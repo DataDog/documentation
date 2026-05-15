@@ -209,7 +209,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_id": "<INSTANCE_ID>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.

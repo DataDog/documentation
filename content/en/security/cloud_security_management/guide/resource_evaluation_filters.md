@@ -47,11 +47,11 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% tab "Azure" %}}
 
 1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-2. Expand the **Azure** section.
-3. Expand a subscription.
-3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
-4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-5. Click **Save**.
+1. Expand the **Azure** section.
+1. Expand a subscription.
+1. Under **Resource Evaluation Filters**, click the **Plus** (+) icon.
+1. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
+1. Click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -59,11 +59,22 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% tab "Google Cloud" %}}
 
 1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-2. Expand the **GCP** section.
-3. Expand a project.
-3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
-4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-5. Click **Save**.
+1. Expand the **GCP** section.
+1. Expand a project.
+1. Under **Resource Evaluation Filters**, click the **Plus** (+) icon.
+1. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
+1. Click **Save**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+
+{{% /tab %}}
+{{% tab "OCI" %}}
+
+1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
+1. Expand the **OCI** section.
+1. Under **Resource Evaluation Filters**, click the **Plus** (+) icon.
+1. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
+1. Click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 

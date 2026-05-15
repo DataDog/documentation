@@ -42,10 +42,6 @@ Use custom metrics from spans for:
 
 Datadog allows you to generate metrics from [Trace Queries][15].
 
-{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="Request access to the Preview!" >}}
-Custom metrics from traces are in Preview. To request access, submit a ticket to the APM Support team and provide a short description of your use case.
-{{< /callout >}}
-
 Use custom metrics from traces for:
 - Metrics derived from complete trace context, such as total trace duration or operations per trace.
 - Alerting on conditions requiring full trace knowledge (for example, N+1 query detection or fan-out patterns).

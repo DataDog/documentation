@@ -1,4 +1,5 @@
 ---
+id: cluster_agent
 title: Cluster Agent
 core_product:
   - datadog agent

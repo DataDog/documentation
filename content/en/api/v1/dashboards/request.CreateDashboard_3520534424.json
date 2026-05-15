@@ -7,6 +7,7 @@
         "title": "",
         "title_size": "16",
         "title_align": "left",
+        "description": "Example widget description",
         "show_legend": true,
         "legend_layout": "auto",
         "time": {},

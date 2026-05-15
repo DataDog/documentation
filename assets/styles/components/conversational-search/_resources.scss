@@ -1,0 +1,240 @@
+// Inline reference chips (within response text)
+.conv-search-source-ref-wrap {
+    position: relative;
+    display: inline;
+}
+
+.conv-search-source-ref-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    border: none;
+    border-radius: 4px;
+    background: $conv-primary-200;
+    color: #000;
+    cursor: pointer;
+    vertical-align: baseline;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    position: relative;
+    top: -1px;
+    transition: background 0.15s ease;
+
+    &:hover {
+        background: $conv-primary-300;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($conv-search-purple, 0.3);
+        outline-offset: 1px;
+    }
+}
+
+.conv-search-source-ref-number {
+    display: block;
+    text-align: center;
+}
+
+.conv-search-source-tooltip {
+    position: absolute;
+    z-index: 100;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    max-width: 300px;
+    padding: 10px 14px;
+    border: 1px solid $conv-search-border;
+    border-radius: 10px;
+    background: $conv-search-bg;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+    display: none;
+    pointer-events: auto;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        height: 10px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 8px;
+        height: 8px;
+        background: $conv-search-bg;
+        border-left: 1px solid $conv-search-border;
+        border-top: 1px solid $conv-search-border;
+        z-index: 1;
+    }
+
+    &.open {
+        display: block;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4;
+        word-break: break-word;
+
+        &::before {
+            content: '\2197';
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: rgba($conv-search-purple, 0.08);
+            color: $conv-search-purple;
+            font-size: 12px;
+        }
+
+        &:hover {
+            color: $conv-search-purple;
+        }
+    }
+}
+
+// Source cards section (below response text)
+.conv-search-sources {
+    margin-top: 28px;
+    padding-top: 0;
+
+    @media (max-width: 640px) {
+        margin-top: 16px;
+    }
+}
+
+.conv-search-sources-title {
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+    color: $conv-neutral-700;
+    line-height: 20px;
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+.conv-search-sources-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+.conv-search-source-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    height: 36px;
+    flex: 0 1 calc(33.33% - 11px);
+    min-width: 0;
+    border: 1px solid $conv-neutral-400;
+    border-radius: 20px;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+
+    &:hover {
+        background: $conv-neutral-200;
+    }
+
+    a {
+        flex: 1;
+        min-width: 0;
+        color: #000;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: 300;
+        line-height: 22px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
+
+        @media (max-width: 640px) {
+            font-size: 13px;
+            line-height: 18px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        flex: none;
+        width: auto;
+        height: 36px;
+        gap: 2px;
+    }
+}
+
+.conv-search-source-card-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background: $conv-primary-200;
+    color: #000;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+
+    @media (max-width: 640px) {
+        border-radius: 2px;
+    }
+}
+
+.conv-search-source-card-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: $conv-neutral-500;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}

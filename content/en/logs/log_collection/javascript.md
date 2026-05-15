@@ -59,9 +59,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -72,9 +72,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -85,9 +85,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -98,9 +98,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -111,9 +111,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -124,22 +124,22 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 ```javascript
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v7.js','DD_LOGS')
 </script>
 ```
 
@@ -156,8 +156,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -166,8 +167,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -176,8 +178,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/ap1/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -186,8 +189,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/ap2/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -196,8 +200,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/us3/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -206,18 +211,20 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/us5/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"
-    type="text/javascript">
+    src="https://www.datadoghq-browser-agent.com/datadog-logs-v7.js"
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 

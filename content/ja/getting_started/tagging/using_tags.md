@@ -312,7 +312,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 * これらのタグのみにメトリクス範囲を制限する **from** テキストボックス。
 * SLO 全体と各タグ値のステータス割合および残りのエラーバジェットを表示する、グループ化されたメトリクスベースの SLO を作成するための **sum by** テキストボックス。
 
-[1]: /ja/service_management/service_level_objectives/metric/
+[1]: /ja/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
@@ -320,7 +320,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="モニターベースの SLO タグ" style="width:80%;">}}
 
-[1]: /ja/service_management/service_level_objectives/monitor/
+[1]: /ja/service_level_objectives/monitor/
 [2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
@@ -354,6 +354,12 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 {{% /tab %}}
 {{< /tabs >}}
 
+## DORA メトリクス
+
+[DORA Metrics Explorer][33] では、DORA Metrics の集計結果を表示します。タグで表示対象のメトリクスと集計を絞り込むには、`+ Filter` ボタンを使って既存タグのファセットを追加してください。グラフやダッシュボードでタグを使ってクエリする方法は、[DORA Metrics でカスタム ダッシュボードを作成する][34] を参照してください。
+
+{{< img src="/dora_metrics/dora_ui_3.png" alt="Language カスタム タグで絞り込んだ DORA Metrics 計算結果の概要" style="width:80%;">}}
+
 ## 開発者
 
 タグは [API][17] でさまざまな使い方ができます。
@@ -380,7 +386,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/
-[2]: /ja/service_management/events/explorer
+[2]: /ja/events/explorer
 [3]: /ja/integrations/
 [4]: /ja/infrastructure/hostmap/
 [5]: /ja/infrastructure/
@@ -411,3 +417,5 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 [30]: /ja/monitors/manage/#monitor-tags
 [31]: /ja/monitors/downtimes/
 [32]: /ja/getting_started/tagging/assigning_tags?tab=monitors
+[33]: https://app.datadoghq.com/ci/dora
+[34]: /ja/dora_metrics/#create-custom-dashboards

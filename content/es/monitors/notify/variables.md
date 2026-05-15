@@ -62,7 +62,7 @@ Están disponibles las siguientes variables condicionales:
 
 ### Ejemplos
 
-La variable condicional debe tener un par de apertura y cierre con el texto y **@-notifications** en medio.
+Las variables condicionales deben tener un par de apertura y cierre con el texto y **@-notifications** en medio. Las variables basadas en el estado del monitor (como `is_alert` o `is_warning`) deben tener su propio bloque de mensajes. Dado que un monitor solo puede estar en un estado a la vez, no puedes combinarlos. Sin embargo, puedes anidar condicionales que coincidan en atributos, consulta los ejemplos de `is_renotify`.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
@@ -111,7 +111,7 @@ Busca una subcadena en una [variable de etiqueta](#attribute-and-tag-variables) 
 Para notificar a tu equipo de base de datos si un host desencadenante tiene la etiqueta `role:db_cassandra` o `role:db_postgres`, utiliza lo siguiente:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -120,7 +120,7 @@ Para notificar a tu equipo de base de datos si un host desencadenante tiene la e
 La condición `is_match` también permite unir varias cadenas:
 
 ```text
-{{#is_match "role.name" "db" "database"}}
+{{#is_match "host.role.name" "db" "database"}}
   This displays if the host triggering the alert contains `db` or `database`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -129,7 +129,7 @@ La condición `is_match` también permite unir varias cadenas:
 Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza la negación de la condición como se indica a continuación:
 
 ```text
-{{^is_match "role.name" "db"}}
+{{^is_match "host.role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -138,7 +138,7 @@ Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza
 O utiliza el parámetro `{{else}}` del primer ejemplo:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{else}}
@@ -242,9 +242,10 @@ Este es el mensaje de escalada @dev-team@company.com
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
-Si configuras un bloque condicional para una transición de estado en condiciones `alert` o `warning` con un identificador **@-notifications**, se recomienda configurar una condición `recovery` correspondiente para que se envíe una notificación de recuperación al identificador.
+Si configura un bloque condicional para una transición de estado en condiciones `alert` o `warning` con un identificador **@-notifications**, Datadog recomienda que configures una condición `recovery` correspondiente para enviar una notificación de recuperación al identificador.
 
 **Nota**: Cualquier texto o identificador de notificación colocado **fuera** de las variables condicionales configuradas se invoca con cada transición de estado del monitor. Cualquier texto o identificador de notificación colocado **dentro** de las variables condicionales configuradas solo se invoca si la transición de estado del monitor coincide con su condición.
 
@@ -556,7 +557,7 @@ Para evitar notificaciones perdidas al usar identificadores dinámicos con estas
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 

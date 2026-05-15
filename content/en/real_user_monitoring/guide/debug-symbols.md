@@ -5,6 +5,8 @@ description: "Debug and deobfuscate stack traces in RUM using debug symbols to i
 
 The [RUM Debug Symbols page][1] lists all the debug symbols that are uploaded for a given type of RUM application. You can use this page to investigate obfuscated stack traces.
 
+<div class="alert alert-info">To automatically associate stack traces with your service and version for source code resolution, use the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context">Source Code Context build plugin</a>.</div>
+
 The following error message appears when a stack trace is not properly deobfuscated in RUM or Error Tracking: _The stack trace could not be deobfuscated because no debug symbols could be found for this application. If you are not obfuscating your application, ignore this message. Otherwise, upload your debug symbols to see deobfuscated stack traces. You can view all your uploaded symbols on the RUM Debug Symbols page._
 
 {{< img src="real_user_monitoring/guide/debug-symbols/deobfuscation-failed-message.png" alt="Deobfuscation failed: The stack trace could not be deobfuscated because no mapping files could be found for this application. If you are not obfuscating your application, ignore this message. Otherwise, upload your mapping files to see deobfuscated stack traces. You can view all your uploaded files on the RUM Debug Symbols page." >}}

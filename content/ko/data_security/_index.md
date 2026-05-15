@@ -21,7 +21,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: 설명서
   text: 세션 리플레이 프라이버시 옵션
-- link: /sensitive_data_scanner/
+- link: /security/sensitive_data_scanner/
   tag: 설명서
   text: Sensitive Data Scanner
 title: 데이터 관련 리스크 줄이기
@@ -49,7 +49,7 @@ Agent 설정 파일의 플레인 텍스트에 시크릿을 저장하지 않도�
 
 일부 타사 서비스의 통합은 Datadog에서 직접 설정 가능하며, Datadog에서 사용자 대신 서비스에 접속할 수 있도록 해당 서비스의 자격증명을 Datadog로 알려주셔야 하는 경우가 있습니다. 공유해주신 자격증명 정보는 암호화되며 Datadog의 안전한 자격증명 데이터 저장소에서 보관합니다.
 
-이러한 통합과 관련된 모든 데이터는 Datadog 시스템에서 유휴 상태인 경우 암호화 처리하며, 전송 중에도 암호화됩니다. 안전한 자격증명 정보 데이터 저장소의 액세스는 면밀한 관리와 감사를 받습니다. 타사 서비스 내의 특정 서비스나 동작은 필수적인 것만 허용하도록 제한합니다. 이상 행동 탐지 도구는 무단 액세스가 발생하는지 지속 모니터링합니다. 또한, Datadog 서비스 점검을 위해 데이터에 접근할 수 있는 인원은 일부 엔지니어로 한정되어 있습니다.
+이러한 통합을 통한 모든 데이터는 Datadog 시스템에 저장되어 있을 때 암호화되고 전송 중에도 암호화됩니다. 크리덴셜 데이터 저장소에 대한 액세스는 제어 및 감사되며, 타사 서비스 내의 특정 서비스 또는 작업은 필요한 것만으로 제한됩니다. 이상 행동 탐지 도구는 무단 액세스를 지속적으로 모니터링합니다. 유지 관리 목적을 위한 Datadog 직원 액세스는 선택된 엔지니어 하위 집합으로 제한됩니다.
 
 ### 클라우드 통합
 
@@ -61,9 +61,9 @@ Agent 설정 파일의 플레인 텍스트에 시크릿을 저장하지 않도�
 
 ## 실천 가능한 데이터 리스크 절감법
 
-Datadog의 목적은 사용자 여러분의 인프라스트럭처나 서비스와 관련된 다수의 소스에서 옵저버빌리티(observability) 정보를 수집하고, 사용자가 분석하고 조사할 수 있도록 한 화면에 간단명료하게 정리하는 것입니다. 따라서 사용자는 다양한 종류의 데이터 콘텐츠를 Datadog 서버로 전송하게 됩니다. Datadog 제품 본연의 목적을 위해 수집한 데이터 대부분은 개인정보를 포함할 가능성이 거의 없습니다. 불필요한 프라이버시나 개인정보를 포함할 가능성이 있는 데이터의 경우, 고객이 다양한 방법으로(예: 삭제, 난독화 등) Datadog와 공유하는 데이터에 포함된 개인정보를 줄이도록 안내 가이드와 도구를 제공하고 권장 사항을 알려드립니다.
+Datadog의 목적은 인프라스트럭처 및 서비스 주변의 다양한 소스에서 옵저버빌리티 정보를 수집 및 분석하고 조사할 수 있도록 한곳에 모으는 것입니다. 여기에는 다양한 유형의 데이터 콘텐츠를 Datadog의 서버로 보내는 것이 포함됩니다. Datadog 제품 사용을 위해 수집된 대부분의 데이터에는 개인 데이터가 포함될 가능성이 거의 없습니다. 불필요한 개인 데이터를 포함하는 데이터의 경우, Datadog과 공유하는 데이터에서 개인 데이터를 제거하고 난독화하여 노출을 최소화할 수 있도록 지침, 도구 및 권장 사항을 제공합니다.
 
-### Sensitive Data Scanner
+### 민감한 데이터 스캐너
 
 Sensitive Data Scanner는 스트림 기반 패턴 매칭 서비스입니다. 민감한 데이터를 식별하고 태그를 지정하는 용도로 쓰이며, 선택 사항으로는 민감한 데이터를 편집하거나 해시 처리하기 위해 활용할 수도 있습니다. Sensitive Data Scanner를 사용하면 보안팀과 컴플라이언스팀이 민감한 데이터가 조직 외부로 유출되지 않도록 막아주는 방어선을 구축할 수 있습니다. 스캐너의 정보와 설정 방법을 자세히 알고 싶다면 [Sensitive Data Scanner][10] 가이드를 참조하세요.
 
@@ -71,7 +71,7 @@ Sensitive Data Scanner는 스트림 기반 패턴 매칭 서비스입니다. 민
 
 로그는 시스템과 서비스에서 생성하는 기록이자, 시스템과 서비스에서 수행하는 동작을 의미합니다. 로그 데이터를 필터링하고 난독화하는 방법을 비롯해, 로그 데이터 보안과 관련해 고려해야 하는 사항은 [로그 관리 데이터 관리][11]에서 알아볼 수 있습니다.
 
-로그 데이터 컨트롤 방법을 더 자세히 알아보고 싶다면 [민감한 로그 데이터 관리][12] 가이드와 [Agent 고급 로그 설정][13]을 참조하세요.
+[민감한 로그 데이터 액세스 관리][12] 가이드와 [로그용 Agent 고급 구성][13]을 통해 로그 데이터 제어에 관해 자세히 알아보세요.
 
 로그 데이터 보안과 관련하여 리스크를 줄이는 주요 방법은 액세스 컨트롤입니다. [로그용 RBAC 설정 방법][14] 및 [로그 RBAC 권한 허용][15] 가이드를 읽고 Datadog에서 액세스를 관리하는 방법을 알아보세요.
 
@@ -84,9 +84,9 @@ Sensitive Data Scanner는 스트림 기반 패턴 매칭 서비스입니다. 민
 Datadog 트레이싱 라이브러리는 애플리케이션, 서비스, 테스트, 파이프라인을 계측하고 Agent를 통해 Datadog로 성능 데이터를 전송하는 데 사용됩니다. 트레이스 및 스팬(span) 데이터는 (그 이외의 다양한 데이터와 함께) 다음 제품에서 활용할 용도로 생성됩니다.
 
 - APM(애플리케이션 성능 모니터링)
-- Continuous Profiler
-- CI Visibility
-- 애플리케이션 보안 관리
+- 지속적 프로파일러
+- CI 가시성
+- 앱 및 API 보호
 
 트레이싱 라이브러리에서 얻은 데이터를 관리하는 방법, 기본 보안 설정, 트레이스 관련 요소의 사용자 맞춤형 난독화, 스크러빙, 배제, 수정 방법을 자세히 알고자 하는 경우 [트레이스 데이터 보안을 위해 Agent와 Tracer 설정하기][18] 가이드를 참조하세요.
 
@@ -98,9 +98,9 @@ Datadog를 사용하면 AWS Lambda 함수의 JSON 리퀘스트 및 리스폰스 
 
 신서틱 테스트는 전 세계 테스트 위치에서 발생한 리퀘스트와 비즈니스 트랜잭션을 시뮬레이션합니다. 설정, 애셋, 결과, 자격증명 암호화에 관한 고려 사항이나 테스트 프라이버시 옵션 사용 방법을 알아보려면 [신서틱 모니터링 데이터 보안][20] 가이드를 읽어주세요.
 
-### RUM & 세션 리플레이
+### RUM & 세션 재생
 
-개인을 식별할 수 있는 정보를 보호하고, 사용자가 수집하는 RUM 데이터를 샘플링하기 위해 브라우저에서 Real User Monitoring이 수집하는 데이터를 변경할 수 있습니다. 자세한 정보를 알아보려면 [RUM 데이터 및 컨텍스트의 수정][21] 가이드를 참조하세요.
+브라우저에서 실제 사용자 모니터링(RUM)을 통해 수집된 데이터를 수정하여 개인 식별 정보를 보호하고 수집 중인 RUM 데이터를 샘플링할 수 있습니다. 자세한 내용은 [RUM 데이터 및 컨텍스트 수정][21]을 참조하세요.
 
 세션 리플레이 프라이버시 옵션은 기본적으로 최종 사용자의 개인정보를 보호하고 조직의 민감한 정보를 수집하지 않도록 설정되어 있습니다. 세션 리플레이 요소의 마스킹, 오버라이드, 요소 숨김 처리와 관련하여 자세한 정보가 필요한 경우 [세션 리플레이 프라이버시 옵션][22]을 참조하세요.
 
@@ -110,7 +110,7 @@ Database Monitoring Agent는 Datadog로 전송된 모든 쿼리의 바인드(파
 
 ## 기타 민감할 수 있는 데이터의 소스
 
-Datadog는 민감한 데이터에 자동으로 스크럽, 난독화, 기타 수집 방지 조치를 취합니다. 또한, Datadog에서 수집하는 데이터는 대부분 이름과 설명으로 구성됩니다. 텍스트를 전송할 때는 프라이버시나 개인정보를 포함하지 않도록 유의하시기를 권장합니다. 의도한 목적에 따른 제품 사용과 관련하여 Datadog로 전송되는 텍스트 데이터 유형을 알아보려면 아래의 목록을 참조하세요. 단, 아래 목록이 모든 유형을 망라한 것은 아님에 유의하시기 바랍니다.
+자동으로 제거하고, 난독화하고, 수집되지 않도록 하는 민감한 데이터 외에도 Datadog이 수집하는 많은 데이터는 사물의 이름과 설명입니다. 보내는 텍스트에 개인 정보를 포함하지 않는 것이 좋습니다. 제품의 사용 목적에 따라 Datadog에 텍스트 데이터를 전송하는 경우 다음(전체는 아님) 목록을 고려하세요.
 
 메타데이터와 태그
 : 메타데이터는 주로 `key:value` 형식의 [태그][24]로 구성됩니다(예: `env:prod`). 메타데이터는 Datadog가 데이터 필터링이나 그룹화에 사용하며, 이를 통해 의미 있는 정보를 도출하는 데 도움이 됩니다.
@@ -150,9 +150,9 @@ Continuous Integration 파이프라인과 테스트
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /ko/integrations/azure/
 [9]: /ko/integrations/google_cloud_platform/
-[10]: /ko/sensitive_data_scanner/
+[10]: /ko/security/sensitive_data_scanner/
 [11]: /ko/data_security/logs/
-[12]: /ko/logs/guide/control-sensitive-logs-data/
+[12]: /ko/logs/guide/manage-sensitive-logs-data-access/
 [13]: /ko/agent/logs/advanced_log_collection
 [14]: /ko/logs/guide/logs-rbac
 [15]: /ko/logs/guide/logs-rbac-permissions
@@ -161,7 +161,7 @@ Continuous Integration 파이프라인과 테스트
 [18]: /ko/tracing/configure_data_security/
 [19]: /ko/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ko/data_security/synthetics/
-[21]: /ko/real_user_monitoring/browser/advanced_configuration/
+[21]: /ko/real_user_monitoring/application_monitoring/browser/advanced_configuration/
 [22]: /ko/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /ko/database_monitoring/data_collected/#sensitive-information
 [24]: /ko/getting_started/tagging/

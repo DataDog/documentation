@@ -5,14 +5,14 @@
     "frontmatter": {
       "title": {
         "itemTranslationData": {
-          "b31ba8cfcd58893d704861d649c333ad": {
+          "09c427f36471a9777800731d4c8fba9f": {
             "string": "Installer et configurer Mobile Session Replay"
           }
         }
       },
       "description": {
         "itemTranslationData": {
-          "4794deaffd12dc9df6dfc5431a7b44ae": {
+          "c11aab16f8a3104ac69f99734e4a7013": {
             "string": "Installer et configurer Mobile Session Replay."
           }
         }
@@ -23,14 +23,14 @@
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
               "itemTranslationData": {
-                "92a453835895c08e3426cf137929c24d": {
+                "ce6c3c781d75059f7fbe7186661b96e0": {
                   "string": "Session Replay sur mobile"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "c3ed2390cc935ae997ebf3814fa9c1ec": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
                   "string": "Documentation"
                 }
               }
@@ -40,14 +40,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
               "itemTranslationData": {
-                "f776d7f0ccce2593396d55d481108a48": {
+                "ab35b85db736ffd1e461c8485e401308": {
                   "string": "Impact de Mobile Session Replay sur les performances des applications"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "c3ed2390cc935ae997ebf3814fa9c1ec": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
                   "string": "Documentation"
                 }
               }
@@ -57,14 +57,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/privacy_options",
             "text": {
               "itemTranslationData": {
-                "c9d9deab00189c18d2495c8c6092ea79": {
+                "26506d24bb1c399504571e1615425fb5": {
                   "string": "Options de confidentialité de Mobile Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "c3ed2390cc935ae997ebf3814fa9c1ec": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
                   "string": "Documentation"
                 }
               }
@@ -74,14 +74,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
               "itemTranslationData": {
-                "211111a5096233a2e15fe2c168c394af": {
+                "5615d411d465239fa5a76720ca89152c": {
                   "string": "Dépanner Mobile Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "c3ed2390cc935ae997ebf3814fa9c1ec": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
                   "string": "Documentation"
                 }
               }
@@ -91,14 +91,14 @@
             "link": "/real_user_monitoring/session_replay",
             "text": {
               "itemTranslationData": {
-                "d7a8dd3f3fbfa7c40fa644d4679218b3": {
+                "ab99140e610ac1c9552fe9f07fdff5ce": {
                   "string": "Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "c3ed2390cc935ae997ebf3814fa9c1ec": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
                   "string": "Documentation"
                 }
               }
@@ -108,18 +108,27 @@
             "link": "/real_user_monitoring/application_monitoring/android/web_view_tracking",
             "text": {
               "itemTranslationData": {
-                "2eb685131ad07b25937b0d409fcceffd": {
+                "16c1b8bece3356f2a9e5c6bc5d607bc7": {
                   "string": "Suivi des vues Web"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "c3ed2390cc935ae997ebf3814fa9c1ec": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
                   "string": "Documentation"
                 }
               }
             }
+          }
+        }
+      },
+      "content_filters": {
+        "listTranslationData": {
+          "0": {
+            "label": "SDK",
+            "trait_id": "platform",
+            "option_group_id": "rum_session_replay_sdk_options"
           }
         }
       }

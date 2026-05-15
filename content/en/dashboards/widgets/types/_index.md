@@ -25,6 +25,8 @@ further_reading:
         img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/point_plot"
+        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Point Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
@@ -49,6 +51,14 @@ further_reading:
         img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/split_graph"
         img="dashboards/widgets/icons/group-split_light_small.svg">}} Split Graph{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Cloud Cost Management
+{{< whatsnext desc="Visualize Cloud Cost Management data:" >}}
+    {{< nextlink href="/dashboards/widgets/budget_summary"
+        img="dashboards/widgets/icons/cloud-cost-summary_light_large.svg">}} Budget Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/cost_summary"
+        img="dashboards/widgets/icons/cloud-cost-summary_light_large.svg">}} Cost Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Product Analytics

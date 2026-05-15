@@ -1,0 +1,41 @@
+{
+  "title": "Example-Dashboard with events flat group_by fields",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "response_format": "timeseries",
+            "queries": [
+              {
+                "data_source": "events",
+                "name": "query1",
+                "search": {
+                  "query": ""
+                },
+                "compute": {
+                  "aggregation": "count"
+                },
+                "group_by": {
+                  "fields": [
+                    "service",
+                    "host"
+                  ],
+                  "limit": 10
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

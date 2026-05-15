@@ -9,6 +9,9 @@ assets:
     AtomWatch Boomi Compute Monitoring: assets/dashboards/boomi_compute_monitoring2.json
     AtomWatch Boomi Workload Monitoring: assets/dashboards/boomi_workload_monitoring2.json
     AtomWatch Overview: assets/dashboards/atomwatch_overview.json
+    Boomi JMX Monitoring - Forked: assets/dashboards/jmx_forked.json
+    Boomi JMX Monitoring - Management JVM: assets/dashboards/jmx_management_jvm.json
+    Boomi JMX Monitoring - Non-Forked: assets/dashboards/jmx_nonforked.json
   integration:
     auto_install: false
     configuration:
@@ -24,19 +27,22 @@ assets:
     source_type_id: 10355
     source_type_name: AtomWatch
   monitors:
-    AtomWatch is Down: assets/monitors/atomwatch_down.json
-    'AtomWatch: Boomi Cluster Node "View File" is Missing': assets/monitors/cluster_view_file_missing.json
-    'AtomWatch: Boomi Cluster Node "View File" is Too Old': assets/monitors/cluster_view_file_too_old.json
-    'AtomWatch: Boomi Cluster Problem': assets/monitors/cluster_view_file_problem.json
-    'AtomWatch: Execution Duration Anomaly': assets/monitors/execution_duration_anomaly.json
-    'AtomWatch: Failure calling Boomi Platform API': assets/monitors/failed_boomi_platform_api_call.json
-    'AtomWatch: Infrastructure - API Gateway Node CPU Usage High': assets/monitors/api_gw_node_cpu.json
-    'AtomWatch: Infrastructure - API Gateway Node Disk Usage High': assets/monitors/api_gw_node_disk.json
-    'AtomWatch: Infrastructure - API Gateway Node Memory Usage High': assets/monitors/api_gw_node_ram.json
-    'AtomWatch: Infrastructure - Molecule Node CPU Usage High': assets/monitors/molecule_node_cpu.json
-    'AtomWatch: Infrastructure - Molecule Node Disk Usage High': assets/monitors/molecule_node_disk.json
-    'AtomWatch: Infrastructure - Molecule Node Memory Usage High': assets/monitors/molecule_node_ram.json
-    'AtomWatch: Runtime Online Status': assets/monitors/boomi_online_status.json
+    API Gateway node CPU usage is high: assets/monitors/api_gw_node_cpu.json
+    API Gateway node Disk usage is high: assets/monitors/api_gw_node_disk.json
+    API Gateway node memory usage is high: assets/monitors/api_gw_node_ram.json
+    AtomWatch is down: assets/monitors/atomwatch_down.json
+    Boomi "View File" is missing: assets/monitors/cluster_view_file_missing.json
+    Boomi "view file" is too old: assets/monitors/cluster_view_file_too_old.json
+    Boomi "view file" reports a problem: assets/monitors/cluster_view_file_problem.json
+    Boomi API calls from more than one node: assets/monitors/multiple_node_api_calls.json
+    Boomi Molecule node is at high CPU usage: assets/monitors/molecule_node_cpu.json
+    Boomi Molecule node is running out of disk space: assets/monitors/molecule_node_disk.json
+    Boomi runtime is reported as offline: assets/monitors/boomi_online_status.json
+    Cannot call the Boomi Platform API: assets/monitors/failed_boomi_platform_api_call.json
+    Execution duration is anomalous: assets/monitors/execution_duration_anomaly.json
+    JVM Runtime low memory: assets/monitors/jmx_low_mem.json
+    JVM Runtime out of memory: assets/monitors/jmx_out_of_mem.json
+    Molecule node memory usage is high: assets/monitors/molecule_node_ram.json
 author:
   homepage: https://www.kitepipe.com
   name: Kitepipe
@@ -50,7 +56,7 @@ categories:
 - ログの収集
 - マーケットプレイス
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -110,6 +116,9 @@ tile:
   - caption: エラーとなった Boomi プロセスのトップリストとグラフ。
     image_url: images/error_monitoring.png
     media_type: image
+  - caption: JMX 監視をサポートします。
+    image_url: images/jmx_monitoring.png
+    media_type: image
   overview: README.md#Overview
   resources:
   - resource_type: documentation
@@ -128,7 +137,7 @@ tile:
 
 Kitepipe の AtomWatch は Agent ベースのインテグレーションで、Boomi プロセス、クラスターノード、関連インフラストラクチャーからメトリクスを収集し、Datadog と Boomi の両方のお客様にインテグレーションの健全性を知らせることができます。
 
-AtomWatch version 1.0 contains 4 dashboards, 13 custom metrics, and 13 monitors that report on Boomi execution statistics, cluster status, and infrastructure health. These metrics are available to Datadog and Boomi customers for extended time-trending analysis (over the standard of 30 days for Boomi Process Reporting availability).
+AtomWatch バージョン 1.2 には 7 つのダッシュボード、17 個のカスタム メトリクス、16 個のモニターが含まれており、Boomi の実行統計、クラスター ステータス、JMX 監視、インフラの健全性をレポートします。これらのメトリクスは、Datadog と Boomi のお客様が長期のトレンド分析に利用できます (Boomi Process Reporting の標準的な提供期間である 30 日を超える期間)。
 
 AtomWatch を購入した Datadog のお客様は、Boomi Java Runtime を Atom または Molecule のいずれかの構成で管理する必要があります。Kitepipe では、14 日間の無料トライアルに 1 時間のセットアップと構成セッションが含まれています。
 
@@ -142,7 +151,7 @@ Datadog のサービス AtomWatch は、AWS における Boomi マネージド�
 
 ### ログ収集
 
-このインテグレーションは、お客様に代わって Boomi プラットフォームへの API 呼び出しを行い、実行レコードを取得し、Datadog にログとして送信します。
+このインテグレーションは、ユーザーに代わって Boomi Platform へ API 呼び出しを行い、実行レコードを取得して Datadog にログとして送信します。また、オプションで、進行中の実行状況と JMX 経由の JVM テレメトリを監視し、同様に Datadog にログとして送信できます。どの Boomi プロセスがどの JVM で実行されているかを確認でき、メモリ使用量、ガベージ コレクション、スレッド数などの関連メトリクスも把握できます。
 
 ### イベント
 
@@ -167,7 +176,8 @@ Kitepipe の AtomWatch のサポート時間は、米国とカナダのタイム
 お役に立つドキュメント、リンクや記事:
 
 - [AtomWatch ドキュメント][9]
-- [Monitor your Boomi integrations with Kitepipe's offering in the Datadog Marketplace][12]
+- [Datadog Marketplace の Kitepipe 提供機能で Boomi インテグレーションを監視する][12]
+- [Boomi で JMX を有効化する][13]
 
 [1]: https://app.datadoghq.com/event/explorer
 [2]: https://help.boomi.com/bundle/atomsphere_platform/page/int-Adding_API_tokens.html
@@ -177,10 +187,11 @@ Kitepipe の AtomWatch のサポート時間は、米国とカナダのタイム
 [6]: https://help.boomi.com/bundle/integration/page/r-atm-Startup_Properties_panel.html
 [7]: https://help.boomi.com/bundle/integration/page/r-atm-Cluster_Status_panel.html
 [8]: https://help.boomi.com/bundle/api_management/page/api-API_Gateway_settings.html
-[9]: https://atomwatch.refined.site/space/CS/11108353
+[9]: https://atomwatch.kitepipe.com/space/CS/11108353
 [10]: https://www.kitepipe.com/
 [11]: mailto:AtomWatch.Support@kitepipe.com
 [12]: https://www.datadoghq.com/blog/kitepipe-datadog-marketplace/
+[13]: https://help.boomi.com/docs/Atomsphere/Integration/Integration%20management/t-atm-Enabling_remote_JMX_on_an_Atom_1a1625d0-330d-43c6-a765-42502d7768ec
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/kitepipe-atomwatch" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/kitepipe-atomwatch" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

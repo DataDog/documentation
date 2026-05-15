@@ -1,2 +1,2 @@
 - Amazon Security Lake TLS passphrase (when enabled):
-    - Stored in the environment variable `DD_OP_DESTINATION_AMAZON_SECURITY_LAKE_KEY_PASS`.
+    - The default environment variable is `DD_OP_DESTINATION_AMAZON_SECURITY_LAKE_KEY_PASS`.

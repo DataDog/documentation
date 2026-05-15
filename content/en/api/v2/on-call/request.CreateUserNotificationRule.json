@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "category": "high_urgency",
+      "delay_minutes": 0
+    },
+    "relationships": {
+      "channel": {
+        "data": {
+          "id": "7c1ce93f-30a5-596a-0f7b-06bfe153704c",
+          "type": "notification_channels"
+        }
+      }
+    },
+    "type": "notification_rules"
+  }
+}

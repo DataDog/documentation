@@ -1,8 +1,8 @@
 ---
 further_reading:
-- link: /agent/basic_agent_usage/
+- link: agent/
   tag: 설명서
-  text: 에이전트 기본 사용량
+  text: Datadog Agent
 private: true
 title: Datadog 에이전트 5 설치
 ---
@@ -731,7 +731,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 원스텝 설치 명령이 작동하지 않을 경우에는 시스템이 `cgroup` 디렉터리를 예상치 못한 위치에 마운트했거나, 메모리 관리에 CGroup을 사용하지 않기 때문일 수 있습니다. Docker 점검을 성공적으로 실행하려면 CGroup이 필요합니다. CGroup을 활성화하려면 [docker-dd-agent][1] 리포지토리의 문서를 참조하세요. 예상치 못한 `cgroup` 디렉터리 위치로 인해 점검에 실패하는 경우는 다음을 참고하세요.
 
 1. `mount | grep "cgroup type tmpfs"`를 실행해 `cgroup` 디렉터리 위치를 불러옵니다.
-1. 원스텝 설치 명령에서 나오는 첫 번째 `/sys/fs/cgroup`를 `cgroup` 디렉터리 위치로 변경합니다.
+1. 1단계 설치 명령의 원스텝  `/sys/fs/cgroup`를 `cgroup` 디렉터리의 위치로 바꿉니다.
 
 ### 커스텀 메트릭 전송하기
 

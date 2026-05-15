@@ -1,9 +1,12 @@
 ---
+description: Aprende a crear dashboards eficaces para la monitorización de equipos,
+  la elaboración de informes ejecutivos y la resolución de problemas utilizando las
+  herramientas de visualización de Datadog.
 further_reading:
 - link: https://www.datadoghq.com/blog/dashboard-sharing/
   tag: Blog
   text: Comparte dashboards de forma segura con cualquier persona que no pertenezca
-    a tu organización
+    a tu organización.
 - link: https://www.datadoghq.com/blog/template-variable-associated-values/
   tag: Blog
   text: Usa variables de plantilla asociadas para redefinir tus dashboards
@@ -20,8 +23,9 @@ further_reading:
   tag: Documentación
   text: Monitores, SLOs, notificaciones, tiempos de inactividad e incidencias
 - link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
-  text: Participa en una sesión interactiva sobre mejores visualizaciones con dashboards
+  tag: Habilitación de los fundamentos
+  text: Participa en una sesión interactiva sobre las mejores visualizaciones con
+    dashboards
 title: Empezando con los dashboards
 ---
 

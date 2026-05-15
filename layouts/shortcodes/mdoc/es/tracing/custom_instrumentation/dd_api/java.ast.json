@@ -1,0 +1,2715 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "The Datadog Java tracer interoperates with the ",
+                            "itemTranslationData": {
+                              "3a695e12ceb507962f66b554c37e6aeb": {
+                                "string": "El rastreador de Datadog Java interopera con la"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 5-6"
+                        },
+                        "2": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " library for custom instrumentation. If you would prefer to use the OpenTelemetry API for your custom instrumentation, see ",
+                            "itemTranslationData": {
+                              "2dcb09d3dd799163cb31db247067c88b": {
+                                "string": " biblioteca para la instrumentación personalizada. Si prefieres utilizar la API de OpenTelemetry para tu instrumentación personalizada, consulta"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 5-6"
+                        },
+                        "3": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Java Custom Instrumentation using OpenTelemetry",
+                                  "itemTranslationData": {
+                                    "16e331cd30a94302cf89d0fb81ec6f40": {
+                                      "string": "instrumentación personalizada de Java mediante OpenTelemetry"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 5-6"
+                              }
+                            }
+                          },
+                          "type": "link",
+                          "location": "line 5-6"
+                        },
+                        "4": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " instead.",
+                            "itemTranslationData": {
+                              "daab55cc40f4e8712fe90058ab979830": {
+                                "string": " en su lugar."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 5-6"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 5-6"
+                  }
+                }
+              },
+              "type": "paragraph",
+              "location": "line 5-6"
+            }
+          }
+        },
+        "type": "tag",
+        "tag": "alert",
+        "location": "line 4-5"
+      },
+      "1": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Prerequisites ",
+                      "itemTranslationData": {
+                        "31e10df211f2d2740ffa7fde3ac7451f": {
+                          "string": "Requisitos previos "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 8-9"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 8-9"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 8-9"
+      },
+      "2": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "If you have not read the setup instructions for automatic instrumentation, start with the ",
+                            "itemTranslationData": {
+                              "aebd01250722d683e70bcc2af14e32bd": {
+                                "string": "Si no has leído las instrucciones de configuración de la instrumentación automática, comienza por las"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 10-11"
+                        },
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Java Setup Instructions",
+                                  "itemTranslationData": {
+                                    "8dc9560f3d41a316c6fc387b41612e9d": {
+                                      "string": "instrucciones de instalación de Java"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 10-11"
+                              }
+                            }
+                          },
+                          "type": "link",
+                          "location": "line 10-11"
+                        },
+                        "2": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": ".",
+                            "itemTranslationData": {
+                              "e56952054383fb97424b7598d6779c38": {
+                                "string": "."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 10-11"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 10-11"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 10-11"
+            },
+            "1": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "To compile the examples on this page, add the ",
+                            "itemTranslationData": {
+                              "bfe233f4bd3ef3d90f2da285e5803ea5": {
+                                "string": "Para compilar los ejemplos en este página, añade la dependencia"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 11-12"
+                        },
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "opentracing-api",
+                                  "itemTranslationData": {
+                                    "a47083b34746aa626d18410bc2a8f2cb": {
+                                      "string": "opentracing-api"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 11-12"
+                              }
+                            }
+                          },
+                          "type": "link",
+                          "location": "line 11-12"
+                        },
+                        "2": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " dependency to your project.",
+                            "itemTranslationData": {
+                              "a25019146da52bd809890395dccc77f9": {
+                                "string": " en tu proyecto."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 11-12"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 11-12"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 11-13"
+            }
+          }
+        },
+        "type": "list",
+        "location": "line 10-13"
+      },
+      "3": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding tags ",
+                      "itemTranslationData": {
+                        "3a1c3f9b7cb67729da3fd7030fa1ffdf": {
+                          "string": "Añadir etiquetas "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 13-14"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 13-14"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 13-14"
+      },
+      "4": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add custom ",
+                      "itemTranslationData": {
+                        "956054dc042b461991a05c2fca7f71e2": {
+                          "string": "Añadir etiquetas de tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 15-16"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "span tags",
+                            "itemTranslationData": {
+                              "5cc505a3fc2e6f549ccfdd92665e93bf": {
+                                "string": "personalizadas"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 15-16"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 15-16"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to your ",
+                      "itemTranslationData": {
+                        "ce19676db7d0d48e1b69d9f53c39e393": {
+                          "string": " a tus"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 15-16"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "spans",
+                            "itemTranslationData": {
+                              "f9aca0b66986c0e197dcd22cda54d9e9": {
+                                "string": "tramos"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 15-16"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 15-16"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.",
+                      "itemTranslationData": {
+                        "5444ed050844151ce46eaaf533d8819c": {
+                          "string": " para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a las trazas entrantes, lo que te permite correlacionar el comportamiento observado con la información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 15-16"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 15-16"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 15-16"
+      },
+      "5": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add custom span tags ",
+                      "itemTranslationData": {
+                        "7b707afa867f3346840c857af0a186be": {
+                          "string": "Añadir etiquetas personalizadas de tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 17-18"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 17-18"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 17-18"
+      },
+      "6": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add custom tags to your spans corresponding to any dynamic value within your application code such as ",
+                      "itemTranslationData": {
+                        "7faca5b8f16ff2cb71c3eb267595c960": {
+                          "string": "Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro del código de tu aplicación como, por ejemplo,"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 19-20"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ".",
+                      "itemTranslationData": {
+                        "e56952054383fb97424b7598d6779c38": {
+                          "string": "."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 19-20"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 19-20"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 19-20"
+      },
+      "8": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding tags globally to all spans ",
+                      "itemTranslationData": {
+                        "a1520037540c2d0de78b6718740cf206": {
+                          "string": "Añadir etiquetas globalmente a todos los tramos"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 48-49"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 48-49"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 48-49"
+      },
+      "9": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "The ",
+                      "itemTranslationData": {
+                        "8faf49cbd3367ffecf66a5fecd7e6d62": {
+                          "string": "La"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 50-51"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.",
+                      "itemTranslationData": {
+                        "be6cfeb20ec90c84ea2f7cafc3833f1e": {
+                          "string": "propiedad permite establecer etiquetas en todos los tramos generados para una aplicación. Esto puede ser útil para agrupar las estadísticas de las aplicaciones, los centros de datos o cualquier otra etiqueta que desees ver en la interfaz de usuario de Datadog."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 50-51"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 50-51"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 50-51"
+      },
+      "11": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Set errors on a span ",
+                      "itemTranslationData": {
+                        "6e580eb6a5ed02d266a17a2d7349b30f": {
+                          "string": "Definir errores en un tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 58-59"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 58-59"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 58-59"
+      },
+      "12": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To customize an error associated with one of your spans, set the error tag on the span and use ",
+                      "itemTranslationData": {
+                        "a09c9e7de6d11babe9439608d9ca24e8": {
+                          "string": "Para personalizar un error asociado a uno de tus tramos, establece la etiqueta de error en el tramo y utilízala"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 60-61"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to set an \"error event\". The error event is a ",
+                      "itemTranslationData": {
+                        "87f0a16bb93b77146e31f482d91cd051": {
+                          "string": " para establecer un \"evento de error\". El evento de error es un"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 60-61"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " containing a ",
+                      "itemTranslationData": {
+                        "452b93f4771d69c1084c7fb66c134753": {
+                          "string": " que contiene una"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 60-61"
+                  },
+                  "6": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " entry, a ",
+                      "itemTranslationData": {
+                        "9a8990f4182f9eaba4d856508c495c5d": {
+                          "string": " entrada, un"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 60-61"
+                  },
+                  "8": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ", or both.",
+                      "itemTranslationData": {
+                        "cecda95da48b6ed37a17f62c1de8155c": {
+                          "string": "o ambos."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 60-61"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 60-61"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 60-61"
+      },
+      "14": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Note",
+                            "itemTranslationData": {
+                              "c46d5932ee14aefee7e3e74cae1e1633": {
+                                "string": "Nota"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 76-78"
+                        }
+                      }
+                    },
+                    "type": "strong",
+                    "location": "line 76-78"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ": ",
+                      "itemTranslationData": {
+                        "e9f1dc12959ff63b1152bbc48aaecdd6": {
+                          "string": ": "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 76-78"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " is a generic OpenTracing mechanism for associating events to the current timestamp. The Java Tracer only supports logging error events.",
+                      "itemTranslationData": {
+                        "0c37481307017ea009ccc081534b0242": {
+                          "string": " es un mecanismo genérico de OpenTracing para asociar eventos a la marca temporal actual. El rastreador de Java solo admite el registro de eventos de error."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 76-78"
+                  },
+                  "5": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Alternatively, you can set error tags directly on the span without ",
+                      "itemTranslationData": {
+                        "cae9c0b7a0ba7cecbd72343ad4b9a4c8": {
+                          "string": "Como alternativa, puedes establecer etiquetas de error directamente en el tramo sin "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 76-78"
+                  },
+                  "7": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ":",
+                      "itemTranslationData": {
+                        "da4c45f492afaed8e7a86c0d173e516b": {
+                          "string": ":"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 76-78"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 76-78"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 76-78"
+      },
+      "16": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Note",
+                            "itemTranslationData": {
+                              "c46d5932ee14aefee7e3e74cae1e1633": {
+                                "string": "Nota"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 100-101"
+                        }
+                      }
+                    },
+                    "type": "strong",
+                    "location": "line 100-101"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ": You can add any relevant error metadata listed in the ",
+                      "itemTranslationData": {
+                        "5a4be867fce0bb4fc376cb6c899f855d": {
+                          "string": ": puedes añadir cualquier metadato de error relevante que aparezca en los"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 100-101"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "trace view docs",
+                            "itemTranslationData": {
+                              "1ef1bcb7be42461743a1e5d9fcd6e3a3": {
+                                "string": "documentos de vista de trazas"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 100-101"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 100-101"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ". If the current span isn't the root span, mark it as an error by using the ",
+                      "itemTranslationData": {
+                        "57aa918952078b58906b3596485b580a": {
+                          "string": ". Si el tramo actual no es el tramo raíz, márcalo como error utilizando la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 100-101"
+                  },
+                  "5": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " library to grab the root span with ",
+                      "itemTranslationData": {
+                        "6523b15a5520204cdf86b3a935cc21a3": {
+                          "string": "biblioteca para obtener el tramo raíz con "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 100-101"
+                  },
+                  "7": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ", then use ",
+                      "itemTranslationData": {
+                        "2245f69999b615bbe9a86afca25d19d0": {
+                          "string": ", luego, utiliza "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 100-101"
+                  },
+                  "9": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ". See the ",
+                      "itemTranslationData": {
+                        "2b9ea44c974f3b700c7a12b4405f5182": {
+                          "string": ". Lee la "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 100-101"
+                  },
+                  "10": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "setting tags & errors on a root span",
+                            "itemTranslationData": {
+                              "dacfb10be658c8344c6850bfde0f2ab2": {
+                                "string": "sección de configuración de etiquetas y errores en un tramo raíz"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 100-101"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 100-101"
+                  },
+                  "11": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " section for more details.",
+                      "itemTranslationData": {
+                        "2226edb5c84c254b737db435fe57590c": {
+                          "string": " para obtener más detalles."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 100-101"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 100-101"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 100-101"
+      },
+      "17": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Set tags and errors on a root span from a child span ",
+                      "itemTranslationData": {
+                        "cb2fc3ec55f7561b84b26a1f4830f37e": {
+                          "string": "Establecer etiquetas y errores en un tramo raíz desde un tramo secundario"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 102-103"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 102-103"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 102-103"
+      },
+      "18": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span. This can be useful to count an error or for measuring performance, or setting a dynamic tag for observability.",
+                      "itemTranslationData": {
+                        "9d84cc75a13024a70ff89d47eca16a12": {
+                          "string": "Cuando un evento o condición ocurre en el tráfico descendente, puede que quieras que ese comportamiento o valor se refleje como una etiqueta en el nivel superior o el tramo raíz tramo. Esto puede ser útil para contar un error o para medir el rendimiento, o establecer una etiqueta dinámica para la observabilidad."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 104-105"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 104-105"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 104-105"
+      },
+      "20": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If you are not manually creating a span, you can still access the root span through the ",
+                      "itemTranslationData": {
+                        "dfdc2cc05fbfc54eb173048d4f92cd20": {
+                          "string": "Si no estás creando manualmente un tramo, todavía puedes acceder al tramo raíz a través del"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 139-140"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ":",
+                      "itemTranslationData": {
+                        "da4c45f492afaed8e7a86c0d173e516b": {
+                          "string": ":"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 139-140"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 139-140"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 139-140"
+      },
+      "22": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Note",
+                            "itemTranslationData": {
+                              "c46d5932ee14aefee7e3e74cae1e1633": {
+                                "string": "Nota"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 155-156"
+                        }
+                      }
+                    },
+                    "type": "strong",
+                    "location": "line 155-156"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ": Although ",
+                      "itemTranslationData": {
+                        "1610119f1b79e82b0a0f434d95e1bc64": {
+                          "string": ": Aunque "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 155-156"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " and ",
+                      "itemTranslationData": {
+                        "5aac82a5ed212375a0d055476ac47839": {
+                          "string": " y "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 155-156"
+                  },
+                  "5": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " share many similar methods, they are distinct types. ",
+                      "itemTranslationData": {
+                        "9262c9f9b7607fb98f0ab45030eccb9d": {
+                          "string": " comparten muchos métodos similares, son tipos distintos."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 155-156"
+                  },
+                  "7": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " is Datadog specific and not part of the OpenTracing API.",
+                      "itemTranslationData": {
+                        "f61fd0cce4a8d2bb69cd4fb3971e8891": {
+                          "string": " es específico de Datadog y no forma parte de la API de OpenTracing."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 155-156"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 155-156"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 155-156"
+      },
+      "23": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding spans ",
+                      "itemTranslationData": {
+                        "5b2e00c5280890f2ced5883f7e4cfda1": {
+                          "string": "Añadir tramos"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 157-158"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 157-158"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 157-158"
+      },
+      "24": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If you aren't using a ",
+                      "itemTranslationData": {
+                        "bcd010878e550c3622497dd4ac013bc8": {
+                          "string": "Si no utilizas un "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "supported framework instrumentation",
+                            "itemTranslationData": {
+                              "829526df5a04b1e317e97e658a550a71": {
+                                "string": "framework de instrumentación compatible"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 159-160"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 159-160"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ", or you would like additional depth in your application's ",
+                      "itemTranslationData": {
+                        "68a33a95bd6e05baa4dc11d0c825001b": {
+                          "string": "o si deseas una mayor profundidad en las"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "traces",
+                            "itemTranslationData": {
+                              "9996e9ed01fb23d000ec46c79e0a9fd2": {
+                                "string": "trazas de tu aplicación"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 159-160"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 159-160"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ", you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.",
+                      "itemTranslationData": {
+                        "ee2292e7be942f3680e2c4ab9ad5d2a0": {
+                          "string": ", es posible que desees añadir instrumentación personalizada a tu código para obtener gráficos de llama completos o para medir los tiempos de ejecución de fragmentos de código."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 159-160"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 159-160"
+      },
+      "25": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If modifying application code is not possible, use the environment variable ",
+                      "itemTranslationData": {
+                        "da83d5bc585a700ed86d8ca5f99daca1": {
+                          "string": "Si no es posible modificar el código de la aplicación, utiliza la variable de entorno "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 161-162"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to detail these methods.",
+                      "itemTranslationData": {
+                        "0cfd2288a0868006126f53b6bc5a28d4": {
+                          "string": " para detallar estos métodos."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 161-162"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 161-162"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 161-162"
+      },
+      "26": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If you have existing ",
+                      "itemTranslationData": {
+                        "37162ed44e1d6a8e8eed409c9cda1b2b": {
+                          "string": "Si ya tienes "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 163-164"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.",
+                      "itemTranslationData": {
+                        "20b07497f6d876e4e39d0d3bbddc301a": {
+                          "string": " anotaciones existentes o similares, o prefieres utilizar anotaciones para completar cualquier traza incompleta dentro de Datadog, utiliza Trace Annotations."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 163-164"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 163-164"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 163-164"
+      },
+      "27": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Datadog trace methods ",
+                      "itemTranslationData": {
+                        "37d2a319fbaccd224cb9bfe6cb8e0929": {
+                          "string": "Métodos de trazas de Datadog"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 165-166"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 165-166"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 165-166"
+      },
+      "28": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Using the ",
+                      "itemTranslationData": {
+                        "411dd4b76fc84b40ea75848e0ee01394": {
+                          "string": "Mediante la "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 167-168"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " system property, you can get visibility into unsupported frameworks without changing application code.",
+                      "itemTranslationData": {
+                        "9f07331e7936a48e51716aa9e4e4ed2c": {
+                          "string": " propiedad de sistema, puedes obtener visibilidad de los frameworks no compatibles sin cambiar el código de la aplicación."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 167-168"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 167-168"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 167-168"
+      },
+      "30": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To trace several functions within the same class, use the following syntax:",
+                      "itemTranslationData": {
+                        "23f50e9f038430102fcc541bb4646dd6": {
+                          "string": "Para rastrear varias funciones dentro de la misma clase, utiliza la siguiente sintaxis:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 173-174"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 173-174"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 173-174"
+      },
+      "32": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "The only difference between this approach and using ",
+                      "itemTranslationData": {
+                        "cc5e5c00245f88a2979ac6e63c182c49": {
+                          "string": "La única diferencia entre este enfoque y el uso de "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 179-180"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " annotations is the customization options for the operation and resource names. With DD Trace Methods, ",
+                      "itemTranslationData": {
+                        "547bd3018c406dc8fe7fd167b7ba7d7d": {
+                          "string": " son las opciones de personalización de los nombres de operaciones y recursos. Con DD Trace Methods, "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 179-180"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " is ",
+                      "itemTranslationData": {
+                        "9279412cda93c478a4751f13a166d840": {
+                          "string": " es "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 179-180"
+                  },
+                  "6": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " and ",
+                      "itemTranslationData": {
+                        "5aac82a5ed212375a0d055476ac47839": {
+                          "string": " y "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 179-180"
+                  },
+                  "8": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " is ",
+                      "itemTranslationData": {
+                        "9279412cda93c478a4751f13a166d840": {
+                          "string": " es "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 179-180"
+                  },
+                  "10": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ".",
+                      "itemTranslationData": {
+                        "e56952054383fb97424b7598d6779c38": {
+                          "string": "."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 179-180"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 179-180"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 179-180"
+      },
+      "33": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Trace annotations ",
+                      "itemTranslationData": {
+                        "ece1368c4fd33dfb8f70eee4caea397e": {
+                          "string": "Anotaciones de trazas"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 181-182"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 181-182"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 181-182"
+      },
+      "34": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add ",
+                      "itemTranslationData": {
+                        "a74701b4de275032746d8667746c1427": {
+                          "string": "Añade"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 183-184"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to methods to have them be traced when running with ",
+                      "itemTranslationData": {
+                        "4cb604b67f5cdd219d12ed4d74bf8585": {
+                          "string": " a los métodos para que sean rastreados cuando se ejecutan con "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 183-184"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ". If the Agent is not attached, this annotation has no effect on your application.",
+                      "itemTranslationData": {
+                        "4f7ac02f176ee16953de417835d0629e": {
+                          "string": ". Si no se adjunta el Agent, esta anotación no tendrá ningún efecto en tu aplicación."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 183-184"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 183-184"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 183-184"
+      },
+      "35": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Datadog's Trace annotation is provided by the ",
+                      "itemTranslationData": {
+                        "8730dfa0bbb6fc6b68dee05f8b00c1dd": {
+                          "string": "La anotación de trazas de Datadog se proporciona mediante la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 185-186"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "dd-trace-api dependency",
+                            "itemTranslationData": {
+                              "49d22661aaf91018983d23da3c93a254": {
+                                "string": "dependencia dd-trace-api"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 185-186"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 185-186"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ".",
+                      "itemTranslationData": {
+                        "e56952054383fb97424b7598d6779c38": {
+                          "string": "."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 185-186"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 185-186"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 185-186"
+      },
+      "36": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "The available arguments for the ",
+                      "itemTranslationData": {
+                        "424d01535ee6bd89131de635afbadab3": {
+                          "string": "Los argumentos disponibles para la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 187-188"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " annotation are:",
+                      "itemTranslationData": {
+                        "58ea9bad5f85e9054782e23a12c4928b": {
+                          "string": " anotación son:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 187-188"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 187-188"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 187-188"
+      },
+      "37": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": ": Set the operation name for the trace (default: The method's name).",
+                            "itemTranslationData": {
+                              "6289e88d95e6612a8e2de5cb112d16fc": {
+                                "string": ": establece el nombre de la operación para la traza (por defecto: el nombre del método)."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 189-190"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 189-190"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 189-190"
+            },
+            "1": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": ": Set the resource name for the trace (default: The same value as ",
+                            "itemTranslationData": {
+                              "0248580e65120314019a74f592217e16": {
+                                "string": ": establece el nombre del recurso para la traza (por defecto: el mismo valor que "
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 190-191"
+                        },
+                        "3": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": ").",
+                            "itemTranslationData": {
+                              "9e2921a57ce95e871dc6831f0eb149e4": {
+                                "string": ")."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 190-191"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 190-191"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 190-191"
+            },
+            "2": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": ": Set to ",
+                            "itemTranslationData": {
+                              "780688c9abf066b543b6ddab43adefdc": {
+                                "string": ": establécelo en"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 191-192"
+                        },
+                        "3": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " to always start a new trace at that method. Supported from v1.22.0+ of ",
+                            "itemTranslationData": {
+                              "54ada20d0d940ffecd21b3ac99b34e8c": {
+                                "string": " para iniciar siempre una nueva traza en ese método. Compatible a partir de v1.22.0+ de "
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 191-192"
+                        },
+                        "5": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " (default: ",
+                            "itemTranslationData": {
+                              "ddace5d07383e7e8f3214b52a395807c": {
+                                "string": " (por defecto: "
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 191-192"
+                        },
+                        "7": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": ").",
+                            "itemTranslationData": {
+                              "9e2921a57ce95e871dc6831f0eb149e4": {
+                                "string": ")."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 191-192"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 191-192"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 191-193"
+            }
+          }
+        },
+        "type": "list",
+        "location": "line 189-193"
+      },
+      "39": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Note",
+                            "itemTranslationData": {
+                              "c46d5932ee14aefee7e3e74cae1e1633": {
+                                "string": "Nota"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 205-206"
+                        }
+                      }
+                    },
+                    "type": "strong",
+                    "location": "line 205-206"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ": Through the ",
+                      "itemTranslationData": {
+                        "117dccfa3c4e12145fb0c4afee019beb": {
+                          "string": ": a través de la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 205-206"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " system property, other tracing method annotations can be recognized by Datadog as ",
+                      "itemTranslationData": {
+                        "c35ac137d1937bde8a85bc450e07556f": {
+                          "string": " propiedad del sistema, otras anotaciones de métodos de rastreo pueden ser reconocidas por Datadog como"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 205-206"
+                  },
+                  "5": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ". You can find a list in ",
+                      "itemTranslationData": {
+                        "906eec4971dd19f7d3e24872e9916849": {
+                          "string": ". Encontrarás una lista en"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 205-206"
+                  },
+                  "6": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "TraceAnnotationsInstrumentation.java",
+                            "itemTranslationData": {
+                              "a94eb2b24d15f58f04005ae6b9e442eb": {
+                                "string": "TraceAnnotationsInstrumentation.java"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 205-206"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 205-206"
+                  },
+                  "7": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " if you have previously decorated your code.",
+                      "itemTranslationData": {
+                        "b4036703e69258ec2071612c2eb08b10": {
+                          "string": " si has decorado previamente tu código."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 205-206"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 205-206"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 205-206"
+      },
+      "40": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Manually creating a new span ",
+                      "itemTranslationData": {
+                        "2729b6aefe32b0c119e946df3dcb1d99": {
+                          "string": "Creación manual de un nuevo tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 207-208"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 207-208"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 207-208"
+      },
+      "41": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "In addition to automatic instrumentation, the ",
+                      "itemTranslationData": {
+                        "ba54c010b282ee42dec80c43e6772191": {
+                          "string": "Además de la instrumentación automática, la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 209-210"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " annotation, and ",
+                      "itemTranslationData": {
+                        "dbbf0f2259ae837654f775bcedd603f2": {
+                          "string": " anotación y "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 209-210"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " configurations , you can customize your observability by programmatically creating spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.",
+                      "itemTranslationData": {
+                        "208bdf2f549cd4d743bd37fd571e9f1f": {
+                          "string": " configuraciones, puedes personalizar tu observabilidad mediante la creación programática de tramos en cualquier bloque de código. Los tramos creados de esta manera se integran automáticamente con otros mecanismos de rastreo. En otras palabras, si una traza ya se ha iniciado, el tramo manual tendrá a su llamador como tramo principal. Del mismo modo, cualquier método rastreado llamado desde el bloque de código envuelto tendrá el tramo manual como principal."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 209-210"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 209-210"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 209-210"
+      },
+      "43": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Extending tracers ",
+                      "itemTranslationData": {
+                        "02d96c888b35b78057c1305b9c3c5900": {
+                          "string": "Extender los rastreadores"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 248-249"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 248-249"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 248-249"
+      },
+      "44": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a ",
+                      "itemTranslationData": {
+                        "a235c4a56fcc353c0abbc37acb10bf21": {
+                          "string": "Las bibliotecas de rastreo están diseñadas para ser extensibles. Los clientes pueden considerar escribir un post-procesador personalizado llamado "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 250-251"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.",
+                      "itemTranslationData": {
+                        "b12dfbb6f6831a138eac6b2a842d617b": {
+                          "string": " para interceptar tramos y luego ajustarlos, o descartarlos en consecuencia (por ejemplo, basándose en expresiones regulares). El siguiente ejemplo implementa dos interceptores para lograr una lógica compleja de posprocesamiento."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 250-251"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 250-251"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 250-251"
+      },
+      "46": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Near the start of your application, register the interceptors with the following:",
+                      "itemTranslationData": {
+                        "522f661f2941ebf0cbbc2d33bad3faaf": {
+                          "string": "Cerca del inicio de tu aplicación, registra los interceptores con lo siguiente:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 311-312"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 311-312"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 311-312"
+      },
+      "48": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Trace client and Agent configuration ",
+                      "itemTranslationData": {
+                        "821d91dc5ec5ed8f48c0414c49fc79d7": {
+                          "string": "Rastrear la configuración del cliente y del Agent "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 318-319"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 318-319"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 318-319"
+      },
+      "49": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "There are additional configurations possible for both the tracing client and Datadog Agent for context propagation, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.",
+                      "itemTranslationData": {
+                        "25703f4fb0e9dc1d43c6b11f02075562": {
+                          "string": "Existen configuraciones adicionales posibles tanto para el cliente de rastreo como para el Datadog Agent para la propagación del contexto, así como para excluir recursos específicos del envío de trazas a Datadog en el caso que no desees que estas trazas cuenten en métricas calculadas, como checks de estado."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 320-321"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 320-321"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 320-321"
+      },
+      "50": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Propagating context with headers extraction and injection ",
+                      "itemTranslationData": {
+                        "714ab393e72ab7d431a8b0e0e9d02ade": {
+                          "string": "Propagación del contexto con extracción e inserción de encabezados"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 322-323"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 322-323"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 322-323"
+      },
+      "51": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "You can configure the propagation of context for distributed traces by injecting and extracting headers. Read ",
+                      "itemTranslationData": {
+                        "78fea2f750fd51da986162d96a380a13": {
+                          "string": "Puedes configurar la propagación del contexto para traces (trazas) distribuidas insertando y extrayendo encabezados. Lee "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 324-325"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Trace Context Propagation",
+                            "itemTranslationData": {
+                              "a2077e7cd77e82c61ec49c0ab7316ebb": {
+                                "string": "Propagación de contextos de trazas"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 324-325"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 324-325"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " for information.",
+                      "itemTranslationData": {
+                        "8a3dbdd3091d9c91d6d1371979299fd9": {
+                          "string": " para obtener información."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 324-325"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 324-325"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 324-325"
+      },
+      "52": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Resource filtering ",
+                      "itemTranslationData": {
+                        "c6b6099b6397c58c41aa94c8b789222b": {
+                          "string": "Filtrado de recursos "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 326-327"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 326-327"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 326-327"
+      },
+      "53": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the ",
+                      "itemTranslationData": {
+                        "e7e9f709cb46834e4b9676c44cfef119": {
+                          "string": "Las trazas pueden excluirse en función de su nombre de recurso, para evitar que el tráfico sintético, como los checks de estado, informe de las trazas a Datadog. Esta y otras configuraciones de seguridad y ajuste se pueden encontrar en la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 328-329"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Security",
+                            "itemTranslationData": {
+                              "815dfb96cf3ce9e401ef031e7787bb6f": {
+                                "string": "Seguridad"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 328-329"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 328-329"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " page or in ",
+                      "itemTranslationData": {
+                        "2193394a74174ad6f936f24375d61c66": {
+                          "string": " página o en "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 328-329"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Ignoring Unwanted Resources",
+                            "itemTranslationData": {
+                              "03095b1dc0aa3d11fcab6a003128e091": {
+                                "string": "Ignorar los recursos no deseados"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 328-329"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 328-329"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ".",
+                      "itemTranslationData": {
+                        "e56952054383fb97424b7598d6779c38": {
+                          "string": "."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 328-329"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 328-329"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 328-329"
+      }
+    }
+  },
+  "type": "document"}

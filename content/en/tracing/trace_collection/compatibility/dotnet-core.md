@@ -109,6 +109,8 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
 | Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                                      | `CosmosDb`           |
+| Azure Event Hubs                | `Azure.Messaging.EventHubs` 5.9.2+                                                                   | `AzureEventHubs`     |
+| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14+                                                                   | `AzureServiceBus`    |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
@@ -130,6 +132,11 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][13] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## End of life .NET runtime versions
@@ -145,6 +152,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | JIT Compiler bug                                                               | All versions of .NET                                     | No current workaround                                                              | [dotnet/runtime/issues/85777][17]       |
 | .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10 | Upgrade .NET 6.0.11 or above, or disable runtime metrics | [dotnet/runtime/pull/76431][18]                                                    |                                         |
 | JIT Compiler bug causing crashes                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x                             | Upgrade .NET to 9.0.0 or above                                                     | [dotnet/runtime/pull/95653][22]         |
+| JIT Compiler bug causing crashes                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x, 9.x, 10.x                  | No current workaround                                                              | [dotnet/runtime/issues/127957][23]      |
 
 ## Supported Datadog Agent versions
 
@@ -202,3 +210,4 @@ Version updates imply the following changes to runtime support:
 [20]: https://www.gnu.org/software/libc/
 [21]: https://musl.libc.org/
 [22]: https://github.com/dotnet/runtime/issues/95653
+[23]: https://github.com/dotnet/runtime/issues/127957

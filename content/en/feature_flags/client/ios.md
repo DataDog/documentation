@@ -1,0 +1,468 @@
+---
+title: iOS and tvOS Feature Flags
+description: Set up Datadog Feature Flags for iOS and tvOS applications.
+aliases:
+  - /feature_flags/setup/ios/
+further_reading:
+- link: "/feature_flags/client/"
+  tag: "Documentation"
+  text: "Client-Side Feature Flags"
+- link: "/real_user_monitoring/ios/"
+  tag: "Documentation"
+  text: "iOS and tvOS Monitoring"
+---
+
+## Overview
+
+This page describes how to instrument your iOS or tvOS application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
+
+This guide explains how to install and enable the SDK, create and use a `FlagsClient`, and configure advanced options.
+
+## Installation
+
+Declare `DatadogFlags` as a dependency in your project. The recommended installation method is Swift Package Manager (SPM).
+
+{{< tabs >}}
+{{% tab "Swift Package Manager (SPM)" %}}
+To install the Datadog Feature Flags SDK using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift` file:
+
+{{< code-block lang="swift" filename="Package.swift" >}}
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
+{{< /code-block >}}
+
+In your project, link the following libraries:
+
+{{< code-block lang="swift" >}}
+DatadogCore
+DatadogFlags
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "CocoaPods" %}}
+To install the Datadog Feature Flags SDK using [CocoaPods][1], declare following pods in your `Podfile`:
+
+{{< code-block lang="swift" >}}
+DatadogCore
+DatadogFlags
+{{< /code-block >}}
+
+[1]: https://cocoapods.org/
+{{% /tab %}}
+
+{{% tab "Carthage" %}}
+To install the Datadog Feature Flags SDK using [Carthage][1], add `dd-sdk-ios` to your `Cartfile`:
+
+{{< code-block lang="swift" >}}
+github "DataDog/dd-sdk-ios"
+{{< /code-block >}}
+
+**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source. To build and integrate the SDK, run:
+
+{{< code-block lang="bash" >}}
+carthage bootstrap --use-xcframeworks --no-use-binaries
+{{< /code-block >}}
+
+After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
+
+{{< code-block lang="swift" >}}
+DatadogInternal.xcframework
+DatadogCore.xcframework
+DatadogFlags.xcframework
+{{< /code-block >}}
+
+[1]: https://github.com/Carthage/Carthage
+{{% /tab %}}
+{{< /tabs >}}
+
+## Initialize the SDK
+
+Initialize Datadog as early as possible in your app lifecycle—typically in `application(_:didFinishLaunchingWithOptions:)` (or with `@UIApplicationDelegateAdaptor` for SwiftUI apps). This ensures all feature flag evaluations and telemetry are captured correctly. To create a client token, see [Client tokens][2].
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .{{< region-param key="dd_datacenter_lowercase" code="true" >}},
+        service: "<service name>"
+    ),
+    trackingConsent: .granted
+)
+```
+
+## Enable flags
+
+After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for client creation and flags evaluation:
+
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+Flags.enable()
+{{< /code-block >}}
+
+You can also pass a configuration object; see [Advanced configuration](#advanced-configuration).
+
+## Create and retrieve a client
+
+Create a client once, typically during app startup:
+
+{{< code-block lang="swift" >}}
+FlagsClient.create() // Creates the default client
+{{< /code-block >}}
+
+Retrieve the same client anywhere in your app:
+
+{{< code-block lang="swift" >}}
+let flagsClient = FlagsClient.shared() // Retrieves the "default" client
+{{< /code-block >}}
+
+You can also create and retrieve multiple clients by providing the `name` parameter:
+
+{{< code-block lang="swift" >}}
+FlagsClient.create(name: "checkout")
+let flagsClient = FlagsClient.shared(named: "checkout")
+{{< /code-block >}}
+
+<div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>
+
+## Set the evaluation context
+
+Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to ensure proper targeting.
+
+{{< code-block lang="swift" >}}
+flagsClient.setEvaluationContext(
+    FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: [
+            "email": .string("user@example.com"),
+            "tier":  .string("premium")
+        ]
+    )
+)
+{{< /code-block >}}
+
+This method fetches flag assignments from the server asynchronously. By providing an optional completion callback or using the async/await variant you can handle the result of context evaluation:
+
+{{< code-block lang="swift" >}}
+do {
+    try await flagsClient.setEvaluationContext(evaluationContext)
+    // Context set successfully
+} catch {
+    print("Failed to set context: \(error)")
+}
+{{< /code-block >}}
+
+## Evaluate flags
+
+After creating the `FlagsClient` and setting its evaluation context, you can start reading flag values throughout your app. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags. This makes evaluations safe to perform on the main thread.
+
+Each flag is identified by a _key_ (a unique string) and can be evaluated with a _typed getter_ that returns a value of the expected type. If the flag doesn't exist or cannot be evaluated, the SDK returns the provided default value.
+
+### Boolean flags
+
+Use `getBooleanValue(key:defaultValue:)` for flags that represent on/off or true/false conditions. For example:
+
+{{< code-block lang="swift" >}}
+let isNewCheckoutEnabled = flagsClient.getBooleanValue(
+    key: "checkout.new",
+    defaultValue: false
+)
+
+if isNewCheckoutEnabled {
+    showNewCheckoutFlow()
+} else {
+    showLegacyCheckout()
+}
+{{< /code-block >}}
+
+### String flags
+
+Use `getStringValue(key:defaultValue:)` for flags that select between multiple variants or configuration strings. For example:
+
+{{< code-block lang="swift" >}}
+let theme = flagsClient.getStringValue(
+    key: "ui.theme",
+    defaultValue: "light"
+)
+
+switch theme {
+case "light":
+    setLightTheme()
+case "dark":
+    setDarkTheme()
+default:
+    setLightTheme()
+}
+{{< /code-block >}}
+
+### Integer and double flags
+
+For numeric flags, use `getIntegerValue(key:defaultValue:)` or `getDoubleValue(key:defaultValue:)`. These are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
+
+{{< code-block lang="swift" >}}
+let maxItems = flagsClient.getIntegerValue(
+    key: "cart.items.max",
+    defaultValue: 20
+)
+
+let priceMultiplier = flagsClient.getDoubleValue(
+    key: "pricing.multiplier",
+    defaultValue: 1.0
+)
+{{< /code-block >}}
+
+### Object flags
+
+For structured or JSON-like data, use `getObjectValue(key:defaultValue:)`. This method returns an `AnyValue`, which can represent primitives, arrays, or dictionaries. Object flags are useful for remote configuration scenarios where multiple properties need to be provided together. For example:
+
+{{< code-block lang="swift" >}}
+let config = flagsClient.getObjectValue(
+    key: "ui.config",
+    defaultValue: .dictionary([
+        "color": .string("#00A3FF"),
+        "fontSize": .integer(14)
+    ])
+)
+{{< /code-block >}}
+
+### Flag evaluation details
+
+When you need more than just the flag value, use the `get<Type>Details` APIs. These methods return both the evaluated value and metadata explaining the evaluation:
+
+* `getBooleanDetails(key:defaultValue:) -> FlagDetails<Bool>`
+* `getStringDetails(key:defaultValue:) -> FlagDetails<String>`
+* `getIntegerDetails(key:defaultValue:) -> FlagDetails<Int>`
+* `getDoubleDetails(key:defaultValue:) -> FlagDetails<Double>`
+* `getObjectDetails(key:defaultValue:) -> FlagDetails<AnyValue>`
+
+For example:
+
+{{< code-block lang="swift" >}}
+let details = flags.getStringDetails(
+    key: "paywall.layout",
+    defaultValue: "control"
+)
+
+print(details.value)    // Evaluated value (for example: "A", "B", or "control")
+print(details.variant)  // Variant name, if applicable
+print(details.reason)   // Description of why this value was chosen (for example: "TARGETING_MATCH" or "DEFAULT")
+print(details.error)    // The error that occurred during evaluation, if any
+{{< /code-block >}}
+
+Flag details may help you debug evaluation behavior and understand why a user received a given value.
+
+## Use with OpenFeature
+
+The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
+
+<div class="alert alert-warning">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is in development and not recommended for production use. Use the <code>FlagsClient</code> API shown above for production workloads; use this section to prototype OpenFeature integrations or to structure tests around the OpenFeature API.</div>
+
+### Install the OpenFeature provider
+
+Add `dd-openfeature-provider-swift` to your `Package.swift`:
+
+{{< code-block lang="swift" filename="Package.swift" >}}
+.package(url: "https://github.com/DataDog/dd-openfeature-provider-swift.git", .upToNextMajor(from: "0.1.0"))
+{{< /code-block >}}
+
+Link the `DatadogOpenFeatureProvider` product to your app target. The bridge depends on OpenFeature Swift SDK 0.3.0.
+
+### Initialize OpenFeature
+
+Initialize Datadog and enable Flags as shown in [Initialize the SDK](#initialize-the-sdk). Then create a `DatadogProvider` and register it with `OpenFeatureAPI.shared`:
+
+{{< code-block lang="swift" >}}
+import DatadogCore
+import DatadogFlags
+import DatadogOpenFeatureProvider
+import OpenFeature
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .{{< region-param key="dd_datacenter_lowercase" code="true" >}},
+        service: "<service name>"
+    ),
+    trackingConsent: .granted
+)
+
+Flags.enable()
+
+let context = MutableContext(targetingKey: "user-123")
+let provider = DatadogProvider()
+await OpenFeatureAPI.shared.setProviderAndWait(provider: provider, initialContext: context)
+{{< /code-block >}}
+
+`setProviderAndWait` is `async` and does not throw. After it returns, the provider is ready and flag evaluations use cached values.
+
+### Set the evaluation context
+
+The evaluation context identifies who or what the flag evaluation applies to. Pass it at provider registration, as shown above, or update it later:
+
+{{< code-block lang="swift" >}}
+let updatedContext = MutableContext(
+    targetingKey: "user-123",
+    structure: MutableStructure(attributes: [
+        "email": Value.string("user@example.com"),
+        "tier":  Value.string("premium")
+    ])
+)
+
+await OpenFeatureAPI.shared.setEvaluationContextAndWait(evaluationContext: updatedContext)
+{{< /code-block >}}
+
+The `targetingKey` is the randomization subject for percentage rollouts — the same key always receives the same variant for a given flag.
+
+### Evaluate flags
+
+Retrieve the global OpenFeature client and call the typed getters:
+
+{{< code-block lang="swift" >}}
+let client = OpenFeatureAPI.shared.getClient()
+
+let isNewCheckoutEnabled = client.getBooleanValue(key: "checkout.new", defaultValue: false)
+
+let theme = client.getStringValue(key: "ui.theme", defaultValue: "light")
+
+let maxItems = client.getIntegerValue(key: "cart.items.max", defaultValue: 20)
+
+let priceMultiplier = client.getDoubleValue(key: "pricing.multiplier", defaultValue: 1.0)
+
+let config = client.getObjectValue(
+    key: "ui.config",
+    defaultValue: Value.structure([
+        "color": Value.string("#00A3FF"),
+        "fontSize": Value.integer(14)
+    ])
+)
+{{< /code-block >}}
+
+Evaluations are synchronous and safe to perform on the main thread — they read from the SDK's local cache and do not make network requests. Note that `getIntegerValue` returns `Int64`; cast to `Int` at the call site if needed.
+
+### Flag evaluation details
+
+Use the `get<Type>Details` methods when you need the reason, variant, or any evaluation error in addition to the value:
+
+{{< code-block lang="swift" >}}
+let details = client.getStringDetails(key: "paywall.layout", defaultValue: "control")
+
+print(details.value)    // Evaluated value
+print(details.variant)  // Variant name, if applicable
+print(details.reason)   // Reason (for example: "TARGETING_MATCH" or "DEFAULT")
+print(details.errorCode) // Error code, if evaluation failed
+{{< /code-block >}}
+
+## Advanced configuration
+
+The `Flags.enable()` API accepts optional configuration with options listed below.
+
+{{< code-block lang="swift" >}}
+var config = Flags.Configuration()
+Flags.enable(with: config)
+{{< /code-block >}}
+
+`trackExposures`
+: When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.
+
+`rumIntegrationEnabled`
+: When `true` (default), flag evaluations are tracked in RUM, which enables correlating them with user sessions. This enables analytics such as _“Do users in variant B experience more errors?”_. If your app does not use RUM, this flag has no effect and can be safely left at its default value.
+
+`gracefulModeEnabled`
+: Controls how the SDK handles incorrect use of the `FlagsClient` API—for example, creating a client before calling `Flags.enable()`, creating a duplicate client with the same name, or retrieving a client that hasn't been created yet.
+
+  The exact behavior of Graceful Mode depends on your build configuration:
+
+  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.verbosityLevel` is configured.
+  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.
+  * **Debug builds** with `gracefulModeEnabled = false`: The SDK raises `fatalError` for incorrect API usage, enforcing a fail-fast approach that helps detect configuration mistakes early.
+
+  You can adjust `gracefulModeEnabled` depending on your development or QA phase.
+
+`customFlagsEndpoint`
+: Configures a custom server URL for retrieving flag assignments.
+
+`customExposureEndpoint`
+: Configures a custom server URL for sending flags exposure data.
+
+`customFlagsHeaders`
+: Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
+
+## Testing
+
+The examples above use Datadog's `FlagsClient` API directly. If you prefer to drive feature flags through the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature bridge for iOS at [dd-openfeature-provider-swift](https://github.com/DataDog/dd-openfeature-provider-swift). Use the bridge's `DatadogProvider` in production, and for code-controlled flag values in tests, substitute an in-memory provider.
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The OpenFeature Swift SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead.
+
+{{< code-block lang="swift" >}}
+import Combine
+import OpenFeature
+import XCTest
+@testable import MyApp
+
+// Minimal in-memory provider for tests. Copy into your test target.
+final class InMemoryTestProvider: FeatureProvider {
+    var hooks: [any Hook] = []
+    var metadata: ProviderMetadata = Metadata(name: "in-memory-test")
+    private let subject = CurrentValueSubject<ProviderEvent?, Never>(.ready)
+    private let bools: [String: Bool]
+    private let strings: [String: String]
+
+    init(bools: [String: Bool] = [:], strings: [String: String] = [:]) {
+        self.bools = bools
+        self.strings = strings
+    }
+
+    func observe() -> AnyPublisher<ProviderEvent?, Never> { subject.eraseToAnyPublisher() }
+
+    func initialize(initialContext: EvaluationContext?) async throws {}
+
+    func onContextSet(oldContext: EvaluationContext?, newContext: EvaluationContext) async throws {}
+
+    func getBooleanEvaluation(key: String, defaultValue: Bool, context: EvaluationContext?) throws -> ProviderEvaluation<Bool> {
+        ProviderEvaluation(value: bools[key] ?? defaultValue, variant: bools[key] == nil ? "default" : "static", reason: Reason.staticReason.rawValue)
+    }
+
+    func getStringEvaluation(key: String, defaultValue: String, context: EvaluationContext?) throws -> ProviderEvaluation<String> {
+        ProviderEvaluation(value: strings[key] ?? defaultValue, variant: strings[key] == nil ? "default" : "static", reason: Reason.staticReason.rawValue)
+    }
+
+    func getIntegerEvaluation(key: String, defaultValue: Int64, context: EvaluationContext?) throws -> ProviderEvaluation<Int64> {
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.staticReason.rawValue)
+    }
+
+    func getDoubleEvaluation(key: String, defaultValue: Double, context: EvaluationContext?) throws -> ProviderEvaluation<Double> {
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.staticReason.rawValue)
+    }
+
+    func getObjectEvaluation(key: String, defaultValue: Value, context: EvaluationContext?) throws -> ProviderEvaluation<Value> {
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.staticReason.rawValue)
+    }
+
+    private struct Metadata: ProviderMetadata { var name: String? }
+}
+
+final class CheckoutFlagTests: XCTestCase {
+    override func tearDown() {
+        OpenFeatureAPI.shared.clearProvider()
+    }
+
+    func testNewCheckoutEnabled() async throws {
+        let provider = InMemoryTestProvider(bools: ["new-checkout-flow": true])
+        await OpenFeatureAPI.shared.setProviderAndWait(provider: provider)
+
+        let client = OpenFeatureAPI.shared.getClient()
+        XCTAssertTrue(client.getBooleanValue(key: "new-checkout-flow", defaultValue: false))
+    }
+}
+{{< /code-block >}}
+
+`OpenFeatureAPI.shared` is a global singleton, so call `clearProvider()` in `tearDown` to prevent one test's flags from leaking into another. `setProviderAndWait(provider:)` is `async` and does not throw, so no `try` is required.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[2]: /account_management/api-app-keys/#client-tokens

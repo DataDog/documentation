@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "team_notification_rules",
+    "attributes": {
+      "email": {
+        "enabled": true
+      },
+      "slack": {
+        "workspace": "Datadog",
+        "channel": "aaa-omg-ops"
+      }
+    }
+  }
+}

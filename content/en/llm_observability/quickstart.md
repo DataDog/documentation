@@ -19,6 +19,8 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
 
 ### Setup
 
+Follow the setup instructions in Datadog's [in-app onboarding flow](https://app.datadoghq.com/llm/applications?setupMethod=manual&showOnboarding=true) for an interactive quickstart experience.
+
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -33,11 +35,10 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
+   DD_SITE=<YOUR_DD_SITE> \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    ddtrace-run <your application command>
    ```
-
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 
 [1]: /llm_observability/setup/sdk/python/#command-line-setup
@@ -55,11 +56,10 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
+   DD_SITE=<YOUR_DD_SITE> \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
-
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 [1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
 [2]: /getting_started/site/
@@ -77,17 +77,19 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    java -javaagent:/path/to/dd-java-agent.jar \
    -Ddd.llmobs.enabled=true \
    -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.site=<YOUR_DD_SITE> \
    -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
    -jar path/to/your/app.jar
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 [1]: /llm_observability/setup/sdk/java/#command-line-setup
 [2]: /getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Your Datadog site is {{< region-param key="dd_site" code="true" >}}. Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 ### View traces
 

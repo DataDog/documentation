@@ -18,9 +18,15 @@ Available integrations endpoints:
 - [AWS Integration][1]
 - [AWS Logs Integration][2]
 - [Azure Integration][3]
+- [Cloudflare Integration][37]
+- [Fastly Integration][38]
 - [Google Cloud Integration][4]
-- [Slack Integration][5]
+- [Jira Integration][39]
+- [Microsoft Teams Integration][40]
+- [Okta Integration][41]
+- [Opsgenie Integration][42]
 - [PagerDuty Integration][6]
+- [Slack Integration][5]
 - [Webhooks Integration][7]
 
 **Platform endpoints**
@@ -99,3 +105,9 @@ You can also use the Datadog API to manage your account programmatically:
 [34]: /api/v1/usage-metering/
 [35]: /api/v1/ip-ranges/
 [36]: /llm_observability/evaluations/export_api
+[37]: /api/latest/cloudflare-integration/
+[38]: /api/latest/fastly-integration/
+[39]: /api/latest/jira-integration/
+[40]: /api/latest/microsoft-teams-integration/
+[41]: /api/latest/okta-integration/
+[42]: /api/latest/opsgenie-integration/

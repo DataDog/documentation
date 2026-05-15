@@ -20,9 +20,9 @@ Containerized Windows Applications Monitoring には、Datadog Agent 7.19+ が�
 
 対応する OS のバージョンは以下の通りです。
 - Windows Server 2019 (LTSC / 1809)
-- Windows Server 2019 1909 (Agent 7.39 まで、Microsoft がサポートしなくなったため)
-- Windows Server 2019 2004 または 20H1 (Agent 7.39 まで、Microsoft がサポートしなくなったため)
-- Windows Server 2019 20H2 (Agent 7.33〜7.39、Microsoft がサポートしなくなったため)
+- Windows Server 2019 1909 (Agent 7.39 まで。 Microsoft のサポートは終了しています)
+- Windows Server 2019 2004 または 20H1 (Agent 7.39 まで。 Microsoft のサポートは終了しています)
+- Windows Server 2019 20H2 (Agent 7.33 ～ 7.39。 Microsoft のサポートは終了しています)
 - Windows Server 2022 LTSC (Agent >=7.34)
 
 Hyper-V 分離モードはサポートされていません。
@@ -35,31 +35,33 @@ Hyper-V 分離モードはサポートされていません。
 
 ## Kubernetes の問題
 
-Live processes do not appear in containers (except for the Datadog Agent).
+ライブプロセスはコンテナに表示されません (Datadog Agent を除く)。
 
-### Mixed clusters (Linux + Windows)
+### 複合クラスター (Linux + Windows)
 
 複合クラスターに Datadog Agent をデプロイするには、Helm チャートの 2 つのインストールを異なる `targetSystem` で実行することが推奨されます。
 
 Datadog Agent は `nodeSelector` を使用して、`targetSystem` に基づき Linux または Windows ノードを自動的に選択します。
 
-ただし、Kube State メトリクス (デフォルトでインストール済み) が Windows ノードにスケジュールできない状況につながるような場合は、この限りではありません。
+ただし、デフォルトでインストールされる Kube State Metrics はこの限りではないため、 Kube State Metrics を Windows ノードにスケジュールできないことがあります。
 
 この問題を回避するには、3 つのオプションがあります。
 
 * Windows ノードに taint を適用します。Windows では、Agent は常に `node.kubernetes.io/os=windows:NoSchedule` taint を許可します。
 * Datatog Helm チャート `values.yaml` を使用して、Kube State メトリクスノードセレクタを設定します。
 
-```
-kube-state-metrics:
-  nodeSelector:
-    beta.kubernetes.io/os: linux // Kubernetes < 1.14
-    kubernetes.io/os: linux // Kubernetes >= 1.14
-```
+   ```
+   kube-state-metrics:
+     nodeSelector:
+       beta.kubernetes.io/os: linux // Kubernetes < 1.14
+       kubernetes.io/os: linux // Kubernetes >= 1.14
+   ```
 
 * `datadog.kubeStateMetricsEnabled` を `false` に設定し、Kube State メトリクスを別途デプロイします。
 
 **注**: 2 つの Datadog インストール (`targetSystem: linux`、`targetSystem: windows`) を使用する場合、2 つ目のインストールで `datadog.kubeStateMetricsEnabled` を必ず `false` に設定してください。Kube State メトリクスのインスタンスを 2 つデプロイしないようにするためです。
+
+Windows デプロイメントでは一部のメトリクスを利用できません。 [利用可能なメトリクス](#limited-metrics-for-windows-deployments) を参照してください。
 
 #### Datadog Cluster Agent によるクラスターの混在
 
@@ -118,17 +120,17 @@ Windows では、一部の構成オプションが使用できません。以下
 
 ### Kubelet チェック
 
-ご使用の Kubernetes バージョンによっては、Kubelet メトリクスの一部をご利用いただけない (または Kubelet チェックがタイムアウトする) ことがあります。
-最適にご利用いただくため、以下をご使用ください。
+Kubernetes のバージョンによっては、 Kubelet メトリクスの一部が利用できない (または Kubelet チェックがタイムアウトする) 場合があります。
+最適な動作のため、 Datadog Agent v7.19.2+ と組み合わせて次のいずれかを使用してください:
 
-* Kubelet 1.16.13 以降 (GKE では 1.16.11)
-* Kubelet 1.17.9 以降 (GKE では 1.17.6)
-* Kubelet 1.18.6 以降
-* Kubelet 1.19 以降
+* Kubelet v1.16.13+ (GKE では v1.16.11+)
+* Kubelet v1.17.9+ (GKE では v1.17.6+)
+* Kubelet v1.18.6+
+* Kubelet v1.19+
 
-Agent バージョン 7.19.2 以降
+### Windows デプロイメント向けの制限付きメトリクス
 
-Windows では、ご利用いただけない `kubernetes.*` があります。以下のリストでご利用可能なものをご確認ください。
+Windows コンテナでは、 次の `kubernetes.*` メトリクスを利用できます:
 
 * `kubernetes.cpu.usage.total`
 * `kubernetes.containers.restarts`

@@ -1,4 +1,5 @@
 ---
+id: saved_views
 title: Saved Views
 core_product:
   - apm

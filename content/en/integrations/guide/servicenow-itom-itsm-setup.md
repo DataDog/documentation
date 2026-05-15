@@ -25,7 +25,7 @@ Before installing the integration, ensure you have the [ServiceNow tile configur
 
 There are two ways to install the integration:
 - Datadog recommends installing the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
-- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.7.xml][2]) and upload it to your ServiceNow instance manually.
+- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.9.xml][2]) and upload it to your ServiceNow instance manually.
 
 ## Configure the integration
 
@@ -231,20 +231,20 @@ sys_id from the templated handle passed in for user.
 
 ### Configure Datadog Case Management {#case-management}
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
 Case Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
 
-Send cases from Datadog to either the Datadog Cases ITOM or ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Event or Incident table. Datadog doesn't support custom payloads for these tables, or updates to the Events table.
+Send cases from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Incident table. Datadog doesn't support custom payloads for this table.
 
 <div class="alert alert-info">The user configuring the settings in ServiceNow must have both the <code>x_datad_datadog.user</code> and <code>admin</code> roles.</a></div>
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Case Management** tab.
 1. Under **Sync ServiceNow with Case Management**, open the settings for your ServiceNow instance.
-1. Beside **Case Table**, choose to send cases to either **Datadog Cases ITOM** or **Datadog Cases ITSM**.
+1. Beside **Case Table**, choose to send cases to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Case Management.
 1. Navigate to the [**Case Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
 ### Configure Datadog Incident Management {#incident-management}
@@ -259,6 +259,8 @@ For step-by-step instructions on setting up and configuring this integration for
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
 
+**Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
+
 1. In Datadog, follow the instructions to [create a service account application key][7].<br />**Note**: Datadog recommends creating this key instead of using a personal one, which risks breaking the ServiceNow sync if the user's account is deactivated or if their permissions change.
 1. In ServiceNow, click the globe icon in the top-right corner, then make sure the **Application Scope** is set to **ITOM/ITSM Integration for Datadog**.
 1. In the top-left navigation menu, click **All**.
@@ -269,7 +271,9 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with both
    1. Paste in your **Service Account Application Key** you created.
    1. Check the **Enabled** box.
 1. Click **Save**.
-1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br />The transform maps for Datadog Cases ITOM and ITSM tables contain an example transform script that runs onBefore. By default, the script is commented out, but you can enable it by uncommenting it and modifying it to fit your use case.
+1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br /> Instructions on how to do so can be found below under **Transform correlated alert data**.
+
+
 
 ## Customize data with transform maps {#transform-maps}
 
@@ -312,7 +316,7 @@ answer = (function transformEntry(source)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
-To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. 
+To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map.
 
 To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
 
@@ -395,14 +399,14 @@ Need additional help? Contact [Datadog support][10].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.7.xml
+[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/cases/settings
-[6]: /service_management/case_management/notifications_integrations/#servicenow
+[6]: /incident_response/case_management/notifications_integrations/#servicenow
 [7]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [8]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
 [9]: https://app.datadoghq.com/incidents/settings?section=integrations
 [10]: /help/
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
-[12]: /service_management/incident_management/integrations/servicenow
+[12]: /incident_response/incident_management/integrations/servicenow

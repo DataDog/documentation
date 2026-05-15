@@ -90,6 +90,10 @@ Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Parámetros de perfiles</u>: Configura tus métodos de contacto y tus preferencias de notificación para asegurarte de recibir localizadores oportunos y efectivos.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Facturación
+
+On-Call es una SKU basada en asientos. Para obtener más información sobre cómo se factura el servicio de On-Call y cómo gestionar los asientos en Datadog, visita nuestra [página de precios][5] y la [documentación de facturación de respuestas a incidentes][6].
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +102,5 @@ Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que
 [2]: /es/service_management/on-call/profile_settings
 [3]: /es/account_management/rbac/granular_access/
 [4]: /es/account_management/rbac/#role-based-access-control
+[5]: https://www.datadoghq.com/pricing/?product=incident-response#products
+[6]: /es/account_management/billing/incident_response/

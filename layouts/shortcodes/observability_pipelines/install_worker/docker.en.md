@@ -18,5 +18,5 @@
 
 See [Update Existing Pipelines][8001] if you want to make changes to your pipeline's configuration.
 
-[8001]: /observability_pipelines/update_existing_pipelines
+[8001]: /observability_pipelines/configuration/update_existing_pipelines/
 [8002]: https://app.datadoghq.com/organization-settings/remote-config/setup

@@ -38,15 +38,14 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
       ```yaml
       logs:
-        - type: syslog
+        - type: udp
           port: 514
-          protocol: udp
           source: syslog
           service: <service> # optional tag
       ```
 
       - **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
-      - **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+      - **`type`**: Set to `udp` or `tcp` based on your device configuration.
       - **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
       - **`service`**: Optional service name for unified service tagging.
 
@@ -76,9 +75,8 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
       ```yaml
       logs:
-        - type: syslog
+        - type: udp
           port: 514
-          protocol: udp
           source: syslog
           service: <service> # optional tag
        ```
@@ -109,9 +107,8 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
       ```yaml
       logs:
-        - type: syslog
+        - type: udp
           port: 514
-          protocol: udp
           source: syslog
           service: <service> # optional tag
       ```
@@ -189,9 +186,9 @@ After your network devices are configured and the Datadog Agent is running, you 
 
 4. Optionally, to observe Syslog messages in NDM, navigate to [**Infrastructure > Network Devices**][5].
     - Select a device that is configured to send Syslog messages.
-    - In the device side panel, click the **Syslog** tab to view your Syslog messages:
+    - In the NDM device view, click the **Events** tab. Syslog messages and SNMP traps are combined in a single view. Use the filters to narrow results by event type.
 
-    {{< img src="network_device_monitoring/syslog/syslog_tab.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
+    {{< img src="network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
 ## Further Reading
 

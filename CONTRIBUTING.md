@@ -199,6 +199,29 @@ Use text formatting to clarify and enhance content.
 | `**bold**`   | Bold important text, like parts of the UI users need to interact with.              | Click **Settings**.                          |
 | `*italics*`  | Use italics when you're introducing a product on a landing page for the first time. | The *Datadog Agent* runs on your hosts to... |
 
+## Page structure 
+
+### Overview sections
+
+Most pages include an **Overview** section. An effective overview:
+- Explains the problem the page helps solve
+- Clarifies who the content is for
+- Provides conceptual or decision-making context before procedural steps
+
+Avoid adding overview sections that duplicate the page’s structure (for example, in a “This guide covers…” list). The documentation site automatically generates a table of contents from H2 and H3 headings. 
+
+If a page requires structured navigation (for example, a long multi-stage workflow), ensure any summary or jump list adds context or guidance beyond what the automatic table of contents already provides.
+
+
+## AI code assistants
+
+Contributors may use AI code assistants (such as Claude Code, GitHub Copilot, Cursor, and others) when working on documentation. If you do, keep the following in mind:
+
+**Transparency**: Note AI tool usage in your pull request description using the AI assistance section in the PR template. This helps reviewers calibrate their review.
+
+**Quality and accuracy**: AI-assisted contributions are held to the same quality bar as any other contribution. You are responsible for the accuracy of all content you submit, regardless of how it was produced.
+
+**Style compliance**: AI tools may not follow the Datadog documentation [style guide][4] or [Vale linting rules][4]. Run `vale` on your changes and fix any issues before submitting.
 
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119

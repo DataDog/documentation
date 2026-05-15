@@ -3,20 +3,20 @@ aliases:
 - /ja/integrations/system_swap/
 - /ja/integrations/system_core/
 categories:
-- os & system
+- OS & システム
 - configuration & deployment
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md
-description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。
+description: システム リソース (CPU、メモリ、ディスク、ファイル システムなど) の使用状況を追跡。
 git_integration_title: system
-integration_id: システム
+integration_id: system
 integration_title: System チェック
 is_public: true
 name: system
 newhlevel: true
 public_title: Datadog-System インテグレーション
-short_description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。
+short_description: システムリソース (CPU、メモリ、ディスク、ファイルシステムなど) の使用状況を追跡。
 supported_os:
 - linux
 - mac_os
@@ -38,9 +38,9 @@ updated_for_agent: 5.8.5
 
 System チェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-## 収集データ
+## 収集されるデータ
 
-### Metrics
+### メトリクス
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
@@ -71,16 +71,16 @@ System チェックには、サービスのチェック機能は含まれませ�
 
 システムコアチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-#### 構成
+#### 設定
 
 1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_core.d/conf.yaml` ファイルを編集します。使用可能な全構成オプションの詳細については、[サンプル system_core.d/conf.yaml][6] を参照してください。**注**: チェックを有効にするには、`instances` に少なくとも 1 つのエントリが必要です。例:
 
     ```yaml
     init_config:
     instances:
-        - foo: bar
+      - foo: bar
         tags:
-            - key:value
+          - key:value
     ```
 
 2. [Agent を再起動します][7]。
@@ -89,9 +89,9 @@ System チェックには、サービスのチェック機能は含まれませ�
 
 [Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_core` を探します。
 
-### 収集データ
+### 収集されるデータ
 
-#### Metrics
+#### メトリクス
 
 {{< get-metrics-from-git "system_core" >}}
 
@@ -115,7 +115,7 @@ System コアチェックには、イベントは含まれません。
 
 システムのスワップチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-#### 構成
+#### 設定
 
 1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_swap.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル system_swap.d/conf.yaml][8] を参照してください。**注**: このチェックは初期コンフィギュレーションを受け取りません。
 
@@ -125,9 +125,9 @@ System コアチェックには、イベントは含まれません。
 
 [Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_swap` を探します。
 
-### 収集データ
+### 収集されるデータ
 
-#### Metrics
+#### メトリクス
 
 {{< get-metrics-from-git "system_swap" >}}
 

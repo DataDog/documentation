@@ -7,6 +7,9 @@ aliases:
   - /guides/autodiscovery/
   - /agent/kubernetes/integrations
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
+  tag: "Blog"
+  text: "Monitor Karpenter with Datadog"
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
@@ -22,6 +25,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "https://www.youtube.com/watch?v=nuxmVf9ByE0"
+  tag: "Video"
+  text: "Datadog Tips & Tricks: How to write annotations in Kubernetes with JSON for Datadog Autodiscovery"
 ---
 
 This page covers how to install and configure integrations for your Kubernetes infrastructure by using a Datadog feature known as _Autodiscovery_. This enables you to use [variables][16] like `%%host%%` to dynamically populate your configuration settings. For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][12]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Container Discovery Management][23].
@@ -30,7 +36,7 @@ If you are using Docker or Amazon ECS, see [Docker and Integrations][1].
 
 <div class="alert alert-info">
 Some Datadog integrations don't work with Autodiscovery because they require either process tree data or filesystem access: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">Cassandra Nodetool</a>, and <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
-To monitor integrations that are not compatible with Autodiscovery, you can use a Prometheus exporter in the pod to expose an HTTP endpoint, and then use the <a href="/integrations/openmetrics/">OpenMetrics integration</a> (which supports Autodiscovery) to find the pod and query the endpoint. 
+To monitor integrations that are not compatible with Autodiscovery, you can use a Prometheus exporter in the pod to expose an HTTP endpoint, and then use the <a href="/integrations/openmetrics/">OpenMetrics integration</a> (which supports Autodiscovery) to find the pod and query the endpoint.
 </div>
 
 ## Set up your integration
@@ -79,7 +85,7 @@ spec:
 # (...)
 ```
 
-**Autodiscovery annotations v1** 
+**Autodiscovery annotations v1**
 
 ```yaml
 apiVersion: v1
@@ -131,7 +137,7 @@ You can store Autodiscovery templates as local files inside the mounted `conf.d`
          volumes:
            - hostPath:
                path: <PATH_TO_LOCAL_FOLDER>/conf.d
-             name: confd 
+             name: confd
    ```
 
    For Helm:
@@ -262,7 +268,7 @@ spec:
 ```
 <div class="alert alert-info">When multiple deployed <code>DatadogAgent</code> CRDs use <code>configDataMap</code>, each CRD writes to a shared ConfigMap named <code>nodeagent-extra-confd</code>. This can cause configurations to override each other. </div>
 
-To monitor a [Cluster Check][1], add an override `extraConfd.configDataMap` to the `clusterAgent` component. You must also enable cluster checks by setting `features.clusterChecks.enabled: true`. 
+To monitor a [Cluster Check][1], add an override `extraConfd.configDataMap` to the `clusterAgent` component. You must also enable cluster checks by setting `features.clusterChecks.enabled: true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -317,7 +323,7 @@ datadog:
         <LOGS_CONFIG>
 ```
 
-To monitor a [Cluster Check][3], define your template under `clusterAgent.confd`. You can find inline examples in the sample [values.yaml][2]. You must also enable the Cluster Agent by setting `clusterAgent.enabled: true` and enable cluster checks by setting `datadog.clusterChecks.enabled: true`. 
+To monitor a [Cluster Check][3], define your template under `clusterAgent.confd`. You can find inline examples in the sample [values.yaml][2]. You must also enable the Cluster Agent by setting `clusterAgent.enabled: true` and enable cluster checks by setting `datadog.clusterChecks.enabled: true`.
 
 ```yaml
 datadog:
@@ -371,11 +377,73 @@ The `ad_identifiers` parameter takes a list, so you can supply multiple containe
 `<LOGS_CONFIG>`
 : The configuration parameters listed under `logs` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file.
 
+### Advanced annotation parameters
+
+In addition to the core Autodiscovery annotations for checks, logs, and instances, you can use additional annotations to customize check behavior:
+
+#### Tag cardinality
+
+Set the tag cardinality level for a specific check using the `check_tag_cardinality` annotation. This overrides the global Agent tag cardinality setting for metrics collected by that check.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+      {
+        "<INTEGRATION_NAME>": {
+          "init_config": <INIT_CONFIG>,
+          "instances": [<INSTANCES_CONFIG>]
+        }
+      }
+    ad.datadoghq.com/<CONTAINER_NAME>.check_tag_cardinality: "<low|orchestrator|high>"
+spec:
+  containers:
+    - name: '<CONTAINER_NAME>'
+```
+
+<div class="alert alert-info">The <code>check_tag_cardinality</code> annotation only affects metrics collected by integration checks. It does not affect metrics sent through DogStatsD. To configure DogStatsD tag cardinality, use the global <code>dogstatsd_tag_cardinality</code> configuration parameter or the <code>DD_DOGSTATSD_TAG_CARDINALITY</code> environment variable.</div>
+
+For more information about tag cardinality, see [Per-check tag configuration][27].
+
 ### Auto-configuration
 
 The Datadog Agent automatically recognizes and supplies basic configuration for some common technologies. For a complete list, see [Autodiscovery auto-configuration][20].
 
 Configurations set with Kubernetes annotations take precedence over auto-configuration, but auto-configuration takes precedence over configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
+
+## Integrations security
+
+Integrations often need to read configuration files, certificates, or other resources from the filesystem. When file paths come from untrusted configuration providers (for example, pod annotations or external service autodiscovery), there is a risk of path traversal or unauthorized file access.
+
+Starting with Datadog Agent version 7.78.0, you can set the following parameters in the Agent's `datadog.yaml` to control filesystem access based on the trust level of a configuration provider.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `integration_ignore_untrusted_file_params` | bool | `false` | When enabled, integrations ignore configuration parameters that refer to file paths if the configuration provider is not trusted. |
+| `integration_file_paths_allowlist` | list | `[]` | List of file paths that integrations are allowed to access, even when provided by an untrusted configuration provider. An empty list means all file paths are allowed. |
+| `integration_trusted_providers` | list | `["file", "remote-config"]` | List of configuration providers considered trusted. Any provider not in this list is considered untrusted. By default, local configuration files (`file`) and Datadog Remote Configuration (`remote-config`) are trusted. For the full list of supported providers, see [Datadog Agent provider names][28]. |
+| `integration_security_excluded_checks` | list | `[]` | List of integration names that are excluded from the above security restrictions. |
+
+These options are backwards compatible: the default values preserve existing behavior. To opt in, enable `integration_ignore_untrusted_file_params` and adjust the remaining parameters to match your environment.
+
+Example `datadog.yaml`:
+
+```yaml
+integration_ignore_untrusted_file_params: true
+integration_file_paths_allowlist:
+  - /etc/datadog-agent/certs
+  - /var/run/secrets
+integration_trusted_providers:
+  - file
+  - remote-config
+integration_security_excluded_checks:
+  - <INTEGRATION_NAME>
+```
+
+With this configuration, an integration configured through pod annotations (an untrusted provider) cannot reference file paths outside `/etc/datadog-agent/certs` or `/var/run/secrets`, unless the integration name is listed in `integration_security_excluded_checks`.
 
 ## Example: Postgres integration
 
@@ -443,7 +511,7 @@ spec:
     - name: postgres
 ```
 
-**Autodiscovery annotations v1** 
+**Autodiscovery annotations v1**
 
 ```yaml
 apiVersion: v1
@@ -506,7 +574,7 @@ spec:
          volumes:
            - hostPath:
                path: <PATH_TO_LOCAL_FOLDER>/conf.d
-             name: confd 
+             name: confd
    ```
 
    For Helm:
@@ -673,3 +741,5 @@ For more examples, including how to configure multiple checks for multiple sets 
 [24]: /containers/guide/autodiscovery-examples
 [25]: /integrations/istio/
 [26]: /integrations/postgres
+[27]: /getting_started/integrations/#per-check-tag-configuration
+[28]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/providers/names/provider_names.go#L10-L38

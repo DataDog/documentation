@@ -1,4 +1,6 @@
 ---
+description: Migra de las configuraciones heredadas Sin datos a las opciones Datos
+  perdidos para una mejor gestión de los datos perdidos en los monitores de métricas.
 further_reading:
 - link: /api/latest/monitors/
   tag: API
@@ -83,7 +85,7 @@ Los SLOs tratan el tiempo de actividad y caída del sistema de acuerdo con esta 
 | Mostrar OK                       | OK                             | Tiempo de actividad                      |
 | Mostrar No Data                  | Sin datos                        | Tiempo de actividad                      |
 | Mostrar No Data y notificar       | Sin datos                        | Caída del sistema                    |
-| Mostrar el último estado conocido        | Sea cual fuere el último estado   | Si es OK, tiempo de actividad<br>Si es alerta, caída del sistema |
+| Mostrar el último estado conocido        | Sea cual fuere el último estado   | Si es OK, tiempo de actividad<br>si es alerta, caída del sistema |
 | Evaluar como cero              | Depende de la configuración del umbral | Si es OK, tiempo de actividad<br>si es alerta, caída del sistema |
 
 ## Referencias adicionales

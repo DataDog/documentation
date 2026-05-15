@@ -7,6 +7,7 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/nodejs
   - /security/application_security/threats_detection/nodejs
   - /security/application_security/setup/aws/fargate/nodejs
+  - /security/application_security/setup/standalone/nodejs
 further_reading:
   - link: "/security/application_security/add-user-info/"
     tag: "Documentation"

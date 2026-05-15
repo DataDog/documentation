@@ -9,9 +9,7 @@
         {{ $page = .GetPage (print "/integrations/" $int_name ".md") }}
       {{ end }}
     {{ end }}
-    {{- if not $page -}}
-      {{ warnf "Integration page for '%s' not found in get-service-checks-from-git shortcode." $int_name }}
-    {{- else -}}
+    {{- if $page -}}
       {{- $pattern := `(?s)### Service Checks\n(.*?)(#{2,3}\s)` -}}
       {{- $matches := findRE $pattern $page.RawContent 1 -}}
       {{- if not $matches -}}

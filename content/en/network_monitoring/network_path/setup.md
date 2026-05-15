@@ -23,11 +23,13 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
+<div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+
 ### Scheduled tests
 
 You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
 
-To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
+To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization in large environments, see [increase the number of workers](#increase-the-number-of-workers).
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -58,9 +60,57 @@ Agent `v7.59+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     # max_ttl: 30 # max traderoute TTL, default is 30
+     # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+
+     # more endpoints
+     - hostname: 1.1.1.1 # endpoint hostname or IP
+       protocol: UDP
+       tags:
+         - "tag_key:tag_value"
+         - "tag_key2:tag_value2"
+
+    ```
+
+3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+{{% /tab %}}
+{{% tab "macOS" %}}
+
+Agent `v7.75+` is required.
+
+1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+
+   ```
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/opt/datadog-agent/etc/conf.d/network_path.d/conf.yaml` file:
+
+   ```yaml
+   init_config:
+     min_collection_interval: 60 # in seconds, default 60 seconds
+   instances:
+     # configure the endpoints you want to monitor, one check instance per endpoint
+     # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+
+     - hostname: api.datadoghq.eu # endpoint hostname or IP
+       protocol: TCP
+       port: 443
+       tags:
+         - "tag_key:tag_value"
+         - "tag_key2:tag_value2"
+       min_collection_interval: 120 # set min_collection_interval at the instance level
+     ## optional configs:
+     # max_ttl: 30 # max traceroute TTL, default is 30
+     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -102,9 +152,11 @@ Agent `v7.72+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     # max_ttl: 30 # max traderoute TTL, default is 30
+     # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
+     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -145,9 +197,11 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key2:tag_value2"
             min_collection_interval: 120 # set min_collection_interval at the instance level
           ## optional configs:
-          # max_ttl: 30 # max traderoute TTL, default is 30
+          # max_ttl: 30 # max traceroute TTL, default is 30
           # timeout: 1000 # timeout in milliseconds per hop, default is 1s
           # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+          # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+          # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
           # more endpoints
           - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -240,7 +294,7 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-### Dynamic tests (Preview)
+### Dynamic tests
 
 **Prerequisites**: [CNM][1] must be enabled.
 
@@ -294,6 +348,19 @@ Agent `v7.73+` is required.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
 
+        ## @param filters - list - optional
+        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+        ## Filters are applied sequentially, with later filters taking precedence.
+        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+        #
+        # filters:
+        #   - match_domain: '*.example.com'
+        #     type: exclude
+        #   - match_ip: 10.0.0.0/8
+        #     type: exclude
+        #   - match_domain: 'api.datadoghq.com'
+        #     type: include
+
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -303,7 +370,7 @@ Agent `v7.73+` is required.
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent `v7.61+` is required.
+Agent `v7.73+` is required.
 
 1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
@@ -347,6 +414,19 @@ Agent `v7.61+` is required.
         # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
+
+        ## @param filters - list - optional
+        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+        ## Filters are applied sequentially, with later filters taking precedence.
+        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+        #
+        # filters:
+        #   - match_domain: '*.example.com'
+        #     type: exclude
+        #   - match_ip: 10.0.0.0/8
+        #     type: exclude
+        #   - match_domain: 'api.datadoghq.com'
+        #     type: include
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -356,7 +436,7 @@ Agent `v7.61+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.59+` is required.
+Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 **Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
@@ -392,6 +472,19 @@ datadog:
     ## The TTL is reset each time the connection is seen again.
     #
     # pathtest_ttl: 35m
+
+    ## @param filters - list - optional
+    ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+    ## Filters are applied sequentially, with later filters taking precedence.
+    ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+    #
+    # filters:
+    #   - match_domain: '*.example.com'
+    #     type: exclude
+    #   - match_ip: 10.0.0.0/8
+    #     type: exclude
+    #   - match_domain: 'api.datadoghq.com'
+    #     type: include
 
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
@@ -459,6 +552,26 @@ network_path:
         type: include
 ```
 
+### Source public IP resolution
+
+<div class="alert alert-info">Source public IP resolution is available in Agent v7.75+.</div>
+
+Network Path resolves the source host's public IP address to provide accurate path visualization for internet-bound traffic. The Agent contacts external IP check services over HTTPS to determine the public IP of the host.
+
+This feature is **not required** for Network Path to function. If these services are unreachable, Network Path continues to operate normally, but the source public IP is not resolved and path visualizations do not display source IP metadata.
+
+If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist:
+
+| URL | Provider |
+|-----|----------|
+| `https://icanhazip.com` | Cloudflare |
+| `https://ipinfo.io/ip` | IPinfo |
+| `https://checkip.amazonaws.com` | Amazon |
+| `https://api.ipify.org` | ipify |
+| `https://whatismyip.akamai.com` | Akamai |
+
+The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443).
+
 ## Troubleshooting
 
 Use the following guidelines to troubleshoot issues with Network Path. If you need additional help, contact [Datadog Support][3].
@@ -500,6 +613,7 @@ If you encounter an error like the following:
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[15]: /synthetics/network_path_tests/
 
 
 

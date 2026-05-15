@@ -12,12 +12,12 @@ You can use the Database for MySQL component to represent and visualize MySQL da
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Deployment option**: Select the type of deployment for your database.
-- **Tier**: Select the performance tier of your database.
-- **Instance**: Select the instance type of your database. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **High availability**: Select a high availability option for your database. Only available for when **Deployment option** is set to **Flexible server**.
-- **Storage (GiB)**: Enter the total volume of storage available for your database in gibibytes.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Deployment option{{< /ui >}}: Select the type of deployment for your database.
+- {{< ui >}}Tier{{< /ui >}}: Select the performance tier of your database.
+- {{< ui >}}Instance{{< /ui >}}: Select the instance type of your database. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}High availability{{< /ui >}}: Select a high availability option for your database. Only available for when {{< ui >}}Deployment option{{< /ui >}} is set to {{< ui >}}Flexible server{{< /ui >}}.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Enter the total volume of storage available for your database in gibibytes.
 
 ## API
 

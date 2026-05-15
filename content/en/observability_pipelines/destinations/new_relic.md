@@ -1,26 +1,54 @@
 ---
 title: New Relic Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
+
+## Overview
 
 Use Observability Pipelines' New Relic destination to send logs to New Relic.
 
 ## Setup
 
-Set up the New Relic destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the New Relic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-### Set up the destination
+<div class="alert alert-danger">Only enter the identifiers for the account ID and license. Do <b>not</b> enter the actual values.</div>
 
+After you select the New Relic destination in the pipeline UI:
+
+1.  Enter the identifier for your account ID. If you leave it blank, the [default](#secret-defaults) is used.
+1.  Enter the identifier for your license. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the data center region (**US** or **EU**) of your New Relic account.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Optional buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- New Relic account ID identifier:
+	- The default identifier is `DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+- New Relic license identifier:
+	- The default identifier is `DESTINATION_NEW_RELIC_LICENSE_KEY`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 
@@ -28,9 +56,12 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 100            | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 100            | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

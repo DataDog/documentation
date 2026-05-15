@@ -176,7 +176,7 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 
 [1]: /monitors/configuration/
 [2]: /monitors/downtimes/
-[3]: /service_management/incident_management/#from-a-monitor
+[3]: /incident_response/incident_management/#from-a-monitor
 [4]: /monitors/types/
 [5]: /api/v1/monitors/
 [6]: /dashboards/querying/

@@ -28,4 +28,4 @@
 See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
 
 [601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
-[602]: /observability_pipelines/update_existing_pipelines
+[602]: /observability_pipelines/configuration/update_existing_pipelines

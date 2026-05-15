@@ -1,4 +1,5 @@
 ---
+id: short_image
 core_product:
 - 인프라스트럭처 모니터링
 title: short image

@@ -26,10 +26,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -55,7 +55,6 @@ Static Analysis에 대해 다음 파라미터를 설정합니다.
 | `enable_performance_statistics` | 분석된 파일의 실행 시간 통계를 가져옵니다.                                                                                                   | No      | `false`         |
 | `debug`      | 분석기가 디버깅에 유용한 추가 로그를 출력하도록 합니다. 활성화하려면 `yes`로 설정하세요.                                                                  | No      | `no`            |
 | `subdirectory` | 분석 대상을 제한해야 하는 하위 디렉터리 패턴 또는 글로브(또는 공백으로 구분된 하위 디렉터리 패턴). 예: "src" 또는 "src packages". | `false` |                 |
-| `architecture` | 분석기에 사용할 CPU 아키텍처. 지원되는 값은 `x86_64` 및 `aarch64`.                                                              | 아니요      | `x86_64`        |
 | `diff_aware` | [Diff-aware scanning 모드][5]를 활성화합니다.                                                                                                                   | No      | `true`          |
 | `secrets_enabled` | 시크릿 감지 활성화(비공개 베타 버전)                                                                                                              | No      | `false`         |
 
@@ -63,11 +62,6 @@ Static Analysis에 대해 다음 파라미터를 설정합니다.
 
 1. Diff-aware 스캐닝은 기능 브랜치를 분석할 때 커밋으로 수정된 파일만 스캔합니다. Diff-aware 스캐닝은 기본적으로 활성화되어 있습니다. Diff-aware 스캐닝을 비활성화하려면 GitHub 작업 `diff_aware` 파라미터를 `false`로 설정하세요.
 2. 시크릿 스캐닝은 비공개 베타 버전입니다. 시크릿 스캐닝을 활성화하려면 Datadog 고객 성공 관리자에게 문의하세요.
-
-### 더 이상 사용되지 않는 입력
-다음 작업 입력은 더 이상 사용되지 않으며 효과가 없습니다. 이러한 입력을 전달하면 경고가 발생합니다.
-* `dd_service`
-* `dd_env`
 
 ## 규칙 사용자 지정
 

@@ -14,16 +14,16 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Java tracer**.
+1. **Install the Datadog Java SDK**.
 
-   1. Add the Datadog Java tracer to your Dockerfile:
+   1. Add the Datadog Java SDK to your Dockerfile:
 
       {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ADD 'https://dtdg.co/latest-java-tracer' agent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
 {{< /code-block >}}
 
-   2. Add the tracer artifacts.
+   2. Add the SDK artifacts.
       {{< tabs >}}
       {{% tab "Maven" %}}
 {{< code-block lang="xml" disable_copy="false" >}}
@@ -60,6 +60,14 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
    {{% tab "Terraform" %}}
    {{% aca-install-sidecar-terraform %}}
+   {{% /tab %}}
+
+   {{% tab "Bicep" %}}
+   {{% aca-install-sidecar-bicep %}}
+   {{% /tab %}}
+
+   {{% tab "ARM Template" %}}
+   {{% aca-install-sidecar-arm-template %}}
    {{% /tab %}}
 
    {{% tab "Manual" %}}
@@ -99,6 +107,8 @@ logger.info("Hello World!");
 
 {{% serverless-init-env-vars-sidecar language="java" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
@@ -110,5 +120,5 @@ logger.info("Hello World!");
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=java#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5

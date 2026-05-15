@@ -3,10 +3,10 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentación
   text: Explorar las reglas de detección por defecto de Cloud SIEM
-- link: /security/cloud_siem/investigate_security_signals
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentación
   text: Más información sobre Security Signals Explorer
-- link: /security/cloud_siem/detection_rules/
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
   tag: Documentación
   text: Crear nuevas reglas de detección
 - link: /integrations/google_cloud_platform/#log-collection
@@ -105,7 +105,7 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
     | Rol | Ruta | Descripción |
     | ------------- | ----------- | ----------- |
     | [Administrador de Dataflow][12] | `roles/dataflow.admin` | Permitir que esta cuenta de servicio realice tareas administrativas de Dataflow.
-    | [Trabajador de Dataflow][13] | `roles/dataflow.worker` | Permitir que esta cuenta de servicio realice operaciones de trabajo de Dataflow.
+    | [Trabajador de Dataflow][13] | `roles/dataflow.worker` | Permitir que esta cuenta de servicio realice operaciones de trabajo de Dataflow. 
     | [Visor Pub/Sub][14] | `roles/pubsub.viewer` | Permitir a esta cuenta de servicio ver mensajes de la suscripción Pub/Sub con tus logs de Google Cloud
     | [Suscriptor Pub/Sub][15] | `roles/pubsub.subscriber` | Permitir a esta cuenta de servicio consumir mensajes de la suscripción Pub/Sub con tus logs de Google Cloud
     | [Publicador de Pub/Sub][16] | `roles/pubsub.publisher` | Permitir que esta cuenta de servicio publique mensajes fallidos en una suscripción separada, lo que permite analizar o reenviar logs
@@ -140,19 +140,19 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
 1. Selecciona un endpoint regional.
 1. En el menú desplegable **Dataflow template** (Plantilla de Dataflow), selecciona **Pub/Sub to Datadog** (Pub/Sub a Datadog).
 1. En la sección **Required Parameters** (Parámetros requeridos):
-      a. En el menú desplegable **Pub/Sub input subscription** (Suscripción de entrada Pub/Sub), selecciona la suscripción predeterminada que se creó anteriormente al crear un nuevo [sistema Pub/Sub](#create-a-google-cloud-publishsubscription-pubsub-system).
-      b. Introduce lo siguiente en el campo **Datadog Logs API URL** (URL de la API de logs de Datadog):
+   1. En el menú desplegable **Pub/Sub input subscription** (Suscripción de entrada Pub/Sub), selecciona la suscripción predeterminada que se creó anteriormente al crear un nuevo [sistema Pub/Sub](#create-a-google-cloud-publishsubscription-pubsub-system).
+   1. Introduce lo siguiente en el campo **Datadog Logs API URL** (URL de la API de logs de Datadog):
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
-      **Nota**: Asegúrate de que el selector de sitio de Datadog situado a la derecha de esta página de documentación está configurado en tu sitio de Datadog antes de copiar la URL anterior.
-      c. En el campo **Output deadletter Pub/Sub topic**, selecciona el [tema adicional](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que creaste anteriormente para recibir mensajes rechazados por la API de Datadog.
-      d. Especifica una ruta para los archivos temporales en tu bucket de almacenamiento en el campo **Temporary location** (Localización temporal).
+      **Nota**: Asegúrate de que el selector de sitio de Datadog situado a la derecha de esta página de documentación está configurado en tu sitio de Datadog antes de copiar la URL anterior.  
+   1. En el campo **Output deadletter Pub/Sub topic**, selecciona el [tema adicional](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que creaste anteriormente para recibir mensajes rechazados por la API de Datadog.
+   1. Especifica una ruta para los archivos temporales en tu bucket de almacenamiento en el campo **Temporary location** (Ubicación temporal).
 1. Si anteriormente [creaste un secreto en Secret Manager](#create-a-secret-in-secret-manager) para tu valor de clave de API de Datadog:
-    a. Haz clic en **Optional Parameters** (Parámetros opcionales) para ver los campos adicionales.
-    b. Introduce el nombre del recurso del secreto en el campo **Google Cloud Secret Manager ID**.
-        Para obtener el nombre del recurso, ve a tu secreto en [Secret Manager][8]. Haz clic en tu secreto. Haz clic en los tres puntos bajo **Action** (Acción) y selecciona **Copy resource name**(Copiar nombre de recurso).
-    c. Introduce `SECRET_MANAGER` en el campo **Source of the API key passed** (Fuente de la clave de API pasada).
+   1. Haz clic en **Optional Parameters** (Parámetros opcionales) para ver los campos adicionales.  
+   1. Introduce el nombre del recurso del secreto en el campo **Google Cloud Secret Manager ID**.<br />
+      Para obtener el nombre del recurso, ve a tu secreto en [Secret Manager][8]. Haz clic en tu secreto. Haz clic en los tres puntos bajo **Action** (Acción) y selecciona **Copy resource name**(Copiar nombre de recurso).
+   1. Introduce `SECRET_MANAGER` en el campo **Source of the API key passed** (Fuente de la clave de API pasada).
 1. Si no utilizas un secreto para el valor de tu clave de API de Datadog:
     - **Recomendado**:
         - Configura `Source of API key passed` en `KMS`.
@@ -185,7 +185,7 @@ Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados,
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
 [6]: https://cloud.google.com/pubsub/quotas#quotas
-[7]: /es/integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[7]: /es/logs/guide/google-cloud-log-forwarding/#monitor-the-cloud-pubsub-log-forwarding
 [8]: https://console.cloud.google.com/security/secret-manager
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account

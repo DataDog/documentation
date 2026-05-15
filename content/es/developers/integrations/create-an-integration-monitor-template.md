@@ -6,85 +6,75 @@ further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentación
   text: Configurar monitores
-title: Crear una plantilla de monitor de integración
+title: Cree una plantilla en monitor
 ---
 ## Información general
 
-Los [monitores Datadog][1] realizan un seguimiento de métricas clave, para que puedas monitorizar eficientemente tu infraestructura y tus integraciones. Datadog proporciona un conjunto de monitores listos para utilizar para muchas funciones e integraciones. Consulta estos monitores en tu [lista de plantillas de monitores][2].
+Esta página guía a los socios tecnológicos en la creación y empaquetado de plantillas de monitor con su integración oficial de Datadog.
 
-Crea un monitor listo para usar para ayudar a los usuarios a encontrar valor en tu integración de Datadog. En esta guía, se proporcionan los pasos para crear una plantilla de monitor de integración y las prácticas recomendadas a seguir durante el proceso de creación.
+Los [Monitores de Datadog][1] evalúan continuamente los datos (como métricas, logs y eventos) para detectar condiciones que indiquen problemas de rendimiento y riesgos de disponibilidad. Actúan como herramientas de alerta proactiva que notifican automáticamente a los usuarios cuando el comportamiento se desvía de los umbrales esperados, lo que permite a los equipos tomar acción antes de que los incidentes afecten a los clientes.
 
-Para crear una integración Datadog, consulta la sección de [creación de una nueva integración][3].
+Para los socios tecnológicos, los monitores transforman la telemetría que recopila tu integración en información práctica. Al empaquetar las plantillas de monitor, los usuarios pueden activarlas directamente desde la página [**Monitors > Templates**][2] (Monitores > Plantillas) para agilizar la configuración y la obtención de valor.
 
-## Pasos para crear una plantilla de monitor
-### Crear un esquema JSON para monitores
+Se requiere al menos una plantilla de monitor si tu integración recopila métricas. 
 
-1. [Crea un monitor][4].
+## Creación de una plantilla de monitor
+Estos pasos presuponen que [te has unido a la Red de socios de Datadog][3], tienes acceso a una organización de desarrolladores asociada y ya has [creado una lista en la Plataforma de desarrolladores][4]. 
 
-2. Sigue las [prácticas recomendadas](#configuration-best-practices) de esta guía para configurar tu monitor.
+1. [Determinar qué telemetría deseas monitorizar](#determine-which-telemetry-to-monitor).
+2. [Crear y configurar un monitor](#create-your-monitor) en tu organización de desarrolladores asociados.
+3. [Testear tu monitor](#test-your-monitor).
+4. [Añadir tu monitor a tu integración](#add-your-monitor-to-your-integration). 
 
-3. Haz clic en **Export Monitor** (Exportar monitor).
+### Determinar qué telemetría monitorizar
+Comienza por revisar la [lista completa de tipos de monitor][6] para comprender sobre qué tipos de telemetría puedes alertar. Determina los datos que más interesan a tus usuarios. Consulta los ejemplos siguientes para ver casos de uso y ejemplos comunes.
 
-4. Marca la casilla **Select to export as a monitor template** (Seleccionar para exportar como plantilla de monitor).
-    {{< img src="developers/integrations/monitor_json.png" alt="Modal JSON de monitor para exportar como plantilla de monitor" style="width:100%;" >}}
+#### Monitorizar las métricas RED (tasa, errores, duración) de tu servicio
+- **Tasa**: monitoriza el número de solicitudes que recibe tu servicio.
+- **Errores: rastrea cuántas de esas solicitudes fallan.
+- **Duración**: mide cuánto tardan esas solicitudes (latencia).
 
-5. Haz clic en **Copy** (Copiar) para utilizar el esquema JSON de tu monitor configurado.
+#### Monitorizar tu infraestructura 
+- **Utilización de la CPU**: realiza un seguimiento del uso de la CPU para asegurarte de que no está ni infrautilizada ni sobreutilizada, para evitar ralentizaciones del sistema o fallos de las aplicaciones.
+- **Utilización de memoria**: monitoriza cuánta memoria del sistema se está utilizando para detectar y prevenir problemas como fugas de memoria o bloqueos.
+- **Almacenamiento**: monitoriza el espacio en disco para evitar problemas como la pérdida de datos, interrupciones del servicio o fallos de escritura.
 
-6. Guarda el esquema copiado en un archivo JSON y nómbralo según el título de tu monitor. Por ejemplo, `your_integration_name_alert.json`.
+#### Monitorizar tus logs
+- **Picos de error**: alerta cuando los logs de errores superan un umbral, como los mensajes repetidos `connection refused` o `timeout` en un período corto.
+- **Actividad ausente**: detecta cuando dejan de aparecer los logs esperados, indicando un proceso estancado o un servicio fallido.
 
-7. En el archivo JSON del monitor, rellena el Título, la Descripción y las Etiquetas (tags). Para obtener más información, consulta [Prácticas de configuración recomendadas](#configuration-best-practices).
+### Crear tu monitor
 
-### Abrir una solicitud pull
+[Crea y configura tu monitor][5] dentro de tu organización de desarrolladores asociados. Estos monitores sirven como plantillas reutilizables que los usuarios de integración pueden habilitar directamente en sus propias organizaciones de Datadog.
 
-1. Guarda el archivo JSON del monitor en tu carpeta de integraciones `assets/monitors`. Añade el recurso a tu archivo `manifest.json`. Para obtener más información sobre la estructura del archivo y el archivo de manifiesto de tu integración, consulta [Referencia de recursos de integraciones][5].
+### Testear tu monitor
 
-2. Abra una solicitud de extracción (PR) para añadir el archivo JSON de plantilla de monitor y el archivo de manifiesto actualizado a la carpeta integración correspondiente, ya sea en el [repositorio de GitHub `integrations-extras`][6] o en el [repositorio de GitHub `Marketplace`][9]. 
+1. Ingiere telemetría que activa tu monitor.
+2. Navega hasta la página [Lista de monitor][7] y selecciona tu monitor.
+3. Confirma que tu monitor se activa según lo esperado. Utiliza [Eventos de estado][8] para ver cuándo se activó tu monitor y revisar los detalles de cada evento.
 
-3. Una vez aprobada, Datadog fusiona la PR y la plantilla de monitor de la integración se pasa a producción.
+## Añadir tu monitor a tu integración
+Una vez que hayas creado y testeado tu monitor, añádelo a tu lista en la Plataforma para desarrolladores. Cuando se publique tu integración, el monitor se convertirá en una plantilla de búsqueda vinculada a tu integración. 
 
-## Verificar tu monitor en producción
+{{< img src="developers/integrations/content_tab.png" alt="La pestaña Contenido en la plataforma para desarrolladores de integración" style="width:100%;" >}}
 
-Para ver el monitor listo para utilizar, el cuadro de integración relevante debe ser `Installed` en Datadog. 
-
-Encuentra tu monitor en la [lista de plantillas de monitores][2]. Asegúrate de que los logotipos se muestran correctamente en la página de listas de plantillas de monitores.
-
-## Prácticas de configuración recomendadas
-
-Además de la definición de tu monitor, los campos [Título](#title), [Descripción](#description) y Etiquetas son obligatorios para las plantillas de monitor. Configura las etiquetas como "integración:<app_id>"; consulta otras etiquetas de monitor disponibles [aquí][8]. Para obtener más información, consulta la documentación de [configuración de un monitor][7].
-
-### Título
-
-El título permite a los usuarios comprender rápidamente el modo de fallo subyacente que abarca la alerta.
-- Utiliza la voz activa y empieza con un objeto seguido de un verbo. 
-- No utilices variables de plantilla.
-
-| Necesita revisión                                       | Mejor                                 | El mejor                                        |
-| -----------                                          | -----------                            | -----------                                 |
-|Mensajes numerosos no reconocidos, informados en {{host.name}}| Mensajes numerosos no reconocidos, informados  |Los mensajes no reconocidos son más numerosos de lo habitual|
-
-### Descripción
-
-Proporciona contexto adicional con respecto al modo de fallo y también sobre el impacto que este modo puede tener en el sistema. Debe permitir a los usuarios comprender de un vistazo si es relevante o no para ellos crear un monitor a partir de él.
-
-- No se trata de una copia del título. 
-- Define el problema enunciado en el título.
-- Responde por qué es un problema que merece generar alertas.
-- Describe el impacto del problema.
-
-| Necesita revisión                                         | Mejor                                       | El mejor                                    |
-| -----------                                          | -----------                                  | -----------                             |
-|Notifica a tu equipo cuando los mensajes no reconocidos son numerosos. | Los mensajes no reconocidos son aquellos que han sido entregados a un consumidor pero que no han sido reconocidos como procesados o gestionados. Este monitor realiza un seguimiento de la proporción de mensajes no reconocidos.|Los mensajes no reconocidos son aquellos que han sido entregados a un consumidor pero que no han sido reconocidos como procesados o gestionados. Este monitor realiza un seguimiento de la proporción de mensajes no reconocidos para evitar posibles cuellos de botella que podrían provocar retrasos en el procesamiento de los mensajes.| 
+1. En la Plataforma para desarrolladores, ve a la pestaña **Content** (Contenido).
+2. Haz clic en **Import Monitor** (Importar monitor).
+3. Busca y selecciona el monitor que has creado. Puedes incluir hasta 10 monitores por integración.
+4. Para cada monitor, proporciona un **Nombre** y una **Descripción**. Estos aparecen en la página [**Monitores > Plantillas**][2].
+    - **Nombre**: un título conciso que comunique claramente de qué trata la alerta. Utiliza la voz activa (por ejemplo, `Database latency exceeds threshold`).
+    - **Descripción**: una breve explicación que ayuda a los usuarios a decidir si el monitor es relevante para ellos. Describe por qué es importante esta alerta y qué impacto tiene.
+5. Haz clic en **Import** (Importar) y, a continuación, en **Save Changes** (Guardar cambios).
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/es/monitors/
-[2]: https://app.datadoghq.com/monitors/recommended
-[3]: https://docs.datadoghq.com/es/developers/integrations/agent_integration/
-[4]: https://app.datadoghq.com/monitors/create
-[5]: https://docs.datadoghq.com/es/developers/integrations/check_references/#manifest-file
-[6]: https://github.com/DataDog/integrations-extras
-[7]: https://docs.datadoghq.com/es/monitors/configuration/
-[8]: https://docs.datadoghq.com/es/monitors/manage/#monitor-tags
-[9]: https://github.com/DataDog/marketplace
+[1]: /es/monitors/
+[2]: https://app.datadoghq.com/monitors/templates
+[3]: /es/developers/integrations/?tab=integrations#join-the-datadog-partner-network
+[4]: /es/developers/integrations/build_integration/#create-a-listing
+[5]: /es/getting_started/monitors/#create-a-monitor
+[6]: /es/monitors/types/
+[7]: https://app.datadoghq.com/monitors/manage
+[8]: /es/monitors/status/events/

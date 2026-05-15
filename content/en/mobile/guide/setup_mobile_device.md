@@ -95,7 +95,7 @@ Enable push notifications to ensure timely response to alerts from On-Call, inci
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 {{< img src="service_management/mobile/android_notification.png" style="width:80%; background:none; border:none; box-shadow:none;" alt="Android notifications settings">}}
 
-[4]: https://docs.datadoghq.com/service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[4]: /incident_response/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 
 {{% /tab %}}
 

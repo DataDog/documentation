@@ -3,10 +3,6 @@ title: Migrate Your Feature Flags from Statsig
 description: Learn how to migrate feature flags from Statsig to Eppo by Datadog.
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This guide walks you through the process of migrating feature flags from Statsig to [Eppo by Datadog][1], as an intermediate step before fully migrating to Datadog's dedicated [Feature Flags][2] product. Follow these general steps:
@@ -100,7 +96,7 @@ export function getBoolVariationWrapper(
   attributes?: Record<string, string | number | boolean | null>
 ) {
   let assignment = false;
-      
+
   try {
     assignment = getInstance().getBooleanAssignment(
       gateKey,
@@ -113,7 +109,7 @@ export function getBoolVariationWrapper(
       'Error encountered evaluating boolean assignment from Eppo SDK; falling back to Statsig',
       { gateKey, user, attributes }
     );
-        
+
     // Fallback to Statsig gate check
     assignment = statsig.checkGate(user, gateKey);
   }
@@ -129,7 +125,7 @@ export function getStringVariationWrapper(
   attributes?: Record<string, string | number | boolean | null>
 ) {
   let assignment = 'default';
-      
+
   try {
     assignment = getInstance().getStringAssignment(
       user.userID,
@@ -142,7 +138,7 @@ export function getStringVariationWrapper(
       'Error encountered evaluating string assignment from Eppo SDK; falling back to Statsig',
       { configKey, parameterName, user, attributes }
     );
-        
+
     // Fallback to Statsig config parameter
     const config = statsig.getConfig(user, configKey);
     assignment = config.get(parameterName, 'default');
@@ -159,7 +155,7 @@ export function getNumericVariationWrapper(
   attributes?: Record<string, string | number | boolean | null>
 ) {
   let assignment = 0;
-      
+
   try {
     assignment = getInstance().getNumericAssignment(
       user.userID,
@@ -172,7 +168,7 @@ export function getNumericVariationWrapper(
       'Error encountered evaluating numeric assignment from Eppo SDK; falling back to Statsig',
       { configKey, parameterName, user, attributes }
     );
-        
+
     // Fallback to Statsig config parameter
     const config = statsig.getConfig(user, configKey);
     assignment = config.get(parameterName, 0);
@@ -189,7 +185,7 @@ export function getJSONVariationWrapper(
   attributes?: Record<string, string | number | boolean | null>
 ) {
   let assignment: any = null;
-      
+
   try {
     // For experiments with multiple parameters, use JSON assignment
     const experimentResult = getInstance().getJSONAssignment(
@@ -204,7 +200,7 @@ export function getJSONVariationWrapper(
       'Error encountered evaluating experiment assignment from Eppo SDK; falling back to Statsig',
       { experimentKey, parameterName, user, attributes }
     );
-        
+
     // Fallback to Statsig experiment
     const experiment = statsig.getExperiment(user, experimentKey);
     assignment = experiment.get(parameterName, null);
@@ -216,7 +212,7 @@ export function getJSONVariationWrapper(
 ### 6. Recreate critical flags in Eppo {#recreate-critical-flags}
 
 <div class="alert alert-info">Datadog can help with migrating flags to the Eppo dashboard. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
- 
+
 1. In the Eppo dashboard, recreate the critical flags from Statsig. This can be done programmatically using [Statsig's][4] and [Eppo's][5] REST APIs.
 1. Ensure that the flag configurations—such as rollout percentages, targeting rules, and variations—are accurately replicated in the new service.
 
@@ -286,7 +282,7 @@ await init({
 {{% tab "Statsig" %}}
 Statsig docs: [Logging an Event][1]
 {{< code-block lang="typescript" >}}
-// Statsig automatically logs assignments, but you can add custom logging by 
+// Statsig automatically logs assignments, but you can add custom logging by
 // subscribing to client events like gate_evaluation or experiment_evaluation.
 
 statsig.on('gate_evaluation', (event) => {
@@ -364,7 +360,7 @@ const config = statsig.getConfig('product_config');
 Eppo docs: [Assignments][1]
 {{< code-block lang="typescript" >}}
 // If it's part of a multi-valued configuration (how Statsig organizes values),
-// you will have to figure out the type of each parameter, as Eppo uses different 
+// you will have to figure out the type of each parameter, as Eppo uses different
 // calls for each variant type.
 
 // For a JSON configuration with multiple parameters:

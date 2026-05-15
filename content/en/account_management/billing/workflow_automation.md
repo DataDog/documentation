@@ -41,7 +41,7 @@ Workflow Automation is billed **per execution**. This means that each complete w
 The two billing options are committed executions and on-demand executions. Committed executions are purchased in advance, while on-demand executions are billed as they occur. Prepaid executions cost less than on-demand executions.
 
 ### Usage tracking
-The best source of truth for billing is on your [Datadog Plan & Usage page][1], where execution usage is continuously tracked. Under **Products**, select only **Workflow Executions** for the filter. If you have multiple Datadog orgs, you can filter for them under **Sub-Orgs**. You can also filter further by team or any other tag in the **Usage Attribution** tab.
+The best source of truth for billing is on your [Datadog Plan & Usage page][1], where execution usage is continuously tracked. Under {{< ui >}}Products{{< /ui >}}, select only {{< ui >}}Workflow Executions{{< /ui >}} for the filter. If you have multiple Datadog orgs, you can filter for them under {{< ui >}}Sub-Orgs{{< /ui >}}. You can also filter further by team or any other tag in the {{< ui >}}Usage Attribution{{< /ui >}} tab.
 
 Other sources of usage tracking that do not include billing metrics are the [Workflow Automation API][7] and the [Workflows Overview dashboard][2]. Through the API, you can view granular information such as [all instances of a given workflow][12]. The Workflows Overview dashboard is based on execution metrics, before any billing considerations take place. Additionally, the dashboard does not reflect billing complexities such as free allotments of workflows. 
 
@@ -73,8 +73,8 @@ This means that if your automation originates from one of these services, those 
 [6]: https://www.datadoghq.com/pricing/?product=infrastructure-monitoring#products
 [7]: /api/latest/workflow-automation/
 [8]: /actions/workflows/
-[9]: /service_management/incident_management/
-[10]: /service_management/on-call/
+[9]: /incident_response/incident_management/
+[10]: /incident_response/on-call/
 [11]: /actions/app_builder/
 [12]: /api/latest/workflow-automation/#list-workflow-instances
 [13]: https://www.datadoghq.com/pricing/?product=workflow-automation#products

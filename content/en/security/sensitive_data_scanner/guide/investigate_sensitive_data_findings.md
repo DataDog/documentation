@@ -43,17 +43,18 @@ To investigate a finding:
 1. Click on the finding in the list.
 2. In the finding panel, click **View Recent Changes** to navigate to [Audit Trail][3] and see if there are any recent configuration changes that caused the sensitive data finding.
 3. Use the following options to explore different types of data matching the query:
-    a. To view all logs related to the query in Log Explorer, click **View All Logs**.<br>
-    b. To view all traces matching the query in Trace Explorer, click **View All APM Spans**.<br>
-    c. To view all RUM events matching the query, click **View All RUM Events**.<br>
-    d. To view all events matching the query, click **View All Events**.
+   1. To view all logs related to the query in Log Explorer, click **View All Logs**.
+   1. To view all traces matching the query in Trace Explorer, click **View All APM Spans**.
+   1. To view all RUM events matching the query, click **View All RUM Events**.
+   1. To view all events matching the query, click **View All Events**.
   {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/findings_panel_20251015.png" alt="The findings panel showing a critical visa card scanner finding" style="width:50%;">}}
-4. In the **Blast Radius** section:<br>
-    a. View the Top 10 services, hosts, and environments impacted by this sensitive data findings.<br>
-    b. Click on a service to see more information about the service in the **Software Catalog**.<br>
-    c. Click on a host to see more information about the host in the Infrastructure List page.
+4. In the **Blast Radius** section:
+   1. View the Top 10 services, hosts, and environments impacted by this sensitive data findings.
+   1. Click on a service to see more information about the service in the **Software Catalog**.
+   1. Click on a host to see more information about the host in the Infrastructure List page.
   {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/blast_radius_02_01_2024.png" alt="The findings panel showing the top 10 impacted services" style="width:50%;">}}
-If you want to modify the Scanning Rule that was used to detect the sensitive data finding, click **Modify Rule** at the top of the panel.
+
+   If you want to modify the Scanning Rule that was used to detect the sensitive data finding, click **Modify Rule** at the top of the panel.
 
 Additionally, you can also:
 - Use [Case Management][1] to track, triage, and investigate the finding, click **Create Case** at the top of the panel. Associated cases are surfaced in the Findings page.
@@ -62,8 +63,8 @@ Additionally, you can also:
 
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/case_mgmt_02_01_2024.png" alt="The case page showing information about the security finding, the assignee and creator of the case, and a timeline of events" style="width:60%;">}}
 
-[1]: /service_management/case_management/
-[2]: /service_management/incident_management/
+[1]: /incident_response/case_management/
+[2]: /incident_response/incident_management/
 [3]: /account_management/audit_trail
 
 {{% /tab %}}

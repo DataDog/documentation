@@ -2,6 +2,9 @@
 title: OCSF Processor
 description: Learn how to set up the OCSF processor.
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
@@ -154,3 +157,7 @@ If you see the error `Invalid OCSF attribute`, check the [OCSF Schema][6] to ens
 [5]: https://github.com/ocsf/ocsf-docs/blob/main/overview/understanding-ocsf.md#enum-attributes
 [6]: https://schema.ocsf.io/
 [7]: https://schema.ocsf.io/1.2.0/classes/authentication
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

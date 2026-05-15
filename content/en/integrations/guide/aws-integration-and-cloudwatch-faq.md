@@ -64,6 +64,47 @@ aws.apigateway.integration_latency.p50
 
 Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, the server groups all data points in minute bins and returns the sum of each bin as a datapoint. However, the granularity of AWS metrics is one minute, so there is only one datapoint per bin leading to no change.
 
+### Why don't I see metrics for a new AWS service I enabled?
+
+If you recently enabled a new AWS service integration but are not seeing metrics in Datadog, verify the following:
+
+1. **IAM permissions**: Confirm that the IAM role or IAM user associated with the Datadog integration includes the permissions required by the service. See the individual [AWS integration pages][8] for service-specific permission requirements.
+2. **Region**: Confirm that the AWS region where your resources are deployed is enabled in the [AWS integration page][1].
+3. **CloudWatch availability**: Open the CloudWatch console in AWS and confirm the expected metrics exist. Some services do not emit CloudWatch metrics until specific conditions are met (for example, an ELB with no attached instances does not emit metrics).
+4. **Polling delay**: API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][6], expect a 2-3 minute delay. Allow at least one polling cycle before investigating further.
+
+### What is the difference between API polling and CloudWatch Metric Streams?
+
+| | API polling (default) | CloudWatch Metric Streams |
+|---|---|---|
+| **Typical latency** | ~10 minutes | 2-3 minutes |
+| **Setup** | Included with the AWS integration | Requires separate setup with [Amazon Data Firehose][6] |
+| **AWS cost** | CloudWatch `GetMetricData` API calls | CloudWatch Metric Streams and Firehose delivery charges |
+| **Coverage** | All standard CloudWatch namespaces; custom namespaces require **Collect Custom Metrics** to be enabled | Most CloudWatch namespaces (some exclusions apply) |
+| **Custom namespaces** | Supported with **Collect Custom Metrics** enabled | Supported by including the namespace in the stream configuration |
+
+For more detail, see [Cloud Metric Delay][4] and the [CloudWatch Metric Streams guide][6].
+
+### Why do my metric values look doubled after enabling Metric Streams?
+
+When transitioning from API polling to CloudWatch Metric Streams, there is an overlap period where both collection methods send data for the same metrics. This can cause metric values to appear doubled in Datadog.
+
+Datadog automatically detects streamed namespaces and stops polling them, so you do not need to manually disable API polling. Leave your configuration settings in the [AWS integration page][1] unchanged, as Datadog continues to use API polling to collect custom tags, metadata, and metrics that cannot be sent through Metric Streams (such as `aws.s3.bucket_size_bytes` and `aws.billing.estimated_charges`).
+
+Detection typically takes up to five minutes, but the overlap period may last longer depending on the timing of active polling crawlers. If values still appear doubled after several minutes, see the [CloudWatch Metric Streams guide][6] for troubleshooting.
+
+### Which AWS services require additional setup beyond the core integration?
+
+Some AWS services do not emit metrics to CloudWatch by default and require extra configuration:
+
+| Service | Additional setup required |
+|---|---|
+| Amazon RDS (OS-level metrics) | Enable [Enhanced Monitoring][9] in the RDS console |
+| Amazon S3 (Storage Lens metrics) | Configure [Storage Lens][10] in the S3 console |
+| AWS billing metrics | Enable `Billing` in the [Metric Collection tab][1], add the `budgets:ViewBudget` permission, and [enable billing metrics][11] in the AWS console. See [Monitor your AWS billing details][13] for full instructions. |
+| Custom CloudWatch namespaces | Enable **Collect Custom Metrics** in the [Metric Collection tab][1] |
+| EC2 detailed monitoring | Enable [detailed monitoring][12] per-instance in the EC2 console |
+
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/api/latest/aws-integration/#set-an-aws-tag-filter
 [3]: /integrations/amazon_billing/
@@ -71,3 +112,9 @@ Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, t
 [5]: /help/
 [6]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 [7]: /metrics/introduction/#space-aggregation
+[8]: /integrations/#cat-aws
+[9]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.Enabling.html
+[10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+[11]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
+[12]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
+[13]: /integrations/guide/monitor-your-aws-billing-details/

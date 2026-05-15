@@ -1,4 +1,5 @@
 ---
+id: span_tag
 core_product:
 - apm
 title: 스팬 태그

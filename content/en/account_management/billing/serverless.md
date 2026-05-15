@@ -16,7 +16,7 @@ To control which functions are being monitored through the integration, you can 
 
 ### UI
 
-To use the UI to control which AWS Lambda functions Datadog is monitoring, navigate to the [AWS Integration page][5]. From the left sidebar, select the relevant AWS account, and navigate to the **Metric Collection tab**. Scroll down to the **Limit Metric Collection to Specific Resources** heading, and select Lambda from the **Select AWS Service** dropdown. You can then add tags as `key:value` sets to the field to the right.
+To use the UI to control which AWS Lambda functions Datadog is monitoring, navigate to the [AWS Integration page][5]. From the left sidebar, select the relevant AWS account, and navigate to the {{< ui >}}Metric Collection{{< /ui >}} tab. Scroll down to the {{< ui >}}Limit Metric Collection to Specific Resources{{< /ui >}} heading, and select Lambda from the {{< ui >}}Select AWS Service{{< /ui >}} dropdown. You can then add tags as `key:value` sets to the field to the right.
 
 See the [tags](#Tags) section below for more information about how to use tags in this field.
 

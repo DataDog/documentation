@@ -1,52 +1,43 @@
 ---
+app_id: azure_app_configuration
 categories:
 - nube
 - azure
 custom_kind: integración
-dependencies: []
 description: Realiza el seguimiento de métricas clave de Azure App Configuration.
-doc_link: https://docs.datadoghq.com/integrations/azure_app_configuration/
-draft: false
-git_integration_title: azure_app_configuration
-has_logo: true
-integration_id: azure-app-configuration
-integration_title: Microsoft Azure App Configuration
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: azure_app_configuration
-public_title: Integración de Datadog y Microsoft Azure App Configuration
-short_description: Realiza el seguimiento de métricas clave de Azure App Configuration.
-version: '1.0'
+title: Microsoft Azure App Configuration
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure App Configuration proporciona un servicio central para gestionar parámetros y marcadores de características de aplicaciones. App Configuration te permite almacenar todos los parámetros de tu aplicación y asegurar su acceso en un solo lugar.
 
-Mediante el uso de la [integración Datadog Azure][1], puedes recopilar métricas de Azure App Configuration para monitorizar solicitudes entrantes, latencias y errores de cuellos de botella.
+Mediante el uso de [la integración de Datadog y Azure](https://docs.datadoghq.com/integrations/azure/), puedes recopilar métricas de Azure App Configuration para monitorizar solicitudes entrantes, latencia y errores de limitación.
 
 ## Configuración
+
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][2]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, primero configura la [integración de Microsoft Azure](https://app.datadoghq.com/integrations/azure). No es necesario realizar ningún otro paso de instalación.
 
 ## Datos recopilados
-### Métricas
-{{< get-metrics-from-git "azure_app_configuration" >}}
 
+### Métricas
+
+| | |
+| --- | --- |
+| **azure.appconfiguration_configurationstores.http_incoming_request_count** <br>(count) | Número total de solicitudes HTTP entrantes.<br>_Se muestra como solicitud_ |
+| **azure.appconfiguration_configurationstores.http_incoming_request_duration** <br>(gauge) | Latencia de una solicitud HTTP.<br>_Se muestra en milisegundos_ |
+| **azure.appconfiguration_configurationstores.throttled_http_request_count** <br>(count) | Solicitudes HTTP limitadas.<br>_Se muestra como solicitud_ |
+| **azure.appconfiguration_configurationstores.count** <br>(gauge) | Recuento de AppConfiguration configurationStores.|
 
 ### Eventos
+
 La integración Azure App Configuration no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
+
 La integración Azure App Configuration no incluye checks de servicios.
 
-## Resolución de problemas
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
+## Solucionar problemas
 
-[1]: https://docs.datadoghq.com/es/integrations/azure/
-[2]: https://app.datadoghq.com/integrations/azure
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_configuration/azure_app_configuration_metadata.csv
-[4]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

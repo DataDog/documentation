@@ -4,10 +4,13 @@ aliases:
 - /es/real_user_monitoring/dashboards/user_sessions_dashboard
 - /es/real_user_monitoring/platform/dashboards/frustration_signals_dashboard
 - /es/real_user_monitoring/platform/dashboards/user_sessions_dashboard
+description: Rastrea la participación y el comportamiento de los usuarios con dashboards
+  que muestren las sesiones de los usuarios, las señales de frustración y los patrones
+  de uso de las aplicaciones.
 further_reading:
 - link: /real_user_monitoring/explorer
-  tag: Documentation
-  text: Información sobre el navegador RUM
+  tag: Documentación
+  text: Más información sobre el Explorador RUM
 title: Dashboard del uso de RUM
 ---
 
@@ -81,9 +84,9 @@ Para obtener más información sobre los datos mostrados, consulta [Seguridad de
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/real_user_monitoring/browser/data_collected/
-[2]: /es/real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
-[4]: /es/real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected/
-[5]: /es/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
+[1]: /es/real_user_monitoring/application_monitoring/browser/data_collected/
+[2]: /es/real_user_monitoring/application_monitoring/ios/data_collected/
+[3]: /es/real_user_monitoring/application_monitoring/android/data_collected/
+[4]: /es/real_user_monitoring/application_monitoring/react_native/data_collected/
+[5]: /es/real_user_monitoring/application_monitoring/flutter/data_collected/
 [6]: /es/data_security/real_user_monitoring/

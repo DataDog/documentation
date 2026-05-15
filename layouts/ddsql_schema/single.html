@@ -26,6 +26,46 @@
             </p>
         {{ end }}
 
+        {{/* PTF (Polymorphic Table Function) specific content */}}
+        {{ with .Params.query_paths }}
+            {{ with .user_sql }}
+                {{ if eq .type "polymorphic_table_function" }}
+                    <h2>Query Parameters</h2>
+                    <p>This dataset uses a <strong>polymorphic table function</strong>. You must specify parameters when querying.</p>
+
+                    {{ with .input_parameters }}
+                    <table class="table-fixed">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{ range . }}
+                            <tr>
+                                <td><code>{{ .name }}</code></td>
+                                <td><code>{{ .type }}</code></td>
+                                <td>{{ if .required }}Yes{{ else }}No{{ end }}</td>
+                                <td>{{ .description | markdownify }}</td>
+                            </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                    {{ end }}
+
+                    {{ with .examples }}
+                    <h2>Example Queries</h2>
+                    {{ range . }}
+                        {{ highlight . "sql" }}
+                    {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
         <h2>Fields</h2>
         <table class="table-fixed">
             {{/*  these values are required by the schema model (https://github.com/DataDog/schemas/blob/main/meta/models/docs.model.yml) */}}

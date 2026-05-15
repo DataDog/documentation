@@ -14,6 +14,8 @@ further_reading:
 
 This guide explains how to use CI jobs failure analysis to determine the most common root cause of failed CI jobs. This can help improve the user experience with CI pipelines.
 
+Datadog also uses this classifier to power [automatic job retries][10], which reruns jobs whose failures are likely transient.
+
 ### Understanding CI jobs failure analysis
 
 CI Visibility uses an LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
@@ -35,6 +37,18 @@ Each log line is pre-scanned to redact any potentially sensitive information bef
 <div class="alert alert-info">
 The LLM model can classify errors with similar messages into distinct yet related subdomains. For example, if the error message is <code>Cannot connect to docker daemon</code>, it is usually categorized under <code>domain:platform</code> and <code>subdomain:network</code>. However, the LLM model may sometimes classify it under <code>subdomain:infrastructure</code> instead.
 </div>
+
+#### Logs requirements for jobs failure analysis
+
+Jobs failure analysis requires the following logs to be indexed:
+* All logs from the **failing job** being analyzed.
+* All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
+
+The following [exclusion filter][9] is compatible with jobs failure analysis:
+* Query: `datadog.product:cipipeline @ci.is_failure:false`
+* Sampling rule: exclude 90% of `@ci.job.id`
+
+This setup reduces log volume while still supporting jobs failure analysis, as long as your CI pipeline runs enough successful jobs to ensure logs are indexed for at least one of them.
 
 #### Domains and Subdomains
 
@@ -106,7 +120,7 @@ CI jobs failure analysis is available for the following CI providers:
 
 [CI Health][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
 
-On this page, you can see a breakdown of the errors in your CI pipelines split by error domain. Click on a CI pipeline, and check the `Breakdown` column in the `Failed Executions` section.
+On this page, you can see a breakdown of the errors in your CI pipelines split by error domain. Click on a CI pipeline, and check the {{< ui >}}Breakdown{{< /ui >}} column in the {{< ui >}}Failed Executions{{< /ui >}} section.
 
 {{< img src="continuous_integration/ci_health_failed_executions_breakdown.png" alt="CI Job Failure analysis breakdown in CI Health" width="90%">}}
 
@@ -120,7 +134,7 @@ These facets are only available when using the `ci_level:job` in a query. If the
 
 ### Using the dashboard template
 
-You can import the **CI Visibility - CI Jobs Failure Analysis** dashboard template:
+You can import the {{< ui >}}CI Visibility - CI Jobs Failure Analysis{{< /ui >}} dashboard template:
 
 1. Open the [civisibility-ci-jobs-failure-analysis-dashboard.json][4] dashboard template and copy the contents into the clipboard.
 2. Create a [New Dashboard][5] in Datadog.
@@ -149,3 +163,5 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [6]:/continuous_integration/pipelines/#setup
 [7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
 [8]:/continuous_integration/pipelines/azure/
+[9]:/logs/log_configuration/indexes#exclusion-filters
+[10]:/continuous_integration/pipelines/automatic_retries/

@@ -16,6 +16,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/custom-metrics-governance/"
   tag: "Blog"
   text: "Best practices for end-to-end custom metrics governance"
+- link: "https://www.datadoghq.com/blog/govern-custom-metrics/"
+  tag: "Blog"
+  text: "A FinOps engineer's guide to governing custom metrics"
+- link: "https://learn.datadoghq.com/courses/metrics-governance"
+  tag: "Learning Center"
+  text: "Metrics Governance"
 ---
 
 ## Overview

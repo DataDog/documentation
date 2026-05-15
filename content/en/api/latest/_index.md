@@ -11,6 +11,9 @@ further_reading:
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits
+  - link: "https://learn.datadoghq.com/courses/dd-api-automation-iac"
+    tag: "Learning Center"
+    text: "Datadog API: Automation and Infrastructure as Code"
 cascade:
     algolia:
         rank: 10
@@ -248,5 +251,5 @@ Trying to get started with the application instead? Check out Datadog's general 
 [3]: https://run.pstmn.io/button.svg
 [4]: /api/v1/using-the-api/
 [5]: https://brew.sh
-[6]: https://docs.datadoghq.com/developers/community/libraries/
+[6]: https://docs.datadoghq.com/extend/community/libraries/
 [7]: /getting_started/application/

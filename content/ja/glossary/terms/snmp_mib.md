@@ -1,4 +1,5 @@
 ---
+id: snmp_mib
 core_product:
 - network device monitoring
 title: SNMP 管理情報ベース (MIB)

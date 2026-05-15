@@ -55,11 +55,7 @@ After you have set up your Datadog library for Test Optimization, you can config
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
-The required test framework and dd-trace versions are:
-
-`dd-trace-js`:
-* `>=5.23.0` for the 5.x release.
-* `>=4.47.0` for the 4.x release.
+`dd-trace-js>=5.23.0`
 
 The test framework compatibility is the same as [Test Optimization Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
@@ -107,6 +103,21 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{< /tabs >}}
 
+<div class="alert alert-warning">
+Test services with more than 100,000 known tests require a Datadog library version that supports pagination on the known tests endpoint. The minimum versions above cover EFD's initial release; pagination support arrived later. Without it, the library cannot fetch the known tests baseline and Early Flake Detection does not run for that session.
+</div>
+
+The following Datadog library versions add pagination support on the known tests endpoint:
+
+| Library                | Minimum version |
+| ---------------------- | --------------- |
+| `dd-trace-js`          | 5.94.0          |
+| `dd-trace-java`        | 1.60.0          |
+| `dd-trace-dotnet`      | 3.42.0          |
+| `ddtrace` (Python)     | 4.6.0           |
+| `datadog-ci` (Ruby)    | 1.27.0          |
+| `dd-trace-go/v2`       | 2.8.0           |
+| `dd-sdk-swift-testing` | 2.6.7           |
 
 ## Explore results in the Test Optimization Explorer
 
@@ -126,7 +137,11 @@ This could be caused by a couple of reasons:
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
+Finally, if your test service has more than 100,000 known tests and your Datadog library version does not support pagination on the known tests endpoint, the library cannot fetch the known tests baseline and no tests are identified as new. To prevent this, update to the latest tracer version.
+
 ### A test was retried that is not new
+
+If a test hasn't been active for more than 14 days, it might be re-identified as new.
 
 If the Datadog library can't fetch the full list of known tests, the Datadog library may retry tests that are not new. There is a mechanism to prevent this error from slowing down the CI pipeline, but if it happens, contact [Datadog Support][9].
 

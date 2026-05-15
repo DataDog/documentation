@@ -1,4 +1,5 @@
 ---
+id: retention_filters
 title: retention filter
 synonyms:
   - indexing

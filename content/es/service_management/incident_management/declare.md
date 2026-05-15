@@ -1,34 +1,51 @@
 ---
-title: Declarar un incidente
+title: Declarar un incident (incidente)
 ---
 
 ## Información general
 
-En el paradigma de Datadog, cualquiera de las siguientes situaciones es apropiada para declarar una incidencia:
+En el paradigma de Datadog, cualquiera de las siguientes situaciones es apropiada para declarar un incident (incidente):
 - Un problema afecta o puede afectar a los clientes.
 - Crees que un problema (incluso interno) debe tratarse con carácter de urgencia.
 - No sabes si debes considerarlo un incidente - notificar a otras personas y aumentar la gravedad adecuadamente.
 
 Puedes declarar un incidente desde múltiples lugares dentro de la plataforma Datadog, como un widget gráfico en un dashboard, la interfaz de usuario de incidentes o cualquier alerta que se notifique en Datadog.
 
+## Modal de declaración
+
+Al declarar un incident (incidente), aparece un modal de declaración. Este modal tiene varios elementos básicos:
+
+| Elementos de un incidente  | Descripción |
+| ------------------ | ----------- |
+| Título              | (Obligatorio) Un título descriptivo para el incident (incidente). |
+| Nivel de gravedad     | (Obligatorio) En forma predeterminada, la gravedad va de SEV-1 (la más grave) a SEV-5 (la menos grave). Puedes personalizar el número de gravedades y sus descripciones en los parámetros de Incident Management.
+| Líder del incidente | La persona asignada para dirigir la respuesta al incident (incidente). |
+
+Puedes configurar [Parámetros de Incident Management][2] para incluir más campos en el modal de declaración de incident (incidente) o exigir determinados campos.
+
+
 ## En la página de incidentes
 
 En la [interfaz de usuario de Datadog][1], haz clic en **Declare Incident** (Declarar incidencia) para crear una incidencia.
 
-El modal *Declarar incidente* muestra un panel lateral plegable que contiene texto de ayuda y descripciones de las gravedades y los estados utilizados por tu organización. El texto de ayuda y las descripciones se pueden personalizar en [Configuración del incidentes][2]. 
+En el modal *Declare incident (incidente)* se muestra un panel lateral plegable que contiene texto de ayuda y descripciones para las gravedades y estados utilizados por tu organización. El texto de ayuda y las descripciones se pueden personalizar en [Parámetros de Incident Management][2].
 
 ## Desde un monitor
 
-Puedes declarar un incidente directamente desde un monitor desde el desplegable Acciones. Selecciona **Declarar incidente** para abrir un modal de creación de incidentes y el monitor se añadirá al incidente como una señal. También puedes añadir un monitor a un incidente existente.
+Puedes declarar un incidente directamente desde un monitor desde el desplegable Acciones. Selecciona **Declare Incident** (Declarar incident (incidente)) para abrir un modal de creación de incidents (incidentes) y el monitor (noun) se añadirá al incident (incidente) como una señal. También puedes añadir un monitor (noun) a un incident (incidente) existente.
 
 {{< img src="service_management/incidents/declare/declare_monitor.png" alt="Menú desplegable de Acciones en monitores donde puedes seleccionar la opción Declarar incidente" style="width:50%;" >}}
 
+Alternativamente, puedes hacer que un monitor (noun) cree automáticamente un incident (incidente) cuando pase a un estado `warn`, `alert` o `no data`. Para activarlo, haz clic en **Add Incident** (Añadir incident (incidente)) en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones) de un monitor (noun) y selecciona una opción de `@incident-`. Los administradores pueden crear opciones de `@incident-` en [Parámetros de incident (Incidente)][9].
+
+Los incidents (incidentes) creados a partir de un monitor (noun) heredarán [valores de campo][10] desde las tags (etiquetas) del monitor (noun). Para enviar notificaciones automáticas desde incidets (incidentes), añade tags (etiquetas) a un monitor (noun) para que los incidents (incidentes) creados coincidan con los criterios de las [reglas de notificación][11].
+
 ## Desde una señal de seguridad
 
-Declara un incidente directamente desde un panel lateral de señales de amenazas de Cloud SIEM o Cloud Security Management, haciendo clic en **Declarar incidente** o **Escalar investigación**. Para obtener más información, consulta [Investigar señales de seguridad][3] para Cloud Security Management.
+Declare una incident (incidente) directamente desde el panel lateral de una señal de Cloud SIEM o de Protección de la carga de trabajo, haciendo clic en **Declare Incident** (Declarar incident (incidente)) o **Escalate Investigation** (Escalar investigación). Para obtener más información, consulta [Investigar señales de seguridad][3].
 
-Declara un incidente desde una señal de Application Security Management a través de las acciones enumeradas en el panel lateral de la señal. Haz clic en **Mostrar todas las acciones** y haz clic en **Declarar incidente**.
-Para obtener más información, consulta [Investigar señales de seguridad][4] para Application Security Management. 
+Declara un incident (incidente) desde una señal de protección de la aplicación y la API a través de las acciones que aparecen en el panel lateral de señales. Haz clic en **Show all actions** (Mostrar todas las acciones) y haz clic en **Declare Incident** Declarar incident (incidente)).
+Para obtener más información, consulta [Investigar señales de seguridad][4] para la protección de la aplicación y la API.
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Tu descripción de imagen" style="width:90%;" >}}
 
@@ -54,6 +71,10 @@ Utiliza el [Portapapeles de Datadog][6] para reunir varios monitores y gráficos
 
 {{< img src="service_management/incidents/declare/declare_clipboard.png" alt="Declara un incidente desde el portapapeles de Datadog" style="width:90%;" >}}
 
+## Desde una page (página) de Datadog On-Call
+
+Puedes declarar un incident (incidente) directamente desde una [page (página) de Datadog On-Call][12]. En la [Lista de pages (páginas) de guardia][13], selecciona una page (página) y haz clic en **Declare Incident** (Declarar incident (incidente)) para crear un incident (incidente) y asociarlo automáticamente al equipo de guardia correspondiente.
+
 ## Desde Slack
 
 Si tienes habilitada la opción [Integración de Datadog en Slack][7], puedes declarar un nuevo incidente con el comando de barra `/datadog incident` desde cualquier canal de Slack.
@@ -64,6 +85,21 @@ Si el usuario que declara el incidente conecta su Slack a su cuenta Datadog, en 
 
 Después de declarar un incidente desde Slack, se genera un canal de incidentes.
 
+## Desde las notificaciones de traspaso
+
+La notificación de traspaso muestra tarjetas de aviso cuando se te llama o se te añade a incidents (incidentes) activos. Estas tarjetas te permiten:
+
+- Visualizar y acusar recibo de las pages (páginas) de guardia
+- Ir a los recursos pertinentes de incident (incidente) 
+- Vista previa de los mensajes de Slack desde los canales de incident (incidente) 
+- Tomar medidas directas sobre los incidents (incidentes)
+
+{{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Tarjeta de notificación de traspaso en que se muestran detalles de incident (incidente) con opciones para visualizar, acusar recibo y tomar medidas" style="width:100%;" >}}
+
+Las tarjetas de notificación de traspaso permanecen visibles hasta que se retiren o hasta que cambie el estado del incident (incidente). Puedes expandir, contraer o descartar todo el contenedor de traspasos en lugar de tarjetas individuales.
+
+Puedes declarar un incident (incidente) desde tarjetas individuales de notificación de traspaso.
+
 ## Próximos pasos
 
 {{< whatsnext desc="Añade información útil a tu incidente y brinda contexto a todos los participantes de la investigación.">}}
@@ -72,9 +108,14 @@ Después de declarar un incidente desde Slack, se genera un canal de incidentes.
 
 [1]: https://app.datadoghq.com/incidents
 [2]: /es/service_management/incident_management/incident_settings#information
-[3]: /es/security/threats/security_signals/#declare-an-incident
-[4]:/es/security/application_security/threats/security_signals/#declare-an-incident
+[3]: /es/security/workload_protection/security_signals/#declare-an-incident
+[4]:/es/security/workload_protection/security_signals/#declare-an-incident
 [5]: /es/service_management/case_management/view_and_manage
 [6]: /es/service_management/incident_management/datadog_clipboard
 [7]: /es/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: https://app.datadoghq.com/synthetics/tests
+[9]: https://app.datadoghq.com/incidents/settings?section=global-settings
+[10]: /es/service_management/incident_management/incident_settings/property_fields
+[11]: /es/service_management/incident_management/incident_settings/notification_rules
+[12]: /es/service_management/on-call/
+[13]: https://app.datadoghq.com/on-call/pages

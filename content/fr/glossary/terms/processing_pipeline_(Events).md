@@ -1,6 +1,7 @@
 ---
+id: processing_pipeline_events
 related_terms:
-- processeur
+- processor
 - pipeline
 title: pipeline de processing
 ---

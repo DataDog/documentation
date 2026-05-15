@@ -4,41 +4,41 @@ aliases:
 further_reading:
 - link: /security/cloud_security_management/guide
   tag: ドキュメント
-  text: Cloud Security Management ガイド
+  text: Cloud Security ガイド
 - link: /integrations/jira/
   tag: ドキュメント
   text: Datadog Jira インテグレーション
 products:
 - icon: cloud-security-management
-  name: CSM Misconfigurations
+  name: Cloud Security Misconfigurations
   url: /security/cloud_security_management/misconfigurations/
 - icon: cloud-security-management
-  name: CSM Identity Risks
+  name: Cloud Security Identity Risks
   url: /security/cloud_security_management/identity_risks/
-title: クラウドセキュリティ管理の問題に対する Jira 課題の作成
+title: Cloud Security の問題に対して Jira issue を作成する
 ---
 
 {{< product-availability >}}
 
-Cloud Security Management (CSM) のセキュリティ問題の影響を受けたリソースに対して Jira 課題を作成するには、[Jira インテグレーション][1]を使用します。Cloud Security Management 用の Jira は、[CSM Misconfigurations][3] および [CSM Identity Risks][4] に対応しています。
+[Jira インテグレーション][1] を利用すると、Cloud Security のセキュリティ問題の影響を受けているリソースについて Jira issue を作成できます。Cloud Security 向けの Jira は、[Cloud Security Misconfigurations][3] と [Cloud Security Identity Risks][4] で利用可能です。
 
 **注**:
-- Jira 課題を作成するには、`security_monitoring_findings_write` 権限が必要です。Datadog のデフォルトロールおよび CSM で利用可能な詳細なロールベースのアクセス制御権限については、[ロールベースのアクセス制御][2]を参照してください。
+- Jira issue を作成するには `security_monitoring_findings_write` 権限が必要です。Datadog のデフォルト ロールや、Cloud Security で利用できる詳細なロール ベース アクセス コントロール権限については、[Role Based Access Control][2] を参照してください。
 - 現時点では、1 つの指摘につき Jira の課題を 1 つ作成できます。
 
 ## Jira インテグレーションの構成
 
-CSM セキュリティ問題の Jira 課題を作成するには、[Jira インテグレーション][5]を構成する必要があります。詳細な手順については、[Jira][1] インテグレーションのドキュメントを参照してください。
+Cloud Security のセキュリティ問題から Jira issue を作成するには、[Jira インテグレーション][5] を設定する必要があります。手順の詳細は [Jira][1] インテグレーション ドキュメントを参照してください。
 
 ## 影響を受けたリソースの Jira 課題を作成する
 
 {{< tabs >}}
 
-{{% tab "CSM Misconfigurations" %}}
+{{% tab "Cloud Security Misconfigurations" %}}
 
 誤構成の影響を受けた 1 つ以上のリソースの Jira 課題を作成するには、
 
-1. [Misconfigurations Explorer][1] で誤構成を選択します。
+1. [Misconfigurations エクスプローラー][1] で誤構成を選択します。
 2. **Resources Impacted** の下で、1 つまたは複数の指摘を選択します。
 3. 上部に表示される **Actions** ドロップダウンメニューで、**Create Jira Issue** を選択します。
 4. 単一の課題を作成するか、複数の課題 (リソースごとに 1 つずつ) を作成するかを選択します。
@@ -49,7 +49,7 @@ CSM セキュリティ問題の Jira 課題を作成するには、[Jira イン�
 
 また、スタンドアロン課題のサイドパネルから Jira 課題を作成することもできます。
 
-1. [Misconfigurations Explorer][1] で、グループ化フィルターを **Resources** に設定します。
+1. [Misconfigurations エクスプローラー][1] で、Group By フィルターを **Resources** に設定します。
 2. リソースを選択します。
 3. **Misconfigurations** タブで、誤構成を選択します。
 4. **Create Jira Issue** をクリックします。
@@ -64,11 +64,11 @@ CSM セキュリティ問題の Jira 課題を作成するには、[Jira イン�
 
 {{% /tab %}}
 
-{{% tab "CSM Identity Risks" %}}
+{{% tab "Cloud Security Identity Risks" %}}
 
 アイデンティティリスクの影響を受ける 1 つ以上のリソースに関する Jira 課題を作成するには、
 
-1. [Identity Risks Explorer][1] でアイデンティティリスクを選択します。
+1. [Identity Risks エクスプローラー][1] でアイデンティティ リスクを選択します。
 2. **Resources Impacted** の下で、1 つまたは複数の指摘を選択します。
 3. 上部に表示される **Actions** ドロップダウンメニューで、**Create Jira Issue** を選択します。
 4. 単一の課題を作成するか、複数の課題 (リソースごとに 1 つずつ) を作成するかを選択します。
@@ -79,7 +79,7 @@ CSM セキュリティ問題の Jira 課題を作成するには、[Jira イン�
 
 また、スタンドアロン課題のサイドパネルから Jira 課題を作成することもできます。
 
-1. [Identity Risks Explorer][1] で、グループ化フィルターを **Resources** に設定します。
+1. [Identity Risks エクスプローラー][1] で、Group By フィルターを **Resources** に設定します。
 2. リソースを選択します。
 3. **Misconfigurations** タブで、アイデンティティリスクを選択します。
 4. **Create Jira Issue** をクリックします。

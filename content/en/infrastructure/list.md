@@ -159,7 +159,7 @@ for host in infra['rows']:
 [5]: /logs/
 [6]: /agent/configuration/agent-configuration-files/
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
-[8]: /developers/guide/query-the-infrastructure-list-via-the-api/
+[8]: /extend/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/account_management/billing/

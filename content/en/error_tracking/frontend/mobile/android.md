@@ -260,6 +260,43 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = <CLIENT_TOKEN>,
+                env = <ENV_NAME>,
+                variant = <APP_VARIANT_NAME>
+            )
+            .useSite(DatadogSite.US2_FED)
+            .build()
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                        .useSite(DatadogSite.US2_FED)
+                        .build();
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -345,23 +382,23 @@ To enable the Android SDK to start sending data:
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
 ```
 {{% /tab %}}
 
 {{% tab "Java" %}}
 ```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
 ```
 
 {{% /tab %}}
@@ -384,7 +421,7 @@ To instrument your web views:
    ```
 2. Enable webview tracking for a given WebView instance by providing a list of hosts to track:
 
-   ```groovy
+   ```kotlin
    WebViewTracking.enable(webView, hosts)
    ```
 
@@ -408,7 +445,7 @@ To enable NDK crash reporting, use the Datadog NDK plugin:
    ```
 2. Enable NDK crash collection after initializing the SDK:
 
-    ``` kotlin
+    ```kotlin
     NdkCrashReports.enable()
     ```
 
@@ -422,7 +459,7 @@ To enable ANR reporting, add the following to your RUM configuration:
 {{% tab "Kotlin" %}}
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold)
     .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
     .useViewTrackingStrategy(strategy)
@@ -433,7 +470,7 @@ Rum.enable(rumConfig)
 {{% tab "Java" %}}
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold)
     .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
     .useViewTrackingStrategy(strategy)
@@ -753,7 +790,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | The version name of the application (by default, the version declared in the `android` block of your `build.gradle` script).                                                                                                               |
 | `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
-| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, AP1, or AP2).                                                                                                                                       |
+| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, US2_FED, AP1, or AP2).                                                                                                                                       |
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
 | `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, `none` is ignored, `warn` logs a warning, and `fail` fails the build with an error (default). |
 

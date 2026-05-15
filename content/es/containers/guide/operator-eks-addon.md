@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/guide/operator-eks-addon
+description: Instala y configura el Datadog Agent en Amazon EKS utilizando el Datadog
+  Operator como complemento de EKS
 further_reading:
 - link: agent/kubernetes/log
   tag: Documentación

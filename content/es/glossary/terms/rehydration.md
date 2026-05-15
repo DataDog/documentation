@@ -1,4 +1,5 @@
 ---
+id: rehydration
 core_product:
 - log management
 title: Rehidratación

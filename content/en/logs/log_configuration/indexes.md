@@ -17,6 +17,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: "Logging without Limits*"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#optimizing-log-usage-to-manage-volume-and-cost"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+- link: "https://learn.datadoghq.com/courses/log-indexes"
+  tag: "Learning Center"
+  text: "Manage and Monitor Indexed Log Volumes"
+
 ---
 
 Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
@@ -84,6 +91,8 @@ Exclusion filters are defined by a query, a sampling rule, and an active/inactiv
 
 * Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query][12].
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute.
+  * If the sampling rate applies on individual logs, sampling is performed on the existence of trace IDs in the logs, if present. In this scenario, logs sampled have an increased chance to be correlated with sampled traces, to promote unified telemetry data.
+  * If the unique value of a trace ID is chosen for sampling, the behavior is the same as on individual logs.
 * Default **toggle** is active, meaning logs flowing in the index are actually discarded according to the exclusion filter configuration. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index.
 
 **Note**: Index filters for logs are only processed with the first **active** exclusion filter matched. If a log matches an exclusion filter (even if the log is not sampled out), it ignores all following exclusion filters in the sequence.
@@ -181,10 +190,10 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /logs/search_syntax/
 [13]: /api/v1/logs-indexes/#update-an-index
-[14]: /logs/log_configuration/processors/#user-agent-parser
-[15]: /logs/log_configuration/processors/#geoip-parser
+[14]: /logs/log_configuration/processors/user_agent_parser/
+[15]: /logs/log_configuration/processors/geoip_parser/
 [16]: /tracing/other_telemetry/connect_logs_and_traces/
-[17]: /logs/log_configuration/processors/#trace-remapper
+[17]: /logs/log_configuration/processors/trace_remapper/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage

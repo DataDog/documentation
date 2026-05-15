@@ -1,18 +1,20 @@
 ---
 aliases:
 - /es/agent/guide/changing_container_registry
+description: Cambia entre los registros de imágenes de contenedor de Datadog para
+  diferentes entornos de despliegue y requisitos.
 title: Cambiar tu registro de contenedores
 ---
 
-Datadog publica imágenes de contenedores en gcr.io de Google, ECR de AWS y en Docker Hub:
+Datadog publica imágenes de contenedor en gcr.io de Google, Azure ACR, AWS ECR, y en Docker Hub:
 
 {{% container-images-table %}}
 
-La extracción desde el registro ECR o GCR funciona igual (excepto para Notary) que la extracción desde Docker Hub. Puedes utilizar el mismo comando (con diferentes parámetros) y obtener la misma imagen.
+La extracción de registros ACR, GCR o ECR funciona igual (excepto para Notary) que la extracción de Docker Hub. Puedes utilizar el mismo comando (con diferentes parámetros) y obtener la misma imagen.
 
-**Nota**: ECR y GCR no son compatibles con Notary. Si verificas la firma de imágenes extraídas de Docker, esta característica no funcionará en GCR o en ECR.
+**Nota**: ACR, ECR y GCR no son compatibles con Notary. Si estás verificando la firma de imágenes extraídas de Docker, esta función no funciona en GCR o ECR.
 
-Si quieres actualizar tu registro, necesitarás actualizar sus valores según el tipo de entorno de contenedor estés usando para la implementación.
+Si quieres actualizar tu registro, necesitarás actualizar tus valores de registro según el tipo de entorno de contenedor que estés utilizando para el despliegue.
 
 **Nota**: También puedes utilizar un registro privado, pero tendrás que crear un secreto pull para poder extraer las imágenes del registro privado.
 Para obtener más información sobre cómo crear un secreto pull, consulta la [documentación de Kubernetes][1].
@@ -21,11 +23,11 @@ Para obtener más información sobre cómo crear un secreto pull, consulta la [d
 
 ### Actualizar tu registro
 
-Para actualizar tu registro de contenedores, ejecuta el comando pull para el nuevo registro. Para ver los comandos pull de Docker para diferentes registros de contenedores, consulta los ejemplos en la [página de información general sobre la documentación Docker][2].
+Para actualizar tu registro de contenedores, ejecuta el comando pull para el nuevo registro. Para ver los comandos pull de Docker para diferentes registros de contenedores, consulta los ejemplos en la [página de información general sobre la documentación de Docker][2].
 
-## Kubernetes con Helm chart
+## Kubernetes con charts de Helm
 
-Para actualizar tu registro de contenedores al implementar el Datadog Agent (o Datadog Cluster Agent) con el Datadog Helm chart en Kubernetes (incluidos GKE, EKS, AKS y OpenShift) actualiza `values.yaml` para especificar un registro diferente:
+Para actualizar tu registro de contenedores al desplegar el Datadog Agent (o el Datadog Cluster Agent) con el chart de Helm de Datadog en Kubernetes (incluidos GKE, EKS, AKS y OpenShift) actualiza `values.yaml` para especificar un registro diferente:
 
 ### Datadog Helm chart >= v2.7.0
 
@@ -35,7 +37,7 @@ Para actualizar tu registro de contenedores al implementar el Datadog Agent (o D
     ```
 2. Elimina todas las anulaciones de `agents.image.repository`, `clusterAgent.image.repository` o `clusterChecksRunner.image.repository` en el `values.yaml`.
 
-### Charts de Helm v2.7.0 o anteriores en Datadog
+### Charts de Helm v2.7.0 o anterior en Datadog
 
 Cambia el repositorio a `gcr.io`:
 
@@ -53,7 +55,7 @@ clusterChecksRunner:
     repository: gcr.io/datadoghq/agent
 ```
 
-Para más información sobre el uso de charts de Helm en Datadog, consulta la [documentación de Kubernetes Datadog][3] y el archivo de ejemplo [`values.yaml`][4].
+Para obtener más información sobre el uso de charts de Helm en Datadog, consulta la [documentación de Kubernetes Datadog][3] y el archivo de ejemplo [`values.yaml`][4].
 
 Si utilizas un registro privado, deberás añadir un secreto pull en el campo `[key].image.pullSecrets` de cada imagen.
 ```yaml
@@ -75,9 +77,9 @@ clusterChecksRunner:
 
 ## Kubernetes con el Datadog Operator
 
-Para actualizar tu registro durante el despliegue del Datadog Agent (o el Datadog Cluster Agent) con el Datadog Operator:
+Para actualizar tu registro durante el despliegue del Datadog Agent (o del Datadog Cluster Agent) con el Datadog Operator:
 
-1. Actualiza el archivo de manifiesto del Datadog Agent para anular el registro por defecto (`gcr.io/datadoghq`). Por ejemplo, con `public.ecr.aws/datadog`:
+1. Actualiza el archivo del manifiesto del Datadog Agent para sobreescribir el registro por defecto (`gcr.io/datadoghq`). Por ejemplo, con `public.ecr.aws/datadog`:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -113,23 +115,23 @@ spec:
   // ..
 ```
 
-Para obtener más información sobre el Datadog Operator, consulte [Desplegar el Agent con el Operator][5].
+Para obtener más información sobre el Datadog Operator, consulta [Desplegar el Agent con el Operator][5].
 
 
-### Usar el registro public.ecr.aws/datadog con Helm
+### Uso de otro registro de contenedores con Helm
 
-También puedes cambiar del registro `gcr.io/datadoghq` por defecto al registro `public.ecr.aws/datadog` cuando instales el Operator con el Helm chart. Para cambiar al registro `public.ecr.aws/datadog`:
+También podrías cambiar del registro por defecto `gcr.io/datadoghq` a otro registro, como `datadoghq.azurecr.io` al instalar el Operator con el Helm chart:
 
 Actualiza [`values.yaml`][6] con la nueva imagen:
 
 ```yaml
 image:
-  repository: public.ecr.aws/datadog
+  repository: datadoghq.azurecr.io
 ```
 
 ## ECS
 
-Para actualizar tu registro durante el despliegue en ECS, en el archivo `datadog-agent-ecs.json`, cambia el valor de la clave `"image"` en `containerDefinitions` por `"public.ecr.aws/datadog/agent:latest"`:
+Para actualizar tu registro durante el despliegue en ECS, en el archivo `datadog-agent-ecs.json` cambia el valor de la clave `"image"` en `containerDefinitions` por `"public.ecr.aws/datadog/agent:latest"`:
 
 ```json
 "image": "public.ecr.aws/datadog/agent:latest",
@@ -145,15 +147,15 @@ Para actualizar tu registro mientras llevas a cabo el despliegue en Fargate, act
 "image": "public.ecr.aws/datadog/agent:latest"
 ```
 
-La próxima vez que se inicie la tarea, se extraerá de `public.ecr.aws` en lugar de Docker Hub. Para obtener más información sobre el despliegue en Fargate, consulta [Desplegar el Agent en ECS][8] y [Desplegar el Agent en EKS][9].
+La próxima vez que se inicie la tarea, la extracción se realizará desde `public.ecr.aws` en lugar del Docker Hub. Para obtener más información sobre el despliegue en Fargate, consulta [Desplegar el Agent en ECS][8] y [Desplegar el Agent en EKS][9].
 
-## Cluster Agent
+## Agent del clúster
 
-Si estás utilizando el chart de Helm para desplegar el Datadog Agent y el Datadog Cluster Agent, sigue las instrucciones en [Kubernetes con chart de Helm](#Kubernetes-with-helm-chart) y no necesitarás realizar ninguna otra actualización. El cambio de `values.yaml` de Helm descrito anteriormente cambia el repositorio del que se extraen tanto el Cluster Agent como el Datadog Agent.
+Si estás utilizando el chart de Helm para desplegar el Datadog Agent y el Datadog Cluster Agent, sigue las instrucciones en [Kubernetes con charts de Helm](#Kubernetes-with-helm-chart) y no necesitarás realizar ninguna otra actualización. El cambio de `values.yaml` de Helm descrito anteriormente cambia el repositorio del que se extraen tanto el Cluster Agent como el Datadog Agent.
 
 Si estás utilizando el Datadog Operator para desplegar el Datadog Cluster Agent, sigue las instrucciones en [Kubernetes con el Datadog Operator](#Kubernetes-with-the-Datadog-operator) y no necesitarás realizar ninguna otra actualización. Las instrucciones para actualizar la configuración del Operator actualizan el repositorio del que se extraen tanto el Cluster Agent como el Datadog Agent.
 
-Para obtener más información sobre el Datadog Cluster Agent, consulte la [documentación del Cluster Agent][10], y la [documentación para la configuración][11].
+Para obtener más información sobre el Datadog Cluster Agent, consulta la [documentación del Cluster Agent][10], y la [documentación para la configuración][11].
 
 ## Kubernetes Helm para el worker de localizaciones privadas de Datadog
 

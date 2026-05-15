@@ -41,26 +41,26 @@ See the respective documentation for your cloud provider:
 
 ## Search and manage tags
 
-Navigate to [**Cloud Cost** > **Settings** > **Tag Explorer**][2] to search for tags related to your cloud provider bills, custom costs, Datadog costs, SaaS cost integrations, and tag pipelines.
+Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Explorer{{< /ui >}}][2] to search for tags related to your cloud provider bills, custom costs, Datadog costs, SaaS cost integrations, and tag pipelines.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-For AWS tags, select **AWS** from the dropdown menu on the top right corner.
+For AWS tags, select {{< ui >}}AWS{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/aws_1.png" alt="Search through the list of AWS cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-For Azure tags, select **Azure** from the dropdown menu on the top right corner.
+For Azure tags, select {{< ui >}}Azure{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/azure_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Google" %}}
 
-For Google Cloud tags, select **Google** from the dropdown menu on the top right corner.
+For Google Cloud tags, select {{< ui >}}Google{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/google_1.png" alt="Search through the list of Google Cloud cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -69,7 +69,7 @@ For Google Cloud tags, select **Google** from the dropdown menu on the top right
 
 <div class="alert alert-danger">Daily Datadog costs are in Preview.</div>
 
-For Datadog tags, select **Datadog** from the dropdown menu on the top right corner.
+For Datadog tags, select {{< ui >}}Datadog{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/datadog_1.png" alt="Search through the list of your Datadog cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -78,7 +78,7 @@ For Datadog tags, select **Datadog** from the dropdown menu on the top right cor
 
 <div class="alert alert-danger">Confluent Cloud costs are in Preview.</div>
 
-For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on the top right corner.
+For Confluent Cloud tags, select {{< ui >}}Confluent Cloud{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/confluent_cloud_1.png" alt="Search through the list of your Confluent Cloud cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -87,7 +87,7 @@ For Confluent Cloud tags, select **Confluent Cloud** from the dropdown menu on t
 
 <div class="alert alert-danger">Databricks costs are in Preview.</div>
 
-For Databricks tags, select **Databricks** from the dropdown menu on the top right corner.
+For Databricks tags, select {{< ui >}}Databricks{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/databricks_1.png" alt="Search through the list of your Databricks cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -96,7 +96,7 @@ For Databricks tags, select **Databricks** from the dropdown menu on the top rig
 
 <div class="alert alert-danger">Fastly costs are in Preview.</div>
 
-For Fastly tags, select **Fastly** from the dropdown menu on the top right corner.
+For Fastly tags, select {{< ui >}}Fastly{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/fastly_1.png" alt="Search through the list of your Fastly cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -105,7 +105,7 @@ For Fastly tags, select **Fastly** from the dropdown menu on the top right corne
 
 <div class="alert alert-danger">Elastic Cloud costs are in Preview.</div>
 
-For Elastic Cloud tags, select **Elastic Cloud** from the dropdown menu on the top right corner.
+For Elastic Cloud tags, select {{< ui >}}Elastic Cloud{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/elastic_cloud.png" alt="Search through the list of your Elastic Cloud cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -114,7 +114,7 @@ For Elastic Cloud tags, select **Elastic Cloud** from the dropdown menu on the t
 
 <div class="alert alert-danger">MongoDB costs are in Preview.</div>
 
-For MongoDB tags, select **MongoDB** from the dropdown menu on the top right corner.
+For MongoDB tags, select {{< ui >}}MongoDB{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/mongodb_1.png" alt="Search through the list of your MongoDB cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -123,7 +123,7 @@ For MongoDB tags, select **MongoDB** from the dropdown menu on the top right cor
 
 <div class="alert alert-danger">OpenAI costs are in Preview.</div>
 
-For OpenAI tags, select **OpenAI** from the dropdown menu on the top right corner.
+For OpenAI tags, select {{< ui >}}OpenAI{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/openai_1.png" alt="Search through the list of your OpenAI cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -132,7 +132,7 @@ For OpenAI tags, select **OpenAI** from the dropdown menu on the top right corne
 
 <div class="alert alert-danger">Snowflake costs are in Preview.</div>
 
-For Snowflake tags, select **Snowflake** from the dropdown menu on the top right corner.
+For Snowflake tags, select {{< ui >}}Snowflake{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/snowflake_1.png" alt="Search through the list of your Snowflake cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -141,7 +141,7 @@ For Snowflake tags, select **Snowflake** from the dropdown menu on the top right
 
 <div class="alert alert-danger">Twilio costs are in Preview.</div>
 
-For Twilio tags, select **Twilio** from the dropdown menu on the top right corner.
+For Twilio tags, select {{< ui >}}Twilio{{< /ui >}} from the dropdown menu on the top right corner.
 
 {{< img src="cloud_cost/tag_explorer/twilio_1.png" alt="Search through the list of your Twilio cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
@@ -156,6 +156,17 @@ You can set up to five preferred tags to highlight your organization's most impo
 You can choose preferred tags from any of your existing cost data tags, including [Tag Pipelines][3]. These settings apply to your entire organization.
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_2.png" alt="Select your preferred tags in Tag Explorer" style="width:100%;" >}}
+
+## Edit tag descriptions
+
+You can add or edit descriptions for any tag in the Tag Explorer to provide context about what a tag represents and how it should be used. Click on a tag's description field to modify it, or use AI to automatically generate a description.
+
+{{< img src="cloud_cost/tag_explorer/edit_tag_description.png" alt="Edit a tag description in the Tag Explorer with the option to generate with AI" style="width:60%;" >}}
+
+Tag descriptions are visible to all members of your organization and appear in the following locations:
+
+- {{< ui >}}Tag Explorer{{< /ui >}}: Descriptions are displayed in the tag table alongside each tag key.
+- {{< ui >}}Group-by selectors{{< /ui >}}: When selecting tags to group by across Cloud Cost Management, descriptions appear in the dropdown menu to help users choose the right tag.
 
 ## Further reading
 

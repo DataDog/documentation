@@ -5,14 +5,14 @@
     "frontmatter": {
       "title": {
         "itemTranslationData": {
-          "4e9633750bc0a1ebcfaa53ec7f5d24e3": {
+          "5616dd60a56d7707ff962e87b9fa067f": {
             "string": "Opciones de privacidad de Mobile Session Replay"
           }
         }
       },
       "description": {
         "itemTranslationData": {
-          "8203acd9f39979799ba05fc28dea8120": {
+          "9a8116f7e8910bb98e4fc9efbabdc973": {
             "string": "Configura opciones de privacidad para Mobile Session Replay."
           }
         }
@@ -23,14 +23,14 @@
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
               "itemTranslationData": {
-                "ba0f605a057aabfbd9d0cb4174e5b49a": {
+                "fb162115e8af8f878d9e5707abe12e1e": {
                   "string": "Session Replay para móviles"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "5af50ce24eec5a00008bd8077f0aabe9": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "Documentación"
                 }
               }
@@ -40,14 +40,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
               "itemTranslationData": {
-                "781a78cd01a7de5580bb7760fa6eb7c6": {
+                "3bad2c19ca0a83a38ff776b95e1f8a4b": {
                   "string": "Cómo afecta Mobile Session Replay al rendimiento de las aplicaciones"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "5af50ce24eec5a00008bd8077f0aabe9": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "Documentación"
                 }
               }
@@ -57,14 +57,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
               "itemTranslationData": {
-                "37b4c49c1b5434ebe04f9ffc28e771da": {
+                "691d661ed1349ca1ba794d2bad6739f0": {
                   "string": "Configuración de Mobile Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "5af50ce24eec5a00008bd8077f0aabe9": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "Documentación"
                 }
               }
@@ -74,14 +74,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
               "itemTranslationData": {
-                "a75c35a834fe1c5757112550dadaeacd": {
+                "bf16cd1a410957692c82abe14fad0152": {
                   "string": "Solución de problemas de Mobile Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "5af50ce24eec5a00008bd8077f0aabe9": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "Documentación"
                 }
               }
@@ -91,18 +91,27 @@
             "link": "/real_user_monitoring/session_replay",
             "text": {
               "itemTranslationData": {
-                "01b55d6e1154772a6b332d3c0a8499f7": {
+                "6336fd746bcc46c6aa4d199a6266c29e": {
                   "string": "Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "5af50ce24eec5a00008bd8077f0aabe9": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "Documentación"
                 }
               }
             }
+          }
+        }
+      },
+      "content_filters": {
+        "listTranslationData": {
+          "0": {
+            "label": "SDK",
+            "trait_id": "platform",
+            "option_group_id": "rum_sdk_platform_options_v2"
           }
         }
       }

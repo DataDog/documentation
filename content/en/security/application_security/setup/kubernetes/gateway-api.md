@@ -3,6 +3,7 @@ title: Enabling AAP for Gateway API in Kubernetes
 aliases:
   - /security/application_security/threats/setup/threat_detection/gateway_api
   - /security/application_security/threats_detection/gateway_api
+  - /security/application_security/setup/gateway-api
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/k8s.io/gateway-api'
       tag: "Source Code"
@@ -151,7 +152,7 @@ spec:
   The AAP Gateway API integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [AAP Library Configuration][8].
+The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go SDK][7] and [AAP Library Configuration][8].
 
 ## Enabling APM tracing
 

@@ -2,9 +2,9 @@
 title: Bits AI Kubernetes Remediation
 description: Discover and automatically remediate Kubernetes errors with Bits AI Kubernetes Remediation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/kubernetes-active-remediation-ai/'
+  - link: 'https://www.datadoghq.com/blog/bits-ai-kubernetes-remediation/'
     tag: 'blog'
-    text: 'Accelerate Kubernetes issue resolution with AI-powered guided remediation'
+    text: 'Troubleshoot and resolve Kubernetes issues with AI-powered guided remediation'
 ---
 
 Bits AI Kubernetes Remediation analyzes and fixes Kubernetes errors in your infrastructure.
@@ -47,12 +47,12 @@ If your repositories are [connected to Datadog][4], and an error can be fixed by
 
 When a pod is terminated because the memory usage exceeded its limit, you may be able to fix the error by increasing your container's memory limit.
 
-1. Click **Edit Memory Limit**.
+1. Click {{< ui >}}Edit Memory Limit{{< /ui >}}.
 2. Adjust your limit so that it is higher than what your container normally uses.
-3. Click **Fix with Bits AI**.
-4. On the next page, select the repository where your deployment is defined, and review the proposed changes. Click **Fix with Bits** to create a pull request.
-5. You are redirected to a Bits [Code Session][3], where you can verify that the Bits AI Dev Agent identified the specific configuration file where your memory limits are defined. Click **Create Pull Request** to initiate the creation of the pull request.
-6. Click **View Pull Request** to view the pull request in GitHub.
+3. Click {{< ui >}}Fix with Bits AI{{< /ui >}}.
+4. On the next page, select the repository where your deployment is defined, and review the proposed changes. Click {{< ui >}}Fix with Bits{{< /ui >}} to create a pull request.
+5. You are redirected to a Bits [Code Session][3], where you can verify that the Bits AI Dev Agent identified the specific configuration file where your memory limits are defined. Click {{< ui >}}Create Pull Request{{< /ui >}} to initiate the creation of the pull request.
+6. Click {{< ui >}}View Pull Request{{< /ui >}} to view the pull request in GitHub.
 {{% /collapse-content %}}
 
 ## Further reading

@@ -1,4 +1,5 @@
 ---
+id: pipeline_execution_time
 core_product:
 - ci-cd
 title: パイプラインの実行時間

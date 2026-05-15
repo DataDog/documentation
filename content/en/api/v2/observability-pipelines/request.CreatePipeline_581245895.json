@@ -1,0 +1,47 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "dedupe-processor",
+                "include": "service:my-service",
+                "type": "dedupe",
+                "fields": [
+                  "message"
+                ],
+                "mode": "match"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Pipeline with Dedupe No Cache"
+    },
+    "type": "pipelines"
+  }
+}

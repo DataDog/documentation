@@ -1,17 +1,16 @@
 ---
-title: Widget iframe
-description: Ajoutez un iframe à vos dashboards Datadog.
 aliases:
-  - /fr/graphing/widgets/iframe/
+- /fr/graphing/widgets/iframe/
+description: Ajoutez un iframe à vos dashboards Datadog.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+title: Widget iframe
+widget_type: iframe
 ---
-Le widget iframe vous permet d'intégrer une partie de n'importe quelle autre page web à votre dashboard.
+
+Un inline frame (iframe) est un élément HTML qui charge une autre page HTML dans le document. Le widget iframe vous permet d'intégrer une partie de n'importe quelle autre page Web dans votre dashboard.
 
 ## Configuration
 
@@ -21,9 +20,7 @@ Saisissez l'URL de la page que vous souhaitez afficher à l'intérieur de l'ifra
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
-
-Le [schéma JSON][2] utilisé pour le widget iframe est le suivant :
+Ce widget peut être utilisé avec l'**[API Dashboards][1]**. Le tableau ci-dessous définit le [schéma JSON du widget][2] :
 
 {{< dashboards-widgets-api >}}
 
@@ -31,5 +28,5 @@ Le [schéma JSON][2] utilisé pour le widget iframe est le suivant :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/api/v1/dashboards/
+[1]: /fr/api/latest/dashboards/
 [2]: /fr/dashboards/graphing_json/widget_json/

@@ -28,6 +28,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/software-catalog/"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Software Catalog"
+- link: "https://learn.datadoghq.com/courses/getting-started-usm"
+  tag: "Learning Center"
+  text: "Getting Started with Universal Service Monitoring (USM)"
 cascade:
     algolia:
         rank: 70
@@ -81,5 +84,5 @@ After enabling Universal Service Monitoring, you can:
 [3]: /tracing/software_catalog/
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
-[6]: /service_management/service_level_objectives/metric/
+[6]: /service_level_objectives/metric/
 [7]: /universal_service_monitoring/setup/

@@ -1,31 +1,61 @@
 ---
 title: Socket Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
+
+## Overview
 
 Use Observability Pipelines' Socket destination to send logs to a socket endpoint.
 
 ## Setup
 
-Set up the Socket destination and its environment variables when you [set up a pipeline][1]. The following information is configured in the pipelines UI.
+Configure the Socket destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the Socket destination in the pipeline UI:
 
+<div class="alert alert-danger">Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</a></div>
+
+1. Enter the identifier for your address. If you leave it blank, the [default](#secret-defaults) is used.
 1.  In the **Mode** dropdown menu, select the socket type to use.
 1.  In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
-1.  Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
-    -   `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    -   `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    -   `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Optional settings
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Socket address identifier:
+	- References the address to which the Observability Pipelines Worker sends processed logs.
+	- The default identifier is `DESTINATION_SOCKET_ADDRESS`.
+- Socket TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_SOCKET_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/socket %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 
@@ -34,3 +64,6 @@ Set up the Socket destination and its environment variables when you [set up a p
 The Socket destination does not batch events.
 
 [1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
