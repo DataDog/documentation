@@ -12,6 +12,7 @@ aliases:
   - /opentelemetry/instrument/api_support/go/metrics
   - /opentelemetry/instrument/api_support/go/traces
   - /opentelemetry/instrument/api_support/java
+  - /opentelemetry/instrument/api_support/java/logs
   - /opentelemetry/instrument/api_support/java/metrics
   - /opentelemetry/instrument/api_support/java/traces
   - /opentelemetry/instrument/api_support/nodejs/
