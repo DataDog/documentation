@@ -42,8 +42,6 @@ From the [Agent Builder page][1], click **New Agent**. From there, you can creat
 
 Instructions tell the agent what to do when it runs. Write them in natural language—describe the goal, the process, and any constraints. Edit instructions directly or refine through the chat interface.
 
-Instructions have a 10,000 character limit. Keep instructions focused on behavior and goals rather than background knowledge. Move detailed reference material into tool descriptions or pass it dynamically through Run Instructions in Workflow Automation.
-
 Good instructions are specific and outcome-oriented. For example:
 
 ```
@@ -71,7 +69,7 @@ improvement of incident response capabilities.
 
 ### Model
 
-Select which LLM powers the agent's reasoning. Models vary in capability, speed, and cost—choose based on your agent's workload. Supported models include options from Anthropic (Claude series) and OpenAI (GPT series). Check the model selector in the Agent Builder UI for the current list. You can compare models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
+Select which LLM powers the agent's reasoning. Models vary in capability, speed, and cost—choose based on your agent's workload. You can compare models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
 
 ### Tools
 
@@ -79,7 +77,7 @@ Tools define what actions the agent can take. Add tools from the [Action Catalog
 
 Click on any added tool to hardcode its parameters so the agent uses the same values every time—for example, locking a Slack tool to a specific channel or a logs query to a specific service.
 
-The [Datadog MCP Server][8] is enabled by default. Support for third-party MCP servers is coming soon. In the meantime, you can connect to any API—including internal services—using custom HTTP actions.
+The [Datadog MCP Server][8] is enabled by default. Support for third-party MCP servers is coming soon. In the meantime, you can connect to any API using [custom HTTP actions][12].
 
 ### Automations
 
@@ -110,17 +108,18 @@ Use agents in [Workflow Automation][9] and [App Builder][10] through the **Run A
 The **Run Agent** step also supports the following optional fields:
 
 - **Output Schema**: Define a JSON schema for the agent's response. When set, the agent structures its output to match the schema for use in downstream steps. For example, you can define a schema with a `requestType` field, then branch on `Run Agent.finalResponse.requestType` in an If condition step.
+
+{{< img src="/actions/agents/output-schema-example.png" alt="A workflow using output schema to branch on agent response fields" style="width:100%;" >}}
+
 - **Conversation ID**: Provide a conversation ID to continue a previous agent conversation. This lets the agent retain context across multiple workflow runs instead of starting fresh each time.
 
 By default, each Run Agent invocation is a standalone, single-turn execution—the agent does not retain memory of previous runs. To continue a prior conversation, pass a Conversation ID from a previous run. Multi-turn sessions are subject to the same context window limits as the chat UI.
-
-{{< img src="/actions/agents/output-schema-example.png" alt="A workflow using output schema to branch on agent response fields" style="width:100%;" >}}
 
 The agent executes with its configured tools and instructions and returns its output to the workflow. Combine rule-based automation with AI reasoning in a single workflow.
 
 ## Data privacy
 
-Agent Builder is powered by third-party LLM providers including OpenAI and Anthropic. Your data is not used to train or improve these models. Datadog has Zero Data Retention (ZDR) agreements with OpenAI and Anthropic, meaning your inputs and outputs are not stored by these providers. All AI products adhere to Datadog's standard privacy and security standards.
+All AI products adhere to Datadog's standard privacy and security standards. See the [Trust Center][13], [Data Processing Addendum][14], and [Transfer Impact Assessment][15] for details.
 
 ## Troubleshooting
 
@@ -129,8 +128,6 @@ Agent Builder is powered by third-party LLM providers including OpenAI and Anthr
 **Automation not running**: Make sure the agent is published and the workflow step is fully configured.
 
 **Conversation length limit**: Long conversations may hit the context length limit. If this happens, start a new conversation. Automatic conversation compaction is coming soon.
-
-**504 Gateway Timeout**: This can occur during heavy tool use or long-running agent tasks. Try simplifying the task, reducing the number of tools called in a single turn, or starting a new conversation.
 
 **Unexpected configuration changes**: Use [Audit Trail][11] filtered to your agent's ID to review the history of changes.
 
@@ -146,3 +143,7 @@ Agent Builder is powered by third-party LLM providers including OpenAI and Anthr
 [9]: https://app.datadoghq.com/workflow
 [10]: https://app.datadoghq.com/app-builder/apps/list
 [11]: /account_management/audit_trail/
+[12]: /actions/actions_catalog/http-action/
+[13]: https://www.datadoghq.com/trust-center/
+[14]: https://www.datadoghq.com/legal/data-processing-addendum/
+[15]: https://www.datadoghq.com/legal/transfer-impact-assessment/
