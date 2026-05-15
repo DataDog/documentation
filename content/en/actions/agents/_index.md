@@ -31,7 +31,7 @@ Use agents to handle work that's too complex for static automation but too repet
 From the [Agent Builder page][1], click **New Agent**. From there, you can create an agent in three ways:
 
 - **Build with AI**: Describe what you want the agent to do in plain language. Agent Builder generates the instructions, selects relevant tools, and configures the agent for you.
-- **Start from a blueprint**: Choose a prebuilt template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come pre-configured with instructions, tools, and automations, and are customizable.
+- **Start from a blueprint**: Choose a prebuilt template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come preconfigured with instructions, tools, and automations, and are customizable.
 - **Start from scratch**: Configure the agent manually—write instructions, pick a model, and add tools.
 
 {{< img src="/actions/agents/empty-state.png" alt="The Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
@@ -56,11 +56,12 @@ Your role involves:
 - Facilitating post-incident reviews and improvements
 
 During incident response:
-1. Help classify incident severity (P0/P1/P2/etc.)
-2. Guide through incident response runbooks and procedures
-3. Assist with stakeholder communication and updates
-4. Track action items and follow-up tasks
-5. Support post-mortem analysis and lessons learned
+1. Use search_datadog_logs to pull recent error logs for the affected service
+2. Help classify incident severity (P0/P1/P2/etc.)
+3. Guide through incident response runbooks and procedures
+4. Assist with stakeholder communication and updates
+5. Track action items and follow-up tasks
+6. Support post-mortem analysis and lessons learned
 
 Focus on clear communication, structured processes, and continuous
 improvement of incident response capabilities.
@@ -74,14 +75,18 @@ Select which LLM powers the agent's reasoning. Models vary in capability, speed,
 
 Tools define what actions the agent can take. Add tools from the [Action Catalog][7], which includes 2500+ integrations. The agent can only use tools that have been added to its configuration.
 
+You can hardcode parameters on individual tools so the agent uses the same values every time—for example, locking a Slack tool to a specific channel or a logs query to a specific service.
+
 The [Datadog MCP Server][8] is enabled by default. Support for third-party MCP servers is coming soon.
 
 ### Automations
 
 Add an automation to trigger agents beyond the chat interface:
 
-- **Schedule**: Run an agent on a recurring basis (for example, daily error triage).
-- **Workflow triggers**: Run an agent as a step in any workflow—triggered by [monitors][14], [incidents][15], [security signals][16], or other events.
+- Schedule
+- Monitor alert
+- Incident
+- Security signal
 
 ## Test your agent
 
@@ -98,7 +103,7 @@ Agents integrate with [Workflow Automation][9] and [App Builder][10] through the
 1. Open or create a workflow in [Workflow Automation][9], or open or create an app in [App Builder][10].
 1. Add the **Run Agent** step from the action catalog.
 1. Select which agent to run.
-1. Write the **Run Instructions**—these are the instructions sent to the agent at runtime. Use variables to pass dynamic context.
+1. Write the **Run Instructions**—the prompt the agent receives each time it runs. Use variables like `{{Source.form}}` to pass in trigger data.
 
 The **Run Agent** step also supports the following optional fields:
 
@@ -106,6 +111,14 @@ The **Run Agent** step also supports the following optional fields:
 - **Conversation ID**: Provide a conversation ID to continue a previous agent conversation. This lets the agent retain context across multiple workflow runs instead of starting fresh each time.
 
 The agent executes with its configured tools and instructions and returns its output to the workflow. Combine rule-based automation with AI reasoning in a single workflow.
+
+## Troubleshooting
+
+**Agent not using a tool**: Verify the tool has been added to the agent's configuration. The agent can only use tools that are explicitly added.
+
+**Automation not running**: Make sure the agent is published and the workflow step is fully configured.
+
+**Conversation length limit**: Long conversations may hit the context length limit. If this happens, start a new conversation. Automatic conversation compaction is coming soon.
 
 ## Further Reading
 
@@ -118,6 +131,3 @@ The agent executes with its configured tools and instructions and returns its ou
 [8]: /bits_ai/mcp_server
 [9]: https://app.datadoghq.com/workflow
 [10]: https://app.datadoghq.com/app-builder/apps/list
-[14]: /actions/workflows/trigger/#monitor-triggers
-[15]: /actions/workflows/trigger/#incident-triggers
-[16]: /actions/workflows/trigger/#security-triggers
