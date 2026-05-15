@@ -7,6 +7,12 @@ further_reading:
       text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">
+GPU Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+  
 ## Overview
 
 The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces Datadog's built-in provisioning and performance optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
