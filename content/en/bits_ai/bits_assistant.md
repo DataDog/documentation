@@ -56,18 +56,18 @@ Example prompts:
 #### APM
 
 ##### Trace analysis
-Investigate an individual [trace][3] to diagnose what failed, where, and why. Bits Assistant explores the full span tree, correlates related logs, and surfaces root causes without manual span tree navigation or log cross-referencing.
+Investigate an individual [trace][3] to diagnose what failed, where, and why.
 
 Example prompts:
 - `Why did this request fail?`
-- `What's causing the latency spike in this trace?`
 - `Summarize this trace and identify the root cause of the error`
 
 ##### Latency investigations
-Analyze slow traces at scale, map the service call chain, and pinpoint bottleneck dependencies. Bits Assistant identifies cross-trace patterns and isolates downstream causes faster than manual trace review.
+Investigate latency on a service to identify bottleneck resources and what changed in its slow traces.
 
 Example prompts:
 - `What caused the latency spike for this service?`
+- `What's the latency bottleneck for this service?`
 
 #### Cloud Cost Management
 Investigate [cloud cost][4] changes and identify the teams or resources responsible.
