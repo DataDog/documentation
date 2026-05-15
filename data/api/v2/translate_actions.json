@@ -3699,6 +3699,22 @@
     "request_description": "",
     "request_schema_description": "Definition of a group."
   },
+  "ListSCIMResourceTypes": {
+    "description": "List the SCIM resource types supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List resource types"
+  },
+  "GetSCIMResourceType": {
+    "description": "Get a single SCIM resource type using the `resource_id`.\nSupported `resource_id` values are `User` and `Group`.",
+    "summary": "Get resource type"
+  },
+  "ListSCIMSchemas": {
+    "description": "List the SCIM schemas supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List schemas"
+  },
+  "GetSCIMSchema": {
+    "description": "Get a single SCIM schema using the `schema_id`. Supported `schema_id`\nvalues are `urn:ietf:params:scim:schemas:core:2.0:User` and\n`urn:ietf:params:scim:schemas:core:2.0:Group`.",
+    "summary": "Get schema"
+  },
   "ListSCIMUsers": {
     "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
     "summary": "List users"
