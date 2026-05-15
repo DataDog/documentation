@@ -84,7 +84,7 @@ jobs:
 
             ${flaggedFiles}
 
-            **Are you trying to document site support for a feature?** If so, the \`site-region\` shortcode is not the recommended approach. See the [Documenting site support](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/5201857960/Documenting+site+support) guide for the correct method.`.replace(/^            /gm, '');
+            **Are you trying to document site support for a product?** If so, the \`site-region\` shortcode is not the recommended approach. See the [Documenting site support](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/5201857960/Documenting+site+support) guide for the preferred method. `.replace(/^            /gm, '');
 
             // Check for an existing comment from this workflow to avoid duplicates
             const { data: comments } = await github.rest.issues.listComments({
