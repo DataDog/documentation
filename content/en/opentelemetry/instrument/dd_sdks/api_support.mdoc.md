@@ -182,7 +182,7 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 - **Rust**: MSRV 1.84 or later.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- **Datadog SDK**: dd-trace-java version 1.61.0 or later.
+- **Datadog SDK**: `dd-trace-java` version 1.61.0 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 {% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "java"]) %}
