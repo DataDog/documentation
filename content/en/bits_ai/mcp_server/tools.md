@@ -471,6 +471,25 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Code Exec
+
+A sandboxed TypeScript runtime that lets an AI agent write code with direct access to Datadog APIs, instead of issuing many sequential tool calls. A single code block can query logs, metrics, traces, services, and changes together, correlate the results inline, and return a structured summary. This reduces the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+
+<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
+
+### `execute_code`
+*Toolset: **code-exec***\
+*Permissions Required: `mcp_read` and `mcp_write`. At runtime, the sandbox also enforces your existing resource permissions (for example, `Logs Read`, `APM Read`, `Dashboards Write`) for each Datadog API call the code makes.*\
+Executes agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent.
+
+- What changed in the last two hours that could explain elevated error rates on the `checkout-api` service?
+- Compare latency trends against recent deployments for the `payments` service over the last day.
+- Show me the top 10 error patterns in `auth-service` logs from the last hour, grouped by error kind.
+
+**Note**: The sandbox enforces execution time limits and code-size limits, and blocks sensitive operations. Long-running queries should be scoped to a bounded time window.
+
 ## Dashboards
 
 Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
@@ -1155,3 +1174,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
+[56]: /account_management/rbac/permissions/
