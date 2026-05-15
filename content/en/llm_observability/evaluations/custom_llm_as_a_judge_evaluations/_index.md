@@ -352,7 +352,7 @@ function __evalPostProcessing(input) {
 
 2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you conduct a more complex assessment than just using Boolean, Score, or Categorical structured output.
 
-    The post-processing function must return an object containing an **assessment** of value "pass" or "fail" and optionally value or reasoning strings. The function must return a json object of the following format
+    The post-processing function must return an object containing an **assessment** of value "pass" or "fail" and optionally, value or reasoning strings. The function must return a json object of the following format:
     ```
     {
         assessment: "pass", // "pass" | "fail" [REQUIRED],
