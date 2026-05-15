@@ -10,6 +10,13 @@ further_reading:
       text: "GPU Monitoring Fleet Page"
 ---
 
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">
+    GPU Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
+
 ## Overview
 
 The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame. This page answers key questions such as:
