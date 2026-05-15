@@ -114,7 +114,7 @@ These checks can be used in Datadog to visualize the Agent status through monito
 
 ## Advanced configurations and features
 
-{{% collapse-content title="Differences between Agent for hosts and containers" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Differences between Agent for hosts and containers" level="h4" expanded=false id="agent-hosts-vs-containers" %}}
 
 There are key differences between installing Agents on a host and in a containerized environment: 
 
@@ -135,7 +135,7 @@ Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough o
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Setting tags through the Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Setting tags through the Agent configuration file" level="h4" expanded=false id="setting-tags-agent-config-file" %}}
 
 Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing.
 
@@ -190,7 +190,7 @@ For example, let's say you have data that is collected from different teams and 
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="finding-metrics-in-the-datadog-ui" %}}
 
 You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
 
@@ -200,14 +200,14 @@ Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Agent overhead" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent overhead" level="h4" expanded=false id="agent-overhead" %}}
 
 The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is sending. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
 See [Agent Overhead][2] to learn more about these benchmarks.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Additional configuration options" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Additional configuration options" level="h4" expanded=false id="additional-configuration-options" %}}
 
 The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These features are not enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
