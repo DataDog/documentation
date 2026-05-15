@@ -94,9 +94,9 @@ Use the built-in chat interface to test your agent. Send messages, review the ag
 
 {{< img src="/actions/agents/agent-chat.png" alt="The agent chat interface showing a conversation with tool calls" style="width:100%;" >}}
 
-## Use agents in workflows and apps
+## Agent orchestration
 
-Agents integrate with [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
+Use agents in [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
 
 {{< img src="/actions/agents/run-agent-step.png" alt="The Run Agent step configuration in a workflow, showing agent selection, run instructions, conversation ID, and output schema fields" style="width:100%;" >}}
 
