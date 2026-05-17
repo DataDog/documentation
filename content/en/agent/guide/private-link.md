@@ -64,6 +64,33 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+| Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
+| CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
+| On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           | {{< region-param key="on_call_endpoint_private_link" code="true" >}}           |
+| Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
+| Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
+| Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
+| Compliance                | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     | {{< region-param key="evp_compliance_endpoint_private_link" code="true" >}}     |
+| Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         | {{< region-param key="salesforce_endpoint_private_link" code="true" >}}         |
+| AWS Kinesis               | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
+| Session Replay            | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
+| GCP                       | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
+| On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  | {{< region-param key="on_call_secondary_endpoint_private_link" code="true" >}}  |
+| Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
+| Webhooks                  | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
+| Webhooks (EVP)            | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
+| All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       | {{< region-param key="evp_all_ddog_endpoint_private_link" code="true" >}}       |
+| HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       | {{< region-param key="hamr_evp_all_endpoint_private_link" code="true" >}}       |
+| Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        | {{< region-param key="evp_profile_endpoint_private_link" code="true" >}}        |
+| All RUM                   | {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        | {{< region-param key="evp_all_rum_endpoint_private_link" code="true" >}}        |
+| Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           | {{< region-param key="web_ddog_endpoint_private_link" code="true" >}}           |
+| Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       | {{< region-param key="evp_internal_endpoint_private_link" code="true" >}}       |
+| Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          | {{< region-param key="evp_agent_endpoint_private_link" code="true" >}}          |
+| AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     | {{< region-param key="evp_awsmetrics_endpoint_private_link" code="true" >}}     |
+| Browser                   | {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        | {{< region-param key="evp_browser_endpoint_private_link" code="true" >}}        |
+| APM (Datadog)             | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       | {{< region-param key="evp_apm_ddog_endpoint_private_link" code="true" >}}       |
+| Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            | {{< region-param key="evp_rum_endpoint_private_link" code="true" >}}            |
+| HAMR Metrics Agent        | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} | {{< region-param key="hamr_metrics_agent_endpoint_private_link" code="true" >}} |
 
 4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][14].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
@@ -144,6 +171,33 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+| Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
+| CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
+| On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           | {{< region-param key="on_call_endpoint_private_link" code="true" >}}           |
+| Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
+| Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
+| Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
+| Compliance                | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     | {{< region-param key="evp_compliance_endpoint_private_link" code="true" >}}     |
+| Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         | {{< region-param key="salesforce_endpoint_private_link" code="true" >}}         |
+| AWS Kinesis               | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
+| Session Replay            | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
+| GCP                       | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
+| On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  | {{< region-param key="on_call_secondary_endpoint_private_link" code="true" >}}  |
+| Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
+| Webhooks                  | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
+| Webhooks (EVP)            | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
+| All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       | {{< region-param key="evp_all_ddog_endpoint_private_link" code="true" >}}       |
+| HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       | {{< region-param key="hamr_evp_all_endpoint_private_link" code="true" >}}       |
+| Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        | {{< region-param key="evp_profile_endpoint_private_link" code="true" >}}        |
+| All RUM                   | {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        | {{< region-param key="evp_all_rum_endpoint_private_link" code="true" >}}        |
+| Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           | {{< region-param key="web_ddog_endpoint_private_link" code="true" >}}           |
+| Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       | {{< region-param key="evp_internal_endpoint_private_link" code="true" >}}       |
+| Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          | {{< region-param key="evp_agent_endpoint_private_link" code="true" >}}          |
+| AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     | {{< region-param key="evp_awsmetrics_endpoint_private_link" code="true" >}}     |
+| Browser                   | {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        | {{< region-param key="evp_browser_endpoint_private_link" code="true" >}}        |
+| APM (Datadog)             | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       | {{< region-param key="evp_apm_ddog_endpoint_private_link" code="true" >}}       |
+| Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            | {{< region-param key="evp_rum_endpoint_private_link" code="true" >}}            |
+| HAMR Metrics Agent        | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} | {{< region-param key="hamr_metrics_agent_endpoint_private_link" code="true" >}} |
 
 **Note**: Cross-region PrivateLink doesn't emit CloudWatch metrics. See [CloudWatch metrics for AWS PrivateLink][2] for more information.
 
@@ -173,6 +227,33 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
+| Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               |
+| CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     |
+| On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           |
+| Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     |
+| Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               |
+| Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           |
+| Compliance                | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     |
+| Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         |
+| AWS Kinesis               | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    |
+| Session Replay            | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         |
+| GCP                       | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            |
+| On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  |
+| Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         |
+| Webhooks                  | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           |
+| Webhooks (EVP)            | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       |
+| All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       |
+| HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       |
+| Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        |
+| All RUM                   | {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        |
+| Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           |
+| Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       |
+| Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          |
+| AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     |
+| Browser                   | {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        |
+| APM (Datadog)             | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       |
+| Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            |
+| HAMR Metrics Agent        | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} |
 
 4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][1].
 
@@ -212,6 +293,33 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
   | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+  | Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
+  | CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
+  | On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           | {{< region-param key="on_call_endpoint_private_link" code="true" >}}           |
+  | Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
+  | Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
+  | Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
+  | Compliance                | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     | {{< region-param key="evp_compliance_endpoint_private_link" code="true" >}}     |
+  | Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         | {{< region-param key="salesforce_endpoint_private_link" code="true" >}}         |
+  | AWS Kinesis               | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
+  | Session Replay            | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
+  | GCP                       | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
+  | On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  | {{< region-param key="on_call_secondary_endpoint_private_link" code="true" >}}  |
+  | Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
+  | Webhooks                  | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
+  | Webhooks (EVP)            | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
+  | All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       | {{< region-param key="evp_all_ddog_endpoint_private_link" code="true" >}}       |
+  | HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       | {{< region-param key="hamr_evp_all_endpoint_private_link" code="true" >}}       |
+  | Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        | {{< region-param key="evp_profile_endpoint_private_link" code="true" >}}        |
+  | All RUM                   | {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        | {{< region-param key="evp_all_rum_endpoint_private_link" code="true" >}}        |
+  | Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           | {{< region-param key="web_ddog_endpoint_private_link" code="true" >}}           |
+  | Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       | {{< region-param key="evp_internal_endpoint_private_link" code="true" >}}       |
+  | Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          | {{< region-param key="evp_agent_endpoint_private_link" code="true" >}}          |
+  | AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     | {{< region-param key="evp_awsmetrics_endpoint_private_link" code="true" >}}     |
+  | Browser                   | {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        | {{< region-param key="evp_browser_endpoint_private_link" code="true" >}}        |
+  | APM (Datadog)             | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       | {{< region-param key="evp_apm_ddog_endpoint_private_link" code="true" >}}       |
+  | Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            | {{< region-param key="evp_rum_endpoint_private_link" code="true" >}}            |
+  | HAMR Metrics Agent        | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} | {{< region-param key="hamr_metrics_agent_endpoint_private_link" code="true" >}} |
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command:
 

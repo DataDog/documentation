@@ -388,6 +388,276 @@ export default {
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
+  aws_private_link_ndm_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06d73ff413f53118b',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_ci_visibility_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-08f348617178337ac',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_on_call_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-040d4694353f1958b',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_logs_livetail_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_echo_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-09c55c3f990206ba0',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_slack_gw_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0a2006b178f345de6',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_compliance_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0e05823ecf4eaa84f',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_salesforce_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0803d0b5406b68f27',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_aws_kinesis_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0b557706c2fbd06b6',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_replay_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-05261703a7218e60a',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_gcp_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_on_call_secondary_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c026794e409de082',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_srcmap_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_webhooks_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0fc2ab3a06dda724c',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_webhooks_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06c2c070ee14b129e',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_all_ddog_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-08dd4ecf3a793a00c',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_hamr_evp_all_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-045380d617704a02d',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_profile_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0acd86d44987b6d4e',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_all_rum_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0945c1461c36f1e90',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_web_ddog_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01911394f8bac8056',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_internal_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0b8473dde46b2f73b',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_agent_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01d5898923af2ddc8',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_awsmetrics_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-053eb40d2f27b4276',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_browser_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01e2749032a8b1b90',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_apm_ddog_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-02546adaf36f386aa',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_evp_rum_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-062eed913b8c463b3',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  aws_private_link_hamr_metrics_agent_service_name: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
   aws_customer_access_id: {
     us: '464622532012',
     us3: '464622532012',
@@ -647,6 +917,276 @@ export default {
     ap2: 'violet.intake.ap2.datadoghq.com',
     gov2: 'config.us2.ddog-gov.com',
     gov: 'config.ddog-gov.com'
+  },
+  ndm_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'olive.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  ci_visibility_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'khaki.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  on_call_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'green.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  logs_livetail_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'indigo.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  echo_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'tomato.edge.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  slack_gw_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'wheat.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_compliance_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'snow.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  salesforce_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'salmon.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_aws_kinesis_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'tan.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_replay_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'black.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_gcp_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'aqua.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  on_call_secondary_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'ivory.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_srcmap_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'plum.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  webhooks_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'maroon.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_webhooks_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'azure.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_all_ddog_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'sienna.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  hamr_evp_all_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'coral.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_profile_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'peru.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_all_rum_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'purple.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  web_ddog_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'orange.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_internal_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'fuchsia.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_agent_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'red.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_awsmetrics_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'teal.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_browser_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'blue.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_apm_ddog_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'silver.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  evp_rum_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'gray.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
+  },
+  hamr_metrics_agent_endpoint_private_link: {
+    us: 'The private link service for US is not supported.',
+    us3: 'The private link service for US3 is not supported.',
+    us5: 'The private link service for US5 is not supported.',
+    eu: 'The private link service for EU is not supported.',
+    ap1: 'The private link service for AP1 is not supported.',
+    ap2: 'brown.intake.ap2.datadoghq.com',
+    gov2: 'The private link service for US2-FED is not supported.',
+    gov: 'The private link service for GOV is not supported.'
   },
   org_management_max_session_duration: {
     us: '720 hours (30 days)',
