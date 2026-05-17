@@ -39,7 +39,7 @@ When a unit is detected, Datadog automatically chooses the most readable unit sc
 
 {{< img src="dashboards/guide/unit_override/unit_override_with_autoscale.png" alt="Table widget showing values scaled to minutes and seconds, alongside unit override configuration with Autoscale unit enabled" style="width:100%;" >}}
 
-With unit override, you can choose a single fixed scale to compare values. In the example below, all values are configured to scale to `minutes`. This is to directly compare values in the same scale. 
+With unit override turned off, you can choose a single fixed scale to compare values. In the example below, all values are configured to scale to `minutes`. This is to directly compare values in the same scale. 
 
 {{< img src="dashboards/guide/unit_override/unit_override_without_autoscale.png" alt="Table widget showing values all scaled to minute, alongside unit override configuration without Autoscale unit enabled" style="width:100%;" >}}
 
