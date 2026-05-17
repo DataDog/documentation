@@ -1,4 +1,5 @@
 ---
+id: query
 core_product:
 - 메트릭
 title: 쿼리

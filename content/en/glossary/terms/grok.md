@@ -1,4 +1,5 @@
 ---
+id: grok
 title: grok
 core_product:
   - log management

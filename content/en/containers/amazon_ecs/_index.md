@@ -62,7 +62,7 @@ The following instructions assume that you have configured an EC2 cluster. See t
 
 **Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 ## FIPS Compliance
 
 Some setup steps are different for FIPS compliance. Please take into account the specific setup instructions in the [FIPS Compliance][32] documentation.
@@ -124,9 +124,9 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 {{% tab "Web UI" %}}
 After you have your task definition file, use the AWS Console to register the file.
 1. Log in to your AWS Console and navigate to the Elastic Container Service section.
-2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
+2. Select {{< ui >}}Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new task definition{{< /ui >}} menu, select {{< ui >}}Create new task definition with JSON{{< /ui >}}.
 3. In the JSON editor box, paste the contents of your task definition file.
-4. Select **Create**.
+4. Select {{< ui >}}Create{{< /ui >}}.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -138,11 +138,11 @@ To have one Datadog Agent container running on each EC2 instance, run the Datado
 
 #### Schedule a daemon service in AWS using Datadog's ECS task
 
-1. Log in to the AWS Console and navigate to the ECS section. On the **Clusters** page, choose the cluster you run the Agent on.
-2. On your cluster's **Services** tab, select **Create**.
-3. Under **Deployment configuration**, for **Service type**, select **Daemon**.
+1. Log in to the AWS Console and navigate to the ECS section. On the {{< ui >}}Clusters{{< /ui >}} page, choose the cluster you run the Agent on.
+2. On your cluster's {{< ui >}}Services{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
+3. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
 3. You do not need to configure load balancing or autoscaling.
-4. Click **Next Step**, and then **Create Service**.
+4. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
 
 ### Set up additional Agent features
 

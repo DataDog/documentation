@@ -13,8 +13,8 @@ Use the EKS Cluster component to visualize Amazon EKS clusters from your Amazon 
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the top of the component and an accent color for the bottom and logo. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Name**: Enter a name for the cluster.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the top of the component and an accent color for the bottom and logo. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Enter a name for the cluster.
 
 You can also add the **EKS Cluster** component to [VPCs][1], [security groups][2], and [subnets][3].
 

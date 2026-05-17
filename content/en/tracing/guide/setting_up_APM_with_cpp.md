@@ -1,6 +1,6 @@
 ---
 title: Setting Up APM with C++
-description: Learn how to set up APM and distributed tracing for C++ applications using Datadog tracing libraries and instrumentation.
+description: Learn how to set up APM and distributed tracing for C++ applications using Datadog SDKs and instrumentation.
 
 further_reading:
 - link: "/tracing/trace_collection/dd_libraries/cpp/"

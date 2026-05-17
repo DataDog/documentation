@@ -1,4 +1,5 @@
 ---
+id: space_aggregation
 core_product:
 - モニター
 title: 空間集計

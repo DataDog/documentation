@@ -10,7 +10,11 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
-        imgUrl: 'https://datadog-docs.imgix.net/',
+        docsAi: {
+            apiUrl: 'https://app.datadoghq.com/api/unstable/docs-ai',
+            apiKey: 'ddpub_docsai_nkbIDfPWw4pKuRlLef8aDs2onVqdimFI'
+        },
+        imgUrl: 'https://docs.dd-static.net/',
         gaTag: 'UA-21102638-5'
     },
     preview: {
@@ -24,7 +28,11 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
-        imgUrl: 'https://datadog-docs-staging.imgix.net/',
+        docsAi: {
+            apiUrl: 'https://dd.datad0g.com/api/unstable/docs-ai',
+            apiKey: 'ddpub_docsai_qvrDfIbODspTDsb2Y9Co7h3QlB4kMJYb'
+        },
+        imgUrl: 'https://docs-staging.dd-static.net/',
         gaTag: 'UA-21102638-9'
     },
     development: {
@@ -36,6 +44,10 @@ module.exports = {
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
+        },
+        docsAi: {
+            apiUrl: 'https://dd.datad0g.com/api/unstable/docs-ai',
+            apiKey: 'ddpub_docsai_qvrDfIbODspTDsb2Y9Co7h3QlB4kMJYb'
         },
         imgUrl: 'http://localhost:1313/',
         gaTag: 'UA-21102638-9'

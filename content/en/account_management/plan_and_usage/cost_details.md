@@ -57,20 +57,20 @@ View historical costs by toggling back to previous months, or use the date dropd
 {{< img src="account_management/plan_and_usage/parent-org-multi-month-cost-changes.png" alt="Screenshot of a parent organization's historical costs over a three month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
-1. Click the **Usage** tab.
-1. For a multi-organization, ensure the **Overall** tab is selected.
+1. Click the {{< ui >}}Usage{{< /ui >}} tab.
+1. For a multi-organization, ensure the {{< ui >}}Overall{{< /ui >}} tab is selected.
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products**, **Sub-Orgs** or **Cost Breakdown**. Use the Daily Cost tab to see how the cumulative day-over-day costs have changed within the current month. 
+Use the search facets at the left to filter the cost by {{< ui >}}Products{{< /ui >}}, {{< ui >}}Sub-Orgs{{< /ui >}} or {{< ui >}}Cost Breakdown{{< /ui >}}. Use the Daily Cost tab to see how the cumulative day-over-day costs have changed within the current month. 
 
 
 #### Download
 
-To download the data as a comma separated value file, click **Download as CSV**. Data is available for the current month and pre-defined prior months. Use the `Cost Type` field to distinguish between the records:
-- **Projected**: Data is available for the current month.
-- **Estimated MTD**: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
-- **Historical**: Data is available after month close, which is approximately 16 days after the end of the month.
+To download the data as a comma separated value file, click {{< ui >}}Download as CSV{{< /ui >}}. Data is available for the current month and pre-defined prior months. Use the `Cost Type` field to distinguish between the records:
+- {{< ui >}}Projected{{< /ui >}}: Data is available for the current month.
+- {{< ui >}}Estimated MTD{{< /ui >}}: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
+- {{< ui >}}Historical{{< /ui >}}: Data is available after month close, which is approximately 16 days after the end of the month.
   
 To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
@@ -87,16 +87,16 @@ View historical costs by toggling back to previous months, or use the date dropd
 {{< img src="account_management/plan_and_usage/suborg-multi-month-cost-changes.png" alt="Screenshot of a sub organization's historical costs over a six month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
-1. Click the **Usage** tab.
-1. Ensure the **Overall** tab is selected.
+1. Click the {{< ui >}}Usage{{< /ui >}} tab.
+1. Ensure the {{< ui >}}Overall{{< /ui >}} tab is selected.
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products** or **Cost Breakdown**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
+Use the search facets at the left to filter the cost by {{< ui >}}Products{{< /ui >}} or {{< ui >}}Cost Breakdown{{< /ui >}}. Use the {{< ui >}}Daily Cost{{< /ui >}} tab to see how the cumulative day-over-day costs have changed within the current month.
 
 #### Download
 
-To download the data as a comma separated value file, click **Download as CSV**.
+To download the data as a comma separated value file, click {{< ui >}}Download as CSV{{< /ui >}}.
 
 ## Cost chargebacks
 
@@ -115,9 +115,9 @@ From a parent organization, view finalized historical costs aggregated by produc
 {{< img src="account_management/plan_and_usage/historical-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
-1. Select the **Usage** tab.
-1. Click **Individual Organizations**.
-1. Ensure the **Billable** and **Cost** toggles are selected.
+1. Select the {{< ui >}}Usage{{< /ui >}} tab.
+1. Click {{< ui >}}Individual Organizations{{< /ui >}}.
+1. Ensure the {{< ui >}}Billable{{< /ui >}} and {{< ui >}}Cost{{< /ui >}} toggles are selected.
 1. Use the date selector to view a prior month for which billing has completed.
 
 **Note**: Data is available after month close, which is approximately 16 days after the end of the month.
@@ -131,20 +131,20 @@ Estimated cost data is available for the current month. If historical cost data 
 {{< img src="account_management/plan_and_usage/estimated-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
-1. Select the **Usage** tab.
-1. Click **Individual Organizations**.
-1. Ensure the **Billable** and **Cost** toggles are selected.
+1. Select the {{< ui >}}Usage{{< /ui >}} tab.
+1. Click {{< ui >}}Individual Organizations{{< /ui >}}.
+1. Ensure the {{< ui >}}Billable{{< /ui >}} and {{< ui >}}Cost{{< /ui >}} toggles are selected.
 1. Ensure the date selector shows the current or prior month.
 
 ### Download
 
-- To download historical or estimated cost chargeback data as a comma separated value file, click **Download as CSV**.
+- To download historical or estimated cost chargeback data as a comma separated value file, click {{< ui >}}Download as CSV{{< /ui >}}.
 - See [Get historical cost across your account][4] to query historical cost chargeback data through the API.
 - See [Get estimated cost across your account][3] to query estimated cost chargeback data through the API.
 
 ## How billing aggregations affect cost changes
 
-Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
+Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][5] feature chart. Each {{< ui >}}Products{{< /ui >}} filter includes the relevant billing aggregation method next to the product name.
 
 ### Percentile and average usage billing
 

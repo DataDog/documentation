@@ -25,7 +25,7 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 
 ## Prerequisites
 
-- Agent version `7.75.2` or later.
+- Agent version `7.77.0` or later.
 - [Remote Configuration][14] enabled for your organization.
 - Permissions required:
   - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
@@ -59,6 +59,8 @@ For advanced profile configuration, see [Build an NDM Profile][3].
     ```
 
   **Note**: EXOS 33.1.1 devices may crash when device scan is enabled due to a firmware bug. As a workaround, disable device scan globally (`network_devices.default_scan.enabled: false`) or upgrade the device firmware. If you are affected by this issue, contact [Datadog Support][21] for assistance.
+
+3. If you have custom profiles on the Agent, upload them to the UI by following the [Upload custom profiles](#upload-custom-profiles) instructions.
 
 ## Configure metrics
 
@@ -192,6 +194,20 @@ To download profiles as YAML files, click **Download Profiles** in the top right
 2. Restart the Datadog Agent.
 3. Confirm that NDM is receiving metrics from the matched devices.
 
+### Upload custom profiles
+
+To upload existing SNMP profiles to the Profile Manager:
+
+1. Navigate to [**Infrastructure > Network Devices > Settings**][1] and click **SNMP Profile Manager** in the left sidebar.
+2. Click **Upload Profiles** in the top right corner of the page.
+3. In the upload modal, drag and drop a `.zip` file or click **browse files** to select one. The `.zip` file must contain one or more SNMP profiles in `.yaml` format.
+
+   {{< img src="/network_device_monitoring/profile_onboarding/upload_custom_profile_2.png" alt="The Upload custom SNMP profile modal with a drag-and-drop area for uploading a .zip file containing SNMP profiles in .yaml format" style="width:60%;">}}
+
+4. Click **Upload profiles**.
+
+After the upload completes, the profiles are available in the profile editor. You can then manage metrics, device coverage, and advanced options for the uploaded profiles the same way as any other custom profile.
+
 ## Profile inheritance
 
 Profile inheritance happens automatically in the background. When you edit a profile, Datadog creates a custom extension of the matching profile. You do not need to configure inheritance manually. Datadog automatically includes base inherited profiles (`_base.yaml`, `_generic-if.yaml`, `_generic-ip.yaml`, `_generic-ospf.yaml`, `_generic-tcp.yaml`, and `_generic-udp.yaml`).
@@ -223,7 +239,7 @@ If a device is not being scanned, it may be due to the following reasons:
 - **Infinite loop detected**: The scan detected an infinite loop and was terminated. Check the Agent logs for `next OID 'X' is not after last OID 'Y'`. This can occur with some device firmware.
 - **Known issue: EXOS 33.1.1 firmware bug**: EXOS 33.1.1 devices may crash when device scan is enabled. As a workaround, keep device scan disabled or upgrade the device firmware. Contact [Datadog Support][21] for assistance.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 - **GovCloud**: Device scans cannot be triggered from the UI. Enable the default device scan (`network_devices.default_scan.enabled: true`) and trigger scans manually from the Agent for specific devices.
 {{< /site-region >}}
 

@@ -12,6 +12,9 @@ further_reading:
   - link: "/real_user_monitoring/"
     tag: "Documentation"
     text: "Datadog Real User Monitoring"
+  - link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+    tag: "Blog"
+    text: "Measure and improve mobile app startup performance with Datadog RUM"
 ---
 
 ## Overview

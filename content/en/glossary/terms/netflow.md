@@ -1,4 +1,5 @@
 ---
+id: netflow
 title: NetFlow
 core_product:
   - cloud network monitoring

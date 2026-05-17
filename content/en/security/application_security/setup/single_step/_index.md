@@ -39,7 +39,7 @@ For an Ubuntu host:
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
-         <li><a href="#lib-linux">Specifying tracing library versions.</a></li>
+         <li><a href="#lib-linux">Specifying SDK versions.</a></li>
          <li><a href="#env-linux">Tagging observability data by environment.</a></li>
       </ul>
    </div>
@@ -50,7 +50,7 @@ For an Ubuntu host:
 
 **Note:** To configure single-step for AAP threat protection, add the environment variable `DD_APPSEC_ENABLED=true` to your one-line installation command.
 
-### Specifying tracing library versions {#lib-linux}
+### Specifying SDK versions {#lib-linux}
 
 By default, enabling APM on your server installs support for Java, Python, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
@@ -58,7 +58,7 @@ By default, enabling APM on your server installs support for Java, Python, Node.
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+You can optionally provide a version number for the SDK by placing a colon after the language name and specifying the SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -68,7 +68,7 @@ Supported languages include:
 - Node.js (`js`)
 - PHP (`php`)
 
-**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
+**Note**: For the Node.js SDK, different versions of Node.js are compatible with different versions of the Node.js SDK. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
 ### Tagging observability data by environment {#env-linux}
 
@@ -114,24 +114,24 @@ For a Docker Linux container:
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
-         <li><a href="#lib-docker">Specifying tracing library versions.</a></li>
+         <li><a href="#lib-docker">Specifying SDK versions.</a></li>
          <li><a href="#env-docker">Tagging observability data by environment.</a></li>
       </ul>
    </div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][6].
 
-### Specifying tracing library versions {#lib-docker}
+### Specifying SDK versions {#lib-docker}
 
 By default, enabling APM on your server installs support for Java, Python, Node.js, and .NET services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script.
 
-For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+For example, to install support for only v1.25.0 of the Java SDK and the latest Python SDK, add the following to the installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+You can optionally provide a version number for the SDK by placing a colon after the language name and specifying the SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -142,7 +142,7 @@ Supported languages include:
 - Ruby (`ruby`)
 - PHP (`php`)
 
-**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
+**Note**: For the Node.js SDK, different versions of Node.js are compatible with different versions of the Node.js SDK. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
 ### Tagging observability data by environment {#env-docker}
 

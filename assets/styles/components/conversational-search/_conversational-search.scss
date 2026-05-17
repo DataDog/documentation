@@ -1,36 +1,37 @@
-// Variables
-// Colors: Bootstrap body-color (#212529) cascades naturally for text.
-// The site's _global.scss overrides p specifically to #4a4a4a.
-$conv-search-purple: #632CA6;
-$conv-search-purple-dark: #4f2384;
-$conv-search-purple-light: #f3eefa;
+// Design token variables
+$conv-search-purple: #b37bff;
+$conv-search-purple-dark: #9654e8;
+$conv-search-purple-light: #e3d2ff;
 $conv-search-bg: #ffffff;
-$conv-search-surface: #f4f4f5;
-$conv-search-border: #e4e4e7;
-$conv-search-text-muted: #6b7280;
+$conv-search-surface: #efefef;
+$conv-search-border: #c7c7c7;
+$conv-search-text-muted: #616161;
+
+$conv-primary-400: #b37bff;
+$conv-primary-300: #ccadff;
+$conv-primary-200: #e3d2ff;
+$conv-primary-100: #f0e7ff;
+$conv-neutral-700: #323232;
+$conv-neutral-600: #616161;
+$conv-neutral-500: #969696;
+$conv-neutral-400: #c7c7c7;
+$conv-neutral-200: #efefef;
 
 @import "dialog";
 @import "resources";
 @import "message-actions";
 @import "home-ask-ai";
 
+// Messages area (scrollable)
 .conv-search-messages {
     position: relative;
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    padding: 16px 20px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-
-    --fade: 10px;
-    mask-image:
-        linear-gradient(to bottom, transparent, black var(--fade),
-                         black calc(100% - var(--fade)), transparent);
-    -webkit-mask-image:
-        linear-gradient(to bottom, transparent, black var(--fade),
-                         black calc(100% - var(--fade)), transparent);
+    z-index: 1;
 
     &::-webkit-scrollbar {
         width: 5px;
@@ -50,131 +51,170 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
-// Empty State with Suggestions
+// Empty state
 .conv-search-empty-state {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 100%;
-    padding: 32px 40px;
+    padding: 36px 36px 28px;
+
+    @media (max-width: 640px) {
+        padding: 20px 20px 16px;
+    }
 }
 
-.conv-search-empty-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: $conv-search-purple-light;
+.conv-search-empty-text {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 16px;
 
-    svg, img {
-        width: 24px;
-        height: 24px;
-        filter: invert(18%) sepia(80%) saturate(3000%) hue-rotate(260deg) brightness(80%) contrast(95%);
+    @media (max-width: 640px) {
+        gap: 8px;
     }
 }
 
 .conv-search-empty-title {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 0 0 6px 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.32px;
+    line-height: 32px;
+    margin: 0;
+    color: #000;
+
+    @media (max-width: 640px) {
+        font-size: 26px;
+        letter-spacing: -0.26px;
+        line-height: 26px;
+    }
 }
 
 .conv-search-empty-subtitle {
-    font-size: 14px;
-    color: #374151;
-    margin: 0 0 28px 0;
+    font-size: 20px;
+    line-height: 28px;
+    color: #000;
+    margin: 0;
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 24px;
+    }
 }
 
 .conv-search-suggestions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
+    gap: 8px;
+
+    @media (max-width: 640px) {
+        gap: 4px;
+    }
 }
 
 .conv-search-suggestion {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 9px 14px;
-    background: transparent;
-    border: 1px solid $conv-search-border;
-    border-radius: 10px;
-    font-size: 13.5px;
-    font-weight: 400;
+    height: 36px;
+    padding: 7px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid $conv-primary-200;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 300;
     cursor: pointer;
-    transition: all 0.18s ease;
+    transition: background 0.18s ease, border-color 0.18s ease;
     text-align: left;
     font-family: inherit;
-    line-height: 1.45;
-    color: #374151;
-
-    svg {
-        flex-shrink: 0;
-        color: #374151;
-        opacity: 0;
-        transform: translateX(-4px);
-        transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
-    }
+    line-height: 22px;
+    color: $conv-neutral-700;
+    white-space: nowrap;
 
     &:hover {
-        border-color: rgba($conv-search-purple, 0.35);
-        background: rgba($conv-search-purple, 0.025);
-        color: $conv-search-purple;
+        background: $conv-primary-100;
+        border-color: $conv-primary-300;
+    }
 
-        svg {
-            opacity: 1;
-            transform: translateX(0);
-            color: $conv-search-purple;
-        }
+    &:active {
+        background: $conv-primary-300;
+        border-color: $conv-primary-300;
+    }
+
+    @media (max-width: 640px) {
+        font-size: 13px;
+        line-height: 18px;
+        white-space: normal;
+        height: auto;
+        border-radius: 16px;
+        padding: 7px 16px;
     }
 }
 
+// Chat messages
 .conv-search-message {
     display: flex;
     flex-direction: column;
 
     &-user {
         align-items: flex-end;
+        padding: 0 36px;
 
         .conv-search-message-content {
-            background: $conv-search-surface;
-            border-radius: 18px 18px 4px 18px;
-            max-width: 80%;
-            padding: 10px 16px;
-            font-size: 16px;
-            line-height: 26px;
+            background: $conv-neutral-200;
+            border: 1px solid $conv-primary-100;
+            border-radius: 24px;
+            padding: 10px 20px;
+            font-size: 20px;
+            line-height: 28px;
+            color: $conv-neutral-700;
+
+            @media (max-width: 640px) {
+                font-size: 16px;
+                line-height: 24px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            padding: 0 20px;
         }
     }
 
     &-assistant {
         align-items: stretch;
+        padding: 0 36px;
 
         .conv-search-message-content {
-            background: transparent;
-            border-radius: 0;
-            max-width: 100%;
-            padding: 4px 0;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid $conv-primary-300;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow:
+                0 4px 4px 0 rgba(199, 230, 253, 0.5),
+                0 4px 8px 0 rgba(255, 209, 228, 0.25),
+                0 4px 16px 0 $conv-primary-200;
+        }
+
+        @media (max-width: 640px) {
+            padding: 0 20px;
+
+            .conv-search-message-content {
+                padding: 12px;
+            }
         }
     }
 }
 
-// Typography baseline.
-// marked.js sometimes wraps <li> content in <p> (when LLM leaves blank lines
-// between items) and sometimes doesn't. The global p rule sets a different
-// font-size/color than body, creating visible mismatches. We normalise here
-// so every element inside the chat uses the same size, color, and line-height
-// regardless of whether marked.js emits a <p> wrapper or not.
+// Typography inside messages
 .conv-search-message-content {
-    font-size: 18px;
-    line-height: 27px;
-    color: #1a1a1a;
+    font-size: 20px;
+    line-height: 28px;
+    color: $conv-neutral-700;
     word-break: break-word;
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 24px;
+    }
 
     p, ul, ol, li, blockquote, td, th, dd, dt {
         font-size: inherit;
@@ -186,13 +226,29 @@ $conv-search-text-muted: #6b7280;
         margin-bottom: 0;
     }
 
+    ul, ol {
+        padding-left: 30px;
+
+        @media (max-width: 640px) {
+            padding-left: 24px;
+        }
+    }
+
+    li {
+        margin-bottom: 8px;
+
+        @media (max-width: 640px) {
+            margin-bottom: 4px;
+        }
+    }
+
     pre {
         position: relative;
         background: #fff;
-        border-radius: 4px;
+        border-radius: 8px;
         border: 1px solid #ddd;
-        border-top: 3px solid rgba(119, 0, 255, 0.3);
-        padding: 10px;
+        border-top: 3px solid rgba($conv-search-purple, 0.3);
+        padding: 12px;
         overflow-x: auto;
         margin: 12px 0 16px;
 
@@ -258,7 +314,7 @@ $conv-search-text-muted: #6b7280;
     height: 28px;
     padding: 0;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
     background: #fff;
     color: #555;
     cursor: pointer;
@@ -279,19 +335,59 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
+// Loading indicator (spinner + status text, shown before first content token)
+.conv-search-loading-state {
+    padding: 0 36px;
+
+    @media (max-width: 640px) {
+        padding: 0 20px;
+    }
+}
+
+.conv-search-loading-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+}
+
+.conv-search-loading-spinner {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    position: relative;
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+    }
+
+    &::before {
+        border: 2px solid $conv-primary-200;
+    }
+
+    &::after {
+        border: 2px solid transparent;
+        border-top-color: $conv-primary-400;
+        animation: conv-search-spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+}
+
 .conv-search-status-text {
-    color: #6e6e80;
-    font-size: 13px;
-    margin-right: 6px;
+    color: $conv-neutral-600;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
     animation: conv-search-fade-in 0.3s ease;
 }
 
 @keyframes conv-search-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-// Typing cursor animation
 .conv-search-cursor {
     display: inline-block;
     width: 2px;
@@ -302,55 +398,47 @@ $conv-search-text-muted: #6b7280;
 }
 
 @keyframes conv-search-blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
+// Footer with input and disclaimer
 .conv-search-footer {
-    background: $conv-search-bg;
     flex-shrink: 0;
-    padding: 6px 0 0;
-    border-radius: 0 0 16px 16px;
+    padding: 0 36px 36px;
+    position: relative;
+    z-index: 1;
+
+    background: transparent;
+
+    @media (max-width: 640px) {
+        padding: 0 20px 20px;
+    }
 
     @media (max-height: 600px) {
         position: sticky;
         bottom: 0;
         z-index: 10;
     }
-
-    @media (max-width: 640px) {
-        border-radius: 0;
-    }
 }
 
 .conv-search-input-container {
     display: flex;
-    align-items: flex-end;
-    gap: 8px;
-    margin: 0 16px;
-    padding: 8px 8px 8px 18px;
-    background: $conv-search-surface;
-    border: 1px solid $conv-search-border;
-    border-radius: 14px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 20px;
+    background: #fff;
+    border: 1px solid $conv-primary-300;
+    border-radius: 24px;
+    box-shadow:
+        0 4px 4px 0 rgba(199, 230, 253, 0.5),
+        0 4px 8px 0 rgba(255, 209, 228, 0.25),
+        0 4px 16px 0 $conv-primary-200;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &:focus-within {
-        border-color: rgba($conv-search-purple, 0.4);
-        box-shadow: 0 0 0 3px rgba($conv-search-purple, 0.05);
+        border-color: $conv-primary-400;
     }
-}
-
-.conv-search-disclaimer {
-    margin: 0;
-    padding: 6px 20px 12px;
-    font-size: 12px;
-    color: $conv-search-text-muted;
-    text-align: center;
-    line-height: 1.5;
 }
 
 .conv-search-input {
@@ -358,44 +446,54 @@ $conv-search-text-muted: #6b7280;
     resize: none;
     border: none;
     border-radius: 0;
-    padding: 4px 0;
-    font-size: 15px;
-    font-weight:300;
-    line-height: 1.5;
+    padding: 0;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 28px;
     background: transparent;
     font-family: inherit;
-    min-height: 24px;
+    min-height: 28px;
     max-height: 120px;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'liga' off, 'clig' off;
 
     &::placeholder {
-        color: $conv-search-text-muted;
+        color: $conv-neutral-500;
     }
 
     &:focus {
         outline: none;
     }
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 24px;
+        min-height: 24px;
+    }
 }
 
 .conv-search-send {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: $conv-search-purple;
-    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 28px;
+    background: transparent;
+    border: 1px solid $conv-primary-400;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $conv-primary-400;
     flex-shrink: 0;
-    transition: background 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+    padding: 6px;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
 
     &:hover:not(:disabled) {
-        background: $conv-search-purple-dark;
+        background: rgba($conv-search-purple, 0.08);
     }
 
     &:active:not(:disabled) {
-        transform: scale(0.95);
+        transform: scale(0.92);
     }
 
     &:disabled {
@@ -409,7 +507,29 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
-// Loading state for messages
+.conv-search-disclaimer {
+    margin: 0;
+    padding: 8px 0 0;
+    font-size: 14px;
+    color: $conv-neutral-600;
+    line-height: 18px;
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+
+        &:hover {
+            color: $conv-neutral-700;
+        }
+    }
+
+    @media (max-width: 640px) {
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
+
+// Loading spinner for assistant messages
 .conv-search-message-assistant .conv-search-message-content:empty::after {
     content: '';
     display: inline-block;
@@ -424,5 +544,41 @@ $conv-search-text-muted: #6b7280;
 @keyframes conv-search-spin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+// Scrollable content area when messages are visible (no empty state)
+.conv-search-messages:not(:has(.conv-search-empty-state)) {
+    padding: 0 0 28px;
+    gap: 16px;
+
+    &::before {
+        content: '';
+        position: sticky;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 60px;
+        background: linear-gradient(to bottom, white 0%, white 1px, transparent 100%);
+        pointer-events: none;
+        z-index: 2;
+        flex-shrink: 0;
+        margin-top: -1px;
+        margin-bottom: -59px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &.has-scrolled::before {
+        opacity: 1;
+    }
+
+    @media (max-width: 640px) {
+        padding: 0 0 16px;
+
+        &::before {
+            height: 40px;
+            margin-bottom: -39px;
+        }
     }
 }

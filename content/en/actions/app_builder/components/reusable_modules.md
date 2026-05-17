@@ -26,17 +26,17 @@ There are three ways to create a reusable module:
 1. While editing an app, click the expand icon (<i class="icon-expand-to-left-wui" style="position:relative; top:4px;"></i>) to open the components panel.
 2. Click a component to select it.
 3. In the components panel, click the menu icon (<i class="icon-config-1" style="position:relative; top:4px;"></i>).
-4. Click Create Module ({{< img src="service_management/app_builder/reusable-module-icon.svg" inline="true">}}).
+4. Click {{< ui >}}Create Module{{< /ui >}} ({{< img src="service_management/app_builder/reusable-module-icon.svg" inline="true">}}).
 5. [Configure your module][3].
 
 ### From a component's instance name tab
 1. While editing an app, select a component on the app canvas.
-2. Click the Create Module icon ({{< img src="service_management/app_builder/reusable-module-icon.svg" inline="true">}}) in the component instance name tab.
+2. Click the {{< ui >}}Create Module{{< /ui >}} icon ({{< img src="service_management/app_builder/reusable-module-icon.svg" inline="true">}}) in the component instance name tab.
 3. [Configure your module][3].
 
 ### From selected components
 1. While editing an app, hold down the Shift key and click multiple components to select them.
-2. In the side panel that appears on the right, click Create Module ({{< img src="service_management/app_builder/reusable-module-icon.svg" inline="true">}}).
+2. In the side panel that appears on the right, click {{< ui >}}Create Module{{< /ui >}} ({{< img src="service_management/app_builder/reusable-module-icon.svg" inline="true">}}).
 
 ## Configure a module
 
@@ -46,17 +46,17 @@ When creating your module, the module editor allows you to preview the component
 
 1. Enter a name and description.
 2. Review the components and queries that are automatically included. The system includes all nested query dependencies.
-3. Click Save Module.
+3. Click {{< ui >}}Save Module{{< /ui >}}.
 
 ## Add a reusable module to an app
 1. While editing an app, click the Add Component icon (<i class="icon-component-wui" style="position:relative; top:4px;"></i>).
-2. In the Modules section, click a module or drag it onto the app canvas.
+2. In the {{< ui >}}Modules{{< /ui >}} section, click a module or drag it onto the app canvas.
 
 
 ## Delete a module
 1. While editing an app, click the Add Component icon (<i class="icon-component-wui" style="position:relative; top:4px;"></i>).
-2. In the Modules section, click the edit icon ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}) for the module you want to delete.
-3. In the module editor, click Delete Module.
+2. In the {{< ui >}}Modules{{< /ui >}} section, click the edit icon ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}) for the module you want to delete.
+3. In the module editor, click {{< ui >}}Delete Module{{< /ui >}}.
 
 ## Further reading
 

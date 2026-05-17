@@ -1,4 +1,5 @@
 ---
+id: trace_root_span
 core_product:
 - apm
 short_definition: Un tramo es un tramo raíz de la traza cuando es el primer tramo

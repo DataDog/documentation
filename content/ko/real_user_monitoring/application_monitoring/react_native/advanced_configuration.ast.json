@@ -1,0 +1,77 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "04fdcc1192429274af1a0f78eee8e549": {
+            "string": "React Native 고급 구성"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "778b6fc8a934f5ae45d17dd7ef70f1da": {
+            "string": "React Native 설정을 위한 고급 설정 옵션에 대해 알아보세요."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-reactnative",
+            "text": {
+              "itemTranslationData": {
+                "1417ef03a3dadc8ba63be06c6511da50": {
+                  "string": "dd-sdk-reactnative를 위한 소스 코드"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "51a8f7e6bf4837b35d750e426156c24b": {
+                  "string": "소스 코드"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/reactnative/",
+            "text": {
+              "itemTranslationData": {
+                "612f2ddd024956cdb4582b157b449f70": {
+                  "string": "React Native 모니터링에 대해 알아보기"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "문서"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring/guide/monitor-hybrid-react-native-applications",
+            "text": {
+              "itemTranslationData": {
+                "f618a615520bdd0c68297c6a79748a14": {
+                  "string": "하이브리드 React Native 애플리케이션 모니터링"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "문서"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

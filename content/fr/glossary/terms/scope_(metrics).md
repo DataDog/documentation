@@ -1,4 +1,5 @@
 ---
+id: scope_metrics
 title: contexte
 ---
 Le contexte utilise un ou plusieurs tags pour filtrer la requête. 

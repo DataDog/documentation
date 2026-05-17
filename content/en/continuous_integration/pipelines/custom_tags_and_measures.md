@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags to a pipeline trace or a job span, in addition to adding measures to a pipeline trace or a job span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
+Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags or measures to a pipeline, job, stage, or step span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
 
 You can use facets and measures to filter, create visualizations, or create monitors for your pipelines in the [CI Visibility Explorer][10].
 
@@ -41,12 +41,12 @@ npm install -g @datadog/datadog-ci
 
 ## Add tags to pipeline traces
 
-Tags can be added to the pipeline span or to the job span.
+Tags can be added to the pipeline, job, stage, or step span.
 
 To do this, run the `tag` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tag1>] [--tags <tag2>] ...
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job|stage|step>] [--tags <tag1>] [--tags <tag2>] ...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
@@ -69,10 +69,10 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 
 ## Add measures to pipeline traces
 
-To add numerical tags to the pipeline span or the job span, run the `measure` command:
+To add numerical tags to the pipeline, job, stage, or step span, run the `measure` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measure1>] [--measures <measure2>]...
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job|stage|step>] [--measures <measure1>] [--measures <measure2>]...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.

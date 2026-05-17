@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Basic Postgres Integration"
 - link: "/database_monitoring/guide/rds_autodiscovery"
-  tag: "Documenation"
+  tag: "Documentation"
   text: "Autodiscovery for RDS"
 - link: "/database_monitoring/guide/parameterized_queries/"
   tag: "Documentation"
@@ -40,33 +40,40 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, use `127.0.0.1` or the socket. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure the AWS integration
 
-Enable **Resource Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
+Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][3].
 
 ## Configure Postgres settings
 
 Configure the following [parameters][4] in the [DB parameter group][5] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][6].
 
+**Required parameters**
+
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][6] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
-| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
-| `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
-| `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
-| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
+
+**Optional parameters**
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `pg_stat_statements.track` | `ALL` | Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.max` | `10000` | Increases the number of normalized queries tracked in `pg_stat_statements`. Recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `off` | Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
+| `track_io_timing` | `on` | Enables collection of block read and write times for queries. |
 
 ### Enable `auto_explain` (optional)
 
 By default, the agent only gathers [`EXPLAIN`][15] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
 
-To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][16], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][16], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so enable it before continuing.
 
 <div class="alert alert-danger">
 <strong>Important:</strong> <code>auto_explain</code> produces log lines that may contain sensitive application data, similar to raw values in non-obfuscated SQL. Use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control access to the resulting plans. To restrict visibility of the log lines themselves—which are visible to all users in your Datadog organization by default—also configure <a href="/logs/guide/logs-rbac">RBAC for Logs</a>. Datadog recommends using both permissions to protect sensitive information effectively.
@@ -94,11 +101,11 @@ To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use 
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
-The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][7].
+Run the following SQL commands on the **primary** database server (the writer) in the cluster if Postgres is replicated. The Agent can collect telemetry from all databases on the server regardless of which database it connects to. Use the default `postgres` database unless you need the Agent to run [custom queries against data unique to a different database][7].
 
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][8] by running:
+Connect to your chosen database as a superuser (or another user with sufficient permissions). For example, to connect to the `postgres` database using [psql][8]:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
@@ -110,7 +117,7 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** IAM authentication is also supported. Please see [the guide][9] on how to configure this for your RDS instance.
+**Note:** IAM authentication is also supported. See [the guide][9] on how to configure this for your RDS instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 15" %}}
@@ -175,7 +182,9 @@ SECURITY DEFINER;
 
 <div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
-Create the function **in every database** to enable the Agent to collect explain plans.
+### Create the explain plan function
+
+Create the following function **in every database** to enable the Agent to collect explain plans:
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -205,7 +214,7 @@ SECURITY DEFINER;
 ### Securely store your password
 {{% dbm-secret %}}
 
-### Verify
+### Verify database permissions
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 {{< tabs >}}
@@ -234,11 +243,11 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
   || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
+  -c "select * from datadog.pg_stat_activity() limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
+  -c "select * from datadog.pg_stat_statements() limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
@@ -605,7 +614,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validate
+### Verify Agent setup
 
 [Run the Agent's status subcommand][11] and look for `postgres` under the Checks section. Or visit the [Databases][12] page to get started!
 
@@ -618,7 +627,7 @@ To see infrastructure metrics from AWS, such as CPU, alongside the database tele
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][14]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][14].
 
 ## Further reading
 

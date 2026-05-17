@@ -1,4 +1,5 @@
 ---
+id: tail
 core_product:
 - 로그 관리
 title: 테일링

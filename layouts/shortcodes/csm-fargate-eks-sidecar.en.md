@@ -43,7 +43,7 @@ spec:
            mountPath: "/cws-instrumentation-volume"
            readOnly: true
      - name: datadog-agent
-       image: datadog/agent:latest 
+       image: public.ecr.aws/datadog/agent:latest
        env:
          - name: DD_API_KEY
            value: "<DD_API_KEY>"

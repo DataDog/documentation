@@ -1,4 +1,5 @@
 ---
+id: funnel_analysis
 core_product:
 - real user monitoring
 title: 퍼널 분석

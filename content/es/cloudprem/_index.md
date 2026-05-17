@@ -2,32 +2,32 @@
 description: Aprende a desplegar y gestionar Datadog CloudPrem, una solución de gestión
   de logs autoalojada para una ingesta, procesamiento, indexación y capacidades de
   búsqueda rentables de logs.
-private: true
+further_reading:
+- link: https://www.datadoghq.com/blog/introducing-datadog-cloudprem/
+  tag: Blog
+  text: Almacena y busca logs a escala de petabytes en tu propia infraestructura con
+    Datadog CloudPrem
 title: CloudPrem
 ---
 
-<div class="alert alert-danger">CloudPrem está en Vista previa.</div>
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem está en vista previa" >}}
+  Únete a la vista previa de CloudPrem para acceder a las nuevas funciones autoalojadas de gestión de logs.
+{{< /callout >}}
 
-## Información general
+CloudPrem es una solución de gestión de logs BYOC de Datadog que ofrece una solución rentable para las organizaciones que desean mantener sus datos en sus propias cuentas en la nube y controlar los costes a lo largo del tiempo utilizando los descuentos de sus proveedores de nube existentes. Está diseñada para cumplir estrictos requisitos de seguridad, residencia de datos, normativos y de gran volumen.
 
-{{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="Información general de la arquitectura de CloudPrem en la que se muestra cómo fluyen los logs desde sources (fuentes) a través de CloudPrem a la plataforma de Datadog" style="width:100%;" >}}
-
-Datadog CloudPrem es una solución autoalojada de gestión de logs que permite una ingesa, procesamiento, indexación y capacidades de búsqueda rentables de logs en tu propia infraestructura. Creada para cumplir los requisitos de residencia de datos, seguridad estricta y gran volumen, CloudPrem se integra con la plataforma Datadog para proporcionar análisis, visualización y alertas de logs, todo ello manteniendo tus datos de logs en reposo dentro de los límites de tu infraestructura.
 
 ## Para empezar
 
-{{< whatsnext >}}
-   {{< nextlink href="/cloudprem/installation/" >}}Instalar CloudPrem y Enviar logs con el Agent {{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingress/" >}}Configurar CloudPrem Ingress{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/aws_config" >}}Configurar AWS{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/processing/" >}}Configurar el procesamiento de logs de CloudPrem{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/cluster/" >}}Más información sobre dimensionamiento de clústeres y operaciones{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/architecture/" >}}Más información sobre la arquitectura de CloudPrem{{< /nextlink >}}   
-   {{< nextlink href="/cloudprem/troubleshooting/" >}}Solucionar problemas{{< /nextlink >}}
+{{< whatsnext desc="Sigue nuestras guías para comenzar a usar CloudPrem:">}}
+  {{< nextlink href="/cloudprem/introduction/" >}}¿Qué es CloudPrem?{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/quickstart/" >}}Inicio rápido: ejecuta CloudPrem de forma local en 5 minutos{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/" >}}Instalación: despliega CloudPrem en AWS, Azure, o Kubernetes personalizado{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/ingest/agent/" >}}Ingesta de logs: configura el Datadog Agent para enviar logs a CloudPrem{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/operate/search_logs" >}}Búsqueda de logs: explora tus logs en el Datadog Log Explorer{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/guides/" >}}Guías: guías paso a paso para funciones e integraciones de CloudPrem{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Referencias adicionales
 
-[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[2]: /es/cloudprem/installation/
-[3]: /es/cloudprem/processing/
-[4]: /es/cloudprem/architecture/
+{{< partial name="whats-next/whats-next.html" >}}

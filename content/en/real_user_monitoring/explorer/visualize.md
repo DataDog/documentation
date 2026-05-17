@@ -110,7 +110,7 @@ When you have a starting point in mind, but aren't sure what your users did next
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
+When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geolocation, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
 

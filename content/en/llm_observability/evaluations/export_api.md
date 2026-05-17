@@ -122,7 +122,7 @@ Method
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
 | include_attachments | boolean | Whether to retrieve truncated input and output content. Defaults to True. |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
-| page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
+| page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. <br>**Note:** Responses are subject to a 50 MB size limit. If your spans contain large inputs or outputs, use a lower limit and paginate with `page[cursor]`. |
 
 #### Code example
 
@@ -298,7 +298,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field | Type | Description |
 |-------|------|-------------|
-| limit | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
+| limit | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. <br>**Note:** Responses are subject to a 50 MB size limit. If your spans contain large inputs or outputs, use a lower limit and paginate with `cursor`. |
 | cursor | string | List following results with a cursor provided in the previous query. |
 
 ### SearchedSpanResource
@@ -331,6 +331,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | tool_definitions        | [[ToolDefinition](#tooldefinition)]                       | List of tools available in an LLM request. |
 | metrics        | Dict[key (string), float]                      | Datadog metrics to collect. |
 | evaluation        | Dict[key (string), [SpanEvalMetric](#spanevalmetric)]                      | A map of evaluations associated with the span. |
+| intent        | string                       | The intent of an MCP tool call. |
 
 ### SearchedIO
 

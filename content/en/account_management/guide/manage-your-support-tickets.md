@@ -81,13 +81,18 @@ further_reading:
 
 <p>If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add <strong>datadog.zendesk.com</strong> to the allow list.</p>
 
+<h3>Ticket is no longer available</h3>
+<p>Datadog deletes closed tickets, including their attachments, 15 months after their last update.</p>
+
+<p>If you need help with a related issue, you can open a new ticket or search the Datadog documentation.</p>
+
 <h2>Further reading</h2>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 
 <h2>Register on the portal</h2>
@@ -104,6 +109,8 @@ further_reading:
 </ol>
 
 <p><strong>Note</strong>: After registration, your login username is your email with <code>.ddgov.support</code> appended (for example, <code>john@agency.gov.ddgov.support</code>). Use this full username when logging in.</p>
+
+<p><strong>Note</strong>: To receive registration verification codes, password reset emails, and case notification emails, add the <code>ddog-gov.com</code> domain to your email allowlist. This includes <code>help@ddog-gov.com</code> and <code>support@ddog-gov.com</code>.</p>
 
 <h2>Create a new case</h2>
 
@@ -143,7 +150,7 @@ further_reading:
 
 <h3>Password reset not received</h3>
 
-<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix).</p>
+<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix). If you still do not receive the email, add <code>ddog-gov.com</code> to your email allowlist.</p>
 
 <h3>Registration error</h3>
 
