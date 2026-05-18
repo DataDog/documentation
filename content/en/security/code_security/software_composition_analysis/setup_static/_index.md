@@ -24,6 +24,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
+| Dart       | pub               | `pubspec.lock`                           |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -37,7 +38,6 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
 | Rust       | Cargo             | `cargo.lock`                             |
-| Dart       | pub               | `pubspec.lock`                           |
 | Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
