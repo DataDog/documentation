@@ -60,6 +60,55 @@
         },
         "color_by_groups": []
       }
+    },
+    {
+      "layout": {
+        "x": 48,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "Data Projection Scatterplot",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "scatterplot",
+        "requests": {
+          "table": {
+            "request_type": "data_projection",
+            "query": {
+              "query_string": "@service:web-store",
+              "data_source": "spans"
+            },
+            "projection": {
+              "type": "scatterplot",
+              "dimensions": [
+                {
+                  "column": "duration",
+                  "dimension": "x"
+                },
+                {
+                  "column": "@resource_name",
+                  "dimension": "y"
+                }
+              ]
+            },
+            "limit": 200
+          }
+        },
+        "xaxis": {
+          "scale": "linear",
+          "include_zero": true,
+          "min": "auto",
+          "max": "auto"
+        },
+        "yaxis": {
+          "scale": "linear",
+          "include_zero": true,
+          "min": "auto",
+          "max": "auto"
+        }
+      }
     }
   ],
   "template_variables": [],
