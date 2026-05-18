@@ -131,6 +131,9 @@ function showRegionSnippet(newSiteRegion) {
         }
     });
 
+    const rowsWithParams = new Set();
+    const rowsToHide = new Set();
+
     regionParams.forEach(param => {
         const { regionParam } = param.dataset;
 
@@ -144,16 +147,29 @@ function showRegionSnippet(newSiteRegion) {
             if (param.tagName === 'A'){
                 param.setAttribute("href", config[regionParam][newSiteRegion])
             } else {
-              param.innerHTML = config[regionParam][newSiteRegion];
+              const value = config[regionParam][newSiteRegion];
+              param.innerHTML = value;
               // checks if there are two `<code>` elements next to each other, and allows them to 'blend' together(no padding or border radius in between the two)
               if (param.previousElementSibling && param.previousElementSibling.tagName === 'CODE'){
                   param.previousElementSibling.style.paddingRight = '0';
                   param.previousElementSibling.style.borderTopRightRadius = '0';
                   param.previousElementSibling.style.borderBottomRightRadius = '0';
               }
+              // track table rows containing region params so unsupported rows can be hidden
+              const closestRow = param.closest('tr');
+              if (closestRow) {
+                  rowsWithParams.add(closestRow);
+                  if (String(value).includes('not supported')) {
+                      rowsToHide.add(closestRow);
+                  }
+              }
              }
         }
     });
+
+    // restore all param rows first, then hide any that are unsupported for this region
+    rowsWithParams.forEach(row => row.classList.remove('d-none'));
+    rowsToHide.forEach(row => row.classList.add('d-none'));
 
     if (externalLinks) {
         externalLinks.forEach(link => {
