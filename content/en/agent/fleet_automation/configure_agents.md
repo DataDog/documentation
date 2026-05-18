@@ -12,9 +12,19 @@ further_reading:
 
 Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files.
 
+## Prerequisites
+
+- [Remote Configuration][9] enabled for your organization
+- Agent version 7.73 or later
+- Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
+
+<div class="alert alert-info">
+Remote configuration of Agents in containerized workloads is not supported.
+</div>
+
 ## Configure multiple Agents
 
-1. In Fleet Automation, open the [Configure Agents][1] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
+1. In Fleet Automation, open the [Configuration][1] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
 
    {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Scope this configuration step in Fleet Automation's Configure Agents workflow, showing filters for environment, operating system, and hostname, a list of 33 Agents included in scope, and a Configuration Summary panel on the right." style="width:100%;" >}}
@@ -28,7 +38,7 @@ Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at 
 
 ## Edit the configuration of a single Agent
 
-1. Navigate to the [Fleet Automation][3] page and select {{< ui >}}View Agents{{< /ui >}}. 
+1. Navigate to [Fleet View][3]. 
 
 1. (Optional) Filter by host information or tags to narrow the list.
 
@@ -78,3 +88,4 @@ For instructions on using mirrored or air-gapped repositories, see:
 [6]: /agent/configuration/proxy/
 [7]: /containers/guide/sync_container_images/
 [8]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
+[9]: /agent/guide/setup_remote_config

@@ -17,7 +17,7 @@ Fleet Automation can centrally manage remote upgrades to the SDKs that power APM
 Scheduling SDK upgrades is not supported.
 </div>
 
-## Requirements
+## Prerequisites
 
 - Services must be instrumented with [Single Step Instrumentation (SSI)][1].
 - Services must be running on Linux or Windows VMs. Remotely upgrading SDKs in containerized or Kubernetes environments is not supported.

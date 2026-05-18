@@ -14,14 +14,20 @@ Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet
 
 ## Prerequisites
 
+- [Remote Configuration][7] enabled for your organization
+- Agent version 7.66 or later
 - Linux VMs or Windows VMs
-- At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.
+- At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
+
+<div class="alert alert-info">
+Remote upgrading of Agents in containerized workloads is not supported.
+</div>
 
 ## Upgrade Agents immediately
 
-1. From the [{{< ui >}}Upgrade Agents{{< /ui >}}][1] tab, click {{< ui >}}Upgrade Now{{< /ui >}}.
+1. From the [{{< ui >}}Upgrades{{< /ui >}}][1] tab, click {{< ui >}}Upgrade Now{{< /ui >}}.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrade Agents tab with the Upgrade Now button." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrades tab with the Upgrade Now button." style="width:100%;" >}}
 1. Select the Agents to upgrade. Filter by host information or tags to target a specific group.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Agent selection screen with filtering options to narrow the list of Agents to upgrade." style="width:100%;" >}}
@@ -35,7 +41,7 @@ Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet
 
 ## Schedule Agent upgrades
 
-1. From the [{{< ui >}}Upgrade Agents{{< /ui >}} tab][1], click {{< ui >}}+ Create Schedule{{< /ui >}}.
+1. From the [{{< ui >}}Upgrades{{< /ui >}} tab][1], click {{< ui >}}+ Create Schedule{{< /ui >}}.
 
 1. On the Upgrade Schedule page, add a {{< ui >}}Schedule name{{< /ui >}}.
 
@@ -57,7 +63,7 @@ Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet
 
 1. Click {{< ui >}}Create Schedule{{< /ui >}} to save the schedule. 
 
-1. See a list of your scheduled upgrades under the [{{< ui >}}Upgrade Agents{{< /ui >}} tab][1], in the {{< ui >}}Upgrade Schedules{{< /ui >}} section. 
+1. See a list of your scheduled upgrades under the [{{< ui >}}Upgrades{{< /ui >}} tab][1], in the {{< ui >}}Upgrade Schedules{{< /ui >}} section. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_schedule_list3.png" alt="See a list of upgrades scheduled for your Agents." style="width:100%;" >}}
 
@@ -114,3 +120,4 @@ After updating to 7.66 or later, future upgrades are handled automatically. If y
 [4]: https://github.com/DataDog/agent-linux-install-script?tab=readme-ov-file#install-script-configuration-options
 [5]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[7]: /agent/guide/setup_remote_config

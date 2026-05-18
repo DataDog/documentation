@@ -34,31 +34,14 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 ## Key capabilities
 
 With Fleet Automation, you can:
-- **[View Agent and OTel Collector configurations][6]** along with historical changes to confirm deployment updates and verify configuration consistency.
-- **[Configure Datadog Agents][8]** to centralize setup and gain visibility into your environments faster.
-- **[Keep your fleet up to date][7]** by identifying and upgrading outdated Agent and OTel Collector versions.
-- **[Send a support flare remotely][9]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
+- **[View Agent and OTel Collector configurations][3]** along with historical changes to confirm deployment updates and verify configuration consistency.
+- **[Configure Datadog Agents][4]** to centralize setup and gain visibility into your environments faster.
+- **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
+- **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 
-## Set up Fleet Automation
+## Fleet Automation API
 
-### Prerequisites
-
-- [Remote Configuration][1] enabled for your organization
-- Agent version 7.73 or later
-- Linux VMs installed using the install script or Ansible Datadog Role, or Windows VMs
-
-<div class="alert alert-info">
-Remote management of Agents in containerized workloads is not supported.
-</div>
-
-### Enable Agent and OTel Collector configuration views
-
-- The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent 7.47.0 or later. To enable it manually, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][2], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
-- To enable the upstream OTel Collector configuration view, set the [Datadog Extension][3] in your collector configuration file.
-- Agent integration configuration is enabled by default in Agent 7.49 or later. To enable it manually, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][2], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
-
-### Fleet Automation API
-Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][4]. 
+Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][1]. 
 
 <div class="alert alert-info">
 The Fleet Automation API does not support all Datadog Agent configuration capabilities.
@@ -75,18 +58,15 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 | `Agent Upgrade` | Restricts which users have access to upgrade Agents from Fleet Automation. |
 | `Agent Configuration Management` | Restricts which users have access to configure Agents from Fleet Automation. |
 
-For information on setting up roles and permissions, see [Access Control][5].
+For information on setting up roles and permissions, see [Access Control][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/setup_remote_config
-[2]: /agent/configuration/agent-configuration-files/
-[3]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
-[4]: /api/latest/fleet-automation/
-[5]: /account_management/rbac/
-[6]: /agent/fleet_automation/fleet_view/
-[7]: /agent/fleet_automation/upgrade_agents/
-[8]: /agent/fleet_automation/configure_agents/
-[9]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[1]: /api/latest/fleet-automation/
+[2]: /account_management/rbac/
+[3]: /agent/fleet_automation/fleet_view/
+[4]: /agent/fleet_automation/configure_agents/
+[5]: /agent/fleet_automation/upgrade_agents/
+[6]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site

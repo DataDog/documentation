@@ -26,12 +26,20 @@ For each OTel Collector, you can see:
 - The configuration YAML of the Collector
 - Pipeline visualization of the Collector
 
+## Prerequisites
+
+- Configuration view is enabled by default for Agents and OTel Collectors with version 7.47.0 and later. To enable it manually for older versions, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
+- To enable the upstream OTel Collector configuration view, set the [Datadog Extension][4] in your collector configuration file.
+- Agent integration configuration is enabled by default in Agent version 7.49.0 or later. To enable it manually on older versions, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
+
 ## Examine a Datadog Agent or OpenTelemetry Collector
+
 Select a Datadog Agent or OTel Collector to view its configuration, connected integrations, audit events, and a support tab for sending a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="The Agent detail panel showing configuration, connected integrations, and audit events." style="width:100%;" >}}
 
 ## Visualize an OTel Collector pipeline
+
 The {{< ui >}}Pipeline Visualization{{< /ui >}} toggle in the {{< ui >}}Configurations{{< /ui >}} tab of an OTel Collector provides a pipeline view of the Collector. Use Pipeline Visualization to:
 - Validate telemetry routing between configured OTel Collector components.
 - Spot unexpected data drops along the OTel Collector pipeline.
@@ -62,3 +70,5 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[3]: /agent/configuration/agent-configuration-files/
+[4]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
