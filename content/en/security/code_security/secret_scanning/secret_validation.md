@@ -15,4 +15,4 @@ For some secret types, Datadog uses static validation methods, such as computing
 
 ## List of supported validators
 
-{{< multifilter-search resource="supported_validators" >}}
+{{< multifilter-search resource="secret_validation" >}}
