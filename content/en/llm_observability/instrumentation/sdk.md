@@ -1966,7 +1966,19 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 ### Use case: Using a common model provider
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with the model name, model provider, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
-**Note**: When providing the cache breakdown, `input_tokens` should equal the sum of `non_cached_input_tokens`, `cache_read_input_tokens`, and `cache_write_input_tokens`. Datadog automatically applies the provider's cache read/write pricing rates to calculate the corresponding input costs.
+#### How token counts are calculated
+The following relationships apply to token usage fields:
+{{< img src="llm_observability/llm_token_hierarchy.png" alt="Token relationships in LLM Observability." style="width:100%;" >}}
+
+When all sub-components of a token field are provided, Datadog automatically calculates the parent token field, so it does not need to be sent separately.
+
+For example:
+- `input_tokens` can be inferred from `non_cached_input_tokens`, `cache_read_input_tokens`, and `cache_write_input_tokens`
+- `total_tokens` can be inferred from input_tokens and output_tokens
+
+Datadog recommends providing the full cache token breakdown whenever cache usage information is available. Datadog automatically applies provider-specific cache read and cache write pricing rates when calculating cached input costs.
+
+If only `input_tokens` is provided, Datadog treats all input tokens as non-cached input tokens. Providing only a partial cache breakdown may result in inaccurate token counts or cost discrepancies.
 
 {{< tabs >}}
 {{% tab "Python" %}}
