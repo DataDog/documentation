@@ -107,8 +107,6 @@ After enabling, the SDK automatically traces calls to [supported Java frameworks
 
 For languages other than Python, Node.js, or Java, use the [LLM Observability HTTP API][1] to send spans directly to Datadog without an SDK.
 
-See the [HTTP API reference][1] for endpoint details, request format, and span kind examples.
-
 If your application emits [OpenTelemetry GenAI semantic convention][2]-compliant spans, see [OpenTelemetry Instrumentation][2] instead.
 
 [1]: /llm_observability/instrumentation/api
@@ -128,7 +126,7 @@ If you don't see any traces:
 - **Check that your library is auto-instrumented**: Auto-instrumentation only captures calls to [supported frameworks and libraries][6]. Check the supported list for [Python][7], [Node.js][8], or [Java][9]. If your library is not listed, you need to add instrumentation manually.
 - **Add manual instrumentation**: Use the [LLM Observability SDK][5] to wrap your LLM calls with spans directly in code. This works for any library or model provider.
 - **Use the HTTP API**: The [LLM Observability HTTP API][10] accepts spans from any language or framework and does not require an SDK.
-- **Use OpenTelemetry**: If your framework emits [OpenTelemetry GenAI semantic convention][11]-compliant spans, see [OpenTelemetry Instrumentation][11] for setup details — no Datadog SDK required.
+- **Use OpenTelemetry**: If your framework emits [OpenTelemetry GenAI semantic convention][11]-compliant spans, see [OpenTelemetry Instrumentation][11] for setup details.
 
 
 ### Next steps
@@ -216,7 +214,7 @@ See below for a simple application that can be used to begin exploring the LLM O
 
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/evaluations
-[5]: /llm_observability/instrumentation/sdk
+[5]: /llm_observability/instrumentation/sdk#manual-instrumentation
 [6]: /llm_observability/instrumentation/auto_instrumentation
 [7]: /llm_observability/instrumentation/auto_instrumentation/?tab=python
 [8]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
