@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Placeholder from '@components/Placeholder/Placeholder.astro';
+
+const title = 'Placeholder';
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>Placeholder</h1>
+
+      <p>A light-purple box with a dark-purple outline and a centered label. Used to stand in for layout elements (header, footer, announcement banner) while their real implementations are under construction. Dark mode swaps the two purples.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>name</code></td><td><code>string</code></td><td>(required)</td><td>The label text rendered inside the placeholder</td></tr>
+          <tr><td><code>class</code></td><td><code>string</code></td><td>&mdash;</td><td>Optional extra class applied to the root element</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+
+      <h3>Named label</h3>
+      <Placeholder name="HEADER" class="placeholder-demo--short" />
+      <Placeholder name="ANNOUNCEMENT BANNER" class="placeholder-demo--short" />
+      <Placeholder name="FOOTER" class="placeholder-demo--tall" />
+
+      <p>The announcement banner, header, and footer all have real implementations now under <code>src/components/AnnouncementBanner/</code>, <code>src/components/Header/</code>, and <code>src/components/Footer/</code>.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+
+  .placeholder-demo--short {
+    height: 40px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .placeholder-demo--tall {
+    height: 120px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+</style>

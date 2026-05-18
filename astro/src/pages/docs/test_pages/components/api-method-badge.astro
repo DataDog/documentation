@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
+
+const title = 'ApiMethodBadge';
+
+const methods = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as const;
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>ApiMethodBadge</h1>
+
+      <p>A small label showing the HTTP method of an API endpoint. The badge color is determined by the method.</p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>method</code></td>
+            <td><code>'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options'</code></td>
+            <td>&mdash;</td>
+            <td>HTTP method displayed on the badge</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+      {methods.map((method) => (
+        <section>
+          <h3>{method.toUpperCase()}</h3>
+          <ApiMethodBadge method={method} />
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>
