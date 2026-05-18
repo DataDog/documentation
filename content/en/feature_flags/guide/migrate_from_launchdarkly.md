@@ -408,7 +408,7 @@ import DatadogCore
 
 class FallbackWrapper {
     private let ldClient: LDClient
-    private let ddClient: FlagsClient
+    private let ddClient: FlagsClientProtocol
 
     init(userId: String, evaluationContext: [String: String] = [:]) {
         let ldConfig = LDConfig(mobileKey: "YOUR_LD_MOBILE_KEY", autoEnvAttributes: .enabled)

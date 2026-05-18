@@ -45,7 +45,7 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials. `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
+Create a `DatadogProvider` instance with your Datadog credentials. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
 
 Note: Browser Feature Flags are currently not supported on GovCloud sites.
 
@@ -212,7 +212,7 @@ The web provider also supports these optional settings:
 | --- | --- | --- |
 | `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
-| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events. This is the setting that can affect RUM usage. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Available in `@datadog/openfeature-browser` v1.1.0 and later. This is the setting that can affect RUM usage. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
 | `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
