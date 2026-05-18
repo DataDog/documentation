@@ -471,9 +471,9 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
-## Code Exec
+## Code Execution
 
-A sandboxed TypeScript runtime that lets an AI agent write code with direct access to Datadog APIs, instead of issuing many sequential tool calls. A single code block can query logs, metrics, traces, services, and changes together, correlate the results inline, and return a structured summary. This reduces the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
 
 <div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
@@ -481,11 +481,11 @@ Code executed by this toolset runs against your Datadog APIs using your own user
 
 ### `execute_code`
 *Toolset: **code-exec***\
-*Permissions Required: `mcp_read` and `mcp_write`. At runtime, the sandbox also enforces your existing resource permissions (for example, `Logs Read`, `APM Read`, `Dashboards Write`) for each Datadog API call the code makes.*\
-Executes agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent.
+*Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
+Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
-- Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and surface anything that moved at the same time.
+- Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ## Dashboards
