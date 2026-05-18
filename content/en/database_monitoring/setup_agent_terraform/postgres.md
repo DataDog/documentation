@@ -370,7 +370,7 @@ terraform apply
 - An Agent host security group
 - An ingress rule on the database security group for port 5432 from the Agent host SG
 - An IAM role with `AmazonSSMManagedInstanceCore` attached
-- An EC2 instance profile.
+- An EC2 instance profile
 
 ### Required inputs
 
