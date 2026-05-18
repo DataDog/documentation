@@ -1,9 +1,10 @@
 ---
 title: Troubleshooting Single Step APM
+description: "Diagnose and fix Single Step Instrumentation (SSI) issues on Kubernetes, Linux, Docker, and Windows. Covers missing traces, silent failure modes, injection verification, Fleet Automation diagnostics, and language-specific troubleshooting."
 aliases:
 - /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
 further_reading:
-- link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+- link: /tracing/trace_collection/single-step-apm/
   tag: Documentation
   text: Single Step APM Instrumentation
 - link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
@@ -14,6 +15,88 @@ further_reading:
 ## Overview
 
 Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+
+## Triage: no traces after enabling SSI?
+
+If you enabled SSI but don't see traces, work through these checks in order:
+
+### All platforms
+
+1. **Did you restart your application after enabling SSI?** SSI injects at startup. Existing processes and pods are not instrumented until restarted.
+
+2. **Does your application have existing tracer dependencies?** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, an OpenTelemetry SDK, or `-javaagent` in your application. Check your dependency manifests and startup scripts:
+   ```shell
+   grep -rn "ddtrace\|dd-trace\|opentelemetry\|dd-java-agent\|javaagent" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
+   ```
+   For Java, also check Dockerfiles and startup scripts for `-javaagent` flags, and check the `JAVA_TOOL_OPTIONS` environment variable. Remove any matches and rebuild your application before proceeding.
+
+3. **Is the runtime version supported?** Check the [SSI compatibility guide][13].
+
+4. **For Node.js: is your application using ECMAScript Modules (ESM)?** SSI does not support ESM. If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][14] instead.
+
+### Kubernetes
+
+5. **Is your application in the same namespace as the Datadog Agent?** SSI does not instrument pods in the Agent namespace.
+
+6. **Is a namespace or pod selector filtering your application out?** Check your SSI configuration for `enabledNamespaces`, `disabledNamespaces`, or `podSelector` targets that may not match your application's namespace or labels. Also check for the `admission.datadoghq.com/enabled: "false"` label on the pod, which tells the Admission Controller to skip it.
+
+### Linux hosts
+
+7. **Is `/etc/ld.so.preload` configured?** SSI on Linux uses `/etc/ld.so.preload` to load the injector. If this file is missing or does not contain the Datadog launcher path, SSI is not active. Check:
+   ```shell
+   cat /etc/ld.so.preload
+   ```
+   The output should contain `/opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so`.
+
+8. **Is the application using musl libc or a static binary?** The SSI injector on Linux requires glibc. Applications on Alpine or other musl-based distributions, and statically linked binaries (common with Go), cannot be instrumented with SSI.
+
+9. **Is SELinux or AppArmor blocking the injector?** Security policies can prevent `/etc/ld.so.preload` from being read. Check `getenforce` (SELinux) or `dmesg | grep apparmor` (AppArmor) for denials.
+
+If none of these apply, continue with the detailed troubleshooting methods below.
+
+{{< agent-only >}}
+All platforms — start with pup if available:
+- `pup traces search --query "service:<SERVICE_NAME>" --from 1h --limit 5`
+- `pup apm services list --env <ENV>`
+- `pup apm troubleshooting list --hostname <HOSTNAME> --timeframe 1h`
+
+Kubernetes diagnostics:
+
+Resolve the node hostname first:
+- `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.nodeName}'` → use as NODE_HOSTNAME below
+
+Triage (run simultaneously):
+- `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'`
+- `kubectl describe pod <POD_NAME> -n <APP_NAMESPACE> | grep -A 10 "Events:"`
+- `kubectl get datadogagent datadog -n <AGENT_NAMESPACE> -o yaml | grep -A 15 instrumentation`
+- `pup fleet instrumented-pods list <CLUSTER_NAME>`
+
+Kubernetes diagnosis by signal:
+| Signal | Likely cause | Next step |
+|--------|-------------|-----------|
+| No init container on pod | Injection never happened | Check namespace targeting, pod-selector, opt-out label, webhook registration, pod not restarted |
+| Init container present, no traces | Injection attempted but tracer not reporting | Check for existing ddtrace/OTel dependencies, runtime version, Agent connectivity |
+| Pod events show CrashLoopBackOff | Init container failure | Check existing instrumentation conflicts, runtime version |
+| Traces arriving but wrong service/env | UST misconfiguration | Check Unified Service Tag labels on the Deployment |
+
+Linux host diagnostics:
+- Check injector is armed: `cat /etc/ld.so.preload` (should contain launcher path)
+- Check tracer loaded in process: `grep datadog /proc/<PID>/maps`
+- Check process started after SSI: compare `ps -o lstart -p <PID>` against `/etc/ld.so.preload` modification time
+- Check libc type: `ldd --version` (musl = incompatible)
+- Check binary type: `file /proc/<PID>/exe` (statically linked = incompatible)
+- Check Agent APM receiver: `datadog-agent status | grep -A 5 "APM Agent"`
+- Check security: `getenforce` (SELinux), `dmesg | grep apparmor` (AppArmor)
+
+Key silent failure modes (SSI produces no error for these):
+- Existing ddtrace or OpenTelemetry instrumentation: SSI silently disables itself
+- Unsupported runtime version: silently skipped
+- Kubernetes: `admission.datadoghq.com/enabled: "false"` label on pod: webhook skips the pod
+- Application not restarted after SSI enabled: injection happens at startup only
+- Kubernetes: pod in the Datadog Agent namespace: SSI skips its own namespace
+- Linux: musl libc or static binary: injector requires glibc
+- Linux: SELinux/AppArmor blocking `/etc/ld.so.preload` reads
+{{< /agent-only >}}
 
 ## Troubleshooting methods
 
@@ -375,10 +458,10 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes?tab=agentv764recommended#remove-apm-for-all-services-on-the-infrastructure
-[2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/docker#remove-apm-for-all-services-on-the-infrastructure
-[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/linux#remove-single-step-apm-instrumentation-from-your-agent
-[4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/windows#remove-single-step-apm-instrumentation-from-your-agent
+[1]: /tracing/trace_collection/single-step-apm/kubernetes?tab=agentv764recommended#remove-apm-for-all-services-on-the-infrastructure
+[2]: /tracing/trace_collection/single-step-apm/docker#remove-apm-for-all-services-on-the-infrastructure
+[3]: /tracing/trace_collection/single-step-apm/linux#remove-single-step-apm-instrumentation-from-your-agent
+[4]: /tracing/trace_collection/single-step-apm/windows#remove-single-step-apm-instrumentation-from-your-agent
 [5]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [6]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
 [7]: https://datatracker.ietf.org/doc/html/rfc1035
@@ -386,4 +469,6 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [9]: https://app.datadoghq.com/fleet
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 [11]: /tracing/guide/injectors/
-[12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[12]: /tracing/trace_collection/single-step-apm/#instrument-sdks-across-applications
+[13]: /tracing/trace_collection/single-step-apm/compatibility/
+[14]: /tracing/trace_collection/dd_libraries/nodejs/

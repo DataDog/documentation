@@ -1,5 +1,6 @@
 ---
 title: Single Step APM Instrumentation
+description: "Automatically instrument applications with Datadog APM using Single Step Instrumentation (SSI). Install the Datadog Agent and enable tracing with no code changes on Kubernetes, Linux, Docker, or Windows."
 aliases:
 - /tracing/trace_collection/admission_controller/
 - /tracing/trace_collection/library_injection_local/
@@ -11,7 +12,7 @@ further_reading:
   - link: /tracing/guide/injectors
     tag: Documentation
     text: Understanding injector behavior with Single Step Instrumentation
-  - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
+  - link: /tracing/trace_collection/single-step-apm/troubleshooting/
     tag: Documentation
     text: "Troubleshooting Single Step APM"
   - link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
@@ -65,16 +66,16 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [3]: /tracing/software_catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
-[6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
+[6]: /tracing/trace_collection/single-step-apm/compatibility
 [7]: /tracing/trace_collection/custom_instrumentation/
 [8]: /tracing/guide/injectors
-[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
+[9]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
 [10]: /tracing/trace_collection/library_config/
 [11]: /tracing/metrics/runtime_metrics/
 [12]: /tracing/software_catalog/
 [13]: /tracing/glossary/#instrumentation
 [14]: /getting_started/tagging/unified_service_tagging
-[15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[15]: /tracing/trace_collection/single-step-apm/troubleshooting
 [16]: /tracing/trace_collection/custom_instrumentation/
 [17]: /tracing/trace_collection/library_config/application_monitoring_yaml/
-[18]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+[18]: /tracing/trace_collection/single-step-apm/compatibility/
