@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-AI Impact is in Preview.
+AI Impact is available to all Datadog customers in Preview.
 {{< /callout >}}
 
 ## Overview
