@@ -16,7 +16,7 @@ further_reading:
     text: "Organize coverage data with flags"
 ---
 
-<div class="alert alert-warning">Carryforward is in <strong>beta</strong> and subject to change.</div>
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
 
 ## Overview
 
@@ -26,16 +26,16 @@ Carryforward solves this problem. When a coverage report is missing for a commit
 
 Carryforward works at the [flag][1] level. For each flag that has no uploaded report on the target commit, Datadog looks back through the commit's ancestors and reuses the latest report tagged with that flag.
 
-{{< img src="code_coverage/carryforward_overview.png" alt="Diagram showing commit A with two uploaded reports, and commit B with one uploaded report and one carried forward from commit A" style="width:80%" >}}
+{{< img src="code_coverage/carryforward_overview.png" alt="Diagram showing commit A with two uploaded reports, and commit B with one uploaded report and one carried forward from commit A." style="width:80%" >}}
 
 ## Prerequisites
 
-Carryforward builds on top of [Code Coverage flags][1]. Before you enable carryforward:
+Carryforward builds on top of [Code Coverage flags][1]. Do the following before you enable carryforward:
 
 - Tag every coverage report with one or more flags using the `--flags` option on `datadog-ci coverage upload`. See [Add flags to coverage reports][2].
 - Use a stable set of flags across CI runs. The same flags should be produced whenever the corresponding tests or tested code change. If your CI distributes tests randomly across workers or generates a different set of reports on each run, carryforward results are not meaningful.
 
-For the consistency requirement, an example of a good setup is one CI job per coverage report (for example, a job for unit tests, a job for backend integration tests, and a job for UI tests), with each job tagging its report with a stable flag.
+For the consistency requirement, assign one CI job per coverage report. For example, use separate jobs for unit tests, backend integration tests, and UI tests, with each job tagging its report with a stable flag.
 
 ## Enable carryforward
 
@@ -79,20 +79,20 @@ In this example, carryforward applies to every flag except `nightly-tests`.
 
 ## How carryforward works
 
-When a new commit is pushed to a repository where carryforward is enabled, Datadog:
+When a new commit is pushed to a repository where carryforward is enabled, Datadog follows these steps:
 
 1. Looks back through the commit's ancestors.
 2. For every flag with carryforward enabled, finds the most recent report tagged with that flag.
 3. Reuses the coverage data from those ancestor reports for the new commit, until a fresh report for the flag is uploaded.
 
-Carried-forward data is automatically replaced as soon as a real report is uploaded for the same flag on the new commit. The merged total coverage on the commit always reflects:
+Carried-forward data is automatically replaced as soon as a real report is uploaded for the same flag on the new commit. The merged total coverage on the commit always reflects a combination of the following:
 
-- Fresh reports uploaded for the commit, plus
-- Carried-forward reports for flags where no fresh report was uploaded.
+- Fresh reports uploaded for the commit
+- Carried-forward reports for flags where no fresh report was uploaded
 
 ## Use with PR Gates
 
-<div class="alert alert-info">While carryforward is in beta, Datadog recommends starting with a non-blocking <a href="/code_coverage/configuration#pr-gates">PR Gate</a> to observe how carryforward affects evaluation before enforcing it as a merge requirement.</div>
+While carryforward is in Preview, Datadog recommends starting with a non-blocking [PR Gate][3] to observe how carryforward affects evaluation before enforcing it as a merge requirement.
 
 ## Further reading
 
@@ -100,3 +100,4 @@ Carried-forward data is automatically replaced as soon as a real report is uploa
 
 [1]: /code_coverage/flags
 [2]: /code_coverage/flags#add-flags-to-coverage-reports
+[3]: /code_coverage/configuration#pr-gates

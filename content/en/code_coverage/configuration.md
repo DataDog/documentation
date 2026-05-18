@@ -293,7 +293,7 @@ gates:
 
 ## Carryforward
 
-<div class="alert alert-warning">Carryforward is in <strong>beta</strong> and subject to change.</div>
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
 
 You can enable [carryforward][4] in the configuration file to reuse coverage data from ancestor commits when not every CI job runs for a commit. Carryforward operates on [flags][3], so every report involved must be tagged with `--flags`.
 
@@ -322,7 +322,7 @@ The top-level `carryforward` field accepts the following values:
 
 The `flags` map accepts a per-flag configuration block. The supported fields are:
 
-- `carryforward`: A boolean that enables or disables carryforward for the named flag. Overrides the top-level `carryforward` value.
+- `carryforward`: A Boolean that enables or disables carryforward for the named flag. Overrides the top-level `carryforward` value.
 
 For complete details, see [Code Coverage Carryforward][4].
 
