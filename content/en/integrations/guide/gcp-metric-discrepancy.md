@@ -77,7 +77,9 @@ Datadog ingests the most granular raw values from Google Cloud. All aggregation 
 
 Google Cloud emits metrics with one-minute granularity, and Datadog pulls them through the Google Cloud Monitoring API. Expect a steady-state delay of approximately 7-8 minutes between when Google Cloud records a metric and when it appears in Datadog. See [Cloud Metric Delay][7] for the full breakdown across cloud providers.
 
-When troubleshooting a metric that appears delayed but not missing, wait at least 10-15 minutes before assuming it is missing. For initial integration setup, the first metrics appear in Datadog approximately 15 minutes after the integration is configured.
+Some metrics have longer delays due to slow sample rates or high latency within Google Cloud. Check the [Google Cloud metric catalog][2] for per-metric timing information. Datadog cannot reduce delays that originate from Google Cloud.
+
+When troubleshooting a metric that appears delayed but not missing, wait at least 10-15 minutes before assuming it is missing. For initial integration setup, the first metrics appear in Datadog approximately 2 minutes after the integration is configured.
 
 ## Further reading
 
