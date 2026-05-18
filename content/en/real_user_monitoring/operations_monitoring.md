@@ -337,7 +337,7 @@ Those metrics are included in the price of RUM Measure and available to all RUM 
 
 ## Investigate root causes with AI
 
-For Browser RUM applications, you can run an agentic investigation on a single operation directly from the Operations page. The agent analyzes both the success rate and the latency of the operation and surfaces focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions. For more information, see [Operation AI Investigation][8].
+You can run an agentic investigation on a single operation directly from the Operations page. The agent analyzes both the success rate and the latency of the operation and surfaces focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions. For more information, see [Operation AI Investigation][8].
 
 ## Configure retention filters
 

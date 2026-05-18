@@ -24,14 +24,17 @@ Operation AI Investigation runs an agentic root-cause analysis on a single opera
 ## Prerequisites
 
 - [RUM without Limits][2] must be enabled in your organization.
-- Operation AI Investigation is available for Browser RUM applications only. Mobile applications are not supported in the current preview.
 
 ## Launch an investigation
 
 1. Open the Operations page for your application from [Operations Monitoring][1].
 2. Select an operation.
-3. The Operation summary surfaces a list of investigation cards — one per failure mode and one for latency regression. Each card is ranked by severity.
-4. Click **Investigate** on a card to drill into a detailed analysis.
+3. The Operations page surfaces two elements:
+   - A **summary** at the top with a plain-language overview of the operation's health across success rate and latency.
+   - A ranked list of **recommendation cards** — one per failure mode (errors, timeouts, abandonment) and one for latency regression, ordered by severity.
+4. Click **Investigate** on a card to open a detailed analysis.
+
+<!-- TODO: Screenshot — Operations page showing the summary and ranked recommendation cards. -->
 
 ## What the agent investigates
 
@@ -59,6 +62,8 @@ When you launch an investigation, a side panel streams the analysis as it runs. 
 - **A verdict** with the investigation mode (Errors, Timeouts, Abandoned, or Performance regression), the inferred root-cause category, and a confidence level.
 - **A plain-language summary** of what the agent found.
 - **Ranked findings** with frontend and backend error details, code locations, and the correlated endpoints.
+
+<!-- TODO: Screenshot — Operation AI Investigation side panel with verdict, summary, and ranked findings. -->
 
 ## Take action
 

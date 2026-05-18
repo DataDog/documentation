@@ -34,8 +34,12 @@ The investigation runs at the (view × vital) granularity and is available for t
 
 1. Open the [Optimization page][2] for your application.
 2. Select a view and one of the supported vitals.
-3. The Optimization page surfaces a ranked list of issue cards detected for that (view × vital) pair. Each card represents a candidate root cause.
+3. The Optimization page surfaces two elements for the selected (view × vital) pair:
+   - A **summary** at the top with an at-a-glance overview of the issues detected.
+   - A ranked list of **recommendation cards** below the summary. Each card represents a candidate root cause, ordered by impact.
 4. Click **Investigate** on a card to launch the agent on that issue.
+
+<!-- TODO: Screenshot — Optimization page showing the summary and ranked recommendation cards for a (view × vital) pair. -->
 
 ## Data analyzed
 
@@ -57,6 +61,8 @@ When you click **Investigate** on an issue card, a side panel opens and the agen
 - **A step-by-step timeline** describing how the metric is built from your application code: which resources load, when scripts execute, and where time is spent during the vital window.
 - **A root-cause explanation** with the supporting evidence the agent considered.
 - **A code-level finding** when the agent can attribute the issue to a specific file or function.
+
+<!-- TODO: Screenshot — Multi-View AI Investigation side panel with timeline, root-cause explanation, and code-level finding. -->
 
 ## Take action
 
