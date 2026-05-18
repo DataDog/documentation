@@ -112,7 +112,7 @@ The agent executes with its configured tools and instructions, then returns its 
 
 ## Troubleshooting
 
-**Agent not using a tool**: Verify the tool has been added to the agent's configuration. The agent can only use tools that are explicitly added.
+**Agent not using a tool**: Verify the tool has been added to the agent's configuration. Agents can use only tools that are explicitly added.
 
 **Automation not running**: Make sure the automation is published and the Run Agent step is fully configured.
 
