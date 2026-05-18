@@ -22,7 +22,7 @@ A workflow execution refers to one full run of a published workflow, regardless 
 - API or programmatic triggers
 - Event-based triggers (monitors, incidents, etc.)
 - Workflows triggered from other workflows
-    - **Note**: When a workflow triggers another workflow, billing is determined by the original (root) trigger of the chain. If the root trigger is a billed source (e.g., a monitor or API call), every workflow in the chain is billed. If the root trigger is a free source (e.g., Incident Management, On-Call, or App Builder), the entire chain is free, regardless of depth.
+    - **Note**: When a workflow triggers another workflow, billing is determined by the original (root) trigger of the chain. If the root trigger is a billed source (such as a monitor or API call), every workflow in the chain is billed. If the root trigger is a free source (for example, Incident Management, On-Call, or App Builder), the entire chain is free, regardless of depth.
 
 Unpublished (test or draft) runs are **not billed**.
 
