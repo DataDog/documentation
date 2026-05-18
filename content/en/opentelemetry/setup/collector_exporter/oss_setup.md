@@ -768,12 +768,12 @@ The `dd-otel-metric-config` header is a JSON payload sent with metrics requests 
 | `resource_attributes_as_tags` | Boolean | `false` | Propagates OTLP resource attributes as Datadog tags on emitted metrics. |
 | `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
 | `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
-| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | Routes standard HTTP instrumentation metrics to the TraceMetrics destination to power APM features. See [Use instrumentation metrics for APM](#use-instrumentation-metrics-for-apm). |
-| `raw_instrumentation_metrics_drop` | Boolean | `false` | Drops the raw HTTP instrumentation metrics from the regular Metrics destination. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
+| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes standard HTTP instrumentation metrics to power APM trace metrics. See [Use HTTP instrumentation metrics for APM](#use-http-instrumentation-metrics-for-apm). |
+| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular Metrics destination after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
 
-### Use instrumentation metrics for APM
+#### Use HTTP instrumentation metrics for APM
 
-By default, the [span metrics connector](#span-metrics-connector) generates the RED metrics that power APM features. As an alternative, you can configure the Datadog intake to derive trace metrics from standard HTTP instrumentation metrics that your OpenTelemetry SDK already produces.
+The recommended configuration uses the `spanmetrics` connector to generate the RED metrics that power APM views. If your application already emits standard HTTP instrumentation metrics, you can use those metrics instead. Use this option only as an **alternative** to the `spanmetrics` connector, not alongside it.
 
 To enable this, set `trace_metrics.instrumentation_metrics_calc` to `true` in the `dd-otel-metric-config` header:
 
@@ -787,13 +787,13 @@ To enable this, set `trace_metrics.instrumentation_metrics_calc` to `true` in th
 }
 ```
 
-When enabled, the following HTTP instrumentation metrics are routed to the TraceMetrics destination:
+When enabled, the following HTTP instrumentation metrics are routed to power APM features:
 - `http.server.request.duration`
 - `http.client.request.duration`
 - `http.server.request.calls`
 - `http.client.request.calls`
 
-By default, these metrics are also sent to the regular Metrics destination. To send them only to TraceMetrics, set `raw_instrumentation_metrics_drop` to `true`.
+By default, these metrics are also sent to the regular Metrics destination. To send them only for APM trace metrics, set `raw_instrumentation_metrics_drop` to `true`.
 
 To customize the namespace prefix applied to the trace-derived metrics, set `trace_metrics.namespace`. The default is `traces.span.metrics`.
 
