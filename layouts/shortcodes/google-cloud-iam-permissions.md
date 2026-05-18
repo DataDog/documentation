@@ -4,8 +4,8 @@ The Datadog Google Cloud integration uses a Google Cloud service account to coll
 |------|-------------------------|-------|---------|
 | [Compute Viewer][1] (`roles/compute.viewer`) | Required | Organization, folder, or project | Read access to get and list Compute Engine resources. |
 | [Monitoring Viewer][2] (`roles/monitoring.viewer`) | Required | Organization, folder, or project | Read access to monitoring data for metric collection. |
-| [Cloud Asset Viewer][3] (`roles/cloudasset.viewer`) | Required | Organization, folder, or project | Read access to cloud asset metadata. |
-| [Browser][4] (`roles/browser`) | Required on the default project of the service account only | Default project of the service account | Read access to browse the project hierarchy. Other projects in the scope do not need this role. |
+| [Cloud Asset Viewer][3] (`roles/cloudasset.viewer`) | Required | Organization, folder, or project | Read access to cloud resource data. |
+| [Browser][4] (`roles/browser`) | Required on the default project of the service account only | Organization, folder, or project | Read access to browse the GCP account hierarchy to discover which parts of the hierarchy to monitor. |
 | Service Account Token Creator (`roles/iam.serviceAccountTokenCreator`) | Required | Granted to the Datadog principal, on the service account | Allow Datadog to impersonate the service account. |
 | [Service Usage Consumer][5] (`roles/serviceusage.serviceUsageConsumer`) | Conditional | Folder or organization | Required when [per-project cost and API quota attribution][6] is enabled. |
 
