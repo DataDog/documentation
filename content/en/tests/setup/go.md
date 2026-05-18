@@ -79,7 +79,7 @@ $ go install github.com/DataDog/orchestrion@latest
     >
     >     import _ "github.com/DataDog/orchestrion"
     >     ```
-    > 2. Run `go get github.com/DataDog/orchstrion@<current-release>` to make sure the project version corresponds to the
+    > 2. Run `go get github.com/DataDog/orchestrion@<current-release>` to make sure the project version corresponds to the
     >    one currently being used
     > 3. Run `go mod tidy` to make sure your `go.mod` and `go.sum` files are up-to-date
     >
