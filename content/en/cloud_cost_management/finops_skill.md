@@ -71,7 +71,7 @@ Example prompts for cost changes:
 - `Which teams are responsible for the highest S3 storage costs this month?`
 - `Create a handoff notebook for the team that owns this cost spike.`
 
-Example prompts for budgets and spendings:
+Example prompts for budgets and spending:
 
 - `Why is the infrastructure budget projected to go over this month?`
 - `Show actual and forecasted spend for the payments team budget.`

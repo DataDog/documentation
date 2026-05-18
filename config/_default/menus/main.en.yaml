@@ -3863,7 +3863,7 @@ menu:
       url: cloud_cost_management/setup/
       parent: cloud_cost
       identifier: cloud_cost_setup
-      weight: 3
+      weight: 2
     - name: Permissions
       url: cloud_cost_management/setup/permissions
       parent: cloud_cost_setup
@@ -3953,7 +3953,7 @@ menu:
       url: cloud_cost_management/tags
       parent: cloud_cost
       identifier: cloud_cost_tags
-      weight: 4
+      weight: 3
     - name: Tag Explorer
       url: cloud_cost_management/tags/tag_explorer
       parent: cloud_cost_tags
@@ -3968,7 +3968,7 @@ menu:
       url: cloud_cost_management/allocation
       parent: cloud_cost
       identifier: cloud_cost_cost_allocation
-      weight: 5
+      weight: 4
     - name: Tag Pipelines
       url: cloud_cost_management/allocation/tag_pipelines
       parent: cloud_cost_cost_allocation
