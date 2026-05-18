@@ -104,7 +104,7 @@ The **Run Agent** step also supports the following optional fields:
 
   {{< img src="/actions/agents/output-schema-example.png" alt="A workflow using output schema to branch on agent response fields" style="width:100%;" >}}
 
-- **Conversation ID**: By default, each Run Agent invocation is a standalone, single-turn execution. To continue a prior conversation, pass a Conversation ID from a previous run. This lets the agent retain context across multiple workflow runs. Multi-turn sessions are subject to the same context window limits as the chat UI.
+- **Conversation ID**: By default, each Run Agent invocation is a standalone, single-turn execution. Passing a Conversation ID lets the agent retain context across multiple workflow runs. Multi-turn sessions are subject to the same context window limits as the chat UI.
 
 The agent executes with its configured tools and instructions, then returns its output to the workflow. You can combine rule-based automation with AI reasoning in a single workflow.
 
