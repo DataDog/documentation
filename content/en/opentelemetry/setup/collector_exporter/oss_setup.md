@@ -768,12 +768,12 @@ The `dd-otel-metric-config` header is a JSON payload sent with metrics requests 
 | `resource_attributes_as_tags` | Boolean | `false` | Propagates OTLP resource attributes as Datadog tags on emitted metrics. |
 | `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
 | `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
-| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes standard HTTP instrumentation metrics to power APM trace metrics. See [Use HTTP instrumentation metrics for APM](#use-http-instrumentation-metrics-for-apm). |
+| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes supported HTTP instrumentation metrics to power APM trace metrics. See [Use HTTP instrumentation metrics for APM](#use-http-instrumentation-metrics-for-apm). |
 | `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular Metrics destination after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
 
 #### Use HTTP instrumentation metrics for APM
 
-The recommended configuration uses the `spanmetrics` connector to generate the RED metrics that power APM views. If your application already emits standard HTTP instrumentation metrics, you can use those metrics instead. Use this option only as an **alternative** to the `spanmetrics` connector, not alongside it.
+The recommended configuration uses the `spanmetrics` connector to generate the RED metrics that power APM views. If your application already emits the following HTTP instrumentation metrics, you can use those metrics instead. Use this option only as an **alternative** to the `spanmetrics` connector, not alongside it.
 
 To enable this, set `trace_metrics.instrumentation_metrics_calc` to `true` in the `dd-otel-metric-config` header:
 
