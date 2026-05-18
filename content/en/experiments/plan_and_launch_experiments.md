@@ -35,7 +35,7 @@ Give your experiment a name and hypothesis, then define the settings.
 To create a draft experiment:
 
 1. Navigate to **[Experiments > Experiment List][1]** in Datadog Product Analytics.
-1. Click **Create Experiment** to open the dialog, then enter your **Experiment name** and **Hypothesis**.
+1. Click {{< ui >}}Create Experiment{{< /ui >}} to open the dialog, then enter your **Experiment name** and **Hypothesis**.
 1. Click **Create Draft Experiment** to open the experiment's setup page and continue to [Set up your experiment](#set-up-your-experiment).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_create_experiment.png" alt="The Create new draft experiment dialog with an experiment name of New Product Photos Experiment, a hypothesis about higher-resolution product photos increasing add-to-cart conversions, and a Create Draft Experiment button highlighted." style="width:80%;" >}}
@@ -78,7 +78,7 @@ To run the calculation:
 
 1. In the **Run a sample size calculation (optional)** section, click the **sample size calculator** link to open the side panel.
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
-1. Use the **Entry point** dropdown to select the event that assigns users to the experiment, such as viewing a checkout page or clicking an add-to-cart button. Datadog uses this event to estimate traffic volume.
+1. Use the {{< ui >}}Entry point{{< /ui >}} dropdown to select the event that assigns users to the experiment, such as viewing a checkout page or clicking an add-to-cart button. Datadog uses this event to estimate traffic volume.
 1. (Optional) Under **Filter entry point**, narrow the entry point's audience:
    1. Click **+ Filter** and select a property from the picker. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
    1. In the filter row that appears, modify the operator as needed and select a value from the dropdown.
@@ -86,7 +86,7 @@ To run the calculation:
 1. Set the **Number of variants** and **Traffic exposure**.
 1. Expand **Additional inputs**, then choose the statistical **Power** and enter a **Target experiment duration** in weeks.
    - The **Target experiment duration** value must be 1 or an even number because the calculator estimates MDE values and expected user counts at 1-, 2-, 4-, 6-, and 8-week intervals.
-1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
+1. Click {{< ui >}}Run Calculation{{< /ui >}} to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
 1. Close the side panel and continue to [Add a feature flag](#add-a-feature-flag).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a secondary metric (guardrail), an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}

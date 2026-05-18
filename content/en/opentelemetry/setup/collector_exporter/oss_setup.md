@@ -22,15 +22,15 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
 - **Resource detection processor**: Extracts host and cloud metadata for hostname resolution and tagging in Datadog.
 
-<!-- TODO: Replace with updated diagram showing OTLP HTTP exporter flow (no Datadog Exporter) -->
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
-<div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized.</div>
+<div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized and the Kubernetes Explorer related views may be empty.</div>
 
 <div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OSS Collector</b>.</div>
 
 ## Prerequisites
 
-- [OpenTelemetry Collector Contrib][1] v0.150.1 or later
+- [OpenTelemetry Collector Contrib][1] v0.152.0 or later
 - A [Datadog API key][2]
 - Your [Datadog site][3] (for example, `datadoghq.com` or `datadoghq.eu`)
 
@@ -99,28 +99,6 @@ processors:
     detectors: [env, system]
     timeout: 2s
     override: true
-    system:
-      resource_attributes:
-        host.arch:
-          enabled: true
-        host.cpu.cache.l2.size:
-          enabled: true
-        host.cpu.family:
-          enabled: true
-        host.cpu.model.id:
-          enabled: true
-        host.cpu.model.name:
-          enabled: true
-        host.cpu.stepping:
-          enabled: true
-        host.cpu.vendor.id:
-          enabled: true
-        host.ip:
-          enabled: true
-        host.mac:
-          enabled: true
-        os.description:
-          enabled: true
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
 
@@ -135,40 +113,21 @@ connectors:
       exponential: {}
       unit: s
     dimensions:
-      ## Universal Service Monitoring
+      ## Unified Service Tagging
       - name: deployment.environment.name
       - name: service.version
       - name: http.response.status_code
       ## Container tags
       - name: container.id
-      - name: container.name
-      - name: container.image.name
-      - name: container.image.tag
-      - name: container.runtime
-      - name: cloud.provider
-      - name: cloud.region
-      - name: cloud.availability_zone
-      - name: aws.ecs.task.family
-      - name: aws.ecs.task.arn
-      - name: aws.ecs.cluster.arn
-      - name: aws.ecs.task.revision
-      - name: aws.ecs.container.arn
-      - name: k8s.container.name
-      - name: k8s.cluster.name
-      - name: k8s.deployment.name
-      - name: k8s.replicaset.name
-      - name: k8s.statefulset.name
-      - name: k8s.daemonset.name
-      - name: k8s.job.name
-      - name: k8s.cronjob.name
-      - name: k8s.namespace.name
-      - name: k8s.pod.name
       ## Host name inference
       - name: aws.ecs.launchtype
+      - name: aws.ecs.task.arn
+      - name: cloud.provider
       - name: cloud.account.id
       - name: host.id
       - name: host.name
       - name: k8s.node.name
+      - name: k8s.cluster.name
       - name: azure.resourcegroup.name
       ## Peer service inference
       - name: aws.s3.bucket
@@ -264,6 +223,8 @@ For cloud-specific environments, add the appropriate resource detection detector
 - **Google Cloud**: `detectors: [gcp, env, system]`
 - **Azure**: `detectors: [azure, env, system]`
 
+See the [full configuration files][5] for an optional config to gather additional metadata about the system.
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -336,40 +297,21 @@ connectors:
       exponential: {}
       unit: s
     dimensions:
-      ## Universal Service Monitoring
+      ## Unified Service Tagging
       - name: deployment.environment.name
       - name: service.version
       - name: http.response.status_code
       ## Container tags
       - name: container.id
-      - name: container.name
-      - name: container.image.name
-      - name: container.image.tag
-      - name: container.runtime
-      - name: cloud.provider
-      - name: cloud.region
-      - name: cloud.availability_zone
-      - name: aws.ecs.task.family
-      - name: aws.ecs.task.arn
-      - name: aws.ecs.cluster.arn
-      - name: aws.ecs.task.revision
-      - name: aws.ecs.container.arn
-      - name: k8s.container.name
-      - name: k8s.cluster.name
-      - name: k8s.deployment.name
-      - name: k8s.replicaset.name
-      - name: k8s.statefulset.name
-      - name: k8s.daemonset.name
-      - name: k8s.job.name
-      - name: k8s.cronjob.name
-      - name: k8s.namespace.name
-      - name: k8s.pod.name
       ## Host name inference
       - name: aws.ecs.launchtype
+      - name: aws.ecs.task.arn
+      - name: cloud.provider
       - name: cloud.account.id
       - name: host.id
       - name: host.name
       - name: k8s.node.name
+      - name: k8s.cluster.name
       - name: azure.resourcegroup.name
       ## Peer service inference
       - name: aws.s3.bucket
@@ -470,9 +412,8 @@ docker run \
     -e DD_SITE \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
-    otel/opentelemetry-collector-contrib:0.150.1 \
-    --config /etc/otelcol-contrib/config.yaml \
-    --feature-gates connector.spanmetrics.includeCollectorInstanceID
+    otel/opentelemetry-collector-contrib:0.152.0 \
+    --config /etc/otelcol-contrib/config.yaml
 ```
 
 {{% /tab %}}
@@ -584,40 +525,21 @@ connectors:
       exponential: {}
       unit: s
     dimensions:
-      ## Universal Service Monitoring
+      ## Unified Service Tagging
       - name: deployment.environment.name
       - name: service.version
       - name: http.response.status_code
       ## Container tags
       - name: container.id
-      - name: container.name
-      - name: container.image.name
-      - name: container.image.tag
-      - name: container.runtime
-      - name: cloud.provider
-      - name: cloud.region
-      - name: cloud.availability_zone
-      - name: aws.ecs.task.family
-      - name: aws.ecs.task.arn
-      - name: aws.ecs.cluster.arn
-      - name: aws.ecs.task.revision
-      - name: aws.ecs.container.arn
-      - name: k8s.container.name
-      - name: k8s.cluster.name
-      - name: k8s.deployment.name
-      - name: k8s.replicaset.name
-      - name: k8s.statefulset.name
-      - name: k8s.daemonset.name
-      - name: k8s.job.name
-      - name: k8s.cronjob.name
-      - name: k8s.namespace.name
-      - name: k8s.pod.name
       ## Host name inference
       - name: aws.ecs.launchtype
+      - name: aws.ecs.task.arn
+      - name: cloud.provider
       - name: cloud.account.id
       - name: host.id
       - name: host.name
       - name: k8s.node.name
+      - name: k8s.cluster.name
       - name: azure.resourcegroup.name
       ## Peer service inference
       - name: aws.s3.bucket
@@ -758,21 +680,20 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
    ```
 
 [102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
-[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-daemonset.yaml
+[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset.yaml
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 3. Run the Collector
 
-Start the Collector with the recommended feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
+Start the Collector. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
 
 For Host installations, run:
 
 ```shell
 DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
-  otelcol-contrib --config collector.yaml \
-  --feature-gates connector.spanmetrics.includeCollectorInstanceID
+  otelcol-contrib --config collector.yaml
 ```
 
 ### 4. Configure your application
@@ -829,7 +750,7 @@ After your application sends telemetry to the Collector, verify that data appear
 
 The `spanmetrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
 
-For a complete list of dimensions included in the recommended configuration, see the [full configuration files][5] in the `opentelemetry-examples` repository.
+For a complete list of dimensions included in the recommended configuration, including those related to container tags, see the [full configuration files][5] in the `opentelemetry-examples` repository.
 
 ### OTLP HTTP exporter
 
