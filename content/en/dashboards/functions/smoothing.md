@@ -107,7 +107,7 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 
 `median()` is equivalent to `median_3()`.
 
-Note: The span value is the number of data points. So `median()` and `median_3()` use the last 3 data points to calculate the median.
+Note: The span value is the number of data points. So, `median()` and `median_3()` use the last 3 data points to calculate the median.
 
 ### Median 5
 
