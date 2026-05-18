@@ -125,7 +125,7 @@ The agent executes with its configured tools and instructions, then returns its 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/actions/agents
-[5]: https://docs.claude.com/en/docs/about-claude/models/overview#latest-models-comparison
+[5]: https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison
 [6]: https://platform.openai.com/docs/models
 [7]: /actions/actions_catalog/
 [8]: /bits_ai/mcp_server
