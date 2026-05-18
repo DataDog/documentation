@@ -64,6 +64,8 @@ User Activity
 | Change Failure Rate | Failure rate weighted by the proportion of AI-assisted commits in each deployment, compared to the weighted rate for non-assisted commits. For example, if a failed deployment has 3 out of 10 commits assisted by AI, only 30% of that failure is attributed to AI. |
 | Recovery Time | Median recovery time of failed deployments containing AI-assisted commits compared to deployments without. |
 
+{{< img src="sdlc_analytics/ai_impact/impact_delivery.png" alt="An overview of AI Impact delivery metrics" style="width:100%;" >}}
+
 <div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
 
 ## Further Reading
