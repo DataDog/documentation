@@ -87,8 +87,6 @@ Set up your agent to run automatically with a [schedule][13], or trigger it from
 
 Use the built-in chat interface to test your agent. Send messages, review the agent's reasoning, and verify it takes the right actions. Chat history is preserved across sessions.
 
-{{< img src="/actions/agents/agent-chat.png" alt="The agent chat interface showing a conversation with tool calls" style="width:100%;" >}}
-
 ## Agent orchestration
 
 Use agents in [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
