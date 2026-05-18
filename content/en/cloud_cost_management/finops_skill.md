@@ -106,7 +106,7 @@ After the initial summary, choose from guided follow-up paths:
 
 ### Budgets and forecasting
 
-If you set up [Budgets][2], use the FinOps skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
+After setting up [Budgets][2], use the FinOps skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
 
 - Actual spend versus budgeted amount.
 - Forecasted spend versus budgeted amount.
