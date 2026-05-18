@@ -116,7 +116,7 @@ The agent executes with its configured tools and instructions and returns its ou
 
 **Automation not running**: Make sure the automation is published and the Run Agent step is fully configured.
 
-**Conversation length limit**: Long conversations may hit the context length limit. If this happens, start a new conversation. Automatic conversation compaction is coming soon.
+**Conversation length limit**: Long conversations may reach the context length limit. If this happens, start a new conversation. 
 
 **Unexpected configuration changes**: Use [Audit Trail][11] filtered to your agent's ID to review the history of changes.
 
