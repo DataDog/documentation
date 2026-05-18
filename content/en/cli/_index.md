@@ -88,28 +88,7 @@ Pup covers most major Datadog product surfaces. See the [command reference][2] f
 
 When Pup is invoked by an AI coding agent, it automatically switches to agent mode, which returns structured JSON responses optimized for machine consumption (including metadata, error details, and hints). Agent mode also auto-approves confirmation prompts.
 
-Agent mode is auto-detected when any of these environment variables are set to `1` or `true`:
-
-{{% collapse-content title="Agent mode variables" level="h5" expanded=false id="id-for-anchoring" %}}
-| Variable | Agent |
-|----------|-------|
-| `CLAUDE_CODE` or `CLAUDECODE` | Claude Code |
-| `CURSOR_AGENT` | Cursor |
-| `CODEX` or `OPENAI_CODEX` | OpenAI Codex |
-| `GITHUB_COPILOT` | GitHub Copilot |
-| `WINDSURF_AGENT` | Windsurf |
-| `AIDER` | Aider |
-| `CLINE` | Cline |
-| `AMAZON_Q` or `AWS_Q_DEVELOPER` | Amazon Q |
-| `GEMINI_CODE_ASSIST` | Gemini Code Assist |
-| `SRC_CODY` | Sourcegraph Cody |
-| `PI_CODING_AGENT` | pi.dev |
-| `FORCE_AGENT_MODE` | Any agent (manual override) |
-{{% /collapse-content %}}
-
-You can also enable agent mode explicitly with the `--agent` flag or by setting `FORCE_AGENT_MODE=1`.
-
-If you are integrating Pup into an AI agent workflow, make sure the appropriate environment variable is set so responses are optimized for your agent. Without it, Pup defaults to human-friendly output.
+Agent mode is auto-detected for [supported coding agents][7] when their environment variable is set. You can also enable it explicitly with the `--agent` flag or by setting `FORCE_AGENT_MODE=1`.
 
 ## Additional features
 
@@ -121,49 +100,7 @@ Pup includes additional features that can be used in AI agent workflows—follow
 
 ## Authentication
 
-Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred and is used automatically if you've logged in.
-
-### OAuth2 authentication (preferred)
-
-OAuth2 provides secure, browser-based authentication with automatic token refresh.
-
-```bash
-# Set your Datadog site (optional, defaults to datadoghq.com for US1)
-export DD_SITE="{{< region-param key="dd_site" >}}"
-
-# Login through browser
-pup auth login
-
-# Use any command - OAuth tokens are used automatically
-pup monitors list
-
-# Check status
-pup auth status
-
-# Logout
-pup auth logout
-```
-
-Tokens are stored securely in your system's keychain (macOS Keychain, Windows Credential Manager, Linux Secret Service). Set `DD_TOKEN_STORAGE=file` to use file-based storage instead.
-
-<div class="alert alert-info">OAuth2 requires Dynamic Client Registration (DCR) to be enabled on your Datadog site. If DCR is not available, use API key authentication.</div>
-
-### API key authentication (fallback)
-
-If OAuth2 tokens are not available, Pup automatically falls back to API key authentication.
-
-```bash
-export DD_API_KEY="<YOUR_API_KEY>"
-export DD_APP_KEY="<YOUR_APP_KEY>"
-export DD_SITE="{{< region-param key="dd_site" >}}"  # Optional, defaults to datadoghq.com for US1
-```
-
-### Authentication priority
-
-Pup checks for authentication in this order:
-1. `DD_ACCESS_TOKEN` — Stateless bearer token (highest priority)
-2. OAuth2 tokens (from `pup auth login`) — Used if valid tokens exist
-3. API keys (from `DD_API_KEY` and `DD_APP_KEY`) — Used if OAuth tokens are not available
+Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run `pup auth login` to authenticate through your browser. If OAuth2 is not available, Pup falls back to API keys (`DD_API_KEY` and `DD_APP_KEY`). See the [authentication documentation][8] for details.
 
 
 ## Global flags
@@ -172,6 +109,11 @@ Pup checks for authentication in this order:
 |------|-------------|
 | `-o, --output` | Output format (`json`, `table`, `yaml`). Default: `json` |
 | `-y, --yes` | Skip confirmation prompts for destructive operations |
+| `--agent` | Enable agent mode |
+| `--no-agent` | Disable agent mode |
+| `--read-only` | Block all write operations (create, update, delete) |
+| `--org <org>` | Use a named org profile for multi-account workflows (run `pup auth login --org` to set up) |
+| `-h, --help` | Print help |
 
 ## Environment variables
 
@@ -194,3 +136,5 @@ Pup checks for authentication in this order:
 [3]: https://github.com/DataDog/pup/blob/main/README.md#runbooks
 [4]: https://github.com/DataDog/pup/blob/main/README.md#agent-skills
 [5]: https://github.com/DataDog/pup/blob/main/docs/EXAMPLES.md#acp-server-ai-agent-integration
+[7]: https://github.com/DataDog/pup/blob/main/README.md#agent-mode
+[8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
