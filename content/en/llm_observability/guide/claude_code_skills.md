@@ -27,15 +27,17 @@ Datadog provides a set of [Claude Code][1] skills that bring LLM Observability a
 
 The skills produce structured, actionable output — RCA reports with before/after fix proposals, generated evaluator code, experiment comparisons — that you can pass directly to a coding agent to apply fixes to your application. When Claude Code has access to your codebase, it can search for the relevant system prompt, tool definitions, or routing logic and propose specific diffs without leaving the session.
 
-## Prerequisites
+## Setup
+
+### Prerequisites
 
 - [Claude Code][1] installed and authenticated
 - At least one LLM application [instrumented with LLM Observability][2] and producing traces
-- A data backend: either the Datadog MCP server **or** the `pup` CLI (see below)
+- A data backend: either the Datadog MCP server **or** the `pup` CLI 
 
-### Option A: Datadog MCP server
+### Datadog MCP server
 
-Connect the LLM Observability MCP server to your Claude Code session:
+To use the Datadog MCP server option, connect the LLM Observability MCP server to your Claude Code session:
 
 ```shell
 claude mcp add --scope user --transport http datadog-llmo-mcp \
@@ -105,7 +107,7 @@ When Claude Code has access to your codebase, the skill searches for the relevan
 
 The skill highlights which metrics improved or regressed, which event categories shifted, and where the candidate underperformed — so you can make a confident promotion decision.
 
-**Examples:**
+**Examples**
 
 ```
 /llm-obs-experiment-analyzer experiment_id=exp-123
@@ -124,7 +126,7 @@ The skill highlights which metrics improved or regressed, which event categories
 
 The generated Python file is self-contained and ready to hand to a coding agent for integration into your experiment harness or CI pipeline.
 
-**Examples:**
+**Examples**
 
 ```
 /llm-obs-eval-bootstrap ml_app=my-chatbot
@@ -144,7 +146,7 @@ Phase 3: llm-obs-eval-bootstrap    →  generate evaluators for each root cause
 
 The pipeline pauses for your review and approval between each phase. You can exclude specific traces, adjust the failure taxonomy, or redirect the evaluator proposal before moving on.
 
-**Example:**
+**Examples**
 
 ```
 /llm-obs-eval-pipeline my-chatbot
