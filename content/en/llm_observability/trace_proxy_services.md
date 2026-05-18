@@ -1,5 +1,6 @@
 ---
 title: Tracing Proxy Services
+description: Learn how to use LLM Observability to trace LLM calls through proxy or gateway services as part of a complete end-to-end trace.
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: LLM Observability
+description: Overview of Datadog LLM Observability, a platform for monitoring, troubleshooting, and improving LLM applications and AI agents.
 aliases:
     - /tracing/llm_observability/
 further_reading:

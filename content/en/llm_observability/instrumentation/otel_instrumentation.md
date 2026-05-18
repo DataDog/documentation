@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry Instrumentation
+description: Instrument LLM applications with OpenTelemetry using GenAI semantic conventions and send traces to Datadog LLM Observability without the Datadog SDK.
 ---
 
 ## Overview

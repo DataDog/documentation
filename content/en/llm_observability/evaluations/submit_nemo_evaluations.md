@@ -1,5 +1,6 @@
 ---
 title: NeMo Evaluations
+description: Learn how to submit NVIDIA NeMo Evaluator model evaluation scores to LLM Observability to monitor benchmarking results alongside LLM traces.
 aliases:
  - /llm_observability/submit_nemo_evaluations/
 further_reading:

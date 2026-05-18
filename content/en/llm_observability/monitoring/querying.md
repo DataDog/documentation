@@ -1,5 +1,6 @@
 ---
 title: Querying spans and traces
+description: Learn how to query LLM Observability spans and traces in the Trace Explorer, including how to search by attribute, tags, and trace-level properties.
 further_reading:
   - link: "tracing/trace_explorer/query_syntax/"
     tag: "Documentation"
