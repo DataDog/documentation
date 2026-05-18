@@ -56,25 +56,12 @@ Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkli
 
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top left of any Datadog page to open the Bits Assistant and ask a cost question.
 
-Example prompts for cost changes:
+Example prompts:
 
 - `Investigate why EC2 costs increased last week for team:payments.`
-- `Which services drove the largest AWS cost increase between March and April?`
-- `Is this cost change putting any budgets at risk?`
 - `Which teams are responsible for the highest S3 storage costs this month?`
-- `Create a handoff notebook for the team that owns this cost spike.`
-
-Example prompts for budgets and spending:
-
 - `Why is the infrastructure budget projected to go over this month?`
-- `Show actual and forecasted spend for the payments team budget.`
-- `Does last week's EC2 cost increase affect any active budgets?`
-
-Example prompts for exploratory cost questions:
-
 - `Show total cloud cost by provider for the last 30 complete days.`
-- `What are our top Kubernetes namespace costs this month?`
-- `What cost tags are available for breaking down GCP spend?`
 - `Find optimization opportunities for idle or over-provisioned cloud infrastructure.`
 
 ### Cost change investigations
