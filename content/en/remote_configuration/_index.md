@@ -185,9 +185,9 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
-[27]: /agent/fleet_automation/#send-a-remote-flare
+[27]: /agent/fleet_automation/fleet_view/#send-a-remote-flare
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
-[29]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
+[29]: /agent/fleet_automation/upgrade_agents/
 [30]: /actions/private_actions/use_private_actions/
 [31]: /agent/guide/setup_remote_config
 [32]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=api-key-enablement-step&standalone=1
