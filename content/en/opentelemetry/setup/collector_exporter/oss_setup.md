@@ -758,7 +758,44 @@ The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints
 
 - **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces and logs, `https://otlp.<YOUR_DD_SITE>/api/v2/otlpmetrics` for metrics.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
-- **Resource attributes as tags**: The `dd-otel-metric-config` header enables resource attributes and instrumentation scope metadata to be sent as metric tags.
+
+#### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
+
+The `dd-otel-metric-config` header is a JSON payload sent with metrics requests that configures how Datadog processes OTLP metrics. Set it in the `headers` section of the `otlp_http` exporter.
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `resource_attributes_as_tags` | Boolean | `false` | Propagates OTLP resource attributes as Datadog tags on emitted metrics. |
+| `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
+| `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
+| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | Routes standard HTTP instrumentation metrics to the TraceMetrics destination to power APM features. See [Use instrumentation metrics for APM](#use-instrumentation-metrics-for-apm). |
+| `raw_instrumentation_metrics_drop` | Boolean | `false` | Drops the raw HTTP instrumentation metrics from the regular Metrics destination. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
+
+### Use instrumentation metrics for APM
+
+By default, the [span metrics connector](#span-metrics-connector) generates the RED metrics that power APM features. As an alternative, you can configure the Datadog intake to derive trace metrics from standard HTTP instrumentation metrics that your OpenTelemetry SDK already produces.
+
+To enable this, set `trace_metrics.instrumentation_metrics_calc` to `true` in the `dd-otel-metric-config` header:
+
+```json
+{
+  "trace_metrics": {
+    "instrumentation_metrics_calc": true
+  },
+  "resource_attributes_as_tags": true,
+  "instrumentation_scope_metadata_as_tags": true
+}
+```
+
+When enabled, the following HTTP instrumentation metrics are routed to the TraceMetrics destination:
+- `http.server.request.duration`
+- `http.client.request.duration`
+- `http.server.request.calls`
+- `http.client.request.calls`
+
+By default, these metrics are also sent to the regular Metrics destination. To send them only to TraceMetrics, set `raw_instrumentation_metrics_drop` to `true`.
+
+To customize the namespace prefix applied to the trace-derived metrics, set `trace_metrics.namespace`. The default is `traces.span.metrics`.
 
 ### Datadog extension
 
