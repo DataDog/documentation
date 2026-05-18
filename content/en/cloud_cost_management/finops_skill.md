@@ -29,7 +29,7 @@ The FinOps skill runs in Bits Assistant. Fill out the Bits Assistant Preview for
 ## Overview
 
 
-The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions. You can use the skill for guided cost investigations, cost explanations, and to share cost findings. For example:
+The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions. For example, you can ask Bits Assistant to:
 
 - Investigate cost changes, anomalies, and cost monitor alerts.
 - Identify teams, services, accounts, regions, or resources driving spend.
