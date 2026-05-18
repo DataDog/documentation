@@ -104,7 +104,7 @@ further_reading:
 
 <p><strong>Note</strong>: To receive registration verification codes, password reset emails, and case notification emails, add the <code>ddog-gov.com</code> domain to your email allowlist. This includes <code>help@ddog-gov.com</code> and <code>support@ddog-gov.com</code>.</p>
 
-## Create a new case
+## Create a case
 
 <p>To create a new case:</p>
 
