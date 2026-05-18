@@ -1,5 +1,5 @@
 ---
-title: LLM Observability MCP Tools
+title: LLM Observability MCP and Skills
 description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
 further_reading:
 - link: "bits_ai/mcp_server"
@@ -11,6 +11,9 @@ further_reading:
 - link: "/llm_observability/monitoring"
   tag: "Documentation"
   text: "Monitor your application with LLM Observability"
+- link: "/llm_observability/guide/claude_code_skills"
+  tag: "Guide"
+  text: "Analyze LLM Applications with Claude Code Skills"
 ---
 
 ## Overview
@@ -155,7 +158,93 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-A set of agent skills that use these MCP endpoints is available in the [datadog-labs/agent-skills](https://github.com/datadog-labs/agent-skills) repository. These skills automate some of the manual work for the use cases below.
+Agent skills are pre-built instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [datadog-labs/agent-skills][8] repository and provides five skills for classifying sessions, diagnosing failures, running experiments, and bootstrapping evaluators — all against your live production data.
+
+### Install
+
+Install the `dd-llmo` skills with the following command:
+
+```shell
+npx skills add datadog-labs/agent-skills --skill dd-llmo --full-depth -y
+```
+
+{{< img src="llm_observability/skills/skills-install.png" alt="Claude Code terminal showing the npx skills add command completing with the five dd-llmo skills listed" >}}
+
+The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
+
+```shell
+claude mcp add --scope user --transport http "datadog-llmo-mcp" \
+  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+```
+
+Restart Claude Code after running both commands for the skills to appear.
+
+### Available skills
+
+| Skill | Invoke with | What it does |
+|-------|-------------|-------------|
+| Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
+| Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
+| Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
+| Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
+
+#### Session classification
+
+`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources — LLM Observability traces, RUM behavioral data, and Audit Trail events — and returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+
+```
+/llm-obs-session-classify session_id=<SESSION_ID>
+/llm-obs-session-classify trace_id=<TRACE_ID>
+/llm-obs-session-classify ml_app=my-chatbot --timeframe now-7d
+```
+
+{{< img src="llm_observability/skills/session-classify-output.png" alt="Claude Code session showing the llm-obs-session-classify verdict block with trace evidence and RUM signal summary" >}}
+
+#### Trace root cause analysis
+
+`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal — LLM-judge eval verdicts, runtime errors, or structural anomalies — and compiles a structured RCA report with a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
+
+When Claude Code has access to your codebase, the skill can search for the relevant source files and propose diffs inline.
+
+```
+/llm-obs-trace-rca ml_app=my-chatbot
+/llm-obs-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
+```
+
+{{< img src="llm_observability/skills/trace-rca-report.png" alt="Claude Code session showing the llm-obs-trace-rca RCA report with failure taxonomy table and a BEFORE/AFTER fix proposal for a system prompt deficiency" >}}
+
+#### Evaluator bootstrap
+
+`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs Python `BaseEvaluator` / `LLMJudge` classes for use in offline experiments, a framework-agnostic JSON spec, or publishes online LLM-judge evaluators that run automatically on your production traces in real time.
+
+```
+/llm-obs-eval-bootstrap ml_app=my-chatbot
+/llm-obs-eval-bootstrap ml_app=my-chatbot --publish
+/llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+```
+
+#### Experiment analyzer
+
+`/llm-obs-experiment-analyzer` retrieves experiment results and surfaces what changed between a candidate and a baseline: which metrics improved, which regressed, and where the candidate underperformed.
+
+```
+/llm-obs-experiment-analyzer experiment_id=<EXPERIMENT_ID>
+/llm-obs-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
+```
+
+#### End-to-end eval pipeline
+
+`/llm-obs-eval-pipeline` chains session classification, trace RCA, and evaluator bootstrap into a single supervised workflow with user checkpoints between phases. It is the recommended starting point when you have no existing evaluators for an application.
+
+```
+/llm-obs-eval-pipeline my-chatbot
+/llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
+```
+
+{{< img src="llm_observability/skills/eval-pipeline-checkpoint.png" alt="Claude Code session showing the llm-obs-eval-pipeline Phase 1 checkpoint with classification summary and a prompt asking for confirmation before proceeding to root cause analysis" >}}
+
+For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
 
 ## Use cases
 
@@ -290,3 +379,5 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [5]: /getting_started/site/
 [6]: /account_management/api-app-keys/
 [7]: /account_management/org_settings/service_accounts/
+[8]: https://github.com/datadog-labs/agent-skills
+[9]: /llm_observability/guide/claude_code_skills
