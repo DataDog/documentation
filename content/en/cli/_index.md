@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-[Pup CLI][6] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes Datadog's API surface for use in AI agent workflows and automated pipelines.
+[Pup CLI][1] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes Datadog's API surface for use in AI agent workflows and automated pipelines.
 
 Key features:
 
@@ -48,7 +48,7 @@ cp target/release/pup /usr/local/bin/pup
 
 ### Manual download
 
-Download pre-built binaries from the [latest release][1].
+Download pre-built binaries from the [latest release][2].
 
 ## Usage examples
 
@@ -71,7 +71,7 @@ pup dashboards get <DASHBOARD_ID>
 
 ## Supported product areas
 
-Pup covers most major Datadog product surfaces. See the [command reference][2] for the canonical command list, or run `pup --help` (or `pup agent schema` for machine-readable output) for the live list of commands as built.
+Pup covers most major Datadog product surfaces. See the [command reference][3] for the canonical command list, or run `pup --help` (or `pup agent schema` for machine-readable output) for the live list of commands as built.
 
 | Category | Examples |
 |----------|----------|
@@ -88,20 +88,19 @@ Pup covers most major Datadog product surfaces. See the [command reference][2] f
 
 When Pup is invoked by an AI coding agent, it automatically switches to agent mode, which returns structured JSON responses optimized for machine consumption (including metadata, error details, and hints). Agent mode also auto-approves confirmation prompts.
 
-Agent mode is auto-detected for [supported coding agents][7] when their environment variable is set. You can also enable it explicitly with the `--agent` flag or by setting `FORCE_AGENT_MODE=1`.
+Agent mode is auto-detected for [supported coding agents][4] when their environment variable is set. You can also enable it explicitly with the `--agent` flag or by setting `FORCE_AGENT_MODE=1`.
 
 ## Additional features
 
 Pup includes additional features that can be used in AI agent workflows—follow the links below for more information:
 
-- [**Runbooks**][3]: `pup runbooks` is a local execution engine for YAML-defined operational procedures, encoding multi-step tasks using `pup`, shell, HTTP, and Datadog Workflow steps.
-- [**Agent skills**][4]: Pup ships skills and domain agents embedded in the binary, installable to any AI coding assistant with `pup skills install`.
-- [**ACP server**][5]: `pup acp serve` runs a local AI agent server that connects coding tools to Datadog Bits AI through ACP and OpenAI-compatible protocols.
+- [**Runbooks**][5]: `pup runbooks` is a local execution engine for YAML-defined operational procedures, encoding multi-step tasks using `pup`, shell, HTTP, and Datadog Workflow steps.
+- [**Agent skills**][6]: Pup ships skills and domain agents embedded in the binary, installable to any AI coding assistant with `pup skills install`.
+- [**ACP server**][7]: `pup acp serve` runs a local AI agent server that connects coding tools to Datadog Bits AI through ACP and OpenAI-compatible protocols.
 
 ## Authentication
 
 Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run `pup auth login` to authenticate through your browser. If OAuth2 is not available, Pup falls back to API keys (`DD_API_KEY` and `DD_APP_KEY`). See the [authentication documentation][8] for details.
-
 
 ## Global flags
 
@@ -130,11 +129,11 @@ Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[6]: https://github.com/DataDog/pup
-[1]: https://github.com/DataDog/pup/releases/latest
-[2]: https://github.com/DataDog/pup/blob/main/docs/COMMANDS.md
-[3]: https://github.com/DataDog/pup/blob/main/README.md#runbooks
-[4]: https://github.com/DataDog/pup/blob/main/README.md#agent-skills
-[5]: https://github.com/DataDog/pup/blob/main/docs/EXAMPLES.md#acp-server-ai-agent-integration
-[7]: https://github.com/DataDog/pup/blob/main/README.md#agent-mode
+[1]: https://github.com/DataDog/pup
+[2]: https://github.com/DataDog/pup/releases/latest
+[3]: https://github.com/DataDog/pup/blob/main/docs/COMMANDS.md
+[4]: https://github.com/DataDog/pup/blob/main/README.md#agent-mode
+[5]: https://github.com/DataDog/pup/blob/main/README.md#runbooks
+[6]: https://github.com/DataDog/pup/blob/main/README.md#agent-skills
+[7]: https://github.com/DataDog/pup/blob/main/docs/EXAMPLES.md#acp-server-ai-agent-integration
 [8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
