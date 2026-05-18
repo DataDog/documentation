@@ -143,6 +143,11 @@ For the full input list and defaults, see [`variables.tf`][5] in the example dir
 | No data in the Datadog UI | The API key is wrong, `datadog_site` is mismatched, or the task can't reach `*.${DD_SITE}` (NAT egress missing). |
 | `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database. |
 
+[2]: /database_monitoring/
+[3]: /database_monitoring/setup_postgres/rds/
+[4]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ecs-fargate
+[5]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ecs-fargate/variables.tf
+
 {{% /tab %}}
 
 {{% tab "Amazon EKS (EC2 nodes)" %}}
@@ -307,6 +312,12 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
 | `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database. |
 | `terraform plan` fails reading the EKS cluster | The IAM principal running Terraform lacks `eks:DescribeCluster` / `eks:GetToken`, or is not mapped in `aws-auth` / EKS access entries for the cluster. |
 
+[2]: /database_monitoring/
+[3]: /database_monitoring/setup_postgres/rds/
+[6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/amazon-eks
+[7]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/README.md
+[8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/variables.tf
+
 {{% /tab %}}
 
 {{% tab "Amazon EC2" %}}
@@ -434,16 +445,13 @@ For the full input list and defaults, see [`variables.tf`][10] in the example di
 | `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database. |
 | `docker: command not found` on first SSH | `cloud-init` is still running. Wait ~60 seconds and re-check with `cloud-init status --wait`. |
 
+[2]: /database_monitoring/
+[3]: /database_monitoring/setup_postgres/rds/
+[9]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ec2
+[10]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ec2/variables.tf
+
 {{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://github.com/DataDog/dd-database-monitoring-example
 [2]: /database_monitoring/
-[3]: /database_monitoring/setup_postgres/rds/
-[4]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ecs-fargate
-[5]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ecs-fargate/variables.tf
-[6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/amazon-eks
-[7]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/README.md
-[8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/variables.tf
-[9]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ec2
-[10]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ec2/variables.tf
