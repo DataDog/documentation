@@ -17,7 +17,7 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ex
 ## Pricing model
 
 ### Definition of workflow execution
-A workflow execution refers to one full run of a published workflow, regardless of how many steps, actions, iterations, or retries it includes. Billing is recorded once when an execution starts. Runs that are rejected before starting — for example, due to spec validation errors, admission limits, or a workflow being marked inactive — are not billed. Executions can be triggered through:
+A workflow execution refers to one full run of a published workflow, regardless of how many steps, actions, iterations, or retries it includes. Billing is recorded one time when an execution starts. Runs that are rejected before starting—for example, due to spec validation errors, admission limits, or a workflow being marked inactive—are not billed. Executions can be triggered through:
 - Manual starts in the Datadog UI
 - API or programmatic triggers
 - Event-based triggers (monitors, incidents, etc.)
