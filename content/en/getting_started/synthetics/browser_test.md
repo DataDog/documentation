@@ -147,6 +147,10 @@ In the example below, the test failed as the result of a server timeout.
 
 Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
 
+### Investigate with Bits AI SRE
+
+To identify the root cause of a failing Synthetic browser test, launch a [Bits AI SRE investigation][15]. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -166,3 +170,4 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 [12]: /synthetics/browser_tests/test_results#resources
 [13]: /synthetics/browser_tests/test_results#page-performance
 [14]: /synthetics/apm/
+[15]: /bits_ai/bits_ai_sre/investigate_issues/#from-the-synthetic-test-details-page
