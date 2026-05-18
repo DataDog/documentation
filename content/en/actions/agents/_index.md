@@ -73,7 +73,7 @@ Select which LLM powers the agent's reasoning. Models vary in capability, speed,
 
 ### Tools
 
-Tools define what actions the agent can take. Add tools from the [Action Catalog][7], which includes 2500+ integrations. The agent can only use tools that have been added to its configuration.
+Tools define what actions the agent can take. Add tools from the [Action Catalog][7]. The agent can only use tools that have been added to its configuration.
 
 Click on any added tool to hardcode its parameters. For example, lock a Slack tool to a specific channel or a logs query to a specific service.
 
