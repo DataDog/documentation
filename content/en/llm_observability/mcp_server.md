@@ -158,7 +158,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are pre-built instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [datadog-labs/agent-skills][8] repository and provides five skills for classifying sessions, diagnosing failures, running experiments, and bootstrapping evaluators — all against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides five skills for classifying sessions, diagnosing failures, running experiments, and bootstrapping evaluators against your live production data.
 
 ### Install
 
@@ -191,7 +191,7 @@ Restart Claude Code after running both commands for the skills to appear.
 
 #### Session classification
 
-`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources — LLM Observability traces, RUM behavioral data, and Audit Trail events — and returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: LLM Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
 
 ```
 /llm-obs-session-classify session_id=<SESSION_ID>
@@ -203,7 +203,7 @@ Restart Claude Code after running both commands for the skills to appear.
 
 #### Trace root cause analysis
 
-`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal — LLM-judge eval verdicts, runtime errors, or structural anomalies — and compiles a structured RCA report with a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
+`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
 
 When Claude Code has access to your codebase, the skill can search for the relevant source files and propose diffs inline.
 
@@ -216,7 +216,7 @@ When Claude Code has access to your codebase, the skill can search for the relev
 
 #### Evaluator bootstrap
 
-`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs Python `BaseEvaluator` / `LLMJudge` classes for use in offline experiments, a framework-agnostic JSON spec, or publishes online LLM-judge evaluators that run automatically on your production traces in real time.
+`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of three artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, or online LLM-judge evaluators published directly to Datadog.
 
 ```
 /llm-obs-eval-bootstrap ml_app=my-chatbot
