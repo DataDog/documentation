@@ -33,40 +33,40 @@ In the following example, the subject assignment count is 12,427 for Variant A a
 Verify that your feature flag is enabled and evaluates in the correct environment. Then, confirm that traffic reaches the experiment's targeting rule.
 
 1. On the [Experiments][2] page, select your experiment to open its detail page. Hover over the Feature flag label (for example, `new-product-photos`) next to the experiment status.
-1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
+1. Note the {{< ui >}}Environment{{< /ui >}} where the experiment is running, then click {{< ui >}}Go to Flag{{< /ui >}}.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
-1. On the **Feature Flags** page, select the correct environment tab and confirm that the flag is **Enabled**. If the flag is disabled, enable it before proceeding.
+1. On the {{< ui >}}Feature Flags{{< /ui >}} page, select the correct environment tab and confirm that the flag is {{< ui >}}Enabled{{< /ui >}}. If the flag is disabled, enable it before proceeding.
 
    {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The Feature Flags page with the Enabled toggle highlighted in the Targeting rules and rollouts section." style="width:90%;" >}}
 
-1. In the **Real-time metric overview** section, confirm that the bar chart shows exposure events.
+1. In the {{< ui >}}Real-time metric overview{{< /ui >}} section, confirm that the bar chart shows exposure events.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic1.png" alt="The Real-time metric overview section of the Feature Flags page, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
 
-Based on what you see in the **Real-time metric overview**, follow the appropriate path:
+Based on what you see in the {{< ui >}}Real-time metric overview{{< /ui >}}, follow the appropriate path:
 
 #### The flag is not receiving traffic
 
-If the **Real-time metric overview** section shows no exposure events, the flag is not receiving traffic from your application.
+If the {{< ui >}}Real-time metric overview{{< /ui >}} section shows no exposure events, the flag is not receiving traffic from your application.
 
 Confirm the flag is enabled in the environment where your application runs. You can manage environments on the [Environments page][3]. See the [Getting Started with Feature Flags][5] guide for details on environments.
 
-After you enable the flag, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
+After you enable the flag, check the {{< ui >}}Real-time metric overview{{< /ui >}} for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
 
 #### The flag is receiving traffic but experiment assignments are zero
 
 If the flag shows exposures but the metric scorecard shows zero assignments, traffic is not reaching the experiment's [targeting rule][6].
 
-The **Targeting Rules & Rollouts** section displays a list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
+The {{< ui >}}Targeting Rules & Rollouts{{< /ui >}} section displays a list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="The Targeting Rules & Rollouts section of a feature flag showing the experiment targeting rule with 269 users and rollout percentages for each variant across four stages." style="width:90%;" >}}
 
 Check the following and edit the targeting rule and traffic exposure as needed:
-   - **Targeting rule order**: Are targeting rules above the experiment capturing traffic before it reaches the experiment rule?
-   - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
-   - **Traffic exposure**: Is the traffic exposure for the targeting rule set correctly?
+   - {{< ui >}}Targeting rule order{{< /ui >}}: Are targeting rules above the experiment capturing traffic before it reaches the experiment rule?
+   - {{< ui >}}Targeting rule filters{{< /ui >}}: Does incoming traffic match the filters in the experiment's targeting rule?
+   - {{< ui >}}Traffic exposure{{< /ui >}}: Is the traffic exposure for the targeting rule set correctly?
 
 After making the necessary changes, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
 
@@ -85,7 +85,7 @@ Work through the following checks in order. Each builds on the previous one, so 
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
-1. From the metric scorecard you checked in [Step 1](#step-1-confirm-the-experiment-is-assigning-users), hover over the metric with a zero value and click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
+1. From the metric scorecard you checked in [Step 1](#step-1-confirm-the-experiment-is-assigning-users), hover over the metric with a zero value and click the &#8942; menu icon. Select {{< ui >}}Edit Metric{{< /ui >}} to open the metric definition page.
 
 1. Verify that the metric event name is correct (for example, check for typos). Then, review the event volume chart on the right side of the page to confirm the event is firing.
 
@@ -104,11 +104,11 @@ Datadog matches metric events to experiment exposures using a set of identifiers
 If the `targetingKey` in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
 1. On the [Experiments][2] page, select your experiment to open its detail page.
-1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
+1. Select the {{< ui >}}Flag & Exposures{{< /ui >}} tab. Then, click {{< ui >}}View Exposures Log{{< /ui >}} to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log showing the flag key and allocation key as header metadata, with a table of recently exposed users listing timestamp, subject, and variant columns." style="width:90%;" >}}
 
-1. The **Subject** column shows the value your SDK passes as [`targetingKey`][7]. Confirm that the `targetingKey` in your SDK matches the [subject type attribute][9] (for example, `@usr.id`). If these identifiers do not match, update them before proceeding.
+1. The {{< ui >}}Subject{{< /ui >}} column shows the value your SDK passes as [`targetingKey`][7]. Confirm that the `targetingKey` in your SDK matches the [subject type attribute][9] (for example, `@usr.id`). If these identifiers do not match, update them before proceeding.
 
 1. To resolve a mismatch, update either the [`targetingKey`][7] in your SDK or the attribute on the [Subject Types page][9] so that both use the same identifier.
 
@@ -118,7 +118,7 @@ If the `targetingKey` in your SDK does not match the subject type attribute conf
 
 If identifiers match and users are assigned to the experiment but experiment results are still missing, inspect individual sessions to identify why specific users are not generating metric events.
 
-1. On the [Activity Stream page][4], filter for experiment sessions using the following syntax:
+1. On the [{{< ui >}}Activity Stream{{< /ui >}} page][4], filter for experiment sessions using the following syntax:
 
    ```
    @feature_flags.<flag-key>:<variant-value>
@@ -147,11 +147,11 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 To check if outlier handling is the cause:
 
 1. On the [Experiments][2] page, select your experiment to open its detail page.
-1. Hover over the metric name, click the &#8942; menu icon, and select **Edit Metric** to open the metric definition page.
-1. Expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
+1. Hover over the metric name, click the &#8942; menu icon, and select {{< ui >}}Edit Metric{{< /ui >}} to open the metric definition page.
+1. Expand the {{< ui >}}Experiment settings{{< /ui >}} accordion. Under {{< ui >}}Outlier handling{{< /ui >}}, toggle off both {{< ui >}}Lower bound percentile{{< /ui >}} and {{< ui >}}Upper bound percentile{{< /ui >}}.
 1. Save the metric.
-1. To trigger an immediate recompute, go to the **Metrics** section of the experiment's
-  detail page. Click the &#8942; menu icon next to **Last Updated** and select **run an update now**. Otherwise, wait for the next scheduled update.
+1. To trigger an immediate recompute, go to the {{< ui >}}Metrics{{< /ui >}} section of the experiment's
+  detail page. Click the &#8942; menu icon next to {{< ui >}}Last Updated{{< /ui >}} and select {{< ui >}}run an update now{{< /ui >}}. Otherwise, wait for the next scheduled update.
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment's detail page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 

@@ -92,7 +92,6 @@ Datadog breaks down change lead time into the following fields, which represent 
 
 * Change lead time stage breakdown metrics are only available when the source of repository metadata is GitHub, GitLab, or Azure DevOps.
 * For most stages, there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
-* When rebasing, either manually or to merge pull requests, the change lead time stage breakdown is unavailable for these commits. This is because rebased commits are not associated with any pull request.
 
 ## Change failure rate
 
