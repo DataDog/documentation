@@ -31,7 +31,7 @@ Use agents to handle work that's too complex for static automation but too repet
 From the [Agent Builder page][1], click **New Agent**. From there, you can create an agent in three ways:
 
 - **Build with AI**: Describe what you want the agent to do in plain language. Agent Builder generates the instructions, selects relevant tools, and configures the agent for you.
-- **Start from a blueprint**: Choose a prebuilt template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come preconfigured with instructions, tools, and automations, and are customizable.
+- **Start from a blueprint**: Choose a prebuilt template for common use cases such as error triage, incident response, security analysis, or DevOps assistance. Blueprints come preconfigured with instructions, tools, and automations, and are customizable.
 - **Start from scratch**: Configure the agent manually—write instructions, pick a model, and add tools.
 
 {{< img src="/actions/agents/empty-state.png" alt="The Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
