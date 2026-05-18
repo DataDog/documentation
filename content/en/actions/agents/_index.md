@@ -104,7 +104,7 @@ The **Run Agent** step also supports the following optional fields:
 
 - **Output Schema**: Define a JSON schema for the agent's response. When set, the agent structures its output to match the schema for use in downstream steps. For example, you can define a schema with a `requestType` field, then branch on `Run Agent.finalResponse.requestType` in an If condition step.
 
-{{< img src="/actions/agents/output-schema-example.png" alt="A workflow using output schema to branch on agent response fields" style="width:100%;" >}}
+  {{< img src="/actions/agents/output-schema-example.png" alt="A workflow using output schema to branch on agent response fields" style="width:100%;" >}}
 
 - **Conversation ID**: By default, each Run Agent invocation is a standalone, single-turn execution. To continue a prior conversation, pass a Conversation ID from a previous run. This lets the agent retain context across multiple workflow runs. Multi-turn sessions are subject to the same context window limits as the chat UI.
 
