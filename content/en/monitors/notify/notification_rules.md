@@ -28,7 +28,7 @@ To create a Monitor Notification Rule in Datadog, do the following:
 1. Go to [**Notification Rules**][1].
 2. Click **New Rule**.
 3. [Configure the scope](#configure-the-scope): Define the required tags for a monitor notification to be routed to this rule.
-4. [Configure the recipients](#configure-the-recipients): Specify who to alert and under what conditions.
+4. [Configure the routing and recipients](#configure-the-routing-and-recipients): Choose how to route notifications and specify recipients.
 5. Add a clear and identifiable rule name.
 
 ### Configure the scope
@@ -93,9 +93,9 @@ Dynamic routing automatically routes monitor alerts to the right team based on y
 | --- | --- | --- |
 | **Service-based** | Checks the monitor's `service` tag or group tag, looks up which team manages that service in the Service Catalog, then sends the alert to that team's configured notification channels. | The service must have a team assigned in the Service Catalog. If no team is assigned, the alert falls back to the fallback recipients. |
 | **Team-based** | Directly checks the monitor's `team` tag or group tag, then sends the alert to that team's configured notification channels. | The monitor must have a `team` tag. |
-| **Fallback** | If routing cannot resolve (for example, the service has no team assigned or the team has no notification channels configured) the alert goes to the fallback recipients. Fallback recipients behave the same as manual routing recipients. | Required for all dynamic routing rules. |
+| **Fallback** | If routing cannot resolve (for example, the service has no team assigned or the team has no notification channels configured), the alert goes to the fallback recipients. Fallback recipients behave the same as manual routing recipients. | Required for all dynamic routing rules. |
 
-Both Service and Team routing types support Slack, email, PagerDuty, and Microsoft Teams. Teams configure their preferred channels in their team settings.
+Both Service-based and Team-based routing support Slack, email, PagerDuty, and Microsoft Teams. Teams can configure their notification channels in [Teams settings][4].
 
 ## Managing notification rules
 
@@ -229,4 +229,4 @@ The following table demonstrates how monitors with different tag combinations ma
 [2]: /monitors/notify/#notifications
 [3]: /getting_started/search/#event-based-queries
 [4]: /account_management/teams/
-[5]: /service_catalog/
+[5]: /internal_developer_portal/software_catalog/
