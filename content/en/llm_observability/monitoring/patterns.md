@@ -25,12 +25,12 @@ Patterns automatically clusters your LLM application's production traffic into m
 
 ## How it works
 
-Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using your connected LLM provider account, giving you an interpretable view of production behavior without manual tagging.
+Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using your connected LLM provider account, giving you an interpretable view of production behavior without manual tagging. Patterns currently supports OpenAI as the LLM provider.
 
 When you run a pipeline, Patterns:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
-2. Clusters interactions based on their semantics, such as user intent
+2. Analyzes interactions based on their semantics, such as user intent
 3. Names each cluster with an AI-generated topic label and summary using your [connected LLM provider account][1]
 4. Organizes clusters into a parent-child topic hierarchy
 
