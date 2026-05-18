@@ -811,6 +811,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2589528326",
+      "description": "Create a Data Jobs monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3626832481",
       "description": "Create a Data Quality monitor returns \"OK\" response"
     },
