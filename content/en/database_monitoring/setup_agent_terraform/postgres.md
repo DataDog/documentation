@@ -1,5 +1,5 @@
 ---
-title: "Provision the Datadog Agent for Postgres with Terraform"
+title: "Provision the Datadog Agent for Postgres Database Monitoring with Terraform"
 description: Provision the Datadog Agent for Postgres Database Monitoring with Terraform on AWS.
 further_reading:
 - link: "/database_monitoring/setup_postgres/rds/"
