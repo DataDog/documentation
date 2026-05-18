@@ -30,7 +30,7 @@ Patterns uses text embeddings to group your application's inputs into hierarchic
 When you run a pipeline, Patterns:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
-2. Clusters interactions based on their semantic embeddings
+2. Clusters interactions based on their semantics, such as user intent
 3. Names each cluster with an AI-generated topic label and summary using your [connected LLM provider account][1]
 4. Organizes clusters into a parent-child topic hierarchy
 
