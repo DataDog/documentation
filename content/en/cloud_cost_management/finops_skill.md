@@ -28,7 +28,6 @@ The FinOps skill runs in Bits Assistant. Fill out the Bits Assistant Preview for
 
 ## Overview
 
-<div class="alert alert-info">This page describes how to use AI to analyze costs in Cloud Cost Management. It is not a guide on monitoring AI provider spend. To ingest SaaS or AI provider costs into CCM, see <a href="/cloud_cost_management/setup/saas_costs/">SaaS Cost Integrations</a>.</div>
 
 The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions. You can use the skill for guided cost investigations, cost explanations, and to share cost findings. For example:
 
