@@ -363,6 +363,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2049446128",
+      "description": "Create a new dashboard with point_plot widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1754992756",
       "description": "Create a new dashboard with powerpack widget"
     },
@@ -803,6 +808,11 @@
       "group": "monitors",
       "suffix": "_1303514967",
       "description": "Create a Cost Monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2589528326",
+      "description": "Create a Data Jobs monitor returns \"OK\" response"
     },
     {
       "group": "monitors",

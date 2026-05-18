@@ -1828,6 +1828,38 @@ components:
       x-enum-varnames:
         - CUSTOM_TIMEBOARD
         - CUSTOM_SCREENBOARD
+    DataProjectionQuery:
+      description: Query configuration for a data projection request.
+      properties:
+        data_source:
+          description: Data source for the query.
+          example: logs
+          type: string
+        indexes:
+          description: List of indexes to query.
+          items:
+            description: Index name.
+            type: string
+          type: array
+        query_string:
+          description: The query string to filter events.
+          example: "service:web-store"
+          type: string
+        storage:
+          description: Storage location for the query.
+          type: string
+      required:
+        - query_string
+        - data_source
+      type: object
+    DataProjectionRequestType:
+      description: Type of a data projection request.
+      enum:
+        - data_projection
+      example: data_projection
+      type: string
+      x-enum-varnames:
+        - DATA_PROJECTION
     DeleteSharedDashboardResponse:
       description: Response containing token of deleted shared dashboard.
       properties:
@@ -3081,7 +3113,8 @@ components:
       x-enum-varnames:
         - APM_RESOURCE_STATS
     FormulaAndFunctionApmResourceStatsQueryDefinition:
-      description: APM resource stats query using formulas and functions.
+      deprecated: true
+      description: APM resource stats query using formulas and functions. Deprecated - Use `apm_metrics` query type instead.
       properties:
         cross_org_uuids:
           $ref: "#/components/schemas/CrossOrgUuids"
@@ -3331,6 +3364,7 @@ components:
         - incident_analytics
         - product_analytics
         - on_call_events
+        - errors
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3347,6 +3381,7 @@ components:
         - INCIDENT_ANALYTICS
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
+        - ERRORS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -6287,6 +6322,38 @@ components:
       type: string
       x-enum-varnames:
         - DECODER_PROCESSOR
+    LogsExcludeAttributeProcessor:
+      description: |-
+        Use this processor to remove an attribute from a log during processing.
+        The processor strips the specified attribute from the log event, which is useful
+        when the attribute contains sensitive data or is no longer needed downstream.
+      properties:
+        attribute_to_exclude:
+          description: Name of the log attribute to remove from the log event.
+          example: foo
+          type: string
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsExcludeAttributeProcessorType"
+      required:
+        - type
+        - attribute_to_exclude
+      type: object
+    LogsExcludeAttributeProcessorType:
+      default: exclude-attribute
+      description: Type of logs exclude attribute processor.
+      enum:
+        - exclude-attribute
+      example: exclude-attribute
+      type: string
+      x-enum-varnames:
+        - EXCLUDE_ATTRIBUTE
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration API.
       properties:
@@ -6894,6 +6961,7 @@ components:
         - $ref: "#/components/schemas/LogsArrayProcessor"
         - $ref: "#/components/schemas/LogsDecoderProcessor"
         - $ref: "#/components/schemas/LogsSchemaProcessor"
+        - $ref: "#/components/schemas/LogsExcludeAttributeProcessor"
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -8141,6 +8209,36 @@ components:
         - data_source
         - query
       type: object
+    MonitorFormulaAndFunctionDataJobsQueryDefinition:
+      description: A formula and functions data jobs query.
+      properties:
+        job_type:
+          description: |-
+            The type of job being monitored. Valid values include:
+            `databricks.job`, `spark.application`, `airflow.dag`,
+            `dbt.job`, `dbt.model`, `dbt.test`, `glue.job`.
+            Custom job types are supported with the `custom.ol.` prefix.
+          example: "databricks.job"
+          type: string
+        jobs_query:
+          description: Filter expression used to select the jobs to monitor.
+          example: "job_name:smoke*"
+          type: string
+        name:
+          description: Name of the query for use in formulas. Must be `run_query`.
+          example: "run_query"
+          type: string
+        query_dialect:
+          description: |-
+            Query dialect for data jobs queries. Currently only `metric` is supported.
+          example: "metric"
+          type: string
+      required:
+        - name
+        - jobs_query
+        - job_type
+        - query_dialect
+      type: object
     MonitorFormulaAndFunctionDataQualityDataSource:
       description: Data source for data quality queries.
       enum:
@@ -8447,6 +8545,7 @@ components:
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition"
+        - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition"
     MonitorFormulaAndFunctionReferenceTableColumn:
@@ -9279,6 +9378,7 @@ components:
         - "cost alert"
         - "data-quality alert"
         - "network-path alert"
+        - "data-jobs alert"
       example: "query alert"
       type: string
       x-enum-varnames:
@@ -9303,6 +9403,7 @@ components:
         - COST_ALERT
         - DATA_QUALITY_ALERT
         - NETWORK_PATH_ALERT
+        - DATA_JOBS_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -11450,6 +11551,150 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    PointPlotDimension:
+      description: Dimension of the point plot.
+      enum:
+        - group
+        - time
+        - y
+        - radius
+      example: y
+      type: string
+      x-enum-varnames:
+        - GROUP
+        - TIME
+        - Y
+        - RADIUS
+    PointPlotProjection:
+      description: Projection configuration for the point plot widget.
+      properties:
+        dimensions:
+          description: List of dimension mappings for the projection.
+          items:
+            $ref: "#/components/schemas/PointPlotProjectionDimension"
+          type: array
+        extra_columns:
+          description: Additional columns to include in the projection.
+          items:
+            description: Column name.
+            type: string
+          type: array
+        type:
+          $ref: "#/components/schemas/PointPlotProjectionType"
+      required:
+        - type
+        - dimensions
+      type: object
+    PointPlotProjectionDimension:
+      description: Dimension mapping for the point plot projection.
+      properties:
+        alias:
+          description: Alias for the column.
+          type: string
+        column:
+          description: Source column name from the dataset.
+          example: duration
+          type: string
+        dimension:
+          $ref: "#/components/schemas/PointPlotDimension"
+      required:
+        - column
+        - dimension
+      type: object
+    PointPlotProjectionType:
+      description: Type of the projection.
+      enum:
+        - point_plot
+      example: point_plot
+      type: string
+      x-enum-varnames:
+        - POINT_PLOT
+    PointPlotWidgetDefinition:
+      description: The point plot displays individual data points over time.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          type: string
+        legend:
+          $ref: "#/components/schemas/PointPlotWidgetLegend"
+        markers:
+          description: List of markers for the widget.
+          items:
+            $ref: "#/components/schemas/WidgetMarker"
+          type: array
+        requests:
+          description: List of request configurations for the widget.
+          items:
+            $ref: "#/components/schemas/PointPlotWidgetRequest"
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/PointPlotWidgetDefinitionType"
+        yaxis:
+          $ref: "#/components/schemas/WidgetAxis"
+      required:
+        - type
+        - requests
+      type: object
+    PointPlotWidgetDefinitionType:
+      default: point_plot
+      description: Type of the point plot widget.
+      enum:
+        - point_plot
+      example: point_plot
+      type: string
+      x-enum-varnames:
+        - POINT_PLOT
+    PointPlotWidgetLegend:
+      description: Legend configuration for the point plot widget.
+      properties:
+        type:
+          $ref: "#/components/schemas/PointPlotWidgetLegendType"
+      required:
+        - type
+      type: object
+    PointPlotWidgetLegendType:
+      description: Type of legend to show for the point plot widget.
+      enum:
+        - automatic
+        - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+        - AUTOMATIC
+        - NONE
+    PointPlotWidgetRequest:
+      description: Request configuration for the point plot widget.
+      properties:
+        limit:
+          description: Maximum number of data points to return.
+          format: int64
+          type: integer
+        projection:
+          $ref: "#/components/schemas/PointPlotProjection"
+        query:
+          $ref: "#/components/schemas/DataProjectionQuery"
+        request_type:
+          $ref: "#/components/schemas/DataProjectionRequestType"
+      required:
+        - request_type
+        - query
+        - projection
+      type: object
     PowerpackTemplateVariableContents:
       description: Powerpack template variable contents.
       properties:
@@ -14099,19 +14344,19 @@ components:
       x-enum-varnames:
         - NETFLOW_SANKEY
     SankeyRumDataSource:
-      default: rum
-      description: Sankey widget with RUM data source.
+      default: product_analytics
+      description: Product Analytics or RUM data source type.
       enum:
         - rum
         - product_analytics
-      example: rum
+      example: product_analytics
       type: string
       x-enum-varnames:
         - RUM
         - PRODUCT_ANALYTICS
     SankeyRumQuery:
       additionalProperties: false
-      description: Sankey widget with RUM data source query.
+      description: Query configuration for Product Analytics or RUM Sankey widget.
       properties:
         audience_filters:
           $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
@@ -14151,7 +14396,7 @@ components:
       type: object
     SankeyRumQueryMode:
       default: source
-      description: Sankey mode for RUM queries.
+      description: Sankey mode for Product Analytics or RUM queries.
       enum:
         - source
         - target
@@ -14162,7 +14407,7 @@ components:
         - TARGET
     SankeyRumRequest:
       additionalProperties: false
-      description: Sankey widget with RUM data source.
+      description: Sankey widget request for Product Analytics or RUM data source.
       properties:
         query:
           $ref: "#/components/schemas/SankeyRumQuery"
@@ -22647,6 +22892,10 @@ components:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
+        infra_storage_mgmt_objects_count_avg:
+          description: Shows the average number of storage management objects over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current date for all organizations.
           format: int64
@@ -23642,6 +23891,10 @@ components:
           type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg:
+          description: Shows the average number of storage management objects over all hours in the current date for the given org.
           format: int64
           type: integer
         ingested_events_bytes_sum:
@@ -24642,6 +24895,10 @@ components:
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg_sum:
+          description: Shows the average number of storage management objects over all hours in the current month for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
@@ -25871,6 +26128,7 @@ components:
         - $ref: "#/components/schemas/MonitorSummaryWidgetDefinition"
         - $ref: "#/components/schemas/NoteWidgetDefinition"
         - $ref: "#/components/schemas/PowerpackWidgetDefinition"
+        - $ref: "#/components/schemas/PointPlotWidgetDefinition"
         - $ref: "#/components/schemas/QueryValueWidgetDefinition"
         - $ref: "#/components/schemas/RetentionCurveWidgetDefinition"
         - $ref: "#/components/schemas/RunWorkflowWidgetDefinition"

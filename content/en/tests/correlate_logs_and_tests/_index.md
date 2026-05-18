@@ -70,6 +70,20 @@ Use the following environment variables to enable and configure log submission:
 | `DD_ENABLE_STDOUT_INSTRUMENTATION` | Enables/disables stdout log submission | `false`       |
 | `DD_ENABLE_STDERR_INSTRUMENTATION` | Enables/disables stderr log submission | `false`       |
 
+### Python
+
+Requirements: `ddtrace >= 4.8.0`.
+
+Log submission is supported for the pytest test framework, and only when logs are emitted with the standard library `logging` module.
+
+Use the following environment variable to enable log submission for agentless mode:
+
+| Name                                             | Description                     | Default value |
+| ------------------------------------------------ | ------------------------------- | ------------- |
+| `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Enables/disables log submission | `false`       |
+
+If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS_INJECTION=true` in the environment.
+
 ### Ruby
 
 Agentless logs submission with Test Optimization is supported for Rails applications. Before enabling, ensure

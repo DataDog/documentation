@@ -79,7 +79,7 @@ The SLO panel on the Test Suite details page shows the current SLO status and er
 - **[View contributors](#contributors)** to see which tests are consuming error budget.
 - **[Edit the SLO](#edit-the-service-level-objective)** by clicking the {{< img src="icons/pencil-mdi.svg" inline="true" style="width:16px;">}} pencil icon.
 
-{{< img src="synthetics/test_suites/test_suite_slo_panel.png" alt="Test suite SLO panel showing the 7-day rolling window, error budget, Create Alert button, and primary contributors." style="width:100%;">}}
+{{< img src="synthetics/test_suites/test_suite_slo_panel_v2.png" alt="Test Suite details page showing the SLO panel with a 7-day rolling window and error budget, the Primary Contributors section with top contributing tests, the Global Uptime timeline, and the Test Runs section." style="width:100%;">}}
 
 ### Create an alert
 

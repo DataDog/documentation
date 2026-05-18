@@ -165,8 +165,7 @@ attributes:
        - **Source Code**: 7 days
   - product: Synthetics
     data_type: |
-       - **Test results (not displayed in UI)**: 2 months
-       - **Test results (displayed in UI)**: 15 months
+       - **Test results**: 15 months
   - product: Test Visibility & Intelligent Test Runner
     data_type: |
        - **Tests**: 3 months
