@@ -64,7 +64,7 @@ Click on a file and line link in the stack trace to navigate to the code.
 When a local agent is detected (you have the Claude Code, Gemini, or Codex CLI installed locally), a **Fix with Local Agent** button will appear. Click this to open a new terminal and launch the local agent with a custom prompt from Datadog requesting the agent to fix the error.
 
 #### Context tab
-The Context tab shows details about the issue including the service, first-seen and last-seen information, who the issue is assigned to, and the error count over time.
+The Context tab shows details about the issue including the service, first-seen and last-seen information, the issue's assignee, and the error count over time.
 
 {{< img src="/ide_plugins/idea/error_tracking/context_tab.png" alt="JetBrains Error Tracking Context tab" style="width:100%;" >}}
 
