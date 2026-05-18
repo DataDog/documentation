@@ -42,7 +42,7 @@ From the [Agent Builder page][1], click **New Agent**. From there, you can creat
 
 Instructions tell the agent what to do when it runs. Write them in natural language—describe the goal, the process, and any constraints. Edit instructions directly or refine through the chat interface.
 
-Good instructions are specific and outcome-oriented. For example:
+Write instructions that are specific and outcome-oriented. For example:
 
 ```
 You are an Incident Responder AI assistant specialized in managing
