@@ -77,7 +77,7 @@ Tools define what actions the agent can take. Add tools from the [Action Catalog
 
 Click on any added tool to hardcode its parameters. For example, lock a Slack tool to a specific channel or a logs query to a specific service.
 
-The [Datadog MCP Server][8] is enabled by default. Support for third-party MCP servers is coming soon. In the meantime, you can connect to any API using [custom HTTP actions][12].
+The [Datadog MCP Server][8] is enabled by default. You can connect to any API using [custom HTTP actions][12].
 
 ### Automations
 
