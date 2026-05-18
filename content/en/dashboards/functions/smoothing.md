@@ -105,7 +105,7 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 | `median()`   | Rolling median with the default span of 3. | `median(<METRIC_NAME>{*})` |
 | `median_3()` | Rolling median with a span of 3. | `median_3(<METRIC_NAME>{*})` |
 
-`median()` is equivalent to `median_3()`.
+`median()` and `median_3()` function identically.
 
 Note: The span value is the number of data points. So, `median()` and `median_3()` use the last 3 data points to calculate the median.
 
