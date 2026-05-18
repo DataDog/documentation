@@ -196,56 +196,63 @@ const createPages = (apiYaml, deref, apiVersion) => {
  * @param {array} specs - array of spec file paths (parallel to specData)
  */
 const createEndpointPages = (specData, specs) => {
-  const endpoints = new Map();
+  const endpoints = buildEndpointsMap(specData, specs);
+  endpoints.forEach(writeEndpointPage);
+  console.log(`successfully wrote ${endpoints.size} per-endpoint pages under content/en/api/latest/`);
+};
 
+const getActionsForTag = (paths, tagName) =>
+  Object.keys(paths)
+    .filter((path) => isTagMatch(paths[path], tagName))
+    .flatMap((path) =>
+      Object.entries(paths[path])
+        .filter(([key]) => !key.startsWith("x-"))
+        .map(([, values]) => values)
+    );
+
+const buildEndpointsMap = (specData, specs) => {
+  const endpoints = new Map();
   specData.forEach((apiYaml, index) => {
     const apiVersion = specs[index].split('/')[3];
     apiYaml.tags.forEach((tag) => {
       const tagSlug = getTagSlug(tag.name);
-      Object.keys(apiYaml.paths)
-        .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
-        .map((path) => Object.entries(apiYaml.paths[path])
-            .filter(([key, _]) => !key.startsWith("x-"))
-            .map(([_, values]) => values))
-        .reduce((obj, item) => ([...obj, ...item]), [])
-        .forEach((action) => {
-          const endpointSlug = getTagSlug(action.summary);
-          const mapKey = `${tagSlug}/${endpointSlug}`;
-          if (endpoints.has(mapKey)) {
-            const entry = endpoints.get(mapKey);
-            if (!entry.versions.includes(apiVersion)) entry.versions.push(apiVersion);
-            if (!entry.operationids.includes(action.operationId)) entry.operationids.push(action.operationId);
-          } else {
-            endpoints.set(mapKey, {
-              tag: tag.name,
-              tagSlug,
-              endpointSlug,
-              title: action.summary,
-              versions: [apiVersion],
-              operationids: [action.operationId],
-            });
-          }
-        });
+      getActionsForTag(apiYaml.paths, tag.name).forEach((action) => {
+        const endpointSlug = getTagSlug(action.summary);
+        const mapKey = `${tagSlug}/${endpointSlug}`;
+        if (endpoints.has(mapKey)) {
+          const entry = endpoints.get(mapKey);
+          if (!entry.versions.includes(apiVersion)) entry.versions.push(apiVersion);
+          if (!entry.operationids.includes(action.operationId)) entry.operationids.push(action.operationId);
+        } else {
+          endpoints.set(mapKey, {
+            tag: tag.name,
+            tagSlug,
+            endpointSlug,
+            title: action.summary,
+            versions: [apiVersion],
+            operationids: [action.operationId],
+          });
+        }
+      });
     });
   });
+  return endpoints;
+};
 
-  endpoints.forEach((entry) => {
-    const dir = `./content/en/api/latest/${entry.tagSlug}/${entry.endpointSlug}`;
-    fs.mkdirSync(dir, { recursive: true });
-    const frontMatter = {
-      title: entry.title,
-      operationid: entry.operationids[0],
-      tag: entry.tag,
-      versions: entry.versions,
-    };
-    if (entry.operationids.length > 1) {
-      frontMatter.operationids = entry.operationids;
-    }
-    const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
-    fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
-  });
-
-  console.log(`successfully wrote ${endpoints.size} per-endpoint pages under content/en/api/latest/`);
+const writeEndpointPage = (entry) => {
+  const dir = `./content/en/api/latest/${entry.tagSlug}/${entry.endpointSlug}`;
+  fs.mkdirSync(dir, { recursive: true });
+  const frontMatter = {
+    title: entry.title,
+    operationid: entry.operationids[0],
+    tag: entry.tag,
+    versions: entry.versions,
+  };
+  if (entry.operationids.length > 1) {
+    frontMatter.operationids = entry.operationids;
+  }
+  const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
+  fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
 };
 
 
