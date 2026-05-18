@@ -43,14 +43,14 @@ You can create a Jira ticket directly from the issue panel to group investigatio
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the **Actions** dropdown, click **Add Jira ticket**.
+3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Jira ticket{{< /ui >}}.
 4. Choose the Jira account and project in which the ticket should be created. Then, choose the ticket type you want to create.
 5. Optionally, access Data Sync settings to configure how data should be synced between Datadog and Jira.
-6. Click **Create** to create the ticket.
+6. Click {{< ui >}}Create{{< /ui >}} to create the ticket.
 
 {{< img src="error_tracking/create-ticket.png" alt="Create a Jira ticket from an Error Tracking issue" style="width:100%;" >}}
 
-Once created, the ticket is linked to the Error Tracking issue. The ticket link appears in the issue panel, and the issue status automatically changes to **REVIEWED**.
+Once created, the ticket is linked to the Error Tracking issue. The ticket link appears in the issue panel, and the issue status automatically changes to {{< ui >}}REVIEWED{{< /ui >}}.
 
 When an issue is linked to a ticket, their state, assignee and comments are two-way synced. See [State dual-way sync between issues and tickets](#state-dual-way-sync-between-issues-and-tickets) for more information on how the issue state and ticket status are synced.
 
@@ -60,10 +60,10 @@ You can attach multiple Error Tracking issues to a single Jira ticket to group c
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the **Actions** dropdown, click **Add Jira ticket**.
-4. In the **Add to Existing** tab, paste the URL of the ticket in which you want to group your issues.
+3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Jira ticket{{< /ui >}}.
+4. In the {{< ui >}}Add to Existing{{< /ui >}} tab, paste the URL of the ticket in which you want to group your issues.
 5. Optionally, access Data Sync settings to configure how data should be synced between Datadog and Jira.
-6. Click **Link to Issue** to attach the issue to the ticket.
+6. Click {{< ui >}}Link to Issue{{< /ui >}} to attach the issue to the ticket.
 7. Repeat these actions on all the issues you want to add to this group.
 
 {{< img src="error_tracking/add-to-existing-ticket.png" alt="Add an Error Tracking issue to an existing Jira ticket" style="height:300px;" >}}
@@ -98,10 +98,10 @@ If you update the state of an issue, the resulting state of other linked issues 
 
 | Initial state                                                      | Action                                                 | Resulting state                                                                                    |
 |--------------------------------------------------------------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| The ticket is `Done` and all issues are `Resolved`.                | You update one issue to `For Review`.                  | The ticket is `To Do` but all other issues remain `Resolved`.                                      |
-| The ticket is `To Do` and all issues are `For Review`.             | You update one issue to `Resolved`.                    | The ticket is `To Do`, one issue is `Resolved`, all other issues remain `For Review`.              |
-| The ticket is `Done` and you have one unlinked issue `For Review`. | You link the `For Review` issue to your `Done` ticket. | The ticket is `Done` and all issues are `Resolved` (including the newly linked issue).             |
-| The ticket is `To Do` and you have one unlinked `Resolved` issue.  | You link the `Resolved` issue to your `To Do` ticket.  | The ticket is `To Do` and all issues are `For Review` except the new one which remains `Resolved`. |
+| The ticket is {{< ui >}}Done{{< /ui >}} and all issues are {{< ui >}}Resolved{{< /ui >}}.                | You update one issue to {{< ui >}}For Review{{< /ui >}}.                  | The ticket is {{< ui >}}To Do{{< /ui >}} but all other issues remain {{< ui >}}Resolved{{< /ui >}}.                                      |
+| The ticket is {{< ui >}}To Do{{< /ui >}} and all issues are {{< ui >}}For Review{{< /ui >}}.             | You update one issue to {{< ui >}}Resolved{{< /ui >}}.                    | The ticket is {{< ui >}}To Do{{< /ui >}}, one issue is {{< ui >}}Resolved{{< /ui >}}, all other issues remain {{< ui >}}For Review{{< /ui >}}.              |
+| The ticket is {{< ui >}}Done{{< /ui >}} and you have one unlinked issue {{< ui >}}For Review{{< /ui >}}. | You link the {{< ui >}}For Review{{< /ui >}} issue to your {{< ui >}}Done{{< /ui >}} ticket. | The ticket is {{< ui >}}Done{{< /ui >}} and all issues are {{< ui >}}Resolved{{< /ui >}} (including the newly linked issue).             |
+| The ticket is {{< ui >}}To Do{{< /ui >}} and you have one unlinked {{< ui >}}Resolved{{< /ui >}} issue.  | You link the {{< ui >}}Resolved{{< /ui >}} issue to your {{< ui >}}To Do{{< /ui >}} ticket.  | The ticket is {{< ui >}}To Do{{< /ui >}} and all issues are {{< ui >}}For Review{{< /ui >}} except the new one which remains {{< ui >}}Resolved{{< /ui >}}. |
 
 ## Automation rules
 
@@ -117,13 +117,13 @@ To create automation rules for your Error Tracking issues, you need one (1) of t
 
 To create an automation rule for Jira:
 
-1. Navigate to [Error Tracking Settings][3], in the **Ticketing & Automation** section.
-2. Click **New Rule**.
+1. Navigate to [Error Tracking Settings][3], in the {{< ui >}}Ticketing & Automation{{< /ui >}} section.
+2. Click {{< ui >}}New Rule{{< /ui >}}.
 3. Configure the rule:
-    - **Match Criteria**: Define conditions that issues must meet to trigger the rule
-    - **Destination**: Select the destination Jira account and project when tickets are created from issues that match the rule. Select the type of ticket you want to create, and provide values for any required fields of the ticket.
-    - **Auto-create**: Optionally enable automatic ticket creation when issues match
-4. Click **Save Rule**.
+    - {{< ui >}}Match Criteria{{< /ui >}}: Define conditions that issues must meet to trigger the rule
+    - {{< ui >}}Destination{{< /ui >}}: Select the destination Jira account and project when tickets are created from issues that match the rule. Select the type of ticket you want to create, and provide values for any required fields of the ticket.
+    - {{< ui >}}Auto-create{{< /ui >}}: Optionally enable automatic ticket creation when issues match
+4. Click {{< ui >}}Save Rule{{< /ui >}}.
 
 {{< img src="error_tracking/create-jira-automation-rule.png" alt="Create a Jira automation rule" style="width:100%;" >}}
 
@@ -131,8 +131,8 @@ To create an automation rule for Jira:
 
 Configure rules based on the following attributes:
 
-- **Service**: Match issues from specific services (for example, `service:web-store`)
-- **Team**: Match issues based on [Issue Team Ownership][4] (for example, `team:Shopist`)
+- {{< ui >}}Service{{< /ui >}}: Match issues from specific services (for example, `service:web-store`)
+- {{< ui >}}Team{{< /ui >}}: Match issues based on [Issue Team Ownership][4] (for example, `team:Shopist`)
 
 You can combine multiple criteria to create precise routing rules. The issue matching query supports the following operators:
 

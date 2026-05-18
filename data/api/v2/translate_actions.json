@@ -416,6 +416,50 @@
     "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Publish App"
   },
+  "UpdateAppFavorite": {
+    "description": "Add or remove an app from the current user's favorites. Favorited apps can be filtered for using the `filter[favorite]` query parameter on the [List Apps](https://docs.datadoghq.com/api/latest/app-builder/#list-apps) endpoint.",
+    "summary": "Update App Favorite Status",
+    "request_description": "",
+    "request_schema_description": "A request to add or remove an app from the current user's favorites."
+  },
+  "UpdateProtectionLevel": {
+    "description": "Update the publication protection level of an app. When set to `approval_required`, future publishes must go through an approval workflow before going live.",
+    "summary": "Update App Protection Level",
+    "request_description": "",
+    "request_schema_description": "A request to update an app's publication protection level."
+  },
+  "CreatePublishRequest": {
+    "description": "Create a publish request to ask for approval to publish an app whose protection level is `approval_required`. Publishing happens automatically once the request is approved by a user with the appropriate permissions.",
+    "summary": "Create Publish Request",
+    "request_description": "",
+    "request_schema_description": "A request to ask for approval to publish an app whose protection level is `approval_required`."
+  },
+  "RevertApp": {
+    "description": "Revert an app to a previous version. The version to revert to is selected through the `version` query parameter. The reverted version becomes the new latest version of the app.",
+    "summary": "Revert App"
+  },
+  "UpdateAppSelfService": {
+    "description": "Enable or disable self-service for an app. Self-service apps can be discovered and run by users in your organization without explicit access being granted.",
+    "summary": "Update App Self-Service Status",
+    "request_description": "",
+    "request_schema_description": "A request to enable or disable self-service for an app."
+  },
+  "UpdateAppTags": {
+    "description": "Replace the tags on an app. The provided list overwrites the existing tags entirely; tags not present in the request body are removed.",
+    "summary": "Update App Tags",
+    "request_description": "",
+    "request_schema_description": "A request to replace the tags on an app."
+  },
+  "UpdateAppVersionName": {
+    "description": "Assign a human-readable name to a specific version of an app. The version is selected through the `version` query parameter.",
+    "summary": "Name App Version",
+    "request_description": "",
+    "request_schema_description": "A request to assign a human-readable name to a specific app version."
+  },
+  "ListAppVersions": {
+    "description": "List the versions of an app. This endpoint is paginated.",
+    "summary": "List App Versions"
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
@@ -869,6 +913,12 @@
     "request_description": "",
     "request_schema_description": "Request object to update a resource filter."
   },
+  "UpsertSyncConfig": {
+    "description": "Enable Storage Management for an S3 bucket, GCS bucket, or Azure container by registering the destination that holds its inventory reports. Set `data.id` to the cloud provider (`aws`, `gcp`, or `azure`) and provide the matching settings under data.attributes. Calling this endpoint with the same provider replaces the existing configuration.",
+    "summary": "Enable Storage Management for a bucket",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
@@ -881,6 +931,10 @@
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
+  "GetRuleBasedView": {
+    "description": "Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
+    "summary": "Get the rule-based view of compliance findings"
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
@@ -888,6 +942,14 @@
   "ListContainers": {
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
+  },
+  "ListCostAnomalies": {
+    "description": "List detected Cloud Cost Management anomalies for the organization.",
+    "summary": "List cost anomalies"
+  },
+  "GetCostAnomaly": {
+    "description": "Get a detected Cloud Cost Management anomaly by UUID.",
+    "summary": "Get cost anomaly"
   },
   "ListCustomAllocationRules": {
     "description": "List all custom allocation rules - Retrieve a list of all custom allocation rules for the organization",
@@ -904,6 +966,10 @@
     "summary": "Reorder custom allocation rules",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
+  },
+  "ListCustomAllocationRulesStatus": {
+    "description": "List the processing status of all custom allocation rules. Returns only the ID and processing status for each rule.",
+    "summary": "List custom allocation rule statuses"
   },
   "DeleteCustomAllocationRule": {
     "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
@@ -994,6 +1060,38 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "GetCommitmentsCommitmentList": {
+    "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
+    "summary": "Get commitments list"
+  },
+  "GetCommitmentsCoverageScalar": {
+    "description": "Get scalar coverage metrics for cloud commitment programs, including hours and cost coverage percentages.",
+    "summary": "Get commitments coverage (scalar)"
+  },
+  "GetCommitmentsCoverageTimeseries": {
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "summary": "Get commitments coverage (timeseries)"
+  },
+  "GetCommitmentsOnDemandHotspotsScalar": {
+    "description": "Get scalar on-demand hot-spots data for cloud commitment programs, showing per-dimension breakdowns of on-demand spending with coverage metrics and potential savings.",
+    "summary": "Get commitments on-demand hot spots (scalar)"
+  },
+  "GetCommitmentsSavingsScalar": {
+    "description": "Get scalar savings metrics for cloud commitment programs, including realized savings and effective savings rate.",
+    "summary": "Get commitments savings (scalar)"
+  },
+  "GetCommitmentsSavingsTimeseries": {
+    "description": "Get timeseries savings metrics for cloud commitment programs, including actual cost, on-demand equivalent cost, realized savings, and effective savings rate over time.",
+    "summary": "Get commitments savings (timeseries)"
+  },
+  "GetCommitmentsUtilizationScalar": {
+    "description": "Get scalar utilization metrics for cloud commitment programs, including utilization percentage and unused cost.",
+    "summary": "Get commitments utilization (scalar)"
+  },
+  "GetCommitmentsUtilizationTimeseries": {
+    "description": "Get timeseries utilization metrics for cloud commitment programs, including used and unused cost series over time.",
+    "summary": "Get commitments utilization (timeseries)"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
@@ -1036,6 +1134,46 @@
     "request_description": "",
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
+  "ListCostOCIConfigs": {
+    "description": "List the OCI configs.",
+    "summary": "List Cloud Cost Management OCI configs"
+  },
+  "ListCostTagDescriptions": {
+    "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
+    "summary": "List Cloud Cost Management tag descriptions"
+  },
+  "ListCostTagKeys": {
+    "description": "List Cloud Cost Management tag keys.",
+    "summary": "List Cloud Cost Management tag keys"
+  },
+  "GetCostTagKey": {
+    "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
+    "summary": "Get a Cloud Cost Management tag key"
+  },
+  "ListCostTagMetadata": {
+    "description": "List Cloud Cost Management tag key metadata, including row counts, cost covered, cardinality, and a sample of top tag values per cloud account. Use `filter[daily]=true` to return daily rows instead of the default monthly roll-up.",
+    "summary": "List Cloud Cost Management tag key metadata"
+  },
+  "GetCostTagMetadataCurrency": {
+    "description": "Get the dominant billing currency observed in Cloud Cost Management data for the requested period. The response wraps the currency in a JSON:API `data` array containing at most one entry; the array is empty when no currency data is available.",
+    "summary": "Get the Cloud Cost Management billing currency"
+  },
+  "ListCostTagMetadataMetrics": {
+    "description": "List Cloud Cost Management metrics that have data for the requested period.",
+    "summary": "List available Cloud Cost Management metrics"
+  },
+  "ListCostTagMetadataOrchestrators": {
+    "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
+    "summary": "List Cloud Cost Management orchestrators"
+  },
+  "ListCostTagKeySources": {
+    "description": "List Cloud Cost Management tag keys observed for the requested period, along with the origin sources that produced them (for example, `aws-user-defined`, `custom`).",
+    "summary": "List Cloud Cost Management tag sources"
+  },
+  "ListCostTags": {
+    "description": "List Cloud Cost Management tags for a given metric.",
+    "summary": "List Cloud Cost Management tags"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -1063,6 +1201,16 @@
   "ListAllCSMServerlessAgents": {
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
+  },
+  "GetCurrentUser": {
+    "description": "Get the user associated with the current authentication context.\nThe response includes the user's profile attributes (name, email, handle,\nstatus, MFA state), along with related resources: the user's organization,\nassigned roles with their granted permissions, and team-scoped roles.\nNo additional permissions are required beyond valid authentication.",
+    "summary": "Get current user"
+  },
+  "UpdateCurrentUser": {
+    "description": "Edit the profile of the currently authenticated user. Updatable fields\ninclude `name`, `title`, `email`, and `disabled` status. The `id` field\nin the request body must match the authenticated user's UUID; a mismatch\nreturns a 422 error. Email address changes are recorded in the audit trail.\nRequires the `user_self_profile_write` permission.",
+    "summary": "Update current user",
+    "request_description": "",
+    "request_schema_description": "Update a user."
   },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
@@ -2208,11 +2356,11 @@
     "request_schema_description": "Request to update an LLM Observability annotation queue."
   },
   "GetLLMObsAnnotatedInteractions": {
-    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
@@ -2502,7 +2650,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -2558,7 +2706,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
   "GetMonitorNotificationRules": {
@@ -3571,6 +3719,22 @@
     "request_description": "",
     "request_schema_description": "Definition of a group."
   },
+  "ListSCIMResourceTypes": {
+    "description": "List the SCIM resource types supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List resource types"
+  },
+  "GetSCIMResourceType": {
+    "description": "Get a single SCIM resource type using the `resource_id`.\nSupported `resource_id` values are `User` and `Group`.",
+    "summary": "Get resource type"
+  },
+  "ListSCIMSchemas": {
+    "description": "List the SCIM schemas supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List schemas"
+  },
+  "GetSCIMSchema": {
+    "description": "Get a single SCIM schema using the `schema_id`. Supported `schema_id`\nvalues are `urn:ietf:params:scim:schemas:core:2.0:User` and\n`urn:ietf:params:scim:schemas:core:2.0:Group`.",
+    "summary": "Get schema"
+  },
   "ListSCIMUsers": {
     "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
     "summary": "List users"
@@ -3953,6 +4117,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkDeleteSecurityMonitoringRules": {
+    "description": "Delete multiple security monitoring rules in a single request. Default rules cannot be deleted.",
+    "summary": "Bulk delete security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk deleting security monitoring rules."
+  },
   "BulkExportSecurityMonitoringRules": {
     "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
     "summary": "Bulk export security monitoring rules",
@@ -4325,6 +4495,12 @@
     "request_description": "",
     "request_schema_description": "The request for a spans list."
   },
+  "UploadSourceMap": {
+    "description": "Upload source maps, symbol files, and mapping files to Datadog for error deobfuscation.\nThis endpoint enables you to upload various types of debug symbols for RUM Error Tracking,\nallowing Datadog to display readable stack traces instead of minified or obfuscated code.\n\n**Request format:**\n\nEach request is a `multipart/form-data` upload containing two parts:\n\n1. `event` — a JSON-encoded string with the upload metadata (type, service, version, etc.)\n2. One or more binary file fields (for example, `source_map`, `symbols_archive`)\n\n**Supported upload types** (set via `event.type`):\n- `js_sourcemap`: JavaScript source maps for browser applications\n- `react_native_sourcemap`: React Native source maps for mobile applications\n- `jvm_mapping_file`: ProGuard/R8 mapping files for Android crash deobfuscation\n- `ios_symbols`: dSYM files for iOS crash symbolication\n- `flutter_symbol_file`: Flutter symbol files\n- `ndk_symbol_file`: Android NDK symbol files for native crashes\n- `il2cpp_mapping_file`: IL2CPP mapping files for Unity\n- `elf_symbol_file`: ELF symbol files for Linux/Unix\n- `pe_symbol_file`: PE/PDB symbol files for Windows\n- `repository`: Repository metadata for source code linking\n\n**Limits:**\n- Maximum file size: 500 MB\n\n**Note:** For most use cases, Datadog recommends using the\n[Datadog CLI (datadog-ci)](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)\nwhich provides a simplified interface for uploading source maps.",
+    "summary": "Upload source maps",
+    "request_description": "",
+    "request_schema_description": "Multipart form data for uploading a source map, symbol file, or mapping file."
+  },
   "CreateSCAResult": {
     "summary": "Post dependencies for analysis",
     "request_description": "",
@@ -4398,7 +4574,7 @@
     "summary": "List status pages"
   },
   "CreateStatusPage": {
-    "description": "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead.",
+    "description": "Creates a new status page in an unpublished state. Use the dedicated [publish](#publish-status-page) status page endpoint to publish the page after creation.",
     "summary": "Create status page",
     "request_description": "",
     "request_schema_description": "Request object for creating a status page."
@@ -4455,6 +4631,12 @@
     "request_description": "",
     "request_schema_description": "Request object for creating a degradation."
   },
+  "CreateBackfilledDegradation": {
+    "description": "Creates a backfilled degradation with predefined updates.",
+    "summary": "Create backfilled degradation",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled degradation."
+  },
   "DeleteDegradation": {
     "description": "Deletes a degradation by its ID.",
     "summary": "Delete degradation"
@@ -4474,6 +4656,12 @@
     "summary": "Schedule maintenance",
     "request_description": "",
     "request_schema_description": "Request object for creating a maintenance."
+  },
+  "CreateBackfilledMaintenance": {
+    "description": "Creates a backfilled maintenance with predefined updates.",
+    "summary": "Create backfilled maintenance",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled maintenance."
   },
   "GetMaintenance": {
     "description": "Retrieves a specific maintenance by its ID.",
@@ -4670,6 +4858,10 @@
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
   },
+  "ListTagPipelinesRulesetsStatus": {
+    "description": "List the processing status of all tag pipeline rulesets. Returns only the ID and processing status for each ruleset.",
+    "summary": "List tag pipeline ruleset statuses"
+  },
   "ValidateQuery": {
     "description": "Validate a tag pipeline query - Validate the syntax and structure of a tag pipeline query",
     "summary": "Validate query",
@@ -4845,30 +5037,6 @@
     "request_description": "",
     "request_schema_description": "Team permission setting update request"
   },
-  "ListIncidentTeams": {
-    "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
-    "summary": "Get a list of all incident teams"
-  },
-  "CreateIncidentTeam": {
-    "description": "Creates a new incident team.",
-    "summary": "Create a new incident team",
-    "request_description": "Incident Team Payload.",
-    "request_schema_description": "Create request with an incident team payload."
-  },
-  "DeleteIncidentTeam": {
-    "description": "Deletes an existing incident team.",
-    "summary": "Delete an existing incident team"
-  },
-  "GetIncidentTeam": {
-    "description": "Get details of an incident team. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident teams.",
-    "summary": "Get details of an incident team"
-  },
-  "UpdateIncidentTeam": {
-    "description": "Updates an existing incident team. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing incident team",
-    "request_description": "Incident Team Payload.",
-    "request_schema_description": "Update request with an incident team payload."
-  },
   "UpdateFlakyTests": {
     "description": "Update the state of multiple flaky tests in Flaky Test Management.",
     "summary": "Update flaky test states",
@@ -4971,14 +5139,22 @@
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
   },
+  "Validate": {
+    "description": "Check if the API key is valid. Returns the organization UUID, API key ID, and associated scopes.",
+    "summary": "Validate API key"
+  },
+  "ValidateAPIKey": {
+    "description": "Check that the API key and application key used for the request are both valid.\nReturns `{\"status\": \"ok\"}` on success, `401` or `403` otherwise. Useful as a\nlightweight authentication probe before issuing other API calls that require\nfull credentials.",
+    "summary": "Validate API and application keys"
+  },
   "SearchWidgets": {
-    "description": "Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.",
+    "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",
     "summary": "Search widgets"
   },
   "CreateWidget": {
     "description": "Create a new widget for a given experience type.",
     "summary": "Create a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`: every type requires `requests`, and\nsome types require additional fields (e.g. `cloud_cost_summary`\nrequires `graph_options`, `geomap` requires `style` and `view`).\nThe example below shows a complete `cloud_cost_summary` payload\nfor the `ccm_reports` experience type.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "DeleteWidget": {
@@ -4992,7 +5168,7 @@
   "UpdateWidget": {
     "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
     "summary": "Update a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {

@@ -772,7 +772,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    val okHttpClient = OkHttpClient.Builder()
      .addInterceptor(
        DatadogInterceptor.Builder(tracedHosts)
-         .setTraceSampler(RateBasedSampler(20f))
+         .setTraceSampleRate(20f)
          .build()
      )
      .build()
@@ -784,7 +784,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    OkHttpClient okHttpClient = new OkHttpClient.Builder()
      .addInterceptor(
        new DatadogInterceptor.Builder(tracedHosts)
-         .setTraceSampler(new RateBasedSampler(20f))
+         .setTraceSampleRate(20f)
          .build()
      )
      .build();
@@ -805,12 +805,12 @@ val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient =  OkHttpClient.Builder()
   .addInterceptor(
     DatadogInterceptor.Builder(tracedHosts)
-      .setTraceSampler(RateBasedSampler(20f))
+      .setTraceSampleRate(20f)
       .build()
   )
   .addNetworkInterceptor(
     TracingInterceptor.Builder(tracedHosts)
-      .setTraceSampler(RateBasedSampler(100f))
+      .setTraceSampleRate(100f)
       .build()
   )
   .build()
@@ -822,12 +822,12 @@ List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
   .addInterceptor(
     new DatadogInterceptor.Builder(tracedHosts)
-      .setTraceSampler(new RateBasedSampler(20f))
+      .setTraceSampleRate(20f)
       .build()
   )
   .addNetworkInterceptor(
     new TracingInterceptor.Builder(tracedHosts)
-      .setTraceSampler(new RateBasedSampler(20f))
+      .setTraceSampleRate(20f)
       .build()
   )
   .build();
