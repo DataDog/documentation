@@ -168,8 +168,6 @@ Install the `dd-llmo` skills with the following command:
 npx skills add datadog-labs/agent-skills --skill dd-llmo --full-depth -y
 ```
 
-{{< img src="llm_observability/skills/skills-install.png" alt="Claude Code terminal showing the npx skills add command completing with the five dd-llmo skills listed" >}}
-
 The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
 
 ```shell
@@ -199,8 +197,6 @@ Restart Claude Code after running both commands for the skills to appear.
 /llm-obs-session-classify ml_app=my-chatbot --timeframe now-7d
 ```
 
-{{< img src="llm_observability/skills/session-classify-output.png" alt="Claude Code session showing the llm-obs-session-classify verdict block with trace evidence and RUM signal summary" >}}
-
 #### Trace root cause analysis
 
 `/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
@@ -211,8 +207,6 @@ When Claude Code has access to your codebase, the skill can search for the relev
 /llm-obs-trace-rca ml_app=my-chatbot
 /llm-obs-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
 ```
-
-{{< img src="llm_observability/skills/trace-rca-report.png" alt="Claude Code session showing the llm-obs-trace-rca RCA report with failure taxonomy table and a BEFORE/AFTER fix proposal for a system prompt deficiency" >}}
 
 #### Evaluator bootstrap
 
@@ -241,8 +235,6 @@ When Claude Code has access to your codebase, the skill can search for the relev
 /llm-obs-eval-pipeline my-chatbot
 /llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
 ```
-
-{{< img src="llm_observability/skills/eval-pipeline-checkpoint.png" alt="Claude Code session showing the llm-obs-eval-pipeline Phase 1 checkpoint with classification summary and a prompt asking for confirmation before proceeding to root cause analysis" >}}
 
 For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
 
