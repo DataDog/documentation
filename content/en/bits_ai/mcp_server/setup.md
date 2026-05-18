@@ -562,28 +562,24 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
-### Exclude specific tools with `omit_tools`
+### Omit specific tools
 
-Use the `omit_tools` query parameter to remove specific tools from the final tool list. This is useful when you want a broad toolset but need to exclude a few tools for tighter context control. Provide tool names as a comma-separated list.
+Use the `omit_tools` query parameter to remove specific tools from the final tool list.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Examples for your selected site ({{< region-param key="dd_site_name" >}}):
 
-- Exclude specific tools from the default set:
+- Omit tools from the default set:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?omit_tools=search_datadog_logs,search_datadog_spans</code></pre>
 
-- Select toolsets, then exclude one tool:
+- Select toolsets, then omit one tool:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,software-delivery&omit_tools=search_datadog_incidents</code></pre>
 
-- Start from all generally available toolsets, then exclude write tools:
+- Start from all generally available toolsets, then omit write tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all&omit_tools=create_datadog_notebook,edit_datadog_notebook</code></pre>
 {{< /site-region >}}
 
-When both parameters are present, the server resolves `toolsets` first and then removes any matching tools listed in `omit_tools`.
-
-If `omit_tools` includes unknown tool names, the server warns and continues instead of failing the connection.
-
-Use `toolsets` for broad scoping first, then use `omit_tools` for fine-grained exclusions.
+Provide tool names as a comma-separated list. When both parameters are present, the server resolves `toolsets` first and then removes matching tools in `omit_tools`. If `omit_tools` includes unknown tool names, the server warns and continues.
 
 ### Available toolsets
 
