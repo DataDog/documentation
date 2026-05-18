@@ -15,9 +15,7 @@ cascade:
     site_support_id: bits_business_analyst
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/bits-business-analyst" >}}
-Bits Business Analyst is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+<div class="alert alert-info">Bits Business Analyst is in Preview. Contact your Datadog representative to sign up.</div>
 
 ## Overview
 
