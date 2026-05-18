@@ -225,6 +225,7 @@ Depending on the mode, the Terraform creates:
 - An ingress rule on the database security group from the node SG
 
 `terraform apply` takes about 3 minutes.
+
 **Greenfield mode** (`eks_cluster_name = ""`):
 - All BYO resources
 - `aws_eks_cluster`
