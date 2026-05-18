@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Lapdog is a local development tool for LLM Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
+Lapdog is a local development tool for LLM Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
 
 Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in LLM Observability alongside your production traffic.
 
@@ -56,6 +56,12 @@ lapdog claude
 ```
 Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code with hooks wired up.
 {{% /tab %}}
+{{% tab "Codex" %}}
+```shell
+lapdog codex
+```
+Starts the local agent, then launches Codex with an OpenAI-compatible proxy and JSONL watcher that capture every LLM request, tool call, and step into a session.
+{{% /tab %}}
 {{% tab "Pi" %}}
 ```shell
 lapdog pi
@@ -69,6 +75,8 @@ lapdog python my_app.py
 Run any command with `ddtrace` auto-instrumentation pointed at the local agent. Useful for instrumenting your own LLM-powered application during development.
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: `lapdog claude` and `lapdog codex` are proxy-backed: the local Lapdog agent sits in the live model-request path. Keep Lapdog running until the coding agent exits. If you stop or kill Lapdog mid-session, the launched coding agent can stop making progress on model calls. Restart the coding agent after restarting Lapdog. `lapdog pi` and hook-only setups fail open if Lapdog goes down: the coding agent keeps running, but capture data is lost.
 
 ## View sessions
 
@@ -91,6 +99,7 @@ Forwarded spans are tagged `source:lapdog` so you can distinguish development se
 | Command | What it does |
 | --- | --- |
 | `lapdog claude` | Launch Claude Code with capture wired up |
+| `lapdog codex` | Launch Codex with the OpenAI proxy and JSONL watcher wired up |
 | `lapdog pi` | Launch Pi with the lapdog extension installed |
 | `lapdog python app.py` | Run any application with tracing instrumentation |
 | `lapdog start` | Start the local agent in the background |
