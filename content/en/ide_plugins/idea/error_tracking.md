@@ -66,7 +66,7 @@ When a local agent is detected (you have the Claude Code, Gemini, or Codex CLI i
 #### Context tab
 The Context tab shows details about the issue including the service, first-seen and last-seen information, the issue's assignee, and the error count over time.
 
-{{< img src="/ide_plugins/idea/error_tracking/context_tab.png" alt="JetBrains Error Tracking Context tab" style="width:60%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/context_tab.png" alt="JetBrains Error Tracking Context tab" style="width:50%;" >}}
 
 #### Tags tab
 The Tags tab shows a breakdown of common tags to help you understand the distribution of the issue.
