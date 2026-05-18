@@ -41,7 +41,7 @@ CI Visibility tracks the performance and results of your CI pipelines, and displ
 
 To start sending pipeline metrics, see the documentation for one of the following CI providers that Datadog supports below.
 
-{{< card-grid >}}
+{{< card-grid min_width="200px">}}
   {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
   {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
   {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}
@@ -53,8 +53,6 @@ To start sending pipeline metrics, see the documentation for one of the followin
   {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
   {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
 {{< /card-grid >}}
-
-</br>
 
 If your CI provider is not supported, you can programmatically send your pipeline events to Datadog. See the [Send pipeline events to Datadog section](#send-pipeline-events-to-datadog).
 

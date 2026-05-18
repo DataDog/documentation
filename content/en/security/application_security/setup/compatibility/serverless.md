@@ -13,7 +13,7 @@ App and API Protection provides serverless capability for the following platform
   {{< image-card href="/security/application_security/serverless/#aws-lambda" src="integrations_logos/amazon_lambda.png" alt="AWS Lambda" >}}
   {{< image-card href="/security/application_security/serverless/#google-cloud-run" src="integrations_logos/google_cloud_run.png" alt="Google Cloud Run" >}}
   {{< image-card href="/security/application_security/serverless/#azure-app-service" src="integrations_logos/azure_app_services.png" alt="Microsoft Azure App Service" >}}
-{{< /card-grid >}}</br>
+{{< /card-grid >}}
 
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].

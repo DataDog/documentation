@@ -39,7 +39,7 @@ Static Code Analysis helps you identify security vulnerabilities and maintainabi
 
 Static Code Analysis supports scanning for security vulnerabilities and poor coding practices in the following languages and technologies:
 
-{{< card-grid img_width="80" >}}
+{{< card-grid min_width="130px" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=JavaScript" src="integrations_logos/javascript_large.png" alt="javascript" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript" src="integrations_logos/typescript_large.svg" alt="typescript" >}}
@@ -57,7 +57,6 @@ Static Code Analysis supports scanning for security vulnerabilities and poor cod
   {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" >}}
 {{< /card-grid >}}
 
-<!-- </br>  -->
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
 To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
 

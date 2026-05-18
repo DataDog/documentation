@@ -40,6 +40,7 @@
   justify-content: center;
   gap: 1rem;
   margin-top: 14px;
+  margin-bottom: 1.5rem;
 }
 
 .card-grid-card {
@@ -49,7 +50,22 @@
   text-decoration: none;
 
   .card-body {
-    height: 120px;
+    min-height: 100px;
+    height: 100%;
+  }
+
+  &.has-title .card-body {
+    height: 140px;
+  }
+
+  .card-grid-card-title {
+    font-size: 16px;
+    color: #000;
+    margin-top: 6px;
+  }
+
+  h5 + small {
+    color: $ddpurple;
   }
 
   img {
@@ -57,6 +73,7 @@
     max-height: 100%;
     object-fit: contain;
   }
+
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   transition: border-color 0.15s, box-shadow 0.15s;

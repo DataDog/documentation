@@ -41,7 +41,7 @@ Test Optimization tracks the performance and results of your CI tests, and displ
 
 To start instrumenting and running tests, see the documentation for one of the following languages.
 
-{{< card-grid img_width="200" >}}
+{{< card-grid min_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
   {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}
@@ -58,7 +58,7 @@ Test Optimization is compatible with any CI provider and is not limited to those
 
 ## Use CI test data
 
-Access your tests’ metrics (such as executions, duration, distribution of duration, overall success rate, failure rate, and more) to start identifying important trends and patterns using the data collected from your tests across CI pipelines.
+Access your tests' metrics (such as executions, duration, distribution of duration, overall success rate, failure rate, and more) to start identifying important trends and patterns using the data collected from your tests across CI pipelines.
 
 {{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Out-of-the-box Test Optimization dashboard in Datadog" style="width:100%;" >}}
 
