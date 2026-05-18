@@ -670,7 +670,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 
 - **[Bits AI Dev Agent][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, the Bits AI Dev Agent creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up the Bits AI Dev Agent][13] to use this feature.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
-- **[Cost Optimization Automation][15]**: Set up automation policies that act on recommendations continuously on a recurring schedule. Policies are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
+- **[Cost Optimization Automation][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 
