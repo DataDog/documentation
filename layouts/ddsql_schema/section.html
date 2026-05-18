@@ -229,7 +229,7 @@
                     >
                         <div class="d-flex align-items-center h-100">
                             <span class="set-header__text fw-semibold">{{$namespace}} Datasets</span>
-                            <span data-anchor="#{{$namespace | anchorize}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "link-wui" "title" (printf "copy anchor for %s" $namespace) ) }}</span>
+                            <span data-anchor="#{{$namespace | anchorize}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $namespace) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
                         <div class="set-header__arrow fw-semibold">></div>
