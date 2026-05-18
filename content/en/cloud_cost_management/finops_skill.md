@@ -22,8 +22,8 @@ further_reading:
   text: "Budgets"
 ---
 
-{{< callout url="#" btn_hidden="true" header="FinOps skill is in Preview" >}}
-The FinOps skill runs in Bits Assistant. Fill out the [Bits Assistant Preview form][8] to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="FinOps skill is in Preview" >}}
+The FinOps skill runs in Bits Assistant. Fill out the Bits Assistant Preview form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -35,7 +35,7 @@ The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assista
 - Investigate cost changes, anomalies, and cost monitor alerts.
 - Identify teams, services, accounts, regions, or resources driving spend.
 - Answer ad hoc questions about cloud, SaaS, custom, or Datadog costs.
-- Compare actual spend and forecasts against [budgets][3].
+- Compare actual spend and forecasts against [budgets][2].
 - Correlate cost changes with observability metrics, such as CPU, memory, request volume, or storage size.
 - Create Datadog Notebooks that capture an investigation for handoff or future reference.
 
@@ -43,11 +43,11 @@ The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assista
 
 To use the FinOps skill for Bits Assistant, you must:
 
-- [Set up Cloud Cost Management][4] for the cost sources you want to analyze.
+- [Set up Cloud Cost Management][3] for the cost sources you want to analyze.
 - Have these permissions:
-  - [Bits Assistant Access][9] permission
-  - [Cloud Cost Management permissions][7] for the data you ask about
-  - (Optional) [Notebook permissions][10], if you want to create or edit investigation notebooks.
+  - [Bits Assistant Access][4] permission
+  - [Cloud Cost Management permissions][5] for the data you ask about
+  - (Optional) [Notebook permissions][6], if you want to create or edit investigation notebooks.
 
 ## FinOps skill in Bits Assistant
 
@@ -55,11 +55,11 @@ To use the FinOps skill for Bits Assistant, you must:
 
 Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to trigger the FinOps skill in areas such as:
 
-- [Budgets][13]
-- [Cost monitors][14] that are triggered
-- [Cost anomalies][15]
-- The Investigate Cost Changes section of the [Summarize][11] page
-- The Total Cost Change section on the [Explorer][12] page
+- [Budgets][7]
+- [Cost monitors][8] that are triggered
+- [Cost anomalies][9]
+- The Investigate Cost Changes section of the [Summarize][10] page
+- The Total Cost Change section on the [Explorer][11] page
 
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top left of any Datadog page to open the Bits Assistant and ask a cost question.
 
@@ -107,7 +107,7 @@ After the initial summary, choose from guided follow-up paths:
 
 ### Budgets and forecasting
 
-If you set up [Budgets][3], use the FinOps skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
+If you set up [Budgets][2], use the FinOps skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
 
 - Actual spend versus budgeted amount.
 - Forecasted spend versus budgeted amount.
@@ -123,16 +123,16 @@ After the initial summary, choose from guided follow-up paths:
 
 ## Use the Datadog MCP Server for cost analysis
 
-The [Datadog MCP Server][2] lets external AI agents query Datadog data. This is useful when you want to ask cost questions from an IDE, terminal-based assistant, or custom AI workflow.
+The [Datadog MCP Server][12] lets external AI agents query Datadog data. This is useful when you want to ask cost questions from an IDE, terminal-based assistant, or custom AI workflow.
 
-To use an external AI agent, [set up the Datadog MCP Server][5]. If your MCP client filters toolsets, include the `core` toolset to use the metric tools that can query Cloud Cost Management data.
+To use an external AI agent, [set up the Datadog MCP Server][13]. If your MCP client filters toolsets, include the `core` toolset to use the metric tools that can query Cloud Cost Management data.
 
 Cloud Cost Management data is available through the core metric tools:
 
 | MCP tool                          | Usage                                 |
 | --------------------------------- | ------------------------------------- |
-| [`get_datadog_metric`][16]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
-| [`get_datadog_metric_context`][17] | Discover metadata, available tag keys, and tag values for a cost metric before querying it. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics.               |
+| [`get_datadog_metric`][14]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
+| [`get_datadog_metric_context`][15] | Discover metadata, available tag keys, and tag values for a cost metric before querying it. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics.               |
 
 Example prompts for MCP-connected agents:
 
@@ -142,26 +142,25 @@ Example prompts for MCP-connected agents:
 
 Use the cloud cost flag only for Cloud Cost Management metrics such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
 
-For connection instructions, supported clients, and toolset configuration, see [Set Up the Datadog MCP Server][5]. For the full MCP tool reference, see [Datadog MCP Server Tools][6].
+For connection instructions, supported clients, and toolset configuration, see [Set Up the Datadog MCP Server][13]. For the full MCP tool reference, see [Datadog MCP Server Tools][16].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/bits_assistant/
-[2]: /bits_ai/mcp_server/
-[3]: /cloud_cost_management/planning/budgets/
-[4]: /cloud_cost_management/setup/
-[5]: /bits_ai/mcp_server/setup/
-[6]: /bits_ai/mcp_server/tools/
-[7]: /cloud_cost_management/setup/permissions/
-[8]: https://www.datadoghq.com/product-preview/bits-assistant/
-[9]: /account_management/rbac/permissions/#bits-assistant
-[10]: /account_management/rbac/permissions/#notebooks
-[11]: https://app.datadoghq.com/cost/summarize/overview
-[12]: https://app.datadoghq.com/cost/analyze/explorer
-[13]: https://app.datadoghq.com/cost/plan/budgets
-[14]: https://app.datadoghq.com/cost/monitor/monitors
-[15]: https://app.datadoghq.com/cost/monitor/anomalies
-[16]: /bits_ai/mcp_server/tools/#get_datadog_metric
-[17]: /bits_ai/mcp_server/tools/#get_datadog_metric_context
+[2]: /cloud_cost_management/planning/budgets/
+[3]: /cloud_cost_management/setup/
+[4]: /account_management/rbac/permissions/#bits-assistant
+[5]: /cloud_cost_management/setup/permissions/
+[6]: /account_management/rbac/permissions/#notebooks
+[7]: https://app.datadoghq.com/cost/plan/budgets
+[8]: https://app.datadoghq.com/cost/monitor/monitors
+[9]: https://app.datadoghq.com/cost/monitor/anomalies
+[10]: https://app.datadoghq.com/cost/summarize/overview
+[11]: https://app.datadoghq.com/cost/analyze/explorer
+[12]: /bits_ai/mcp_server/
+[13]: /bits_ai/mcp_server/setup/
+[14]: /bits_ai/mcp_server/tools/#get_datadog_metric
+[15]: /bits_ai/mcp_server/tools/#get_datadog_metric_context
+[16]: /bits_ai/mcp_server/tools/
