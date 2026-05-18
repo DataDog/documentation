@@ -753,7 +753,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 
 To add custom attributes to resources, use the `URLSessionTracking.resourceAttributesProvider` option when enabling the RUM. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource.
 
-For instance, to surface a correlation ID from a response header as a custom attribute on the resource:
+For instance, you may want to add HTTP request and response headers to the RUM resource:
 
 ```swift
 RUM.enable(
@@ -762,7 +762,8 @@ RUM.enable(
     urlSessionTracking: RUM.Configuration.URLSessionTracking(
         resourceAttributesProvider: { request, response, data, error in
             return [
-                "correlation-id": response?.value(forHTTPHeaderField: "x-correlation-id") ?? ""
+                "request.headers" : redactedHeaders(from: request),
+                "response.headers" : redactedHeaders(from: response)
             ]
         }
     )
