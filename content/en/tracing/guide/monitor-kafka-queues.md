@@ -14,9 +14,12 @@ further_reading:
   text: "Data Streams Monitoring"
 ---
 
-{{< callout url="/data_streams/kafka?utm_source=docs&utm_medium=callout&utm_campaign=DocsCTA-DSMKafka-TracingGuide" btn_hidden="false" header="Learn more" >}}
-**Data Streams Monitoring for Kafka** &mdash; track end-to-end producer/consumer lag, throughput, and message lineage on top of your APM data.
-{{< /callout >}}
+<div style="background:#f3edfa;border-left:4px solid #632ca6;padding:14px 18px;margin:24px 0;border-radius:4px;">
+  <p style="margin:0;line-height:1.5;">
+    <span style="display:inline-block;background:#632ca6;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:0.06em;text-transform:uppercase;margin-right:8px;vertical-align:middle;">New</span>
+    <strong>Kafka Monitoring</strong> tracks end-to-end producer/consumer lag, throughput, and message lineage on top of your APM data. <a href="/data_streams/kafka?utm_source=docs&utm_medium=callout&utm_campaign=DocsCTA-DSMKafka-TracingGuide">Try it &rarr;</a>
+  </p>
+</div>
 
 ## Overview
 
