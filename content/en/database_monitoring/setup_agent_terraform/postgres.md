@@ -233,7 +233,7 @@ Depending on the mode, the Terraform creates:
 - Two `aws_iam_role` instances
 - Five `aws_iam_role_policy_attachment` instances
 
- `terraform apply` typically takes 15-20 minutes.
+`terraform apply` typically takes 15-20 minutes.
 
 ### Required inputs
 
