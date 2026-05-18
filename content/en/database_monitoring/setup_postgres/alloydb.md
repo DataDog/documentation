@@ -22,7 +22,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 14, 15, 16, 17
+: 14, 15, 16, 17, 18
 
 Supported Agent versions
 : 7.36.1+
