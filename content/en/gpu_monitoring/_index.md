@@ -9,12 +9,6 @@ further_reading:
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">
-    GPU Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 ## Overview
 Datadog's [GPU Monitoring][1] provides a centralized view into your GPU fleet's health, cost, and performance. It enables teams to make better provisioning decisions, optimize and troubleshoot AI workload performance, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). GPU Monitoring supports fleets deployed across the major cloud providers (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or provisioned through GPU-as-a-Service platforms like Coreweave and Lambda Labs. 
 

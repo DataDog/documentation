@@ -11,6 +11,7 @@ further_reading:
   tag: "Blog"
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
+
 This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
 To get additional insights and advanced eBPF metrics, like GPU core utilization, you can optionally opt-in to enabling System Probe with privileged mode.
