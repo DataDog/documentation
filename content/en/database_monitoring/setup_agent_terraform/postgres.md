@@ -196,7 +196,7 @@ The example supports two modes:
 ### Additional prerequisites for greenfield mode
 
 - **AWS credentials** with permission to create EKS clusters, IAM roles + policy attachments, EKS managed node groups, and security-group rules.
-- **At least 2 private subnets in different AZs** in the database's VPC, with NAT egress so the control plane and worker nodes can reach Datadog and ECR.
+- **At least two private subnets in different AZs** in the database's VPC, with NAT egress so the control plane and worker nodes can reach Datadog and ECR.
 - **Awareness of ongoing cost** — provisioning a new EKS cluster adds approximately $0.10/hr for the control plane plus the EC2 node hourly rate, billed continuously while the cluster exists. See the [example README][7] for the full breakdown.
 
 ## Apply the Terraform
