@@ -3,7 +3,6 @@ title: AI Impact
 description: "Measure the impact of AI coding assistants on your software delivery performance with DORA Metrics."
 aliases:
 - /dora_metrics/ai-impact/
-- /dora_metrics/ai_impact/
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
@@ -36,7 +35,8 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 | Tool | Per-Commit Granularity | User Activity Granularity |
 |------|-----------|---------------|
 | [Cursor][2] | &#x2714; | &#x2714; |
-| [Claude Code][3] |  | &#x2714; |
+| [Claude Code API][3] |  | &#x2714; |
+| GitHub Copilot (Coming soon) |  | &#x2714; |
 
 ### Granularity modes
 
