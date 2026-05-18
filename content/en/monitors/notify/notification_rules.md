@@ -86,12 +86,12 @@ Notifications can be sent to email or any integration channel. There is a limit 
 
 #### Dynamic routing
 
-Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Service Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
+Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Software Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
 
 
 | Configuration | Description | Requirements |
 | --- | --- | --- |
-| **Service-based** | Checks the monitor's `service` tag or group tag, looks up which team manages that service in the Service Catalog, then sends the alert to that team's configured notification channels. | The service must have a team assigned in the Service Catalog. If no team is assigned, the alert falls back to the fallback recipients. |
+| **Service-based** | Checks the monitor's `service` tag or group tag, looks up which team manages that service in the Software Catalog, then sends the alert to that team's configured notification channels. | The service must have a team assigned in the Software Catalog. If no team is assigned, the alert falls back to the fallback recipients. |
 | **Team-based** | Directly checks the monitor's `team` tag or group tag, then sends the alert to that team's configured notification channels. | The monitor must have a `team` tag. |
 | **Fallback** | If routing cannot resolve (for example, the service has no team assigned or the team has no notification channels configured), the alert goes to the fallback recipients. Fallback recipients behave the same as manual routing recipients. | Required for all dynamic routing rules. |
 
