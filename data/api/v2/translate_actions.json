@@ -416,6 +416,50 @@
     "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Publish App"
   },
+  "UpdateAppFavorite": {
+    "description": "Add or remove an app from the current user's favorites. Favorited apps can be filtered for using the `filter[favorite]` query parameter on the [List Apps](https://docs.datadoghq.com/api/latest/app-builder/#list-apps) endpoint.",
+    "summary": "Update App Favorite Status",
+    "request_description": "",
+    "request_schema_description": "A request to add or remove an app from the current user's favorites."
+  },
+  "UpdateProtectionLevel": {
+    "description": "Update the publication protection level of an app. When set to `approval_required`, future publishes must go through an approval workflow before going live.",
+    "summary": "Update App Protection Level",
+    "request_description": "",
+    "request_schema_description": "A request to update an app's publication protection level."
+  },
+  "CreatePublishRequest": {
+    "description": "Create a publish request to ask for approval to publish an app whose protection level is `approval_required`. Publishing happens automatically once the request is approved by a user with the appropriate permissions.",
+    "summary": "Create Publish Request",
+    "request_description": "",
+    "request_schema_description": "A request to ask for approval to publish an app whose protection level is `approval_required`."
+  },
+  "RevertApp": {
+    "description": "Revert an app to a previous version. The version to revert to is selected through the `version` query parameter. The reverted version becomes the new latest version of the app.",
+    "summary": "Revert App"
+  },
+  "UpdateAppSelfService": {
+    "description": "Enable or disable self-service for an app. Self-service apps can be discovered and run by users in your organization without explicit access being granted.",
+    "summary": "Update App Self-Service Status",
+    "request_description": "",
+    "request_schema_description": "A request to enable or disable self-service for an app."
+  },
+  "UpdateAppTags": {
+    "description": "Replace the tags on an app. The provided list overwrites the existing tags entirely; tags not present in the request body are removed.",
+    "summary": "Update App Tags",
+    "request_description": "",
+    "request_schema_description": "A request to replace the tags on an app."
+  },
+  "UpdateAppVersionName": {
+    "description": "Assign a human-readable name to a specific version of an app. The version is selected through the `version` query parameter.",
+    "summary": "Name App Version",
+    "request_description": "",
+    "request_schema_description": "A request to assign a human-readable name to a specific app version."
+  },
+  "ListAppVersions": {
+    "description": "List the versions of an app. This endpoint is paginated.",
+    "summary": "List App Versions"
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
@@ -887,6 +931,10 @@
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
+  "GetRuleBasedView": {
+    "description": "Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
+    "summary": "Get the rule-based view of compliance findings"
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
@@ -1012,6 +1060,38 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "GetCommitmentsCommitmentList": {
+    "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
+    "summary": "Get commitments list"
+  },
+  "GetCommitmentsCoverageScalar": {
+    "description": "Get scalar coverage metrics for cloud commitment programs, including hours and cost coverage percentages.",
+    "summary": "Get commitments coverage (scalar)"
+  },
+  "GetCommitmentsCoverageTimeseries": {
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "summary": "Get commitments coverage (timeseries)"
+  },
+  "GetCommitmentsOnDemandHotspotsScalar": {
+    "description": "Get scalar on-demand hot-spots data for cloud commitment programs, showing per-dimension breakdowns of on-demand spending with coverage metrics and potential savings.",
+    "summary": "Get commitments on-demand hot spots (scalar)"
+  },
+  "GetCommitmentsSavingsScalar": {
+    "description": "Get scalar savings metrics for cloud commitment programs, including realized savings and effective savings rate.",
+    "summary": "Get commitments savings (scalar)"
+  },
+  "GetCommitmentsSavingsTimeseries": {
+    "description": "Get timeseries savings metrics for cloud commitment programs, including actual cost, on-demand equivalent cost, realized savings, and effective savings rate over time.",
+    "summary": "Get commitments savings (timeseries)"
+  },
+  "GetCommitmentsUtilizationScalar": {
+    "description": "Get scalar utilization metrics for cloud commitment programs, including utilization percentage and unused cost.",
+    "summary": "Get commitments utilization (scalar)"
+  },
+  "GetCommitmentsUtilizationTimeseries": {
+    "description": "Get timeseries utilization metrics for cloud commitment programs, including used and unused cost series over time.",
+    "summary": "Get commitments utilization (timeseries)"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
@@ -1069,6 +1149,26 @@
   "GetCostTagKey": {
     "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
     "summary": "Get a Cloud Cost Management tag key"
+  },
+  "ListCostTagMetadata": {
+    "description": "List Cloud Cost Management tag key metadata, including row counts, cost covered, cardinality, and a sample of top tag values per cloud account. Use `filter[daily]=true` to return daily rows instead of the default monthly roll-up.",
+    "summary": "List Cloud Cost Management tag key metadata"
+  },
+  "GetCostTagMetadataCurrency": {
+    "description": "Get the dominant billing currency observed in Cloud Cost Management data for the requested period. The response wraps the currency in a JSON:API `data` array containing at most one entry; the array is empty when no currency data is available.",
+    "summary": "Get the Cloud Cost Management billing currency"
+  },
+  "ListCostTagMetadataMetrics": {
+    "description": "List Cloud Cost Management metrics that have data for the requested period.",
+    "summary": "List available Cloud Cost Management metrics"
+  },
+  "ListCostTagMetadataOrchestrators": {
+    "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
+    "summary": "List Cloud Cost Management orchestrators"
+  },
+  "ListCostTagKeySources": {
+    "description": "List Cloud Cost Management tag keys observed for the requested period, along with the origin sources that produced them (for example, `aws-user-defined`, `custom`).",
+    "summary": "List Cloud Cost Management tag sources"
   },
   "ListCostTags": {
     "description": "List Cloud Cost Management tags for a given metric.",
@@ -1345,12 +1445,6 @@
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
-  },
-  "CreateEmailTransportWebhookIntake": {
-    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
-    "summary": "Ingest email transport webhook events",
-    "request_description": "",
-    "request_schema_description": "A batch of email transport webhook log events."
   },
   "SearchIssues": {
     "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
@@ -2266,7 +2360,7 @@
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
@@ -3624,6 +3718,22 @@
     "summary": "Update group",
     "request_description": "",
     "request_schema_description": "Definition of a group."
+  },
+  "ListSCIMResourceTypes": {
+    "description": "List the SCIM resource types supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List resource types"
+  },
+  "GetSCIMResourceType": {
+    "description": "Get a single SCIM resource type using the `resource_id`.\nSupported `resource_id` values are `User` and `Group`.",
+    "summary": "Get resource type"
+  },
+  "ListSCIMSchemas": {
+    "description": "List the SCIM schemas supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List schemas"
+  },
+  "GetSCIMSchema": {
+    "description": "Get a single SCIM schema using the `schema_id`. Supported `schema_id`\nvalues are `urn:ietf:params:scim:schemas:core:2.0:User` and\n`urn:ietf:params:scim:schemas:core:2.0:Group`.",
+    "summary": "Get schema"
   },
   "ListSCIMUsers": {
     "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
