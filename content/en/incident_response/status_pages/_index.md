@@ -143,16 +143,16 @@ After a degradation notice is reviewed and published, it:
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
-#### Backfill a degradation
+### Backfill a degradation
 
 Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
 
-From a status page, under **Publish Notice**, click **Publish Backfilled Notice**, select **Degradation**, then provide:
+From a status page, select the dropdown next to **Publish Notice**, click **Publish Backfilled Notice**, select **Degradation**, then provide:
 
 | Field | Description |
 | ---- | ---- |
 | **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
-| **Updates** | One or more timestamped updates reconstructing the incident timeline. Each update includes a started at timestamp, status (Investigating, Identified, Monitoring, or Resolved), description, and impacted components. |
+| **Updates** | Exactly two timestamped updates representing the start and end of the degradation. Each update requires a started at timestamp, status (Investigating or Resolved), description, and affected components. |
 
 {{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
 
@@ -181,11 +181,11 @@ After reviewing and scheduling, the maintenance window:
 
 You can post updates if plans change or reschedule the maintenance window as needed.
 
-#### Backfill a maintenance window
+### Backfill a maintenance window
 
 Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
 
-From a status page, under **Publish Notice**, click **Publish Backfilled Notice**, select **Scheduled Maintenance**, then provide:
+From a status page, select the dropdown next to **Publish Notice**, click **Publish Backfilled Notice**, select **Scheduled Maintenance**, then provide:
 
 | Field | Description |
 | ---- | ---- |
