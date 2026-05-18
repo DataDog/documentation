@@ -66,6 +66,8 @@ AI summaries and smart chapters are generated for sessions with at least four us
 
 ## Comments
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). If you require this capability, contact <a href="/help/">Datadog Support</a>.</div>{{< /site-region >}}
+
 Session Replay comments allow your team to collaborate on bugs, usability issues, and other observations directly within a replay.
 
 With comments, you can:

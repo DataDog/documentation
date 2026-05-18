@@ -1148,6 +1148,31 @@ menu:
       url: /api/latest/key-management/
       identifier: key-management
       generated: true
+    - name: Validate API and application keys
+      url: '#validate-api-and-application-keys'
+      identifier: key-management-validate-api-and-application-keys
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateAPIKey
+        unstable: []
+        order: 21
+    - name: Validate API key
+      url: '#validate-api-key'
+      identifier: key-management-validate-api-key
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - Validate
+        unstable:
+          - v2
+        order: 20
     - name: Update a personal access token
       url: '#update-a-personal-access-token'
       identifier: key-management-update-a-personal-access-token
@@ -2965,6 +2990,18 @@ menu:
           - BulkExportSecurityMonitoringRules
         unstable: []
         order: 61
+    - name: Bulk delete security monitoring rules
+      url: '#bulk-delete-security-monitoring-rules'
+      identifier: security-monitoring-bulk-delete-security-monitoring-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteSecurityMonitoringRules
+        unstable: []
+        order: 97
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -5707,6 +5744,30 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Update current user
+      url: '#update-current-user'
+      identifier: users-update-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCurrentUser
+        unstable: []
+        order: 13
+    - name: Get current user
+      url: '#get-current-user'
+      identifier: users-get-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCurrentUser
+        unstable: []
+        order: 12
     - name: Anonymize users
       url: '#anonymize-users'
       identifier: users-anonymize-users
@@ -6494,6 +6555,102 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List App Versions
+      url: '#list-app-versions'
+      identifier: app-builder-list-app-versions
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAppVersions
+        unstable: []
+        order: 13
+    - name: Name App Version
+      url: '#name-app-version'
+      identifier: app-builder-name-app-version
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppVersionName
+        unstable: []
+        order: 14
+    - name: Update App Tags
+      url: '#update-app-tags'
+      identifier: app-builder-update-app-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppTags
+        unstable: []
+        order: 12
+    - name: Update App Self-Service Status
+      url: '#update-app-self-service-status'
+      identifier: app-builder-update-app-self-service-status
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppSelfService
+        unstable: []
+        order: 11
+    - name: Revert App
+      url: '#revert-app'
+      identifier: app-builder-revert-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevertApp
+        unstable: []
+        order: 16
+    - name: Create Publish Request
+      url: '#create-publish-request'
+      identifier: app-builder-create-publish-request
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePublishRequest
+        unstable: []
+        order: 15
+    - name: Update App Protection Level
+      url: '#update-app-protection-level'
+      identifier: app-builder-update-app-protection-level
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProtectionLevel
+        unstable: []
+        order: 10
+    - name: Update App Favorite Status
+      url: '#update-app-favorite-status'
+      identifier: app-builder-update-app-favorite-status
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppFavorite
+        unstable: []
+        order: 9
     - name: Publish App
       url: '#publish-app'
       identifier: app-builder-publish-app
@@ -7894,6 +8051,18 @@ menu:
           - ValidateQuery
         unstable: []
         order: 22
+    - name: List tag pipeline ruleset statuses
+      url: '#list-tag-pipeline-ruleset-statuses'
+      identifier: cloud-cost-management-list-tag-pipeline-ruleset-statuses
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPipelinesRulesetsStatus
+        unstable: []
+        order: 41
     - name: Reorder tag pipeline rulesets
       url: '#reorder-tag-pipeline-rulesets'
       identifier: cloud-cost-management-reorder-tag-pipeline-rulesets
@@ -7930,6 +8099,131 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management tags
+      url: '#list-cloud-cost-management-tags'
+      identifier: cloud-cost-management-list-cloud-cost-management-tags
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTags
+        unstable: []
+        order: 45
+    - name: List Cloud Cost Management tag sources
+      url: '#list-cloud-cost-management-tag-sources'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-sources
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagKeySources
+        unstable:
+          - v2
+        order: 57
+    - name: List Cloud Cost Management orchestrators
+      url: '#list-cloud-cost-management-orchestrators'
+      identifier: cloud-cost-management-list-cloud-cost-management-orchestrators
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataOrchestrators
+        unstable:
+          - v2
+        order: 59
+    - name: List available Cloud Cost Management metrics
+      url: '#list-available-cloud-cost-management-metrics'
+      identifier: cloud-cost-management-list-available-cloud-cost-management-metrics
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataMetrics
+        unstable:
+          - v2
+        order: 58
+    - name: Get the Cloud Cost Management billing currency
+      url: '#get-the-cloud-cost-management-billing-currency'
+      identifier: cloud-cost-management-get-the-cloud-cost-management-billing-currency
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostTagMetadataCurrency
+        unstable:
+          - v2
+        order: 60
+    - name: List Cloud Cost Management tag key metadata
+      url: '#list-cloud-cost-management-tag-key-metadata'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-key-metadata
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadata
+        unstable:
+          - v2
+        order: 56
+    - name: Get a Cloud Cost Management tag key
+      url: '#get-a-cloud-cost-management-tag-key'
+      identifier: cloud-cost-management-get-a-cloud-cost-management-tag-key
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostTagKey
+        unstable: []
+        order: 47
+    - name: List Cloud Cost Management tag keys
+      url: '#list-cloud-cost-management-tag-keys'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-keys
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagKeys
+        unstable: []
+        order: 46
+    - name: List Cloud Cost Management tag descriptions
+      url: '#list-cloud-cost-management-tag-descriptions'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-descriptions
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagDescriptions
+        unstable: []
+        order: 42
+    - name: List Cloud Cost Management OCI configs
+      url: '#list-cloud-cost-management-oci-configs'
+      identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostOCIConfigs
+        unstable: []
+        order: 39
     - name: Update Google Cloud Usage Cost config
       url: '#update-google-cloud-usage-cost-config'
       identifier: cloud-cost-management-update-google-cloud-usage-cost-config
@@ -8038,6 +8332,110 @@ menu:
           - ListCustomCostsFiles
         unstable: []
         order: 29
+    - name: Get commitments utilization (timeseries)
+      url: '#get-commitments-utilization-timeseries'
+      identifier: cloud-cost-management-get-commitments-utilization-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsUtilizationTimeseries
+        unstable:
+          - v2
+        order: 53
+    - name: Get commitments utilization (scalar)
+      url: '#get-commitments-utilization-scalar'
+      identifier: cloud-cost-management-get-commitments-utilization-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsUtilizationScalar
+        unstable:
+          - v2
+        order: 48
+    - name: Get commitments savings (timeseries)
+      url: '#get-commitments-savings-timeseries'
+      identifier: cloud-cost-management-get-commitments-savings-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsSavingsTimeseries
+        unstable:
+          - v2
+        order: 52
+    - name: Get commitments savings (scalar)
+      url: '#get-commitments-savings-scalar'
+      identifier: cloud-cost-management-get-commitments-savings-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsSavingsScalar
+        unstable:
+          - v2
+        order: 51
+    - name: Get commitments on-demand hot spots (scalar)
+      url: '#get-commitments-on-demand-hot-spots-scalar'
+      identifier: cloud-cost-management-get-commitments-on-demand-hot-spots-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsOnDemandHotspotsScalar
+        unstable:
+          - v2
+        order: 50
+    - name: Get commitments coverage (timeseries)
+      url: '#get-commitments-coverage-timeseries'
+      identifier: cloud-cost-management-get-commitments-coverage-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCoverageTimeseries
+        unstable:
+          - v2
+        order: 54
+    - name: Get commitments coverage (scalar)
+      url: '#get-commitments-coverage-scalar'
+      identifier: cloud-cost-management-get-commitments-coverage-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCoverageScalar
+        unstable:
+          - v2
+        order: 49
+    - name: Get commitments list
+      url: '#get-commitments-list'
+      identifier: cloud-cost-management-get-commitments-list
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCommitmentList
+        unstable:
+          - v2
+        order: 55
     - name: List budgets
       url: '#list-budgets'
       identifier: cloud-cost-management-list-budgets
@@ -8266,6 +8664,18 @@ menu:
           - DeleteCustomAllocationRule
         unstable: []
         order: 26
+    - name: List custom allocation rule statuses
+      url: '#list-custom-allocation-rule-statuses'
+      identifier: cloud-cost-management-list-custom-allocation-rule-statuses
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomAllocationRulesStatus
+        unstable: []
+        order: 40
     - name: Reorder custom allocation rules
       url: '#reorder-custom-allocation-rules'
       identifier: cloud-cost-management-reorder-custom-allocation-rules
@@ -8302,6 +8712,32 @@ menu:
           - ListCustomAllocationRules
         unstable: []
         order: 23
+    - name: Get cost anomaly
+      url: '#get-cost-anomaly'
+      identifier: cloud-cost-management-get-cost-anomaly
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAnomaly
+        unstable:
+          - v2
+        order: 44
+    - name: List cost anomalies
+      url: '#list-cost-anomalies'
+      identifier: cloud-cost-management-list-cost-anomalies
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostAnomalies
+        unstable:
+          - v2
+        order: 43
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
@@ -8421,6 +8857,23 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageBranchSummary
+        unstable:
+          - v2
+        order: 1
+    - name: Compliance
+      url: /api/latest/compliance/
+      identifier: compliance
+      generated: true
+    - name: Get the rule-based view of compliance findings
+      url: '#get-the-rule-based-view-of-compliance-findings'
+      identifier: compliance-get-the-rule-based-view-of-compliance-findings
+      parent: compliance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRuleBasedView
         unstable:
           - v2
         order: 1
@@ -9892,75 +10345,6 @@ menu:
           - v2
         operationids:
           - ListIncidentServices
-        unstable:
-          - v2
-        order: 4
-    - name: Incident Teams
-      url: /api/latest/incident-teams/
-      identifier: incident-teams
-      generated: true
-    - name: Update an existing incident team
-      url: '#update-an-existing-incident-team'
-      identifier: incident-teams-update-an-existing-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentTeam
-        unstable:
-          - v2
-        order: 3
-    - name: Get details of an incident team
-      url: '#get-details-of-an-incident-team'
-      identifier: incident-teams-get-details-of-an-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentTeam
-        unstable:
-          - v2
-        order: 1
-    - name: Delete an existing incident team
-      url: '#delete-an-existing-incident-team'
-      identifier: incident-teams-delete-an-existing-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentTeam
-        unstable:
-          - v2
-        order: 2
-    - name: Create a new incident team
-      url: '#create-a-new-incident-team'
-      identifier: incident-teams-create-a-new-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentTeam
-        unstable:
-          - v2
-        order: 5
-    - name: Get a list of all incident teams
-      url: '#get-a-list-of-all-incident-teams'
-      identifier: incident-teams-get-a-list-of-all-incident-teams
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListIncidentTeams
         unstable:
           - v2
         order: 4
@@ -12838,6 +13222,18 @@ menu:
       url: /api/latest/rum/
       identifier: rum
       generated: true
+    - name: Upload source maps
+      url: '#upload-source-maps'
+      identifier: rum-upload-source-maps
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadSourceMap
+        unstable: []
+        order: 9
     - name: Search RUM events
       url: '#search-rum-events'
       identifier: rum-search-rum-events
@@ -13853,6 +14249,54 @@ menu:
           - ListSCIMUsers
         unstable: []
         order: 1
+    - name: Get schema
+      url: '#get-schema'
+      identifier: scim-get-schema
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMSchema
+        unstable: []
+        order: 16
+    - name: List schemas
+      url: '#list-schemas'
+      identifier: scim-list-schemas
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMSchemas
+        unstable: []
+        order: 15
+    - name: Get resource type
+      url: '#get-resource-type'
+      identifier: scim-get-resource-type
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMResourceType
+        unstable: []
+        order: 14
+    - name: List resource types
+      url: '#list-resource-types'
+      identifier: scim-list-resource-types
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMResourceTypes
+        unstable: []
+        order: 13
     - name: Update group
       url: '#update-group'
       identifier: scim-update-group
@@ -14984,6 +15428,18 @@ menu:
           - GetMaintenance
         unstable: []
         order: 21
+    - name: Create backfilled maintenance
+      url: '#create-backfilled-maintenance'
+      identifier: status-pages-create-backfilled-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBackfilledMaintenance
+        unstable: []
+        order: 22
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -15032,6 +15488,18 @@ menu:
           - DeleteDegradation
         unstable: []
         order: 17
+    - name: Create backfilled degradation
+      url: '#create-backfilled-degradation'
+      identifier: status-pages-create-backfilled-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBackfilledDegradation
+        unstable: []
+        order: 23
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation
@@ -15188,6 +15656,22 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Storage Management
+      url: /api/latest/storage-management/
+      identifier: storage-management
+      generated: true
+    - name: Enable Storage Management for a bucket
+      url: '#enable-storage-management-for-a-bucket'
+      identifier: storage-management-enable-storage-management-for-a-bucket
+      parent: storage-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertSyncConfig
+        unstable: []
+        order: 1
     - name: Teams
       url: /api/latest/teams/
       identifier: teams

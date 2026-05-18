@@ -629,7 +629,7 @@ To collect traces over UDS:
 {
     "containerDefinitions": [
         {
-            "image": "datadog/agent:latest",
+            "image": "public.ecr.aws/datadog/agent:latest",
             "mountPoints": [
                 {
                     "containerPath": "/var/run/datadog",

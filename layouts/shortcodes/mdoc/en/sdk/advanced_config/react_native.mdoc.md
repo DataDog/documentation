@@ -53,18 +53,18 @@ The application's environment, for example: prod, pre-prod, and staging. Follows
 `rumConfiguration`
 : Optional  
 **Type**: `RumConfiguration`  
-The Datadog RUM configuration. RUM is **disabled by default**. See [RUM configuration][20].
+The Datadog RUM configuration. RUM is **disabled by default**. See [RUM configuration][21].
 
 `logsConfiguration`
 : Optional  
 **Default**: `undefined`  
 **Type**: `LogsConfiguration`  
-The Datadog Logs configuration. Logs is **disabled by default**: use an empty configuration `{}` to enable. See [Logs configuration][21].
+The Datadog Logs configuration. Logs is **disabled by default**: use an empty configuration `{}` to enable. See [Logs configuration][22].
 
 `traceConfiguration`
 : Optional  
 **Type**: `TraceConfiguration`  
-The Datadog Trace configuration. Trace is **disabled by default**: use an empty configuration `{}` to enable. See [Trace configuration][22].
+The Datadog Trace configuration. Trace is **disabled by default**: use an empty configuration `{}` to enable. See [Trace configuration][23].
 
 `site`
 : Optional  
@@ -235,7 +235,7 @@ Enables tracking of memory warnings as RUM events on iOS. When enabled, the SDK 
 : Optional  
 **Type**: Number  
 **Default**: `undefined`  
-The app hang threshold in seconds for non-fatal app hangs on iOS. App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. By default, app hangs reporting is disabled, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using this parameter. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms. See [Configure the app hang threshold][19] for more guidance on what to set this value to.
+The app hang threshold in seconds for non-fatal app hangs on iOS. App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. By default, app hangs reporting is disabled, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using this parameter. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms. See [Configure the app hang threshold][20] for more guidance on what to set this value to.
 
 `initialResourceThreshold`
 : Optional  
@@ -657,13 +657,15 @@ export default function App() {
 }
 ```
 
-This uses React Native's [InteractionManager.runAfterInteractions][16] to delay the animations.
+When initializing the SDK asynchronously, the SDK uses React Native's [requestIdleCallback][16] to run the initialization code after all animations and UI rendering have settled.
+
+If `requestIdleCallback` is not available, the SDK uses React Native's [InteractionManager.runAfterInteractions][17] to delay its initialization.
 
 All interactions with the RUM SDK (view tracking, actions, resources tracing, and so on) are still recorded and kept in a queue with a limit of 100 events.
 
 Logs are not recorded and calling a `DdLogs` method before the actual initialization might break logging.
 
-If you experience any issue setting up the asynchronous initialization of Datadog, see the [example application][17].
+If you experience any issue setting up the asynchronous initialization of Datadog, see the [example application][18].
 
 ## Delaying the initialization
 
@@ -738,7 +740,7 @@ const configuration = {
 
 ## Hybrid app monitoring
 
-See [Monitor hybrid React Native applications][18].
+See [Monitor hybrid React Native applications][19].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/react_native
@@ -755,10 +757,11 @@ See [Monitor hybrid React Native applications][18].
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[16]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
-[17]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[18]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
-[19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
-[20]: #rum-configuration
-[21]: #logs-configuration
-[22]: #trace-configuration
+[16]: https://reactnative.dev/docs/global-requestIdleCallback
+[17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
+[18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
+[19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
+[20]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
+[21]: #rum-configuration
+[22]: #logs-configuration
+[23]: #trace-configuration
