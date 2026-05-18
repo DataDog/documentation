@@ -22,7 +22,7 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
 - **Resource detection processor**: Extracts host and cloud metadata for hostname resolution and tagging in Datadog.
 
-<!-- TODO: Replace with updated diagram showing OTLP HTTP exporter flow (no Datadog Exporter) -->
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
 <div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized and the Kubernetes Explorer related views may be empty.</div>
 

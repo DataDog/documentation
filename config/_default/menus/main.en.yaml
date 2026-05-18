@@ -2947,6 +2947,16 @@ menu:
       parent: actions_heading
       identifier: forms
       weight: 50000
+    - name: Components
+      url: actions/forms/components/
+      parent: forms
+      identifier: forms_components
+      weight: 1
+    - name: Responses
+      url: actions/forms/responses/
+      parent: forms
+      identifier: forms_responses
+      weight: 2
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -5038,6 +5048,11 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
+    - name: Monitors and Automation
+      url: data_streams/kafka/monitors_and_automation
+      identifier: data_streams_kafka_monitors_and_automation
+      parent: data_streams_kafka
+      weight: 2
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -7152,16 +7167,21 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
       weight: 601
-    - name: Troubleshooting
-      url: /byoc-logs/operate/troubleshooting
-      parent: cloudprem_operate
-      identifier: cloudprem_operate_troubleshooting
-      weight: 602
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
+      weight: 602
+    - name: Production Best Practices
+      url: /byoc-logs/operate/best_practices
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Troubleshooting
+      url: /byoc-logs/operate/troubleshooting
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_troubleshooting
+      weight: 604
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -7530,11 +7550,16 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
+    - name: Rule Configuration
+      identifier: sec_secret_scanning_configuration
+      url: /security/code_security/secret_scanning/configuration/
+      parent: sec_secret_scanning
+      weight: 3
     - name: Secret Validation
       identifier: sec_secret_scanning_secret_validation
       url: /security/code_security/secret_scanning/secret_validation/
       parent: sec_secret_scanning
-      weight: 3
+      weight: 4
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/

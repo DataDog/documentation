@@ -6555,6 +6555,102 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List App Versions
+      url: '#list-app-versions'
+      identifier: app-builder-list-app-versions
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAppVersions
+        unstable: []
+        order: 13
+    - name: Name App Version
+      url: '#name-app-version'
+      identifier: app-builder-name-app-version
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppVersionName
+        unstable: []
+        order: 14
+    - name: Update App Tags
+      url: '#update-app-tags'
+      identifier: app-builder-update-app-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppTags
+        unstable: []
+        order: 12
+    - name: Update App Self-Service Status
+      url: '#update-app-self-service-status'
+      identifier: app-builder-update-app-self-service-status
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppSelfService
+        unstable: []
+        order: 11
+    - name: Revert App
+      url: '#revert-app'
+      identifier: app-builder-revert-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevertApp
+        unstable: []
+        order: 16
+    - name: Create Publish Request
+      url: '#create-publish-request'
+      identifier: app-builder-create-publish-request
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePublishRequest
+        unstable: []
+        order: 15
+    - name: Update App Protection Level
+      url: '#update-app-protection-level'
+      identifier: app-builder-update-app-protection-level
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProtectionLevel
+        unstable: []
+        order: 10
+    - name: Update App Favorite Status
+      url: '#update-app-favorite-status'
+      identifier: app-builder-update-app-favorite-status
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppFavorite
+        unstable: []
+        order: 9
     - name: Publish App
       url: '#publish-app'
       identifier: app-builder-publish-app
@@ -8015,6 +8111,71 @@ menu:
           - ListCostTags
         unstable: []
         order: 45
+    - name: List Cloud Cost Management tag sources
+      url: '#list-cloud-cost-management-tag-sources'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-sources
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagKeySources
+        unstable:
+          - v2
+        order: 57
+    - name: List Cloud Cost Management orchestrators
+      url: '#list-cloud-cost-management-orchestrators'
+      identifier: cloud-cost-management-list-cloud-cost-management-orchestrators
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataOrchestrators
+        unstable:
+          - v2
+        order: 59
+    - name: List available Cloud Cost Management metrics
+      url: '#list-available-cloud-cost-management-metrics'
+      identifier: cloud-cost-management-list-available-cloud-cost-management-metrics
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataMetrics
+        unstable:
+          - v2
+        order: 58
+    - name: Get the Cloud Cost Management billing currency
+      url: '#get-the-cloud-cost-management-billing-currency'
+      identifier: cloud-cost-management-get-the-cloud-cost-management-billing-currency
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostTagMetadataCurrency
+        unstable:
+          - v2
+        order: 60
+    - name: List Cloud Cost Management tag key metadata
+      url: '#list-cloud-cost-management-tag-key-metadata'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-key-metadata
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadata
+        unstable:
+          - v2
+        order: 56
     - name: Get a Cloud Cost Management tag key
       url: '#get-a-cloud-cost-management-tag-key'
       identifier: cloud-cost-management-get-a-cloud-cost-management-tag-key
@@ -8171,6 +8332,110 @@ menu:
           - ListCustomCostsFiles
         unstable: []
         order: 29
+    - name: Get commitments utilization (timeseries)
+      url: '#get-commitments-utilization-timeseries'
+      identifier: cloud-cost-management-get-commitments-utilization-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsUtilizationTimeseries
+        unstable:
+          - v2
+        order: 53
+    - name: Get commitments utilization (scalar)
+      url: '#get-commitments-utilization-scalar'
+      identifier: cloud-cost-management-get-commitments-utilization-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsUtilizationScalar
+        unstable:
+          - v2
+        order: 48
+    - name: Get commitments savings (timeseries)
+      url: '#get-commitments-savings-timeseries'
+      identifier: cloud-cost-management-get-commitments-savings-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsSavingsTimeseries
+        unstable:
+          - v2
+        order: 52
+    - name: Get commitments savings (scalar)
+      url: '#get-commitments-savings-scalar'
+      identifier: cloud-cost-management-get-commitments-savings-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsSavingsScalar
+        unstable:
+          - v2
+        order: 51
+    - name: Get commitments on-demand hot spots (scalar)
+      url: '#get-commitments-on-demand-hot-spots-scalar'
+      identifier: cloud-cost-management-get-commitments-on-demand-hot-spots-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsOnDemandHotspotsScalar
+        unstable:
+          - v2
+        order: 50
+    - name: Get commitments coverage (timeseries)
+      url: '#get-commitments-coverage-timeseries'
+      identifier: cloud-cost-management-get-commitments-coverage-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCoverageTimeseries
+        unstable:
+          - v2
+        order: 54
+    - name: Get commitments coverage (scalar)
+      url: '#get-commitments-coverage-scalar'
+      identifier: cloud-cost-management-get-commitments-coverage-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCoverageScalar
+        unstable:
+          - v2
+        order: 49
+    - name: Get commitments list
+      url: '#get-commitments-list'
+      identifier: cloud-cost-management-get-commitments-list
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCommitmentList
+        unstable:
+          - v2
+        order: 55
     - name: List budgets
       url: '#list-budgets'
       identifier: cloud-cost-management-list-budgets
@@ -8592,6 +8857,23 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageBranchSummary
+        unstable:
+          - v2
+        order: 1
+    - name: Compliance
+      url: /api/latest/compliance/
+      identifier: compliance
+      generated: true
+    - name: Get the rule-based view of compliance findings
+      url: '#get-the-rule-based-view-of-compliance-findings'
+      identifier: compliance-get-the-rule-based-view-of-compliance-findings
+      parent: compliance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRuleBasedView
         unstable:
           - v2
         order: 1
@@ -13967,6 +14249,54 @@ menu:
           - ListSCIMUsers
         unstable: []
         order: 1
+    - name: Get schema
+      url: '#get-schema'
+      identifier: scim-get-schema
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMSchema
+        unstable: []
+        order: 16
+    - name: List schemas
+      url: '#list-schemas'
+      identifier: scim-list-schemas
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMSchemas
+        unstable: []
+        order: 15
+    - name: Get resource type
+      url: '#get-resource-type'
+      identifier: scim-get-resource-type
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMResourceType
+        unstable: []
+        order: 14
+    - name: List resource types
+      url: '#list-resource-types'
+      identifier: scim-list-resource-types
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMResourceTypes
+        unstable: []
+        order: 13
     - name: Update group
       url: '#update-group'
       identifier: scim-update-group

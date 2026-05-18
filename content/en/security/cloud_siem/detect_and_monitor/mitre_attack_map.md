@@ -70,6 +70,6 @@ Note the following formatting details:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/siem/rules
-[2]: https://docs.datadoghq.com/security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[2]: /security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/
 [3]: https://app.datadoghq.com/security/siem/rules?query=product=siem&sort=date&viz=attck-map
-[4]: https://docs.datadoghq.com/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold
+[4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold
