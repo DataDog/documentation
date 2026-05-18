@@ -57,6 +57,8 @@ Datadog's LLM cost and token metrics ship with OOTB tags such as `model_name`, `
 2. In the same annotation, mark which of those tag keys should propagate to cost metrics by passing the keys to the `cost_tags` (Python) or `costTags` (Node.js) parameter. See the [SDK Reference][7] for the full instrumentation syntax and timing rules
 3. Once propagated, those tag keys appear as tags on the LLM cost and token metrics. You can use them anywhere in Datadog that consumes these metrics — dashboards, monitors, notebooks, and trace search
 
+<div class="alert alert-warning">Only configure tags with bounded values (such as <code>team</code>, <code>customer_tier</code>, or <code>feature</code>). Tags with unbounded or high-cardinality values (such as user IDs or request IDs) are not fully supported and may be truncated or omitted from the resulting metrics.</div>
+
 ### Use case: Filter and group spend by an application attribute
 
 Use custom tags to break down spend by attributes that aren't part of the OOTB metric tags. Build a dashboard widget of `ml_obs.span.llm.total.cost` grouped by `team` to see which teams' LLM usage is driving consumption over time, and configure a metric monitor on the same query to alert independently for each team (or customer tier, feature, environment) when usage crosses a threshold.
