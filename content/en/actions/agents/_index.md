@@ -98,7 +98,7 @@ Use agents in [Workflow Automation][9] and [App Builder][10] through the **Run A
 1. Open or create a workflow in [Workflow Automation][9], or open or create an app in [App Builder][10].
 1. Add the **Run Agent** step from the action catalog.
 1. Select which agent to run.
-1. Write the **Run Instructions**—the prompt the agent receives each time it runs. Use variables like `{{Source.form}}` to pass in trigger data.
+1. Write the **Run Instructions**—the prompt the agent receives each time it runs. Use variables such as `{{Source.form}}` to pass in trigger data.
 
 The **Run Agent** step also supports the following optional fields:
 
