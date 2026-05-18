@@ -1,6 +1,6 @@
 ---
 title: Arithmetic
-description: Perform mathematical operations including absolute values, logarithms, exponents, and cumulative sums on metrics.
+description: Perform mathematical operations including absolute values, rounding, logarithms, exponents, and cumulative sums on metrics.
 aliases:
     - /graphing/functions/arithmetic/
 ---
@@ -19,11 +19,23 @@ into this one `abs(sin{*})`:
 
 {{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs" style="width:80%;">}}
 
+## Rounding
+
+| Function | Description | Example |
+| :----    | :-------    | :------ |
+| `round()` | Round each point in the metric to the nearest value. You can optionally choose the precision. | `round(<METRIC_NAME>{*})`, `round(<METRIC_NAME>{*}, <DECIMAL_PLACES>)` |
+| `ceil()` | Round each point in the metric up to the nearest integer. | `ceil(<METRIC_NAME>{*})` |
+| `floor()` | Round each point in the metric down to the nearest integer. | `floor(<METRIC_NAME>{*})` |
+
+Use the optional second argument with `round()` to set the number of decimal places to keep.
+
 ## Exponent
 
-| Function | Description                             | Example                 |
-| :----    | :-------                                | :---------              |
-| `pow()`  | Graph all combinations of metric and constant using exponentiation. | `pow(<METRIC_NAME>{*}, CONSTANT)`, `pow(<METRIC_NAME>{*}, <METRIC_NAME>{*})`, `pow(CONSTANT, <METRIC_NAME>{*})`, `pow(CONSTANT, CONSTANT)` |
+| Function | Description | Example |
+| :----    | :-------    | :------ |
+| `pow()`  | Raise each point in a metric or constant to the power of another metric or constant. | `pow(<METRIC_NAME>{*}, CONSTANT)`, `pow(<METRIC_NAME>{*}, <METRIC_NAME>{*})`, `pow(CONSTANT, <METRIC_NAME>{*})`, `pow(CONSTANT, CONSTANT)` |
+
+Use `pow()` when you need exponentiation in a formula. For example, you can square a metric with `pow(<METRIC_NAME>{*}, 2)` or use a metric as the exponent with `pow(2, <METRIC_NAME>{*})`.
 
 ## Logarithm
 
