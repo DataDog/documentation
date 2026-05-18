@@ -4,7 +4,7 @@ title: Workflow Automation
 
 ## Overview
 
-Datadog [Workflow Automation][8] billing is based on the number of **workflow executions**. Workflow executions are recorded whenever a published workflow runs, regardless of its run method (manually, programmatically, or automatically), except for the cases listed under "Included automations" below.
+Datadog [Workflow Automation][8] billing is based on the number of **workflow executions**. Workflow executions are recorded whenever a published workflow runs, regardless of its run method (manually, programmatically, or automatically), except for the cases listed under [Included automations](#included-automations).
 
 ## Summary
 - **Billing metric**: You incur a cost per committed execution or on-demand execution, depending on your billing plan. Specific pricing can be found on the [Workflow Automation pricing page][13].
