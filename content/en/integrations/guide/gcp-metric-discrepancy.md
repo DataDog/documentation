@@ -24,7 +24,7 @@ If a metric you expect to see does not appear in Datadog, work through the follo
 
 1. Search for the metric on the [Datadog Metric Summary page][7]. If the metric kind is `CUMULATIVE`, also search for the `.delta` variant (for example, `gcp.gke.container.restart_count.delta`). See [Cumulative metrics][8] for background.
 
-2. Confirm the metric is part of the standard Google Cloud Monitoring catalog. The Google Cloud integration does not automatically import [custom metrics][9] or [log-based metrics][10].
+2. Confirm the metric is part of the standard Google Cloud Monitoring catalog. The Google Cloud integration does not collect Anthos metrics, which are prefixed with `kubernetes.io/anthos/` in Google Cloud.
 
 3. Confirm the integration has access to the resource:
    - The service account has the required IAM roles at the project, folder, or organization that contains the resource. See [Google Cloud integration setup][11] for the required roles.
@@ -104,8 +104,6 @@ Datadog ingests the most granular raw values from Google Cloud. All aggregation 
 [6]: https://cloud.google.com/monitoring/api/v3/aggregation#alignment-intro
 [7]: https://app.datadoghq.com/metric/summary
 [8]: /integrations/google-cloud-platform/#cumulative-metrics
-[9]: https://cloud.google.com/monitoring/custom-metrics
-[10]: https://cloud.google.com/logging/docs/logs-based-metrics
 [11]: /integrations/google-cloud-platform/#setup
 [12]: https://app.datadoghq.com/integrations/google-cloud-platform
 [13]: /getting_started/integrations/google_cloud/#limit-metric-collection-filters
