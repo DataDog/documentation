@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Lapdog is a local development tool for LLM Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application — or from a coding agent like Claude Code or Pi — and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
+Lapdog is a local development tool for LLM Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
 
 Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in LLM Observability alongside your production traffic.
 
