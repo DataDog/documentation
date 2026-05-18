@@ -6322,6 +6322,38 @@ components:
       type: string
       x-enum-varnames:
         - DECODER_PROCESSOR
+    LogsExcludeAttributeProcessor:
+      description: |-
+        Use this processor to remove an attribute from a log during processing.
+        The processor strips the specified attribute from the log event, which is useful
+        when the attribute contains sensitive data or is no longer needed downstream.
+      properties:
+        attribute_to_exclude:
+          description: Name of the log attribute to remove from the log event.
+          example: foo
+          type: string
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsExcludeAttributeProcessorType"
+      required:
+        - type
+        - attribute_to_exclude
+      type: object
+    LogsExcludeAttributeProcessorType:
+      default: exclude-attribute
+      description: Type of logs exclude attribute processor.
+      enum:
+        - exclude-attribute
+      example: exclude-attribute
+      type: string
+      x-enum-varnames:
+        - EXCLUDE_ATTRIBUTE
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration API.
       properties:
@@ -6929,6 +6961,7 @@ components:
         - $ref: "#/components/schemas/LogsArrayProcessor"
         - $ref: "#/components/schemas/LogsDecoderProcessor"
         - $ref: "#/components/schemas/LogsSchemaProcessor"
+        - $ref: "#/components/schemas/LogsExcludeAttributeProcessor"
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
