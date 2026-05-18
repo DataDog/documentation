@@ -1,6 +1,8 @@
 ---
 title: Change Failure Detection
 description: "Learn how to configure change failure detection in DORA Metrics using rollbacks, revert PRs, and custom PR filters."
+aliases:
+- /dora_metrics/change_failure_detection/
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'

@@ -14,6 +14,7 @@ aliases:
 - /dora_metrics/failures/incident_api
 - /dora_metrics/failures/pagerduty
 - /dora_metrics/failures/
+- /dora_metrics/setup/
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'

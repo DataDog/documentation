@@ -5271,31 +5271,41 @@ menu:
       parent: quality_gates
       identifier: quality_gates_guide
       weight: 4
-    - name: Métricas de DORA
-      url: dora_metrics/
+    - name: SDLC Analytics
+      url: sdlc_analytics/
       pre: ci
       parent: software_delivery_heading
-      identifier: dora_metrics
+      identifier: sdlc_analytics
       weight: 70000
+    - name: Métricas de DORA
+      url: sdlc_analytics/dora_metrics/
+      parent: sdlc_analytics
+      identifier: dora_metrics
+      weight: 1
     - name: Configuración
-      url: dora_metrics/setup
+      url: sdlc_analytics/dora_metrics/setup
       parent: dora_metrics
       identifier: dora_metrics_setup
       weight: 1
     - name: Fuentes de datos de despliegue
-      url: dora_metrics/setup/deployments
+      url: sdlc_analytics/dora_metrics/setup/deployments
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_deployments
       weight: 101
     - name: Failure Data Sources
-      url: dora_metrics/setup/failures/
+      url: sdlc_analytics/dora_metrics/setup/failures/
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_failures
       weight: 102
     - name: Datos recopilados
-      url: dora_metrics/data_collected/
+      url: sdlc_analytics/dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
+      weight: 2
+    - name: AI Impact
+      url: sdlc_analytics/ai_impact/
+      parent: sdlc_analytics
+      identifier: sdlc_analytics_ai_impact
       weight: 2
     - name: Feature Flags
       url: feature_flags/

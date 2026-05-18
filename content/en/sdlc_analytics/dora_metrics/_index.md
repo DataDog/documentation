@@ -3,6 +3,7 @@ title: DORA Metrics
 description: Learn how to use DORA metrics to measure and improve your organization's software delivery processes.
 aliases:
 - /continuous_integration/dora_metrics
+- /dora_metrics/
 is_beta: true
 further_reading:
 - link: "/dora_metrics/calculation/"

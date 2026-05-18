@@ -1,6 +1,8 @@
 ---
 title: DORA Metrics Calculation
 description: Learn how DORA metrics are calculated in Datadog.
+aliases:
+- /dora_metrics/calculation/
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'

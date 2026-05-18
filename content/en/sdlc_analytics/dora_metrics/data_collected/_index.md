@@ -1,6 +1,8 @@
 ---
 title: DORA Metrics Data Collected
 description: "Learn about DORA Metrics events, fields, tags, and change lead time stages for deployment frequency, change lead time, and failure analysis."
+aliases:
+- /dora_metrics/data_collected/
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
