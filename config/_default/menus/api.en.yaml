@@ -8111,6 +8111,71 @@ menu:
           - ListCostTags
         unstable: []
         order: 45
+    - name: List Cloud Cost Management tag sources
+      url: '#list-cloud-cost-management-tag-sources'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-sources
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagKeySources
+        unstable:
+          - v2
+        order: 57
+    - name: List Cloud Cost Management orchestrators
+      url: '#list-cloud-cost-management-orchestrators'
+      identifier: cloud-cost-management-list-cloud-cost-management-orchestrators
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataOrchestrators
+        unstable:
+          - v2
+        order: 59
+    - name: List available Cloud Cost Management metrics
+      url: '#list-available-cloud-cost-management-metrics'
+      identifier: cloud-cost-management-list-available-cloud-cost-management-metrics
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataMetrics
+        unstable:
+          - v2
+        order: 58
+    - name: Get the Cloud Cost Management billing currency
+      url: '#get-the-cloud-cost-management-billing-currency'
+      identifier: cloud-cost-management-get-the-cloud-cost-management-billing-currency
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostTagMetadataCurrency
+        unstable:
+          - v2
+        order: 60
+    - name: List Cloud Cost Management tag key metadata
+      url: '#list-cloud-cost-management-tag-key-metadata'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-key-metadata
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadata
+        unstable:
+          - v2
+        order: 56
     - name: Get a Cloud Cost Management tag key
       url: '#get-a-cloud-cost-management-tag-key'
       identifier: cloud-cost-management-get-a-cloud-cost-management-tag-key

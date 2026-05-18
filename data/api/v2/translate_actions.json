@@ -1150,6 +1150,26 @@
     "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
     "summary": "Get a Cloud Cost Management tag key"
   },
+  "ListCostTagMetadata": {
+    "description": "List Cloud Cost Management tag key metadata, including row counts, cost covered, cardinality, and a sample of top tag values per cloud account. Use `filter[daily]=true` to return daily rows instead of the default monthly roll-up.",
+    "summary": "List Cloud Cost Management tag key metadata"
+  },
+  "GetCostTagMetadataCurrency": {
+    "description": "Get the dominant billing currency observed in Cloud Cost Management data for the requested period. The response wraps the currency in a JSON:API `data` array containing at most one entry; the array is empty when no currency data is available.",
+    "summary": "Get the Cloud Cost Management billing currency"
+  },
+  "ListCostTagMetadataMetrics": {
+    "description": "List Cloud Cost Management metrics that have data for the requested period.",
+    "summary": "List available Cloud Cost Management metrics"
+  },
+  "ListCostTagMetadataOrchestrators": {
+    "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
+    "summary": "List Cloud Cost Management orchestrators"
+  },
+  "ListCostTagKeySources": {
+    "description": "List Cloud Cost Management tag keys observed for the requested period, along with the origin sources that produced them (for example, `aws-user-defined`, `custom`).",
+    "summary": "List Cloud Cost Management tag sources"
+  },
   "ListCostTags": {
     "description": "List Cloud Cost Management tags for a given metric.",
     "summary": "List Cloud Cost Management tags"
@@ -2340,7 +2360,7 @@
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."

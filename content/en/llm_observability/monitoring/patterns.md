@@ -25,13 +25,13 @@ Patterns automatically clusters your LLM application's production traffic into m
 
 ## How it works
 
-Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using an LLM, giving you an interpretable view of production behavior without manual tagging.
+Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using your connected LLM provider account, giving you an interpretable view of production behavior without manual tagging. Patterns supports OpenAI as the LLM provider.
 
 When you run a pipeline, Patterns:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
-2. Embeds interactions semantically and clusters them
-3. Names each cluster with an AI-generated label and summary using Datadog's in-house models
+2. Analyzes interactions based on their semantics, such as user intent
+3. Names each cluster with an AI-generated topic label and summary using your [connected LLM provider account][1]
 4. Organizes clusters into a parent-child topic hierarchy
 
 Each topic shows its interaction volume, share of total traffic, and a coherence score — a measure of how semantically similar the interactions within the topic are to each other (0.0–1.0). Interactions that don't fit any cluster are collected into an Outliers group.
@@ -101,3 +101,5 @@ Scope your pipeline filter to spans with poor quality scores or failed evaluatio
 ### Track how traffic evolves
 
 Re-run the pipeline periodically and compare topic distributions over time. When a new topic appears near the top that wasn't there last month, this indicates that your users have found a new use case (or a new failure mode).
+
+[1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/
