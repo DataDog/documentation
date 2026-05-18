@@ -10,7 +10,7 @@ further_reading:
   text: "Send a flare"
 ---
 
-Use the [**Fleet Automation**][1] page to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues. 
+Use [Fleet View][1] to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues.
 
 For each Datadog Agent, you can see:
 - The Agent version

@@ -10,11 +10,7 @@ further_reading:
   text: "Fleet Automation API"
 ---
 
-Fleet Automation allows you to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. With Fleet Automation, you can:
-- Enable Datadog capabilities such as APM, Logs, and NDM
-- Enable or adjust Agent integrations
-- Manage Agent tags
-- Standardize configuration across environments
+Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files.
 
 ## Configure multiple Agents
 

@@ -10,11 +10,12 @@ further_reading:
   text: "Fleet Automation API"
 ---
 
-Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through the API. Upgrades are supported on Linux and Windows VMs.
+Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through the API.
 
-## Disk space requirements
+## Prerequisites
 
-Datadog recommends at least 2 GB for the initial Agent install and an additional 2 GB for Fleet Automation upgrades. The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.
+- Linux VMs or Windows VMs
+- At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.
 
 ## Upgrade Agents immediately
 
