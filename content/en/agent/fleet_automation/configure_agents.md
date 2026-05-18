@@ -23,7 +23,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
    {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Scope this configuration step in Fleet Automation's Configure Agents workflow, showing filters for environment, operating system, and hostname, a list of 33 Agents included in scope, and a Configuration Summary panel on the right." style="width:100%;" >}}
 
-1. Select the products (for example, APM, Logs, or NDM) that the target Agents should run.
+1. Select the products (for example, Logs, APM, or NDM) that the target Agents should run.
 
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="The Select products to configure step in Fleet Automation's Configure Agents workflow, showing product tiles grouped under Core Observability (Infrastructure Monitoring, Log Management, APM) and Additional Observability (Live Process Monitoring, Cloud Network Monitoring, Network Device Monitoring)." style="width:100%;" >}}
 

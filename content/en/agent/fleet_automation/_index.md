@@ -54,13 +54,15 @@ Remote management of Agents in containerized workloads is not supported.
 ### Enable Agent and OTel Collector configuration views
 
 - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent 7.47.0 or later. To enable it manually, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][2], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
-- The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][3] in your collector configuration file.
+- To enable the upstream OTel Collector configuration view, set the [Datadog Extension][3] in your collector configuration file.
 - Agent integration configuration is enabled by default in Agent 7.49 or later. To enable it manually, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][2], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
 
 ### Fleet Automation API
 Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][4]. 
 
-**Note**: The Fleet Automation API does not support all Datadog Agent configuration capabilities.
+<div class="alert alert-info">
+The Fleet Automation API does not support all Datadog Agent configuration capabilities.
+</div>
 
 ## Control access to Fleet Automation
 
