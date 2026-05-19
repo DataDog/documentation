@@ -62,7 +62,7 @@ Use **standard Data Access Control** to apply restrictions progressively: all da
 
 For organizations with hard regulatory requirements (for example, defense) or organizations that collarborate with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
 
-Strict Mode is the exception, not the rule. Most enterprises achieve their compliance requirements with standard Data Access Control and well-structured datasets. Consider Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
+Strict Mode is the exception, not the rule. Consider Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
 
 ## Recommendations
 
