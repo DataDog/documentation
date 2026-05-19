@@ -571,6 +571,32 @@ menu:
       url: /api/latest/dashboards/
       identifier: dashboards
       generated: true
+    - name: Get usage stats for a dashboard
+      url: '#get-usage-stats-for-a-dashboard'
+      identifier: dashboards-get-usage-stats-for-a-dashboard
+      parent: dashboards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardUsage
+        unstable:
+          - v2
+        order: 2
+    - name: Get usage stats for all dashboards
+      url: '#get-usage-stats-for-all-dashboards'
+      identifier: dashboards-get-usage-stats-for-all-dashboards
+      parent: dashboards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDashboardsUsage
+        unstable:
+          - v2
+        order: 1
     - name: Update a dashboard
       url: '#update-a-dashboard'
       identifier: dashboards-update-a-dashboard
