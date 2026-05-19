@@ -1,6 +1,6 @@
 ---
 title: FinOps Skill in Bits Assistant
-description: Use the FinOps skill in Bits Assistant and the Datadog MCP Server to investigate, explain, and share cloud cost findings.
+description: Learn about using the FinOps skill in Bits Assistant to investigate, explain, and share cloud cost findings.
 aliases:
 - /cloud_cost_management/finops_agent/
 - /cloud_cost_management/ccm_ai/
@@ -39,7 +39,7 @@ The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assista
 
 ## Prerequisites
 
-To use the FinOps skill for Bits Assistant, you must:
+To use the FinOps skill in Bits Assistant, you must:
 
 - [Set up Cloud Cost Management][6] for the cost sources you want to analyze.
 - Have these permissions:
@@ -49,7 +49,7 @@ To use the FinOps skill for Bits Assistant, you must:
 
 ## FinOps skill in Bits Assistant
 
-{{< img src="cloud_cost/finops_skill_anomalies.png" alt="Anomalies graphs across top models showing the Investigate with Bits AI button in each graph." style="width:100%;" >}}
+{{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:100%;" >}}
 
 Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to trigger the FinOps skill.
 
@@ -68,9 +68,9 @@ Example prompts:
 When you use the FinOps skill in Bits Assistant to investigate a cost change, Bits Assistant provides a concise summary and then asks what you want to explore next. The initial analysis typically includes:
 
 - A daily cost chart for the baseline and investigation periods.
-- The baseline period, investigation period, total dollar and percentage change, and projected annual impact when applicable.
+- The baseline period, investigation period, total dollar amount and percentage change, and projected annual impact when applicable.
 - Rate-versus-usage context to help distinguish price changes from consumption changes.
-- Owners or teams attribution based on your cost tags.
+- Owner or team attribution based on your cost tags.
 
 After the initial summary, Bits Assistant can:
 
@@ -89,10 +89,10 @@ After setting up [Budgets][5], use the FinOps skill in Bits Assistant to explain
 - Which cost scope a budget covers, based on the budget's filters.
 - Which budget entries, teams, services, or providers are contributing to an overage.
 
-After the initial summary, Bit Assistant can:
+After the initial summary, Bits Assistant can:
 
 - Find the top services, accounts, regions, resources, or tags driving spending.
-- See the teams that own the resources contributing to the cost change.
+- Identify the teams that own the resources contributing to the cost change.
 - Update your budget.
 - Capture the investigation for your records in a Notebook.
 

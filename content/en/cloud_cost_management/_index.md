@@ -152,4 +152,3 @@ Use the [FinOps Skill in Bits Assistant][10] to investigate cost changes, identi
 [8]: /cloud_cost_management/datadog_costs
 [9]: /cloud_cost_management/setup/permissions
 [10]: /cloud_cost_management/finops_skill/
-[11]: /bits_ai/mcp_server/
