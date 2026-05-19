@@ -13,13 +13,13 @@ further_reading:
   text: "Getting Started with Internal Developer Portal"
 - link: "https://www.datadoghq.com/blog/software-catalog"
   tag: "Blog"
-  text: "Improve developer experience and collaboration with Software Catalog"
+  text: "Improve developer experience and collaboration with Catalog"
 - link: "https://www.datadoghq.com/blog/service-scorecards"
   tag: "Blog"
   text: "Prioritize and promote service observability best practices with Service Scorecards"
 - link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions"
   tag: "Blog"
-  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog"
+  text: "Empower your engineering teams with Self-Service Actions in Datadog Catalog"
 - link: "https://www.datadoghq.com/blog/how-datadog-manages-internal-deployments/"
   tag: "Blog"
   text: "How Datadog's Infrastructure team manages internal deployments using the Service Catalog and CI/CD Visibility"
@@ -40,7 +40,7 @@ further_reading:
 
 Creating an IDP is a critical part of [Platform Engineering][7] best practices. Datadog's Internal Developer Portal (IDP) is a fully managed solution that unifies live telemetry, metadata, and self-service workflows to standardize and accelerate software delivery and optimize developer experience. 
 
-- Powered by live telemetry, [Software Catalog][1] inventories every service and environment in real time and enriches each entry with descriptive metadata for ownership and operational context.
+- Powered by live telemetry, [Catalog][1] inventories every service and environment in real time and enriches each entry with descriptive metadata for ownership and operational context.
 - [Self-Service Actions][2] and [Scorecards][3] translate platform policies into one-click tasks, ensuring every change meets observability, security, and production criteria. 
 - Built-in [Engineering Reports][4] give platform engineers and leaders real-time visibility into software quality, standards adoption, and developer experience, making it easy to identify gaps and drive data-backed decisions.
 
@@ -61,7 +61,7 @@ If you're new to IDP, start with the [Getting Started guide][5], which walks thr
 ## Main features
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/internal_developer_portal/software_catalog" >}}Centralize observability, ownership, and engineering knowledge with Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/catalog" >}}Centralize observability, ownership, and engineering knowledge with Catalog{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/scorecards" >}}Promote engineering best practices at scale with Scorecards{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/self_service_actions" >}}Accelerate releases through Self-Service Actions{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports" >}}Track reliability and scorecard compliance with Engineering Reports{{< /nextlink >}}
@@ -75,7 +75,7 @@ Use [Datadog Teams][6] to enable team-based features in IDP:
 - Track your teams in Datadog and automatically sync with your external sources of truth 
 - Assign teams as owners of services and other entities 
 - Create [hierarchies][8] to have parent-child relationships between your teams
-- Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
+- Filter views by teams throughout IDP (for example, in Catalog, Scorecards, and Engineering Reports)
 
 If your organization manages team structure in GitHub, use GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
@@ -83,7 +83,7 @@ If your organization manages team structure in GitHub, use GitHub Integration fo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /internal_developer_portal/software_catalog
+[1]: /internal_developer_portal/catalog
 [2]: /internal_developer_portal/self_service_actions
 [3]: /internal_developer_portal/scorecards
 [4]: /internal_developer_portal/eng_reports

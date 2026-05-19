@@ -70,7 +70,7 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add additional primary tags in Datadog
 
-If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Software Catalog Performance** tab. 
+If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Catalog Performance** tab. 
 
 Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
@@ -151,7 +151,7 @@ DD_APM_FEATURES=enable_cid_stats
 
 Restart the Agent. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
 
-Now you can filter your services in the [Software Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+Now you can filter your services in the [Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
 **Note**: Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
 

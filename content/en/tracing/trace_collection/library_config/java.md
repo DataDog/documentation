@@ -114,7 +114,7 @@ Enable client IP collection from relevant IP headers in HTTP request spans. Auto
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
 Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
-Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Software Catalog][4] UI.
+Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Catalog][4] UI.
 
 `dd.trace.request_header.tags`
 : **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -398,7 +398,7 @@ Available since version 1.58.0
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
 **Default**: `true`<br>
 Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
-Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Software Catalog][4] UI.
+Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Catalog][4] UI.
 
 ### Trace context propagation
 

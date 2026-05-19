@@ -270,7 +270,7 @@ You can also group by log patterns and select different log attributes for clust
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Catalog][17].
 
 ## Bits AI
 

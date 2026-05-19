@@ -161,6 +161,6 @@ X-Ray spans are sampled before they are sent to Datadog, which means trace metri
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/software_catalog/#services-types
+[8]: /tracing/catalog/#services-types
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

@@ -98,15 +98,15 @@ To add a button that sets the value of a date range picker component to the dash
     - {{< ui >}}Value{{< /ui >}}: `${global?.dashboard?.timeframe}`
 1. Save and publish your app.
 
-## Add apps to Software Catalog
+## Add apps to Catalog
 
-Add a published app to the [Self-Service Actions][2] dashboard in [Software Catalog][3] to provide developers with a central place to provision infrastructure, scaffold services, remediate issues, and more.
+Add a published app to the [Self-Service Actions][2] dashboard in [Catalog][3] to provide developers with a central place to provision infrastructure, scaffold services, remediate issues, and more.
 
 To add to Self-Service Actions, first ensure your app is published and permissions are defined. Next, you can click {{< ui >}}Add to Self-Service Actions{{< /ui >}}.
 
 {{< img src="tracing/software_catalog/self-service-ui.png" alt="Self-Service Actions" style="width:100%;" >}}
 
-Once added, you can view and use your app in Software Catalog.
+Once added, you can view and use your app in Catalog.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service Actions" style="width:100%;" >}}
 

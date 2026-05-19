@@ -1,13 +1,13 @@
 ---
 title: Tag Enrichment
-description: Automatically enrich telemetry with team and system tags from Software Catalog service definitions without redeploying code.
+description: Automatically enrich telemetry with team and system tags from Catalog service definitions without redeploying code.
 further_reading:
 - link: "/tracing/services/service_remapping_rules"
   tag: "Documentation"
   text: "Service remapping rules"
-- link: "/internal_developer_portal/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Software Catalog"
+  text: "Catalog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" >}}
@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Software Catalog.
+Use tag enrichment rules to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Catalog.
 
 ## Prerequisites
 

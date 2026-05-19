@@ -18,7 +18,7 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-Create Software Templates within Software Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
+Create Software Templates within Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
 ## Create a Software Template
 
@@ -89,7 +89,7 @@ Once your Software Template is configured and tested, publish it so your team ca
 
 ## Available templating actions
 
-The following actions are available for Software Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
+The following actions are available for Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
 
 - **Templating**
   - "Apply template": Pass input parameters into a set of files.
@@ -105,7 +105,7 @@ The following actions are available for Software Catalog in Datadog App Builder 
 - **Azure DevOps**
   - "Run pipeline": Trigger a pipeline run in Azure DevOps.
 - **Retrieve Service Information**
-  - "List entity definitions": Retrieve all service definitions from Datadog Software Catalog (v3.0 and prior).
+  - "List entity definitions": Retrieve all service definitions from Datadog Catalog (v3.0 and prior).
   - "Get service dependencies": Retrieve a service's upstream and downstream dependencies.
 - **Approvals**
   - "Make a decision": Use Slack or Microsoft Teams to solicit an approval.

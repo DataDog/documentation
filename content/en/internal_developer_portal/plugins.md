@@ -1,9 +1,9 @@
 ---
 title: Plugins
 further_reading:
-- link: "/internal_developer_portal/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Learn about the Software Catalog"
+  text: "Learn about the Catalog"
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Explore available Datadog Actions"

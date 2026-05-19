@@ -50,7 +50,7 @@ To investigate a finding:
   {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/findings_panel_20251015.png" alt="The findings panel showing a critical visa card scanner finding" style="width:50%;">}}
 4. In the **Blast Radius** section:
    1. View the Top 10 services, hosts, and environments impacted by this sensitive data findings.
-   1. Click on a service to see more information about the service in the **Software Catalog**.
+   1. Click on a service to see more information about the service in the **Catalog**.
    1. Click on a host to see more information about the host in the Infrastructure List page.
   {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/blast_radius_02_01_2024.png" alt="The findings panel showing the top 10 impacted services" style="width:50%;">}}
 

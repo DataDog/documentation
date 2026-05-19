@@ -6,7 +6,7 @@ further_reading:
       text: 'Kafka Integration'
     - link: '/tracing/software_catalog/'
       tag: 'Documentation'
-      text: 'Software Catalog'
+      text: 'Catalog'
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'

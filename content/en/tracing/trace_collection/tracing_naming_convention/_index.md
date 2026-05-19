@@ -51,7 +51,7 @@ Span tags provide context related to the span. For instance, host or container t
 
 The list of added tags can be found for [Kubernetes][7], [Docker][8] and [Amazon ECS][9].
 
-Tags are usually enriched from other data sources like tags sourced from host, container, or Software Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
+Tags are usually enriched from other data sources like tags sourced from host, container, or Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
 To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 

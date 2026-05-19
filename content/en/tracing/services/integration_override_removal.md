@@ -40,7 +40,7 @@ Before you remove integration overrides:
 
 To remove integration overrides in Datadog:
 
-1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
+1. Navigate to **Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
 
    {{< img src="tracing/guide/base_service/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
 

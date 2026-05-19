@@ -6,7 +6,7 @@ further_reading:
       text: 'Kafka Integration'
     - link: '/tracing/software_catalog/'
       tag: 'Documentation'
-      text: 'Software Catalog'
+      text: 'Catalog'
 aliases:
   - /data_streams/ruby
 ---

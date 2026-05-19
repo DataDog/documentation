@@ -149,7 +149,7 @@ Lists available metrics, with options for filtering and metadata.
 ### `search_datadog_services`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Software Catalog with details and team information.
+Lists services in Datadog's Catalog with details and team information.
 
 - Show me all services in our microservices architecture.
 - List services owned by the platform team.

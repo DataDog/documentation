@@ -32,17 +32,17 @@ This step describes how to set up your service to use AAP.
 
 <div class="alert alert-info">If your service is already using AAP, you can go to <a href="#step-1.3:-validating-login-information-is-automatically-collected">Step 1.3: Validating whether login information is automatically collected</a>.</div>
 
-1. Go to [**Software Catalog**][2], click the **Security** lens, and search for your login service name. 
+1. Go to [**Catalog**][2], click the **Security** lens, and search for your login service name. 
 
-   {{<img src="security/ato/guide_service_catalog.png" alt="Software Catalog with a service managing authentication" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog.png" alt="Catalog with a service managing authentication" style="width:100%;" >}}
 
 2. Click on the service to open its details. If the **Threat management** pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
    
-   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
 
    If AAP isn't enabled, the panel displays the **Discover AAP** button.
 
-   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
 
    To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-aap-on-your-login-service).
 
