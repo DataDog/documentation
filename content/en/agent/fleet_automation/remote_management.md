@@ -46,7 +46,7 @@ Datadog suggests at least 2 GB for the initial Agent install and an additional 2
 
 ### Upgrade steps 
 
-{{% collapse-content title=" How to upgrade Agents remotely" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="How to upgrade Agents remotely" level="h4" expanded=false id="upgrade-agents-remotely" %}}
 
 1. From the [{{< ui >}}Upgrade Agents{{< /ui >}}][4] tab, click {{< ui >}}Upgrade Now{{< /ui >}}.
 
@@ -64,7 +64,7 @@ Datadog suggests at least 2 GB for the initial Agent install and an additional 2
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="schedule-agent-upgrades" %}}
 
 1. From the [{{< ui >}}Upgrade Agents{{< /ui >}} tab][4], click {{< ui >}}+ Create Schedule{{< /ui >}}.
 
@@ -170,7 +170,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 - Manage Agent tags
 - Apply consistent configuration across environments
 
-{{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="configure-multiple-agents" %}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. You can target a group of Agents by filtering on host information or tags.
@@ -185,7 +185,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment and track its progress from the [Deployments page][10].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Edit configuration of a single Agent" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Edit configuration of a single Agent" level="h4" expanded=false id="edit-single-agent-configuration" %}}
 1. In the Datadog UI, navigate to the [Fleet Automation][18] page and select {{< ui >}}View Agents{{< /ui >}}. 
 
 1. (Optional) You can target a group of Agents by filtering on host information or tags.
