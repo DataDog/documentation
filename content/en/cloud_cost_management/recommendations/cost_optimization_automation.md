@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Cost Optimization Automation lets you continuously act on [Cloud Cost Recommendations][1] without manual cleanup. You define an **automation**, scope it to the accounts, regions, and resources you want, and Datadog executes the recommended action on a recurring schedule.
+Cost Optimization Automation lets you continuously act on [Cloud Cost Recommendations][1] without manual cleanup. You define an **automation**, scope it to the accounts, regions, and resources you want, and Datadog executes the recommended action on a recurring schedule. Each run can require human approval in Slack or Microsoft Teams before Datadog makes any changes, so your team stays in control of every change.
 
 Each automation targets a single recommendation type and includes the following:
 
@@ -33,14 +33,14 @@ Cost Optimization Automation is different from the 1-click Workflow Automation a
 
 Cost Optimization Automation supports the following AWS recommendation types:
 
-| Recommendation type |
-|---------------------|
-| Terminate unattached EBS volume |
-| Transition S3 Standard objects to Amazon S3 Intelligent-Tiering |
-| Terminate unused RDS instance |
-| Delete extra on-demand backups (DynamoDB) |
-| Set CloudWatch logs retention policy |
-| Delete old EBS snapshots |
+| Recommendation type | Built-in safeguards |
+|---------------------|---------------------|
+| Terminate unattached EBS volume | An EBS snapshot is taken before each volume is deleted. |
+| Transition S3 Standard objects to Amazon S3 Intelligent-Tiering | Reversible. The lifecycle configuration can be removed at any time. |
+| Terminate unused RDS instance | A final RDS snapshot is taken before each instance is terminated. |
+| Delete extra on-demand backups (DynamoDB) | The two most recent backups are preserved on every run. |
+| Set CloudWatch logs retention policy | Reversible. The retention period can be adjusted or removed at any time. |
+| Delete old EBS snapshots | Snapshots referenced by an AMI are skipped. |
 
 ## Prerequisites
 
@@ -94,7 +94,7 @@ When approval is required, Datadog posts a summary of the resources targeted on 
 
 ### Step 6: Save the automation
 
-Click {{< ui >}}Save Automation{{< /ui >}}. The automation is created in a paused state. Toggle it to {{< ui >}}Active{{< /ui >}} to start the schedule.
+At the bottom of the form, set the automation to {{< ui >}}Active{{< /ui >}} to start the schedule immediately, or leave it {{< ui >}}Paused{{< /ui >}} to enable it later. Then click {{< ui >}}Save Automation{{< /ui >}}.
 
 ## Manage automations
 
@@ -116,9 +116,9 @@ Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past 
 
 Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find executions by status, recommendation type, or date range.
 
-## Change history
+## Version history
 
-Datadog records every create, edit, enable, disable, and delete event for an automation. Open an automation and select the {{< ui >}}History{{< /ui >}} tab to see who made each change and what changed. Use this view to audit changes or roll back to a previous configuration.
+Datadog records a new version of an automation each time it's created, edited, enabled, disabled, or deleted. Open an automation and select the {{< ui >}}History{{< /ui >}} tab to see who made each change and what changed. Use this view to audit changes or roll back to a previous version.
 
 ## Recommendation status
 
