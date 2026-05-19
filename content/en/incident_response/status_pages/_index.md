@@ -147,7 +147,7 @@ You can publish updates over time and mark the notice as **Resolved** when the i
 
 Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
 
-From a status page, select the dropdown next to **Publish Notice**, click **Publish Backfilled Notice**, select **Degradation**, then provide:
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Degradation**, then provide:
 
 | Field | Description |
 | ---- | ---- |
@@ -185,7 +185,7 @@ You can post updates if plans change or reschedule the maintenance window as nee
 
 Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
 
-From a status page, select the dropdown next to **Publish Notice**, click **Publish Backfilled Notice**, select **Scheduled Maintenance**, then provide:
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Scheduled Maintenance**, then provide:
 
 | Field | Description |
 | ---- | ---- |
