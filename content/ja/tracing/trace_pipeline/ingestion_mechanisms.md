@@ -4,93 +4,96 @@ aliases:
 description: トレース取り込みを制御するトレーサーと Agent のメカニズムの概要。
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
-  tag: ドキュメント
-  text: Ingestion Controls
+  tag: Documentation
+  text: 取り込みのコントロール
 - link: /tracing/trace_pipeline/trace_retention/
-  tag: ドキュメント
+  tag: Documentation
   text: トレースの保持
 - link: /tracing/trace_pipeline/metrics/
-  tag: ドキュメント
+  tag: Documentation
   text: 使用量メトリクス
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization/#improving-tracing-efficiency-through-targeted-changes
+  tag: Blog
+  text: 'Datadog の大規模な最適化: Zendesk におけるコスト効率に優れた観測可能性'
 title: 取り込みのメカニズム
 ---
-
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="取り込みサンプリングルール" >}}
 
 
-アプリケーションで生成されたスパンを Datadog に送信する (_取り込む_) かどうかは、複数のメカニズムによって決定されます。これらのメカニズムの背後にあるロジックは、[トレーシングライブラリ][1]と Datadog Agent の中にあります。構成によっては、インスツルメントされたサービスによって生成されたトラフィックの全てまたは一部が取り込まれます。
+アプリケーションによって生成されたスパンを Datadog に送信するかどうか (_取り込み_) の選択は、複数のメカニズムによって行われます。これらのメカニズムの背後にある論理は、[トレースライブラリ][1] と Datadog Agent にあります。構成に応じて、インスツルメントされたサービスによって生成されたすべてまたは一部のトラフィックが取り込まれます。
 
-取り込まれた各スパンには、このページで説明されているメカニズムのいずれかを参照する一意の**取り込み理由**が付加されています。[使用量メトリクス][2]`datadog.estimated_usage.apm.ingested_bytes` と `datadog.estimated_usage.apm.ingested_spans` は `ingestion_reason` によってタグ付けされています。
+取り込まれた各スパンには、このページで説明しているメカニズムのいずれかを指す固有の **取り込み理由**が付随しています。[使用状況メトリクス][2] `datadog.estimated_usage.apm.ingested_bytes` と `datadog.estimated_usage.apm.ingested_spans` は `ingestion_reason` でタグ付けされています。
 
-[取り込み理由ダッシュボード][3]を使って、それぞれの取り込み理由を確認することができます。各メカニズムに起因するボリュームの概要を把握し、どの構成オプションに焦点を当てるべきかを迅速に知ることができます。
+[取り込み理由ダッシュボード][3] を使用して、これらの各取り込み理由をコンテキストの中で調査します。各メカニズムに帰属するボリュームの概要を把握し、どの構成オプションに焦点を当てるべきかを迅速に知ることができます。
 
 ## ヘッドベースサンプリング
 
-デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][4]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
+デフォルトのサンプリングメカニズムは、_ヘッドベースサンプリング_と呼ばれています。トレースを保持するか削除するかの判断は、トレースの最初の段階、つまり [ルートスパン][4] の開始時に行われます。この決定はその後、リクエストコンテキストの一部として、たとえば HTTP リクエストヘッダーとして他のサービスに伝播されます。
 
 この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、トレースは全体として保持または削除されることが保証されます。
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="ヘッドベースサンプリング" style="width:100%;" >}}
 
-ヘッドベースサンプリングのサンプリングレートは、以下の 2 か所で設定できます。
-- **[Agent](#in-the-agent)** レベル (デフォルト)
-- [トレースライブラリ](#in-tracing-libraries-user-defined-rules)**レベル: 任意のトレースライブラリのメカニズムが Agent の設定をオーバーライドします。
+ヘッドベースサンプリングのサンプリングレートは、次の 2 か所で設定できます。
+ **[Agent](#intheagent)** レベル (デフォルト)
+ **[トレースライブラリ](#intracinglibrariesuserdefinedrules)** レベル: 任意のトレースライブラリのメカニズムにより Agent のセットアップがオーバーライドされます。
 
 ### Agent で
 `ingestion_reason: auto`
 
-Datadog Agent は、トレーシングライブラリにサンプリングレートを継続的に送信し、トレースのルートで適用させます。Agent は、1 秒間に 10 個のトレースを目標にレートを調整し、トラフィックに応じて各サービスに分配します。
+Datadog Agent は、トレースのルートで適用するために、トレースライブラリにサンプリングレートを継続的に送信します。Agent は、トラフィックに応じてサービスに分配される、全体で 1 秒あたり 10 のトレースを取得できるようにレートを調整します。
 
-例えば、サービス `A` が `B` よりもトラフィックが多い場合、Agent は `A` のサンプリングレートを変化させて、`A` が 1 秒間に 7 つ以上のトレースを保持しないようにし、同様に `B` のサンプリングレートを調整して `B` が 1 秒間に 3 つのトレース、合計 1 秒間に 10 個以上のトレースを保持しないようにします。
+たとえば、サービス `A` がサービス `B` よりもトラフィックが多い場合、Agent は `A` のサンプリングレートを変化させて、`A` が 1 秒間に 7 つのトレースを超えないようにし、同様に `B` のサンプリングレートを調整して `B` が 1 秒間に 3 つのトレースを超えないようにします。これにより、合計で 1 秒間に最大 10 個のトレースとなります。
 
-#### リモート構成
+#### リモート設定
 
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][23] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
+Agent のサンプリングレート設定は、Agent バージョン [7.42.0][20] 以上を使用している場合、リモートで設定可能です。始めるには、[Remote Configuration][21] をセットアップした後、[取り込み制御ページ][5] から `ingestion_reason` パラメーターを設定します。Remote Configuration を使用すると、Agent を再起動することなくパラメーターを変更できます。リモートで設定された設定内容は、環境変数や `datadog.yaml` からの設定を含むローカル設定よりも優先されます。
 
-#### ローカル構成
+#### ローカル設定
 
-Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数に、Agent の目標の 1 秒あたりのトレースを設定します。
+Agent のメイン構成ファイル (`datadog.yaml`) または環境変数に、Agent の目標の 1 秒あたりのトレースを設定します。
+
 ```
-@param max_traces_per_second - 整数 - オプション - デフォルト: 10
-@env DD_APM_MAX_TPS - 整数 - オプション - デフォルト: 10
+@param target_traces_per_second - integer - optional - default: 10
+@env DD_APM_TARGET_TPS - integer - optional - default: 10
 ```
 
 **注**:
-- Agent で設定した traces-per-second サンプリングレートは、Datadog トレースライブラリにのみ適用されます。OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
-- The maximum traces per second is a target, not a fixed value. In reality, it fluctuates depending on traffic spikes and other factors.
+ Agent で設定された 1 秒あたりのトレース数のサンプリングレートは、Datadog のトレースライブラリにのみ適用されます。OpenTelemetry SDK などの他のトレースライブラリには影響しません。
+目標は固定値ではありません。実際には、トラフィックの急増や他の要因に応じて変動します。
 
-Datadog Agent の[自動計算されたサンプリングレート](#in-the-agent)を使ってサンプリングされたトレースの全てのスパンには、取り込み理由 `auto` のタグが付けられています。`ingestion_reason` タグは、[使用量メトリクス][2]にも設定されています。Datadog Agent のデフォルトのメカニズムを使用するサービスは、[Ingestion Control Page][5] の Configuration の列で `Automatic` とラベル付けされます。
+Datadog Agent の[自動計算されたサンプリングレート](#intheagent)を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `auto` がタグ付けされています。`ingestion_reason` タグは [使用状況メトリクス][2] にも設定されています。Datadog Agent のデフォルトメカニズムを使用しているサービスは、[取り込み制御ページ][5] の [Configuration] (設定) 列で `Automatic` としてラベル付けされています。
 
-### トレーシングライブラリ: ユーザー定義のルール
+### トレースライブラリ: ユーザー定義のルール
 `ingestion_reason: rule`
 
 よりきめ細かい制御を行うには、トレースライブラリのサンプリング構成オプションを使用します。
-- Set a specific **sampling rate to apply to the root of the trace**, by service, and/or resource name, overriding the Agent's [default mechanism](#in-the-agent).
-- 1 秒間に取り込まれるトレース数の**レートリミット**を設定します。デフォルトのレートリミットは、サービスインスタンスあたり 1 秒あたり 100 トレースです (Agent [デフォルトメカニズム](#in-the-agent)を使用している場合、レートリミッターは無視されます)。
+ サービスおよび/またはリソース名ごとに、**トレースのルートに適用する特定のサンプリングレート**を設定し、Agent の[デフォルトメカニズム](#intheagent)をオーバーライドします。
+1 秒間に取り込まれるトレース数の**レート制限**を設定します。デフォルトのレート制限は、サービスインスタンスごとに 1 秒あたり 100 トレースです (Agent の[デフォルトメカニズム](#intheagent)を使用している場合、レートリミッターは無視されます)。
 
-**Note**: Sampling rules are also head-based sampling controls. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
+**注**: サンプリングルールは、ヘッドベースのサンプリング制御でもあります。サービスのトラフィックが設定された 1 秒あたりの最大トレース数を超える場合、ルートでトレースが削除されます。不完全なトレースは作成されません。
 
 構成は、環境変数で設定するか、コードで直接設定することができます。
 
 {{< tabs >}}
 {{% tab "Java" %}}
-**Remote configuration**
+**リモート設定**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+バージョン <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a> から、Java アプリケーションでは、<a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control ページ</a> UI からサービスごとおよびリソースごとのサンプリングレートを設定します。
 
-Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+サービスごとおよびリソースごとのサンプリングレートをリモートで設定する方法については、[リソースベースのサンプリングガイド][1] を参照してください。
 
-**Note**: Remotely set configuration takes precedence over local configuration.
+**注**: リモートで設定された設定内容は、ローカル設定よりも優先されます。
 
-**Local configuration**
+**ローカル設定**
 
-For Java applications, set by-service and by-resource (starting from version [v1.26.0][3] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+Java アプリケーションでは、`DD_TRACE_SAMPLING_RULES` 環境変数を使用して、サービスごとおよびリソースごとのサンプリングレートを設定します (リソースベースのサンプリングはバージョン [v1.26.0][3] から)。
 
-For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
+たとえば、サービス `myservice` からリソース `GET /checkout` のトレースを 100% キャプチャし、他のエンドポイントのトレースを 20% キャプチャするには、次のように設定します。
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\":1},{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{"service": "my-service", "resource": "GET /checkout", "sample_rate":1},{"service": "my-service", "sample_rate":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
@@ -98,83 +101,112 @@ export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /chec
 
 サービス名の値は大文字と小文字を区別し、実際のサービス名の大文字と小文字を一致させる必要があります。
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの 1 秒あたりのトレース数を設定して、レート制限を構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 トレースの制限が適用されます。
 
-**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
+**注**: `DD_TRACE_SAMPLE_RATE` の使用は非推奨です。代わりに `DD_TRACE_SAMPLING_RULES` を使用してください。たとえば、すでに `DD_TRACE_SAMPLE_RATE` を `0.1` に設定している場合は、代わりに `DD_TRACE_SAMPLING_RULES` を `[{"sample_rate":0.1}]` に設定します。
 
-サンプリングコントロールについては、[Java トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[Java トレースライブラリドキュメント][2] を参照してください。
 
 [1]: /ja/tracing/guide/resource_based_sampling
 [2]: /ja/tracing/trace_collection/dd_libraries/java
-[3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
+[3]: https://github.com/DataDog/ddtracejava/releases/tag/v1.26.0
 {{% /tab %}}
 {{% tab "Python" %}}
-For Python applications, set by-service and by-resource (starting from version [v2.8.0][1] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+**リモート設定**
 
-For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
+バージョン <a href="https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0">2.9.0</a> から、Python アプリケーションでは、<a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control ページ</a> UI からサービスごとおよびリソースごとのサンプリングレートを設定します。
+
+サービスごとおよびリソースごとのサンプリングレートをリモートで設定する方法については、[リソースベースのサンプリングガイド][3] を参照してください。
+
+**注**: リモートで設定された設定内容は、ローカル設定よりも優先されます。
+
+**ローカル設定**
+Python アプリケーションでは、`DD_TRACE_SAMPLING_RULES` 環境変数を使用して、サービスごとおよびリソースごとのサンプリングレートを設定します (リソースベースのサンプリングはバージョン [v2.8.0][1] から)。
+
+たとえば、サービス `myservice` からリソース `GET /checkout` のトレースを 100% キャプチャし、他のエンドポイントのトレースを 20% キャプチャするには、次のように設定します。
 
 ```
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの 1 秒あたりのトレース数を設定して、レート制限を構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 トレースの制限が適用されます。
 
-**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
+**注**: `DD_TRACE_SAMPLE_RATE` の使用は非推奨です。代わりに `DD_TRACE_SAMPLING_RULES` を使用してください。たとえば、すでに `DD_TRACE_SAMPLE_RATE` を `0.1` に設定している場合は、代わりに `DD_TRACE_SAMPLING_RULES` を `[{"sample_rate":0.1}]` に設定します。
 
-サンプリングコントロールについては、[Python トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[Python トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
+[1]: https://github.com/DataDog/ddtracepy/releases/tag/v2.8.0
 [2]: /ja/tracing/trace_collection/dd_libraries/python
+[3]: /ja/tracing/guide/resource_based_sampling/
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Ruby アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
+**リモート設定**
 
-例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+バージョン <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a> から、Ruby アプリケーションでは、<a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control ページ</a> UI からサービスごとおよびリソースごとのサンプリングレートを設定します。
+
+サービスごとおよびリソースごとのサンプリングレートをリモートで設定する方法については、[リソースベースのサンプリングガイド][1] を参照してください。
+
+**注**: リモートで設定された設定内容は、ローカル設定よりも優先されます。
+
+**ローカル設定**
+Ruby アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使用して、ライブラリのグローバルサンプリングレートを設定します。`DD_TRACE_SAMPLING_RULES` 環境変数を使用して、サービスごとのサンプリングレートを設定します。
+
+たとえば、`myservice` という名前のサービスのトレースを 50% 送信し、トレースの残りを 10% 送信するには、次のようにします。
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの 1 秒あたりのトレース数を設定して、レート制限を構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 トレースの制限が適用されます。
 
-サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][1]を参照してください。
+サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][1] を参照してください。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
-**Remote configuration**
+**リモート設定**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+バージョン <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.64.0">1.64.0</a> から、Go アプリケーションでは、<a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control ページ</a> UI からサービスごとおよびリソースごとのサンプリングレートを設定します。
 
-Read more about how to remotely configure sampling rates by service and resource in this [article][3].
+サービスごとおよびリソースごとのサンプリングレートをリモートで構成する方法については、[こちらの記事][3] を参照してください。
 
-**Note**: The remotely set configuration takes precedence over local configuration.
+**注**: リモートで設定された設定内容は、ローカル設定よりも優先されます。
 
-**Local configuration**
+**ローカル設定**
 
-For Go applications, set by-service and by-resource (starting from version [v1.60.0][2] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+Go アプリケーションでは、`DD_TRACE_SAMPLING_RULES` 環境変数を使用して、サービスごとおよびリソースごとのサンプリングレートを設定します (リソースベースのサンプリングの場合はバージョン [v1.60.0][2] から)。
 
-For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
+たとえば、サービス `myservice` からリソース `GET /checkout` のトレースを 100% キャプチャし、他のエンドポイントのトレースを 20% キャプチャするには、次のように設定します。
 
 ```
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの 1 秒あたりのトレース数を設定して、レート制限を構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 トレースの制限が適用されます。
 
-**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
+**注**: `DD_TRACE_SAMPLE_RATE` の使用は非推奨です。代わりに `DD_TRACE_SAMPLING_RULES` を使用してください。たとえば、すでに `DD_TRACE_SAMPLE_RATE` を `0.1` に設定している場合は、代わりに `DD_TRACE_SAMPLING_RULES` を `[{"sample_rate":0.1}]` に設定します。
 
-サンプリングコントロールについては、[Go トレースライブラリドキュメント][1]を参照してください。
+サンプリングコントロールについては、[Go トレースライブラリドキュメント][1] を参照してください。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/go
-[2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
+[2]: https://github.com/DataDog/ddtracego/releases/tag/v1.60.0
 [3]: /ja/tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Node.js アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
+**リモート設定**
 
-また、サービス別のサンプリングレートを設定することもできます。例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+バージョン <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a> から、Node.js アプリケーションでは、<a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control ページ</a> UI からサービスごとおよびリソースごとのサンプリングレートを設定します。
+
+サービスごとおよびリソースごとのサンプリングレートをリモートで設定する方法については、[リソースベースのサンプリングガイド][1] を参照してください。
+
+**注**: リモートで設定された設定内容は、ローカル設定よりも優先されます。
+
+**ローカル設定**
+
+Node.js アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使用して、ライブラリのグローバルサンプリングレートを設定します。
+
+サービスごとのサンプリングレートも設定できます。たとえば、`myservice` という名前のサービスのトレースを 50% 送信し、トレースの残りを 10% 送信するには、次のようにします。
 
 ```javascript
 tracer.init({
@@ -189,161 +221,185 @@ tracer.init({
 });
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの 1 秒あたりのトレース数を設定して、レート制限を構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 トレースの制限が適用されます。
 
-サンプリングコントロールについては、[Node.js トレースライブラリドキュメント][1]を参照してください。
+サンプリングコントロールについては、[Node.js トレースライブラリドキュメント][1] を参照してください。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
-PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
+**リモート設定**
 
-例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a> から、PHP アプリケーションでは、<a href="https://app.datadoghq.com/apm/traces/ingestion-control">Ingestion Control ページ</a> からサービスごとおよびリソースごとのサンプリングレートを設定します。
+
+サービスごとおよびリソースごとのサンプリングレートをリモートで設定する方法については、[リソースベースのサンプリングガイド][1] を参照してください。
+
+**注**: リモート設定された設定内容は、ローカル設定よりも優先されます。
+
+**ローカル設定**
+
+PHP アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使用して、ライブラリのグローバルサンプリングレートを設定します。`DD_TRACE_SAMPLING_RULES` 環境変数を使用して、サービスごとのサンプリングレートを設定します。
+
+たとえば、`myservice` という名前のサービスのトレースを 50% 送信し、他のエンドポイントのトレースを 20%、トレースの残りを 10% 送信するには、次のように設定します。
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-サンプリングコントロールについては、[PHP トレースライブラリドキュメント][1]を参照してください。
+サンプリングコントロールについては、[PHP トレースライブラリドキュメント][1] を参照してください。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-Starting in [v0.1.0][1], the Datadog C++ library supports the following configurations:
-- グローバルサンプリングレート: 環境変数 `DD_TRACE_SAMPLE_RATE`
-- サービス別のサンプリングレート: 環境変数 `DD_TRACE_SAMPLING_RULES`
-- レートリミットの設定: 環境変数 `DD_TRACE_RATE_LIMIT`
+**リモート設定**
 
-例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+バージョン <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a> から、C++ アプリケーションでは、<a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control ページ</a> UI からサービスごとおよびリソースごとのサンプリングレートを設定します。
+
+サービスごとおよびリソースごとのサンプリングレートをリモートで設定する方法については、[リソースベースのサンプリングガイド][1] を参照してください。
+
+**注**: リモートで設定された設定内容は、ローカル設定よりも優先されます。
+
+**ローカル設定**
+[v0.1.0][1] からは、Datadog C++ ライブラリは以下の構成をサポートしています。
+ グローバルサンプリングレート: `DD_TRACE_SAMPLE_RATE` 環境変数
+ サービスごとのサンプリングレート: `DD_TRACE_SAMPLING_RULES` 環境変数
+レート制限の設定: `DD_TRACE_RATE_LIMIT` 環境変数
+
+たとえば、`myservice` という名前のサービスのトレースを 50% 送信し、トレースの残りを 10% 送信するには、次のようにします。
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
-C++ does not provide integrations for automatic instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][2].
+C++ は自動インスツルメンテーションのインテグレーションを提供しません。Envoy、Nginx、Istio などのプロキシのトレースに C++ を使用します。プロキシのサンプリング設定方法については、[プロキシのトレース][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
+[1]: https://github.com/DataDog/ddtracecpp/releases/tag/v0.1.0
 [2]: /ja/tracing/trace_collection/proxy_setup
 {{% /tab %}}
 {{% tab ".NET" %}}
-.NET アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
+.NET アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使用して、ライブラリのグローバルサンプリングレートを設定します。`DD_TRACE_SAMPLING_RULES` 環境変数を使用して、サービスごとのサンプリングレートを設定します。
 
-例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+たとえば、`myservice` という名前のサービスのトレースを 50% 送信し、トレースの残りを 10% 送信するには、次のようにします。
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+#using powershell
+$env:DD_TRACE_SAMPLE_RATE=0.1
+$env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+
+#using JSON file   
+{
+    "DD_TRACE_SAMPLE_RATE": "0.1",
+    "DD_TRACE_SAMPLING_RULES": "[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\": 0.5}]"
+}
 ```
 
-<div class="alert alert-info"><strong>ベータ版</strong>: バージョン 2.35.0 から、サービスが実行される場所で <a href="/agent/remote_config/">Agent リモート構成</a>が有効になっている場合、<a href="/tracing/service_catalog">サービスカタログ</a> の UI でサービスごとの <code>DD_TRACE_SAMPLE_RATE</code> を設定できます。</div>
+<div class="alert alert-info">バージョン 2.35.0 以降、このサービスが実行される環境で <a href="/remote_configuration">Agent Remote Configuration</a> が有効になっている場合、<a href="/tracing/software_catalog">Software Catalog</a> UI でサービスごとの <code>DD_TRACE_SAMPLE_RATE</code> を設定できます。</div>
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの 1 秒あたりのトレース数を設定して、レート制限を構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 トレースの制限が適用されます。
 
-Read more about sampling controls in the [.NET tracing library documentation][1].\
-Read more about [configuring environment variables for .NET][2].
+サンプリングコントロールについては、[.NET トレースライブラリドキュメント][1] を参照してください。\
+[.NET の環境変数の設定][2] で詳細を確認してください。
 
-[1]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
-[2]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core?tab=registryeditor#configuring-process-environment-variables
+[1]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnetcore
+[2]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnetcore?tab=registryeditor#configuringprocessenvironmentvariables
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: トレースライブラリ構成を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `rule` というタグが付けられます。ユーザー定義のサンプリングルールで構成されたサービスは、[Ingestion Control Page][5] の Configuration 列で `Configured` としてマークされます。
+**注**: トレースライブラリの設定を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `rule` がタグ付けされています。ユーザー定義のサンプリングルールで設定されたサービスは、[Ingestion Control ページ][5] の [Configuration] 列で `Configured` としてマークされます。
 
 ## エラーとレアトレース
 
-ヘッドベースサンプリングで捕捉できなかったトレースについては、2 つの Datadog Agent の追加サンプリングメカニズムにより、重要かつ多様なトレースが保持され、取り込まれるようにします。この 2 つのサンプラーは、あらかじめ決められたタグの組み合わせをすべてキャッチすることで、多様なローカルトレースセット (同一ホストからのスパンセット) を保持します。
+ヘッドベースのサンプリングで取得されないトレースについて、2 つの追加の Datadog Agent サンプリングメカニズムにより、重要で多様なトレースが保持され、取り込まれることが保証されます。これらの 2 つのサンプラーは、あらかじめ定められたタグのセットのすべての組み合わせを取得することによって、ローカルトレースの多様なセット (同じホストからのスパンのセット) を保持します。
 
-- **Error traces**: サンプリングエラーは、システムの潜在的な不具合を可視化するために重要です。
-- **Rare traces**: レアトレースをサンプリングすることで、トラフィックの少ないサービスやリソースを確実に監視し、システム全体の可視性を維持することができます。
+ **エラートレース**: サンプリングエラーは、システムの潜在的な不具合を可視化するために重要です。
+**レアトレース**: レアトレースをサンプリングすることで、トラフィックの少ないサービスやリソースを確実に監視し、システム全体の可視性を維持することができます。
 
-**注**: [ライブラリサンプリングルール](#in-tracing-libraries-user-defined-rules)を設定したサービスでは、エラーサンプリングとレアサンプリングは無視されます。
+**注**: [ライブラリサンプリングルール](#intracinglibrariesuserdefinedrules)を設定したサービスでは、エラーサンプリングとレアサンプリングは無視されます。
 
 ### エラートレース
 `ingestion_reason: error`
 
-エラーサンプラーは、ヘッドベースサンプリングでは捕捉できないエラースパンを含むトレースの断片を捕捉します。最大 10 トレース/秒 (Agent 毎) の速度でエラートレースを捕捉します。ヘッドベースのサンプリングレートが低い場合に、エラーを包括的に可視化することができます。
+エラーサンプラーでは、ヘッドベースのサンプリングで取得されないエラースパンを含むトレースを取得します。エラーサンプラーは、(Agent ごとに) 1 秒あたり最大 10 トレースのレートでエラートレースを取得します。ヘッドベースのサンプリングレートが低い場合でも、エラーに関する包括的な可視性を確保します。
 
-Agent バージョン 7.33 以降では、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数でエラーサンプラーを構成することが可能です。
+Agent バージョン 7.33 以降では、Agent のメイン構成ファイル (`datadog.yaml`) または環境変数でエラーサンプラーを構成することが可能です。
+
 ```
-@param errors_per_second - 整数 - オプション - デフォルト: 10
-@env DD_APM_ERROR_TPS - 整数 - オプション - デフォルト: 10
+@param errors_per_second - integer - optional - default: 10
+@env DD_APM_ERROR_TPS - integer - optional - default: 10
 ```
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="エラーサンプリング" style="width:100%;" >}}
 
 **注**:
 1. エラーサンプラーを無効にするには、このパラメーターを `0` に設定します。
-2. エラーサンプラーは、Agent レベルのエラースパンを持つローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信される保証はありません。
-3. デフォルトでは、トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンは、エラーサンプラーでは**除外**されます。
+2. エラーサンプラーは、Agent レベルでエラースパンを持つローカルトレースを取得します。トレースが分散している場合、完全なトレースが Datadog に送信される保証はありません。
+3. デフォルトでは、トレースライブラリのルールや `manual.drop` などのカスタムロジックによって削除されたスパンは、エラーサンプラーでは **除外**されます。
 
 #### Datadog Agent 7.42.0 以降
 
-<div class="alert alert-danger"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
-
-The error sampling is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
+エラーサンプリングは、Agent バージョン [7.42.0][20] 以降を使用している場合、リモートで設定可能です。[ドキュメント][21] に従って、Agent でリモート設定を有効にしてください。リモート設定を使用すると、Datadog Agent を再起動することなく、レアスパンの収集を有効にできます。
 
 #### Datadog Agent 6/7.41.0 以降
 
-トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンがエラーサンプラーに**含まれる**ようにデフォルトの動作をオーバーライドするには、Datadog Agent (または Kubernetes の Datadog Agent ポッド内の専用 Trace Agent コンテナ) で `DD_APM_FEATURES=error_rare_sample_tracer_drop` として機能を有効にします。
+トレースライブラリのルールや `manual.drop` などのカスタムロジックによって削除されたスパンがエラーサンプラーに**含まれる**ようにデフォルトの動作をオーバーライドするには、Datadog Agent (または Kubernetes の Datadog Agent Pod 内の専用 Trace Agent コンテナ) で `DD_APM_FEATURES=error_rare_sample_tracer_drop` として機能を有効にします。
 
 
-#### Datadog Agent 6/7.33〜6/7.40.x
+#### Datadog Agent 6/7.33 〜 6/7.40.x
 
-エラーサンプリングのデフォルト動作は、これらの Agent のバージョンでは変更できません。Datadog Agent を Datadog Agent 6/7.41.0 以降にアップグレードしてください。
+これらの Agent バージョンでは、エラーサンプリングのデフォルト動作を変更することはできません。Datadog Agent を Datadog Agent 6/7.41.0 以降にアップグレードしてください。
 
 
 ### レアトレース
 `ingestion_reason: rare`
 
-レアサンプラーは、Datadog にレアスパンのセットを送信します。これは、`env`、`service`、`name`、`resource`、`error.type`、`http.status` の組み合わせを最大で毎秒 5 トレース (Agent 毎) 捕捉することができます。ヘッドベースのサンプリングレートが低い場合に、低トラフィックのリソースを確実に可視化することができます。
+レアサンプラーは、Datadog に一連のレアスパンを送信します。これは、`env`、`service`、`name`、`resource`、`error.type`、および `http.status` の組み合わせを、(Agentごとに) 1 秒あたり最大 5 トレースのレートで取得します。ヘッドベースのサンプリングレートが低い場合でも、低トラフィックリソースの可視性を確保します。
 
-**注**: レアサンプラーは、Agent レベルのローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信されることを保証する方法はありません。
+**注**: レアサンプラーは、Agent レベルでローカルトレースを取得します。トレースが分散している場合、完全なトレースが Datadog に送信されることは保証されません。
 
 #### Datadog Agent 7.42.0 以降
 
-<div class="alert alert-danger"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
-
-The rare sampling rate is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
+レアサンプリングレートは、Agent バージョン [7.42.0][20] 以降を使用している場合、リモートで設定可能です。[ドキュメント][21] に従って、Agent でリモート設定を有効にしてください。リモート設定を使用すると、Datadog Agent を再起動することなく、パラメーター値を変更できます。
 
 #### Datadog Agent 6/7.41.0 以降
 
 デフォルトでは、レアサンプラーは**有効ではありません**。
 
-**注**: **有効**の場合、トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンは、このサンプラーでは**除外**されます。
+**注**: **有効**の場合、トレースライブラリのルールや `manual.drop` などのカスタムロジックによって削除されたスパンは、このサンプラーでは**除外**されます。
 
-レアサンプラーを設定するには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数 `DD_APM_ENABLE_RARE_SAMPLER` で `apm_config.enable_rare_sampler` 設定を更新してください。
+レアサンプラーを設定するには、Agent のメイン構成ファイル (`datadog.yaml`) または環境変数 `DD_APM_ENABLE_RARE_SAMPLER` で `apm_config.enable_rare_sampler` 設定を更新してください。
 
 ```
-@params apm_config.enable_rare_sampler - ブール値 - オプション - デフォルト: false
-@env DD_APM_ENABLE_RARE_SAMPLER - ブール値 - オプション - デフォルト: false
+@params apm_config.enable_rare_sampler - boolean - optional - default: false
+@env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンを評価するには、Trace Agent の `DD_APM_FEATURES=error_rare_sample_tracer_drop` で機能を有効にします。
+トレースライブラリのルールや `manual.drop` などカスタムロジックによって削除されたスパンを評価するには、
+ Trace Agent で `DD_APM_FEATURES=error_rare_sample_tracer_drop` を設定して機能を有効にします。
 
 
-#### Datadog Agent 6/7.33〜6/7.40.x
+#### Datadog Agent 6/7.33 〜 6/7.40.x
 
 デフォルトでは、レアサンプラーが有効になっています。
 
-**注**: **有効**の場合、トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンは、このサンプラーでは**除外**されます。これらのスパンをこのロジックに含めるには、Datadog Agent 6.41.0/7.41.0 以降にアップグレードしてください。
+**注**: **有効**の場合、トレースライブラリのルールや `manual.drop` などのカスタムロジックによって削除されたスパンは、このサンプラーでは**除外**されます。これらのスパンをこのロジックに含めるには、Datadog Agent 6.41.0/7.41.0 以降にアップグレードしてください。
 
-レアサンプラーのデフォルト設定を変更するには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数 `DD_APM_DISABLE_RARE_SAMPLER` で `apm_config.disable_rare_sampler` 設定を更新してください。
+レアサンプラーのデフォルト設定を変更するには、Agent のメイン構成ファイル (`datadog.yaml`) または環境変数 `DD_APM_DISABLE_RARE_SAMPLER` で `apm_config.disable_rare_sampler` 設定を更新してください。
 
 ```
-@params apm_config.disable_rare_sampler - ブール値 - オプション - デフォルト: false
-@env DD_APM_DISABLE_RARE_SAMPLER - ブール値 - オプション - デフォルト: false
+@params apm_config.disable_rare_sampler - boolean - optional - default: false
+@env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-## 強制維持と削除
+## 強制保持と削除
 `ingestion_reason: manual`
 
-ヘッドベースのサンプリングメカニズムは、トレーシングライブラリレベルでオーバーライドすることができます。例えば、クリティカルなトランザクションを監視する必要がある場合、関連するトレースを強制的に保持させることができます。一方、ヘルスチェックのような不要または反復的な情報については、トレースを強制的に削除することができます。
+ヘッドベースのサンプリングメカニズムは、トレースライブラリレベルでオーバーライドできます。たとえば、重要なトランザクションを監視する必要がある場合、関連するトレースを強制保持できます。一方、ヘルスチェックのような不要または反復的な情報については、トレースを強制削除できます。
 
-- スパンに Manual Keep を設定して、そのスパンとすべての子スパンを取り込むように指示します。問題のスパンがトレースのルートスパンでない場合、結果のトレースは UI で不完全に表示されることがあります。
+スパンに手動保持を設定して、それとすべての子スパンを取り込むことを示します。該当するスパンがトレースのルートスパンでない場合、結果として得られるトレースが UI で適切に表示されない可能性があります。
 
-- スパンに Manual Drop を設定して、子スパンが**取り込まれない**ようにします。[エラーとレアサンプラー](#error-and-rare-traces)は Agent では無視されます。
+スパンに手動削除を設定して、子スパンが取り込まれ**ない**ようにします。[エラーおよびレアサンプラー](#errorandraretraces) は Agent で無視されます。
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -359,11 +415,11 @@ import io.opentracing.util.GlobalTracer;
 public class MyClass {
     @Trace
     public static void myMethod() {
-        // トレース方法からアクティブなスパンを取り除く
+        // grab the active span out of the traced method
         Span span = GlobalTracer.get().activeSpan();
-        // 常にトレースを保持
+        // Always keep the trace
         span.setTag(DDTags.MANUAL_KEEP, true);
-        // 続いて実装方法を入力
+        // method impl follows
     }
 }
 ```
@@ -379,11 +435,11 @@ import io.opentracing.util.GlobalTracer;
 public class MyClass {
     @Trace
     public static void myMethod() {
-        // トレース方法からアクティブなスパンを取り除く
+        // grab the active span out of the traced method
         Span span = GlobalTracer.get().activeSpan();
-        // 常にトレースをドロップ
+        // Always Drop the trace
         span.setTag(DDTags.MANUAL_DROP, true);
-        // 続いて実装方法を入力
+        // method impl follows
     }
 }
 ```
@@ -400,9 +456,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    # 常にトレースを保持
+    # Always Keep the Trace
     span.set_tag(MANUAL_KEEP_KEY)
-    # 続いて実装方法を入力
+    # method impl follows
 ```
 
 手動でトレースを削除:
@@ -414,9 +470,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    # 常にトレースをドロップ
+    # Always Drop the Trace
     span.set_tag(MANUAL_DROP_KEY)
-    # 続いて実装方法を入力
+    # method impl follows
 ```
 
 {{< /programming-lang >}}
@@ -426,8 +482,8 @@ def handler():
 
 ```ruby
 Datadog::Tracing.trace(name, options) do |span, trace|
-  trace.keep! # アクティブトレースに影響する
-  # 続いて実装方法を入力
+  trace.keep! # Affects the active trace
+  # Method implementation follows
 end
 ```
 
@@ -435,13 +491,15 @@ end
 
 ```ruby
 Datadog::Tracing.trace(name, options) do |span, trace|
-  trace.reject! # アクティブトレースに影響する
-  # 続いて実装方法を入力
+  trace.reject! # Affects the active trace
+  # Method implementation follows
 end
 ```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
+
+{{% tracing-go-v2 %}}
 
 手動でトレースを保持:
 
@@ -451,18 +509,18 @@ package main
 import (
     "log"
     "net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" 
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    //  /posts URLでwebリクエストのスパンを作成
+    // Create a span for a web request at the /posts URL.
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // 常にこのトレースを保持:
+    // Always keep this trace:
     span.SetTag(ext.ManualKeep, true)
-    //続いて実装方法を入力
+    //method impl follows
 
 }
 ```
@@ -476,18 +534,18 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    //  /posts URLでwebリクエストのスパンを作成
+    // Create a span for a web request at the /posts URL.
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // 常にこのトレースを削除:
+    // Always drop this trace:
     span.SetTag(ext.ManualDrop, true)
-    //続いて実装方法を入力
+    //method impl follows
 }
 ```
 
@@ -502,9 +560,9 @@ const tags = require('dd-trace/ext/tags')
 
 const span = tracer.startSpan('web.request')
 
-// 常にトレースを保持
+// Always keep the trace
 span.setTag(tags.MANUAL_KEEP)
-//続いて実装方法を入力
+//method impl follows
 
 ```
 
@@ -516,9 +574,9 @@ const tags = require('dd-trace/ext/tags')
 
 const span = tracer.startSpan('web.request')
 
-// 常にトレースを削除
+// Always drop the trace
 span.setTag(tags.MANUAL_DROP)
-//続いて実装方法を入力
+//method impl follows
 
 ```
 
@@ -534,9 +592,9 @@ using(var scope = Tracer.Instance.StartActive("my-operation"))
 {
     var span = scope.Span;
 
-    // 常にこのトレースを保持
+    // Always keep this trace
     span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
-    //続いて実装方法を入力
+    //method impl follows
 }
 ```
 
@@ -549,9 +607,9 @@ using(var scope = Tracer.Instance.StartActive("my-operation"))
 {
     var span = scope.Span;
 
-    // 常にこのトレースをドロップ
+    // Always drop this trace
     span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
-    //続いて実装方法を入力
+    //method impl follows
 }
 ```
 
@@ -567,7 +625,7 @@ using(var scope = Tracer.Instance.StartActive("my-operation"))
   $span = $tracer->getActiveSpan();
 
   if (null !== $span) {
-    // 常にこのトレースを保持
+    // Always keep this trace
     $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
   }
 ?>
@@ -581,7 +639,7 @@ using(var scope = Tracer.Instance.StartActive("my-operation"))
   $span = $tracer->getActiveSpan();
 
   if (null !== $span) {
-    // 常にこのトレースをドロップ
+    // Always drop this trace
     $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
   }
 ?>
@@ -631,166 +689,172 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-手動によるトレース保持は、コンテキスト伝搬の前に行われるべきです。コンテキスト伝搬の後に保持される場合、システムはサービス間でトレース全体が保持されることを保証することはできません。手動によるトレース保持はトレースクライアントの位置で設定されるため、サンプリングルールに基づいて Agent またはサーバーの位置によってトレースが削除される可能性があります。
+トレース手動保持は、コンテキストの伝播の前に行う必要があります。コンテキストの伝播後に保持される場合、サービス間でトレース全体が保持されることは保証されません。トレース手動保持はトレースクライアントの場所で設定されるため、トレースはサンプリングルールに基づいて Agent により、またはサーバーの場所で削除される可能性があります。
 
 
 ## シングルスパン
 `ingestion_reason: single_span`
 
-特定のスパンをサンプリングする必要があるが、完全なトレースは必要ない場合、トレーシングライブラリでは、単一のスパンに設定されるサンプリングレートを設定することができます。
+特定のスパンをサンプリングする必要があるが、完全なトレースは必要ない場合、トレースライブラリでは、単一のスパンに設定されるサンプリングレートを設定することができます。
 
-例えば、特定のサービスをモニターするために[スパンからのメトリクス][6]を構築する場合、スパンのサンプリングルールを構成することで、サービスを流れるすべてのリクエストのトレースを 100% 取り込む必要がなく、これらのメトリクスが 100% のアプリケーショントラフィックに基づくことを確認することができます。
+たとえば、特定のサービスをモニターするために [スパンからのメトリクス][6] を構築する場合、スパンのサンプリングルールを構成することで、サービスを流れるすべてのリクエストのトレースを 100% 取り込む必要がなく、これらのメトリクスが 100% のアプリケーショントラフィックに基づくことを確認することができます。
 
 この機能は、Datadog Agent v[7.40.0][19]+ で利用可能です。
 
-**注**: [ヘッドベースサンプリング](#head-based-sampling)によって保持されているスパンをドロップするためにシングルスパンサンプリングルールを使用することは**できません**。ヘッドベースサンプリングによってドロップされる追加のスパンを保持するためにのみ使用できます。
+**注**: シングルスパンサンプリングルールは、[ヘッドベースサンプリング](#headbasedsampling)によって保持されているスパンを削除するために使用することは**できません**。ヘッドベースサンプリングによって削除される追加のスパンを保持するためにのみ使用できます。
 
 {{< tabs >}}
 {{% tab "Java" %}}
-トレーシングライブラリの[バージョン 1.7.0][1] から、Java アプリケーションの場合、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
+トレースライブラリの [バージョン 1.7.0][1] から、Java アプリケーションの場合、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 50 スパンを 100% 収集するには
+たとえば、`myservice`という名前のサービスから、`http.request`という操作で、1 秒間に最大 50 スパンを 100% 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-サンプリングコントロールについては、[Java トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[Java トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
+[1]: https://github.com/DataDog/ddtracejava/releases/tag/v1.7.0
 [2]: /ja/tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Python" %}}
 バージョン [v1.4.0][1] 以降、Python アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
 
-サンプリングコントロールについては、[Python トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[Python トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
+[1]: https://github.com/DataDog/ddtracepy/releases/tag/v1.4.0
 [2]: /ja/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
 バージョン [v1.5.0][1] 以降、Ruby アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
+[1]: https://github.com/DataDog/ddtracerb/releases/tag/v1.5.0
 [2]: /ja/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 バージョン [v1.41.0][1] 以降、Go アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
-Starting from version [v1.60.0][3], for Go applications, set by-resource and by-tags **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+バージョン [v1.60.0][3] 以降、Go アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でリソース名別とタグ別の **span** サンプリングルールを設定します。
 
-For example, to collect `100%` of the spans from the service for the resource `POST /api/create_issue`, for the tag `priority` with value `high`:
+たとえば、リソース `POST /api/create_issue` 用のサービスから、タグ `priority` の値 `high` に対して、`100%`のスパンを収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"resource": "POST /api/create_issue", "tags": { "priority":"high" }, "sample_rate":1.0}]
 ```
 
-サンプリングコントロールについては、[Go トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[Go トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
+[1]: https://github.com/DataDog/ddtracego/releases/tag/v1.41.0
 [2]: /ja/tracing/trace_collection/dd_libraries/go
-[3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
+[3]: https://github.com/DataDog/ddtracego/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
 Node.js アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-サンプリングコントロールについては、[Node.js トレースライブラリドキュメント][1]を参照してください。
+サンプリングコントロールについては、[Node.js トレースライブラリドキュメント][1] を参照してください。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
 バージョン [v0.77.0][1] 以降、PHP アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-サンプリングコントロールについては、[PHP トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[PHP トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
+[1]: https://github.com/DataDog/ddtracephp/releases/tag/0.77.0
 [2]: /ja/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-Starting from version [v0.1.0][1], for C++ applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+バージョン [v0.1.0][1] 以降、C++ アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-[1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
+[1]: https://github.com/DataDog/ddtracecpp/releases/tag/v0.1.0
 {{% /tab %}}
 {{% tab ".NET" %}}
 バージョン [v2.18.0][1] 以降、.NET アプリケーションでは、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
-例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには
+たとえば、`myservice` という名前のサービスから、`http.request` という操作で、1 秒間に最大 `50` スパンを `100%` 収集するには、次のようにします。
 
 ```
-@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+#using powershell
+$env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+
+#using JSON file   
+{
+    "DD_SPAN_SAMPLING_RULES": "[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\": 1.0, \"max_per_second\": 50}]"
+}
 ```
 
-サンプリングコントロールについては、[.NET トレースライブラリドキュメント][2]を参照してください。
+サンプリングコントロールについては、[.NET トレースライブラリドキュメント][2] を参照してください。
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
-[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
+[1]: https://github.com/DataDog/ddtracedotnet/releases/tag/v2.18.0
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnetcore
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger"><a href="/tracing/legacy_app_analytics/">App Analytics</a> のメカニズムは完全に非推奨となります。完全なトレースなしでシングルスパンを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">シングルスパンサンプリング</a>構成を使用します。完全なトレースを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">ヘッドベースサンプリング</a>構成を使用します。</div>
+<div class="alert alert-danger"> <a href="/tracing/legacy_app_analytics/">アプリ分析</a> メカニズムは完全に廃止されました。完全なトレースなしで単一のスパンを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">単一スパンサンプリング</a>設定を使用します。完全なトレースを取り込むには、<a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">ヘッドベースサンプリング</a>設定を使用します。</div>
 
 ## 製品の取り込まれたスパン
 
 ### RUM トレース
 `ingestion_reason:rum`
 
-Web アプリケーションやモバイルアプリケーションからのリクエストは、バックエンドサービスがインスツルメントされたときにトレースを生成します。[APM とリアルユーザーモニタリングのインテグレーション][7]は、Web やモバイルアプリケーションのリクエストを対応するバックエンドトレースにリンクし、フロントエンドとバックエンドの全データを 1 つのレンズで見ることができるようにします。
+Web またはモバイルアプリケーションからリクエストがあると、バックエンドサービスがインスツルメントされるときにトレースが生成されます。[APM と Real User Monitoring のインテグレーション][7] により、Web およびモバイルアプリケーションからのリクエストが対応するバックエンドトレースにリンクされるため、フロントエンドとバックエンドの完全なデータを同時に確認できます。
 
-RUM ブラウザ SDK のバージョン `4.30.0` からは、`traceSampleRate` という初期化パラメーターを設定することで、取り込み量を制御し、バックエンドのトレースのサンプリングを保持することができます。`traceSampleRate` には `0` から `100` の間の数値を設定します。
-もし `traceSampleRate` の値が設定されていない場合は、デフォルトでブラウザのリクエストから来るトレースの 100% が Datadog に送信されます。
+RUM ブラウザ SDK のバージョン `4.30.0` 以降、`traceSampleRate` 初期化パラメーターの設定により、取り込まれるボリュームを制御し、バックエンドトレースのサンプリングを保持することができます。`traceSampleRate` を `0` ～ `100` の数値に設定します。
+`traceSampleRate` の値が設定されていない場合、ブラウザリクエストからのトレースの 100 %がデフォルトで Datadog に送信されます。
 
 同様に、他の SDK でも同様のパラメーターでトレースサンプリングレートを制御してください。
 
 | SDK         | パラメーター             | 最小バージョン    |
-|-------------|-----------------------|--------------------|
-| Browser     | `traceSampleRate`     | [v4.30.0][8]       |
-| iOS         | `tracingSamplingRate` | [1.11.0][9] _サンプリングレートは、[1.13.0][16] 以降、取り込み制御ページで報告しています。_ |
-| Android     | `traceSampleRate`   | [1.13.0][10] _サンプリングレートは、[1.15.0][17] 以降、取り込み制御ページで報告しています。_ |
+||||
+| ブラウザ     | `traceSampleRate`     | [v4.30.0][8]       |
+| iOS         | `tracingSamplingRate` | [1.11.0][9] _サンプリングレートは、[1.13.0][16] 以降、Ingestion Control ページで報告されます。_ |
+| Android     | `traceSampleRate`   | [1.13.0][10] _サンプリングレートは、[1.15.0][17] 以降、Ingestion Control ページで報告されます。_ |
 | Flutter     | `tracingSamplingRate` | [1.0.0][11] |
-| React Native | `tracingSamplingRate` | [1.0.0][12] _サンプリングレートは、[1.2.0][18] 以降、取り込み制御ページで報告しています。_  |
+| React Native | `tracingSamplingRate` | [1.0.0][12] _サンプリングレートは、[1.2.0][18] 以降、Ingestion Control ページで報告されます。_  |
 
 ### Synthetic トレース
-`ingestion_reason:synthetics` と `ingestion_reason:synthetics-browser`
+`ingestion_reason:synthetics` および `ingestion_reason:syntheticsbrowser`
 
-HTTP テストとブラウザテストは、バックエンドサービスがインストルメントされたときに、トレースを生成します。[Synthetic テストと APM のインテグレーション][13]は、 Synthetic テストを対応するバックエンドのトレースとリンクさせます。失敗したテストの実行から、そのテストの実行によって生成されたトレースを見ることで、問題の根本的な原因を突き止めることができます。
+HTTP およびブラウザテストにより、バックエンドサービスがインスツルメントされるときにトレースが生成されます。[APM とSynthetic テストインテグレーション][13] により、Synthetic テストと対応するバックエンドトレースがリンクされます。テスト実行が失敗した場合、そのテスト実行によって生成されたトレースを見て問題の根本原因にナビゲートします。
 
 デフォルトでは、Synthetic HTTP テストとブラウザテストの 100% がバックエンドトレースを生成します。
 
@@ -798,41 +862,40 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 
 いくつかの追加の取り込み理由は、特定の Datadog 製品によって生成されるスパンに起因します。
 
-| 製品    | 取り込み理由                    | 取り込みのメカニズムの説明 |
-|------------|-------------------------------------|---------------------------------|
-| サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][14]から受信したトレース。 |
-| Application Security Management     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][15] によって脅威としてフラグが立てられたもの。 |
-| データジョブのモニタリング    | `data_jobs`                            | Traces ingested from the Datadog Java Tracer Spark integration or the Databricks integration. |
+| 製品    | 取り込み理由                    | 取り込みメカニズムの説明 |
+||||
+| Serverless | `lambda` と `xray`                   | Datadog トレースライブラリまたは AWS XRay インテグレーションでトレースした [Serverless アプリケーション][14] から受信したトレース。|
+| App and API Protection     | `appsec`                            | Datadog トレースライブラリから取り込まれ、[AAP][15] によって脅威としてフラグ付けされたトレース。|
+| Data Observability: Jobs Monitoring    | `data_jobs`                            | Datadog Java Tracer Spark インテグレーションまたは Databricks インテグレーションから取り込まれたトレース。|
 
 ## OpenTelemetry の取り込みメカニズム
 `ingestion_reason:otel`
 
-OpenTelemetry SDK のセットアップ (OpenTelemetry Collector または Datadog Agent を使用) に応じて、取り込みサンプリングを制御する複数の方法があります。様々な OpenTelemetry のセットアップで OpenTelemetry SDK、OpenTelemetry Collector、Datadog Agent レベルでのサンプリングに利用できるオプションの詳細は [OpenTelemetry による取り込みサンプリング][22] を参照してください。
+OpenTelemetry SDK (OpenTelemetry Collector または Datadog Agent を使用) を使用したセットアップに応じて、取り込みサンプリングを制御する複数の方法があります。各種 OpenTelemetry セットアップの OpenTelemetry SDK、OpenTelemetry Collector、および Datadog Agent レベルでのサンプリングに利用できるオプションの詳細については、[OpenTelemetry による取り込みサンプリング][22] を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/dd_libraries/
 [2]: /ja/tracing/trace_pipeline/metrics/
 [3]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[4]: /ja/tracing/glossary/#trace-root-span
+[4]: /ja/tracing/glossary/#tracerootspan
 [5]: /ja/tracing/trace_pipeline/ingestion_controls/
 [6]: /ja/tracing/trace_pipeline/generate_metrics/
-[7]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
-[8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
-[9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
-[10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
-[11]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv1.0.0
-[12]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0
+[7]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm/
+[8]: https://github.com/DataDog/browsersdk/releases/tag/v4.30.0
+[9]: https://github.com/DataDog/ddsdkios/releases/tag/1.11.0
+[10]: https://github.com/DataDog/ddsdkandroid/releases/tag/1.13.0
+[11]: https://github.com/DataDog/ddsdkflutter/releases/tag/datadog_flutter_plugin%2Fv1.0.0
+[12]: https://github.com/DataDog/ddsdkreactnative/releases/tag/1.0.0
 [13]: /ja/synthetics/apm/
 [14]: /ja/serverless/distributed_tracing/
 [15]: /ja/security/application_security/
-[16]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.13.0
-[17]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.15.0
-[18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
-[19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
-[20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /ja/agent/remote_config/#enabling-remote-configuration
+[16]: https://github.com/DataDog/ddsdkios/releases/tag/1.13.0
+[17]: https://github.com/DataDog/ddsdkandroid/releases/tag/1.15.0
+[18]: https://github.com/DataDog/ddsdkreactnative/releases/tag/1.2.0
+[19]: https://github.com/DataDog/datadogagent/releases/tag/7.40.0
+[20]: https://github.com/DataDog/datadogagent/releases/tag/7.42.0
+[21]: /ja/tracing/guide/remote_config/
 [22]: /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry
-[23]: /ja/agent/remote_config/

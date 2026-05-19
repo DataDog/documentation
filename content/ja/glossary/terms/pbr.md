@@ -1,4 +1,5 @@
 ---
+id: pbr
 core_product:
 - クラウドネットワークモニタリング
 title: ポリシーベースルーティング (PBR)

@@ -1,4 +1,5 @@
 ---
+id: dashboard
 title: dashboard
 core_product:
   - dashboards

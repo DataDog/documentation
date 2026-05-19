@@ -71,9 +71,11 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
    ```bash
    helm repo update
    helm upgrade datadog-operator datadog/datadog-operator \
-       --set image.repository=datadog/operator \
-       --set image.tag=latest # you can pin a specific version, see available tags on [Docker Hub][102]
+       --set image.repository=registry.datadoghq.com/operator \
+       --set image.tag=latest
    ```
+
+   You can pin a specific version. To browse available tags, use [Docker Hub][102].
 
 2. Update the Agent image versions in your `datadog-agent.yaml` manifest:
 
@@ -81,10 +83,10 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
    override:
      nodeAgent:
        image:
-         name: datadog/agent:<NEW_AGENT_VERSION>
+         name: registry.datadoghq.com/agent:<NEW_AGENT_VERSION>
      clusterAgent:
        image:
-         name: datadog/cluster-agent:<NEW_AGENT_VERSION>
+         name: registry.datadoghq.com/cluster-agent:<NEW_AGENT_VERSION>
    ```
 
 3. Apply the updated manifest:
@@ -100,7 +102,7 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
    kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
    ```
 
-[102]: https://hub.docker.com/r/datadog/operator/tags?name=latest
+[102]: https://hub.docker.com/r/datadog/operator/tags
 
 {{% /tab %}}
 

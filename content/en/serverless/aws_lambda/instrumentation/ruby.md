@@ -23,10 +23,6 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
-Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
-{{< /callout >}}
-
 ## Setup
 
 {{< tabs >}}
@@ -241,7 +237,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 1. Install the Datadog Lambda Library
 
-    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and tracing libraries within the image.
+    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and SDKs within the image.
 
     Add the following to your Gemfile:
 

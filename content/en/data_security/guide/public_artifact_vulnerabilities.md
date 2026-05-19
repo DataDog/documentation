@@ -17,7 +17,7 @@ The Public Artifact Vulnerabilities page lets you view vulnerability and respons
 
 ## How to access
 
-The Public Artifact Vulnerabilities page is accessible through the Help page under **Public Artifact Vulnerabilities**.
+The Public Artifact Vulnerabilities page is accessible through the Help page under {{< ui >}}Public Artifact Vulnerabilities{{< /ui >}}.
 
 {{< img src="data_security/public_artifact_vulnerabilities/help-page.png" alt="Help page with Public Artifact Vulnerabilities link" style="width:100%;" >}}
 
@@ -29,8 +29,8 @@ The Public Artifact Vulnerabilities page is accessible through the Help page und
 
 Use this to see all vulnerabilities for a specific artifact and version (for example, the Datadog Agent image version 7.52.0).
 
-- **Image**: Choose an artifact from the **Image** dropdown (for example, agent, cluster-agent, synthetic-private-location-worker). The list is built from available public artifacts.
-- **Version**: Choose a **Version** for that image. Versions are sorted by newest first.
+- {{< ui >}}Image{{< /ui >}}: Choose an artifact from the {{< ui >}}Image{{< /ui >}} dropdown (for example, agent, cluster-agent, synthetic-private-location-worker). The list is built from available public artifacts.
+- {{< ui >}}Version{{< /ui >}}: Choose a {{< ui >}}Version{{< /ui >}} for that image. Versions are sorted by newest first.
 
 The table loads and shows one row per vulnerability affecting that image/version.
 
@@ -53,7 +53,7 @@ You can use the search/filter box above the table to filter these rows by keywor
 Use this to find which artifacts/versions are affected and the status for each.
 
 1. In the search box at the top of the table, enter one or more CVE IDs (for example, `CVE-2024-1234` or `CVE-2024-1234, CVE-2024-5678` for multiple).
-2. Click **Find CVE in artifacts**.
+2. Click {{< ui >}}Find CVE in artifacts{{< /ui >}}.
 
 The table switches to CVE mode and shows one row per (CVE, artifact, version, status) combination.
 
@@ -80,9 +80,9 @@ The **Image** dropdown is populated from the list of tracked public artifacts. I
 
 | Option or action | Description |
 |------------------|-------------|
-| **Search / global filter** | Filter table rows by any text. In "by image/version" mode, the same search box is used before clicking **Find CVE in artifacts** to run a CVE lookup. |
-| **Find CVE in artifacts** | Runs a CVE lookup using the current search box value (supports comma-separated CVE IDs). Only relevant when you want to look up by CVE. |
-| **Pagination** | Use the table pagination to move through large result sets (for example, 50 rows per page). |
-| **Resizable columns** | You can resize column widths for readability. |
+| {{< ui >}}Search / global filter{{< /ui >}} | Filter table rows by any text. In "by image/version" mode, the same search box is used before clicking {{< ui >}}Find CVE in artifacts{{< /ui >}} to run a CVE lookup. |
+| {{< ui >}}Find CVE in artifacts{{< /ui >}} | Runs a CVE lookup using the current search box value (supports comma-separated CVE IDs). Only relevant when you want to look up by CVE. |
+| {{< ui >}}Pagination{{< /ui >}} | Use the table pagination to move through large result sets (for example, 50 rows per page). |
+| {{< ui >}}Resizable columns{{< /ui >}} | You can resize column widths for readability. |
 
 [1]: /help

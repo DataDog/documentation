@@ -6,6 +6,8 @@ export async function streamDocsAiChat({
     config,
     query,
     history = [],
+    conversationId,
+    anchorUrl = '',
     rewriteQuery = false,
     signal,
     onToken,
@@ -15,6 +17,12 @@ export async function streamDocsAiChat({
     const attributes = { query };
     if (history.length > 0) {
         attributes.history = history;
+    }
+    if (conversationId) {
+        attributes.conversation_id = conversationId;
+    }
+    if (anchorUrl) {
+        attributes.anchor_url = anchorUrl;
     }
     // Tells the API to rewrite the query for better retrieval (first message only)
     if (rewriteQuery) {

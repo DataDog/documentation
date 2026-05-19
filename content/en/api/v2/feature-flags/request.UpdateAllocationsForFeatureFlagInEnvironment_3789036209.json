@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+      "type": "allocations",
+      "attributes": {
+        "key": "overwrite-allocation-example-feature-flag",
+        "name": "New targeting rule Example-Feature-Flag",
+        "targeting_rules": [],
+        "variant_weights": [
+          {
+            "variant_id": "550e8400-e29b-41d4-a716-446655440002",
+            "value": 100
+          }
+        ],
+        "exposure_schedule": {
+          "rollout_options": {
+            "strategy": "UNIFORM_INTERVALS",
+            "autostart": false,
+            "selection_interval_ms": 86400000
+          },
+          "rollout_steps": [
+            {
+              "exposure_ratio": 0.05,
+              "interval_ms": null,
+              "is_pause_record": false,
+              "grouped_step_index": 0
+            },
+            {
+              "exposure_ratio": 0.25,
+              "interval_ms": null,
+              "is_pause_record": false,
+              "grouped_step_index": 1
+            },
+            {
+              "exposure_ratio": 1,
+              "interval_ms": null,
+              "is_pause_record": false,
+              "grouped_step_index": 2
+            }
+          ]
+        },
+        "guardrail_metrics": [],
+        "type": "CANARY"
+      }
+    }
+  ]
+}

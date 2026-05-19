@@ -27,8 +27,8 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
 ### Configuration
 1. Choose the visualization layer:
-    * **Regions**: Aggregate measures at a country or country subdivisions level.
-    * **Points**: Overlay events as points on the map to display geographic event data.
+    * {{< ui >}}Regions{{< /ui >}}: Aggregate measures at a country or country subdivisions level.
+    * {{< ui >}}Points{{< /ui >}}: Overlay events as points on the map to display geographic event data.
 
 2. Choose the data to graph: <br>
   **Note**: Support for data sources varies based on the visualization layer you select.
@@ -42,7 +42,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   |SLO | See the [SLO search documentation][7] to configure an SLO query. |
   |Security Signals <br> App and API Protection <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
-  [1]: /logs/log_configuration/processors/#geoip-parser
+  [1]: /logs/log_configuration/processors/geoip_parser/
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /logs/logs_to_metrics/
@@ -59,14 +59,14 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
   **Note**: The Points layer shows a maximum of 100,000 events at a time.
   
-  [1]: /logs/log_configuration/processors/#geoip-parser
+  [1]: /logs/log_configuration/processors/geoip_parser/
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /real_user_monitoring/explorer/search_syntax/
   {{% /tab %}}
   {{< /tabs >}}
 
-3. (Optional) Under **Visual Options**, use the **Set widget default view** dropdown to select where to initially focus the map. Select **Custom** to define a custom region, or search for the name of a country, state, or province.
+3. (Optional) Under {{< ui >}}Visual Options{{< /ui >}}, use the {{< ui >}}Set widget default view{{< /ui >}} dropdown to select where to initially focus the map. Select {{< ui >}}Custom{{< /ui >}} to define a custom region, or search for the name of a country, state, or province.
 
 ### Options
 
@@ -88,7 +88,7 @@ This widget can be used with the **[Dashboards API][8]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/processors/#geoip-parser
+[1]: /logs/log_configuration/processors/geoip_parser/
 [2]: /getting_started/tagging/#define-tags
 [3]: /logs/search_syntax/
 [4]: /logs/logs_to_metrics/

@@ -1,4 +1,5 @@
 ---
+id: manual_step
 title: manual step
 core_product:
   - ci-cd

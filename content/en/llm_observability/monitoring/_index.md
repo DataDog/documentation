@@ -1,6 +1,11 @@
 ---
 title: Monitoring
 description: How to explore more of your application in LLM Observability.
+further_reading:
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
+
 ---
 
 ## Overview
@@ -58,20 +63,24 @@ This enables you to quickly identify issues, monitor performance, and gain insig
 
 For applications instrumented with Datadog APM, you can [correlate APM and LLM Observability][2] through the SDK. Correlating APM with LLM Observability full end-to-end visibility and thorough analysis, from app issues to LLM-specific root causes.
 
-### Cluster Map
+### Patterns
 
-{{< img src="llm_observability/index/llm_cluster_example.png" alt="An example Cluster Map, displaying 1000+ trace inputs, colored by the 'failure to answer' metric. A hover state for a dot on the map is shown, displaying a classification of the trace as 'Budget-Friendly Options' as well as input and output text, and a link to further details." style="width:100%">}}
+{{< img src="llm_observability/Patterns.png" alt="The Patterns page displaying hierarchical topics along with scores and volumes. Three KPIs are also visible, showing the number of interactions clustered, the number of identified topics and the ratio of clustered interactions in percentage." style="width:100%">}}
 
-The [Cluster Map][3] provides a visual overview of how your LLM application's requests are grouped and related. It helps you identify patterns, clusters of similar activity, and outliers in your LLM traces, making it easier to investigate issues and optimize performance.
+[Patterns][3] automatically clusters your LLM application's production traffic into hierarchical topics, helping you understand what users are asking, identify coverage gaps in your evaluation datasets, and diagnose failure modes.
 
 ### Monitor your agentic sytems 
 
 Learn how to monitor agentic LLM applications, which use multiple tools or chains of reasoning, with Datadog's [Agent Monitoring][4]. This feature helps you track agent actions, tool usage, and reasoning steps, providing visibility into complex LLM workflows and enabling you to troubleshoot and optimize agentic systems effectively. See the [Agent Monitoring documentation][4] for details.
 
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /llm_observability/monitoring/querying
 [2]: /llm_observability/monitoring/llm_observability_and_apm
-[3]: /llm_observability/monitoring/cluster_map/
+[3]: /llm_observability/monitoring/patterns/
 [4]: /llm_observability/monitoring/agent_monitoring
 [5]: /llm_observability/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true

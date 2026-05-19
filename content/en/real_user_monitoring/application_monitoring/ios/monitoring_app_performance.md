@@ -1,6 +1,6 @@
 ---
-title: iOS Monitoring App Performance
-description: "Track iOS app performance with custom view timings, network metrics, and user interaction measurements for enhanced user experience."
+title: Apple Platform Monitoring App Performance
+description: "Track app performance on Apple platforms with custom view timings, network metrics, and user interaction measurements for enhanced user experience."
 aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/ios/monitoring_app_performance
 further_reading:
@@ -66,7 +66,7 @@ If you need more control over which interactions are considered "last interactio
 
 ### Notify the SDK that your view finished loading
 
-iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
+The iOS SDK tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
 through the `RUMMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
 
 {{< tabs >}}

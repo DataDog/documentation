@@ -1,4 +1,5 @@
 ---
+id: short_image
 core_product:
 - monitorización de la infraestructura
 title: nombre de imagen corto

@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
   tag: "Blog"
   text: "Don't fear the Agent"
+- link: "https://learn.datadoghq.com/courses/agent-on-host"
+  tag: "Learning Center"
+  text: "The Agent on a Host"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra
@@ -66,9 +69,9 @@ Upgrading to a major Datadog Agent version and keeping it updated is the only su
 {{< img src="/agent/basic_agent_usage/basic_agent_2_july_25.png" alt="The Fleet Automation view that allows you to centrally manage your Datadog Agents in one place." style="width:100%;">}}
 
 
-- **View configuration & history**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
+- **{{< ui >}}View configuration & history{{< /ui >}}**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
 - **[Upgrade outdated Agents][13]**: Trigger remote upgrades for your Agents to keep your fleet updated in a few clicks.
-- **[Send a flare for support][14]**: From the Support tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.
+- **[Send a flare for support][14]**: From the {{< ui >}}Support{{< /ui >}} tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.
 - **Audit API-key usage**: Identify which Agents are using a specific API key and rotate keys safely.
 
 
@@ -197,6 +200,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 [10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/site/
 [12]: /agent/configuration/agent-log-files/
-[13]: /agent/fleet_automation/remote_management/#remotely-upgrade-your-agents
+[13]: /agent/fleet_automation/upgrade_agents/
 [14]: /agent/troubleshooting/send_a_flare/?tab=agent#send-a-flare-from-the-datadog-site
 [15]: /agent/fleet_automation

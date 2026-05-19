@@ -45,7 +45,7 @@ Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.49.0 or higher is installed alongside your service (7.73.0 or higher for Go).
 - [Remote Configuration][2] is enabled in that Agent.
-- A supported Datadog tracing library is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
+- A supported Datadog SDK is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended: [Autocomplete and search (in Preview)][17] are enabled.
 - Recommended: [Source Code Integration][7] is set up for your service.
@@ -85,7 +85,7 @@ For more detailed instructions, select your runtime below:
 
 - Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
 - Not all probe types are supported in every language. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for supported features and limitations.
-- The Java tracer library does not support Kotlin coroutines.
+- The Java SDK does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
 

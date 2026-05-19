@@ -103,7 +103,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | App and API Protection, Workload Protection, and Cloud SIEM |
 | disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
-| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Client SIEM |
+| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Cloud SIEM |
 | cryptomining | malicious | IP addresses | IP addresses associated with cryptomining activities | AAP, CWS, and Cloud SIEM |
 
 ### Threat intelligence intents

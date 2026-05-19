@@ -23,7 +23,7 @@ The Clipboard works on all pages in Datadog and keeps a record of all graphs cop
 
 ## Opening the Clipboard
 
-To open the Clipboard, copy any graph and click **Open Clipboard** in the popup.
+To open the Clipboard, copy any graph and click {{< ui >}}Open Clipboard{{< /ui >}} in the popup.
 
 {{< img src="service_management/incidents/open-clipboard.png" alt="Open a graph in the Clipboard" style="width:80%;">}}
 
@@ -33,9 +33,9 @@ The Clipboard can also be opened and closed using `Cmd/Ctrl + Shift + K`. To min
 
 ## Adding clips
 
-To add a graph, copy it with `Cmd/Ctrl + C` or click **Copy** in the export menu. Once the Clipboard is open, copied graphs get added automatically.
+To add a graph, copy it with `Cmd/Ctrl + C` or click {{< ui >}}Copy{{< /ui >}} in the export menu. Once the Clipboard is open, copied graphs get added automatically.
 
-To add a URL, open the Clipboard and click **Add current page**.
+To add a URL, open the Clipboard and click {{< ui >}}Add current page{{< /ui >}}.
 
 {{< img src="service_management/incidents/add-page.png" alt="Add a dashboard to the Clipboard" style="width:80%;">}}
 
@@ -45,7 +45,7 @@ Each item in the Clipboard can be opened, cloned, or deleted; these options are 
 
 {{< img src="service_management/incidents/managing-clips.png" alt="Manage your clips" style="width:80%;">}}
 
-The Clipboard holds a maximum of 20 signals. Remove signals by deleting them individually, or by clicking **Remove All**. If more than 20 signals are added, the oldest signals, stored furthest to the left, are removed automatically.
+The Clipboard holds a maximum of 20 signals. Remove signals by deleting them individually, or by clicking {{< ui >}}Remove All{{< /ui >}}. If more than 20 signals are added, the oldest signals, stored furthest to the left, are removed automatically.
 
 ## Exporting
 

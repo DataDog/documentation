@@ -1,4 +1,5 @@
 ---
+id: iast
 core_product:
 - security
 title: 인터랙티브 애플리케이션 보안 테스트 (IAST)

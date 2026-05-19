@@ -32,7 +32,7 @@ The following table shows feature compatibility across different setups:
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [LLM Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
+| [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
@@ -57,10 +57,10 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
-| [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [Java][34] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
+| [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
-| [PHP][37] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [PHP][37] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
 
 ## More details
 

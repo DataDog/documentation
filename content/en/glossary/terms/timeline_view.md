@@ -1,4 +1,5 @@
 ---
+id: timeline_view
 title: timeline view
 core_product:
   - continuous profiler

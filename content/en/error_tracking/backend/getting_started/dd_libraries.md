@@ -1,5 +1,5 @@
 ---
-title: Install Backend Error Tracking Using Datadog Tracing Libraries
+title: Install Backend Error Tracking Using Datadog SDKs
 aliases:
 - /error_tracking/standalone_backend/getting_started/dd_libraries
 further_reading:
@@ -20,7 +20,7 @@ further_reading:
 To instrument your application with Datadog libraries:
 
 1. [Install and configure the Agent](#install-and-configure-the-agent).
-2. [Add the Datadog tracing library to your code](#instrument-your-application).
+2. [Add the Datadog SDK to your code](#instrument-your-application).
 
 ## Install and configure the Agent
 
@@ -98,7 +98,7 @@ datadog:
 
 ## Instrument your application
 
-Follow the relevant [documentation][4] to set up your application to send traces using one of the official Datadog tracing libraries.
+Follow the relevant [documentation][4] to set up your application to send traces using one of the official Datadog SDKs.
 Follow the [OpenTelemetry API guide][5] for your application language to manually send errors through span events.
 
 ## Further Reading

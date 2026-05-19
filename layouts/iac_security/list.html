@@ -69,21 +69,39 @@
             const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
             const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
 
-            const filterValues = Object.values(this.filterTypes)
             const searchValues = this.searchValue.split(' ')
 
             /**
             *   FILTER LOGIC (containsFilteredValue) e.g.
             *   {
             *      providers: [aws, azure],
-            *      platforms: [terraform, kurbernetes],
-            *      categories: [severity],
+            *      platforms: [terraform, kubernetes],
+            *      categories: [security],
             *      severities: [warning]
             *   }
-            *   show ruleEl if condition met ('Javascript' OR 'Docker') AND Security AND Warning
+            *   show ruleEl if condition met (aws OR azure) AND (terraform OR kubernetes) AND security AND warning
+            *
+            *   Filter info structure: [cloud_provider, category, severity, platform]
+            *   Map each filter type to its specific index position
             */
 
-            const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
+            const filterIndexMap = {
+                providers: 0,
+                categories: 1,
+                severities: 2,
+                platforms: 3
+            }
+
+            const containsFilteredValue = Object.entries(this.filterTypes).every(([filterType, filterValues]) => {
+                if (!filterValues.length) return true // no filter applied for this type
+
+                const index = filterIndexMap[filterType]
+                const ruleValue = ruleFilterInfo[index]
+
+                // Check if at least one selected filter value matches the rule's value at this index
+                return filterValues.some(f => f.split(',')[0].toLowerCase() === ruleValue)
+            })
+
             const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
             this.shouldShowRuleSet(ruleEl.closest('.set'), containsSearchValues && containsFilteredValue)

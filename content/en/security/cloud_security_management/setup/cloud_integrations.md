@@ -8,7 +8,7 @@ aliases:
 
 Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on AWS, Azure, GCP, and OCI.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

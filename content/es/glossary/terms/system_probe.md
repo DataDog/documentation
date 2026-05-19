@@ -1,4 +1,5 @@
 ---
+id: system_probe
 core_product:
 - protección de cargas de trabajo
 - seguridad

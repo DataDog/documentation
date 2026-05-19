@@ -48,12 +48,48 @@ docker run -d --name dd-agent \
   -e DD_SBOM_ENABLED=true
   -e DD_SBOM_CONTAINER_IMAGE_ENABLED=true
   -e DD_SBOM_HOST_ENABLED=true
+  -e DD_SBOM_ENRICHMENT_USAGE_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   registry.datadoghq.com/agent:7
 
 {{< /code-block >}}
 
+## Runtime Package Prioritization (Preview)
+
+Runtime package prioritization enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
+
+Each vulnerability finding is enriched with the following signals:
+
+| Signal | Description |
+|--------|-------------|
+| Package is running | The package files are actively being accessed by running processes. |
+| Accessed by root process | The package is being accessed by a process running as root (UID 0). |
+| SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
+
+These signals power vulnerability prioritization in Cloud Security, surfacing findings where vulnerable code is confirmed running in production.
+
+**Requirements**:
+- Datadog Agent **7.78.0 or later**
+- Linux only (eBPF dependency)
+
+**Important**: Enabling runtime package prioritization activates [Workload Protection][4] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs.
+
+Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
+
+{{< code-block lang="shell" >}}
+docker run -d --name dd-agent \
+  [... other flags ...] \
+  -e DD_SBOM_ENABLED=true \
+  -e DD_SBOM_CONTAINER_IMAGE_ENABLED=true \
+  -e DD_SBOM_ENRICHMENT_USAGE_ENABLED=true \
+  -e DD_API_KEY=<API KEY> \
+  registry.datadoghq.com/agent:7
+{{< /code-block >}}
+
+**Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Agent **7.78.0 or later**. It activates [Workload Protection][4] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
+
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[4]: /security/workload_protection/

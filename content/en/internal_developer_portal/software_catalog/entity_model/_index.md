@@ -51,7 +51,7 @@ algolia:
   tags: [ "codeLocations" ]
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}
@@ -123,7 +123,7 @@ V3.0 contains the following changes from v2.2:
 
 ### Example YAML files
 
-{{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="component-of-kind-system" %}}
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: system
@@ -194,7 +194,7 @@ datadog:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="component-of-kind-library" %}}
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: library
@@ -233,7 +233,7 @@ metadata:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="components-in-multiple-systems" %}}
 If a single component is part of multiple systems, you must specify that component in the YAML for each system. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
 For the postgres fleet (`managed-postgres`), specify a definition for `kind:system`:

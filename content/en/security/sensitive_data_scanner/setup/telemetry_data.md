@@ -5,6 +5,8 @@ aliases:
   - /sensitive_data_scanner/setup/telemetry_data
   - /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
   - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  - /security/sensitive_data_scanner/guide/redact_uuids_in_logs/
+  - /security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs/
 further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
@@ -364,7 +366,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
 [8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /logs/guide/logs-rbac/
-[10]: /logs/log_configuration/processors/?tab=ui#remapper
+[10]: /logs/log_configuration/processors/remapper/
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/

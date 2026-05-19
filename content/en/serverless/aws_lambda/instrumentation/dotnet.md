@@ -17,10 +17,6 @@ further_reading:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
-Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
-{{< /callout >}}
-
 ## Setup
 
 {{< tabs >}}
@@ -319,7 +315,7 @@ module "lambda-datadog" {
 
 ## Add custom spans
 
-When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET tracer is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
+When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET SDK is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
 ```xml
 <PackageReference Include="Datadog.Trace" Version="3.26.3"/>
