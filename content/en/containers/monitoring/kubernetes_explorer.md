@@ -88,7 +88,7 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 
 #### Limitations
 
-The `k8sobjects` receiver has known scalability issues (see [open-telemetry/opentelemetry-collector-contrib#43602][103]). In large clusters, it can place significant load on the Kubernetes API server.
+The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server. Modify the time interval in [Resource collection](#resource-collection) if you experience issues.
 
 Recommendations:
 1. Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
@@ -449,7 +449,6 @@ Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name.
 [100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.152.0
-[103]: https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/43602
 [104]: /getting_started/site/
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
