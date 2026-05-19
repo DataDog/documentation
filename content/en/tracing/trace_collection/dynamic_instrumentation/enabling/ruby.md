@@ -27,6 +27,7 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 3. Install or upgrade the Ruby tracing library to version 2.9.0 or higher, by following the [relevant instructions][2].
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
 5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+6. For a better experience, Datadog recommends enabling [autocomplete and search (in Preview)][11].
 
 ## Configuration
 
@@ -72,3 +73,4 @@ See [Dynamic Instrumentation][5] for information about adding instrumentations a
 [8]: /dynamic_instrumentation/#creating-log-probes
 [9]: /integrations/guide/source-code-integration/?tab=ruby
 [10]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
+[11]: /dynamic_instrumentation/symdb/
