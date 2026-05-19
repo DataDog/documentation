@@ -212,7 +212,22 @@ Notebook queries that read large amounts of data or run heavy computations can b
 
 The shortest summary: **filter early, aggregate early.** Work pushed into the query filter or a `GROUP BY` summary is computed against the index; work left to a `JOIN` or a wide `LIMIT` is held in memory.
 
-### Filter on the data source
+### Checklist
+
+Walk through this before re-running a heavy query:
+
+- Does the query filter include a selective token (not a wildcard like `service:*` or `env:*`)?
+- Is the time range as small as it can be for the question?
+- Are you selecting only the columns you actually use?
+- If you have a large `LIMIT`, could a `GROUP BY` summary work instead?
+- If you have many JOINs, could it be rewritten as a single scan?
+- When joining across sources, is each side filtered?
+- Is the JOIN key high-cardinality (user / request / trace ID)?
+- Is the same regex being run more than once per row?
+
+### Filtering
+
+#### Filter on the data source
 
 Always include a selective token in your data source query—`service:`, `host:`, `env:`, or any `@attribute:value`. Wildcard filters such as `service:*` or `env:*` match every event, so they don't actually narrow the data—treat them as equivalent to leaving the filter blank.
 
@@ -231,12 +246,16 @@ SELECT *
 FROM logs
 WHERE service = 'checkout-api'
   AND env     = 'prod'
-  AND timestamp >= NOW() - INTERVAL '1 day';
+  AND timestamp >= NOW() - INTERVAL '7 days';      -- same window, but with a selective filter
 ```
 
-### Choose a time range that fits the question
+#### Choose a time range that fits the question
 
 Scan cost grows with the time range. Consider starting with a window that covers the question (often a few hours or a day) and widening only when the question demands more. For long-term trends, a pre-aggregated metric or a daily-summary cell is usually cheaper than re-scanning raw events on every run.
+
+In Notebooks, you can lock a cell's time range independently of the global time picker. Setting a conservative default prevents readers from accidentally widening the window to a much larger scan.
+
+*Goal: understand log volume from the billing service over the last month.*
 
 **Before**
 
@@ -251,7 +270,7 @@ WHERE service = 'billing'
 **After**
 
 ```sql
--- Start with a narrower window; widen only if needed. Aggregate up front for trends.
+-- Aggregate up front for trends instead of scanning raw events
 SELECT date_trunc('day', timestamp) AS day, count(*) AS events
 FROM logs
 WHERE service = 'billing'
@@ -260,7 +279,9 @@ GROUP BY 1
 ORDER BY 1;
 ```
 
-### Project only the columns you use
+### Column selection
+
+#### Project only the columns you use
 
 Each column listed in a data source cell is fetched from storage. Trim the column list to what you use downstream—wide attributes like the raw `message` or full HTTP headers can dominate the cost.
 
@@ -280,7 +301,9 @@ FROM logs
 WHERE service = 'checkout-api';
 ```
 
-### Return summaries, not raw rows
+### Aggregations
+
+#### Return summaries, not raw rows
 
 Asking for millions of raw rows isn't free—the engine has to buffer them in memory, transmit them over the network, and render them in your notebook, even if the underlying scan is bounded. If your goal is to understand the data (top-N, counts per category, distributions), a `GROUP BY` returns a small summary that costs far less and is easier to read.
 
@@ -304,9 +327,41 @@ ORDER BY hits DESC
 LIMIT 100;
 ```
 
-### Combine self-joins into a single scan
+**Note:** Aggregating in SQL with `GROUP BY` is more efficient than fetching raw rows and letting a visualization cell aggregate them—the engine returns a small summary instead of buffering millions of rows.
 
-Joining one source to itself many times to correlate different events is one of the most common causes of slow notebook queries. Most self-joins can be rewritten as a single scan with `CASE` expressions, window functions, or `GROUP BY ... HAVING`. When you do need a `JOIN`, prefer a high-cardinality key (`user_id`, `request_id`, `trace_id`)—coarse keys like `service` or `status` can expand a moderate input into billions of intermediate rows. The rewrite reduces structural overhead; for a large dataset, also narrow the data source filter and time range.
+#### Narrow the scan before aggregating on a high-cardinality column
+
+`SELECT DISTINCT` or `GROUP BY` on a high-cardinality column (an email, an IP, a request ID) keeps one entry per distinct value across workers, which grows unboundedly without a tight filter. Narrow the data source filter first so the aggregation runs over fewer rows. For wide cardinalities, pre-aggregate to one row per time bucket and key, then count distinct across buckets. `approx_distinct(...)` is cheaper than exact `count(distinct ...)`.
+
+*Goal: find the distinct user emails in the checkout service's logs over the last 7 days.*
+
+**Before**
+
+```sql
+SELECT DISTINCT user_email
+FROM logs
+WHERE timestamp >= NOW() - INTERVAL '7 days';    -- no service filter, unbounded set
+```
+
+**After**
+
+```sql
+-- Pre-aggregate to one row per (day, email), then count distinct across days
+SELECT count(DISTINCT user_email) AS distinct_emails
+FROM (
+  SELECT date_trunc('day', timestamp) AS day, user_email
+  FROM logs
+  WHERE service = 'checkout-api'
+    AND timestamp >= NOW() - INTERVAL '7 days'
+  GROUP BY 1, 2
+) daily;
+```
+
+### Joins
+
+#### Combine self-joins into a single scan
+
+Joining one source to itself many times to correlate different events is one of the most common causes of slow notebook queries. Most self-joins can be rewritten as a single scan with `CASE` expressions, window functions, or `GROUP BY ... HAVING`.
 
 **Before—4 self-joins**
 
@@ -331,7 +386,11 @@ GROUP BY user_id
 HAVING count(DISTINCT service) = 4;
 ```
 
-### Filter both sides of a cross-source join
+#### Use a high-cardinality join key
+
+Prefer a high-cardinality key (`user_id`, `request_id`, `trace_id`) when joining. Coarse keys like `service` or `status` can expand a moderate input into billions of intermediate rows. For large datasets, also narrow the data source filter and time range on each side of the join.
+
+#### Filter both sides of a cross-source join
 
 When you `JOIN` across two data sources (logs + RUM, logs + traces, feed + logs), apply a selective filter on each side. An unfiltered side becomes a full scan that has to be held in memory for the join. Where possible, pre-aggregate each source in its own cell and join the summaries in a final cell.
 
@@ -355,7 +414,9 @@ WHERE l.service   = 'checkout-api'                  -- both sides filtered
   AND r.view_name = 'cart';
 ```
 
-### Run regular expressions once per row
+### Expressions
+
+#### Run regular expressions once per row
 
 If you call `REGEXP_MATCH` once for each output column, the same pattern is evaluated against `message` repeatedly for every row. Run it once into an array, join the captures into a single delimited string, and unpack them with `SPLIT_PART` in a downstream `SELECT`.
 
@@ -382,40 +443,6 @@ FROM (
   FROM logs
 ) sub;
 ```
-
-### Narrow the scan before aggregating on a high-cardinality column
-
-`SELECT DISTINCT` or `GROUP BY` on a high-cardinality column (an email, an IP, a request ID) keeps one entry per distinct value across workers, which grows unboundedly without a tight filter. Narrow the data source filter and time range first so the aggregation runs over fewer rows. `GROUP BY count(*)` does more per-row work than `DISTINCT`, and `approx_distinct(...)` is cheaper than exact `count(distinct ...)`; for wide cardinalities, bucketing on a coarser key (`/24` subnet, email domain) collapses the set further.
-
-**Before**
-
-```sql
-SELECT DISTINCT user_email
-FROM logs
-WHERE timestamp >= NOW() - INTERVAL '7 days';    -- no service filter, unbounded set
-```
-
-**After**
-
-```sql
-SELECT DISTINCT user_email
-FROM logs
-WHERE service = 'checkout-api'
-  AND timestamp >= NOW() - INTERVAL '1 day';     -- same DISTINCT, scoped scan
-```
-
-### Checklist
-
-Walk through this before re-running a heavy query:
-
-- Does the query filter include a selective token (not a wildcard like `service:*` or `env:*`)?
-- Is the time range as small as it can be for the question?
-- Are you selecting only the columns you actually use?
-- If you have a large `LIMIT`, could a `GROUP BY` summary work instead?
-- If you have many JOINs, could it be rewritten as a single scan?
-- When joining across sources, is each side filtered?
-- Is the JOIN key high-cardinality (user / request / trace ID)?
-- Is the same regex being run more than once per row?
 
 ## Further reading
 
