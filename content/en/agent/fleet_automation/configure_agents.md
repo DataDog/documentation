@@ -62,9 +62,16 @@ Fleet Automation provides an API to apply configuration updates programmatically
 
 ## Configuration precedence
 
-Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the field level, Fleet Automation overrides the local value. The most recent change becomes the Agent's active configuration, regardless of the source (Fleet Automation, configuration management tools, or direct host edits).
+Configuration changes deployed through Fleet Automation follow different rules depending on the target:
 
-You can use [Fleet Automation Audit Trail][5] to gain visibility into recent configuration changes to your Agents and to set up alerts on those changes.
+- **Agent configuration (`datadog.yaml`):** Fleet Automation applies changes using merge patch: only the specified fields are updated, and unmentioned fields are left unchanged. If a conflict occurs at the field level, the Fleet Automation value takes precedence over any local value.
+- **Integration and custom log configurations:** Fleet Automation supports two modes:
+    - Deploy a new configuration file.
+    - Update an existing file using merge patch to modify only specific fields. If you deploy a change targeting an existing filename without using merge patch, the file is fully overwritten.
+
+  In both cases, the most recent change becomes the Agent's active configuration, regardless of the source (Fleet Automation, configuration management tools, or direct host edits).
+
+Use [Fleet Automation Audit Trail][5] to track recent configuration changes to your Agents and set up alerts on those changes.
 
 ## Mirrors and proxies
 
