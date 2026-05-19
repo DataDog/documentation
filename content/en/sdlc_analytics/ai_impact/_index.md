@@ -68,6 +68,8 @@ User Activity
 
 <div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
 
+<div class="alert alert-info">For GitHub, PR-centric metrics exclude PRs where all commits were authored by bots. This prevents automated activity from skewing non-AI baselines and helps ensure comparisons reflect human developer performance.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
