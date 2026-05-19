@@ -40,8 +40,6 @@ Cost Optimization Automation is different from the 1-click Workflow Automation a
 | AWS | Set CloudWatch logs retention policy |
 | AWS | Delete old EBS snapshots |
 
-Additional recommendation types and support for Azure and GCP are planned.
-
 ## Prerequisites
 
 - An AWS account configured with [Cloud Cost Recommendations][7] and actively generating recommendations.
