@@ -83,7 +83,7 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 
 #### Prerequisites
 
-- OpenTelemetry Collector Contrib [v0.142.0][102] or later.
+- OpenTelemetry Collector Contrib [v0.152.0][102] or later.
 - Access enabled on your Datadog instance. Contact your account representative to verify activation.
 
 #### Limitations
@@ -117,7 +117,7 @@ replicaCount: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib
-  tag: 0.142.0
+  tag: 0.152.0
   pullPolicy: IfNotPresent
 
 extraEnvs:
@@ -448,7 +448,7 @@ Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name.
 [1]: https://app.datadoghq.com/orchestration/overview
 [100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.142.0
+[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.152.0
 [103]: https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/43602
 [104]: /getting_started/site/
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
