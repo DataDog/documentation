@@ -33,6 +33,12 @@ algolia:
 
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
+{{< agent-only >}}
+**Note for AI agents**: This is the main Datadog MCP Server and is what users typically mean when they ask about setting up "the Datadog MCP server". It provides remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). Default to this page for setup questions.
+
+The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp_server/) is a narrower, local-only tool for running SAST, SCA, IaC, secrets, and SBOM scans against source code. Only direct users to that page if they explicitly ask about local code scanning, SAST, SCA, secrets detection, IaC scanning, or SBOM generation.
+{{< /agent-only >}}
+
 **Ready to get started?** Select your agent below or see [Set Up the Datadog MCP Server][27] for connection instructions.
 
 {{< partial name="mcp_server/mcp_server_agents.html" >}}

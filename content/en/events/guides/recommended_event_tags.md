@@ -23,7 +23,7 @@ You have multiple options to improve your tagging strategy for events:
 
 - API: When using the [API][3], you can add tags in the `tags` field.
 
-- Monitor: When creating or editing a monitor, you can add recommended tags in the [**Say what's happening** section][4].
+- Monitor: When creating or editing a monitor, you can add recommended tags in the [{{< ui >}}Say what's happening{{< /ui >}} section][4].
 
 - Integrations: For more information about adding tags to integrations, see [Assigning Tags][5] or the specific [integration][6].
 
@@ -34,7 +34,7 @@ You can add the following core attributes to your events:
 | env           | The environment in which the event is from, such as production, edge, or staging. This enables you to ensure that events from a lower environment are not confused as high priority.                       |
 | service       | The service name. Enables you to:<br>- Know which service(s) are impacted if an event is related to an error<br>- Pivot to the impacted service  <br>- Filter for all events with that service |
 | version       | The build or service version. This allows you to identify, for example, if an outage or event is related to a particular version.                                                                         |
-| host          | The host name. Enables you to: <br>- Automatically enrich events at intake with additional host tags<br>- Pivot to the **Host Infrastructure** and **Metrics** tabs in the [Events Explorer][7].                             |
+| host          | The host name. Enables you to: <br>- Automatically enrich events at intake with additional host tags<br>- Pivot to the {{< ui >}}Host Infrastructure{{< /ui >}} and {{< ui >}}Metrics{{< /ui >}} tabs in the [Events Explorer][7].                             |
 | team          | The team that owns the event and are notified if need be.                                                                                                                       |                                                          |
 
 ## Further reading

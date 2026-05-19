@@ -388,6 +388,26 @@ export default {
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
+  aws_customer_access_id: {
+    us: '464622532012',
+    us3: '464622532012',
+    us5: '464622532012',
+    eu: '464622532012',
+    ap1: '417141415827',
+    ap2: '412381753143',
+    gov2: '382742775718',
+    gov: '392588925713'
+  },
+  aws_customer_access_govcloud_id: {
+    us: 'N/A',
+    us3: 'N/A',
+    us5: 'N/A',
+    eu: 'N/A',
+    ap1: 'N/A',
+    ap2: 'N/A',
+    gov2: '486737091498',
+    gov: '065115117704'
+  },
   ip_ranges_url: {
     us: 'https://ip-ranges.datadoghq.com',
     us3: 'https://ip-ranges.us3.datadoghq.com',

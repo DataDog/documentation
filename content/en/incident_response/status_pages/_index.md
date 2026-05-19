@@ -168,6 +168,15 @@ After reviewing and scheduling, the maintenance window:
 
 You can post updates if plans change or reschedule the maintenance window as needed.
 
+## Backfill a notice
+
+If an incident occurred and you did not publish a notice to the status page while it was happening, you can still document it retroactively using a backfilled notice. Unlike a regular notice, a backfilled notice is built from a list of updates, each with its own start time, so the notice accurately reflects the full incident timeline in the uptime history.
+
+1. From a status page, under **Publish Notice**, click **Publish Backfilled Notice**.
+1. Enter a **Title** for the notice.
+1. Add one or more **Updates**. For each update, provide a start time and any relevant details.
+1. Click **Publish Notice**.
+
 ## Email subscriptions
 
 Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. A preferred timezone can be configured for timestamp formatting within notifications. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
