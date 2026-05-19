@@ -1019,6 +1019,15 @@ Searches Datadog [Test Optimization][24] for flaky tests and returns triage deta
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
 - List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
 
+### `update_datadog_flaky_test_states`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Write`*\
+Sets the state of one or more flaky tests to `quarantined` (suppress failures), `disabled` (skip test), `fixed` (mark resolved), or `active` (restore). This is a write operation that requires explicit user approval. All state changes are reversible.
+
+- Quarantine all active flaky tests in the `checkout-service` repository.
+- Mark the flaky test `AuthServiceTest::testLogin` as fixed.
+- Disable flaky tests owned by `@team-payments` with a failure rate above 50%.
+
 ### `aggregate_datadog_test_events`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
@@ -1053,6 +1062,40 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
+
+### `get_datadog_test_optimization_settings`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
+Retrieves which Test Optimization features are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
+
+- Which test optimization features are enabled for the `auth-service`?
+- Show me the Test Optimization settings for my checkout service.
+
+### `get_datadog_flaky_tests_management_policies`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
+Retrieves the Flaky Tests Management policies configured for a repository, including auto-quarantine windows, branch rules, failure rate thresholds, disable policies, and retry settings.
+
+- Show me the flaky test management policies for `github.com/my-org/my-repo`.
+- What auto-quarantine rules are configured for the checkout service repository?
+
+### `search_dora_deployments`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+
+- Show me deployments for the `checkout` service in the last 7 days.
+- Get details for DORA deployment `abc123`.
+- Find failed deployments in the production environment this month.
+
+### `aggregate_dora_deployments`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
+Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+
+- What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
+- Show me the change lead time trend for the `payments` service over the last quarter.
+- Get all four DORA metrics for the `auth-service` team.
 
 ## Synthetics
 
