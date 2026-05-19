@@ -33,12 +33,12 @@ Cost Optimization Automation is different from the 1-click Workflow Automation a
 
 | Cloud provider | Recommendation type |
 |----------------|---------------------|
-| AWS | Terminate Unattached EBS Volume |
-| AWS | Transition S3 Standard objects to Intelligent Tiering |
-| AWS | Terminate Unused RDS Instance |
-| AWS | Delete Extra On-Demand Backups (DynamoDB) |
-| AWS | Set CloudWatch Logs Retention Policy |
-| AWS | Delete Old EBS Snapshots |
+| AWS | Terminate unattached EBS volume |
+| AWS | Transition S3 Standard objects to Amazon S3 Intelligent-Tiering |
+| AWS | Terminate unused RDS instance |
+| AWS | Delete extra on-demand backups (DynamoDB) |
+| AWS | Set CloudWatch logs retention policy |
+| AWS | Delete old EBS snapshots |
 
 Additional recommendation types and support for Azure and GCP are planned.
 
