@@ -148,6 +148,9 @@ clusterRole:
         - replicationcontrollers/status
         - resourcequotas
         - services
+        - persistentvolumes
+        - persistentvolumeclaims
+        - serviceaccounts
       verbs: ["get", "list", "watch"]
     - apiGroups: ["apps"]
       resources:
@@ -171,6 +174,26 @@ clusterRole:
     - apiGroups: ["autoscaling"]
       resources:
         - horizontalpodautoscalers
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["policy"]
+      resources:
+        - poddisruptionbudgets
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["rbac.authorization.k8s.io"]
+      resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["storage.k8s.io"]
+      resources:
+        - storageclasses
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["networking.k8s.io"]
+      resources:
+        - networkpolicies
+        - ingresses
       verbs: ["get", "list", "watch"]
     - apiGroups: ["apiextensions.k8s.io"]
       resources:
@@ -258,6 +281,84 @@ The [`k8sobjects`][100] receiver collects Kubernetes resource data using two mod
         - name: deployments
           mode: watch
           group: apps
+        - name: horizontalpodautoscalers
+          mode: pull
+          interval: 3m
+          group: autoscaling
+        - name: horizontalpodautoscalers
+          mode: watch
+          group: autoscaling
+        - name: roles
+          mode: pull
+          interval: 3m
+          group: rbac.authorization.k8s.io
+        - name: roles
+          mode: watch
+          group: rbac.authorization.k8s.io
+        - name: rolebindings
+          mode: pull
+          interval: 3m
+          group: rbac.authorization.k8s.io
+        - name: rolebindings
+          mode: watch
+          group: rbac.authorization.k8s.io
+        - name: clusterroles
+          mode: pull
+          interval: 3m
+          group: rbac.authorization.k8s.io
+        - name: clusterroles
+          mode: watch
+          group: rbac.authorization.k8s.io
+        - name: clusterrolebindings
+          mode: pull
+          interval: 3m
+          group: rbac.authorization.k8s.io
+        - name: clusterrolebindings
+          mode: watch
+          group: rbac.authorization.k8s.io
+        - name: storageclasses
+          mode: pull
+          interval: 3m
+          group: storage.k8s.io
+        - name: storageclasses
+          mode: watch
+          group: storage.k8s.io
+        - name: networkpolicies
+          mode: pull
+          interval: 3m
+          group: networking.k8s.io
+        - name: networkpolicies
+          mode: watch
+          group: networking.k8s.io
+        - name: ingresses
+          mode: pull
+          interval: 3m
+          group: networking.k8s.io
+        - name: ingresses
+          mode: watch
+          group: networking.k8s.io
+        - name: persistentvolumes
+          mode: pull
+          interval: 3m
+        - name: persistentvolumes
+          mode: watch
+        - name: persistentvolumeclaims
+          mode: pull
+          interval: 3m
+        - name: persistentvolumeclaims
+          mode: watch
+        - name: poddisruptionbudgets
+          mode: pull
+          interval: 3m
+          group: policy
+        - name: poddisruptionbudgets
+          mode: watch
+          group: policy
+        - name: serviceaccounts
+          mode: pull
+          interval: 3m
+        - name: serviceaccounts
+          mode: watch
         - name: customresourcedefinitions
           mode: pull
           interval: 3m
