@@ -56,6 +56,8 @@ User Activity
 
 ## Impact metrics
 
+{{< img src="sdlc_analytics/ai_impact/impact_delivery.png" alt="An overview of AI Impact delivery metrics" style="width:100%;" >}}
+
 | Metric | Definition |
 |--------|------------|
 | AI-assisted PRs | PRs containing at least one AI-assisted commit, divided by total PRs. |
@@ -64,11 +66,9 @@ User Activity
 | Change Failure Rate | Failure rate weighted by the proportion of AI-assisted commits in each deployment, compared to the weighted rate for non-assisted commits. For example, if a failed deployment has 3 out of 10 commits assisted by AI, only 30% of that failure is attributed to AI. |
 | Recovery Time | Median recovery time of failed deployments containing AI-assisted commits compared to deployments without. |
 
-{{< img src="sdlc_analytics/ai_impact/impact_delivery.png" alt="An overview of AI Impact delivery metrics" style="width:100%;" >}}
-
 <div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
 
-<div class="alert alert-info">For GitHub, PR-centric metrics exclude PRs where all commits were authored by bots. This prevents automated activity from skewing non-AI baselines and helps ensure comparisons reflect human developer performance.</div>
+<div class="alert alert-info">For GitHub only, PR-level metrics exclude PRs whose commits are entirely bot-authored. This keeps automated activity out of the non-AI baseline.</div>
 
 ## Further Reading
 
