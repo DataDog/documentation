@@ -255,7 +255,7 @@
                             build a string with rule's lookup info for filtering and searching against
                             */}}
                             {{ $cloud_provider = ( .Params.meta.cloud_provider ) }}
-                            {{ $rule_id := index (split .Params.meta.name "/") 1}}
+                            {{ $rule_id := .Params.meta.id}}
                             {{ $filter_info := (printf "%s,%s,%s,%s" $cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.platform) }}
                             {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) .Params.group_id .Title ) ";")) }}
                             <div 
