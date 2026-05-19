@@ -18,7 +18,7 @@ further_reading:
 
 Cost Optimization Automation lets you continuously act on [Cloud Cost Recommendations][1] without manual cleanup. You define an **automation**, scope it to the accounts, regions, and resources you want, and Datadog executes the recommended action on a recurring schedule.
 
-Each automation targets a single recommendation type and pairs it with:
+Each automation targets a single recommendation type and includes the following:
 
 - A schedule (weekly, biweekly, every 30 days, or every 90 days)
 - A scope (AWS account, region, tags, and a maximum number of resources per run)
@@ -31,14 +31,16 @@ Cost Optimization Automation is different from the 1-click Workflow Automation a
 
 ## Supported recommendation types
 
-| Cloud provider | Recommendation type |
-|----------------|---------------------|
-| AWS | Terminate unattached EBS volume |
-| AWS | Transition S3 Standard objects to Amazon S3 Intelligent-Tiering |
-| AWS | Terminate unused RDS instance |
-| AWS | Delete extra on-demand backups (DynamoDB) |
-| AWS | Set CloudWatch logs retention policy |
-| AWS | Delete old EBS snapshots |
+Cost Optimization Automation supports the following AWS recommendation types:
+
+| Recommendation type |
+|---------------------|
+| Terminate unattached EBS volume |
+| Transition S3 Standard objects to Amazon S3 Intelligent-Tiering |
+| Terminate unused RDS instance |
+| Delete extra on-demand backups (DynamoDB) |
+| Set CloudWatch logs retention policy |
+| Delete old EBS snapshots |
 
 ## Prerequisites
 
@@ -49,7 +51,7 @@ Cost Optimization Automation is different from the 1-click Workflow Automation a
 
 ## Set up an automation
 
-To get started, go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4] and click {{< ui >}}Set Up New Automation{{< /ui >}}.
+Go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4] and click {{< ui >}}Set Up New Automation{{< /ui >}}.
 
 ### Step 1: Choose a recommendation type
 
@@ -65,8 +67,8 @@ If the selected account does not have a connection with the required write permi
 
 Narrow what the automation acts on:
 
-- **Filters** — Restrict the automation to resources matching tags, regions, or other recommendation attributes. For example, scope an automation to `environment:sandbox` to limit it to non-production resources.
-- **Max resources per run** — Cap how many resources the automation acts on during a single execution. The automation prioritizes resources by highest potential savings.
+- **Filters**: Restrict the automation to resources matching tags, regions, or other recommendation attributes. For example, scope an automation to `environment:sandbox` to limit it to non-production resources.
+- **Max resources per run**: Cap how many resources the automation acts on during a single execution. The automation prioritizes resources by highest potential savings.
 
 ### Step 4: Set the execution schedule
 
@@ -129,7 +131,6 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/recommendations/
-[2]: /cloud_cost_management/recommendations/#setup
 [3]: /service_management/workflows/connections/
 [4]: https://app.datadoghq.com/cost/optimize/automations
 [5]: /service_management/workflows/connections/#connection-groups
