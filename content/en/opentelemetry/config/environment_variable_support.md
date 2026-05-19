@@ -103,7 +103,6 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 `OTEL_TRACES_EXPORTER`
 : **Datadog convention**: `DD_TRACE_ENABLED=false` <br>
 Trace exporter to be used<br>
-**Notes**: Only a value of `none` is accepted<br>
 
 `OTEL_METRICS_EXPORTER`
 : **Description**: Specifies the metrics exporter to be used. <br>
