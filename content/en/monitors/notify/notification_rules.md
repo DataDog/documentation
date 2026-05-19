@@ -86,8 +86,9 @@ Notifications can be sent to email or any integration channel. There is a limit 
 
 #### Dynamic routing
 
-Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Software Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
+<div class="alert alert-danger">Dynamic routing is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.</div>
 
+Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Software Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
 
 | Configuration | Description | Requirements |
 | --- | --- | --- |
