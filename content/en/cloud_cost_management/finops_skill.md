@@ -49,7 +49,7 @@ To use the FinOps skill for Bits Assistant, you must:
 
 ## FinOps skill in Bits Assistant
 
-{{< img src="cloud_cost/budgets_bits_assistant.png" alt="The Budgets page showing over-budget items with an Investigate button to trigger the FinOps skill" style="width:100%;" >}}
+{{< img src="cloud_cost/finops_skill_anomalies.png" alt="Anomalies graphs across top models showing the Investigate with Bits AI button in each graph." style="width:100%;" >}}
 
 Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to trigger the FinOps skill.
 
