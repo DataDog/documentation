@@ -28,7 +28,6 @@ The FinOps skill runs in Bits Assistant. Fill out the Bits Assistant Preview for
 
 ## Overview
 
-
 The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions. For example, you can ask Bits Assistant to:
 
 - Investigate [cost monitor alerts][2], [cost anomalies][3], and cost changes on the [Summarize][4] page.
@@ -46,7 +45,7 @@ To use the FinOps skill for Bits Assistant, you must:
 - Have these permissions:
   - [Bits Assistant Access][7] permission
   - [Cloud Cost Management permissions][8] for the data you ask about
-  - (Optional) [Notebook permissions][9], if you want to create or edit investigation notebooks.
+  - (Optional) [Notebook permissions][9], if you want to create or edit investigation [Notebooks][15].
 
 ## FinOps skill in Bits Assistant
 
@@ -72,16 +71,14 @@ When you use the FinOps skill in Bits Assistant to investigate a cost change, Bi
 - The baseline period, investigation period, total dollar and percentage change, and projected annual impact when applicable.
 - Rate-versus-usage context to help distinguish price changes from consumption changes.
 - Owners or teams attribution based on your cost tags.
-- A link to open the query in Cost Explorer.
 
-After the initial summary, choose from guided follow-up paths:
+After the initial summary, Bits Assistant can:
 
-1. {{< ui >}}Cost Breakdown{{< /ui >}} - Find the top services, accounts, regions, resources, or tags driving the change.
-1. {{< ui >}}Observability{{< /ui >}} - Correlate the cost change with metrics such as CPU requests, memory requests, request count, bucket size, or database usage.
-1. {{< ui >}}Check Budget Impact{{< /ui >}} - Find related budgets and compare actual or forecasted spend against budget targets.
-1. {{< ui >}}Create Handoff Notebook{{< /ui >}} - Create a Datadog Notebook for the team that owns the service to confirm and act on findings.
-1. {{< ui >}}Save to Notebook{{< /ui >}} - Capture the investigation for your records.
-1. {{< ui >}}Look up Communication Channel{{< /ui >}} - Find a team communication channel when ownership metadata is available in Datadog.
+- Find the top services, accounts, regions, resources, or tags driving the change.
+- Correlate the cost change with metrics such as CPU requests, memory requests, request count, bucket size, or database usage.
+- Find related budgets and compare actual or forecasted spend against budget targets.
+- Create a Datadog Notebook for the team that owns the service to confirm and act on findings.
+- Capture the investigation for your records in a Notebook.
 
 ### Budgets and forecasting
 
@@ -92,12 +89,12 @@ After setting up [Budgets][5], use the FinOps skill in Bits Assistant to explain
 - Which cost scope a budget covers, based on the budget's filters.
 - Which budget entries, teams, services, or providers are contributing to an overage.
 
-After the initial summary, choose from guided follow-up paths:
+After the initial summary, Bit Assistant can:
 
-1. {{< ui >}}Cost Breakdown{{< /ui >}} - Find the top services, accounts, regions, resources, or tags driving spending.
-1. {{< ui >}}Identify Owners{{< /ui >}} - See the teams that own the resources contributing to the cost change.
-1. {{< ui >}}Adjust Budget{{< /ui >}} - Navigates you to the Budget page to update the budget.
-1. {{< ui >}}Save to Notebook{{< /ui >}} - Capture the investigation for your records.
+- Find the top services, accounts, regions, resources, or tags driving spending.
+- See the teams that own the resources contributing to the cost change.
+- Update your budget.
+- Capture the investigation for your records in a Notebook.
 
 ## Use the Datadog MCP Server for cost analysis
 
@@ -140,3 +137,4 @@ For connection instructions, supported clients, and toolset configuration, see [
 [12]: /bits_ai/mcp_server/tools/#get_datadog_metric
 [13]: /bits_ai/mcp_server/tools/#get_datadog_metric_context
 [14]: /bits_ai/mcp_server/tools/
+[15]: /notebooks/
