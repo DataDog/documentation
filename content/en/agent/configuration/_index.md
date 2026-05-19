@@ -9,6 +9,10 @@ further_reading:
   text: "Agent guides"
 ---
 
+{{< auto-config >}}
+
+<br><br><br><br><br><br><br><br><br><br>
+
 {{< callout url="https://www.datadoghq.com/product-preview/manage-agent-configurations-from-fleet-automation/" >}}
 Manage Agent configuration across your Agents centrally in Fleet Automation, at scale. To get access, complete the preview sign-up form. To get started in Fleet Automation, see <a href="https://docs.datadoghq.com/agent/fleet_automation/remote_management/?tab=linux#configure-agents">configure Agents</a>.
 {{< /callout >}}
