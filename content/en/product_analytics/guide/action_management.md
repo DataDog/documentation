@@ -35,9 +35,11 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 
    {{< img src="product_analytics/action_management/pana-label-mode-2.png" alt="Click on and label your actions." style="width:90%;">}}
 
-6. Select **New Labeled Action** and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). You can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. Then select **Save**.
+6. Select **New Labeled Action** and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). You can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity.
 
    You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
+
+7. Select **Save**.
 
 After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
 
@@ -49,12 +51,9 @@ Manual labeling is available for both web and mobile applications and does not r
 2. Select **Add Labeled Action**, then select **Create manually**.
 3. Add a label name, description (optional), and tags (optional).
 4. Under **Definition**, define one or more events to track:
-   - **Action Type**: `click` or `custom` events
+   - **Action Type**: `click` or `custom` events. For `click` events, you can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. 
    - **Action Name**: Use the drop-down to select an action
    - **Page Location**: Use the drop-down to target one or more pages
-
-   For `click` events, you can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. 
-
    Select **Add New Definition** to add a definition.
 5. Select **Save**.
 
