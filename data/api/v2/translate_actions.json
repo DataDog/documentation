@@ -2893,6 +2893,70 @@
     "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
+  "GetModelLabArtifactContent": {
+    "description": "Download the raw content of a Model Lab artifact file.",
+    "summary": "Get Model Lab artifact content"
+  },
+  "ListModelLabRunFacetKeys": {
+    "description": "List all available facet keys for filtering Model Lab runs.",
+    "summary": "List Model Lab run facet keys"
+  },
+  "ListModelLabRunFacetValues": {
+    "description": "List available facet values for a specific run facet key.",
+    "summary": "List Model Lab run facet values"
+  },
+  "ListModelLabProjectFacetKeys": {
+    "description": "List all available facet keys for filtering Model Lab projects.",
+    "summary": "List Model Lab project facet keys"
+  },
+  "ListModelLabProjectFacetValues": {
+    "description": "List available facet values for a specific project facet key.",
+    "summary": "List Model Lab project facet values"
+  },
+  "ListModelLabProjects": {
+    "description": "List all Model Lab projects for the current organization.",
+    "summary": "List Model Lab projects"
+  },
+  "GetModelLabProject": {
+    "description": "Get a single Model Lab project by its ID.",
+    "summary": "Get a Model Lab project"
+  },
+  "ListModelLabProjectArtifacts": {
+    "description": "List all artifact files for a specific Model Lab project.",
+    "summary": "List Model Lab project artifacts"
+  },
+  "UnstarModelLabProject": {
+    "description": "Remove the star from a Model Lab project for the current user.",
+    "summary": "Remove star from a Model Lab project"
+  },
+  "StarModelLabProject": {
+    "description": "Star a Model Lab project for the current user.",
+    "summary": "Star a Model Lab project"
+  },
+  "ListModelLabRuns": {
+    "description": "List all Model Lab runs for the current organization.",
+    "summary": "List Model Lab runs"
+  },
+  "DeleteModelLabRun": {
+    "description": "Delete a Model Lab run by its ID.",
+    "summary": "Delete a Model Lab run"
+  },
+  "GetModelLabRun": {
+    "description": "Get a single Model Lab run by its ID.",
+    "summary": "Get a Model Lab run"
+  },
+  "ListModelLabRunArtifacts": {
+    "description": "List artifact files for a specific Model Lab run.",
+    "summary": "List Model Lab run artifacts"
+  },
+  "UnpinModelLabRun": {
+    "description": "Remove the pin from a Model Lab run for the current user.",
+    "summary": "Unpin a Model Lab run"
+  },
+  "PinModelLabRun": {
+    "description": "Pin a Model Lab run for the current user.",
+    "summary": "Pin a Model Lab run"
+  },
   "GetMonitorNotificationRules": {
     "description": "Returns a list of all monitor notification rules.",
     "summary": "Get all monitor notification rules"

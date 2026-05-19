@@ -12598,6 +12598,218 @@ menu:
           - GetChannelByName
         unstable: []
         order: 1
+    - name: Model Lab API
+      url: /api/latest/model-lab-api/
+      identifier: model-lab-api
+      generated: true
+    - name: Pin a Model Lab run
+      url: '#pin-a-model-lab-run'
+      identifier: model-lab-api-pin-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PinModelLabRun
+        unstable:
+          - v2
+        order: 10
+    - name: Unpin a Model Lab run
+      url: '#unpin-a-model-lab-run'
+      identifier: model-lab-api-unpin-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpinModelLabRun
+        unstable:
+          - v2
+        order: 11
+    - name: List Model Lab run artifacts
+      url: '#list-model-lab-run-artifacts'
+      identifier: model-lab-api-list-model-lab-run-artifacts
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRunArtifacts
+        unstable:
+          - v2
+        order: 14
+    - name: Get a Model Lab run
+      url: '#get-a-model-lab-run'
+      identifier: model-lab-api-get-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetModelLabRun
+        unstable:
+          - v2
+        order: 8
+    - name: Delete a Model Lab run
+      url: '#delete-a-model-lab-run'
+      identifier: model-lab-api-delete-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteModelLabRun
+        unstable:
+          - v2
+        order: 9
+    - name: List Model Lab runs
+      url: '#list-model-lab-runs'
+      identifier: model-lab-api-list-model-lab-runs
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRuns
+        unstable:
+          - v2
+        order: 7
+    - name: Star a Model Lab project
+      url: '#star-a-model-lab-project'
+      identifier: model-lab-api-star-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StarModelLabProject
+        unstable:
+          - v2
+        order: 5
+    - name: Remove star from a Model Lab project
+      url: '#remove-star-from-a-model-lab-project'
+      identifier: model-lab-api-remove-star-from-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnstarModelLabProject
+        unstable:
+          - v2
+        order: 6
+    - name: List Model Lab project artifacts
+      url: '#list-model-lab-project-artifacts'
+      identifier: model-lab-api-list-model-lab-project-artifacts
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjectArtifacts
+        unstable:
+          - v2
+        order: 15
+    - name: Get a Model Lab project
+      url: '#get-a-model-lab-project'
+      identifier: model-lab-api-get-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetModelLabProject
+        unstable:
+          - v2
+        order: 2
+    - name: List Model Lab projects
+      url: '#list-model-lab-projects'
+      identifier: model-lab-api-list-model-lab-projects
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjects
+        unstable:
+          - v2
+        order: 1
+    - name: List Model Lab project facet values
+      url: '#list-model-lab-project-facet-values'
+      identifier: model-lab-api-list-model-lab-project-facet-values
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjectFacetValues
+        unstable:
+          - v2
+        order: 4
+    - name: List Model Lab project facet keys
+      url: '#list-model-lab-project-facet-keys'
+      identifier: model-lab-api-list-model-lab-project-facet-keys
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjectFacetKeys
+        unstable:
+          - v2
+        order: 3
+    - name: List Model Lab run facet values
+      url: '#list-model-lab-run-facet-values'
+      identifier: model-lab-api-list-model-lab-run-facet-values
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRunFacetValues
+        unstable:
+          - v2
+        order: 13
+    - name: List Model Lab run facet keys
+      url: '#list-model-lab-run-facet-keys'
+      identifier: model-lab-api-list-model-lab-run-facet-keys
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRunFacetKeys
+        unstable:
+          - v2
+        order: 12
+    - name: Get Model Lab artifact content
+      url: '#get-model-lab-artifact-content'
+      identifier: model-lab-api-get-model-lab-artifact-content
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetModelLabArtifactContent
+        unstable:
+          - v2
+        order: 16
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
