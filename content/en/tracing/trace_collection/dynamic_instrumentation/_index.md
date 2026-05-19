@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-Dynamic Instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
+Dynamic Instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
 If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
 
@@ -91,20 +91,11 @@ As a developer, you can also think of an instrumentation as a "non-breaking brea
 All instrumentation types require the same initial setup:
 
 1. Go to the [Dynamic Instrumentation page][12].
-1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
+1. Click **Create Instrumentation** in the top right, or click the three-dot menu on a service and select **Add an instrumentation for this service**.
 1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
+1. In the source code, specify where to set the instrumentation by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
 
-See the individual probe types below for specific creation steps for each probe type.
-
-Alternatively, you can create a probe from these other contexts:
-
-Profiling
-: On a profiler flame graph, you can create a probe for a method by selecting **Instrument this frame with a probe** from the frame's context menu.
-
-Error Tracking
-: On a stack trace, mouse over a stack frame and click **Instrument**. This prefills the probe creation form with the Issue context.
-
+See the individual instrumentation types below for specific creation steps for each instrumentation type.
 
 <div class="alert alert-info">Dynamic log instrumentations have moved to <a href="/tracing/live_debugger/">Live Debugger</a>. Use Live Debugger to capture logs and variable snapshots in real time from running applications.</div>
 
