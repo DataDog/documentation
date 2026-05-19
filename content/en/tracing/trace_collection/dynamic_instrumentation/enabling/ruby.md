@@ -4,7 +4,7 @@ description: Set up Dynamic Instrumentation for Ruby applications to add probes 
 aliases:
     - /dynamic_instrumentation/enabling/ruby/
     - /tracing/dynamic_instrumentation/enabling/ruby
-private: false
+private: true
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 50
