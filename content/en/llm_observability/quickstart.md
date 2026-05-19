@@ -1,5 +1,6 @@
 ---
 title: Quickstart
+description: Get started with Datadog LLM Observability by instrumenting a Python, Node.js, or Java LLM application using the LLM Observability SDK.
 aliases:
     - /tracing/llm_observability/quickstart
 further_reading:
