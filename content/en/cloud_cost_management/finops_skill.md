@@ -35,7 +35,7 @@ The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assista
 - Answer ad hoc questions about cloud, SaaS, custom, or Datadog costs.
 - Compare actual spend and forecasts against [budgets][5].
 - Correlate cost changes with observability metrics, such as CPU, memory, request volume, or storage size.
-- Create Datadog Notebooks that capture an investigation for handoff or future reference.
+- Create [Notebooks][15] that capture an investigation for handoff or future reference.
 
 ## Prerequisites
 
