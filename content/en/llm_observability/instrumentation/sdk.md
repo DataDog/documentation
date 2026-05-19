@@ -1968,7 +1968,7 @@ Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic,
 
 #### How token counts are calculated
 The following relationships apply to token usage fields:
-{{< img src="llm_observability/llm_token_hierarchy.png" alt="Token relationships in LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/llm_token_relationships.png" alt="Token relationships in LLM Observability." style="width:100%;" >}}
 
 When all sub-components of a token field are provided, Datadog automatically calculates the parent token field, so it does not need to be sent separately.
 
