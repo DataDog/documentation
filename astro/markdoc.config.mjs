@@ -70,38 +70,9 @@ export default defineMarkdocConfig({
       // attribute shape for validation.
       ...schema.tags.tab,
     },
-    apiMethodBadge: {
-      render: component('./src/components/ApiMethodBadge/ApiMethodBadge.astro'),
-      selfClosing: true,
-      ...schema.tags.apiMethodBadge,
-    },
-    schemaTable: {
-      render: component('./src/components/ApiSchemaTable/ApiSchemaTableMarkdoc.astro'),
-      selfClosing: true,
-      ...schema.tags.schemaTable,
-    },
     regionSelector: {
       render: component('./src/components/RegionSelector/RegionSelectorIsland.astro'),
       selfClosing: true,
-    },
-    apiResponse: {
-      render: component('./src/components/ApiResponse/ApiResponseMarkdoc.astro'),
-      selfClosing: true,
-      ...schema.tags.apiResponse,
-    },
-    apiCodeExample: {
-      render: component('./src/components/ApiCodeExample/ApiCodeExampleMarkdoc.astro'),
-      selfClosing: true,
-      ...schema.tags.apiCodeExample,
-    },
-    apiEndpoint: {
-      render: component('./src/components/ApiEndpoint/ApiEndpoint.astro'),
-      ...schema.tags.apiEndpoint,
-    },
-    placeholder: {
-      render: component('./src/components/Placeholder/Placeholder.astro'),
-      selfClosing: true,
-      ...schema.tags.placeholder,
     },
     whatsNext: {
       render: component('./src/components/WhatsNext/WhatsNext.astro'),
