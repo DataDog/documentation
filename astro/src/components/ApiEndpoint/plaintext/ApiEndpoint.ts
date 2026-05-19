@@ -19,6 +19,8 @@ import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchema
 import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
 import { renderApiResponseMd } from '../../ApiResponse/plaintext/ApiResponse';
 import { renderApiCodeExampleMd } from '../../ApiCodeExample/plaintext/ApiCodeExample';
+import { renderAlertMd } from '../../Alert/plaintext/Alert';
+import { renderApiMethodBadgeMd } from '../../ApiMethodBadge/plaintext/ApiMethodBadge';
 
 function renderRegionTable(ep: EndpointData): string {
   const regions = getDefaultRegions();
@@ -27,7 +29,7 @@ function renderRegionTable(ep: EndpointData): string {
     const url = ep.regionUrls?.[region.key];
     if (!url) continue;
     const site = appHost(region.key) ?? region.site;
-    rows.push(`| ${site} | ${ep.method} ${url} |`);
+    rows.push(`| ${site} | ${renderApiMethodBadgeMd(ep.method)} ${url} |`);
   }
   if (rows.length === 0) return '';
   return ['| Datadog site | API endpoint |', '| --- | --- |', ...rows].join('\n');
@@ -80,10 +82,10 @@ export function renderApiEndpointMd(ep: EndpointData): string {
 
   if (ep.deprecated) {
     const link = ep.newerVersionUrl ? ` [Use the newer version.](${ep.newerVersionUrl})` : '';
-    blocks.push(`{% alert level="warning" %}\nThis endpoint is deprecated.${link}\n{% /alert %}`);
+    blocks.push(renderAlertMd('warning', `This endpoint is deprecated.${link}`));
   } else if (ep.unstable) {
     const msg = ep.unstableMessage ?? 'This endpoint is unstable and may change without notice.';
-    blocks.push(`{% alert level="warning" %}\n${msg}\n{% /alert %}`);
+    blocks.push(renderAlertMd('warning', msg));
   }
 
   if (ep.description) {

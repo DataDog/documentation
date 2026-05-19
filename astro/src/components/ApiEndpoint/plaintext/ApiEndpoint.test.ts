@@ -45,8 +45,8 @@ describe('renderApiEndpointMd', () => {
   it('renders a Datadog site → API endpoint table for each supported region', () => {
     const out = renderApiEndpointMd(baseEndpoint);
     expect(out).toContain('| Datadog site | API endpoint |');
-    expect(out).toContain('| app.datadoghq.com | GET https://api.datadoghq.com/api/v2/things/{thing_id} |');
-    expect(out).toContain('| app.datadoghq.eu | GET https://api.datadoghq.eu/api/v2/things/{thing_id} |');
+    expect(out).toContain('| app.datadoghq.com | **GET** https://api.datadoghq.com/api/v2/things/{thing_id} |');
+    expect(out).toContain('| app.datadoghq.eu | **GET** https://api.datadoghq.eu/api/v2/things/{thing_id} |');
   });
 
   it('omits unsupported regions from the URL table', () => {
