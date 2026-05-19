@@ -7,7 +7,7 @@
  */
 
 import type { ResponseData } from '@lib/api/schemas/views';
-import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
+import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable';
 
 function renderExamples(examples: NonNullable<ResponseData['examples']>): string {
   return examples

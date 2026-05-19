@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderApiSchemaTableMd } from './ApiSchemaTable.md';
+import { renderApiSchemaTableMd } from './ApiSchemaTable';
 import type { SchemaField } from '@lib/api/schemas/schemaField';
 
 const field = (overrides: Partial<SchemaField> = {}): SchemaField => ({

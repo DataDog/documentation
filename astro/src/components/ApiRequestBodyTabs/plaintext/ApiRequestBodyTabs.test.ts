@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderApiRequestBodyTabsMd } from './ApiRequestBodyTabs.md';
+import { renderApiRequestBodyTabsMd } from './ApiRequestBodyTabs';
 import type { SchemaField } from '@lib/api/schemas/schemaField';
 
 const schema: SchemaField[] = [

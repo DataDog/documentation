@@ -1,6 +1,6 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
-import { renderApiEndpointMd } from "@components/ApiEndpoint/plaintext/ApiEndpoint.md";
+import { renderApiEndpointMd } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 
 export const getStaticPaths: GetStaticPaths = async () => {

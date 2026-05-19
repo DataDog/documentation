@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderApiResponseMd } from './ApiResponse.md';
+import { renderApiResponseMd } from './ApiResponse';
 import type { ResponseData } from '@lib/api/schemas/views';
 
 const responses: ResponseData[] = [

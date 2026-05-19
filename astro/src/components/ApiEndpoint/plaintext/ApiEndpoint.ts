@@ -1,7 +1,7 @@
 /**
  * Markdown twin of `ApiEndpoint.astro`.
  *
- * Composes the leaf `.md.ts` renderers into a complete Markdown rendering of
+ * Composes the leaf plaintext renderers into a complete Markdown rendering of
  * one API endpoint's body. Output is parseable Markdoc — tabbed content
  * (request body, response, code examples) emits `{% tabs %}` blocks; status
  * notices emit `{% alert %}` blocks.
@@ -15,10 +15,10 @@
 import type { EndpointData } from '@lib/api/schemas/views';
 import { getDefaultRegions } from '@lib/api/regionResolver';
 import { appHost } from '@config/regions';
-import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
-import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs.md';
-import { renderApiResponseMd } from '../../ApiResponse/plaintext/ApiResponse.md';
-import { renderApiCodeExampleMd } from '../../ApiCodeExample/plaintext/ApiCodeExample.md';
+import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable';
+import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
+import { renderApiResponseMd } from '../../ApiResponse/plaintext/ApiResponse';
+import { renderApiCodeExampleMd } from '../../ApiCodeExample/plaintext/ApiCodeExample';
 
 function renderRegionTable(ep: EndpointData): string {
   const regions = getDefaultRegions();

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderApiEndpointMd } from './ApiEndpoint.md';
+import { renderApiEndpointMd } from './ApiEndpoint';
 import type { EndpointData } from '@lib/api/schemas/views';
 
 const baseEndpoint: EndpointData = {

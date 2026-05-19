@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderApiMethodBadgeMd } from './ApiMethodBadge.md';
+import { renderApiMethodBadgeMd } from './ApiMethodBadge';
 
 describe('renderApiMethodBadgeMd', () => {
   it('uppercases and bolds the method name', () => {

@@ -7,7 +7,7 @@
  */
 
 import type { SchemaField } from '@lib/api/schemas/schemaField';
-import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
+import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable';
 
 interface Example {
   name: string;
