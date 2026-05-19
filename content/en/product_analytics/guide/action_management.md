@@ -21,7 +21,7 @@ Two labeling methods are available:
 
 ## Visual labeling {#visual-labeling}
 
-Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2] for extension installation — or use [manual labeling](#manual-labeling) instead.
+Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2] for extension installation, or use [manual labeling](#manual-labeling) instead.
 
 1. Go to the [Actions][3] page in Datadog and select your application.
 
