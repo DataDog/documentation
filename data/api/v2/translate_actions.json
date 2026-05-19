@@ -4013,6 +4013,10 @@
     "description": "Fetches all scorecards.",
     "summary": "List all scorecards"
   },
+  "ListScorecardScores": {
+    "description": "Returns a list of scorecard scores for each aggregation type, with score breakdowns.",
+    "summary": "List all scores"
+  },
   "UnassignSeatsUser": {
     "description": "Unassign seats from users for a product code.",
     "summary": "Unassign seats from users",

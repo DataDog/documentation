@@ -14867,6 +14867,18 @@ menu:
       url: /api/latest/scorecards/
       identifier: scorecards
       generated: true
+    - name: List all scores
+      url: '#list-all-scores'
+      identifier: scorecards-list-all-scores
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardScores
+        unstable: []
+        order: 14
     - name: List all scorecards
       url: '#list-all-scorecards'
       identifier: scorecards-list-all-scorecards
