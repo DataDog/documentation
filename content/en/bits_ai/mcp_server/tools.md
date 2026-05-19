@@ -22,6 +22,8 @@ To enable product-specific tools, include the `toolsets` query parameter at the 
 
 You can also exclude specific tools with the `omit_tools` query parameter. For usage details and precedence with `toolsets`, see [Set Up the Datadog MCP Server][1].
 
+[1]: /bits_ai/mcp_server/setup#toolsets
+
 [2]: /getting_started/site/
 {{< /site-region >}}
 
