@@ -31,7 +31,7 @@ This is the most common pattern. The assets themselves aren't sensitive (anyone 
 
 This is also the right approach for the "create but not edit" pattern: users can freely create their own Monitors and Dashboards, but granular access controls prevent them from editing assets owned by other teams. The boundary is ownership, not a role-level permission.
 
-Certain Datadog assets offer access levels beyond Edit, View, and No Access. For example, Logs Pipelines separate who can manage an entire pipeline vs. who can edit the processors within it. Review the [granular access controls documentation][1] for asset-specific options.
+Certain Datadog assets offer access levels beyond Edit, View, and No Access. For example, Logs Pipelines separate who can manage an entire pipeline vs. who can edit the processors within it. For more details, see [granular access controls][1].
 
 ### Assets that should only be viewed by the responsible team
 
@@ -43,7 +43,7 @@ This is less common. The assets themselves contain sensitive information, and no
 
 ## Admin override considerations
 
-As noted in [Assigning Users to Roles and Teams][3], restricting assets to specific teams affects everyone, including administrators. If your platform administrators are not members of the owning team, they are locked out.
+Restricting assets to specific teams affects everyone, including administrators. If your platform administrators are not members of the owning team, they are locked out. For more information, see [Assigning Users to Roles and Teams][3].
 
 Before broadly applying granular access controls, make sure your admin override team is included in the access list for all critical assets. A common approach is to include an "Admin" or "Platform" team with Edit access alongside the owning team.
 

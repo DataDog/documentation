@@ -32,21 +32,23 @@ Managed roles are maintained by Datadog. Their permissions are automatically upd
 
 ### When to create custom roles
 
-Most enterprises primarily use custom roles as a means of **controlling which features are available** to their SREs and developers, especially which newly-released Datadog features are available to which users. Beyond feature access, custom roles are also used to create distinct tiers for different user populations. Other common triggers:
+Use custom roles to **control which features are available** to their SREs and developers, including which newly-released Datadog features are available to which users. Beyond feature access, use custom roles to create distinct tiers for user populations. Other common triggers:
 
 - **Compliance or audit users** need read access across products but should never edit anything.
 - **Platform administrators** need elevated permissions for infrastructure management without full org admin access.
 - **Third-party contractors or vendors** need access to specific products but should be excluded from sensitive data, billing, or user management.
 
-The key principle is **least privilege**: start with the minimum permissions a user needs, and add from there.
+<div class="alert alert-tip">
+Start with the minimum permissions a user needs, and add from there.
+</div>
 
-### Keeping roles current with new permissions
+### Keeping custom roles current with new permissions
 
 Unlike managed roles, custom roles do not automatically receive new permissions when Datadog releases new features unless you configure them to. This means new product capabilities may be invisible to users on custom roles until an administrator explicitly grants the permission. There are three strategies to stay current:
 
 1. **Monitor the Permissions Release Notes.** When Datadog adds new permissions, they are announced in [permissions release notes][4]. Review these periodically and decide which roles should receive the new permission.
 
-2. **Use Bulk Assign.** When you decide to distribute a new permission, you can add it to multiple roles at once from the [Roles page][3] by selecting the roles and clicking Add Permission.
+2. **Use Bulk Assign.** When you decide to distribute a new permission, you can add it to multiple roles at once. For more information, see [Roles][3].
 
 3. **Configure Automatic Updates.** Each custom role can be set to follow a managed role template (Read Only, Standard, or Admin). When a new permission is released to that template, your custom role receives it automatically, but you can still add or remove any permissions from the role after automatic updates occur. Use this feature for trusted users who should get new features by default.
 
@@ -54,15 +56,15 @@ Unlike managed roles, custom roles do not automatically receive new permissions 
 
 ### Role hygiene at scale
 
-As your organization grows, role sprawl becomes a real risk. Organizations with thousands of users can end up with hundreds or even thousands of roles if creation is not governed. To manage this:
+As your organization grows, the number of roles can increase rapidly. Organizations with thousands of users can end up with hundreds or even thousands of roles if creation is not governed. To manage this:
 
-- **Audit roles regularly.** Identify roles with no users or teams assigned and consider consolidating or deleting them.
+- **Audit roles regularly.** Identify roles with no users or teams assigned and consolidate or delete them.
 - **Name roles descriptively.** Use a naming convention that indicates the role's purpose and scope (for example, `team-payments-lead` or `contractor-readonly`).
 - **Limit role creation.** Only users with the `user_access_manage` permission should be able to create new roles. Review new role requests to avoid duplication.
 
 ## Recommended starter roles
 
-Most enterprises converge on a set of 4-6 custom roles. Here is a recommended starting point:
+Start with set of 4-6 custom roles. Here is a recommended starting point:
 
 | Role | Based on | Key modifications |
 | :---- | :---- | :---- |
@@ -79,9 +81,9 @@ Expand only when a meaningful group of users needs a distinct permission set tha
 - **Use roles to reflect permissions, not ownership.** Teams better reflect ownership and accountability.
 - **Create custom roles to maintain granular control of feature access**, including new features and permissions.
 - **Start by cloning a managed role** and removing permissions, rather than building from scratch.
-- **Keep custom roles up to date as new features are released.** Monitoring new permission releases and automatic updates are equally good options.
+- **Keep custom roles up to date as new features are released.** Either monitor new permission releases or configure automatic updates.
 - **Audit roles quarterly.** Look for roles with no users, duplicate roles, and users with more permissions than they need.
-- **Name roles with a consistent convention** that indicates purpose and scope.
+- **Use a consistent naming convention for roles** that indicates purpose and scope.
 
 ## Further reading
 

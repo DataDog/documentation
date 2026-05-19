@@ -1,6 +1,6 @@
 ---
 title: Organizing Your Datadog Deployment
-description: Decide between single-org and multi-org Datadog deployments for your enterprise.
+description: Decide between single-org and multi-org Datadog topology for your enterprise.
 further_reading:
 - link: "/account_management/organization_topology/"
   tag: "Documentation"
@@ -22,25 +22,24 @@ The first decision in your access strategy is how many Datadog organizations you
 
 ## Start with a single org
 
-Datadog recommends implementing Datadog with a **single organization** where possible. A single org maximizes the power of connected observability workflows: traces link to logs, logs link to infrastructure, and dashboards can span your entire estate. Datadog's access controls (including [Data Access Control][1], [granular access controls][2], and [custom roles][3]) provide enterprise-grade data segregation within a single org, even in regulated industries.
+Datadog recommends a **single organization** where possible. A single org maximizes the power of connected observability workflows. Traces link to logs, logs link to infrastructure, and dashboards can span your entire estate. Datadog's access controls (including [Data Access Control][1], [granular access controls][2], and [custom roles][3]) provide enterprise-grade data segregation within a single org, even in regulated industries.
 
-Many large enterprises with hundreds of teams and thousands of users successfully operate in a single org by using Teams and Data Access Control to create internal boundaries, rather than splitting into separate orgs.
 
-## Within-org segmentation
+## Evaluate segmentation before splitting orgs
 
-Before adding orgs, consider whether **Teams and Data Access Control** can provide the isolation you need within a single org. Some enterprises operate dozens of internal business units, agencies, or subsidiaries within a small number of orgs, using Data Access Control to restrict data visibility and granular access controls to protect resources. This approach preserves cross-cutting observability while still maintaining strict boundaries.
+Instead of adding multiple organizations, ask whether **Teams and Data Access Control** can provide the isolation you need within a single org. You can operate dozens of internal business units, agencies, or subsidiaries within a small number of orgs, using Data Access Control to restrict data visibility and granular access controls to protect resources. This approach preserves cross-cutting observability while still maintaining strict boundaries.
 
-The key question is: *Do these groups need to share any operational context?* If teams trace requests across each other's services, share infrastructure, or participate in the same incidents, a single org with strong internal segmentation is usually the better path.
+The key question is: *Do these groups need to share any operational context?* If teams trace requests across each other's services, share infrastructure, or participate in the same incidents, a single org with strong internal segmentation is the better path.
 
 ## When multiple orgs are appropriate
 
-There are cases where multiple organizations are justified:
+There are some cases where multiple organizations are justified:
 
 - **Separate companies or acquisitions** that do not share infrastructure, services, or personnel. If there is no shared operational context, a shared org provides little value.
 - **Hard compliance boundaries** requiring complete data isolation between divisions. For example, a defense division whose standard metrics and infrastructure must be invisible to commercial users, even at the metadata level.
 - **Distinct billing or contractual requirements** where usage must be tracked and invoiced independently.
 
-Some enterprises also use multiple orgs as a workaround when within-org access controls don't yet cover all their products. As Datadog's access controls expand, these enterprises may consolidate orgs over time.
+You can also use multiple orgs as a workaround when within-org access controls don't yet cover all products. As Datadog's access controls expand, you can consolidate orgs over time.
 
 ## Recommendations
 

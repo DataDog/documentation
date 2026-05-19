@@ -15,15 +15,23 @@ further_reading:
 
 ## Overview
 
-This guide helps Datadog administrators at large organizations design and implement an access control strategy. It is intended for organizations that fit any of the below profiles:
+This guide helps Datadog administrators at large organizations design and implement an access control strategy. It is intended for organizations that fit any of the following profiles:
 
 - Have **100 or more users** across multiple teams or business units
 - Operate in **regulated industries** with data sensitivity requirements
 - Need to **expand Datadog usage** across more users and teams while maintaining governance
 
 As organizations grow on Datadog, they face a core tension: enabling self-service for developers, operators, and business users while maintaining boundaries on who can see or change what. This guide provides a decision framework for resolving that tension, not step-by-step UI instructions.
+## Prerequisites
 
-### What this guide covers
+This guide assumes familiarity with Datadog basics. Before starting, review:
+
+- [Administrator's Guide: Getting Started][10] for overall platform setup and onboarding
+- [Getting Started with Teams][11] for team structure, sync strategies, and ownership workflows
+- [Access Control (RBAC)][12] for Datadog's role and permission model
+## Design and implement an access control strategy
+
+You can read this guide sequentially to plan a new access strategy, or jump to the section most relevant to your current challenge. 
 
 Each section addresses a layer of your access control strategy, from organizational structure through enforcement and auditing:
 
@@ -39,21 +47,11 @@ Each section addresses a layer of your access control strategy, from organizatio
 | [Sharing Across Organizations][8] | Cross-Org Visibility, Shared Dashboards, and multi-org governance |
 | [Example Implementations][9] | Enterprise implementation templates |
 
-### How to use this guide
 
-You can read this guide sequentially to plan a new access strategy, or jump to the section most relevant to your current challenge. Each section ends with a **Recommendations** block summarizing the key takeaways and a **Further Reading** list linking to detailed documentation.
-
-### Prerequisites
-
-This guide assumes familiarity with Datadog basics. Before starting, review:
-
-- [Administrator's Guide: Getting Started][10] for overall platform setup and onboarding
-- [Getting Started with Teams][11] for team structure, sync strategies, and ownership workflows
-- [Access Control (RBAC)][12] for Datadog's role and permission model
 
 ## Next steps
 
-Start with [Organizing Your Datadog Deployment][1] to determine whether your organization should use a single Datadog org or multiple orgs. This foundational decision shapes every access control decision that follows.
+Start with [Organizing Your Datadog Deployment][1] to determine whether your organization should use a single Datadog org or multiple orgs.
 
 ## Further reading
 

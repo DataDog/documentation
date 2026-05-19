@@ -5,7 +5,7 @@ further_reading:
 - link: "/account_management/rbac/data_access"
   tag: "Documentation"
   text: "Data Access Control"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
 - link: "/administrators_guide/plan/#resource-tagging"
@@ -58,9 +58,9 @@ Sensitive Data Scanner is useful as a defense-in-depth measure alongside Data Ac
 
 ## Standard Data Access Control vs. Strict Mode
 
-Most enterprises should use **standard Data Access Control**, which applies restrictions progressively: all data is visible by default, and you create restricted datasets to limit access to specific data. This model works well when sensitive data is the exception, not the rule.
+Use **standard Data Access Control** to apply restrictions progressively: all data is visible by default, and you create restricted datasets to limit access to specific data. This model works well when sensitive data is the exception, not the rule.
 
-For organizations with hard regulatory requirements (for example, defense) or those collaborating with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. This is a fundamentally different posture: instead of restricting the sensitive subset, you must explicitly allow access to everything.
+For organizations with hard regulatory requirements (for example, defense) or organizations that collarborate with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
 
 Strict Mode is the exception, not the rule. Most enterprises achieve their compliance requirements with standard Data Access Control and well-structured datasets. Consider Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
 

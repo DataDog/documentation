@@ -21,11 +21,9 @@ further_reading:
 
 ## Overview
 
-This section provides four implementation templates for Datadog access controls, each representing the end state for a different enterprise archetype. They show what a fully implemented access strategy looks like: which mechanisms are in use, how roles and teams are structured, and how the layers work together.
+These four implementation templates show what a fully implemented access strategy looks like, including which mechanisms are in use, how roles and teams are structured, and how the layers work together. They represent common organization archetypes, not specific companies. Use them as starting point for your own implementation.
 
-These templates are composites, not descriptions of specific companies. Use them as starting points to design your own access implementation.
-
-## Choosing your template
+## Choose your template
 
 Most enterprises are a blend of these archetypes. Use the following questions to identify which patterns are most relevant to you:
 
@@ -98,7 +96,7 @@ A global technology company with 12,000 Datadog users running a large-scale paym
 
 | Layer | Implementation |
 | :---- | :---- |
-| **Org structure** | Single org representing 20 major product lines. Data Access Control and Teams provide internal boundaries within each org. 2 additional orgs used for sandbox and non-prod environments. |
+| **Org structure** | Single org representing 20 major product lines. Data Access Control and Teams provide internal boundaries within each org. Two additional orgs used for sandbox and non-prod environments. |
 | **Custom roles** | 5 custom roles, standardized across the company through Terraform modules: Read Only, Standard, Platform, Organization Admin, Contractor. Automatic Updates enabled for the non-Contractor roles. |
 | **Identity** | Proprietary IdP integrated with Teams API and Terraform. Team membership synced nightly from the internal service ownership registry. Role assignment managed through a Terraform module that reads from the central employee directory. |
 | **Data restrictions** | Standard Data Access Control separating product lines on sensitive key telemetry types (Logs, RUM, Cloud Costs). Restricted datasets created based on service, with cross-team access granted through explicit dataset assignments. Contractor users are restricted to a narrow set of services defined in their contract scope. |
@@ -131,7 +129,7 @@ A large government agency or managed service provider with 5,000 Datadog users o
 
 ### Key takeaway
 
-Within-org segmentation (Teams + Data Access Control) can replace multi-org isolation when the tenant boundaries are organizational, not regulatory. The CMDB-driven identity chain and Terraform-managed configuration are not optional at this scale. The admin override team is a critical safety net that should be established before any asset restrictions are applied.
+Within-org segmentation (Teams + Data Access Control) can replace multi-org isolation when the tenant boundaries are organizational, not regulatory. The CMDB-driven identity chain and Terraform-managed configuration are required at this scale. The admin override team is a critical safety net that should be established before any asset restrictions are applied.
 
 ## Further reading
 

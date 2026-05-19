@@ -27,11 +27,11 @@ further_reading:
 
 ## Overview
 
-Most enterprises interact with Datadog programmatically through CI/CD pipelines, Terraform, custom integrations, and automation scripts. Managing the keys and tokens that enable this access is a critical part of your security posture. A leaked or over-permissioned key can expose data across your entire org.
+You can interact with Datadog programmatically through CI/CD pipelines, Terraform, custom integrations, and automation scripts. Managing the keys and tokens that enable this access is a critical part of your security posture. A leaked or over-permissioned key can expose data across your entire organization.
 
 This section covers the five types of programmatic credentials in Datadog, best practices for managing them at scale, and strategies for lifecycle management.
 
-## Types of credentials
+## Types of programmatic credentials
 
 | Credential | Purpose | Scope | Lifetime |
 | :---- | :---- | :---- | :---- |
@@ -48,7 +48,7 @@ This section covers the five types of programmatic credentials in Datadog, best 
 - **Application Keys** are legacy secrets used for API access, like reading dashboards, managing monitors, or configuring integrations. They inherit the permissions of the creating user or service account, and can be further scoped to limit what they can do.
 - **RUM Client Tokens** are specific to client-side implementation of RUM data.
 
-## Best practices
+## Best practices for managing credentials at scale
 
 ### One key per team, service, or environment
 
@@ -58,24 +58,20 @@ Avoid sharing a single API key or application key across multiple teams or servi
 - Create dedicated service accounts with SATs for each automation pipeline (for example, Terraform, CI/CD, custom scripts).
 - Name keys descriptively to indicate their owner and purpose (for example, `payments-team-terraform` or `ci-pipeline-staging`).
 
-### Scope secrets to the minimum needed
+### Scope secrets to the minimum required
 
 Keys can be [scoped][1] to restrict which API endpoints they can access. A key that only needs to manage monitors should not have permissions to manage users or read logs.
 
 - When creating a key, explicitly set scopes to limit its access.
 - Secrets cannot exceed the permissions of their creating user or service account, but they can (and should) be further restricted.
 
-### Prefer short-lived tokens
+### Use short-lived tokens
 
-Where possible, use PATs or SATs instead of long-lived application keys. Short-lived tokens:
+Where possible, use PATs or SATs instead of long-lived application keys. Short-lived tokens automatically expire, which limits exposure it a token is leaked and created cleaner audit trails tied to specific users or service accounts.
 
-- Automatically expire, reducing the window of exposure if leaked
-- Create cleaner audit trails tied to specific users or service accounts
-- Encourage better hygiene by forcing regular renewal
+For automated pipelines, SATs with a service account are the recommended pattern. The service account defines the permission boundary, and the SAT provides time-limited access within that boundary. SATs can be configured as long-lived when required, but short expiration windows are strongly recommended.
 
-For automated pipelines, SATs with a service account are the recommended pattern. The service account defines the permission boundary, and the SAT provides time-limited access within that boundary. While SATs can be configured as long-lived if needed, **short-lived tokens are strongly recommended** for improved security.
-
-### Service accounts
+### Use service accounts
 
 [Service accounts][2] are non-human accounts designed for automation. They have their own roles and permissions, independent of any individual user. Use service accounts when:
 
@@ -83,18 +79,18 @@ For automated pipelines, SATs with a service account are the recommended pattern
 - You need a stable identity for a service that outlives employee tenure
 - You want to scope permissions specifically for a pipeline without affecting a human user's access
 
-### Authenticated proxy for RUM tokens
+### Use an authenticated proxy for RUM tokens
 
 Using an [authenticated proxy][3] for RUM client tokens hides them from end users, while still routing data to the correct RUM application.
 
-## Key lifecycle management
+## Strategies for key lifecycle management
 
 ### Audit unused keys
 
 Over time, keys accumulate. Teams rotate members, pipelines are decommissioned, and keys created for one-off tasks are forgotten. Regularly audit your keys to identify:
 
 - **Keys with no recent usage.** If a key hasn't been used in 90 days, investigate whether it's still needed.
-- **Keys with unknown owners.** If no one can identify the purpose of a key, it's a candidate for rotation or revocation.
+- **Keys with unknown owners.** If no one can identify the purpose of a key, it's a candidate for revocation.
 
 The [Governance Console][4], the [Safety Center][5], and [Audit Trail][6] can help identify key usage patterns.
 
@@ -106,7 +102,7 @@ Even long-lived keys should be rotated periodically. A practical cadence:
 - **Application keys:** Rotate quarterly for production pipelines. Rotate immediately if a compromise is suspected or the creating user leaves the organization.
 - **PATs and SATs:** No rotation needed if expiration is configured appropriately (these expire automatically, though SATs have the option to be long-lived).
 
-### Managing keys as code
+### Manage keys as code
 
 Organizations that manage Datadog configuration through [Terraform][7] or other infrastructure-as-code tools can also manage API keys and application keys as code. This provides:
 
@@ -116,13 +112,13 @@ Organizations that manage Datadog configuration through [Terraform][7] or other 
 
 When managing keys through Terraform, store the actual key values in a secrets manager (such as HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault) rather than in your Terraform state or source code.
 
-Datadog is investing in keyless authentication, based on mapping between Datadog organizations and cloud provider identities. See [Cloud-based authentication documentation][8] for more details.
+Datadog also supports keyless authentication through cloud provider identity mapping. See [Cloud-based authentication documentation][8] for more details.
 
 ## Recommendations
 
 - **Create one key per team or service.** Shared keys are an audit and revocation liability.
-- **Scope application keys** to the minimum permissions needed.
-- **Prefer PATs and SATs** over long-lived application keys for API access.
+- **Scope application keys** to the minimum permissions required.
+- **Use PATs and SATs** over long-lived application keys for API access.
 - **Use service accounts** for automation pipelines. Don't tie pipeline access to individual human accounts.
 - **Audit keys quarterly.** Remove unused keys, replace keys from former employees, and rotate production keys on a regular cadence.
 - **Store key values in a secrets manager**, not in source code, environment files, or Terraform state.

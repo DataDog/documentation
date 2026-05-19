@@ -22,9 +22,9 @@ With the [permission model and starter roles][1] defined, the next step is assig
 
 ## Roles vs. Teams
 
-In Datadog, users can be mapped to both Roles and Teams. A user may have one or more Roles, and one or more Teams. Both can be targets of access policies. Understanding when to use each is important for building a maintainable access model.
+In Datadog, users can be assigned one or more roles and be added to one or more teams. Both can be used to scope permissions, but they serve different purposes.
 
-**Roles** define a user's coarse permissions: whether they can use a feature, and which feature capabilities they can access. For access, this could mean:
+**Roles** define what features a user has access to and which feature capabilities they can access. For access, this could mean:
 
 - Who should be able to manage other users' permissions in Datadog
 - Who is never able to see any Logs data
@@ -37,7 +37,7 @@ In Datadog, users can be mapped to both Roles and Teams. A user may have one or 
 - Who is able to see sensitive Logs that are related to that Team's work
 - Who is able to see any data related to a sensitive service owned by that Team
 
-### How Roles and Teams work together
+## How Roles and Teams work together
 
 A practical model for most enterprises:
 
@@ -63,7 +63,9 @@ Datadog offers Request Access (in Preview) for situations where users need tempo
 - **Establish an admin override team** before you begin restricting resources to specific teams.
 - **Automate provisioning.** Map your IdP groups to Datadog Roles and Teams. Manual user management does not scale.
 - **Audit role and team assignments periodically.** Look for users with more permissions than they need, roles with no users, and stale team memberships.
+## Next steps
 
+Restrict who can edit or view Dashboards, Monitors, and other assets. View common patterns for [Protecting Assets][2].
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
