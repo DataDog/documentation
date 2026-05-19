@@ -1066,7 +1066,7 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
-Retrieves which Test Optimization features are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
+Retrieves the Test Optimization features that are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
 
 - Which test optimization features are enabled for the `auth-service`?
 - Show me the Test Optimization settings for my checkout service.
