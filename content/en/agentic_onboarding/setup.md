@@ -141,7 +141,7 @@ To get started:
    npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
    ```
 
-   **GCP Cloud Run (containers)**
+   **GCP Cloud Run containers**
    {{< code-block lang="text" >}}Help me monitor my GCP Cloud Run services with Datadog{{< /code-block >}}
 
    ```shell
