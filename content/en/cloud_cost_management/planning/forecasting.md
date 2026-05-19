@@ -64,7 +64,7 @@ Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecas
 {{< img src="cloud_cost/forecasts/cost-report-with-forecast.png" alt="Cost report showing the Show Forecast toggle in the left panel and forecasted costs displayed alongside historical data with a hatched pattern" style="width:100%;" >}}
 
 The report displays:
-- {{< ui >}}Forecast toggle and controls{{< /ui >}}: Located in the left panel to enable forecasting, select the time period, and pick the rollup interval.
+- {{< ui >}}Forecast toggle and controls{{< /ui >}}: Enable forecasting, select the time period, and pick the rollup interval.
 - {{< ui >}}Historical costs{{< /ui >}}: Your actual spending shown in solid colors.
 - {{< ui >}}Forecasted costs{{< /ui >}}: Predicted costs shown with a hatched pattern.
 - {{< ui >}}Forecast summary card{{< /ui >}}: Shows the total forecasted cost for the selected period.
