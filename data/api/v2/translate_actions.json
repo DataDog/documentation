@@ -1278,6 +1278,14 @@
     "request_description": "Secure embed update request body.",
     "request_schema_description": "Request to update a secure embed shared dashboard."
   },
+  "ListDashboardsUsage": {
+    "description": "Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set.",
+    "summary": "Get usage stats for all dashboards"
+  },
+  "GetDashboardUsage": {
+    "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score.",
+    "summary": "Get usage stats for a dashboard"
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
