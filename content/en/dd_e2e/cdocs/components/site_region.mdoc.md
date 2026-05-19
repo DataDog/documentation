@@ -46,3 +46,9 @@ This content is only visible in the **AP1** region.
 {% site-region region="gov" %}
 This content is only visible in the **Gov** region.
 {% /site-region %}
+
+### Multi-region (us,eu)
+
+{% site-region region="us,eu" %}
+This content is visible in both the **US1** and **EU** regions.
+{% /site-region %}

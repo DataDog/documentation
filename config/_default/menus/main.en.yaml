@@ -2962,6 +2962,16 @@ menu:
       parent: actions_heading
       identifier: forms
       weight: 50000
+    - name: Components
+      url: actions/forms/components/
+      parent: forms
+      identifier: forms_components
+      weight: 1
+    - name: Responses
+      url: actions/forms/responses/
+      parent: forms
+      identifier: forms_responses
+      weight: 2
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -4957,6 +4967,11 @@ menu:
       parent: dbm_setup_clickhouse
       identifier: dbm_setup_clickhouse_cloud
       weight: 902
+    - name: Provision the Agent with Terraform
+      url: database_monitoring/setup_agent_terraform/
+      parent: dbm
+      identifier: dbm_setup_agent_terraform
+      weight: 10
     - name: Setting Up Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm
@@ -5053,6 +5068,11 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
+    - name: Monitors and Automation
+      url: data_streams/kafka/monitors_and_automation
+      identifier: data_streams_kafka_monitors_and_automation
+      parent: data_streams_kafka
+      weight: 2
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -5545,16 +5565,21 @@ menu:
       parent: pipeline_visibility
       identifier: ci_custom
       weight: 110
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: pipeline_visibility
+      identifier: ci_automatic_retries
+      weight: 111
     - name: Custom Commands
       url: continuous_integration/pipelines/custom_commands/
       parent: pipeline_visibility
       identifier: ci_custom_commands
-      weight: 111
+      weight: 112
     - name: Custom Tags and Measures
       url: continuous_integration/pipelines/custom_tags_and_measures/
       parent: pipeline_visibility
       identifier: ci_custom_tags_and_measures
-      weight: 112
+      weight: 113
     - name: Search and Manage
       url: continuous_integration/search/
       parent: ci
@@ -5909,11 +5934,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_flags
       weight: 4
+    - name: Carryforward
+      url: code_coverage/carryforward/
+      parent: code_coverage
+      identifier: code_coverage_carryforward
+      weight: 5
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 5
+      weight: 6
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -7162,16 +7192,21 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
       weight: 601
-    - name: Troubleshooting
-      url: /byoc-logs/operate/troubleshooting
-      parent: cloudprem_operate
-      identifier: cloudprem_operate_troubleshooting
-      weight: 602
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
+      weight: 602
+    - name: Production Best Practices
+      url: /byoc-logs/operate/best_practices
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Troubleshooting
+      url: /byoc-logs/operate/troubleshooting
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_troubleshooting
+      weight: 604
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -7540,11 +7575,16 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
+    - name: Rule Configuration
+      identifier: sec_secret_scanning_configuration
+      url: /security/code_security/secret_scanning/configuration/
+      parent: sec_secret_scanning
+      weight: 3
     - name: Secret Validation
       identifier: sec_secret_scanning_secret_validation
       url: /security/code_security/secret_scanning/secret_validation/
       parent: sec_secret_scanning
-      weight: 3
+      weight: 4
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
@@ -8658,7 +8698,7 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_performance_overhead
       weight: 113
-    - name: iOS and tvOS
+    - name: Apple Platforms
       url: real_user_monitoring/application_monitoring/ios
       parent: application_monitoring
       identifier: rum_mobile_ios
@@ -9512,196 +9552,201 @@ menu:
       url: account_management/personal-access-tokens/
       parent: account_management
       weight: 7
+    - name: Service Access Tokens
+      identifier: account_management_service_access_tokens
+      url: account_management/service-access-tokens/
+      parent: account_management
+      weight: 8
     - name: Teams
       identifier: account_management_teams
       url: account_management/teams/
       parent: account_management
-      weight: 8
+      weight: 9
     - name: Team Management
       identifier: account_management_teams_management
       url: account_management/teams/manage/
       parent: account_management_teams
-      weight: 801
+      weight: 901
     - name: Provision with GitHub
       identifier: account_management_provision_github
       url: account_management/teams/github/
       parent: account_management_teams
-      weight: 802
+      weight: 902
     - name: Governance Console
       identifier: account_management_governance_console
       url: account_management/governance_console/
       parent: account_management
-      weight: 9
+      weight: 10
     - name: Controls
       identifier: account_management_governance_console_controls
       url: account_management/governance_console/controls
       parent: account_management_governance_console
-      weight: 901
+      weight: 1001
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
       parent: account_management
-      weight: 10
+      weight: 11
     - name: Audit Trail
       url: account_management/audit_trail/
       parent: account_management
       identifier: account_management_audit_trail
-      weight: 11
+      weight: 12
     - name: Events
       url: account_management/audit_trail/events/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_events
-      weight: 1101
+      weight: 1201
     - name: Forwarding
       url: account_management/audit_trail/forwarding_audit_events/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_forwarding
-      weight: 1102
+      weight: 1202
     - name: Guides
       url: account_management/audit_trail/guides/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_guides
-      weight: 1103
+      weight: 1203
     - name: Safety Center
       url: account_management/safety_center/
       parent: account_management
       identifier: safety_center
-      weight: 12
+      weight: 13
     - name: Plan & Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 13
+      weight: 14
     - name: Bill Overview
       identifier: account_management_bill_overview
       url: account_management/plan_and_usage/bill_overview/
       parent: account_management_plan_and_usage
-      weight: 1300
+      weight: 1400
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
       parent: account_management_plan_and_usage
-      weight: 1301
+      weight: 1401
     - name: Usage Details
       identifier: account_management_usage_details
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
-      weight: 1302
+      weight: 1402
     - name: Partner Experience
       identifier: account_management_partner_experience
       url: account_management/plan_and_usage/partner_experience/
       parent: account_management_plan_and_usage
-      weight: 1303
+      weight: 1403
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 14
+      weight: 15
     - name: Pricing
       url: account_management/billing/pricing
       parent: account_management_billing
-      weight: 1401
+      weight: 1501
       identifier: account_management_billing_pricing
     - name: Credit Card
       identifier: account_management_billing_credit_card
       url: account_management/billing/credit_card/
       parent: account_management_billing
-      weight: 1402
+      weight: 1502
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
-      weight: 1403
+      weight: 1503
       identifier: account_management_billing_product_allotments
     - name: Usage Metrics
       identifier: account_management_plan_and_usage_usage_metrics
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
-      weight: 1404
+      weight: 1504
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/
       parent: account_management_billing
-      weight: 1405
+      weight: 1505
     - name: Custom Metrics
       identifier: account_management_billing_custom_metrics
       url: account_management/billing/custom_metrics/
       parent: account_management_billing
-      weight: 1406
+      weight: 1506
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
-      weight: 1407
+      weight: 1507
     - name: Log Management
       identifier: account_management_billing_log_management
       url: account_management/billing/log_management/
       parent: account_management_billing
-      weight: 1408
+      weight: 1508
     - name: APM
       identifier: account_management_billing_apm_tracing_profiler
       url: account_management/billing/apm_tracing_profiler/
       parent: account_management_billing
-      weight: 1409
+      weight: 1509
     - name: Serverless
       identifier: account_management_billing_serverless
       url: account_management/billing/serverless/
       parent: account_management_billing
-      weight: 1410
+      weight: 1510
     - name: Real User Monitoring
       identifier: account_management_billing_rum
       url: account_management/billing/rum/
       parent: account_management_billing
-      weight: 1411
+      weight: 1511
     - name: CI Visibility
       identifier: account_management_billing_ci_visibility
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
-      weight: 1412
+      weight: 1512
     - name: Incident Response
       identifier: account_management_billing_incident_response
       url: account_management/billing/incident_response/
       parent: account_management_billing
-      weight: 1413
+      weight: 1513
     - name: AWS Integration
       identifier: account_management_billing_aws
       url: account_management/billing/aws/
       parent: account_management_billing
-      weight: 1414
+      weight: 1514
     - name: Azure Integration
       identifier: account_management_billing_azure
       url: account_management/billing/azure/
       parent: account_management_billing
-      weight: 1415
+      weight: 1515
     - name: Google Cloud Integration
       identifier: account_management_billing_google_cloud
       url: account_management/billing/google_cloud/
       parent: account_management_billing
-      weight: 1416
+      weight: 1516
     - name: OCI Integration
       identifier: account_management_billing_oci
       url: account_management/billing/oci/
       parent: account_management_billing
-      weight: 1417
+      weight: 1517
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1418
+      weight: 1518
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1419
+      weight: 1519
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1420
+      weight: 1520
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 15
+      weight: 16
     - name: Organization Groups
       identifier: account_management_organization_groups
       url: account_management/organization_groups/
@@ -9711,12 +9756,12 @@ menu:
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 16
+      weight: 17
     - name: Cloud-based Authentication
       identifier: account_management_cloud_auth
       url: account_management/cloud_provider_authentication/
       parent: account_management
-      weight: 17
+      weight: 18
     - name: Data Security
       url: data_security/
       pre: security-lock

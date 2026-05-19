@@ -67,7 +67,7 @@ For example, to see the documentation for the Datadog for Government sites, sele
 
 ### US1-FED
 
-The Datadog for Government site (US1-FED) is Datadog's FedRAMP Moderate Authorized site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
+The Datadog for Government site (US1-FED) is Datadog's FedRAMP High Certified site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
 ### US2-FED
 

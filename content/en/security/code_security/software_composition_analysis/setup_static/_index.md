@@ -156,7 +156,7 @@ This functionality is supported only when using the [Datadog SBOM Generator][1] 
 
 Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
 
-{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Supported advisories" level="h4" expanded=true id="supported-advisories" %}}
 Static reachability analysis is available for the following advisories:
 - [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
 - [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
