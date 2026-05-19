@@ -44,7 +44,14 @@ sbom:
     enabled: true
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
     analyzers: ["os", "languages"]
+  # Enables runtime package prioritization (Preview, Agent 7.78+)
+  # Note: activates Workload Protection — may incur additional costs. See Runtime Package Prioritization section below.
+  enrichment:
+    usage:
+      enabled: true
 {{< /code-block >}}
+
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Agent **7.78.0 or later**. It activates [Workload Protection][7] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -105,7 +112,7 @@ sbom:
   enabled: true
   container_image:
     enabled: true
-  # Enables runtime package tracking (Preview, Agent 7.78+)
+  # Enables runtime package prioritization (Preview, Agent 7.78+)
   enrichment:
     usage:
       enabled: true

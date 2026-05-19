@@ -56,6 +56,12 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
             enabled: true
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
+
+          # Enables runtime package prioritization (Preview, Agent 7.78+)
+          # Note: activates Workload Protection — may incur additional costs. See Runtime Package Prioritization section below.
+          enrichment:
+            usage:
+              enabled: true
     ```
 
 2. Apply the changes and restart the Agent.
@@ -91,6 +97,12 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           enabled: true
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
+
+        # Enables runtime package prioritization (Preview, Agent 7.78+)
+        # Note: activates Workload Protection — may incur additional costs. See Runtime Package Prioritization section below.
+        enrichment:
+          usage:
+            enabled: true
     ```
 
 2. Restart the Agent.
@@ -98,6 +110,8 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 {{% /tab %}}
 
 {{< /tabs >}}
+
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Agent **7.78.0 or later**. It activates [Workload Protection][8] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -154,7 +168,7 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package tracking (Preview, Agent 7.78+)
+      # Enables runtime package prioritization (Preview, Agent 7.78+)
       enrichment:
         usage:
           enabled: true
@@ -173,7 +187,7 @@ datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package tracking (Preview, Agent 7.78+)
+    # Enables runtime package prioritization (Preview, Agent 7.78+)
     enrichment:
       usage:
         enabled: true
