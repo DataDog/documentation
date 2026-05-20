@@ -1,6 +1,7 @@
 
 ---
 title: Agent-Side Filtering for Custom Metrics
+description: "Filter out unused custom metrics at the Datadog Agent to reduce ingested and indexed metric volume."
 aliases:
 - /metrics/guide/agent-filtering-for-dogstatsd-custom-metrics/
 further_reading:

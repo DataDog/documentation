@@ -1,5 +1,6 @@
 ---
 title: Events Generated from Rate Limited Metrics
+description: "Identify rate-limited metrics and address the high-cardinality tags that trigger metric rate limits."
 private: true
 further_reading:
 - link: "/metrics/custom_metrics/"

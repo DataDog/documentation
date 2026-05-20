@@ -1,5 +1,6 @@
 ---
 title: Dynamic Metric Quotas
+description: "Automate custom metric quotas with Workflow Automation to control account, team, and metric-level usage."
 further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"

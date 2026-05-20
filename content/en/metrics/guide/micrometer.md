@@ -1,5 +1,6 @@
 ---
 title: Send metrics with Micrometer
+description: "Send application metrics from Micrometer to Datadog using OpenTelemetry, Prometheus, or OpenMetrics."
 further_reading:
 - link: "https://docs.micrometer.io/micrometer/reference/implementations/otlp.html"
   tag: "External Site"
