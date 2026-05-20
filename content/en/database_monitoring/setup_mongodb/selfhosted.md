@@ -195,5 +195,15 @@ Refer to the [MongoDB integration documentation][2] for a comprehensive list of 
 
 {{% dbm-mongodb-agent-data-collected %}}
 
+### Query Metrics
+
+**Note**: Query metrics for MongoDB require Datadog Agent v7.78 or later.
+
+To collect query metrics, ensure you have granted the required permissions as described in the [Grant the Agent access](#grant-the-agent-access-to-your-mongodb-instances) section. The Agent automatically collects query metrics once properly configured.
+
+Query metrics provide insights into the performance of your MongoDB operations. For more information, see [Query Metrics][3].
+
+[3]: /database_monitoring/query_metrics/
+
 [1]: /account_management/api-app-keys/
 [2]: /integrations/mongo/?tab=standalone#metrics
