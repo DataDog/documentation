@@ -24,7 +24,24 @@ Required dict keys:
 {{ $anchorStr := $menuChild.Name }}
 {{ $endpointSlug := $anchorStr | anchorize }}
 {{ $versions := $menuChild.Params.versions | default (slice "v2") }}
+{{ $versionCount := len $versions }}
+
+{{/* Pick the version the per-endpoint page treats as the active tab so the summary
+describes the current version. With versions: [v1, v2] and v2 stable, the menu lists
+v1 first but the active tab is v2; mirror that here using endpoint-visibility. */}}
 {{ $primaryVersion := index $versions 0 }}
+{{ range $versionNum := $versions }}
+  {{ $vSpec := cond (eq $versionNum "v1") $d $d2 }}
+  {{ $vRegions := partial "api/regions.html" (dict "servers" $vSpec.servers) }}
+  {{ $vEndpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "spec" $vSpec "generalRegions" $vRegions) }}
+  {{ if $vEndpoint }}
+    {{ $vVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $vEndpoint) }}
+    {{ if $vVisibility.isVisibleVersion }}
+      {{ $primaryVersion = $versionNum }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{ $adat := cond (eq $primaryVersion "v1") $d $d2 }}
 {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
 {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions) }}
@@ -35,9 +52,9 @@ Required dict keys:
 
   <div class="api-endpoint-summary mb-4">
     <h2 class="mb-2 api-task-description" id="{{ $endpointSlug }}">
-      <a class="js-collapse-trigger" href="{{ $menuChild.URL }}">{{- $anchorStr -}}</a>
-      {{ if $isDeprecated }}<span class="badge bg-warning text-dark ms-2">deprecated</span>{{ end }}
-      {{ if $isUnstable }}<span class="badge bg-info text-dark ms-2">preview</span>{{ end }}
+      <a class="js-collapse-trigger" href="{{ $menuChild.URL }}">{{- $anchorStr }} &rarr;</a>
+      {{ if $isDeprecated }}<span class="badge bg-warning text-dark ms-2 fs-5 align-middle px-1" style="padding-top: 0; padding-bottom: 2px">deprecated</span>{{ end }}
+      {{ if $isUnstable }}<span class="badge bg-info text-white ms-2 fs-5 align-middle px-1" style="padding-top: 0; padding-bottom: 2px">preview</span>{{ end }}
     </h2>
     <p class="mb-1 api-url-info">
       <span style="padding: 3px" class="font-semibold api-method text-api-method text-api-{{ $endpoint.actionType }} bg-bg-api-{{ $endpoint.actionType }}">{{ $endpoint.actionType | upper }}</span>&nbsp;
@@ -50,6 +67,5 @@ Required dict keys:
         {{- end -}}
       {{- end -}}
     </p>
-    <p class="mb-0"><a href="{{ $menuChild.URL }}">See full reference &rarr;</a></p>
   </div>
 {{ end }}
