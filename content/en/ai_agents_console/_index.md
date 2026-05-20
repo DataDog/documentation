@@ -30,7 +30,7 @@ In addition, Agent Console includes a dedicated tab for [Bits AI agents](#bits-a
 
 ## Coding Agents
 
-The {{< ui >}}Coding Agents{{< /ui >}} tab is scoped to coding agents. By default, the view aggregates all coding agents and can be filtered to a single agent.
+The {{< ui >}}Coding Agents{{< /ui >}} tab gives you a top-level view of coding agent activity across your organization. By default, the view aggregates all coding agents and can be filtered to a single agent.
 
 ### Agent findings
 
