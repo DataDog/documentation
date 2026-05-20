@@ -100,7 +100,7 @@ Even long-lived keys should be rotated periodically. A practical cadence:
 
 - **API keys:** Rotate quarterly or immediately if a compromise is suspected.
 - **Application keys:** Rotate quarterly for production pipelines. Rotate immediately if a compromise is suspected or the creating user leaves the organization.
-- **PATs and SATs:** No rotation needed if expiration is configured appropriately (these expire automatically, though SATs have the option to be long-lived).
+- **PATs and SATs:** No rotation needed. PATs expire automatically. If you configure SATs to be long-lived, quarterly rotation is still recommended.
 
 ### Manage keys as code
 
