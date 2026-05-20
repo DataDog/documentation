@@ -260,7 +260,7 @@ Datastore entities can be:
 
 ### Example YAML definitions
 
-{{% collapse-content title="YAML definition for an inferred datastore" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="YAML definition for an inferred datastore" level="h4" expanded=false id="yaml-inferred-datastore" %}}
 
 This example shows a `kind:datastore` definition for a database automatically detected by APM.
 
@@ -295,7 +295,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="YAML definition for a manually defined datastore" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="YAML definition for a manually defined datastore" level="h4" expanded=false id="yaml-manual-datastore" %}}
 
 This example shows a `kind:datastore` definition for a manually declared datastore.
 

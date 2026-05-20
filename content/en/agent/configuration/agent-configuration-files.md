@@ -20,7 +20,7 @@ The location of the Agent configuration file differs depending on the operating 
 |:-------------------------------------|:-------------------------------------|
 | AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| macOS                                | `~/.datadog-agent/datadog.yaml`      |
+| macOS                                | `/opt/datadog-agent/etc/datadog.yaml`      |
 | Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
 
 See the [sample `config_template.yaml` file][1] for all available configuration options.
@@ -36,7 +36,7 @@ Configuration files for Agent checks and integrations are stored in the `conf.d`
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |
 | Fedora                               | `/etc/datadog-agent/conf.d/`   |
-| macOS                                | `~/.datadog-agent/conf.d/`     |
+| macOS                                | `/opt/datadog-agent/etc/conf.d/`     |
 | RedHat                               | `/etc/datadog-agent/conf.d/`   |
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |

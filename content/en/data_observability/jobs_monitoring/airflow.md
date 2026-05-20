@@ -139,6 +139,10 @@ In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment variables set previously for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][10].
+
+[10]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
+
 {{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
@@ -209,6 +213,9 @@ Ensure your Execution role configured for your Amazon MWAA Environment has the r
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3] for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][12].
+
+[12]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
 
 {{% /tab %}}
 
@@ -272,6 +279,11 @@ In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list
 Check that the OpenLineage environment variables are correctly set on the Astronomer deployment.
 
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
+
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][12].
+
+[12]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
+
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
 <div class="alert alert-danger">
@@ -336,6 +348,10 @@ In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list
 ### Troubleshooting
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the {{< ui >}}Environment variables{{< /ui >}} tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
+
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][8].
+
+[8]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
 
 {{% /tab %}}
 {{< /tabs >}}

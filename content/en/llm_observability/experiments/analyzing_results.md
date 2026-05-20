@@ -11,14 +11,14 @@ After running an Experiment, you can analyze the results to understand performan
 
 On the Experiments page, click on an experiment to see its details. 
 
-The **Summary** section contains the evaluations, summary evaluations, and metrics that were logged during the execution of your Experiment.
+The {{< ui >}}Summary{{< /ui >}} section contains the evaluations, summary evaluations, and metrics that were logged during the execution of your Experiment.
 
 Each value is aggregated based on its type: 
 - **Boolean**: Aggregated as the ratio of `True` over all the values recorded.
 - **Score**: Aggregated as average over all values recorded.
 - **Categorical**: Aggregated as the mode (most frequent value in the distribution).
 
-The **Records** section contains traces related to the execution of your task on the dataset inputs. Each trace contains the list of spans showing the flow of information through your agent. 
+The {{< ui >}}Records{{< /ui >}} section contains traces related to the execution of your task on the dataset inputs. Each trace contains the list of spans showing the flow of information through your agent. 
 
 You can use the facets (on the left-hand side) to filter the records based on their evaluation results to uncover patterns.
 
@@ -30,13 +30,13 @@ You can customize the experiment results table to surface the fields that matter
 
 Use the column picker to toggle columns on or off and drag to reorder them. By default, raw JSON blob columns (Input, Output, Expected Output) are hidden to keep the table scannable. You can toggle them back on at any time.
 
-The table includes a **Record ID** column that shows which dataset record each experiment run was executed against. For experiments with multiple runs per record, expand a record to see all runs underneath.
+The table includes a {{< ui >}}Record ID{{< /ui >}} column that shows which dataset record each experiment run was executed against. For experiments with multiple runs per record, expand a record to see all runs underneath.
 
 #### Custom columns
 
 Extract specific fields from your top-level experiment span, such as an input key, output key, or metadata key, and display them as dedicated table columns. This lets you compare key properties across records at a glance.
 
-To add a custom column, type a field path in the **Add Column** input at the top of the table:
+To add a custom column, type a field path in the {{< ui >}}Add Column{{< /ui >}} input at the top of the table:
 
 | Source          | Path format                    | Example                          |
 | --------------- | ------------------------------ | -------------------------------- |
@@ -54,16 +54,16 @@ When viewing the root span in the span detail side panel, you can act on fields 
 
 The following options are available on JSON fields (Input, Output, Expected Output, Metadata):
 
-- **Copy key path**: Copies the field's full path (for example, `@meta.input.user_query`) so you can paste it into the custom column input, search bar, or a dashboard widget query.
-- **Add column**: Adds the field as a custom column in the results table in one click.
-- **Filter by / Exclude**: Adds the field's key-value pair to the search query to narrow down or exclude matching records. Available on leaf values (strings, numbers, booleans) only.
+- {{< ui >}}Copy key path{{< /ui >}}: Copies the field's full path (for example, `@meta.input.user_query`) so you can paste it into the custom column input, search bar, or a dashboard widget query.
+- {{< ui >}}Add column{{< /ui >}}: Adds the field as a custom column in the results table in one click.
+- {{< ui >}}Filter by / Exclude{{< /ui >}}: Adds the field's key-value pair to the search query to narrow down or exclude matching records. Available on leaf values (strings, numbers, booleans) only.
 
 The following options are available on tags:
 
-- **Copy key**: Copies the tag key (for example, `env`).
-- **Copy to clipboard**: Copies the full tag including its value (for example, `env:prod`).
-- **Add column**: Adds the tag key as a custom column in the results table.
-- **Filter by / Exclude**: Adds the tag's key-value pair to the search query.
+- {{< ui >}}Copy key{{< /ui >}}: Copies the tag key (for example, `env`).
+- {{< ui >}}Copy to clipboard{{< /ui >}}: Copies the full tag including its value (for example, `env:prod`).
+- {{< ui >}}Add column{{< /ui >}}: Adds the tag key as a custom column in the results table.
+- {{< ui >}}Filter by / Exclude{{< /ui >}}: Adds the tag's key-value pair to the search query.
 
 <div class="alert alert-info">These actions are available on the root span of a trace.</div>
 
@@ -180,9 +180,9 @@ Datadog suggests that you:
 - Update `ddtrace-py` version >= 4.1.0
 
 
-To build a widget using LLM Experiments data, use `LLM Observability > Experiments` as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
+To build a widget using LLM Experiments data, use {{< ui >}}LLM Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
 
-For record level data aggregation, use `Traces`; otherwise, use `All Spans`.
+For record level data aggregation, use {{< ui >}}Traces{{< /ui >}}; otherwise, use {{< ui >}}All Spans{{< /ui >}}.
 
 Group or filter by `@experiment.status` to compare metrics across running or completed experiments.
 
