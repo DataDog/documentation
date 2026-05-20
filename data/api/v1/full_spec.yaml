@@ -22735,6 +22735,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current date for the given org.
           format: int64
@@ -22765,6 +22773,14 @@ components:
           type: integer
         cspm_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         custom_ts_avg:
@@ -23728,6 +23744,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current date for the given org.
           format: int64
@@ -23758,6 +23782,14 @@ components:
           type: integer
         cspm_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         custom_historical_ts_avg:
@@ -24731,6 +24763,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_agg_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current month for all organizations.
           format: int64
@@ -24761,6 +24801,14 @@ components:
           type: integer
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_agg_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         custom_historical_ts_sum:
