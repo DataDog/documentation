@@ -1,6 +1,6 @@
 ---
 title: AI Impact
-description: "Measure the impact of AI coding assistants on your software delivery performance with DORA Metrics."
+description: "Measure the impact of AI coding assistants on your software delivery performance."
 aliases:
 - /dora_metrics/ai-impact/
 - /dora_metrics/ai_impact/

@@ -59,7 +59,7 @@ To start configuring data sources to send deployment events to Datadog, see the 
 
 ## Analyze DORA Metrics
 
-After you've set up the data sources for your deployment and failure events, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}DORA Metrics{{< /ui >}}][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
+After you've set up the data sources for your deployment and failure events, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}DORA Metrics{{< /ui >}}][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
 
 {{< img src="delivery_performance/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
