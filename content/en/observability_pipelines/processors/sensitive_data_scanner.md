@@ -19,6 +19,8 @@ The Sensitive Data Scanner processor scans logs to detect and redact or hash sen
 
 You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
 
+See [Best practices to optimize performance](#best-practices-to-optimize-performance) for configuration recommendations.
+
 ## Set up the processor in the UI
 
 To set up the processor:
@@ -88,6 +90,17 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Delete a rule
+
+To delete a rule in the Sensitive Data Scanner:
+
+1. Navigate to Observability Pipelines.
+1. Select your pipeline.
+1. Click the Sensitive Data Scanner processor to expand it.
+1. Click **Manage Scanning Rules**.
+1. Select the rule you want to delete.
+1. Click **Delete**.
 
 ### Path notation example
 
@@ -270,6 +283,42 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
   }
 }
 {{< /code-block >}}
+
+## Best Practices to optimize performance
+
+The Sensitive Data Scanner processor is CPU intensive, which means more resources are needed when there are more fields and data to scan. The following are best practices to optimize performance.
+
+### Only enable rules you need
+
+Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data processor to view how many matches each rules has had over the past 24 hours.
+
+1. Navigate to Observability Pipelines.
+1. Select your pipeline.
+1. Click the Sensitive Data Scanner processor to exanpd it.
+1. Click **View Scanning rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
+
+See [Delete a rule](#delete-a-rule) if you want to delete an unused rule.
+
+### Only scan the events and fields that need to be scanned for sensitive data
+
+If you know the types of events you want to scan, define a processor query that only sends the events you want to the processor.
+
+Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the **Define Rules and Target** section in [Set up the processor](#set-up-the-processor-in-the-ui).
+
+### Evaluate and benchmark performance optimizations
+
+Use the `pipelines.component_latency_seconds` metric to:
+
+- Benchmark processor performance when you add a rule
+- Evaluate performance after making optimization changes, such as reducing the number of fields being scanned and removing unused rules.
+
+To view the `pipelines.component_latency_seconds` metric:
+
+1. Navigate to [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
+1. In the metric field, enter `pipelines.component_latency_seconds`.
+1. In the **from** field, enter the tags: `component_type:sensitive_data_scanner` and `component_id:<component_id>`, where `<component_id>` is the ID for your Sensitive Data Scanner processor.
+
+**Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metrics. see [Enabling advanced query functionality](/metrics/distributions/#enabling-advanced-query-functionality) for instructions.
 
 ## Further reading
 
