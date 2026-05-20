@@ -44,7 +44,6 @@ rshell enforces the following constraints by design:
 | `tail` | Print the last N lines or bytes of a file (default: 10 lines); supports `+N` offset mode; `-f` (follow) is blocked |
 | `find` | Search for files by name, type, size, permissions, and modification time; `-delete` and `-regex` are blocked |
 | `strings` | Print printable character sequences in files (default minimum length: 4) |
-| `du` | Estimate file space usage; recursion capped at depth 256 |
 
 ### Text processing
 
@@ -57,8 +56,6 @@ rshell enforces the following constraints by design:
 | `sort` | Sort lines; supports numeric, human-readable, and reverse sorting; `-o` (output to file) is blocked |
 | `uniq` | Filter or report duplicate lines |
 | `wc` | Count lines, words, bytes, characters, or max line length |
-| `awk` | Pattern scanning and processing language |
-| `xargs` | Build and execute commands from stdin; only invokes other registered rshell builtins |
 | `printf` | Format and print data to stdout |
 
 ### Process and system inspection
@@ -67,7 +64,6 @@ rshell enforces the following constraints by design:
 |---------|-------------|
 | `ps` | Report process status; `-e`/`-A` shows all processes; `-f` adds UID/PPID/start time |
 | `uname` | Print system information (Linux only) |
-| `df` | Report disk space usage per filesystem (Linux and macOS only) |
 
 ### Network diagnostics (read-only)
 
@@ -83,9 +79,6 @@ rshell enforces the following constraints by design:
 | Command | Description |
 |---------|-------------|
 | `echo` | Write arguments to stdout |
-| `pwd` | Print current working directory |
-| `cd` | Change working directory; targets must be within `AllowedPaths` |
-| `read` | Read input from stdin and assign to variables |
 | `test` / `[ ]` | Evaluate conditional expressions (file tests, string and integer comparison, logical operators) |
 | `help` | Display supported features and available commands |
 | `true` / `false` | Return exit code 0 or 1 |
@@ -96,8 +89,6 @@ rshell enforces the following constraints by design:
 ### Control flow
 
 - `for VAR in WORDS; do CMDS; done`
-- `while CONDITION; do CMDS; done`
-- `until CONDITION; do CMDS; done`
 - `if` / `elif` / `else`
 - `break` and `continue` for loop control
 - `&&` and `||` short-circuit lists
