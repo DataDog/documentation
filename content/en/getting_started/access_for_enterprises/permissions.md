@@ -26,7 +26,7 @@ Managed roles are maintained by Datadog. Their permissions are automatically upd
 
 ## Custom roles
 
-[Custom roles][3] let you define access tiers that reflect how your organization actually works. For most enterprises, the three managed roles are a starting point, not the final answer.
+[Custom roles][3] let you define access tiers that reflect how your organization actually works. The three managed roles are a starting point, not the final answer.
 
 ### When to create custom roles
 

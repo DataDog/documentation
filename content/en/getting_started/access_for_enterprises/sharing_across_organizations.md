@@ -73,7 +73,7 @@ If your enterprise manages more than a handful of orgs and struggles with config
 - **Use Cross-Org Visibility for centralized dashboards.** If your leadership or operations team needs a unified view across orgs, Cross-Org Visibility is the right approach. Don't give users accounts in orgs they don't need to access directly.
 - **Be deliberate about public sharing.** Shared dashboards with public URLs are powerful but carry risk. Review which dashboards are shared publicly on a regular basis, and revoke URLs that are no longer needed.
 - **Use authenticated sharing for sensitive dashboards.** If the dashboard contains data that should not be publicly accessible, require SAML authentication.
-- **Plan for cross-org governance.** If you manage many orgs, consider Organization Groups to reduce configuration drift and centralize policy management.
+- **Plan for cross-org governance.** If you manage many orgs, use Organization Groups to reduce configuration drift and centralize policy management.
 
 ## Further reading
 

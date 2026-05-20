@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-With your roles and teams in place, the most immediate access control needed for most organizations is protecting *assets*: the Dashboards, Monitors, Notebooks, Service Level Objectives, integrations, Datadog Agents, and other objects that teams create and depend on for their daily work.
+With your roles and teams in place, the most immediate access control needed is protecting *assets*: the Dashboards, Monitors, Notebooks, Service Level Objectives, integrations, Datadog Agents, and other objects that teams create and depend on for their daily work.
 
 The most common need is not to *hide* assets, but to prevent the wrong person from accidentally *editing* them. In large organizations, a single Monitor misconfiguration can affect alerting for an entire team. [Granular access controls][1] let you restrict who can edit or view individual assets.
 

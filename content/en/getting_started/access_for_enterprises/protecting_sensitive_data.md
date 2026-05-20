@@ -24,7 +24,7 @@ This section helps you identify your data sensitivity patterns and choose the ri
 
 ## Identifying your data sensitivity patterns
 
-For sensitive data restrictions, there are three common patterns. Most enterprises use one or a combination of these three.
+For sensitive data restrictions, there are three common patterns. You can use one or a combination of the three.
 
 ### Pattern 1: Based on the type of data
 
@@ -62,11 +62,11 @@ Use **standard Data Access Control** to apply restrictions progressively: all da
 
 For organizations with hard regulatory requirements (for example, defense) or organizations that collarborate with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
 
-Strict Mode is the exception, not the rule. Consider Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
+Strict Mode is the exception, not the rule. Use Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
 
 ## Recommendations
 
-- **Identify which pattern applies to you** before creating datasets. Most organizations use Pattern 2 (service-based restrictions) as their primary model, with Pattern 1 (type-based restrictions through roles) as a supplement.
+- **Identify which pattern applies to you** before creating datasets. Many organizations use Pattern 2 (service-based restrictions) as their primary model, with Pattern 1 (type-based restrictions through roles) as a supplement.
 - **Use tags consistently.** Data Access Control restrictions are only as good as your tagging. Make sure that services, infrastructure, and data classifications are tagged consistently at ingestion. Work with your tagging strategy (see the [Administrator's Guide][5]) to help ensure the right tags are present.
 - **Start with your most sensitive data.** Don't try to create datasets for everything at once. Identify the top 3-5 most sensitive services or data classes and restrict those first.
 - **Use standard Data Access Control unless you have a regulatory reason for Strict Mode.** Default-deny creates significant operational overhead and should only be used when the regulatory environment demands it.

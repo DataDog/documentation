@@ -25,7 +25,7 @@ These four implementation templates show what a fully implemented access strateg
 
 ## Choose your template
 
-Most enterprises are a blend of these archetypes. Use the following questions to identify which patterns are most relevant to you:
+Use the following questions to identify which patterns are most relevant to you:
 
 | Question | If yes, look at... |
 | :---- | :---- |

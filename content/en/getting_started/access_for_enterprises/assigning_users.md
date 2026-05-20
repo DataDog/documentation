@@ -37,9 +37,9 @@ In Datadog, users can be assigned one or more roles and be added to one or more 
 - Who is able to see sensitive Logs that are related to that Team's work
 - Who is able to see any data related to a sensitive service owned by that Team
 
-## How Roles and Teams work together
+## How to use Roles and Teams together
 
-A practical model for most enterprises:
+Best practices for Roles and Teams include the following:
 
 - Use **Roles** to define broad permission tiers (what a user *can do* across the platform).
 - Use **Teams** to define ownership boundaries (what resources and data a user *is responsible for*).
