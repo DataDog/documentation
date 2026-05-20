@@ -1,5 +1,6 @@
 ---
 title: Azure Native Integration Setup & Reference
+description: "Set up and manage the Datadog Azure native integration through the Azure portal Datadog Monitor resource."
 aliases:
 - /integrations/guide/azure-portal/
 - /integrations/guide/azure-native-programmatic-management/
