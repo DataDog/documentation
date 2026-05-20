@@ -61,7 +61,7 @@ After configuring a rule, you can test it to verify the configuration before sav
 
 ## Identify automatically created tickets
 
-{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Case Management ticket popup showing case VV-3722 was created by an Automation Rule with a lightning bolt indicator, and a link to view all findings with tickets from the same rule" style="width:100%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Case Management ticket popup showing case VV-3722 was created by an Automation Rule with a lightning bolt indicator, and a link to view all findings with tickets from the same rule" style="width:60%;" >}}
 
 Tickets created by a rule are marked with a lightning bolt indicator in the findings side panel and explorer views. Hovering over the indicator shows the automation rule responsible for the ticket and provides a link to the rule.
 

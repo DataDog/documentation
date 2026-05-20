@@ -7288,6 +7288,11 @@ menu:
       parent: automation_pipelines
       identifier: automation_pipelines_due_date
       weight: 10003
+    - name: Create Tickets
+      url: security/automation_pipelines/create_ticket
+      parent: automation_pipelines
+      identifier: automation_pipelines_create_ticket
+      weight: 10004
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
