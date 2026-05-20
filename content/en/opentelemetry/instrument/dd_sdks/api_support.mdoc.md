@@ -881,6 +881,12 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
 {% /if %}
 
+{% if equals($prog_lang, "ruby") %}
+{% alert level="warning" %}
+The Datadog SDK does not capture Ruby's built-in `Logger`. You must emit logs with the OpenTelemetry Logs API through `OpenTelemetry.logger_provider` and `on_emit`.
+{% /alert %}
+{% /if %}
+
 ## Prerequisites
 
 {% if equals($prog_lang, "dot_net") %}
@@ -920,8 +926,6 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 - **OpenTelemetry OTLP Logs Exporter**: `opentelemetry-exporter-otlp-logs` version 0.1 or later.
 
 {% alert level="warning" %}
-The Datadog SDK does not capture Ruby's built-in `Logger`. You must emit logs with the OpenTelemetry Logs API through `OpenTelemetry.logger_provider` and `on_emit`.
-
 If you run Ruby 3.1 or 3.2, pin `opentelemetry-logs-sdk` to `~> 0.4`. Version 0.5.0 and later require Ruby 3.3 or later.
 {% /alert %}
 {% /if %}
@@ -1064,7 +1068,7 @@ Follow these steps to enable OTel Logs API support in your application.
 1. Add the Datadog SDK and OTel gems:
     ```ruby
     # Add to your Gemfile
-    gem 'datadog', '~> 2.34.0'
+    gem 'datadog'
     gem 'opentelemetry-logs-sdk', '>= 0.1'
     gem 'opentelemetry-exporter-otlp-logs', '>= 0.1'
     ```
