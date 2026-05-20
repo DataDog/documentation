@@ -32,7 +32,7 @@ The quick start process configures your Lambda functions on the fly. To instrume
 Use the [Datadog MCP server][9] to set up monitoring for your AWS Lambda containers with AI assistance. After you connect, try a prompt like:
 
 ```shell
-Instrument my AWS Lambda functions with Datadog
+Help me monitor my AWS Lambda functions with Datadog
 ```
 
 ## Instrumentation instructions
