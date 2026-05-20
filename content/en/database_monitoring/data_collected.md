@@ -20,6 +20,17 @@ The metrics used for Database Monitoring views are, primarily:
 - **SQL Server**: `sqlserver.queries.*`
 - **Oracle**: `oracle.queries.*`
 
+## MySQL Wait Events
+
+When Database Monitoring is enabled for MySQL, the Agent collects global wait event metrics that provide insight into resource contention and I/O bottlenecks:
+
+- `mysql.performance.wait_event.count` - Occurrence count per wait event type
+- `mysql.performance.wait_event.time` - Total accumulated wait time per event type
+- `mysql.performance.wait_event.avg_time` - Average wait time per event occurrence
+- `mysql.performance.wait_event.max_time` - Maximum wait time for an event occurrence
+
+These metrics are tagged by `wait_event` (the MySQL performance_schema event name) and are collected from `performance_schema.events_waits_summary_global_by_event_name`. The top 200 wait events by total wait time are collected.
+
 ## Normalized queries
 
 In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
