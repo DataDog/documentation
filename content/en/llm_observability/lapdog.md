@@ -82,7 +82,7 @@ Run any command with `ddtrace` auto-instrumentation pointed at the local agent. 
 
 While a session is running, open [lapdog.datadoghq.com](https://lapdog.datadoghq.com). The dashboard reads directly from your local agent on `localhost:8126`; no login or Datadog account is needed.
 
-If you've changed the local port, override it from the **Collecting sessions** badge in the dashboard header.
+If you've changed the local port, override it from the {{< ui >}}Collecting sessions{{< /ui >}} badge in the dashboard header.
 
 ## Forward events to Datadog
 
