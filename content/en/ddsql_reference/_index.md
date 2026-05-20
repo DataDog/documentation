@@ -1201,28 +1201,30 @@ FROM aws.ec2_instance
 
 ## Writing efficient queries
 
-Queries that read large amounts of data or run heavy computations can be slow or return resource errors. The patterns below are the most common causes—each with a rewrite that usually resolves the issue.
+Queries that read large amounts of data or run heavy computations can be slow or return resource errors. The patterns below are the most common causes, each with a rewrite that usually resolves the issue.
 
-The shortest summary: **filter early, aggregate early.** Work pushed into the query filter or a `GROUP BY` summary is computed against the index; work left to a `JOIN` or a wide `LIMIT` is held in memory.
+**Filter early and aggregate early**. Computations in the query filter or a `GROUP BY` summary run against the index. Computations in a `JOIN` or a wide `LIMIT` are held in memory.
 
 ### Checklist
 
-Walk through this before re-running a slow query:
+Before re-running a slow query, ask the following questions:
 
 - Does the query filter include a selective token (not a wildcard like `service:*` or `env:*`)?
 - Is the time range as small as it can be for the question?
 - Are you selecting only the columns you actually use?
 - If you have a large `LIMIT`, could a `GROUP BY` summary work instead?
-- If you have many JOINs, could it be rewritten as a single scan?
+- If you have many `JOIN` clauses, could the query be rewritten as a single scan?
 - When joining across sources, is each side filtered?
-- Is the JOIN key high-cardinality (user / request / trace ID)?
+- Is the `JOIN` key high-cardinality (user/ request/trace ID)?
 - Is the same regex being run more than once per row?
 
 ### Filtering
 
 #### Filter on the data source
 
-Always include a selective token in your data source query—`service:`, `host:`, `env:`, or any `@attribute:value`. Wildcard filters such as `service:*` or `env:*` match every event, so they don't actually narrow the data—treat them as equivalent to leaving the filter blank.
+Always include a selective token in your data source query, such as `service:`, `host:`, `env:`, or any `@attribute:value`.
+
+Wildcard filters such as `service:*` or `env:*` match every event, so they don't actually narrow the data. Treat these filters as equivalent to leaving the filter blank.
 
 **Before**
 
@@ -1274,7 +1276,7 @@ ORDER BY 1;
 
 #### Project only the columns you use
 
-Each column in your query is fetched from storage. Trim the column list to what you use downstream—wide attributes like the raw `message` or full HTTP headers can slow down the query significantly.
+Each column in your query is fetched from storage. Trim the column list to what you use downstream. Wide attributes like the raw `message` or full HTTP headers can slow down the query significantly.
 
 **Before**
 
@@ -1296,7 +1298,7 @@ WHERE service = 'checkout-api';
 
 #### Return summaries, not raw rows
 
-When your goal is to understand the data—top-N, counts per category, distributions—a `GROUP BY` returns a focused result that is faster to compute and easier to work with than scanning millions of raw rows.
+When your goal is to understand the data (such as top-N, counts per category, or distributions), a `GROUP BY` returns a focused result that is faster to compute and easier to work with than scanning millions of raw rows.
 
 **Before**
 
@@ -1317,11 +1319,16 @@ ORDER BY hits DESC
 LIMIT 100;
 ```
 
-**Note:** Aggregating in SQL with `GROUP BY` is more efficient than fetching raw rows and aggregating in a downstream step—the engine filters and summarizes data at the source.
+**Note:** Aggregating in SQL with `GROUP BY` is more efficient than fetching raw rows and aggregating in a downstream step. The engine filters and summarizes data at the source.
 
 #### Narrow the scan before aggregating on a high-cardinality column
 
-`SELECT DISTINCT` or `GROUP BY` on a high-cardinality column (an email, an IP, a request ID) keeps one entry per distinct value across workers, which grows unboundedly without a tight filter. Narrow the data source filter first so the aggregation runs over fewer rows. For wide cardinalities, pre-aggregate to one row per time bucket and key, then count distinct across buckets. `approx_distinct(...)` is faster than exact `count(distinct ...)`.
+When working with high-cardinality columns (such as emails, IPs, or request IDs):
+
+- Use `SELECT DISTINCT` or `GROUP BY` to return one entry per distinct value across workers. Without a tight filter, the result set grows without bound.
+- Narrow the data source filter first so the aggregation runs over fewer rows.
+- For wide cardinalities, pre-aggregate to one row per time bucket and key, then count distinct across buckets.
+- Use `approx_distinct(...)` instead of exact `count(distinct ...)` for better performance.
 
 *Goal: find the distinct user emails in the checkout service's logs over the last 7 days.*
 
@@ -1353,7 +1360,7 @@ FROM (
 
 Joining one source to itself many times to correlate different events is one of the most common causes of slow queries. Most self-joins can be rewritten as a single scan with `CASE` expressions, window functions, or `GROUP BY ... HAVING`.
 
-**Before—4 self-joins**
+**Before: 4 self-joins**
 
 ```sql
 WITH a AS (SELECT user_id FROM logs WHERE service='checkout-api'),
@@ -1366,7 +1373,7 @@ FROM a JOIN b USING (user_id)
        JOIN d USING (user_id);
 ```
 
-**After—single scan**
+**After: single scan**
 
 ```sql
 SELECT user_id
