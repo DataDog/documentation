@@ -38,10 +38,13 @@ If using Kubernetes, the following additional requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Setting up GPU Monitoring 
+If using Google Kubernetes Engine, Container-Optimized OS nodes are _not_ supported due to limitations in the kernel and permission system.
+
+## Setting up GPU Monitoring
+
 Configuring GPU Monitoring does not require DCGM. You need to opt-in to the collection of GPU Monitoring metrics at the Agent. Setup depends on your environment: non-Kubernetes/uniform, Kubernetes cluster, or mixed cluster.
 
-After you've enabled the collection of GPU Monitoring metrics, you can opt-in to enable several integrations for more advanced insights: 
+After you've enabled the collection of GPU Monitoring metrics, you can opt-in to enable several integrations for more advanced insights:
 - For cloud costs and cloud instance-type information: enable the [AWS][9], [Google Cloud][10], [Azure][11], or [Oracle][12] cloud integrations in your Datadog UI.
 - For process-level insights, set up Datadog's [Live Processes][13].
 
