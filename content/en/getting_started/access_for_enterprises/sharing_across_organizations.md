@@ -8,7 +8,7 @@ further_reading:
 - link: "/dashboards/sharing/"
   tag: "Documentation"
   text: "Dashboard Sharing"
-- link: "/dashboards/sharing/#embed-a-dashboard"
+- link: "/dashboards/sharing/shared_dashboards/#embedded-shared-dashboards"
   tag: "Documentation"
   text: "Dashboard Embedding"
 ---
