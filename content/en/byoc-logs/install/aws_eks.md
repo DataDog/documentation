@@ -97,12 +97,12 @@ Required authorized actions:
 }
 ```
 
-1. Create the IAM role and service account:
+2. Create the IAM role and service account:
 
 ```bash
 eksctl create iamserviceaccount \
   --name byoc-logs \
-  --namespace <NAMESPACE_NAME> \
+  --namespace byoclogs \
   --cluster <CLUSTER_NAME> \
   --role-name byoc-logs \
   --region <AWS_REGION> \
@@ -110,7 +110,7 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-This creates an IAM role called `byoc-logs` and a Kubernetes service account called `byoc-logs` in the `<NAMESPACE_NAME>` namespace. 
+This creates an IAM role called `byoc-logs` and a Kubernetes service account called `byoc-logs` in the `byoclogs` namespace. 
 
 ### Create an RDS database
 
