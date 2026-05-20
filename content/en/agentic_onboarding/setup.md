@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Set up Datadog instrumentation with the AI Setup CLI, the Datadog MCP Server, or task-scoped skills for Claude.
+description: Instrument your applications with Datadog using the AI Setup CLI, the Datadog MCP Server, or task-scoped skills for Claude.
 
 ---
 
@@ -10,40 +10,40 @@ Agentic Onboarding is in Preview.
 
 ## Overview
 
-Agentic Onboarding lets LLM coding agents instrument your applications and infrastructure for [Error Tracking][1], [Real User Monitoring (RUM)][2], [Product Analytics][3], [Infrastructure Monitoring][4], and [Serverless Monitoring][5].
+Agentic Onboarding is a set of tools for instrumenting your applications and infrastructure with Datadog for [Error Tracking][1], [Real User Monitoring (RUM)][2], [Product Analytics][3], [Infrastructure Monitoring][4], and [Serverless Monitoring][5].
 
-There are three ways to get started. Pick the one that matches how you work:
+Choose the path that fits your workflow:
 
 | Path | Use when |
 |------|----------|
-| [Setup CLI](#setup-cli) | You want to set up Datadog from a terminal, without an AI coding assistant. |
+| [AI Setup CLI](#ai-setup-cli) | You want to set up Datadog from a terminal, without an AI coding assistant. |
 | [MCP Server](#mcp-server) | You use an LLM coding assistant (such as Claude Code or Cursor) and want it to handle framework detection and configuration from your IDE. |
 | [Skills](#skills) | You want a focused, single-task workflow in Claude rather than a full MCP toolset. |
 
-The three paths are complementary and work against the same Datadog account. You can install the Datadog MCP Server in your IDE, run the CLI in a terminal, and invoke skills from Claude.
+The three paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE, run the CLI in a terminal, and invoke skills from Claude.
 
-## Setup CLI
+## AI Setup CLI
 
-The Datadog AI Setup CLI is a standalone tool that runs from your terminal. Use it when you don't want to install an MCP server, or when you need to do something the MCP flow doesn't cover, such as account bootstrapping.
+The Datadog AI Setup CLI is a standalone tool that runs in your terminal. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as bootstrapping a Datadog account.
 
 The CLI can:
 
 - Create a Datadog account end-to-end from the terminal
 - Link an existing Datadog account to your local environment
-- Instrument local infrastructure-as-code (Terraform, Helm, Kustomize, Ansible, Pulumi, raw Kubernetes manifests) by editing files in place
+- Instrument local infrastructure as code (Terraform, Helm, Kustomize, Ansible, Pulumi, raw Kubernetes manifests) by editing files in place
 - Instrument local application code by adding SDK initialization and configuration for supported frontends and backends
 
-### Install and run
+### Install and run the CLI
 
-1. Run the CLI with `npx`:
+1. Run the CLI with `npx`. You have two options:
 
-    **No Datadog account yet, or want to choose your product interactively**: Run with no arguments to step through account setup and product choice.
+    **Option 1: Interactive setup.** If you don't have a Datadog account yet, or you want to choose your product interactively, run with no arguments. The CLI steps you through account setup and product choice.
 
     ```shell
     npx @datadog/ai-setup-cli
     ```
 
-    **Existing account, installing a specific product**: Pass `--product` to skip product selection.
+    **Option 2: Specific product.** If you already have a Datadog account and want to install a specific product, pass `--product` to skip product selection.
 
     ```shell
     npx @datadog/ai-setup-cli --product <PRODUCT>
@@ -79,9 +79,11 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-Click the install deeplink for your [Datadog site](/getting_started/site/), then click {{< ui >}}Install{{< /ui >}} in Cursor for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server:
+1. Click the install deeplink for your [Datadog site](/getting_started/site/):
 
-<pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
+   <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
+
+1. In Cursor, click {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
 {{% collapse-content title="Manual configuration" level="h4" expanded=false %}}
 Add the server to `~/.cursor/mcp.json`:
@@ -97,7 +99,7 @@ Add the server to `~/.cursor/mcp.json`:
 {{% /tab %}}
 
 {{% tab "Other MCP clients" %}}
-Any MCP client that supports HTTP transport works. Point it at the endpoint for your [Datadog site](/getting_started/site/):
+Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site](/getting_started/site/):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
 {{% /tab %}}
@@ -111,7 +113,7 @@ Any MCP client that supports HTTP transport works. Point it at the endpoint for 
 
 ### Instrument your project
 
-Send the prompt that matches the product you want to install:
+Send the prompt that matches the product you want to set up:
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
@@ -147,7 +149,7 @@ After the agent completes, commit the changes to your repository and set any new
 
 ## Skills
 
-Skills are task-scoped capabilities for Claude. The Datadog MCP Server exposes a broad onboarding toolset, but a skill is a focused workflow for a single onboarding step. Use a skill when you only need one thing done and don't want to load a full MCP server.
+Skills are task-scoped capabilities for Claude. The Datadog MCP Server exposes a broad onboarding toolset, but a skill is a focused workflow for a single onboarding step. Use a skill when you need a single onboarding task and don't want to load the full MCP toolset.
 
 <div class="alert alert-info">This section is in progress. Additional onboarding skills are planned, and the content below is subject to change before general availability.</div>
 
@@ -166,11 +168,11 @@ Skills are discoverable inside Claude. From a Claude conversation:
 1. Claude loads the skill, asks for any required credentials or scope (such as host or cluster type, or cloud account ID), and walks through the steps.
 1. The skill prints verification commands when it finishes.
 
-Skills work standalone, so you don't need the MCP Server installed to use them. After the skill completes, see [Next steps](#next-steps).
+Skills work independently, so you don't need the MCP Server installed to use them. After the skill completes, see [Next steps](#next-steps).
 
 ## Next steps
 
-- Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
+- Confirm data is flowing in the Datadog UI for the product you set up: [Error Tracking][6], [RUM > Applications][7], [Infrastructure > Hosts][8], [Serverless > Functions][9], or [Logs > Live Tail][10].
 - For team-wide rollout, propagate environment variables through your secret manager.
 
 [1]: /error_tracking/frontend/
@@ -178,7 +180,8 @@ Skills work standalone, so you don't need the MCP Server installed to use them. 
 [3]: /product_analytics/
 [4]: /containers/kubernetes/
 [5]: /serverless/
-[6]: https://app.datadoghq.com/services
+[6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
 [8]: https://app.datadoghq.com/infrastructure
-[9]: https://app.datadoghq.com/logs/livetail
+[9]: https://app.datadoghq.com/functions
+[10]: https://app.datadoghq.com/logs/livetail
