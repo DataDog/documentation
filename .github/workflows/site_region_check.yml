@@ -27,12 +27,11 @@ jobs:
       - name: Get changed markdown files
         id: changed_files
         run: |
-          FILES=$(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'content/en/**/*.md' | xargs)
+          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'content/en/**/*.md' | xargs)
           echo "files=$FILES" >> $GITHUB_OUTPUT
 
       - name: Check for site-region at top of page with support language
         id: check
-        if: steps.changed_files.outputs.files != ''
         env:
           CHANGED_FILES: ${{ steps.changed_files.outputs.files }}
         run: |
