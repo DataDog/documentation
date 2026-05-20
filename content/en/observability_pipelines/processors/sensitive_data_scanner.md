@@ -284,17 +284,17 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 }
 {{< /code-block >}}
 
-## Best Practices to optimize performance
+## Best practices to optimize performance
 
 The Sensitive Data Scanner processor is CPU intensive, which means more resources are needed when there are more fields and data to scan. The following are best practices to optimize performance.
 
 ### Only enable rules you need
 
-Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data processor to view how many matches each rules has had over the past 24 hours.
+Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data Scanner processor to view how many matches each rule has had over the past 24 hours.
 
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
-1. Click the Sensitive Data Scanner processor to exanpd it.
+1. Click the Sensitive Data Scanner processor to expand it.
 1. Click **View Scanning rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
 
 See [Delete a rule](#delete-a-rule) if you want to delete an unused rule.
@@ -310,7 +310,7 @@ Reduce scanning time by targeting specific event attributes for scanning or excl
 Use the `pipelines.component_latency_seconds` metric to:
 
 - Benchmark processor performance when you add a rule
-- Evaluate performance after making optimization changes, such as reducing the number of fields being scanned and removing unused rules.
+- Evaluate performance after making optimization changes, such as reducing the number of fields being scanned and removing unused rules
 
 To view the `pipelines.component_latency_seconds` metric:
 
@@ -318,7 +318,7 @@ To view the `pipelines.component_latency_seconds` metric:
 1. In the metric field, enter `pipelines.component_latency_seconds`.
 1. In the **from** field, enter the tags: `component_type:sensitive_data_scanner` and `component_id:<component_id>`, where `<component_id>` is the ID for your Sensitive Data Scanner processor.
 
-**Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metrics. see [Enabling advanced query functionality][12] for instructions.
+**Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 
 ## Further reading
 
