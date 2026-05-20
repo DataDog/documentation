@@ -53,16 +53,15 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 {{% tab "Claude Code" %}}
 
-Install the [Datadog plugin](https://claude.com/plugins/datadog) from the [Claude Code Plugin Marketplace](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces). The plugin packages the Datadog MCP Server with the `/ddsetup` slash command for first-time configuration, and auto-updates as new toolsets and skills ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
+Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server together with bundled skills (see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin) for the full list) and auto-updates when new plugin versions ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Add the Datadog marketplace to Claude Code:
-    <pre><code>/plugin marketplace add DataDog/claude-marketplace</code></pre>
+1. Install the Datadog plugin:
+    <pre><code>/plugin install datadog@claude-plugins-official</code></pre>
 
-1. Install the Datadog plugin when prompted, or run:
-    <pre><code>/plugin install datadog@datadog</code></pre>
+1. Run `/ddsetup` to select the Datadog MCP Server domain for your [site](/getting_started/site/), then complete the OAuth login flow to choose your organization in the browser. The `/ddsetup` skill also runs automatically when Claude Code detects a Datadog-related prompt, so manual invocation is optional. For unattended configuration, set the domain (and optionally Datadog API and application keys) as environment variables in your MCP Server declaration instead of running `/ddsetup`.
 
-1. Run `/ddsetup` to choose your [Datadog site](/getting_started/site/) and organization.
+   To switch sites or datacenters later in the same Claude Code session, run `/ddconfig` to change your Datadog site or organization, then run `/reload-plugins` to refresh the connection. Reauthenticate by opening `/plugin` and selecting the Datadog plugin.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
