@@ -76,6 +76,20 @@ The {{< ui >}}Lines Generated vs Spend{{< /ui >}} chart plots each user as a poi
 
 {{< img src="ai_agents_console/lines-vs-spend.png" alt="Scatter plot of Lines Generated vs Spend, with each user as a bubble sized by number of sessions and labeled with email addresses" style="width:100%;" >}}
 
+### Team comparison
+
+The {{< ui >}}Comparison{{< /ui >}} panel compares your team to other teams and the broader organization across spend, cost per line, and model usage. The line chart trends the selected metric per engineer over time, and the table breaks down spend per engineer, cost per PR, time to merge, and sessions for each team. Insights on the right surface notable trends, such as teams that are running well above or below the organization average.
+
+Select {{< ui >}}Team Details{{< /ui >}} on a row to open that team's view.
+
+{{< img src="ai_agents_console/team-comparison.png" alt="Comparison panel with a line chart of spend per engineer across teams over time, insight callouts on the right, and a table comparing spend per engineer, cost per PR, time to merge, and sessions for each team" style="width:100%;" >}}
+
+### Top users
+
+The {{< ui >}}User Analytics{{< /ui >}} panel ranks your top contributors across three leaderboards: top users by spend, top users by lines generated, and top users by merged PRs.
+
+{{< img src="ai_agents_console/top-users.png" alt="User Analytics panel showing three leaderboards: Top Users by Spend, Top Users by Lines Generated, and Top Users by Merged PRs" style="width:100%;" >}}
+
 ### User cost across agents
 
 The {{< ui >}}User Cost Across Agents{{< /ui >}} table lists every user, the agents they use, their model cost (with a per-model breakdown), lines of code generated, and number of sessions. Search for a specific user or sort by any column.
