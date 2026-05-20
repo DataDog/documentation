@@ -34,7 +34,7 @@ To set up the processor:
 
 1. In the dropdown menu, select the library rule you want to use.
 1. Recommended keywords are automatically added based on the library rule selected. After the scanning rule has been added, you can [add additional keywords or remove recommended keywords](#add-additional-keywords).
-1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. In the **Define rule target and conditions** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
@@ -74,7 +74,7 @@ After adding scanning rules from the library, you can edit each rule separately 
     - Atomic grouping and possessive quantifiers
 1. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.
 1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. In the **Define rule target and conditions** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-custom) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
@@ -295,7 +295,7 @@ Rules that are enabled but not used consume unnecessary resources. Check the Sen
 1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to expand it.
-1. Click **View Scanning rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
+1. Click **View Scanning Rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
 
 See [Delete a rule](#delete-a-rule) if you want to delete an unused rule.
 
@@ -303,7 +303,7 @@ See [Delete a rule](#delete-a-rule) if you want to delete an unused rule.
 
 If you know the types of events you want to scan, define a processor query that only sends the events you want to the processor.
 
-Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the **Define Rules and Target** section in [Set up the processor](#set-up-the-processor-in-the-ui).
+Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the **Define rule target and conditions** section in [Set up the processor](#set-up-the-processor-in-the-ui).
 
 ### Evaluate and benchmark performance optimizations
 
@@ -316,7 +316,7 @@ To view the `pipelines.component_latency_seconds` metric:
 
 1. Navigate to [Metrics Explorer][11].
 1. In the metric field, enter `pipelines.component_latency_seconds`.
-1. In the **from** field, enter the tags: `component_type:sensitive_data_scanner` and `component_id:<component_id>`, where `<component_id>` is the ID for your Sensitive Data Scanner processor.
+1. In the **from** field, enter the tags: `component_type:sensitive_data_scanner` and `component_id:<COMPONENT_ID>`, where `<COMPONENT_ID>` is the ID for your Sensitive Data Scanner processor.
 
 **Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 
