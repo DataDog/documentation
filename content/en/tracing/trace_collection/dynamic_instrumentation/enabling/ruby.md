@@ -5,9 +5,6 @@ aliases:
     - /dynamic_instrumentation/enabling/ruby/
     - /tracing/dynamic_instrumentation/enabling/ruby
 private: true
-code_lang: ruby
-type: multi-code-lang
-code_lang_weight: 50
 further_reading:
     - link: 'agent'
       tag: 'Documentation'

@@ -2,9 +2,6 @@
 title: Enable Dynamic Instrumentation for Go
 description: Set up Dynamic Instrumentation for Go applications to add probes and capture data without code changes.
 private: true
-code_lang: go
-type: multi-code-lang
-code_lang_weight: 70
 aliases:
     - /dynamic_instrumentation/enabling/go
 further_reading:
