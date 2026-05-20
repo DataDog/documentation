@@ -9295,26 +9295,31 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
+    - name: Analysis Methods
+      url: experiments/analysis_methods
+      parent: pa_experiments
+      identifier: pa_experiments_analysis_methods
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 4
+      weight: 5
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 5
+      weight: 6
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 5
+      weight: 7
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
