@@ -24,8 +24,12 @@
     <!-- Build slice of unique cloud_providers to validate against url param `cloud_providers` on page load -->
     {{ range ($list.GroupByParam "group_id") }}
         {{ range .Pages }}
-            {{ $pad.Set "providers" ( union ($pad.Get "providers") (slice (( .Params.meta.cloud_provider ))) ) }}
-            {{ $pad.Set "platforms" ( union ($pad.Get "platforms") (slice (( .Params.meta.platform ))) ) }}
+            {{ if .Params.meta.cloud_provider }}
+                {{ $pad.Set "providers" ( union ($pad.Get "providers") (slice (( .Params.meta.cloud_provider ))) ) }}
+            {{ end }}
+            {{ if .Params.meta.platform }}
+                {{ $pad.Set "platforms" ( union ($pad.Get "platforms") (slice (( .Params.meta.platform ))) ) }}
+            {{ end }}
         {{ end }}
     {{ end }}
 
@@ -293,18 +297,26 @@
                                     Severity: {}
                                 }
                             */}}
-                            {{ $pad.SetInMap "filters" "Providers" (union (index ($pad.Get "filters") "Providers") (slice .Params.meta.cloud_provider)) }}
-                            {{ $pad.SetInMap "filters" "Platforms" (union (index ($pad.Get "filters") "Platforms") (slice .Params.meta.platform)) }}
-                            {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
+                            {{ if .Params.meta.cloud_provider }}
+                                {{ $pad.SetInMap "filters" "Providers" (union (index ($pad.Get "filters") "Providers") (slice .Params.meta.cloud_provider)) }}
+                            {{ end }}
+                            {{ if .Params.meta.platform }}
+                                {{ $pad.SetInMap "filters" "Platforms" (union (index ($pad.Get "filters") "Platforms") (slice .Params.meta.platform)) }}
+                            {{ end }}
+                            {{ if .Params.meta.category }}
+                                {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
+                            {{ end }}
                             {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW") }}
-                            {{/*  
+                            {{/*
                                 build object of arrays with unique cloud provider for each ruleset header (.set-header )
                                 cloudProvidersByRuleset: {
                                     rulesetID: [<providers>],
                                     ...
                                 }
                             */}}
-                            {{ $pad.SetInMap "cloudProviderByRuleSet" $group_id (union (index ($pad.Get "cloudProviderByRuleSet") $group_id) (slice $cloud_provider)) }}
+                            {{ if $cloud_provider }}
+                                {{ $pad.SetInMap "cloudProviderByRuleSet" $group_id (union (index ($pad.Get "cloudProviderByRuleSet") $group_id) (slice $cloud_provider)) }}
+                            {{ end }}
                             {{ end }}
                         </div>
                     </div>
