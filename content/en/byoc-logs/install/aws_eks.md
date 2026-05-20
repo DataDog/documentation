@@ -24,15 +24,16 @@ This document walks you through the process of configuring your AWS environment 
 ## Prerequisites
 
 To deploy BYOC Logs on AWS, you need to configure:
-- AWS credentials and authentication
-- AWS region selection
-- IAM permissions for S3 object storage
-- RDS PostgreSQL database (recommended)
-- EKS cluster with AWS Load Balancer Controller
+- AWS credentials and authentication.
+- AWS region selection.
+- IAM permissions for S3 object storage.
+- RDS PostgreSQL database (recommended).
+- EKS cluster with AWS Load Balancer Controller.
+- If you are not using EKS auto-mode, the [EKS Pod Identity Agent][1] and [EBS CSI driver][2] are required to use persistent volumes and claims from `searcher.persistentVolume` or `indexer.persistentVolume`.
 
 ### AWS credentials
 
-When starting a node, BYOC Logs attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][2] and looks for credentials in this order:
+When starting a node, BYOC Logs attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][3] and looks for credentials in this order:
 
 1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
 2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
@@ -50,18 +51,21 @@ BYOC Logs attempts to find the AWS region from multiple sources, using the follo
 3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.
 4. **Default**: Falls back to `us-east-1` if no other source provides a region.
 
-### IAM permissions for S3
+<div class="alert alert-warning">The resolved AWS region must match the region of the S3 bucket used for BYOC Logs storage.</div>
+
+
+### IAM access for S3
 
 Required authorized actions:
 
-* `ListBucket` (on the bucket directly)
-* `GetObject`
-* `PutObject`
-* `DeleteObject`
-* `ListMultipartUploadParts`
-* `AbortMultipartUpload`
+- `ListBucket` (on the bucket directly)
+- `GetObject`
+- `PutObject`
+- `DeleteObject`
+- `ListMultipartUploadParts`
+- `AbortMultipartUpload`
 
-Here is an example of a bucket policy:
+1. Create an IAM policy with the following permissions:
 
 ```json
 {
@@ -93,16 +97,45 @@ Here is an example of a bucket policy:
 }
 ```
 
+1. Create the IAM role and service account:
+
+```bash
+eksctl create iamserviceaccount \
+  --name byoc-logs \
+  --namespace <NAMESPACE_NAME> \
+  --cluster <CLUSTER_NAME> \
+  --role-name byoc-logs \
+  --region <AWS_REGION> \
+  --attach-policy-arn <POLICY_ARN> \
+  --approve
+```
+
+This creates an IAM role called `byoc-logs` and a Kubernetes service account called `byoc-logs` in the `<NAMESPACE_NAME>` namespace. 
+
 ### Create an RDS database
 
-You can create a micro RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is enough.
+Create a micro RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is sufficient.
 
 ```shell
 # Micro RDS instance for testing purposes. Takes around 5 min.
-aws rds create-db-instance --db-instance-identifier byoc-logs-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username byoc-logs --master-user-password 'FixMeBYOC_Logs' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name byoc-logs --backup-retention-period 0 --no-multi-az
+aws rds create-db-instance \
+  --db-instance-identifier byoc-logs-demo-postgres \
+  --db-instance-class db.t3.micro \
+  --engine postgres \
+  --engine-version 18.3 \
+  --master-username byoclogs \
+  --master-user-password 'FixMeBYOC_Logs' \
+  --allocated-storage 20 \
+  --storage-type gp2 \
+  --db-subnet-group-name <DB-SUBNET-GROUP-NAME> \
+  --vpc-security-group-ids <EKS-CLUSTER-SECURITY-GROUP-ID> \
+  --db-name byoclogs \
+  --backup-retention-period 0 \
+  --region <AWS_REGION> \
+  --no-multi-az
 ```
 
-You can retrieve RDS info by executing the following shell commmands:
+You can retrieve RDS information by executing the following shell commmands. The below commands retrieve information for the testing RDS instance created above:
 
 ```shell
 # Get RDS instance details
@@ -115,7 +148,7 @@ DATABASE=$(echo $RDS_INFO | jq -r '.Database')
 
 echo ""
 echo "🔗 Full URI:"
-echo "postgres://byoc-logs:FixMeBYOC_Logs@$ENDPOINT:$PORT/$DATABASE"
+echo "postgres://byoclogs:FixMeBYOC_Logs@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
 
@@ -137,14 +170,14 @@ echo ""
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-   For example, to create a `byoc-logs` namespace:
+   For example, to create a `byoclogs` namespace:
    ```shell
-   kubectl create namespace byoc-logs
+   kubectl create namespace byoclogs
    ```
 
    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
-   kubectl config set-context --current --namespace=byoc-logs
+   kubectl config set-context --current --namespace=byoclogs
    ```
 
 1. Store your Datadog API key as a Kubernetes secret:
@@ -181,8 +214,10 @@ echo ""
 
    # Environment variables
    # Any environment variables defined here are available to all pods in the deployment
+   # Replace the "us-west-1" example below with your AWS region.
    environment:
-     AWS_REGION: us-east-1
+     - name: AWS_REGION
+       value: "us-west-1"
 
    # Datadog configuration
    datadog:
@@ -192,17 +227,12 @@ echo ""
       apiKeyExistingSecret: datadog-secret
 
    # Service account configuration
-   # If `serviceAccount.create` is set to `true`, a service account is created with the specified name.
-   # The service account will be annotated with the IAM role ARN if `aws.accountId` and serviceAccount.eksRoleName` are set.
-   # Additional annotations can be added using serviceAccount.extraAnnotations.
+   # `serviceAccount.create: false` references the service account created with eksctl.
+   # The chart uses this service account to access S3.
    serviceAccount:
-     create: true
+     create: false
      name: byoc-logs
-     # The name of the IAM role to use for the service account. If set, the following annotations will be added to the service account:
-     # - eks.amazonaws.com/role-arn: arn:aws:iam::<aws.accountId>:role/<serviceAccount.eksRoleName>
-     # - eks.amazonaws.com/sts-regional-endpoints: "true"
      eksRoleName: byoc-logs
-     extraAnnotations: {}
 
    # BYOC Logs node configuration
    config:
@@ -297,13 +327,13 @@ helm uninstall <RELEASE_NAME>
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][8]** - Configure the Datadog Agent to send logs to BYOC Logs
+**[Set up log ingestion with Datadog Agent][4]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://aws.amazon.com/eks/
-[2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
-[3]: https://aws.amazon.com/rds/
-[8]: /byoc-logs/ingest/agent/
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html
+[2]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[3]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
+[4]: /byoc-logs/ingest/agent/
