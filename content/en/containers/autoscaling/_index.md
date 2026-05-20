@@ -353,9 +353,7 @@ spec:
 
 Pick this template when a workload can't be scaled horizontally, or when you want pure rightsizing without changing replica counts. Common cases are singleton services, stateful workloads, and leader-elected components. The defining setting is `scaleDown.strategy: Disabled` and `scaleUp.strategy: Disabled`, which leaves only `update.strategy: Auto` to apply CPU and memory recommendations.
 
-By default, the controller applies vertical recommendations by triggering a rollout (evict and recreate pods). Cluster Agent **7.78+** also supports **in-place pod resizing**, which updates a pod's CPU and memory requests and limits without restarting it. In-place resize is **opt-in**.
-
-To enable in-place resize, set `autoscaling.workload.in_place_vertical_scaling.enabled: true` on the Cluster Agent (or set the environment variable `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`).
+By default, the controller applies vertical recommendations by triggering a rollout (evict and recreate pods). Cluster Agent **7.78+** also supports **in-place pod resizing**, which updates a pod's CPU and memory requests and limits without restarting it. In-place resize is opt-in: set `autoscaling.workload.in_place_vertical_scaling.enabled: true` on the Cluster Agent (or set the environment variable `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`).
 
 Your cluster must also expose the `pods/resize` subresource. This is the default in Kubernetes 1.33+ where the `InPlacePodVerticalScaling` feature gate is beta. On Kubernetes 1.27 to 1.32 the feature gate must be enabled on `kube-apiserver` and every `kubelet`.
 
