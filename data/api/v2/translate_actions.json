@@ -536,6 +536,36 @@
     "request_description": "Case payload",
     "request_schema_description": "Case create request"
   },
+  "AggregateCases": {
+    "description": "Performs an aggregation query over cases, grouping results by specified fields and returning counts per group along with a total. Useful for dashboards and analytics.",
+    "summary": "Aggregate cases",
+    "request_description": "Case aggregate request payload.",
+    "request_schema_description": "Request payload for aggregating case counts with grouping. Use this to get faceted breakdowns of cases (for example, count of cases grouped by priority and status)."
+  },
+  "BulkUpdateCases": {
+    "description": "Applies a single action (such as changing priority, status, assignment, or archiving) to multiple cases at once. The list of case IDs and the action type with its payload are specified in the request body.",
+    "summary": "Bulk update cases",
+    "request_description": "Case bulk update request payload.",
+    "request_schema_description": "Request payload for applying a single action (such as changing priority, status, or assignment) to multiple cases at once."
+  },
+  "CountCases": {
+    "description": "Returns case counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.",
+    "summary": "Count cases"
+  },
+  "ListCaseLinks": {
+    "description": "Returns all links associated with a case. Links define relationships (for example, BLOCKS) between cases. Requires entity_type and entity_id query parameters.",
+    "summary": "List case links"
+  },
+  "CreateCaseLink": {
+    "description": "Creates a directional link between two cases (for example, case A blocks case B). The parent and child cases and their relationship type must be specified.",
+    "summary": "Create a case link",
+    "request_description": "Case link create request.",
+    "request_schema_description": "Request payload for creating a link between two entities."
+  },
+  "DeleteCaseLink": {
+    "description": "Deletes an existing link between cases by link ID.",
+    "summary": "Delete a case link"
+  },
   "GetProjects": {
     "description": "Get all projects.",
     "summary": "Get all projects"
@@ -545,6 +575,10 @@
     "summary": "Create a project",
     "request_description": "Project payload.",
     "request_schema_description": "Project create request."
+  },
+  "ListUserCaseProjectFavorites": {
+    "description": "Returns the list of case projects that the current authenticated user has marked as favorites.",
+    "summary": "List project favorites"
   },
   "DeleteProject": {
     "description": "Remove a project using the project's `id`.",
@@ -559,6 +593,14 @@
     "summary": "Update a project",
     "request_description": "Project payload.",
     "request_schema_description": "Project update request."
+  },
+  "UnfavoriteCaseProject": {
+    "description": "Removes a case project from the current user's favorites list.",
+    "summary": "Unfavorite a project"
+  },
+  "FavoriteCaseProject": {
+    "description": "Marks a case project as a favorite for the current authenticated user.",
+    "summary": "Favorite a project"
   },
   "GetProjectNotificationRules": {
     "description": "Get all notification rules for a project.",
@@ -580,6 +622,38 @@
     "request_description": "Notification rule payload",
     "request_schema_description": "Notification rule update request"
   },
+  "ListCaseAutomationRules": {
+    "description": "Returns all automation rules configured for a project. Automation rules allow automatic actions to be triggered by case events like creation, status transitions, or attribute changes.",
+    "summary": "List automation rules"
+  },
+  "CreateCaseAutomationRule": {
+    "description": "Creates an automation rule for a project. The rule defines a trigger event (for example, case created, status transitioned) and an action to execute.",
+    "summary": "Create an automation rule",
+    "request_description": "Automation rule payload.",
+    "request_schema_description": "Request payload for creating an automation rule."
+  },
+  "DeleteCaseAutomationRule": {
+    "description": "Permanently deletes an automation rule from a project.",
+    "summary": "Delete an automation rule"
+  },
+  "GetCaseAutomationRule": {
+    "description": "Returns a single automation rule identified by its UUID, including its trigger, action, and current state (enabled/disabled).",
+    "summary": "Get an automation rule"
+  },
+  "UpdateCaseAutomationRule": {
+    "description": "Updates the trigger, action, name, or state of an existing automation rule.",
+    "summary": "Update an automation rule",
+    "request_description": "Automation rule payload.",
+    "request_schema_description": "Request payload for updating an automation rule."
+  },
+  "DisableCaseAutomationRule": {
+    "description": "Disables an automation rule so it no longer triggers on case events. The rule configuration is preserved.",
+    "summary": "Disable an automation rule"
+  },
+  "EnableCaseAutomationRule": {
+    "description": "Enables a previously disabled automation rule so it triggers on matching case events.",
+    "summary": "Enable an automation rule"
+  },
   "GetAllCaseTypes": {
     "description": "Get all case types",
     "summary": "Get all case types"
@@ -588,7 +662,7 @@
     "description": "Create a Case Type",
     "summary": "Create a case type",
     "request_description": "Case type payload",
-    "request_schema_description": "Case type create request"
+    "request_schema_description": "Request payload for creating a case type."
   },
   "GetAllCustomAttributes": {
     "description": "Get all custom attributes",
@@ -598,6 +672,12 @@
     "description": "Delete a case type",
     "summary": "Delete a case type"
   },
+  "UpdateCaseType": {
+    "description": "Updates the name, emoji, or description of an existing case type.",
+    "summary": "Update a case type",
+    "request_description": "Case type payload.",
+    "request_schema_description": "Request payload for updating a case type."
+  },
   "GetAllCustomAttributeConfigsByCaseType": {
     "description": "Get all custom attribute config of case type",
     "summary": "Get all custom attributes config of case type"
@@ -606,11 +686,41 @@
     "description": "Create custom attribute config for a case type",
     "summary": "Create custom attribute config for a case type",
     "request_description": "Custom attribute config payload",
-    "request_schema_description": "Custom attribute config create request"
+    "request_schema_description": "Request payload for creating a custom attribute configuration."
   },
   "DeleteCustomAttributeConfig": {
     "description": "Delete custom attribute config",
     "summary": "Delete custom attributes config"
+  },
+  "UpdateCustomAttributeConfig": {
+    "description": "Updates the display name, description, type, or options of an existing custom attribute configuration for a case type.",
+    "summary": "Update custom attribute config",
+    "request_description": "Custom attribute config payload.",
+    "request_schema_description": "Request payload for updating a custom attribute configuration."
+  },
+  "ListCaseViews": {
+    "description": "Returns all saved case views for a given project. Views are saved search queries that allow quick access to filtered lists of cases.",
+    "summary": "List case views"
+  },
+  "CreateCaseView": {
+    "description": "Creates a new saved case view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.",
+    "summary": "Create a case view",
+    "request_description": "Case view payload.",
+    "request_schema_description": "Request payload for creating a case view."
+  },
+  "DeleteCaseView": {
+    "description": "Permanently deletes a saved case view.",
+    "summary": "Delete a case view"
+  },
+  "GetCaseView": {
+    "description": "Returns a single saved case view identified by its UUID, including its query, associated project, and timestamps.",
+    "summary": "Get a case view"
+  },
+  "UpdateCaseView": {
+    "description": "Updates the name, query, or notification rule of an existing case view.",
+    "summary": "Update a case view",
+    "request_description": "Case view payload.",
+    "request_schema_description": "Request payload for updating a case view."
   },
   "GetCase": {
     "description": "Get the details of case by `case_id`",
@@ -644,6 +754,12 @@
     "description": "Delete case comment",
     "summary": "Delete case comment"
   },
+  "UpdateCaseComment": {
+    "description": "Updates the text content of an existing comment on a case timeline. The comment is identified by its cell ID.",
+    "summary": "Update case comment",
+    "request_description": "Case update comment payload.",
+    "request_schema_description": "Request payload for updating a comment on a case timeline."
+  },
   "DeleteCaseCustomAttribute": {
     "description": "Delete custom attribute from case",
     "summary": "Delete custom attribute from case"
@@ -659,6 +775,24 @@
     "summary": "Update case description",
     "request_description": "Case description update payload",
     "request_schema_description": "Case update description request"
+  },
+  "UpdateCaseDueDate": {
+    "description": "Sets or updates the due date for a case. The due date is a calendar date (without a time component) indicating when the case should be resolved.",
+    "summary": "Update case due date",
+    "request_description": "Case due date update payload.",
+    "request_schema_description": "Request payload for updating a case's due date."
+  },
+  "RemoveCaseInsights": {
+    "description": "Removes one or more previously added insights from a case by specifying their type and resource identifier in the request body.",
+    "summary": "Remove insights from a case",
+    "request_description": "Case insights request.",
+    "request_schema_description": "Request payload for adding or removing case insights."
+  },
+  "AddCaseInsights": {
+    "description": "Adds one or more insights to a case. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.",
+    "summary": "Add insights to a case",
+    "request_description": "Case insights request.",
+    "request_schema_description": "Request payload for adding or removing case insights."
   },
   "UpdatePriority": {
     "description": "Update case priority",
@@ -706,11 +840,21 @@
     "request_description": "ServiceNow ticket creation request",
     "request_schema_description": "ServiceNow ticket creation request"
   },
+  "UpdateCaseResolvedReason": {
+    "description": "Sets the resolved reason for a security case (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type cases.",
+    "summary": "Update case resolved reason",
+    "request_description": "Case resolved reason update payload.",
+    "request_schema_description": "Request payload for updating the resolution reason on a closed security case."
+  },
   "UpdateStatus": {
     "description": "Update case status",
     "summary": "Update case status",
     "request_description": "Case status update payload",
     "request_schema_description": "Case update status request"
+  },
+  "ListCaseTimeline": {
+    "description": "Returns the timeline of events for a case, including comments, status changes, and other activity. Supports pagination and sort order.",
+    "summary": "Get case timeline"
   },
   "UpdateCaseTitle": {
     "description": "Update case title",
@@ -729,6 +873,18 @@
     "summary": "Unassign case",
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
+  },
+  "ListCaseWatchers": {
+    "description": "Returns the list of users who are watching a case. Watchers receive notifications about updates to the case.",
+    "summary": "List case watchers"
+  },
+  "UnwatchCase": {
+    "description": "Removes a user from the watchers list of a case. The user no longer receives notifications about updates to the case.",
+    "summary": "Unwatch a case"
+  },
+  "WatchCase": {
+    "description": "Adds a user (identified by their UUID) as a watcher of a case. The user receives notifications about subsequent updates to the case.",
+    "summary": "Watch a case"
   },
   "ListCatalogEntity": {
     "description": "Get a list of entities from Software Catalog.",
@@ -2389,6 +2545,24 @@
     "request_description": "Update label schema payload.",
     "request_schema_description": "Request to update the label schema of an annotation queue."
   },
+  "AggregateLLMObsExperimentation": {
+    "description": "Execute an analytics aggregation over LLM Observability experimentation data.\nUse this endpoint to compute metrics (for example average eval scores) grouped by fields such as `span_id` or `experiment_id`.\n\nAt least one `compute` definition and one `index` must be provided.",
+    "summary": "Aggregate LLM Observability experimentation",
+    "request_description": "Analytics payload.",
+    "request_schema_description": "Request to run an analytics aggregation over LLM Observability experimentation data."
+  },
+  "SearchLLMObsExperimentation": {
+    "description": "Search across LLM Observability experimentation entities — projects, datasets, dataset records, experiments, and experiment runs — using cursor-based pagination.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.\n\nReturns `200 OK` when all results fit in a single page. Returns `206 Partial Content` with a cursor in `meta.after` when additional pages are available.",
+    "summary": "Search LLM Observability experimentation entities",
+    "request_description": "Experimentation search payload.",
+    "request_schema_description": "Request to search across LLM Observability experimentation entities using cursor-based pagination."
+  },
+  "SimpleSearchLLMObsExperimentation": {
+    "description": "Search across LLM Observability experimentation entities using offset-based (page-number) pagination.\nUse this endpoint when you need total page count or want to navigate to a specific page number.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.",
+    "summary": "Simple search experimentation entities",
+    "request_description": "Simple search payload.",
+    "request_schema_description": "Request to search across LLM Observability experimentation entities using offset-based pagination."
+  },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
     "summary": "List LLM Observability experiments"
@@ -2482,6 +2656,10 @@
     "summary": "Delete LLM Observability dataset records",
     "request_description": "Delete records payload.",
     "request_schema_description": "Request to delete records from an LLM Observability dataset."
+  },
+  "ListLLMObsExperimentEvents": {
+    "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
+    "summary": "List events for an LLM Observability experiment"
   },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
@@ -2656,6 +2834,26 @@
     "summary": "Search logs (POST)",
     "request_description": "",
     "request_schema_description": "The request for a logs list."
+  },
+  "ListMaintenanceWindows": {
+    "description": "Returns all configured maintenance windows for event management cases. Maintenance windows define time periods during which case notifications and automation rules are suppressed for cases matching a given query.",
+    "summary": "List maintenance windows"
+  },
+  "CreateMaintenanceWindow": {
+    "description": "Creates a maintenance window for event management cases with a name, case filter query, and time range (start and end).",
+    "summary": "Create a maintenance window",
+    "request_description": "Maintenance window payload.",
+    "request_schema_description": "Request payload for creating a maintenance window."
+  },
+  "DeleteMaintenanceWindow": {
+    "description": "Permanently deletes a maintenance window.",
+    "summary": "Delete a maintenance window"
+  },
+  "UpdateMaintenanceWindow": {
+    "description": "Updates the name, query, start time, or end time of an existing maintenance window.",
+    "summary": "Update a maintenance window",
+    "request_description": "Maintenance window payload.",
+    "request_schema_description": "Request payload for updating a maintenance window."
   },
   "ListTagConfigurations": {
     "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
