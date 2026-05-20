@@ -76,7 +76,12 @@ def llm_call():
 
 ## Submitting external evaluations with the API
 
-You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
+You can use the evaluations API provided by LLM Observability to send evaluations to Datadog at the span, trace, or session level. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
+
+Use the `eval_scope` field to control the granularity of the evaluation:
+- **`span`** (default): Associates the evaluation with a specific span, identified by `join_on`.
+- **`trace`**: Associates the evaluation with an entire trace, identified by `join_on` pointing to the root span.
+- **`session`**: Associates the evaluation with a session, identified by `session_id`. Do not include `join_on` for session-scoped evaluations.
 
 To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation. Additionally, <code>span_id</code> and <code>trace_id</code> values must be provided as **decimal** strings. If your OpenTelemetry instrumentation produces hexadecimal IDs, convert them to decimal before submitting. For example, in Python: <code>str(int(hex_span_id, 16))</code>.
 
@@ -86,29 +91,47 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
 {
   "data": {
     "type": "evaluation_metric",
-    "id": "456f4567-e89b-12d3-a456-426655440000",
     "attributes": {
       "metrics": [
         {
-          "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "eval_scope": "span",
           "join_on": {
             "tag": {
               "key": "msg_id",
               "value": "1123132"
             }
           },
-          "span_id": "20245611112024561111",
-          "trace_id": "13932955089405749200",
           "ml_app": "weather-bot",
-          "timestamp_ms": 1609479200,
+          "timestamp_ms": 1765990800016,
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3,
-          // source:otel required only for OpenTelemetry spans
-          "tags": ["source:otel"],
-          "timestamp_ms": 1765990800016,
           "assessment": "pass",
           "reasoning": "it makes sense"
+        },
+        {
+          "eval_scope": "trace",
+          "join_on": {
+            "span": {
+              "span_id": "20245611112024561111",
+              "trace_id": "13932955089405749200"
+            }
+          },
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1765990800016,
+          "metric_type": "score",
+          "label": "Overall Quality",
+          "score_value": 4,
+          "assessment": "pass"
+        },
+        {
+          "eval_scope": "session",
+          "session_id": "abc123def456",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1765990800016,
+          "metric_type": "categorical",
+          "label": "Session Outcome",
+          "categorical_value": "Resolved"
         }
       ]
     }

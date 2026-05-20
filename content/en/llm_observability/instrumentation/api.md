@@ -350,7 +350,7 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 <div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
-Use this endpoint to send evaluations associated with a given span to Datadog.
+Use this endpoint to send evaluations to Datadog at the span, trace, or session level.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
@@ -358,9 +358,11 @@ Endpoint
 Method
 : `POST`
 
-Evaluations must be joined to a unique span. You can identify the target span using either of these two methods:
-1. Tag-based joining - Join an evaluation using a custom tag key-value pair that uniquely identifies a single span.
-2. Direct span reference - Join an evaluation using the span's unique trace ID and span ID combination.
+Use the `eval_scope` field to set the granularity of the evaluation:
+
+- **`span`** (default): The evaluation is associated with a specific span. Use `join_on` to identify the target span with a tag key-value pair or a span ID and trace ID combination.
+- **`trace`**: The evaluation is associated with an entire trace. Use `join_on` to identify the root span of the trace.
+- **`session`**: The evaluation is associated with a session. Provide `session_id` instead of `join_on`.
 
 
 ### Request
@@ -386,6 +388,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
     "attributes": {
       "metrics": [
         {
+          "eval_scope": "span",
           "join_on": {
             "span": {
               "span_id": "20245611112024561111",
@@ -396,13 +399,14 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "timestamp_ms": 1609459200,
           "metric_type": "categorical",
           "label": "Sentiment",
-          "categorical_value": "Positive",
+          "categorical_value": "Positive"
         },
         {
+          "eval_scope": "trace",
           "join_on": {
-            "tag": {
-              "key": "msg_id",
-              "value": "1123132"
+            "span": {
+              "span_id": "20245611112024561111",
+              "trace_id": "13932955089405749200"
             }
           },
           "ml_app": "weather-bot",
@@ -414,19 +418,16 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "reasoning": "The response provided incorrect information about the weather forecast."
         },
         {
-          "join_on": {
-            "tag": {
-              "key": "msg_id",
-              "value": "1123132"
-            }
-          },
+          "eval_scope": "session",
+          "session_id": "abc123def456",
           "ml_app": "weather-bot",
           "timestamp_ms": 1609479200,
           "metric_type": "boolean",
           "label": "Topic Relevancy",
-          "boolean_value": true,
+          "boolean_value": true
         },
         {
+          "eval_scope": "span",
           "join_on": {
             "tag": {
               "key": "msg_id",
@@ -476,6 +477,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
       "metrics": [
         {
           "id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
+          "eval_scope": "span",
           "join_on": {
             "span": {
               "span_id": "20245611112024561111",
@@ -490,14 +492,13 @@ Evaluations must be joined to a unique span. You can identify the target span us
         },
         {
           "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "eval_scope": "trace",
           "join_on": {
-            "tag": {
-              "key": "msg_id",
-              "value": "1123132"
+            "span": {
+              "span_id": "20245611112024561111",
+              "trace_id": "13932955089405749200"
             }
           },
-          "span_id": "20245611112024561111",
-          "trace_id": "13932955089405749200",
           "ml_app": "weather-bot",
           "timestamp_ms": 1609479200,
           "metric_type": "score",
@@ -508,30 +509,23 @@ Evaluations must be joined to a unique span. You can identify the target span us
         },
         {
           "id": "haz3fc7-g3p2-1s37-8m12-ndk4hbf7a522",
-          "join_on": {
-            "tag": {
-              "key": "msg_id",
-              "value": "1123132"
-            }
-          },
-          "span_id": "20245611112024561111",
-          "trace_id": "13932955089405749200",
+          "eval_scope": "session",
+          "session_id": "abc123def456",
           "ml_app": "weather-bot",
           "timestamp_ms": 1609479200,
           "metric_type": "boolean",
           "label": "Topic Relevancy",
-          "boolean_value": true,
+          "boolean_value": true
         },
         {
           "id": "abc1234-h4i5-6j78-9k01-lmn2opq3rst4",
+          "eval_scope": "span",
           "join_on": {
             "tag": {
               "key": "msg_id",
               "value": "1123132"
             }
           },
-          "span_id": "20245611112024561111",
-          "trace_id": "13932955089405749200",
           "ml_app": "weather-bot",
           "timestamp_ms": 1609479200,
           "metric_type": "json",
@@ -569,7 +563,9 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | Field                                                              | Type                | Description                                                                                            |
 |--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
 | ID                                                                 | string              | Evaluation metric UUID (generated upon submission).                                                    |
-| join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
+| eval_scope                                                         | string              | The granularity of the evaluation: `"span"` (default), `"trace"`, or `"session"`.                     |
+| join_on [*required for span and trace scope*]                      | [[JoinOn](#joinon)] | How the evaluation is joined to a span or trace. Required when `eval_scope` is `"span"` or `"trace"`. Must be absent when `eval_scope` is `"session"`. |
+| session_id [*required for session scope*]                          | string              | The session ID the evaluation is associated with. Required when `eval_scope` is `"session"`. Must be absent when `eval_scope` is `"span"` or `"trace"`. |
 | timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, `"boolean"`, or `"json"`.                          |
