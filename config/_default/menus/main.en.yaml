@@ -5514,6 +5514,11 @@ menu:
       identifier: ai_agents_console
       parent: ai_observability_heading
       weight: 30000
+    - name: Setup
+      url: ai_agents_console/setup/
+      parent: ai_agents_console
+      identifier: ai_agents_console_setup
+      weight: 1
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

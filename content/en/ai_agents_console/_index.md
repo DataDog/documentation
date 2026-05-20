@@ -28,9 +28,9 @@ Agent Console supports the following coding agents:
 
 In addition, Agent Console includes a dedicated tab for [Bits AI agents](#bits-ai-agents), Datadog's built-in AI agents.
 
-## Overview
+## Coding Agents
 
-The {{< ui >}}Intro{{< /ui >}} tab gives you a top-level view of agent activity across your organization. By default, the view aggregates all coding agents and can be filtered to a single agent.
+The {{< ui >}}Coding Agents{{< /ui >}} tab is scoped to coding agents. By default, the view aggregates all coding agents and can be filtered to a single agent.
 
 ### Agent findings
 
@@ -52,17 +52,15 @@ The {{< ui >}}Impact Metrics{{< /ui >}} panel measures the effect of AI-assisted
 
 The {{< ui >}}Detected Problems{{< /ui >}} panel highlights common problem patterns that your team is hitting and recommends fixes. The Sankey diagram shows how problem patterns (such as skipped checks, retry loops, and file rereads) flow from individual agents into specific repositories, with an estimated monthly cost for each pattern.
 
-Filter the view by {{< ui >}}All Repos{{< /ui >}}, {{< ui >}}DD Repos{{< /ui >}}, or {{< ui >}}Non DD Repos{{< /ui >}}, or use {{< ui >}}+ Add Pattern{{< /ui >}} to define a new detection pattern.
-
 {{< img src="ai_agents_console/detected-problems.png" alt="Detected Problems Sankey diagram mapping Claude Code, Cursor, and GitHub Copilot sessions to problem patterns such as Skipped checks, Retry loops, and File rereads, then to affected repositories, with a side panel showing cost breakdowns per repository" style="width:100%;" >}}
 
 Select a pattern to open a detail view that includes the pattern definition, estimated monthly cost across your organization, a list of flagged sessions, and a recommended fix.
 
 {{< img src="ai_agents_console/detected-pattern-detail.png" alt="Detected Pattern detail view for Skipped Checks, showing the pattern definition, an $8.5K per month estimated cost, a View Recommendation button, and a list of 12 flagged sessions with users, agents, durations, and costs" style="width:100%;" >}}
 
-## Coding Agents
+### Individual agent dashboards
 
-The {{< ui >}}Coding Agents{{< /ui >}} tab provides a dedicated dashboard for each supported coding agent. Each dashboard includes summary tiles for total spend, sessions, commits, and lines added, along with performance charts covering request volume, latency, model usage patterns, lines added vs. removed, and tool accepts vs. rejects.
+Click an agent tile to open a dedicated dashboard for that coding agent. Each dashboard includes summary tiles for total spend, sessions, commits, and lines added, along with performance charts covering request volume, latency, model usage patterns, lines added vs. removed, and tool accepts vs. rejects.
 
 Filter each dashboard by team, user, repository, and time range.
 
@@ -74,7 +72,7 @@ The {{< ui >}}Analytics{{< /ui >}} tab provides granular details for individuals
 
 ### Lines generated vs. spend
 
-The {{< ui >}}Lines Generated vs Spend{{< /ui >}} chart plots each user as a point, with point size reflecting the number of sessions. Both axes are configurable so you can compare metrics such as lines generated, spend, sessions, or commits.
+The {{< ui >}}Lines Generated vs Spend{{< /ui >}} chart plots each user as a point, with point size reflecting the number of sessions. Both axes are configurable so you can compare lines generated, PRs, or spend.
 
 {{< img src="ai_agents_console/lines-vs-spend.png" alt="Scatter plot of Lines Generated vs Spend, with each user as a bubble sized by number of sessions and labeled with email addresses" style="width:100%;" >}}
 
@@ -98,92 +96,9 @@ Individual cards summarize activity for each Bits AI agent, including [Bits AI S
 
 {{< img src="ai_agents_console/bits-ai-agents.png" alt="Bits AI Agents tab with a combined agent activity chart over time and individual cards for Bits AI SRE, Bits AI Dev, and Agent Builder showing recent investigations, sessions, and executions" style="width:100%;" >}}
 
-## Set up an integration
+## Set up
 
-### Claude Code
-
-#### Option 1: Anthropic Usage and Costs integration (recommended)
-
-To monitor Claude Code with Agent Console, set up the [Anthropic Usage and Costs][4] integration.
-
-After setup, navigate to the [Agent Console][1] and click the {{< ui >}}Claude Code{{< /ui >}} tile to view metrics.
-
-#### Option 2: OpenTelemetry (OTLP)
-
-The following procedure configures Claude Code to send telemetry directly to Datadog with the OpenTelemetry protocol (OTLP).
-
-1. Make sure that your [Logs configuration][6] includes a catch-all [index][7], or an index that covers `service:claude-code`.
-2. Generate a [Datadog API key][8].
-3. Set the following environment variables in your Claude Code settings file (for example, `~/.claude/settings.json`):
-
-   ```json
-   {
-     "env": {
-       "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
-       "OTEL_LOGS_EXPORTER": "otlp",
-       "OTEL_EXPORTER_OTLP_LOGS_PROTOCOL": "http/protobuf",
-       "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT": "{{< region-param key="otlp_logs_endpoint" >}}",
-       "OTEL_METRICS_EXPORTER": "otlp",
-       "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL": "http/protobuf",
-       "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT": "{{< region-param key="otlp_metrics_endpoint" >}}",
-       "OTEL_EXPORTER_OTLP_HEADERS": "dd-api-key=<DATADOG_API_KEY>"
-     }
-   }
-   ```
-
-   Replace `<DATADOG_API_KEY>` with your Datadog API key.
-
-   <div class="alert alert-info">To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
-4. Restart Claude Code.
-
-After you restart Claude Code, navigate to the [Agent Console][1] and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
-
-#### Option 3: Forward data through the Datadog Agent
-
-1. Make sure that your [Logs configuration][6] includes a catch-all [index][7], or an index that covers `service:claude-code`.
-2. [Install the Datadog Agent][9].
-3. Configure your Datadog Agent to enable the OpenTelemetry Collector:
-   ```yaml
-   otlp_config:
-     receiver:
-       protocols:
-         grpc:
-           endpoint: 0.0.0.0:4317
-     logs:
-       enabled: true
-   otelCollector:
-     enabled: true
-   ```
-4. Set the following environment variables in your Claude Code settings file (for example, `~/.claude/settings.json`):
-   ```json
-   {
-     "env": {
-       "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
-       "OTEL_METRICS_EXPORTER": "otlp",
-       "OTEL_LOGS_EXPORTER": "otlp",
-       "OTEL_EXPORTER_OTLP_ENDPOINT": "http://127.0.0.1:4317",
-       "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
-       "OTEL_METRIC_EXPORT_INTERVAL": "10000"
-     }
-   }
-   ```
-
-   <div class="alert alert-info">To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
-5. Restart Claude Code.
-
-After you restart Claude Code, navigate to the [Agent Console][1] and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
-
-### Cursor
-
-To monitor Cursor with Agent Console, set up the [Cursor][5] integration using the Datadog Extension for Cursor.
-
-After setup, navigate to the [Agent Console][1] and click the {{< ui >}}Cursor{{< /ui >}} tile to view metrics.
-
-### GitHub Copilot
-
-To monitor GitHub Copilot with Agent Console, set up the [GitHub Copilot][10] integration.
-
-After setup, navigate to the [Agent Console][1] and click the {{< ui >}}GitHub Copilot{{< /ui >}} tile to view metrics.
+To start sending data to Agent Console, see [Set Up Agent Console][14].
 
 ## Further reading
 
@@ -192,13 +107,8 @@ After setup, navigate to the [Agent Console][1] and click the {{< ui >}}GitHub C
 [1]: https://app.datadoghq.com/llm/ai-agents-console
 [2]: https://docs.claude.com/en/docs/claude-code/overview
 [3]: https://www.cursor.com/
-[4]: /integrations/anthropic-usage-and-costs/
-[5]: /integrations/cursor/?tab=datadogextensionforcursor
-[6]: /logs/log_configuration/
-[7]: /logs/log_configuration/indexes/
-[8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: /agent/?tab=Host-based
 [10]: /integrations/github-copilot/
 [11]: /bits_ai/bits_ai_sre/
 [12]: /bits_ai/bits_ai_dev_agent/
 [13]: /actions/agents/
+[14]: /ai_agents_console/setup/
