@@ -1,5 +1,6 @@
 ---
 title: Ticket Creation Rules
+site_support_id: case_management
 further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
@@ -11,6 +12,8 @@ further_reading:
     tag: "Documentation"
     text: "Case Management"
 ---
+
+{{< product-availability >}}
 
 Configure ticket creation rules to automatically create tickets in Jira or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
 
