@@ -1,6 +1,6 @@
 ---
 title: Analyze LLM Applications with Claude Code Skills
-description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, and bootstrap evaluators against your live production data.
+description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators against your live production data.
 further_reading:
     - link: '/llm_observability/evaluations/'
       tag: 'Documentation'
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Datadog provides a set of [Claude Code][1] skills that bring LLM Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, and generate evaluators — all against your live production data.
+Datadog provides a set of [Claude Code][1] skills that bring LLM Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators — all against your live production data.
 
 | Skill | What it does |
 |-------|-------------|

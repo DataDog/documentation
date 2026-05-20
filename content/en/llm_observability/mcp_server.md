@@ -158,7 +158,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides five skills for classifying sessions, diagnosing failures, running experiments, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
