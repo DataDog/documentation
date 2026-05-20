@@ -66,15 +66,9 @@ Filter each dashboard by team, user, repository, and time range.
 
 {{< img src="ai_agents_console/coding-agent-dashboard.png" alt="Claude Code dashboard in the Coding Agents tab with Teams, Users, and Repository filters; summary tiles for Total Spend, Sessions, Commits, and Lines Added; and Performance charts for Commits Over Time, Pull Requests Over Time, Lines Added vs Removed, and Tool Accepts vs Rejects" style="width:100%;" >}}
 
-## User Analytics
+## Analytics
 
 The {{< ui >}}Analytics{{< /ui >}} tab provides granular details for individuals and teams, helping you identify power users, outliers, and team-level adoption patterns.
-
-### Lines generated vs. spend
-
-The {{< ui >}}Lines Generated vs Spend{{< /ui >}} chart plots each user as a point, with point size reflecting the number of sessions. Both axes are configurable so you can compare lines generated, PRs, or spend.
-
-{{< img src="ai_agents_console/lines-vs-spend.png" alt="Scatter plot of Lines Generated vs Spend, with each user as a bubble sized by number of sessions and labeled with email addresses" style="width:100%;" >}}
 
 ### Team comparison
 
@@ -84,19 +78,27 @@ Select {{< ui >}}Team Details{{< /ui >}} on a row to open that team's view.
 
 {{< img src="ai_agents_console/team-comparison.png" alt="Comparison panel with a line chart of spend per engineer across teams over time, insight callouts on the right, and a table comparing spend per engineer, cost per PR, time to merge, and sessions for each team" style="width:100%;" >}}
 
-### Top users
+### User Analytics
 
-The {{< ui >}}User Analytics{{< /ui >}} panel ranks your top contributors across three leaderboards: top users by spend, top users by lines generated, and top users by merged PRs.
+The {{< ui >}}User Analytics{{< /ui >}} panel breaks down activity by individual user.
+
+#### Top users
+
+Three leaderboards rank your top contributors by spend, lines generated, and merged PRs.
 
 {{< img src="ai_agents_console/top-users.png" alt="User Analytics panel showing three leaderboards: Top Users by Spend, Top Users by Lines Generated, and Top Users by Merged PRs" style="width:100%;" >}}
 
-### User cost across agents
+#### Lines generated vs. spend
+
+The {{< ui >}}Lines Generated vs Spend{{< /ui >}} chart plots each user as a point, with point size reflecting the number of sessions. Both axes are configurable so you can compare lines generated, PRs, or spend.
+
+{{< img src="ai_agents_console/lines-vs-spend.png" alt="Scatter plot of Lines Generated vs Spend, with each user as a bubble sized by number of sessions and labeled with email addresses" style="width:100%;" >}}
+
+#### User cost across agents
 
 The {{< ui >}}User Cost Across Agents{{< /ui >}} table lists every user, the agents they use, their model cost (with a per-model breakdown), lines of code generated, and number of sessions. Search for a specific user or sort by any column.
 
 {{< img src="ai_agents_console/user-cost-across-agents.png" alt="User Cost Across Agents table showing per-user model cost, agents used, lines of code generated, and sessions for 98 users" style="width:100%;" >}}
-
-### User detail view
 
 Select a user to open a detail view that includes their user spend, lines generated, pull requests, AI adoption percentage, model mix, and recent pull requests. Switch to the {{< ui >}}Github Pull Requests{{< /ui >}} tab to see the user's full PR history.
 
