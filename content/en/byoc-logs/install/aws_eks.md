@@ -101,26 +101,26 @@ Required authorized actions:
 
 ```bash
 eksctl create iamserviceaccount \
-  --name byoc-logs \
+  --name byoclogs \
   --namespace byoclogs \
   --cluster <CLUSTER_NAME> \
-  --role-name byoc-logs \
+  --role-name byoclogs \
   --region <AWS_REGION> \
   --attach-policy-arn <POLICY_ARN> \
   --approve
 ```
 
-This creates an IAM role called `byoc-logs` and a Kubernetes service account called `byoc-logs` in the `byoclogs` namespace. 
+This creates an IAM role called `byoclogs` and a Kubernetes service account called `byoclogs` in the `byoclogs` namespace. 
 
 ### Create an RDS database
 
-Create a micro RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is sufficient.
+Create an RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is sufficient.
 
 ```shell
-# Micro RDS instance for testing purposes. Takes around 5 min.
+# RDS instance for testing purposes. Takes around 5 min.
 aws rds create-db-instance \
-  --db-instance-identifier byoc-logs-demo-postgres \
-  --db-instance-class db.t3.micro \
+  --db-instance-identifier byoclogs-demo-postgres \
+  --db-instance-class db.t4g.medium \
   --engine postgres \
   --engine-version 18.3 \
   --master-username byoclogs \
@@ -135,11 +135,11 @@ aws rds create-db-instance \
   --no-multi-az
 ```
 
-You can retrieve RDS information by executing the following shell commmands. The below commands retrieve information for the testing RDS instance created above:
+You can retrieve RDS information by executing the following shell commands. The below commands retrieve information for the testing RDS instance created above:
 
 ```shell
 # Get RDS instance details
-RDS_INFO=$(aws rds describe-db-instances --db-instance-identifier byoc-logs-demo-postgres --query 'DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port,Database:DBName}' --output json 2>/dev/null)
+RDS_INFO=$(aws rds describe-db-instances --db-instance-identifier byoclogs-demo-postgres --query 'DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port,Database:DBName}' --output json 2>/dev/null)
 
 STATUS=$(echo $RDS_INFO | jq -r '.Status')
 ENDPOINT=$(echo $RDS_INFO | jq -r '.Endpoint')
@@ -165,21 +165,6 @@ echo ""
    helm repo update
    ```
 
-1. Create a Kubernetes namespace for the chart:
-   ```shell
-   kubectl create namespace <NAMESPACE_NAME>
-   ```
-
-   For example, to create a `byoclogs` namespace:
-   ```shell
-   kubectl create namespace byoclogs
-   ```
-
-   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
-   ```shell
-   kubectl config set-context --current --namespace=byoclogs
-   ```
-
 1. Store your Datadog API key as a Kubernetes secret:
 
    ```shell
@@ -188,9 +173,14 @@ echo ""
    --from-literal api-key="<DD_API_KEY>"
    ```
 
+    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
+   ```shell
+   kubectl config set-context --current --namespace=byoclogs
+   ```
+
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
    ```shell
-   kubectl create secret generic byoc-logs-metastore-uri \
+   kubectl create secret generic byoclogs-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
@@ -231,8 +221,8 @@ echo ""
    # The chart uses this service account to access S3.
    serviceAccount:
      create: false
-     name: byoc-logs
-     eksRoleName: byoc-logs
+     name: byoclogs
+     eksRoleName: byoclogs
 
    # BYOC Logs node configuration
    config:
@@ -247,10 +237,10 @@ echo ""
    ingress:
      internal:
        enabled: true
-       name: byoc-logs-internal
-       host: byoc-logs.acme.internal
+       name: byoclogs-internal
+       host: byoclogs.acme.internal
        extraAnnotations:
-         alb.ingress.kubernetes.io/load-balancer-name: byoc-logs-internal
+         alb.ingress.kubernetes.io/load-balancer-name: byoclogs-internal
 
    # Metastore configuration
    # The metastore is responsible for storing and managing index metadata.
@@ -262,7 +252,7 @@ echo ""
    metastore:
      extraEnvFrom:
        - secretRef:
-           name: byoc-logs-metastore-uri
+           name: byoclogs-metastore-uri
 
    # Indexer configuration
    # The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
@@ -322,7 +312,8 @@ kubectl get services -n <NAMESPACE_NAME>
 To uninstall BYOC Logs:
 
 ```shell
-helm uninstall <RELEASE_NAME>
+helm uninstall <RELEASE_NAME> \
+-n <NAMESPACE_NAME>
 ```
 
 ## Next step
