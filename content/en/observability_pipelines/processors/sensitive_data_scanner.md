@@ -95,7 +95,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 To delete a rule in the Sensitive Data Scanner:
 
-1. Navigate to Observability Pipelines.
+1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to expand it.
 1. Click **Manage Scanning Rules**.
@@ -292,7 +292,7 @@ The Sensitive Data Scanner processor is CPU intensive, which means more resource
 
 Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data processor to view how many matches each rules has had over the past 24 hours.
 
-1. Navigate to Observability Pipelines.
+1. Navigate to [Observability Pipelines][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to exanpd it.
 1. Click **View Scanning rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
@@ -314,11 +314,11 @@ Use the `pipelines.component_latency_seconds` metric to:
 
 To view the `pipelines.component_latency_seconds` metric:
 
-1. Navigate to [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
+1. Navigate to [Metrics Explorer][11].
 1. In the metric field, enter `pipelines.component_latency_seconds`.
 1. In the **from** field, enter the tags: `component_type:sensitive_data_scanner` and `component_id:<component_id>`, where `<component_id>` is the ID for your Sensitive Data Scanner processor.
 
-**Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metrics. see [Enabling advanced query functionality](/metrics/distributions/#enabling-advanced-query-functionality) for instructions.
+**Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metrics. see [Enabling advanced query functionality][12] for instructions.
 
 ## Further reading
 
@@ -334,3 +334,5 @@ To view the `pipelines.component_latency_seconds` metric:
 [8]: /security/sensitive_data_scanner/scanning_rules/library_rules/?search=US+Social+Security+Number+Scanner
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline#nested-schema-for-configprocessor_groupprocessorsensitive_data_scanner
 [10]: /api/latest/observability-pipelines/#create-a-new-pipeline
+[11]: https://app.datadoghq.com/metric/explorer
+[12]: /metrics/distributions/#enabling-advanced-query-functionality
