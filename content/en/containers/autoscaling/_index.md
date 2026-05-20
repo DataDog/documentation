@@ -474,20 +474,18 @@ After a workload is autoscaled, day-two operations are managed through a combina
 
 ### How vertical recommendations are calculated
 
-Datadog computes vertical scaling recommendations for CPU and memory by analyzing historical container usage data over the last 8 days. Recommendations are calculated differently depending on whether the workload's current resource request equals its resource limit.
+Datadog computes vertical scaling recommendations for CPU and memory by analyzing historical container usage data over the last 8 days. The methodology used for each resource depends on whether that resource's request is equal to its limit, mirroring the [Kubernetes Quality of Service (QoS) class][14] concept. CPU and memory are evaluated independently: a workload can use the Burstable methodology for CPU and the Guaranteed methodology for memory, or vice versa.
 
 #### Memory recommendations
 
-**When memory request differs from memory limit:**
+**Burstable** (memory request is lower than memory limit):
 
 | | How it's computed |
 |---|---|
 | **Request recommendation** | Based on the **p95** of memory usage over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
 | **Limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is then added. |
 
-**When memory request equals memory limit:**
-
-When the current request and limit are set to the same value, both are computed using the more conservative limit-level methodology:
+**Guaranteed** (memory request equals memory limit):
 
 | | How it's computed |
 |---|---|
@@ -497,16 +495,14 @@ When the current request and limit are set to the same value, both are computed 
 
 #### CPU recommendations
 
-**When CPU request differs from CPU limit:**
+**Burstable** (CPU request is lower than CPU limit):
 
 | | How it's computed |
 |---|---|
 | **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
 | **Limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
 
-**When CPU request equals CPU limit:**
-
-When the current request and limit are set to the same value, both are computed using the same methodology:
+**Guaranteed** (CPU request equals CPU limit):
 
 | | How it's computed |
 |---|---|
@@ -515,10 +511,10 @@ When the current request and limit are set to the same value, both are computed 
 #### Key design principles
 
 - **8-day lookback window (configurable)**: By default, all recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes. The lookback window is configurable per workload.
-- **Decaying weights**: For both CPU and memory request recommendations (when request ≠ limit), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
+- **Decaying weights**: For Burstable-class request recommendations (CPU or memory), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
 - **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
-- **OOMKill response**: When memory requests and limits are equal and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
-- **Request-equals-limit preservation**: When a workload's request and limit are configured to the same value, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
+- **OOMKill response**: When memory is Guaranteed-class (request equals limit) and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
+- **Guaranteed-class preservation**: When a resource has request equal to limit, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
 
 ## Further reading
 
@@ -537,3 +533,4 @@ When the current request and limit are set to the same value, both are computed 
 [11]: https://app.datadoghq.com/orchestration/scaling/setup
 [12]: /containers/guide/manage-datadogpodautoscaler-with-argocd/
 [13]: /containers/guide/manage-datdadogpodautoscaler-with-terraform/
+[14]: https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/
