@@ -4,10 +4,10 @@ description: "Learn about DORA Metrics events, fields, tags, and change lead tim
 aliases:
 - /dora_metrics/data_collected/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up data sources for DORA Metrics'
 - link: '/metrics/'
@@ -120,11 +120,11 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 [7]: /api/latest/dora-metrics/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/metrics/
-[10]: /dora_metrics/setup/
+[10]: /delivery_performance/dora_metrics/setup/
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
-[12]: /dora_metrics/deployments/#limitations
+[12]: /delivery_performance/dora_metrics/setup/#limitations
 [13]: https://www.datadoghq.com/blog/service-catalog-setup/
 [14]: https://app.datadoghq.com/incidents
 [15]: /incident_response/incident_management/investigate/describe/
-[16]: /dora_metrics/
-[17]: /dora_metrics/change_failure_detection/
+[16]: /delivery_performance/dora_metrics/
+[17]: /delivery_performance/dora_metrics/change_failure_detection/

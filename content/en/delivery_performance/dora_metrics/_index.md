@@ -6,7 +6,7 @@ aliases:
 - /dora_metrics/
 is_beta: true
 further_reading:
-- link: "/dora_metrics/calculation/"
+- link: "/delivery_performance/dora_metrics/calculation/"
   tag: "Documentation"
   text: "Learn how Datadog calculates DORA metrics"
 - link: "/continuous_delivery/deployments"
@@ -95,10 +95,10 @@ Within dashboards and graphs, custom tags are treated as [attributes][7]. To fil
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/knowledge-center/dora-metrics/
-[2]: /dora_metrics/setup/
-[3]: /dora_metrics/data_collected/
+[2]: /delivery_performance/dora_metrics/setup/
+[3]: /delivery_performance/dora_metrics/data_collected/
 [4]: https://app.datadoghq.com/ci/dora
 [5]: /monitors/types/metric/?tab=threshold
 [6]: /monitors/
 [7]: /dashboards/guide/quick-graphs/#graphing-events
-[8]: /dora_metrics/data_collected/#custom-tags
+[8]: /delivery_performance/dora_metrics/data_collected/#custom-tags
