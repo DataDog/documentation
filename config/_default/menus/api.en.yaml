@@ -11803,6 +11803,32 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Search LLM Observability spans
+      url: '#search-llm-observability-spans'
+      identifier: llm-observability-search-llm-observability-spans
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchLLMObsSpans
+        unstable:
+          - v2
+        order: 35
+    - name: List LLM Observability spans
+      url: '#list-llm-observability-spans'
+      identifier: llm-observability-list-llm-observability-spans
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsSpans
+        unstable:
+          - v2
+        order: 34
     - name: Update an LLM Observability project
       url: '#update-an-llm-observability-project'
       identifier: llm-observability-update-an-llm-observability-project
@@ -12076,6 +12102,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Delete LLM Observability data
+      url: '#delete-llm-observability-data'
+      identifier: llm-observability-delete-llm-observability-data
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsData
+        unstable:
+          - v2
+        order: 36
     - name: Create or update a custom evaluator configuration
       url: '#create-or-update-a-custom-evaluator-configuration'
       identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
