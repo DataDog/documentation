@@ -460,6 +460,26 @@
     "description": "List the versions of an app. This endpoint is paginated.",
     "summary": "List App Versions"
   },
+  "GetBlueprint": {
+    "description": "Retrieve an app blueprint by its ID.",
+    "summary": "Get Blueprint"
+  },
+  "ListBlueprints": {
+    "description": "List available app blueprints.",
+    "summary": "List Blueprints"
+  },
+  "GetBlueprintsByIntegrationId": {
+    "description": "List app blueprints associated with a specific integration ID.",
+    "summary": "Get Blueprints by Integration ID"
+  },
+  "GetBlueprintsBySlugs": {
+    "description": "Retrieve app blueprints by their slugs.",
+    "summary": "Get Blueprints by Slugs"
+  },
+  "ListTags": {
+    "description": "List all tags associated with the authenticated user's apps.",
+    "summary": "List Tags"
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
