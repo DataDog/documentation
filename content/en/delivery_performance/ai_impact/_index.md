@@ -56,7 +56,7 @@ User Activity
 
 ## Impact metrics
 
-{{< img src="sdlc_analytics/ai_impact/impact_delivery.png" alt="An overview of AI Impact delivery metrics" style="width:100%;" >}}
+{{< img src="delivery_performance/ai_impact/impact_delivery.png" alt="An overview of AI Impact delivery metrics" style="width:100%;" >}}
 
 | Metric | Definition |
 |--------|------------|

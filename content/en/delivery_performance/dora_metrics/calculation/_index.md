@@ -40,7 +40,7 @@ To calculate a deployment's change lead time, Datadog runs a `git log` between t
 
 The following example illustrates how Datadog uses the commit history to calculate a deployment's change lead time.
 
-{{< img src="sdlc_analytics/dora_metrics/git_log_example.png" alt="An example of a detected rollback deployment" style="width:75%;" >}}
+{{< img src="delivery_performance/dora_metrics/git_log_example.png" alt="An example of a detected rollback deployment" style="width:75%;" >}}
 
 In the graph above, C is the first commit, followed by C1 and C2. A feature branch is created from C2 with commit C3, then merged back into the main branch with merge commit C4. C4 has two parents: C2 and C3.
 

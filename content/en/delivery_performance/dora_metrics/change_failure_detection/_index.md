@@ -50,7 +50,7 @@ When a rollback is detected, the change failure is the first deployment after th
 
 For the sequence V1 → V2 → V3 → V1, the rollback target is the original V1, so V2 is marked as the change failure and V1 as a rollback deployment.
 
-{{< img src="sdlc_analytics/dora_metrics/rollback_example.png" alt="An example of a detected rollback deployment" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/rollback_example.png" alt="An example of a detected rollback deployment" style="width:100%;" >}}
 
 **Note**: Redeploying the same version back‑to‑back (for example, V1 → V1) is not considered a rollback.
 
@@ -182,7 +182,7 @@ To update a deployment's status from the Datadog UI:
 2. Click on a deployment to open the deployment details panel.
 3. In the deployment details panel, select the {{< ui >}}Deployment status{{< /ui >}} from the dropdown to mark the deployment as failed or stable.
 
-{{< img src="sdlc_analytics/dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" video="true" >}}
+{{< img src="delivery_performance/dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" video="true" >}}
 
 ## Further reading
 

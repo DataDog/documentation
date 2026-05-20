@@ -5935,41 +5935,41 @@ menu:
       parent: pr_gates
       identifier: pr_gates_setup
       weight: 1
-    - name: SDLC Analytics
-      url: sdlc_analytics/
+    - name: Delivery Performance
+      url: delivery_performance/
       pre: ci
       parent: software_delivery_heading
-      identifier: sdlc_analytics
+      identifier: delivery_performance
       weight: 70000
     - name: DORA Metrics
-      url: sdlc_analytics/dora_metrics/
-      parent: sdlc_analytics
+      url: delivery_performance/dora_metrics/
+      parent: delivery_performance
       identifier: dora_metrics
       weight: 1
     - name: Setup
-      url: sdlc_analytics/dora_metrics/setup
+      url: delivery_performance/dora_metrics/setup
       parent: dora_metrics
       identifier: dora_metrics_setup
       weight: 1
     - name: Change Failure Detection
-      url: sdlc_analytics/dora_metrics/change_failure_detection/
+      url: delivery_performance/dora_metrics/change_failure_detection/
       parent: dora_metrics
       identifier: dora_metrics_change_failure_detection
       weight: 2
     - name: DORA Metrics Calculation
-      url: sdlc_analytics/dora_metrics/calculation/
+      url: delivery_performance/dora_metrics/calculation/
       parent: dora_metrics
       identifier: dora_metrics_calculation
       weight: 3
     - name: Data Collected
-      url: sdlc_analytics/dora_metrics/data_collected/
+      url: delivery_performance/dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
       weight: 4
     - name: AI Impact
-      url: sdlc_analytics/ai_impact/
-      parent: sdlc_analytics
-      identifier: sdlc_analytics_ai_impact
+      url: delivery_performance/ai_impact/
+      parent: delivery_performance
+      identifier: delivery_performance_ai_impact
       weight: 2
     - name: Feature Flags
       url: feature_flags/
