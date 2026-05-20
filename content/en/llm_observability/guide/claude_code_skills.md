@@ -119,13 +119,13 @@ The skill highlights which metrics improved or regressed, which event categories
 
 `/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][6], with all eight sections present (env setup, `LLMObs.enable`, dataset, task placeholder, evaluators, experiment, run, results inspection) and a `# TODO(user)` marker on the task and evaluators so the placeholder cannot ship by accident.
 
-The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime via `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime via `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is. Every generated experiment is tagged with `generated_by=claude-code` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is. Every generated experiment is tagged with `generated_by=claude-code` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
 
 | Option | Default | Description |
 |--------|---------|-------------|
 | `--format` | `py` | `py` (single `.py` file) or `ipynb` (Jupyter notebook with one cell per section) |
 | `--dataset` | none (inline 3-record sample) | Path to a local `DatasetRecordRaw[]` JSON or CSV file. Mutually exclusive with `--dataset-name` |
-| `--dataset-name` | none | Name of an existing Datadog dataset to fetch at runtime via `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
+| `--dataset-name` | none | Name of an existing Datadog dataset to fetch at runtime with `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
 | `--dataset-version` | latest | Pin to a specific dataset version when using `--dataset-name` |
 | `--project-name` | `experiment-<service-name>` (inferred from the codebase) | Datadog project name visible in the LLM Experiments UI |
 | `--evaluator-style` | `function` | `function` (plain functions), `class` (`BaseEvaluator` subclasses), or `remote` (`RemoteEvaluator` instances) |
