@@ -41,13 +41,13 @@ The default delivery method uses init containers, but SSI supports additional [i
 
 ### Windows
 
-On Windows, the injector is delivered as a DLL. A Datadog kernel driver loads the injector DLL into every new process, and the DLL's `DllMain` function runs before the application's entry point. The injector then performs the same detection and instrumentation steps as on Linux.
+On Windows, the injector is delivered as a DLL. A Datadog kernel driver loads the injector DLL into every new process, and the DLL's `DllMain` function runs before the application's entry point. After loading, the injector follows the same flow described in [Injector behavior](#injector-behavior). Windows supports Java and .NET only; runtime detection on Windows differs from Linux in implementation, but the resulting instrumentation behavior is the same.
 
 ## Injector behavior
 
 After the injector is loaded into a process's memory space—regardless of platform—it performs the following:
 - Detects the application's runtime (such as Python, Node.js, PHP, Java, .NET, Ruby, or NGINX).
-- Evaluates whether the process should be instrumented.
+- Evaluates whether the process should be instrumented. Some processes are excluded by default. You can also define instrumentation rules to allow or deny injection per workload on [Linux][3], [Kubernetes][4], and [Windows][5].
 - Modifies environment variables or command-line arguments to load the appropriate tracer SDK.
 - Emits telemetry to report status and aid in debugging.
 
@@ -57,9 +57,9 @@ If injection fails or no supported runtime is detected, the application continue
 
 ## Injector life cycle
 
-The injector runs before the application's `main` function and exits before the application starts. It is not a background process or thread that runs alongside the application.
+The injector completes its work before the application's `main` function runs. It is not a background process or thread that runs alongside the application.
 
-After the injector sets the necessary environment variables (or, for NGINX, re-executes the process with the Datadog module loaded), the injected library completes its work and the application proceeds normally. From that point on, the only Datadog code in the process is the tracer SDK that the application itself loads through the configured environment variables.
+After the injector sets the necessary environment variables or command-line arguments, the injected library completes its work and the application proceeds normally. From that point on, the only Datadog code in the process is the tracer SDK that the application itself loads using that configuration.
 
 ## Per-language instrumentation
 
@@ -73,24 +73,24 @@ To load the appropriate tracer SDK, the injector sets one or more environment va
 | Ruby     | Sets `RUBYOPT` with `-r <path-to-Datadog-host-inject-script>`. |
 | .NET     | Sets the .NET CLR profiler environment variables (`CORECLR_ENABLE_PROFILING`, `CORECLR_PROFILER`, `CORECLR_PROFILER_PATH`, and related variables). |
 | PHP      | Sets `PHP_INI_SCAN_DIR` to a Datadog-provided loader directory. |
-| NGINX    | Re-executes the NGINX binary with the Datadog module loaded (for example, `-g "load_module <path-to-Datadog-module>;"`). Because NGINX is a web server that loads native modules rather than a language runtime, it cannot be instrumented with environment variables. |
+| NGINX    | Re-executes the NGINX binary with added command-line arguments to load the Datadog module (for example, `-g "load_module <path-to-Datadog-module>;"`). |
 
 ## Privileges and scope
 
 ### Injection scope
 
-SSI instruments applications by loading a tracer or profiler into the application process using user-space dynamic linking (such as `LD_PRELOAD` on Linux or DLL injection on Windows). It does not install kernel modules, patch the kernel, hook system calls, or use eBPF.
+SSI instruments applications by loading a tracer or profiler into the application process using user-space dynamic linking (such as `LD_PRELOAD` on Linux or DLL injection on Windows). It does not install kernel modules, patch the kernel, hook system calls, or use eBPF. After it loads, the injector and the tracer or profiler run with the same OS privileges as the application process—see [Runtime privileges](#runtime-privileges).
 
 While the injected code runs inside the application process, some deployment modes update OS or runtime configuration so that the injector loads automatically:
 
-- **Kubernetes admission controller injection**: Mutates pod specs (adds an init container, mounts volumes, sets environment variables). This is a Kubernetes API action, not a host OS modification.
-- **Linux host injection**: Configures the dynamic loader (typically through `/etc/ld.so.preload`) so that new processes load the injection launcher. This is an OS-level configuration change, but it remains user-space dynamic linking, not kernel code.
-- **Docker runtime injection**: Configures Docker to use a wrapper runtime so that containers start with the tracer mounted and configured. This modifies Docker daemon configuration. It does not modify kernel modules.
+- **Kubernetes admission controller injection**: Mutates pod specs to mount the injector (using an init container or the [Datadog CSI driver][2]) and set environment variables. This is a Kubernetes API action, not a host OS modification.
+- **Linux host injection**: Configures the dynamic loader (typically through `/etc/ld.so.preload`) so that every new dynamically linked process loads the injection launcher. This is an OS-level configuration change, but it remains user-space dynamic linking, not kernel code.
+- **Docker runtime injection**: Configures Docker to use a wrapper runtime so that containers start with the tracer mounted and configured (typically by injecting an `LD_PRELOAD` environment variable into the container). This modifies Docker daemon configuration.
 - **Windows injection**: Installs a kernel driver that loads the injector DLL into new processes. The driver runs at the OS level; the injected code that runs inside each application process remains user-space.
 
 ### Runtime privileges
 
-After injection, the tracer or profiler runs inside the application process and inherits the same OS permissions as that process. It does not gain additional privileges. If the application runs as a restricted user, the tracer or profiler is also restricted to that user's permissions.
+The injector, tracer, and profiler all run inside the application process and inherit the same OS permissions as that process. They do not gain additional privileges. If the application runs as a restricted user, the injector, tracer, and profiler are also restricted to that user's permissions.
 
 ### Installation privileges
 
@@ -113,7 +113,7 @@ Privilege requirements at install time depend on the deployment mode:
 #### Docker runtime on a host
 
 - Installation and configuration typically require root, because they modify Docker daemon configuration.
-- At runtime, injection affects container startup behavior. The tracer runs inside the container's application process as that container's user.
+- At runtime, injection affects container startup behavior. The injector and the tracer run inside the container's application process as that container's user.
 
 #### Windows
 
@@ -126,3 +126,6 @@ Privilege requirements at install time depend on the deployment mode:
 
 [1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
 [2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/#configure-injection-modes
+[3]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
+[4]: /tracing/trace_collection/single-step-apm/kubernetes/#target-specific-workloads
+[5]: /tracing/trace_collection/single-step-apm/windows/#define-instrumentation-rules
