@@ -22667,6 +22667,10 @@ components:
           description: Shows the sum of all Cloud Security Information and Event Management events over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_siem_indexed_logs_sum:
+          description: Shows the sum of all Cloud SIEM Indexed Logs over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         code_analysis_sa_committers_hwm:
           description: Shows the high-water mark of all Static Analysis committers over all hours in the current date for the given org.
           format: int64
@@ -23427,6 +23431,14 @@ components:
           description: Shows the average number of Serverless Apps for Azure and Google Cloud for the given date and given org.
           format: int64
           type: integer
+        siem_12mo_retention_sum:
+          description: Shows the sum of all SIEM 12mo Retention over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        siem_6mo_retention_sum:
+          description: Shows the sum of all SIEM 6mo Retention over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         siem_analyzed_logs_add_on_count_sum:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current date for the given org.
           format: int64
@@ -23674,6 +23686,10 @@ components:
           type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cloud_siem_indexed_logs_sum:
+          description: Shows the sum of all Cloud SIEM Indexed Logs over all hours in the current date for the given org.
           format: int64
           type: integer
         code_analysis_sa_committers_hwm:
@@ -24448,6 +24464,14 @@ components:
           description: Shows the average number of Serverless Apps for Azure and Google Cloud for the given date and given org.
           format: int64
           type: integer
+        siem_12mo_retention_sum:
+          description: Shows the sum of all SIEM 12mo Retention over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        siem_6mo_retention_sum:
+          description: Shows the sum of all SIEM 6mo Retention over all hours in the current date for the given org.
+          format: int64
+          type: integer
         siem_analyzed_logs_add_on_count_sum:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current date for the given org.
           format: int64
@@ -24693,6 +24717,10 @@ components:
           type: integer
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management events over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cloud_siem_indexed_logs_agg_sum:
+          description: Shows the sum of all Cloud SIEM Indexed Logs over all hours in the current month for all organizations.
           format: int64
           type: integer
         code_analysis_sa_committers_hwm_sum:
@@ -25485,6 +25513,14 @@ components:
           type: integer
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and Google Cloud in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_12mo_retention_agg_sum:
+          description: Shows the sum of all SIEM 12mo Retention over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_6mo_retention_agg_sum:
+          description: Shows the sum of all SIEM 6mo Retention over all hours in the current month for all organizations.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_agg_sum:
