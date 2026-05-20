@@ -8,27 +8,12 @@ const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
 const ENUM_DISPLAY_LIMIT = 10;
 
-// marked v17+ is ESM-only and breaks raw `node` require(). Load lazily so the rest of
-// this module (updateMenu, createPages, etc.) can be required without marked working.
-// Jest tests that exercise descColumn etc. will trigger the load via parseDescWithTableCell;
-// inside Jest, babel-jest transforms the ESM module so the require succeeds.
+// marked v17+ is ESM-only; require() doesn't work. init() pre-loads it via dynamic import()
+// before processSpecs() runs. Jest tests use babel-jest which transforms the ESM import.
 let marked;
 function loadMarked() {
-  if (marked) return marked;
-  try {
-    const m = require('marked/lib/marked.umd.js');
-    const parse = (m.marked && m.marked.parse) || m.parse || (m.default && m.default.parse);
-    if (typeof parse === 'function') marked = { parse };
-  } catch (_) { /* fall through */ }
-  if (!marked) {
-    try {
-      const m = require('marked');
-      const parse = m.parse || (m.default && m.default.parse) || (m.marked && m.marked.parse);
-      if (typeof parse === 'function') marked = { parse };
-    } catch (_) { /* fall through */ }
-  }
   if (!marked || typeof marked.parse !== 'function') {
-    throw new Error('marked.parse not found. Check marked package version.');
+    throw new Error('marked not loaded. Ensure init() has been awaited before calling this function.');
   }
   return marked;
 }
@@ -244,13 +229,7 @@ const writeEndpointPage = (entry) => {
   fs.mkdirSync(dir, { recursive: true });
   const frontMatter = {
     title: entry.title,
-    operationid: entry.operationids[0],
-    tag: entry.tag,
-    versions: entry.versions,
   };
-  if (entry.operationids.length > 1) {
-    frontMatter.operationids = entry.operationids;
-  }
   const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
   fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
 };
@@ -1168,7 +1147,9 @@ const findSpecFiles = () => {
   return specs;
 };
 
-const init = () => {
+const init = async () => {
+  const m = await import('marked');
+  marked = { parse: (m.marked || m.default || m).parse };
   const specs = findSpecFiles();
   processSpecs(specs);
 };
