@@ -220,15 +220,16 @@ Edits an existing Datadog notebook.
 
 <div class="alert alert-info">The <code>agent</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
 
-description tk
+Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a restricted shell interpreter. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
 
-### `tool_1`
+### `datadog_remote_action_restricted_shell_run_command`
 *Toolset: **agent***\
 *Permissions Required: `tk`*\
-Description goes here.
+Runs a read-only shell command on a specified host. Supported commands include: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss`, and `ip`. Supports pipes, loops, conditionals, variable assignment, and globbing.
 
-- Example 1.
-- Example 2.
+- Show me the last 100 lines of the Datadog Agent log on host `prod-web-01`.
+- Find all ERROR entries in `/var/log/app/` on host `db-replica-3` from the last hour.
+- Get the contents of `/etc/datadog-agent/datadog.yaml` on host `prod-worker-07`.
 
 ## Alerting
 
