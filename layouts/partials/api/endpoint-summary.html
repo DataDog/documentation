@@ -52,7 +52,7 @@ v1 first but the active tab is v2; mirror that here using endpoint-visibility. *
 
   <div class="api-endpoint-summary mb-4">
     <h2 class="mb-2 api-task-description" id="{{ $endpointSlug }}">
-      <a class="js-collapse-trigger" href="{{ $menuChild.URL }}">{{- $anchorStr }} &rarr;</a>
+      <a class="js-collapse-trigger" href="{{ $menuChild.URL }}">{{- $anchorStr }} <span class="fs-4" style="vertical-align: 0.05em">&rarr;</span></a>
       {{ if $isDeprecated }}<span class="badge bg-warning text-dark ms-2 fs-5 align-middle px-1" style="padding-top: 0; padding-bottom: 2px">deprecated</span>{{ end }}
       {{ if $isUnstable }}<span class="badge bg-info text-white ms-2 fs-5 align-middle px-1" style="padding-top: 0; padding-bottom: 2px">preview</span>{{ end }}
     </h2>
