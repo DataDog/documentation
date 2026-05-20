@@ -14,8 +14,6 @@ further_reading:
 
 After you've decided on your org structure, the next step is defining what users are allowed to do. Datadog's [permission model][1] controls access to features, data types, and administrative actions through Roles. This section covers how the permission system works, when and how to create custom roles, and how to keep them current as Datadog evolves.
 
-**Note:** The `user_access_manage` permission is one of the most sensitive in the platform. It allows a user to manage other users' roles and permissions, including granting themselves additional permissions. Guard this permission carefully and limit it to trusted administrators.
-
 ## Managed roles
 
 Datadog provides three [managed roles][2]:
@@ -59,6 +57,8 @@ As your organization grows, the number of roles can increase rapidly. Organizati
 - **Audit roles regularly.** Identify roles with no users or teams assigned and consolidate or delete them.
 - **Name roles descriptively.** Use a naming convention that indicates the role's purpose and scope (for example, `team-payments-lead` or `contractor-readonly`).
 - **Limit role creation.** Only users with the `user_access_manage` permission should be able to create new roles. Review new role requests to avoid duplication.
+
+<div class="alert alert-danger">The <code>user_access_manage</code> permission is one of the most sensitive in the platform. It allows a user to manage other users' roles and permissions, including granting themselves additional permissions. Guard this permission carefully and limit it to trusted administrators.</div>
 
 ## Recommended starter roles
 
