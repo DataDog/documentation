@@ -1385,11 +1385,11 @@ HAVING count(DISTINCT service) = 4;
 
 #### Use a high-cardinality join key
 
-Prefer a high-cardinality key (`user_id`, `request_id`, `trace_id`) when joining. Coarse keys like `service` or `status` can expand a moderate input into billions of intermediate rows. For large datasets, also narrow the data source filter and time range on each side of the join.
+When joining, prefer a high-cardinality key like `user_id`, `request_id`, or `trace_id`. Coarse keys like `service` or `status` can expand a moderate input into billions of intermediate rows. For large datasets, also narrow the data source filter and time range on each side of the join.
 
 #### Filter both sides of a cross-source join
 
-When you `JOIN` across two data sources (logs + RUM, logs + traces, feed + logs), apply a selective filter on each side. An unfiltered side becomes a full scan that has to be held in memory for the join. Where possible, pre-aggregate each source separately and join the summaries.
+When you `JOIN` across two data sources, apply a selective filter on each side. Examples include logs + RUM, logs + traces, and feed + logs. An unfiltered side becomes a full scan that has to be held in memory for the join. Where possible, pre-aggregate each source separately and join the summaries.
 
 **Before**
 
