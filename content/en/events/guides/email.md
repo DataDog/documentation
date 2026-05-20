@@ -7,7 +7,7 @@ aliases:
 - /service_management/events/guides/email/
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Events with email is not supported on {{< region-param key=dd_datacenter code="true" >}}</div>
 {{< /site-region >}}
 

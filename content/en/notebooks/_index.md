@@ -27,6 +27,10 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-with-notebooks"
   tag: "Learning Center"
   text: "Getting Started with Notebooks"
+- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
+  tag: "Learning Center"
+  text: "Using Datadog Notebooks for Centralized Reporting"
+
 ---
 
 ## Overview

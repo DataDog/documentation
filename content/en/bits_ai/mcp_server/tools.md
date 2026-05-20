@@ -471,6 +471,23 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Code Execution
+
+A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
+
+<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
+
+### `execute_code`
+*Toolset: **code-exec***\
+*Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
+Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+
+- For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
+- Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
+- For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
 ## Dashboards
 
 Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
@@ -768,6 +785,38 @@ Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
+## Kubernetes
+
+Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+
+### `search_datadog_k8s_resources`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Teams Read`*\
+Searches for [Kubernetes][55] resources across all clusters. Use this tool instead of `kubectl` to determine the state of Kubernetes resources such as deployments, pods, nodes, etc. This tool does not require local cluster access, works across all clusters, and returns enriched data with tags. You can include specific tag keys on each result, and include parent resource names to investigate relationships between resources (for example, the deployment a pod belongs to).
+
+- Show me all pods in the `production` namespace with `CrashLoopBackOff` status.
+- Find deployments with in-progress rollouts in the `general2` cluster.
+- List all nodes in my cluster sorted by CPU usage.
+- Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `describe_datadog_k8s_resource`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read`*\
+Gets detailed information about a specific [Kubernetes][55] resource, including resource-specific details such as CPU and memory requests and limits, and optionally tags, labels, annotations, manifest history, parent resources, and a deep link to the [Kubernetes Explorer][55]. Use this tool instead of `kubectl describe`. Identify a resource by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). For the full raw manifest, use `get_datadog_k8s_manifest`.
+
+- Describe pod `my-app` in cluster `prod`, namespace `default`.
+- Get details for deployment `api-server` in namespace `default`, cluster `staging`.
+- Show me the tags and annotations for this Kubernetes resource.
+
+### `get_datadog_k8s_manifest`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read`*\
+Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this tool instead of `kubectl get -o yaml`. Supports extracting specific subtrees with a `kubectl` JSONPath expression and a concise mode that omits `status` and `managedFields` to reduce response size.
+
+- Get the manifest for pod `my-app` in cluster `prod`, namespace `default`.
+- Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
+- Get the container images from the manifest of pod `my-app`.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
@@ -912,6 +961,23 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 - Find high-severity security signals related to my production environment.
 - List Cloud SIEM signals triggered by suspicious login attempts.
 
+### `analyze_datadog_security_signals`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read` and `Timeseries`*\
+Analyzes security signals using SQL queries for aggregations, grouping, and trend analysis. Use this for counts, top-N, and breakdowns over time. To list or retrieve specific signals, use `search_datadog_security_signals` or `get_datadog_security_signal`.
+
+- Show me the top 10 SIEM rules by signal count over the last 7 days.
+- Count high and critical security signals grouped by severity.
+- How many App & API Protection signals fired per service yesterday?
+
+### `get_datadog_security_signal`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations.
+
+- Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
+- Show me the rule, triage state, and linked cases for this signal.
+
 ### `security_findings_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
@@ -970,6 +1036,15 @@ Searches Datadog [Test Optimization][24] for flaky tests and returns triage deta
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
 - List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
 
+### `update_datadog_flaky_test_states`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Write`*\
+Sets the state of one or more flaky tests to `quarantined` (suppress failures), `disabled` (skip test), `fixed` (mark resolved), or `active` (restore). This is a write operation that requires explicit user approval. All state changes are reversible.
+
+- Quarantine all active flaky tests in the `checkout-service` repository.
+- Mark the flaky test `AuthServiceTest::testLogin` as fixed.
+- Disable flaky tests owned by `@team-payments` with a failure rate above 50%.
+
 ### `aggregate_datadog_test_events`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
@@ -1005,6 +1080,40 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
 
+### `get_datadog_test_optimization_settings`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
+Retrieves the Test Optimization features that are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
+
+- Which test optimization features are enabled for the `auth-service`?
+- Show me the Test Optimization settings for my checkout service.
+
+### `get_datadog_flaky_tests_management_policies`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
+Retrieves the Flaky Tests Management policies configured for a repository, including auto-quarantine windows, branch rules, failure rate thresholds, disable policies, and retry settings.
+
+- Show me the flaky test management policies for `github.com/my-org/my-repo`.
+- What auto-quarantine rules are configured for the checkout service repository?
+
+### `search_dora_deployments`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+
+- Show me deployments for the `checkout` service in the last 7 days.
+- Get details for DORA deployment `abc123`.
+- Find failed deployments in the production environment this month.
+
+### `aggregate_dora_deployments`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
+Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+
+- What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
+- Show me the change lead time trend for the `payments` service over the last quarter.
+- Get all four DORA metrics for the `auth-service` team.
+
 ## Synthetics
 
 Tools for interacting with Datadog [Synthetic tests][47].
@@ -1012,7 +1121,7 @@ Tools for interacting with Datadog [Synthetic tests][47].
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Read`*\
-Searches Datadog Synthetic tests.
+Searches Datadog Synthetic HTTP API tests.
 
 - Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
 - There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
@@ -1105,3 +1214,5 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [51]: /feature_flags/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
+[55]: /containers/monitoring/kubernetes_explorer/
+[56]: /account_management/rbac/permissions/

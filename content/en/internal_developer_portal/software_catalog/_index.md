@@ -16,6 +16,9 @@ further_reading:
 - link: "/internal_developer_portal/use_cases"
   tag: "Documentation"
   text: "Learn about Software Catalog Use Cases"
+- link: "https://learn.datadoghq.com/courses/managing-software-catalog"
+  tag: "Learning Center"
+  text: "Managing Services with the Software Catalog"
 algolia:
   tags: ['software catalog']
 ---
@@ -57,7 +60,7 @@ Software Catalog includes an entity when:
 - Use the entity type for more precise filtering than the legacy `type` filter (from the `span.type` attribute). For example, use the `datastore type` facet to filter by specific datastore technology.
 - Span summaries and service and resource statistics are retained for up to 30 days. For deeper analysis on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 ### Service types
 
 Every monitored service is associated with a type. Datadog automatically determines type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.

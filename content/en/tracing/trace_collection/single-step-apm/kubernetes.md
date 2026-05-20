@@ -15,6 +15,10 @@ further_reading:
   - link: /tracing/guide/local_sdk_injection
     tag: Documentation
     text: Instrument your applications using local SDK injection
+  - link: "https://learn.datadoghq.com/courses/configuring-ssi-k8s"
+    tag: "Learning Center"
+    text: "Configuring Single Step Instrumentation on Kubernetes"
+
 ---
 
 ## Overview
@@ -755,7 +759,7 @@ After you enable SSI, all supported processes in the cluster are automatically i
 
 To control where APM is activated and reduce overhead, consider the following best practices.
 
-{{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="opt-in-labels-controlled-apm-rollout" %}}
 
 #### Default vs. opt-in instrumentation
 | Mode    | Behavior    | When to use |
@@ -815,7 +819,7 @@ See [instrumentation rules][4] for additional examples.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Control which Datadog SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Control which Datadog SDKs are loaded" level="h3" expanded=false id="control-loaded-datadog-sdks" %}}
 
 Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the Datadog SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
 

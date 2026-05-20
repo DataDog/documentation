@@ -168,7 +168,21 @@ Python 3.7+ is available by default only on:
 
 For other distributions, you may need to install Python 3.7+ separately.
 
+### Known issues
+
+**Preforking WSGI servers**: Python applications running under preforking WSGI servers can experience worker process crashes (SIGSEGV) on startup when SSI is enabled. This affects uWSGI in preforking mode, gunicorn with `--preload`, and Apache `mod_wsgi` in daemon mode with preload.
+
+Recent Python SDK releases include partial fixes. See the [dd-trace-py releases page][2] for the latest status.
+
+To mitigate:
+- Disable SSI for the affected service. See [your platform's SSI setup page][3] for removal steps.
+- Switch to a lazy-loading deployment pattern (for example, gunicorn without `--preload`, or uWSGI with lazy-apps mode).
+- Install the [Python SDK][4] manually (`pip install ddtrace` + `ddtrace-run`) instead of using SSI.
+
 [1]: /tracing/trace_collection/compatibility/python
+[2]: https://github.com/DataDog/dd-trace-py/releases
+[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[4]: /tracing/trace_collection/dd_libraries/python/
 
 {{< /programming-lang >}}
 
@@ -176,7 +190,8 @@ For other distributions, you may need to install Python 3.7+ separately.
 
 ### Minimum SDK version
 
-**Ruby SDK**: 2.5.0 or higher
+**Ruby SDK**: 2.6.0 or higher
+
 
 ### Supported runtime versions
 
@@ -184,8 +199,9 @@ For a complete list of supported Ruby versions, see the [Ruby SDK compatibility 
 
 ### Operating system requirements
 
-- Requires Linux distributions using glibc 2.27 or newer
+- Requires Linux distributions using glibc 2.17 or newer
 - Not compatible with Alpine Linux or other musl-based distributions
+- Requires Bundler >= 2.4, < 4.0 and RubyGems >= 3.4, < 4.0
 
 ### Known issues
 
@@ -239,8 +255,20 @@ SSI supports both .NET Core and .NET Framework runtimes. For a complete list of 
 - [.NET Core SDK compatibility][1]
 - [.NET Framework SDK compatibility][2]
 
+### Known issues
+
+**Pre-existing .NET profilers**: The .NET CLR Profiling API loads only one profiler per process. If your application already has a .NET profiler (Datadog or another APM vendor), SSI installs successfully but the pre-existing profiler takes precedence at runtime. As a result, no Datadog traces reach the Agent.
+
+To resolve this, remove the conflicting `CORECLR_*` environment variables and any `LD_PRELOAD` entries that reference the pre-existing profiler before enabling SSI:
+
+- **Linux hosts and Docker**: Remove the variables from your application's startup environment, then restart the application.
+- **Kubernetes**: The SSI admission webhook does not overwrite `CORECLR_*` variables injected by another vendor's operator, init container, or pod template. Remove the variables from their source (the operator that injected them, an init container, the pod template, or Helm values), then restart the affected pods.
+
+For details on the .NET CLR one-profiler constraint, see [.NET Core installation][3].
+
 [1]: /tracing/trace_collection/compatibility/dotnet-core
 [2]: /tracing/trace_collection/compatibility/dotnet-framework
+[3]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 
 {{< /programming-lang >}}
 

@@ -154,6 +154,41 @@
       "description": "Delete Multiple Apps returns \"OK\" response"
     }
   ],
+  "UpdateAppVersionName": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Name App Version returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppFavorite": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Favorite Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateProtectionLevel": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Protection Level returns \"OK\" response"
+    }
+  ],
+  "UpdateAppSelfService": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Self-Service Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppTags": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Tags returns \"No Content\" response"
+    }
+  ],
   "UpdateApp": [
     {
       "group": "app_builder",
@@ -833,20 +868,6 @@
       "group": "incident_services",
       "suffix": "",
       "description": "Update an existing incident service returns \"OK\" response"
-    }
-  ],
-  "CreateIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Create a new incident team returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Update an existing incident team returns \"OK\" response"
     }
   ],
   "UpdateIncident": [
@@ -2130,6 +2151,18 @@
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
+  "MuteSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3830190821",
+      "description": "Mute security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_298521544",
+      "description": "Unmute security findings returns \"Accepted\" response"
+    }
+  ],
   "PatchSignalNotificationRule": [
     {
       "group": "security_monitoring",
@@ -2397,6 +2430,20 @@
       "group": "spans_metrics",
       "suffix": "",
       "description": "Update a span-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateBackfilledDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create backfilled degradation returns \"Created\" response"
+    }
+  ],
+  "CreateBackfilledMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create backfilled maintenance returns \"Created\" response"
     }
   ],
   "CreateComponent": [

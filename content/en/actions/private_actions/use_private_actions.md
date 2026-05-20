@@ -184,7 +184,7 @@ Install the Datadog Operator version 1.25.0:
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 helm install datadog-operator datadog/datadog-operator \
-    --set image.repository=datadog/operator \
+    --set image.repository=registry.datadoghq.com/operator \
     --set image.tag=1.25.0
 ```
 

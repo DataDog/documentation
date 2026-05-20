@@ -55,84 +55,78 @@ The available functions are categorized as follows:
 
 Returns the absolute value of a number.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attributes: <br> - `@client_latency` = 2 <br> - `@server_latency` = 3 | `#discrepancy = abs(@client_latency - @server_latency)` | `#discrepancy` = 1 |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>ceil(<i>num</i> value)</h4>
 
 Rounds number up to the nearest integer.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@value` = 2.2 | `#rounded_up = ceil(@value)` | `#rounded_up` = 3 |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>floor(<i>num</i> value)</h4>
 
 Rounds number down to the nearest integer.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@value` = 9.99 | `#rounded_down = floor(@value)` | `#rounded_down` = 9 |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>max(<i>num</i> value, [ <i>num</i> value, …])</h4>
 
 Finds maximum value amongst a set of numbers.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | `#highest_temp = max(@CPU_temperatures)` | `#highest_temp` = 5 |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>min(<i>num</i> value, [<i>num</i> value, …])</h4>
 
 Finds the minimum value amongst a set of numbers.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | `#lowest_temp = min(@CPU_temperatures)` | `#lowest_temp` = -1 |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>round(<i>num</i> value, <i>int</i> precision)</h4>
 
 Rounds a number. Optionally, define how many decimal places to maintain.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@value` = -1234.01 | `#rounded_to_tens = round(@value, -1)` | `#rounded_to_tens` = -1230 |
 
-</details>
+{{% /collapse-content %}}
 
 ---
 
@@ -142,64 +136,59 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 Combines multiple values into a single string.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | `#region = concat(@city, ", ", @country)` | `#region` = "Paris, France" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>lower(<i>str</i> string)</h4>
 
 Converts string to lowercase.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@first_name` = "Bob" | `#lower_name = lower(@first_name)` | `#lower_name` = "bob" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>left(<i>str</i> string, <i>int</i> num_chars)</h4>
 
 Extracts a portion of text from the beginning of a string.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@price` = "USD10.50" | `#currency = left(@price, 3)` | `#currency` = "USD" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>proper(<i>str</i> string)</h4>
 
 Converts string to proper case.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@address` = "123 main st" | `#formatted_address = proper(@address)` | `#formatted_address` = "123 Main St" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>split_before(<i>str</i> string, <i>str</i> separator, <i>int</i> occurrence)</h4>
 
 Extracts the portion of text preceding a certain pattern in a string.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 <table>
   <tr>
@@ -218,15 +207,14 @@ Extracts the portion of text preceding a certain pattern in a string.
   </tr>
 </table>
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>split_after(<i>str</i> string, <i>str</i> separator, <i>int</i> occurrence)</h4>
 
 Extracts the portion of text following a certain pattern in a string.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 <table>
   <tr>
@@ -244,64 +232,59 @@ Extracts the portion of text following a certain pattern in a string.
     <td><code>#url_extraction</code> = "to/split"
 </table>
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>substring(<i>str</i> string, <i>int</i> start, <i>int</i> length)</h4>
 
 Extracts a portion of text from the middle of a string.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@price` = "USD10.50" | `#dollar_value = substring(@price, 2, 2)` | `#dollar_value` = "10" |
 
-
-</details>
+{{% /collapse-content %}}
 
 
 <h4>right(<i>str</i> string, <i>int</i> num_chars)</h4>
 
 Extracts a portion of text from the end of a string.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@price` = "USD10.50" | `#cent_value = right(@price, 2)` | `#cent_value` = "50" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>textjoin(<i>str</i> delimiter, <i>bool</i> ignore_empty, <i>str</i> string [<i>str</i> string, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string with a delimiter in between.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attributes: <br> - `@city` = "Paris" <br> - `@country` = "France" | `#region = textjoin(", ", "false", @city, @country)` | `#region` = "Paris, France" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>upper(<i>str</i> string)</h4>
 
 Converts string to uppercase.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute: `@first_name` = "Bob" | `#upper_name = upper(@first_name)` | `#upper_name` = "BOB" |
 
-</details>
+{{% /collapse-content %}}
 
 ---
 
@@ -311,28 +294,26 @@ Converts string to uppercase.
 
 Evaluates a condition and returns a value accordingly.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attributes: <br> - `@location` = "Paris, France" <br> - `@home` = "New York, USA" | `#abroad = if(@location == @home, "false", "true")` | `#abroad` = "true" |
 
-</details>
+{{% /collapse-content %}}
 
 
 <h4>is_null(<i>expr</i> value)</h4>
 
 Checks if an attribute or expression is null.
 
-<details>
-<summary>Example</summary>
+{{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 | `is_null(@users_online / @max_capacity)` | "true" |
 
-</details>
+{{% /collapse-content %}}
 
 
 ## Further reading
