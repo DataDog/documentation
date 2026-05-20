@@ -5282,7 +5282,7 @@ menu:
       parent: software_delivery_heading
       identifier: delivery_performance
       weight: 70000
-    - name: OpenTelemetry
+    - name: DORA Metrics
       url: delivery_performance/dora_metrics/
       parent: delivery_performance
       identifier: dora_metrics
