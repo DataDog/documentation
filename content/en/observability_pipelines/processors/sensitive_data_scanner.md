@@ -316,7 +316,7 @@ To view the `pipelines.component_latency_seconds` metric:
 
 1. Navigate to [Metrics Explorer][11].
 1. In the metric field, enter `pipelines.component_latency_seconds`.
-1. In the **from** field, enter the tags: `component_type:sensitive_data_scanner` and `component_id:<COMPONENT_ID>`, where `<COMPONENT_ID>` is the ID for your Sensitive Data Scanner processor.
+1. In the **from** field, enter the tag `component_id:<COMPONENT_ID>`, where `<COMPONENT_ID>` is the ID for your Sensitive Data Scanner processor.
 
 **Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 
