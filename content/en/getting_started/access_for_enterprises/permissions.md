@@ -33,7 +33,7 @@ Managed roles are maintained by Datadog. Their permissions are automatically upd
 Use custom roles to **control which features are available** to their SREs and developers, including which newly-released Datadog features are available to which users. Beyond feature access, use custom roles to create distinct tiers for user populations. Other common triggers:
 
 - **Compliance or audit users** need read access across products but should never edit anything.
-- **Platform administrators** need elevated permissions for infrastructure management without full org admin access.
+- **Platform administrators** need elevated permissions for infrastructure management, without overly-broad admin privileges.
 - **Third-party contractors or vendors** need access to specific products but should be excluded from sensitive data, billing, or user management.
 
 <div class="alert alert-tip">
