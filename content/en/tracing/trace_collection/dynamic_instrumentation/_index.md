@@ -76,7 +76,7 @@ For more detailed instructions, select your runtime below:
 
 ## Explore Dynamic Instrumentation
 
-Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding a Dynamic Instrumentation instrumentation you are exporting additional data from your application, without the need to change code or redeploy it.
+Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding an instrumentation, you export additional data from your application without the need to change code or redeploy it.
 
 ### Using instrumentations
 
@@ -97,7 +97,7 @@ All instrumentation types require the same initial setup:
 
 See the individual instrumentation types below for specific creation steps for each instrumentation type.
 
-<div class="alert alert-info">Dynamic log instrumentations have moved to <a href="/tracing/live_debugger/">Live Debugger</a>. Use Live Debugger to capture logs and variable snapshots in real time from running applications.</div>
+<div class="alert alert-info">Dynamic log instrumentations are supported in <a href="/tracing/live_debugger/">Live Debugger</a>. Use Live Debugger to capture logs and variable snapshots in real time from running applications.</div>
 
 ### Creating metric instrumentations
 
