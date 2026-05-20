@@ -135,7 +135,7 @@ To get started:
 
    {{% tab "Serverless Monitoring" %}}
    **AWS Lambda**
-   {{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
+   {{< code-block lang="text" >}}Help me monitor my AWS Lambda functions with Datadog{{< /code-block >}}
 
    ```shell
    npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
