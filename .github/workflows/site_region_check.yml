@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   check-site-region:
-    if: github.ref != 'refs/heads/guacbot/translation-pipeline'
+    if: github.head_ref != 'guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -78,13 +78,15 @@ jobs:
             const fs = require('fs');
             const flaggedFiles = fs.readFileSync('flagged_files.txt', 'utf8').trim();
 
-            const body = `## :warning: Possible site support note detected
-
-            The following files have a \`site-region\` shortcode at the top of the page that mentions a feature being "not available" or "not supported":
-
-            ${flaggedFiles}
-
-            **Are you trying to document site support for a product?** If so, the \`site-region\` shortcode is not the recommended approach. See the [Documenting site support](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/5201857960/Documenting+site+support) guide for the preferred method. `.replace(/^            /gm, '');
+            const body = [
+              '## :warning: Possible site support note detected',
+              '',
+              'The following files have a `site-region` shortcode at the top of the page that mentions a feature being "not available" or "not supported":',
+              '',
+              flaggedFiles,
+              '',
+              '**Are you trying to document site support for a product?** If so, the `site-region` shortcode is not the recommended approach. See the [Documenting site support](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/5201857960/Documenting+site+support) guide for the preferred method.',
+            ].join('\n');
 
             // Check for an existing comment from this workflow to avoid duplicates
             const { data: comments } = await github.rest.issues.listComments({
@@ -111,5 +113,26 @@ jobs:
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
                 body: body,
+              });
+            }
+
+      - name: Resolve warning comment
+        if: steps.check.outputs.has_flagged == 'false'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const marker = 'Possible site support note detected';
+            const existing = comments.find(c => c.user.type === 'Bot' && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
               });
             }
