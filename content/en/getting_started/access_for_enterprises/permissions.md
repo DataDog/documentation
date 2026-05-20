@@ -48,11 +48,9 @@ Unlike managed roles, custom roles do not automatically receive new permissions 
 
 1. **Monitor the Permissions Release Notes.** When Datadog adds new permissions, they are announced in [permissions release notes][4]. Review these periodically and decide which roles should receive the new permission.
 
-2. **Use Bulk Assign.** When you decide to distribute a new permission, you can add it to multiple roles at once. For more information, see [Roles][3].
+2. **Use Bulk Assign.** When you decide to distribute a new permission, you can add it to multiple roles at once. For more information, see [Roles][2].
 
-3. **Configure Automatic Updates.** Each custom role can be set to follow a managed role template (Read Only, Standard, or Admin). When a new permission is released to that template, your custom role receives it automatically, but you can still add or remove any permissions from the role after automatic updates occur. Use this feature for trusted users who should get new features by default.
-
-   To configure: go to Organization Settings > Roles, click the role, click Edit Role, and choose a template under *Automatically Receives Permissions*.
+3. **Configure Automatic Updates.** Each custom role can be set to follow a managed role template (Read Only, Standard, or Admin). When a new permission is released to that template, your custom role receives it automatically, but you can still add or remove any permissions from the role after automatic updates occur. Use this feature for trusted users who should get new features by default. To configure, see [Custom Roles][3].
 
 ### Role hygiene at scale
 
