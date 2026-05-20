@@ -47,13 +47,13 @@ To use the FinOps skill in Bits Assistant, you must:
   - [Cloud Cost Management permissions][8] for the data you ask about
   - (Optional) [Notebook permissions][9], if you want to create or edit investigation [Notebooks][15]
 
-## FinOps skill in Bits Assistant
+## Start an investigation with the FinOps skill
 
 {{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:80%;" >}}
 
 Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the FinOps skill.
 
-Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top left of any Datadog page to open the Bits Assistant and ask a cost question.
+Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open the Bits Assistant and ask a cost question.
 
 Example prompts:
 
