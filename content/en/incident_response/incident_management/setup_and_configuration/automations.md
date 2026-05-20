@@ -1,6 +1,5 @@
 ---
 title: Automations
-site_support_id: actions
 aliases:
 - /incident_response/incident_management/incident_settings/automations/
 further_reading:

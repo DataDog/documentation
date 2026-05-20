@@ -1,4 +1,5 @@
 ---
+id: framework
 title: framework
 synonyms:
   - compliance framework

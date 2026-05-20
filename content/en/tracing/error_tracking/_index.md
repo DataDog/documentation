@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -30,13 +30,13 @@ Error Tracking is available for all languages supported by APM. It requires no a
 
 Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
 
 To get started with configuring your repository, see the [Source Code Integration documentation][6].
 
 ## Use span attributes to track error spans
 
-The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. An error span must contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] and belong to a complete trace to be tracked. If an error is reported multiple times within a service, only the top-most error is kept.
+The Datadog SDKs collect errors through integrations and the manual instrumentation of your backend services' source code. An error span must contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] and belong to a complete trace to be tracked. If an error is reported multiple times within a service, only the top-most error is kept.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 

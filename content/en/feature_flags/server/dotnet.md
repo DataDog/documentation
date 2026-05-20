@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -21,8 +21,10 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the .NET Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog .NET tracer** `dd-trace-dotnet` version 3.36.0 or later
-- **.NET runtime** version 6.0 or later
+- **Datadog [API key][5]** configured on the Agent
+- **Datadog .NET SDK** (`dd-trace-dotnet`):
+  - Version 3.36.0 or later for .NET 6+
+  - Version 3.38.0 or later for .NET Framework 4.6.2+
 
 Set the following environment variables:
 
@@ -37,10 +39,10 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 ## Installation
 
-Install the Datadog .NET tracer and OpenFeature SDK using NuGet:
+Install the Datadog [.NET SDK][3] and [OpenFeature SDK][4] using NuGet:
 
 {{< code-block lang="bash" >}}
-dotnet add package Datadog.Trace
+dotnet add package Datadog.FeatureFlags.OpenFeature
 dotnet add package OpenFeature
 {{< /code-block >}}
 
@@ -48,14 +50,14 @@ Or add them to your `.csproj` file:
 
 {{< code-block lang="xml" filename="MyProject.csproj" >}}
 <ItemGroup>
-  <PackageReference Include="Datadog.Trace" Version="3.36.0" />
-  <PackageReference Include="OpenFeature" Version="2.0.0" />
+  <PackageReference Include="Datadog.FeatureFlags.OpenFeature" />
+  <PackageReference Include="OpenFeature" />
 </ItemGroup>
 {{< /code-block >}}
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
 
 ### Blocking initialization
 
@@ -63,7 +65,7 @@ Use `SetProviderAsync` with `await` to block evaluation until the initial flag c
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
-using Datadog.Trace.FeatureFlags.OpenFeature;
+using Datadog.FeatureFlags.OpenFeature;
 
 // Create and register the Datadog provider
 var provider = new DatadogProvider();
@@ -81,7 +83,7 @@ Use `SetProvider` to register the provider without waiting. Flag evaluations ret
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
-using Datadog.Trace.FeatureFlags.OpenFeature;
+using Datadog.FeatureFlags.OpenFeature;
 
 // Create and register the Datadog provider
 var provider = new DatadogProvider();
@@ -261,6 +263,64 @@ When your application exits, shut down the OpenFeature API to clean up resources
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
+
+`Api.Instance` is a singleton. Use xUnit's `IAsyncLifetime` to set the provider per test and tear it down in `DisposeAsync`, which avoids ordering-dependent tests. For faster suites that share setup, use `InMemoryProvider.UpdateFlagsAsync(...)` to mutate flag state between tests without re-registering the provider.
+
+{{< code-block lang="csharp" >}}
+using OpenFeature;
+using OpenFeature.Model;
+using OpenFeature.Providers.Memory;
+using Xunit;
+
+public class CheckoutFlagTests : IAsyncLifetime
+{
+    private FeatureClient _client = null!;
+
+    public async Task InitializeAsync()
+    {
+        var flags = new Dictionary<string, Flag>
+        {
+            ["new-checkout-flow"] = new Flag<bool>(
+                variants: new Dictionary<string, bool> { ["on"] = true, ["off"] = false },
+                defaultVariant: "on"),
+            ["ui-theme"] = new Flag<string>(
+                variants: new Dictionary<string, string> { ["dark"] = "dark", ["light"] = "light" },
+                defaultVariant: "light",
+                contextEvaluator: ctx =>
+                    ctx.GetValue("tier")?.AsString == "premium" ? "dark" : "light"),
+        };
+
+        await Api.Instance.SetProviderAsync(new InMemoryProvider(flags));
+        _client = Api.Instance.GetClient("test");
+    }
+
+    public Task DisposeAsync() => Api.Instance.ShutdownAsync();
+
+    [Fact]
+    public async Task NewCheckoutEnabledByDefault()
+    {
+        Assert.True(await _client.GetBooleanValueAsync("new-checkout-flow", false));
+    }
+
+    [Fact]
+    public async Task PremiumUserGetsDarkTheme()
+    {
+        var ctx = EvaluationContext.Builder()
+            .SetTargetingKey("u1")
+            .Set("tier", "premium")
+            .Build();
+        Assert.Equal("dark", await _client.GetStringValueAsync("ui-theme", "light", ctx));
+    }
+}
+{{< /code-block >}}
+
+The same pattern applies to NUnit (`[SetUp]`/`[TearDown]`) and MSTest (`[TestInitialize]`/`[TestCleanup]`). For ASP.NET Core integration tests, register the `InMemoryProvider` inside `WebApplicationFactory.ConfigureTestServices` before the application boots.
+
+To avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` over mocking the Datadog provider with Moq or similar libraries.
+
 ## Troubleshooting
 
 ### Provider not enabled
@@ -286,7 +346,7 @@ Verify the following to ensure that Remote Configuration is working:
 - Datadog Agent is the [required version](#prerequisites)
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
-- The tracer can communicate with the Agent
+- The SDK can communicate with the Agent
 
 ### Async evaluation errors
 
@@ -302,6 +362,9 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
+[3]: https://www.nuget.org/packages/Datadog.Trace
+[4]: https://www.nuget.org/packages/Datadog.FeatureFlags.OpenFeature
+[5]: /account_management/api-app-keys/#api-keys
 
 ## Further reading
 

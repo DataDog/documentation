@@ -29,7 +29,7 @@ The unit override feature in visualizations allows you to customize how your dat
 
 ## Configuration
 
-In your Notebooks and Dashboard widgets, find the graph editor of the cell or the widget. For Notebooks, click **More Options** and for Dashboards, find the **Graph your data** section.
+In your Notebooks and Dashboard widgets, find the graph editor of the cell or the widget. For Notebooks, click {{< ui >}}More Options{{< /ui >}} and for Dashboards, find the {{< ui >}}Graph your data{{< /ui >}} section.
 
 {{< img src="dashboards/guide/unit_override/unit_override_config.png" alt="Unit override option in the graph your data section for a Change widget" style="width:100%;" >}}
 

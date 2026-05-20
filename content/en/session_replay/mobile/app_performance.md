@@ -28,15 +28,15 @@ Session Replay leverages the existing mechanisms of batching and smart upload fr
 Mobile Session Replay SDK supports a seamless user experience without impacting your application's performance.
 
 ## Main thread
-The system responsible for capturing the current screen of your application runs in the UI Thread, which can potentially cause UI updates to be delayed. However, Datadog uses highly optimized processes to minimize the workload the SDK performs in the UI Thread.
+The system responsible for capturing the current screen of your application runs in the UI Thread, which can potentially cause UI updates to be delayed. However, Datadog uses optimized processes to minimize the workload the SDK performs in the UI Thread.
 
 Screens are captured between 64 ms to 100 ms (depending on the platform) and single screen capture takes 3 ms. All processing of the collected data happens on the background thread, without affecting your application's performance.
 
 ## Network
-To minimize the total upload volume, Datadog employs a highly optimized wire format. As a result, you can expect to see an average bandwidth usage of around 12 KB/s for data sent to the Datadog servers on iOS, and 1.22 KB/s on Android. When image recording is enabled, applications with image-heavy content may experience a slightly higher initial volume. In cases when the device is disconnected from the network, the data is buffered to the device's disk storage until a high-bandwidth connection is reestablished.
+To minimize the total upload volume, Datadog employs an optimized wire format. As a result, you can expect to see an average bandwidth usage of around 12 KB/s for data sent to the Datadog servers on iOS, and 1.22 KB/s on Android. When image recording is enabled, applications with image-heavy content may experience a slightly higher initial volume. In cases when the device is disconnected from the network, the data is buffered to the device's disk storage until a high-bandwidth connection is reestablished.
 
 ## Application size
-Datadog's SDK follows strict standards and aims to minimize the inclusion of third-party dependencies. This approach ensures that the SDK leverages as much native framework code as possible. On Android, the binary size produced by Datadog's own code in the AAR package is 480 kB. See more information on the application size impact [here][1]. On iOS, the size of exported `*.ipa` file will be higher by approximately 200 kB.
+Datadog's SDK follows strict standards and aims to minimize the inclusion of third-party dependencies. This approach helps ensure that the SDK leverages as much native framework code as possible. On Android, the binary size produced by Datadog's own code in the AAR package is 480 kB. See more information on the application size impact [here][1]. On iOS, the size of exported `*.ipa` file will be higher by approximately 200 kB.
 
 ## Benchmarks
 For a more detailed description of how Session Replay performance impact was measured, see the following pages: [Android][2], [iOS][3].

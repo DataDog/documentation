@@ -11,12 +11,21 @@ further_reading:
   - link: "/code_coverage/flags"
     tag: "Documentation"
     text: "Organize coverage data with flags"
+  - link: "/code_coverage/carryforward"
+    tag: "Documentation"
+    text: "Keep total coverage accurate with carryforward"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
   - link: "/code_coverage/monorepo_support"
     tag: "Documentation"
     text: "Learn how Code Coverage supports large monorepos"
+  - link: "https://www.datadoghq.com/blog/improve-test-cover-across-codebases-with-code-coverage"
+    tag: "Blog"
+    text: "Improve test coverage across codebases with Datadog Code Coverage"
+  - link: "https://www.datadoghq.com/blog/move-fast-dont-break-things"
+    tag: "Blog"
+    text: "Move fast, don't break things: Consistent testing standards at scale"
 algolia:
   tags: ["code coverage"]
 ---

@@ -28,11 +28,11 @@ With custom recommendations, you can:
 
 <div class="alert alert-info">Customizations reflect within 24 hours, when recommendations are generated next.</div>
 
-To access custom recommendations, go to [**Cloud Cost > Settings > Configure Recommendations**][2].
+To access custom recommendations, go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Configure Recommendations{{< /ui >}}][2].
 
 On this page, you can see a list of out-of-the-box recommendations that can be customized.
 
-Click a recommendation, then click **Create New Configuration** to get started.
+Click a recommendation, then click {{< ui >}}Create New Configuration{{< /ui >}} to get started.
 
 ### Step 1: Set custom metric thresholds
 
@@ -46,20 +46,20 @@ Adjust the evaluation time frame to match your business's seasonality or operati
 
 ### Step 3: Apply this rule to all resources or add a filter
 
-You can select whether to apply the rule to **All Resources** or **Some Resources** in your environment.
+You can select whether to apply the rule to {{< ui >}}All Resources{{< /ui >}} or {{< ui >}}Some Resources{{< /ui >}} in your environment.
 
-If you select **Some Resources**, you can filter resources by tag (for example, `team`, `service`, or `environment`) to target specific parts of your business.
+If you select {{< ui >}}Some Resources{{< /ui >}}, you can filter resources by tag (for example, `team`, `service`, or `environment`) to target specific parts of your business.
 
 ### Step 4: (optional) Label and document the customization
 
 Use this step to add a reason and unique name to your configuration so you can audit and reference this recommendation later.
 
-- **Reason:** Provide a reason for your customization to support future audits and maintain a clear record of changes.
-- **Name:** Enter a descriptive name for the configuration to identify and locate this recommendation in the future.
+- {{< ui >}}Reason{{< /ui >}}: Provide a reason for your customization to support future audits and maintain a clear record of changes.
+- {{< ui >}}Name{{< /ui >}}: Enter a descriptive name for the configuration to identify and locate this recommendation in the future.
 
 ### Step 5: Save the recommendation
 
-Click **Save** to save your customized recommendation. Recommendations that have already been customized **once** are labeled **Configured**.
+Click {{< ui >}}Save{{< /ui >}} to save your customized recommendation. Recommendations that have already been customized **once** are labeled {{< ui >}}Configured{{< /ui >}}.
 
 ## Updating custom recommendations
 
@@ -67,11 +67,11 @@ You can update a custom recommendation at any time to reflect changes in your bu
 
 To update a custom recommendation:
 
-1. Navigate to [**Cloud Cost > Settings > Configure Recommendations**][2].
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Configure Recommendations{{< /ui >}}][2].
 2. Go to the customized recommendation.
 3. Modify the parameters as needed.
-4. Click **Save**.
-5. In the confirmation popup, click **Yes, save custom parameters** to apply your changes.
+4. Click {{< ui >}}Save{{< /ui >}}.
+5. In the confirmation popup, click {{< ui >}}Yes, save custom parameters{{< /ui >}} to apply your changes.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

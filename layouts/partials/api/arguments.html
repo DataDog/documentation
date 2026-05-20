@@ -69,7 +69,7 @@
                             <div class="col-6 column">
                                 <p class="table-cell">
                                   {{ .description | markdownify }}
-                                  {{ with .schema }}{{ with .enum }}<br/>Allowed enum values: <code>{{ delimit . ", " }}</code>{{ end }}{{ end }}
+                                  {{ with .schema }}{{ with .enum }}{{ if gt (len .) 10 }}<br/>Allowed enum values: <code>{{ delimit (first 10 .) ", " }}</code><details class="enum-details"><summary class="enum-summary">Show {{ sub (len .) 10 }} more</summary><code>, {{ delimit (after 10 .) ", " }}</code></details>{{ else }}<br/>Allowed enum values: <code>{{ delimit . ", " }}</code>{{ end }}{{ end }}{{ end }}
                                 </p>
                             </div>
                         </div>

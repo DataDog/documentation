@@ -36,7 +36,9 @@
 <body
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
   {{- with partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
-  <div style="display:none" class="exclude-from-md">For a plaintext version of this page, see: {{ . }}</div>
+  <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0" class="exclude-from-md sr-only">For AI agents: A markdown version of this page is available at {{ . }}. 
+  A documentation index is available at /llms.txt.
+  </div>
   {{- end -}}
 
   <div class="greyside">

@@ -6,7 +6,7 @@ disable_toc: true
 further_reading:
 - link: /security/cloud_security_management/
   tag: Documentación
-  text: Cloud Security Management
+  text: Cloud Security
 - link: /security/code_security/
   tag: Documentación
   text: Code Security
@@ -1329,89 +1329,89 @@ Estos atributos están presentes en todos los hallazgos de seguridad y describen
   </thead>
   <tbody>
     <tr>
-      <td><code>severity</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@severity</code><br>Nivel de gravedad del hallazgo ajustado por Datadog. Valores válidos: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+      <td><code>gravedad</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@severity</code><br>Nivel de gravedad del hallazgo ajustado por Datadog. Valores válidos: <code>crítico</code>, <code>elevado</code>, <code>medio</code>, <code>bajo</code>, <code>información</code>, <code>ninguno</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>base_severity</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@base_severity</code><br>Nivel de gravedad básico del hallazgo antes de cualquier ajuste. Valores válidos: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+      <td><code>gravedad_base</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@base_severity</code><br>Nivel de gravedad básico del hallazgo antes de cualquier ajuste. Valores válidos: <code>crítico</code>, <code>elevado</code>, <code>medio</code>, <code>bajo</code>, <code>información</code>, <code>ninguno</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>status</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@status</code><br>Estado del flujo de trabajo del hallazgo. Valores válidos: <code>open</code>, <code>muted</code>, <code>auto_closed</code>.</td>
+      <td><code>estado</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@status</code><br>Estado del flujo de trabajo del hallazgo. Valores válidos: <code>abierto</code>, <code>silenciado</code>, <code>auto_cerrado</code>.</td>
     </tr>
     <tr>
-      <td><code>finding_type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@finding_type</code><br>Categoría del hallazgo. Valores válidos: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>.</td>
+      <td><code>tipo_hallazgo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@finding_type</code><br>Categoría del hallazgo. Valores válidos: <code>seguridad_api</code>, <code>ruta_ataque</code>, <code>vulnerabilidad_código_tiempo_ejecución</code>, <code>vulnerabilidad_código_estático</code>, <code>vulnerabilidad_host_y_contenedor</code>, <code>configuración_errónea_iac</code>, <code>riesgo_identidad</code>, <code>vulnerabilidad_biblioteca</code>, <code>configuración_errónea</code>, <code>secreto</code>, <code>actividad_carga_trabajo</code>.</td>
     </tr>
     <tr>
-      <td><code>finding_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@finding_id</code><br>Identificador único del hallazgo.</td>
+      <td><code>id_hallazgo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@finding_id</code><br>Identificador único del hallazgo.</td>
     </tr>
     <tr>
-      <td><code>title</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@title</code><br>Título legible del hallazgo.</td>
+      <td><code>título</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@title</code><br>Título legible del hallazgo.</td>
     </tr>
     <tr>
-      <td><code>description</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@description</code><br>Explicación legible del hallazgo. Puede incluir el formato Markdown.</td>
+      <td><code>descripción</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@description</code><br>Explicación legible del hallazgo. Puede incluir el formato Markdown.</td>
     </tr>
     <tr>
-      <td><code>resource_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@resource_id</code><br>Identificador único del recurso afectado por e hallazgo.</td>
+      <td><code>id_recurso</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@resource_id</code><br>Identificador único del recurso afectado por el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>resource_name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@resource_name</code><br>Nombre legible del recurso afectado por el hallazgo.</td>
+      <td><code>nombre_recurso</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@resource_name</code><br>Nombre legible del recurso afectado por el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>resource_type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@resource_type</code><br>Tipo de recurso.</td>
+      <td><code>tipo_recurso</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@resource_type</code><br>Tipo de recurso.</td>
     </tr>
     <tr>
-      <td><code>first_seen_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@first_seen_at</code><br>Marca de tiempo en milisegundos (UTC) de la primera detección del hallazgo.</td>
+      <td><code>visto_por_primera_vez_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@first_seen_at</code><br>Marca de tiempo en milisegundos (UTC) de la primera detección del hallazgo.</td>
     </tr>
     <tr>
-      <td><code>last_seen_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@last_seen_at</code><br>Marca de tiempo en milisegundos (UTC) de la detección más reciente del hallazgo</td>
+      <td><code>visto_por_última_vez_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@last_seen_at</code><br>Marca de tiempo en milisegundos (UTC) de la detección más reciente del hallazgo</td>
     </tr>
     <tr>
-      <td><code>detection_changed_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@detection_changed_at</code><br>Marca de tiempo en milisegundos (UTC) del último cambio de estado de la evaluación o detección del hallazgo</td>
+      <td><code>detección_cambió_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@detection_changed_at</code><br>Marca de tiempo en milisegundos (UTC) del último cambio de estado de la evaluación o detección del hallazgo</td>
     </tr>
     <tr>
-      <td><code>origin</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@origin</code><br>Orígenes de la detección que produjo el hallazgo, como los análisis sin agente, APM, SCI (Software Composition Analysis) o CI (Continuous Integration).</td>
+      <td><code>origen</code></td>
+      <td>matriz (cadena)</td>
+      <td><strong>Ruta:</strong> <code>@origin</code><br>Orígenes de la detección que produjo el hallazgo, como los análisis sin agente, APM, SCI (Software Composition Analysis) o CI (Continuous Integration).</td>
     </tr>
     <tr>
-      <td><code>exposure_time_seconds</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@exposure_time_seconds</code><br>Indica el tiempo transcurrido en segundos entre el último cierre del hallazgo y una nueva detección de este.</td>
+      <td><code>tiempo_exposición_segundos</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@exposure_time_seconds</code><br>Indica el tiempo transcurrido en segundos entre el último cierre del hallazgo y una nueva detección de este.</td>
     </tr>
     <tr>
-      <td><code>is_in_security_inbox</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@is_in_security_inbox</code><br>Es true si el hallazgo aparece en la bandeja de entrada de Seguridad, de lo contrario es false.</td>
+      <td><code>está_en_bandeja_entrada_seguridad</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@is_in_security_inbox</code><br>Es true si el hallazgo aparece en la bandeja de entrada de Seguridad, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>detection_tool</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@detection_tool</code><br>Información de la herramienta o del motor responsables de la detección del hallazgo.</td>
+      <td><code>herramienta_detección</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@detection_tool</code><br>Información de la herramienta o del motor responsables de la detección del hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -1433,34 +1433,34 @@ Toda la información silenciable relacionada con la gestión de un hallazgo tras
   </thead>
   <tbody>
     <tr>
-      <td><code>triage</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.triage</code><br>Información sobre asignación y estado. La asignación puede estar sincronizada con información de Case o de Jira.</td>
+      <td><code>clasificación</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage</code><br>Información sobre asignación y estado. La asignación puede estar sincronizada con información de Case o de Jira.</td>
     </tr>
     <tr>
-      <td><code>auto_closed_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.auto_closed_at</code><br>Marca de tiempo en milisegundos (UTC) del cierre automático del hallazgo por parte del sistema.</td>
+      <td><code>auto_cerrado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.auto_closed_at</code><br>Marca de tiempo en milisegundos (UTC) del cierre automático del hallazgo por parte del sistema.</td>
     </tr>
     <tr>
-      <td><code>due_date</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date</code><br>Regla de la fecha límite aplicada al hallazgo.</td>
+      <td><code>fecha_límite</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.due_date</code><br>Regla de la fecha límite aplicada al hallazgo.</td>
     </tr>
     <tr>
-      <td><code>mute</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.mute</code><br>Información sobre silenciamiento y metadatos.</td>
+      <td><code>silenciado</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute</code><br>Información sobre silenciamiento y metadatos.</td>
     </tr>
     <tr>
-      <td><code>automations</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@workflow.automations</code><br>Información sobre cualquier regla de automatización que sea aplicable al hallazgo.</td>
+      <td><code>automatizaciones</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@workflow.automations</code><br>Información sobre cualquier regla de automatización que sea aplicable al hallazgo.</td>
     </tr>
     <tr>
-      <td><code>integrations</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations</code><br>Integraciones como Jira, Case Management o ServiceNow utilizadas para clasificar y corregir el hallazgo.</td>
+      <td><code>integraciones</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.integrations</code><br>Integraciones como Jira, Case Management o ServiceNow utilizadas para clasificar y corregir el hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -1479,19 +1479,19 @@ Información sobre asignación y estado. La asignación puede estar sincronizada
   </thead>
   <tbody>
     <tr>
-      <td><code>assignee</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee</code><br>Usuario asignado a este hallazgo.</td>
+      <td><code>assignatario</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee</code><br>Usuario asignado a este hallazgo.</td>
     </tr>
     <tr>
-      <td><code>time_to_acknowledge_seconds</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.time_to_acknowledge_seconds</code><br>Tiempo en segundos entre la primera detección del hallazgo y la primera acción de clasificación manual.</td>
+      <td><code>tiempo_hasta_recepción_segundos</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.time_to_acknowledge_seconds</code><br>Tiempo en segundos entre la primera detección del hallazgo y la primera acción de clasificación manual.</td>
     </tr>
     <tr>
-      <td><code>time_to_resolution_seconds</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.time_to_resolution_seconds</code><br>Tiempo en segundos entre la primera detección del hallazgo y su resolución.</td>
+      <td><code>tiempo_hasta_resolución_segundos</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.time_to_resolution_seconds</code><br>Tiempo en segundos entre la primera detección del hallazgo y su resolución.</td>
     </tr>
   </tbody>
 </table>
@@ -1510,24 +1510,24 @@ Usuario asignado a este hallazgo.
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.name</code><br>Mostrar el nombre del asignatario.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee.name</code><br>Mostrar el nombre del asignatario.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.id</code><br>Identificador único en formato UUID del asignatario.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee.id</code><br>Identificador único en formato UUID del asignatario.</td>
     </tr>
     <tr>
-      <td><code>updated_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_at</code><br>Marca de tiempo en milisegundos (UTC) de la última modificación del asignatario.</td>
+      <td><code>actualizado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee.updated_at</code><br>Marca de tiempo en milisegundos (UTC) de la última modificación del asignatario.</td>
     </tr>
     <tr>
-      <td><code>updated_by</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by</code><br>Usuario que modificó el asignatario por última vez.</td>
+      <td><code>actualizado_por</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee.updated_by</code><br>Usuario que modificó el asignatario por última vez.</td>
     </tr>
   </tbody>
 </table>
@@ -1547,13 +1547,13 @@ Usuario que modificó el asignatario por última vez.
   <tbody>
     <tr>
       <td><code>id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by.id</code><br>Identificador único en formato UUID del usuario que modificó el asignatario por última vez.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee.updated_by.id</code><br>Identificador único en formato UUID del usuario que modificó el asignatario por última vez.</td>
     </tr>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by.name</code><br>Mostrar el nombre del usuario que modificó el asignatario por última vez</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.triage.assignee.updated_by.name</code><br>Mostrar el nombre del usuario que modificó el asignatario por última vez</td>
     </tr>
   </tbody>
 </table>
@@ -1572,19 +1572,19 @@ Regla de la fecha límite aplicada al hallazgo.
   </thead>
   <tbody>
     <tr>
-      <td><code>due_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date.due_at</code><br>Marca de tiempo en milisegundos (UTC) de la fecha límite del hallazgo.</td>
+      <td><code>fecha_límite</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.due_date.due_at</code><br>Marca de tiempo en milisegundos (UTC) de la fecha límite del hallazgo.</td>
     </tr>
     <tr>
-      <td><code>is_overdue</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date.is_overdue</code><br>Es true si se alcanzó la fecha límite, de lo contrario es false.</td>
+      <td><code>fecha_límite_excedida</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@workflow.due_date.is_overdue</code><br>Es true si se alcanzó la fecha límite, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>rule_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date.rule_id</code><br>Identificador único de la regla de la fecha límite aplicada a este hallazgo.</td>
+      <td><code>id_regla</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.due_date.rule_id</code><br>Identificador único de la regla de la fecha límite aplicada a este hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -1603,49 +1603,49 @@ Silenciar información y metadatos.
   </thead>
   <tbody>
     <tr>
-      <td><code>is_muted</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.is_muted</code><br>Es true si el hallazgo está silenciado, y es false es si está activo.</td>
+      <td><code>está_silenciado</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.is_muted</code><br>Es true si el hallazgo está silenciado, y es false es si está activo.</td>
     </tr>
     <tr>
-      <td><code>reason</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.reason</code><br>Motivo para silenciar el hallazgo proporcionado. Valores válidos: <code>none</code>, <code>no_pending_fix</code>, <code>human_error</code>, <code>no_longer_accepted_risk</code>, <code>other</code>, <code>pending_fix</code>, <code>false_positive</code>, <code>accepted_risk</code>, <code>no_fix</code>, <code>duplicate</code>, <code>risk_accepted</code>.</td>
+      <td><code>motivo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.reason</code><br>Motivo para silenciar el hallazgo proporcionado. Valores válidos: <code>ninguno</code>, <code>ninguna_corrección_pendiente</code>, <code>error_humano</code>, <code>riesgo_ya_no_es_aceptado</code>, <code>otro</code>, <code>corrección_pendiente</code>, <code>falso_positivo</code>, <code>riesgo_aceptado</code>, <code>sin_corrección</code>, <code>duplicado</code>, <code>riesgo_aceptado</code>.</td>
     </tr>
     <tr>
-      <td><code>description</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.description</code><br>Explicación en texto libre de por qué se silenció el hallazgo.</td>
+      <td><code>descripción</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.description</code><br>Explicación en texto libre de por qué se silenció el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>expire_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.expire_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que termina el silenciamiento. Si no se configura, se silencian de forma permanente.</td>
+      <td><code>expira_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.expire_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que termina el silenciamiento. Si no se configura, se silencian de forma permanente.</td>
     </tr>
     <tr>
-      <td><code>is_muted_by_rule</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>Es true si el hallazgo es silenciado por una regla de automatización, de lo contrario es false. Si es true, la regla de automatización relevante se presenta en la sección de reglas de automatización.</td>
+      <td><code>silenciado_por_regla</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>Es true si el hallazgo es silenciado por una regla de automatización, de lo contrario es false. Si es true, la regla de automatización relevante se presenta en la sección de reglas de automatización.</td>
     </tr>
     <tr>
-      <td><code>rule_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.rule_id</code><br>Identificador único de la regla de automatización que silenció este hallazgo. Solo se configura si <code>is_muted_by_rule</code> es true.</td>
+      <td><code>id_regla</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.rule_id</code><br>Identificador único de la regla de automatización que silenció este hallazgo. Solo se configura si <code>is_muted_by_rule</code> es true.</td>
     </tr>
     <tr>
-      <td><code>rule_name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.rule_name</code><br>Nombre legible de la regla de automatización que silenció este hallazgo. Solo se configura si <code>is_muted_by_rule</code> es true.</td>
+      <td><code>nombre_regla</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.rule_name</code><br>Nombre legible de la regla de automatización que silenció este hallazgo. Solo se configura si <code>is_muted_by_rule</code> es true.</td>
     </tr>
     <tr>
-      <td><code>muted_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.muted_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se silenció el hallazgo.</td>
+      <td><code>silenciado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.muted_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se silenció el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>muted_by</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.muted_by</code><br>Usuario que silenció el hallazgo.</td>
+      <td><code>silenciado_por</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.muted_by</code><br>Usuario que silenció el hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -1666,12 +1666,12 @@ Usuario que silenció el hallazgo.
     <tr>
       <td><code>id</code></td>
       <td>cadena</td>
-      <td><strong>Ruta de acceso:</strong> <code>@workflow (UI) / proceso (generic).mute.muted_by.id</code><br>Identificador único en formato UUID del usuario que silenció el hallazgo.</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.muted_by.id</code><br>Identificador único en formato UUID del usuario que silenció el hallazgo.</td>
     </tr>
     <tr>
       <td><code>nombre</code></td>
       <td>cadena</td>
-      <td><strong>Ruta</strong> <code>@workflow (UI) / proceso (generic).mute.muted_by.name</code><br>Nombre para mostrar del usuario que silenció el hallazgo.</td>
+      <td><strong>Ruta:</strong> <code>@workflow.mute.muted_by.name</code><br>Mostrar nombre del usuario que silenció el hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -1690,19 +1690,19 @@ Integraciones como Jira, Case Management, o ServiceNow utilizadas para triar y r
   </thead>
   <tbody>
     <tr>
-      <td><code>cases</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases</code><br>Matriz de casos adjuntos al hallazgo.</td>
+      <td><code>casos</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@workflow.integrations.cases</code><br>Matriz de casos adjuntos al hallazgo.</td>
     </tr>
     <tr>
       <td><code>jira</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.jira</code><br>Claves de incidente Jira adjuntos a este hallazgo en el formato <code>PROJECT-NUMBER</code> (por ejemplo, <code>PROJ-123</code>).</td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@workflow.integrations.jira</code><br>Claves de incidente Jira adjuntos a este hallazgo en el formato <code>PROJECT-NUMBER</code> (por ejemplo, <code>PROJ-123</code>).</td>
     </tr>
     <tr>
-      <td><code>pull_requests</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.pull_requests</code><br>Solicitudes pull utilizadas para corregir este hallazgo.</td>
+      <td><code>solicitudes_pull</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@workflow.integrations.pull_requests</code><br>Solicitudes pull utilizadas para corregir este hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -1723,64 +1723,64 @@ Atributos del hallazgo relacionados con el riesgo. Cada clave debe tener una cla
   </thead>
   <tbody>
     <tr>
-      <td><code>has_sensitive_data</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_sensitive_data</code><br>Es true si el hallazgo tine acceso al recurso que contiene información confidencial, de lo contrario es false.</td>
+      <td><code>tiene_datos_confidenciales</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.has_sensitive_data</code><br>Es true si el hallazgo tine acceso al recurso que contiene información confidencial, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_function_reachable</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_function_reachable</code><br>Es true si se puede ejecutar la función vulnerable, de lo contrario es false.</td>
+      <td><code>es_alcanzable_por_la_función</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_function_reachable</code><br>Es true si se puede ejecutar la función vulnerable, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_exposed_to_attacks</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_exposed_to_attacks</code><br>Es true si ya se detectaron ataques en este recurso, de lo contrario es false.</td>
+      <td><code>está_expuesto_a_ataques</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_exposed_to_attacks</code><br>Es true si ya se detectaron ataques en este recurso, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>has_privileged_access</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_privileged_access</code><br>Es true si el recurso del hallazgo se ejecuta con privilegios elevados o tiene la capacidad de asumir un rol privilegiado, de lo contrario es false.</td>
+      <td><code>tiene_accesso_privilegiado</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.has_privileged_access</code><br>Es true si el recurso del hallazgo se ejecuta con privilegios elevados o tiene la capacidad de asumir un rol privilegiado, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_production</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_production</code><br>Es true si el recurso del hallazgo se ejecuta en producción, de lo contrario es false.</td>
+      <td><code>en_producción</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_production</code><br>Es true si el recurso del hallazgo se ejecuta en producción, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_publicly_accessible</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_publicly_accessible</code><br>Es true si el recurso del hallazgo es accesible al público, de lo contrario es false.</td>
+      <td><code>es_accesible_al_público</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_publicly_accessible</code><br>Es true si el recurso del hallazgo es accesible al público, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>has_exploit_available</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_exploit_available</code><br>Es true si existen exploits conocidos de este hallazgo, de lo contrario es false.</td>
+      <td><code>tiene_exploit_disponible</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.has_exploit_available</code><br>Es true si existen exploits conocidos de este hallazgo, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>has_high_exploitability_chance</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_high_exploitability_chance</code><br>Es true si la puntuación EPSS (Exploit Prediction Scoring System) score es mayor al 1%, de lo contrario es false.</td>
+      <td><code>tiene_altas_probabilidades_de_explotación</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.has_high_exploitability_chance</code><br>Es true si la puntuación EPSS (Exploit Prediction Scoring System) score es mayor al 1%, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_tainted_from_request_url</code></td>
+      <td><code>está_contaminado_desde_url_de_solicitud</code></td>
       <td>boolean</td>
       <td><strong>Path:</strong> <code>@risk.is_tainted_from_request_url</code><br>Es true si la URL final contiene partes contaminadas provenientes de la URL de la solicitud, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_tainted_from_query_string</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_tainted_from_query_string</code><br>Es true si la cadena está contaminada por elementos derivados de una cadena de consultas HTTP, de lo contrario es false.</td>
+      <td><code>está_contaminado_desde_cadena_de_consulta</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_tainted_from_query_string</code><br>Es true si la cadena está contaminada por elementos derivados de una cadena de consultas HTTP, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_tainted_from_database</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_tainted_from_database</code><br>Es true si la cadena está contaminada porque se originó en una fuente de bases de datos no confiable, de lo contrario es false.</td>
+      <td><code>está_contaminado_desde_base_de_datos</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_tainted_from_database</code><br>Es true si la cadena está contaminada porque se originó en una fuente de bases de datos no confiable, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>is_using_sha1</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_using_sha1</code><br>Es true si SHA1 se utiliza en un hash débil, de lo contrario es false.</td>
+      <td><code>utiliza_sha1</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk.is_using_sha1</code><br>Es true si SHA1 se utiliza en un hash débil, de lo contrario es false.</td>
     </tr>
   </tbody>
 </table>
@@ -1801,64 +1801,64 @@ Factores de riesgo contextuales que ayudan a evaluar el impacto potencial de un 
   </thead>
   <tbody>
     <tr>
-      <td><code>has_sensitive_data</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data</code><br>Evidencia e indicadores de si el recurso afectado contiene datos confidenciales.</td>
+      <td><code>contiene_datos_confidenciales</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_sensitive_data</code><br>Evidencia e indicadores de si el recurso afectado contiene datos confidenciales.</td>
     </tr>
     <tr>
-      <td><code>is_function_reachable</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable</code><br>Agrupa evidencia e indicadores de si la función o el módulo vulnerable se utiliza en el código.</td>
+      <td><code>es_alcanzable_por_la_función</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable</code><br>Agrupa evidencia e indicadores de si la función o el módulo vulnerable se utiliza en el código.</td>
     </tr>
     <tr>
-      <td><code>is_exposed_to_attacks</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks</code><br>Agrupa evidencia e indicadores de si el hallazgo detectado está expuesto a ataques.</td>
+      <td><code>está_expuesto_a_ataques</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks</code><br>Agrupa evidencia e indicadores de si el hallazgo detectado está expuesto a ataques.</td>
     </tr>
     <tr>
-      <td><code>has_privileged_access</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access</code><br>Agrupa evidencia e indicadores de si el recurso tiene acceso privilegiado.</td>
+      <td><code>tiene_acceso_privilegiado</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_privileged_access</code><br>Agrupa evidencia e indicadores de si el recurso tiene acceso privilegiado.</td>
     </tr>
     <tr>
-      <td><code>is_production</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production</code><br>Agrupa evidencia e indicadores de si el recurso asociado al hallazgo se ejecuta en un entorno de producción.</td>
+      <td><code>en_producción</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_production</code><br>Agrupa evidencia e indicadores de si el recurso asociado al hallazgo se ejecuta en un entorno de producción.</td>
     </tr>
     <tr>
-      <td><code>is_publicly_accessible</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible</code><br>Agrupa información de si el recurso afectado es accesible a través de la internet pública.</td>
+      <td><code>es_accesible_al_público</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_publicly_accessible</code><br>Agrupa información de si el recurso afectado es accesible a través de la internet pública.</td>
     </tr>
     <tr>
-      <td><code>has_exploit_available</code></td>
+      <td><code>tiene_exploit_disponible</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@risk_details.has_exploit_available</code><br>Agrupa información de si existe un exploit conocido para este aviso de hallazgo.</td>
     </tr>
     <tr>
-      <td><code>has_high_exploitability_chance</code></td>
+      <td><code>tiene_altas_probabilidades_de_explotación</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance</code><br>Agrupa evidencia e indicadores de si la vulnerabilidad podría ser explotada basándose en el EPSS (Exploit Prediction Scoring System).</td>
     </tr>
     <tr>
-      <td><code>is_tainted_from_request_url</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url</code><br>Agrupa información de si las partes contaminadas provienen de la URL de la solicitud.</td>
+      <td><code>está_contaminado_desde_url_de_solicitud</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_request_url</code><br>Agrupa información de si las partes contaminadas provienen de la URL de la solicitud.</td>
     </tr>
     <tr>
-      <td><code>is_tainted_from_query_string</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string</code><br>Agrupa información de si las partes contaminadas provienen de una cadena de consulta.</td>
+      <td><code>está_contaminado_desde_cadena_de_consulta</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_query_string</code><br>Agrupa información de si las partes contaminadas provienen de una cadena de consulta.</td>
     </tr>
     <tr>
-      <td><code>is_tainted_from_database</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database</code><br>Agrupa información de si las partes contaminadas provienen de una base de datos.</td>
+      <td><code>está_contaminado_desde_base_de_datos</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_database</code><br>Agrupa información de si las partes contaminadas provienen de una base de datos.</td>
     </tr>
     <tr>
-      <td><code>is_using_sha1</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1</code><br>Agrupa información de si SHA1 se utiliza en un hash débil.</td>
+      <td><code>utiliza_sha1</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_using_sha1</code><br>Agrupa información de si SHA1 se utiliza en un hash débil.</td>
     </tr>
   </tbody>
 </table>
@@ -1877,19 +1877,19 @@ Evidencia e indicadores de si el recurso afectado contiene datos confidenciales.
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.impact_cvss</code><br>Decribe de qué forma la presencia de datos confidenciales cambia la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_sensitive_data.impact_cvss</code><br>Decribe de qué forma la presencia de datos confidenciales cambia la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.value</code><br>Igual a <code>risk.has_sensitive_data</code>.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_sensitive_data.value</code><br>Igual a <code>risk.has_sensitive_data</code>.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.evidence</code><br>Evidencia que demuestra la presencia de datos confidenciales.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_sensitive_data.evidence</code><br>Evidencia que demuestra la presencia de datos confidenciales.</td>
     </tr>
   </tbody>
 </table>
@@ -1908,9 +1908,9 @@ Evidencia que demuestra la presencia de datos confidenciales.
   </thead>
   <tbody>
     <tr>
-      <td><code>sds_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.evidence.sds_id</code><br>Identificador de un ingreso de datos confidenciales detectado por Datadog Sensitive Data Scanner.</td>
+      <td><code>id_sds</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_sensitive_data.evidence.sds_id</code><br>Identificador de un ingreso de datos confidenciales detectado por Datadog Sensitive Data Scanner.</td>
     </tr>
   </tbody>
 </table>
@@ -1929,19 +1929,19 @@ Agrupa evidencia e indicadores de si la función o módulo vulnerable se utiliza
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.impact_cvss</code><br>Describe de qué forma el alcance de la función cambia el riesgo CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.impact_cvss</code><br>Describe de qué forma el alcance de la función cambia el riesgo CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.value</code><br>Es true si la función es alcanzable, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.value</code><br>Es true si la función es alcanzable, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence</code><br>Contiene la evidencia utilizada para determinar si la función es alcanzable.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence</code><br>Contiene la evidencia utilizada para determinar si la función es alcanzable.</td>
     </tr>
   </tbody>
 </table>
@@ -1960,9 +1960,9 @@ Contiene la evidencia utilizada para determinar si la función es alcanzable.
   </thead>
   <tbody>
     <tr>
-      <td><code>locations</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations</code><br>Matriz de localizaciones de código de donde se llama a la función.</td>
+      <td><code>localizaciones</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations</code><br>Matriz de localizaciones de código de donde se llama a la función.</td>
     </tr>
   </tbody>
 </table>
@@ -1981,44 +1981,44 @@ Matriz de localizaciones de código de donde se llama a la función.
   </thead>
   <tbody>
     <tr>
-      <td><code>filename</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
+      <td><code>nombre de archivo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
     </tr>
     <tr>
-      <td><code>line_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>início_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>inicio_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>line_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>final_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>final_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>is_test_file</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
+      <td><code>es_archivo_de_test</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
     </tr>
     <tr>
-      <td><code>symbol</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.symbol</code></td>
+      <td><code>símbolo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_function_reachable.evidence.locations.symbol</code></td>
     </tr>
   </tbody>
 </table>
@@ -2037,19 +2037,19 @@ Agrupa evidencia e indicadores de si el servicio donde se detectó el hallazgo e
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.impact_cvss</code><br>Describe de qué forma la exposición del recurso afecta a la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks.impact_cvss</code><br>Describe de qué forma la exposición del recurso afecta a la puntuación CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.value</code><br>Igual que <code>risk.is_exposed_to_attacks</code>.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks.value</code><br>Igual que <code>risk.is_exposed_to_attacks</code>.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.evidence</code><br>Contiene evidencia sobre la presencia de ataques.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks.evidence</code><br>Contiene evidencia sobre la presencia de ataques.</td>
     </tr>
   </tbody>
 </table>
@@ -2068,19 +2068,19 @@ Contiene evidencia sobre la presencia de ataques.
   </thead>
   <tbody>
     <tr>
-      <td><code>trace_example</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.evidence.trace_example</code><br>Ejemplo de traza con ataques detectados en el recurso del hallazgo.</td>
+      <td><code>ejemplo_de_traza</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks.evidence.trace_example</code><br>Ejemplo de traza con ataques detectados en el recurso del hallazgo.</td>
     </tr>
     <tr>
-      <td><code>trace_query</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.evidence.trace_query</code><br>Consulta utilizada para buscar trazas con ataques relacionados con el recurso del hallazgo.</td>
+      <td><code>consulta_de_traza</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks.evidence.trace_query</code><br>Consulta utilizada para buscar trazas con ataques relacionados con el recurso del hallazgo.</td>
     </tr>
     <tr>
-      <td><code>attacks_details</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.evidence.attacks_details</code><br>Contiene detalles sobre uno de los ataques detectados.</td>
+      <td><code>detalles_del_ataque</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_exposed_to_attacks.evidence.attacks_details</code><br>Contiene detalles sobre uno de los ataques detectados.</td>
     </tr>
   </tbody>
 </table>
@@ -2099,19 +2099,19 @@ Agrupa evidencia e indicadores de si el recurso tiene acceso privilegiado.
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.impact_cvss</code><br>Describe de qué forma el acceso privilegiado afecta a la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_privileged_access.impact_cvss</code><br>Describe de qué forma el acceso privilegiado afecta a la puntuación CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.value</code><br>Es true si el recurso asociado al hallazgo tiene acceso privilegiado, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_privileged_access.value</code><br>Es true si el recurso asociado al hallazgo tiene acceso privilegiado, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.evidence</code><br>Contiene evidencia que demuestra un acceso privilegiado.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_privileged_access.evidence</code><br>Contiene evidencia que demuestra un acceso privilegiado.</td>
     </tr>
   </tbody>
 </table>
@@ -2130,9 +2130,9 @@ Contiene evidencia que demuestra un acceso privilegiado.
   </thead>
   <tbody>
     <tr>
-      <td><code>resource_key</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.evidence.resource_key</code><br>Identificador canónico de recursos en la nube que demuestra un acceso privilegiado.</td>
+      <td><code>clave_de_recurso</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_privileged_access.evidence.resource_key</code><br>Identificador canónico de recursos en la nube que demuestra un acceso privilegiado.</td>
     </tr>
   </tbody>
 </table>
@@ -2151,19 +2151,19 @@ Agrupa evidencia e indicadores de si el recurso asociado al hallazgo se ejecuta 
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production.impact_cvss</code><br>Describe de qué forma un entorno de producción afecta a la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_production.impact_cvss</code><br>Describe de qué forma un entorno de producción afecta a la puntuación CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production.value</code><br>Igual que <code>risk.is_production</code>.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_production.value</code><br>Igual que <code>risk.is_production</code>.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production.evidence</code><br>Contiene el valor de etiqueta (tag) <code>env</code> que determina si el recurso está en producción.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_production.evidence</code><br>Contiene el valor de etiqueta (tag) <code>env</code> que determina si el recurso está en producción.</td>
     </tr>
   </tbody>
 </table>
@@ -2182,19 +2182,19 @@ Agrupa información de si el recurso afectado es accesible desde la internet pú
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.impact_cvss</code><br>Describe de qué forma la accesibilidad pública afecta a la puntuación CVSS. valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_publicly_accessible.impact_cvss</code><br>Describe de qué forma la accesibilidad pública afecta a la puntuación CVSS. valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.value</code><br>Igual que <code>risk.is_publicly_accessible</code>.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_publicly_accessible.value</code><br>Igual que <code>risk.is_publicly_accessible</code>.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.evidence</code><br>Contiene evidencia que demuestra el acceso desde internet.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_publicly_accessible.evidence</code><br>Contiene evidencia que demuestra el acceso desde internet.</td>
     </tr>
   </tbody>
 </table>
@@ -2213,9 +2213,9 @@ Contiene evidencia que demuestra el acceso desde internet.
   </thead>
   <tbody>
     <tr>
-      <td><code>resource_key</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.evidence.resource_key</code><br>Identificador canónico de recursos en la nube del recurso accesible desde internet.</td>
+      <td><code>clave_de_recurso</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_publicly_accessible.evidence.resource_key</code><br>Identificador canónico de recursos en la nube del recurso accesible desde internet.</td>
     </tr>
   </tbody>
 </table>
@@ -2234,19 +2234,19 @@ Agrupa información de si existe un exploit conocido para este aviso de hallazgo
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.impact_cvss</code><br>Describe de qué forma la disponibilidad de exploits conocidos afecta a la puntuación CVSS. Valores válidos:<code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_exploit_available.impact_cvss</code><br>Describe de qué forma la disponibilidad de exploits conocidos afecta a la puntuación CVSS. Valores válidos:<code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.value</code><br>Es true si existen exploits conocidos para este hallazgo, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_exploit_available.value</code><br>Es true si existen exploits conocidos para este hallazgo, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence</code><br>Contiene evidencia sobre la disponibilidad de exploits.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_exploit_available.evidence</code><br>Contiene evidencia sobre la disponibilidad de exploits.</td>
     </tr>
   </tbody>
 </table>
@@ -2265,19 +2265,19 @@ Contiene evidencia sobre la disponibilidad de exploits.
   </thead>
   <tbody>
     <tr>
-      <td><code>type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.type</code><br>Tipo de evidencia. Valores válidos: <code>production_ready</code>, <code>poc</code>, <code>unavailable</code>.</td> 
+      <td><code>tipo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_exploit_available.evidence.type</code><br>Tipo de evidencia. Valores válidos: <code>listo_para_producción</code>, <code>poc</code>, <code>no disponible</code>.</td> 
     </tr>
     <tr>
-      <td><code>exploit_urls</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.exploit_urls</code><br>Enumera las URL de exploits asociadas al hallazgo.</td>
+      <td><code>url_exploit</code></td>
+      <td>matriz (cadena)</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_exploit_available.evidence.exploit_urls</code><br>Enumera las URL de exploits asociadas al hallazgo.</td>
     </tr>
     <tr>
-      <td><code>exploit_sources</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.exploit_sources</code><br>Enumera fuentes de exploits asociadas al hallazgo (por ejemplo, NIST, CISA, Exploit-DB).</td>
+      <td><code>fuente_exploit</code></td>
+      <td>matriz (cadena)</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_exploit_available.evidence.exploit_sources</code><br>Enumera fuentes de exploits asociadas al hallazgo (por ejemplo, NIST, CISA, Exploit-DB).</td>
     </tr>
   </tbody>
 </table>
@@ -2296,19 +2296,19 @@ Agrupa evidencia e indicadores sobre la probabilidad de que la vulnerabilidad se
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.impact_cvss</code><br>Describe de qué forma la elevada explotabilidad afecta a la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_high_exploitability_chance.impact_cvss</code><br>Describe de qué forma la elevada explotabilidad afecta a la puntuación CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.value</code><br>Es true si la puntuación EPSS es superior al 1%, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_high_exploitability_chance.value</code><br>Es true si la puntuación EPSS es superior al 1%, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>evidence</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.evidence</code><br>Contiene evidencia de la puntuación EPSS.</td>
+      <td><code>evidencia</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_high_exploitability_chance.evidence</code><br>Contiene evidencia de la puntuación EPSS.</td>
     </tr>
   </tbody>
 </table>
@@ -2327,19 +2327,19 @@ Contiene evidencia de la puntuación EPSS.
   </thead>
   <tbody>
     <tr>
-      <td><code>epss_score</code></td>
-      <td>number</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.epss_score</code><br>Puntuación EPSS como porcentaje que representa la probabilidad de explotación.</td>
+      <td><code>puntuación_epss</code></td>
+      <td>número</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.epss_score</code><br>Puntuación EPSS como porcentaje que representa la probabilidad de explotación.</td>
     </tr>
     <tr>
-      <td><code>epss_severity</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.epss_severity</code><br>Nivel de gravedad de la puntuación EPSS. Valores válidos: <code>Critical</code>, <code>High</code>, <code>Medium</code>, <code>Low</code>.</td>
+      <td><code>gravedad_epss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.epss_severity</code><br>Nivel de gravedad de la puntuación EPSS. Valores válidos: <code>crítico</code>, <code>elevado</code>, <code>medio</code>, <code>bajo</code>.</td>
     </tr>
     <tr>
-      <td><code>threshold</code></td>
-      <td>number</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.threshold</code><br>Puntuación EPSS mínima necesaria para que se considere que una vulnerabilidad tiene una elevada probabilidad de explotación.</td>
+      <td><code>umbral</code></td>
+      <td>número</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.threshold</code><br>Puntuación EPSS mínima necesaria para que se considere que una vulnerabilidad tiene una elevada probabilidad de explotación.</td>
     </tr>
   </tbody>
 </table>
@@ -2358,14 +2358,14 @@ Agrupa información de si las partes contaminadas provienen de la URL de la soli
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url.impact_cvss</code><br>Describe de qué forma la contaminación de la URL de la solicitud cambia la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_request_url.impact_cvss</code><br>Describe de qué forma la contaminación de la URL de la solicitud cambia la puntuación CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url.value</code><br>Es true si la URL final contiene partes contaminadas que se originan en la URL de la solicitud, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_request_url.value</code><br>Es true si la URL final contiene partes contaminadas que se originan en la URL de la solicitud, de lo contrario es false.</td>
     </tr>
   </tbody>
 </table>
@@ -2384,14 +2384,14 @@ Agrupa información de si las partes contaminadas provienen de una cadena de con
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string.impact_cvss</code><br>Describe de qué forma la contaminación de la cadena de consulta cambia la puntuación CVSS: Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_query_string.impact_cvss</code><br>Describe de qué forma la contaminación de la cadena de consulta cambia la puntuación CVSS: Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string.value</code><br>Es true si la cadena contiene elementos derivados de una cadena de consulta HTTP, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_query_string.value</code><br>Es true si la cadena contiene elementos derivados de una cadena de consulta HTTP, de lo contrario es false.</td>
     </tr>
   </tbody>
 </table>
@@ -2410,14 +2410,14 @@ Agrupa información de si las partes contaminadas provienen de una base de datos
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database.impact_cvss</code><br>Describe de qué forma la contaminación de la base de datos cambia la puntuación CVSS: Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_database.impact_cvss</code><br>Describe de qué forma la contaminación de la base de datos cambia la puntuación CVSS: Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database.value</code><br>Es true si la cadena está contaminada porque se originó en una fuente de base de datos no confiable, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_tainted_from_database.value</code><br>Es true si la cadena está contaminada porque se originó en una fuente de base de datos no confiable, de lo contrario es false.</td>
     </tr>
   </tbody>
 </table>
@@ -2436,14 +2436,14 @@ Agrupa información de si SHA1 se utiliza en un hash débil.
   </thead>
   <tbody>
     <tr>
-      <td><code>impact_cvss</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1.impact_cvss</code><br>Describe de qué forma el uso de SHA1 cambia la puntuación CVSS. Valores válidos: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
+      <td><code>impacto_cvss</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_using_sha1.impact_cvss</code><br>Describe de qué forma el uso de SHA1 cambia la puntuación CVSS. Valores válidos: <code>más riesgoso</code>, <code>neutral</code>, <code>más seguro</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>value</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1.value</code><br>Es true si SHA1 se utiliza en un hash débil, de lo contrario es false.</td>
+      <td><code>valor</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@risk_details.is_using_sha1.value</code><br>Es true si SHA1 se utiliza en un hash débil, de lo contrario es false.</td>
     </tr>
   </tbody>
 </table>
@@ -2464,29 +2464,29 @@ Describe cómo detectar una vulnerabilidad. Los hallazgos de vulnerabilidades co
   </thead>
   <tbody>
     <tr>
-      <td><code>type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@rule.type</code><br>Tipo de regla que generó el hallazgo.</td>
+      <td><code>tipo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@rule.type</code><br>Tipo de regla que generó el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@rule.name</code><br>Nombre de la regla que generó el hallazgo.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@rule.name</code><br>Nombre de la regla que generó el hallazgo.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@rule.id</code><br>Identificador de la regla que generó el hallazgo.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@rule.id</code><br>Identificador de la regla que generó el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>version</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@rule.version</code><br>Versión de la regla que generó el hallazgo.</td>
+      <td><code>versión</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@rule.version</code><br>Versión de la regla que generó el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>default_rule_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@rule.default_rule_id</code><br>Identificador por defecto de la regla. Las reglas personalizadas no tienen identificadores de reglas por defecto.</td>
+      <td><code>id_de_regla_por_defecto</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@rule.default_rule_id</code><br>Identificador por defecto de la regla. Las reglas personalizadas no tienen identificadores de reglas por defecto.</td>
     </tr>
   </tbody>
 </table>
@@ -2508,38 +2508,38 @@ Vincula una vulnerabilidad a un conjunto de versiones de software específicas. 
   <tbody>
     <tr>
       <td><code>id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@advisory.id</code><br>Identificador interno del aviso.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@advisory.id</code><br>Identificador interno del aviso.</td>
     </tr>
     <tr>
       <td><code>cve</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@advisory.cve</code><br>Identificador primario reconocido globalmente de una vulnerabilidad de la seguridad, siguiendo el formato <code>CVE-YYYY-NNNN</code>.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@advisory.cve</code><br>Identificador primario reconocido globalmente de una vulnerabilidad de la seguridad, siguiendo el formato <code>CVE-YYYY-NNNN</code>.</td>
     </tr>
     <tr>
-      <td><code>aliases</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@advisory.aliases</code><br>Contiene identificadores adicionales que hacen referencia a la misma vulnerabilidad, creados por otras entidades.</td>
+      <td><code>alias</code></td>
+      <td>matriz (cadena)</td>
+      <td><strong>Ruta:</strong> <code>@advisory.aliases</code><br>Contiene identificadores adicionales que hacen referencia a la misma vulnerabilidad, creados por otras entidades.</td>
     </tr>
     <tr>
-      <td><code>published_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@advisory.published_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se publicó el aviso.</td>
+      <td><code>publicado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@advisory.published_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se publicó el aviso.</td>
     </tr>
     <tr>
-      <td><code>modified_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@advisory.modified_at</code><br>Marca de tiempo en milisegundos (UTC) de la última actualización del aviso.</td>
+      <td><code>modificado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@advisory.modified_at</code><br>Marca de tiempo en milisegundos (UTC) de la última actualización del aviso.</td>
     </tr>
     <tr>
-      <td><code>summary</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@advisory.summary</code><br>Breve resumen del aviso.</td>
+      <td><code>resumen</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@advisory.summary</code><br>Breve resumen del aviso.</td>
     </tr>
     <tr>
-      <td><code>type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@advisory.type</code><br>Especifica el tipo de aviso. Valores válidos: <code>component_with_known_vulnerability</code>, <code>unmaintained</code>, <code>end_of_life</code>, <code>dangerous_workflows</code>, <code>risky_license</code>, <code>malicious_package</code>.</td>
+      <td><code>tipo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@advisory.type</code><br>Especifica el tipo de aviso. Valores válidos: <code>componente_con_vulnerabilidad_conocida</code>, <code>sin mantenimiento</code>, <code>fin_de_vida</code>, <code>flujos_de_trabajo_peligrosos</code>, <code>licencia_riesgosa</code>, <code>paquete_malicioso</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2561,48 +2561,48 @@ Contiene información específica sobre vulnerabilidades.
   <tbody>
     <tr>
       <td><code>cwes</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@vulnerability.cwes</code><br>Identificador CWE (Common Weakness Enumeration) asociado a esta vulnerabilidad. Cada entrada debe utilizar el formato <code>CWE-&lt;id&gt;</code> (por ejemplo, <code>CWE-416</code>).</td>
+      <td>matriz (cadena)</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.cwes</code><br>Identificador CWE (Common Weakness Enumeration) asociado a esta vulnerabilidad. Cada entrada debe utilizar el formato <code>CWE-&lt;id&gt;</code> (por ejemplo, <code>CWE-416</code>).</td>
     </tr>
     <tr>
       <td><code>hash</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.hash</code><br>Hash de la vulnerabilidad utilizado para correlacionar la misma vulnerabilidad en todo el tiempo de ejecución y el análisis estático de SCA (Software Composition Analysis).</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.hash</code><br>Hash de la vulnerabilidad utilizado para correlacionar la misma vulnerabilidad en todo el tiempo de ejecución y el análisis estático de SCA (Software Composition Analysis).</td>
     </tr>
     <tr>
-      <td><code>first_commit</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.first_commit</code><br>Identifica el commit en el que se introdujo esta vulnerabilidad por primera vez.</td>
+      <td><code>primer_commit</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.first_commit</code><br>Identifica el commit en el que se introdujo esta vulnerabilidad por primera vez.</td>
     </tr>
     <tr>
-      <td><code>last_commit</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.last_commit</code><br>Identifica el commit en el que se corrigió esta vulnerabilidad.</td>
+      <td><code>último_commit</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.last_commit</code><br>Identifica el commit en el que se corrigió esta vulnerabilidad.</td>
     </tr>
     <tr>
       <td><code>owasp_top10_years</code></td>
-      <td>array (integer)</td>
-      <td><strong>Path:</strong> <code>@vulnerability.owasp_top10_years</code><br>Indica en qué años apareció la vulnerabilidad en la lista de las 10 principales vulnerabilidades críticas de OWASP.</td>
+      <td>matriz (entero)</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.owasp_top10_years</code><br>Indica en qué años apareció la vulnerabilidad en la lista de las 10 principales vulnerabilidades críticas de OWASP.</td>
     </tr>
     <tr>
-      <td><code>confidence</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.confidence</code><br>Evalúa la probabilidad de que la vulnerabilidad sea un true positivo. Posibles valores: <code>low</code>, <code>high</code>, <code>not_evaluated</code>.</td>
+      <td><code>confianza</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.confidence</code><br>Evalúa la probabilidad de que la vulnerabilidad sea un true positivo. Posibles valores: <code>low</code>, <code>high</code>, <code>not_evaluated</code>.</td>
     </tr>
     <tr>
-      <td><code>confidence_reason</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.confidence_reason</code><br>Proporciona la razón detrás del nivel de confianza asignado.</td>
+      <td><code>motivo_de_confianza</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.confidence_reason</code><br>Proporciona la razón detrás del nivel de confianza asignado.</td>
     </tr>
     <tr>
-      <td><code>is_emerging</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@vulnerability.is_emerging</code><br>Es true si esta vulnerabilidad se clasifica como una amenaza emergente, de lo contrario es false.</td>
+      <td><code>es_nuevo</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.is_emerging</code><br>Es true si esta vulnerabilidad se clasifica como una amenaza emergente, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>stack</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@vulnerability.stack</code><br>Especifica el stack tecnológico en el que se encontró la vulnerabilidad.</td>
+      <td><code>stack tecnológico</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.stack</code><br>Especifica el stack tecnológico en el que se encontró la vulnerabilidad.</td>
     </tr>
   </tbody>
 </table>
@@ -2621,14 +2621,14 @@ Especifica el stack tecnológico en el que se encontró la vulnerabilidad.
   </thead>
   <tbody>
     <tr>
-      <td><code>language</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.stack.language</code><br>Especifica el lenguaje en el que se encontró la vulnerabilidad.</td>
+      <td><code>lenguaje</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.stack.language</code><br>Especifica el lenguaje en el que se encontró la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>ecosystem</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.stack.ecosystem</code><br>Indica el sistema de gestión de paquetes o el registro fuente donde se originó el componente vulnerable. Posibles valores: <code>pypi</code>, <code>maven</code>, <code>nuget</code>, <code>npm</code>, <code>rubygems</code>, <code>go</code>, <code>packagist</code>, <code>deb</code>, <code>rpm</code>, <code>apk</code>, <code>windows</code>, <code>macos</code>, <code>oci</code>, <code>generic</code>, <code>bottlerocket</code>, <code>conan</code>, <code>crates</code>, <code>none</code>.</td>
+      <td><code>ecosistema</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@vulnerability.stack.ecosystem</code><br>Indica el sistema de gestión de paquetes o el registro fuente donde se originó el componente vulnerable. Posibles valores: <code>pypi</code>, <code>maven</code>, <code>nuget</code>, <code>npm</code>, <code>rubygems</code>, <code>go</code>, <code>packagist</code>, <code>deb</code>, <code>rpm</code>, <code>apk</code>, <code>windows</code>, <code>macos</code>, <code>oci</code>, <code>generic</code>, <code>bottlerocket</code>, <code>conan</code>, <code>crates</code>, <code>ninguno</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2650,58 +2650,58 @@ Agrupa información sobre la corrección del hallazgo.
   <tbody>
     <tr>
       <td><code>codegen</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.codegen</code><br>Rastrea el estado del hallazgo para la plataforma de generación de códigos.</td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.codegen</code><br>Rastrea el estado del hallazgo para la plataforma de generación de códigos.</td>
     </tr>
     <tr>
-      <td><code>is_available</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.is_available</code><br>Es true si hay una corrección actualmente disponible para este hallazgo, de lo contrario es false.</td>
+      <td><code>está_disponible</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@remediation.is_available</code><br>Es true si hay una corrección actualmente disponible para este hallazgo, de lo contrario es false.</td>
     </tr>
     <tr>
-      <td><code>description</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.description</code><br>Descripción de la corrección.</td>
+      <td><code>descripción</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.description</code><br>Descripción de la corrección.</td>
     </tr>
     <tr>
-      <td><code>recommended_type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.recommended_type</code><br>Indica el tipo de corrección recomendado para este hallazgo. Posibles valores: <code>package</code>, <code>host_image</code>, <code>container_image</code>, <code>code_update</code>, <code>microsoft_kb</code>, <code>root_package</code>.</td>
+      <td><code>tipo_recomendado</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.recommended_type</code><br>Indica el tipo de corrección recomendado para este hallazgo. Posibles valores: <code>paquete</code>, <code>imagen_de_host</code>, <code>imagen_de_contenedor</code>, <code>actualizar_código</code>, <code>microsoft_kb</code>, <code>paquete_raíz</code>.</td>
     </tr>
     <tr>
-      <td><code>recommended</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.recommended</code><br>Contiene la corrección recomendada.</td>
+      <td><code>recomendado</code></td>
+      <td>objete</td>
+      <td><strong>Ruta:</strong> <code>@remediation.recommended</code><br>Contiene la corrección recomendada.</td>
     </tr>
     <tr>
-      <td><code>package</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.package</code><br>Agrupa información del paquete de corrección.</td>
+      <td><code>paquete</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.package</code><br>Agrupa información del paquete de corrección.</td>
     </tr>
     <tr>
-      <td><code>root_package</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package</code><br>Agrupa información del paquete de corrección raíz.</td>
+      <td><code>paquete_raíz</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.root_package</code><br>Agrupa información del paquete de corrección raíz.</td>
     </tr>
     <tr>
-      <td><code>host_image</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.host_image</code><br>Contiene correcciones que sugieren la versión de la imagen de host más reciente que podría corregir la vulnerabilidad.</td>
+      <td><code>imagen_de_host</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.host_image</code><br>Contiene correcciones que sugieren la versión de la imagen de host más reciente que podría corregir la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>container_image</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image</code><br>Contiene correcciones que sugieren una versión de la imagen de host más reciente que podría corregir la vulnerabilidad.</td>
+      <td><code>imagen_de_contenedor</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.container_image</code><br>Contiene correcciones que sugieren una versión de la imagen de host más reciente que podría corregir la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>code_update</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.code_update</code></td>
+      <td><code>actualizar_código</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.code_update</code></td>
     </tr>
     <tr>
       <td><code>microsoft_kb</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.microsoft_kb</code><br>Contiene estrategias de corrección mediante un artículo de la Base de conocimientos de Microsoft.</td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.microsoft_kb</code><br>Contiene estrategias de corrección mediante un artículo de la Base de conocimientos de Microsoft.</td>
     </tr>
   </tbody>
 </table>
@@ -2720,14 +2720,14 @@ Rastrea el estado del hallazgo para la plataforma de generación de códigos.
   </thead>
   <tbody>
     <tr>
-      <td><code>status</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.codegen.status</code><br>Estado de la generación de correcciones automatizada. valores válidos: <code>generated</code>, <code>not_available_non_default_branch</code>, <code>not_available_unsupported_tool</code>, <code>not_available_unsupported_rule</code>, <code>not_available_confidence_low</code>, <code>not_available_disabled</code>, <code>not_available_git_provider_not_supported</code>, <code>not_available_confidence_too_low</code>, <code>error</code>.</td>
+      <td><code>estado</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.codegen.status</code><br>Estado de la generación de correcciones automatizada. Valores válidos: <code>generado</code>, <code>no_disponible_sin_rama_por_defecto</code>, <code>no_disponible_herramienta_no_compatible</code>, <code>no_disponible_regla_no_compatible</code>, <code>no_disponible_confianza_baja</code>, <code>no_disponible_desactivado</code>, <code>no_disponible_provvedor_git_no_compatible</code>, <code>no_disponible_confianza_demasiado_baja</code>, <code>error</code>.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.codegen.id</code><br>Identificador utilizado para rastrear la corrección en el backend de generación de códigos.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.codegen.id</code><br>Identificador utilizado para rastrear la corrección en el backend de generación de códigos.</td>
     </tr>
   </tbody>
 </table>
@@ -2746,29 +2746,29 @@ Agrupa información del paquete de corrección.
   </thead>
   <tbody>
     <tr>
-      <td><code>latest_no_critical</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical</code><br>Contiene correcciones que sugieren la versión del paquete más reciente sin vulnerabilidades críticas (basado en una puntuación básica).</td>
+      <td><code>más_reciente_no_crítico</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.package.latest_no_critical</code><br>Contiene correcciones que sugieren la versión más reciente del paquete sin vulnerabilidades críticas (basado en la puntuación básica).</td>
     </tr>
     <tr>
-      <td><code>closest_no_critical</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical</code><br>Contiene correcciones que sugieren la versión del paquete más parecida sin vulnerabilidades críticas (basado en una puntuación básica).</td>
+      <td><code>más_parecido_no_crítico</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.package.closest_no_critical</code><br>Contiene correcciones que sugieren la versión más parecida del paquete sin vulnerabilidades críticas (basado en la puntuación básica).</td>
     </tr>
     <tr>
-      <td><code>latest_no_vulnerabilities</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión del paquete más reciente sin vulnerabilidades.</td>
+      <td><code>más_reciente_sin_vulnerabilidades</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.package.latest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión más reciente del paquete sin vulnerabilidades.</td>
     </tr>
     <tr>
-      <td><code>closest_no_vulnerabilities</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión del paquete más parecida sin vulnerabilidades.</td>
+      <td><code>más_parecido_sin_vulnerabilidades</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.package.closest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión más parecida del paquete sin vulnerabilidades.</td>
     </tr>
     <tr>
       <td><code>base</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.package.base</code></td>
     </tr>
   </tbody>
 </table>
@@ -2787,29 +2787,29 @@ Agrupa información del paquete de corrección raíz.
   </thead>
   <tbody>
     <tr>
-      <td><code>latest_no_critical</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical</code><br>Contiene correcciones que sugieren la versión del paquete más reciente sin vulnerabilidades críticas (basado en una puntuación básica).</td>
+      <td><code>más_reciente_no_crítico</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.root_package.latest_no_critical</code><br>Contiene correcciones que sugieren la versión del paquete más reciente sin vulnerabilidades críticas (basado en una puntuación básica).</td>
     </tr>
     <tr>
-      <td><code>closest_no_critical</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical</code><br>Contiene correcciones que sugieren la versión del paquete más parecida sin vulnerabilidades críticas (basado en una puntuación básica).</td>
+      <td><code>más_parecido_no_crítico</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.root_package.closest_no_critical</code><br>Contiene correcciones que sugieren la versión del paquete más parecida sin vulnerabilidades críticas (basado en una puntuación básica).</td>
     </tr>
     <tr>
-      <td><code>latest_no_vulnerabilities</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión del paquete más reciente sin vulnerabilidades.</td>
+      <td><code>más_reciente_sin_vulnerabilidades</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.root_package.latest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión del paquete más reciente sin vulnerabilidades.</td>
     </tr>
     <tr>
-      <td><code>closest_no_vulnerabilities</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión del paquete más parecida sin vulnerabilidades.</td>
+      <td><code>más_parecido_sin_vulnerabilidades</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.root_package.closest_no_vulnerabilities</code><br>Contiene correcciones que sugieren la versión del paquete más parecida sin vulnerabilidades.</td>
     </tr>
     <tr>
       <td><code>base</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.root_package.base</code></td>
     </tr>
   </tbody>
 </table>
@@ -2828,9 +2828,9 @@ Contiene correcciones que sugieren la versión de la imagen de host más recient
   </thead>
   <tbody>
     <tr>
-      <td><code>latest_major</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.host_image.latest_major</code><br>Contiene información sobre la imagen de máquina de Amazon (AMI) más reciente que podría corregir la vulnerabilidad.</td>
+      <td><code>mayor_más_reciente</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.host_image.latest_major</code><br>Contiene información sobre la imagen de máquina de Amazon (AMI) más reciente que podría corregir la vulnerabilidad.</td>
     </tr>
   </tbody>
 </table>
@@ -2849,9 +2849,9 @@ Contiene información sobre la imagen de máquina de Amazon (AMI) más reciente 
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.host_image.latest_major.name</code><br>Nombre de la imagen de máquina de Amazon (AMI) más reciente (por ejemplo, <code>ami-12345678</code>) que podría corregir la vulnerabilidad.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.host_image.latest_major.name</code><br>Nombre de la imagen de máquina de Amazon (AMI) más reciente (por ejemplo, <code>ami-12345678</code>) que podría corregir la vulnerabilidad.</td>
     </tr>
   </tbody>
 </table>
@@ -2870,9 +2870,9 @@ Contiene correcciones que sugieren una versión de la imagen de contenedor más 
   </thead>
   <tbody>
     <tr>
-      <td><code>closest_no_vulnerabilities</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities</code><br>Contiene correcciones que sugieren actualizar la imagen de contenedor a una versión más reciente que podría corregir la vulnerabilidad.</td>
+      <td><code>más_parecido_sin_vulnerabilidades</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.container_image.closest_no_vulnerabilities</code><br>Contiene correcciones que sugieren actualizar la imagen de contenedor a una versión más reciente que podría corregir la vulnerabilidad.</td>
     </tr>
   </tbody>
 </table>
@@ -2891,24 +2891,24 @@ Contiene sugerencias de corrección para actualizar la imagen de contenedor a un
   </thead>
   <tbody>
     <tr>
-      <td><code>layer_digests</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.layer_digests</code><br>Contiene los digests de capas de la imagen de contenedor actualmente vulnerable que necesita actualización.</td>
+      <td><code>digests_de_capas</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.layer_digests</code><br>Contiene los digests de capas de la imagen de contenedor actualmente vulnerable que necesita actualización.</td>
     </tr>
     <tr>
-      <td><code>image_url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.image_url</code><br>URL de la imagen de contenedor que podría corregir la vulnerabilidad.</td>
+      <td><code>url_imagen</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.image_url</code><br>URL de la imagen de contenedor que podría corregir la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.name</code><br>Nombre de la imagen de contenedor que podría corregir la vulnerabilidad.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.name</code><br>Nombre de la imagen de contenedor que podría corregir la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>tag</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.tag</code><br>Etiqueta de la imagen de contenedor que podría corregir la vulnerabilidad.</td>
+      <td><code>etiqueta</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.tag</code><br>Etiqueta de la imagen de contenedor que podría corregir la vulnerabilidad.</td>
     </tr>
   </tbody>
 </table>
@@ -2925,9 +2925,9 @@ Contiene sugerencias de corrección para actualizar la imagen de contenedor a un
   </thead>
   <tbody>
     <tr>
-      <td><code>edits</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.code_update.edits</code><br>Enumera los cambios de código necesarios para corregir el hallazgo.</td>
+      <td><code>ediciones</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@remediation.code_update.edits</code><br>Enumera los cambios de código necesarios para corregir el hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -2946,9 +2946,9 @@ Contiene estrategias de corrección mediante un artículo de la base de conocimi
   </thead>
   <tbody>
     <tr>
-      <td><code>closest_fix_advisory</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.microsoft_kb.closest_fix_advisory</code><br>Especifica el parche más parecido para responder al aviso actual.</td>
+      <td><code>aviso_corrección_más_parecida</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@remediation.microsoft_kb.closest_fix_advisory</code><br>Especifica el parche más parecido para responder al aviso actual.</td>
     </tr>
   </tbody>
 </table>
@@ -2967,9 +2967,9 @@ Especifica el parche más parecido disponible para responder al aviso actual.
   </thead>
   <tbody>
     <tr>
-      <td><code>article</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.microsoft_kb.closest_fix_advisory.article</code><br>Nombre de artículo del parche más parecido.</td>
+      <td><code>artículo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@remediation.microsoft_kb.closest_fix_advisory.article</code><br>Nombre de artículo del parche más parecido.</td>
     </tr>
   </tbody>
 </table>
@@ -2990,24 +2990,24 @@ Contiene información específica de los hallazgos de cumplimiento, como la regl
   </thead>
   <tbody>
     <tr>
-      <td><code>evaluation</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@compliance.evaluation</code><br>Resultado de la evaluación del cumplimiento. Valores válidos: <code>pass</code> (recurso correctamente configurado), <code>fail</code> (recurso incorrectamente configurado).</td>
+      <td><code>evaluación</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@compliance.evaluation</code><br>Resultado de la evaluación del cumplimiento. Valores válidos: <code>aprobado</code> (recurso correctamente configurado), <code>no aprobado</code> (recurso incorrectamente configurado).</td>
     </tr>
     <tr>
-      <td><code>frameworks</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@compliance.frameworks</code><br>Enumera los marcos de cumplimiento asignados a este hallazgo.</td>
+      <td><code>marcos</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@compliance.frameworks</code><br>Enumera los marcos de cumplimiento asignados a este hallazgo.</td>
     </tr>
     <tr>
-      <td><code>framework_requirements</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@compliance.framework_requirements</code><br>Enumera los requisitos de este marco de cumplimiento con los que se relaciona este hallazgo.</td>
+      <td><code>requisitos_de_marcos</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@compliance.framework_requirements</code><br>Enumera los requisitos de este marco de cumplimiento con los que se relaciona este hallazgo.</td>
     </tr>
     <tr>
-      <td><code>framework_requirement_controls</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@compliance.framework_requirement_controls</code><br>Enumera los controles del requisito del marco a los que apunta este hallazgo.</td>
+      <td><code>controles_requisitos_de_marcos</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@compliance.framework_requirement_controls</code><br>Enumera los controles del requisito del marco a los que apunta este hallazgo.</td>
     </tr>
   </tbody>
 </table>
@@ -3028,64 +3028,64 @@ Agrupa atributos que identifican el recurso en la nube afectado por el hallazgo.
   </thead>
   <tbody>
     <tr>
-      <td><code>tags</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.tags</code><br>Enumera las etiquestas aplicadas al recurso en la nube.</td>
+      <td><code>etiquetas</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.tags</code><br>Enumera las etiquetas aplicadas al recurso en la nube.</td>
     </tr>
     <tr>
-      <td><code>category</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.category</code><br>Categoría a la que corresponde el tipo de recurso.</td>
+      <td><code>categoría</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.category</code><br>Categoría a la que corresponde el tipo de recurso.</td>
     </tr>
     <tr>
-      <td><code>key</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.key</code><br>Identificador canónico de recursos en la nube (CCRID).</td>
+      <td><code>clave</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.key</code><br>Identificador canónico de recursos en la nube (CCRID).</td>
     </tr>
     <tr>
-      <td><code>cloud_provider_url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.cloud_provider_url</code><br>Enlace al recurso en la consola del proveedor de la nube.</td>
+      <td><code>url_proveedor_de_nube</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.cloud_provider_url</code><br>Enlace al recurso en la consola del proveedor de la nube.</td>
     </tr>
     <tr>
-      <td><code>cloud_provider</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.cloud_provider</code><br>Indica el proveedor de la nube que aloja el recurso. Valores válidos: <code>aws</code>, <code>azure</code>, <code>gcp</code>, <code>oci</code>.</td>
+      <td><code>proveedor_de_nube</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.cloud_provider</code><br>Indica el proveedor de la nube que aloja el recurso. Valores válidos: <code>aws</code>, <code>azure</code>, <code>gcp</code>, <code>oci</code>.</td>
     </tr>
     <tr>
-      <td><code>configuration</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.configuration</code><br>Configuracion del recurso en la nube devuelto por el proveedor de la nube.</td>
+      <td><code>configuración</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.configuration</code><br>Configuracion del recurso en la nube devuelto por el proveedor de la nube.</td>
     </tr>
     <tr>
-      <td><code>context</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.context</code><br>Contexto del recurso en la nube.</td>
+      <td><code>contexto</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.context</code><br>Contexto del recurso en la nube.</td>
     </tr>
     <tr>
-      <td><code>account</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.account</code><br>Cuenta en la nube propietaria del recurso en la nube (por ejemplo, cuenta AWS, suscripción Azure, proyecto GCP, arrendamiento OCI).</td>
+      <td><code>cuenta</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.account</code><br>Cuenta en la nube propietaria del recurso en la nube (por ejemplo, cuenta AWS, suscripción Azure, proyecto GCP, arrendamiento OCI).</td>
     </tr>
     <tr>
-      <td><code>display_name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.display_name</code><br>Muestra el nombre del recurso.</td>
+      <td><code>mostrar_nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.display_name</code><br>Muestra el nombre del recurso.</td>
     </tr>
     <tr>
-      <td><code>region</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.region</code><br>Región en la nube donde se encuentra el recurso.</td>
+      <td><code>región</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.region</code><br>Región en la nube donde se encuentra el recurso.</td>
     </tr>
     <tr>
-      <td><code>public_accessibility_paths</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.public_accessibility_paths</code><br>Descubre las rutas de red a través de las que el recurso es accesible desde la internet pública.</td>
+      <td><code>rutas_de_accesibilidad_pública</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.public_accessibility_paths</code><br>Descubre las rutas de red a través de las que el recurso es accesible desde la internet pública.</td>
     </tr>
     <tr>
-      <td><code>public_port_ranges</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.public_port_ranges</code><br>Lista de rangos de puerto del recurso expuestos a la internet pública.</td>
+      <td><code>rangos_de_puertos_públicos</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@cloud_resource.public_port_ranges</code><br>Lista de rangos de puerto del recurso expuestos a la internet pública.</td>
     </tr>
   </tbody>
 </table>
@@ -3107,14 +3107,14 @@ Agrupa atributos que identifican el recurso Infraestructura como Código (IaC) r
   </thead>
   <tbody>
     <tr>
-      <td><code>provider</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.provider</code><br>Indica el proveedor de IaC (Infraestructura como código) donde está definido el recurso (por ejemplo, <code>aws</code>, <code>gcp</code>, <code>azure</code>). Posibles valores: <code>aws</code>, <code>gcp</code>, <code>azure</code>.</td>
+      <td><code>proveedor</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@iac_resource.provider</code><br>Indica el proveedor de IaC (Infraestructura como código) donde está definido el recurso (por ejemplo, <code>aws</code>, <code>gcp</code>, <code>azure</code>). Posibles valores: <code>aws</code>, <code>gcp</code>, <code>azure</code>.</td>
     </tr>
     <tr>
-      <td><code>platform</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.platform</code><br>Indica en qué plataforma de IaC (Infraestructura como código) se encontró la vulnerabilidad (por ejemplo, <code>terraform</code>, <code>kubernetes</code>). Possible values: <code>cicd</code>, <code>terraform</code>, <code>kubernetes</code>, <code>cloudformation</code>.</td>
+      <td><code>plataforma</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@iac_resource.platform</code><br>Indica en qué plataforma de IaC (Infraestructura como código) se encontró la vulnerabilidad (por ejemplo, <code>terraform</code>, <code>kubernetes</code>). Posibles valores: <code>cicd</code>, <code>terraform</code>, <code>kubernetes</code>, <code>cloudformation</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3135,9 +3135,9 @@ Contiene campos Kubernetes para los hallazgos generados en relación con recurso
   </thead>
   <tbody>
     <tr>
-      <td><code>cluster_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@k8s.cluster_id</code><br>Identificador de clústeres Kubernetes.</td>
+      <td><code>id_de_clúster</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@k8s.cluster_id</code><br>Identificador de clústeres Kubernetes.</td>
     </tr>
   </tbody>
 </table>
@@ -3158,29 +3158,29 @@ Contiene información sobre el host.
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@host.name</code><br>Host name.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@host.name</code><br>Host name.</td>
     </tr>
     <tr>
-      <td><code>key</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@host.key</code><br>Identificador canónico de recursos en la nube (CCRID).</td>
+      <td><code>clave</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@host.key</code><br>Identificador canónico de recursos en la nube (CCRID).</td>
     </tr>
     <tr>
-      <td><code>cloud_provider</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@host.cloud_provider</code><br>Proveedor de nube al que pertenece el host. Posibles valores: <code>aws</code>, <code>azure</code>, <code>gcp</code>, <code>oci</code>.</td>
+      <td><code>proveedor_de_nube</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@host.cloud_provider</code><br>Proveedor de nube al que pertenece el host. Posibles valores: <code>aws</code>, <code>azure</code>, <code>gcp</code>, <code>oci</code>.</td>
     </tr>
     <tr>
-      <td><code>image</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@host.image</code><br>Nombre de la imagen de host utilizada para crear el host (por ejemplo, <code>ami-1234</code>).</td>
+      <td><code>imagen</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@host.image</code><br>Nombre de la imagen de host utilizada para crear el host (por ejemplo, <code>ami-1234</code>).</td>
     </tr>
     <tr>
-      <td><code>os</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@host.os</code><br>Agrupa atributos del sistema operativo que se ejecuta en el host.</td>
+      <td><code>sistema operativo</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@host.os</code><br>Agrupa atributos del sistema operativo que se ejecuta en el host.</td>
     </tr>
   </tbody>
 </table>
@@ -3199,14 +3199,14 @@ Agrupa atributos del sistema operativo que se ejecuta en el host.
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@host.os.name</code><br>Nombre del sistema operativo.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@host.os.name</code><br>Nombre del sistema operativo.</td>
     </tr>
     <tr>
-      <td><code>version</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@host.os.version</code><br>Versión del sistema operativo.</td>
+      <td><code>versión</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@host.os.version</code><br>Versión del sistema operativo.</td>
     </tr>
   </tbody>
 </table>
@@ -3225,19 +3225,19 @@ Agrupa atributos del sistema operativo que se ejecuta en el host.
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@service.name</code><br>Nombre del servicio en que se detectó este hallazgo.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@service.name</code><br>Nombre del servicio en que se detectó este hallazgo.</td>
     </tr>
     <tr>
-      <td><code>git_commit_sha</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@service.git_commit_sha</code><br>SHA de commit Git del commit más reciente donde se detectó este hallazgo del servicio. Solo disponible cuando está configurada la integración del código fuente.</td>
+      <td><code>sha_del_commit_git</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@service.git_commit_sha</code><br>SHA de commit Git del commit más reciente donde se detectó este hallazgo del servicio. Solo disponible cuando está configurada la integración del código fuente.</td>
     </tr>
     <tr>
-      <td><code>git_repository_url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@service.git_repository_url</code><br>URL del repositorio Git del servicio asociado a este hallazgo. Solo disponible cuando está configurada la integración del código fuente.</td>
+      <td><code>url_del_repositorio_git</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@service.git_repository_url</code><br>URL del repositorio Git del servicio asociado a este hallazgo. Solo disponible cuando está configurada la integración del código fuente.</td>
     </tr>
   </tbody>
 </table>
@@ -3256,54 +3256,54 @@ Agrupa atributos del sistema operativo que se ejecuta en el host.
   </thead>
   <tbody>
     <tr>
-      <td><code>registries</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.registries</code><br>Indica el registro de contenedor donde está almacenada la imagen o del que fue extraído.</td>
+      <td><code>registros</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.registries</code><br>Indica el registro de contenedor donde está almacenada la imagen o del que fue extraído.</td>
     </tr>
     <tr>
-      <td><code>repository</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@container_image.repository</code><br>Repositorio de la imagen de contenedor.</td>
+      <td><code>repositorio</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@container_image.repository</code><br>Repositorio de la imagen de contenedor.</td>
     </tr>
     <tr>
-      <td><code>repo_digests</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.repo_digests</code><br>Digests de repositorio de la imagen de contenedor donde se detectó este hallazgo.</td>
+      <td><code>digests_de_repositorio</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.repo_digests</code><br>Digests de repositorio de la imagen de contenedor donde se detectó este hallazgo.</td>
     </tr>
     <tr>
-      <td><code>git_repository_url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@container_image.git_repository_url</code><br>URL del respositorio Git del código utilizado para crear la imagen de contenedor. Solo disponible cuando está configurada la integración del código fuente.</td>
+      <td><code>url_del_repositorio_git</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@container_image.git_repository_url</code><br>URL del respositorio Git del código utilizado para crear la imagen de contenedor. Solo disponible cuando está configurada la integración del código fuente.</td>
     </tr>
     <tr>
       <td><code>oses</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@container_image.oses</code><br>Sistemas operativos asociados a la imagen de contenedor.</td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.oses</code><br>Sistemas operativos asociados a la imagen de contenedor.</td>
     </tr>
     <tr>
-      <td><code>architectures</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.architectures</code><br>Arquitecturas asociadas a la imagen de contenedor.</td>
+      <td><code>arquitecturas</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.architectures</code><br>Arquitecturas asociadas a la imagen de contenedor.</td>
     </tr>
     <tr>
-      <td><code>image_layer_digests</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.image_layer_digests</code></td>
+      <td><code>digests_de_capa_de_imagen</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.image_layer_digests</code></td>
     </tr>
     <tr>
-      <td><code>image_layer_diff_ids</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.image_layer_diff_ids</code></td>
+      <td><code>id_dif_de_capa_de_imagen</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.image_layer_diff_ids</code></td>
     </tr>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@container_image.name</code><br>Nombre completo de la imagen de contenedor.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@container_image.name</code><br>Nombre completo de la imagen de contenedor.</td>
     </tr>
     <tr>
-      <td><code>tags</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.tags</code><br>Parte de la etiqueta del nombre de la imagen de contenedor (por ejemplo, <code>latest</code> o <code>1.2.3</code>).</td>
+      <td><code>etiquetas</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@container_image.tags</code><br>Parte de la etiqueta del nombre de la imagen de contenedor (por ejemplo, <code>latest</code> o <code>1.2.3</code>).</td>
     </tr>
   </tbody>
 </table>
@@ -3324,54 +3324,54 @@ Contiene metadatos Git que vinculan un hallazgo al contexto del código fuente. 
   </thead>
   <tbody>
     <tr>
-      <td><code>repository_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.repository_id</code><br>Identificador normalizado del repositorio Git.</td>
+      <td><code>id_del_repositorio</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.repository_id</code><br>Identificador normalizado del repositorio Git.</td>
     </tr>
     <tr>
-      <td><code>repository_url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.repository_url</code><br>URL del repositorio relacionado con el hallazgo.</td>
+      <td><code>rurl_del_repositorio</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.repository_url</code><br>URL del repositorio relacionado con el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>repository_visibility</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.repository_visibility</code><br>Indica la visibilidad del repositorio. Valores válidos: <code>public</code>, <code>private</code>, <code>not_detected</code>.</td>
+      <td><code>visibilidad_del_repositorio</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.repository_visibility</code><br>Indica la visibilidad del repositorio. Valores válidos: <code>público</code>, <code>privado</code>, <code>no_detectado</code>.</td>
     </tr>
     <tr>
-      <td><code>branch</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.branch</code><br>Nombre de la rama Git relacionada con el hallazgo.</td>
+      <td><code>rama</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.branch</code><br>Nombre de la rama Git relacionada con el hallazgo.</td>
     </tr>
     <tr>
-      <td><code>default_branch</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.default_branch</code><br>Rama por defecto definida para el repositorio Git.</td>
+      <td><code>rama_por_defecto</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.default_branch</code><br>Rama por defecto definida para el repositorio Git.</td>
     </tr>
     <tr>
-      <td><code>is_default_branch</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@git.is_default_branch</code><br>Es true si la rama actual es la rama por defecto del repositorio, de lo contrario es false.</td>
+      <td><code>es_la_rama_por_defecto</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@git.is_default_branch</code><br>Es true si la rama actual es la rama por defecto del repositorio, de lo contrario es false.</td>
     </tr>
     <tr>
       <td><code>sha</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.sha</code><br>Identificador del commit Git (SHA).</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.sha</code><br>Identificador del commit Git (SHA).</td>
     </tr>
     <tr>
-      <td><code>author</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@git.author</code><br>Contiene detalles del autor del commit.</td>
+      <td><code>autor</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@git.author</code><br>Contiene detalles del autor del commit.</td>
     </tr>
     <tr>
-      <td><code>committer</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@git.committer</code><br>Contiene detalles del confirmador.</td>
+      <td><code>confirmador</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@git.committer</code><br>Contiene detalles del confirmador.</td>
     </tr>
     <tr>
-      <td><code>codeowners</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@git.codeowners</code><br>Incluye equipos propietarios de código extraídos del archivo CODEOWNERS del proveedor de SCM (Gestión del código fuente) (por ejemplo, GitHub).</td>
+      <td><code>propietarios de código</code></td>
+      <td>matriz (cadena)</td>
+      <td><strong>Ruta:</strong> <code>@git.codeowners</code><br>Incluye equipos propietarios de código extraídos del archivo CODEOWNERS del proveedor de SCM (Gestión del código fuente) (por ejemplo, GitHub).</td>
     </tr>
   </tbody>
 </table>
@@ -3390,19 +3390,19 @@ Contiene detalles del autor del commit.
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.author.name</code><br>Nombre del autor del commit.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.author.name</code><br>Nombre del autor del commit.</td>
     </tr>
     <tr>
-      <td><code>email</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.author.email</code><br>Correo electrónico del autor del commit.</td>
+      <td><code>correo electrónico</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.author.email</code><br>Correo electrónico del autor del commit.</td>
     </tr>
     <tr>
-      <td><code>authored_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@git.author.authored_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se realizaron los cambios originales.</td>
+      <td><code>creado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@git.author.authored_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se realizaron los cambios originales.</td>
     </tr>
   </tbody>
 </table>
@@ -3421,19 +3421,19 @@ Contiene información del confirmador.
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.committer.name</code><br>Nombre del confirmador.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.committer.name</code><br>Nombre del confirmador.</td>
     </tr>
     <tr>
-      <td><code>email</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@git.committer.email</code><br>Correo electrónica del confirmador.</td>
+      <td><code>correo electrónico</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@git.committer.email</code><br>Correo electrónica del confirmador.</td>
     </tr>
     <tr>
-      <td><code>committed_at</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@git.committer.committed_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se realizaron los últimos cambios importantes (por ejemplo, durante una operación rebase o amend).</td>
+      <td><code>confirmado_en</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@git.committer.committed_at</code><br>Marca de tiempo en milisegundos (UTC) del momento en que se realizaron los últimos cambios importantes (por ejemplo, durante una operación rebase o amend).</td>
     </tr>
   </tbody>
 </table>
@@ -3454,44 +3454,44 @@ Agrupa atributos que señalan los números concretos de archivo y línea en los 
   </thead>
   <tbody>
     <tr>
-      <td><code>filename</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@code_location.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
+      <td><code>nombre de archivo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@code_location.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
     </tr>
     <tr>
-      <td><code>line_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@code_location.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>inicio_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@code_location.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@code_location.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>inicio_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@code_location.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>line_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@code_location.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>final_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@code_location.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@code_location.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>final_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@code_location.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>is_test_file</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@code_location.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
+      <td><code>es_archivo_de_test</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@code_location.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@code_location.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@code_location.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
     </tr>
     <tr>
-      <td><code>symbol</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@code_location.symbol</code></td>
+      <td><code>símbolo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@code_location.symbol</code></td>
     </tr>
   </tbody>
 </table>
@@ -3512,59 +3512,59 @@ Contiene información del gestor de paquetes. Un gestor de paquetes automatiza l
   </thead>
   <tbody>
     <tr>
-      <td><code>name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.name</code><br>Nombre del paquete o de la biblioteca donde se identificó la vulnerabilidad.</td>
+      <td><code>nombre</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.name</code><br>Nombre del paquete o de la biblioteca donde se identificó la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>version</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.version</code><br>Versión del paquete o de la biblioteca donde se identificó la vulnerabilidad.</td>
+      <td><code>versión</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.version</code><br>Versión del paquete o de la biblioteca donde se identificó la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>additional_names</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@package.additional_names</code><br>Lista de nombres de paquetes afectados cuando una vulnerabilidad de la nube afecta a varios paquetes provenientes del mismo paquete de origen.</td>
+      <td><code>nombres_adicionales</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@package.additional_names</code><br>Lista de nombres de paquetes afectados cuando una vulnerabilidad de la nube afecta a varios paquetes provenientes del mismo paquete de origen.</td>
     </tr>
     <tr>
-      <td><code>normalized_name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.normalized_name</code><br>Nombre normalizado en función del ecosistema del paquete o de la biblioteca donde se identificó la vulnerabilidad.</td>
+      <td><code>nombre_normalizado</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.normalized_name</code><br>Nombre normalizado en función del ecosistema del paquete o de la biblioteca donde se identificó la vulnerabilidad.</td>
     </tr>
     <tr>
-      <td><code>manager</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.manager</code><br>Indica el ecosistema de gestión de paquetes o el registro fuente del que se originó el componente vulnerable. Posibles valores: <code>maven</code>, <code>gradle</code>, <code>npm</code>, <code>yarn</code>, <code>pnpm</code>, <code>requirements</code>, <code>pipfile</code>, <code>pdm</code>, <code>poetry</code>, <code>nuget</code>, <code>bundler</code>, <code>golang</code>, <code>composer</code>, <code>crates</code>, <code>conan</code>, <code>hex</code>, <code>pub</code>, <code>renv</code>, <code>uv</code>, <code>unknown</code>.</td>
+      <td><code>gestor</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.manager</code><br>Indica el ecosistema de gestión de paquetes o el registro fuente del que se originó el componente vulnerable. Posibles valores: <code>maven</code>, <code>gradle</code>, <code>npm</code>, <code>yarn</code>, <code>pnpm</code>, <code>requirements</code>, <code>pipfile</code>, <code>pdm</code>, <code>poetry</code>, <code>nuget</code>, <code>bundler</code>, <code>golang</code>, <code>composer</code>, <code>crates</code>, <code>conan</code>, <code>hex</code>, <code>pub</code>, <code>renv</code>, <code>uv</code>, <code>desconocido</code>.</td>
     </tr>
     <tr>
-      <td><code>dependency_type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.dependency_type</code><br>Indica si el paquete es una dependencia directa, una dependencia transitiva o no compatible, si no es posible recuperar la información. Posibles valores: <code>direct</code>, <code>transitive</code>, <code>not_supported</code>.</td>
+      <td><code>tipo_de_dependencia</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.dependency_type</code><br>Indica si el paquete es una dependencia directa, una dependencia transitiva o no compatible, si no es posible recuperar la información. Posibles valores: <code>directo</code>, <code>transitivo</code>, <code>no_compatible</code>.</td>
     </tr>
     <tr>
-      <td><code>loading_type</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.loading_type</code><br>Indica si el componente se carga y ejecuta siempre (<code>hot</code>), si se ejecuta con poca frecuencia (<code>cold</code>) o si se carga bajo pedido (<code>lazy</code>). Posibles valores: <code>hot</code>, <code>cold</code>, <code>lazy</code>.</td>
+      <td><code>tipo_de_carga</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.loading_type</code><br>Indica si el componente se carga y ejecuta siempre (<code>caliente</code>), si se ejecuta con poca frecuencia (<code>frío</code>) o si se carga bajo pedido (<code>perezoso</code>). Posibles valores: <code>caliente</code>, <code>frío</code>, <code>perezoso</code>.</td>
     </tr>
     <tr>
-      <td><code>dependency_location_text</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.dependency_location_text</code></td>
+      <td><code>texto_de_localización_de_dependencia</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.dependency_location_text</code></td>
     </tr>
     <tr>
-      <td><code>declaration</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@package.declaration</code><br>Contiene localizaciones de código de la definición del paquete.</td>
+      <td><code>declaración</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration</code><br>Contiene localizaciones de código de la definición del paquete.</td>
     </tr>
     <tr>
-      <td><code>scope</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.scope</code><br>Indica el contexto de uso previsto del paquete (<code>production</code> or <code>development</code>). Posibles valores: <code>production</code>, <code>development</code>.</td>
+      <td><code>contexto</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.scope</code><br>Indica el contexto de uso previsto del paquete (<code>producción</code> or <code>desarrollo</code>). Posibles valores: <code>producción</code>, <code>desarrollo</code>.</td>
     </tr>
     <tr>
-      <td><code>root_parents</code></td>
-      <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@package.root_parents</code><br>Contiene una lista de dependencias para las que este paquete es una dependencia transitiva.</td>
+      <td><code>elementos_principales_raíz</code></td>
+      <td>matriz (objeto)</td>
+      <td><strong>Ruta:</strong> <code>@package.root_parents</code><br>Contiene una lista de dependencias para las que este paquete es una dependencia transitiva.</td>
     </tr>
   </tbody>
 </table>
@@ -3583,19 +3583,19 @@ Contiene localizaciones de código de la definición del paquete.
   </thead>
   <tbody>
     <tr>
-      <td><code>block</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block</code><br>Contiene la localización del código que declara toda la declaración de dependencia..</td>
+      <td><code>bloque</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block</code><br>Contiene la localización del código que declara toda la declaración de dependencia..</td>
     </tr>
     <tr>
-      <td><code>name</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name</code><br>Contiene la localización del código que declara el nombre de la dependencia.</td>
+      <td><code>nombre</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name</code><br>Contiene la localización del código que declara el nombre de la dependencia.</td>
     </tr>
     <tr>
-      <td><code>version</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version</code><br>Versión declarada del elemento principal raíz.</td>
+      <td><code>versión</code></td>
+      <td>objeto</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version</code><br>Versión declarada del elemento principal raíz.</td>
     </tr>
   </tbody>
 </table>
@@ -3614,44 +3614,44 @@ Contiene la localización del código que declara toda la declaración de depend
   </thead>
   <tbody>
     <tr>
-      <td><code>filename</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
+      <td><code>nombre de archivo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
     </tr>
     <tr>
-      <td><code>line_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>inicio_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>inicio_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>line_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>final_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>final_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>is_test_file</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
+      <td><code>es_archivo_de_test</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
     </tr>
     <tr>
-      <td><code>symbol</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.symbol</code></td>
+      <td><code>símbolo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.block.symbol</code></td>
     </tr>
   </tbody>
 </table>
@@ -3670,44 +3670,44 @@ Contiene la localización del código que declara el nombre de la dependencia.
   </thead>
   <tbody>
     <tr>
-      <td><code>filename</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
+      <td><code>nombre de archivo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
     </tr>
     <tr>
-      <td><code>line_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>inicio_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>inicio_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>line_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>final_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>final_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>is_test_file</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
+      <td><code>es_archivo_de_test</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
     </tr>
     <tr>
-      <td><code>symbol</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.symbol</code></td>
+      <td><code>símbolo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.name.symbol</code></td>
     </tr>
   </tbody>
 </table>
@@ -3726,44 +3726,44 @@ Versión declarada del elemento principal raíz.
   </thead>
   <tbody>
     <tr>
-      <td><code>filename</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
+      <td><code>nombre de archivo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.filename</code><br>Nombre del archivo donde está declarada la versión del paquete principal raíz.</td>
     </tr>
     <tr>
-      <td><code>line_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>inicio_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.line_start</code><br>Número de línea en la que empieza la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_start</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
+      <td><code>inicio_de_columna</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.column_start</code><br>Posición en la columna donde empieza la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>line_end</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
+      <td><code>final_de_línea</code></td>
+      <td>entero</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.line_end</code><br>Número de línea en la que termina la declaración de la versión del paquete principal raíz en el archivo.</td>
     </tr>
     <tr>
-      <td><code>column_end</code></td>
-      <td>integer</td>
+      <td><code>final_de_columna</code></td>
+      <td>entero</td>
       <td><strong>Path:</strong> <code>@package.declaration.version.column_end</code><br>Posición en la columna donde termina la declaración de la versión del paquete principal raíz en la línea.</td>
     </tr>
     <tr>
-      <td><code>is_test_file</code></td>
-      <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
+      <td><code>es_archivo_de_test</code></td>
+      <td>booleano</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.is_test_file</code><br>Es true si el archivo de código es un archivo de test, de lo contrario es false.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.url</code><br>URL para visualizar el archivo en línea (por ejemplo, en GitHub), donde se resalta la localización del código.</td>
     </tr>
     <tr>
-      <td><code>symbol</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.symbol</code></td>
+      <td><code>símbolo</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@package.declaration.version.symbol</code></td>
     </tr>
   </tbody>
 </table>
@@ -3782,9 +3782,9 @@ Versión declarada del elemento principal raíz.
   </thead>
   <tbody>
     <tr>
-      <td><code>validation_status</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@secret.validation_status</code><br>Resultado del intento de confirmación de si el secreto está activo. Posibles valoress: <code>valid</code>, <code>invalid</code>, <code>not_validated</code>, <code>validation_error</code>, <code>not_available</code>.</td>
+      <td><code>estado_de_validación</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@secret.validation_status</code><br>Resultado del intento de confirmación de si el secreto está activo. Posibles valoress: <code>válido</code>, <code>inválido</code>, <code>no_validado</code>, <code>error_de_validación</code>, <code>no_disponible</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3805,24 +3805,24 @@ Contiene la representación del endpoint HTTP.
   </thead>
   <tbody>
     <tr>
-      <td><code>operation_name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@api_endpoint.operation_name</code><br>Nombre del punto de entrada a un servicio (por ejemplo, <code>http.request</code>, <code>grpc.server</code>).</td>
+      <td><code>nombre_de_operación</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@api_endpoint.operation_name</code><br>Nombre del punto de entrada a un servicio (por ejemplo, <code>http.request</code>, <code>grpc.server</code>).</td>
     </tr>
     <tr>
-      <td><code>path</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@api_endpoint.path</code><br>Ruta relativa al endpoint.</td>
+      <td><code>ruta</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@api_endpoint.path</code><br>Ruta relativa al endpoint.</td>
     </tr>
     <tr>
-      <td><code>method</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@api_endpoint.method</code><br>Método del endpoint (verbo HTTP o método gRPC).</td>
+      <td><code>método</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@api_endpoint.method</code><br>Método del endpoint (verbo HTTP o método gRPC).</td>
     </tr>
     <tr>
-      <td><code>resource_name</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@api_endpoint.resource_name</code><br>Identificación interna del endpoint en el formato <code>{method} {path}</code>.</td>
+      <td><code>nombre_de_recurso</code></td>
+      <td>cadena</td>
+      <td><strong>Ruta:</strong> <code>@api_endpoint.resource_name</code><br>Identificación interna del endpoint en el formato <code>{method} {path}</code>.</td>
     </tr>
   </tbody>
 </table>

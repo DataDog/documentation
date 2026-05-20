@@ -1,7 +1,6 @@
 ---
-title: iOS and tvOS Monitoring Supported Versions
-beta: true
-description: "List of supported operating systems and platforms for the RUM iOS SDK."
+title: Apple Platform Monitoring Supported Versions
+description: "Supported operating systems and platforms for the Datadog iOS SDK, including iOS, iPadOS, tvOS, watchOS, and visionOS."
 aliases:
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
@@ -24,22 +23,39 @@ further_reading:
    text: "Learn about instrumenting SwiftUI applications"
 ---
 
+## Overview
+
+The Datadog iOS SDK is the single SDK for instrumenting Real User Monitoring on all Apple platforms — iOS, iPadOS, tvOS, watchOS, and visionOS. Use this page to confirm the minimum OS version, dependency manager, and Datadog modules available for each platform.
 
 ## Supported versions
 
-The RUM iOS SDK supports the following iOS versions:
+The RUM iOS SDK supports the following platforms and versions:
 
 | Platform | Supported | Version | Notes |
 |--------|-------------|---------|-------|
 | iOS | {{< X >}} | 12+ | |
-| tvOS | {{< X >}} | 12+ | |
 | iPadOS | {{< X >}} | 12+ | |
+| tvOS | {{< X >}} | 12+ | |
+| visionOS | {{< X >}} | 1.0+ | |
+| watchOS | {{< X >}} | 7.0+ | |
 | macOS (Designed for iPad) | {{< X >}} | 11+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
 | macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
-| visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
-| watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: only `DatadogLogs` and `DatadogTrace` can build on watchOS. |
 | Linux | | n/a | |
+
+### Module support by platform
+
+  | Module | iOS | tvOS | watchOS | visionOS | Notes |
+  |--------|-----|------|---------|----------|-------|
+  | DatadogCore | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogLogs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogTrace | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogCrashReporting | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogRUM | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | watchOS: automatic view/action tracking, frame rate monitoring, and memory warning detection are not available. |
+  | DatadogFlags | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogProfiling | {{< X >}} | {{< X >}} | | {{< X >}} | Not available on watchOS. The profiling module requires system-level APIs that watchOS does not support. |
+  | DatadogSessionReplay | {{< X >}} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay requires rendering capabilities not available on these platforms. |
+  | DatadogWebViewTracking | {{< X >}} | | | {{< X >}} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities not available on these platforms. |
 
 ## Supported platforms
 
@@ -47,7 +63,7 @@ The RUM iOS SDK supports the following iOS versions:
 The SDK is built using the most recent version of [Xcode][1], but is always backwards compatible with the [lowest supported Xcode version][2] for App Store submission.
 
 ### Dependency managers
-We currently support integration of the SDK using the following dependency managers:
+The iOS SDK supports the following dependency managers:
 
 - [Swift Package Manager][3]
 - [Cocoapods][4]

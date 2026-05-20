@@ -1,4 +1,5 @@
 ---
+id: core_web_vitals
 title: Core Web Vitals
 core_product:
   - real user monitoring

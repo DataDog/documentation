@@ -90,7 +90,7 @@ Before decommissioning your legacy system, perform comprehensive testing to conf
 
 ### Validation checklist
 
-- **Route alerts from critical monitors**: Identify your highest-severity monitors and trigger test alerts to confirm they are routed to the appropriate Datadog On-Call team. Check for timely delivery and metadata correctness.
+- **Route alerts from critical monitors**: Identify your highest-severity monitors and trigger test alerts to confirm they are routed to the appropriate Datadog On-Call Team. Check for timely delivery and metadata correctness.
 - **Verify escalation chains**: Simulate unacknowledged alerts to ensure escalations follow the intended sequence. Include both time-based and fallback escalations. Validate receipt across all intended responders.
 - **Check notification channels**: Ensure team members receive alerts through all configured methods, including email, SMS, push notifications, and voice. Ask recipients to confirm delivery and clarity of the content.
 - **Test overrides and handoffs**: Set a temporary override for a team member and validate that alerts correctly route during that period. Repeat with a handoff between shifts to catch edge cases.

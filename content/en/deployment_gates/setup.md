@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about the Deployment Gates explorer"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -31,16 +31,16 @@ Setting up Deployment Gates involves two steps:
 
 <div class="alert alert-info">In addition to using the Deployment Gates UI, you can manage gates and rules programmaticaly with the <a href="https://docs.datadoghq.com/api/latest/deployment-gates">Deployment Gates API</a> or <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate">Datadog Terraform provider</a>.</div>
 
-1. Go to [**Software Delivery > Deployment Gates > Configuration**][1].
-2. Click **Create Gate**.
+1. Go to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Deployment Gates{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][1].
+2. Click {{< ui >}}Create Gate{{< /ui >}}.
 3. Configure the following settings:
-   - **Service**: The service name (example: `transaction-backend`).
-   - **Environment**: The target environment (example: `dev`).
-   - **Identifier** (optional, default value is `default`): Unique name for multiple gates on the same service/environment. This can be used to:
+   - {{< ui >}}Service{{< /ui >}}: The service name (example: `transaction-backend`).
+   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`).
+   - {{< ui >}}Identifier{{< /ui >}} (optional, default value is `default`): Unique name for multiple gates on the same service/environment. This can be used to:
      - Allow different deployment strategies (example: `fast-deploy` vs `default`)
      - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
      - Define canary stages (example: `pre-deploy` vs `canary-20pct`)
-   - **Evaluation Mode**: Enable `Dry Run` to test gate behavior without impacting deployments. The evaluation of
+   - {{< ui >}}Evaluation Mode{{< /ui >}}: Enable {{< ui >}}Dry Run{{< /ui >}} to test gate behavior without impacting deployments. The evaluation of
 a dry run gate always responds with a pass status, but the in-app result is the real status based
 on rules evaluation. This is particularly useful when performing an initial evaluation of the
 gate behavior without impacting the deployment pipeline.
@@ -49,10 +49,10 @@ gate behavior without impacting the deployment pipeline.
 
 Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
-1. **Name**: Enter a descriptive label (for example, `Check all P0 monitors`).
-2. **Type**: Select `Monitor` or `Faulty Deployment Detection`.
+1. {{< ui >}}Name{{< /ui >}}: Enter a descriptive label (for example, `Check all P0 monitors`).
+2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}} or {{< ui >}}Faulty Deployment Detection{{< /ui >}}.
 3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for more information.
-4. **Evaluation Mode**: When a rule is set as a `Dry Run`, its result is not taken into account when computing the overall gate result.
+4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
 
 
 #### Rule types
@@ -66,11 +66,11 @@ The Monitors rule allows you to evaluate the state of a set of monitors over a c
 
 ##### Configuration settings
 
-* **Search Query**: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
+* {{< ui >}}Search Query{{< /ui >}}: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
   * Monitor static tags - `service:transaction-backend`
   * Tags within the monitor's query - `scope:"service:transaction-backend"`
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
-* **Duration**: Enter the period of time (in seconds) for which the matching monitors should be evaluated. The default duration is 0, which means that monitors are evaluated instantly.
+* {{< ui >}}Duration{{< /ui >}}: Enter the period of time (in seconds) for which the matching monitors should be evaluated. The default duration is 0, which means that monitors are evaluated instantly.
 
 ##### Example queries
 
@@ -95,9 +95,9 @@ The analysis is automatically done for all APM-instrumented services, and no pri
 
 ##### Configuration settings
 
-* **Operation Name**: Auto-populated from the service's [APM primary operation][3] settings.
-* **Duration**: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
-* **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+* {{< ui >}}Operation Name{{< /ui >}}: Auto-populated from the service's [APM primary operation][3] settings.
+* {{< ui >}}Duration{{< /ui >}}: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
+* {{< ui >}}Excluded Resources{{< /ui >}}: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
 ##### Notes
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it when [requesting a gate evaluation](#evaluate-deployment-gates) (see below).
@@ -471,7 +471,7 @@ Be sure to replace the following:
 - `<YOUR_APP_KEY>`: Your [application key][3]
 
 ```bash
-curl -X POST "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation" \
+curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
@@ -511,7 +511,7 @@ The field `data.attributes.evaluation_id` contains the unique identifier for thi
 You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
 
 ```bash
-curl -X GET "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
+curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
@@ -561,11 +561,11 @@ The field `data.attributes.gate_status` contains the result of the evaluation. I
 
 ## Recommendation for first-time onboarding
 
-When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase is recommended to confirm the product is working as expected before it impacts deployments. You can do this using the Dry Run evaluation mode and the **Deployment Gates Evaluations** page:
-1. Create a gate for a service and set the evaluation mode as `Dry Run`.
+When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase is recommended to confirm the product is working as expected before it impacts deployments. You can do this using the Dry Run evaluation mode and the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page:
+1. Create a gate for a service and set the evaluation mode as {{< ui >}}Dry Run{{< /ui >}}.
 2. Add the gate evaluation in your deployment process. As the evaluation mode is dry run, the Deployment Gates API response always contains a `pass` status and the deployments are not impacted by the gate result.
-3. After a certain period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see what were the statuses of the gates and rules evaluated. On the contrary to the API responses, the gate status in the UI doesn't take into consideration the evaluation mode (`Dry Run` or `Active`). It means you can understand when the gate would have failed and what was the reason behind it.
-4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from `Dry Run` to `Active`. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
+3. After a certain period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see what were the statuses of the gates and rules evaluated. On the contrary to the API responses, the gate status in the UI doesn't take into consideration the evaluation mode ({{< ui >}}Dry Run{{< /ui >}} or {{< ui >}}Active{{< /ui >}}). It means you can understand when the gate would have failed and what was the reason behind it.
+4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from {{< ui >}}Dry Run{{< /ui >}} to {{< ui >}}Active{{< /ui >}}. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
 
 ## Further reading
 

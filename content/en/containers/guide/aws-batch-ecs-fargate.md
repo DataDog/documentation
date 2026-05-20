@@ -23,31 +23,31 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
 {{% tab "AWS Web UI" %}}
 
 1. Log in to your [AWS Web Console][1] and navigate to the AWS Batch section.
-2. Click on **Job Definitions** in the left menu, then click the **Create** button or choose an existing AWS Batch job definition.
+2. Click on {{< ui >}}Job Definitions{{< /ui >}} in the left menu, then click the {{< ui >}}Create{{< /ui >}} button or choose an existing AWS Batch job definition.
 3. For new job definitions:
-    1. Select **Fargate** as the orchestration type.
-    2. Unselect **Use legacy containerProperties structure** option. 
-    3. Enter a **Job Definition Name**, such as `my-app-and-datadog`.
+    1. Select {{< ui >}}Fargate{{< /ui >}} as the orchestration type.
+    2. Unselect {{< ui >}}Use legacy containerProperties structure{{< /ui >}} option. 
+    3. Enter a {{< ui >}}Job Definition Name{{< /ui >}}, such as `my-app-and-datadog`.
     4. Select an execution IAM role. See permission requirements in the [Create or Modify your IAM Policy](#create-or-modify-your-iam-policy) section below.
-    5. Enable **Assign public IP** to allow outbound network access, then click the **Next** button.
+    5. Enable {{< ui >}}Assign public IP{{< /ui >}} to allow outbound network access, then click the {{< ui >}}Next{{< /ui >}} button.
     6. Configure the Datadog Agent container.
-        1. For **Container name** enter `datadog-agent`.
-        2. For **Image** enter `public.ecr.aws/datadog/agent:latest`.
-        3. Configure **CPU** and **Memory** resource requirements based on your needs.
-        4. For **Env Variables**, add the **Key** `DD_API_KEY` and enter your [Datadog API Key][2] as the value.
-        5. Add another environment variable using the **Key** `ECS_FARGATE` and the value `true`. Click **Add** to add the container.
-        6. Add another environment variable using the **Key** `DD_SITE` and the value {{< region-param key="dd_site" code="true" >}}. This defaults to `datadoghq.com` if you don't set it.
+        1. For {{< ui >}}Container name{{< /ui >}} enter `datadog-agent`.
+        2. For {{< ui >}}Image{{< /ui >}} enter `public.ecr.aws/datadog/agent:latest`.
+        3. Configure {{< ui >}}CPU{{< /ui >}} and {{< ui >}}Memory{{< /ui >}} resource requirements based on your needs.
+        4. For {{< ui >}}Env Variables{{< /ui >}}, add the {{< ui >}}Key{{< /ui >}} `DD_API_KEY` and enter your [Datadog API Key][2] as the value.
+        5. Add another environment variable using the {{< ui >}}Key{{< /ui >}} `ECS_FARGATE` and the value `true`. Click {{< ui >}}Add{{< /ui >}} to add the container.
+        6. Add another environment variable using the {{< ui >}}Key{{< /ui >}} `DD_SITE` and the value {{< region-param key="dd_site" code="true" >}}. This defaults to `datadoghq.com` if you don't set it.
     7. Add your other application containers to the job definition.
     8. AWS Batch supports [Fluent Bit and Firelens][3]. To enable log collection for your application containers with Datadog:
        1. Create a separate log router container in the job definition.
        2. Configure the image `amazon/aws-for-fluent-bit:stable"` for the container.
        3. In the Firelens Configuration section:
-          - Configure the **Type** to be `fluentbit`.
-          - Configure the **Options** to include `enable-ecs-log-metadata` set to `true` to the **Name** and **Value** respectively
+          - Configure the {{< ui >}}Type{{< /ui >}} to be `fluentbit`.
+          - Configure the {{< ui >}}Options{{< /ui >}} to include `enable-ecs-log-metadata` set to `true` to the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} respectively
        4. For your application containers, in the Log Configuration section:
-          - Configure the **Log Driver** to `awsfirelens`
-          - Configure the **Options** to include the following  **Name** and **Value** similar to Step 2 of the [ECS Fargate Fluent Bit and Firelens section][4]
-    10. Click **Create job definition** to create the job definition.
+          - Configure the {{< ui >}}Log Driver{{< /ui >}} to `awsfirelens`
+          - Configure the {{< ui >}}Options{{< /ui >}} to include the following  {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} similar to Step 2 of the [ECS Fargate Fluent Bit and Firelens section][4]
+    10. Click {{< ui >}}Create job definition{{< /ui >}} to create the job definition.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -109,12 +109,12 @@ You can run the Datadog Agent alongside your AWS Batch job containers by adding 
 {{% tab "AWS Web UI" %}}
 
 1. Log in to your [AWS Web Console][1] and navigate to the AWS Batch section. If needed, create a [compute environment][2] and/or [job queue][3] associated with a compute environment.
-2. On the **Jobs** tab, click the **Submit new job** button.
-3. Enter a **Job name**.
-4. For **Job Definition**, select the job created in the previous steps.
+2. On the {{< ui >}}Jobs{{< /ui >}} tab, click the {{< ui >}}Submit new job{{< /ui >}} button.
+3. Enter a {{< ui >}}Job name{{< /ui >}}.
+4. For {{< ui >}}Job Definition{{< /ui >}}, select the job created in the previous steps.
 5. Choose the job queue to run the Datadog Agent on.
-6. **Container overrides** are optional based on your preference.
-7. Click the **Next** button, then click the **Create job** button.
+6. {{< ui >}}Container overrides{{< /ui >}} are optional based on your preference.
+7. Click the {{< ui >}}Next{{< /ui >}} button, then click the {{< ui >}}Create job{{< /ui >}} button.
 
 [1]: https://aws.amazon.com/console
 [2]: https://docs.aws.amazon.com/batch/latest/userguide/create-compute-environment.html

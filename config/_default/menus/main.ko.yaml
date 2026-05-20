@@ -6525,11 +6525,6 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
-    - name: Jira 이슈 생성
-      url: security/cloud_security_management/review_remediate/jira
-      parent: csm_review_remediate
-      identifier: csm_jira
-      weight: 103
     - name: '심각도 점수 '
       url: security/cloud_security_management/severity_scoring/
       parent: csm

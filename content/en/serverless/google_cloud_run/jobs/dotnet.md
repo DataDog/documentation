@@ -17,11 +17,11 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/dotnet">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
-1. **Install the Datadog .NET tracer** in your Dockerfile.
+1. **Install the Datadog .NET SDK** in your Dockerfile.
 
    Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
 
@@ -75,7 +75,7 @@ logger.LogInformation("Hello World!");
 
 4. **Configure your application**.
 
-{{% serverless-init-configure cloudrun="true" %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -86,6 +86,8 @@ logger.LogInformation("Hello World!");
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-in-container language="csharp" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

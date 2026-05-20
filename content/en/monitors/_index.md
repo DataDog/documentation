@@ -8,18 +8,15 @@ aliases:
   - /monitoring
 description: "Create monitors, configure notifications and automations, and manage your monitors using the alerting platform"
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Alerting"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Alerting releases! (App login required)."
+  - link: "/api/v1/monitors/"
+    tag: "Documentation"
+    text: "Datadog Monitors API"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on creating effective monitors"
   - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
     tag: "Blog"
     text: "Monitoring 101: Alerting on what matters"
-  - link: "/api/v1/monitors/"
-    tag: "Documentation"
-    text: "Datadog Monitors API"
   - link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
     tag: "Blog"
     text: "Route your monitor alerts with Datadog monitor notification rules"
@@ -32,6 +29,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/human-name-detection"
     tag: "Blog"
     text: "Detect human names in logs with ML in Sensitive Data Scanner"
+  - link: "https://app.datadoghq.com/release-notes?category=Alerting"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Alerting releases! (App login required)."
+  - link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+    tag: "Learning Center"
+    text: "APM Monitors and Alerting"
 cascade:
     algolia:
         rank: 70

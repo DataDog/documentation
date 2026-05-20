@@ -60,23 +60,30 @@ These packs are available:
 - [AWS CloudTrail][8]
 - [AWS Elastic Load Balancer Logs][9]
 - [AWS Network Load Balancer Logs][10]
+- [AWS WAF][28]
+- [Check Point][29]
 - [Cisco ASA][11]
+- [Cisco Meraki][30]
 - [Cloudflare][12]
+- [CrowdStrike FDR][31]
 - [F5][13]
 - [Fastly][14]
 - [Fortinet Firewall][15]
 - [HAProxy Ingress][16]
+- [Infoblox][32]
 - [Istio Proxy][17]
 - [Juniper SRX Firewall Traffic Logs][18]
 - [Netskope][19]
 - [NGINX][20]
 - [Okta][21]
 - [Palo Alto Firewall][22]
+- [SentinelOne Cloud Funnel EDR][33]
 - [Windows XML][23]
 - [ZScaler ZIA DNS][24]
 - [Zscaler ZIA Firewall][25]
 - [Zscaler ZIA Tunnel][26]
 - [Zscaler ZIA Web Logs][27]
+- [Zscaler ZPA][34]
 
 ## Setup
 
@@ -126,3 +133,10 @@ To set up packs:
 [25]: /observability_pipelines/packs/zscaler_zia_firewall/
 [26]: /observability_pipelines/packs/zscaler_zia_tunnel/
 [27]: /observability_pipelines/packs/zscaler_zia_web_logs/
+[28]: /observability_pipelines/packs/aws_waf/
+[29]: /observability_pipelines/packs/checkpoint/
+[30]: /observability_pipelines/packs/cisco_meraki/
+[31]: /observability_pipelines/packs/crowdstrike/
+[32]: /observability_pipelines/packs/infoblox/
+[33]: /observability_pipelines/packs/sentinel_one/
+[34]: /observability_pipelines/packs/zscaler_zpa/

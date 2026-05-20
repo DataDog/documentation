@@ -1,5 +1,6 @@
 ---
 title: LLM Observability SDK Reference
+description: Reference documentation for the Datadog LLM Observability SDKs for Python, Node.js, and Java, covering automatic and manual instrumentation.
 aliases:
     - /tracing/llm_observability/sdk/python
     - /llm_observability/sdk/python
@@ -493,6 +494,8 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
+<div class="alert alert-info">If you are manually instrumenting an LLM span, you must record token counts (such as <code>input_tokens</code>, <code>output_tokens</code>, and <code>total_tokens</code>) yourself by annotating the span. See <a href="#enriching-spans">Enriching spans</a> for more information.</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm()`.
@@ -525,11 +528,17 @@ To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm(
 #### Example
 
 {{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
 @llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
+def llm_call(prompt):
     completion = ... # user application logic to invoke LLM
+    LLMObs.annotate(
+        input_data=[{"role": "user", "content": prompt}],
+        output_data=[{"role": "assistant", "content": completion}],
+        metrics={"input_tokens": 4, "output_tokens": 6, "total_tokens": 10},
+    )
     return completion
 {{< /code-block >}}
 {{% /tab %}}
@@ -565,8 +574,13 @@ To trace an LLM call, specify the span kind as `llm`, and optionally specify the
 #### Example
 
 {{< code-block lang="javascript" >}}
-function llmCall () {
+function llmCall (prompt) {
   const completion = ... // user application logic to invoke LLM
+  llmobs.annotate({
+    inputData: [{ role: "user", content: prompt }],
+    outputData: [{ role: "assistant", content: completion }],
+    metrics: { input_tokens: 4, output_tokens: 6, total_tokens: 10 }
+  })
   return completion
 }
 llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
@@ -616,6 +630,11 @@ public class MyJavaClass {
     LLMObsSpan llmSpan = LLMObs.startLLMSpan("my-llm-span-name", "my-llm-model", "my-company", "maybe-ml-app-override", "session-141");
     String inference = ... // user application logic to invoke LLM
     llmSpan.annotateIO(...); // record the input and output
+    llmSpan.setMetrics(Map.of(
+      "input_tokens", 617,
+      "output_tokens", 338,
+      "total_tokens", 955
+    ));
     llmSpan.finish();
     return inference;
   }
@@ -1252,6 +1271,10 @@ public class MyJavaClass {
 
 ## Enriching spans
 
+<div class="alert alert-info">
+The <code>metrics</code> parameter here refers to numeric values attached as attributes on individual spans — not <a href="/llm_observability/monitoring/metrics/">Datadog platform metrics</a>. For certain recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, and <code>total_tokens</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.tokens</code>) for use in dashboards and monitors.
+</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 The SDK provides the method `LLMObs.annotate()` to enrich spans with inputs, outputs, and metadata.
@@ -1804,8 +1827,8 @@ Supported keys:
 - `template` (str): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`).
 - `chat_template` (List[Message]): Multi-message template form. Provide a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Dict[str, str]): Tags to attach to the prompt run.
-- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1866,8 +1889,8 @@ Supported properties:
 - `variables` (Record<string, string>): Variables used to populate the template placeholders.
 - `template` (string | List[Message]): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Record<string, string>): Tags to attach to the prompt run.
-- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1922,6 +1945,8 @@ This gives you the flexibility to either rely on automatic version management ba
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
 If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
+
+<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform LLM Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}

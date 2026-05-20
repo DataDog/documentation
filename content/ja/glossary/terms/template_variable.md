@@ -1,4 +1,5 @@
 ---
+id: template_variable
 core_product:
 - alerts
 - dashboards

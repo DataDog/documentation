@@ -9,7 +9,7 @@ This customizable partial requires the `platform` trait, with the following opti
 -->
 If you aren't already collecting Browser RUM events with Datadog, see the [RUM Browser Monitoring setup documentation][3] or the [RUM Mobile and TV Monitoring setup documentation][4].
 
-{% if or(equals($platform, "show_all"), equals($platform, "android")) %}
+{% if includes($platform, ["show_all", "android"]) %}
 ### Android
 
 {% alert level="info" %}
@@ -43,7 +43,7 @@ RUM.enable(rumConfiguration)
 ```
 {% /if %}
 
-{% if or(equals($platform, "show_all"), equals($platform, "browser")) %}
+{% if includes($platform, ["show_all", "browser"]) %}
 ### Browser
 
 To use custom grouping, you need the Datadog Browser SDK [v4.42.0 or later][6], a [browser RUM error][5], and an additional string attribute.
@@ -76,7 +76,7 @@ DD_RUM.init({
 In both cases, `my-custom-grouping-material` is used to group the Browser RUM errors into a single issue in Error Tracking.
 {% /if %}
 
-{% if or(equals($platform, "show_all"), equals($platform, "flutter")) %}
+{% if includes($platform, ["show_all", "flutter"]) %}
 ### Flutter
 
 {% alert level="info" %}
@@ -115,7 +115,7 @@ final configuration = DatadogConfiguration(
 ```
 {% /if %}
 
-{% if or(equals($platform, "show_all"), equals($platform, "ios")) %}
+{% if includes($platform, ["show_all", "ios"]) %}
 ### iOS
 
 {% alert level="info" %}
@@ -147,7 +147,7 @@ RUM.enable(with: config)
 ```
 {% /if %}
 
-{% if or(equals($platform, "show_all"), equals($platform, "react_native")) %}
+{% if includes($platform, ["show_all", "react_native"]) %}
 ### React Native
 
 {% alert level="info" %}

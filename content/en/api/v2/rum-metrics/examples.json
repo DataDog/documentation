@@ -128,7 +128,7 @@
             },
             "event_type": "session",
             "filter": {
-              "query": "@service:web-ui: "
+              "query": "@service:web-ui:"
             },
             "group_by": [
               {
@@ -153,7 +153,7 @@
             },
             "event_type": "session",
             "filter": {
-              "query": "@service:web-ui: "
+              "query": "@service:web-ui:"
             },
             "group_by": [
               {
@@ -344,7 +344,7 @@
         "data": {
           "attributes": {
             "filter": {
-              "query": "@service:web-ui: "
+              "query": "@service:web-ui:"
             },
             "group_by": [
               {
@@ -362,7 +362,7 @@
               "include_percentiles": true
             },
             "filter": {
-              "query": "@service:web-ui: "
+              "query": "@service:web-ui:"
             },
             "group_by": [
               {

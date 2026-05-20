@@ -3,18 +3,24 @@ title: Network Path Testing
 description: Analyze global Network Paths with managed locations and private environments.
 aliases:
 further_reading:
+- link: "/synthetics/network_path_tests/glossary/"
+  tag: "Documentation"
+  text: "Network Path terms and concepts"
 - link: "/network_monitoring/network_path/"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Learn more about Network Path"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/network-path/"
   tag: "Blog"
   text: "Identify slowdowns across your entire network with Datadog Network Path"
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
-- link: "/synthetics/network_path_tests/glossary/"
-  tag: "Doc"
-  text: "Network Path terms and concepts"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
 ---
 
 ## Overview
@@ -23,7 +29,7 @@ Network Path Testing in Synthetic Monitoring gives you complete visibility into 
 
 Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations and private environments.
 
-<div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=network-monitoring#products">pricing page</a>.</div>
+<div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products">pricing page</a>.</div>
 
 ## Test creation
 
@@ -72,7 +78,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Agent configuration
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">Network Path testing with the Datadog Agent is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
@@ -95,7 +101,10 @@ Requires [Agent version][7] `7.72` or higher.
    synthetics:
      collector:
        enabled: true
+       workers: 4 # default
    ```
+
+   **Note**: Set `workers` to a value greater than or equal to the number of Network Path tests running concurrently on the Agent.
 
 3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
 

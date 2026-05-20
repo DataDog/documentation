@@ -1,4 +1,5 @@
 ---
+id: saved_views
 core_product:
 - apm
 - log management

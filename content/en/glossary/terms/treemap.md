@@ -1,4 +1,5 @@
 ---
+id: treemap
 title: treemap
 core_product:
   - dashboards

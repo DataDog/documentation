@@ -1,4 +1,5 @@
 ---
+id: administrative_status
 synonyms:
 - 관리 상태
 title: 관리 상태

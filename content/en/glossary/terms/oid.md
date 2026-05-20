@@ -1,4 +1,5 @@
 ---
+id: oid
 title: object identifier (OID)
 core_product:
   - network device monitoring

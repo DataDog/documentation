@@ -1,8 +1,9 @@
 ---
+id: quartile
 core_product:
 - dashboards
 related_terms:
-- mediana
+- median
 title: cuartil
 ---
 Los cuartiles organizan los datos en cuatro secciones con un 25 % de los datos en cada una. 

@@ -103,9 +103,9 @@ See below for the list of identifier formats per-cloud:
 | Cloud   | Identifier Type    | Example                                                                                                                                      |
 |---------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | AWS     | ARN                | `arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi`                                                                                    |
-| Azure   | Resource ID        | `/subscriptions/0b62a232-b8db-4380-9da6-640f7272ed6d/resourcegroups/lfotriggertest/providers/microsoft.web/sites/resources-task-19cb7afdcbbc`|
-| GCP     | CAI Resource Name  | `//file.googleapis.com/projects/datadog-sandbox/locations/us-central1/backups/kevin-test-backup`                                             |
-| OCI     | OCID               | `ocid1.bucket.oc1.eu-frankfurt-1.aaaaaaaa5b5d7phlob22x4xin2lopq33ugriqiglek2ecxecrjx2awceb7eq`                                               |
+| Azure   | Resource ID        | `/subscriptions/12345678-1234-5678-1234-567891234567/resourcegroups/exampleResourceGroup/Microsoft.Compute/virtualMachines/exampleVM`        |
+| GCP     | CAI Resource Name  | `//compute.googleapis.com/projects/example-project/locations/us-central1/instances/my-instance`                                              |
+| OCI     | OCID               | `ocid1.instance.oc1.eu-frankfurt-1.exampleuniqueid`                                                                                          |
 
 How to form a CCRID:
  * [AWS (EC2 Instance)][13]: `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`. 

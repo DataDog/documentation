@@ -1,9 +1,10 @@
 ---
+id: split_graph
 core_product:
 - dashboards
 related_terms:
 - metric
-- faceta
+- facet
 - dashboard
 title: gráfica dividida
 ---

@@ -23,7 +23,7 @@ further_reading:
 - Homebrew (recommended for Agent installation)
 - Administrator privileges for some configuration steps
 - Your Datadog API key
-- Datadog Node.js tracing library (see [version requirements][1])
+- Datadog Node.js SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

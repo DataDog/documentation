@@ -21,7 +21,7 @@ Network Device Monitoring helps you gain insights into the health and performanc
 
 This guide covers configuring Network Device Monitoring on your hosts, enriching device tags, setting up and viewing device profiles, viewing data in NetFlow Monitoring, and validating data in the provided dashboards and Device Topology Map.
 
-{{< img src="network_device_monitoring/getting_started/ndm_landing_page.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
+{{< img src="network_device_monitoring/getting_started/ndm_landing_page_2.png" alt="The Network Device Monitoring landing page, showing graphs and interfaces." style="width:100%;" >}}
 
 ## How it works
 
@@ -45,7 +45,7 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 ### High Availability
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger"> High Availability support of the Datadog Agent is in not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

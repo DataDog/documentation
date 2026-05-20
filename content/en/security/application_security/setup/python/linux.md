@@ -25,7 +25,7 @@ further_reading:
 - Root or sudo privileges
 - Systemd (for service management)
 - Your Datadog API key
-- Datadog Python tracing library (see [version requirements][1])
+- Datadog Python SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -38,7 +38,7 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts](
 
 ### Manually enabling App and API Protection monitoring
 
-Install the Datadog Python tracing library:
+Install the Datadog Python SDK:
 
 ```bash
 pip install ddtrace

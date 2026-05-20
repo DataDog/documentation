@@ -1,4 +1,5 @@
 ---
+id: space_aggregation
 core_product:
 - métricas
 title: agregación espacial

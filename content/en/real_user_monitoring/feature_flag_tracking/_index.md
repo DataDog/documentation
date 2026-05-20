@@ -3,7 +3,7 @@ title: Feature Flag Tracking
 description: "Track feature flag usage and performance impact in RUM to maintain release safety and optimize user experience with controlled rollouts."
 disable_toc: false
 further_reading:
-- link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
+- link: "/real_user_monitoring/feature_flag_tracking/setup/"
   tag: "Documentation"
   text: "Set up Feature Flag data collection"
 - link: "/real_user_monitoring/explorer/"

@@ -73,7 +73,7 @@ function handleMessageAction(action, query, response, button, ctx) {
 
             button.classList.add('active');
             if (oppositeBtn) oppositeBtn.classList.remove('active');
-            showFeedbackTooltip(button, 'Thanks for feedback!');
+            showFeedbackTooltip(button, 'Thanks for your feedback!');
 
             logAction('Conversational Search Feedback', {
                 conversational_search: {

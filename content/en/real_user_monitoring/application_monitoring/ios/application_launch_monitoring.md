@@ -1,6 +1,6 @@
 ---
-title: iOS Mobile App Launch Monitoring
-description: "Measure iOS mobile application launch performance, including the time to initial display and time to full display."
+title: Apple Platform App Launch Monitoring
+description: "Measure application launch performance on Apple platforms, including the time to initial display and time to full display."
 aliases:
 - /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/ios/
@@ -12,11 +12,14 @@ further_reading:
   - link: "/real_user_monitoring/"
     tag: "Documentation"
     text: "Datadog Real User Monitoring"
+  - link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+    tag: "Blog"
+    text: "Measure and improve mobile app startup performance with Datadog RUM"
 ---
 
 ## Overview
 
-Application launch monitoring helps you understand how fast your iOS app becomes usable after a user taps the app icon. Use it to identify slow startup times, track performance regressions, and optimize the user’s first impression of your app.
+Application launch monitoring helps you understand how fast your app becomes usable after a user opens it on their Apple device. Use it to identify slow startup times, track performance regressions, and optimize the user's first impression of your app.
 
 With this feature, you can:
 - Measure time to initial display (TTID) and time to full display (TTFD) for cold and warm starts

@@ -28,16 +28,16 @@ As teams iterate, deploy code, and make changes to their applications and servic
 
 ## Overlay changes on graphs
 
-To get started, click **Show Overlays** in the upper right corner of your dashboard. Now you can enable the [Change Tracking][16] timeline and change overlays on timeseries widgets.
+To get started, click {{< ui >}}Show Overlays{{< /ui >}} in the upper right corner of your dashboard. Now you can enable the [Change Tracking][16] timeline and change overlays on timeseries widgets.
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
-When activated, the **Service** search bar displays the **Most Relevant** service by default. Datadog automatically selects the service most frequently referenced in the queries supporting the widgets on the dashboard.
+When activated, the {{< ui >}}Service{{< /ui >}} search bar displays the {{< ui >}}Most Relevant{{< /ui >}} service by default. Datadog automatically selects the service most frequently referenced in the queries supporting the widgets on the dashboard.
 
 Override the automatic service detection by using the search bar to find the service of interest. 
 
 All changes displayed on the change timeline and as overlays tie back to the selected service. 
-Use the **Show On** dropdown to limit change overlays to relevant widgets, or shown them on all widgets on your dashboard.
+Use the {{< ui >}}Show On{{< /ui >}} dropdown to limit change overlays to relevant widgets, or shown them on all widgets on your dashboard.
 
 To view additional details or take additional actions, click on a change overlay or change within the change timeline.
 

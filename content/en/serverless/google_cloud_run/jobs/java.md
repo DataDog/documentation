@@ -17,20 +17,20 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/java">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
-1. **Install the Datadog Java tracer**.
+1. **Install the Datadog Java SDK**.
 
-   1. Add the Datadog Java tracer to your Dockerfile:
+   1. Add the Datadog Java SDK to your Dockerfile:
 
       {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ADD 'https://dtdg.co/latest-java-tracer' agent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
 {{< /code-block >}}
 
-   2. Add the tracer artifacts.
+   2. Add the SDK artifacts.
       {{< tabs >}}
       {{% tab "Maven" %}}
 {{< code-block lang="xml" disable_copy="false" >}}
@@ -85,7 +85,7 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% serverless-init-configure %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -96,6 +96,8 @@ logger.info("Hello World!");
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

@@ -14,6 +14,9 @@ aliases:
   - /tracing/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated with your traces."
 further_reading:
+    - link: '/opentelemetry/integrations/runtime_metrics/'
+      tag: 'Documentation'
+      text: 'OpenTelemetry Runtime Metrics'
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Correlate your logs and traces'
@@ -27,9 +30,11 @@ further_reading:
 
 ## Overview 
 
-Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog tracing libraries automatically collect these metrics for supported environments and send them to the Datadog Agent.
+Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog SDKs automatically collect these metrics for supported environments and send them to the Datadog Agent.
 
 These metrics help you identify bottlenecks, troubleshoot performance issues, and optimize resource utilization. By viewing runtime metrics alongside traces and logs, you gain comprehensive visibility into your application's health and performance.
+
+If you instrument your application with OpenTelemetry instead of Datadog tracing libraries, see [OpenTelemetry Runtime Metrics][10] for setup instructions.
 
 ## Compatibility
 
@@ -84,11 +89,11 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 {{% tab ".NET" %}}
 
-  - **Enabled By Default**: No
+  - **Enabled By Default**: Yes, on .NET 6+ (v3.40.0+).
   - **Library Version**: 1.23.0+
   - **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
-#### Permissions for Internet Information Services (IIS)
+#### Permissions for Internet Information Services (IIS) (.NET Framework only)
 
 On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
 
@@ -132,7 +137,7 @@ When running the Agent in containerized environments, additional configuration i
 
 <br>
 
-{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,gov,gov2,ap1,ap2" >}}
 
 3. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the correct Datadog location.
 
@@ -149,7 +154,7 @@ Configure runtime metrics in your application using environment variables. Some 
 Use the following environment variables to configure runtime metrics in your application:
 
 `DD_RUNTIME_METRICS_ENABLED`
-: **Default**: `true` for Java, `false` for all other languages <br>
+: **Default**: `true` for Java and .NET 6+ (v3.40.0+), `false` for all other languages and runtimes. <br>
 **Description**: Enables the collection of runtime metrics. Metrics are sent to the Datadog agent, as configured for the instrumented application.
 
 `DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED`
@@ -158,11 +163,15 @@ Use the following environment variables to configure runtime metrics in your app
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-**Description**: Sets the host address for the tracing library's metric submission. Can be a hostname or an IP address.
+**Description**: Sets the host address for the SDK's metric submission. Can be a hostname or an IP address.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
-**Description**: Sets the port for the tracing library's metric submission.
+**Description**: Sets the port for the SDK's metric submission.
+
+`DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
+: **Default**: `true` starting tracer v3.40.0+ on .NET 8+ and (.NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set), otherwise `false`. <br>
+**Description**: Available starting with .NET 6. It controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the `EventListener`-based collector.
 
 #### Code-based configuration
 
@@ -302,3 +311,5 @@ Each supported language collects a set of runtime metrics that provide insights 
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file
+[9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics
+[10]: /opentelemetry/integrations/runtime_metrics/

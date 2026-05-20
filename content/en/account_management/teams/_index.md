@@ -24,12 +24,12 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 
 ### Create team
 
-1. On the [team directory page][1], click **New Team** at the upper right.
-1. Choose a **Team Name**.
-1. The **Handle** populates based on your team name.
+1. On the [team directory page][1], click {{< ui >}}New Team{{< /ui >}} at the upper right.
+1. Choose a {{< ui >}}Team Name{{< /ui >}}.
+1. The {{< ui >}}Handle{{< /ui >}} populates based on your team name.
 1. Use the dropdown menu to select team members and team managers.
-1. Provide an optional **Description**.
-1. Click **Create**.
+1. Provide an optional {{< ui >}}Description{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**: 
 
@@ -39,9 +39,9 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 ### Modify team
 
 1. On the [team directory page][1], click the team you wish to modify. The [team detail page][3] appears. 
-1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
+1. Click the {{< ui >}}Settings{{< /ui >}} cog at the top of the screen. A pop-up window appears.
 1. Select the item you wish to modify.
-1. Make your changes, then click **Save**.
+1. Make your changes, then click {{< ui >}}Save{{< /ui >}}.
 
 ### Choose provisioning source
 
@@ -56,8 +56,8 @@ SAML
 All sources
 : Use SAML as a starting point, and allow overrides through the UI and API
 
-1. On the [team directory page][1], click **Teams Settings**.
-1. Select one of the options under **Team Provisioning Sources**.
+1. On the [team directory page][1], click {{< ui >}}Teams Settings{{< /ui >}}.
+1. Select one of the options under {{< ui >}}Team Provisioning Sources{{< /ui >}}.
 
 If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][4].
 
@@ -90,13 +90,13 @@ Datadog supports associating the following resources with team handles:
 Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel. 
 
 1. On the [team directory page][1], click the team you wish to modify. 
-1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
-1. Select **Notifications**.
-1. Add a channel, then click **Save**.
+1. Click the {{< ui >}}Settings{{< /ui >}} cog at the top of the screen. A pop-up window appears.
+1. Select {{< ui >}}Notifications{{< /ui >}}.
+1. Add a channel, then click {{< ui >}}Save{{< /ui >}}.
 
 ## Team filter
 
-The team filter tailors your experience across Datadog by showing you content associated with your teams. The **My Teams** list includes teams you are a member of and teams you selected as a favorite.
+The team filter tailors your experience across Datadog by showing you content associated with your teams. The {{< ui >}}My Teams{{< /ui >}} list includes teams you are a member of and teams you selected as a favorite.
 
 {{< img src="/account_management/teams/team-filter.png" alt="Monitor list page with red box around the team filter. Two out of three My Teams selected.">}}
 
@@ -116,15 +116,15 @@ You can add or remove a team from your favorites from the team directory page or
 
 From the [team directory page][1]:
 1. Click the team you wish to add as a favorite. The [team detail page][3] appears.
-1. Click **Add Favorite** or **Remove Favorite** in the upper right.
+1. Click {{< ui >}}Add Favorite{{< /ui >}} or {{< ui >}}Remove Favorite{{< /ui >}} in the upper right.
 
 Alternatively, also from the team directory page:
 1. Hover over the team you wish to add or remove. Inline icons appear to the right of the team name.
-1. Click the star (**Add to Favorites** or **Remove from Favorites**) icon.
+1. Click the star ({{< ui >}}Add to Favorites{{< /ui >}} or {{< ui >}}Remove from Favorites{{< /ui >}}) icon.
 
 From the team filter:
-1. If the filter is collapsed, click **My Teams** to expand it.
-1. Click **Add Favorites**. A search box and list of teams appear.
+1. If the filter is collapsed, click {{< ui >}}My Teams{{< /ui >}} to expand it.
+1. Click {{< ui >}}Add Favorites{{< /ui >}}. A search box and list of teams appear.
 1. To narrow the list of teams, start typing a team name in the search box.
 1. Click the star next to the desired team to add or remove it from your favorites.
 
