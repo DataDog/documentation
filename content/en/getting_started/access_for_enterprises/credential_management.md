@@ -50,40 +50,40 @@ This section covers the five types of programmatic credentials in Datadog, best 
 
 ## Best practices for managing credentials at scale
 
-### One key per team, service, or environment
-
+{{% collapse-content title="Assign one key per team, service, or environment" %}}
 Avoid sharing a single API key or application key across multiple teams or services. When a key is shared, you lose the ability to audit who is using it, and revoking it means disrupting everyone.
 
 - Create a dedicated API key for each team or major service that submits data.
 - Create dedicated service accounts with SATs for each automation pipeline (for example, Terraform, CI/CD, custom scripts).
 - Name keys descriptively to indicate their owner and purpose (for example, `payments-team-terraform` or `ci-pipeline-staging`).
+{{% /collapse-content %}}
 
-### Scope secrets to the minimum required
-
+{{% collapse-content title="Scope secrets to the minimum required" %}}
 Keys can be [scoped][1] to restrict which API endpoints they can access. A key that only needs to manage monitors should not have permissions to manage users or read logs.
 
 - When creating a key, explicitly set scopes to limit its access.
 - Secrets cannot exceed the permissions of their creating user or service account, but they can (and should) be further restricted.
+{{% /collapse-content %}}
 
-### Use short-lived tokens
-
+{{% collapse-content title="Use short-lived tokens" %}}
 Where possible, use PATs or SATs instead of long-lived application keys. Short-lived tokens automatically expire, which limits exposure it a token is leaked and created cleaner audit trails tied to specific users or service accounts.
 
 For automated pipelines, SATs with a service account are the recommended pattern. The service account defines the permission boundary, and the SAT provides time-limited access within that boundary. SATs can be configured as long-lived when required, but short expiration windows are strongly recommended.
+{{% /collapse-content %}}
 
-### Use service accounts
-
+{{% collapse-content title="Use service accounts" %}}
 [Service accounts][2] are non-human accounts designed for automation. They have their own roles and permissions, independent of any individual user. Use service accounts when:
 
 - An automation pipeline (Terraform, CI/CD) needs API access that should not be tied to a human user's account
 - You need a stable identity for a service that outlives employee tenure
 - You want to scope permissions specifically for a pipeline without affecting a human user's access
+{{% /collapse-content %}}
 
-### Use an authenticated proxy for RUM tokens
-
+{{% collapse-content title="Use an authenticated proxy for RUM tokens" %}}
 Using an [authenticated proxy][3] for RUM client tokens hides them from end users, while still routing data to the correct RUM application.
+{{% /collapse-content %}}
 
-## Strategies for key lifecycle management
+## Strategies for key lifecycle management 
 
 ### Audit unused keys
 
