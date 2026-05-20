@@ -37,7 +37,7 @@ Each section addresses a layer of your access control strategy, from organizatio
 
 | Section | What to decide |
 | :---- | :---- |
-| [Organizing Your Datadog Deployment][1] | Single org vs. multi-org, and when each is appropriate |
+| [Choosing Your Datadog Topology][1] | Single org vs. multi-org, and when each is appropriate |
 | [Permissions and Feature Access][2] | Custom roles, keeping roles current, role hygiene |
 | [Assigning Users to Roles and Teams][3] | Roles vs. Teams, and how to assign users at scale |
 | [Protecting Assets][4] | Restricting who can edit or view Dashboards, Monitors, and other assets |
@@ -51,13 +51,13 @@ Each section addresses a layer of your access control strategy, from organizatio
 
 ## Next steps
 
-Start with [Organizing Your Datadog Deployment][1] to determine whether your organization should use a single Datadog org or multiple orgs.
+Start with [Choosing Your Datadog Topology][1] to determine whether your organization should use a single Datadog org or multiple orgs.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/access_for_enterprises/organizing_your_deployment/
+[1]: /getting_started/access_for_enterprises/choosing_topology/
 [2]: /getting_started/access_for_enterprises/permissions/
 [3]: /getting_started/access_for_enterprises/assigning_users/
 [4]: /getting_started/access_for_enterprises/protecting_assets/

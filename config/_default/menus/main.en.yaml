@@ -311,9 +311,9 @@ menu:
       url: getting_started/access_for_enterprises/
       parent: getting_started
       weight: 30
-    - name: Organizing Your Deployment
+    - name: Choosing Your Datadog Topology
       identifier: getting_started_access_for_enterprises_organizing
-      url: getting_started/access_for_enterprises/organizing_your_deployment/
+      url: getting_started/access_for_enterprises/choosing_topology/
       parent: getting_started_access_for_enterprises
       weight: 3001
     - name: Permissions and Feature Access

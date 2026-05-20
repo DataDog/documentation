@@ -1,5 +1,5 @@
 ---
-title: Organizing Your Datadog Deployment
+title: Choosing Your Datadog Topology
 description: Decide between single-org and multi-org Datadog topology for your enterprise.
 further_reading:
 - link: "/account_management/organization_topology/"
