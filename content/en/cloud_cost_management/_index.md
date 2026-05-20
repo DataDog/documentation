@@ -136,7 +136,9 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 
 ## Use AI for cost analysis
 
-Use the [FinOps Skill in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams. 
+Use the [FinOps Skill in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams.
+
+{{< img src="cloud_cost/finops_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
 
 ## Further reading
 

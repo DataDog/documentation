@@ -49,7 +49,7 @@ To use the FinOps skill in Bits Assistant, you must:
 
 ## FinOps skill in Bits Assistant
 
-{{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:100%;" >}}
+{{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:80%;" >}}
 
 Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to trigger the FinOps skill.
 
@@ -72,7 +72,7 @@ When you use the FinOps skill in Bits Assistant to investigate a cost change, Bi
 - Rate-versus-usage context to help distinguish price changes from consumption changes.
 - Owner or team attribution based on your cost tags.
 
-{{< img src="cloud_cost/finops_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:100%;" >}}
+{{< img src="cloud_cost/finops_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
 
 After the initial summary, Bits Assistant can:
 
