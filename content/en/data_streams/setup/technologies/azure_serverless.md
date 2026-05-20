@@ -30,12 +30,14 @@ Install [serverless monitoring][2] on your Azure Functions.
 
 ### Azure Service Bus
 
-.NET Azure Functions automatically instrument Azure Service Bus when publishing a message. Set the following environment variables on your Azure Function to enable data streams monitoring:
+.NET Azure Functions automatically instrument Azure Service Bus when publishing a message. Set the following environment variables on your Azure Function to enable data streams monitoring. More details are available in the [Azure Service Bus documentation][3]:
 
 ```yaml
 environment:
   DD_DATA_STREAMS_ENABLED: "true"
   DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+  AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE: "true"
+  DD_TRACE_OTEL_ENABLED: "true"
 ```
 
 If you are **consuming** a message from Azure Service Bus using Azure Functions you will need to manually extract the DSM context.
@@ -82,3 +84,4 @@ public void Run([ServiceBusTrigger(ServiceBusConfiguration.QueueName, Connection
 
 [1]: /data_streams/manual_instrumentation/
 [2]: /serverless/azure_functions/?tab=dotnet
+[3]: /data_streams/setup/technologies/azure_service_bus/
