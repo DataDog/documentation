@@ -19,8 +19,6 @@ The Cloudcraft Diagram widget displays a live architecture diagram of your AWS, 
 
 ### Configuration
 
-{{< img src="dashboards/widgets/cloudcraft_diagram/cloudcraft_diagram_editor.png" alt="The Cloudcraft Diagram widget editor showing provider, overlay, account, and filter options" >}}
-
 1. Select a cloud provider: {{< ui >}}AWS{{< /ui >}}, {{< ui >}}Azure{{< /ui >}}, or {{< ui >}}GCP{{< /ui >}}.
 1. Select an [overlay][1] to determine what information is displayed on the diagram:
    - **Infrastructure**: High-level view of services and resources.
