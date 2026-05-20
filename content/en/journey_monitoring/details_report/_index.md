@@ -64,7 +64,7 @@ The [operations][7] table lists all operations associated with the journey. Each
 Click on an operation to open a side panel with details about its performance. Data in the side panel includes:
 - The list of SLOs and monitors configured for the operation
 - The volume, success rate, and latency of the operation
-- Where the operation executed within the journey's lifecycle
+- Where the operation executed within the journey's life cycle
 
 If the RUM [distributed tracing][11] integration is enabled, the side panel also includes a list of the backend services the operation depends on. Each entry includes metrics on the backend service's performance. Clicking on a backend service opens the service's entry in the APM [Software Catalog][8].
 
