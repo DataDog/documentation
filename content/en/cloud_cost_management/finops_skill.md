@@ -108,16 +108,16 @@ Cloud Cost Management data is available through the core metric tools:
 
 | MCP tool                          | Usage                                 |
 | --------------------------------- | ------------------------------------- |
-| [`get_datadog_metric`][12]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
-| [`get_datadog_metric_context`][13] | Discover metadata, available tag keys, and tag values for a cost metric before querying it. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics.               |
+| [`get_datadog_metric`][12]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. |
+| [`get_datadog_metric_context`][13] | Discover metadata, available tag keys, and tag values for a cost metric before querying it.               |
+
+Ask your agent to set `use_cloud_cost` to `true` for Cloud Cost Management metrics, such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
 
 Example prompts for MCP-connected agents:
 
 - `Use Datadog MCP to query cloud cost data. Set use_cloud_cost=true and show daily all.cost grouped by provider for the last 30 complete days.`
 - `Use get_datadog_metric_context with use_cloud_cost=true to find available tags for aws.cost.net.amortized.shared.resources.allocated, then group EC2 costs by team.`
 - `Compare this week's complete EC2 cost to the previous week and explain which teams or accounts changed the most.`
-
-Use the `use_cloud_cost` flag only for Cloud Cost Management metrics such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
 
 For connection instructions, supported clients, and toolset configuration, see [Set Up the Datadog MCP Server][11]. For the full MCP tool reference, see [Datadog MCP Server Tools][14].
 
