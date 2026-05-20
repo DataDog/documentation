@@ -30,7 +30,7 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
 | **Network path analysis**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
 
-## Trace network paths from devices to SaaS applications
+### Trace network paths from real devices to SaaS applications
 
 When users report slow application performance or degraded video call quality (for example, on Zoom), the issue could be on the device, somewhere along the network path, or within the application itself. End User Device Monitoring integrates with [Network Path Monitoring][4] to trace the full route from a user's laptop to the destination SaaS application, giving you visibility across all three layers.
 
