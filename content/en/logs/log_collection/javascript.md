@@ -27,7 +27,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 ### Step 1 - Create a client token
 
-In Datadog, navigate to [**Organization Settings > New Client Tokens**][1]
+In Datadog, navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}New Client Tokens{{< /ui >}}][1]
 
 **Supported environments**: The browser logs SDK supports all modern desktop and mobile browsers, as well as Worker and Service Worker environments. See the [Browser Support][4] table.
 
