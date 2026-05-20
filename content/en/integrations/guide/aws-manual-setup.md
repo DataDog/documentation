@@ -86,17 +86,11 @@ Datadog assumes this role to collect data on your behalf.
 
 1. Go to the AWS [IAM Console][4] and click `Create role`.
 2. Select **AWS account** for the trusted entity type, and **Another AWS account**.
-{{< site-region region="us,us3,us5,eu" >}}
-3. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-3. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
-{{< /site-region >}}
-{{< site-region region="ap2" >}}
-3. Enter `412381753143` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+3. Enter {{< region-param key="aws_customer_access_id" code="true" >}} as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
-3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+3. If the AWS account you want to integrate is a GovCloud account, enter {{< region-param key="aws_customer_access_govcloud_id" code="true" >}} as the `Account ID`, otherwise enter {{< region-param key="aws_customer_access_id" code="true" >}}. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 **Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
 

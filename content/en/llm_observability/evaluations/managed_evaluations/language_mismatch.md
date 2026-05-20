@@ -1,6 +1,6 @@
 ---
-title: Quality Evaluations
-description: Learn how to configure managed evaluations for your LLM applications.
+title: Language Mismatch
+description: Learn about Datadog's Language Mismatch evaluation.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
@@ -10,11 +10,8 @@ further_reading:
   text: "Learn how to set up LLM Observability"
 aliases:
     - /llm_observability/evaluations/quality_evaluations
+    - /llm_observability/evaluations/managed_evaluations/quality_evaluations
 ---
-
-Quality evaluations help ensure your LLM-powered applications generate accurate, relevant, and safe responses. Managed evaluations automatically score model outputs on key quality dimensions and attach results to traces, helping you detect issues, monitor trends, and improve response quality over time.
-
-#### Language Mismatch
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
 

@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry Instrumentation
+description: Instrument LLM applications with OpenTelemetry using GenAI semantic conventions and send traces to Datadog LLM Observability without the Datadog SDK.
 ---
 
 ## Overview
@@ -63,7 +64,7 @@ To generate traces compatible with LLM Observability, do one of the following:
 - Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1].
 - Create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes, as defined in the semantic conventions.
 
-After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
+After your application starts sending data, the traces automatically appear in the [{{< ui >}}LLM Observability Traces{{< /ui >}} page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
 <div class="alert alert-danger">
 <ul>
