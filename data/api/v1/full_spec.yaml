@@ -16550,6 +16550,7 @@ components:
         - udp
         - icmp
         - websocket
+        - mcp
       example: http
       type: string
       x-enum-varnames:
@@ -16561,6 +16562,7 @@ components:
         - UDP
         - ICMP
         - WEBSOCKET
+        - MCP
     SyntheticsAPITestType:
       default: "api"
       description: Type of the Synthetic test, `api`.
@@ -16683,6 +16685,8 @@ components:
         - $ref: "#/components/schemas/SyntheticsAssertionJSONSchemaTarget"
         - $ref: "#/components/schemas/SyntheticsAssertionXPathTarget"
         - $ref: "#/components/schemas/SyntheticsAssertionJavascript"
+        - $ref: "#/components/schemas/SyntheticsAssertionMCPServerCapabilitiesTarget"
+        - $ref: "#/components/schemas/SyntheticsAssertionMCPRespectsSpecification"
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -16818,6 +16822,49 @@ components:
       type: string
       x-enum-varnames:
         - JAVASCRIPT
+    SyntheticsAssertionMCPRespectsSpecification:
+      description: An assertion that verifies the MCP server response respects the MCP specification.
+      properties:
+        type:
+          $ref: "#/components/schemas/SyntheticsAssertionMCPRespectsSpecificationType"
+      required:
+        - type
+      type: object
+    SyntheticsAssertionMCPRespectsSpecificationType:
+      description: Type of the assertion.
+      enum:
+        - mcpRespectsSpecification
+      example: mcpRespectsSpecification
+      type: string
+      x-enum-varnames:
+        - MCP_RESPECTS_SPECIFICATION
+    SyntheticsAssertionMCPServerCapabilitiesTarget:
+      description: An assertion that checks that an MCP server advertises the expected capabilities.
+      properties:
+        operator:
+          $ref: "#/components/schemas/SyntheticsAssertionOperator"
+        target:
+          description: List of MCP server capabilities to assert against.
+          example:
+            - completions
+          items:
+            $ref: "#/components/schemas/SyntheticsMCPServerCapability"
+          type: array
+        type:
+          $ref: "#/components/schemas/SyntheticsAssertionMCPServerCapabilitiesType"
+      required:
+        - type
+        - operator
+        - target
+      type: object
+    SyntheticsAssertionMCPServerCapabilitiesType:
+      description: Type of the assertion.
+      enum:
+        - mcpServerCapabilities
+      example: mcpServerCapabilities
+      type: string
+      x-enum-varnames:
+        - MCP_SERVER_CAPABILITIES
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
@@ -16920,6 +16967,8 @@ components:
         - connection
         - multiNetworkHop
         - jitter
+        - mcpToolNameLength
+        - mcpToolCount
       example: statusCode
       type: string
       x-enum-varnames:
@@ -16944,6 +16993,8 @@ components:
         - CONNECTION
         - MULTI_NETWORK_HOP
         - JITTER
+        - MCP_TOOL_NAME_LENGTH
+        - MCP_TOOL_COUNT
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -18252,6 +18303,31 @@ components:
             $ref: "#/components/schemas/SyntheticsLocation"
           type: array
       type: object
+    SyntheticsMCPProtocolVersion:
+      description: The MCP protocol version used by the step. See https://modelcontextprotocol.io/specification.
+      enum:
+        - "2025-06-18"
+      example: "2025-06-18"
+      type: string
+      x-enum-varnames:
+        - VERSION_2025_06_18
+    SyntheticsMCPServerCapability:
+      description: A capability advertised by an MCP server.
+      enum:
+        - completions
+        - experimental
+        - logging
+        - prompts
+        - resources
+        - tools
+      type: string
+      x-enum-varnames:
+        - COMPLETIONS
+        - EXPERIMENTAL
+        - LOGGING
+        - PROMPTS
+        - RESOURCES
+        - TOOLS
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -19141,15 +19217,24 @@ components:
         - UPLOAD_FILES
         - WAIT
     SyntheticsTestCallType:
-      description: The type of gRPC call to perform.
+      description: |-
+        The type of call to perform. Used by gRPC steps (`healthcheck`, `unary`)
+        and MCP steps (`init`, `tool_list`, `tool_call`). Valid values depend on
+        the parent step's `subtype`.
       enum:
         - healthcheck
         - unary
+        - init
+        - tool_list
+        - tool_call
       example: unary
       type: string
       x-enum-varnames:
         - HEALTHCHECK
         - UNARY
+        - INIT
+        - TOOL_LIST
+        - TOOL_CALL
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -19650,6 +19735,8 @@ components:
         isMessageBase64Encoded:
           description: Whether the message is base64 encoded.
           type: boolean
+        mcpProtocolVersion:
+          $ref: "#/components/schemas/SyntheticsMCPProtocolVersion"
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -19694,6 +19781,14 @@ components:
           description: Timeout in seconds for the test.
           format: double
           type: number
+        toolArgs:
+          additionalProperties: {}
+          description: Arguments to pass to the MCP tool. Free-form object whose shape depends on the tool. Used when `callType` is `tool_call`.
+          type: object
+        toolName:
+          description: The name of the MCP tool to call. Required when `callType` is `tool_call`.
+          example: search
+          type: string
         url:
           description: URL to perform the test with.
           example: "https://example.com"
