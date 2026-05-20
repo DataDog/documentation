@@ -45,14 +45,6 @@ A practical model for most enterprises:
 - Use **Teams** to define ownership boundaries (what resources and data a user *is responsible for*).
 - Where a specific Team needs elevated permissions, use **Team-linked Roles** (in Preview) to assign the role to the Team rather than to individual users. When you assign a role to a Team, each member receives the role.
 
-## Admin override groups
-
-When you begin restricting resources to specific teams (covered in [Protecting Assets][2]), be aware that those restrictions apply to everyone, including administrators. If an admin is not a member of the owning team, they can be locked out of resources they need to manage.
-
-To avoid this, establish a break-glass **admin override team** (such as "Platform Admins" or "Datadog Governance") and include it in the access list for all critical resources. This helps ensure that your administrative staff always retains access for troubleshooting and governance, even as you tighten team-based restrictions.
-
-**Note:** Users with the `user_access_manage` permission are able to grant themselves elevated access as a failsafe.
-
 ## Request Access (Preview)
 
 Datadog offers Request Access (in Preview) for situations where users need temporary or elevated access beyond their standard role, such as responding to an urgent incident or debugging a production issue in another team's domain. This allows end users to request access to resources they don't have, with approval workflows for administrators.
@@ -60,7 +52,7 @@ Datadog offers Request Access (in Preview) for situations where users need tempo
 ## Recommendations
 
 - **Use Roles for what users *can do*, and Teams for what users *are responsible for*.** Don't conflate the two.
-- **Establish an admin override team** before you begin restricting resources to specific teams.
+- **Establish an admin override team** before you begin restricting resources to specific teams. See [Permissions and Feature Access][1] for details.
 - **Automate provisioning.** Map your IdP groups to Datadog Roles and Teams. Manual user management does not scale.
 - **Audit role and team assignments periodically.** Look for users with more permissions than they need, roles with no users, and stale team memberships.
 ## Next steps

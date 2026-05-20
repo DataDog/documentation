@@ -76,6 +76,14 @@ Start with set of 4-6 custom roles. Here is a recommended starting point:
 
 Expand only when a meaningful group of users needs a distinct permission set that can't be served by one of these.
 
+## Admin override groups
+
+When you begin restricting resources to specific teams (covered in [Protecting Assets][5]), be aware that those restrictions apply to everyone, including administrators. If an admin is not a member of the owning team, they can be locked out of resources they need to manage.
+
+To avoid this, establish a break-glass **admin override team** (such as "Platform Admins" or "Datadog Governance") and include it in the access list for all critical resources. This helps ensure that your administrative staff always retains access for troubleshooting and governance, even as you tighten team-based restrictions.
+
+**Note:** Users with the `user_access_manage` permission are able to grant themselves elevated access as a failsafe.
+
 ## Recommendations
 
 - **Use roles to reflect permissions, not ownership.** Teams better reflect ownership and accountability.
@@ -93,3 +101,4 @@ Expand only when a meaningful group of users needs a distinct permission set tha
 [2]: /account_management/rbac/permissions/#roles
 [3]: /account_management/rbac/permissions/#custom-roles
 [4]: https://app.datadoghq.com/organization-settings/roles#release-notes
+[5]: /getting_started/access_for_enterprises/protecting_assets/
