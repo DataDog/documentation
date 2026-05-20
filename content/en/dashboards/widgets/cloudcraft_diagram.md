@@ -1,5 +1,6 @@
 ---
 title: Cloudcraft Diagram Widget
+description: "Display a live Cloudcraft architecture diagram in your dashboards."
 widget_type: cloud_graph
 further_reading:
 - link: "/datadog_cloudcraft/"
