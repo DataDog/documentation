@@ -72,6 +72,8 @@ When you use the FinOps skill in Bits Assistant to investigate a cost change, Bi
 - Rate-versus-usage context to help distinguish price changes from consumption changes.
 - Owner or team attribution based on your cost tags.
 
+{{< img src="cloud_cost/finops_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:100%;" >}}
+
 After the initial summary, Bits Assistant can:
 
 - Find the top services, accounts, regions, resources, or tags driving the change.
