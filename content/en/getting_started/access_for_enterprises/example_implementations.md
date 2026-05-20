@@ -36,8 +36,6 @@ Most enterprises are a blend of these archetypes. Use the following questions to
 | Do you manage configuration through Terraform or similar IaC tools? | [Template 4 (Platform Provider)](#template-4-government-agency--platform-provider) for the most comprehensive IaC pattern |
 | Do you operate many orgs and need consistent access controls across them? | [Template 4 (Platform Provider)](#template-4-government-agency--platform-provider) |
 
----
-
 ## Template 1: Large Financial Institution
 
 ### Profile
@@ -59,8 +57,6 @@ A global financial services company with 15,000 Datadog users across retail bank
 ### Key takeaway
 
 Data Access Control lets this organization keep a single org for connected observability while maintaining strict data boundaries between divisions. The critical success factor is consistent tagging at ingestion. Without reliable `data_sensitivity` tags, Data Access Control cannot enforce the boundaries.
-
----
 
 ## Template 2: Regulated Enterprise with Multiple Business Units
 
@@ -84,8 +80,6 @@ A multinational conglomerate with 8,000 Datadog users across 5 major divisions: 
 
 Multi-org is justified here because of hard compliance boundaries. Regulations create strict data isolation and residency requirements. The defense division's use of Strict Mode reflects the default-deny requirement of its regulatory environment. Cross-Org Visibility keeps centralized reporting functional without compromising isolation.
 
----
-
 ## Template 3: Large Technology Company
 
 ### Profile
@@ -106,8 +100,6 @@ A global technology company with 12,000 Datadog users running a large-scale paym
 ### Key takeaway
 
 Per-Team API keys and quarterly audits are essential for managing governance at this scale. Data Access Control, Teams, and granular access provide boundaries within the org.
-
----
 
 ## Template 4: Government Agency / Platform Provider
 
