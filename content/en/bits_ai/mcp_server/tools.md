@@ -1160,7 +1160,7 @@ Tools for [dashboard][46] and [notebook][57] widget visualization, validation, a
 
 ### `get_widget`
 *Toolset: **widgets***\
-*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read` (OR logic)*\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read`*\
 Retrieves and visualizes Datadog metrics, traces, logs, and other data as interactive charts. Supports three modes: dashboard lookup, direct definition, or URL resolution.
 
 - Show the CPU usage timeseries for `service:api` over the last hour.
@@ -1209,7 +1209,7 @@ Validates multiple notebook cell widget definitions in a single call, including 
 
 ### `verify_widget_data`
 *Toolset: **widgets***\
-*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read` (OR logic)*\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read`*\
 Verifies whether widget definitions return data for the last hour. Call after adding widgets to a dashboard to confirm queries return real data. Returns one result per widget indicating whether data was found, with a reason if not.
 
 - Check if these widget definitions return data.
