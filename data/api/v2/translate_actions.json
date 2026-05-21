@@ -1294,6 +1294,12 @@
     "description": "List the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
+  "SearchCostRecommendations": {
+    "description": "List cost recommendations matching a filter, with pagination and sorting.",
+    "summary": "Search cost recommendations",
+    "request_description": "",
+    "request_schema_description": "Request body for filtering cost recommendations."
+  },
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
