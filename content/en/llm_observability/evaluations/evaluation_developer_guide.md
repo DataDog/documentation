@@ -1,5 +1,7 @@
 ---
 title: Evaluation Developer Guide
+aliases:
+  - /llm_observability/guide/evaluation_developer_guide
 description: Learn how to build custom evaluators using the LLM Observability SDK.
 further_reading:
     - link: '/llm_observability/evaluations/external_evaluations'

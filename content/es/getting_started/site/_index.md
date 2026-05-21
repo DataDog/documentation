@@ -1,74 +1,85 @@
 ---
 algolia:
   tags:
-  - sitio
-  - sitio de Datadog
-description: Infórmate sobre los distintos sitios Datadog de tu región y los requisitos
-  de seguridad, incluidas las opciones que cumplen las normas gubernamentales.
+  - site
+  - datadog site
+description: Aprende sobre los diferentes sitios de Datadog para tu región y requisitos
+  de seguridad, incluyendo opciones que cumplen con las normativas gubernamentales.
 further_reading:
 - link: https://learn.datadoghq.com/courses/dashboards-slos
-  tag: Centro de aprendizaje
-  text: Crea perspectivas críticas para la empresa utilizando dashboards y SLOs
+  tag: Centro de Aprendizaje
+  text: Cree Perspectivas Críticas para el Negocio Usando Tableros y SLOs
 - link: /agent/configuration/dual-shipping/
   tag: Guía
-  text: Envío dual
-title: Empezando con los sitios de Datadog
+  text: Envío Dual
+title: Comenzando con los Sitios de Datadog
 ---
+## Resumen {#overview}
 
-## Información general
+Datadog ofrece diferentes sitios en todo el mundo. Cada sitio es completamente independiente y no se pueden compartir datos entre ellos. Cada sitio le brinda beneficios (por ejemplo, regulaciones de seguridad gubernamentales) o le permite almacenar sus datos en ubicaciones específicas alrededor del mundo.
 
-Datadog ofrece distintos sitios en todo el mundo. Cada uno es totalmente independiente del resto, y no puedes compartir datos entre ellos. Todos los sitios presentan ventajas (por ejemplo, normativas de seguridad del gobierno) o te permiten almacenar tus datos en localizaciones concretas de todo el mundo.
+## Responsabilidad compartida {#shared-responsibility}
 
-## Responsabilidad compartida
-
-La responsabilidad de mantener seguros los datos de los usuarios es compartida entre Datadog y los desarrolladores que utilizan los productos de Datadog.
+La responsabilidad de mantener los datos de los usuarios seguros se comparte entre Datadog y los desarrolladores que utilizan los productos de Datadog.
 
 Datadog es responsable de:
-- Proporcionar un producto fiable que gestione los datos de forma segura cuando se transmiten a la plataforma Datadog y se almacenan en ella.
-- Garantizar que los problemas de seguridad se identifiquen de acuerdo con las políticas internas.
+- Proporcionar un producto confiable que maneje los datos de manera segura cuando se transmiten y almacenan en la plataforma de Datadog.
+- Asegurar que los problemas de seguridad se identifiquen de acuerdo con las políticas internas.
 
 Los desarrolladores son responsables de:
-- Aprovechar los valores de configuración y las opciones de privacidad de los datos que ofrece Datadog.
-- Garantizar la integridad del código en sus entornos.
+- Aprovechar los valores de configuración y las opciones de privacidad de datos proporcionadas por Datadog.
+- Asegurar la integridad del código dentro de sus entornos.
 
-## Acceder al sitio de Datadog
+## Acceda al sitio de Datadog {#access-the-datadog-site}
 
-Puedes identificar en qué sitio te encuentras consultando la URL de tu sitio web de Datadog en la siguiente tabla.
-
-{{< img src="getting_started/site/site.png" alt="La URL del sitio en tu pestaña del navegador" style="width:40%" >}}
-
-| Sitio    | URL del sitio                    | Parámetro del sitio      | Localización |
+| Sitio    | URL del Sitio                    | Parámetro del Sitio      | Ubicación |
 |---------|-----------------------------|---------------------|----------|
-| US1     | `https://app.datadoghq.com` | `datadoghq.com`     | EE. UU.       |
-| US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | EE. UU.       |
-| US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | EE. UU.       |
-| UE1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | UE (Alemania) |
-| US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | EE. UU.       |
+| US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
+| US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
+| US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
+| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Alemania) |
+| US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
+| US2-FED | `https://us2.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japón |
 | AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
 
-Para enviar datos a más de un destino a través de varios endpoints, consulta la guía [Envío doble][2].
+Si tienes un dominio personalizado, como `demo.datadoghq.com`, puedes encontrar tu sitio listado en la parte superior de la página **Mis Preferencias**.
 
-## Dominios SDK
+{{< img src="getting_started/site/site-in-preferences.png" alt="La parte superior de la página Mis Preferencias en Datadog, mostrando el nombre de la organización y la URL del sitio" style="width:80%" >}}
 
-Consulta [Endpoints compatibles con dominios de SDK][3].
+Para navegar a **Mis Preferencias**, haz clic en tu avatar de perfil en la esquina inferior izquierda, luego selecciona **Mis Preferencias** del menú.
 
-## Navega por la documentación de Datadog por sitio.
+{{< img src="getting_started/site/my-preferences-menu.png" alt="El menú de cuenta de Datadog, accesible haciendo clic en tu avatar de perfil en la navegación inferior izquierda, mostrando la opción Mis Preferencias bajo Configuraciones Personales" style="width:80%" >}}
 
-Distintos sitios de Datadog admiten distintas funcionalidades según los requisitos de seguridad de la instancia. Por tanto, la documentación puede variar de un sitio a otro. Utiliza el menú desplegable del selector de sitios en el lateral derecho de cualquier página de la documentación de Datadog para seleccionar el sitio de Datadog sobre el que quieres obtener información.
+Para enviar datos a más de un destino a través de múltiples puntos de conexión, consulta la guía de [Envío Dual][2].
 
-{{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="El menú desplegable del selector de sitio a la derecha del sitio de Documentación" style="width:100%" >}}
+## Dominios SDK {#sdk-domains}
 
-Por ejemplo, para ver la documentación del sitio Datadog for Government, selecciona **US1-FED**.
+Consulta [Puntos de conexión soportados para dominios SDK][3].
 
-## Acceder al sitio Datadog for Government
+## Navega la documentación de Datadog por sitio {#navigate-the-datadog-documentation-by-site}
 
-El sitio Datadog for Government (US1-FED) es el sitio FedRAMP Moderate Authorized de Datadog. US1-FED está pensado para permitir que las agencias gubernamentales y socios de EE.UU. monitoricen sus aplicaciones e infraestructuras. Para obtener información sobre los controles y frameworks de seguridad y conformidad de US1-FED, así como sobre su compatibilidad con FedRAMP, consulta la [page (página) Seguridad][1].
+Diferentes sitios de Datadog pueden soportar diferentes funcionalidades dependiendo de los requisitos de seguridad de la instancia. Por lo tanto, la documentación puede variar entre sitios. Puedes usar el menú desplegable de selección de sitio en el lado derecho de cualquier página en la documentación de Datadog para seleccionar el sitio de Datadog sobre el que deseas ver información.
 
-## Referencias adicionales
+{{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="El menú desplegable del selector de sitios en el lado derecho del sitio de Documentación" style="width:100%" >}}
+
+Por ejemplo, para ver la documentación de los sitios de Datadog para el Gobierno, selecciona **US1-FED** o **US2-FED**.
+
+## Accede a los sitios de Datadog para el Gobierno {#access-the-datadog-for-government-sites}
+
+### US1-FED {#us1-fed}
+
+El sitio de Datadog para el Gobierno (US1-FED) es el sitio autorizado de FedRAMP Moderate de Datadog. US1-FED está destinado a permitir que las agencias y socios del gobierno de EE. UU. monitoreen sus aplicaciones e infraestructura. Para obtener información sobre los controles y marcos de seguridad y cumplimiento de US1-FED, así como sobre cómo apoya a FedRAMP, consulta la [página de Seguridad][1].
+
+### US2-FED {#us2-fed}
+
+El sitio de Datadog para el Gobierno (US2-FED) está en proceso de autorización IL5. US2-FED está destinado a permitir que las agencias y socios del gobierno de EE. UU. monitoreen sus aplicaciones e infraestructura. Para más información, envía un correo electrónico a [fedramp@datadoghq.com][4].
+
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/security/
 [2]: /es/agent/configuration/dual-shipping/
 [3]: /es/real_user_monitoring/#supported-endpoints-for-sdk-domains
+[4]: mailto:fedramp@datadoghq.com
