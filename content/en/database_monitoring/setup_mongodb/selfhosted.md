@@ -193,6 +193,8 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 
 Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
 
+Query metrics for MongoDB require Datadog Agent v7.78 or later and MongoDB 8.0+. Query metrics are not enabled by default — see the [sample mongo.d/conf.yaml][3] for configuration options.
+
 {{% dbm-mongodb-agent-data-collected %}}
 
 [1]: /account_management/api-app-keys/
