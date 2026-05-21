@@ -9,3 +9,5 @@ related_terms:
   - relative_change
 ---
 In Datadog Test Optimization, an absolute change is the absolute difference between the test duration and the baseline mean. For more information, <a href="/continuous_integration/explorer/?tab=testruns">see the documentation</a>.
+
+{{< nonexistent-ci-triage-shortcode >}}
