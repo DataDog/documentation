@@ -628,7 +628,7 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 
 #### Key design principles
 
-- **8-day lookback window (configurable)**: By default, all recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes. The lookback window is configurable per workload.
+- **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
 - **Decaying weights**: For Burstable-class request recommendations (CPU or memory), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
 - **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
 - **OOMKill response**: When memory is Guaranteed-class (request equals limit) and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
