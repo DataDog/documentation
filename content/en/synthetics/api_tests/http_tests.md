@@ -188,7 +188,12 @@ Use JavaScript assertions when standard response assertions don't meet your vali
 
 <div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
 
-**Note:** If a failed JavaScript assertion's error message might include sensitive data, enable **Do not save response body** under **Advanced Options** > **Privacy**. This truncates the assertion error message.
+<div class="alert alert-info">
+  <ul>
+    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
+    <li>If a failed JavaScript assertion's error message might include sensitive data, under <strong>Advanced Options</strong> > <strong>Privacy</strong>, enable <strong>Do not save response body</strong>. This truncates the assertion error message.</li>
+  </ul>
+</div>
 
 #### Using dd.assert()
 
