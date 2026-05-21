@@ -16,6 +16,9 @@ Supported MongoDB major versions
 Supported MongoDB editions
 : Community, Enterprise
 
+Minimum Datadog Agent version for MongoDB query metrics
+: 7.78
+
 {{% dbm-mongodb-before-you-begin %}}
 
 ## Setup
