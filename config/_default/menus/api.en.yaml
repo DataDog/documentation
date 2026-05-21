@@ -6581,6 +6581,66 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List Tags
+      url: '#list-tags'
+      identifier: app-builder-list-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTags
+        unstable: []
+        order: 17
+    - name: Get Blueprints by Slugs
+      url: '#get-blueprints-by-slugs'
+      identifier: app-builder-get-blueprints-by-slugs
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsBySlugs
+        unstable: []
+        order: 20
+    - name: Get Blueprints by Integration ID
+      url: '#get-blueprints-by-integration-id'
+      identifier: app-builder-get-blueprints-by-integration-id
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsByIntegrationId
+        unstable: []
+        order: 21
+    - name: List Blueprints
+      url: '#list-blueprints'
+      identifier: app-builder-list-blueprints
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBlueprints
+        unstable: []
+        order: 18
+    - name: Get Blueprint
+      url: '#get-blueprint'
+      identifier: app-builder-get-blueprint
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprint
+        unstable: []
+        order: 19
     - name: List App Versions
       url: '#list-app-versions'
       identifier: app-builder-list-app-versions
