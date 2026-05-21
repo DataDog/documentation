@@ -30,7 +30,7 @@ The FinOps skill runs in Bits Assistant. Fill out the Bits Assistant Preview for
 
 The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis, budget tracking, and general cost questions. For example, you can ask Bits Assistant to:
 
-- Investigate [cost monitor alerts][2], [cost anomalies][3], and cost changes on the [Summarize][4] page
+- Investigate [cost monitor alerts][2], [cost anomalies][3], and [cost changes][4]
 - Identify teams, services, accounts, regions, or resources driving spend
 - Answer ad hoc questions about cloud, SaaS, custom, or Datadog costs
 - Compare actual spend and forecasts against [budgets][5]
@@ -51,7 +51,7 @@ To use the FinOps skill in Bits Assistant, you must:
 
 {{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:80%;" >}}
 
-Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the FinOps skill.
+When you want to start an investigation, such as for a [cost anomaly], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the FinOps skill.
 
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open the Bits Assistant and ask a cost question.
 
