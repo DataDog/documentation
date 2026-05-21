@@ -28,16 +28,16 @@ Automation Pipelines allows you to set up automated rules for newly discovered f
 
 Automation Pipelines is available for:
 
-- Runtime Code Vulnerability
-- Static Code Vulnerability
-- Library Vulnerability
-- Secret
+- Runtime Code Vulnerabilities
+- Static Code Vulnerabilities
+- Library Vulnerabilities
+- Secrets
 - Infrastructure as Code
-- Container Image Vulnerability
-- Host Vulnerability
-- Misconfiguration
-- Attack Path
-- Identity Risk
+- Container Image Vulnerabilities
+- Host Vulnerabilities
+- Misconfigurations
+- Attack Paths
+- Identity Risks
 - API Security
 
 ## How it works

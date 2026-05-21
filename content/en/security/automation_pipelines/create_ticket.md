@@ -1,6 +1,16 @@
 ---
 title: Ticket Creation Rules
 site_support_id: case_management
+products:
+  - name: Cloud Security
+    url: /security/cloud_security_management/
+    icon: cloud-security-management
+  - name: Code Security
+    url: /security/code_security/
+    icon: security-code-security
+  - name: App and API Protection
+    url: /security/application_security/
+    icon: app-sec
 further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
@@ -43,22 +53,15 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
      - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
      - **Assignee** (optional): Specify a user to assign automatically created tickets to.
      - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
+     - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
    - **Case Management**
      - **Case Management Project**: Select an existing Case Management project, or create one.
      - **Assignee** (optional): Specify a user to assign automatically created cases to.
 1. Under **Rate limit**, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
-1. Click **Save**. The rule applies to new findings immediately, and ticket creation can take a few minutes after a finding is detected.
+1. To test the rule before saving, click **Test Rule**, select a matching finding, and click **Run Test**. After the test completes, you can view the created ticket or detach the test ticket from the finding.
+1. Click **Save**. The rule applies to new findings only. It can take up to a few minutes after a finding is detected to create the corresponding ticket.
 
 **Note**: Ticket creation rules only create tickets for new findings. Datadog does not create retroactive tickets for existing findings when you create a rule.
-
-## Test a ticket creation rule
-
-After configuring a rule, you can test it to verify the configuration before saving:
-
-1. After filling in the rule form, click **Test Rule**.
-1. Select a matching finding to use for the test.
-1. Click **Run Test**.
-1. After the test completes, you can view the created ticket, or detach the test ticket from the finding.
 
 ## Identify automatically created tickets
 
