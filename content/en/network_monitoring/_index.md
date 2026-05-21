@@ -38,6 +38,8 @@ cascade:
     {{< nextlink href="network_monitoring/cloud_network_monitoring" >}}<u>Cloud Network Monitoring</u>: Explore metrics for point to point communication on your infrastructure.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/dns" >}}<u>DNS Monitoring</u>: Diagnose and debug DNS server issues.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices" >}}<u>Network Device Monitoring</u>: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/netflow" >}}<u>NetFlow Monitoring</u>: Analyze network traffic flows to identify top talkers and bandwidth usage across your infrastructure.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/network_path" >}}<u>Network Path</u>: Investigate the routes network traffic follows from source to destination to pinpoint network issues.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

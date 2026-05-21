@@ -1,5 +1,6 @@
 ---
 title: "Metric submission: PowerShell"
+description: "Submit custom metrics to Datadog from PowerShell using the API or the Datadog Agent."
 aliases:
   - /developers/faq/powershell-api-examples
   - /developers/faq/submitting-metrics-via-powershell

@@ -63,12 +63,12 @@ The standard attribute table comes with a set of [predefined standard attributes
 ### Create a new standard attribute
 **Admin users** can curate the standard attribute list:
 1. Navigate to the standard attribute [configuration page][3].
-1. Click **New Standard Attribute**.
+1. Click {{< ui >}}New Standard Attribute{{< /ui >}}.
 1. Define the standard attribute:
-    - `Path`: The path of the standard attributes as you would find it in your JSON (for example, network.client.ip).
-    - `Type`: (`string`, `integer`, `double`, `boolean`): The type of the attribute, which is used to cast elements of the remapping list.
-    - `Description`: Human-readable description of the attribute.
-    - (Optional)`Remapping list`: Comma-separated list of non-compliant attributes that should be remapped to the standard attribute.
+    - {{< ui >}}Path{{< /ui >}}: The path of the standard attributes as you would find it in your JSON (for example, network.client.ip).
+    - {{< ui >}}Type{{< /ui >}}: (`string`, `integer`, `double`, `boolean`): The type of the attribute, which is used to cast elements of the remapping list.
+    - {{< ui >}}Description{{< /ui >}}: Human-readable description of the attribute.
+    - (Optional) {{< ui >}}Remapping list{{< /ui >}}: Comma-separated list of non-compliant attributes that should be remapped to the standard attribute.
 
 ### Default standard attribute list
 
@@ -123,7 +123,7 @@ See [Alias Facets][34] for additional information.
 [11]: /standard-attributes/?product=log+management&search=geolocation
 [12]: /standard-attributes/?search=http.&product=log+management
 [13]: /integrations/amazon_elb/
-[14]: /logs/log_configuration/processors/#url-parser
+[14]: /logs/log_configuration/processors/url_parser/
 [15]: /standard-attributes/?search=logger+error&product=log+management
 [16]: /standard-attributes/?search=db&product=log+management
 [17]: /integrations/cassandra/
@@ -131,7 +131,7 @@ See [Alias Facets][34] for additional information.
 [19]: /integrations/amazon_rds/
 [20]: /integrations/elastic/
 [21]: /standard-attributes/?search=duration&product=log+management
-[22]: /logs/log_configuration/processors/#remapper
+[22]: /logs/log_configuration/processors/remapper/
 [23]: /tracing/app_analytics/search/
 [24]: /standard-attributes/?search=usr&product=log+management
 [25]: /standard-attributes/?search=syslog&product=log+management
