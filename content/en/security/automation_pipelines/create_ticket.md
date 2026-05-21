@@ -19,39 +19,37 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
 
 ## Create a ticket creation rule
 
-1. On the [Automation Pipelines][2] page, click **Add a New Rule** and select **Create Ticket**.
-1. Enter a descriptive name for the rule, for example, **Critical vulnerabilities for engineering team**.
-1. Use the following boxes to configure the rule criteria:
+1. In Datadog, go to **Security** > **Settings** > [Findings Automation][2]. Click **Add a New Rule**, then select **Create Ticket**. The Create a New Rule page opens.
+1. Under **Rule name**, enter a descriptive name for the rule; for example, "Critical vulnerabilities for engineering team".
+1. Add your rule criteria into the following fields:
     - **Any of these types**: The types of findings that the rule should check for. Available types include:
-      - **Runtime Code Vulnerability**
-      - **Static Code Vulnerability**
-      - **Library Vulnerability**
-      - **Secret**
-      - **Infrastructure as Code**
-      - **Container Image Vulnerability**
-      - **Host Vulnerability**
-      - **Misconfiguration**
-      - **Attack Path**
-      - **Identity Risk**
-      - **API Security**
+      - Runtime Code Vulnerability
+      - Static Code Vulnerability
+      - Library Vulnerability
+      - Secret
+      - Infrastructure as Code
+      - Container Image Vulnerability
+      - Host Vulnerability
+      - Misconfiguration
+      - Attack Path
+      - Identity Risk
+      - API Security
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Select the ticketing system and configure the ticket destination:
-
-    **Jira**
-    - **Jira Account**: Select the Atlassian instance to use.
-    - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
-    - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
-    - **Assignee** (optional): Specify a user to assign automatically created tickets to.
-    - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
-
-    **Case Management**
-    - **Case Management Project**: Select an existing Case Management project, or create a new one.
-    - **Assignee** (optional): Specify a user to assign automatically created cases to.
-1. Set the **Daily ticket limit**: The maximum number of tickets this rule can create per UTC day.
+   - **Jira**
+     - **Jira Account**: Select the Atlassian instance to use.
+     - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+     - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
+     - **Assignee** (optional): Specify a user to assign automatically created tickets to.
+     - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
+   - **Case Management**
+     - **Case Management Project**: Select an existing Case Management project, or create one.
+     - **Assignee** (optional): Specify a user to assign automatically created cases to.
+1. Under **Rate limit**, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
 1. Click **Save**. The rule applies to new findings immediately, and ticket creation can take a few minutes after a finding is detected.
 
-**Note**: Ticket creation rules only create tickets for new findings. Existing findings are not retroactively ticketed when you create a rule.
+**Note**: Ticket creation rules only create tickets for new findings. Datadog does not create retroactive tickets for existing findings when you create a rule.
 
 ## Test a ticket creation rule
 
@@ -64,7 +62,7 @@ After configuring a rule, you can test it to verify the configuration before sav
 
 ## Identify automatically created tickets
 
-{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Case Management ticket popup showing case VV-3722 was created by an Automation Rule with a lightning bolt indicator, and a link to view all findings with tickets from the same rule" style="width:60%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Case Management ticket popup showing a case created by an Automation Rule, indicated with a lightning bolt icon, and a link to view all findings with tickets that were created from the same rule" style="width:60%;" >}}
 
 Tickets created by a rule are marked with a lightning bolt indicator in the findings side panel and explorer views. Hovering over the indicator shows the automation rule responsible for the ticket and provides a link to the rule.
 
@@ -80,11 +78,11 @@ Each rule has a configurable daily ticket limit that resets at midnight UTC. Whe
 
 If a project configuration error prevents ticket creation—for example, if the connected Jira project is no longer valid—Datadog automatically disables the rule and marks it as broken.
 
-{{< img src="security/automation_pipelines/ticket_creation_broken_rule.png" alt="Automation Pipelines list showing a ticket creation rule with a red warning triangle on a rule, and a tooltip reading 'Rule auto-disabled due to a ticketing integration error'" style="width:100%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_broken_rule.png" alt="Automation Pipelines list showing a ticket creation rule with a warning tooltip that says 'Rule auto-disabled due to a ticketing integration error'" style="width:100%;" >}}
 
 To resume automatic ticket creation, fix the project configuration and re-enable the rule.
 
-## Disabling or deleting a rule
+## Disabled or deleted rules
 
 When you disable or delete a ticket creation rule, tickets that were previously created by the rule remain attached to their findings. They are not detached or deleted.
 
