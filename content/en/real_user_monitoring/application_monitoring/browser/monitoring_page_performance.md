@@ -74,10 +74,10 @@ RUM reports the element that is associated with each Core Web Vital instance:
 
 The RUM Browser SDK reports each Core Web Vital under different conditions. If a vital is missing from a view event, the SDK most likely did not capture a value for it.
 
-- **Largest Contentful Paint**: Reported on the initial view only. Captured when the `largest-contentful-paint` PerformanceObserver entry fires before the page is hidden and before the user's first interaction. Not reported if the page starts hidden, if the user interacts before any LCP entry arrives, or after a 10-minute cap.
-- **Interaction to Next Paint**: Reported on every view, including SPA route changes. Requires at least one user interaction during the view's lifetime. If the user never interacts, no INP value is emitted. Requires browser support for the `event` PerformanceObserver entry type and `PerformanceEventTiming.interactionId`. If unsupported, no INP value is emitted.
-- **Cumulative Layout Shift**: Reported on every view, including SPA route changes. Requires browser support for the `layout-shift` PerformanceObserver entry type and `WeakRef`. If unsupported, no CLS value is emitted.
-- **First Contentful Paint**: Reported on the initial view only. Captured when the entry fires before the page is hidden, within 10 minutes of view start.
+- **Largest Contentful Paint**: Reported on the initial view only. Captured when the `largest-contentful-paint` PerformanceObserver entry fires before the page is hidden and before the user's first interaction. Not reported if the page starts hidden, if the user interacts before any LCP entry arrives, or after a 10-minute cap. See [LCP: Differences between the metric and the API](https://web.dev/articles/lcp#differences-metric-api) for the upstream definition.
+- **Interaction to Next Paint**: Reported on every view, including SPA route changes. Requires at least one user interaction during the view's lifetime (see [INP on web.dev](https://web.dev/articles/inp)). If the user never interacts, no INP value is emitted. Requires browser support for the `event` PerformanceObserver entry type and `PerformanceEventTiming.interactionId`. If unsupported, no INP value is emitted.
+- **Cumulative Layout Shift**: Reported on every view, including SPA route changes. Requires browser support for the [`layout-shift` PerformanceObserver entry type](https://web.dev/articles/cls). The SDK also relies on `WeakRef` internally; if either is missing, no CLS value is emitted.
+- **First Contentful Paint**: Reported on the initial view only (see [FCP on web.dev](https://web.dev/articles/fcp)). Captured when the entry fires before the page is hidden. The SDK applies a 10-minute ceiling per view.
 
 Values are captured up to the point of backgrounding; they are not discarded if a page is later hidden. A page that is hidden at view start (for example, opened in a background tab) emits no LCP or FCP.
 
