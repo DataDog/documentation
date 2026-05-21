@@ -6107,16 +6107,21 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_migration_tooling
       weight: 313
+    - name: JSON Schema Validation
+      url: feature_flags/concepts/json_schema_validation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_json_schema_validation
+      weight: 314
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 309
+      weight: 315
     - name: MCP Server
       url: feature_flags/concepts/feature_flag_mcp_server
       parent: feature_flags_concepts
       identifier: feature_flags_mcp_server
-      weight: 310
+      weight: 316
     - name: .NET
       url: feature_flags/server/dotnet
       parent: feature_flags_server
