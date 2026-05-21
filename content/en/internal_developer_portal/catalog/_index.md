@@ -24,13 +24,14 @@ algolia:
   tags: ['software catalog', 'catalog']
 ---
 
-{{< img src="tracing/internal_developer_portal/catalog/landing_page.mp4" video=true alt="Navigating the IDP Catalog" style="width:100%;" >}}
 
 ## Overview
 
 [Catalog][1] provides a centralized, dynamic view of your software ecosystem, enabling teams to track ownership, monitor performance, manage dependencies, and enforce security and compliance standards.
 
 Built on real-time telemetry and automated metadata collection, Catalog offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
+
+{{< img src="tracing/internal_developer_portal/catalog/tour.mp4" video=true alt="Navigating the IDP Catalog" style="width:100%;" >}}
 
 ## What you can do in Catalog
 

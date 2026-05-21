@@ -52,7 +52,7 @@ To create an entity definition:
 
 1. Submit the metadata by clicking **Save Entry** or by running the provided cURL command.
 
-   **Note**: You must have [Catalog Write permission][2] to save the entry.
+   **Note**: You must have [Service Catalog Write permission][2] to save the entry.
 
 
 ## Through automation
