@@ -43,13 +43,16 @@
 #    neither. Do NOT add `track_progress: true` or
 #    `trigger_phrase:` without redoing the tool-surface analysis.
 #
-# 6. Claude's tool surface is `Read, Glob, Grep` only. No MCP
-#    write tools (no inline-comment server), no `Bash`, no `Edit`,
-#    no `Write`, no `MultiEdit`, no `NotebookEdit`. Claude's only
-#    output channel is its final stdout message, which the
-#    workflow parses as JSON. Re-introducing any write-capable
-#    tool collapses the separation between content generation
-#    (review job) and posting (post job).
+# 6. Claude's tool surface is `Read, Glob, Grep` only, enforced
+#    in four ways: `--tools` restricts the available set,
+#    `--allowedTools` auto-approves those three, `--permission-mode
+#    dontAsk` blocks any permission prompts, and `--disallowedTools`
+#    explicitly denies `Bash, Edit, Write, MultiEdit, NotebookEdit`
+#    by name. No MCP write tools (no inline-comment server) are
+#    mounted. Claude's only output channel is its final stdout
+#    message, which the workflow parses as JSON. Re-introducing
+#    any write-capable tool collapses the separation between
+#    content generation (review job) and posting (post job).
 #
 # 6a. Trust boundary in the review job: the workspace root is the
 #     *default branch* (trusted), sparse-checked-out to just
@@ -180,11 +183,17 @@ jobs:
       # Workspace contains only what the workflow needs to trust:
       # - `.github/scripts/*` and `.github/schemas/*`: required by
       #   the `github-script` step.
-      # - `.claude/`: the substantive review guide
-      #   (`pr-review.md`) that defines style rules, focus areas,
-      #   and per-finding formatting. Reading it from
-      #   `__untrusted/` would let the PR rewrite its own review
-      #   instructions.
+      # - `.claude/pr-review.md`: the substantive review guide
+      #   (style rules, focus areas, per-finding formatting).
+      #   Reading it from `__untrusted/` would let the PR rewrite
+      #   its own review instructions.
+      #
+      # Only `pr-review.md` from `.claude/` is checked out — NOT the
+      # full directory. `.claude/settings.json` enables Claude Code
+      # plugins from external marketplaces, which can register hooks,
+      # MCP servers, and agents that would expand the review job's
+      # tool surface beyond `Read,Glob,Grep`. Keeping `settings.json`
+      # out of the workspace prevents the action from loading it.
       # All come from the default branch, so PR-side edits to any
       # of these files have no effect on the review.
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -195,7 +204,7 @@ jobs:
         sparse-checkout: |
           .github/scripts
           .github/schemas
-          .claude
+          .claude/pr-review.md
         sparse-checkout-cone-mode: false
 
     - name: Checkout PR head into __untrusted/
@@ -241,11 +250,23 @@ jobs:
         # supported, env scrub, token-free git config, cleanup).
         # Do NOT replace with '*' or a real username.
         allowed_non_write_users: "__force_sandbox_dummy__"
-        # Read-only tool surface. No MCP write tools, no Bash, no
-        # Edit/Write. Claude's only output is its final stdout
-        # message, which the workflow parses as JSON below.
+        # Read-only tool surface. Defense in depth:
+        # - `--tools` restricts the available tool set entirely.
+        # - `--allowedTools` auto-approves the same three tools so
+        #   they run without a permission prompt.
+        # - `--permission-mode dontAsk` ensures the model never
+        #   gets a permission prompt to bypass.
+        # - `--disallowedTools` explicitly denies the write/exec
+        #   tools by name as a final belt-and-suspenders.
+        # - No MCP write tools are mounted, so the inline-comment
+        #   server is unavailable. Claude's only output is its
+        #   final stdout message, which the workflow parses as
+        #   JSON below.
         claude_args: |
+          --tools "Read,Glob,Grep"
           --allowedTools "Read,Glob,Grep"
+          --permission-mode dontAsk
+          --disallowedTools "Bash,Edit,Write,MultiEdit,NotebookEdit"
         prompt: |
           # Datadog documentation PR review
 
