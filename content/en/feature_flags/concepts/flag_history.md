@@ -1,6 +1,8 @@
 ---
 title: Feature Flag History
 description: "Track and manage the history of your feature flags"
+aliases:
+  - /feature_flags/history
 further_reading:
 - link: "/getting_started/feature_flags/"
   tag: "Documentation"

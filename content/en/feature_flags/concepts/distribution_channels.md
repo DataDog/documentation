@@ -1,0 +1,46 @@
+---
+title: Distribution Channels
+description: Control which SDKs receive your feature flag configuration with distribution channels.
+further_reading:
+- link: "/feature_flags/concepts/variants_and_flag_types"
+  tag: "Documentation"
+  text: "Variants and Flag Types"
+- link: "/feature_flags/client/"
+  tag: "Documentation"
+  text: "Client-Side SDKs"
+- link: "/feature_flags/server/"
+  tag: "Documentation"
+  text: "Server-Side SDKs"
+---
+
+## Overview
+
+Distribution channels allow you to control which SDKs your flag configuration is exposed to. When you create or edit a flag, you can set distribution channels to **Client**, **Server**, or **both**.
+
+## Why use distribution channels
+
+### Protect sensitive configuration
+
+Client-side SDKs fetch flag configuration over the network. Flag keys and variant values sent to client SDKs can be visible in API requests. Restrict server-only flags to the **Server** distribution channel to avoid exposing sensitive flag keys or variant values to client SDKs.
+
+### Reduce payload size
+
+If you work with a large number of feature flags, limiting which flags each SDK type receives can reduce the size of the configuration payload. This can improve performance for client and server SDK initialization.
+
+## Configure distribution channels
+
+When you [create a feature flag][1], select which distribution channels should receive the flag:
+
+- **Client**: Client-side SDKs only (browser, mobile, and other client SDKs)
+- **Server**: Server-side SDKs only
+- **Both**: All SDK types
+
+<div class="alert alert-warning">
+  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
+</div>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/feature-flags/create
