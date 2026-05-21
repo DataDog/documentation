@@ -9,6 +9,11 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="#"
+ btn_hidden="true" header="Join the Preview!">}}
+The Databricks (Zerobus) destination is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
 Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus Ingest API][1] and authenticates to Databricks with an OAuth service principal.
@@ -112,7 +117,7 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 ### Convert string timestamps to timestamp format
 
-If your logs have timestamps in string format and your Databricks table has a timestamp column declared as a [`TIMESTAMP` type][11], you must convert the string to timestamp format before sending logs to the Databricks (Zerobus) destination. Databricks (Zerobus) can only convert the timestamp format to its `TIMESTAMP` type. 
+If your logs have timestamps in string format and your Databricks table has a timestamp column declared as a [`TIMESTAMP` type][11], you must convert the string to timestamp format before sending logs to the Databricks (Zerobus) destination. Databricks (Zerobus) can only convert the timestamp format to its `TIMESTAMP` type.
 
 If you do not convert the string timestamp, the Worker throws an error similar to:
 
