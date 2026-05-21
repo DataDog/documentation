@@ -223,7 +223,7 @@ From any of these views, click {{< ui >}}Optimize{{< /ui >}} on a workload to se
 
 After you identify a workload to optimize, inspect its {{< ui >}}Scaling Recommendation{{< /ui >}}. Click {{< ui >}}Configure Recommendation{{< /ui >}} to add constraints or adjust target utilization levels before enabling.
 
-There are three ways to enable autoscaling for a workload. Pick the path that matches how you ship workloads today.
+There are three ways to enable autoscaling for a workload. Pick the path that matches how you deploy workloads today.
 
 | Path | Best for | Where you start | Ongoing management |
 |------|----------|-----------------|--------------------|
@@ -358,9 +358,13 @@ Pick this template when a workload can't be scaled horizontally, or when you wan
 
 By default, the controller applies vertical recommendations by triggering a rollout (evict and recreate pods). Cluster Agent **7.78+** also supports **in-place pod resizing**, which updates a pod's CPU and memory requests and limits without restarting it. In-place resize is opt-in: set `autoscaling.workload.in_place_vertical_scaling.enabled: true` on the Cluster Agent (or set the environment variable `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`).
 
-Your cluster must also expose the `pods/resize` subresource. This is the default in Kubernetes 1.33+ where the `InPlacePodVerticalScaling` feature gate is beta. On Kubernetes 1.27 to 1.32 the feature gate must be enabled on `kube-apiserver` and every `kubelet`.
+Your cluster must also expose the `pods/resize` subresource. This is the default in Kubernetes 1.33+ where the `InPlacePodVerticalScaling` feature gate is beta. On Kubernetes 1.27 to 1.32, the feature gate must be enabled on `kube-apiserver` and every `kubelet`.
 
-When both prerequisites are met, workloads with `applyPolicy.update.strategy: Auto` (the default) resize in place. If the kubelet reports a resize as `Infeasible`, the controller falls back to a rollout. To force a workload to always use rollout-based vertical scaling regardless of the cluster setting, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`.
+When both prerequisites are met:
+
+- **Default**: Workloads with `applyPolicy.update.strategy: Auto` (the default) resize in place.
+- **Fallback**: If the kubelet reports a resize as `Infeasible`, the controller falls back to a rollout.
+- **Opt-out**: To force a workload to always use rollout-based vertical scaling regardless of the cluster setting, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -573,7 +577,7 @@ Profile activation supports `Deployment` and `StatefulSet`. For other kinds (for
 
 ### Deploy recommendations manually
 
-If you want Datadog's recommendations without enabling autoscaling, you can apply them manually as a one-off. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendation, or click {{< ui >}}Export Recommendation{{< /ui >}} to see a generated `kubectl patch` command. Datadog continues to refresh the recommendation, but the cluster only changes when you reapply.
+If you want Datadog's recommendations without enabling autoscaling, you can apply them manually as a one-off. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendation. You can also click {{< ui >}}Export Recommendation{{< /ui >}} to see a generated `kubectl patch` command. Datadog continues to refresh the recommendation, but the cluster only changes when you reapply.
 
 ## Manage workloads at scale
 
