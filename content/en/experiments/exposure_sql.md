@@ -86,7 +86,7 @@ After you save an Exposure SQL Model, Datadog scans the model for distinct exper
 
 {{< img src="/product_analytics/experiment/exposure-sql/manually-add-flag.png" alt="The feature flag selection modal with a text field to manually enter an experiment ID that was not found in the latest warehouse scan." style="width:80%;" >}}
 
-1. Select the Exposure SQL Model that tracks the flag.
+3. Select the Exposure SQL Model that tracks the flag.
 
 {{< img src="/product_analytics/experiment/exposure-sql/select-exposure-sql.png" alt="The experiment setup page with a dropdown to select which Exposure SQL Model tracks a manually entered experiment ID." style="width:80%;" >}}
 
