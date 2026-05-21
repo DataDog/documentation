@@ -65,18 +65,10 @@ $conv-float-btn-bg-hover: #4f2384;
 
 .conv-search-sidebar {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.96);
     z-index: 10000;
-    width: 920px;
-    max-width: 92vw;
-    height: 733px;
-    max-height: 90vh;
     background: white;
     display: flex;
     flex-direction: column;
-    border-radius: 28px;
     box-shadow:
         0 0 8px 0 rgba(75, 179, 255, 0.4),
         0 0 11px 0 rgba(255, 209, 228, 0.2),
@@ -89,38 +81,89 @@ $conv-float-btn-bg-hover: #4f2384;
         opacity 0.25s ease-out,
         visibility 0.25s ease-out;
 
-    &.open {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-        visibility: visible;
-    }
-
-
-    @media (min-width: 1280px) {
-        width: clamp(920px, 66vw, 1408px);
+    // --- Mode: Full screen (default centered modal) -----------------------
+    &.mode-fullscreen {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.96);
+        width: 920px;
         max-width: 92vw;
-    
-        height: clamp(733px, 79vh, 915px);
+        height: 733px;
         max-height: 90vh;
-    
-    }
-
-    @media (max-width: 640px) {
-        inset: 0;
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100%;
-        max-width: none;
-        height: 100%;
-        max-height: none;
-        border-radius: 0;
+        border-radius: 28px;
 
         &.open {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // --- Mode: Floating (small bottom-right panel) ------------------------
+    &.mode-floating {
+        bottom: 24px;
+        right: 24px;
+        transform: translateY(8px) scale(0.98);
+        transform-origin: bottom right;
+        width: 420px;
+        max-width: calc(100vw - 32px);
+        height: 620px;
+        max-height: calc(100vh - 48px);
+        border-radius: 20px;
+
+        &.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // --- Mode: Sidebar (right-docked, full height) ------------------------
+    &.mode-sidebar {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transform: translateX(16px);
+        transform-origin: right center;
+        width: 440px;
+        max-width: 92vw;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow:
+            -8px 0 24px 0 rgba(0, 0, 0, 0.08),
+            0 0 16px 0 rgba($conv-search-purple, 0.25);
+
+        &.open {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // --- Small viewports: any mode collapses to full takeover -------------
+    @media (max-width: 640px) {
+        &.mode-fullscreen,
+        &.mode-floating,
+        &.mode-sidebar {
+            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             transform: none;
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            max-height: none;
+            border-radius: 0;
+
+            &.open {
+                transform: none;
+            }
         }
     }
 }
+
 
 .conv-search-aurora {
     position: absolute;
@@ -145,7 +188,9 @@ $conv-float-btn-bg-hover: #4f2384;
     border-bottom: 1px solid $conv-search-border;
     flex-shrink: 0;
     position: relative;
-    z-index: 1;
+    // Sits above .conv-search-messages (z-index: 1) so the view-mode dropdown
+    // can overlap the messages area instead of being clipped behind it.
+    z-index: 2;
 
     @media (max-width: 640px) {
         padding: 8px 16px;
@@ -309,7 +354,7 @@ $conv-float-btn-bg-hover: #4f2384;
     background: transparent;
     border: none;
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     color: $conv-neutral-500;
@@ -324,8 +369,139 @@ $conv-float-btn-bg-hover: #4f2384;
         width: 18px;
         height: 18px;
     }
+}
 
-    @media (max-width: 640px) {
-        display: flex;
+// --- View-mode switcher (button + dropdown) ----------------------------------
+.conv-search-mode-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.conv-search-mode-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $conv-neutral-500;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover,
+    &[aria-expanded="true"] {
+        background: rgba(0, 0, 0, 0.05);
+        color: $conv-neutral-700;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+}
+
+.conv-search-mode-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    padding: 6px;
+    background: white;
+    border: 1px solid $conv-search-border;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 10002;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        visibility 0.15s ease;
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+.conv-search-mode-menu-label {
+    padding: 6px 10px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $conv-neutral-500;
+}
+
+.conv-search-mode-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    color: $conv-neutral-700;
+    text-align: left;
+    transition: background 0.12s ease;
+
+    &:hover {
+        background: $conv-primary-100;
+    }
+
+    &[aria-checked="true"] {
+        color: $conv-search-purple-dark;
+
+        .conv-search-mode-option-check {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .conv-search-mode-option-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        color: $conv-neutral-600;
+        flex-shrink: 0;
+    }
+
+    &[aria-checked="true"] .conv-search-mode-option-icon {
+        color: $conv-search-purple-dark;
+    }
+
+    .conv-search-mode-option-label {
+        flex: 1;
+    }
+
+    .conv-search-mode-option-check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        color: $conv-search-purple-dark;
+        visibility: hidden;
+        opacity: 0;
+        flex-shrink: 0;
+    }
+}
+
+// Hide the mode switcher on small viewports — all modes collapse to fullscreen takeover.
+@media (max-width: 640px) {
+    .conv-search-mode-switcher {
+        display: none;
     }
 }

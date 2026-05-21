@@ -24,6 +24,23 @@ const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
 const RENDER_THROTTLE = 50;
 
+const VIEW_MODES = ['fullscreen', 'floating', 'sidebar'];
+const DEFAULT_VIEW_MODE = 'fullscreen';
+const VIEW_MODE_STORAGE_KEY = 'docs-ai-view-mode';
+
+function readStoredViewMode() {
+    try {
+        const stored = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
+        return VIEW_MODES.includes(stored) ? stored : DEFAULT_VIEW_MODE;
+    } catch (_) {
+        return DEFAULT_VIEW_MODE;
+    }
+}
+
+function persistViewMode(mode) {
+    try { localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode); } catch (_) { /* ignore */ }
+}
+
 // Auto-rotated client-side messages shown while we wait for the first server `thinking` event.
 // Aligned with the mapped server messages below so the user sees consistent copy either way.
 const LOADING_MESSAGES = [
@@ -87,8 +104,12 @@ class ConversationalSearch {
         this.homeAiBtnVisible = false;
         this.ready = false;
 
+        this.viewMode = readStoredViewMode();
+        this.isModeMenuOpen = false;
+
         if (!this.createElements()) return;
         this.bindEvents();
+        this.applyViewMode(this.viewMode);
         this.ready = true;
     }
 
@@ -143,6 +164,9 @@ class ConversationalSearch {
         this.messagesContainer = messagesContainer;
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
+        this.modeToggleBtn = this.sidebar.querySelector('.conv-search-mode-toggle');
+        this.modeMenu = this.sidebar.querySelector('.conv-search-mode-menu');
+        this.modeOptions = Array.from(this.sidebar.querySelectorAll('.conv-search-mode-option'));
         return true;
     }
 
@@ -189,13 +213,45 @@ class ConversationalSearch {
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isOpen) this.close();
+            if (e.key !== 'Escape') return;
+            if (this.isModeMenuOpen) {
+                this.closeModeMenu();
+                return;
+            }
+            if (this.isOpen) this.close();
         });
 
+        this.bindModeSwitcher();
         this.bindHomepageObserver();
         this.bindTooltipEvents();
         this.bindClickDelegation();
         this.bindScrollFade();
+    }
+
+    bindModeSwitcher() {
+        if (!this.modeToggleBtn || !this.modeMenu) return;
+
+        this.modeToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (this.isModeMenuOpen) this.closeModeMenu();
+            else this.openModeMenu();
+        });
+
+        this.modeOptions.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const mode = btn.dataset.mode;
+                if (mode) this.setViewMode(mode);
+                this.closeModeMenu();
+            });
+        });
+
+        // Click anywhere else closes the dropdown.
+        document.addEventListener('click', (e) => {
+            if (!this.isModeMenuOpen) return;
+            if (this.modeMenu.contains(e.target) || this.modeToggleBtn.contains(e.target)) return;
+            this.closeModeMenu();
+        });
     }
 
     bindHomepageObserver() {
@@ -308,6 +364,50 @@ class ConversationalSearch {
         });
     }
 
+    // --- View mode ---------------------------------------------------------------
+
+    applyViewMode(mode) {
+        if (!VIEW_MODES.includes(mode)) mode = DEFAULT_VIEW_MODE;
+        this.viewMode = mode;
+
+        VIEW_MODES.forEach((m) => this.sidebar.classList.toggle(`mode-${m}`, m === mode));
+
+        this.modeOptions.forEach((btn) => {
+            const isActive = btn.dataset.mode === mode;
+            btn.setAttribute('aria-checked', String(isActive));
+        });
+
+        // Floating/sidebar modes coexist with page content — no backdrop, no scroll lock.
+        const isFullscreen = mode === 'fullscreen';
+        if (this.isOpen) {
+            this.overlay.classList.toggle('open', isFullscreen);
+            document.body.style.overflow = isFullscreen ? 'hidden' : '';
+        }
+    }
+
+    setViewMode(mode) {
+        if (!VIEW_MODES.includes(mode) || mode === this.viewMode) return;
+        this.logInteraction('view_mode_changed', { view_mode: mode });
+        this.applyViewMode(mode);
+        persistViewMode(mode);
+    }
+
+    openModeMenu() {
+        if (!this.modeMenu) return;
+        this.isModeMenuOpen = true;
+        this.modeMenu.classList.add('open');
+        this.modeMenu.setAttribute('aria-hidden', 'false');
+        this.modeToggleBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    closeModeMenu() {
+        if (!this.modeMenu) return;
+        this.isModeMenuOpen = false;
+        this.modeMenu.classList.remove('open');
+        this.modeMenu.setAttribute('aria-hidden', 'true');
+        this.modeToggleBtn.setAttribute('aria-expanded', 'false');
+    }
+
     // --- Open / Close / Reset ----------------------------------------------------
 
     open(trigger = 'entry_button') {
@@ -320,9 +420,13 @@ class ConversationalSearch {
 
         this.isOpen = true;
         this.sidebar.classList.add('open');
-        this.overlay.classList.add('open');
         this.floatButton.classList.add('hidden');
-        document.body.style.overflow = 'hidden';
+
+        const isFullscreen = this.viewMode === 'fullscreen';
+        if (isFullscreen) {
+            this.overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
         setTimeout(() => this.input.focus(), 300);
     }
@@ -340,6 +444,7 @@ class ConversationalSearch {
         this.sidebar.classList.remove('open');
         this.overlay.classList.remove('open');
         document.body.style.overflow = '';
+        this.closeModeMenu();
 
         if (!this.isHomepage || !this.homeAiBtnVisible) {
             this.floatButton.classList.remove('hidden');
