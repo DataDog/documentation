@@ -1,23 +1,23 @@
 ---
 title: AI Impact
-description: "Measure the impact of AI coding assistants on your software delivery performance with DORA Metrics."
+description: "Measure the impact of AI coding assistants on your software delivery performance."
 aliases:
 - /dora_metrics/ai-impact/
-private: true
+- /dora_metrics/ai_impact/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up DORA Metrics'
-- link: '/dora_metrics/calculation/'
+- link: '/delivery_performance/dora_metrics/calculation/'
   tag: 'Documentation'
   text: 'Learn how DORA metrics are calculated'
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-AI Impact is in Preview.
+AI Impact is available to all Datadog customers in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -36,7 +36,8 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 | Tool | Per-Commit Granularity | User Activity Granularity |
 |------|-----------|---------------|
 | [Cursor][2] | &#x2714; | &#x2714; |
-| [Claude Code][3] |  | &#x2714; |
+| [Claude Code API][3] |  | &#x2714; |
+| GitHub Copilot (Coming soon) |  | &#x2714; |
 
 ### Granularity modes
 
@@ -50,7 +51,7 @@ Per-Commit
 User Activity
 : Compares delivery metrics between active and non-active users of the selected tool. A user is considered active on a given day if they performed any interaction with the tool (for example, accepted a suggestion, used chat, or triggered an agent). Commits are attributed to the active or non-active group based on their author's activity on the day the commit was created.
 
-[1]: /dora_metrics/setup/
+[1]: /delivery_performance/dora_metrics/setup/
 [2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
 [3]: /integrations/anthropic-usage-and-costs/
 
@@ -65,6 +66,8 @@ User Activity
 | Recovery Time | Median recovery time of failed deployments containing AI-assisted commits compared to deployments without. |
 
 <div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
+
+<div class="alert alert-info">For GitHub only, PR-level metrics exclude PRs whose commits are entirely bot-authored. This keeps automated activity out of the non-AI baseline.</div>
 
 ## Further Reading
 

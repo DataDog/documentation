@@ -1,11 +1,13 @@
 ---
 title: Change Failure Detection
 description: "Learn how to configure change failure detection in DORA Metrics using rollbacks, revert PRs, and custom PR filters."
+aliases:
+- /dora_metrics/change_failure_detection/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up data sources for DORA Metrics'
 ---
@@ -48,7 +50,7 @@ When a rollback is detected, the change failure is the first deployment after th
 
 For the sequence V1 → V2 → V3 → V1, the rollback target is the original V1, so V2 is marked as the change failure and V1 as a rollback deployment.
 
-{{< img src="dora_metrics/rollback_example.png" alt="An example of a detected rollback deployment" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/rollback_example.png" alt="An example of a detected rollback deployment" style="width:100%;" >}}
 
 **Note**: Redeploying the same version back‑to‑back (for example, V1 → V1) is not considered a rollback.
 
@@ -180,14 +182,14 @@ To update a deployment's status from the Datadog UI:
 2. Click on a deployment to open the deployment details panel.
 3. In the deployment details panel, select the {{< ui >}}Deployment status{{< /ui >}} from the dropdown to mark the deployment as failed or stable.
 
-{{< img src="dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" video="true" >}}
+{{< img src="delivery_performance/dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" video="true" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/settings/dora
-[2]: /dora_metrics/calculation/#change-failure-rate
-[3]: /dora_metrics/calculation/#failed-deployment-recovery-time
+[2]: /delivery_performance/dora_metrics/calculation/#change-failure-rate
+[3]: /delivery_performance/dora_metrics/calculation/#failed-deployment-recovery-time
 [4]: /api/latest/dora-metrics/#patch-a-deployment-event
 [5]: https://app.datadoghq.com/ci/dora?detail=deployments
