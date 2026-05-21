@@ -8706,6 +8706,19 @@ menu:
           - ListCostTagDescriptions
         unstable: []
         order: 42
+    - name: Search cost recommendations
+      url: '#search-cost-recommendations'
+      identifier: cloud-cost-management-search-cost-recommendations
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchCostRecommendations
+        unstable:
+          - v2
+        order: 61
     - name: List Cloud Cost Management OCI configs
       url: '#list-cloud-cost-management-oci-configs'
       identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
