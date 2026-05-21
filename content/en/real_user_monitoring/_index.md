@@ -156,7 +156,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 ### Additional endpoints for Browser Profiling
 
-When [Browser Profiling][18] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
+When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
 
 | Site | Quota API URL                                             |
 |------|-----------------------------------------------------------|
