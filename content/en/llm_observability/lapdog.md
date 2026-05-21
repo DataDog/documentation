@@ -54,7 +54,7 @@ Lapdog instruments coding agents end-to-end. Each prompt, tool call, and permiss
 ```shell
 lapdog claude
 ```
-Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code with hooks wired up.
+Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code.
 {{% /tab %}}
 {{% tab "Codex" %}}
 ```shell
@@ -154,11 +154,8 @@ Follow these steps to remove Lapdog and the state it writes to your home directo
    {{% /tab %}}
    {{< /tabs >}}
 
-If you used `lapdog --hooks claude` to write hook entries into `~/.claude/settings.json`, see the [Lapdog uninstall guide][2] for the `jq` recipe that strips them cleanly.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md
-[2]: https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md#uninstallation
