@@ -120,7 +120,7 @@ Your Datadog site is {{< region-param key="dd_site" code="true" >}}. Replace `<Y
 
 ### View traces
 
-Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
+Make requests to your application triggering LLM calls and then view traces in the {{< ui >}}Traces{{< /ui >}} tab [of the {{< ui >}}LLM Observability{{< /ui >}} page][3] in Datadog.
 
 If you don't see any traces:
 

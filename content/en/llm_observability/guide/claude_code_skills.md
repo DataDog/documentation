@@ -11,6 +11,9 @@ further_reading:
     - link: '/llm_observability/guide/evaluation_developer_guide'
       tag: 'Guide'
       text: 'Evaluation Developer Guide: Build custom evaluators'
+    - link: 'https://github.com/datadog-labs/agent-skills'
+      tag: 'GitHub'
+      text: 'datadog-labs/agent-skills'
 ---
 
 ## Overview
@@ -33,7 +36,22 @@ The skills produce structured, actionable output — RCA reports with before/aft
 
 - [Claude Code][1] installed and authenticated
 - At least one LLM application [instrumented with LLM Observability][2] and producing traces
-- A data backend: either the Datadog MCP server **or** the `pup` CLI 
+- A data backend: either the Datadog MCP server **or** the `pup` CLI
+
+### Install the skills
+
+The skills are published in the [agent-skills][6] repository. Clone the repository and copy the LLM Observability skills into your Claude Code skills directory:
+
+```shell
+git clone https://github.com/datadog-labs/agent-skills
+cp -r agent-skills/dd-llmo/llm-obs-experiment-analyzer ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-eval-pipeline ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-eval-bootstrap ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-session-classify ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-trace-rca ~/.claude/skills
+```
+
+The skills are available in any Claude Code session after copying.
 
 ### Datadog MCP server
 
@@ -187,3 +205,4 @@ If you are new to evaluating an LLM application, the recommended flow is:
 [3]: /llm_observability/experiments/
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: https://datadoghq.atlassian.net/wiki/spaces/BITSAI/pages/5226692942/pup+CLI
+[6]: https://github.com/datadog-labs/agent-skills

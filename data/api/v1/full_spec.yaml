@@ -22815,6 +22815,10 @@ components:
           description: Shows the average of all normalized Database Monitoring queries over all hours in the current date for all organizations.
           format: int64
           type: integer
+        do_jobs_monitoring_orchestrators_job_hours_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         eph_infra_host_agent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts with the Datadog Agent over all hours in the current date for the given org.
           format: int64
@@ -23826,6 +23830,10 @@ components:
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring normalized queries over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current date for the given org.
           format: int64
           type: integer
         eph_infra_host_agent_sum:
@@ -24845,6 +24853,10 @@ components:
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring Normalized Queries over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_agg_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current month for all organizations.
           format: int64
           type: integer
         end_date:
