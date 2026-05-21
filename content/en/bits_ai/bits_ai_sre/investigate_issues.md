@@ -68,7 +68,7 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits AI 
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
 
-{{< img src="bits_ai/synthetics_bits_sre.png" alt="Synthetic test details page showing the Activity tab with an Alert Triggered timeline event selected, the failure summary panel, and the Investigate with Bits AI SRE button in the Next Steps panel" style="width:100%;" >}}
+{{< img src="bits_ai/synthetics_investigate_sre.png" alt="Synthetic test details page showing the Activity tab with an Alert Triggered timeline event selected, the failure summary panel, and the Investigate with Bits AI SRE button in the Next Steps panel" style="width:100%;" >}}
 
 #### From a Synthetic monitor
 
