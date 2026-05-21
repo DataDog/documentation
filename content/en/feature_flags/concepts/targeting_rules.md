@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Targeting rules define which variant to serve to which subjects. Each rule can include a filter, one or more variants, and an optional percentage rollout. Rules are evaluated in order until a match is found.
+**Targeting rules** define which variant to serve to which subjects. Each rule can include a **filter**, one or more variants, and an optional percentage rollout. Rules are evaluated in order until a match is found.
 
 ## Targeting rule types
 
@@ -33,23 +33,34 @@ To configure targeting rules for a flag:
 
 1. Navigate to **Feature Flags** and select your flag.
 2. Select the environment whose rules you want to modify.
-3. Click **Edit Targeting Rules**.
+3. Click **Add Targeting Rule** (or click on the targeting rule you wish to modify).
+
+{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules and Rollouts section on a feature flag" style="width:100%;" >}}
 
 For each targeting rule:
 
-1. **Define a filter** (optional): If you do not define a filter, the rule matches all subjects in that environment.
-2. **Select variant(s)**: Choose which variant(s) to serve to matching subjects.
-3. **Set the audience percentage** (optional): Serve the variant to a percentage of matching subjects. See [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
+1. **Name your targeting rule**: Give your targeting rule a name to describe the group it targets.
+2. **Define a filter** (optional): If you do not define a filter, the rule matches all subjects in that environment.
+3. **Select variant(s)**: Choose which variant(s) to serve to matching subjects. Click "Split Traffic" to randomize across multiple variants (See [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
+4. **Set the traffic exposure** (optional): Serve the variant to a percentage of matching subjects. (See [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules and Rollouts section on a feature flag" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/configure-targeting-rule.png" alt="Targeting Rule editor sidepanel on a feature flag" style="width:100%;" >}}
+
+After configuring your targeting rules, click Save Changes, then enable the flag in the environment so SDKs can evaluate targeting rules.
+
+<div class="alert alert-info">
+SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in the given environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
+</div>
 
 ## Filters and evaluation context
 
 Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are not supported.
 
-### Example evaluation contexts
+### Example evaluation contexts and filters
 
-Given the following evaluation context, you can construct filters such as `country == "US"`, `tier == "premium"`, or `user_role == "admin"`:
+Given the following evaluation context, you can build filters with different operators—for example, equality, **is one of**, **is not**, or numeric comparisons:
+
+**Evaluation context:**
 
 {{< programming-lang-wrapper langs="javascript,python,go" >}}
 
@@ -63,6 +74,7 @@ await OpenFeature.setContext({
   email: 'user@example.com',
   country: 'US',
   tier: 'premium',
+  account_age_days: 120,
 });
 ```
 
@@ -81,6 +93,7 @@ eval_ctx = EvaluationContext(
         "email": "user@example.com",
         "country": "US",
         "tier": "premium",
+        "account_age_days": 120,
     },
 )
 ```
@@ -93,11 +106,12 @@ eval_ctx = EvaluationContext(
 evalCtx := openfeature.NewEvaluationContext(
     "user-123",
     map[string]interface{}{
-        "user_id":   "user-123",
-        "user_role": "admin",
-        "email":     "user@example.com",
-        "country":   "US",
-        "tier":      "premium",
+        "user_id":          "user-123",
+        "user_role":        "admin",
+        "email":            "user@example.com",
+        "country":          "US",
+        "tier":             "premium",
+        "account_age_days": 120,
     },
 )
 ```
@@ -105,6 +119,13 @@ evalCtx := openfeature.NewEvaluationContext(
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+#### Example filters:
+
+- `country` **is one of** `US`, `CA`
+- `tier` **equals** `premium`
+- `user_role` **is not** `guest`
+- `account_age_days` **greater than** `90`
 
 **Note**: Other SDKs follow the same pattern. See your platform's [client](/feature_flags/client/) or [server](/feature_flags/server/) SDK documentation for evaluation context setup.
 
@@ -115,15 +136,6 @@ Targeting rules are evaluated **in order** from top to bottom:
 1. The SDK evaluates the first rule. If the subject matches the filter (or no filter is defined), the rule may serve a variant.
 2. If the subject does not match, evaluation passes through to the next rule.
 3. If no rule matches, the SDK serves the **default variant** for that environment.
-
-## When targeting rules apply
-
-Targeting rules are evaluated only when **both** of the following are true:
-
-- The flag is **enabled** in the given environment.
-- The flag is **not overridden** with a fixed variant in that environment.
-
-If a feature flag is overridden with a variant in the environment, SDKs ignore all targeting rules and return the overridden variant.
 
 ## Further reading
 

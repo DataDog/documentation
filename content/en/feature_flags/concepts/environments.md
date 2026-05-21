@@ -17,6 +17,27 @@ further_reading:
 
 Environments represent different deployment stages or modes in your software delivery lifecycle—for example, Development, Staging, and Production. Flag configuration is isolated by environment: a flag can be enabled, disabled, overridden, or given targeting rules in one environment without affecting other environments.
 
+## Manage environments
+
+{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list in Feature Flags settings" style="width:100%;" >}}
+
+### Add an environment
+
+1. Navigate to [**Feature Flags > Settings > Environments**][1].
+2. Click **Create Environment**.
+3. Configure the environment name, queries, and whether it is a production environment.
+
+### Edit an environment
+
+1. Navigate to [**Feature Flags > Settings > Environments**][1].
+2. Click the environment you want to edit.
+3. Update the environment settings and save.
+
+### Delete an environment
+
+1. Navigate to [**Feature Flags > Settings > Environments**][1].
+2. Hover over the environment you want to delete, then click the trash icon.
+
 ## Default environments
 
 By default, Datadog creates three environments for your organization:
@@ -29,38 +50,52 @@ You can modify these environments or add new ones to match how your team ships c
 
 ## Production environments
 
-Mark an environment as **production** to indicate that changes in that environment can affect customers. Production environments support additional governance features, such as [approvals][1].
+Mark an environment as **production** to indicate that changes in that environment can affect customers. Production environments support additional governance controls, such as required change approvals.
 
-## Environment queries and the env string
+## Environment queries
 
-Each environment is configured with a **name** and a set of **queries**. When you initialize your Feature Flags SDK, provide an `env` string that matches one of the environment queries for that environment.
+Each environment is configured with a **name** and a set of **queries**. Queries are the `env` or `DD_ENV` strings your applications send at runtime.
 
 Having multiple queries per environment lets you keep the `env` value consistent with the environment you pass to RUM, APM, or StatsD. For example, you might have `staging-eu` and `staging-us` as separate `env` values in your telemetry, but map both to a single **Staging** environment in Feature Flags. That way, you do not need to duplicate flag configuration across multiple Staging environments when you want to enable a flag across all of staging.
 
-## Manage environments
+## Connect environments in the SDK
 
-### Add an environment
+The `env` value you use must match a query configured for the Feature Flags environment you want—for example, `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the **same value** for Feature Flags.
 
-1. Navigate to [**Feature Flags > Settings > Environments**][2].
-2. Click **Create Environment**.
-3. Configure the environment name, queries, and whether it is a production environment.
+### Client-side applications
 
-### Edit an environment
+Set `env` when you initialize the Datadog OpenFeature provider (same value as RUM):
 
-1. Navigate to [**Feature Flags > Settings > Environments**][2].
-2. Hover over the environment you want to edit, then click the pencil icon.
-3. Update the environment settings and save.
+```javascript
+import { DatadogProvider } from '@datadog/openfeature-browser';
+import { OpenFeature } from '@openfeature/web-sdk';
 
-### Delete an environment
+const provider = new DatadogProvider({
+  clientToken: '<CLIENT_TOKEN>',
+  applicationId: '<APPLICATION_ID>',
+  site: 'datadoghq.com',
+  env: 'staging-us', // Must match an environment query in Feature Flags
+  service: '<SERVICE_NAME>',
+  version: '1.0.0',
+});
 
-1. Navigate to [**Feature Flags > Settings > Environments**][2].
-2. Hover over the environment you want to delete, then click the trash icon.
+await OpenFeature.setProviderAndWait(provider);
+```
 
-{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list in Feature Flags settings" style="width:100%;" >}}
+### Server-side applications
+
+Set `DD_ENV` in your deployment environment (shell, container, or orchestrator)—not in application code:
+
+{{< code-block lang="bash" >}}
+export DD_ENV=staging-us  # Must match an environment query in Feature Flags
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+{{< /code-block >}}
+
+This applies to Python, Go, Java, Node.js, Ruby, and .NET server SDKs. See [Server-Side Feature Flags](/feature_flags/server/) for language-specific setup.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /feature_flags/concepts/approvals/
-[2]: https://app.datadoghq.com/feature-flags/settings/environments
+[1]: https://app.datadoghq.com/feature-flags/settings/environments

@@ -16,24 +16,23 @@ When you define a targeting rule, you can serve a variant to a percentage of sub
 
 ## Percentage rollouts
 
-In the **Targeting Rules & Rollouts** section, set the percentage of the audience that should receive each variant. For example, you might serve `true` to 30% of subjects matching your filter.
+In the **Targeting Rules & Rollouts** section, set the percentage of the audience that should receive each variant. For a **single-variant** targeting rule, assign your desired traffic exposure to one variant—for example, roll the "Free Shipping" variant of your promo banner to 50% of subjects matching your filter:
 
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting rule with percentage rollout configured" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/single-variant-traffic-exposure.png" alt="Targeting rule with a single-variant percentage rollout" style="width:100%;" >}}
 
-## How randomization works
+For a **multi-variant** rollout, assign percentages across multiple variants in the same targeting rule by selecting **Serve > Split Traffic** when editing or creating your targeting rule. The SDK distributes matching subjects across those variants according to the percentages you configure.
 
-When evaluating a flag, Datadog hashes the flag key and the `targetingKey` from your evaluation context to generate a value between 0 and 10000. That value determines whether the subject falls into the rollout percentage.
+{{< img src="getting_started/feature_flags/multi-variant-traffic-split.png" alt="Targeting rule with percentages split across multiple variants" style="width:100%;" >}}
 
-For example, if you serve `true` to 30% of subjects:
+## How the SDK evaluates percentage rollouts
 
-1. Compute a hash from the flag key and `targetingKey`.
-2. Map the hash to a value between 0 and 10000.
-3. If the value is less than or equal to 3000, serve `true`.
-4. Otherwise, pass through to the next targeting rule.
+When the SDK evaluates a targeting rule with a percentage rollout, it first checks whether the evaluation context matches the rule's filter. If it matches, the SDK uses the flag key and the `targetingKey` from the evaluation context to assign the subject to a rollout bucket. That bucket determines whether the subject receives a variant from the current rule or passes through to the next rule.
 
-This approach provides **deterministic** randomization: if you increase the percentage from 30% to 50%, subjects who were already in the 30% group remain in the treatment group.
+Randomization is **deterministic**: a subject with the same `targetingKey` always lands in the same bucket for a given flag, so they receive the same variant on repeat evaluations. If you increase a rollout percentage later—for example, from 30% to 50%—subjects already in the treatment bucket stay in the treatment bucket.
 
-### Example
+For multi-variant rules, the SDK applies the same bucketing logic to distribute subjects across variants according to the percentages defined on the rule.
+
+### Example evaluation context
 
 {{< programming-lang-wrapper langs="javascript,python,go" >}}
 
@@ -41,7 +40,7 @@ This approach provides **deterministic** randomization: if you increase the perc
 
 ```javascript
 await OpenFeature.setContext({
-  targetingKey: 'user-123', // Used for percentage rollouts
+  targetingKey: 'user-123',
   user_id: 'user-123',
 });
 ```
@@ -52,7 +51,7 @@ await OpenFeature.setContext({
 
 ```python
 eval_ctx = EvaluationContext(
-    targeting_key="user-123",  # Used for percentage rollouts
+    targeting_key="user-123",
     attributes={"user_id": "user-123"},
 )
 ```
@@ -63,7 +62,7 @@ eval_ctx = EvaluationContext(
 
 ```go
 evalCtx := openfeature.NewEvaluationContext(
-    "user-123", // Used for percentage rollouts
+    "user-123",
     map[string]interface{}{"user_id": "user-123"},
 )
 ```
@@ -71,12 +70,6 @@ evalCtx := openfeature.NewEvaluationContext(
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-info">The <code>targetingKey</code> is the randomization subject for percentage-based targeting. Subjects with the same <code>targetingKey</code> always receive the same variant for a given flag.</div>
-
-## Multiple variants
-
-You can randomize across multiple variants in a single targeting rule. Datadog distributes subjects across variants according to the percentages you configure.
 
 ## Further reading
 

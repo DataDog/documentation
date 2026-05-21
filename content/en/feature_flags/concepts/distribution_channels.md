@@ -31,13 +31,11 @@ If you work with a large number of feature flags, limiting which flags each SDK 
 
 When you [create a feature flag][1], select which distribution channels should receive the flag:
 
-- **Client**: Client-side SDKs only (browser, mobile, and other client SDKs)
+- **Client**: Client-side SDKs only (browser & mobile)
 - **Server**: Server-side SDKs only
 - **Both**: All SDK types
 
-<div class="alert alert-warning">
-  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
-</div>
+You can also update distribution channels on an existing flag from the **Manage Implementation & Variants** section of the flag details page.
 
 ## Further reading
 

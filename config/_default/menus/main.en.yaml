@@ -6062,20 +6062,20 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_variants
       weight: 302
-    - name: Distribution Channels
-      url: feature_flags/concepts/distribution_channels
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_distribution_channels
-      weight: 303
     - name: Targeting Rules and Filters
       url: feature_flags/concepts/targeting_rules
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
-      weight: 304
+      weight: 303
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
+      weight: 304
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_distribution_channels
       weight: 305
     - name: Flag History
       url: feature_flags/concepts/flag_history
