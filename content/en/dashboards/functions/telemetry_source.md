@@ -9,10 +9,6 @@ further_reading:
   text: "Query Across Datadog and OpenTelemetry Metrics"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" btn_hidden="false" header="Join the Preview!" >}}
-The Telemetry source query modifier is in Preview. Use this form to request access.
-{{< /callout >}}
-
 The Telemetry source query modifier controls whether a metric query uses only the queried metric or combines equivalent Datadog and OpenTelemetry metrics. For more information about querying across both sources, see [Query Across Datadog and OpenTelemetry Metrics][1].
 
 In the query editor, select **Modify** and then choose an option in the **Telemetry sources** section.
