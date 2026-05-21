@@ -47,7 +47,7 @@ Restricting assets to specific teams affects everyone, including administrators.
 
 Before broadly applying granular access controls, make sure your admin override team is included in the access list for all critical assets. A common approach is to include an "Admin" or "Platform" team with Edit access alongside the owning team.
 
-**Note:** Users with the `user_access_manage` permission are able to grant themselves elevated access as a failsafe.
+**Note:** Users with the `user_access_manage` permission can grant themselves elevated access as a failsafe.
 
 ## Recommendations
 

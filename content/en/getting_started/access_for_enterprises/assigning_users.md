@@ -55,9 +55,11 @@ Datadog offers Request Access (in Preview) for situations where users need tempo
 - **Establish an admin override team** before you begin restricting resources to specific teams. See [Permissions and Feature Access][1] for details.
 - **Automate provisioning.** Map your IdP groups to Datadog Roles and Teams. Manual user management does not scale.
 - **Audit role and team assignments periodically.** Look for users with more permissions than they need, roles with no users, and stale team memberships.
+
 ## Next steps
 
-Restrict who can edit or view Dashboards, Monitors, and other assets. View common patterns for [Protecting Assets][2].
+Restrict who can edit or view Dashboards, Monitors, and other assets. See common patterns in [Protecting Assets][2].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

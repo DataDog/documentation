@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The first decision in your access strategy is how many Datadog organizations your enterprise needs. This decision affects everything downstream: how you define roles, restrict data, share dashboards, and manage identity. Getting it right upfront avoids costly migrations later.
+The first decision in your access strategy is how many Datadog organizations your enterprise needs. This decision affects everything downstream: how you define roles, restrict data, share dashboards, and manage identity. Getting it right up front avoids costly migrations later.
 
 ## Start with a single org
 

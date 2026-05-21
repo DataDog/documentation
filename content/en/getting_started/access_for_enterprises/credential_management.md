@@ -66,7 +66,7 @@ Keys can be [scoped][1] to restrict which API endpoints they can access. A key t
 {{% /collapse-content %}}
 
 {{% collapse-content title="Use short-lived tokens" %}}
-Where possible, use PATs or SATs instead of long-lived application keys. Short-lived tokens automatically expire, which limits exposure it a token is leaked and created cleaner audit trails tied to specific users or service accounts.
+Where possible, use PATs or SATs instead of long-lived application keys. Short-lived tokens automatically expire, which limits exposure if a token is leaked and creates cleaner audit trails tied to specific users or service accounts.
 
 For automated pipelines, SATs with a service account are the recommended pattern. The service account defines the permission boundary, and the SAT provides time-limited access within that boundary. SATs can be configured as long-lived when required, but short expiration windows are strongly recommended.
 {{% /collapse-content %}}
@@ -83,7 +83,7 @@ For automated pipelines, SATs with a service account are the recommended pattern
 Using an [authenticated proxy][3] for RUM client tokens hides them from end users, while still routing data to the correct RUM application.
 {{% /collapse-content %}}
 
-## Strategies for key lifecycle management 
+## Strategies for key lifecycle management
 
 ### Audit unused keys
 

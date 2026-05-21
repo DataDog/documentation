@@ -60,7 +60,7 @@ Sensitive Data Scanner is useful as a defense-in-depth measure alongside Data Ac
 
 Use **standard Data Access Control** to apply restrictions progressively: all data is visible by default, and you create restricted datasets to limit access to specific data. This model works well when sensitive data is the exception, not the rule.
 
-For organizations with hard regulatory requirements (for example, defense) or organizations that collarborate with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
+For organizations with hard regulatory requirements (for example, defense) or organizations that collaborate with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
 
 Strict Mode is the exception, not the rule. Use Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
 
