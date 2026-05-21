@@ -91,7 +91,7 @@ This document goes over one of the ways you can set up the Observability Pipelin
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<DATADOG_SITE>`: The [Datadog site][11].
 
-2. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
+2. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][26] for more information.
 3. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
@@ -225,6 +225,10 @@ Follow these steps if you want to use the one-line installation script to instal
     sudo systemctl restart observability-pipelines-worker
     ```
 
+{% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
+
+See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
+
 {% /if %}
 
 <!-- API/TF - Linux - Environment variables -->
@@ -246,9 +250,8 @@ You must replace the placeholders with the following values:
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
     - See [Environment Variables][7] for a list of destination environment variables.
-**Notes**:
-- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
+{% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
@@ -401,7 +404,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     ```
 7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Notes**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 {% /if %}
 
@@ -412,9 +415,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Notes**:
-- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+{% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
 {% /if %}
 
@@ -832,13 +833,11 @@ Follow these steps to manually install the Worker, instead of running the one-li
     ```
 
 <!-- UI - Linux APT -->
-{% if includes($interface, ["ui"]) %}
+{% if equals($interface, "ui") %}
 
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Notes**:
-- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+{% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
 {% /if %}
 
@@ -868,6 +867,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 
 <!-- UI, API, Terraform - Linux - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
+
 3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -876,6 +876,11 @@ Follow these steps to manually install the Worker, instead of running the one-li
     DD_SITE=<SITE>
     EOF
     ```
+4. Start the worker:
+    ```shell
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
 {% /if %}
 
 <!-- UI, API, Terraform - Linux - Environment variables -->
@@ -891,21 +896,19 @@ Follow these steps to manually install the Worker, instead of running the one-li
     <DESTINATION_ENV_VARIABLES>
     EOF
     ```
-{% /if %}
-
 4. Start the worker:
     ```shell
     sudo systemctl restart observability-pipelines-worker
     ```
 
+{% /if %}
+
 <!-- UI - Linux RPM -->
-{% if includes($interface, ["ui"]) %}
+{% if equals($interface, "ui") %}
 
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Notes**:
-- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+{% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
 {% /if %}
 
@@ -915,9 +918,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- API/TF - Linux RPM -->
 {% if includes($interface, ["api","terraform"]) %}
 
-**Notes**:
-- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+{% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
 {% /if %}
 
@@ -1022,3 +1023,4 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [23]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
 [24]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[26]: /observability_pipelines/configuration/secrets_management/
