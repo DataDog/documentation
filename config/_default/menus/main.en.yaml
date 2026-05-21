@@ -6092,6 +6092,21 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_notifications
       weight: 308
+    - name: Permissions and Access Control
+      url: feature_flags/concepts/permissions
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_permissions
+      weight: 311
+    - name: Approvals
+      url: feature_flags/concepts/approvals
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_approvals
+      weight: 312
+    - name: Migration Tooling
+      url: feature_flags/concepts/migration_tooling
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_migration_tooling
+      weight: 313
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
