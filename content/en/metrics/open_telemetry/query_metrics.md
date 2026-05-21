@@ -8,10 +8,6 @@ further_reading:
   text: "OpenTelemetry"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" btn_hidden="false" header="Join the Preview!" >}}
-Querying across Datadog and OpenTelemetry metrics is in Preview. Use this form to request access.
-{{< /callout >}}
-
 Many organizations use OpenTelemetry (OTel) alongside Datadog, creating hybrid environments where some hosts emit OTel metrics and others emit Datadog metrics. Because OTel and Datadog metrics often use different naming conventions and semantic definitions, creating a unified view of your infrastructure in these environments can be challenging.
 
 Datadog helps you bridge this gap by enabling you to:
@@ -20,6 +16,10 @@ Datadog helps you bridge this gap by enabling you to:
 - Understand metric sources and mappings.
 
 ## Unify OpenTelemetry and Datadog metrics in queries
+
+{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" btn_hidden="false" header="Join the Preview!" >}}
+The Telemetry source query modifier requires the OTel Native Instrumentation preview. Use this form to request access.
+{{< /callout >}}
 
 The [Metrics Query Editor][1] and dashboard widgets include a [Telemetry source][3] query modifier, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources. Select **Modify** and then choose **Native telemetry** or **Combined telemetry** in the **Telemetry sources** section.
 
