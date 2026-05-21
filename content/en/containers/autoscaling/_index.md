@@ -64,7 +64,8 @@ Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resourc
    | Argo Rollout recommendations and autoscaling | 7.71+ |
    | Cluster autoscaling ([preview sign-up][10]) | 7.72+ |
    | In-place vertical pod resize (opt-in) | 7.78+ |
-   | Cluster profile activation (label-based) | 7.78+ |
+   | Cluster profile activation, workload label | 7.78+ |
+   | Cluster profile activation, namespace label | 7.79+ |
 
 - The following user permissions:
    - Org Management (required for Remote Configuration)
@@ -461,9 +462,9 @@ spec:
 
 ### Cluster profiles
 
-A `DatadogPodAutoscalerClusterProfile` is a cluster-scoped resource that holds a `DatadogPodAutoscaler` template. The Cluster Agent watches `Deployment` and `StatefulSet` resources (and the namespaces that contain them) for the `autoscaling.datadoghq.com/profile` label, and creates a managed `DatadogPodAutoscaler` for every matching workload. One profile applies to many workloads; one workload still maps to one `DatadogPodAutoscaler`.
+A `DatadogPodAutoscalerClusterProfile` is a cluster-scoped resource that holds a `DatadogPodAutoscaler` template. The Cluster Agent watches `Deployment` and `StatefulSet` resources (and, on 7.79+, the namespaces that contain them) for the `autoscaling.datadoghq.com/profile` label, and creates a managed `DatadogPodAutoscaler` for every matching workload. One profile applies to many workloads; one workload still maps to one `DatadogPodAutoscaler`.
 
-Cluster profiles require Datadog Cluster Agent 7.78.0+. Older Cluster Agents ignore the profile label.
+Cluster profiles and the workload-level label require Datadog Cluster Agent 7.78.0+. Namespace-level activation (labeling a namespace to opt every supported workload inside it into a profile) requires Datadog Cluster Agent 7.79.0+. Older Cluster Agents ignore the profile label.
 
 #### Built-in profiles
 
@@ -489,7 +490,7 @@ spec:
   # ...rest of the Deployment spec
 ```
 
-To activate a profile on every supported workload in a namespace, label the namespace instead:
+To activate a profile on every supported workload in a namespace, label the namespace instead (requires Cluster Agent 7.79.0+):
 
 ```yaml
 apiVersion: v1
@@ -547,6 +548,8 @@ metadata:
 The template body accepts the same fields as a `DatadogPodAutoscaler` spec, minus `targetRef` (the Cluster Agent fills that in for each matching workload). See the [example configurations](#example-datadogpodautoscaler-configurations) above for the full range of fields you can put under `spec.template`.
 
 #### Activation precedence
+
+Cluster Agent 7.79.0+ adds namespace-level activation, the `excluded` opt-out, and the precedence rule between them. On Cluster Agent 7.78.0, only the workload-level label is read — the rules below that involve namespaces or the `excluded` value do not apply.
 
 - **Workload labels take precedence over namespace labels.** If a namespace is labeled `autoscaling.datadoghq.com/profile=ns-profile` and a workload inside it is labeled `autoscaling.datadoghq.com/profile=workload-profile`, the workload uses `workload-profile`.
 - **Opt out with `excluded`.** Set `autoscaling.datadoghq.com/profile: excluded` on a workload to exempt it when its namespace is labeled. This is useful for stateful or critical workloads in an otherwise opted-in namespace.
