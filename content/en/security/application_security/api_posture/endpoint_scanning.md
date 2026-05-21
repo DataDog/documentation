@@ -3,8 +3,7 @@ title: Endpoint Scanning
 description: Verify whether discovered API endpoints are publicly accessible and require authentication.
 ---
 
-{{< callout url="#" btn_hidden="true" header="Endpoint Scanning is in Preview" >}}
-{{< /callout >}}
+<div class="alert alert-warning">Endpoint Scanning is in Preview and is subject to change.</div>
 
 Endpoint Scanning verifies how your API endpoints actually respond by scanning them from outside your environment, rather than inferring their behavior from observed traffic. The results enrich the [API Inventory][2] with verified authentication and visibility data.
 
