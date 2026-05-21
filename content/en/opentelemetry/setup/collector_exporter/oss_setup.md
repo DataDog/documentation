@@ -785,7 +785,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended OSS Collector configuration uses the <code>spanmetrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable this option alongside the <code>spanmetrics</code> connector.</div>
+<div class="alert alert-info">The recommended OSS Collector configuration uses the <code>spanmetrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>spanmetrics</code> connector, as this computes trace metrics from both sources.</div>
 
 ### Datadog extension
 
