@@ -1,5 +1,5 @@
 ---
-title: Define Exposure SQL Models
+title: Create Exposure SQL Models
 description: Analyze experiments tracked in your data warehouse
 further_reading:
 - link: "/experiments/guide/"
