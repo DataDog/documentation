@@ -417,22 +417,21 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 **Windows PowerShell** (Ensure that your shell session has _administrator_ privileges):
 
-<details>
-  <summary>Agent <code>v6.11</code> or earlier</summary>
+{{% collapse-content title="Agent v6.11 or earlier" level="h4" expanded=false %}}
 
-  ```ps
-  & "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install -w /path/to/wheel.whl
-  ```
+```ps
+& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install -w /path/to/wheel.whl
+```
 
-</details>
+{{% /collapse-content %}}
 
-<details open>
-  <summary>Agent<code>v6.12</code> or later</summary>
+{{% collapse-content title="Agent v6.12 or later" level="h4" expanded=true %}}
 
-  ```ps
-  & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" integration install -w /path/to/wheel.whl
-  ```
-</details>
+```ps
+& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" integration install -w /path/to/wheel.whl
+```
+
+{{% /collapse-content %}}
 
 For installing your wheel to test in Kubernetes environments:
 1. Mount the `.whl` file into an initContainer.

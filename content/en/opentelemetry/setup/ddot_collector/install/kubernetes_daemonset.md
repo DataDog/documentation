@@ -459,7 +459,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -580,7 +579,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-

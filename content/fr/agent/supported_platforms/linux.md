@@ -46,17 +46,17 @@ title: Linux
 
 Cette page décrit les fonctionnalités de base de l'Agent Datadog pour les environnements Linux. Consultez la documentation [Plateformes prises en charge][5] pour la liste complète des distributions et versions Linux prises en charge.
 
-## Installation de l'Agent {#install-the-agent}
-Pour installer l'Agent sur Linux, suivez les [instructions dans l'application dans Fleet Automation][6], et exécutez le script généré sur vos hôtes.
+## Installer l'Agent {#install-the-agent}
+Pour installer l'Agent sur Linux, suivez les instructions in-app dans Fleet Automation [6] et exécutez le script généré sur vos hôtes.
 
-{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Étapes d'installation dans l'application pour l'Agent Datadog sur un hôte Linux." style="width:90%;">}}
+{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Étapes d'installation in-app pour l'Agent Datadog sur un hôte Linux." style="width:90%;">}}
 
 
-## Configurez l'Agent {#configure-the-agent}
+## Configurer l'Agent {#configure-the-agent}
 Le fichier de configuration de l'Agent Datadog se trouve dans `/etc/datadog-agent/datadog.yaml`. Ce fichier YAML contient les détails de connexion à l'échelle de l'hôte utilisés pour envoyer des données à Datadog, y compris :
 - `api_key` : La [clé API Datadog][7] de votre organisation
-- `site` : Région cible de Datadog (par exemple `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
-- `proxy` : Points de terminaison proxy HTTP/HTTPS pour le trafic sortant (voir [Configuration du proxy de l'Agent Datadog][8])
+- `site` : Région cible de Datadog (par exemple `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`, `us2.ddog-gov.com`)
+- `proxy` : Points de terminaison de proxy HTTP/HTTPS pour le trafic sortant (voir [Configuration du proxy de l'Agent Datadog][8])
 - Tags par défaut, niveau de journalisation et configurations Datadog
 
 Un fichier de référence entièrement commenté, situé dans `/etc/datadog-agent/datadog.yaml.example`, répertorie chaque option disponible pour comparaison ou pour copier et coller. Alternativement, consultez le fichier d'exemple `config_template.yaml` pour toutes les options de configuration disponibles.
@@ -64,7 +64,7 @@ Un fichier de référence entièrement commenté, situé dans `/etc/datadog-agen
 ### Fichiers d'intégration {#integration-files}
 Les fichiers de configuration pour les intégrations se trouvent dans `/etc/datadog-agent/conf.d/`. Chaque intégration a son propre sous-répertoire, `<INTEGRATION>.d/`, qui contient :
 - `conf.yaml` : La configuration active contrôlant la manière dont l'intégration collecte les métriques et les journaux
-- `conf.yaml.example` : Un exemple illustrant les clés et valeurs par défaut prises en charge
+- `conf.yaml.example` : Un exemple illustrant les clés et les valeurs par défaut prises en charge
 
 
 ## Commandes {#commands}
@@ -76,11 +76,11 @@ Les fichiers de configuration pour les intégrations se trouvent dans `/etc/data
 | Redémarrer l'Agent fonctionnant en tant que service | `sudo systemctl restart datadog-agent`                 |
 | État du service Agent            | `sudo systemctl status datadog-agent`                  |
 | Page d'état de l'Agent en cours d'exécution       | `sudo datadog-agent status`                            |
-| Envoyer un signal lumineux                         | `sudo datadog-agent flare`                             |
+| Envoyer un flare                         | `sudo datadog-agent flare`                             |
 | Afficher l'utilisation de la commande              | `sudo datadog-agent --help`                            |
 | Exécuter un contrôle                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-**Note** : Pour les systèmes basés sur upstart, tels que `CentOS/RHEL 6` ou `SUSE 11`, remplacez `systemctl <action>` par `<action>`. Par exemple, lors du démarrage d'un Agent en tant que service sur un système `SUSE 11`, utilisez `sudo start datadog-agent`.
+**Remarque** : Pour les systèmes basés sur upstart, tels que `CentOS/RHEL 6` ou `SUSE 11`, remplacez `systemctl <action>` par `<action>`. Par exemple, lors du démarrage d'un Agent en tant que service sur un système `SUSE 11`, utilisez `sudo start datadog-agent`.
 
 
 ## Désinstaller l'Agent {#uninstall-the-agent}
@@ -112,7 +112,7 @@ sudo zypper remove datadog-agent
 * Le fichier de configuration `datadog.yaml`
 * Fichiers créés par l'utilisateur dans le dossier de configuration `/etc/datadog-agent`
 * Fichiers créés par l'utilisateur dans le dossier `/opt/datadog-agent`
-* L'`dd-agent` utilisateur
+* L'utilisateur `dd-agent`
 * Fichiers journaux Datadog
 
 **Pour supprimer ces éléments, exécutez cette commande après avoir supprimé l'Agent :**
@@ -133,22 +133,22 @@ sudo apt-get remove --purge datadog-agent -y
 </div>
 
 
-### Désinstaller l'instrumentation APM en une seule étape {#uninstall-single-step-apm-instrumentation}
-Si vous avez installé l'Agent avec l'instrumentation APM en une seule étape et que vous souhaitez le désinstaller, vous devez [exécuter des commandes supplémentaires][9] pour supprimer l'instrumentation APM. Suivez les étapes pour votre [environnement spécifique][10].
+### Désinstaller Single Step APM Instrumentation {#uninstall-single-step-apm-instrumentation}
+Si vous avez installé l'Agent avec Single Step APM Instrumentation et souhaitez le désinstaller, vous devez [exécuter des commandes supplémentaires][9] pour supprimer APM Instrumentation. Suivez les étapes pour votre [environnement spécifique][10].
 
 
 ## Dépannage {#troubleshooting}
 
-Pour des étapes détaillées, consultez [Dépannage de l'Agent][2].
+Pour des étapes détaillées, voir [Dépannage de l'Agent][2].
 
-## Utilisation de l'Agent intégré {#working-with-the-embedded-agent}
+## Travailler avec l'Agent intégré {#working-with-the-embedded-agent}
 
 L'Agent contient un environnement Python intégré à `/opt/datadog-agent/embedded/`. Des binaires courants tels que `python` et `pip` sont contenus dans `/opt/datadog-agent/embedded/bin/`.
 
 Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets à l'Agent intégré][3].
 
 
-## Pour aller plus loin {#further-reading}
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
