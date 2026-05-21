@@ -2597,6 +2597,20 @@
     "request_description": "Experiment events payload.",
     "request_schema_description": "Request to push spans and metrics for an LLM Observability experiment."
   },
+  "ListLLMObsIntegrationAccounts": {
+    "description": "Retrieve the list of configured accounts for the specified LLM provider integration.",
+    "summary": "List LLM integration accounts"
+  },
+  "CreateLLMObsIntegrationInference": {
+    "description": "Run an LLM inference request through the specified integration and account, returning the model response and token usage.",
+    "summary": "Run an LLM inference",
+    "request_description": "Inference request parameters.",
+    "request_schema_description": "Parameters for an LLM inference request."
+  },
+  "ListLLMObsIntegrationModels": {
+    "description": "Retrieve the list of models available for the specified LLM provider integration and account.",
+    "summary": "List LLM integration models"
+  },
   "ListLLMObsProjects": {
     "description": "List all LLM Observability projects sorted by creation date, newest first.",
     "summary": "List LLM Observability projects"
