@@ -212,7 +212,7 @@ The web provider also supports these optional settings:
 | --- | --- | --- |
 | `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
-| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Available in `@datadog/openfeature-browser` v1.1.0 and later. This is the setting that can affect RUM usage. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. This is the setting that can affect RUM usage. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
 | `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
