@@ -127,12 +127,12 @@ Detailed network timing data for the loading of an application's resources are c
 
 ### Resource network headers
 
-For requests configured in `trackResourceHeaders`, additional network header metadata is automatically collected. See [`RumInitConfiguration.trackResourceHeaders`][16] for configuration details.
+When `trackResourceHeaders` is enabled, the SDK automatically collects additional network header metadata. See [`RumInitConfiguration.trackResourceHeaders`][16] for configuration details.
 
 | Attribute                   | Type   | Description                                                                                                              |
 |-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------|
-| `resource.request.headers`  | object | Request headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch resources only).      |
-| `resource.response.headers` | object | Response headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch and XHR resources).  |
+| `resource.request.headers`  | object | Request headers as key-value pairs (available only if `trackResourceHeaders` is enabled, for Fetch resources only).      |
+| `resource.response.headers` | object | Response headers as key-value pairs (available only if `trackResourceHeaders` is enabled, for Fetch and XHR resources).  |
 
 ### GraphQL attributes
 

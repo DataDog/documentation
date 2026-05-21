@@ -73,7 +73,7 @@ public void onUserInteraction() {
 
 When [tracking resources automatically][6], you can capture HTTP request and response headers on RUM Resources by calling `trackResourceHeaders` on the `DatadogInterceptor.Builder`.
 
-Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers` and are queryable in the RUM Explorer.
+Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers`. You can query them in the RUM Explorer.
 
 {% tabs %}
 {% tab label="Kotlin" %}
@@ -106,7 +106,7 @@ With no arguments, `trackResourceHeaders` captures a predefined set of common he
 To capture additional headers on top of the defaults, configure a `ResourceHeadersExtractor` and pass it to `trackResourceHeaders`. To skip the defaults, set `includeDefaults = false`.
 
 {% alert level="info" %}
-Sensitive headers (tokens, API keys, etc.) are filtered out automatically, even if you list them explicitly.
+Sensitive headers, such as tokens and API keys, are filtered out automatically, even if you list them explicitly.
 {% /alert %}
 
 ### Custom resource attributes
