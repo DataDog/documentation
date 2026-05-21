@@ -46,7 +46,7 @@ Follow-ups can be created at any point during an incident (even before it's reso
 
 ## Follow-ups in postmortem notebooks
 
-You can display follow-ups directly in a postmortem notebook using the `{{incident.follow-ups}}` template variable. When added to a Datadog Notebooks postmortem template, this variable renders a list of follow-ups that you can assign, set due dates for, and create new ones from within the notebook. For more information, see [Incident Postmortems][6].
+You can display follow-ups directly in a postmortem notebook using the `{{incident.follow-ups}}` template variable. When added to a Datadog Notebooks postmortem template, this variable renders a list of follow-up items. From the list view in your notebook, you can set due dates, assign items, or create new follow-up items. For more information, see [Incident Postmortems][6].
 
 ## Export follow-ups
 

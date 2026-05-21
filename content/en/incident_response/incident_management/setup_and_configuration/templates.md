@@ -55,7 +55,7 @@ Postmortem templates define the structure and content of your postmortems. When 
 
 To create a postmortem template:
 
-1. Go to [**Incident Management Settings > Post-Mortem Templates**][8] and click **+ New Postmortem Template**.
+1. Go to [**Incident Management Settings > Postmortem Templates**][8] and click **+ New Postmortem Template**.
 2. Give the template a name.
 3. Select the save location (see [Save location](#save-location)).
 4. Write the template's content (available template variables are listed to the right of the textbox).
@@ -95,7 +95,7 @@ The incident card variable (`{{incident.card}}`) embeds a summary card that refl
 {{% /collapse-content %}}
 
 {{% collapse-content title="Follow-ups variable" level="h4" %}}
-The follow-ups variable (`{{incident.follow-ups}}`) embeds a list of incident follow-ups in the postmortem notebook. From this view, you can assign follow-ups, set due dates, and create new ones. Changes are reflected in the incident's follow-ups list.
+The follow-ups variable (`{{incident.follow-ups}}`) embeds a list of incident follow-ups in the postmortem notebook. From the list view in your notebook, you can set due dates, assign items, or create new follow-up items. Changes are reflected in the incident's follow-ups list.
 
 **Note**: The follow-ups variable is only supported in Datadog Notebooks.
 {{% /collapse-content %}}

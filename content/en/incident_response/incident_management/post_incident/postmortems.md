@@ -35,7 +35,7 @@ Datadog automatically populates postmortems with incident data using templates y
 
 ## Generate a postmortem
 
-{{< img src="/incident_response/incident_management/post_incident/postmortems/post_incident_tab_generate_postmortem.png" alt="The Post-Incident tab showing the Generate Postmortem button, template preview, and Follow-Ups sidebar" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/post_incident/postmortems/post_incident_tab_generate_postmortem.png" alt="The Post-Incident tab showing the Generate Postmortem button, template preview, and Follow-Ups sidebar." style="width:100%;" >}}
 
 After an incident is resolved, you can generate a postmortem from the incident's **Post-Incident** tab.
 
@@ -54,7 +54,7 @@ After generating a postmortem:
 
 Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident** tab. You can read and edit the postmortem without leaving the incident view. Changes made in the embedded view are reflected in the underlying notebook.
 
-Multiple users can edit an embedded postmortem at the same time. Active editors are indicated by markers showing where each user is working. You can also add inline comments from within the embedded view.
+Multiple users can edit an embedded postmortem at the same time. Cursor markers show where each user is working. You can also add inline comments from within the embedded view.
 
 ## Postmortem status and owner
 
