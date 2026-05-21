@@ -3,6 +3,8 @@ title: Install the Worker
 disable_toc: false
 aliases:
     - /observability_pipelines/install_the_worker/
+    - /observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
+    - /observability_pipelines/guide/set_up_the_worker_in_ecs_fargate/
 further_reading:
 - link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
