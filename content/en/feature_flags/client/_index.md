@@ -35,13 +35,13 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 ## Telemetry options by platform
 
-The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. When a telemetry option is exposed, its default value is `true`.
+The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
 
-| Concept | Web (`@datadog/openfeature-browser`) | Android (`dd-sdk-android-flags`) | iOS (`DatadogFlags`) | React Native | Unity |
-|---|---|---|---|---|---|
-| Send exposure events | `enableExposureLogging` | `trackExposures` | `trackExposures` | `trackExposures` | `trackExposures` |
-| Send aggregated evaluation telemetry | `enableFlagEvaluationTracking` | `trackEvaluations` | `trackEvaluations` | Not exposed | `trackEvaluations` |
-| Attach evaluations to RUM | `enableRumFeatureFlagTracking` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | Not exposed |
+| Concept | Default | Web (`@datadog/openfeature-browser`) | Android (`dd-sdk-android-flags`) | iOS (`DatadogFlags`) | React Native | Unity |
+|---|---|---|---|---|---|---|
+| Send exposure events | `true` | `enableExposureLogging` | `trackExposures` | `trackExposures` | `trackExposures` | `trackExposures` |
+| Send aggregated evaluation telemetry | `true` | `enableFlagEvaluationTracking` | `trackEvaluations` | `trackEvaluations` | Not exposed | `trackEvaluations` |
+| Attach evaluations to RUM | `true` | `enableRumFeatureFlagTracking` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | Not exposed |
 
 <div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift">dd-openfeature-provider-swift</a>) is available for use as a pre-1.0 package. Until it reaches 1.0, version updates may include breaking changes. For the most stable iOS API surface, use the <code>FlagsClient</code> API directly.</div>
 
