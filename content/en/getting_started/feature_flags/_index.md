@@ -142,9 +142,7 @@ For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
 ### Step 5: Monitor your rollout
 
-Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with the flag, view the **Real-Time Metric Overview** panel in the Datadog UI to see how the feature impacts application performance.
-
-{{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
+Monitor rollout progress from the feature flag details page. See [Evaluation Tracking][9] for evaluations graphs, variant breakdowns, and targeting rule subject counts.
 
 ## Further reading
 
@@ -158,3 +156,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 [6]: /feature_flags/concepts/distribution_channels/
 [7]: /feature_flags/concepts/targeting_rules/
 [8]: /feature_flags/concepts/traffic_splitting/
+[9]: /feature_flags/concepts/evaluation_tracking/
