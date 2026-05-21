@@ -144,7 +144,7 @@ export default {
     us5: 'agent-http-intake.logs.us5.datadoghq.com',
     eu: 'agent-http-intake.logs.datadoghq.eu',
     ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
-    ap2: 'gold.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>http-intake.logs.ap2.datadoghq.com</code> <span>(+5 more)</span></summary><ul><li><code>http-intake.logs.ap2.datadoghq.com</code></li><li><code>aws-kinesis-http-intake.logs.ap2.datadoghq.com</code></li><li><code>eventbridge-intake.logs.ap2.datadoghq.com</code></li><li><code>lambda-http-intake.logs.ap2.datadoghq.com</code></li><li><code>obpipeline-intake.ap2.datadoghq.com</code></li><li><code>runtime-security-http-intake.logs.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'agent-http-intake.logs.us2.ddog-gov.com',
     gov: 'agent-http-intake.logs.ddog-gov.com'
   },
@@ -174,7 +174,7 @@ export default {
     us5: 'http-intake.logs.us5.datadoghq.com',
     eu: 'http-intake.logs.datadoghq.eu',
     ap1: 'http-intake.logs.ap1.datadoghq.com',
-    ap2: 'gold.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>http-intake.logs.ap2.datadoghq.com</code> <span>(+5 more)</span></summary><ul><li><code>http-intake.logs.ap2.datadoghq.com</code></li><li><code>aws-kinesis-http-intake.logs.ap2.datadoghq.com</code></li><li><code>eventbridge-intake.logs.ap2.datadoghq.com</code></li><li><code>lambda-http-intake.logs.ap2.datadoghq.com</code></li><li><code>obpipeline-intake.ap2.datadoghq.com</code></li><li><code>runtime-security-http-intake.logs.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'http-intake.logs.us2.ddog-gov.com',
     gov: 'http-intake.logs.ddog-gov.com'
   },
@@ -774,7 +774,7 @@ export default {
     us5: 'api.us5.datadoghq.com',
     eu: 'api.datadoghq.eu',
     ap1: 'api.ap1.datadoghq.com',
-    ap2: 'orchid.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>api.ap2.datadoghq.com</code> <span>(+2 more)</span></summary><ul><li><code>api.ap2.datadoghq.com</code></li><li><code>synthetics.ap2.datadoghq.com</code></li><li><code>*.synthetics.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'api.us2.ddog-gov.com',
     gov: 'api.ddog-gov.com'
   },
@@ -794,7 +794,7 @@ export default {
     us5: 'metrics.agent.us5.datadoghq.com',
     eu: 'metrics.agent.datadoghq.eu',
     ap1: 'metrics.agent.ap1.datadoghq.com',
-    ap2: 'beige.intake.ap2.datadoghq.com',
+    ap2: 'metrics.agent.ap2.datadoghq.com',
     gov2: 'metrics.agent.us2.ddog-gov.com',
     gov: 'metrics.agent.ddog-gov.com'
   },
@@ -814,7 +814,7 @@ export default {
     us5: 'orchestrator.us5.datadoghq.com',
     eu: 'orchestrator.datadoghq.eu',
     ap1: 'orchestrator.ap1.datadoghq.com',
-    ap2: 'linen.intake.ap2.datadoghq.com',
+    ap2: 'orchestrator.ap2.datadoghq.com',
     gov2: 'orchestrator.us2.ddog-gov.com',
     gov: 'orchestrator.ddog-gov.com'
   },
@@ -834,7 +834,7 @@ export default {
     us5: 'process.us5.datadoghq.com',
     eu: 'process.datadoghq.eu',
     ap1: 'process.ap1.datadoghq.com',
-    ap2: 'bisque.intake.ap2.datadoghq.com',
+    ap2: 'process.ap2.datadoghq.com',
     gov2: 'process.us2.ddog-gov.com',
     gov: 'process.ddog-gov.com'
   },
@@ -854,7 +854,7 @@ export default {
     us5: 'intake.profile.us5.datadoghq.com',
     eu: 'intake.profile.datadoghq.eu',
     ap1: 'intake.profile.ap1.datadoghq.com',
-    ap2: 'cyan.intake.ap2.datadoghq.com',
+    ap2: 'intake.profile.ap2.datadoghq.com',
     gov2: 'intake.profile.us2.ddog-gov.com',
     gov: 'intake.profile.ddog-gov.com'
   },
@@ -874,7 +874,7 @@ export default {
     us5: 'trace.agent.us5.datadoghq.com',
     eu: 'trace.agent.datadoghq.eu',
     ap1: 'trace.agent.ap1.datadoghq.com',
-    ap2: 'lime.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>trace.agent.ap2.datadoghq.com</code> <span>(+1 more)</span></summary><ul><li><code>trace.agent.ap2.datadoghq.com</code></li><li><code>data-obs-intake.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'trace.agent.us2.ddog-gov.com',
     gov: 'trace.agent.ddog-gov.com'
   },
@@ -894,7 +894,7 @@ export default {
     us5: 'dbm-metrics-intake.us5.datadoghq.com',
     eu: 'dbm-metrics-intake.datadoghq.eu',
     ap1: 'dbm-metrics-intake.ap1.datadoghq.com',
-    ap2: 'white.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>dbm-metrics-intake.ap2.datadoghq.com</code> <span>(+1 more)</span></summary><ul><li><code>dbm-metrics-intake.ap2.datadoghq.com</code></li><li><code>dbquery-intake.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'dbm-metrics-intake.us2.ddog-gov.com',
     gov: 'dbm-metrics-intake.ddog-gov.com'
   },
@@ -914,7 +914,7 @@ export default {
     us5: 'config.us5.datadoghq.com',
     eu: 'config.datadoghq.eu',
     ap1: 'config.ap1.datadoghq.com',
-    ap2: 'violet.intake.ap2.datadoghq.com',
+    ap2: 'config.ap2.datadoghq.com',
     gov2: 'config.us2.ddog-gov.com',
     gov: 'config.ddog-gov.com'
   },
@@ -924,7 +924,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'olive.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>ndm-intake.ap2.datadoghq.com</code> <span>(+1 more)</span></summary><ul><li><code>ndm-intake.ap2.datadoghq.com</code></li><li><code>ndmflow-intake.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -934,7 +934,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'khaki.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>ci-intake.ap2.datadoghq.com</code> <span>(+4 more)</span></summary><ul><li><code>ci-intake.ap2.datadoghq.com</code></li><li><code>cireport-intake.ap2.datadoghq.com</code></li><li><code>citestcov-intake.ap2.datadoghq.com</code></li><li><code>citestcycle-intake.ap2.datadoghq.com</code></li><li><code>cicodescan-intake.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -944,7 +944,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'green.intake.ap2.datadoghq.com',
+    ap2: 'oncall-primary.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -954,7 +954,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'indigo.intake.ap2.datadoghq.com',
+    ap2: 'live.logs.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -964,7 +964,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'tomato.edge.ap2.datadoghq.com',
+    ap2: 'echo.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -984,7 +984,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'snow.intake.ap2.datadoghq.com',
+    ap2: 'cspm-intake.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1004,7 +1004,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'tan.intake.ap2.datadoghq.com',
+    ap2: 'aws-kinesis-http-intake.logs.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1014,7 +1014,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'black.intake.ap2.datadoghq.com',
+    ap2: 'browser-intake-ap2-datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1024,7 +1024,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'aqua.intake.ap2.datadoghq.com',
+    ap2: 'gcp-intake.logs.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1034,7 +1034,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'ivory.intake.ap2.datadoghq.com',
+    ap2: 'oncall-secondary.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1044,7 +1044,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'plum.intake.ap2.datadoghq.com',
+    ap2: 'sourcemap-intake.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1064,7 +1064,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'azure.intake.ap2.datadoghq.com',
+    ap2: 'webhook-intake.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1094,7 +1094,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'peru.intake.ap2.datadoghq.com',
+    ap2: 'intake.profile.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1104,7 +1104,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'purple.intake.ap2.datadoghq.com',
+    ap2: 'browser-intake-ap2-datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1114,7 +1114,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'orange.intake.ap2.datadoghq.com',
+    ap2: 'ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1144,7 +1144,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'teal.intake.ap2.datadoghq.com',
+    ap2: 'awsmetrics-intake.ap2.datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1154,7 +1154,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'blue.intake.ap2.datadoghq.com',
+    ap2: 'browser-intake-ap2-datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1174,7 +1174,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'gray.intake.ap2.datadoghq.com',
+    ap2: 'browser-intake-ap2-datadoghq.com',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -1184,7 +1184,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'The private link service for AP1 is not supported.',
-    ap2: 'brown.intake.ap2.datadoghq.com',
+    ap2: `<details><summary><code>otlp.ap2.datadoghq.com</code> <span>(+2 more)</span></summary><ul><li><code>otlp.ap2.datadoghq.com</code></li><li><code>*.integrations.otlp.ap2.datadoghq.com</code></li><li><code>opamp.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },

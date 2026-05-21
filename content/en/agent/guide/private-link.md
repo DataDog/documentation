@@ -52,7 +52,7 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
-| Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+| Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
 | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
@@ -159,7 +159,7 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 
 ## PrivateLink service names
 
-| Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+| Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
 | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
@@ -281,7 +281,7 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+  | Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
   |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
   | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
   | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
@@ -337,11 +337,16 @@ Use the list below to map service and DNS name to different parts of Datadog:
 
 This returns <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
 
+{{% site-region region="ap2" %}}
+**Note for AP2:** On AP2, PrivateLink endpoints use an intermediate color-named routing record instead of the agent hostname directly. The `PrivateDnsName` returned by the command above will be a record like `beige.intake.ap2.datadoghq.com`, not the agent-facing hostname. Create your Route53 hosted zone for _that_ color record. Because the customer-facing agent hostnames (for example, `metrics.agent.ap2.datadoghq.com`) CNAME to the color record, overriding the color record in your VPC is sufficient — you do not need a separate hosted zone per agent hostname.
+{{% /site-region %}}
+
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the {{< ui >}}Alias{{< /ui >}} option, then under {{< ui >}}Route traffic to{{< /ui >}}, choose {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
    **Notes**:
       - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]
       - The Agent sends telemetry to versioned endpoints, for example, <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> which resolves to <code>metrics.agent.{{< region-param key="dd_site" >}}</code> through a CNAME alias. Therefore, you only need to set up a private hosted zone for <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
+      - {{% site-region region="ap2" %}}**AP2 only:** The agent hostname shown in the table above (for example, `metrics.agent.ap2.datadoghq.com`) CNAME-resolves to an intermediate color record (for example, `beige.intake.ap2.datadoghq.com`). The Route53 hosted zone you need to create is for the color record, not the agent hostname. Retrieve the correct hosted zone name for each service using `DescribeVpcEndpointServices` as shown above.{{% /site-region %}}
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
