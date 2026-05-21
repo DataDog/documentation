@@ -30,7 +30,7 @@ Managed roles are maintained by Datadog. Their permissions are automatically upd
 
 ### When to create custom roles
 
-Use custom roles to **control which features are available** to their SREs and developers, including which newly-released Datadog features are available to which users. Beyond feature access, use custom roles to create distinct tiers for user populations. Other common triggers:
+Use custom roles to **control which features are available** to your SREs and developers, including which newly-released Datadog features are available to which users. Beyond feature access, use custom roles to create distinct tiers for user populations. Other common triggers:
 
 - **Compliance or audit users** need read access across products but should never edit anything.
 - **Platform administrators** need elevated permissions for infrastructure management, without overly-broad admin privileges.
@@ -62,7 +62,7 @@ As your organization grows, the number of roles can increase rapidly. Organizati
 
 ## Recommended starter roles
 
-Start with set of 4-6 custom roles. Here is a recommended starting point:
+Start with a set of 4-6 custom roles. Here is a recommended starting point:
 
 | Role | Based on | Key modifications |
 | :---- | :---- | :---- |
@@ -80,7 +80,7 @@ When you begin restricting resources to specific teams (covered in [Protecting A
 
 To avoid this, establish a break-glass **admin override team** (such as "Platform Admins" or "Datadog Governance") and include it in the access list for all critical resources. This helps ensure that your administrative staff always retains access for troubleshooting and governance, even as you tighten team-based restrictions.
 
-**Note:** Users with the `user_access_manage` permission are able to grant themselves elevated access as a failsafe.
+**Note:** Users with the `user_access_manage` permission can grant themselves elevated access as a failsafe.
 
 ## Recommendations
 

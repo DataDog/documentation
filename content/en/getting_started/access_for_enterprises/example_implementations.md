@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-These four implementation templates show what a fully implemented access strategy looks like, including which mechanisms are in use, how roles and teams are structured, and how the layers work together. They represent common organization archetypes, not specific companies. Use them as starting point for your own implementation.
+These four implementation templates show what a fully implemented access strategy looks like, including which mechanisms are in use, how roles and teams are structured, and how the layers work together. They represent common organization archetypes, not specific companies. Use them as a starting point for your own implementation.
 
 ## Choose your template
 
