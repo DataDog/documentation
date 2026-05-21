@@ -247,7 +247,7 @@ To optimize how your archived logs are physically organized in storage (and acce
 * **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
 * **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
 
-#### Archive Lookup Attribute
+#### Archive Lookup Attribute (Preview)
 
 To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
 

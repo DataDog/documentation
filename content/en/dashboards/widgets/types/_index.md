@@ -25,6 +25,8 @@ further_reading:
         img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/point_plot"
+        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Point Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
@@ -71,6 +73,8 @@ further_reading:
 
 ## Architecture
 {{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
+    {{< nextlink href="/dashboards/widgets/cloudcraft_diagram"
+        img="dashboards/widgets/icons/cloudcraft_light_large.svg">}} Cloudcraft Diagram{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap"
         img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/topology_map"
