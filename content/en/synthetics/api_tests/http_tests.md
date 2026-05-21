@@ -125,7 +125,7 @@ You may create a test using one of the following options:
 
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime and to truncate the error message of failed JavaScript assertions. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 
 [1]: /data_security/synthetics
@@ -187,6 +187,8 @@ Use JavaScript assertions when standard response assertions don't meet your vali
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
 <div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
+**Note:** If a failed JavaScript assertion's error message might include sensitive data, enable **Do not save response body** under **Advanced Options** > **Privacy**. This truncates the assertion error message.
 
 #### Using dd.assert()
 
