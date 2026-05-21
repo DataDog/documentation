@@ -1,16 +1,17 @@
 ---
 title: AI Impact
-description: "Measure the impact of AI coding assistants on your software delivery performance with DORA Metrics."
+description: "Measure the impact of AI coding assistants on your software delivery performance."
 aliases:
 - /dora_metrics/ai-impact/
+- /dora_metrics/ai_impact/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up DORA Metrics'
-- link: '/dora_metrics/calculation/'
+- link: '/delivery_performance/dora_metrics/calculation/'
   tag: 'Documentation'
   text: 'Learn how DORA metrics are calculated'
 ---
@@ -50,7 +51,7 @@ Per-Commit
 User Activity
 : Compares delivery metrics between active and non-active users of the selected tool. A user is considered active on a given day if they performed any interaction with the tool (for example, accepted a suggestion, used chat, or triggered an agent). Commits are attributed to the active or non-active group based on their author's activity on the day the commit was created.
 
-[1]: /dora_metrics/setup/
+[1]: /delivery_performance/dora_metrics/setup/
 [2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
 [3]: /integrations/anthropic-usage-and-costs/
 

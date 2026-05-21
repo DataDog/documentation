@@ -4,10 +4,10 @@ description: "Learn how to configure change failure detection in DORA Metrics us
 aliases:
 - /dora_metrics/change_failure_detection/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up data sources for DORA Metrics'
 ---
@@ -189,7 +189,7 @@ To update a deployment's status from the Datadog UI:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/settings/dora
-[2]: /dora_metrics/calculation/#change-failure-rate
-[3]: /dora_metrics/calculation/#failed-deployment-recovery-time
+[2]: /delivery_performance/dora_metrics/calculation/#change-failure-rate
+[3]: /delivery_performance/dora_metrics/calculation/#failed-deployment-recovery-time
 [4]: /api/latest/dora-metrics/#patch-a-deployment-event
 [5]: https://app.datadoghq.com/ci/dora?detail=deployments

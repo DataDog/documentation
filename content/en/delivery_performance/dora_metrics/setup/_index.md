@@ -16,13 +16,13 @@ aliases:
 - /dora_metrics/failures/
 - /dora_metrics/setup/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/calculation'
+- link: '/delivery_performance/dora_metrics/calculation/'
   tag: 'Documentation'
   text: 'Learn how the DORA metrics are calculated'
-- link: '/dora_metrics/change-failure-detection'
+- link: '/delivery_performance/dora_metrics/change_failure_detection/'
   tag: 'Documentation'
   text: 'Learn about Change Failure Detection'
 - link: '/tracing/software_catalog'
@@ -576,5 +576,5 @@ EOF
 [2]: /tracing/software_catalog
 [3]: /tracing/software_catalog/adding_metadata
 [4]: /tracing/software_catalog/adding_metadata
-[5]: /dora_metrics/change_failure_detection/
+[5]: /delivery_performance/dora_metrics/change_failure_detection/
 [6]: https://app.datadoghq.com/ci/settings/dora

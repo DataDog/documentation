@@ -4,13 +4,13 @@ description: Learn how DORA metrics are calculated in Datadog.
 aliases:
 - /dora_metrics/calculation/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/data_collected/'
+- link: '/delivery_performance/dora_metrics/data_collected/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics Data Collected'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up data sources for DORA Metrics'
 ---
@@ -120,5 +120,5 @@ Failed deployment recovery time measures how long it takes to recover from a fai
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dora_metrics/change_failure_detection/
-[2]: /dora_metrics/change_failure_detection/#static-rules
+[1]: /delivery_performance/dora_metrics/change_failure_detection/
+[2]: /delivery_performance/dora_metrics/change_failure_detection/#static-rules
