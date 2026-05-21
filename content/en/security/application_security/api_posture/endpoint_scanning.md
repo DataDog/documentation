@@ -5,11 +5,11 @@ description: Verify whether discovered API endpoints are publicly accessible and
 
 <div class="alert alert-warning">Endpoint Scanning is in Preview and is subject to change.</div>
 
-Endpoint Scanning verifies how your API endpoints actually respond by scanning them from outside your environment, rather than inferring their behavior from observed traffic. The results enrich the [API Inventory][2] with verified authentication and visibility data.
+Endpoint Scanning probes your API endpoints from outside your environment and records their HTTP responses, rather than inferring behavior from observed traffic. The results enrich the [API Inventory][2] with verified authentication and visibility data.
 
-Endpoint Scanning sends only `GET` requests. It does not call POST, PUT, PATCH, or DELETE endpoints, and never modifies data on your endpoints.
+Endpoint Scanning sends only `GET` requests. It does not call `POST`, `PUT`, `PATCH`, or `DELETE` endpoints, and never modifies data on your endpoints.
 
-<div class="alert alert-info">At this time, Endpoint Scanning only scans endpoints AAP has discovered from APM traces.</div>
+<div class="alert alert-info">At this time, Endpoint Scanning only scans endpoints that AAP discovers from APM traces.</div>
 
 ## What Endpoint Scanning verifies
 
