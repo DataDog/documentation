@@ -1,5 +1,6 @@
 ---
 title: External Evaluations
+description: Submit custom evaluations to LLM Observability using the Python SDK or the LLM Observability API to track user feedback and response quality.
 aliases:
     - /tracing/llm_observability/submit_evaluations
     - /llm_observability/submit_evaluations
