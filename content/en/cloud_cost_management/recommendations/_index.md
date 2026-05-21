@@ -45,6 +45,12 @@ multifiltersearch:
     - name: Recommendation Prerequisites
       id: recommendation_prerequisites
   data:
+    - category: Configure
+      cloud_provider: Anthropic
+      resource_type: Anthropic API Key
+      recommendation_type: Enable Anthropic Prompt Caching
+      recommendation_description: Identifies Anthropic API keys with no prompt caching usage and recommends enabling prompt caching to reduce input token costs.
+      recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
     - category: Migrate
       cloud_provider: AWS
       resource_type: Auto Scaling Group
@@ -602,6 +608,7 @@ Below are the available cloud cost recommendation categories and their descripti
 | Migrate | Resources with moderately low utilization signals or other inefficiencies. Consider adjusting the instance type or other parameters. |
 | Downsize | Resources that are under-utilized or over-provisioned. Consider adjusting the size or other parameters to reduce costs. |
 | Purchase | Resources with on-demand charges and extended uptime. Purchasing a reservation or Savings Plan can reduce the amortized cost of the resource. |
+| Configure | Resources with configuration options that can be adjusted to reduce costs without changing capacity or terminating the resource. |
 
 ## Prerequisites
 

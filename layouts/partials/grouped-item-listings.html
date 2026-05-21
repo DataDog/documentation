@@ -21,44 +21,50 @@
 <div>
   <div class="js-empty-results d-none font-semibold"></div>
   {{ range $i, $v := $listGroups }}
+  {{$groupHeaderText := ""}}
+  {{ if $transformGroupTitle }}
+    <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
+    {{ $words := (split (humanize $v.Key) " ") }}
+    {{ range $index, $word := $words }}
+      {{ if (and (eq $index 0) (eq (len $word) 3)) }}
+        {{ $groupHeaderText = $word | upper }}
+      {{ else }}
+        <!-- concatenate -->
+        {{ $groupHeaderText = (trim (printf "%s %s" $groupHeaderText ($word | title )) " ") }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ $groupHeaderText = $v.Key }}
+  {{ end }}
   <div class="js-group js-group-{{ $i }}" id="{{ $v.Key | anchorize }}">
-    <div class="js-group-header mb-1 d-flex align-items-center {{$activeAttr}}" id="">
-      <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
-        {{ range last 1 $v.Pages }}
-          {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}
-          {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
-          {{ if $int_logo }}
-            <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
-          {{ else }}
-            <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
-          {{ end }}
-        {{ end }}
-      </div>
-      {{$groupHeaderText := ""}}
-      <div class="font-semibold ms-1 group-header-text">
-        {{ if $transformGroupTitle }}
-          <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
-          {{ $words := (split (humanize $v.Key) " ") }}
-          {{ range $index, $word := $words }}
-            {{ if (and (eq $index 0) (eq (len $word) 3)) }}
-              {{ $groupHeaderText = $word | upper }}
+    <div class="group-header-container">
+      <button class="js-group-header mb-1 d-flex align-items-center {{$activeAttr}}" aria-expanded="false" aria-label="Toggle {{ $groupHeaderText }} content">
+        <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
+          {{ range last 1 $v.Pages }}
+            {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}
+            {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
+            {{ if $int_logo }}
+              <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
             {{ else }}
-              <!-- concatenate -->
-              {{ $groupHeaderText = (trim (printf "%s %s" $groupHeaderText ($word | title )) " ") }}
+              <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
             {{ end }}
           {{ end }}
-        {{ else }}
-          {{ $groupHeaderText = $v.Key }}
-        {{ end }}
+        </div>
+        <div class="js-group-header__arrow" aria-hidden="true">></div>
+      </button>
+      <div class="group-header-text font-semibold">
         <span>{{ $groupHeaderText }}</span>
         {{ if $groupHeaderText }}
-          <span class="icon-wrapper" data-anchor="#{{$v.Key | anchorize}}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $groupHeaderText) ) }}</span>
-          <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+          <button class="copy-anchor" data-anchor="#{{$v.Key | anchorize}}" aria-label="copy anchor for {{ $groupHeaderText }}">
+            <span aria-hidden="true">
+              {{ partial "icon" (dict "name" "link-wui" "size" "14px" "title" (printf "copy anchor for %s" $groupHeaderText)) }}
+              {{ partial "icon" (dict "name" "check-bold" "color" "#632ca6" "size" "14px") }}
+            </span>
+          </button>
         {{ end }}
       </div>
-      <div class="js-group-header__arrow">></div>
     </div>
-    <div class="group-{{ .Key }} mb-2 ms-4 d-none">
+    <div class="group-content group-{{ $v.Key }} mb-2 ms-4 d-none">
       {{ range $v.Pages }}
         <a class="mb-1 font-semibold mix js-single-rule {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ lower $groupHeaderText }} {{ .File.TranslationBaseName }}">
           {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}

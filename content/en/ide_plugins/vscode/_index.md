@@ -54,6 +54,8 @@ The extension includes these features:
 
 -   [**Exception Replay**](#exception-replay): Debug your production code.
 
+-   [**Live Debugger**](#live-debugger): Add non-breaking logpoints to running services to capture runtime data without redeploying.
+
 -   [**Fix in Chat**](?tab=cursor#fix-in-chat): Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
@@ -145,6 +147,14 @@ Find out more in the [Code Security][19] sub-section.
 
 Find out more in the [Exception Replay][22] sub-section.
 
+### Live Debugger
+
+The **Live Debugger** lets you add logpoints—auto-expiring, non-breaking breakpoints—to your running services to capture runtime data for debugging without redeploying your code.
+
+{{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Overview of the Datadog Live Debugger activity" style="width:100%" video=true >}}
+
+Find out more in the [Live Debugger][23] sub-section.
+
 ## Other features
 
 ### View in IDE
@@ -206,3 +216,4 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 [20]: /ide_plugins/vscode/logs/
 [21]: /ide_plugins/vscode/code_insights/
 [22]: /ide_plugins/vscode/exception_replay/
+[23]: /ide_plugins/vscode/live_debugger/
