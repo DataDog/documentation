@@ -1,5 +1,6 @@
 ---
 title: AWS Integration and CloudWatch FAQ
+description: "Frequently asked questions about the Datadog AWS integration and CloudWatch metric collection."
 
 aliases:
   - "/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog"

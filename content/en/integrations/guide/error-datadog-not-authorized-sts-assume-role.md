@@ -1,5 +1,6 @@
 ---
 title: "Error: Datadog is not authorized to perform sts:AssumeRole"
+description: "Troubleshoot the sts:AssumeRole error in the Datadog AWS integration by checking the IAM role's trust relationship and policy."
 
 further_reading:
 - link: "/integrations/amazon_web_services/#installation"
