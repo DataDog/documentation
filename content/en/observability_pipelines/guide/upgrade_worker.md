@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.15.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.16.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,49 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.16.0
+
+To upgrade to Worker version 2.16.0:
+
+- Docker: Run the `docker pull` command for the [2.16.0 image][43].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.16.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.16.0`.
+
+Worker version 2.16.0 gives you access to the following:
+
+#### New features
+
+- A new [ClickHouse destination][44] that inserts log events into a ClickHouse table via HTTP. Supports basic auth, TLS, gzip compression, batch buffering, and per-event JSON formats (`json_each_row`, `json_as_object`, `json_as_string`).
+- A new [Databricks Zerobus destination][45] that streams log data to Databricks Unity Catalog tables. Supports OAuth 2.0 authentication and automatic schema fetching from Unity Catalog.
+- The Splunk HEC source now supports enriching incoming log events with a VRL decoder.
+- New processors for metrics pipelines:
+    - `add_metric_tags`: Adds new tags to metric events. Existing tags are left unchanged when a conflict occurs.
+    - `rename_metric_tags`: Renames tags on metric events. Renames that would overwrite an existing tag are skipped.
+    - `tag_cardinality_limit`: Caps the number of distinct tag values tracked per metric. Supports per-metric and per-tag-key overrides, including opting metrics out entirely.
+    - Aggregate processor: Aggregates metric samples across a specified time window.
+- The HTTP server source now accepts an optional `valid_tokens` list for token-based authentication. Each entry specifies a secret identifier via `token_key` and an optional `path_to_token` to indicate which request field to read the token from (for example, a named header, the request path, or the client address). `valid_tokens` is mutually exclusive with `auth_strategy: plain`.
+
+#### Enhancements
+
+- Multiple push/server based sources now support mTLS via the `tls.verify_certificate` field. When set to `true`, connecting clients must present a valid certificate signed by a trusted CA. Affected sources: Fluent, Logstash, OpenTelemetry (logs and metrics), Splunk HEC, Splunk TCP, HTTP server, Socket, and Syslog.
+- Live capture events now include a `worker_uuid` field to attribute each captured event to the worker that produced it.
+- New gauge metrics `buffer_size_events` and `buffer_size_bytes` have been added to the Reference Tables processor buffer, replacing the deprecated `buffer_events` and `buffer_byte_size` metrics. The deprecated metrics are still exported for backward compatibility.
+- The `datadog_logs` destination now supports per-site logs endpoint overrides configurable via the bootstrap `logs-sites` field or `DD_OP_LOGS_<SITE>` environment variables (for example, `DD_OP_LOGS_US1`). Environment variables take precedence over the bootstrap file.
+- The Grok processor now accepts a per-rule `include` filter written in Datadog search syntax.
+- The Parse Grok processor accepts an optional `field` setting (default `.message`) to select which event field is parsed and updated.
+- The Splunk HEC source now accepts an optional `valid_tokens` list for token-based authentication via environment variables or the configured secret backend.
+- The Amazon S3 destination now supports schema file validation with `strict` or `relaxed` modes.
+
+#### Fixes
+
+- Fixed a race condition in the Reference Tables processor that could, in rare situations, cause buffered events to be dropped during worker shutdown.
+- Fixed a Live Capture issue where captured events could be lost when too many events were flowing at the same time.
+- Fixed spurious "discarded events" in live capture when a processor follows a Generate Metrics transform. The Generate Metrics transform now routes generated metric events to a dedicated output and passes log events through the primary output, so downstream log processors no longer receive metric events they cannot handle.
+- Fixed a startup warning where the Worker incorrectly logged `Root metadata expired, potential freeze attack` due to expired embedded Remote Config trusted-root metadata.
+
+---
 
 ## Worker version 2.15.0
 
@@ -459,3 +502,6 @@ Worker version 2.7.0 gives you access to the following:
 [40]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.15.0
 [41]: https://yaml.org/spec/1.1/
 [42]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.1
+[43]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.16.0
+[44]: /observability_pipelines/destinations/clickhouse/
+[45]: /observability_pipelines/destinations/databricks_zerobus/
