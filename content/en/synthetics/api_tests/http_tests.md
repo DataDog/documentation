@@ -182,7 +182,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
 
-**Note:** When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
