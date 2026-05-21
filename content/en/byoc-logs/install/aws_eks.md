@@ -65,7 +65,7 @@ Required authorized actions:
 - `ListMultipartUploadParts`
 - `AbortMultipartUpload`
 
-1. Create an IAM policy with the following permissions:
+1. Copy the following JSON to a file, replacing `<S3_BUCKET_NAME>` with your bucket name:
 
 ```json
 {
@@ -77,7 +77,7 @@ Required authorized actions:
        "s3:ListBucket"
      ],
      "Resource": [
-       "arn:aws:s3:::my-bucket"
+       "arn:aws:s3:::<S3_BUCKET_NAME>"
      ]
    },
    {
@@ -90,34 +90,50 @@ Required authorized actions:
        "s3:AbortMultipartUpload"
      ],
      "Resource": [
-       "arn:aws:s3:::my-bucket/*"
+       "arn:aws:s3:::<S3_BUCKET_NAME>/*"
      ]
    }
  ]
 }
 ```
 
-2. Create the IAM role and service account:
+2. Create the IAM policy, replacing `<JSON_FILENAME>` with the name of the file you created in Step 1:
+
+```bash
+aws iam create-policy \
+  --policy-name <POLICY_NAME> \
+  --policy-document file://<JSON_FILENAME> \
+  --region <AWS_REGION>
+```
+
+3. Get the policy ARN for role creation:
+
+```bash
+POLICY_ARN=$(aws iam list-policies --query \
+  "Policies[?PolicyName=='<POLICY_NAME>'].Arn" \
+  --output text)
+```
+
+4. Create the IAM role and service account:
 
 ```bash
 eksctl create iamserviceaccount \
   --name byoclogs \
-  --namespace byoclogs \
+  --namespace <NAMESPACE_NAME> \
   --cluster <CLUSTER_NAME> \
   --role-name byoclogs \
   --region <AWS_REGION> \
-  --attach-policy-arn <POLICY_ARN> \
+  --attach-policy-arn $POLICY_ARN \
   --approve
 ```
 
-This creates an IAM role called `byoclogs` and a Kubernetes service account called `byoclogs` in the `byoclogs` namespace. 
+This creates an IAM role called `byoclogs` and a Kubernetes service account called `byoclogs` in the `<NAMESPACE_NAME>` namespace. If the namespace does not already exist, the command creates it.
 
 ### Create an RDS database
 
 Create an RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is sufficient.
 
 ```shell
-# RDS instance for testing purposes. Takes around 5 min.
 aws rds create-db-instance \
   --db-instance-identifier byoclogs-demo-postgres \
   --db-instance-class db.t4g.medium \
@@ -135,7 +151,7 @@ aws rds create-db-instance \
   --no-multi-az
 ```
 
-You can retrieve RDS information by executing the following shell commands. The below commands retrieve information for the testing RDS instance created above:
+You can retrieve RDS information by executing the following shell commands. The below commands retrieve information for the RDS instance created above:
 
 ```shell
 # Get RDS instance details
@@ -173,9 +189,9 @@ echo ""
    --from-literal api-key="<DD_API_KEY>"
    ```
 
-    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
-   kubectl config set-context --current --namespace=byoclogs
+   kubectl config set-context --current --namespace=<NAMESPACE_NAME>
    ```
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
@@ -222,7 +238,12 @@ echo ""
    serviceAccount:
      create: false
      name: byoclogs
+     # eksRoleName is the name of the IAM role to use for the service account.
+     # If serviceAccount.create is set to true, the following annotations will be added to the service account:
+     # - eks.amazonaws.com/role-arn:arn:aws:iam::<aws.accountId>:role/<serviceAccount.eksRoleName>
+     # - eks.amazonaws.com/sts-regional-endpoints:"true"
      eksRoleName: byoclogs
+     extraAnnotations: {}
 
    # BYOC Logs node configuration
    config:
@@ -267,7 +288,7 @@ echo ""
      persistentVolume:
        enabled: true
        storage: 250Gi
-       storageClass: <storage class>
+       storageClass: <STORAGE_CLASS>
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.
