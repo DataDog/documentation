@@ -85,7 +85,7 @@ See the [Send AWS Services Logs with the Datadog Amazon Data Firehose Destinatio
    kubectl apply -f aws-logging-configmap.yaml
 {{< /code-block >}}
 
-4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Amazon Data Firehose. You can use the example below, replacing the ARN in the {{< ui >}}Resource{{< /ui >}} field with the ARN of your delivery stream, as well as specifying your region and account ID.
+4. Create an IAM policy and attach it to the pod execution role to allow the log router running on AWS Fargate to write to the Amazon Data Firehose. You can use the example below, replacing the ARN in the `Resource` field with the ARN of your delivery stream, as well as specifying your region and account ID.
    {{< code-block lang="json" filename="allow_firehose_put_permission.json" disable_copy="false" collapsible="false" >}}
    {
        "Version": "2012-10-17",

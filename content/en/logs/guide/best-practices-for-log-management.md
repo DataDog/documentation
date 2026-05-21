@@ -190,7 +190,7 @@ To find this dashboard, go to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashbo
 
 ### Monitor which indexes are queried actively
 
-Monitoring {{< ui >}}query activity{{< /ui >}} helps you evaluate the value of your indexed data and optimize costs. For example, you can identify indexes that are rarely queried to reduce retention or move data to Flex Logs or archives.
+Monitoring query activity helps you evaluate the value of your indexed data and optimize costs. For example, you can identify indexes that are rarely queried to reduce retention or move data to Flex Logs or archives.
 
 To analyze which indexes are actively queried:
 

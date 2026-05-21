@@ -59,8 +59,8 @@ Pipelines use [Granular Access Control][7] to manage who can edit pipeline and p
 
 For each pipeline, administrators can choose the following edit scopes:
 
-- {{< ui >}}Editor{{< /ui >}}: Only specified users, teams, or roles can edit pipeline configuration and processors.
-- {{< ui >}}Processor Editor{{< /ui >}}: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
+- **Editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
+- **Processor Editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
 <div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 

@@ -161,7 +161,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 ### Custom log forwarding
 
-Any custom process or logging library able to forward logs through {{< ui >}}HTTP{{< /ui >}} can be used in conjunction with Datadog Logs.
+Any custom process or logging library able to forward logs through HTTP can be used in conjunction with Datadog Logs.
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][15] to get started.
 

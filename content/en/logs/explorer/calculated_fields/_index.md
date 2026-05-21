@@ -106,9 +106,9 @@ Extraction rules are evaluated globally across all logs in your session. For mor
 
 After you create a calculated field, the Log Explorer updates instantly to show you the new data and give you tools to interact with it. Calculated fields function like log attributes and can be used for search, aggregation, visualization, or defining other calculated fields. Always use the `#` prefix when referencing a calculated field.
 
-- {{< ui >}}Header row{{< /ui >}}: A new row appears under the search bar, showing all active calculated fields. Hover to view the full definition, or use quick actions to edit, filter by, or group by the field.
-- {{< ui >}}List visualization{{< /ui >}}: In [List][6] view, a column for the calculated field is automatically added.
-- {{< ui >}}Log side panel{{< /ui >}}: Calculated fields are grouped into a dedicated section when you inspect a log.
+- **Header row**: A new row appears under the search bar, showing all active calculated fields. Hover to view the full definition, or use quick actions to edit, filter by, or group by the field.
+- **List visualization**: In [List][6] view, a column for the calculated field is automatically added.
+- **Log side panel**: Calculated fields are grouped into a dedicated section when you inspect a log.
 
 {{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated field called request_duration used to filter results in the Log Explorer" style="width:100%;" >}}
 

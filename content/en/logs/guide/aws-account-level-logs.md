@@ -105,7 +105,7 @@ aws s3api create-bucket \
 ```
 
 3. Create an IAM role, specifying the trust policy file:
-   **Note**: The returned {{< ui >}}Role.Arn{{< /ui >}} value is used in a later step.
+   **Note**: The returned `Role.Arn` value is used in a later step.
 
 ```bash
 aws iam create-role \
@@ -196,7 +196,7 @@ aws iam create-role \
   --role-name CWLtoKinesisFirehoseRole \
   --assume-role-policy-document file://./TrustPolicyForCWL.json
 ```
-   **Note**: The returned {{< ui >}}Role.Arn{{< /ui >}} value is used in a later step.
+   **Note**: The returned `Role.Arn` value is used in a later step.
 
 3. Create a `./PermissionsForCWL.json` file with the following statement:
    - Replace `<REGION>` with the region containing your Datadog Forwarder Lambda function.

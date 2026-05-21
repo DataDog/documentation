@@ -33,18 +33,18 @@ To view CSV reports navigate to [Log Explorer][1] and click the {{< ui >}}Report
 
 **Note**: Reports are not tied to [Saved Views][6] and can only be accessed through the Reports tab. 
 
-* You must have the {{< ui >}}CSV Report Schedules Write{{< /ui >}} permission to create your own report schedules.
-* You must have the {{< ui >}}CSV Report Schedules Manage{{< /ui >}} permission to modify other users' report schedules.
+* You must have the `CSV Report Schedules Write` permission to create your own report schedules.
+* You must have the `CSV Report Schedules Manage` permission to modify other users' report schedules.
 
-After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have {{< ui >}}CSV Report Schedules Write{{< /ui >}} or {{< ui >}}CSV Report Schedules Manage{{< /ui >}} permissions, you can unsubscribe from the report directly from an email
+After a report is created, you can subscribe, unsubscribe, edit a schedule, and delete a report assuming you have appropriate permissions. If you do not have `CSV Report Schedules Write` or `CSV Report Schedules Manage` permissions, you can unsubscribe from the report directly from an email
 
 ## Reports views
 
 | Report View | Description | Required Permission |
 | ----- | ----- | ----- |
-| {{< ui >}}Created by you{{< /ui >}} | Shows all Scheduled CSV Reports you have created from Log Explorer | {{< ui >}}CSV Report Schedules Write{{< /ui >}} |
-| {{< ui >}}All Reports{{< /ui >}} | Shows all Scheduled CSV Reports in Log Explorer for the organization you are in | {{< ui >}}CSV Report Schedules Manage{{< /ui >}} |
-| {{< ui >}}Subscribed{{< /ui >}} | Shows all Scheduled CSV Reports that you are Subscribed to | {{< ui >}}CSV Report Schedules Write{{< /ui >}} |
+| {{< ui >}}Created by you{{< /ui >}} | Shows all Scheduled CSV Reports you have created from Log Explorer | `CSV Report Schedules Write` |
+| {{< ui >}}All Reports{{< /ui >}} | Shows all Scheduled CSV Reports in Log Explorer for the organization you are in | `CSV Report Schedules Manage` |
+| {{< ui >}}Subscribed{{< /ui >}} | Shows all Scheduled CSV Reports that you are Subscribed to | `CSV Report Schedules Write` |
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/explorer/advanced_search/#filter-logs-with-subqueries

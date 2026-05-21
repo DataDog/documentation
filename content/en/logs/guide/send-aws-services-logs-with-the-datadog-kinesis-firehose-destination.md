@@ -93,7 +93,7 @@ Create an IAM role and permissions policy to enable CloudWatch Logs to put data 
   ]
 }
 ```
-  2. Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions. If you're using a Kinesis Data Stream, specify its ARN in the {{< ui >}}Resource{{< /ui >}} field. If you're **not** using a Kinesis Data Stream, specify the ARN of your Amazon Data Firehose stream in the {{< ui >}}Resource{{< /ui >}} field.  
+  2. Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions. If you're using a Kinesis Data Stream, specify its ARN in the `Resource` field. If you're **not** using a Kinesis Data Stream, specify the ARN of your Amazon Data Firehose stream in the `Resource` field.  
   For example:
 
 ```
