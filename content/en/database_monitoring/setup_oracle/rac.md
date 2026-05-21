@@ -35,7 +35,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 1. [Create the Datadog user](#create-the-datadog-user)
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
-1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+1. Install or verify the Oracle integration
 1. [Validate the setup](#validate-the-setup)
 
 ### Create the Datadog user
