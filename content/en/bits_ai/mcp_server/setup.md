@@ -53,15 +53,16 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 {{% tab "Claude Code" %}}
 
-Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server together with bundled skills (see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin) for the full list) and auto-updates when new plugin versions ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
+Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin). If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the Datadog plugin:
     <pre><code>/plugin install datadog@claude-plugins-official</code></pre>
 
-1. Run `/ddsetup` to select the Datadog MCP Server domain for your [site](/getting_started/site/), then complete the OAuth login flow to choose your organization in the browser. The `/ddsetup` skill also runs automatically when Claude Code detects a Datadog-related prompt, so manual invocation is optional. For unattended configuration, set the domain (and optionally Datadog API and application keys) as environment variables in your MCP Server declaration instead of running `/ddsetup`.
-
-   To switch sites or datacenters later in the same Claude Code session, run `/ddconfig` to change your Datadog site or organization, then run `/reload-plugins` to refresh the connection. Reauthenticate by opening `/plugin` and selecting the Datadog plugin.
+1. The plugin ships with three slash commands:
+   - `/ddsetup`: first-time setup. Auto-triggers on Datadog-related prompts to select the MCP Server domain for your [site](/getting_started/site/) and complete OAuth login. To skip it, set the domain (and optionally Datadog API and application keys) as environment variables in your MCP Server declaration.
+   - `/ddconfig`: change your site, switch organizations, or diagnose connection issues. After running it, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
+   - `/ddtoolsets`: enable or disable groups of MCP tools.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
