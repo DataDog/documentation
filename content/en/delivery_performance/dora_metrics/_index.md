@@ -3,9 +3,10 @@ title: DORA Metrics
 description: Learn how to use DORA metrics to measure and improve your organization's software delivery processes.
 aliases:
 - /continuous_integration/dora_metrics
+- /dora_metrics/
 is_beta: true
 further_reading:
-- link: "/dora_metrics/calculation/"
+- link: "/delivery_performance/dora_metrics/calculation/"
   tag: "Documentation"
   text: "Learn how Datadog calculates DORA metrics"
 - link: "/continuous_delivery/deployments"
@@ -58,24 +59,24 @@ To start configuring data sources to send deployment events to Datadog, see the 
 
 ## Analyze DORA Metrics
 
-After you've set up the data sources for your deployment and failure events, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}DORA Metrics{{< /ui >}}][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
+After you've set up the data sources for your deployment and failure events, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}DORA Metrics{{< /ui >}}][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
 
-{{< img src="dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
 Click {{< ui >}}View Deployments{{< /ui >}} to open a new tab with the list of deployment events.
 
-{{< img src="dora_metrics/deployments_list.png" alt="The Deployments Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/deployments_list.png" alt="The Deployments Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
 Click {{< ui >}}View Change Failures{{< /ui >}} to open a side panel with the list of deployment events marked as change failures.
 
-{{< img src="dora_metrics/change_failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/change_failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
 ## Use DORA Metrics data
 
 ### Export DORA Metrics widgets
 Export your visualization widgets to dashboards, notebooks, or add them to existing incidents.
 
-{{< img src="dora_metrics/dora_ui_2.png" alt="Click the Export icon to add the visualization widget to an incident or to a dashboard or notebook" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/dora_ui_2.png" alt="Click the Export icon to add the visualization widget to an incident or to a dashboard or notebook" style="width:100%;" >}}
 
 Click the {{< ui >}}Export{{< /ui >}} icon on any visualization to add it to an incident, dashboard, or notebook. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
 
@@ -83,21 +84,21 @@ Click the {{< ui >}}Export{{< /ui >}} icon on any visualization to add it to an 
 
 Build custom dashboards using DORA Metrics to analyze your delivery workflow end-to-end, from commits and pull requests to production deployments. For example, compare code review performance across teams to identify which teams are blocked by slow approvals and prioritize where to invest in workflow improvements.
 
-{{< img src="dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
 
 Within dashboards and graphs, custom tags are treated as [attributes][7]. To filter or group by a custom tag, it must be prefixed with an `@` symbol.
 
-{{< img src="dora_metrics/graph_with_custom_tag.png" alt="An example of a custom DORA Metrics graph grouped by a custom tag" style="width:100%;" >}}
+{{< img src="delivery_performance/dora_metrics/graph_with_custom_tag.png" alt="An example of a custom DORA Metrics graph grouped by a custom tag" style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/knowledge-center/dora-metrics/
-[2]: /dora_metrics/setup/
-[3]: /dora_metrics/data_collected/
+[2]: /delivery_performance/dora_metrics/setup/
+[3]: /delivery_performance/dora_metrics/data_collected/
 [4]: https://app.datadoghq.com/ci/dora
 [5]: /monitors/types/metric/?tab=threshold
 [6]: /monitors/
 [7]: /dashboards/guide/quick-graphs/#graphing-events
-[8]: /dora_metrics/data_collected/#custom-tags
+[8]: /delivery_performance/dora_metrics/data_collected/#custom-tags

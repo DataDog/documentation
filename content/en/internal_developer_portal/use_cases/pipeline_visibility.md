@@ -16,7 +16,7 @@ further_reading:
   - link: "/security/code_security/static_analysis/"
     tag: "Documentation"
     text: "Static Analysis"
-  - link: "/dora_metrics/"
+  - link: "/delivery_performance/dora_metrics/"
     tag: "Documentation"
     text: "DORA Metrics"
   - link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
@@ -66,7 +66,7 @@ For more details on CI status and static analysis violations for the pipelines a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/static_analysis/
-[2]: /dora_metrics/
+[2]: /delivery_performance/dora_metrics/
 [4]: https://app.datadoghq.com/software
 [5]: https://app.datadoghq.com/ci/pipelines
 [6]: /software_catalog/service_definitions/v2-2/#example-yaml

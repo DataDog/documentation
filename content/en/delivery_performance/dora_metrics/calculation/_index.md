@@ -1,14 +1,16 @@
 ---
 title: DORA Metrics Calculation
 description: Learn how DORA metrics are calculated in Datadog.
+aliases:
+- /dora_metrics/calculation/
 further_reading:
-- link: '/dora_metrics/'
+- link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/dora_metrics/data_collected/'
+- link: '/delivery_performance/dora_metrics/data_collected/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics Data Collected'
-- link: '/dora_metrics/setup/'
+- link: '/delivery_performance/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Set up data sources for DORA Metrics'
 ---
@@ -38,7 +40,7 @@ To calculate a deployment's change lead time, Datadog runs a `git log` between t
 
 The following example illustrates how Datadog uses the commit history to calculate a deployment's change lead time.
 
-{{< img src="dora_metrics/git_log_example.png" alt="An example of a detected rollback deployment" style="width:75%;" >}}
+{{< img src="delivery_performance/dora_metrics/git_log_example.png" alt="An example of a detected rollback deployment" style="width:75%;" >}}
 
 In the graph above, C is the first commit, followed by C1 and C2. A feature branch is created from C2 with commit C3, then merged back into the main branch with merge commit C4. C4 has two parents: C2 and C3.
 
@@ -118,5 +120,5 @@ Failed deployment recovery time measures how long it takes to recover from a fai
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dora_metrics/change_failure_detection/
-[2]: /dora_metrics/change_failure_detection/#static-rules
+[1]: /delivery_performance/dora_metrics/change_failure_detection/
+[2]: /delivery_performance/dora_metrics/change_failure_detection/#static-rules

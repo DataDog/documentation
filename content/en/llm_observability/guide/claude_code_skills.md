@@ -11,6 +11,9 @@ further_reading:
     - link: '/llm_observability/guide/evaluation_developer_guide'
       tag: 'Guide'
       text: 'Evaluation Developer Guide: Build custom evaluators'
+    - link: 'https://github.com/datadog-labs/agent-skills'
+      tag: 'GitHub'
+      text: 'datadog-labs/agent-skills'
 ---
 
 ## Overview
@@ -34,7 +37,22 @@ The skills produce structured, actionable output — RCA reports with before/aft
 
 - [Claude Code][1] installed and authenticated
 - At least one LLM application [instrumented with LLM Observability][2] and producing traces
-- A data backend: either the Datadog MCP server **or** the `pup` CLI 
+- A data backend: either the Datadog MCP server **or** the `pup` CLI
+
+### Install the skills
+
+The skills are published in the [agent-skills][6] repository. Clone the repository and copy the LLM Observability skills into your Claude Code skills directory:
+
+```shell
+git clone https://github.com/datadog-labs/agent-skills
+cp -r agent-skills/dd-llmo/llm-obs-experiment-analyzer ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-eval-pipeline ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-eval-bootstrap ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-session-classify ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-trace-rca ~/.claude/skills
+```
+
+The skills are available in any Claude Code session after copying.
 
 ### Datadog MCP server
 
@@ -117,7 +135,7 @@ The skill highlights which metrics improved or regressed, which event categories
 
 ### Generate experiment code with the Python SDK
 
-`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][6], with all eight sections present (env setup, `LLMObs.enable`, dataset, task placeholder, evaluators, experiment, run, results inspection) and a `# TODO(user)` marker on the task and evaluators so the placeholder cannot ship by accident.
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][7], with all eight sections present (env setup, `LLMObs.enable`, dataset, task placeholder, evaluators, experiment, run, results inspection) and a `# TODO(user)` marker on the task and evaluators so the placeholder cannot ship by accident.
 
 The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is. Every generated experiment is tagged with `generated_by=claude-code` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
 
@@ -214,4 +232,5 @@ If you are new to evaluating an LLM application, the recommended flow is:
 [3]: /llm_observability/experiments/
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: https://datadoghq.atlassian.net/wiki/spaces/BITSAI/pages/5226692942/pup+CLI
-[6]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
+[6]: https://github.com/datadog-labs/agent-skills
+[7]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks
