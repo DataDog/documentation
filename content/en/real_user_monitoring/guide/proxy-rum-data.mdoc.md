@@ -148,7 +148,7 @@ The RUM Browser SDK adds a `ddforward` query parameter to all requests to your p
 
 For example, with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the RUM Browser SDK sends requests to a URL like this: `https://example.org/datadog-intake-proxy?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`. The proxy forwards the request to `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
-When [Browser Profiling][3] is enabled, the SDK also sends requests to the quota API using a `quota.` subdomain of the standard intake origin. For these requests, a `ddforwardSubdomain=quota` query parameter is added alongside `ddforward`, so your proxy can construct the correct target URL: `https://quota.browser-intake-datadoghq.eu/api/v2/profiling/quota?...`.
+When [Browser Profiling][3] is enabled, the SDK also sends requests to the quota API using a `quota.` subdomain of the standard intake origin. For these requests, the SDK adds a `ddforwardSubdomain=quota` query parameter alongside `ddforward`, so your proxy can construct the correct target URL: `https://quota.browser-intake-datadoghq.eu/api/v2/profiling/quota?...`.
 
 <!-- SDK version >=5.4.0 -->
 {% if equals($rum_browser_sdk_version, "gte_5_4_0") %}

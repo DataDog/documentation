@@ -83,7 +83,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
         });
     ```
 
-3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session will receive profiling data. No additional setup is required for this unless you use a proxy or have Content Security Policy (CSP) restrictions.
+3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session will receive profiling data.
 
     If you use a [proxy][13] or [CSP][14], you must also allow the `quota.` subdomain of your site's standard intake origin (for example, `https://quota.browser-intake-datadoghq.com` for US1, serving the `/api/v2/profiling/quota` endpoint). See the full list of quota endpoints per site in the [Supported endpoints][15] section, and refer to the [proxy setup documentation][13] for details on routing subdomain-specific requests.
 
@@ -105,7 +105,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
        });
        ```
 
-{% collapse-content title="Browser profiling and CORS" %}
+{% collapse-content title="Browser profiling and CORS" id="cors"%}
 
 #### Requirements for Cross-Origin Scripts (CORS)
 
