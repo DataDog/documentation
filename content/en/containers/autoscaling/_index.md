@@ -64,6 +64,7 @@ Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resourc
    | Argo Rollout recommendations and autoscaling | 7.71+ |
    | Cluster autoscaling ([preview sign-up][10]) | 7.72+ |
    | In-place vertical pod resize (opt-in) | 7.78+ |
+   | Cluster profile activation (label-based) | 7.78+ |
 
 - The following user permissions:
    - Org Management (required for Remote Configuration)
@@ -221,14 +222,15 @@ From any of these views, click {{< ui >}}Optimize{{< /ui >}} on a workload to se
 
 After you identify a workload to optimize, inspect its {{< ui >}}Scaling Recommendation{{< /ui >}}. Click {{< ui >}}Configure Recommendation{{< /ui >}} to add constraints or adjust target utilization levels before enabling.
 
-There are two ways to enable autoscaling for a workload. Pick the path that matches how you ship workloads today.
+There are three ways to enable autoscaling for a workload. Pick the path that matches how you ship workloads today.
 
 | Path | Best for | Where you start | Ongoing management |
 |------|----------|-----------------|--------------------|
 | **A. Datadog UI setup wizard** | Get started quickly and iterate on settings with immediate visual feedback, or empower your application teams to make better scaling configuration decisions | [Setup page][11] in the Datadog UI | Edit the workload's `DatadogPodAutoscaler` from the UI or your cluster |
 | **B. Author a `DatadogPodAutoscaler` manifest** | Existing workflows for shipping Kubernetes manifests (`kubectl`, Helm, ArgoCD, Terraform, or other GitOps tools) | Hand-written or templated YAML applied through your existing tooling | Edit the manifest and reapply through the same tooling |
+| **C. Apply a [cluster profile](#cluster-profiles) label** | Activating autoscaling across many workloads or namespaces with a single shared policy | Label the workload or namespace with `autoscaling.datadoghq.com/profile` | Edit the profile to update every workload it manages, or move workloads between profiles by changing the label |
 
-#### Path A: Datadog UI setup wizard
+#### Path A: Datadog UI
 
 The fastest way to get started is the [Setup page][11] in the Datadog UI. The wizard walks you through five steps: select a cluster, verify Agent and permission requirements, choose an install method, pick a scaling template, and deploy. Templates available in the wizard:
 
@@ -239,7 +241,7 @@ The fastest way to get started is the [Setup page][11] in the Datadog UI. The wi
 
 The Setup wizard is best for trying autoscaling on a single workload, getting hands-on with a recommendation, or onboarding a small set of workloads. (Requires `Workload Scaling Write` and `Autoscaling Manage` permissions.)
 
-#### Path B: author a manifest
+#### Path B: GitOps
 
 Define a `DatadogPodAutoscaler` custom resource that targets your workload and apply it through whatever tooling you already use to ship Kubernetes manifests, whether that's `kubectl apply`, Helm, ArgoCD, Terraform, or another GitOps tool. Authoring the manifest is the same regardless of delivery mechanism. See the [example configurations](#example-datadogpodautoscaler-configurations) below for ready-to-edit starting points covering cost optimization, balanced scaling, vertical-only resizing, and custom-query horizontal scaling.
 
@@ -456,6 +458,115 @@ spec:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Cluster profiles
+
+A `DatadogPodAutoscalerClusterProfile` is a cluster-scoped resource that holds a `DatadogPodAutoscaler` template. The Cluster Agent watches `Deployment` and `StatefulSet` resources (and the namespaces that contain them) for the `autoscaling.datadoghq.com/profile` label, and creates a managed `DatadogPodAutoscaler` for every matching workload. One profile applies to many workloads; one workload still maps to one `DatadogPodAutoscaler`.
+
+Cluster profiles require Datadog Cluster Agent 7.78.0+. Older Cluster Agents ignore the profile label.
+
+#### Built-in profiles
+
+The Cluster Agent ships three built-in profiles and recreates them on startup, so you do not commit any CRD YAML to use them. The names are reserved.
+
+| Profile | CPU target | Min replicas | Profile of behavior |
+|---|---|---|---|
+| `datadog-optimize-cost` | 85% | 1 | Stateless, cost-sensitive workloads. Fast scale-up and scale-down (5-minute stabilization windows, 50% step every 2 minutes). |
+| `datadog-optimize-balance` | 70% | 2 | Default for most stateless workloads. Balanced 10-minute stabilization windows, conservative scale-down (20% step every 20 minutes). |
+| `datadog-optimize-performance` | 60% | 3 | Stateful or latency-sensitive workloads. Very conservative scale-down (15-minute stabilization windows, 10% step every 30 minutes). |
+
+To activate a profile on a single workload, add the label to the workload's `metadata.labels`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: production
+  labels:
+    autoscaling.datadoghq.com/profile: datadog-optimize-balance
+spec:
+  # ...rest of the Deployment spec
+```
+
+To activate a profile on every supported workload in a namespace, label the namespace instead:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    autoscaling.datadoghq.com/profile: datadog-optimize-balance
+```
+
+#### Custom profiles
+
+Author a `DatadogPodAutoscalerClusterProfile` when no built-in profile matches your scaling policy. Profiles are cluster-scoped, so apply them without a `--namespace` flag (or place them in the cluster-level layer of your config repository).
+
+```yaml
+apiVersion: datadoghq.com/v1alpha2
+kind: DatadogPodAutoscalerClusterProfile
+metadata:
+  name: cost-optimized-strict-floor
+spec:
+  template:
+    applyPolicy:
+      mode: Apply
+      scaleUp:
+        stabilizationWindowSeconds: 300
+        rules:
+          - type: Percent
+            value: 50
+            periodSeconds: 120
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        rules:
+          - type: Percent
+            value: 50
+            periodSeconds: 120
+    constraints:
+      minReplicas: 1
+    objectives:
+      - type: PodResource
+        podResource:
+          name: cpu
+          value:
+            type: Utilization
+            utilization: 85
+```
+
+Reference the custom profile from a workload or namespace using the same label:
+
+```yaml
+metadata:
+  labels:
+    autoscaling.datadoghq.com/profile: cost-optimized-strict-floor
+```
+
+The template body accepts the same fields as a `DatadogPodAutoscaler` spec, minus `targetRef` (the Cluster Agent fills that in for each matching workload). See the [example configurations](#example-datadogpodautoscaler-configurations) above for the full range of fields you can put under `spec.template`.
+
+#### Activation precedence
+
+- **Workload labels take precedence over namespace labels.** If a namespace is labeled `autoscaling.datadoghq.com/profile=ns-profile` and a workload inside it is labeled `autoscaling.datadoghq.com/profile=workload-profile`, the workload uses `workload-profile`.
+- **Opt out with `excluded`.** Set `autoscaling.datadoghq.com/profile: excluded` on a workload to exempt it when its namespace is labeled. This is useful for stateful or critical workloads in an otherwise opted-in namespace.
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    name: payments-ledger
+    namespace: production
+    labels:
+      autoscaling.datadoghq.com/profile: excluded
+  ```
+
+- **Unknown profile names are ignored.** If a workload or namespace references a profile that does not exist, the Cluster Agent does not create a managed `DatadogPodAutoscaler` and does not report an error. Reconciliation picks up the assignment as soon as a profile with that name is created.
+- **Reconciliation is automatic.** Adding, changing, or removing the label propagates to a managed `DatadogPodAutoscaler` within seconds.
+
+#### Supported workload kinds
+
+Profile activation supports `Deployment` and `StatefulSet`. For other kinds (for example, Argo `Rollout`), use [Path B: GitOps](#path-b-gitops) to author a `DatadogPodAutoscaler` directly.
 
 ### Deploy recommendations manually
 
