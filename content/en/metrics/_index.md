@@ -1,5 +1,6 @@
 ---
 title: Metrics
+description: "Submit, query, visualize, and manage your metrics in Datadog."
 aliases:
   - /graphing/metrics/
   - /metrics/introduction/

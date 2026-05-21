@@ -1,5 +1,6 @@
 ---
 title: Metrics Types
+description: "Learn about Datadog metric submission types (count, rate, gauge, histogram, distribution) and how they map to in-app types."
 aliases:
     - /developers/metrics/counts/
     - /developers/metrics/distributions/
