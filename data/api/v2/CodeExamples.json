@@ -2021,6 +2021,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_3243059428",
+      "description": "Create a detection rule with type 'impossible_travel' and baselineUserLocationsDuration returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
