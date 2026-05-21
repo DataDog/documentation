@@ -1,89 +1,78 @@
 ---
-description: Aprende a excluir recursos no deseados de las trazas (traces), como los
-  checks de estado, utilizando reglas de muestreo y filtrado para reducir el ruido
-  y gestionar los costes.
-title: Ignorar los recursos no deseados en APM
+description: Aprende a excluir recursos no deseados como las verificaciones de salud
+  de las trazas utilizando reglas de muestreo y filtrado para reducir el ruido y gestionar
+  costos.
+title: Ignorando Recursos No Deseados en APM
 ---
+Los servicios a menudo manejan puntos de conexión cuyo tráfico puede que no desees trazar (por ejemplo, las verificaciones de salud). Esta guía explica los siguientes enfoques para excluir ese tráfico:
 
-Un servicio puede administrar una variedad de solicitudes, algunas de las cuales puede que no quieras que se rastreen o se incluyan en las métricas de trazas. Un ejemplo de esto son, posiblemente, los checks de estado en una aplicación web. Esta documentación cubre dos opciones principales: muestreo y filtrado.
+- **Muestreo**: Utiliza cuando deseas que las solicitudes permanezcan visibles en las métricas de traza, pero reducir el volumen de ingesta de traza.
+- **Filtrado en el Agente de Datadog**: Utiliza para excluir solicitudes por completo (incluyendo de las métricas de traza) en todos los servicios que reportan al Agente.
+- **Configuración del rastreador**: Utiliza cuando la lógica de filtrado debe aplicarse por servicio o depende del contexto específico de la aplicación (por ejemplo, atributos de solicitud o estado de ejecución).
 
-Si necesitas ayuda para decidir cuál opción es la más adecuada para tu caso de uso, ponte en contacto con [asistencia técnica de Datadog][1].
+Si necesitas asistencia para decidir cuál opción es la más relevante para tu caso de uso, contacta a [soporte de Datadog][1]. 
 
-## Muestreo
+## Muestreo {#sampling}
 
-Si quieres que el tramo (span) se incluya en las métricas de trazas pero no quieres que se ingiera, utiliza reglas de muestreo. Para obtener más información sobre el muestreo, consulta [Controles de ingesta][4].
+Si deseas que el tramo esté incluido en las métricas de traza pero no quieres que sea ingerido, utiliza reglas de muestreo. Para más información sobre muestreo, consulta [Controles de Ingesta][4].
 
-### Utilización de reglas de muestreo
+### Usando reglas de muestreo {#using-sampling-rules}
 
-El enfoque de recomendado consiste en utilizar reglas de muestreo, que permiten muestrear trazas en función de los nombres de los recursos, los nombres de los servicios, las etiquetas (tags) y los nombres de las operaciones:
+El enfoque recomendado es utilizar reglas de muestreo, que te permiten muestrear trazas basadas en nombres de recursos, nombres de servicios, etiquetas y nombres de operaciones:
 
 ```shell
 DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
 ```
 
-O para realizar un muestreo basado en las etiquetas de la URL HTTP:
+O muestrear basado en etiquetas de URL HTTP:
 
 ```shell
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
 ```
 
-<div class="alert alert-info">Las decisiones de muestreo se determinan utilizando el primer tramo de una traza. Si el tramo que contiene la etiqueta con la que quieres filtrar no es una {{< tooltip glossary="trace_root_span" case="sentence" >}}, esta regla no se aplica.</div>
+<div class="alert alert-info">Las decisiones de muestreo se determinan utilizando el primer tramo en una traza. Si el tramo que contiene la etiqueta que deseas filtrar no es un {{< tooltip glossary="trace_root_span" case="sentence" >}}, esta regla no se aplica.</div>
 
-## Filtrado
+## Filtrado en el Agente de Datadog {#filtering-in-the-datadog-agent}
 
-Si no quieres que se ingiera el tramo y no quiere que se refleje en las métricas de trazas, utiliza el filtrado.
+Si no deseas que el tramo se ingeste o se refleje en las métricas de traza, utiliza el filtrado en el Agente de Datadog.
 
-Existen dos formas de especificar que un punto de conexión de este tipo no debe rastrearse y debe excluirse de las métricas de trazas:
+El componente Trace Agent dentro del Agente de Datadog tiene dos métodos para evitar que ciertas trazas sean enviadas: filtrado por etiquetas de tramo o filtrado por recursos. Si las trazas son descartadas debido a estas configuraciones, las métricas de traza excluyen estas solicitudes.
 
-- [Configuración del Trace Agent](#trace-agent-configuration-options) (en el Datadog Agent) o bien
-- [Configuración del rastreador](#tracer-configuration-options).
+Configurar el Trace Agent para ignorar ciertas trazas o recursos se aplica a todos los servicios que envían trazas a este Agente de Datadog. Si tienes requisitos específicos de la aplicación, utiliza [la configuración del rastreador](#tracer-configuration) en su lugar.
 
-### Opciones de configuración del Trace Agent
+<div class="alert alert-info">
+Si ninguna de las opciones en esta guía cumple con tus requisitos, considera agregar una <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">etiqueta de tramo personalizada</a> en tu aplicación y usarla para descartar trazas en el Agente.
+</div>
 
-El componente Trace Agent dentro del Datadog Agent tiene dos métodos para evitar que aparezcan ciertas trazas: ignorar etiquetas de tramos o ignorar recursos. Si se descartan trazas debido a esta configuración, las métricas de trazas excluyen estas solicitudes.
+### Ignorando trazas basadas en etiquetas de tramo {#ignoring-traces-based-on-span-tags}
 
-La configuración del Trace Agent para ignorar ciertos tramos o recursos se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Si tienes requisitos específicos de la aplicación, utiliza, en su lugar, el método de [Configuración del rastreador](#tracer-configuration).
+A partir de Datadog Agent 6.27.0/7.27.0, la opción **filter tags** descarta trazas con tramos raíz que coinciden con las etiquetas de tramo especificadas. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent. Las trazas que son descartadas debido a las etiquetas de filtro no se incluyen en las métricas de traza.
 
-#### Ignorar en función de las etiquetas de tramos
+<div class="alert alert-info">
+Los tramos individuales dentro de una traza no pueden ser descartados selectivamente; si el tramo raíz coincide con los criterios de filtro, la traza completa es descartada.
+</div>
 
-Empezando con el Datadog Agent 6.27.0/7.27.0, con la opción **filtrar por etiquetas**, se descartan trazas con tramos de raíz que coincidan con etiquetas de tramos especificadas. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Las trazas que se descartan debido al filtro por etiquetas no se incluyen en las métricas de trazas.
+**Comportamiento de coincidencia:**
 
-Si puedes identificar mediante programación un conjunto de trazas que sabes que no quieres enviar a Datadog y ninguna otra opción de esta guía resuelve tu necesidad, puedes considerar añadir una [etiqueta de tramo personalizada][2] para poder descartar las trazas. [Ponte en contacto con el servicio de soporte técnico][1] para tratar tu caso de uso con más detalle, de modo que Datadog pueda seguir ampliando esta funcionalidad.
+La opción de filtrar etiquetas requiere una coincidencia exacta de cadena. Para filtrado basado en regex, consulte [Ignorando basado en recursos](#ignoring-traces-based-on-resources).
 
-La opción de filtrar por etiquetas requiere una coincidencia exacta de las cadenas. Si tu caso de uso requiere ignorar por expresiones regulares, consulta [Ignorar en función de los recursos](#ignoring-based-on-resources).
+Cuando especificas múltiples etiquetas, el filtro utiliza **lógica OR**: las trazas son descartadas si el tramo raíz coincide con **cualquiera** de las etiquetas. Para coincidir múltiples condiciones simultáneamente, agrega una etiqueta personalizada que represente esos criterios combinados.
 
-Puedes especificar etiquetas de tramos para requerir o rechazar utilizando un lista de claves y valores separados por espacios en variables de entorno:
+**Configuración:**
+
+Puedes especificar etiquetas de tramo para requerir o rechazar utilizando una lista de claves y valores separados por espacios en las variables de entorno:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Recopila solo las trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si no coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
+: Recoge solo trazas que tienen tramos raíz con una coincidencia exacta para las etiquetas y valores de tramo especificados. Si no coincide con esta regla, la traza se descarta. Por ejemplo, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. En Datadog Agent 7.49+, se pueden proporcionar expresiones regulares con `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rechaza las trazas que tienen tramos de raíz con una coincidencia exacta con las etiquetas de tramos y valores especificados. Si coincide con esta regla, se descarta la traza. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En el Datadog Agent 7.49+, las expresiones regulares pueden estar provistas de `DD_APM_FILTER_TAGS_REGEX_REJECT`.
-
+: Rechaza trazas que tienen tramos raíz con una coincidencia exacta para las etiquetas y valores de tramo especificados. Si coincide con esta regla, la traza se descarta. Por ejemplo, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. En Datadog Agent 7.49+, se pueden proporcionar expresiones regulares con `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
 
-También las puedes configurar en la configuración del Agent con una lista separada por comas:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-apm_config:
-  filter_tags:
-    require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success", "key2:value2"]
-{{< /code-block >}}
-
-Por ejemplo, para ignorar comprobaciones de estado donde la `http.url` coincide con este punto conexión:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-apm_config:
-  filter_tags:
-    reject: ["http.url:http://localhost:5050/healthcheck"]
-{{< /code-block >}}
-
-{{% /tab %}}
 {{% tab "Kubernetes" %}}
-##### Datadog Operator
+
+#### Datadog Operator {#datadog-operator}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -96,69 +85,94 @@ spec:
       containers:
         trace-agent:
           env:
-            - nombre: DD_APM_FILTER_TAGS_REJECT
-              valor: tag_key1:tag_val2 tag_key2:tag_val2
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
 {{< /code-block >}}
 
 {{% k8s-operator-redeploy %}}
 
-##### Helm
+#### Helm {#helm}
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 agents:
   containers:
     traceAgent:
       env:
-        - nombre: DD_APM_FILTER_TAGS_REJECT
-          valor: tag_key1:tag_val2 tag_key2:tag_val2
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
 
 {{% k8s-helm-redeploy %}}
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
+
 {{% /tab %}}
+
+{{% tab "datadog.yaml" %}}
+
+También puedes establecer estos valores en el archivo de configuración del Agent utilizando una lista separada por comas:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
+  filter_tags:
+    require: ["db:sql", "db.instance:mysql"]
+    reject: ["outcome:success", "key2:value2"]
+{{< /code-block >}}
+
+Por ejemplo, para ignorar las verificaciones de salud donde la `http.url` coincide con este punto de conexión:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
+  filter_tags:
+    reject: ["http.url:http://localhost:5050/healthcheck"]
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-Al filtrar trazas de esta manera, se eliminan estas solicitudes de las [métricas de trazas][3]. Para obtener más información sobre cómo reducir el consumo sin afectar las métricas de trazas, consulta [Controles de consumo][4].
 
-En el backend, Datadog crea y añade las siguientes etiquetas de tramos a los tramos después de la ingesta. Ten en cuenta que estas etiquetas no se pueden utilizar para eliminar trazas a nivel del Datadog Agent, ya que el Agent solo filtra en función de las etiquetas disponibles antes de la ingesta.
+#### Etiquetas de tramo disponibles {#available-span-tags}
 
+En el backend, Datadog crea las siguientes etiquetas de tramo en los tramos después de la ingestión. 
+
+**Nota**: Estas etiquetas no se pueden usar para descartar trazas a nivel del Datadog Agent. El agente solo filtra en función de las etiquetas disponibles antes de la ingestión.
 
 | Nombre                                    | Descripción                                      |
 |-----------------------------------------|--------------------------------------------------|
-| `http.path_group`                       | La ruta de acceso de URL completa desde la etiqueta `http.url`.        |
-| `http.url_details.host`                 | La parte del nombre de host de la etiqueta `http.url`.      |
-| `http.url_details.path`                 | El destino completo de la solicitud tal y como se pasa en una línea de solicitud HTTP o equivalente. |
-| `http.url_details.scheme`               | El esquema de solicitud de la etiqueta `http.url`.       |
-| `http.url_details.queryString`          | La parte de la cadena de consulta de la etiqueta `http.url`. |
+| `http.path_group`                       | La ruta completa de URL desde la etiqueta `http.url`.        |
+| `http.url_details.host`                 | La porción del nombre del servidor de la etiqueta `http.url`      |
+| `http.url_details.path`                 | El objetivo completo de la solicitud tal como se pasa en una línea de solicitud HTTP o equivalente. |
+| `http.url_details.scheme`               | El esquema de la solicitud de la etiqueta `http.url`.       |
+| `http.url_details.queryString`          | La porción de la cadena de consulta de la etiqueta `http.url`. |
 | `http.url_details.port`                 | El puerto HTTP de la etiqueta `http.url`.            |
-| `http.useragent_details.os.family`      | La familia del SO informada por el User-Agent.         |
-| `http.useragent_details.browser.family` | La familia de navegadores informada por el User-Agent.    |
-| `http.useragent_details.device.family`  | La familia de dispositivos informada por el User-Agent.     |
+| `http.useragent_details.os.family`      | La familia del sistema operativo reportada por el User-Agent.         |
+| `http.useragent_details.browser.family` | La familia del navegador reportada por el User-Agent.    |
+| `http.useragent_details.device.family`  | La familia del dispositivo reportada por el User-Agent.     |
 
-<div class="alert alert-danger">A partir del 1 de octubre de 2022, el backend de Datadog implementa una reasignación para aplicar la <a href="/tracing/trace_collection/tracing_naming_convention">Semántica de etiquetas de tramos
-</a> en los rastreadores en todos los tramos ingeridos. Si quieres descartar tramos en función de las etiquetas a nivel del Datadog Agent, utiliza las etiquetas de la columna <strong>Reasignar desde</strong>.</div>
+<div class="alert alert-danger">A partir del 1 de octubre de 2022, el backend de Datadog aplica un remapeo para aplicar <a href="/tracing/trace_collection/tracing_naming_convention">la semántica de las etiquetas de tramo
+</a> a través de los rastreadores en todos los tramos ingeridos. Si deseas descartar trazas basadas en etiquetas de tramo raíz a nivel del Agente de Datadog, utiliza etiquetas en la columna <strong>Remap from</strong>.</div>
 
-##### Comunicaciones de red
+##### Comunicaciones de red {#network-communications}
 
-| **Nombre**                   | **Reasignar desde**                                      |
+| **Nombre**                   | **Remap from**                                      |
 |----------------------------|-----------------------------------------------------|
 | `network.host.ip`          | `tcp.local.address` - Node.js                       |
 | `network.destination.ip`   | `out.host` - Todos los lenguajes  |
-| `network.destination.port` | `grpc.port` - Python<br> `tcp.remote.port` - Node.js<br>`out.port` - Todos los lenguajes  |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - Todos los lenguajes  |
 
-##### Solicitudes HTTP
+##### Solicitudes HTTP {#http-requests}
 
-| **Nombre**                       | **Reasignar desde**                                                                                        |
+| **Nombre**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
 | `http.useragent`               | `user_agent` - Java, C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
-##### Base de datos
+##### Base de datos {#database}
 
-| **Nombre**                         | **Reasignar desde**                                                                                                                                                                                                                  |
+| **Nombre**                         | **Remap from**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `db.system`                      | `db.type` - Java, Python, Node.js, Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
 | `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - Todos los lenguajes                                           |
@@ -171,16 +185,16 @@ En el backend, Datadog crea y añade las siguientes etiquetas de tramos a los tr
 | `db.mongodb.collection`          | `mongodb.collection` - Python, .NET, Ruby, PHP                                                                                                                                                                                  |
 | `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
 
-##### Cola de mensajes
+##### Cola de Mensajes {#message-queue}
 
-| **Nombre**                               | **Reasignar desde**                                                                                             |
+| **Nombre**                               | **Remapear desde**                                                                                             |
 |----------------------------------------|------------------------------------------------------------------------------------------------------------|
 | `messaging.destination`                | `amqp.destination` - Node.js<br>`amqp.queue` - .NET<br>`msmq.queue.path` - .NET<br>`aws.queue.name` - .NET |
 | `messaging.url`                        | `aws.queue.url` - .NET, Java                                                                               |
 | `messaging.message_id`                 | `server_id` - Go                                                                                           |
 | `messaging.message_payload_size`       | `message.size` - .NET, Java                                                                                |
 | `messaging.operation`                  | `amqp.command` - .NET<br>`msmq.command` - .NET                                                             |
-| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Nodes.js                                                  |
+| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Node.js                                                  |
 | `messaging.rabbitmq.delivery_mode`     | `messaging.rabbitmq.exchange` - .NET                                                                       |
 | `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
 | `messaging.msmq.queue.transactional`   | `msmq.queue.transactional` - .NET                                                                          |
@@ -191,9 +205,9 @@ En el backend, Datadog crea y añade las siguientes etiquetas de tramos a los tr
 | `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
 
 
-##### Llamadas a procedimientos remotos
+##### Llamadas a procedimientos remotos {#remote-procedure-calls}
 
-| **Nombre**                       | **Reasignar desde**                                                                                          |
+| **Nombre**                       | **Remapear desde**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
 | `rpc.service`                  | `grpc.method.service` - Python, .NET                                                                    |
 | `rpc.method`                   | `grpc.method.name` - Python, .NET, Go                                                                   |
@@ -204,56 +218,56 @@ En el backend, Datadog crea y añade las siguientes etiquetas de tramos a los tr
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
 | `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js
 
-##### Errores
+##### Errores {#errors}
 
-| **Nombre**                       | **Reasignar desde**                                                                                          |
+| **Nombre**                       | **Remapear desde**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
 | `error.message`                  | `error.msg` - Todos los lenguajes                      |
 
-#### Ignorar en función de los recursos
+### Ignorando trazas basadas en recursos {#ignoring-traces-based-on-resources}
 
-La opción **ignorar recursos** permite excluir recursos si el tramo de raíz global de la traza coincide con determinados criterios. Consulta [Excluir recursos de la recopilación][5]. Esta opción se aplica a todos los servicios que envían trazas a este Datadog Agent particular. Las trazas que se descartan porque se ignoran recursos no se incluyen en las métricas de trazas.
+La opción **ignorar recursos** permite excluir recursos si el tramo raíz global de la traza coincide con ciertos criterios. Consulte [Excluir recursos de ser recolectados][5]. Esta opción se aplica a todos los servicios que envían trazas a este Agente de Datadog en particular. Las trazas que se descartan debido a recursos ignorados no se incluyen en las métricas de traza.
 
-Puedes especificar los recursos que deseas ignorar en el archivo de configuración del Agent, `datadog.yaml` o con la variable de entorno `DD_APM_IGNORE_RESOURCES`. Consulta los ejemplos siguientes.
+Puede especificar recursos a ignorar ya sea en el archivo de configuración del Agente, `datadog.yaml`, o con la variable de entorno `DD_APM_IGNORE_RESOURCES`. Consulte los ejemplos a continuación.
 
-Utilización de `Datadog.yaml`:
+Usando `datadog.yaml`:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
-## @param ignore_resources - lista de cadenas - opcional
-## Se puede proporcionar un lista de expresiones regulares para excluir determinados trazas en función del nombre del recurso.
-## Todas las entradas deben ir entre comillas dobles y separadas por comas.
+## @param ignore_resources - list of strings - optional
+## A list of regular expressions can be provided to exclude certain traces based on their resource name.
+## All entries must be surrounded by double quotes and separated by commas.
 
   ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 {{< /code-block >}}
 
-Utilización de `DD_APM_IGNORE_RESOURCES`:
+Usando `DD_APM_IGNORE_RESOURCES`:
 
 ```shell
 DD_APM_IGNORE_RESOURCES="(GET|POST) /healthcheck,API::NotesController#index"
 ```
 
 **Notas**:
-- Cuando se utiliza el formato de variable de entorno (`DD_APM_IGNORE_RESOURCES`), los valores deben proporcionarse como una lista de cadenas separadas por comas.
-- La sintaxis de las expresiones regulares que acepta el Trace Agent se evalúa con [expresiones regulares][6] de Go.
-- Según cuál sea tu estrategia de despliegue, puedes tener que ajustar la expresión regular escapando caracteres especiales.
-- Si utilizas contenedores dedicados con Kubernetes, asegúrate de que la variable de entorno para la opción de ignorar recursos se esté aplicando al contenedor del **Trace-Agent**.
+- Al usar el formato de variable de entorno (`DD_APM_IGNORE_RESOURCES`), los valores deben proporcionarse como una lista de cadenas separadas por comas.
+- La sintaxis regex que acepta el Agente de Trazas es evaluada por [regexp][6] de Go.
+- Dependiendo de su estrategia de implementación, es posible que deba ajustar la regex escapando caracteres especiales.
+- Si utiliza contenedores dedicados con Kubernetes, asegúrese de que la variable de entorno para la opción de recurso ignorado se esté aplicando al contenedor **trace-agent**.
 
-##### Ejemplo
+#### Ejemplo {#example}
 
-Considera una traza que contiene llamadas a `/api/healthcheck` desde la cual no quieres ver trazas:
+Considere una traza que contiene llamadas a `/api/healthcheck` de las que no desea trazas:
 
-{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Gráfica de llamas de un recurso que quieres que el rastreador ignore" style="width:90%;">}}
+{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Gráfico de llamas de un recurso que desea que el SDK ignore" style="width:90%;">}}
 
-Toma nota del nombre del recurso del tramo de raíz global.
+Tome nota del nombre del recurso del span raíz global.
 
 - Nombre de la operación: `rack.request`
 - Nombre del recurso: `Api::HealthchecksController#index`
 - Http.url: `/api/healthcheck`
 
-Para utilizar correctamente la opción de ignorar recurso, la regla de la expresión regular escrita debe coincidir con el nombre del recurso, `Api::HealthchecksController#index`. Existen varias opciones de expresiones regulares posibles, pero para filtrar trazas desde este recurso tal como está, una posible expresión regular que puedes utilizar es `Api::HealthchecksController#index$`.
+Para usar correctamente la opción de recurso ignorado, la regla regex escrita debe coincidir con el nombre del recurso, `Api::HealthchecksController#index`. Existen algunas opciones de regex, pero para filtrar rastros de este recurso tal como está, un regex potencial a utilizar es `Api::HealthchecksController#index$`.
 
-Según cuál sea tu forma de despliegue, la sintaxis será un poco diferente:
+Dependiendo de cómo lo implementes, la sintaxis se ve un poco diferente:
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
@@ -263,7 +277,7 @@ apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
-Para valores múltiples:
+Para múltiples valores:
 
 {{< code-block lang="yaml" >}}
 apm_config:
@@ -273,19 +287,19 @@ apm_config:
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
-En la lista de variables de entorno del contenedor del Datadog Agent, añade `DD_APM_IGNORE_RESOURCES` con un patrón como el del ejemplo siguiente. Docker Compose tiene su propia [sustitución de variables][1] para tener en cuenta cuando utilices caracteres especiales como `$`.
+En la lista de variables de entorno del contenedor del Agente de Datadog, agrega `DD_APM_IGNORE_RESOURCES` con un patrón como el ejemplo a continuación. Docker Compose tiene su propia [sustitución de variables][1] a considerar cuando usas caracteres especiales como `$`.
 
 {{< code-block lang="yaml" >}}
     environment:
-      // otras variables de entorno del Datadog Agent
+      // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 {{< /code-block >}}
 
-Para valores múltiples:
+Para múltiples valores:
 
 {{< code-block lang="yaml" >}}
     environment:
-      // otras variables de entorno del Datadog Agent
+      // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
 {{< /code-block >}}
 
@@ -293,7 +307,7 @@ Para valores múltiples:
 {{% /tab %}}
 {{% tab "Docker run" %}}
 
-En tu comando Docker run para hacer girar el Datadog Agent, añade `DD_APM_IGNORE_RESOURCES`:
+En tu comando de docker run para iniciar el Agente de Datadog, agrega `DD_APM_IGNORE_RESOURCES`:
 
 {{< code-block lang="shell" >}}
 docker run -d --name datadog-agent \
@@ -306,10 +320,10 @@ docker run -d --name datadog-agent \
               -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 {{< /code-block >}}
 
-Para valores múltiples:
+Para múltiples valores:
 
 {{< code-block lang="yaml" >}}
               -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
@@ -318,76 +332,76 @@ Para valores múltiples:
 {{% /tab %}}
 {{% tab "Kubernetes daemonset" %}}
 
-En el contenedor del Trace Agent dedicado, añade la variable de entorno `DD_APM_IGNORE_RESOURCES`:
+En el contenedor dedicado del trace-agent, agrega la variable de entorno `DD_APM_IGNORE_RESOURCES`:
 
 {{< code-block lang="yaml" >}}
-    - nombre: trace-agent
-        imagen: "gcr.io/datadoghq/agent:latest"
+    - name: trace-agent
+        image: "registry.datadoghq.com/agent:latest"
         imagePullPolicy: IfNotPresent
-        comando: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-        recursos: {}
-        puertos:
+        command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
+        resources: {}
+        ports:
         - containerPort: 8126
           hostPort: 8126
-          nombre: traceport
-          protocolo: TCP
+          name: traceport
+          protocol: TCP
         env:
-        - nombre: DD_API_KEY
+        - name: DD_API_KEY
           valueFrom:
             secretKeyRef:
-              nombre: "datadog-secret"
-              clave: api-key
-        - nombre: DD_KUBERNETES_KUBELET_HOST
+              name: "datadog-secret"
+              key: api-key
+        - name: DD_KUBERNETES_KUBELET_HOST
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        - nombre: KUBERNETES
-          valor: "yes"
-        - nombre: DOCKER_HOST
-          valor: unix:///host/var/run/docker.sock
-        - nombre: DD_LOG_LEVEL
-          valor: "INFO"
-        - nombre: DD_APM_ENABLED
-          valor: "true"
-        - nombre: DD_APM_NON_LOCAL_TRAFFIC
-          valor: "true"
-        - nombre: DD_APM_RECEIVER_PORT
-          valor: "8126"
-        - nombre: DD_KUBELET_TLS_VERIFY
-          valor: "false"
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: "Api::HealthchecksController#index$"
+        - name: KUBERNETES
+          value: "yes"
+        - name: DOCKER_HOST
+          value: unix:///host/var/run/docker.sock
+        - name: DD_LOG_LEVEL
+          value: "INFO"
+        - name: DD_APM_ENABLED
+          value: "true"
+        - name: DD_APM_NON_LOCAL_TRAFFIC
+          value: "true"
+        - name: DD_APM_RECEIVER_PORT
+          value: "8126"
+        - name: DD_KUBELET_TLS_VERIFY
+          value: "false"
+        - name: DD_APM_IGNORE_RESOURCES
+          value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
-Para valores múltiples:
+Para múltiples valores:
 
 {{< code-block lang="yaml" >}}
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: '"value1","Api::HealthchecksController#index$"'
+        - name: DD_APM_IGNORE_RESOURCES
+          value: '"value1","Api::HealthchecksController#index$"'
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
-En la sección `traceAgent` del archivo `values.yaml`, añade `DD_APM_IGNORE_RESOURCES` en la sección `env` y, a continuación, [haz girar helm como de costumbre][1].
+En la sección `traceAgent` del archivo `values.yaml`, agrega `DD_APM_IGNORE_RESOURCES` en la sección `env`, luego [inicia helm como de costumbre][1].
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
     traceAgent:
-      # agents.containers.traceAgent.env -- Variables de entorno adicionales para el contenedor del trace-agent container
+      # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
       env:
         - name: DD_APM_IGNORE_RESOURCES
           value: Api::HealthchecksController#index$
 
 {{< /code-block >}}
 
-Para valores múltiples:
+Para múltiples valores:
 
 {{< code-block lang="yaml" >}}
-        - nombre: DD_APM_IGNORE_RESOURCES
-          valor: value1, Api::HealthchecksController#index$
+        - name: DD_APM_IGNORE_RESOURCES
+          value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
-También puedes configurar `agents.containers.traceAgent.env` en el comando `helm install`:
+Alternativamente, puedes establecer `agents.containers.traceAgent.env` en el comando `helm install`:
 
 {{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
@@ -399,13 +413,13 @@ helm install dd-agent -f values.yaml \
 
 [1]: /es/agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
-{{% tab "Amazon ECS Task Definition" %}}
+{{% tab "Definición de Tarea de Amazon ECS" %}}
 
-Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datadog Agent, añade la variable de entorno `DD_APM_IGNORE_RESOURCES` con los valores necesarios para que el JSON evalúe de la siguiente manera:
+Si usas Amazon ECS (como en EC2), en la definición de tu contenedor del Agente de Datadog, agrega la variable de entorno `DD_APM_IGNORE_RESOURCES` con los valores de tal manera que el JSON evalúe a algo como esto:
 
 {{< code-block lang="json" >}}
     "environment": [
-    // other environment variables for the Datadog Agent
+	// other environment variables for the Datadog Agent
         {
           "name": "DD_APM_IGNORE_RESOURCES",
           "value": "Api::HealthchecksController#index$"
@@ -416,22 +430,24 @@ Si utilizas Amazon ECS (como en EC2), en tu definición del contenedor del Datad
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger">Al filtrar las trazas de esta manera se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de trazas, consulta los <a href="/tracing/trace_ingestion/ingestion_controls">controles de ingestión</a>.</div>
+<div class="alert alert-danger">Filtrar trazas de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">métricas de traza</a>. Para información sobre cómo reducir la ingestión sin afectar las métricas de traza, consulta <a href="/tracing/trace_ingestion/ingestion_controls">controles de ingestión</a>.</div>
 
-## Opciones de configuración del rastreador
+## Configuración del trazador {#tracer-configuration}
 
-Algunos de los rastreadores específicos del lenguaje tienen una opción para modificar tramos antes de que se envíen al Datadog Agent. Utiliza esta opción si tienes requisitos específicos de la aplicación y utilizas uno de los lenguajes que se enumeran a continuación.
+Algunos trazadores para algunos lenguajes pueden descartar trazas antes de que sean enviadas al Agente de Datadog. Usa esta opción si tienes requisitos específicos de la aplicación.
 
-<div class="alert alert-warning">1. Si la solicitud está asociada a una traza distribuida, la traza resultante puede tener imprecisiones de muestreo si se descartan partes de ella debido a estas reglas de filtrado.<br> 2. Al filtrar las trazas de esta manera se eliminan estas solicitudes de las <a href="/tracing/guide/metrics_namespace/">métricas de trazas</a>. Para obtener información sobre cómo reducir la ingesta sin afectar a las métricas de trazas, consulta los <a href="/tracing/trace_ingestion/ingestion_controls">controles de ingesta</a>.</div>
+<div class="alert alert-warning">
+1. Si la solicitud está asociada con una traza distribuida, la traza resultante puede tener imprecisión de muestreo si se eliminan partes de ella debido a estas reglas de filtrado.<br> 
+2. Filtrar las trazas de esta manera elimina estas solicitudes de <a href="/tracing/guide/metrics_namespace/">métricas de traza</a>. Para obtener información sobre cómo reducir la ingesta sin afectar las métricas de traza, consulte <a href="/tracing/trace_ingestion/ingestion_controls">controles de ingesta</a>.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
-El rastreador de Ruby tiene un pipeline de posprocesamiento que elimina trazas que cumplen ciertos criterios. Puedes obtener más información y ejemplos en [Trazas de posprocesamiento][1].
+El rastreador de Ruby tiene una canalización de post-procesamiento que elimina las trazas que cumplen con ciertos criterios. Más información y ejemplos se pueden encontrar en [Post-procesamiento de trazas][1].
 
-Por ejemplo, si el nombre del recurso es `Api::HealthchecksController#index`, utiliza la clase `Datadog::Tracing::Pipeline::SpanFilter` para eliminar trazas que contengan el nombre del recurso. Este filtro también puede utilizarse para hacer coincidir otros metadatos disponibles para el [objeto de tramo][2].
+Por ejemplo, si el nombre del recurso es `Api::HealthchecksController#index`, use la clase `Datadog::Tracing::Pipeline::SpanFilter` para eliminar las trazas que contienen el nombre del recurso. Este filtro también se puede usar para filtrar otros metadatos disponibles para el [objeto de tramo][2].
 
 ```
 Datadog::Tracing.before_flush(
@@ -445,11 +461,11 @@ Datadog::Tracing.before_flush(
 
 {{< programming-lang lang="python" >}}
 
-El rastreador Python ofrece una opción para filtrar los traces (trazas) no deseadas:
+El rastreador de Python proporciona una opción para filtrar trazas no deseadas:
 
-### Uso de filtros personalizados
+### Usando filtros personalizados {#using-custom-filters}
 
-Para casos de uso avanzados, puedes crear filtros personalizados:
+Para casos de uso avanzados, puede crear filtros personalizados:
 
 ```py
 from ddtrace.trace import tracer
@@ -466,15 +482,15 @@ class CustomFilter(TraceFilter):
                 return None  # Drop the trace
         return trace  # Keep the trace
 
-# Configure the tracer with your custom filter
+# Configure the SDK with your custom filter
 tracer.configure(trace_processors=[CustomFilter(r'http://.*/healthcheck$')])
 ```
 
 {{< /programming-lang >}}
 
-{{< programming-lang lenguaje="nodeJS" >}}
+{{< programming-lang lang="nodeJS" >}}
 
-Configura una lista de bloqueados en la extensión [Http][1]. Toma nota de las coincidencias de la lista de bloqueados en los documentos de la API. Por ejemplo, las solicitudes Http entrantes coinciden con las rutas de acceso URL, entonces, si la etiqueta de tramo `http.url` de la traza es `http://<domain>/healthcheck`, escribe una regla de acceso que coincida con la URL `healthcheck`:
+Configure una lista de bloqueo en el plugin [Http][1]. Tenga en cuenta en qué coincide la lista de bloqueo según la documentación de la API. Por ejemplo, las solicitudes Http entrantes coinciden con las rutas de URL, así que si la etiqueta de tramo de la traza es `http.url` y es `http://<domain>/healthcheck`, escriba una regla que coincida con la `healthcheck` URL:
 
 
 ```
@@ -493,34 +509,34 @@ tracer.use('http', {
 //import http
 
 ```
-<div class="alert alert-info">La configuración del rastreador para la integración debe venir <em>antes</em> de que se importe ese módulo instrumentado.</div>
+<div class="alert alert-info">La configuración del SDK para la integración debe venir <em>antes</em> de que se importe ese módulo instrumentado.</div>
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
 
-El rastreador de Java tiene una opción para que un `TraceInterceptor` personalizado filtre determinados tramos. Consulta [Ampliar los rastreadores][1].
+El rastreador de Java tiene una opción para un `TraceInterceptor` personalizado para filtrar ciertos tramos. Consulte [Extensión de trazadores][1].
 
-Por ejemplo, si el nombre de tu recurso es `GET /healthcheck`, escribe un interceptor de trazas que descarte trazas que contengan este nombre del recurso. Ajusta la lógica para adaptarla a tu caso de uso.
+Por ejemplo, si su nombre de recurso es `GET /healthcheck`, escriba un interceptor de traza que elimine las trazas que contengan este nombre de recurso. Ajuste la lógica para satisfacer su caso de uso.
 
 ```
 public class GreetingController {
    static {
-       // En un bloque estático de clase para evitar inicializar muchas veces.
+       // In a class static block to avoid initializing multiple times.
        GlobalTracer.get().addTraceInterceptor(new TraceInterceptor() {
            @Override
            public Collection<? extends MutableSpan> onTraceComplete(Collection<? extends MutableSpan> trace) {
-               para (MutableSpan span : trace) {
-                   si ("GET /healthcheck".contentEquals(span.getResourceName())) {
-                       devolver Collections.emptyList();
+               for (MutableSpan span : trace) {
+                   if ("GET /healthcheck".contentEquals(span.getResourceName())) {
+                       return Collections.emptyList();
                    }
                }
-               devolver traza;
+               return trace;
            }
            @Override
            public int priority() {
-               devolver 200;  // Algún número único
+               return 200;  // Some unique number
            }
        });
    }
