@@ -8,9 +8,6 @@ further_reading:
 - link: "/feature_flags/concepts/distribution_channels"
   tag: "Documentation"
   text: "Distribution Channels"
-- link: "/feature_flags/concepts/json_schema_validation"
-  tag: "Documentation"
-  text: "JSON Schema Validation"
 ---
 
 ## Overview
@@ -45,7 +42,7 @@ Datadog Feature Flags support five data types:
 1. Navigate to your feature flag's details page.
 2. Open the **Manage Implementation & Variants** side panel.
 3. Click the pencil icon next to the variant you want to modify.
-4. Update the variant's name and/or value, then save.
+4. Update the variant's name, value, or both, then save.
 
 <div class="alert alert-warning">
 Changing the value of a variant that is being served as part of a running experiment may invalidate the results of that experiment.

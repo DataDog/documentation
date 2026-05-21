@@ -15,11 +15,13 @@ further_reading:
 
 ## Overview
 
-Environments represent different deployment stages or modes in your software delivery lifecycle—for example, Development, Staging, and Production. Flag configuration is isolated by environment: a flag can be enabled, disabled, overridden, or given targeting rules in one environment without affecting other environments.
+Environments represent different deployment stages or modes in your software delivery life cycle, such as Development, Staging, and Production. Flag configuration is isolated by environment. A flag can be enabled, disabled, overridden, or given targeting rules in one environment without affecting other environments.
 
 ## Manage environments
 
-{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list in Feature Flags settings" style="width:100%;" >}}
+Manage environments from **Feature Flags > Settings > Environments**:
+
+{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list in Feature Flags settings." style="width:100%;" >}}
 
 ### Add an environment
 
@@ -56,11 +58,11 @@ Mark an environment as **production** to indicate that changes in that environme
 
 Each environment is configured with a **name** and a set of **queries**. Queries are the `env` or `DD_ENV` strings your applications send at runtime.
 
-Having multiple queries per environment lets you keep the `env` value consistent with the environment you pass to RUM, APM, or StatsD. For example, you might have `staging-eu` and `staging-us` as separate `env` values in your telemetry, but map both to a single **Staging** environment in Feature Flags. That way, you do not need to duplicate flag configuration across multiple Staging environments when you want to enable a flag across all of staging.
+Having multiple queries per environment lets you keep the `env` value consistent with the environment you pass to RUM, APM, or StatsD. For example, you might have `staging-eu` and `staging-us` as separate `env` values in your telemetry, but map both to a single **Staging** environment in Feature Flags. That way, you do not need to duplicate flag configuration across multiple Staging environments when you want to enable a flag across all of Staging.
 
 ## Connect environments in the SDK
 
-The `env` value you use must match a query configured for the Feature Flags environment you want—for example, `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the **same value** for Feature Flags.
+The `env` value you use must match a query configured for the Feature Flags environment you want, such as `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the **same value** for Feature Flags.
 
 ### Client-side applications
 
@@ -84,7 +86,7 @@ await OpenFeature.setProviderAndWait(provider);
 
 ### Server-side applications
 
-Set `DD_ENV` in your deployment environment (shell, container, or orchestrator)—not in application code:
+Set `DD_ENV` in your deployment environment (shell, container, or orchestrator), not in application code:
 
 {{< code-block lang="bash" >}}
 export DD_ENV=staging-us  # Must match an environment query in Feature Flags

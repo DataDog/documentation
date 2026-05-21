@@ -15,9 +15,11 @@ further_reading:
 
 ## Overview
 
-Distribution channels allow you to control which SDKs your flag configuration is exposed to. When you create or edit a flag, you can set distribution channels to **Client**, **Server**, or **both**.
+Distribution channels control which SDKs receive your flag configuration. When you create or edit a flag, you can set distribution channels to **Client**, **Server**, or both.
 
 ## Why use distribution channels
+
+Use distribution channels to protect sensitive configuration and reduce payload size.
 
 ### Protect sensitive configuration
 
@@ -31,7 +33,7 @@ If you work with a large number of feature flags, limiting which flags each SDK 
 
 When you [create a feature flag][1], select which distribution channels should receive the flag:
 
-- **Client**: Client-side SDKs only (browser & mobile)
+- **Client**: Client-side SDKs only (browser and mobile)
 - **Server**: Server-side SDKs only
 - **Both**: All SDK types
 

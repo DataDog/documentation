@@ -13,7 +13,7 @@ further_reading:
   text: "Getting started with Feature Flags"
 - link: "/feature_flags/concepts/"
   tag: "Documentation"
-  text: "Feature Flags Concepts"
+  text: "Learn the core concepts of Feature Flags"
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Set up Feature Flags for client-side applications"

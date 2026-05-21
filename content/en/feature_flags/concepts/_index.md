@@ -11,13 +11,6 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/targeting_rules" >}}Targeting Rules and Filters{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/traffic_splitting" >}}Traffic Splitting and Randomization{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/distribution_channels" >}}Distribution Channels{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/evaluation_tracking" >}}Evaluation Tracking{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/flag_organization" >}}Flag Organization{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/notifications" >}}Notifications{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/flag_history" >}}Flag History{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/permissions" >}}Permissions and Access Control{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/approvals" >}}Approvals{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/json_schema_validation" >}}JSON Schema Validation{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/migration_tooling" >}}Migration Tooling{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/feature_flag_mcp_server" >}}Feature Flags MCP Server{{< /nextlink >}}
 {{< /whatsnext >}}

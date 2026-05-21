@@ -16,19 +16,19 @@ When you define a targeting rule, you can serve a variant to a percentage of sub
 
 ## Percentage rollouts
 
-In the **Targeting Rules & Rollouts** section, set the percentage of the audience that should receive each variant. For a **single-variant** targeting rule, assign your desired traffic exposure to one variant—for example, roll the "Free Shipping" variant of your promo banner to 50% of subjects matching your filter:
+In the **Targeting Rules & Rollouts** section, set the percentage of the audience that should receive each variant. For a **single-variant** targeting rule, assign your desired traffic exposure to one variant. For example, roll the **Free Shipping** variant of your promo banner to 50% of subjects matching your filter:
 
-{{< img src="getting_started/feature_flags/single-variant-traffic-exposure.png" alt="Targeting rule with a single-variant percentage rollout" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/single-variant-traffic-exposure.png" alt="Targeting rule with a single-variant percentage rollout." style="width:100%;" >}}
 
 For a **multi-variant** rollout, assign percentages across multiple variants in the same targeting rule by selecting **Serve > Split Traffic** when editing or creating your targeting rule. The SDK distributes matching subjects across those variants according to the percentages you configure.
 
-{{< img src="getting_started/feature_flags/multi-variant-traffic-split.png" alt="Targeting rule with percentages split across multiple variants" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/multi-variant-traffic-split.png" alt="Targeting rule with percentages split across multiple variants." style="width:100%;" >}}
 
 ## How the SDK evaluates percentage rollouts
 
 When the SDK evaluates a targeting rule with a percentage rollout, it first checks whether the evaluation context matches the rule's filter. If it matches, the SDK uses the flag key and the `targetingKey` from the evaluation context to assign the subject to a rollout bucket. That bucket determines whether the subject receives a variant from the current rule or passes through to the next rule.
 
-Randomization is **deterministic**: a subject with the same `targetingKey` always lands in the same bucket for a given flag, so they receive the same variant on repeat evaluations. If you increase a rollout percentage later—for example, from 30% to 50%—subjects already in the treatment bucket stay in the treatment bucket.
+Randomization is **deterministic**: a subject with the same `targetingKey` always lands in the same bucket for a given flag, so they receive the same variant on repeat evaluations. If you increase a rollout percentage later (for example, from 30% to 50%), subjects already in the treatment bucket stay there.
 
 For multi-variant rules, the SDK applies the same bucketing logic to distribute subjects across variants according to the percentages defined on the rule.
 

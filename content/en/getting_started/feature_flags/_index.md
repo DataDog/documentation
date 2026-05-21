@@ -49,7 +49,7 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 
 ## Configure your environments
 
-Your organization likely already has pre-configured environments for Development, Staging, and Production. For details on environment queries, production marking, and managing environments, see [Environments][5].
+Your organization likely already has pre-configured environments for Development, Staging, and Production. For details on environment queries, production marking, and managing environments, see [Environments][4].
 
 ## Create your first feature flag
 
@@ -84,15 +84,15 @@ await OpenFeature.setProviderAndWait(provider);
 
 <div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
 
-More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
+More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][3].
 
 ### Step 2: Create a feature flag
 
 Go to [**Create Feature Flag**][2] in Datadog and configure the following:
 
 - **Name and key**: The flag's display name and the key referenced in code
-- **Variant type** and **variant values**: See [Variants and Flag Types][6]
-- **Distribution channels**: See [Distribution Channels][7]
+- **Variant type** and **variant values**: See [Variants and Flag Types][5]
+- **Distribution channels**: See [Distribution Channels][6]
 
 <div class="alert alert-warning">
   <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
@@ -132,15 +132,15 @@ After you've completed this step, redeploy the application to pick up these chan
 
 ### Step 4: Define targeting rules and enable the feature flag
 
-Configure [targeting rules][8] to define which subjects receive each variant. After saving your rules, enable the flag in your chosen environment.
+Configure [targeting rules][7] to define which subjects receive each variant. After saving your rules, enable the flag in your chosen environment.
 
 <div class="alert alert-info">
 As a general best practice, roll out changes in a Staging environment before Production.
 </div>
 
-For percentage rollouts, see [Traffic Splitting and Randomization][9].
+For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
-### Step 6: Monitor your rollout
+### Step 5: Monitor your rollout
 
 Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with the flag, view the **Real-Time Metric Overview** panel in the Datadog UI to see how the feature impacts application performance.
 
@@ -152,10 +152,9 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/settings/environments
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[5]: /feature_flags/concepts/environments/
-[6]: /feature_flags/concepts/variants_and_flag_types/
-[7]: /feature_flags/concepts/distribution_channels/
-[8]: /feature_flags/concepts/targeting_rules/
-[9]: /feature_flags/concepts/traffic_splitting/
+[3]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[4]: /feature_flags/concepts/environments/
+[5]: /feature_flags/concepts/variants_and_flag_types/
+[6]: /feature_flags/concepts/distribution_channels/
+[7]: /feature_flags/concepts/targeting_rules/
+[8]: /feature_flags/concepts/traffic_splitting/
