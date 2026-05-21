@@ -486,7 +486,92 @@ The tasks should be deployed as a replica with auto scaling enabled, where the m
 - The guidance for CPU and memory allocation is not for a single instance of the task, but for the total number of tasks. For example, if you want to send 3 TB of logs to the Worker, you could either deploy three replicas with one vCPU each or deploy one replica with three vCPUs.
 - Datadog recommends enabling load balancers for the pool of replica tasks.
 
-Set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` allow the load balancer to do health checks on the Observability Pipelines Worker.
+In the task definition, set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` allow the load balancer to perform health checks on the Observability Pipelines Worker.
+
+{% if equals($secrets_source, "secrets_management") %}
+
+Also, configure your task definition to point to your [Secrets Manager][18]. For example for AWS Secrets Manager or AWS Systems Manager Parameter Store, specify the ARNs that point to the stored secrets. See [Specifying sensitive data using Secrets Manager secrets in Amazon ECS][25] for details.
+
+An example task definition using AWS Secrets Manager:
+
+```json
+{
+  "family": "my-opw",
+  "containerDefinitions": [
+    {
+      "name": "my-opw",
+      "image": "datadog/observability-pipelines-worker",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "my-opw-80-tcp",
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "command": [
+        "run"
+      ],
+      "environment": [
+        {
+          "name": "DD_OP_API_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_API_KEY",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "datadoghq.com"
+        },
+        {
+          "name": "DD_OP_API_ADDRESS",
+          "value": "0.0.0.0:8181"
+        },
+        {
+          "name": "DD_OP_PIPELINE_ID",
+          "value": "xxxxxxx-xxxx-xxxx-xxxx-xxxx"
+        }
+      ],
+      "secrets": [
+                {
+                    "valueFrom": "arn:aws:secretsmanager:region:aws_account_id:secret:username_value",
+                    "name": "username_value"
+                }
+            ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "tags": [
+    {
+      "key": "PrincipalId",
+      "value": "AROAYYB64AB3JW3TEST"
+    },
+    {
+      "key": "User",
+      "value": "username@test.com"
+    }
+  ],
+  "executionRoleArn": "arn:aws:iam::60142xxxxxx:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "xxx",
+  "memory": "xxx"
+}
+```
+
+{% /if %}
+
+{% if equals($secrets_source, "environment_variables") %}
 
 An example task definition:
 
@@ -562,6 +647,8 @@ An example task definition:
   "memory": "xxx"
 }
 ```
+
+{% /if %}
 
 ### Configure the ECS service
 
@@ -932,3 +1019,4 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [22]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html
 [23]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
 [24]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
