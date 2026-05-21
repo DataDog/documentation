@@ -617,14 +617,14 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 
 | | How it's computed |
 |---|---|
-| **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
-| **Limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
+| **Request recommendation** | Based on the **p90** of CPU usage relative to the current request over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
+| **Limit recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
 
 **Guaranteed** (CPU request equals CPU limit):
 
 | | How it's computed |
 |---|---|
-| **Request and limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
+| **Request and limit recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
 
 #### Key design principles
 
