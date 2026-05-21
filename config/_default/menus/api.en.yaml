@@ -571,6 +571,32 @@ menu:
       url: /api/latest/dashboards/
       identifier: dashboards
       generated: true
+    - name: Get usage stats for a dashboard
+      url: '#get-usage-stats-for-a-dashboard'
+      identifier: dashboards-get-usage-stats-for-a-dashboard
+      parent: dashboards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardUsage
+        unstable:
+          - v2
+        order: 2
+    - name: Get usage stats for all dashboards
+      url: '#get-usage-stats-for-all-dashboards'
+      identifier: dashboards-get-usage-stats-for-all-dashboards
+      parent: dashboards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDashboardsUsage
+        unstable:
+          - v2
+        order: 1
     - name: Update a dashboard
       url: '#update-a-dashboard'
       identifier: dashboards-update-a-dashboard
@@ -7378,6 +7404,97 @@ menu:
       url: /api/latest/case-management/
       identifier: case-management
       generated: true
+    - name: Update a maintenance window
+      url: '#update-a-maintenance-window'
+      identifier: case-management-update-a-maintenance-window
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMaintenanceWindow
+        unstable:
+          - v2
+        order: 40
+    - name: Delete a maintenance window
+      url: '#delete-a-maintenance-window'
+      identifier: case-management-delete-a-maintenance-window
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMaintenanceWindow
+        unstable:
+          - v2
+        order: 41
+    - name: Create a maintenance window
+      url: '#create-a-maintenance-window'
+      identifier: case-management-create-a-maintenance-window
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMaintenanceWindow
+        unstable:
+          - v2
+        order: 39
+    - name: List maintenance windows
+      url: '#list-maintenance-windows'
+      identifier: case-management-list-maintenance-windows
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMaintenanceWindows
+        unstable:
+          - v2
+        order: 38
+    - name: Watch a case
+      url: '#watch-a-case'
+      identifier: case-management-watch-a-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - WatchCase
+        unstable:
+          - v2
+        order: 65
+    - name: Unwatch a case
+      url: '#unwatch-a-case'
+      identifier: case-management-unwatch-a-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnwatchCase
+        unstable:
+          - v2
+        order: 66
+    - name: List case watchers
+      url: '#list-case-watchers'
+      identifier: case-management-list-case-watchers
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCaseWatchers
+        unstable:
+          - v2
+        order: 64
     - name: Unassign case
       url: '#unassign-case'
       identifier: case-management-unassign-case
@@ -7389,7 +7506,7 @@ menu:
         operationids:
           - UnassignCase
         unstable: []
-        order: 9
+        order: 16
     - name: Unarchive case
       url: '#unarchive-case'
       identifier: case-management-unarchive-case
@@ -7401,7 +7518,7 @@ menu:
         operationids:
           - UnarchiveCase
         unstable: []
-        order: 11
+        order: 18
     - name: Update case title
       url: '#update-case-title'
       identifier: case-management-update-case-title
@@ -7413,7 +7530,20 @@ menu:
         operationids:
           - UpdateCaseTitle
         unstable: []
-        order: 4
+        order: 11
+    - name: Get case timeline
+      url: '#get-case-timeline'
+      identifier: case-management-get-case-timeline
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCaseTimeline
+        unstable:
+          - v2
+        order: 58
     - name: Update case status
       url: '#update-case-status'
       identifier: case-management-update-case-status
@@ -7425,7 +7555,20 @@ menu:
         operationids:
           - UpdateStatus
         unstable: []
-        order: 6
+        order: 13
+    - name: Update case resolved reason
+      url: '#update-case-resolved-reason'
+      identifier: case-management-update-case-resolved-reason
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseResolvedReason
+        unstable:
+          - v2
+        order: 26
     - name: Create ServiceNow ticket for case
       url: '#create-servicenow-ticket-for-case'
       identifier: case-management-create-servicenow-ticket-for-case
@@ -7438,7 +7581,7 @@ menu:
           - CreateCaseServiceNowTicket
         unstable:
           - v2
-        order: 26
+        order: 56
     - name: Update case project
       url: '#update-case-project'
       identifier: case-management-update-case-project
@@ -7451,7 +7594,7 @@ menu:
           - MoveCaseToProject
         unstable:
           - v2
-        order: 21
+        order: 51
     - name: Create investigation notebook for case
       url: '#create-investigation-notebook-for-case'
       identifier: case-management-create-investigation-notebook-for-case
@@ -7464,7 +7607,7 @@ menu:
           - CreateCaseNotebook
         unstable:
           - v2
-        order: 27
+        order: 57
     - name: Create Jira issue for case
       url: '#create-jira-issue-for-case'
       identifier: case-management-create-jira-issue-for-case
@@ -7477,7 +7620,7 @@ menu:
           - CreateCaseJiraIssue
         unstable:
           - v2
-        order: 23
+        order: 53
     - name: Link existing Jira issue to case
       url: '#link-existing-jira-issue-to-case'
       identifier: case-management-link-existing-jira-issue-to-case
@@ -7490,7 +7633,7 @@ menu:
           - LinkJiraIssueToCase
         unstable:
           - v2
-        order: 24
+        order: 54
     - name: Remove Jira issue link from case
       url: '#remove-jira-issue-link-from-case'
       identifier: case-management-remove-jira-issue-link-from-case
@@ -7503,7 +7646,7 @@ menu:
           - UnlinkJiraIssue
         unstable:
           - v2
-        order: 25
+        order: 55
     - name: Link incident to case
       url: '#link-incident-to-case'
       identifier: case-management-link-incident-to-case
@@ -7516,7 +7659,7 @@ menu:
           - LinkIncident
         unstable:
           - v2
-        order: 22
+        order: 52
     - name: Update case priority
       url: '#update-case-priority'
       identifier: case-management-update-case-priority
@@ -7528,7 +7671,46 @@ menu:
         operationids:
           - UpdatePriority
         unstable: []
-        order: 7
+        order: 14
+    - name: Add insights to a case
+      url: '#add-insights-to-a-case'
+      identifier: case-management-add-insights-to-a-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddCaseInsights
+        unstable:
+          - v2
+        order: 33
+    - name: Remove insights from a case
+      url: '#remove-insights-from-a-case'
+      identifier: case-management-remove-insights-from-a-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveCaseInsights
+        unstable:
+          - v2
+        order: 34
+    - name: Update case due date
+      url: '#update-case-due-date'
+      identifier: case-management-update-case-due-date
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseDueDate
+        unstable:
+          - v2
+        order: 25
     - name: Update case description
       url: '#update-case-description'
       identifier: case-management-update-case-description
@@ -7540,7 +7722,7 @@ menu:
         operationids:
           - UpdateCaseDescription
         unstable: []
-        order: 5
+        order: 12
     - name: Update case custom attribute
       url: '#update-case-custom-attribute'
       identifier: case-management-update-case-custom-attribute
@@ -7552,7 +7734,7 @@ menu:
         operationids:
           - UpdateCaseCustomAttribute
         unstable: []
-        order: 15
+        order: 23
     - name: Delete custom attribute from case
       url: '#delete-custom-attribute-from-case'
       identifier: case-management-delete-custom-attribute-from-case
@@ -7564,7 +7746,20 @@ menu:
         operationids:
           - DeleteCaseCustomAttribute
         unstable: []
-        order: 16
+        order: 24
+    - name: Update case comment
+      url: '#update-case-comment'
+      identifier: case-management-update-case-comment
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseComment
+        unstable:
+          - v2
+        order: 21
     - name: Delete case comment
       url: '#delete-case-comment'
       identifier: case-management-delete-case-comment
@@ -7576,7 +7771,7 @@ menu:
         operationids:
           - DeleteCaseComment
         unstable: []
-        order: 14
+        order: 22
     - name: Comment case
       url: '#comment-case'
       identifier: case-management-comment-case
@@ -7588,7 +7783,7 @@ menu:
         operationids:
           - CommentCase
         unstable: []
-        order: 13
+        order: 20
     - name: Update case attributes
       url: '#update-case-attributes'
       identifier: case-management-update-case-attributes
@@ -7600,7 +7795,7 @@ menu:
         operationids:
           - UpdateAttributes
         unstable: []
-        order: 12
+        order: 19
     - name: Assign case
       url: '#assign-case'
       identifier: case-management-assign-case
@@ -7612,7 +7807,7 @@ menu:
         operationids:
           - AssignCase
         unstable: []
-        order: 8
+        order: 15
     - name: Archive case
       url: '#archive-case'
       identifier: case-management-archive-case
@@ -7624,7 +7819,7 @@ menu:
         operationids:
           - ArchiveCase
         unstable: []
-        order: 10
+        order: 17
     - name: Get the details of a case
       url: '#get-the-details-of-a-case'
       identifier: case-management-get-the-details-of-a-case
@@ -7636,7 +7831,163 @@ menu:
         operationids:
           - GetCase
         unstable: []
+        order: 10
+    - name: Update a case view
+      url: '#update-a-case-view'
+      identifier: case-management-update-a-case-view
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseView
+        unstable:
+          - v2
+        order: 62
+    - name: Get a case view
+      url: '#get-a-case-view'
+      identifier: case-management-get-a-case-view
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCaseView
+        unstable:
+          - v2
+        order: 61
+    - name: Delete a case view
+      url: '#delete-a-case-view'
+      identifier: case-management-delete-a-case-view
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseView
+        unstable:
+          - v2
+        order: 63
+    - name: Create a case view
+      url: '#create-a-case-view'
+      identifier: case-management-create-a-case-view
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseView
+        unstable:
+          - v2
+        order: 60
+    - name: List case views
+      url: '#list-case-views'
+      identifier: case-management-list-case-views
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCaseViews
+        unstable:
+          - v2
+        order: 59
+    - name: Enable an automation rule
+      url: '#enable-an-automation-rule'
+      identifier: case-management-enable-an-automation-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EnableCaseAutomationRule
+        unstable:
+          - v2
+        order: 6
+    - name: Disable an automation rule
+      url: '#disable-an-automation-rule'
+      identifier: case-management-disable-an-automation-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DisableCaseAutomationRule
+        unstable:
+          - v2
+        order: 7
+    - name: Update an automation rule
+      url: '#update-an-automation-rule'
+      identifier: case-management-update-an-automation-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseAutomationRule
+        unstable:
+          - v2
+        order: 4
+    - name: Get an automation rule
+      url: '#get-an-automation-rule'
+      identifier: case-management-get-an-automation-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCaseAutomationRule
+        unstable:
+          - v2
         order: 3
+    - name: Delete an automation rule
+      url: '#delete-an-automation-rule'
+      identifier: case-management-delete-an-automation-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseAutomationRule
+        unstable:
+          - v2
+        order: 5
+    - name: Create an automation rule
+      url: '#create-an-automation-rule'
+      identifier: case-management-create-an-automation-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseAutomationRule
+        unstable:
+          - v2
+        order: 2
+    - name: List automation rules
+      url: '#list-automation-rules'
+      identifier: case-management-list-automation-rules
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCaseAutomationRules
+        unstable:
+          - v2
+        order: 1
     - name: Update a notification rule
       url: '#update-a-notification-rule'
       identifier: case-management-update-a-notification-rule
@@ -7648,7 +7999,7 @@ menu:
         operationids:
           - UpdateProjectNotificationRule
         unstable: []
-        order: 19
+        order: 44
     - name: Delete a notification rule
       url: '#delete-a-notification-rule'
       identifier: case-management-delete-a-notification-rule
@@ -7660,7 +8011,7 @@ menu:
         operationids:
           - DeleteProjectNotificationRule
         unstable: []
-        order: 20
+        order: 45
     - name: Create a notification rule
       url: '#create-a-notification-rule'
       identifier: case-management-create-a-notification-rule
@@ -7672,7 +8023,7 @@ menu:
         operationids:
           - CreateProjectNotificationRule
         unstable: []
-        order: 18
+        order: 43
     - name: Get notification rules
       url: '#get-notification-rules'
       identifier: case-management-get-notification-rules
@@ -7684,7 +8035,33 @@ menu:
         operationids:
           - GetProjectNotificationRules
         unstable: []
-        order: 17
+        order: 42
+    - name: Favorite a project
+      url: '#favorite-a-project'
+      identifier: case-management-favorite-a-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - FavoriteCaseProject
+        unstable:
+          - v2
+        order: 31
+    - name: Unfavorite a project
+      url: '#unfavorite-a-project'
+      identifier: case-management-unfavorite-a-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnfavoriteCaseProject
+        unstable:
+          - v2
+        order: 32
     - name: Update a project
       url: '#update-a-project'
       identifier: case-management-update-a-project
@@ -7696,7 +8073,7 @@ menu:
         operationids:
           - UpdateProject
         unstable: []
-        order: 32
+        order: 50
     - name: Get the details of a project
       url: '#get-the-details-of-a-project'
       identifier: case-management-get-the-details-of-a-project
@@ -7708,7 +8085,7 @@ menu:
         operationids:
           - GetProject
         unstable: []
-        order: 30
+        order: 48
     - name: Remove a project
       url: '#remove-a-project'
       identifier: case-management-remove-a-project
@@ -7720,7 +8097,20 @@ menu:
         operationids:
           - DeleteProject
         unstable: []
-        order: 31
+        order: 49
+    - name: List project favorites
+      url: '#list-project-favorites'
+      identifier: case-management-list-project-favorites
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserCaseProjectFavorites
+        unstable:
+          - v2
+        order: 30
     - name: Create a project
       url: '#create-a-project'
       identifier: case-management-create-a-project
@@ -7732,7 +8122,7 @@ menu:
         operationids:
           - CreateProject
         unstable: []
-        order: 28
+        order: 46
     - name: Get all projects
       url: '#get-all-projects'
       identifier: case-management-get-all-projects
@@ -7744,7 +8134,85 @@ menu:
         operationids:
           - GetProjects
         unstable: []
+        order: 47
+    - name: Delete a case link
+      url: '#delete-a-case-link'
+      identifier: case-management-delete-a-case-link
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCaseLink
+        unstable:
+          - v2
+        order: 37
+    - name: Create a case link
+      url: '#create-a-case-link'
+      identifier: case-management-create-a-case-link
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseLink
+        unstable:
+          - v2
+        order: 36
+    - name: List case links
+      url: '#list-case-links'
+      identifier: case-management-list-case-links
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCaseLinks
+        unstable:
+          - v2
+        order: 35
+    - name: Count cases
+      url: '#count-cases'
+      identifier: case-management-count-cases
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CountCases
+        unstable:
+          - v2
+        order: 28
+    - name: Bulk update cases
+      url: '#bulk-update-cases'
+      identifier: case-management-bulk-update-cases
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkUpdateCases
+        unstable:
+          - v2
         order: 29
+    - name: Aggregate cases
+      url: '#aggregate-cases'
+      identifier: case-management-aggregate-cases
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AggregateCases
+        unstable:
+          - v2
+        order: 27
     - name: Create a case
       url: '#create-a-case'
       identifier: case-management-create-a-case
@@ -7756,7 +8224,7 @@ menu:
         operationids:
           - CreateCase
         unstable: []
-        order: 2
+        order: 8
     - name: Search cases
       url: '#search-cases'
       identifier: case-management-search-cases
@@ -7768,11 +8236,24 @@ menu:
         operationids:
           - SearchCases
         unstable: []
-        order: 1
+        order: 9
     - name: Case Management Attribute
       url: /api/latest/case-management-attribute/
       identifier: case-management-attribute
       generated: true
+    - name: Update custom attribute config
+      url: '#update-custom-attribute-config'
+      identifier: case-management-attribute-update-custom-attribute-config
+      parent: case-management-attribute
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomAttributeConfig
+        unstable:
+          - v2
+        order: 5
     - name: Delete custom attributes config
       url: '#delete-custom-attributes-config'
       identifier: case-management-attribute-delete-custom-attributes-config
@@ -7825,6 +8306,19 @@ menu:
       url: /api/latest/case-management-type/
       identifier: case-management-type
       generated: true
+    - name: Update a case type
+      url: '#update-a-case-type'
+      identifier: case-management-type-update-a-case-type
+      parent: case-management-type
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCaseType
+        unstable:
+          - v2
+        order: 4
     - name: Delete a case type
       url: '#delete-a-case-type'
       identifier: case-management-type-delete-a-case-type
@@ -11192,6 +11686,19 @@ menu:
       url: /api/latest/llm-observability/
       identifier: llm-observability
       generated: true
+    - name: List events for an LLM Observability experiment
+      url: '#list-events-for-an-llm-observability-experiment'
+      identifier: llm-observability-list-events-for-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperimentEvents
+        unstable:
+          - v2
+        order: 30
     - name: Delete LLM Observability dataset records
       url: '#delete-llm-observability-dataset-records'
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -11296,6 +11803,32 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Search LLM Observability spans
+      url: '#search-llm-observability-spans'
+      identifier: llm-observability-search-llm-observability-spans
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchLLMObsSpans
+        unstable:
+          - v2
+        order: 35
+    - name: List LLM Observability spans
+      url: '#list-llm-observability-spans'
+      identifier: llm-observability-list-llm-observability-spans
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsSpans
+        unstable:
+          - v2
+        order: 34
     - name: Update an LLM Observability project
       url: '#update-an-llm-observability-project'
       identifier: llm-observability-update-an-llm-observability-project
@@ -11413,6 +11946,45 @@ menu:
         unstable:
           - v2
         order: 13
+    - name: Simple search experimentation entities
+      url: '#simple-search-experimentation-entities'
+      identifier: llm-observability-simple-search-experimentation-entities
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SimpleSearchLLMObsExperimentation
+        unstable:
+          - v2
+        order: 32
+    - name: Search LLM Observability experimentation entities
+      url: '#search-llm-observability-experimentation-entities'
+      identifier: llm-observability-search-llm-observability-experimentation-entities
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchLLMObsExperimentation
+        unstable:
+          - v2
+        order: 31
+    - name: Aggregate LLM Observability experimentation
+      url: '#aggregate-llm-observability-experimentation'
+      identifier: llm-observability-aggregate-llm-observability-experimentation
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AggregateLLMObsExperimentation
+        unstable:
+          - v2
+        order: 33
     - name: Update annotation queue label schema
       url: '#update-annotation-queue-label-schema'
       identifier: llm-observability-update-annotation-queue-label-schema
@@ -11530,6 +12102,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Delete LLM Observability data
+      url: '#delete-llm-observability-data'
+      identifier: llm-observability-delete-llm-observability-data
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsData
+        unstable:
+          - v2
+        order: 36
     - name: Create or update a custom evaluator configuration
       url: '#create-or-update-a-custom-evaluator-configuration'
       identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
@@ -12104,6 +12689,218 @@ menu:
           - GetChannelByName
         unstable: []
         order: 1
+    - name: Model Lab API
+      url: /api/latest/model-lab-api/
+      identifier: model-lab-api
+      generated: true
+    - name: Pin a Model Lab run
+      url: '#pin-a-model-lab-run'
+      identifier: model-lab-api-pin-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PinModelLabRun
+        unstable:
+          - v2
+        order: 10
+    - name: Unpin a Model Lab run
+      url: '#unpin-a-model-lab-run'
+      identifier: model-lab-api-unpin-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpinModelLabRun
+        unstable:
+          - v2
+        order: 11
+    - name: List Model Lab run artifacts
+      url: '#list-model-lab-run-artifacts'
+      identifier: model-lab-api-list-model-lab-run-artifacts
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRunArtifacts
+        unstable:
+          - v2
+        order: 14
+    - name: Get a Model Lab run
+      url: '#get-a-model-lab-run'
+      identifier: model-lab-api-get-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetModelLabRun
+        unstable:
+          - v2
+        order: 8
+    - name: Delete a Model Lab run
+      url: '#delete-a-model-lab-run'
+      identifier: model-lab-api-delete-a-model-lab-run
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteModelLabRun
+        unstable:
+          - v2
+        order: 9
+    - name: List Model Lab runs
+      url: '#list-model-lab-runs'
+      identifier: model-lab-api-list-model-lab-runs
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRuns
+        unstable:
+          - v2
+        order: 7
+    - name: Star a Model Lab project
+      url: '#star-a-model-lab-project'
+      identifier: model-lab-api-star-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StarModelLabProject
+        unstable:
+          - v2
+        order: 5
+    - name: Remove star from a Model Lab project
+      url: '#remove-star-from-a-model-lab-project'
+      identifier: model-lab-api-remove-star-from-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnstarModelLabProject
+        unstable:
+          - v2
+        order: 6
+    - name: List Model Lab project artifacts
+      url: '#list-model-lab-project-artifacts'
+      identifier: model-lab-api-list-model-lab-project-artifacts
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjectArtifacts
+        unstable:
+          - v2
+        order: 15
+    - name: Get a Model Lab project
+      url: '#get-a-model-lab-project'
+      identifier: model-lab-api-get-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetModelLabProject
+        unstable:
+          - v2
+        order: 2
+    - name: List Model Lab projects
+      url: '#list-model-lab-projects'
+      identifier: model-lab-api-list-model-lab-projects
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjects
+        unstable:
+          - v2
+        order: 1
+    - name: List Model Lab project facet values
+      url: '#list-model-lab-project-facet-values'
+      identifier: model-lab-api-list-model-lab-project-facet-values
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjectFacetValues
+        unstable:
+          - v2
+        order: 4
+    - name: List Model Lab project facet keys
+      url: '#list-model-lab-project-facet-keys'
+      identifier: model-lab-api-list-model-lab-project-facet-keys
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabProjectFacetKeys
+        unstable:
+          - v2
+        order: 3
+    - name: List Model Lab run facet values
+      url: '#list-model-lab-run-facet-values'
+      identifier: model-lab-api-list-model-lab-run-facet-values
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRunFacetValues
+        unstable:
+          - v2
+        order: 13
+    - name: List Model Lab run facet keys
+      url: '#list-model-lab-run-facet-keys'
+      identifier: model-lab-api-list-model-lab-run-facet-keys
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListModelLabRunFacetKeys
+        unstable:
+          - v2
+        order: 12
+    - name: Get Model Lab artifact content
+      url: '#get-model-lab-artifact-content'
+      identifier: model-lab-api-get-model-lab-artifact-content
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetModelLabArtifactContent
+        unstable:
+          - v2
+        order: 16
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
@@ -13232,7 +14029,8 @@ menu:
           - v2
         operationids:
           - UploadSourceMap
-        unstable: []
+        unstable:
+          - v2
         order: 9
     - name: Search RUM events
       url: '#search-rum-events'
@@ -14373,6 +15171,18 @@ menu:
       url: /api/latest/scorecards/
       identifier: scorecards
       generated: true
+    - name: List all scores
+      url: '#list-all-scores'
+      identifier: scorecards-list-all-scores
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardScores
+        unstable: []
+        order: 14
     - name: List all scorecards
       url: '#list-all-scorecards'
       identifier: scorecards-list-all-scorecards
