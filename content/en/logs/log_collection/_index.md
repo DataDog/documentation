@@ -161,7 +161,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 ### Custom log forwarding
 
-Any custom process or logging library able to forward logs through **HTTP** can be used in conjunction with Datadog Logs.
+Any custom process or logging library able to forward logs through HTTP can be used in conjunction with Datadog Logs.
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][15] to get started.
 
@@ -224,7 +224,7 @@ For more information, see the complete [source code attributes documentation][11
 
 ## Next steps
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
+Once logs are collected and ingested, they are available in {{< ui >}}Log Explorer{{< /ui >}}. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
 {{< img src="logs/explore.png" alt="Logs appearing in the Log Explorer" style="width:100%" >}}
 

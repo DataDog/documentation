@@ -84,6 +84,10 @@ To use Database Investigator, your role must have the **Database Monitoring Read
 
 Database Investigator reads the telemetry your account already collects, including query metrics, query samples, explain plans, instance and host metrics. It also reads related APM service dependencies, incidents, events, and metrics in your Datadog organization. It accesses only the resources permitted by your role.
 
+### Is data sent to Database Investigator used to train AI models?
+
+Database Investigator operates under zero-retention and zero-training agreements with the third-party AI service providers that power it. Data processed during an investigation is not retained by those providers and is not used to train or improve their models.
+
 ### Does Database Investigator modify the database?
 
 No. Database Investigator reads observability data and produces recommendations. It does not connect to your database, run SQL against it, or change configuration. SQL changes in its responses are suggestions for you to review and apply.

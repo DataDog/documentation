@@ -170,7 +170,7 @@ You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:100%;" >}}
 
-There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab. 
+There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the {{< ui >}}Traces{{< /ui >}} tab. 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:100%;" >}}
 

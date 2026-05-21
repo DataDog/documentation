@@ -3,6 +3,7 @@ title: Google Cloud Run
 aliases:
     - /serverless/gcp
     - /serverless/google_cloud
+    - /serverless/google
 further_reading:
   - link: "/integrations/google-cloud-run/"
     tag: "Documentation"

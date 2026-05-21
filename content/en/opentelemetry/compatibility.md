@@ -38,7 +38,7 @@ The following table shows feature compatibility across different setups:
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
-| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
+| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | {{< tooltip text="Preview" tooltip="Kubernetes Explorer support for the OSS Collector is in Preview. Contact your account representative to request access." >}} | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
