@@ -32,8 +32,8 @@ To start sending Error Tracking data from your browser application to Datadog, f
 
 ### Step 1 - Create the application
 
-1. In Datadog, navigate to the [**Errors > Settings > Browser and Mobile > Add an Application**][6] page and select the JavaScript (JS) application type.
-2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
+1. In Datadog, navigate to the [{{< ui >}}Errors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}Add an Application{{< /ui >}}][6] page and select the JavaScript (JS) application type.
+2. Enter a name for your application, then click {{< ui >}}Create Application{{< /ui >}}. This generates a `clientToken` and an `applicationId` for your application.
 
 ### Step 2 - Choose the right installation method
 
@@ -171,7 +171,7 @@ Now that you've completed the basic setup for Browser Error Tracking, your appli
 
 Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
 
-Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
+Until Datadog starts receiving data, your application appears as `pending` on the {{< ui >}}Applications{{< /ui >}} page.
 
 ### Step 7 - Link errors with your source code (optional)
 

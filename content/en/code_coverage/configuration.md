@@ -11,6 +11,9 @@ further_reading:
   - link: "/code_coverage/flags"
     tag: "Documentation"
     text: "Organize coverage data with flags"
+  - link: "/code_coverage/carryforward"
+    tag: "Documentation"
+    text: "Keep total coverage accurate with carryforward"
 ---
 
 ## Overview
@@ -288,6 +291,41 @@ gates:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+## Carryforward
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
+
+You can enable [carryforward][4] in the configuration file to reuse coverage data from ancestor commits when not every CI job runs for a commit. Carryforward operates on [flags][3], so every report involved must be tagged with `--flags`.
+
+To enable carryforward for every flag in the repository:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+carryforward: true
+{{< /code-block >}}
+
+To enable carryforward for specific flags only:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+flags:
+  unit-tests:
+    carryforward: true
+  integration-tests:
+    carryforward: true
+{{< /code-block >}}
+
+The top-level `carryforward` field accepts the following values:
+
+- `true`: Carryforward is enabled for every flag, unless a flag overrides it with `carryforward: false` in the `flags` map.
+- `false` (default): Carryforward is disabled, unless a flag opts in with `carryforward: true` in the `flags` map.
+
+The `flags` map accepts a per-flag configuration block. The supported fields are:
+
+- `carryforward`: A Boolean that enables or disables carryforward for the named flag. Overrides the top-level `carryforward` value.
+
+For complete details, see [Code Coverage Carryforward][4].
+
 ## Pattern syntax
 
 Configuration options that accept file paths support three types of patterns:
@@ -333,3 +371,4 @@ Simple path prefixes without special characters are treated as prefix matches:
 [1]: /code_coverage/monorepo_support
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/flags
+[4]: /code_coverage/carryforward

@@ -146,7 +146,7 @@ For more information, see the [Nested Queries][13] documentation.
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][14].
 
-Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations and comparison functions. Use `+`, `-`, `/`, `*`, `minimum()`, and `maximum()` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
@@ -183,21 +183,26 @@ status:error / status:info
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
 #### Minimum or Maximum between two queries
-Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.
+
+Use `minimum()` and `maximum()` to compare two queries point by point and return the lower or higher value at each timestamp.
+
+**Note**: Using `min()` and `max()` for arithmetic comparison is deprecated. Use `minimum()` and `maximum()` instead. This deprecation applies only to arithmetic comparison syntax. Aggregation methods such as `min by`, `max by`, and nested-query aggregation with `min` and `max` are unchanged.
+
+Here is an example using `maximum()` to find the maximum CPU usage between two availability zones.
 
 ```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
+maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
 
-Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and warning statuses.
+Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 
 ```text
-min(status:error, status:warn)
+minimum(status:error, status:warn)
 ```
 
-{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
 
 ### Create an alias
 

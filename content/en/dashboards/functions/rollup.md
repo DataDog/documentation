@@ -76,6 +76,34 @@ You can customize how your metrics data is bucketed over time when using the `.r
 * Weekly rollups with adjustable start date and timezones. For example, see how many weekly transactions are open (if your week starts on Mondays).
 * Daily rollups with adjustable start time and timezones. For example, see how many events of interest occurred on the current day (if your day begins at midnight Pacific Time).
 
+The calendar-aligned rollup syntax extends `.rollup()` with a calendar unit and optional alignment day and timezone:
+
+`.rollup(<AGGREGATOR>, <CALENDAR_UNIT>, <ALIGNMENT>, '<TIMEZONE>')`
+
+| Parameter        | Description                                                                                                          |
+|------------------|----------------------------------------------------------------------------------------------------------------------|
+| `<AGGREGATOR>`   | Can be `avg`, `sum`, `min`, `max`, or `count`.                                                                       |
+| `<CALENDAR_UNIT>`| `daily`, `weekly`, or `monthly`.                                                                                     |
+| `<ALIGNMENT>`    | For `weekly`: the start day as a lowercase day name (`monday`, `tuesday`, ..., `sunday`). Defaults to `sunday` if omitted. For `daily`: a start time such as `12am`. For `monthly`: a start date. |
+| `<TIMEZONE>`     | Optional. An [IANA timezone][7] string such as `America/New_York` or `Europe/Paris`. Defaults to UTC if omitted.    |
+
+**Examples**:
+
+Weekly rollup starting Monday (UTC):
+```
+sum:requests.count{*}.as_count().rollup(sum, weekly, monday)
+```
+
+Weekly rollup starting Monday in Eastern Time:
+```
+sum:requests.count{*}.as_count().rollup(sum, weekly, monday, 'America/New_York')
+```
+
+Daily rollup starting at midnight Pacific Time:
+```
+sum:requests.count{*}.as_count().rollup(sum, daily, 12am, 'America/Los_Angeles')
+```
+
 ## Rollups in monitors
 
 Rollups should usually be avoided in monitor queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
@@ -92,3 +120,4 @@ If your monitor queries are unexpectedly showing {{< ui >}}No Data{{< /ui >}}, c
 [4]: /metrics/custom_metrics/type_modifiers/
 [5]: /monitors/types/metric/
 [6]: /monitors/guide/troubleshooting-no-data/
+[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
