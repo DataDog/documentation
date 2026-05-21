@@ -27,7 +27,7 @@ curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
 Then follow the instructions below to add the MCP Server to your specific client.
 
 <div class="alert alert-info">
-  The Feature Flags MCP Server endpoint uses <code>/api/unstable/</code>. This API is in preview.
+  The Feature Flags toolset is generally available on the Datadog MCP Server. The MCP Server endpoint currently uses the <code>/api/unstable/</code> path.
 </div>
 
 ### Claude Code
