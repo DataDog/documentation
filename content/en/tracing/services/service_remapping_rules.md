@@ -3,11 +3,6 @@ title: Service remapping rules
 site_support_id: service_remapping_rules
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-remapping-rules/"
- btn_hidden="false" header="Join the Preview!">}}
-Service remapping rules are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Update how your services appear across Datadog without changing tracer configuration or redeploying code. Service remapping rules allow you to rename, merge, or split services; or create new services based on infrastructure tags from the Datadog UI. You can also create remapping rules for other entity types, such as datastores and queues.
