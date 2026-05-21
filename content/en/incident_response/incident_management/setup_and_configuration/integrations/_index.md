@@ -3,6 +3,7 @@ title: Incident Integrations
 description: "Learn how to connect Datadog Incident Management with third-party tools to automate workflows, sync communications, and streamline incident response."
 aliases:
 - /service_management/incident_management/integrations/
+- /service_management/incident_management/incident_settings/integrations/
 - /incident_response/incident_management/integrations
 ---
 
@@ -29,6 +30,7 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
     {{< nextlink href="/incident_response/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="/integrations/google-meet-incident-management" >}}Google Meet{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/google_chat" >}}Google Chat{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}

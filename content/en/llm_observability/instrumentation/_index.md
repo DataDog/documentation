@@ -1,5 +1,6 @@
 ---
 title: LLM Observability Instrumentation
+description: Overview of instrumentation options for Datadog LLM Observability, including SDK-based and API-based approaches for Python, Node.js, and Java.
 further_reading:
     - link: '/llm_observability/auto_instrumentation'
       tag: 'Auto instrumentation'
@@ -7,6 +8,10 @@ further_reading:
     - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
       tag: Blog
       text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+    - link: "https://learn.datadoghq.com/courses/llm-obs-getting-started"
+      tag: "Learning Center"
+      text: "Getting Started with LLM Observability"
+
 ---
 
 

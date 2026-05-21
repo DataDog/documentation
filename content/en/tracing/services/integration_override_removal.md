@@ -28,7 +28,7 @@ Before you remove integration overrides:
 | Language   | Minimum supported version |
 |------------|---------------------------|
 | C++        | All versions supported    |
-| Dotnet     | [3.4.0][1]                |
+| .NET       | [3.4.0][1]                |
 | Go         | [1.55.0][2]               |
 | Java       | [1.20.0][3]               |
 | Node.js    | [3.37.0][13]-3.x or [4.16.0][4]               |

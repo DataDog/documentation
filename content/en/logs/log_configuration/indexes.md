@@ -20,6 +20,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#optimizing-log-usage-to-manage-volume-and-cost"
   tag: "Blog"
   text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+- link: "https://learn.datadoghq.com/courses/log-indexes"
+  tag: "Learning Center"
+  text: "Manage and Monitor Indexed Log Volumes"
+
 ---
 
 Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
@@ -186,10 +190,10 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /logs/search_syntax/
 [13]: /api/v1/logs-indexes/#update-an-index
-[14]: /logs/log_configuration/processors/#user-agent-parser
-[15]: /logs/log_configuration/processors/#geoip-parser
+[14]: /logs/log_configuration/processors/user_agent_parser/
+[15]: /logs/log_configuration/processors/geoip_parser/
 [16]: /tracing/other_telemetry/connect_logs_and_traces/
-[17]: /logs/log_configuration/processors/#trace-remapper
+[17]: /logs/log_configuration/processors/trace_remapper/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage

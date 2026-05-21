@@ -1,6 +1,7 @@
 ---
 title: Glossary tooltip
 draft: true
+private: true
 ---
 
 ## Case tests

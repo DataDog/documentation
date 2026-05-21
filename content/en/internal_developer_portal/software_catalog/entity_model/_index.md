@@ -51,7 +51,7 @@ algolia:
   tags: [ "codeLocations" ]
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}
@@ -123,7 +123,7 @@ V3.0 contains the following changes from v2.2:
 
 ### Example YAML files
 
-{{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="component-of-kind-system" %}}
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: system
@@ -194,7 +194,7 @@ datadog:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="component-of-kind-library" %}}
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: library
@@ -233,7 +233,7 @@ metadata:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="components-in-multiple-systems" %}}
 If a single component is part of multiple systems, you must specify that component in the YAML for each system. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
 For the postgres fleet (`managed-postgres`), specify a definition for `kind:system`:
@@ -599,5 +599,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
-[21]: /dora_metrics/setup/#handling-multiple-services-in-the-same-repository
+[21]: /delivery_performance/dora_metrics/setup/#handling-multiple-services-in-the-same-repository
 [22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

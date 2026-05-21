@@ -176,7 +176,7 @@ nav_sections:
       title: Plugins IDE
     - desc: Mesurer et améliorer les processus de livraison logicielle de votre organisation
       icon: ci
-      link: dora_metrics/
+      link: delivery_performance/dora_metrics/
       title: Métriques DORA
     - desc: Activer ou désactiver des fonctionnalités, exécuter des tests A/B et déployer
         progressivement des fonctionnalités sans déploiement de code

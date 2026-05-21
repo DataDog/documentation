@@ -54,6 +54,9 @@ further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:
@@ -147,6 +150,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US5  | `https://browser-intake-us5-datadoghq.com`    |
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
@@ -202,11 +206,11 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 ### Web and mobile vitals
 
-View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
+View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS, iPadOS, tvOS, and visionOS][8] or [Android and Android TV applications][9].
 
 ### Web view tracking
 
-Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS and tvOS][10] or [Android and Android TV][11].
+Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS, iPadOS, and visionOS][10] or [Android and Android TV][11].
 
 {{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
 
