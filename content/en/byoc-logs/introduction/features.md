@@ -23,10 +23,11 @@ The following log features are supported:
 - Facet-based filtering and drill-down
 - Download CSV
 
-**Dashboards and monitors**
+**Dashboards, monitors, and notebooks**
 - Dashboards with BYOC Logs data
 - Log monitors on BYOC Logs indexes
 - Bits AI SRE
+- Notebooks with BYOC Logs data (for small datasets)
 
 **Index management**
 - Multiple indexes with independent retention periods and routing rules
@@ -44,7 +45,7 @@ Feature support is actively evolving. The following are not currently supported:
 
 - **SIEM**: Not available for BYOC Logs data.
 - **Watchdog**: Not available for BYOC Logs data.
-- **Notebooks**: Log data from BYOC Logs cannot be used in Notebooks.
+- **Calculated fields**: Not available for BYOC Logs data.
 - **Federated search**: Searching across multiple BYOC Logs clusters from a single query is not supported.
 - **LiveTail**: Real-time log streaming is not available for BYOC Logs indexes.
 - **Log context view**: Viewing surrounding logs in context is not yet supported.
