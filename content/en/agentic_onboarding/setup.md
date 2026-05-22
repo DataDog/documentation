@@ -46,7 +46,8 @@ The CLI can:
     npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
     ```
 
-    Replace `<PRODUCT>` with one of `infrastructure`, `apm`, `logs`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `code-coverage`, `test-optimization`, or `llm-observability`.
+    - Replace the value of `--site` with the [Datadog site](http://localhost:1313/getting_started/site/) for your account.
+    - Replace `<PRODUCT>` with one of `infrastructure`, `apm`, `logs`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `code-coverage`, `test-optimization`, or `llm-observability`.
 
 1. Complete the OAuth flow in your browser when prompted. After authentication, point the CLI to your code repository. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables.
 
