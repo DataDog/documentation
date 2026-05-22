@@ -237,5 +237,5 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [6]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
-[9]: /serverless/azure_app_service/windows_code/?tab=net
+[9]: /serverless/azure_functions/dotnet_extension/
 [10]: /profiler/

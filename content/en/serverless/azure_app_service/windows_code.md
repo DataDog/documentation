@@ -33,7 +33,7 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 The extension supports the following:
 <ul>
   <li>App Service Web Apps: Supported for .NET, Java, and Node.js runtimes on Basic, Standard, and Premium plans.</li>
-  <li>Azure Functions: Supported only for the .NET runtime on Basic, Standard, and Premium plans.</li>
+  <li>Azure Functions: Supported only for the .NET runtime on Dedicated (App Service) or Premium plans.</li>
 </ul>
 
 For all other Azure Functions configurations, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
@@ -192,6 +192,7 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 Update your existing Web App to include the necessary Datadog App Settings and extension, as follows:
 
 ```bicep
+// Version: 1.0.0
 @secure()
 param datadogApiKey string
 
@@ -243,6 +244,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "metadata": { "version": "1.0.0" },
   "parameters": {
     "webAppName": {
       "type": "string"
@@ -432,6 +434,7 @@ Run `terraform apply`, and follow any prompts.
 Update your template to target a deployment slot instead of the main web app:
 
 ```bicep
+// Version: 1.0.0
 @secure()
 param datadogApiKey string
 
@@ -489,6 +492,7 @@ Update your template to target a deployment slot instead of the main web app:
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "metadata": { "version": "1.0.0" },
   "parameters": {
     "webAppName": {
       "type": "string"
@@ -548,6 +552,8 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 
 {{% /collapse-content %}}
 
+<div class="alert alert-info">Using Azure Functions? See <a href="/serverless/azure_functions/dotnet_extension/">Azure Functions .NET APM Extension</a> for Function App-specific installation instructions, including guidance on avoiding file-lock failures during extension install.</div>
+
 ## Custom metrics
 
 The Azure App Service extension includes an instance of [DogStatsD][1], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
@@ -559,27 +565,7 @@ To submit custom metrics to Datadog from Azure App Service using the extension:
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-1. Add the [DogStatsD NuGet package](https://www.nuget.org/packages/DogStatsD-CSharp-Client) to your Visual Studio project.
-2. Initialize DogStatsD and write custom metrics in your application.
-3. Deploy your code to Azure App Service.
-4. If you have not already, install the Datadog App Service extension.
-
-To send metrics, use this code:
-
-```csharp
-// Configure your DogStatsd client and configure any tags
-if (!DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.aspnetcore" } }))
-{
-    // `Configure` returns false if the necessary environment variables are not present.
-    // These environment variables are present in Azure App Service, but
-    // need to be set in order to test your custom metrics: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
-    // Ignore or log the error as it suits you
-    Console.WriteLine("Cannot initialize DogstatsD.");
-}
-
-// Send a metric
-DogStatsd.Increment("sample.startup");
-```
+{{% aas-custom-metrics-dotnet %}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -639,15 +625,7 @@ Learn more about [custom metrics][2].
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-You can send logs from your application in Azure App Service to Datadog in one of the following ways:
-
-- Use the [installation steps](#installation) on this page to enable APM with the Datadog APM extension. Then [enable Agentless logging][1].
-- Use [Agentless logging with the Serilog sink][2].
-
-Both methods allow trace ID injection, making it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
-
-[1]: /logs/log_collection/csharp/#agentless-logging-with-apm
-[2]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
+{{% aas-logging-dotnet %}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -685,83 +663,7 @@ Configure these environment variables in your Azure App Service Application Sett
 {{< tabs >}}
 {{% tab ".NET" %}}
 
-**Code Example: Microsoft Native Logging**
-
-An example of how to set up logging in a .NET application using Microsoft.Extensions.Logging:
-
-```csharp
-using Microsoft.Extensions.Logging;
-
-public class WeatherForecastController : ControllerBase
-{
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
-    {
-        _logger = logger;
-    }
-
-    [HttpGet]
-    public IActionResult Get()
-    {
-        _logger.LogInformation("Processing weather forecast request");
-
-        // Your business logic here
-        var forecast = GetWeatherForecast();
-
-        _logger.LogInformation("Weather forecast retrieved for user: {UserId}", userId);
-
-        return Ok(forecast);
-    }
-}
-```
-
-**Program.cs configuration**
-
-```csharp
-using Microsoft.Extensions.Logging;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Configure logging
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
-builder.Logging.AddDebug();
-
-// Add structured logging with JSON format
-builder.Logging.AddJsonConsole(options =>
-{
-    options.JsonWriterOptions = new JsonWriterOptions
-    {
-        Indented = true
-    };
-});
-
-var app = builder.Build();
-// ... rest of your application configuration
-```
-
-**appsettings.json configuration**
-
-```json
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    },
-    "Console": {
-      "FormatterName": "json",
-      "FormatterOptions": {
-        "IncludeScopes": true,
-        "TimestampFormat": "yyyy-MM-dd HH:mm:ss "
-      }
-    }
-  }
-}
-```
-
-This setup automatically includes trace correlation when `DD_LOGS_INJECTION=true` is set in your Azure App Service Application Settings.
+{{% aas-logging-dotnet-code-example %}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -805,7 +707,7 @@ The install script adds the latest version of the extension to an Azure Web App 
 3. Run the following command, passing in required and optional arguments as needed.
 
     ```
-    .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION>
+    .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION> [-SlotName <SLOT_NAME>]
     ```
 
 **Note**: The following arguments are required for the above command:
@@ -818,6 +720,8 @@ The install script adds the latest version of the extension to an Azure Web App 
 - `<DATADOG_API_KEY>`: Your [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys).
 
 Also, set `DATADOG_SITE` to your [Datadog site][32]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
+
+To target a deployment slot instead of the main app, add `-SlotName <SLOT_NAME>`. On Azure Function Apps, this also automatically applies the `WEBSITE_PRIVATE_EXTENSIONS=0` sticky slot setting to prevent extension install failures. See [Azure Functions .NET APM Extension](/serverless/azure_functions/dotnet_extension/) for details.
 
 [32]: /getting_started/site/
 
@@ -864,7 +768,7 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 ### ARM template
 
-Many organizations use [Azure Resource Management (ARM) templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template](https://github.com/DataDog/datadog-aas-extension/tree/master/ARM) into your deployments to add the extension and configure it alongside your App Service resources.
+Many organizations use [Azure Resource Management (ARM) templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension install templates](https://github.com/DataDog/datadog-aas-extension/tree/master/install-templates) into your deployments to add the extension and configure it alongside your App Service resources.
 
 {{% /tab %}}
 {{% tab "Java" %}}
