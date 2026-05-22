@@ -5,9 +5,9 @@ further_reading:
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"
-  - link: "/security/code_security/iac_security/exclusions"
+  - link: "/security/code_security/iac_security/configuration"
     tag: "Documentation"
-    text: "Configure IaC Security Exclusions"
+    text: "Configure IaC Security"
 ---
 
 {{% site-region region="gov,gov2" %}}
