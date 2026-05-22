@@ -2531,6 +2531,10 @@
     "request_description": "Data deletion request payload.",
     "request_schema_description": "Request to delete LLM Observability data."
   },
+  "GetLLMObsAnnotatedInteractionsByTraceIDs": {
+    "description": "Returns annotated interactions across all annotation queues for the given content IDs. Results include queue metadata (ID and name) for each interaction.",
+    "summary": "Get annotated interactions by content IDs"
+  },
   "ListLLMObsAnnotationQueues": {
     "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
     "summary": "List LLM Observability annotation queues"

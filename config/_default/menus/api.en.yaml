@@ -12395,6 +12395,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Get annotated interactions by content IDs
+      url: '#get-annotated-interactions-by-content-ids'
+      identifier: llm-observability-get-annotated-interactions-by-content-ids
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractionsByTraceIDs
+        unstable:
+          - v2
+        order: 40
     - name: Delete LLM Observability data
       url: '#delete-llm-observability-data'
       identifier: llm-observability-delete-llm-observability-data
