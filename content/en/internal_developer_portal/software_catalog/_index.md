@@ -31,7 +31,7 @@ algolia:
 
 ## What you can do in Software Catalog
 
-Software Catalog offers multiple views to help you explore and manage your entities.
+Software Catalog offers multiple views to help you explore and manage your entities. To quickly find what you need most, pin frequently accessed views using Saved Views.
 
 - [**Ownership**][8]: Access your team's Slack, repo, or on-call information.
 - **Reliability**: Address risks by surfacing entities with recent deploys, rising error rates, open incidents, or failing monitors.
