@@ -107,7 +107,7 @@ In [Container Images][7], you can trace vulnerabilities found in an image to spe
 
 ## Trace production vulnerabilities to source code
 
-When a CVE is detected on a running container image, Datadog can link it directly to the Dockerfile and commit that introduced the vulnerable package. This closes the gap between a production alert and the code change that caused it, giving developers the context they need to remediate at the source rather than chasing package versions across registries.
+When Datadog detects a CVE on a running container image, it can link the CVE directly to the Dockerfile and commit that introduced the vulnerable package. This closes the gap between a production alert and the code change that caused it, giving developers the context they need to remediate at the source rather than chasing package versions across registries.
 
 To enable this code-to-cloud mapping, add OCI image annotations to your container images at build time. Datadog uses these annotations to display a preview of the Dockerfile inside the Container Image Vulnerabilities panel and to surface the exact repository, commit, and file path associated with the vulnerability.
 
