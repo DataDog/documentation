@@ -46,7 +46,7 @@ To use the Cloud Cost skill in Bits Assistant, you must:
 
 ## Start an investigation with the Cloud Cost skill
 
-{{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:80%;" >}}
+{{< img src="cloud_cost/cc_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:80%;" >}}
 
 When you want to start an investigation, such as for a [cost anomaly][3], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the Cloud Cost skill.
 
@@ -69,7 +69,7 @@ When you investigate a cost change with the Cloud Cost skill, Bits Assistant pro
 - Rate-versus-usage context to help distinguish price changes from consumption changes
 - Owner or team attribution based on your cost tags
 
-{{< img src="cloud_cost/finops_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
+{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
 
 After the initial summary, Bits Assistant can:
 
