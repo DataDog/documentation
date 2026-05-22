@@ -111,8 +111,6 @@ When Datadog detects a CVE on a running container image, it can link the CVE dir
 
 To enable this code-to-cloud mapping, add OCI image annotations to your container images at build time. Datadog uses these annotations to display a preview of the Dockerfile inside the Container Image Vulnerabilities panel and to surface the exact repository, commit, and file path associated with the vulnerability.
 
-{{< img src="security/vulnerabilities/csm-vm-dockerfile-panel.png" alt="The Container Image Vulnerabilities panel showing a Dockerfile preview linked to a detected CVE" width="100%">}}
-
 To set up source linking, see [Link Dockerfile to vulnerabilities][22] in the CI/CD container image scanning guide.
 
 ## Automation and Jira integration
