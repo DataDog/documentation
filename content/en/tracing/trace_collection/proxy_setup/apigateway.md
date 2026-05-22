@@ -85,7 +85,7 @@ To create inferred spans, API Gateway must pass the following headers to your ba
 
 To pass in the required headers, you can use the AWS CDK or AWS Console:
 
-{{% collapse-content title="AWS CDK" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS CDK" level="h4" expanded=false id="aws-cdk" %}}
 
 Add the headers under `requestParameters` and use `$context` variables:
 
@@ -113,7 +113,7 @@ const api = new apigateway.RestApi(this, "MyApi", {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="AWS Console" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="AWS Console" level="h4" expanded=false id="aws-console" %}}
 
 
 1. In the AWS Management Console, navigate to API Gateway and go to your API's **Resources** page. 

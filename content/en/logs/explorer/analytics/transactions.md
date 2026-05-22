@@ -33,7 +33,7 @@ Get Statistics
 Set Start And End Conditions
 : Customize transaction boundaries by specifying the start and end of the transaction using distinct queries.
 
-For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a **Transactions** view using a common attribute such as `requestId` or `orderId`.
+For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a {{< ui >}}Transactions{{< /ui >}} view using a common attribute such as `requestId` or `orderId`.
 
 {{< img src="logs/explorer/aggregations_transactions.jpg" alt="The Log Explorer showing logs grouped by transactions" style="width:100%;" >}}
 

@@ -550,7 +550,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 
 1. The flag is **enabled** for the target environment, not disabled. Flags are disabled by default in each environment.
 2. The flag targets the **correct environment** (`DD_ENV`). Flags do not target specific services—they apply to all services within the enabled environment.
-3. Your `DD_ENV` value appears in [Feature Flag Environments][5]. If it is absent, the environment has not received any flag traffic yet.
+3. Your `DD_ENV` value appears in [{{< ui >}}Feature Flag Environments{{< /ui >}}][5]. If it is absent, the environment has not received any flag traffic yet.
 
 ### 2. Remote Configuration: Verify the path
 
@@ -559,7 +559,7 @@ Remote Configuration delivers flag configurations from the Datadog backend to th
 1. **RC is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
 2. **`DD_API_KEY` is valid on the Agent** and belongs to the target organization.
 3. **`DD_SITE` is set correctly** on the Agent (`site` in `datadog.yaml` or `DD_SITE` env var). See [Agent Site Issues][3].
-4. **Fleet Automation**: Open [Fleet Automation][4], select the Agent your application connects to, and confirm Remote Configuration is active.
+4. **Fleet Automation**: Open [{{< ui >}}Fleet Automation{{< /ui >}}][4], select the Agent your application connects to, and confirm Remote Configuration is active.
 5. **Agent CLI**: Run `datadog-agent status` and review the Remote Configuration section of the output. See [Agent Commands][6].
 
 ### 3. Agent: Verify Agent health and connectivity

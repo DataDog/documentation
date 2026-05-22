@@ -52,8 +52,6 @@ Drag the latency reachability health bar to observe a snapshot of the end-to-end
 
 ## Visual comparison
 
-<div class="alert alert-info">Visual Comparison for Network Path is in Preview. To request access, contact your Datadog representative.</div>
-
 Use the visual comparison view to compare two path visualizations side-by-side and identify what changed before and after an incident.
 
 The comparison view provides:
