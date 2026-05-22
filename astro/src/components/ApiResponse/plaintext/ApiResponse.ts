@@ -34,6 +34,8 @@ function panelNodes(r: ResponseData): MarkdocNode[] {
   return contents;
 }
 
+// Produces the schema/examples section of a response panel:
+// a schema table, example nodes, or a tabs widget combining both.
 function innerNodes(r: ResponseData): MarkdocNode[] {
   const hasSchema = (r.schema?.length ?? 0) > 0;
   const hasExamples = (r.examples?.length ?? 0) > 0;

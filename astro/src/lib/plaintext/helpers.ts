@@ -89,26 +89,6 @@ export function nodesFromMd(md: string): MarkdocNode[] {
 }
 
 /**
- * Build a standard Markdown table node. Cells are treated as plain text.
- * Use `tableNodeMd` when cells may contain inline markdown.
- */
-export function table(headers: string[], rows: string[][]): MarkdocNode {
-  const th = (text: string): MarkdocNode => {
-    return new Ast.Node("th", {}, [inline([plaintext(text)])]);
-  };
-  const td = (text: string): MarkdocNode => {
-    return new Ast.Node("td", {}, [inline([plaintext(text)])]);
-  };
-  const headRow = new Ast.Node("tr", {}, headers.map(th));
-  const thead = new Ast.Node("thead", {}, [headRow]);
-  const bodyRows = rows.map((row) => {
-    return new Ast.Node("tr", {}, row.map(td));
-  });
-  const tbody = new Ast.Node("tbody", {}, bodyRows);
-  return new Ast.Node("table", {}, [thead, tbody]);
-}
-
-/**
  * Build a Markdown table whose cells can contain inline markdown. Each cell
  * is parsed; if it parses to a single paragraph, its inline children are
  * inlined into the cell. Otherwise the cell falls back to plain text.

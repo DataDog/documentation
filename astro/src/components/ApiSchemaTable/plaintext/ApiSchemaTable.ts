@@ -40,24 +40,27 @@ function schemaFieldsToTableRows(
   parent: string,
 ): SchemaTableRow[] {
   const rows: SchemaTableRow[] = [];
-  for (const f of fields) {
+  for (const field of fields) {
     rows.push({
       parent,
-      field: getFieldName(f),
-      type: getFieldType(f),
-      description: getFieldDescription(f),
+      field: getFieldName(field),
+      type: getFieldType(field),
+      description: getFieldDescription(field),
     });
 
-    if (f.children && f.children.length > 0) {
+    if (field.children && field.children.length > 0) {
       rows.push(
-        ...schemaFieldsToTableRows(f.children, f.name || UNNAMED_FIELD_LABEL),
+        ...schemaFieldsToTableRows(
+          field.children,
+          field.name || UNNAMED_FIELD_LABEL,
+        ),
       );
     }
 
-    if (f.unionOptions && f.unionOptions.length > 0) {
-      for (const opt of f.unionOptions) {
+    if (field.unionOptions && field.unionOptions.length > 0) {
+      for (const opt of field.unionOptions) {
         rows.push({
-          parent: f.name || UNNAMED_FIELD_LABEL,
+          parent: field.name || UNNAMED_FIELD_LABEL,
           field: opt.label,
           type: "object",
           description: "",
