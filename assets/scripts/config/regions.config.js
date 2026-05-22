@@ -144,7 +144,7 @@ export default {
     us5: 'agent-http-intake.logs.us5.datadoghq.com',
     eu: 'agent-http-intake.logs.datadoghq.eu',
     ap1: 'agent-http-intake.logs.ap1.datadoghq.com',
-    ap2: `<details><summary><code>gold.intake.ap2.datadoghq.com</code></summary><ul><li><code>agent-http-intake.logs.ap2.datadoghq.com</code></li><li><code>http-intake.logs.ap2.datadoghq.com</code></li><li><code>eventbridge-intake.logs.ap2.datadoghq.com</code></li><li><code>lambda-http-intake.logs.ap2.datadoghq.com</code></li><li><code>obpipeline-intake.ap2.datadoghq.com</code></li><li><code>runtime-security-http-intake.logs.ap2.datadoghq.com</code></li></ul></details>`,
+    ap2: `<details><summary><code>gold.intake.ap2.datadoghq.com</code></summary><ul><li><code>agent-http-intake.logs.ap2.datadoghq.com</code></li><li><code>aws-kinesis-http-intake.logs.ap2.datadoghq.com</code></li><li><code>eventbridge-intake.logs.ap2.datadoghq.com</code></li><li><code>http-intake.logs.ap2.datadoghq.com</code></li><li><code>lambda-http-intake.logs.ap2.datadoghq.com</code></li><li><code>obpipeline-intake.ap2.datadoghq.com</code></li><li><code>runtime-security-http-intake.logs.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'agent-http-intake.logs.us2.ddog-gov.com',
     gov: 'agent-http-intake.logs.ddog-gov.com'
   },
@@ -174,7 +174,7 @@ export default {
     us5: 'http-intake.logs.us5.datadoghq.com',
     eu: 'http-intake.logs.datadoghq.eu',
     ap1: 'http-intake.logs.ap1.datadoghq.com',
-    ap2: `<details><summary><code>gold.intake.ap2.datadoghq.com</code></summary><ul><li><code>agent-http-intake.logs.ap2.datadoghq.com</code></li><li><code>http-intake.logs.ap2.datadoghq.com</code></li><li><code>eventbridge-intake.logs.ap2.datadoghq.com</code></li><li><code>lambda-http-intake.logs.ap2.datadoghq.com</code></li><li><code>obpipeline-intake.ap2.datadoghq.com</code></li><li><code>runtime-security-http-intake.logs.ap2.datadoghq.com</code></li></ul></details>`,
+    ap2: `<details><summary><code>gold.intake.ap2.datadoghq.com</code></summary><ul><li><code>agent-http-intake.logs.ap2.datadoghq.com</code></li><li><code>aws-kinesis-http-intake.logs.ap2.datadoghq.com</code></li><li><code>eventbridge-intake.logs.ap2.datadoghq.com</code></li><li><code>http-intake.logs.ap2.datadoghq.com</code></li><li><code>lambda-http-intake.logs.ap2.datadoghq.com</code></li><li><code>obpipeline-intake.ap2.datadoghq.com</code></li><li><code>runtime-security-http-intake.logs.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'http-intake.logs.us2.ddog-gov.com',
     gov: 'http-intake.logs.ddog-gov.com'
   },
@@ -774,7 +774,7 @@ export default {
     us5: 'api.us5.datadoghq.com',
     eu: 'api.datadoghq.eu',
     ap1: 'api.ap1.datadoghq.com',
-    ap2: `<details><summary><code>orchid.intake.ap2.datadoghq.com</code></summary><ul><li><code>api.ap2.datadoghq.com</code></li><li><code>synthetics.ap2.datadoghq.com</code></li><li><code>*.synthetics.ap2.datadoghq.com</code></li></ul></details>`,
+    ap2: `<details><summary><code>orchid.intake.ap2.datadoghq.com</code></summary><ul><li><code>api.ap2.datadoghq.com</code></li><li><code>quota.browser-intake-ap2-datadoghq.com</code></li><li><code>synthetics.ap2.datadoghq.com</code></li><li><code>*.synthetics.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'api.us2.ddog-gov.com',
     gov: 'api.ddog-gov.com'
   },
@@ -854,7 +854,7 @@ export default {
     us5: 'intake.profile.us5.datadoghq.com',
     eu: 'intake.profile.datadoghq.eu',
     ap1: 'intake.profile.ap1.datadoghq.com',
-    ap2: `<details><summary><code>cyan.intake.ap2.datadoghq.com</code></summary><ul><li><code>intake.profile.ap2.datadoghq.com</code></li></ul></details>`,
+    ap2: `<details><summary><code>cyan.intake.ap2.datadoghq.com</code></summary><ul><li><code>agenthealth-intake.ap2.datadoghq.com</code></li><li><code>awsmetrics-intake.ap2.datadoghq.com</code></li><li><code>ci-intake.ap2.datadoghq.com</code></li><li><code>cicodescan-intake.ap2.datadoghq.com</code></li><li><code>cireport-intake.ap2.datadoghq.com</code></li><li><code>citestcov-intake.ap2.datadoghq.com</code></li><li><code>citestcycle-intake.ap2.datadoghq.com</code></li><li><code>cloudplatform-intake.ap2.datadoghq.com</code></li><li><code>contimage-intake.ap2.datadoghq.com</code></li><li><code>contlcycle-intake.ap2.datadoghq.com</code></li><li><code>cspm-intake.ap2.datadoghq.com</code></li><li><code>cws-intake.ap2.datadoghq.com</code></li><li><code>debugger-intake.ap2.datadoghq.com</code></li><li><code>error-tracking-intake.ap2.datadoghq.com</code></li><li><code>event-management-intake.ap2.datadoghq.com</code></li><li><code>instrumentation-telemetry-intake.ap2.datadoghq.com</code></li><li><code>intake.profile.ap2.datadoghq.com</code></li><li><code>kubeops-intake.ap2.datadoghq.com</code></li><li><code>llmobs-intake.ap2.datadoghq.com</code></li><li><code>ndm-intake.ap2.datadoghq.com</code></li><li><code>ndmflow-intake.ap2.datadoghq.com</code></li><li><code>netpath-intake.ap2.datadoghq.com</code></li><li><code>ocimetrics-intake.ap2.datadoghq.com</code></li><li><code>resources-intake.ap2.datadoghq.com</code></li><li><code>sbom-intake.ap2.datadoghq.com</code></li><li><code>sds-intake.ap2.datadoghq.com</code></li><li><code>sentry-intake.ap2.datadoghq.com</code></li><li><code>snmp-traps-intake.ap2.datadoghq.com</code></li><li><code>softinv-intake.ap2.datadoghq.com</code></li><li><code>webhook-intake.ap2.datadoghq.com</code></li></ul></details>`,
     gov2: 'intake.profile.us2.ddog-gov.com',
     gov: 'intake.profile.ddog-gov.com'
   },
