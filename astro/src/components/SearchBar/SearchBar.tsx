@@ -66,9 +66,16 @@ export default function SearchBar({ env, search, labels }: Props) {
 
   const trimmedQuery = query.trim();
   const hits = useDebouncedSearch(trimmedQuery, config, searchFn, DEBOUNCE_MS);
+  // Don't show the popup for an empty/whitespace query — no hits to display.
   const popupVisible = open && trimmedQuery.length > 0;
+  // Recalculates whenever the form moves (e.g. window resize) so the popup
+  // stays anchored directly below the search bar.
   const popupRect = usePopupPosition(formRef, popupVisible);
 
+  // `grouped` is used by SearchResultsPopup to render hits under category
+  // headings. `flatHits` is the same hits in CATEGORY_ORDER sequence so that
+  // keyboard selection indices map 1-to-1 with what's visible on screen.
+  // "partners" is appended last because it falls outside the standard order.
   const { grouped, flatHits } = useMemo(() => {
     if (!hits) {
       return { grouped: null, flatHits: [] as NormalizedHit[] };
@@ -119,6 +126,8 @@ export default function SearchBar({ env, search, labels }: Props) {
       e.preventDefault();
       setSelection((s) => {
         const prev = previousSelection(s);
+        // Arrow-up from the first result returns selection to "none" and
+        // refocuses the input so the user can keep typing.
         if (prev.kind === "none") {
           inputRef.current?.focus();
         }
@@ -173,6 +182,8 @@ export default function SearchBar({ env, search, labels }: Props) {
         </span>
       </form>
 
+      {/* Portal renders the popup on document.body so it escapes any
+          overflow:hidden ancestor in the page layout. */}
       {popupVisible &&
         createPortal(
           <SearchResultsPopup
