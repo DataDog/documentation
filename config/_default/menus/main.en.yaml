@@ -5133,6 +5133,11 @@ menu:
       identifier: data_streams_kafka_monitors_and_automation
       parent: data_streams_kafka
       weight: 2
+    - name: Data Collection
+      url: data_streams/kafka/data_collection
+      identifier: data_streams_kafka_data_collection
+      parent: data_streams_kafka
+      weight: 3
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
