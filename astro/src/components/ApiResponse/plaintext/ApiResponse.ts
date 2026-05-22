@@ -7,11 +7,11 @@
  * examples are present; otherwise it includes whichever is available.
  */
 
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import type { ResponseData } from '@lib/api/schemas/views';
-import { NO_CONTENT, nodesFromMd, tagNode } from '@lib/plaintext/helpers';
-import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
-import { exampleNodes } from '@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { ResponseData } from "@lib/api/schemas/views";
+import { NO_CONTENT, nodesFromMd, tag } from "@lib/plaintext/helpers";
+import { apiSchemaTableNode } from "@components/ApiSchemaTable/plaintext/ApiSchemaTable";
+import { exampleNodes } from "@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs";
 
 export function apiResponseNode(responses: ResponseData[]): MarkdocNode | null {
   if (!responses || responses.length === 0) {
@@ -19,10 +19,10 @@ export function apiResponseNode(responses: ResponseData[]): MarkdocNode | null {
   }
 
   const tabs = responses.map((r) => {
-    return tagNode('tab', { label: r.statusCode }, panelNodes(r));
+    return tag("tab", { label: r.statusCode }, panelNodes(r));
   });
 
-  return tagNode('tabs', {}, tabs);
+  return tag("tabs", {}, tabs);
 }
 
 function panelNodes(r: ResponseData): MarkdocNode[] {
@@ -45,9 +45,9 @@ function innerNodes(r: ResponseData): MarkdocNode[] {
   if (hasSchema && hasExamples) {
     const table = apiSchemaTableNode(r.schema!);
     return [
-      tagNode('tabs', {}, [
-        tagNode('tab', { label: 'Model' }, table ? [table] : NO_CONTENT),
-        tagNode('tab', { label: 'Example' }, exampleNodes(r.examples!)),
+      tag("tabs", {}, [
+        tag("tab", { label: "Model" }, table ? [table] : NO_CONTENT),
+        tag("tab", { label: "Example" }, exampleNodes(r.examples!)),
       ]),
     ];
   }

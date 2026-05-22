@@ -9,9 +9,9 @@
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { SchemaField } from "@lib/api/schemas/schemaField";
-import { tableNodeMd } from "@lib/plaintext/helpers";
+import { tableMd } from "@lib/plaintext/helpers";
 
-interface Row {
+interface SchemaTableRow {
   parent: string;
   field: string;
   type: string;
@@ -25,23 +25,56 @@ export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
     return null;
   }
 
-  const rows: Row[] = [];
-  walkFields(fields, "", rows);
+  const rows = schemaFieldsToTableRows(fields, "");
 
   const headers = ["Parent field", "Field", "Type", "Description"];
   const bodyRows = rows.map((row) => {
     return [row.parent, row.field, row.type, row.description];
   });
 
-  return tableNodeMd(headers, bodyRows);
+  return tableMd(headers, bodyRows);
 }
 
-function fieldName(field: SchemaField): string {
+function schemaFieldsToTableRows(
+  fields: SchemaField[],
+  parent: string,
+): SchemaTableRow[] {
+  const rows: SchemaTableRow[] = [];
+  for (const f of fields) {
+    rows.push({
+      parent,
+      field: getFieldName(f),
+      type: getFieldType(f),
+      description: getFieldDescription(f),
+    });
+
+    if (f.children && f.children.length > 0) {
+      rows.push(
+        ...schemaFieldsToTableRows(f.children, f.name || UNNAMED_FIELD_LABEL),
+      );
+    }
+
+    if (f.unionOptions && f.unionOptions.length > 0) {
+      for (const opt of f.unionOptions) {
+        rows.push({
+          parent: f.name || UNNAMED_FIELD_LABEL,
+          field: opt.label,
+          type: "object",
+          description: "",
+        });
+        rows.push(...schemaFieldsToTableRows(opt.fields, opt.label));
+      }
+    }
+  }
+  return rows;
+}
+
+function getFieldName(field: SchemaField): string {
   const name = field.name || UNNAMED_FIELD_LABEL;
   return field.required ? `${name} [*required*]` : name;
 }
 
-function fieldType(field: SchemaField): string {
+function getFieldType(field: SchemaField): string {
   if (field.type === "oneOf") {
     return "<oneOf>";
   }
@@ -51,7 +84,7 @@ function fieldType(field: SchemaField): string {
   return field.type;
 }
 
-function fieldDescription(field: SchemaField): string {
+function getFieldDescription(field: SchemaField): string {
   const parts: string[] = [];
   if (field.description) {
     parts.push(field.description);
@@ -69,31 +102,4 @@ function fieldDescription(field: SchemaField): string {
     parts.push(`Default: \`${field.defaultValue}\`.`);
   }
   return parts.join(" ");
-}
-
-function walkFields(fields: SchemaField[], parent: string, rows: Row[]): void {
-  for (const f of fields) {
-    rows.push({
-      parent,
-      field: fieldName(f),
-      type: fieldType(f),
-      description: fieldDescription(f),
-    });
-
-    if (f.children && f.children.length > 0) {
-      walkFields(f.children, f.name || UNNAMED_FIELD_LABEL, rows);
-    }
-
-    if (f.unionOptions && f.unionOptions.length > 0) {
-      for (const opt of f.unionOptions) {
-        rows.push({
-          parent: f.name || UNNAMED_FIELD_LABEL,
-          field: opt.label,
-          type: "object",
-          description: "",
-        });
-        walkFields(opt.fields, opt.label, rows);
-      }
-    }
-  }
 }

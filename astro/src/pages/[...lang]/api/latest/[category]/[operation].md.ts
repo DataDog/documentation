@@ -7,12 +7,12 @@
  * but structure (tables, tabs, alerts, fences) is described as nodes.
  */
 
-import type { APIRoute, GetStaticPaths } from 'astro';
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import { getCategoriesView, getOperationView } from '@lib/api/viewsBuilder';
-import { LOCALES, parseLangParam } from '@lib/i18n/locale';
-import { documentNode, format, headingNode } from '@lib/plaintext/helpers';
-import { apiEndpointNodes } from '@components/ApiEndpoint/plaintext/ApiEndpoint';
+import type { APIRoute, GetStaticPaths } from "astro";
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import { buildMarkdocStr, heading } from "@lib/plaintext/helpers";
+import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       for (const op of cat.operations) {
         paths.push({
           params: {
-            lang: lang === 'en' ? undefined : lang,
+            lang: lang === "en" ? undefined : lang,
             category: cat.slug,
             operation: op.slug,
           },
@@ -49,16 +49,16 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const nodes: MarkdocNode[] = [headingNode(1, operation.summary)];
+  const nodes: MarkdocNode[] = [heading(1, operation.summary)];
   for (const [i, variant] of operation.variants.entries()) {
     const label = i === 0 ? `${variant.version} (latest)` : variant.version;
-    nodes.push(headingNode(2, label));
+    nodes.push(heading(2, label));
     nodes.push(...apiEndpointNodes(variant));
   }
 
-  const body = format(documentNode(nodes)).trim() + '\n';
+  const body = buildMarkdocStr(nodes);
 
   return new Response(body, {
-    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };

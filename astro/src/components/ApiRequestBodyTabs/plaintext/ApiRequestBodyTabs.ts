@@ -6,10 +6,18 @@
  * - Both:          a `{% tabs %}` tag with Model and Example tabs.
  */
 
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import type { SchemaField } from '@lib/api/schemas/schemaField';
-import { NO_CONTENT, boldNode, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/plaintext/helpers';
-import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import {
+  NO_CONTENT,
+  bold,
+  fence,
+  inline,
+  paragraph,
+  tag,
+  plaintext,
+} from "@lib/plaintext/helpers";
+import { apiSchemaTableNode } from "@components/ApiSchemaTable/plaintext/ApiSchemaTable";
 
 interface Example {
   name: string;
@@ -21,7 +29,10 @@ interface Props {
   examples: Example[];
 }
 
-export function apiRequestBodyTabsNodes({ schema, examples }: Props): MarkdocNode[] {
+export function apiRequestBodyTabsNodes({
+  schema,
+  examples,
+}: Props): MarkdocNode[] {
   const hasSchema = schema.length > 0;
   const hasExamples = examples.length > 0;
 
@@ -37,9 +48,9 @@ export function apiRequestBodyTabsNodes({ schema, examples }: Props): MarkdocNod
   if (hasSchema && hasExamples) {
     const table = apiSchemaTableNode(schema);
     const modelChildren = table ? [table] : NO_CONTENT;
-    const tabs = tagNode('tabs', {}, [
-      tagNode('tab', { label: 'Model' }, modelChildren),
-      tagNode('tab', { label: 'Example' }, exampleNodes(examples)),
+    const tabs = tag("tabs", {}, [
+      tag("tab", { label: "Model" }, modelChildren),
+      tag("tab", { label: "Example" }, exampleNodes(examples)),
     ]);
     return [tabs];
   }
@@ -52,9 +63,9 @@ export function exampleNodes(examples: Example[]): MarkdocNode[] {
   const nodes: MarkdocNode[] = [];
   for (const ex of examples) {
     if (includeHeading) {
-      nodes.push(paragraphNode([inlineNode([boldNode([textNode(ex.name)])])]));
+      nodes.push(paragraph([inline([bold([plaintext(ex.name)])])]));
     }
-    nodes.push(fenceNode('json', ex.value));
+    nodes.push(fence("json", ex.value));
   }
   return nodes;
 }

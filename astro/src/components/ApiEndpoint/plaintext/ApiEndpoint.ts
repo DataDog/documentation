@@ -10,24 +10,24 @@
  * `## v{N} (latest?)` sub-headings around each call.
  */
 
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import type { EndpointData } from '@lib/api/schemas/views';
-import { getDefaultRegions } from '@lib/api/regionResolver';
-import { appHost } from '@config/regions';
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { EndpointData } from "@lib/api/schemas/views";
+import { getDefaultRegions } from "@lib/api/regionResolver";
+import { appHost } from "@config/regions";
 import {
   Ast,
   NO_CONTENT,
-  headingNode,
-  inlineNode,
+  heading,
+  inline,
   nodesFromMd,
-  textNode,
-} from '@lib/plaintext/helpers';
-import { alertNode } from '@components/Alert/plaintext/Alert';
-import { apiMethodBadgeNode } from '@components/ApiMethodBadge/plaintext/ApiMethodBadge';
-import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
-import { apiRequestBodyTabsNodes } from '@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
-import { apiResponseNode } from '@components/ApiResponse/plaintext/ApiResponse';
-import { apiCodeExampleNode } from '@components/ApiCodeExample/plaintext/ApiCodeExample';
+  plaintext,
+} from "@lib/plaintext/helpers";
+import { alertNode } from "@components/Alert/plaintext/Alert";
+import { apiMethodBadgeNode } from "@components/ApiMethodBadge/plaintext/ApiMethodBadge";
+import { apiSchemaTableNode } from "@components/ApiSchemaTable/plaintext/ApiSchemaTable";
+import { apiRequestBodyTabsNodes } from "@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs";
+import { apiResponseNode } from "@components/ApiResponse/plaintext/ApiResponse";
+import { apiCodeExampleNode } from "@components/ApiCodeExample/plaintext/ApiCodeExample";
 
 export function apiEndpointNodes(ep: EndpointData): MarkdocNode[] {
   return [
@@ -47,15 +47,15 @@ function statusNotice(ep: EndpointData): MarkdocNode[] {
   if (ep.deprecated) {
     const link = ep.newerVersionUrl
       ? ` [Use the newer version.](${ep.newerVersionUrl})`
-      : '';
+      : "";
     const body = nodesFromMd(`This endpoint is deprecated.${link}`);
-    return [alertNode('warning', body)];
+    return [alertNode("warning", body)];
   }
   if (ep.unstable) {
     const msg =
       ep.unstableMessage ??
-      'This endpoint is unstable and may change without notice.';
-    return [alertNode('warning', nodesFromMd(msg))];
+      "This endpoint is unstable and may change without notice.";
+    return [alertNode("warning", nodesFromMd(msg))];
   }
   return NO_CONTENT;
 }
@@ -71,7 +71,7 @@ function permissionsNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.permissions || ep.permissions.length === 0) {
     return NO_CONTENT;
   }
-  return nodesFromMd(`**Permissions:** \`${ep.permissions.join('`, `')}\``);
+  return nodesFromMd(`**Permissions:** \`${ep.permissions.join("`, `")}\``);
 }
 
 function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
@@ -79,7 +79,7 @@ function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
     return NO_CONTENT;
   }
   return nodesFromMd(
-    `OAuth apps require the \`${ep.oauthScopes.join('`, `')}\` authorization scope to access this endpoint.`,
+    `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization scope to access this endpoint.`,
   );
 }
 
@@ -101,26 +101,29 @@ function regionTableNodes(ep: EndpointData): MarkdocNode[] {
   }
 
   const th = (text: string): MarkdocNode => {
-    return new Ast.Node('th', {}, [inlineNode([textNode(text)])]);
+    return new Ast.Node("th", {}, [inline([plaintext(text)])]);
   };
 
   const siteCell = (site: string): MarkdocNode => {
-    return new Ast.Node('td', {}, [inlineNode([textNode(site)])]);
+    return new Ast.Node("td", {}, [inline([plaintext(site)])]);
   };
 
   const urlCell = (url: string): MarkdocNode => {
-    return new Ast.Node('td', {}, [
-      inlineNode([apiMethodBadgeNode(ep.method), textNode(` ${url}`)]),
+    return new Ast.Node("td", {}, [
+      inline([apiMethodBadgeNode(ep.method), plaintext(` ${url}`)]),
     ]);
   };
 
-  const headRow = new Ast.Node('tr', {}, [th('Datadog site'), th('API endpoint')]);
-  const thead = new Ast.Node('thead', {}, [headRow]);
+  const headRow = new Ast.Node("tr", {}, [
+    th("Datadog site"),
+    th("API endpoint"),
+  ]);
+  const thead = new Ast.Node("thead", {}, [headRow]);
   const bodyRows = rows.map((r) => {
-    return new Ast.Node('tr', {}, [siteCell(r.site), urlCell(r.url)]);
+    return new Ast.Node("tr", {}, [siteCell(r.site), urlCell(r.url)]);
   });
-  const tbody = new Ast.Node('tbody', {}, bodyRows);
-  const table = new Ast.Node('table', {}, [thead, tbody]);
+  const tbody = new Ast.Node("tbody", {}, bodyRows);
+  const table = new Ast.Node("table", {}, [thead, tbody]);
 
   return [table];
 }
@@ -148,15 +151,15 @@ function argumentsNodes(ep: EndpointData): MarkdocNode[] {
   if (tables.length === 0) {
     return NO_CONTENT;
   }
-  return [headingNode(3, 'Arguments'), ...tables];
+  return [heading(3, "Arguments"), ...tables];
 }
 
 function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.requestBody) {
     return NO_CONTENT;
   }
-  const suffix = ep.requestBody.required ? '(required)' : '(optional)';
-  const out: MarkdocNode[] = [headingNode(3, `Request Body ${suffix}`)];
+  const suffix = ep.requestBody.required ? "(required)" : "(optional)";
+  const out: MarkdocNode[] = [heading(3, `Request Body ${suffix}`)];
   if (ep.requestBody.description) {
     out.push(...nodesFromMd(ep.requestBody.description));
   }
@@ -177,7 +180,7 @@ function responseNodes(ep: EndpointData): MarkdocNode[] {
   if (!tabs) {
     return NO_CONTENT;
   }
-  return [headingNode(3, 'Response'), tabs];
+  return [heading(3, "Response"), tabs];
 }
 
 function codeExampleNodes(ep: EndpointData): MarkdocNode[] {
@@ -188,6 +191,5 @@ function codeExampleNodes(ep: EndpointData): MarkdocNode[] {
   if (!tabs) {
     return NO_CONTENT;
   }
-  return [headingNode(3, 'Code Example'), tabs];
+  return [heading(3, "Code Example"), tabs];
 }
-

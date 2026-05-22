@@ -5,23 +5,22 @@
  * a heading, an intro paragraph, and a bullet list of category links.
  */
 
-import type { APIRoute, GetStaticPaths } from 'astro';
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import { getCategoryStubsView } from '@lib/api/viewsBuilder';
-import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
+import type { APIRoute, GetStaticPaths } from "astro";
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import { getCategoryStubsView } from "@lib/api/viewsBuilder";
+import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 import {
   Ast,
-  documentNode,
-  format,
-  headingNode,
-  inlineNode,
+  buildMarkdocStr,
+  heading,
+  inline,
   paragraphFromText,
-  textNode,
-} from '@lib/plaintext/helpers';
+  plaintext,
+} from "@lib/plaintext/helpers";
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({
-    params: { lang: lang === 'en' ? undefined : lang },
+    params: { lang: lang === "en" ? undefined : lang },
   }));
 };
 
@@ -35,22 +34,22 @@ export const GET: APIRoute = async ({ params }) => {
 
   const items = categories.map((cat) => {
     const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
-    const link = new Ast.Node('link', { href }, [textNode(cat.name)]);
-    return new Ast.Node('item', {}, [inlineNode([link])]);
+    const link = new Ast.Node("link", { href }, [plaintext(cat.name)]);
+    return new Ast.Node("item", {}, [inline([link])]);
   });
-  const list = new Ast.Node('list', { ordered: false }, items);
+  const list = new Ast.Node("list", { ordered: false }, items);
 
   const nodes: MarkdocNode[] = [
-    headingNode(1, 'API Reference'),
+    heading(1, "API Reference"),
     paragraphFromText(
-      'Welcome to the Datadog API Reference. Select a category to get started.',
+      "Welcome to the Datadog API Reference. Select a category to get started.",
     ),
     list,
   ];
 
-  const body = format(documentNode(nodes)).trim() + '\n';
+  const body = buildMarkdocStr(nodes);
 
   return new Response(body, {
-    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };

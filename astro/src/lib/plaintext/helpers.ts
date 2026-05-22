@@ -6,16 +6,14 @@
  * AST directly (rather than concatenating strings) gives precise control
  * over structure: attribute escaping, table alignment, tag wrapping, etc.
  * are all handled by the formatter.
- *
- * `@markdoc/markdoc` ships a CJS build whose named exports don't round-trip
- * cleanly under Node's ESM loader during Astro's SSG step. Pulling the
- * default export here and re-exporting keeps every other module on the
- * named-import path.
  */
 
-import Markdoc from '@markdoc/markdoc';
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
+import Markdoc from "@markdoc/markdoc";
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
 
+// @markdoc/markdoc ships a CJS build whose named exports don't round-trip
+// cleanly under Node's ESM loader during Astro's SSG step. Pulling from the
+// default export and re-exporting keeps every other module on the named-import path.
 const { Ast, format, parse } = Markdoc;
 
 export { Ast, format, parse };
@@ -23,44 +21,44 @@ export { Ast, format, parse };
 export const NO_CONTENT: MarkdocNode[] = [];
 
 export function documentNode(children: MarkdocNode[]): MarkdocNode {
-  return new Ast.Node('document', {}, children);
+  return new Ast.Node("document", {}, children);
 }
 
-export function textNode(content: string): MarkdocNode {
-  return new Ast.Node('text', { content });
+export function plaintext(content: string): MarkdocNode {
+  return new Ast.Node("text", { content });
 }
 
-export function inlineNode(children: MarkdocNode[]): MarkdocNode {
-  return new Ast.Node('inline', {}, children);
+export function inline(children: MarkdocNode[]): MarkdocNode {
+  return new Ast.Node("inline", {}, children);
 }
 
-export function headingNode(level: number, text: string): MarkdocNode {
-  return new Ast.Node('heading', { level }, [inlineNode([textNode(text)])]);
+export function heading(level: number, text: string): MarkdocNode {
+  return new Ast.Node("heading", { level }, [inline([plaintext(text)])]);
 }
 
-export function paragraphNode(children: MarkdocNode[]): MarkdocNode {
-  return new Ast.Node('paragraph', {}, children);
+export function paragraph(children: MarkdocNode[]): MarkdocNode {
+  return new Ast.Node("paragraph", {}, children);
 }
 
 export function paragraphFromText(text: string): MarkdocNode {
-  return paragraphNode([inlineNode([textNode(text)])]);
+  return paragraph([inline([plaintext(text)])]);
 }
 
-export function fenceNode(language: string, content: string): MarkdocNode {
-  const c = content.endsWith('\n') ? content : `${content}\n`;
-  return new Ast.Node('fence', { content: c, language });
+export function fence(language: string, content: string): MarkdocNode {
+  const c = content.endsWith("\n") ? content : `${content}\n`;
+  return new Ast.Node("fence", { content: c, language });
 }
 
-export function boldNode(children: MarkdocNode[]): MarkdocNode {
-  return new Ast.Node('strong', {}, children);
+export function bold(children: MarkdocNode[]): MarkdocNode {
+  return new Ast.Node("strong", {}, children);
 }
 
-export function tagNode(
+export function tag(
   name: string,
   attributes: Record<string, unknown>,
   children: MarkdocNode[] = [],
 ): MarkdocNode {
-  return new Ast.Node('tag', attributes, children, name);
+  return new Ast.Node("tag", attributes, children, name);
 }
 
 /**
@@ -79,20 +77,20 @@ export function nodesFromMd(md: string): MarkdocNode[] {
  * Build a standard Markdown table node. Cells are treated as plain text.
  * Use `tableNodeMd` when cells may contain inline markdown.
  */
-export function tableNode(headers: string[], rows: string[][]): MarkdocNode {
+export function table(headers: string[], rows: string[][]): MarkdocNode {
   const th = (text: string): MarkdocNode => {
-    return new Ast.Node('th', {}, [inlineNode([textNode(text)])]);
+    return new Ast.Node("th", {}, [inline([plaintext(text)])]);
   };
   const td = (text: string): MarkdocNode => {
-    return new Ast.Node('td', {}, [inlineNode([textNode(text)])]);
+    return new Ast.Node("td", {}, [inline([plaintext(text)])]);
   };
-  const headRow = new Ast.Node('tr', {}, headers.map(th));
-  const thead = new Ast.Node('thead', {}, [headRow]);
+  const headRow = new Ast.Node("tr", {}, headers.map(th));
+  const thead = new Ast.Node("thead", {}, [headRow]);
   const bodyRows = rows.map((row) => {
-    return new Ast.Node('tr', {}, row.map(td));
+    return new Ast.Node("tr", {}, row.map(td));
   });
-  const tbody = new Ast.Node('tbody', {}, bodyRows);
-  return new Ast.Node('table', {}, [thead, tbody]);
+  const tbody = new Ast.Node("tbody", {}, bodyRows);
+  return new Ast.Node("table", {}, [thead, tbody]);
 }
 
 /**
@@ -100,33 +98,33 @@ export function tableNode(headers: string[], rows: string[][]): MarkdocNode {
  * is parsed; if it parses to a single paragraph, its inline children are
  * inlined into the cell. Otherwise the cell falls back to plain text.
  */
-export function tableNodeMd(headers: string[], rows: string[][]): MarkdocNode {
+export function tableMd(headers: string[], rows: string[][]): MarkdocNode {
   const cellChildren = (text: string): MarkdocNode[] => {
     const parsed = nodesFromMd(text);
-    if (parsed.length === 1 && parsed[0].type === 'paragraph') {
+    if (parsed.length === 1 && parsed[0].type === "paragraph") {
       return parsed[0].children;
     }
-    return [inlineNode([textNode(text)])];
+    return [inline([plaintext(text)])];
   };
   const th = (text: string): MarkdocNode => {
-    return new Ast.Node('th', {}, cellChildren(text));
+    return new Ast.Node("th", {}, cellChildren(text));
   };
   const td = (text: string): MarkdocNode => {
-    return new Ast.Node('td', {}, cellChildren(text));
+    return new Ast.Node("td", {}, cellChildren(text));
   };
-  const headRow = new Ast.Node('tr', {}, headers.map(th));
-  const thead = new Ast.Node('thead', {}, [headRow]);
+  const headRow = new Ast.Node("tr", {}, headers.map(th));
+  const thead = new Ast.Node("thead", {}, [headRow]);
   const bodyRows = rows.map((row) => {
-    return new Ast.Node('tr', {}, row.map(td));
+    return new Ast.Node("tr", {}, row.map(td));
   });
-  const tbody = new Ast.Node('tbody', {}, bodyRows);
-  return new Ast.Node('table', {}, [thead, tbody]);
+  const tbody = new Ast.Node("tbody", {}, bodyRows);
+  return new Ast.Node("table", {}, [thead, tbody]);
 }
 
 /**
- * Serialize a list of block-level nodes as plaintext. Wraps them in a
+ * Serialize a list of block-level nodes as a Markdoc string. Wraps them in a
  * document node, calls Markdoc's `format()`, and ensures a trailing newline.
  */
-export function formatNodes(children: MarkdocNode[]): string {
-  return format(documentNode(children)).trim() + '\n';
+export function buildMarkdocStr(children: MarkdocNode[]): string {
+  return format(documentNode(children)).trim() + "\n";
 }

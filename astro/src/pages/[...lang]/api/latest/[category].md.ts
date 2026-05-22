@@ -7,23 +7,22 @@
  * result through `format()`.
  */
 
-import type { APIRoute, GetStaticPaths } from 'astro';
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
+import type { APIRoute, GetStaticPaths } from "astro";
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import {
   getCategoryStubsView,
   getCategoryViewBySlug,
-} from '@lib/api/viewsBuilder';
-import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
+} from "@lib/api/viewsBuilder";
+import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 import {
   Ast,
-  documentNode,
-  format,
-  headingNode,
-  inlineNode,
+  buildMarkdocStr,
+  heading,
+  inline,
   nodesFromMd,
-  tagNode,
-  textNode,
-} from '@lib/plaintext/helpers';
+  tag,
+  plaintext,
+} from "@lib/plaintext/helpers";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -31,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     for (const cat of await getCategoryStubsView(lang)) {
       paths.push({
         params: {
-          lang: lang === 'en' ? undefined : lang,
+          lang: lang === "en" ? undefined : lang,
           category: cat.slug,
         },
       });
@@ -58,11 +57,15 @@ export const GET: APIRoute = async ({ params }) => {
 
   const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 
-  const nodes: MarkdocNode[] = [headingNode(1, category.name)];
+  const nodes: MarkdocNode[] = [heading(1, category.name)];
 
   if (category.deprecated) {
     nodes.push(
-      tagNode('alert', { level: 'warning' }, nodesFromMd('This endpoint is deprecated.')),
+      tag(
+        "alert",
+        { level: "warning" },
+        nodesFromMd("This endpoint is deprecated."),
+      ),
     );
   }
 
@@ -71,14 +74,14 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   if (category.operations.length > 0) {
-    nodes.push(headingNode(2, 'Actions'));
+    nodes.push(heading(2, "Actions"));
     nodes.push(operationsList(category.operations, categoryBaseHref));
   }
 
-  const body = format(documentNode(nodes)).trim() + '\n';
+  const body = buildMarkdocStr(nodes);
 
   return new Response(body, {
-    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };
 
@@ -87,12 +90,10 @@ function operationsList(
   baseHref: string,
 ): MarkdocNode {
   const items = operations.map((op) => {
-    const link = new Ast.Node(
-      'link',
-      { href: `${baseHref}${op.slug}/` },
-      [textNode(op.summary)],
-    );
-    return new Ast.Node('item', {}, [inlineNode([link])]);
+    const link = new Ast.Node("link", { href: `${baseHref}${op.slug}/` }, [
+      plaintext(op.summary),
+    ]);
+    return new Ast.Node("item", {}, [inline([link])]);
   });
-  return new Ast.Node('list', { ordered: false }, items);
+  return new Ast.Node("list", { ordered: false }, items);
 }

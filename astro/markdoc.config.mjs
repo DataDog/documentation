@@ -1,6 +1,6 @@
 import { defineMarkdocConfig, component, nodes, Markdoc } from '@astrojs/markdoc/config';
 import schema from './markdoc.schema.mjs';
-import { generateElementId } from './src/utils/generateElementId.ts';
+import { generateElementId } from './src/lib/utils/generateElementId.ts';
 
 export default defineMarkdocConfig({
   nodes: {

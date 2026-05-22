@@ -13,12 +13,12 @@ import type {
   CodeExampleEntry,
 } from "@lib/api/schemas/codeExamples";
 import {
-  boldNode,
-  fenceNode,
-  inlineNode,
-  paragraphNode,
-  tagNode,
-  textNode,
+  bold,
+  fence,
+  inline,
+  paragraph,
+  tag,
+  plaintext,
 } from "@lib/plaintext/helpers";
 
 export function apiCodeExampleNode(
@@ -29,10 +29,10 @@ export function apiCodeExampleNode(
   }
 
   const tabs = examples.map((set) => {
-    return tagNode("tab", { label: set.label }, renderCodeExampleTab(set));
+    return tag("tab", { label: set.label }, renderCodeExampleTab(set));
   });
 
-  return tagNode("tabs", {}, tabs);
+  return tag("tabs", {}, tabs);
 }
 
 function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
@@ -52,10 +52,10 @@ function renderCodeExampleContent(
   if (includeHeading && entry.description) {
     out.push(boldParagraph(entry.description));
   }
-  out.push(fenceNode(entry.syntax, entry.code));
+  out.push(fence(entry.syntax, entry.code));
   return out;
 }
 
 function boldParagraph(text: string): MarkdocNode {
-  return paragraphNode([inlineNode([boldNode([textNode(text)])])]);
+  return paragraph([inline([bold([plaintext(text)])])]);
 }
