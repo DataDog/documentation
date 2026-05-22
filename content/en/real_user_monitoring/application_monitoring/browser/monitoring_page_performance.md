@@ -74,12 +74,12 @@ RUM reports the element that is associated with each Core Web Vital instance:
 
 The RUM Browser SDK reports each Core Web Vital under different conditions. If a vital is missing from a view event, the SDK most likely did not capture a value for it.
 
-**Note**: Note: Re-reporting CLS and INP on each view, including SPA route changes, is intentional. It follows Chrome's [Soft Navigations API experiment][#], which extends these metrics beyond the initial page load. LCP and FCP follow the stable definition and are reported on the initial view only.
-
 - **Largest Contentful Paint**: Reported on the initial view only. Captured when the `largest-contentful-paint` PerformanceObserver entry fires before the page is hidden and before the user's first interaction. Not reported if the page starts hidden, if the user interacts before any LCP entry arrives, or after a 10-minute cap. See [LCP: Differences between the metric and the API][10] for the upstream definition.
 - **Interaction to Next Paint**: Reported on every view, including SPA route changes. Requires at least one user interaction during the view's lifetime (see [INP on web.dev][11]). If the user never interacts, no INP value is emitted. Requires browser support for the `event` PerformanceObserver entry type and `PerformanceEventTiming.interactionId`. If unsupported, no INP value is emitted.
 - **Cumulative Layout Shift**: Reported on every view, including SPA route changes. Requires browser support for the [`layout-shift` PerformanceObserver entry type][12]. The SDK also relies on `WeakRef` internally; if either is missing, no CLS value is emitted.
 - **First Contentful Paint**: Reported on the initial view only (see [FCP on web.dev][13]). Captured when the entry fires before the page is hidden. The SDK applies a 10-minute ceiling per view.
+
+**Note**: Reporting CLS and INP on every view, including SPA route changes, is intentional. This follows Chrome's [Soft Navigations API experiment][23], which extends these metrics beyond the initial page load. LCP and FCP use the standard page-load definition and are reported only on the initial view.
 
 Values are captured up to the point of backgrounding; they are not discarded if a page is later hidden. A page that is hidden at view start (for example, opened in a background tab) emits no LCP or FCP.
 
@@ -351,3 +351,4 @@ document.addEventListener("scroll", function handler() {
 [20]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [21]: https://en.wikipedia.org/wiki/Comet_(programming)
 [22]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[23]: https://developer.chrome.com/docs/web-platform/soft-navigations
