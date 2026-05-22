@@ -58,10 +58,10 @@ To begin profiling applications:
 
 5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiler page][8]. If they do not, see the [Troubleshooting][9] guide.
 
-### Caveats
+### Profiling across forks
 
 When your process forks using `os.fork`, the profiler is automatically restarted
-in the child process on supported Python versions. No manual restart is required.
+in the child process. No manual restart is required.
 
 ## Configuration
 
