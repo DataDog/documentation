@@ -53,12 +53,12 @@ For example, if you have logs that only need to be retained for 7 days, while ot
 To set up multiple indexes:
 
 1. Navigate to [Log Indexes][1].
-2. Click **New Index** or **Add a new index**.
+2. Click {{< ui >}}New Index{{< /ui >}} or {{< ui >}}Add a new index{{< /ui >}}.
 3. Enter a name for the Index.
 4. Enter the search query to filter to the logs you want in this index.
 5. Set the daily quota to limit the number of logs that are stored within an index per day.
 6. Set the retention period to how long you want to retain these logs.
-7. Click **Save**.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 Setting daily quotas on your indexes can help prevent billing overages when new log sources are added or if a developer unintentionally changes the logging levels to debug mode. See [Alert on indexes reaching their daily quota](#alert-on-indexes-reaching-their-daily-quota) on how to set up a monitor to alert when a percentage of the daily quota is reached within the past 24 hours.
 
@@ -82,11 +82,11 @@ To set up custom roles with permissions:
 
 1. Log in to [Datadog][6] as an Admin.
 2. Navigate to [Organization Settings > Roles][7].
-3. To enable custom roles, click the cog on the top left and then click **Enable**.
-4. Once enabled, click **New Role**.
+3. To enable custom roles, click the cog on the top left and then click {{< ui >}}Enable{{< /ui >}}.
+4. Once enabled, click {{< ui >}}New Role{{< /ui >}}.
 5. Enter a name for the new role.
 6. Select the permissions for the role. This allows you to restrict access to certain actions, such as rehydrating logs and creating log-based metrics. See [Log Management Permissions][8] for details.
-7. Click **Save**.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 See [How to Set Up RBAC for Logs][9] for a step-by-step guide on how to set up and assign a role with specific permissions for an example use case.
 
@@ -116,7 +116,7 @@ See [Anomaly detection monitors][11] for steps on how to create anomaly monitors
 
 Create an anomaly detection monitor to alert on any unexpected log indexing spikes:
 
-1. Navigate to [Monitors > New Monitor][13] and select **Anomaly**.
+1. Navigate to [Monitors > New Monitor][13] and select {{< ui >}}Anomaly{{< /ui >}}.
 2. In the **Define the metric** section, select the `datadog.estimated_usage.logs.ingested_events` metric.
 3. In the **from** field, add the `datadog_is_excluded:false` tag to monitor indexed logs and not ingested ones.
 4. In the **sum by** field, add the `service` and `datadog_index` tags, so that you are notified if a specific service spikes or stops sending logs in any index.
@@ -128,7 +128,7 @@ Create an anomaly detection monitor to alert on any unexpected log indexing spik
     1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
     2. [Add an exclusion filter on the noisy pattern](https://app.datadoghq.com/logs/pipelines/indexes)
     ```
-7. Click **Create**.
+7. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Alert when an indexed log volume passes a specified threshold
 
@@ -136,9 +136,9 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 1. Navigate to the [Log Explorer][14].
 2. Enter a [search query][15] that includes the index name (for example, `index:main`) to capture the log volume you want to monitor.
-3. Click **More...** and select **Create monitor**.
-4. Add tags (for example, `host, `services, and so on) to the **group by** field.
-5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
+3. Click {{< ui >}}More...{{< /ui >}} and select {{< ui >}}Create monitor{{< /ui >}}.
+4. Add tags (for example, `host, `services, and so on) to the {{< ui >}}group by{{< /ui >}} field.
+5. Enter the {{< ui >}}Alert threshold{{< /ui >}} for your use case. Optionally, enter a {{< ui >}}Warning threshold{{< /ui >}}.
 6. Add a notification title, for example:
     ```
     Unexpected spike on indexed logs for service {{service.name}}
@@ -147,7 +147,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```
-7. Click **Create**.
+7. Click {{< ui >}}Create{{< /ui >}}.
 
 #### Alert on indexed logs volume since the beginning of the month
 
@@ -163,14 +163,14 @@ An event is generated when the daily quota is reached. These events have the `da
 
 To set up a monitor to alert when the daily quota is reached for an index:
 
-1. Navigate to [Monitors > New Monitor][13] and click **Event**.
+1. Navigate to [Monitors > New Monitor][13] and click {{< ui >}}Event{{< /ui >}}.
 2. Enter: `source:datadog datadog_index:* "daily quota reached"` in the **Define the search query** section. Include `datadog_index:*` to ensure only index related events are selected.
 3. In the **Count of** field, add `datadog_index` to group by index. This updates the query to read `Show Count of * by datadog_index (datadog_index)`.
 4. For **Evaluate the query over**, select **current day**. For **Starting at**, select the time when indexes reset. This keeps the monitor in alert status until quota reset. This is an example of what the search query looks like when defined in Datadog:
    {{< img src="logs/guide/daily_quota_notification_search_query.png" alt="The Datadog Alert on Index Quota Reached Search Query configuration" style="width:100%;">}}
 5. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
-6. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
-7. Click **Save**.
+6. Add a notification title and message in the {{< ui >}}Configure notifications and automations{{< /ui >}} section. The {{< ui >}}Multi Alert{{< /ui >}} button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note**: The `datadog_index(datadog_index)` tag is only available when an event has already been generated.
 
@@ -186,22 +186,22 @@ Once you begin ingesting logs, an out-of-the-box [dashboard][18] summarizing you
 
 **Note**: The metrics used in this dashboard are estimates and may differ from official billing numbers.
 
-To find this dashboard, go to **Dashboards > Dashboards List** and search for [Log Management - Estimated Usage][19].
+To find this dashboard, go to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}} and search for [Log Management - Estimated Usage][19].
 
 ### Monitor which indexes are queried actively
 
-Monitoring **query activity** helps you evaluate the value of your indexed data and optimize costs. For example, you can identify indexes that are rarely queried to reduce retention or move data to Flex Logs or archives.
+Monitoring query activity helps you evaluate the value of your indexed data and optimize costs. For example, you can identify indexes that are rarely queried to reduce retention or move data to Flex Logs or archives.
 
 To analyze which indexes are actively queried:
 
 1. Navigate to the [Audit Trail][31]. This link pre-fills the required query and grouping.
 2. Verify that the query is set to `@evt.name:"Log Management" @action:queried`.
-3. Select the **Table** visualization to view a ranked list of the most and least used indexes for the selected time frame.
-4. In the **By** section, group logs by `@asset.new_value.query.indexes`.
+3. Select the {{< ui >}}Table{{< /ui >}} visualization to view a ranked list of the most and least used indexes for the selected time frame.
+4. In the {{< ui >}}By{{< /ui >}} section, group logs by `@asset.new_value.query.indexes`.
 
 ### Set up exclusion filters on high-volume logs
 
-When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][21] to group and identify high-volume logs. Then, in the log pattern's side panel, click **Add Exclusion Filter** to add a filter to stop indexing those logs.
+When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][21] to group and identify high-volume logs. Then, in the log pattern's side panel, click {{< ui >}}Add Exclusion Filter{{< /ui >}} to add a filter to stop indexing those logs.
 
 {{< img src="logs/guide/patterns_exclusion.png" alt="The log explorer page showing the side-panel details of a pattern with the add exclusion filter button at the top" style="width:80%;">}}
 

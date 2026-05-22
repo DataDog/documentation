@@ -6581,6 +6581,66 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List Tags
+      url: '#list-tags'
+      identifier: app-builder-list-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTags
+        unstable: []
+        order: 17
+    - name: Get Blueprints by Slugs
+      url: '#get-blueprints-by-slugs'
+      identifier: app-builder-get-blueprints-by-slugs
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsBySlugs
+        unstable: []
+        order: 20
+    - name: Get Blueprints by Integration ID
+      url: '#get-blueprints-by-integration-id'
+      identifier: app-builder-get-blueprints-by-integration-id
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsByIntegrationId
+        unstable: []
+        order: 21
+    - name: List Blueprints
+      url: '#list-blueprints'
+      identifier: app-builder-list-blueprints
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBlueprints
+        unstable: []
+        order: 18
+    - name: Get Blueprint
+      url: '#get-blueprint'
+      identifier: app-builder-get-blueprint
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprint
+        unstable: []
+        order: 19
     - name: List App Versions
       url: '#list-app-versions'
       identifier: app-builder-list-app-versions
@@ -8706,6 +8766,19 @@ menu:
           - ListCostTagDescriptions
         unstable: []
         order: 42
+    - name: Search cost recommendations
+      url: '#search-cost-recommendations'
+      identifier: cloud-cost-management-search-cost-recommendations
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchCostRecommendations
+        unstable:
+          - v2
+        order: 61
     - name: List Cloud Cost Management OCI configs
       url: '#list-cloud-cost-management-oci-configs'
       identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
@@ -11803,6 +11876,32 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Search LLM Observability spans
+      url: '#search-llm-observability-spans'
+      identifier: llm-observability-search-llm-observability-spans
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchLLMObsSpans
+        unstable:
+          - v2
+        order: 35
+    - name: List LLM Observability spans
+      url: '#list-llm-observability-spans'
+      identifier: llm-observability-list-llm-observability-spans
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsSpans
+        unstable:
+          - v2
+        order: 34
     - name: Update an LLM Observability project
       url: '#update-an-llm-observability-project'
       identifier: llm-observability-update-an-llm-observability-project
@@ -11855,6 +11954,45 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List LLM integration models
+      url: '#list-llm-integration-models'
+      identifier: llm-observability-list-llm-integration-models
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsIntegrationModels
+        unstable:
+          - v2
+        order: 38
+    - name: Run an LLM inference
+      url: '#run-an-llm-inference'
+      identifier: llm-observability-run-an-llm-inference
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsIntegrationInference
+        unstable:
+          - v2
+        order: 39
+    - name: List LLM integration accounts
+      url: '#list-llm-integration-accounts'
+      identifier: llm-observability-list-llm-integration-accounts
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsIntegrationAccounts
+        unstable:
+          - v2
+        order: 37
     - name: Push events for an LLM Observability experiment
       url: '#push-events-for-an-llm-observability-experiment'
       identifier: llm-observability-push-events-for-an-llm-observability-experiment
@@ -12076,6 +12214,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Delete LLM Observability data
+      url: '#delete-llm-observability-data'
+      identifier: llm-observability-delete-llm-observability-data
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsData
+        unstable:
+          - v2
+        order: 36
     - name: Create or update a custom evaluator configuration
       url: '#create-or-update-a-custom-evaluator-configuration'
       identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
