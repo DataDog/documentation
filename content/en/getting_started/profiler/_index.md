@@ -149,7 +149,7 @@ Also, you can see a part of the CPU profile that looks like this:
 
 ### Profile types
 
-Almost 6% of CPU time was spent in garbage collection, which suggests it may be producing a lot of garbage. So, review the **Allocated Memory** profile type:
+Almost 6% of CPU time was spent in garbage collection, which suggests it may be producing a lot of garbage. So, review the {{< ui >}}Allocated Memory{{< /ui >}} profile type:
 
 {{< img src="profiler/intro_to_profiling/types.png" alt="Profile type selector" style="width:60%;">}}
 

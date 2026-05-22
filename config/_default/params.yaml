@@ -288,6 +288,7 @@ unsupported_sites:
   agentic_onboarding: [gov,gov2]
   agentless-scanning: [gov,gov2] # api page
   agentless_scanning: [gov,gov2] # docs page
+  ai_impact: [gov,gov2]
   alibaba-cloud: [gov,gov2]
   amazon-compute-optimizer: [gov,gov2]
   amazon-event-bridge: [gov,gov2]

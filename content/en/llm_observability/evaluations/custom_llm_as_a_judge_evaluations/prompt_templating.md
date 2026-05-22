@@ -10,7 +10,7 @@ further_reading:
   text: "Trace-Level Evaluations"
 ---
 
-Custom LLM-as-a-judge prompts inject span or trace data into the **User** message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time.
+Custom LLM-as-a-judge prompts inject span or trace data into the {{< ui >}}User{{< /ui >}} message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time.
 
 ## At a glance
 
@@ -119,8 +119,8 @@ For example, given a span where `meta.input.messages` is:
 ## Tips
 
 - Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (span or trace) and to the sample selected on the right.
-- Pick a sample row in the **Filtered Spans** panel (span scope) or the **Spans in Selected Trace** panel (trace scope), then click **Test Evaluation** to preview how each placeholder resolves on real data before saving the configuration.
-- Use the three-dots menu on a sample's JSON view and select **Add variable to message** to insert a field path into the prompt without typing it.
+- Pick a sample row in the {{< ui >}}Filtered Spans{{< /ui >}} panel (span scope) or the {{< ui >}}Spans in Selected Trace{{< /ui >}} panel (trace scope), then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving the configuration.
+- Use the three-dots menu on a sample's JSON view and select {{< ui >}}Add variable to message{{< /ui >}} to insert a field path into the prompt without typing it.
 - Pass `{{*}}` when you want the LLM judge to see the full payload—useful for free-form prompts that decide for themselves which fields matter.
 
 ## Further Reading

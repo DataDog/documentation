@@ -13,11 +13,19 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation. When referencing spans, provide <code>span_id</code> and <code>trace_id</code> as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's <code>int(hex_span_id, 16)</code> to convert a hex span ID to its decimal equivalent.
+## Supported features
 
-For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
+### Evaluations
 
-You can also use OpenTelemetry spans inside <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">LLM Observability Experiments</a>. By setting <code>DD_TRACE_OTEL_ENABLED=1</code>, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+To send [external evaluations directly to the API](/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
+
+### Prompt Tracking
+
+For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt Tracking - OpenTelemetry Instrumentation](/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation).
+
+### Experiments
+
+You can use OpenTelemetry spans inside [LLM Observability Experiments](/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
 ## Setup
 
@@ -64,7 +72,7 @@ To generate traces compatible with LLM Observability, do one of the following:
 - Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1].
 - Create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes, as defined in the semantic conventions.
 
-After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
+After your application starts sending data, the traces automatically appear in the [{{< ui >}}LLM Observability Traces{{< /ui >}} page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
 <div class="alert alert-danger">
 <ul>

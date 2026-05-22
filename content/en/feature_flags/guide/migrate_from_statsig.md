@@ -22,7 +22,7 @@ This guide walks you through the process of migrating feature flags from Statsig
 ### 1. Install the Eppo SDK {#install-sdk}
 
 1. Log in to Eppo at [https://eppo.cloud/][3].
-1. Generate an SDK key by navigating to **Flags** > **Environments**, then clicking **Create** > **SDK Key**.
+1. Generate an SDK key by navigating to {{< ui >}}Flags{{< /ui >}} > {{< ui >}}Environments{{< /ui >}}, then clicking {{< ui >}}Create{{< /ui >}} > {{< ui >}}SDK Key{{< /ui >}}.
 1. Define a logging function for the Eppo SDK to log assignments so they end up in your data warehouse.
 
     {{< code-block lang="typescript" >}}
@@ -50,7 +50,7 @@ await init({
 
 ### 2. Set up and verify a new flag {#set-up-flag}
 
-1. Create a flag in Eppo by navigating to **Flags** > **Feature Flags**, then clicking **Create Flag** > **Feature Flag**.
+1. Create a flag in Eppo by navigating to {{< ui >}}Flags{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}, then clicking {{< ui >}}Create Flag{{< /ui >}} > {{< ui >}}Feature Flag{{< /ui >}}.
 1. Implement the flag in your application code.
 1. Test the flag in your local development environment to ensure it works as expected.
 

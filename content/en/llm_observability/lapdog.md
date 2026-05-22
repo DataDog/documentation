@@ -4,7 +4,7 @@ description: "Run an LLM Observability dashboard locally to inspect coding-agent
 further_reading:
     - link: 'https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md'
       tag: 'GitHub'
-      text: 'Lapdog install and usage guide'
+      text: 'Lapdog README on GitHub'
     - link: '/llm_observability/instrumentation/sdk'
       tag: 'Documentation'
       text: 'Instrument your application with the LLM Observability SDK'
@@ -54,7 +54,7 @@ Lapdog instruments coding agents end-to-end. Each prompt, tool call, and permiss
 ```shell
 lapdog claude
 ```
-Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code with hooks wired up.
+Starts the local agent, installs the Claude Code lapdog plugin, and launches Claude Code.
 {{% /tab %}}
 {{% tab "Codex" %}}
 ```shell
@@ -82,7 +82,7 @@ Run any command with `ddtrace` auto-instrumentation pointed at the local agent. 
 
 While a session is running, open [lapdog.datadoghq.com](https://lapdog.datadoghq.com). The dashboard reads directly from your local agent on `localhost:8126`; no login or Datadog account is needed.
 
-If you've changed the local port, override it from the **Collecting sessions** badge in the dashboard header.
+If you've changed the local port, override it from the {{< ui >}}Collecting sessions{{< /ui >}} badge in the dashboard header.
 
 ## Forward events to Datadog
 
@@ -107,6 +107,52 @@ Forwarded spans are tagged `source:lapdog` so you can distinguish development se
 | `lapdog status` | Show whether the agent is running |
 
 For the full list of options, run `lapdog --help`.
+
+## Uninstall
+
+Follow these steps to remove Lapdog and the state it writes to your home directory. Your package manager (Homebrew, pip, or pipx) cleans up only what it installed; it does not touch `~/.lapdog/`, the Claude Code plugin, or the pi extension.
+
+1. Stop the local agent:
+
+   ```shell
+   lapdog stop
+   ```
+
+2. Remove the Claude Code plugin (if installed):
+
+   ```shell
+   claude plugin uninstall lapdog@lapdog
+   claude plugin marketplace remove lapdog
+   ```
+
+3. Remove the pi extension (only if you ran `lapdog pi`):
+
+   ```shell
+   rm -f ~/.pi/agent/extensions/lapdog.ts
+   ```
+
+4. Remove the Lapdog working directory:
+
+   ```shell
+   rm -rf ~/.lapdog
+   ```
+
+5. Uninstall the package:
+
+   {{< tabs >}}
+   {{% tab "Homebrew (macOS)" %}}
+   ```shell
+   brew uninstall lapdog
+   brew untap datadog/lapdog
+   ```
+   {{% /tab %}}
+   {{% tab "pip / pipx" %}}
+   ```shell
+   pipx uninstall ddapm-test-agent
+   # or: pip uninstall ddapm-test-agent
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Further reading
 
