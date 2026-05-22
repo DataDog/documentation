@@ -8,9 +8,9 @@ further_reading:
 - link: "/incident_response/incident_management/investigate/incident_ai"
   tag: "Documentation"
   text: "Coordinate incidents with Incident AI"
-- link: "/cloud_cost_management/finops_skill/"
+- link: "/cloud_cost_management/cloud_cost_skill/"
   tag: "Documentation"
-  text: "FinOps Skill in Bits Assistant"
+  text: "Cloud Cost Skill in Bits Assistant"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
@@ -73,7 +73,7 @@ Example prompts:
 - `What's the latency bottleneck for this service?`
 
 #### Cloud Cost Management
-Investigate [cloud cost][4] changes and identify the teams or resources responsible. See [FinOps Skill in Bits Assistant][9].
+Investigate [cloud cost][4] changes and identify the teams or resources responsible. See [Cloud Cost Skill in Bits Assistant][9].
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
@@ -127,4 +127,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [6]: /notebooks/
 [7]: /ddsql_editor/
 [8]: /ddsql_reference/data_directory/
-[9]: /cloud_cost_management/finops_skill/
+[9]: /cloud_cost_management/cloud_cost_skill/

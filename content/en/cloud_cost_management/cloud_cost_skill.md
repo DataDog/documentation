@@ -1,11 +1,8 @@
 ---
-title: FinOps Skill in Bits Assistant
-description: Use the FinOps skill in Bits Assistant to investigate, explain, and share cloud cost findings.
-aliases:
-- /cloud_cost_management/finops_agent/
-- /cloud_cost_management/ccm_ai/
+title: Cloud Cost Skill in Bits Assistant
+description: Use the Cloud Cost skill in Bits Assistant to investigate, explain, and share cloud cost findings.
 algolia:
-  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "finops skill", "bits assistant", "mcp"]
+  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits assistant", "mcp"]
   rank: 75
 further_reading:
 - link: "/bits_ai/bits_assistant/"
@@ -22,13 +19,13 @@ further_reading:
   text: "Budgets"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="FinOps skill is in Preview" >}}
-The FinOps skill runs in Bits Assistant. Fill out the Bits Assistant Preview form to request access.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Cloud Cost skill is in Preview" >}}
+The Cloud Cost skill runs in Bits Assistant. Fill out the Bits Assistant Preview form to request access.
 {{< /callout >}}
 
 ## Overview
 
-The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis, budget tracking, and general cost questions. For example, you can ask Bits Assistant to:
+The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis, budget tracking, and general cost questions. For example, you can ask Bits Assistant to:
 
 - Investigate [cost monitor alerts][2], [cost anomalies][3], and [cost changes][4]
 - Identify teams, services, accounts, regions, or resources driving spend
@@ -39,7 +36,7 @@ The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assista
 
 ## Prerequisites
 
-To use the FinOps skill in Bits Assistant, you must:
+To use the Cloud Cost skill in Bits Assistant, you must:
 
 - [Set up Cloud Cost Management][6] for the cost sources you want to analyze
 - Have these permissions:
@@ -47,11 +44,11 @@ To use the FinOps skill in Bits Assistant, you must:
   - [Cloud Cost Management permissions][8] for the data you ask about
   - (Optional) [Notebook permissions][9], if you want to create or edit investigation [Notebooks][15]
 
-## Start an investigation with the FinOps skill
+## Start an investigation with the Cloud Cost skill
 
 {{< img src="cloud_cost/finops_skill_anomalies.png" alt="Cost anomalies graphs showing the Investigate with Bits AI button in each graph." style="width:80%;" >}}
 
-When you want to start an investigation, such as for a [cost anomaly], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the FinOps skill.
+When you want to start an investigation, such as for a [cost anomaly][3], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the Cloud Cost skill.
 
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open the Bits Assistant and ask a cost question.
 
@@ -65,7 +62,7 @@ Example prompts:
 
 ### Cost change investigations
 
-When you investigate a cost change with the FinOps skill, Bits Assistant provides a concise summary, then asks what you want to explore next. The initial analysis typically includes:
+When you investigate a cost change with the Cloud Cost skill, Bits Assistant provides a concise summary, then asks what you want to explore next. The initial analysis typically includes:
 
 - A daily cost chart for the baseline and investigation periods
 - The baseline period, investigation period, total dollar amount and percentage change, and projected annual impact when applicable
@@ -84,7 +81,7 @@ After the initial summary, Bits Assistant can:
 
 ### Budgets and forecasting
 
-After setting up [Budgets][5], use the FinOps skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
+After setting up [Budgets][5], use the Cloud Cost skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
 
 - Actual spend versus budgeted amount
 - Forecasted spend versus budgeted amount

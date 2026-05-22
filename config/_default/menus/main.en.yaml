@@ -4104,10 +4104,10 @@ menu:
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
       weight: 903
-    - name: FinOps Skill
-      url: cloud_cost_management/finops_skill
+    - name: Cloud Cost Skill
+      url: cloud_cost_management/cloud_cost_skill
       parent: cloud_cost
-      identifier: cloud_cost_finops_skill
+      identifier: cloud_cost_skill
       weight: 10
     - name: APM
       url: tracing/
