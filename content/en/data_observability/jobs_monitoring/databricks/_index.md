@@ -491,7 +491,11 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
 ### Set up Data Observability: Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access with [IP access lists][13], add Datadog's {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} to your allow-list. See Databricks's documentation for configuring IP access lists for [individual workspaces][16].
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. See Databricks's documentation for configuring IP access lists for [individual workspaces][16] to give Datadog API access.
+
+To monitor workspaces that use [Databricks Private Link][14] connectivity, see [Private Link Connectivity (Preview)][15].
+
+[15]: /data_observability/jobs_monitoring/databricks/private_link
 
 ## Further Reading
 
@@ -505,6 +509,7 @@ If you are controlling Databricks API access with [IP access lists][13], add Dat
 [9]: https://app.datadoghq.com/data-jobs/configuration
 [12]: https://docs.databricks.com/en/security/network/front-end/index.html
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
+[14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace
 [18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
 [19]: https://docs.databricks.com/aws/en/security/auth/access-control#access-control-lists-overview
