@@ -2531,6 +2531,10 @@
     "request_description": "Data deletion request payload.",
     "request_schema_description": "Request to delete LLM Observability data."
   },
+  "GetLLMObsAnnotatedInteractionsByTraceIDs": {
+    "description": "Returns annotated interactions across all annotation queues for the given content IDs. Results include queue metadata (ID and name) for each interaction.",
+    "summary": "Get annotated interactions by content IDs"
+  },
   "ListLLMObsAnnotationQueues": {
     "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
     "summary": "List LLM Observability annotation queues"
@@ -4357,6 +4361,40 @@
     "request_description": "New definition of the critical asset. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the critical asset."
   },
+  "ListSecurityMonitoringIntegrationConfigs": {
+    "description": "List the entity context sync configurations for Cloud SIEM. Each configuration connects Cloud SIEM\nto an external source that provides entities (for example, users from an identity provider) for use\nin signals and the entity explorer.",
+    "summary": "List entity context sync configurations"
+  },
+  "CreateSecurityMonitoringIntegrationConfig": {
+    "description": "Create a new entity context sync configuration so Cloud SIEM can ingest entities from an external\nsource. The credentials provided in `secrets` are validated against the source before the configuration\nis stored and never returned in subsequent responses.",
+    "summary": "Create an entity context sync configuration",
+    "request_description": "The definition of the new integration configuration.",
+    "request_schema_description": "Request body to create an entity context sync configuration."
+  },
+  "ValidateSecurityMonitoringIntegrationCredentials": {
+    "description": "Validate a set of credentials against the external entity source before creating a sync configuration.\nReturns a 200 status code if the credentials are valid.",
+    "summary": "Validate entity context sync credentials",
+    "request_description": "The credentials to validate.",
+    "request_schema_description": "Request body to validate credentials against an external entity source before creating a sync configuration."
+  },
+  "DeleteSecurityMonitoringIntegrationConfig": {
+    "description": "Delete an entity context sync configuration. Cloud SIEM stops ingesting entities from this source,\nand the credentials stored for the configuration are removed from the secrets store.",
+    "summary": "Delete an entity context sync configuration"
+  },
+  "GetSecurityMonitoringIntegrationConfig": {
+    "description": "Get the details of a specific entity context sync configuration.",
+    "summary": "Get an entity context sync configuration"
+  },
+  "UpdateSecurityMonitoringIntegrationConfig": {
+    "description": "Update an existing entity context sync configuration. Supports partial updates; only the fields provided in the request body are modified.",
+    "summary": "Update an entity context sync configuration",
+    "request_description": "The fields to update on the integration configuration.",
+    "request_schema_description": "Request body to update an entity context sync configuration. Supports partial updates."
+  },
+  "ValidateSecurityMonitoringIntegrationConfig": {
+    "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
+    "summary": "Validate an entity context sync configuration"
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
@@ -4366,6 +4404,10 @@
     "summary": "Create a security filter",
     "request_description": "The definition of the new security filter.",
     "request_schema_description": "Request object that includes the security filter that you would like to create."
+  },
+  "ListSecurityFilterVersions": {
+    "description": "Get the configured security filters at each historical version of the configuration.\nEach entry in the response represents the set of all security filters at a given version,\nordered from the most recent version to the oldest.",
+    "summary": "Get the version history of security filters"
   },
   "DeleteSecurityFilter": {
     "description": "Delete a specific security filter.",
@@ -4437,6 +4479,10 @@
     "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
+  "GetEntityContext": {
+    "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
+    "summary": "Get entity context"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -4505,6 +4551,26 @@
     "description": "Get a rule's version history.",
     "summary": "Get a rule's version history"
   },
+  "ListSampleLogGenerationSubscriptions": {
+    "description": "Get the sample log generation subscriptions for the organization.\nSample log generation injects representative example logs for a given Cloud SIEM content pack into the Logs platform,\nwhich can be used to test detection rules without onboarding the underlying integration first.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an eligible\npricing model. Other organizations receive a `403 Forbidden` (non-trial orgs) or a `400 Bad Request`\n(feature disabled), and legacy pricing tiers receive a response with `status: not_available`.",
+    "summary": "Get sample log generation subscriptions"
+  },
+  "CreateSampleLogGenerationSubscription": {
+    "description": "Subscribe to sample log generation for a Cloud SIEM content pack. Sample logs for the\nrequested content pack are injected into the Logs platform for the duration of the subscription,\nso detection rules can be exercised without onboarding the underlying integration first.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
+    "summary": "Subscribe to sample log generation",
+    "request_description": "The content pack to subscribe to and the desired duration of the subscription.",
+    "request_schema_description": "Request body to create a sample log generation subscription for a single content pack."
+  },
+  "BulkCreateSampleLogGenerationSubscriptions": {
+    "description": "Subscribe to sample log generation for multiple Cloud SIEM content packs in a single call.\nEach requested content pack is processed independently; the response includes a per-item\nstatus so partial successes can be inspected.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive per-item responses with `status: not_available`.",
+    "summary": "Bulk subscribe to sample log generation",
+    "request_description": "The content packs to subscribe to and the desired duration of the subscriptions.",
+    "request_schema_description": "Request body to create sample log generation subscriptions for multiple content packs at once."
+  },
+  "DeleteSampleLogGenerationSubscription": {
+    "description": "Unsubscribe from sample log generation for a Cloud SIEM content pack.\nAfter unsubscribing, no more sample logs are generated for the requested content pack.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
+    "summary": "Unsubscribe from sample log generation"
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
@@ -4542,6 +4608,10 @@
     "summary": "Modify the triage assignee of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the assignee of a given security monitoring signal."
+  },
+  "GetSignalEntities": {
+    "description": "Get the list of entities related to a security signal, captured at the signal's timestamp.",
+    "summary": "Get entities related to a signal"
   },
   "EditSecurityMonitoringSignalIncidents": {
     "description": "Change the related incidents for a security signal.",

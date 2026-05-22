@@ -141,6 +141,15 @@ Detailed network timing data for resources is collected from the Fetch and XHR n
 
 **Note**: Some fields may not be available in all browsers. For example, `resource.status_code` is not available in Safari, see [Browser Compatibility][3].
 
+## Resource network headers
+
+For resources configured with `trackResourceHeaders`, additional network header metadata is automatically collected. See [`RumInitConfiguration.trackResourceHeaders`][10] for configuration details.
+
+| Attribute                   | Type   | Description                                                                                                             |
+| --------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `resource.request.headers`  | object | Request headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch resources only).     |
+| `resource.response.headers` | object | Response headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch and XHR resources). |
+
 ## Identify third-party resources
 
 RUM infers the name and category of the resource provider from the resource URL host part. If the resource URL host matches the current page URL host, the category is set to `first party`. Otherwise, the category will be `cdn`, `analytics`, or `social` for example.
@@ -170,3 +179,4 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
+[10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
