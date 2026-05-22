@@ -32,7 +32,7 @@ Operation AI Investigation runs an agentic root-cause analysis on a single opera
 3. The Operations page surfaces two elements:
    - A **summary** at the top with a plain-language overview of the operation's health across success rate and latency.
    - A ranked list of **recommendation cards** — one per failure mode (errors, timeouts, abandonment), one for latency regression, and one for sustained high latency. Each card is tagged with a priority badge (**P0**, **P1**, or **P2**) reflecting relative severity.
-4. Click **Investigate** on a card to open a detailed analysis. While the agent runs, the card button shows **View progress**; after it completes, it shows **See investigation**.
+4. Click **Investigate** on a card to open a detailed analysis.
 
 <!-- TODO: Screenshot — Operations page showing the summary and ranked recommendation cards. -->
 
@@ -43,7 +43,7 @@ The agent looks at several modes of failure or degradation for the operation:
 - **Errors** — operations that ended with an error.
 - **Timeouts** — operations that did not complete within their expected duration.
 - **Abandoned** — operations that the user gave up on.
-- **Perf. regression** — operations whose latency degraded compared to the historical baseline.
+- **Performance regression** — operations whose latency degraded compared to the historical baseline.
 - **Latency** — operations that are sustainably slow, independent of a recent regression.
 
 For each card, the findings are grouped into three root-cause categories:
@@ -60,8 +60,7 @@ When applicable, the agent surfaces frontend and backend error groups together w
 
 When you launch an investigation, a side panel streams the analysis as it runs. Once complete, the panel shows:
 
-- **A verdict** combining the investigation mode (Errors, Timeouts, Abandoned, Perf. regression, or Latency), the inferred root-cause category (Frontend, Backend, or Network), and a confidence level (**High**, **Medium**, or **Low**) indicating how confident the agent is in its conclusion.
-- **A plain-language summary** of what the agent found.
+- **The inferred root cause** — categorized as Frontend, Backend, or Network — with a confidence level (**High**, **Medium**, or **Low**) indicating how confident the agent is in its conclusion.
 - **Ranked findings**, where each finding includes:
   - **A summary** of the failure or degradation pattern.
   - **Code locations** with file path, line number, and surrounding snippet when source maps are available.

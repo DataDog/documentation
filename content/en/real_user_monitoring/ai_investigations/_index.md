@@ -33,7 +33,7 @@ For more information, see [Multi-View AI Investigation][2].
 
 ## Operation AI investigation
 
-Run an agentic investigation on a single operation in [Operations Monitoring][3]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions, with findings grouped into frontend, backend, and network root causes.
+Run an agentic investigation on a single operation in [Operations Monitoring][3]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions.
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-operation-ai-investigation/" header="Join the Preview!">}}
   Operation AI Investigation is in Preview.

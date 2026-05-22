@@ -28,15 +28,13 @@ The investigation runs at the (view × vital) granularity and is available for t
 - First Contentful Paint
 - Interaction to Next Paint
 
-**Note**: Cumulative Layout Shift is not currently supported. CLS is a sum of unexpected layout shifts rather than a metric built up linearly over the page lifetime, so it does not fit the timeline-driven investigation pattern used for the other vitals. A CLS-specific investigation shape, focused on culprit elements and shift triggers, is on the roadmap.
-
 ## Launch an investigation
 
 1. Open the [Optimization page][2] for your application.
 2. Select a view and one of the supported vitals.
 3. The Optimization page surfaces two elements for the selected (view × vital) pair:
    - A **summary** at the top with an at-a-glance overview of the issues detected.
-   - Up to three **recommendation cards** below the summary. Each card represents a candidate root cause, ordered by impact. Issues that are specific to the selected view are prioritized over issues that affect the application globally.
+   - Up to three **recommendation cards** below the summary. Each card represents a candidate root cause, ordered by impact.
 4. Click **Investigate** on a card to launch the agent on that issue.
 
 <!-- TODO: Screenshot — Optimization page showing the summary and ranked recommendation cards for a (view × vital) pair. -->
@@ -56,18 +54,24 @@ The richer the data available, the more precise the analysis. Correlating RUM wi
 
 ## Read the results
 
-When you click **Investigate** on an issue card, a side panel opens and the agent streams its analysis in real time. Each investigation produces:
+When you click **Investigate** on a recommendation card, a side panel opens and the agent streams its analysis in real time. Each investigation produces:
 
 - **A step-by-step timeline** describing how the metric is built from your application code: which resources load, when scripts execute, and where time is spent during the vital window.
-- **A reasoning trace** showing the tool calls the agent makes — for example, searching the codebase, reading specific files, or inspecting sessions — so you can follow the path it took to reach its conclusion.
 - **A root-cause explanation** with the supporting evidence the agent considered.
 - **A code-level finding** when the agent can attribute the issue to a specific file or function.
 
 <!-- TODO: Screenshot — Multi-View AI Investigation side panel with timeline, root-cause explanation, and code-level finding. -->
 
+## Take action
+
+After an investigation completes, you can act on findings without leaving the panel:
+
+- **Fix with Bits**: opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
+- **Save to a Notebook**: exports the full timeline and findings to a [Notebook][5] to share with your team.
+
 ## Platform support
 
-Multi-View AI Investigation is available for Browser RUM applications only. Mobile applications use the dedicated [Mobile Optimization page][2] instead.
+Multi-View AI Investigation is available for Browser RUM applications only.
 
 ## Further reading
 
@@ -77,3 +81,4 @@ Multi-View AI Investigation is available for Browser RUM applications only. Mobi
 [2]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/
 [3]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/
+[5]: /notebooks/
