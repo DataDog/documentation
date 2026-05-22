@@ -199,16 +199,7 @@ Both the AWS X-Ray SDK and Datadog APM client libraries (`dd-trace`) add metadat
 ### Tracing across AWS Lambda and hosts
 
 #### Context propagation with the Datadog SDKs (recommended)
-Install Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts. Your traces then automatically show a complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services. This works for any runtime; your hosts and Lambda functions don't need to match.
-
-#### Context propagation with the X-Ray integration
-If `dd-trace` is already installed on your hosts and your Node.js or Python serverless functions are traced with AWS X-Ray, you can connect both into a single trace:
-
-1. You have installed the [AWS X-Ray integration][18] for tracing your Lambda functions, enabling both AWS X-Ray active tracing and installing the X-Ray client libraries.
-2. You have installed the [Datadog Lambda Library for your Lambda runtime][5], and the `DD_TRACE_ENABLED` environment variable is set to `true`.
-3. [Datadog APM][20] is configured on your hosts and container-based infrastructure.
-
-For X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the same `env` tag.
+Install Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts. Your traces then automatically show a complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace of a request from a host to a Lambda function" >}}
 
@@ -369,7 +360,7 @@ ddlambda.WrapFunction(handler, cfg)
 
 ## Sending traces to Datadog with the X-Ray Integration
 
-If you have existing X-Ray instrumentation and want to keep using it, [install the AWS X-Ray integration][2] to send traces from X-Ray to Datadog. For new serverless applications, Datadog recommends instrumenting with the [Datadog SDKs][5] instead.
+If you have existing X-Ray instrumentation and want to keep using it, [install the AWS X-Ray integration][2] to send traces from X-Ray to Datadog. For new serverless applications, Datadog recommends instrumenting Lambda functions with the [Datadog Lambda Extension][35] instead.
 
 ## Further Reading
 
