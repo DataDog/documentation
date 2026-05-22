@@ -19,7 +19,7 @@ The Sensitive Data Scanner processor scans logs to detect and redact or hash sen
 
 You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
 
-See [Best practices to optimize performance](#best-practices-to-optimize-performance) for configuration recommendations.
+See [Best practices to optimize performance](#best-practices-to-optimize-performance) for tips on reducing resource usage.
 
 ## Set up the processor in the UI
 
@@ -286,7 +286,7 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 
 ## Best practices to optimize performance
 
-The Sensitive Data Scanner processor is CPU intensive, which means more resources are needed when there are more fields and data to scan. The following are best practices to optimize performance.
+The Sensitive Data Scanner processor is CPU intensive. Use the following best practices to optimize performance.
 
 ### Only enable rules you need
 
@@ -297,7 +297,7 @@ Rules that are enabled but not used consume unnecessary resources. Check the Sen
 1. Click the Sensitive Data Scanner processor to expand it.
 1. Click **View Scanning Rules** to open the side panel and see **Matches in the last 24 hours** for each rule.
 
-See [Delete a rule](#delete-a-rule) if you want to delete an unused rule.
+See [Delete a rule](#delete-a-rule) to delete an unused rule.
 
 ### Only scan the events and fields that need to be scanned for sensitive data
 
