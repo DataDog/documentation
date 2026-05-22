@@ -1,13 +1,13 @@
 ---
-title: Kafka Monitoring Data Collection
+title: Data Collection
 description: Metrics, configurations, and capabilities collected by Data Streams Monitoring's Kafka Monitoring when cluster monitoring is enabled.
 ---
 
-Data Streams Monitoring's Kafka Monitoring collects cluster health data through the [Kafka Consumer integration][1]. Setting `enable_cluster_monitoring: true` in the Kafka Consumer check expands the integration's capabilities and unlocks the additional data described on this page.
+Data Streams Monitoring's Kafka Monitoring collects cluster health data through the [Kafka Consumer integration][1]. With `enable_cluster_monitoring: true`, the integration collects additional metrics and unlocks the extra capabilities described on this page.
+
+See [Kafka Monitoring Setup][4] for how to configure the check.
 
 ## Metrics
-
-With `enable_cluster_monitoring: true`, the Kafka Consumer integration sends the following metrics in addition to its default set:
 
 | Metric                                           | Description                                                  |
 |--------------------------------------------------|--------------------------------------------------------------|
@@ -40,7 +40,7 @@ With `enable_cluster_monitoring: true`, the Kafka Consumer integration sends the
 | `kafka.consumer_group.members`                   | Number of members in the consumer group                      |
 | `kafka.consumer_group.member.partitions`         | Number of partitions assigned to this consumer group member  |
 
-Enabling the flag also collects these metrics across the entire cluster, rather than for selected topics only:
+Now collected across the entire cluster instead of for selected topics only:
 
 | Metric                          | Description                                                                                                                                                  |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -51,8 +51,6 @@ Enabling the flag also collects these metrics across the entire cluster, rather 
 
 ## Configurations and schemas
 
-With `enable_cluster_monitoring: true`, the Kafka Consumer integration also collects:
-
 - Broker configurations
 - Topic configurations
 - Schemas from a schema registry
@@ -61,7 +59,9 @@ These appear in Data Streams Monitoring alongside the metrics above.
 
 ## Capabilities
 
-Enabling cluster monitoring also unlocks the ability to read live messages on topics on demand. See [Enable message inspection][2] for the additional setup steps.
+Enabling cluster monitoring also unlocks the ability to [read live messages on topics][3] on demand. See [Enable message inspection][2] for the additional setup steps.
 
 [1]: /integrations/kafka-consumer/?tab=containerized
 [2]: /data_streams/kafka/setup/#enable-message-inspection
+[3]: /data_streams/kafka/#inspect-topic-schemas-and-messages
+[4]: /data_streams/kafka/setup/
