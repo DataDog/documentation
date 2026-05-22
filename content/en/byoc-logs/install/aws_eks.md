@@ -259,7 +259,7 @@ echo ""
      internal:
        enabled: true
        name: byoclogs-internal
-       host: byoclogs.acme.internal
+       host: byoclogs.example.internal
        extraAnnotations:
          alb.ingress.kubernetes.io/load-balancer-name: byoclogs-internal
 
@@ -308,13 +308,15 @@ echo ""
      podSize: xlarge
    ```
 
-1. Install or upgrade the Helm chart
+1. Install or upgrade the Helm chart:
 
    ```shell
    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
    -n <NAMESPACE_NAME> \
    -f datadog-values.yaml
    ```
+
+   **Note**: If a pod stays pending with a warning about insufficient memory or CPU and no available nodes, change `indexer.podSize` to `medium` in `datadog-values.yaml` and run the `helm upgrade --install` command again.
 
 ## Verification
 
