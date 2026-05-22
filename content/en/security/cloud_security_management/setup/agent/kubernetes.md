@@ -111,7 +111,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{< /tabs >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][8] and does not affect Workload Protection usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -153,7 +153,7 @@ These signals power vulnerability prioritization in Cloud Security, surfacing fi
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8], which can affect Workload Protection usage. From 7.79.0, runtime package tracking runs independently and does not affect Workload Protection usage.
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package tracking runs independently and does not affect its usage.
 
 {{< tabs >}}
 

@@ -51,7 +51,7 @@ sbom:
       enabled: true
 {{< /code-block >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][7] and does not affect Workload Protection usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][7] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -103,7 +103,7 @@ These signals power vulnerability prioritization in Cloud Security, surfacing fi
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7], which can affect Workload Protection usage. From 7.79.0, runtime package tracking runs independently and does not affect Workload Protection usage.
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package tracking runs independently and does not affect its usage.
 
 Add the `enrichment` block to the `sbom` section of your `datadog.yaml` file:
 
