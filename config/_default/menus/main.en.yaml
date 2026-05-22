@@ -1514,16 +1514,7 @@ menu:
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
       weight: 502
-    - name: Agent
-      url: bits_ai/mcp_server/agent/rshell
-      identifier: bits_ai_mcp_server_agent
-      parent: bits_ai_mcp_server
-      weight: 503
-    - name: Agent Restricted Shell (rshell)
-      url: bits_ai/mcp_server/agent/rshell
-      identifier: bits_ai_mcp_server_agent_rshell
-      parent: bits_ai_mcp_server_agent
-      weight: 1
+
     - name: Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
