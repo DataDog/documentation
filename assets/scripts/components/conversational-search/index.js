@@ -28,6 +28,14 @@ const VIEW_MODES = ['fullscreen', 'floating', 'sidebar'];
 const DEFAULT_VIEW_MODE = 'fullscreen';
 const VIEW_MODE_STORAGE_KEY = 'docs-ai-view-mode';
 
+// Sidebar resize bounds — kept in sync with `min-width` / `max-width` in
+// `_dialog.scss` so the JS clamp and the CSS clamp agree.
+const SIDEBAR_WIDTH_STORAGE_KEY = 'docs-ai-sidebar-width';
+const SIDEBAR_WIDTH_DEFAULT = 440;
+const SIDEBAR_WIDTH_MIN = 280;
+const SIDEBAR_WIDTH_MAX_PX = 800;
+const SIDEBAR_WIDTH_MAX_VW_PCT = 0.6;
+
 function readStoredViewMode() {
     try {
         const stored = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
@@ -39,6 +47,24 @@ function readStoredViewMode() {
 
 function persistViewMode(mode) {
     try { localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode); } catch (_) { /* ignore */ }
+}
+
+function readStoredSidebarWidth() {
+    try {
+        const raw = parseInt(localStorage.getItem(SIDEBAR_WIDTH_STORAGE_KEY), 10);
+        return Number.isFinite(raw) ? raw : SIDEBAR_WIDTH_DEFAULT;
+    } catch (_) {
+        return SIDEBAR_WIDTH_DEFAULT;
+    }
+}
+
+function persistSidebarWidth(px) {
+    try { localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, String(px)); } catch (_) { /* ignore */ }
+}
+
+function clampSidebarWidth(px) {
+    const max = Math.min(SIDEBAR_WIDTH_MAX_PX, window.innerWidth * SIDEBAR_WIDTH_MAX_VW_PCT);
+    return Math.max(SIDEBAR_WIDTH_MIN, Math.min(px, max));
 }
 
 // Auto-rotated client-side messages shown while we wait for the first server `thinking` event.
@@ -106,9 +132,11 @@ class ConversationalSearch {
 
         this.viewMode = readStoredViewMode();
         this.isModeMenuOpen = false;
+        this.sidebarWidth = clampSidebarWidth(readStoredSidebarWidth());
 
         if (!this.createElements()) return;
         this.bindEvents();
+        this.applySidebarWidth(this.sidebarWidth);
         this.applyViewMode(this.viewMode);
         this.ready = true;
     }
@@ -167,6 +195,7 @@ class ConversationalSearch {
         this.modeToggleBtn = this.sidebar.querySelector('.conv-search-mode-toggle');
         this.modeMenu = this.sidebar.querySelector('.conv-search-mode-menu');
         this.modeOptions = Array.from(this.sidebar.querySelectorAll('.conv-search-mode-option'));
+        this.resizeHandle = this.sidebar.querySelector('.conv-search-resize-handle');
         return true;
     }
 
@@ -222,10 +251,42 @@ class ConversationalSearch {
         });
 
         this.bindModeSwitcher();
+        this.bindSidebarResize();
+        this.bindTopOffsetTracker();
         this.bindHomepageObserver();
         this.bindTooltipEvents();
         this.bindClickDelegation();
         this.bindScrollFade();
+    }
+
+    // Keep the sidebar's top offset in sync with the navbar's bottom edge.
+    // The navbar shrinks on scroll and the announcement banner can be
+    // dismissed, so a one-shot measurement on open isn't enough. We listen
+    // to scroll (rAF-throttled) and observe size changes on the navbar +
+    // banner; everything is a no-op until the panel is actually in sidebar
+    // mode and open, so other modes pay nothing.
+    bindTopOffsetTracker() {
+        let rafScheduled = false;
+        const refresh = () => {
+            if (rafScheduled) return;
+            rafScheduled = true;
+            requestAnimationFrame(() => {
+                rafScheduled = false;
+                if (this.viewMode === 'sidebar' && this.isOpen) {
+                    this.applySidebarTopOffset();
+                }
+            });
+        };
+
+        window.addEventListener('scroll', refresh, { passive: true });
+
+        if (typeof ResizeObserver === 'function') {
+            const observer = new ResizeObserver(refresh);
+            ['.main-nav', '.announcement-banner'].forEach((sel) => {
+                const el = document.querySelector(sel);
+                if (el) observer.observe(el);
+            });
+        }
     }
 
     bindModeSwitcher() {
@@ -251,6 +312,84 @@ class ConversationalSearch {
             if (!this.isModeMenuOpen) return;
             if (this.modeMenu.contains(e.target) || this.modeToggleBtn.contains(e.target)) return;
             this.closeModeMenu();
+        });
+    }
+
+    // The sidebar's width and the body's padding-right both read the same CSS
+    // variable, so writing it to the document root is the entire "apply" step.
+    applySidebarWidth(px) {
+        this.sidebarWidth = clampSidebarWidth(px);
+        document.documentElement.style.setProperty(
+            '--docs-ai-sidebar-width',
+            `${this.sidebarWidth}px`
+        );
+    }
+
+    // Tuck the sidebar below the top navbar (and announcement banner, if any)
+    // by measuring their bottom edge in viewport coords and feeding it into
+    // a CSS variable. Measured live so it stays correct across responsive
+    // breakpoints, the navbar shrink-on-scroll, and banner dismissals.
+    //
+    // NB: `.main-nav-wrapper` has zero height because its children are all
+    // position: fixed, so we measure `.main-nav` (the actual visible bar)
+    // directly. We still consider every selector and take the max bottom so
+    // the offset survives layout reshuffles where one selector vanishes.
+    applySidebarTopOffset() {
+        const selectors = ['.main-nav', '.main-nav-wrapper', '.announcement-banner'];
+        const offset = selectors.reduce((acc, sel) => {
+            const el = document.querySelector(sel);
+            if (!el) return acc;
+            return Math.max(acc, el.getBoundingClientRect().bottom);
+        }, 0);
+        document.documentElement.style.setProperty(
+            '--docs-ai-sidebar-top-offset',
+            `${Math.max(0, offset)}px`
+        );
+    }
+
+    bindSidebarResize() {
+        if (!this.resizeHandle) return;
+
+        let pointerId = null;
+
+        const onPointerMove = (e) => {
+            // Distance from the right edge of the viewport == new sidebar width.
+            this.applySidebarWidth(window.innerWidth - e.clientX);
+        };
+
+        const stop = (e) => {
+            if (pointerId !== null) {
+                try { this.resizeHandle.releasePointerCapture(pointerId); } catch (_) { /* ignore */ }
+                pointerId = null;
+            }
+            this.resizeHandle.removeEventListener('pointermove', onPointerMove);
+            this.resizeHandle.removeEventListener('pointerup', stop);
+            this.resizeHandle.removeEventListener('pointercancel', stop);
+            document.body.classList.remove('docs-ai-sidebar-resizing');
+            persistSidebarWidth(this.sidebarWidth);
+            this.logInteraction('sidebar_resized', { width_px: this.sidebarWidth });
+        };
+
+        this.resizeHandle.addEventListener('pointerdown', (e) => {
+            // Only react in sidebar mode and only for primary button / touch / pen.
+            if (this.viewMode !== 'sidebar' || e.button !== 0) return;
+            e.preventDefault();
+            pointerId = e.pointerId;
+            try { this.resizeHandle.setPointerCapture(pointerId); } catch (_) { /* ignore */ }
+            document.body.classList.add('docs-ai-sidebar-resizing');
+
+            this.resizeHandle.addEventListener('pointermove', onPointerMove);
+            this.resizeHandle.addEventListener('pointerup', stop);
+            this.resizeHandle.addEventListener('pointercancel', stop);
+        });
+
+        // Re-clamp on viewport resize so the persisted width stays within the
+        // allowed range when the window shrinks (and the body push follows).
+        // Also refresh the top offset since the navbar may resize responsively.
+        window.addEventListener('resize', () => {
+            const clamped = clampSidebarWidth(this.sidebarWidth);
+            if (clamped !== this.sidebarWidth) this.applySidebarWidth(clamped);
+            if (this.viewMode === 'sidebar') this.applySidebarTopOffset();
         });
     }
 
@@ -383,6 +522,16 @@ class ConversationalSearch {
             this.overlay.classList.toggle('open', isFullscreen);
             document.body.style.overflow = isFullscreen ? 'hidden' : '';
         }
+
+        if (mode === 'sidebar') this.applySidebarTopOffset();
+        this.updateBodyPush();
+    }
+
+    // Sidebar mode reserves space on the right by adding padding to <body>.
+    // Centralized so open()/close()/applyViewMode() all agree on the truth.
+    updateBodyPush() {
+        const shouldPush = this.isOpen && this.viewMode === 'sidebar';
+        document.body.classList.toggle('docs-ai-sidebar-pushed', shouldPush);
     }
 
     setViewMode(mode) {
@@ -428,6 +577,8 @@ class ConversationalSearch {
             document.body.style.overflow = 'hidden';
         }
 
+        if (this.viewMode === 'sidebar') this.applySidebarTopOffset();
+        this.updateBodyPush();
         setTimeout(() => this.input.focus(), 300);
     }
 
@@ -445,6 +596,7 @@ class ConversationalSearch {
         this.overlay.classList.remove('open');
         document.body.style.overflow = '';
         this.closeModeMenu();
+        this.updateBodyPush();
 
         if (!this.isHomepage || !this.homeAiBtnVisible) {
             this.floatButton.classList.remove('hidden');

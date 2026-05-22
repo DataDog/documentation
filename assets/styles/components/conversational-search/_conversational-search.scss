@@ -149,6 +149,21 @@ $conv-neutral-200: #efefef;
     }
 }
 
+// In the compact modes the default 17px nowrap chips overflow horizontally;
+// reuse the mobile treatment (smaller font, wrap, auto height) so they pack
+// nicely on multiple lines instead of forcing a horizontal scroll.
+.conv-search-sidebar.mode-floating,
+.conv-search-sidebar.mode-sidebar {
+    .conv-search-suggestion {
+        font-size: 13px;
+        line-height: 18px;
+        white-space: normal;
+        height: auto;
+        border-radius: 16px;
+        padding: 7px 14px;
+    }
+}
+
 // Chat messages
 .conv-search-message {
     display: flex;

@@ -2,6 +2,39 @@
 $conv-float-btn-bg: #632CA6;
 $conv-float-btn-bg-hover: #4f2384;
 
+// Single source of truth for the sidebar width — shared by the panel's own
+// `width` and the body's `padding-right` push (see body.docs-ai-sidebar-pushed
+// below) so the two stay in sync without duplication.
+//
+// `--docs-ai-sidebar-top-offset` is measured at runtime from the top navbar
+// (and announcement banner, if any) so the sidebar tucks in just below them.
+:root {
+    --docs-ai-sidebar-width: 440px;
+    --docs-ai-sidebar-top-offset: 0px;
+}
+
+// Sidebar mode pushes the page content leftward by the sidebar width.
+// Body padding leaves fixed-positioned chrome (navbar, banner) at full viewport
+// width — the sidebar's own z-index keeps it on top of them — while all
+// in-flow content (containers, footer, etc.) shrinks to fit the available space.
+body {
+    transition: padding-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.docs-ai-sidebar-pushed {
+        padding-right: var(--docs-ai-sidebar-width);
+    }
+
+    @media (max-width: 640px) {
+        // On small viewports the sidebar collapses to a full takeover, so the
+        // push effect (and its transition) would only cause a flicker.
+        transition: none;
+
+        &.docs-ai-sidebar-pushed {
+            padding-right: 0;
+        }
+    }
+}
+
 .conv-search-float-btn {
     position: fixed;
     bottom: 24px;
@@ -107,7 +140,7 @@ $conv-float-btn-bg-hover: #4f2384;
         transform-origin: bottom right;
         width: 420px;
         max-width: calc(100vw - 32px);
-        height: 620px;
+        height: 570px;
         max-height: calc(100vh - 48px);
         border-radius: 20px;
 
@@ -119,19 +152,26 @@ $conv-float-btn-bg-hover: #4f2384;
     }
 
     // --- Mode: Sidebar (right-docked, full height) ------------------------
+    // No glow / drop shadow — the sidebar is treated as a docked surface, not
+    // a floating panel. A 1px left border is enough demarcation against the
+    // pushed page content. `top` is driven by the measured navbar offset so
+    // the sidebar tucks in just below the top chrome instead of covering it.
     &.mode-sidebar {
-        top: 0;
+        top: var(--docs-ai-sidebar-top-offset);
         right: 0;
         bottom: 0;
         transform: translateX(16px);
         transform-origin: right center;
-        width: 440px;
-        max-width: 92vw;
-        height: 100vh;
+        width: var(--docs-ai-sidebar-width);
+        min-width: 280px;
+        // String-interpolated so Sass passes the CSS-native min() through to
+        // the browser instead of trying to evaluate vw and px together.
+        max-width: #{"min(800px, 92vw)"};
+        // top + bottom define the height — no explicit `height` needed and
+        // it stays correct as the top offset changes.
         border-radius: 0;
-        box-shadow:
-            -8px 0 24px 0 rgba(0, 0, 0, 0.08),
-            0 0 16px 0 rgba($conv-search-purple, 0.25);
+        border-left: 1px solid $conv-search-border;
+        box-shadow: none;
 
         &.open {
             transform: translateX(0);
@@ -503,5 +543,79 @@ $conv-float-btn-bg-hover: #4f2384;
 @media (max-width: 640px) {
     .conv-search-mode-switcher {
         display: none;
+    }
+}
+
+// --- Sidebar resize handle ---------------------------------------------------
+// Thin invisible strip on the left edge of the sidebar. Only enabled (visible
+// + interactive) when the panel is in sidebar mode — every other mode hides it
+// so it can't be grabbed by accident. The visible "rail" is a 1px line that
+// brightens on hover/drag, sitting flush with the sidebar's left border.
+.conv-search-resize-handle {
+    display: none;
+}
+
+.conv-search-sidebar.mode-sidebar .conv-search-resize-handle {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 6px;
+    margin-left: -3px;
+    cursor: col-resize;
+    z-index: 2;
+    background: transparent;
+    transition: background 0.15s ease;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 3px;
+        width: 1px;
+        background: transparent;
+        transition: background 0.15s ease;
+    }
+
+    &:hover::after,
+    body.docs-ai-sidebar-resizing &::after {
+        background: $conv-search-purple;
+    }
+}
+
+// While the user is dragging the handle, kill transitions on every element
+// involved so the resize feels immediate (no rubber-banding from the
+// padding-right transition on body or width transition on the panel).
+body.docs-ai-sidebar-resizing {
+    user-select: none;
+    cursor: col-resize;
+    transition: none !important;
+
+    .conv-search-sidebar {
+        transition: none !important;
+    }
+}
+
+// --- Compact-mode header tweaks (floating + sidebar) -------------------------
+// In the narrower modes there isn't room for a labeled "New Question" pill, so
+// we collapse it to a circular icon button that matches the close/mode icons.
+.conv-search-sidebar.mode-floating,
+.conv-search-sidebar.mode-sidebar {
+    .conv-search-header {
+        padding: 12px 16px;
+    }
+
+    .conv-search-new {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 50%;
+        gap: 0;
+
+        span {
+            display: none;
+        }
     }
 }
