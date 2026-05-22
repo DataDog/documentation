@@ -89,7 +89,7 @@ If you are a first-time user, follow these steps to register an account:
 
 ## Create a case
 
-To create a new case:
+To create a case:
 
 1. Navigate to [the Datadog GovCloud support portal](https://govsupport.ddog-gov.com).
 1. Log in with the username format `[name]@[domain].ddgov.support`.
