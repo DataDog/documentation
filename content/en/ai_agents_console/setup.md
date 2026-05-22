@@ -1,5 +1,6 @@
 ---
 title: Set Up Agent Console
+description: Set up integrations for Claude Code, Cursor, and GitHub Copilot to monitor coding agent activity in Datadog Agent Console.
 further_reading:
   - link: '/ai_agents_console/'
     tag: 'Documentation'
@@ -54,7 +55,7 @@ The following procedure configures Claude Code to send telemetry directly to Dat
    <div class="alert alert-info">To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
 4. Restart Claude Code.
 
-After you restart Claude Code, navigate to the [Agent Console][1] and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
+After you restart Claude Code, navigate to the [Agent Console][1] and click the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
 
 ### Option 3: Forward data through the Datadog Agent
 
@@ -89,7 +90,7 @@ After you restart Claude Code, navigate to the [Agent Console][1] and click on t
    <div class="alert alert-info">To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
 5. Restart Claude Code.
 
-After you restart Claude Code, navigate to the [Agent Console][1] and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
+After you restart Claude Code, navigate to the [Agent Console][1] and click the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
 
 ## Cursor
 
