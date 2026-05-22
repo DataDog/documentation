@@ -51,13 +51,13 @@ If you find that a calculated field is valuable in the long-term, update your [l
 
 ## Create a calculated field
 
-You can create a calculated field from two entry points in the Log Explorer: from the **Add** menu or from within a specific log event or attribute.
+You can create a calculated field from two entry points in the Log Explorer: from the {{< ui >}}Add{{< /ui >}} menu or from within a specific log event or attribute.
 
 ### From the Add menu
 
 1. Navigate to the [Log Explorer][5].
-1. Click the **Add** button next to the search bar.
-1. Select **Calculated field**.
+1. Click the {{< ui >}}Add{{< /ui >}} button next to the search bar.
+1. Select {{< ui >}}Calculated field{{< /ui >}}.
 
 This is useful when you are already familiar with the structure and content of the logs and want to quickly define a formula or parsing rule.
 
@@ -66,7 +66,7 @@ This is useful when you are already familiar with the structure and content of t
 1. Navigate to the [Log Explorer][5].
 1. Click on a log event to open the side panel.
 1. Select a JSON attribute to open the context menu.
-1. Choose **Create calculated from...**.
+1. Choose {{< ui >}}Create calculated from...{{< /ui >}}.
 
 {{< img src="/logs/explorer/calculated_fields/add_calculated_field_side_panel.png" alt="Creating a calculated field from the log side panel in the Log Explorer" style="width:70%;" >}}
 

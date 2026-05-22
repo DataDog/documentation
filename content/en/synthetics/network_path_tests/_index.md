@@ -104,6 +104,8 @@ Requires [Agent version][7] `7.72` or higher.
        workers: 4 # default
    ```
 
+   **Note**: Set `workers` to a value greater than or equal to the number of Network Path tests running concurrently on the Agent.
+
 3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
 
 4. [Restart the Agent][8] for it to appear in the list of available test locations.

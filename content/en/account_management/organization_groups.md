@@ -5,7 +5,7 @@ further_reading:
 - link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Managing Multiple-Organization Accounts"
-- link: "/getting_started/organization_topology/"
+- link: "/account_management/organization_topology/"
   tag: "Documentation"
   text: "Organization Topology"
 - link: "/account_management/rbac/"

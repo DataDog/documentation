@@ -24,7 +24,7 @@ All saved views except for the [default view](#default-views) are shared across 
 1. Click {{< ui >}}+ Save{{< /ui >}}.
 1. Enter a name and click {{< ui >}}Save{{< /ui >}} to create a saved view.
 
-To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of **Events Explorer**. From the saved view entry in the Views panel, you can:
+To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of {{< ui >}}Events Explorer{{< /ui >}}. From the saved view entry in the Views panel, you can:
 
 * {{< ui >}}Load{{< /ui >}} or {{< ui >}}reload{{< /ui >}} a saved view.
 * {{< ui >}}Update{{< /ui >}} a saved view with the configuration of the current view.
@@ -34,7 +34,7 @@ To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of *
 
 ## Default views
 
-To access your default view, expand {{< ui >}}> Views{{< /ui >}} to the left of **Events Explorer**. Your existing Events Explorer view is your default saved view. This configuration is only accessible and viewable to you. Updating this configuration does not have any impact on your organization.
+To access your default view, expand {{< ui >}}> Views{{< /ui >}} to the left of {{< ui >}}Events Explorer{{< /ui >}}. Your existing Events Explorer view is your default saved view. This configuration is only accessible and viewable to you. Updating this configuration does not have any impact on your organization.
 
 Temporarily override your default saved view by adding facets to your search query and clicking {{< ui >}}Update your default view{{< /ui >}}. To create a new saved view, Click the {{< ui >}}+ Create a New Saved View{{< /ui >}} button.
 
