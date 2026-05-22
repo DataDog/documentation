@@ -2,21 +2,23 @@
 $conv-float-btn-bg: #632CA6;
 $conv-float-btn-bg-hover: #4f2384;
 
-// Single source of truth for the sidebar width — shared by the panel's own
-// `width` and the body's `padding-right` push (see body.docs-ai-sidebar-pushed
-// below) so the two stay in sync without duplication.
-//
-// `--docs-ai-sidebar-top-offset` is measured at runtime from the top navbar
-// (and announcement banner, if any) so the sidebar tucks in just below them.
+// Single source of truth for each resizable mode's width. JS owns the values
+// (drag handler clamps + writes them); CSS just reads them. Defaults here
+// only matter for the first render before JS has initialized.
+//   - sidebar:  shared by .mode-sidebar width, body.docs-ai-sidebar-pushed
+//               padding-right, and the right-edge clip applied to the fixed
+//               top chrome (one variable, three consumers, zero drift).
+//   - floating: feeds .mode-floating width.
 :root {
     --docs-ai-sidebar-width: 440px;
-    --docs-ai-sidebar-top-offset: 0px;
+    --docs-ai-floating-width: 420px;
+    --docs-ai-floating-height: 570px;
 }
 
-// Sidebar mode pushes the page content leftward by the sidebar width.
-// Body padding leaves fixed-positioned chrome (navbar, banner) at full viewport
-// width — the sidebar's own z-index keeps it on top of them — while all
-// in-flow content (containers, footer, etc.) shrinks to fit the available space.
+// Sidebar mode pushes the page content leftward by the sidebar width, and we
+// also pull the right edge of the fixed top chrome inward by the same amount
+// so the sidebar takes the full viewport height without ever covering the
+// navbar.
 body {
     transition: padding-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -31,6 +33,31 @@ body {
 
         &.docs-ai-sidebar-pushed {
             padding-right: 0;
+        }
+    }
+}
+
+// Fixed top chrome (announcement banner + main nav) shrinks from the right
+// when the sidebar is pushed. `transition` lives on the elements themselves
+// so the close animation is symmetric with the open one.
+.announcement-banner,
+.main-nav-wrapper,
+.main-nav-wrapper .main-nav {
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.docs-ai-sidebar-pushed {
+    .announcement-banner,
+    .main-nav-wrapper,
+    .main-nav-wrapper .main-nav {
+        right: var(--docs-ai-sidebar-width);
+    }
+
+    @media (max-width: 640px) {
+        .announcement-banner,
+        .main-nav-wrapper,
+        .main-nav-wrapper .main-nav {
+            right: 0;
         }
     }
 }
@@ -133,14 +160,18 @@ body {
     }
 
     // --- Mode: Floating (small bottom-right panel) ------------------------
+    // Width and height are both driven by CSS variables so the user can drag
+    // any of the three handles (left edge → width, top edge → height,
+    // top-left corner → both). `right: 24px; bottom: 24px;` keep the
+    // bottom-right corner pinned while dragging grows the panel up/left.
     &.mode-floating {
         bottom: 24px;
         right: 24px;
         transform: translateY(8px) scale(0.98);
         transform-origin: bottom right;
-        width: 420px;
+        width: var(--docs-ai-floating-width);
         max-width: calc(100vw - 32px);
-        height: 570px;
+        height: var(--docs-ai-floating-height);
         max-height: calc(100vh - 48px);
         border-radius: 20px;
 
@@ -152,12 +183,11 @@ body {
     }
 
     // --- Mode: Sidebar (right-docked, full height) ------------------------
-    // No glow / drop shadow — the sidebar is treated as a docked surface, not
-    // a floating panel. A 1px left border is enough demarcation against the
-    // pushed page content. `top` is driven by the measured navbar offset so
-    // the sidebar tucks in just below the top chrome instead of covering it.
+    // The sidebar spans the full viewport height — the top chrome is shrunk
+    // from the right by the same amount (see `body.docs-ai-sidebar-pushed`
+    // above) so the sidebar never has to dodge it.
     &.mode-sidebar {
-        top: var(--docs-ai-sidebar-top-offset);
+        top: 0;
         right: 0;
         bottom: 0;
         transform: translateX(16px);
@@ -167,8 +197,6 @@ body {
         // String-interpolated so Sass passes the CSS-native min() through to
         // the browser instead of trying to evaluate vw and px together.
         max-width: #{"min(800px, 92vw)"};
-        // top + bottom define the height — no explicit `height` needed and
-        // it stays correct as the top offset changes.
         border-radius: 0;
         border-left: 1px solid $conv-search-border;
         box-shadow: none;
@@ -546,27 +574,32 @@ body {
     }
 }
 
-// --- Sidebar resize handle ---------------------------------------------------
-// Thin invisible strip on the left edge of the sidebar. Only enabled (visible
-// + interactive) when the panel is in sidebar mode — every other mode hides it
-// so it can't be grabbed by accident. The visible "rail" is a 1px line that
-// brightens on hover/drag, sitting flush with the sidebar's left border.
+// --- Resize handles ----------------------------------------------------------
+// Three thin invisible strips/dots on the panel's edges, each tagged with
+// `data-resize` (the JS reads this to know which dimension(s) to drive).
+// Visibility is mode-gated below: sidebar mode shows just the left edge,
+// floating mode exposes all three (left, top, top-left corner).
+//
+// The visible "rail" is a 1px purple line that brightens on hover/drag and
+// sits flush with the panel's edge. The corner handle reuses the same look
+// via an L-shaped indicator.
 .conv-search-resize-handle {
     display: none;
+    position: absolute;
+    background: transparent;
+    z-index: 2;
 }
 
-.conv-search-sidebar.mode-sidebar .conv-search-resize-handle {
+// Left edge — width resizer. Lives in both sidebar and floating modes.
+.conv-search-sidebar.mode-sidebar .conv-search-resize-handle--left,
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--left {
     display: block;
-    position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     width: 6px;
     margin-left: -3px;
     cursor: col-resize;
-    z-index: 2;
-    background: transparent;
-    transition: background 0.15s ease;
 
     &::after {
         content: "";
@@ -578,19 +611,95 @@ body {
         background: transparent;
         transition: background 0.15s ease;
     }
+}
 
-    &:hover::after,
-    body.docs-ai-sidebar-resizing &::after {
-        background: $conv-search-purple;
+// Top edge — height resizer. Floating only (sidebar is already full height).
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--top {
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    margin-top: -3px;
+    cursor: row-resize;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 3px;
+        height: 1px;
+        background: transparent;
+        transition: background 0.15s ease;
     }
 }
 
-// While the user is dragging the handle, kill transitions on every element
+// Top-left corner — drives both width and height at once. Floating only.
+// Sits above the edge handles in the corner overlap so the diagonal cursor
+// wins over col/row when the pointer is in the corner zone.
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--corner {
+    display: block;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    cursor: nwse-resize;
+    z-index: 3;
+
+    // L-shaped corner mark (two 1px segments) — same brighten behaviour as
+    // the edge indicators so the three handles feel like one family.
+    &::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        width: 6px;
+        height: 6px;
+        border-top: 1px solid transparent;
+        border-left: 1px solid transparent;
+        transition: border-color 0.15s ease;
+    }
+}
+
+// Lit-state for each indicator. Highlights are axis-scoped via the body
+// classes JS adds during a drag (`docs-ai-panel-resizing-width` /
+// `-height`), so dragging the left handle only lights the left rail,
+// dragging the corner lights all three (since it drives both axes).
+.conv-search-resize-handle--left:hover::after,
+body.docs-ai-panel-resizing-width .conv-search-resize-handle--left::after {
+    background: $conv-search-purple;
+}
+
+.conv-search-resize-handle--top:hover::after,
+body.docs-ai-panel-resizing-height .conv-search-resize-handle--top::after {
+    background: $conv-search-purple;
+}
+
+.conv-search-resize-handle--corner:hover::after,
+body.docs-ai-panel-resizing-width.docs-ai-panel-resizing-height .conv-search-resize-handle--corner::after {
+    border-top-color: $conv-search-purple;
+    border-left-color: $conv-search-purple;
+}
+
+// Floating mode has a 20px border-radius — inset the edge handles' hit areas
+// past the curve so they line up with the straight portions of the edges.
+// (The corner handle owns the rounded section itself.)
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--left {
+    top: 20px;
+    bottom: 20px;
+}
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--top {
+    left: 20px;
+    right: 20px;
+}
+
+// While the user is dragging any handle, kill transitions on everything
 // involved so the resize feels immediate (no rubber-banding from the
-// padding-right transition on body or width transition on the panel).
-body.docs-ai-sidebar-resizing {
+// padding-right transition on body or width/height transition on the panel).
+// The actual cursor is set inline by JS based on which axis is active.
+body.docs-ai-panel-resizing {
     user-select: none;
-    cursor: col-resize;
     transition: none !important;
 
     .conv-search-sidebar {

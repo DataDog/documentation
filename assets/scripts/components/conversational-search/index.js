@@ -28,13 +28,67 @@ const VIEW_MODES = ['fullscreen', 'floating', 'sidebar'];
 const DEFAULT_VIEW_MODE = 'fullscreen';
 const VIEW_MODE_STORAGE_KEY = 'docs-ai-view-mode';
 
-// Sidebar resize bounds — kept in sync with `min-width` / `max-width` in
-// `_dialog.scss` so the JS clamp and the CSS clamp agree.
-const SIDEBAR_WIDTH_STORAGE_KEY = 'docs-ai-sidebar-width';
-const SIDEBAR_WIDTH_DEFAULT = 440;
-const SIDEBAR_WIDTH_MIN = 280;
-const SIDEBAR_WIDTH_MAX_PX = 800;
-const SIDEBAR_WIDTH_MAX_VW_PCT = 0.6;
+// Resize config for each mode that supports drag-to-resize. Each mode lists
+// the dimensions it exposes (width / height); a missing dimension means that
+// axis isn't resizable in that mode (e.g. sidebar has no height because it
+// spans the full viewport vertically).
+//
+// Per-dimension fields:
+//   - cssVar / storageKey: where the value is written / persisted
+//   - default / min / maxPx / maxViewportPct: clamp bounds (kept in sync
+//     with the matching CSS so JS and CSS agree on limits)
+//   - viewportOffset: distance in px from the corresponding viewport edge
+//     (right for width, bottom for height) to the panel's anchored edge —
+//     used to derive new size from raw pointer coordinates
+const RESIZABLE_MODES = {
+    sidebar: {
+        width: {
+            cssVar: '--docs-ai-sidebar-width',
+            storageKey: 'docs-ai-sidebar-width',
+            default: 440,
+            min: 280,
+            maxPx: 800,
+            maxViewportPct: 0.6,
+            viewportOffset: 0,
+        },
+    },
+    floating: {
+        width: {
+            cssVar: '--docs-ai-floating-width',
+            storageKey: 'docs-ai-floating-width',
+            default: 420,
+            min: 360,
+            maxPx: 720,
+            maxViewportPct: 0.8,
+            viewportOffset: 24,
+        },
+        height: {
+            cssVar: '--docs-ai-floating-height',
+            storageKey: 'docs-ai-floating-height',
+            default: 570,
+            min: 400,
+            maxPx: 900,
+            maxViewportPct: 0.85,
+            viewportOffset: 24,
+        },
+    },
+};
+
+// Which dimensions each handle drives. The `data-resize` attribute in the
+// markup maps directly to a key here.
+const HANDLE_AXES = {
+    left: ['width'],
+    top: ['height'],
+    corner: ['width', 'height'],
+};
+
+// Cursor shown on the body while a handle is being dragged. Inline on the
+// body so it overrides any element-specific cursors the pointer is over.
+const HANDLE_CURSORS = {
+    left: 'col-resize',
+    top: 'row-resize',
+    corner: 'nwse-resize',
+};
 
 function readStoredViewMode() {
     try {
@@ -49,22 +103,37 @@ function persistViewMode(mode) {
     try { localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode); } catch (_) { /* ignore */ }
 }
 
-function readStoredSidebarWidth() {
+function readStoredSize(mode, dim) {
+    const cfg = RESIZABLE_MODES[mode]?.[dim];
+    if (!cfg) return null;
     try {
-        const raw = parseInt(localStorage.getItem(SIDEBAR_WIDTH_STORAGE_KEY), 10);
-        return Number.isFinite(raw) ? raw : SIDEBAR_WIDTH_DEFAULT;
+        const raw = parseInt(localStorage.getItem(cfg.storageKey), 10);
+        return Number.isFinite(raw) ? raw : cfg.default;
     } catch (_) {
-        return SIDEBAR_WIDTH_DEFAULT;
+        return cfg.default;
     }
 }
 
-function persistSidebarWidth(px) {
-    try { localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, String(px)); } catch (_) { /* ignore */ }
+function persistSize(mode, dim, px) {
+    const cfg = RESIZABLE_MODES[mode]?.[dim];
+    if (!cfg) return;
+    try { localStorage.setItem(cfg.storageKey, String(px)); } catch (_) { /* ignore */ }
 }
 
-function clampSidebarWidth(px) {
-    const max = Math.min(SIDEBAR_WIDTH_MAX_PX, window.innerWidth * SIDEBAR_WIDTH_MAX_VW_PCT);
-    return Math.max(SIDEBAR_WIDTH_MIN, Math.min(px, max));
+function clampSize(mode, dim, px) {
+    const cfg = RESIZABLE_MODES[mode]?.[dim];
+    if (!cfg) return px;
+    const viewport = dim === 'width' ? window.innerWidth : window.innerHeight;
+    const max = Math.min(cfg.maxPx, viewport * cfg.maxViewportPct);
+    return Math.max(cfg.min, Math.min(px, max));
+}
+
+// Walk every (mode, dim) pair in RESIZABLE_MODES. Saves three levels of
+// nested loops at every call site.
+function forEachResizable(callback) {
+    Object.entries(RESIZABLE_MODES).forEach(([mode, dims]) => {
+        Object.keys(dims).forEach((dim) => callback(mode, dim));
+    });
 }
 
 // Auto-rotated client-side messages shown while we wait for the first server `thinking` event.
@@ -132,11 +201,16 @@ class ConversationalSearch {
 
         this.viewMode = readStoredViewMode();
         this.isModeMenuOpen = false;
-        this.sidebarWidth = clampSidebarWidth(readStoredSidebarWidth());
+        this.panelSizes = Object.fromEntries(
+            Object.keys(RESIZABLE_MODES).map((mode) => [mode, {}])
+        );
+        forEachResizable((mode, dim) => {
+            this.panelSizes[mode][dim] = clampSize(mode, dim, readStoredSize(mode, dim));
+        });
 
         if (!this.createElements()) return;
         this.bindEvents();
-        this.applySidebarWidth(this.sidebarWidth);
+        forEachResizable((mode, dim) => this.applyPanelSize(mode, dim, this.panelSizes[mode][dim]));
         this.applyViewMode(this.viewMode);
         this.ready = true;
     }
@@ -195,7 +269,7 @@ class ConversationalSearch {
         this.modeToggleBtn = this.sidebar.querySelector('.conv-search-mode-toggle');
         this.modeMenu = this.sidebar.querySelector('.conv-search-mode-menu');
         this.modeOptions = Array.from(this.sidebar.querySelectorAll('.conv-search-mode-option'));
-        this.resizeHandle = this.sidebar.querySelector('.conv-search-resize-handle');
+        this.resizeHandles = Array.from(this.sidebar.querySelectorAll('.conv-search-resize-handle'));
         return true;
     }
 
@@ -251,42 +325,11 @@ class ConversationalSearch {
         });
 
         this.bindModeSwitcher();
-        this.bindSidebarResize();
-        this.bindTopOffsetTracker();
+        this.bindPanelResize();
         this.bindHomepageObserver();
         this.bindTooltipEvents();
         this.bindClickDelegation();
         this.bindScrollFade();
-    }
-
-    // Keep the sidebar's top offset in sync with the navbar's bottom edge.
-    // The navbar shrinks on scroll and the announcement banner can be
-    // dismissed, so a one-shot measurement on open isn't enough. We listen
-    // to scroll (rAF-throttled) and observe size changes on the navbar +
-    // banner; everything is a no-op until the panel is actually in sidebar
-    // mode and open, so other modes pay nothing.
-    bindTopOffsetTracker() {
-        let rafScheduled = false;
-        const refresh = () => {
-            if (rafScheduled) return;
-            rafScheduled = true;
-            requestAnimationFrame(() => {
-                rafScheduled = false;
-                if (this.viewMode === 'sidebar' && this.isOpen) {
-                    this.applySidebarTopOffset();
-                }
-            });
-        };
-
-        window.addEventListener('scroll', refresh, { passive: true });
-
-        if (typeof ResizeObserver === 'function') {
-            const observer = new ResizeObserver(refresh);
-            ['.main-nav', '.announcement-banner'].forEach((sel) => {
-                const el = document.querySelector(sel);
-                if (el) observer.observe(el);
-            });
-        }
     }
 
     bindModeSwitcher() {
@@ -315,81 +358,104 @@ class ConversationalSearch {
         });
     }
 
-    // The sidebar's width and the body's padding-right both read the same CSS
-    // variable, so writing it to the document root is the entire "apply" step.
-    applySidebarWidth(px) {
-        this.sidebarWidth = clampSidebarWidth(px);
-        document.documentElement.style.setProperty(
-            '--docs-ai-sidebar-width',
-            `${this.sidebarWidth}px`
-        );
+    // Writes the clamped size into the mode/dim-specific CSS variable. The
+    // panel (and, for the sidebar's width, the body push + nav shrink) all
+    // read from there, so writing the variable is the entire "apply" step.
+    applyPanelSize(mode, dim, px) {
+        const cfg = RESIZABLE_MODES[mode]?.[dim];
+        if (!cfg) return;
+        const clamped = clampSize(mode, dim, px);
+        this.panelSizes[mode][dim] = clamped;
+        document.documentElement.style.setProperty(cfg.cssVar, `${clamped}px`);
     }
 
-    // Tuck the sidebar below the top navbar (and announcement banner, if any)
-    // by measuring their bottom edge in viewport coords and feeding it into
-    // a CSS variable. Measured live so it stays correct across responsive
-    // breakpoints, the navbar shrink-on-scroll, and banner dismissals.
-    //
-    // NB: `.main-nav-wrapper` has zero height because its children are all
-    // position: fixed, so we measure `.main-nav` (the actual visible bar)
-    // directly. We still consider every selector and take the max bottom so
-    // the offset survives layout reshuffles where one selector vanishes.
-    applySidebarTopOffset() {
-        const selectors = ['.main-nav', '.main-nav-wrapper', '.announcement-banner'];
-        const offset = selectors.reduce((acc, sel) => {
-            const el = document.querySelector(sel);
-            if (!el) return acc;
-            return Math.max(acc, el.getBoundingClientRect().bottom);
-        }, 0);
-        document.documentElement.style.setProperty(
-            '--docs-ai-sidebar-top-offset',
-            `${Math.max(0, offset)}px`
-        );
-    }
+    bindPanelResize() {
+        if (!this.resizeHandles?.length) return;
 
-    bindSidebarResize() {
-        if (!this.resizeHandle) return;
-
-        let pointerId = null;
-
-        const onPointerMove = (e) => {
-            // Distance from the right edge of the viewport == new sidebar width.
-            this.applySidebarWidth(window.innerWidth - e.clientX);
-        };
-
-        const stop = (e) => {
-            if (pointerId !== null) {
-                try { this.resizeHandle.releasePointerCapture(pointerId); } catch (_) { /* ignore */ }
-                pointerId = null;
-            }
-            this.resizeHandle.removeEventListener('pointermove', onPointerMove);
-            this.resizeHandle.removeEventListener('pointerup', stop);
-            this.resizeHandle.removeEventListener('pointercancel', stop);
-            document.body.classList.remove('docs-ai-sidebar-resizing');
-            persistSidebarWidth(this.sidebarWidth);
-            this.logInteraction('sidebar_resized', { width_px: this.sidebarWidth });
-        };
-
-        this.resizeHandle.addEventListener('pointerdown', (e) => {
-            // Only react in sidebar mode and only for primary button / touch / pen.
-            if (this.viewMode !== 'sidebar' || e.button !== 0) return;
-            e.preventDefault();
-            pointerId = e.pointerId;
-            try { this.resizeHandle.setPointerCapture(pointerId); } catch (_) { /* ignore */ }
-            document.body.classList.add('docs-ai-sidebar-resizing');
-
-            this.resizeHandle.addEventListener('pointermove', onPointerMove);
-            this.resizeHandle.addEventListener('pointerup', stop);
-            this.resizeHandle.addEventListener('pointercancel', stop);
+        this.resizeHandles.forEach((handle) => {
+            const axes = HANDLE_AXES[handle.dataset.resize];
+            if (!axes) return;
+            this.bindResizeHandle(handle, axes);
         });
 
-        // Re-clamp on viewport resize so the persisted width stays within the
-        // allowed range when the window shrinks (and the body push follows).
-        // Also refresh the top offset since the navbar may resize responsively.
+        // Re-clamp every resizable (mode, dim) on viewport resize so persisted
+        // values stay within bounds when the window shrinks.
         window.addEventListener('resize', () => {
-            const clamped = clampSidebarWidth(this.sidebarWidth);
-            if (clamped !== this.sidebarWidth) this.applySidebarWidth(clamped);
-            if (this.viewMode === 'sidebar') this.applySidebarTopOffset();
+            forEachResizable((mode, dim) => {
+                const current = this.panelSizes[mode][dim];
+                const clamped = clampSize(mode, dim, current);
+                if (clamped !== current) this.applyPanelSize(mode, dim, clamped);
+            });
+        });
+    }
+
+    // Wire pointerdown/move/up for a single handle. The handle's axes
+    // determine which dimension(s) the drag drives; the current `viewMode`
+    // determines whether the handle is active at all (a handle whose axes
+    // aren't all resizable in the current mode is a no-op).
+    bindResizeHandle(handle, axes) {
+        const axisKey = handle.dataset.resize;
+        let pointerId = null;
+        let activeMode = null;
+
+        const onPointerMove = (e) => {
+            if (!activeMode) return;
+            // Each axis maps pointer coords to a size: width is distance from
+            // the right edge of the viewport (minus the panel's right gutter),
+            // height is distance from the bottom edge (minus bottom gutter).
+            axes.forEach((dim) => {
+                const cfg = RESIZABLE_MODES[activeMode][dim];
+                if (!cfg) return;
+                const value = dim === 'width'
+                    ? window.innerWidth - cfg.viewportOffset - e.clientX
+                    : window.innerHeight - cfg.viewportOffset - e.clientY;
+                this.applyPanelSize(activeMode, dim, value);
+            });
+        };
+
+        const stop = () => {
+            const finishedMode = activeMode;
+            if (pointerId !== null) {
+                try { handle.releasePointerCapture(pointerId); } catch (_) { /* ignore */ }
+                pointerId = null;
+            }
+            handle.removeEventListener('pointermove', onPointerMove);
+            handle.removeEventListener('pointerup', stop);
+            handle.removeEventListener('pointercancel', stop);
+            document.body.classList.remove('docs-ai-panel-resizing');
+            axes.forEach((dim) => document.body.classList.remove(`docs-ai-panel-resizing-${dim}`));
+            document.body.style.cursor = '';
+            if (finishedMode) {
+                axes.forEach((dim) => {
+                    persistSize(finishedMode, dim, this.panelSizes[finishedMode][dim]);
+                });
+                this.logInteraction('panel_resized', {
+                    mode: finishedMode,
+                    axes,
+                    width_px: this.panelSizes[finishedMode].width,
+                    height_px: this.panelSizes[finishedMode].height,
+                });
+            }
+            activeMode = null;
+        };
+
+        handle.addEventListener('pointerdown', (e) => {
+            const modeCfg = RESIZABLE_MODES[this.viewMode];
+            // Handle is only active if the current mode supports every axis
+            // this handle drives, and only for primary button / touch / pen.
+            if (!modeCfg || e.button !== 0) return;
+            if (!axes.every((dim) => modeCfg[dim])) return;
+            e.preventDefault();
+            activeMode = this.viewMode;
+            pointerId = e.pointerId;
+            try { handle.setPointerCapture(pointerId); } catch (_) { /* ignore */ }
+            document.body.classList.add('docs-ai-panel-resizing');
+            axes.forEach((dim) => document.body.classList.add(`docs-ai-panel-resizing-${dim}`));
+            document.body.style.cursor = HANDLE_CURSORS[axisKey] || 'col-resize';
+
+            handle.addEventListener('pointermove', onPointerMove);
+            handle.addEventListener('pointerup', stop);
+            handle.addEventListener('pointercancel', stop);
         });
     }
 
@@ -523,7 +589,6 @@ class ConversationalSearch {
             document.body.style.overflow = isFullscreen ? 'hidden' : '';
         }
 
-        if (mode === 'sidebar') this.applySidebarTopOffset();
         this.updateBodyPush();
     }
 
@@ -577,7 +642,6 @@ class ConversationalSearch {
             document.body.style.overflow = 'hidden';
         }
 
-        if (this.viewMode === 'sidebar') this.applySidebarTopOffset();
         this.updateBodyPush();
         setTimeout(() => this.input.focus(), 300);
     }
