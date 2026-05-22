@@ -12,6 +12,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Some features depend on newer Python versions than the minimum required version for the SDK. For more details, read [Profile Types][5].
 - The installation requires pip version 18 or above.
 - Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][6].
+- Continuous Profiler is not supported on Windows.
 
 ## Installation
 
