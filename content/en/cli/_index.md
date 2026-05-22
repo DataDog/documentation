@@ -18,14 +18,14 @@ further_reading:
 
 ## Overview
 
-[Pup CLI][1] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes Datadog's API surface for use in AI agent workflows and automated pipelines.
+[Pup CLI][1] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes [Datadog's API surface][9] for use in AI agent workflows and automated pipelines.
 
 Key features:
 
 - **Self-discoverable commands**: Commands are structured so agents can navigate them without external documentation.
 - **Structured output**: Responses are available in JSON and YAML for reliable parsing.
-- **Scoped authentication**: OAuth2 + PKCE for scoped access without long-lived API keys.
-- **Broad product coverage**: Supports monitors, logs, metrics, RUM, security, and more.
+- **Scoped authentication**: OAuth2 and PKCE provide scoped access without long-lived API keys.
+- **Broad product coverage**: Pup supports monitors, logs, metrics, RUM, security, and more.
 
 <div class="alert alert-info">This page covers the Pup's core features. See the <a href="https://github.com/DataDog/pup/blob/main/README.md" target="_blank">Pup repository documentation</a> for the full list of features and commands.</div>
 
@@ -137,3 +137,4 @@ Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run
 [6]: https://github.com/DataDog/pup/blob/main/README.md#agent-skills
 [7]: https://github.com/DataDog/pup/blob/main/docs/EXAMPLES.md#acp-server-ai-agent-integration
 [8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
+[9]: /api/latest/
