@@ -76,7 +76,7 @@ The {{< ui >}}Analytics{{< /ui >}} tab provides granular details for individuals
 
 ### Team comparison
 
-The {{< ui >}}Comparison{{< /ui >}} panel compares your team to other teams and the broader organization across spend, cost per line, and model usage. The line chart shows the selected metric per engineer over time, and the table breaks down spend per engineer, cost per PR, time to merge, and sessions for each team. Insights on the right highlight notable trends, such as teams that are running well above or below the organization average.
+The {{< ui >}}Comparison{{< /ui >}} panel shows your team's spend, cost per line, and model usage relative to other teams and the broader organization. The line chart shows the selected metric per engineer over time, and the table breaks down spend per engineer, cost per PR, time to merge, and sessions for each team. Insights on the right highlight notable trends, such as teams that are running well above or below the organization average.
 
 Select {{< ui >}}Team Details{{< /ui >}} on a row to open that team's view.
 
