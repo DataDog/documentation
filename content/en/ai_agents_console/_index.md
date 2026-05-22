@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview">}}
-Agent Console is in Preview.
+Agent Console is in Preview and available to all Datadog customers.
 {{< /callout >}}
 
 The [Agent Console][1] provides centralized monitoring for AI agents across your organization. It collects logs and metrics from coding agents and Datadog's own Bits AI agents, surfacing them in real time to give you visibility into usage, cost, latency, productivity impact, and emerging problem patterns.
@@ -115,6 +115,10 @@ The {{< ui >}}Bits AI Agents{{< /ui >}} tab shows usage of Datadog's built-in AI
 Individual cards summarize activity for each Bits AI agent, including [Bits AI SRE][11], [Bits AI Dev Agent][12], and [Agent Builder][13]. Select {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
 
 {{< img src="ai_agents_console/bits-ai-agents.png" alt="Bits AI Agents tab with a combined agent activity chart over time and individual cards for Bits AI SRE, Bits AI Dev, and Agent Builder showing recent investigations, sessions, and executions" style="width:100%;" >}}
+
+## Set up
+
+To start sending data to Agent Console, see [Set Up Agent Console][14].
 
 ## Further reading
 
