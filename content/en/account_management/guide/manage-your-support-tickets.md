@@ -70,6 +70,10 @@ If you need help with a related issue, you can open a new ticket or search the D
 
 {{% site-region region="gov,gov2" %}}
 
+## Prerequisites
+
+To receive registration verification codes, password reset emails, and case notification emails, add the `ddog-gov.com` domain to your email allowlist. This includes `help@ddog-gov.com` and `support@ddog-gov.com`.
+
 ## Register on the portal
 
 If you are a first-time user, follow these steps to register an account:
@@ -82,8 +86,6 @@ If you are a first-time user, follow these steps to register an account:
 1. Click **Verify**.
 
 **Note**: After registration, your login username is your email with `.ddgov.support` appended (for example, `[name]@[domain].ddgov.support`). Use this full username when logging in.
-
-**Note**: To receive registration verification codes, password reset emails, and case notification emails, add the `ddog-gov.com` domain to your email allowlist. This includes `help@ddog-gov.com` and `support@ddog-gov.com`.
 
 ## Create a case
 
