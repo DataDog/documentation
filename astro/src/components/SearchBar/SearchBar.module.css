@@ -49,15 +49,10 @@
   padding: 0 var(--space-sm);
   color: var(--color-text-muted);
   cursor: pointer;
-  line-height: 1;
 }
 
 .search-bar__submit:hover {
   color: var(--color-brand);
-}
-
-.search-bar__submit svg {
-  display: block;
 }
 
 /* Visual hint that `/` focuses the input. Ported from Hugo's
@@ -81,7 +76,9 @@
   background: var(--color-bg);
   pointer-events: none;
   user-select: none;
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
 }
 
 .search-bar__form:focus-within .search-bar__shortcut {
