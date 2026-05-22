@@ -1,24 +1,11 @@
 ---
-title: Progressive Rollouts & Canaries
+title: Progressive Rollouts and Canaries
 description: Gradually roll out feature flags on a schedule with optional guardrail metrics for canary releases.
-further_reading:
-- link: "/feature_flags/concepts/targeting_rules"
-  tag: "Documentation"
-  text: "Targeting Rules and Filters"
-- link: "/feature_flags/concepts/traffic_splitting"
-  tag: "Documentation"
-  text: "Traffic Splitting and Randomization"
-- link: "/feature_flags/concepts/evaluation_tracking"
-  tag: "Documentation"
-  text: "Evaluation Tracking"
-- link: "/feature_flags/concepts/notifications"
-  tag: "Documentation"
-  text: "Notifications"
 ---
 
 ## Overview
 
-Progressive rollouts let you gradually release new functionality on a schedule instead of enabling a flag for 100% of traffic at once. **Canaries** are progressive rollouts that monitor **guardrail metrics** and automatically pause or abort when regressions are detected.
+Progressive rollouts let you gradually release new functionality on a schedule instead of enabling a flag for 100% of traffic at once. **Canaries** are progressive rollouts that monitor **guardrail metrics** and automatically pause or abort the rollout when they detect regressions.
 
 ## Progressive rollouts
 
@@ -30,7 +17,7 @@ Progressive rollouts let you gradually release new functionality on a schedule i
    - Set the percentage for each step, or delete steps to simplify the schedule.
    - Customize the delay between steps for a slower or faster rollout.
 
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Multistep progressive rollout configuration" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Multistep progressive rollout configuration." style="width:100%;" >}}
 
 ### Start and control the rollout
 
@@ -42,11 +29,11 @@ After the rollout starts:
 - **Pause** to stop progress temporarily.
 - **Abort** to revert all progress on the rollout.
 
-Monitor progress with [evaluation tracking](/feature_flags/concepts/evaluation_tracking/) and configure [notifications](/feature_flags/concepts/notifications/) for rollout events.
+Monitor progress with evaluation tracking and configure notifications for rollout events.
 
 ## Canaries
 
-A canary is a progressive rollout that includes **guardrail metrics**. Guardrail metrics measure standard KPIs such as error rate and long task count.
+A canary is a progressive rollout that includes **guardrail metrics**. Guardrail metrics measure standard key performance indicators (KPIs) such as error rate and long task count.
 
 ### How canaries work
 
@@ -55,7 +42,7 @@ When guardrail metrics are configured, the rollout monitors metrics in both grou
 - **Treatment**: Subjects receiving the variant you are rolling out
 - **Control**: Subjects not receiving the treatment variant
 
-If a statistically significant change is observed for any guardrail metric (direction depends on metric type), the rollout is automatically **paused** or **aborted** based on the behavior you configure when you create the canary rollout.
+When the canary detects a statistically significant change in any guardrail metric, it automatically **pauses** or **aborts** the rollout. The direction of the change depends on the metric type. You choose the pause-or-abort behavior when you create the canary.
 
 ### Configure a canary rollout
 
@@ -63,13 +50,4 @@ If a statistically significant change is observed for any guardrail metric (dire
 2. Add guardrail metrics to the rollout configuration.
 3. Choose whether guardrail failures should pause or abort the rollout.
 
-<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> on client SDKs can impact <a href="/real_user_monitoring/">RUM</a> costs when guardrail metrics rely on exposure data.</div>
-
-## Related concepts
-
-- [Traffic splitting](/feature_flags/concepts/traffic_splitting/) explains how percentage rollouts assign subjects deterministically.
-- [Targeting rules](/feature_flags/concepts/targeting_rules/) define filters and rule types, including progressive rollouts and experiments.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> on client SDKs can impact <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> costs when guardrail metrics rely on exposure data.</div>

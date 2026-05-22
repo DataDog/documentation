@@ -1,27 +1,20 @@
 ---
 title: Dynamic Configuration
 description: Change application behavior with feature flag configuration instead of code deployments.
-further_reading:
-- link: "/feature_flags/concepts/variants_and_flag_types"
-  tag: "Documentation"
-  text: "Variants and Flag Types"
-- link: "/feature_flags/concepts/json_schema_validation"
-  tag: "Documentation"
-  text: "JSON Schema Validation"
 ---
 
 ## Overview
 
-**Dynamic configuration** lets you change application behavior from the Datadog UI without a code deployment. Your application reads configuration values from feature flag variants—strings, numbers, or JSON objects—and you update those values in Datadog when you want to change behavior.
+**Dynamic configuration** lets you change application behavior from the Datadog UI without a code deployment. Your application reads configuration values (Strings, Numbers, or JSON objects) from feature flag variants. To change behavior, update those values in Datadog.
 
 ## How it works
 
 1. Define variables in your application that read from a feature flag variant.
-2. Create a flag with the appropriate [variant type](/feature_flags/concepts/variants_and_flag_types/) (string, integer, number, or JSON).
-3. Update variant values or [targeting rules](/feature_flags/concepts/targeting_rules/) in Datadog.
+2. Create a flag with the appropriate variant type (String, Integer, Number, or JSON).
+3. Update variant values or targeting rules in Datadog.
 4. The SDK picks up changes on the next configuration refresh.
 
-For JSON configuration, use [JSON Schema validation](/feature_flags/concepts/json_schema_validation/) to help enforce type safety on variant values.
+For JSON configuration, use JSON Schema validation to help enforce type safety on variant values.
 
 ## Example: JSON configuration flag
 
@@ -37,7 +30,7 @@ For JSON configuration, use [JSON Schema validation](/feature_flags/concepts/jso
 }
 ```
 
-2. Optionally add a [JSON Schema](/feature_flags/concepts/json_schema_validation/) to validate future variant values.
+2. Optionally add a JSON Schema to validate future variant values.
 
 ### Read configuration in code
 
@@ -85,14 +78,10 @@ config, _ := client.ObjectValue(ctx, "homepage-config", defaultVal, evalCtx)
 
 ### Run experiments
 
-Create additional variants with different configuration values and use an **experiment** targeting rule to compare behavior. See [Targeting Rules and Filters](/feature_flags/concepts/targeting_rules/).
+Create additional variants with different configuration values and use an **experiment** targeting rule to compare behavior.
 
 ## Common use cases
 
 - **Marketing**: Update headline copy, CTA text, or colors without deploying.
 - **AI and ML**: Compare model parameters or feature toggles across variants in experiments.
 - **Operations**: Adjust limits, timeouts, or feature thresholds per environment.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

@@ -3,7 +3,7 @@ title: Use Cases
 description: Common use cases for Datadog Feature Flags.
 ---
 
-Learn how teams use Datadog Feature Flags for rollouts, kill switches, and dynamic configuration.
+Datadog Feature Flags support several common workflows. Each use case below shows step-by-step setup and code examples for a specific scenario.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/feature_flags/use_cases/progressive_rollouts" >}}Progressive Rollouts and Canaries{{< /nextlink >}}

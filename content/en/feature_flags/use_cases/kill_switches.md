@@ -1,13 +1,7 @@
 ---
 title: Kill Switches
-description: Use boolean feature flags as kill switches to disable features instantly without redeploying.
+description: Use Boolean feature flags as kill switches to disable features instantly without redeploying.
 further_reading:
-- link: "/feature_flags/concepts/targeting_rules"
-  tag: "Documentation"
-  text: "Targeting Rules and Filters"
-- link: "/feature_flags/concepts/environments"
-  tag: "Documentation"
-  text: "Environments"
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Client-Side SDKs"
@@ -15,7 +9,7 @@ further_reading:
 
 ## Overview
 
-A **kill switch** is a boolean feature flag that lets you disable a feature instantly when something goes wrong—without redeploying your application. Operations and engineering teams can turn off a problematic feature from the Datadog UI while the application continues to run.
+A **kill switch** is a Boolean feature flag that lets you disable a feature instantly when something goes wrong, without redeploying your application. Operations and engineering teams can turn off a problematic feature from the Datadog UI while the application continues to run.
 
 ## When to use a kill switch
 
@@ -27,16 +21,16 @@ Use kill switches for:
 
 ## Set up a kill switch
 
-### Step 1: Create a boolean flag
+### Step 1: Create a Boolean flag
 
 1. Navigate to [**Create Feature Flag**][1].
 2. Set the variant type to **Boolean**.
-3. Set distribution channels appropriate for where the feature runs (client, server, or both).
+3. Choose the distribution channels based on where the feature runs (client, server, or both).
 4. Save the flag.
 
 ### Step 2: Evaluate the flag in your application
 
-Wrap the feature code with a boolean evaluation and a safe default of `false` (feature off):
+Wrap the feature code with a Boolean evaluation and a safe default of `false` (feature off):
 
 {{< programming-lang-wrapper langs="javascript,python,go" >}}
 
@@ -84,8 +78,8 @@ Deploy the application with the flag check in place before enabling the flag in 
 
 ### Step 3: Enable and target the flag
 
-1. Add [targeting rules](/feature_flags/concepts/targeting_rules/) if you want to limit the feature to specific subjects.
-2. Enable the flag in the target [environment](/feature_flags/concepts/environments/).
+1. Add targeting rules if you want to limit the feature to specific subjects.
+2. Enable the flag in the target environment.
 
 ### Step 4: Disable the feature in an emergency
 
@@ -100,7 +94,7 @@ The SDK returns the default value (`false`) on the next configuration refresh, a
 
 - Use a default value of `false` so the feature is off when the flag is disabled or unavailable.
 - Test the kill switch in Staging before relying on it in Production.
-- Use [evaluation tracking](/feature_flags/concepts/evaluation_tracking/) to confirm the flag state during an incident.
+- Use evaluation tracking to confirm the flag state during an incident.
 
 ## Further reading
 
