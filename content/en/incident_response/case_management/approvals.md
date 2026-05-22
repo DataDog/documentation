@@ -53,7 +53,7 @@ Available triggers include:
 
 See [Case automation rules][1] for setup instructions.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
