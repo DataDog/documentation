@@ -1,3 +1,4 @@
+// Renders each endpoint page in plaintext.
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import { renderApiEndpointMd } from "@components/ApiEndpoint/plaintext/ApiEndpoint";

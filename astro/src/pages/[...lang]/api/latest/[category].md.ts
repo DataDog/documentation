@@ -1,5 +1,9 @@
+// Renders each category summary page in plaintext.
 import type { APIRoute, GetStaticPaths } from "astro";
-import { getCategoryStubsView, getCategoryViewBySlug } from "@lib/api/viewsBuilder";
+import {
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+} from "@lib/api/viewsBuilder";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -34,24 +38,23 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
-  const lines: string[] = [`# ${category.name}`, ""];
 
-  if (category.deprecated) {
-    lines.push("> **Warning:** This endpoint is deprecated.", "");
-  }
+  const deprecationInfo = category.deprecated
+    ? `> **Warning:** This endpoint is deprecated.\n\n`
+    : "";
 
-  if (category.description) {
-    lines.push(category.description.trim(), "");
-  }
+  const categoryDescription = category.description
+    ? `${category.description.trim()}\n\n`
+    : "";
 
-  if (category.operations.length > 0) {
-    lines.push("## Actions", "");
-    for (const op of category.operations) {
-      lines.push(`- [${op.summary}](${categoryBaseHref}${op.slug}/)`);
-    }
-  }
+  const actionsList =
+    category.operations.length > 0
+      ? `## Actions\n\n${category.operations
+          .map((op) => `- [${op.summary}](${categoryBaseHref}${op.slug}/)`)
+          .join("\n")}\n`
+      : "";
 
-  const body = lines.join("\n") + "\n";
+  const body = `# ${category.name}\n\n${deprecationInfo}${categoryDescription}${actionsList}`;
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
