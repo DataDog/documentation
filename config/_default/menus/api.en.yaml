@@ -11953,6 +11953,19 @@ menu:
         unstable:
           - v2
         order: 30
+    - name: List LLM Observability dataset versions
+      url: '#list-llm-observability-dataset-versions'
+      identifier: llm-observability-list-llm-observability-dataset-versions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetVersions
+        unstable:
+          - v2
+        order: 44
     - name: Delete LLM Observability dataset records
       url: '#delete-llm-observability-dataset-records'
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -12005,6 +12018,45 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Unlock LLM Observability dataset draft state
+      url: '#unlock-llm-observability-dataset-draft-state'
+      identifier: llm-observability-unlock-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 43
+    - name: Lock LLM Observability dataset draft state
+      url: '#lock-llm-observability-dataset-draft-state'
+      identifier: llm-observability-lock-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 42
+    - name: Get LLM Observability dataset draft state
+      url: '#get-llm-observability-dataset-draft-state'
+      identifier: llm-observability-get-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 41
     - name: Update an LLM Observability dataset
       url: '#update-an-llm-observability-dataset'
       identifier: llm-observability-update-an-llm-observability-dataset
