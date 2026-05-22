@@ -9,7 +9,7 @@
 
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import type { ResponseData } from '@lib/api/schemas/views';
-import { nodesFromMd, tagNode } from '@lib/plaintext/helpers';
+import { NO_CONTENT, nodesFromMd, tagNode } from '@lib/plaintext/helpers';
 import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
 import { exampleNodes } from '@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
 
@@ -39,14 +39,14 @@ function innerNodes(r: ResponseData): MarkdocNode[] {
   const hasExamples = (r.examples?.length ?? 0) > 0;
 
   if (!hasSchema && !hasExamples) {
-    return [];
+    return NO_CONTENT;
   }
 
   if (hasSchema && hasExamples) {
     const table = apiSchemaTableNode(r.schema!);
     return [
       tagNode('tabs', {}, [
-        tagNode('tab', { label: 'Model' }, table ? [table] : []),
+        tagNode('tab', { label: 'Model' }, table ? [table] : NO_CONTENT),
         tagNode('tab', { label: 'Example' }, exampleNodes(r.examples!)),
       ]),
     ];
@@ -54,7 +54,7 @@ function innerNodes(r: ResponseData): MarkdocNode[] {
 
   if (hasSchema) {
     const table = apiSchemaTableNode(r.schema!);
-    return table ? [table] : [];
+    return table ? [table] : NO_CONTENT;
   }
 
   return exampleNodes(r.examples!);

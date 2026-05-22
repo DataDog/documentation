@@ -20,6 +20,8 @@ const { Ast, format, parse } = Markdoc;
 
 export { Ast, format, parse };
 
+export const NO_CONTENT: MarkdocNode[] = [];
+
 export function documentNode(children: MarkdocNode[]): MarkdocNode {
   return new Ast.Node('document', {}, children);
 }
@@ -47,6 +49,10 @@ export function paragraphFromText(text: string): MarkdocNode {
 export function fenceNode(language: string, content: string): MarkdocNode {
   const c = content.endsWith('\n') ? content : `${content}\n`;
   return new Ast.Node('fence', { content: c, language });
+}
+
+export function boldNode(children: MarkdocNode[]): MarkdocNode {
+  return new Ast.Node('strong', {}, children);
 }
 
 export function tagNode(

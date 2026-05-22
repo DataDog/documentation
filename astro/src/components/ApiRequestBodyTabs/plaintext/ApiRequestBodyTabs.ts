@@ -8,7 +8,7 @@
 
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import type { SchemaField } from '@lib/api/schemas/schemaField';
-import { Ast, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/plaintext/helpers';
+import { NO_CONTENT, boldNode, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/plaintext/helpers';
 import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
 
 interface Example {
@@ -27,7 +27,7 @@ export function apiRequestBodyTabsNodes({ schema, examples }: Props): MarkdocNod
 
   if (hasSchema && !hasExamples) {
     const table = apiSchemaTableNode(schema);
-    return table ? [table] : [];
+    return table ? [table] : NO_CONTENT;
   }
 
   if (!hasSchema && hasExamples) {
@@ -36,7 +36,7 @@ export function apiRequestBodyTabsNodes({ schema, examples }: Props): MarkdocNod
 
   if (hasSchema && hasExamples) {
     const table = apiSchemaTableNode(schema);
-    const modelChildren = table ? [table] : [];
+    const modelChildren = table ? [table] : NO_CONTENT;
     const tabs = tagNode('tabs', {}, [
       tagNode('tab', { label: 'Model' }, modelChildren),
       tagNode('tab', { label: 'Example' }, exampleNodes(examples)),
@@ -44,7 +44,7 @@ export function apiRequestBodyTabsNodes({ schema, examples }: Props): MarkdocNod
     return [tabs];
   }
 
-  return [];
+  return NO_CONTENT;
 }
 
 export function exampleNodes(examples: Example[]): MarkdocNode[] {
@@ -52,8 +52,7 @@ export function exampleNodes(examples: Example[]): MarkdocNode[] {
   const nodes: MarkdocNode[] = [];
   for (const ex of examples) {
     if (includeHeading) {
-      const strong = new Ast.Node('strong', {}, [textNode(ex.name)]);
-      nodes.push(paragraphNode([inlineNode([strong])]));
+      nodes.push(paragraphNode([inlineNode([boldNode([textNode(ex.name)])])]));
     }
     nodes.push(fenceNode('json', ex.value));
   }

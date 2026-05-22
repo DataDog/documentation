@@ -8,6 +8,7 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 
 - Never assume I know what I'm talking about. If you have a better idea, raise it. If there is a security concern or other concern with what I'm doing, raise it. If I left gaps in my instructions, ask questions.
 - When you update a component, be sure to update its tests and documentation page.
+- If a component has a `plaintext/` subfolder, it has an AST twin there that mirrors its rendering logic. When you update the component, check whether the plaintext twin also needs updating.
 - After you implement something, list any best practices you used that aren't well known.
 - Don't automatically run tests unless you truly need the information. Otherwise, just remind me that we haven't run or updated the tests yet, and which updates are still pending (like "change the font size of the page title"). I may have more changes I want to do in this batch, and running the tests every time is slow and expensive (in terms of tokens).
 - Use `npm run test` for the headless tests and `npm run test:browser` for browser tests. Don't run vitest directly, it will fail to set necessary env variables.

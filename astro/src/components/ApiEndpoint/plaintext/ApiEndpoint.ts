@@ -16,6 +16,7 @@ import { getDefaultRegions } from '@lib/api/regionResolver';
 import { appHost } from '@config/regions';
 import {
   Ast,
+  NO_CONTENT,
   headingNode,
   inlineNode,
   nodesFromMd,
@@ -56,26 +57,26 @@ function statusNotice(ep: EndpointData): MarkdocNode[] {
       'This endpoint is unstable and may change without notice.';
     return [alertNode('warning', nodesFromMd(msg))];
   }
-  return [];
+  return NO_CONTENT;
 }
 
 function descriptionNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.description) {
-    return [];
+    return NO_CONTENT;
   }
   return nodesFromMd(ep.description);
 }
 
 function permissionsNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.permissions || ep.permissions.length === 0) {
-    return [];
+    return NO_CONTENT;
   }
   return nodesFromMd(`**Permissions:** \`${ep.permissions.join('`, `')}\``);
 }
 
 function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.oauthScopes || ep.oauthScopes.length === 0) {
-    return [];
+    return NO_CONTENT;
   }
   return nodesFromMd(
     `OAuth apps require the \`${ep.oauthScopes.join('`, `')}\` authorization scope to access this endpoint.`,
@@ -96,7 +97,7 @@ function regionTableNodes(ep: EndpointData): MarkdocNode[] {
     rows.push({ site, url });
   }
   if (rows.length === 0) {
-    return [];
+    return NO_CONTENT;
   }
 
   const th = (text: string): MarkdocNode => {
@@ -145,14 +146,14 @@ function argumentsNodes(ep: EndpointData): MarkdocNode[] {
     }
   }
   if (tables.length === 0) {
-    return [];
+    return NO_CONTENT;
   }
   return [headingNode(3, 'Arguments'), ...tables];
 }
 
 function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.requestBody) {
-    return [];
+    return NO_CONTENT;
   }
   const suffix = ep.requestBody.required ? '(required)' : '(optional)';
   const out: MarkdocNode[] = [headingNode(3, `Request Body ${suffix}`)];
@@ -170,22 +171,22 @@ function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
 
 function responseNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.responses || ep.responses.length === 0) {
-    return [];
+    return NO_CONTENT;
   }
   const tabs = apiResponseNode(ep.responses);
   if (!tabs) {
-    return [];
+    return NO_CONTENT;
   }
   return [headingNode(3, 'Response'), tabs];
 }
 
 function codeExampleNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.codeExamples || ep.codeExamples.length === 0) {
-    return [];
+    return NO_CONTENT;
   }
   const tabs = apiCodeExampleNode(ep.codeExamples);
   if (!tabs) {
-    return [];
+    return NO_CONTENT;
   }
   return [headingNode(3, 'Code Example'), tabs];
 }

@@ -7,32 +7,47 @@
  * paragraph carrying its description.
  */
 
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import type { CodeExampleSet, CodeExampleEntry } from '@lib/api/schemas/codeExamples';
-import { Ast, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/plaintext/helpers';
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type {
+  CodeExampleSet,
+  CodeExampleEntry,
+} from "@lib/api/schemas/codeExamples";
+import {
+  boldNode,
+  fenceNode,
+  inlineNode,
+  paragraphNode,
+  tagNode,
+  textNode,
+} from "@lib/plaintext/helpers";
 
-export function apiCodeExampleNode(examples: CodeExampleSet[]): MarkdocNode | null {
+export function apiCodeExampleNode(
+  examples: CodeExampleSet[],
+): MarkdocNode | null {
   if (!examples || examples.length === 0) {
     return null;
   }
 
   const tabs = examples.map((set) => {
-    return tagNode('tab', { label: set.label }, renderTab(set));
+    return tagNode("tab", { label: set.label }, renderCodeExampleTab(set));
   });
 
-  return tagNode('tabs', {}, tabs);
+  return tagNode("tabs", {}, tabs);
 }
 
-function renderTab(set: CodeExampleSet): MarkdocNode[] {
+function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
   const includeHeading = set.entries.length > 1;
   const nodes: MarkdocNode[] = [];
   for (const entry of set.entries) {
-    nodes.push(...renderEntry(entry, includeHeading));
+    nodes.push(...renderCodeExampleContent(entry, includeHeading));
   }
   return nodes;
 }
 
-function renderEntry(entry: CodeExampleEntry, includeHeading: boolean): MarkdocNode[] {
+function renderCodeExampleContent(
+  entry: CodeExampleEntry,
+  includeHeading: boolean,
+): MarkdocNode[] {
   const out: MarkdocNode[] = [];
   if (includeHeading && entry.description) {
     out.push(boldParagraph(entry.description));
@@ -42,6 +57,5 @@ function renderEntry(entry: CodeExampleEntry, includeHeading: boolean): MarkdocN
 }
 
 function boldParagraph(text: string): MarkdocNode {
-  const strong = new Ast.Node('strong', {}, [textNode(text)]);
-  return paragraphNode([inlineNode([strong])]);
+  return paragraphNode([inlineNode([boldNode([textNode(text)])])]);
 }
