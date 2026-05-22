@@ -1,6 +1,6 @@
 ---
-import styles from './ApiMethodBadge.module.css';
-import { classListFactory } from '@utils/classListFactory';
+import styles from "./ApiMethodBadge.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
 
 interface Props {
   method: string;
@@ -10,6 +10,8 @@ const { method } = Astro.props;
 const cl = classListFactory(styles);
 ---
 
-<span class={cl('api-method-badge', `api-method-badge--${method.toLowerCase()}`)}>
+<span
+  class={cl("api-method-badge", `api-method-badge--${method.toLowerCase()}`)}
+>
   {method.toUpperCase()}
 </span>

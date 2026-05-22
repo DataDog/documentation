@@ -1,8 +1,8 @@
-import { useState } from 'preact/hooks';
-import type { JSX } from 'preact';
-import styles from './LanguageSelector.module.css';
-import { classListFactory } from '@utils/classListFactory';
-import { Select } from '@components/Select/Select';
+import { useState } from "preact/hooks";
+import type { JSX } from "preact";
+import styles from "./LanguageSelector.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { Select } from "@components/Select/Select";
 
 const cl = classListFactory(styles);
 
@@ -28,8 +28,8 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
   };
 
   return (
-    <div class={cl('language-selector')}>
-      <label class={cl('language-selector__label')} for="language-select">
+    <div class={cl("language-selector")}>
+      <label class={cl("language-selector__label")} for="language-select">
         {/* TODO: replace with i18n() once the helper exposes the singular form
             of the `language` key in i18n/en.json (currently returns plural). */}
         Language

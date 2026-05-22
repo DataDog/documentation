@@ -10,8 +10,7 @@
       "@layouts/*": ["./src/layouts/*"],
       "@components/*": ["./src/components/*"],
       "@config/*": ["./src/config/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@utils/*": ["./src/lib/utils/*"]
+      "@lib/*": ["./src/lib/*"]
     }
   }
 }

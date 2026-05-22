@@ -1,6 +1,6 @@
 import styles from "./SearchBar.module.css";
-import { classListFactory } from "@utils/classListFactory";
-import type { NormalizedHit } from "@lib/searchNormalize";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import type { NormalizedHit } from "@lib/search/normalize";
 
 const cl = classListFactory(styles);
 

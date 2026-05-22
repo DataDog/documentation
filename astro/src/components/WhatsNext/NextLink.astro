@@ -1,6 +1,6 @@
 ---
-import styles from './WhatsNext.module.css';
-import { classListFactory } from '@utils/classListFactory';
+import styles from "./WhatsNext.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
 
 interface Props {
   href: string;
@@ -11,12 +11,12 @@ const { href, tag } = Astro.props;
 const cl = classListFactory(styles);
 ---
 
-<li class={cl('whatsnext__item')}>
-  <a class={cl('whatsnext__link')} href={href}>
-    <span class={cl('whatsnext__content')}>
+<li class={cl("whatsnext__item")}>
+  <a class={cl("whatsnext__link")} href={href}>
+    <span class={cl("whatsnext__content")}>
       <slot />
     </span>
-    {tag && <span class={cl('whatsnext__tag')}>{tag.toUpperCase()}</span>}
-    <span class={cl('whatsnext__arrow')} aria-hidden="true"></span>
+    {tag && <span class={cl("whatsnext__tag")}>{tag.toUpperCase()}</span>}
+    <span class={cl("whatsnext__arrow")} aria-hidden="true"></span>
   </a>
 </li>

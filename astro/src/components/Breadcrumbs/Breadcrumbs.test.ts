@@ -22,15 +22,15 @@ describe('Breadcrumbs component', () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Breadcrumbs, { props: { crumbs } });
 
-    expect(html).toMatch(/<a[^>]+href="\/"[^>]*>Docs<\/a>/);
-    expect(html).toMatch(/<a[^>]+href="\/api\/"[^>]*>API<\/a>/);
+    expect(html).toMatch(/<a[^>]+href="\/"[^>]*>\s*Docs\s*<\/a>/);
+    expect(html).toMatch(/<a[^>]+href="\/api\/"[^>]*>\s*API\s*<\/a>/);
   });
 
   it('renders the final crumb as a span with aria-current="page"', async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Breadcrumbs, { props: { crumbs } });
 
-    expect(html).toMatch(/<span[^>]*aria-current="page"[^>]*>Dashboards<\/span>/);
+    expect(html).toMatch(/<span[^>]*aria-current="page"[^>]*>\s*Dashboards\s*<\/span>/);
   });
 
   it('emits BEM classes on every element', async () => {

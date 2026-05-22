@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import styles from "./Tabs.module.css";
-import { classListFactory } from "@utils/classListFactory";
-import { addStyleFactory } from "@utils/addStyleFactory";
-import { removeStyleFactory } from "@utils/removeStyleFactory";
-import { markSelfAsHydrated } from "@utils/markSelfAsHydrated";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { addStyleFactory } from "@lib/cssUtils/addStyleFactory";
+import { removeStyleFactory } from "@lib/cssUtils/removeStyleFactory";
+import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import {
   loadExternalContext,
   type ExternalContext,
-} from "@utils/loadExternalContext";
+} from "@lib/componentUtils/loadExternalContext";
 
 const cl = classListFactory(styles);
 const addStyle = addStyleFactory(styles);

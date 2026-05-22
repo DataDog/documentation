@@ -14,7 +14,10 @@ const labels: SearchBarLabels = {
 import basicFixture from "./__fixtures__/typesense_basic.json";
 import noHitsFixture from "./__fixtures__/typesense_no_hits.json";
 import apiOnlyFixture from "./__fixtures__/typesense_api_only.json";
-import { flattenSearchResult, type MultiSearchResponse } from "@lib/typesense";
+import {
+  flattenSearchResult,
+  type MultiSearchResponse,
+} from "@lib/search/typesense";
 
 afterEach(() => {
   cleanup();

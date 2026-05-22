@@ -4,13 +4,14 @@
  * this on `repo_name == "documentation"`; since the Astro site IS the docs
  * replacement, we always render it.
  */
-import styles from './Footer.module.css';
-import { resolveFooterUrl } from '@lib/footerMenus';
+import styles from "./Footer.module.css";
+import { resolveFooterUrl } from "@lib/componentUtils/footerMenus";
 
 const heading = "Can't find something?";
-const desc = "Our friendly, knowledgeable solutions engineers are here to help!";
+const desc =
+  "Our friendly, knowledgeable solutions engineers are here to help!";
 const ctaLabel = "Contact Us";
-const ctaHref = resolveFooterUrl('help/');
+const ctaHref = resolveFooterUrl("help/");
 ---
 
 <div class={styles.blurbRow}>

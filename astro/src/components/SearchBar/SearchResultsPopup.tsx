@@ -1,6 +1,6 @@
 import styles from "./SearchBar.module.css";
-import { classListFactory } from "@utils/classListFactory";
-import { CATEGORY_ORDER, type NormalizedHit } from "@lib/searchNormalize";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { CATEGORY_ORDER, type NormalizedHit } from "@lib/search/normalize";
 import SearchHit from "./SearchHit";
 import type { PopupRect } from "./hooks/usePopupPosition";
 
@@ -40,7 +40,9 @@ export default function SearchResultsPopup({
       ref={popupRef}
       class={cl("search-bar__popup")}
       role="listbox"
-      style={rect ? { top: `${rect.top}px`, left: `${rect.left}px` } : undefined}
+      style={
+        rect ? { top: `${rect.top}px`, left: `${rect.left}px` } : undefined
+      }
     >
       <div
         class={cl(

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { createPortal } from "preact/compat";
 import styles from "./SearchBar.module.css";
-import { classListFactory } from "@utils/classListFactory";
-import { multiSearch } from "@lib/typesense";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { multiSearch } from "@lib/search/typesense";
 import {
   getTypesenseConfig,
   HUGO_ORIGIN,
@@ -12,16 +12,13 @@ import {
   CATEGORY_ORDER,
   groupHits,
   type NormalizedHit,
-} from "@lib/searchNormalize";
+} from "@lib/search/normalize";
 // Same magnifying-glass shape Hugo's side-nav search uses (Hugo loads it as an
 // icomoon font glyph; here we inline it as SVG so the icon scales freely and
 // inherits the input-bar text color via `currentColor`).
 import searchIconSvg from "../../assets/images/svg-icons/searchbar_search.svg?raw";
 import SearchResultsPopup, { type Selection } from "./SearchResultsPopup";
-import {
-  useDebouncedSearch,
-  type SearchFn,
-} from "./hooks/useDebouncedSearch";
+import { useDebouncedSearch, type SearchFn } from "./hooks/useDebouncedSearch";
 import { usePopupPosition } from "./hooks/usePopupPosition";
 import { useGlobalSearchShortcuts } from "./hooks/useGlobalSearchShortcuts";
 import { useOutsideClick } from "./hooks/useOutsideClick";

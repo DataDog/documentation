@@ -1,16 +1,18 @@
 ---
-import styles from './Header.module.css';
-import './ProductMegaMenu.css';
-import NavDropdown from './NavDropdown.tsx';
+import styles from "./Header.module.css";
+import "./ProductMegaMenu.css";
+import NavDropdown from "./NavDropdown.tsx";
 import ProductMegaMenu, {
   type MegaCategory,
   type MegaSubcategory,
   type MegaSection,
-} from './ProductMegaMenu.tsx';
-import LogoDownloadPanel from './LogoDownloadPanel.astro';
-import HeaderScroll from './HeaderScroll.astro';
-import MobileNav, { type MobileNavLabels } from '@components/MobileNav/MobileNav.tsx';
-import { classListFactory } from '@utils/classListFactory';
+} from "./ProductMegaMenu.tsx";
+import LogoDownloadPanel from "./LogoDownloadPanel.astro";
+import HeaderScroll from "./HeaderScroll.astro";
+import MobileNav, {
+  type MobileNavLabels,
+} from "@components/MobileNav/MobileNav.tsx";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import {
   getMainLeft,
   getMainRight,
@@ -20,8 +22,8 @@ import {
   isDisabledForDocs,
   resolveUrl,
   type MenuItem,
-} from '@lib/menuData';
-import { i18n } from '@lib/i18n/i18n';
+} from "@lib/componentUtils/menuData.ts";
+import { i18n } from "@lib/i18n/i18n";
 
 const cl = classListFactory(styles);
 
@@ -32,16 +34,16 @@ const mobileCategoriesRaw = getMobileCategories();
 
 // Raw imports for each product-category icon, keyed by the category's `icon` field.
 const categoryIconMap: Record<string, string> = import.meta.glob<string>(
-  '../../mocked-dependencies/websites_modules/static/icons/*.svg',
-  { query: '?raw', import: 'default', eager: true }
+  "../../mocked-dependencies/websites_modules/static/icons/*.svg",
+  { query: "?raw", import: "default", eager: true },
 );
 
 function iconHtmlFor(name: string): string {
   const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
-  return categoryIconMap[key] ?? '';
+  return categoryIconMap[key] ?? "";
 }
 
-const carrotSvg = iconHtmlFor('right-carrot-normal-2');
+const carrotSvg = iconHtmlFor("right-carrot-normal-2");
 
 // Assemble the mega-menu data structure (translated, URL-resolved).
 const megaCategories: MegaCategory[] = categories.map((cat) => {
@@ -52,26 +54,48 @@ const megaCategories: MegaCategory[] = categories.map((cat) => {
           products: section.products
             .map((id) => {
               const p = getProduct(id);
-              return p ? { identifier: p.identifier, label: i18n(p.lang_key), url: resolveUrl(p.url) } : null;
+              return p
+                ? {
+                    identifier: p.identifier,
+                    label: i18n(p.lang_key),
+                    url: resolveUrl(p.url),
+                  }
+                : null;
             })
-            .filter((p): p is { identifier: string; label: string; url: string } => p !== null),
+            .filter(
+              (p): p is { identifier: string; label: string; url: string } =>
+                p !== null,
+            ),
         }))
       : sub.products
-      ? [{
-          label: i18n(sub.lang_key),
-          products: sub.products
-            .map((id) => {
-              const p = getProduct(id);
-              return p ? { identifier: p.identifier, label: i18n(p.lang_key), url: resolveUrl(p.url) } : null;
-            })
-            .filter((p): p is { identifier: string; label: string; url: string } => p !== null),
-        }]
-      : [];
+        ? [
+            {
+              label: i18n(sub.lang_key),
+              products: sub.products
+                .map((id) => {
+                  const p = getProduct(id);
+                  return p
+                    ? {
+                        identifier: p.identifier,
+                        label: i18n(p.lang_key),
+                        url: resolveUrl(p.url),
+                      }
+                    : null;
+                })
+                .filter(
+                  (
+                    p,
+                  ): p is { identifier: string; label: string; url: string } =>
+                    p !== null,
+                ),
+            },
+          ]
+        : [];
 
     return {
       identifier: sub.identifier,
       label: i18n(sub.lang_key),
-      related: sub.identifier.includes('related'),
+      related: sub.identifier.includes("related"),
       sections,
     };
   });
@@ -80,32 +104,41 @@ const megaCategories: MegaCategory[] = categories.map((cat) => {
     identifier: cat.identifier,
     label: i18n(cat.lang_key),
     descriptionLabel: i18n(cat.description_key),
-    gradient: cat.gradient ?? ['#000000', '#333333'],
+    gradient: cat.gradient ?? ["#000000", "#333333"],
     iconHtml: iconHtmlFor(cat.icon),
     subcategories,
   };
 });
 
-const productItem = mainLeft.find((m) => m.identifier === 'product');
-const solutionsItem = mainLeft.find((m) => m.identifier === 'solutions');
+const productItem = mainLeft.find((m) => m.identifier === "product");
+const solutionsItem = mainLeft.find((m) => m.identifier === "solutions");
 const simpleLeftItems = mainLeft.filter(
-  (m) => m.identifier !== 'product' && m.identifier !== 'solutions' && m.identifier !== 'search' && !isDisabledForDocs(m),
+  (m) =>
+    m.identifier !== "product" &&
+    m.identifier !== "solutions" &&
+    m.identifier !== "search" &&
+    !isDisabledForDocs(m),
 );
 
-const aboutItem = mainRight.find((m) => m.identifier === 'about');
-const blogItem = mainRight.find((m) => m.identifier === 'blog');
-const loginItem = mainRight.find((m) => m.identifier === 'login');
-const getStartedItem = mainRight.find((m) => m.identifier === 'get_started');
+const aboutItem = mainRight.find((m) => m.identifier === "about");
+const blogItem = mainRight.find((m) => m.identifier === "blog");
+const loginItem = mainRight.find((m) => m.identifier === "login");
+const getStartedItem = mainRight.find((m) => m.identifier === "get_started");
 
 // Solutions columns — flatten the tree for easy rendering.
-type SolutionsColumn = { label: string; items: { label: string; url: string }[] };
-const solutionsColumns: SolutionsColumn[] = (solutionsItem?.children ?? []).map((col) => ({
-  label: i18n(col.lang_key),
-  items: (col.children ?? []).map((child) => ({
-    label: i18n(child.lang_key),
-    url: resolveUrl(child.url),
-  })),
-}));
+type SolutionsColumn = {
+  label: string;
+  items: { label: string; url: string }[];
+};
+const solutionsColumns: SolutionsColumn[] = (solutionsItem?.children ?? []).map(
+  (col) => ({
+    label: i18n(col.lang_key),
+    items: (col.children ?? []).map((child) => ({
+      label: i18n(child.lang_key),
+      url: resolveUrl(child.url),
+    })),
+  }),
+);
 
 function simpleChildren(item: MenuItem | undefined) {
   if (!item) return [];
@@ -134,111 +167,133 @@ const mobileCategoriesData = mobileCategoriesRaw.map((cat) => ({
   products: (cat.mobile_products ?? [])
     .map((id) => {
       const p = getProduct(id);
-      return p ? { identifier: p.identifier, label: i18n(p.lang_key), url: resolveUrl(p.url) } : null;
+      return p
+        ? {
+            identifier: p.identifier,
+            label: i18n(p.lang_key),
+            url: resolveUrl(p.url),
+          }
+        : null;
     })
-    .filter((p): p is { identifier: string; label: string; url: string } => p !== null),
+    .filter(
+      (p): p is { identifier: string; label: string; url: string } =>
+        p !== null,
+    ),
 }));
 
 const mobileNavQuicknav = {
-  home: i18n('home'),
-  docs: i18n('docs') || 'Docs',
-  api: i18n('api'),
+  home: i18n("home"),
+  docs: i18n("docs") || "Docs",
+  api: i18n("api"),
 };
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
-const mobileNavSearch = { placeholder: 'Search', ariaLabel: 'Search' };
+const mobileNavSearch = { placeholder: "Search", ariaLabel: "Search" };
 const mobileNavLabels: MobileNavLabels = {
   "Toggle navigation": "Toggle navigation",
 };
 
-const bitsLogoUrl = 'https://imgix.datadoghq.com/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75';
-const textLogoUrl = 'https://imgix.datadoghq.com/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807';
-const mobileLogoUrl = 'https://imgix.datadoghq.com/img/datadog_rbg_n_2x.png';
+const bitsLogoUrl =
+  "https://imgix.datadoghq.com/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75";
+const textLogoUrl =
+  "https://imgix.datadoghq.com/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807";
+const mobileLogoUrl = "https://imgix.datadoghq.com/img/datadog_rbg_n_2x.png";
 const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 ---
 
-<div class={`${cl('header__wrapper')} main-nav-wrapper`}>
-  <nav class={`${cl('header__nav')} main-nav`}>
-    <div class={cl('header__container')}>
+<div class={`${cl("header__wrapper")} main-nav-wrapper`}>
+  <nav class={`${cl("header__nav")} main-nav`}>
+    <div class={cl("header__container")}>
       {/* Desktop layout */}
-      <div class={cl('header__desktop')}>
-        <ul class={`${cl('header__left-list')} main-left`}>
-          {productItem && (
-            <ProductMegaMenu
-              client:load
-              label={i18n(productItem.lang_key)}
-              href={resolveUrl(productItem.url)}
-              categories={megaCategories}
-              pricingLabel={i18n('view_pricing')}
-              pricingHref={resolveUrl('pricing/')}
-              hype={i18n('product_hype')}
-              carrotSvg={carrotSvg}
-              classes={{
-                menuItem: cl('header__menu-item'),
-                menuItemOpen: cl('header__menu-item--open'),
-                menuLink: cl('header__menu-link'),
-                dropdownMenu: cl('header__dropdown-menu'),
-                dropdownMenuOpen: cl('header__dropdown-menu--open'),
-              }}
-            />
-          )}
+      <div class={cl("header__desktop")}>
+        <ul class={`${cl("header__left-list")} main-left`}>
+          {
+            productItem && (
+              <ProductMegaMenu
+                client:load
+                label={i18n(productItem.lang_key)}
+                href={resolveUrl(productItem.url)}
+                categories={megaCategories}
+                pricingLabel={i18n("view_pricing")}
+                pricingHref={resolveUrl("pricing/")}
+                hype={i18n("product_hype")}
+                carrotSvg={carrotSvg}
+                classes={{
+                  menuItem: cl("header__menu-item"),
+                  menuItemOpen: cl("header__menu-item--open"),
+                  menuLink: cl("header__menu-link"),
+                  dropdownMenu: cl("header__dropdown-menu"),
+                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
+                }}
+              />
+            )
+          }
 
-          {simpleLeftItems.map((item) => (
-            <li class={`${cl('header__menu-item')} ${item.identifier}-item`}>
-              <a class={`${cl('header__menu-link')} ${item.identifier}-menu`} href={resolveUrl(item.url)}>
-                <span class="menu-text">{i18n(item.lang_key)}</span>
-              </a>
-            </li>
-          ))}
+          {
+            simpleLeftItems.map((item) => (
+              <li class={`${cl("header__menu-item")} ${item.identifier}-item`}>
+                <a
+                  class={`${cl("header__menu-link")} ${item.identifier}-menu`}
+                  href={resolveUrl(item.url)}
+                >
+                  <span class="menu-text">{i18n(item.lang_key)}</span>
+                </a>
+              </li>
+            ))
+          }
 
-          {solutionsItem && (
-            <NavDropdown
-              client:load
-              label={i18n(solutionsItem.lang_key)}
-              href={resolveUrl(solutionsItem.url)}
-              identifier="solutions"
-              isSolutions={true}
-              classes={{
-                menuItem: cl('header__menu-item'),
-                menuItemOpen: cl('header__menu-item--open'),
-                menuLink: cl('header__menu-link'),
-                dropdownMenu: cl('header__dropdown-menu'),
-                dropdownMenuOpen: cl('header__dropdown-menu--open'),
-                solutionsMenu: cl('header__solutions-menu'),
-              }}
-            >
-              <div class={cl('header__solutions-grid')}>
-                {solutionsColumns.map((col) => (
-                  <div class={cl('header__solutions-column')}>
-                    <p class={cl('header__solutions-header')}>{col.label}</p>
-                    <ul class={cl('header__solutions-list')}>
-                      {col.items.map((item) => (
-                        <li>
-                          <a href={item.url}>
-                            <span class={cl('header__menu-text')}>{item.label}</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </NavDropdown>
-          )}
+          {
+            solutionsItem && (
+              <NavDropdown
+                client:load
+                label={i18n(solutionsItem.lang_key)}
+                href={resolveUrl(solutionsItem.url)}
+                identifier="solutions"
+                isSolutions={true}
+                classes={{
+                  menuItem: cl("header__menu-item"),
+                  menuItemOpen: cl("header__menu-item--open"),
+                  menuLink: cl("header__menu-link"),
+                  dropdownMenu: cl("header__dropdown-menu"),
+                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
+                  solutionsMenu: cl("header__solutions-menu"),
+                }}
+              >
+                <div class={cl("header__solutions-grid")}>
+                  {solutionsColumns.map((col) => (
+                    <div class={cl("header__solutions-column")}>
+                      <p class={cl("header__solutions-header")}>{col.label}</p>
+                      <ul class={cl("header__solutions-list")}>
+                        {col.items.map((item) => (
+                          <li>
+                            <a href={item.url}>
+                              <span class={cl("header__menu-text")}>
+                                {item.label}
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </NavDropdown>
+            )
+          }
         </ul>
 
         {/* Logo */}
         <div class="header__logo-slot">
-          <a href="/" class={`${cl('header__logo-column')} js-logo-download`}>
+          <a href="/" class={`${cl("header__logo-column")} js-logo-download`}>
             <img
               height="75"
-              class={cl('header__logo-bits')}
+              class={cl("header__logo-bits")}
               src={bitsLogoUrl}
               srcset={`${bitsLogoUrl} 1x, ${bitsLogoUrl}&dpr=2 2x`}
               alt="Datadog"
             />
             <img
-              class={cl('header__logo-text')}
+              class={cl("header__logo-text")}
               height="14"
               src={textLogoUrl}
               srcset={`${textLogoUrl} 1x, ${textLogoUrl}&dpr=2 2x`}
@@ -248,74 +303,96 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
           </a>
         </div>
 
-        <ul class={`${cl('header__right-list')} main-right`}>
-          {aboutItem && (
-            <NavDropdown
-              client:load
-              label={i18n(aboutItem.lang_key)}
-              href={resolveUrl(aboutItem.url)}
-              identifier="about"
-              classes={{
-                menuItem: cl('header__menu-item'),
-                menuItemOpen: cl('header__menu-item--open'),
-                menuLink: cl('header__menu-link'),
-                dropdownMenu: cl('header__dropdown-menu'),
-                dropdownMenuOpen: cl('header__dropdown-menu--open'),
-              }}
-            >
-              <ul style="list-style:none;margin:0;padding:0;">
-                {aboutChildren.map((child) => (
-                  <li><a href={child.url}>{child.label}</a></li>
-                ))}
-              </ul>
-            </NavDropdown>
-          )}
-          {blogItem && (
-            <NavDropdown
-              client:load
-              label={i18n(blogItem.lang_key)}
-              href={resolveUrl(blogItem.url)}
-              identifier="blog"
-              classes={{
-                menuItem: cl('header__menu-item'),
-                menuItemOpen: cl('header__menu-item--open'),
-                menuLink: cl('header__menu-link'),
-                dropdownMenu: cl('header__dropdown-menu'),
-                dropdownMenuOpen: cl('header__dropdown-menu--open'),
-              }}
-            >
-              <ul style="list-style:none;margin:0;padding:0;">
-                {blogChildren.map((child) => (
-                  <li><a href={child.url}>{child.label}</a></li>
-                ))}
-              </ul>
-            </NavDropdown>
-          )}
-          {loginItem && !isDisabledForDocs(loginItem) && (
-            <li class={`${cl('header__menu-item')} login-item`}>
-              <a class={cl('header__menu-link')} href={resolveUrl(loginItem.url)}>
-                <span class="menu-text">{i18n(loginItem.lang_key)}</span>
-              </a>
-            </li>
-          )}
-          {getStartedItem && (
-            <li class={`${cl('header__menu-item')} get-started-item`}>
-              <a class={cl('header__btn-gradient')} href={resolveUrl(getStartedItem.url)}>
-                <span class={cl('header__btn-gradient-full')}>{i18n('get_started_free')}</span>
-                <span class={cl('header__btn-gradient-short')}>{i18n('free_trial')}</span>
-              </a>
-            </li>
-          )}
+        <ul class={`${cl("header__right-list")} main-right`}>
+          {
+            aboutItem && (
+              <NavDropdown
+                client:load
+                label={i18n(aboutItem.lang_key)}
+                href={resolveUrl(aboutItem.url)}
+                identifier="about"
+                classes={{
+                  menuItem: cl("header__menu-item"),
+                  menuItemOpen: cl("header__menu-item--open"),
+                  menuLink: cl("header__menu-link"),
+                  dropdownMenu: cl("header__dropdown-menu"),
+                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
+                }}
+              >
+                <ul style="list-style:none;margin:0;padding:0;">
+                  {aboutChildren.map((child) => (
+                    <li>
+                      <a href={child.url}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </NavDropdown>
+            )
+          }
+          {
+            blogItem && (
+              <NavDropdown
+                client:load
+                label={i18n(blogItem.lang_key)}
+                href={resolveUrl(blogItem.url)}
+                identifier="blog"
+                classes={{
+                  menuItem: cl("header__menu-item"),
+                  menuItemOpen: cl("header__menu-item--open"),
+                  menuLink: cl("header__menu-link"),
+                  dropdownMenu: cl("header__dropdown-menu"),
+                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
+                }}
+              >
+                <ul style="list-style:none;margin:0;padding:0;">
+                  {blogChildren.map((child) => (
+                    <li>
+                      <a href={child.url}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </NavDropdown>
+            )
+          }
+          {
+            loginItem && !isDisabledForDocs(loginItem) && (
+              <li class={`${cl("header__menu-item")} login-item`}>
+                <a
+                  class={cl("header__menu-link")}
+                  href={resolveUrl(loginItem.url)}
+                >
+                  <span class="menu-text">{i18n(loginItem.lang_key)}</span>
+                </a>
+              </li>
+            )
+          }
+          {
+            getStartedItem && (
+              <li class={`${cl("header__menu-item")} get-started-item`}>
+                <a
+                  class={cl("header__btn-gradient")}
+                  href={resolveUrl(getStartedItem.url)}
+                >
+                  <span class={cl("header__btn-gradient-full")}>
+                    {i18n("get_started_free")}
+                  </span>
+                  <span class={cl("header__btn-gradient-short")}>
+                    {i18n("free_trial")}
+                  </span>
+                </a>
+              </li>
+            )
+          }
         </ul>
       </div>
 
       {/* Mobile row */}
-      <div class={cl('header__mobile-row')}>
+      <div class={cl("header__mobile-row")}>
         <a href="/" class="header__mobile-logo-link">
           <img
             src={mobileLogoUrl}
             srcset={mobileLogoSrcset}
-            class={cl('header__mobile-logo')}
+            class={cl("header__mobile-logo")}
             alt="Datadog Logo"
             width="157"
             height="40"
@@ -324,9 +401,9 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
         <MobileNav
           client:load
           classes={{
-            hamburger: cl('header__hamburger'),
-            hamburgerOpen: cl('header__hamburger--open'),
-            hamburgerBar: cl('header__hamburger-bar'),
+            hamburger: cl("header__hamburger"),
+            hamburgerOpen: cl("header__hamburger--open"),
+            hamburgerBar: cl("header__hamburger-bar"),
           }}
           quicknav={mobileNavQuicknav}
           search={mobileNavSearch}

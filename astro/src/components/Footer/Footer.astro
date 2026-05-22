@@ -5,14 +5,14 @@
  * corp-hugo-only trailing modals/scripts and the variant footers
  * (footer-small, footer-nycactivities, aws-reinvent-2020, footer-slim).
  */
-import styles from './Footer.module.css';
-import { classListFactory } from '@utils/classListFactory';
-import FooterBlurb from './FooterBlurb.astro';
-import FooterAccordion from './FooterAccordion.tsx';
-import LanguageSelector from './LanguageSelector.tsx';
-import FreeTrialModal from './FreeTrialModal.tsx';
-import SocialIcon from './SocialIcon.astro';
-import SvgIcon from './SvgIcon.astro';
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import FooterBlurb from "./FooterBlurb.astro";
+import FooterAccordion from "./FooterAccordion.tsx";
+import LanguageSelector from "./LanguageSelector.tsx";
+import FreeTrialModal from "./FreeTrialModal.tsx";
+import SocialIcon from "./SocialIcon.astro";
+import SvgIcon from "./SvgIcon.astro";
 import {
   getFooterResources,
   getFooterAbout,
@@ -21,10 +21,18 @@ import {
   getFooterSocial,
   resolveFooterUrl,
   splitHalves,
-} from '@lib/footerMenus';
-import { i18n } from '@lib/i18n/i18n';
-import { getTranslations, getNativeLabel, type LangCode } from '@lib/i18n/languageNames';
-import { getProductCategories, getProduct, resolveUrl } from '@lib/menuData';
+} from "@lib/componentUtils/footerMenus.ts";
+import { i18n } from "@lib/i18n/i18n";
+import {
+  getTranslations,
+  getNativeLabel,
+  type LangCode,
+} from "@lib/i18n/languageNames";
+import {
+  getProductCategories,
+  getProduct,
+  resolveUrl,
+} from "@lib/componentUtils/menuData.ts";
 
 // Products — assembled from the mega-menu product tree so the Product column
 // matches Hugo's `$datadir.menu_data.products` source. Flatten to a deduped
@@ -38,17 +46,37 @@ for (const cat of getProductCategories()) {
       if (seen.has(id)) continue;
       seen.add(id);
       const p = getProduct(id);
-      if (p) products.push({ identifier: p.identifier, label: i18n(p.lang_key), url: resolveUrl(p.url) });
+      if (p)
+        products.push({
+          identifier: p.identifier,
+          label: i18n(p.lang_key),
+          url: resolveUrl(p.url),
+        });
     }
   }
 }
 const productHalves = splitHalves(products);
 
-const resourcesItems = getFooterResources().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
-const aboutItems = getFooterAbout().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
-const blogItems = getFooterBlog().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
-const subItems = getFooterSub().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
-const socialItems = getFooterSocial().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
+const resourcesItems = getFooterResources().map((it) => ({
+  ...it,
+  href: resolveFooterUrl(it.url),
+}));
+const aboutItems = getFooterAbout().map((it) => ({
+  ...it,
+  href: resolveFooterUrl(it.url),
+}));
+const blogItems = getFooterBlog().map((it) => ({
+  ...it,
+  href: resolveFooterUrl(it.url),
+}));
+const subItems = getFooterSub().map((it) => ({
+  ...it,
+  href: resolveFooterUrl(it.url),
+}));
+const socialItems = getFooterSocial().map((it) => ({
+  ...it,
+  href: resolveFooterUrl(it.url),
+}));
 
 const resourcesHalves = splitHalves(resourcesItems);
 const aboutHalves = splitHalves(aboutItems);
@@ -59,9 +87,11 @@ const year = new Date().getFullYear();
 // Language selector — Astro's i18n routing handles the actual locale switch,
 // so each link is a real localized URL. The footer renders all supported
 // locales; the toolbar instance reuses the same Preact component.
-import { LOCALES, localizedHref, stripLocalePrefix } from '@lib/i18n/locale';
+import { LOCALES, localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
 
-const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
+const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(
+  Astro.url.pathname,
+);
 const currentLang: LangCode = footerLang;
 const translate = getTranslations(currentLang);
 const currentLangOption = {
@@ -70,49 +100,47 @@ const currentLangOption = {
   secondary: translate(currentLang),
   href: localizedHref(footerLang, footerLocaleless),
 };
-const alternates = LOCALES
-  .filter((c) => c !== currentLang)
-  .map((code) => ({
-    code,
-    primary: getNativeLabel(code),
-    secondary: translate(code),
-    href: localizedHref(code, footerLocaleless),
-  }));
+const alternates = LOCALES.filter((c) => c !== currentLang).map((code) => ({
+  code,
+  primary: getNativeLabel(code),
+  secondary: translate(code),
+  href: localizedHref(code, footerLocaleless),
+}));
 
 // Pre-resolve globe and caret SVGs for the language selector island.
 const svgIcons = import.meta.glob<string>(
-  '../../assets/images/svg-icons/*.svg',
-  { query: '?raw', import: 'default', eager: true }
+  "../../assets/images/svg-icons/*.svg",
+  { query: "?raw", import: "default", eager: true },
 );
 function inlineSvg(name: string, color: string, size: string): string {
   const raw = svgIcons[`../../assets/images/svg-icons/${name}`];
-  if (!raw) return '';
+  if (!raw) return "";
   return raw
-    .replaceAll('default-size', size)
-    .replaceAll('default-fill', color)
-    .replaceAll('default-opacity', '1.0');
+    .replaceAll("default-size", size)
+    .replaceAll("default-fill", color)
+    .replaceAll("default-opacity", "1.0");
 }
-const worldIconHtml = inlineSvg('world.svg', '#ffffff', '16px');
-const caretIconHtml = inlineSvg('arrow.svg', '#ffffff', '16px');
+const worldIconHtml = inlineSvg("world.svg", "#ffffff", "16px");
+const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
 
 // Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
-const freeTrialHref = 'https://app.datadoghq.com/signup';
-const freeTrialLabel = i18n('free_trial');
+const freeTrialHref = "https://app.datadoghq.com/signup";
+const freeTrialLabel = i18n("free_trial");
 
 const accordionClasses = {
   column: styles.column,
   columnByKey: {
-    product: styles['column--product'],
-    resources: styles['column--resources'],
-    about: styles['column--about'],
-    blog: styles['column--blog'],
+    product: styles["column--product"],
+    resources: styles["column--resources"],
+    about: styles["column--about"],
+    blog: styles["column--blog"],
   },
   header: styles.sectionHeader,
   body: styles.sectionBody,
-  bodyOpen: styles['sectionBody--open'],
+  bodyOpen: styles["sectionBody--open"],
   divider: styles.divider,
-  dividerDesktop: styles['divider--desktop'],
-  dividerMobile: styles['divider--mobile'],
+  dividerDesktop: styles["divider--desktop"],
+  dividerMobile: styles["divider--mobile"],
   columnBodyFlex: styles.columnBodyFlex,
   columnBodyFlexStacked: styles.columnBodyFlexStacked,
   menuLinks: styles.menuLinks,
@@ -123,31 +151,61 @@ const accordionClasses = {
 
 const accordionSections = [
   {
-    id: 'product' as const,
-    title: i18n('product'),
-    firstColumn: productHalves.first.map((p) => ({ label: p.label, href: p.url })),
-    secondColumn: productHalves.second.map((p) => ({ label: p.label, href: p.url })),
+    id: "product" as const,
+    title: i18n("product"),
+    firstColumn: productHalves.first.map((p) => ({
+      label: p.label,
+      href: p.url,
+    })),
+    secondColumn: productHalves.second.map((p) => ({
+      label: p.label,
+      href: p.url,
+    })),
     stackOnDesktop: false,
   },
   {
-    id: 'resources' as const,
-    title: i18n('resources'),
-    firstColumn: resourcesHalves.first.map((it) => ({ label: it.name, href: it.href, target: it.target })),
-    secondColumn: resourcesHalves.second.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    id: "resources" as const,
+    title: i18n("resources"),
+    firstColumn: resourcesHalves.first.map((it) => ({
+      label: it.name,
+      href: it.href,
+      target: it.target,
+    })),
+    secondColumn: resourcesHalves.second.map((it) => ({
+      label: it.name,
+      href: it.href,
+      target: it.target,
+    })),
     stackOnDesktop: true,
   },
   {
-    id: 'about' as const,
-    title: i18n('about'),
-    firstColumn: aboutHalves.first.map((it) => ({ label: it.name, href: it.href, target: it.target })),
-    secondColumn: aboutHalves.second.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    id: "about" as const,
+    title: i18n("about"),
+    firstColumn: aboutHalves.first.map((it) => ({
+      label: it.name,
+      href: it.href,
+      target: it.target,
+    })),
+    secondColumn: aboutHalves.second.map((it) => ({
+      label: it.name,
+      href: it.href,
+      target: it.target,
+    })),
     stackOnDesktop: true,
   },
   {
-    id: 'blog' as const,
-    title: i18n('blog'),
-    firstColumn: blogHalves.first.map((it) => ({ label: it.name, href: it.href, target: it.target })),
-    secondColumn: blogHalves.second.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    id: "blog" as const,
+    title: i18n("blog"),
+    firstColumn: blogHalves.first.map((it) => ({
+      label: it.name,
+      href: it.href,
+      target: it.target,
+    })),
+    secondColumn: blogHalves.second.map((it) => ({
+      label: it.name,
+      href: it.href,
+      target: it.target,
+    })),
     stackOnDesktop: true,
   },
 ];
@@ -157,9 +215,9 @@ const langClasses = {
   button: styles.langButton,
   buttonLabel: styles.langButtonLabel,
   caret: styles.langCaret,
-  caretOpen: styles['langCaret--open'],
+  caretOpen: styles["langCaret--open"],
   popup: styles.langPopup,
-  popupOpen: styles['langPopup--open'],
+  popupOpen: styles["langPopup--open"],
   item: styles.langItem,
   primary: styles.langPrimary,
   secondary: styles.langSecondary,
@@ -167,14 +225,14 @@ const langClasses = {
 
 const cl = classListFactory(styles);
 const modalClasses = {
-  overlay: cl('free-trial-modal__overlay'),
-  overlayOpen: cl('free-trial-modal__overlay--open'),
-  dialog: cl('free-trial-modal__dialog'),
-  header: cl('free-trial-modal__header'),
-  title: cl('free-trial-modal__title'),
-  close: cl('free-trial-modal__close'),
-  body: cl('free-trial-modal__body'),
-  iframe: cl('free-trial-modal__iframe'),
+  overlay: cl("free-trial-modal__overlay"),
+  overlayOpen: cl("free-trial-modal__overlay--open"),
+  dialog: cl("free-trial-modal__dialog"),
+  header: cl("free-trial-modal__header"),
+  title: cl("free-trial-modal__title"),
+  close: cl("free-trial-modal__close"),
+  body: cl("free-trial-modal__body"),
+  iframe: cl("free-trial-modal__iframe"),
 };
 ---
 
@@ -184,7 +242,7 @@ const modalClasses = {
 
     <div class={styles.mainRow}>
       {/* Trial + download column */}
-      <div class={`${styles.column} ${styles['column--trial']}`}>
+      <div class={`${styles.column} ${styles["column--trial"]}`}>
         <a
           href={freeTrialHref}
           class={styles.ctaOutline}
@@ -195,10 +253,13 @@ const modalClasses = {
           <span>{freeTrialLabel}</span>
         </a>
 
-        <p class={styles.downloadApp}>{i18n('download_mobile_app')}</p>
+        <p class={styles.downloadApp}>{i18n("download_mobile_app")}</p>
 
         <div class={styles.downloadBadges}>
-          <a href="https://apps.apple.com/app/datadog/id1391380318" aria-label="Apple Store Link">
+          <a
+            href="https://apps.apple.com/app/datadog/id1391380318"
+            aria-label="Apple Store Link"
+          >
             <span class={styles.badgeMobile}>
               <SvgIcon src="app-store-badge.svg" color="#ffffff" />
             </span>
@@ -219,25 +280,33 @@ const modalClasses = {
           </a>
         </div>
 
-        <div class={`${styles.divider} ${styles['divider--mobile']}`} aria-hidden="true" />
+        <div
+          class={`${styles.divider} ${styles["divider--mobile"]}`}
+          aria-hidden="true"
+        >
+        </div>
       </div>
 
       <FooterAccordion
-        client:visible={{ rootMargin: '500px' }}
+        client:visible={{ rootMargin: "500px" }}
         classes={accordionClasses}
         sections={accordionSections}
       />
     </div>
   </div>
 
-  <div class={`${styles.borderTop} ${styles['borderTop--desktop']}`} aria-hidden="true" />
-  <div class={styles.spacer} aria-hidden="true" />
+  <div
+    class={`${styles.borderTop} ${styles["borderTop--desktop"]}`}
+    aria-hidden="true"
+  >
+  </div>
+  <div class={styles.spacer} aria-hidden="true"></div>
 
   <div class={styles.container}>
     <div class={styles.bottomRow}>
       <div class={styles.langCell}>
         <LanguageSelector
-          client:visible={{ rootMargin: '500px' }}
+          client:visible={{ rootMargin: "500px" }}
           currentLang={currentLangOption}
           alternates={alternates}
           worldIconHtml={worldIconHtml}
@@ -248,30 +317,43 @@ const modalClasses = {
 
       <div class={styles.legalCell}>
         <span class={styles.copyright}>&copy; Datadog {year}</span>
-        {subItems.map((it, i) => (
-          <span class={styles.legalItem}>
-            <a href={it.href} class={styles.menuLink} target={it.target}>{it.name}</a>
-            {i !== subItems.length - 1 && <span>&nbsp;|&nbsp;</span>}
-          </span>
-        ))}
+        {
+          subItems.map((it, i) => (
+            <span class={styles.legalItem}>
+              <a href={it.href} class={styles.menuLink} target={it.target}>
+                {it.name}
+              </a>
+              {i !== subItems.length - 1 && <span>&nbsp;|&nbsp;</span>}
+            </span>
+          ))
+        }
       </div>
 
       <div class={styles.socialCell}>
-        {socialItems.map((it, i) => (
-          <span class={`${styles.socialItem} ${i !== socialItems.length - 1 ? styles['socialItem--spaced'] : ''}`}>
-            <a
-              class={styles.socialLink}
-              href={it.href}
-              aria-label={`${it.name} link`}
-              target={it.target}
+        {
+          socialItems.map((it, i) => (
+            <span
+              class={`${styles.socialItem} ${i !== socialItems.length - 1 ? styles["socialItem--spaced"] : ""}`}
             >
-              <SocialIcon name={it.pre} />
-            </a>
-          </span>
-        ))}
+              <a
+                class={styles.socialLink}
+                href={it.href}
+                aria-label={`${it.name} link`}
+                target={it.target}
+              >
+                <SocialIcon name={it.pre} />
+              </a>
+            </span>
+          ))
+        }
       </div>
     </div>
   </div>
 </footer>
 
-<FreeTrialModal client:idle title={freeTrialLabel} iframeSrc={freeTrialHref} classes={modalClasses} />
+<FreeTrialModal
+  client:idle
+  title={freeTrialLabel}
+  iframeSrc={freeTrialHref}
+  classes={modalClasses}
+/>

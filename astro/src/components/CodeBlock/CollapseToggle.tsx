@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import styles from "./CodeBlock.module.css";
-import { classListFactory } from "@utils/classListFactory";
-import { markSelfAsHydrated } from "@utils/markSelfAsHydrated";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import {
   loadExternalContext,
   type ExternalContext,
-} from "@utils/loadExternalContext";
+} from "@lib/componentUtils/loadExternalContext";
 
 const cl = classListFactory(styles);
 
@@ -19,7 +19,10 @@ interface CollapseToggleProps {
   labels: CollapseToggleLabels;
 }
 
-export function CollapseToggle({ externalContext, labels }: CollapseToggleProps) {
+export function CollapseToggle({
+  externalContext,
+  labels,
+}: CollapseToggleProps) {
   const [collapsed, setCollapsed] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   const targetRef = useRef<HTMLElement | null>(null);

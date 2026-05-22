@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'preact/hooks';
-import type { JSX } from 'preact';
-import styles from './RegionSelector.module.css';
-import { classListFactory } from '@utils/classListFactory';
-import { Select } from '@components/Select/Select';
+import { useEffect, useMemo, useState } from "preact/hooks";
+import type { JSX } from "preact";
+import styles from "./RegionSelector.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { Select } from "@components/Select/Select";
 import {
   getActiveRegion,
   setActiveRegion,
@@ -10,8 +10,8 @@ import {
   onRegionChange,
   initRegionState,
   DEFAULT_REGION_KEY,
-} from './regionState';
-import type { ClientRegion } from '@config/regions';
+} from "./regionState";
+import type { ClientRegion } from "@config/regions";
 
 const cl = classListFactory(styles);
 
@@ -31,7 +31,10 @@ export interface RegionSelectorProps {
  * wrapper so this component (and its client bundle) never imports the
  * build-time region config or the `yaml` parser.
  */
-export function RegionSelector({ regions, labels }: RegionSelectorProps): JSX.Element {
+export function RegionSelector({
+  regions,
+  labels,
+}: RegionSelectorProps): JSX.Element {
   useMemo(() => initRegionState(regions), [regions]);
 
   const [selected, setSelected] = useState<string>(DEFAULT_REGION_KEY);
@@ -50,8 +53,13 @@ export function RegionSelector({ regions, labels }: RegionSelectorProps): JSX.El
   };
 
   return (
-    <div class={cl('region-selector')} data-hydrated={hydrated ? 'true' : undefined}>
-      <label class={cl('region-selector__label')} for="region-select">{labels["Datadog site"]}</label>
+    <div
+      class={cl("region-selector")}
+      data-hydrated={hydrated ? "true" : undefined}
+    >
+      <label class={cl("region-selector__label")} for="region-select">
+        {labels["Datadog site"]}
+      </label>
       <Select id="region-select" value={selected} onChange={handleChange}>
         {regions.map((r) => (
           <option key={r.key} value={r.key}>

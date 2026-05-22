@@ -1,25 +1,33 @@
-import { describe, it, expect } from 'vitest';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { describe, it, expect } from "vitest";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
 // @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
-import preactRenderer from '@astrojs/preact/server.js';
-import Header from './Header.astro';
-import { getMainLeft, getMainRight, getDesktopCategories, isDisabledForDocs } from '@lib/menuData';
-import { i18n } from '@lib/i18n/i18n';
+import preactRenderer from "@astrojs/preact/server.js";
+import Header from "./Header.astro";
+import {
+  getMainLeft,
+  getMainRight,
+  getDesktopCategories,
+  isDisabledForDocs,
+} from "@lib/componentUtils/menuData";
+import { i18n } from "@lib/i18n/i18n";
 
 async function createContainer() {
   const container = await AstroContainer.create();
-  container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+  container.addServerRenderer({
+    renderer: preactRenderer,
+    name: "@astrojs/preact",
+  });
   return container;
 }
 
-describe('Header', () => {
-  it('renders every non-disabled top-level menu item from menus.yaml', async () => {
+describe("Header", () => {
+  it("renders every non-disabled top-level menu item from menus.yaml", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
     const expectedLeft = getMainLeft()
       .filter((m) => !isDisabledForDocs(m))
-      .filter((m) => m.identifier !== 'search')
+      .filter((m) => m.identifier !== "search")
       .map((m) => i18n(m.lang_key));
 
     for (const label of expectedLeft) {
@@ -27,7 +35,7 @@ describe('Header', () => {
     }
   });
 
-  it('renders the Datadog logo linking to /', async () => {
+  it("renders the Datadog logo linking to /", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
@@ -38,7 +46,7 @@ describe('Header', () => {
     );
   });
 
-  it('serves retina srcset on the desktop and mobile logo images', async () => {
+  it("serves retina srcset on the desktop and mobile logo images", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
@@ -51,14 +59,14 @@ describe('Header', () => {
     }
   });
 
-  it('renders a GET STARTED FREE CTA from the right-hand menu', async () => {
+  it("renders a GET STARTED FREE CTA from the right-hand menu", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    expect(html).toContain(i18n('get_started_free'));
+    expect(html).toContain(i18n("get_started_free"));
   });
 
-  it('renders desktop product categories as interactive islands', async () => {
+  it("renders desktop product categories as interactive islands", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
@@ -66,8 +74,8 @@ describe('Header', () => {
     // appear in rendered HTML unless we inspect the SSR fallback. The static
     // markup should still include the product-dropdown marker and the product
     // menu link.
-    expect(html).toContain('product-dropdown');
-    expect(html).toContain(i18n('product'));
+    expect(html).toContain("product-dropdown");
+    expect(html).toContain(i18n("product"));
     // And the mobile product list's categories should render at build time.
     const categories = getDesktopCategories();
     for (const cat of categories) {
@@ -75,15 +83,15 @@ describe('Header', () => {
     }
   });
 
-  it('renders About and Blog dropdowns from main_right', async () => {
+  it("renders About and Blog dropdowns from main_right", async () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
     const mainRight = getMainRight();
     for (const item of mainRight) {
       if (isDisabledForDocs(item)) continue;
-      if (item.identifier === 'docs' || item.identifier === 'search') continue;
-      if (item.identifier === 'get_started') continue;
+      if (item.identifier === "docs" || item.identifier === "search") continue;
+      if (item.identifier === "get_started") continue;
       expect(html).toContain(i18n(item.lang_key));
     }
   });

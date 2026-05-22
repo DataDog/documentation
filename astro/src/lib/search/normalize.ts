@@ -1,5 +1,5 @@
 import { HUGO_ORIGIN } from "@config/typesense";
-import type { TypesenseHit, MultiSearchResponse } from "@lib/typesense";
+import type { TypesenseHit, MultiSearchResponse } from "@lib/search/typesense";
 
 export interface NormalizedHit {
   title: string;

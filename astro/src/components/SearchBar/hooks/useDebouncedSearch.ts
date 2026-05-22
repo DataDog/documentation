@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import type { MultiSearchResponse } from "@lib/typesense";
+import type { MultiSearchResponse } from "@lib/search/typesense";
 import type { TypesenseEnv } from "@config/typesense";
 
 export type SearchFn = (
