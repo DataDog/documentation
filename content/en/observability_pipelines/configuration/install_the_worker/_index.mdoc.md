@@ -93,7 +93,7 @@ This page describes one way you can set up the Observability Pipelines Worker in
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<DATADOG_SITE>`: The [Datadog site][11].
 
-2. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][26] for more information.
+2. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
 3. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
@@ -992,7 +992,7 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [9]: /logs/log_configuration/indexes/
 [10]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [11]: /getting_started/site/
-[12]: /observability_pipelines/configuration/secrets_management
+[12]: /observability_pipelines/configuration/secrets_management/
 [13]: /observability_pipelines/configuration/update_existing_pipelines/
 [14]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [15]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
@@ -1006,4 +1006,3 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [23]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
 [24]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
-[26]: /observability_pipelines/configuration/secrets_management/

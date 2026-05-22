@@ -1,4 +1,4 @@
-3. Download the [Helm chart values file][101]. See the [full list of configuration options][102] available.
+3. Download the [Helm chart values file][101]. See the [full list of available configuration options][102].
     - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 4. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][103].
