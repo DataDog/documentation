@@ -48,7 +48,7 @@ cp target/release/pup /usr/local/bin/pup
 
 ### Manual download
 
-Download pre-built binaries from the [latest release][2].
+Download prebuilt binaries from the [latest release][2].
 
 ## Usage examples
 
@@ -67,11 +67,14 @@ pup metrics query --query="avg:system.cpu.user{*}" --from="1h"
 
 # Get dashboard details
 pup dashboards get <DASHBOARD_ID>
+
+# Delete a dashboard
+pup dashboards delete <DASHBOARD_ID> --yes
 {{< /code-block >}}
 
 ## Supported product areas
 
-Pup covers most major Datadog product surfaces. See the [command reference][3] for the canonical command list, or run `pup --help` (or `pup agent schema` for machine-readable output) for the live list of commands as built.
+Pup covers most major Datadog product surfaces. See the [command reference][3] for the canonical product-specific command list. You can also run `pup --help` (or `pup agent schema` for machine-readable output) for the live list of commands as built.
 
 | Category | Examples |
 |----------|----------|
@@ -86,7 +89,7 @@ Pup covers most major Datadog product surfaces. See the [command reference][3] f
 
 ## Agent mode
 
-When Pup is invoked by an AI coding agent, it automatically switches to agent mode, which returns structured JSON responses optimized for machine consumption (including metadata, error details, and hints). Agent mode also auto-approves confirmation prompts.
+When Pup is invoked by an AI coding agent, it automatically switches to agent mode, which returns structured JSON responses optimized for machine consumption. Responses include metadata, error details, and hints. Agent mode also auto-approves confirmation prompts.
 
 Agent mode is auto-detected for [supported coding agents][4] when their environment variable is set. You can also enable it explicitly with the `--agent` flag or by setting `FORCE_AGENT_MODE=1`.
 
