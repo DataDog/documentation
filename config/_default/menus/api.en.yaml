@@ -1247,9 +1247,9 @@ menu:
           - CreatePersonalAccessToken
         unstable: []
         order: 15
-    - name: Get all personal access tokens
-      url: '#get-all-personal-access-tokens'
-      identifier: key-management-get-all-personal-access-tokens
+    - name: Get all access tokens
+      url: '#get-all-access-tokens'
+      identifier: key-management-get-all-access-tokens
       parent: key-management
       generated: true
       params:
@@ -11881,45 +11881,6 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: List LLM integration models
-      url: '#list-llm-integration-models'
-      identifier: llm-observability-list-llm-integration-models
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsIntegrationModels
-        unstable:
-          - v2
-        order: 38
-    - name: Run an LLM inference
-      url: '#run-an-llm-inference'
-      identifier: llm-observability-run-an-llm-inference
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsIntegrationInference
-        unstable:
-          - v2
-        order: 39
-    - name: List LLM integration accounts
-      url: '#list-llm-integration-accounts'
-      identifier: llm-observability-list-llm-integration-accounts
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsIntegrationAccounts
-        unstable:
-          - v2
-        order: 37
     - name: Push events for an LLM Observability experiment
       url: '#push-events-for-an-llm-observability-experiment'
       identifier: llm-observability-push-events-for-an-llm-observability-experiment
