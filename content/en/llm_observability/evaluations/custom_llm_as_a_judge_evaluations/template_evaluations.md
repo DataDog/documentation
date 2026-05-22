@@ -24,7 +24,7 @@ For best practices and details on how to create LLM-as-a-judge evaluations, read
 
 To select a template:
 1. In Datadog, navigate to the [LLM Observability Evaluations][11] page
-1. Click on the **Create Evaluation** button
+1. Click on the {{< ui >}}Create Evaluation{{< /ui >}} button
 1. Select the template of your choice
     {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 

@@ -1,5 +1,6 @@
 ---
 title: Update to Distribution Metrics Workflow FAQ
+description: "Learn about the new pipeline for globally accurate percentiles on distribution metrics and the updated tag configuration workflow."
 is_beta: true
 further_reading:
 - link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers/"

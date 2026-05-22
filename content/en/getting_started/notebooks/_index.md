@@ -25,15 +25,15 @@ This guide introduces Datadog Notebooks and demonstrates how notebook types enha
 
 Selecting the appropriate notebook type helps your team understand the document's purpose and expected outcome. Each type serves a specific workflow need:
 
-**Investigation** notebooks capture real-time troubleshooting efforts. Use this type when exploring unknown issues, unexpected behavior, or system anomalies. Document your discovery process, team collaboration, and successful resolutions.
+{{< ui >}}Investigation{{< /ui >}} notebooks capture real-time troubleshooting efforts. Use this type when exploring unknown issues, unexpected behavior, or system anomalies. Document your discovery process, team collaboration, and successful resolutions.
 
-**Runbook** notebooks provide step-by-step procedures for common tasks. Use this type for deployment processes, incident response workflows, or any repeatable operation your team performs regularly.
+{{< ui >}}Runbook{{< /ui >}} notebooks provide step-by-step procedures for common tasks. Use this type for deployment processes, incident response workflows, or any repeatable operation your team performs regularly.
 
-**Documentation** notebooks serve as living reference materials. Use this type for system architecture overviews, team onboarding guides, or configuration standards that evolve over time.
+{{< ui >}}Documentation{{< /ui >}} notebooks serve as living reference materials. Use this type for system architecture overviews, team onboarding guides, or configuration standards that evolve over time.
 
-**Report** notebooks synthesize findings for stakeholders. Use these to summarize quarterly incidents, present important planning data, or communicate technical decisions to leadership.
+{{< ui >}}Report{{< /ui >}} notebooks synthesize findings for stakeholders. Use these to summarize quarterly incidents, present important planning data, or communicate technical decisions to leadership.
 
-**Postmortem** notebooks analyze completed incidents. Create these after service disruptions to document timelines, identify root causes, and track improvement actions.
+{{< ui >}}Postmortem{{< /ui >}} notebooks analyze completed incidents. Create these after service disruptions to document timelines, identify root causes, and track improvement actions.
 
 Every notebook type offers collaboration with others and connects to your Datadog data.
 
@@ -45,11 +45,11 @@ When error logs appear in your system, creating a Notebook is one click away. He
    {{< img src="/getting_started/notebooks/log-explorer-errors.png" alt="Your image description" style="width:100%;" >}}
 
 1. **Create a notebook from the Log Explorer**<br>
-   Click "Open in Notebooks" and select "New notebook" on the next screen.
+   Click {{< ui >}}Open in Notebooks{{< /ui >}} and select {{< ui >}}New notebook{{< /ui >}} on the next screen.
 
    {{< img src="/getting_started/notebooks/notebooks-button.png" alt="Your image description" style="width:80%;" >}}
 
-1. **Select the Investigation notebook type in the upper left corner of the Notebook**
+1. **Select the {{< ui >}}Investigation{{< /ui >}} notebook type in the upper left corner of the Notebook**
 
    {{< img src="/getting_started/notebooks/notebook-type.png" alt="Your image description" style="width:80%;" >}}
 
@@ -79,9 +79,9 @@ Throughout this investigation, the notebook becomes a living record of your trou
 
 The investigation is only the beginning. Notebooks continue to gain value over time by transforming from reactive documents into proactive resources. An investigation notebook created during an incident can become the foundation for multiple assets:
 
-- Convert your investigation into a **Runbook** by extracting the successful troubleshooting steps. Future responders can follow your proven path rather than starting from scratch.
-- Transform complex investigations into **Documentation** that explains system behavior and known issues.
-- Create quarterly **Reports** by aggregating multiple investigations to identify patterns and systemic improvements.
+- Convert your investigation into a {{< ui >}}Runbook{{< /ui >}} by extracting the successful troubleshooting steps. Future responders can follow your proven path rather than starting from scratch.
+- Transform complex investigations into {{< ui >}}Documentation{{< /ui >}} that explains system behavior and known issues.
+- Create quarterly {{< ui >}}Reports{{< /ui >}} by aggregating multiple investigations to identify patterns and systemic improvements.
 
 This evolution creates a centralized knowledge repository that benefits the entire organization. New team members can reference these notebooks during onboarding, on-call engineers can consult them as runbooks during incidents, and leadership can review reports for capacity planning.
 

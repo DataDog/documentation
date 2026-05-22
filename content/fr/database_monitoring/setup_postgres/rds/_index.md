@@ -1,127 +1,133 @@
 ---
-description: Installez et configurez Database Monitoring pour Postgres sur Amazon RDS.
+description: Installez et configurez la surveillance Datadog pour Postgres sur Amazon RDS.
 further_reading:
 - link: /integrations/postgres/
   tag: Documentation
-  text: Intégration Postgres basique
+  text: Intégation Postgres basique
 - link: /database_monitoring/guide/rds_autodiscovery
   tag: Documentation
-  text: Autodiscovery pour RDS
+  text: Autodécouverte pour RDS
 - link: /database_monitoring/guide/parameterized_queries/
   tag: Documentation
-  text: Capturer les valeurs des paramètres de requête SQL
-title: Configuration de Database Monitoring pour Postgres avec une gestion sur Amazon RDS
+  text: Capture des valeurs des paramètres de requête SQL
+title: Configuration de la surveillance de base de données avec Postgres sur Amazon RDS
 ---
-
 La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données Postgres, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des états, des failovers et des événements de base de données.
 
-L'Agent recueille la télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Suivez les étapes ci-dessous pour activer la solution Database Monitoring avec votre base de données Postgres :
+L'Agent recueille les données de télémétrie directement depuis la base de données, en se connectant en tant qu'utilisateur en lecture seule. Effectuez la configuration suivante pour activer la surveillance de la base de données avec votre base de données Postgres :
 
-1. [Configurer l'intégration AWS](#configurer-lintegration-aws)
-1. [Configurer les paramètres de base de données](#configurer-les-parametres-postgres)
-1. [Autoriser l'Agent à accéder à la base de données](#accorder-un-acces-a-l-agent)
-1. [Installer et configurer l'Agent Datadog](#installer-et-configurer-lagent-datadog)
-1. [Installer l'intégration RDS](#installer-l-integration-rds)
+1. [Configurer l'intégration AWS](#configure-the-aws-integration)
+1. [Configurer les paramètres de la base de données](#configure-postgres-settings)
+1. [Accorder à l'Agent l'accès à la base de données](#grant-the-agent-access)
+1. [Installer et configurer l'Agent](#install-and-configure-the-agent)
+1. [Installer l'intégration RDS](#install-the-rds-integration)
 
 <div class="alert alert-info">
-<a href="/database_monitoring/setup_postgres/rds/quick_install">RDS Quick Install</a> est notre méthode d'installation recommandée pour les environnements de petite taille (par exemple, 20 hosts de base de données) ou pour ceux qui découvrent DBM et souhaitent l'essayer rapidement. Pour ceux qui gèrent de grands parcs de bases de données pour lesquels le déploiement de l'Agent via l'interface utilisateur n'est pas aussi adapté, nous recommandons l'installation standard, afin de gérer l'Agent manuellement ou de l'intégrer à vos pratiques d'automatisation.
+<a href="/database_monitoring/setup_postgres/rds/quick_install">Installation rapide RDS</a> est notre méthode d'installation recommandée pour les environnements plus petits (par exemple, 20 hôtes de base de données) ou ceux qui découvrent DBM et souhaitent l'essayer rapidement. Pour ceux qui gèrent de grandes flottes de bases de données où le déploiement de l'agent via l'interface utilisateur ne s'adapte pas aussi bien, nous recommandons l'installation standard, pour gérer l'agent vous-même ou intégrer vos pratiques d'automatisation.
 </div>
 
-## Avant de commencer
+## Avant de commencer {#before-you-begin}
 
-Versions de PostgreSQL prises en charge
+Versions PostgreSQL prises en charge
 : 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Versions de l'Agent prises en charge
-: 7.36.1 et versions ultérieures
+: 7.36.1+
 
-Incidence sur les performances
-: La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
-La solution Database Monitoring de Datadog fonctionne comme une intégration et vient compléter l'Agent de base ([voir les benchmarks][1]).
+Impact sur la performance
+: La configuration par défaut de l'Agent pour la surveillance de la base de données est conservatrice, mais vous pouvez ajuster des paramètres tels que l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des charges de travail, l'Agent représente moins d'un pour cent du temps d'exécution des requêtes sur la base de données et moins d'un pour cent du CPU. <br/><br/>
+La surveillance de la base de données fonctionne comme une intégration au-dessus de l'Agent de base ([voir les benchmarks][1]).
 
-Proxies, répartiteurs de charge et poolers de connexion
-: L'Agent Datadog doit se connecter directement au host surveillé. Pour les bases de données auto-hébergées, `127.0.0.1` ou le socket est préférable. L'Agent ne doit pas se connecter à la base de données via un proxy, un répartiteur de charge ou un pooler de connexion tel que `pgbouncer`. Si l'Agent se connecte à différents hosts pendant son exécution (comme dans le cas d'un basculement, d'un équilibrage de charge, etc.), il calcule la différence de statistiques entre deux hosts, ce qui produit des métriques inexactes.
+Proxies, équilibreurs de charge et gestionnaires de connexions
+: L'Agent Datadog doit se connecter directement à l'hôte surveillé. Pour les bases de données auto-hébergées, utilisez `127.0.0.1` ou le socket. L'Agent ne doit pas se connecter à la base de données via un proxy, un équilibreur de charge ou un pool de connexions tel que `pgbouncer`. Si l'Agent se connecte à différents hôtes pendant son fonctionnement (comme dans le cas d'un basculement, d'un équilibrage de charge, etc.), l'Agent calcule la différence de statistiques entre deux hôtes, produisant des métriques inexactes.
 
 Considérations relatives à la sécurité des données
-: Consultez la rubrique [Informations sensibles][2] pour découvrir les données recueillies par l'Agent à partir de vos bases de données et la méthode à suivre pour garantir leur sécurité.
+: Voir [Informations sensibles][2] pour des informations sur les données que l'Agent collecte de vos bases de données et comment garantir leur sécurité.
 
-## Configurer l'intégration AWS
+## Configurer l'intégration AWS {#configure-the-aws-integration}
 
-Activez **Resource Collection** dans la section **Resource Collection** de votre [carré d'intégration Amazon Web Services][3].
+Activez {{< ui >}}Resource Collection{{< /ui >}} dans la section {{< ui >}}Resource Collection{{< /ui >}} de votre [carte d'intégration Amazon Web Services][3] .
 
-## Configurer les paramètres Postgres
+## Configurer les paramètres Postgres {#configure-postgres-settings}
 
-Configurez les [paramètres][4] suivants dans le [groupe de paramètres DB][5], puis **redémarrez le serveur** pour que les paramètres prennent effet. Pour en savoir plus sur ces paramètres, consultez la [documentation Postgres][6].
+Configurez les [paramètres][4] suivants dans le [groupe de paramètres DB][5] puis **redémarrez le serveur** pour que les paramètres prennent effet. Pour plus d'informations sur ces paramètres, consultez la [documentation Postgres][6].
+
+**Paramètres requis**
 
 | Paramètre | Valeur | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Obligatoire pour les métriques `postgresql.queries.*`. Active la collecte de métriques de requêtes à l'aide de l'extension [pg_stat_statements][6]. |
-| `track_activity_query_size` | `4096` | Obligatoire pour la collecte des requêtes plus longues. Augmente la taille du texte SQL dans `pg_stat_activity`. Si la valeur par défaut est conservée, les requêtes de plus de `1024` caractères ne seront pas collectées. |
-| `pg_stat_statements.track` | `ALL` | Facultatif. Active le suivi des déclarations dans les procédures et fonctions stockées. |
-| `pg_stat_statements.max` | `10000` | Facultatif. Augmente le nombre de requêtes normalisées suivies dans `pg_stat_statements`. Ce paramètre est recommandé pour les bases de données générant d'importants volumes ainsi que de nombreux types de requêtes à partir d'un grand nombre de clients. |
-| `pg_stat_statements.track_utility` | `off` | Facultatif. Désactive les commandes utilitaires telles que PREPARE et EXPLAIN. Définir cette valeur sur `off` signifie que seules les requêtes de type SELECT, UPDATE et DELETE sont suivies. |
-| `track_io_timing` | `on` | Facultatif. Active la collecte des durées de lecture et d'écriture des blocs pour les requêtes. |
+| `shared_preload_libraries` | `pg_stat_statements` | Requis pour les métriques `postgresql.queries.*`. Active la collecte des métriques de requête en utilisant l'extension [pg_stat_statements][6]. |
+| `track_activity_query_size` | `4096` | Requis pour la collecte de requêtes plus volumineuses. Augmente la taille du texte SQL dans `pg_stat_activity`. S'il est laissé à la valeur par défaut, les requêtes de plus de `1024` caractères ne seront pas collectées. |
 
-### Activer `auto_explain` (facultatif)
+**Paramètres optionnels**
 
-Par défaut, l'Agent ne collecte des plans [`EXPLAIN`][15] que pour un échantillon de requêtes en cours d'exécution. Ces plans sont de nature plus générale, notamment lorsque le code de l'application utilise des prepared statements.
+| Paramètre | Valeur | Description |
+| --- | --- | --- |
+| `pg_stat_statements.track` | `ALL` | Active le suivi des instructions dans les procédures stockées et les fonctions. |
+| `pg_stat_statements.max` | `10000` | Augmente le nombre de requêtes normalisées suivies dans `pg_stat_statements`. Recommandé pour les bases de données à fort volume qui reçoivent de nombreux types de requêtes de différents clients. |
+| `pg_stat_statements.track_utility` | `off` | Désactive les commandes utilitaires comme PREPARE et EXPLAIN. Définir cette valeur à `off` signifie que seules les requêtes comme SELECT, UPDATE et DELETE sont suivies. |
+| `track_io_timing` | `on` | Active la collecte des temps de lecture et d'écriture des blocs pour les requêtes. |
 
-Pour collecter des plans `EXPLAIN ANALYZE` complets issus de toutes les requêtes, vous devez utiliser [`auto_explain`][16], une extension native fournie avec PostgreSQL et disponible chez tous les principaux fournisseurs. _La collecte de logs est un prérequis à la collecte `auto_explain`_. Veillez donc à l'activer avant de continuer.
+### Activer `auto_explain` (optionnel) {#enable-auto-explain-optional}
+
+Par défaut, l'agent ne collecte que les plans [`EXPLAIN`][15] pour un échantillonnage des requêtes en cours. Ces plans sont de nature plus générale, surtout lorsque le code de l'application utilise des instructions préparées.
+
+Pour collecter des plans `EXPLAIN ANALYZE` complets issus de toutes les requêtes, vous devez utiliser [`auto_explain`][16], une extension de première partie fournie avec PostgreSQL disponible chez tous les principaux fournisseurs. _La collecte des journaux est une condition préalable à la collecte de `auto_explain`_, donc activez-la avant de continuer.
 
 <div class="alert alert-danger">
-<strong>Important :</strong> <code>auto_explain</code> génère des lignes de log susceptibles de contenir des données d'application sensibles, similaires aux valeurs brutes dans du SQL non obfusqué. Utilisez l'<a href="/account_management/rbac/permissions/#database-monitoring">autorisation <code>dbm_parameterized_queries_read</code></a> pour contrôler l'accès aux plans générés. Pour restreindre la visibilité des lignes de log elles-mêmes — visibles par défaut par tous les utilisateurs de votre organisation Datadog —, configurez également le <a href="/logs/guide/logs-rbac">RBAC pour les logs</a>. Datadog recommande d'utiliser les deux autorisations pour protéger efficacement les informations sensibles.
+<strong>Important:</strong> <code>auto_explain</code> produit des lignes de journal qui peuvent contenir des données sensibles de l'application, similaires aux valeurs brutes dans un SQL non obfusqué. Utilisez le <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> autorisation pour contrôler l'accès aux plans résultants. Pour restreindre la visibilité des lignes de journal elles-mêmes—qui sont visibles par défaut pour tous les utilisateurs de votre organisation Datadog—configurez également <a href="/logs/guide/logs-rbac">RBAC pour les journaux</a>. Datadog recommande d'utiliser les deux autorisations pour protéger efficacement les informations sensibles.
 </div>
 
-1. Configurez les paramètres `auto_explain`. Le format de log _doit_ être `json`, mais les autres paramètres peuvent varier selon votre application. Cet exemple enregistre un plan `EXPLAIN ANALYZE` pour toutes les requêtes dépassant une seconde, en incluant les informations sur les buffers mais en omettant le timing (qui peut engendrer une surcharge).
+1. Configurer les paramètres `auto_explain`. Le format de journal _doit_ être `json`, mais d'autres paramètres peuvent varier en fonction de votre application. Cet exemple enregistre un plan `EXPLAIN ANALYZE` pour toutes les requêtes de plus d'une seconde, y compris les informations de tampon, mais omettant le timing (ce qui peut entraîner une surcharge).
 
 | Paramètre | Valeur | Description |
 | --- | --- | --- |
-| `shared_preload_libraries`      | `pg_stat_statements,auto_explain` | Active `EXPLAIN ANALYZE` automatiquement |
+| `shared_preload_libraries`      | `pg_stat_statements,auto_explain` | Active l'automatisation `EXPLAIN ANALYZE` |
 | `auto_explain.log_format`       | `json` | Génère des plans lisibles par machine |
 | `auto_explain.log_min_duration` | `1000` | Enregistre les plans lorsque les requêtes dépassent une seconde |
-| `auto_explain.log_analyze`      | `on` | Utilise la forme `ANALYZE` de `EXPLAIN` |
-| `auto_explain.log_buffers`      | `on` | Inclut l'utilisation des buffers dans les plans |
-| `auto_explain.log_timing`       | `off` | N'inclut pas le timing (surcharge élevée) |
-| `auto_explain.log_triggers`     | `on` | Inclut les plans pour les instructions de déclencheur |
-| `auto_explain.log_verbose`      | `on` | Utilise le type de plan verbose |
-| `auto_explain.log_nested_statements` | `on` | Inclut les instructions imbriquées |
-| `auto_explain.sample_rate`      | `1` | Explique toutes les requêtes dépassant la durée |
+| `auto_explain.log_analyze`      | `on` | Utilisez le formulaire `ANALYZE` de `EXPLAIN` |
+| `auto_explain.log_buffers`      | `on` | Incluez l'utilisation de tampon dans les plans |
+| `auto_explain.log_timing`       | `off` | N'incluez pas le timing (forte surcharge) |
+| `auto_explain.log_triggers`     | `on` | Incluez des plans pour l'instruction de déclenchement |
+| `auto_explain.log_verbose`      | `on` | Utilisez le type de plan détaillé |
+| `auto_explain.log_nested_statements` | `on` | Incluez des instructions imbriquées |
+| `auto_explain.sample_rate`      | `1` | Expliquez toutes les requêtes sur la durée |
 
-2. Modifiez le `log_line_prefix` pour permettre une corrélation d'événements plus riche. Pour en savoir plus, consultez la documentation sur les [groupes de paramètres DB RDS][17]. L'ingestion `auto_explain` requiert que cette valeur soit définie sur `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
+2. Changez le `log_line_prefix` pour activer une corrélation d'événements plus riche. Pour plus d'informations, consultez la documentation des [groupes de paramètres RDS DB][17]. `auto_explain`L'ingestion nécessite que cela soit réglé sur `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
 
-3. Pour vous assurer que vos instances RDS transfèrent les logs vers CloudWatch et Datadog, suivez les instructions relatives à la [collecte de logs Amazon RDS][18].
+3. Pour vous assurer que vos instances RDS transmettent les journaux à CloudWatch et Datadog, suivez les instructions pour [la collecte de journaux Amazon RDS][18].
 
 
-## Accorder un accès à l'Agent
+## Accordez l'accès à l'Agent {#grant-the-agent-access}
 
-L'Agent Datadog requiert un accès en lecture seule pour le serveur de base de données, afin de pouvoir recueillir les statistiques et requêtes.
+L'Agent Datadog requiert un accès en lecture seule pour le serveur de la base de données, afin de pouvoir recueillir les statistiques et requêtes.
 
-Les commandes SQL suivantes doivent être exécutées sur le serveur de base de données **primaire** (le writer) dans le cluster si Postgres est répliqué. Choisissez une base de données PostgreSQL sur le serveur à laquelle l'Agent doit se connecter. L'Agent peut collecter des données de télémétrie depuis toutes les bases de données du serveur de base de données, quelle que soit celle à laquelle il se connecte. Il est donc conseillé d'utiliser la base de données `postgres` par défaut. Ne choisissez une autre base de données que si vous avez besoin que l'Agent exécute des [requêtes custom sur des données propres à cette base de données][7].
+Exécutez les commandes SQL suivantes sur le serveur de base de données **principal** (le primaire) dans le cluster si Postgres est répliqué. L'Agent peut collecter la télémétrie de toutes les bases de données sur le serveur, quelle que soit la base de données à laquelle il se connecte. Utilisez la base de données par défaut `postgres` à moins que vous n'ayez besoin que l'Agent exécute [des requêtes personnalisées sur des données uniques à une autre base de données][7].
 
-Connectez-vous à la base de données choisie en tant que superutilisateur (ou un autre utilisateur disposant d'autorisations suffisantes). Par exemple, si la base de données choisie est `postgres`, connectez-vous en tant qu'utilisateur `postgres` à l'aide de [psql][8] en exécutant :
+Connectez-vous à votre base de données choisie en tant que superutilisateur (ou un autre utilisateur avec des autorisations suffisantes). Par exemple, pour se connecter à la base de données `postgres` en utilisant [psql][8]:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
  ```
 
-Créez l'utilisateur `datadog` :
+Créez l'utilisateur `datadog` :
 
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Remarque :** l'authentification IAM est également prise en charge. Consultez [le guide][9] pour savoir comment la configurer pour votre instance RDS.
+**Remarque :** L'authentification IAM est également prise en charge. Consultez [le guide][9] sur la façon de configurer cela pour votre instance RDS.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 15" %}}
 
-Accordez à l'utilisateur `datadog` l'autorisation d'accéder aux tables concernées :
+Donnez à l'utilisateur `datadog` l'autorisation d'accéder aux tables pertinentes :
 
 ```SQL
 ALTER ROLE datadog INHERIT;
 ```
 
-Créez le schéma suivant **dans chaque base de données** :
+Créez le schéma suivant **dans chaque base de données** :
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -134,7 +140,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
 
 {{% tab "Postgres ≥ 10" %}}
 
-Créez le schéma suivant **dans chaque base de données** :
+Créez le schéma suivant **dans chaque base de données** :
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -145,9 +151,9 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
 ```
 
 {{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{% tab "Postgres 9.6" %}}
 
-Créez le schéma suivant **dans chaque base de données** :
+Créez le schéma suivant **dans chaque base de données** :
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -157,7 +163,7 @@ GRANT SELECT ON pg_stat_database TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Créez des fonctions **dans chaque base de données** pour permettre à l'Agent de lire tout le contenu de `pg_stat_activity` et `pg_stat_statements` :
+Créez des fonctions **dans chaque base de données** pour permettre à l'Agent de lire le contenu complet de `pg_stat_activity` et `pg_stat_statements` :
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
@@ -173,9 +179,11 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Pour la collecte de données ou les métriques custom nécessitant d'interroger des tables supplémentaires, vous devrez peut-être accorder l'autorisation <code>SELECT</code> sur ces tables à l'utilisateur <code>datadog</code>. Exemple : <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. Consultez la page <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">Collecte de métriques custom PostgreSQL</a> pour en savoir plus. </div>
+<div class="alert alert-info">Pour la collecte de données ou de métriques personnalisées nécessitant l'interrogation de tables supplémentaires, vous devrez peut-être accorder les permissions sur ces tables à l'utilisateur. <code>SELECT</code> permissions sur ces tables à l' <code>datadog</code> utilisateur. Exemple : <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>Consultez <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">la collecte de métriques personnalisées PostgreSQL</a> pour plus d'informations. </div>
 
-Créez la fonction **dans chaque base de données** pour permettre à l'Agent de recueillir les plans d'exécution.
+### Créez la fonction de plan d'explication {#create-the-explain-plan-function}
+
+Créez la fonction suivante **dans chaque base de données** pour permettre à l'Agent de collecter des plans d'explication :
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -202,12 +210,12 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Stocker votre mot de passe de manière sécurisée
+### Stockez votre mot de passe de manière sécurisée {#securely-store-your-password}
 {{% dbm-secret %}}
 
-### Vérification
+### Vérifiez les autorisations de la base de données {#verify-database-permissions}
 
-Pour vérifier que l'utilisateur de l'Agent possède les autorisations adéquates et qu'il parvient à se connecter à la base de données et à lire les principales tables, exécutez ce qui suit :
+Pour vérifier que les permissions sont correctes, exécutez les commandes suivantes pour confirmer que l'utilisateur Agent est capable de se connecter à la base de données et lire les tables principales :
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -226,7 +234,7 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 {{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{% tab "Postgres 9.6" %}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -234,11 +242,11 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
   || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
+  -c "select * from datadog.pg_stat_activity() limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
+  -c "select * from datadog.pg_stat_statements() limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
@@ -246,17 +254,17 @@ psql -h localhost -U datadog postgres -A \
 {{% /tab %}}
 {{< /tabs >}}
 
-Lorsque vous êtes invité à saisir un mot de passe, indiquez celui que vous avez défini lors de la création de l'utilisateur `datadog`.
+Lorsqu'il vous demande un mot de passe, utilisez le mot de passe que vous avez saisi lors de la création de l'utilisateur `datadog`.
 
-## Installer et configurer l'Agent
+## Installez et configurez l'Agent {#install-and-configure-the-agent}
 
-Pour surveiller les hosts RDS, installez l'Agent Datadog dans votre infrastructure et configurez-le pour qu'il se connecte à distance à chaque endpoint d'instance. L'Agent n'a pas besoin de s'exécuter sur la base de données, il doit uniquement s'y connecter. Pour d'autres méthodes d'installation de l'Agent non mentionnées ici, consultez les [instructions d'installation de l'Agent][10].
+Pour surveiller les hôtes RDS, installez l'Agent Datadog dans votre infrastructure et configurez-le pour se connecter à chaque point de terminaison d'instance à distance. L'Agent n'a pas besoin de s'exécuter sur la base de données, il doit simplement s'y connecter. Pour des méthodes d'installation supplémentaires de l'Agent non mentionnées ici, consultez les [instructions d'installation de l'Agent][10].
 
 {{< tabs >}}
 {{% tab "Host" %}}
-Pour configurer la collecte de métriques Database Monitoring pour un Agent s'exécutant sur un host, par exemple lorsque vous provisionnez une petite instance EC2 pour que l'Agent collecte des données depuis une base de données RDS :
+Pour configurer la collecte de métriques de surveillance Datadog pour un Agent s'exécutant sur un host, par exemple si vous provisionnez une petite instance EC2 pour l'Agent afin de recueillir des données depuis une base de données RDS, procédez comme suit :
 
-1. Modifiez le fichier `postgres.d/conf.yaml` afin de spécifier votre `host` / `port` et de définir les masters à surveiller. Consultez le [fichier d'exemple postgres.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `postgres.d/conf.yaml` pour pointer vers votre `host` / `port` et définissez les maîtres à surveiller. Consultez le [sample postgres.d/conf.yaml][1] pour toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -288,7 +296,7 @@ Pour configurer la collecte de métriques Database Monitoring pour un Agent s'ex
 
    Si vous souhaitez vous authentifier avec IAM, spécifiez les paramètres `region` et `instance_endpoint`, et définissez `managed_authentication.enabled` sur `true`.
 
-   **Remarque :** n'activez `managed_authentication` que si vous souhaitez utiliser l'authentification IAM. L'authentification IAM est prioritaire sur le champ `password`.
+   **Remarque** : activez `managed_authentication` uniquement si vous souhaitez utiliser l'authentification IAM. L'authentification IAM a la priorité sur le champ `password`.
 
    ```yaml
    init_config:
@@ -313,7 +321,7 @@ Pour configurer la collecte de métriques Database Monitoring pour un Agent s'ex
        # dbname: '<DB_NAME>'
    ```
 
-   Pour en savoir plus sur la configuration de l'authentification IAM sur votre instance RDS, consultez la section [Connexion avec l'authentification gérée][3].
+   Pour des informations sur la configuration de l'authentification IAM sur votre instance RDS, consultez [Connexion avec l'authentification gérée][3].
 
 2. [Redémarrez l'Agent][2].
 
@@ -323,15 +331,15 @@ Pour configurer la collecte de métriques Database Monitoring pour un Agent s'ex
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-Pour configurer une intégration pour un Agent s'exécutant dans un conteneur Docker, par exemple dans ECS ou Fargate, plusieurs méthodes sont disponibles, toutes décrites en détail dans la [documentation sur la configuration Docker][1].
+Pour configurer une intégration pour un Agent fonctionnant dans un conteneur Docker tel que dans ECS ou Fargate, vous disposez de plusieurs méthodes, toutes couvertes en détail dans la [Documentation de configuration Docker][1].
 
-Les exemples ci-dessous montrent comment utiliser les [étiquettes Docker][2] et les [modèles Autodiscovery][3] pour configurer l'intégration Postgres.
+Les exemples ci-dessous montrent comment utiliser [les étiquettes Docker][2] et [les modèles d'autodécouverte][3] pour configurer l'intégration Postgres.
 
-**Remarque** : pour que le processus de découverte automatique des étiquettes fonctionne, l'Agent doit être autorisé à lire le socket Docker.
+**Remarque** : L'Agent doit avoir l'autorisation de lecture sur le socket Docker pour que l'autodécouverte des étiquettes fonctionne.
 
-### Ligne de commande
+### Ligne de commande {#command-line}
 
-Exécutez la commande suivante depuis votre [ligne de commande][4] pour démarrer l'Agent. Remplacez les valeurs fictives par celles correspondant à votre compte et à votre environnement.
+Exécutez la commande suivante depuis votre [ligne de commande][4] pour démarrer l'Agent. Remplacez les valeurs de remplacement par celles de votre compte et de votre environnement.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -357,16 +365,16 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
-Pour Postgres 9.6, ajoutez les paramètres suivants à la configuration de l'instance spécifiant le host et le port :
+Pour Postgres 9.6, ajoutez les paramètres suivants à la configuration d'instance où l'hôte et le port sont spécifiés :
 
 ```yaml
 "pg_stat_statements_view": "datadog.pg_stat_statements()",
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-### Dockerfile
+### Dockerfile {#dockerfile}
 
-Vous pouvez également spécifier des étiquettes dans un `Dockerfile`, ce qui vous permet de créer et de déployer un Agent personnalisé sans modifier la configuration de votre infrastructure :
+Vous pouvez également spécifier des étiquettes dans un `Dockerfile`, vous permettant de créer et de déployer un Agent personnalisé sans modifier la configuration de votre infrastructure :
 
 ```Dockerfile
 FROM registry.datadoghq.com/agent:<AGENT_VERSION>
@@ -376,14 +384,14 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]","aws": {"instance_endpoint": "<AWS_INSTANCE_ENDPOINT>", "region": "<REGION>"}, "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]}]'
 ```
 
-Pour Postgres 9.6, ajoutez les paramètres suivants à la configuration de l'instance spécifiant le host et le port :
+Pour Postgres 9.6, ajoutez les paramètres suivants à la configuration d'instance où l'hôte et le port sont spécifiés :
 
 ```yaml
 "pg_stat_statements_view": "datadog.pg_stat_statements()",
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, utilisez le [package de gestion des secrets][5] de l'Agent et déclarez le mot de passe à l'aide de la syntaxe `ENC[]`. Vous pouvez également consulter la [documentation sur les template variables Autodiscovery][6] pour fournir le mot de passe en tant que variable d'environnement.
+Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en texte clair, utilisez le [package de gestion des secrets de l'Agent][5] et déclarez le mot de passe en utilisant la syntaxe `ENC[]`. Alternativement, consultez la [documentation des variables de modèle d'autodécouverte][6] pour fournir le mot de passe en tant que variable d'environnement.
 
 [1]: /fr/containers/docker/integrations/?tab=labels#configuration
 [2]: https://docs.docker.com/engine/manage-resources/labels/
@@ -394,15 +402,15 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-Si vous exécutez un cluster Kubernetes, utilisez l'[Agent de cluster Datadog][1] pour activer Database Monitoring.
+Si vous exécutez un cluster Kubernetes, utilisez le [Datadog Cluster Agent][1] pour activer la surveillance de la base de données.
 
-**Remarque** : vérifiez que les [checks de cluster][2] sont activés pour votre Agent de cluster Datadog avant de continuer.
+**Remarque** : Assurez-vous que les [vérifications de cluster][2] sont activées pour votre Datadog Cluster Agent avant de continuer.
 
-Vous trouverez ci-dessous des instructions détaillées pour configurer l'intégration Postgres à l'aide de différentes méthodes de déploiement de l'Agent de cluster Datadog.
+Voici des instructions étape par étape pour configurer l'intégration Postgres en utilisant différentes méthodes de déploiement du Datadog Cluster Agent :
 
-### Operator
+### Opérateur {#operator}
 
-En vous référant aux [instructions relatives à l'Operator dans Kubernetes et les intégrations][3], suivre les étapes ci-dessous pour configurer l'intégration Postgres :
+En utilisant les [instructions de l'Opérateur dans Kubernetes et Intégrations][3] comme référence, suivez les étapes ci-dessous pour configurer l'intégration Postgres :
 
 1. Créez ou mettez à jour le fichier `datadog-agent.yaml` avec la configuration suivante :
 
@@ -450,24 +458,24 @@ En vous référant aux [instructions relatives à l'Operator dans Kubernetes et 
 
     ```
 
-    **Note** : Pour Postgres 9.6, ajoutez les lignes suivantes à la configuration de l'instance où l'hôte et le port sont spécifiés :
+    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. Appliquer les modifications à l'Operator Datadog à l'aide de la commande suivante :
+2. Appliquez les modifications au Datadog Operator en utilisant la commande suivante :
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-### Helm
+### Helm {#helm}
 
-En vous référant aux [instructions relatives à Helm dans Kubernetes et les intégrations][4], suivre les étapes ci-dessous pour configurer l'intégration Postgres :
+En utilisant les [instructions Helm dans Kubernetes et Intégrations][4] comme référence, suivez les étapes ci-dessous pour configurer l'intégration Postgres :
 
-1. Mettez à jour votre fichier `datadog-values.yaml` (utilisé dans les instructions d'installation de l'Agent de cluster) avec la configuration suivante :
+1. Mettez à jour votre fichier `datadog-values.yaml` (utilisé dans les instructions d'installation du Cluster Agent) avec la configuration suivante :
 
     ```yaml
     datadog:
@@ -497,26 +505,26 @@ En vous référant aux [instructions relatives à Helm dans Kubernetes et les in
 
     ```
 
-    **Note** : Pour Postgres 9.6, ajoutez les lignes suivantes à la configuration de l'instance où l'hôte et le port sont spécifiés :
+    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. Déployez l'Agent avec le fichier de configuration ci-dessus à l'aide de la commande suivante :
+2. Déployez l'Agent avec le fichier de configuration ci-dessus en utilisant la commande suivante :
 
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
 
 <div class="alert alert-info">
-Pour Windows, ajoutez <code>--set targetSystem=windows</code> à la commande <code>helm install</code>.
+Pour Windows, ajoutez <code>--set targetSystem=windows</code> à la <code>helm install</code> commande.
 </div>
 
-### Configuration avec des fichiers montés
+### Configurer avec des fichiers montés {#configure-with-mounted-files}
 
-Pour configurer un check de cluster avec un fichier de configuration monté, montez le fichier de configuration dans le conteneur de l'Agent de cluster à l'emplacement suivant : `/conf.d/postgres.yaml` :
+Pour configurer une vérification de cluster avec un fichier de configuration monté, montez le fichier de configuration dans le conteneur Cluster Agent à l'emplacement : `/conf.d/postgres.yaml` :
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -538,11 +546,11 @@ instances:
     # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-### Configuration avec les annotations de service Kubernetes
+### Configurer avec des annotations de service Kubernetes {#configure-with-kubernetes-service-annotations}
 
-Plutôt que de monter un fichier, vous pouvez déclarer la configuration de l'instance en tant que service Kubernetes. Pour configurer ce check pour un Agent s'exécutant sur Kubernetes, créez un service avec la syntaxe suivante :
+Au lieu de monter un fichier, vous pouvez déclarer la configuration de l'instance en tant que service Kubernetes. Pour configurer cette vérification pour un Agent fonctionnant sur Kubernetes, créez un service en utilisant la syntaxe suivante :
 
-#### Annotations Autodiscovery v2
+#### Annotations d'autodécouverte v2 {#autodiscovery-annotations-v2}
 
 ```yaml
 apiVersion: v1
@@ -583,7 +591,7 @@ spec:
     name: postgres
 ```
 
-Pour en savoir plus, consultez la section [Annotations Autodiscovery][5].
+Pour plus d'informations, consultez [Annotations d'autodécouverte][5].
 
 Si vous utilisez Postgres 9.6, ajoutez ce qui suit à la configuration de l'instance :
 
@@ -594,7 +602,7 @@ Si vous utilisez Postgres 9.6, ajoutez ce qui suit à la configuration de l'inst
 
 L'Agent de cluster enregistre automatiquement cette configuration et commence à exécuter le check Postgres.
 
-Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en texte clair, utilisez le [package de gestion des secrets][6] de l'Agent et déclarez le mot de passe avec la syntaxe `ENC[]`.
+Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en texte clair, utilisez le [package de gestion des secrets de l'Agent][6] et déclarez le mot de passe en utilisant la syntaxe `ENC[]`.
 
 [1]: /fr/containers/cluster_agent/setup/
 [2]: /fr/containers/cluster_agent/clusterchecks/
@@ -605,22 +613,22 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en texte clair
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### Vérifiez la configuration de l'Agent {#verify-agent-setup}
 
-[Exécutez la sous-commande status de l'Agent][11] et recherchez `postgres` dans la section Checks. Ou consultez la page [Bases de données][12] pour commencer !
+[Exécutez la sous-commande d'état de l'Agent][11] et recherchez `postgres` dans la section Vérifications. Ou visitez la page [Bases de données][12] pour commencer !
 
-## Exemples de configuration de l'Agent
+## Exemples de configurations d'Agent {#example-agent-configurations}
 {{% dbm-postgres-agent-config-examples %}}
 
-## Installer l'intégration RDS
+## Installez l'intégration RDS {#install-the-rds-integration}
 
-Pour afficher les métriques d'infrastructure AWS, telles que le CPU, aux côtés des données de télémétrie de base de données dans DBM, installez l'[intégration RDS][13] (facultatif).
+Pour voir les métriques d'infrastructure d'AWS, telles que le CPU, aux côtés de la télémétrie de la base de données dans DBM, installez l'[intégration RDS][13] (optionnelle).
 
-## Dépannage
+## Dépannage {#troubleshooting}
 
-Si vous avez respecté les instructions d'installation et de configuration des intégrations et de l'Agent, mais que vous rencontrez un problème, consultez la section [Dépannage de la surveillance de bases de données][14].
+Si vous avez installé et configuré les intégrations et l'Agent comme décrit et que cela ne fonctionne pas comme prévu, consultez [Dépannage][14].
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
