@@ -131,7 +131,7 @@ This creates an IAM role called `byoclogs` and a Kubernetes service account call
 
 ### Create an RDS database
 
-Create an RDS instance with the following command. For production environments, a small instance deployed across multiple Availability Zones (multi-AZ) is sufficient.
+Create an RDS instance with the following command:
 
 ```shell
 aws rds create-db-instance \
@@ -163,7 +163,7 @@ PORT=$(echo $RDS_INFO | jq -r '.Port')
 DATABASE=$(echo $RDS_INFO | jq -r '.Database')
 
 echo ""
-echo "🔗 Full URI:"
+echo "Full URI:"
 echo "postgres://byoclogs:FixMeBYOC_Logs@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
@@ -189,10 +189,8 @@ echo ""
    --from-literal api-key="<DD_API_KEY>"
    ```
 
-   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
-   ```shell
-   kubectl config set-context --current --namespace=<NAMESPACE_NAME>
-   ```
+   <div class="alert alert-tip">You can set a default namespace for your current context to avoid having to type <code>-n &lt;NAMESPACE_NAME&gt;</code> with every command:
+   <pre><code>kubectl config set-context --current --namespace=&lt;NAMESPACE_NAME&gt;</code></pre></div>
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
    ```shell
@@ -204,6 +202,8 @@ echo ""
 1. Customize the Helm chart
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, AWS account ID, service account, ingress setup, resource requests and limits, and more.
+
+   <div class="alert alert-info">The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To use it, follow the instructions in the <a href="https://aws.amazon.com/blogs/containers/migrating-amazon-eks-clusters-from-gp2-to-gp3-ebs-volumes/">AWS gp3 guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), use <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</div>
 
    Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined in the chart's `values.yaml`.
 
@@ -252,7 +252,7 @@ echo ""
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
 
    # Internal ingress configuration for access within the VPC
-   # The ingress provisions an Application Load Balancers (ALBs) in AWS which is created in private subnets.
+   # The ingress provisions an Application Load Balancer (ALB) in AWS which is created in private subnets.
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
@@ -276,7 +276,7 @@ echo ""
            name: byoclogs-metastore-uri
 
    # Indexer configuration
-   # The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
+   # The indexer is responsible for processing and indexing incoming data. It receives data from various sources (for example, Datadog Agents, log collectors)
    # and transforms it into searchable files called "splits" stored in S3.
    #
    # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
@@ -288,7 +288,7 @@ echo ""
      persistentVolume:
        enabled: true
        storage: 250Gi
-       storageClass: <STORAGE_CLASS>
+       storageClass: gp3
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.
@@ -316,7 +316,7 @@ echo ""
    -f datadog-values.yaml
    ```
 
-   **Note**: If a pod stays pending with a warning about insufficient memory or CPU and no available nodes, change `indexer.podSize` to `medium` in `datadog-values.yaml` and run the `helm upgrade --install` command again.
+   <div class="alert alert-info">If a pod stays pending with a warning about insufficient memory or CPU and no available nodes, change <code>indexer.podSize</code> to <code>medium</code> in <code>datadog-values.yaml</code> and run the <code>helm upgrade --install</code> command again.</div>
 
 ## Verification
 
