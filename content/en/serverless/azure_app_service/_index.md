@@ -3,6 +3,7 @@ title: Serverless Monitoring for Azure App Service
 aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/
+  - /serverless/azure
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"

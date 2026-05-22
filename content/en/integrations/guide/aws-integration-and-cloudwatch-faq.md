@@ -1,5 +1,6 @@
 ---
 title: AWS Integration and CloudWatch FAQ
+description: "Frequently asked questions about the Datadog AWS integration and CloudWatch metric collection."
 
 aliases:
   - "/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog"
@@ -51,7 +52,7 @@ Some important distinctions to be aware of:
 
 ### How do I adjust my data on Datadog to match the data displayed in CloudWatch?
 
-AWS CloudWatch reports metrics at one-minute granularity normalized to per-minute data. Datadog reports metrics at one-minute granularity normalized to per-second data. To adjust the data in Datadog, multiply by 60.  Also make sure the statistic of the metric is the same. For example, the metric `IntegrationLatency` fetches a number of different statistics": Average, Maximum, Minimum, as well as percentiles. In Datadog, these statistics are each represented as their own metrics:
+AWS CloudWatch reports metrics at one-minute granularity normalized to per-minute data. Datadog reports metrics at one-minute granularity normalized to per-second data. To adjust the data in Datadog, multiply by 60. Also make sure the statistic of the metric is the same. For example, the metric `IntegrationLatency` fetches a number of different statistics: Average, Maximum, Minimum, as well as percentiles. In Datadog, these statistics are each represented as their own metrics:
   ```
 aws.apigateway.integration_latency (average)
 aws.apigateway.integration_latency.maximum

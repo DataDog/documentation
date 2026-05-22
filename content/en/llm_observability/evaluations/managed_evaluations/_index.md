@@ -24,16 +24,16 @@ Learn more about the [compatibility requirements][2].
 
 ## Create new evaluations
 
-1. Navigate to [**AI Observability > Evaluations**][1].
-1. Click on the **Create Evaluation** button on the top right corner.
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][1].
+1. Click on the {{< ui >}}Create Evaluation{{< /ui >}} button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 
-After you click **Save and Publish**, the evaluation goes live. Alternatively, you can **Save as Draft** and edit or enable them later.
+After you click {{< ui >}}Save and Publish{{< /ui >}}, the evaluation goes live. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable them later.
 
 ## Edit existing evaluations
 
-1. Navigate to [**AI Observability > Evaluations**][1].
-1. Hover over the evaluation you want to edit and click the **Edit** button.
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][1].
+1. Hover over the evaluation you want to edit and click the {{< ui >}}Edit{{< /ui >}} button.
 
 ### Supported managed evaluations
 

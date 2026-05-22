@@ -1,6 +1,5 @@
 ---
 title: LLM Observability Guides
-private: true
 disable_toc: true
 cascade:
     algolia:

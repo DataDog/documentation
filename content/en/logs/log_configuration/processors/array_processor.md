@@ -20,7 +20,7 @@ Supported operations include:
 
 Each operation is configured through a dedicated processor.
 
-Define the array processor on the [**Pipelines** page][1].
+Define the array processor on the [{{< ui >}}Pipelines{{< /ui >}} page][1].
 
 
 ### Select value from matching element
@@ -47,10 +47,10 @@ Extract a specific value from an object inside an array when it matches a condit
 
 **Configuration steps:**
 
-- **Array path**: `httpRequest.headers`
-- **Condition**: `name:Referrer`
-- **Extract value of**: `value`
-- **Target attribute**: `referrer`
+- {{< ui >}}Array path{{< /ui >}}: `httpRequest.headers`
+- {{< ui >}}Condition{{< /ui >}}: `name:Referrer`
+- {{< ui >}}Extract value of{{< /ui >}}: `value`
+- {{< ui >}}Target attribute{{< /ui >}}: `referrer`
 
 **Result:**
 
@@ -117,8 +117,8 @@ Compute the number of elements in an array.
 
 **Configuration steps:**
 
-- **Array attribute**: `tags`
-- **Target attribute**: `tagCount`
+- {{< ui >}}Array attribute{{< /ui >}}: `tags`
+- {{< ui >}}Target attribute{{< /ui >}}: `tagCount`
 
 **Result:**
 
@@ -186,8 +186,8 @@ Add an attribute value to the end of a target array attribute in the log.
 ```
 **Configuration steps:**
 
-- **Attribute to append**: `"network.client.ip"`
-- **Array attribute to append to**: `sourceIps`
+- {{< ui >}}Attribute to append{{< /ui >}}: `"network.client.ip"`
+- {{< ui >}}Array attribute to append to{{< /ui >}}: `sourceIps`
 
 **Result:**
 
