@@ -3,6 +3,7 @@ title: Organization Topology
 description: Choose between single-org and multi-org Datadog deployments, achieve isolation with access controls, and manage multi-org environments.
 aliases:
 - /account_management/org_settings/organization_topology/
+- /getting_started/organization_topology/
 further_reading:
 - link: "/account_management/multi_organization/"
   tag: "Documentation"

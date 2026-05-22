@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info"><a href="https://docs.databricks.com/en/security/network/front-end/index.html">Databricks Networking Restrictions</a> can block some Datadog functions. Add the following Datadog IP ranges to your allow-list: {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IPs" >}}, {{< region-param key="ip_ranges_url_api" link="true" text="API IPs" >}}.</div>
+<div class="alert alert-info">If your Databricks workspace has <a href="https://docs.databricks.com/en/security/network/front-end/index.html">Networking Restrictions</a> enabled, add Datadog's {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP ranges" >}} to your allow-list. If your workspace uses Private Link, see the <strong>Private Link Connectivity</strong> tab below.</div>
 
 Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 

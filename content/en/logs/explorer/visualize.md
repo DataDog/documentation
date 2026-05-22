@@ -36,7 +36,7 @@ For a list of individual logs, choose which information of interest to display a
 - The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
 - The **facet panel** on the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-With the **Options** button, control the Content Height and Content Display in the table per log.
+With the {{< ui >}}Options{{< /ui >}} button, control the Content Height and Content Display in the table per log.
 
 {{< img src="logs/explorer/list_view_controls.mp4" alt="Configuring columns and display options" video=true style="width:80%;">}}
 
@@ -63,7 +63,7 @@ The following Timeseries log analytics shows the evolution of the **top 50 URL P
 
 {{< img src="logs/explorer/timeseries.png" alt="Timeseries example" style="width:90%;">}}
 
-Choose additional display options for timeseries: the **roll-up interval**, whether you **display** results as **bars** (recommended for counts and unique counts), **lines** (recommended for statistical aggregations) or **areas**, and the **colorset**.
+Choose additional display options for timeseries: the {{< ui >}}roll-up interval{{< /ui >}}, whether you **display** results as {{< ui >}}bars{{< /ui >}} (recommended for counts and unique counts), {{< ui >}}lines{{< /ui >}} (recommended for statistical aggregations) or {{< ui >}}areas{{< /ui >}}, and the {{< ui >}}colorset{{< /ui >}}.
 
 ## Top list
 

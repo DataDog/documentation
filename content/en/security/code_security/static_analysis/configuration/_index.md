@@ -21,7 +21,7 @@ For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with `schema-version: v1.0` or `schema-version: v1.1`, followed by a `sast` key containing the analysis configuration. The full structure is as follows:
+The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, or `v1.2`), followed by a `sast` key containing the analysis configuration, structured as shown below:
 
 ```yaml
 schema-version: v1.0

@@ -35,7 +35,7 @@ To search multiple tags inclusively, separate each tag with OR: `tags:(service:c
 {{< tabs >}}
 {{% tab "Assignment" %}}
 
-Use tags to filter metrics to display in a [dashboard graph][1], or to create aggregated groups of metrics to display. To filter the metrics to display, enter the tag in the **from** text box. This metric displays over all sources that have that particular tag assigned (`service:web-store` in the example below).
+Use tags to filter metrics to display in a [dashboard graph][1], or to create aggregated groups of metrics to display. To filter the metrics to display, enter the tag in the {{< ui >}}from{{< /ui >}} text box. This metric displays over all sources that have that particular tag assigned (`service:web-store` in the example below).
 
 {{< img src="tagging/using_tags/dashboards_tags_example.png" alt="Filter metrics in dashboards by adding a tag to the 'from' field, in this example the metric is filtered to 'service:web-store'" style="width:80%;">}}
 
@@ -55,7 +55,7 @@ Use `IN`, `NOT IN` to quickly filter a metric down to specific tags:
 
 {{< img src="tagging/using_tags/dashboard_advanced_tags_NOT_IN.png" alt="Boolean Filter with IN/NOT IN" style="width:80%;">}}
 
-To create an aggregated group using tags, enter the key part of the tag in the **avg by** text box. For example, if you have a timeseries graph showing a metric tagged with the key `service`, such as `service:web-store`, enter `service` in the **avg by** text box to show one line for each `service` tag value. Each line represents the average metric value across all sources that share that `service` tag value.
+To create an aggregated group using tags, enter the key part of the tag in the {{< ui >}}avg by{{< /ui >}} text box. For example, if you have a timeseries graph showing a metric tagged with the key `service`, such as `service:web-store`, enter `service` in the {{< ui >}}avg by{{< /ui >}} text box to show one line for each `service` tag value. Each line represents the average metric value across all sources that share that `service` tag value.
 
 {{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Tags in Dashboards avg by text box" style="width:80%;">}}
 
@@ -64,7 +64,7 @@ The matching events are overlaid as vertical bars on the graph. The example belo
 
 {{< img src="tagging/using_tags/dashboard_event_overlays.png" alt="Use tags to add Event Overlays in Dashboards" style="width:80%;">}}
 
-Use [template variables][3] to save time switching the **from** tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag key. To use the template variable, add the `$service` template variable in the **from** text box of your graph query.
+Use [template variables][3] to save time switching the {{< ui >}}from{{< /ui >}} tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag key. To use the template variable, add the `$service` template variable in the {{< ui >}}from{{< /ui >}} text box of your graph query.
 
 {{< img src="tagging/using_tags/dashboard_dynamic_template_variables.png" alt="Dashboard Template Variables" style="width:80%;">}}
 
@@ -78,11 +78,11 @@ Here is an example of tags using the timeseries graph editor. For the first scre
 
 {{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_no_tags.png" alt="Timeseries graph editor with no tags added" style="width:75%;">}}
 
-Next, the editor is updated to include a tag (`region:eastus`) in the **from** text box that enables Datadog to look at CPU usage across the US East region. The `region` tag is used as an example here, but you could use any arbitrary tag sent to your Datadog platform, including `application`, `service`, or `environment`.
+Next, the editor is updated to include a tag (`region:eastus`) in the {{< ui >}}from{{< /ui >}} text box that enables Datadog to look at CPU usage across the US East region. The `region` tag is used as an example here, but you could use any arbitrary tag sent to your Datadog platform, including `application`, `service`, or `environment`.
 
 {{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_from_tag.png" alt="Timeseries graph editor filtered by the 'region:us-east-1' tag" style="width:75%;">}}
 
-Finally, the second empty field (the **avg by** text box) is used to show an individual timeseries line for each `host`. Server CPU is displayed for individual hosts running in the US East region.
+Finally, the second empty field (the {{< ui >}}avg by{{< /ui >}} text box) is used to show an individual timeseries line for each `host`. Server CPU is displayed for individual hosts running in the US East region.
 
 {{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Timeseries graph editor filtered by 'region:us-east-1' and grouped by 'host'" style="width:75%;">}}
 
@@ -93,7 +93,7 @@ If needed, add additional tags to narrow down the scope even further—for examp
 
 ## Infrastructure
 
-To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the **Filter by** text box at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** text box. If you enter `service` in the group box, you see each service as a group heading.
+To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the {{< ui >}}Filter by{{< /ui >}} text box at the top of the page. Hosts and containers can be grouped by tag key using the {{< ui >}}Group by{{< /ui >}} text box. If you enter `service` in the group box, you see each service as a group heading.
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
@@ -138,9 +138,9 @@ To filter monitors and [monitor downtimes][31] by [assigned tags][32], use the s
 **Note**: Monitor tags are different and separate from metric tags. For more information, see the documentation on [Monitor tags][30].
 
 When creating a new monitor, use *metric tags* in the:
-* **from** text box to limit the monitor scope to only metrics that have those tags.
-* **excluding** text box to remove the corresponding metrics from the monitor scope.
-* **avg by** text box to transform the monitor into a multi alert monitor on each tag value.
+* {{< ui >}}from{{< /ui >}} text box to limit the monitor scope to only metrics that have those tags.
+* {{< ui >}}excluding{{< /ui >}} text box to remove the corresponding metrics from the monitor scope.
+* {{< ui >}}avg by{{< /ui >}} text box to transform the monitor into a multi alert monitor on each tag value.
 
 ## Metrics
 
@@ -239,7 +239,7 @@ After [assigning tags][1], use the Service Map to navigate to different areas of
 
 ## Notebooks
 
-When creating a [Notebook][9] graph, limit metrics by using tags in the **from** text box. Additionally, group metrics by using tags in the **avg by** text box. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
+When creating a [Notebook][9] graph, limit metrics by using tags in the {{< ui >}}from{{< /ui >}} text box. Additionally, group metrics by using tags in the {{< ui >}}avg by{{< /ui >}} text box. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
 
 {{< img src="tagging/using_tags/notebooktags.png" alt="Notebook Tags" style="width:80%;">}}
 
@@ -309,14 +309,14 @@ SLO tags are different and separate from metric or monitor tags used in the unde
 
 When creating a [metric-based SLO][1], use metric tags in the SLO's success ratio metric queries (all metrics must use the same set of metric tags):
 
-* **from** text box to limit the metric scope to only those tags.
-* **sum by** text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
+* {{< ui >}}from{{< /ui >}} text box to limit the metric scope to only those tags.
+* {{< ui >}}sum by{{< /ui >}} text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
 
 [1]: /service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
-When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use the **Calculate on selected groups** toggle to select up to 20 tag values from the underlying monitor to display a status percentage and remaining error budget for both the overall SLO and for each tag value:
+When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use the {{< ui >}}Calculate on selected groups{{< /ui >}} toggle to select up to 20 tag values from the underlying monitor to display a status percentage and remaining error budget for both the overall SLO and for each tag value:
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Monitor-based SLO Tags" style="width:80%;">}}
 
@@ -356,7 +356,7 @@ To filter pipeline executions by tags, use the search bar or facet checkboxes. T
 
 ## DORA Metrics
 
-The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the `+ Filter` button to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
+The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the {{< ui >}}+ Filter{{< /ui >}} button to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
 
 {{< img src="/delivery_performance/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:80%;">}}
 
