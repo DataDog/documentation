@@ -1229,19 +1229,36 @@ Wildcard filters such as `service:*` or `env:*` match every event, so they don't
 **Before**
 
 ```sql
-SELECT *
-FROM logs
-WHERE timestamp >= NOW() - INTERVAL '7 days';      -- no service or host filter
+-- No filter; scans all logs in the time range
+SELECT timestamp, service, host, message
+FROM dd.logs(
+    columns        => ARRAY['timestamp', 'service', 'host', 'message'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR,
+    message   VARCHAR
+)
 ```
 
 **After**
 
 ```sql
-SELECT *
-FROM logs
-WHERE service = 'checkout-api'
-  AND env     = 'prod'
-  AND timestamp >= NOW() - INTERVAL '7 days';      -- same window, but with a selective filter
+-- filter => narrows the scan to matching events before any SQL runs
+SELECT timestamp, service, host, message
+FROM dd.logs(
+    filter         => 'service:checkout-api env:prod',
+    columns        => ARRAY['timestamp', 'service', 'host', 'message'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR,
+    message   VARCHAR
+)
 ```
 
 #### Choose a time range that fits the question
@@ -1253,21 +1270,32 @@ Scan time grows with the time range. Consider starting with a window that covers
 **Before**
 
 ```sql
--- A single query scanning 31 days of raw events
-SELECT *
-FROM logs
-WHERE service = 'billing'
-  AND timestamp >= NOW() - INTERVAL '31 days';
+-- Scans 31 days of raw events
+SELECT timestamp, message
+FROM dd.logs(
+    filter         => 'service:billing',
+    columns        => ARRAY['timestamp', 'message'],
+    from_timestamp => NOW() - INTERVAL '31 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    message   VARCHAR
+)
 ```
 
 **After**
 
 ```sql
--- Aggregate up front for trends instead of scanning raw events
+-- Aggregate up front for trends; only fetch the timestamp column needed for grouping
 SELECT date_trunc('day', timestamp) AS day, count(*) AS events
-FROM logs
-WHERE service = 'billing'
-  AND timestamp >= NOW() - INTERVAL '7 days'
+FROM dd.logs(
+    filter         => 'service:billing',
+    columns        => ARRAY['timestamp'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP
+)
 GROUP BY 1
 ORDER BY 1;
 ```
@@ -1281,17 +1309,38 @@ Each column in your query is fetched from storage. Trim the column list to what 
 **Before**
 
 ```sql
-SELECT *                                            -- pulls every column, including the raw message
-FROM logs
-WHERE service = 'checkout-api';
+-- columns array fetches every field, including the expensive raw message
+SELECT *
+FROM dd.logs(
+    filter         => 'service:checkout-api',
+    columns        => ARRAY['timestamp', 'service', 'host', 'message', '@http.url', '@http.status_code'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp   TIMESTAMP,
+    service     VARCHAR,
+    host        VARCHAR,
+    message     VARCHAR,
+    http_url    VARCHAR,
+    status_code VARCHAR
+)
 ```
 
 **After**
 
 ```sql
-SELECT timestamp, service, host                     -- only what the analysis uses
-FROM logs
-WHERE service = 'checkout-api';
+-- Only declare the columns the analysis actually uses
+SELECT timestamp, service, host
+FROM dd.logs(
+    filter         => 'service:checkout-api',
+    columns        => ARRAY['timestamp', 'service', 'host'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR
+)
 ```
 
 ### Aggregations
@@ -1304,7 +1353,17 @@ When your goal is to understand the data (such as top-N, counts per category, or
 
 ```sql
 SELECT *
-FROM logs WHERE service = 'orders-api'
+FROM dd.logs(
+    filter         => 'service:orders-api',
+    columns        => ARRAY['timestamp', 'service', '@http.status_code', 'message'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp   TIMESTAMP,
+    service     VARCHAR,
+    status_code VARCHAR,
+    message     VARCHAR
+)
 LIMIT 5000000;
 ```
 
@@ -1313,7 +1372,14 @@ LIMIT 5000000;
 ```sql
 -- Returns ~10 rows (one per status_code), answers the actual question
 SELECT status_code, count(*) AS hits
-FROM logs WHERE service = 'orders-api'
+FROM dd.logs(
+    filter         => 'service:orders-api',
+    columns        => ARRAY['@http.status_code'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    status_code VARCHAR
+)
 GROUP BY status_code
 ORDER BY hits DESC
 LIMIT 100;
@@ -1335,9 +1401,15 @@ When working with high-cardinality columns (such as emails, IPs, or request IDs)
 **Before**
 
 ```sql
+-- No service filter; unbounded distinct set across all logs
 SELECT DISTINCT user_email
-FROM logs
-WHERE timestamp >= NOW() - INTERVAL '7 days';    -- no service filter, unbounded set
+FROM dd.logs(
+    columns        => ARRAY['@usr.email'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    user_email VARCHAR
+)
 ```
 
 **After**
@@ -1347,9 +1419,15 @@ WHERE timestamp >= NOW() - INTERVAL '7 days';    -- no service filter, unbounded
 SELECT count(DISTINCT user_email) AS distinct_emails
 FROM (
   SELECT date_trunc('day', timestamp) AS day, user_email
-  FROM logs
-  WHERE service = 'checkout-api'
-    AND timestamp >= NOW() - INTERVAL '7 days'
+  FROM dd.logs(
+      filter         => 'service:checkout-api',
+      columns        => ARRAY['timestamp', '@usr.email'],
+      from_timestamp => NOW() - INTERVAL '7 days',
+      to_timestamp   => NOW()
+  ) AS (
+      timestamp  TIMESTAMP,
+      user_email VARCHAR
+  )
   GROUP BY 1, 2
 ) daily;
 ```
@@ -1363,10 +1441,26 @@ Joining one source to itself many times to correlate different events is one of 
 **Before: 4 self-joins**
 
 ```sql
-WITH a AS (SELECT user_id FROM logs WHERE service='checkout-api'),
-     b AS (SELECT user_id FROM logs WHERE service='payment-api'),
-     c AS (SELECT user_id FROM logs WHERE service='shipping-api'),
-     d AS (SELECT user_id FROM logs WHERE service='orders-api')
+WITH a AS (
+    SELECT user_id FROM dd.logs(filter => 'service:checkout-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+b AS (
+    SELECT user_id FROM dd.logs(filter => 'service:payment-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+c AS (
+    SELECT user_id FROM dd.logs(filter => 'service:shipping-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+d AS (
+    SELECT user_id FROM dd.logs(filter => 'service:orders-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+)
 SELECT user_id
 FROM a JOIN b USING (user_id)
        JOIN c USING (user_id)
@@ -1377,8 +1471,15 @@ FROM a JOIN b USING (user_id)
 
 ```sql
 SELECT user_id
-FROM logs
-WHERE service IN ('checkout-api','payment-api','shipping-api','orders-api')
+FROM dd.logs(
+    filter         => 'service:(checkout-api OR payment-api OR shipping-api OR orders-api)',
+    columns        => ARRAY['service', '@usr.id'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    service VARCHAR,
+    user_id VARCHAR
+)
 GROUP BY user_id
 HAVING count(DISTINCT service) = 4;
 ```
@@ -1394,21 +1495,36 @@ When you `JOIN` across two data sources, apply a selective filter on each side. 
 **Before**
 
 ```sql
+-- No filter on the logs side; full scan held in memory for the join
 SELECT l.message, r.user_id
-FROM logs l                                         -- no filter on the logs side
-JOIN rum  r ON l.trace_id = r.trace_id
+FROM (
+    SELECT message, trace_id
+    FROM dd.logs(
+        columns        => ARRAY['message', 'trace_id'],
+        from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp   => NOW()
+    ) AS (message VARCHAR, trace_id VARCHAR)
+) l
+JOIN rum r ON l.trace_id = r.trace_id
 WHERE r.view_name = 'cart';
 ```
 
 **After**
 
 ```sql
+-- Both sides filtered before the join
 SELECT l.message, r.user_id
-FROM logs l
-JOIN rum  r ON l.trace_id = r.trace_id
-WHERE l.service   = 'checkout-api'                  -- both sides filtered
-  AND l.status    = 'error'
-  AND r.view_name = 'cart';
+FROM (
+    SELECT message, trace_id
+    FROM dd.logs(
+        filter         => 'service:checkout-api status:error',
+        columns        => ARRAY['message', 'trace_id'],
+        from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp   => NOW()
+    ) AS (message VARCHAR, trace_id VARCHAR)
+) l
+JOIN rum r ON l.trace_id = r.trace_id
+WHERE r.view_name = 'cart';
 ```
 
 ### Expressions
@@ -1420,24 +1536,33 @@ If you call `REGEXP_MATCH` once for each output column, the same pattern is eval
 **Before**
 
 ```sql
+-- Same regex evaluated 3 times per row
 SELECT
   SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 1) AS user_id,
   SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 2) AS latency_ms,
   SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 3) AS error_code
-  -- same regex evaluated 3 times per row
-FROM logs;
+FROM dd.logs(
+    columns        => ARRAY['message'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (message VARCHAR);
 ```
 
 **After**
 
 ```sql
+-- Regex runs once per row; captures unpacked in the outer SELECT
 SELECT
   SPLIT_PART(matched, '|||', 1) AS user_id,
   SPLIT_PART(matched, '|||', 2) AS latency_ms,
   SPLIT_PART(matched, '|||', 3) AS error_code
 FROM (
   SELECT ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||') AS matched
-  FROM logs
+  FROM dd.logs(
+      columns        => ARRAY['message'],
+      from_timestamp => NOW() - INTERVAL '1 day',
+      to_timestamp   => NOW()
+  ) AS (message VARCHAR)
 ) sub;
 ```
 
