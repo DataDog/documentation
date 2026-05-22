@@ -102,12 +102,12 @@ Before you begin, ensure that you have an [AWS][7] account. The CloudFormation t
 ## Setup
 
 1. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
-1. Configure the integration's settings under the **Automatically using CloudFormation** option.  
-   1. Select the AWS regions to integrate with.  
-   1. Add your Datadog [API key][9].  
-   1. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
+1. Configure the integration's settings under the **Automatically using CloudFormation** option.
+   1. Select the AWS regions to integrate with.
+   1. Add your Datadog [API key][9].
+   1. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].
    1. Optionally, enable [Cloud Security Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
-1. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
+1. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 1. Check the required boxes from AWS and click **Create stack**. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
 1. After the stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
@@ -212,7 +212,7 @@ To monitor AWS Lambda functions with Datadog, see [Serverless][42] for instructi
 
 ### APM
 
-To collect distributed traces from your applications and AWS services, use the Datadog Agent with [APM][47]. For AWS Lambda functions, instrument with the [Datadog Lambda Extension and SDKs][44]. The [AWS X-Ray integration][46] remains available for use cases not yet covered by Datadog's native SDKs. See the [APM documentation][48] for details on analyzing application performance data.
+To collect distributed traces from your applications and AWS services, use the Datadog Agent with [APM][47]. For AWS Lambda functions, instrument with the [Datadog Lambda Extension][44].  See the [APM documentation][48] for details on analyzing application performance data.
 
 You can also use [Watchdog][49], an algorithmic feature for APM performance and infrastructure metrics, to automatically detect and be notified about potential application issues.
 

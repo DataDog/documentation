@@ -86,7 +86,7 @@ The Datadog Lambda Library and SDKs for Go support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Go][9] libraries.
 
-For Go serverless applications, Datadog recommends installing [Datadog SDKs][5]. 
+For Go serverless applications, Datadog recommends installing [Datadog SDKs][5].
 
 *Looking to trace through serverless resources not listed above? [Open a feature request][7].*
 
@@ -156,13 +156,13 @@ For [S3 Change Notifications][28], Span Auto-linking supports the following oper
 
 For end-to-end visibility across Lambda functions, hosts, containers, and managed services, install the Datadog SDKs (`dd-trace`) on both your Lambda functions and your hosts. Your traces then show a complete picture of requests that cross infrastructure boundaries.
 
-If your hosts already run `dd-trace` and your Lambda functions are instrumented with AWS X-Ray, see [Trace Merging](#trace-merging) for guidance on connecting both into a single trace.
+On Lambda, install `dd-trace` with the [Datadog Lambda Extension][35], which runs the Datadog Agent inside the Lambda execution environment and ships traces directly to Datadog with minimal overhead. The Lambda Extension is the recommended installation method for new and existing serverless applications.
 
 See the [Datadog APM documentation][16] for tracing setup in container and host-based environments.
 
 ## Profiling your Lambda Functions
 
-Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -409,3 +409,4 @@ If you have existing X-Ray instrumentation and want to keep using it, [install t
 [32]: https://github.com/DataDog/dd-trace-js/
 [33]: https://github.com/DataDog/datadog-lambda-python
 [34]: https://github.com/DataDog/datadog-lambda-js
+[35]: /serverless/libraries_integrations/extension/

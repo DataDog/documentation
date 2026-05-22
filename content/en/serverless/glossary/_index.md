@@ -2,7 +2,7 @@
 title: Serverless Glossary
 ---
 
-This glossary focuses on terms and concepts specific to serverless architectures, cloud platform providers, and Datadog Serverless monitoring. 
+This glossary focuses on terms and concepts specific to serverless architectures, cloud platform providers, and Datadog Serverless monitoring.
 
 ### General serverless concepts
 
@@ -17,7 +17,7 @@ This glossary focuses on terms and concepts specific to serverless architectures
 
 ## Cloud-specific concepts
 
-Datadog Serverless provides monitoring for serverless applications in multiple cloud environments. 
+Datadog Serverless provides monitoring for serverless applications in multiple cloud environments.
 
 {{< tabs >}}
 {{% tab "AWS Lambda" %}}
@@ -77,6 +77,38 @@ AWS Lambda is the FaaS platform provided by Amazon Web Services. See the [AWS La
 [14]: /serverless/distributed_tracing/serverless_trace_merging
 [15]: /serverless/distributed_tracing/serverless_trace_propagation
 [16]: /serverless/troubleshooting/insights/
+{{% /tab %}}
+{{% tab "AWS Step Functions" %}}
+
+AWS Step Functions is a serverless orchestration service from Amazon Web Services. See the [AWS Step Functions documentation][1] for more details.
+
+| Concept                         | Description                                                                                                                                                                                                          |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| State machine          | The workflow definition for a Step Function, written in Amazon States Language. A state machine defines the states and transitions that make up a workflow.                              |
+| State          | An individual step in a state machine. States can perform work (such as invoking a Lambda function), make decisions, pass data, or wait.                              |
+| Execution          | A single run of a state machine, which processes input through the states until it reaches a terminal state.                              |
+| Task          | A state that represents a single unit of work performed by a state machine, such as invoking an AWS Lambda function or calling an AWS service.                              |
+| Distributed Map          | A state type for running large-scale parallel workloads. Distributed Map states process items from a data source as independent child workflow executions.                              |
+| Redrive          | An AWS feature that restarts a failed execution from the point of failure, without re-running successful states.                              |
+
+
+### Datadog serverless for AWS Step Functions concepts
+
+| Concept                         | Description                                                                                                                                                                                                          |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Step Functions monitoring][2]      | Datadog's offering for monitoring AWS Step Functions, including tracing, logs, and enhanced metrics.                            |
+| [Enhanced Step Functions metrics][3] | Metrics that go beyond the default CloudWatch metrics for Step Functions. Enhanced Step Functions metrics are in the `aws.states.enhanced.*` namespace. |
+| [Trace merging with Lambda][4] | Datadog merges AWS Step Functions traces with downstream AWS Lambda traces into a single, connected trace.                            |
+| [Distributed Map tracing][5] | Tracing for large-scale parallel workloads run with Distributed Map states.                            |
+| [Redrive support][6] | Datadog supports tracing for redriven Step Function executions.                            |
+
+
+[1]: https://docs.aws.amazon.com/step-functions/
+[2]: /serverless/step_functions/
+[3]: /serverless/step_functions/enhanced-metrics/
+[4]: /serverless/step_functions/merge-step-functions-lambda/
+[5]: /serverless/step_functions/distributed-maps/
+[6]: /serverless/step_functions/redrive/
 {{% /tab %}}
 {{% tab "Azure Functions" %}}
 
