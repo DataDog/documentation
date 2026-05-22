@@ -16,7 +16,7 @@ Case approvals let you request sign-off from one or more team members before tak
 ## Requesting approvals
 
 To request approval on a case:
-1. From a case, click the **More Options** icon on the righthand side.
+1. From a case, click the **More Options** icon on the right-hand side.
 1. Select **Request approval**.
 1. Use the **Add reviewer** dropdown to select one or more users.
 1. (Optional) Enter a message in the **Describe your request** field.
@@ -41,8 +41,7 @@ After requesting approval, a **Reviewers** section appears in the case details p
 | Be added as an approver on a case | Cases Read |
 | Approve or decline a case | Cases Read |
 
-For more information, see
-  <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.
+For more information, see [Datadog Role Permissions](/account_management/rbac/permissions/#case-and-incident-management).
 
 ## Automation rules
 
