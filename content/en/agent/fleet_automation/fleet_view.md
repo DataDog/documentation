@@ -55,9 +55,9 @@ To access these views:
 
 The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a single OTel Collector. Use the pipeline view to:
 
-- **Validate telemetry routing** between configured receivers, processors, and exporters.
-- **Identify data flow issues** such as data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
-- **Investigate pipeline alerts** by examining active monitor alerts surfaced on component nodes.
+- Validate telemetry routing between configured receivers, processors, and exporters.
+- Identify data flow issues such as data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
+- Investigate pipeline alerts by examining active monitor alerts surfaced on component nodes.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline view showing telemetry routing between OTel Collector components." style="width:100%;" >}}
 
@@ -65,11 +65,9 @@ The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a sin
 
 The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
 
-- **Validate telemetry routing** across Collectors in a DaemonSet-to-gateway architecture.
-- **Spot data drops and bottlenecks** by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle to overlay data flow rates on each edge.
-- **Investigate pipeline issues** by examining active monitor alerts surfaced on Collector nodes.
-
-<div class="alert alert-info">Topology view is a preview feature. To enable it, complete the <a href="/opentelemetry/integrations/datadog_extension/#5-optional-configure-gateway-topology-preview">gateway topology setup</a> in the Datadog Extension.</div>
+- Validate telemetry routing across Collectors in a DaemonSet-to-gateway architecture.
+- Spot data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle to overlay data flow rates on each edge.
+- Investigate pipeline issues by examining active monitor alerts surfaced on Collector nodes.
 
 {{< img src="/agent/fleet_automation/fleet-automation-gateway-topology.png" alt="Topology view in Fleet Automation showing DaemonSet Collectors forwarding through gateway Collectors to Datadog." style="width:100%;" >}}
 
