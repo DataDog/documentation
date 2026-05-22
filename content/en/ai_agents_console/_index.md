@@ -20,7 +20,7 @@ further_reading:
 Agent Console is in Preview and available to all Datadog customers.
 {{< /callout >}}
 
-The [Agent Console][1] provides centralized monitoring for AI agents across your organization. It collects logs and metrics from coding agents and Datadog's own Bits AI agents, surfacing them in real time to give you visibility into usage, cost, latency, productivity impact, and emerging problem patterns.
+The [Agent Console][1] provides centralized monitoring for AI agents across your organization. It collects logs and metrics from coding agents and Datadog's own [Bits AI agents](#bits-ai-agents), surfacing them in real time to give you visibility into usage, cost, latency, productivity impact, and emerging problem patterns.
 
 Agent Console supports the following coding agents:
 
@@ -30,7 +30,6 @@ Agent Console supports the following coding agents:
 | [Cursor][3] | AI-powered code editor |
 | [GitHub Copilot][10] | GitHub's AI-powered code completion tool |
 
-In addition, Agent Console includes a dedicated tab for [Bits AI agents](#bits-ai-agents), Datadog's built-in AI agents.
 
 ## Coding agents
 
