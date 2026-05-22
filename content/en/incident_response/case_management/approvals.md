@@ -41,7 +41,7 @@ After requesting approval, a **Reviewers** section appears in the case details p
 | Be added as an approver on a case | Cases Read |
 | Approve or decline a case | Cases Read |
 
-For more information, see [Datadog Role Permissions](/account_management/rbac/permissions/#case-and-incident-management).
+For more information, see [Datadog Role Permissions][2].
 
 ## Automation rules
 
@@ -58,3 +58,4 @@ See [Case automation rules][1] for setup instructions.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /incident_response/case_management/automation_rules
+[2]: /account_management/rbac/permissions/#case-and-incident-management
