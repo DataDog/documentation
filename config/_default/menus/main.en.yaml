@@ -1670,16 +1670,21 @@ menu:
       url: dashboards/functions/smoothing/
       parent: dashboards_functions
       weight: 510
+    - name: Telemetry Source
+      identifier: dashboards_functions_telemetry_source
+      url: dashboards/functions/telemetry_source/
+      parent: dashboards_functions
+      weight: 511
     - name: Timeshift
       identifier: dashboards_functions_timeshift
       url: dashboards/functions/timeshift/
       parent: dashboards_functions
-      weight: 511
+      weight: 512
     - name: Beta
       identifier: dashboards_functions_beta
       url: dashboards/functions/beta/
       parent: dashboards_functions
-      weight: 512
+      weight: 513
     - name: Graph Insights
       identifier: dashboards_graph_insights
       url: dashboards/graph_insights
