@@ -301,9 +301,11 @@ See [Delete a rule](#delete-a-rule) if you want to delete an unused rule.
 
 ### Only scan the events and fields that need to be scanned for sensitive data
 
-If you know the types of events you want to scan, define a processor query that only sends the events you want to the processor.
+The time it takes the Sensitive Data Scanner to scan an event roughly scales with the size of the event. To optimize processor performance:
 
-Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the **Define rule target and conditions** section in [Set up the processor](#set-up-the-processor-in-the-ui).
+- If you know the types of events you want to scan, define a processor query that only sends the events you want to the processor.
+
+- Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the **Define rule target and conditions** step in [Set up the processor](#set-up-the-processor-in-the-ui).
 
 ### Evaluate and benchmark performance optimizations
 
