@@ -154,7 +154,7 @@ nav_sections:
         icon: ide
         desc: Interact with Datadog services directly from your IDE as you code
       - title: DORA Metrics
-        link: dora_metrics/
+        link: delivery_performance/dora_metrics/
         icon: ci
         desc: Measure and improve your organization's software delivery processes
       - title: Feature Flags

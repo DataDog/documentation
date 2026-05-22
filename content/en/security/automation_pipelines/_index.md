@@ -12,6 +12,9 @@ further_reading:
   - link: "/security/automation_pipelines/set_due_date"
     tag: "Documentation"
     text: "Set Due Date Rules"
+  - link: "/security/automation_pipelines/create_ticket"
+    tag: "Documentation"
+    text: "Ticket Creation Rules"
   - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
     tag: "Blog"
     text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
@@ -25,17 +28,17 @@ Automation Pipelines allows you to set up automated rules for newly discovered f
 
 Automation Pipelines is available for:
 
-- Misconfigurations
-- Attack paths
-- Identity risks
-- Secrets
-- Infrastructure as Code
 - Runtime Code Vulnerabilities
 - Static Code Vulnerabilities
 - Library Vulnerabilities
+- Secrets
+- Infrastructure as Code
 - Container Image Vulnerabilities
-- API Security findings
 - Host Vulnerabilities
+- Misconfigurations
+- Attack Paths
+- Identity Risks
+- API Security
 
 ## How it works
 
@@ -68,7 +71,15 @@ Assign remediation deadlines to findings to improve accountability and stay comp
 
 - **Stay compliant by design**: Automatically apply due dates that align with industry standards, such as FedRAMP, PCI, and others.
 - **Drive accountability across teams**: Use SLAs to ensure timely remediation without constant follow-ups, giving security and engineering clear expectations.
-- **Promote proactive risk management** Encourage faster response times and reduce exposure by using SLAs to prioritize and track remediation efforts.
+- **Promote proactive risk management**: Encourage faster response times and reduce exposure by using SLAs to prioritize and track remediation efforts.
+
+### Automatically create tickets to route findings into engineering workflows
+
+Route security findings directly into Jira or Case Management as soon as they are discovered. This allows you to:
+
+- **Eliminate manual triage**: Automatically generate tickets for findings that match your criteria, removing the need for security teams to create tickets by hand.
+- **Integrate with existing engineering workflows**: Meet engineering teams where they already work by routing security work into the same tools they use for other tasks.
+- **Reduce time to remediation**: Get findings into engineering queues immediately after detection, eliminating the delay between discovery and assignment.
 
 ## Further reading
 

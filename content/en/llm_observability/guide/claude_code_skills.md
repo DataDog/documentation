@@ -1,6 +1,6 @@
 ---
 title: Analyze LLM Applications with Claude Code Skills
-description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, and bootstrap evaluators against your live production data.
+description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators against your live production data.
 further_reading:
     - link: '/llm_observability/evaluations/'
       tag: 'Documentation'
@@ -18,13 +18,14 @@ further_reading:
 
 ## Overview
 
-Datadog provides a set of [Claude Code][1] skills that bring LLM Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, and generate evaluators — all against your live production data.
+Datadog provides a set of [Claude Code][1] skills that bring LLM Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators — all against your live production data.
 
 | Skill | What it does |
 |-------|-------------|
 | `/llm-obs-session-classify` | Classify whether user intent was satisfied in a session, trace, or batch of sessions from an ml_app |
 | `/llm-obs-trace-rca` | Root cause analysis on failing production LLM traces |
 | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK from a labeled dataset or sample fixtures |
 | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators from trace data |
 | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify sessions → root cause analysis → bootstrap evaluators |
 
@@ -132,6 +133,32 @@ The skill highlights which metrics improved or regressed, which event categories
 /llm-obs-experiment-analyzer experiment_id=exp-456 baseline_id=exp-123
 ```
 
+### Generate experiment code with the Python SDK
+
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][7], with all eight sections present (env setup, `LLMObs.enable`, dataset, task placeholder, evaluators, experiment, run, results inspection) and a `# TODO(user)` marker on the task and evaluators so the placeholder cannot ship by accident.
+
+The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is. Every generated experiment is tagged with `generated_by=claude-code` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--format` | `py` | `py` (single `.py` file) or `ipynb` (Jupyter notebook with one cell per section) |
+| `--dataset` | none (inline 3-record sample) | Path to a local `DatasetRecordRaw[]` JSON or CSV file. Mutually exclusive with `--dataset-name` |
+| `--dataset-name` | none | Name of an existing Datadog dataset to fetch at runtime with `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
+| `--dataset-version` | latest | Pin to a specific dataset version when using `--dataset-name` |
+| `--project-name` | `experiment-<service-name>` (inferred from the codebase) | Datadog project name visible in the LLM Experiments UI |
+| `--evaluator-style` | `function` | `function` (plain functions), `class` (`BaseEvaluator` subclasses), or `remote` (`RemoteEvaluator` instances) |
+| `--jobs` | `10` | Concurrency passed to `experiment.run(jobs=N)` |
+| `--output` | `./experiments/experiment.<ext>` | Output file path; extension derives from `--format` |
+
+**Examples**
+
+```
+/llm-obs-experiment-py-bootstrap
+/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --dataset-name qa_v3 --project-name customer-qa
+/llm-obs-experiment-py-bootstrap --evaluator-style remote --jobs 5
+```
+
 ### Bootstrap evaluators from trace data
 
 `/llm-obs-eval-bootstrap` analyzes production traces from an ml_app (or an RCA report already in context) and proposes a suite of evaluators that would catch the observed failure modes. It outputs one of three artifacts:
@@ -206,3 +233,4 @@ If you are new to evaluating an LLM application, the recommended flow is:
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: https://datadoghq.atlassian.net/wiki/spaces/BITSAI/pages/5226692942/pup+CLI
 [6]: https://github.com/datadog-labs/agent-skills
+[7]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks

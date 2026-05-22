@@ -1,6 +1,6 @@
 ---
-description: Installer et configurer Database Monitoring pour SQL Server géré sur
-  RDS.
+description: Installez et configurez la surveillance de la base de données pour SQL
+  Server géré sur RDS.
 further_reading:
 - link: /integrations/sqlserver/
   tag: Documentation
@@ -10,40 +10,41 @@ further_reading:
   text: Résoudre les problèmes courants
 - link: /database_monitoring/guide/sql_deadlock/
   tag: Documentation
-  text: Configurer la surveillance des deadlocks
+  text: Configurez la surveillance des blocages.
 - link: /database_monitoring/guide/sql_extended_events/
   tag: Documentation
-  text: Configurer la collecte des fins de requêtes et des erreurs de requêtes
+  text: Configurez la collecte de l'achèvement des requêtes et des erreurs de requête.
 - link: /database_monitoring/guide/parameterized_queries/
   tag: Documentation
-  text: Capture des valeurs de paramètres de requêtes SQL
-title: Configuration de Database Monitoring pour SQL Server sur Amazon RDS
+  text: Capturez les valeurs des paramètres de requête SQL.
+title: Configuration de la surveillance de la base de données pour SQL Server sur
+  Amazon RDS.
 ---
+La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données Microsoft SQL Server, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, des états, des failovers et des événements de base de données.
 
-La solution Database Monitoring vous permet de bénéficier d'une visibilité complète sur vos bases de données Microsoft SQL Server, en exposant des métriques de requête, des échantillons de requête, des plans d'exécution, ainsi que des états, des failovers et des événements de base de données.
+Pour activer la solution Database Monitoring pour votre base de données, suivez les étapes ci-dessous :
 
-Pour activer la solution Database Monitoring pour votre base de données, suivez les étapes ci-dessous :
+1. [Configurez l'intégration AWS](#configure-the-aws-integration)
+1. [Accordez l'accès à l'Agent](#grant-the-agent-access)
+1. [Installez l'Agent](#install-the-agent)
+1. [Installez l'intégration RDS](#install-the-rds-integration)
 
-1. [Configurer l'intégration AWS](#configurer-lintegration-aws)
-1. [Accorder un accès à l'Agent](#accorder-un-acces-a-l-agent)
-1. [Installer l'Agent](#installer-l-agent)
-1. [Installer l'intégration RDS](#installer-l-integration-rds)
+## Avant de commencer {#before-you-begin}
 
-## Avant de commencer
-
-Versions de SQL Server prises en charge : 2014, 2016, 2017, 2019, 2022
+Versions de SQL Server prises en charge
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Configurer l'intégration AWS
+## Configurez l'intégration AWS {#configure-the-aws-integration}
 
-Activez la **collecte standard** dans la section **Collecte de ressources** de votre [carré d'intégration Amazon Web Services][2].
+Activez {{< ui >}}Standard Collection{{< /ui >}} dans la section {{< ui >}}Resource Collection{{< /ui >}} de votre [tuile d'intégration Amazon Web Services][2].
 
-## Accorder un accès à l'Agent
+## Accordez l'accès à l'Agent {#grant-the-agent-access}
 
-L'Agent Datadog requiert un accès en lecture seule au serveur de la base de données, afin de pouvoir recueillir les statistiques et requêtes.
+L'Agent Datadog requiert un accès en lecture seule pour le serveur de la base de données, afin de pouvoir recueillir les statistiques et requêtes.
 
-Créez une connexion en lecture seule pour vous connecter au serveur et attribuez les autorisations requises :
+Créez une connexion en lecture seule pour vous connecter au serveur en attribuant les autorisations requises :
 
 ```SQL
 USE [master];
@@ -67,26 +68,27 @@ GRANT VIEW ANY DEFINITION to datadog;
 GO
 ```
 
-Créez l'utilisateur `datadog` dans chaque base de données de l'application supplémentaire :
+Créez l'utilisateur `datadog` dans chaque base de données d'application supplémentaire :
+
 ```SQL
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-Cela est nécessaire car RDS n'autorise pas l'octroi de `CONNECT ANY DATABASE`. L'Agent Datadog doit se connecter à chaque base de données pour collecter les statistiques d'E/S de fichiers spécifiques à chaque base de données.
+Ceci est requis car RDS ne permet pas d'accorder `CONNECT ANY DATABASE`. L'Agent Datadog doit se connecter à chaque base de données pour collecter des statistiques spécifiques aux fichiers I/O de la base de données.
 
-### Stocker votre mot de passe de manière sécurisée
+### Stockez votre mot de passe de manière sécurisée {#securely-store-your-password}
 {{% dbm-secret %}}
 
-## Installer l'Agent
+## Installez l'Agent {#install-the-agent}
 
-AWS n'accordant pas d'accès direct à l'hôte, l'Agent Datadog doit être installé sur un hôte distinct depuis lequel il peut communiquer avec l'hôte SQL Server. Plusieurs options sont disponibles pour installer et exécuter l'Agent.
+Parce qu'AWS ne permet pas l'accès direct à l'hôte, l'Agent Datadog doit être installé sur un hôte séparé où il peut communiquer avec l'hôte SQL Server. Il existe plusieurs options pour installer et exécuter l'Agent.
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
+{{% tab "Hôte Windows" %}}
 {{% dbm-alwayson-cloud-hosted %}}
 
-Pour commencer à collecter des données de télémétrie SQL Server, [installez l'Agent Datadog][1], puis créez le fichier de configuration de l'Agent SQL Server à l'emplacement `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. Consultez le [fichier de configuration d'exemple][2] pour obtenir toutes les options de configuration disponibles.
+Pour commencer à collecter la télémétrie SQL Server, [installez l'Agent Datadog][1], puis créez le fichier de configuration de l'Agent SQL Server à `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. Référez-vous au [fichier de configuration d'exemple][2] pour toutes les options de configuration disponibles.
 
 ```yaml
 init_config:
@@ -105,25 +107,26 @@ instances:
       instance_endpoint: '<INSTANCE_ENDPOINT>'
 ```
 
-Pour utiliser l'[authentification Windows][4], définissez `connection_string: "Trusted_Connection=yes"` et ne remplissez pas les champs `username` et `password`.
+Pour utiliser [l'authentification Windows][4], définissez `connection_string: "Trusted_Connection=yes"` et omettez les champs `username` et `password`.
 
-Utilisez les tags `service` et `env` pour associer vos données de télémétrie de base de données à d'autres données de télémétrie via un schéma de tagging commun. Consultez la section [Tagging de service unifié][5] pour en savoir plus sur l'utilisation de ces tags dans Datadog.
+Utilisez les balises `service` et `env` pour lier votre télémétrie de base de données à d'autres télémétries via un schéma de balisage commun. Consultez [Balisage de service unifié][5] pour des détails sur l'utilisation de ces balises dans Datadog.
 
-### Pilotes compatibles
+### Pilotes pris en charge {#supported-drivers}
 
-#### Microsoft ADO
+#### Microsoft ADO {#microsoft-ado}
 
-Le fournisseur [ADO][6] recommandé est [Microsoft OLE DB Driver][7]. Vérifiez que le pilote est installé sur l'hôte sur lequel l'Agent s'exécute.
+Le fournisseur [ADO][6] recommandé est le [Pilote OLE DB de Microsoft][7]. Assurez-vous que le pilote est installé sur l'hôte où l'Agent fonctionne.
+
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL19  # Remplacer cette valeur par MSOLEDBSQL pour la version 18 et les versions antérieures
+adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
 ```
 
 Les deux autres fournisseurs, `SQLOLEDB` et `SQLNCLI`, sont considérés comme obsolètes par Microsoft et ne doivent pas être utilisés.
 
-#### ODBC
+#### ODBC {#odbc}
 
-Le pilote ODBC recommandé est [Microsoft ODBC Driver][8]. À partir de l'Agent 7.51, ODBC Driver 18 for SQL Server est inclus par défaut dans l'Agent Linux. Pour Windows, vérifiez que le pilote est installé sur l'hôte sur lequel l'Agent s'exécute.
+Le pilote ODBC recommandé est le [Pilote ODBC de Microsoft][8]. À partir de l'Agent 7.51, le Pilote ODBC 18 pour SQL Server est inclus par défaut dans l'Agent Linux. Pour Windows, assurez-vous que le pilote est installé sur l'hôte où l'Agent fonctionne.
 
 ```yaml
 connector: odbc
@@ -132,9 +135,9 @@ driver: 'ODBC Driver 18 for SQL Server'
 
 Une fois la configuration de l'Agent terminée, [redémarrez l'Agent Datadog][9].
 
-### Validation
+### Valider {#validate}
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `sqlserver` dans la section **Checks**. Accédez à la page [Databases][11] dans Datadog pour commencer le processus de validation.
+[Exécutez la sous-commande d'état de l'Agent][10] et recherchez `sqlserver` sous la section **Vérifications**. Naviguez vers la page [Databases][11] dans Datadog pour commencer.
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
@@ -149,16 +152,16 @@ Une fois la configuration de l'Agent terminée, [redémarrez l'Agent Datadog][9]
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 
-{{% tab "Linux Host" %}}
+{{% tab "Hôte Linux" %}}
 {{% dbm-alwayson-cloud-hosted %}}
 
 Pour commencer à recueillir des données de télémétrie pour SQL Server, commencez par [installer l'Agent Datadog][1].
 
-Sur Linux, vous devez également installer un pilote ODBC SQL Server, tel que [Microsoft ODBC Driver][2]. Une fois l'installation terminée, copiez les fichiers `odbc.ini` et `odbcinst.ini` dans le dossier `/opt/datadog-agent/embedded/etc`.
+Sur Linux, vous devez également installer un pilote ODBC pour SQL Server, tel que [le pilote ODBC de Microsoft][2]. Après l'installation, copiez les fichiers `odbc.ini` et `odbcinst.ini` dans le dossier `/opt/datadog-agent/embedded/etc`.
 
-Utilisez le connecteur `odbc` et spécifiez le bon pilote, tel qu'indiqué dans le fichier `odbcinst.ini`.
+Utilisez le connecteur `odbc` et spécifiez le pilote approprié comme indiqué dans le fichier `odbcinst.ini`.
 
-Créez le fichier conf de l'Agent SQL Server `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. Consultez l'[exemple de fichier conf][3] pour découvrir toutes les options de configuration disponibles.
+Créez le fichier de configuration de l'Agent SQL Server `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. Consultez le [fichier de configuration d'exemple][3] pour toutes les options de configuration disponibles.
 
 ```yaml
 init_config:
@@ -177,13 +180,13 @@ instances:
       instance_endpoint: '<INSTANCE_ENDPOINT>'
 ```
 
-Utilisez les tags `service` et `env` pour associer vos données de télémétrie de base de données à d'autres données de télémétrie via un schéma de tagging commun. Consultez la section [Tagging de service unifié][5] pour en savoir plus sur l'utilisation de ces tags dans Datadog.
+Utilisez les balises `service` et `env` pour lier votre télémétrie de base de données à d'autres télémétries via un schéma de balisage commun. Consultez [Balisage de service unifié][5] pour des détails sur l'utilisation de ces balises dans Datadog.
 
 Une fois la configuration de l'Agent terminée, [redémarrez l'Agent Datadog][6].
 
-### Validation
+### Valider {#validate-1}
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `sqlserver` dans la section **Checks**. Accédez à la page [Databases][8] dans Datadog pour commencer le processus de validation.
+[Exécutez la sous-commande d'état de l'Agent][7] et recherchez `sqlserver` dans la section **Vérifications**. Naviguez vers la page [Databases][8] dans Datadog pour commencer.
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
@@ -200,9 +203,9 @@ Une fois la configuration de l'Agent terminée, [redémarrez l'Agent Datadog][6]
 
 Pour configurer l'Agent Database Monitoring qui s'exécute dans un conteneur Docker, définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur le conteneur de votre Agent.
 
-**Remarque** : pour que le processus de découverte automatique des étiquettes fonctionne, l'Agent doit être autorisé à lire le socket Docker.
+**Remarque** : L'Agent doit avoir l'autorisation de lecture sur le socket Docker pour que l'Autodécouverte des étiquettes fonctionne.
 
-Remplacez les valeurs afin qu'elles correspondent à votre compte et votre environnement. Consultez l'[exemple de fichier conf][2] pour découvrir toutes les options de configuration disponibles.
+Remplacez les valeurs pour correspondre à votre compte et à votre environnement. Consultez le [fichier de configuration d'exemple][2] pour toutes les options de configuration disponibles.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -230,11 +233,11 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
-Utilisez les tags `service` et `env` pour lier la télémétrie de votre base de données à d'autres données de télémétrie, par l'intermédiaire d'un schéma de tagging commun. Consultez la section [Tagging de service unifié][4] pour découvrir comment ces tags sont exploités dans l'ensemble de la plateforme Datadog.
+Utilisez les balises `service` et `env` pour lier votre télémétrie de base de données à d'autres télémétries via un schéma de balisage commun. Consultez [l'étiquetage de service unifié][4] pour des informations sur l'utilisation de ces balises dans Datadog.
 
-### Validation
+### Valider {#validate-2}
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `sqlserver` dans la section **Checks**. Sinon, accédez à la page [Databases][6] dans Datadog pour commencer le processus de validation.
+[Exécutez la sous-commande d'état de l'Agent][5] et recherchez `sqlserver` dans la section **Vérifications**. Alternativement, naviguez vers la page [Databases][6] dans Datadog pour commencer.
 
 [1]: /fr/agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
@@ -247,13 +250,13 @@ Utilisez les tags `service` et `env` pour lier la télémétrie de votre base de
 {{% tab "Kubernetes" %}}
 {{% dbm-alwayson-cloud-hosted %}}
 
-Si vous exécutez un cluster Kubernetes, utilisez l'[Agent de cluster de Datadog][1] pour activer Database Monitoring. Si les checks de cluster ne sont pas déjà activés, [suivez ces instructions][2] pour les activer avant de continuer.
+Si vous exécutez un cluster Kubernetes, utilisez [l'Agent de cluster Datadog][1] pour activer la surveillance des bases de données. Si les vérifications de cluster ne sont pas déjà activées, [suivez ces instructions][2] pour les activer avant de continuer.
 
-### Operator
+### Opérateur {#operator}
 
-Suivez les étapes ci-dessous pour configurer l'intégration SQL Server en vous appuyant sur les [instructions relatives à l'Operator dans Kubernetes et les intégrations][6] comme référence.
+Suivez les étapes ci-dessous pour configurer l'intégration SQL Server, en utilisant les [instructions de l'Opérateur dans Kubernetes et Intégrations][6] comme référence.
 
-1. Créez ou mettez à jour le fichier `datadog-agent.yaml` avec la configuration suivante :
+1. Créez ou mettez à jour le fichier `datadog-agent.yaml` avec la configuration suivante :
 
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
@@ -301,18 +304,18 @@ Suivez les étapes ci-dessous pour configurer l'intégration SQL Server en vous 
                     instance_endpoint: <INSTANCE_ENDPOINT>
     ```
 
-2. Appliquez les modifications à l'Operator Datadog à l'aide de la commande suivante :
+2. Appliquez les modifications à l'Opérateur Datadog en utilisant la commande suivante :
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-### Helm
+### Helm {#helm}
 
-Suivez les étapes ci-dessous pour installer l'[Agent de cluster de Datadog][1] sur votre cluster Kubernetes. Remplacez les valeurs pour qu'elles correspondent à votre compte et à votre environnement.
+Complétez les étapes suivantes pour installer le [Datadog Cluster Agent][1] sur votre cluster Kubernetes. Remplacez les valeurs pour correspondre à votre compte et à votre environnement.
 
-1. Suivez les [instructions d'installation de l'Agent Datadog][3] pour Helm.
-2. Mettez à jour votre fichier de configuration YAML (`datadog-values.yaml` dans les instructions d'installation de l'Agent de cluster) pour y inclure les éléments suivants :
+1. Complétez les [instructions d'installation de l'Agent Datadog][3] pour Helm.
+2. Mettez à jour votre fichier de configuration YAML (`datadog-values.yaml` dans les instructions d'installation du Cluster Agent) pour inclure ce qui suit :
     ```yaml
     clusterAgent:
       confd:
@@ -344,12 +347,12 @@ Suivez les étapes ci-dessous pour installer l'[Agent de cluster de Datadog][1] 
     ```
 
 <div class="alert alert-info">
-Pour Windows, ajoutez <code>--set targetSystem=windows</code> à la commande <code>helm install</code>.
+Pour Windows, ajoutez <code>--set targetSystem=windows</code> au <code>helm install</code> commande.
 </div>
 
-### Configuration avec des fichiers montés
+### Configurez avec des fichiers montés {#configure-with-mounted-files}
 
-Pour configurer un check de cluster avec un fichier de configuration monté, montez le fichier de configuration dans le conteneur de l'Agent de cluster à l'emplacement suivant : `/conf.d/sqlserver.yaml`.
+Pour configurer un contrôle de cluster avec un fichier de configuration monté, montez le fichier de configuration dans le conteneur du Cluster Agent sur le chemin : `/conf.d/sqlserver.yaml`.
 
 ```yaml
 cluster_check: true  # Required for cluster checks
@@ -370,9 +373,9 @@ instances:
       instance_endpoint: <INSTANCE_ENDPOINT>
 ```
 
-### Configuration avec les annotations de service Kubernetes
+### Configurez avec des annotations de service Kubernetes {#configure-with-kubernetes-service-annotations}
 
-Plutôt que de monter un fichier, vous pouvez déclarer la configuration de l'instance en tant que service Kubernetes. Pour configurer ce check pour un Agent s'exécutant sur Kubernetes, créez un service avec la syntaxe suivante :
+Au lieu de monter un fichier, vous pouvez déclarer la configuration de l'instance en tant que Service Kubernetes. Pour configurer ce contrôle pour un Agent fonctionnant sur Kubernetes, créez un service en utilisant la syntaxe suivante :
 
 ```yaml
 apiVersion: v1
@@ -405,11 +408,11 @@ spec:
     name: sqlserver
 ```
 
-Consultez les [spécifications de l'intégration SQL Server][4] pour en savoir plus sur la définition des champs `deployment_type` et `name`.
+Consultez la [spécification d'intégration SQL Server][4] pour des informations supplémentaires sur la définition des champs `deployment_type` et `name` :
 
 L'Agent de cluster enregistre automatiquement cette configuration et commence à exécuter le check SQL Server.
 
-Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, utilisez le [package de gestion des secrets][5] de l'Agent et déclarez le mot de passe à l'aide de la syntaxe `ENC[]`.
+Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en texte clair, utilisez le [package de gestion des secrets][5] de l'Agent et déclarez le mot de passe en utilisant la syntaxe `ENC[]`.
 
 
 [1]: /fr/agent/cluster_agent
@@ -423,14 +426,14 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 
 {{< /tabs >}}
 
-## Exemples de configuration de l'Agent
+## Exemples de configurations d'Agent {#example-agent-configurations}
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## Installer l'intégration RDS
+## Installez l'intégration RDS {#install-the-rds-integration}
 
-Pour collecter des métriques de base de données et des logs plus complets depuis AWS, installez l'[intégration RDS][1].
+Pour collecter des métriques et des journaux de base de données plus complets d'AWS, installez l'[intégration RDS][1].
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

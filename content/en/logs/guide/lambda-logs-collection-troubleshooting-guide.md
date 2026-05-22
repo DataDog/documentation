@@ -41,7 +41,7 @@ The Action and Resource elements in the policy document **must exactly match** t
 
 1. Open your forwarder Lambda function.
 
-2. Click the Monitoring tab.
+2. Click the {{< ui >}}Monitoring{{< /ui >}} tab.
 
     {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
@@ -50,7 +50,7 @@ The Action and Resource elements in the policy document **must exactly match** t
     * errors
     * logs
 
-4. If you don't see any data points on the **Invocations** graph, there may be a problem with the triggers you set for your function. See [Manage Your Function Triggers](#manage-your-function-triggers). To get insight into your Lambda invocations without using the monitoring tab, see [Viewing Lambda metrics in Datadog](#viewing-lambda-metrics-in-datadog).
+4. If you don't see any data points on the {{< ui >}}Invocations{{< /ui >}} graph, there may be a problem with the triggers you set for your function. See [Manage Your Function Triggers](#manage-your-function-triggers). To get insight into your Lambda invocations without using the monitoring tab, see [Viewing Lambda metrics in Datadog](#viewing-lambda-metrics-in-datadog).
 5. If you see data points on the "Error count and success rate" graph, [check the Lambda function logs](#check-the-lambda-function-logs) to see what error messages are being reported.
 
 ### Viewing Lambda metrics in Datadog
@@ -105,7 +105,7 @@ If Datadog fails to automatically create triggers, follow this troubleshooting c
 
 ## Check the Lambda function logs
 
-1. From the monitoring tab, click **View logs in Cloudwatch**.
+1. From the monitoring tab, click {{< ui >}}View logs in Cloudwatch{{< /ui >}}.
 
 {{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch" style="width:80%;" >}}
 

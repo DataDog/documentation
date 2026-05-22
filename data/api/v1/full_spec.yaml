@@ -9336,11 +9336,19 @@ components:
           description: The monitor `CRITICAL` threshold.
           format: double
           type: number
+        critical_query:
+          description: Query evaluated as a dynamic `CRITICAL` threshold. Only supported on metric monitors with a formula query and options['variables']. Cannot be combined with static thresholds. This field is in preview.
+          example: 'formula("2 * query1").rollup("avg").last("6mo")'
+          type: string
         critical_recovery:
           description: The monitor `CRITICAL` recovery threshold.
           format: double
           nullable: true
           type: number
+        critical_recovery_query:
+          description: Query evaluated as a dynamic `CRITICAL` recovery threshold. Only supported on metric monitors with a formula query and options['variables']. Cannot be combined with static thresholds. This field is in preview.
+          example: 'formula("1.5 * query1").rollup("avg").last("3mo")'
+          type: string
         ok:
           description: The monitor `OK` threshold.
           format: double
@@ -34401,6 +34409,10 @@ paths:
         - `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)
         - `operator`: <, <=, >, >=, ==, or !=
         - `#`: an integer or decimal number used to set the threshold
+
+        To use a dynamic threshold on a metric monitor with a formula query, replace `#` with the `threshold` keyword
+        (for example, `... > threshold`) and provide the threshold as a query via `critical_query` on `options.thresholds`.
+        This feature is in preview.
 
         If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),
         timeshift):space_aggr:metric{tags} [by {key}] operator #` with:

@@ -158,7 +158,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides five skills for classifying sessions, diagnosing failures, running experiments, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
@@ -184,6 +184,7 @@ Restart Claude Code after running both commands for the skills to appear.
 | Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
 | Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
 | Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
 | Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
 | Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
 
@@ -225,6 +226,16 @@ When Claude Code has access to your codebase, the skill can search for the relev
 ```
 /llm-obs-experiment-analyzer experiment_id=<EXPERIMENT_ID>
 /llm-obs-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
+```
+
+#### Generate experiment code with the Python SDK
+
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+
+```
+/llm-obs-experiment-py-bootstrap
+/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
 ```
 
 #### End-to-end eval pipeline

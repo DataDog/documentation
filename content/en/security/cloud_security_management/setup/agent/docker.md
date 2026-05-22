@@ -70,10 +70,10 @@ Each vulnerability finding is enriched with the following signals:
 These signals power vulnerability prioritization in Cloud Security, surfacing findings where vulnerable code is confirmed running in production.
 
 **Requirements**:
-- Datadog Agent **7.78.0 or later**
+- Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
 
-**Important**: Enabling runtime package prioritization activates [Workload Protection][4] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs.
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][4] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
 Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
 
@@ -87,7 +87,7 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
-**Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Agent **7.78.0 or later**. It activates [Workload Protection][4] for runtime file access monitoring, which may trigger additional Workload Protection usage and costs. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
+**Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats

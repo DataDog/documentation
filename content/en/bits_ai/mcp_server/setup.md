@@ -583,6 +583,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
+- `widgets`: Tools for [dashboard][46] and [notebook][54] widget visualization, validation, and type conversion.
 - `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
 
 ### Preview toolsets
@@ -768,3 +769,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [51]: /containers/monitoring/kubernetes_explorer/
 [52]: https://opencode.ai/
 [53]: https://github.com/datadog-labs/opencode-plugin
+[54]: /notebooks/
