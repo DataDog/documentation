@@ -38,15 +38,15 @@ The CLI can:
     npx @datadog/ai-setup-cli --site datadoghq.com
     ```
 
-    **Option 2: Specific product.** If you already have a Datadog account and want to install a specific product, pass `--product` to skip product selection.
+    Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, or `ap2.datadoghq.com`.
+
+    **Option 2: Direct setup.** If you already have a Datadog account and want to install a specific product, pass `--product` to skip product selection.
 
     ```shell
     npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
     ```
 
     Replace `<PRODUCT>` with one of `infrastructure`, `apm`, `logs`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `code-coverage`, `test-optimization`, or `llm-observability`.
-
-    Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, or `ap2.datadoghq.com`.
 
 1. Complete the OAuth flow in your browser when prompted. After authentication, point the CLI to your code repository. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables.
 
@@ -56,7 +56,7 @@ The CLI can:
 
 The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
 
-### Supported frameworks
+The MCP Server supports the following frameworks:
 
 | Product | Frameworks |
 |---------|------------|
@@ -81,7 +81,7 @@ In an active Claude Code session, run:
 1. In Cursor, click {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
 {{% collapse-content title="Manual configuration" level="h4" expanded=false %}}
-Add the server to `~/.cursor/mcp.json`:
+If you can't use the install deeplink, add the server to `~/.cursor/mcp.json` manually instead:
 
 <pre><code>{
   "mcpServers": {
@@ -136,11 +136,7 @@ Send the prompt that matches the product you want to set up:
 {{% /tab %}}
 {{< /tabs >}}
 
-The agent detects your stack, requests permission before each tool call, applies changes, and prints verification steps.
-
-**Note**: Your coding agent makes changes locally but does not commit them.
-
-After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
+The agent detects your stack, requests permission before each tool call, applies changes locally (without committing them), and prints verification steps. After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
 
 ## Next steps
 
