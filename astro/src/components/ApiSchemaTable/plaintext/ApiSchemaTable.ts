@@ -1,5 +1,5 @@
 /**
- * AST twin of `ApiSchemaTable.tsx` / `renderApiSchemaTableMd`.
+ * AST twin of `ApiSchemaTable.tsx`.
  *
  * Walks the SchemaField tree depth-first and builds a Markdown `table` AST
  * node with a leading `Parent field` column. Behavior mirrors the string
@@ -7,9 +7,9 @@
  * row per option label, with nested fields attributed to the option label.
  */
 
-import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import type { SchemaField } from '@lib/api/schemas/schemaField';
-import { tableNodeMd } from '@lib/plaintext/helpers';
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { tableNodeMd } from "@lib/plaintext/helpers";
 
 interface Row {
   parent: string;
@@ -18,7 +18,7 @@ interface Row {
   description: string;
 }
 
-const UNNAMED_FIELD_LABEL = '<items>';
+const UNNAMED_FIELD_LABEL = "<items>";
 
 export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
   if (!fields || fields.length === 0) {
@@ -26,9 +26,9 @@ export function apiSchemaTableNode(fields: SchemaField[]): MarkdocNode | null {
   }
 
   const rows: Row[] = [];
-  walkFields(fields, '', rows);
+  walkFields(fields, "", rows);
 
-  const headers = ['Parent field', 'Field', 'Type', 'Description'];
+  const headers = ["Parent field", "Field", "Type", "Description"];
   const bodyRows = rows.map((row) => {
     return [row.parent, row.field, row.type, row.description];
   });
@@ -42,11 +42,11 @@ function fieldName(field: SchemaField): string {
 }
 
 function fieldType(field: SchemaField): string {
-  if (field.type === 'oneOf') {
-    return '<oneOf>';
+  if (field.type === "oneOf") {
+    return "<oneOf>";
   }
-  if (field.type === 'anyOf') {
-    return '<anyOf>';
+  if (field.type === "anyOf") {
+    return "<anyOf>";
   }
   return field.type;
 }
@@ -57,18 +57,18 @@ function fieldDescription(field: SchemaField): string {
     parts.push(field.description);
   }
   if (field.deprecated) {
-    parts.push('**Deprecated.**');
+    parts.push("**Deprecated.**");
   }
   if (field.readOnly) {
-    parts.push('Read-only.');
+    parts.push("Read-only.");
   }
   if (field.enumValues && field.enumValues.length > 0) {
-    parts.push(`Allowed values: \`${field.enumValues.join('`, `')}\`.`);
+    parts.push(`Allowed values: \`${field.enumValues.join("`, `")}\`.`);
   }
   if (field.defaultValue !== undefined) {
     parts.push(`Default: \`${field.defaultValue}\`.`);
   }
-  return parts.join(' ');
+  return parts.join(" ");
 }
 
 function walkFields(fields: SchemaField[], parent: string, rows: Row[]): void {
@@ -89,8 +89,8 @@ function walkFields(fields: SchemaField[], parent: string, rows: Row[]): void {
         rows.push({
           parent: f.name || UNNAMED_FIELD_LABEL,
           field: opt.label,
-          type: 'object',
-          description: '',
+          type: "object",
+          description: "",
         });
         walkFields(opt.fields, opt.label, rows);
       }

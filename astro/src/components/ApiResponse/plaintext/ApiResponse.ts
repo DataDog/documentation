@@ -1,5 +1,5 @@
 /**
- * AST twin of `ApiResponse.astro` / `renderApiResponseMd`.
+ * AST twin of `ApiResponse.astro`.
  *
  * Emits an outer `{% tabs %}` tag with one `{% tab %}` per status code.
  * Each panel may include a description (parsed as markdown) and then an

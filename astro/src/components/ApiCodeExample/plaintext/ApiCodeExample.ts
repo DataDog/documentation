@@ -1,5 +1,5 @@
 /**
- * AST twin of `ApiCodeExample.astro` / `renderApiCodeExampleMd`.
+ * AST twin of `ApiCodeExample.astro`.
  *
  * Wraps code examples in a Markdoc `{% tabs %}` tag with one `{% tab %}`
  * child per language. Each tab contains a sequence of fenced code blocks;

@@ -1,5 +1,5 @@
 /**
- * AST twin of `ApiEndpoint.astro` / `renderApiEndpointMd`.
+ * AST twin of `ApiEndpoint.astro`.
  *
  * Builds the block-level Markdoc nodes for a single API endpoint variant.
  * Returns an array of top-level nodes (alerts, paragraphs, headings, tables,

@@ -1,5 +1,5 @@
 /**
- * AST twin of `ApiRequestBodyTabs.astro` / `renderApiRequestBodyTabsMd`.
+ * AST twin of `ApiRequestBodyTabs.astro`.
  *
  * - Schema only:   the schema table.
  * - Examples only: a sequence of JSON fenced blocks.
