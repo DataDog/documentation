@@ -121,7 +121,7 @@ Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run
 
 | Variable | Description |
 |----------|-------------|
-| `DD_ACCESS_TOKEN` | Bearer token for stateless auth (highest priority) |
+| `DD_ACCESS_TOKEN` | Bearer token for [stateless authentication][10] |
 | `DD_API_KEY` | Datadog API key (optional if using OAuth2 or `DD_ACCESS_TOKEN`) |
 | `DD_APP_KEY` | Datadog application key (optional if using OAuth2 or `DD_ACCESS_TOKEN`) |
 | `DD_SITE` | Datadog site (default: `datadoghq.com`) |
@@ -141,3 +141,4 @@ Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run
 [7]: https://github.com/DataDog/pup/blob/main/docs/EXAMPLES.md#acp-server-ai-agent-integration
 [8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
 [9]: /api/latest/
+[10]: https://github.com/DataDog/pup#bearer-token-authentication-wasm--headless
