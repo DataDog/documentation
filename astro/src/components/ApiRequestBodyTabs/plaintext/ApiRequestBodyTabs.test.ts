@@ -10,8 +10,8 @@ const schema: SchemaField[] = [
 const examples = [{ name: 'Default', value: '{"id":"abc"}' }];
 
 function render(props: { schema: SchemaField[]; examples: { name: string; value: string }[] }): string {
-  const nodes = apiRequestBodyTabsNodes(props);
-  return format(documentNode(nodes));
+  const contents = apiRequestBodyTabsNodes(props);
+  return format(documentNode(contents));
 }
 
 describe('apiRequestBodyTabsNodes', () => {

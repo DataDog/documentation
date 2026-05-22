@@ -60,12 +60,12 @@ export function apiRequestBodyTabsNodes({
 
 export function exampleNodes(examples: Example[]): MarkdocNode[] {
   const includeHeading = examples.length > 1;
-  const nodes: MarkdocNode[] = [];
+  const contents: MarkdocNode[] = [];
   for (const ex of examples) {
     if (includeHeading) {
-      nodes.push(paragraph([inline([bold([plaintext(ex.name)])])]));
+      contents.push(paragraph([inline([bold([plaintext(ex.name)])])]));
     }
-    nodes.push(fence("json", ex.value));
+    contents.push(fence("json", ex.value));
   }
-  return nodes;
+  return contents;
 }

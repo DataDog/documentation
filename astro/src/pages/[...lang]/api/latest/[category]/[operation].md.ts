@@ -49,14 +49,14 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const nodes: MarkdocNode[] = [heading(1, operation.summary)];
+  const contents: MarkdocNode[] = [heading(1, operation.summary)];
   for (const [i, variant] of operation.variants.entries()) {
     const label = i === 0 ? `${variant.version} (latest)` : variant.version;
-    nodes.push(heading(2, label));
-    nodes.push(...apiEndpointNodes(variant));
+    contents.push(heading(2, label));
+    contents.push(...apiEndpointNodes(variant));
   }
 
-  const body = buildMarkdocStr(nodes);
+  const body = buildMarkdocStr(contents);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

@@ -159,17 +159,17 @@ function requestBodyNodes(ep: EndpointData): MarkdocNode[] {
     return NO_CONTENT;
   }
   const suffix = ep.requestBody.required ? "(required)" : "(optional)";
-  const out: MarkdocNode[] = [heading(3, `Request Body ${suffix}`)];
+  const contents: MarkdocNode[] = [heading(3, `Request Body ${suffix}`)];
   if (ep.requestBody.description) {
-    out.push(...nodesFromMd(ep.requestBody.description));
+    contents.push(...nodesFromMd(ep.requestBody.description));
   }
-  out.push(
+  contents.push(
     ...apiRequestBodyTabsNodes({
       schema: ep.requestBody.schema,
       examples: ep.requestBody.examples,
     }),
   );
-  return out;
+  return contents;
 }
 
 function responseNodes(ep: EndpointData): MarkdocNode[] {

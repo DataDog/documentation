@@ -37,23 +37,23 @@ export function apiCodeExampleNode(
 
 function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
   const includeHeading = set.entries.length > 1;
-  const nodes: MarkdocNode[] = [];
+  const contents: MarkdocNode[] = [];
   for (const entry of set.entries) {
-    nodes.push(...renderCodeExampleContent(entry, includeHeading));
+    contents.push(...renderCodeExampleContent(entry, includeHeading));
   }
-  return nodes;
+  return contents;
 }
 
 function renderCodeExampleContent(
   entry: CodeExampleEntry,
   includeHeading: boolean,
 ): MarkdocNode[] {
-  const out: MarkdocNode[] = [];
+  const contents: MarkdocNode[] = [];
   if (includeHeading && entry.description) {
-    out.push(boldParagraph(entry.description));
+    contents.push(boldParagraph(entry.description));
   }
-  out.push(fence(entry.syntax, entry.code));
-  return out;
+  contents.push(fence(entry.syntax, entry.code));
+  return contents;
 }
 
 function boldParagraph(text: string): MarkdocNode {

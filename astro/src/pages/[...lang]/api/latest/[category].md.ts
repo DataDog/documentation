@@ -14,14 +14,15 @@ import {
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
+import { alertNode } from "@components/Alert/plaintext/Alert";
 import {
-  Ast,
   buildMarkdocStr,
   heading,
   inline,
+  link,
+  list,
+  listItem,
   nodesFromMd,
-  tag,
-  plaintext,
 } from "@lib/plaintext/helpers";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -57,28 +58,24 @@ export const GET: APIRoute = async ({ params }) => {
 
   const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 
-  const nodes: MarkdocNode[] = [heading(1, category.name)];
+  const contents: MarkdocNode[] = [heading(1, category.name)];
 
   if (category.deprecated) {
-    nodes.push(
-      tag(
-        "alert",
-        { level: "warning" },
-        nodesFromMd("This endpoint is deprecated."),
-      ),
+    contents.push(
+      alertNode("warning", nodesFromMd("This endpoint is deprecated.")),
     );
   }
 
   if (category.description) {
-    nodes.push(...nodesFromMd(category.description.trim()));
+    contents.push(...nodesFromMd(category.description.trim()));
   }
 
   if (category.operations.length > 0) {
-    nodes.push(heading(2, "Actions"));
-    nodes.push(operationsList(category.operations, categoryBaseHref));
+    contents.push(heading(2, "Actions"));
+    contents.push(operationsList(category.operations, categoryBaseHref));
   }
 
-  const body = buildMarkdocStr(nodes);
+  const body = buildMarkdocStr(contents);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
@@ -90,10 +87,7 @@ function operationsList(
   baseHref: string,
 ): MarkdocNode {
   const items = operations.map((op) => {
-    const link = new Ast.Node("link", { href: `${baseHref}${op.slug}/` }, [
-      plaintext(op.summary),
-    ]);
-    return new Ast.Node("item", {}, [inline([link])]);
+    return listItem([inline([link(`${baseHref}${op.slug}/`, op.summary)])]);
   });
-  return new Ast.Node("list", { ordered: false }, items);
+  return list("unordered", items);
 }

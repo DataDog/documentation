@@ -49,6 +49,21 @@ export function fence(language: string, content: string): MarkdocNode {
   return new Ast.Node("fence", { content: c, language });
 }
 
+export function listItem(children: MarkdocNode[]): MarkdocNode {
+  return new Ast.Node("item", {}, children);
+}
+
+export function list(
+  order: "ordered" | "unordered",
+  items: MarkdocNode[],
+): MarkdocNode {
+  return new Ast.Node("list", { ordered: order === "ordered" }, items);
+}
+
+export function link(href: string, text: string): MarkdocNode {
+  return new Ast.Node("link", { href }, [plaintext(text)]);
+}
+
 export function bold(children: MarkdocNode[]): MarkdocNode {
   return new Ast.Node("strong", {}, children);
 }

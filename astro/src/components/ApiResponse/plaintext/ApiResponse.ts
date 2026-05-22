@@ -26,12 +26,12 @@ export function apiResponseNode(responses: ResponseData[]): MarkdocNode | null {
 }
 
 function panelNodes(r: ResponseData): MarkdocNode[] {
-  const nodes: MarkdocNode[] = [];
+  const contents: MarkdocNode[] = [];
   if (r.description) {
-    nodes.push(...nodesFromMd(r.description));
+    contents.push(...nodesFromMd(r.description));
   }
-  nodes.push(...innerNodes(r));
-  return nodes;
+  contents.push(...innerNodes(r));
+  return contents;
 }
 
 function innerNodes(r: ResponseData): MarkdocNode[] {

@@ -10,12 +10,13 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 import {
-  Ast,
   buildMarkdocStr,
   heading,
   inline,
+  link,
+  list,
+  listItem,
   paragraphFromText,
-  plaintext,
 } from "@lib/plaintext/helpers";
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -34,20 +35,19 @@ export const GET: APIRoute = async ({ params }) => {
 
   const items = categories.map((cat) => {
     const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
-    const link = new Ast.Node("link", { href }, [plaintext(cat.name)]);
-    return new Ast.Node("item", {}, [inline([link])]);
+    return listItem([inline([link(href, cat.name)])]);
   });
-  const list = new Ast.Node("list", { ordered: false }, items);
+  const listNode = list("unordered", items);
 
-  const nodes: MarkdocNode[] = [
+  const contents: MarkdocNode[] = [
     heading(1, "API Reference"),
     paragraphFromText(
       "Welcome to the Datadog API Reference. Select a category to get started.",
     ),
-    list,
+    listNode,
   ];
 
-  const body = buildMarkdocStr(nodes);
+  const body = buildMarkdocStr(contents);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
