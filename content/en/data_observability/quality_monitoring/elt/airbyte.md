@@ -9,14 +9,14 @@ further_reading:
 
 ## Overview
 
-Datadog's Airbyte integration helps data teams understand how data flows from external sources into their data warehouses and trace quality issues back to upstream sources. After Datadog connects, it:
+Datadog's Airbyte integration helps data teams understand how data flows from external sources into their data warehouses and trace quality issues back to upstream sources. After you enable the integration, Datadog:
 
 - Pulls metadata from your Airbyte workspace, including workspaces, connections, and streams
 - Automatically generates column-level lineage between source system tables and destination warehouse tables across all active connections
 
 Lineage is derived for all [supported data warehouse destinations][4].
 
-## Connect Airbyte
+## Connect Airbyte and Datadog
 
 ### Airbyte Cloud: Generate credentials
 
@@ -31,7 +31,7 @@ For more information, see the [Airbyte API documentation][1].
 ### Self-hosted Airbyte
 
 You need the **base API URL** for your Airbyte instance (for example, `http://localhost:8000/api/public/v1`).
-If your instance has Basic authentication enabled, you also need a **username** and **password**.
+If your instance has Basic authentication enabled, you also need a username and password.
 
 ### Add the Airbyte integration
 
