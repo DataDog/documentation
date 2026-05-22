@@ -74,6 +74,8 @@ RUM reports the element that is associated with each Core Web Vital instance:
 
 The RUM Browser SDK reports each Core Web Vital under different conditions. If a vital is missing from a view event, the SDK most likely did not capture a value for it.
 
+**Note**: Note: Re-reporting CLS and INP on each view, including SPA route changes, is intentional. It follows Chrome's [Soft Navigations API experiment][#], which extends these metrics beyond the initial page load. LCP and FCP follow the stable definition and are reported on the initial view only.
+
 - **Largest Contentful Paint**: Reported on the initial view only. Captured when the `largest-contentful-paint` PerformanceObserver entry fires before the page is hidden and before the user's first interaction. Not reported if the page starts hidden, if the user interacts before any LCP entry arrives, or after a 10-minute cap. See [LCP: Differences between the metric and the API][10] for the upstream definition.
 - **Interaction to Next Paint**: Reported on every view, including SPA route changes. Requires at least one user interaction during the view's lifetime (see [INP on web.dev][11]). If the user never interacts, no INP value is emitted. Requires browser support for the `event` PerformanceObserver entry type and `PerformanceEventTiming.interactionId`. If unsupported, no INP value is emitted.
 - **Cumulative Layout Shift**: Reported on every view, including SPA route changes. Requires browser support for the [`layout-shift` PerformanceObserver entry type][12]. The SDK also relies on `WeakRef` internally; if either is missing, no CLS value is emitted.
