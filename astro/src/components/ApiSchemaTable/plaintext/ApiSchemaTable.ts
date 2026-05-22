@@ -9,7 +9,7 @@
 
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import type { SchemaField } from '@lib/api/schemas/schemaField';
-import { tableNodeMd } from '@lib/ast/helpers';
+import { tableNodeMd } from '@lib/plaintext/helpers';
 
 interface Row {
   parent: string;

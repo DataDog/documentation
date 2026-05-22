@@ -11,7 +11,7 @@
       "@components/*": ["./src/components/*"],
       "@config/*": ["./src/config/*"],
       "@lib/*": ["./src/lib/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/lib/utils/*"]
     }
   }
 }

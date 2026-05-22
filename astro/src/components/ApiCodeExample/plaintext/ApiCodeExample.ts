@@ -9,7 +9,7 @@
 
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import type { CodeExampleSet, CodeExampleEntry } from '@lib/api/schemas/codeExamples';
-import { Ast, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/ast/helpers';
+import { Ast, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/plaintext/helpers';
 
 export function apiCodeExampleNode(examples: CodeExampleSet[]): MarkdocNode | null {
   if (!examples || examples.length === 0) {

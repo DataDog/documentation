@@ -17,7 +17,7 @@ import {
   inlineNode,
   paragraphFromText,
   textNode,
-} from '@lib/ast/helpers';
+} from '@lib/plaintext/helpers';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({

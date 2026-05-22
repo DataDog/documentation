@@ -8,8 +8,8 @@
 
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import type { SchemaField } from '@lib/api/schemas/schemaField';
-import { Ast, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/ast/helpers';
-import { apiSchemaTableNode } from '@components/ApiSchemaTable/ast/ApiSchemaTable';
+import { Ast, fenceNode, inlineNode, paragraphNode, tagNode, textNode } from '@lib/plaintext/helpers';
+import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
 
 interface Example {
   name: string;

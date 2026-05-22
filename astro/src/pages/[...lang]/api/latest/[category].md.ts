@@ -23,7 +23,7 @@ import {
   nodesFromMd,
   tagNode,
   textNode,
-} from '@lib/ast/helpers';
+} from '@lib/plaintext/helpers';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];

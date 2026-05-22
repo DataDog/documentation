@@ -8,7 +8,7 @@
 
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { LOCALES, parseLangParam } from '@lib/i18n/locale';
-import { format, parse } from '@lib/ast/helpers';
+import { format, parse } from '@lib/plaintext/helpers';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({

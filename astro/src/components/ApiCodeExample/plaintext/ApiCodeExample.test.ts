@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { format } from '@markdoc/markdoc';
-import { documentNode } from '@lib/ast/helpers';
+import { documentNode } from '@lib/plaintext/helpers';
 import { apiCodeExampleNode } from './ApiCodeExample';
 import type { CodeExampleSet } from '@lib/api/schemas/codeExamples';
 

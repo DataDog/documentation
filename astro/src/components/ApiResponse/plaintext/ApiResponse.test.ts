@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { format } from '@markdoc/markdoc';
-import { documentNode } from '@lib/ast/helpers';
+import { documentNode } from '@lib/plaintext/helpers';
 import { apiResponseNode } from './ApiResponse';
 import type { ResponseData } from '@lib/api/schemas/views';
 

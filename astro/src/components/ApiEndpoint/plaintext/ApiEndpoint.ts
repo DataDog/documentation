@@ -20,13 +20,13 @@ import {
   inlineNode,
   nodesFromMd,
   textNode,
-} from '@lib/ast/helpers';
-import { alertNode } from '@components/Alert/ast/Alert';
-import { apiMethodBadgeNode } from '@components/ApiMethodBadge/ast/ApiMethodBadge';
-import { apiSchemaTableNode } from '@components/ApiSchemaTable/ast/ApiSchemaTable';
-import { apiRequestBodyTabsNodes } from '@components/ApiRequestBodyTabs/ast/ApiRequestBodyTabs';
-import { apiResponseNode } from '@components/ApiResponse/ast/ApiResponse';
-import { apiCodeExampleNode } from '@components/ApiCodeExample/ast/ApiCodeExample';
+} from '@lib/plaintext/helpers';
+import { alertNode } from '@components/Alert/plaintext/Alert';
+import { apiMethodBadgeNode } from '@components/ApiMethodBadge/plaintext/ApiMethodBadge';
+import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
+import { apiRequestBodyTabsNodes } from '@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
+import { apiResponseNode } from '@components/ApiResponse/plaintext/ApiResponse';
+import { apiCodeExampleNode } from '@components/ApiCodeExample/plaintext/ApiCodeExample';
 
 export function apiEndpointNodes(ep: EndpointData): MarkdocNode[] {
   return [

@@ -9,9 +9,9 @@
 
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import type { ResponseData } from '@lib/api/schemas/views';
-import { nodesFromMd, tagNode } from '@lib/ast/helpers';
-import { apiSchemaTableNode } from '@components/ApiSchemaTable/ast/ApiSchemaTable';
-import { exampleNodes } from '@components/ApiRequestBodyTabs/ast/ApiRequestBodyTabs';
+import { nodesFromMd, tagNode } from '@lib/plaintext/helpers';
+import { apiSchemaTableNode } from '@components/ApiSchemaTable/plaintext/ApiSchemaTable';
+import { exampleNodes } from '@components/ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
 
 export function apiResponseNode(responses: ResponseData[]): MarkdocNode | null {
   if (!responses || responses.length === 0) {

@@ -11,8 +11,8 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
 import { getCategoriesView, getOperationView } from '@lib/api/viewsBuilder';
 import { LOCALES, parseLangParam } from '@lib/i18n/locale';
-import { documentNode, format, headingNode } from '@lib/ast/helpers';
-import { apiEndpointNodes } from '@components/ApiEndpoint/ast/ApiEndpoint';
+import { documentNode, format, headingNode } from '@lib/plaintext/helpers';
+import { apiEndpointNodes } from '@components/ApiEndpoint/plaintext/ApiEndpoint';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];

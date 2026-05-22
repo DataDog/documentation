@@ -1,5 +1,5 @@
 import type { Node as MarkdocNode } from '@markdoc/markdoc';
-import { Ast } from '@lib/ast/helpers';
+import { Ast } from '@lib/plaintext/helpers';
 
 export type AlertLevel = 'info' | 'danger' | 'warning' | 'tip';
 

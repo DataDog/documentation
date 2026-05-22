@@ -48,7 +48,7 @@ export default defineConfig({
         ),
         "@config": fileURLToPath(new URL("./src/config", import.meta.url)),
         "@lib": fileURLToPath(new URL("./src/lib", import.meta.url)),
-        "@utils": fileURLToPath(new URL("./src/utils", import.meta.url)),
+        "@utils": fileURLToPath(new URL("./src/lib/utils", import.meta.url)),
       },
     },
     plugins: [
