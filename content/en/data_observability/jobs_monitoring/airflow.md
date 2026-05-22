@@ -360,6 +360,8 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 ### Link your dbt jobs with Airflow tasks
 
+<div class="alert alert-info">On Airflow 2.9.2 with <code>apache-airflow-providers-openlineage</code> 2.2.0 - the latest provider enabled for this Airflow version - the <code>lineage_root_*</code> macros required for root-parent linking are not available. To use them anyway, see <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">Backport OpenLineage lineage macros for older provider versions</a>.</div>
+
 You can monitor your dbt jobs that are running in Airflow by connecting the dbt telemetry with respective Airflow tasks, using [OpenLineage dbt integration][6].
 
 To see the link between Airflow tasks and dbt jobs, follow those steps:
@@ -392,9 +394,9 @@ dbt_run = BashOperator(
 )
 ```
 
-**Note**: On Airflow 2.9.2 with `apache-airflow-providers-openlineage` 2.2.0 - the latest provider enabled for this Airflow version - the `lineage_root_*` macros required for root-parent linking are not available. To use them anyway, see [Backport OpenLineage lineage macros for older provider versions](#backport-openlineage-lineage-macros-for-older-provider-versions).
-
 ### Link your Spark jobs with Airflow tasks
+
+<div class="alert alert-info">The <code>lineage_root_*</code> macros require <code>apache-airflow-providers-openlineage</code> 2.3.0 or later. On older provider versions (for example, Airflow 2.9.2 with provider 2.2.0), see <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">Backport OpenLineage lineage macros for older provider versions</a>.</div>
 
 OpenLineage integration can automatically inject Airflow's parent job information (namespace, job name, run id) into Spark application properties. This creates a parent-child relationship between Airflow tasks and Spark jobs, enabling you to troubleshoot both systems in one place.
 
@@ -456,8 +458,6 @@ aws emr-serverless start-job-run \
 """,
     )
 ```
-
-The `lineage_root_*` macros require `apache-airflow-providers-openlineage` 2.3.0 or later. On older provider versions (for example, Airflow 2.9.2 with provider 2.2.0), see [Backport OpenLineage lineage macros for older provider versions](#backport-openlineage-lineage-macros-for-older-provider-versions).
 
 ### Backport OpenLineage lineage macros for older provider versions
 
