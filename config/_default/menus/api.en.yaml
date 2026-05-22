@@ -2823,6 +2823,19 @@ menu:
           - EditSecurityMonitoringSignalIncidents
         unstable: []
         order: 77
+    - name: Get entities related to a signal
+      url: '#get-entities-related-to-a-signal'
+      identifier: security-monitoring-get-entities-related-to-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalEntities
+        unstable:
+          - v2
+        order: 98
     - name: Get a signal's details
       url: '#get-a-signals-details'
       identifier: security-monitoring-get-a-signals-details
@@ -2895,6 +2908,58 @@ menu:
           - ListSecurityMonitoringSignals
         unstable: []
         order: 74
+    - name: Unsubscribe from sample log generation
+      url: '#unsubscribe-from-sample-log-generation'
+      identifier: security-monitoring-unsubscribe-from-sample-log-generation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSampleLogGenerationSubscription
+        unstable:
+          - v2
+        order: 110
+    - name: Bulk subscribe to sample log generation
+      url: '#bulk-subscribe-to-sample-log-generation'
+      identifier: security-monitoring-bulk-subscribe-to-sample-log-generation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkCreateSampleLogGenerationSubscriptions
+        unstable:
+          - v2
+        order: 109
+    - name: Subscribe to sample log generation
+      url: '#subscribe-to-sample-log-generation'
+      identifier: security-monitoring-subscribe-to-sample-log-generation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSampleLogGenerationSubscription
+        unstable:
+          - v2
+        order: 108
+    - name: Get sample log generation subscriptions
+      url: '#get-sample-log-generation-subscriptions'
+      identifier: security-monitoring-get-sample-log-generation-subscriptions
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSampleLogGenerationSubscriptions
+        unstable:
+          - v2
+        order: 107
     - name: Get a rule's version history
       url: '#get-a-rules-version-history'
       identifier: security-monitoring-get-a-rules-version-history
@@ -3052,6 +3117,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 51
+    - name: Get entity context
+      url: '#get-entity-context'
+      identifier: security-monitoring-get-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityContext
+        unstable:
+          - v2
+        order: 111
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -3235,6 +3313,18 @@ menu:
           - DeleteSecurityFilter
         unstable: []
         order: 32
+    - name: Get the version history of security filters
+      url: '#get-the-version-history-of-security-filters'
+      identifier: security-monitoring-get-the-version-history-of-security-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFilterVersions
+        unstable: []
+        order: 99
     - name: Create a security filter
       url: '#create-a-security-filter'
       identifier: security-monitoring-create-a-security-filter
@@ -3259,6 +3349,97 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 28
+    - name: Validate an entity context sync configuration
+      url: '#validate-an-entity-context-sync-configuration'
+      identifier: security-monitoring-validate-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 106
+    - name: Update an entity context sync configuration
+      url: '#update-an-entity-context-sync-configuration'
+      identifier: security-monitoring-update-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 103
+    - name: Get an entity context sync configuration
+      url: '#get-an-entity-context-sync-configuration'
+      identifier: security-monitoring-get-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 102
+    - name: Delete an entity context sync configuration
+      url: '#delete-an-entity-context-sync-configuration'
+      identifier: security-monitoring-delete-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 104
+    - name: Validate entity context sync credentials
+      url: '#validate-entity-context-sync-credentials'
+      identifier: security-monitoring-validate-entity-context-sync-credentials
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringIntegrationCredentials
+        unstable:
+          - v2
+        order: 105
+    - name: Create an entity context sync configuration
+      url: '#create-an-entity-context-sync-configuration'
+      identifier: security-monitoring-create-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 101
+    - name: List entity context sync configurations
+      url: '#list-entity-context-sync-configurations'
+      identifier: security-monitoring-list-entity-context-sync-configurations
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringIntegrationConfigs
+        unstable:
+          - v2
+        order: 100
     - name: Update a critical asset
       url: '#update-a-critical-asset'
       identifier: security-monitoring-update-a-critical-asset
@@ -6581,6 +6762,66 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List Tags
+      url: '#list-tags'
+      identifier: app-builder-list-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTags
+        unstable: []
+        order: 17
+    - name: Get Blueprints by Slugs
+      url: '#get-blueprints-by-slugs'
+      identifier: app-builder-get-blueprints-by-slugs
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsBySlugs
+        unstable: []
+        order: 20
+    - name: Get Blueprints by Integration ID
+      url: '#get-blueprints-by-integration-id'
+      identifier: app-builder-get-blueprints-by-integration-id
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsByIntegrationId
+        unstable: []
+        order: 21
+    - name: List Blueprints
+      url: '#list-blueprints'
+      identifier: app-builder-list-blueprints
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBlueprints
+        unstable: []
+        order: 18
+    - name: Get Blueprint
+      url: '#get-blueprint'
+      identifier: app-builder-get-blueprint
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprint
+        unstable: []
+        order: 19
     - name: List App Versions
       url: '#list-app-versions'
       identifier: app-builder-list-app-versions
@@ -12154,6 +12395,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Get annotated interactions by content IDs
+      url: '#get-annotated-interactions-by-content-ids'
+      identifier: llm-observability-get-annotated-interactions-by-content-ids
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractionsByTraceIDs
+        unstable:
+          - v2
+        order: 40
     - name: Delete LLM Observability data
       url: '#delete-llm-observability-data'
       identifier: llm-observability-delete-llm-observability-data
