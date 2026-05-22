@@ -19,15 +19,6 @@ interface Props {
   examples: Example[];
 }
 
-function renderExamples(examples: Example[]): string {
-  return examples
-    .map((ex) => {
-      const heading = examples.length > 1 ? `**${ex.name}**\n\n` : '';
-      return `${heading}\`\`\`json\n${ex.value}\n\`\`\``;
-    })
-    .join('\n\n');
-}
-
 export function renderApiRequestBodyTabsMd({ schema, examples }: Props): string {
   const hasSchema = schema.length > 0;
   const hasExamples = examples.length > 0;
@@ -58,4 +49,13 @@ export function renderApiRequestBodyTabsMd({ schema, examples }: Props): string 
   }
 
   return '';
+}
+
+function renderExamples(examples: Example[]): string {
+  return examples
+    .map((ex) => {
+      const heading = examples.length > 1 ? `**${ex.name}**\n\n` : '';
+      return `${heading}\`\`\`json\n${ex.value}\n\`\`\``;
+    })
+    .join('\n\n');
 }

@@ -11,16 +11,6 @@
 
 import type { CodeExampleSet, CodeExampleEntry } from '@lib/api/schemas/codeExamples';
 
-function renderEntry(entry: CodeExampleEntry, includeHeading: boolean): string {
-  const heading = includeHeading && entry.description ? `**${entry.description}**\n\n` : '';
-  return `${heading}\`\`\`${entry.syntax}\n${entry.code}\n\`\`\``;
-}
-
-function renderTab(set: CodeExampleSet): string {
-  const includeHeading = set.entries.length > 1;
-  return set.entries.map((e) => renderEntry(e, includeHeading)).join('\n\n');
-}
-
 export function renderApiCodeExampleMd(examples: CodeExampleSet[]): string {
   if (!examples || examples.length === 0) return '';
 
@@ -35,4 +25,14 @@ export function renderApiCodeExampleMd(examples: CodeExampleSet[]): string {
   lines.push('{% /tabs %}');
 
   return lines.join('\n');
+}
+
+function renderEntry(entry: CodeExampleEntry, includeHeading: boolean): string {
+  const heading = includeHeading && entry.description ? `**${entry.description}**\n\n` : '';
+  return `${heading}\`\`\`${entry.syntax}\n${entry.code}\n\`\`\``;
+}
+
+function renderTab(set: CodeExampleSet): string {
+  const includeHeading = set.entries.length > 1;
+  return set.entries.map((e) => renderEntry(e, includeHeading)).join('\n\n');
 }

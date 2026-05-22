@@ -9,6 +9,25 @@
 import type { ResponseData } from '@lib/api/schemas/views';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable';
 
+export function renderApiResponseMd(responses: ResponseData[]): string {
+  if (!responses || responses.length === 0) return '';
+
+  const lines: string[] = ['{% tabs %}'];
+  for (const r of responses) {
+    lines.push(`{% tab label="${r.statusCode}" %}`);
+    lines.push('');
+    const body = renderResponsePanel(r);
+    if (body) {
+      lines.push(body);
+      lines.push('');
+    }
+    lines.push('{% /tab %}');
+  }
+  lines.push('{% /tabs %}');
+
+  return lines.join('\n');
+}
+
 function renderExamples(examples: NonNullable<ResponseData['examples']>): string {
   return examples
     .map((ex) => {
@@ -51,23 +70,4 @@ function renderResponsePanel(r: ResponseData): string {
   const inner = renderInnerTabs(r);
   if (inner) parts.push(inner);
   return parts.join('\n\n');
-}
-
-export function renderApiResponseMd(responses: ResponseData[]): string {
-  if (!responses || responses.length === 0) return '';
-
-  const lines: string[] = ['{% tabs %}'];
-  for (const r of responses) {
-    lines.push(`{% tab label="${r.statusCode}" %}`);
-    lines.push('');
-    const body = renderResponsePanel(r);
-    if (body) {
-      lines.push(body);
-      lines.push('');
-    }
-    lines.push('{% /tab %}');
-  }
-  lines.push('{% /tabs %}');
-
-  return lines.join('\n');
 }

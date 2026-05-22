@@ -15,6 +15,38 @@
 
 import type { SchemaField } from '@lib/api/schemas/schemaField';
 
+interface Row {
+  parent: string;
+  field: string;
+  type: string;
+  description: string;
+}
+
+/**
+ * Render an array of schema fields as a Markdown table. Returns an empty
+ * string when there are no fields (caller decides whether to omit the
+ * surrounding section).
+ */
+export function renderApiSchemaTableMd(fields: SchemaField[]): string {
+  if (!fields || fields.length === 0) return '';
+
+  const rows: Row[] = [];
+  walkFields(fields, '', rows);
+
+  const lines: string[] = [
+    '| Parent field | Field | Type | Description |',
+    '| --- | --- | --- | --- |',
+  ];
+
+  for (const row of rows) {
+    lines.push(
+      `| ${escapeCell(row.parent)} | ${escapeCell(row.field)} | ${escapeCell(row.type)} | ${escapeCell(row.description)} |`,
+    );
+  }
+
+  return lines.join('\n');
+}
+
 const UNNAMED_FIELD_LABEL = '<items>';
 
 function escapeCell(s: string): string {
@@ -46,13 +78,6 @@ function fieldDescription(field: SchemaField): string {
   return parts.join(' ');
 }
 
-interface Row {
-  parent: string;
-  field: string;
-  type: string;
-  description: string;
-}
-
 function walkFields(fields: SchemaField[], parent: string, rows: Row[]): void {
   for (const f of fields) {
     rows.push({
@@ -78,29 +103,4 @@ function walkFields(fields: SchemaField[], parent: string, rows: Row[]): void {
       }
     }
   }
-}
-
-/**
- * Render an array of schema fields as a Markdown table. Returns an empty
- * string when there are no fields (caller decides whether to omit the
- * surrounding section).
- */
-export function renderApiSchemaTableMd(fields: SchemaField[]): string {
-  if (!fields || fields.length === 0) return '';
-
-  const rows: Row[] = [];
-  walkFields(fields, '', rows);
-
-  const lines: string[] = [
-    '| Parent field | Field | Type | Description |',
-    '| --- | --- | --- | --- |',
-  ];
-
-  for (const row of rows) {
-    lines.push(
-      `| ${escapeCell(row.parent)} | ${escapeCell(row.field)} | ${escapeCell(row.type)} | ${escapeCell(row.description)} |`,
-    );
-  }
-
-  return lines.join('\n');
 }

@@ -5,7 +5,7 @@
  * `.astro` component: info, danger, warning, tip.
  */
 
-export type AlertLevel = 'info' | 'danger' | 'warning' | 'tip';
+export type AlertLevel = "info" | "danger" | "warning" | "tip";
 
 export function renderAlertMd(level: AlertLevel, body: string): string {
   return `{% alert level="${level}" %}\n${body}\n{% /alert %}`;

@@ -12,15 +12,62 @@
  * outline rather than parallel duplicated H1s.
  */
 
-import type { EndpointData } from '@lib/api/schemas/views';
-import { getDefaultRegions } from '@lib/api/regionResolver';
-import { appHost } from '@config/regions';
-import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable';
-import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs';
-import { renderApiResponseMd } from '../../ApiResponse/plaintext/ApiResponse';
-import { renderApiCodeExampleMd } from '../../ApiCodeExample/plaintext/ApiCodeExample';
-import { renderAlertMd } from '../../Alert/plaintext/Alert';
-import { renderApiMethodBadgeMd } from '../../ApiMethodBadge/plaintext/ApiMethodBadge';
+import type { EndpointData } from "@lib/api/schemas/views";
+import { getDefaultRegions } from "@lib/api/regionResolver";
+import { appHost } from "@config/regions";
+import { renderApiSchemaTableMd } from "../../ApiSchemaTable/plaintext/ApiSchemaTable";
+import { renderApiRequestBodyTabsMd } from "../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs";
+import { renderApiResponseMd } from "../../ApiResponse/plaintext/ApiResponse";
+import { renderApiCodeExampleMd } from "../../ApiCodeExample/plaintext/ApiCodeExample";
+import { renderAlertMd } from "../../Alert/plaintext/Alert";
+import { renderApiMethodBadgeMd } from "../../ApiMethodBadge/plaintext/ApiMethodBadge";
+
+export function renderApiEndpointMd(ep: EndpointData): string {
+  return [
+    renderStatusNotice(ep),
+    renderDescription(ep),
+    renderRegionTable(ep),
+    renderPermissions(ep),
+    renderOAuthScopes(ep),
+    renderArguments(ep),
+    renderRequestBody(ep),
+    renderResponseSection(ep),
+    renderCodeExampleSection(ep),
+  ]
+    .join("\n\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function renderStatusNotice(ep: EndpointData): string {
+  if (ep.deprecated) {
+    const link = ep.newerVersionUrl
+      ? ` [Use the newer version.](${ep.newerVersionUrl})`
+      : "";
+    return renderAlertMd("warning", `This endpoint is deprecated.${link}`);
+  }
+  if (ep.unstable) {
+    const msg =
+      ep.unstableMessage ??
+      "This endpoint is unstable and may change without notice.";
+    return renderAlertMd("warning", msg);
+  }
+  return "";
+}
+
+function renderDescription(ep: EndpointData): string {
+  return ep.description ?? "";
+}
+
+function renderPermissions(ep: EndpointData): string {
+  if (!ep.permissions || ep.permissions.length === 0) return "";
+  return `**Permissions:** \`${ep.permissions.join("`, `")}\``;
+}
+
+function renderOAuthScopes(ep: EndpointData): string {
+  if (!ep.oauthScopes || ep.oauthScopes.length === 0) return "";
+  return `OAuth apps require the \`${ep.oauthScopes.join("`, `")}\` authorization scope to access this endpoint.`;
+}
 
 function renderRegionTable(ep: EndpointData): string {
   const regions = getDefaultRegions();
@@ -31,8 +78,10 @@ function renderRegionTable(ep: EndpointData): string {
     const site = appHost(region.key) ?? region.site;
     rows.push(`| ${site} | ${renderApiMethodBadgeMd(ep.method)} ${url} |`);
   }
-  if (rows.length === 0) return '';
-  return ['| Datadog site | API endpoint |', '| --- | --- |', ...rows].join('\n');
+  if (rows.length === 0) return "";
+  return ["| Datadog site | API endpoint |", "| --- | --- |", ...rows].join(
+    "\n",
+  );
 }
 
 function renderArguments(ep: EndpointData): string {
@@ -46,17 +95,17 @@ function renderArguments(ep: EndpointData): string {
   if (ep.headerParams && ep.headerParams.length > 0) {
     sections.push(renderApiSchemaTableMd(ep.headerParams));
   }
-  if (sections.length === 0) return '';
-  return ['### Arguments', '', sections.join('\n\n')].join('\n');
+  if (sections.length === 0) return "";
+  return ["### Arguments", "", sections.join("\n\n")].join("\n");
 }
 
 function renderRequestBody(ep: EndpointData): string {
-  if (!ep.requestBody) return '';
-  const heading = `### Request Body ${ep.requestBody.required ? '(required)' : '(optional)'}`;
-  const parts: string[] = [heading, ''];
+  if (!ep.requestBody) return "";
+  const heading = `### Request Body ${ep.requestBody.required ? "(required)" : "(optional)"}`;
+  const parts: string[] = [heading, ""];
   if (ep.requestBody.description) {
     parts.push(ep.requestBody.description);
-    parts.push('');
+    parts.push("");
   }
   parts.push(
     renderApiRequestBodyTabsMd({
@@ -64,58 +113,17 @@ function renderRequestBody(ep: EndpointData): string {
       examples: ep.requestBody.examples,
     }),
   );
-  return parts.join('\n');
+  return parts.join("\n");
 }
 
 function renderResponseSection(ep: EndpointData): string {
-  if (!ep.responses || ep.responses.length === 0) return '';
-  return ['### Response', '', renderApiResponseMd(ep.responses)].join('\n');
+  if (!ep.responses || ep.responses.length === 0) return "";
+  return ["### Response", "", renderApiResponseMd(ep.responses)].join("\n");
 }
 
 function renderCodeExampleSection(ep: EndpointData): string {
-  if (!ep.codeExamples || ep.codeExamples.length === 0) return '';
-  return ['### Code Example', '', renderApiCodeExampleMd(ep.codeExamples)].join('\n');
-}
-
-export function renderApiEndpointMd(ep: EndpointData): string {
-  const blocks: string[] = [];
-
-  if (ep.deprecated) {
-    const link = ep.newerVersionUrl ? ` [Use the newer version.](${ep.newerVersionUrl})` : '';
-    blocks.push(renderAlertMd('warning', `This endpoint is deprecated.${link}`));
-  } else if (ep.unstable) {
-    const msg = ep.unstableMessage ?? 'This endpoint is unstable and may change without notice.';
-    blocks.push(renderAlertMd('warning', msg));
-  }
-
-  if (ep.description) {
-    blocks.push(ep.description);
-  }
-
-  const regionTable = renderRegionTable(ep);
-  if (regionTable) blocks.push(regionTable);
-
-  if (ep.permissions && ep.permissions.length > 0) {
-    blocks.push(`**Permissions:** \`${ep.permissions.join('`, `')}\``);
-  }
-
-  if (ep.oauthScopes && ep.oauthScopes.length > 0) {
-    blocks.push(
-      `OAuth apps require the \`${ep.oauthScopes.join('`, `')}\` authorization scope to access this endpoint.`,
-    );
-  }
-
-  const args = renderArguments(ep);
-  if (args) blocks.push(args);
-
-  const reqBody = renderRequestBody(ep);
-  if (reqBody) blocks.push(reqBody);
-
-  const resp = renderResponseSection(ep);
-  if (resp) blocks.push(resp);
-
-  const codeEx = renderCodeExampleSection(ep);
-  if (codeEx) blocks.push(codeEx);
-
-  return blocks.join('\n\n');
+  if (!ep.codeExamples || ep.codeExamples.length === 0) return "";
+  return ["### Code Example", "", renderApiCodeExampleMd(ep.codeExamples)].join(
+    "\n",
+  );
 }
