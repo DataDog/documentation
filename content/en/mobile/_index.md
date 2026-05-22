@@ -287,7 +287,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Chat][27].
+On the Bits AI home page, you can ask questions about your system or active incident by voice or text. Bits Chat has context on Datadog public documentation, telemetry, and ownership. For more information, see [Bits Chat][27].
 
 ### Bits Investigation
 {{< tabs >}}
