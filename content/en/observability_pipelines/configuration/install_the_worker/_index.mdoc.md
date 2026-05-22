@@ -353,14 +353,6 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
 7. Run the command provided in the UI to install the Worker.
-    ```shell
-    helm upgrade --install opw \
-    -f values.yaml \
-    --set datadog.apiKey=<DATADOG_API_KEY> \
-    --set datadog.pipelineId=<PIPELINE_ID> \
-    datadog/observability-pipelines-worker
-    ```
-
 8. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {% /if %}
@@ -371,17 +363,6 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-    ```shell
-    helm upgrade --install opw \
-    -f values.yaml \
-    --set datadog.apiKey=<DATADOG_API_KEY> \
-    --set datadog.pipelineId=<PIPELINE_ID> \
-    --set <SOURCE_ENV_VARIABLES> \
-    --set <DESTINATION_ENV_VARIABLES> \
-    --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-    datadog/observability-pipelines-worker
-    ```
-
 7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {% /if %}
