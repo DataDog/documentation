@@ -1394,7 +1394,6 @@ When working with high-cardinality columns (such as emails, IPs, or request IDs)
 - Use `SELECT DISTINCT` or `GROUP BY` to return one entry per distinct value across workers. Without a tight filter, the result set grows without bound.
 - Narrow the data source filter first so the aggregation runs over fewer rows.
 - For wide cardinalities, pre-aggregate to one row per time bucket and key, then count distinct across buckets.
-- Use `approx_distinct(...)` instead of exact `count(distinct ...)` for better performance.
 
 *Goal: find the distinct user emails in the checkout service's logs over the last 7 days.*
 
@@ -1496,7 +1495,7 @@ When you `JOIN` across two data sources, apply a selective filter on each side. 
 
 ```sql
 -- No filter on the logs side; full scan held in memory for the join
-SELECT l.message, r.user_id
+SELECT logs.message, rum.user_id
 FROM (
     SELECT message, trace_id
     FROM dd.logs(
@@ -1504,16 +1503,16 @@ FROM (
         from_timestamp => NOW() - INTERVAL '1 day',
         to_timestamp   => NOW()
     ) AS (message VARCHAR, trace_id VARCHAR)
-) l
-JOIN rum r ON l.trace_id = r.trace_id
-WHERE r.view_name = 'cart';
+) logs
+JOIN rum ON logs.trace_id = rum.trace_id
+WHERE rum.view_name = 'cart';
 ```
 
 **After**
 
 ```sql
 -- Both sides filtered before the join
-SELECT l.message, r.user_id
+SELECT logs.message, rum.user_id
 FROM (
     SELECT message, trace_id
     FROM dd.logs(
@@ -1522,9 +1521,9 @@ FROM (
         from_timestamp => NOW() - INTERVAL '1 day',
         to_timestamp   => NOW()
     ) AS (message VARCHAR, trace_id VARCHAR)
-) l
-JOIN rum r ON l.trace_id = r.trace_id
-WHERE r.view_name = 'cart';
+) logs
+JOIN rum ON logs.trace_id = rum.trace_id
+WHERE rum.view_name = 'cart';
 ```
 
 ### Expressions
