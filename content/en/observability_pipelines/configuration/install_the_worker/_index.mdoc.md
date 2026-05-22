@@ -25,6 +25,8 @@ content_filters:
   - trait_id: interface
     option_group_id: op_pipelines_setup_method_options
     label: "Pipeline setup method"
+    hide_if:
+        - platform: ["ecs_fargate"]
   - trait_id: platform
     option_group_id: op_platform_options
     label: "Platform"
@@ -53,14 +55,14 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 - Amazon Elastic Kubernetes Service (EKS)
 - Azure Kubernetes Service (AKS)
 - Google Kubernetes Engine (GKE)
-- Red Hat Openshift
+- Red Hat OpenShift
 - Rancher
 {% /if %}
 
 <!-- ECS Fargate - Overview -->
 {% if equals($platform, "ecs_fargate") %}
 
-This document goes over one of the ways you can set up the Observability Pipelines Worker in ECS Fargate.
+This page describes one way you can set up the Observability Pipelines Worker in ECS Fargate.
 
 {% /if %}
 
@@ -141,7 +143,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Kubernetes -->
 {% if equals($platform, "kubernetes") %}
 
-1. Download the [Helm chart values file][14]. See the [full list of configuration options][15] available.
+1. Download the [Helm chart values file][14]. See the [full list of available configuration options][15].
     - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 2. Add the Datadog chart repository to Helm:
     ```shell
@@ -210,7 +212,7 @@ Follow these steps if you want to use the one-line installation script to instal
 <!-- API/TF - Linux - Secrets Management -->
 
 {% if equals($secrets_source, "secrets_management") %}
-1. Run this one-step command to install the Worker.
+1. Run this one-step command to install the Worker:
     ```bash
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
