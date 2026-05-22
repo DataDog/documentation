@@ -59,14 +59,15 @@ Install the Datadog plugin from the [official Anthropic Plugin Marketplace](http
 1. Install the Datadog plugin:
     <pre><code>/plugin install datadog@claude-plugins-official</code></pre>
 
-1. The plugin ships with three slash commands:
-   - `/ddsetup`: first-time setup. Auto-triggers on Datadog-related prompts to select the MCP Server domain for your [site](/getting_started/site/) and complete OAuth login. To skip it, set the domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
-   - `/ddconfig`: change your MCP Server domain or diagnose connection issues.
-   - `/ddtoolsets`: enable or disable groups of MCP tools.
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
 
-   After running `/ddconfig` or `/ddtoolsets`, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
+1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. After any making any configuration change, run `/reload-plugins` and reauthenticate by opening `/plugin` and selecting the Datadog plugin.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/claude-code-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
 
 {{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="claudecode-manual" %}}
 If the plugin is not available to you, point Claude Code at the MCP Server endpoint for your regional [Datadog site](/getting_started/site/) directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
