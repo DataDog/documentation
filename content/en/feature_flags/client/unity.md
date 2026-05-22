@@ -27,7 +27,7 @@ Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity
 
 2. Add the [Datadog SDK Unity package][3] using its Git URL `https://github.com/DataDog/unity-package.git`.
 
-3. (Android only) Configure your project to use [Gradle templates][4], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+3. (Android only) Configure your project to use [Gradle templates][4], and enable both {{< ui >}}Custom Main Template{{< /ui >}} and {{< ui >}}Custom Gradle Properties Template{{< /ui >}}.
 
 4. (Android only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
@@ -41,7 +41,7 @@ Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle. Navigate to your `Project Settings` and click on the `Datadog` section to configure your client token, environment, and other settings.
+Initialize Datadog as early as possible in your app lifecycle. Navigate to your {{< ui >}}Project Settings{{< /ui >}} and click on the {{< ui >}}Datadog{{< /ui >}} section to configure your client token, environment, and other settings. To create a client token, see [Client tokens][6].
 
 For more information about setting up the Unity SDK, see [Unity Monitoring Setup][5].
 
@@ -233,3 +233,4 @@ DdFlags.Enable(new FlagsConfiguration(
 [3]: https://github.com/DataDog/unity-package
 [4]: https://docs.unity3d.com/Manual/gradle-templates.html
 [5]: /real_user_monitoring/application_monitoring/unity/setup
+[6]: /account_management/api-app-keys/#client-tokens

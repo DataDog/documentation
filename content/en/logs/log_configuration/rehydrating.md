@@ -44,7 +44,7 @@ Only archives with proper authentication are available for rehydrating. For deta
 ## Rehydrating logs with historical views
 
 1. Navigate to the [Rehydration][3] page.
-2. Click **New Historical View**.
+2. Click {{< ui >}}New Historical View{{< /ui >}}.
 3. Select the time period for rehydration.
 4. Choose the archive you want to rehydrate log events from. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 5. (Optional) Estimate scan size and get the total amount of compressed data that is contained in your archive for the selected time frame.
@@ -67,7 +67,7 @@ After selecting "Rehydrate from Archive," the historical view is marked as "PEND
 After the content is rehydrated, the historical view is marked as "ACTIVE", and the link in the query column leads to the historical view in the Log Explorer.
 
 **From the Log Explorer**:
-In the Log Explorer, open the Index facet in the index selector. Select the Historical indexes to include in your search.
+In the Log Explorer, open the {{< ui >}}Index{{< /ui >}} facet in the index selector. Select the Historical indexes to include in your search.
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="90%">}}
 
@@ -87,7 +87,7 @@ The historical view is permanently deleted one day after the deletion is initiat
 
 ### Viewing deleted historical views
 
-View deleted historical views for up to 1 year in the past using the `View` dropdown menu:
+View deleted historical views for up to 1 year in the past using the {{< ui >}}View{{< /ui >}} dropdown menu:
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="Viewing deleted historical views in Datadog" width="90%" >}}
 
@@ -110,11 +110,11 @@ You can use the built-in template variables to customize the notification trigge
 
 ### Default limit for historical views
 
-Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Log Rehydration* across teams. Click **Settings** to configure:
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Log Rehydration* across teams. Click {{< ui >}}Settings{{< /ui >}} to configure:
 
-- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per historical view. If the limit is reached, the rehydration automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during view creation.
+- {{< ui >}}Default Rehydration volume limit{{< /ui >}}: Define the default number of logs (in millions) that can be rehydrated per historical view. If the limit is reached, the rehydration automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during view creation.
 
-- **Rehydration retention periods**: Choose which retention periods are available when creating rehydrations. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+- {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when creating rehydrations. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ### Cloud-specific permissions
 
@@ -174,9 +174,14 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
+In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting {{< ui >}}Storage{{< /ui >}} > {{< ui >}}Storage Object Viewer{{< /ui >}}.
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" style="width:75%;">}}
+
+The {{< ui >}}Storage Object Viewer{{< /ui >}} role is Datadog's recommended configuration. If your organization requires a least-privilege custom role, the following individual permissions are required for rehydration:
+
+- `storage.objects.get`
+- `storage.objects.list`
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}

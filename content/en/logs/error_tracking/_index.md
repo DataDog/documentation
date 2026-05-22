@@ -15,6 +15,10 @@ further_reading:
   - link: '/monitors/types/error_tracking/'
     tag: 'Documentation'
     text: 'Create an Error Tracking monitor'
+  - link: "https://learn.datadoghq.com/courses/log-investigations"
+    tag: "Learning Center"
+    text: "Track Logs for Alerting and Investigations"
+
 ---
 
 ## Overview
@@ -23,7 +27,7 @@ further_reading:
 
 {{% error-tracking-description %}}
 
-Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [**Error Tracking**][1].
+Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 

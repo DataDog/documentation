@@ -35,7 +35,7 @@ Debug symbols are used to deobfuscate stack traces, which helps in debugging err
 
 **Note:** Error Tracking can be used as a standalone product or alongside [Real User Monitoring (RUM)][12]. If you're using RUM, Error Tracking is already included. See the [RUM Expo setup documentation][3] for RUM-specific configuration.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -112,7 +112,7 @@ const config = new CoreConfiguration(
     '<ENVIRONMENT_NAME>',
     trackingConsent,
     {
-        site: 'US1', // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
+        site: 'US1', // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", "AP1", "AP2", "US1_FED", or "US2_FED"). Default is "US1".
         rumConfiguration: {
             applicationId: '<APPLICATION_ID>', // RUM Application ID
             trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
@@ -234,8 +234,8 @@ To test your implementation:
    }
    ```
 
-3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
-4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][6] package.
 

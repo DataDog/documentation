@@ -32,7 +32,7 @@ This guide introduces the Datadog Agent and covers:
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
-- Local hosts (Windows, macOS) 
+- Local hosts (Windows, Linux, macOS) 
 - Containerized environments (Docker, Kubernetes)
 - On-premises data centers 
 
@@ -73,9 +73,9 @@ The Agent reports the following metrics to Datadog about itself. These metrics p
 
 | Metric                           | Description                                      |
 | -------------------------------- |------------------------------------------------- |
-| `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                    |
-| `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).    |
-| `datadog.agent.python.version` | The metric is tagged with the `python_version`.     |
+| `datadog.agent.running`        | A value of `1` if the Agent is running and reporting to Datadog, tagged with the Agent version.  |
+| `datadog.agent.started`        | A count of `1` each time the Agent starts.    |
+| `datadog.agent.python.version` | A value of `1`, tagged with the Python version.     |
 
 
 See the [Agent Metrics][3] integration for a full list of Agent metrics.
@@ -114,7 +114,7 @@ These checks can be used in Datadog to visualize the Agent status through monito
 
 ## Advanced configurations and features
 
-{{% collapse-content title="Differences between Agent for hosts and containers" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Differences between Agent for hosts and containers" level="h4" expanded=false id="agent-hosts-vs-containers" %}}
 
 There are key differences between installing Agents on a host and in a containerized environment: 
 
@@ -135,7 +135,7 @@ Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough o
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Setting tags through the Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Setting tags through the Agent configuration file" level="h4" expanded=false id="setting-tags-agent-config-file" %}}
 
 Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing.
 
@@ -184,15 +184,15 @@ For example, let's say you have data that is collected from different teams and 
    sudo service datadog-agent restart
    ```
 
-5. After a few minutes, go to the [Metrics Summary page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and any personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
+5. After a few minutes, go to the [{{< ui >}}Metrics Summary{{< /ui >}} page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and any personal tags you added. You can also filter metrics by the {{< ui >}}Tag{{< /ui >}} field at the top of the page.
 
-6. Go to the [Events Explorer page][20] and find the custom tags displayed with the latest Agent Event.
+6. Go to the [{{< ui >}}Events Explorer{{< /ui >}} page][20] and find the custom tags displayed with the latest Agent Event.
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="finding-metrics-in-the-datadog-ui" %}}
 
-You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
+You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [{{< ui >}}Metrics Summary{{< /ui >}} page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
 
 Click on either of the metrics and a Metric panel opens. This panel shows additional metadata about where these metrics are collected and any associated tags. If no tags are configured on a host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the section above on setting tags through the Agent configuration files to learn more about how to add tags.
 
@@ -200,14 +200,14 @@ Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Agent overhead" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent overhead" level="h4" expanded=false id="agent-overhead" %}}
 
 The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is sending. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
 See [Agent Overhead][2] to learn more about these benchmarks.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Additional configuration options" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Additional configuration options" level="h4" expanded=false id="additional-configuration-options" %}}
 
 The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These features are not enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 

@@ -50,6 +50,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
     tag: "Blog"
     text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
+  - link: "https://learn.datadoghq.com/courses/managing-software-catalog"
+    tag: "Learning Center"
+    text: "Managing Services with the Software Catalog"
+
 ---
 
 ## Overview

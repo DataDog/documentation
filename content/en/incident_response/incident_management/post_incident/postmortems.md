@@ -24,7 +24,7 @@ A postmortem is a structured document that captures what happened during an inci
 - Drive accountability for remediation work
 - Build organizational knowledge to reduce the frequency and severity of future incidents
 
-Datadog automatically populates postmortems with incident data using templates you define. You can generate postmortems directly to [Datadog Notebooks][1], [Confluence][2], or [Google Drive][3].
+Datadog automatically populates postmortems with incident data using templates you define. You can generate postmortems to [Datadog Notebooks][1], [Confluence][2], or [Google Drive][3]. Postmortems generated as Datadog Notebooks embed directly in the Post-Incident tab, where you can view, edit, and track their status and ownership without leaving the incident.
 
 ## Permissions
 
@@ -35,54 +35,49 @@ Datadog automatically populates postmortems with incident data using templates y
 
 ## Generate a postmortem
 
-{{< img src="/incident_response/incident_management/post_incident/postmortems/generate_postmortem.png" alt="The Post-Incident tab with options to generate a new postmortem or attach an existing one" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/post_incident/postmortems/post_incident_tab_generate_postmortem.png" alt="The Post-Incident tab showing the Generate Postmortem button, template preview, and Follow-Ups sidebar." style="width:100%;" >}}
 
-After an incident is resolved, a **Generate post-mortem** button appears on the incident. You can also generate a postmortem at any time from the incident's **Post-Incident** tab.
+After an incident is resolved, you can generate a postmortem from the incident's **Post-Incident** tab.
 
 To generate a postmortem:
 
 1. Open the incident and go to the **Post-Incident** tab.
-1. Click **Generate new post-mortem**.
-1. Select a postmortem template. A preview of the template appears on the right.
-1. Click **Generate**. Datadog creates the postmortem in the destination configured in the template and links it to the incident.
+1. Select a postmortem template.
+1. Click **Generate Postmortem**. Datadog creates the postmortem in the destination configured in the template and links it to the incident.
 
-After generating a postmortem, click the link in the **Post-Incident** tab to open it in the configured destination.
+After generating a postmortem:
+
+- **Datadog Notebooks**: The postmortem embeds directly in the **Post-Incident** tab.
+- **Confluence or Google Drive**: A link appears in the **Post-Incident** tab. Click the link to open the document in the configured destination.
+
+## View and edit a postmortem
+
+Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident** tab. You can read and edit the postmortem without leaving the incident view. Changes made in the embedded view are reflected in the underlying notebook.
+
+Multiple users can edit an embedded postmortem at the same time. Cursor markers show where each user is working. You can also add inline comments from within the embedded view.
+
+## Postmortem status and owner
+
+Postmortems have two fields to help track completion and drive accountability:
+
+| Field | Description | Default |
+|---|---|---|
+| **Status** | The current completion state of the postmortem. | Draft |
+| **Owner** | The person responsible for completing the postmortem. | The user who generated the postmortem |
+
+The postmortem status values are:
+
+| Status | Description |
+|---|---|
+| **Draft** | The postmortem is in progress. |
+| **In Review** | The postmortem is ready for review. |
+| **Completed** | The postmortem is finished. |
+
+The postmortem owner can be reassigned to any user in your Datadog organization. The owner is a system role that appears in the incident's response team alongside Incident Commander and Responder.
 
 ## Configure postmortem templates
 
-{{< img src="/incident_response/incident_management/post_incident/postmortems/configure_postmortem_templates.png" alt="A Postmortem editor with the Datadog Notebook selected as the Save Location" style="width:100%;" >}}
-
-Postmortem templates define the structure of generated postmortems and control where they are saved. To create or edit templates, go to [**Incident Management Settings > Post-Mortem Templates**][4].
-
-### Save location
-
-Use the **Save Location** dropdown in the template editor to select where the generated document is saved:
-
-| Option | Requirements |
-|---|---|
-| **Datadog Notebooks** | No additional setup required. |
-| **Confluence** | Requires the [Confluence integration][2]. Configure your Confluence account in the integration settings before selecting it as a destination. |
-| **Google Drive** | Requires the [Google Drive integration][3]. Configure your Google account in the integration settings before selecting it as a destination. |
-
-### Template variables
-
-Templates support variables that populate with incident data when the postmortem is generated. Variables allow you to include relevant incident context automatically without copying it manually. For a full list of available variables, see the [Incident Variables][6] reference.
-
-**Standard variables** pull directly from incident fields:
-
-| Variable | Description |
-|---|---|
-| `{{incident.title}}` | The incident title |
-| `{{incident.state}}` | The current incident state (for example: `active`, `stable`, `resolved`) |
-| `{{incident.severity}}` | The incident severity level |
-| `{{incident.commander}}` | The incident commander's name, or their email or handle if no name is set |
-
-Any [custom property fields][5] you have defined are also available as variables.
-
-**The incident card variable** (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically, reducing the need to switch between the two. 
-**Note**: The incident card is only supported in Datadog Notebooks.
-
-**AI variables** use Bits AI to generate suggested content based on incident data. When you generate a postmortem that includes an AI variable, Datadog provides a suggested value that you can accept, edit, or reject before it is saved. The `{{incident.ai_summary}}` variable, for example, generates a suggested summary of what occurred during the incident.
+To create or manage postmortem templates, including save location and template variables, see [Templates][4].
 
 ## Attach an existing postmortem
 
@@ -101,6 +96,4 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [1]: /notebooks/
 [2]: /integrations/confluence/
 [3]: /integrations/google_drive/
-[4]: https://app.datadoghq.com/incidents/settings?section=postmortem-templates
-[5]: /incident_response/incident_management/setup_and_configuration/property_fields
-[6]: /incident_response/incident_management/setup_and_configuration/variables
+[4]: /incident_response/incident_management/setup_and_configuration/templates

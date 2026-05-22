@@ -37,7 +37,7 @@ With Analytics visualizations, you can:
 * Dive deeper into subsets of the events list depending on the interactions that the visualization enables.
 
 ## Using the analytics chart
-{{< whatsnext desc="Follow these links here to learn how to use the analytics search syntax, view events, and vizualise, group, and export views. " >}}
+{{< whatsnext desc="Follow these links here to learn how to use the analytics search syntax, view events, and visualize, group, and export views. " >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}Search syntax{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualize{{< /nextlink >}}

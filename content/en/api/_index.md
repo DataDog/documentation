@@ -30,4 +30,5 @@ cascade:
     lang: en
   aliases:
     - /api/latest/service-scorecards
+
 ---

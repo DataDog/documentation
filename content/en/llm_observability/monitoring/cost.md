@@ -46,11 +46,11 @@ The cost metrics include a `source` tag to indicate where the value originated:
 
 
 ## View costs in LLM Observability
-View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features:
-- A high-level overview of your LLM usage over time including **Total Cost**, **Cost Change**, **Total Tokens**, and **Token Change**
-- **Breakdown by Token Type**: A breakdown of token usage, along with associated costs
-- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
-- **Most Expensive LLM Calls**: A list of your most expensive requests
+View your app in LLM Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
+- A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
+- {{< ui >}}Breakdown by Token Type{{< /ui >}}: A breakdown of token usage, along with associated costs
+- {{< ui >}}Breakdown by Provider/Model{{< /ui >}} or {{< ui >}}Prompt ID/Version{{< /ui >}}: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
+- {{< ui >}}Most Expensive LLM Calls{{< /ui >}}: A list of your most expensive requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
 
@@ -60,7 +60,7 @@ At the top of the trace view, the banner shows aggregated cost information for t
 
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
 
-To query cost-related data in Traces page, use the left side **Cost** facets. 
+To query cost-related data in Traces page, use the left side {{< ui >}}Cost{{< /ui >}} facets. 
 
 Alternatively, query the following span attributes directly:
 - `@metrics.input_tokens` / `@metrics.estimated_input_cost`
@@ -70,6 +70,53 @@ Alternatively, query the following span attributes directly:
 - `@metrics.cache_read_input_tokens` / `@metrics.estimated_cache_read_input_cost`
 - `@metrics.cache_write_input_tokens` / `@metrics.estimated_cache_write_input_cost`
 - `@metrics.reasoning_output_tokens` / `@metrics.estimated_reasoning_output_cost`
+
+## Troubleshoot LLM cost monitoring
+
+If LLM cost values are missing from a trace or appear inaccurate, see the following sections for common causes and fixes.
+
+### Trace shows "PARTIAL COST" or "COST UNAVAILABLE"
+
+Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
+
+- {{< ui >}}PARTIAL COST{{< /ui >}}: Datadog computed costs for some LLM spans in the trace, but not the rest. The {{< ui >}}Estimated Cost{{< /ui >}} value reflects the sum of only the spans for which cost was computed.
+- {{< ui >}}COST UNAVAILABLE{{< /ui >}}: Datadog could not compute cost for any LLM span in the trace.
+
+Hover over the warning to see the number of affected spans, the reason cost is missing, and the names of the affected spans. The reasons fall into one of the following categories.
+
+#### Unsupported model provider
+
+The LLM model provider on the span is not in the [list of supported providers](#supported-providers), so Datadog has no public pricing rates to apply.
+
+How to fix:
+- Verify the span's `model_provider` matches a supported provider identifier. See the [list of supported providers](#supported-providers).
+- Manually supply cost values on the span. See the [SDK Reference][2] or [API][3].
+
+#### Unsupported model name
+
+The LLM provider is supported, but the `model_name` on the span does not match any entry in the provider's [pricing catalog][4]. This usually happens when the model name is misspelled, abbreviated, or uses an internal alias.
+
+How to fix:
+- Update the span's `model_name` to match the official name in the provider's [pricing catalog][4].
+- For privately deployed or customized variants of a supported model, manually supply cost values on the span. See the [SDK Reference][2] or [API][3].
+
+#### Missing token counts
+
+The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values for cost calculation. (For embedding spans, only `input_tokens` is required.)
+
+How to fix:
+- For [auto-instrumentation][1], confirm your provider and SDK version are supported.
+- For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
+
+### Inaccurate cost when prompt caching is enabled
+
+If a span includes only aggregate `input_tokens` and `output_tokens`, but is missing `cache_read_input_tokens`, `cache_write_input_tokens`, or `non_cached_input_tokens`, Datadog applies the standard input rate to the entire `input_tokens`.
+
+For providers that support prompt caching, cache reads, cache writes, and non-cached inputs are billed at different rates. Without this breakdown, the input cost calculation may be inaccurate.
+
+How to fix:
+- For [auto-instrumentation][1], verify that your provider and SDK version emit cache-specific token counts.
+- For manual instrumentation, annotate `cache_read_input_tokens`, `cache_write_input_tokens`, and `non_cached_input_tokens` in addition to `input_tokens`. See the [SDK Reference][2] or [API][3].
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs

@@ -371,7 +371,18 @@ If your build process is executed in CI within a Docker container, use a [named 
 
 ## Configure telemetry tagging
 
-For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit.
+If your language is not listed in the [Embed Git information](#embed-git-information-in-your-build-artifacts) section, you can manually tag your telemetry with Git information by setting environment variables in the environment where your application runs.
+
+Set the `DD_GIT_COMMIT_SHA` and `DD_GIT_REPOSITORY_URL` environment variables on your application's deployment:
+
+```shell
+export DD_GIT_COMMIT_SHA="<commitSha>"
+export DD_GIT_REPOSITORY_URL="<git-provider.example/me/my-repo>"
+```
+
+Replace `<commitSha>` with the commit SHA used to build your application. You can retrieve this by running `git rev-parse HEAD` at build time, and it needs to be passed into the runtime environment variables. Replace `<git-provider.example/me/my-repo>` with your repository URL.
+
+These environment variables add `git.commit.sha` and `git.repository_url` tags to your APM spans, linking your service to a specific commit in your source code repository.
 
 ## Further reading
 

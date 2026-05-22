@@ -12,15 +12,19 @@ further_reading:
     - link: '/profiler/enabling/'
       tag: 'Documentation'
       text: 'Enabling the Profiler'
-    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-apm'
       tag: 'Learning Center'
-      text: 'Introduction to Application Performance Monitoring'
+      text: 'Getting Started with APM Metrics & Traces'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
       text: "How we optimized our Akka application using Datadog's Continuous Profiler"
     - link: 'https://www.datadoghq.com/blog/request-latency-profiling/'
       tag: 'Blog'
       text: 'Understanding Request Latency with Profiling'
+    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
+      tag: "Learning Center"
+      text: "Diagnose Code Performance Issues with Continuous Profiler"
+
 ---
 
 Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler, it can be confusing.
@@ -145,7 +149,7 @@ Also, you can see a part of the CPU profile that looks like this:
 
 ### Profile types
 
-Almost 6% of CPU time was spent in garbage collection, which suggests it may be producing a lot of garbage. So, review the **Allocated Memory** profile type:
+Almost 6% of CPU time was spent in garbage collection, which suggests it may be producing a lot of garbage. So, review the {{< ui >}}Allocated Memory{{< /ui >}} profile type:
 
 {{< img src="profiler/intro_to_profiling/types.png" alt="Profile type selector" style="width:60%;">}}
 

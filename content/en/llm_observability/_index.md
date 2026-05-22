@@ -1,5 +1,6 @@
 ---
 title: LLM Observability
+description: Overview of Datadog LLM Observability, a platform for monitoring, troubleshooting, and improving LLM applications and AI agents.
 aliases:
     - /tracing/llm_observability/
 further_reading:
@@ -39,6 +40,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+- link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
+  tag: "Learning Center"
+  text: "Tracing LLM Applications"
+
 ---
 
 {{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}

@@ -5,12 +5,12 @@ further_reading:
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"
-  - link: "/security/code_security/iac_security/exclusions"
+  - link: "/security/code_security/iac_security/configuration"
     tag: "Documentation"
-    text: "Configure IaC Security Exclusions"
+    text: "Configure IaC Security"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
