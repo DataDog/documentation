@@ -627,8 +627,6 @@ Datadog automatically injects the trace context into outgoing AWS SDK requests a
 
 ## Merge X-Ray and Datadog traces
 
-AWS Step Functions tracing is supported natively by Datadog. See [Serverless Monitoring for AWS Step Functions][59] and [Merge Step Functions and Lambda Traces][60].
-
 For AWS managed services that Datadog APM doesn't yet instrument (such as AppSync), you can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
 
 ## Enable AWS Lambda code signing
@@ -868,5 +866,3 @@ If you have trouble configuring your installations, set the environment variable
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
 [58]: /observability_pipelines/sources/lambda_extension/
-[59]: /serverless/step_functions/
-[60]: /serverless/step_functions/merge-step-functions-lambda/
