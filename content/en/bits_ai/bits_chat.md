@@ -133,14 +133,13 @@ There are multiple ways to open Bits Chat in the Datadog web application:
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat panel open alongside the Dashboards list" style="width:40%;">}}
 
 ### Mobile application
-<div class="alert alert-info">
-Bits Chat is available on iOS v5.8.4+ and Android v3.15+.
-</div>
+
+Ask Bits questions about your system or active incident. Bits has context on Datadog public documentation, telemetry, and ownership.
 
 1. [Download the mobile app and log in][2].
-2. On the home screen, tap {{< ui >}}Bits Chat{{< /ui >}}.
-3. Start chatting with Bits Chat in chat or voice mode.
-{{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
+2. On the home screen, tap {{< ui >}}Bits Assistant{{< /ui >}}.
+3. Start chatting with Bits Chat by voice or text.
+{{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack
 1. [Connect your Datadog account to your Slack workspace][1].
