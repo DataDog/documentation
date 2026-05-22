@@ -44,10 +44,10 @@ Now collected across the entire cluster instead of for selected topics only:
 
 | Metric                          | Description                                                                                                                                                  |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `kafka.broker_offset`           | Current message offset on broker. *Shown as offset*                                                                                                          |
-| `kafka.consumer_offset`         | Current message offset on consumer. *Shown as offset*                                                                                                        |
-| `kafka.consumer_lag`            | Lag in messages between consumer and broker. *Shown as message*                                                                                              |
-| `kafka.estimated_consumer_lag`  | Lag in seconds between consumer and broker. This metric is provided through Data Streams Monitoring. Additional charges may apply. *Shown as second*         |
+| `kafka.broker_offset`           | Current message offset on broker.<br>*Shown as offset*                                                                                                       |
+| `kafka.consumer_offset`         | Current message offset on consumer.<br>*Shown as offset*                                                                                                     |
+| `kafka.consumer_lag`            | Lag in messages between consumer and broker.<br>*Shown as message*                                                                                           |
+| `kafka.estimated_consumer_lag`  | Lag in seconds between consumer and broker. This metric is provided through Data Streams Monitoring. Additional charges may apply.<br>*Shown as second*      |
 
 ## Configurations and schemas
 
