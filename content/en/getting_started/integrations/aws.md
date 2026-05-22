@@ -212,7 +212,7 @@ To monitor AWS Lambda functions with Datadog, see [Serverless][42] for instructi
 
 ### APM
 
-To collect distributed traces from your applications and AWS services, use the [AWS X-Ray][46] integration or the Datadog Agent with [APM][47]. See the [APM documentation][48] for details on analyzing application performance data.
+To collect distributed traces from your applications and AWS services, use the Datadog Agent with [APM][47]. For AWS Lambda functions, instrument with the [Datadog Lambda Extension and SDKs][44]. The [AWS X-Ray integration][46] remains available for use cases not yet covered by Datadog's native SDKs. See the [APM documentation][48] for details on analyzing application performance data.
 
 You can also use [Watchdog][49], an algorithmic feature for APM performance and infrastructure metrics, to automatically detect and be notified about potential application issues.
 
