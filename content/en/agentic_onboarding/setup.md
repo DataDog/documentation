@@ -30,7 +30,7 @@ The CLI can:
 
 ### Install and run the CLI
 
-1. Run the CLI with `npx`, passing `--site` to target your [Datadog site][16]. You have two options:
+1. Run the CLI with `npx`, passing `--site` to target your [Datadog site][16]. You have two options, depending on whether you already have a Datadog account:
 
     **Option 1: Interactive setup.** If you don't have a Datadog account yet, or you want to choose your product interactively, run without a `--product` flag. The CLI steps you through account setup and product choice.
 
