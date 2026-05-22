@@ -76,12 +76,12 @@ If you are a first-time user, follow these steps to register an account:
 
 1. Navigate to [the Datadog GovCloud support portal](https://govsupport.ddog-gov.com).
 1. Click **Sign Up**.
-1. Complete the registration form using the email address associated with your existing GovCloud Datadog account.
-1. In a separate browser tab, navigate to your email. Open the verification email from `help@ddog-gov.com` and copy the verification code.
+1. Complete the registration form using the email address associated with your existing GovCloud Datadog account. Keep this page open.
+1. In a separate location, access your email account. Open the verification email from `help@ddog-gov.com` and copy the verification code.
 1. In the Datadog GovCloud support portal, enter the verification code.
 1. Click **Verify**.
 
-**Note**: After registration, your login username is your email with `.ddgov.support` appended (for example, `john@agency.gov.ddgov.support`). Use this full username when logging in.
+**Note**: After registration, your login username is your email with `.ddgov.support` appended (for example, `[name]@[domain].ddgov.support`). Use this full username when logging in.
 
 **Note**: To receive registration verification codes, password reset emails, and case notification emails, add the `ddog-gov.com` domain to your email allowlist. This includes `help@ddog-gov.com` and `support@ddog-gov.com`.
 
@@ -94,7 +94,7 @@ To create a new case:
 1. Click **Create a New Case**.
 1. Complete the form.
 1. Click **Submit & Upload Files**.
-1. Optionally, upload supporting files. Accepted file types include `.txt`, `.csv`, `.xls`, `.xlsx`, `.doc`, `.otf`, `.yaml`, `.log`, `.conf`, `.tf`, `.zip`, and `.pcap`.
+1. Optionally, upload supporting files. Accepted file types include `.txt`, `.csv`, `.xls`, `.xlsx`, `.doc`, `.otf`, `.yaml`, `.log`, `.conf`, `.tf`, `.zip`, `.pcap`, `.png`, and `.jpeg`.
 1. Click **Submit**.
 
 ## Access existing cases
@@ -123,7 +123,7 @@ Click **Forgot Password** and follow the process with your full username (with t
 
 ### Registration error
 
-Your account may already exist. Click **Forgot Password** and enter your full username, including the `.ddgov.support` suffix (for example, `john@agency.gov.ddgov.support`). If you are still unable to access your account, contact `support@ddog-gov.com`.
+Your account may already exist. Click **Forgot Password** and enter your full username, including the `.ddgov.support` suffix (for example, `[name]@[domain].ddgov.support`). If you are still unable to access your account, contact `support@ddog-gov.com`.
 
 {{% /site-region %}}
 
