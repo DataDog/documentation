@@ -1,8 +1,18 @@
-// Renders each endpoint page in plaintext.
-import type { APIRoute, GetStaticPaths } from "astro";
-import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
-import { renderApiEndpointMd } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
-import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+/**
+ * AST-based plaintext rendering of each endpoint page.
+ *
+ * Equivalent to `[operation].md.ts`, but builds a Markdoc AST and runs it
+ * through `format()` rather than concatenating strings. The output is the
+ * same shape — `# Summary` then per-variant `## v{N} (latest?)` sections —
+ * but structure (tables, tabs, alerts, fences) is described as nodes.
+ */
+
+import type { APIRoute, GetStaticPaths } from 'astro';
+import type { Node as MarkdocNode } from '@markdoc/markdoc';
+import { getCategoriesView, getOperationView } from '@lib/api/viewsBuilder';
+import { LOCALES, parseLangParam } from '@lib/i18n/locale';
+import { documentNode, format, headingNode } from '@lib/ast/helpers';
+import { apiEndpointNodes } from '@components/ApiEndpoint/ast/ApiEndpoint';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -11,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       for (const op of cat.operations) {
         paths.push({
           params: {
-            lang: lang === "en" ? undefined : lang,
+            lang: lang === 'en' ? undefined : lang,
             category: cat.slug,
             operation: op.slug,
           },
@@ -24,25 +34,31 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const GET: APIRoute = async ({ params }) => {
   const lang = parseLangParam(params.lang);
-  if (!lang) return new Response(null, { status: 404 });
+  if (!lang) {
+    return new Response(null, { status: 404 });
+  }
 
   const catSlug = params.category;
   const opSlug = params.operation;
-  if (!catSlug || !opSlug) return new Response(null, { status: 404 });
+  if (!catSlug || !opSlug) {
+    return new Response(null, { status: 404 });
+  }
 
   const operation = await getOperationView(catSlug, opSlug, lang);
-  if (!operation) return new Response(null, { status: 404 });
+  if (!operation) {
+    return new Response(null, { status: 404 });
+  }
 
-  // Variants are ordered newest-first. The first variant is "(latest)".
-  const blocks: string[] = [`# ${operation.summary}`];
+  const nodes: MarkdocNode[] = [headingNode(1, operation.summary)];
   for (const [i, variant] of operation.variants.entries()) {
     const label = i === 0 ? `${variant.version} (latest)` : variant.version;
-    blocks.push(`## ${label}`);
-    blocks.push(renderApiEndpointMd(variant));
+    nodes.push(headingNode(2, label));
+    nodes.push(...apiEndpointNodes(variant));
   }
-  const body = blocks.join("\n\n") + "\n";
+
+  const body = format(documentNode(nodes)).trim() + '\n';
 
   return new Response(body, {
-    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 };

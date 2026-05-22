@@ -1,14 +1,22 @@
-import type { APIRoute, GetStaticPaths } from "astro";
-import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+/**
+ * AST-based plaintext rendering of the rate-limits page.
+ *
+ * Equivalent to `rate-limits.md.ts`. The source markdown is parsed into a
+ * Markdoc AST and re-emitted via `format()`, so the round trip is exercised
+ * for the same static content the string version returns directly.
+ */
+
+import type { APIRoute, GetStaticPaths } from 'astro';
+import { LOCALES, parseLangParam } from '@lib/i18n/locale';
+import { format, parse } from '@lib/ast/helpers';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({
-    params: { lang: lang === "en" ? undefined : lang },
+    params: { lang: lang === 'en' ? undefined : lang },
   }));
 };
 
-// Duplicated from rate-limits.astro until a shared Markdoc/markdown source is set up.
-const BODY = `# Rate Limits
+const SOURCE = `# Rate Limits
 
 ## Rate Limits
 
@@ -73,12 +81,14 @@ API limit and usage metrics provide insight into usage patterns and blocked requ
 For more detailed visibility into API activity, consider using [Audit Trail](/account_management/audit_trail/events/).
 `;
 
+const BODY = format(parse(SOURCE)).trim() + '\n';
+
 export const GET: APIRoute = ({ params }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
   }
   return new Response(BODY, {
-    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 };

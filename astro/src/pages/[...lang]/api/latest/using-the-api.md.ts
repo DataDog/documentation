@@ -1,14 +1,22 @@
-import type { APIRoute, GetStaticPaths } from "astro";
-import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+/**
+ * AST-based plaintext rendering of the using-the-api page.
+ *
+ * Equivalent to `using-the-api.md.ts`. The source markdown is parsed into a
+ * Markdoc AST and re-emitted via `format()`, so the round trip is exercised
+ * for the same static content the string version returns directly.
+ */
+
+import type { APIRoute, GetStaticPaths } from 'astro';
+import { LOCALES, parseLangParam } from '@lib/i18n/locale';
+import { format, parse } from '@lib/ast/helpers';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({
-    params: { lang: lang === "en" ? undefined : lang },
+    params: { lang: lang === 'en' ? undefined : lang },
   }));
 };
 
-// Duplicated from using-the-api.astro until a shared Markdoc/markdown source is set up.
-const BODY = `# Using the API
+const SOURCE = `# Using the API
 
 ## Using the API
 
@@ -76,12 +84,14 @@ You can also use the Datadog API to manage your account programmatically:
 - See the list of IP prefixes belonging to Datadog with [IP Ranges](/api/v1/ip-ranges/)
 `;
 
+const BODY = format(parse(SOURCE)).trim() + '\n';
+
 export const GET: APIRoute = ({ params }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
   }
   return new Response(BODY, {
-    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 };

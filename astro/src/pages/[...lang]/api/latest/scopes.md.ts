@@ -1,14 +1,22 @@
-import type { APIRoute, GetStaticPaths } from "astro";
-import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+/**
+ * AST-based plaintext rendering of the OAuth scopes page.
+ *
+ * Equivalent to `scopes.md.ts`. The source markdown is parsed into a Markdoc
+ * AST and re-emitted via `format()`, so the round trip is exercised for the
+ * same static content the string version returns directly.
+ */
+
+import type { APIRoute, GetStaticPaths } from 'astro';
+import { LOCALES, parseLangParam } from '@lib/i18n/locale';
+import { format, parse } from '@lib/ast/helpers';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({
-    params: { lang: lang === "en" ? undefined : lang },
+    params: { lang: lang === 'en' ? undefined : lang },
   }));
 };
 
-// Duplicated from scopes.astro until a shared Markdoc/markdown source is set up.
-const BODY = `# Authorization Scopes
+const SOURCE = `# Authorization Scopes
 
 ## Authorization scopes for OAuth clients
 
@@ -24,12 +32,14 @@ The best practice for scoping applications is to follow the principle of least p
 You can use authorization scopes with OAuth2 clients for your [Datadog Apps](/extend/authorization/oauth2_in_datadog).
 `;
 
+const BODY = format(parse(SOURCE)).trim() + '\n';
+
 export const GET: APIRoute = ({ params }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
   }
   return new Response(BODY, {
-    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 };
