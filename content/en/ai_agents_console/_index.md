@@ -104,7 +104,7 @@ The {{< ui >}}User Cost Across Agents{{< /ui >}} table lists every user, the age
 
 {{< img src="ai_agents_console/user-cost-across-agents.png" alt="User Cost Across Agents table showing per-user model cost, agents used, lines of code generated, and sessions for 98 users" style="width:100%;" >}}
 
-Select a user to open a detail view that includes their spend, lines generated, pull requests, AI adoption percentage, model mix, and recent pull requests. Switch to the {{< ui >}}Github Pull Requests{{< /ui >}} tab to see the user's full PR history.
+Select a user to open a detail view that includes their spend, lines generated, pull requests, AI adoption percentage, model mix, and recent pull requests. Switch to the {{< ui >}}GitHub Pull Requests{{< /ui >}} tab to see the user's full PR history.
 
 {{< img src="ai_agents_console/user-detail.png" alt="User detail view for an individual user, showing summary tiles for User Spend, Lines Generated, and Pull Requests; an AI Adoption and Model Mix breakdown; and a Recent Pull Requests table" style="width:100%;" >}}
 
