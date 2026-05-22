@@ -12,7 +12,7 @@ You can also set up webhook notifications to call on [Datadog's API][3] if, for 
 
 ## How to do this
 
-Each webhook must be set up with a name (to be referenced in monitors) and a URL (to be pinged by the webhook). For submitting a call to the Datadog API, select "Use custom payload" and add your custom payload to the subsequent field.
+Each webhook must be set up with a name (to be referenced in monitors) and a URL (to be pinged by the webhook). For submitting a call to the Datadog API, select {{< ui >}}Use custom payload{{< /ui >}} and add your custom payload to the subsequent field.
 
 * The **name field**: anything, as long as it is unique among all the other webhook name fields.
 

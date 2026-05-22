@@ -112,7 +112,7 @@ Datadog Scorecards include 10 out-of-the-box rules across observability practice
 
 In addition to using default rules, you can define custom rules to reflect your internal standards:
 
-1. Go to the [Scorecards page][13] and click Create Rule.
+1. Go to the [Scorecards page][13] and click {{< ui >}}Create Rule{{< /ui >}}.
 1. Specify the rule name, the scorecard it belongs to, a description, and the owning team.
 1. Send an outcome of `pass`, `fail`, or `skip` for each entity in one of the following ways:
    - Manually through the Datadog UI

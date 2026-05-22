@@ -13,85 +13,166 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: Gérer les monitors
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: Centre d'apprentissage
+  text: Suivez une formation pour apprendre à personnaliser les notifications de vos
+    monitors d'alerte.
+- link: https://www.datadoghq.com/blog/monitor-notification-rules/
+  tag: Blog
+  text: Dirigez vos alertes de monitor avec les règles de notification des monitors
+    Datadog
 title: Notifications
 ---
+## Aperçu {#overview}
 
-## Présentation
+Les notifications sont un élément clé des moniteurs qui tiennent votre équipe informée des problèmes et facilitent le dépannage. Lors de la [création de votre moniteur][1], configurez votre réponse pour :
+- Rédigez un message actionnable.
+- Déclenchez un flux de travail ou créez un flux de travail à partir d'un moniteur.
+- [Créez automatiquement un cas][2].
+- Créez automatiquement un incident.
 
-Les notifications constituent un outil clé des monitors. Elles vous permettent de tenir votre équipe informée des problèmes et de faciliter leur résolution. Lorsque vous [créez un monitor][1], prenez le temps de remplir la section **Configurer des notifications et des automatisations**.
+## Construire des titres et des messages efficaces {#constructing-effective-titles-and-messages}
 
-## Configurer des notifications et des automatisations
+Cette approche aide à garantir que les titres et les messages de votre moniteur sont clairs, actionnables et adaptés aux besoins de votre public.
+- **Titres uniques** : Ajoutez un titre unique à votre moniteur (c'est requis). Pour les moniteurs d'alerte multiples, certains tags identifiant votre portée de déclenchement sont insérés automatiquement. Vous pouvez utiliser [des variables de tag][3] pour améliorer la spécificité.
+- **Champ de message** : Le champ de message prend en charge le [formatage Markdown standard][4] et [les variables][5]. Utilisez [des variables conditionnelles][6] pour moduler le texte de notification envoyé à différents contacts avec [@notifications](#notifications). Utilisez [des variables de modèle synthétiques][23] pour enrichir le message d'alerte avec le contexte d'échec des synthétiques.
 
-Utilisez la section **Configurer des notifications et des automatisations** pour :
-- Envoyer des notifications à votre équipe via e-mail, Slack, PagerDuty et dʼautres intégrations. 
-- Déclencher un workflow ou créer un workflow à partir d'un monitor.
-- Ajouter un cas à votre monitor.
+<div class="alert alert-info"> Le support du formatage Markdown varie selon la méthode de notification. Certains canaux ne prennent en charge qu'un sous-ensemble de la syntaxe Markdown.
+<ul> 
+  <li/>Notifications Slack : Prend en charge le formatage de base (gras, italique, code en ligne, liens). Les en-têtes Markdown (par exemple, <code>#</code>, <code>##</code>) et les tableaux ne sont pas rendus ; ils apparaissent comme du texte brut.
+  <li/>Les notifications par e-mail : prennent en charge le formatage de base (gras, italique, code en ligne, liens). Les tableaux ne sont pas rendus en tant que tableaux Markdown et apparaissent comme du texte brut dans le corps du message.
+</ul>
+</div>
 
-### Titre
-
-Vous devez ajouter un titre unique à votre monitor. Pour les monitors à alertes multiples, certains tags permettant d'identifier votre contexte de déclenchement sont automatiquement ajoutés. Vous pouvez également utiliser des [variables de tags][2].
-
-### Message
-
-Le champ de message prend en charge le [format Markdown][3] standard ainsi que des [variables][4]. Utilisez des [variables conditionnelles][5] pour ajuster le texte de la notification envoyé aux différents contacts avec la [syntaxe @notifications](#notifications).
-
+{{% collapse-content title="Exemple de message de moniteur" level="h4" expanded=false %}}
 Le message du monitor inclut généralement des étapes détaillées permettant de résoudre le problème. Exemple :
 
 ```text
-Étapes à suivre pour libérer de l'espace disque :
-1. Supprimer les packages non utilisés
-2. Vider le cache APT
-3. Désinstaller les applications superflues
-4. Supprimer les fichiers en double
+{{#is_alert}} <-- conditional variable
+
+Steps to free up disk space on {{host.name}}: <-- tag variable
+
+1. Remove unused packages
+2. Clear APT cache
+3. Uninstall unnecessary applications
+4. Remove duplicate files
+
+@slack-incident-response <-- channel to send notification
+
+{{/is_alert}}
+
 ```
 
-### Notifications
+{{% /collapse-content %}}
 
-Utilisez une `@notification` pour ajouter un membre de l'équipe, une intégration, un workflow ou un cas à votre notification. Au fil de votre saisie, Datadog vous propose des options dans un menu déroulant. Cliquez sur une option pour l'ajouter à votre notification. Vous pouvez également cliquer sur **@ Add Mention**, **Add Workflow** ou **Add Case**.
 
-**Remarque** : vous devez inclure une espace entre le dernier caractère de la ligne et la `@notification`. Exemple :
+## Destinataires de la notification {#notification-recipients}
+Datadog recommande d'utiliser [les règles de notification de moniteur][22] pour gérer les notifications de moniteur. Avec les règles de notification, vous pouvez automatiser l'ajout des destinataires de notification à un moniteur en fonction d'ensembles de conditions prédéfinies. Créez différentes règles pour acheminer les alertes de moniteur en fonction des tags de la notification, afin de ne pas avoir à configurer manuellement les destinataires ni la logique d'acheminement des notifications pour chaque moniteur individuel.
 
-```text
-Espace disque faible @ops-team@company.com
-```
-Vous pouvez envoyer des `@notifications` de différentes façons :
+Dans les règles de notification et les moniteurs individuels, vous pouvez utiliser un `@notification` pour ajouter un membre de l'équipe, une intégration, un flux de travail ou un cas à votre notification. Au fur et à mesure que vous tapez, Datadog recommande automatiquement des options existantes dans un menu déroulant. Cliquez sur une option pour l'ajouter à votre notification. Alternativement, cliquez sur **@ Ajouter une mention**, **Ajouter un flux de travail** ou **Ajouter un cas**.
 
-#### E-mail
+Une @notification doit avoir un espace entre elle et le dernier caractère de ligne :
 
-{{% notifications-email %}}
+| Format correct | Format incorrect |
+|------------------|-------------------|
+| `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
-#### Équipes
-
-Si un canal de notification est défini, vous pouvez acheminer les notifications vers une équipe spécifique. Les alertes de monitor ciblant @team-handle sont redirigées vers le canal de communication sélectionné. Pour en savoir plus sur la configuration d'un canal de notification pour votre équipe, consultez la documentation relative aux [équipes][6].
-
-#### Intégrations
-
+{{% collapse-content title="Les intégrations" level="h4" expanded=false %}}
 {{% notifications-integrations %}}
+{{% /collapse-content %}}
 
-### Workflows
-Vous pouvez déclencher une [automatisation de workflow][7] ou créer un nouveau workflow à partir d'un monitor.
+{{% collapse-content title="Équipes" level="h4" expanded=false %}}
+{{% notifications-teams %}}
+{{% /collapse-content %}}
 
-**Pour ajouter un workflow existant à un monitor** :
-1. Dans la section du message, ajoutez le nom complet de la mention du workflow :
-   - Le nom de la mention doit commencer par `@workflow-`. Par exemple, `@workflow-my-workflow`
-   - Pour transmettre des variables de déclenchement dans le workflow, utilisez une liste séparée par des virgules avec la syntaxe `@workflow-name(key=value, key=value)`. Vous pouvez utiliser des variables de modèles de messages comme variables de déclenchement. Par exemple, `@workflow-my-workflow(hostname=host.name)`
+{{% collapse-content title="Cas" level="h4" expanded=false %}}
+{{% notifications-cases %}}
+{{% /collapse-content %}}
 
-1. Vous pouvez également cliquer sur **Add Workflow** et rechercher lʼélément dans le menu déroulant.
+{{% collapse-content title="Par e-mail" level="h4" expanded=false %}}
+{{% notifications-email %}}
+{{% /collapse-content %}}
 
-Pour en savoir plus sur le déclenchement dʼun workflow, consultez la section [Déclencher un workflow][8].
+### Édition en masse des @-handles de moniteur {#bulk-editing-monitor-handles}
+Datadog prend en charge l'édition des destinataires de messages d'alerte sur plusieurs moniteurs à la fois. Utilisez cette fonctionnalité pour ajouter, supprimer ou remplacer efficacement `@-handles` dans le corps du message du moniteur. Exemples de cas d'utilisation :
 
-**Pour créer un workflow** :
-1. Cliquez sur **Add Workflow**.
-1. Cliquez sur l'icône **+** et sélectionnez un modèle, ou sélectionnez **Start From Scratch**.
-   {{< img src="/monitors/notifications/create-workflow.png" alt="Cliquez sur le bouton + pour ajouter un nouveau workflow" style="width:90%;">}}
+- **Échanger un handle** : Remplacer un handle par un autre sur plusieurs moniteurs. Par exemple, changez `@pagerduty-sre` en `@oncall-sre`. Vous pouvez également échanger un handle contre plusieurs handles, par exemple en remplaçant `@pagerduty-sre` par `@pagerduty-sre` et `@oncall-sre`, pour prendre en charge la double pagination ou une couverture d'alerte élargie.
+- **Ajouter un handle** : Ajoutez un nouveau destinataire sans supprimer les existants. Par exemple, ajoutez `@slack-infra-leads` à tous les moniteurs sélectionnés.
+- **Supprimer un handle** : Supprimez un handle spécifique des messages de moniteur. Par exemple, supprimez `@webhook-my-legacy-event-intake`.
 
-Pour en savoir plus sur la création d'un workflow, consultez la section [Build workflows][9] (en anglais).
+## Flux de travail {#workflows}
+Vous pouvez déclencher une [automatisation de flux de travail][8] ou créer un nouveau flux de travail à partir d'un moniteur.
 
-### Priorité
+Avant d'ajouter un flux de travail à un moniteur, [ajoutez un déclencheur de moniteur au flux de travail][9].
 
-Vous avez la possibilité d'ajouter une priorité à vos monitors. Les valeurs autorisées vont de P1 à P5 : P1 correspond à la plus haute priorité, et P5 à la plus faible. Pour ignorer la priorité du monitor dans le message de notification, utilisez `{{override_priority 'Pi'}}`, en remplaçant `Pi` par une priorité de P1 à P5.
+Après avoir ajouté le déclencheur de moniteur, [ajoutez un flux de travail existant à votre moniteur][10] ou créez un nouveau flux de travail. Pour créer un nouveau flux de travail à partir de la page des moniteurs :
 
-Par exemple, vous pouvez définir plusieurs priorités pour les notifications `alert` et `warning` :
+1. Cliquez sur **Ajouter un flux de travail**.
+1. Cliquez sur l'icône **+** et sélectionnez un modèle, ou sélectionnez **Commencer à partir de zéro**.
+   {{< img src="/monitors/notifications/create-workflow.png" alt="Cliquez sur le bouton + pour ajouter un nouveau flux de travail" style="width:90%;">}}
+
+Pour plus d'informations sur la création d'un flux de travail, consultez [Créer des flux de travail][11].
+
+## Incidents {#incidents}
+Les incidents peuvent être créés automatiquement à partir d'un moniteur lorsque le moniteur passe à un statut `alert`, `warn` ou `no data`. Cliquez sur **Ajouter un incident** et sélectionnez une option `@incident-`. Les administrateurs peuvent créer `@incident-` options dans [Paramètres des incidents][12].
+
+Lorsqu'un incident est créé à partir d'un moniteur, les [valeurs de champ][13] de l'incident sont automatiquement remplies en fonction des tags du moniteur. Par exemple, si votre moniteur a un tag `service:payments`, le champ de service de l'incident sera défini sur "paiements". Pour recevoir des notifications concernant ces incidents, assurez-vous que les tags du moniteur correspondent à vos règles de notification d'incidents. **Remarque** : Les règles de notification d'incidents sont configurées séparément des règles de notification de moniteur et doivent être mises en place indépendamment. Pour plus d'informations, consultez [Notification d'incidents][14].
+
+## Basculer le contenu supplémentaire {#toggle-additional-content}
+
+Les notifications de moniteur incluent des contenus tels que la requête du moniteur, les mentions @ utilisées, les instantanés de métriques (pour les moniteurs de métriques) et des liens vers les pages pertinentes dans Datadog. Vous avez la possibilité de choisir quel contenu vous souhaitez inclure ou exclure des notifications pour des moniteurs individuels.
+
+<div class="alert alert-danger">Les métriques de distribution avec des agrégateurs de percentile (tels que `p50`, `p75`, `p95` ou `p99`) ne génèrent pas de graphique instantané dans les notifications. </div>
+
+{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Définir un préréglage de moniteur" style="width:70%;" >}}
+
+Les options disponibles sont :
+
+- **Par défaut** : Aucun contenu n'est masqué.
+- **Masquer la requête** : Supprimer la requête du moniteur du message de notification.
+- **Masquer les mentions** : Supprimer les mentions @ utilisées dans le message de notification.
+- **Tout masquer** : Le message de notification n'inclut pas la requête, les mentions, les instantanés (pour les moniteurs de métriques) ou des liens supplémentaires dans les pieds de page.
+
+**Remarque** : Selon l'intégration, certains contenus peuvent ne pas être affichés par défaut.
+
+## Renotifier {#renotify}
+
+Activez le renvoi de notifications (facultatif) pour rappeler à votre équipe qu'un problème n'a pas été résolu.
+
+  {{< img src="monitors/notifications/renotify_options.png" alt="Activer la renotification" style="width:90%;" >}}
+
+Configurer l'intervalle de renotification, les états du moniteur à partir desquels le moniteur renotifie (dans `alert`, `no data` et `warn`) et éventuellement définir une limite au nombre de messages de renotification envoyés.
+
+Par exemple, configurez le moniteur pour `stop renotifying after 1 occurrence` afin de recevoir un seul message d'escalade après l'alerte principale.
+**Remarque :** [Les variables d'attribut et de tag][3] dans la renotification sont peuplées avec les données disponibles pour le moniteur pendant la période de temps de la renotification.
+
+Si le renvoi de notifications est activé, vous pouvez définir un message de réaffectation. Celui-ci est envoyé lorsque le monitor conserve l'un des états indiqués pendant la période de votre choix.
+
+Le message de réaffectation peut être ajouté de plusieurs façons :
+
+* Dans le `{{#is_renotify}}` bloc dans le message de notification original (recommandé).
+* Dans le champ *Message de renotification* dans la section `Configure notifications and automations`.
+* Avec l'attribut `escalation_message` dans l'API.
+
+Si vous utilisez le bloc `{{#is_renotify}}`, le message de notification original est également inclus dans la renotification, donc :
+
+1. Incluez uniquement des détails supplémentaires dans le bloc `{{#is_renotify}}` et ne répétez pas les détails du message original.
+2. Envoyez le message d'escalade à un sous-ensemble de groupes.
+
+Apprenez à configurer vos moniteurs pour ces cas d'utilisation dans la [section exemple][15].
+
+## Métadonnées {#metadata}
+
+Ajoutez des métadonnées (Priorité, Tags, Équipe Datadog) à votre moniteur. La priorité du moniteur vous permet de définir l'importance de votre moniteur par le niveau P (P1 à P5). Les tags de moniteur--qui sont différents des tags de métriques--sont utilisés dans l'interface utilisateur pour regrouper et rechercher des moniteurs. Si des politiques de tags sont configurées, les tags requis et les valeurs de tags doivent être ajoutés. Pour en savoir plus, consultez [Politiques de tags][16]. Les équipes Datadog vous permettent de définir un niveau de propriété pour ce moniteur et de voir tous les moniteurs liés à votre équipe. Pour en savoir plus, consultez [Équipes Datadog][17].
+
+{{< img src="monitors/notifications/notifications_metadata.png" alt="Vue de la configuration des tags de politique. Sous 'Policy tags', il y a trois tags d'exemple : cost_center, product_id et env, à côté d'un menu déroulant 'Select value'." style="width:100%;" >}}
+
+{{% collapse-content title="Priorité" level="h4" expanded=false %}}
+
+Ajoutez une priorité (facultatif) associée à vos moniteurs. Les valeurs vont de P1 à P5, P1 étant la priorité la plus élevée et P5 la plus basse.
+Pour remplacer la priorité du moniteur dans le message de notification, utilisez `{{override_priority 'Pi'}}` where `Pi` est entre P1 et P5.
+
+Par exemple, vous pouvez définir différentes priorités pour `alert` et `warning` notifications :
 
 ```
 {{#is_alert}}
@@ -103,131 +184,68 @@ Par exemple, vous pouvez définir plusieurs priorités pour les notifications `a
 ...
 {{/is_warning}}
 ```
-
-### Choisir le contenu supplémentaire à afficher
-
-Les notifications de monitor incluent diverses informations telles que la requête du monitor, les mentions « @ » utilisées, les snapshots de métrique (pour les monitors de métrique) et les liens renvoyant aux pages pertinentes dans Datadog. Vous pouvez choisir le contenu que vous souhaitez inclure ou exclure des notifications pour un monitor donné.
-
-<div class="alert alert-danger">Les métriques de distribution avec des agrégateurs de percentiles (tels que `p50`, `p75`, `p95`, ou `p99`) ne génèrent pas de graphiques snapshot dans les notifications. </div>
-
-{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Définir un préréglage de monitor" style="width:70%;" >}}
-
-Les options disponibles sont :
-
-- **Default** : aucun contenu n'est masqué.
-- **Hide Query** : supprime la requête du monitor du message de notification.
-- **Hide Handles** : supprime les mentions « @ » utilisées dans le message de notification.
-- **Hide All** : le message de notification n'inclut pas la requête ni aucun handle, snapshot (pour les monitors de métrique) ou lien supplémentaire en bas.
-
-**Remarque** : selon l'intégration utilisée, une partie du contenu peut ne pas être affichée par défaut.
-
-### Métadonnées
-
-Ajoutez des métadonnées (priorité, tags, équipe Datadog) à votre monitor. La priorité vous permet de définir l'importance de votre monitor en fonction de niveaux P (P1 à P5). Les tags de monitors, qui sont différents des tags de métriques, sont utilisés dans l'interface utilisateur pour regrouper et rechercher des monitors. Si des stratégies de tags sont configurées, les tags requis et leurs valeurs doivent être ajoutés. Pour en savoir plus, consultez la section relative aux [stratégies de tags][10]. Les équipes Datadog vous permettent de définir un niveau de propriété pour ce monitor et d'afficher tous les monitors liés à votre équipe. Pour en savoir plus, consultez la section relative aux [équipes Datadog][11].
-
-{{< img src="monitors/notifications/notifications_metadata.png" alt="Vue d'une configuration de politique de tagging. En dessous de 'Policy tags' se trouvent trois exemples de tag, cost_center, product_id et env, à côté d'un menu déroulant 'Select value'." style="width:100%;" >}}
-
-### Renvoi de notifications
-
-Activez le renvoi de notifications (facultatif) pour rappeler à votre équipe qu'un problème n'a pas été résolu.
-
-  {{< img src="monitors/notifications/renotify_options.png" alt="Activer le renvoi de notifications" style="width:90%;" >}}
-
-Configurez l'intervalle de renvoi de notifications et les états à partir desquels le monitor renvoie des notifications (valeurs autorisées :  `alert`, `no data` et `warn`). Vous avez également la possibilité de limiter le nombre de nouvelles notifications envoyées.
-
-Appliquez par exemple au monitor la configuration `stop renotifying after 1 occurrence` pour recevoir un seul message de réaffectation après l'alerte principale.
-**Remarque :** les [variables d'attribut et de tag][12] dans la nouvelle notification sont automatiquement renseignées avec les données dont dispose le monitor durant la période de la nouvelle notification.
-
-Si le renvoi de notifications est activé, vous pouvez définir un message de réaffectation. Celui-ci est envoyé lorsque le monitor conserve l'un des états indiqués pendant la période de votre choix.
+{{% /collapse-content %}}
 
 
-Le message de réaffectation peut être ajouté de plusieurs façons :
+## Agrégation {#aggregation}
 
-* Dans le bloc `{{#is_renotify}}` du message de la notification d'origine (recommandé)
-* Dans le champ *Renotification message* de la section `Configure notifications and automations`.
-* Avec l'attribut `escalation_message` dans l'API
+Si la requête du moniteur est groupée, vous pouvez retirer une ou plusieurs dimensions du regroupement de notification, ou les retirer toutes et notifier comme une alerte simple.
 
-Si vous utilisez le bloc `{{#is_renotify}}`, sachez que le message de notification d'origine est également inclus dans la nouvelle notification. Pour cette raison :
+{{< img src="monitors/notifications/notifications_aggregation.png" alt="Vue de la configuration d'agrégation définie sur multi-alert." style="width:100%;" >}}
 
-1. Ne répétez pas le contenu du message d'origine : ajoutez uniquement des informations supplémentaires dans le bloc `{{#is_renotify}}`.
-2. Envoyez le message de réaffectation à un sous-ensemble de groupes.
+Trouvez plus d'informations sur cette fonctionnalité dans [Configurer les Moniteurs][18]
 
-Consultez la [section Exemples][13] pour découvrir comment configurer vos monitors pour ces scénarios.
+## Notifications de test {#test-notifications}
 
+Après avoir défini votre moniteur, testez les notifications avec le bouton **Test Notifications** en bas à droite de la page du moniteur.
 
-## Définir des autorisations et des notifications dʼaudit
+Les notifications de test sont prises en charge pour les [types de moniteurs][19] : hôte, métrique, anomalie, valeur aberrante, prévision, journaux, rum, apm, intégration (vérification uniquement), processus (vérification uniquement), réseau (vérification uniquement), vérification personnalisée, événement et composite.
 
-### Modifications
+1. Dans la fenêtre contextuelle des notifications de test, choisissez la transition du moniteur à tester et le groupe (disponible uniquement si la requête a [regroupement][20]). Vous ne pouvez tester que les états qui sont disponibles dans la configuration du moniteur pour les seuils spécifiés dans les conditions d'alerte. [Seuils de récupération][21] sont une exception, car Datadog envoie une notification de récupération une fois que le moniteur n'est plus en alerte, ou qu'il n'a plus de conditions d'avertissement.
 
-Chaque fois qu'un monitor est créé, modifié, désactivé ou supprimé, un [événement][14] est généré. Définissez l'option `Notify` pour envoyer des notifications aux membres de vos équipes, aux services de discussion et au créateur du monitor à propos de ces événements.
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="Testez les notifications pour ce moniteur" style="width:70%;" >}}
 
-### Autorisations
+1. Cliquez sur **Exécuter le Test** pour envoyer des notifications aux personnes et aux services listés dans le moniteur.
 
-Tous les utilisateurs peuvent lire l'ensemble des monitors, indépendamment du rôle auquel ils ont été associés.
+### Événements {#events}
 
-Par défaut, seuls les utilisateurs associés à des rôles disposant de l'[autorisation monitor_write][15] peuvent modifier les monitors. Le [rôle Admin Datadog et le rôle Standard Datadog][16] disposent par défaut de cette autorisation. Si votre organisation utilise des [rôles personnalisés][17], vous pouvez attribuer cette autorisation aux rôles de votre choix.
+Les notifications de test produisent des événements qui peuvent être recherchés dans l'explorateur d'événements. Ces notifications indiquent qui a initié le test dans le corps du message avec `[TEST]` dans le titre de la notification.
 
-Vous pouvez restreindre encore davantage l'accès au monitor en spécifiant une liste de [rôles][18] autorisés à le modifier. Le créateur du monitor, quant à lui, peut toujours le modifier.
+Les variables de balise ne sont peuplées que dans le texte des événements enfants de Datadog. L'événement parent n'affiche qu'un résumé d'agrégation.
 
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="Monitor avec une restriction RBAC" style="width:90%;" >}}
-
-Il est notamment possible de modifier la configuration du monitor, de supprimer le monitor et de désactiver ses notifications pendant la durée souhaitée.
-
-**Remarque** : les limites s'appliquent à la fois à l'IU et à l'API.
-
-Pour en savoir plus sur la configuration du RBAC pour les monitors et découvrir comment passer du paramètre locked aux restrictions de rôles pour vos monitors, consultez la section [Configuration du RBAC pour les monitors][19].
-
-## Notifications de test
-
-Les notifications de test sont prises en charge pour les [types de monitors][20] suivants : host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check uniquement), process (check uniquement), network (check uniquement), custom check, event et composite.
-
-### Effectuer le test
-
-1. Après avoir défini votre monitor, testez les notifications à l'aide du bouton **Test Notifications** situé en bas de la page du monitor.
-
-2. Dans la fenêtre contextuelle des notifications de test, choisissez le scénario de monitor à tester. Vous pouvez uniquement tester les états disponibles dans la configuration du monitor, pour les seuils indiqués dans les conditions d'alerte. Les [seuils de rétablissement][21] sont la seule exception. En effet, Datadog envoie une notification de rétablissement lorsque le monitor n'est plus en alerte ou lorsqu'il ne possède aucune condition d'avertissement.
-
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Tester les notifications de ce monitor" style="width:70%;" >}}
-
-3. Cliquez sur **Run Test** pour envoyer des notifications aux personnes et services répertoriés dans le monitor.
-
-### Événements
-
-Les notifications de test créent des événements qui peuvent faire l'objet de recherches dans l'Events Explorer. Ces notifications indiquent la personne à l'origine du test dans le corps du message. La mention `[TEST]` est ajoutée au titre de la notification.
-
-Les variables de tags sont uniquement insérées dans le texte des événements enfants de Datadog. L'événement parent affiche seulement un résumé des agrégations.
-
-### Variables {#notification-test-variables}
+### Variables {#variables-test-notification}
 
 Les variables de message se remplissent automatiquement à partir d'un groupe disponible, sélectionné au hasard, en fonction du contexte de la définition de votre monitor. Exemple :
 
 ```text
 {{#is_alert}}
-{{host.name}} <-- est fourni automatiquement
+{{host.name}} <-- will populate
 {{/is_alert}}
 ```
-## Pour aller plus loin
+
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/monitors/configuration
-[2]: /fr/monitors/notify/variables/#tag-variables
-[3]: http://daringfireball.net/projects/markdown/syntax
-[4]: /fr/monitors/notify/variables/
-[5]: /fr/monitors/notify/variables/#conditional-variables
-[6]: /fr/account_management/teams/#send-notifications-to-a-specific-communication-channel
-[7]: /fr/service_management/workflows/
-[8]: /fr/service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
-[9]: /fr/service_management/workflows/build/
-[10]: /fr/monitors/settings/#tag-policies
-[11]: /fr/account_management/teams/
-[12]: /fr/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[13]: /fr/monitors/notify/variables/?tab=is_renotify#examples
-[14]: /fr/events/
-[15]: /fr/account_management/rbac/permissions/#monitors
-[16]: /fr/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[17]: /fr/account_management/rbac/?tab=datadogapplication#custom-roles
-[18]: /fr/account_management/rbac/?tab=datadogapplication
-[19]: /fr/monitors/guide/how-to-set-up-rbac-for-monitors/
-[20]: /fr/monitors/types
+[2]: /fr/incident_response/case_management/create_case/#automatic-case-creation
+[3]: /fr/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
+[4]: http://daringfireball.net/projects/markdown/syntax
+[5]: /fr/monitors/notify/variables/
+[6]: /fr/monitors/notify/variables/#conditional-variables
+[8]: /fr/service_management/workflows/
+[9]: /fr/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[10]: /fr/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
+[11]: /fr/service_management/workflows/build/
+[12]: https://app.datadoghq.com/incidents/settings?section=global-settings
+[13]: /fr/incident_response/incident_management/setup_and_configuration/property_fields
+[14]: /fr/incident_response/incident_management/notification
+[15]: /fr/monitors/notify/variables/?tab=is_renotify#examples
+[16]: /fr/monitors/settings/#tag-policies
+[17]: /fr/account_management/teams/
+[18]: /fr/monitors/configuration/#set-alert-aggregation
+[19]: /fr/monitors/types
+[20]: /fr/monitors/configuration/
 [21]: /fr/monitors/guide/recovery-thresholds/
+[22]: /fr/monitors/notify/notification_rules
+[23]: /fr/synthetics/notifications/template_variables/

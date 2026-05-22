@@ -91,12 +91,12 @@ If you are using LangChain prompt templates, Datadog automatically captures prom
 
 ## Use Prompt Tracking in LLM Observability
 
-View your app in LLM Observability and select **Prompts** on the left. The _Prompts view_ features the following information:
+View your app in LLM Observability and select {{< ui >}}Prompts{{< /ui >}} on the left. The _Prompts view_ features the following information:
 
-- **Prompt Call Count**: A timeseries chart displaying calls per prompt (or per version) over time
-- **Recent Prompt Updates**: Information about recent prompt updates, including time of last update, call count, average latency, and average tokens per call
-- **Most Tokens Used**: Prompts ranked by total (input or output) tokens
-- **Highest Latency Prompts**: Prompts ranked by average duration
+- {{< ui >}}Prompt Call Count{{< /ui >}}: A timeseries chart displaying calls per prompt (or per version) over time
+- {{< ui >}}Recent Prompt Updates{{< /ui >}}: Information about recent prompt updates, including time of last update, call count, average latency, and average tokens per call
+- {{< ui >}}Most Tokens Used{{< /ui >}}: Prompts ranked by total (input or output) tokens
+- {{< ui >}}Highest Latency Prompts{{< /ui >}}: Prompts ranked by average duration
 
 {{< img src="llm_observability/monitoring/prompt_details.png" alt="Detail view for a single prompt." style="width:100%;" >}}
 
