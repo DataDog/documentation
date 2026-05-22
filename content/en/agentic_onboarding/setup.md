@@ -46,7 +46,7 @@ The CLI can:
     npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
     ```
 
-    - Replace the value of `--site` with the [Datadog site](http://localhost:1313/getting_started/site/) for your account.
+    - Replace the value of `--site` with the [Datadog site][16] for your account.
     - Replace `<PRODUCT>` with one of `infrastructure`, `apm`, `logs`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `code-coverage`, `test-optimization`, or `llm-observability`.
 
 1. Complete the OAuth flow in your browser when prompted. After authentication, point the CLI to your code repository. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables.
@@ -65,7 +65,7 @@ The MCP Server supports the following frameworks:
 | Infrastructure Monitoring (Kubernetes) | Terraform, Ansible, Kustomize, Helm, Pulumi, raw manifests |
 | Serverless Monitoring (AWS Lambda) | Terraform, AWS CDK, Serverless Framework, SAM |
 
-### Install the MCP Server
+### Step 1: Install the MCP Server
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
@@ -75,8 +75,6 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-You have two options:
-
 **Option 1: Install deeplink (recommended).** Click the install deeplink for your [Datadog site](/getting_started/site/), then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
@@ -99,13 +97,13 @@ Any MCP client that supports HTTP transport can connect to the Datadog MCP Serve
 {{% /tab %}}
 {{< /tabs >}}
 
-### Authenticate the MCP Server
+### Step 2: Authenticate the MCP Server
 
 1. When prompted to authenticate, press <kbd>Enter</kbd>. This opens the Datadog OAuth screen in your browser.
 1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP Server access to your Datadog account.
 1. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
-### Instrument your project
+### Step 3: Instrument your project
 
 Send the prompt that matches the product you want to set up:
 
