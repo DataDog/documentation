@@ -3,6 +3,13 @@ import re
 import os
 import json
 import requests
+import semver
+
+VERSION_KEY_PATTERN = re.compile(r'^\d+\.\d+\.\d+$')
+WORKER_URL_PATTERN = re.compile(
+    r'datadog-synthetics-worker-(\d+\.\d+\.\d+)\.amd64\.msi'
+)
+
 
 def get_data(url):
     response = requests.get(url)
@@ -11,21 +18,38 @@ def get_data(url):
     return response
 
 
+def _max_semver_version(versions):
+    if not versions:
+        raise Exception("Failed to find latest release")
+    return str(max(versions, key=semver.Version.parse))
+
+
+def is_newer_version(latest_version, current_version):
+    if not current_version:
+        return True
+    return semver.compare(latest_version, current_version) > 0
+
+
 def get_synthetics_worker_version(data):
-    '''Get the latest version'''
+    '''Get the highest published worker version from installers.json.'''
     data = data.json()
-    latest_info = data.get("synthetics-private-location", {}).get("latest", {}).get("x86_64", {}).get("url", "")
-    if latest_info:
-        # Extract version number from the URL
-        match = re.search(r"datadog-synthetics-worker-(\d+\.\d+\.\d+)\.amd64\.msi", latest_info)
+    spl = data.get("synthetics-private-location", {})
+    versions = []
+
+    for key in spl:
+        if VERSION_KEY_PATTERN.match(key):
+            versions.append(key)
+
+    latest_url = spl.get("latest", {}).get("x86_64", {}).get("url", "")
+    if latest_url:
+        match = WORKER_URL_PATTERN.search(latest_url)
         if match:
-            version=match.group(1)
+            versions.append(match.group(1))
         else:
             raise Exception("Failed to extract latest version")
-    else:
-        raise Exception("Failed to find latest release")
-    
-    return version    
+
+    return _max_semver_version(versions)
+
 
 def get_private_action_runner_version(data):
     '''Get the latest version'''
@@ -75,13 +99,14 @@ if __name__ == "__main__":
     try:
         with open(f'data/{file_name}', 'r') as f:
             current_versions = json.load(f)
-    except:
+    except (FileNotFoundError, json.JSONDecodeError):
         current_versions = {}
 
     current_version = current_versions[0].get('version') if current_versions else None
     print("Current version: ", current_version)
+    print("Latest version: ", latest_version)
 
-    if current_version != latest_version and client:
+    if is_newer_version(latest_version, current_version) and client:
         print("New version detected: ", latest_version)
         final_versions = [{
             "client": client,
@@ -91,13 +116,19 @@ if __name__ == "__main__":
             f.write(json.dumps(final_versions, indent=4, sort_keys=True))
         if github_output:
             with open(github_output, 'a', encoding='utf-8') as f:
-                f.write('new_version=true')    
+                f.write('new_version=true\n')
         else:
             print("A new version was found!")
     else:
+        if current_version and semver.compare(latest_version, current_version) < 0:
+            print(
+                "Skipping update: remote version",
+                latest_version,
+                "is older than current",
+                current_version,
+            )
         if github_output:
             with open(github_output, 'a', encoding='utf-8') as f:
-                print("No new version detected")
-                f.write('new_version=false')
+                f.write('new_version=false\n')
         else:
             print("No new version detected")

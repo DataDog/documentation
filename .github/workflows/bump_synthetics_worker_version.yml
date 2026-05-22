@@ -67,12 +67,24 @@ jobs:
           github-token: ${{ steps.octo-sts.outputs.token }}
           result-encoding: string
           script: |
-            await github.rest.pulls.create({
+            const head = "automatic-version-update/synthetics-worker";
+            const { data: openPulls } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: "(Automated) Bump version",
-              body: "### Merge instructions\n- **Please merge this PR after approving!**",
-              head: "automatic-version-update/synthetics-worker",
+              head: `${context.repo.owner}:${head}`,
               base: "master",
-              maintainer_can_modify: true
-            })
+              state: "open",
+            });
+            if (openPulls.length > 0) {
+              core.info(`Open PR already exists: #${openPulls[0].number}`);
+            } else {
+              await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: "(Automated) Bump version",
+                body: "### Merge instructions\n- **Please merge this PR after approving!**",
+                head: head,
+                base: "master",
+                maintainer_can_modify: true
+              });
+            }
