@@ -6,7 +6,7 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 
 ## Overview
 
-Agentic Onboarding is a set of tools for instrumenting your applications and infrastructure with Datadog for [Infrastructure Monitoring][4], [APM][11], [Logs][12], [Real User Monitoring (RUM)][2], [Error Tracking][1], [Product Analytics][3], [Serverless Monitoring][5], [Code Coverage][13], [Test Optimization][14], and [LLM Observability][15].
+Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure. It supports the following products: [Infrastructure Monitoring][4], [APM][11], [Logs][12], [Real User Monitoring (RUM)][2], [Error Tracking][1], [Product Analytics][3], [Serverless Monitoring][5], [Code Coverage][13], [Test Optimization][14], and [LLM Observability][15].
 
 Choose the path that fits your workflow:
 
