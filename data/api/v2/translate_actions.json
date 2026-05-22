@@ -1780,6 +1780,20 @@
     "request_description": "",
     "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
+  "DeleteEntityIntegrationConfig": {
+    "description": "Delete the configuration stored for a given integration in the caller's organization.",
+    "summary": "Delete an entity integration configuration"
+  },
+  "GetEntityIntegrationConfig": {
+    "description": "Retrieve the configuration currently stored for a given integration in the caller's organization.",
+    "summary": "Get an entity integration configuration"
+  },
+  "UpdateEntityIntegrationConfig": {
+    "description": "Create or replace the configuration for a given integration in the caller's organization. The shape of `data.attributes.config` depends on the integration:\n\n- For `github`: `config` must contain an `enabled_repos` array of objects with `hostname`, `github_org_name`, and `repo_name`.\n- For `jira`: `config` must contain an `enabled_projects` array of objects with `hostname`, `account_id`, and `project_key`.\n- For `pagerduty`: `config` must contain an `accounts` array of objects with a required `enabled` boolean and an optional `subdomain` string.",
+    "summary": "Create or update entity integration configuration",
+    "request_description": "",
+    "request_schema_description": "Request body used to create or replace the configuration for a given integration."
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
