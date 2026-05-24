@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Operation AI Investigation runs an agentic root-cause analysis on a single operation in [Operations Monitoring][1]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment), for latency regressions, and for sustained high latency — so you can see at a glance why the operation is degraded.
+Operation AI Investigation runs an agentic root-cause analysis on a single operation in [Operations Monitoring][1]. The agent analyzes both the success rate and the latency of the operation. It surfaces focused investigations for each failure mode (errors, timeouts, abandonment), for latency regressions, and for sustained high latency, so you can see at a glance why the operation is degraded.
 
 ## Prerequisites
 
@@ -40,15 +40,15 @@ Operation AI Investigation runs an agentic root-cause analysis on a single opera
 
 The agent looks at several modes of failure or degradation for the operation:
 
-- **Errors** — operations that ended with an error.
-- **Timeouts** — operations that did not complete within their expected duration.
-- **Abandoned** — operations that the user gave up on.
-- **Performance regression** — operations whose latency degraded compared to the historical baseline.
-- **Latency** — operations that are sustainably slow, independent of a recent regression.
+- **Errors**: Operations that ended with an error.
+- **Timeouts**: Operations that did not complete within their expected duration.
+- **Abandoned**: Operations that the user gave up on.
+- **Performance regression**: Operations whose latency degraded compared to the historical baseline.
+- **Latency**: Operations that are consistently slow, independent of a recent regression.
 
 For each card, the findings are grouped into three root-cause categories:
 
-| Category   | What is examined                                                                                                |
+| Source   | What is examined                                                                                                |
 |------------|-----------------------------------------------------------------------------------------------------------------|
 | Frontend   | Client-side failures: JavaScript errors, broken event handlers, blocking scripts.                                |
 | Backend    | Server-side failures: backend errors, slow responses, downstream service issues.                                 |
@@ -58,14 +58,20 @@ When applicable, the agent surfaces frontend and backend error groups together w
 
 ## Read the results
 
-When you launch an investigation, a side panel streams the analysis as it runs. Once complete, the panel shows:
+When you launch an investigation, a side panel streams the analysis as it runs. Once complete, the panel shows the inferred root cause and a ranked list of findings.
 
-- **The inferred root cause** — categorized as Frontend, Backend, or Network — with a confidence level (**High**, **Medium**, or **Low**) indicating how confident the agent is in its conclusion.
-- **Ranked findings**, where each finding includes:
-  - **A summary** of the failure or degradation pattern.
-  - **Code locations** with file path, line number, and surrounding snippet when source maps are available.
-  - **Correlated APM endpoints**, each with a **View trace** link that opens the matching trace in APM.
-  - **Error groups** with the affected session count and whether the error first appeared in a recent application version, plus a **View Sample Session** link that opens the session in the RUM Explorer.
+### Root cause
+
+The agent categorizes the root cause as **Frontend**, **Backend**, or **Network**, with a confidence level of **High**, **Medium**, or **Low**.
+
+### Ranked findings
+
+Each finding includes:
+
+- **Summary**: A description of the failure or degradation pattern.
+- **Code locations**: File path, line number, and surrounding snippet when source maps are available.
+- **Correlated APM endpoints**: Each with a **View trace** link that opens the matching trace in APM.
+- **Error groups**: Affected session count, whether the error first appeared in a recent application version, and a **View Sample Session** link that opens the session in the RUM Explorer.
 
 <!-- TODO: Screenshot — Operation AI Investigation side panel with verdict, summary, and ranked findings. -->
 
@@ -73,10 +79,10 @@ When you launch an investigation, a side panel streams the analysis as it runs. 
 
 After an investigation completes, you can act on findings without leaving the panel:
 
-- **Fix with Bits**: opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
-- **Copy Investigation Prompt**: copies the agent's prompt to your clipboard so you can rerun, refine, or share it.
-- **View trace** on a correlated endpoint: opens the matching trace in APM.
-- **View Sample Session** on an error group: opens the session in the RUM Explorer.
+- **Fix with Bits**: Opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
+- **Copy Investigation Prompt**: Copies the agent's prompt to your clipboard so you can rerun, refine, or share it.
+- **View trace** on a correlated endpoint: Opens the matching trace in APM.
+- **View Sample Session** on an error group: Opens the session in the RUM Explorer.
 
 ## Further reading
 

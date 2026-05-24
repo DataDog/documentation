@@ -23,7 +23,7 @@ For more information, see [Single-View AI Investigation][1].
 
 ## Multi-view AI investigation
 
-Run an agentic investigation across a sample of views that share a slow Core Web Vital. Multi-view extends the same agentic analysis to a population of views, helping you find what to fix when an entire (view × vital) pair is consistently slow across your users. Available from the Optimization page for Loading Time, Largest Contentful Paint, First Contentful Paint, and Interaction to Next Paint.
+Run an agentic investigation across a sample of views that share a slow Core Web Vital. Multi-View AI Investigation extends the same agentic analysis to a population of views, helping you identify what to fix when an entire (view × vital) pair is consistently slow across users. Available from the Optimization page for Loading Time, Largest Contentful Paint, First Contentful Paint, and Interaction to Next Paint.
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-multi-view-ai-investigation/" header="Join the Preview!">}}
   Multi-View AI Investigation is in Preview.

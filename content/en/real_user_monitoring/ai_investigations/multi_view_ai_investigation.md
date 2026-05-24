@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Multi-View AI Investigation runs an agentic root-cause analysis across a sample of views that share a slow Core Web Vital. Where [Single-View AI Investigation][1] explains why one session was slow, Multi-View AI Investigation explains why an entire (view × vital) pair is consistently slow across users. Use it from the Optimization page when you are looking at a specific page and a specific vital and want to know what to fix first.
+Multi-View AI Investigation runs an agentic root-cause analysis across a sample of views that share a slow Core Web Vital. While [Single-View AI Investigation][1] explains why one view was slow, Multi-View AI Investigation explains why an entire (view × vital) pair is consistently slow across users. Use it from the Optimization page when you have identified a specific page and vital and want to know what to fix first.
 
 The investigation runs at the (view × vital) granularity and is available for the following vitals:
 
@@ -27,6 +27,10 @@ The investigation runs at the (view × vital) granularity and is available for t
 - Largest Contentful Paint
 - First Contentful Paint
 - Interaction to Next Paint
+
+## Prerequisites
+
+Multi-View AI Investigation is available for Browser RUM applications only.
 
 ## Launch an investigation
 
@@ -43,7 +47,7 @@ The investigation runs at the (view × vital) granularity and is available for t
 
 The agent groups its findings into four diagnostic types:
 
-| Diagnostic              | What is examined                                                                                              |
+| Source              | What is examined                                                                                              |
 |-------------------------|---------------------------------------------------------------------------------------------------------------|
 | Resource bottleneck     | Slow resources (HTML, scripts, images) impacting the vital across views.                                       |
 | Vital element           | DOM elements that contribute most to the LCP or INP score for the view.                                        |
@@ -66,12 +70,8 @@ When you click **Investigate** on a recommendation card, a side panel opens and 
 
 After an investigation completes, you can act on findings without leaving the panel:
 
-- **Fix with Bits**: opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
-- **Save to a Notebook**: exports the full timeline and findings to a [Notebook][5] to share with your team.
-
-## Platform support
-
-Multi-View AI Investigation is available for Browser RUM applications only.
+- **Fix with Bits**: Opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
+- **Save to a Notebook**: Exports the full timeline and findings to a [Notebook][5] to share with your team.
 
 ## Further reading
 
