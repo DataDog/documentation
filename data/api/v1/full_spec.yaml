@@ -23039,6 +23039,22 @@ components:
           description: Shows the 99th percentile of all IoT devices over all hours in the current date all organizations.
           format: int64
           type: integer
+        llm_observability_15day_retention_spans_sum:
+          description: Sum of all LLM Observability spans with 15-day retention over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_30day_retention_spans_sum:
+          description: Sum of all LLM Observability spans with 30-day retention over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_60day_retention_spans_sum:
+          description: Sum of all LLM Observability spans with 60-day retention over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_90day_retention_spans_sum:
+          description: Sum of all LLM Observability spans with 90-day retention over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         llm_observability_min_spend_sum:
           description: Sum of all LLM observability minimum spend over all hours in the current date for all organizations.
           format: int64
@@ -24058,6 +24074,22 @@ components:
           type: integer
         iot_device_top99p_sum:
           description: Shows the 99th percentile of all IoT devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_15day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability spans with 15-day retention over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_30day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability spans with 30-day retention over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_60day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability spans with 60-day retention over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_90day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability spans with 90-day retention over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_min_spend_sum:
@@ -25095,6 +25127,22 @@ components:
           type: integer
         live_ingested_bytes_agg_sum:
           description: Shows the sum of all live logs bytes ingested over all hours in the current month for all organizations (data available as of December 1, 2020).
+          format: int64
+          type: integer
+        llm_observability_15day_retention_spans_agg_sum:
+          description: Sum of all LLM Observability spans with 15-day retention for all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_30day_retention_spans_agg_sum:
+          description: Sum of all LLM Observability spans with 30-day retention for all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_60day_retention_spans_agg_sum:
+          description: Sum of all LLM Observability spans with 60-day retention for all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_90day_retention_spans_agg_sum:
+          description: Sum of all LLM Observability spans with 90-day retention for all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_agg_sum:
