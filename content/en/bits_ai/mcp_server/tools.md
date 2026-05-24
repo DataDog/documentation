@@ -952,12 +952,13 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, and inspecting application configuration.
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
 
 <div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
 ### `search_rum_applications`
 *Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
 Lists your RUM applications and resolves the `application_id` to use for subsequent RUM tool calls.
 
 - Find the RUM application named "checkout-web" and return its application ID.
@@ -965,6 +966,7 @@ Lists your RUM applications and resolves the `application_id` to use for subsequ
 
 ### `get_rum_summary`
 *Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
 Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
 
 - Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
@@ -972,13 +974,23 @@ Returns a summary of vital metrics for a RUM application, with period-over-perio
 
 ### `get_rum_insight`
 *Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
 Returns aggregated insights for RUM Views: waterfall, long tasks, vital distributions, and tag analysis.
 
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
 
+### `search_rum_metrics`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Explores RUM metrics for an application, including out-of-the-box metrics and custom metrics.
+
+- List the custom RUM metrics defined on the "checkout-web" application.
+- Show me available RUM metrics related to page load time on my main app.
+
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Read`*\
 Lists retention filters configured on a RUM application. Read-only; available for [RUM without Limits][59] customers.
 
 - List the retention filters configured on the "checkout-web" application.
