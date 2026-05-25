@@ -265,7 +265,7 @@ foo = 1
 bar = 2
 ```
 
-You can also use `no-dd-sa` to only suppress a particular rule rather than suppressing all rules. To do so, specify the name of the rule you wish to suppress in place of `<rule-name>` using this template:
+You can also use `no-dd-sa` to only suppress a particular rule, rather than suppressing all rules. To do so, specify the name of the rule you wish to suppress in place of `<rule-name>` using this template:
 
 `no-dd-sa:<rule-name>`
 
