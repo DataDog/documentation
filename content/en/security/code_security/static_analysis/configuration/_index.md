@@ -277,6 +277,8 @@ my_foo = 1
 myBar = 2
 ```
 
+[1]: https://app.datadoghq.com/security/code-security/repositories
+[2]: https://app.datadoghq.com/security/code-security/sca
 [6]: /security/code_security/static_analysis/static_analysis_rules
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [26]: /security/code_security/guides/configuration/
