@@ -215,10 +215,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 
    Then re-deploy the Datadog Operator with: `helm upgrade --install <release-name> datadog/datadog-operator -f datadog-operator.yaml`.
 
-2. Modify your `DatadogAgent` resource with the following changes:
-
-   1. Add the `agent.datadoghq.com/update-metadata` annotation to the `DatadogAgent` resource.
-   2. If advanced eBPF metrics are wanted, verify that at least one system-probe feature is enabled. Examples of system-probe features are `npm`, `cws`, `usm`. If none is enabled, the `oomKill` feature can be enabled.
+2. Modify your `DatadogAgent` resource by adding the `agent.datadoghq.com/update-metadata` annotation to the `DatadogAgent` resource.
 
    The additions to the `datadog-agent.yaml` file should look like this:
 
@@ -229,12 +226,6 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
-   spec:
-     features:
-       oomKill:
-         # Only enable this feature if there is nothing else that requires the system-probe container in all Agent pods
-         # Examples of system-probe features are npm, cws, usm
-         enabled: true
    ```
 
 3. Apply your changes to the `DatadogAgent` resource. These changes are safe to apply to all Datadog Agents, regardless of whether they run on GPU nodes.
