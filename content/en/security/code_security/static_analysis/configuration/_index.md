@@ -269,7 +269,7 @@ You can also use `no-dd-sa` to only suppress a particular rule, rather than supp
 
 `no-dd-sa:<rule-name>`
 
-For example, in the following JavaScript code snippet, the line `my_foo = 1` is suppressed only for the `javascript-code-style/assignment-name` rule and is still analyzed by all other rules.
+For example, in the following JavaScript code snippet, the line `my_foo = 1` is suppressed only for the `javascript-code-style/assignment-name` rule, but all other rules still analyze it.
 
 ```javascript
 // no-dd-sa:javascript-code-style/assignment-name
