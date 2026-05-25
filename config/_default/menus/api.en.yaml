@@ -10218,6 +10218,49 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Entity Integration Configs
+      url: /api/latest/entity-integration-configs/
+      identifier: entity-integration-configs
+      generated: true
+    - name: Create or update entity integration configuration
+      url: '#create-or-update-entity-integration-configuration'
+      identifier: entity-integration-configs-create-or-update-entity-integration-configuration
+      parent: entity-integration-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateEntityIntegrationConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Get an entity integration configuration
+      url: '#get-an-entity-integration-configuration'
+      identifier: entity-integration-configs-get-an-entity-integration-configuration
+      parent: entity-integration-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityIntegrationConfig
+        unstable:
+          - v2
+        order: 1
+    - name: Delete an entity integration configuration
+      url: '#delete-an-entity-integration-configuration'
+      identifier: entity-integration-configs-delete-an-entity-integration-configuration
+      parent: entity-integration-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEntityIntegrationConfig
+        unstable:
+          - v2
+        order: 3
     - name: Entity Risk Scores
       url: /api/latest/entity-risk-scores/
       identifier: entity-risk-scores
@@ -11953,6 +11996,19 @@ menu:
         unstable:
           - v2
         order: 30
+    - name: List LLM Observability dataset versions
+      url: '#list-llm-observability-dataset-versions'
+      identifier: llm-observability-list-llm-observability-dataset-versions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetVersions
+        unstable:
+          - v2
+        order: 44
     - name: Delete LLM Observability dataset records
       url: '#delete-llm-observability-dataset-records'
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -12005,6 +12061,45 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Unlock LLM Observability dataset draft state
+      url: '#unlock-llm-observability-dataset-draft-state'
+      identifier: llm-observability-unlock-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 43
+    - name: Lock LLM Observability dataset draft state
+      url: '#lock-llm-observability-dataset-draft-state'
+      identifier: llm-observability-lock-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 42
+    - name: Get LLM Observability dataset draft state
+      url: '#get-llm-observability-dataset-draft-state'
+      identifier: llm-observability-get-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 41
     - name: Update an LLM Observability dataset
       url: '#update-an-llm-observability-dataset'
       identifier: llm-observability-update-an-llm-observability-dataset
@@ -12395,6 +12490,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Get annotated interactions by content IDs
+      url: '#get-annotated-interactions-by-content-ids'
+      identifier: llm-observability-get-annotated-interactions-by-content-ids
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractionsByTraceIDs
+        unstable:
+          - v2
+        order: 40
     - name: Delete LLM Observability data
       url: '#delete-llm-observability-data'
       identifier: llm-observability-delete-llm-observability-data
