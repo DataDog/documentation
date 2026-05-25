@@ -31,6 +31,8 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
 - **Measuring DORA metrics**: Query deployment frequency, change lead time, change failure rate, and recovery time by service or team.
 - **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
+- **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions job without leaving the agent session.
+- **Checking PR health**: Get a combined view of CI failures, code coverage, and quality or security violations for a pull request.
 
 ## Available tools
 
@@ -73,7 +75,7 @@ The `software-delivery` toolset includes the following tools:
 : Aggregate DORA metrics—deployment frequency, change lead time, change failure rate, and recovery time—as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
 
 `retry_datadog_ci_job`
-: Queue a retry for a failed GitHub Actions CI job. Requires `CiVisibilityWrite` permission and explicit user approval. Server-side safety rails cap retries at two per job over seven days. GitHub Actions only — for other CI providers, use the provider's UI to rerun.
+: Queue a retry for a failed GitHub Actions CI job. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. GitHub Actions only — for other CI providers, use the provider's UI to rerun.
 
 ## Example prompts
 
@@ -102,7 +104,7 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines against your live CI and Test Optimization data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines using your live CI and Test Optimization data.
 
 Skills are loaded automatically by the MCP server when your prompt matches their purpose — for example, "TestMyFunc keeps failing in CI — investigate it" loads `/triage-flaky-test` automatically. You can also invoke them explicitly with a slash command after installing them locally.
 
