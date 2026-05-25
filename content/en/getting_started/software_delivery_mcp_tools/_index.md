@@ -72,6 +72,9 @@ The `software-delivery` toolset includes the following tools:
 `aggregate_dora_deployments`
 : Aggregate DORA metrics—deployment frequency, change lead time, change failure rate, and recovery time—as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
 
+`retry_datadog_ci_job`
+: Queue a retry for a failed GitHub Actions CI job. Requires `CiVisibilityWrite` permission and explicit user approval. Server-side safety rails cap retries at two per job over seven days. GitHub Actions only — for other CI providers, use the provider's UI to rerun.
+
 ## Example prompts
 
 After you are connected, try prompts like:
@@ -101,7 +104,7 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines against your live CI and Test Optimization data.
 
-Skills are loaded automatically by the MCP server when your prompt matches their purpose — for example, "Why is TestMyFunc flaky?" loads `/triage-flaky-test` automatically. You can also invoke them explicitly with a slash command after installing them locally.
+Skills are loaded automatically by the MCP server when your prompt matches their purpose — for example, "TestMyFunc keeps failing in CI — investigate it" loads `/triage-flaky-test` automatically. You can also invoke them explicitly with a slash command after installing them locally.
 
 ### Install
 
@@ -118,7 +121,7 @@ Restart Claude Code after installing for the slash commands to appear.
 | Skill | Invoke with | What it does |
 |-------|-------------|-------------|
 | Triage flaky test | `/triage-flaky-test` | Get history, failure pattern, and AI category for a specific flaky test, then recommend fix, quarantine, or escalate |
-| Unblock PR | `/unblock-pr` | Attribute each CI failure on a PR as flaky, infra, or regression and propose a targeted action |
+| Unblock PR | `/unblock-pr` | Attribute each CI failure on a PR as flaky, infra, or regression, surface code coverage and quality violations, and propose a targeted action |
 
 ### Triage flaky test
 
@@ -133,9 +136,9 @@ If the skill recommends quarantine, it presents the proposed action and requires
 
 ### Unblock PR
 
-`/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches — a blame guard that classifies the failure as **flaky**, **infra**, or **regression**. It produces a triage brief with per-job classification, evidence, and a recommended action.
+`/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches — a blame guard that classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage and any code quality or security violations from PR insights. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section summarizing coverage and violations.
 
-For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For infra failures, it offers to retry the failed jobs. For regressions, it prompts you to investigate your code changes.
+For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For infra failures on GitHub Actions, it retries the failed jobs using `retry_datadog_ci_job`; for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
 
 ```
 /unblock-pr
