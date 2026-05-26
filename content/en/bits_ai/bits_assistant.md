@@ -8,6 +8,9 @@ further_reading:
 - link: "/incident_response/incident_management/investigate/incident_ai"
   tag: "Documentation"
   text: "Coordinate incidents with Incident AI"
+- link: "/cloud_cost_management/cloud_cost_skill/"
+  tag: "Documentation"
+  text: "Cloud Cost Skill in Bits Assistant"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
@@ -53,15 +56,24 @@ Example prompts:
 - `Create an investigation for the recent spike of errors in the checkout service`
 - `Add an executive summary for this cost spike report`
 
-#### Trace investigation
-Debug errors and latency issues directly from [traces][3] using natural language queries. Bits Assistant analyzes and summarizes large traces, determines likely root causes for errors and latency, and suggests remediations.
+#### APM
+
+##### Trace analysis
+Investigate an individual [trace][3] to diagnose what failed, where, and why.
 
 Example prompts:
-- `What's causing the latency spike in this trace?`
+- `Why did this request fail?`
 - `Summarize this trace and identify the root cause of the error`
 
+##### Latency investigations
+Investigate latency on a service to identify bottleneck resources and what changed in its slow traces.
+
+Example prompts:
+- `What caused the latency spike for this service?`
+- `What's the latency bottleneck for this service?`
+
 #### Cloud Cost Management
-Investigate [cloud cost][4] changes and identify the teams or resources responsible.
+Investigate [cloud cost][4] changes and identify the teams or resources responsible. See [Cloud Cost Skill in Bits Assistant][9].
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
@@ -115,3 +127,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [6]: /notebooks/
 [7]: /ddsql_editor/
 [8]: /ddsql_reference/data_directory/
+[9]: /cloud_cost_management/cloud_cost_skill/

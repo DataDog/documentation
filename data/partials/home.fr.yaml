@@ -1,20 +1,20 @@
-guides:
-- desc: Recueillez des événements et des métriques à partir de vos hosts qui transmettent
-    des données à Datadog.
-  link: getting_started/agent/
-  link_text: Débuter avec l'Agent
-  title: Installer l'Agent
-- desc: Récupérez des métriques, des traces et des logs grâce à plus de 1 000 intégrations
-    afin de les envoyer à Datadog.
-  link: getting_started/integrations/
-  link_text: Débuter avec les intégrations
-  title: Configurer des intégrations
-- desc: Visualisez les données recueillies dans Datadog et créez des dashboards, des
-    alertes, des monitors, et plus encore.
-  link: getting_started/application/
-  link_text: Débuter avec Datadog
-  title: Débuter avec Datadog
 heading: Bienvenue dans la documentation de Datadog !
+
+guides:
+    # There can be only 3 guides in this section
+  - title: "Installation de l'Agent"
+    desc: Recueillez des événements et des métriques à partir de vos hosts qui transmettent des données à Datadog.
+    link_text: "Débuter avec l'Agent"
+    link: getting_started/agent/
+  - title: Configurer des intégrations
+    desc: "Rassemblez des métriques, des traces et des journaux grâce à plus de 1 000 intégrations natives pour les envoyer à Datadog."
+    link_text: Débuter avec les intégrations
+    link: getting_started/integrations/
+  - title: Débuter avec Datadog
+    desc: "Visualisez les données recueillies dans Datadog et créez des dashboards, des alertes, des monitors, et plus encore."
+    link_text: Débuter avec Datadog
+    link: getting_started/application/
+
 nav_sections:
 - nav_section:
   - name: Observabilité
@@ -176,7 +176,7 @@ nav_sections:
       title: Plugins IDE
     - desc: Mesurer et améliorer les processus de livraison logicielle de votre organisation
       icon: ci
-      link: dora_metrics/
+      link: delivery_performance/dora_metrics/
       title: Métriques DORA
     - desc: Activer ou désactiver des fonctionnalités, exécuter des tests A/B et déployer
         progressivement des fonctionnalités sans déploiement de code
@@ -325,15 +325,15 @@ nav_sections:
       link: partners/
       title: Partenaires
 popular_searches:
-- link: api/
-  title: Documentation sur l'API
-  weight: 10
-- link: getting_started/agent/
-  title: Installation de l'Agent
-  weight: 20
-- link: logs/log_collection/
-  title: Collecte de logs
-  weight: 30
-- link: integrations/
-  title: Configuration d'intégrations
-  weight: 40
+  - title: "Documentation sur l'API"
+    link: api/
+    weight: 10
+  - title: "Installation de l'Agent"
+    link: getting_started/agent/
+    weight: 20
+  - title: Collecte de logs
+    link: logs/log_collection/
+    weight: 30
+  - title: "Configuration d'intégrations"
+    link: integrations/
+    weight: 40

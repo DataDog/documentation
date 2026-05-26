@@ -154,6 +154,23 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
+### Additional endpoints for Browser Profiling
+
+When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
+
+| Site | Quota API URL                                             |
+|------|-----------------------------------------------------------|
+| US1  | `https://quota.browser-intake-datadoghq.com`             |
+| US3  | `https://quota.browser-intake-us3-datadoghq.com`         |
+| US5  | `https://quota.browser-intake-us5-datadoghq.com`         |
+| EU1  | `https://quota.browser-intake-datadoghq.eu`              |
+| US1-FED  | `https://quota.browser-intake-ddog-gov.com`          |
+| US2-FED  | `https://quota.browser-intake-us2-ddog-gov.com`      |
+| AP1  | `https://quota.browser-intake-ap1-datadoghq.com`         |
+| AP2  | `https://quota.browser-intake-ap2-datadoghq.com`         |
+
+If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure these `quota.` domains are also allowed. See the [Browser Profiling setup][19] page for details.
+
 ## Explore Datadog RUM
 
 Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
@@ -206,11 +223,11 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 ### Web and mobile vitals
 
-View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
+View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS, iPadOS, tvOS, and visionOS][8] or [Android and Android TV applications][9].
 
 ### Web view tracking
 
-Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS and tvOS][10] or [Android and Android TV][11].
+Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS, iPadOS, and visionOS][10] or [Android and Android TV][11].
 
 {{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
 
@@ -270,3 +287,6 @@ You must have edit access to restore general access to a restricted application.
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/
+[19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[20]: /real_user_monitoring/guide/proxy-rum-data
+[21]: /integrations/content_security_policy_logs

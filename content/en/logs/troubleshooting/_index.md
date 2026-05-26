@@ -42,7 +42,7 @@ Epoch timestamps can be adjusted using the timezone parameter in a Grok Parser p
 Epoch timestamps can be adjusted using the `timezone` parameter in a Grok Parser processor. Follow these steps to convert a localized timestamp to UTC using the example in Datadog's [Grok Parser][19] guide.
 
 1. Navigate to the [Pipelines][9] page.
-2. In **Pipelines**, select the correct pipeline matching to your logs.
+2. In {{< ui >}}Pipelines{{< /ui >}}, select the correct pipeline matching to your logs.
 3. Open the Grok Parser processor that is parsing your logs.
 4. Given that a local host is logging in UTC+1, adjust the date matcher to account for this difference. The resulting rule will have a comma and a new string defining the timezone to UTC+1.
 5. Verify that the [Log Date Remapper][8] is using the parsed attribute as the official timestamp for the matching logs.
@@ -63,7 +63,7 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 
 1. Navigate to the [Pipelines][9] page.
 
-2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
+2. In {{< ui >}}Pipelines{{< /ui >}}, hover over {{< ui >}}Preprocessing for JSON logs{{< /ui >}}, and click the pencil icon.
 
 3. Remove `timestamp` from the reserved attribute mapping list. The attribute is not being parsed as the official timestamp of the log during preprocessing.
 

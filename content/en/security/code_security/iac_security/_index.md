@@ -9,9 +9,9 @@ further_reading:
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"
-  - link: "/security/code_security/iac_security/exclusions"
+  - link: "/security/code_security/iac_security/configuration"
     tag: "Documentation"
-    text: "Configure IaC Security Exclusions"
+    text: "Configure IaC Security"
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
@@ -76,12 +76,12 @@ To restore a muted finding, click **Unmute** in the details panel. You can also 
 
 You can configure exclusions to prevent certain findings from appearing in scan results. Exclusions can be based on rule ID, file path, resource type, severity, or tag.
 
-Exclusions are managed through a configuration file or inline comments in your IaC code. For supported formats and usage examples, see [Configure IaC Security Exclusions][7].
+Exclusions are managed through a configuration file or inline comments in your IaC code. For supported formats and usage examples, see [Configure IaC Security][7].
 
 ## Next steps
 
 1. [Set up IaC Security][1] in your environment.
-2. Configure [scanning exclusions][2] to reduce false positives or ignore expected results.
+2. Configure [IaC Security][2] to reduce false positives or ignore expected results.
 3. Review and triage findings on the [Code Security Vulnerabilities][3] page.
 
 ## Further reading
@@ -89,12 +89,12 @@ Exclusions are managed through a configuration file or inline comments in your I
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/iac_security/setup
-[2]: /security/code_security/iac_security/exclusions
+[2]: /security/code_security/iac_security/configuration
 [3]: https://app.datadoghq.com/security/code-security/iac
 [4]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [5]: /security/code_security/dev_tool_int/github_pull_requests/
 [6]: https://app.datadoghq.com/ci/code-analysis?
-[7]: /security/code_security/iac_security/exclusions/?tab=yaml
+[7]: /security/code_security/iac_security/configuration/
 [8]: /security/automation_pipelines/mute
 [9]: https://app.datadoghq.com/integrations/github/
 [10]: /security/automation_pipelines/
