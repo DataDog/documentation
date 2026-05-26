@@ -280,19 +280,19 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  actions: [gov,gov2]
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
-  agent_builder: [gov,gov2]
   agent_flare: [gov,gov2]
   agentic_onboarding: [gov,gov2]
   agentless-scanning: [gov,gov2] # api page
   agentless_scanning: [gov,gov2] # docs page
+  ai_impact: [gov,gov2]
   alibaba-cloud: [gov,gov2]
   amazon-compute-optimizer: [gov,gov2]
   amazon-event-bridge: [gov,gov2]
   apm_processing_pipelines: [gov,gov2]
   apm_recommendations: [gov,gov2]
-  app_builder: [gov,gov2]
   application_security: [gov,gov2]
   autocomplete_search: [gov,gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2]
@@ -337,6 +337,7 @@ unsupported_sites:
   gitlab-source-code: [gov,gov2]
   google-hangouts-chat: [gov,gov2]
   google_chat: [gov,gov2]
+  gpu_monitoring: [gov, gov2]
   high_availability_datadog_agent: [gov,gov2]
   iac_security: [gov,gov2]
   incident_ai: [gov,gov2]

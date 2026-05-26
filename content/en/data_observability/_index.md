@@ -5,6 +5,9 @@ further_reading:
  - link: '/data_observability/data_catalog/'
    tag: 'Documentation'
    text: 'Data Catalog'
+ - link: '/data_observability/lineage/'
+   tag: 'Documentation'
+   text: 'Lineage'
  - link: '/data_observability/quality_monitoring/'
    tag: 'Documentation'
    text: 'Quality Monitoring'
@@ -32,6 +35,7 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
 
 {{< whatsnext desc="Data Observability consists of the following:" >}}
    {{< nextlink href="/data_observability/data_catalog/" >}}Data Catalog: Browse and search a centralized inventory of your data assets across connected integrations.{{< /nextlink >}}
+   {{< nextlink href="/data_observability/lineage/" >}}Lineage: Trace upstream dependencies and downstream consumers across your data stack.{{< /nextlink >}}
    {{< nextlink href="/data_observability/quality_monitoring/" >}}Quality Monitoring: Identify data issues before downstream BI and AI applications are impacted.{{< /nextlink >}}
    {{< nextlink href="/data_observability/jobs_monitoring/" >}}Jobs Monitoring: Observe, troubleshoot, and optimize jobs across your data pipelines.{{< /nextlink >}}
 {{< /whatsnext >}}

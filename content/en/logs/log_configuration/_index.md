@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [**Logs > Pipelines**][1].
+Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1].
 
 ## Configuration options
 

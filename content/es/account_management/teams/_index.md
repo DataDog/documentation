@@ -1,156 +1,177 @@
 ---
+description: Organiza los activos del equipo, filtra las experiencias de Datadog y
+  gestiona la membresía del equipo con identificadores de equipo, notificaciones y
+  asociaciones de recursos.
+further_reading:
+- link: https://www.datadoghq.com/blog/datadog-teams-github-integration
+  tag: Blog
+  text: Mantén la propiedad del servicio actualizada con la integración de GitHub
+    de los Equipos de Datadog
 title: Equipos
 ---
+## Resumen {#overview}
+Los Equipos de Datadog permiten a grupos de usuarios organizar sus activos de equipo dentro de Datadog y filtrar automáticamente su experiencia en Datadog para priorizar estos activos.
 
-## Información general
-Datadog Teams permite a los grupos de usuarios organizar los activos de sus equipos dentro de Datadog y filtrarlos automáticamente en Datadog para clasificarlos por relevancia.
+Utiliza Equipos para vincular recursos como tableros, servicios, seguimientos e incidentes a un grupo de usuarios. También puedes agregar enlaces específicos del equipo a canales de Slack, tableros de Jira, repositorios de GitHub y más.
 
-Puedes utilizar Teams para vincular recursos como dashboards, servicios, monitores e incidencias a un grupo de usuarios. También puedes añadir enlaces específicos para equipos a los canales de Slack, paneles de Jira o repositorios de GitHub, entre otros.
+La membresía del equipo es flexible. Los usuarios pueden unirse a equipos, ser añadidos por otros miembros o ser añadidos por un administrador. Los usuarios pueden pertenecer a múltiples equipos.
 
-Existen varias formas de ser miembro de un equipo. Los usuarios pueden unirse a los equipos, o pueden agregarlos otros miembros o un administrador. Además, un usuario puede estar en varios equipos al mismo tiempo.
+## Configuración {#setup}
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Únete a la Vista previa.">}}
-  La integración de Github para Teams está en Vista previa.
-{{< /callout >}}
+### Navegación {#navigation}
 
-## Configuración
+Accede a la página del directorio del equipo desde [Configuraciones de la Organización][1] o navegando a [**Equipos**][2]. La [página del directorio del equipo][1] lista todos los equipos dentro de tu organización.
 
-### Navegación
+### Crear equipo {#create-team}
 
-Accede a la página del directorio de equipos desde los [parámetros de organización][1] o consulta [**Service Management > Teams**][2] (Gestión de servicios > Teams). La [página del directorio de equipos][1] enumera todos los equipos de tu organización.
-
-### Crear un equipo
-
-1. En la [página del directorio de equipos][1], haz clic en **New Team** (Nuevo equipo), en la parte superior derecha.
-1. Elige un **Team Name** (Nombre de equipo).
-1. El **Handle** (Identificador) se rellena según el nombre de tu equipo.
-1. Usa el menú desplegable para seleccionar miembros y administradores del equipo.
-1. Escribe una descripción opcional en **Description**.
-1. Haz clic en **Create** (Crear).
+1. En la [página del directorio del equipo][1], haz clic en {{< ui >}}New Team{{< /ui >}} en la esquina superior derecha.
+1. Elige un {{< ui >}}Team Name{{< /ui >}}.
+1. El {{< ui >}}Handle{{< /ui >}} se completa según el nombre de tu equipo.
+1. Utiliza el menú desplegable para seleccionar miembros del equipo y gerentes del equipo.
+1. Proporciona un {{< ui >}}Description{{< /ui >}} opcional.
+1. Haz clic en {{< ui >}}Create{{< /ui >}}.
 
 **Notas**: 
 
-- Los caracteres permitidos para los nombres de equipos son `a-z`, `A-Z`, `0-9` y `._-:/`. Sustituye los espacios por guiones bajos. 
-- Los caracteres permitidos para los identificadores de equipos son `a-z`, `0-9` y `._-:/`. El último carácter no puede ser un guion bajo.
+- Los caracteres permitidos para los nombres de equipo son `a-z`, `A-Z`, `0-9` y `._-:/`. Reemplace los espacios con guiones bajos. 
+- Los caracteres permitidos para los identificadores de equipo son `a-z`, `0-9` y `._-:/`. El último carácter no puede ser un guion bajo.
 
-### Modificar el equipo
+### Modifica el equipo {#modify-team}
 
-1. En la [página del directorio de equipos][1], haz clic en el equipo que quieres modificar. Aparecerá la [página de detalles del equipo][3]. 
-1. Haz clic en el botón **Parámetros**, situado en la parte superior de la pantalla. Aparecerá una ventana emergente.
-1. Selecciona el elemento que quieres modificar.
-1. Realiza los cambios y pulsa **Guardar**.
+1. En la [página del directorio de equipos][1], haz clic en el equipo que deseas modificar. Aparece la [página de detalles del equipo][3]. 
+1. Haz clic en el engranaje {{< ui >}}Settings{{< /ui >}} en la parte superior de la pantalla. Aparece una ventana emergente.
+1. Selecciona el elemento que deseas modificar.
+1. Realiza tus cambios, luego haz clic en {{< ui >}}Save{{< /ui >}}.
 
-### Elige la fuente de suministro
+### Elige la fuente de aprovisionamiento {#choose-provisioning-source}
 
-Elige entre tres opciones para determinar cómo los administradores y los jefes de equipo pueden actualizar los miembros de un equipo:
+Elige entre tres opciones para determinar cómo los administradores y gerentes de equipo pueden actualizar la membresía del equipo:
 
-Interfaz de usuario y API
-: Actualiza los miembros de un equipo únicamente mediante acciones de interfaz de usuario y llamadas a la API.
+UI y API
+: Actualice la membresía solo a través de acciones de UI y llamadas a la API
 
 SAML
-: Utiliza un modelo *SAML estricto* para que los datos del proveedor de identidad determinen los miembros del equipo.
+: Utilice un modelo *SAML estricto* para que los datos del proveedor de identidad determinen la membresía del equipo.
 
 Todas las fuentes
-: Utiliza SAML como punto de partida y permite anulaciones a través de la interfaz de usuario y la API.
+: Utiliza SAML como punto de partida y permite sobrescrituras a través de la interfaz de usuario y la API
 
-1. En la [página del directorio de equipos][1], haz clic en **Parámetros de equipo**.
-1. Selecciona una de las opciones en **Fuentes de suministro de los equipos**.
+1. En la [página del directorio de equipos][1], haz clic en {{< ui >}}Teams Settings{{< /ui >}}.
+1. Selecciona una de las opciones bajo {{< ui >}}Team Provisioning Sources{{< /ui >}}.
 
-Si tienes equipos con miembros existentes, al elegir la opción de SAML strict (SALM estricto) se anulan los parámetros y se elimina a los miembros de esos equipos. Si eliges la opción All Sources (Todos los orígenes), se conservarán los miembros existentes. Para gestionar los equipos y sus miembros mediante atributos SAML, consulta [Asignar atributos SAML a equipos][4].
+Si tienes equipos con miembros existentes, elegir la opción estricta de SAML sobrescribe tus configuraciones y elimina a los miembros de esos equipos. Elegir la opción Todas las fuentes preserva las membresías existentes. Para gestionar equipos y la membresía de equipos utilizando atributos SAML, consulta [Mapear atributos SAML a Equipos][4].
 
-## Identificador de equipos
+## Identificador de equipo {#team-handle}
 
-Un identificador de equipos sirve para vincular los equipos a los recursos de Datadog. Estos identificadores aparecen en las barras y facetas de búsqueda con el formato `team:<team-handle>` o `teams:<team-handle>`. 
+Un identificador de equipo vincula equipos a recursos de Datadog. Los identificadores de equipo aparecen en las barras de búsqueda y facetas en el formato `team:<team-handle>` o `teams:<team-handle>`. 
 
-Para buscar un identificador de equipos:
-1. Haz clic en el nombre del equipo en la página del directorio de equipos. Aparecerá la página de detalles del equipo.
-1. El identificador del equipo aparece a la derecha del nombre, en la parte superior de la página.
+Para encontrar un identificador de equipo:
+1. Haz clic en el nombre del equipo en la página del directorio de equipos. Aparece la página de detalles del equipo.
+1. El identificador de equipo aparece a la derecha del nombre, en la parte superior de la página.
 
-Para asociar un recurso con un equipo definido, el equipo debe tener en Datadog un identificador coincidente. Al hacer clic en un recurso asociado a un equipo definido, aparecerá una ventanita con el identificador del equipo y otros datos adicionales. Los equipos definidos tienen funcionalidades adicionales, como el filtro que te mostramos más abajo. 
+Para asociar un recurso con un equipo definido, debe existir un equipo en Datadog con un identificador de equipo coincidente. Cuando haces clic en un recurso asociado con un equipo definido, aparece una ventana pequeña con el identificador de equipo y información adicional. Los equipos definidos proporcionan funcionalidad adicional, como el filtro de equipo a continuación. 
 
-Los identificadores de equipos que no están asociados con un equipo definido en Datadog se comportan de forma similar a las etiquetas (tags). Para aprovechar todas las ventajas de Teams, puedes convertir los identificadores que no están definidos en definidos.
+Los identificadores de equipo que no están asociados con un equipo definido en Datadog se comportan de manera similar a las etiquetas. Convierte cualquier identificador de equipo indefinido en equipos definidos para aprovechar las características de Teams.
 
-### Asociar recursos con identificadores de equipos
+### Asocia recursos con identificadores de equipo {#associate-resources-with-team-handles}
 
-Datadog permite asociar los siguientes recursos con identificadores de equipos:
+Datadog admite asociar los siguientes recursos con los identificadores de equipo:
 
 - [Dashboards][5]
-- [Incidencias][6]
-- [Monitores][7]
-- [Catálogo de recursos][8]
+- [Incidentes][6]
+- [Seguimientos][7]
+- [Resource Catalog][8]
 - [Software Catalog][9]
-- [Objetivos de nivel de servicio (SLOs)][10]
-- Monitoreos de Sintético, variables globales, ubicaciones privadas
+- [SLO][10]
+- Pruebas Synthetic, Variables Globales, Ubicaciones Privadas
 
-### Enviar notificaciones a un canal de comunicación específico 
+### Enviar notificaciones a un canal de comunicación específico {#send-notifications-to-a-specific-communication-channel}
 
-Añade un canal de notificación a tu equipo para redirigir las alertas a canales de comunicación como Slack o Microsoft Teams. Las alertas de monitorización dirigidas a `@team-<handle>` se redirigen al canal seleccionado. 
+Agrega un canal de notificación a tu equipo para dirigir alertas a canales de comunicación como Slack o Microsoft Teams. Las alertas de seguimiento dirigidas a `@team-<handle>` se redirigen al canal seleccionado. 
 
-1. En la [página del directorio de equipos][1], haz clic en el equipo que quieres modificar. 
-1. Haz clic en el botón **Parámetros**, situado en la parte superior de la pantalla. Aparecerá una ventana emergente.
-1. Selecciona **Notificaciones**.
-1. Añade un canal y haz clic en **Guardar**.
+1. En la [página del directorio de equipos][1], haz clic en el equipo que deseas modificar. 
+1. Haz clic en el {{< ui >}}Settings{{< /ui >}} engranaje en la parte superior de la pantalla. Aparece una ventana emergente.
+1. Selecciona {{< ui >}}Notifications{{< /ui >}}.
+1. Agrega un canal, luego haz clic en {{< ui >}}Save{{< /ui >}}.
 
-## Filtro de equipos
+## Filtro de equipo {#team-filter}
 
-El filtro de equipos adapta tu experiencia en Datadog al mostrarte contenido asociado con tus equipos. La lista **My Teams** (Mis equipos) incluye los equipos de los que eres miembro y los que seleccionaste como favoritos.
+El filtro de equipo adapta tu experiencia en Datadog al mostrarte contenido asociado con tus equipos. La lista {{< ui >}}My Teams{{< /ui >}} incluye equipos de los que eres miembro y equipos que seleccionaste como favoritos.
 
-{{< img src="/account_management/teams/team-filter.png" alt="Página de lista de monitores con un recuadro rojo alrededor del filtro de equipos. Dos de las tres opciones de Mis equipos seleccionadas.">}}
+{{< img src="/account_management/teams/team-filter.png" alt="Página de lista de seguimientos con un cuadro rojo alrededor del filtro de equipo. Dos de tres Mis Equipos seleccionados.">}}
 
-Cuando habilitas el filtro de equipos, solo ves los recursos asociados con tus equipos o con los servicios que son propiedad de tus equipos. El estado del filtro de equipos es global y persistente, por lo que Datadog aplica el contexto de tu equipo a medida que navegas por diferentes productos.
+Cuando habilitas el filtro de equipo, solo ves los recursos asociados con tus equipos o con los servicios que pertenecen a tus equipos. El estado del filtro de equipo es global y persistente, por lo que Datadog aplica tu contexto de equipo mientras navegas por diferentes productos.
 
-El filtro de equipos funciona al añadir términos de búsqueda basados ​​en el equipo a la consulta de búsqueda. Cuando habilitas el filtro de equipos, puedes ver los términos de búsqueda basados ​​en el equipo que se añaden en la barra de búsqueda.
+El filtro de equipo funciona añadiendo términos de búsqueda basados en el equipo a la consulta de búsqueda. Cuando habilitas el filtro de equipo, puedes ver los términos de búsqueda basados en el equipo que se añaden en la barra de búsqueda.
 
-### Equipos favoritos
+### Equipos favoritos {#favorite-teams}
 
-Es posible que te interesen los recursos de un equipo en particular sin ser miembro de este. Si añades un equipo a tus equipos favoritos, podrás obtener vistas filtradas de los recursos de ese equipo sin tener que unirte.
+Puedes estar interesado en los recursos de un equipo en particular sin ser miembro de ese equipo. Agregar un equipo a tus equipos favoritos te permite obtener vistas filtradas de los recursos de ese equipo sin unirte al equipo.
 
-Tus equipos favoritos aparecen junto a los equipos a los que perteneces en la parte superior de la página del directorio de equipos y en el filtro de equipos.
+Tus equipos favoritos aparecen junto a los equipos a los que perteneces en la parte superior de la página del directorio de equipos y en el filtro de equipo.
 
-#### Añadir o eliminar equipos favoritos
+#### Agregar o quitar equipos favoritos {#add-or-remove-favorite-teams}
 
-Puedes añadir o eliminar un equipo de tus favoritos desde la página del directorio de equipos o desde el filtro de equipos.
+Puedes agregar o quitar un equipo de tus favoritos desde la página del directorio de equipos o desde el filtro de equipo.
 
 Desde la [página del directorio de equipos][1]:
-1. Haz clic en el equipo que quieres añadir como favorito. Aparecerá la [página de detalles del equipo][3].
-1. Haz clic en **Add Favorite** (Añadir favorito) o **Remove Favorite** (Eliminar favorito) en la parte superior derecha.
+1. Haz clic en el equipo que deseas agregar como favorito. Aparece la [página de detalles del equipo][3].
+1. Haz clic en {{< ui >}}Add Favorite{{< /ui >}} o {{< ui >}}Remove Favorite{{< /ui >}} en la esquina superior derecha.
 
-De manera alternativa, también puedes hacerlo desde la página del directorio de equipos:
-1. Pasa el ratón sobre el equipo que quieres añadir o eliminar. Aparecerán iconos en línea a la derecha del nombre del equipo.
-1. Haz clic en el icono de estrella (**Add to Favorites** [Añadir a favoritos] o **Remove from Favorites** [Eliminar de favoritos]).
+Alternativamente, también desde la página del directorio de equipos:
+1. Pasa el cursor sobre el equipo que deseas agregar o quitar. Los íconos en línea aparecen a la derecha del nombre del equipo.
+1. Haz clic en el ícono de estrella ({{< ui >}}Add to Favorites{{< /ui >}} o {{< ui >}}Remove from Favorites{{< /ui >}}).
 
-Desde el filtro de equipos:
-1. Si el filtro está contraído, haz clic en **My Teams** (Mis equipos) para expandirlo.
-1. Haz clic en **Add Favorites** (Añadir favoritos). Aparecerá un cuadro de búsqueda y una lista de equipos.
-1. Para limitar la lista de equipos, comienza a escribir el nombre de un equipo en el cuadro de búsqueda.
-1. Haz clic en la estrella junto al equipo que quieras para añadirlo o eliminarlo de tus favoritos.
+Desde el filtro de equipo:
+1. Si el filtro está colapsado, haz clic en {{< ui >}}My Teams{{< /ui >}} para expandirlo.
+1. Haz clic en {{< ui >}}Add Favorites{{< /ui >}}. Aparece un cuadro de búsqueda y una lista de equipos.
+1. Para reducir la lista de equipos, comienza a escribir el nombre de un equipo en el cuadro de búsqueda.
+1. Haz clic en la estrella junto al equipo deseado para agregarlo o quitarlo de tus favoritos.
 
-### Productos compatibles
+### Productos soportados {#supported-products}
 
-En la siguiente tabla se describen los productos en los que puedes usar el filtro de equipos:
+La siguiente tabla describe los productos en los que puedes usar el filtro de equipos:
 
-| Página de listas del producto       | Base de filtro                                                                     |
-|-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][11]         | Identificador de equipos                                                                      |
-| [Catálogo de recursos][8]   | Identificador de equipos                                                                      |
-| [Software Catalog][12]    | Identificador de equipos                                                                      |
-| [Incidentes][13]          | Identificador de equipos                                                                      |
-| [Monitores][14]          | Identificador de equipos                                                                      |
-| [Seguimiento de errores de APM][15] | Servicio propiedad de los equipos (determinado por la propiedad dentro del [Software Catalog][12]) |
-| [Seguimiento de errores de logs][16] | Servicio propiedad de los equipos (determinado por la propiedad dentro del [Software Catalog][12]) |
-| [Objetivos de nivel de servicio (SLOs)][17] | Identificador de equipos                                                                 |
-| [Data Streams Monitoring][18]  | Identificador de equipos                                                                 |
-| [Tests Synthetic][19]          | Identificador de equipos                                                                 |
-| [Notebooks][20]          | Identificador de equipos                                                                      |
+| Página de lista de productos              | Base de filtro                                                                       |
+|--------------------------------|------------------------------------------------------------------------------------|
+| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Apps][21]                     | Identificador de equipo                                                                        |
+| [Case Management projects][22] | Identificador de equipo                                                                        |
+| [Connections][23]              | Identificador de equipo                                                                        |
+| [Connection Groups][24]        | Identificador de equipo                                                                        |
+| [Cross Org Connections][25]    | Identificador de equipo                                                                        |
+| [Datastores][26]               | Identificador de equipo                                                                        |
+| [Data Streams Monitoring][18]  | Identificador de equipo                                                                        |
+| [Dashboards][11]               | Identificador de equipo                                                                        |
+| [Incidentes][13]                | Identificador de equipo                                                                        |
+| [Integrations][27]             | Identificador de equipo                                                                        |
+| [Logs Error Tracking][16]      | Servicio propiedad de equipos (determinado por la propiedad dentro del [Software Catalog][12]) |
+| [Logs Pipelines][28]           | Identificador de equipo                                                                        |
+| [Monitors][14]                 | Identificador de equipo                                                                        |
+| [Notebooks][20]                | Identificador de equipo                                                                        |
+| [Observability Pipelines][29]  | Identificador de equipo                                                                        |
+| [On-Call][30]                  | Servicio propiedad de equipos (determinado por la propiedad dentro del [Software Catalog][12]) |
+| [Powerpacks][32]               | Identificador de equipo                                                                        |
+| [Private Action Runner][31]    | Identificador de equipo                                                                        |
+| [Tablas de referencia][33]         | Identificador de equipo                                                                        |
+| [Resource Catalog][8]          | Identificador de equipo                                                                        |
+| [RUM apps][34]                 | Identificador de equipo                                                                        |
+| [Security rules][35]           | Identificador de equipo                                                                        |
+| [Security suppressions][36]    | Identificador de equipo                                                                        |
+| [Service Level Objectives][17] | Identificador de equipo                                                                        |
+| [Sheets][37]                   | Identificador de equipo                                                                        |
+| [Software Catalog][12]         | Identificador de equipo                                                                        |
+| [Synthetic Tests][19]          | Identificador de equipo                                                                        |
+| [Flujos de trabajo][38]                | Identificador de equipo                                                                        |
 
 
-## Permisos
+## Permisos {#permissions}
 
-Cualquier usuario con el permiso de gestión de equipos puede crear equipos, cambiarles el nombre, borrarlos y modificar sus identificadores. Los usuarios con `user_access_manage` pueden añadir, eliminar y promocionar a miembros y jefes de equipos.
+Cualquier usuario en un rol con el permiso Teams Manage puede crear equipos, renombrar equipos, eliminar equipos y cambiar los identificadores de equipo. Los usuarios con `user_access_manage` pueden agregar, eliminar y promover miembros y gerentes de equipo.
 
-## Gestionar equipos
+## Manage teams {#manage-teams}
 
-Para personalizar tu equipo, consulta [Gestión de equipos][3].
+Para personalizar tu equipo, consulta [Team Management][3].
 
 
 [1]: https://app.datadoghq.com/organization-settings/teams
@@ -158,11 +179,11 @@ Para personalizar tu equipo, consulta [Gestión de equipos][3].
 [3]: /es/account_management/teams/manage/
 [4]: /es/account_management/saml/mapping/#map-saml-attributes-to-teams
 [5]: /es/dashboards/#dashboard-details
-[6]: /es/service_management/incident_management/
+[6]: /es/incident_response/incident_management/
 [7]: /es/monitors/configuration/?tab=thresholdalert#add-metadata
-[8]: /es/infrastructure/resource_catalog/
+[8]: https://app.datadoghq.com/infrastructure/catalog
 [9]: /es/tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
-[10]: /es/service_management/service_level_objectives/#slo-tags
+[10]: /es/service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services
 [13]: https://app.datadoghq.com/incidents
@@ -173,3 +194,21 @@ Para personalizar tu equipo, consulta [Gestión de equipos][3].
 [18]: https://app.datadoghq.com/data-streams
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
+[21]: https://app.datadoghq.com/app-builder/apps/list
+[22]: https://app.datadoghq.com/cases
+[23]: https://app.datadoghq.com/actions/connections
+[24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
+[25]: https://app.datadoghq.com/organization-settings/cross-org-visibility
+[26]: https://app.datadoghq.com/actions/datastores
+[27]: https://app.datadoghq.com/integrations
+[28]: https://app.datadoghq.com/logs/pipelines
+[29]: https://app.datadoghq.com/observability-pipelines
+[30]: https://app.datadoghq.com/on-call/summary
+[31]: https://app.datadoghq.com/actions/private-action-runners
+[32]: /es/dashboards/widgets/powerpack/#powerpack-permissions
+[33]: https://app.datadoghq.com/reference-tables
+[34]: https://app.datadoghq.com/rum/list
+[35]: https://app.datadoghq.com/security/configuration/notification-rules
+[36]: https://app.datadoghq.com/security/configuration/suppressions
+[37]: https://app.datadoghq.com/sheets
+[38]: https://app.datadoghq.com/workflow

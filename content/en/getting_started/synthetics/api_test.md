@@ -36,53 +36,53 @@ HTTP tests monitor your API endpoints and alert you when response latency is hig
 
 The examples below demonstrate how to create an [HTTP test][3], a subtype of [single API tests][1].
 
-1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
+1. In the Datadog site, hover over {{< ui >}}Digital Experience{{< /ui >}} and select [{{< ui >}}Tests{{< /ui >}}][4] (under {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}).
 
-2. Click **New Test** > **[New API test][5]**.
+2. Click {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}New API test{{< /ui >}}][5].
 
 3. You may create a test using one of the following options:
 
    - **Create a test from a template**:
 
-      1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
-      2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-      3. Click **Save Details** to submit your API test.<br /><br>
+      1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+      2. Click {{< ui >}}+Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+      3. Click {{< ui >}}Save Details{{< /ui >}} to submit your API test.<br /><br>
 
         {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
    - **Build a test from scratch**:
 
-      1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type.
+      1. To build a test from scratch, click the {{< ui >}}+ Start from scratch{{< /ui >}} template, then select the `HTTP` request type.
 
       2. Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. If you use the test Shopist URL, the name of your test is automatically populated as `Test on shopist.io`.  
 
-      3. Optionally, select **Advanced Options** to set custom request options, add certificates and authentication credentials, and create secure [global variables][6] or [local variables][7] for dynamic inputs.
+      3. Optionally, select {{< ui >}}Advanced Options{{< /ui >}} to set custom request options, add certificates and authentication credentials, and create secure [global variables][6] or [local variables][7] for dynamic inputs.
 
          **Note**: Type `{{` in any relevant field to select a variable and inject its value into your test options. 
           
       4. Optionally, set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
-      5. Click **Send** to trigger a sample test run.
+      5. Click {{< ui >}}Send{{< /ui >}} to trigger a sample test run.
 
          {{< img src="getting_started/synthetics/api-test-config-4.png" alt="API test configuration" style="width:90%;">}}
 
-      6. Click **Create Test** to submit your API test.
+      6. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
 
 ### Define assertions
 
-Clicking **Send** automatically populates basic assertions about your endpoint's response. Assertions define what a successful test run is.
+Clicking {{< ui >}}Send{{< /ui >}} automatically populates basic assertions about your endpoint's response. Assertions define what a successful test run is.
 
 In this example, three default assertions populate after triggering the sample test run:
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions" style="width:100%;">}}
 
-Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
+Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click {{< ui >}}New Assertion{{< /ui >}} to define a new assertion from scratch. 
 
 {{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true" >}}
 
 ### Select locations 
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from. {{% managed-locations %}}
+Select one or more {{< ui >}}Managed Locations{{< /ui >}} or {{< ui >}}Private Locations{{< /ui >}} to run your test from. {{% managed-locations %}}
 
 The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
 
@@ -127,7 +127,7 @@ For example, the following monitor message creates a monitor that iterates over 
    {{/each}}
    ```
 
-When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
+When you're ready to save your test configuration and monitor, click {{< ui >}}Save & Edit Recording{{< /ui >}}.
 
 For more information, see [Using Synthetic Test Monitors][13].
 
@@ -148,54 +148,54 @@ The example test below demonstrates the creation of a multistep API test that mo
 
 If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
 
-To create a new multistep API test, click **New Test** > **[Multistep API test][12]**. Add a test name such as `Add product to cart`, include tags, and select locations. 
+To create a new multistep API test, click {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}Multistep API test{{< /ui >}}][12]. Add a test name such as `Add product to cart`, include tags, and select locations. 
 
 ### Get a cart
 
-1. In **Define steps**, click **Create Your First Step**. 
+1. In {{< ui >}}Define steps{{< /ui >}}, click {{< ui >}}Create Your First Step{{< /ui >}}. 
 2. Add a name to your step, for example: `Get a cart`.
 3. Specify the HTTP method and the URL you want to query. You can enter `POST` and `https://api.shopist.io/carts`. 
-4. Click **Test URL**. This creates a cart item in the Shopist application's backend.
+4. Click {{< ui >}}Test URL{{< /ui >}}. This creates a cart item in the Shopist application's backend.
 5. Leave the default assertions or modify them.
 6. Optionally, define execution parameters. 
 
-    Selecting **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed, regardless of previous steps' success or failure. The **Retry** step feature is handy in situations where you know your API endpoint may take some time before responding. 
+    Selecting {{< ui >}}Continue with test if this step fails{{< /ui >}} is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed, regardless of previous steps' success or failure. The {{< ui >}}Retry{{< /ui >}} step feature is handy in situations where you know your API endpoint may take some time before responding. 
     
     In this example, no specific execution parameter is needed. 
 
 7. To create a variable out of the value of the cart ID located at the end of the `location` header:
-    - Click **Extract a variable from response content**.
+    - Click {{< ui >}}Extract a variable from response content{{< /ui >}}.
     - Name your variable as `CART_ID`.
-    - In the **Response Header,** select `location`.
-    - In the **Parsing Regex** field, add a regular expression such as `(?:[^\\/](?!(\\|/)))+$`.
+    - In the {{< ui >}}Response Header{{< /ui >}}, select `location`.
+    - In the {{< ui >}}Parsing Regex{{< /ui >}} field, add a regular expression such as `(?:[^\\/](?!(\\|/)))+$`.
 
    {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Extracted variable from response content" style="width:100%;" >}}
 
-8. Click **Save Variable**.
-9. When you're done creating this test step, click **Save Step**.
+8. Click {{< ui >}}Save Variable{{< /ui >}}.
+9. When you're done creating this test step, click {{< ui >}}Save Step{{< /ui >}}.
 
 ### Get a product
    
-1. In **Define another step**, click **Add Another Step**. By default, you can create up to ten steps.
+1. In {{< ui >}}Define another step{{< /ui >}}, click {{< ui >}}Add Another Step{{< /ui >}}. By default, you can create up to ten steps.
 2. Add a name to your step, for example: `Get a product`.
 3. Specify the HTTP method and the URL you want to query. Here, you can add: `GET` and `https://api.shopist.io/products.json`. 
-4. Click **Test URL**. This retrieves a list of products available in the Shopist application.
+4. Click {{< ui >}}Test URL{{< /ui >}}. This retrieves a list of products available in the Shopist application.
 5. Leave the default assertions or modify them.
 6. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
 7. To create a variable out of the product ID located in the response body:
-    - Click **Extract a variable from response content**
+    - Click {{< ui >}}Extract a variable from response content{{< /ui >}}
     - Name your variable as `PRODUCT_ID`.
-    - Click the **Response Body** tab.
+    - Click the {{< ui >}}Response Body{{< /ui >}} tab.
     - Click on the `$oid` key of any product to generate a JSON Path such as `$[0].id['$oid']`.
-8. Click **Save Variable**.
-9. When you're done creating this test step, click **Save Step**.
+8. Click {{< ui >}}Save Variable{{< /ui >}}.
+9. When you're done creating this test step, click {{< ui >}}Save Step{{< /ui >}}.
 
 ### Add product to cart
 
-1. Click **Add Another Step** to add the final step, the addition of a product into your cart.
+1. Click {{< ui >}}Add Another Step{{< /ui >}} to add the final step, the addition of a product into your cart.
 2. Add a name to your step, for example: `Add product to cart`.
 3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and  `https://api.shopist.io/add_item.json`. 
-4. In the **Request Body** tab, choose the `application/json` body type and insert the following:
+4. In the {{< ui >}}Request Body{{< /ui >}} tab, choose the `application/json` body type and insert the following:
         
     {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
     {
@@ -208,26 +208,26 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
     } 
     {{< /code-block >}}
         
-5. Click **Test URL**. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
-6. In **Add assertions (optional)**, click **Response Body** and click the `url` key to have your test assert that the journey finished with a response containing the checkout URL.
+5. Click {{< ui >}}Test URL{{< /ui >}}. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
+6. In {{< ui >}}Add assertions (optional){{< /ui >}}, click {{< ui >}}Response Body{{< /ui >}} and click the `url` key to have your test assert that the journey finished with a response containing the checkout URL.
 7. No execution parameters and variable extractions are needed in this last step.
-10. When you're done creating this test step, click **Save Step**.
+10. When you're done creating this test step, click {{< ui >}}Save Step{{< /ui >}}.
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
-You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click **Create**. 
+You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click {{< ui >}}Create{{< /ui >}}. 
 
 For more information, see [Using Synthetic Test Monitors][13].
 
 ## Look at test results
 
-The **API test** and **Multistep API test detail** pages display an overview of the test configuration, the global uptime associated with the tested endpoints by location, graphs about response time and network timings, and a list of test results and events.
+The {{< ui >}}API test{{< /ui >}} and {{< ui >}}Multistep API test detail{{< /ui >}} pages display an overview of the test configuration, the global uptime associated with the tested endpoints by location, graphs about response time and network timings, and a list of test results and events.
 
-To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
+To troubleshoot a failed test, scroll down to {{< ui >}}Test Results{{< /ui >}} and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API test failure" style="width:100%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][14], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
+With Datadog's [APM integration with Synthetic Monitoring][14], access the root cause of a failed test run by looking at the trace generated from the test run in the {{< ui >}}Traces{{< /ui >}} tab.
 
 ### Investigate with Bits AI SRE
 
