@@ -360,7 +360,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 ### Link your dbt jobs with Airflow tasks
 
-<div class="alert alert-info">On Airflow 2.9.2 with <code>apache-airflow-providers-openlineage</code> 2.2.0 - the latest provider enabled for this Airflow version - the <code>lineage_root_*</code> macros required for root-parent linking are not available. To use them anyway, see <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">Backport OpenLineage lineage macros for older provider versions</a>.</div>
+<div class="alert alert-info">The <code>lineage_root_*</code> macros used below require <code>apache-airflow-providers-openlineage</code> 2.3.0 or later. On older provider versions (for example, Airflow 2.9.2 with provider 2.2.0), see <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">Backport OpenLineage lineage macros for older provider versions</a>.</div>
 
 You can monitor your dbt jobs that are running in Airflow by connecting the dbt telemetry with respective Airflow tasks, using [OpenLineage dbt integration][6].
 
@@ -380,7 +380,7 @@ Also, add the --consume-structured-logs flag to view dbt jobs while the command 
 dbt-ol run --consume-structured-logs --project-dir=$TEMP_DIR --profiles-dir=$PROFILES_DIR
 ```
 
-3. In your DAG file, add the OPENLINEAGE_PARENT_ID variable to the environment of the Airflow task that runs the dbt process:
+3. In your DAG file, set the OpenLineage parent and root-parent environment variables on the Airflow task that runs the dbt process so dbt jobs link to both the immediate parent task and the outermost DAG run in Datadog:
 
 ```python
 dbt_run = BashOperator(
@@ -389,7 +389,12 @@ dbt_run = BashOperator(
     bash_command=f"dbt-ol run --consume-structured-logs --project-dir=$TEMP_DIR --profiles-dir=$PROFILES_DIR",
     append_env=True,
     env={
-        "OPENLINEAGE_PARENT_ID": "{{ macros.OpenLineageProviderPlugin.lineage_parent_id(task_instance) }}",
+        "OPENLINEAGE_PARENT_JOB_NAMESPACE": "{{ lineage_job_namespace() }}",
+        "OPENLINEAGE_PARENT_JOB_NAME": "{{ lineage_job_name(task_instance) }}",
+        "OPENLINEAGE_PARENT_RUN_ID": "{{ lineage_run_id(task_instance) }}",
+        "OPENLINEAGE_ROOT_PARENT_JOB_NAMESPACE": "{{ lineage_root_job_namespace(task_instance) }}",
+        "OPENLINEAGE_ROOT_PARENT_JOB_NAME": "{{ lineage_root_job_name(task_instance) }}",
+        "OPENLINEAGE_ROOT_PARENT_RUN_ID": "{{ lineage_root_run_id(task_instance) }}",
     },
 )
 ```
