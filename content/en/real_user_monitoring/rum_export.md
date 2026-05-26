@@ -1,6 +1,7 @@
 ---
-title: RUM Export
-description: Forward all your ingested RUM sessions to long term storage.
+title: Export Pipelines
+description: Forward your RUM and Product Analytics events to your own cloud storage for warehouse loading or long-term retention.
+private: true
 further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
@@ -8,66 +9,81 @@ further_reading:
 - link: "/real_user_monitoring/rum_without_limits/"
   tag: "Documentation"
   text: "Learn about RUM without Limits"
+- link: "/product_analytics/"
+  tag: "Documentation"
+  text: "Learn about Product Analytics"
 ---
+
+<div class="alert alert-warning">Export Pipelines is in Preview. Contact your Customer Success Manager or <a href="/help/">Datadog support</a> to request access.</div>
 
 ## Overview
 
-Configure your Datadog account to forward all the RUM sessions ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your RUM sessions in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations.
+Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format. From there you can load the data into your own data warehouse (such as Snowflake, BigQuery, or Databricks), or keep it as a long-term archive for compliance and ad-hoc investigations.
 
-{{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Archives tab on the RUM Export page" style="width:100%;">}}
+{{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:100%;">}}
+<!-- TODO: refresh screenshot to match the current Export Pipelines UI -->
 
-Navigate to the [**RUM Export** page][3] to set up an export for forwarding ingested RUM sessions to your own cloud-hosted storage bucket.
+Datadog manages the export from your account to your cloud storage. Loading the data into a downstream warehouse is something you set up on your side.
 
-1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
-2. Create a [storage bucket](#create-a-storage-bucket).
-3. Set [permissions](#set-permissions) to `read` and/or `write` on that archive.
-4. [Route your RUM sessions](#route-your-rum-sessions-to-a-bucket) to and from that archive.
-5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags.
-6. [Validate](#validation) your setup and check for possible misconfigurations that Datadog would be able to detect for you.
+## How it works
 
-## Configure an export
+Export Pipelines are configured per RUM application. For each application you can create up to three pipelines:
 
-### Set up an integration
+| Source             | Pipelines per application | Available presets                                                |
+|--------------------|---------------------------|------------------------------------------------------------------|
+| RUM                | One                       | *All RUM Event Types* **or** *Sessions, Views & Actions*         |
+| Product Analytics  | Up to two                 | *All Product Analytics Events* and *User and Account Profiles*   |
+
+Each pipeline exports continuously and independently of the others. Events are not deduplicated across pipelines.
+
+## Prerequisites
+
+- RUM is enabled on the application (or Product Analytics, for PA presets).
+- The Datadog integration for your cloud provider — AWS, Azure, or Google Cloud — is set up.
+- Your Datadog user has the `rum_write_archives` permission. See [Role Based Access Control][1].
+
+## Set up an export pipeline
+
+### 1. Set up your cloud integration
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-If not already configured, set up the [AWS integration][1] for the AWS account that holds your S3 bucket.
-   * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
-   * Specifically for AWS China accounts, use access keys as an alternative to role delegation.
+If not already configured, set up the [AWS integration][1] for the account that holds your S3 bucket. This usually means creating a role that Datadog can assume.
+
+For AWS China accounts, use access keys instead of role delegation.
 
 [1]: /integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
+Set up the [Azure integration][1] in the subscription that holds your storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2].
 
-**Note:** Archiving to Azure ChinaCloud and Azure GermanyCloud is not supported. Archiving to Azure GovCloud is supported in Preview. To request access, contact Datadog support.
+**Note:** Exporting to Azure ChinaCloud and Azure GermanyCloud is not supported. Exporting to Azure GovCloud is supported in Preview — contact Datadog support to request access.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 {{% /tab %}}
-
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [Google Cloud integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2] to integrate with.
+Set up the [Google Cloud integration][1] for the project that holds your GCS bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
 {{% /tab %}}
 {{< /tabs >}}
 
-### Create a storage bucket
+### 2. Create a storage bucket
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
+In the [AWS console][1], [create an S3 bucket][2] for your exports.
 
 **Notes:**
 
-- Do not make your bucket publicly readable.
-- For [US1, US3, and US5 sites][3], see [AWS Pricing][4] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+- Do not make the bucket publicly readable.
+- For [US1, US3, and US5 sites][3], see [AWS pricing][4] for inter-region data transfer fees. Consider creating the bucket in `us-east-1` to minimize transfer costs.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
@@ -77,10 +93,10 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Azure Storage" %}}
 
-* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, select either standard performance or **Block blobs** premium account type, and select the **hot** or **cool** access tier.
-* Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog RUM Export page.
+- In the [Azure Portal][1], [create a storage account][2]. Choose **Standard** performance or **Block blobs premium**, and select either the **hot** or **cool** access tier.
+- Create a **container** inside that storage account. Note the container name — you reference it when configuring the pipeline.
 
-**Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
+**Note:** Do not set [immutability policies][3]. Some events occasionally need to be rewritten (typically on retry after a timeout).
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
@@ -89,9 +105,9 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Google Cloud Storage" %}}
 
-Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your archives to. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
+In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
 
-**Note:** Do not add [retention policy][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
+**Note:** Do not add a [retention policy][3]. Some events occasionally need to be rewritten (typically on retry after a timeout).
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -99,14 +115,12 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
 {{% /tab %}}
 {{< /tabs >}}
 
-### Set permissions
-
-Only Datadog users with the [`rum_write_archives` permission][5] can create, modify, or delete RUM export configurations.
+### 3. Grant Datadog access to the bucket
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-1. [Create a policy][1] with the following permission statements:
+1. [Create a policy][1] with the following statements:
 
    ```json
    {
@@ -133,132 +147,114 @@ Only Datadog users with the [`rum_write_archives` permission][5] can create, mod
      ]
    }
    ```
-     * The `GetObject` and `ListBucket` permissions allow for rehydrating from archives.
-     * The `PutObject` permission is sufficient for uploading archives.
-     * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets.
+
+   * `PutObject` is sufficient to upload exports.
+   * `GetObject` and `ListBucket` are required only if you plan to rehydrate archives back into Datadog.
+   * The resource value under `s3:PutObject` and `s3:GetObject` must end with `/*` — these permissions apply to objects inside the buckets.
 
 2. Edit the bucket names.
-3. Optionally, specify the paths that contain your RUM archives.
-4. Attach the new policy to the Datadog integration role.
-   * Navigate to **Roles** in the AWS IAM console.
-   * Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
-   * Click **Add permissions**, and then **Attach policies**.
-   * Enter the name of the policy created above.
+3. Optionally, restrict the policy to specific paths.
+4. Attach the policy to the Datadog integration role:
+   * In the AWS IAM console, go to **Roles** and open the role used by the Datadog integration. By default it is named `DatadogIntegrationRole`, but the name may differ if your organization renamed it.
+   * Click **Add permissions**, then **Attach policies**.
+   * Enter the name of the policy you just created.
    * Click **Attach policies**.
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Grant the Datadog app permission to write to and rehydrate from your storage account.
-2. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**.
-3. Input the Role called **Storage Blob Data Contributor**, select the Datadog app which you created to integrate with Azure, and save.
+1. Grant the Datadog app permission to write to your storage account.
+2. On the [Storage accounts page][1], select your storage account, open **Access Control (IAM)**, and choose **Add → Add Role Assignment**.
+3. Assign the **Storage Blob Data Contributor** role to the Datadog app you created when integrating with Azure, then save.
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-1. Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
-2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**.
-3. Click **ADD ANOTHER ROLE**, select the **Storage Object Admin** role, and save.
+1. Grant your Datadog Google Cloud service account permission to write to your bucket.
+2. On the [Google Cloud IAM Admin page][1], select your Datadog service account principal and click **Edit principal**.
+3. Click **ADD ANOTHER ROLE**, select **Storage Object Admin**, and save.
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
-### Route your RUM sessions to a bucket
+**Note:** If your bucket restricts network access by IP, add the webhook IP ranges from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 
-Navigate to the [RUM Export page][3] and select **Add a new archive**.
+### 4. Configure the pipeline in Datadog
 
-**Notes:**
-* Only Datadog users with the [`rum_write_archives` permission][5] can complete this and the following step.
-* If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
+1. Go to **[Real User Monitoring][2]**, open the application you want to export from, and select **Export Pipelines** in the application settings.
+2. Click **New Export Pipeline**.
+3. Fill in each section of the side panel:
 
-| Service                  | Steps                                                                                                                                                      |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Amazon S3**               | - Select the appropriate AWS account and role combination for your S3 bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your RUM archives. |
-| **Azure Storage**        | - Select the **Azure Storage** archive type, and the Azure tenant and client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.<br>- Input your storage account name and the container name for your archive.<br>**Optional**: Input a prefix directory for all the content of your RUM archives. |
-| **Google Cloud Storage** | - Select the **Google Cloud Storage** archive type, and the GCS Service Account that has permissions to write on your storage bucket.<br>- Input your bucket name.<br>**Optional**: Input a prefix directory for all the content of your RUM archives. |
+   **Define Data to Export**
+   - **Source**: Real User Monitoring or Product Analytics.
+   - **Preset**:
+     - RUM — *All RUM Event Types* or *Sessions, Views & Actions*
+     - Product Analytics — *All Product Analytics Events* or *User and Account Profiles*
 
-### Advanced settings
+   **File format**
+   - **Parquet**: best for loading directly into a data warehouse such as BigQuery, Snowflake, or Databricks.
+   - **JSON**: best when you want to process the data with your own pipeline.
 
-#### Datadog tags
+   **Select Storage Type**
+   - Amazon S3, Google Cloud Storage, or Azure Blob Storage.
 
-Use this optional configuration step to include all RUM session tags in your archives (activated by default on all new archives).
+   **Configure Bucket**
 
-**Note**: This increases the size of resulting archives.
+   | Provider | Fields |
+   |---|---|
+   | **Amazon S3** | AWS account and role (from your AWS integration); **Bucket** (required); **Path** (optional prefix) |
+   | **Azure Blob Storage** | Azure tenant and client (from your Azure integration); **Storage Account** (required); **Container** (required); **Path** (optional prefix) |
+   | **Google Cloud Storage** | GCP service account (from your Google Cloud integration); **Bucket** (required); **Path** (optional prefix) |
 
-#### Storage class
+4. Click **Test Configuration**. Datadog writes a small test file to your bucket and reads it back to verify both directions. Fix any reported permissions or naming issues before saving.
+5. Click **Save** to start the pipeline.
 
-{{< tabs >}}
-{{% tab "AWS S3" %}}
+## Pipeline statuses
 
-You can either select a storage class for your archive or [set a lifecycle configuration on your S3 bucket][1] to automatically transition your RUM archives to optimal storage classes.
+Once created, a pipeline shows one of these states on the Export Pipelines page:
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-{{% /tab %}}
-{{% tab "Azure Storage" %}}
+| Status   | Meaning                                                                                                                        |
+|----------|--------------------------------------------------------------------------------------------------------------------------------|
+| Active   | Datadog is exporting events successfully.                                                                                      |
+| Pending  | The pipeline was just created or updated. Allow a few minutes before the first upload.                                         |
+| Error    | Datadog could not write to the bucket — typically a permissions or naming issue. Open the pipeline and run **Test Configuration** to see details. |
+| Paused   | The pipeline is disabled. No events are exported.                                                                              |
 
-Archiving only supports the following access tiers:
+If a pipeline stays in **Pending** for more than 15 minutes, run **Test Configuration** to surface the underlying issue.
 
-- Hot access tier
-- Cool access tier
+## File format
 
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-Archiving supports the following access tiers:
-
-- Standard
-- Nearline
-- Coldline
-- Archive
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-#### Server-side encryption (SSE) for S3 archives
-
-When creating or updating an S3 archive in Datadog, you can optionally configure **Advanced Encryption**. Three options are available under the **Encryption Type** dropdown:
-
-- **Default S3 Bucket-Level Encryption** (Default): Datadog does not override your S3 bucket's default encryption settings.
-- **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][6]), regardless of the S3 bucket's default encryption.
-- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][7], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN.
-
-### Validation
-
-After your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all RUM sessions ingested into Datadog. These sessions are subsequently forwarded to your archive.
-
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
-
-After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid. When Datadog fails to upload RUM sessions to an external archive due to unintentional changes in settings or permissions, the corresponding RUM Export is highlighted in the configuration page.
-
-## Multiple archives
-
-If multiple archives are defined, RUM sessions enter the first archive based on filter.
-
-It is important to order your archives carefully. For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production sessions would go to one storage bucket or path, and the rest would go to the other.
-
-## Format of the archives
-
-The RUM archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
+Files are organized in a directory structure that makes it easy to query archives by date:
 
 ```
-/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.02aafad5-f525-4592-905e-e962d1a5b2f7.json.gz
-/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<UUID>.json.gz
+/<path>/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<UUID>.<ext>
 ```
 
-This directory structure simplifies the process of querying your historical RUM archives based on their date.
+| Format  | Extension     | Notes                                                          |
+|---------|---------------|----------------------------------------------------------------|
+| JSON    | `.json.gz`    | Gzip-compressed newline-delimited JSON.                        |
+| Parquet | `.parquet`    | <!-- TODO: confirm Parquet file naming convention and per-record schema with the Product Analytics team --> |
+
+<!-- TODO: confirm the directory structure above still applies for both formats in the new Export Pipelines backend -->
+
+## Programmatic management
+
+A public REST API for managing RUM exports is available at `/api/v2/rum/forwarding`. The API exposes a few advanced options that are not currently surfaced in the UI:
+
+- A custom RUM query filter on events to forward.
+- For S3 destinations: server-side encryption — `SSE_S3` or `SSE_KMS` with a customer-managed key — and storage class (`STANDARD`, `STANDARD_IA`, `ONEZONE_IA`, `INTELLIGENT_TIERING`, `GLACIER_IR`).
+- An `include_tags` toggle.
+- Rehydration tags and an optional `rehydration_max_scan_size_gb` for rehydration jobs.
+
+The API requires the `rum_write_archives` permission. See the [Datadog API reference][3] for full request and response schemas.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/rum_without_limits/retention_filters/
-[2]: /real_user_monitoring/explorer/
-[3]: https://app.datadoghq.com/rum/export
-[4]: /real_user_monitoring/rum_without_limits/
-[5]: /account_management/rbac/permissions/
-[6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
-[7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[1]: /account_management/rbac/permissions/
+[2]: https://app.datadoghq.com/rum/list
+[3]: /api/latest/rum/
