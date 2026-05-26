@@ -1,5 +1,5 @@
 ---
-title: Findings
+title: Log Findings
 description: 'Capture, organize, and reuse important context during log investigations in Log Explorer.'
 private: true
 ---
