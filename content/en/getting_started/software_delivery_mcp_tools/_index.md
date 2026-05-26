@@ -123,7 +123,7 @@ Restart Claude Code after installing for the slash commands to appear.
 | Skill | Invoke with | What it does |
 |-------|-------------|-------------|
 | Triage flaky test | `/triage-flaky-test` | Get history, failure pattern, and AI category for a specific flaky test, then recommend fix, quarantine, or escalate |
-| Unblock PR | `/unblock-pr` | Attribute each CI failure on a PR as flaky, infra, or regression, surface code coverage and quality violations, and propose a targeted action |
+| Unblock PR | `/unblock-pr` | Attribute each CI failure on a PR as flaky, infra, or regression, surface code coverage and quality or security violations, and propose a targeted action |
 
 ### Triage flaky test
 
