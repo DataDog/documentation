@@ -11,9 +11,6 @@ further_reading:
 - link: "/cloud_cost_management/cloud_cost_skill/"
   tag: "Documentation"
   text: "Cloud Cost Skill in Bits AI Assistant"
-- link: "/bits_ai/ai_credits/"
-  tag: "Documentation"
-  text: "AI Credits"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
@@ -24,27 +21,27 @@ Bits AI Assistant is an AI-powered companion in Datadog that helps you search an
 
 Ask Bits AI Assistant questions across these categories:
 
-#### Investigate issues and remediate
+### Investigate issues and remediate
 - `Summarize high severity incidents that have occurred in the last day`
 - `What's causing 400 errors on the checkout endpoint in the last hour?`
 - `Why is the error rate spiking on the web-store service?`
 - `What is the root cause of this error? How did it propagate and what is the impact on users?`
 - `What could cause 500 errors on this API endpoint?`
 
-#### Explore and analyze telemetry
+### Explore and analyze telemetry
 - `Which services have the most errors right now?`
 - `Summarize the key findings from the Kubernetes overview dashboard`
 - `What's the success rate for my top API endpoints over the past week?`
 - `Show me error rates for the checkout service over the last 24 hours`
 - `Are there any incidents related to Kafka lag?`
 
-#### Learn Datadog concepts and how-to
+### Learn Datadog concepts and how-to
 - `How do I configure log collection for the Datadog Agent?`
 - `What is the difference between a metric monitor and an anomaly monitor?`
 - `What permission do I need to create a new connection?`
 - `Can I set the timepicker on a notebook to read-only?`
 
-#### Set up and optimize observability
+### Set up and optimize observability
 - `Do we already have monitors for high latency on the payments service?`
 - `Build me a dashboard to show latency, errors, and request rates for my service`
 - `How can I put a team tag on this monitor?`
@@ -65,7 +62,7 @@ To manage this permission for custom roles, go to **Organization Settings** > **
 Bits AI Assistant uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, Bits AI Assistant can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, Bits AI Assistant cannot edit that dashboard on your behalf.
 
 ### Skills
-Bits AI Assistant has access to 50+ specialized skills that help with tasks across Datadog. Below are some of the most commonly used skills.
+Bits AI Assistant has a range of specialized skills for tasks across Datadog. The most commonly used skills are described below.
 
 #### Dashboards
 Build [dashboards][5] and widgets from natural language descriptions.
