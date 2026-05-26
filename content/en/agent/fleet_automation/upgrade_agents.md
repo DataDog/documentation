@@ -94,6 +94,10 @@ Datadog recommends managing upgrades from one source at a time. Use either Fleet
 
 ## Troubleshooting
 
+### Newly released Agent version is not yet available for upgrade
+
+After a new Agent version is released, it can take up to 24 hours before it appears as an upgrade target in Fleet Automation. If a recently released version is missing from the upgrade picker, wait up to 24 hours and retry.
+
 ### Datadog Installer incompatible with Agent (pre-7.66)
 
 If you were a Preview customer and set up remote Agent Management before Agent version 7.66, your Datadog Installer might be incompatible with the Agent.
