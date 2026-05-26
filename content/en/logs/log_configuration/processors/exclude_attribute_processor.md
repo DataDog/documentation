@@ -20,10 +20,11 @@ Use the Exclude Attribute Processor to remove a specified attribute from your lo
 
 ## Use cases
 
-- **Clean up intermediate parsing artifacts**: Some pipelines create temporary attributes during processing. For example, a Grok parser may extract a raw chunk that feeds into a nested pipeline. The Exclude Attribute Processor removes these intermediate attributes from the final log.
+- **Clean up intermediate parsing artifacts**: Some pipelines create temporary attributes during processing. For example, a Grok parser may extract a raw chunk that feeds into a [nested pipeline](/logs/log_configuration/pipelines/#nested-pipelines). The Exclude Attribute Processor removes these intermediate attributes from the final log.
 - **Improve log readability**: Remove verbose or noisy attributes that clutter logs in Explorer, archives, and forwarding destinations.
 
 ## Before and after state of logs
+
 {{% collapse-content title="Example: Removing a parsed attribute with the Exclude Attribute Processor" level="h4" %}}
 
 **Before:**
