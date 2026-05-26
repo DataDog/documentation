@@ -1,4 +1,7 @@
 {
+  "env": {
+    "OTEL_RESOURCE_ATTRIBUTES": "repo.owner=DataDog,repo.name=documentation"
+  },
   "extraKnownMarketplaces": {
     "datadog-claude-plugins": {
       "source": {
@@ -9,6 +12,7 @@
   },
   "enabledPlugins": {
     "marketplace-auto-update@datadog-claude-plugins": true,
-    "documentation@datadog-claude-plugins": true
+    "documentation@datadog-claude-plugins": true,
+    "dd@datadog-claude-plugins": true
   }
 }
