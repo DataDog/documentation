@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
 ---
 
 ## Overview
@@ -100,6 +103,8 @@ Requires [Agent version][7] `7.72` or higher.
        enabled: true
        workers: 4 # default
    ```
+
+   **Note**: Set `workers` to a value greater than or equal to the number of Network Path tests running concurrently on the Agent.
 
 3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
 

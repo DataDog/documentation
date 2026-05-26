@@ -59,7 +59,7 @@ To keep the Datadog Agent updated, edit your `datadog-values.yaml` to remove any
 
 To use a specific container registry, set it with `agent.image.repository` and `clusterChecksRunner.image.repository`. Ensure that `agents.image.tag` and  `clusterChecksRunner.image.tag` are undefined.
 
-The default registry is `gcr.io/datadoghq/agent`.
+When the image repository is unset, the Helm chart derives it from `datadog.site`, cluster type, and `registryMigrationMode`.
 
 ```yaml
 agent:
@@ -143,7 +143,7 @@ spec:
         name: gcr.io/datadoghq/agent:6.33.0
 ```
 
-Use the `spec.global.registry` if you need to change the default registry. The default is `gcr.io/datadoghq`.
+Use `spec.global.registry` if you need to change the registry selected from your Datadog site, cluster type, and `registryMigrationMode`.
 
 Then, pin the Agent 7 image tag in `spec.override.nodeAgent.image.tag`.
 

@@ -1828,6 +1828,38 @@ components:
       x-enum-varnames:
         - CUSTOM_TIMEBOARD
         - CUSTOM_SCREENBOARD
+    DataProjectionQuery:
+      description: Query configuration for a data projection request.
+      properties:
+        data_source:
+          description: Data source for the query.
+          example: logs
+          type: string
+        indexes:
+          description: List of indexes to query.
+          items:
+            description: Index name.
+            type: string
+          type: array
+        query_string:
+          description: The query string to filter events.
+          example: "service:web-store"
+          type: string
+        storage:
+          description: Storage location for the query.
+          type: string
+      required:
+        - query_string
+        - data_source
+      type: object
+    DataProjectionRequestType:
+      description: Type of a data projection request.
+      enum:
+        - data_projection
+      example: data_projection
+      type: string
+      x-enum-varnames:
+        - DATA_PROJECTION
     DeleteSharedDashboardResponse:
       description: Response containing token of deleted shared dashboard.
       properties:
@@ -3081,7 +3113,8 @@ components:
       x-enum-varnames:
         - APM_RESOURCE_STATS
     FormulaAndFunctionApmResourceStatsQueryDefinition:
-      description: APM resource stats query using formulas and functions.
+      deprecated: true
+      description: APM resource stats query using formulas and functions. Deprecated - Use `apm_metrics` query type instead.
       properties:
         cross_org_uuids:
           $ref: "#/components/schemas/CrossOrgUuids"
@@ -3331,6 +3364,7 @@ components:
         - incident_analytics
         - product_analytics
         - on_call_events
+        - errors
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3347,6 +3381,7 @@ components:
         - INCIDENT_ANALYTICS
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
+        - ERRORS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -4956,6 +4991,8 @@ components:
         - sds_scanned_bytes_usage
         - serverless_apps_usage
         - serverless_apps_apm_usage
+        - siem_12mo_retention_usage
+        - siem_6mo_retention_usage
         - siem_analyzed_logs_add_on_usage
         - siem_ingested_bytes_usage
         - snmp_usage
@@ -5045,6 +5082,8 @@ components:
         - SDS_SCANNED_BYTES_USAGE
         - SERVERLESS_APPS_USAGE
         - SERVERLESS_APPS_APM_USAGE
+        - SIEM_12MO_RETENTION_USAGE
+        - SIEM_6MO_RETENTION_USAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
         - SIEM_INGESTED_BYTES_USAGE
         - SNMP_USAGE
@@ -6287,6 +6326,38 @@ components:
       type: string
       x-enum-varnames:
         - DECODER_PROCESSOR
+    LogsExcludeAttributeProcessor:
+      description: |-
+        Use this processor to remove an attribute from a log during processing.
+        The processor strips the specified attribute from the log event, which is useful
+        when the attribute contains sensitive data or is no longer needed downstream.
+      properties:
+        attribute_to_exclude:
+          description: Name of the log attribute to remove from the log event.
+          example: foo
+          type: string
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsExcludeAttributeProcessorType"
+      required:
+        - type
+        - attribute_to_exclude
+      type: object
+    LogsExcludeAttributeProcessorType:
+      default: exclude-attribute
+      description: Type of logs exclude attribute processor.
+      enum:
+        - exclude-attribute
+      example: exclude-attribute
+      type: string
+      x-enum-varnames:
+        - EXCLUDE_ATTRIBUTE
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration API.
       properties:
@@ -6894,6 +6965,7 @@ components:
         - $ref: "#/components/schemas/LogsArrayProcessor"
         - $ref: "#/components/schemas/LogsDecoderProcessor"
         - $ref: "#/components/schemas/LogsSchemaProcessor"
+        - $ref: "#/components/schemas/LogsExcludeAttributeProcessor"
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -8141,6 +8213,36 @@ components:
         - data_source
         - query
       type: object
+    MonitorFormulaAndFunctionDataJobsQueryDefinition:
+      description: A formula and functions data jobs query.
+      properties:
+        job_type:
+          description: |-
+            The type of job being monitored. Valid values include:
+            `databricks.job`, `spark.application`, `airflow.dag`,
+            `dbt.job`, `dbt.model`, `dbt.test`, `glue.job`.
+            Custom job types are supported with the `custom.ol.` prefix.
+          example: "databricks.job"
+          type: string
+        jobs_query:
+          description: Filter expression used to select the jobs to monitor.
+          example: "job_name:smoke*"
+          type: string
+        name:
+          description: Name of the query for use in formulas. Must be `run_query`.
+          example: "run_query"
+          type: string
+        query_dialect:
+          description: |-
+            Query dialect for data jobs queries. Currently only `metric` is supported.
+          example: "metric"
+          type: string
+      required:
+        - name
+        - jobs_query
+        - job_type
+        - query_dialect
+      type: object
     MonitorFormulaAndFunctionDataQualityDataSource:
       description: Data source for data quality queries.
       enum:
@@ -8312,6 +8414,10 @@ components:
           description: The name assigned to this aggregation, when multiple aggregations are defined for a query.
           example: "compute_result"
           type: string
+        source:
+          description: Source reference for composite query payloads.
+          example: "filter_query"
+          type: string
       required:
         - aggregation
       type: object
@@ -8339,6 +8445,10 @@ components:
           type: integer
         sort:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBySort"
+        source:
+          description: Source reference for composite query payloads.
+          example: "filter_query"
+          type: string
       required:
         - facet
       type: object
@@ -8447,6 +8557,7 @@ components:
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition"
+        - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition"
     MonitorFormulaAndFunctionReferenceTableColumn:
@@ -9229,11 +9340,19 @@ components:
           description: The monitor `CRITICAL` threshold.
           format: double
           type: number
+        critical_query:
+          description: Query evaluated as a dynamic `CRITICAL` threshold. Only supported on metric monitors with a formula query and options['variables']. Cannot be combined with static thresholds. This field is in preview.
+          example: 'formula("2 * query1").rollup("avg").last("6mo")'
+          type: string
         critical_recovery:
           description: The monitor `CRITICAL` recovery threshold.
           format: double
           nullable: true
           type: number
+        critical_recovery_query:
+          description: Query evaluated as a dynamic `CRITICAL` recovery threshold. Only supported on metric monitors with a formula query and options['variables']. Cannot be combined with static thresholds. This field is in preview.
+          example: 'formula("1.5 * query1").rollup("avg").last("3mo")'
+          type: string
         ok:
           description: The monitor `OK` threshold.
           format: double
@@ -9279,6 +9398,7 @@ components:
         - "cost alert"
         - "data-quality alert"
         - "network-path alert"
+        - "data-jobs alert"
       example: "query alert"
       type: string
       x-enum-varnames:
@@ -9303,6 +9423,7 @@ components:
         - COST_ALERT
         - DATA_QUALITY_ALERT
         - NETWORK_PATH_ALERT
+        - DATA_JOBS_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -9595,6 +9716,10 @@ components:
         - rum_browser_mobile_sessions_percentage
         - ingested_spans_bytes_usage
         - ingested_spans_bytes_percentage
+        - siem_12mo_retention_usage
+        - siem_12mo_retention_percentage
+        - siem_6mo_retention_usage
+        - siem_6mo_retention_percentage
         - siem_analyzed_logs_add_on_usage
         - siem_analyzed_logs_add_on_percentage
         - siem_ingested_bytes_usage
@@ -9764,6 +9889,10 @@ components:
         - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
         - INGESTED_SPANS_BYTES_USAGE
         - INGESTED_SPANS_BYTES_PERCENTAGE
+        - SIEM_12MO_RETENTION_USAGE
+        - SIEM_12MO_RETENTION_PERCENTAGE
+        - SIEM_6MO_RETENTION_USAGE
+        - SIEM_6MO_RETENTION_PERCENTAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_PERCENTAGE
         - SIEM_INGESTED_BYTES_USAGE
@@ -10391,6 +10520,22 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_12mo_retention_percentage:
+          description: The percentage of Cloud SIEM Indexed Logs (12-month retention) usage by tag(s).
+          format: double
+          type: number
+        siem_12mo_retention_usage:
+          description: The Cloud SIEM Indexed Logs (12-month retention) usage by tag(s).
+          format: double
+          type: number
+        siem_6mo_retention_percentage:
+          description: The percentage of Cloud SIEM Indexed Logs (6-month retention) usage by tag(s).
+          format: double
+          type: number
+        siem_6mo_retention_usage:
+          description: The Cloud SIEM Indexed Logs (6-month retention) usage by tag(s).
           format: double
           type: number
         siem_analyzed_logs_add_on_percentage:
@@ -11450,6 +11595,150 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    PointPlotDimension:
+      description: Dimension of the point plot.
+      enum:
+        - group
+        - time
+        - y
+        - radius
+      example: y
+      type: string
+      x-enum-varnames:
+        - GROUP
+        - TIME
+        - Y
+        - RADIUS
+    PointPlotProjection:
+      description: Projection configuration for the point plot widget.
+      properties:
+        dimensions:
+          description: List of dimension mappings for the projection.
+          items:
+            $ref: "#/components/schemas/PointPlotProjectionDimension"
+          type: array
+        extra_columns:
+          description: Additional columns to include in the projection.
+          items:
+            description: Column name.
+            type: string
+          type: array
+        type:
+          $ref: "#/components/schemas/PointPlotProjectionType"
+      required:
+        - type
+        - dimensions
+      type: object
+    PointPlotProjectionDimension:
+      description: Dimension mapping for the point plot projection.
+      properties:
+        alias:
+          description: Alias for the column.
+          type: string
+        column:
+          description: Source column name from the dataset.
+          example: duration
+          type: string
+        dimension:
+          $ref: "#/components/schemas/PointPlotDimension"
+      required:
+        - column
+        - dimension
+      type: object
+    PointPlotProjectionType:
+      description: Type of the projection.
+      enum:
+        - point_plot
+      example: point_plot
+      type: string
+      x-enum-varnames:
+        - POINT_PLOT
+    PointPlotWidgetDefinition:
+      description: The point plot displays individual data points over time.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          type: string
+        legend:
+          $ref: "#/components/schemas/PointPlotWidgetLegend"
+        markers:
+          description: List of markers for the widget.
+          items:
+            $ref: "#/components/schemas/WidgetMarker"
+          type: array
+        requests:
+          description: List of request configurations for the widget.
+          items:
+            $ref: "#/components/schemas/PointPlotWidgetRequest"
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/PointPlotWidgetDefinitionType"
+        yaxis:
+          $ref: "#/components/schemas/WidgetAxis"
+      required:
+        - type
+        - requests
+      type: object
+    PointPlotWidgetDefinitionType:
+      default: point_plot
+      description: Type of the point plot widget.
+      enum:
+        - point_plot
+      example: point_plot
+      type: string
+      x-enum-varnames:
+        - POINT_PLOT
+    PointPlotWidgetLegend:
+      description: Legend configuration for the point plot widget.
+      properties:
+        type:
+          $ref: "#/components/schemas/PointPlotWidgetLegendType"
+      required:
+        - type
+      type: object
+    PointPlotWidgetLegendType:
+      description: Type of legend to show for the point plot widget.
+      enum:
+        - automatic
+        - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+        - AUTOMATIC
+        - NONE
+    PointPlotWidgetRequest:
+      description: Request configuration for the point plot widget.
+      properties:
+        limit:
+          description: Maximum number of data points to return.
+          format: int64
+          type: integer
+        projection:
+          $ref: "#/components/schemas/PointPlotProjection"
+        query:
+          $ref: "#/components/schemas/DataProjectionQuery"
+        request_type:
+          $ref: "#/components/schemas/DataProjectionRequestType"
+      required:
+        - request_type
+        - query
+        - projection
+      type: object
     PowerpackTemplateVariableContents:
       description: Powerpack template variable contents.
       properties:
@@ -14099,19 +14388,19 @@ components:
       x-enum-varnames:
         - NETFLOW_SANKEY
     SankeyRumDataSource:
-      default: rum
-      description: Sankey widget with RUM data source.
+      default: product_analytics
+      description: Product Analytics or RUM data source type.
       enum:
         - rum
         - product_analytics
-      example: rum
+      example: product_analytics
       type: string
       x-enum-varnames:
         - RUM
         - PRODUCT_ANALYTICS
     SankeyRumQuery:
       additionalProperties: false
-      description: Sankey widget with RUM data source query.
+      description: Query configuration for Product Analytics or RUM Sankey widget.
       properties:
         audience_filters:
           $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
@@ -14151,7 +14440,7 @@ components:
       type: object
     SankeyRumQueryMode:
       default: source
-      description: Sankey mode for RUM queries.
+      description: Sankey mode for Product Analytics or RUM queries.
       enum:
         - source
         - target
@@ -14162,7 +14451,7 @@ components:
         - TARGET
     SankeyRumRequest:
       additionalProperties: false
-      description: Sankey widget with RUM data source.
+      description: Sankey widget request for Product Analytics or RUM data source.
       properties:
         query:
           $ref: "#/components/schemas/SankeyRumQuery"
@@ -16297,6 +16586,7 @@ components:
         - udp
         - icmp
         - websocket
+        - mcp
       example: http
       type: string
       x-enum-varnames:
@@ -16308,6 +16598,7 @@ components:
         - UDP
         - ICMP
         - WEBSOCKET
+        - MCP
     SyntheticsAPITestType:
       default: "api"
       description: Type of the Synthetic test, `api`.
@@ -16430,6 +16721,8 @@ components:
         - $ref: "#/components/schemas/SyntheticsAssertionJSONSchemaTarget"
         - $ref: "#/components/schemas/SyntheticsAssertionXPathTarget"
         - $ref: "#/components/schemas/SyntheticsAssertionJavascript"
+        - $ref: "#/components/schemas/SyntheticsAssertionMCPServerCapabilitiesTarget"
+        - $ref: "#/components/schemas/SyntheticsAssertionMCPRespectsSpecification"
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -16565,6 +16858,49 @@ components:
       type: string
       x-enum-varnames:
         - JAVASCRIPT
+    SyntheticsAssertionMCPRespectsSpecification:
+      description: An assertion that verifies the MCP server response respects the MCP specification.
+      properties:
+        type:
+          $ref: "#/components/schemas/SyntheticsAssertionMCPRespectsSpecificationType"
+      required:
+        - type
+      type: object
+    SyntheticsAssertionMCPRespectsSpecificationType:
+      description: Type of the assertion.
+      enum:
+        - mcpRespectsSpecification
+      example: mcpRespectsSpecification
+      type: string
+      x-enum-varnames:
+        - MCP_RESPECTS_SPECIFICATION
+    SyntheticsAssertionMCPServerCapabilitiesTarget:
+      description: An assertion that checks that an MCP server advertises the expected capabilities.
+      properties:
+        operator:
+          $ref: "#/components/schemas/SyntheticsAssertionOperator"
+        target:
+          description: List of MCP server capabilities to assert against.
+          example:
+            - completions
+          items:
+            $ref: "#/components/schemas/SyntheticsMCPServerCapability"
+          type: array
+        type:
+          $ref: "#/components/schemas/SyntheticsAssertionMCPServerCapabilitiesType"
+      required:
+        - type
+        - operator
+        - target
+      type: object
+    SyntheticsAssertionMCPServerCapabilitiesType:
+      description: Type of the assertion.
+      enum:
+        - mcpServerCapabilities
+      example: mcpServerCapabilities
+      type: string
+      x-enum-varnames:
+        - MCP_SERVER_CAPABILITIES
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
@@ -16667,6 +17003,8 @@ components:
         - connection
         - multiNetworkHop
         - jitter
+        - mcpToolNameLength
+        - mcpToolCount
       example: statusCode
       type: string
       x-enum-varnames:
@@ -16691,6 +17029,8 @@ components:
         - CONNECTION
         - MULTI_NETWORK_HOP
         - JITTER
+        - MCP_TOOL_NAME_LENGTH
+        - MCP_TOOL_COUNT
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -17999,6 +18339,31 @@ components:
             $ref: "#/components/schemas/SyntheticsLocation"
           type: array
       type: object
+    SyntheticsMCPProtocolVersion:
+      description: The MCP protocol version used by the step. See https://modelcontextprotocol.io/specification.
+      enum:
+        - "2025-06-18"
+      example: "2025-06-18"
+      type: string
+      x-enum-varnames:
+        - VERSION_2025_06_18
+    SyntheticsMCPServerCapability:
+      description: A capability advertised by an MCP server.
+      enum:
+        - completions
+        - experimental
+        - logging
+        - prompts
+        - resources
+        - tools
+      type: string
+      x-enum-varnames:
+        - COMPLETIONS
+        - EXPERIMENTAL
+        - LOGGING
+        - PROMPTS
+        - RESOURCES
+        - TOOLS
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -18888,15 +19253,24 @@ components:
         - UPLOAD_FILES
         - WAIT
     SyntheticsTestCallType:
-      description: The type of gRPC call to perform.
+      description: |-
+        The type of call to perform. Used by gRPC steps (`healthcheck`, `unary`)
+        and MCP steps (`init`, `tool_list`, `tool_call`). Valid values depend on
+        the parent step's `subtype`.
       enum:
         - healthcheck
         - unary
+        - init
+        - tool_list
+        - tool_call
       example: unary
       type: string
       x-enum-varnames:
         - HEALTHCHECK
         - UNARY
+        - INIT
+        - TOOL_LIST
+        - TOOL_CALL
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -19397,6 +19771,8 @@ components:
         isMessageBase64Encoded:
           description: Whether the message is base64 encoded.
           type: boolean
+        mcpProtocolVersion:
+          $ref: "#/components/schemas/SyntheticsMCPProtocolVersion"
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -19441,6 +19817,14 @@ components:
           description: Timeout in seconds for the test.
           format: double
           type: number
+        toolArgs:
+          additionalProperties: {}
+          description: Arguments to pass to the MCP tool. Free-form object whose shape depends on the tool. Used when `callType` is `tool_call`.
+          type: object
+        toolName:
+          description: The name of the MCP tool to call. Required when `callType` is `tool_call`.
+          example: search
+          type: string
         url:
           description: URL to perform the test with.
           example: "https://example.com"
@@ -22319,6 +22703,10 @@ components:
           description: Shows the sum of all Cloud Security Information and Event Management events over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_siem_indexed_logs_sum:
+          description: Shows the sum of all Cloud SIEM Indexed Logs over all hours in the current date for the given org.
+          format: int64
+          type: integer
         code_analysis_sa_committers_hwm:
           description: Shows the high-water mark of all Static Analysis committers over all hours in the current date for the given org.
           format: int64
@@ -22387,6 +22775,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current date for the given org.
           format: int64
@@ -22419,6 +22815,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cspm_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all hours in the current date for all organizations.
           format: int64
@@ -22449,6 +22853,10 @@ components:
           type: integer
         dbm_queries_count_avg:
           description: Shows the average of all normalized Database Monitoring queries over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_agent_sum:
@@ -22645,6 +23053,10 @@ components:
           type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg:
+          description: Shows the average number of storage management objects over all hours in the current date for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_sum:
@@ -22951,6 +23363,10 @@ components:
           description: Shows the average number of Serverless Apps with Application Performance Monitoring for Google Cloud Platform Cloud Run instances for the current date for all organizations.
           format: int64
           type: integer
+        serverless_apps_apm_apm_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps with Application Performance Monitoring for Google Kubernetes Engine Autopilot pods for the current date for all organizations.
+          format: int64
+          type: integer
         serverless_apps_apm_avg:
           description: Shows the average number of Serverless Apps with Application Performance Monitoring for the current date for all organizations.
           format: int64
@@ -22973,6 +23389,10 @@ components:
           type: integer
         serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg:
           description: Shows the average number of Serverless Apps with Application Performance Monitoring excluding Fargate for Google Cloud Platform Cloud Run instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps with Application Performance Monitoring excluding Fargate for Google Kubernetes Engine Autopilot pods for the current date for all organizations.
           format: int64
           type: integer
         serverless_apps_apm_excl_fargate_avg:
@@ -23027,6 +23447,10 @@ components:
           description: Shows the average number of Serverless Apps excluding Fargate for Google Cloud Platform Cloud Run instances for the current date for all organizations.
           format: int64
           type: integer
+        serverless_apps_excl_fargate_infra_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate for Google Kubernetes Engine Autopilot pods for the current date for all organizations.
+          format: int64
+          type: integer
         serverless_apps_google_cloud_functions_instances_avg:
           description: Shows the average number of Serverless Apps for Google Cloud Platform Cloud Functions instances for the current date for all organizations.
           format: int64
@@ -23039,8 +23463,20 @@ components:
           description: Shows the average number of Serverless Apps for Google Cloud for the given date and given org.
           format: int64
           type: integer
+        serverless_apps_infra_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps for Google Kubernetes Engine Autopilot pods for the current date for all organizations.
+          format: int64
+          type: integer
         serverless_apps_total_count_avg:
           description: Shows the average number of Serverless Apps for Azure and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_12mo_retention_sum:
+          description: Shows the sum of Cloud SIEM Indexed Logs (12-month retention) over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        siem_6mo_retention_sum:
+          description: Shows the sum of Cloud SIEM Indexed Logs (6-month retention) over all hours in the current date for the given org.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
@@ -23292,6 +23728,10 @@ components:
           description: Shows the sum of all Cloud Security Information and Event Management events over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_siem_indexed_logs_sum:
+          description: Shows the sum of all Cloud SIEM Indexed Logs over all hours in the current date for the given org.
+          format: int64
+          type: integer
         code_analysis_sa_committers_hwm:
           description: Shows the high-water mark of all Static Analysis committers over all hours in the current date for the given org.
           format: int64
@@ -23360,6 +23800,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current date for the given org.
           format: int64
@@ -23390,6 +23838,14 @@ components:
           type: integer
         cspm_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         custom_historical_ts_avg:
@@ -23426,6 +23882,10 @@ components:
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring normalized queries over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current date for the given org.
           format: int64
           type: integer
         eph_infra_host_agent_sum:
@@ -23626,6 +24086,10 @@ components:
           type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg:
+          description: Shows the average number of storage management objects over all hours in the current date for the given org.
           format: int64
           type: integer
         ingested_events_bytes_sum:
@@ -23936,6 +24400,10 @@ components:
           description: Shows the average number of Serverless Apps with Application Performance Monitoring for Google Cloud Platform Cloud Run instances for the given date and given org.
           format: int64
           type: integer
+        serverless_apps_apm_apm_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps with Application Performance Monitoring for Google Kubernetes Engine Autopilot pods for the given date and given org.
+          format: int64
+          type: integer
         serverless_apps_apm_avg:
           description: Shows the average number of Serverless Apps with Application Performance Monitoring for the given date and given org.
           format: int64
@@ -23958,6 +24426,10 @@ components:
           type: integer
         serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg:
           description: Shows the average number of Serverless Apps with Application Performance Monitoring excluding Fargate for Google Cloud Platform Cloud Run instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps with Application Performance Monitoring excluding Fargate for Google Kubernetes Engine Autopilot pods for the given date and given org.
           format: int64
           type: integer
         serverless_apps_apm_excl_fargate_avg:
@@ -24012,6 +24484,10 @@ components:
           description: Shows the average number of Serverless Apps excluding Fargate for Google Cloud Platform Cloud Run instances for the given date and given org.
           format: int64
           type: integer
+        serverless_apps_excl_fargate_infra_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate for Google Kubernetes Engine Autopilot pods for the given date and given org.
+          format: int64
+          type: integer
         serverless_apps_google_cloud_functions_instances_avg:
           description: Shows the average number of Serverless Apps for Google Cloud Platform Cloud Functions instances for the given date and given org.
           format: int64
@@ -24024,8 +24500,20 @@ components:
           description: Shows the average number of Serverless Apps for Google Cloud for the given date and given org.
           format: int64
           type: integer
+        serverless_apps_infra_gcp_gke_autopilot_pods_avg:
+          description: Shows the average number of Serverless Apps for Google Kubernetes Engine Autopilot pods for the given date and given org.
+          format: int64
+          type: integer
         serverless_apps_total_count_avg:
           description: Shows the average number of Serverless Apps for Azure and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
+        siem_12mo_retention_sum:
+          description: Shows the sum of Cloud SIEM Indexed Logs (12-month retention) over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        siem_6mo_retention_sum:
+          description: Shows the sum of Cloud SIEM Indexed Logs (6-month retention) over all hours in the current date for the given org.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
@@ -24275,6 +24763,10 @@ components:
           description: Shows the sum of all Cloud Security Information and Event Management events over all hours in the current month for all organizations.
           format: int64
           type: integer
+        cloud_siem_indexed_logs_agg_sum:
+          description: Shows the sum of all Cloud SIEM Indexed Logs over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         code_analysis_sa_committers_hwm_sum:
           description: Shows the high-water mark of all Static Analysis committers over all hours in the current month for all organizations.
           format: int64
@@ -24343,6 +24835,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_agg_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current month for all organizations.
           format: int64
@@ -24373,6 +24873,14 @@ components:
           type: integer
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_agg_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         custom_historical_ts_sum:
@@ -24409,6 +24917,10 @@ components:
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring Normalized Queries over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_agg_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current month for all organizations.
           format: int64
           type: integer
         end_date:
@@ -24610,6 +25122,10 @@ components:
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg_sum:
+          description: Shows the average number of storage management objects over all hours in the current month for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
@@ -24939,6 +25455,10 @@ components:
           description: Sum of the average number of Serverless Apps with Application Performance Monitoring for Google Cloud Platform Cloud Run instances in the current month for all organizations.
           format: int64
           type: integer
+        serverless_apps_apm_apm_gcp_gke_autopilot_pods_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application Performance Monitoring for Google Kubernetes Engine Autopilot pods in the current month for all organizations.
+          format: int64
+          type: integer
         serverless_apps_apm_avg_sum:
           description: Sum of the average number of Serverless Apps with Application Performance Monitoring in the current month for all organizations.
           format: int64
@@ -24961,6 +25481,10 @@ components:
           type: integer
         serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg_sum:
           description: Sum of the average number of Serverless Apps with Application Performance Monitoring excluding Fargate for Google Cloud Platform Cloud Run instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_gke_autopilot_pods_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application Performance Monitoring excluding Fargate for Google Kubernetes Engine Autopilot pods in the current month for all organizations.
           format: int64
           type: integer
         serverless_apps_apm_excl_fargate_avg_sum:
@@ -25015,6 +25539,10 @@ components:
           description: Sum of the average number of Serverless Apps excluding Fargate for Google Cloud Platform Cloud Run instances in the current month for all organizations.
           format: int64
           type: integer
+        serverless_apps_excl_fargate_infra_gcp_gke_autopilot_pods_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate for Google Kubernetes Engine Autopilot pods in the current month for all organizations.
+          format: int64
+          type: integer
         serverless_apps_google_cloud_functions_instances_avg_sum:
           description: Sum of the average number of Serverless Apps for Google Cloud Platform Cloud Functions instances in the current month for all organizations.
           format: int64
@@ -25027,8 +25555,20 @@ components:
           description: Sum of the average number of Serverless Apps for Google Cloud in the current month for all organizations.
           format: int64
           type: integer
+        serverless_apps_infra_gcp_gke_autopilot_pods_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Kubernetes Engine Autopilot pods in the current month for all organizations.
+          format: int64
+          type: integer
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and Google Cloud in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_12mo_retention_agg_sum:
+          description: Shows the sum of Cloud SIEM Indexed Logs (12-month retention) over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        siem_6mo_retention_agg_sum:
+          description: Shows the sum of Cloud SIEM Indexed Logs (6-month retention) over all hours in the current month for all organizations.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_agg_sum:
@@ -25823,6 +26363,7 @@ components:
         - $ref: "#/components/schemas/MonitorSummaryWidgetDefinition"
         - $ref: "#/components/schemas/NoteWidgetDefinition"
         - $ref: "#/components/schemas/PowerpackWidgetDefinition"
+        - $ref: "#/components/schemas/PointPlotWidgetDefinition"
         - $ref: "#/components/schemas/QueryValueWidgetDefinition"
         - $ref: "#/components/schemas/RetentionCurveWidgetDefinition"
         - $ref: "#/components/schemas/RunWorkflowWidgetDefinition"
@@ -33932,6 +34473,10 @@ paths:
         - `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)
         - `operator`: <, <=, >, >=, ==, or !=
         - `#`: an integer or decimal number used to set the threshold
+
+        To use a dynamic threshold on a metric monitor with a formula query, replace `#` with the `threshold` keyword
+        (for example, `... > threshold`) and provide the threshold as a query via `critical_query` on `options.thresholds`.
+        This feature is in preview.
 
         If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),
         timeshift):space_aggr:metric{tags} [by {key}] operator #` with:

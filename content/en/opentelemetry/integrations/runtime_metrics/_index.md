@@ -255,10 +255,7 @@ After setup is complete, you can view runtime metrics in:
 
 ## Data collected
 
-The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences. Each row maps an OpenTelemetry metric to the equivalent Datadog metric name, along with a description and any attribute conditions Datadog uses to identify the correct data point:
-
-- **Transform**: shown when both the OpenTelemetry metric and the Datadog metric require attribute filters to uniquely identify the data point.
-- **Filter**: shown when only the OpenTelemetry metric requires an attribute filter.
+The following tables list the OpenTelemetry runtime metrics collected for Datadog's out-of-the-box in-app experiences, along with a description and any attribute conditions (**Filter**) that Datadog uses to identify the correct data point.
 
 For Collector processor configuration required to make these metrics compatible with Datadog, see the [Collector configuration](#2-configure-your-application) instructions above.
 

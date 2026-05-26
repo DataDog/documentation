@@ -30,10 +30,6 @@ Developers are responsible for:
 
 ## Access the Datadog site
 
-You can identify which site you are on by matching your Datadog website URL to the site URL in the table below.
-
-{{< img src="getting_started/site/site.png" alt="The site URL in your browser tab" style="width:40%" >}}
-
 | Site    | Site URL                    | Site Parameter      | Location |
 |---------|-----------------------------|---------------------|----------|
 | US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
@@ -44,6 +40,14 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US2-FED | `https://us2.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 | AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
+
+If you have a custom domain, such as `demo.datadoghq.com`, you can find your site listed at the top of the {{< ui >}}My Preferences{{< /ui >}} page.
+
+{{< img src="getting_started/site/site-in-preferences.png" alt="The top of the My Preferences page in Datadog, showing the organization name and site URL" style="width:80%" >}}
+
+To navigate to {{< ui >}}My Preferences{{< /ui >}}, click your profile avatar in the lower-left corner, then select {{< ui >}}My Preferences{{< /ui >}} from the menu.
+
+{{< img src="getting_started/site/my-preferences-menu.png" alt="The Datadog account menu, accessed by clicking your profile avatar in the lower-left navigation, showing the My Preferences option under Personal Settings" style="width:80%" >}}
 
 To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
 
@@ -57,13 +61,13 @@ Different Datadog sites may support different functionalities depending on the i
 
 {{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="The site selector dropdown menu on the right hand side of the Documentation site" style="width:100%" >}}
 
-For example, to see the documentation for the Datadog for Government sites, select **US1-FED** or **US2-FED**.
+For example, to see the documentation for the Datadog for Government sites, select {{< ui >}}US1-FED{{< /ui >}} or {{< ui >}}US2-FED{{< /ui >}}.
 
 ## Access the Datadog for Government sites
 
 ### US1-FED
 
-The Datadog for Government site (US1-FED) is Datadog's FedRAMP Moderate Authorized site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
+The Datadog for Government site (US1-FED) is Datadog's FedRAMP High Certified site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
 ### US2-FED
 

@@ -22,7 +22,7 @@ This guide assumes that you are:
 
 To get started, bring in the logs from the service(s) you want to analyze.
 1. [Create a new notebook][1].
-1. Select **Logs** as your data source.
+1. Select {{< ui >}}Logs{{< /ui >}} as your data source.
 
 ### 2. Query for failed logins
 
@@ -47,7 +47,7 @@ To analyze the data further, you can count the number of failed login attempts b
 
 To get a clearer picture of when failed logins are occurring, you can create a timeline or Timeseries visualization.
 1. Add a [Visualization cell][4].
-1. Choose Timeseries from the "Visualize as" dropdown.
+1. Choose {{< ui >}}Timeseries{{< /ui >}} from the "Visualize as" dropdown.
 1. Configure the graph to display the number of failed login attempts over time, using your query results as the data source.
 
 ## Further reading
