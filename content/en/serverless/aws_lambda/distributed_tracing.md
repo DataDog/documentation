@@ -86,7 +86,7 @@ The Datadog Lambda Library and SDKs for Go support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Go][9] libraries.
 
-For Go serverless applications, Datadog recommends installing [Datadog SDKs][5]. 
+For Go serverless applications, Datadog recommends installing [Datadog SDKs][5].
 
 *Looking to trace through serverless resources not listed above? [Open a feature request][7].*
 
@@ -154,15 +154,15 @@ For [S3 Change Notifications][28], Span Auto-linking supports the following oper
 
 ## Hybrid environments
 
-If you have installed Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts, your traces automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
+For end-to-end visibility across Lambda functions, hosts, containers, and managed services, install the Datadog SDKs (`dd-trace`) on both your Lambda functions and your hosts. Your traces then show a complete picture of requests that cross infrastructure boundaries.
 
-If `dd-trace` is installed on your hosts with the Datadog Agent, and your serverless functions are traced with AWS X-Ray, trace merging is required to see a single, connected trace across your infrastructure. See the [Serverless Trace Merging][6] documentation to learn more about merging traces from `dd-trace` and AWS X-Ray.
+On Lambda, install `dd-trace` with the [Datadog Lambda Extension][35], which runs the Datadog Agent inside the Lambda execution environment and ships traces directly to Datadog with minimal overhead. The Lambda Extension is the recommended installation method for new and existing serverless applications.
 
-Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. See the [Datadog APM documentation][16] to learn more about tracing in container or host-based environments.
+See the [Datadog APM documentation][16] for tracing setup in container and host-based environments.
 
 ## Profiling your Lambda Functions
 
-Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in Preview for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -172,8 +172,10 @@ The Continuous Profiler works by spawning a thread that periodically wakes up an
 
 Datadog recommends using only the Datadog APM trace library (`dd-trace`), but in some advanced situations users can combine Datadog tracing and AWS X-Ray using trace merging. Trace merging is available for Node.js and Python AWS Lambda functions. If you aren't sure which SDK to use, read about [choosing your SDK][17].
 
+<div class="alert alert-info">AWS Step Functions tracing is supported natively by Datadog and no longer requires X-Ray. See <a href="/serverless/step_functions/">Serverless Monitoring for AWS Step Functions</a> and <a href="/serverless/step_functions/merge-step-functions-lambda/">Merge Step Functions and Lambda Traces</a>.</div>
+
 There are two primary reasons for instrumenting both `dd-trace` and AWS X-Ray tracing libraries:
-- In an AWS serverless environment, you are already tracing your Lambda functions with `dd-trace`, you require AWS X-Ray active tracing for AWS managed services such as AppSync and Step Functions, and you want to visualize the `dd-trace` and AWS X-Ray spans in one single trace.
+- In an AWS serverless environment, you are already tracing your Lambda functions with `dd-trace`, you require AWS X-Ray active tracing for an AWS managed service that Datadog APM doesn't yet instrument (such as AppSync), and you want to visualize the `dd-trace` and AWS X-Ray spans in one single trace.
 - In a hybrid environment with both Lambda functions and hosts, `dd-trace` instruments your hosts, AWS X-Ray instruments your Lambda functions, and you want to visualize connected traces for transactions across Lambda functions and hosts.
 
 **Note:** This may result in higher usage bills. X-Ray spans continue to be available in your merged traces after 2-5 minutes. In many cases, Datadog recommends only using a single SDK. Learn more about [choosing your SDK][17].
@@ -196,19 +198,8 @@ Both the AWS X-Ray SDK and Datadog APM client libraries (`dd-trace`) add metadat
 
 ### Tracing across AWS Lambda and hosts
 
-#### Context propagation with the Datadog SDKs
-If you have installed Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
-
-#### Context propagation with the X-Ray integration
-If `dd-trace` is installed on your hosts with the Datadog Agent, and your Node.js or Python serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
-
-1. You have installed the [AWS X-Ray integration][18] for tracing your Lambda functions, enabling both AWS X-Ray active tracing and installing the X-Ray client libraries.
-2. You have installed the [Datadog Lambda Library for your Lambda runtime][5], and the `DD_TRACE_ENABLED` environment variable is set to `true`.
-3. [Datadog APM][20] is configured on your hosts and container-based infrastructure.
-
-Then, for X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the same `env` tag.
-
-**Note**: Distributed Tracing is supported for any runtime for your host or container-based applications. Your hosts and Lambda functions do not need to be in the same runtime.
+#### Context propagation with the Datadog SDKs (recommended)
+Install Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts. Your traces then automatically show a complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace of a request from a host to a Lambda function" >}}
 
@@ -367,9 +358,9 @@ ddlambda.WrapFunction(handler, cfg)
 {{% /tab %}}
 {{< /tabs >}}
 
-## Sending traces to Datadog with the X-Ray Integration 
+## Sending traces to Datadog with the X-Ray Integration
 
-If you are already tracing your serverless application with X-Ray and want to continue using X-Ray, you can [install the AWS X-Ray integration][2] to send traces from X-Ray to Datadog.
+If you have existing X-Ray instrumentation and want to keep using it, [install the AWS X-Ray integration][2] to send traces from X-Ray to Datadog. For new serverless applications, Datadog recommends instrumenting Lambda functions with the [Datadog Lambda Extension][35] instead.
 
 ## Further Reading
 
@@ -409,3 +400,4 @@ If you are already tracing your serverless application with X-Ray and want to co
 [32]: https://github.com/DataDog/dd-trace-js/
 [33]: https://github.com/DataDog/datadog-lambda-python
 [34]: https://github.com/DataDog/datadog-lambda-js
+[35]: /serverless/libraries_integrations/extension/
