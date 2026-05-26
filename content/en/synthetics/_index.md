@@ -101,7 +101,7 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 {{< img src="synthetics/synthetics_traces.mp4" alt="Synthetic Monitoring" video=true style="width:100%;">}}
 
-### Investigate failures with Bits AI SRE
+### Investigate with Bits AI SRE
 
 When a Synthetic Browser or API test monitor triggers, launch a Bits AI SRE investigation to identify the root cause. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, and surfaces a likely root cause. For more information, see [Investigate Issues with Bits AI SRE][27].
 
