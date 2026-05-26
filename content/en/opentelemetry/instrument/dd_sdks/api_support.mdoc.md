@@ -20,6 +20,7 @@ aliases:
   - /opentelemetry/instrument/api_support/nodejs/metrics
   - /opentelemetry/instrument/api_support/nodejs/traces
   - /opentelemetry/instrument/api_support/php
+  - /opentelemetry/instrument/api_support/php/logs
   - /opentelemetry/instrument/api_support/php/metrics
   - /opentelemetry/instrument/api_support/php/traces
   - /opentelemetry/instrument/api_support/python/
@@ -54,19 +55,6 @@ further_reading:
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
       tag: 'Blog'
 ---
-
-<!-- ============================================== -->
-<!-- SIGNAL AVAILABILITY NOTICES -->
-<!-- ============================================== -->
-
-<!-- PHP has traces and metrics only -->
-{% if equals($prog_lang, "php") %}
-{% if equals($platform, "logs") %}
-{% alert level="danger" %}
-OpenTelemetry API support for logs is not available for PHP. Use [Datadog Log Collection][210] instead.
-{% /alert %}
-{% /if %}
-{% /if %}
 
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
@@ -859,7 +847,7 @@ Here is the minimum version required for each instrument type:
 {% if equals($platform, "logs") %}
 
 <!-- Show content only for languages that support logs -->
-{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust", "java", "ruby"]) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust", "java", "ruby", "php"]) %}
 
 ## Overview
 
@@ -875,8 +863,8 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 {% /alert %}
 {% /if %}
 
-<!-- Exporter-based implementation (Python, Ruby) -->
-{% if or(equals($prog_lang, "python"), equals($prog_lang, "ruby")) %}
+<!-- Exporter-based implementation (Python, Ruby, PHP) -->
+{% if includes($prog_lang, ["python", "ruby", "php"]) %}
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
 {% /if %}
@@ -928,6 +916,12 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 {% alert level="warning" %}
 If you run Ruby 3.1 or 3.2, pin `opentelemetry-logs-sdk` to `~> 0.4`. Version 0.5.0 and later require Ruby 3.3 or later.
 {% /alert %}
+{% /if %}
+{% if equals($prog_lang, "php") %}
+- **Datadog SDK**: dd-trace-php version 1.20.0 or later.
+- **OpenTelemetry PHP SDK**: Version 1.0.0 or later (`open-telemetry/sdk`).
+- **OpenTelemetry OTLP Exporter**: The OTLP exporter package (`open-telemetry/exporter-otlp`).
+- **Monolog bridge** (optional, for PSR-3 / Monolog interoperability): `open-telemetry/opentelemetry-logger-monolog` version 1.0.0 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
@@ -1093,6 +1087,38 @@ Follow these steps to enable OTel Logs API support in your application.
     OpenTelemetry::SDK.configure
     ```
     When enabled, `datadog` automatically detects the OTel packages and configures the OTLP logs exporter to send logs to your OTLP destination.
+{% /if %}
+
+{% if equals($prog_lang, "php") %}
+1. Install the Datadog PHP SDK following the [official installation instructions][400].
+2. Install the required OpenTelemetry packages:
+    ```sh
+    composer require open-telemetry/sdk
+    composer require open-telemetry/exporter-otlp
+    ```
+    To bridge a PSR-3 or Monolog logger to OTel logs, also install:
+    ```sh
+    composer require open-telemetry/opentelemetry-logger-monolog
+    ```
+3. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+    Alternatively, set it in your `php.ini`:
+    ```ini
+    datadog.logs_otel_enabled = true
+    ```
+4. Configure your application. The Datadog SDK automatically configures the OpenTelemetry LoggerProvider when your application loads. No additional code configuration is required.
+
+   If your Datadog Agent is running on a non-default location, configure the endpoint:
+    ```sh
+    # Option 1: Using the Agent URL
+    export DD_TRACE_AGENT_URL=http://your-agent-host:8126
+
+    # Option 2: Using the Agent host
+    export DD_AGENT_HOST=your-agent-host
+    ```
+    The SDK automatically resolves the appropriate OTLP endpoint (port 4318 for HTTP, port 4317 for gRPC).
 {% /if %}
 
 ## Examples
@@ -1478,6 +1504,86 @@ end
 ```
 {% /if %}
 
+{% if equals($prog_lang, "php") %}
+After the Datadog SDK is initialized, use the OpenTelemetry Logs API to get a logger and emit log records.
+
+### Emitting a log {% #emitting-log-php %}
+
+```php
+use OpenTelemetry\API\Globals;
+use OpenTelemetry\API\Logs\LogRecord;
+use OpenTelemetry\API\Logs\Severity;
+
+// dd-trace-php automatically configures the LoggerProvider
+$logger = Globals::loggerProvider()->getLogger('my-service', '1.0.0');
+
+$record = (new LogRecord('User clicked the checkout button.'))
+    ->setSeverityNumber(Severity::INFO)
+    ->setSeverityText('INFO')
+    ->setAttributes([
+        'cart.id' => 'c-12345',
+        'user.id' => 'u-54321',
+    ]);
+
+$logger->emit($record);
+```
+
+### Bridging Monolog to OTel logs {% #monolog-bridge-php %}
+
+To export logs written with Monolog through the OTel pipeline, attach the OpenTelemetry Monolog handler to your logger. The Datadog SDK detects this bridge and skips its standard `dd.*` injection on those loggers, because trace correlation is carried in the OTLP log record's dedicated `trace_id` and `span_id` fields.
+
+```php
+use Monolog\Logger;
+use Monolog\Level;
+use OpenTelemetry\API\Globals;
+use OpenTelemetry\Contrib\Logs\Monolog\Handler;
+
+$loggerProvider = Globals::loggerProvider();
+$handler = new Handler($loggerProvider, Level::Info);
+
+$monolog = new Logger('my-service');
+$monolog->pushHandler($handler);
+
+$monolog->info('User clicked the checkout button.', [
+    'cart.id' => 'c-12345',
+    'user.id' => 'u-54321',
+]);
+```
+
+Other Monolog handlers attached to the same logger continue to receive `dd.*` trace identifiers, so file or syslog output keeps its existing correlation behavior.
+
+### Trace and log correlation {% #trace-log-correlation-php %}
+
+Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are added to the log record.
+
+```php
+use OpenTelemetry\API\Globals;
+use OpenTelemetry\API\Logs\LogRecord;
+use OpenTelemetry\API\Logs\Severity;
+use OpenTelemetry\API\Trace\SpanKind;
+
+$tracer = Globals::tracerProvider()->getTracer('my-service');
+$logger = Globals::loggerProvider()->getLogger('my-service');
+
+$span = $tracer->spanBuilder('process.user.request')
+    ->setSpanKind(SpanKind::KIND_SERVER)
+    ->startSpan();
+$scope = $span->activate();
+
+try {
+    // This log is automatically correlated with the active span
+    $record = (new LogRecord('Processing user request for ID: 12345'))
+        ->setSeverityNumber(Severity::INFO)
+        ->setSeverityText('INFO');
+
+    $logger->emit($record);
+} finally {
+    $scope->detach();
+    $span->end();
+}
+```
+{% /if %}
+
 ## Supported configuration
 
 To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
@@ -1548,6 +1654,12 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 The Datadog SDK programmatically configures the OTel SDK for you.
 {% /if %}
 
+{% if equals($prog_lang, "php") %}
+1. Install the Datadog PHP SDK following the [official installation instructions][400].
+2. Remove any code that manually configures the OTLP logs endpoint. The Datadog SDK derives the endpoint from `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and registers it with the OpenTelemetry SDK automatically.
+3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
 ### Existing Datadog log injection
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
@@ -1591,6 +1703,15 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 - Verify required gems (`opentelemetry-logs-sdk` and `opentelemetry-exporter-otlp-logs`) are installed in your Ruby environment.
 - Verify `Datadog.configure` is called before `OpenTelemetry::SDK.configure`.
 - Verify you are using `OpenTelemetry.logger_provider`, not Ruby's stdlib `Logger` or `OpenTelemetry.logger`.
+{% /if %}
+
+{% if equals($prog_lang, "php") %}
+- Verify OpenTelemetry SDK version. Version 1.0.0 or later is required.
+- Verify `open-telemetry/exporter-otlp` is installed.
+- Verify `DD_LOGS_OTEL_ENABLED=true` is set before your application starts.
+- If `OpenTelemetry\API\Globals::loggerProvider()` returns a proxy or no-op provider, the OTel SDK has not autoloaded. Confirm `open-telemetry/sdk` is installed and that its Composer autoloader runs before your application code.
+- If your logs reach the destination but no trace correlation appears on a Monolog logger, confirm the OpenTelemetry Monolog handler is attached to that logger. Loggers without the handler still receive `dd.*` fields in their message context instead.
+- Enable debug logging with `DD_TRACE_DEBUG=true` to see detailed logs.
 {% /if %}
 
 {% /if %}
