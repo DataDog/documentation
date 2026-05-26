@@ -24,38 +24,38 @@ Datadog builds lineage automatically from metadata collected through your [Quali
 
 {{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
-To open Lineage, go to **Data Observability > Lineage**.
+To open Lineage, go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Lineage{{< /ui >}}.
 
 ## Select anchor assets
 
-Every lineage view centers on an **anchor**: the single asset whose upstream and downstream neighbors you want to explore. Datadog marks the anchor node with an `ANCHOR` badge.
+Every lineage view centers on an **anchor**: the single asset whose upstream and downstream neighbors you want to explore. Datadog marks the anchor node with an {{< ui >}}ANCHOR{{< /ui >}} badge.
 
 To set an anchor, use the search bar at the top of the page:
 
-1. Choose an asset type from the **Any asset** dropdown (for example, *Table*, *Column*, *Dashboard*, or *Job*). Leave it set to **Any asset** to search across all types.
+1. Choose an asset type from the {{< ui >}}Any asset{{< /ui >}} dropdown (for example, {{< ui >}}Table{{< /ui >}}, {{< ui >}}Column{{< /ui >}}, {{< ui >}}Dashboard{{< /ui >}}, or {{< ui >}}Job{{< /ui >}}). Leave it set to {{< ui >}}Any asset{{< /ui >}} to search across all types.
 2. Enter the asset name. Datadog searches all connected sources in the Data Observability Catalog.
 3. Select a result to anchor the graph.
 
-**One Anchor**
+#### One anchor
 
 Search for a single asset by name to make it the anchor for the lineage graph.
-{{< img src="data_observability/lineage/anchors-1-search.png" alt="The anchor search bar with one anchor selected" style="width:100%;" >}}
+{{< img src="data_observability/lineage/anchors-1-search.png" alt="The anchor search bar showing a Select ANCHOR label, an Any asset type dropdown, and a single anchor token for the fct_orders table" style="width:100%;" >}}
 
 The graph centers on the selected anchor and shows its upstream dependencies and downstream consumers.
 {{< img src="data_observability/lineage/anchors-1-map.png" alt="The lineage map with one anchor selected" style="width:100%;" >}}
 
-**Multiple Anchors**
+#### Multiple anchors
 
 Add multiple assets to the search bar to compare related lineage paths in the same view.
-{{< img src="data_observability/lineage/anchors-2-search.png" alt="The anchor search bar with 2 anchors selected" style="width:100%;" >}}
+{{< img src="data_observability/lineage/anchors-2-search.png" alt="The anchor search bar with the Any asset type dropdown and two anchor tokens, fct_orders and int_orders_enriched, joined by an OR operator" style="width:100%;" >}}
 
-Each selected asset is marked with an `ANCHOR` badge, and the graph shows how their upstream and downstream paths connect.
+Each selected asset is marked with an {{< ui >}}ANCHOR{{< /ui >}} badge, and the graph shows how their upstream and downstream paths connect.
 {{< img src="data_observability/lineage/anchors-2-map.png" alt="The lineage map with 2 anchors selected" style="width:100%;" >}}
 
-**Search Query**
+#### Search query
 
 Use an attribute query, such as `schema:staging`, to select a dynamic set of matching assets.
-{{< img src="data_observability/lineage/anchors-n-search.png" alt="The anchor search bar with a dynamic query" style="width:100%;" >}}
+{{< img src="data_observability/lineage/anchors-n-search.png" alt="The anchor search bar with the asset type dropdown set to Table and a schema:staging attribute query used to match a dynamic set of anchors" style="width:100%;" >}}
 
 The graph marks every matching asset as an anchor so you can inspect lineage for the full query result set.
 {{< img src="data_observability/lineage/anchors-n-map.png" alt="The lineage map with many anchors selected via a dynamic query" style="width:100%;" >}}
@@ -66,27 +66,27 @@ The graph renders with the anchors in the center and upstream and downstream nei
 
 After you set an anchor, the lineage graph renders in the main panel. Upstream dependencies appear to the left; downstream consumers appear to the right. Each node shows the asset's name, type, source, and basic stats such as row or column count where available.
 
-The toolbar on the right of the canvas provides **zoom in**, **zoom out**, **Reset view**, and **Center anchors**.
+The toolbar on the right of the canvas provides {{< ui >}}zoom in{{< /ui >}}, {{< ui >}}zoom out{{< /ui >}}, {{< ui >}}Reset view{{< /ui >}}, and {{< ui >}}Center anchors{{< /ui >}}.
 
 The time selector in the top-right corner (`1w`, `Past 1 Week`, and so on) sets the window used to evaluate lineage. Datadog derives relationships from query history and job runs within this window: widen it to surface older or less frequent dependencies, narrow it to show only what's active.
 
 ## Lineage Controls
 
-The **Lineage Controls** panel on the left configures the shape and contents of the graph.
+The {{< ui >}}Lineage Controls{{< /ui >}} panel on the left configures the shape and contents of the graph.
 
 <div class="alert alert-info">Lineage controls do not apply to anchor assets. Anchors remain visible even when depth, filter, or grouping settings would otherwise hide matching assets.</div>
 
 ### Map, List, and Find
 
-Toggle between **Map** (the default graph view) and **List** (a flat, sortable list of every asset in the current slice). Use **List** to export, copy, or scan a large lineage; use **Map** to understand structure visually.
+Toggle between {{< ui >}}Map{{< /ui >}} (the default graph view) and {{< ui >}}List{{< /ui >}} (a flat, sortable list of every asset in the current slice). Use {{< ui >}}List{{< /ui >}} to export, copy, or scan a large lineage; use {{< ui >}}Map{{< /ui >}} to understand structure visually.
 
 The magnifying-glass icon next to the toggle fits the graph to the viewport.
 
-The **Find in map** search box highlights nodes in the current graph by name. Unlike the top-of-page search, it does not change the anchor—it only locates nodes already on screen.
+The {{< ui >}}Find in map{{< /ui >}} search box highlights nodes in the current graph by name. Unlike the top-of-page search, it does not change the anchor—it only locates nodes already on screen.
 
 ### Depth
 
-**Depth** controls how many hops of lineage to load on either side of the anchor.
+{{< ui >}}Depth{{< /ui >}} controls how many hops of lineage to load on either side of the anchor.
 
 - The left selector sets **upstream depth** (levels of parents).
 - The right selector sets **downstream depth** (levels of children).
@@ -98,17 +98,17 @@ Increase depth to find a distant root cause or downstream consumer. Decrease dep
 
 ### Filter
 
-The **Filter** section controls which asset types are displayed. For Snowflake, the available types are **Column** and **Table**; BI integrations add dashboards and reports; jobs add tasks and DAGs. The number next to each type shows how many of those assets exist in the current slice.
+The {{< ui >}}Filter{{< /ui >}} section controls which asset types are displayed. For Snowflake, the available types are {{< ui >}}Column{{< /ui >}} and {{< ui >}}Table{{< /ui >}}; BI integrations add dashboards and reports; jobs add tasks and DAGs. The number next to each type shows how many of those assets exist in the current slice.
 
-Filter when the slice contains the right assets but the graph is too noisy. For example, when scoping the blast radius of a column change, uncheck **Table** to remove table-level clutter and leave **Column** checked.
+Filter when the slice contains the right assets but the graph is too noisy. For example, when scoping the blast radius of a column change, uncheck {{< ui >}}Table{{< /ui >}} to remove table-level clutter and leave {{< ui >}}Column{{< /ui >}} checked.
 
 Filtering does not change the anchor or the depth—it only hides nodes from the rendered graph.
 
 ### Group by
 
-**Group by** sets the level of aggregation. Available levels depend on the source. For Snowflake, you can group by **Accounts**, **Databases**, **Schemas**, **Tables**, or **Columns**.
+{{< ui >}}Group by{{< /ui >}} sets the level of aggregation. Available levels depend on the source. For Snowflake, you can group by {{< ui >}}Accounts{{< /ui >}}, {{< ui >}}Databases{{< /ui >}}, {{< ui >}}Schemas{{< /ui >}}, {{< ui >}}Tables{{< /ui >}}, or {{< ui >}}Columns{{< /ui >}}.
 
-Grouping is most useful for zooming out: group by **Schemas** to see how data flows across a warehouse, then drill down to **Tables** or **Columns** after you find the area of interest.
+Grouping is most useful for zooming out: group by {{< ui >}}Schemas{{< /ui >}} to see how data flows across a warehouse, then drill down to {{< ui >}}Tables{{< /ui >}} or {{< ui >}}Columns{{< /ui >}} after you find the area of interest.
 
 ## Common workflows
 
@@ -118,7 +118,7 @@ When a downstream asset—a dashboard, a model, an ML feature—is broken or sta
 
 1. Anchor on the broken asset (a Looker dashboard, a Snowflake table, a dbt model).
 2. Set downstream depth to `0` to focus on upstream assets.
-3. Group by **Tables** for the broad structure; switch to **Columns** if the issue is at column level.
+3. Group by {{< ui >}}Tables{{< /ui >}} for the broad structure; switch to {{< ui >}}Columns{{< /ui >}} if the issue is at column level.
 4. Step backward through upstream nodes. Failures, freshness anomalies, and schema changes flagged by Quality Monitoring or Jobs Monitoring appear as status indicators on the graph.
 5. Open a flagged node to jump to its quality monitors, recent job runs, or schema history.
 
@@ -129,7 +129,7 @@ Before changing or dropping a column, table, or model, use lineage to see what d
 1. Anchor on the asset you plan to change.
 2. Set downstream depth to `∞` and upstream depth to `0`.
 3. Filter to the asset types you care about—for example, leave dashboards and reports visible to identify affected BI consumers.
-4. Switch to **List** view to export the full list of affected assets or share it with the owning teams.
+4. Switch to {{< ui >}}List{{< /ui >}} view to export the full list of affected assets or share it with the owning teams.
 
 {{< img src="data_observability/lineage/impact-analysis-list-view.png" alt="The List view showing every downstream asset that depends on a given Snowflake table, with type and source columns" style="width:100%;" >}}
 
@@ -137,9 +137,9 @@ Before changing or dropping a column, table, or model, use lineage to see what d
 
 Most integrated sources support column-level lineage.
 
-1. In the search bar, change the asset type to **Column** and search for the column to trace.
+1. In the search bar, change the asset type to {{< ui >}}Column{{< /ui >}} and search for the column to trace.
 2. Anchor on the result.
-3. Group by **Columns** to keep the graph at column granularity.
+3. Group by {{< ui >}}Columns{{< /ui >}} to keep the graph at column granularity.
 
 ## Further Reading
 
