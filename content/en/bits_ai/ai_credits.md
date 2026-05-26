@@ -28,10 +28,10 @@ The following products consume AI Credits:
 
 | Product | What it does |
 |---|---|
-| [Bits AI Assistant][1] | Conversational assistant for searching telemetry, exploring data, and generating dashboards across the Datadog platform. |
-| [Bits AI Dev][2] | AI-assisted code fixes for application code, infrastructure-as-code, and Datadog configuration. |
-| [Bits AI SRE][3] | Autonomous investigations triggered by monitors, incidents, and other signals. |
-| [Agent Builder][4] | Custom agents built on Datadog telemetry and tools. |
+| [Bits AI Assistant][1] | Search, explore, and take action across Datadog using natural language from the web app, mobile, and Slack. |
+| [Bits AI SRE][3] | Resolve issues faster with autonomous alert investigations built for complex environments. |
+| [Bits AI Dev][2] | Generate, review, and refine code in-app to speed up implementation and bug fixing. |
+| [Agent Builder][4] | Build custom AI agents inside Datadog to automate workflows like incident response, report generation, and standards enforcement. |
 
 ## Pricing
 
@@ -61,33 +61,22 @@ These are average credit costs per feature. Actual consumption for any single re
 
 | Feature | Avg. credits per use |
 |---|---|
-| Bits AI Assistant — search and explore telemetry | 0.5 |
-| Bits AI Assistant — dashboard generation | 3 |
-| Bits AI Assistant — cloud cost investigation | 2.1 |
+| Bits AI Assistant — search and explore telemetry | 0.6 |
+| Bits AI Assistant — setup and optimize observability | 0.4 |
+| Bits AI Assistant — root cause analysis | 0.8 |
 | Bits AI SRE — investigation | 6.5 |
 | Bits AI Dev — code fix | 5 |
 | Agent Builder — message | 0.3 |
 
-<div class="alert alert-info">These are the credit consumption rates as of June 1, 2026. Costs for each feature may change as models are optimized or new models become available.</div>
+<div class="alert alert-info">These are the credit consumption rates as of May 26, 2026. Costs for each feature may change as models are optimized or new models become available.</div>
 
 ## Admin controls
 
-### Enable or disable billable AI products
+All AI Credit management lives in **Plan & Usage > AI Credits**. From there, admins can:
 
-Admins can disable all billable AI products with a single org-level toggle. When billable AI products are disabled, users in your organization can still see the product surfaces in Datadog and view past results (for example, previous Bits AI SRE investigations or Bits AI Assistant conversations). New requests are blocked, and users see a message directing them to ask an admin to enable AI.
-
-### Manage AI Credits in Plan & Usage
-
-All AI Credit configuration lives in **Plan & Usage > AI Credits**. From there, admins can:
-
-- View the current month's credit consumption, broken down by AI product.
-- Turn billable AI products on or off (single org-level toggle covering all billable AI products).
-- Receive notifications as your organization approaches its monthly AI Credit limit, with time to add capacity before usage is impacted.
+- **View usage**: See the current month's credit consumption, broken down by AI product.
+- **Enable or disable billable AI products**: A single org-level toggle controls all billable AI products. When disabled, users can still see product surfaces and view past results (for example, previous Bits AI SRE investigations or Bits AI Assistant conversations), but new requests are blocked.
 - **Coming soon**: Set a monthly AI Credit spend cap to block new requests after a configured threshold is reached.
-
-### Track usage
-
-Admins can view AI Credit consumption at any time in **Plan & Usage > AI Credits**, broken down by AI product.
 
 ## Availability
 
@@ -117,10 +106,6 @@ Not exactly. Because the model decides which steps it needs to take to complete 
 ### Can I disable AI Credits billing entirely?
 
 Yes. An admin can disable all billable AI products from **Plan & Usage > AI Credits**. With billable AI products disabled, your organization is not billed for AI Credit consumption.
-
-### What is the difference between AI Credits and other usage-based SKUs?
-
-AI Credits unify billing across Datadog's billable AI products under a single, predictable unit. Instead of separate SKUs and pricing models per AI product, you purchase one currency (credits) that works across [Bits AI Assistant][1], [Bits AI Dev][2], [Bits AI SRE][3], and [Agent Builder][4].
 
 ## Further reading
 
