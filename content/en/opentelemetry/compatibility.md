@@ -57,9 +57,9 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Java][34] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
+| [Java][34] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
+| [Ruby][36] | {{< X >}} | Alpha | {{< X >}} |
 | [PHP][37] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
 
 ## More details

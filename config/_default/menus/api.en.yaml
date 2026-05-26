@@ -3221,6 +3221,110 @@ menu:
         unstable:
           - v2
         order: 111
+    - name: Get the version history of a dataset
+      url: '#get-the-version-history-of-a-dataset'
+      identifier: security-monitoring-get-the-version-history-of-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetVersionHistory
+        unstable:
+          - v2
+        order: 126
+    - name: Get a dataset at a specific version
+      url: '#get-a-dataset-at-a-specific-version'
+      identifier: security-monitoring-get-a-dataset-at-a-specific-version
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetByVersion
+        unstable:
+          - v2
+        order: 125
+    - name: Update a dataset
+      url: '#update-a-dataset'
+      identifier: security-monitoring-update-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 123
+    - name: Get a dataset
+      url: '#get-a-dataset'
+      identifier: security-monitoring-get-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 122
+    - name: Delete a dataset
+      url: '#delete-a-dataset'
+      identifier: security-monitoring-delete-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 124
+    - name: Get dataset dependencies
+      url: '#get-dataset-dependencies'
+      identifier: security-monitoring-get-dataset-dependencies
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchGetSecurityMonitoringDatasetDependencies
+        unstable:
+          - v2
+        order: 121
+    - name: Create a dataset
+      url: '#create-a-dataset'
+      identifier: security-monitoring-create-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 120
+    - name: List datasets
+      url: '#list-datasets'
+      identifier: security-monitoring-list-datasets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringDatasets
+        unstable:
+          - v2
+        order: 119
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
