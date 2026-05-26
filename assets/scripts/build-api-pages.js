@@ -8,21 +8,23 @@ const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
 const ENUM_DISPLAY_LIMIT = 10;
 
-// marked v17+ is ESM-only; require() doesn't work. init() pre-loads it via dynamic import()
-// before processSpecs() runs. Jest tests use babel-jest which transforms the ESM import.
+// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
 let marked;
-function loadMarked() {
-  if (!marked || typeof marked.parse !== 'function') {
-    throw new Error('marked not loaded. Ensure init() has been awaited before calling this function.');
-  }
-  return marked;
+try {
+  const markedModule = require('marked/lib/marked.umd.js');
+  marked = markedModule.marked || markedModule.default || markedModule;
+} catch (_) {
+  const markedModule = require('marked');
+  marked = { parse: markedModule.parse };
+}
+if (!marked || typeof marked.parse !== 'function') {
+  throw new Error('marked.parse not found. Check marked package version.');
 }
 
-const supportedLangs = ['en', 'fr', 'ja', 'ko'];
+const supportedLangs = ['en'];
 
 /** Parse markdown, add table-cell class to paragraph tags, and add id to headings (for API description tables). */
 function parseDescWithTableCell(desc) {
-  loadMarked();
   const html = marked.parse(desc || '', typeof marked.use === 'function' ? {} : undefined);
   let out = (html || '').trim()
     .replace(/<p>/g, '<p class="table-cell">')
@@ -1147,9 +1149,7 @@ const findSpecFiles = () => {
   return specs;
 };
 
-const init = async () => {
-  const m = await import('marked');
-  marked = { parse: (m.marked || m.default || m).parse };
+const init = () => {
   const specs = findSpecFiles();
   processSpecs(specs);
 };

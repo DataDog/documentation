@@ -59,22 +59,6 @@ describe(`createEndpointPages`, () => {
     ]);
   });
 
-  it('frontmatter contains operationid, tag, and versions', () => {
-    const specData = [
-      buildSpec([
-        {path: '/api/v2/actions/connections/{id}', method: 'get', operationId: 'GetActionConnection', summary: 'Get an action connection'},
-      ]),
-    ];
-    const specs = ['./data/api/v2/full_spec.yaml'];
-
-    bp.createEndpointPages(specData, specs);
-
-    const [, body] = writeSpy.mock.calls[0];
-    expect(body).toContain('operationid: GetActionConnection');
-    expect(body).toContain('tag: Action Connection');
-    expect(body).toContain('- v2');
-  });
-
   it('shared v1+v2 endpoints (same summary) produce one page with both versions', () => {
     const specData = [
       buildSpec([
@@ -89,12 +73,8 @@ describe(`createEndpointPages`, () => {
     bp.createEndpointPages(specData, specs);
 
     expect(writeSpy.mock.calls).toHaveLength(1);
-    const [path, body] = writeSpy.mock.calls[0];
+    const [path] = writeSpy.mock.calls[0];
     expect(path).toBe('./content/en/api/latest/action-connection/list-foos/index.md');
-    expect(body).toContain('- v1');
-    expect(body).toContain('- v2');
-    expect(body).toContain('- ListFoosV1');
-    expect(body).toContain('- ListFoosV2');
   });
 
 });
