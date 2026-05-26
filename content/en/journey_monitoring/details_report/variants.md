@@ -1,6 +1,5 @@
 ---
 title: Journey Variants
-private: true
 description: Journey variants are versions of a journey that contain a unique sequence of intermediate steps between the journey's start and end.
 further_reading:
 - link: "/journey_monitoring/"

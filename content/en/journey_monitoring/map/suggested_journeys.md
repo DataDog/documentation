@@ -1,6 +1,5 @@
 ---
 title: Suggested Journeys
-private: true
 description: Create journeys based on Datadog's automatically generated suggestions.
 further_reading:
 - link: '/journey_monitoring/'
