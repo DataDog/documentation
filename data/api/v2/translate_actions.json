@@ -4533,6 +4533,44 @@
     "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
+  "ListSecurityMonitoringDatasets": {
+    "description": "List all Cloud SIEM datasets available to the organization, including both\ncustomer-defined datasets and Datadog out-of-the-box datasets.",
+    "summary": "List datasets"
+  },
+  "CreateSecurityMonitoringDataset": {
+    "description": "Create a new Cloud SIEM dataset. A dataset bundles a data source, a set of\nindexes, and a search query that can be referenced from detection rules.",
+    "summary": "Create a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a Cloud SIEM dataset."
+  },
+  "BatchGetSecurityMonitoringDatasetDependencies": {
+    "description": "Return, for each of the requested datasets, the list of detection rules that depend\non it. Useful for understanding the impact of updating or deleting a dataset.",
+    "summary": "Get dataset dependencies",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving dependencies of a batch of datasets."
+  },
+  "DeleteSecurityMonitoringDataset": {
+    "description": "Delete a Cloud SIEM dataset. Out-of-the-box datasets cannot be deleted and\ndeleting a dataset that is referenced by a detection rule is rejected.",
+    "summary": "Delete a dataset"
+  },
+  "GetSecurityMonitoringDataset": {
+    "description": "Get the current version of a Cloud SIEM dataset by ID.",
+    "summary": "Get a dataset"
+  },
+  "UpdateSecurityMonitoringDataset": {
+    "description": "Update an existing Cloud SIEM dataset. The current version of the dataset can be\nprovided to detect concurrent modifications.",
+    "summary": "Update a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a Cloud SIEM dataset."
+  },
+  "GetSecurityMonitoringDatasetByVersion": {
+    "description": "Retrieve a specific historical version of a Cloud SIEM dataset.",
+    "summary": "Get a dataset at a specific version"
+  },
+  "GetSecurityMonitoringDatasetVersionHistory": {
+    "description": "Retrieve the version history of a Cloud SIEM dataset, including the changes made at each version.",
+    "summary": "Get the version history of a dataset"
+  },
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get entity context"
