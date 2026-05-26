@@ -29,7 +29,7 @@ After [completing setup][6], do one of the following to start a code session:
 - Enter a freeform prompt at [**Code Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
 - Invoke Bits AI Dev Agent in a [supported Datadog product][9]
 
-A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
+A code session can also be created when another Bits AI agent (like [Bits AI Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
 
 ### View and manage code sessions
 On **[Code Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
@@ -44,7 +44,7 @@ Bits AI Dev Agent can suggest code improvements in the following Datadog product
 |---------------------------|--------------------------------------------------------------------|
 | [APM][20]                 | Proposes code changes for relevant [APM Recommendations][21]|
 | [Bits AI SRE][17]         | Generates code remediations based on Bits AI SRE investigations |
-| [Bits Assistant][16]      | Suggests code changes arising from Bits Assistant conversations |
+| [Bits AI Assistant][16]   | Suggests code changes arising from Bits AI Assistant conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
 | [Code Security][2]        | Remediates code vulnerabilities individually or in bulk  |

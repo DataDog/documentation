@@ -33,7 +33,7 @@ The [User Profiles][7] page lists the users who are interacting with your applic
 Each profile has attributes to help you better segment your users. You can conduct a full-text search or sort and filter based on any of these attributes. You can also customize this page with attributes relevant to your analytic needs. See the [Custom Attributes section](#use-custom-attributes-to-enrich-profiles) to learn how.
 
 
-{{% collapse-content title="List of user profile attributes" level="h5" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="List of user profile attributes" level="h5" expanded=true id="user-profile-attributes" %}}
 
 <!-- #### User attributes  -->
 User ID `REQUIRED`

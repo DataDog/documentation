@@ -18,7 +18,7 @@ Your coding assistant, such as [Cursor][1] or [Claude Code][2], detects your pro
 Agentic Onboarding is available for the following frameworks:
 - **Error Tracking, RUM, and Product Analytics**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue.
 - **Infrastructure Monitoring with Kubernetes**: Terraform, Ansible, Kustomize, and more.
-- **Serverless Monitoring for AWS Lambda**: Terraform, AWS CDK, Serverless Framework, and more.
+- **Serverless Monitoring**: AWS Lambda (Terraform, AWS CDK, Serverless Framework, and more); GCP Cloud Run containers and Cloud Run functions.
 
 ## Setup
 
@@ -82,6 +82,7 @@ The Datadog AI Setup CLI configures your project without a coding assistant.
    | Infrastructure Monitoring | `infra-monitoring` |
    | Product Analytics | `product-analytics` |
    | Real User Monitoring | `rum` |
+   | Serverless Monitoring | `serverless` |
    | Studio | `studio` |
 
    ```shell
@@ -133,7 +134,26 @@ To get started:
    {{% /tab %}}
 
    {{% tab "Serverless Monitoring" %}}
-   {{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
+   **AWS Lambda**
+   {{< code-block lang="text" >}}Help me monitor my AWS Lambda functions with Datadog{{< /code-block >}}
+
+   ```shell
+   npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+   ```
+
+   **GCP Cloud Run containers**
+   {{< code-block lang="text" >}}Help me monitor my GCP Cloud Run services with Datadog{{< /code-block >}}
+
+   ```shell
+   npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+   ```
+
+   **GCP Cloud Run functions**
+   {{< code-block lang="text" >}}Help me monitor my GCP Cloud Run functions with Datadog{{< /code-block >}}
+
+   ```shell
+   npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions
+   ```
    {{% /tab %}}
    {{< /tabs >}}
 

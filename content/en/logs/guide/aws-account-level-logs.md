@@ -23,20 +23,20 @@ https://datadog-cloudformation-template.s3.amazonaws.com/aws_account_level_logs/
 {{< /code-block >}}
 
 2. Go to [CloudFormation][1] in the AWS console.
-3. Click **Create stack**.
+3. Click {{< ui >}}Create stack{{< /ui >}}.
     - Select `With new resources (standard)`.
-4. Leave the options to **Choose an existing template** and **Amazon S3 URL** checked.
-5. In the **Amazon S3 URL** field, paste the URL of the CloudFormation template.
-6. Click **Next**.
-7. In the **Stack name** field, provide a descriptive name such as `datadog-account-level-logs-stack`.
-8. In the **ApiKey** field, paste a valid [Datadog API key][4] value.
-9. In the **Regions** field, enter a comma-separated list of AWS region codes (for example, `us-east-1`) corresponding to the regions to include for the account-level log subscription.
-10. In the **DatadogHttpEndpointUrl** field, select the URL corresponding to your [Datadog site][5].
-11. Click **Next**.
+4. Leave the options to {{< ui >}}Choose an existing template{{< /ui >}} and {{< ui >}}Amazon S3 URL{{< /ui >}} checked.
+5. In the {{< ui >}}Amazon S3 URL{{< /ui >}} field, paste the URL of the CloudFormation template.
+6. Click {{< ui >}}Next{{< /ui >}}.
+7. In the {{< ui >}}Stack name{{< /ui >}} field, provide a descriptive name such as `datadog-account-level-logs-stack`.
+8. In the {{< ui >}}ApiKey{{< /ui >}} field, paste a valid [Datadog API key][4] value.
+9. In the {{< ui >}}Regions{{< /ui >}} field, enter a comma-separated list of AWS region codes (for example, `us-east-1`) corresponding to the regions to include for the account-level log subscription.
+10. In the {{< ui >}}DatadogHttpEndpointUrl{{< /ui >}} field, select the URL corresponding to your [Datadog site][5].
+11. Click {{< ui >}}Next{{< /ui >}}.
 12. Configure additional stack options as desired.
-13. Click **Next**.
+13. Click {{< ui >}}Next{{< /ui >}}.
 14. Review the stack options, and click the checkbox stating `I acknowledge that AWS CloudFormation might create IAM resources with custom names`.
-15. Click **Submit**.
+15. Click {{< ui >}}Submit{{< /ui >}}.
 
 ### Manual
 
@@ -105,7 +105,7 @@ aws s3api create-bucket \
 ```
 
 3. Create an IAM role, specifying the trust policy file:
-   **Note**: The returned **Role.Arn** value is used in a later step.
+   **Note**: The returned `Role.Arn` value is used in a later step.
 
 ```bash
 aws iam create-role \
@@ -149,23 +149,23 @@ aws iam put-role-policy \
 The following steps guide you through creating and configuring an Amazon Data Firehose delivery stream.
 
 1. Go to [Amazon Data Firehose][202] in the AWS console.
-2. Click **Create Firehose stream**.
-3. In the **Source** field, select the source of your logs:
+2. Click {{< ui >}}Create Firehose stream{{< /ui >}}.
+3. In the {{< ui >}}Source{{< /ui >}} field, select the source of your logs:
    - Select `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis Data Stream
    - Select `Direct PUT` if your logs are coming directly from a CloudWatch log group
-4. In the **Destination** field, select `Datadog`.
-5. If your **Source** is `Amazon Kinesis Data Streams`, select your Kinesis data stream under **Source settings**.
+4. In the {{< ui >}}Destination{{< /ui >}} field, select `Datadog`.
+5. If your {{< ui >}}Source{{< /ui >}} is `Amazon Kinesis Data Streams`, select your Kinesis data stream under {{< ui >}}Source settings{{< /ui >}}.
 6. Optionally, give the Firehose stream a descriptive name.
-7. In the **Destination settings** section, choose the Datadog logs HTTP endpoint URL that corresponds to your [Datadog site][203].
-8. For **Authentication**, a valid [Datadog API key][204] is needed. You can either:
-     - Select **Use API key** and paste the key's value in the **API key** field.
-     - Select **Use AWS Secrets Manager** and choose a secret containing your valid Datadog API key value in the **Secret name** dropdown.
-9. For **Content encoding**, select `GZIP`.
-10. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters** (which are attached as tags to your logs).  
-     **Note**: Datadog recommends setting the **Buffer size** to `2` MiB if the logs are single-line messages.
-11. In the **Backup settings** section, select the S3 bucket for receiving any failed events that exceed the retry duration.  
+7. In the {{< ui >}}Destination settings{{< /ui >}} section, choose the Datadog logs HTTP endpoint URL that corresponds to your [Datadog site][203].
+8. For {{< ui >}}Authentication{{< /ui >}}, a valid [Datadog API key][204] is needed. You can either:
+     - Select {{< ui >}}Use API key{{< /ui >}} and paste the key's value in the {{< ui >}}API key{{< /ui >}} field.
+     - Select {{< ui >}}Use AWS Secrets Manager{{< /ui >}} and choose a secret containing your valid Datadog API key value in the {{< ui >}}Secret name{{< /ui >}} dropdown.
+9. For {{< ui >}}Content encoding{{< /ui >}}, select `GZIP`.
+10. Optionally, configure the {{< ui >}}Retry duration{{< /ui >}}, the buffer settings, or add {{< ui >}}Parameters{{< /ui >}} (which are attached as tags to your logs).  
+     **Note**: Datadog recommends setting the {{< ui >}}Buffer size{{< /ui >}} to `2` MiB if the logs are single-line messages.
+11. In the {{< ui >}}Backup settings{{< /ui >}} section, select the S3 bucket for receiving any failed events that exceed the retry duration.  
      **Note**: To ensure any logs that fail to be delivered by the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs from this S3 bucket][205].
-12. Click **Create Firehose stream**.
+12. Click {{< ui >}}Create Firehose stream{{< /ui >}}.
 
 #### Create role for CloudWatch Logs
 
@@ -196,7 +196,7 @@ aws iam create-role \
   --role-name CWLtoKinesisFirehoseRole \
   --assume-role-policy-document file://./TrustPolicyForCWL.json
 ```
-   **Note**: The returned **Role.Arn** value is used in a later step.
+   **Note**: The returned `Role.Arn` value is used in a later step.
 
 3. Create a `./PermissionsForCWL.json` file with the following statement:
    - Replace `<REGION>` with the region containing your Datadog Forwarder Lambda function.
