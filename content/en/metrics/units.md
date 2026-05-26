@@ -1,5 +1,6 @@
 ---
 title: Metrics Units
+description: "Set units on your metrics so values display at the right order of magnitude on graphs and widgets."
 aliases:
 - /developers/metrics/metrics_units
 - /developers/metrics/units/
