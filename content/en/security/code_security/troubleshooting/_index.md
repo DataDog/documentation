@@ -116,7 +116,7 @@ You can also run datadog-static-analyzer with the `--debug` option to get more i
 
 **Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
 
-## Software Composition Analysis
+## Software Composition Analysis (SCA)
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
 
