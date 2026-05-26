@@ -350,6 +350,7 @@ unsupported_sites:
   jetbrains-ides: [gov,gov2]
   jira-service-management-ops: [gov,gov2]
   jira_error_tracking: [gov,gov2]
+  key_management_v1: [gov,gov2] # V1 Key Management APIs are disabled on US1-FED
   launchdarkly: [gov,gov2]
   linear: [gov,gov2]
   live_debugger: [gov,gov2]

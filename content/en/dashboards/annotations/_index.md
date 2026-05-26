@@ -3,6 +3,10 @@ title: Annotations
 description: Learn how to add, customize, and manage annotations on timeseries widgets in dashboards and notebooks to highlight important events.
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Adding hyperlinks to annotation comments is not available on your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Annotations let you manually place markers with descriptions on timeseries widgets to highlight key events like deploys, incidents, or outages. Two annotation types are available:

@@ -2,6 +2,7 @@
 title: Automations
 aliases:
 - /incident_response/incident_management/incident_settings/automations/
+site_support_id: workflow-automation
 further_reading:
 - link: "/actions/workflows/"
   tag: "Documentation"
@@ -18,6 +19,7 @@ further_reading:
 Automations enable you to customize and extend incident management to fit your organization's specific processes. Automatically trigger actions based on incident events such as severity changes, or state transitions.
 
 Automations are powered by [Datadog Workflow Automation][1] and are included in your Incident Management billing at no additional cost.
+
 
 ## Prerequisites
 
