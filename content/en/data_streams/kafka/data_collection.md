@@ -3,11 +3,11 @@ title: Data Collection
 description: Metrics, configurations, and capabilities collected by Data Streams Monitoring's Kafka Monitoring when cluster monitoring is enabled.
 ---
 
-Data Streams Monitoring's [Kafka Monitoring][6] uses the [Kafka Consumer integration][1] to collect cluster health data. On top of the integration's defaults, it collects additional data and adds ability to perform actions described in this doc.
+Data Streams Monitoring (DSM)'s [Kafka Monitoring][6] uses the [Kafka Consumer integration][1] to collect cluster health data. In addition to the integration's default collection, enabling cluster monitoring collects extra data and unlocks the actions described on this page.
 
 ## Metrics
 
-To collect the **DSM only** [Kafka Consumer integration metrics][5], set `enable_cluster_monitoring: true`. See [Kafka Monitoring Setup][4] for how to configure the check.
+To collect the **DSM-only** [Kafka Consumer integration metrics][5], set `enable_cluster_monitoring: true`. See [Kafka Monitoring Setup][4] for how to configure the check.
 
 ## Configurations and schemas
 
