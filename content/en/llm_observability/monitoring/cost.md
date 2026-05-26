@@ -32,7 +32,7 @@ To manually supply cost information, follow the instrumentation steps described 
 
 #### How token counts are calculated
 The following relationships apply to token usage fields:
-{{< img src="llm_observability/llm_token_relationships.png" alt="Token relationships in LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/llm_token_relationships.png" alt="Diagram showing how LLM Observability computes token counts: total_tokens is the sum of input_tokens and output_tokens; input_tokens is the sum of non_cached_input_tokens, cache_read_input_tokens, and cache_write_input_tokens; reasoning_output_tokens is a subset of output_tokens." style="width:100%;" >}}
 
 When all sub-components of a token field are provided, Datadog automatically calculates the parent token field, so it does not need to be sent separately.
 
