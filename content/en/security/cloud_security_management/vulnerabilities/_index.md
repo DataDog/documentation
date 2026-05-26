@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
+- link: "/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities"
+  tag: "Documentation"
+  text: "Link a Dockerfile to vulnerabilities detected in production"
 ---
 
 ## Overview
@@ -35,7 +38,7 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 
 ## Key capabilities
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -102,6 +105,14 @@ In [Container Images][7], you can trace vulnerabilities found in an image to spe
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
 
+## Trace production vulnerabilities to source code
+
+When Datadog detects a CVE on a running container image, it can link the CVE directly to the Dockerfile and commit that introduced the vulnerable package. This closes the gap between a production alert and the code change that caused it, giving developers the context they need to remediate at the source rather than chasing package versions across registries.
+
+To enable this code-to-cloud mapping, add OCI image annotations to your container images at build time. Datadog uses these annotations to display a preview of the Dockerfile inside the Container Image Vulnerabilities panel and to surface the exact repository, commit, and file path associated with the vulnerability.
+
+To set up source linking, see [Link Dockerfile to vulnerabilities][22] in the CI/CD container image scanning guide.
+
 ## Automation and Jira integration
 Make Cloud Security Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
 - Get alerted upon detection of an exploitable vulnerability for your scope
@@ -142,6 +153,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
 [21]: /security/cloud_security_management/setup/ci_cd
+[22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 
 ## Further reading
 

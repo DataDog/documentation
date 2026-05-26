@@ -28,6 +28,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-observability/"
       tag: "Blog"
       text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
+    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
+      tag: "Learning Center"
+      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
 cascade:
     algolia:
         rank: 70

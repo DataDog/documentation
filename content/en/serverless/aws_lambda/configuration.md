@@ -10,6 +10,9 @@ further_reading:
   - link: '/integrations/github'
     tag: 'Documentation'
     text: 'Datadog GitHub integration'
+  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+    tag: "Learning Center"
+    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -614,9 +617,9 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 
 3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed.
 
-4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
-   - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
-   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints.
+4. For complete end-to-end FIPS compliance, configure your Lambda function to use a Datadog for Government site:
+   - Set `DD_SITE` to `ddog-gov.com` (US1-FED) or `us2.ddog-gov.com` (US2-FED)
+   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the Datadog for Government sites have FIPS-compliant intake endpoints.
 
 ## Propagate trace context over AWS resources
 
@@ -624,7 +627,7 @@ Datadog automatically injects the trace context into outgoing AWS SDK requests a
 
 ## Merge X-Ray and Datadog traces
 
-AWS X-Ray supports tracing through certain AWS managed services such as AppSync and Step Functions, which is not supported by Datadog APM natively. You can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
+For AWS managed services that Datadog APM doesn't yet instrument (such as AppSync), you can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
 
 ## Enable AWS Lambda code signing
 
@@ -728,7 +731,7 @@ When the `DD_SERVERLESS_APPSEC_ENABLED` environment variable is set to `true`, t
 
 ## Configure Auto-linking for DynamoDB PutItem
 _Available for Python and Node.js runtimes_.
-When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][55] feature automatically detects linked spans. 
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][55] feature automatically detects linked spans.
 To enable Span Auto-linking for [DynamoDB Change Streams][56]' `PutItem` operation, configure primary key names for your tables.
 
 {{< tabs >}}
@@ -767,7 +770,7 @@ This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Man
 
 ## Visualize and model AWS services by resource name
 
-These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services. 
+These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services.
 
 Service names reflect the actual AWS resource name rather than only the AWS service:
 * `aws.lambda` → `[function_name]`

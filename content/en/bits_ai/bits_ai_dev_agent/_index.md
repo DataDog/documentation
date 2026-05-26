@@ -11,25 +11,25 @@ further_reading:
 
 ## Overview
 
-{{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent suggesting a fix for an IndexError in a Django app" style="width:100%;">}}
+Bits AI Dev Agent is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
 
-Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
+{{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [code session][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
 To get started with Bits AI Dev Agent, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
 
 ## Code sessions
 A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
 
-{{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
+{{< img src="bits_ai/dev_agent/code_fix.png" alt="A code session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
 
 ### Start a code session
 After [completing setup][6], do one of the following to start a code session:
 - Enter a freeform prompt at [**Code Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
 - Invoke Bits AI Dev Agent in a [supported Datadog product][9]
 
-A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
+A code session can also be created when another Bits AI agent (like [Bits AI Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
 
 ### View and manage code sessions
 On **[Code Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
@@ -38,15 +38,19 @@ Click a session to view its details and continue working with the Dev Agent. To 
 
 ## Supported Datadog products
 
-Bits AI Dev Agent is available for the following Datadog products:
+Bits AI Dev Agent can suggest code improvements in the following Datadog products:
 
-| Product                   | Availability         | Capabilities                                                       |
-|---------------------------|----------------------|--------------------------------------------------------------------|
-| [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
-| [Code Security][2]        | Preview              | Remediates code vulnerabilities individually or in bulk    |
-| [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests remain stable                                                         |
-| [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
-| [Containers][12]          | Preview              | Provides code changes for [Kubernetes Remediations][13]                  |
+| Product                   | Capabilities                                                       |
+|---------------------------|--------------------------------------------------------------------|
+| [APM][20]                 | Proposes code changes for relevant [APM Recommendations][21]|
+| [Bits AI SRE][17]         | Generates code remediations based on Bits AI SRE investigations |
+| [Bits AI Assistant][16]   | Suggests code changes arising from Bits AI Assistant conversations |
+| [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
+| [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
+| [Code Security][2]        | Remediates code vulnerabilities individually or in bulk  |
+| [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
+| [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
+| [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
 
 **Note**: Enabling Bits AI Dev Agent is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
 
@@ -99,9 +103,9 @@ Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Managem
 
 [Auto-push](#auto-push) is available for this feature. 
 
-### Product recommendations
+### In-product recommendations
 
-Bits AI Dev Agent applies automated code changes based on Datadog insights such as CCM Recommendations, APM Recommendations, and Profiling Insights.
+Bits AI Dev Agent suggests code improvements and fixes in various Datadog products, such as CCM Recommendations, [APM Recommendations][21], and Profiling Insights. See [Supported Datadog products][9] for a full list.
 
 ### Code security
 
@@ -138,3 +142,8 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [17]: /bits_ai/bits_ai_sre/
 [18]: #start-a-code-session
 [19]: #code-sessions
+[20]: /tracing/
+[21]: /tracing/recommendations/
+[22]: /cloud_cost_management/
+[23]: /cloud_cost_management/recommendations
+[24]: /tests/flaky_management#ai-powered-flaky-test-fixes

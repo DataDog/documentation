@@ -129,7 +129,7 @@ The metric description helps you understand what a metric represents, why it exi
 
 #### AI-generated description
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -142,7 +142,7 @@ To enable auto-generated descriptions from source code, ensure that you've insta
 
 ## Source Code
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">Metric Source Code is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

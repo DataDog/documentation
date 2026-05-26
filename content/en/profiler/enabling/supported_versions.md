@@ -53,14 +53,14 @@ The following table outlines additional profiling features by language. For full
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/enabling/java/
-[2]: /profiler/enabling/python/
-[3]: /profiler/enabling/go/
-[4]: /profiler/enabling/ruby/
-[5]: /profiler/enabling/nodejs/
-[6]: /profiler/enabling/dotnet/
-[7]: /profiler/enabling/php/
-[8]: /profiler/enabling/ddprof/
+[1]: /profiler/enabling/?prog_lang=java
+[2]: /profiler/enabling/?prog_lang=python
+[3]: /profiler/enabling/?prog_lang=go
+[4]: /profiler/enabling/?prog_lang=ruby
+[5]: /profiler/enabling/?prog_lang=node_js
+[6]: /profiler/enabling/?prog_lang=dot_net
+[7]: /profiler/enabling/?prog_lang=php
+[8]: /profiler/enabling/?prog_lang=rust
 [9]: https://github.com/DataDog/dd-trace-java/releases
 [10]: https://github.com/DataDog/dd-trace-py/releases
 [11]: https://github.com/DataDog/dd-trace-go/releases
@@ -69,7 +69,7 @@ The following table outlines additional profiling features by language. For full
 [14]: https://github.com/DataDog/dd-trace-dotnet/releases
 [15]: https://github.com/DataDog/dd-trace-php/releases
 [16]: https://github.com/DataDog/ddprof/releases
-[17]: /profiler/enabling/java/#requirements
+[17]: /profiler/enabling/?prog_lang=java#requirements
 [18]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [19]: /profiler/connect_traces_and_profiles/#endpoint-profiling
 [20]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view

@@ -21,6 +21,24 @@ Set up Datadog Feature Flags for your applications. Follow the platform-specific
 
 {{< partial name="feature_flags/feature_flags_client.html" >}}
 
+## Testing with in-memory providers
+
+Datadog supports these testing approaches:
+
+- **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider end-to-end, including the CDN-delivered flag assignments.
+- **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic and offline.
+
+This section covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
+
+A typical test follows this pattern:
+
+1. Build a map of flag keys to variants in your test setup.
+2. Register an `InMemoryProvider` with that map through the OpenFeature API.
+3. Call the OpenFeature client in the units being tested. The `InMemoryProvider` returns the flag assignments configured at test setup.
+4. Reset the provider in test teardown to avoid cross-test state leakage.
+
+See your platform's SDK page (select from the top of this page) for a concrete test example.
+
 ## Context attribute requirements
 
 <div class="alert alert-warning">

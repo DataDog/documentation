@@ -11,7 +11,7 @@ algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

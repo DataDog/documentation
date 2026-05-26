@@ -24,7 +24,7 @@ further_reading:
   text: "Learn more about Source Code Integration"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
     The Datadog extension for JetBrains IDEs is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>

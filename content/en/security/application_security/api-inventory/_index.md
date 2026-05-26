@@ -116,7 +116,7 @@ What actions you take depend on each of the attack surfaces:
 
 <div class="alert alert-info">Static Endpoint Discovery is in Preview.</div>
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 

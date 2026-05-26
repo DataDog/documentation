@@ -13,6 +13,10 @@ further_reading:
 - link: "/synthetics/dashboards/browser_test/"
   tag: "Documentation"
   text: "Learn about the Browser Test Performance Dashboard"
+- link: "https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing"
+  tag: "Learning Center"
+  text: "Getting Started with Synthetic Monitoring & Browser Testing"
+
 ---
 
 ## Overview

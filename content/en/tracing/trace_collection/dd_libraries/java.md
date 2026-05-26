@@ -18,6 +18,10 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
+    - link: "https://learn.datadoghq.com/courses/apm-java-host"
+      tag: "Learning Center"
+      text: "Set up APM for Java applications"
+
 ---
 ## Compatibility requirements
 

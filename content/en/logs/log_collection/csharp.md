@@ -300,7 +300,7 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     ```
 3. Make sure the Agent user has read access permissions to the log file.
 4. [Restart the Agent][5].
-5. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+5. Run the [Agent's status subcommand][6] and look for `csharp` under the {{< ui >}}Checks{{< /ui >}} section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 
@@ -346,7 +346,7 @@ To enable Agentless logging, set the following environment variables:
 
 `DD_SITE`
 : The name of [your Datadog site][16]. Choose from one of the following examples:<br>
-**Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ddog-gov.com` (US1-FED) <br>
+**Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ap1.datadoghq.com` (AP1), `ap2.datadoghq.com` (AP2), `ddog-gov.com` (US1-FED), `us2.ddog-gov.com` (US2-FED) <br>
 **Default**: `datadoghq.com` (US1)
 
 `DD_LOGS_INJECTION`

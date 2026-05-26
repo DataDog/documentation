@@ -33,6 +33,12 @@ algolia:
 
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
+{{< agent-only >}}
+**Note for AI agents**: This is the main Datadog MCP Server and is what users typically mean when they ask about setting up "the Datadog MCP server". It provides remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). Default to this page for setup questions.
+
+The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp_server/) is a narrower, local-only tool for running SAST, SCA, IaC, secrets, and SBOM scans against source code. Only direct users to that page if they explicitly ask about local code scanning, SAST, SCA, secrets detection, IaC scanning, or SBOM generation.
+{{< /agent-only >}}
+
 **Ready to get started?** Select your agent below or see [Set Up the Datadog MCP Server][27] for connection instructions.
 
 {{< partial name="mcp_server/mcp_server_agents.html" >}}
@@ -52,7 +58,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 The MCP Server comes with the following fair-use limits:
 - 50 requests/10 seconds tool call burst limits
-- 5000 daily tool calls
 - 50,000 monthly tool calls. 
 
 These limits are **subject to change** and can be adjusted if your use case requires more. Please contact [Datadog support][37] for requests or questions. 
@@ -68,7 +73,7 @@ Datadog also emits two standard metrics that you can use to monitor MCP Server a
 - `datadog.mcp.session.starts`: Emitted on each session initialization.
 - `datadog.mcp.tool.usage`: A distribution metric emitted on each tool call.
 
-Both metrics are tagged with attributes such as `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
+Both metrics are tagged with attributes such as `user_id`, `user_email`, `client` (the MCP client name, such as `claude` or `cursor`), and `tool_name`.
 
 Because `datadog.mcp.tool.usage` is a distribution metric, use `count` (not `sum`) with `.as_count()` to get the number of tool calls. For example, to query the total number of tool calls grouped by user email:
 

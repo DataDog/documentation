@@ -46,7 +46,7 @@ The following conditional variables are available:
 | `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
-| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
+| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `WARNING` or `OK`             |
 | `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
 | `{{#is_alert_to_warning}}` | The monitor transitions from `ALERT` to `WARNING`                  |
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |

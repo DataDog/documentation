@@ -77,7 +77,7 @@ Configure the Dev Agent's runtime environment, including network access policies
 
 By default, the Dev Agent has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits AI Dev** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
-The default allowlist includes the following domains:
+The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
 | Language | Domains |
 |---|---|
@@ -89,6 +89,7 @@ The default allowlist includes the following domains:
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
+| Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 
 ### Configure repository environment
 

@@ -10,7 +10,7 @@ further_reading:
   text: "Measure and optimize security team efficiency with Cloud SIEM security operational metrics"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Workflow Automation is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

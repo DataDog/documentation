@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about the Deployment Gates explorer"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

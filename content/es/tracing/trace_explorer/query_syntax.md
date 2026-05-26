@@ -17,55 +17,54 @@ aliases:
 - /es/tracing/app_analytics/analytics
 - /es/tracing/trace_search_and_analytics/query_syntax
 - /es/tracing/trace_explorer/trace_groups
-description: Búsqueda global de todas tus trazas (traces) con etiquetas (tags)
+description: Búsqueda global de todas tus trazas con etiquetas
 further_reading:
 - link: /getting_started/search/
   tag: Documentación
-  text: Empezando con las búsquedas en Datadog
+  text: Introducción a la búsqueda en Datadog
 - link: /tracing/trace_collection/
   tag: Documentación
-  text: Aprender a configurar el rastreo de APM con tu aplicación
+  text: Aprende a configurar el trazado de APM en tu aplicación
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentación
-  text: Comprender cómo leer una traza de Datadog
+  text: Entiende cómo leer una traza de Datadog
 - link: /tracing/software_catalog/
   tag: Documentación
-  text: Descubrir y catalogar los servicios que informan a Datadog
+  text: Descubre y cataloga los servicios que reportan a Datadog
 - link: /tracing/services/service_page/
   tag: Documentación
-  text: Más información sobre servicios en Datadog
+  text: Aprende más sobre los servicios en Datadog
 - link: /tracing/services/resource_page/
   tag: Documentación
-  text: Profundizar en el rendimiento de tus recursos y trazas (traces)
+  text: Profundiza en el rendimiento de tus recursos y trazas
 title: Sintaxis de consulta
 ---
+## Consulta de búsqueda {#search-query}
 
-## Consulta de búsqueda
+Todos los parámetros de búsqueda están contenidos en la URL de la página, lo que puede ser útil para compartir tu visualización.
 
-Todos los parámetros de búsqueda se incluyen en la url de la página, lo que puede ser útil para compartir tu vista.
-
-### Sintaxis de búsqueda
+### Sintaxis de búsqueda {#search-syntax}
 
 Una consulta se compone de *términos* y *operadores*.
 
-Existen dos tipos de *términos*:
+Hay dos tipos de *términos*:
 
-* **Atributo de tramo**: contenido del tramo (span), recopilado con instrumentación automática o manual en la aplicación.
-* **Etiqueta de tramo**: mejoras de contexto relacionados con el tramo. Por ejemplo, etiquetas de host o contenedor que describen la infraestructura en la que se ejecuta el servicio.
-
-Para combinar varios *términos* en una consulta compleja, utiliza cualquiera de los siguientes operadores booleanos:
+* **Atributo de tramo**: Contenido del tramo, recopilado con instrumentación automática o manual en la aplicación.
+* **Etiqueta de tramo**: Enriquecimientos de contexto relacionados con el tramo. Por ejemplo, etiquetas de servidor o contenedor que describen la infraestructura en la que se ejecuta el servicio.
+  
+Para combinar múltiples *términos* en una consulta compleja, utiliza cualquiera de los siguientes operadores booleanos:
 
 | **Operador** | **Descripción**                                                                                        | **Ejemplo**                  |
 |:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
-| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se añade nada, se toma AND por defecto). | autenticación Y fallo   |
-| `OR`         | **Unión**: cualquiera de los términos está en los eventos seleccionados.                                            | autenticación O contraseña   |
-| `-`          | **Exclusión**: el término siguiente NO figura en el evento                                                  | autenticación Y contraseña |
+| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se agrega nada, se toma AND por defecto) | autenticación Y fallo   |
+| `OR`         | **Unión**: cualquiera de los términos está contenido en los eventos seleccionados                                            | autenticación O contraseña   |
+| `-`          | **Exclusión**: el siguiente término NO está en el evento                                                  | autenticación Y -contraseña |
 
-### Búsqueda de atributo
+### Búsqueda de atributos {#attribute-search}
 
-Para buscar un atributo de span (tramo), debes añadir `@` al principio de la clave del atributo.
+Para buscar un atributo de tramo, debes agregar `@` al principio de la clave del atributo.
 
-Por ejemplo, si deseas acceder a un tramo con el siguiente atributo a continuación, puedes utilizar:
+Por ejemplo, si deseas acceder a un tramo con el siguiente atributo a continuación, puedes usar:
 
 `@git.commit.sha:12345`
 
@@ -80,46 +79,46 @@ Por ejemplo, si deseas acceder a un tramo con el siguiente atributo a continuaci
   }
 ```
 
-Los atributos de spans (tramos) son visibles en la pestaña **Información general** del panel lateral de traces (trazas).
+Los atributos de tramo son visibles en la pestaña **Resumen** del panel lateral de trazas.
 
-**Nota:** No es necesario utilizar `@` en los [atributos reservados][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
+**Nota:** No necesitas usar `@` en los [atributos reservados][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
-### Búsqueda por etiquetas
+### Búsqueda de etiquetas {#tags-search}
 
-Tus spans (tramos) heredan etiquetas de hosts e integraciones que los generan.
+Tus tramos heredan etiquetas de los servidores y las integraciones que los generan.
 
 Por ejemplo:
 
 | Consulta                                                        | Coincidencia                                                                                             |
 |:-------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
 | `(hostname:web-server OR env:prod)`                          | Todas las trazas con la etiqueta de infraestructura `hostname:web-server` o el atributo reservado `env:prod` |
-| `(availability-zone:us-east OR container_name:api-frontend)` | Todas las trazas con cualquiera de estas etiquetas de infraestructura                                               |
-| `(service:api AND -kube_deployment:canary)`                  | Todas las trazas del servicio `api` que no están desplegados en el despliegue `canary`                 |
+| `(availability-zone:us-east OR container_name:api-frontend)` | Todas las trazas con cualquiera de estas etiquetas de infraestructura |
+| `(service:api AND -kube_deployment:canary)`                  | Todas las trazas del `api` servicio que no están desplegadas en el `canary` despliegue |
 
-Las etiquetas de spans (tramos) son visibles en la pestaña **Infraestructura** del panel lateral de trazas.
+Las etiquetas de tramo son visibles en la pestaña **Infrastructure** del panel lateral de trazas.
 
-#### Formatos de etiquetas no estándar
+#### Formatos de etiqueta no estándar {#non-standard-tag-formats}
 
-Si tus etiquetas no siguen las [prácticas recomendadas de etiquetas][2], no utilices la sintaxis `key:value`. En su lugar, utiliza la siguiente consulta de búsqueda:
+Si tus etiquetas no siguen [las mejores prácticas de etiquetas][2], entonces no uses `key:value` sintaxis. En su lugar, usa la siguiente consulta de búsqueda:
 
 `tags:<MY_TAG>`
 
-Por ejemplo, esta etiqueta no sigue las prácticas recomendadas:  
+Por ejemplo, esta etiqueta no sigue las mejores prácticas:  
 `auto-discovery.cluster-autoscaler.k8s.io/daffy`
 
-Para buscar en esta etiqueta, utiliza la siguiente consulta:  
+Para buscar esta etiqueta, utiliza la siguiente consulta:  
 `tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
-### Comodines
+### Comodines {#wildcards}
 
-Para realizar una búsqueda con un comodín de varios caracteres, utiliza el símbolo `*` como se indica a continuación:
+Para realizar una búsqueda con comodines de múltiples caracteres, utiliza el símbolo `*` de la siguiente manera:
 
-* `service:web*` coincide con cada traza que tenga un servicio que empiece por `web`
-* `@url:data*` coincide con cada traza que tenga una `url` que empiece por `data`.
+* `service:web*` coincide con cada traza que tiene un servicio que comienza con `web`
+* `@url:data*` coincide con cada traza que tiene un `url` que comienza con `data`.
 
-### Valores numéricos
+### Valores numéricos {#numerical-values}
 
-Utiliza `<`,`>`, `<=`, o `>=` para realizar una búsqueda sobre atributos numéricos. Por ejemplo, recupera todas las trazas que tengan un tiempo de respuesta superior a 100 ms con:
+Utiliza `<`, `>`, `<=` o `>=` para realizar una búsqueda en atributos numéricos. Por ejemplo, recupera todas las trazas que tienen un tiempo de respuesta superior a 100 ms con:
 
 `@http.response_time:>100`
 
@@ -127,70 +126,70 @@ También es posible buscar atributos numéricos dentro de un rango específico. 
 
 `@http.status_code:[400 TO 499]`
 
-### Autocompletar
+### Autocompletar {#autocomplete}
 
-Escribir una consulta compleja puede ser engorroso. Utiliza la función de autocompletar de la barra de búsqueda para completar tu consulta utilizando los valores existentes:
+Escribir una consulta compleja puede ser engorroso. Utiliza la función de autocompletar de la barra de búsqueda para completar tu consulta utilizando valores existentes:
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="barra de búsqueda de autocompletar " style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="autocompletar de la barra de búsqueda " style="width:60%;">}}
 
-### Caracteres especiales de escape
+### Escape de caracteres especiales {#escaping-of-special-characters}
 
-Los siguientes atributos se consideran especiales: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, y `\` requieren escape.
-Por ejemplo, para buscar trazas que contengan `user=JaneDoe` en su `url` debe introducirse la siguiente búsqueda:
+Los siguientes atributos se consideran especiales: `?`, `>`, `<`, `:`, `=`, `"`, `~`, `/` y `\` requieren ser escapados.
+Por ejemplo, para buscar trazas que contengan `user=JaneDoe` en su `url`, se debe ingresar la siguiente búsqueda:
 
 `@url:*user\=JaneDoe*`
 
-La misma lógica debe aplicarse a los espacios dentro de los atributos de traza. No es recomendado tener espacios en los atributos de traza, pero en tales casos, los espacios requieren un escape.
-Si un atributo se llama `user.first name`, realiza una búsqueda en este atributo con un espacio de escape:
+La misma lógica debe aplicarse a los espacios dentro de los atributos de traza. No se recomienda tener espacios en los atributos de traza, pero en tales casos, los espacios requieren ser escapados.
+Si un atributo se llama `user.first name`, realice una búsqueda en este atributo escapando el espacio:
 
 `@user.first\ name:myvalue`
 
-### Búsquedas guardadas
+### Búsquedas guardadas {#saved-searches}
 
-No pierdas tiempo creando las mismas vistas todos los días. Las búsquedas guardadas contienen tu consulta de búsqueda, columnas y horizonte temporal. Están disponibles en la barra de búsqueda gracias a la coincidencia de autocompletar, ya sea por nombre de búsqueda o consulta.
+No pierda tiempo construyendo las mismas visualizaciones todos los días. Las búsquedas guardadas contienen su consulta de búsqueda, columnas y horizonte temporal. Luego están disponibles en la barra de búsqueda gracias a la coincidencia de autocompletado, ya sea por el nombre de búsqueda o la consulta.
 
 {{< img src="tracing/app_analytics/search/saved_search.png" alt="Búsqueda guardada" style="width:80%;">}}
 
-Para eliminar una búsqueda guardada, haz clic en el icono de la papelera situado bajo el menú desplegable Buscar traza.
+Para eliminar una búsqueda guardada, haga clic en el ícono de papelera en el menú desplegable de búsqueda de trazas.
 
-### Buscar servicios y entidades 
+### Buscar servicios y entidades {#search-for-services-and-entities}
 
 {{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
-Para buscar un servicio, utiliza el atributo `service`. Para buscar otro [tipo de entidad][20] (por ejemplo, una base de datos, una cola o un proveedor externo), recurre a otros [atributos de pares][21] que Datadog utiliza para describir dependencias que no están instrumentadas con APM. Por ejemplo, para encontrar spans (tramos) que representen llamadas a una tabla `users` desde una base de datos postgres, utiliza la siguiente consulta: `@peer.db.name:users @peer.db.system:postgres`
+Para buscar un servicio, utilice el `service`atributo. Para buscar otro [tipo de entidad][20] (por ejemplo, una base de datos, una cola o un proveedor externo), confíe en otros [atributos de pares][21] que Datadog utiliza para describir dependencias que no están instrumentadas con APM. Por ejemplo, para encontrar tramos que representan llamadas a una `users`tabla de una base de datos postgres, utilice la siguiente consulta: `@peer.db.name:users @peer.db.system:postgres`
 
-**Nota**: La etiqueta `service` del tramo representa el servicio **emitiendo** el tramo si migraste a la [nomenclatura del servicio global][22] configurando `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
+**Nota**: La `service`etiqueta de tramo** representa el servicio que emite el tramo si migró a la [nomenclatura de servicio global][22] configurando `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
 
 [20]: /es/tracing/services/inferred_services
 [21]: /es/tracing/services/inferred_services#peer-tags
 [22]: /es/tracing/services/inferred_services#migrate-to-global-default-service-naming
 {{< /site-region >}}
 
-## Rango de tiempo
+## Rango de tiempo {#time-range}
 
-El intervalo de tiempo te permite visualizar trazas dentro de un periodo determinado. Cambia rápidamente el intervalo de tiempo seleccionando un intervalo preestablecido en el menú desplegable (o [introduciendo un intervalo de tiempo personalizado][3]):
+El rango de tiempo permite mostrar trazas dentro de un período de tiempo determinado. Cambia rápidamente el rango de tiempo seleccionando un rango preestablecido del menú desplegable (o [ingresando un intervalo de tiempo personalizado][3]):
 
-{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Seleccionar el marco temporal" >}}
+{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Seleccionar intervalo de tiempo" >}}
 
-## Tabla de tramo
+## Tabla de tramos {#span-table}
 
-La tabla de tramo es la lista de tramos que coinciden con el contexto seleccionado. Un contexto se define mediante un filtro de [barra de búsqueda](#search-bar) y un [intervalo de tiempo](#time-range).
+La tabla de tramos es la lista de tramos que coinciden con el contexto seleccionado. Un contexto se define por un [filtro de barra de búsqueda](#search-bar) y un [rango de tiempo](#time-range).
 
 {{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
-### La columna de servicio
+### La columna de servicio {#the-service-column}
 
-Por defecto, la columna de servicio muestra el atributo reservado `service` del tramo.
+Por defecto, la columna de servicio muestra el `service` atributo reservado del tramo.
 
 {{< img src="tracing/app_analytics/search/span_table_service.png" style="width:60%;" alt="Columna de servicio de la tabla de tramos" >}}
 
 Cuando el tramo representa una llamada de cliente desde un servicio instrumentado a un servicio inferido, la columna de servicio muestra:
-- el **servicio**, identificado por el atributo reservado `service`.
-- el **[servicio inferido][4]**: nombre de la entidad inferida a la que llama el servicio base, identificada por uno de los [atributos de pares][5]
+- el **servicio**, identificado por el `service` atributo reservado.
+- el **[servicio inferido][4]**: nombre de la entidad inferida que está siendo llamada por el servicio base, identificada por uno de los [atributos pares][5]
 
-{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="Columna de servicio de tabla de tramos con servicio inferido" >}}
+{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="Columna de servicio de la tabla de tramos con servicio inferido" >}}
 
-Cuando el nombre del servicio es una modificación del nombre del servicio base, aparece la columna de servicio:
-- el **[servicio base][2]**: servicio desde el que se emite el tramo, identificado por el atributo `@base_service`.
-- la **[anulación del servicio][3]**: nombre del servicio, diferente del nombre de servicio base, establecido automáticamente en integraciones de Datadog o cambiado a través de la API programática. La anulación del servicio se identifica mediante el atributo reservado `service`.
+Cuando el nombre del servicio es una anulación del nombre del servicio base, la columna de servicio muestra:
+- el **[servicio base][2]**: servicio desde el cual se emite el tramo, identificado por el `@base_service` atributo.
+- el **[anulación de servicio][3]**: nombre del servicio, diferente del nombre del servicio base, establecido automáticamente en las integraciones de Datadog o cambiado a través de la API programática. La anulación de servicio se identifica por el `service` atributo reservado.
 
 {{< img src="tracing/app_analytics/search/span_table_service_override.png" style="width:80%;" alt="Columna de servicio de la tabla de tramos con anulación de servicio" >}}
 
@@ -200,64 +199,64 @@ Cuando el nombre del servicio es una modificación del nombre del servicio base,
 [5]: /es/tracing/services/inferred_services#peer-tags
 {{< /site-region >}}
 
-### Visualización de una traza completa
+### Mostrando una traza completa {#displaying-a-full-trace}
 
-Haz clic en cualquier tramo para ver los detalles sobre la traza asociada:
+Haga clic en cualquier tramo para ver detalles sobre la traza asociada:
 
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Traza en el flujo de trazas" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Traza en tracestream" style="width:80%;">}}
 
-### Columnas
+### Columnas {#columns}
 
-Para añadir otras [etiquetas de tramo o atributos][23] como columnas a la lista, pulsa el botón **Options** (Opciones) y selecciona cualquier dimensión que desees añadir:
+Para agregar otras [etiquetas de tramo o atributos][23] como columnas a la lista, haga clic en el botón **Opciones** y seleccione cualquier dimensión que desee agregar:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Lista de trazas con columnas" style="width:80%;">}}
 
-### Grupos de rastreo
+### Grupos de trazas {#trace-groups}
 
-Agrupa la consulta por cualquier etiqueta o atributo de tramo para observar los recuentos de solicitudes, las tasas de error y las distribuciones de latencia en la vista de lista. Puedes seleccionar hasta cuatro dimensiones en la cláusula **Agrupar por**.
+Agrupe la consulta por cualquier etiqueta de tramo o atributo para observar los conteos de solicitudes, tasas de error y distribuciones de latencia en la visualización de lista. Puede seleccionar hasta cuatro dimensiones en la cláusula **Agrupar por**.
 
-{{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Cláusula Agrupar por" style="width:90%;" >}}
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Cláusula de agrupación" style="width:90%;" >}}
 
-#### Consultas 'Agrupar por' avanzadas
+#### Consultas 'Agrupar por' avanzadas {#advanced-group-by-queries}
 
-Después de seleccionar una dimensión para la agrupación, puedes especificar de dónde obtener los valores de la dimensión utilizando el desplegable **desde**: 
-- **Tramo**: Agrupa utilizando la dimensión del tramo consultado (por defecto). Por ejemplo, `a`.
-- **Tramo principal**: Agrupa utilizando la dimensión especificada del tramo principal de los tramos que coinciden con la consulta. Por ejemplo, para visualizar el rendimiento de un endpoint de API en función del servicio que lo llama, agrupa por `service` desde `parent(a)`.
-- **Tramo raíz**: Agrupa utilizando la dimensión especificada del tramo raíz de la traza. Por ejemplo, para analizar patrones de solicitudes de backend en función de las páginas de frontend desde las que se originan las solicitudes, agrupa por `@view.name` desde `root`.
+Después de seleccionar una dimensión para agrupar, puede especificar de dónde obtener los valores de la dimensión utilizando el menú desplegable **de**: 
+- **Tramo**: Agrupar por la dimensión del tramo consultado (predeterminado). Por ejemplo, `a`.
+- **Padre del tramo**: Agrupar por la dimensión especificada del tramo padre de los tramos que coinciden con la consulta. Por ejemplo, para visualizar cómo se desempeña un punto de conexión de API según el servicio que lo llama, agrupar por `service` de `parent(a)`.
+- **Tramo raíz**: Agrupar por la dimensión especificada del tramo raíz de la traza. Por ejemplo, para analizar patrones de solicitudes del backend basados en las páginas del frontend de donde provienen las solicitudes, agrupar por `@view.name` de `root`.
 
-{{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Agrupar por, desde la raíz" style="width:90%;" >}}
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Agrupar desde la raíz" style="width:90%;" >}}
 
-#### Ver grupos de rastreo en la lista de grupos
+#### Ver grupos de trazas en la lista de grupos {#view-trace-groups-in-the-group-list}
 
-Los grupos de rastreo se muestran como valores únicos de la dimensión seleccionada. Cada grupo se muestra con tres métricas clave:
-- **SOLICITUDES**: Recuento de tramos dentro del grupo.
-- **ERRORES**: Tasa de error y recuento de errores.
-- **Latencia P95**: Latencia p95 de los tramos.
+Los grupos de trazas se muestran como valores únicos de la dimensión seleccionada. Cada grupo se muestra con tres métricas clave:
+- **SOLICITUDES**: Conteo de tramos dentro del grupo.
+- **ERRORES**: Tasa de error y conteo de errores.
+- **Latencia P95**: latencia p95 de los tramos.
 
-Para ver estas métricas agregadas en el tramo principal o raíz, en lugar de en el tramo consultado, selecciona `parent(a)` o `root` en la sentencia **Mostrar métricas desde**.
+Para ver estas métricas agregadas sobre el tramo padre o raíz en lugar del tramo consultado, seleccione `parent(a)` o `root` en la declaración **Mostrar métricas de**.
 
-Además, `Latency Breakdown` muestra el tiempo que transcurre entre diferentes servicios dentro de las solicitudes de cada grupo, lo que permite detectar visualmente los cuellos de botella de latencia de determinados grupos.
+Además, el `Latency Breakdown` muestra cómo se distribuye el tiempo entre diferentes servicios en las solicitudes de cada grupo, permitiéndote identificar visualmente los cuellos de botella de latencia para dichos grupos.
 
 {{< img src="/tracing/trace_explorer/trace_groups/group_list.png" alt="Lista de grupos" style="width:90%;" >}}
 
-Para realizar un análisis más profundo, haz clic en cualquier grupo para examinar los eventos individuales de tramos que conforman las métricas agregadas.
+Para un análisis más profundo, haga clic en cualquier grupo para examinar los eventos de tramo individuales que componen las métricas agregadas.
 
-## Facetas
+## Facetas {#facets}
 
-Una faceta muestra todos los valores distintos de un atributo o una etiqueta, además de proporcionar algunos análisis básicos, como la cantidad de trazas representada. También sirve para filtrar los datos.
+Una faceta muestra todos los valores distintos de un atributo o una etiqueta, así como proporciona algunas analíticas básicas como la cantidad de trazas representadas. Esto también es un interruptor para filtrar sus datos.
 
-Las facetas permiten girar o filtrar los conjuntos de datos en función de un atributo determinado. Ejemplos de facetas pueden incluir usuarios, servicios, etc...
+Las facetas le permiten pivotar o filtrar sus conjuntos de datos basados en un atributo dado. Ejemplos de facetas pueden incluir usuarios, servicios, etc...
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Demostración de facetas" style="width:80%;">}}
 
-### Medidas
+### Medidas {#measures}
 
 Las medidas son el tipo específico de facetas para valores cuantitativos.
 
-Usa las medidas cuando necesites:
-* Añadir valores de distintas trazas. Por ejemplo, crear una medida sobre el número de filas en Cassandra y visualizar los p95 o referenciadores superiores por la suma del tamaño de archivo solicitado.
-* Calcular numéricamente los servicios con latencia más alta, por ejemplo, para valores del carrito de la compra superiores a $1000.
-* Filtrar valores continuos, por ejemplo, el tamaño en bytes de cada segmento de carga útil en un flujo de vídeo.
+Utiliza medidas cuando necesites:
+* Agregar valores de múltiples trazas. Por ejemplo, crea una medida sobre el número de filas en Cassandra y visualiza el P95 o los referers principales por la suma del tamaño de archivo solicitado.
+* Calcular numéricamente los servicios con la mayor latencia para valores de carrito de compras superiores a $1000.
+* Filtrar valores continuos. Por ejemplo, el tamaño en bytes de cada fragmento de carga de un flujo de video.
 
 **Tipos**
 
@@ -265,83 +264,83 @@ Las medidas vienen con un valor entero (largo) o doble, para capacidades equival
 
 **Unidades**
 
-Las medidas admiten unidades (tiempo en segundos o tamaño en bytes) para manejar órdenes de magnitud en el tiempo de consulta y el tiempo de visualización. La unidad es una propiedad de la propia medida, no del campo. Por ejemplo, considera una medida de duración en nanosegundos: tiene una etiqueta de tramo de `service:A` donde `duration:1000` representa `1000 milliseconds`, y otra etiqueta de tramo de `service:B` donde `duration:500` representa `500 microseconds`:
-Escala la duración en nanosegundos para todas las etiquetas de tramo que fluyen con el procesador aritmético. Utiliza un multiplicador `*1000000` en las etiquetas de tramo desde `service:A`, y un multiplicador `*1000` en etiquetas de tramo desde `service:B`.
-Utiliza `duration:>20ms` (consulta la sintaxis de búsqueda como referencia) para consultar sistemáticamente etiquetas de tramo desde ambos servicios a la vez, y ve un resultado agregado de un minuto como máximo.
+Las medidas soportan unidades (tiempo en segundos o tamaño en bytes) para el manejo de órdenes de magnitud en el tiempo de consulta y el tiempo de visualización. La unidad es una propiedad de la medida misma, no del campo. Por ejemplo, considera una medida de duración en nanosegundos: tienes una etiqueta de tramo de `service:A` donde `duration:1000` representa `1000 milliseconds`, y otras etiquetas de tramo de `service:B` donde `duration:500` representa `500 microseconds`:
+Escala la duración en nanosegundos para todas las etiquetas de tramo que fluyen con el procesador aritmético. Utiliza un multiplicador de `*1000000` en las etiquetas de tramo de `service:A`, y un multiplicador de `*1000` en las etiquetas de tramo de `service:B`.
+Utiliza `duration:>20ms` (consulta la sintaxis de búsqueda para referencia) para consultar de manera consistente las etiquetas de tramo de ambos servicios a la vez, y ver un resultado agregado de un máximo de un minuto.
 
-### Crear una faceta
+### Crea una faceta{#create-a-facet}
 
-Para empezar a utilizar un atributo como faceta o en la búsqueda, haz clic en él y añádelo como faceta:
+Para comenzar a usar un atributo como una faceta o en la búsqueda, haz clic en él y agrégalo como una faceta:
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Crear faceta" style="width:50%;">}}
 
-Después de crear una nueva faceta, está disponible en el panel de facetas para el filtrado y el análisis básico.
+Después de crear una nueva faceta, estará disponible en el panel de facetas para filtrado y análisis básico.
 
-### Panel de facetas
+### Panel de facetas {#facet-panel}
 
-Utilice facetas para filtrar en tus trazas. La barra de búsqueda y la url reflejan automáticamente tus selecciones.
+Utiliza las facetas para filtrar tus trazas. La barra de búsqueda y la URL reflejan automáticamente tus selecciones.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Panel de faceta" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Panel de facetas" style="width:30%;">}}
 
-## Visualizaciones
+## Visualizaciones {#visualizations}
 
-Selecciona un tipo de visualización de Analytics mediante el selector de Analytics:
+Selecciona un tipo de visualización analítica usando el selector analítico:
 
-* [Timeseries](#timeseries)
-* [Lista de principales](#top-list)
+* [Series temporales](#timeseries)
+* [Lista principal](#top-list)
 * [Tabla](#table)
 
-### Series temporales
+### Series temporales {#timeseries}
 
-Visualiza la evolución de la métrica `Duration` (o una faceta de recuento único de valores) en un marco temporal seleccionado, y (opcionalmente) divide por una faceta disponible.
+Visualiza la evolución de la métrica `Duration` (o un conteo único de valores de una faceta) a lo largo de un período de tiempo seleccionado, y (opcionalmente) divide por una faceta disponible.
 
-La siguiente serie temporal Analytics muestra la evolución de la **duración** **pc99** por pasos de **5min** para cada **servicio**
+Las siguientes analíticas de series temporales muestran la evolución de la **pc99** **duración** en intervalos de **5min** para cada **Servicio**.
 
 {{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="ejemplo de serie temporal" style="width:90%;">}}
 
-### Lista principal
+### Lista principal {#top-list}
 
-Visualiza los valores principales de una faceta según su `Duration` (o un recuento único de valores de la faceta).
+Visualiza los valores principales de una faceta de acuerdo a su `Duration` (o un conteo único de valores de una faceta).
 
-La siguiente lista de principales de Analytics muestra los valores principales de **duración** **pc99** del **servicio**:
+Las siguientes analíticas de lista principal muestran la **pc99** **duración** de **Servicio**:
 
 {{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="ejemplo de lista principal" style="width:90%;">}}
 
-### Tabla
+### Tabla {#table}
 
-Visualiza los valores principales de una faceta según una [medida][9] elegida (la primera medida que elijas en la lista), y visualiza el valor de las medidas adicionales de los elementos que aparecen en esta lista de principales. Actualiza la consulta de búsqueda o investiga los logs correspondientes a cualquiera de las dimensiones.
+Visualiza los valores principales de una faceta de acuerdo a una [medida][9] elegida (la primera medida que elijas en la lista), y muestra el valor de medidas adicionales para los elementos que aparecen en esta lista principal. Actualiza la consulta de búsqueda o investiga los registros correspondientes a cualquiera de las dimensiones.
 
-* Cuando hay múltiples dimensiones, los valores máximos se determinan según la primera dimensión, luego según la segunda dimensión dentro de los valores máximos de la primera dimensión, luego según la tercera dimensión dentro de los valores máximos de la segunda dimensión.
-* Cuando haya varias medidas, la lista superior o inferior se determina en función de la primera medida.
-* El subtotal puede diferir de la suma real de valores de un grupo, ya que solo se muestra un subconjunto (principal o inferior). Los eventos con un valor nulo o vacío para esta dimensión no se muestran como subgrupo.
+* Cuando hay múltiples dimensiones, los valores principales se determinan de acuerdo con la primera dimensión, luego de acuerdo con la segunda dimensión dentro de los valores principales de la primera dimensión, y finalmente de acuerdo con la tercera dimensión dentro de los valores principales de la segunda dimensión.
+* Cuando hay múltiples medidas, la lista principal o inferior se determina de acuerdo con la primera medida.
+* El subtotal puede diferir de la suma real de los valores en un grupo, ya que solo se muestra un subconjunto (principal o inferior). Los eventos con un valor nulo o vacío para esta dimensión no se muestran como un subgrupo.
 
-**Nota**: Una visualización de tabla utilizada para una sola medida y una sola dimensión es lo mismo que una lista, solo que con una visualización diferente.
+**Nota**: Una visualización de tabla para una sola medida y una sola dimensión es lo mismo que una lista principal, solo que con una visualización diferente.
 
-La siguiente tabla de log de Analytics muestra la evolución de los **códigos de estado principales** en función de su **rendimiento**, junto con el número de **IPs de cliente** únicos, y durante los últimos 15 minutos:
+El siguiente análisis de registros de tabla muestra la evolución de la **lista principal de códigos de estado** de acuerdo con su **rendimiento**, junto con el número de **IPs de cliente** únicas, y durante los últimos 15 minutos:
 
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="ejemplo de lista de principales" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="ejemplo de lista principal" style="width:90%;">}}
 
-## Trazas relacionadas
+## Trazas relacionadas {#related-traces}
 
-Selecciona o haz clic en una sección del gráfico para ampliarlo o ver la página de lista de [trazas][10] correspondiente a tu selección:
+Selecciona o haz clic en una sección del gráfico para acercar el gráfico o ver la lista de [trazas][10] correspondientes a tu selección:
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="Vista de trazas" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="ver Trazas" style="width:40%;">}}
 
-## Exportar
+## Exportar {#export}
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Botón Exportar tu Analytics" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Exporta tu botón de análisis" style="width:40%;">}}
 
 Exporta tus consultas:
 
-* Al [monitor][11]
-* Al [dashboard][12]
-* Al [notebook][18]
+* Para [monitor][11]
+* Para [dashboard][12]
+* Para [notebook][18]
 
 También puedes generar una nueva métrica para la consulta.
 
-**Nota**: Las consultas de APM en dashboards y notebooks se basan en todos los [tramos indexados][14]. Las consultas de APM en monitores se basan únicamente en tramos indexados por [filtros de retención personalizados][19].
+**Nota**: Las consultas de APM en dashboards y notebooks se basan en todos los [tramos indexados][14]. Las consultas de APM en monitors se basan únicamente en tramos indexados por [custom retention filters][19].
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

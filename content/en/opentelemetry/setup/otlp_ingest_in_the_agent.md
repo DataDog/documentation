@@ -321,7 +321,23 @@ There are many other environment variables and settings supported in the Datadog
 
 ## Sending OpenTelemetry traces, metrics, and logs to Datadog Agent
 
+After enabling OTLP ingestion on the Datadog Agent, configure your OpenTelemetry-instrumented application to export telemetry data to the Agent's OTLP endpoint. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable in your **application** environment to direct data to the Agent. Without this configuration, your application does not send telemetry data to the Agent, even if the Agent's OTLP receiver is enabled.
+
 {{< tabs >}}
+{{% tab "Host" %}}
+Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable in your application's environment:
+
+For gRPC:
+```shell
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
+```
+
+For HTTP:
+```shell
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
+```
+{{% /tab %}}
+
 {{% tab "Docker" %}}
 1. For the application container, set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Datadog Agent container. For example:
 

@@ -29,9 +29,9 @@ further_reading:
 
 Cloud Cost Monitors help you proactively identify cost changes, and understand if you're projected to go over budget, so you can investigate the cause.
 
-- Instantly view all your cost monitors and filter or search by team, service, tag, provider, or alert status.
-- See a summary of how many monitors are set up, which are alerting, and what areas of cloud spend are tracked.
-- Create new cost monitors using templates and take action on monitors that need attention.
+-   Instantly view all your cost monitors and filter or search by team, service, tag, provider, or alert status.
+-   See a summary of how many monitors are set up, which are alerting, and what areas of cloud spend are tracked.
+-   Create new cost monitors using templates and take action on monitors that need attention.
 
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up.
 
@@ -54,8 +54,8 @@ You can select from the following monitor types:
 | Changes      | Yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                     |
 | Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 | Threshold    | Yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                |
-| Forecast     | Yes               | Alert if forecasted costs exceeds a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                     |
-| Budget       | No                | Alert if actual or forecasted costs exceed your [budget][7].                                                                                                                                                                                              | Alert if the forecasted month cost is projected to exceed 90% of the assigned $10,000 budget.      |
+| Forecast     | Yes               | Alert if forecasted costs exceeds a threshold.                                                                                                                                                                                                            | Alert daily if the forecasted cost for this month is projected to exceed $500.                     |
+| Budget       | No                | Alert if actual or [forecasted][8] costs exceed your [budget][7].                                                                                                                                                                                         | Alert if the forecasted month cost is projected to exceed 90% of the assigned $10,000 budget.      |
 
 ### Specify which cost to track
 
@@ -129,8 +129,9 @@ If you are using the **Budget** monitor type, you can trigger an alert when the 
 | Threshold        | Percentage of budget that is utilized to trigger the alert.                       | Number between 0 and 100 (%)      |
 | Timeframe        | Evaluation window used to assess if the threshold is breached.                    | `all_months`, `current_month`     |
 
-When you select **is forecasted to reach**, the monitor uses the same forecasting model as budget cards and the budget status page. Forecasts require at least 64 consecutive days of cost data — see [Forecasting][8] for details.
+When you select **is forecasted to reach**, the monitor uses the same [forecasting model][8] as budget cards and the budget status page.
 
+[8]: /cloud_cost_management/planning/forecasting/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -150,11 +151,11 @@ You can also turn on **Audit Notifications** to alert the monitor creator and re
 
 {{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-other-actions.png" alt="The actions menu open with options to view the monitor in the Cloud Cost Explorer, as well as options to edit, clone, and delete the monitor." style="width:100%;" >}}
 
-- **View in Monitors** to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
-- **View in Explorer** to open the monitor in the Cloud Cost Explorer for deeper analysis.
-- **Edit** a monitor to update the monitor's settings or configuration.
-- **Clone** a monitor to create a copy of an existing monitor by choosing **Actions > Clone**.
-- **Delete** a monitor to permanently remove a monitor you no longer need.
+-   **View in Monitors** to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
+-   **View in Explorer** to open the monitor in the Cloud Cost Explorer for deeper analysis.
+-   **Edit** a monitor to update the monitor's settings or configuration.
+-   **Clone** a monitor to create a copy of an existing monitor by choosing **Actions > Clone**.
+-   **Delete** a monitor to permanently remove a monitor you no longer need.
 
 ## Further Reading
 

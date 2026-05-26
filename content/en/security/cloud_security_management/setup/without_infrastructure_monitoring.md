@@ -38,7 +38,7 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 
 ### Oracle Cloud Infrastructure
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

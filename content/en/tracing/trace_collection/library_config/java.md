@@ -16,6 +16,10 @@ further_reading:
     - link: "/opentelemetry/interoperability/environment_variable_support"
       tag: "Documentation"
       text: "OpenTelemetry Environment Variable Configurations"
+    - link: "https://learn.datadoghq.com/courses/apm-java-host"
+      tag: "Learning Center"
+      text: "Set up APM for Java applications"
+
 ---
 
 After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].

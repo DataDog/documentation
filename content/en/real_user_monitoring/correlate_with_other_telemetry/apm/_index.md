@@ -180,7 +180,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+3.  _(Optional)_ Configure the `traceSampleRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
 
     ```kotlin
     val tracedHosts = listOf("example.com")
@@ -188,14 +188,14 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
           DatadogInterceptor.Builder(tracedHosts)
-              .setTraceSampler(RateBasedSampler(20f))
+              .setTraceSampleRate(20f)
               .build()
         )
         .build()
     ```
 
 **Note**:
-* `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+* `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 [1]: /real_user_monitoring/android/
@@ -314,8 +314,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 {{% tab "Roku RUM" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">RUM for Roku is not available on the US1-FED Datadog site.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">RUM for Roku is not available on the {{< region-param key="dd_datacenter" >}} Datadog site.</div>
 {{< /site-region >}}
 
 1. Set up [RUM Roku Monitoring][1].

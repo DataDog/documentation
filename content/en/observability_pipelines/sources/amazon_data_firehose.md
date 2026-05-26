@@ -23,7 +23,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 <div class="alert alert-danger">Only enter the identifiers for the Amazon Data Firehose address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-- Enter the identifier for your Amazon Data Firehose address. If you leave it blank, the [default](#set-secrets) is used.
+After you select the Amazon Data Firehose source in the pipeline UI, enter the identifier for your Amazon Data Firehose address. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional settings
 
@@ -37,7 +37,7 @@ Select an **AWS authentication** option. If you select **Assume role**:
 
 {{% observability_pipelines/tls_settings %}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

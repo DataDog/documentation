@@ -3,7 +3,7 @@ This partial contains integrated libraries content for the iOS SDK.
 It can be included in the iOS SDK integrated libraries page or in the unified client_sdks view.
 -->
 
-This page lists integrated libraries you can use for iOS and tvOS applications.
+This page lists integrated libraries you can use for your Apple platform applications.
 
 ## Alamofire
 

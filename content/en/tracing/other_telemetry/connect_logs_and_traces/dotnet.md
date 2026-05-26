@@ -356,7 +356,7 @@ You can read more about using BeginScope to create structured log messages for t
 [5]: https://docs.microsoft.com/en-us/dotnet/core/extensions/logging
 [6]: /tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
 [7]: /logs/log_collection/csharp/
-[8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+[8]: /logs/log_configuration/processors/trace_remapper/
 [9]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
 [10]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/

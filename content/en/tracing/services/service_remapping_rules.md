@@ -3,11 +3,6 @@ title: Service remapping rules
 site_support_id: service_remapping_rules
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-remapping-rules/"
- btn_hidden="false" header="Join the Preview!">}}
-Service remapping rules are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Update how your services appear across Datadog without changing tracer configuration or redeploying code. Service remapping rules allow you to rename, merge, or split services; or create new services based on infrastructure tags from the Datadog UI. You can also create remapping rules for other entity types, such as datastores and queues.
@@ -72,7 +67,13 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 - **Historical data:** Changes made by remapping rules affect only telemetry ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
 - **Logs service remapper:** Service remapping rules occur before logs pipelines. If the logs service remapper and remapping rules are both applied to a service, the remapping rules take precedence. 
 - **Dashboards and monitors:** Existing queries that reference old service names are not automatically updated. Review and update these manually.
-- **Integration overrides:** Remapping rules apply to base services; integration overrides are not remapped. [Remove integration overrides][15] for the best APM experience.
+**Integration and custom overrides:** If integration overrides or custom overrides fall within the scope of a remapping rule, they are also remapped. [Remove integration overrides][15] for the best APM experience.
+- **Service naming hierarchy:** Service names are determined by the following hierarchy, from highest to lowest priority:
+  1. Service remapping rules
+  2. Service defined in code (`tracer.Start(WithService(xx))`)
+  3. Service defined in the system property (`-Ddd.service={}`)
+  4. Service defined in the environment variable (`DD_SERVICE`)
+  5. Service defined in the config file (`application_monitoring.yaml`)
 
 [1]: /account_management/rbac/permissions
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.20.0
