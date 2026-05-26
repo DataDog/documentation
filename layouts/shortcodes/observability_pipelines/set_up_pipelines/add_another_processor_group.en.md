@@ -1,7 +1,7 @@
 If you want to add another group of processors for a destination:
 1. Click the plus sign (**+**) at the bottom of the existing processor group.
 1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Search Syntax][11] for more information.
+1. Optionally, enter a group filter. Only data that match the filter query are sent through the processors in the group. See [Search Syntax][11] for more information.
 1. Click **Add** to add processors to the group.
 1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
     1. Click the three dots on the processor group.

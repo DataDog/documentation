@@ -1,0 +1,1264 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Imports ",
+                      "itemTranslationData": {
+                        "528b5051d148e84f32e793ce0bd03321": {
+                          "string": "Importaciones "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 5-6"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 5-6"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 5-6"
+      },
+      "1": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Import the following packages to setup the Datadog trace provider:",
+                      "itemTranslationData": {
+                        "30d2a3289186b7da1d2a948866750d0c": {
+                          "string": "Importa los siguientes paquetes para configurar el proveedor de traces (trazas) de Datadog:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 7-8"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 7-8"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 7-8"
+      },
+      "3": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setup ",
+                      "itemTranslationData": {
+                        "0e04f980355395f9a82787e3ee3cd53c": {
+                          "string": "Configuración"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 24-25"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 24-25"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 24-25"
+      },
+      "4": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To configure OpenTelemetry to use the Datadog trace provider:",
+                      "itemTranslationData": {
+                        "f5d41336ba9598024bbcd2d57084bf33": {
+                          "string": "Para configurar OpenTelemetry para utilizar el proveedor de traces (trazas) de Datadog:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 26-27"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 26-27"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 26-27"
+      },
+      "5": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Add your desired manual OpenTelemetry instrumentation to your Go code following the ",
+                                  "itemTranslationData": {
+                                    "0f31e32dbc64547d1cd627eea60f312c": {
+                                      "string": "Añade la instrumentación manual de OpenTelemetry que desees a tu código de Go siguiendo la"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 28-29"
+                              },
+                              "1": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "children": {
+                                  "listTranslationData": {
+                                    "0": {
+                                      "$$mdtype": "Node",
+                                      "inline": true,
+                                      "attributes": {
+                                        "content": "OpenTelemetry Go Manual Instrumentation documentation",
+                                        "itemTranslationData": {
+                                          "b9eb7e2fcb0da618c0d53c94f88b699d": {
+                                            "string": "documentación sobre la instrumentación manual de OpenTelemetry Go"
+                                          }
+                                        }
+                                      },
+                                      "type": "text",
+                                      "location": "line 28-29"
+                                    }
+                                  }
+                                },
+                                "type": "link",
+                                "location": "line 28-29"
+                              },
+                              "2": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": ". ",
+                                  "itemTranslationData": {
+                                    "ae7a1e9485bd38b7deec2f6ee1d8bb5a": {
+                                      "string": ". "
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 28-29"
+                              },
+                              "3": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "children": {
+                                  "listTranslationData": {
+                                    "0": {
+                                      "$$mdtype": "Node",
+                                      "inline": true,
+                                      "attributes": {
+                                        "content": "Important!",
+                                        "itemTranslationData": {
+                                          "90ce874842459eb09f69ccfc84562f79": {
+                                            "string": "¡Importante!"
+                                          }
+                                        }
+                                      },
+                                      "type": "text",
+                                      "location": "line 28-29"
+                                    }
+                                  }
+                                },
+                                "type": "strong",
+                                "location": "line 28-29"
+                              },
+                              "4": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": " Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.",
+                                  "itemTranslationData": {
+                                    "fa9acd475bf0621adb0dd29ee1c2bb13": {
+                                      "string": " Cuando esas instrucciones indiquen que tu código debe llamar al kit de desarrollo de software (SDK) de OpenTelemetry, llama en su lugar a la biblioteca de rastreo de Datadog."
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 28-29"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 28-29"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 28-29"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 28-30"
+            },
+            "1": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Install the OpenTelemetry package:",
+                                  "itemTranslationData": {
+                                    "8a9792a3f51390f6f7e96e6d25b430ff": {
+                                      "string": "Instala el paquete de OpenTelemetry:"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 30-31"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 30-31"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 30-31"
+                  }}
+              },
+              "type": "item",
+              "location": "line 30-35"
+            },
+            "2": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Install the Datadog OpenTelemetry wrapper package:",
+                                  "itemTranslationData": {
+                                    "a2502b98b85321e351cad439f214b5ce": {
+                                      "string": "Instala el paquete de ajustador de Datadog OpenTelemetry:"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 35-36"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 35-36"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 35-36"
+                  }}
+              },
+              "type": "item",
+              "location": "line 35-40"
+            },
+            "3": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Import packages:",
+                                  "itemTranslationData": {
+                                    "fd2df7aeca38daa2c03b811064334faa": {
+                                      "string": "Importa paquetes:"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 40-41"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 40-41"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 40-41"
+                  }}
+              },
+              "type": "item",
+              "location": "line 40-48"
+            },
+            "4": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Create a TracerProvider and defer the Shutdown method:",
+                                  "itemTranslationData": {
+                                    "cec856d22fc8382d7716d1f3a61d4613": {
+                                      "string": "Crea un TracerProvider y aplaza el método de apagado:"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 48-49"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 48-49"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 48-49"
+                  }}
+              },
+              "type": "item",
+              "location": "line 48-54"
+            },
+            "5": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Set the global TracerProvider:",
+                                  "itemTranslationData": {
+                                    "3f88f1bba1d4c90a26c22e3158d2a2c7": {
+                                      "string": "Configura el TracerProvider global:"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 54-55"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 54-55"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 54-55"
+                  }}
+              },
+              "type": "item",
+              "location": "line 54-59"
+            },
+            "6": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Run your application.",
+                                  "itemTranslationData": {
+                                    "f6bc6d5e517dffb3b5b2688caaae3587": {
+                                      "string": "Ejecuta tu aplicación."
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 59-60"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 59-60"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 59-60"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 59-61"
+            }
+          }
+        },
+        "type": "list",
+        "location": "line 28-61"
+      },
+      "6": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding span tags ",
+                      "itemTranslationData": {
+                        "160e3975d75a00ac272d01f65dcbe158": {
+                          "string": "Añadir tags (etiquetas) de spans (tramos)"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 61-62"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 61-62"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 61-62"
+      },
+      "7": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add custom tags to your spans to attach additional metadata and context:",
+                      "itemTranslationData": {
+                        "f2a8b26320f0ff193d2acdc974c57e56": {
+                          "string": "Añade tags (etiquetas) personalizadas a tus spans (tramos) para adjuntar metadatos y contexto adicionales:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 63-64"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 63-64"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 63-64"
+      },
+      "9": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding tags globally to all spans ",
+                      "itemTranslationData": {
+                        "6f45ea021ae41fd6d1efefbb400ac577": {
+                          "string": "Añadir tags (etiquetas) globalmente a todos los spans (tramos)"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 72-73"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 72-73"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 72-73"
+      },
+      "10": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add tags to all spans by configuring the tracer with the ",
+                      "itemTranslationData": {
+                        "4b2a4af377b9e7ae8d1df5c0b3877be3": {
+                          "string": "Añade tags (etiquetas) a todos los spans (tramos) configurando el rastreador con la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 74-75"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " option:",
+                      "itemTranslationData": {
+                        "3b9b26c0ea9cb095ee12068c12624b2a": {
+                          "string": " opción:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 74-75"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 74-75"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 74-75"
+      },
+      "12": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setting errors on a span ",
+                      "itemTranslationData": {
+                        "07f0f1e02756a82c40a5bc328be2f829": {
+                          "string": "Configuración de errores en un span (tramo) "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 87-88"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 87-88"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 87-88"
+      },
+      "13": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To set an error on a span:",
+                      "itemTranslationData": {
+                        "774ae2b565145f9000097fa3fd4187f0": {
+                          "string": "Para configurar un error en un span (tramo):"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 89-90"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 89-90"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 89-90"
+      },
+      "15": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding spans ",
+                      "itemTranslationData": {
+                        "ed7cc2cabeb364ee0bb805fe1305b4ae": {
+                          "string": "Añadir spans (tramos)"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 103-104"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 103-104"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 103-104"
+      },
+      "16": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans.",
+                      "itemTranslationData": {
+                        "868ba49d102e230a1bc308c69a7791cf": {
+                          "string": "A diferencia de otras bibliotecas de rastreo de Datadog, al rastrear aplicaciones de Go, Datadog recomienda que gestiones y pases explícitamente el contexto de Go de tus spans (tramos)."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 105-106"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 105-106"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 105-106"
+      },
+      "18": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding span events ",
+                      "itemTranslationData": {
+                        "b2ae74dcb5ea88a75afbd7c93247f809": {
+                          "string": "Añadir eventos de span (tramo) "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 114-115"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 114-115"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 114-115"
+      },
+      "19": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Adding span events requires SDK version 1.67.0 or higher.",
+                            "itemTranslationData": {
+                              "adf37b7a0cf28ff0d93b7e907607247e": {
+                                "string": "Para añadir eventos de spans (tramos) se requiere el kit de desarrollo de software (SDK) versión 1.67.0 o superior."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 117-118"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 117-118"
+                  }
+                }
+              },
+              "type": "paragraph",
+              "location": "line 117-118"
+            }
+          }
+        },
+        "type": "tag",
+        "tag": "alert",
+        "location": "line 116-117"
+      },
+      "20": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "You can add span events using the ",
+                      "itemTranslationData": {
+                        "8636582d91ca798b602d3dc616ad886b": {
+                          "string": "Puedes añadir eventos de spans (tramos) utilizando la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 120-121"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " API:",
+                      "itemTranslationData": {
+                        "b68702596b045c49e4d591341c058eb2": {
+                          "string": " API:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 120-121"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 120-121"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 120-121"
+      },
+      "22": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Read the ",
+                      "itemTranslationData": {
+                        "41003d824b39d453eb13ad92af56399e": {
+                          "string": "Lee la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 129-130"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "OpenTelemetry specification for adding events",
+                            "itemTranslationData": {
+                              "60cdd6ca1af9904347cf3acd84d53199": {
+                                "string": "especificación de OpenTelemetry para añadir eventos"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 129-130"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 129-130"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " for more information.",
+                      "itemTranslationData": {
+                        "9f33aee7877b27a30cde009df7b94107": {
+                          "string": " para obtener más información."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 129-130"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 129-130"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 129-130"
+      },
+      "23": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Trace client and Agent configuration ",
+                      "itemTranslationData": {
+                        "025b8d0837137da3ac1024ccc452d548": {
+                          "string": "Rastrea la configuración del cliente y del Agent "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 131-132"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 131-132"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 131-132"
+      },
+      "24": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Propagating context with headers extraction and injection ",
+                      "itemTranslationData": {
+                        "91e050d9b24a45f6f0c7a4ceaad931c9": {
+                          "string": "Propagación del contexto con extracción e inserción de encabezados"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 133-134"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 133-134"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 133-134"
+      },
+      "25": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "You can configure the propagation of context for distributed traces by injecting and extracting headers. Read ",
+                      "itemTranslationData": {
+                        "89dfdfce589c1df7469286afac83fbef": {
+                          "string": "Puedes configurar la propagación del contexto para traces (trazas) distribuidas insertando y extrayendo encabezados. Lee "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 135-136"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Trace Context Propagation",
+                            "itemTranslationData": {
+                              "cbd5b9c69c13223aff25053e1697c801": {
+                                "string": "Propagación de contextos de traces (trazas)"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 135-136"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 135-136"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " for information.",
+                      "itemTranslationData": {
+                        "6bd26ed7241f403d2bd6e18ed7e60fce": {
+                          "string": " para obtener más información."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 135-136"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 135-136"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 135-136"
+      },
+      "26": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Resource filtering ",
+                      "itemTranslationData": {
+                        "f67c05b042e03cf4a70a63c003d1b687": {
+                          "string": "Filtrado de recursos "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 137-138"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 137-138"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 137-138"
+      },
+      "27": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the ",
+                      "itemTranslationData": {
+                        "5a8fdaeffcc41d8f17635c5ef3a2087a": {
+                          "string": "Las traces (trazas) pueden excluirse en función de su nombre de recurso, para evitar que el tráfico sintético, como los checks de estado, informe de las traces (trazas) a Datadog. Esta y otras configuraciones de seguridad y ajuste se pueden encontrar en la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 139-140"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Security",
+                            "itemTranslationData": {
+                              "4d8ba55c84c8e939e4f139399051db14": {
+                                "string": "Seguridad"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 139-140"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 139-140"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " page.",
+                      "itemTranslationData": {
+                        "45254b0cbea9a97ecf3f237dc8e8424e": {
+                          "string": " page (página)."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 139-140"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 139-140"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 139-140"
+      }
+    }
+  },
+  "type": "document"}

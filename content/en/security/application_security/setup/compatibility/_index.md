@@ -12,7 +12,7 @@ further_reading:
   text: "How App and API Protection Works in Datadog"
 ---
 
-The following AAP capabilities are supported relative to each language's tracing library:
+The following AAP capabilities are supported relative to each language's SDK:
 
 | AAP capability                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
 |----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|

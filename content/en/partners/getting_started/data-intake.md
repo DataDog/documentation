@@ -86,7 +86,7 @@ For more information, see [Custom Checks][13].
 
 The Datadog Agent comes bundled with DogStatsD, a metrics aggregation service, which accepts data using UDP. DogStatsD is a good alternative if a custom check does not suit your use case, and there are no existing integrations for the application. For example, you can use DogStatsD to collect events and metrics data from a cron job, which probably does not have its own log files.
 
-You can either use the DogStatsD endpoints, or use a Datadog client library to facilitate the submission of metrics and events to DogStatsD.
+You can either use the DogStatsD endpoints, or use a Datadog SDK to facilitate the submission of metrics and events to DogStatsD.
 
 For more information, see:
 - [Submit Events][14]
@@ -181,10 +181,10 @@ Now that you have data flowing into Datadog, it's time to focus on [delivering v
 [10]: /api/latest/metrics
 [11]: /api/latest/events
 [12]: /api/latest/tracing/
-[13]: /developers/custom_checks/
+[13]: /extend/custom_checks/
 [14]: /events/guides/dogstatsd/
 [15]: /metrics/custom_metrics/
-[16]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
+[16]: /extend/community/libraries/#api-and-dogstatsd-client-libraries
 [17]: /api/latest/
 [18]: /getting_started/tagging/
 [19]: https://www.datadoghq.com/blog/tagging-best-practices/

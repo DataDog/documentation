@@ -614,6 +614,7 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 **Note**:
 - The Agent requires read and execute permissions on a directory to list all the available files in it.
 - The path and exclude_paths values are case sensitive.
+- Starting in Agent version 7.76.0, recursive globs (`**`) are supported in `path` and `exclude_paths` when you set `logs_config.enable_recursive_glob: true` in `datadog.yaml`. This is disabled by default.
 
 ### Prioritize tailed files by modification time
 
@@ -654,6 +655,8 @@ The list below gives the supported encoding values. If you provide an unsupporte
  * `utf-16-le` - UTF-16 little-endian (Datadog Agent **v6.23/v7.23**)
  * `utf-16-be` - UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
  * `shift-jis` - Shift-JIS (Datadog Agent **v6.34/v7.34**)
+
+<div class="alert alert-warning">If you change the <code>encoding</code> of a file the Agent is <em>already tailing</em>, it can produce garbled characters (mojibake). The Agent resumes from the previous byte offset, which may not align with character boundaries after an encoding change. To fix this, rotate the log file, replace it, or restart tailing from the beginning of a file that uses the new encoding. These actions help the Agent start with the correct encoding.</div>
 
 Configuration example:
 

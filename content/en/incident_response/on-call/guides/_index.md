@@ -10,5 +10,6 @@ disable_toc: true
     {{< nextlink href="/incident_response/on-call/guides/configure-mobile-device-for-on-call" >}}Set up your mobile device for Datadog On-Call{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/guides/migrating-from-your-current-providers" >}}Migrate from your current on-call provider{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call" >}}Migrate PagerDuty resources to Datadog On-Call{{< /nextlink >}}
+    {{< nextlink href="/incident_response/on-call/guides/migrate-your-opsgenie-resources-to-on-call" >}}Migrate OpsGenie resources to Datadog On-Call{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/guides/offboarding-teams-and-users" >}}Offboard teams and users from Datadog On-Call{{< /nextlink >}}
 {{< /whatsnext >}}

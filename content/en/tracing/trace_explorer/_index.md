@@ -9,6 +9,13 @@ further_reading:
 - link: 'tracing/trace_explorer/search'
   tag: 'Documentation'
   text: 'Search Spans'
+- link: "https://learn.datadoghq.com/courses/getting-started-apm"
+  tag: "Learning Center"
+  text: "Getting Started with APM Metrics and Traces"
+- link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"
+  tag: "Learning Center"
+  text: "Diagnosing Application Bugs with Datadog APM"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
@@ -32,6 +39,14 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 {{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data indicator" style="width:75%;" >}}
 
 Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
+
+### Trace Patterns 
+
+{{< callout url="https://www.datadoghq.com/product-preview/apm-trace-patterns/" btn_hidden="false" header="Join the Preview!" >}}
+Trace Patterns is in Preview. Use this form to submit your request today.
+{{< /callout >}}
+
+Trace Patterns groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use Trace Patterns when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. 
 
 ### Trace volume control
 
@@ -110,6 +125,17 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Filter on all spans with a `cart.value` attribute by typing "cart.value" in the search query bar:
 {{< img src="tracing/live_search/filter-by-attribute2.mp4" alt="Live Search filter by attribute" video="true" >}}
 
+### Analyzing anomalies with integrated insights
+
+The Trace Explorer combines automated Watchdog outlier detection with TAG Analysis to help you quickly identify the root cause of issues. When Watchdog detects tags that are statistically overrepresented in errors or high-latency spans, these insights are surfaced in multiple places:
+
+- **Search suggestions**: As you type in the search bar, outlier tags appear as suggestions with an indicator showing they're correlated with errors or latency issues.
+- **Group-by recommendations**: When selecting attributes to group by, outlier facets are highlighted to guide your investigation.
+- **Facets sidebar**: Outlier tags are promoted to the top of the facets list in a dedicated "OUTLIERS" section.
+- **RED metrics**: The "Analyze" button next to error and latency graphs is highlighted when relevant outliers are detected.
+
+{{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="Analyzing anomalies with integrated insights" video="true" >}}
+
 ## Indexed spans search with 15 day retention
 
 {{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Indexed Search" >}}
@@ -128,7 +154,7 @@ All spans indexed by custom retention filters *and* the intelligent retention fi
 
 All spans indexed by custom retention filters or the intelligent retention filter are available to be searched when using trace analytics.
 
-From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
+From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
 
 **Note**: Spans indexed by the intelligent retention filter are excluded from APM trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 

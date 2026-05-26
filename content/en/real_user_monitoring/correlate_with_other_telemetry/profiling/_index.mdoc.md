@@ -83,7 +83,11 @@ To start collecting data, set up [RUM Browser Monitoring][2].
         });
     ```
 
-3. Set up Cross-Origin Resource Sharing (CORS) if needed.
+3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session will receive profiling data.
+
+    If you use a [proxy][13] or [CSP][14], you must also allow the `quota.` subdomain of your site's standard intake origin (for example, `https://quota.browser-intake-datadoghq.com` for US1, serving the `/api/v2/profiling/quota` endpoint). See the full list of quota endpoints per site in the [Supported endpoints][15] section, and refer to the [proxy setup documentation][13] for details on routing subdomain-specific requests.
+
+4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
       This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
     
@@ -101,7 +105,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
        });
        ```
 
-{% collapse-content title="Browser profiling and CORS" %}
+{% collapse-content title="Browser profiling and CORS" id="cors"%}
 
 #### Requirements for Cross-Origin Scripts (CORS)
 
@@ -141,6 +145,32 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 ## Explore profiling
 
+### Within the Sessions Explorer
+
+Profiling data is captured on long tasks and rolls up to actions, views, vitals, and sessions. Use `@profiling.has_profile` to filter to profiled events and understand what code ran and how it affected the user's experience. This is available for sessions, views, actions, vitals, and long tasks.
+- **View panel**: Profiling data in a new tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_view_panel.png" alt="Browser profiling tab in the View panel." style="width:100%;" /%}
+
+- **Long Task panel**: Profiling data in the performance tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
+
+- **Vitals panel**: Profiling data in a new tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_vitals_panel.png" alt="Browser profiling tab in the Vitals panel." style="width:100%;" /%}
+
+- **Action panel**: Profiling data in a new tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_action_panel.png" alt="Browser profiling tab in the Action panel." style="width:100%;" /%}
+
+### Within the Profiling page
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience.mp4" alt="Browser profiling event waterfall example within the Optimization page." video="true" style="width:100%;" /%}
+
+The Profiling page, found thorugh the top bar navigation, lets you analyze profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+
+1. **Focus on views**: Choose the views you'd like to analyze.
+2. **Select a measurement**: Pick a Core Web Vital, custom vital, or RUM action to dive into.
+3. **Refine your selection**: Narrow to the most relevant slice of data by percentile or time range so you focus on the worst-performing or most critical segment.
+4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first.
+5. **View the flame graph**: Explore the call hierarchy to see how those functions relate and where time is spent across the stack.
+
 ### Within the Optimization page
 
 The **Optimization page** surfaces profiling data in several contexts:
@@ -152,12 +182,6 @@ The **Optimization page** surfaces profiling data in several contexts:
 - Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Click one of these long task events to open a Long Task view panel with detailed profiling data. Use this panel to identify blocking functions, trace their call stacks, and understand how script execution contributes to poor responsiveness.
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
-
-
-### Within the Sessions Explorer
-You can also find profiling data when reviewing individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user's experience.
-
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
 
 {% /if %}
 <!-- end Browser -->
@@ -231,6 +255,8 @@ The [ProfilingManager API][7] also supports disabling rate limiting during debug
 
 ## Explore profiling data
 
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+
 ### During the time to initial display
 
 Android application launch profiling data is attached to the [time to initial display][8] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
@@ -301,6 +327,8 @@ If no value is specified, the default `applicationLaunchSampleRate` is 5 percent
 
 ## Explore profiling data
 
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+
 ### During the time to initial display
 
 iOS application launch profiling data is attached to the [time to initial display][12] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
@@ -326,3 +354,6 @@ Use the **flame graph** to identify which functions consume the most Wall time d
 [10]: /real_user_monitoring/rum_without_limits/ 
 [11]: /real_user_monitoring/application_monitoring/ios
 [12]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
+[13]: /real_user_monitoring/guide/proxy-rum-data
+[14]: /integrations/content_security_policy_logs
+[15]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

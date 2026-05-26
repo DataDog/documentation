@@ -1,8 +1,9 @@
 ---
+id: standard_deviation
 core_product:
 - dashboards
 related_terms:
-- varianza
+- variance
 title: desviación estándar
 ---
 Una desviación estándar es una medida de la cantidad de varianza de una variable aleatoria con respecto a su media.

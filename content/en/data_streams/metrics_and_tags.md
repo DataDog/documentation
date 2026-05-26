@@ -4,12 +4,6 @@ aliases:
   - "/data_streams/guide/metrics-and-tags"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 This document discusses the following Data Streams Monitoring metrics and their tags:
 
 - `data_streams.latency`

@@ -1,4 +1,5 @@
 ---
+id: pipeline_failure
 core_product:
 - ci-cd
 title: fallo del pipeline

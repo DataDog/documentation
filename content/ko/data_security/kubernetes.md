@@ -57,6 +57,6 @@ Datadog 에이전트의 기본 설정은 표준 kubelet 및 컨테이너 소켓 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/developers/dogstatsd/unix_socket/?tab=host 
+[1]: /ko/extend/dogstatsd/unix_socket/?tab=host 
 [2]: /ko/containers/kubernetes/apm/ 
 [3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted

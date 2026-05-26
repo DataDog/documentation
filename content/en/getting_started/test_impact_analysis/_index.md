@@ -13,6 +13,9 @@ further_reading:
 - link: '/tests/code_coverage/'
   tag: 'Documentation'
   text: 'Learn about Code Coverage'
+- link: 'https://learn.datadoghq.com/courses/getting-started-test-optimization'
+  tag: 'Learning Center'
+  text: 'Getting Started with Test Optimization'
 algolia:
   tags: ["test impact analysis", "intelligent test runner", "ci test", "ci tests", "flaky test", "flaky tests"]
 ---
@@ -43,8 +46,8 @@ To set up Test Impact Analysis, see the following documentation for your program
 
 To enable Test Impact Analysis:
 
-1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][3]. 
-1. On the **Test Services** tab, click **Configure** in the `Test Impact Analysis` column for a service.
+1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3]. 
+1. On the {{< ui >}}Test Services{{< /ui >}} tab, click {{< ui >}}Configure{{< /ui >}} in the {{< ui >}}Test Impact Analysis{{< /ui >}} column for a service.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Service Settings page" style="width:100%" >}}
 
@@ -58,11 +61,11 @@ You can configure Test Impact Analysis to prevent specific tests from being skip
 
 To configure Test Impact Analysis:
 
-1. For the test you want to enable it on, click **Configure**.
-1. Click the **Status** toggle to enable Test Impact Analysis. 
+1. For the test you want to enable it on, click {{< ui >}}Configure{{< /ui >}}.
+1. Click the {{< ui >}}Status{{< /ui >}} toggle to enable Test Impact Analysis. 
 1. Specify any branches to exclude (typically the default branch of a repository). Test Impact Analysis does not skip tests for these branches.
 1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Test Impact Analysis runs all CI tests when any of these tracked files change.
-1. Click **Save Settings**.
+1. Click {{< ui >}}Save Settings{{< /ui >}}.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Enable Test Impact Analysis, provide branches for Test Impact Analysis to exclude, and add files for Test Impact Analysis to track and run tests when any changes happen" style="width:100%" >}}
 
@@ -83,7 +86,7 @@ The [Test Optimization Explorer][8] allows you to create visualizations and filt
 {{< tabs >}}
 {{% tab "Session" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Session` to start filtering your test session span results.
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Session{{< /ui >}} to start filtering your test session span results.
 
 {{< img src="/getting_started/intelligent_test_runner/itr_sessions.png" alt="Test session results in the Test Optimization Explorer filtered on tests skipped by Test Impact Analysis" style="width:100%" >}}
 
@@ -92,7 +95,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 {{% /tab %}}
 {{% tab "Module" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Module{{< /ui >}} to start filtering your test module span results. 
 
 {{< img src="/getting_started/intelligent_test_runner/itr_modules.png" alt="Test module results in the Test Optimization Explorer filtered on tests skipped by Test Impact Analysis" style="width:100%" >}}
 
@@ -101,7 +104,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 {{% /tab %}}
 {{% tab "Suite" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Suite{{< /ui >}} to start filtering your test suite span results. 
 
 {{< img src="/getting_started/intelligent_test_runner/itr_suites.png" alt="Test suite results in the Test Optimization Explorer filtered on tests skipped by Test Impact Analysis" style="width:100%" >}}
 
@@ -110,7 +113,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 {{% /tab %}}
 {{% tab "Test" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Test{{< /ui >}} to start filtering your test span results. 
 
 {{< img src="/getting_started/intelligent_test_runner/itr_tests.png" alt="Test results in the Test Optimization Explorer filtered on tests skipped by Test Impact Analysis" style="width:100%" >}}
 
@@ -121,29 +124,29 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 
 Use the following out-of-the-box Test Impact Analysis [facets][9] to customize the search query:
 
-Code Coverage Enabled
+{{< ui >}}Code Coverage Enabled{{< /ui >}}
 : Indicates whether code coverage tracking was active during the test session.
 
-Skipped by ITR
+{{< ui >}}Skipped by ITR{{< /ui >}}
 : Number of tests that were skipped during the session by Test Impact Analysis.
 
-Test Skipping Enabled
+{{< ui >}}Test Skipping Enabled{{< /ui >}}
 : Indicates if Test Impact Analysis was enabled for the test session.
 
-Test Skipping Type
+{{< ui >}}Test Skipping Type{{< /ui >}}
 : The method or criteria used by Test Impact Analysis to determine which tests to skip.
 
-Tests Skipped
+{{< ui >}}Tests Skipped{{< /ui >}}
 : The total count of tests that were not executed during the test session, which may include tests that were configured to skip, or were set as manual exclusions.
 
-Time Saved
+{{< ui >}}Time Saved{{< /ui >}}
 : The length of time saved for the session by Test Impact Analysis usage.
 
-For example, to filter test session runs that have `Test Skipping Enabled`, you can use `@test.itr.tests_skipping.enabled:true` in the search query. 
+For example, to filter test session runs that have {{< ui >}}Test Skipping Enabled{{< /ui >}}, you can use `@test.itr.tests_skipping.enabled:true` in the search query. 
 
 {{< img src="/getting_started/intelligent_test_runner/session_run.png" alt="A side panel displaying the first test session run where the Test Skipping feature is enabled for Test Impact Analysis" style="width:100%" >}}
 
-Then, click on a test session run and see the amount of time saved by Test Impact Analysis in the **Test Session Details** section on the test session side panel.
+Then, click on a test session run and see the amount of time saved by Test Impact Analysis in the {{< ui >}}Test Session Details{{< /ui >}} section on the test session side panel.
 
 ## Further Reading
 

@@ -2,7 +2,7 @@
 title: Request Datadog Integrations
 
 further_reading:
-  - link: "developers/integrations/agent_integration"
+  - link: "extend/integrations/agent_integration"
     tag: "Documentation"
     text: "Create a Datadog Integration"
 ---

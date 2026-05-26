@@ -161,6 +161,8 @@ For containerized environments, it is recommended to follow the [unified service
 
 After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agent's main configuration file. If you specify multiple tags, separate each one with a space.
 
+**Note**: The `DD_TAGS` environment variable uses whitespace to separate tags. For example, `DD_TAGS="key1:val1 key2:val2"` sets two tags. A value like `DD_TAGS="test:this is a test"` produces four separate tags (`test:this`, `is`, `a`, `test`) because each space-separated token is treated as its own tag. To include spaces in tag values, set tags through YAML configuration or integration annotations instead. Those methods convert whitespace to underscores (for example, `test:this is a test` becomes `test:this_is_a_test`).
+
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                                                                             |
@@ -217,7 +219,7 @@ services:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'gcr.io/datadoghq/agent:latest'
+    image: 'registry.datadoghq.com/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
@@ -254,9 +256,9 @@ Depending on the cardinality, there is a different set of out-of-the box tags fo
 
 #### Traces
 
-The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
+The Datadog SDK can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each SDK. You can also follow the [unified service tagging][2] documentation to configure your SDK for unified service tagging.
 
-Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
+Regardless of the SDK used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
 For instance, a node can't be both an object (with sub-nodes) and a string:
 
@@ -274,7 +276,7 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma-separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the {{< ui >}}User{{< /ui >}} section, click the {{< ui >}}Add Tags{{< /ui >}} button. Enter the tags as a comma-separated list, then click {{< ui >}}Save Tags{{< /ui >}}. Changes made to host tags in the UI may take up to five minutes to apply.
 
 {{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
 
@@ -283,7 +285,7 @@ Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (h
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma-separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the {{< ui >}}User{{< /ui >}} section, click the {{< ui >}}Add Tags{{< /ui >}} button. Enter the tags as a comma-separated list, then click {{< ui >}}Save Tags{{< /ui >}}. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
 
 {{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
 
@@ -292,9 +294,9 @@ Assign host tags in the UI using the [Infrastructure List page][1]. Click on any
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
+From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the {{< ui >}}Edit Tags{{< /ui >}} button. Enter a tag or select one used previously. Then click {{< ui >}}Add Tag `tag:name`{{< /ui >}} or {{< ui >}}Apply Changes{{< /ui >}}. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
 
-When creating a monitor, assign monitor tags under step 4 *Say what's happening* or *Notify your Team*:
+When creating a monitor, assign monitor tags under step 4 {{< ui >}}Say what's happening{{< /ui >}} or {{< ui >}}Notify your Team{{< /ui >}}:
 
 {{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:80%;" >}}
 
@@ -323,7 +325,7 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 {{% /tab %}}
 {{% tab "Service Level Objectives" %}}
 
-When creating an SLO, assign tags under step 3, **Add name and tags**:
+When creating an SLO, assign tags under step 3, {{< ui >}}Add name and tags{{< /ui >}}:
 
 {{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags" style="width:80%;">}}
 
@@ -421,6 +423,6 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 [9]: /tracing/setup/
-[10]: /developers/dogstatsd/
-[11]: /developers/community/libraries/
+[10]: /extend/dogstatsd/
+[11]: /extend/community/libraries/
 [12]: /metrics/dogstatsd_metrics_submission/#host-tag

@@ -21,7 +21,7 @@ title: バックエンドサービスのエラー追跡
 
 ## 概要
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -31,7 +31,7 @@ title: バックエンドサービスのエラー追跡
 
 オプションで、スタックトレース内でコードスニペットを見たい場合は、[GitHub インテグレーション][4]をセットアップしてください。
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="スタックトレース内のインラインコードスニペット" style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="スタックトレース内のインラインコードスニペット" style="width:70%;" >}}
 
 リポジトリの構成を始めるには、[ソースコードインテグレーションのドキュメント][6]を参照してください。
 

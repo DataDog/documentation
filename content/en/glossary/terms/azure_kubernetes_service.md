@@ -1,4 +1,5 @@
 ---
+id: azure_kubernetes_service
 title: Azure Kubernetes Service (AKS)
 core_product:
   - infrastructure monitoring

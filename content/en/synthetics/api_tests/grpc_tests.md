@@ -169,6 +169,8 @@ gRPC tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 {{% synthetics-variables %}}
 
 ### Use variables

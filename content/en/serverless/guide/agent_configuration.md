@@ -13,6 +13,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_API_KEY`                   | The environment variable with your Datadog API key, in plaintext. **One** key environment variable is required. See [serverless CLI environment variables][7].                                                                                              |
 | `DD_KMS_API_KEY`               | The environment variable with your Datadog API key, using KMS. **One** key environment variable is required. See [serverless CLI environment variables][7].                                                                        |
 | `DD_API_KEY_SECRET_ARN`        | The environment variable with your Datadog API key, using an AWS Secrets Manager secret. **One** key environment variable is required. See [serverless CLI environment variables][7].                                                                           |
+| `DD_API_KEY_SECRET_RELOAD_INTERVAL` | Only applicable when `DD_API_KEY_SECRET_ARN` is set. The interval (in seconds) at which to periodically reload the API key from AWS Secrets Manager. The reload is triggered lazily when the API key is needed for a flush and the interval has elapsed. If unset or `0`, the secret is loaded once and never reloaded. Available for version 88+ of the Datadog Lambda Extension. **Best practice for key rotation:** when rotating your API key, keep the old key valid for a grace period after creating the new one, and set this interval to a value shorter than that grace period. This helps ensure the extension always reloads the new key before the old one expires. |
 | `DD_LOG_LEVEL`                 | Set the level for the [Datadog Agent log][8].                                                                                                                                                                      |
 | `DD_SERVERLESS_FLUSH_STRATEGY` | Datadog Agent flushing strategy. Values permitted are `end` or `periodically[,milliseconds]`. For example, `DD_SERVERLESS_FLUSH_STRATEGY=periodically,100` flushes every 100ms.                                                                                                                  |
 | `DD_ENV`                       | Sets the global tag `env` tag for all data emitted.                                                                                                                                                                |
@@ -106,7 +107,7 @@ Send custom metrics with [the StatsD protocol][5]:
 
 [4]: https://docs.datadoghq.com/tracing/troubleshooting/agent_rate_limits/#max-connection-limit
 
-[5]: /developers/dogstatsd/
+[5]: /extend/dogstatsd/
 
 [6]: /agent/configuration/proxy/#agent-v6
 

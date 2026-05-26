@@ -12,12 +12,12 @@ Use the Network ACL component to visualize network access control lists from you
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Visibility**: Toggle the visibility of the component on the diagram.
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Name**: Give the NACL a name.
-- **Shape**: Select a shape for the component.
-- **Padding**: Increase or decrease the amount of space inside the component.
-- **Rules**: View inbound and outbound rules for the NACL.
+- {{< ui >}}Visibility{{< /ui >}}: Toggle the visibility of the component on the diagram.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Give the NACL a name.
+- {{< ui >}}Shape{{< /ui >}}: Select a shape for the component.
+- {{< ui >}}Padding{{< /ui >}}: Increase or decrease the amount of space inside the component.
+- {{< ui >}}Rules{{< /ui >}}: View inbound and outbound rules for the NACL.
 
 ## API
 

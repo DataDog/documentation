@@ -7,6 +7,9 @@ further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
   text: "Customize message templates"
+- link: "/incident_response/incident_management/setup_and_configuration/variables"
+  tag: "Documentation"
+  text: "Incident variables reference"
 ---
 
 ## Overview

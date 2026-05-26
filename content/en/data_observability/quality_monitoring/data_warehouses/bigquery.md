@@ -7,18 +7,25 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Learn about Data Observability'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitors'
 ---
 
 ## Overview
 
 The BigQuery integration connects Datadog to your Google Cloud project to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
 
+## Prerequisites
+
+If your Google Cloud project restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+
 ## Configure the BigQuery integration in Datadog
 
 To configure the BigQuery integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][8].
-2. Click the **Configure** button for the BigQuery option.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][8].
+2. Click the {{< ui >}}Configure{{< /ui >}} button for the BigQuery option.
 
 You can now choose to use a service account that you've [already connected to Datadog](#using-an-existing-service-account) or [set up a new one](#using-a-new-service-account) specifically for Data Observability.
 
@@ -26,10 +33,10 @@ You can now choose to use a service account that you've [already connected to Da
 
 Choose this option if you've previously connected a service account to Datadog.
 
-1. Select the **Use connected Service Account** option.
+1. Select the {{< ui >}}Use connected Service Account{{< /ui >}} option.
 2. Select the service account from the dropdown list.
-3. Click **Next**.
-4. Turn on the **Enable Data Observability** toggle and click **Add Account**.
+3. Click {{< ui >}}Next{{< /ui >}}.
+4. Turn on the {{< ui >}}Enable Data Observability{{< /ui >}} toggle and click {{< ui >}}Add Account{{< /ui >}}.
 Data Observability functionality requires additional roles and API access beyond the basic BigQuery integration.
 
 #### Additional roles
@@ -52,10 +59,10 @@ Make sure the following APIs have been enabled in the project associated with th
 
 ### Using a new service account
 
-1. Select the **Add new Service Account** option.
-2. Choose one of the setup methods. **Quick Start** is recommended for most users since it requires no manual permissions setup.
+1. Select the {{< ui >}}Add new Service Account{{< /ui >}} option.
+2. Choose one of the setup methods. {{< ui >}}Quick Start{{< /ui >}} is recommended for most users since it requires no manual permissions setup.
 
-After you've completed the **Quick Start** flow, click **Next** to proceed to the next page and enable the **Enable Data Observability** toggle before clicking **Add Account**.
+After you've completed the {{< ui >}}Quick Start{{< /ui >}} flow, click {{< ui >}}Next{{< /ui >}} to proceed to the next page and enable the {{< ui >}}Enable Data Observability{{< /ui >}} toggle before clicking {{< ui >}}Add Account{{< /ui >}}.
 
 #### Manual setup
 
@@ -71,14 +78,14 @@ In your Google Cloud console's IAM page, create a service account with the follo
 | [Job User][3] | `roles/bigquery.jobUser` | Required to run data quality queries |
 | [Compute Viewer][4] | `roles/compute.viewer` | Provides read-only access to get and list Compute Engine resources |
 
-In Datadog, after you've selected the **Manual** setup method:
+In Datadog, after you've selected the {{< ui >}}Manual{{< /ui >}} setup method:
 
-1. Copy the generated **Datadog Principal** to your clipboard. If this is your first time configuration GCP you'll need to first click the **Generate Principal** button.
-2. In the Google Cloud console, under **Service Accounts**, find the service account you recently created and click on it.
-3. Navigate to the **Principals with access** tab and click the **Grant access** button.
-4. Paste the **Datadog Principal** into the **New principals** text box.
-5. Under the **Assign roles** section, select the **Service Account Token Creator** role. This will allow the Datadog Principal to impersonate the service account you just created.
-6. Click the **Save** button.
+1. Copy the generated {{< ui >}}Datadog Principal{{< /ui >}} to your clipboard. If this is your first time configuration GCP you'll need to first click the {{< ui >}}Generate Principal{{< /ui >}} button.
+2. In the Google Cloud console, under {{< ui >}}Service Accounts{{< /ui >}}, find the service account you recently created and click on it.
+3. Navigate to the {{< ui >}}Principals with access{{< /ui >}} tab and click the {{< ui >}}Grant access{{< /ui >}} button.
+4. Paste the {{< ui >}}Datadog Principal{{< /ui >}} into the {{< ui >}}New principals{{< /ui >}} text box.
+5. Under the {{< ui >}}Assign roles{{< /ui >}} section, select the {{< ui >}}Service Account Token Creator{{< /ui >}} role. This will allow the Datadog Principal to impersonate the service account you just created.
+6. Click the {{< ui >}}Save{{< /ui >}} button.
 
 Finally, you need to enable the following APIs for **every project** you want to monitor, including the project where the service account has been created.
 
@@ -92,13 +99,15 @@ Finally, you need to enable the following APIs for **every project** you want to
 
 Once the service account has been created and the necessary roles and APIs have been applied, you can return to Datadog.
 
-1. Click **Verify and save account**.
-2. Click **Next**.
-3. Turn on the **Enable Data Observability** toggle and click **Add Account**.
+1. Click {{< ui >}}Verify and save account{{< /ui >}}.
+2. Click {{< ui >}}Next{{< /ui >}}.
+3. Turn on the {{< ui >}}Enable Data Observability{{< /ui >}} toggle and click {{< ui >}}Add Account{{< /ui >}}.
 
 ## Next steps
 
 After you configure the integration, Datadog begins syncing your information schema and query history in the background. Initial syncs can take several hours depending on the size of your BigQuery deployment.
+
+After the initial sync completes, create a [Data Observability monitor][14] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
 
 ## Further reading
 
@@ -117,3 +126,4 @@ After you configure the integration, Datadog begins syncing your information sch
 [11]: https://cloud.google.com/compute/docs/reference/rest/v1
 [12]: https://cloud.google.com/resource-manager/reference/rest
 [13]: https://cloud.google.com/bigquery/docs/reference/rest
+[14]: /monitors/types/data_observability/

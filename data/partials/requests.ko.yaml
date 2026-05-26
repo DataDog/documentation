@@ -11,10 +11,10 @@ requests:
   image: int_jmx.png
   link: /integrations/java
   name: JMX Beans
-- description: '[DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/)와 [API](https://docs.datadoghq.com/api/latest/metrics/)를
+- description: '[DogStatsD](https://docs.datadoghq.com/extend/dogstatsd/)와 [API](https://docs.datadoghq.com/api/latest/metrics/)를
     사용하여 비즈니스 통계용 커스텀 메트릭을 전송하세요. Datadog 에이전트 통합은 메트릭을 쿼링하는 파이썬(Python) 파일입니다. 에이전트
-    코드는 모두 오픈 소스이므로, [커스텀 에이전트 점검](https://docs.datadoghq.com/developers/custom_checks/)
-    또는 [커스텀 에이전트 통합](https://docs.datadoghq.com/developers/integrations/)을 작성할 수 있습니다.
+    코드는 모두 오픈 소스이므로, [커스텀 에이전트 점검](https://docs.datadoghq.com/extend/custom_checks/)
+    또는 [커스텀 에이전트 통합](https://docs.datadoghq.com/extend/integrations/)을 작성할 수 있습니다.
     [통합-엑스트라스 GitHub 리포지토리]에는 (https://github.com/DataDog/integrations-extras) 수많은
     커뮤니티 개발 커스텀 통합이 포함됩니다.'
   image: int_custom_metrics.png

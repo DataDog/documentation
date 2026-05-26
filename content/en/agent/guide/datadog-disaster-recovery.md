@@ -77,7 +77,9 @@ Email your new org name to your [Customer Success Manager](mailto:success@datado
 
 After the Datadog team has set your DDR org, use the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
-To link your DDR and primary orgs, run these commands, replacing the `<PLACEHOLDERS>` with your orgs' values:
+To link your DDR org to your primary org:
+- Add the `disaster_recovery_status_write` scope to your application key in the primary org. 
+- Run the following commands, replacing the placeholders with the appropriate values.
 
 
 ```shell
@@ -90,8 +92,8 @@ export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
 export USER_EMAIL=<USER_EMAIL>
 export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
-curl -v -H "Content-Type: application/json" -H 
-"dd-api-key:${PRIMARY_DD_API_KEY}" -H 
+curl -v -H "Content-Type: application/json" -H \
+"dd-api-key:${PRIMARY_DD_API_KEY}" -H \
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
 After linking your orgs, only the failover org displays this banner:
@@ -111,7 +113,7 @@ After linking your orgs, only the failover org displays this banner:
 {{% collapse-content title="Configure Single Sign On for the DDR org" level="h5" %}}
 **Datadog recommends using Single Sign On (SSO)** to enable all your users to seamlessly login to your Disaster Recovery org during an outage.
 
-Go to the [Organization Settings][1] in your DDR org to configure [SAML][9] or Google Login for your users. 
+Go to the [Organization Settings][1] in your DDR org to configure [SAML][9] or {{< ui >}}Google Login{{< /ui >}} for your users. 
 
 You must invite each of your users to your Disaster Recovery org and give them appropriate roles and permissions. Alternatively, to streamline this operation, you can use [Just-in-Time provisioning with SAML][2].
 {{% /collapse-content %}}
@@ -205,9 +207,9 @@ Contact your Datadog Customer Success Manager to schedule dedicated time windows
 {{< tabs >}}
 {{% tab "Using Fleet Automation (recommended)" %}}
 
-From the [Fleet Automation][14] page in your failover org, on the **Configure Agents** tab,  you can create a new failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites. 
+From the [Fleet Automation][14] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab,  you can create a new failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites. 
 
-To create a failover policy, click on **Create Failover Policy**.
+To create a failover policy, click on {{< ui >}}Create Failover Policy{{< /ui >}}.
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy.png" alt="Manage DDR policies" style="width:80%;" >}}
 
@@ -254,7 +256,7 @@ multi_region_failover:
 ### 3. Test	run failover tests in various environments
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
 
-To trigger a failover of your Agents, you can click on one of the policies in [Fleet Automation][14] in your DDR org, and then click **Enable**. The status of each host updates as the failover occurs.
+To trigger a failover of your Agents, you can click on one of the policies in [Fleet Automation][14] in your DDR org, and then click {{< ui >}}Enable{{< /ui >}}. The status of each host updates as the failover occurs.
 
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-enable3.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
@@ -333,7 +335,7 @@ You can test failover for your cloud integrations from your DDR organization's l
 
 {{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="Enable the failover policy in the DDR org" style="width:80%;" >}}
 
-On the failover landing page, you can check the status of your DDR org, or click **Fail over your integrations** to test your cloud integration failover.
+On the failover landing page, you can check the status of your DDR org, or click {{< ui >}}Fail over your integrations{{< /ui >}} to test your cloud integration failover.
 
 <div class="alert alert-danger">
 When no longer in failover, <strong>disable the failover policy</strong> in the DDR org to return integration data collection to the primary org. 
@@ -364,3 +366,4 @@ During testing, integration telemetry is spread over both organizations. If you 
 [16]: https://app.datadoghq.com/organization-settings/application-keys
 [17]: https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm
 [18]: https://docs.datadoghq.com/agent/fleet_automation/#overview
+[19]: /account_management/rbac/permissions/#disaster-recovery

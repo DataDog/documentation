@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "source": "github",
+      "type": "link",
+      "selection_state": [
+        {
+          "external_id": {
+            "type": "organization",
+            "value": "1"
+          }
+        }
+      ]
+    },
+    "type": "team_sync_bulk"
+  }
+}

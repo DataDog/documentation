@@ -21,7 +21,7 @@ further_reading:
 {{% tab "Kubernetes" %}}
 ### Requirements
 
-* [Apache Airflow 2.7][1] or later
+* [Apache Airflow 2.7][1] or later, including Airflow 3
 * [apache-airflow-providers-openlineage][2]
 
 ### Setup
@@ -92,7 +92,7 @@ To get started, follow the instructions below.
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
 
-   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables along with the previous ones. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables along with the previous ones. This fixes an OpenLineage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
@@ -139,15 +139,21 @@ In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment variables set previously for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][10].
+
+[10]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
+
 {{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
 ### Requirements
 
-* [Apache Airflow 2.7.0][1] or later
+* [Apache Airflow 2.7.0][1] or later, including Airflow 3
 * [apache-airflow-providers-openlineage][2]
 
 ### Setup
+
+<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: MWAA default constraints pin older <code>apache-airflow-providers-openlineage` versions</code>. These versions include known issues that can degrade the Data Observability experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/"> Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
 
 To get started, follow the instructions below.
 
@@ -157,7 +163,7 @@ To get started, follow the instructions below.
     apache-airflow-providers-openlineage
     ```
 
-2. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
+1. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
 
    ```shell
    #!/bin/sh
@@ -169,7 +175,7 @@ To get started, follow the instructions below.
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLineage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
@@ -179,11 +185,11 @@ To get started, follow the instructions below.
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
-3. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
+1. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-4. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
-   1. Configure Amazon MWAA to [send logs to CloudWatch][8].
-   2. [Send the logs to Datadog][9].
+1. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
+   1. Configure Amazon MWAA to [send logs to CloudWatch][9].
+   2. [Send the logs to Datadog][10].
 
 [1]: https://github.com/apache/airflow/releases/tag/2.7.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -192,8 +198,10 @@ To get started, follow the instructions below.
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [6]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 [7]: https://app.datadoghq.com/data-jobs/
-[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
-[9]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
+[8]: https://openlineage.io/docs/integrations/airflow/
+[9]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
+[10]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
+[11]: /data_observability/jobs_monitoring/airflow_mwaa_upgrade/
 
 ### Validation
 
@@ -205,6 +213,9 @@ Ensure your Execution role configured for your Amazon MWAA Environment has the r
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3] for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][12].
+
+[12]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
 
 {{% /tab %}}
 
@@ -268,6 +279,11 @@ In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list
 Check that the OpenLineage environment variables are correctly set on the Astronomer deployment.
 
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
+
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][12].
+
+[12]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
+
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
 <div class="alert alert-danger">
@@ -284,7 +300,7 @@ Data Observability: Jobs Monitoring for Airflow is not yet compatible with <a hr
 To get started, follow the instructions below.
 
 
-In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
+In the {{< ui >}}Advanced Configuration{{< /ui >}} tab, under {{< ui >}}Airflow configuration override{{< /ui >}}, click {{< ui >}}Add Airflow configuration override{{< /ui >}} and configure these settings:
 
    - In Section 1, enter `openlineage`.
    - In Key 1, enter `disabled`.
@@ -331,7 +347,11 @@ In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list
 
 ### Troubleshooting
 
-Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the {{< ui >}}Environment variables{{< /ui >}} tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
+
+To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][8].
+
+[8]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -339,6 +359,8 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of 
 ## Advanced Configuration
 
 ### Link your dbt jobs with Airflow tasks
+
+<div class="alert alert-info">The <code>lineage_root_*</code> macros used below require <code>apache-airflow-providers-openlineage</code> 2.3.0 or later. On older provider versions (for example, Airflow 2.9.2 with provider 2.2.0), see <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">Backport OpenLineage lineage macros for older provider versions</a>.</div>
 
 You can monitor your dbt jobs that are running in Airflow by connecting the dbt telemetry with respective Airflow tasks, using [OpenLineage dbt integration][6].
 
@@ -358,7 +380,7 @@ Also, add the --consume-structured-logs flag to view dbt jobs while the command 
 dbt-ol run --consume-structured-logs --project-dir=$TEMP_DIR --profiles-dir=$PROFILES_DIR
 ```
 
-3. In your DAG file, add the OPENLINEAGE_PARENT_ID variable to the environment of the Airflow task that runs the dbt process:
+3. In your DAG file, set the OpenLineage parent and root-parent environment variables on the Airflow task that runs the dbt process so dbt jobs link to both the immediate parent task and the outermost DAG run in Datadog:
 
 ```python
 dbt_run = BashOperator(
@@ -367,12 +389,19 @@ dbt_run = BashOperator(
     bash_command=f"dbt-ol run --consume-structured-logs --project-dir=$TEMP_DIR --profiles-dir=$PROFILES_DIR",
     append_env=True,
     env={
-        "OPENLINEAGE_PARENT_ID": "{{ macros.OpenLineageProviderPlugin.lineage_parent_id(task_instance) }}",
+        "OPENLINEAGE_PARENT_JOB_NAMESPACE": "{{ lineage_job_namespace() }}",
+        "OPENLINEAGE_PARENT_JOB_NAME": "{{ lineage_job_name(task_instance) }}",
+        "OPENLINEAGE_PARENT_RUN_ID": "{{ lineage_run_id(task_instance) }}",
+        "OPENLINEAGE_ROOT_PARENT_JOB_NAMESPACE": "{{ lineage_root_job_namespace(task_instance) }}",
+        "OPENLINEAGE_ROOT_PARENT_JOB_NAME": "{{ lineage_root_job_name(task_instance) }}",
+        "OPENLINEAGE_ROOT_PARENT_RUN_ID": "{{ lineage_root_run_id(task_instance) }}",
     },
 )
 ```
 
 ### Link your Spark jobs with Airflow tasks
+
+<div class="alert alert-info">The <code>lineage_root_*</code> macros require <code>apache-airflow-providers-openlineage</code> 2.3.0 or later. On older provider versions (for example, Airflow 2.9.2 with provider 2.2.0), see <a href="#backport-openlineage-lineage-macros-for-older-provider-versions">Backport OpenLineage lineage macros for older provider versions</a>.</div>
 
 OpenLineage integration can automatically inject Airflow's parent job information (namespace, job name, run id) into Spark application properties. This creates a parent-child relationship between Airflow tasks and Spark jobs, enabling you to troubleshoot both systems in one place.
 
@@ -389,6 +418,141 @@ AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
 ```
 
 This automatically injects parent job properties for all supported Spark Operators. To disable for specific operators, set `openlineage_inject_parent_job_info=False` on the operator.
+
+#### Manually inject parent job information for unsupported operators
+
+For operators that do not support automatic injection (for example, a `BashOperator` running the AWS CLI to start an Amazon EMR Serverless job), use the [OpenLineage Airflow lineage macros][4] to pass parent and root-parent identifiers as Spark configuration properties:
+
+```python
+from datetime import datetime
+
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+
+with DAG(
+    dag_id="emr_serverless_with_openlineage_parent",
+    start_date=datetime(2026, 1, 1),
+    schedule_interval=None,
+    catchup=False,
+) as dag:
+
+    submit = BashOperator(
+        task_id="start_emr_serverless_job",
+        bash_command=r"""
+set -euo pipefail
+
+aws emr-serverless start-job-run \
+  --application-id <APPLICATION_ID> \
+  --execution-role-arn <EXECUTION_ROLE_ARN> \
+  --name <JOB_NAME> \
+  --region <AWS_REGION> \
+  --mode STREAMING \
+  --job-driver '{"sparkSubmit": {
+    "entryPoint": "<JAR_URL>",
+    "entryPointArguments": ["--config-key", "<CONFIG_KEY>", "--stage", "<STAGE>"],
+    "sparkSubmitParameters": "\
+--conf spark.app.name=<APP_NAME> \
+--conf spark.openlineage.parentJobNamespace={{ lineage_job_namespace() }} \
+--conf spark.openlineage.parentJobName={{ lineage_job_name(task_instance) }} \
+--conf spark.openlineage.parentRunId={{ lineage_run_id(task_instance) }} \
+--conf spark.openlineage.rootParentJobNamespace={{ lineage_root_job_namespace(task_instance) }} \
+--conf spark.openlineage.rootParentJobName={{ lineage_root_job_name(task_instance) }} \
+--conf spark.openlineage.rootParentRunId={{ lineage_root_run_id(task_instance) }}\
+"
+  }}'
+""",
+    )
+```
+
+### Backport OpenLineage lineage macros for older provider versions
+
+The `lineage_root_job_namespace`, `lineage_root_job_name`, and `lineage_root_run_id` macros that emit the outermost DAG identifiers for root-parent linking were added in `apache-airflow-providers-openlineage` 2.3.0. If you cannot upgrade the provider (for example, Amazon MWAA on Airflow 2.9.2 pins provider 2.2.0), define the missing macros as `user_defined_macros` on the DAG:
+
+```python
+from __future__ import annotations
+
+from datetime import datetime
+
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from airflow.providers.openlineage import conf as ol_conf
+from airflow.providers.openlineage.plugins.adapter import OpenLineageAdapter
+
+
+def _logical_date(ti):
+    return getattr(ti, "logical_date", None) or ti.execution_date
+
+
+def _clear_number(ti) -> int:
+    return ti.get_dagrun().clear_number
+
+
+def _root_from_conf(ti, key):
+    ol = (ti.get_dagrun().conf or {}).get("openlineage") or {}
+    return ol.get(key) or None
+
+
+def lineage_job_namespace():
+    return ol_conf.namespace()
+
+
+def lineage_job_name(ti):
+    return f"{ti.dag_id}.{ti.task_id}"
+
+
+def lineage_run_id(ti):
+    return OpenLineageAdapter.build_task_instance_run_id(
+        dag_id=ti.dag_id,
+        task_id=ti.task_id,
+        try_number=ti.try_number,
+        logical_date=_logical_date(ti),
+        map_index=ti.map_index,
+    )
+
+
+def lineage_root_job_namespace(ti):
+    return _root_from_conf(ti, "rootParentJobNamespace") or ol_conf.namespace()
+
+
+def lineage_root_job_name(ti):
+    return _root_from_conf(ti, "rootParentJobName") or ti.dag_id
+
+
+def lineage_root_run_id(ti):
+    forwarded = _root_from_conf(ti, "rootParentRunId")
+    if forwarded:
+        return forwarded
+    return OpenLineageAdapter.build_dag_run_id(
+        dag_id=ti.dag_id,
+        logical_date=_logical_date(ti),
+        clear_number=_clear_number(ti),
+    )
+
+
+OL_MACROS = {
+    "lineage_job_namespace": lineage_job_namespace,
+    "lineage_job_name": lineage_job_name,
+    "lineage_run_id": lineage_run_id,
+    "lineage_root_job_namespace": lineage_root_job_namespace,
+    "lineage_root_job_name": lineage_root_job_name,
+    "lineage_root_run_id": lineage_root_run_id,
+}
+
+
+with DAG(
+    dag_id="<YOUR_DAG_ID>",
+    start_date=datetime(2026, 1, 1),
+    schedule_interval=None,
+    catchup=False,
+    user_defined_macros=OL_MACROS,
+) as dag:
+    submit = BashOperator(
+        task_id="<YOUR_TASK_ID>",
+        bash_command="...",
+    )
+```
+
+With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ lineage_root_*() }}` calls in your task templates resolve to values that match the built-in macros shipped with provider 2.3.0+, so downstream Spark or dbt jobs can link to the Airflow root parent in Datadog.
 
 
 ## Further Reading

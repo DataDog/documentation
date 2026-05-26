@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Go applic
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
@@ -65,10 +65,10 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 
 1. Verify that the containers are running with the `docker ps` command. You should see something like this:
    {{< code-block lang="shell" disable_copy="true" >}}
-   CONTAINER ID   IMAGE                           COMMAND                  CREATED              STATUS                          PORTS                    NAMES
-   0a4704ebed09   docker-notes                    "./cmd/notes/notes"      About a minute ago   Up About a minute               0.0.0.0:8080->8080/tcp   notes
-   9c428d7f7ad1   docker-calendar                 "./cmd/calendar/cale…"   About a minute ago   Up About a minute               0.0.0.0:9090->9090/tcp   calendar
-   b2c2bafa6b36   gcr.io/datadoghq/agent:latest   "/bin/entrypoint.sh"     About a minute ago   Up About a minute (unhealthy)   8125/udp, 8126/tcp       datadog-ag
+   CONTAINER ID   IMAGE                                  COMMAND                  CREATED              STATUS                          PORTS                    NAMES
+   0a4704ebed09   docker-notes                           "./cmd/notes/notes"      About a minute ago   Up About a minute               0.0.0.0:8080->8080/tcp   notes
+   9c428d7f7ad1   docker-calendar                        "./cmd/calendar/cale…"   About a minute ago   Up About a minute               0.0.0.0:9090->9090/tcp   calendar
+   b2c2bafa6b36   registry.datadoghq.com/agent:latest    "/bin/entrypoint.sh"     About a minute ago   Up About a minute (unhealthy)   8125/udp, 8126/tcp       datadog-ag
    {{< /code-block >}}
 
 1. The sample `notes` application is a basic REST API that stores data in an in-memory database. Use `curl` to send a few API requests:
@@ -143,7 +143,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
    {{< code-block lang="yaml" filename="docker/all-docker-compose.yaml">}}
      datadog-agent:
      container_name: datadog-agent
-     image: "gcr.io/datadoghq/agent:latest"
+     image: "registry.datadoghq.com/agent:latest"
      pid: host
      environment:
        - DD_API_KEY=<DD_API_KEY_HERE>
@@ -185,7 +185,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
 
 ## Launch the containers to explore automatic instrumentation
 
-Now that the Tracing Library is installed, spin up your application containers and start receiving traces. Run the following commands:
+Now that the SDK is installed, spin up your application containers and start receiving traces. Run the following commands:
 
 {{< code-block lang="shell" >}}
 docker-compose -f all-docker-compose.yaml build
@@ -235,7 +235,7 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-You can configure the tracing library to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+You can configure the SDK to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="docker/all-docker-compose.yaml" disable_copy="true" >}}
 environment:
@@ -244,9 +244,9 @@ environment:
   - DD_APM_NON_LOCAL_TRAFFIC=true
 {{< /code-block >}}
 
-For more information on available configuration options, see [Configuring the Go Tracing Library][14].
+For more information on available configuration options, see [Configuring the Go SDK][14].
 
-### Use automatic tracing libraries
+### Use automatic instrumentation
 
 Datadog has several fully supported libraries for Go that allow for automatic tracing when implemented in the code. In the `cmd/notes/main.go` file, you can see the `go-chi`, `sql`, and `http` libraries being aliased to the corresponding Datadog libraries: `chitrace`, `sqltrace`, and `httptrace` respectively:
 

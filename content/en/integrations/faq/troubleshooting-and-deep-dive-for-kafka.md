@@ -95,5 +95,5 @@ The number of partition contexts collection is limited to 500. If you require mo
 [7]: /agent/
 [8]: /agent/versions/upgrade_to_agent_v6/
 [9]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[10]: /developers/dogstatsd/
+[10]: /extend/dogstatsd/
 [11]: /help/

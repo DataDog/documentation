@@ -16,7 +16,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about the PagerDuty integration"
 ---
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
 PagerDuty and OpsGenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
@@ -45,7 +45,7 @@ When you configure a service account for a [Datadog integration][1], you can inc
 
 ### Setup examples
 
-{{% collapse-content title="PagerDuty" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="PagerDuty" level="h4" expanded=false id="pagerduty-setup" %}}
 
 You can connect any service in your [PagerDuty Service Directory][63]. You can map one PagerDuty service to each service in Software Catalog.
 
@@ -65,7 +65,7 @@ You can connect any service in your [PagerDuty Service Directory][63]. You can m
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="OpsGenie" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="OpsGenie" level="h4" expanded=false id="opsgenie-setup" %}}
 
 To add OpsGenie metadata to an entity definition: 
 

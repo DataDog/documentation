@@ -1,6 +1,5 @@
 ---
 title: Tracing a Proxy
-type: multi-code-lang
 further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"

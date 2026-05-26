@@ -10,6 +10,7 @@ private: true
 {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Sending Data from OpenTelemetry Demo to Datadog{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Visualize Histograms as Heatmaps{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/guide/instrument_unsupported_runtimes/" >}}Instrument Unsupported Runtimes with OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Migration guides

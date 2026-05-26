@@ -32,13 +32,13 @@ The following table shows feature compatibility across different setups:
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [LLM Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
+| [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
-| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
+| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | {{< tooltip text="Preview" tooltip="Kubernetes Explorer support for the OSS Collector is in Preview. Contact your account representative to request access." >}} | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
@@ -57,10 +57,10 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
-| [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
-| [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
-| [PHP][37] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [Java][34] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Ruby][36] | {{< X >}} | Alpha | {{< X >}} |
+| [PHP][37] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
 
 ## More details
 
@@ -86,6 +86,16 @@ For more information, see [Cloud Network Monitoring Setup][3].
 ### Source Code Integration
 
 For unsupported languages in OpenTelemetry setups, [configure telemetry tagging][5] to link data to a specific commit.
+
+## Support levels
+
+Datadog provides different levels of support for OpenTelemetry components and configurations:
+
+- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][39], [Datadog Exporter][40], and [Infra Attribute Processor][41]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements.
+
+- **Community Supported Components**: OpenTelemetry components [included with the DDOT Collector][42] by default. Datadog helps ensure these components are secure, stable, and compatible.
+
+- **Custom Components**: OpenTelemetry components or configurations not included by default, such as [custom Collector components][43] or [instrumentation of unsupported runtimes][44]. Datadog provides guidance and documentation as a starting point but does not directly support these components' functionality. For issues with custom components, engage with the [OpenTelemetry community][45] or the component maintainers.
 
 ## Platform and environment support
 
@@ -144,3 +154,10 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [36]: /opentelemetry/instrument/api_support/ruby/
 [37]: /opentelemetry/instrument/api_support/php/
 [38]: /llm_observability/instrumentation/otel_instrumentation/
+[39]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
+[40]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
+[41]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
+[42]: /opentelemetry/setup/ddot_collector/#opentelemetry-collector-components
+[43]: /opentelemetry/setup/ddot_collector/custom_components
+[44]: /opentelemetry/guide/instrument_unsupported_runtimes
+[45]: https://opentelemetry.io/community/

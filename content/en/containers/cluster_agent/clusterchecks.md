@@ -574,7 +574,7 @@ Next, identify the Agent pod on that node and run the [node Agent's `status` sub
 [3]: /agent/cluster_agent/clusterchecksrunner?tab=helm
 [4]: /agent/cluster_agent/clusterchecksrunner?tab=operator
 [5]: /containers/guide/clustercheckrunners
-[6]: /developers/custom_checks/write_agent_check/
+[6]: /extend/custom_checks/write_agent_check/
 [7]: /agent/guide/template_variables/
 [8]: /agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service
 [9]: /integrations/mysql/

@@ -1,9 +1,10 @@
 ---
+id: alerting_type
 core_product:
 - alertas
 related_terms:
-- alerta simple
-- alerta múltiple
+- simple_alert
+- multi_alert
 synonyms:
 - agrupación de alertas
 title: tipo de alerta

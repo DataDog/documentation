@@ -77,6 +77,10 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
     {% site-region region="gov" %}
     The intake origin for your Datadog site is `https://browser-intake-ddog-gov.com`.
     {% /site-region %}
+
+    {% site-region region="gov2" %}
+    The intake origin for your Datadog site is `https://browser-intake-us2-ddog-gov.com`.
+    {% /site-region %}
 ---
 * path
 * 
@@ -93,7 +97,7 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
 ## SDK setup
 
 <!-- SDK version >4.34.0 and up -->
-{% if or(equals($rum_browser_sdk_version, "gte_5_4_0"),equals($rum_browser_sdk_version, "gte_4_34_0")) %}
+{% if includes($rum_browser_sdk_version, ["gte_5_4_0", "gte_4_34_0"]) %}
 
 Configure the URL of the proxy in the `proxy` initialization parameter:
 
@@ -144,6 +148,8 @@ The RUM Browser SDK adds a `ddforward` query parameter to all requests to your p
 
 For example, with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the RUM Browser SDK sends requests to a URL like this: `https://example.org/datadog-intake-proxy?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`. The proxy forwards the request to `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
+When [Browser Profiling][3] is enabled, the SDK also sends requests to the quota API using a `quota.` subdomain of the standard intake origin. For these requests, the SDK adds a `ddforwardSubdomain=quota` query parameter alongside `ddforward`, so your proxy can construct the correct target URL: `https://quota.browser-intake-datadoghq.eu/api/v2/profiling/quota?...`.
+
 <!-- SDK version >=5.4.0 -->
 {% if equals($rum_browser_sdk_version, "gte_5_4_0") %}
 ### Passing a function to the `proxy` initialization parameter
@@ -154,6 +160,7 @@ This function receives an object with the following properties:
 
 - `path`: the path for the Datadog requests (example: `/api/v2/rum`)
 - `parameters`: the parameters of the Datadog requests (example: `ddsource=browser&...`)
+- `subdomain` _(optional)_: the intake subdomain to target, when the request should go to a subdomain-specific endpoint rather than the standard intake origin. For example, when [Browser Profiling][3] is enabled, the SDK passes `subdomain: 'quota'` so your proxy can route the request to `https://quota.browser-intake-datadoghq.eu/api/v2/profiling/quota?...` instead of the standard intake.
 
 <!-- NPM -->
 {% if equals($lib_src, "npm") %}
@@ -222,3 +229,4 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=rum#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
+[3]: /real_user_monitoring/correlate_with_other_telemetry/profiling

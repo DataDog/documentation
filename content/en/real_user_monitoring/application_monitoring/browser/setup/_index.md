@@ -7,7 +7,15 @@ further_reading:
 - link: '/real_user_monitoring/application_monitoring/browser/'
   tag: 'Documentation'
   text: 'RUM Browser Monitoring'
+- link: "https://learn.datadoghq.com/courses/configure-rum-javascript"
+  tag: "Learning Center"
+  text: "Configure Real User Monitoring (RUM) for JavaScript web applications"
+
 ---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
+{{< /site-region >}}
 
 ## Setup
 

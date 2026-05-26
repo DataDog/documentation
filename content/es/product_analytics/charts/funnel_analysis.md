@@ -25,7 +25,6 @@ El análisis del embudo te ayuda a realizar un seguimiento de las tasas de conve
 - Filtrar eventos individuales (acción o vista) en diferentes pasos de tu embudo.
 - Combinar varios eventos en un mismo paso, ya que los usuarios finales podrían tener diferentes maneras de obtener el mismo resultado en diferentes flujos.
 
-**Nota**: La **tasa de conversión** es el número de visitantes de tu sitio web que sí lograron el objetivo buscado (la conversión) del número total de visitantes.
 
 ## Construir un embudo
 
@@ -37,15 +36,15 @@ En esta página, elige tu vista o acción inicial y haz clic en `+ Step` crear p
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_video1.mp4" alt="Filtrado del mapa de red con búsquedas" video=true >}}
 
-Si tienes un punto de partida en mente, pero no sabes exactamente qué hicieron tus usuarios a continuación, el editor de pasos del embudo carga automáticamente las **vistas** y **acciones** más frecuentes que tus usuarios suelen ver y realizar a continuación. Esto te permite crear embudos más rápidamente, ya que conoces los recorridos que tus usuarios realizan en secuencia.
+Si no estás seguro de lo que hicieron tus usuarios, el editor del step (UI) / paso (generic) del embudo carga automáticamente **vistas** y **acciones** comunes que puedes elegir para añadir como pasos.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_dropoffs.png" alt="El editor de pasos de embudo carga automáticamente las vistas y acciones más frecuentes que los usuarios generalmente ven y realizan respectivamente." style="width:50%;" >}}
 
-**Nota**: Cualquier acción o vista que ocurra entre dos pasos de un embudo no afecta a la tasa de conversión paso a paso o global. Mientras el paso 1 y el paso 2 ocurran en el orden correcto en una sesión dada al menos una vez, cuentan como una única sesión convertida.
 
-### Filtrado
 
-Cuando creas tu embudo, puedes filtrar globalmente o por pasos.
+### Añadir filtros
+
+Cuando construyas tu embudo, puedes filtrar usuarios globalmente, o para un step (UI) / paso (generic) específico.
 
 - Los **filtros globales** se aplican a todo el embudo.
 
@@ -55,46 +54,83 @@ Cuando creas tu embudo, puedes filtrar globalmente o por pasos.
 
     {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_filter_by_step.png" alt="Uso de atributos para filtrar información entre pasos al crear tu embudo" style="width:50%;" >}}
 
-### Combinación de eventos
+### Combinar eventos
 
 Al crear tu embudo, puedes combinar varios eventos en un paso dado, ya que los usuarios finales pueden tener diferentes maneras de obtener el mismo resultado en diferentes flujos. Al combinar eventos, cualquiera de los eventos del paso puede representar el paso. El valor numérico que ves es la combinación de todos los pasos dentro del paso combinado.
 
 Para combinar un evento, haz clic en los tres puntos situados junto a un evento y selecciona **+ Combine Events** (+ Combinar eventos).
 
-### Agrupar
+### Datos del grupo
 
-Utiliza el desplegable Agrupar por, para agrupar los datos por un atributo específico.
+Utiliza el desplegable **Group by** (Agrupar por) para agrupar los datos por un atributo específico.
 
-**Nota**: La opción Agrupar por no funciona con la visualización de pasos del embudo.
+**Nota**: La agrupación de datos no es compatible con la [visualización](#change-the-visualization) de steps (UI) / pasos (generic) del embudo; cuando se aplica, la visualización cambia automáticamente a una top list (lista principal).
 
 ## Refinar la conversión
 
 Puedes seguir analizando la información de la página del embudo para comprender la tasa de conversión. La tasa de conversión es una métrica esencial que mide la eficacia de tu sitio o aplicación.
 
-Puedes analizar la conversión por **recuento de sesiones** o **usuarios**, lo que significa que puedes comprender cuántas sesiones o usuarios completaron el embudo.
+Puedes analizar la conversión por **sesión**, **usuario** o **cuenta**. Esto puede ser útil si sospechas, por ejemplo, que una minoría de tu base de usuarios convierte a un ritmo elevado.
 
-Puedes medir la conversión mediante los siguientes atributos:
+- Si seleccionas **Session** (Sesión), todos los steps (UI) / pasos (generic) deben completarse dentro de la misma `@session.id` para que cuenten como conversión.
 
-- **Recuento de conversiones** - Recuento de usuarios que atravesaron el embudo que definiste.
-- **Tasa de conversión** - La conversión se refiere al momento en que un usuario responde a una llamada a la acción. Esta tasa es el porcentaje de usuarios que entraron en el embudo y se convirtieron.
+- Si seleccionas **User** (Usuario), el embudo requiere que el mismo usuario individual (`@user.id`) complete cada step (UI) / paso (generic) para que la conversión cuente.
 
-  **Nota**: Sólo las sesiones RUM completadas contribuyen a las tasas de conversión.
+- Si seleccionas **Account** (Cuenta), diferentes usuarios dentro de la misma cuenta pueden completar diferentes steps (UI) / pasos (generic) y la conversión sigue contando. En este case (incidencia), el embudo está vinculado a la faceta `@account.id`.
 
-- **Tiempo hasta la conversión** - Tiempo que tardó el usuario en completar los eventos del paso.
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_refine_conversion.png" alt="La sección de la interfaz de usuario en la cual puedes seleccionar Sesión, Usuario o Cuenta para analizar tu conversión." style="width:50%;" >}}
+
+
+Una conversión se refiere al momento en el que un usuario responde a una llamada a la acción. Puedes medir la conversión mediante los siguientes atributos:
+
+- **Número de conversiones**: Número de usuarios que han pasado por el embudo que has definido.
+- **Tasa de conversión**: Esta tasa es el porcentaje de usuarios que han entrado en el embudo y han convertido.
+- **Tiempo de conversión**: El tiempo que tardó el usuario en completar los eventos de step (UI) / paso (generic). Esta opción no está disponible para la [visualización](#change-the-visualization) de pasos del embudo; si la seleccionas, la visualización cambia automáticamente a una serie temporal.
+
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion_measures.png" alt="La sección de la interfaz de usuario en la cual puedes seleccionar Sesión, Usuario o Cuenta para analizar tu conversión." style="width:50%;" >}}
 
 Puedes medir estos atributos **en todos los pasos** o entre **pasos específicos**.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion.png" alt="Medir atributos en todos los pasos o en pasos específicos." style="width:60%;" >}}
 
-Utiliza el selector **filtro** para filtrar por los distintos criterios que hayas definido.
+Utiliza el selector [**filter** (filtrar)](#add-filters) para filtrar los datos por tipos específicos de usuarios. Estos filtros se aplican a todos los steps (UI) / pasos (generic) del embudo.
 
 A continuación, haz clic en un punto de datos para **investigar los atributos específicos** que podrían haber afectado a los índices de conversión, como la velocidad de carga de la página, la facilidad de navegación o la experiencia de pago.
 
+## Métricas informáticas de conversión
+
+### Cómo calcula Datadog las métricas de conversión
+Considera un embudo con eventos `A → B → C` y steps (UI) / pasos (generic) de eventos `A, A, A, B, C, C`. 
+
+En este case (incidencia), Datadog cuenta una conversión. Esto se debe a que el cálculo de conversión coincide solo con la primera ocurrencia del evento **A** y la primera ocurrencia del evento **C** en la secuencia.
+
+Para ilustrarlo mejor, si el usuario realiza la secuencia de eventos `A, A, A, B, C, C, A, B, C`, Datadog cuenta dos conversiones. La primera conversión se completa con la secuencia `A, A, A, B, C, C` y la segunda conversión se completa con la siguiente secuencia `A, B, C`.
+
+<div class="alert alert-info"> Cualquier acción o vista que se produzca entre dos pasos de un embudo no afecta al step (UI) / paso (generic) por step (UI) / paso (generic) o a la tasa de conversión global. Siempre que step (UI) / paso (generic) A y C se produzcan en el orden correcto en una sesión determinada al menos una vez, cuenta como una única sesión convertida.</div>
+
+Datadog calcula el tiempo medio entre pasos promediando la duración total entre el primeo y el último step (UI) / paso (generic) de cada conversión sobre el número total de pasos.
+
+Si analizas tu embudo por **usuario** o por **cuenta**, puedes definir tu plazo de conversión en horas o días desde el primer evento. El plazo predeterminado para las conversiones es de un día (una ventana de 24 horas, no una fecha de calendario) para determinar si se ha producido una conversión.
+
+
+### Selecciona un método de recuento de conversiones
+
+Cuando calcules tu conversión, selecciona cómo se cuentan las conversiones eligiendo **único** o **total** al lado de **Conversion count** (Número de conversiones) en la configuración de tu embudo. 
+
+- **Único**: Cuenta la conversión una sola vez por sesión, usuario o cuenta. Por ejemplo, si el usuario completa la secuencia del embudo `A → B → C` varias veces dentro de la misma sesión (por ejemplo, `A, B, C, A, B, C`), cuenta como **una conversión**. El ajuste `Unique` solo cuenta la primera conversión por sesión (o por usuario, según el alcance de tu análisis).
+
+- **Total**: Cuenta una conversión cada vez que el mismo ID de sesión, usuario o cuenta completa el embudo definido. Utilizando el mismo ejemplo (`A, B, C, A, B, C`), este método cuenta **dos conversiones**. El ajuste `Total` cuenta los flujos completos, no el número de veces que se repite un step (UI) / paso (generic) intermedio.
+
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_conversion.png" alt="Selecciona una medida de conversión, ya sea Única o Total, para determinar cómo se cuentan tus conversiones de sesión." style="width:80%;" >}}
+
+
 ## Cambiar la visualización
+Después de definir los eventos y la medición de la conversión del paso, puedes cambiar a una visualización diferente para comprender mejor las conversiones de los usuarios de tu aplicación.
+
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_change_viz.mp4" alt="Hacer clic en el menú desplegable de visualización para seleccionar otra vista" video=true >}}
 
-Después de definir los eventos y la medición de la conversión del paso, puedes cambiar a una visualización diferente para comprender mejor las conversiones de los usuarios de tu aplicación.
 
 ### Series temporales
 Visualizar la conversión como una serie temporal puede ser útil para comprender las tendencias de conversión. Cada punto del eje x representa la conversión de la consulta identificada.
@@ -114,6 +150,16 @@ Los valores de consulta muestran el valor actual de la métrica de uso dada.
 Visualiza los principales valores de una faceta en función de la medida elegida.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_toplist.png" alt="Visualizar datos de conversión como una lista de principales." style="width:80%;" >}}
+
+## Navegar por los gráficos de embudo
+Para obtener más contexto sobre las bajas de usuarios, haz clic en el gráfico del embudo para abrir un panel lateral que contiene información adicional. A continuación, navega entre los steps (UI) / pasos (generic) para ver:
+
+- **Rendimiento del step (UI) / paso (generic)**: Consulta las métricas relacionadas con la conversión (por ejemplo, la tasa de conversión, las sesiones abandonadas y el tiempo medio de conversión).
+- **Rutas de ramifcación del step (UI) / paso (generic) anterior**: Descubre los otros caminos que toman los usuarios en lugar de los previstos. Esta sección solo está disponible cuando se mira un step (UI) / paso (generic) entre dos vistas en un embudo.
+- **Problemas que podrían estar afectando a la conversión**: Consulta los principales problemas que podrían estar afectando a las conversiones e investígalos más a fondo con los enlaces a RUM, Error Tracking y Session Replay.
+
+
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_metrics.png" alt="Haz clic en la vista del embudo para ver un contexto adicional sobre los abandonos de usuarios." style="width:90%;" >}}
 
 ## Compartir un embudo
 

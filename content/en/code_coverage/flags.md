@@ -11,6 +11,9 @@ further_reading:
   - link: "/code_coverage/configuration"
     tag: "Documentation"
     text: "Configure Code Coverage"
+  - link: "/code_coverage/carryforward"
+    tag: "Documentation"
+    text: "Keep total coverage accurate with carryforward"
 ---
 
 ## Overview
@@ -21,6 +24,7 @@ With flags, you can:
 - View coverage data filtered by a specific flag in the Datadog UI.
 - Configure [PR Gates][1] that evaluate coverage thresholds for specific flags.
 - Track coverage trends separately for different test suites or environments.
+- Enable [carryforward][6] to keep total coverage accurate when not every CI job runs for a commit.
 
 ### Flags vs. monorepo support features
 
@@ -85,7 +89,7 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ## View coverage by flag
 
-In the [Code Coverage UI][4], select a repository and use the **Flag** filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
+In the [Code Coverage UI][4], select a repository and use the {{< ui >}}Flag{{< /ui >}} filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
 
 {{< img src="/code_coverage/flags_filter.png" alt="Code Coverage UI showing the flag filter dropdown" style="width:100%" >}}
 
@@ -95,11 +99,18 @@ When you select a flag, the coverage metrics update to show only the data from r
 
 You can configure [PR Gates][1] to enforce coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types or runtime versions.
 
-### Create a flag-specific gate
+You can create flag-specific gates in one of two ways:
+
+- **Datadog UI**: Navigate to [PR Gates rule creation][2] and configure a rule with per-flag scope.
+- **YAML configuration file**: Define gates with the `flags` field in your [`code-coverage.datadog.yml`][5] file. This allows you to manage gates as code alongside your repository.
+
+Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][5] for YAML gate syntax and examples.
+
+### Create a flag-specific gate in the Datadog UI
 
 1. Navigate to [PR Gates rule creation][2].
 2. Configure the coverage threshold (total or patch coverage).
-3. In the **per flag** field, select one or more flags the gate should apply to.
+3. In the {{< ui >}}per flag{{< /ui >}} field, select one or more flags the gate should apply to.
 4. Save the rule.
 
 {{< img src="/code_coverage/flags_gate.png" alt="PR Gates configuration showing the flags scope option" style="width:100%" >}}
@@ -113,23 +124,23 @@ You can configure [PR Gates][1] to enforce coverage thresholds for specific flag
 
 **Enforce high coverage for unit tests:**
 
-- Condition type: `Overall Code Coverage`
+- Condition type: {{< ui >}}Overall Code Coverage{{< /ui >}}
 - Threshold: `80%`
-- Scope: `Flags`
+- Scope: {{< ui >}}Flags{{< /ui >}}
 - Flags: `unit-tests`
 
 **Require all new code in integration tests to be tested:**
 
-- Condition type: `Patch Code Coverage`
+- Condition type: {{< ui >}}Patch Code Coverage{{< /ui >}}
 - Threshold: `100%`
-- Scope: `Flags`
+- Scope: {{< ui >}}Flags{{< /ui >}}
 - Flags: `integration-tests`
 
 **Enforce coverage for specific runtime versions:**
 
-- Condition type: `Overall Code Coverage`
+- Condition type: {{< ui >}}Overall Code Coverage{{< /ui >}}
 - Threshold: `75%`
-- Scope: `Flags`
+- Scope: {{< ui >}}Flags{{< /ui >}}
 - Flags: `python-3.11`, `python-3.12`
 
 ### Multiple gates per repository
@@ -167,3 +178,5 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/monorepo_support
 [4]: https://app.datadoghq.com/ci/code-coverage
+[5]: /code_coverage/configuration#pr-gates
+[6]: /code_coverage/carryforward

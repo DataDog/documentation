@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog PHP tracer** in your Dockerfile.
+1. **Install the Datadog PHP SDK** in your Dockerfile.
 
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php \
@@ -53,6 +53,8 @@ apk add libgcc
 
 {{% serverless-init-env-vars-in-container language="php" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
@@ -63,5 +65,5 @@ apk add libgcc
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
-[3]: /developers/dogstatsd/?tab=php#install-the-dogstatsd-client
+[3]: /extend/dogstatsd/?tab=php#install-the-dogstatsd-client
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples-5

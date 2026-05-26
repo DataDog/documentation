@@ -25,28 +25,33 @@ further_reading:
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
 ---
 
-Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. You can define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run these evaluations at scale across your traces and spans.
+Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. Define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run the evaluations at scale on:
+
+- **Span scope**—score the input and output of one LLM call, agent step, or tool invocation in isolation.
+- **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluations][16] for the full walkthrough, use cases, and prompt examples.
 
 ## Create a custom LLM-as-a-judge evaluation
 
 You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
 
+<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
+
 Learn more about the [compatibility requirements][6].
 
 ### Configure the prompt
 
-1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1-3.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
-1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
-1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
-    - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
-    - If you select a **Vertex** account, choose a project and location.
-1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
-1. Under **Evaluation Scope**, select the application you want to evaluate.
-1. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
-   - **Create from scratch**: Use your own custom prompt (defined in the next step).
-   - **Failure to Answer**, **Prompt Injection**, **Sentiment**, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
-1. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
+1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
+1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
+1. Use the {{< ui >}}Account{{< /ui >}} drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+    - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for.
+    - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
+1. Use the {{< ui >}}Model{{< /ui >}} drop-down menu to select a model to use for your LLM judge.
+1. Under {{< ui >}}Evaluation Scope{{< /ui >}}, select the application you want to evaluate.
+1. Under {{< ui >}}Evaluation Prompt{{< /ui >}} section, use the {{< ui >}}Prompt Template{{< /ui >}} drop-down menu:
+   - {{< ui >}}Create from scratch{{< /ui >}}: Use your own custom prompt (defined in the next step).
+   - {{< ui >}}Failure to Answer{{< /ui >}}, {{< ui >}}Prompt Injection{{< /ui >}}, {{< ui >}}Sentiment{{< /ui >}}, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
+1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter your custom prompt or modify a prompt template.
    For custom prompts, provide clear instructions describing what the evaluator should assess.
    - Focus on a single evaluation goal
    - Include 2–3 few-shot examples showing input/output pairs, expected results, and reasoning.
@@ -84,32 +89,32 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. An autocomplete dropdown appears when you type `{{` to help you select available fields.
+8. In the {{< ui >}}User{{< /ui >}} field, provide your user prompt. Explicitly specify what parts of the span or trace to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans—see [Prompt Templating][15] for the full reference. An autocomplete dropdown appears when you type `{{` to help you select available fields.
 
-   Additional variables are available: type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces** (on the right side) to add span data as a variable:
+   You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Spans in Selected Trace{{< /ui >}} in trace scope) to add span data as a variable:
    1. Choose an account and an application so that spans/traces show up on the right.
    2. Select one of the spans on the right to view its JSON.
-   3. Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
+   3. Use the three-dots menu and select {{< ui >}}Add variable to message{{< /ui >}} to insert the JSON into your prompt.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
 ### Define the evaluation output
 
-For OpenAI, Azure OpenAI, Vertex AI, or Anthropic models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
 
-For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
+For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
 
 For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
-   - **Boolean**: True/false results (for example, "Did the model follow instructions?")
-   - **Score**: Numeric ratings (for example, a 1–5 scale for helpfulness)
-   - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
-   - **JSON**: JSON allows free form schemas
+   - {{< ui >}}Boolean{{< /ui >}}: True/false results (for example, "Did the model follow instructions?")
+   - {{< ui >}}Score{{< /ui >}}: Numeric ratings (for example, a 1–5 scale for helpfulness)
+   - {{< ui >}}Categorical{{< /ui >}}: Discrete labels (for example, "Good", "Bad", "Neutral")
+   - {{< ui >}}JSON{{< /ui >}}: JSON allows free form schemas
 
-2. Optionally, select **Enable Reasoning**. This configures the LLM judge to provide a short justification for its decision (for example, why a score of 8 was given). Reasoning helps you understand how and why evaluations are made, and is particularly useful for auditing subjective metrics like tone, empathy, or helpfulness. Adding reasoning can also [make the LLM judge more accurate](https://arxiv.org/abs/2504.00050).
+2. Optionally, select {{< ui >}}Enable Reasoning{{< /ui >}}. This configures the LLM judge to provide a short justification for its decision (for example, why a score of 8 was given). Reasoning helps you understand how and why evaluations are made, and is particularly useful for auditing subjective metrics like tone, empathy, or helpfulness. Adding reasoning can also [make the LLM judge more accurate](https://arxiv.org/abs/2504.00050).
 
 3. Edit a JSON schema that defines your evaluations output type:
 
@@ -227,12 +232,12 @@ An example schema for a JSON evaluation:
 {{< /tabs >}}
 
 
-4. Configure **Assessment Criteria**.
+4. Configure {{< ui >}}Assessment Criteria{{< /ui >}}.
    This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
 
 {{< tabs >}}
 {{% tab "Boolean" %}}
-Select **True** to mark a result as "Pass", or **False** to mark a result as "Fail".
+Select {{< ui >}}True{{< /ui >}} to mark a result as "Pass", or {{< ui >}}False{{< /ui >}} to mark a result as "Fail".
 {{% /tab %}}
 
 {{% tab "Score" %}}
@@ -242,31 +247,232 @@ Define numerical thresholds to determine passing performance.
 Select the categories that should map to a passing state. For example, if you have the categories `Excellent`, `Good`, and `Poor`, where only `Poor` should correspond to a failing state, select `Excellent` and `Good`.
 {{% /tab %}}
 {{% tab "JSON" %}}
-Assessment Criteria is not currently available for JSON evaluations.
+Supply a JavaScript function to assign an assessment based on the output from the LLM-as-a-Judge evaluator. The function must return a json object of the following format
+```
+{
+    assessment: "pass", // "pass" | "fail" [REQUIRED],
+    value: "evaluation_label" // string [OPTIONAL],
+    reasoning: "explanation behind the assessment" // string [OPTIONAL]
+
+}
+```
+and the function signature must be `function __evalPostProcessing(input)` and the `input` is the json from the evaluator. The function below is an example of a post processing function:
+```
+function __evalPostProcessing(input) {
+    /*
+     * Expected input shape (from LLM evaluator [this depends on the JSON Structured Output]):
+     * {
+     *   criteria: {
+     *     quality_score: { score: number (0–1), category: "excellent"|"good"|"poor", reasoning: string },
+     *     toxicity:      { score: number (0–1), category: "safe"|"unsafe",           reasoning: string },
+     *     completeness:  { score: number (0–1), category: "complete"|"incomplete",   reasoning: string },
+     *     relevance:     { score: number (0–1), category: "relevant"|"irrelevant",   reasoning: string },
+     *   },
+     *   overall_reasoning: string  // (optional) top-level summary from LLM evaluator
+     * }
+     */
+
+    const SCORE_THRESHOLD = 0.7;
+
+    // Category → pass/fail mappings per criterion
+    const CATEGORY_PASS_MAP = {
+        quality_score: ["excellent", "good"],
+        toxicity:      ["safe"],
+        completeness:  ["complete"],
+        relevance:     ["relevant"],
+    };
+
+    const criteriaResults = {};
+    const failures = [];
+    const passes = [];
+
+    for (const [criterionName, passCategories] of Object.entries(CATEGORY_PASS_MAP)) {
+        const criterion = input?.criteria?.[criterionName];
+
+        if (!criterion) {
+            failures.push(`[${criterionName}] Missing from evaluator output.`);
+            criteriaResults[criterionName] = false;
+            continue;
+        }
+
+        const { score, category, reasoning } = criterion;
+
+        const scorePass    = typeof score === "number" && score >= SCORE_THRESHOLD;
+        const categoryPass = typeof category === "string" && passCategories.includes(category.toLowerCase());
+
+        // Both score AND category must pass
+        const criterionPass = scorePass && categoryPass;
+        criteriaResults[criterionName] = criterionPass;
+
+        if (criterionPass) {
+            passes.push(`[${criterionName}] PASS — score: ${score.toFixed(2)}, category: "${category}". ${reasoning ?? ""}`);
+        } else {
+            const reasons = [];
+            if (!scorePass)    reasons.push(`score ${score?.toFixed(2) ?? "N/A"} below threshold (≥${SCORE_THRESHOLD})`);
+            if (!categoryPass) reasons.push(`category "${category}" not in acceptable set [${passCategories.join(", ")}]`);
+            failures.push(`[${criterionName}] FAIL — ${reasons.join("; ")}. ${reasoning ?? ""}`);
+        }
+    }
+
+    // Determine overall assessment
+    const passed = Object.values(criteriaResults).every(Boolean);
+    const failCount = failures.length;
+
+    const assessment = passed ? "pass" : "fail";
+
+    const label = passed
+        ? "high_quality_response"
+        : failCount === 1
+            ? "minor_quality_issue"
+            : failCount === 2
+                ? "moderate_quality_issue"
+                : "low_quality_response";
+
+    const reasoningParts = [
+        passed
+            ? "All criteria passed."
+            : `${failCount} criterion/criteria failed.`,
+        ...failures,
+        ...passes,
+        input?.overall_reasoning ? `Evaluator summary: ${input.overall_reasoning}` : ""
+    ].filter(Boolean);
+
+    return {
+        assessment: assessment,
+        value: label,
+        reasoning: reasoningParts.join(" | ")
+    };
+}
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
-1. Select the **Boolean** output type.
-   <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
+{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+1. Select the {{< ui >}}JSON{{< /ui >}} output type.
 
-2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
+2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you conduct a more complex assessment than just using Boolean, Score, or Categorical structured output.
+
+    The post-processing function must return an object containing an **assessment** of value "pass" or "fail" and optionally, value or reasoning strings. The function must return a json object of the following format:
+    ```
+    {
+        assessment: "pass", // "pass" | "fail" [REQUIRED],
+        value: "evaluation_label" // string [OPTIONAL],
+        reasoning: "explanation behind the assessment" // string [OPTIONAL]
+
+    }
+    ```
+    and the function signature must be `function __evalPostProcessing(input)` and the `input` is the json from the evaluator. The function below is an example of a post processing function:
+    ```
+    function __evalPostProcessing(input) {
+        /*
+        * Expected input shape (from LLM evaluator [this depends on the JSON Structured Output]):
+        * {
+        *   criteria: {
+        *     quality_score: { score: number (0–1), category: "excellent"|"good"|"poor", reasoning: string },
+        *     toxicity:      { score: number (0–1), category: "safe"|"unsafe",           reasoning: string },
+        *     completeness:  { score: number (0–1), category: "complete"|"incomplete",   reasoning: string },
+        *     relevance:     { score: number (0–1), category: "relevant"|"irrelevant",   reasoning: string },
+        *   },
+        *   overall_reasoning: string  // (optional) top-level summary from LLM evaluator
+        * }
+        */
+
+        const SCORE_THRESHOLD = 0.7;
+
+        // Category → pass/fail mappings per criterion
+        const CATEGORY_PASS_MAP = {
+            quality_score: ["excellent", "good"],
+            toxicity:      ["safe"],
+            completeness:  ["complete"],
+            relevance:     ["relevant"],
+        };
+
+        const criteriaResults = {};
+        const failures = [];
+        const passes = [];
+
+        for (const [criterionName, passCategories] of Object.entries(CATEGORY_PASS_MAP)) {
+            const criterion = input?.criteria?.[criterionName];
+
+            if (!criterion) {
+                failures.push(`[${criterionName}] Missing from evaluator output.`);
+                criteriaResults[criterionName] = false;
+                continue;
+            }
+
+            const { score, category, reasoning } = criterion;
+
+            const scorePass    = typeof score === "number" && score >= SCORE_THRESHOLD;
+            const categoryPass = typeof category === "string" && passCategories.includes(category.toLowerCase());
+
+            // Both score AND category must pass
+            const criterionPass = scorePass && categoryPass;
+            criteriaResults[criterionName] = criterionPass;
+
+            if (criterionPass) {
+                passes.push(`[${criterionName}] PASS — score: ${score.toFixed(2)}, category: "${category}". ${reasoning ?? ""}`);
+            } else {
+                const reasons = [];
+                if (!scorePass)    reasons.push(`score ${score?.toFixed(2) ?? "N/A"} below threshold (≥${SCORE_THRESHOLD})`);
+                if (!categoryPass) reasons.push(`category "${category}" not in acceptable set [${passCategories.join(", ")}]`);
+                failures.push(`[${criterionName}] FAIL — ${reasons.join("; ")}. ${reasoning ?? ""}`);
+            }
+        }
+
+        // Determine overall assessment
+        const passed = Object.values(criteriaResults).every(Boolean);
+        const failCount = failures.length;
+
+        const assessment = passed ? "pass" : "fail";
+
+        const label = passed
+            ? "high_quality_response"
+            : failCount === 1
+                ? "minor_quality_issue"
+                : failCount === 2
+                    ? "moderate_quality_issue"
+                    : "low_quality_response";
+
+        const reasoningParts = [
+            passed
+                ? "All criteria passed."
+                : `${failCount} criterion/criteria failed.`,
+            ...failures,
+            ...passes,
+            input?.overall_reasoning ? `Evaluator summary: ${input.overall_reasoning}` : ""
+        ].filter(Boolean);
+
+        return {
+            assessment: assessment,
+            value: label,
+            reasoning: reasoningParts.join(" | ")
+        };
+    }
+    ```
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
+1. Select the {{< ui >}}Boolean{{< /ui >}} output type.
+   <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
+
+2. Provide {{< ui >}}True keywords{{< /ui >}} and {{< ui >}}False keywords{{< /ui >}} that define when the evaluation result is true or false, respectively.
 
    Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords.
 
    For example, if you set:
 
-   - **True keywords**: Yes, yes
-   - **False keywords**: No, no
+   - {{< ui >}}True keywords{{< /ui >}}: Yes, yes
+   - {{< ui >}}False keywords{{< /ui >}}: No, no
 
    Then your system prompt should include something like `Respond with "yes" or "no"`.
 
-3. For **Assessment Criteria**:
-   - Select **True** to mark a result as "Pass"
-   - Select **False** to mark a result as "Fail"
+3. For {{< ui >}}Assessment Criteria{{< /ui >}}:
+   - Select {{< ui >}}True{{< /ui >}} to mark a result as "Pass"
+   - Select {{< ui >}}False{{< /ui >}} to mark a result as "Fail"
 
    This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
 {{% /collapse-content %}}
@@ -275,28 +481,33 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 ### Define the evaluation scope: Filtering and sampling
 
-Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
-   - **Application**: Select the application you want to evaluate.
-   - **Evaluate On**: Choose one of the following:
-      - **Traces**: Evaluate only root spans
-      - **All Spans**: Evaluate both root and child spans
-   - **Span Names**: (Optional) Limit evaluation to spans with certain names.
-   - **Tags**: (Optional) Limit evaluation to spans with certain tags.
-   - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
+<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
+
+Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluation runs. This helps control coverage (which spans or traces are included) and cost (how many are sampled).
+   - {{< ui >}}Application{{< /ui >}}: Select the application you want to evaluate.
+   - {{< ui >}}Evaluate On{{< /ui >}}: Choose one of the following:
+      - {{< ui >}}Trace{{< /ui >}}: Evaluate the full trace, including all its spans, as a single unit. Use this when the answer depends on context across multiple spans (agent goal completion, tool-use chains, RAG faithfulness). See [Trace-Level Evaluations][16] for examples and details on how trace completion is determined.
+      - {{< ui >}}Span{{< /ui >}}: Evaluate matching spans individually. Use the {{< ui >}}Query{{< /ui >}} field to scope to specific spans (for example, only root spans, only `llm` spans, or spans with a specific tag).
+   - {{< ui >}}Query{{< /ui >}}: (Optional) Enter a query using Datadog query syntax to filter which spans or traces are evaluated. For example:
+      - `@name:agent.workflow` to filter by span name
+      - `env:prod` to filter by tag
+      - `@parent_id:undefined` to evaluate only root spans (when {{< ui >}}Evaluate On{{< /ui >}} is set to {{< ui >}}Span{{< /ui >}})
+      - `@name:agent.workflow AND env:prod` to filter by span name and tag
+   - {{< ui >}}Sampling Rate{{< /ui >}}: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
 {{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
 
 ### Test and preview
 
-The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
+The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
 
-Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
+Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluation{{< /ui >}} to pre-fill inputs to your evaluation with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
 
 ## Viewing and using results
 
-After you **Save and Publish** your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can **Save as Draft** and edit or enable your evaluation later.
+After you {{< ui >}}Save and Publish{{< /ui >}} your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluation later.
 
-Results are available across LLM Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
+Results are available across LLM Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
@@ -306,22 +517,42 @@ Each evaluation result includes:
 - The reasoning (when enabled)
 - The pass/fail indicator (based on your assessment criteria)
 
-Use the syntax `@evaluations.custom.<evaluation_name>` to query or visualize results.
+Use the syntax `@evaluation.<evaluation_name>.value` to query or visualize results.
 
 For example:
 ```
-@evaluations.custom.helpfulness-check
+@evaluation.helpfulness-check.value
 ```
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluations.custom.budget-guru-intent-classifier:budgeting_question` and results are populated below." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
 
 
 You can:
-- Filter traces by evaluation results (example, `@evaluations.custom.helpfulness-check`)
-- Filter by pass/fail assessment status (example, `@evaluations.assessment.custom.helpfulness-check:fail`)
+- Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
+- Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
+
+## Using in experiments
+
+To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluation Developer Guide.
 
 ## Best practices for reliable custom evaluations
 
@@ -332,14 +563,44 @@ You can:
 - **Document your rubric**: Clearly define what "Pass" and "Fail" mean to avoid drift over time.
 - **Re-align your evaluator**: Reassess prompt and few-shot examples when the underlying LLM updates.
 
+## Estimated token usage
+
+You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][10].
+
+If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
+
+- `ml_obs.estimated_usage.llm.input.tokens`
+- `ml_obs.estimated_usage.llm.output.tokens`
+- `ml_obs.estimated_usage.llm.total.tokens`
+
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+
+## Configure LLM-as-a-judge evaluations from the API
+
+You can use basic CRUD operations to manipluate managed evaluation configs, one you have the `DD_API_KEY` [API key][14] specified in your environment.
+
+ - [GET][11] existing evaluation configurations
+ - [PUT][12] existing evaluation configurations
+ - [DELETE][13] existing evaluation configurations
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
+[2]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
 [3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
+[8]: /llm_observability/experiments
+[9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
+[10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
+[11]: /api/latest/llm-observability/#get-a-custom-evaluator-configuration
+[12]: /api/latest/llm-observability/#create-or-update-a-custom-evaluator-configuration
+[13]: /api/latest/llm-observability/#delete-a-custom-evaluator-configuration
+[14]: /account_management/api-app-keys
+[15]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
+[16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
+

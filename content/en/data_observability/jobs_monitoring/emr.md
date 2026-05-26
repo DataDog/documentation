@@ -28,15 +28,15 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Amazon EMR.
 
 ### Store your Datadog API key in AWS Secrets Manager (Recommended)
 1. Take note of your [Datadog API key][1].
-1. In [AWS Secrets Manager][2], choose **Store a new secret**.
-   - Under **Secret type**, select **Other type of secret**.
-   - Under **Key/value pairs**, add your Datadog API key as a key-value pair, where the key is `dd_api_key`.
+1. In [AWS Secrets Manager][2], choose {{< ui >}}Store a new secret{{< /ui >}}.
+   - Under {{< ui >}}Secret type{{< /ui >}}, select {{< ui >}}Other type of secret{{< /ui >}}.
+   - Under {{< ui >}}Key/value pairs{{< /ui >}}, add your Datadog API key as a key-value pair, where the key is `dd_api_key`.
       {{< img src="data_jobs/emr/key_value.png" alt="AWS Secrets Manager, Store a new secret. A section titled 'Key/value pairs'. On the left, a text box containing 'dd_api_key'. On the right, a text box containing a redacted API key." style="width:80%;" >}}
    - Then, click **Next**.
-1. On the **Configure secret** page, enter a **Secret name**. You can use `datadog/dd_api_key`. Then, click **Next**.
-1. On the **Configure rotation** page, you can optionally turn on [automatic rotation][3]. Then, click **Next**.
-1. On the **Review** page, review your secret details. Then, click **Store**.
-1. In AWS Secrets Manager, open the secret you created. Take note of the **Secret ARN**.
+1. On the {{< ui >}}Configure secret{{< /ui >}} page, enter a {{< ui >}}Secret name{{< /ui >}}. You can use `datadog/dd_api_key`. Then, click {{< ui >}}Next{{< /ui >}}.
+1. On the {{< ui >}}Configure rotation{{< /ui >}} page, you can optionally turn on [automatic rotation][3]. Then, click {{< ui >}}Next{{< /ui >}}.
+1. On the {{< ui >}}Review{{< /ui >}} page, review your secret details. Then, click {{< ui >}}Store{{< /ui >}}.
+1. In AWS Secrets Manager, open the secret you created. Take note of the {{< ui >}}Secret ARN{{< /ui >}}.
 
 ### Grant permissions to EMR EC2 instance profile
 EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches. Follow [the Amazon guide][11] to prepare this role based on your application's need to interact with other AWS services. The following additional permissions may be required for Data Observability: Jobs Monitoring.
@@ -47,15 +47,15 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
 </div>
 
-1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
+1. In your [AWS IAM console][5], click on {{< ui >}}Access management{{< /ui >}} > {{< ui >}}Roles{{< /ui >}} in the left navigation bar.
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
-1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
-1. On the **Specify permissions** page, find the **Select a service** section. Under **Service**, select **Secrets Manager**.
+1. On the next page, under the {{< ui >}}Permissions{{< /ui >}} tab, find the {{< ui >}}Permissions policies{{< /ui >}} section. Click on {{< ui >}}Add permissions{{< /ui >}} > {{< ui >}}Create inline policy{{< /ui >}}.
+1. On the {{< ui >}}Specify permissions{{< /ui >}} page, find the {{< ui >}}Select a service{{< /ui >}} section. Under {{< ui >}}Service{{< /ui >}}, select {{< ui >}}Secrets Manager{{< /ui >}}.
    {{< img src="data_jobs/emr/specify_permissions.png" alt="AWS IAM console, Specify Permissions page." style="width:80%;" >}}
-   - Then, under **Actions allowed**, select `GetSecretValue`. This is a **Read** action.
-   - Under **Resources**, select **Specific**. Then, next to **Secret**, click on **Add ARNs** and add the ARN of the secret you created in the first step on this page.
+   - Then, under {{< ui >}}Actions allowed{{< /ui >}}, select `GetSecretValue`. This is a {{< ui >}}Read{{< /ui >}} action.
+   - Under {{< ui >}}Resources{{< /ui >}}, select {{< ui >}}Specific{{< /ui >}}. Then, next to {{< ui >}}Secret{{< /ui >}}, click on {{< ui >}}Add ARNs{{< /ui >}} and add the ARN of the secret you created in the first step on this page.
    - Click **Next**.
-1. On the next page, give your policy a name. Then, click **Create policy**.
+1. On the next page, give your policy a name. Then, click {{< ui >}}Create policy{{< /ui >}}.
 
 #### Permissions to describe cluster
 
@@ -63,11 +63,11 @@ These permissions are <strong>required</strong> if you are using AWS Secrets Man
 These permissions are <strong>required</strong> if you are <strong>NOT</strong> using the default role, <code>EMR_EC2_DefaultRole</code>.
 </div>
 
-1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
+1. In your [AWS IAM console][5], click on {{< ui >}}Access management{{< /ui >}} > {{< ui >}}Roles{{< /ui >}} in the left navigation bar.
 1. Click on the IAM role you plan to use as the instance profile for your EMR cluster.
-1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
-1. On the **Specify permissions** page, toggle on the **JSON** tab.
-   - Then, copy and paste the following policy into the **Policy editor**
+1. On the next page, under the {{< ui >}}Permissions{{< /ui >}} tab, find the {{< ui >}}Permissions policies{{< /ui >}} section. Click on {{< ui >}}Add permissions{{< /ui >}} > {{< ui >}}Create inline policy{{< /ui >}}.
+1. On the {{< ui >}}Specify permissions{{< /ui >}} page, toggle on the {{< ui >}}JSON{{< /ui >}} tab.
+   - Then, copy and paste the following policy into the {{< ui >}}Policy editor{{< /ui >}}
    ```json
    {
       "Version": "2012-10-17",
@@ -88,13 +88,13 @@ These permissions are <strong>required</strong> if you are <strong>NOT</strong> 
    }
    ```
    - Click **Next**.
-1. On the next page, give your policy a name. Then, click **Create policy**.
+1. On the next page, give your policy a name. Then, click {{< ui >}}Create policy{{< /ui >}}.
 
 Take note of the name of the IAM role you plan to use as the instance profile for your EMR cluster.
 
 ### Create and configure your EMR cluster
 
-When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
+When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the {{< ui >}}Create Cluster{{< /ui >}} page:
 
 1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
 
@@ -133,13 +133,13 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 [15]: /getting_started/tagging/
 [16]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
-1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
+1. On the **Create Cluster** page, find the {{< ui >}}Bootstrap actions{{< /ui >}} section. Click {{< ui >}}Add{{< /ui >}} to bring up the {{< ui >}}Add bootstrap action{{< /ui >}} dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
-   - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
-   - For **Script location**, enter the path to where you stored the init script in S3.
-   - Click **Add bootstrap action**.
+   - For {{< ui >}}Name{{< /ui >}}, give your bootstrap action a name. You can use `datadog_agent`.
+   - For {{< ui >}}Script location{{< /ui >}}, enter the path to where you stored the init script in S3.
+   - Click {{< ui >}}Add bootstrap action{{< /ui >}}.
 
-1. On the **Create Cluster** page, find the **Identity and Access Management (IAM) roles** section. For **instance profile** dropdown, select the IAM role you have granted permissions in [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
+1. On the **Create Cluster** page, find the **Identity and Access Management (IAM) roles** section. For {{< ui >}}instance profile{{< /ui >}} dropdown, select the IAM role you have granted permissions in [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
 
 When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 

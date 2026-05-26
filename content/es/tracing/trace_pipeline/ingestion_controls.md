@@ -6,150 +6,249 @@ aliases:
 - /es/tracing/app_analytics/
 - /es/tracing/guide/ingestion_control_page/
 - /es/tracing/trace_ingestion/ingestion_controls
-description: Aprende a controlar las velocidades de consumo con APM.
+description: Aprende a controlar las tasas de ingestión con APM.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
   tag: Documentación
-  text: Mecanismos de consumo
+  text: Mecanismos de Ingestión
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentación
-  text: Métricas de uso
-title: Controles del consumo
+  text: Métricas de Uso
+title: Controles de Ingestión
 ---
+{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Reglas de Muestreo de Ingestión" >}}
 
-{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Reglas para el muestreo del consumo" >}}
+Los controles de ingestión afectan qué trazas son enviadas por tus aplicaciones a Datadog. Las [Métricas de APM][1] siempre se calculan en función de todas las trazas y no se ven afectadas por los controles de ingestión.
 
-Los controles del consumo afectan a qué trazas (traces) envían tus aplicaciones a Datadog. Las [métricas de APM][1] siempre se calculan basándose en todas las trazas y no se ven afectadas por los controles del consumo.
+La página de Ingestion Control proporciona visibilidad sobre la configuración de ingestión de tus aplicaciones y servicios. Desde la [página de Ingestion Control][2]:
 
-La página de control del consumo ofrece visibilidad al nivel del Agent y de las bibliotecas de rastreo en la configuración del consumo de tus aplicaciones y servicios. Desde la [página de configuración del control del consumo][2], puedes:
-- Obtener visibilidad de tu configuración del consumo al nivel del servicio y ajustar las frecuencias de muestreo de trazas para obtener servicios de alto rendimiento.
-- Comprender qué mecanismos de consumo son responsables del muestreo de la mayor parte de tus trazas.
-- Investigar y actuar ante posibles problemas de configuración del consumo, como recursos limitados de la CPU o la RAM para el Agent.
+- Obtén visibilidad sobre la configuración de ingestión a nivel de servicio.
+- Ajusta las tasas de muestreo de trazas para servicios o puntos finales de alto rendimiento para gestionar mejor el presupuesto de ingestión.
+- Ajusta las tasas de muestreo de trazas para servicios o puntos finales de bajo rendimiento y tráfico raro para aumentar la visibilidad.
+- Entiende cuáles [mecanismos de ingestión][11] son responsables de muestrear la mayoría de tus trazas.
+- Investiga y actúa sobre posibles problemas de configuración de ingestión, como recursos limitados de CPU o RAM para el Agente.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Información general de la página de control del consumo" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Descripción General de la Página de Control de Ingestión" >}}
 
-Todas las métricas utilizadas en la página se basan en datos del tráfico en vivo de la **última hora**. Cualquier cambio en la configuración del Agent o de las bibliotecas se refleja en la página.
+## Entendiendo tu configuración de ingestión {#understanding-your-ingestion-configuration}
 
-## Resumen de todos los entornos
+Utiliza los datos en el encabezado de control de ingestión para monitorear tu ingestión de trazas. El encabezado muestra la cantidad total de datos ingeridos en la última hora, tu uso mensual estimado y el porcentaje de tu límite mensual de ingestión asignado, calculado en función de tu infraestructura activa de APM (como hosts, tareas de Fargate y funciones sin servidor).
 
-Obtén información general del total de datos consumidos durante la última hora y una estimación de tu uso mensual frente a tu asignación mensual, calculado con la infraestructura activa (hosts, tareas de Fargate y funciones serverless) de APM.
+Si el uso mensual está por debajo de `100%`, los datos ingeridos proyectados se ajustan dentro de tu asignación mensual. Un valor de uso mensual superior a `100%` significa que se proyecta que los datos ingeridos mensualmente superen su asignación mensual.
 
-Si el uso mensual es inferior a `100%`, los datos consumidos previstos se ajustan a tu [asignación mensual][3]. Un valor de uso mensual superior a `100%` significa que se prevé que los datos mensuales consumidos superen tu asignación mensual.
+### Niveles de ingestión por servicio {#ingestion-levels-by-service}
 
-## Administrar el consumo para todos los servicios en el nivel del Agent
-
-Haz clic en **Configuración remota del consumo en el Agent** para administrar el muestreo del consumo de tus servicios de forma global. Puedes configurar en forma remota los parámetros de muestreo del Agent si utilizas el Agent versión [7.42.0][13] o superior. Lee [Cómo funciona la configuración remota][14] para obtener información sobre cómo activar la configuración remota en tus Agents.
-
-{{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Modalidad de configuración en el nivel del Agent" >}}
-
-Hay tres mecanismos de muestreo del consumo que se pueden controlar desde el Datadog Agent:
-- **[Head-based sampling][4]** (Muestreo basado en la fase inicial): Cuando no se establecen reglas para el muestreo de un servicio, el Datadog Agent calcula automáticamente las frecuencias de muestreo que se aplicarán a tus servicioscon un objetivo de **10 trazas por segundo por Agent**. Cambia este número de destino de trazas en Datadog o configura `DD_APM_MAX_TPS` localmente en el nivel del Agent.
--  **[Muestreo de tramos (spans) de error][5]**: Para las trazas no capturadas por el muestreo basado en la fase inicial, el Datadog Agent captura trazas de error locales **hasta 10 trazas por segundo por Agent**. Cambia este número de destino de trazas en Datadog o configura `DD_APM_ERROR_TPS` localmente en el nivel del Agent.
--  **[Muestreo de tramos poco frecuentes][6]**: Para las trazas no capturadas por el muestreo basado en la fase inicial, el Datadog Agent captura trazas poco frecuentes locales **hasta 5 trazas por segundo por Agent**. Esta opción está desactivada por defecto. Habilita la recopilación de trazas poco frecuentes en Datadog o configura `DD_APM_ENABLE_RARE_SAMPLER` localmente en el nivel del Agent.
-
-Con la configuración remota, no es necesario reiniciar el Agent para actualizar estos parámetros. Haz clic en `Apply` para guardar los cambios de configuración y la nueva configuración entrará en vigencia inmediatamente.
-
-**Nota**: La sección `Other Ingestion Reasons` (gris) del gráfico circular representa otros motivos de consumo que _no son configurables_ en el nivel del Datadog Agent.
-
-**Nota**: Los parámetros configurados en forma remota tienen prioridad sobre las configuraciones locales como las variables de entorno y la configuración de `datadog.yaml`.
-
-## Administrar el consumo para cada servicio en el nivel de la librería
-
-La tabla de servicios contiene información sobre los volúmenes consumidos y la configuración del consumo, desglosada por servicio:
+La tabla de servicios contiene información sobre los volúmenes ingeridos y la configuración de ingestión, desglosada por servicio:
 
 Tipo
 : El tipo de servicio: servicio web, base de datos, caché, navegador, etc...
 
 Nombre
-: El nombre de cada servicio que envía trazas a Datadog. La tabla contiene servicios raíz y no raíz para los que se consumieron datos en la última hora.
+: El nombre de cada servicio que envía trazas a Datadog. La tabla contiene servicios raíz y no raíz para los cuales se ingirió datos en la última hora.
 
-Trazas/s consumidas
-: Número promedio de trazas por segundo consumidas partiendo del servicio durante la última hora.
+Trazas ingeridas/s
+: Número promedio de trazas por segundo ingeridas desde el servicio en la última hora.
 
-Bytes/s consumidos
-: Número promedio de bytes por segundo consumidos en Datadog para el servicio durante la última hora.
+Bytes ingeridos/s
+: Número promedio de bytes por segundo ingeridos para el servicio en la última hora.
 
-Bytes/s downstream
-: Número promedio de bytes por segundo consumidos para los cuales el servicio *toma la decisión de muestreo*. Esto incluye los bytes de todos los tramos secundarios que siguen la decisión tomada en el encabezado de la traza, así como los tramos capturados por el [Muestreador de errores][5], el [Muestreador de poco frecuentes][6] y el mecanismo de [App Analytics][7].
+Bytes descendentes/s
+: Número promedio de bytes por segundo ingeridos para los cuales el servicio _toma la decisión de muestreo_. Esto incluye los bytes de todos los spans de servicios descendentes en la pila de llamadas que siguen la decisión tomada al inicio de la traza. Los datos de esta columna se basan en la dimensión `sampling_service`, establecida en las métricas `datadog.estimated_usage.apm.ingested_bytes`. Para más información, lea [métricas de uso de APM][15].
 
 Desglose del tráfico
-: Un desglose detallado del tráfico muestreado y no muestreado para trazas partiendo del servicio. Consulta [Desglose del tráfico](#traffic-breakdown) para obtener más información.
+: Un desglose detallado del tráfico muestreado y no muestreado para trazas que comienzan desde el servicio. Vea [Desglose del tráfico](#traffic-breakdown) para más información.
 
-Configuración del consumo
-: Muestra `Automatic` si se aplica el [mecanismo de muestreo basado en la fase inicial por defecto][4] del Agent. Si el consumo se configuró en las bibliotecas de rastreo con las [reglas de muestreo de trazas][8], el servicio se marca como `Configured`. Para más información sobre la configuración del consumo para un servicio, lee [cambiar la velocidad de consumo por defecto](#configure-the-service-ingestion-rate).
+Configuración de Ingesta
+: Muestra `Automatic` si el [mecanismo de muestreo basado en el encabezado por defecto][4] del Datadog Agent se aplica. Si la ingesta fue configurada con [reglas de muestreo de trazas][8], el servicio se marca como `Configured`; se establece una etiqueta `Local` cuando la regla de muestreo se aplica desde la configuración en el SDK, y se establece una etiqueta `Remote` cuando la regla de muestreo se aplica de forma remota, desde la interfaz de usuario. Para más información sobre cómo configurar la ingesta para un servicio, lee sobre [cambiar la tasa de ingesta por defecto](#configure-the-service-ingestion-rate).
 
 Infraestructura
-: Hosts, contenedores y funciones en los cuales se ejecuta el servicio.
+: Hosts, contenedores y funciones en los que se está ejecutando el servicio.
 
 Estado del servicio
-: Muestra `Limited Resource` cuando se descartan algunos tramos debido a que el Datadog Agent alcanza los límites de la CPU o de la RAM configurados [en su configuración][9], `Legacy Setup` cuando algunos tramos se consumen a través del [mecanismo de App Analytics][7] legacy o `OK` de otro modo.
+: Muestra `Limited Resource` cuando algunos spans son descartados debido a que el Datadog Agent alcanza los límites de CPU o RAM establecidos [en su configuración][9], `Legacy Setup` cuando algunos spans son ingeridos a través del antiguo [mecanismo de App Analytics][7], o `OK` de otra manera.
 
-Filtra la página por el entorno, la configuración y el estado para ver los servicios para los cuales necesitas tomar una decisión. Para reducir el volumen del consumo global, ordena la tabla por la columna `Downstream Bytes/s` para ver los servicios responsables de la mayor parte de tu consumo.
+Filtra la página por entorno, configuración y estado para ver los servicios para los cuales necesitas tomar una acción. Para reducir el volumen global de ingesta, ordena la tabla por la `Downstream Bytes/s` columna para ver los servicios responsables de la mayor parte de tu ingesta.
 
-**Nota**: La tabla tiene la tecnología de las [métricas de uso][10] `datadog.estimated_usage.apm.ingested_spans` y `datadog.estimated_usage.apm.ingested_bytes`. Estas métricas están etiquetadas por `service`, `env` y `ingestion_reason`.
+**Nota**: La tabla está alimentada por las [métricas de uso][10] `datadog.estimated_usage.apm.ingested_spans` y `datadog.estimated_usage.apm.ingested_bytes`. Estas métricas están etiquetadas por `service`, `env` y `ingestion_reason`.
 
-### Desglose del tráfico
+#### Desglose de tráfico {#traffic-breakdown}
 
-En la columna Desglose del tráfico se desglosa el destino de todas las trazas procedentes del servicio. Te ofrece una estimación de la proporción del tráfico que se consume y se descarta y por qué motivos.
+La columna de Desglose de Tráfico desglosa el destino de todas las trazas que comienzan desde el servicio. Te da una estimación de la parte del tráfico que es ingerido y descartado, y por qué razones.
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_traffic_breakdown.png" style="width:100%;" alt="Desglose del tráfico del consumo de trazas" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/service_traffic_breakdown.png" style="width:100%;" alt="Desglose de tráfico de la ingesta de trazas" >}}
 
 El desglose se compone de las siguientes partes:
 
-- **Trazas completas consumidas** (azul): El porcentaje de las trazas consumidas por Datadog.
-- **Trazas completas no retenidas** (gris): El porcentaje de las trazas que intencionalmente no se han reenviado a Datadog desde el Agent o la librería de rastreo. Esto puede ocurrir por uno de los siguientes dos motivos en función de tu configuración:
+- **Trazas completas ingeridas** (azul): El porcentaje de trazas que han sido ingeridas por Datadog.
+- **Trazas completas no retenidas** (gris): El porcentaje de trazas que no han sido ingeridas por Datadog. Algunas trazas pueden ser descartadas porque: 
 
-    1. Por defecto, el [Agent distribuye una velocidad de consumo][4] a los servicios en función del tráfico del servicio.
-    2. Cuando el servicio se [configura][8] manualmente para consumir un determinado porcentaje de trazas en el nivel de la librería de rastreo.
+    1. Por defecto, el [Agente establece automáticamente una tasa de muestreo][4] en los servicios, dependiendo del tráfico del servicio.
+    2. El servicio está configurado para ingerir un cierto porcentaje de trazas utilizando [reglas de muestreo][8].
 
-- **Trazas completas descartadas por el limitador de la velocidad del rastreador** (naranja): Cuando eliges configurar manualmente la velocidad de consumo del servicio como un porcentaje con reglas para el muestreo de trazas, se habilita automáticamente un limitador de la velocidad, configurado por defecto para 100 trazas por segundo. Consulta la documentación del [limitador de la velocidad][8] para configurar manualmente esta velocidad.
+- **Trazas completas descartadas por el limitador de tasa del SDK** (naranja): Cuando eliges establecer manualmente la tasa de ingesta del servicio como un porcentaje con reglas de muestreo de trazas, un limitador de tasa se habilita automáticamente, configurado por defecto a 100 trazas por segundo. Consulta la documentación del [limitador de tasa][8] para cambiar esta tasa.
 
-- **Trazas descartadas debido al límite de la CPU o la RAM del Agent** (rojo): Con este mecanismo se pueden descartar tramos y crear trazas incompletas. Para solucionarlo, aumenta la asignación de la CPU y la memoria para la infraestructura en la cual se ejecuta el Agent.
+- **Trazas descartadas debido al límite de CPU o RAM del Agente** (rojo): Este mecanismo puede descartar tramos y crear trazas incompletas. Para solucionar esto, aumenta la asignación de CPU y memoria para la infraestructura en la que se ejecuta el Agente.
 
-## Resumen del consumo del servicio
+## Configurando la ingestión para un servicio {#configuring-ingestion-for-a-service}
 
-Haz clic en cualquier fila de servicio para ver el Resumen del consumo del servicio, una vista detallada que ofrece información que requiere acción sobre la configuración del consumo del servicio.
+Haz clic en cualquier servicio para ver el Resumen de Ingestión del Servicio, que proporciona información útil y opciones de configuración para gestionar la ingestión de trazas de ese servicio.
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_summary.png" style="width:100%;" alt="Resumen del consumo del servicio" >}}
+### Configuración de ingestión para un servicio {#ingestion-configuration-for-a-service}
 
-Explora el **Desglose de motivos del consumo** para ver qué mecanismos son responsables del consumo de tu servicio. Cada motivo del consumo está relacionado con un [mecanismo de consumo][11] específico. Después de cambiar tu configuración del consumo del servicio, puedes observar el aumento o la disminución de los bytes y tramos consumidos en esta gráfica de series temporales basado en los datos consumidos en la última hora.
+#### Tasas de muestreo por recurso {#sampling-rates-by-resource}
 
-Si la mayor parte de tu volumen de consumo del servicio se debe a decisiones tomadas por servicios upstream, investiga el detalle de la lista principal de los **Tomadores de decisiones de muestreo**. Por ejemplo, si tu servicio es no raíz, (lo que significa que **nunca decide** muestrear trazas), observa todos los servicios upstream responsables de tu consumo del servicio no raíz. Configura los servicios raíz upstream para reducir tu volumen total de consumo.
+La tabla lista las tasas de muestreo aplicadas por recurso del servicio.
 
-Para investigar más a fondo, utiliza [APM Trace - Dashboard de uso estimado][12], que ofrece información sobre el consumo global, así como gráficas de desglose por `service`, `env` y `ingestion reason`.
+{{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="Tabla de tasas de muestreo por recurso" style="width:100%;">}}
 
-### Versiones del Agent y de las bibliotecas de rastreo
+- La columna `Ingested bytes` muestra los bytes ingeridos de los tramos del servicio y recurso, mientras que la columna `Downstream bytes` muestra los bytes ingeridos de los tramos donde se toma la decisión de muestreo comenzando desde ese servicio y recurso, incluyendo bytes de servicios descendentes en la cadena de llamadas.
+- La columna `Configuration` muestra de dónde se está aplicando la tasa de muestreo del recurso: 
+  - `Automatic` si se aplica el [mecanismo de muestreo basado en cabeza por defecto][4] del Agente.
+  - `Local Configured` si se estableció una [regla de muestreo][8] localmente en el SDK.
+  - `Remote Configured` si se estableció una regla de muestreo remota desde la interfaz de usuario de Datadog. Para aprender a configurar reglas de muestreo desde la página de Control de Ingestión, lee la sección sobre [configuración remota de reglas de muestreo](#configure-the-service-ingestion-rates-by-resource).
 
-Consulta las versiones del **Datadog Agent y de las bibliotecas de rastreo** que utiliza tu servicio. Compara las versiones en uso con las últimas versiones publicadas para asegurarte de estar ejecutando Agents y bibliotecas actualizadas.
+**Nota**: Si el servicio no está tomando decisiones de muestreo, los recursos del servicio se colapsarán bajo la fila `Resources not making sampling decisions`.
 
-{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Versiones del Agent y de las bibliotecas de rastreo" >}}
+**Nota**: En intervalos de tiempo cortos (1-4 horas), la Tasa de Muestreo Efectiva puede mostrar menos del 100% incluso cuando está configurada al 100%. Este es un comportamiento esperado debido a cálculos estadísticos que necesitan más puntos de datos para converger. Todos los rastros aún se están capturando correctamente. Para la visualización más precisa, observe las tasas de muestreo durante períodos de tiempo más largos.
 
-**Nota**: Es necesario actualizar el Agent a la v6.34 o la v7.34 para que se informe la información de la versión.
+#### Razones de ingestión y tomadores de decisiones de muestreo {#ingestion-reasons-and-sampling-decision-makers}
 
-### Configurar la velocidad de consumo del servicio
+Explore el **desglose de razones de ingestión** para ver qué mecanismos son responsables de la ingestión de su servicio. Cada razón de ingestión se relaciona con un mecanismo de ingestión específico [mecanismo de ingestión][11]. Después de cambiar la configuración de ingestión de su servicio, puede observar el aumento o disminución de bytes y tramos ingeridos en este gráfico de series temporales basado en la última hora de datos ingeridos.
 
-<div class="alert alert-info">Las<strong>reglas de muestreo configuradas remotamente están en Beta</strong>. Solicita acceso a la función a través de este <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">vínculo</a> para poder configurar dinámicamente esta configuración desde la interfaz de usuario de Datadog sin tener que volver a desplegar tu servicio. Sigue las instrucciones de la <a href="/tracing/guide/resource_based_sampling">Guía de muestreo en función de los recursos</a> para empezar.</div>
+Si la mayor parte del volumen de ingestión de su servicio se debe a decisiones tomadas por servicios ascendentes, investigue el detalle de la lista de los **tomadores de decisiones de muestreo**. Por ejemplo, si su servicio no es raíz (es decir, que **nunca decide** muestrear trazas), observe todos los servicios ascendentes responsables de la ingestión de ese servicio. Configure los servicios raíz ascendentes para reducir su volumen total de ingestión.
 
-Haz clic en **Administrar la velocidad de consumo** para obtener instrucciones sobre cómo configurar tu velocidad de consumo del servicio.
+Para investigaciones adicionales, utilice el [tablero de Uso Estimado de APM traza][12], que proporciona información global de ingestión así como gráficos de desglose por `service`, `env` y `ingestion reason`.
 
-servicio{{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Cambiar la velocidad de consumo del servicio" >}}
+#### Versiones de Datadog Agent y SDK {#agent-and-sdk-versions}
 
-Para especificar que se envíe un porcentaje específico del tráfico de un servicio, añade una variable de entorno o un fragmento de código generado a tu configuración de la librería de rastreo para ese servicio.
+Vea las **versiones de Datadog Agent y SDK** que su servicio está utilizando. Compare las versiones en uso con las versiones más recientes lanzadas para asegurarse de que está utilizando Datadog Agents y bibliotecas recientes y actualizadas.
 
-1. Selecciona el servicio para el cual deseas cambiar el porcentaje de tramos consumidos.
-2. Selecciona el lenguaje del servicio.
-3. Selecciona el porcentaje de consumo deseado.
-4. Aplica la configuración apropiada generada a partir de estas elecciones al servicio indicado y vuelve a desplegar el servicio. **Nota**: El valor del nombre del servicio distingue entre mayúsculas y minúsculas. Debe coincidir con las mayúsculas y minúsculas de tu nombre del servicio.
-5. Confirma en la Página de control del consumo que se haya aplicado tu nuevo porcentaje mirando la columna de Desglose del tráfico, en la cual se muestra la frecuencia de muestreo aplicada. El motivo del consumo del servicio aparece como `ingestion_reason:rule`.
+{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Versiones de Agente y SDK" >}}
+
+### Gestionando las tasas de muestreo de los servicios {#managing-services-sampling-rates}
+
+Para controlar las tasas de muestreo de un servicio, puede que desee utilizar:
+- **Muestreo adaptativo**: Ajustar automáticamente las tasas de muestreo para coincidir con un presupuesto de volumen de ingestión mensual configurado.
+- **Muestreo basado en recursos**: Establecer manualmente tasas de muestreo explícitas por recurso.
+
+Las configuraciones para estas estrategias se pueden aplicar **Remotamente** a través de la interfaz de usuario de Datadog. Este método permite que los cambios surtan efecto de inmediato sin necesidad de volver a implementar su servicio. Para **Muestreo basado en recursos**, también tiene la opción de aplicar configuraciones **localmente** actualizando los archivos de configuración de su servicio y volviendo a implementar.
+
+El uso de **Configuración Remota** para las tasas de ingestión del servicio tiene requisitos específicos.
+
+{{% collapse-content title="Requisitos de Configuración Remota" level="h4" expanded="false" id="remote-configuration-requirements" %}}
+
+- Datadog Agent [7.41.1][19] o superior.
+- [Configuración Remota][3] habilitada para su Datadog Agent.
+- `APM Remote Configuration Write` [permisos][20]. Si no tiene estos permisos, pida a su administrador de Datadog que actualice sus permisos desde la configuración de su organización.
+
+Encuentre a continuación la versión mínima del SDK requerida para la función:
+
+| Idioma | Versión mínima requerida |
+|----------|--------------------------|
+| Java     | v1.34.0                  |
+| Go       | v1.64.0                  |
+| Python   | v.2.9.0                  |
+| Ruby     | v2.0.0                   |
+| Node.js  | v5.16.0                  |
+| PHP      | v1.4.0                   |
+| .NET     | v2.53.2                  |
+| C++      | v0.2.2                   |
+
+{{% /collapse-content %}}
+
+#### Muestreo adaptativo {#adaptive-sampling}
+
+Utiliza el muestreo adaptativo para permitir que Datadog gestione las tasas de muestreo de los servicios en tu nombre. Especifica un volumen de ingestión mensual objetivo para uno o varios servicios mientras mantienes visibilidad sobre todos los servicios y puntos de conexión.
+
+Para configurar el muestreo adaptativo:
+
+1. Navega a la página de [Ingestion Control][2].
+2. Haz clic en un servicio para ver el **Resumen de Ingestión del Servicio**.
+3. Haz clic en **Gestionar Tasa de Ingestión**.
+4. Elige **tasas de muestreo adaptativo de Datadog** como la estrategia de muestreo de tu servicio.
+5. Haz clic en **Aplicar**.
+
+<div class="alert alert-info">Si aplicar esta configuración <strong>Remotamente</strong> está deshabilitado, asegúrate de que se cumplan los <a href="#remote-configuration-requirements">requisitos de Configuración Remota</a>.</div>
+
+Para más información, consulta [Muestreo Adaptativo][17].
 
 
-## Leer más
+#### Muestreo basado en recursos {#resource-based-sampling}
+
+Para configurar tasas de muestreo personalizadas para el servicio por nombre de recurso: 
+1. Navega a la página de [Ingestion Control][2].
+2. Haz clic en un servicio para ver el **Resumen de Ingestión del Servicio**.
+3. Haz clic en **Gestionar tasa de ingestión**.
+4. Haz clic en **Solo tasas de muestreo personalizadas**.
+5. Haz clic en **Agregar nueva regla** para establecer tasas de muestreo para algunos recursos.  
+   **Nota**: Las reglas de muestreo utilizan coincidencia de patrones globos, por lo que puedes usar comodines (`*`) para coincidir con múltiples recursos al mismo tiempo.
+   {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_custom.png" alt="Modal de Configuración" style="width:100%;">}}
+6. Aplica la configuración **Remotamente** o **Localmente**:
+{{< tabs >}}
+{{% tab "Remotamente" %}}
+
+Esta opción aplica la configuración utilizando Configuración Remota, por lo que **no necesitas** volver a implementar el servicio para que el cambio surta efecto. Puedes observar los cambios de configuración desde el [Explorador de Búsqueda en Vivo][100].
+
+Haz clic en **Aplicar** para guardar la configuración. 
+
+Los recursos que han sido configurados de forma remota se muestran como `Configured Remote` en la columna de **Configuración**.  
+
+<br><div class="alert alert-info">Si aplicar esta configuración <strong>Remotamente</strong> está deshabilitado, asegúrate de que se cumplan los <a href="#remote-configuration-requirements">requisitos de Configuración Remota</a>.</div>
+
+[100]: /es/tracing/trace_explorer/?tab=listview#live-search-for-15-minutes
+
+{{% /tab %}}
+
+{{% tab "Localmente" %}}
+
+Esta opción genera configuración para que la apliques manualmente.
+1. Aplica la configuración generada a tu servicio.  
+   **Nota**: El valor del nombre del servicio es sensible a mayúsculas y minúsculas. Debería coincidir con el caso de tu nombre de servicio.
+1. Vuelve a implementar el servicio.
+1. Confirma que el nuevo porcentaje ha sido aplicado revisando la columna de **Desglose de Tráfico**. Los recursos que han sido configurados localmente se muestran como `Configured Local` en la columna de **Configuración**.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Gestionando la configuración de ingesta del Agente de Datadog {#managing-datadog-agent-ingestion-configuration}
+
+Haz clic en **Configurar la Ingesta del Agente de Datadog** para gestionar las tasas de muestreo basadas en encabezados por defecto, muestreo de errores y muestreo raro.
+
+{{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Modal de Configuración a Nivel de Agente" >}}
+
+- **[Muestreo basado en encabezado][4]**: Cuando no se establecen reglas de muestreo para un servicio, el Agente de Datadog calcula automáticamente las tasas de muestreo que se aplicarán a tus servicios, apuntando a **10 trazas por segundo por Agente**. Cambia este número objetivo de trazas en Datadog, o configúralo `DD_APM_TARGET_TPS` localmente a nivel de Agente.
+- **[Muestreo de errores en trazas][5]**: Para las trazas que no son capturadas por el muestreo basado en encabezado, el Agente de Datadog captura trazas de errores locales **hasta 10 trazas por segundo por Agente**. Cambia este número objetivo de trazas en Datadog, o establece `DD_APM_ERROR_TPS` localmente a nivel del Agente.
+- **[Muestreo de trazas raras][6]**: Para trazas que no son capturadas por el muestreo basado en encabezado, el Agente de Datadog captura trazas raras locales **hasta 5 trazas por segundo por Agente**. Esta configuración está deshabilitada por defecto. Habilita la recolección de trazas raras en Datadog, o establece `DD_APM_ENABLE_RARE_SAMPLER` localmente a nivel del Agente.
+
+Con la configuración remota, no es necesario reiniciar el Agente para actualizar estos parámetros. Haz clic en `Apply` para guardar los cambios de configuración, y la nueva configuración entra en efecto de inmediato. La configuración remota para los parámetros de muestreo del Agente está disponible si estás utilizando la versión del Agente [7.42.0][13] o superior.
+
+**Nota**: La sección `Other Ingestion Reasons` (gris) del gráfico circular representa otras razones de ingestión que _no son configurables_ a nivel del Agente de Datadog. 
+
+**Nota**: Los parámetros configurados de forma remota tienen prioridad sobre las configuraciones locales, como las variables de entorno y `datadog.yaml` la configuración.
+
+## Prioridad de las reglas de muestreo {#sampling-rules-precedence}
+
+Si se establecen reglas de muestreo en múltiples ubicaciones, se aplican las siguientes reglas de prioridad en orden, donde las reglas que aparecen primero en la lista pueden anular las reglas de menor prioridad:
+
+1. Reglas de muestreo configuradas de forma remota, establecidas a través de [muestreo basado en recursos](#configure-the-service-ingestion-rates-by-resource)
+1. [Reglas de muestreo adaptativo][17]
+1. [Reglas de muestreo configuradas localmente][8] (`DD_TRACE_SAMPLING_RULES`)
+1. [Tasa de muestreo global configurada de forma remota][8]
+1. [Tasa de muestreo global configurada localmente][8] (`DD_TRACE_SAMPLE_RATE`)
+1. [Tasas del agente de traza controladas indirectamente con configuraciones del Agent](#managing-datadog-agent-ingestion-configuration) de forma remota o local (`DD_APM_TARGET_TPS`)
+
+Dicho de otra manera, Datadog utiliza las siguientes reglas de precedencia:
+- Configuraciones del trazador > Configuraciones del Agent
+- Reglas de muestreo > Tasa de muestreo global
+- Remoto > Local
+
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
-[3]: https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler
+[3]: /es/tracing/guide/remote_config
 [4]: /es/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [5]: /es/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /es/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
@@ -160,4 +259,9 @@ Para especificar que se envíe un porcentaje específico del tráfico de un serv
 [11]: /es/tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /es/agent/remote_config/#enabling-remote-configuration
+[14]: /es/remote_configuration#enabling-remote-configuration
+[15]: /es/tracing/trace_pipeline/metrics#what-is-the-sampling-service
+[17]: /es/tracing/trace_pipeline/adaptive_sampling/
+[18]: /es/tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
+[19]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
+[20]: /es/account_management/rbac/permissions/

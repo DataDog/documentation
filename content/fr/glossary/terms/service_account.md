@@ -1,4 +1,5 @@
 ---
+id: service_account
 title: compte de service
 ---
 Un compte de service est un utilisateur fictif qui peut être associé à un rôle et qui peut posséder des clés d'application.

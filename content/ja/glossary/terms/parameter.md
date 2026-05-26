@@ -1,4 +1,5 @@
 ---
+id: parameter
 core_product:
 - ci-cd
 title: パラメーター

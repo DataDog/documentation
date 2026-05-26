@@ -8,19 +8,23 @@ aliases:
   - /developers/metrics/dogstatsd_metrics_submission/
   - /metrics/dogstatsd_metrics_submission
 further_reading:
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
 - link: "/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
+- link: "https://learn.datadoghq.com/courses/create-custom-metrics-dogstatsd"
+  tag: "Learning Center"
+  text: "Create Custom Metrics with DogStatsD"
+
 ---
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for metrics split down by metric types, and introduces [sampling rates](#sample-rates) and [metric tagging](#metric-tagging) options specific to DogStatsD.
 
 [COUNT](#count), [GAUGE](#gauge), and [SET](#set) metric types are familiar to StatsD users. `TIMER` from StatsD is a sub-set of `HISTOGRAM` in DogStatsD. Additionally, you can submit [HISTOGRAM](#histogram) and [DISTRIBUTION](#distribution) metric types using DogStatsD.
 
-**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
+**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. To get RATE metrics through DogStatsD, submit either a [COUNT](#count) or [HISTOGRAM](#histogram) metric. Count metric values and `<HISTOGRAM>.count` values are time-normalized deltas of the metric's value over the StatsD flush period.
 
 ## Functions
 
@@ -1131,7 +1135,7 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/
+[1]: /extend/dogstatsd/
 [2]: /metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral

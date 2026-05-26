@@ -1,0 +1,37 @@
+{
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_table",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "stat": "hits",
+                "name": "query1",
+                "service": "web-store",
+                "data_source": "apm_metrics",
+                "query_filter": "env:prod",
+                "group_by": [
+                  "resource_name"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

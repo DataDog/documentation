@@ -17,6 +17,13 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "External Site"
   text: "Create and manage Synthetic Multistep API Tests with Terraform"
+- link: "/synthetics/guide/export-tests-to-terraform"
+  tag: "Guide"
+  text: "Export Synthetic API tests to Terraform"
+- link: "https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing"
+  tag: "Learning Center"
+  text: "Getting Started with Synthetic Monitoring and Browser Testing"
+
 ---
 
 ## Overview
@@ -176,6 +183,8 @@ Multistep API tests can run:
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 {{% synthetics-alerting-monitoring %}}
+
+{{% synthetics-downtimes %}}
 
 {{% synthetics-variables %}}
 

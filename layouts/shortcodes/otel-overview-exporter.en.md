@@ -16,4 +16,4 @@ Send custom application {{ $signal }} into Datadog using the OpenTelemetry (OTel
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send {{ $signal }} to the Datadog Agent.
 
-[100]: /developers/dogstatsd/
+[100]: /extend/dogstatsd/

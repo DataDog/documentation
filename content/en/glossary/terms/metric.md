@@ -1,4 +1,5 @@
 ---
+id: metric
 title: metric
 core_product:
   - metrics

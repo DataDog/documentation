@@ -1,4 +1,5 @@
 ---
+id: service_check
 title: check de service
 ---
 Un check de service permet de surveiller le statut d'un service afin de vérifier s'il est disponible ou non.

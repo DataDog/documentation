@@ -6,10 +6,10 @@ aliases:
 - /developers/events/dogstatsd/
 - /service_management/events/guides/dogstatsd/
 further_reading:
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "/developers/community/libraries/"
+- link: "/extend/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 ---
@@ -211,5 +211,5 @@ $statsd->event('An error occurred.',
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /developers/dogstatsd/
+[1]: /extend/dogstatsd/
 [2]: /events/

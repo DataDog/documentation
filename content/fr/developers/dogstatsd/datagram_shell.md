@@ -13,7 +13,7 @@ further_reading:
 title: Datagramme et interface système
 ---
 
-Cette section spécifie le format des datagrammes bruts pour les métriques, événements et checks de service acceptés par DogStatsD. Les datagrammes bruts sont encodés en UTF-8. Vous pouvez ignorer cette section si vous utilisez l'une des [bibliothèques client pour DogStatsD][1]. Toutefois, si vous souhaitez rédiger votre propre bibliothèque ou utiliser l'interface système pour envoyer des métriques, lisez attentivement ce qui suit.
+Cette section spécifie le format des datagrammes bruts pour les métriques, événements et checks de service acceptés par DogStatsD. Les datagrammes bruts sont encodés en UTF-8. Vous pouvez ignorer cette section si vous utilisez l'une des [bibliothèques client pour DogStatsD][1]. Toutefois, si vous souhaitez écrire votre propre bibliothèque ou utiliser l'interface système pour envoyer des métriques, lisez attentivement ce qui suit.
 
 ## Protocole DogStatsD
 
@@ -22,13 +22,13 @@ Cette section spécifie le format des datagrammes bruts pour les métriques, év
 
 `<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
-| Paramètre                           | Obligatoire | Description                                                                                                                                                    |
+| Paramètre                           | Obligatoire | Rôle                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<NOM_MÉTRIQUE>`                     | Oui      | Chaîne contenant uniquement des caractères alphanumériques ASCII, des underscores et des points. Consultez les [règles de nommage des métriques][1].                                                  |
+| `<NOM_MÉTRIQUE>`                     | Oui      | Une chaîne contenant uniquement des caractères alphanumériques ASCII, des tirets bas et des points. Consultez la [politique de nommage des métriques][101].                                                  |
 | `<VALEUR>`                           | Oui      | Nombre entier ou valeur flottante.                                                                                                                                           |
-| `<TYPE>`                            | Oui      | `c` pour COUNT, `g` pour GAUGE, `ms` pour TIMER, `h` pour HISTOGRAM, `s` pour SET et `d` pour DISTRIBUTION. Consultez la section [Types de métriques][2] pour en savoir plus.                    |
+| `<TYPE>`                            | Oui      | `c` pour COUNT, `g` pour GAUGE, `ms` pour TIMER, `h` pour HISTOGRAM, `s` pour SET, `d` pour DISTRIBUTION. Consultez la section [Types de métriques][102] pour en savoir plus.                    |
 | `<TAUX_ÉCHANTILLONNAGE>`                     | Non       | Valeur flottante entre `0` et `1` (inclusif). Elle ne fonctionne qu'avec des métriques COUNT, HISTOGRAM, DISTRIBUTION et TIMER. Valeur par défaut : `1` (entraîne un échantillonnage 100 % du temps). |
-| `<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | Liste de chaînes séparées par des virgules. Utilisez deux-points « : » pour les tags clé/valeur (`env:prod`). Consultez la section [Débuter avec les tags][3] pour découvrir comment définir des tags.              |
+| `<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | Une liste de chaînes séparées par des virgules. Utilisez des deux-points pour les tags clé/valeur (`env:prod`). Pour obtenir des conseils sur la définition des tags, consultez la section [Premiers pas avec les tags][103].              |
 
 Voici quelques exemples de datagrammes :
 
@@ -66,19 +66,92 @@ L'ID de conteneur commence par `c:`. Exemple :
 
 - `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d` : l'Agent Datadog ajoute des tags de conteneur comme `image_name` et `image_tag` à la métrique `page.views`.
 
-Consultez la documentation sur le tagging [Kubernetes][4] et [Docker][5] pour en savoir plus sur les tags de conteneur.
+Pour en savoir plus sur les tags de conteneur, consultez la documentation sur le tagging [Kubernetes][104] et [Docker][105]. 
 
-[1]: /fr/metrics/#naming-metrics
-[2]: /fr/metrics/types/
-[3]: /fr/getting_started/tagging/
-[4]: /fr/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[5]: /fr/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+### Protocole DogStatsD v1.3
+
+Les Agents `v6.40.0+` et `v7.40.0+` prennent en charge un champ timestamp Unix facultatif.
+
+Lorsque ce champ est fourni, l'Agent Datadog n'effectue aucun traitement sur les métriques (pas d'agrégation), si ce n'est l'enrichissement des métriques avec des tags. Cela peut être utile si vous agrégez déjà vos métriques dans votre application et souhaitez les envoyer à Datadog sans traitement supplémentaire.
+
+Le timestamp Unix doit être un nombre positif valide situé dans le passé. Seules les métriques GAUGE et COUNT sont prises en charge.
+
+La valeur est un timestamp Unix (UTC) et doit être préfixée par `T`, par exemple :
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
+
+### Exemple de datagramme
+
+- `page.views:15|c|#env:dev|T1656581400` : un COUNT indiquant que 15 pages vues ont eu lieu le 30 juin 2022 à 9h30 UTC.
+
+### Protocole DogStatsD v1.4
+
+À partir de l'Agent `>=v7.51.0`, une nouvelle valeur inode est prise en charge pour le champ ID de conteneur.
+Le champ ID de conteneur peut désormais contenir deux valeurs pour enrichir les métriques DogStatsD avec des tags de conteneur supplémentaires :
+- L'ID du conteneur, si disponible.
+- L'inode du nœud cgroup si l'ID de conteneur n'est pas disponible. 
+
+Le champ ID de conteneur est toujours préfixé par `c:`, avec pour valeur :
+
+- `c:ci-<CONTAINER_ID>`
+- `c:in-<CGROUP_INODE>`
+
+Pour des raisons de rétrocompatibilité, le format suivant est toujours pris en charge, bien qu'il soit considéré comme obsolète :
+- `c:<CONTAINER_ID>`
+
+### Protocole DogStatsD v1.5
+
+À partir de l'Agent `>=v7.57.0`, un nouveau champ External Data est pris en charge.
+L'Agent Datadog utilise la valeur External Data pour enrichir les métriques DogStatsD avec des tags de conteneur supplémentaires lorsque l'ID de conteneur n'est pas disponible.
+
+L'ID du conteneur est préfixé par `e:`, par exemple :
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|e:<EXTERNAL_DATA>`
+
+Ces données sont fournies par le [contrôleur d'admission de l'Agent Datadog][106] et contiennent :
+- Un booléen indiquant si le conteneur est un conteneur init ou non.
+- Le nom du conteneur.
+- L'UID du pod.
+
+Le format est le suivant :
+
+`it-INIT_CONTAINER,cn-CONTAINER_NAME,pu-POD_UID`
+
+Il se présenterait comme suit :
+
+`it-false,cn-nginx-webserver,pu-75a2b6d5-3949-4afb-ad0d-92ff0674e759`
+
+### Protocole DogStatsD v1.6
+
+À partir de l'Agent `>=v7.64.0`, un nouveau champ Cardinality est pris en charge.
+L'Agent Datadog utilise la valeur de cardinalité pour enrichir les métriques DogStatsD avec des tags de conteneur supplémentaires correspondant à leur cardinalité.
+
+Le champ cardinality est préfixé par `card:`, par exemple :
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|card:<CARDINALITY>`
+
+La cardinalité aura un impact sur l'enrichissement des tags pour les deux éléments suivants :
+- [Tags Docker][105]
+- [Tags Kubernetes][104]
+
+Les valeurs disponibles pour la cardinalité sont les suivantes :
+- `none`
+- `low`
+- `orchestrator`
+- `high`
+
+[101]: /fr/metrics/#metric-name
+[102]: /fr/metrics/types/
+[103]: /fr/getting_started/tagging/
+[104]: /fr/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[105]: /fr/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[106]: /fr/containers/cluster_agent/admission_controller
 {{% /tab %}}
 {{% tab "Événements" %}}
 
 `_e{<LONGUEUR_TITRE_UTF8>,<LONGUEUR_TEXTE_UTF8>}:<TITRE>|<TEXTE>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
-| Paramètre                            | Obligatoire | Description                                                                                                            |
+| Paramètre                            | Obligatoire | Rôle                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `_e`                                 | Oui      | Le datagramme doit commencer par `_e`.                                                                                     |
 | `<TITRE>`                            | Oui      | Titre de l'événement.                                                                                                       |
@@ -86,11 +159,11 @@ Consultez la documentation sur le tagging [Kubernetes][4] et [Docker][5] pour en
 | `<LONGUEUR_TITRE_UTF8>`                | Oui      | La longueur (en octets) du `<TITRE>` encodé en UTF-8                                                                              |
 | `<LONGUEUR_TEXTE_UTF8>`                 | Oui      | La longueur (en octets) du `<TEXTE>` encodé en UTF-8                                                                               |
 | `d:<TIMESTAMP>`                      | Non       | Ajoute un timestamp à l'événement. Valeur par défaut ; timestamp epoch Unix actuel.                                         |
-| `h:<HOSTNAME>`                       | Non       | Ajoute un hostname à l'événement. Pas de valeur par défaut.                                                                               |
+| `h:<HOSTNAME>`                       | Non       | Ajouter un hostname à l'événement. Par défaut, il s'agit de l'instance de l'Agent Datadog.                                                                               |
 | `k:<CLÉ_AGGRÉGATION>`                | Non       | Ajoute une clé d'agrégation afin de regrouper les événements qui possèdent la même clé. Pas de valeur par défaut.                              |
 | `p:<PRIORITÉ>`                       | Non       | Défini sur `normal` ou `low`. Valeur par défaut : `normal`.                                                                            |
 | `s:<NOM_TYPE_SOURCE>`               | Non       | Ajoute un type de source à l'événement. Pas de valeur par défaut.                                                                            |
-| `t:<TYPE_ALERTE>`                     | Non       | Défini sur `error`, `warning`, `info` ou `success`. Valeur par défaut : `info`.                                                        |
+| `t:<TYPE_ALERTE>`                     | Non       | Définir `error`, `warning`, `info`, ou `success`. Valeur par défaut : `info`.                                                        |
 | `#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | La virgule dans les tags fait partie de la chaîne de liste de tags et ne sert pas au parsing comme pour les autres paramètres. Pas de valeur par défaut. |
 
 Voici quelques exemples de datagrammes :
@@ -108,7 +181,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 `_sc|<NOM>|<STATUT>|d:<TIMESTAMP>|h:<HOSTNAME>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>|m:<MESSAGE_CHECK_SERVICE>`
 
-| Paramètre                            | Obligatoire | Description                                                                                                                             |
+| Paramètre                            | Obligatoire | Rôle                                                                                                                             |
 | ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `_sc`                                | Oui      | Le datagramme doit commencer par `_sc`.                                                                                                     |
 | `<NOM>`                             | Oui      | Nom du check de service.                                                                                                                 |
@@ -116,7 +189,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 | `d:<TIMESTAMP>`                      | Non       | Ajoute un timestamp au check. Valeur par défaut : timestamp epoch Unix actuel.                                                          |
 | `h:<HOSTNAME>`                       | Non       | Ajoute un hostname à l'événement (pas de valeur par défaut).                                                                                               |
 | `#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | Définit les tags de l'événement. Liste de chaînes séparées par des virgules (pas de valeur par défaut).                                                           |
-| `m:<MESSAGE_CHECK_SERVICE>`          | Non       | Message décrivant l'état actuel du check de service. Ce champ DOIT être placé en dernier parmi les champs des métadonnées (pas de valeur par défaut). |
+| `m:<MESSAGE_CHECK_SERVICE>`          | Non       | Message décrivant l'état actuel du check de service. Ce champ doit être placé en dernier parmi les champs des métadonnées (pas de valeur par défaut). |
 
 Voici un exemple de datagramme :
 
@@ -165,7 +238,7 @@ Sur Windows :
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
-Depuis n'importe quelle plateforme avec Python (sur Windows, vous pouvez utiliser l'interpréteur Python intégré à l'Agent ; il se trouve à l'emplacement `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` pour les versions 6.11 ou antérieures de l'Agent et à l'emplacement `%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` pour les versions ultérieures) :
+Sur toute plateforme disposant de Python (sur Windows, l'interpréteur Python intégré de l'Agent peut être utilisé ; il se trouve à l'emplacement `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe` pour les versions de l'Agent <= 6.11 et dans `%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` pour les versions de l'Agent >= 6.12) :
 
 ### Python 2
 
@@ -180,7 +253,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}

@@ -40,6 +40,8 @@ This layered approach ensures threats are neutralized as early as possible witho
 
 ## AWS WAF integration with AAP
 
+For detailed setup instructions, see [Enabling App and API Protection for AWS WAF][6].
+
 There are two main use cases supported with this [integration][1]:
 
 1. Gain visibility of AWS WAF actions in Datadog AAP. For example:
@@ -65,3 +67,4 @@ There are two main use cases supported with this [integration][1]:
 [3]: https://app.datadoghq.com/security/appsec/signals?query=@workflow.rule.type:%22Application%20Security%22
 [4]: https://app.datadoghq.com/security/appsec/traces
 [5]: /security/application_security/#exploit-prevention-vs-in-app-waf
+[6]: /security/application_security/setup/aws/waf/

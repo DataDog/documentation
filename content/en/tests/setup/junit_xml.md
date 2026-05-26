@@ -27,11 +27,11 @@ further_reading:
 
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
-If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
+If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog SDKs. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
 
 ## Compatibility
 
-Supported Datadog tracing library:
+Supported Datadog SDK:
 
 | Datadog Library | Version |
 |---|---|
@@ -541,10 +541,9 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 
 ## Reporting code coverage
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-This section covers the code coverage feature of the Test Optimization product.
-This feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
-{{< /callout >}}
+<div class="alert alert-warning">
+This Test Optimization feature is legacy. Use the new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product instead.
+</div>
 
 It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 

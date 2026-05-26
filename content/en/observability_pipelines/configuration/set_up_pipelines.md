@@ -35,7 +35,11 @@ You can create a pipeline with one of the following methods:
 - [API](#set-up-a-pipeline-with-the-api)
 - [Terraform](#set-up-a-pipeline-with-terraform)
 
+See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to programmatically deploy a pipeline created in the UI.
+
 ## Set up a pipeline in the UI
+
+### Set up pipeline components
 
 {{< tabs >}}
 {{% tab "Logs" %}}
@@ -72,12 +76,13 @@ You can create a pipeline with one of the following methods:
 [3]: /observability_pipelines/sources/
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/
-[6]: /observability_pipelines/search_syntax/logs/
+[11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-### Set up pipeline components
+<div class="alert alert-info">
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
@@ -122,13 +127,11 @@ If you want to make changes to your pipeline after you have deployed it, see [Up
 1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.
     - See [Environment Variables][9] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
-**Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][8] endpoint to make any changes to an existing pipeline.
+Use the [update a pipeline][8] endpoint to make any changes to an existing pipeline.
 
 See [Advanced Worker Configurations][5] for bootstrapping options.
 
 ## Set up a pipeline with Terraform
-
-<div class="alert alert-info">Creating pipelines using Terraform is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 <div class="alert alert-warning"><a href="https://github.com/DataDog/terraform-provider-datadog/releases/tag/v3.84.0">Terraform 3.84.0</a> replaces standalone processors with <a href="/observability_pipelines/processors/#processor-groups">processor groups</a> and is a breaking change. If you want to upgrade to Terraform 3.84.0, see the <a href="https://github.com/DataDog/terraform-provider-datadog/pull/3346">PR description</a> for instructions on how to migrate your existing resources.</div>
 
@@ -137,7 +140,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.
     - See [Environment Variables][9] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
-Pipelines created using Terraform are read-only in the UI. Use the [datadog_observability_pipeline][10] module to make any changes to an existing pipeline.
+Use the [datadog_observability_pipeline][10] module to make any changes to an existing pipeline.
 
 See [Advanced Worker Configurations][5] for bootstrapping options.
 
@@ -182,3 +185,4 @@ To delete a pipeline in the UI:
 [11]: /observability_pipelines/configuration/update_existing_pipelines/?
 [12]: /observability_pipelines/configuration/install_the_worker/
 [13]: /monitors/types/metric/
+[14]: /observability_pipelines/configuration/export_pipeline_configuration/

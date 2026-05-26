@@ -25,7 +25,7 @@
   },
   "downtimes": {
     "name": "Downtimes",
-    "description": "Les [downtimes](https://docs.datadoghq.com/monitors/notify/downtimes) vous permettent de mieux contrôler les notifications d'un contrôleur en empêchant certains contextes de déclencher des alertes. Les paramètres de downtime, qui peuvent être planifiés avec une heure de début et de fin, désactivent toutes les notifications liées à des tags Datadog."
+    "description": "Les [downtimes](https://docs.datadoghq.com/monitors/notify/downtimes) vous offrent un meilleur contrôle sur les notifications des monitors en vous permettant d'exclure globalement des périmètres des alertes. Les paramètres de downtime, qui peuvent être programmés avec des heures de début et de fin, empêchent toutes les alertes liées aux tags Datadog spécifiés.\n\n**Remarque :** les commandes `curl` nécessitent un [encodage de l'URL](https://curl.se/docs/url-syntax.html)."
   },
   "embeddable-graphs": {
     "name": "Graphiques intégrables",
@@ -33,7 +33,7 @@
   },
   "events": {
     "name": "Événements",
-    "description": "L'API Event Management vous permet de programmer la publication dʼévénements dans l'explorateur événements\net d'extraire événements de l'Events Explorer. Consultez la page [page Event Management](https://docs.datadoghq.com/service_management/events/) (en anglais)pour plus d'informations."
+    "description": "L'API Event Management vous permet de publier des événements par programmation dans l'event explorer et d'en récupérer depuis l'event explorer. Consultez la [page Event Management](https://docs.datadoghq.com/service_management/events/) pour plus d'informations.\n\n**Mise à jour de l'`aggregation_key` des événements de monitors Datadog à partir du 1er mars 2025 :** L'`aggregation_key` des événements de monitors Datadog est unique pour chaque ID de monitor. À partir du 1er mars, cette clé inclura également le groupe de monitors, la rendant unique par *ID de monitor et groupe de monitors*. Si vous utilisez l'`aggregation_key` des événements de monitors dans des requêtes de dashboard ou l'API d'événements, vous devez migrer vers l'utilisation de `@monitor.id`. Contactez l'[assistance](https://www.datadoghq.com/support/) pour toute question."
   },
   "gcp-integration": {
     "name": "Intégration GCP",
@@ -49,7 +49,7 @@
   },
   "key-management": {
     "name": "Gestion des clés",
-    "description": "Gérez vos clés d'application et d'API Datadog. Vous aurez besoin d'une clé d'API et d'une clé d'application, ainsi que des autorisations requises, pour interagir avec ces endpoints. La liste complète des clés d'API et d'application est disponible sur votre [page API Datadog](https://app.datadoghq.com/account/settings#api)."
+    "description": "Gérez vos clés API et d'application Datadog. Vous avez besoin d'une clé API et d'une clé d'application pour un utilisateur disposant des autorisations requises afin d'interagir avec ces endpoints. \n\nConsultez les pages suivantes pour afficher et gérer vos clés :\n\n- [Clés API](https://app.datadoghq.com/organization-settings/api-keys)\n- [Clés d'application](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
@@ -57,11 +57,11 @@
   },
   "logs-indexes": {
     "name": "Index de logs",
-    "description": "Gérez la configuration des [index de logs](https://docs.datadoghq.com/logs/indexes/). Vous aurez besoin d'une clé d'API et d'application ainsi que de droits administrateur pour interagir avec cet endpoint."
+    "description": "Gérez la configuration des [index de logs](https://docs.datadoghq.com/logs/indexes/)."
   },
   "logs-pipelines": {
     "name": "Pipelines de logs",
-    "description": "Les pipelines et les processeurs fonctionnent sur les logs entrants : ils effectuent le parsing de ces logs et les transforment en attributs structurés pour faciliter les requêtes.\n\n- Consultez la [page de configuration des pipelines] (https://app.datadoghq.com/logs/pipelines) pour obtenir une liste des pipelines et des processeurs actuellement configurés dans l'interface utilisateur Web.\n\n- Vous trouverez de plus amples informations concernant l'API pour les processeurs dans la [documentation relative aux processeurs](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#processeur-de-correspondances).\n\n- Pour en savoir plus sur les pipelines, consultez la [documentation à ce sujet](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n- **Remarque** : ces endpoints sont uniquement disponibles pour les utilisateurs admin. Veillez à utiliser une clé d'application créée par un admin.\n\n**Les règles de parsing Grok peuvent affecter la sortie JSON et nécessitent de configurer les données renvoyées avant leur utilisation dans une requête.**\nPar exemple, si vous utilisez les données renvoyées par une requête dans un autre corps de requête, et que vous avez une règle de parsing qui utilise une expression regex comme `\\s` pour les espaces, vous devrez configurer tous les espaces échappés en tant que `%{space}` pour utiliser les données."
+    "description": "Les pipelines et processeurs opèrent sur les logs entrants, les parsant et les transformant en attributs structurés pour faciliter les requêtes.\n\n- Consultez la [page de configuration des pipelines](https://app.datadoghq.com/logs/pipelines)\n pour obtenir la liste des pipelines et processeurs actuellement configurés dans l'interface Web.\n\n- Des informations complémentaires relatives à l'API concernant les processeurs sont disponibles dans la\n[documentation sur les processeurs](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n- Pour plus d'informations sur les pipelines, consultez la\n [documentation sur les pipelines](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n***Remarques :**\n\n****Les règles de parsing Grok peuvent affecter la sortie JSON et nécessitent \nque les données renvoyées soient configurées avant d'être utilisées dans une requête.**\nPar exemple, si vous utilisez les données renvoyées par une\nrequête dans le corps d'une autre requête, et que vous disposez d'une règle de parsing\nutilisant un modèle d'expression régulière comme `\\s` pour les espaces, vous devrez\nconfigurer tous les espaces échappés sous la forme `%{space}` pour les utiliser\ndans les données du corps."
   },
   "metrics": {
     "name": "Métriques",
@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "Monitors",
-    "description": "Les [monitors](https://docs.datadoghq.com/monitors) vous permettent de surveiller une métrique ou un check qui vous intéresse, en envoyant une notification à votre équipe lorsqu'un seuil défini est dépassé.\n\nPour en savoir plus, consultez la page [Créer des monitors](https://docs.datadoghq.com/monitors/create/types/)."
+    "description": "Les [monitors](https://docs.datadoghq.com/monitors) vous permettent de surveiller une métrique ou un check qui vous importe et\nd'informer votre équipe lorsqu'un seuil défini a été dépassé.\n\nPour plus d'informations, consultez [Créer des monitors](https://docs.datadoghq.com/monitors/create/types/).\n\n****Remarque :** les commandes `curl` nécessitent un [encodage de l'URL](https://curl.se/docs/url-syntax.html)."
   },
   "notebooks": {
     "name": "Notebooks",
@@ -85,7 +85,7 @@
   },
   "screenboards": {
     "name": "Screenboards",
-    "description": "Cet endpoint est obsolète. Utilisez plutôt le [nouvel endpoint Dashboards](https://docs.datadoghq.com/api/#dashboards)."
+    "description": "Cet endpoint est obsolète. Utilisez le [nouvel endpoint Dashboard](https://docs.datadoghq.com/api/latest/dashboards/) à la place."
   },
   "security-monitoring": {
     "name": "Security Monitoring",
@@ -117,15 +117,15 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetic Monitoring utilise des requêtes utilisateur simulées et le rendu du navigateur pour vous aider à optimiser votre uptime, à identifier les problèmes affectant une région spécifique et à surveiller les performances de l'application. Il existe deux types de tests Synthetic : les [tests API](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest) et les [tests Browser](https://docs.datadoghq.com/synthetics/browser_tests). Vous pouvez utiliser l'API Datadog pour gérer les deux types de tests automatiquement.\n\nPour en savoir plus sur Synthetic, consultez la [documentation relative à Synthetic Monitoring](https://docs.datadoghq.com/synthetics/)."
+    "description": "Les tests Synthetic utilisent des requêtes et actions simulées pour vous permettre de surveiller la disponibilité et les performances des systèmes et applications. Datadog prend en charge les types de tests Synthetic suivants :\n- [Tests API](https://docs.datadoghq.com/synthetics/api_tests/)\n- [Tests Browser](https://docs.datadoghq.com/synthetics/browser_tests)\n- [Tests Network Path](https://docs.datadoghq.com/synthetics/network_path_tests/)\n- [Tests d'applications mobiles](https://docs.datadoghq.com/synthetics/mobile_app_testing)\n\nVous pouvez utiliser l'API Datadog pour créer, gérer et organiser les tests et suites de tests par programmation.\n\nPour plus d'informations, consultez la [documentation Synthetic Monitoring](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
     "name": "Tags",
-    "description": "L'endpoint tag vous permet d'assigner des tags à des hosts, par exemple : `role:database`. Ces tags sont appliqués à toutes les métriques envoyées par le host. Pour récupérer et appliquer des tags à un host spécifique, utilisez le nom du host en question (votrehost.exemple.com).\n\nLe composant de votre infrastructure à l'origine d'un tag est identifié par une source. Les sources valides sont notamment nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nPour en savoir plus sur les tags, référez-vous à la section [Premiers pas avec les tags](https://docs.datadoghq.com/getting_started/tagging/)."
+    "description": "L'endpoint de tags vous permet d'attribuer des tags aux hosts,\npar exemple : `role:database`. Ces tags sont appliqués à\ntoutes les métriques envoyées par le host. Référencez les hosts par leur nom\n(`yourhost.example.com`) lors de la récupération et de l'application\nde tags sur un host particulier.\n\nLe composant de votre infrastructure responsable d'un tag est identifié\npar une source. Par exemple, parmi les sources valides figurent nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc. Retrouvez la liste complète des noms de types de sources dans [Attributs de source de l'API](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).\n\nPour en savoir plus sur les tags, consultez [Débuter avec les tags](https://docs.datadoghq.com/getting_started/tagging/)."
   },
   "timeboards": {
     "name": "Timeboards",
-    "description": "Cet endpoint est obsolète. Utilisez plutôt le [nouvel endpoint Dashboards](https://docs.datadoghq.com/api/#dashboards)."
+    "description": "Cet endpoint est obsolète. Utilisez le [nouvel endpoint Dashboard](https://docs.datadoghq.com/api/latest/dashboards/) à la place."
   },
   "usage-metering": {
     "name": "Mesure de l'utilisation",

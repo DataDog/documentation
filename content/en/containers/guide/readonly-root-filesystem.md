@@ -38,13 +38,13 @@ Complete example:
 ```yaml
 services:
   datadog-init:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     command: ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"]
     volumes:
       - datadog-config:/opt/datadog-agent-config
 
   datadog:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     read_only: true
     pid: host
     depends_on:
@@ -83,7 +83,7 @@ Create a custom Datadog Agent image with pre-defined volumes for writable direct
 
 1. Create a Dockerfile that extends the Datadog Agent image and declares volumes for required paths:
 ```dockerfile
-FROM gcr.io/datadoghq/agent:latest
+FROM registry.datadoghq.com/agent:latest
 
 VOLUME ["/etc/datadog-agent", "/opt/datadog-agent/run", "/var/run/datadog", "/var/log/datadog"]
 
@@ -125,13 +125,13 @@ services:
 
 Following [Linux Filesystem Hierarchy Standard (FHS)][4] guidelines, the Datadog Agent writes defaults to the following directories, which require read/write permissions:
 
-| Directory | Purpose | Read/Write Required |
-|-----------|---------|----------|
-| `/etc/datadog-agent/` | Configuration and check files | Yes |
-| `/opt/datadog-agent/run/` | Runtime state files | Yes |
-| `/var/run/datadog/` | APM and DogStatsD sockets | Yes |
-| `/var/log/datadog/` | Agent log output | No |
-| `/tmp/` | Temporary files for flares and diagnostics | No |
+| Directory                 | Purpose                                    | Read/Write Required |
+| ------------------------- | ------------------------------------------ | ------------------- |
+| `/etc/datadog-agent/`     | Configuration and check files              | Yes                 |
+| `/opt/datadog-agent/run/` | Runtime state files                        | Yes                 |
+| `/var/run/datadog/`       | APM and DogStatsD sockets                  | Yes                 |
+| `/var/log/datadog/`       | Agent log output                           | No                  |
+| `/tmp/`                   | Temporary files for flares and diagnostics | No                  |
 
 ## Troubleshooting
 
@@ -153,4 +153,3 @@ Agent flare requires write access to `/tmp/`. If generating flares is important 
 [2]: https://docs.aws.amazon.com/eks/latest/best-practices/pod-security.html
 [3]: https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF
 [4]: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html
-

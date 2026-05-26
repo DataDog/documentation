@@ -8,6 +8,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
   text: "Burn rate is a better error rate"
+- link: "https://learn.datadoghq.com/courses/understanding-slos"
+  tag: "Learning Center"
+  text: "Understanding Service Level Objectives (SLOs)"
+
 ---
 {{< jqmath-vanilla >}}
 
@@ -105,7 +109,7 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
 
 ### Alerting for SLOs with groups
 
-For Time Slice SLOs containing groups, you can set burn rate alerts based on the SLO groups or the overall SLO. If you alert based on the groups, you can confiure the [alert aggregation][8] to use simple or multi alerts. For metric-based and monitor-based SLOs, you can only set burn rate alerts based on the overall SLO.
+For Metric-based and Time Slice SLOs containing groups, you can set burn rate alerts based on the SLO groups or the overall SLO. If you alert based on the groups, you can confiure the [alert aggregation][8] to use simple or multi alerts. For monitor-based SLOs, you can only set burn rate alerts based on the overall SLO.
 
 ### Examples
 
@@ -169,6 +173,10 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_level_objectives/metric/
 [2]: /service_level_objectives/monitor/

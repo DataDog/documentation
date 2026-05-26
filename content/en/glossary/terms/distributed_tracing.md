@@ -1,4 +1,5 @@
 ---
+id: distributed_tracing
 title: distributed tracing
 core_product:
   - apm

@@ -47,7 +47,7 @@ docker run -d --name datadog-agent \
     -v /proc/:/host/proc/:ro \
     -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 [1]: /containers/docker/log

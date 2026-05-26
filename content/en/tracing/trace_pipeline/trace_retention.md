@@ -17,6 +17,10 @@ further_reading:
 - link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
+- link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
+  tag: "Learning Center"
+  text: "APM Rate Limiting and Retention"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Retention filters" >}}
@@ -148,8 +152,9 @@ To create a retention filter:
 <div class="alert alert-warning">Configuring a trace rate can significantly increase your indexed spans usage.</div>
 
 For example, if you configure a retention filter to index spans from `service:my-service`:
-- Configuring a span rate of `100%` ensures that all spans matching `service:my-service` are indexed.
-- Configuring a trace rate of `50%` ensures that all spans from all traces with a span from `service:my-service` are indexed. Assuming traces have 100 spans in average and 5 spans from `service:my-service`, configuring a trace rate indexes the remaining 95 spans of the trace, for the trace rate percentage being configured.
+- Configuring a span rate of `50%` helps ensure that approximately 50% of traces that contain spans matching `service:my-service` are selected. For selected traces, all spans matching `service:my-service` are indexed.
+- Configuring a trace rate of `10%` helps ensure that 10% of the traces selected by the span rate are fully indexed. For those traces, all spans in the trace (not only those from `service:my-service`) are indexed. Assuming traces have 100 spans on average and 5 spans from `service:my-service`, configuring a trace rate indexes the remaining 95 spans of the trace for the configured percentage of selected traces.
+- Span rate is evaluated first, and trace rate is applied only to traces selected by the span rate.
 
 When you create a new filter or edit the retention rate of an existing filter, Datadog displays an estimate of the percentage change in global indexing volume.
 

@@ -9,7 +9,7 @@ content_filters:
 
 ## Overview
 
-Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
+Session Replay provides privacy controls to help ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
 
 Default privacy options for Session Replay protect end user privacy and prevent sensitive organizational information from being collected.
 
@@ -292,7 +292,7 @@ final configuration = DatadogConfiguration(
 You can manage content masking while still allowing system or bundled images to be visible.
 
 <!-- iOS and React Native -->
-{% if or(equals($platform, "ios"), equals($platform, "react_native")) %}
+{% if includes($platform, ["ios", "react_native"]) %}
 Use the `maskNonBundledOnly` setting to replace non-bundled images with a "Content Image" placeholder in the replay.
 
 - In UIKit, the SDK can determine whether an image is bundled and can mask it accordingly.
@@ -564,7 +564,7 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 
 
 <!-- Android, iOS, or Flutter -->
-{% if or(equals($platform, "android"), equals($platform, "ios"), equals($platform, "flutter")) %}
+{% if includes($platform, ["android", "ios", "flutter"]) %}
 
 ### Text and input override
 

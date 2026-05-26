@@ -30,7 +30,7 @@ Do the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2014, 2016, 2017, 2019, 2022
+: 2014, 2016, 2017, 2019, 2022, 2025 (requires Agent 7.79+)
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -290,7 +290,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<AZURE_ENDPOINT_ADDRESS>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.

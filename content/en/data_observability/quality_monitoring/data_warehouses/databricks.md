@@ -7,6 +7,9 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Overview'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitors'
 
 ---
 
@@ -18,6 +21,10 @@ The Databricks integration connects Datadog to your Databricks workspace to sync
 
 **Note**: The instructions below are for Quality Monitoring. For Jobs Monitoring, see [Enable Data Observability: Jobs Monitoring for Databricks][1].
 
+## Prerequisites
+
+If your Databricks workspace restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+
 ## Set up your account in Databricks
 
 ### Step 1 - Connect the Databricks integration tile
@@ -26,8 +33,8 @@ The Databricks integration connects Datadog to your Databricks workspace to sync
 
    **Note**: Workspace Admin permissions are not required for Quality Monitoring.
 
-2. When configuring the integration, turn on the **Data Observability** toggle.
-3. Click **Save Databricks Workspace**.
+2. When configuring the integration, turn on the {{< ui >}}Data Observability{{< /ui >}} toggle.
+3. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
 ### Step 2 - Grant access
 
@@ -76,9 +83,12 @@ These permissions are needed for the following reasons:
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
+After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_observability/jobs_monitoring/databricks/
 [2]: /integrations/databricks/
+[3]: /monitors/types/data_observability/

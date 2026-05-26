@@ -11,10 +11,6 @@ title: Seguridad de datos y RBAC
 
 ## Control de acceso a los datos
 
-{{< callout url="#" header="false" btn_hidden="true">}}
-  El control de acceso a datos está en Disponibilidad limitada.
-{{< /callout >}}
-
 LLM Observability te permite restringir el acceso a datos potencialmente confidenciales asociados a tus aplicaciones de ML solo a determinados equipos y roles de tu organización. Esto es especialmente importante cuando tus aplicaciones LLM procesan información confidencial, como datos personales, información empresarial privada o interacciones confidenciales entre usuarios.
 
 Los controles de acceso en LLM Observability se basan en la función [Control de acceso de datos][1] de Datadog, que permite regular el acceso a datos considerados confidenciales. Puedes utilizar la etiqueta `ml_app` para identificar y restringir el acceso a aplicaciones LLM específicas dentro de tu organización.

@@ -1,4 +1,5 @@
 ---
+id: image
 core_product:
 - dashboards
 related_terms:

@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Ruby tracer**.
+1. **Install the Datadog Ruby SDK**.
 
    Add the `datadog` gem to your Gemfile:
    {{< code-block lang="gemfile" disable_copy="false" >}}
@@ -24,7 +24,7 @@ source 'https://rubygems.org'
 gem 'datadog'
 {{< /code-block >}}
 
-   See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
+   See [Tracing Ruby applications][1] for additional information on how to configure the SDK and enable auto instrumentation.
 
 2. **Install serverless-init as a sidecar**.
 
@@ -52,7 +52,7 @@ gem 'datadog'
 
    Then, update your logging library. For example, you can use Ruby's native `logger` library:
    {{< code-block lang="ruby" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
+LOG_FILE = "/shared-volume/logs/app.log"
 FileUtils.mkdir_p(File.dirname(LOG_FILE))
 
 logger = Logger.new(LOG_FILE)
@@ -73,6 +73,8 @@ logger.info "Hello World!"
 
 {{% serverless-init-env-vars-sidecar language="ruby" function="true" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -83,5 +85,5 @@ logger.info "Hello World!"
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#instrument-your-application
 [2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
-[3]: /developers/dogstatsd/?tab=ruby#install-the-dogstatsd-client
+[3]: /extend/dogstatsd/?tab=ruby#install-the-dogstatsd-client
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples-5

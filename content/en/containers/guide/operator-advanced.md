@@ -105,7 +105,7 @@ spec:
   override:
     nodeAgent:
       image:
-        name: gcr.io/datadoghq/agent:latest
+        name: registry.datadoghq.com/agent:latest
       tolerations:
         - operator: Exists
 ```

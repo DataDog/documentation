@@ -54,7 +54,7 @@ To install the Agent on Linux, follow the [in-app instructions in Fleet Automati
 ## Configure the Agent
 The Datadog Agent configuration file is located in `/etc/datadog-agent/datadog.yaml`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 - `api_key`: Your organization's [Datadog API key][7]
-- `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
+- `site`: Target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`, `us2.ddog-gov.com`)
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])
 - Default tags, log level, and Datadog configurations
 
@@ -150,7 +150,7 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [2]: /agent/troubleshooting/
-[3]: /developers/guide/custom-python-package/
+[3]: /extend/guide/custom-python-package/
 [4]: /integrations/
 [5]: /agent/supported_platforms/?tab=linux
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux

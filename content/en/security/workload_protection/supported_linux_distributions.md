@@ -1,7 +1,7 @@
 ---
 title: Workload Protection Supported Linux Distributions
 aliases:
-- security/threats/supported_linux_distributions/
+- /security/threats/supported_linux_distributions/
 ---
 
 Workload Protection supports the following Linux distributions:

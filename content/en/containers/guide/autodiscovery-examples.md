@@ -634,5 +634,5 @@ All of these examples use [Autodiscovery template variables][7]:
 [8]: /integrations/apache
 [9]: /integrations/http_check/
 [10]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[11]: /developers/write_agent_check/#updating-the-collection-interval
+[11]: /extend/write_agent_check/#updating-the-collection-interval
 [12]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "title": "API Maintenance",
+      "scheduled_description": "We will be performing maintenance on the API to improve performance.",
+      "in_progress_description": "We are currently performing maintenance on the API to improve performance.",
+      "completed_description": "We have completed maintenance on the API to improve performance.",
+      "start_date": "2021-11-11T12:11:11+00:00",
+      "completed_date": "2021-11-11T13:11:11+00:00",
+      "components_affected": [
+        {
+          "id": "4e9d3726-bdd7-0079-613c-e9aaba89eb01",
+          "status": "operational"
+        }
+      ]
+    },
+    "type": "maintenances"
+  }
+}

@@ -19,11 +19,12 @@ version of Continuous Profiler with SSI works for host, container, and Kubernete
 
 Continuous Profiler with SSI can be enabled for the following languages:
 
-| Language           | Tracer library version |
+| Language           | SDK version |
 |--------------------|------------------------|
 | Java               | 1.37.0+                |
 | .NET (x86_64 only) | 3.3.1+                 |
 | Node.js            | 4.39.0+, 5.15.0+       |
+| Python             | 3.0.0+                 |
 
 Kubernetes deployments require at least Datadog Agent 7.57.0. Host and container deployments can
 use 7.56.x versions of the Datadog Agent.
@@ -36,7 +37,7 @@ Continuous Profiler can be enabled as part of the SSI setup by following these s
 {{% tab "Host and container" %}}
 
 1. Go to the [Agent Installation Page][2] and select one of Linux platforms or Docker.
-1. Toggle the "Enable APM Instrumentation" switch. (If there is no switch, the platform is not supported by SSI.) Toggling the switch adds the `DD_APM_INSTRUMENTATION_ENABLED=` environment variable to the installation command, configuring the installed agent to inject the tracer library into processes.
+1. Toggle the "Enable APM Instrumentation" switch. (If there is no switch, the platform is not supported by SSI.) Toggling the switch adds the `DD_APM_INSTRUMENTATION_ENABLED=` environment variable to the installation command, configuring the installed agent to inject the SDK into processes.
 1. Copy the installation command into a text editor.
 1. Add `DD_PROFILING_ENABLED=auto` as an additional environment variable after `DD_APM_INSTRUMENTATION_ENABLED` in the copied command. This turns on automatic profiler enablement for any new process worth profiling.
 1. Proceed with the rest of the installation instructions, using the modified installation command.
@@ -105,9 +106,9 @@ environment variable. Running processes are not affected. The Datadog library dy
 on the profiler for the processes that are good profiling candidates.
 
 The logic for identifying a process as a good candidate varies by language. For Java, all processes
-are profiled, as Java applications are usually deployed as a single Java process on a host. For Node
-and Python, profiler is only turned on if the application is running for more than 30 seconds and
-has created at least one tracing span.
+are profiled, as Java applications are usually deployed as a single Java process on a host. For Node.js,
+profiler is only turned on if the application is running for more than 30 seconds and has created at least
+one tracing span. For Python, when `DD_PROFILING_ENABLED=auto` (the SSI default), profiling is enabled for SSI-instrumented processes.
 
 SSI can also be configured to inject profiling on each and every process by using the value `true`
 instead of `auto`.

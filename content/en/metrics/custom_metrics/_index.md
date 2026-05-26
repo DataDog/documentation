@@ -1,5 +1,6 @@
 ---
 title: Custom Metrics
+description: "Learn what custom metrics are, how they're identified by name and tags, and how they're billed in Datadog."
 aliases:
   - /guides/metrics/
   - /metrictypes/
@@ -10,10 +11,10 @@ aliases:
   - /developers/metrics/
   - /metrics/guide/tag-configuration-cardinality-estimation-tool/
 further_reading:
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
-- link: "/developers/community/libraries/"
+- link: "/extend/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
@@ -28,6 +29,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
+- link: "https://learn.datadoghq.com/courses/metrics-governance"
+  tag: "Learning Center"
+  text: "Metrics Governance"
 algolia:
   tags: ['custom metrics']
 ---
@@ -125,11 +129,11 @@ The following standard integrations can potentially emit custom metrics.
 [8]: /metrics/types/
 [9]: /metrics/types/?tab=rate#metric-types
 [10]: /metrics/types/?tab=count#metric-types
-[11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
+[11]: /extend/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
 [12]: /metrics/summary/#metric-unit
 [13]: /dashboards/guide/unit-override/
 [14]: /metrics/units/
-[15]: /developers/community/libraries/
+[15]: /extend/community/libraries/
 [16]: /integrations/activemq/#activemq-xml-integration
 [17]: /integrations/go_expvar/
 [18]: /integrations/java/

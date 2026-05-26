@@ -1,4 +1,5 @@
 ---
+id: queue_time
 title: queue time
 core_product:
   - ci-cd

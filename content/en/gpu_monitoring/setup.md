@@ -1,10 +1,18 @@
 ---
 title: Set up GPU Monitoring
-private: true
+further_reading:
+- link: "/gpu_monitoring/summary"
+  tag: "Documentation"
+  text: "GPU Monitoring Summary Page"
+- link: "/gpu_monitoring/fleet"
+  tag: "Documentation"
+  text: "GPU Monitoring Fleet Page"
+- link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
+  tag: "Blog"
+  text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
-This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
-To get additional insights and advanced eBPF metrics, like GPU core utilization, you can optionally opt-in to enabling System Probe with privileged mode.
+This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
 ### Prerequisites
 
@@ -20,7 +28,6 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 
 - **Datadog Agent**: v7.74
 - **Operating system**: Linux
-   - (Optional) For advanced eBPF metrics, Linux kernel version 5.8
 - **NVIDIA driver**: version 450.51
 
 If using Kubernetes, the following additional requirements must be met:
@@ -28,7 +35,17 @@ If using Kubernetes, the following additional requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a non-Kubernetes environment or uniform Kubernetes cluster
+If using Google Kubernetes Engine, Container-Optimized OS nodes are _not_ supported due to limitations in the kernel and permission system.
+
+## Setting up GPU Monitoring
+
+Configuring GPU Monitoring does not require DCGM. You need to opt-in to the collection of GPU Monitoring metrics at the Agent. Setup depends on your environment: non-Kubernetes/uniform, Kubernetes cluster, or mixed cluster.
+
+After you've enabled the collection of GPU Monitoring metrics, you can opt-in to enable several integrations for more advanced insights:
+- For cloud costs and cloud instance-type information: enable the [AWS][9], [Google Cloud][10], [Azure][11], or [Oracle][12] cloud integrations in your Datadog UI.
+- For process-level insights, set up Datadog's [Live Processes][13].
+
+### Set up GPU Monitoring on a non-Kubernetes environment or uniform Kubernetes cluster
 
 The following instructions are the basic steps to set up GPU Monitoring in the following environments:
 - In a Kubernetes cluster where **all** nodes have GPU devices
@@ -36,22 +53,19 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-1. Ensure that the [latest version of the Datadog Agent][2] is [installed and deployed][1] on every GPU host you wish to monitor.
+1. Make sure that the [latest version of the Datadog Agent][2] is [installed and deployed][1] on every GPU host you wish to monitor.
 2. Modify your `DatadogAgent` resource with the following parameters:
 
    `gpu.enabled: true`
    : Enables GPU Monitoring.
 
-   `gpu.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
-
    `gpu.patchCgroupPermissions: true`
-   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
+   : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
    : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
-   Example `datadog-agent.yaml`, running on GKE with advanced eBPF metrics enabled:
+   Example `datadog-agent.yaml`, running on GKE:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -62,7 +76,6 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
      features:
        gpu:
          enabled: true
-         privilegedMode: true # Only for advanced eBPF metrics
          patchCgroupPermissions: true # Only for GKE
          requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
    ```
@@ -75,29 +88,25 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-1. Ensure that the [latest version of the Datadog Agent][2] is [installed and deployed][1] on every GPU host you wish to monitor.
+1. Make sure that the [latest version of the Datadog Agent][2] is [installed and deployed][1] on every GPU host you wish to monitor.
 
 2. Modify your `datadog-values.yaml` configuration file with the following parameters:
 
    `gpuMonitoring.enabled: true`
    : Enables GPU Monitoring.
 
-   `gpuMonitoring.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
-
    `gpuMonitoring.configureCgroupPerms: true`
-   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
+   : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
    : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
-   Example `datadog-values.yaml`, running on GKE with advanced eBPF metrics enabled:
+   Example `datadog-values.yaml`, running on GKE:
 
    ```yaml
    datadog:
      gpuMonitoring:
        enabled: true
-       privilegedMode: true        # Only for advanced SP metrics
        configureCgroupPerms: true  # Only for GKE
        runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
    ```
@@ -111,53 +120,18 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
 
 {{% tab "Docker" %}}
 
-To enable GPU Monitoring in Docker without advanced eBPF metrics, use the following configuration when starting the container Agent:
+To enable GPU Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
 docker run \
---pid host \
---gpus all \
--e DD_GPU_ENABLED=true \
--v /var/run/docker.sock:/var/run/docker.sock:ro \
--v /proc/:/host/proc/:ro \
--v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-gcr.io/datadoghq/agent:latest
-```
-
-To enable advanced eBPF metrics, use the following configuration for the required permissions to run eBPF programs:
-
-```shell
-docker run \
---cgroupns host \
 --pid host \
 --gpus all \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_GPU_MONITORING_ENABLED=true \
 -e DD_GPU_ENABLED=true \
--v /:/host/root:ro \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
 -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
--v /sys/kernel/debug:/sys/kernel/debug \
--v /lib/modules:/lib/modules:ro \
--v /usr/src:/usr/src:ro \
--v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
--v /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers \
--v /etc/apt:/host/etc/apt:ro \
--v /etc/yum.repos.d:/host/etc/yum.repos.d:ro \
--v /etc/zypp:/host/etc/zypp:ro \
--v /etc/pki:/host/etc/pki:ro \
--v /etc/yum/vars:/host/etc/yum/vars:ro \
--v /etc/dnf/vars:/host/etc/dnf/vars:ro \
--v /etc/rhsm:/host/etc/rhsm:ro \
--e HOST_ROOT=/host/root \
---security-opt apparmor:unconfined \
---cap-add=SYS_ADMIN \
---cap-add=SYS_RESOURCE \
---cap-add=SYS_PTRACE \
---cap-add=IPC_LOCK \
---cap-add=CHOWN \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
@@ -173,7 +147,7 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 version: '3'
 services:
   datadog:
-    image: "gcr.io/datadoghq/agent:latest"
+    image: "registry.datadoghq.com/agent:latest"
     environment:
       - DD_GPU_ENABLED=true
       - DD_API_KEY=<DATADOG_API_KEY>
@@ -181,41 +155,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            count: all
-            capabilities: [gpu]
-```
-
-To enable advanced eBPF metrics, use the following configuration for the required permissions to run eBPF programs:
-
-```yaml
-version: '3'
-services:
-  datadog:
-    image: "gcr.io/datadoghq/agent:latest"
-    environment:
-      - DD_GPU_MONITORING_ENABLED=true  # only for advanced eBPF metrics
-      - DD_GPU_ENABLED=true
-      - DD_API_KEY=<DATADOG_API_KEY>
-      - HOST_ROOT=/host/root
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-      - /sys/kernel/debug:/sys/kernel/debug
-      - /:/host/root
-    cap_add:
-      - SYS_ADMIN
-      - SYS_RESOURCE
-      - SYS_PTRACE
-      - IPC_LOCK
-      - CHOWN
-    security_opt:
-      - apparmor:unconfined
     deploy:
       resources:
         reservations:
@@ -235,41 +174,20 @@ gpu:
   enabled: true
 ```
 
-Additionally, to enable advanced eBPF-based metrics such as GPU core utilization (`gpu.process.core.usage`), follow these steps:
-
-1. If `/etc/datadog-agent/system-probe.yaml` does not exist, create it from `system-probe.yaml.example`:
-
-    ```shell
-    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
-    ```
-
-2. Edit `/etc/datadog-agent/system-probe.yaml` and enable GPU monitoring in system-probe:
-
-    ```yaml
-    gpu_monitoring:
-      enabled: true
-    ```
-
-3. Restart the Datadog Agent
-
-    ```shell
-    sudo systemctl restart datadog-agent
-    ```
-
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ## Set up GPU Monitoring on a mixed Kubernetes cluster
 
-In a mixed Kubernetes cluster, some nodes have GPU devices while other nodes do not. Two separate DaemonSets are required (one for the runtime class in GPU nodes, and another for non-GPU nodes) due to runtime class requirements for the NVIDIA device plugin for Kubernetes. 
+In a mixed Kubernetes cluster, some nodes have GPU devices while others do not. Two separate DaemonSets are required: one for the runtime class in GPU nodes, and another for non-GPU nodes. This split is due to runtime class requirements for the NVIDIA device plugin for Kubernetes.
 
-The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. However, for compatibility reasons instructions are also provided for Helm installations or for older versions of the Datadog Operator.
+The recommended method is the Datadog Operator, version 1.20 or greater. This version provides features that make setup easier. For compatibility, instructions are also provided for Helm installations and older Datadog Operator versions.
 
 {{< tabs >}}
 {{% tab "Datadog Operator (1.20 or greater)" %}}
 
-To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the Operator's [Agent Profiles][2] feature to selectively enable GPU Monitoring only on nodes with GPUs.
+To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles][2] feature. This selectively enables GPU Monitoring only on nodes with GPUs.
 
 1. Configure the Datadog Operator to enable the Datadog Agent Profile feature in the DatadogAgentInternal mode.
 
@@ -296,10 +214,7 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 
    Then re-deploy the Datadog Operator with: `helm upgrade --install <release-name> datadog/datadog-operator -f datadog-operator.yaml`.
 
-2. Modify your `DatadogAgent` resource with the following changes:
-
-   1. Add the `agent.datadoghq.com/update-metadata` annotation to the `DatadogAgent` resource.
-   2. If advanced eBPF metrics are wanted, ensure at least one system-probe feature is enabled. Examples of system-probe features are `npm`, `cws`, `usm`. If none is enabled, the `oomKill` feature can be enabled.
+2. Modify your `DatadogAgent` resource by adding the `agent.datadoghq.com/update-metadata` annotation to the `DatadogAgent` resource.
 
    The additions to the `datadog-agent.yaml` file should look like this:
 
@@ -310,12 +225,6 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
-   spec:
-     features:
-       oomKill:
-         # Only enable this feature if there is nothing else that requires the system-probe container in all Agent pods
-         # Examples of system-probe features are npm, cws, usm
-         enabled: true
    ```
 
 3. Apply your changes to the `DatadogAgent` resource. These changes are safe to apply to all Datadog Agents, regardless of whether they run on GPU nodes.
@@ -340,7 +249,6 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
        features:
          gpu:
            enabled: true
-           privilegedMode: true # Only for advanced eBPF metrics
            patchCgroupPermissions: true # Only for GKE
    ```
 
@@ -353,9 +261,9 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 
 {{% /tab %}}
 {{% tab "Datadog Operator (1.18 or 1.19)" %}}
-To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the Operator's [Agent Profiles][2] feature to selectively enable GPU Monitoring only on nodes with GPUs.
+To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles][2] feature. This selectively enables GPU Monitoring only on nodes with GPUs.
 
-1. Ensure that the [latest version of the Datadog Agent][4] is [installed and deployed][1] on every GPU host you wish to monitor.
+1. Make sure that the [latest version of the Datadog Agent][4] is [installed and deployed][1] on every GPU host you wish to monitor.
 
 2. Modify your `DatadogAgent` resource with the following changes:
 
@@ -449,9 +357,9 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 
 {{% tab "Helm" %}}
 
-To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm deployments: one deployment for GPU nodes, and one deployment for non-GPU nodes.
+To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deployments. One deployment targets GPU nodes, and the other targets non-GPU nodes.
 
-1. Ensure that the [latest version of the Datadog Agent][3] is [installed and deployed][1] on every GPU host you wish to monitor.
+1. Make sure that the [latest version of the Datadog Agent][3] is [installed and deployed][1] on every GPU host you wish to monitor.
 
 2. Modify your `datadog-values.yaml` configuration file to target non-GPU nodes.
 
@@ -470,7 +378,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
                  - "true"
    ```
 
-3. Create a new values file, `datadog-gpu-values.yaml`. Configure this file to:
+3. Create a values file, `datadog-gpu-values.yaml`. Configure this file to:
    - Target only GPU nodes
    - [Join existing Datadog Cluster Agents][2]
    - Enable GPU Monitoring with the following parameters:
@@ -478,11 +386,8 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
    `gpuMonitoring.enabled: true`
    : Enables GPU Monitoring.
 
-   `gpuMonitoring.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
-
    `gpuMonitoring.configureCgroupPerms: true`
-   : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
+   : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
    : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
@@ -495,7 +400,6 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
      kubeStateMetricsEnabled: false # Disabled, as you're joining an existing Cluster Agent
      gpuMonitoring:
        enabled: true
-       privilegedMode: true        # Only for advanced eBPF metrics
        configureCgroupPerms: true  # Only for GKE
        runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
 
@@ -550,3 +454,8 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [7]: /containers/docker/
 [8]: /agent/supported_platforms/linux/
+[9]: /getting_started/integrations/aws/
+[10]: /getting_started/integrations/google_cloud/?tab=orglevel
+[11]: /getting_started/integrations/azure/?tab=createanappregistration
+[12]: /getting_started/integrations/oci/
+[13]: /infrastructure/process?tab=linuxwindows#installation

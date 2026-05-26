@@ -8,9 +8,6 @@ aliases:
 - /service_management/service_level_objectives/ootb_dashboard
 - /service_management/service_level_objectives/
 further_reading:
-- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
-  tag: "Blog"
-  text: "Track the status and error budget of your SLOs with Datadog"
 - link: "https://learn.datadoghq.com/courses/intro-to-slo"
   tag: "Learning Center"
   text: "Introduction to Service Level Objectives"
@@ -26,15 +23,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
   tag: "Blog"
   text: "Best practices for managing your SLOs with Datadog"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
-  tag: "External Site"
-  text: "Create and manage SLOs with Terraform"
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
   text: "Burn Rate is a Better Error Rate"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
+  tag: "Blog"
+  text: "Track the status and error budget of your SLOs with Datadog"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
+  tag: "External Site"
+  text: "Create and manage SLOs with Terraform"
 ---
 
 {{< jqmath-vanilla >}}
@@ -341,38 +341,6 @@ For Metric-based and Time Slice SLOs with status corrections, there is a toggle 
 The SLO Calendar View is available on the [SLO manage page][2]. On the top right corner, switch from the "Primary" view to the "Daily", "Weekly", or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
 {{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="SLO calendar view" >}}
-
-## SLO CSV export
-
-{{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="Try Out the SLO CSV Export Feature">}}
-The CSV Export feature is in Preview. Complete the form to request access.
-{{< /callout >}}
-
-The SLO CSV Export feature is available on the [SLO manage page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data with the following information:
-
-- SLO id, name, and type
-- SLO tags
-- SLO target
-- Historical SLO status values
-
-{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO calendar view" >}}
-
-The following time windows are available for the CSV export:
-
-- **Weekly:** The SLO statuses are based on calendar-aligned weeks (Sunday 12am - Saturday 11:59pm)
-- **Monthly:** The SLO statuses are based on calendar-aligned months (First day of the month 12am - last day of the month 11:59pm)
-
-These times are based on the user's timezone setting in Datadog.
-
-The SLO statuses are calculated based on the SLO type:
-- **Metric-based SLOs:** Percent of good events out of total events for the time window
-- **Time Slice SLOs:** Percent of good minutes out of total minutes for the time window
-
-**Notes:**
-
-- The SLOs that are exported are based on your search query.
-- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name are included in the CSV (not the SLO's status history data).
-- There is a limit of 1000 SLOs per export.
 
 ## Further Reading
 

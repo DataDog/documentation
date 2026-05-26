@@ -57,6 +57,6 @@ The Datadog Agent's default configuration is designed to be highly compatible wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/unix_socket/?tab=host 
+[1]: /extend/dogstatsd/unix_socket/?tab=host 
 [2]: /containers/kubernetes/apm/ 
 [3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted

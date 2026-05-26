@@ -143,6 +143,19 @@ After a degradation notice is reviewed and published, it:
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
+### Backfill a degradation
+
+Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Degradation**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the degradation. Each update requires a started at timestamp, status (Investigating or Resolved), description, and affected components. |
+
+{{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
+
 ### Schedule a maintenance window
 
 {{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
@@ -168,13 +181,26 @@ After reviewing and scheduling, the maintenance window:
 
 You can post updates if plans change or reschedule the maintenance window as needed.
 
+### Backfill a maintenance window
+
+Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Scheduled Maintenance**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the maintenance window. Each update requires a started at timestamp, status (In Progress or Completed), description, and affected components. |
+
+{{< img src="service_management/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
+
 ## Email subscriptions
 
-Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
+Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. A preferred timezone can be configured for timestamp formatting within notifications. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
-{{< img src="/service_management/status_pages/status_pages_subscription.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
+{{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
 ## Set a custom domain
 

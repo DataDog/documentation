@@ -1,4 +1,5 @@
 ---
+id: system
 title: system
 core_product:
   - software catalog

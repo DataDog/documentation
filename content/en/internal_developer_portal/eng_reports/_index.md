@@ -1,5 +1,5 @@
 ---
-title: Engineering Report
+title: Engineering Reports
 further_reading:
 - link: "/service_level_objectives/"
   tag: "Documentation"

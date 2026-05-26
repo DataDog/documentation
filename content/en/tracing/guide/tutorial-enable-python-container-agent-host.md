@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a container
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/python/
   tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
@@ -34,7 +34,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 - A Datadog account and [organization API key][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- Python that meets the [SDK requirements][4]
 
 ## Install the Agent
 
@@ -49,7 +49,7 @@ To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE`
 Ensure your Agent is configured to receive trace data from containers. Open its [configuration file][15] and ensure `apm_config:` is uncommented, and `apm_non_local_traffic` is uncommented and set to `true`.
 
 
-If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
+If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [SDK developer docs][7].
 
 
 ## Install the sample Dockerized Python application
@@ -219,7 +219,7 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 
 ## Launch the containers to see automatic tracing
 
-Now that the Tracing Library is installed and the Agent is running, restart your application to start receiving traces. Run the following commands:
+Now that the SDK is installed and the Agent is running, restart your application to start receiving traces. Run the following commands:
 
 ```
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app

@@ -18,10 +18,19 @@ further_reading:
 ---
 ## Overview
 
-Front-end errors are collected with Browser SDK. The error message and stack trace are included when available.
+The Browser SDK collects frontend errors, including the error message and stack trace when available. For triaging and managing these errors in the Error Tracking product, see [Browser Error Tracking][4].
+
+When the Browser SDK collects an error:
+
+* The error is captured as an [Error event][14] in RUM.
+* [Retention Filters][15] that target sessions containing an Error event retain the current session.
+* The [RUM metrics][16] `rum.measure.error`, `rum.measure.session.error`, and `rum.measure.view.error_free` are updated, regardless of whether the session is retained.
+* The error is captured in [Error Tracking][4].
+
+[Error Tracking rules][17] do not apply to _Error events_, and RUM still records Error events that match [Ignored and Excluded issues][18] in Error Tracking. To prevent errors from being recorded as Error events, you must discard them before they are sent to Datadog [using the `beforeSend` callback][19].
 
 ## Error sources
-Front-end errors come from several different sources:
+Frontend errors come from several different sources:
 
 - **agent**: From the SDK execution
 - **console**: From `console.error()` API calls
@@ -63,7 +72,7 @@ addError(
 **Note**: [Error Tracking][4] processes errors that are sent with the source set to `custom`, `source`, `report` or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{% tab "npm" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -151,7 +160,7 @@ The collected rendering errors contain a component stack, which is unminified li
 To instrument React error boundaries for monitoring, use the following:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{% tab "npm" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -261,3 +270,9 @@ Get visibility into cross-origin scripts by following these two steps:
 [11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
 [12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause
+[14]: /real_user_monitoring/explorer/search/#event-types
+[15]: /real_user_monitoring/rum_without_limits/retention_filters
+[16]: /real_user_monitoring/rum_without_limits/metrics
+[17]: /error_tracking/manage_data_collection
+[18]: /error_tracking/issue_states#excluding-an-issue
+[19]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#discard-a-frontend-error

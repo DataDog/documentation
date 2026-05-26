@@ -11,6 +11,9 @@ further_reading:
   - link: "/code_coverage/flags"
     tag: "Documentation"
     text: "Organize coverage data with flags"
+  - link: "/code_coverage/carryforward"
+    tag: "Documentation"
+    text: "Keep total coverage accurate with carryforward"
 ---
 
 ## Overview
@@ -33,6 +36,13 @@ services:
 ignore:
   - "test/**/*"
   - "**/*.pb.go"
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 85
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
 ```
 
 ## Services configuration
@@ -154,6 +164,168 @@ ignore:
 ```
 {{% /collapse-content %}}
 
+## PR Gates
+
+You can define [PR Gates][2] in the configuration file to enforce code coverage thresholds on pull requests. If gates are also configured in the [Datadog UI][2], Datadog evaluates both the configuration file rules and the UI rules when a PR is opened or updated.
+
+<div class="alert alert-info">If both the configuration file and the Datadog UI define gates for the same scope, the pull request must meet every defined threshold.</div>
+
+```yaml
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 85
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
+```
+
+Each gate has the following fields:
+
+- `type` (required): The type of coverage gate. Supported values:
+  - `total_coverage_percentage`: The minimum overall coverage percentage for the repository (or for the scoped services or code owners).
+  - `patch_coverage_percentage`: The minimum coverage percentage on code changed in the pull request.
+- `config` (required): Gate configuration options. Supported values:
+  - `threshold` (required): The minimum coverage percentage (0-100).
+  - `services`: (optional) A list of service name patterns to scope the gate to. Use `*` as a wildcard. Prefix a value with `!` to exclude matching services. When set, coverage is evaluated separately for each matching service.
+  - `codeowners`: (optional) A list of code owner patterns to scope the gate to. Use `*` as a wildcard. Prefix a value with `!` to exclude matching code owners. When set, coverage is evaluated separately for each matching code owner.
+  - `flags`: (optional) A list of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. Prefix a value with `!` to exclude matching flags. When set, coverage is evaluated separately for each matching flag.
+
+### Examples
+
+{{% collapse-content title="Unscoped total and patch coverage gates" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Gates scoped to services" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: backend-api
+    paths:
+      - backend/api/**
+  - id: frontend-web
+    paths:
+      - frontend/**
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      services:
+        - "*"
+
+  - type: total_coverage_percentage
+    config:
+      threshold: 85
+      services:
+        - "backend-api"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Gates scoped to code owners" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
+      codeowners:
+        - "@DataDog/backend-team"
+        - "@DataDog/api-*"
+
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      codeowners:
+        - "@DataDog/frontend-team"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Gates scoped to flags" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      flags:
+        - "unit-tests"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      flags:
+        - "integration-tests"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Excluding with negation" level="h4" %}}
+Use the `!` prefix to exclude specific services, code owners, or flags from a gate. For example, to enforce coverage on all services except experimental ones, and on all flags except nightly tests:
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      services:
+        - "*"
+        - "!experimental-*"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      flags:
+        - "*"
+        - "!nightly-*"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+## Carryforward
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
+
+You can enable [carryforward][4] in the configuration file to reuse coverage data from ancestor commits when not every CI job runs for a commit. Carryforward operates on [flags][3], so every report involved must be tagged with `--flags`.
+
+To enable carryforward for every flag in the repository:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+carryforward: true
+{{< /code-block >}}
+
+To enable carryforward for specific flags only:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+flags:
+  unit-tests:
+    carryforward: true
+  integration-tests:
+    carryforward: true
+{{< /code-block >}}
+
+The top-level `carryforward` field accepts the following values:
+
+- `true`: Carryforward is enabled for every flag, unless a flag overrides it with `carryforward: false` in the `flags` map.
+- `false` (default): Carryforward is disabled, unless a flag opts in with `carryforward: true` in the `flags` map.
+
+The `flags` map accepts a per-flag configuration block. The supported fields are:
+
+- `carryforward`: A Boolean that enables or disables carryforward for the named flag. Overrides the top-level `carryforward` value.
+
+For complete details, see [Code Coverage Carryforward][4].
+
 ## Pattern syntax
 
 Configuration options that accept file paths support three types of patterns:
@@ -197,3 +369,6 @@ Simple path prefixes without special characters are treated as prefix matches:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /code_coverage/monorepo_support
+[2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[3]: /code_coverage/flags
+[4]: /code_coverage/carryforward

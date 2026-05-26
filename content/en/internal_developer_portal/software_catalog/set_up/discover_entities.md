@@ -25,7 +25,7 @@ Datadog Software Catalog is pre-populated with entries detected through [APM][1]
 
 All automatically detected entities appear in the Component Selector within Software Catalog.
 
-APM and USM automatically detect the following entities types: `service`,`datastore`, `queue`, `external providers`, `inferred services`, and `endpoints`. APM SDKs identify dependencies of instrumented services and classify them as databases, queues, or third-party APIs—even if those dependencies are not directly instrumented. Custom instrumentation may affect how entities are discovered and how the `service tag` is assigned. To learn more, see [APM Inferred Services][3].
+APM and USM automatically detect the following entities types: `service`,`datastore`, `queue`, `external providers`, `inferred services`, and `endpoints`. Datadog SDKs identify dependencies of instrumented services and classify them as databases, queues, or third-party APIs—even if those dependencies are not directly instrumented. Custom instrumentation may affect how entities are discovered and how the `service tag` is assigned. To learn more, see [APM Inferred Services][3].
 
 RUM is responsible for discovering `frontend apps` entities.
 
@@ -45,7 +45,7 @@ To adjust how inferred entities appear in Software Catalog, you can:
 
 To ensure proper auto-correlation between APM and Software Catalog, follow these best practices:
 
-- Ensure your APM SDK and Datadog Agent versions support [inferred entities][15].
+- Ensure your Datadog SDK and Datadog Agent versions support [inferred entities][15].
 - Avoid arbitrary [service overrides][16] and use [inferred entities][15] instead. 
   - Arbitrary service overrides can make correlation unreliable and clutter your catalog. They also make Software Catalog hard to use for those unfamiliar with the override names.
 - [Rename inferred entities][14], like datastores and queues, to match your team's naming conventions.

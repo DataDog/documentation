@@ -9,7 +9,7 @@ title: Error Tracking Explorer
 
 ## Présentation
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
 
 L'Explorateur de suivi des erreurs vous permet d'afficher, de filtrer et d'analyser des problèmes dans Datadog. Un problème est un groupe d'erreurs similaires liées au même bug. Les problèmes sont automatiquement créés en calculant une empreinte pour chaque erreur à l'aide de certains de ses attributs, tels que le type d'erreur, le message d'erreur ou la stack trace. Les erreurs qui partagent la même empreinte sont regroupées dans le même problème.
 
@@ -40,11 +40,11 @@ La fonctionnalité Suivi des erreurs indexe automatiquement une liste prédéfin
 
 Cliquez sur un problème pour l'examiner plus en détail dans un volet dédié.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Le haut du volet relatif aux problèmes du suivi des erreurs proposant une vue résumée du problème" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Le haut du volet relatif aux problèmes du suivi des erreurs proposant une vue résumée du problème" style="width:80%;" >}}
 
 Les principales informations dont vous avez besoin pour dépanner un problème se trouvent dans la partie supérieure du volet. Elles vous permettent de comprendre son cycle de vie : première et dernière occurrence, nombre total d'occurrences et évolution du nombre d'occurrences au fil du temps.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Le bas du volet relatif aux problèmes du suivi des erreurs proposant des exemples d'erreurs" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Le bas du volet relatif aux problèmes du suivi des erreurs proposant des exemples d'erreurs" style="width:80%;" >}}
 
 Les informations affichées dans le volet relatif aux problèmes varient en fonction de la source de l'erreur. Par exemple, un problème créé à partir d'erreurs de l'APM affiche les tags de span de l'erreur, comme le nom de la ressource ou de l'opération, avec un accès direct à la trace ou aux logs associés.
 

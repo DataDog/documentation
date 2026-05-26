@@ -58,14 +58,26 @@ Traces are generated when Istio is able to determine the traffic is using an HTT
 By default, Istio tries to automatically detect this. It can be manually configured by naming the ports in your
 application's deployment and service. More information can be found in Istio's documentation for [Protocol Selection][7]
 
-By default, the service name used when creating traces is generated from the deployment name and namespace. This can be
-set manually by adding an `app` label to the deployment's pod template:
+By default, the service name used when creating traces is derived from the `app` label on the pod and the pod's namespace. If the `app` label is not set, the service name defaults to `istio-proxy`.
+
+To set a custom service name, add an `app` label to the deployment's pod template:
 
 ```yaml
 template:
   metadata:
     labels:
       app: <SERVICE_NAME>
+```
+
+Alternatively, override the service name with the `DD_SERVICE` environment variable through the [`proxy.istio.io/config` annotation](#environment-variables):
+
+```yaml
+template:
+  metadata:
+    annotations:
+      proxy.istio.io/config: |
+        proxyMetadata:
+          "DD_SERVICE": "<SERVICE_NAME>"
 ```
 
 For [CronJobs][8], the `app` label should be added to the job template, as the generated name comes from the `Job` instead

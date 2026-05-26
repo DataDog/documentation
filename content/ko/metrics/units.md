@@ -6,6 +6,9 @@ further_reading:
 - link: /dashboards/
   tag: 설명서
   text: 데이터를 시각화하여 인사이트 확보
+- link: /dashboards/guide/unit-override/
+  tag: 설명서
+  text: 단위 재정의로 시각화 맞춤 설정
 title: 메트릭 단위
 ---
 
@@ -17,14 +20,18 @@ title: 메트릭 단위
 
 시계열 그래프에서 그래프 위 아무데나 커서를 가리켜 해당 단위를 볼 수 있습니다. 단위는 직접 지정되어야 하지만 단위가 지정되지 않으면 자릿수 표기법(예: 천, 백만, 10억 등에 대해 각각 K, M, G)이 사용됩니다. 단위가 지정된 경우 원본 데이터가 자동으로 해당 자릿수를 사용하여 읽기 가능한 표시 단위로 전환됩니다.
 
-예를 들어 3,000,000,000인 데이터 요소가 있는 경우,
+예를 들어 3,000,000,000인 데이터 포인트가 있는 경우:
 
-* 이 데이터 요소에 대한 단위를 지정하지 않은 경우 "3G"가 표시됩니다.
-* 이 데이터 요소를 바이트로 지정한 경우 "3GB"가 표시됩니다.
+* 이 데이터 포인트에 단위를 지정하지 않으면 "3G"가 표시됩니다.
+* 이 데이터 포인트를 바이트로 지정한 경우 "3GB"가 표시됩니다.
 
-단위는 타임보드 그래프 하단에도 표시됩니다. 기어 드롭다운에서 **메트릭 정보**를 선택하면 메트릭 설명도 사용할 수 있습니다.
+그래프 우상단의 전체 화면 버튼을 클릭하면 하단에 단위가 표시됩니다.
 
-{{< img src="metrics/units/annotated_ops.png" alt="주석 지정 연산자" style="width:100%;">}}
+{{< img src="metrics/units/metrics_units.png" alt="전체 화면 모드에서 메트릭 그래프의 단위" style="width:100%;">}}
+
+메트릭 그래프에서 컨텍스트 메뉴(세로 점 3개)를 클릭하여 **Metrics Info** 옵션을 찾습니다. 그러면 해당 메트릭 설명이 포함된 패널이 열립니다. 이 패널에서 메트릭 이름을 클릭하면 메트릭 요약 페이지에서 해당 메트릭이 열리며 추가 분석 또는 편집할 수 있습니다.
+
+{{< img src="metrics/units/metrics_info.png" alt="확장 컨텍스트 메뉴(세로 점 3개)의 Metrics Info 옵션" style="width:100%;">}}
 
 메트릭 단위를 변경하려면 [메트릭 요약][1] 페이지로 이동한 다음 메트릭을 선택하세요. **메타데이터**에서 **편집**을 클릭한 다음 드롭다운 메뉴에서 `bit` 또는 `byte` 등 단위를 선택하세요.
 
@@ -32,28 +39,28 @@ title: 메트릭 단위
 
 다음 단위는 Datadog에 제출된 메트릭과 연결되어 있을 수 있습니다.
 
-| 타입        | 단위                                                                                                                                                                                                                                                                                                                    |
+| 유형        | 단위                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 바이트       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
-| 시간        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
-| 백분율  | percent_nano / percent / apdex / fraction                                                                                                                                                                                                                                                                                  |
-| 네트워크     | connection / request / packet / segment / response / message / payload / timeout / datagram / route / session / hop                                                                                                                                                                                                             |
-| 시스템      | process / thread / host / node / fault / service / instance / cpu                                                                                                                                                                                                                                                          |
-| 디스크        | file / inode / sector / block                                                                                                                                                                                                                                                                                              |
-| 일반     | buffer / error / read / write / occurrence / event / time / unit / operation / item / task / worker / resource / garbage collection / email / sample / stage / monitor / location / check / attempt / device / update / method / job / container / execution / throttle / invocation / user / success / build / prediction / exception |
-| DB          | table / index / lock / transaction / query / row / key / command / offset / record / object / cursor / assertion / scan / document / shard / flush / merge / refresh / fetch / column / commit / wait / ticket / question                                                                                                  |
+| 바이트       | bit / byte (b) / kibibyte(KiB) / mebibyte (MiB) / gibibyte (GB) / tebibyte (TiB) / pebibyte (PiB) / exbibyte (EiB)                                                                                                                                                                                                         |
+| 시간        | nanosecond (ns) / microsecond (μs) / millisecond (ms) / second (s) / minute (min) / hour (hr) / day / week (wk)                                                                                                                                                                                                            |
+| 백분율  | percent_nano (n%) / percent (%) / apdex / fraction                                                                                                                                                                                                                                                                         |
+| 네트워크     | connection (conn) / request (req) / packet (pkt) / segment (seg) / response (rsp) / message (msg) / payload / timeout / datagram / route / session / hop                                                                                                                                                                   |
+| 시스템      | process (proc) / thread / host / node / fault / service (svc) / instance / cpu                                                                                                                                                                                                                                             |
+| 디스크        | file / inode / sector / block (blk)                                                                                                                                                                                                                                                                                        |
+| 일반     | buffer / error (err) / read (rd) / write (wr) / occurrence / event / time / unit / operation (op) / item / task / worker / resource (res) / garbage collection (gc) / email / sample (smpl) / stage / monitor / location / check / attempt / device (dev) / update (up) / method (mthd) / job / container / execution / throttle / invocation / user / success / build / prediction / exception |
+| DB          | table / index (idx) / lock / transaction (tx) / query / row / key / command (cmd) / offset / record / object / cursor / assertion (assert) / scan / document / shard / flush / merge / refresh / fetch / column (col) / commit / wait / ticket / question                                                                  |
 | 캐시       | hit / miss / eviction / get / set                                                                                                                                                                                                                                                                                          |
-| 화폐       | dollar / cent / microdollar / euro                                                                                                                                                                                                                                                                                         |
-| 메모리      | page / split                                                                                                                                                                                                                                                                                                               |
-| 주파수   | hertz / kilohertz / megahertz / gigahertz                                                                                                                                                                                                                                                                                  |
+| 화폐       | dollar ($) / cent (¢) / microdollar (μ$) / euro (€) / pound (£) / pence (p) / yen (¥)                                                                                                                                                                                                                                      |
+| 메모리      | page (pg) / split                                                                                                                                                                                                                                                                                                          |
+| 주파수   | hertz (Hz) / kilohertz (kHz) / megahertz (MHz) / gigahertz (GHz)                                                                                                                                                                                                                                                           |
 | 기록     | entry                                                                                                                                                                                                                                                                                                                      |
-| 온도 | decidegree celsius / degree celsius / degree fahrenheit                                                                                                                                                                                                                                                                    |
-| CPU         | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                                                                                                   |
-| 전력       | nanowatt / microwatt / milliwatt / deciwatt / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                                            |
-| 전류     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
-| 퍼텐셜   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
-| APM         | span                                                                                                                                                                                                                                                                                                                       |
-| 신서틱(Synthetic)  | run                                                                                                                                                                                                                                                                                                                        |
+| 온도 | decidegree celsius (d°C) / degree celsius (°C) / degree fahrenheit (°F)                                                                                                                                                                                                                                                    |
+| CPU         | nanocore (ncores) / microcore (μcores) / millicore (mcores) / core / kilocore (Kcores) / megacore (Mcores) / gigacore (Gcores) / teracore (Tcores) / petacore (Pcores) / exacore (Ecores)                                                                                                                                  |
+| 전력       | nanowatt (nW) / microwatt (μW) / milliwatt (mW) / deciwatt (dW) / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                        |
+| 전류     | milliampere (mA) / ampere (A)                                                                                                                                                                                                                                                                                              |
+| 퍼텐셜   | millivolt (mV) / volt (V)                                                                                                                                                                                                                                                                                                  |
+| APM         | 스팬                                                                                                                                                                                                                                                                                                                       |
+| 신서틱(Synthetic)  | run / step                                                                                                                                                                                                                                                                                                                 |
 
 ## 숫자 형식
 
@@ -77,7 +84,7 @@ title: 메트릭 단위
 
 ### 단위 처리
 
-단위는 가독성을 위해 그래프에서 자동으로 형식이 지정됩니다.
+그래프 단위는 가독성을 위해 자동으로 서식이 지정됩니다. 단위 표시 방식을 사용자 설정하려면 [단위 재지정으로 시각화 사용자 설정하기][3]를 참조하세요.
 
 #### 예시
 
@@ -120,3 +127,4 @@ title: 메트릭 단위
 
 [1]: https://app.datadoghq.com/metric/summary
 [2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes
+[3]: /ko/dashboards/guide/unit-override/

@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Python ap
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/python/
   tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
@@ -34,7 +34,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 - A Datadog account and [organization API key][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- Python that meets the [SDK requirements][4]
 
 ## Install the sample Dockerized Python application
 
@@ -158,7 +158,7 @@ Add the Datadog Agent in the services section of the `docker/containers/exercise
    ```yaml
      datadog:
        container_name: dd-agent
-       image: "gcr.io/datadoghq/agent:latest"
+       image: "registry.datadoghq.com/agent:latest"
        environment:
           - DD_API_KEY=<DD_API_KEY>
           - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
@@ -179,7 +179,7 @@ To check that you've set things up correctly, compare your `docker-compose.yaml`
 
 ## Launch the containers to see automatic tracing
 
-Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
+Now that the SDK is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
 docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
