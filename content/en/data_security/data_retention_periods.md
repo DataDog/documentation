@@ -28,6 +28,9 @@ attributes:
     data_type: |
        - **Audit logs (Audit Trail enabled)**: 90 days
        - **Audit logs (Audit Trail disabled)**: 7 days
+  - product: Bits AI Assistant
+    data_type: |
+       - **Messages**: 15 months
   - product: Bits AI Dev Agent
     data_type: |
        - **Source Code**: 7 days
