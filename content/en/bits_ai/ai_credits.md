@@ -28,10 +28,10 @@ The following products consume AI Credits:
 
 | Product | What it does |
 |---|---|
-| [Bits AI Assistant][1] | Search, explore, and take action across Datadog using natural language from the web app, mobile, and Slack. |
-| [Bits AI SRE][3] | Resolve issues faster with autonomous alert investigations built for complex environments. |
-| [Bits AI Dev][2] | Generate, review, and refine code in-app to speed up implementation and bug fixing. |
-| [Agent Builder][4] | Build custom AI agents inside Datadog to automate workflows like incident response, report generation, and standards enforcement. |
+| [Bits AI Assistant][1] | AI-powered assistant that helps you search, explore, and act across Datadog using natural language. |
+| [Bits AI SRE][3] | Autonomous AI agent that investigates production issues end to end to help on-call engineers pinpoint root causes. |
+| [Bits AI Dev][2] | AI coding assistant that uses Datadog observability data to diagnose issues and generate code fixes. |
+| [Agent Builder][4] | Build custom AI agents that use Datadog tools and integrations to automate operational tasks. |
 
 ## Pricing
 
@@ -64,7 +64,7 @@ These are average credit costs per feature. Actual consumption for any single re
 | Bits AI Assistant — search and explore telemetry | 0.6 |
 | Bits AI Assistant — setup and optimize observability | 0.4 |
 | Bits AI Assistant — root cause analysis | 0.8 |
-| Bits AI SRE — investigation | 6.5 |
+| Bits AI SRE — autonomous investigation | 6.5 |
 | Bits AI Dev — code fix | 5 |
 | Agent Builder — message | 0.3 |
 
@@ -82,7 +82,7 @@ All AI Credit management lives in **Plan & Usage > AI Credits**. From there, adm
 
 AI Credits are available to all Datadog customers except:
 
-- **FedRAMP / Datadog for Government** customers, where AI Credit products are not supported.
+- **FedRAMP** customers, where AI Credit products are not supported.
 - Customers who have explicitly opted out of AI features through their account team.
 
 ## Frequently asked questions
@@ -93,7 +93,7 @@ No. Unused Commit credits expire at the end of each monthly billing period. On-D
 
 ### What happens if I run out of Commit credits mid-month?
 
-Usage automatically continues at the On-Demand rate ($1.30 per credit). You do not need to take any action.
+Usage automatically continues at the On-Demand rate. You do not need to take any action.
 
 ### What happens if I run out of credits while an AI product is mid-task?
 
@@ -101,7 +101,7 @@ Any task already in flight is allowed to complete—for example, a Bits AI SRE i
 
 ### Can I see what a request costs before I run it?
 
-Not exactly. Because the model decides which steps it needs to take to complete a task, the final credit cost is determined after the request completes. AI Credit consumption is visible in Plan & Usage at the AI product level, and the per-feature averages on this page are a reliable planning estimate.
+No. The final credit cost is determined after the request completes, because the model decides which steps to take. AI Credit consumption is visible in Plan & Usage at the AI product level, and the per-feature averages on this page are a reliable planning estimate.
 
 ### Can I disable AI Credits billing entirely?
 
