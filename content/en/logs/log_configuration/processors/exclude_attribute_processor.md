@@ -68,7 +68,7 @@ The `http.response.body` attribute is removed from the log before it reaches ind
 
 ## API
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following exclude attribute processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following Exclude Attribute Processor JSON payload:
 
 ```json
 {
