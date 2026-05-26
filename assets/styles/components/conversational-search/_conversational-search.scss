@@ -226,6 +226,27 @@ $conv-neutral-200: #efefef;
         margin-bottom: 0;
     }
 
+    // Inline markdown links — always visible (not just on hover) so users
+    // recognize them as clickable without having to mouse over the text.
+    .conv-search-md-link {
+        color: $conv-search-purple-dark;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+        transition: color 0.15s ease;
+
+        &:hover,
+        &:focus-visible {
+            color: $conv-search-purple;
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba($conv-search-purple, 0.3);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+    }
+
     ul, ol {
         padding-left: 30px;
 
