@@ -17,139 +17,123 @@ further_reading:
 
 ## Create a support ticket
 
-<p>To create a new support ticket, navigate to the <a href="https://help.datadoghq.com/">Datadog support site</a>. At the bottom of the page, click <strong>Create a New Ticket</strong> to fill out a ticket form.</p>
+To create a new support ticket, navigate to the [Datadog support site][1]. At the bottom of the page, click **Create a New Ticket** to fill out a ticket form.
 
-<p>You can also access this form through Datadog. From the left navigation, hover over <strong>Help</strong> and click <strong>Support</strong>. Alternatively, navigate to the <a href="https://app.datadoghq.com/help">Datadog help page</a> and click <strong>New Support Ticket</strong>.</p>
+You can also access this form through Datadog. From the left navigation, hover over **Help** and click **Support**. Alternatively, navigate to the [Datadog help page][2] and click **New Support Ticket**.
 
 ## Access existing tickets
 
-<p>If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:</p>
-<ol>
-    <li>From the <a href="https://help.datadoghq.com/">Support page</a>, click <strong>Sign in</strong> on the top right.</li>
-    <li>If this is your first time signing into your Datadog Zendesk account, click <strong>New to your Datadog Zendesk account? Sign up</strong>.</li>
-    <li>If you have previously emailed Datadog support, click <strong>Emailed us for support? Get a password</strong> and enter the email address you used to contact Datadog support.</li>
-    <li>After you receive the password in your email, log in and click <strong>Manage your tickets</strong> to see your requests.</li>
-    <li>If you don't see the <strong>My Activities</strong> page after logging in, click on your name in the upper right corner, and then click <strong>My Activities</strong>.</li>
-    <li>To view your entire organization's tickets, submit a request to Datadog support.</li>
-</ol>
+If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:
+
+1. From the [Support page][1], click **Sign in** on the top right.
+1. If this is your first time signing into your Datadog Zendesk account, click **New to your Datadog Zendesk account? Sign up**.
+1. If you have previously emailed Datadog support, click **Emailed us for support? Get a password** and enter the email address you used to contact Datadog support.
+1. After you receive the password in your email, log in and click **Manage your tickets** to see your requests.
+1. If you don't see the **My Activities** page after logging in, click on your name in the upper right corner, and then click **My Activities**.
+1. To view your entire organization's tickets, submit a request to Datadog support.
 
 ## Password requirements
 
-<p>To ensure the security of your account, any password used to sign in to Datadog's Zendesk support portal must meet the following requirements:</p>
-<ol>
-    <li>Password complexity:
-        <ul>
-            <li>Must include at least <strong>12 characters</strong>.</li>
-            <li>Must contain <strong>uppercase and lowercase letters (A-Z)</strong>.</li>
-            <li>Must include at least <strong>one number (0-9)</strong>.</li>
-            <li>Must include at least <strong>one special character</strong> (for example, <code>!</code>, <code>@</code>, <code>#</code>, or <code>%</code>).</li>
-            <li>Must <strong>not resemble an email address</strong>.</li>
-            <li>Must <strong>not include the word "Zendesk"</strong>.</li>
-        </ul>
-    </li>
-    <li>Failed attempts and lockout:
-        <ul>
-            <li>Users are allowed a maximum of <strong>5 attempts</strong> before the account is locked out temporarily.</li>
-        </ul>
-    </li>
-    <li>Prohibited sequences:
-        <ul>
-            <li>Passwords cannot include more than a specified number of consecutive letters or numbers. For instance, if the limit is set to 4, the system rejects passwords like <code>admin12345</code>.</li>
-        </ul>
-    </li>
-    <li>Previous passwords:
-        <ul>
-            <li>Users cannot reuse a certain number of their previously used passwords.</li>
-        </ul>
-    </li>
-    <li>Expiration policy:
-        <ul>
-            <li>Passwords must be updated at least <strong>every 90 days</strong>, or whenever prompted by the system.</li>
-        </ul>
-    </li>
-</ol>
+To help ensure the security of your account, any password used to sign in to Datadog's Zendesk support portal must meet the following requirements:
+
+- Password complexity
+   - Must include at least **12 characters**.
+   - Must contain **uppercase and lowercase letters (A-Z)**.
+   - Must include at least **one number (0-9)**.
+   - Must include at least **one special character** (for example, `!`, `@`, `#`, or `%`).
+   - Must **not resemble an email address**.
+   - Must **not include the word "Zendesk"**.
+- Prohibited sequences
+   - Passwords cannot include more than a specified number of consecutive letters or numbers. For instance, if the limit is set to 4, the system rejects passwords like `admin12345`.
+- Previous passwords
+   - Users cannot reuse a certain number of their previously used passwords.
+- Expiration policy
+   - Passwords must be updated at least **every 90 days**, or whenever prompted by the system.
+- Failed attempts and lockout
+   - Users are allowed a maximum of **5 attempts** before the account is locked out temporarily.
 
 ## Troubleshooting
 
 ### Error: Refused to connect
 
-<p><strong>Refused to connect</strong> errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to <a href="https://support.google.com/chrome/answer/95647">Clear, enable, and manage cookies in Chrome</a> in Google Chrome Help.</p>
+**Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][3] in Google Chrome Help.
 
-<p>If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add <strong>datadog.zendesk.com</strong> to the allow list.</p>
+If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add **datadog.zendesk.com** to the allow list.
 
 ### Ticket is no longer available
 
-<p>Datadog deletes closed tickets, including their attachments, 15 months after their last update.</p>
+Datadog deletes closed tickets, including their attachments, 15 months after their last update.
 
-<p>If you need help with a related issue, you can open a new ticket or search the Datadog documentation.</p>
+If you need help with a related issue, you can open a new ticket or search the Datadog documentation.
 
 {{% /site-region %}}
 
 {{% site-region region="gov,gov2" %}}
 
+## Prerequisites
+
+To receive registration verification codes, password reset emails, and case notification emails, add the `ddog-gov.com` domain to your email allowlist. This includes `help@ddog-gov.com` and `support@ddog-gov.com`.
+
 ## Register on the portal
 
-<p>If you are a first-time user, follow these steps to register an account:</p>
+If you are a first-time user, follow these steps to register an account:
 
-<ol>
-    <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
-    <li>Click <strong>Sign Up</strong>.</li>
-    <li>Complete the registration form using the email address associated with your existing GovCloud Datadog account.</li>
-    <li>In a separate browser tab, navigate to your email. Open the verification email from <code>help@ddog-gov.com</code> and copy the verification code.</li>
-    <li>In the Datadog GovCloud support portal, enter the verification code.</li>
-    <li>Click <strong>Verify</strong>.</li>
-</ol>
+1. Navigate to [the Datadog GovCloud support portal][4].
+1. Click **Sign Up**.
+1. Complete the registration form using the email address associated with your existing GovCloud Datadog account. Keep this page open.
+1. In a separate browser tab, access your email account. Open the verification email from `help@ddog-gov.com` and copy the verification code.
+1. In the Datadog GovCloud support portal, enter the verification code.
+1. Click **Verify**.
 
-<p><strong>Note</strong>: After registration, your login username is your email with <code>.ddgov.support</code> appended (for example, <code>john@agency.gov.ddgov.support</code>). Use this full username when logging in.</p>
-
-<p><strong>Note</strong>: To receive registration verification codes, password reset emails, and case notification emails, add the <code>ddog-gov.com</code> domain to your email allowlist. This includes <code>help@ddog-gov.com</code> and <code>support@ddog-gov.com</code>.</p>
+**Note**: After registration, your login username is your email with `.ddgov.support` appended (for example, `[name]@[domain].ddgov.support`). Use this full username when logging in.
 
 ## Create a case
 
-<p>To create a new case:</p>
+To create a case:
 
-<ol>
-    <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
-    <li>Log in with the username format <code>[name]@[domain].ddgov.support</code>.</li>
-    <li>Click <strong>Create a New Case</strong>.</li>
-    <li>Complete the form.</li>
-    <li>Click <strong>Submit &amp; Upload Files</strong>.</li>
-    <li>Optionally, upload supporting files. Accepted file types include <code>.txt</code>, <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>, <code>.doc</code>, <code>.otf</code>, <code>.yaml</code>, <code>.log</code>, <code>.conf</code>, <code>.tf</code>, <code>.zip</code>, and <code>.pcap</code>.</li>
-    <li>Click <strong>Submit</strong>.</li>
-</ol>
+1. Navigate to [the Datadog GovCloud support portal](https://govsupport.ddog-gov.com).
+1. Log in with the username format `[name]@[domain].ddgov.support`.
+1. Click **Create a New Case**.
+1. Complete the form.
+1. Click **Submit & Upload Files**.
+1. Optionally, upload supporting files. Accepted file types include `.txt`, `.csv`, `.xls`, `.xlsx`, `.doc`, `.otf`, `.yaml`, `.log`, `.conf`, `.tf`, `.zip`, `.pcap`, `.png`, and `.jpeg`.
+1. Click **Submit**.
 
 ## Access existing cases
 
-<p>If you have opened at least one Datadog case, follow this process to access your cases:</p>
+If you have opened at least one Datadog case, follow this process to access your cases:
 
-<ol>
-    <li>Log in at <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
-    <li>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong> to view all cases.</li>
-    <li>Click <strong>Case Number</strong> or <strong>Subject</strong> to view details.</li>
-</ol>
+1. Log in at [the Datadog GovCloud support portal][4].
+1. Change the filter from **Recently Viewed** to **Cases** to view all cases.
+1. Click **Case Number** or **Subject** to view details.
 
-<p><strong>Note</strong>: Historical Zendesk cases are not migrated; legacy Zendesk is read-only.</p>
+**Note**: Historical Zendesk cases are not migrated; legacy Zendesk is read-only.
 
 ## Troubleshooting
 
 ### Cannot see new cases
 
-<p>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong>.</p>
+Change the filter from **Recently Viewed** to **Cases**.
 
 ### Login issues
 
-<p>Make sure your full username includes the <code>.ddgov.support</code> suffix.</p>
+Make sure your full username includes the `.ddgov.support` suffix.
 
 ### Password reset not received
 
-<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix). If you still do not receive the email, add <code>ddog-gov.com</code> to your email allowlist.</p>
+Click **Forgot Password** and follow the process with your full username (with the `.ddgov.support` suffix). If you still do not receive the email, add `ddog-gov.com` to your email allowlist.
 
 ### Registration error
 
-<p>Your account may already exist. Click <strong>Forgot Password</strong> and enter your full username, including the <code>.ddgov.support</code> suffix (for example, <code>john@agency.gov.ddgov.support</code>). If you are still unable to access your account, contact <code>support@ddog-gov.com</code>.</p>
+Your account may already exist. Click **Forgot Password** and enter your full username, including the `.ddgov.support` suffix (for example, `[name]@[domain].ddgov.support`). If you are still unable to access your account, contact `support@ddog-gov.com`.
 
 {{% /site-region %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://help.datadoghq.com/
+[2]: https://app.datadoghq.com/help
+[3]: https://support.google.com/chrome/answer/95647
+[4]: https://govsupport.ddog-gov.com
