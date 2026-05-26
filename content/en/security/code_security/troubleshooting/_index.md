@@ -78,6 +78,15 @@ is too large, consider the following options:
 
 Update the configuration either through the Datadog application or by modifying the `code-security.datadog.yaml` file.
 
+### No PR comments or PR gates for third-party SARIF uploads
+
+[PR comments][25] and [PR gates][26] are only supported for results produced by Datadog's official static analysis tools:
+
+- [`datadog-static-analyzer`](https://github.com/DataDog/datadog-static-analyzer)
+- [`datadog-saist`](https://github.com/DataDog/datadog-saist)
+
+If you upload SARIF results from a third-party tool, findings appear in the Datadog UI but do not trigger PR comments or PR gate evaluations.
+
 ### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
@@ -310,3 +319,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [22]: /tracing/troubleshooting/
 [23]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
 [24]: /getting_started/site/
+[25]: /security/code_security/dev_tool_int/pull_request_comments/
+[26]: /pr_gates/
