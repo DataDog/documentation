@@ -144,7 +144,7 @@ You can trigger and retrieve investigation details programmatically [via API][16
 [11]: /account_management/audit_trail/events/#bits-ai-sre
 [12]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [13]: /integrations/github/
-[14]: /integrations/source_code/service-mapping/?tab=go
+[14]: /source_code/service-mapping
 [15]: /actions/workflows/actions/
 
 <!-- Commenting out until API Docs are merged

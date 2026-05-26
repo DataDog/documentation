@@ -1,5 +1,6 @@
 ---
 title: Data Security and RBAC
+description: Restrict access to sensitive LLM Observability data using data access controls, redact data with span processors, and integrate with Sensitive Data Scanner.
 further_reading:
   - link: "/account_management/rbac/data_access"
     tag: "Documentation"

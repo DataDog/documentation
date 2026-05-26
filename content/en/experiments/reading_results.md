@@ -19,7 +19,7 @@ After [launching your experiment][1], Datadog begins calculating results for you
 {{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="The experiment results overview showing a decision metrics table with control and treatment values, relative lift, and confidence interval bars for three metrics." style="width:90%;" >}}
 
 ## Confidence intervals
-For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval.
+For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval. The interval depends on the experiment's configured [analysis method][2].
 
 The relative lift is defined as:
 
@@ -34,7 +34,7 @@ The confidence interval represents the range of lift values that are plausibly s
 If the entire confidence interval is above zero, then the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise, and supports the conclusion that the experiment produced a true effect.
 
 ## Exploring results 
-To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
+To dive deeper into experiment results, hover over a metric and click {{< ui >}}Chart{{< /ui >}}. This gives you the option to compare the experiment’s impact across different user segments.
 
 ### Segment-level results
 Subject-level properties are based on attributes at the initial time of exposure (for example, a user's region, whether they are a new visitor, or a repeat visitor). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
@@ -46,3 +46,4 @@ Subject-level properties are based on attributes at the initial time of exposure
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/
+[2]: /experiments/analysis_methods
