@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Database Investigator is in Preview" >}}
-Database Investigator is in Preview for all customers monitoring Postgres or SQL Server with Database Monitoring. Support for other databases covered by Database Monitoring is in development.
+Database Investigator is in Preview for all customers monitoring Postgres or SQL Server with Database Monitoring.
 {{< /callout >}}
 
 ## Overview
@@ -94,7 +94,7 @@ No. Database Investigator reads observability data and produces recommendations.
 
 ### Which databases are supported?
 
-Postgres and SQL Server are supported in Preview for all Database Monitoring customers. Support for other databases covered by Database Monitoring is in development.
+Postgres and SQL Server are supported in Preview for all Database Monitoring customers.
 
 ### Are there usage limits?
 
