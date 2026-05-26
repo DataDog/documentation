@@ -82,7 +82,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following exclude attrib
 |------------------------|---------|----------|----------------------------------------------------------|
 | `type`                 | String  | Yes      | Type of the processor.                                   |
 | `name`                 | String  | No       | Name of the processor.                                   |
-| `is_enabled`           | Boolean | No       | Whether the processor is enabled. Default: `false`.      |
+| `is_enabled`           | Boolean | No       | If the processor is enabled or not. Default: `false`.    |
 | `attribute_to_exclude` | String  | Yes      | Name of the log attribute to remove from the log event.  |
 
 ## Further reading
