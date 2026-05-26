@@ -12,7 +12,7 @@ further_reading:
     text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 ---
 
-{{< img src="data_jobs/overview_062024.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}
+{{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}
 
 Data Observability: Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Observability: Jobs Monitoring enables you to:
 
