@@ -42,8 +42,6 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
-> **Java with custom builds:** If your project relies on checked-in JAR files instead of a complete Maven or Gradle manifest, see [Scan Java JAR directories](#scan-java-jar-directories).
-
 ## Select where to run static SCA scans
 By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI pipelines; CI jobs are supported for `push` events.
 
@@ -76,85 +74,7 @@ You must scan your default branch at least once before results appear in <b>Code
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Scan Java JAR directories
-
-Some Java projects rely on third-party JAR files checked into the repository — for example, in a `lib/` directory — rather than a complete Maven or Gradle manifest. When your build pulls dependencies straight from those JARs, or when your dependency manifests are incomplete or out of sync with what your build actually uses, you can scan the JAR files directly and treat them as the source of truth.
-
-Datadog SBOM generator includes an opt-in parser that extracts Maven metadata embedded in each JAR and reports every detected artifact as a Maven component in the resulting SBOM. Use this approach when the JARs on disk are the most reliable record of what your build depends on. For projects with standard Maven or Gradle manifests, scan the supported manifests listed above — they give you transitive dependencies and source-file matching that the JAR parser cannot.
-
-#### Requirements
-
-- `datadog-sbom-generator` version `1.10.2` or later. See the [releases page on GitHub](https://github.com/DataDog/datadog-sbom-generator/releases).
-- Each JAR must include Maven metadata at `META-INF/maven/<groupId>/<artifactId>/pom.properties`. JARs without this metadata are skipped with a warning, and scanning continues.
-
-To confirm the JAR parser is available in your installed version, run:
-
-```shell
-datadog-sbom-generator parsers list
-```
-
-Look for `jar` in the output.
-
-#### Enable the JAR parser
-
-The JAR parser is not part of the default parser set. Enable it explicitly with `--enable-parsers jar`:
-
-```shell
-datadog-sbom-generator scan --enable-parsers jar /path/to/lib
-```
-
-Replace `/path/to/lib` with the directory that contains your JAR files. The scanner walks the directory and reads metadata from every file with a `.jar` extension.
-
-**Important:** `--enable-parsers` replaces the default parser set. If you want to scan JARs and standard manifests in the same run, list every parser you need. Otherwise, run separate scans.
-
-To scan JAR files and Maven manifests together:
-
-```shell
-datadog-sbom-generator scan --enable-parsers jar,maven /path/to/repository
-```
-
-#### Upload the SBOM to Datadog
-
-Save the SBOM to a file, then upload it with `datadog-ci`:
-
-```shell
-datadog-sbom-generator scan \
-    --enable-parsers jar \
-    --output sbom.json \
-    /path/to/lib
-
-datadog-ci sbom upload sbom.json
-```
-
-Set `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` in your CI environment before you run the upload.
-
-#### How the JAR parser identifies components
-
-When Maven packages a JAR, it embeds a `pom.properties` file at:
-
-```text
-META-INF/maven/<groupId>/<artifactId>/pom.properties
-```
-
-The parser reads the `groupId`, `artifactId`, and `version` from that file and emits one Maven component per detected entry. A single JAR can contain more than one `pom.properties` entry — the parser emits one component for each.
-
-Components detected this way carry two SBOM properties:
-
-| Property | Value | Meaning |
-|---|---|---|
-| `datadog:opaque` | `true` | The component was detected from a binary, not a source manifest. |
-| `datadog:is-direct` | `true` | Every JAR present on disk is treated as a direct dependency. |
-
-#### Limitations
-
-The JAR parser is intentionally narrow. Use it with these constraints in mind:
-
-- Only files with a `.jar` extension are scanned. Other ZIP-based archives, including `.war` and `.ear`, are not scanned.
-- JARs without `META-INF/maven/.../pom.properties` are skipped. Components without embedded Maven metadata are not reported.
-- Transitive dependencies are not resolved. Each detected JAR is reported as a direct dependency.
-- Source-file matching is not available for components detected through the JAR parser.
-
-If you need transitive resolution, source matching, or richer dependency context, scan the standard Maven or Gradle manifests instead. The JAR parser is the right tool when your build does not have a trustworthy manifest to scan.
+If your Java project checks third-party JARs directly into the repository instead of using a Maven or Gradle manifest, see [Scan Java JAR directories][27].
 
 ## Select your source code management provider
 
@@ -328,3 +248,4 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/
+[27]: /security/code_security/troubleshooting/#scan-java-jar-directories
