@@ -190,7 +190,6 @@ The walkthrough below highlights the parts of the configuration that are specifi
 1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
 1. Under {{< ui >}}Evaluation Scope{{< /ui >}} > {{< ui >}}Evaluate On{{< /ui >}}, select {{< ui >}}Session{{< /ui >}}.
 
-   <!-- TODO: Add screenshot. Save as static/images/llm_observability/evaluations/session_level_evaluation_scope.png -->
    {{< img src="llm_observability/evaluations/session_level_evaluation_scope.png" alt="The Evaluate On scope picker with Session selected." style="width:100%;" >}}
 
    <div class="alert alert-info">A session is considered complete after <strong>30 minutes</strong> of inactivity (no new spans for that session, measured from the most recent span), at which point the evaluation runs. Spans that arrive more than 30 minutes after the previous span are not included in the evaluation.</div>
@@ -209,12 +208,10 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    See [Prompt Templating][3] for the full reference.
 
-   <!-- TODO: Add screenshot. Save as static/images/llm_observability/evaluations/session_level_prompt_editor.png -->
    {{< img src="llm_observability/evaluations/session_level_prompt_editor.png" alt="The User prompt editor for a session-level evaluation, with the autocomplete dropdown listing traces-prefixed fields after typing two open braces." style="width:100%;" >}}
 
 1. Pick a sample session from the panel on the right. The pane lists the traces in that session, with the fields referenced by your prompt highlighted.
 
-   <!-- TODO: Add screenshot. Save as static/images/llm_observability/evaluations/session_level_sample_session.png -->
    {{< img src="llm_observability/evaluations/session_level_sample_session.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
 
 1. Click {{< ui >}}Test Evaluation{{< /ui >}} to run the prompt against the selected session and preview the LLM judge's output before saving.
@@ -238,10 +235,9 @@ Substitute `<evaluation_name>` with the name you set when creating the evaluator
 
 ### Debug results
 
-Open the {{< ui >}}Evaluations{{< /ui >}} tab on a session to see every evaluation that ran for it, alongside the LLM judge's reasoning when {{< ui >}}Enable Reasoning{{< /ui >}} was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific trace or span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
+Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every evaluation that ran for it, alongside the LLM judge's reasoning when {{< ui >}}Enable Reasoning{{< /ui >}} was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific trace or span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
 
-<!-- TODO: Add screenshot. Save as static/images/llm_observability/evaluations/session_level_results_sidepanel.png -->
-{{< img src="llm_observability/evaluations/session_level_results_sidepanel.png" alt="The Evaluations tab of a completed session, showing the session-level evaluation result with the LLM judge's reasoning expanded." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/session_level_eval_results.png" alt="The Evaluations tab of a completed session, showing the session-level evaluation result with the LLM judge's reasoning expanded." style="width:100%;" >}}
 
 ### Monitor results
 
