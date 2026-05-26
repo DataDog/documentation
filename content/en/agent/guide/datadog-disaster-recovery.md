@@ -112,8 +112,6 @@ See the [AWS](https://docs.datadoghq.com/integrations/amazon-web-services), [Azu
 
 Your cloud integrations must be configured in both primary and DDR orgs. Datadog ensures integrations run in only one org at a time: by default in the primary org, and in the DDR org during failover.
 
-**Note:** The integrations failover policy applies to cloud integration crawlers only, not all integration types.
-
 For more information, see the [Cloud integrations failover](#id-for-cloud) section.
 
 {{% /collapse-content %}}
@@ -122,7 +120,7 @@ For more information, see the [Cloud integrations failover](#id-for-cloud) secti
 
 Datadog manages resource sync on your behalf using the open-source [datadog-sync-cli](https://github.com/DataDog/datadog-sync-cli) tool. You do not need to run or operate this tool yourself.
 
-Managed sync replicates resources from your primary org to your DDR org on a daily schedule. Replicated resources include dashboards, monitors, users, notebooks, and [34+ other resource types](https://github.com/DataDog/datadog-sync-cli#supported-resources). Replication runs on this daily schedule so your DDR org stays current before an outage.
+Managed sync replicates resources from your primary org to your DDR org on a regular schedule. Replicated resources include dashboards, monitors, users, notebooks, and [34+ other resource types](https://github.com/DataDog/datadog-sync-cli#supported-resources). Replication runs on this schedule so your DDR org stays current before an outage.
 
 **Users are scoped to each Datadog site.** Managed sync replicates user accounts to your DDR org. However, users may need to reset their password on first login to the DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) to ensure seamless access without manual password resets.
 
@@ -192,7 +190,7 @@ multi_region_failover:
 
 DNS-based failover is a complementary approach to Agent-based failover. Instead of configuring Agents with a secondary site endpoint, you configure all your data sources to send telemetry to a single Datadog-provided custom intake URL. During a failover event, Datadog updates the DNS record for that URL to redirect traffic from your primary site to your DDR site.
 
-**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously.
+**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously. Dual shipping is not supported for DNS-based failover.
 
 #### Receive your custom DNS endpoint
 
