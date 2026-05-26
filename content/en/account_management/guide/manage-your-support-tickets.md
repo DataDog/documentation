@@ -81,7 +81,7 @@ If you are a first-time user, follow these steps to register an account:
 1. Navigate to [the Datadog GovCloud support portal](https://govsupport.ddog-gov.com).
 1. Click **Sign Up**.
 1. Complete the registration form using the email address associated with your existing GovCloud Datadog account. Keep this page open.
-1. In a separate location, access your email account. Open the verification email from `help@ddog-gov.com` and copy the verification code.
+1. In a separate browser tab, access your email account. Open the verification email from `help@ddog-gov.com` and copy the verification code.
 1. In the Datadog GovCloud support portal, enter the verification code.
 1. Click **Verify**.
 
