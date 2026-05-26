@@ -17,15 +17,15 @@ further_reading:
 
 ## Create a support ticket
 
-To create a new support ticket, navigate to the [Datadog support site](https://help.datadoghq.com/). At the bottom of the page, click **Create a New Ticket** to fill out a ticket form.
+To create a new support ticket, navigate to the [Datadog support site][1]. At the bottom of the page, click **Create a New Ticket** to fill out a ticket form.
 
-You can also access this form through Datadog. From the left navigation, hover over **Help** and click **Support**. Alternatively, navigate to the [Datadog help page](https://app.datadoghq.com/help) and click **New Support Ticket**.
+You can also access this form through Datadog. From the left navigation, hover over **Help** and click **Support**. Alternatively, navigate to the [Datadog help page][2] and click **New Support Ticket**.
 
 ## Access existing tickets
 
 If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:
 
-1. From the [Support page](https://help.datadoghq.com/), click **Sign in** on the top right.
+1. From the [Support page][1], click **Sign in** on the top right.
 1. If this is your first time signing into your Datadog Zendesk account, click **New to your Datadog Zendesk account? Sign up**.
 1. If you have previously emailed Datadog support, click **Emailed us for support? Get a password** and enter the email address you used to contact Datadog support.
 1. After you receive the password in your email, log in and click **Manage your tickets** to see your requests.
@@ -56,7 +56,7 @@ To help ensure the security of your account, any password used to sign in to Dat
 
 ### Error: Refused to connect
 
-**Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome](https://support.google.com/chrome/answer/95647) in Google Chrome Help.
+**Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][3] in Google Chrome Help.
 
 If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add **datadog.zendesk.com** to the allow list.
 
@@ -78,7 +78,7 @@ To receive registration verification codes, password reset emails, and case noti
 
 If you are a first-time user, follow these steps to register an account:
 
-1. Navigate to [the Datadog GovCloud support portal](https://govsupport.ddog-gov.com).
+1. Navigate to [the Datadog GovCloud support portal][4].
 1. Click **Sign Up**.
 1. Complete the registration form using the email address associated with your existing GovCloud Datadog account. Keep this page open.
 1. In a separate browser tab, access your email account. Open the verification email from `help@ddog-gov.com` and copy the verification code.
@@ -103,7 +103,7 @@ To create a case:
 
 If you have opened at least one Datadog case, follow this process to access your cases:
 
-1. Log in at [the Datadog GovCloud support portal](https://govsupport.ddog-gov.com).
+1. Log in at [the Datadog GovCloud support portal][4].
 1. Change the filter from **Recently Viewed** to **Cases** to view all cases.
 1. Click **Case Number** or **Subject** to view details.
 
@@ -132,3 +132,8 @@ Your account may already exist. Click **Forgot Password** and enter your full us
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://help.datadoghq.com/
+[2]: https://app.datadoghq.com/help
+[3]: https://support.google.com/chrome/answer/95647
+[4]: https://govsupport.ddog-gov.com
