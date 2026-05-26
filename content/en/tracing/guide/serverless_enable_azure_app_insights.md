@@ -16,6 +16,8 @@ The Azure App Insights Integration is in Preview. Use this form to request acces
 
 Bring your Azure Application Insights distributed traces into Datadog APM. Datadog converts App Insights traces into APM spans and enriches spans from supported services with Azure resource metadata.
 
+{{< img src="tracing/guide/serverless_enable_azure_app_insights/app-insights-azure-fn-example.png" alt="An Azure Application Insights trace shown in the Datadog APM flame graph, with Azure resource metadata visible on the selected span." style="width:100%;" >}}
+
 The integration reads App Insights records forwarded to Datadog as logs and emits APM spans from them. No changes to your application code or instrumentation are required.
 
 ## How it works
