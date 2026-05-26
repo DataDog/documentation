@@ -185,11 +185,11 @@ To ensure data quality, Datadog applies validation rules during SBOM processing.
 - **Invalid purl**: The package URL is present but not in a valid purl format.
 - **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
-## No vulnerabilities detected by Software Composition Analysis
+### No vulnerabilities detected by Software Composition Analysis
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
-### Confirming runtime detection is enabled
+#### Confirming runtime detection is enabled
 
 If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
@@ -201,11 +201,11 @@ If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check 
 
 Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
-### Confirm tracer versions are updated
+#### Confirm tracer versions are updated
 
 See the Application Security product set up documentation to validate you you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
 
-### Ensure the communication of telemetry data
+#### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
