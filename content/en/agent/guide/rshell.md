@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Agent Restricted Shell (rshell) is the command execution layer behind the `agent` toolset in the Datadog MCP server. When an AI system or developer CLI calls `datadog_remote_action_restricted_shell_run_command`, rshell is what runs on the host.
+The Agent Restricted Shell (rshell) is the command execution layer behind the `remote-actions` toolset in the Datadog MCP server. When an AI system or developer CLI calls `datadog_remote_action_restricted_shell_run_command`, rshell is what runs on the host.
 
 rshell is an open source, POSIX-compatible shell interpreter written in Go and embedded in the Private Action Runner (PAR) process. It is not a real host shell. There is no `bash`, `sh`, or `zsh` process spawned. Every command is a purpose-built Go implementation with explicit safety constraints. You can view the source at [github.com/DataDog/rshell](https://github.com/DataDog/rshell).
 
@@ -42,6 +42,8 @@ rshell enforces the following constraints by design:
 - **Empty environment by default.** No parent environment variables are inherited. rshell starts with an empty environment unless variables are explicitly passed by the caller.
 
 ## Supported commands
+
+The following commands and shell features are available as of Agent 7.79.
 
 ### File inspection
 
@@ -131,16 +133,18 @@ Arithmetic expansion `$(( ))`, array assignment, append assignment (`+=`), and p
 
 ## Restrict file access
 
-By default, file read commands are gated by a path allowlist managed from the Datadog backend. You can further restrict which paths rshell can access in your Agent configuration.
+By default, file read commands are gated by a path allowlist managed from the Datadog backend. You can further restrict which paths and commands rshell can access in your Agent configuration.
 
 ```yaml
 # datadog.yaml
-remote_configuration:
-  # tk: confirm exact config key with engineering
+private_action_runner:
   restricted_shell:
     allowed_paths:
       - /etc/datadog-agent/
       - /var/log/datadog/
+    allowed_commands:
+      - cat
+      - grep
 ```
 
 ## Further reading

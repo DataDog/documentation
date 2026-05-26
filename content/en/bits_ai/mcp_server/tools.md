@@ -216,14 +216,14 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
-## Agent
+## Remote Actions
 
-<div class="alert alert-info">The <code>agent</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
+<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
 
 Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a restricted shell interpreter. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
 
 ### `datadog_remote_action_restricted_shell_run_command`
-*Toolset: **agent***\
+*Toolset: **remote-actions***\
 *Permissions Required: `tk`*\
 Runs a read-only shell command on a specified host. Supported commands include: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss`, and `ip`. Supports pipes, loops, conditionals, variable assignment, and globbing.
 

@@ -589,7 +589,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
-- `agent`: ([Sign up][XX]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
+- `remote-actions`: ([Sign up][XX]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 
 ## Supported clients
 
