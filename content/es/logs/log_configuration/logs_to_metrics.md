@@ -1,97 +1,99 @@
 ---
 algolia:
   tags:
-  - Métricas de logs
-  - Generación de logs a partir de métricas
+  - log metrics
+  - generating logs from metrics
 aliases:
 - /es/logs/processing/logs_to_metrics/
 - /es/logs/logs_to_metrics/
-description: Genera métricas a partir de logs consumidos.
+description: Generar métricas a partir de registros ingeridos.
 further_reading:
 - link: logs/log_configuration/processors
   tag: Documentación
-  text: Aprender a procesar tus logs
+  text: Aprenda cómo procesar sus registros
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: Blog
-  text: Uso de consultas con notación de CIDR para filtrar tus logs de tráfico de
-    red
-title: Generar métricas a partir de logs consumidos
+  text: Utilice consultas en notación CIDR para filtrar los registros de tráfico de
+    su red
+- link: https://learn.datadoghq.com/courses/log-investigations
+  tag: Centro de Aprendizaje
+  text: Rastree registros para alertas e investigaciones
+title: Generar métricas a partir de registros ingeridos.
 ---
+## Resumen {#overview}
 
-## Información general
+<div class="alert alert-info">Las soluciones descritas en esta documentación son específicas para entornos de registro basados en la nube. Para generar métricas a partir de registros locales, consulte la documentación de <a href="https://docs.datadoghq.com/observability_pipelines/configuration/explore_templates#generate-metrics">Observability Pipelines</a>.</div>
 
-<div class="alert alert-info">Las soluciones descritas en esta documentación son específicas para entornos de generación de logs basados en la nube. Para generar métricas a partir de logs on-premises, consulta la documentación de <a href="https://docs.datadoghq.com/observability_pipelines/configuration/explore_templates#generate-metrics">Observability Pipelines</a>.</div>
+El [Logging without Limits][1]* de Datadog le permite decidir dinámicamente qué incluir o excluir de sus índices para almacenamiento y consulta, al mismo tiempo que muchos tipos de registros están destinados a ser utilizados para telemetría para rastrear tendencias, como KPIs, durante largos períodos de tiempo. Las métricas basadas en registros son una forma rentable de resumir los datos de registro de toda la corriente de ingestión. Esto significa que, incluso si utiliza [filtros de exclusión][2] para limitar lo que almacena para la exploración, aún puede visualizar tendencias y anomalías en todos sus datos de registro con una granularidad de 10s durante 15 meses.
 
-Datadog [Logging without Limits][1]\* te permite decidir de forma dinámica qué incluir o excluir de tus índices para el almacenamiento y las consultas. Al mismo tiempo, muchos tipos de logs se utilizan en telemetrías como los KPI, para el seguimiento de tendencias durante largos periodos de tiempo. Las métricas basadas en logs son una forma rentable de resumir los datos de logs de todo el flujo (stream) de consumo. Esto significa que, incluso si utilizas [filtros de exclusión][2] para limitar lo que se almacena para la exploración, puedes seguir visualizando las tendencias y las anomalías de todos los datos de tus logs, con una granularidad de 10s durante 15 meses.
+Con métricas basadas en registros, puede generar una métrica de conteo de registros que coincidan con una consulta o una [métrica de distribución][3] de un valor numérico contenido en los registros, como la duración de la solicitud.
 
-Con las métricas basadas en logs puedes generar una métrica de recuento de los logs que coinciden con una consulta o una [métrica de distribución][3] de un valor numérico contenido en los logs, como la duración de la solicitud.
+**Nota de Facturación:** Las métricas creadas a partir de registros ingeridos se facturan como [Custom Metrics][4].
 
-**Nota de facturación:** las métricas creadas a partir de logs consumidos se facturan como [Métricas personalizadas][4].
+## Genere una métrica basada en registros {#generate-a-log-based-metric}
 
-## Generar una métrica basada en logs
+{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Convierta registros en una métrica." style="width:80%;">}}
 
-{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generar logs para métricas" style="width:80%;">}}
+Para generar una nueva métrica basada en registros:
 
-Para generar una métrica basada en logs:
+1. Navegue a la página de [Generate Metrics][5].
+1. Seleccione la pestaña **Generate Metrics**.
+1. Haga clic en **+New Metric**.
 
-1. Ve a la página [Generar métricas][5].
-1. Selecciona la pestaña **Generate Metrics** (Generar métricas).
-1. Haz clic en **+New Metric** (+Nueva métrica).
+También puede crear métricas a partir de una búsqueda de Analytics seleccionando la opción "Generate new metric" en el menú de Exportar.
 
-También puedes crear métricas a partir de una búsqueda de Analytics, seleccionando la opción "Generate new metric" (Generar nueva métrica) del menú Export (Exportar).
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="Convierta registros en una métrica." style="width:80%;">}}
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="Generar logs para métricas" style="width:80%;">}}
+### Agregue una nueva métrica basada en registros {#add-a-new-log-based-metric}
 
-### Añadir una nueva métrica basada en logs
+{{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Convierta registros en una métrica." style="width:80%;">}}
 
-{{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Crear logs para métricas" style="width:80%;">}}
+1. **Ingrese una consulta para filtrar el flujo de registros**: La sintaxis de la consulta es la misma que para la [Log Explorer Search][6]. Solo se consideran para la agregación los logs ingeridos con una marca de tiempo dentro de los últimos 20 minutos. El índice debe ser excluido de la consulta.
+2. **Seleccione el campo que desea rastrear**: Seleccione `*` para generar un conteo de todos los registros que coincidan con su consulta o ingrese un atributo de registro (por ejemplo, `@network.bytes_written`) para agregar un valor numérico y crear sus correspondientes `count`, `min`, `max`, `sum` y `avg` métricas agregadas. Si la faceta de atributo de registro es una [medida][7], el valor de la métrica es el valor del atributo de registro.
+3. **Agrega dimensiones a `group by`**: Por defecto, las métricas generadas a partir de logs no tienen etiquetas a menos que se agreguen explícitamente. Cualquier atributo o dimensión de etiqueta que exista en tus logs (por ejemplo, `@network.bytes_written`, `env`) puede ser utilizado para crear etiquetas de métrica [tags][8]. Los nombres de las etiquetas de métrica son iguales al nombre del atributo o etiqueta de origen, sin el @.
+4. **Agregue agregaciones percentiles**: Para métricas de distribución, puede generar opcionalmente percentiles p50, p75, p90, p95 y p99. Las métricas percentiles también se consideran [Custom Metrics], y se facturan en consecuencia.
+5. **Nombre su métrica**: Los nombres de las métricas basadas en logs deben seguir la [custom metric naming convention][10].
 
-1. **Introduce una consulta para filtrar el flujo de logs**: la sintaxis de la consulta es la misma que la de las [búsquedas del Log Explorer][6]. Para la agregación, solo se tienen en cuenta los logs con marcas de tiempo, consumidos en los últimos 20 minutos. El índice debe excluirse de la consulta.
-2. **Selecciona el campo del que quieres realizar el seguimiento**: selecciona `*` para generar un recuento de todos los logs que coinciden con tu consulta o introduce un atributo de log (por ejemplo, `@network.bytes_written`), para agregar un valor numérico y crear sus correspondientes métricas agregadas `count`, `min`, `max`, `sum` y `avg`. Si la faceta del atributo de log es una [medida][7], el valor de la métrica es el valor del atributo de log.
-3. **Añade dimensiones a `group by`**: por defecto, las métricas generadas a partir de logs no tienen ninguna etiqueta (tags), a menos que se añadan explícitamente. Cualquier atributo o dimensión de etiqueta presente en tus logs (por ejemplo, `@network.bytes_written`, `env`) puede utilizarse para crear [etiquetas][8] de métricas. Los nombres de etiquetas de métricas son iguales al atributo o nombre de etiqueta de origen, sin el símbolo @.
-4. **Añade agregaciones de percentiles**: para las métricas de distribución, también puedes generar los percentiles p50, p75, p90, p95 y p99. Las métricas de percentiles también se consideran métricas personalizadas y se [facturan en consecuencia][9].
-5. **Ponle un nombre a tu métrica**: los nombres de los logs basados en métricas deben seguir la [convención de nomenclatura de métricas personalizadas][10].
+**Nota**: Los puntos de datos para métricas basadas en logs se generan en intervalos de 10 segundos. Cuando crea un [dashboard graph][11] para métricas basadas en logs, el parámetro `count unique` se basa en los valores dentro del intervalo de 10 segundos.
 
-**Nota**: Los puntos de datos para métricas basadas en logs se generan a intervalos de 10 segundos. Cuando creas un [gráfico de dashboard][11] para métricas basadas en logs, el parámetro `count unique` se basa en los valores del intervalo de 10 segundos.
+{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="La página de configuración del gráfico de series temporales con el parámetro de consulta único resaltado." style="width:80%;">}}
 
-{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="Página de configuración del gráfico de series temporales con el parámetro de consulta de recuento único resaltado" style="width:80%;">}}
+<div class="alert alert-danger">Las métricas basadas en logs se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evite agrupar por atributos de cardinalidad no acotada o extremadamente alta, como marcas de tiempo, identificaciones de usuario, identificaciones de solicitud o identificaciones de sesión para evitar afectar su facturación.</div>
 
-<div class="alert alert-danger">Las métricas basadas en logs se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta, como marcas de tiempo, IDs de usuario, IDs de solicitud o IDs de sesión, para no afectar a tu facturación.</div>
+### Actualiza una métrica basada en logs {#update-a-log-based-metric}
 
-### Actualizar una métrica basada en logs
+Después de que se crea una métrica, se pueden actualizar los siguientes campos:
 
-Después de crear una métrica, se pueden actualizar los siguientes campos:
+- Consulta de filtro de flujo: Para cambiar el conjunto de registros coincidentes que se agregarán a las métricas
+- Grupos de agregación: Para actualizar las etiquetas o gestionar la cardinalidad de las métricas generadas
+- Selección de percentiles: Marque o desmarque la casilla **Calcular percentiles** para eliminar o generar métricas de percentiles
 
-- Consulta del filtro de flujo: para cambiar el conjunto de logs coincidentes que se agregarán a las métricas
-- Grupos de agregación: para actualizar las etiquetas o gestionar la cardinalidad de las métricas generadas
-- Selección de percentiles: selecciona o deselecciona la casilla **Calculate percentiles** (Calcular percentiles) para eliminar o generar métricas de percentiles
+Para cambiar el tipo o nombre de la métrica, se debe crear una nueva métrica.
 
-Para cambiar el tipo o el nombre de la métrica, debe crearse una nueva métrica.
-
-## Métricas del uso de logs
+## Métricas de uso de registros {#logs-usage-metrics}
 
 {{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="Métricas de uso recomendadas" style="width:80%;">}}
 
-Las métricas de uso son estimaciones de tu uso actual de Datadog casi en tiempo real y te permiten:
+Las métricas de uso son estimaciones de su uso actual de Datadog en casi tiempo real. Le permiten:
 
-- Presentar de forma gráfica tu uso estimado.
-- Crear monitores de tu uso estimado.
-- Recibir alertas instantáneas sobre picos o caídas en tu uso.
-- Evaluar el impacto potencial de los cambios de código en tu uso casi en tiempo real.
+- Grafique su uso estimado.
+- Cree monitores en torno a su uso estimado.
+- Reciba alertas instantáneas sobre picos o caídas en su uso.
+- Evalúe el impacto potencial de los cambios de código en su uso en casi tiempo real.
 
-Las métricas de uso de Log Management vienen con tres etiquetas que se pueden utilizar para una monitorización más específica:
+Las métricas de uso de Log Management vienen con tres etiquetas que se pueden utilizar para un monitoreo más granular:
 
 | Etiqueta                     | Descripción                                                           |
 | ----------------------- | --------------------------------------------------------------------- |
-|  `datadog_index`        | Indica la consulta de enrutamiento que empareja un log con un índice previsto.  |
-|  `datadog_is_excluded`  | Indica si un log coincide o no con una consulta de exclusión.            |
-|  `service`              | El atributo servicio del evento de log.                               |
+|  `datadog_index`        | Indica la consulta de enrutamiento que coincide un registro con un índice previsto.  |
+|  `datadog_is_excluded`  | Indica si un registro coincide o no con una consulta de exclusión.            |
+|  `service`              | El atributo de servicio del registro de evento.                               |
 
-**Nota**: Los campos `datadog_is_excluded` y `datadog_index` pueden tener un valor de `N/A`. Esto indica que los logs fueros ingeridos, pero no coincidió con ningún criterio de inclusión o exclusión para ser enrutado explícitamente a un índice.
+**Nota**: Los campos `datadog_is_excluded` y `datadog_index` pueden tener un valor de `N/A`. Esto indica que los registros fueron ingeridos, pero no coincidieron con ningún criterio de inclusión o exclusión que permitiera asignarlos explícitamente a un índice.
 
-Existe una etiqueta `status` adicional disponible en la métrica `datadog.estimated_usage.logs.ingested_events` para reflejar el estado del log (`info`, `warning`, etc.).
+Una etiqueta adicional `status` está disponible en la métrica `datadog.estimated_usage.logs.ingested_events` para reflejar el estado del registro (`info`, `warning`, etc.).
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
