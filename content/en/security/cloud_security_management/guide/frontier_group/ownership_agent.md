@@ -38,13 +38,15 @@ The Ownership Agent reads multiple data sources and combines them into a ranked 
 The Ownership Agent processes the following cloud resource types:
 
 
-| Resource type       | Cloud provider                    |
-| ------------------- | --------------------------------- |
-| `aws_ec2_instance`  | AWS                               |
-| `aws_s3_bucket`     | AWS                               |
-| `host`              | AWS, Azure, GCP                   |
-| `host_image`        | AWS, Azure, GCP                   |
-| `image` (container) | Docker, ECR, and other registries |
+| Resource type                    | Cloud provider                    |
+| -------------------------------- | --------------------------------- |
+| `aws_ec2_instance`               | AWS                               |
+| `aws_s3_bucket`                  | AWS                               |
+| `azure_virtual_machine_instance` | Azure                             |
+| `gcp_compute_instance`           | GCP                               |
+| `host`                           | AWS, Azure, GCP                   |
+| `host_image`                     | AWS, Azure, GCP                   |
+| `image` (container)              | Docker, ECR, and other registries |
 
 
 ## Review and correct ownership
