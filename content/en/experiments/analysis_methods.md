@@ -21,10 +21,10 @@ Datadog Experiments provides several methods for estimating experiment lift and 
 | --- | --- | --- | --- |
 | [**Fixed-sample frequentist**](#fixed-sample-frequentist-analysis) | Choose a sample size or duration before launching the experiment, wait until that point, then make a decision. | Provides the most power for a fixed sample size. | Requires an upfront plan and can lose its statistical guarantees if you stop early or extend the experiment based on observed results. |
 | [**Sequential frequentist**](#sequential-frequentist-analysis) | Monitor results while the experiment runs and make a decision when you are ready. | Supports flexible decision-making while controlling the false positive rate. | Has less power than fixed-sample analysis, so it can require more samples to detect the same effect. |
-| [**Sequential hybrid**](#sequential-hybrid-analysis) | Use sequential analysis while the experiment runs, then switch to a fixed-sample interval at the planned end date. | Combines early stopping with stronger power at the end of a planned experiment. | Requires an end date, and intervals are wider than fixed-sample intervals. |
-| [**Bayesian**](#bayesian-analysis) | Combine experiment data with a prior belief about plausible lifts, then make decisions from the posterior distribution. | Supports nuanced decisions, especially when sample sizes are small or business tradeoffs are asymmetric. | Requires trust in the prior and alignment on how to interpret probabilities. |
+| [**Sequential hybrid**](#sequential-hybrid-analysis) | Use sequential analysis before a pre-planned end date, then switch to a fixed sample interval on the end date if the experiment was not stopped early. | Combines early stopping with stronger power at the end of a planned experiment. | Requires an end date, and intervals are wider than fixed-sample intervals. |
+| [**Bayesian**](#bayesian-analysis) | Combine experiment data with a prior belief about plausible lifts, then make decisions from the posterior distribution. | Supports nuanced decisions, especially when sample sizes are small. | Requires trust in the prior and alignment on how to interpret probabilities. |
 
-Sequential frequentist analysis is the default because it lets you monitor results and make ship or rollback decisions without invalidating the false positive rate. Fixed-sample analysis can be more powerful when everything goes according to plan, but it requires a stricter decision process. Sequential hybrid and Bayesian methods support more specialized decision-making workflows.
+Sequential frequentist analysis is the default because it lets you monitor results and make ship or rollback decisions without inflating the false positive rate. Fixed-sample analysis can be more powerful when everything goes according to plan, but it requires a stricter decision process. Sequential hybrid and Bayesian methods support more specialized decision-making workflows.
 
 Configure the analysis method in the experiment's [statistical analysis plan][1].
 
@@ -34,10 +34,7 @@ Fixed-sample frequentist analysis is the most direct way to analyze experiment r
 
 Use fixed-sample analysis when sample size is scarce and your team can commit to the decision criteria before the experiment starts.
 
-The main challenge is choosing the decision point. If you evaluate too early, the experiment may not have enough power to detect a real effect. If you evaluate too late, you may expose users to an inferior experience longer than needed. There are two common ways to choose the decision point:
-
-- **Choose a fixed duration.** This works when product, business, or operational constraints determine how long the experiment can run. Make sure the duration is long enough to detect a meaningful effect.
-- **Run a power analysis.** Use historical metric behavior to estimate how many subjects you need to detect a given [minimum detectable effect][2].
+The main challenge is choosing the decision point. If you evaluate too early, the experiment may not have enough power to detect a real effect. If you evaluate too late, you may expose users to an inferior experience longer than needed. The decision point should be informed by a power analysis, which helps experimentation teams choose a duration that gives the experiment enough power to detect a given [minimum detectable effect][2] while adhering to product, business, or operational constraints.
 
 <div class="alert alert-warning">For fixed-sample analysis, avoid changing the duration or sample size based on interim results. Stopping early because results look unusually good or bad, or extending the experiment because results are close to significant, can bias the lift estimate and increase the false positive rate.</div>
 
@@ -72,10 +69,9 @@ Use Bayesian analysis when:
 
 - You need to make a decision with limited data.
 - The decision depends on the probability of a lift exceeding a business threshold, not just whether the interval excludes zero.
-- Different metrics have asymmetric risks or rewards.
-- Stakeholders are prepared to interpret probabilities rather than binary significant or non-significant results.
+- Stakeholders prefer to think in terms of probabilities of success rather than in terms of frequentist p-values.
 
-The prior matters most when sample sizes are small. With enough data, the posterior is driven mostly by observed experiment behavior. With little data, an incorrect prior can influence the lift estimate and interval enough to change the decision.
+The prior matters most when sample sizes are small. With enough data, the posterior is driven mostly by observed experiment behavior, but empirically grounded priors are often strong enough to affect results even at large sample sizes. A poorly-specified prior can influence the lift estimate and interval enough to change the decision.
 
 <div class="alert alert-info">Bayesian intervals are technically credible intervals, though Datadog may present them alongside confidence intervals in the experiment results UI. Unlike frequentist intervals, Bayesian intervals do not provide the same false positive rate guarantee.</div>
 
@@ -84,7 +80,7 @@ The prior matters most when sample sizes are small. With enough data, the poster
 Analysis methods are only one part of the statistical analysis plan. Datadog Experiments also supports modifying the following [settings][1]:
 
 CUPED
-: Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift may differ from the naive treatment-minus-control calculation.
+: Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift and metric values may differ from the naive estimates calculated from the raw data.
 
 Multiple testing correction
 : Adjusts for the increased false positive risk that comes from evaluating multiple metric comparisons. This produces more conservative results and is not available with Bayesian analysis.
