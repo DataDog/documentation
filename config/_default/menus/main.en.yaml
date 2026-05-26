@@ -2087,7 +2087,7 @@ menu:
       parent: platform_heading
       identifier: internal_developer_portal
       weight: 110000
-    - name: Software Catalog
+    - name: Catalog
       url: internal_developer_portal/catalog/
       parent: internal_developer_portal
       identifier: catalog
@@ -4520,7 +4520,7 @@ menu:
       parent: tracing
       identifier: tracing_services
       weight: 9
-    - name: Software Catalog
+    - name: Catalog
       url: /internal_developer_portal/catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
