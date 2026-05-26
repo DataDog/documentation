@@ -34,6 +34,8 @@ After you select the Syslog source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings %}}
 
+{{% observability_pipelines/tls_settings_mtls %}}
+
 ## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}

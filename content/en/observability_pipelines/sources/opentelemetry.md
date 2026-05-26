@@ -56,6 +56,8 @@ After you select the OpenTelemetry source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings %}}
 
+{{% observability_pipelines/tls_settings_mtls %}}
+
 {{< img src="observability_pipelines/sources/otel_settings.png" alt="The OpenTelemetry source settings" style="width:35%;" >}}
 
 ## Secret defaults
