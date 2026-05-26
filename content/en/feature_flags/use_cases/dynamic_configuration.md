@@ -3,9 +3,11 @@ title: Dynamic Configuration
 description: Change application behavior with feature flag configuration instead of code deployments.
 ---
 
+Use **dynamic configuration** when settings or behavior change often and redeploying for every tweak is slow or risky. Product, marketing, and operations teams can update strings, numbers, or JSON-backed settings in Datadog while your application reads the latest values on the next SDK refresh—no new build required.
+
 ## Overview
 
-**Dynamic configuration** lets you change application behavior from the Datadog UI without a code deployment. Your application reads configuration values (Strings, Numbers, or JSON objects) from feature flag variants. To change behavior, update those values in Datadog.
+Dynamic configuration stores behavior in feature flag variants (String, Integer, Number, or JSON). Your code evaluates the flag and applies the variant value; you change behavior by updating variants or targeting rules in Datadog.
 
 ## How it works
 

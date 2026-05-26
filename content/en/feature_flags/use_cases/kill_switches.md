@@ -7,17 +7,13 @@ further_reading:
   text: "Client-Side SDKs"
 ---
 
+Use a **kill switch** when you need to turn off risky or broken functionality in seconds from Datadog, without waiting for a deploy. During incidents, that gives operations and engineering a fast path to stop customer impact while the rest of the application keeps running.
+
+Kill switches work well for new features, third-party integrations, and experimental code paths where you want a reliable off switch in Production.
+
 ## Overview
 
-A **kill switch** is a Boolean feature flag that lets you disable a feature instantly when something goes wrong, without redeploying your application. Operations and engineering teams can turn off a problematic feature from the Datadog UI while the application continues to run.
-
-## When to use a kill switch
-
-Use kill switches for:
-
-- New features that might cause errors or performance issues
-- Integrations with third-party services that can fail
-- Experimental code paths you want to disable quickly in production
+A kill switch is a Boolean feature flag. When the flag is disabled or overridden to `false`, the SDK skips the feature code path on the next configuration refresh.
 
 ## Set up a kill switch
 

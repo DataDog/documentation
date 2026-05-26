@@ -3,7 +3,9 @@ title: Use Cases
 description: Common use cases for Datadog Feature Flags.
 ---
 
-Datadog Feature Flags support several common workflows. Each use case below shows step-by-step setup and code examples for a specific scenario.
+Feature flags support distinct rollout and control patterns. Pick the use case that matches your goal: limit release risk with gradual rollouts, stop broken features fast during incidents, or change application settings without a code deployment.
+
+Each page below walks through why teams choose that pattern and how to set it up in Datadog.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/feature_flags/use_cases/progressive_rollouts" >}}Progressive Rollouts and Canaries{{< /nextlink >}}
