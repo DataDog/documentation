@@ -186,8 +186,6 @@ When working with JSON responses, use `JSON.parse(dd.response.body)` to parse th
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
-<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
-
 <div class="alert alert-info">
   <ul>
     <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
