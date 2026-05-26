@@ -101,26 +101,9 @@ In CI-node mode, `ddtest` uses one local worker by default. To start multiple wo
 
 ## Common settings
 
-Every `ddtest` setting can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables.
+Every `ddtest` setting can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables. For a list of available environment variables, defaults, and examples, see [Configuration][4].
 
-| CLI flag | Environment variable | Description |
-| -------- | -------------------- | ----------- |
-| `--platform` | `DD_TEST_OPTIMIZATION_RUNNER_PLATFORM` | Language or platform.<br>**Default:** `ruby` |
-| `--framework` | `DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK` | Test framework. Supported values are `rspec` and `minitest`.<br>**Default:** `rspec` |
-| `--command` | `DD_TEST_OPTIMIZATION_RUNNER_COMMAND` | Overrides the default test command.<br>**Default:** Empty |
-| `--min-parallelism` | `DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM` | Minimum CI node or worker count `ddtest` considers.<br>**Default:** Physical CPU count |
-| `--max-parallelism` | `DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM` | Maximum CI node or worker count `ddtest` considers.<br>**Default:** Physical CPU count |
-| `--ci-job-overhead` | `DD_TEST_OPTIMIZATION_RUNNER_CI_JOB_OVERHEAD` | Modeled overhead for adding one CI node.<br>**Default:** `25s` |
-| `--ci-node` | `DD_TEST_OPTIMIZATION_RUNNER_CI_NODE` | Runs only the files assigned to CI node `N`, where `N` is zero-indexed.<br>**Default:** `-1` |
-| `--ci-node-workers` | `DD_TEST_OPTIMIZATION_RUNNER_CI_NODE_WORKERS` | Number of workers to start on this CI node. Use a positive integer or `ncpu`.<br>**Default:** `1` |
-| `--worker-env` | `DD_TEST_OPTIMIZATION_RUNNER_WORKER_ENV` | Templates environment variables per worker.<br>**Default:** Empty |
-| `--tests-location` | `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` | Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec and `test/**/*_test.rb` for Minitest.<br>**Default:** Framework default |
-| `--runtime-tags` | `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS` | JSON string that overrides runtime tags used to fetch skippable tests.<br>**Default:** Empty |
-| N/A | `DD_TEST_OPTIMIZATION_RUNNER_REPORT_ENABLED` | Prints human-readable plan and run reports. Set to `false` to disable reports.<br>**Default:** `true` |
-
-For more information about parallelism, worker environment variables, and plan artifacts, see [Configuration][4].
-
-### Custom test commands
+## Custom test commands
 
 Use `--command` to override the default test command:
 
@@ -149,6 +132,8 @@ on: [push]
 env:
   DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: ruby
   DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: rspec
+  DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
+  DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
 
 jobs:
   dd_plan:
@@ -178,9 +163,6 @@ jobs:
       - id: dd_plan
         name: Plan test execution
         run: bin/ddtest plan
-        env:
-          DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: 1
-          DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM: 8
       - uses: actions/upload-artifact@v4
         with:
           name: dd-artifacts
@@ -219,8 +201,6 @@ jobs:
           site: datadoghq.com
       - name: Run tests
         run: bin/ddtest run --ci-node ${{ matrix.ci_node_index }}
-        env:
-          DD_TEST_SESSION_NAME: ddtest-runner-${{ matrix.ci_node_index }}
 {{< /code-block >}}
 
 {{% /tab %}}
