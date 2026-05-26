@@ -1,5 +1,6 @@
 ---
 title: The AWS Integration with Terraform
+description: "Set up the Datadog-AWS integration with Terraform, including the IAM role and integration resource."
 aliases:
     - /integrations/faq/aws-integration-with-terraform/
 disable_toc: true
