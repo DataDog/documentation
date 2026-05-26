@@ -27,15 +27,13 @@ algolia:
 
 ## Overview
 
-[Catalog][1] provides a centralized, dynamic view of your software ecosystem, enabling teams to track ownership, monitor performance, manage dependencies, and enforce security and compliance standards.
-
-Built on real-time telemetry and automated metadata collection, Catalog offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
+[Catalog][1] provides a centralized, dynamic view of your software ecosystem and infrastructure resources, giving you a single point of entry to understand every layer of your stack. Built on real-time telemetry and automated metadata collection, the Catalog integrates with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, optimize operations, and promote service reliability at scale.
 
 {{< img src="tracing/internal_developer_portal/catalog/tour.mp4" video=true alt="Navigating the IDP Catalog" style="width:100%;" >}}
 
 ## What you can do in Catalog
 
-Catalog offers multiple views to help you explore and manage your entities.
+Catalog offers multiple views to help you explore and manage your entities. To quickly find what you need most, pin frequently accessed views using Saved Views.
 
 - [**Ownership**][8]: Access your team's Slack, repo, or on-call information.
 - **Reliability**: Address risks by surfacing entities with recent deploys, rising error rates, open incidents, or failing monitors.
@@ -43,11 +41,10 @@ Catalog offers multiple views to help you explore and manage your entities.
 - **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
 - **Costs**: Track AWS costs linked to code and infrastructure changes to control cloud spend.
 - **Software Delivery**: Monitor CI pipeline health, static analysis violations, and DORA metrics to shorten delivery cycles.
+- **Relationships**: See the dependency graph for services and hover over any service card to see the infrastructure resources it runs on.
+- **Infrastructure**: Browse your cloud infrastructure resources in a dedicated section of the Catalog. Infrastructure resources link to the software entities that run on them. You can click any service in the dependency graph to navigate directly to the infrastructure it runs on.
 
 See the [Use Cases documentation][4] to learn how teams use Datadog Catalog to centralize knowledge, streamline processes, improve operational efficiency, and more.
-
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
-{{< /callout >}}
 
 ## What appears in Catalog
 
@@ -56,9 +53,11 @@ Catalog includes an entity when:
 - You [declare it in an Entity Definition][6], or
 - You [import it from a third-party source][7] such as Backstage or ServiceNow.
 
+You can view infrastructure resources when you [enable Resource collection][9]. Resource collection is free for any Infrastructure Monitoring customer.
+
 [Learn more][3] about entity types and how to configure them for your needs.
 
-**Note**: 
+**Notes**: 
 - Use the entity type for more precise filtering than the legacy `type` filter (from the `span.type` attribute). For example, use the `datastore type` facet to filter by specific datastore technology.
 - Span summaries and service and resource statistics are retained for up to 30 days. For deeper analysis on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
 
@@ -94,4 +93,5 @@ Some integrations alias to certain types. For example, Postgres, MySQL, and Cass
 [6]: /internal_developer_portal/catalog/set_up/create_entities
 [7]: /internal_developer_portal/catalog/set_up/import_entities
 [8]: /internal_developer_portal/catalog/set_up/ownership
+[9]: /infrastructure/
 
