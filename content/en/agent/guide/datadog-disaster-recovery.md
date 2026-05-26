@@ -60,8 +60,6 @@ If you are also sending telemetry to Datadog using cloud provider integrations, 
 
 Email your new org name to your [Customer Success Manager](mailto:success@datadoghq.com). Then, your Customer Success Manager sets this new org as your DDR org.
 
-**Note:** Although this org appears in your Datadog billing hierarchy, all usage and cost associated is *not* billed during the Preview period.
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs" level="h5" %}}
@@ -104,7 +102,7 @@ After linking your orgs, only the failover org displays this banner:
 
 Go to the [Organization Settings](https://app.datadoghq.com/organization-settings/users) in your DDR org to configure [SAML](https://docs.datadoghq.com/account_management/saml/#overview) or {{< ui >}}Google Login{{< /ui >}} for your users.
 
-You must invite each of your users to your Disaster Recovery org and give them appropriate roles and permissions. Alternatively, to streamline this operation, you can use [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning).
+Managed sync replicates user accounts from your primary org to your DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) to ensure your users can access the DDR org during a failover without needing to reset their password.
 
 {{% /collapse-content %}}
 
@@ -112,10 +110,9 @@ You must invite each of your users to your Disaster Recovery org and give them a
 
 See the [AWS](https://docs.datadoghq.com/integrations/amazon-web-services), [Azure](https://docs.datadoghq.com/integrations/azure), and [Google Cloud](https://docs.datadoghq.com/integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#overview) integrations for setup steps.
 
-Your cloud integrations must be configured in both primary and DDR orgs. However, the integrations must only run in one org at a time:
+Your cloud integrations must be configured in both primary and DDR orgs. Datadog ensures integrations run in only one org at a time: by default in the primary org, and in the DDR org during failover.
 
-- By default, the integrations must run only in the primary org.
-- When in failover, the integrations must only run in the DDR org.
+**Note:** The integrations failover policy applies to cloud integration crawlers only, not all integration types.
 
 For more information, see the [Cloud integrations failover](#id-for-cloud) section.
 
@@ -125,11 +122,11 @@ For more information, see the [Cloud integrations failover](#id-for-cloud) secti
 
 Datadog manages resource sync on your behalf using the open-source [datadog-sync-cli](https://github.com/DataDog/datadog-sync-cli) tool. You do not need to run or operate this tool yourself.
 
-Managed sync replicates resources from your primary org to your DDR org on a daily schedule. Replicated resources include dashboards, monitors, users, notebooks, and [34+ other resource types](https://github.com/DataDog/datadog-sync-cli#supported-resources). Replication runs continuously before an outage, so your DDR org stays current.
+Managed sync replicates resources from your primary org to your DDR org on a daily schedule. Replicated resources include dashboards, monitors, users, notebooks, and [34+ other resource types](https://github.com/DataDog/datadog-sync-cli#supported-resources). Replication runs on this daily schedule so your DDR org stays current before an outage.
 
-**Users are scoped to each Datadog site.** A user account in your primary org does not automatically exist in your DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) to help ensure your users can access the DDR org during a failover without manual user creation. You can also manually invite users to both orgs and assign them the same roles and permissions.
+**Users are scoped to each Datadog site.** Managed sync replicates user accounts to your DDR org. However, users may need to reset their password on first login to the DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) to ensure seamless access without manual password resets.
 
-**Managed sync uses a Datadog [service account](https://docs.datadoghq.com/account_management/org_settings/service_accounts/).** During onboarding, you will need to create a service account in your primary org to read and replicate resources to your DDR org. Resources synced by managed sync appear under this service account in your DDR org rather than their original owner. This is expected behavior and does not affect resource functionality during failover.
+**Managed sync uses a Datadog [service account](https://docs.datadoghq.com/account_management/org_settings/service_accounts/).** During onboarding, you will need to create a service account in your DDR org to read and replicate resources from your primary org. Resources synced by managed sync will be provisioned by a user mapped to their original owner when possible.
 
 {{% /collapse-content %}}
 
@@ -144,8 +141,6 @@ Datadog strongly recommends using Remote Configuration for better failover contr
 {{% /collapse-content %}}
 
 {{% collapse-content title="Dual ship telemetry to DDR org during failover or drills" level="h5" %}}
-
-[Dual Shipping](https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm) allows you to simultaneously route the same data to two different orgs, such as a primary and a failover org. Starting with Agent **v7.54+**, a new DDR configuration enables Datadog Agents to send {{< tooltip text="telemetry" tooltip="Data that is sent to the Datadog platform. For example, `logs`, `metrics`, `traces`. " >}} to the designated failover org when failover is triggered.
 
 **Dual Shipping is disabled by default**, but you can enable it to support your periodic disaster recovery exercises and drills.
 
@@ -197,7 +192,7 @@ multi_region_failover:
 
 DNS-based failover is a complementary approach to Agent-based failover. Instead of configuring Agents with a secondary site endpoint, you configure all your data sources to send telemetry to a single Datadog-provided custom intake URL. During a failover event, Datadog updates the DNS record for that URL to redirect traffic from your primary site to your DDR site.
 
-**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously. Dual shipping is not supported for DNS-based failover.
+**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously.
 
 #### Receive your custom DNS endpoint
 
