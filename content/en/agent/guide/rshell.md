@@ -24,10 +24,9 @@ rshell is an open source, POSIX-compatible shell interpreter written in Go and e
 When a command is invoked:
 
 1. The Datadog backend receives the request from the MCP client.
-2. The backend validates the command against the per-Agent-version allowlist.
-3. The request is forwarded to the PAR running on the target host.
-4. rshell, embedded in the PAR process, executes the command as a Go builtin.
-5. Output is returned to the backend and surfaced to the MCP client.
+2. The request is forwarded to the PAR running on the target host.
+3. rshell, embedded in the PAR process, executes the command as a Go builtin.
+4. Output is returned to the backend and surfaced to the MCP client.
 
 The PAR is a customer-installed process. It handles the secure channel between the Datadog backend and the host. rshell runs inside it and never opens a separate shell process on the host.
 
