@@ -37,9 +37,9 @@ You can **temporarily** override your default saved view by completing any actio
 
 At any moment, from the default view entry in the Views panel:
 
-* **Reload** your default view by clicking on the entry.
-* **Update** your default view with the current parameters.
-* **Reset** your default view to Datadog's defaults for a fresh restart.
+* {{< ui >}}Reload{{< /ui >}} your default view by clicking on the entry.
+* {{< ui >}}Update{{< /ui >}} your default view with the current parameters.
+* {{< ui >}}Reset{{< /ui >}} your default view to Datadog's defaults for a fresh restart.
 
 ## Saved views
 
@@ -48,17 +48,17 @@ At any moment, from the default view entry in the Views panel:
 All saved views, that are not your default saved view, are shared across your organization:
 
 * **Integration saved views** come out-of-the-box with most Datadog [Log Management Integrations][7]. These are read-only, and identified by the logo of the integration.
-* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
+* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the {{< ui >}}save{{< /ui >}} button to create a new custom saved view from the current content of your explorer.
 
 {{< img src="logs/explorer/saved_views/save.png" alt="Logs -- Save" style="width:30%;" >}}
 
 At any moment, from the saved view entry in the Views panel:
 
-* **Load** or **reload** a saved view.
-* **Update** a saved view with the configuration of the current view.
-* **Rename** or **delete** a saved view.
-* **Share** a saved view through a short-link.
-* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
+* {{< ui >}}Load{{< /ui >}} or {{< ui >}}reload{{< /ui >}} a saved view.
+* {{< ui >}}Update{{< /ui >}} a saved view with the configuration of the current view.
+* {{< ui >}}Rename{{< /ui >}} or {{< ui >}}delete{{< /ui >}} a saved view.
+* {{< ui >}}Share{{< /ui >}} a saved view through a short-link.
+* {{< ui >}}Star{{< /ui >}} (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
 {{< img src="logs/explorer/saved_views/star.png" alt="Starred views" style="width:50%;" >}}
 

@@ -56,6 +56,12 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
             enabled: true
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
+
+          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # See Runtime Package Tracking section below.
+          enrichment:
+            usage:
+              enabled: true
     ```
 
 2. Apply the changes and restart the Agent.
@@ -91,6 +97,12 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           enabled: true
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
+
+        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # See Runtime Package Tracking section below.
+        enrichment:
+          usage:
+            enabled: true
     ```
 
 2. Restart the Agent.
@@ -99,16 +111,16 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{< /tabs >}}
 
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
+
+**Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
+
 ### Supported application library package managers
-
-The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages.
-
-When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
 The `languages` analyzer covers the following package ecosystems:
 
 | Ecosystem | Package manager/format |
-|-----------|--------------------------|
+|-----------|------------------------|
 | Ruby | Bundler, GemSpec |
 | Rust | Cargo, Rust binary |
 | PHP | Composer |
@@ -123,6 +135,70 @@ The `languages` analyzer covers the following package ecosystems:
 | Elixir | Mix lock |
 | Julia | Julia |
 
+## Runtime Package Tracking (Preview)
+
+Runtime package tracking enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
+
+Each vulnerability finding is enriched with the following signals:
+
+| Signal | Description |
+|--------|-------------|
+| Package is running | The package files are actively being accessed by running processes. |
+| Accessed by root process | The package is being accessed by a process running as root (UID 0). |
+| SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
+
+These signals power vulnerability prioritization in Cloud Security, surfacing findings where vulnerable code is confirmed running in production.
+
+**Requirements**:
+- Datadog Agent **7.79.0 or later**
+- Linux only (eBPF dependency)
+
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package tracking runs independently and does not affect its usage.
+
+{{< tabs >}}
+
+{{% tab "Datadog Operator" %}}
+
+Add the `enrichment` block to the `sbom` section of your `datadog-agent.yaml` file:
+
+```yaml
+spec:
+  features:
+    sbom:
+      enabled: true
+      containerImage:
+        enabled: true
+      # Enables runtime package prioritization (Preview, Agent 7.79+)
+      enrichment:
+        usage:
+          enabled: true
+```
+
+Apply the changes and restart the Agent.
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Add the `enrichment` block to the `sbom` section of your `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  sbom:
+    containerImage:
+      enabled: true
+    # Enables runtime package prioritization (Preview, Agent 7.79+)
+    enrichment:
+      usage:
+        enabled: true
+```
+
+Restart the Agent.
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
@@ -130,3 +206,4 @@ The `languages` analyzer covers the following package ecosystems:
 [5]: /getting_started/agent
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
+[8]: /security/workload_protection/

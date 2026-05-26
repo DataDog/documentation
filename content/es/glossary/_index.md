@@ -3,13 +3,12 @@ aliases:
 - /es/glossary/terms/wall_time/
 cascade:
   disable_toc: true
-filter_all: Todas
+filter_all: All
 scrollspy:
   offset: 5
   target: '#glossary-nav'
 title: Glosario
 ---
-
 {{< jqmath-vanilla >}}
 
-<div class="alert alert-info"><strong>¡Bienvenido a nuestro glosario!</strong> Este glosario se encuentra en progreso y estamos creando una lista completa de términos de manera activa, lo que tomará tiempo. Si tienes comentarios sobre el funcionamiento de este glosario o los términos que te gustaría encontrar, haz clic en <strong>Feedback</strong> (Comentarios) y háznoslo saber.</a></div>
+<div class="alert alert-info"><strong>¡Bienvenido a nuestro Glosario!</strong> Este es un trabajo en progreso y estamos construyendo activamente una lista completa de términos, lo cual tomará tiempo. Si tienes comentarios sobre cómo funciona este glosario, o términos que te gustaría ver definidos, por favor haz clic en <strong>Feedback</strong> y háznoslo saber.</a></div>

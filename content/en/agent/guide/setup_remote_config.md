@@ -135,9 +135,9 @@ To authenticate and authorize the Agent to receive configuration, enable Remote 
 [7]: /agent/guide#cloud-infrastructure-guides
 [8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
-[10]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
+[10]: /agent/fleet_automation/upgrade_agents/
 [11]: /agent/fleet_automation/
-[12]: /agent/fleet_automation/remote_management#datadog-installer-incompatible-with-agent-pre-766
+[12]: /agent/fleet_automation/upgrade_agents/#datadog-installer-incompatible-with-agent-pre-766
 
 ## Further reading
 

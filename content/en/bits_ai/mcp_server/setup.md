@@ -379,29 +379,53 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "OpenCode" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+Connect [OpenCode][3] to the Datadog MCP Server with the official [Datadog OpenCode Plugin][2] (in Preview). The plugin writes and maintains the MCP Server entry in your `opencode.json` and exposes the `ddsetup`, `ddconfig`, and `ddtoolsets` tools that the agent uses to handle setup, site changes, and [toolset](#toolsets) selection.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. Add the following to your `opencode.json` configuration file:
-    <pre><code>{
-     "mcp": {
-       "datadog": {
-         "type": "remote",
-         "url": "{{< region-param key="mcp_server_endpoint" >}}",
-         "enabled": true
-       }
-     }
+1. Add the plugin to your `opencode.json` configuration file. Create the file if it doesn't exist:
+
+   <pre><code>{
+     "plugin": ["@datadog/opencode-plugin"]
    }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools:
+    If a `plugin` array already exists, add `"@datadog/opencode-plugin"` to it.
 
-   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
-   
-   To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+    If you previously configured the Datadog MCP Server manually in `opencode.json`, remove or disable that entry to avoid conflicts with the plugin.
+
+1. Restart OpenCode. The package is fetched from npm at startup.
+
+1. Ask the agent to run `ddsetup`. The plugin walks through site selection.
+
+1. Restart OpenCode again to activate the MCP Server, and complete the OAuth login flow when prompted.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+1. To enable [product-specific tools](#toolsets), ask the agent to run `ddtoolsets`.
+
+After setup, ask the agent to run `ddconfig` to change your Datadog site or troubleshoot the connection.
+
+{{% collapse-content title="Manual configuration" level="h4" expanded=false id="opencode-manual" %}}
+To configure the MCP Server without the plugin, add the following to your `opencode.json` configuration file.
+
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+
+<pre><code>{
+  "mcp": {
+    "datadog": {
+      "type": "remote",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}",
+      "enabled": true
+    }
+  }
+}</code></pre>
+
+To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools:
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+{{% /collapse-content %}}
 
 [1]: /getting_started/site/
 {{< /site-region >}}
@@ -410,7 +434,8 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: /getting_started/site/
+[2]: https://github.com/datadog-labs/opencode-plugin
+[3]: https://opencode.ai/
 {{% /tab %}}
 
 {{% tab "VS Code" %}}
@@ -558,12 +583,15 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
+- `widgets`: Tools for [dashboard][46] and [notebook][54] widget visualization, validation, and type conversion.
 - `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
 
 ### Preview toolsets
 
 These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
+- `rum`: Tools for [Real User Monitoring][55], including summarizing application performance, inspecting application configuration, and running performance investigations
 
 ## Supported clients
 
@@ -579,6 +607,7 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
+| [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
 | [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -739,3 +768,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [49]: /bits_ai/mcp_server/tools
 [50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
+[52]: https://opencode.ai/
+[53]: https://github.com/datadog-labs/opencode-plugin
+[54]: /notebooks/
+[55]: /real_user_monitoring/

@@ -56,9 +56,9 @@ For more information about the structure of context objects, see the [Browser SD
 
 ## Examples
 
-### Collect HTTP headers from a Fetch response
+### Track aborted requests
 
-Collect HTTP headers from a Fetch response with the following `beforeSend` configuration. Additional context attributes **must** be stored in the `event.context` object.
+Track aborted requests with the following `beforeSend` configuration. Additional context attributes **must** be stored in the `event.context` object.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -66,9 +66,8 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
-        // collect a RUM resource's response headers
-        if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context.responseHeaders = Object.fromEntries(context.response.headers)
+        if (event.type === 'resource' && context.isAborted) {
+            event.context.aborted = true
         }
         return true
     },
@@ -127,6 +126,7 @@ The following tabs show the information contained in the `beforeSend` event and 
 {{% tab "Context" %}}
 ```json
 {
+    "isAborted": false,
     "performanceEntry": {
         "name": "https://api.shopist.io/products.json",
         "entryType": "resource",

@@ -243,11 +243,11 @@ The following filters are only available for ingest-time parsing with the Grok P
 
 ## Advanced settings
 
-Use the **Advanced Settings** section at the bottom of your Grok processor to parse a specific attribute instead of the default `message` attribute, or to define helper rules that reuse common patterns across multiple parsing rules.
+Use the {{< ui >}}Advanced Settings{{< /ui >}} section at the bottom of your Grok processor to parse a specific attribute instead of the default `message` attribute, or to define helper rules that reuse common patterns across multiple parsing rules.
 
 ### Parsing a specific text attribute
 
-Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+Use the {{< ui >}}Extract from{{< /ui >}} field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
 For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. Extract from `command.line` to parse its contents and create structured attributes from the command data.
 
@@ -255,7 +255,7 @@ For example, consider a log containing a `command.line` attribute that should be
 
 ### Using helper rules to reuse common patterns
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the {{< ui >}}Helper Rules{{< /ui >}} field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -301,7 +301,7 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterAllowList[
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 * `delimiter`: defines the separator between the different key values pairs (for example, `|`is the delimiter in `key1=value1|key2=value2`). Defaults to ` ` (normal space), `,` and `;`.
 
-Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
+Use filters such as `keyvalue` to more-easily map strings to attributes for keyvalue or logfmt formats:
 
 **Log:**
 
@@ -679,7 +679,7 @@ rule %{data::xml}
 
 ### Parsing CSV
 
-Use the **CSV** filter to more-easily map strings to attributes when separated by a given character (`,` by default).
+Use the `csv` filter to more-easily map strings to attributes when separated by a given character (`,` by default).
 
 The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` where:
 

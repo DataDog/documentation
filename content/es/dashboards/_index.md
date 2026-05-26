@@ -16,106 +16,107 @@ cascade:
     tags:
     - snapshot
     - dashboards
-description: Visualiza tus datos para obtener más información
+description: Visualiza tus datos para obtener información
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Dashboards
-  tag: Notas de versiones
-  text: ¡Ëchales un vistazo a las últimas versiones de dashboards de Datadog! (Se
-    requiere iniciar sesión en la aplicación).
 - link: /dashboards/sharing/
   tag: Documentación
-  text: Compartir gráficos fuera de Datadog
+  text: Comparte tus gráficos fuera de Datadog
+- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
+  tag: Mejores prácticas
+  text: Crea excelentes tableros de integración
+- link: https://dtdg.co/fe
+  tag: Habilitación de la fundación
+  text: Únete a una sesión interactiva sobre mejores visualizaciones con Dashboards
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: Blog
-  text: Añade widgets del dashboard a tu portapapeles
+  text: Agrega widgets de tablero a tu portapapeles
 - link: https://www.datadoghq.com/blog/datadog-dashboards/
   tag: Blog
-  text: Una nueva experiencia con los dashboards de Datadog
-- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
-  tag: Prácticas recomendadas
-  text: Crea unos dashboards de integración excelentes
-- link: https://dtdg.co/fe
-  tag: Habilitación de los fundamentos
-  text: Participa en una sesión interactiva sobre las mejores visualizaciones con
-    dashboards
+  text: La nueva experiencia de tableros de Datadog
+- link: https://www.datadoghq.com/blog/datadog-executive-dashboards
+  tag: Blog
+  text: Diseña tableros ejecutivos efectivos con Datadog
+- link: https://app.datadoghq.com/release-notes?category=Dashboards
+  tag: Notas de la versión
+  text: ¡Consulta los últimos lanzamientos de Dashboards de Datadog! (Se requiere
+    inicio de sesión en la aplicación).
 title: Dashboards
 ---
+## Resumen {#overview}
 
-## Información general
+Los paneles proporcionan información en tiempo real sobre el rendimiento y la salud de los sistemas y aplicaciones dentro de una organización. Permiten a los usuarios analizar visualmente los datos, rastrear indicadores clave de rendimiento (KPI) y monitorear tendencias de manera eficiente. Con los paneles, los equipos pueden identificar anomalías, priorizar problemas, detectar proactivamente problemas, diagnosticar causas raíz y asegurar que se cumplan los objetivos de confiabilidad. Empodera a tus equipos para tomar decisiones informadas, optimizar las operaciones del sistema y impulsar el éxito empresarial al proporcionar una interfaz centralizada y fácil de usar para monitorear y analizar métricas críticas e indicadores de rendimiento.
 
-Los dashboards proporcionan información en tiempo real sobre el rendimiento y el estado de los sistemas y las aplicaciones de una organización. Permiten a los usuarios analizar visualmente los datos, realizar un seguimiento de los indicadores clave de rendimiento (KPI) y monitorizar tendencias de forma eficaz. Con los dashboards, los equipos pueden identificar anomalías, priorizar problemas, detectar problemas de forma proactiva, diagnosticar sus causas raíz y garantizar el cumplimiento de los objetivos de confiabilidad. Permite a tus equipos tomar decisiones informadas, optimizar las operaciones del sistema e impulsar el éxito empresarial, proporcionando una interfaz centralizada y fácil de utilizar para monitorizar y analizar los indicadores críticos de métricas y de rendimiento.
-
-{{< whatsnext desc="Funciones del dashboard:">}}
-    {{< nextlink href="/dashboards/configure" >}}Configuración: Información general sobre las opciones de configuración de dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/list" >}}Lista de dashboards: Búsqueda, visualización o creación de dashboards y listas{{< /nextlink >}}
-    {{< nextlink href="/dashboards/template_variables" >}}Variable de plantilla: Filtrado dinámico de widgets en un dashboard{{< /nextlink >}}
+{{< whatsnext desc="Características del tablero:">}}
+    {{< nextlink href="/dashboards/configure" >}}Configurar: Resumen de las opciones de configuración para tableros{{< /nextlink >}}
+    {{< nextlink href="/dashboards/list" >}}Dashboard List: Buscar, ver o crear tableros y listas{{< /nextlink >}}
+    {{< nextlink href="/dashboards/template_variables" >}}Variables de plantilla: Filtrar dinámicamente widgets en un tablero{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/datadog_clipboard/" >}}Portapapeles de Datadog{{< /nextlink >}}
-    {{< nextlink href="/api/latest/dashboards" >}}API: Gestión de dashboards mediante programación{{< /nextlink >}}
+    {{< nextlink href="/api/latest/dashboards" >}}API: Administrar tableros programáticamente{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Funciones gráficas:">}}
-    {{< nextlink href="/dashboards/widgets" >}}Widgets: Obtén información sobre la configuración de diferentes visualizaciones{{< /nextlink >}}
-    {{< nextlink href="/dashboards/querying" >}}Consultas: Visualiza las opciones de formatos para las consultas gráficas{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions" >}}Funciones: Modifica consultas sobre métricas y los gráficos resultantes{{< /nextlink >}}
-    {{< nextlink href="/dashboards/change_overlays" >}}Superposiciones: Superpone automáticamente eventos de cambios en gráficos{{< /nextlink >}}
+{{< whatsnext desc="Características de graficación:">}}
+    {{< nextlink href="/dashboards/widgets" >}}Widgets: Aprender la configuración para diferentes visualizaciones{{< /nextlink >}}
+    {{< nextlink href="/dashboards/querying" >}}Consultas: Ver las opciones de formato para consultas gráficas{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions" >}}Funciones: Modificar consultas de métricas y gráficos resultantes{{< /nextlink >}}
+    {{< nextlink href="/dashboards/change_overlays" >}}Superposiciones: Superponer automáticamente eventos de cambio en gráficos{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Para empezar
+## Comenzar {#get-started}
 
-Para crear un dashboard:
-1. Haz clic en **+Nuevo dashboard** en la page (página) [Listas de dashboards][4] o en **Nuevo dashboard** en el menú de navegación.
-2. Introduce un nombre para el dashboard y elige una opción de diseño.
+Para crear un tablero: 
+1. Haz clic en **+Nuevo Tablero** en la página [Dashboard List][4] o **Nuevo Tablero** en el menú de navegación.
+2. Introduce un nombre para el tablero y elige una opción de diseño.
 
-{{< img src="dashboards/create-dashboard.png" alt="Añadir un nuevo dashboard" style="width:70%;">}}
+{{< img src="dashboards/create-dashboard.png" alt="Agregando un nuevo tablero" style="width:70%;">}}
 
 Dashboards 
-: Tienen un diseño basado en cuadrículas, que puede incluir una variedad de objetos como imágenes, gráficos y logs. Suelen utilizarse como tableros de estado o vistas narrativas que se actualizan en tiempo real y pueden representar puntos específicos del pasado. Tienen una anchura máxima de 12 cuadrados de cuadrícula y también resultan útiles para tareas de depuración.
+: Un diseño basado en cuadrícula, que puede incluir una variedad de objetos como imágenes, gráficos y registros. Se utilizan comúnmente como tableros de estado o vistas narrativas que se actualizan en tiempo real, y pueden representar puntos fijos en el pasado. Tienen un ancho máximo de 12 cuadros de cuadrícula y también funcionan bien para la depuración.
 
-Timeboards (Tableros temporales)
-: Tienen un diseño automático que representa un único punto en el tiempo, ya sea fijo o en tiempo real, en todo el dashboard. Suelen utilizarse para solucionar problemas, la correlación y la exploración general de datos.
+Tableros de tiempo
+: Diseños automáticos que representan un único punto en el tiempo—ya sea fijo o en tiempo real—en todo el tablero. Se utilizan comúnmente para la resolución de problemas, correlación y exploración general de datos.
 
-Screenboards (Pantallas)
-: Dashboards con un diseño de forma libre que puede incluir una variedad de objetos, como imágenes, gráficos y logs. Suelen utilizarse como tableros de estado o vistas narrativas que se actualizan en tiempo real o que representan puntos específicos del pasado.
+Paneles visuales
+: Paneles visuales con diseños de forma libre que pueden incluir una variedad de objetos como imágenes, gráficos y registros. Se utilizan comúnmente como paneles visuales de estado o vistas narrativas que se actualizan en tiempo real o representan puntos fijos en el pasado.
 
-{{< whatsnext desc="Consulta los siguientes recursos:" >}}
-   {{< nextlink href="/getting_started/dashboards/" >}}Empezando con los dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Curso de aprendizaje: Presentación de los dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Curso de aprendizaje: Crear mejores dashboards{{< /nextlink >}}
+{{< whatsnext desc="Vea los siguientes recursos:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}Introducción a los Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Curso de aprendizaje: Introducción a los Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Curso de aprendizaje: Creando mejores Dashboards{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Frecuencia de actualización
+## Frecuencia de actualización {#refresh-rate}
 
-La frecuencia de actualización de un dashboard privado depende del periodo de tiempo que se esté visualizando. Cuanto más corto sea el periodo, más a menudo se actualizarán los datos. Los dashboards compartidos públicamente se actualizan cada treinta segundos, independientemente del intervalo de tiempo que se haya seleccionado.
+La frecuencia de actualización de un tablero privado depende del intervalo de tiempo que esté visualizando. Cuanto más corto sea el intervalo de tiempo, más frecuentemente se actualizan los datos. Los tableros compartidos públicamente se actualizan cada treinta segundos, independientemente del intervalo de tiempo seleccionado.
 
-| Periodo de tiempo   | Frecuencia de actualización |
+| Intervalo de tiempo   | Frecuencia de actualización |
 |--------------|--------------|
 | 1 minuto     | 10 segundos   |
 | 2 minutos    | 10 segundos   |
-| 5 minutos    | 10 segundos   |
-| 10 minutos   | 10 segundos   |
-| 30 minutos   | 20 segundos   |
-| 1 hora       | 20 segundos   |
-| 3 horas      | 1 minuto     |
-| 4 horas      | 1 minuto     |
-| 1 día        | 3 minutos     |
-| 2 días       | 10 minutos    |
-| 1 semana       | 1 hora       |
-| 1 mes      | 1 hora       |
-| 3 meses     | 1 hora       |
-| 6 meses     | 1 hora       |
-| 1 año       | 1 hora       |
+| 5 minutos    | 10 segundos   |
+| 10 minutos   | 10 segundos   |
+| 30 minutos   | 20 segundos   |
+| 1 hora       | 20 segundos   |
+| 3 horas      | 1 minuto     |
+| 4 horas      | 1 minuto     |
+| 1 día        | 3 minutos     |
+| 2 días       | 10 minutos    |
+| 1 semana     | 1 hora       |
+| 1 mes        | 1 hora       |
+| 3 meses      | 1 hora       |
+| 6 meses      | 1 hora       |
+| 1 año        | 1 hora       |
 
-## Ver dashboards en dispositivos móviles
+## Ver tableros en dispositivos móviles {#view-dashboards-on-mobile-devices}
 
-Consulta tus dashboards en formato móvil con la aplicación móvil de Datadog, disponible en [Apple App Store][2] y [Google Play Store][3]. La aplicación móvil viene equipada con widgets móviles en la pantalla de inicio que te permiten monitorizar servicios de salud y de infraestructura sin abrir la aplicación móvil.
+Vea sus tableros en un formato amigable para móviles con la aplicación móvil de Datadog, disponible en el [Apple App Store][2] y [Google Play Store][3]. La aplicación móvil viene equipada con widgets para la pantalla de inicio que te permiten hacer seguimiento de la salud del servicio y de la infraestructura sin abrir la aplicación móvil.
 
-**Nota**: Para configurar o editar un dashboard, debes iniciar sesión en la interfaz de usuario del navegador de Datadog. Para obtener más información sobre la instalación de la aplicación, consulta la documentación de la [aplicación móvil de Datadog][1].
+**Nota**: Para configurar o editar un tablero, debes iniciar sesión en la interfaz de usuario del navegador de Datadog. Para más información sobre la instalación de la aplicación, revisa la documentación de la [aplicación móvil de Datadog][1].
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
-{{< learning-center-callout header="Try Creating Graph Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explora los widgets de series temporales, valor de consulta, top list (lista principal), tabla, distribución y gráfico circular. Aprende a configurar los widgets y a comprender cuándo debe utilizarse cada tipo de widget. {{< /learning-center-callout >}}
+{{< learning-center-callout header="Prueba crear widgets de gráficos en el Centro de Aprendizaje de Datadog" btn_title="Inscríbete ahora" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explora widgets de series temporales, valor de consulta, lista principal, tabla, distribución y gráfico circular. Aprende a configurar los widgets y entiende cuándo usar cada tipo de widget. {{< /learning-center-callout >}}
 
-{{< learning-center-callout header="Try Creating Table, List, SLO, and Architecture Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}} Explora los widgets de tabla, lista, SLOs y arquitectura. Aprende a rastrear las métricas y el rendimiento de una aplicación web y descubre cómo presentar datos importantes. {{< /learning-center-callout >}}
+{{< learning-center-callout header="Prueba crear widgets de tabla, lista, SLO y arquitectura en el Centro de Aprendizaje de Datadog" btn_title="Inscríbete ahora" btn_url="https://learn.datadoghq.com/courses/discovering-table-list-widgets">}} Explora widgets de tabla, lista, SLO y arquitectura. Aprende a rastrear las métricas y el rendimiento de una aplicación web y descubre cómo presentar datos importantes. {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

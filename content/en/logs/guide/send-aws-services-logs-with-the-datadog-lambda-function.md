@@ -242,10 +242,10 @@ The following sources and locations are supported:
     | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.             |
 
 
-3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.
-4. In the **Datadog Forwarder Lambda** section, enter the ARN of the Lambda created in the previous section and click **Add**. The Lambda function appears in the table below with its name, version, and region.
-5. In the **Log Autosubscription** section, under **Log Sources**, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
-6. (Optional) In the **Log Source Tag Filters** section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected. **Note**: Resource tags are automatically lowercased to match Datadog platform conventions. Define your tag filters in lowercase to avoid mismatches.
+3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the {{< ui >}}Log Collection{{< /ui >}} tab.
+4. In the {{< ui >}}Datadog Forwarder Lambda{{< /ui >}} section, enter the ARN of the Lambda created in the previous section and click {{< ui >}}Add{{< /ui >}}. The Lambda function appears in the table below with its name, version, and region.
+5. In the {{< ui >}}Log Autosubscription{{< /ui >}} section, under {{< ui >}}Log Sources{{< /ui >}}, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
+6. (Optional) In the {{< ui >}}Log Source Tag Filters{{< /ui >}} section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected. **Note**: Resource tags are automatically lowercased to match Datadog platform conventions. Define your tag filters in lowercase to avoid mismatches.
 7. If you have logs across multiple regions, you must create additional Lambda functions in those regions and add them in the **Datadog Forwarder Lambda** section.
 8. To stop collecting all AWS logs from a specific Lambda function, hover over the Lambda in the table and click the delete icon. All triggers for that function are removed.
 9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
@@ -259,12 +259,12 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 {{< tabs >}}
 {{% tab "AWS console" %}}
 
-1. In the AWS console, go to **Lambda**.
-2. Click **Functions** and select the Datadog Forwarder.
-3. Click **Add trigger** and select **CloudWatch Logs**.
+1. In the AWS console, go to {{< ui >}}Lambda{{< /ui >}}.
+2. Click {{< ui >}}Functions{{< /ui >}} and select the Datadog Forwarder.
+3. Click {{< ui >}}Add trigger{{< /ui >}} and select {{< ui >}}CloudWatch Logs{{< /ui >}}.
 4. Select the log group from the dropdown menu.
 5. Enter a name for your filter, and optionally specify a filter pattern.
-6. Click **Add**.
+6. Click {{< ui >}}Add{{< /ui >}}.
 7. Go to the [Datadog Log section][1] to explore any new log events sent to your log group.
 
 [1]: https://app.datadoghq.com/logs
