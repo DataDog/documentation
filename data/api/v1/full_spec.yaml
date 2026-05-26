@@ -1345,6 +1345,50 @@ components:
       type: string
       x-enum-varnames:
         - COHORT
+    ComparisonCustomTimeframe:
+      description: Fixed time range for a `custom_timeframe` comparison.
+      properties:
+        from:
+          description: Start time in milliseconds since epoch.
+          example: 1779290190000
+          format: int64
+          type: integer
+        to:
+          description: End time in milliseconds since epoch.
+          example: 1779894990000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+      type: object
+    ComparisonDuration:
+      description: The comparison period. Use a preset `type` value or set `type` to `custom_timeframe` and provide `custom_timeframe` with explicit millisecond epoch bounds.
+      properties:
+        custom_timeframe:
+          $ref: "#/components/schemas/ComparisonCustomTimeframe"
+          description: Required when `type` is `custom_timeframe`. Fixed time range to compare against.
+        type:
+          $ref: "#/components/schemas/ComparisonDurationType"
+      required:
+        - type
+      type: object
+    ComparisonDurationType:
+      description: "The comparison window type."
+      enum:
+        - previous_timeframe
+        - custom_timeframe
+        - previous_day
+        - previous_week
+        - previous_month
+      example: previous_timeframe
+      type: string
+      x-enum-varnames:
+        - PREVIOUS_TIMEFRAME
+        - CUSTOM_TIMEFRAME
+        - PREVIOUS_DAY
+        - PREVIOUS_WEEK
+        - PREVIOUS_MONTH
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -12171,6 +12215,43 @@ components:
       x-enum-varnames:
         - ASC
         - DESC
+    QueryValueWidgetComparison:
+      description: A change indicator that compares the current value to a historical period.
+      properties:
+        directionality:
+          $ref: "#/components/schemas/QueryValueWidgetComparisonDirectionality"
+          description: Which direction of change is considered an improvement, determining the indicator color.
+        duration:
+          $ref: "#/components/schemas/ComparisonDuration"
+        type:
+          $ref: "#/components/schemas/QueryValueWidgetComparisonType"
+      required:
+        - duration
+      type: object
+    QueryValueWidgetComparisonDirectionality:
+      default: neutral
+      description: "Color-coding direction: `increase_better` (green on rise), `decrease_better` (green on drop), or `neutral` (no color)."
+      enum:
+        - increase_better
+        - decrease_better
+        - neutral
+      type: string
+      x-enum-varnames:
+        - INCREASE_BETTER
+        - DECREASE_BETTER
+        - NEUTRAL
+    QueryValueWidgetComparisonType:
+      default: absolute
+      description: "How the delta is expressed: `absolute` (raw difference), `relative` (percentage), or `both`."
+      enum:
+        - absolute
+        - relative
+        - both
+      type: string
+      x-enum-varnames:
+        - ABSOLUTE
+        - RELATIVE
+        - BOTH
     QueryValueWidgetDefinition:
       description: Query values display the current value of a given metric, APM, or log query.
       properties:
@@ -12242,6 +12323,9 @@ components:
           $ref: "#/components/schemas/LogQueryDefinition"
           deprecated: true
           description: Deprecated - Use `queries` and `formulas` instead.
+        comparison:
+          $ref: "#/components/schemas/QueryValueWidgetComparison"
+          description: Displays a change indicator showing a delta against a historical baseline.
         conditional_formats:
           description: List of conditional formats.
           items:
