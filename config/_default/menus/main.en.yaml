@@ -9270,7 +9270,7 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 3
-    - name: Define Exposure SQL Models
+    - name: Create Exposure SQL Models
       url: experiments/exposure_sql
       parent: pa_experiments
       identifier: pa_experiments_exposure_sql
