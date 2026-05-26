@@ -221,18 +221,6 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
 After a session completes, its evaluation result is attached to the session and is available across LLM Observability in near-real-time. While the session is still within its 30-minute inactivity window, the result shows up as {{< ui >}}Pending{{< /ui >}} in the side panel; after the session completes, the pending row is replaced by the final result.
 
-### Query results
-
-Session-level evaluation results use the same `@evaluation.<evaluation_name>` query syntax as other scopes. Use these patterns in the LLM Observability explorer, in dashboards, and in monitor queries:
-
-| Query | Purpose |
-|---|---|
-| `@evaluation.<evaluation_name>.value:complete` | Filter to sessions with a specific evaluation value |
-| `@evaluation.<evaluation_name>.assessment:fail` | Filter to sessions that failed your evaluation's pass criteria |
-| `@evaluation.<evaluation_name>.value:*` | All sessions that have a result for this evaluator (excludes pending) |
-
-Substitute `<evaluation_name>` with the name you set when creating the evaluator. Evaluation values can also be used as [facets][6] for grouping in dashboards and monitors.
-
 ### Debug results
 
 Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every evaluation that ran for it, alongside the LLM judge's reasoning when {{< ui >}}Enable Reasoning{{< /ui >}} was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific trace or span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
@@ -241,16 +229,7 @@ Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every ev
 
 ### Monitor results
 
-Wire session-level evaluation results into [monitors][7] and [annotation queues][8] to alert on regressions and route failures for human review:
-
-- **Monitor on pass-rate drop.** Create a monitor with a query like the following to alert when the rolling pass rate drops:
-
-  ```
-  formula(100 * a / b) < 80
-    where a = count(@evaluation.<evaluation_name>.assessment:pass) by {ml_app}
-          b = count(@evaluation.<evaluation_name>.value:*) by {ml_app}
-  over last_15m
-  ```
+Wire session-level evaluation results into [annotation queues][8] to route failures for human review:
 
 - **Route failures to an annotation queue.** Configure an [Automation Rule][8] that matches `@evaluation.<evaluation_name>.assessment:fail` and adds the session to an annotation queue for a human reviewer.
 
