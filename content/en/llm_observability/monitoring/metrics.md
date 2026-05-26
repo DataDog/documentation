@@ -15,6 +15,16 @@ further_reading:
 
 After you instrument your application with LLM Observability, you can access LLM Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.
 
+<div class="alert alert-info">
+The <code>ml_obs.*</code> entries on this page are <a href="/metrics/">Datadog Metrics</a>: numerical values that describe an aspect of your LLM application over time, derived from your LLM spans (counts, distributions of cost, tokens, latency, errors). They are 100%-sampled, follow standard <a href="/developers/guide/data-collection-resolution-retention/">Datadog metric retention</a> (15 months at full granularity), and are queryable from dashboards, monitors, and notebooks like any other Datadog metric.
+<br><br>
+They are distinct from two other things in LLM Observability:
+<ul>
+<li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/setup/#data-retention">LLM Observability trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
+<li><strong><a href="/llm_observability/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow LLM Observability trace and experiment retention rather than Datadog metric retention.</li>
+</ul>
+</div>
+
 <div class="alert alert-info">Other tags set on spans are not available as tags on LLM Observability metrics.</div>
 
 ### Span metrics
@@ -35,6 +45,9 @@ After you instrument your application with LLM Observability, you can access LLM
 | `ml_obs.span.llm.prompt.tokens` | Number of tokens used in the prompt | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.completion.tokens` | Tokens generated as a completion during the span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.total.tokens` | Total tokens consumed during the span (input + output + prompt) | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.input.cache_write.tokens` | Number of input tokens written to the prompt cache in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.input.cache_read.tokens` | Number of input tokens served from the prompt cache in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.input.non_cached.tokens` | Number of input tokens that did not interact with the prompt cache in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.characters` | Number of characters in the input sent to the LLM | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.output.characters` | Number of characters in the output | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 

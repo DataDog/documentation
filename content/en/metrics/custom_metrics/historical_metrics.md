@@ -1,5 +1,6 @@
 ---
 title: Historical Metrics Ingestion
+description: "Ingest custom metric values with timestamps older than one hour, up to your metric retention period."
 further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"

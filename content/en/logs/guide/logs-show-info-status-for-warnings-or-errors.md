@@ -37,8 +37,8 @@ If your raw logs are not showing the correct status in Datadog, [extract](#extra
 Use a Grok parser to define a rule with the [`word()` matcher][1] and extract the actual log status.
 
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
-2. Click **Add Processor**.
-3. Select **Grok Parser** for the processor type.
+2. Click {{< ui >}}Add Processor{{< /ui >}}.
+3. Select {{< ui >}}Grok Parser{{< /ui >}} for the processor type.
 4. Use the [`word()` matcher][1] to extract the status and pass it into a custom `log_status` attribute. 
 
 For example, the log may look like:
@@ -70,11 +70,11 @@ The output for `MyParsingRule`'s extraction:
 The `log_status` attribute contains the correct status. Add a [Log Status remapper][3] to make sure the status value in the `log_status` attribute overrides the default log status.
 
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
-2. Click **Add Processor**.
-3. Select Status remapper as the processor type.
+2. Click {{< ui >}}Add Processor{{< /ui >}}.
+3. Select {{< ui >}}Status remapper{{< /ui >}} as the processor type.
 4. Enter a name for the processor.
 5. Add **log_status** to the Set status attribute(s) section.
-6. Click **Create**.
+6. Click {{< ui >}}Create{{< /ui >}}.
 
 {{< img src="logs/guide/log_post_processing.png" alt="Log panel showing a log with a warn status that matches the severity attribute's value of warning" style="width:50%;">}}
 

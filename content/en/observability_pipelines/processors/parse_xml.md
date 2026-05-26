@@ -56,24 +56,9 @@ To set up this processor:
 
 ### Path notation example {#path-notation-example-parse-xml}
 
-For the following message structure:
+{{% observability_pipelines/path_notation %}}
 
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to see the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation_dots %}}
 
 ### Always use text key example
 
