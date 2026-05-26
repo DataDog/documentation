@@ -84,7 +84,7 @@ After processing, the following structured log is generated:
 ### Matcher and filter
 
 <div class="alert alert-danger">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
-The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> functionality.</div>
+The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/grok_parser/">Grok Parser</a> functionality.</div>
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
 
@@ -236,18 +236,18 @@ The following filters are only available for ingest-time parsing with the Grok P
 `url`
 : Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].
 
-[1]: /logs/log_configuration/processors/#user-agent-parser
-[2]: /logs/log_configuration/processors/#url-parser
+[1]: /logs/log_configuration/processors/user_agent_parser/
+[2]: /logs/log_configuration/processors/url_parser/
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Advanced settings
 
-Use the **Advanced Settings** section at the bottom of your Grok processor to parse a specific attribute instead of the default `message` attribute, or to define helper rules that reuse common patterns across multiple parsing rules.
+Use the {{< ui >}}Advanced Settings{{< /ui >}} section at the bottom of your Grok processor to parse a specific attribute instead of the default `message` attribute, or to define helper rules that reuse common patterns across multiple parsing rules.
 
 ### Parsing a specific text attribute
 
-Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+Use the {{< ui >}}Extract from{{< /ui >}} field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
 For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. Extract from `command.line` to parse its contents and create structured attributes from the command data.
 
@@ -255,7 +255,7 @@ For example, consider a log containing a `command.line` attribute that should be
 
 ### Using helper rules to reuse common patterns
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the {{< ui >}}Helper Rules{{< /ui >}} field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -301,7 +301,7 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterAllowList[
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 * `delimiter`: defines the separator between the different key values pairs (for example, `|`is the delimiter in `key1=value1|key2=value2`). Defaults to ` ` (normal space), `,` and `;`.
 
-Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
+Use filters such as `keyvalue` to more-easily map strings to attributes for keyvalue or logfmt formats:
 
 **Log:**
 
@@ -679,7 +679,7 @@ rule %{data::xml}
 
 ### Parsing CSV
 
-Use the **CSV** filter to more-easily map strings to attributes when separated by a given character (`,` by default).
+Use the `csv` filter to more-easily map strings to attributes when separated by a given character (`,` by default).
 
 The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` where:
 
@@ -768,5 +768,5 @@ If your logs contain ASCII control characters, they are serialized upon ingestio
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /logs/log_configuration/processors/#log-date-remapper
+[3]: /logs/log_configuration/processors/log_date_remapper/
 [4]: /logs/log_configuration/parsing/?tab=filters&tabs=filters#matcher-and-filter

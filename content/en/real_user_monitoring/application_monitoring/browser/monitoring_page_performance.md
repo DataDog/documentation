@@ -51,13 +51,13 @@ You can access performance telemetry for your views in:
 
 {{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Core Web Vitals summary visualization" >}}
 
-- Interaction to Next Paint and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
+- LCP and FCP are not collected for pages that start hidden (for example, opened in a background tab). For more on when each vital is reported and how to troubleshoot a missing value, see [When each Core Web Vital is collected](#when-each-core-web-vital-is-collected).
 - Telemetry collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab telemetry, not real telemetry.
 
 | Datapoint                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
-| [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
+| [Interaction To Next Paint][8]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
 | [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
 
 ### Core web vitals target elements
@@ -69,6 +69,65 @@ RUM reports the element that is associated with each Core Web Vital instance:
 - For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
+
+### When each core web vital is collected
+
+The RUM Browser SDK reports each Core Web Vital under different conditions. If a vital is missing from a view event, the SDK most likely did not capture a value for it.
+
+- **Largest Contentful Paint**: Reported on the initial view only. Captured when the `largest-contentful-paint` PerformanceObserver entry fires before the page is hidden and before the user's first interaction. Not reported if the page starts hidden, if the user interacts before any LCP entry arrives, or after a 10-minute cap. See [LCP: Differences between the metric and the API][10] for the upstream definition.
+- **Interaction to Next Paint**: Reported on every view, including SPA route changes. Requires at least one user interaction during the view's lifetime (see [INP on web.dev][11]). If the user never interacts, no INP value is emitted. Requires browser support for the `event` PerformanceObserver entry type and `PerformanceEventTiming.interactionId`. If unsupported, no INP value is emitted.
+- **Cumulative Layout Shift**: Reported on every view, including SPA route changes. Requires browser support for the [`layout-shift` PerformanceObserver entry type][12]. The SDK also relies on `WeakRef` internally; if either is missing, no CLS value is emitted.
+- **First Contentful Paint**: Reported on the initial view only (see [FCP on web.dev][13]). Captured when the entry fires before the page is hidden. The SDK applies a 10-minute ceiling per view.
+
+**Note**: Reporting CLS and INP on every view, including SPA route changes, is intentional. This follows Chrome's [Soft Navigations API experiment][23], which extends these metrics beyond the initial page load. LCP and FCP use the standard page-load definition and are reported only on the initial view.
+
+Values are captured up to the point of backgrounding; they are not discarded if a page is later hidden. A page that is hidden at view start (for example, opened in a background tab) emits no LCP or FCP.
+
+### Troubleshooting missing core web vitals
+
+If a Core Web Vital is missing from a view in the [RUM Explorer][4], check the following:
+
+| Symptom | Likely cause |
+|---|---|
+| INP missing on a view | The user did not interact with the page during this view; the browser does not support INP; or the view ended before any interaction. |
+| LCP or FCP missing on a view | The page was opened in a background tab or hidden window; the entry took longer than 10 minutes to fire; or this is a SPA route-change view (LCP and FCP are reported on the initial view only). |
+| CLS missing on a view | The browser does not support the `layout-shift` PerformanceObserver entry type or lacks `WeakRef`. |
+| Any vital below the expected threshold | Verify the loaded `@datadog/browser-rum` version meets the requirements in [Event timings and core web vitals](#event-timings-and-core-web-vitals). |
+
+To check that the SDK is collecting vitals:
+
+1. Open your browser's developer tools and run `window.DD_RUM.getInternalContext()` to confirm the SDK loaded.
+2. In the {{< ui >}}Network{{< /ui >}} tab, look for view events being sent to the Datadog intake.
+3. In the [RUM Explorer][4], open the view event in question and confirm it has the expected `@view.*` attributes.
+
+### Diagnose Core Web Vitals with subparts
+
+Largest Contentful Paint and Interaction to Next Paint break down into subparts, each isolating a specific phase of the metric. Use subpart data to identify which phase contributes most to a slow LCP or INP.
+
+#### Largest Contentful Paint subparts
+
+<div class="alert alert-info">These attributes require Browser SDK v6.32.0 or later.</div>
+
+LCP breaks down into four phases. Time to First Byte is collected separately as `view.first_byte`. The remaining three subparts are collected under `view.performance.lcp.sub_parts`:
+
+| Phase                  | Attribute                                              | Description                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Time to First Byte     | `view.first_byte`                                      | Time until the browser receives the first byte of the HTML response, including server response time, CDN latency, and redirect time.                                                                     |
+| Resource load delay    | `view.performance.lcp.sub_parts.load_delay`            | Time between TTFB and the start of the LCP resource load. Reflects priority hints, preloads, and render-blocking resources. `0` when the LCP element does not require a resource. |
+| Resource load time     | `view.performance.lcp.sub_parts.load_time`             | Time to load the LCP resource, affected by image format, compression, and network conditions. `0` when the LCP element does not require a resource.                                  |
+| Render delay           | `view.performance.lcp.sub_parts.render_delay`          | Time between the LCP resource finishing loading and the LCP element being painted. High values indicate long tasks or blocking JavaScript or CSS.                                            |
+
+#### Interaction to Next Paint subparts
+
+<div class="alert alert-info">These attributes require Browser SDK v6.33.0 or later.</div>
+
+INP breaks down into three phases, collected under `view.performance.inp.sub_parts`:
+
+| Phase                  | Attribute                                              | Description                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Input delay            | `view.performance.inp.sub_parts.input_delay`           | Time from the user input until the event handler starts running. High values indicate main-thread contention and long tasks.                                                                  |
+| Processing duration    | `view.performance.inp.sub_parts.processing_duration`   | Duration of the event handler execution. High values indicate complex or synchronous handler work.                                                                                        |
+| Presentation delay     | `view.performance.inp.sub_parts.presentation_delay`    | Time the browser took to render the next frame. High values indicate expensive style, layout, paint, or composite operations.                                                                                |
 
 ## All performance telemetry
 
@@ -84,12 +143,12 @@ RUM reports the element that is associated with each Core Web Vital instance:
 | `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
 | `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
-| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
-| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                         |
-| `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. For more information, see the [MDN documentation][12].                                                                                                        |
-| `view.dom_content_loaded`       | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. For more information, see the [MDN documentation][13]. |
-| `view.dom_complete`             | number (ns) | The page and all the sub-resources are ready. For the user, the loading spinner has stopped spinning. For more information, see the [MDN documentation][14].                                                                     |
-| `view.load_event`               | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. For more information, see the [MDN documentation][15].                                                                            |
+| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][14].                                                                          |
+| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][15].                                         |
+| `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. For more information, see the [MDN documentation][16].                                                                                                        |
+| `view.dom_content_loaded`       | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. For more information, see the [MDN documentation][17]. |
+| `view.dom_complete`             | number (ns) | The page and all the sub-resources are ready. For the user, the loading spinner has stopped spinning. For more information, see the [MDN documentation][18].                                                                     |
+| `view.load_event`               | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. For more information, see the [MDN documentation][19].                                                                            |
 | `view.error.count`              | number      | Count of all errors collected for this view.                                                                                                                                                                                     |
 | `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                                 |
 | `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                                  |
@@ -97,7 +156,7 @@ RUM reports the element that is associated with each Core Web Vital instance:
 
 ## Monitoring single page applications (SPA)
 
-For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API][16].
+For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API][20].
 
 Datadog provides a unique KPI, `loading_time`, which calculates the time needed for a page to load. This KPI works for both `initial_load` and `route_change` navigation.
 
@@ -142,7 +201,7 @@ The page activity is considered to have ended when it hasn't had any activity fo
 The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
 - The application collects analytics by sending requests to an API periodically or after every click.
-- The application uses "[comet][17]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][21]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
@@ -245,7 +304,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
+Once the timing is sent, the timing is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][22] before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
@@ -277,15 +336,19 @@ document.addEventListener("scroll", function handler() {
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/
 [7]: https://web.dev/lcp/
-[8]: https://web.dev/fid/
+[8]: https://web.dev/inp/
 [9]: https://web.dev/cls/
-[10]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[11]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
-[16]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[17]: https://en.wikipedia.org/wiki/Comet_(programming)
-[18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[19]: https://web.dev/inp/
+[10]: https://web.dev/articles/lcp#differences-metric-api
+[11]: https://web.dev/articles/inp
+[12]: https://web.dev/articles/cls
+[13]: https://web.dev/articles/fcp
+[14]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[15]: https://www.w3.org/TR/paint-timing/#sec-terminology
+[16]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
+[17]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+[19]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[20]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[21]: https://en.wikipedia.org/wiki/Comet_(programming)
+[22]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[23]: https://developer.chrome.com/docs/web-platform/soft-navigations

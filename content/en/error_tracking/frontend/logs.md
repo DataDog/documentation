@@ -19,7 +19,7 @@ Error Tracking processes errors collected from browser and mobile Datadog Log SD
 
 An essential attribute for log errors is the stack trace in a log's `error.stack`. If you are sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][6] to remap the stack trace to the correct attribute in Datadog.
 
-Your crash reports appear in [**Error Tracking**][2].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][2].
 
 ## Setup
 
@@ -137,4 +137,4 @@ If you have not setup the Datadog Kotlin Multiplatform Logs SDK yet, follow the 
 [3]: https://app.datadoghq.com/logs/onboarding/client
 [4]: /logs/log_collection/javascript/#setup
 [5]: /logs/log_collection/javascript/#choose-the-right-installation-method
-[6]: /logs/log_configuration/processors/?tab=ui#remapper
+[6]: /logs/log_configuration/processors/remapper/
