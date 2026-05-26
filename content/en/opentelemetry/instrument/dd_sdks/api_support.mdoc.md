@@ -1108,9 +1108,40 @@ Follow these steps to enable OTel Logs API support in your application.
     ```ini
     datadog.logs_otel_enabled = true
     ```
-4. Configure your application. The Datadog SDK automatically configures the OpenTelemetry LoggerProvider when your application loads. No additional code configuration is required.
+4. Initialize the OpenTelemetry LoggerProvider. The Datadog SDK provides a default value for `OTEL_EXPORTER_OTLP_LOGS_ENDPOINT` derived from the Datadog Agent, but it does not build the `LoggerProvider` itself. Use one of the following approaches:
 
-   If your Datadog Agent is running on a non-default location, configure the endpoint:
+    **Option A: Opt in to the OpenTelemetry SDK autoloader.** Set the following environment variables before your application starts:
+    ```sh
+    export OTEL_PHP_AUTOLOAD_ENABLED=true
+    export OTEL_LOGS_EXPORTER=otlp
+    # If you are not also using OTel API support for traces or metrics, disable those exporters:
+    export OTEL_TRACES_EXPORTER=none
+    export OTEL_METRICS_EXPORTER=none
+    ```
+    The OpenTelemetry SDK builds the `LoggerProvider` and registers it as the global instance.
+
+    **Option B: Wire the `LoggerProvider` in code.** Build the provider during your application bootstrap and register it on the global SDK:
+    ```php
+    use OpenTelemetry\API\Globals;
+    use OpenTelemetry\SDK\Common\Attribute\Attributes;
+    use OpenTelemetry\SDK\Common\Instrumentation\InstrumentationScopeFactory;
+    use OpenTelemetry\SDK\Common\Time\ClockFactory;
+    use OpenTelemetry\SDK\Logs\ExporterFactory;
+    use OpenTelemetry\SDK\Logs\LoggerProvider;
+    use OpenTelemetry\SDK\Logs\Processor\BatchLogRecordProcessor;
+    use OpenTelemetry\SDK\Sdk;
+
+    $exporter = (new ExporterFactory())->create();
+    $processor = new BatchLogRecordProcessor($exporter, ClockFactory::getDefault());
+    $loggerProvider = new LoggerProvider($processor, new InstrumentationScopeFactory(Attributes::factory()));
+
+    Sdk::builder()
+        ->setLoggerProvider($loggerProvider)
+        ->setAutoShutdown(true)
+        ->buildAndRegisterGlobal();
+    ```
+
+5. If your Datadog Agent runs on a non-default location, configure the endpoint:
     ```sh
     # Option 1: Using the Agent URL
     export DD_TRACE_AGENT_URL=http://your-agent-host:8126
@@ -1118,7 +1149,7 @@ Follow these steps to enable OTel Logs API support in your application.
     # Option 2: Using the Agent host
     export DD_AGENT_HOST=your-agent-host
     ```
-    The SDK automatically resolves the appropriate OTLP endpoint (port 4318 for HTTP, port 4317 for gRPC).
+    The Datadog SDK resolves the appropriate OTLP endpoint (port 4318 for HTTP, port 4317 for gRPC).
 {% /if %}
 
 ## Examples
@@ -1534,12 +1565,11 @@ To export logs written with Monolog through the OTel pipeline, attach the OpenTe
 
 ```php
 use Monolog\Logger;
-use Monolog\Level;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\Contrib\Logs\Monolog\Handler;
 
 $loggerProvider = Globals::loggerProvider();
-$handler = new Handler($loggerProvider, Level::Info);
+$handler = new Handler($loggerProvider, Logger::INFO);
 
 $monolog = new Logger('my-service');
 $monolog->pushHandler($handler);
@@ -1554,7 +1584,7 @@ Other Monolog handlers attached to the same logger continue to receive `dd.*` tr
 
 ### Trace and log correlation {% #trace-log-correlation-php %}
 
-Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are added to the log record.
+Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are added to the log record. To create spans with the OpenTelemetry tracing API as shown below, also set `DD_TRACE_OTEL_ENABLED=true`.
 
 ```php
 use OpenTelemetry\API\Globals;
@@ -1709,7 +1739,8 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 - Verify OpenTelemetry SDK version. Version 1.0.0 or later is required.
 - Verify `open-telemetry/exporter-otlp` is installed.
 - Verify `DD_LOGS_OTEL_ENABLED=true` is set before your application starts.
-- If `OpenTelemetry\API\Globals::loggerProvider()` returns a proxy or no-op provider, the OTel SDK has not autoloaded. Confirm `open-telemetry/sdk` is installed and that its Composer autoloader runs before your application code.
+- If `OpenTelemetry\API\Globals::loggerProvider()` returns a proxy or no-op provider, the global `LoggerProvider` was never registered. Either set `OTEL_PHP_AUTOLOAD_ENABLED=true` to use the OpenTelemetry SDK autoloader, or build a `LoggerProvider` in code and register it with `Sdk::builder()->setLoggerProvider(...)->buildAndRegisterGlobal()`.
+- If `OTEL_PHP_AUTOLOAD_ENABLED=true` activates traces or metrics export you did not intend, set `OTEL_TRACES_EXPORTER=none` and `OTEL_METRICS_EXPORTER=none` to disable the unused signals.
 - If your logs reach the destination but no trace correlation appears on a Monolog logger, confirm the OpenTelemetry Monolog handler is attached to that logger. Loggers without the handler still receive `dd.*` fields in their message context instead.
 - Enable debug logging with `DD_TRACE_DEBUG=true` to see detailed logs.
 {% /if %}
