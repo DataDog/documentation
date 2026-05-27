@@ -4,7 +4,7 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 
 ---
 
-{{< site-region region="gov, gov2" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -12,7 +12,7 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 
 Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
 
-- [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without an AI coding assistant. |
+- [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without an AI coding assistant.
 - [MCP Server](#mcp-server): Set up Datadog through an LLM coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
