@@ -118,11 +118,6 @@ multifiltersearch:
       recommendation_description: A service repeatedly exhausts its connection pool to a downstream dependency, queueing requests and causing latency spikes or failures under load.
       recommendation_prerequisite: APM + AI Recs (Preview)
     - category: Reliability
-      recommendation_type: Error Rate
-      scope: Backend services
-      recommendation_description: A service's error rate is elevated relative to its baseline, indicating a regression or fault pattern worth investigating.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Reliability
       recommendation_type: Error Misclassification
       scope: Backend services
       recommendation_description: A service surfaces expected outcomes as errors in APM, inflating endpoint error rates and obscuring real reliability regressions.
@@ -137,7 +132,7 @@ APM Recommendations help you improve your applications' performance and reliabil
 
 {{< img src="/tracing/recommendations/apm_recommendations-3.png" alt="APM Recommendations page with summary cards for reliability and performance issues and a list of recommendations to review" style="width:100%;" >}}
 
-{{< callout url="https://dd-corpsite.datadoghq.com/forms/share/40936700d6123ffbbc27558024da17058b7e7988f00ea24126df892f1730fbc9" header="Join the AI Recommendations Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/apm-ai-recommendations/" header="Join the AI Recommendations Preview!" >}}
 AI-driven recommendation types are now available, expanding the set of [optimization opportunities](?recommendation_prerequisite=APM+%2B+AI+Recs+%28Preview%29#supported-recommendations) Datadog can detect.
 {{< /callout >}}
 
