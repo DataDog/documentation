@@ -169,14 +169,14 @@ With the Slack integration, replies in Slack notification threads linked to a ca
 
 **To configure Slack thread mirroring**:
 
-Ensure the [Slack integration][9] is configured for your Datadog organization.
+Make sure the [Slack integration][9] is configured for your Datadog organization.
 
 Slack thread mirroring is enabled by default for all Case Management projects. To disable it for a specific project:
-1. Go to [**Project Settings**][1] and click on a project to expand its settings.
+1. Navigate to [**Project Settings**][1] and click on a project to expand its settings.
 1. In the expanded menu, click **Integrations** > **Slack**.
-1. Toggle off **Slack thread mirroring**
+1. Toggle off **Slack thread mirroring**.
 
-### How It Works
+### How it works
 
 - For any case notifications sent to Slack, activity in the notification thread is mirrored back to the case.
 - Mirrored activity includes any text replies (attachments are not supported). Each mirrored message shows the Slack user's name and Slack as the source.
