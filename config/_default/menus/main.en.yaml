@@ -8113,6 +8113,11 @@ menu:
       parent: application_security_api_security
       identifier: asm_api_security
       weight: 1
+    - name: API Endpoints
+      url: security/application_security/api_posture/api_inventory/api_endpoints/
+      parent: asm_api_security
+      identifier: asm_api_security_api_endpoints
+      weight: 10000
     - name: Services
       url: security/application_security/api_posture/api_inventory/services/
       parent: asm_api_security
