@@ -1,5 +1,6 @@
 ---
 title: Export API
+description: Reference for the LLM Observability Export API, which provides endpoints to search and retrieve span data for external evaluations or offline storage.
 ---
 
 ## Overview

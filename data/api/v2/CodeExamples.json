@@ -154,11 +154,53 @@
       "description": "Delete Multiple Apps returns \"OK\" response"
     }
   ],
+  "UpdateAppVersionName": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Name App Version returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppFavorite": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Favorite Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateProtectionLevel": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Protection Level returns \"OK\" response"
+    }
+  ],
+  "UpdateAppSelfService": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Self-Service Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppTags": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Tags returns \"No Content\" response"
+    }
+  ],
   "UpdateApp": [
     {
       "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
+    }
+  ],
+  "CreateApplicationSecurityWafPolicy": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF Policy returns \"Created\" response"
     }
   ],
   "CreateApplicationSecurityWafExclusionFilter": [
@@ -1554,6 +1596,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1785209526",
+      "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
     },
@@ -1576,6 +1623,11 @@
       "group": "observability_pipelines",
       "suffix": "_2960728933",
       "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1130701356",
+      "description": "Validate an observability pipeline with Splunk HEC source valid_tokens returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -1983,6 +2035,11 @@
       "group": "security_monitoring",
       "suffix": "_1965169892",
       "description": "Create a detection rule with type 'application_security 'returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3243059428",
+      "description": "Create a detection rule with type 'impossible_travel' and baselineUserLocationsDuration returns \"OK\" response"
     },
     {
       "group": "security_monitoring",

@@ -139,12 +139,12 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
 ## Explore traces in Datadog
 
-1. In Datadog, go to [**APM** > **Services**][3]. You should see a Python service named `hello`:
+1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3]. You should see a Python service named `hello`:
 
    {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
 
 1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
-1. Go to [**APM** > **Traces**][4]. You should see a trace for the `hello` service:
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]. You should see a trace for the `hello` service:
 
    {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace explorer shows the trace for the hello service." style="width:100%;" >}}
 
@@ -200,13 +200,13 @@ To add custom instrumentation:
    ```shell
    curl http://0.0.0.0:5050/
    ```
-1. In Datadog, go to [**APM** > **Traces**][4].
-1. Select the **hello** trace.
+1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4].
+1. Select the `hello` trace.
 1. Find the new custom `get_quote` span in the flame graph and hover over it:
 
    {{< img src="/getting_started/apm/custom-instrumentation.png" alt="The get_quote custom span displays in the flame graph. On hover, the quote span tag is displayed. " style="width:100%;" >}}
 
-1. Notice that the custom `quote` span tag displays on the **Info** tab.
+1. Notice that the custom `quote` span tag displays on the {{< ui >}}Info{{< /ui >}} tab.
 
 ## What's next?
 

@@ -73,6 +73,8 @@ further_reading:
 
 ## Architecture
 {{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
+    {{< nextlink href="/dashboards/widgets/cloudcraft_diagram"
+        img="dashboards/widgets/icons/cloudcraft_light_large.svg">}} Cloudcraft Diagram{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap"
         img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/topology_map"

@@ -14,7 +14,7 @@ title: Suivi des déploiements
 ---
 ## La balise de version {#the-version-tag}
 
-La balise `version` est réservée au sein du Tagging de service unifié. Elle est appliquée aux métriques d'infrastructure (hôte, conteneur, processus et vérifications NPM), aux métriques de trace, aux traces, aux profils et aux journaux.
+La balise `version` est réservée au sein du Tagging de service unifié. Elle est appliquée aux métriques d'infrastructure (hôte, conteneur, processus et NPM checks), aux métriques de trace, aux traces, aux profils et aux journaux.
 
 Vous pouvez utiliser la balise `version` pour surveiller les déploiements et le comportement des services en soutien à votre stratégie de déploiement logiciel.
 
@@ -68,7 +68,7 @@ Vous pouvez ajouter ou supprimer des colonnes de ce tableau de synthèse et vos 
 - Nombre total d'erreurs.
 - Latence mesurée par p50, p75, p90, p95, p99 ou max.
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions sur la Page de service" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions sur la page de service" style="width:100%;">}}
 
 **Remarque :** La section des versions apparaît uniquement s'il y a plus d'une version rapportant pendant l'intervalle de temps sélectionné en haut de la page.
 
@@ -84,11 +84,11 @@ La page de comparaison de versions affiche les informations suivantes :
 
 ### Graphiques de comparaison {#comparison-graphs}
 
-Semblables aux graphiques de la page Service, les graphiques de Requêtes et d'Erreurs montrent un aperçu d'un déploiement ou des pics dans les taux d'erreur. Sur cette page, les graphiques mettent en évidence les versions sélectionnées pour la comparaison et laissent toutes les autres versions en gris pour un contexte supplémentaire.
+Semblables aux graphiques de la page de service, les graphiques de Requêtes et d'Erreurs montrent un aperçu d'un déploiement ou des pics dans les taux d'erreur. Sur cette page, les graphiques mettent en évidence les versions sélectionnées pour la comparaison et laissent toutes les autres versions en gris pour un contexte supplémentaire.
 
 {{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="Graphiques de comparaison de déploiement" style="width:100%;">}}
 
-Si [le Profiler Continu est activé][5], vous voyez également des comparaisons des indicateurs de performance clés, tels que le Temps CPU ou la mémoire allouée, décomposés par ressource APM. À partir de là, vous pouvez accéder à la [Page de comparaison de profil][6] :
+Si [le Profiler Continu est activé][5], vous voyez également des comparaisons des indicateurs de performance clés, tels que le Temps CPU ou la Mémoire Allouée, décomposés par ressource APM. À partir de là, vous pouvez passer à la [Page de comparaison de profil][6] :
 
 {{< img src="tracing/deployment_tracking/DeploymentTrackingProfileComparison.png" alt="Graphiques de comparaison de profil de déploiement" style="width:100%;">}}
 
@@ -102,13 +102,13 @@ Cette section répertorie les différences en termes de types d'erreur détecté
 
 Ce tableau vous permet d'afficher les traces recueillies en temps réel ou les traces historiques correspondant à l'erreur sélectionnée pour effectuer un examen plus poussé.
 
-**Remarque:** La comparaison des erreurs est basée sur les types d'erreurs _observés_. Si un type d'erreur est rare, il pourrait être listé comme n'apparaissant plus uniquement parce qu'il n'a pas été vu _encore_.
+**Remarque :** La comparaison des erreurs est basée sur les types d'erreurs _observés_. Si un type d'erreur est rare, il pourrait être listé comme n'apparaissant plus uniquement parce qu'il n'a pas été vu _encore_.
 
 {{< img src="tracing/deployment_tracking/ErrorComparison.mp4" alt="Comparaison des erreurs" video=true style="width:100%;">}}
 
 ### Comparaison des points de terminaison {#endpoint-comparison}
 
-Cette section vous permet de comparer la performance (requêtes, latence et erreurs) de chaque point de terminaison dans le service. Triez le tableau par Valeur pour valider que les points de terminaison à fort débit sont toujours sains après un déploiement, ou par % Changement pour repérer de grands changements dans la latence ou les taux d'erreur.
+Cette section vous permet de comparer la performance (requêtes, latence et erreurs) de chaque point de terminaison dans le service. Triez le tableau par Valeur pour valider que les points de terminaison à fort débit sont toujours sains après un déploiement, ou par % de Changement pour repérer de grands changements dans la latence ou les taux d'erreur.
 
 {{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="Comparaison des points de terminaison" style="width:100%;">}}
 
@@ -128,7 +128,7 @@ Vous pouvez utiliser Datadog pour surveiller vos déploiements progressifs et d�
 
 Les déploiements bleus et verts (ou dans toute autre combinaison de couleurs) permettent de réduire les downtimes en exécutant deux clusters de services qui acceptent tous les deux le trafic, ou en maintenant l'un d'eux en veille, mais prêt à prendre le relais en cas de problème avec l'autre.
 
-Définir et visualiser les `version` balises pour ces services vous permet de comparer les requêtes et les erreurs afin de détecter si l'un des clusters a un taux d'erreur plus élevé que l'autre cluster, si un cluster ne respecte pas les SLO, ou si un cluster qui ne devrait pas recevoir de trafic le fait.
+Définir et visualiser les balises `version` pour ces services vous permet de comparer les requêtes et les erreurs afin de détecter si l'un des clusters affiche un taux d'erreur supérieur à l'autre, si un cluster ne respecte pas les SLO ou si un cluster qui ne devrait pas recevoir de trafic en reçoit.
 
 {{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="Déploiement bleu/vert" style="width:100%;">}}
 
@@ -146,11 +146,11 @@ Sur l'image suivante, on constate par exemple qu'une version Canary a été dép
 
 Lors d'un déploiement fantôme, une version release candidate est déployée avec la version de production et le trafic entrant est envoyé aux deux services. Les utilisateurs constatent uniquement les résultats de la version de production, mais vous recueillez les données des deux versions.
 
-Les déploiements shadow vous permettent de tester une version potentielle contre un trafic de production réel. Taguer les déploiements shadow avec une balise `version` vous permet de comparer les taux d'erreur, les traces et le comportement des services entre les deux versions pour déterminer si la version shadow doit être publiée.
+Le déploiement en ombre vous permet de tester une version potentielle contre un trafic de production réel. Appliquer la balise `version` aux déploiements en ombre vous permet de comparer les taux d'erreur, les traces et le comportement des services entre les deux versions afin de déterminer si la version en ombre doit être publiée.
 
 ## Utilisation des balises de version ailleurs dans Datadog {#using-version-tags-elsewhere-within-datadog}
 
-La balise `version` peut être utilisée n'importe où dans Datadog, que ce soit pour filtrer une vue de recherche vers une version spécifique, ou pour comparer des métriques de différentes versions.
+La balise `version` peut être utilisée n'importe où dans Datadog, que ce soit pour filtrer une vue de recherche à une version spécifique, ou pour comparer des métriques de différentes versions.
 
 ### Page des ressources {#resource-page}
 
@@ -161,7 +161,7 @@ Sur la page Ressource, si le tag « version » est disponible, vous pouvez dé
 - Requêtes totales par version
 - Requêtes par seconde par version
 
-Le widget des erreurs peut être limité à l'une des trois options qui impliquent la balise `version`:
+Le widget des erreurs peut être limité à l'une des trois options qui impliquent la balise `version` :
 
 - Total des erreurs par version
 - Erreurs par seconde par version
@@ -173,9 +173,9 @@ Toutes ces informations peuvent être exportées vers des dashboards et des moni
 
 {{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.mp4" alt="Version dans l'analyse d'application" video=true style="width:100%;">}}
 
-Lorsque disponible, `version` peut être utilisé comme un tag pour la recherche de traces et les analyses, soit pour filtrer le mode de recherche en direct et les traces indexées, soit pour filtrer ou regrouper les requêtes d'analyses.
+Lorsque disponible, `version` peut être utilisé comme une balise pour la recherche de traces et les analyses, soit pour filtrer le mode de recherche en direct et les traces indexées, soit pour filtrer ou regrouper les requêtes d'analyses.
 
-Les analyses, y compris le filtrage sur le tag `version`, peuvent être exportées vers des tableaux de bord et des moniteurs.
+Les analyses, y compris le filtrage sur la balise `version`, peuvent être exportées vers des tableaux de bord et des moniteurs.
 
 ### Profils par version {#profiles-by-version}
 
@@ -211,7 +211,7 @@ Temps entre les déploiements
 : `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist} = 10`
 
 
-Si vous déployez la version X à Temps = 20 sur le cluster `dev-shopist`, la version Y à Temps = 30 sur le cluster `us-staging`, et la version Y à nouveau à Temps = 45 sur le cluster `dev-shopist`, la valeur `max` de la métrique `datadog.service.time_between_deployments` pour n'importe quel cluster est 25 (le temps du Y le plus récent moins le dernier X) : 
+Si vous déployez la version X à l'heure = 20 sur le cluster `dev-shopist`, la version Y à l'heure = 30 sur le cluster `us-staging`, et la version Y à nouveau à l'heure = 45 sur le cluster `dev-shopist`, la valeur `max` de la métrique `datadog.service.time_between_deployments` pour n'importe quel cluster est 25 (le temps du Y le plus récent moins le dernier X) : 
 
 Temps = 20
 : `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`

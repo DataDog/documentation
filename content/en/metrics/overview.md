@@ -1,5 +1,6 @@
 ---
 title: Metrics Overview Page
+description: "Use the Metrics Overview page to explore your metric sources, generate metrics from Datadog products, and enable advanced platform features."
 further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"

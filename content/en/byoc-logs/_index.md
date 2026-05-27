@@ -2,7 +2,7 @@
 title: BYOC Logs
 description: Learn how to deploy and manage Datadog BYOC Logs, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-datadog-cloudprem/"
+- link: "https://www.datadoghq.com/blog/introducing-datadog-byoc-logs/"
   tag: "Blog"
   text: "Store and search logs at petabyte scale in your own infrastructure with Datadog BYOC Logs"
 aliases:
