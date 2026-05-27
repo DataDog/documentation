@@ -302,7 +302,7 @@ comments:
   disabled: true
 ```
 
-When `comments.disabled` is set to `true`, Datadog stops adding the Code Coverage section to the pull request summary comment. PR Gate checks are not affected: any gates configured in this file or in the Datadog UI continue to evaluate and report their status as commit checks.
+When `comments.disabled` is set to `true`, Datadog stops adding the Code Coverage section to the pull request summary comment. PR Gate checks are not affected.
 
 The `comments` block accepts the following fields:
 
