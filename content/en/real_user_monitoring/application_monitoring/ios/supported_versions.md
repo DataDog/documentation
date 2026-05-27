@@ -23,6 +23,9 @@ further_reading:
    text: "Learn about instrumenting SwiftUI applications"
 ---
 
+## Overview
+
+The Datadog iOS SDK is the single SDK for instrumenting Real User Monitoring on all Apple platforms — iOS, iPadOS, tvOS, watchOS, and visionOS. Use this page to confirm the minimum OS version, dependency manager, and Datadog modules available for each platform.
 
 ## Supported versions
 

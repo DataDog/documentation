@@ -88,14 +88,14 @@ More information about OpenFeature SDK configuration options can be found in its
 
 ### Step 2: Create a feature flag
 
-Go to [**Create Feature Flag**][2] in Datadog and configure the following:
+Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the following:
 
 - **Name and key**: The flag's display name and the key referenced in code
 - **Variant type** and **variant values**: See [Variants and Flag Types][5]
 - **Distribution channels**: See [Distribution Channels][6]
 
 <div class="alert alert-warning">
-  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
+  {{< ui >}}Flag keys{{< /ui >}}, {{< ui >}}variant keys{{< /ui >}}, and {{< ui >}}variant values{{< /ui >}} should be considered public when sent to client SDKs.
 </div>
 
 {{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
@@ -142,7 +142,7 @@ For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
 ### Step 5: Monitor your rollout
 
-Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with the flag, view the **Real-Time Metric Overview** panel in the Datadog UI to see how the feature impacts application performance.
+Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-Time Metric Overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 

@@ -47,7 +47,7 @@ Select your visualization from the available [widgets][3].
 
 Choose the metric to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`.
 
-You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's {{< ui >}}Semantic Mode{{< /ui >}} selector to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
+You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's [Telemetry source][19] query modifier to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
@@ -267,3 +267,4 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [16]: /dashboards/widgets/timeseries/#event-overlay
 [17]: /logs/explorer/search_syntax/
 [18]: /metrics/open_telemetry/query_metrics
+[19]: /dashboards/functions/telemetry_source/

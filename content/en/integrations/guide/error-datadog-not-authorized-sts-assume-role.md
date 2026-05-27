@@ -1,5 +1,6 @@
 ---
 title: "Error: Datadog is not authorized to perform sts:AssumeRole"
+description: "Troubleshoot the sts:AssumeRole error in the Datadog AWS integration by checking the IAM role's trust relationship and policy."
 
 further_reading:
 - link: "/integrations/amazon_web_services/#installation"
@@ -16,7 +17,7 @@ Check the following points for the AWS account mentioned in the error:
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
-2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below:
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below. Replace `<DATADOG_AWS_ACCOUNT_ID>` with {{< region-param key="aws_customer_access_id" code="true" >}}:
 
 {{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
 
@@ -26,7 +27,7 @@ Check the following points for the AWS account mentioned in the error:
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::{{< region-param key="aws_customer_access_id" >}}:root"
+                "AWS": "arn:aws:iam::<DATADOG_AWS_ACCOUNT_ID>:root"
             },
             "Action": "sts:AssumeRole",
             "Condition": {
@@ -47,7 +48,7 @@ Check the following points for the AWS account mentioned in the error:
 {{< site-region region="gov,gov2" >}}
 1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
-2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured with the correct Datadog account ID for your AWS partition. Use {{< region-param key="aws_customer_access_id" code="true" >}} for commercial AWS accounts or {{< region-param key="aws_customer_access_govcloud_id" code="true" >}} for GovCloud accounts:
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured with the correct Datadog account ID for your AWS partition. Replace `<DATADOG_AWS_ACCOUNT_ID>` in the following example with {{< region-param key="aws_customer_access_id" code="true" >}} for commercial AWS accounts or {{< region-param key="aws_customer_access_govcloud_id" code="true" >}} for GovCloud accounts:
 
 {{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
 
@@ -57,7 +58,7 @@ Check the following points for the AWS account mentioned in the error:
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::{{< region-param key="aws_customer_access_id" >}}:root"
+                "AWS": "arn:aws:iam::<DATADOG_AWS_ACCOUNT_ID>:root"
             },
             "Action": "sts:AssumeRole",
             "Condition": {
