@@ -213,6 +213,10 @@ Datadog's Continuous Profiler is available in preview for Python and Node.js on 
 
 To enable the [Continuous Profiler][10], set the environment variable `DD_PROFILING_ENABLED=true`.
 
+## Data Streams Monitoring
+
+To enable the [Data Streams Monitoring][11], set the environment variable `DD_DATA_STREAMS_ENABLED=true`. If you are consuming messages you will need to [manually extract the DSM context][11] from the inbound message. 
+
 ## Troubleshooting
 
 ### Enable debug logs
@@ -239,3 +243,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
 [9]: /serverless/azure_app_service/windows_code/?tab=net
 [10]: /profiler/
+[11]: /data_streams/setup/technologies/azure_serverless
