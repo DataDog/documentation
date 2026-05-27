@@ -30,7 +30,7 @@ If `ddtest` selects more or fewer CI nodes than expected, review these settings:
 
 - `--min-parallelism`: Minimum CI node or worker count considered by `ddtest`.
 - `--max-parallelism`: Maximum CI node or worker count considered by `ddtest`.
-- `--ci-job-overhead`: Modeled overhead for adding one CI node.
+- `--ci-job-overhead`: Estimated overhead for launching an additional CI node.
 
 Increase `--ci-job-overhead` to prefer fewer CI nodes. Decrease it to prefer faster wall-clock time.
 
@@ -39,23 +39,11 @@ Increase `--ci-job-overhead` to prefer fewer CI nodes. Decrease it to prefer fas
 If Test Impact Analysis does not skip tests before Test Parallelization runs, check that:
 
 - Test Impact Analysis is enabled for the test service.
-- The repository, branch, and commit metadata are available in Test Optimization.
+- The `git` executable is present, and you run `ddtest` in a Git repository with a `.git` folder.
 - The job that runs `ddtest plan` and the job that runs tests use the same `DD_SERVICE` value.
-- The runtime tags from the test run match the environment used for skippable test data.
-- The commit being tested has changes that Test Impact Analysis can evaluate.
+- `ddtest plan` runs on the same OS and language runtime as your tests.
 
 For more information, see [Test Impact Analysis troubleshooting][1].
-
-## Local runs do not match CI skips
-
-Skippable tests are scoped by runtime environment. A local run on macOS does not automatically reuse skippable test data calculated on Linux CI.
-
-Use `--runtime-tags` or `DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS` to pass CI runtime tags when running `ddtest` locally:
-
-{{< code-block lang="bash" >}}
-export DD_TEST_OPTIMIZATION_RUNNER_RUNTIME_TAGS='{"os.platform":"linux","runtime.name":"ruby","runtime.version":"3.3.0"}'
-bin/ddtest run
-{{< /code-block >}}
 
 ## Minitest does not run the selected files
 
