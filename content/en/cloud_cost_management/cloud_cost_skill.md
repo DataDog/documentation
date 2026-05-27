@@ -1,13 +1,13 @@
 ---
-title: Cloud Cost Skill in Bits Assistant
-description: Use the Cloud Cost skill in Bits Assistant to investigate, explain, and share cloud cost findings.
+title: Cloud Cost Skill in Bits AI Assistant
+description: Use the Cloud Cost skill in Bits AI Assistant to investigate, explain, and share cloud cost findings.
 algolia:
-  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits assistant", "mcp"]
+  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits ai assistant", "bits assistant", "mcp"]
   rank: 75
 further_reading:
 - link: "/bits_ai/bits_assistant/"
   tag: "Documentation"
-  text: "Bits Assistant"
+  text: "Bits AI Assistant"
 - link: "/bits_ai/mcp_server/"
   tag: "Documentation"
   text: "Datadog MCP Server"
@@ -20,12 +20,12 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Cloud Cost skill is in Preview" >}}
-The Cloud Cost skill runs in Bits Assistant. Fill out the Bits Assistant Preview form to request access.
+The Cloud Cost skill runs in Bits AI Assistant. Fill out the Bits AI Assistant Preview form to request access.
 {{< /callout >}}
 
 ## Overview
 
-The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis, budget tracking, and general cost questions. For example, you can ask Bits Assistant to:
+The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits AI Assistant][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and general cost questions. For example, you can ask Bits AI Assistant to:
 
 - Investigate [cost monitor alerts][2], [cost anomalies][3], and [cost changes][4]
 - Identify teams, services, accounts, regions, or resources driving spend
@@ -36,7 +36,7 @@ The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Ass
 
 ## Prerequisites
 
-To use the Cloud Cost skill in Bits Assistant, you must:
+To use the Cloud Cost skill in Bits AI Assistant, you must:
 
 - [Set up Cloud Cost Management][6] for the cost sources you want to analyze
 - Have these permissions:
@@ -50,7 +50,7 @@ To use the Cloud Cost skill in Bits Assistant, you must:
 
 When you want to start an investigation, such as for a [cost anomaly][3], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the Cloud Cost skill.
 
-Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open the Bits Assistant and ask a cost question.
+Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open Bits AI Assistant and ask a cost question.
 
 Example prompts:
 
@@ -62,16 +62,16 @@ Example prompts:
 
 ### Cost change investigations
 
-When you investigate a cost change with the Cloud Cost skill, Bits Assistant provides a concise summary, then asks what you want to explore next. The initial analysis typically includes:
+When you investigate a cost change with the Cloud Cost skill, Bits AI Assistant provides a concise summary, then asks what you want to explore next. The initial analysis typically includes:
 
 - A daily cost chart for the baseline and investigation periods
 - The baseline period, investigation period, total dollar amount and percentage change, and projected annual impact when applicable
 - Rate-versus-usage context to help distinguish price changes from consumption changes
 - Owner or team attribution based on your cost tags
 
-{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
+{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits AI Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
 
-After the initial summary, Bits Assistant can:
+After the initial summary, Bits AI Assistant can:
 
 - Find the top services, accounts, regions, resources, or tags driving the change
 - Correlate the cost change with metrics such as CPU requests, memory requests, request count, bucket size, or database usage
@@ -81,14 +81,14 @@ After the initial summary, Bits Assistant can:
 
 ### Budgets and forecasting
 
-After setting up [Budgets][5], use the Cloud Cost skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
+After setting up [Budgets][5], use the Cloud Cost skill in Bits AI Assistant to explain budget status and spending. Bits AI Assistant can help summarize:
 
 - Actual spend versus budgeted amount
 - Forecasted spend versus budgeted amount
 - Which cost scope a budget covers, based on the budget's filters
 - Which budget entries, teams, services, or providers are contributing to an overage
 
-After the initial summary, Bits Assistant can:
+After the initial summary, Bits AI Assistant can:
 
 - Find the top services, accounts, regions, resources, or tags driving spending
 - Identify the teams that own the resources contributing to the cost change

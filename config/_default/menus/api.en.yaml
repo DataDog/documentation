@@ -2580,6 +2580,58 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Get tree-sitter WASM file
+      url: '#get-tree-sitter-wasm-file'
+      identifier: security-monitoring-get-tree-sitter-wasm-file
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisTreeSitterWasm
+        unstable:
+          - v2
+        order: 117
+    - name: Get node types for a language
+      url: '#get-node-types-for-a-language'
+      identifier: security-monitoring-get-node-types-for-a-language
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisNodeTypes
+        unstable:
+          - v2
+        order: 118
+    - name: Get AST for source code
+      url: '#get-ast-for-source-code'
+      identifier: security-monitoring-get-ast-for-source-code
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStaticAnalysisAst
+        unstable:
+          - v2
+        order: 116
+    - name: Analyze code
+      url: '#analyze-code'
+      identifier: security-monitoring-analyze-code
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStaticAnalysisServerAnalysis
+        unstable:
+          - v2
+        order: 115
     - name: Returns a list of Secrets rules
       url: '#returns-a-list-of-secrets-rules'
       identifier: security-monitoring-returns-a-list-of-secrets-rules
@@ -2593,6 +2645,19 @@ menu:
         unstable:
           - v2
         order: 78
+    - name: Get a SAST ruleset
+      url: '#get-a-sast-ruleset'
+      identifier: security-monitoring-get-a-sast-ruleset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisRuleset
+        unstable:
+          - v2
+        order: 112
     - name: Ruleset get multiple
       url: '#ruleset-get-multiple'
       identifier: security-monitoring-ruleset-get-multiple
@@ -2606,6 +2671,32 @@ menu:
         unstable:
           - v2
         order: 79
+    - name: Get default rulesets for a language
+      url: '#get-default-rulesets-for-a-language'
+      identifier: security-monitoring-get-default-rulesets-for-a-language
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisDefaultRulesets
+        unstable:
+          - v2
+        order: 114
+    - name: List codegen rulesets
+      url: '#list-codegen-rulesets'
+      identifier: security-monitoring-list-codegen-rulesets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStaticAnalysisCodegenRulesets
+        unstable:
+          - v2
+        order: 113
     - name: Get a job's hist signals
       url: '#get-a-jobs-hist-signals'
       identifier: security-monitoring-get-a-jobs-hist-signals
@@ -3130,6 +3221,110 @@ menu:
         unstable:
           - v2
         order: 111
+    - name: Get the version history of a dataset
+      url: '#get-the-version-history-of-a-dataset'
+      identifier: security-monitoring-get-the-version-history-of-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetVersionHistory
+        unstable:
+          - v2
+        order: 126
+    - name: Get a dataset at a specific version
+      url: '#get-a-dataset-at-a-specific-version'
+      identifier: security-monitoring-get-a-dataset-at-a-specific-version
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetByVersion
+        unstable:
+          - v2
+        order: 125
+    - name: Update a dataset
+      url: '#update-a-dataset'
+      identifier: security-monitoring-update-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 123
+    - name: Get a dataset
+      url: '#get-a-dataset'
+      identifier: security-monitoring-get-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 122
+    - name: Delete a dataset
+      url: '#delete-a-dataset'
+      identifier: security-monitoring-delete-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 124
+    - name: Get dataset dependencies
+      url: '#get-dataset-dependencies'
+      identifier: security-monitoring-get-dataset-dependencies
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchGetSecurityMonitoringDatasetDependencies
+        unstable:
+          - v2
+        order: 121
+    - name: Create a dataset
+      url: '#create-a-dataset'
+      identifier: security-monitoring-create-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 120
+    - name: List datasets
+      url: '#list-datasets'
+      identifier: security-monitoring-list-datasets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringDatasets
+        unstable:
+          - v2
+        order: 119
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -7018,6 +7213,66 @@ menu:
       url: /api/latest/application-security/
       identifier: application-security
       generated: true
+    - name: Update a WAF Policy
+      url: '#update-a-waf-policy'
+      identifier: application-security-update-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafPolicy
+        unstable: []
+        order: 8
+    - name: Get a WAF Policy
+      url: '#get-a-waf-policy'
+      identifier: application-security-get-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafPolicy
+        unstable: []
+        order: 6
+    - name: Delete a WAF Policy
+      url: '#delete-a-waf-policy'
+      identifier: application-security-delete-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafPolicy
+        unstable: []
+        order: 9
+    - name: Create a WAF Policy
+      url: '#create-a-waf-policy'
+      identifier: application-security-create-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafPolicy
+        unstable: []
+        order: 7
+    - name: List all WAF policies
+      url: '#list-all-waf-policies'
+      identifier: application-security-list-all-waf-policies
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWAFPolicies
+        unstable: []
+        order: 10
     - name: Update a WAF exclusion filter
       url: '#update-a-waf-exclusion-filter'
       identifier: application-security-update-a-waf-exclusion-filter
@@ -7089,7 +7344,7 @@ menu:
         operationids:
           - UpdateApplicationSecurityWafCustomRule
         unstable: []
-        order: 7
+        order: 14
     - name: Get a WAF custom rule
       url: '#get-a-waf-custom-rule'
       identifier: application-security-get-a-waf-custom-rule
@@ -7101,7 +7356,7 @@ menu:
         operationids:
           - GetApplicationSecurityWafCustomRule
         unstable: []
-        order: 6
+        order: 11
     - name: Delete a WAF Custom Rule
       url: '#delete-a-waf-custom-rule'
       identifier: application-security-delete-a-waf-custom-rule
@@ -7113,7 +7368,7 @@ menu:
         operationids:
           - DeleteApplicationSecurityWafCustomRule
         unstable: []
-        order: 8
+        order: 15
     - name: Create a WAF custom rule
       url: '#create-a-waf-custom-rule'
       identifier: application-security-create-a-waf-custom-rule
@@ -7125,7 +7380,7 @@ menu:
         operationids:
           - CreateApplicationSecurityWafCustomRule
         unstable: []
-        order: 10
+        order: 12
     - name: List all WAF custom rules
       url: '#list-all-waf-custom-rules'
       identifier: application-security-list-all-waf-custom-rules
@@ -7137,7 +7392,7 @@ menu:
         operationids:
           - ListApplicationSecurityWAFCustomRules
         unstable: []
-        order: 9
+        order: 13
     - name: Audit
       url: /api/latest/audit/
       identifier: audit
@@ -16561,6 +16816,227 @@ menu:
         unstable:
           - v2
         order: 8
+    - name: Create Custom Ruleset
+      url: '#create-custom-ruleset'
+      identifier: static-analysis-create-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomRuleset
+        unstable:
+          - v2
+        order: 14
+    - name: List Custom Rulesets
+      url: '#list-custom-rulesets'
+      identifier: static-analysis-list-custom-rulesets
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomRulesets
+        unstable:
+          - v2
+        order: 13
+    - name: Get an AI custom rule revision
+      url: '#get-an-ai-custom-rule-revision'
+      identifier: static-analysis-get-an-ai-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiCustomRuleRevision
+        unstable:
+          - v2
+        order: 19
+    - name: Create an AI custom rule revision
+      url: '#create-an-ai-custom-rule-revision'
+      identifier: static-analysis-create-an-ai-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiCustomRuleRevision
+        unstable:
+          - v2
+        order: 20
+    - name: List AI custom rule revisions
+      url: '#list-ai-custom-rule-revisions'
+      identifier: static-analysis-list-ai-custom-rule-revisions
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiCustomRuleRevisions
+        unstable:
+          - v2
+        order: 21
+    - name: Get an AI custom rule
+      url: '#get-an-ai-custom-rule'
+      identifier: static-analysis-get-an-ai-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiCustomRule
+        unstable:
+          - v2
+        order: 23
+    - name: Delete an AI custom rule
+      url: '#delete-an-ai-custom-rule'
+      identifier: static-analysis-delete-an-ai-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiCustomRule
+        unstable:
+          - v2
+        order: 22
+    - name: Create an AI custom rule
+      url: '#create-an-ai-custom-rule'
+      identifier: static-analysis-create-an-ai-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiCustomRule
+        unstable:
+          - v2
+        order: 24
+    - name: Update an AI custom ruleset
+      url: '#update-an-ai-custom-ruleset'
+      identifier: static-analysis-update-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiCustomRuleset
+        unstable:
+          - v2
+        order: 26
+    - name: Get an AI custom ruleset
+      url: '#get-an-ai-custom-ruleset'
+      identifier: static-analysis-get-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiCustomRuleset
+        unstable:
+          - v2
+        order: 27
+    - name: Delete an AI custom ruleset
+      url: '#delete-an-ai-custom-ruleset'
+      identifier: static-analysis-delete-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiCustomRuleset
+        unstable:
+          - v2
+        order: 25
+    - name: Create an AI custom ruleset
+      url: '#create-an-ai-custom-ruleset'
+      identifier: static-analysis-create-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiCustomRuleset
+        unstable:
+          - v2
+        order: 28
+    - name: List AI custom rulesets
+      url: '#list-ai-custom-rulesets'
+      identifier: static-analysis-list-ai-custom-rulesets
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiCustomRulesets
+        unstable:
+          - v2
+        order: 29
+    - name: List AI prompts
+      url: '#list-ai-prompts'
+      identifier: static-analysis-list-ai-prompts
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiPrompts
+        unstable:
+          - v2
+        order: 15
+    - name: Delete an AI memory violation result
+      url: '#delete-an-ai-memory-violation-result'
+      identifier: static-analysis-delete-an-ai-memory-violation-result
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiMemoryViolationResult
+        unstable:
+          - v2
+        order: 16
+    - name: Create an AI memory violation result
+      url: '#create-an-ai-memory-violation-result'
+      identifier: static-analysis-create-an-ai-memory-violation-result
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiMemoryViolationResult
+        unstable:
+          - v2
+        order: 17
+    - name: List AI memory violation results
+      url: '#list-ai-memory-violation-results'
+      identifier: static-analysis-list-ai-memory-violation-results
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiMemoryViolationResults
+        unstable:
+          - v2
+        order: 18
     - name: POST request to resolve vulnerable symbols
       url: '#post-request-to-resolve-vulnerable-symbols'
       identifier: static-analysis-post-request-to-resolve-vulnerable-symbols
