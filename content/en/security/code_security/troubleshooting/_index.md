@@ -134,7 +134,7 @@ Datadog SBOM generator includes an opt-in parser that extracts Maven metadata em
 
 #### Requirements
 
-- `datadog-sbom-generator` version `1.10.2` or later. See the [releases page on GitHub](https://github.com/DataDog/datadog-sbom-generator/releases).
+- `datadog-sbom-generator` version `1.10.2` or later. See the [releases page on GitHub][25].
 - Each JAR must include Maven metadata at `META-INF/maven/<groupId>/<artifactId>/pom.properties`. JARs without this metadata are skipped with a warning, and scanning continues.
 
 To confirm the JAR parser is available in your installed version, run:
@@ -155,7 +155,7 @@ datadog-sbom-generator scan --enable-parsers jar /path/to/lib
 
 Replace `/path/to/lib` with the directory that contains your JAR files. The scanner walks the directory and reads metadata from every file with a `.jar` extension.
 
-**Important:** `--enable-parsers` replaces the default parser set. If you want to scan JARs and standard manifests in the same run, list every parser you need. Otherwise, run separate scans.
+<div class="alert alert-warning"><code>--enable-parsers</code> replaces the default parser set. To scan JARs and standard manifests in the same run, list every parser you need. Otherwise, run separate scans.</div>
 
 To scan JAR files and Maven manifests together:
 
@@ -390,3 +390,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [22]: /tracing/troubleshooting/
 [23]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
 [24]: /getting_started/site/
+[25]: https://github.com/DataDog/datadog-sbom-generator/releases
