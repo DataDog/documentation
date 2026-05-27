@@ -28,7 +28,7 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| Running jobs | Running jobs | View job executions that are currently running. |
+| [Running jobs][27] | Running jobs | View job executions that are currently running. |
 | [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
@@ -159,3 +159,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [24]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [25]: /glossary/#pipeline-execution-time
 [26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[27]: /glossary/#running-job
