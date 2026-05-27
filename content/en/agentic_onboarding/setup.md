@@ -152,7 +152,7 @@ Any MCP client that supports HTTP transport can connect to the Datadog MCP Serve
 
 ### Step 2: Authenticate the MCP Server
 
-1. When prompted to authenticate, press <kbd>Enter</kbd>. This opens the Datadog OAuth screen in your browser.
+1. After you install the MCP Server, your coding assistant prompts you to authenticate. Press <kbd>Enter</kbd> to open the Datadog OAuth screen in your browser.
 1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP Server access to your Datadog account.
 1. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
@@ -211,7 +211,9 @@ npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-clo
 
 {{< /tabs >}}
 
-The agent detects your stack, requests permission before each tool call, applies changes locally (without committing them), and prints verification steps. After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
+The agent detects your stack, requests permission before each tool call, applies changes locally (without committing them), and prints verification steps.
+
+After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
 
 ## Next steps
 
@@ -224,5 +226,5 @@ The agent detects your stack, requests permission before each tool call, applies
 [9]: https://app.datadoghq.com/functions
 [10]: https://app.datadoghq.com/logs/livetail
 [16]: /getting_started/site/
-[17]: https://claude.ai/code
+[17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/
