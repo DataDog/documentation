@@ -29,7 +29,7 @@ Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}}
 
 Cost Optimization Automation is different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
 
-**Note**: Cost Optimization Automation uses Datadog Workflows and incurs additional costs. For detailed pricing information, see the [Workflow Automation pricing page][8].
+**Note**: Cost Optimization Automation uses Datadog Workflows and incurs additional costs. For detailed pricing information, see the [Workflow Automation pricing page][3].
 
 ## Supported recommendation types
 
@@ -46,19 +46,19 @@ Cost Optimization Automation supports the following AWS recommendation types:
 
 ## Prerequisites
 
-- An AWS account configured with [Cloud Cost Recommendations][3] and actively generating recommendations.
+- An AWS account configured with [Cloud Cost Recommendations][4] and actively generating recommendations.
 - The **Cloud Cost Management - Cloud Cost Management Write** permission to create or edit an automation.
-- A [Workflow Automation connection][4] to each AWS account you want an automation to act on. Datadog uses this connection to assume an IAM role with the write permissions needed for the recommended action. Datadog grants only the permissions required for the selected recommendation type.
+- A [Workflow Automation connection][5] to each AWS account you want an automation to act on. Datadog uses this connection to assume an IAM role with the write permissions needed for the recommended action. Datadog grants only the permissions required for the selected recommendation type.
 - (Optional) A Slack or Microsoft Teams connection if you want approval messages routed to a channel.
 
 ## Set up an automation
 
 To set up an automation on a recurring schedule for a recommendation type:
 
-1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][5].
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][6].
 1. On the left side of the page, select the recommendation type.
 1. Click **Create New Automation**.
-1. In the {{< ui >}}AWS Connection{{< /ui >}} dropdown menu, select or create a [connection][6]. To act across multiple accounts with one automation, select or create a [connection group][7].
+1. In the {{< ui >}}AWS Connection{{< /ui >}} dropdown menu, select or create a [connection][7]. To act across multiple accounts with one automation, select or create a [connection group][8].
 1. In the {{< ui >}}Define scope{{< /ui >}} section:
     1. Enter tags to restrict the automation to resources matching those tags, such as `env`, `service`, and `team`.
     1. Enter the maximum resources per run to cap how many resources the automation acts on during a single execution. The automation prioritizes resources by highest potential savings.
@@ -109,9 +109,9 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 
 [1]: /cloud_cost_management/recommendations/
 [2]: /cloud_cost_management/recommendations/#recommendation-action-taking
-[3]: /cloud_cost_management/recommendations/#prerequisites
-[4]: /service_management/workflows/connections/
-[5]: https://app.datadoghq.com/cost/optimize/automations
-[6]: /actions/connections/
-[7]: /service_management/workflows/connections/#connection-groups
-[8]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[3]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[4]: /cloud_cost_management/recommendations/#prerequisites
+[5]: /service_management/workflows/connections/
+[6]: https://app.datadoghq.com/cost/optimize/automations
+[7]: /actions/connections/
+[8]: /service_management/workflows/connections/#connection-groups
