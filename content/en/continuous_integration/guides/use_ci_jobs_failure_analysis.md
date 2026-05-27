@@ -14,6 +14,8 @@ further_reading:
 
 This guide explains how to use CI jobs failure analysis to determine the most common root cause of failed CI jobs. This can help improve the user experience with CI pipelines.
 
+Datadog also uses this classifier to power [automatic job retries][10], which reruns jobs whose failures are likely transient.
+
 ### Understanding CI jobs failure analysis
 
 CI Visibility uses an LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
@@ -162,3 +164,4 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
 [8]:/continuous_integration/pipelines/azure/
 [9]:/logs/log_configuration/indexes#exclusion-filters
+[10]:/continuous_integration/pipelines/automatic_retries/

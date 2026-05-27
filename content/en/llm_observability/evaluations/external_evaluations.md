@@ -1,5 +1,6 @@
 ---
 title: External Evaluations
+description: Submit custom evaluations to LLM Observability using the Python SDK or the LLM Observability API to track user feedback and response quality.
 aliases:
     - /tracing/llm_observability/submit_evaluations
     - /llm_observability/submit_evaluations
@@ -75,7 +76,7 @@ def llm_call():
 
 ## Submitting external evaluations with the API
 
-You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
+You can use the evaluations API provided by LLM Observability to send evaluations associated with spans, traces, or sessions to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
 
 To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation. Additionally, <code>span_id</code> and <code>trace_id</code> values must be provided as **decimal** strings. If your OpenTelemetry instrumentation produces hexadecimal IDs, convert them to decimal before submitting. For example, in Python: <code>str(int(hex_span_id, 16))</code>.
 

@@ -1,5 +1,6 @@
 ---
 title: LLM Observability Terms and Concepts
+description: Reference guide for LLM Observability key terms and concepts, including spans, traces, and evaluations.
 aliases:
     - /tracing/llm_observability/core_concepts
     - /llm_observability/core_concepts

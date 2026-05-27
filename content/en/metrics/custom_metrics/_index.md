@@ -1,5 +1,6 @@
 ---
 title: Custom Metrics
+description: "Learn what custom metrics are, how they're identified by name and tags, and how they're billed in Datadog."
 aliases:
   - /guides/metrics/
   - /metrictypes/

@@ -32,7 +32,7 @@ Android [Error Tracking][1] gives you comprehensive visibility into your mobile 
 
 The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV.
 
-Your crash reports appear in [**Error Tracking**][2].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][2].
 
 ## Setup
 
@@ -64,9 +64,9 @@ dependencies {
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to [**Errors** > **Settings** > **Browser and Mobile** > **+ New Application**][7].
+1. Navigate to [{{< ui >}}Errors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}+ New Application{{< /ui >}}][7].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. Click **Create Application**.
+3. Click {{< ui >}}Create Application{{< /ui >}}.
 
 
 
@@ -487,7 +487,7 @@ Fatal ANRs result in crashes. The application reports them when it's unresponsiv
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="A fatal crash report in Error Tracking." >}}
 
-- In the **Error Tracking** page, fatal ANRs are grouped based on their similarity, which can result in several **individual issues** being created.
+- In the {{< ui >}}Error Tracking{{< /ui >}} page, fatal ANRs are grouped based on their similarity, which can result in several **individual issues** being created.
 - By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][19] (available since *[Android 30+][20]*), which can be read on the next app launch.
 - In *[Android 29][21] and below*, reporting on fatal ANRs is not possible.
 
@@ -496,7 +496,7 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="A non-fatal crash report in Error Tracking." >}}
 
-- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
+- In the {{< ui >}}Error Tracking{{< /ui >}} page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
 - By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
@@ -851,7 +851,7 @@ To test your implementation:
    }
    ```
 
-3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][2].
+3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][2].
 
 ## Kotlin extensions
 

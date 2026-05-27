@@ -14,13 +14,13 @@ Datadog Event Management supports maintenance windows to suppress case notificat
 <div class="alert alert-danger">You must have Case Management Shared Settings Write (cases_shared_settings_write) permissions. For more information, see <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.</div>
 
 To create a [Maintenance Window][2]:
-1. Navigate to Event Management Settings.
+1. Navigate to {{< ui >}}Event Management Settings{{< /ui >}}.
 1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to Case Attributes in the left navigation bar.
 1. Click {{< ui >}}New Maintenance Window{{< /ui >}} in the top right.
 1. Enter a Maintenance Window name.
 1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. By default, Event Management cases inherit tags from the alerts they correlate.
 1. Select the start and end times for the Maintenance Window.
-1. Review Maintenance Window details and Save.
+1. Review Maintenance Window details and click {{< ui >}}Save{{< /ui >}}.
 
 After you save, your Maintenance Window will be added to the Maintenance Window list where you can review its details, update by selecting its row, or delete by selecting the trash icon on the right of the row.
 
@@ -28,7 +28,7 @@ After you save, your Maintenance Window will be added to the Maintenance Window 
 
 To sync Maintenance Windows with ServiceNow changes so your ServiceNow changes create, update, or delete case Maintenance Windows:
 1. See [Forward change requests to Datadog][3] and follow the steps to ingest ServiceNow changes.
-1. Navigate to Event Management Settings.
+1. Navigate to {{< ui >}}Event Management Settings{{< /ui >}}.
 1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to Case Attributes in the left navigation bar.
 1. Click {{< ui >}}Sync from ServiceNow{{< /ui >}} in the top right
 1. Optionally, define a filter for the ServiceNow changes that should create, update, or delete maintenance windows.

@@ -4,22 +4,31 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 
 ---
 
+{{< site-region region="gov, gov2" >}}
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
-Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure. It supports the following products: [Infrastructure Monitoring][4], [APM][11], [Logs][12], [Real User Monitoring (RUM)][2], [Error Tracking][1], [Product Analytics][3], [Serverless Monitoring][5], [Code Coverage][13], [Test Optimization][14], and [LLM Observability][15].
+Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
 
-Choose the path that fits your workflow:
-
-| Path | Use when |
-|------|----------|
-| [AI Setup CLI](#ai-setup-cli) | You want to set up Datadog from a terminal, without an AI coding assistant. |
-| [MCP Server](#mcp-server) | You use an LLM coding assistant (such as Claude Code or Cursor) and want it to handle framework detection and configuration from your IDE. |
+- [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without an AI coding assistant. |
+- [MCP Server](#mcp-server): Set up Datadog through an LLM coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
 
+## Supported frameworks
+
+Agentic Onboarding is available for the following products and frameworks:
+
+- **[Error Tracking][1], [Real User Monitoring (RUM)][2], and [Product Analytics][3]**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue.
+- **[Infrastructure Monitoring][4] with Kubernetes**: Terraform, Ansible, Kustomize, and more.
+- **[Serverless Monitoring][5]**: AWS Lambda (Terraform, AWS CDK, Serverless Framework, and more); GCP Cloud Run containers and Cloud Run functions.
+- [Code Coverage][13], [Test Optimization][14], and [LLM Observability][15]
+
 ## AI Setup CLI
 
-The Datadog AI Setup CLI is a standalone tool that runs in your terminal. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as bootstrapping a Datadog account.
+The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as bootstrapping a Datadog account.
 
 The CLI can:
 
@@ -47,11 +56,15 @@ The CLI can:
     ```
 
     - Replace the value of `--site` with the [Datadog site][16] for your account.
-    - Replace `<PRODUCT>` with one of `infrastructure`, `apm`, `logs`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `code-coverage`, `test-optimization`, or `llm-observability`.
+    - Replace `<PRODUCT>` with one of `infra-monitoring`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `studio`, `code-coverage`, `test-optimization`, or `llm-observability`.
 
-1. Complete the OAuth flow in your browser when prompted. After authentication, point the CLI to your code repository. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables.
+1. Complete the OAuth flow in your browser when prompted. 
+
+1. Return to your terminal, and point the CLI to your code repository. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables.
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
+
+After the CLI completes, see [Next steps](#next-steps).
 
 ## MCP Server
 
@@ -91,9 +104,11 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Other MCP clients" %}}
+
 Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site](/getting_started/site/):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -120,17 +135,42 @@ Send the prompt that matches the product you want to set up:
 {{< code-block lang="text" >}}Add Datadog Product Analytics to my project{{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Infrastructure Monitoring" %}}
+
+**Kubernetes**
 {{< code-block lang="text" >}}Add Datadog for Kubernetes to my project{{< /code-block >}}
-{{% /tab %}}
 
-{{% tab "Docker" %}}
+**Docker**
 {{< code-block lang="text" >}}Add Datadog for Docker to my project{{< /code-block >}}
+
 {{% /tab %}}
 
-{{% tab "Serverless" %}}
+
+{{% tab "Serverless Monitoring" %}}
+
+**AWS Lambda**
 {{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+```
+
+**GCP Cloud Run containers**
+{{< code-block lang="text" >}}Help me monitor my GCP Cloud Run services with Datadog{{< /code-block >}}
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+```
+
+**GCP Cloud Run functions**
+{{< code-block lang="text" >}}Help me monitor my GCP Cloud Run functions with Datadog{{< /code-block >}}
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions
+```
+
+
 {{% /tab %}}
+
 {{< /tabs >}}
 
 The agent detects your stack, requests permission before each tool call, applies changes locally (without committing them), and prints verification steps. After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.

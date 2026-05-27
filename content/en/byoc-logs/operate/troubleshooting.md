@@ -7,6 +7,9 @@ further_reading:
 - link: "/byoc-logs/architecture/"
   tag: "Documentation"
   text: "BYOC Logs Architecture"
+- link: "/observability_pipelines/scaling_and_performance/"
+  tag: "Documentation"
+  text: "Observability Pipelines Scaling and Performance"
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!" >}}
@@ -66,107 +69,88 @@ postgresql://user:abc%2Fdef%2Bghi%3D@host:5432/byoc-logs
 postgresql://user:abc/def+ghi=@host:5432/byoc-logs
 ```
 
-### Cloud SQL connection issues (GKE)
+### Index not found or multiple clusters in the console
 
-**Error**: `failed to connect to metastore: connection error: pool timed out`
+**Symptom:** Indexer logs repeatedly show:
+```
+ERROR quickwit: command failed error=metastore error `index `datadog` not found`
+```
 
-**Solution**: Verify Cloud SQL authorized networks include GKE node IPs:
+The cluster eventually crashes, and the BYOC Logs console shows multiple clusters where you expect one.
+
+**Cause:** The metastore URI is not set correctly, so the metastore falls back to a local file-backed store. Each time the metastore pod restarts, the file is wiped and a fresh metastore is created—all index metadata is lost. An earlier error in the logs often points to the misconfiguration:
+
+```
+ERROR quickwit: command failed error=failed to resolve metastore uri postgresql://user:***redacted***@<host>/<database>
+```
+
+**Solution:** Verify the metastore URI is set correctly. Port-forward to the metastore pod and inspect the running configuration:
+
 ```bash
-gcloud sql instances describe byoc-logs-postgres \
-  --format="value(settings.ipConfiguration.authorizedNetworks)"
+kubectl port-forward -n datadog-byoc-logs <pod-name> 7280:7280
+curl -s http://localhost:7280/api/v1/config
 ```
 
-Update authorized networks if needed:
-```bash
-export NODE_IPS=$(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | tr ' ' ',')
-gcloud sql instances patch byoc-logs-postgres \
-  --authorized-networks=${NODE_IPS} \
-  --quiet
-```
-
-**Error**: `failed to connect to metastore: invalid port number`
-
-**Solution**: Confirm the password in the metastore URI is URL-encoded. Special characters must be escaped:
-```
-# Correct format
-postgresql://postgres:abc%2Fdef%2Bghi%3D@IP:5432/byoc-logs
-
-# Incorrect format (fails)
-postgresql://postgres:abc/def+ghi=@IP:5432/byoc-logs
-```
+Confirm `metastore_uri` points to your PostgreSQL instance. If the password contains special characters, verify it is URL-encoded (see [Metastore cannot connect to PostgreSQL](#metastore-cannot-connect-to-postgresql)).
 
 ## Storage errors
 
-If you set the wrong AWS credentials, you see this error message with `Unauthorized` in the logs of your indexers:
+If you set the wrong AWS/GKE/Azure credentials or region, you see this error message with kind `Unauthorized` or `Internal` in the logs of your indexers:
 
 ```
 Command failed: Another error occurred. `Metastore error`. Cause: `StorageError(kind=Unauthorized, source=failed to fetch object: s3://my-bucket/datadog-index/some-id.split)`
 ```
 
-If you set the wrong region, you see this error:
+Action: Check if your pod has access to the bucket.
 
-```
-Command failed: Another error occurred. `Metastore error`. Cause: `StorageError(kind=Internal, source=failed to fetch object: s3://my-bucket/datadog-index/some-id.split)`
-```
+## Ingestion issues
 
-### GCS storage access issues (GKE)
+### Ingest errors on BYOC Logs indexers
 
-**Error**: `failed to write to GCS bucket`
+**Symptom:** Indexer logs show ingest errors, or the `ingest_requests.count` metric shows failures in the OOTB dashboard.
 
-**Solution**: Verify the service account has the correct permissions:
-```bash
-gsutil iam get gs://${BUCKET_NAME}
-```
+**Common causes:**
+- **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
+- **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 
-Grant permissions if missing:
-```bash
-gsutil iam ch \
-  serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com:objectAdmin \
-  gs://${BUCKET_NAME}
-```
+In case you use Observability Pipelines in front of BYOC Logs, you will need to check what's happening there, see OP [Scaling and Performance][2].
 
-### MinIO storage access issues
+### Occasional 429 (Too Many Requests) errors
 
-**Error**: `failed to put object` or `NoSuchBucket`
+A low rate of 429 errors is not a problem in itself. The Datadog Agent or Observability Pipelines buffers payloads and retries the request automatically.
 
-**Solution**: Verify MinIO connectivity and credentials:
-```shell
-kubectl run minio-client \
-  --rm -it \
-  --image=minio/mc:latest \
-  --command -- bash -c "mc alias set myminio <MINIO_ENDPOINT> <ACCESS_KEY> <SECRET_KEY> && mc ls myminio/<BUCKET_NAME>"
-```
+429s usually mean the cluster is temporarily short on shards. Common triggers:
 
-Common causes:
-- MinIO endpoint is not reachable from the cluster
-- Incorrect access key or secret key
-- The bucket does not exist
-- `force_path_style_access` is not set to `true` in the storage configuration
+- On initial deployment or after a restart, while the cluster stabilizes
+- Ingestion throughput increased quickly
+- An indexer pod went down
+- Ingestion paused for a while and shards scaled down
 
-## Workload Identity issues (GKE)
+The real concern is sustained 429s that overflow the client buffer. If 429s persist, the cluster is likely undersized—add indexer pods or increase `indexer.podSize`.
 
-**Error**: `could not generate access token`
+**Monitor for client-side log loss:** Watch the following Datadog Agent metrics to detect dropped logs:
 
-**Solution**: Verify the Workload Identity binding:
-```bash
-# Check service account annotation
-kubectl get serviceaccount byoc-logs-ksa -n datadog-byoc-logs -o yaml | grep iam.gke.io
+| Metric | What it measures |
+|--------|------------------|
+| `datadog.logs.bytes_missed` | Bytes from logs that could not be tailed after a file rotation (the Agent had not finished reading the previous file). |
+| `datadog.logs_client_http_destination.payloads_dropped` | Log payloads dropped because of HTTP errors. The Agent retries on almost all errors, so a non-zero value indicates a real issue. |
 
-# Verify IAM binding
-gcloud iam service-accounts get-iam-policy \
-  ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com
-```
+If either metric is rising, contact Datadog support.
 
-Re-create the binding if needed:
-```bash
-gcloud iam service-accounts add-iam-policy-binding \
-  ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com \
-  --role=roles/iam.workloadIdentityUser \
-  --member="serviceAccount:${PROJECT_ID}.svc.id.goog[datadog-byoc-logs/byoc-logs-ksa]"
-```
+## Search performance
+
+### Queries timing out
+
+**Symptom:** Search queries in Log Explorer return errors or take longer than expected. Dashboard widgets show "No Data" or loading spinners.
+
+**Common causes:**
+- **Not enough searcher pods:** Check searcher CPU utilization. If pods are at high CPU, add more replicas or increase `searcher.podSize`.
+- **Wildcard queries with whole event search:** Queries like `*:*abcd*`) are significantly more expensive than prefix or term queries targeting one single field. Consider using more specific fields and query terms.
+- **Large time ranges with aggregations:** Aggregation queries (timeseries, top lists, percentiles) over multi-day ranges scan large amounts of data. Narrow the time range or add more searcher resources.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
+[2]: /observability_pipelines/scaling_and_performance/
