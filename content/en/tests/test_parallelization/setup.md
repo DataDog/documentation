@@ -38,7 +38,7 @@ Plan
 : The generated `.testoptimization/` directory. It contains the runnable test files, the selected parallelism, and per-node file lists used by `ddtest run` or another runner.
 
 Selected parallelism
-: The CI node count or local worker count that `ddtest` chooses after estimating test file duration and balancing execution time against CI job overhead.
+: The CI node count or local worker count that `ddtest` chooses after estimating test file durations.
 
 ## Install ddtest
 
@@ -70,9 +70,9 @@ chmod +x bin/ddtest
 {{% /tab %}}
 {{< /tabs >}}
 
-## Run on one CI node
+## Run on a single CI node
 
-On one CI node, run `ddtest run`:
+If you run your tests on a single CI node, run `ddtest run`:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec
@@ -99,21 +99,7 @@ bin/ddtest run \
 
 In CI-node mode, `ddtest` uses one local worker by default. To start multiple workers in each CI node, set `--ci-node-workers` to a positive integer or `ncpu`.
 
-## Common settings
-
-Every `ddtest` setting can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables. For a list of available environment variables, defaults, and examples, see [Configuration][4].
-
-## Custom test commands
-
-Use `--command` to override the default test command:
-
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform ruby --framework rspec --command "bundle exec rspec --profile"
-{{< /code-block >}}
-
-When using `--command`, do not include test files in the command. `ddtest` appends test files and framework-specific flags to the command.
-
-Do not include the `--` separator in `--command`. If the command contains `--`, `ddtest` emits a warning and removes the separator and everything after it.
+For a list of available environment variables, defaults, and examples, see [Configuration][4].
 
 ## CI examples
 
@@ -308,6 +294,8 @@ workflows:
 
 Use `ddtest` plan files when you want `ddtest` to choose which files should run, but another runner should execute them.
 
+To learn about the full contents of the plan directory, see [Plan artifacts][5].
+
 | File | Use |
 | ---- | --- |
 | `.testoptimization/runner/test-files.txt` | All runnable test files after Test Impact Analysis skips are applied. |
@@ -327,3 +315,4 @@ KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=.testoptimization/runner/test-files.txt 
 [2]: /tests/test_impact_analysis/
 [3]: https://github.com/DataDog/ddtest/releases/latest
 [4]: /tests/test_parallelization/configuration/
+[5]: /tests/test_parallelization/configuration/#plan-artifacts
