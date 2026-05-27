@@ -48,7 +48,7 @@ By default, Datadog creates three environments for your organization:
 - **Staging**
 - **Production**
 
-You can modify these environments or add new ones to match how your team ships code.
+You can modify these environments or add new ones to match how your team deploys code.
 
 ## Production environments
 
