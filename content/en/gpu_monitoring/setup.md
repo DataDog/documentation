@@ -167,7 +167,7 @@ services:
 {{% /tab %}}
 {{% tab "Linux (non-containerized)" %}}
 
-GPU monitoring requires configuration in **both** `datadog.yaml` and `system-probe.yaml`. Configuring only `datadog.yaml` does not load the eBPF module and results in no metrics being collected.
+GPU Monitoring requires configuration in **both** `datadog.yaml` and `system-probe.yaml`. Configuring only `datadog.yaml` does not load the eBPF module and results in no metrics being collected.
 
 1. Add the following to `/etc/datadog-agent/datadog.yaml`:
 
