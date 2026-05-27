@@ -203,7 +203,7 @@ echo ""
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, AWS account ID, service account, ingress setup, resource requests and limits, and more.
 
-   <div class="alert alert-info"><p>The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To create the gp3 storage class, follow the instructions in the <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html">AWS gp3 guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), set <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</p>
+   <div class="alert alert-info"><p>The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To create the gp3 storage class, follow the instructions in this <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html">AWS guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), set <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</p>
    
    <p>Datadog recommends gp3 storage volumes for BYOC Logs to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
    </div>
