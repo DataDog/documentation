@@ -49,7 +49,7 @@ For each targeting rule, configure the following:
 After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules.
 
 <div class="alert alert-info">
-SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in the given environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
+SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
 </div>
 
 ## Filters and evaluation context
