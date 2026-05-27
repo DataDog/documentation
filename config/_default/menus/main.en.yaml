@@ -2428,11 +2428,16 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_jira
       weight: 100
+    - name: Linear
+      url: error_tracking/ticketing_systems/linear
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_linear
+      weight: 101
     - name: Case Management
       url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
-      weight: 101
+      weight: 102
     - name: Link Pull Requests
       url: error_tracking/link_pull_requests
       parent: error_tracking
@@ -5185,6 +5190,12 @@ menu:
       identifier: data_catalog
       parent: data_observability_heading
       weight: 65000
+    - name: Lineage
+      url: data_observability/lineage
+      pre: data-observability-wui
+      identifier: data_lineage
+      parent: data_observability_heading
+      weight: 67500
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui

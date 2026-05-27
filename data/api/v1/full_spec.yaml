@@ -23499,6 +23499,10 @@ components:
           description: Shows the average number of Serverless Apps for Azure Web App instances for the current date for all organizations.
           format: int64
           type: integer
+        serverless_apps_dsm_fargate_tasks_avg:
+          description: Shows the average number of DSM Fargate ECS tasks monitored under Serverless Apps DSM for the current date for all organizations.
+          format: int64
+          type: integer
         serverless_apps_ecs_avg:
           description: Shows the average number of Serverless Apps for Elastic Container Service for the current date for all organizations.
           format: int64
@@ -24534,6 +24538,10 @@ components:
           type: integer
         serverless_apps_azure_web_app_instances_avg:
           description: Shows the average number of Serverless Apps for Azure Web App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_dsm_fargate_tasks_avg:
+          description: Shows the average number of DSM Fargate ECS tasks monitored under Serverless Apps DSM for the given date and given org.
           format: int64
           type: integer
         serverless_apps_ecs_avg:
@@ -25589,6 +25597,10 @@ components:
           type: integer
         serverless_apps_azure_web_app_instances_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure Web App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_dsm_fargate_tasks_avg_sum:
+          description: Sum of the average number of DSM Fargate ECS tasks monitored under Serverless Apps DSM in the current month for all organizations.
           format: int64
           type: integer
         serverless_apps_ecs_avg_sum:
