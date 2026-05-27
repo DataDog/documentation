@@ -31,11 +31,11 @@ The CLI can:
 ### Prerequisites
 
 - Node.js 20 or later
-- An existing Datadog account (optional — the CLI can create one for you)
+- A Datadog account (optional; the CLI can create one for you)
 
 ### Supported products
 
-The CLI can set up the following products. Use the identifier with the `--product` flag.
+The CLI can set up the following products:
 
 | Product | Identifier |
 |---------|------------|
@@ -74,13 +74,7 @@ The CLI can set up the following products. Use the identifier with the `--produc
     - Replace the value of `--site` with the [Datadog site][16] for your account.
     - Replace `<PRODUCT>` with one of the [identifiers above](#supported-products).
 
-1. The CLI displays a welcome screen. Press <kbd>Enter</kbd> to continue.
-
-   {{< img src="agentic_onboarding/welcome-screen.png" alt="CLI welcome screen showing 'Get started with Datadog' and 'Set up in ~3 minutes'" style="width:80%;" >}}
-
-1. Choose whether you have a Datadog account. **Yes, sign in** links an existing account; **No, create one** bootstraps a new account. The CLI opens a browser for OAuth — complete the flow and grant access to your Datadog account.
-
-   {{< img src="agentic_onboarding/account-linking-creation.png" alt="CLI prompt 'Do you have a Datadog account?' with options 'Yes, sign in' and 'No, create one'" style="width:80%;" >}}
+1. Press <kbd>Enter</kbd> at the welcome screen, then choose whether you have a Datadog account. **Yes, sign in** links an existing account; **No, create one** bootstraps a new account. The CLI opens a browser for OAuth. Complete the flow and grant access to your Datadog account.
 
 1. If you ran the CLI without `--product`, select what to set up from the product menu. (Direct setup with `--product` skips this menu.)
 
