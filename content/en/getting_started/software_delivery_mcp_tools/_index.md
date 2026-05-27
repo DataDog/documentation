@@ -134,13 +134,15 @@ pup auth login
 | Skill | Invoke with | What it does |
 |-------|-------------|-------------|
 | Triage flaky test | `/triage-flaky-test` | Get history, failure pattern, and AI category for a specific flaky test, then recommend fix, quarantine, or escalate |
-| Unblock PR | `/unblock-pr` | Attribute each CI failure on a PR as flaky, infra, or regression, surface code coverage, and propose a targeted action |
+| Unblock PR | `/unblock-pr` | Attribute each CI failure on a PR as flaky, infra, or regression, surface code coverage and quality or security violations, and propose a targeted action |
 
 ### Triage flaky test
 
-`/triage-flaky-test` investigates a specific flaky test. It pulls 30-day failure history, extracts the top error messages and stack traces, and checks how many pipelines the test has impacted. It proposes a targeted fix based on the flaky category and stack trace, or recommends quarantine when the root cause is unclear. It produces a structured triage brief with a recommendation to fix, quarantine, or escalate to the owning team.
+`/triage-flaky-test` investigates a specific flaky test. It pulls 30-day failure history, extracts the top error messages and stack traces, and checks how many pipelines the test has impacted. If a CodeGen AI fix exists for the test, the skill surfaces it directly. Otherwise, it proposes a targeted fix based on the flaky category and stack trace, or recommends quarantine when the root cause is unclear. It produces a structured triage brief with a recommendation to fix, quarantine, or escalate to the owning team.
 
 If the skill recommends quarantine, it presents the proposed action and requires your explicit approval before writing. All state changes are reversible.
+
+**Note**: CodeGen AI fix surfacing requires the MCP toolset. When using pup, the skill proposes an agent-native fix instead.
 
 ```
 /triage-flaky-test TestCheckoutServiceIntegration
@@ -149,9 +151,11 @@ If the skill recommends quarantine, it presents the proposed action and requires
 
 ### Unblock PR
 
-`/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches — a blame guard that classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section with coverage data.
+`/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches — a blame guard that classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage and any code quality or security violations from PR insights. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section summarizing coverage and violations.
 
-For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions, it offers to retry via `gh run rerun`; for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
+For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions, it retries failed jobs using `retry_datadog_ci_job`; for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
+
+**Note**: Code quality and security violation data and `retry_datadog_ci_job` require the MCP toolset. When using pup, the PR Health section shows coverage only and infra retries use `gh run rerun`.
 
 ```
 /unblock-pr
