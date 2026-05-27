@@ -14,7 +14,7 @@ further_reading:
 
 ## Optimize the planning step
 
-Test Parallelization adds a planning step that discovers test files before execution. For example, RSpec projects use dry-run discovery. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
+Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
 
 ### Preinstall system dependencies with Docker
 
