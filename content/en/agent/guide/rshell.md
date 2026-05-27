@@ -2,7 +2,9 @@
 title: Agent Restricted Shell (rshell)
 description: "Learn how the Agent Restricted Shell (rshell) executes safe, read-only commands on hosts through the Datadog MCP Server."
 further_reading:
-- link: "bits_ai/mcp_server/tools/#agent"
+- link: "bits_ai/mcp_server/tools/#remote-actions"
+  tag: "Documentation"
+  text: "Remote Actions toolset"
   tag: "Documentation"
   text: "Agent toolset"
 - link: "bits_ai/mcp_server/setup"
