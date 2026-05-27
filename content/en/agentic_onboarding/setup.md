@@ -33,6 +33,26 @@ The CLI can:
 - Node.js 20 or later
 - An existing Datadog account (optional — the CLI can create one for you)
 
+### Supported products
+
+The CLI can set up the following products. Use the identifier with the `--product` flag.
+
+| Product | Identifier |
+|---------|------------|
+| App and API Protection | `app_and_api_protection` |
+| Code Coverage | `ci_code_coverage` |
+| Docker | `docker` |
+| Error Tracking | `error-tracking` |
+| Infrastructure Monitoring | `infra-monitoring` |
+| Linux | `linux` |
+| LLM Observability | `llm-obs` |
+| OpenTelemetry | `otel` |
+| Product Analytics | `product-analytics` |
+| Real User Monitoring (RUM) | `rum` |
+| Serverless Monitoring | `serverless` |
+| Studio | `studio` |
+| Test Optimization | `test-optimization` |
+
 ### Install and run the CLI
 
 1. Run the CLI with `npx`, passing `--site` to target your [Datadog site][16]. You have two options, depending on whether you already have a Datadog account:
@@ -52,7 +72,7 @@ The CLI can:
     ```
 
     - Replace the value of `--site` with the [Datadog site][16] for your account.
-    - Replace `<PRODUCT>` with one of `infra-monitoring`, `rum`, `error-tracking`, `product-analytics`, `serverless`, `studio`, `code-coverage`, `test-optimization`, or `llm-observability`.
+    - Replace `<PRODUCT>` with one of the [identifiers above](#supported-products).
 
 1. Complete the OAuth flow in your browser when prompted. 
 
