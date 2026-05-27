@@ -24,7 +24,7 @@ Datadog supports different targeting rule types depending on your rollout strate
 | Type | Description |
 |------|-------------|
 | **Feature gate** | Roll out immediately to a percentage of subjects matching your filter (randomized or not) |
-| **Progressive rollout** | Randomized rollout over a schedule with multiple steps. See [Progressive Rollouts & Canaries](/feature_flags/use_cases/progressive_rollouts/) |
+| **Progressive rollout** | Randomized rollout over a schedule with multiple steps |
 | **Experiment** | Randomized allocation associated with an experiment |
 
 ## Configure targeting rules
