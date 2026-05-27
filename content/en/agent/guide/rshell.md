@@ -5,8 +5,6 @@ further_reading:
 - link: "bits_ai/mcp_server/tools/#remote-actions"
   tag: "Documentation"
   text: "Remote Actions toolset"
-  tag: "Documentation"
-  text: "Agent toolset"
 - link: "bits_ai/mcp_server/setup"
   tag: "Documentation"
   text: "Datadog MCP Server setup"
