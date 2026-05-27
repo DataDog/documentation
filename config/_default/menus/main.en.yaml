@@ -1554,7 +1554,7 @@ menu:
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
       weight: 3
-    - name: Bits Assistant
+    - name: Bits AI Assistant
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
@@ -2428,11 +2428,16 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_jira
       weight: 100
+    - name: Linear
+      url: error_tracking/ticketing_systems/linear
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_linear
+      weight: 101
     - name: Case Management
       url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
-      weight: 101
+      weight: 102
     - name: Link Pull Requests
       url: error_tracking/link_pull_requests
       parent: error_tracking
@@ -2819,16 +2824,21 @@ menu:
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
+    - name: Case Approvals
+      url: incident_response/case_management/approvals
+      parent: case_management
+      identifier: case_management_approvals
+      weight: 7
     - name: MCP Server
       url: incident_response/case_management/mcp_server
       parent: case_management
       identifier: case_management_mcp_server
-      weight: 7
+      weight: 8
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 8
+      weight: 9
     - name: Agents
       weight: 7
     - name: Agent Builder
@@ -4154,6 +4164,11 @@ menu:
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
       weight: 903
+    - name: Cloud Cost Skill
+      url: cloud_cost_management/cloud_cost_skill
+      parent: cloud_cost
+      identifier: cloud_cost_skill
+      weight: 10
     - name: APM
       url: tracing/
       pre: apm
@@ -5133,11 +5148,16 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
+    - name: Data Collection
+      url: data_streams/kafka/data_collection
+      identifier: data_streams_kafka_data_collection
+      parent: data_streams_kafka
+      weight: 2
     - name: Monitors and Automation
       url: data_streams/kafka/monitors_and_automation
       identifier: data_streams_kafka_monitors_and_automation
       parent: data_streams_kafka
-      weight: 2
+      weight: 3
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -5170,6 +5190,12 @@ menu:
       identifier: data_catalog
       parent: data_observability_heading
       weight: 65000
+    - name: Lineage
+      url: data_observability/lineage
+      pre: data-observability-wui
+      identifier: data_lineage
+      parent: data_observability_heading
+      weight: 67500
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
@@ -5574,6 +5600,11 @@ menu:
       identifier: ai_agents_console
       parent: ai_observability_heading
       weight: 30000
+    - name: Setup
+      url: ai_agents_console/setup/
+      parent: ai_agents_console
+      identifier: ai_agents_console_setup
+      weight: 1
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -9375,26 +9406,31 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
+    - name: Analysis Methods
+      url: experiments/analysis_methods
+      parent: pa_experiments
+      identifier: pa_experiments_analysis_methods
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 4
+      weight: 5
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 5
+      weight: 6
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 5
+      weight: 7
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics

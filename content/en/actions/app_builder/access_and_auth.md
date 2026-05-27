@@ -62,7 +62,7 @@ By default:
 - While the app is in draft, the author of an app is the only user who has access to the app.
 - After the app is published, the author maintains {{< ui >}}Editor{{< /ui >}} access, while the rest of the author's Datadog organization receives {{< ui >}}Viewer{{< /ui >}} access to the app.
 
-You can expand access to a draft of published app using access control.
+You can expand access to a draft or published app using access control.
 
 ### Permissions and access control
 
@@ -78,6 +78,67 @@ The coarse permissions that apply to apps include the following:
 
 {{< ui >}}Connections Read{{< /ui >}}
 : List and view available connections. Datadog Read Only, Standard, and Admin roles have read access to connections by default.
+
+### Restrict access to a specific app
+
+Set permissions on each app to restrict modifications to the app.
+
+App Builder provides the following permissions for each app:
+
+{{< ui >}}Viewer{{< /ui >}}
+: Run and view the app
+
+{{< ui >}}Contributor{{< /ui >}}
+: Edit, run, and view the app
+
+{{< ui >}}Editor{{< /ui >}}
+: Edit, run, view, publish, and delete the app.
+
+To restrict access to the app, perform the following steps in the app canvas:
+1. Navigate to the detailed editing view for the app you want to restrict access to.
+1. In the app editor, click on the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Select {{< ui >}}Permissions{{< /ui >}} from the dropdown.
+1. Select {{< ui >}}Restrict Access{{< /ui >}}.
+1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+### Restrict app access using the API or Terraform
+
+When using the [Restriction Policy API][10] or Terraform, a user or service account cannot decrease their own access level. This is intentional behavior enforced by [Granular Access][4] to prevent self-inflicted lockouts.
+
+To transfer `editor` access away from the calling user or service account:
+
+1. Add the new principal as `editor` while keeping the current user or service account as `editor`:
+
+   ```terraform
+   bindings {
+       principals = ["user:<SERVICE_ACCOUNT_UUID>"]
+       relation   = "editor"
+   }
+   bindings {
+       principals = ["team:<TEAM_UUID>"]
+       relation   = "editor"
+   }
+   bindings {
+       principals = ["org:<ORG_UUID>"]
+       relation   = "viewer"
+   }
+   ```
+
+1. Using a **different** API key or admin account (not the one being demoted), remove the original user or service account's binding:
+
+   ```terraform
+   bindings {
+       principals = ["team:<TEAM_UUID>"]
+       relation   = "editor"
+   }
+   bindings {
+       principals = ["org:<ORG_UUID>"]
+       relation   = "viewer"
+   }
+   ```
 
 ### Restrict access to a specific connection
 
@@ -108,40 +169,15 @@ Use the following steps to modify the permissions on a specific connection:
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-### Restrict access to a specific app
-
-Set permissions on each app to restrict modifications to the app. By default:
-- The author of an app is the only user who has access to the app.
-- After the app is published, the author maintains {{< ui >}}Editor{{< /ui >}} access, while the rest of the author's Datadog organization receives {{< ui >}}Viewer{{< /ui >}} access to the app.
-
-App Builder provides the following permissions for each app:
-
-{{< ui >}}Viewer{{< /ui >}}
-: Run and view the app
-
-{{< ui >}}Contributor{{< /ui >}}
-: Edit, run, and view the app
-
-{{< ui >}}Editor{{< /ui >}}
-: Edit, run, view, publish, and delete the app.
-
-To restrict access to the app, perform the following steps in the app canvas:
-1. Navigate to the detailed editing view for the app you want to restrict access to.
-1. In the app editor, click on the cog ({{< ui >}}Settings{{< /ui >}}) icon.
-1. Select {{< ui >}}Permissions{{< /ui >}} from the dropdown.
-1. Select {{< ui >}}Restrict Access{{< /ui >}}.
-1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
-1. Next to the role name, select your desired permission from the dropdown menu.
-1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
-1. Click {{< ui >}}Save{{< /ui >}}.
-
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
 
 [1]: https://app.datadoghq.com/actions/action-catalog/
 [2]: /account_management/org_settings/service_accounts#permissions
 [3]: /account_management/rbac/?tab=datadogapplication#role-based-access-control
+[4]: /account_management/rbac/granular_access
 [5]: https://app.datadoghq.com/app-builder/
 [6]: https://chat.datadoghq.com/
 [7]: /account_management/audit_trail/#overview
 [8]: /actions/connections/
 [9]: /actions/workflows/
+[10]: /api/latest/restriction-policies/

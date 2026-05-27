@@ -1780,6 +1780,20 @@
     "request_description": "",
     "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
+  "DeleteEntityIntegrationConfig": {
+    "description": "Delete the configuration stored for a given integration in the caller's organization.",
+    "summary": "Delete an entity integration configuration"
+  },
+  "GetEntityIntegrationConfig": {
+    "description": "Retrieve the configuration currently stored for a given integration in the caller's organization.",
+    "summary": "Get an entity integration configuration"
+  },
+  "UpdateEntityIntegrationConfig": {
+    "description": "Create or replace the configuration for a given integration in the caller's organization. The shape of `data.attributes.config` depends on the integration:\n\n- For `github`: `config` must contain an `enabled_repos` array of objects with `hostname`, `github_org_name`, and `repo_name`.\n- For `jira`: `config` must contain an `enabled_projects` array of objects with `hostname`, `account_id`, and `project_key`.\n- For `pagerduty`: `config` must contain an `accounts` array of objects with a required `enabled` boolean and an optional `subdomain` string.",
+    "summary": "Create or update entity integration configuration",
+    "request_description": "",
+    "request_schema_description": "Request body used to create or replace the configuration for a given integration."
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
@@ -2695,6 +2709,18 @@
     "request_description": "Update dataset payload.",
     "request_schema_description": "Request to partially update an LLM Observability dataset."
   },
+  "GetLLMObsDatasetDraftState": {
+    "description": "Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.",
+    "summary": "Get LLM Observability dataset draft state"
+  },
+  "LockLLMObsDatasetDraftState": {
+    "description": "Acquire the draft lock on a dataset for the calling user. The lock prevents other users from concurrently editing the dataset draft.",
+    "summary": "Lock LLM Observability dataset draft state"
+  },
+  "UnlockLLMObsDatasetDraftState": {
+    "description": "Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.",
+    "summary": "Unlock LLM Observability dataset draft state"
+  },
   "ListLLMObsDatasetRecords": {
     "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
     "summary": "List LLM Observability dataset records"
@@ -2716,6 +2742,10 @@
     "summary": "Delete LLM Observability dataset records",
     "request_description": "Delete records payload.",
     "request_schema_description": "Request to delete records from an LLM Observability dataset."
+  },
+  "ListLLMObsDatasetVersions": {
+    "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
+    "summary": "List LLM Observability dataset versions"
   },
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
@@ -3166,6 +3196,26 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "DeleteScopesRestriction": {
+    "description": "Delete the scopes restriction configured for the OAuth2 client.",
+    "summary": "Delete an OAuth2 client scopes restriction"
+  },
+  "GetScopesRestriction": {
+    "description": "Get the scopes restriction configured for the OAuth2 client.",
+    "summary": "Get an OAuth2 client scopes restriction"
+  },
+  "UpsertScopesRestriction": {
+    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
+    "summary": "Upsert an OAuth2 client scopes restriction",
+    "request_description": "",
+    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
+  },
+  "RegisterOAuthClient": {
+    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
+    "summary": "Register an OAuth2 client",
+    "request_description": "",
+    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
   },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
@@ -3702,6 +3752,30 @@
     "summary": "Update a WAF exclusion filter",
     "request_description": "The exclusion filter to update.",
     "request_schema_description": "Request object for updating a single WAF exclusion filter."
+  },
+  "ListApplicationSecurityWAFPolicies": {
+    "description": "Retrieve a list of WAF policies.",
+    "summary": "List all WAF policies"
+  },
+  "CreateApplicationSecurityWafPolicy": {
+    "description": "Create a new WAF policy.",
+    "summary": "Create a WAF Policy",
+    "request_description": "The new WAF policy.",
+    "request_schema_description": "Request object that includes the policy to create."
+  },
+  "DeleteApplicationSecurityWafPolicy": {
+    "description": "Delete a specific WAF policy.",
+    "summary": "Delete a WAF Policy"
+  },
+  "GetApplicationSecurityWafPolicy": {
+    "description": "Retrieve a WAF policy by ID.",
+    "summary": "Get a WAF Policy"
+  },
+  "UpdateApplicationSecurityWafPolicy": {
+    "description": "Update a specific WAF policy.\nReturns the policy object when the request is successful.",
+    "summary": "Update a WAF Policy",
+    "request_description": "New WAF policy.",
+    "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
@@ -4479,6 +4553,44 @@
     "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
+  "ListSecurityMonitoringDatasets": {
+    "description": "List all Cloud SIEM datasets available to the organization, including both\ncustomer-defined datasets and Datadog out-of-the-box datasets.",
+    "summary": "List datasets"
+  },
+  "CreateSecurityMonitoringDataset": {
+    "description": "Create a new Cloud SIEM dataset. A dataset bundles a data source, a set of\nindexes, and a search query that can be referenced from detection rules.",
+    "summary": "Create a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a Cloud SIEM dataset."
+  },
+  "BatchGetSecurityMonitoringDatasetDependencies": {
+    "description": "Return, for each of the requested datasets, the list of detection rules that depend\non it. Useful for understanding the impact of updating or deleting a dataset.",
+    "summary": "Get dataset dependencies",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving dependencies of a batch of datasets."
+  },
+  "DeleteSecurityMonitoringDataset": {
+    "description": "Delete a Cloud SIEM dataset. Out-of-the-box datasets cannot be deleted and\ndeleting a dataset that is referenced by a detection rule is rejected.",
+    "summary": "Delete a dataset"
+  },
+  "GetSecurityMonitoringDataset": {
+    "description": "Get the current version of a Cloud SIEM dataset by ID.",
+    "summary": "Get a dataset"
+  },
+  "UpdateSecurityMonitoringDataset": {
+    "description": "Update an existing Cloud SIEM dataset. The current version of the dataset can be\nprovided to detect concurrent modifications.",
+    "summary": "Update a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a Cloud SIEM dataset."
+  },
+  "GetSecurityMonitoringDatasetByVersion": {
+    "description": "Retrieve a specific historical version of a Cloud SIEM dataset.",
+    "summary": "Get a dataset at a specific version"
+  },
+  "GetSecurityMonitoringDatasetVersionHistory": {
+    "description": "Retrieve the version history of a Cloud SIEM dataset, including the changes made at each version.",
+    "summary": "Get the version history of a dataset"
+  },
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get entity context"
@@ -4911,6 +5023,90 @@
     "request_description": "",
     "request_schema_description": "The top-level request object for resolving vulnerable symbols in a set of packages."
   },
+  "ListAiMemoryViolationResults": {
+    "description": "Get all AI memory violation results for the authenticated organization.",
+    "summary": "List AI memory violation results"
+  },
+  "CreateAiMemoryViolationResult": {
+    "description": "Add a new AI memory violation result for the authenticated organization.",
+    "summary": "Create an AI memory violation result",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI memory violation result."
+  },
+  "DeleteAiMemoryViolationResult": {
+    "description": "Delete an AI memory violation result by its numeric identifier.",
+    "summary": "Delete an AI memory violation result"
+  },
+  "ListAiPrompts": {
+    "description": "Get all AI prompts, including default prompts and custom AI rule prompts for the authenticated organization.",
+    "summary": "List AI prompts"
+  },
+  "ListAiCustomRulesets": {
+    "description": "Get all AI custom rulesets for the authenticated organization.",
+    "summary": "List AI custom rulesets"
+  },
+  "CreateAiCustomRuleset": {
+    "description": "Create a new AI custom ruleset for the authenticated organization.",
+    "summary": "Create an AI custom ruleset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI custom ruleset."
+  },
+  "DeleteAiCustomRuleset": {
+    "description": "Delete an AI custom ruleset by name.",
+    "summary": "Delete an AI custom ruleset"
+  },
+  "GetAiCustomRuleset": {
+    "description": "Get an AI custom ruleset by name.",
+    "summary": "Get an AI custom ruleset"
+  },
+  "UpdateAiCustomRuleset": {
+    "description": "Update the description of an existing AI custom ruleset.",
+    "summary": "Update an AI custom ruleset",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an AI custom ruleset."
+  },
+  "CreateAiCustomRule": {
+    "description": "Create a new AI custom rule within a ruleset.",
+    "summary": "Create an AI custom rule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI custom rule."
+  },
+  "DeleteAiCustomRule": {
+    "description": "Delete an AI custom rule by name within a ruleset.",
+    "summary": "Delete an AI custom rule"
+  },
+  "GetAiCustomRule": {
+    "description": "Get an AI custom rule by name within a ruleset.",
+    "summary": "Get an AI custom rule"
+  },
+  "ListAiCustomRuleRevisions": {
+    "description": "Get all revisions for an AI custom rule.",
+    "summary": "List AI custom rule revisions"
+  },
+  "CreateAiCustomRuleRevision": {
+    "description": "Create a new revision for an AI custom rule.",
+    "summary": "Create an AI custom rule revision",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI custom rule revision."
+  },
+  "GetAiCustomRuleRevision": {
+    "description": "Get a specific revision of an AI custom rule.",
+    "summary": "Get an AI custom rule revision"
+  },
+  "ListStaticAnalysisCodegenRulesets": {
+    "description": "Get the rulesets relevant for code generation for the authenticated user.",
+    "summary": "List codegen rulesets"
+  },
+  "ListCustomRulesets": {
+    "description": "Get all custom rulesets for the authenticated organization.",
+    "summary": "List Custom Rulesets"
+  },
+  "CreateCustomRuleset": {
+    "description": "Create a new custom ruleset for the authenticated organization.",
+    "summary": "Create Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a custom ruleset."
+  },
   "DeleteCustomRuleset": {
     "description": "Delete a custom ruleset",
     "summary": "Delete Custom Ruleset"
@@ -4959,15 +5155,43 @@
     "description": "Get a specific revision of a custom rule",
     "summary": "Show Custom Rule Revision"
   },
+  "GetStaticAnalysisDefaultRulesets": {
+    "description": "Get the default SAST ruleset names for a given programming language.",
+    "summary": "Get default rulesets for a language"
+  },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",
     "summary": "Ruleset get multiple",
     "request_description": "",
     "request_schema_description": "The request payload for retrieving rules for multiple rulesets in a single batch call."
   },
+  "GetStaticAnalysisRuleset": {
+    "description": "Get a SAST ruleset by name, including all its rules.",
+    "summary": "Get a SAST ruleset"
+  },
   "GetSecretsRules": {
     "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
     "summary": "Returns a list of Secrets rules"
+  },
+  "CreateStaticAnalysisServerAnalysis": {
+    "description": "Run static analysis rules against a source code file and return violations found.",
+    "summary": "Analyze code",
+    "request_description": "",
+    "request_schema_description": "The request payload for running static analysis on source code."
+  },
+  "CreateStaticAnalysisAst": {
+    "description": "Parse source code into an abstract syntax tree (AST) for the specified language.",
+    "summary": "Get AST for source code",
+    "request_description": "",
+    "request_schema_description": "The request payload for parsing source code into an abstract syntax tree."
+  },
+  "GetStaticAnalysisNodeTypes": {
+    "description": "Retrieve tree-sitter node type definitions for a given programming language.",
+    "summary": "Get node types for a language"
+  },
+  "GetStaticAnalysisTreeSitterWasm": {
+    "description": "Download the WebAssembly binary for a tree-sitter grammar by file name.",
+    "summary": "Get tree-sitter WASM file"
   },
   "ListStatusPages": {
     "description": "Lists all status pages for the organization.",

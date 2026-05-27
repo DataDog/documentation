@@ -28,7 +28,7 @@ If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog acco
 | Requirement            | Details                                                                                  |
 |------------------------|------------------------------------------------------------------------------------------|
 | **Kubernetes Version** | 1.25 or higher                                                                           |
-| **Supported Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (Nginx controller)<br><br>OpenShift and OCI (Oracle Cloud) are not currently tested or supported. |
+| **Supported Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (NGINX Ingress Controller or AWS Load Balancer Controller)<br><br>OpenShift and OCI (Oracle Cloud) are not currently tested or supported. |
 | **Metadata Storage**   | PostgreSQL database                                                                      |
 | **Recommended PostgreSQL Options** | - AWS: RDS PostgreSQL<br>- GCP: Cloud SQL for PostgreSQL<br>- Azure: Azure Database for PostgreSQL<br>- Self-hosted: PostgreSQL with persistent storage |
 
