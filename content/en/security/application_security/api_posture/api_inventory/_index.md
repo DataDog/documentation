@@ -23,12 +23,12 @@ API security relies on visibility. The biggest failure mode in most applications
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
 
-These explorers correspond to the common API security operational flow:
+The Inventory explorers cover the discovery and context steps of the API security operational flow:
 
 1. **Discover:** Identify what endpoints exist using **API Endpoints**.
 2. **Contextualize:** Identify ownership and dependencies using **Services**.
 
-Findings detected against endpoints in your inventory appear in [API Findings][2]. Each endpoint row in the API Endpoints explorer displays a findings chip; selecting it opens the finding in API Findings.
+To detect and respond to specific weaknesses, attacks, or misconfigurations, use **[API Findings][2]**. Each endpoint row in the API Endpoints explorer displays a findings chip; selecting it opens the finding in API Findings.
 
 ## Further reading
 
