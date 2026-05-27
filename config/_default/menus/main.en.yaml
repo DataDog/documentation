@@ -6143,6 +6143,46 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: Concepts
+      url: feature_flags/concepts
+      parent: feature_flags
+      identifier: feature_flags_concepts
+      weight: 3
+    - name: Environments
+      url: feature_flags/concepts/environments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_environments
+      weight: 301
+    - name: Variants and Flag Types
+      url: feature_flags/concepts/variants_and_flag_types
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_variants
+      weight: 302
+    - name: Targeting Rules and Filters
+      url: feature_flags/concepts/targeting_rules
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_rules
+      weight: 303
+    - name: Traffic Splitting and Randomization
+      url: feature_flags/concepts/traffic_splitting
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_traffic_splitting
+      weight: 304
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_distribution_channels
+      weight: 305
+    - name: Flag History
+      url: feature_flags/concepts/flag_history
+      parent: feature_flags_concepts
+      identifier: feature_flags_history
+      weight: 306
+    - name: MCP Server
+      url: feature_flags/feature_flag_mcp_server
+      parent: feature_flags
+      identifier: feature_flags_mcp_server
+      weight: 8
     - name: .NET
       url: feature_flags/server/dotnet
       parent: feature_flags_server
@@ -6173,16 +6213,6 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
-    - name: Flag History
-      url: feature_flags/history
-      parent: feature_flags
-      identifier: feature_flags_history
-      weight: 6
-    - name: MCP Server
-      url: feature_flags/feature_flag_mcp_server
-      parent: feature_flags
-      identifier: feature_flags_mcp_server
-      weight: 8
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
