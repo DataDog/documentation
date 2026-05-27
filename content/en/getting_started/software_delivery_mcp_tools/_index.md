@@ -108,11 +108,9 @@ Agent skills are prebuilt instruction sets for AI coding agents that automate co
 
 When the `software-delivery` MCP toolset is connected, skills are loaded automatically when your prompt matches their purpose — for example, "TestCheckoutServiceIntegration keeps failing in CI — investigate it" loads `/triage-flaky-test` without any installation required.
 
-To use the skills with [pup][7] or invoke them explicitly with a slash command, install them locally.
+To invoke the skills explicitly with a slash command, install them locally:
 
 ### Install
-
-Install the skills with the following command:
 
 ```shell
 npx skills add datadog-labs/agent-skills \
@@ -123,9 +121,10 @@ npx skills add datadog-labs/agent-skills \
 
 Restart Claude Code after installing for the slash commands to appear.
 
-The locally installed skills use the [pup][7] CLI as their data backend. Install and authenticate pup before using them:
+Each skill automatically uses the Datadog MCP server if connected, and falls back to the [pup][7] CLI otherwise. To use the pup fallback, install and authenticate pup:
 
 ```shell
+brew install datadog-labs/pack/pup
 pup auth login
 ```
 
@@ -138,11 +137,9 @@ pup auth login
 
 ### Triage flaky test
 
-`/triage-flaky-test` investigates a specific flaky test. It pulls 30-day failure history, extracts the top error messages and stack traces, and checks how many pipelines the test has impacted. If a CodeGen AI fix exists for the test, the skill surfaces it directly. Otherwise, it proposes a targeted fix based on the flaky category and stack trace, or recommends quarantine when the root cause is unclear. It produces a structured triage brief with a recommendation to fix, quarantine, or escalate to the owning team.
+`/triage-flaky-test` investigates a specific flaky test. It pulls 30-day failure history, extracts the top error messages and stack traces, and checks how many pipelines the test has impacted. It proposes a targeted fix based on the flaky category and stack trace, or recommends quarantine when the root cause is unclear. It produces a structured triage brief with a recommendation to fix, quarantine, or escalate to the owning team.
 
 If the skill recommends quarantine, it presents the proposed action and requires your explicit approval before writing. All state changes are reversible.
-
-**Note**: CodeGen AI fix surfacing requires the MCP toolset. When using pup, the skill proposes an agent-native fix instead.
 
 ```
 /triage-flaky-test TestCheckoutServiceIntegration
@@ -153,9 +150,9 @@ If the skill recommends quarantine, it presents the proposed action and requires
 
 `/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches — a blame guard that classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage and any code quality or security violations from PR insights. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section summarizing coverage and violations.
 
-For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions, it retries failed jobs using `retry_datadog_ci_job`; for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
+For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions, it retries failed jobs using `retry_datadog_ci_job` (MCP) or `gh run rerun` (pup fallback); for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
 
-**Note**: Code quality and security violation data and `retry_datadog_ci_job` require the MCP toolset. When using pup, the PR Health section shows coverage only and infra retries use `gh run rerun`.
+**Note**: Code quality and security violation data in the PR Health section requires the MCP toolset and is not available in pup mode.
 
 ```
 /unblock-pr
