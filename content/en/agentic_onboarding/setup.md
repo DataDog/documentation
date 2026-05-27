@@ -106,11 +106,11 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | Product | Frameworks |
 |---------|------------|
 | Error Tracking, RUM, Product Analytics | Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, Vue |
-| Kubernetes Observability | Helm, Kustomize, raw manifests, Terraform, Pulumi, Ansible — across GKE, EKS, AKS, minikube, and others (kind, k3s, OpenShift) |
+| Kubernetes Observability | Helm, Kustomize, raw manifests, Terraform, Pulumi, Ansible (across GKE, EKS, AKS, minikube, and others such as kind, k3s, and OpenShift) |
 | Docker Observability | `docker-compose` and sidecar (`docker run`) deployments; Terraform, Ansible, and other IaC (Pulumi, CloudFormation, Puppet, Chef) |
 | Linux Observability | Terraform, Ansible, other IaC (Pulumi, CloudFormation, Puppet, Chef), and plain-shell install |
-| Serverless Monitoring — AWS Lambda | AWS SAM, AWS CDK, Serverless Framework, Terraform, `datadog-ci lambda instrument` |
-| Serverless Monitoring — GCP Cloud Run / Cloud Run Functions | Terraform, `gcloud run deploy`, Cloud Run YAML, Dockerfile, Gen 2 `gcloud functions deploy` |
+| Serverless Monitoring (AWS Lambda) | AWS SAM, AWS CDK, Serverless Framework, Terraform, `datadog-ci lambda instrument` |
+| Serverless Monitoring (GCP Cloud Run and Cloud Run Functions) | Terraform, `gcloud run deploy`, Cloud Run YAML, Dockerfile, Gen 2 `gcloud functions deploy` |
 | LLM Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
 | OpenTelemetry | Node.js / server-side TS, Browser JS / React / Vite, Python (Django, Flask, FastAPI), Java, Go |
 | App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP (auto-detected from dependency manifests) |
@@ -126,7 +126,7 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-**Option 1: Install deeplink (recommended).** Click the install deeplink for your [Datadog site](/getting_started/site/), then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+**Option 1: Install deeplink (recommended).** Click the install deeplink for your [Datadog site][16], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -143,7 +143,7 @@ In an active Claude Code session, run:
 
 {{% tab "Other MCP clients" %}}
 
-Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site](/getting_started/site/):
+Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][16]:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
 
@@ -218,21 +218,11 @@ The agent detects your stack, requests permission before each tool call, applies
 - Confirm data is flowing in the Datadog UI for the product you set up: [Error Tracking][6], [RUM > Applications][7], [Infrastructure > Hosts][8], [Serverless > Functions][9], or [Logs > Live Tail][10].
 - For team-wide rollout, propagate environment variables through your secret manager.
 
-[1]: /error_tracking/frontend/
-[2]: /real_user_monitoring/
-[3]: /product_analytics/
-[4]: /containers/kubernetes/
-[5]: /serverless/
 [6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
 [8]: https://app.datadoghq.com/infrastructure
 [9]: https://app.datadoghq.com/functions
 [10]: https://app.datadoghq.com/logs/livetail
-[11]: /tracing/
-[12]: /logs/
-[13]: /tests/code_coverage/
-[14]: /tests/test_optimization/
-[15]: /llm_observability/
 [16]: /getting_started/site/
 [17]: https://claude.ai/code
 [18]: https://cursor.com/
