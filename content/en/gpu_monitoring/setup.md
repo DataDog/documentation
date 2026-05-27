@@ -228,32 +228,35 @@ services:
 {{% /tab %}}
 {{% tab "Linux (non-containerized)" %}}
 
-Modify your `/etc/datadog-agent/datadog.yaml` file to enable GPU monitoring
+GPU monitoring requires configuration in **both** `datadog.yaml` and `system-probe.yaml`. Configuring only `datadog.yaml` does not load the eBPF module and results in no metrics being collected.
 
-```yaml
-gpu:
-  enabled: true
-```
+1. Add the following to `/etc/datadog-agent/datadog.yaml`:
 
-Additionally, to enable advanced eBPF-based metrics such as GPU core utilization (`gpu.process.core.usage`), follow these steps:
+    ```yaml
+    gpu:
+      enabled: true
+    collect_gpu_tags: true
+    enable_nvml_detection: true
+    ```
 
-1. If `/etc/datadog-agent/system-probe.yaml` does not exist, create it from `system-probe.yaml.example`:
+2. If `/etc/datadog-agent/system-probe.yaml` does not exist, create it from the example:
 
     ```shell
     sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
-2. Edit `/etc/datadog-agent/system-probe.yaml` and enable GPU monitoring in system-probe:
+3. Add the following to `/etc/datadog-agent/system-probe.yaml`:
 
     ```yaml
     gpu_monitoring:
       enabled: true
     ```
 
-3. Restart the Datadog Agent
+4. Restart both the Agent and system-probe:
 
     ```shell
     sudo systemctl restart datadog-agent
+    sudo systemctl restart datadog-agent-sysprobe
     ```
 
 {{% /tab %}}
