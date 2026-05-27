@@ -4,11 +4,11 @@ title: Test Parallelization
 
 ## Overview
 
-Test Parallelization helps you reduce CI testing time by distributing test files across CI nodes or local workers. It uses Test Optimization data to detect which test files should run, estimate their duration, and create an execution plan for the remaining runnable tests.
+Test Parallelization helps you reduce CI testing time by distributing test files across CI nodes or local workers. It uses Test Optimization data to detect which test files should run, estimate their duration, and create an execution plan.
 
-Test Parallelization is designed to work with [Test Impact Analysis][1]. Test Impact Analysis selects the tests affected by a code change, and Test Parallelization splits those remaining tests across the available CI capacity.
+Test Parallelization is designed to work with [Test Impact Analysis][1]. Test Impact Analysis skips tests that are not affected by a code change. Test Parallelization splits the remaining test files evenly across the selected CI nodes.
 
-Use Test Parallelization when your test suite takes a long time to run. Datadog chooses the CI node or worker count based on historical test duration data.
+Use Test Parallelization when your test suite takes a long time to run. It distributes test files evenly across CI nodes or workers. When used with Test Impact Analysis, Test Parallelization runs only files with non-skipped tests. It also helps reduce CI costs by choosing only as many CI nodes as needed, which can lower total CPU minutes.
 
 ## Compatibility
 
