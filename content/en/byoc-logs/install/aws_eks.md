@@ -189,7 +189,7 @@ echo ""
    --from-literal api-key="<DD_API_KEY>"
    ```
 
-   <div class="alert alert-tip">You can set a default namespace for your current context to avoid having to type <code>-n &lt;NAMESPACE_NAME&gt;</code> with every command:
+   <div class="alert alert-tip"><p>You can set a default namespace for your current context to avoid having to type <code>-n &lt;NAMESPACE_NAME&gt;</code> with every command:</p>
    <pre><code>kubectl config set-context --current --namespace=&lt;NAMESPACE_NAME&gt;</code></pre></div>
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
@@ -203,7 +203,10 @@ echo ""
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, AWS account ID, service account, ingress setup, resource requests and limits, and more.
 
-   <div class="alert alert-info">The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To use it, follow the instructions in the <a href="https://aws.amazon.com/blogs/containers/migrating-amazon-eks-clusters-from-gp2-to-gp3-ebs-volumes/">AWS gp3 guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), use <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</div>
+   <div class="alert alert-info"><p>The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To create the gp3 storage class, follow the instructions in the <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html">AWS gp3 guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), set <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</p>
+   
+   <p>Datadog recommends gp3 storage volumes for BYOC Logs to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
+   </div>
 
    Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined in the chart's `values.yaml`.
 
@@ -316,7 +319,7 @@ echo ""
    -f datadog-values.yaml
    ```
 
-   <div class="alert alert-info">If a pod stays pending with a warning about insufficient memory or CPU and no available nodes, change <code>indexer.podSize</code> to <code>medium</code> in <code>datadog-values.yaml</code> and run the <code>helm upgrade --install</code> command again.</div>
+   <div class="alert alert-info">If a pod remains pending with a warning about insufficient memory or CPU and no available nodes, change <code>indexer.podSize</code> to <code>medium</code> in <code>datadog-values.yaml</code> and run the <code>helm upgrade --install</code> command again.</div>
 
 ## Verification
 
