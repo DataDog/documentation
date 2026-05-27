@@ -1344,6 +1344,10 @@
     "description": "List Cloud Cost Management metrics that have data for the requested period.",
     "summary": "List available Cloud Cost Management metrics"
   },
+  "ListCostTagMetadataMonths": {
+    "description": "List months that have Cloud Cost Management tag metadata for a given provider,\nordered most-recent first. The response is capped at 36 months.",
+    "summary": "List Cloud Cost Management tag metadata months"
+  },
   "ListCostTagMetadataOrchestrators": {
     "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
     "summary": "List Cloud Cost Management orchestrators"
@@ -3196,26 +3200,6 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
-  },
-  "DeleteScopesRestriction": {
-    "description": "Delete the scopes restriction configured for the OAuth2 client.",
-    "summary": "Delete an OAuth2 client scopes restriction"
-  },
-  "GetScopesRestriction": {
-    "description": "Get the scopes restriction configured for the OAuth2 client.",
-    "summary": "Get an OAuth2 client scopes restriction"
-  },
-  "UpsertScopesRestriction": {
-    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
-    "summary": "Upsert an OAuth2 client scopes restriction",
-    "request_description": "",
-    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
-  },
-  "RegisterOAuthClient": {
-    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
-    "summary": "Register an OAuth2 client",
-    "request_description": "",
-    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
   },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
