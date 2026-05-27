@@ -96,8 +96,15 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | Product | Frameworks |
 |---------|------------|
 | Error Tracking, RUM, Product Analytics | Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, Vue |
-| Infrastructure Monitoring (Kubernetes) | Terraform, Ansible, Kustomize, Helm, Pulumi, raw manifests |
-| Serverless Monitoring (AWS Lambda) | Terraform, AWS CDK, Serverless Framework, SAM |
+| Kubernetes Observability | Helm, Kustomize, raw manifests, Terraform, Pulumi, Ansible — across GKE, EKS, AKS, minikube, and others (kind, k3s, OpenShift) |
+| Docker Observability | `docker-compose` and sidecar (`docker run`) deployments; Terraform, Ansible, and other IaC (Pulumi, CloudFormation, Puppet, Chef) |
+| Linux Observability | Terraform, Ansible, other IaC (Pulumi, CloudFormation, Puppet, Chef), and plain-shell install |
+| Serverless Monitoring — AWS Lambda | AWS SAM, AWS CDK, Serverless Framework, Terraform, `datadog-ci lambda instrument` |
+| Serverless Monitoring — GCP Cloud Run / Cloud Run Functions | Terraform, `gcloud run deploy`, Cloud Run YAML, Dockerfile, Gen 2 `gcloud functions deploy` |
+| LLM Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
+| OpenTelemetry | Node.js / server-side TS, Browser JS / React / Vite, Python (Django, Flask, FastAPI), Java, Go |
+| App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP (auto-detected from dependency manifests) |
+| Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |
 
 ### Step 1: Install the MCP Server
 
