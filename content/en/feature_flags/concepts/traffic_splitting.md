@@ -5,9 +5,6 @@ further_reading:
 - link: "/feature_flags/concepts/targeting_rules"
   tag: "Documentation"
   text: "Targeting Rules and Filters"
-- link: "/feature_flags/use_cases/progressive_rollouts"
-  tag: "Documentation"
-  text: "Progressive Rollouts and Canaries"
 ---
 
 ## Overview
