@@ -43,6 +43,8 @@ gates:
   - type: patch_coverage_percentage
     config:
       threshold: 95
+comments:
+  disabled: false
 ```
 
 ## Services configuration
@@ -288,6 +290,35 @@ gates:
       flags:
         - "*"
         - "!nightly-*"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+## PR comments
+
+By default, Datadog posts a pull request comment with code coverage results after each coverage upload. You can suppress this comment on a per-repository basis with the `comments.disabled` field.
+
+```yaml
+comments:
+  disabled: true
+```
+
+When `comments.disabled` is set to `true`, Datadog stops adding the Code Coverage section to the pull request summary comment. PR Gate checks are not affected: any gates configured in this file or in the Datadog UI continue to evaluate and report their status as commit checks.
+
+The `comments` block accepts the following fields:
+
+- `disabled` (optional, defaults to `false`): A Boolean that suppresses the Code Coverage section of the pull request summary comment when set to `true`.
+
+### Example
+
+{{% collapse-content title="Enforce gates without posting comments" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+comments:
+  disabled: true
 {{< /code-block >}}
 {{% /collapse-content %}}
 
