@@ -101,16 +101,16 @@ Before you begin, ensure that you have an [AWS][7] account. The CloudFormation t
 
 ## Setup
 
-1. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
-1. Configure the integration's settings under the **Automatically using CloudFormation** option.  
-   1. Select the AWS regions to integrate with.  
-   1. Add your Datadog [API key][9].  
-   1. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
+1. Go to the [AWS integration configuration page][8] in Datadog and click {{< ui >}}Add AWS Account{{< /ui >}}.
+1. Configure the integration's settings under the {{< ui >}}Automatically using CloudFormation{{< /ui >}} option.
+   1. Select the AWS regions to integrate with.
+   1. Add your Datadog [API key][9].
+   1. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].
    1. Optionally, enable [Cloud Security Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
-1. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
+1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
-1. Check the required boxes from AWS and click **Create stack**. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
-1. After the stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
+1. Check the required boxes from AWS and click {{< ui >}}Create stack{{< /ui >}}. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
+1. After the stack is created, go back to the AWS integration tile in Datadog and click {{< ui >}}Ready!{{< /ui >}}
 1. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heatmap showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
 
@@ -137,11 +137,11 @@ Datadog does not backfill historical metric data from before the integration was
 
 See the [Integrations page][13] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account.
 
-Use the **Metric Collection** tab on the [AWS integration page][8] to configure which services the Datadog integration collects metrics from.
+Use the {{< ui >}}Metric Collection{{< /ui >}} tab on the [AWS integration page][8] to configure which services the Datadog integration collects metrics from.
 
 ### Add regions
 
-Under the **General** tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.
+Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.
 
 ## Send logs
 
@@ -212,7 +212,7 @@ To monitor AWS Lambda functions with Datadog, see [Serverless][42] for instructi
 
 ### APM
 
-To collect distributed traces from your applications and AWS services, use the [AWS X-Ray][46] integration or the Datadog Agent with [APM][47]. See the [APM documentation][48] for details on analyzing application performance data.
+To collect distributed traces from your applications and AWS services, use the Datadog Agent with [APM][47]. For AWS Lambda functions, instrument with the [Datadog Lambda Extension][44].  See the [APM documentation][48] for details on analyzing application performance data.
 
 You can also use [Watchdog][49], an algorithmic feature for APM performance and infrastructure metrics, to automatically detect and be notified about potential application issues.
 

@@ -76,11 +76,11 @@ If you do not define `run_count`, your experiment defaults to running 1 iteratio
 
 Navigate to [LLM Experiments][3] in Datadog and select an experiment with multiple runs.
 
-At the **Summary** level, evaluations and metrics are computed as:
+At the {{< ui >}}Summary{{< /ui >}} level, evaluations and metrics are computed as:
 - For score-based evaluations, the average across record averages
 - For categorical evaluations, the mode across record modes
 
-At the **Record** level, evaluations and metrics are computed as:
+At the {{< ui >}}Record{{< /ui >}} level, evaluations and metrics are computed as:
 - For score-based evaluations, the average across runs on the input
 - For categorical evaluations, the mode across runs on the input
 

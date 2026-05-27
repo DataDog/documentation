@@ -1,5 +1,5 @@
 ---
-title: LLM Observability MCP Tools
+title: LLM Observability MCP and Skills
 description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
 further_reading:
 - link: "bits_ai/mcp_server"
@@ -11,6 +11,9 @@ further_reading:
 - link: "/llm_observability/monitoring"
   tag: "Documentation"
   text: "Monitor your application with LLM Observability"
+- link: "/llm_observability/guide/claude_code_skills"
+  tag: "Guide"
+  text: "Analyze LLM Applications with Claude Code Skills"
 ---
 
 ## Overview
@@ -155,7 +158,96 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-A set of agent skills that use these MCP endpoints is available in the [datadog-labs/agent-skills](https://github.com/datadog-labs/agent-skills) repository. These skills automate some of the manual work for the use cases below.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+
+### Install
+
+Install the `dd-llmo` skills with the following command:
+
+```shell
+npx skills add datadog-labs/agent-skills --skill dd-llmo --full-depth -y
+```
+
+The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
+
+```shell
+claude mcp add --scope user --transport http "datadog-llmo-mcp" \
+  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+```
+
+Restart Claude Code after running both commands for the skills to appear.
+
+### Available skills
+
+| Skill | Invoke with | What it does |
+|-------|-------------|-------------|
+| Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
+| Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
+| Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
+| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
+| Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
+
+#### Session classification
+
+`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: LLM Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+
+```
+/llm-obs-session-classify session_id=<SESSION_ID>
+/llm-obs-session-classify trace_id=<TRACE_ID>
+/llm-obs-session-classify ml_app=my-chatbot --timeframe now-7d
+```
+
+#### Trace root cause analysis
+
+`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
+
+When Claude Code has access to your codebase, the skill can search for the relevant source files and propose diffs inline.
+
+```
+/llm-obs-trace-rca ml_app=my-chatbot
+/llm-obs-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
+```
+
+#### Evaluator bootstrap
+
+`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of three artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, or online LLM-judge evaluators published directly to Datadog.
+
+```
+/llm-obs-eval-bootstrap ml_app=my-chatbot
+/llm-obs-eval-bootstrap ml_app=my-chatbot --publish
+/llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+```
+
+#### Experiment analyzer
+
+`/llm-obs-experiment-analyzer` retrieves experiment results and surfaces what changed between a candidate and a baseline: which metrics improved, which regressed, and where the candidate underperformed.
+
+```
+/llm-obs-experiment-analyzer experiment_id=<EXPERIMENT_ID>
+/llm-obs-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
+```
+
+#### Generate experiment code with the Python SDK
+
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+
+```
+/llm-obs-experiment-py-bootstrap
+/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
+```
+
+#### End-to-end eval pipeline
+
+`/llm-obs-eval-pipeline` chains session classification, trace RCA, and evaluator bootstrap into a single supervised workflow with user checkpoints between phases. It is the recommended starting point when you have no existing evaluators for an application.
+
+```
+/llm-obs-eval-pipeline my-chatbot
+/llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
+```
+
+For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
 
 ## Use cases
 
@@ -290,3 +382,5 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [5]: /getting_started/site/
 [6]: /account_management/api-app-keys/
 [7]: /account_management/org_settings/service_accounts/
+[8]: https://github.com/datadog-labs/agent-skills
+[9]: /llm_observability/guide/claude_code_skills

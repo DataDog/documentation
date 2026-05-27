@@ -4,75 +4,79 @@ aliases:
 cascade:
   algolia:
     rank: 70
+description: Monitorea las métricas de salud del servicio en todo tu stack sin instrumentación
+  de código utilizando Universal Service Monitoring y el Datadog Agent.
 further_reading:
 - link: /universal_service_monitoring/setup/
   tag: Documentación
   text: Configuración de Universal Service Monitoring
 - link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
-  text: Señales clave en segundos con Universal Service Monitoring
+  text: Señales doradas en segundos con Universal Service Monitoring
 - link: /getting_started/tagging/unified_service_tagging/
   tag: Documentación
-  text: Etiquetado de servicios unificado
+  text: Unified Service Tagging
 - link: /tracing/software_catalog/
   tag: Documentación
-  text: Descubrir y catalogar los servicios que informan a Datadog
+  text: Descubre y cataloga los servicios que reportan a Datadog
 - link: /tracing/services/service_page/
   tag: Documentación
-  text: Más información sobre servicios en Datadog
+  text: Aprende más sobre los servicios en Datadog
 - link: /tracing/services/services_map/
   tag: Documentación
-  text: Leer sobre el Mapa de servicios
+  text: Lee sobre el Service Map
 - link: https://www.datadoghq.com/blog/monitor-connection-churn-datadog/
   tag: Blog
-  text: Prácticas recomendadas para la monitorización y corrección del churn de conexiones
+  text: Mejores prácticas para monitorear y remediar la rotación de conexiones
 - link: https://www.datadoghq.com/blog/software-catalog/
   tag: Blog
-  text: Mejorar la experiencia y la colaboración de los desarrolladores con Software
-    Catalog
+  text: Mejora la experiencia del desarrollador y la colaboración con el Catálogo
+    de Software
+- link: https://learn.datadoghq.com/courses/getting-started-usm
+  tag: Centro de Aprendizaje
+  text: Comenzando con Universal Service Monitoring (USM)
 title: Universal Service Monitoring
 ---
+## Resumen {#overview}
 
-## Información general
+Universal Service Monitoring (USM) proporciona visibilidad en las métricas de salud de tu servicio de manera universal en todo tu stack _sin tener que instrumentar tu código_. Se basa únicamente en la presencia de un Datadog Agent configurado y [Unified Service Tagging][1], y trae datos de rendimiento sobre tus servicios no instrumentados a vistas como el Software Catalog y Service Map. USM también funciona con [Deployment Tracking][2], Monitors, Dashboards y SLOs.
 
-Universal Service Monitoring (USM) proporciona visibilidad de las métricas de salud de tus servicios de forma universal en todo tu stack tecnológico _sin tener que instrumentar tu código_. Se basa únicamente en la presencia de un Datadog Agent configurado y el [etiquetado unificado de servicio][1], y aporta datos de rendimiento sobre tus servicios no instrumentados en vistas como Software Catalog y Mapa de servicios. USM también funciona con [Deployment Tracking][2], monitores, dashboards y SLO.
+{{< img src="universal_service_monitoring/usm-demo.mp4" alt="Video que demuestra Universal Service Monitoring. Un resumen de un servicio se accede haciendo clic en un servicio en el Service Map y seleccionando View service overview." video="true" >}}
 
-{{< img src="universal_service_monitoring/usm-demo.mp4" alt="Vídeo que demuestra Universal Service Monitoring. Información general de un servicio al que se accede haciendo clic en un servicio en el Mapa de servicio y seleccionando Ver información general." video="true" >}}
+## Configuración {#setup}
 
-## Configurar
+Para obtener información sobre las plataformas y protocolos compatibles, y para instrucciones sobre cómo comenzar, lea [Setting Up Universal Service Monitoring][7].
 
-Para obtener información sobre las plataformas y protocolos compatibles y para obtener instrucciones sobre cómo empezar, lee [Configuración de Universal Service Monitoring][7].
+<div class="alert alert-info"><strong>Vista previa: Protocolos adicionales y métodos de cifrado</strong><p>USM está en vista previa para descubrir servicios en la nube y para decodificar protocolos adicionales y métodos de cifrado de tráfico. Para más información y para solicitar acceso, lea <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
 
-<div class="alert alert-info"><strong>Vista previa: protocolos y métodos de cifrado adicionales</strong><p>USM está en Vista previa para detectar servicios en la nube y para decodificar protocolos adicionales y métodos de encriptación de tráfico. Para obtener más información y solicitar acceso, lee <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
+## Etiquetado automático de servicios {#automatic-service-tagging}
 
-## Etiquetado de servicios automático
+Universal Service Monitoring detecta automáticamente los servicios que se ejecutan en tu infraestructura. Si no encuentra [unified service tags][1], les asigna un nombre basado en una de las etiquetas: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
 
-Universal Service Monitoring detecta automáticamente servicios que se ejecutan en tu infraestructura. Si no encuentra [etiquetas de servicio unificado][1], les asigna un nombre basado en una de las etiquetas (tags): `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
+Para actualizar el nombre del servicio, configure [Unified Service Tagging][1].
 
-Para actualizar el nombre del servicio, configura [Etiquetado de servicios unificado][1].
+{{< img src="universal_service_monitoring/automatic-service-tagging.png" alt="Cuando Datadog detecta automáticamente tus servicios, la etiqueta utilizada para ello se muestra en la parte superior de la página del servicio." style="width:80%;" >}}
 
-{{< img src="universal_service_monitoring/automatic-service-tagging.png" alt="Cuando Datadog detecta automáticamente tus servicios, la etiqueta utilizada para mostrar esto está en la parte superior de la Página de servicios" style="width:80%;" >}}
+## Explorando tus servicios {#exploring-your-services}
 
-## Explorar tus servicios
+Después de configurar el Agent, espera aproximadamente cinco minutos para que tu servicio aparezca en el Software Catalog. Haz clic en el servicio para ver la página de detalles del servicio. Un nombre de operación de `universal.http.server` o `universal.http.client` en la esquina superior izquierda indica que la telemetría del servicio proviene de Universal Service Monitoring.
 
-Después de configurar el Agent, espera unos cinco minutos a que tu servicio aparezca en el Software Catalog. Haz clic en el servicio para ver la página de detalles del servicio. Un nombre de operación de `universal.http.server` o `universal.http.client` en la parte superior izquierda indica que la telemetría del servicio procede de Universal Service Monitoring.
+El nombre de operación `universal.http.server` captura métricas de salud para el tráfico entrante a su servicio. El nombre de operación correspondiente `universal.http.client` representa el tráfico saliente a otros destinos.
 
-El nombre de operación `universal.http.server` captura las métricas de estado para el tráfico entrante a tu servicio. El nombre de operación `universal.http.client` correspondiente representa el tráfico saliente hacia otros destinos.
+{{< img src="universal_service_monitoring/select_service_operation_cropped.png" alt="El menú desplegable de operaciones en la pestaña de Services muestra los nombres de operación disponibles." style="width:100%;" >}}
 
-{{< img src="universal_service_monitoring/select_service_operation_cropped.png" alt="El menú desplegable de la operación en la pestaña Services (Servicios) que muestra los nombres de operación disponibles" style="width:100%;" >}}
-
-Después de activar Universal Service Monitoring, puedes:
-
-
-- Navega a **APM** > **Software Catalog** o **APM** > **Service Map** (APM > Mapa de servicios) para [visualizar tus servicios y sus dependencias][3].
-
-- Haz clic en páginas específicas de servicio para ver las métricas de señales clave (solicitudes, errores y duración) y correlacionarlas con los cambios de código recientes con [Rastreo de implementación][2].
-
-- Crea [monitores][4], [dashboards][5] y [SLOs][6] utilizando las métricas `universal.http.*`.
+Después de habilitar Universal Service Monitoring, puedes:
 
 
+Navega a - **APM** > **Software Catalog** o **APM** > **Service Map** para [visualizar tus servicios y sus dependencias][3].
 
-## Referencias adicionales
+- Haz clic en páginas de servicio específicas para ver métricas de señal dorada (solicitudes, errores y duración), y correlaciona estas con cambios recientes en el código con [Deployment Tracking][2].
+
+- Crea [monitors][4], [Dashboards][5] y [SLOs][6] utilizando las métricas `universal.http.*`.
+
+
+
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -81,5 +85,5 @@ Después de activar Universal Service Monitoring, puedes:
 [3]: /es/tracing/software_catalog/
 [4]: /es/monitors/types/apm/?tab=apmmetrics
 [5]: /es/dashboards/
-[6]: /es/service_management/service_level_objectives/metric/
+[6]: /es/service_level_objectives/metric/
 [7]: /es/universal_service_monitoring/setup/

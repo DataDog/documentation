@@ -21,7 +21,7 @@ The Playground supports two flows:
 
 ## Prerequisites
 
-Connect at least one model provider integration in [**AI Observability > Settings > Integrations**][3] before using the Playground.
+Connect at least one model provider integration in [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][3] before using the Playground.
 
 Supported providers:
 - OpenAI
@@ -37,18 +37,18 @@ Supported providers:
 
 Use Prompts mode to iterate on a prompt with a fixed set of inputs.
 
-1. Navigate to [**AI Observability > Playground**][1].
+1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Playground{{< /ui >}}][1].
 1. Write your system and user prompts in the message editor. To parameterize inputs, use `{{variable_name}}` in any message.
-1. Open the **Model configuration** panel using the top bar.
-1. In the configuration panel, select a **Provider**, an **Account** and a **Model**.
-1. (Optional) Click **Edit Response Structure** to request structured output from the model.
-1. (Optional) Click **Model Parameters** to specify the parameters of the model.
-1. (Optional) Click **Add New** next to **Tools** to add tool definitions in JSON function schema format. Use the provided examples (Weather, Web Search, Email, Stock Price) as starting points.
-1. You can enter values for each variable in the **Variables** section to substitute for the parameters you defined in your user and system prompts.
-1. Click **Done** to save the configuration and close the modal.
-1. Click **Run** to send the prompt and view the model response.
+1. Open the {{< ui >}}Model configuration{{< /ui >}} panel using the top bar.
+1. In the configuration panel, select a {{< ui >}}Provider{{< /ui >}}, an {{< ui >}}Account{{< /ui >}} and a {{< ui >}}Model{{< /ui >}}.
+1. (Optional) Click {{< ui >}}Edit Response Structure{{< /ui >}} to request structured output from the model.
+1. (Optional) Click {{< ui >}}Model Parameters{{< /ui >}} to specify the parameters of the model.
+1. (Optional) Click {{< ui >}}Add New{{< /ui >}} next to {{< ui >}}Tools{{< /ui >}} to add tool definitions in JSON function schema format. Use the provided examples (Weather, Web Search, Email, Stock Price) as starting points.
+1. You can enter values for each variable in the {{< ui >}}Variables{{< /ui >}} section to substitute for the parameters you defined in your user and system prompts.
+1. Click {{< ui >}}Done{{< /ui >}} to save the configuration and close the modal.
+1. Click {{< ui >}}Run{{< /ui >}} to send the prompt and view the model response.
 
-Edit messages, variable values, or model settings, then click **Run** again to iterate.
+Edit messages, variable values, or model settings, then click {{< ui >}}Run{{< /ui >}} again to iterate.
 
 ## Run an experiment from the Playground
 
@@ -72,49 +72,49 @@ Map dataset columns to the sections available in your prompt:
 
 | Section | Description |
 |---------|-------------|
-| **Input** | Columns from the input section of each record, used to fill `{{input.*}}` variables. If the input value is a JSON object, its top-level keys are exposed as individual variables (for example, `{{input.question}}` and `{{input.category}}`). If the input value is a plain string or number, the whole field is available as `{{input}}`. |
-| **Expected Output** | Ground truth values used by evaluators to score model output. If the value is a JSON object, top-level keys are exposed individually (for example, `{{expected_output.answer}}`). Available as `{{expected_output}}` for plain values. |
-| **Metadata** | Additional context columns. Top-level keys of a JSON object are available as `{{metadata.*}}` variables. |
+| {{< ui >}}Input{{< /ui >}} | Columns from the input section of each record, used to fill `{{input.*}}` variables. If the input value is a JSON object, its top-level keys are exposed as individual variables (for example, `{{input.question}}` and `{{input.category}}`). If the input value is a plain string or number, the whole field is available as `{{input}}`. |
+| {{< ui >}}Expected Output{{< /ui >}} | Ground truth values used by evaluators to score model output. If the value is a JSON object, top-level keys are exposed individually (for example, `{{expected_output.answer}}`). Available as `{{expected_output}}` for plain values. |
+| {{< ui >}}Metadata{{< /ui >}} | Additional context columns. Top-level keys of a JSON object are available as `{{metadata.*}}` variables. |
 
-Click **Use this dataset** to proceed to the preview stage.
+Click {{< ui >}}Use this dataset{{< /ui >}} to proceed to the preview stage.
 
 <div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Go back to your prompt and correct the variable paths to match the columns shown in the table above.</div>
 
 ### 3. Add evaluators
 
-Evaluators score each row after a preview run. Click **Add Evaluators** in the toolbar to open the evaluator configuration modal.
+Evaluators score each row after a preview run. Click {{< ui >}}Add Evaluators{{< /ui >}} in the toolbar to open the evaluator configuration modal.
 
-The Playground supports **String Check** evaluators. Add multiple evaluators to score different aspects of the output in one run.
+The Playground supports {{< ui >}}String Check{{< /ui >}} evaluators. Add multiple evaluators to score different aspects of the output in one run.
 
 {{% collapse-content title="String Check evaluator options" level="h4" expanded=false %}}
 
 | Field | Description |
 |-------|-------------|
-| **Operator** | The comparison to apply: `equals`, `not equals`, or `contains`. |
-| **Case sensitive** | When enabled, the comparison is case-sensitive. |
-| **Strip whitespace** | When enabled, leading and trailing whitespace is trimmed before comparing. |
-| **Left operand** | The value to evaluate—defaults to the model output (`output`). |
-| **Right operand** | The value to compare against—defaults to the expected output. Supports dot notation for nested fields. |
-| **Name** | An alias displayed as the column header in the results table. |
+| {{< ui >}}Operator{{< /ui >}} | The comparison to apply: `equals`, `not equals`, or `contains`. |
+| {{< ui >}}Case sensitive{{< /ui >}} | When enabled, the comparison is case-sensitive. |
+| {{< ui >}}Strip whitespace{{< /ui >}} | When enabled, leading and trailing whitespace is trimmed before comparing. |
+| {{< ui >}}Left operand{{< /ui >}} | The value to evaluate—defaults to the model output (`output`). |
+| {{< ui >}}Right operand{{< /ui >}} | The value to compare against—defaults to the expected output. Supports dot notation for nested fields. |
+| {{< ui >}}Name{{< /ui >}} | An alias displayed as the column header in the results table. |
 
 {{% /collapse-content %}}
 
 ### 4. Run a preview
 
-Click **Run Preview** to execute the prompt on up to 20 dataset records.
+Click {{< ui >}}Run Preview{{< /ui >}} to execute the prompt on up to 20 dataset records.
 
 After the preview completes:
-- Each row shows a **PASS** or **FAIL** badge for each evaluator.
+- Each row shows a {{< ui >}}PASS{{< /ui >}} or {{< ui >}}FAIL{{< /ui >}} badge for each evaluator.
 - The column header shows the aggregate pass and fail counts.
 - A summary banner displays the overall result.
 
-Click a **FAIL** badge to expand a popover showing the actual output, the operator, the expected value, and a contextual hint. For example, when an `equals` check fails because the output contains the expected value as a substring, the popover suggests switching to `contains`.
+Click a {{< ui >}}FAIL{{< /ui >}} badge to expand a popover showing the actual output, the operator, the expected value, and a contextual hint. For example, when an `equals` check fails because the output contains the expected value as a substring, the popover suggests switching to `contains`.
 
 ### Iterate on prompt and evaluator configuration
 
 {{< img src="llm_observability/playground/playground-stale-preview.png" alt="LLM Observability Playground showing stale preview state after a prompt edit. A warning banner reads 'Prompt or settings changed since the last preview. Run the preview again before running the full dataset.' with a Re-run Preview button. The results table shows PASS and FAIL badges from the previous run." style="width:100%;" >}}
 
-After reviewing results, edit the prompt or evaluator configuration to improve scores. Any edit marks the preview results as stale. Click **Re-run Preview** to run again with the updated configuration.
+After reviewing results, edit the prompt or evaluator configuration to improve scores. Any edit marks the preview results as stale. Click {{< ui >}}Re-run Preview{{< /ui >}} to run again with the updated configuration.
 
 Common iteration patterns:
 - If most rows fail `equals`, check whether `contains` or case-insensitive comparison better reflects the task.
@@ -123,15 +123,15 @@ Common iteration patterns:
 
 ### 5. Save the experiment
 
-When the preview results meet your expectations, click **Save & Run as experiment** in the top toolbar to run on the full dataset.
+When the preview results meet your expectations, click {{< ui >}}Save & Run as experiment{{< /ui >}} in the top toolbar to run on the full dataset.
 
 In the dialog:
 
-1. Enter an **Experiment name**.
-1. Select a **Project**.
-1. Click **Save**.
+1. Enter an {{< ui >}}Experiment name{{< /ui >}}.
+1. Select a {{< ui >}}Project{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
-The experiment runs across all records in the dataset—not only the 20-record preview sample. When complete, view results in [**AI Observability > Experiments**][2].
+The experiment runs across all records in the dataset—not only the 20-record preview sample. When complete, view results in [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}}][2].
 
 ## Further reading
 

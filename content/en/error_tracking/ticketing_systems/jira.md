@@ -26,16 +26,15 @@ Integrate Jira with Error Tracking to create and link Jira tickets to Error Trac
 
 ## Prerequisites
 
-Follow [these steps][7] to set up the Jira integration for Datadog.
-
 <div class="alert alert-info">Ticket creation from an Error Tracking issue is available for Jira Cloud and Data Center. Dual-sync between Jira and Error Tracking is only available for Jira Cloud.</div>
 
-You need the following [permissions][1] to use the Jira integration for Error Tracking:
-
-- Error Tracking Read
-- Error Tracking Issue Write
-- Cases Read
-- Cases Write
+1. Set up the [Jira integration for Datadog][7].
+2. Make sure you have the following [permissions][1]:
+   - Error Tracking Read
+   - Error Tracking Issue Write
+   - Cases Read
+   - Cases Write
+   - Integrations Read
 
 ## Create a ticket from an issue
 

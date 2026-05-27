@@ -49,9 +49,9 @@ From the [correlation configuration page][2]
    Customize case title
    : to create a template to replace the automatically generated case title. You can reference tag template variables using handlebars syntax, for     example "{{tag.service}}", to include a comma-separated list of tag values.
    
-1. Under **Advanced correlation logic**, you can specify the minimum number of correlated events it takes to create a case and update the timeframe.
+1. Under {{< ui >}}Advanced correlation logic{{< /ui >}}, you can specify the minimum number of correlated events it takes to create a case and update the timeframe.
 
-    **Timeframes**
+    {{< ui >}}Timeframes{{< /ui >}}
 
     Correlate alerts to a case for
     : The max duration that net new alerts will be added to a case 
@@ -75,7 +75,7 @@ Use this data to preview the impact of your correlations and understand the expe
 
 ## Select a Case Management destination
 
-1. From the *Project* dropdown menu, select from an existing Case to send your grouped events to.
+1. From the {{< ui >}}Project{{< /ui >}} dropdown menu, select from an existing Case to send your grouped events to.
 1. (Optional) Add a tag to resulting cases.
 1. Click {{< ui >}}Save and Activate{{< /ui >}} to activate this pattern and group events into cases.
 

@@ -50,6 +50,7 @@ Functions can be applied to your queries by clicking the Add Function `Σ` icon 
     {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply a machine learning function.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Control the number of raw data points used. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/telemetry_source" >}}Telemetry Source: Choose the telemetry source of your metric data.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/beta" >}}Beta: Compute the rolling average of a metric.{{< /nextlink >}}
 {{< /whatsnext >}}

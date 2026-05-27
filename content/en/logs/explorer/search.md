@@ -29,13 +29,13 @@ Natural Language Queries is not available in the <a href="/getting_started/site"
 
 <div class="alert alert-info">Natural Language Queries (NLQ) for Logs is <strong>built with Llama</strong>.</div>
 
-Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured log query, making it easier to explore logs without needing to write complex syntax. To access this feature, click **Ask** in the search field.
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured log query, making it easier to explore logs without needing to write complex syntax. To access this feature, click {{< ui >}}Ask{{< /ui >}} in the search field.
 
 {{< img src="/logs/explorer/search/log_explorer_nlq.mp4" alt="Natural language query in Log Explorer showing how to search for logs using plain English phrases" video=true >}}
 
 The system translates natural language input into Datadog queries and understands context such as services, attributes, tags, and time ranges. It also detects relevant fields automatically and enables users to create visualizations using simple descriptions—for example, "Top 20 services by errors" or "Show errors from service X in the past 24 hours."
 
-To disable NLQ, you must have [`org_management` permissions][2]. Navigate to [Organization Settings > Preferences][3] and toggle off the Natural Language Queries feature.
+To disable NLQ, you must have [`org_management` permissions][2]. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Preferences{{< /ui >}}][3] and toggle off the Natural Language Queries feature.
 
 ## Search query
 

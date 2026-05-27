@@ -45,7 +45,7 @@ Telemetry data is not available in the following situations:
 - The service name is manually set on spans (a [Service Override][4]).
 
 [1]: /tracing/trace_collection/runtime_config
-[2]: /agent/fleet_automation/remote_management
+[2]: /agent/fleet_automation/
 [3]: /agent/configuration/network/#destinations
 [4]: /tracing/guide/base_service/#service-overrides
 [5]: https://app.datadoghq.com/software

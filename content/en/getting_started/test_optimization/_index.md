@@ -59,7 +59,7 @@ You can create [dashboards][4] for monitoring flaky tests, performance regressio
 
 A [flaky test][6] is a test that exhibits both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the same test now passes, that test is unreliable and marked as flaky.
 
-You can access flaky test information in the **Flaky Tests** section of a test run’s overview page, or as a column on your list of test services on the [**Test List** page][7].
+You can access flaky test information in the {{< ui >}}Flaky Tests{{< /ui >}} section of a test run’s overview page, or as a column on your list of test services on the [{{< ui >}}Test List{{< /ui >}} page][7].
 
 {{< img src="getting_started/test_visibility/commit_flaky_tests.png" alt="Flaky tests that can be ignored in the Commits section of a test run" style="width:100%;" >}}
 
@@ -80,7 +80,7 @@ Failure rate
 Trend
 : A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
 
-Test Optimization displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s **Flaky Tests** section:
+Test Optimization displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s {{< ui >}}Flaky Tests{{< /ui >}} section:
 
 New Flaky Test Runs
 : How often new flaky tests are being detected.
@@ -88,7 +88,7 @@ New Flaky Test Runs
 Known Flaky Test Runs
 : All of the test failures associated with the flaky tests being tracked. This shows every time a flaky test "flakes”.
 
-To ignore new flaky tests for a commit that you’ve determined the flaky tests were detected by mistake, click on a test containing a **New Flaky** value with a dropdown option, and click **Ignore flaky tests**. For more information, see [Flaky Test Management][8].
+To ignore new flaky tests for a commit that you’ve determined the flaky tests were detected by mistake, click on a test containing a {{< ui >}}New Flaky{{< /ui >}} value with a dropdown option, and click {{< ui >}}Ignore flaky tests{{< /ui >}}. For more information, see [Flaky Test Management][8].
 
 ## Examine results in the Test Optimization Explorer
 
@@ -97,7 +97,7 @@ The Test Optimization Explorer allows you to create visualizations and filter te
 {{< tabs >}}
 {{% tab "Session" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Session` to start filtering your test session span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Session{{< /ui >}} to start filtering your test session span results. 
 
 {{< img src="/getting_started/test_visibility/session.png" alt="Test session results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -106,7 +106,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 {{% /tab %}}
 {{% tab "Module" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Module{{< /ui >}} to start filtering your test module span results. 
 
 {{< img src="/getting_started/test_visibility/module.png" alt="Test module results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -115,7 +115,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 {{% /tab %}}
 {{% tab "Suite" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Suite{{< /ui >}} to start filtering your test suite span results. 
 
 {{< img src="/getting_started/test_visibility/suite.png" alt="Test suite results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -124,7 +124,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 {{% /tab %}}
 {{% tab "Test" %}}
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select {{< ui >}}Test{{< /ui >}} to start filtering your test span results. 
 
 {{< img src="/getting_started/test_visibility/test.png" alt="Test results in the Test Optimization Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -135,7 +135,7 @@ Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][101]
 
 Use [facets][9] to customize the search query and identify changes in time spent on each level of your test run.
 
-Once you click on a test on the **Test List** page, you can see a flame graph or a list of spans on the **Trace** tab. 
+Once you click on a test on the {{< ui >}}Test List{{< /ui >}} page, you can see a flame graph or a list of spans on the {{< ui >}}Trace{{< /ui >}} tab. 
 
 {{< img src="/getting_started/test_visibility/failed_test_trace.png" alt="A stack trace of a failed test run on the Test List page" style="width:100%" >}}
 
@@ -155,13 +155,13 @@ Alert relevant teams in your organization about test performance regressions whe
 
 To set up a monitor that alerts when the amount of test failures exceeds a threshold of 1 failure:
 
-1. Navigate to [**Monitors** > **New Monitor**][12] and select **CI**. 
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][12] and select {{< ui >}}CI{{< /ui >}}. 
 1. Select a common monitor type for CI tests to get started, for example: `New Flaky Test` to trigger alerts when new flaky tests are added to your code base, `Test Failures` to trigger alerts for test failures, or `Test Performance` to trigger alerts for test performance regressions, or customize your own search query. In this example, select the `Branch (@git.branch)` facet to filter your test runs on the `main` branch.
 1. In the `Evaluate the query over the` section, select last 15 minutes. 
 1. Set the alert conditions to trigger when the evaluated value is above the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 1`.
 1. Define the monitor notification.
 1. Set permissions for the monitor.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 For more information, see the [CI Monitor documentation][13]. 
 
