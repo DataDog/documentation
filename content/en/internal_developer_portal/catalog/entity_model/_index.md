@@ -319,7 +319,6 @@ To create, get, and delete definitions for all entity types like endpoints, syst
 [4]: https://en.wikipedia.org/wiki/Glob_(programming)
 [5]: /api/latest/software-catalog/
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
-[7]: catalog/customize/import_entries_backstage
 [8]: /api/latest/software-catalog/
 
 {{% /tab %}}
