@@ -351,7 +351,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% if equals($secrets_source, "secrets_management") %}
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
-6. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
+6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
 7. Run the command provided in the UI to install the Worker.
 8. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
@@ -654,7 +654,7 @@ Depending on your use case, configure either an [Application Load Balancer][22] 
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-- If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines helm chart.
+- If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart.
 - See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
@@ -810,7 +810,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
     ```
 {% /if %}
 
-4. Start the worker:
+4. Start the Worker:
     ```shell
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -859,7 +859,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
     DD_SITE=<SITE>
     EOF
     ```
-4. Start the worker:
+4. Start the Worker:
     ```shell
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -879,7 +879,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
     <DESTINATION_ENV_VARIABLES>
     EOF
     ```
-4. Start the worker:
+4. Start the Worker:
     ```shell
     sudo systemctl restart observability-pipelines-worker
     ```
