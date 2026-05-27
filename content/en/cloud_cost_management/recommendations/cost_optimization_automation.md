@@ -27,7 +27,9 @@ Each automation targets a single recommendation type and includes the following:
 
 Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}} automatically and contribute to realized savings on the [Cloud Cost Recommendations][1] page.
 
-Cost Optimization Automation is different from the 1-click Workflow Automation actions described in [Recommendation action-taking][6]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
+Cost Optimization Automation is different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
+
+**Note**: Cost Optimization Automation uses Datadog Workflows and incurs additional costs. For detailed pricing information, see the [Workflow Automation pricing page][3].
 
 ## Supported recommendation types
 
@@ -44,57 +46,32 @@ Cost Optimization Automation supports the following AWS recommendation types:
 
 ## Prerequisites
 
-- An AWS account configured with [Cloud Cost Recommendations][7] and actively generating recommendations.
+- An AWS account configured with [Cloud Cost Recommendations][4] and actively generating recommendations.
 - The **Cloud Cost Management - Cloud Cost Management Write** permission to create or edit an automation.
-- A [Workflow Automation connection][3] to each AWS account you want an automation to act on. Datadog uses this connection to assume an IAM role with the write permissions needed for the recommended action. Datadog grants only the permissions required for the selected recommendation type.
+- A [Workflow Automation connection][5] to each AWS account you want an automation to act on. Datadog uses this connection to assume an IAM role with the write permissions needed for the recommended action. Datadog grants only the permissions required for the selected recommendation type.
 - (Optional) A Slack or Microsoft Teams connection if you want approval messages routed to a channel.
 
 ## Set up an automation
 
-Go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4] and click {{< ui >}}Set Up New Automation{{< /ui >}}.
+To set up an automation on a recurring schedule for a recommendation type:
 
-### Step 1: Choose a recommendation type
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][6].
+1. On the left side of the page, select the recommendation type.
+1. Click **Create New Automation**.
+1. In the {{< ui >}}AWS Connection{{< /ui >}} dropdown menu, select or create a [connection][7]. To act across multiple accounts with one automation, select or create a [connection group][8].
+1. In the {{< ui >}}Define scope{{< /ui >}} section:
+    1. Enter tags to restrict the automation to resources matching those tags, such as `env`, `service`, and `team`.
+    1. Enter the maximum resources per run to cap how many resources the automation acts on during a single execution. The automation prioritizes resources by highest potential savings.
+1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the automation frequency and execution time.
+1. (Optional) Enable the {{< ui >}}Require approval before execution{{< /ui >}} toggle to require human review before execution. If enabled, select {{< ui >}}Slack{{< /ui >}} or {{< ui >}}Microsoft Teams{{< /ui >}}, and fill out the channel notification fields. See [Safeguards](#safeguards).
+1. Enter a name for the automation.
+1. Click {{< ui >}}Save Policy{{< /ui >}}.
 
-Select the recommendation type the automation targets. Datadog displays the AWS accounts that contain applicable resources, the estimated monthly savings, and the number of resources that match.
-
-### Step 2: Connect an AWS account
-
-Select the AWS account the automation executes against. To act across multiple accounts with one automation, select a [connection group][5].
-
-If the selected account does not have a connection with the required write permissions, follow the in-product wizard to create one.
-
-### Step 3: Define the scope
-
-Narrow what the automation acts on:
-
-- **Filters**: Restrict the automation to resources matching tags, regions, or other recommendation attributes. For example, scope an automation to `environment:sandbox` to limit it to non-production resources.
-- **Max resources per run**: Cap how many resources the automation acts on during a single execution. The automation prioritizes resources by highest potential savings.
-
-### Step 4: Set the execution schedule
-
-Choose how often the automation runs:
-
-- Weekly
-- Biweekly
-- Every 30 days
-- Every 90 days
-
-You can also specify the day of the week and the time of day the automation executes.
-
-### Step 5: Configure safeguards and approval
+### Safeguards
 
 Each recommendation type has built-in safeguards. For example, the **Terminate Unattached EBS Volume** automation takes an EBS snapshot before deleting each volume. Review the safeguards listed in the automation form and toggle the ones that are optional for your environment.
 
-To require human review before execution:
-
-1. Turn on {{< ui >}}Require approval before execution{{< /ui >}}.
-2. Select a Slack or Microsoft Teams channel to receive the approval message.
-
-When approval is required, Datadog posts a summary of the resources targeted on each run. The automation acts only after a user approves the request in the channel.
-
-### Step 6: Save the automation
-
-At the bottom of the form, set the automation to {{< ui >}}Active{{< /ui >}} to start the schedule immediately, or leave it {{< ui >}}Paused{{< /ui >}} to enable it later. Then click {{< ui >}}Save Automation{{< /ui >}}.
+If {{< ui >}}Require approval before execution{{< /ui >}} is enabled in the [automation setup](#set-up-an-automation), Datadog posts in the designated channel a summary of the resources targeted on each run. The automation only runs after a user approves the request in the channel.
 
 ## Manage automations
 
@@ -131,8 +108,10 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/recommendations/
-[3]: /service_management/workflows/connections/
-[4]: https://app.datadoghq.com/cost/optimize/automations
-[5]: /service_management/workflows/connections/#connection-groups
-[6]: /cloud_cost_management/recommendations/#recommendation-action-taking
-[7]: /cloud_cost_management/recommendations/#prerequisites
+[2]: /cloud_cost_management/recommendations/#recommendation-action-taking
+[3]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[4]: /cloud_cost_management/recommendations/#prerequisites
+[5]: /service_management/workflows/connections/
+[6]: https://app.datadoghq.com/cost/optimize/automations
+[7]: /actions/connections/
+[8]: /service_management/workflows/connections/#connection-groups
