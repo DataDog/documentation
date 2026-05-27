@@ -35,7 +35,7 @@ The following products consume AI Credits:
 
 ## Pricing
 
-AI Credits are available in three pricing tiers. You can use any combination.
+See the [Datadog pricing page][5] for current rates. AI Credits are available in three pricing tiers, and you can use any combination.
 
 | Pricing tier | How it works |
 |---|---|
@@ -43,13 +43,9 @@ AI Credits are available in three pricing tiers. You can use any combination.
 | Monthly Commit | Month-to-month, no annual commitment. Credits are purchased in bundles of 500 per month. |
 | On-Demand | No commitment. Billed monthly based on actual usage. |
 
-Most customers purchase multiple Commit bundles to match their forecasted usage. For example, a team that expects to use 2,000 credits per month would purchase four Annual Commit bundles.
-
-See the [Datadog pricing page][5] for current rates.
-
 ### Billing cycle
 
-AI Credits reset on the first day of each calendar month. Unused Commit credits do not roll over.
+AI Credits reset on the first day of each calendar month. Unused Commit credits do not roll over to the next month.
 
 ### Overages
 
@@ -71,7 +67,7 @@ These are average credit costs per feature. Actual consumption for any single re
 | Bits AI Dev — code fix | 5 |
 | Agent Builder — message | 0.3 |
 
-<div class="alert alert-info">These are the credit consumption rates as of May 26, 2026. Costs for each feature may change as models are optimized or new models become available.</div>
+<div class="alert alert-info">These are the credit consumption rates as of May 27, 2026. Costs for each feature may change as models are optimized or new models become available.</div>
 
 ## Admin controls
 
