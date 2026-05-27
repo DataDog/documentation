@@ -135,8 +135,8 @@ Restart Claude Code after installing for the slash commands to appear.
 If the skill recommends quarantine, it presents the proposed action and requires your explicit approval before calling `update_datadog_flaky_test_states`. All state changes are reversible.
 
 ```
-/triage-flaky-test TestMyFunc
-/triage-flaky-test com.example.MyTest github.com/org/repo
+/triage-flaky-test TestCheckoutServiceIntegration
+/triage-flaky-test TestCheckoutServiceIntegration github.com/my-org/my-service
 ```
 
 ### Unblock PR
@@ -147,7 +147,7 @@ For flaky failures, the skill chains into `triage-flaky-test` for a deeper inves
 
 ```
 /unblock-pr
-/unblock-pr my-feature-branch
+/unblock-pr feat/add-retry-logic
 ```
 
 ## Further reading
