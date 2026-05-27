@@ -41,7 +41,7 @@ The evaluation system has four main components:
 
 - **[EvaluatorContext](#evaluatorcontext)**: The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In Experiments, the SDK builds this automatically from each dataset record. In production, you construct the EvaluatorContext yourself.
 - **[EvaluatorResult](#evaluatorresult)**: The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`, `dict`) instead.
-- **[MultiEvaluatorResult](#multievaluatorresult)**: An optional container for returning **multiple named metrics** from a single evaluator. Each sub-value can be a plain value or its own `EvaluatorResult`. Useful when one evaluator pass produces several related metrics (for example, precision, recall, and F1).
+- **[MultiEvaluatorResult](#multievaluatorresult)**: An optional container for returning multiple named metrics from a single evaluator. Each sub-value can be a plain value or its own `EvaluatorResult`. Useful when one evaluator pass produces several related metrics (for example, precision, recall, and F1).
 - **[Metric type](#metric-types)**: Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), `boolean` (pass/fail), or `json` (structured data).
 - **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
 
@@ -464,7 +464,7 @@ def evaluator_function(
     ...
 {{< /code-block >}}
 
-You can return either:
+You can return:
 - A plain value (`str`, `float`, `int`, `bool`, `dict`), or
 - An `EvaluatorResult` for rich results with reasoning and metadata, or
 - A `MultiEvaluatorResult` to emit multiple named metrics from one evaluator call
@@ -509,7 +509,7 @@ By default, sub-metric labels are prefixed with the evaluator's name: `confusion
 return MultiEvaluatorResult({"precision": 0.9, "recall": 0.8}, prefix=False)
 {{< /code-block >}}
 
-<div class="alert alert-warning">If two evaluators in the same row emit the same metric label (for example, both use <code>prefix=False</code> with the same key), the second value overwrites the first and a warning is logged.</div>
+<div class="alert alert-warning">If two evaluators emit the same metric label for the same dataset record (for example, both use <code>prefix=False</code> with the same key), the second value overwrites the first and a warning is logged.</div>
 
 `MultiEvaluatorResult` is also supported in class-based evaluators and summary evaluators:
 
@@ -524,6 +524,7 @@ class ConfusionMatrixEvaluator(BaseEvaluator):
         predicted = bool(context.output_data)
         expected = bool(context.expected_output)
         correct = predicted == expected
+        # Emitted labels: correct, false_positive, false_negative (prefix=False)
         return MultiEvaluatorResult(
             {
                 "correct": correct,
@@ -532,7 +533,6 @@ class ConfusionMatrixEvaluator(BaseEvaluator):
             },
             prefix=False
         )
-        # Emitted labels: confusion_matrix-correct, confusion_matrix-false_positive, ...
 {{< /code-block >}}
 
 ## Using evaluators in experiments
@@ -720,7 +720,7 @@ A container for emitting multiple named evaluation metrics from a single evaluat
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `values` | `dict[str, Union[str, float, int, bool, dict, EvaluatorResult]]` | — | Mapping of sub-metric name to a plain value or an `EvaluatorResult`. Must be non-empty; keys must follow evaluation [label naming conventions](#naming-conventions). |
+| `values` | `Dict[str, Union[str, float, int, bool, dict, EvaluatorResult]]` | — | Mapping of sub-metric name to a plain value or an `EvaluatorResult`. Must be non-empty; keys must follow evaluation [label naming conventions](#naming-conventions). |
 | `prefix` | `bool` | `True` | Controls label generation. `True` → `"<evaluator_name>-<key>"`. `False` → raw key. |
 
 Supported in function-based evaluators, class-based evaluators (`BaseEvaluator`), and summary evaluators (`BaseSummaryEvaluator`).

@@ -190,7 +190,7 @@ To create an experiment:
 
    You can also return:
    - An `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
-   - A `MultiEvaluatorResult` to emit multiple named metrics from a single evaluator call. Each sub-value can be a plain value or its own `EvaluatorResult`. Labels default to `"<evaluator_name>-<key>"`; pass `prefix=False` for raw keys. For details and examples, see the [Evaluation Developer Guide][4].
+   - A `MultiEvaluatorResult` to emit multiple named metrics from a single evaluator call. For details and examples, see the [Evaluation Developer Guide][4].
 
    #### Function-based evaluators
 
