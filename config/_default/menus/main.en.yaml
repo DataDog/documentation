@@ -6168,6 +6168,26 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Use Cases
+      url: feature_flags/use_cases
+      parent: feature_flags
+      identifier: feature_flags_use_cases
+      weight: 3
+    - name: Progressive Rollouts and Canaries
+      url: feature_flags/use_cases/progressive_rollouts
+      parent: feature_flags_use_cases
+      identifier: feature_flags_use_cases_progressive_rollouts
+      weight: 401
+    - name: Kill Switches
+      url: feature_flags/use_cases/kill_switches
+      parent: feature_flags_use_cases
+      identifier: feature_flags_use_cases_kill_switches
+      weight: 402
+    - name: Dynamic Configuration
+      url: feature_flags/use_cases/dynamic_configuration
+      parent: feature_flags_use_cases
+      identifier: feature_flags_use_cases_dynamic_configuration
+      weight: 403
     - name: Flag History
       url: feature_flags/history
       parent: feature_flags
