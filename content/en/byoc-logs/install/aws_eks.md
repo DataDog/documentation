@@ -23,17 +23,18 @@ This document walks you through the process of configuring your AWS environment 
 
 ## Prerequisites
 
-To deploy BYOC Logs on AWS, you need to configure:
+To deploy BYOC Logs on AWS, you must configure:
 - AWS credentials and authentication.
 - AWS region selection.
 - IAM permissions for S3 object storage.
 - RDS PostgreSQL database (recommended).
 - EKS cluster with AWS Load Balancer Controller.
-- If you are not using EKS auto-mode, the [EKS Pod Identity Agent][1] and [EBS CSI driver][2] are required to use persistent volumes and claims from `searcher.persistentVolume` or `indexer.persistentVolume`.
+  - See the [Cluster Sizing][1] documentation for guidelines on planning your node groups for your expected TB/day.
+- If you are not using EKS auto-mode, the [EKS Pod Identity Agent][2] and [EBS CSI driver][3] are required to use persistent volumes and claims from `searcher.persistentVolume` or `indexer.persistentVolume`.
 
 ### AWS credentials
 
-When starting a node, BYOC Logs attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][3] and looks for credentials in this order:
+When starting a node, BYOC Logs attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][4] and looks for credentials in this order:
 
 1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
 2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
@@ -142,7 +143,7 @@ aws rds create-db-instance \
   --master-username byoclogs \
   --master-user-password 'FixMeBYOC_Logs' \
   --allocated-storage 20 \
-  --storage-type gp2 \
+  --storage-type gp3 \
   --db-subnet-group-name <DB-SUBNET-GROUP-NAME> \
   --vpc-security-group-ids <EKS-CLUSTER-SECURITY-GROUP-ID> \
   --db-name byoclogs \
@@ -208,14 +209,14 @@ echo ""
    <p>Datadog recommends gp3 storage volumes for BYOC Logs to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
    </div>
 
-   Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined in the chart's `values.yaml`.
+   Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined [in the chart's `values.yaml`][5].
 
    ```shell
    # Show default values
    helm show values datadog/cloudprem
    ```
 
-   Here is an example of a `datadog-values.yaml` file with such overrides:
+   Here is an example of a `datadog-values.yaml` file with overrides:
 
    ```yaml
    aws:
@@ -344,13 +345,15 @@ helm uninstall <RELEASE_NAME> \
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][4]** - Configure the Datadog Agent to send logs to BYOC Logs
+**[Set up log ingestion with Datadog Agent][6]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html
-[2]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
-[3]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
-[4]: /byoc-logs/ingest/agent/
+[1]: /byoc-logs/operate/sizing/
+[2]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html
+[3]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[4]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml
+[6]: /byoc-logs/ingest/agent/
