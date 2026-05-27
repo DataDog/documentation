@@ -74,6 +74,8 @@ You must scan your default branch at least once before results appear in <b>Code
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
+If your Java project checks third-party JARs directly into the repository instead of using a Maven or Gradle manifest, see [Scan Java JAR directories][27].
+
 ## Select your source code management provider
 
 Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, and Azure DevOps.
@@ -246,3 +248,4 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [101]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/
+[27]: /security/code_security/troubleshooting/#scan-java-jar-directories
