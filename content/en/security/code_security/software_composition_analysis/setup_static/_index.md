@@ -24,6 +24,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
+| Dart       | pub               | `pubspec.lock`                           |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -36,7 +37,8 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Python     | poetry            | `poetry.lock`                            |
 | Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
-| Rust       | Cargo           | `cargo.lock`                               |
+| Rust       | Cargo             | `cargo.lock`                             |
+| Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
@@ -229,7 +231,7 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
-[15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[15]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [16]: https://docs.datadoghq.com/account_management/teams/
 [17]: https://app.datadoghq.com/source-code/repositories
 [18]: https://cyclonedx.org/docs/1.4/json/
@@ -237,10 +239,10 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [20]: https://cyclonedx.org/docs/1.6/json/
 [21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [22]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-sbom
-[23]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
-[24]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[23]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
+[24]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [25]: https://docs.datadoghq.com/data_security/data_retention_periods/
 [26]: https://docs.datadoghq.com/account_management/teams/
-[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/

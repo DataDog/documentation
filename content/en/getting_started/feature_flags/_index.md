@@ -49,9 +49,7 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 
 ## Configure your environments
 
-Your organization likely already has pre-configured environments for Development, Staging, and Production. If you need to configure these or any other environments, navigate to the [**Environments**][3] page to create tag queries for each environment. You can also identify which environment should be considered a Production environment.
-
-{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list" style="width:100%;" >}}
+Your organization likely already has pre-configured environments for Development, Staging, and Production. For details on environment queries, production marking, and managing environments, see [Environments][4].
 
 ## Create your first feature flag
 
@@ -86,22 +84,18 @@ await OpenFeature.setProviderAndWait(provider);
 
 <div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
 
-More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
+More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][3].
 
 ### Step 2: Create a feature flag
 
-Go to [**Create Feature Flag**][2] in Datadog and configure the following:
+Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the following:
 
 - **Name and key**: The flag's display name and the key referenced in code
-- **Variant type**: The data type for the flag variants (Boolean, string, integer, number, or JSON)
-
-    **Note**: The <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
-
-- **Variant values**: The possible values the flag can return (you can add these later)
-- **Distribution channels**: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
+- **Variant type** and **variant values**: See [Variants and Flag Types][5]
+- **Distribution channels**: See [Distribution Channels][6]
 
 <div class="alert alert-warning">
-  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
+  {{< ui >}}Flag keys{{< /ui >}}, {{< ui >}}variant keys{{< /ui >}}, and {{< ui >}}variant values{{< /ui >}} should be considered public when sent to client SDKs.
 </div>
 
 {{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
@@ -138,29 +132,17 @@ After you've completed this step, redeploy the application to pick up these chan
 
 ### Step 4: Define targeting rules and enable the feature flag
 
-Now that the application is ready to check the value of your flag, you can start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature.
-
-Go to **Feature Flags**, select your flag, select the environment whose rules you want to modify, and click **Edit Targeting Rules**.
-
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules & Rollouts" style="width:100%;" >}}
-
-### Step 5: Publish the rules in your environments
-
-After saving changes to the targeting rules, publish those rules by enabling your flag in the environment of your choice.
+Configure [targeting rules][7] to define which subjects receive each variant. After saving your rules, enable the flag in your chosen environment.
 
 <div class="alert alert-info">
-As a general best practice, changes should be rolled out in a Staging environment before rolling out in Production.
+As a general best practice, roll out changes in a Staging environment before Production.
 </div>
 
-Toggle your selected environment to **Enabled**.
+For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
-{{< img src="getting_started/feature_flags/publish-targeting-rules.png" alt="Publish targeting rules" style="width:100%;" >}}
+### Step 5: Monitor your rollout
 
-The flag serves your targeting rules in this environment. You can continue to edit these targeting rules to control where the variants are served.
-
-### Step 6: Monitor your rollout
-
-Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as **error rate** and **page load time**. As you incrementally release the feature with the flag, view the **Real-Time Metric Overview** panel in the Datadog UI to see how the feature impacts application performance.
+Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-Time Metric Overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
@@ -170,5 +152,9 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/settings/environments
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[3]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[4]: /feature_flags/concepts/environments/
+[5]: /feature_flags/concepts/variants_and_flag_types/
+[6]: /feature_flags/concepts/distribution_channels/
+[7]: /feature_flags/concepts/targeting_rules/
+[8]: /feature_flags/concepts/traffic_splitting/
