@@ -239,37 +239,6 @@ Custom authentication detection is possible by configuring [Endpoint Tagging Rul
 |PHP       | v1.15.0                |
 |Golang    | v2.4.0                 |
 
-## Services
-
-The **Services** explorer shows where findings from API Endpoints, vulnerabilities, and runtime signals converge by service. Consider it the operational risk view of your applications.
-
-Review your services for the following:
-
-- **Vulnerability risk:** The **Vulnerability Risk** column shows aggregated SCA and IAST results for each service. Vulnerable services have components needing patching or upgrading.
-- **Signals and attacks:** Click a service to see charts showing ongoing detections for active exploit attempts or recurring attack patterns.
-- **Sensitive data exposure:** Services processing PII (such as SSNs or emails) demand stricter controls and monitoring.
-- **Coverage and mode:** Use the **App & API Protection In Monitoring Mode**, **App & API Protection In Blocking Mode**, and the **Inactive** facet to identify where App and API Protection is enabled and enforcing runtime protection.
-- **Trend graphs:** The **Trend** column indicates activity and attack frequency over time.
-
-### Coverage
-
-The **Coverage** column shows the active protection and analysis capabilities for each service. Use **Coverage** to measure the completeness of your protection stack.
-
-For example, here are some use cases for **Coverage**:
-
-- **Runtime protection coverage with App and API Protection**: 
-  - Identify the services in **Monitoring** or **Blocking** mode.
-  - Move ready-to-block services into blocking mode to actively stop attacks.
-  - Investigate inactive services to see if instrumentation or configuration gaps are leaving APIs exposed.
-- **Software Composition Analysis (SCA) coverage**:
-  - Track the services with analyzed open source dependencies.
-  - Enable SCA for unscanned services to detect vulnerable libraries early.
-  - Prioritize patching inactive services with high dependency risk.
-- **Runtime Code Analysis (IAST) coverage**:
-  - Pinpoint where code-level vulnerability detection is missing.
-  - Enable IAST for production or high-risk apps to uncover exploitable issues in live traffic.
-  - Use results to confirm whether library vulnerabilities are actually reachable in code.
-
 ## API Findings
 
 **API Findings** provides a central triage view of all detected API risks across definitions, gateways, and live traffic. It provides a set of default rules to detect common vulnerabilities and misconfigurations. You can also set up [custom rules][12] to adapt to specific use cases.
