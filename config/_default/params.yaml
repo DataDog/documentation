@@ -280,10 +280,9 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
-  actions_catalog: [gov,gov2]
+  actions: [gov,gov2]
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
-  agent_builder: [gov,gov2]
   agent_flare: [gov,gov2]
   agentic_onboarding: [gov,gov2]
   agentless-scanning: [gov,gov2] # api page
@@ -294,7 +293,6 @@ unsupported_sites:
   amazon-event-bridge: [gov,gov2]
   apm_processing_pipelines: [gov,gov2]
   apm_recommendations: [gov,gov2]
-  app_builder: [gov,gov2]
   application_security: [gov,gov2]
   autocomplete_search: [gov,gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2]
@@ -334,7 +332,6 @@ unsupported_sites:
   fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2]
   fleet_automation: [gov,gov2]
   forwarding_audit_events: [gov,gov2]
-  forms: [gov,gov2]
   gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2]
   getting_started_feature_flags: [gov,gov2]
   gitlab-source-code: [gov,gov2]
@@ -352,6 +349,7 @@ unsupported_sites:
   jira_error_tracking: [gov,gov2]
   launchdarkly: [gov,gov2]
   linear: [gov,gov2]
+  linear_error_tracking: [gov,gov2]
   live_debugger: [gov,gov2]
   llm_observability: [gov,gov2]
   mcp_server: [gov,gov2]

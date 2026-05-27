@@ -1560,7 +1560,7 @@ menu:
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
       weight: 3
-    - name: Bits Assistant
+    - name: Bits AI Assistant
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
@@ -2434,11 +2434,16 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_jira
       weight: 100
+    - name: Linear
+      url: error_tracking/ticketing_systems/linear
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_linear
+      weight: 101
     - name: Case Management
       url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
-      weight: 101
+      weight: 102
     - name: Link Pull Requests
       url: error_tracking/link_pull_requests
       parent: error_tracking
@@ -4165,6 +4170,11 @@ menu:
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
       weight: 903
+    - name: Cloud Cost Skill
+      url: cloud_cost_management/cloud_cost_skill
+      parent: cloud_cost
+      identifier: cloud_cost_skill
+      weight: 10
     - name: APM
       url: tracing/
       pre: apm
@@ -5144,11 +5154,16 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
+    - name: Data Collection
+      url: data_streams/kafka/data_collection
+      identifier: data_streams_kafka_data_collection
+      parent: data_streams_kafka
+      weight: 2
     - name: Monitors and Automation
       url: data_streams/kafka/monitors_and_automation
       identifier: data_streams_kafka_monitors_and_automation
       parent: data_streams_kafka
-      weight: 2
+      weight: 3
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -5181,6 +5196,12 @@ menu:
       identifier: data_catalog
       parent: data_observability_heading
       weight: 65000
+    - name: Lineage
+      url: data_observability/lineage
+      pre: data-observability-wui
+      identifier: data_lineage
+      parent: data_observability_heading
+      weight: 67500
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
@@ -6128,6 +6149,46 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: Concepts
+      url: feature_flags/concepts
+      parent: feature_flags
+      identifier: feature_flags_concepts
+      weight: 3
+    - name: Environments
+      url: feature_flags/concepts/environments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_environments
+      weight: 301
+    - name: Variants and Flag Types
+      url: feature_flags/concepts/variants_and_flag_types
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_variants
+      weight: 302
+    - name: Targeting Rules and Filters
+      url: feature_flags/concepts/targeting_rules
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_rules
+      weight: 303
+    - name: Traffic Splitting and Randomization
+      url: feature_flags/concepts/traffic_splitting
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_traffic_splitting
+      weight: 304
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_distribution_channels
+      weight: 305
+    - name: Flag History
+      url: feature_flags/concepts/flag_history
+      parent: feature_flags_concepts
+      identifier: feature_flags_history
+      weight: 306
+    - name: MCP Server
+      url: feature_flags/feature_flag_mcp_server
+      parent: feature_flags
+      identifier: feature_flags_mcp_server
+      weight: 8
     - name: .NET
       url: feature_flags/server/dotnet
       parent: feature_flags_server
@@ -6158,16 +6219,6 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
-    - name: Flag History
-      url: feature_flags/history
-      parent: feature_flags
-      identifier: feature_flags_history
-      weight: 6
-    - name: MCP Server
-      url: feature_flags/feature_flag_mcp_server
-      parent: feature_flags
-      identifier: feature_flags_mcp_server
-      weight: 8
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
@@ -9391,26 +9442,31 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 2
+    - name: Analysis Methods
+      url: experiments/analysis_methods
+      parent: pa_experiments
+      identifier: pa_experiments_analysis_methods
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 4
+      weight: 5
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 5
+      weight: 6
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 5
+      weight: 7
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics

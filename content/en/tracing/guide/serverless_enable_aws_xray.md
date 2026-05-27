@@ -4,6 +4,18 @@ description: 'Trace your Lambda functions with AWS X-Ray'
 aliases:
     - /tracing/serverless_functions/enable_aws_xray/
 ---
+## Before you enable X-Ray
+
+The AWS X-Ray integration converts X-Ray traces into Datadog APM traces. Datadog offers native instrumentation for the use cases that originally required X-Ray. Before enabling X-Ray, consider whether one of the native paths fits your stack:
+
+| Use case | Recommended Datadog path |
+|----------|-------------------------|
+| Distributed tracing for AWS Lambda functions, hosts, and containers | [Datadog APM SDKs (`dd-trace`)][7] installed with the [Datadog Lambda Extension][8] |
+| AWS Step Functions tracing, including merging Step Functions traces with Lambda traces | [Serverless Monitoring for AWS Step Functions][9] and [Merge Step Functions and Lambda Traces][10] |
+| Trace context propagation across managed services (API Gateway, SQS, SNS, EventBridge, Kinesis, DynamoDB, S3) | Supported out of the box by the [Datadog Lambda Library][11] |
+
+Use the X-Ray integration if you need traces for an AWS managed service that Datadog APM doesn't yet instrument (for example, AppSync). The X-Ray integration also remains available if you already have X-Ray instrumentation in place and prefer to keep it.
+
 ## Enable AWS X-Ray
 
 **Prerequisite:** [Install the AWS integration][1].
@@ -172,3 +184,8 @@ See:
 [4]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
 [5]: https://www.datadoghq.com/blog/serverless-framework-plugin
 [6]: https://console.aws.amazon.com/apigateway/
+[7]: /serverless/aws_lambda/distributed_tracing/
+[8]: /serverless/libraries_integrations/extension/
+[9]: /serverless/step_functions/
+[10]: /serverless/step_functions/merge-step-functions-lambda/
+[11]: /serverless/installation/
