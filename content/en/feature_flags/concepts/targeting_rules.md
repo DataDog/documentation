@@ -58,7 +58,7 @@ Filters use attributes from your SDK's **evaluation context**. Define attributes
 
 ### Example evaluation contexts and filters
 
-Given the following evaluation context, you can build filters with different operators, such as equality, **is one of**, **is not**, or numeric comparisons:
+With the following evaluation context, you can build filters with different operators, such as equality, **is one of**, **is not**, or numeric comparisons:
 
 **Evaluation context:**
 
