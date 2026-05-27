@@ -104,7 +104,7 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines using your live CI and Test Optimization data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-unblock-pr` and `dd-triage-flaky-test` skills are available in the [Datadog agent-skills][6] repository. They provide two skills for triaging flaky tests and unblocking failing PR pipelines using your live CI and Test Optimization data.
 
 Skills are loaded automatically by the MCP server when your prompt matches their purpose — for example, "TestMyFunc keeps failing in CI — investigate it" loads `/triage-flaky-test` automatically. You can also invoke them explicitly with a slash command after installing them locally.
 
@@ -113,7 +113,10 @@ Skills are loaded automatically by the MCP server when your prompt matches their
 The skills are available automatically when the `software-delivery` MCP toolset is connected — no installation required. To also invoke them explicitly with a slash command, install them locally:
 
 ```shell
-npx skills add datadog-labs/agent-skills --skill dd-software-delivery --full-depth -y
+npx skills add datadog-labs/agent-skills \
+  --skill dd-unblock-pr \
+  --skill dd-triage-flaky-test \
+  --full-depth -y
 ```
 
 Restart Claude Code after installing for the slash commands to appear.
