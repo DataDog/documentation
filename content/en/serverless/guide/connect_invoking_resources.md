@@ -15,7 +15,7 @@ To instrument your Lambda functions for the first time, follow the [serverless i
 
 Managed resources are automatically connected to your AWS Lambda functions if all of the following are true:
 - Your functions are written in Node.js or Python Lambda runtimes.
-- [APM with Datadog's X-Ray integration][2] is configured on your functions and [configured Datadog's Lambda Library is configured to enrich AWS X-Ray segments][3], **OR** [APM with Datadog SDKs][2] (`dd-trace`) is configured on your functions.
+- [APM with Datadog SDKs (`dd-trace`)][2] is configured on your functions. (Existing X-Ray users can alternatively configure [APM with Datadog's X-Ray integration][2] and [enrich AWS X-Ray segments with Datadog's Lambda Library][3].)
 - The managed resource invoking your function is one of the following: API Gateway, SQS, SNS, EventBridge, Kinesis, DynamoDB, S3.
 - Your functions are instrumented with a recent version of Datadog's Lambda Library (>= `v3.46.0` for Node, >= `v28` for Python).
 

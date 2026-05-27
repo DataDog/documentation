@@ -13,19 +13,19 @@ further_reading:
 
 <div class="alert alert-info">Select your Datadog site to see instructions for your support portal.</div>
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 
-<h2>Create a support ticket</h2>
+## Create a support ticket
 
 <p>To create a new support ticket, navigate to the <a href="https://help.datadoghq.com/">Datadog support site</a>. At the bottom of the page, click <strong>Create a New Ticket</strong> to fill out a ticket form.</p>
 
 <p>You can also access this form through Datadog. From the left navigation, hover over <strong>Help</strong> and click <strong>Support</strong>. Alternatively, navigate to the <a href="https://app.datadoghq.com/help">Datadog help page</a> and click <strong>New Support Ticket</strong>.</p>
 
-<h2>Access existing tickets</h2>
+## Access existing tickets
 
 <p>If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:</p>
 <ol>
-    <li>From the Support page click <strong>Sign in</strong> on the top right.</li>
+    <li>From the <a href="https://help.datadoghq.com/">Support page</a>, click <strong>Sign in</strong> on the top right.</li>
     <li>If this is your first time signing into your Datadog Zendesk account, click <strong>New to your Datadog Zendesk account? Sign up</strong>.</li>
     <li>If you have previously emailed Datadog support, click <strong>Emailed us for support? Get a password</strong> and enter the email address you used to contact Datadog support.</li>
     <li>After you receive the password in your email, log in and click <strong>Manage your tickets</strong> to see your requests.</li>
@@ -33,11 +33,7 @@ further_reading:
     <li>To view your entire organization's tickets, submit a request to Datadog support.</li>
 </ol>
 
-{{< whatsnext desc="Support Page by Datadog Site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
-{{< /whatsnext >}}
-
-<h2>Password requirements</h2>
+## Password requirements
 
 <p>To ensure the security of your account, any password used to sign in to Datadog's Zendesk support portal must meet the following requirements:</p>
 <ol>
@@ -73,24 +69,25 @@ further_reading:
     </li>
 </ol>
 
-<h2>Troubleshooting</h2>
+## Troubleshooting
 
-<h3>Error: Refused to connect</h3>
+### Error: Refused to connect
 
 <p><strong>Refused to connect</strong> errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to <a href="https://support.google.com/chrome/answer/95647">Clear, enable, and manage cookies in Chrome</a> in Google Chrome Help.</p>
 
 <p>If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add <strong>datadog.zendesk.com</strong> to the allow list.</p>
 
-<h2>Further reading</h2>
+### Ticket is no longer available
 
-{{< partial name="whats-next/whats-next.html" >}}
+<p>Datadog deletes closed tickets, including their attachments, 15 months after their last update.</p>
 
-{{< /site-region >}}
+<p>If you need help with a related issue, you can open a new ticket or search the Datadog documentation.</p>
 
-{{< site-region region="gov,gov2" >}}
+{{% /site-region %}}
 
+{{% site-region region="gov,gov2" %}}
 
-<h2>Register on the portal</h2>
+## Register on the portal
 
 <p>If you are a first-time user, follow these steps to register an account:</p>
 
@@ -105,7 +102,9 @@ further_reading:
 
 <p><strong>Note</strong>: After registration, your login username is your email with <code>.ddgov.support</code> appended (for example, <code>john@agency.gov.ddgov.support</code>). Use this full username when logging in.</p>
 
-<h2>Create a new case</h2>
+<p><strong>Note</strong>: To receive registration verification codes, password reset emails, and case notification emails, add the <code>ddog-gov.com</code> domain to your email allowlist. This includes <code>help@ddog-gov.com</code> and <code>support@ddog-gov.com</code>.</p>
+
+## Create a case
 
 <p>To create a new case:</p>
 
@@ -119,7 +118,7 @@ further_reading:
     <li>Click <strong>Submit</strong>.</li>
 </ol>
 
-<h2>Access existing cases</h2>
+## Access existing cases
 
 <p>If you have opened at least one Datadog case, follow this process to access your cases:</p>
 
@@ -131,25 +130,26 @@ further_reading:
 
 <p><strong>Note</strong>: Historical Zendesk cases are not migrated; legacy Zendesk is read-only.</p>
 
-<h2>Troubleshooting</h2>
+## Troubleshooting
 
-<h3>Cannot see new cases</h3>
+### Cannot see new cases
 
 <p>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong>.</p>
 
-<h3>Login issues</h3>
+### Login issues
 
 <p>Make sure your full username includes the <code>.ddgov.support</code> suffix.</p>
 
-<h3>Password reset not received</h3>
+### Password reset not received
 
-<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix).</p>
+<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix). If you still do not receive the email, add <code>ddog-gov.com</code> to your email allowlist.</p>
 
-<h3>Registration error</h3>
+### Registration error
 
 <p>Your account may already exist. Click <strong>Forgot Password</strong> and enter your full username, including the <code>.ddgov.support</code> suffix (for example, <code>john@agency.gov.ddgov.support</code>). If you are still unable to access your account, contact <code>support@ddog-gov.com</code>.</p>
 
-<h2>Further reading</h2>
-{{< partial name="whats-next/whats-next.html" >}}
+{{% /site-region %}}
 
-{{< /site-region >}}
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

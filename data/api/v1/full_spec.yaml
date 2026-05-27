@@ -3364,6 +3364,7 @@ components:
         - incident_analytics
         - product_analytics
         - on_call_events
+        - errors
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3380,6 +3381,7 @@ components:
         - INCIDENT_ANALYTICS
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
+        - ERRORS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -6320,6 +6322,38 @@ components:
       type: string
       x-enum-varnames:
         - DECODER_PROCESSOR
+    LogsExcludeAttributeProcessor:
+      description: |-
+        Use this processor to remove an attribute from a log during processing.
+        The processor strips the specified attribute from the log event, which is useful
+        when the attribute contains sensitive data or is no longer needed downstream.
+      properties:
+        attribute_to_exclude:
+          description: Name of the log attribute to remove from the log event.
+          example: foo
+          type: string
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsExcludeAttributeProcessorType"
+      required:
+        - type
+        - attribute_to_exclude
+      type: object
+    LogsExcludeAttributeProcessorType:
+      default: exclude-attribute
+      description: Type of logs exclude attribute processor.
+      enum:
+        - exclude-attribute
+      example: exclude-attribute
+      type: string
+      x-enum-varnames:
+        - EXCLUDE_ATTRIBUTE
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration API.
       properties:
@@ -6927,6 +6961,7 @@ components:
         - $ref: "#/components/schemas/LogsArrayProcessor"
         - $ref: "#/components/schemas/LogsDecoderProcessor"
         - $ref: "#/components/schemas/LogsSchemaProcessor"
+        - $ref: "#/components/schemas/LogsExcludeAttributeProcessor"
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -8174,6 +8209,36 @@ components:
         - data_source
         - query
       type: object
+    MonitorFormulaAndFunctionDataJobsQueryDefinition:
+      description: A formula and functions data jobs query.
+      properties:
+        job_type:
+          description: |-
+            The type of job being monitored. Valid values include:
+            `databricks.job`, `spark.application`, `airflow.dag`,
+            `dbt.job`, `dbt.model`, `dbt.test`, `glue.job`.
+            Custom job types are supported with the `custom.ol.` prefix.
+          example: "databricks.job"
+          type: string
+        jobs_query:
+          description: Filter expression used to select the jobs to monitor.
+          example: "job_name:smoke*"
+          type: string
+        name:
+          description: Name of the query for use in formulas. Must be `run_query`.
+          example: "run_query"
+          type: string
+        query_dialect:
+          description: |-
+            Query dialect for data jobs queries. Currently only `metric` is supported.
+          example: "metric"
+          type: string
+      required:
+        - name
+        - jobs_query
+        - job_type
+        - query_dialect
+      type: object
     MonitorFormulaAndFunctionDataQualityDataSource:
       description: Data source for data quality queries.
       enum:
@@ -8345,6 +8410,10 @@ components:
           description: The name assigned to this aggregation, when multiple aggregations are defined for a query.
           example: "compute_result"
           type: string
+        source:
+          description: Source reference for composite query payloads.
+          example: "filter_query"
+          type: string
       required:
         - aggregation
       type: object
@@ -8372,6 +8441,10 @@ components:
           type: integer
         sort:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBySort"
+        source:
+          description: Source reference for composite query payloads.
+          example: "filter_query"
+          type: string
       required:
         - facet
       type: object
@@ -8480,6 +8553,7 @@ components:
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition"
+        - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition"
     MonitorFormulaAndFunctionReferenceTableColumn:
@@ -9262,11 +9336,19 @@ components:
           description: The monitor `CRITICAL` threshold.
           format: double
           type: number
+        critical_query:
+          description: Query evaluated as a dynamic `CRITICAL` threshold. Only supported on metric monitors with a formula query and options['variables']. Cannot be combined with static thresholds. This field is in preview.
+          example: 'formula("2 * query1").rollup("avg").last("6mo")'
+          type: string
         critical_recovery:
           description: The monitor `CRITICAL` recovery threshold.
           format: double
           nullable: true
           type: number
+        critical_recovery_query:
+          description: Query evaluated as a dynamic `CRITICAL` recovery threshold. Only supported on metric monitors with a formula query and options['variables']. Cannot be combined with static thresholds. This field is in preview.
+          example: 'formula("1.5 * query1").rollup("avg").last("3mo")'
+          type: string
         ok:
           description: The monitor `OK` threshold.
           format: double
@@ -9312,6 +9394,7 @@ components:
         - "cost alert"
         - "data-quality alert"
         - "network-path alert"
+        - "data-jobs alert"
       example: "query alert"
       type: string
       x-enum-varnames:
@@ -9336,6 +9419,7 @@ components:
         - COST_ALERT
         - DATA_QUALITY_ALERT
         - NETWORK_PATH_ALERT
+        - DATA_JOBS_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -16474,6 +16558,7 @@ components:
         - udp
         - icmp
         - websocket
+        - mcp
       example: http
       type: string
       x-enum-varnames:
@@ -16485,6 +16570,7 @@ components:
         - UDP
         - ICMP
         - WEBSOCKET
+        - MCP
     SyntheticsAPITestType:
       default: "api"
       description: Type of the Synthetic test, `api`.
@@ -16607,6 +16693,8 @@ components:
         - $ref: "#/components/schemas/SyntheticsAssertionJSONSchemaTarget"
         - $ref: "#/components/schemas/SyntheticsAssertionXPathTarget"
         - $ref: "#/components/schemas/SyntheticsAssertionJavascript"
+        - $ref: "#/components/schemas/SyntheticsAssertionMCPServerCapabilitiesTarget"
+        - $ref: "#/components/schemas/SyntheticsAssertionMCPRespectsSpecification"
     SyntheticsAssertionBodyHashOperator:
       description: Assertion operator to apply.
       enum:
@@ -16742,6 +16830,49 @@ components:
       type: string
       x-enum-varnames:
         - JAVASCRIPT
+    SyntheticsAssertionMCPRespectsSpecification:
+      description: An assertion that verifies the MCP server response respects the MCP specification.
+      properties:
+        type:
+          $ref: "#/components/schemas/SyntheticsAssertionMCPRespectsSpecificationType"
+      required:
+        - type
+      type: object
+    SyntheticsAssertionMCPRespectsSpecificationType:
+      description: Type of the assertion.
+      enum:
+        - mcpRespectsSpecification
+      example: mcpRespectsSpecification
+      type: string
+      x-enum-varnames:
+        - MCP_RESPECTS_SPECIFICATION
+    SyntheticsAssertionMCPServerCapabilitiesTarget:
+      description: An assertion that checks that an MCP server advertises the expected capabilities.
+      properties:
+        operator:
+          $ref: "#/components/schemas/SyntheticsAssertionOperator"
+        target:
+          description: List of MCP server capabilities to assert against.
+          example:
+            - completions
+          items:
+            $ref: "#/components/schemas/SyntheticsMCPServerCapability"
+          type: array
+        type:
+          $ref: "#/components/schemas/SyntheticsAssertionMCPServerCapabilitiesType"
+      required:
+        - type
+        - operator
+        - target
+      type: object
+    SyntheticsAssertionMCPServerCapabilitiesType:
+      description: Type of the assertion.
+      enum:
+        - mcpServerCapabilities
+      example: mcpServerCapabilities
+      type: string
+      x-enum-varnames:
+        - MCP_SERVER_CAPABILITIES
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
       enum:
@@ -16844,6 +16975,8 @@ components:
         - connection
         - multiNetworkHop
         - jitter
+        - mcpToolNameLength
+        - mcpToolCount
       example: statusCode
       type: string
       x-enum-varnames:
@@ -16868,6 +17001,8 @@ components:
         - CONNECTION
         - MULTI_NETWORK_HOP
         - JITTER
+        - MCP_TOOL_NAME_LENGTH
+        - MCP_TOOL_COUNT
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -18176,6 +18311,31 @@ components:
             $ref: "#/components/schemas/SyntheticsLocation"
           type: array
       type: object
+    SyntheticsMCPProtocolVersion:
+      description: The MCP protocol version used by the step. See https://modelcontextprotocol.io/specification.
+      enum:
+        - "2025-06-18"
+      example: "2025-06-18"
+      type: string
+      x-enum-varnames:
+        - VERSION_2025_06_18
+    SyntheticsMCPServerCapability:
+      description: A capability advertised by an MCP server.
+      enum:
+        - completions
+        - experimental
+        - logging
+        - prompts
+        - resources
+        - tools
+      type: string
+      x-enum-varnames:
+        - COMPLETIONS
+        - EXPERIMENTAL
+        - LOGGING
+        - PROMPTS
+        - RESOURCES
+        - TOOLS
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -19065,15 +19225,24 @@ components:
         - UPLOAD_FILES
         - WAIT
     SyntheticsTestCallType:
-      description: The type of gRPC call to perform.
+      description: |-
+        The type of call to perform. Used by gRPC steps (`healthcheck`, `unary`)
+        and MCP steps (`init`, `tool_list`, `tool_call`). Valid values depend on
+        the parent step's `subtype`.
       enum:
         - healthcheck
         - unary
+        - init
+        - tool_list
+        - tool_call
       example: unary
       type: string
       x-enum-varnames:
         - HEALTHCHECK
         - UNARY
+        - INIT
+        - TOOL_LIST
+        - TOOL_CALL
     SyntheticsTestCiOptions:
       description: CI/CD options for a Synthetic test.
       properties:
@@ -19574,6 +19743,8 @@ components:
         isMessageBase64Encoded:
           description: Whether the message is base64 encoded.
           type: boolean
+        mcpProtocolVersion:
+          $ref: "#/components/schemas/SyntheticsMCPProtocolVersion"
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -19618,6 +19789,14 @@ components:
           description: Timeout in seconds for the test.
           format: double
           type: number
+        toolArgs:
+          additionalProperties: {}
+          description: Arguments to pass to the MCP tool. Free-form object whose shape depends on the tool. Used when `callType` is `tool_call`.
+          type: object
+        toolName:
+          description: The name of the MCP tool to call. Required when `callType` is `tool_call`.
+          example: search
+          type: string
         url:
           description: URL to perform the test with.
           example: "https://example.com"
@@ -22564,6 +22743,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current date for the given org.
           format: int64
@@ -22596,6 +22783,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cspm_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all hours in the current date for all organizations.
           format: int64
@@ -22626,6 +22821,10 @@ components:
           type: integer
         dbm_queries_count_avg:
           description: Shows the average of all normalized Database Monitoring queries over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current date for all organizations.
           format: int64
           type: integer
         eph_infra_host_agent_sum:
@@ -23557,6 +23756,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current date for the given org.
           format: int64
@@ -23587,6 +23794,14 @@ components:
           type: integer
         cspm_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         custom_historical_ts_avg:
@@ -23623,6 +23838,10 @@ components:
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring normalized queries over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current date for the given org.
           format: int64
           type: integer
         eph_infra_host_agent_sum:
@@ -24560,6 +24779,14 @@ components:
           description: Shows the 99th percentile of all Cloud Security Management Enterprise hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
+        csm_host_pro_hosts_agentless_scanners_agg_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        csm_host_pro_hosts_agentless_scanners_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         csm_host_pro_oci_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management Pro OCI hosts over all hours in the current month for all organizations.
           format: int64
@@ -24590,6 +24817,14 @@ components:
           type: integer
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management Pro hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_agg_sum:
+          description: Shows the sum of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cspm_hosts_agentless_scanners_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management Pro Agentless scanner hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         custom_historical_ts_sum:
@@ -24626,6 +24861,10 @@ components:
           type: integer
         dbm_queries_avg_sum:
           description: Shows the average of all distinct Database Monitoring Normalized Queries over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        do_jobs_monitoring_orchestrators_job_hours_agg_sum:
+          description: Shows the sum of all orchestrator job hours over all hours in the current month for all organizations.
           format: int64
           type: integer
         end_date:
@@ -34170,6 +34409,10 @@ paths:
         - `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)
         - `operator`: <, <=, >, >=, ==, or !=
         - `#`: an integer or decimal number used to set the threshold
+
+        To use a dynamic threshold on a metric monitor with a formula query, replace `#` with the `threshold` keyword
+        (for example, `... > threshold`) and provide the threshold as a query via `critical_query` on `options.thresholds`.
+        This feature is in preview.
 
         If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),
         timeshift):space_aggr:metric{tags} [by {key}] operator #` with:

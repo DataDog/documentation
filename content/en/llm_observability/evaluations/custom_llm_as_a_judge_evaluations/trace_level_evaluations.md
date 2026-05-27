@@ -19,13 +19,13 @@ Span-level evaluations, by contrast, run once per matching span and only see tha
 
 ## When to use trace scope over span scope
 
-Use **Trace** scope when the evaluation needs context from more than one span:
+Use {{< ui >}}Trace{{< /ui >}} scope when the evaluation needs context from more than one span:
 
 - The answer depends on a sequence of steps (a tool call followed by an LLM response that uses the tool's output).
 - The judge has to look at a final answer in the context of intermediate reasoning.
 - A "pass" depends on something that happened earlier in the trace (a retrieval, a guardrail, a refusal).
 
-Use **Span** scope when the evaluation can be answered from a single span in isolation—for example, scoring the quality of one LLM response, classifying user intent on the root span, or checking that a tool received well-formed arguments.
+Use {{< ui >}}Span{{< /ui >}} scope when the evaluation can be answered from a single span in isolation—for example, scoring the quality of one LLM response, classifying user intent on the root span, or checking that a tool received well-formed arguments.
 
 ## Use cases and examples
 
@@ -141,17 +141,17 @@ Any spans that arrive more than 3 minutes after the previous span on a trace are
 
 The walkthrough below highlights the parts of the configuration that are specific to trace scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span-scoped evaluations.
 
-1. Navigate to the LLM Observability [Evaluations page][1] and select **Create Evaluation**, then **Create your own**. (You can also start from a [template evaluation][2].)
-1. Fill in the **evaluation name**, **account**, and **model** as you would for any custom LLM-as-a-judge evaluation.
-1. Under **Evaluation Scope** > **Evaluate On**, select **Trace**.
+1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then {{< ui >}}Create your own{{< /ui >}}. (You can also start from a [template evaluation][2].)
+1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
+1. Under {{< ui >}}Evaluation Scope{{< /ui >}} > {{< ui >}}Evaluate On{{< /ui >}}, select {{< ui >}}Trace{{< /ui >}}.
 
    {{< img src="llm_observability/evaluations/trace_level_evaluation_scope.png" alt="The Evaluate On scope picker with Trace selected and Span as the alternative." style="width:100%;" >}}
 
    <div class="alert alert-info">A trace is considered complete after <strong>3 minutes</strong> of inactivity (no new spans for that trace), at which point the evaluation runs. Spans that arrive more than 3 minutes after the previous span are not included in the evaluation.</div>
 
-1. Add a **Query** and **Sampling Rate** to control which traces are evaluated. The query is matched against the trace's root span—for example, `@name:agent.workflow` evaluates only traces whose root span is named `agent.workflow`.
-1. In the **System Prompt** field, enter the static instructions to the LLM judge—for example, the criteria the judge should use and the output it should produce. The System Prompt does not resolve `{{ ... }}` placeholders.
-1. In the **User** message, write the prompt that injects trace data using `{{spans...}}` paths. The autocomplete dropdown adapts to trace scope and lists every field available on the selected sample trace. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope—reference span data through the `spans` array instead. Common patterns:
+1. Add a {{< ui >}}Query{{< /ui >}} and {{< ui >}}Sampling Rate{{< /ui >}} to control which traces are evaluated. The query is matched against the trace's root span—for example, `@name:agent.workflow` evaluates only traces whose root span is named `agent.workflow`.
+1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter the static instructions to the LLM judge—for example, the criteria the judge should use and the output it should produce. The System Prompt does not resolve `{{ ... }}` placeholders.
+1. In the {{< ui >}}User{{< /ui >}} message, write the prompt that injects trace data using `{{spans...}}` paths. The autocomplete dropdown adapts to trace scope and lists every field available on the selected sample trace. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope—reference span data through the `spans` array instead. Common patterns:
 
    ```
    {{spans}}                                         # JSON of every span in the trace
@@ -166,16 +166,16 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    {{< img src="llm_observability/evaluations/trace_level_prompt_editor.png" alt="The User prompt editor for a trace-level evaluation, with the autocomplete dropdown listing spans-prefixed fields after typing two open braces." style="width:100%;" >}}
 
-1. Pick a sample trace from the panel on the right. The pane title becomes **Spans in Selected Trace** and renders the spans of that trace, with the fields referenced by your prompt highlighted.
+1. Pick a sample trace from the panel on the right. The pane title becomes {{< ui >}}Spans in Selected Trace{{< /ui >}} and renders the spans of that trace, with the fields referenced by your prompt highlighted.
 
    {{< img src="llm_observability/evaluations/trace_level_filtered_traces.png" alt="The configuration page in trace scope, with the Spans in Selected Trace pane on the right showing one span's input and output values highlighted." style="width:100%;" >}}
 
-1. Click **Test Evaluation** to run the prompt against the selected trace and preview the LLM judge's output before saving.
-1. Continue with the rest of the [evaluation configuration][5] (output type, assessment criteria) and **Save and Publish** to start running the evaluation against new traces.
+1. Click {{< ui >}}Test Evaluation{{< /ui >}} to run the prompt against the selected trace and preview the LLM judge's output before saving.
+1. Continue with the rest of the [evaluation configuration][5] (output type, assessment criteria) and {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluation against new traces.
 
 ## Viewing results
 
-After a trace completes, its evaluation result is attached to the trace itself and is available across LLM Observability in near-real-time. While the trace is still within its 3-minute inactivity window, the result shows up as **Pending** in the side panel; after the trace completes, the pending row is replaced by the final result.
+After a trace completes, its evaluation result is attached to the trace itself and is available across LLM Observability in near-real-time. While the trace is still within its 3-minute inactivity window, the result shows up as {{< ui >}}Pending{{< /ui >}} in the side panel; after the trace completes, the pending row is replaced by the final result.
 
 ### Query results
 
@@ -191,7 +191,7 @@ Substitute `<evaluation_name>` with the name you set when creating the evaluator
 
 ### Debug results
 
-Open the **Evaluations** tab on a trace to see every evaluation that ran for it, alongside the LLM judge's reasoning when **Enable Reasoning** was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
+Open the {{< ui >}}Evaluations{{< /ui >}} tab on a trace to see every evaluation that ran for it, alongside the LLM judge's reasoning when {{< ui >}}Enable Reasoning{{< /ui >}} was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
 
 {{< img src="llm_observability/evaluations/trace_level_results_sidepanel.png" alt="The Evaluations tab of a completed trace, showing the trace-level evaluation result with the LLM judge's reasoning expanded." style="width:100%;" >}}
 

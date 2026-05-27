@@ -46,11 +46,11 @@ The cost metrics include a `source` tag to indicate where the value originated:
 
 
 ## View costs in LLM Observability
-View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features:
-- A high-level overview of your LLM usage over time including **Total Cost**, **Cost Change**, **Total Tokens**, and **Token Change**
-- **Breakdown by Token Type**: A breakdown of token usage, along with associated costs
-- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
-- **Most Expensive LLM Calls**: A list of your most expensive requests
+View your app in LLM Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
+- A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
+- {{< ui >}}Breakdown by Token Type{{< /ui >}}: A breakdown of token usage, along with associated costs
+- {{< ui >}}Breakdown by Provider/Model{{< /ui >}} or {{< ui >}}Prompt ID/Version{{< /ui >}}: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
+- {{< ui >}}Most Expensive LLM Calls{{< /ui >}}: A list of your most expensive requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
 
@@ -60,7 +60,7 @@ At the top of the trace view, the banner shows aggregated cost information for t
 
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
 
-To query cost-related data in Traces page, use the left side **Cost** facets. 
+To query cost-related data in Traces page, use the left side {{< ui >}}Cost{{< /ui >}} facets. 
 
 Alternatively, query the following span attributes directly:
 - `@metrics.input_tokens` / `@metrics.estimated_input_cost`
@@ -79,8 +79,8 @@ If LLM cost values are missing from a trace or appear inaccurate, see the follow
 
 Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
 
-- **PARTIAL COST**: Datadog computed costs for some LLM spans in the trace, but not the rest. The **Estimated Cost** value reflects the sum of only the spans for which cost was computed.
-- **COST UNAVAILABLE**: Datadog could not compute cost for any LLM span in the trace.
+- {{< ui >}}PARTIAL COST{{< /ui >}}: Datadog computed costs for some LLM spans in the trace, but not the rest. The {{< ui >}}Estimated Cost{{< /ui >}} value reflects the sum of only the spans for which cost was computed.
+- {{< ui >}}COST UNAVAILABLE{{< /ui >}}: Datadog could not compute cost for any LLM span in the trace.
 
 Hover over the warning to see the number of affected spans, the reason cost is missing, and the names of the affected spans. The reasons fall into one of the following categories.
 

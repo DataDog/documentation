@@ -21,8 +21,6 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Setup
 
-{{< img src="/monitors/notifications/notification_rules/notification_rule_form-light.png" alt="Configuration for a notification rule showing scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
-
 <div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
 
 To create a Monitor Notification Rule in Datadog, do the following:
@@ -30,7 +28,7 @@ To create a Monitor Notification Rule in Datadog, do the following:
 1. Go to [**Notification Rules**][1].
 2. Click **New Rule**.
 3. [Configure the scope](#configure-the-scope): Define the required tags for a monitor notification to be routed to this rule.
-4. [Configure the recipients](#configure-the-recipients): Specify who to alert and under what conditions.
+4. [Configure the routing and recipients](#configure-the-routing-and-recipients): Choose how to route notifications and specify recipients.
 5. Add a clear and identifiable rule name.
 
 ### Configure the scope
@@ -73,7 +71,11 @@ The following are **not supported**:
 {{% /collapse-content %}}
 
 
-### Configure the recipients
+### Configure the routing and recipients
+
+Choose how to route notifications when a monitor alert matches the rule's scope. You can manually specify recipients or use dynamic routing to resolve recipients automatically from your team and service configurations.
+
+#### Manual routing
 
 Specify which recipients to notify when a monitor notification matches the rule's scope. You can always notify all recipients, or set conditional recipients that are only notified when certain conditions are met (for example, route critical alerts to your on-call recipient, and send warnings to a Slack channel).
 Conditions can be based on monitor status or tags:
@@ -81,6 +83,20 @@ Conditions can be based on monitor status or tags:
 - **Tag-based conditions**: Notify recipients when a specific tag key has a given value (for example, `env:prod`). Each condition supports only one tag key.
 
 Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
+
+#### Dynamic routing
+
+<div class="alert alert-danger">Dynamic routing is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.</div>
+
+Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Software Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
+
+| Configuration | Description | Requirements |
+| --- | --- | --- |
+| **Service-based** | Checks the monitor's `service` tag or group tag, looks up which team manages that service in the Software Catalog, then sends the alert to that team's configured notification channels. | The service must have a team assigned in the Software Catalog. If no team is assigned, the alert falls back to the fallback recipients. |
+| **Team-based** | Directly checks the monitor's `team` tag or group tag, then sends the alert to that team's configured notification channels. | The monitor must have a `team` tag. |
+| **Fallback** | If routing cannot resolve (for example, the service has no team assigned or the team has no notification channels configured), the alert goes to the fallback recipients. Fallback recipients behave the same as manual routing recipients. | Required for all dynamic routing rules. |
+
+Both Service-based and Team-based routing support Slack, email, PagerDuty, and Microsoft Teams. Teams can configure their notification channels in [Teams settings][4].
 
 ## Managing notification rules
 
@@ -213,3 +229,5 @@ The following table demonstrates how monitors with different tag combinations ma
 [1]: https://app.datadoghq.com/monitors/settings/notifications
 [2]: /monitors/notify/#notifications
 [3]: /getting_started/search/#event-based-queries
+[4]: /account_management/teams/
+[5]: /internal_developer_portal/software_catalog/

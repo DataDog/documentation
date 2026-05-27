@@ -1,5 +1,6 @@
 ---
 title: "Metric Submission: Custom Agent Check"
+description: "Submit custom metrics from a custom Agent check using count, gauge, histogram, and rate functions."
 aliases:
   - /developers/metrics/agent_metrics_submission/
   - /metrics/agent_metrics_submission
