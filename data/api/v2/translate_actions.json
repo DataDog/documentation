@@ -1344,6 +1344,10 @@
     "description": "List Cloud Cost Management metrics that have data for the requested period.",
     "summary": "List available Cloud Cost Management metrics"
   },
+  "ListCostTagMetadataMonths": {
+    "description": "List months that have Cloud Cost Management tag metadata for a given provider,\nordered most-recent first. The response is capped at 36 months.",
+    "summary": "List Cloud Cost Management tag metadata months"
+  },
   "ListCostTagMetadataOrchestrators": {
     "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
     "summary": "List Cloud Cost Management orchestrators"

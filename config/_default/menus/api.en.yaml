@@ -9127,6 +9127,19 @@ menu:
         unstable:
           - v2
         order: 59
+    - name: List Cloud Cost Management tag metadata months
+      url: '#list-cloud-cost-management-tag-metadata-months'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-metadata-months
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataMonths
+        unstable:
+          - v2
+        order: 62
     - name: List available Cloud Cost Management metrics
       url: '#list-available-cloud-cost-management-metrics'
       identifier: cloud-cost-management-list-available-cloud-cost-management-metrics
