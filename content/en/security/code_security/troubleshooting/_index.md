@@ -196,7 +196,7 @@ To ensure data quality, Datadog applies validation rules during SBOM processing.
 
 ### No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
 #### Confirming runtime detection is enabled
 

@@ -7,7 +7,7 @@ further_reading:
 - link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
-- link: "software_catalog/scorecards/"
+- link: "/internal_developer_portal/scorecards/"
   tag: "Documentation"
   text: "Datadog Scorecards"
 - link: "/dora_metrics"
@@ -31,9 +31,9 @@ Datadog's IDP supports two types of reports:
 - [**Custom Reports**][2]: Any Datadog Dashboards that your organization has added to your IDP Overview Page
 
 {{< whatsnext desc="Explore the following OOTB Engineering Reports:" >}}
-    {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/eng_reports/scorecards_performance" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/eng_reports/dora_metrics" >}}DORA Metrics: Software development velocity and stability metrics broken down by services and teams.{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/eng_reports/scorecards_performance/" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/eng_reports/dora_metrics/" >}}DORA Metrics: Software development velocity and stability metrics broken down by services and teams.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

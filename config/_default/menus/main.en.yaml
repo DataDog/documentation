@@ -2092,60 +2092,60 @@ menu:
       parent: platform_heading
       identifier: internal_developer_portal
       weight: 110000
-    - name: Software Catalog
-      url: internal_developer_portal/software_catalog/
+    - name: Catalog
+      url: internal_developer_portal/catalog/
       parent: internal_developer_portal
-      identifier: software_catalog
+      identifier: catalog
       weight: 1
     - name: Set Up
-      url: internal_developer_portal/software_catalog/set_up
-      parent: software_catalog
-      identifier: software_catalog_set_up
+      url: internal_developer_portal/catalog/set_up
+      parent: catalog
+      identifier: catalog_set_up
       weight: 101
     - name: Discover Entities
-      url: internal_developer_portal/software_catalog/set_up/discover_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_discover_entities
+      url: internal_developer_portal/catalog/set_up/discover_entities
+      parent: catalog_set_up
+      identifier: catalog_discover_entities
       weight: 1011
     - name: Create Entities
-      url: internal_developer_portal/software_catalog/set_up/create_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_create_entities
+      url: internal_developer_portal/catalog/set_up/create_entities
+      parent: catalog_set_up
+      identifier: catalog_create_entities
       weight: 1012
     - name: Import Entities
-      url: internal_developer_portal/software_catalog/set_up/import_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_import_entities
+      url: internal_developer_portal/catalog/set_up/import_entities
+      parent: catalog_set_up
+      identifier: catalog_import_entities
       weight: 1013
     - name: Define Ownership
-      url: internal_developer_portal/software_catalog/set_up/ownership
-      parent: software_catalog_set_up
-      identifier: software_catalog_ownership
+      url: internal_developer_portal/catalog/set_up/ownership
+      parent: catalog_set_up
+      identifier: catalog_ownership
       weight: 1014
     - name: Entity Model
-      url: internal_developer_portal/software_catalog/entity_model
-      parent: software_catalog
-      identifier: software_catalog_entity_model
+      url: internal_developer_portal/catalog/entity_model
+      parent: catalog
+      identifier: catalog_entity_model
       weight: 102
     - name: Native Entities
-      url: internal_developer_portal/software_catalog/entity_model/native_entities
-      parent: software_catalog_entity_model
-      identifier: software_catalog_native_entities
+      url: internal_developer_portal/catalog/entity_model/native_entities
+      parent: catalog_entity_model
+      identifier: catalog_native_entities
       weight: 1021
     - name: Custom Entities
-      url: internal_developer_portal/software_catalog/entity_model/custom_entities
-      parent: software_catalog_entity_model
-      identifier: software_catalog_custom_entities
+      url: internal_developer_portal/catalog/entity_model/custom_entities
+      parent: catalog_entity_model
+      identifier: catalog_custom_entities
       weight: 1022
     - name: AI-generated Systems
-      url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
-      parent: software_catalog_entity_model
-      identifier: software_catalog_ai_generated_systems
+      url: internal_developer_portal/catalog/entity_model/ai-generated-systems
+      parent: catalog_entity_model
+      identifier: catalog_ai_generated_systems
       weight: 1023
     - name: Troubleshooting
-      url: internal_developer_portal/software_catalog/troubleshooting
-      parent: software_catalog
-      identifier: software_catalog_troubleshooting
+      url: internal_developer_portal/catalog/troubleshooting
+      parent: catalog
+      identifier: catalog_troubleshooting
       weight: 103
     - name: Scorecards
       url: internal_developer_portal/scorecards
@@ -4540,8 +4540,8 @@ menu:
       parent: tracing
       identifier: tracing_services
       weight: 9
-    - name: Software Catalog
-      url: /internal_developer_portal/software_catalog/
+    - name: Catalog
+      url: /internal_developer_portal/catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
       weight: 901
@@ -4596,17 +4596,17 @@ menu:
       identifier: tracing_apm_monitors
       weight: 911
     - name: Endpoint Observability
-      url: internal_developer_portal/software_catalog/endpoints/
+      url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
       weight: 10
     - name: Explore Endpoints
-      url: internal_developer_portal/software_catalog/endpoints/explore_endpoints
+      url: internal_developer_portal/catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 1002
     - name: Monitor Endpoints
-      url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
+      url: internal_developer_portal/catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 1003
