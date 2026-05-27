@@ -4,30 +4,35 @@ aliases:
 - /bits_ai/bits_ai_sre/remediate_issues/
 ---
 
-## Suggested code fixes from the Bits AI Dev Agent
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Suggested code fixes from the Bits AI Dev Agent is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+After Bits AI SRE identifies a root cause, it can help you take action in three ways:
 
-After Bits AI SRE helps you identify a root cause, it can also help you take action as quickly as possible.
+- Code Fixes help resolve code-related root causes.
+- Remediation Recommendations provide corrective steps and fully configured commands.
+- Triage Suggestions help coordinate the response through connected tools.
 
-Bits AI SRE integrates with [Bits AI Dev Agent][2] to automatically generate code fixes. The Dev Agent connects to GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and uses multiple Datadog products to generate contextual fixes.
-1. [Set up the Bits AI Dev Agent][1]. Then, after Bits AI SRE has determined a code-related root cause, you will automatically receive suggested code fixes.
-1. Ask Bits AI Dev Agent to make any additional updates as needed, create a pull request for review in GitHub, and merge when ready to fix the underlying problem.
+## Code fixes
+
+Bits AI SRE integrates with [Bits AI Dev Agent][2] to automatically generate code fixes. The Dev Agent connects to GitHub or GitLab to create production-ready pull requests, iterate on fixes using CI logs and developer feedback, and apply context from multiple Datadog products.
+
+To start receiving code fixes, [set up the Bits AI Dev Agent][1]. Then, if Bits AI SRE determines a code-related root cause, you receive suggested code fixes automatically.
 
 {{< img src="bits_ai/bits_ai_sre_suggested_code_fix.png" alt="Flowchart showing Bits' investigation conclusion and a suggested code fix" style="width:100%;" >}}
 
-## Run triage actions via chat
-From chat, you can trigger triage actions without leaving the investigation workflow.
+## Remediation Recommendations
+Triage Suggestions help you coordinate the response without leaving the investigation page. Bits AI SRE uses investigation context to prefill messages, incident descriptions, or ticket metadata, so you can complete common response tasks with a single click.
+Bits AI SRE recommends corrective steps when applicable to the root cause. These recommendations can include fully configured commands that you copy and run in your terminal — for example, a `kubectl` command to restart a Kubernetes deployment, an AWS CLI call to adjust a resource, or a Terraform change to update infrastructure.
 
-Supported actions include:
-- Sending Slack and Microsoft Teams messages
-- Creating incidents in Datadog and PagerDuty
-- Paging engineers via Datadog On-Call
-- Creating cases in Datadog Case Management
+Review each recommendation and command before running it in your environment.
+
+## Triage Suggestions
+
+Triage Suggestions help you coordinate the response without leaving the investigation page. Bits AI SRE uses investigation context to prefill messages, incident descriptions, or ticket metadata, so you can complete common response tasks with a single click.
+
+Suggestions include but are not limited to:
+- Sending Slack messages to update your team on the investigation results
+- Declaring incidents in Datadog
+- Paging engineers through Datadog On-Call
 - Opening Jira tickets
-
-Bits AI SRE automatically pulls relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, ensures consistency, and accelerates response time.
 
 [1]: /bits_ai/bits_ai_dev_agent/setup/
 [2]: /bits_ai/bits_ai_dev_agent
