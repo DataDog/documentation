@@ -295,7 +295,7 @@ gates:
 
 ## PR comments
 
-By default, Datadog posts a pull request comment with code coverage results after each coverage upload. You can suppress this comment on a per-repository basis with the `comments.disabled` field.
+By default, Datadog posts a code coverage summary on every pull request. You can suppress it on a per-repository basis with the `comments.disabled` field.
 
 ```yaml
 comments:
