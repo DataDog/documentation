@@ -32,11 +32,11 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 
 ### Trace network paths from real devices to SaaS applications
 
-When users report slow application performance or degraded video call quality (for example, on Zoom), the issue could be on the device, somewhere along the network path, or within the application itself. End User Device Monitoring integrates with [Network Path Monitoring][4] to trace the full route from a user's laptop to the destination SaaS application, giving you visibility across all three layers.
+When users report slow application performance or degraded video call quality (for example, on Zoom), the issue could be on the device, somewhere along the network path, or within the application itself. End User Device Monitoring integrates with [Network Path Monitoring][4] to trace the full route from a user's device to the destination SaaS application, giving you visibility across all three layers.
 
 The traceroute visualization shows every hop along the path, from the local router and ISP through the public internet to the application's CDN and servers. Each hop includes latency data, so you can pinpoint where a slowdown is introduced rather than seeing only the total round-trip time.
 
-With network path tracing you can:
+With network path tracing, you can:
 
 - **Compare paths across devices**: View traceroutes from multiple devices on the same network to determine whether an issue affects a single user or the broader network.
 - **Compare paths across time**: Examine how the network path changes before and after a reported issue to identify when and where latency increased.
