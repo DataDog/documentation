@@ -78,6 +78,15 @@ is too large, consider the following options:
 
 Update the configuration either through the Datadog application or by modifying the `code-security.datadog.yaml` file.
 
+### No PR comments or PR gates for third-party SARIF uploads
+
+[PR comments][25] and [PR gates][26] are only supported for results produced by Datadog's official static analysis tools:
+
+- [`datadog-static-analyzer`](https://github.com/DataDog/datadog-static-analyzer)
+- [`datadog-saist`](https://github.com/DataDog/datadog-saist)
+
+If you upload SARIF results from a third-party tool, findings appear in the Datadog UI but do not trigger PR comments or PR gate evaluations.
+
 ### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
@@ -116,7 +125,7 @@ You can also run datadog-static-analyzer with the `--debug` option to get more i
 
 **Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
 
-## Software Composition Analysis
+## Software Composition Analysis (SCA)
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
 
@@ -185,11 +194,11 @@ To ensure data quality, Datadog applies validation rules during SBOM processing.
 - **Invalid purl**: The package URL is present but not in a valid purl format.
 - **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
-## No vulnerabilities detected by Software Composition Analysis
+### No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
-### Confirming runtime detection is enabled
+#### Confirming runtime detection is enabled
 
 If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
@@ -201,11 +210,11 @@ If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check 
 
 Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
-### Confirm tracer versions are updated
+#### Confirm tracer versions are updated
 
 See the Application Security product set up documentation to validate you you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
 
-### Ensure the communication of telemetry data
+#### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
@@ -310,3 +319,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [22]: /tracing/troubleshooting/
 [23]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
 [24]: /getting_started/site/
+[25]: /security/code_security/dev_tool_int/pull_request_comments/
+[26]: /pr_gates/
