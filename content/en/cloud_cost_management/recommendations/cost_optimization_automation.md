@@ -14,6 +14,11 @@ further_reading:
 
 ---
 
+{{< callout url="#"
+ btn_hidden="true" header="Join the Preview!">}}
+Cost Optimization Automation is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
 Cost Optimization Automation lets you continuously act on [Cloud Cost Recommendations][1] without manual cleanup. You define an **automation**, scope it to the accounts, regions, and resources you want, and Datadog executes the recommended action on a recurring schedule. Each run can require human approval in Slack or Microsoft Teams before Datadog makes any changes, so your team stays in control of every change.
