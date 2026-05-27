@@ -349,6 +349,7 @@ unsupported_sites:
   jira_error_tracking: [gov,gov2]
   launchdarkly: [gov,gov2]
   linear: [gov,gov2]
+  linear_error_tracking: [gov,gov2]
   live_debugger: [gov,gov2]
   llm_observability: [gov,gov2]
   mcp_server: [gov,gov2]
