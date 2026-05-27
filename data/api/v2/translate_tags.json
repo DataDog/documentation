@@ -263,10 +263,6 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
-  "oauth2-client-public": {
-    "name": "OAuth2 Client Public",
-    "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
-  },
   "oci-integration": {
     "name": "OCI Integration",
     "description": "Auto-generated tag OCI Integration"
