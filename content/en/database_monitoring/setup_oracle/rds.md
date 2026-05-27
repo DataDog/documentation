@@ -41,7 +41,7 @@ Complete the following steps to enable Database Monitoring with your Oracle data
 
 ### Create the Datadog user
 
-{{% dbm-create-oracle-user %}}
+{{% dbm-oracle-create-user-tabs %}}
 
 ### Grant the user access to the database
 
@@ -94,26 +94,9 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`
 
 **Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][11] for more details.
 
-```yaml
-init_config:
-instances:
-  - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
-    username: 'datadog'
-    password: 'ENC[datadog_user_database_password]'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-  - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
-    username: 'datadog'
-    password: 'ENC[datadog_user_database_password]'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-```
+{{% dbm-oracle-agent-config-tabs %}}
+
+{{% dbm-oracle-wallet-config %}}
 
 Once all Agent configuration is complete, [restart the Datadog Agent][2].
 

@@ -40,7 +40,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the Datadog user
 
-{{% dbm-create-oracle-user %}}
+{{% dbm-oracle-create-user-tabs %}}
 
 ### Securely store your password
 {{% dbm-secret %}}
@@ -53,10 +53,10 @@ For installation steps, see the [Agent installation instructions][9].
 
 ### Configure the Agent
 
-Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][3].
-
 You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
 
+{{< tabs >}}
+{{% tab "Multi-tenant" %}}
 ```yaml
 init_config:
 instances:
@@ -80,9 +80,39 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-The Agent connects only to CDB. It queries the information about PDBs while connected to CDB. Don't create connections to individual PDBs.
+The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
+{{% /tab %}}
+
+{{% tab "Non-CDB" %}}
+```yaml
+init_config:
+instances:
+  - server: '<RAC_NODE_1>:<PORT>'
+    service_name: "<SERVICE_NAME>" # The Oracle DB service name
+    username: 'c##datadog'
+    password: 'ENC[datadog_user_database_password]'
+    dbm: true
+    tags:  # Optional
+      - rac_cluster:<CLUSTER_NAME>
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+  - server: '<RAC_NODE_2>:<PORT>'
+    service_name: "<SERVICE_NAME>" # The Oracle DB service name
+    username: 'c##datadog'
+    password: 'ENC[datadog_user_database_password]'
+    dbm: true
+    tags:  # Optional
+      - rac_cluster:<CLUSTER_NAME>
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Set the `rac_cluster` configuration parameter to the name of your RAC cluster or some user friendly alias. The `rac_cluster` filter helps you select all RAC nodes in the [DBM Oracle Database Overview dashboard][4]. You can set an additional filter for the database of interest.
+
+{{% dbm-oracle-wallet-config %}}
 
 ### Validate the setup
 
