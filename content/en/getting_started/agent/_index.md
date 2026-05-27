@@ -184,15 +184,15 @@ For example, let's say you have data that is collected from different teams and 
    sudo service datadog-agent restart
    ```
 
-5. After a few minutes, go to the [Metrics Summary page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and any personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
+5. After a few minutes, go to the [{{< ui >}}Metrics Summary{{< /ui >}} page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and any personal tags you added. You can also filter metrics by the {{< ui >}}Tag{{< /ui >}} field at the top of the page.
 
-6. Go to the [Events Explorer page][20] and find the custom tags displayed with the latest Agent Event.
+6. Go to the [{{< ui >}}Events Explorer{{< /ui >}} page][20] and find the custom tags displayed with the latest Agent Event.
 
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="finding-metrics-in-the-datadog-ui" %}}
 
-You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
+You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [{{< ui >}}Metrics Summary{{< /ui >}} page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
 
 Click on either of the metrics and a Metric panel opens. This panel shows additional metadata about where these metrics are collected and any associated tags. If no tags are configured on a host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the section above on setting tags through the Agent configuration files to learn more about how to add tags.
 

@@ -182,7 +182,7 @@ Datadog needs access to the Git information (repository URL and commit SHA) of y
 {{< tabs >}}
 {{% tab "APM Deployment Tracking" %}}
 
-For deployments identified through APM Deployment Tracking, ensure your application telemetry is tagged with Git information:
+For deployments identified through APM Deployment Tracking, ensure your application telemetry, in the form of traces, is tagged with Git information:
 
 - Enable Git tagging [in APM][1] or see the [Source Code Integration documentation][2]
 

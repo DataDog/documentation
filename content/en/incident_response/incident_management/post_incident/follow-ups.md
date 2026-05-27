@@ -48,6 +48,10 @@ Follow-ups can be created at any point during an incident (even before it's reso
 
 **From Slack**: In the incident channel, run `/datadog followup` to create a new follow-up or `/datadog followup list` to view and manage existing follow-ups. For more Slack commands, see [Integrate Slack with Datadog Incident Management][5].
 
+## Follow-ups in postmortem notebooks
+
+You can display follow-ups directly in a postmortem notebook using the `{{incident.follow-ups}}` template variable. When added to a Datadog Notebooks postmortem template, this variable renders a list of follow-up items. From the list view in your notebook, you can set due dates, assign items, or create new follow-up items. For more information, see [Incident Postmortems][6].
+
 ## Export follow-ups
 
 You can export follow-ups from Incident Management to either Case Management or Jira, allowing you to track and manage them within your team's existing workflows. You can export follow-ups manually or configure Incident Management to automatically export all follow-ups to a selected Case Management or Jira project.
@@ -107,3 +111,4 @@ Organizations that need two-way sync should export to a Case Management project 
 [2]: /service_management/case_management
 [4]: /integrations/jira/
 [5]: /service_management/incident_management/integrations/slack/#slack-commands
+[6]: /incident_response/incident_management/post_incident/postmortems

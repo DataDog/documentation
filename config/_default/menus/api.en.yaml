@@ -2580,6 +2580,58 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Get tree-sitter WASM file
+      url: '#get-tree-sitter-wasm-file'
+      identifier: security-monitoring-get-tree-sitter-wasm-file
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisTreeSitterWasm
+        unstable:
+          - v2
+        order: 117
+    - name: Get node types for a language
+      url: '#get-node-types-for-a-language'
+      identifier: security-monitoring-get-node-types-for-a-language
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisNodeTypes
+        unstable:
+          - v2
+        order: 118
+    - name: Get AST for source code
+      url: '#get-ast-for-source-code'
+      identifier: security-monitoring-get-ast-for-source-code
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStaticAnalysisAst
+        unstable:
+          - v2
+        order: 116
+    - name: Analyze code
+      url: '#analyze-code'
+      identifier: security-monitoring-analyze-code
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStaticAnalysisServerAnalysis
+        unstable:
+          - v2
+        order: 115
     - name: Returns a list of Secrets rules
       url: '#returns-a-list-of-secrets-rules'
       identifier: security-monitoring-returns-a-list-of-secrets-rules
@@ -2593,6 +2645,19 @@ menu:
         unstable:
           - v2
         order: 78
+    - name: Get a SAST ruleset
+      url: '#get-a-sast-ruleset'
+      identifier: security-monitoring-get-a-sast-ruleset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisRuleset
+        unstable:
+          - v2
+        order: 112
     - name: Ruleset get multiple
       url: '#ruleset-get-multiple'
       identifier: security-monitoring-ruleset-get-multiple
@@ -2606,6 +2671,32 @@ menu:
         unstable:
           - v2
         order: 79
+    - name: Get default rulesets for a language
+      url: '#get-default-rulesets-for-a-language'
+      identifier: security-monitoring-get-default-rulesets-for-a-language
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStaticAnalysisDefaultRulesets
+        unstable:
+          - v2
+        order: 114
+    - name: List codegen rulesets
+      url: '#list-codegen-rulesets'
+      identifier: security-monitoring-list-codegen-rulesets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStaticAnalysisCodegenRulesets
+        unstable:
+          - v2
+        order: 113
     - name: Get a job's hist signals
       url: '#get-a-jobs-hist-signals'
       identifier: security-monitoring-get-a-jobs-hist-signals
@@ -2823,6 +2914,19 @@ menu:
           - EditSecurityMonitoringSignalIncidents
         unstable: []
         order: 77
+    - name: Get entities related to a signal
+      url: '#get-entities-related-to-a-signal'
+      identifier: security-monitoring-get-entities-related-to-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSignalEntities
+        unstable:
+          - v2
+        order: 98
     - name: Get a signal's details
       url: '#get-a-signals-details'
       identifier: security-monitoring-get-a-signals-details
@@ -2895,6 +2999,58 @@ menu:
           - ListSecurityMonitoringSignals
         unstable: []
         order: 74
+    - name: Unsubscribe from sample log generation
+      url: '#unsubscribe-from-sample-log-generation'
+      identifier: security-monitoring-unsubscribe-from-sample-log-generation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSampleLogGenerationSubscription
+        unstable:
+          - v2
+        order: 110
+    - name: Bulk subscribe to sample log generation
+      url: '#bulk-subscribe-to-sample-log-generation'
+      identifier: security-monitoring-bulk-subscribe-to-sample-log-generation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkCreateSampleLogGenerationSubscriptions
+        unstable:
+          - v2
+        order: 109
+    - name: Subscribe to sample log generation
+      url: '#subscribe-to-sample-log-generation'
+      identifier: security-monitoring-subscribe-to-sample-log-generation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSampleLogGenerationSubscription
+        unstable:
+          - v2
+        order: 108
+    - name: Get sample log generation subscriptions
+      url: '#get-sample-log-generation-subscriptions'
+      identifier: security-monitoring-get-sample-log-generation-subscriptions
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSampleLogGenerationSubscriptions
+        unstable:
+          - v2
+        order: 107
     - name: Get a rule's version history
       url: '#get-a-rules-version-history'
       identifier: security-monitoring-get-a-rules-version-history
@@ -3052,6 +3208,123 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 51
+    - name: Get entity context
+      url: '#get-entity-context'
+      identifier: security-monitoring-get-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityContext
+        unstable:
+          - v2
+        order: 111
+    - name: Get the version history of a dataset
+      url: '#get-the-version-history-of-a-dataset'
+      identifier: security-monitoring-get-the-version-history-of-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetVersionHistory
+        unstable:
+          - v2
+        order: 126
+    - name: Get a dataset at a specific version
+      url: '#get-a-dataset-at-a-specific-version'
+      identifier: security-monitoring-get-a-dataset-at-a-specific-version
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetByVersion
+        unstable:
+          - v2
+        order: 125
+    - name: Update a dataset
+      url: '#update-a-dataset'
+      identifier: security-monitoring-update-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 123
+    - name: Get a dataset
+      url: '#get-a-dataset'
+      identifier: security-monitoring-get-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 122
+    - name: Delete a dataset
+      url: '#delete-a-dataset'
+      identifier: security-monitoring-delete-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 124
+    - name: Get dataset dependencies
+      url: '#get-dataset-dependencies'
+      identifier: security-monitoring-get-dataset-dependencies
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchGetSecurityMonitoringDatasetDependencies
+        unstable:
+          - v2
+        order: 121
+    - name: Create a dataset
+      url: '#create-a-dataset'
+      identifier: security-monitoring-create-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 120
+    - name: List datasets
+      url: '#list-datasets'
+      identifier: security-monitoring-list-datasets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringDatasets
+        unstable:
+          - v2
+        order: 119
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -3235,6 +3508,18 @@ menu:
           - DeleteSecurityFilter
         unstable: []
         order: 32
+    - name: Get the version history of security filters
+      url: '#get-the-version-history-of-security-filters'
+      identifier: security-monitoring-get-the-version-history-of-security-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFilterVersions
+        unstable: []
+        order: 99
     - name: Create a security filter
       url: '#create-a-security-filter'
       identifier: security-monitoring-create-a-security-filter
@@ -3259,6 +3544,97 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 28
+    - name: Validate an entity context sync configuration
+      url: '#validate-an-entity-context-sync-configuration'
+      identifier: security-monitoring-validate-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 106
+    - name: Update an entity context sync configuration
+      url: '#update-an-entity-context-sync-configuration'
+      identifier: security-monitoring-update-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 103
+    - name: Get an entity context sync configuration
+      url: '#get-an-entity-context-sync-configuration'
+      identifier: security-monitoring-get-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 102
+    - name: Delete an entity context sync configuration
+      url: '#delete-an-entity-context-sync-configuration'
+      identifier: security-monitoring-delete-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 104
+    - name: Validate entity context sync credentials
+      url: '#validate-entity-context-sync-credentials'
+      identifier: security-monitoring-validate-entity-context-sync-credentials
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateSecurityMonitoringIntegrationCredentials
+        unstable:
+          - v2
+        order: 105
+    - name: Create an entity context sync configuration
+      url: '#create-an-entity-context-sync-configuration'
+      identifier: security-monitoring-create-an-entity-context-sync-configuration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringIntegrationConfig
+        unstable:
+          - v2
+        order: 101
+    - name: List entity context sync configurations
+      url: '#list-entity-context-sync-configurations'
+      identifier: security-monitoring-list-entity-context-sync-configurations
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringIntegrationConfigs
+        unstable:
+          - v2
+        order: 100
     - name: Update a critical asset
       url: '#update-a-critical-asset'
       identifier: security-monitoring-update-a-critical-asset
@@ -6581,6 +6957,66 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List Tags
+      url: '#list-tags'
+      identifier: app-builder-list-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTags
+        unstable: []
+        order: 17
+    - name: Get Blueprints by Slugs
+      url: '#get-blueprints-by-slugs'
+      identifier: app-builder-get-blueprints-by-slugs
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsBySlugs
+        unstable: []
+        order: 20
+    - name: Get Blueprints by Integration ID
+      url: '#get-blueprints-by-integration-id'
+      identifier: app-builder-get-blueprints-by-integration-id
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprintsByIntegrationId
+        unstable: []
+        order: 21
+    - name: List Blueprints
+      url: '#list-blueprints'
+      identifier: app-builder-list-blueprints
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBlueprints
+        unstable: []
+        order: 18
+    - name: Get Blueprint
+      url: '#get-blueprint'
+      identifier: app-builder-get-blueprint
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBlueprint
+        unstable: []
+        order: 19
     - name: List App Versions
       url: '#list-app-versions'
       identifier: app-builder-list-app-versions
@@ -6777,6 +7213,66 @@ menu:
       url: /api/latest/application-security/
       identifier: application-security
       generated: true
+    - name: Update a WAF Policy
+      url: '#update-a-waf-policy'
+      identifier: application-security-update-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafPolicy
+        unstable: []
+        order: 8
+    - name: Get a WAF Policy
+      url: '#get-a-waf-policy'
+      identifier: application-security-get-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafPolicy
+        unstable: []
+        order: 6
+    - name: Delete a WAF Policy
+      url: '#delete-a-waf-policy'
+      identifier: application-security-delete-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafPolicy
+        unstable: []
+        order: 9
+    - name: Create a WAF Policy
+      url: '#create-a-waf-policy'
+      identifier: application-security-create-a-waf-policy
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafPolicy
+        unstable: []
+        order: 7
+    - name: List all WAF policies
+      url: '#list-all-waf-policies'
+      identifier: application-security-list-all-waf-policies
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWAFPolicies
+        unstable: []
+        order: 10
     - name: Update a WAF exclusion filter
       url: '#update-a-waf-exclusion-filter'
       identifier: application-security-update-a-waf-exclusion-filter
@@ -6848,7 +7344,7 @@ menu:
         operationids:
           - UpdateApplicationSecurityWafCustomRule
         unstable: []
-        order: 7
+        order: 14
     - name: Get a WAF custom rule
       url: '#get-a-waf-custom-rule'
       identifier: application-security-get-a-waf-custom-rule
@@ -6860,7 +7356,7 @@ menu:
         operationids:
           - GetApplicationSecurityWafCustomRule
         unstable: []
-        order: 6
+        order: 11
     - name: Delete a WAF Custom Rule
       url: '#delete-a-waf-custom-rule'
       identifier: application-security-delete-a-waf-custom-rule
@@ -6872,7 +7368,7 @@ menu:
         operationids:
           - DeleteApplicationSecurityWafCustomRule
         unstable: []
-        order: 8
+        order: 15
     - name: Create a WAF custom rule
       url: '#create-a-waf-custom-rule'
       identifier: application-security-create-a-waf-custom-rule
@@ -6884,7 +7380,7 @@ menu:
         operationids:
           - CreateApplicationSecurityWafCustomRule
         unstable: []
-        order: 10
+        order: 12
     - name: List all WAF custom rules
       url: '#list-all-waf-custom-rules'
       identifier: application-security-list-all-waf-custom-rules
@@ -6896,7 +7392,7 @@ menu:
         operationids:
           - ListApplicationSecurityWAFCustomRules
         unstable: []
-        order: 9
+        order: 13
     - name: Audit
       url: /api/latest/audit/
       identifier: audit
@@ -9977,6 +10473,49 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Entity Integration Configs
+      url: /api/latest/entity-integration-configs/
+      identifier: entity-integration-configs
+      generated: true
+    - name: Create or update entity integration configuration
+      url: '#create-or-update-entity-integration-configuration'
+      identifier: entity-integration-configs-create-or-update-entity-integration-configuration
+      parent: entity-integration-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateEntityIntegrationConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Get an entity integration configuration
+      url: '#get-an-entity-integration-configuration'
+      identifier: entity-integration-configs-get-an-entity-integration-configuration
+      parent: entity-integration-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityIntegrationConfig
+        unstable:
+          - v2
+        order: 1
+    - name: Delete an entity integration configuration
+      url: '#delete-an-entity-integration-configuration'
+      identifier: entity-integration-configs-delete-an-entity-integration-configuration
+      parent: entity-integration-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEntityIntegrationConfig
+        unstable:
+          - v2
+        order: 3
     - name: Entity Risk Scores
       url: /api/latest/entity-risk-scores/
       identifier: entity-risk-scores
@@ -11712,6 +12251,19 @@ menu:
         unstable:
           - v2
         order: 30
+    - name: List LLM Observability dataset versions
+      url: '#list-llm-observability-dataset-versions'
+      identifier: llm-observability-list-llm-observability-dataset-versions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetVersions
+        unstable:
+          - v2
+        order: 44
     - name: Delete LLM Observability dataset records
       url: '#delete-llm-observability-dataset-records'
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -11764,6 +12316,45 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Unlock LLM Observability dataset draft state
+      url: '#unlock-llm-observability-dataset-draft-state'
+      identifier: llm-observability-unlock-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 43
+    - name: Lock LLM Observability dataset draft state
+      url: '#lock-llm-observability-dataset-draft-state'
+      identifier: llm-observability-lock-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 42
+    - name: Get LLM Observability dataset draft state
+      url: '#get-llm-observability-dataset-draft-state'
+      identifier: llm-observability-get-llm-observability-dataset-draft-state
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 41
     - name: Update an LLM Observability dataset
       url: '#update-an-llm-observability-dataset'
       identifier: llm-observability-update-an-llm-observability-dataset
@@ -12154,6 +12745,19 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Get annotated interactions by content IDs
+      url: '#get-annotated-interactions-by-content-ids'
+      identifier: llm-observability-get-annotated-interactions-by-content-ids
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractionsByTraceIDs
+        unstable:
+          - v2
+        order: 40
     - name: Delete LLM Observability data
       url: '#delete-llm-observability-data'
       identifier: llm-observability-delete-llm-observability-data
@@ -16212,6 +16816,227 @@ menu:
         unstable:
           - v2
         order: 8
+    - name: Create Custom Ruleset
+      url: '#create-custom-ruleset'
+      identifier: static-analysis-create-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomRuleset
+        unstable:
+          - v2
+        order: 14
+    - name: List Custom Rulesets
+      url: '#list-custom-rulesets'
+      identifier: static-analysis-list-custom-rulesets
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomRulesets
+        unstable:
+          - v2
+        order: 13
+    - name: Get an AI custom rule revision
+      url: '#get-an-ai-custom-rule-revision'
+      identifier: static-analysis-get-an-ai-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiCustomRuleRevision
+        unstable:
+          - v2
+        order: 19
+    - name: Create an AI custom rule revision
+      url: '#create-an-ai-custom-rule-revision'
+      identifier: static-analysis-create-an-ai-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiCustomRuleRevision
+        unstable:
+          - v2
+        order: 20
+    - name: List AI custom rule revisions
+      url: '#list-ai-custom-rule-revisions'
+      identifier: static-analysis-list-ai-custom-rule-revisions
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiCustomRuleRevisions
+        unstable:
+          - v2
+        order: 21
+    - name: Get an AI custom rule
+      url: '#get-an-ai-custom-rule'
+      identifier: static-analysis-get-an-ai-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiCustomRule
+        unstable:
+          - v2
+        order: 23
+    - name: Delete an AI custom rule
+      url: '#delete-an-ai-custom-rule'
+      identifier: static-analysis-delete-an-ai-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiCustomRule
+        unstable:
+          - v2
+        order: 22
+    - name: Create an AI custom rule
+      url: '#create-an-ai-custom-rule'
+      identifier: static-analysis-create-an-ai-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiCustomRule
+        unstable:
+          - v2
+        order: 24
+    - name: Update an AI custom ruleset
+      url: '#update-an-ai-custom-ruleset'
+      identifier: static-analysis-update-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiCustomRuleset
+        unstable:
+          - v2
+        order: 26
+    - name: Get an AI custom ruleset
+      url: '#get-an-ai-custom-ruleset'
+      identifier: static-analysis-get-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiCustomRuleset
+        unstable:
+          - v2
+        order: 27
+    - name: Delete an AI custom ruleset
+      url: '#delete-an-ai-custom-ruleset'
+      identifier: static-analysis-delete-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiCustomRuleset
+        unstable:
+          - v2
+        order: 25
+    - name: Create an AI custom ruleset
+      url: '#create-an-ai-custom-ruleset'
+      identifier: static-analysis-create-an-ai-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiCustomRuleset
+        unstable:
+          - v2
+        order: 28
+    - name: List AI custom rulesets
+      url: '#list-ai-custom-rulesets'
+      identifier: static-analysis-list-ai-custom-rulesets
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiCustomRulesets
+        unstable:
+          - v2
+        order: 29
+    - name: List AI prompts
+      url: '#list-ai-prompts'
+      identifier: static-analysis-list-ai-prompts
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiPrompts
+        unstable:
+          - v2
+        order: 15
+    - name: Delete an AI memory violation result
+      url: '#delete-an-ai-memory-violation-result'
+      identifier: static-analysis-delete-an-ai-memory-violation-result
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiMemoryViolationResult
+        unstable:
+          - v2
+        order: 16
+    - name: Create an AI memory violation result
+      url: '#create-an-ai-memory-violation-result'
+      identifier: static-analysis-create-an-ai-memory-violation-result
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiMemoryViolationResult
+        unstable:
+          - v2
+        order: 17
+    - name: List AI memory violation results
+      url: '#list-ai-memory-violation-results'
+      identifier: static-analysis-list-ai-memory-violation-results
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiMemoryViolationResults
+        unstable:
+          - v2
+        order: 18
     - name: POST request to resolve vulnerable symbols
       url: '#post-request-to-resolve-vulnerable-symbols'
       identifier: static-analysis-post-request-to-resolve-vulnerable-symbols
