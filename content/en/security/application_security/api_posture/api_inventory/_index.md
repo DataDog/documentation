@@ -1,6 +1,6 @@
 ---
 title: API Inventory
-description: Catalog API endpoints, services, and findings, and assess API security risk across your environment.
+description: Catalog API endpoints and services, and assess API security risk across your environment.
 aliases:
   - /security/application_security/api-inventory/
 further_reading:
@@ -22,18 +22,17 @@ API security relies on visibility. The biggest failure mode in most applications
 2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
-3. **API Findings:** *Which API weaknesses, attacks, or misconfigurations require investigation or remediation?*
-    
-    API Findings are security detections and policy evaluation results tied to endpoints. These represent known or inferred weaknesses or threats in API behavior or configuration.
 
-These explorers correspond to the common API security operational flow: 
+These explorers correspond to the common API security operational flow:
 
 1. **Discover:** Identify what endpoints exist using **API Endpoints**.
 2. **Contextualize:** Identify ownership and dependencies using **Services**.
-3. **Detect and respond:** See where misconfigurations are, and where attacks could occur, using **API Findings**.
+
+Findings detected against endpoints in your inventory appear in [API Findings][2]. Each endpoint row in the API Endpoints explorer displays a findings chip; selecting it opens the finding in API Findings.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/inventory/apis
+[2]: /security/application_security/api_posture/api_findings/
