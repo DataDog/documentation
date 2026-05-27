@@ -295,23 +295,15 @@ gates:
 
 ## PR Comments
 
-By default, Datadog posts a code coverage summary on every pull request. You can suppress it on a per-repository basis with the `comments.disabled` field.
+By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.disabled` field.
 
 PR Gate checks are not affected by this setting.
 
-### Example
-
-{{% collapse-content title="Enforce gates without posting comments" level="h4" %}}
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
-gates:
-  - type: patch_coverage_percentage
-    config:
-      threshold: 90
 comments:
   disabled: true
 {{< /code-block >}}
-{{% /collapse-content %}}
 
 ## Carryforward
 
