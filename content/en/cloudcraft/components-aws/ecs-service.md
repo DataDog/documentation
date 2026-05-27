@@ -11,8 +11,8 @@ Use the ECS Service component to visualize Amazon ECS services from your Amazon 
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the top of the component and an accent color for the bottom. You can use the same colors on the 2D and 3D views or different colors for each.
-- **Name**: Enter a name for the service.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the top of the component and an accent color for the bottom. You can use the same colors on the 2D and 3D views or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Enter a name for the service.
 
 You can also add the **ECS Service** component to [VPCs][1], [security groups][2], and [subnets][3].
 

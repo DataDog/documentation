@@ -40,20 +40,20 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. In the Datadog site, hover over **Digital Experience** and select **Settings** > [**Private Locations**][5]. 
-2. Click **Add Private Location**.
-3. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
-4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
+1. In the Datadog site, hover over {{< ui >}}Digital Experience{{< /ui >}} and select {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Private Locations{{< /ui >}}][5]. 
+2. Click {{< ui >}}Add Private Location{{< /ui >}}.
+3. Fill out your private location details. Only {{< ui >}}Name{{< /ui >}} and {{< ui >}}API key{{< /ui >}} fields are mandatory.
+4. Click {{< ui >}}Save Location and Generate Configuration File{{< /ui >}} to generate the configuration file associated with your private location on your worker. 
 5. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
-    - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges. 
+    - If you want to block reserved IPs, toggle {{< ui >}}Block reserved IPs{{< /ui >}} and enter the IP ranges. 
 
     For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
 
 6. Copy and paste your private location configuration file to your working directory.
 
-    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the **Private Locations** creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**. 
-7. When you are ready, click **View Installation Instructions**.
+    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the {{< ui >}}Private Locations{{< /ui >}} creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**. 
+7. When you are ready, click {{< ui >}}View Installation Instructions{{< /ui >}}.
 8. Follow the installation instructions based on the environment you want to run the Private Location worker in.
 9. If you are using Docker, launch your worker as a standalone container using the Docker `run` command and your configuration file:
 
@@ -71,7 +71,7 @@ Your private locations test results display identically to your managed location
     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
     ```
 
-10. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
+10. If your private location reports correctly to Datadog, an `OK` health status displays under {{< ui >}}Private Location Status{{< /ui >}} and on the {{< ui >}}Private Locations{{< /ui >}} list in the {{< ui >}}Settings{{< /ui >}} page:
 
     {{< img src="synthetics/private_locations/pl_health.png" alt="Private Location Health" style="width:100%;">}}
 
@@ -82,14 +82,14 @@ Your private locations test results display identically to your managed location
     2022-02-28 16:20:03 [info]: Fetching 10 messages from queue - 10 slots available
     2022-02-28 16:20:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
-11. Once you're done testing your internal endpoint, click **OK**.
+11. Once you're done testing your internal endpoint, click {{< ui >}}OK{{< /ui >}}.
 
 ## Run Synthetic tests with your private location
 
 Use your new private location just like a managed location in your Synthetic tests.
 
 1. Create an [API test][2], [multistep API test][8], or [browser test][9] on any internal endpoint or application you want to monitor.
-2. Under **Private Locations**, select your new private location:
+2. Under {{< ui >}}Private Locations{{< /ui >}}, select your new private location:
 
     {{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Assign a Synthetic test to a private location" style="width:100%;">}}
 

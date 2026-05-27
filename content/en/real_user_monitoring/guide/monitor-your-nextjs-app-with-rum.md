@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
             d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
           window.DD_RUM.onReady(function() {
             window.DD_RUM.init({
               clientToken: '<CLIENT_TOKEN>',
@@ -137,7 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Script
           id="dd-rum-sync"
-          src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+          src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
           crossOrigin=""
           type="text/javascript"
           strategy="beforeInteractive"
@@ -220,7 +220,7 @@ export default function App({ Component, pageProps }: AppProps) {
             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
             d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
           window.DD_RUM.onReady(function() {
             window.DD_RUM.init({
               clientToken: '<CLIENT_TOKEN>',
@@ -254,7 +254,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Script
         id="dd-rum-sync"
-        src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+        src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
         crossOrigin=""
         type="text/javascript"
         strategy="beforeInteractive"

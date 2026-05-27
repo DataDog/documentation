@@ -359,8 +359,8 @@ You can aggregate all products into a single widget to get visibility into the t
 [3]: /logs/log_configuration/logs_to_metrics/#logs-usage-metrics
 [4]: https://app.datadoghq.com/logs/pipelines
 [5]: /getting_started/tagging/#tagging-methods
-[6]: /logs/log_configuration/processors/?tab=ui#category-processor
-[7]: /logs/log_configuration/processors/?tab=api#category-processor
+[6]: /logs/log_configuration/processors/category_processor/
+[7]: /logs/log_configuration/processors/category_processor/
 [8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [9]: /logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric
 [10]: /dashboards/#new-dashboard

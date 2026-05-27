@@ -38,9 +38,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Node.js Applications][1].
 
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js SDK**.
 
-   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step.
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js SDK in one step.
 
    ```
    NODE_OPTIONS='--require @datadog/serverless-compat/init --require dd-trace/init'
@@ -66,7 +66,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Python Applications][1].
 
 
-2. **Initialize the Datadog Python tracer and Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
+2. **Initialize the Datadog Python SDK and Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
 
    ```python
    from datadog_serverless_compat import start
@@ -85,10 +85,10 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
-1. **Install dependencies**. Download the Datadog Java tracer and Serverless Compatibility Layer:
+1. **Install dependencies**. Download the Datadog Java SDK and Serverless Compatibility Layer:
 
 
-   Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
+   Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest SDK class files, to a folder that is accessible by your Datadog user:
    ```shell
    wget -O /path/to/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O /path/to/dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
@@ -98,9 +98,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
 
-2. **Initialize the Datadog Java tracer and Serverless Compatibility Layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
+2. **Initialize the Datadog Java SDK and Serverless Compatibility Layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
 
-   Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java tracer and the Serverless Compatibility Layer.
+   Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java SDK and the Serverless Compatibility Layer.
 
    | Name      | Value |
    |-----------| ----- |
@@ -128,7 +128,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Go Applications][1] and [Datadog Serverless Compatibility Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
 
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Go SDK**. Add the following lines to your main application entry point file (for example, `main.go`):
 
    ```go
       import (
@@ -259,7 +259,7 @@ public class Example implements HttpFunction {
 }
 ```
 
-You can also install the tracer using the following Maven dependency:
+You can also install the SDK using the following Maven dependency:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -379,7 +379,7 @@ func helloHTTP(w http.ResponseWriter, r *http.Request) {
 You can collect [debug logs][7] for troubleshooting. To configure debug logs, use the following environment variables:
 
 `DD_TRACE_DEBUG`
-: Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
+: Enables (`true`) or disables (`false`) debug logging for the Datadog SDK. Defaults to `false`.
 
   **Values**: `true`, `false`
 

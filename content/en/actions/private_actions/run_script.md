@@ -72,7 +72,7 @@ chmod 440 /etc/sudoers.d/dd-agent
 
 ### Configure the connection
 
-If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][4].
+If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the {{< ui >}}path to file{{< /ui >}}. For more information, see [Handling Private Action Credentials][4].
 
 [4]: /actions/private_actions/private_action_credentials
 
@@ -130,7 +130,7 @@ icacls "C:\<your-file-path>"
 
 ### Configure the connection
 
-If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][4].
+If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the {{< ui >}}path to file{{< /ui >}}. For more information, see [Handling Private Action Credentials][4].
 
 [4]: /actions/private_actions/private_action_credentials
 
@@ -141,14 +141,14 @@ If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your act
 ### Create a script connection
 
 1. After [setting up a PAR][2], navigate to [**Connections**][5].
-1. Click **New Connection**.
-1. Select **Script**.
-1. Enter a **Connection Name**.
-1. In the **Private Action Runner** dropdown, select your PAR.
+1. Click {{< ui >}}New Connection{{< /ui >}}.
+1. Select {{< ui >}}Script{{< /ui >}}.
+1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
+1. In the {{< ui >}}Private Action Runner{{< /ui >}} dropdown, select your PAR.
 1. Copy and paste the credential file template into your PAR's configuration directory with the commands you want to run.
-1. In **Path to file**, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases).
-1. Click **Next, Confirm Access**.
-1. After configuring permissions, click **Create**.
+1. In {{< ui >}}Path to file{{< /ui >}}, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases).
+1. Click {{< ui >}}Next, Confirm Access{{< /ui >}}.
+1. After configuring permissions, click {{< ui >}}Create{{< /ui >}}.
 1. Select this new connection when using the script action in your workflows or apps.
 
 ### Configure scripts

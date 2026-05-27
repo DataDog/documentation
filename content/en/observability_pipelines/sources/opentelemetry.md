@@ -23,7 +23,7 @@ Sending metrics to Observability Pipelines is in Preview. Fill out the form to r
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
@@ -35,7 +35,7 @@ Common scenarios when you might use this source:
 
 - You are using [OpenTelemetry][1] as your standard method for collecting and routing data, and you want to normalize that data, before routing them to different destinations.
 - You are collecting data from multiple sources and want to aggregate them in a central place for consistent processing.
-    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines [sources][2], you can aggregate all of your data in Observability Pipelines for processing.
+    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines [sources][2], you can send all of your data to Observability Pipelines for processing.
 
 ## Prerequisites
 
@@ -47,20 +47,18 @@ Set up this source when you [set up a pipeline][6]. You can set up a pipeline in
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your HTTP listener address. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your gRPC listener address. If you leave it blank, the [default](#set-secrets) is used.
+After you select the OpenTelemetry source in the pipeline UI:
+
+1. Enter the identifier for your HTTP listener address. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your gRPC listener address. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional TLS settings
 
-Toggle the switch to enable TLS. The following certificate and key files are required for TLS.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][3] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your OTel TLS key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+{{% observability_pipelines/tls_settings %}}
 
 {{< img src="observability_pipelines/sources/otel_settings.png" alt="The OpenTelemetry source settings" style="width:35%;" >}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

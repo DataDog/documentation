@@ -18,17 +18,19 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 
 ## Set up destination
 
-Set up the HTTP Client destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the HTTP Client destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#set-secrets) is used.
+After you select the HTTP Client destination in the pipeline UI:
+
+1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy (**None**, **Basic**, or **Bearer**). If you selected:
 	- **Basic**:
-		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#set-secrets) is used.
-		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secret-defaults) is used.
+		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secret-defaults) is used.
 	- **Bearer**:
-		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#secret-defaults) is used.
 1. JSON is the only available encoder.
 
 ### Optional settings
@@ -41,18 +43,13 @@ Toggle the switch to **Enable Compression**. If enabled:
 
 #### Enable TLS
 
-Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
-- Enter the identifier for your HTTP Client key pass. If you leave it blank, the [default](#set-secrets) is used.
-	- **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+{{% observability_pipelines/tls_settings %}}
 
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -93,3 +90,6 @@ A batch of events is flushed when one of these conditions occurs. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

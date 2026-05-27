@@ -3,26 +3,25 @@ title: Network Path
 description: Investigate network traffic paths
 is_beta: true
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
-  tag: "Blog"
-  text: "Get end-to-end network visibility with Datadog Network Path"
-- link: "https://www.datadoghq.com/blog/network-path/"
-  tag: "Blog"
-  text: "Identify slowdowns across your entire network with Datadog Network Path"
 - link: "network_monitoring/network_path/glossary"
   tag: "Documentation"
   text: "Network Path terms and concepts"
 - link: "/monitors/types/network_path/"
   tag: "Documentation"
   text: Network Path Monitor
+- link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
+  tag: "Blog"
+  text: "Get end-to-end network visibility with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/network-path/"
+  tag: "Blog"
+  text: "Identify slowdowns across your entire network with Datadog Network Path"
 ---
 
 ## Overview
 
 Network Path illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a path from a source to its destination, as depicted in the `source` and `destination` facet panel.
 
-
-{{< img src="network_performance_monitoring/network_path/network_path_view_4.png" alt="Path view in Network path highlighting a path selected from source to destination" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_landing_page.png" alt="Network Path explorer showing a list of paths with source, destination, tags, protocol, port, average reachability, and average RTT columns" >}}
 
 ## How it works
 

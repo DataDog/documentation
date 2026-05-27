@@ -24,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
   tag: "Blog"
   text: "Reduce your mean time to repair with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -284,7 +287,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits AI Assistant][27].
 
 ### Bits AI SRE
 {{< tabs >}}

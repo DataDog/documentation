@@ -23,7 +23,7 @@ further_reading:
 - PHP application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog PHP tracing library (see [version requirements][1])
+- Datadog PHP SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

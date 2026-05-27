@@ -17,6 +17,10 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+  tag: "Learning Center"
+  text: "APM Monitors and Alerting"
+
 ---
 
 ## Overview

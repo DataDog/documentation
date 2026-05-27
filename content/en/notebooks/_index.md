@@ -24,6 +24,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
   tag: "Blog"
   text: "How we've created a successful FinOps practice at Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-with-notebooks"
+  tag: "Learning Center"
+  text: "Getting Started with Notebooks"
+- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
+  tag: "Learning Center"
+  text: "Using Datadog Notebooks for Centralized Reporting"
+
 ---
 
 ## Overview

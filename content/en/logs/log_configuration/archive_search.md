@@ -13,9 +13,6 @@ further_reading:
   text: "Manage log retention and indexing"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
-{{< /callout >}}
 
 ## Overview
 
@@ -68,14 +65,14 @@ For more information on access controls and log security, see [How to Set Up RBA
 
 ## Launching a search
 
-1. Go to [**Logs > Archive Search > New Search**][4].
+1. Go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Archive Search{{< /ui >}} > {{< ui >}}New Search{{< /ui >}}][4].
 2. Select an Archive and time range.
 3. Enter a query, such as `user_id:abc123`.
 4. (Optional) Rename the search.
-5. Under **Mode**, choose the kind of search you want to perform.
-   - Choose **Search** to limit your search to the last 100,000 logs from the last 24 hours.
-   - Choose **Search & Rehydration** to specify your own volume and time limit for your search.
-6. Click **Search**.
+5. Under {{< ui >}}Mode{{< /ui >}}, choose the kind of search you want to perform.
+   - Choose {{< ui >}}Search{{< /ui >}} to retrieve results in real time, with up to 100,000 logs retained for 24 hours.
+   - Choose {{< ui >}}Search & Rehydration{{< /ui >}} to rehydrate results for full platform access and custom retention.
+6. Click {{< ui >}}Search{{< /ui >}}.
 
 Logs stream into the results page in real time. A progress bar shows scan status, and you can cancel the search at any time.
 
@@ -99,7 +96,7 @@ To retain more data or access logs in other Datadog products, choose one of the 
 
 ## Analyze results
 
-After launching a search, logs stream into the **Archive Search Results** page. From this page, you can use filters to narrow down the results and open specific log details to investigate issues.
+After launching a search, logs stream into the {{< ui >}}Archive Search Results{{< /ui >}} page. From this page, you can use filters to narrow down the results and open specific log details to investigate issues.
 
 ### Limitations
 
@@ -114,7 +111,7 @@ To enable full analytics and platform-wide visibility, you need to rehydrate the
 
 <!-- {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}} -->
 
-From the [**Archive Search list view**][5], you can:
+From the [{{< ui >}}Archive Search list view{{< /ui >}}][5], you can:
 
 - **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
@@ -125,9 +122,10 @@ Archive Search scans archived log files within your selected time range. **Scan 
 
 To optimize performance and reduce costs:
 * **Narrow the time range:** Limit your search to the smallest window possible.
-* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
+* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the {{< ui >}}Settings{{< /ui >}}.
 * **Use Partition Attributes (Preview):** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query.
 * **Use Lookup Attributes (Preview):** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`.
+* **Use zstd compression:** Archives use zstd compression by default, which reduces scan volume and cloud egress costs compared to gzip. If your archive uses gzip, see [Log Archives][9] to switch to zstd.
 
 **Note**: Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
 
@@ -159,11 +157,11 @@ For maximum search performance, combine both: partition attributes narrow the se
 
 ### Default limit for Rehydration of Results
 
-Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of **Archive Search** across teams. Click **Settings** to configure:
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of {{< ui >}}Archive Search{{< /ui >}} across teams. Click {{< ui >}}Settings{{< /ui >}} to configure:
 
-- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search in **Search & Rehydration** mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+- {{< ui >}}Default Rehydration volume limit{{< /ui >}}: Define the default number of logs (in millions) that can be rehydrated per Archive Search in {{< ui >}}Search & Rehydration{{< /ui >}} mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
-- **Rehydration retention periods**: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+- {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ## Cloud-specific permissions
 
@@ -218,7 +216,7 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to search log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting **Storage > Storage Object Viewer**.
+In order to search log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting {{< ui >}}Storage{{< /ui >}} > {{< ui >}}Storage Object Viewer{{< /ui >}}.
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
@@ -236,3 +234,4 @@ In order to search log events from your archives, Datadog uses a service account
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute
 [8]: /logs/log_configuration/archives/?tab=awss3#archive-search-partition-attribute
+[9]: /logs/log_configuration/archives/?tab=awss3#compression

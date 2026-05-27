@@ -24,7 +24,7 @@ The profiler might fail to find its native component. In this situation, your ap
 Error: No native build was found for runtime=node abi=109 platform=linuxglibc arch=x64
 ```
 
-If you are using a bundler such as esbuild or webpack, which is used by frameworks such as Next.js, see [Bundling with the Node.js tracer][3]. The Datadog tracer and profiler have special requirements when used with bundlers.
+If you are using a bundler such as esbuild or webpack, which is used by frameworks such as Next.js, see [Bundling with the Node.js tracer][3]. The Datadog SDK and profiler have special requirements when used with bundlers.
 
 Node versions available through package managers may sometimes incorrectly report their ABI (Application Binary Interface) version. For example, Ubuntu Linux 24.04.01 LTS includes a Node 18 package that incorrectly reports its ABI version as 109, instead of the correct version, 108, for Node 18.
 

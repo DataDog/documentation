@@ -24,6 +24,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
+| Dart       | pub               | `pubspec.lock`                           |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -36,7 +37,8 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Python     | poetry            | `poetry.lock`                            |
 | Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
-| Rust       | Cargo           | `cargo.lock`                               |
+| Rust       | Cargo             | `cargo.lock`                             |
+| Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
@@ -156,7 +158,7 @@ This functionality is supported only when using the [Datadog SBOM Generator][1] 
 
 Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
 
-{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Supported advisories" level="h4" expanded=true id="supported-advisories" %}}
 Static reachability analysis is available for the following advisories:
 - [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
 - [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
@@ -202,7 +204,7 @@ Static reachability analysis is available for the following advisories:
 
 ## Data Retention
 
-Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
+Datadog stores findings in accordance with our [Data Retention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
 ## Further Reading
 

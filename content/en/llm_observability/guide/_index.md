@@ -1,6 +1,5 @@
 ---
 title: LLM Observability Guides
-private: true
 disable_toc: true
 cascade:
     algolia:
@@ -18,4 +17,5 @@ cascade:
     {{< nextlink href="/llm_observability/monitoring/mcp_client" >}}Monitor MCP Clients{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/crewai_guide" >}}Using the Datadog-CrewAI integration for LLM Observability{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/evaluation_developer_guide" >}}Evaluation Developer Guide: Build custom evaluators{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/guide/claude_code_skills" >}}Analyze LLM Applications with Claude Code Skills{{< /nextlink >}}
 {{< /whatsnext >}}

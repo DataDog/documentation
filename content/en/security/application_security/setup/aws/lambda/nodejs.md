@@ -170,7 +170,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Install the Datadog tracer:
+1. Install the Datadog SDK:
    ```sh
    # Use this format for AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}

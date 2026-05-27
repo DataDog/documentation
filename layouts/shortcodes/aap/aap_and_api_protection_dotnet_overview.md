@@ -3,7 +3,7 @@
 ## Overview
 App and API Protection leverages the [Datadog .NET library](https://github.com/DataDog/dd-trace-dotnet/) to monitor and secure your .NET service. The library integrates seamlessly with your existing application without requiring code changes.
 
-For detailed compatibility information, including supported DOTNET versions, frameworks, and deployment environments, see [.NET Compatibility Requirements](/security/application_security/setup/dotnet/compatibility).
+For detailed compatibility information, including supported .NET versions, frameworks, and deployment environments, see [.NET Compatibility Requirements](/security/application_security/setup/dotnet/compatibility).
 
 {{ if $showSetup }}
 This guide explains how to set up App and API Protection (AAP) for .NET applications. The setup involves:

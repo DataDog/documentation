@@ -4,6 +4,9 @@ description: "Monitor performance, reliability, and cost efficiency of data proc
 aliases:
   - /data_jobs/
 further_reading:
+  - link: '/data_observability/lineage/'
+    tag: 'Documentation'
+    text: 'Lineage'
   - link: '/data_streams'
     tag: 'Documentation'
     text: 'Data Streams Monitoring'
@@ -12,13 +15,14 @@ further_reading:
     text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 ---
 
-{{< img src="data_jobs/overview_062024.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}
+{{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}
 
 Data Observability: Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Observability: Jobs Monitoring enables you to:
 
 - Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
 - Receive an alert when a job fails—or when a job is taking too long to complete.
 - Analyze job execution details and stack traces.
+- Use [Lineage][2] to assess upstream causes and downstream impact for failing or delayed jobs.
 - Correlate infrastructure metrics, Spark metrics from the Spark UI, logs, and cluster configuration.
 - Compare multiple runs to facilitate troubleshooting, and to optimize provisioning and configuration during deployment.
 
@@ -56,13 +60,13 @@ Click on a job to see how it performed across multiple runs, as well as error me
 
 Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration.
 
-On the **Infrastructure** tab, you can correlate the execution to infrastructure metrics.
+On the {{< ui >}}Infrastructure{{< /ui >}} tab, you can correlate the execution to infrastructure metrics.
 
 {{< img src="data_jobs/djm_run_infra_062024.png" alt="Data Observability: Jobs Monitoring > Run panel, Infrastructure tab" style="width:100%;" >}}
 
-For a failed run, look at the **Errors** tab to see the stack trace, which can help you determine where and how this failure occurred.
+For a failed run, look at the {{< ui >}}Errors{{< /ui >}} tab to see the stack trace, which can help you determine where and how this failure occurred.
 
-To determine why a stage is taking a long time to complete, you can use the **Spark Task Metrics** tab to view task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
+To determine why a stage is taking a long time to complete, you can use the {{< ui >}}Spark Task Metrics{{< /ui >}} tab to view task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
 
 {{< img src="data_jobs/djm_task_metrics.png" alt="Data Observability: Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
 
@@ -71,3 +75,4 @@ To determine why a stage is taking a long time to complete, you can use the **Sp
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/templates
+[2]: /data_observability/lineage/

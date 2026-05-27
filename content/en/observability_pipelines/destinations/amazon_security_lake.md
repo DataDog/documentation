@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Amazon Security Lake destination to send logs to Amazon Security Lake.
 
 ## Prerequisites
@@ -19,13 +21,13 @@ You need to do the following before setting up the Amazon Security Lake destinat
 
 ## Setup
 
-Set up the Amazon Security Lake destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Amazon Security Lake destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
 **Notes**:
 - When you add the Amazon Security Lake destination, the OCSF processor is automatically added so that you can convert your logs to Parquet before they are sent to Amazon Security Lake. See [Remap to OCSF documentation][3] for setup instructions.
 - Only logs formatted by the OCSF processor are converted to Parquet.
 
-### Set up the destination
+After you select the Amazon Security Lake destination in the pipeline UI:
 
 1. Enter your S3 bucket name.
 1. Enter the AWS region.
@@ -41,19 +43,15 @@ Set up the Amazon Security Lake destination and its environment variables when y
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.
-**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][4] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your Amazon Security Lake key pass. If you leave it blank, the [default](#set-secrets) is used.
-    - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+<div class="alert alert-danger">Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/tls_settings %}}
 
 ##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -93,5 +91,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/processors/remap_ocsf
-[4]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [5]: /observability_pipelines/destinations/amazon_security_lake/#aws-authentication
+[6]: /observability_pipelines/configuration/set_up_pipelines/
+[7]: /api/latest/observability-pipelines/
+[8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

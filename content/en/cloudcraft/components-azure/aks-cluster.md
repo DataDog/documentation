@@ -12,9 +12,9 @@ You can use the AKS Cluster component to represent and visualize Kubernetes clus
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Name**: Enter a name for the AKS Cluster.
-- **Tier**: Select a service tier for your cluster.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Enter a name for the AKS Cluster.
+- {{< ui >}}Tier{{< /ui >}}: Select a service tier for your cluster.
 
 ## API
 

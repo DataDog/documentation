@@ -14,7 +14,7 @@ module.exports = {
             apiUrl: 'https://app.datadoghq.com/api/unstable/docs-ai',
             apiKey: 'ddpub_docsai_nkbIDfPWw4pKuRlLef8aDs2onVqdimFI'
         },
-        imgUrl: 'https://datadog-docs.imgix.net/',
+        imgUrl: 'https://docs.dd-static.net/',
         gaTag: 'UA-21102638-5'
     },
     preview: {

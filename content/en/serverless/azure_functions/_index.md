@@ -35,17 +35,17 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js SDK**.
    
-   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step. Node options in Azure Functions can be configured with the environment variable `languageWorkers__node__arguments`.
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js SDK in one step. Node options in Azure Functions can be configured with the environment variable `languageWorkers__node__arguments`.
 
    ```
    languageWorkers__node__arguments='--require @datadog/serverless-compat/init --require dd-trace/init'
    ```
 
-3. **Configure the Datadog Node.js tracer**
+3. **Configure the Datadog Node.js SDK**
 
-   [Configuring the Node.js Tracing Library][1]
+   [Configuring the Node.js SDK][1]
 
 [1]:/tracing/trace_collection/library_config/nodejs
 {{< /programming-lang >}}
@@ -58,7 +58,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `ddtrace` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Python tracer**. Add the following lines to your main application entry point file:
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Python SDK**. Add the following lines to your main application entry point file:
 
    ```python
    from datadog_serverless_compat import start
@@ -67,9 +67,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    start()
    ```
 
-3. **Configure the Datadog Python tracer**
+3. **Configure the Datadog Python SDK**
 
-   [Configuring the Python Tracing Library][1]
+   [Configuring the Python SDK][1]
 
 [1]:/tracing/trace_collection/library_config/python
 {{< /programming-lang >}}
@@ -83,7 +83,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    Datadog recommends regularly upgrading to the latest versions of both `dd-serverless-compat-java-agent` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Java tracer**. Add the following `-javaagent` arguments to the JVM options.:
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Java SDK**. Add the following `-javaagent` arguments to the JVM options.:
 
    ```bash
    -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
@@ -91,9 +91,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    **Note**: the environment variable to set JVM options depends on the hosting plan (example, Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][2] for more details on the appropriate environment variable for your hosting plan.
 
-3. **Configure the Datadog Java tracer**
+3. **Configure the Datadog Java SDK**
 
-   [Configuring the Java Tracing Library][3]
+   [Configuring the Java SDK][3]
 
 [1]: https://repo1.maven.org/maven2/com/datadoghq/dd-serverless-compat-java-agent/
 [2]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-java?tabs=bash%2Cconsumption#customize-jvm
@@ -169,10 +169,10 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    ```
 
-4. **Configure the Datadog .NET tracer**
+4. **Configure the Datadog .NET SDK**
 
-   - [Configuring the .NET Core Tracing Library][1]
-   - [Configuring the .NET Framework Tracing Library][2]
+   - [Configuring the Datadog .NET Core SDK][1]
+   - [Configuring the Datadog .NET Framework SDK][2]
 
 [1]: /tracing/trace_collection/library_config/dotnet-core
 [2]: /tracing/trace_collection/library_config/dotnet-framework
@@ -220,7 +220,7 @@ To enable the [Continuous Profiler][10], set the environment variable `DD_PROFIL
 You can collect [debug logs][6] for troubleshooting. To configure debug logs, use the following environment variables:
 
 `DD_TRACE_DEBUG`
-: Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
+: Enables (`true`) or disables (`false`) debug logging for the Datadog SDK. Defaults to `false`.
 
   **Values**: `true`, `false`
 

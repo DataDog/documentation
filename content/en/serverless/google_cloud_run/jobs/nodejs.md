@@ -21,7 +21,7 @@ ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Goo
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
-1. **Install the Datadog Node.js tracer**.
+1. **Install the Datadog Node.js SDK**.
 
    1. In your main application, install the `dd-trace` package.
 

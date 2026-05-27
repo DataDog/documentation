@@ -9,8 +9,9 @@ The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iO
 
 ## Setup
 
-### Step 1 - Declare the Kotlin Multiplatform SDK as a dependency
+{% stepper %}
 
+{% step title="Declare the Kotlin Multiplatform SDK as a dependency" %}
 Declare [`dd-sdk-kotlin-multiplatform-rum`][3] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
 
 ```kotlin
@@ -26,9 +27,9 @@ kotlin {
   }
 }
 ```
+{% /step %}
 
-### Step 2 - Add native dependencies for iOS
-
+{% step title="Add native dependencies for iOS" %}
 {% alert level="info" %}
 Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled.
 {% /alert %}
@@ -79,8 +80,9 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 3. Select the version from the table above.
 4. Click on the necessary application target and open the **General** tab.
 5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies mentioned above.
+{% /step %}
 
-### Step 3 - Specify application details in the UI
+{% step title="Specify application details in the UI" %}
 
 1. Navigate to [**Digital Experience** > **Add an Application**][4].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
@@ -93,8 +95,9 @@ If you've purchased Error Tracking as a standalone product (without RUM), naviga
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][7] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
 
 For more information about setting up a client token, see the [Client Token documentation][8].
+{% /step %}
 
-### Step 4 - Initialize Datadog SDK
+{% step title="Initialize Datadog SDK" %}
 
 In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][9].
 
@@ -118,8 +121,9 @@ fun initializeDatadog(context: Any? = null) {
     Datadog.initialize(context, configuration, trackingConsent)
 }
 ```
+{% /step %}
 
-### Step 5 - Sample RUM sessions
+{% step title="Sample RUM sessions" %}
 
 To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
@@ -130,8 +134,9 @@ val rumConfig = RumConfiguration.Builder(applicationId)
         .build()
 Rum.enable(rumConfig)
 ```
+{% /step %}
 
-### Step 6 - Enable RUM to start sending data
+{% step title="Enable RUM to start sending data" %}
 
 ```kotlin
 // in a common source set
@@ -185,8 +190,9 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+{% /step %}
 
-### Step 7 - Initialize the RUM Ktor plugin to track network events made with Ktor
+{% step title="Initialize the RUM Ktor plugin to track network events made with Ktor" %}
 
 1. In your `build.gradle.kts` file, add the Gradle dependency to `dd-sdk-kotlin-multiplatform-ktor` for Ktor 2.x, or `dd-sdk-kotlin-multiplatform-ktor3` for Ktor 3.x:
 
@@ -222,6 +228,9 @@ val ktorClient = HttpClient {
 ```
 
 This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][15] or enable [background view tracking](#track-background-events).
+{% /step %}
+
+{% /stepper %}
 
 ## Track errors
 

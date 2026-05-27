@@ -32,6 +32,13 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
     tag: "Blog"
     text: "Unify remediation and communication with Datadog Incident Response"
+  - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+    tag: "Blog"
+    text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+    tag: "Learning Center"
+    text: "Getting Started with Incident Management"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}

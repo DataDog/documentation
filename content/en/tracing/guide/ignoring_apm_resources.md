@@ -256,7 +256,7 @@ DD_APM_IGNORE_RESOURCES="(GET|POST) /healthcheck,API::NotesController#index"
 
 Consider a trace that contains calls to `/api/healthcheck` that you don't want traces from:
 
-{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flame graph of a resource you want the tracer to ignore" style="width:90%;">}}
+{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flame graph of a resource you want the SDK to ignore" style="width:90%;">}}
 
 Take note of the resource name of the global root span.
 
@@ -481,7 +481,7 @@ class CustomFilter(TraceFilter):
                 return None  # Drop the trace
         return trace  # Keep the trace
 
-# Configure the tracer with your custom filter
+# Configure the SDK with your custom filter
 tracer.configure(trace_processors=[CustomFilter(r'http://.*/healthcheck$')])
 ```
 
@@ -508,7 +508,7 @@ tracer.use('http', {
 //import http
 
 ```
-<div class="alert alert-info">The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
+<div class="alert alert-info">The SDK configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}

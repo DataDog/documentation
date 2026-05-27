@@ -4,6 +4,9 @@ aliases:
 - /service_management/case_management/create_notifications_and_third_party_tickets
 - /service_management/case_management/notifications_integrations/
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "/incident_response/case_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
