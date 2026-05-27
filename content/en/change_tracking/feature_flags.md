@@ -5,6 +5,9 @@ further_reading:
   - link: "/change_tracking/"
     tag: "Documentation"
     text: "Change Tracking"
+  - link: "/feature_flags/"
+    tag: "Documentation"
+    text: "Datadog Feature Flags"
   - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
     tag: "Documentation"
     text: "LaunchDarkly"
@@ -23,7 +26,21 @@ With feature flag tracking, you can:
 
 ## Track feature flags
 
-Datadog supports tracking LaunchDarkly flags using the [LaunchDarkly integration][1] or tracking feature flags from other feature flag providers using the [Events API][3].
+Datadog supports tracking [Datadog Feature Flags][8] automatically, [LaunchDarkly][1] flags using the LaunchDarkly integration, or flags from other providers using the [Events API][3].
+
+### Datadog Feature Flags
+
+Change tracking for [Datadog Feature Flags][8] is enabled automatically. No additional setup is required. When you update a flag's targeting, rollout, or status in an environment, Datadog emits a change tracking event that appears in your services' Change Tracking timelines.
+
+Each event includes:
+
+- The flag key and name
+- The environment where the change occurred (and whether it is a production environment)
+- The user who made the change
+- The previous and new values, including targeting rules and variants
+- A link back to the feature flag in Datadog
+
+To associate a Datadog Feature Flag change with a service, [instrument your flag evaluation code][4] with the Datadog tracing library. Datadog uses the resulting APM traces to automatically detect which services evaluate the flag. See [Automatically detect affected services](#automatically-detect-affected-services) for details.
 
 ### LaunchDarkly flags
 
@@ -196,3 +213,4 @@ To toggle feature flags on or off from inside Datadog:
 [5]: https://app.datadoghq.com/apm/settings
 [6]: https://app.datadoghq.com/actions/connections
 [7]: https://app.datadoghq.com/software
+[8]: /feature_flags/

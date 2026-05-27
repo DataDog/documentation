@@ -43,6 +43,8 @@ gates:
   - type: patch_coverage_percentage
     config:
       threshold: 95
+comments:
+  enabled: true
 ```
 
 ## Services configuration
@@ -290,6 +292,18 @@ gates:
         - "!nightly-*"
 {{< /code-block >}}
 {{% /collapse-content %}}
+
+## PR Comments
+
+By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.enabled` field.
+
+PR Gate checks are not affected by this setting.
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+comments:
+  enabled: false
+{{< /code-block >}}
 
 ## Carryforward
 
