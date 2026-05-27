@@ -293,7 +293,7 @@ gates:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-## PR comments
+## Pull request comments
 
 By default, Datadog posts a code coverage summary on every pull request. You can suppress it on a per-repository basis with the `comments.disabled` field.
 
