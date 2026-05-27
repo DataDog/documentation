@@ -1,222 +1,214 @@
 environment: default
-# do not delete repo_name, used by websites-modules as context
-repo_name: "documentation"
-integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
+repo_name: documentation
+integrations_img_url: https://static.datadoghq.com/static/images/logos/
 img:
-  header_jpg: "?fit=max&fm=jpg&auto=format"
-  header_png: "?fit=max&fm=png&auto=format"
-  header_gif: "?fm=gif"
-  jpg: "?fm=jpg&auto=format"
-  png: "?fm=png&auto=format"
-  gif: ""
+  header_jpg: '?fit=max&fm=jpg&auto=format'
+  header_png: '?fit=max&fm=png&auto=format'
+  header_gif: '?fm=gif'
+  jpg: '?fm=jpg&auto=format'
+  png: '?fm=png&auto=format'
+  gif: ''
 code_languages:
-  'py':
+  py:
     extension: py
     name: python-legacy
     syntax: python
     command: python
     example_file: example.py
-  'pybeta':
+  pybeta:
     extension: py
     name: python
     syntax: python
     command: python3
     example_file: example.py
-  'rb':
+  rb:
     extension: rb
     name: ruby-legacy
     syntax: ruby
     command: rb
     example_file: example.rb
-  'rbbeta':
+  rbbeta:
     extension: rbbeta
     name: ruby
     syntax: ruby
     command: rb
     example_file: example.rb
-  'sh':
+  sh:
     extension: sh
     name: curl
     syntax: curl
-  'go':
+  go:
     extension: go
     name: go
     syntax: go
     command: go run
     example_file: main.go
-  'java':
+  java:
     extension: java
     name: java
     syntax: java
     command: java
     example_file: Example.java
-  'cs':
+  cs:
     extension: cs
     name: csharp
     syntax: csharp
-  'php':
+  php:
     extension: php
     name: php
     syntax: php
-  'ts':
+  ts:
     extension: ts
     name: typescript
     syntax: typescript
     command: tsc
     example_file: example.ts
-  'rs':
+  rs:
     extension: rs
     name: rust
     syntax: rust
     command: rustc
     example_file: src/main.rs
-
 code_language_ids:
-    browser: Browser
-    android: Android
-    ios: iOS
-    expo: Expo
-    flutter: Flutter
-    reactnative: React Native
-    codepush: CodePush
-    roku: Roku
-    unity: Unity
-    kotlin-multiplatform: Kotlin Multiplatform
-    swiftui: Swift UI
-    java: Java
-    graalvm: GraalVM
-    cpp: 'C++'
-    php: PHP
-    nodejs: "Node.js"
-    NodeJS: "Node.js"
-    "Node.js": "Node.js"
-    python-legacy: Python [legacy]
-    python: Python
-    ruby-legacy: Ruby [legacy]
-    ruby: Ruby
-    go: Go
-    typescript: Typescript
-    ".NET": ".NET"
-    dotnet: ".NET"
-    dotnet-core: ".NET Core"
-    dotnet-framework: ".NET Framework"
-    curl: Curl
-    native: Native
-    other: Other
-    linux: Linux
-    macos: macOS
-    windows: Windows
-    aws-fargate: "AWS Fargate"
-    opentelemetry: OpenTelemetry
-    ddprof: "Rust/C/C++"
-    full_host: "Full Host"
-    serverless: "Serverless"
-    javascript: "JavaScript"
-    swift: "Swift"
-    junit_xml: "JUnit XML"
-    kubernetes: "Kubernetes"
-    docker: "Docker"
-    hosts: "Hosts"
-    ecs_ec2: "ECS EC2"
-    elixir: "Elixir"
-    rust: "Rust"
-    dd-api: "Datadog API"
-    otel: "OpenTelemetry API"
-    status_legacy: "Status Page (Legacy)"
-    status_page: "Status Page"
-    envoy: "Envoy"
-    httpd: "Apache HTTP Server"
-    istio: "Istio"
-    kong: "Kong"
-    nginx: "NGINX"
-    windows_iis: "Windows IIS"
-    apache: "Apache HTTP Server"
-    ibm: "IBM HTTP Server"
-    gcp-service-extensions: "GCP Service Extensions"
-    apigateway: "Amazon API Gateway"
-    real_time_rule: "Real-Time Rule"
-    scheduled_rule: "Scheduled Rule"
-    historical_job: "Historical Job"
-    kubernetes_daemonset: "Kubernetes (DaemonSet)"
-    kubernetes_gateway: "Kubernetes (Gateway)"
-    ecs_fargate: "ECS Fargate"
-    eks_fargate: "EKS Fargate"
-    haproxy: "HAProxy"
-    traces: "Traces"
-    metrics: "Metrics"
-    logs: "Logs"
-    topology: "Topology Map"
-    geomap: "Geomap"
-    azure_apim: "Azure API Management"
-branch: ""
-
+  browser: Browser
+  android: Android
+  ios: iOS
+  expo: Expo
+  flutter: Flutter
+  reactnative: React Native
+  codepush: CodePush
+  roku: Roku
+  unity: Unity
+  kotlin-multiplatform: Kotlin Multiplatform
+  swiftui: Swift UI
+  java: Java
+  graalvm: GraalVM
+  cpp: C++
+  php: PHP
+  nodejs: Node.js
+  NodeJS: Node.js
+  Node.js: Node.js
+  python-legacy: Python [legacy]
+  python: Python
+  ruby-legacy: Ruby [legacy]
+  ruby: Ruby
+  go: Go
+  typescript: Typescript
+  .NET: .NET
+  dotnet: .NET
+  dotnet-core: .NET Core
+  dotnet-framework: .NET Framework
+  curl: Curl
+  native: Native
+  other: Other
+  linux: Linux
+  macos: macOS
+  windows: Windows
+  aws-fargate: AWS Fargate
+  opentelemetry: OpenTelemetry
+  ddprof: Rust/C/C++
+  full_host: Full Host
+  serverless: Serverless
+  javascript: JavaScript
+  swift: Swift
+  junit_xml: JUnit XML
+  kubernetes: Kubernetes
+  docker: Docker
+  hosts: Hosts
+  ecs_ec2: ECS EC2
+  elixir: Elixir
+  rust: Rust
+  dd-api: Datadog API
+  otel: OpenTelemetry API
+  status_legacy: Status Page (Legacy)
+  status_page: Status Page
+  envoy: Envoy
+  httpd: Apache HTTP Server
+  istio: Istio
+  kong: Kong
+  nginx: NGINX
+  windows_iis: Windows IIS
+  apache: Apache HTTP Server
+  ibm: IBM HTTP Server
+  gcp-service-extensions: GCP Service Extensions
+  apigateway: Amazon API Gateway
+  real_time_rule: Real-Time Rule
+  scheduled_rule: Scheduled Rule
+  historical_job: Historical Job
+  kubernetes_daemonset: Kubernetes (DaemonSet)
+  kubernetes_gateway: Kubernetes (Gateway)
+  ecs_fargate: ECS Fargate
+  eks_fargate: EKS Fargate
+  haproxy: HAProxy
+  traces: Traces
+  metrics: Metrics
+  logs: Logs
+  topology: Topology Map
+  geomap: Geomap
+  azure_apim: Azure API Management
+branch: ''
 signupclass: sign-up-trigger
-
 header_scripts:
   - hotjar: false
   - google-tag-manager: false
   - google-site-tag: false
   - marketo: false
-
-footer_scripts:
-
-# Docs allowed regions for redirecting
+footer_scripts: null
 allowedRegions:
   - name: US1
     value: us
     weight: 10
     domain: datadoghq.com
     exact_domains:
-      - "navy.oncall.datadoghq.com"
-      - "browser-intake-datadoghq.com"
+      - navy.oncall.datadoghq.com
+      - browser-intake-datadoghq.com
   - name: US3
     value: us3
     weight: 13
     domain: us3.datadoghq.com
     exact_domains:
-      - "teal.oncall.datadoghq.com"
-      - "browser-intake-us3-datadoghq.com"
+      - teal.oncall.datadoghq.com
+      - browser-intake-us3-datadoghq.com
   - name: US5
     value: us5
     weight: 15
     domain: us5.datadoghq.com
     exact_domains:
-      - "coral.oncall.datadoghq.com"
-      - "browser-intake-us5-datadoghq.com"
+      - coral.oncall.datadoghq.com
+      - browser-intake-us5-datadoghq.com
   - name: EU
     value: eu
     weight: 20
     domain: datadoghq.eu
     exact_domains:
-      - "beige.oncall.datadoghq.eu"
-      - "browser-intake-datadoghq.eu"
+      - beige.oncall.datadoghq.eu
+      - browser-intake-datadoghq.eu
   - name: AP1
     value: ap1
     weight: 25
     domain: ap1.datadoghq.com
     exact_domains:
-      - "saffron.oncall.datadoghq.com"
-      - "browser-intake-ap1-datadoghq.com"
+      - saffron.oncall.datadoghq.com
+      - browser-intake-ap1-datadoghq.com
   - name: AP2
     value: ap2
     weight: 30
     domain: ap2.datadoghq.com
     exact_domains:
-      - "lava.oncall.datadoghq.com"
-      - "browser-intake-ap2-datadoghq.com"
+      - lava.oncall.datadoghq.com
+      - browser-intake-ap2-datadoghq.com
   - name: US1-FED
     value: gov
     weight: 35
     domain: ddog-gov.com
     exact_domains:
-      - "navy.oncall.datadoghq.com"
+      - navy.oncall.datadoghq.com
   - name: US2-FED
     value: gov2
     weight: 40
     domain: us2.ddog-gov.com
     exact_domains:
-      - "navy.oncall.datadoghq.com"
-
+      - navy.oncall.datadoghq.com
 core_product:
   value_required: false
   possible_values:
@@ -224,30 +216,30 @@ core_product:
     - name: apm
     - name: appsec
       requires_all_keyvals:
-        - 'core_product:security'
+        - core_product:security
     - name: ci-cd
     - name: cloud siem
       requires_all_keyvals:
-        - 'core_product:security'
+        - core_product:security
     - name: continuous profiler
     - name: continuous testing
       requires_all_keyvals:
-        - 'core_product:synthetic monitoring'
-        - 'core_product:digital experience monitoring'
-        - 'specific_interest:testing'
+        - core_product:synthetic monitoring
+        - core_product:digital experience monitoring
+        - specific_interest:testing
     - name: cloud security
       requires_all_keyvals:
-        - 'core_product:security'
+        - core_product:security
     - name: workload protection
       requires_all_keyvals:
-        - 'core_product:security'
+        - core_product:security
     - name: cspm
       requires_all_keyvals:
-        - 'specific_interest:compliance'
-        - 'core_product:security'
+        - specific_interest:compliance
+        - core_product:security
     - name: cwpp
       requires_all_keyvals:
-        - 'core_product:security'
+        - core_product:security
     - name: dashboards
     - name: database monitoring
     - name: datadog agent
@@ -256,14 +248,14 @@ core_product:
     - name: datadog mobile app
     - name: digital experience monitoring
       requires_one_keyval:
-        - 'core_product:real user monitoring'
-        - 'core_product:synthetic monitoring'
+        - core_product:real user monitoring
+        - core_product:synthetic monitoring
     - name: real user monitoring
       requires_all_keyvals:
-        - 'core_product:digital experience monitoring'
+        - core_product:digital experience monitoring
     - name: synthetic monitoring
       requires_all_keyvals:
-        - 'core_product:digital experience monitoring'
+        - core_product:digital experience monitoring
     - name: error tracking
     - name: incident management
     - name: infrastructure monitoring
@@ -277,117 +269,370 @@ core_product:
     - name: software catalog
     - name: slos
     - name: watchdog
-
-# Unsupported sites for each product
 unsupported_sites:
-  actions: [gov,gov2]
-  adaptive_sampling: [gov,gov2]
-  advanced_analysis: [gov,gov2]
-  agent_flare: [gov,gov2]
-  agentic_onboarding: [gov,gov2]
-  agentless-scanning: [gov,gov2] # api page
-  agentless_scanning: [gov,gov2] # docs page
-  ai_impact: [gov,gov2]
-  alibaba-cloud: [gov,gov2]
-  amazon-compute-optimizer: [gov,gov2]
-  amazon-event-bridge: [gov,gov2]
-  apm_processing_pipelines: [gov,gov2]
-  apm_recommendations: [gov,gov2]
-  application_security: [gov,gov2]
-  autocomplete_search: [gov,gov2]
-  azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2]
-  backstage: [gov,gov2]
-  bits_ai: [gov,gov2]
-  bits_ai_sre: [gov,gov2]
-  byoti: [gov, gov2]
-  case_management: [gov,gov2]
-  ci_visibility: [gov,gov2]
-  cloudcraft_monitors_overlay: [gov,gov2]
-  cloudprem: [gov,gov2]
-  code_coverage: [gov,gov2]
-  code_security: [gov,gov2]
-  configuration_at_runtime: [gov,gov2]
-  confluence: [gov,gov2]
-  confluent_cloud_integration: [gov,gov2]
-  containers_kubernetes_appsec: [gov,gov2]
-  continuous_delivery: [gov,gov2]
-  continuous_integration: [gov,gov2]
-  correlation: [gov,gov2] #Event management correlation
-  coterm: [gov,gov2]
-  csm_jira: [us,us3,us5,eu,ap1,ap2]
-  data_jobs: [gov,gov2]
-  data_observability: [gov,gov2]
-  data_streams: [gov,gov2]
-  datadog_disaster_recovery: [gov,gov2]
-  dora_metrics: [gov,gov2]
-  dynamic_instrumentation: [gov,gov2]
-  dynamic_quotas: [gov,gov2]
-  eng_reports: [gov,gov2]
-  events_from_sns_emails: [gov,gov2]
-  exception_replay: [gov,gov2]
-  experiments: [gov,gov2]
-  feature_flags: [gov,gov2]
-  fips-compliance: [us,us3,us5,eu,ap1,ap2]
-  fips-integrations: [us,us3,us5,eu,ap1,ap2]
-  fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2]
-  fleet_automation: [gov,gov2]
-  forwarding_audit_events: [gov,gov2]
-  gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2]
-  getting_started_feature_flags: [gov,gov2]
-  gitlab-source-code: [gov,gov2]
-  google-hangouts-chat: [gov,gov2]
-  google_chat: [gov,gov2]
-  gpu_monitoring: [gov, gov2]
-  high_availability_datadog_agent: [gov,gov2]
-  iac_security: [gov,gov2]
-  incident_ai: [gov,gov2]
-  inferred_entity_remapping_rules: [gov,gov2]
-  internal_developer_portal: [gov,gov2]
-  ioc_explorer: [gov,gov2]
-  jetbrains-ides: [gov,gov2]
-  jira-service-management-ops: [gov,gov2]
-  jira_error_tracking: [gov,gov2]
-  launchdarkly: [gov,gov2]
-  linear: [gov,gov2]
-  linear_error_tracking: [gov,gov2]
-  live_debugger: [gov,gov2]
-  llm_observability: [gov,gov2]
-  mcp_server: [gov,gov2]
-  mobile_app_testing: [gov,gov2]
-  network_config_management: [gov,gov2]
-  observability_pipelines: [gov,gov2]
-  on-call: [gov,gov2]
-  oracle-cloud-infrastructure: [gov,gov2]
-  oracle-fusion: [gov,gov2]
-  oracle_fusion_integration_setup: [gov,gov2]
-  overview_pages: [gov,gov2]
-  pr_gates: [gov,gov2]
-  product_analytics: [gov,gov2]
-  recorded-future: [gov,gov2]
-  remote_config: [gov,gov2]
-  remote_config_for_fa: [gov,gov2] #For the Guides page
-  remote_configuration: [gov,gov2]
-  resource_based_sampling: [gov,gov2]
-  roku_error_tracking: [gov,gov2]
-  roku_log_collection: [gov,gov2]
-  rum_roku: [gov,gov2]
-  safety_center: [gov,gov2]
-  scorecards: [gov,gov2]
-  self_service_actions: [gov,gov2]
-  service_override_removal: [gov,gov2]
-  service_remapping_rules: [gov,gov2]
-  setup_remote_config: [gov,gov2]
-  snmp_profile_manager: [gov,gov2]
-  software_delivery_mcp_tools: [gov,gov2]
-  status_pages: [gov,gov2]
-  storage_management: [gov,gov2]
-  supported_deployment_types: [gov,gov2]
-  synthetics_email_validation: [gov,gov2]
-  synthetics_safari: [gov,gov2]
-  test_optimization: [gov,gov2]
-  universal_service_monitoring: [gov,gov2]
-  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2]
-  wiz: [gov,gov2]
-  workflow-automation: [gov,gov2]
-  workflows: [gov,gov2]
-  workload_security_active_protection: [gov,gov2]
+  actions:
+    - gov
+    - gov2
+  adaptive_sampling:
+    - gov
+    - gov2
+  advanced_analysis:
+    - gov
+    - gov2
+  agent_flare:
+    - gov
+    - gov2
+  agentic_onboarding:
+    - gov
+    - gov2
+  agentless-scanning:
+    - gov
+    - gov2
+  agentless_scanning:
+    - gov
+    - gov2
+  ai_impact:
+    - gov
+    - gov2
+  alibaba-cloud:
+    - gov
+    - gov2
+  amazon-compute-optimizer:
+    - gov
+    - gov2
+  amazon-event-bridge:
+    - gov
+    - gov2
+  apm_processing_pipelines:
+    - gov
+    - gov2
+  apm_recommendations:
+    - gov
+    - gov2
+  application_security:
+    - gov
+    - gov2
+  autocomplete_search:
+    - gov
+    - gov2
+  azure-private-link:
+    - us
+    - us5
+    - eu
+    - gov
+    - gov2
+    - ap1
+    - ap2
+  backstage:
+    - gov
+    - gov2
+  bits_ai:
+    - gov
+    - gov2
+  bits_ai_sre:
+    - gov
+    - gov2
+  byoti:
+    - gov
+    - gov2
+  case_management:
+    - gov
+    - gov2
+  ci_visibility:
+    - gov
+    - gov2
+  cloudcraft_monitors_overlay:
+    - gov
+    - gov2
+  cloudprem:
+    - gov
+    - gov2
+  code_coverage:
+    - gov
+    - gov2
+  code_security:
+    - gov
+    - gov2
+  configuration_at_runtime:
+    - gov
+    - gov2
+  confluence:
+    - gov
+    - gov2
+  confluent_cloud_integration:
+    - gov
+    - gov2
+  containers_kubernetes_appsec:
+    - gov
+    - gov2
+  continuous_delivery:
+    - gov
+    - gov2
+  continuous_integration:
+    - gov
+    - gov2
+  correlation:
+    - gov
+    - gov2
+  coterm:
+    - gov
+    - gov2
+  csm_jira:
+    - us
+    - us3
+    - us5
+    - eu
+    - ap1
+    - ap2
+  data_jobs:
+    - gov
+    - gov2
+  data_observability:
+    - gov
+    - gov2
+  data_streams:
+    - gov
+    - gov2
+  datadog_disaster_recovery:
+    - gov
+    - gov2
+  dora_metrics:
+    - gov
+    - gov2
+  dynamic_instrumentation:
+    - gov
+    - gov2
+  dynamic_quotas:
+    - gov
+    - gov2
+  eng_reports:
+    - gov
+    - gov2
+  events_from_sns_emails:
+    - gov
+    - gov2
+  exception_replay:
+    - gov
+    - gov2
+  experiments:
+    - gov
+    - gov2
+  feature_flags:
+    - gov
+    - gov2
+  fips-compliance:
+    - us
+    - us3
+    - us5
+    - eu
+    - ap1
+    - ap2
+  fips-integrations:
+    - us
+    - us3
+    - us5
+    - eu
+    - ap1
+    - ap2
+  fips-proxy:
+    - us
+    - us3
+    - us5
+    - eu
+    - ap1
+    - ap2
+    - gov2
+  fleet_automation:
+    - gov
+    - gov2
+  forwarding_audit_events:
+    - gov
+    - gov2
+  gcp-private-service-connect:
+    - us
+    - us3
+    - gov
+    - gov2
+    - ap1
+    - ap2
+  getting_started_feature_flags:
+    - gov
+    - gov2
+  gitlab-source-code:
+    - gov
+    - gov2
+  google-hangouts-chat:
+    - gov
+    - gov2
+  google_chat:
+    - gov
+    - gov2
+  gpu_monitoring:
+    - gov
+    - gov2
+  high_availability_datadog_agent:
+    - gov
+    - gov2
+  iac_security:
+    - gov
+    - gov2
+  incident_ai:
+    - gov
+    - gov2
+  inferred_entity_remapping_rules:
+    - gov
+    - gov2
+  internal_developer_portal:
+    - gov
+    - gov2
+  ioc_explorer:
+    - gov
+    - gov2
+  jetbrains-ides:
+    - gov
+    - gov2
+  jira-service-management-ops:
+    - gov
+    - gov2
+  jira_error_tracking:
+    - gov
+    - gov2
+  launchdarkly:
+    - gov
+    - gov2
+  linear:
+    - gov
+    - gov2
+  linear_error_tracking:
+    - gov
+    - gov2
+  live_debugger:
+    - gov
+    - gov2
+  llm_observability:
+    - gov
+    - gov2
+  mcp_server:
+    - gov
+    - gov2
+  mobile_app_testing:
+    - gov
+    - gov2
+  network_config_management:
+    - gov
+    - gov2
+  observability_pipelines:
+    - gov
+    - gov2
+  on-call:
+    - gov
+    - gov2
+  oracle-cloud-infrastructure:
+    - gov
+    - gov2
+  oracle-fusion:
+    - gov
+    - gov2
+  oracle_fusion_integration_setup:
+    - gov
+    - gov2
+  overview_pages:
+    - gov
+    - gov2
+  pr_gates:
+    - gov
+    - gov2
+  product_analytics:
+    - gov
+    - gov2
+  recorded-future:
+    - gov
+    - gov2
+  remote_config:
+    - gov
+    - gov2
+  remote_config_for_fa:
+    - gov
+    - gov2
+  remote_configuration:
+    - gov
+    - gov2
+  resource_based_sampling:
+    - gov
+    - gov2
+  roku_error_tracking:
+    - gov
+    - gov2
+  roku_log_collection:
+    - gov
+    - gov2
+  rum_roku:
+    - gov
+    - gov2
+  safety_center:
+    - gov
+    - gov2
+  scorecards:
+    - gov
+    - gov2
+  self_service_actions:
+    - gov
+    - gov2
+  service_override_removal:
+    - gov
+    - gov2
+  service_remapping_rules:
+    - gov
+    - gov2
+  setup_remote_config:
+    - gov
+    - gov2
+  snmp_profile_manager:
+    - gov
+    - gov2
+  software_delivery_mcp_tools:
+    - gov
+    - gov2
+  status_pages:
+    - gov
+    - gov2
+  storage_management:
+    - gov
+    - gov2
+  supported_deployment_types:
+    - gov
+    - gov2
+  synthetics_email_validation:
+    - gov
+    - gov2
+  synthetics_safari:
+    - gov
+    - gov2
+  test_optimization:
+    - gov
+    - gov2
+  universal_service_monitoring:
+    - gov
+    - gov2
+  watchdog_faulty_service_deployment:
+    - us3
+    - us5
+    - eu
+    - ap1
+    - ap2
+    - gov
+    - gov2
+  wiz:
+    - gov
+    - gov2
+  workflow-automation:
+    - gov
+    - gov2
+  workflows:
+    - gov
+    - gov2
+  workload_security_active_protection:
+    - gov
+    - gov2
+  byoc:
+    - gov
