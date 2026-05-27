@@ -1554,7 +1554,7 @@ menu:
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
       weight: 3
-    - name: Bits Assistant
+    - name: Bits AI Assistant
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
@@ -2092,60 +2092,60 @@ menu:
       parent: platform_heading
       identifier: internal_developer_portal
       weight: 110000
-    - name: Software Catalog
-      url: internal_developer_portal/software_catalog/
+    - name: Catalog
+      url: internal_developer_portal/catalog/
       parent: internal_developer_portal
-      identifier: software_catalog
+      identifier: catalog
       weight: 1
     - name: Set Up
-      url: internal_developer_portal/software_catalog/set_up
-      parent: software_catalog
-      identifier: software_catalog_set_up
+      url: internal_developer_portal/catalog/set_up
+      parent: catalog
+      identifier: catalog_set_up
       weight: 101
     - name: Discover Entities
-      url: internal_developer_portal/software_catalog/set_up/discover_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_discover_entities
+      url: internal_developer_portal/catalog/set_up/discover_entities
+      parent: catalog_set_up
+      identifier: catalog_discover_entities
       weight: 1011
     - name: Create Entities
-      url: internal_developer_portal/software_catalog/set_up/create_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_create_entities
+      url: internal_developer_portal/catalog/set_up/create_entities
+      parent: catalog_set_up
+      identifier: catalog_create_entities
       weight: 1012
     - name: Import Entities
-      url: internal_developer_portal/software_catalog/set_up/import_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_import_entities
+      url: internal_developer_portal/catalog/set_up/import_entities
+      parent: catalog_set_up
+      identifier: catalog_import_entities
       weight: 1013
     - name: Define Ownership
-      url: internal_developer_portal/software_catalog/set_up/ownership
-      parent: software_catalog_set_up
-      identifier: software_catalog_ownership
+      url: internal_developer_portal/catalog/set_up/ownership
+      parent: catalog_set_up
+      identifier: catalog_ownership
       weight: 1014
     - name: Entity Model
-      url: internal_developer_portal/software_catalog/entity_model
-      parent: software_catalog
-      identifier: software_catalog_entity_model
+      url: internal_developer_portal/catalog/entity_model
+      parent: catalog
+      identifier: catalog_entity_model
       weight: 102
     - name: Native Entities
-      url: internal_developer_portal/software_catalog/entity_model/native_entities
-      parent: software_catalog_entity_model
-      identifier: software_catalog_native_entities
+      url: internal_developer_portal/catalog/entity_model/native_entities
+      parent: catalog_entity_model
+      identifier: catalog_native_entities
       weight: 1021
     - name: Custom Entities
-      url: internal_developer_portal/software_catalog/entity_model/custom_entities
-      parent: software_catalog_entity_model
-      identifier: software_catalog_custom_entities
+      url: internal_developer_portal/catalog/entity_model/custom_entities
+      parent: catalog_entity_model
+      identifier: catalog_custom_entities
       weight: 1022
     - name: AI-generated Systems
-      url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
-      parent: software_catalog_entity_model
-      identifier: software_catalog_ai_generated_systems
+      url: internal_developer_portal/catalog/entity_model/ai-generated-systems
+      parent: catalog_entity_model
+      identifier: catalog_ai_generated_systems
       weight: 1023
     - name: Troubleshooting
-      url: internal_developer_portal/software_catalog/troubleshooting
-      parent: software_catalog
-      identifier: software_catalog_troubleshooting
+      url: internal_developer_portal/catalog/troubleshooting
+      parent: catalog
+      identifier: catalog_troubleshooting
       weight: 103
     - name: Scorecards
       url: internal_developer_portal/scorecards
@@ -2428,11 +2428,16 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_jira
       weight: 100
+    - name: Linear
+      url: error_tracking/ticketing_systems/linear
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_linear
+      weight: 101
     - name: Case Management
       url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
-      weight: 101
+      weight: 102
     - name: Link Pull Requests
       url: error_tracking/link_pull_requests
       parent: error_tracking
@@ -4535,8 +4540,8 @@ menu:
       parent: tracing
       identifier: tracing_services
       weight: 9
-    - name: Software Catalog
-      url: /internal_developer_portal/software_catalog/
+    - name: Catalog
+      url: /internal_developer_portal/catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
       weight: 901
@@ -4591,17 +4596,17 @@ menu:
       identifier: tracing_apm_monitors
       weight: 911
     - name: Endpoint Observability
-      url: internal_developer_portal/software_catalog/endpoints/
+      url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
       weight: 10
     - name: Explore Endpoints
-      url: internal_developer_portal/software_catalog/endpoints/explore_endpoints
+      url: internal_developer_portal/catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 1002
     - name: Monitor Endpoints
-      url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
+      url: internal_developer_portal/catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 1003
@@ -5143,11 +5148,16 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
+    - name: Data Collection
+      url: data_streams/kafka/data_collection
+      identifier: data_streams_kafka_data_collection
+      parent: data_streams_kafka
+      weight: 2
     - name: Monitors and Automation
       url: data_streams/kafka/monitors_and_automation
       identifier: data_streams_kafka_monitors_and_automation
       parent: data_streams_kafka
-      weight: 2
+      weight: 3
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -5180,6 +5190,12 @@ menu:
       identifier: data_catalog
       parent: data_observability_heading
       weight: 65000
+    - name: Lineage
+      url: data_observability/lineage
+      pre: data-observability-wui
+      identifier: data_lineage
+      parent: data_observability_heading
+      weight: 67500
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
@@ -6127,6 +6143,46 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: Concepts
+      url: feature_flags/concepts
+      parent: feature_flags
+      identifier: feature_flags_concepts
+      weight: 3
+    - name: Environments
+      url: feature_flags/concepts/environments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_environments
+      weight: 301
+    - name: Variants and Flag Types
+      url: feature_flags/concepts/variants_and_flag_types
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_variants
+      weight: 302
+    - name: Targeting Rules and Filters
+      url: feature_flags/concepts/targeting_rules
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_rules
+      weight: 303
+    - name: Traffic Splitting and Randomization
+      url: feature_flags/concepts/traffic_splitting
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_traffic_splitting
+      weight: 304
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_distribution_channels
+      weight: 305
+    - name: Flag History
+      url: feature_flags/concepts/flag_history
+      parent: feature_flags_concepts
+      identifier: feature_flags_history
+      weight: 306
+    - name: MCP Server
+      url: feature_flags/feature_flag_mcp_server
+      parent: feature_flags
+      identifier: feature_flags_mcp_server
+      weight: 8
     - name: .NET
       url: feature_flags/server/dotnet
       parent: feature_flags_server
@@ -6157,16 +6213,6 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
-    - name: Flag History
-      url: feature_flags/history
-      parent: feature_flags
-      identifier: feature_flags_history
-      weight: 6
-    - name: MCP Server
-      url: feature_flags/feature_flag_mcp_server
-      parent: feature_flags
-      identifier: feature_flags_mcp_server
-      weight: 8
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags

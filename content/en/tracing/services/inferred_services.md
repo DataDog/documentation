@@ -17,7 +17,7 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 
-Explore inferred services in the [Software Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
+Explore inferred services in the [Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
 {{< tabs >}}
@@ -168,7 +168,7 @@ Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog 
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 
-[1]: /software_catalog/
+[1]: /internal_developer_portal/catalog/
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides

@@ -156,22 +156,22 @@ You can see the workflow run status in the {{< ui >}}Workflows{{< /ui >}} sectio
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
-## Software Catalog triggers
+## Catalog triggers
 
 To run a workflow from a software catalog entity, you must first add a software catalog trigger to your workflow:
 
 1. Add a software catalog trigger to your workflow:
-   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Software Catalog{{< /ui >}}.
-   - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Software Catalog{{< /ui >}}.
+   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}}.
+   - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Catalog{{< /ui >}}.
 2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
 3. Save your Workflow.
 4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-Run the workflow from your Software Catalog entity:
+Run the workflow from your Catalog entity:
 
-1. On the [Software Catalog page][14], choose an entity from the list.
+1. On the [Catalog page][14], choose an entity from the list.
 1. Click {{< ui >}}Run Workflow{{< /ui >}} at the top of the side panel.
-1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with Software Catalog triggers appear in the list.
+1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with Catalog triggers appear in the list.
 1. If your workflow requires input parameters, enter the values as required.
 1. Click {{< ui >}}Run{{< /ui >}} to run the workflow.
 

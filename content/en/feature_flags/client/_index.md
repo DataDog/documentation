@@ -71,4 +71,6 @@ const evaluationContext = {
 
 ## Further reading
 
+For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
+
 {{< partial name="whats-next/whats-next.html" >}}

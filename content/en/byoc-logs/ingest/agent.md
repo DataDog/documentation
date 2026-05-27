@@ -5,10 +5,10 @@ aliases:
 - /cloudprem/ingest/agent/
 description: Configure the Datadog Agent to send logs to your BYOC Logs deployment
 further_reading:
-- link: "/byoc-logs/ingest_logs/observability_pipelines/"
+- link: "/byoc-logs/ingest/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines Integration"
-- link: "/byoc-logs/ingest_logs/rest_api/"
+- link: "/byoc-logs/ingest/api/"
   tag: "Documentation"
   text: "REST API Integration"
 - link: "/getting_started/containers/datadog_operator/"

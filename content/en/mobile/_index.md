@@ -270,7 +270,7 @@ You can also group by log patterns and select different log attributes for clust
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Catalog][17].
 
 ## Bits AI
 
@@ -287,7 +287,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits AI Assistant][27].
 
 ### Bits AI SRE
 {{< tabs >}}
@@ -350,7 +350,7 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [14]: https://chat.datadoghq.com/
 [15]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [16]: /tracing/trace_explorer/query_syntax/
-[17]: https://docs.datadoghq.com/software_catalog/manage/
+[17]: https://docs.datadoghq.com/internal_developer_portal/catalog/set_up/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
 [20]: https://docs.datadoghq.com/incident_response/on-call/
