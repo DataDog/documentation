@@ -33,7 +33,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       }]
     }
   }' \
-  datadog/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 ### Validate

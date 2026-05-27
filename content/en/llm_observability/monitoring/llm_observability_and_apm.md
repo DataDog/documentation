@@ -45,13 +45,13 @@ By using this integration, you can correlate data across your application stack 
 
 ### From LLM Observability to APM
 
-To understand the broader context of your LLM operations within your application ecosystem, select an LLM Observability span in the [LLM Observability Explorer][4] and click **APM span** to navigate to the relevant APM span.
+To understand the broader context of your LLM operations within your application ecosystem, select an LLM Observability span in the [LLM Observability Explorer][4] and click {{< ui >}}APM span{{< /ui >}} to navigate to the relevant APM span.
 
 {{< img src="llm_observability/guides/apm/llm_span.png" alt="An LLM Observability span with a related APM span that you can navigate to from the Traces page in LLM Observability" style="width:100%;" >}}
 
 ### From APM to LLM Observability 
 
-To access LLM-specific insights, select an APM span in the [Trace Explorer][5] and click **View Span** in the LLM Observability section on the **Info** tab to navigate to the corresponding LLM Observability span.
+To access LLM-specific insights, select an APM span in the [Trace Explorer][5] and click {{< ui >}}View Span{{< /ui >}} in the LLM Observability section on the {{< ui >}}Info{{< /ui >}} tab to navigate to the corresponding LLM Observability span.
 
 {{< img src="llm_observability/guides/apm/apm_span.png" alt="An APM span with a related LLM Observability span that you can navigate to from the Traces page in APM" style="width:100%;" >}}
 

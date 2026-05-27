@@ -257,7 +257,7 @@ Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 
 ## Advanced CEL exclusion
 
-In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Langauge][3] rules to target containers to be excluded from telemetry collection.
+In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Language][3] rules to target containers to be excluded from telemetry collection.
 
 Use the following attributes to represent the container object in your filtering rules:
 

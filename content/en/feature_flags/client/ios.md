@@ -62,7 +62,7 @@ github "DataDog/dd-sdk-ios"
 carthage bootstrap --use-xcframeworks --no-use-binaries
 {{< /code-block >}}
 
-After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
+After building, add the following XCFrameworks to your Xcode project (in the {{< ui >}}Frameworks, Libraries, and Embedded Content{{< /ui >}} section):
 
 {{< code-block lang="swift" >}}
 DatadogInternal.xcframework

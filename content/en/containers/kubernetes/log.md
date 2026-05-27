@@ -184,7 +184,7 @@ The `source` tag can be important for your logs, as the [out of box log pipeline
 - Specify a log configuration as Autodiscovery Annotations on a given Pod, to configure the rules for a given container *(Recommended)*
 - Specify a log configuration as a configuration file, to configure the rules for each matching container by image
 
-At minimum, these log configurations require a `source` and `service` tag. You may want to match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] to help automatically enrich your logs. You can also find a [library of pipelines in Datadog][16].
+Setting a `source` and `service` tag on these log configurations is strongly recommended. Match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] so your logs are automatically enriched; you can also find a [library of pipelines in Datadog][16]. The `service` tag powers [Unified Service Tagging][4], linking your logs with metrics and traces from the same service. If `source` and `service` are omitted, the Agent falls back to the `service` tag from Unified Service Tagging (when set), and otherwise to the container's short image name.
 
 ### Autodiscovery annotations
 
