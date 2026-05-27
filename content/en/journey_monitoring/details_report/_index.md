@@ -20,7 +20,7 @@ further_reading:
   text: 'Learn about journey uptime'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
