@@ -22,7 +22,7 @@ Errors shown in the editor are filtered by controls on the Error Tracking tab, d
 ## Error Tracking tab
 Use the Error Tracking tab in the tool window to filter, sort and inspect errors, view stack traces, navigate to relevant locations in your source code, attempt fixes with your local agent, or navigate to Datadog to continue your investigations.
 
-{{< img src="/ide_plugins/idea/error_tracking/toolwindow.png" alt="The Error Tracking tool window" style="width:100%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/error_tracking_toolwindow.png" alt="JetBrains Error Tracking tool window" style="width:100%;" >}}
 
 Additional information shown in this view includes the count, service, first-seen and last-seen timestamps.
 
@@ -52,19 +52,33 @@ Errors are displayed in a list on the left-side of the tool window, with the typ
 Select an issue to display its details on the right-side of the tool window.
 
 ### Issue details
-The issue details pane shows detailed information about the selected error, including the error description, the service, the count, first-seen and last-seen information, and a stack trace.
+The issue details pane shows detailed information about the selected error, including the error status, the count, and a stack trace.
 
-{{< img src="/ide_plugins/idea/error_tracking/details.png" alt="Error Tracking details" style="width:100%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/issue_details.png" alt="Error Tracking details" style="width:100%;" >}}
 
 Click the **View in Datadog** link to open the selected issue in Datadog.
 
 Click on a file and line link in the stack trace to navigate to the code.
 
-### Fix With AI
+#### Fix with AI
 When a local agent is detected (you have the Claude Code, Gemini, or Codex CLI installed locally), a **Fix with Local Agent** button will appear. Click this to open a new terminal and launch the local agent with a custom prompt from Datadog requesting the agent to fix the error.
+
+#### Context tab
+The Context tab shows details about the issue including the service, first-seen and last-seen information, the issue's assignee, and the error count over time.
+
+{{< img src="/ide_plugins/idea/error_tracking/context_tab.png" alt="JetBrains Error Tracking Context tab" style="width:50%;" >}}
+
+#### Tags tab
+The Tags tab shows a breakdown of common tags to help you understand the distribution of the issue.
+
+#### Variables tab
+The Variables tab shows the set of variables captured with the stack trace when [Exception Replay][2] is enabled on the service.
+
+You can switch between frames with data by clicking the icon on the left side of the stack trace.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/error_tracking/
+[2]: /tracing/error_tracking/exception_replay/
