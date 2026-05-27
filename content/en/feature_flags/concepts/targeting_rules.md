@@ -54,7 +54,7 @@ SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>over
 
 ## Filters and evaluation context
 
-Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are not supported.
+Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
 
 ### Example evaluation contexts and filters
 
