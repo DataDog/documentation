@@ -7,7 +7,7 @@ further_reading:
     text: "Change Tracking"
   - link: "/feature_flags/"
     tag: "Documentation"
-    text: "Feature Flags"
+    text: "Datadog Feature Flags"
   - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
     tag: "Documentation"
     text: "LaunchDarkly"
