@@ -62,7 +62,7 @@ Having multiple queries per environment lets you keep the `env` value consistent
 
 ## Connect environments in the SDK
 
-The `env` value you use must match a query configured for the Feature Flags environment you want, such as `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the **same value** for Feature Flags.
+The `env` value you use must match a query configured for the Feature Flags environment you want, such as `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the *same value* for Feature Flags.
 
 ### Client-side applications
 
