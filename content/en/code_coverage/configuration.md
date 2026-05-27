@@ -44,7 +44,7 @@ gates:
     config:
       threshold: 95
 comments:
-  disabled: false
+  enabled: true
 ```
 
 ## Services configuration
@@ -295,14 +295,14 @@ gates:
 
 ## PR Comments
 
-By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.disabled` field.
+By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.enabled` field.
 
 PR Gate checks are not affected by this setting.
 
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
 comments:
-  disabled: true
+  enabled: false
 {{< /code-block >}}
 
 ## Carryforward
