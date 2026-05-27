@@ -17,15 +17,6 @@ Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumenta
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
 
-## Supported frameworks
-
-Agentic Onboarding is available for the following products and frameworks:
-
-- **[Error Tracking][1], [Real User Monitoring (RUM)][2], and [Product Analytics][3]**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue.
-- **[Infrastructure Monitoring][4] with Kubernetes**: Terraform, Ansible, Kustomize, and more.
-- **[Serverless Monitoring][5]**: AWS Lambda (Terraform, AWS CDK, Serverless Framework, and more); GCP Cloud Run containers and Cloud Run functions.
-- [Code Coverage][13], [Test Optimization][14], and [LLM Observability][15]
-
 ## AI Setup CLI
 
 The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as bootstrapping a Datadog account.
@@ -36,6 +27,11 @@ The CLI can:
 - Link an existing Datadog account to your local environment
 - Instrument local infrastructure as code (Terraform, Helm, Kustomize, Ansible, Pulumi, raw Kubernetes manifests, Docker Compose files) by editing files in place
 - Instrument local application code by adding SDK initialization and configuration for supported frontends and backends
+
+### Prerequisites
+
+- Node.js 20 or later
+- An existing Datadog account (optional — the CLI can create one for you)
 
 ### Install and run the CLI
 
@@ -70,7 +66,12 @@ After the CLI completes, see [Next steps](#next-steps).
 
 The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
 
-The MCP Server supports the following frameworks:
+### Prerequisites
+
+- An MCP-compatible coding assistant, such as [Claude Code][17] or [Cursor][18]
+- A Datadog account
+
+### Supported frameworks
 
 | Product | Frameworks |
 |---------|------------|
@@ -196,3 +197,5 @@ The agent detects your stack, requests permission before each tool call, applies
 [14]: /tests/test_optimization/
 [15]: /llm_observability/
 [16]: /getting_started/site/
+[17]: https://claude.ai/code
+[18]: https://cursor.com/
