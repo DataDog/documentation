@@ -29,6 +29,8 @@ Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}}
 
 Cost Optimization Automation is different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
 
+**Note**: Cost Optimization Automation uses Datadog Workflows and incurs additional costs. For detailed pricing information, see the [Workflow Automation pricing page][8].
+
 ## Supported recommendation types
 
 Cost Optimization Automation supports the following AWS recommendation types:
@@ -112,3 +114,4 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 [5]: https://app.datadoghq.com/cost/optimize/automations
 [6]: /actions/connections/
 [7]: /service_management/workflows/connections/#connection-groups
+[8]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
