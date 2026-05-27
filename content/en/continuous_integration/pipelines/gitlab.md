@@ -25,6 +25,7 @@ Set up CI Visibility for GitLab to collect data on your pipeline executions, ana
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| Running jobs | Running jobs | View job executions that are currently running. |
 | [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
