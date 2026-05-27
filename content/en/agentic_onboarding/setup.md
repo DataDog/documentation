@@ -74,9 +74,25 @@ The CLI can set up the following products. Use the identifier with the `--produc
     - Replace the value of `--site` with the [Datadog site][16] for your account.
     - Replace `<PRODUCT>` with one of the [identifiers above](#supported-products).
 
-1. Complete the OAuth flow in your browser when prompted. 
+1. The CLI displays a welcome screen. Press <kbd>Enter</kbd> to continue.
 
-1. Return to your terminal, and point the CLI to your code repository. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables.
+   {{< img src="agentic_onboarding/welcome-screen.png" alt="CLI welcome screen showing 'Get started with Datadog' and 'Set up in ~3 minutes'" style="width:80%;" >}}
+
+1. Choose whether you have a Datadog account. **Yes, sign in** links an existing account; **No, create one** bootstraps a new account. The CLI opens a browser for OAuth — complete the flow and grant access to your Datadog account.
+
+   {{< img src="agentic_onboarding/account-linking-creation.png" alt="CLI prompt 'Do you have a Datadog account?' with options 'Yes, sign in' and 'No, create one'" style="width:80%;" >}}
+
+1. If you ran the CLI without `--product`, select what to set up from the product menu. (Direct setup with `--product` skips this menu.)
+
+   {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' grouped by Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications, and CI Testing" style="width:80%;" >}}
+
+1. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
+
+   {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps" style="width:80%;" >}}
+
+1. When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify telemetry.
+
+   {{< img src="agentic_onboarding/success.png" alt="CLI showing 'Setup complete!' with check marks next to RUM, Error Tracking, and Product Analytics" style="width:80%;" >}}
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
 
