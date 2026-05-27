@@ -724,8 +724,8 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
-[10]: /catalog/service_definitions/
-[11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml
+[10]: /internal_developer_portal/catalog/entity_model/
+[11]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [12]: /monitors/types/log/
 [13]: /monitors/types/apm/?tab=analytics
 [14]: /monitors/types/error_tracking/

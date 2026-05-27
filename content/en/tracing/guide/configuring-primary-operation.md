@@ -8,7 +8,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"

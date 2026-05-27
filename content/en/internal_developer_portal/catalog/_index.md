@@ -87,7 +87,7 @@ Some integrations alias to certain types. For example, Postgres, MySQL, and Cass
 
 [1]: https://app.datadoghq.com/services
 [2]: /data_security/data_retention_periods/
-[3]: /internal_developer_portal/catalog/entity_model/entity_types
+[3]: /internal_developer_portal/catalog/entity_model/native_entities/
 [4]: /internal_developer_portal/use_cases
 [5]: /internal_developer_portal/catalog/set_up/discover_entities
 [6]: /internal_developer_portal/catalog/set_up/create_entities

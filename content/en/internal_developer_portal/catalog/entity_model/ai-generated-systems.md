@@ -5,7 +5,7 @@ disable_toc: false
 aliases:
   - /internal_developer_portal/software_catalog/entity_model/ai-generated-systems
 further_reading:
-- link: "/internal_developer_portal/catalog/entity_model/entity_types"
+- link: "/internal_developer_portal/catalog/entity_model/native_entities/"
   tag: "Documentation"
   text: "Entity Types"
 - link: "/internal_developer_portal/catalog/set_up/discover_entities"

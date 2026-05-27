@@ -350,7 +350,7 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [14]: https://chat.datadoghq.com/
 [15]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [16]: /tracing/trace_explorer/query_syntax/
-[17]: https://docs.datadoghq.com/software_catalog/manage/
+[17]: https://docs.datadoghq.com/internal_developer_portal/catalog/set_up/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
 [20]: https://docs.datadoghq.com/incident_response/on-call/

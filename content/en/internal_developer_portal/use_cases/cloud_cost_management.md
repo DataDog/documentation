@@ -8,10 +8,10 @@ aliases:
   - /service_catalog/use_cases/cloud_cost_management
   - /software_catalog/use_cases/cloud_cost_management
 further_reading:
-  - link: "/tracing/catalog/"
+  - link: "/internal_developer_portal/catalog/"
     tag: "Documentation"
     text: "Datadog Catalog"
-  - link: "/tracing/catalog/scorecards/"
+  - link: "/internal_developer_portal/scorecards/"
     tag: "Documentation"
     text: "Datadog Scorecards"
   - link: "/cloud_cost_management/"
@@ -46,7 +46,7 @@ Datadog offers preconfigured [Workflow blueprints][3] to help you build cost man
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/
-[2]: /catalog/scorecards/
+[2]: /internal_developer_portal/scorecards/
 [3]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
-[4]: /catalog/
+[4]: /internal_developer_portal/catalog/
 [5]: /service_management/workflows/

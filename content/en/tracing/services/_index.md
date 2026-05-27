@@ -19,7 +19,7 @@ Viewing span and trace data through the lens of your services can ease troublesh
 {{< img src="tracing/visualization/software-catalog.png" alt="Catalog" >}}
 
 {{< whatsnext desc="Use the following visualizations and tools to monitor, report, and solve problems in your distributed services" >}}
-    {{< nextlink href="tracing/catalog/" >}}Catalog{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/catalog/" >}}Catalog{{< /nextlink >}}
     {{< nextlink href="tracing/services/service_page/" >}}Service Pages{{< /nextlink >}}
     {{< nextlink href="tracing/services/resource_page/" >}}Resource Pages{{< /nextlink >}}
     {{< nextlink href="tracing/services/deployment_tracking/" >}}Deployment Tracking{{< /nextlink >}}

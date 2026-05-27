@@ -6,7 +6,7 @@ aliases:
   - /service_catalog/scorecards/using_scorecards
   - /software_catalog/scorecards/using_scorecards
 further_reading:
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Catalog"
 - link: /api/latest/service-scorecards/

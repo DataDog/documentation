@@ -4,7 +4,7 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/software_catalog/'
+    - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
       text: 'Catalog'
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'

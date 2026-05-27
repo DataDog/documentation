@@ -69,4 +69,4 @@ For more details on CI status and static analysis violations for the pipelines a
 [2]: /delivery_performance/dora_metrics/
 [4]: https://app.datadoghq.com/software
 [5]: https://app.datadoghq.com/ci/pipelines
-[6]: /catalog/service_definitions/v2-2/#example-yaml
+[6]: /internal_developer_portal/catalog/entity_model/

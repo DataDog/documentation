@@ -131,7 +131,7 @@ To validate your service definitions ingested by Datadog's GitHub integration, y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /internal_developer_portal/catalog/set_up#role-based-access-and-permissions
+[2]: /internal_developer_portal/catalog/set_up#configure-role-based-access-and-permissions
 [3]: https://app.datadoghq.com/software/settings/get-started
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest

@@ -173,7 +173,7 @@ For setup and customization tips, read the [Overview Pages documentation][22].
 [9]: https://app.datadoghq.com/software
 [10]: /internal_developer_portal/catalog/set_up/import_entities/
 [11]: /internal_developer_portal/catalog/set_up/
-[12]: /internal_developer_portal/catalog/entity_model/entity_types/
+[12]: /internal_developer_portal/catalog/entity_model/native_entities/
 [13]: https://app.datadoghq.com/software/scorecards
 [14]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [16]: https://app.datadoghq.com/app-builder/apps/edit?startModalOpen=false&template=create-new-s3-bucket&viewMode=templatePreview

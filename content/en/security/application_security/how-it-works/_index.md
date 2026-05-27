@@ -118,7 +118,7 @@ Datadog App and API Protection provides visibility into threats targeting your A
 Datadog App and API Protection identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
 
 [1]: /security/workload_protection/
-[2]: /tracing/catalog/#security-view
+[2]: /internal_developer_portal/catalog/
 [3]: /tracing/services/service_page/#security
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information
 [5]: /security/code_security/software_composition_analysis/
@@ -134,6 +134,6 @@ Datadog App and API Protection identifies Log4j Log4Shell attack payloads and pr
 [16]: /security/cloud_siem/
 [17]: /security/application_security/policies/library_configuration/#data-security-considerations
 [26]: /agent/remote_config/#enabling-remote-configuration
-[27]: /catalog/endpoints/
+[27]: /internal_developer_portal/catalog/endpoints/
 [28]: /security/code_security/iast/
 [29]: /security/code_security/

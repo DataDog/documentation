@@ -118,7 +118,7 @@ For more information, see the [Dashboards documentation][16].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /universal_service_monitoring
-[2]: /tracing/catalog
+[2]: /internal_developer_portal/catalog/
 [3]: /tracing/services/deployment_tracking/
 [4]: /service_level_objectives
 [5]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog

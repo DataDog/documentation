@@ -6,7 +6,7 @@ aliases:
   - /service_catalog/scorecards/custom_rules
   - /software_catalog/scorecards/custom_rules
 further_reading:
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Catalog"
 - link: /api/latest/service-scorecards/
@@ -123,7 +123,7 @@ You can also link an existing workflow to any custom rule that already generates
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /catalog/scorecards/scorecard_configuration/
+[1]: /internal_developer_portal/scorecards/scorecard_configuration/
 [2]: /api/latest/service-scorecards/
 [3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.updateScorecardRuleOutcome
 [4]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS

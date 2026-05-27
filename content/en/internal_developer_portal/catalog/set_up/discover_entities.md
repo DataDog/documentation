@@ -75,14 +75,14 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 [2]: /universal_service_monitoring/
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/guide/service_overrides/
-[5]: /catalog/endpoints/
+[5]: /internal_developer_portal/catalog/endpoints/
 [6]: https://app.datadoghq.com/software?lens=performance
 [7]: /tracing/guide/configuring-primary-operation/
 [8]: /tracing/metrics/metrics_namespace/
 [9]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
 [10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/software/settings/get-started
-[12]: /catalog/apis/
+[12]: /internal_developer_portal/catalog/entity_model/
 [13]: /integrations/github/
 [14]: /tracing/services/renaming_rules/#step-3-name-your-rule-and-review
 [15]: /tracing/services/inferred_services/?tab=agentv7600#set-up-inferred-services

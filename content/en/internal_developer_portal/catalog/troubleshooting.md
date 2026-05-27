@@ -10,7 +10,7 @@ aliases:
   - /software_catalog/troubleshooting
   - /internal_developer_portal/software_catalog/troubleshooting
 further_reading:
-  - link: "/tracing/catalog/setup/"
+  - link: "/internal_developer_portal/catalog/set_up/"
     tag: "Documentation"
     text: "Setting Up Catalog"
 ---

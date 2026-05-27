@@ -276,7 +276,7 @@ You might notice a discrepancy in how a deployment's status is reported, where i
 [10]: /continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
-[13]: /tracing/catalog
+[13]: /internal_developer_portal/catalog/
 [14]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#correlate
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer

@@ -6,7 +6,7 @@ aliases:
   - /service_catalog/integrations
   - /software_catalog/integrations
 further_reading:
-- link: "/tracing/catalog/service_definition_api/"
+- link: "/internal_developer_portal/catalog/entity_model/"
   tag: "Documentation"
   text: "Learn about the Service Definition API"
 - link: "/integrations/opsgenie/"
@@ -175,6 +175,6 @@ Datadog's Infrastructure integrations and [Resource Catalog][54] provides a comp
 [82]: /internal_developer_portal/catalog/entity_model
 [83]: /internal_developer_portal/catalog/set_up/create_entities#github-integration
 [84]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
-[85]: /internal_developer_portal/catalog/set_up/import_entities#import-from-backstage
+[85]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
 
 

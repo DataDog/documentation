@@ -177,7 +177,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [16]: /remote_configuration
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
-[19]: /tracing/catalog/
+[19]: /internal_developer_portal/catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/

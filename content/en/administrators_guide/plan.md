@@ -343,10 +343,10 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [27]: /infrastructure/process/?tab=linuxwindows\#installation
 [28]: /integrations/network/
 [29]: /network_monitoring/cloud_network_monitoring/
-[30]: /catalog/
+[30]: /internal_developer_portal/catalog/
 [31]: /events/
 [32]: /error_tracking/
-[33]: /catalog/endpoints/
+[33]: /internal_developer_portal/catalog/endpoints/
 [34]: /agent/fleet_automation/
 [35]: /remote_configuration
 [36]: /remote_configuration#supported-products-and-features
@@ -384,7 +384,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [69]: /integrations/process/
 [70]: /extend/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: /synthetics/api_tests/ssl_tests/
-[72]: /catalog/service_definitions/
+[72]: /internal_developer_portal/catalog/entity_model/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
 [75]: /tracing/trace_collection/

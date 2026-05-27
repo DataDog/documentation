@@ -13,7 +13,7 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -81,7 +81,7 @@ After enabling Universal Service Monitoring, you can:
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/services/deployment_tracking/
-[3]: /tracing/catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /service_level_objectives/metric/

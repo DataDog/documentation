@@ -590,7 +590,7 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [10]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
-[11]: /tracing/catalog/service_definition_api/
+[11]: /internal_developer_portal/catalog/entity_model/
 [12]: https://app.datadoghq.com/personal-settings/profile
 [13]: http://json-schema.org/
 [14]: https://www.schemastore.org/json/

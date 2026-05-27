@@ -8,7 +8,7 @@ aliases:
   - /service_catalog/use_cases/api_management
   - /software_catalog/use_cases/api_management
 further_reading:
-  - link: "/tracing/catalog/"
+  - link: "/internal_developer_portal/catalog/"
     tag: "Documentation"
     text: "Datadog Catalog"
 ---

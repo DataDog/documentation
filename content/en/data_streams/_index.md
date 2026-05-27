@@ -10,7 +10,7 @@ further_reading:
     - link: '/integrations/amazon_sqs/'
       tag: 'Documentation'
       text: 'Amazon SQS Integration'
-    - link: '/tracing/software_catalog/'
+    - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
       text: 'Catalog'
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
@@ -135,7 +135,7 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_streams/go#manual-instrumentation
-[2]: /tracing/catalog/
+[2]: /internal_developer_portal/catalog/
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /integrations/kafka/
 [5]: /integrations/amazon_sqs/

@@ -4,7 +4,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
   tag: "Blog"
   text: "Manage API performance, security, and ownership with Datadog API Catalog"
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Datadog Catalog"
 - link: "/synthetics/api_tests/http_tests/"
@@ -108,10 +108,10 @@ Read [Adding Metadata to APIs][10] for more information.
 
 [1]: https://app.datadoghq.com/apis/catalog
 [3]: /api_catalog/explore_apis/
-[6]: /catalog/manage
+[6]: /internal_developer_portal/catalog/set_up/
 [7]: /internal_developer_portal/catalog/endpoints/monitor_endpoints/
 [8]: /tracing/trace_collection/
-[9]: /catalog/customize/create_entries
-[10]: /catalog/service_definitions/#add-metadata-to-endpoints
+[9]: /internal_developer_portal/catalog/set_up/create_entities/
+[10]: /internal_developer_portal/catalog/entity_model/
 [11]: /internal_developer_portal/catalog/endpoints/explore_endpoints/
 [12]: https://app.datadoghq.com/services?selectedComponent=endpoint

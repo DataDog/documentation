@@ -104,5 +104,5 @@ Once your Software Template is configured and tested, publish it so your team ca
 [13]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=provision-eks-cluster&viewMode=edit&visibleDataItemId=createOrUpdateFile0-action
 [14]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=rds_provision_instance&viewMode=edit&visibleDataItemId=createDbInstance0-action
 [15]: https://app.datadoghq.com/workflow/blueprints
-[16]: /catalog/self-service/software_templates
+[16]: /internal_developer_portal/self_service_actions/software_templates/
 [17]: https://app.datadoghq.com/software/self-service

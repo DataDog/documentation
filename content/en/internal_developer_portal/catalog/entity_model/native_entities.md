@@ -38,7 +38,7 @@ In Catalog, you can collect non-instrumented services by declaring them through 
 [2]: /opentelemetry/integrations/trace_metrics/
 [3]: /tracing/trace_collection/custom_instrumentation/
 [4]: /internal_developer_portal/catalog/set_up/create_entities
-[5]: /internal_developer_portal/catalog/set_up/import_entities#import-from-backstage
+[5]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
 [6]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
 
 {{% /tab %}}

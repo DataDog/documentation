@@ -7,7 +7,7 @@ further_reading:
 - link: "/internal_developer_portal/catalog/set_up/create_entities"
   tag: "Documentation"
   text: "Create entities in Catalog"
-- link: "/internal_developer_portal/catalog/entity_model/native_entity_types"
+- link: "/internal_developer_portal/catalog/entity_model/native_entities/"
   tag: "Documentation"
   text: "Learn about native entity types"
 ---

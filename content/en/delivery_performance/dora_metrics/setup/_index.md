@@ -25,7 +25,7 @@ further_reading:
 - link: '/delivery_performance/dora_metrics/change_failure_detection/'
   tag: 'Documentation'
   text: 'Learn about Change Failure Detection'
-- link: '/tracing/software_catalog'
+- link: '/internal_developer_portal/catalog/'
   tag: 'Documentation'
   text: 'Learn about the Catalog'
 - link: 'https://github.com/DataDog/datadog-ci'
@@ -73,7 +73,7 @@ For more information about ensuring service deployments that are tracked by APM 
 
 [1]: /tracing/services/deployment_tracking
 [2]: https://app.datadoghq.com/ci/settings/dora
-[3]: /catalog/adding_metadata
+[3]: /internal_developer_portal/catalog/entity_model/
 [4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 {{% /tab %}}
@@ -159,8 +159,8 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [3]: https://app.datadoghq.com/ci/settings/dora
-[4]: /tracing/catalog
-[5]: /tracing/catalog/adding_metadata
+[4]: /internal_developer_portal/catalog/
+[5]: /internal_developer_portal/catalog/entity_model/
 [6]: https://app.datadoghq.com/ci/dora
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 
@@ -495,10 +495,10 @@ If an incident is resolved manually in PagerDuty instead of from a monitor notif
 [3]: https://support.pagerduty.com/main/docs/incident-priority
 [4]: https://support.pagerduty.com/docs/services-and-integrations
 [5]: /integrations/pagerduty/#troubleshooting
-[6]: /catalog/
+[6]: /internal_developer_portal/catalog/
 [7]: /monitors/configuration/#multi-alert
 [8]: /monitors/manage/#monitor-tags
-[9]: /catalog/integrations/#pagerduty-integration
+[9]: /internal_developer_portal/integrations/
 
 
 {{% /tab %}}
@@ -573,8 +573,8 @@ EOF
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/dora
-[2]: /tracing/catalog
-[3]: /tracing/catalog/adding_metadata
-[4]: /tracing/catalog/adding_metadata
+[2]: /internal_developer_portal/catalog/
+[3]: /internal_developer_portal/catalog/entity_model/
+[4]: /internal_developer_portal/catalog/entity_model/
 [5]: /delivery_performance/dora_metrics/change_failure_detection/
 [6]: https://app.datadoghq.com/ci/settings/dora

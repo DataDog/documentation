@@ -179,6 +179,6 @@ In this case, Code Changes Detection for deployments of the `shopist` service wi
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
 [3]: https://app.datadoghq.com/ci/commits
-[4]: /tracing/catalog/adding_metadata
-[5]: /tracing/catalog
+[4]: /internal_developer_portal/catalog/entity_model/
+[5]: /internal_developer_portal/catalog/
 

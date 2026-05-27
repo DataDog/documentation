@@ -1,7 +1,7 @@
 ---
 title: Exploring Endpoints
 further_reading:
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Datadog Catalog"
 aliases:
@@ -51,4 +51,4 @@ The endpoint details page shows you metadata, performance metrics, errors, depen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[2]: /catalog/service_definitions/v3-0/#system-and-api-pages-in-catalog
+[2]: /internal_developer_portal/catalog/entity_model/

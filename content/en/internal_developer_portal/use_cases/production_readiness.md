@@ -7,7 +7,7 @@ further_reading:
   - link: "/infrastructure/"
     tag: "Documentation"
     text: "Infrastructure Monitoring"
-  - link: "/catalog/scorecards/"
+  - link: "/internal_developer_portal/scorecards/"
     tag: "Documentation"
     text: "Scorecards"
   - link: "/cloud_cost_management/"
@@ -68,6 +68,6 @@ To explore cost details for a specific service, you can do one of the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /catalog/scorecards/
+[1]: /internal_developer_portal/scorecards/
 [2]: /cloud_cost_management/
 [3]: https://app.datadoghq.com/software

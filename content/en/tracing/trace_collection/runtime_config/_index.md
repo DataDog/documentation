@@ -56,7 +56,7 @@ The following options are supported with configuration at runtime. The required 
 
 [1]: /tracing/guide/remote_config/
 [2]: /agent/
-[3]: /tracing/catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /account_management/rbac/permissions/
 [5]: /tracing/trace_explorer/trace_view
 [6]: https://app.datadoghq.com/organization-settings/remote-config

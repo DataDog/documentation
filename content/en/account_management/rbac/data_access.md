@@ -225,7 +225,7 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [6]: https://app.datadoghq.com/organization-settings/
 [7]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [8]: /data_security/
-[9]: /catalog/customize/
+[9]: /internal_developer_portal/catalog/set_up/
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/

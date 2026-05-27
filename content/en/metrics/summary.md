@@ -287,7 +287,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: /catalog/endpoints/
+[13]: /internal_developer_portal/catalog/endpoints/
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
@@ -299,11 +299,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/
-[25]: /catalog/
+[25]: /internal_developer_portal/catalog/
 [26]: /synthetics/
 [27]: /universal_service_monitoring/
 [28]: /logs/
-[29]: /catalog/scorecards/
+[29]: /internal_developer_portal/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/

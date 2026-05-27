@@ -85,7 +85,7 @@ Recommendations:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /internal_developer_portal/catalog/entity_model/entity_types/
+[2]: /internal_developer_portal/catalog/entity_model/native_entities/
 [3]: /internal_developer_portal/scorecards/
 [4]: /internal_developer_portal/self_service_actions/
 [5]: /internal_developer_portal/catalog/set_up/ownership
@@ -97,7 +97,7 @@ Recommendations:
 [11]: https://app.datadoghq.com/software/self-service-actions
 [12]: /internal_developer_portal/eng_reports/
 [13]: /internal_developer_portal/catalog/set_up/create_entities/#github-integration
-[14]: /internal_developer_portal/catalog/set_up/import_entities#import-from-backstage
+[14]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
 [15]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
 [16]: /internal_developer_portal/integrations
 [18]: /internal_developer_portal/catalog/entity_model?tab=v30#build-custom-extensions

@@ -7,7 +7,7 @@ further_reading:
 - link: "/account_management/teams/"
   tag: "Documentation"
   text: "Teams"
-- link: "/tracing/catalog/adding_metadata/#add-metadata-from-the-datadog-ui"
+- link: "/internal_developer_portal/catalog/entity_model/"
   tag: "Documentation"
   text: "Add metadata from the Datadog UI"
 ---

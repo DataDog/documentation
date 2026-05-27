@@ -9,7 +9,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -120,7 +120,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 
 [2]: /extend/guide/data-collection-resolution/
 [3]: /tracing/setup/
-[4]: /tracing/catalog/
+[4]: /internal_developer_portal/catalog/
 [5]: /tracing/services/services_map/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/

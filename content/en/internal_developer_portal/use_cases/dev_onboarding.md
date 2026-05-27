@@ -10,10 +10,10 @@ aliases:
   - /tracing/service_catalog/use_cases/dev_onboarding
   - /software_catalog/use_cases/dev_onboarding
 further_reading:
-  - link: "/catalog/scorecards/"
+  - link: "/internal_developer_portal/scorecards/"
     tag: "Documentation"
     text: "Datadog Scorecards"
-  - link: "/catalog/software_templates/"
+  - link: "/internal_developer_portal/self_service_actions/software_templates/"
     tag: "Documentation"
     text: "Datadog Software Templates"
   - link: "https://www.datadoghq.com/blog/software-catalog/"
@@ -53,8 +53,8 @@ Catalog acts as a single source of truth for your engineering environment. Newly
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /catalog/scorecards/
-[2]: /catalog/software_templates/
+[1]: /internal_developer_portal/scorecards/
+[2]: /internal_developer_portal/self_service_actions/software_templates/
 [3]: /api/latest/api-management/
 [4]: /account_management/teams/
 [5]: /service_management/app_builder/

@@ -113,7 +113,7 @@ When you use [**Import Entities**][10] and choose a data source, Datadog queries
 If you maintain software inventories in Backstage or ServiceNow CMDB, you can sync these inventories into Datadog's Catalog.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/internal_developer_portal/catalog/set_up/import_entities#import-from-backstage" >}}Import from Backstage{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage" >}}Import from Backstage{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow" >}}Import from ServiceNow{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -174,8 +174,8 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [4]: /account_management/rbac/permissions
 [5]: /internal_developer_portal/catalog/set_up/discover_entities#automatic-discovery-with-apm-usm-and-rum
 [6]: /integrations/guide/source-code-integration/
-[7]: /internal_developer_portal/catalog/entity_model/entity_types?tab=datastore#datastore-peer-tags
-[8]: /internal_developer_portal/catalog/entity_model/entity_types?tab=queue#datastore-peer-tags
+[7]: /internal_developer_portal/catalog/entity_model/native_entities/?tab=datastore#datastore-peer-tags
+[8]: /internal_developer_portal/catalog/entity_model/native_entities/?tab=queue#datastore-peer-tags
 [9]: /internal_developer_portal/catalog/entity_model?tab=v30
 [10]: https://app.datadoghq.com/software/settings/get-started
 [11]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend

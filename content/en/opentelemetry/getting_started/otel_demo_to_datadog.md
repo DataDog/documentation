@@ -4,7 +4,7 @@ aliases:
 - /opentelemetry/guide/otel_demo_to_datadog
 - /opentelemetry/otel_demo_to_datadog
 further_reading:
-- link: "/catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Catalog"
 - link: "/tracing/trace_explorer/"

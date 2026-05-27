@@ -220,7 +220,7 @@ To see archived alerts, select the checkbox option to **Show _N_ archived alerts
 [4]: /watchdog/impact_analysis/
 [5]: /getting_started/tagging/unified_service_tagging/
 [6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: /tracing/catalog/
+[7]: /internal_developer_portal/catalog/
 [8]: /watchdog/insights?tab=logmanagement#explore-insights
 [9]: /watchdog/rca/
 [10]: /monitors/types/anomaly/

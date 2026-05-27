@@ -86,4 +86,4 @@ All dependencies, including manual dependencies, are shown. You can use the "Inc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /catalog/service_definitions/v3-0/
+[2]: /internal_developer_portal/catalog/entity_model/
