@@ -636,3 +636,6 @@ unsupported_sites:
     - gov2
   byoc:
     - gov
+  ai_agents_console:
+    - gov
+    - gov2
