@@ -98,7 +98,7 @@ AWS Step Functions is a serverless orchestration service from Amazon Web Service
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Step Functions monitoring][2]      | Datadog's offering for monitoring AWS Step Functions, including tracing, logs, and enhanced metrics.                            |
 | [Enhanced Step Functions metrics][3] | Metrics that go beyond the default CloudWatch metrics for Step Functions. Enhanced Step Functions metrics are in the `aws.states.enhanced.*` namespace. |
-| [Trace merging with Lambda][4] | Datadog merges AWS Step Functions traces with downstream AWS Lambda traces into a single, connected trace.                            |
+| [Trace merging with Lambda][4] | Datadog merges AWS Step Functions traces with upstream and downstream AWS Lambda traces into a single, connected trace.                            |
 | [Distributed Map tracing][5] | Tracing for large-scale parallel workloads run with Distributed Map states.                            |
 | [Redrive support][6] | Datadog supports tracing for redriven Step Function executions.                            |
 
