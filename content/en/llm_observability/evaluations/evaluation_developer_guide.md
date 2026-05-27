@@ -509,13 +509,6 @@ By default, sub-metric labels are prefixed with the evaluator's name: `confusion
 return MultiEvaluatorResult({"precision": 0.9, "recall": 0.8}, prefix=False)
 {{< /code-block >}}
 
-#### `MultiEvaluatorResult` parameters
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `values` | `dict[str, Union[str, float, int, bool, dict, EvaluatorResult]]` | — | Mapping of sub-metric name to value or `EvaluatorResult`. Keys must follow evaluation [label naming conventions](#naming-conventions). |
-| `prefix` | `bool` | `True` | If `True`, labels are emitted as `"<evaluator_name>-<key>"`. If `False`, labels are the raw keys. |
-
 <div class="alert alert-warning">If two evaluators in the same row emit the same metric label (for example, both use <code>prefix=False</code> with the same key), the second value overwrites the first and a warning is logged.</div>
 
 `MultiEvaluatorResult` is also supported in class-based evaluators and summary evaluators:
@@ -536,7 +529,8 @@ class ConfusionMatrixEvaluator(BaseEvaluator):
                 "correct": correct,
                 "false_positive": predicted and not expected,
                 "false_negative": not predicted and expected,
-            }
+            },
+            prefix=False
         )
         # Emitted labels: confusion_matrix-correct, confusion_matrix-false_positive, ...
 {{< /code-block >}}
