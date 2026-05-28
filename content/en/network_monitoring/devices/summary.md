@@ -63,11 +63,11 @@ The **Issues** list summarizes active alerts on network resources, grouped to re
 
 {{< img src="network_device_monitoring/summary/issues-view.png" alt="The Device Health view showing the Open Issues list with a high-severity issue card for a network interface and its dependencies." style="width:100%;" >}}
 
-### Interface performance
+### Interface health
 
-The **Interface performance** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the [device side panel](#device-side-panel).
+The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the [device side panel](#device-side-panel).
 
-{{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface performance section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
+{{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
 
 **Interface health thresholds**
 
@@ -83,11 +83,11 @@ A Bits AI summary highlights patterns across the affected interfaces, such as mu
 
 Three cards below the list surface aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. In the Errors and Discards detail views, click any interface to open a side panel with additional context and an **Ask Bits** button for AI-assisted investigation.
 
-### Device performance
+### Device health
 
-The **Device performance** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the [device side panel](#device-side-panel).
+The **Device health** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the [device side panel](#device-side-panel).
 
-{{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device performance section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
+{{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device health section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
 
 By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure instead.
 
@@ -116,7 +116,7 @@ Click **[View all changes][11]** to open the full change history for your curren
 
 ## Device side panel
 
-Click any device or interface in the **Interface performance** or **Device performance** sections to open the device side panel. The panel provides a detailed overview of the selected device, including:
+Click any device or interface in the **Interface health** or **Device health** sections to open the device side panel. The panel provides a detailed overview of the selected device, including:
 
 - **Device Summary**: Active issues, triggered monitors, and tags
 - **Interfaces**: Interface status and utilization, with a **View interfaces** link
