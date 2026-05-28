@@ -51,7 +51,13 @@ Custom rules let you target a specific set of services and configure exactly how
 
 ### Add a tag enrichment rule from a service page
 
-On any service page that is missing a `team` or `system` tag, click **Add Tags** on the top banner to enrich telemetry for that service.
+On any service page that is missing a `team` or `system` tag, click **Service Config** to open the configuration side panel. A banner at the top of the panel indicates which tags are missing.
+
+{{< img src="tracing/services/tag_enrichment/service-config-side-panel.png" alt="The Service Config side panel for a service, showing a banner that indicates the team and system tags are missing from telemetry, with an Add Tags button." >}}
+
+Click **Add Tags** to open the tag enrichment rule modal pre-populated with that service.
+
+{{< img src="tracing/services/tag_enrichment/add-idp-tag-enrichment-rule.png" alt="The Add IDP tag enrichment rule modal, showing fields for selecting entities to enrich, tags to add, and the tag source method." >}}
 
 ## Tag enrichment behavior
 
