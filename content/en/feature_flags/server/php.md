@@ -44,9 +44,6 @@ export DD_REMOTE_CONFIG_ENABLED=true
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
 export DD_VERSION=<YOUR_APP_VERSION>
-
-# Required for flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
 ## Installation
@@ -134,7 +131,7 @@ $context = new EvaluationContext(
 );
 {{< /code-block >}}
 
-<div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and booleans. Nested arrays, objects, and null values are not sent for targeting or exposure reporting.</div>
+<div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and booleans. Nested arrays, objects, and null values are ignored.</div>
 
 ## Evaluate flags
 
@@ -404,10 +401,6 @@ If targeting rules do not match as expected:
 - Pass custom targeting data under the `attributes` key when using the Datadog API.
 - Use only flat primitive attributes. Nested arrays, objects, and null values are ignored.
 - Verify the `DD_ENV` value appears in [{{< ui >}}Feature Flag Environments{{< /ui >}}][5].
-
-### Flag evaluation metrics are missing
-
-Set `DD_METRICS_OTEL_ENABLED=true` to enable the `feature_flag.evaluations` counter metric. Each evaluation records a count tagged with the flag key, provider name, result variant, and evaluation reason. Error evaluations also include an error type.
 
 ## Further reading
 
