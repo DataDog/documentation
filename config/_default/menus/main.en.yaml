@@ -9462,21 +9462,26 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_exposure_sql
       weight: 4
+    - name: Manage Subject Types
+      url: experiments/subject_types
+      parent: pa_experiments
+      identifier: pa_experiments_subject_types
+      weight: 5
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 5
+      weight: 6
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 6
+      weight: 7
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 7
+      weight: 8
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
