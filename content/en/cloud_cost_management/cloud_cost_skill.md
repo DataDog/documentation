@@ -19,8 +19,8 @@ further_reading:
   text: "Budgets"
 ---
 
-{{< callout btn_hidden="true" header="Cloud Cost skill is in Preview" >}}
-The Cloud Cost skill runs in Bits AI Assistant. To request access, contact your Datadog account team or Datadog Support.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Cloud Cost skill is in Preview" >}}
+The Cloud Cost skill runs in Bits AI Assistant. Fill out the Bits AI Assistant Preview form to request access.
 {{< /callout >}}
 
 ## Overview
