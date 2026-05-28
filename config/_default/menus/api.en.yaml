@@ -6952,6 +6952,75 @@ menu:
           - ListAwsScanOptions
         unstable: []
         order: 1
+    - name: Annotations
+      url: /api/latest/annotations/
+      identifier: annotations
+      generated: true
+    - name: Update an annotation
+      url: '#update-an-annotation'
+      identifier: annotations-update-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnnotation
+        unstable:
+          - v2
+        order: 4
+    - name: Delete an annotation
+      url: '#delete-an-annotation'
+      identifier: annotations-delete-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnnotation
+        unstable:
+          - v2
+        order: 5
+    - name: Get annotations for a page
+      url: '#get-annotations-for-a-page'
+      identifier: annotations-get-annotations-for-a-page
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPageAnnotations
+        unstable:
+          - v2
+        order: 3
+    - name: Create an annotation
+      url: '#create-an-annotation'
+      identifier: annotations-create-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnnotation
+        unstable:
+          - v2
+        order: 2
+    - name: List annotations
+      url: '#list-annotations'
+      identifier: annotations-list-annotations
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnnotations
+        unstable:
+          - v2
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder

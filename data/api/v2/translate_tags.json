@@ -31,6 +31,10 @@
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
   },
+  "annotations": {
+    "name": "Annotations",
+    "description": "Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time."
+  },
   "app-builder": {
     "name": "App Builder",
     "description": "Datadog App Builder provides a low-code solution to rapidly develop and integrate secure, customized applications into your monitoring stack that are built to accelerate remediation at scale. These API endpoints allow you to create, read, update, delete, and publish apps."
