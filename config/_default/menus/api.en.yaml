@@ -6508,6 +6508,36 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: APM Trace
+      url: /api/latest/apm-trace/
+      identifier: apm-trace
+      generated: true
+    - name: Get a trace by ID
+      url: '#get-a-trace-by-id'
+      identifier: apm-trace-get-a-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTraceByID
+        unstable:
+          - v2
+        order: 1
+    - name: Get a pruned trace by ID
+      url: '#get-a-pruned-trace-by-id'
+      identifier: apm-trace-get-a-pruned-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPrunedTraceByID
+        unstable:
+          - v2
+        order: 2
     - name: Action Connection
       url: /api/latest/action-connection/
       identifier: action-connection
