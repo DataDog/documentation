@@ -197,6 +197,11 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    {{< img src="llm_observability/evaluations/session_level_sample_session.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
 
+   Clicking on a session then lists the traces in that session, with the fields referenced by your prompt highlighted.
+
+   {{< img src="llm_observability/evaluations/session_level_sample_session_trace_view.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
+
+
 1. Click {{< ui >}}Test Evaluation{{< /ui >}} to run the prompt against the selected session and preview the LLM judge's output before saving.
 1. Continue with the rest of the [evaluation configuration][5] (output type, assessment criteria) and {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluation against new sessions.
 
