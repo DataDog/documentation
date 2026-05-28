@@ -34,8 +34,8 @@ The [Datadog MCP Server][1] lets AI agents query your security data through the 
 
 You can use the `security` toolset to:
 
-- **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
-- **Triage and bulk-update signals**: Update triage state or assignee across a set of matching signals in bulk.
+- **Analyze and understand security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
+- **Triage security signals**: Update triage state or assignee across a set of matching signals in bulk.
 - **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
 - **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
@@ -81,6 +81,20 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Updates the triage state or assignee of one or more security signals in bulk (up to 500 signals). Accepts either a list of signal IDs or a filter query matching all signals to update.
 : *Permissions required: `Security Signals Write`*
 
+### Security Findings
+
+`security_findings_schema`
+: Returns the available fields and their types for security findings. Call this before using `analyze_security_findings` to discover which fields you can filter and group by. Supports filtering by finding type.
+: *Permissions required: `Security Monitoring Findings Read`*
+
+`analyze_security_findings`
+: Primary tool for analyzing security findings using SQL. Queries live data from the last 24 hours with support for aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields.
+: *Permissions required: `Security Monitoring Findings Read`, `Timeseries`*
+
+`search_security_findings`
+: Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
+: *Permissions required: `Security Monitoring Findings Read`*
+
 ### Detection Rules
 
 `get_datadog_security_detection_rules_schema`
@@ -112,20 +126,6 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 `delete_datadog_security_suppression`
 : Deletes a suppression rule.
 : *Permissions required: `Security Monitoring Suppressions Write`*
-
-### Security Findings
-
-`security_findings_schema`
-: Returns the available fields and their types for security findings. Call this before using `analyze_security_findings` to discover which fields you can filter and group by. Supports filtering by finding type.
-: *Permissions required: `Security Monitoring Findings Read`*
-
-`analyze_security_findings`
-: Primary tool for analyzing security findings using SQL. Queries live data from the last 24 hours with support for aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields.
-: *Permissions required: `Security Monitoring Findings Read`, `Timeseries`*
-
-`search_security_findings`
-: Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
-: *Permissions required: `Security Monitoring Findings Read`*
 
 ## Further reading
 
