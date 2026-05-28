@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "test_type": "browser",
+      "steps_description": "login with username and password\nnavigate to product page\nadd to cart\ncheckout",
+      "test_summary": "check a user can add a product to the cart and check out."
+    },
+    "type": "synthetics_similar_test"
+  }
+}

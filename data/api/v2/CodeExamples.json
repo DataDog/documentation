@@ -2559,6 +2559,18 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "SearchSyntheticsSimilarTests": [
+    {
+      "group": "synthetics",
+      "suffix": "_215750625",
+      "description": "Search for similar Synthetic browser tests returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1226382414",
+      "description": "Search for similar Synthetic tests with default values returns \"OK\" response"
+    }
+  ],
   "CreateTeamMembership": [
     {
       "group": "teams",

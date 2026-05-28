@@ -1,0 +1,8 @@
+{
+  "data": {
+    "attributes": {
+      "test_summary": "check a user can add a product to the cart and check out."
+    },
+    "type": "synthetics_similar_test"
+  }
+}
