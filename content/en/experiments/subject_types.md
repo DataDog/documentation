@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-Use this page to configure **subject types**—the unit at which Datadog randomizes experiment traffic (for example, a user or an organization).
+Use this page to configure subject types, the unit Datadog uses to randomize experiment traffic, such as a user or an organization.
 
-Experiments assign traffic to different variations of an experience and compare outcomes. For most use cases, subjects correspond to users, but you can define other units of randomization.
+Experiments assign traffic to different variations of an experience and measure outcomes across those groups. Subjects are users by default, but you can define other randomization units.
 
-For a given subject, the Datadog SDK returns the same variant on every evaluation. This helps keep the experience consistent across sessions and devices.
+For a given subject, the Datadog SDK returns the same variant on every evaluation, keeping the experience consistent across sessions and devices.
 
 Subject types also determine how Datadog associates metric events with experiment exposures for statistical analysis.
 
@@ -32,7 +32,7 @@ When you use the Datadog SDK, pass a unique identifier for the experiment subjec
 
 ```js
 const evaluationContext = {
-    targetingKey: user_id,
+    targetingKey: 'user_1234',
 };
 ```
 
