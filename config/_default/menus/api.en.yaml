@@ -6952,6 +6952,75 @@ menu:
           - ListAwsScanOptions
         unstable: []
         order: 1
+    - name: Annotations
+      url: /api/latest/annotations/
+      identifier: annotations
+      generated: true
+    - name: Update an annotation
+      url: '#update-an-annotation'
+      identifier: annotations-update-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnnotation
+        unstable:
+          - v2
+        order: 4
+    - name: Delete an annotation
+      url: '#delete-an-annotation'
+      identifier: annotations-delete-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnnotation
+        unstable:
+          - v2
+        order: 5
+    - name: Get annotations for a page
+      url: '#get-annotations-for-a-page'
+      identifier: annotations-get-annotations-for-a-page
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPageAnnotations
+        unstable:
+          - v2
+        order: 3
+    - name: Create an annotation
+      url: '#create-an-annotation'
+      identifier: annotations-create-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnnotation
+        unstable:
+          - v2
+        order: 2
+    - name: List annotations
+      url: '#list-annotations'
+      identifier: annotations-list-annotations
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnnotations
+        unstable:
+          - v2
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder
@@ -13657,6 +13726,62 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: OAuth2 Client Public
+      url: /api/latest/oauth2-client-public/
+      identifier: oauth2-client-public
+      generated: true
+    - name: Register an OAuth2 client
+      url: '#register-an-oauth2-client'
+      identifier: oauth2-client-public-register-an-oauth2-client
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RegisterOAuthClient
+        unstable:
+          - v2
+        order: 1
+    - name: Upsert an OAuth2 client scopes restriction
+      url: '#upsert-an-oauth2-client-scopes-restriction'
+      identifier: oauth2-client-public-upsert-an-oauth2-client-scopes-restriction
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertScopesRestriction
+        unstable:
+          - v2
+        order: 3
+    - name: Get an OAuth2 client scopes restriction
+      url: '#get-an-oauth2-client-scopes-restriction'
+      identifier: oauth2-client-public-get-an-oauth2-client-scopes-restriction
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScopesRestriction
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an OAuth2 client scopes restriction
+      url: '#delete-an-oauth2-client-scopes-restriction'
+      identifier: oauth2-client-public-delete-an-oauth2-client-scopes-restriction
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScopesRestriction
+        unstable:
+          - v2
+        order: 4
     - name: OCI Integration
       url: /api/latest/oci-integration/
       identifier: oci-integration
