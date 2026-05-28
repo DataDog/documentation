@@ -267,6 +267,30 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "ListAnnotations": {
+    "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
+    "summary": "List annotations"
+  },
+  "CreateAnnotation": {
+    "description": "Creates a new annotation on a dashboard or notebook page.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Create an annotation",
+    "request_description": "Annotation to create.",
+    "request_schema_description": "Request body for creating an annotation."
+  },
+  "GetPageAnnotations": {
+    "description": "Returns all annotations on a specific page for a given time window, grouped by widget.\nUnlike `ListAnnotations`, this endpoint returns a single structured object with annotations\nindexed by their ID and a widget-to-annotation mapping for easy UI rendering.",
+    "summary": "Get annotations for a page"
+  },
+  "DeleteAnnotation": {
+    "description": "Deletes an existing annotation by ID.\nReturns `204 No Content` if the annotation does not exist (idempotent).",
+    "summary": "Delete an annotation"
+  },
+  "UpdateAnnotation": {
+    "description": "Updates an existing annotation.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Update an annotation",
+    "request_description": "Updated annotation payload.",
+    "request_schema_description": "Request body for updating an annotation."
+  },
   "AnonymizeUsers": {
     "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
     "summary": "Anonymize users",
@@ -1327,6 +1351,24 @@
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
+  },
+  "DeleteCostTagDescriptionByKey": {
+    "description": "Delete a Cloud Cost Management tag key description. When `cloud` is omitted, deletes every description for the tag key, falling back to Datadog's global default when available. When `cloud` is provided, deletes only the description scoped to that cloud provider.",
+    "summary": "Delete a Cloud Cost Management tag description"
+  },
+  "GetCostTagDescriptionByKey": {
+    "description": "Get the Cloud Cost Management description for a single tag key. Use `filter[cloud]` to scope the lookup to a specific cloud provider; when omitted, the response resolves the description in fallback order (cloud-specific organization override, then cloudless organization default, then Datadog's global default).",
+    "summary": "Get a Cloud Cost Management tag description"
+  },
+  "UpsertCostTagDescriptionByKey": {
+    "description": "Create or update a Cloud Cost Management tag key description. The new description and optional cloud scoping are supplied in the request body. Omit `cloud` to set a cross-cloud default for the tag key.",
+    "summary": "Upsert a Cloud Cost Management tag description",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Cloud Cost Management tag key description."
+  },
+  "GenerateCostTagDescriptionByKey": {
+    "description": "Use AI to draft a Cloud Cost Management tag key description based on associated cost data. The generated description is returned in the response and is not persisted by this endpoint; follow up with `UpsertCostTagDescriptionByKey` to save it.",
+    "summary": "Generate a Cloud Cost Management tag description"
   },
   "ListCostTagKeys": {
     "description": "List Cloud Cost Management tag keys.",
@@ -3205,6 +3247,26 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "DeleteScopesRestriction": {
+    "description": "Delete the scopes restriction configured for the OAuth2 client.",
+    "summary": "Delete an OAuth2 client scopes restriction"
+  },
+  "GetScopesRestriction": {
+    "description": "Get the scopes restriction configured for the OAuth2 client.",
+    "summary": "Get an OAuth2 client scopes restriction"
+  },
+  "UpsertScopesRestriction": {
+    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
+    "summary": "Upsert an OAuth2 client scopes restriction",
+    "request_description": "",
+    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
+  },
+  "RegisterOAuthClient": {
+    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
+    "summary": "Register an OAuth2 client",
+    "request_description": "",
+    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
+  },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
     "summary": "List pipelines"
@@ -3628,6 +3690,10 @@
   "ListConnections": {
     "description": "List all data connections for an entity",
     "summary": "List connections"
+  },
+  "GetPrunedTraceByID": {
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a pruned trace by ID"
   },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
@@ -5660,6 +5726,10 @@
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
+  },
+  "GetTraceByID": {
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a trace by ID"
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
