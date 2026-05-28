@@ -114,8 +114,8 @@ To invoke the skills explicitly with a slash command, install them locally:
 
 ```shell
 npx skills add datadog-labs/agent-skills \
-  --skill dd-software-delivery/unblock-pr \
-  --skill dd-software-delivery/triage-flaky-test \
+  --skill unblock-pr \
+  --skill triage-flaky-test \
   --full-depth -y
 ```
 
