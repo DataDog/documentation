@@ -333,13 +333,13 @@ Commits using `@users.noreply.github.com` are not automatically excluded. These 
 For clarification on how committers are counted in your environment, [contact Datadog Support][1].
 
 ### Deduplicating committers across email addresses
-A single developer can author commits under more than one Git author email — for example, by running `git config user.email` in different repositories. Without deduplication, each email is counted as a separate committer.
+In some cases, a single developer's commits can be split across multiple Git author emails — for example, if they set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold, each counts as a separate committer.
 
-For repositories hosted on GitHub, Datadog maps each Git author email to the underlying GitHub user and counts that user once, even when they push under different emails. Deduplication requires a Datadog [GitHub App][28] installed on the affected repositories with the `Contents: Read` permission.
+For repositories hosted on GitHub, Datadog can map each Git author email to the underlying GitHub user so that the developer is counted once, even when they push under different emails. This requires a Datadog [GitHub App][28] installed on the affected repositories with the `Contents: Read` permission.
 
-Deduplication is only available for GitHub repositories. Repositories hosted on GitLab, Azure DevOps, or Bitbucket may still show duplicated committers.
+This mapping is available for GitHub repositories only. Repositories hosted on GitLab, Azure DevOps, or Bitbucket are not deduplicated.
 
-If you see duplicate committers for GitHub repositories, confirm that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
+If your committer count looks higher than expected for GitHub repositories, check that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
