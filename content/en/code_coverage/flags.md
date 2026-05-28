@@ -11,6 +11,9 @@ further_reading:
   - link: "/code_coverage/configuration"
     tag: "Documentation"
     text: "Configure Code Coverage"
+  - link: "/code_coverage/carryforward"
+    tag: "Documentation"
+    text: "Keep total coverage accurate with carryforward"
 ---
 
 ## Overview
@@ -21,6 +24,7 @@ With flags, you can:
 - View coverage data filtered by a specific flag in the Datadog UI.
 - Configure [PR Gates][1] that evaluate coverage thresholds for specific flags.
 - Track coverage trends separately for different test suites or environments.
+- Enable [carryforward][6] to keep total coverage accurate when not every CI job runs for a commit.
 
 ### Flags vs. monorepo support features
 
@@ -175,3 +179,4 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 [3]: /code_coverage/monorepo_support
 [4]: https://app.datadoghq.com/ci/code-coverage
 [5]: /code_coverage/configuration#pr-gates
+[6]: /code_coverage/carryforward

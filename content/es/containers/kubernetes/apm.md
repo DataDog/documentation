@@ -1,45 +1,46 @@
 ---
 aliases:
 - /es/agent/kubernetes/apm
-description: Activar la recopilación de traces (trazas) de APM para aplicaciones en
-  contenedores que se ejecutan en entornos de Kubernetes
+description: Habilitar la recolección de trazas APM para aplicaciones en contenedores
+  que se ejecutan en entornos de Kubernetes
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación
-  text: Recopilar tus logs de aplicación
+  text: Recopila los registros de tu aplicación
 - link: /agent/kubernetes/prometheus/
   tag: Documentación
   text: Recopila tus métricas de Prometheus
 - link: /agent/kubernetes/integrations/
   tag: Documentación
-  text: Recopila las métricas de tus aplicaciones y logs automáticamente
+  text: Recopila automáticamente las métricas y registros de tus aplicaciones
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limita la recopilación de datos solo a un subconjunto de contenedores
+  text: Limita la recolección de datos a un subconjunto de contenedores solamente
 - link: /agent/kubernetes/tag/
   tag: Documentación
-  text: Asignar etiquetas a todos los datos emitidos por un contenedor
-title: Kubernetes APM - Recopilación de trazas (traces)
+  text: Asigna etiquetas a todos los datos emitidos por un contenedor
+title: Kubernetes APM - Recolección de Trazas
 ---
-
-{{< learning-center-callout header="Prueba la Introducción a la monitorización con Kubernetes en el Centro de aprendizaje" btn_title="Inscríbete ahora" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
-  Aprende sin coste alguno sobre la capacidad real de la computación en la nube y una cuenta de prueba de Datadog. Inicia estos laboratorios prácticos para ponerte al día con métricas, logs y trazas de APM que son específicos de Kubernetes.
+{{< learning-center-callout header="Intenta la Introducción a la Monitorización de Kubernetes en el Centro de Aprendizaje" btn_title="Inscríbete ahora" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
+  Aprende sin costo en capacidad de computación en la nube real y una cuenta de prueba de Datadog. Comienza estos laboratorios prácticos para ponerte al día con las métricas, registros y trazas APM que son específicas de Kubernetes.
 {{< /learning-center-callout >}}
 
-Esta página describe cómo ajustar y configurar [Application Performance Monitoring (APM)][10] para tu aplicación de Kubernetes.
+Esta página describe cómo configurar [Application Performance Monitoring (APM)][10] para tu aplicación de Kubernetes.
 
-{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="Canalización para solucionar problemas de APM: el rastreador envía datos de trazas y métricas desde el pod de aplicación al pod del Agent, el cual lo envía al backend de Datadog para mostrarlo en la interfaz de usuario de Datadog.">}}
+{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="La canalización de solución de problemas de APM: El rastreador envía trazas y datos de métricas desde el pod de la aplicación al pod del Agent, que los envía al backend de Datadog para ser mostrados en la interfaz de usuario de Datadog.">}}
 
-Puedes enviar trazas a través de Unix Domain Socket (UDS), TCP (`IP:Port`), o el servicio de Kubernetes. Datadog recomienda que utilices UDS, pero es posible utilizar los tres al mismo tiempo, si es necesario.
+Puedes enviar trazas a través de Unix Domain Socket (UDS), TCP (`IP:Port`), o servicio de Kubernetes. Datadog recomienda que uses UDS, pero es posible utilizar los tres al mismo tiempo, si es necesario.
 
-## Configuración
+**Nota**: Para instrumentación automática sin configuración manual, consulta [Instrumentación de Un Solo Paso para Kubernetes][13].
+
+## Configuración {#setup}
 1. Si aún no lo has hecho, [instala el Datadog Agent][1] en tu entorno de Kubernetes.
 2. [Configura el Datadog Agent](#configure-the-datadog-agent-to-collect-traces) para recopilar trazas.
-3. [Configura pods de aplicación](#configure-your-application-pods-to-submit-traces-to-datadog-agent) para enviar trazas al Datadog Agent.
+3. [Configura los pods de la aplicación](#configure-your-application-pods-to-submit-traces-to-datadog-agent) para enviar trazas al Datadog Agent.
 
-### Configura el Datadog Agent para recopilar trazas
+### Configura el Datadog Agent para recolectar trazas {#configure-the-datadog-agent-to-collect-traces}
 
-Las instrucciones de esta sección configuran el Datadog Agent para recibir trazas a través de UDS. Para utilizar TCP, consulta la sección [Configuración adicional](#additional-configuration). Para utilizar el servicio de Kubernetes, consulta [Configuración de APM con el servicio de Kubernetes][9].
+Las instrucciones en esta sección configuran el Datadog Agent para recibir trazas a través de UDS. Para usar TCP, consulta la sección de [configuración adicional](#additional-configuration). Para usar el servicio de Kubernetes, consulta [Configurando APM con el Servicio de Kubernetes][9].
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -62,18 +63,18 @@ spec:
         path: /var/run/datadog/apm.socket # default
 ```
 
-Cuando APM está habilitado, la configuración por defecto crea un directorio en el host y lo monta dentro del Agent. El Agent entonces crea y escucha en un archivo de socket `/var/run/datadog/apm/apm.socket`. Los pods de aplicación pueden entonces montar de forma similar este volumen y escribir en este mismo socket. Puedes modificar la ruta y el socket con el valor de configuración `features.apm.unixDomainSocketConfig.path`.
+Cuando APM está habilitado, la configuración predeterminada crea un directorio en el host y lo monta dentro del Agente. El Agente luego crea y escucha en un archivo de socket `/var/run/datadog/apm/apm.socket`. Los pods de la aplicación pueden montar este volumen de manera similar y escribir en este mismo socket. Puedes modificar la ruta y el socket con el valor de configuración `features.apm.unixDomainSocketConfig.path`.
 
 {{% k8s-operator-redeploy %}}
 
-**Nota**: En minikube, puedes recibir un error `Unable to detect the kubelet URL automatically`. En este caso, establece `global.kubelet.tlsVerify` en `false`.
+**Nota**: En minikube, puedes recibir un `Unable to detect the kubelet URL automatically` error. En este caso, establece `global.kubelet.tlsVerify` en `false`.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Si [utilizaste Helm para instalar el Datadog Agent][1], APM está **habilitado por defecto** sobre la canalización de UDS o Windows.
+Si [usaste Helm para instalar el Datadog Agent][1], APM está **habilitado por defecto** a través de UDS o tubería nombrada de Windows.
 
-Para comprobarlo, asegúrate de que `datadog.apm.socketEnabled` se haya establecido en `true` en tu `datadog-values.yaml`.
+Para verificar, asegúrate de que `datadog.apm.socketEnabled` esté establecido en `true` en tu `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -81,42 +82,42 @@ datadog:
     socketEnabled: true    
 ```
 
-La configuración por defecto crea un directorio en el host y lo monta dentro del Agent. A continuación, el Agent crea y escucha en un archivo de socket `/var/run/datadog/apm.socket`. Los pods de aplicación pueden entonces montar de forma similar este volumen y escribir en este mismo socket. Puedes modificar la ruta y el socket con los valores de configuración `datadog.apm.hostSocketPath` y `datadog.apm.socketPath`.
+La configuración predeterminada crea un directorio en el host y lo monta dentro del Datadog Agent. El Datadog Agent luego crea y escucha en un archivo de socket `/var/run/datadog/apm.socket`. Los pods de la aplicación pueden montar este volumen de manera similar y escribir en este mismo socket. Puedes modificar la ruta y el socket con los valores de configuración `datadog.apm.hostSocketPath` y `datadog.apm.socketPath`.
 
 ```yaml
 datadog:
   apm:
-    # los siguientes valores son predeterminados:
+    # the following values are default:
     socketEnabled: true
     hostSocketPath: /var/run/datadog/
     socketPath: /var/run/datadog/apm.socket
 ```
 
-Para desactivar APM, establece `datadog.apm.socketEnabled` en `false`.
+Para deshabilitar APM, establece `datadog.apm.socketEnabled` en `false`.
 
 {{% k8s-helm-redeploy %}}
 
-**Nota**: En minikube, puedes recibir un error `Unable to detect the kubelet URL automatically`. En este caso, establece `datadog.kubelet.tlsVerify` en `false`.
+**Nota**: En minikube, puedes recibir un `Unable to detect the kubelet URL automatically` error. En este caso, establece `datadog.kubelet.tlsVerify` en `false`.
 
 [1]: /es/containers/kubernetes/installation?tab=helm#installation
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configura tus pods de aplicación para enviar trazas al Datadog Agent
+### Configura tus pods de aplicación para enviar trazas al Agente de Datadog {#configure-your-application-pods-to-submit-traces-to-datadog-agent}
 
 {{< tabs >}}
 
-{{% tab "Datadog Admission Controller" %}}
-El Controlador de admisión de Datadog (Admission Controller) es un componente del Datadog Cluster Agent que simplifica tu configuración de pod de aplicación. Obtén más información leyendo la [documentación del Datadog Admission Controller][1].
+{{% tab "Controlador de Admisión de Datadog" %}}
+El Datadog Admission Controller es un componente del Datadog Cluster Agent que simplifica la configuración de tus pods de aplicación. Aprende más leyendo la [documentación del Datadog Admission Controller][1].
 
-Utiliza el Controlador de admisión de Datadog (Admission Controller) para inyectar las variables de entorno y montar los volúmenes necesarios en nuevos pods de aplicación, configurando automáticamente la comunicación de trazas entre el pod y el Agent. Aprende cómo configurar automáticamente tu aplicación para enviar trazas al Datadog Agent leyendo la documentación [Inyectar bibliotecas con el Admission Controller][2].
+Utiliza el Datadog Admission Controller para inyectar variables de entorno y montar los volúmenes necesarios en nuevos pods de aplicación, configurando automáticamente la comunicación de trazas entre el pod y el Datadog Agent. Aprende cómo configurar automáticamente tu aplicación para enviar trazas al Datadog Agent leyendo la documentación de [Injecting Libraries Using Datadog Admission Controller][2].
 
 [1]: /es/agent/cluster_agent/admission_controller/
 [2]: /es/tracing/trace_collection/library_injection_local/
 {{% /tab %}}
 
-{{% tab "Unix Domain Socket (UDS)" %}}
-Si estás enviando trazas al Agent utilizando UDS, monta el directorio de host en el que se encuentra el socket (que el Agent ha creado) en el contenedor de aplicación y especifica la ruta al socket con `DD_TRACE_AGENT_URL`:
+{{% tab "Socket de Dominio Unix (UDS)" %}}
+Si estás enviando trazas al Datadog Agent usando UDS, monta el directorio del host donde se encuentra el socket (que creó el Datadog Agent) en el contenedor de la aplicación y especifica la ruta al socket con `DD_TRACE_AGENT_URL`:
 
 ```yaml
 apiVersion: apps/v1
@@ -139,14 +140,14 @@ kind: Deployment
           name: apmsocketpath
 ```
 
-### Configura tus trazadores de aplicaciones para emitir trazas:
-Después de configurar tu Datadog Agent para recopilar trazas y establecer en tus pods de aplicación la configuración sobre *dónde* enviar trazas, instala el trazador de Datadog en tus aplicaciones para emitir trazas. Una vez hecho esto, el trazador envía las trazas al endpoint `DD_TRACE_AGENT_URL` apropiado.
+### Configura tus SDKs de aplicación para emitir trazas: {#configure-your-application-sdks-to-emit-traces}
+Después de configurar tu Datadog Agent para recolectar trazas y dar a tus pods de aplicación la configuración sobre *dónde* enviar trazas, instala el SDK de Datadog en tus aplicaciones para emitir las trazas. Una vez hecho esto, el SDK envía las trazas al `DD_TRACE_AGENT_URL` punto de conexión apropiado.
 
 {{% /tab %}}
 
 
 {{% tab TCP %}}
-Si estás enviando trazas al Agent mediante TCP (`<IP_ADDRESS>:8126`), proporciona esta dirección IP a tus pods de aplicación, ya sea de forma automática con el [Controlador de admisión de Datadog][1], o de forma manual mediante la API descendente para obtener la IP de host. El contenedor de aplicación necesita la variable de entorno `DD_AGENT_HOST` que apunta a `status.hostIP`:
+Si estás enviando trazas al Datadog Agent usando TCP (`<IP_ADDRESS>:8126`), proporciona esta dirección IP a tus pods de aplicación—ya sea automáticamente con el [Datadog Admission Controller][1], o manualmente usando la API descendente para obtener la IP del host. El contenedor de la aplicación necesita la variable de entorno `DD_AGENT_HOST` que apunta a `status.hostIP`:
 
 ```yaml
 apiVersion: apps/v1
@@ -162,25 +163,25 @@ kind: Deployment
               fieldRef:
                 fieldPath: status.hostIP
 ```
-**Nota:** Esta configuración requiere que el Agent esté configurado para aceptar trazas sobre TCP.
+**Nota:** Esta configuración requiere que el Datadog Agent esté configurado para aceptar trazas a través de TCP
 
-### Configura tus trazadores de aplicaciones para emitir trazas:
-Después de configurar tu Datadog Agent para recopilar trazas y establecer en tus pods de aplicación la configuración sobre *dónde* enviar trazas, instala el trazador de Datadog en tus aplicaciones para emitir trazas. Una vez hecho esto, el trazador envía automáticamente las trazas al endpoint `DD_AGENT_HOST` apropiado.
+### Configura tus SDKs de aplicación para emitir trazas: {#configure-your-application-sdks-to-emit-traces-1}
+Después de configurar el Datadog Agent para recolectar trazas y dar a tus pods de aplicación la configuración sobre *dónde* enviar trazas, instala el Datadog SDK en tus aplicaciones para emitir las trazas. Una vez hecho esto, el SDK envía automáticamente las trazas al `DD_AGENT_HOST` punto de conexión apropiado.
 
 [1]: /es/agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-Para obtener más ejemplos, consulta la [documentación específica en tu idioma de la instrumentación de APM][2].
+Consulte la [documentación de instrumentación APM específica del idioma][2] para más ejemplos.
 
-## Configuración adicional
+## Configuración adicional {#additional-configuration}
 
-### Configura el Datadog Agent para aceptar trazas sobre TCP
+### Configure el Datadog Agent para aceptar trazas a través de TCP {#configure-the-datadog-agent-to-accept-traces-over-tcp}
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Actualiza tu `datadog-agent.yaml` con lo siguiente:
+Actualice su `datadog-agent.yaml` con lo siguiente:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -202,11 +203,11 @@ spec:
 
 {{% k8s-operator-redeploy %}}
 
-**Atención**: El parámetro `hostPort` abre un puerto en tu host. Asegúrate de que tu cortafuegos solo permite el acceso desde tus aplicaciones o fuentes de confianza. Si tu complemento de red no admite `hostPorts`, añade `hostNetwork: true` en las especificaciones de pod de tu Agent. Esto comparte el espacio de nombres de red de tu host con el Datadog Agent. Esto también significa que todos los puertos abiertos en el contenedor se abren en el host. Si un puerto se utiliza tanto en el host como en tu contenedor, entran en conflicto (ya que comparten el mismo espacio de nombres de red) y el pod no arranca. Algunas instalaciones de Kubernetes no permiten esto.
+**Advertencia**: El parámetro `hostPort` abre un puerto en su host. Asegúrese de que su firewall solo permita el acceso desde sus aplicaciones o fuentes de confianza. Si su complemento de red no admite `hostPorts`, agregue `hostNetwork: true` en las especificaciones del pod del Datadog Agent. Esto comparte el espacio de nombres de red de su host con el Datadog Agent. Esto también significa que todos los puertos abiertos en el contenedor están abiertos en el host. Si un puerto se utiliza tanto en el host como en su contenedor, hay un conflicto (ya que comparten el mismo espacio de nombres de red) y el pod no se inicia. Algunas instalaciones de Kubernetes no permiten esto.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Actualiza tu archivo `datadog-values.yaml` con la siguiente configuración de APM:
+Actualice su archivo `datadog-values.yaml` con la siguiente configuración de APM:
 
 ```yaml
 datadog:
@@ -217,15 +218,15 @@ datadog:
 
 {{% k8s-helm-redeploy %}}
 
-**Atención**: El parámetro `datadog.apm.portEnabled` abre un puerto en tu host. Asegúrate de que tu cortafuegos solo permite el acceso desde tus aplicaciones o fuentes de confianza. Si tu complemento de red no admite `hostPorts`, añade `hostNetwork: true` en las especificaciones de pod de tu Agent. Esto comparte el espacio de nombres de red de tu host con el Datadog Agent. Esto también significa que todos los puertos abiertos en el contenedor se abren en el host. Si un puerto se utiliza tanto en el host como en tu contenedor, entran en conflicto (ya que comparten el mismo espacio de nombres de red) y el pod no arranca. Algunas instalaciones de Kubernetes no permiten esto.
+**Advertencia**: El parámetro `datadog.apm.portEnabled` abre un puerto en su host. Asegúrese de que su firewall solo permita el acceso desde sus aplicaciones o fuentes de confianza. Si su complemento de red no admite `hostPorts`, agregue `hostNetwork: true` en las especificaciones del pod del Datadog Agent. Esto comparte el espacio de nombres de red de su host con el Datadog Agent. Esto también significa que todos los puertos abiertos en el contenedor están abiertos en el host. Si un puerto se utiliza tanto en el host como en su contenedor, hay un conflicto (ya que comparten el mismo espacio de nombres de red) y el pod no se inicia. Algunas instalaciones de Kubernetes no permiten esto.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Variables de entorno de APM
+## Variables de entorno de APM {#apm-environment-variables}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Establece variables de entorno de APM adicionales en `override.nodeAgent.containers.trace-agent.env`:
+Establezca variables de entorno adicionales de APM bajo `override.nodeAgent.containers.trace-agent.env`:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -244,7 +245,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Establece variables de entorno de APM adicionales en `agents.containers.traceAgent.env`:
+Establezca variables de entorno adicionales de APM bajo `agents.containers.traceAgent.env`:
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 agents:
   containers:
@@ -256,7 +257,8 @@ agents:
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
-Añade variables de entorno al DaemonSet o al despliegue (para Datadog Cluster Agent).
+Agregue variables de entorno al DaemonSet o Despliegue (para el Datadog Cluster Agent).
+
 ```yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -280,34 +282,34 @@ Lista de variables de entorno disponibles para configurar APM:
 
 | Variable de entorno | Descripción |
 | -------------------- | ----------- |
-| `DD_APM_ENABLED`           | Cuando se establece en `true`, el Datadog Agent acepta rastrear métricas. <br/>**De manera predeterminada**: `true` (Agent 7.18 o posterior) |
-| `DD_APM_ENV`           | Establece la etiqueta `env:` en trazas recopiladas.  |
-| `DD_APM_RECEIVER_SOCKET` | Para rastrear a través de UDS. Cuando se establece, debe apuntar a un archivo de socket válido. |
-| `DD_APM_RECEIVER_PORT`     | Para rastrear a través de TCP, el puerto en el que escucha el receptor de trazas del Datadog Agent. <br/>**De manera predeterminada**: `8126` |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Permite el tráfico no local al rastrear desde otros contenedores. <br/>**De manera predeterminada**: `true` (Agent 7.18 o posterior) |
-| `DD_APM_DD_URL`            | El endpoint de la API de Datadog al que se envían tus trazas: `https://trace.agent.{{< region-param key="dd_site" >}}`. <br/>**De manera predeterminada**: `https://trace.agent.datadoghq.com` |
-| `DD_APM_TARGET_TPS`     | Las trazas de destino por segundo a muestrear. <br/>**De manera predeterminada**: `10` |
-| `DD_APM_ERROR_TPS`     | Los fragmentos de trazas de errores de destino a recibir por segundo. <br/>**De manera predeterminada**: `10` |
-| `DD_APM_MAX_EPS`     | La cantidad máxima de eventos de APM por segundo a muestrear. <br/>**De manera predeterminada**: `200` |
-| `DD_APM_MAX_MEMORY`     | Lo que el Datadog Agent pretende usar en términos de memoria. Si se sobrepasa, la tasa de la API limita las solicitudes entrantes. <br/>**De manera predeterminada**: `500000000` |
-| `DD_APM_MAX_CPU_PERCENT`     | El porcentaje de CPU que el Datadog Agent pretende usar. Si se sobrepasa, la tasa de la API limita las solicitudes entrantes. <br/>**De manera predeterminada**: `50` |
-| `DD_APM_FILTER_TAGS_REQUIRE`     | Solo recopila las trazas que tienen tramos (spans) raíz con una coincidencia exacta para los valores y etiquetas de tramo especificados. <br/>Consulta [Ignorar recursos no deseados en APM][11]. |
-| `DD_APM_FILTER_TAGS_REJECT`     | Rechaza las trazas que tienen tramos raíz con una coincidencia exacta para los valores y etiquetas de tramo especificados. <br/>Consulta [Ignorar recursos no deseados en APM][11]. |
-| `DD_APM_REPLACE_TAGS` | [Borre los datos confidenciales de su tramo (span)'s etiquetas (tags)][4]. |
-| `DD_APM_IGNORE_RESOURCES`  | Configura recursos para que el Agent los ignore. El formato debe estar separado por comas y contener expresiones regulares. <br/>Por ejemplo: `GET /ignore-me,(GET\|POST) /and-also-me` |
-| `DD_APM_LOG_FILE`  | Ruta al archivo donde se escriben los logs de APM. |
-| `DD_APM_CONNECTION_LIMIT`  | Límite máximo de conexiones para un intervalo de 30 segundos. <br/>**De manera predeterminada**: 2000 |
-| `DD_APM_ADDITONAL_ENDPOINTS`     | Envía datos a varios endpoints o con varias claves de API. <br/>Consulta [Envío doble][12]. |
-| `DD_APM_DEBUG_PORT`     | Puerto para los endpoints de depuración del Trace Agent. Establécelo en `0` para deshabilitar el servidor. <br/>**De manera predeterminada**: `5012`. |
-| `DD_BIND_HOST`             | Establece el StatsD y el nombre de host del receptor. |
-| `DD_DOGSTATSD_PORT`        | Para rastrear a través de TCP, establece el puerto de DogStatsD. |
-| `DD_ENV`                   | Establece el `env` global para todos los datos emitidos por el Agent. Si `env` no está presente en tus datos de traza, se utiliza esta variable. |
-| `DD_HOSTNAME`         | Si la detección automática falla, o durante la ejecución del Datadog Cluster Agent, establece el nombre de host que hay que usar para las métricas. |
-| `DD_LOG_LEVEL`             | Establece el nivel de registro. <br/>**Valores**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off` |
-| `DD_PROXY_HTTPS`     | Configura la URL para que lo pueda usar el proxy. |
+| `DD_APM_ENABLED`           | Cuando se establece en `true`, el Agente de Datadog acepta métricas de traza. <br/>**Predeterminado**: `true` (Agente 7.18+) |
+| `DD_APM_ENV`           | Establece la etiqueta `env:` en las trazas recolectadas.  |
+| `DD_APM_RECEIVER_SOCKET` | Para trazas sobre UDS. Cuando se establece, debe apuntar a un archivo de socket válido. |
+| `DD_APM_RECEIVER_PORT`     | Para trazas sobre TCP, el puerto en el que escucha el receptor de trazas del Agente de Datadog. <br/>**Predeterminado**: `8126` |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Permitir tráfico no local al trazar desde otros contenedores. <br/>**Predeterminado**: `true` (Agente 7.18+) |
+| `DD_APM_DD_URL`            | El punto de conexión de la API de Datadog donde se envían sus trazas: `https://trace.agent.{{< region-param key="dd_site" >}}`. <br/>**Default**:  `https://trace.agent.datadoghq.com` |
+| `DD_APM_TARGET_TPS`     | The target traces per second to sample. <br/>**Default**: `10` |
+| `DD_APM_ERROR_TPS`     | The target error trace chunks to receive per second. <br/>**Default**: `10` |
+| `DD_APM_MAX_EPS`     | Maximum number of APM events per second to sample. <br/>**Default**: `200` |
+| `DD_APM_MAX_MEMORY`     | What the Datadog Agent aims to use in terms of memory. If surpassed, the API rate limits incoming requests. <br/>**Default**: `500000000` |
+| `DD_APM_MAX_CPU_PERCENT`     | The CPU percentage that the Datadog Agent aims to use. If surpassed, the API rate limits incoming requests. <br/>**Default**: `50` |
+| `DD_APM_FILTER_TAGS_REQUIRE`     | Collects only traces that have root spans with an exact match for the specified span tags and values. <br/>See [Ignoring unwanted resources in APM][11]. |
+| `DD_APM_FILTER_TAGS_REJECT`     | Rejects traces that have root spans with an exact match for the specified span tags and values. <br/>See [Ignoring unwanted resources in APM][11]. |
+| `DD_APM_REPLACE_TAGS` | [Scrub sensitive data from your span's tags][4]. |
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. <br/>For example: `GET /ignore-me,(GET\|POST) /and-also-me` |
+| `DD_APM_LOG_FILE`  | Path to file where APM logs are written. |
+| `DD_APM_CONNECTION_LIMIT`  | Maximum connection limit for a 30 second time window. <br/>**Default**: 2000 |
+| `DD_APM_ADDITONAL_ENDPOINTS`     | Send data to multiple endpoints and/or with multiple API keys. <br/>See [Dual Shipping][12]. |
+| `DD_APM_DEBUG_PORT`     | Port for the debug endpoints for the Trace Agent. Set to `0` to disable the server. <br/>**Default**: `5012`. |
+| `DD_BIND_HOST`             | Set the StatsD and receiver hostname. |
+| `DD_PUERTO_DOGSTATSD`        | For tracing over TCP, set the DogStatsD port. |
+| `DD_ENV`                   | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable is used. |
+| `DD_HOSTNAME`         | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent. |
+| `DD_LOG_LEVEL`             | Set the logging level. <br/>**Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off` |
+| `DD_PROXY_HTTPS`     | Configura la URL para el proxy a utilizar. |
 
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -324,3 +326,4 @@ Lista de variables de entorno disponibles para configurar APM:
 [10]: /es/tracing
 [11]: /es/tracing/guide/ignoring_apm_resources/?tab=kubernetes
 [12]: /es/agent/configuration/dual-shipping/
+[13]: /es/tracing/trace_collection/single-step-apm/kubernetes/

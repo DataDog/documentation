@@ -20,6 +20,9 @@ further_reading:
   - link: /security/code_security/software_composition_analysis/library_inventory
     tag: Documentation
     text: Library Inventory
+  - link: /security/code_security/software_composition_analysis/cve_explorer
+    tag: Documentation
+    text: CVE Explorer
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
@@ -130,6 +133,14 @@ Use the exported SBOM to share dependency data with downstream consumers, satisf
 
 For details on how to generate and download an SBOM, see [Library Inventory][29].
 
+### Explore the full CVE catalog
+
+Use the [CVE Explorer][15] to search every CVE and security advisory tracked by Datadog, including those that do not affect your environment. This helps you assess exposure to newly published vulnerabilities before they appear in your findings.
+
+For CVEs that affect packages detected in your scanned repositories and services, Datadog automatically marks them as impacted. Assets that have not been scanned do not show an impacted status.
+
+For each CVE, you can view the severity score, exploit availability, EPSS score, CISA KEV status, impacted packages, and fix versions. See [CVE Explorer][27] for more details.
+
 ### Create tickets from findings
 
 You can create a bidirectional ticket in Jira or ServiceNow directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and your ticketing tool. For more information, see [Ticketing integrations][19].
@@ -146,7 +157,7 @@ To restore a muted finding, click **Unmute** in the details panel. You can also 
 
 ### Library vulnerability context in APM
 
-SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Software Catalog][10].
+SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Catalog][10].
 
 ## Understanding SCA views
 
@@ -197,7 +208,7 @@ Software Composition Analysis (SCA) supports the following languages:
 
 ## Customize your configuration
 
-You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][30]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
 
 ## Next steps
 
@@ -205,6 +216,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 2. [Set up Runtime SCA][2] to detect libraries loaded by your running services.
 3. Review and triage findings in the [Vulnerabilities Explorer][11].
 4. Configure [PR Gates][16] to block risky changes before they are merged.
+5. Use the [CVE Explorer][15] to proactively assess exposure to newly published vulnerabilities.
 
 ## Further Reading
 
@@ -221,6 +233,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [12]: https://app.datadoghq.com/ci/code-analysis
 [13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
 [14]: /security/code_security/software_composition_analysis/library_inventory
+[15]: https://app.datadoghq.com/security/code-security/detection-coverage/advisories
 [16]: /pr_gates/
 [17]: /pr_gates/setup
 [18]: /security/code_security/software_composition_analysis/setup_static/?tab=github#link-findings-to-datadog-services-and-teams
@@ -232,6 +245,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
-[27]: /security/code_security/software_composition_analysis/configuration/
+[27]: /security/code_security/software_composition_analysis/cve_explorer/
 [28]: /security/code_security/guides/configuration/
 [29]: /security/code_security/software_composition_analysis/library_inventory/#export-a-software-bill-of-materials-sbom
+[30]: /security/code_security/software_composition_analysis/configuration/

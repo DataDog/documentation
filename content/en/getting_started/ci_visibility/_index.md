@@ -27,7 +27,7 @@ CI Visibility, or CI Pipeline Visibility, allows you to monitor the health of yo
 
 {{< img src="/getting_started/ci_visibility/pipelines_list.png" alt="A list view of your CI pipelines in Datadog CI Visibility" style="width:100%" >}}
 
-You can forward CI job logs and automatically correlate them with your pipelines in CI Visibility. Depending on the providers you are using, you can either enable job log collection on the [**Settings** page][1] in CI Visibility or in your provider’s settings to integrate with Datadog.
+You can forward CI job logs and automatically correlate them with your pipelines in CI Visibility. Depending on the providers you are using, you can either enable job log collection on the [{{< ui >}}Settings{{< /ui >}} page][1] in CI Visibility or in your provider’s settings to integrate with Datadog.
 
 You can also use the `datadog-ci` CLI to [trace commands][2] in your pipelines, as well as the [custom tags and measures commands][3] to add user-defined text and numerical tags in your pipeline traces.
 
@@ -68,7 +68,7 @@ You can create [dashboards][5] to visualize at which points failures are happeni
 
 ## Search and manage your CI pipelines
 
-The [**CI Pipeline List** page][7] provides a comprehensive view of the performance and reliability of your CI pipelines, for the default branch. Access aggregated statistics, trends, and information about your pipelines to identify and resolve issues like failures and regressions.
+The [{{< ui >}}CI Pipeline List{{< /ui >}} page][7] provides a comprehensive view of the performance and reliability of your CI pipelines, for the default branch. Access aggregated statistics, trends, and information about your pipelines to identify and resolve issues like failures and regressions.
 
 To enhance troubleshooting and streamline your pipeline management processes, click on a pipeline to access insights, review execution histories, and pivot to logs and related telemetry data. For more information, see [Search and Manage CI Pipelines][8].
 
@@ -79,7 +79,7 @@ The [CI Visibility Explorer][9] allows you to create visualizations and filter p
 {{< tabs >}}
 {{% tab "Pipeline" %}}
 
-Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] and select `Pipeline` to start filtering your pipeline span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}CI Visibility{{< /ui >}} > {{< ui >}}Executions{{< /ui >}}][101] and select {{< ui >}}Pipeline{{< /ui >}} to start filtering your pipeline span results. 
 
 {{< img src="/getting_started/ci_visibility/pipeline_view.png" alt="Pipeline execution results in the CI Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -88,7 +88,7 @@ Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] an
 {{% /tab %}}
 {{% tab "Stage" %}}
 
-Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] and select `Stage` to start filtering your stage span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}CI Visibility{{< /ui >}} > {{< ui >}}Executions{{< /ui >}}][101] and select {{< ui >}}Stage{{< /ui >}} to start filtering your stage span results. 
 
 {{< img src="/getting_started/ci_visibility/stage_view.png" alt="Stage results in the CI Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -97,7 +97,7 @@ Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] an
 {{% /tab %}}
 {{% tab "Job" %}}
 
-Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] and select `Job` to start filtering your job span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}CI Visibility{{< /ui >}} > {{< ui >}}Executions{{< /ui >}}][101] and select {{< ui >}}Job{{< /ui >}} to start filtering your job span results. 
 
 {{< img src="/getting_started/ci_visibility/job_view.png" alt="Job results in the CI Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -106,7 +106,7 @@ Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] an
 {{% /tab %}}
 {{% tab "Step" %}}
 
-Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] and select `Step` to start filtering your step span results. 
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}CI Visibility{{< /ui >}} > {{< ui >}}Executions{{< /ui >}}][101] and select {{< ui >}}Step{{< /ui >}} to start filtering your step span results. 
 
 {{< img src="/getting_started/ci_visibility/step_view.png" alt="Step results in the CI Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
@@ -117,15 +117,15 @@ Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] an
 
 Use [facets][9] to customize the search query and identify changes in time spent on each level of your pipeline.
 
-Once you click into a pipeline, you can access individual pipeline executions listed in the **Pipeline Executions** section. When you click on a pipeline execution, you can see a flame graph or a list of spans in the **Trace** tab. 
+Once you click into a pipeline, you can access individual pipeline executions listed in the {{< ui >}}Pipeline Executions{{< /ui >}} section. When you click on a pipeline execution, you can see a flame graph or a list of spans in the {{< ui >}}Trace{{< /ui >}} tab. 
 
 {{< img src="/getting_started/ci_visibility/executions.png" alt="Pipeline execution results visualized as a flame graph for the Staging Build and Test pipeline" style="width:100%" >}}
 
 You can identify bottlenecks in your pipeline and examine individual nodes ranked from the largest to smallest percentage of execution time. 
 
-After you have set up Test Optimization, you can access information about tests that were run in your CI pipelines, including the test status (Failed, New Flaky, Passed, or Skipped), on the Test Runs tab in a pipeline execution’s side panel. For more information, see the [Flaky Test Management documentation][10].
+After you have set up Test Optimization, you can access information about tests that were run in your CI pipelines, including the test status (Failed, New Flaky, Passed, or Skipped), on the {{< ui >}}Test Runs{{< /ui >}} tab in a pipeline execution’s side panel. For more information, see the [Flaky Test Management documentation][10].
 
-You can access pipeline or job logs across cloud and self-hosted runners and see information about your runners on the Logs tab in a pipeline execution’s side panel.
+You can access pipeline or job logs across cloud and self-hosted runners and see information about your runners on the {{< ui >}}Logs{{< /ui >}} tab in a pipeline execution’s side panel.
 
 If you are using [supported providers][11], you can correlate infrastructure metrics with your GitLab jobs and access the GitLab job’s host, system, host tags, and host metrics information. For more information, see [Correlate Infrastructure Metrics with GitLab Jobs in Datadog][12].
 
@@ -143,13 +143,13 @@ Alert relevant teams in your organization about pipeline health and performance 
 
 To set up a monitor that alerts on your CI pipeline when the average duration in the past day exceeds a five minute threshold:
 
-1. Navigate to [**Monitors** > **New Monitor**][15] and select **CI**. 
-1. Select a common monitor type for CI pipelines to get started, for example: `Long Running Pipeline` to trigger alerts when a pipeline has been running for too long or `Failed Job` to trigger alerts for job failures, or customize your own search query. In this example, enter `@ci.pipeline.name:test_and_deploy_cart` and select the Avg of `Duration (@duration)`.
-1. In the `Evaluate the query over the` section, select **last 1 day**. 
-1. Set the alert conditions to trigger when the evaluated value is **above** the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 300000000000`.
-1. In the `Configure notifications and automations` section, configure your monitor's notification settings.
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][15] and select {{< ui >}}CI{{< /ui >}}. 
+1. Select a common monitor type for CI pipelines to get started, for example: {{< ui >}}Long Running Pipeline{{< /ui >}} to trigger alerts when a pipeline has been running for too long or {{< ui >}}Failed Job{{< /ui >}} to trigger alerts for job failures, or customize your own search query. In this example, enter `@ci.pipeline.name:test_and_deploy_cart` and select the Avg of `Duration (@duration)`.
+1. In the {{< ui >}}Evaluate the query over the{{< /ui >}} section, select {{< ui >}}last 1 day{{< /ui >}}. 
+1. Set the alert conditions to trigger when the evaluated value is {{< ui >}}above{{< /ui >}} the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 300000000000`.
+1. In the {{< ui >}}Configure notifications and automations{{< /ui >}} section, configure your monitor's notification settings.
 1. Set permissions for the monitor.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 ## Further Reading
 

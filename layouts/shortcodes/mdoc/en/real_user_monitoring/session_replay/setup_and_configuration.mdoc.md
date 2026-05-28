@@ -520,14 +520,6 @@ SessionReplay.stopRecording();
 {% /if %}
 <!-- end React Native -->
 
-<!-- Flutter -->
-{% if equals($platform, "flutter") %}
-
-Datadog Session Replay for Flutter does not currently support manual recording.
-
-{% /if %}
-<!-- end Flutter -->
-
 ### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK.

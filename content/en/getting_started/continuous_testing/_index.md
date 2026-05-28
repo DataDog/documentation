@@ -46,20 +46,20 @@ If you haven't already, create a [Datadog account][8].
 
 To set up a Continuous Testing test, first create a Synthetic test in Datadog. In this example, create a [browser test][3] on the site `https://www.shopist.io`, a test e-commerce web application.
 
-Browser tests simulate a user's journey through your web application beginning at your **Starting URL**. Ensuring your **Starting URL** is a resource in your staging environment makes it easier to test changes before moving them into production.
+Browser tests simulate a user's journey through your web application beginning at your {{< ui >}}Starting URL{{< /ui >}}. Ensuring your {{< ui >}}Starting URL{{< /ui >}} is a resource in your staging environment makes it easier to test changes before moving them into production.
 
 ### Configure your test details
 
-1. Navigate to [**Digital Experience** > **Synthetic Monitoring & Testing** > **New Test**][26].
-2. In the top right corner, click **New Test** > **Browser Test**.
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}} > {{< ui >}}New Test{{< /ui >}}][26].
+2. In the top right corner, click {{< ui >}}New Test{{< /ui >}} > {{< ui >}}Browser Test{{< /ui >}}.
 
    {{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:80%;" >}}
 
 3. Define your browser test:
 
-    - Add the URL of the website you want to monitor into the Starting URL field. For this example, enter `https://www.shopist.io`.
-    - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. In this example, no specific advanced option is needed.
-    - Name your test and set a Team Tag such as **team-checkout**. Tags allow you to keep your test suite organized and find tests you're interested in through the Synthetic Monitoring & Testing Results Explorer.
+    - Add the URL of the website you want to monitor into the {{< ui >}}Starting URL{{< /ui >}} field. For this example, enter `https://www.shopist.io`.
+    - Select {{< ui >}}Advanced Options{{< /ui >}} to set custom request options, certificates, authentication credentials, and more. In this example, no specific advanced option is needed.
+    - Name your test and set a Team Tag such as `team-checkout`. Tags allow you to keep your test suite organized and find tests you're interested in through the Synthetic Monitoring & Testing Results Explorer.
     - Choose the browsers and devices to test.
 
 4. Continue [filling out your test details and your recording like you normally would][9].
@@ -94,9 +94,9 @@ You can retrieve the command for running a specific test using `datadog-ci` from
 
 {{< img src="continuous_testing/copy_cli_command.png" alt="Copy the CLI command for running a test from the test detail page" style="width:100%;">}}
 
-1. Navigate to the [**Tests** page][19].
+1. Navigate to the [{{< ui >}}Tests{{< /ui >}} page][19].
 2. Select a test.
-3. Look for the command in the **CI/CD Execution** section.
+3. Look for the command in the {{< ui >}}CI/CD Execution{{< /ui >}} section.
 4. Copy and paste the command into your command line.
 
 For more information about running the Synthetics command and using reporters, see the [Configuration documentation][11].
@@ -105,7 +105,7 @@ For more information about running the Synthetics command and using reporters, s
 
 The Synthetic Monitoring & Testing Results Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests.
 
-Navigate to [**Digital Experience** > **Synthetic Monitoring & Testing** > **New Test**][26], then select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
+Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}} > {{< ui >}}New Test{{< /ui >}}][26], then select {{< ui >}}CI Batches{{< /ui >}} or {{< ui >}}Test Runs{{< /ui >}} to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
 
 {{< tabs >}}
 {{% tab "CI Batches" %}}
@@ -128,27 +128,27 @@ To find the ID of your browser test:
 
 {{< img src="continuous_testing/example_test_id.png" alt="The browser test ID highlighted in the Properties section of a test run" style="width:60%;" >}}
 
-1. Navigate to the [**Tests** page][19].
+1. Navigate to the [{{< ui >}}Tests{{< /ui >}} page][19].
 2. Select a test.
-3. Look for the Test ID in the **Properties** section.
+3. Look for the Test ID in the {{< ui >}}Properties{{< /ui >}} section.
 
 For more information about using facets in your search query, see [Search Test Runs][17].
 
-To export your view of the Synthetic Monitoring & Testing Results Explorer, click **> Views**. For more information, see [Saved Views][16].
+To export your view of the Synthetic Monitoring & Testing Results Explorer, click {{< ui >}}> Views{{< /ui >}}. For more information, see [Saved Views][16].
 
 ## Set parallelization preferences
 
-By default, Synthetic tests are not parallelized. Parallelization allows you to run multiple tests in your CI/CD pipelines simultaneously. If you want to parallelize your tests, you can use the **Estimate Parallelization** calculator to determine your needs.
+By default, Synthetic tests are not parallelized. Parallelization allows you to run multiple tests in your CI/CD pipelines simultaneously. If you want to parallelize your tests, you can use the {{< ui >}}Estimate Parallelization{{< /ui >}} calculator to determine your needs.
 
 {{< img src="continuous_testing/parallelization_estimate.png" alt="parallelization_estimate" style="width:100%;" >}}
 
-Navigate to [**Digital Experience** > **Synthetic Monitoring & Testing** > **Settings**][27] to locate the calculator.
+Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][27] to locate the calculator.
 
 For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you need to run 12 tests in parallel.
 
 $$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minute duration"} / \text"4 minute expected duration in your CI pipeline"$$
 
-Once you're done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then, click **Save Selection**.
+Once you're done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then, click {{< ui >}}Save Selection{{< /ui >}}.
 
 For more information, see the [Parallelization documentation][18].
 

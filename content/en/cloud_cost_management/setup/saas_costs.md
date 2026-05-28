@@ -56,20 +56,6 @@ If your provider is not supported, use [Custom Costs][1] to upload any cost data
 
 ## Setup
 
-To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, Google Cloud, or Oracle Cloud.
-
-See the respective documentation for your cloud provider:
-
-{{< card-grid min_width="225px" img_width="50" >}}
-  {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" >}}
-  {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" >}}
-  {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" >}}
-{{< /card-grid >}}
-
-</br>
-
-### Configure your SaaS accounts
-
 Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click {{< ui >}}Configure{{< /ui >}} on a provider to collect cost data.
 
 {{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, and GitHub" style="width:100%" >}}

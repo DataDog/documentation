@@ -1,5 +1,6 @@
 ---
 title: Query Across Datadog and OpenTelemetry Metrics
+description: "Query equivalent Datadog and OpenTelemetry metrics together in hybrid environments using Semantic Mode."
 aliases:
 - metrics/open_telemetry/otlp_metrics/
 further_reading:
@@ -17,18 +18,22 @@ Datadog helps you bridge this gap by enabling you to:
 
 ## Unify OpenTelemetry and Datadog metrics in queries
 
-The [Metrics Query Editor][1] includes a Semantic Mode selector, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources.
+{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" btn_hidden="false" header="Join the Preview!" >}}
+The Telemetry source query modifier requires the OTel Native Instrumentation preview. Use this form to request access.
+{{< /callout >}}
 
-{{< img src="/metrics/otel/semantic_mode.png" alt="Semantic mode selector on Metrics Explorer page." style="width:100%;" >}}
+The [Metrics Query Editor][1] and dashboard widgets include a [Telemetry source][3] query modifier, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources. Select **Modify** and then choose **Native telemetry** or **Combined telemetry** in the **Telemetry sources** section.
+
+{{< img src="dashboards/functions/telemetry_source_combined.png" alt="Telemetry sources query modifier showing Combined telemetry selected." style="width:100%;" >}}
 
 Choose between two modes:
 
-### Strictly adhere to native data source (Default)
+### Native telemetry (default)
 
 - This mode queries only the specific metric name you enter (whether it's a Datadog or OTel metric).
 - It does not include data from any equivalent metrics.
 
-### Combine data from all telemetry sources
+### Combined telemetry
 
 - This mode automatically combines data from equivalent Datadog and OTel metrics into a single query, even if you only enter one of the metric names.
 - It handles the mapping between equivalent metrics (including complex ones) and aggregates all related timeseries as a single metric.
@@ -41,7 +46,7 @@ Imagine you're monitoring system load using two different metrics:
 - **OTel native**: `system.cpu.load_average.15m`
 - **Datadog Agent**: `system.load.15`
 
-If you query for `system.cpu.load_average.15m`, apply a max space aggregation, and set the Semantic Mode to **Combine data from all telemetry sources**, Datadog automatically:
+If you query for `system.cpu.load_average.15m`, apply a max space aggregation, and set the telemetry source to **Combined telemetry**, Datadog automatically:
 
 1. Identifies the equivalent Datadog metric: `system.load.15`.
 2. Combines the timeseries from both `system.cpu.load_average.15m` and `system.load.15`.
@@ -81,3 +86,4 @@ You can also see the tag-based logic used for these mappings. Hover over an equi
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: https://app.datadoghq.com/metric/summary
+[3]: /dashboards/functions/telemetry_source/

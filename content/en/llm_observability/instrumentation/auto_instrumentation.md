@@ -1,5 +1,6 @@
 ---
 title: Automatic Instrumentation for LLM Observability
+description: Enable automatic tracing for LLM frameworks and libraries in your Python or Node.js application using Datadog LLM Observability integrations.
 aliases:
     - /tracing/llm_observability/auto_instrumentation
     - /llm_observability/auto_instrumentation
