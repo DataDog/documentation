@@ -1328,6 +1328,24 @@
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
   },
+  "DeleteCostTagDescriptionByKey": {
+    "description": "Delete a Cloud Cost Management tag key description. When `cloud` is omitted, deletes every description for the tag key, falling back to Datadog's global default when available. When `cloud` is provided, deletes only the description scoped to that cloud provider.",
+    "summary": "Delete a Cloud Cost Management tag description"
+  },
+  "GetCostTagDescriptionByKey": {
+    "description": "Get the Cloud Cost Management description for a single tag key. Use `filter[cloud]` to scope the lookup to a specific cloud provider; when omitted, the response resolves the description in fallback order (cloud-specific organization override, then cloudless organization default, then Datadog's global default).",
+    "summary": "Get a Cloud Cost Management tag description"
+  },
+  "UpsertCostTagDescriptionByKey": {
+    "description": "Create or update a Cloud Cost Management tag key description. The new description and optional cloud scoping are supplied in the request body. Omit `cloud` to set a cross-cloud default for the tag key.",
+    "summary": "Upsert a Cloud Cost Management tag description",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Cloud Cost Management tag key description."
+  },
+  "GenerateCostTagDescriptionByKey": {
+    "description": "Use AI to draft a Cloud Cost Management tag key description based on associated cost data. The generated description is returned in the response and is not persisted by this endpoint; follow up with `UpsertCostTagDescriptionByKey` to save it.",
+    "summary": "Generate a Cloud Cost Management tag description"
+  },
   "ListCostTagKeys": {
     "description": "List Cloud Cost Management tag keys.",
     "summary": "List Cloud Cost Management tag keys"
@@ -3204,6 +3222,26 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "DeleteScopesRestriction": {
+    "description": "Delete the scopes restriction configured for the OAuth2 client.",
+    "summary": "Delete an OAuth2 client scopes restriction"
+  },
+  "GetScopesRestriction": {
+    "description": "Get the scopes restriction configured for the OAuth2 client.",
+    "summary": "Get an OAuth2 client scopes restriction"
+  },
+  "UpsertScopesRestriction": {
+    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
+    "summary": "Upsert an OAuth2 client scopes restriction",
+    "request_description": "",
+    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
+  },
+  "RegisterOAuthClient": {
+    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
+    "summary": "Register an OAuth2 client",
+    "request_description": "",
+    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
   },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
