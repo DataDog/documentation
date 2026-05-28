@@ -119,6 +119,8 @@ To get started, follow the instructions below.
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][6].
 
+   To inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][11].
+
 
 [1]: https://github.com/apache/airflow/releases/tag/2.7.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -129,6 +131,7 @@ To get started, follow the instructions below.
 [7]: /integrations/airflow/?tab=containerized
 [8]: /containers/kubernetes/installation/?tab=datadogoperator#installation
 [9]: /containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
+[11]: /data_observability/jobs_monitoring/airflow_log_context/
 
 
 ### Validation
@@ -256,7 +259,9 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
     See the [Astronomer official guide][10] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
 
-3. Trigger a update to your deployment and wait for it to finish.
+3. Trigger an update to your deployment and wait for it to finish.
+
+4. Optionally, to inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][13]. Add `dd_airflow_log_context.py` to your Astro project root so it is baked into the Docker image, then set `AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS=dd_airflow_log_context.LOGGING_CONFIG` through the [Astro UI][5] or your Dockerfile.
 
 [1]: https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-1210
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -283,6 +288,7 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][12].
 
 [12]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
+[13]: /data_observability/jobs_monitoring/airflow_log_context/
 
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
