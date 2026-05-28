@@ -489,7 +489,7 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
-[18]: /real_user_monitoring/application_monitoring/flutter/mobile_vitals/
+[18]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=flutter
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio

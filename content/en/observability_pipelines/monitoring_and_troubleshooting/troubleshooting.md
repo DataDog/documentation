@@ -175,6 +175,16 @@ The quota processor is synchronized across all Workers in a Datadog organization
 - The Worker prints `Failed to sync quota state errors`.
 - [Contact support][20] if you want to increase the default number of Workers per organization.
 
+###  Error converting timestamp field
+
+If you are using the Databricks (Zerobus) destination and see a Worker error similar to the below, check if the timestamps on your logs are in string format:
+
+```
+Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-04-23T10[41]15Z' to i64: invalid digit found in string
+```
+
+If your log timestamps are in string format and your Databricks table has a timestamp column declared as `TIMESTAMP` type, you must convert the string timestamp to timestamp format. See [Convert string timestamps to timestamp format][22] for more information.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
@@ -196,3 +206,4 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [19]: /remote_configuration/#security-considerations
 [20]: /help/
 [21]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
+[22]: /observability_pipelines/destinations/databricks#convert-string-timestamps-to-timestamp-format

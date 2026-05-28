@@ -30,22 +30,22 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 
 ##### Instructions
 
-1. In the [Google Cloud integration tile][100], click the **Configure Log Collection** button.
-1. Select **Quick Start**. A setup script, configured with your Datadog credentials and site, is automatically generated.
+1. In the [Google Cloud integration tile][100], click the {{< ui >}}Configure Log Collection{{< /ui >}} button.
+1. Select {{< ui >}}Quick Start{{< /ui >}}. A setup script, configured with your Datadog credentials and site, is automatically generated.
 1. Copy the setup script. You can run the script locally or in Google Cloud Shell:
    - Locally: May be faster, but requires your Google Cloud credentials and the [gcloud CLI][101] installed on your machine.
-   - [Google Cloud Shell][102]: Click **Open Google Cloud Shell** to run the script.
+   - [Google Cloud Shell][102]: Click {{< ui >}}Open Google Cloud Shell{{< /ui >}} to run the script.
 1. After running the script, return to the Google Cloud integration tile.
-1. In the **Select Projects** section, select the folders and projects to forward logs from. If you select a folder, logs are forwarded from all of its child projects.<br>
+1. In the {{< ui >}}Select Projects{{< /ui >}} section, select the folders and projects to forward logs from. If you select a folder, logs are forwarded from all of its child projects.<br>
    **Note**: Only folders and projects that you have the necessary access and permissions for appear in this section. Likewise, folders and projects without a display name do not appear.
-1. In the **Dataflow Job Configuration** section, specify configuration options for the Dataflow job:
+1. In the {{< ui >}}Dataflow Job Configuration{{< /ui >}} section, specify configuration options for the Dataflow job:
    - Select deployment settings (Google Cloud region and project to host the created resources---Pub/Sub topics and subscriptions, a log routing sink, a Secret Manager entry, a service account, a Cloud Storage bucket, and a Dataflow job)
    - Select scaling settings (number of workers and maximum workers)
    - Select performance settings (maximum number of parallel requests and batch size)
    - Select execution options
-1. In the **Advanced Configuration** section, optionally specify the machine type for your Dataflow worker VMs. If no machine type is selected, Dataflow automatically chooses an appropriate machine type based on your job requirements. 
+1. In the {{< ui >}}Advanced Configuration{{< /ui >}} section, optionally specify the machine type for your Dataflow worker VMs. If no machine type is selected, Dataflow automatically chooses an appropriate machine type based on your job requirements. 
 1. Optionally, choose to specify inclusion and exclusion filters using Google Cloud's [logging query language][105].
-1. Review the steps to be executed in the **Complete Setup** section. If everything is satisfactory, click **Complete Setup**.
+1. Review the steps to be executed in the {{< ui >}}Complete Setup{{< /ui >}} section. If everything is satisfactory, click {{< ui >}}Complete Setup{{< /ui >}}.
 
 
 [100]: https://app.datadoghq.com/integrations/gcp
@@ -71,16 +71,16 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 {{< tabs >}}
 {{% tab "Datadog UI-based setup" %}}
 
-1. In the [Google Cloud integration tile][200], click the **Configure Log Collection** button.
-1. Select **Terraform**.
-1. In the **Select Projects** section, select the folders and projects to forward logs from. If you select a folder, logs are forwarded from all of its child projects.<br>
+1. In the [Google Cloud integration tile][200], click the {{< ui >}}Configure Log Collection{{< /ui >}} button.
+1. Select {{< ui >}}Terraform{{< /ui >}}.
+1. In the {{< ui >}}Select Projects{{< /ui >}} section, select the folders and projects to forward logs from. If you select a folder, logs are forwarded from all of its child projects.<br>
    **Note**: Only folders and projects that you have the necessary access and permissions for appear in this section. Likewise, folders and projects without a display name do not appear.
-1. In the **Dataflow Job Configuration** section, specify configuration options for the Dataflow job:
+1. In the {{< ui >}}Dataflow Job Configuration{{< /ui >}} section, specify configuration options for the Dataflow job:
    - Select deployment settings (Google Cloud region and project to host the created resources---Pub/Sub topics and subscriptions, a log routing sink, a Secret Manager entry, a service account, a Cloud Storage bucket, and a Dataflow job)
    - Select scaling settings (maximum workers)
    - Select performance settings (maximum number of parallel requests and batch size)
    - Select execution options (Streaming Engine is enabled by default; read more about its [benefits][201])
-1. In the **Advanced Configuration** section, optionally specify the machine type for your Dataflow worker VMs. If no machine type is selected, Dataflow automatically chooses an appropriate machine type based on your job requirements. 
+1. In the {{< ui >}}Advanced Configuration{{< /ui >}} section, optionally specify the machine type for your Dataflow worker VMs. If no machine type is selected, Dataflow automatically chooses an appropriate machine type based on your job requirements. 
 1. Optionally, choose to specify inclusion and exclusion filters using Google Cloud's [logging query language][203].
 
 
@@ -135,8 +135,8 @@ Cloud Pub/Subs are subject to <a href="https://cloud.google.com/pubsub/quotas#qu
 The default behavior for Dataflow pipeline workers is to use your project's [Compute Engine default service account][416], which grants permissions to all resources in the project. If you are forwarding logs from a **Production** environment, you should instead create a custom worker service account with only the necessary roles and permissions, and assign this service account to your Dataflow pipeline workers.
 
 1. Go to the [Service Accounts][417] page in the Google Cloud console and select your project.
-2. Click **CREATE SERVICE ACCOUNT** and give the service account a descriptive name. Click **CREATE AND CONTINUE**.
-3. Add the roles in the required permissions table and click **DONE**.
+2. Click {{< ui >}}CREATE SERVICE ACCOUNT{{< /ui >}} and give the service account a descriptive name. Click {{< ui >}}CREATE AND CONTINUE{{< /ui >}}.
+3. Add the roles in the required permissions table and click {{< ui >}}DONE{{< /ui >}}.
 
 ##### Required permissions
 
@@ -166,13 +166,13 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 #### 3. Export logs from Google Cloud Pub/Sub topic
 
 1. Go to [the Logs Explorer page][425] in the Google Cloud console.
-2. From the **Log Router** tab, select **Create Sink**.
+2. From the {{< ui >}}Log Router{{< /ui >}} tab, select {{< ui >}}Create Sink{{< /ui >}}.
 3. Provide a name for the sink.
 4. Choose _Cloud Pub/Sub_ as the destination and select the Cloud Pub/Sub topic that was created for that purpose. **Note**: The Cloud Pub/Sub topic can be located in a different project.
    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
 5. Choose the logs you want to include in the sink with an optional inclusion or exclusion filter. You can filter the logs with a search query, or use the [sample function][426]. For example, to include only 10% of the logs with a `severity` level of `ERROR`, create an inclusion filter with `severity="ERROR" AND sample(insertId, 0.1)`.
    {{< img src="integrations/google_cloud_platform/sink_inclusion_filter_2.png" alt="The inclusion filter for a Google Cloud logging sink with a query of severity=ERROR and sample(insertId, 0.1)" >}}
-6. Click **Create Sink**.
+6. Click {{< ui >}}Create Sink{{< /ui >}}.
 
 **Note**: It is possible to create several exports from Google Cloud Logging to the same Cloud Pub/Sub topic with different sinks.
 
@@ -180,21 +180,21 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 
 1. Go to the [Create job from template][427] page in the Google Cloud console.
 2. Give the job a name and select a Dataflow regional endpoint.
-3. Select `Pub/Sub to Datadog` in the **Dataflow template** dropdown, and the **Required parameters** section appears.
-   1. Select the input subscription in the **Pub/Sub input subscription** dropdown.
-   1. Enter the following in the **Datadog Logs API URL** field:
+3. Select `Pub/Sub to Datadog` in the {{< ui >}}Dataflow template{{< /ui >}} dropdown, and the {{< ui >}}Required parameters{{< /ui >}} section appears.
+   1. Select the input subscription in the {{< ui >}}Pub/Sub input subscription{{< /ui >}} dropdown.
+   1. Enter the following in the {{< ui >}}Datadog Logs API URL{{< /ui >}} field:
       <pre>https://{{< region-param key="http_endpoint" code="true" >}}</pre>
 
       **Note**: Ensure that the Datadog site selector on the right of the page is set to your [Datadog site][428] before copying the URL above.
 
-   1. Select the topic created to receive message failures in the **Output deadletter Pub/Sub topic** dropdown.
-   1. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
+   1. Select the topic created to receive message failures in the {{< ui >}}Output deadletter Pub/Sub topic{{< /ui >}} dropdown.
+   1. Specify a path for temporary files in your storage bucket in the {{< ui >}}Temporary location{{< /ui >}} field.
 
       {{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Required parameters in the Datadog Dataflow template" style="width:80%;">}}
 
-4. Under **Optional Parameters**, check `Include full Pub/Sub message in the payload`.
+4. Under {{< ui >}}Optional Parameters{{< /ui >}}, check {{< ui >}}Include full Pub/Sub message in the payload{{< /ui >}}.
 
-5. If you created a secret in Secret Manager with your Datadog API key value as mentioned in [step 1](#1-create-a-cloud-pubsub-topic-and-subscription), enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.
+5. If you created a secret in Secret Manager with your Datadog API key value as mentioned in [step 1](#1-create-a-cloud-pubsub-topic-and-subscription), enter the **resource name** of the secret in the {{< ui >}}Google Cloud Secret Manager ID{{< /ui >}} field.
 
    {{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Optional parameters in the Datadog Dataflow template with Google Cloud Secret Manager ID and Source of the API key passed fields both highlighted" style="width:80%;">}}
 
@@ -203,11 +203,11 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
       - `apiKeySource=KMS` with `apiKeyKMSEncryptionKey` set to your [Cloud KMS][429] key ID and `apiKey` set to the encrypted API key
       - **Not recommended**: `apiKeySource=PLAINTEXT` with `apiKey` set to the plaintext API key
 
-6. If you created a custom worker service account, select it in the **Service account email** dropdown.
+6. If you created a custom worker service account, select it in the {{< ui >}}Service account email{{< /ui >}} dropdown.
 
    {{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Optional parameters in the Datadog Dataflow template with the service account email dropdown highlighted" style="width:80%;">}}
 
-7. Click **RUN JOB**.
+7. Click {{< ui >}}RUN JOB{{< /ui >}}.
 
 **Note**: If you have a shared VPC, see the [Specify a network and subnetwork][430] page in the Dataflow documentation for guidelines on specifying the `Network` and `Subnetwork` parameters.
 

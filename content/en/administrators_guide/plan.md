@@ -217,13 +217,13 @@ Web servers are almost always inter-connected with other services through a netw
 
 Datadog infrastructure monitoring comes with additional products that you can use to maximize observability of your environments.
 
-### Software Catalog
+### Catalog
 
-[Software Catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
+[Catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
 
-Software Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the {{< ui >}}Setup Guidance{{< /ui >}} tab of each of your services, to ensure that they have the expected configurations:
+Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the {{< ui >}}Setup Guidance{{< /ui >}} tab of each of your services, to ensure that they have the expected configurations:
 
-{{< img src="/administrators_guide/software_catalog_2.png" alt="Software Catalog home screen" style="width:90%;">}}
+{{< img src="/administrators_guide/software_catalog_2.png" alt="Catalog home screen" style="width:90%;">}}
 
 You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
 
@@ -256,7 +256,7 @@ Centrally administer and manage all of your Datadog Agents with [Fleet Automatio
 
 ### Remote Configuration
 
-Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
+Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, SDKs, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
 
 ### Notebooks 
 
@@ -343,10 +343,10 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [27]: /infrastructure/process/?tab=linuxwindows\#installation
 [28]: /integrations/network/
 [29]: /network_monitoring/cloud_network_monitoring/
-[30]: /software_catalog/
+[30]: /internal_developer_portal/catalog/
 [31]: /events/
 [32]: /error_tracking/
-[33]: /software_catalog/endpoints/
+[33]: /internal_developer_portal/catalog/endpoints/
 [34]: /agent/fleet_automation/
 [35]: /remote_configuration
 [36]: /remote_configuration#supported-products-and-features
@@ -384,7 +384,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [69]: /integrations/process/
 [70]: /extend/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: /synthetics/api_tests/ssl_tests/
-[72]: /software_catalog/service_definitions/
+[72]: /internal_developer_portal/catalog/entity_model/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
 [75]: /tracing/trace_collection/

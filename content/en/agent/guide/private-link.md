@@ -25,7 +25,7 @@ further_reading:
       text: "Reduce costs and enhance security with cross-region Datadog connectivity using AWS PrivateLink"
 ---
 
-{{% site-region region="us3,us5,eu,gov" %}}
+{{% site-region region="us3,us5,eu,gov,gov2" %}}
 <div class="alert alert-danger">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 

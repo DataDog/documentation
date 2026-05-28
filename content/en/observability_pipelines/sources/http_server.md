@@ -1,5 +1,5 @@
 ---
-title: HTTP Server Source
+title: HTTP/S Server Source
 disable_toc: false
 products:
 - name: Logs
@@ -23,36 +23,36 @@ You can also [send AWS vended logs with Datadog Lambda Forwarder to Observabilit
 
 Set up this source when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-To configure your HTTP/S Server source, enter the following:
+<div class="alert alert-danger">Only enter the identifiers for the HTTP/S Server address and, if applicable, the username and password for plain (also known as basic) authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Server address and, if applicable, the username and password for plain (also known as basic) authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+After you select the HTTP/S Server source in the pipeline UI:
 
-1. Enter the identifier for your HTTP Server address. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your HTTP/S Server address. If you leave it blank, the [default](#secret-defaults) is used.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
 1. Select your authorization strategy. If you selected **Plain**:
-    - Enter the identifiers for your HTTP Server username and password. If you leave it blank, the [default](#set-secrets) is used.
+    - Enter the identifiers for your HTTP/S Server username and password. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- HTTP Server address identifier:
+- HTTP/S Server address identifier:
 	- References the socket address, such as `0.0.0.0:9997`, on which the Observability Pipelines Worker listens for HTTP client logs.
 	- The default identifier is `SOURCE_HTTP_SERVER_ADDRESS`.
-- HTTP Server TLS passphrase identifier (when TLS is enabled):
+- HTTP/S Server TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_HTTP_SERVER_KEY_PASS`.
 - If you are using plain authentication:
-	- HTTP Server username identifier:
+	- HTTP/S Server username identifier:
 		- The default identifier is `SOURCE_HTTP_SERVER_USERNAME`.
-	- HTTP Server password identifier:
+	- HTTP/S Server password identifier:
 		- The default identifier is `SOURCE_HTTP_SERVER_PASSWORD`.
 
 {{% /tab %}}

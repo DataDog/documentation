@@ -215,6 +215,8 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
+<div class="alert alert-info">JFR template overrides are applied at JVM startup. After you create or modify an override file, restart the application for the changes to take effect.</div>
+
 ### Advanced Linux settings for CPU profiles
 
 The CPU profiler engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
@@ -293,7 +295,7 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.ddp
 
 The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
 
-To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
+To disable exception profiling, start the SDK with the `-Ddd.integration.throwables.enabled=false` JVM setting.
 
 Note: Turn this setting back on after you've returned to a more typical rate of exceptions.
 

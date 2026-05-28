@@ -1,5 +1,6 @@
 ---
 title: Agent Monitoring
+description: Monitor, troubleshoot, and improve agentic applications built on OpenAI Agents SDK, LangGraph, or CrewAI using Datadog LLM Observability.
 aliases:
   - /llm_observability/agent_monitoring
 further_reading:

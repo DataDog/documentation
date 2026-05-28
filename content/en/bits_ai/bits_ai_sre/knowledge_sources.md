@@ -19,6 +19,8 @@ You can either add step-by-step troubleshooting instructions directly in the mon
 
 Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
 
+- **Notebooks**: Monitors can link to notebooks that contain instructions on how to troubleshoot the monitor or related service. Notebooks support markdown as well as Datadog queries, giving the agent instructions on how to best perform root cause analysis.
+
 - **Confluence integration**: If your runbooks live in Confluence, link the relevant pages in the monitor message. During an investigation, Bits AI SRE reads the page, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its recommendations.
 
 To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits AI SRE to conduct more accurate and effective investigations.
@@ -30,7 +32,7 @@ To maximize the value of this integration, document the services, dependencies, 
 <div class="alert alert-info">
 Bits.md is in Preview for all customers.</div>
 
-You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
+You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
@@ -114,7 +116,7 @@ If the conclusion was inaccurate, provide Bits AI SRE with the correct root caus
 
 All positive feedback, as well as any negative feedback that includes details provided in the Bits' chat, creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
 
-To manage memories, including viewing and deleting them, go to the **Memories** column of the [Monitor Management][1] page.
+To manage memories, including viewing and deleting them, go to the {{< ui >}}Memories{{< /ui >}} column of the [Monitor Management][1] page.
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md

@@ -3,28 +3,28 @@
   <div class="container cards-dd">
     <div class="row row-cols-1 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
       <div class="col">
-        <a class="card h-100" href="linux">
+        <a class="card h-100" href="{{ .Page.Permalink }}linux/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/linux.png" "class" "img-fluid" "alt" "linux" "width" "200") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="docker">
+        <a class="card h-100" href="{{ .Page.Permalink }}docker/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/docker.png" "class" "img-fluid" "alt" "docker" "width" "200") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="kubernetes">
+        <a class="card h-100" href="{{ .Page.Permalink }}kubernetes/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/kubernetes.png" "class" "img-fluid" "alt" "kubernetes" "width" "200") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="windows">
+        <a class="card h-100" href="{{ .Page.Permalink }}windows/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/windows.png" "class" "img-fluid" "alt" "windows" "width" "200") }}
           </div>

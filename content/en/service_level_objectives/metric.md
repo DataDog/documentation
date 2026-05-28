@@ -15,6 +15,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
   tag: "Blog"
   text: "Best practices for managing your SLOs with Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-slos"
+  tag: "Learning Center"
+  text: "Getting Started with Service Level Objectives (SLOs)"
+
 ---
 
 ## Overview

@@ -11,7 +11,7 @@ Before setting up runtime detection, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page for each AAP product.
+3. **Supported SDK:** The Datadog SDK used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page for each AAP product.
 
 ## Software Composition Analysis enablement types
 
@@ -24,9 +24,9 @@ You can enable runtime Software Composition Analysis (SCA) in-app through [**Sec
 3. Check the services where you want to identify library vulnerabilities, and select **Bulk Actions**.
 4. Click **Activate Runtime Software Composition Analysis (SCA)**.
 
-### Datadog tracing library configuration
+### Datadog SDK configuration
 
-Add an environment variable or a new argument to your Datadog Tracing Library configuration.
+Add an environment variable or a new argument to your Datadog SDK configuration.
 
 By following these steps, you will successfully set up Software Composition Analysis for your application, ensuring comprehensive monitoring and identification of vulnerabilities in open source libraries used by your applications or services.
 

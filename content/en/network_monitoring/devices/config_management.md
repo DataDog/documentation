@@ -144,6 +144,25 @@ When you compare two configuration versions, the AI summary automatically:
 - Describes changes in human-readable terms
 - Highlights changes that may be relevant for incident investigation or risk analysis
 
+## Supported device profiles
+
+NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent, matched automatically based on your device's operating system, and updated through Agent releases.
+
+For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
+
+| Vendor | OS | Profile | Min. Agent version | Running | Startup |
+|---|---|---|---|---|---|
+| Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-CX | `aoscx` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-W | `aosw` | 7.75.0 | {{< X >}} | |
+| Cisco | IOS | `cisco-ios` | 7.73.0 | {{< X >}} | {{< X >}} |
+| Cisco | NX-OS | `nxos` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Dell | DellOS10 | `dellos10` | 7.77.0 | {{< X >}} | {{< X >}} |
+| F5 | TMOS | `tmos` | 7.76.0 | {{< X >}} | |
+| FortiGate | FortiOS | `fortios` | 7.77.0 | {{< X >}} | |
+| Juniper | JunOS | `junos` | 7.74.0 | {{< X >}} | |
+| Palo Alto | PAN-OS | `pan-os` | 7.75.0 | {{< X >}} | |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -155,3 +174,4 @@ When you compare two configuration versions, the AI summary automatically:
 [5]: /network_monitoring/devices/topology
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
+[8]: https://github.com/DataDog/datadog-agent/tree/main/pkg/networkconfigmanagement/profile/default_profiles

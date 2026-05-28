@@ -1,5 +1,5 @@
 ---
-description: Utiliza variables para personalizar tus notificaciones de monitor
+description: Utiliza variables para personalizar las notificaciones de tu seguimiento
 further_reading:
 - link: /monitors/guide/template-variable-evaluation/
   tag: Guía
@@ -7,67 +7,66 @@ further_reading:
     de plantilla
 - link: /monitors/
   tag: Documentación
-  text: Crear monitores
+  text: Crea seguimientos
 - link: /monitors/notify/
   tag: Documentación
-  text: Notificaciones de monitor
+  text: Notificaciones de seguimientos
 - link: /monitors/manage/
   tag: Documentación
-  text: Gestionar los monitores
+  text: Gestiona seguimientos
 - link: https://learn.datadoghq.com/courses/alert-monitor-notifications
-  tag: Centro de aprendizaje
-  text: Realiza un curso para personalizar las notificaciones del monitor de alertas
+  tag: Centro de Aprendizaje
+  text: Toma un curso para personalizar las notificaciones de alertas de seguimiento
 - link: https://www.datadoghq.com/blog/monitor-notification-rules/
   tag: Blog
-  text: Dirige tus alertas de monitor con las reglas de notificación de monitor de
-    Datadog
+  text: Dirige tus alertas de seguimiento con las reglas de notificación de seguimientos
+    de Datadog
 title: Variables
 ---
+Utiliza variables en los mensajes de notificación para mostrar mensajes condicionales y dirigir la notificación a diferentes equipos utilizando [variables condicionales](#conditional-variables), o para enriquecer su contenido utilizando [variables de atributo y etiqueta](#attribute-and-tag-variables) y [variables de plantilla](#template-variables).
 
-Utiliza variables en los mensajes de notificación para mostrar mensajes condicionales y dirigir la notificación a diferentes equipos utilizando [variables condicionales](#conditional-variables), o para enriquecer tu contenido utilizando [variables de atributo y etiqueta (tag)](#attribute-and-tag-variables) y [variables de plantilla](#template-variables).
+## Variables condicionales {#conditional-variables}
 
-## Variables condicionales
+Las variables condicionales utilizan `if-else` lógica para mostrar un mensaje diferente dependiendo del estado del seguimiento y los detalles de cómo fue activado. Estas variables pueden ser utilizadas dentro del asunto o cuerpo del mensaje de notificación.
 
-Las variables condicionales utilizan la lógica de `if-else` para mostrar un mensaje diferente dependiendo del estado del monitor y de los detalles de cómo se activó. Estas variables pueden utilizarse dentro del asunto o del cuerpo del mensaje de notificación.
+Las siguientes variables condicionales están disponibles:
 
-Están disponibles las siguientes variables condicionales:
-
-| Variable condicional       | El texto se muestra si                                           |
+| Variable Condicional       | El texto se muestra si                                           |
 |----------------------------|--------------------------------------------------------------------|
-| `{{#is_alert}}`            | El monitor alerta                                                 |
-| `{{^is_alert}}`            | El monitor no alerta                                         |
-| `{{#is_match}}`            | El contexto coincide con la subcadena proporcionada. Si se utiliza un valor numérico, se convierte en una cadena.|
-| `{{^is_match}}`            | El contexto no coincide con la subcadena proporcionada                  |
-| `{{#is_exact_match}}`      | El contexto coincide exactamente con la cadena proporcionada.<br> Si se utiliza un número, se considera el valor numérico, independientemente de su tipo. Esto significa que mientras dos números tengan el mismo valor, la función los considerará iguales. |
-| `{{^is_exact_match}}`      | El contexto no coincide exactamente con la cadena proporcionada             |
-| `{{#is_no_data}}`          | El monitor se activa si faltan datos                          |
-| `{{^is_no_data}}`          | El monitor no se activa si faltan datos                      |
-| `{{#is_warning}}`          | El monitor advierte                                                  |
-| `{{^is_warning}}`          | El monitor no advierte                                          |
-| `{{#is_recovery}}`         | El monitor se recupera de `ALERT`, `WARNING`, `UNKNOWN`, o `NO DATA`         |
-| `{{^is_recovery}}`         | El monitor no se recupera de `ALERT`, `WARNING`, `UNKNOWN`, o `NO DATA` |
-| `{{#is_warning_recovery}}` | El monitor se recupera de `WARNING` a `OK`                        |
-| `{{^is_warning_recovery}}` | El monitor no se recupera de `WARNING` a `OK`                |
-| `{{#is_alert_recovery}}`   | El monitor se recupera de `ALERT` a `OK`                          |
-| `{{^is_alert_recovery}}`   | El monitor no se recupera de ALERT a OK                   |
-| `{{#is_alert_to_warning}}` | El monitor pasa de `ALERT` a `WARNING`                  |
-| `{{^is_alert_to_warning}}` | El monitor no pasa de `ALERT` a `WARNING`          |
-| `{{#is_no_data_recovery}}` | El monitor se recupera de `NO DATA`                                |
-| `{{^is_no_data_recovery}}` | El monitor no se recupera de `NO DATA`                        |
-| `{{#is_priority 'value'}}` | El monitor tiene prioridad `value`. El valor oscila entre `P1` y `P5`   |
-| `{{#is_unknown}}`          | El monitor está en estado unknown                                |
-| `{{^is_unknown}}`          | El monitor no está en estado unknown                            |
-| `{{#is_renotify}}`         | El monitor hace renotificación                                         |
-| `{{^is_renotify}}`         | El monitor no hace renotificación                                    |
+| `{{#is_alert}}`            | The monitor alerts                                                 |
+| `{{^is_alert}}`            | The monitor does not alert                                         |
+| `{{#is_match}}`            | The context matches the provided substring. If a numeric value is used, it is converted to a string.|
+| `{{^is_match}}`            | The context does not match the provided substring                  |
+| `{{#is_exact_match}}`      | The context exactly matches the provided string.<br> If a number is used, the numeric value is considered, regardless of its type. This means that as long as two numbers have the same value, they are considered equal by the function. |
+| `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
+| `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
+| `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
+| `{{#is_warning}}`          | The monitor warns                                                  |
+| `{{^is_warning}}`          | The monitor does not warn                                          |
+| `{{#is_recovery}}`         | The monitor recovers from `ALERTA`, `ADVERTENCIA`, `DESCONOCIDO`, or `SIN DATOS`         |
+| `{{^is_recovery}}`         | The monitor does not recover from `ALERTA`, `ADVERTENCIA`, `DESCONOCIDO`, or `SIN DATOS` |
+| `{{#is_warning_recovery}}` | The monitor recovers from `ADVERTENCIA` to `OK`                        |
+| `{{^is_warning_recovery}}` | The monitor does not recover from `ADVERTENCIA` to `OK`                |
+| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERTA` to `OK`                          |
+| `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
+| `{{#is_alert_to_warning}}` | The monitor transitions from `ALERTA` to `ADVERTENCIA`                  |
+| `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERTA` to `ADVERTENCIA`          |
+| `{{#is_no_data_recovery}}` | The monitor recovers from `SIN DATOS`                                |
+| `{{^is_no_data_recovery}}` | The monitor does not recover from `SIN DATOS`                        |
+| `{{#is_priority 'value'}}` | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
+| `{{#is_unknown}}`          | The monitor is in the unknown state                                |
+| `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
+| `{{#is_renotify}}`         | The monitor is renotifying                                         |
+| `{{^is_renotify}}`         | El seguimiento no está renotificando.                                    |
 
-### Ejemplos
+### Ejemplos {#examples}
 
-Las variables condicionales deben tener un par de apertura y cierre con el texto y **@-notifications** en medio. Las variables basadas en el estado del monitor (como `is_alert` o `is_warning`) deben tener su propio bloque de mensajes. Dado que un monitor solo puede estar en un estado a la vez, no puedes combinarlos. Sin embargo, puedes anidar condicionales que coincidan en atributos, consulta los ejemplos de `is_renotify`.
+Las variables condicionales deben tener un par de apertura y cierre con el texto y **@-notificaciones** en medio. Las variables basadas en el estado del seguimiento (como `is_alert` o `is_warning`), deben tener su propio bloque de mensaje. Debido a que un seguimiento solo puede estar en un estado a la vez, no puedes combinarlos. Sin embargo, puedes anidar condicionales que coincidan con atributos, consulta los `is_renotify` ejemplos.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
 
-Para enviar un mensaje de notificación cuando un monitor alerta, utiliza el formato:
+Para enviar un mensaje de notificación cuando un seguimiento alerta, utiliza el formato:
 
 ```text
 {{#is_alert}}
@@ -78,7 +77,7 @@ Para enviar un mensaje de notificación cuando un monitor alerta, utiliza el for
 {{% /tab %}}
 {{% tab "is_warning" %}}
 
-Para enviar un mensaje de notificación cuando un monitor advierte, utiliza el formato:
+Para enviar un mensaje de notificación cuando un seguimiento advierte, utiliza el formato:
 
 ```text
 {{#is_warning}}
@@ -89,7 +88,7 @@ Para enviar un mensaje de notificación cuando un monitor advierte, utiliza el f
 {{% /tab %}}
 {{% tab "is_recovery" %}}
 
-Para enviar un mensaje de notificación cuando se recupere un monitor, utiliza el formato:
+Para enviar un mensaje de notificación cuando un seguimiento se recupera, utiliza el formato:
 
 ```text
 {{#is_recovery}}
@@ -98,7 +97,7 @@ Para enviar un mensaje de notificación cuando se recupere un monitor, utiliza e
 ```
 
 {{% /tab %}}
-{{% tab "is_match" %}}
+{{% tab "es_coincidencia" %}}
 
 Busca una subcadena en una [variable de etiqueta](#attribute-and-tag-variables) con el formato:
 
@@ -108,7 +107,7 @@ Busca una subcadena en una [variable de etiqueta](#attribute-and-tag-variables) 
 {{/is_match}}
 ```
 
-Para notificar a tu equipo de base de datos si un host desencadenante tiene la etiqueta `role:db_cassandra` o `role:db_postgres`, utiliza lo siguiente:
+Para notificar a tu equipo de base de datos si un servidor desencadenante tiene la etiqueta `role:db_cassandra` o `role:db_postgres`, utiliza lo siguiente:
 
 ```text
 {{#is_match "host.role.name" "db"}}
@@ -117,7 +116,7 @@ Para notificar a tu equipo de base de datos si un host desencadenante tiene la e
 {{/is_match}}
 ```
 
-La condición `is_match` también permite unir varias cadenas:
+La `is_match` condición también admite la coincidencia de múltiples cadenas:
 
 ```text
 {{#is_match "host.role.name" "db" "database"}}
@@ -126,7 +125,7 @@ La condición `is_match` también permite unir varias cadenas:
 {{/is_match}}
 ```
 
-Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza la negación de la condición como se indica a continuación:
+Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza la negación de la condición de la siguiente manera:
 
 ```text
 {{^is_match "host.role.name" "db"}}
@@ -135,7 +134,7 @@ Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza
 {{/is_match}}
 ```
 
-O utiliza el parámetro `{{else}}` del primer ejemplo:
+O utiliza el `{{else}}` parámetro en el primer ejemplo:
 
 ```text
 {{#is_match "host.role.name" "db"}}
@@ -146,10 +145,10 @@ O utiliza el parámetro `{{else}}` del primer ejemplo:
   @slack-example
 {{/is_match}}
 ```
-**Nota**: Para comprobar si uns `<TAG_VARIABLE>` no existe o si está vacía, utiliza `is_exact_match`. Consulta la pestaña `is_exact_match` para más detalles.
+**Nota**: Para verificar si un `<TAG_VARIABLE>` no existe o si está vacío, utiliza `is_exact_match`. Consulta la pestaña `is_exact_match` para más detalles.
 
 {{% /tab %}}
-{{% tab "is_exact_match" %}}
+{{% tab "es_coincidencia_exacta" %}}
 
 Busca una cadena exacta en una [variable de etiqueta](#attribute-and-tag-variables) con el formato:
 
@@ -159,7 +158,7 @@ Busca una cadena exacta en una [variable de etiqueta](#attribute-and-tag-variabl
 {{/is_exact_match}}
 ```
 
-Para notificar a tu equipo de desarrollo si un host desencadenante tiene el nombre `production`, utiliza lo siguiente:
+Para notificar a tu equipo de desarrollo si un servidor desencadenante tiene el nombre `production`, utiliza lo siguiente:
 
 ```text
 {{#is_exact_match "host.name" "production"}}
@@ -168,7 +167,7 @@ Para notificar a tu equipo de desarrollo si un host desencadenante tiene el nomb
 {{/is_exact_match}}
 ```
 
-La condición `is_exact_match` también permite buscar varias cadenas:
+La `is_exact_match` condición también admite la coincidencia de múltiples cadenas:
 
 ```text
 {{#is_exact_match "host.name" "production" "staging"}}
@@ -177,7 +176,7 @@ La condición `is_exact_match` también permite buscar varias cadenas:
 {{/is_exact_match}}
 ```
 
-La variable condicional `is_exact_match` también admite [variables de plantilla `{{value}}`](#template-variables):
+La `is_exact_match` variable condicional también admite [`{{value}}` variables de plantilla](#template-variables):
 
 ```text
 {{#is_exact_match "value" "<VALUE>"}}
@@ -185,7 +184,7 @@ La variable condicional `is_exact_match` también admite [variables de plantilla
 {{/is_exact_match}}
 ```
 
-Para notificar a tu equipo de desarrollo si el valor que ha superado el umbral de tu monitor es 5 (o 5,0), utiliza lo siguiente:
+Para notificar a tu equipo de desarrollo si el valor que superó el umbral de tu seguimiento es 5 (o 5.0), utiliza lo siguiente:
 
 ```text
 {{#is_exact_match "value" "5"}}
@@ -193,7 +192,8 @@ Para notificar a tu equipo de desarrollo si el valor que ha superado el umbral d
 {{/is_exact_match}}
 ```
 
-La variable condicional `is_exact_match` también admite una cadena vacía para que `<COMPARISON_STRING>` compruebe si el atributo o etiqueta está vacío o no existe.
+La `is_exact_match` variable condicional también admite una cadena vacía para el `<COMPARISON_STRING>` para verificar si el atributo o etiqueta está vacío o no existe.
+
 ```text
 {{#is_exact_match "host.datacenter" ""}}
   This displays if the attribute or tag does not exist or if it's empty
@@ -204,87 +204,87 @@ La variable condicional `is_exact_match` también admite una cadena vacía para 
 {{% /tab %}}
 {{% tab "is_renotify" %}}
 
-Para enviar un mensaje de escalada a un destino diferente solo para el entorno `production`:
+Para enviar un mensaje de escalación a un destino diferente solo para el `production` entorno:
 
 ```text
 {{#is_renotify}}
 {{#is_match "env" "production"}}
-  Este es un mensaje de escalada enviado a @dev-team@company.com
+  This is an escalation message sent to @dev-team@company.com
 {{/is_match}}
 {{/is_renotify}}
 ```
 
-Para enviar un mensaje de escalada diferente que no contenga los detalles del mensaje original, utiliza una combinación de bloques `{{^is_renotify}}` y `{{#is_renotify}}`:
+Para enviar un mensaje de escalación diferente que no contenga los detalles del mensaje original, utiliza una combinación de `{{^is_renotify}}` and `{{#is_renotify}}` bloques:
 
 ```text
 {{^is_renotify}}
-Este monitor alerta y envía un primer mensaje a @dev-team@company.com
+This monitor is alerting and sending a first message @dev-team@company.com
 
-Para resolver este monitor sigue los pasos:
+To solve this monitor follow the steps:
 1. Go there
 2. Do this
 {{/is_renotify}}
 
-Esta parte es genérica y se envía para el primer desencadenante y el mensaje de escalada.
+This part is generic and sent both for the first trigger and the escalation message.
 
 {{#is_renotify}}
-  Este es el mensaje de escalada @dev-team@company.com
+  This is the escalation message @dev-team@company.com
 {{/is_renotify}}
 
 ```
 
-En la renotificación del monitor, los usuarios recibirán el siguiente mensaje de escalada:
+En la renotificación del seguimiento, los usuarios recibirán el siguiente mensaje de escalación:
 
 ```
-Esta parte es genérica y se envía tanto para el primer desencadenante como para el mensaje de escalada.
+This part is generic and sent both for the first trigger and the escalation message.
 
-Este es el mensaje de escalada @dev-team@company.com
+This is the escalation message @dev-team@company.com
 ```
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-Si configura un bloque condicional para una transición de estado en condiciones `alert` o `warning` con un identificador **@-notifications**, Datadog recomienda que configures una condición `recovery` correspondiente para enviar una notificación de recuperación al identificador.
+Si configuras un bloque condicional para una transición de estado en las condiciones `alert` o `warning` con un manejador de **@-notifications**, Datadog recomienda que configures una condición correspondiente `recovery` para enviar una notificación de recuperación al manejador.
 
-**Nota**: Cualquier texto o identificador de notificación colocado **fuera** de las variables condicionales configuradas se invoca con cada transición de estado del monitor. Cualquier texto o identificador de notificación colocado **dentro** de las variables condicionales configuradas solo se invoca si la transición de estado del monitor coincide con su condición.
+**Nota**: Cualquier texto o manejador de notificación colocado **fuera** de las variables condicionales configuradas se invoca con cada transición de estado del monitor. Cualquier texto o manejador de notificación colocado **dentro** de las variables condicionales configuradas solo se invoca si la transición de estado del seguimiento coincide con su condición.
 
-## Variables de atributos y etiquetas
+## Variables de atributo y etiqueta {#attribute-and-tag-variables}
 
-Utiliza variables de atributos y etiquetas para mostrar mensajes de alerta personalizados, informativos y específicos que ayuden a comprender la naturaleza de la alerta. Consulta las siguientes secciones para ver ejemplos y casos de uso:
+Utiliza variables de atributo y etiqueta para generar mensajes de alerta que sean personalizados, informativos y específicos para ayudar a entender la naturaleza de la alerta. Consulta las siguientes secciones para ejemplos y casos de uso:
 - [Variables de alerta múltiple](#multi-alert-variables)
 - [Variables de atributo/etiqueta coincidentes](#matching-attributetag-variables)
 
 Etiquetas
-: se adjuntan automáticamente (como nombre de host, nombre de contenedor, nombre de archivo de log y nombre de función sin servidor) o se añaden mediante etiquetas personalizadas (como equipo responsable, entorno, aplicación o versión).
+: Adjuntadas automáticamente (como el nombre del servidor, el nombre del contenedor, el nombre del archivo de registro y el nombre de la función sin servidor) o añadidas a través de etiquetas personalizadas (como el equipo a cargo, el entorno, la aplicación o la versión).
 
 Atributos
-: basados en el contenido de log y analizados o añadidos mediante búsquedas en tablas de referencia (por ejemplo, geoip).
+: Basado en el contenido del registro y ya sea analizado o añadido mediante búsquedas en tablas de referencia (por ejemplo, geoip).
 
-**Nota**: Si el monitor está configurado para recuperarse en condiciones sin datos (por ejemplo, cuando no hay eventos que coincidan con la consulta), el mensaje de recuperación no contiene datos. Para mantener la información en el mensaje de recuperación, agrupa por etiquetas adicionales, a las que se puede acceder mediante `{{tag.name}}`.
+**Nota**: Si el seguimiento está configurado para recuperarse en condiciones de sin datos (por ejemplo, cuando no hay eventos que coincidan con la consulta), el mensaje de recuperación no contiene ningún dato. Para persistir información en el mensaje de recuperación, agrupa por etiquetas adicionales, que son accesibles mediante `{{tag.name}}`.
 
-### Variables de alerta múltiple
+### Variables de alerta múltiple {#multi-alert-variables}
 
-Configura variables de multialertas en [monitores de multialertas][1] en función de la dimensión seleccionada en el cuadro de grupo de multialertas. Enriquece las notificaciones incluyendo dinámicamente en cada alerta el valor asociado a la dimensión agrupada.
+Configura variables de alerta múltiple en [seguimientos de alerta múltiple][1] según la dimensión seleccionada en el cuadro de grupo de alerta múltiple. Enriquece las notificaciones incluyendo dinámicamente el valor asociado con la dimensión de agrupación en cada alerta.
 
-**Nota**: Cuando se utiliza el campo `group_by` en la agregación, las etiquetas y alertas adicionales del monitor pueden heredarse automáticamente. Esto significa que cualquier alerta o configuración establecida en el endpoint supervisado podría aplicarse a cada grupo resultante de la agregación.
+**Nota**: Cuando uses el campo `group_by` en la agregación, las etiquetas y alertas adicionales del seguimiento pueden ser heredadas automáticamente. Esto significa que cualquier alerta o configuración establecida en el punto de conexión monitoreado podría aplicarse a cada grupo resultante de la agregación.
 
 {{< tabs >}}
 {{% tab "Agrupar por etiqueta" %}}
 
-Si una métrica está etiquetada con cualquier etiqueta en el formato `key:value` y la consulta de monitor está agrupada por esta etiqueta, utiliza la variable:
+Si una métrica está etiquetada con cualquier etiqueta en el formato `key:value` y la consulta del seguimiento está agrupada por esta etiqueta, usa la variable:
 
 ```
 {{ key.name }}
 ```
 
-Esta variable inserta el `value` asociado al `key` en cada notificación de alerta. Por ejemplo, si tu monitor activa una alerta para cada `env`, entonces la variable `{{env.name}}` está disponible en tu mensaje de notificación.
+Esta variable inserta el `value` asociado con el `key` en cada notificación de alerta. Por ejemplo, si tu seguimiento activa una alerta por cada `env`, entonces la variable `{{env.name}}` está disponible en tu mensaje de notificación.
 
-Si un grupo tiene varios `values` asociados a la misma `key`, el mensaje de alerta muestra una cadena separada por comas de todos los valores, en orden lexicográfico.
+Si un grupo tiene múltiples `values` asociados con el mismo `key`, el mensaje de alerta muestra una cadena de todos los valores separados por comas, en orden lexicográfico.
 
-#### Clave de etiqueta con punto
+#### Clave de etiqueta con punto {#tag-key-with-period}
 
-Si la clave de tu etiqueta contiene un punto, pon entre paréntesis la clave completa cuando utilices una variable de etiqueta. Por ejemplo, si tu etiqueta es `dot.key.test:five` y tu monitor está agrupado por `dot.key.test`, utiliza:
+Si la clave de tu etiqueta tiene un punto, incluye corchetes alrededor de la clave completa al usar una variable de etiqueta. Por ejemplo, si tu etiqueta es `dot.key.test:five` y tu seguimiento está agrupado por `dot.key.test`, usa:
 
 ```text
 {{[dot.key.test].name}}
@@ -294,19 +294,19 @@ Si la clave de tu etiqueta contiene un punto, pon entre paréntesis la clave com
 
 {{% tab "Agrupar por faceta" %}}
 
-Monitores de logs, monitores de Trace Analytics, monitores RUM y monitores de eventos pueden usar facetas como variables si el monitor está agrupado por facetas. Si un monitor de log está agrupado por `@facet_key`, utiliza la variable:
+Los seguimientos de registro, los seguimientos de Trace Analytics, los seguimientos de RUM y los seguimientos de eventos pueden usar facetas como variables si el seguimiento está agrupado por faceta. Si un seguimiento de registro está agrupado por `@facet_key`, usa la variable:
 
 ```text
 {{ @facet_key.name }}
 ```
 
-**Ejemplo**: Para incluir información específica de un grupo en un monitor de log de alerta múltiple agrupado por `@machine_id`:
+**Ejemplo**: Para incluir información específica del grupo en un seguimiento de registros de alerta múltiple agrupado por `@machine_id`:
 
 ```text
-Esta alerta se activó en {{ @machine_id.name }}
+This alert was triggered on {{ @machine_id.name }}
 ```
 
-Si tu faceta tiene puntos, utiliza corchetes alrededor de la faceta, por ejemplo:
+Si tu faceta tiene puntos, usa corchetes alrededor de la faceta, por ejemplo:
 
 ```text
 {{ [@network.client.ip].name }}
@@ -315,26 +315,26 @@ Si tu faceta tiene puntos, utiliza corchetes alrededor de la faceta, por ejemplo
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Personalización de las notificaciones en función del grupo
+#### Personaliza la notificación según el grupo {#customize-the-notification-based-on-the-group}
 
-Cuando tu consulta está agrupada por dimensiones específicas, puedes mejorar las notificaciones con metadatos dinámicos asociados al grupo. Para ver una lista de variables de etiqueta basadas en tu selección de etiquetas, haz clic en **Use message template variables** (Utilizar variables de plantilla de mensaje) en la sección **Configure notifications & automations** (Configurar notificaciones y automatizaciones). Consulta los siguientes ejemplos:
+Cuando tu consulta está agrupada por dimensiones específicas, puedes enriquecer las notificaciones con metadatos dinámicos asociados con el grupo. Para ver una lista de variables de plantilla de etiqueta según tu selección de etiquetas, haz clic en **Usar variables de plantilla de mensaje** en la sección **Configurar notificaciones y automatizaciones**. Mira los siguientes ejemplos:
 
-{{% collapse-content title="Grupo de consulta por host" level="h5" %}}
+{{% collapse-content title="Consulta agrupada por host" level="h5" %}}
 
-Si tu monitor activa una alerta para cada `host`, entonces las variables de etiqueta `{{host.name}}` y `{{host.ip}}` están disponibles, así como cualquier etiqueta de host que esté disponible en este host.
+Si tu monitor activa una alerta para cada `host`, entonces las variables de etiqueta `{{host.name}}` and `{{host.ip}}` están disponibles, así como cualquier etiqueta de host que esté disponible en este host.
 
-Variables de metadatos específicas de host:
+Variables de metadatos específicos del host:
 
-- Versión del Agent: `{{host.metadata_agent_version}}`
+- Versión del agente: `{{host.metadata_agent_version}}`
 - Máquina: `{{host.metadata_machine}}`
 - Plataforma: `{{host.metadata_platform}}`
 - Procesador: `{{host.metadata_processor}}`
 {{% /collapse-content %}}
 
-{{% collapse-content title="Grupo de consulta por kube_namespace y kube_cluster_name" level="h5" %}}
+{{% collapse-content title="Consulta agrupada por kube_namespace y kube_cluster_name" level="h5" %}}
 Si tu monitor activa una alerta para cada `kube_namespace` y `kube_cluster_name`, entonces puedes acceder a cualquier atributo del espacio de nombres.
 
-Variables de metadatos del espacio de nombres:
+Variables de metadatos del namespace:
 
 - Nombre del clúster: `{{kube_namespace.cluster_name}}`
 - Nombre del espacio de nombres: `{{kube_namespace.display_name}}`
@@ -343,12 +343,12 @@ Variables de metadatos del espacio de nombres:
 
 La siguiente tabla contiene todos los atributos disponibles:
 
-| Sintaxis de la variable   | Atributos de primer nivel |
+| Sintaxis de variable   | Atributos de primer nivel |
 |-------------------|------------------------|
 | `{{kube_namespace.key}}`     | `k8s_namespace_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `group_size`, `labels`, `name`, `namespace`, `status`, `uid`|
 {{% /collapse-content %}}
 
-{{% collapse-content title="Grupo de consulta por pod_name y kube_namespace y kube_cluster_name" level="h5" %}}
+{{% collapse-content title="Consulta agrupada por pod_name y kube_namespace y kube_cluster_name" level="h5" %}}
 Si tu monitor activa una alerta para cada `pod_name` y `kube_namespace` y `kube_cluster_name`, entonces puedes acceder a cualquier atributo del pod.
 
 Variables de metadatos del pod:
@@ -358,51 +358,51 @@ Variables de metadatos del pod:
 
 La siguiente tabla contiene todos los atributos disponibles:
 
-| Sintaxis de la variable   | Atributos de primer nivel |
+| Sintaxis de variable   | Atributos de primer nivel |
 |-------------------|------------------------|
 | `{{pod_name.key}}`     | `k8s_pod_key`, `tags`, `annotations`, `cluster_id`, `cluster_name`, `conditions`, `container_statuses`, `creation_timestamp`, `deletion_timestamp`, `display_name`, `external_id`, `finalizers`, `first_seen_at`, `host_id`, `host_key`, `hostname`, `init_container_statuses`, `ip`, `labels`, `name`, `namespace`, `node_name`, `nominated_node_name`, `phase`, `pod_scheduled_timestamp`, `priority_class_name`, `qosclass`, `resource_requirements`, `uid`|
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Grupo de consulta por servicio" level="h5" %}}
+{{% collapse-content title="Consulta agrupada por servicio" level="h5" %}}
 
-Si tu monitor activa una alerta para cada `service`, entonces puedes acceder a algún atributo del servicio, tal y como se define en el [Software Catalog][10].
+Si tu monitor activa una alerta para cada `service`, entonces puedes acceder a algún atributo del servicio, como se define en el [Software Catalog][10].
 
-Variables de metadatos de servicio:
+Variables de metadatos del servicio:
 
 - Nombre del servicio: `{{service.name}}`
 - Nombre del equipo: `{{service.team}}`
 - Documentos: `{{service.docs}}`
 - Enlaces: `{{service.links}}`
 
-Para documentos y enlaces también puedes acceder a un elemento específico con la siguiente sintaxis `[<name>]`. Por ejemplo, para los servicios que tienen un esquema de definición como el definido en este [ejemplo][11], puedes acceder al enlace "Runbook" utilizando la siguiente sintaxis
+Para Documentos y Enlaces, también puedes acceder a un elemento específico con la siguiente sintaxis `[<name>]`. Por ejemplo, para servicios que tienen un esquema de definición como el que se define en este [ejemplo][11], puedes acceder al enlace "Runbook" utilizando la siguiente sintaxis
 
 ```text
 {{service.links[Runbook]}}
 ```
 {{% /collapse-content %}}
 
-### Unión de variables de atributo/etiqueta
+### Variables de atributo/etiqueta coincidentes {#matching-attributetag-variables}
 
-Puedes incluir cualquier atributo o etiqueta de un log, tramo de traza, evento RUM, CI pipeline, o evento de CI test que coincida con la consulta de monitor. La siguiente tabla muestra ejemplos de atributos y variables que puedes añadir de diferentes tipos de monitor.
+Puedes incluir cualquier atributo o etiqueta de un registro, traza, evento RUM, canalización CI o evento de prueba CI que coincida con la consulta del monitor. La siguiente tabla muestra ejemplos de atributos y variables que puedes agregar de diferentes tipos de monitores.
 
-<div class="alert alert-info">Para ver la lista completa de variables disponibles para tu monitor, en la parte inferior de la configuración de notificaciones, haz clic en <strong>Add Variable</strong> (Añadir variable) y selecciona una de las opciones del menú desplegado.</div>
+<div class="alert alert-info">Para ver la lista completa de variables disponibles para tu monitor, en la parte inferior de la configuración de notificaciones haz clic en <strong>{{&nbsp;Agregar Variable</strong> y selecciona de las opciones del menú expandido.</div>
 
-| Tipo de monitor             | Sintaxis de la variable                                         |
+| Tipo de monitor             | Sintaxis de variable                                         |
 |--------------------------|--------------------------------------------------------|
-| [Audit Trail][16]        | `{{audit.attributes.key}}` o `{{audit.message}}`      |
+| [Audit Trail][16]        | `{{audit.attributes.key}}` or `{{audit.message}}`      |
 | [CI Pipeline][17]        | `{{cipipeline.attributes.key}}`                        |
 | [CI Test][18]            | `{{citest.attributes.key}}`                            |
 | [Database Monitoring][19]| `{{databasemonitoring.attributes.key}}`                |
 | [Error Tracking][14]     | `{{issue.attributes.key}}`                             |
-| [Log][12]                | `{{log.attributes.key}}` o `{{log.tags.key}}`         |
-| [RUM][15]                | `{{rum.attributes.key}}` o `{{rum.tags.key}}`         |
+| [Log][12]                | `{{log.attributes.key}}` or `{{log.tags.key}}`         |
+| [RUM][15]                | `{{rum.attributes.key}}` or `{{rum.tags.key}}`         |
 | [Synthetic Monitoring][20]| `{{synthetics.attributes.key}}`                       |
-| [Trace Analytics][13]    | `{{span.attributes.key}}` o `{{span.tags.key}}`       |
+| [Trace Analytics][13]    | `{{span.attributes.key}}` or `{{span.tags.key}}`       |
 
 {{% collapse-content title="Ejemplo de uso de sintaxis" level="h4" %}}
-- Para cualquier par `key:value`, la variable `{{log.tags.key}}` se convierte en `value` en el mensaje de alerta.
-- No se incluye el `@` que precede a todos los atributos. Por ejemplo, si un monitor de logs está agrupado por `@http.status_code`, puedes incluir el mensaje de error o las etiquetas de infraestructura en el mensaje de notificación utilizando las variables:
+- Para cualquier par `key:value`, la variable `{{log.tags.key}}` renders `valor` en el mensaje de alerta.
+- El `@` que precede a todos los atributos no está incluido. Por ejemplo, si un monitor de registros está agrupado por `@http.status_code`, puedes incluir el mensaje de error o las etiquetas de infraestructura en el mensaje de notificación utilizando las variables:
 
   ```text
   {{ log.attributes.[error.message] }}
@@ -410,8 +410,8 @@ Puedes incluir cualquier atributo o etiqueta de un log, tramo de traza, evento R
   ...
   ```
 
-  {{< img src="monitors/notifications/tag_attribute_variables.png" alt="Unir la sintaxis de variable de atributo" style="width:90%;">}}
-- El mensaje muestra el atributo `error.message` de un log elegido que coincide con la consulta, **si el atributo existe**.
+  {{< img src="monitors/notifications/tag_attribute_variables.png" alt="Sintaxis de variable de atributo coincidente" style="width:90%;">}}
+- El mensaje muestra el atributo `error.message` de un registro que coincide con la consulta, **si el atributo existe**.
 - Si la etiqueta está en un evento, utiliza la siguiente sintaxis:
 
   ```text
@@ -420,40 +420,40 @@ Puedes incluir cualquier atributo o etiqueta de un log, tramo de traza, evento R
 
 {{% /collapse-content %}}
 
-#### Notas importantes
+#### Notas importantes {#important-notes}
 
-- Si el evento seleccionado no incluye la clave de atributo o etiqueta, la variable aparece vacía en el mensaje de notificación. Para evitar que se pierdan notificaciones, evita utilizar estas variables para enrutar notificaciones con indicadores `{{#is_match}}`.
-- Para los monitores que utilizan fórmulas y funciones en las consultas, los valores se resuelven en función de los eventos extraídos de la primera consulta.
+- Si el evento seleccionado no incluye el atributo o la clave de la etiqueta, la variable se muestra vacía en el mensaje de notificación. Para evitar notificaciones perdidas, evita usar estas variables para enrutar notificaciones con `{{#is_match}}` manejadores.
+- Para monitores que utilizan Fórmulas y Funciones en consultas, los valores se resuelven en función de los eventos extraídos de la primera consulta.
 
 
-#### Atributos reservados
+#### Atributos reservados {#reserved-attributes}
 
-Los eventos de logs, Event Management, tramos, RUM, CI Pipeline y CI Test tienen atributos reservados genéricos, que puedes usar en variables con la siguiente sintaxis:
+Los registros, la Gestión de Eventos, los spans, RUM, la Pipeline CI y los eventos de Prueba CI tienen atributos reservados genéricos, que puedes usar en variables con la siguiente sintaxis:
 
-| Tipo de monitor    | Sintaxis de la variable   | Atributos de primer nivel |
+| Tipo de monitor    | Sintaxis de variable   | Atributos de primer nivel |
 |-----------------|-------------------|------------------------|
-| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id`, `link`, `host` |
-| Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link` |
-| RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp`, `link` |
-| Evento             | `{{event.key}}`     | `attributes`, `host.name`, `id`, `link`, `title`, `text`, `tags` |
-| CI Pipeline             | `{{cipipeline.key}}`     | `service`, `env`, `resource_name`, `ci_level`, `trace_id`, `span_id`, `pipeline_fingerprint`, `operation_name`, `ci_partial_array`, `status`, `timestamp`, `link` |
-| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
+| Registro             | `{{log.key}}`     | `mensaje`, `servicio`, `estado`, `fuente`, `span_id`, `timestamp`, `trace_id`, `enlace`, `host` |
+| Trace Analytics | `{{span.key}}`    | `env`, `nombre_de_operación`, `nombre_de_recurso`, `servicio`, `estado`, `span_id`, `timestamp`, `trace_id`, `tipo`, `enlace` |
+| RUM             | `{{rum.key}}`     | `servicio`, `estado`, `marca de tiempo`, `enlace` |
+| Event             | `{{event.key}}`     | `atributos`, `nombre del servidor`, `id`, `enlace`, `título`, `texto`, `etiquetas` |
+| CI Pipeline             | `{{cipipeline.key}}`     | `servicio`, `ambiente`, `nombre_recurso`, `nivel_ci`, `id_traza`, `id_span`, `huella_pipeline`, `nombre_operación`, `arreglo_parcial_ci`, `estado`, `marca de tiempo`, `enlace` |
+| CI Test             | `{{citest.key}}`     | `servicio`, `ambiente`, `nombre_recurso`, `trace_id`, `span_id`, `nombre_operación`, `estado`, `marca de tiempo`, `enlace` |
 
 Si el evento coincidente no contiene el atributo en su definición, la variable se muestra vacía.
 
-#### Enlace de explorador
+#### Enlace del explorador {#explorer-link}
 
-Utiliza `{{log.link}}`, `{{span.link}}`, `{{rum.link}}` y `{{issue.link}}` para fortalecer la notificación con un enlace a Log Explorer, Trace Explorer, RUM Explorer o Error Tracking, en el contexto de eventos que coincida con la consulta.
+Usar `{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` para enriquecer la notificación con un enlace al Explorador de Registros, Explorador de Trazas, Explorador RUM o Error Tracking, limitado a los eventos que coinciden con la consulta.
 
-### Comprobar variables de monitor
+### Variables del monitor de verificación {#check-monitor-variables}
 
-Para comprobar las variables de monitor (check personalizado y check de integración), la variable `{{check_message}}` está disponible y muestra el mensaje especificado en el check personalizado o el check de integración.
+Para las variables del monitor de verificación (verificación personalizada y verificación de integración), la variable `{{check_message}}` está disponible y muestra el mensaje especificado en la verificación personalizada o la verificación de integración.
 
-### Variables compuestas de monitor
+### Variables de monitores composite {#composite-monitor-variables}
 
-Los monitores compuestos pueden acceder al valor y al estado asociados a los submonitores en el momento en que se activa la alerta.
+Los monitores composite pueden acceder al valor y al estado asociados a los submonitores en el momento en que se activa la alerta.
 
-Por ejemplo, si tu monitor compuesto tiene el submonitor `a`, puedes incluir el valor de `a` con:
+Por ejemplo, si su monitor composite tiene un submonitor `a`, puede incluir el valor de `a` con:
 
 ```text
 {{ a.value }}
@@ -467,46 +467,66 @@ Para recuperar el estado del submonitor `a`, utiliza:
 
 Los valores posibles para el estado son: `OK`, `Alert`, `Warn` y `No Data`.
 
-Los monitores compuestos también admiten variables de etiqueta del mismo modo que sus monitores subyacentes. Siguen el mismo formato que otros monitores, siempre que los monitores subyacentes estén agrupados por la misma etiqueta o faceta.
+Los monitores composite también admiten variables de etiqueta de la misma manera que sus monitores subyacentes. Siguen el mismo formato que otros monitores, siempre que los monitores subyacentes estén agrupados por la misma etiqueta o faceta.
 
-Por ejemplo, supón que tu monitor compuesto tiene un submonitor `a` , que es un monitor de logs. Puedes incluir el valor de cualquier etiqueta o faceta de `a` con:
+Por ejemplo, suponga que su monitor composite tiene un submonitor `a`, que es un monitor de registros. Puede incluir el valor de cualquier etiqueta o faceta de `a` con:
 
 ```text
-{{ a.log.message }} o {{ a.log.my_facet }}
+{{ a.log.message }} or {{ a.log.my_facet }}
 ```
 
-### Fuga de caracteres
+### Escape de caracteres {#character-escape}
 
-El contenido de las variables se fuga por defecto. Para evitar que se fugue contenido como JSON o código, utiliza llaves triples en lugar de dobles, por ejemplo: `{{{event.text}}}`.
+El contenido variable está codificado en HTML por defecto. Para mostrar contenido sin codificar, use llaves triples en lugar de llaves dobles.
 
-## Variables de plantilla
+Por ejemplo, cuando el valor de una variable contiene una URL con parámetros de consulta, el `&` se trata de manera diferente dependiendo de si se utilizan llaves dobles o triples:
 
-Utiliza variables de plantilla para personalizar tus notificaciones de monitor. Las variables incorporadas son:
+| Sintaxis | Ejemplo de salida |
+--------|----------------|
+| `{{template_variable}}` (double braces) | `https://status.example.com/check?service=web&amp;region=us-east` |
+| `{{{template_variable}}}` (triple braces) | `https://status.example.com/check?service=web&region=us-east` |
+
+| Sintaxis | Salida |
+|--------|--------|
+| `{{variable}}` | HTML-encoded (default) |
+| `{{{variable}}}` | Sin codificar, sin procesar |
+
+Por ejemplo, para mostrar el mensaje de verificación sin codificación HTML:
+
+```text
+{{{check_message}}}
+```
+
+Esto es particularmente relevante cuando `{{check_message}}` contains auto-generated URLs with query parameters (for example, on HTTP Check monitors). The `&` characters in those URLs are HTML-encoded by default, which can break clickable links in notifications. Use `{{{check_message}}}` para preservar las URL tal como están.
+
+## Variables de plantilla {#template-variables}
+
+Utiliza variables de plantilla para personalizar las notificaciones de tu monitor. Las variables integradas son:
 
 | Variable                             | Descripción                                                                   |
 |-----------------------------------   |-------------------------------------------------------------------------------|
-| `{{value}}`                          | El valor que infringió la alerta para los monitores de consulta basados en métricas.            |
-| `{{threshold}}`                      | El valor del umbral de alerta establecido en las condiciones de alerta del monitor.       |
-| `{{warn_threshold}}`                 | Valor del umbral de advertencia establecido en las condiciones de alerta del monitor.     |
-| `{{alert_recovery_threshold}}`       | El valor que recuperó el monitor de su estado `ALERT`.                  |
-| `{{warn_recovery_threshold}}`        | El valor que recuperó el monitor de su estado `WARN`.                   |
-| `{{ok_threshold}}`                   | El valor que recuperó el monitor del check de servicio.                           |
-| `{{comparator}}`                     | El valor relacional establecido en las condiciones de alerta del monitor.                   |
-| `{{first_triggered_at}}`<br>*Consulta la sección siguiente*         | La fecha y hora UTC en que se activó el monitor por primera vez.                       |
-| `{{first_triggered_at_epoch}}`<br>*Consulta la sección siguiente*   | La fecha y hora UTC en que el monitor se activó por primera vez en milisegundos epoch. |
-| `{{last_triggered_at}}`<br>*Consulta la sección siguiente*          | La fecha y hora UTC en que se activó el monitor por última vez.                        |
-| `{{last_triggered_at_epoch}}`<br>*Consulta la sección siguiente*    | La fecha y hora UTC en que el monitor se activó por última vez en milisegundos epoch.  |
-| `{{triggered_duration_sec}}`         | El número de segundos que el monitor ha estado en estado activado.              |
+| `{{value}}`                          | The value that breached the alert for metric based query monitors.            |
+| `{{threshold}}`                      | The value of the alert threshold set in the monitor's alert conditions.       |
+| `{{warn_threshold}}`                 | The value of the warning threshold set in the monitor's alert conditions.     |
+| `{{alert_recovery_threshold}}`       | The value that recovered the monitor from its `ALERT` state.                  |
+| `{{warn_recovery_threshold}}`        | The value that recovered the monitor from its `WARN` state.                   |
+| `{{ok_threshold}}`                   | The value that recovered the Service Check monitor.                           |
+| `{{comparator}}`                     | The relational value set in the monitor's alert conditions.                   |
+| `{{first_triggered_at}}`<br>*See section below*         | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`<br>*See section below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`<br>*See section below*          | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`<br>*See section below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{triggered_duration_sec}}`         | El número de segundos que el monitor ha estado en un estado activado.              |
 
-### Variables activadas
+### Variables activadas {#triggered-variables}
 
-Las variables de plantilla de monitor `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}` y `{{last_triggered_at_epoch}}` reflejan los valores cuando un monitor cambia de estado, **NO** cuando se produce un nuevo evento de monitor. Los eventos de renotificación muestran la misma variable de plantilla si el estado del monitor no ha cambiado. Utiliza `{{triggered_duration_sec}}` para mostrar la duración en el momento del evento del monitor.
+ El `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}`, and `{{last_triggered_at_epoch}}` monitor template variables reflect the values when a monitor changes state, **NOT** when a new monitor event occurs. Renotification events show the same template variable if the monitor state has not changed. Use `{{triggered_duration_sec}}` para mostrar la duración en el momento del evento del monitor.
 
- `{{first_triggered_at}}` se establece cuando el grupo de monitor pasa de `OK` a un estado distinto de `OK` o cuando aparece un nuevo grupo en un estado distinto de `OK`. `{{last_triggered_at}}` se establece cuando el grupo de monitor pasa a un estado distinto de `OK` independientemente de su estado anterior (incluido `WARN` → `ALERT`, `ALERT` → `WARN`). Además, `{{last_triggered_at}}` se establece cuando un nuevo grupo aparece en un estado distinto a `OK`. La diferencia es que `{{last_triggered_at}}` es independiente de su estado anterior.
+ `{{first_triggered_at}}` is set when the monitor group goes from `OK` to a non-`OK` state or when a new group appears in a non-`OK` state. `{{last_triggered_at}}` gets set when the monitor group goes to a non-`OK` state independently from its previous state (including `WARN` → `ALERT`, `ALERT` → `WARN`). Additionally, `{{last_triggered_at}}` is set when a new group appears in a non-`OK` state. The difference is that `{{last_triggered_at}}` es independiente de su estado anterior.
 
- {{< img src="monitors/notifications/triggered_variables.png" alt="Muestra cuatro transiciones con marcas temporales A: 1419 OK a WARN, B: 1427 WARN a ALERT, C: 1445 ALERT a NO DATA, D: 1449 NO DATA a OK" style="width:90%;">}}
+ {{< img src="monitors/notifications/triggered_variables.png" alt="Mostrando cuatro transiciones con marcas de tiempo A: 1419 OK a WARN, B: 1427 WARN a ALERT, C: 1445 ALERT a NO DATA, D: 1449 NO DATA a OK" style="width:90%;">}}
 
-**Ejemplo**: Cuando el monitor pasa de `OK` → `WARN`, los valores de `{{first_triggered_at}}` y `{{last_triggered_at}}` tienen ambos la marca temporal A. La tabla siguiente muestra los valores hasta que el monitor se recupere.
+**Ejemplo**: Cuando el monitor transita de `OK` → `WARN`, los valores de `{{first_triggered_at}}` and `{{last_triggered_at}}` ambos tienen la marca de tiempo A. La tabla a continuación muestra los valores hasta que el monitor se recupere.
 
 | Transición         | first_triggered_at     | last_triggered_at      | triggered_duration_sec           |
 |------------------  |--------------------------------  |--------------------------------  |--------------------------------  |
@@ -515,43 +535,43 @@ Las variables de plantilla de monitor `{{first_triggered_at}}`, `{{first_trigger
 | `ALERT` → `NO DATA`| A                                | C                                | C - A                            |
 | `NO DATA` → `OK`   | A                                | C                                | D - A                            |
 
-### Evaluación
+### Evaluación {#evaluation}
 
-Las variables de plantilla que devuelven valores numéricos admiten operaciones y funciones, que permiten realizar operaciones matemáticas o cambios de formato en el valor. Para más detalles, consulta [Evaluación de variables de plantilla][7].
+Las variables de plantilla que devuelven valores numéricos admiten operaciones y funciones, lo que permite realizar operaciones matemáticas o cambios de formato en el valor. Para más detalles, consulte [Evaluación de Variables de Plantilla][7].
 
-### Hora local
+### Hora local {#local-time}
 
-Utiliza la función `local_time` para añadir otra fecha en tu notificación en la zona horaria de elección. Esta función transforma una fecha en su hora local: `{{local_time 'time_variable' 'timezone'}}`.
-Por ejemplo, para añadir la última hora activada del monitor en la zona horaria de Tokio en tu notificación, incluye lo siguiente en el mensaje de notificación:
+Utiliza la `local_time` función para agregar otra fecha en tu notificación en la zona horaria de tu elección. Esta función transforma una fecha en su hora local: `{{local_time 'time_variable' 'timezone'}}`.
+Por ejemplo, para agregar el último momento en que se activó el monitor en la zona horaria de Tokio en tu notificación, incluye lo siguiente en el mensaje de notificación:
 
 ```
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}
 ```
 
 El resultado se muestra en el formato ISO 8601: `yyyy-MM-dd HH:mm:ss±HH:mm`, por ejemplo `2021-05-31 23:43:27+09:00`.
-Consulta la [lista de zonas horarias de la base de datos tz][8], en particular la columna de nombre de la base de datos TZ, para ver la lista de valores de zonas horarias disponibles.
+Consulta la [lista de zonas horarias de la base de datos tz][8], particularmente la columna del nombre de la base de datos TZ, para ver la lista de valores de zona horaria disponibles.
 
-## Avanzado
+## Avanzado {#advanced}
 
-### Identificadores dinámicos
+### Manejadores dinámicos {#dynamic-handles}
 
-Utiliza [variables de etiqueta](#attribute-and-tag-variables) para crear dinámicamente identificadores de notificación y notificaciones de ruta al equipo o servicio correcto basado en el tipo de problema detectado por tu monitor.
+Utiliza [variables de etiqueta](#attribute-and-tag-variables) para construir dinámicamente manejadores de notificación y dirigir notificaciones al equipo o servicio adecuado según el tipo de problema detectado por tu monitor.
 
-**Ejemplo**: Si tu monitor consulta una métrica y la agrupa por una etiqueta de `service`, puedes hacer que tus notificaciones se enruten a diferentes canales de Slack según el servicio que falle:
-
-```text
-@slack-{{service.name}} Hay un problema en curso con {{service.name}}.
-```
-
-Si tu monitor empieza a fallar en el grupo `service:ad-server`, la notificación se envía al canal de Slack `#ad-server` con el siguiente contenido:
+**Ejemplo**: Si tu monitor consulta una métrica y la agrupa por una `service` etiqueta, puedes hacer que tus notificaciones se dirijan a diferentes canales de Slack dependiendo del servicio que falla:
 
 ```text
-@slack-ad-server Hay un problema en curso con ad-server.
+@slack-{{service.name}} There is an ongoing issue with {{service.name}}.
 ```
 
-Cuando se crean indicadores dinámicos con atributos que pueden no estar siempre presentes, pueden surgir problemas con la entrega de notificaciones. Si falta un atributo, la variable se muestra vacía en el mensaje de notificación, lo que da lugar a un indicador no válido.
+Si tu monitor comienza a fallar en el grupo `service:ad-server`, la notificación se envía al canal de Slack `#ad-server` con el siguiente contenido:
 
-Para evitar notificaciones perdidas al usar identificadores dinámicos con estas variables, asegúrate de agregar un identificador alternativo:
+```text
+@slack-ad-server There is an ongoing issue with ad-server.
+```
+
+Al construir manejadores dinámicos con atributos que pueden no estar siempre presentes, puedes encontrar problemas con la entrega de notificaciones. Si falta un atributo, la variable se renderiza vacía en el mensaje de notificación, lo que resulta en un manejador inválido.
+
+Para evitar notificaciones perdidas al usar manejadores dinámicos con estas variables, asegúrate de agregar un manejador de respaldo:
 
 ```text
 {{#is_exact_match "kube_namespace.owner" ""}}
@@ -561,101 +581,101 @@ Para evitar notificaciones perdidas al usar identificadores dinámicos con estas
 ```
 
 
-### Enlaces dinámicos
+### Enlaces dinámicos {#dynamic-links}
 
-Utiliza [variables de etiqueta](#attribute-and-tag-variables) para permitir la creación de URL dinámicas que enlacen a tu equipo con un recurso apropiado. Por ejemplo, puedes proporcionar enlaces a páginas dentro de Datadog como dashboards, mapa de host y monitores.
+Utiliza [variables de etiqueta](#attribute-and-tag-variables) para habilitar la construcción dinámica de URL que vincule a tu equipo a un recurso apropiado. Por ejemplo, puedes proporcionar enlaces a páginas dentro de Datadog, como tableros, el mapa de hosts y monitores.
 
 {{< tabs >}}
-{{% tab "Dashboards" %}}
+{{% tab "Tableros" %}}
 
-Utiliza la [variable de etiqueta](#attribute-and-tag-variables) `{{host.name}}` para proporcionar un enlace a un dashboard de sistema:
+Utiliza el `{{host.name}}` [variable de etiqueta](#attribute-and-tag-variables) para proporcionar un enlace a un tablero del sistema:
 
 ```text
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
-Utiliza la [variable de etiqueta](#attribute-and-tag-variables) `{{host.name}}` y `<INTEGRATION_NAME>` para proporcionar un enlace a un dashboard de integración:
+Utiliza el `{{host.name}}` [tag variable](#attribute-and-tag-variables) and an `<INTEGRATION_NAME>` para proporcionar un enlace a un tablero de integración:
 
 ```text
 https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
 ```
 
-Utiliza la [variable de plantilla] `{{last_triggered_at_epoch}}` así como `<DASHBOARD_ID>` y  `<DASHBOARD_NAME>`para vincular a dashboards con rangos temporales relativos desde el momento de la alerta:
+Utiliza el `{{last_triggered_at_epoch}}` [template variable](#template-variables) as well as a `<DASHBOARD_ID>` and `<DASHBOARD_NAME>` para enlazar a Dashboards con rangos de tiempo relativos desde el momento de la alerta:
 
 ```text
 https://app.datadoghq.com/dashboard/<DASHBOARD_ID>/<DASHBOARD_NAME>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
 {{% /tab %}}
-{{% tab "Mapa de host" %}}
+{{% tab "Mapa de servidores" %}}
 
-Utiliza una [variable de etiqueta](#attribute-and-tag-variables) como `{{service.name}}` para proporcionar un enlace al mapa de host:
+Utiliza una [variable de etiqueta](#attribute-and-tag-variables) como `{{service.name}}` para proporcionar un enlace al mapa de servidores:
 
 ```text
 https://app.datadoghq.com/infrastructure/map?filter=service:{{service.name}}
 ```
 
-El enlace del mapa de host se puede personalizar con parámetros adicionales. Los más comunes son:
+El enlace del mapa de servidores es personalizable con parámetros adicionales. Los más comunes son:
 
 | Parámetro | Definido con               | Determina                           |
 |-----------|----------------------------|--------------------------------------|
-| `fillby`  | `fillby=avg:<METRIC_NAME>` | El color de relleno de los hexágonos de host. |
-| `groupby` | `groupby=<TAG_KEY>`        | Los grupos para hexágonos de host.        |
-| `sizeby`  | `sizeby=avg:<METRIC_NAME>` | El tamaño de los hexágonos de host.       |
+| `fillby`  | `fillby=avg:<METRIC_NAME>` | El color de relleno de los hexágonos de los servidores. |
+| `groupby` | `groupby=<TAG_KEY>`        | Los grupos para los hexágonos de los servidores.        |
+| `sizeby`  | `sizeby=avg:<METRIC_NAME>` | El tamaño de los hexágonos de los servidores.       |
 
 {{% /tab %}}
-{{% tab "Monitores" %}}
+{{% tab "Monitors" %}}
 
-Utiliza la [variable de etiqueta](#attribute-and-tag-variables) `{{host.name}}` para proporcionar un enlace a todos los monitores relacionados con un host específico:
+Utiliza el `{{host.name}}` [variable de etiqueta](#attribute-and-tag-variables) para proporcionar un enlace a todos los monitors relacionados con un servidor específico:
 
 ```text
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 ```
 
-El enlace de monitores se puede personalizar con parámetros adicionales. Los más comunes son:
+El enlace del seguimiento es personalizable con parámetros adicionales. Los más comunes son:
 
 | Parámetro | Ejemplo        | Muestra                                                                        |
 |-----------|----------------|---------------------------------------------------------------------------------|
-| `status`  | `status:Alert` | Monitores en estado de alerta (estados adicionales: `WARN`, `NO DATA` y `OK`)   |
-| `muted`   | `muted: true`  | Monitores silenciados (utiliza `false` para monitores no silenciados)                             |
-| `type`    | `type:log`     | Monitores de logs (consulta otros [tipos de monitores][1])                                     |
+| `status`  | `status:Alert` | Seguimientos en estado de alerta (estados adicionales: `WARN`, `NO DATA` y `OK`)   |
+| `muted`   | `muted: true`  | Seguimientos silenciados (usa `false` para seguimientos no silenciados)                             |
+| `type`    | `type:log`     | Monitores de registros (ver otros [tipos de seguimientos][1])                                     |
 
 
 
 [1]: /es/monitors/types
 {{% /tab %}}
-{{% tab "Logs" %}}
+{{% tab "Registros" %}}
 
-Utiliza la [variable de plantilla] `{{last_triggered_at_epoch}}` (#template-variables) para proporcionar un enlace a todos los logs que estén ocurriendo en el momento de la alerta.
+Utiliza el `{{last_triggered_at_epoch}}` [variable de plantilla](#template-variables) para proporcionar un enlace a todos los registros que ocurren en el momento de la alerta.
 
 ```text
 https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
-El enlace de logs se puede personalizar con parámetros adicionales. Los más comunes son:
+El enlace de registros es personalizable con parámetros adicionales. Los más comunes son:
 
 | Parámetro | Definido con               | Determina                             |
 |-----------|----------------------------|----------------------------------------|
-| `service` | `service=<SERVICE_NAME>`   | Filtro en logs de un servicio específico.  |
-| `host`    | `host=<HOST_NAME>`         | Filtro en logs de un host específico      |
-| `status`  | `status=<STATUS>`          | Estado de logs: Error, Warn, Info, etc. |
+| `service` | `service=<SERVICE_NAME>`   | Filtrar en registros de un servicio específico.  |
+| `host`    | `host=<HOST_NAME>`         | Filtrar en registros de un servidor específico      |
+| `status`  | `status=<STATUS>`          | Estado de los registros: Error, Advertencia, Información, etc. |
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Comentarios
+### Comentarios {#comments}
 
-Para incluir un comentario en el mensaje de monitor, utiliza la sintaxis:
+Para incluir un comentario en el mensaje del monitor, utiliza la sintaxis:
 
 ```text
 {{!-- this is a comment --}}
 {{!-- this is a comment }}
 ```
 
-### Formato sin procesar
+### Formato en bruto {#raw-format}
 
-Si tu mensaje de alerta necesita enviar llaves dobles, como `{{ <TEXT> }}`, utiliza el formato `{{{{raw}}}}`. Por ejemplo, el siguiente:
+Si tu mensaje de alerta necesita enviar llaves dobles, como `{{ <TEXT> }}`, use `{{{{raw}}}}` formato. Por ejemplo, lo siguiente:
 
 ```text
 {{{{raw}}}}
@@ -669,7 +689,7 @@ Salidas:
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
-Las ayudas `^|#` utilizadas en las [variables condicionales](#conditional-variables) no pueden utilizarse con el formato `{{{{raw}}}}` y deben eliminarse. Por ejemplo, para mostrar texto sin formato con la variable condicional `{{is_match}}`, utiliza la siguiente plantilla:
+Los `^|#` ayudantes utilizados en [variables condicionales](#conditional-variables) no pueden ser utilizados con `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` variable condicional utiliza la siguiente plantilla:
 
 ```text
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
@@ -677,23 +697,23 @@ Las ayudas `^|#` utilizadas en las [variables condicionales](#conditional-variab
 {{{{/is_match}}}}
 ```
 
-Si `host.name` coincide con `<HOST_NAME>`, la plantilla muestra:
+Si `host.name` coincide con `<HOST_NAME>`, la plantilla produce:
 
 ```text
 {{ .matched }} the host name
 ```
 
-### Codificación URL
+### Codificar URL {#url-encode}
 
-Si tu mensaje de alerta incluye información que debe codificarse en una URL (por ejemplo, para redireccionamientos), utiliza la sintaxis `{{ urlencode "<variable>"}}`.
+Si tu mensaje de alerta incluye información que necesita ser codificada en una URL (por ejemplo, para redirecciones), utiliza el `{{ urlencode "<variable>"}}` sintaxis.
 
-**Ejemplo**: Si tu mensaje de monitor incluye una URL al Software Catalog filtrada a un servicio específico, utiliza la [variable de etiqueta](#attribute-and-tag-variables) `service` y añade la sintaxis `{{ urlencode "<variable>"}}` a la URL:
+**Ejemplo**: Si el mensaje de tu monitor incluye una URL al Catálogo de Software filtrado a un servicio específico, utiliza la `service` [variable de etiqueta](#attribute-and-tag-variables) y agrega el `{{ urlencode "<variable>"}}` sintaxis a la URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -68,7 +68,7 @@ buildscript {
 
 ## Initialize the SDK
 
-The Datadog OpenFeature provider for React Native requires the core Datadog SDK to be initialized first, followed by enabling the Feature Flags feature.
+The Datadog OpenFeature provider for React Native requires the core Datadog SDK to be initialized first, followed by enabling the Feature Flags feature. To create a client token, see [Client tokens][2].
 
 ### Option 1: Using DatadogProvider component
 
@@ -484,3 +484,4 @@ If you see an error about Feature Flags not being initialized, verify the initia
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens

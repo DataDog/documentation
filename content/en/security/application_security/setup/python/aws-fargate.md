@@ -23,7 +23,7 @@ further_reading:
 - Python application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Python tracing library (see [version requirements][1])
+- Datadog Python SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -61,7 +61,7 @@ Install the Datadog Agent in your Fargate task definition:
 {{% appsec-remote-config-activation %}}
 
 ### Manually enabling App and API Protection monitoring
-Install the Datadog Python tracing library in your application environment:
+Install the Datadog Python SDK in your application environment:
 
 ```dockerfile
 RUN pip install ddtrace

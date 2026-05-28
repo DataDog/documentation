@@ -149,7 +149,7 @@ Lists available metrics, with options for filtering and metadata.
 ### `search_datadog_services`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Software Catalog with details and team information.
+Lists services in Datadog's Catalog with details and team information.
 
 - Show me all services in our microservices architecture.
 - List services owned by the platform team.
@@ -471,12 +471,29 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Code Execution
+
+A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
+
+<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
+
+### `execute_code`
+*Toolset: **code-exec***\
+*Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
+Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+
+- For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
+- Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
+- For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
 ## Dashboards
 
 Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
 
 ### `get_datadog_dashboard`
-*Toolset: **dashboards***\
+*Toolset: **core**, **dashboards***\
 *Permissions Required: `Dashboards Read` and `User Access Read`*\
 Retrieves a Datadog [dashboard][46] by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
 
@@ -485,7 +502,7 @@ Retrieves a Datadog [dashboard][46] by ID, returning its title, description, tag
 - Retrieve the template variables configured on this dashboard.
 
 ### `upsert_datadog_dashboard`
-*Toolset: **dashboards***\
+*Toolset: **core**, **dashboards***\
 *Permissions Required: `Dashboards Read` and `Dashboards Write`*\
 Creates or updates a Datadog [dashboard][46]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one. Call `get_widget_reference` for widget schemas before building widgets.
 
@@ -532,6 +549,87 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 Tools for interacting with [Database Monitoring][26].
 
+### `find_datadog_database_instances`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Discovers and ranks database instances for DBM investigation. Call this before other DBM tools that require a `database_instance` parameter. Accepts an APM trace or span ID, tags, or both to find matching instances, then assesses and ranks their health.
+
+- Find database instances correlated with trace `abc123` from an hour ago.
+- What PostgreSQL instances match `cluster_name:payments-prod`?
+- Rank database instances for service `checkout-api` by health.
+
+### `get_datadog_database_calling_services`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Identifies upstream APM services and resources that call database queries. Correlates database activity with application traces for root cause analysis across the APM-database boundary.
+
+- Which services are calling the slowest queries on `db-prod-1`?
+- Find the primary caller of query signature `abc123def`.
+- Show me APM resources driving load on the payments database.
+
+### `get_datadog_database_explain_plans`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves PostgreSQL explain plans for a query signature within a time frame. Returns simplified plan structures with operator trees, index usage, and estimated costs, sorted by cost.
+
+- Get explain plans for query signature `abc123def` on `db-prod-1`.
+- Show me the most expensive execution plans for this slow query.
+- What plan variations does query signature `xyz789` have over the past day?
+
+### `get_datadog_database_health_signals`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Runs health checks to surface potential PostgreSQL issues such as CPU saturation, restarts, query latency, and blocking. Compares a regression time frame against a baseline period.
+
+- Run health checks on `db-prod-1` for the last hour versus the previous hour.
+- Check database health around the incident time frame.
+- What signals explain the regression on the payments database?
+
+### `get_datadog_database_query_performance`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Analyzes a specific PostgreSQL query's performance. Returns throughput, average latency, execution time, rows per execution, cache hit ratio, I/O stats, connection activity, wait events, and transaction duration, with both overall statistics and time-bucketed analysis.
+
+- Analyze performance for query signature `abc123def` over the last hour.
+- Why is this query slow on the production PostgreSQL instance?
+- Show wait events and cache hit ratio for query signature `xyz789`.
+
+### `get_datadog_database_query_statement`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves the SQL statement text for a given query signature. Use this to map signature hashes back to the concrete SQL for investigation and reporting.
+
+- Get the SQL for query signature `abc123def`.
+- Show me the statement behind this query hash on `db-prod-1`.
+- What query does signature `xyz789` correspond to?
+
+### `get_datadog_database_recommendations`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves live database recommendations for a database, query, table, host, or index. Returns the matching recommendations with status, severity, and a normalized scope block highlighting affected instances, query signatures, tables, indexes, services, plans, and infrastructure identifiers.
+
+- Show open database recommendations for `db-prod-1`.
+- List missing index recommendations on the payments database.
+- Get high-severity recommendations for query signature `abc123def`.
+
+### `get_datadog_database_schemas`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Fetches schema definitions (columns, indexes, foreign keys, partitions) for one or more database objects. Accepts table names with optional schema, database, and instance qualifiers.
+
+- Show me the schema for the `orders` table.
+- Get columns and indexes for `public.users` on `db-prod-1`.
+- Fetch foreign keys for the `payments` table.
+
+### `optimize_datadog_database_query`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Analyzes a PostgreSQL query for optimization opportunities using deterministic rules. Returns query rewrites, anti-pattern detection (`SELECT *`, `OFFSET` without `ORDER BY`, `ORDER BY` without `LIMIT`), missing index suggestions, and idle-in-transaction impact analysis. Accepts either SQL text or a query signature.
+
+- Optimize query signature `abc123def` on the payments database.
+- Check this SQL for missing indexes and anti-patterns.
+- Suggest rewrites for the slowest query on `db-prod-1`.
+
 ### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
@@ -553,8 +651,6 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 ## DDSQL
 
 Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
-
-<div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
 
 ### `ddsql_get_spec`
 *Toolset: **ddsql***\
@@ -624,6 +720,15 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `update_datadog_error_tracking_issue`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Updates the state or assignee of an Error Tracking Issue in Datadog.
+
+- Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
+- Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
+- Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -688,6 +793,38 @@ Checks if a feature flag is implemented in code.
 Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
+
+## Kubernetes
+
+Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+
+### `search_datadog_k8s_resources`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Teams Read`*\
+Searches for [Kubernetes][55] resources across all clusters. Use this tool instead of `kubectl` to determine the state of Kubernetes resources such as deployments, pods, nodes, etc. This tool does not require local cluster access, works across all clusters, and returns enriched data with tags. You can include specific tag keys on each result, and include parent resource names to investigate relationships between resources (for example, the deployment a pod belongs to).
+
+- Show me all pods in the `production` namespace with `CrashLoopBackOff` status.
+- Find deployments with in-progress rollouts in the `general2` cluster.
+- List all nodes in my cluster sorted by CPU usage.
+- Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `describe_datadog_k8s_resource`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read`*\
+Gets detailed information about a specific [Kubernetes][55] resource, including resource-specific details such as CPU and memory requests and limits, and optionally tags, labels, annotations, manifest history, parent resources, and a deep link to the [Kubernetes Explorer][55]. Use this tool instead of `kubectl describe`. Identify a resource by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). For the full raw manifest, use `get_datadog_k8s_manifest`.
+
+- Describe pod `my-app` in cluster `prod`, namespace `default`.
+- Get details for deployment `api-server` in namespace `default`, cluster `staging`.
+- Show me the tags and annotations for this Kubernetes resource.
+
+### `get_datadog_k8s_manifest`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read`*\
+Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this tool instead of `kubectl get -o yaml`. Supports extracting specific subtrees with a `kubectl` JSONPath expression and a concise mode that omits `status` and `managedFields` to reduce response size.
+
+- Get the manifest for pod `my-app` in cluster `prod`, namespace `default`.
+- Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
+- Get the container images from the manifest of pod `my-app`.
 
 ## Networks
 
@@ -768,9 +905,11 @@ Guides you through onboarding Test Optimization in Datadog.
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\
-Guides you through onboarding serverless applications to Datadog.
+Guides you through onboarding serverless applications to Datadog, including AWS Lambda functions and GCP Cloud Run and Cloud Run functions (Gen 2).
 
 - Help me monitor my AWS Lambda functions with Datadog.
+- Help me monitor my GCP Cloud Run services with Datadog.
+- Help me monitor my GCP Cloud Run functions with Datadog.
 
 ### `source_map_uploads`
 *Toolset: **onboarding***\
@@ -811,6 +950,52 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
+## RUM
+
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
+
+<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `search_rum_applications`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Lists your RUM applications and resolves the `application_id` to use for subsequent RUM tool calls.
+
+- Find the RUM application named "checkout-web" and return its application ID.
+- List all my RUM applications.
+
+### `get_rum_summary`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
+
+- Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
+- How did Core Web Vitals on my main RUM app change week-over-week?
+
+### `get_rum_insight`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Returns aggregated insights for RUM Views: waterfall, long tasks, vital distributions, and tag analysis.
+
+- For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
+- Break down INP distribution by device type for the home page.
+
+### `search_rum_metrics`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Explores RUM metrics for an application, including out-of-the-box metrics and custom metrics.
+
+- List the custom RUM metrics defined on the "checkout-web" application.
+- Show me available RUM metrics related to page load time on my main app.
+
+### `search_rum_retention_filters`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Read`*\
+Lists retention filters configured on a RUM application. Read-only; available for [RUM without Limits][59] customers.
+
+- List the retention filters configured on the "checkout-web" application.
+- What retention filters do I have on my main RUM app?
+
 ## Security
 
 Tools for code security scanning and searching [security signals][53] and [security findings][54].
@@ -830,6 +1015,23 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 - Show me security signals from the last 24 hours.
 - Find high-severity security signals related to my production environment.
 - List Cloud SIEM signals triggered by suspicious login attempts.
+
+### `analyze_datadog_security_signals`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read` and `Timeseries`*\
+Analyzes security signals using SQL queries for aggregations, grouping, and trend analysis. Use this for counts, top-N, and breakdowns over time. To list or retrieve specific signals, use `search_datadog_security_signals` or `get_datadog_security_signal`.
+
+- Show me the top 10 SIEM rules by signal count over the last 7 days.
+- Count high and critical security signals grouped by severity.
+- How many App & API Protection signals fired per service yesterday?
+
+### `get_datadog_security_signal`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations.
+
+- Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
+- Show me the rule, triage state, and linked cases for this signal.
 
 ### `security_findings_schema`
 *Toolset: **security***\
@@ -889,6 +1091,15 @@ Searches Datadog [Test Optimization][24] for flaky tests and returns triage deta
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
 - List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
 
+### `update_datadog_flaky_test_states`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Write`*\
+Sets the state of one or more flaky tests to `quarantined` (suppress failures), `disabled` (skip test), `fixed` (mark resolved), or `active` (restore). This is a write operation that requires explicit user approval. All state changes are reversible.
+
+- Quarantine all active flaky tests in the `checkout-service` repository.
+- Mark the flaky test `AuthServiceTest::testLogin` as fixed.
+- Disable flaky tests owned by `@team-payments` with a failure rate above 50%.
+
 ### `aggregate_datadog_test_events`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
@@ -924,6 +1135,40 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
 
+### `get_datadog_test_optimization_settings`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
+Retrieves the Test Optimization features that are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
+
+- Which test optimization features are enabled for the `auth-service`?
+- Show me the Test Optimization settings for my checkout service.
+
+### `get_datadog_flaky_tests_management_policies`
+*Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
+Retrieves the Flaky Tests Management policies configured for a repository, including auto-quarantine windows, branch rules, failure rate thresholds, disable policies, and retry settings.
+
+- Show me the flaky test management policies for `github.com/my-org/my-repo`.
+- What auto-quarantine rules are configured for the checkout service repository?
+
+### `search_dora_deployments`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+
+- Show me deployments for the `checkout` service in the last 7 days.
+- Get details for DORA deployment `abc123`.
+- Find failed deployments in the production environment this month.
+
+### `aggregate_dora_deployments`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
+Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+
+- What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
+- Show me the change lead time trend for the `payments` service over the last quarter.
+- Get all four DORA metrics for the `auth-service` team.
+
 ## Synthetics
 
 Tools for interacting with Datadog [Synthetic tests][47].
@@ -931,7 +1176,7 @@ Tools for interacting with Datadog [Synthetic tests][47].
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Read`*\
-Searches Datadog Synthetic tests.
+Searches Datadog Synthetic HTTP API tests.
 
 - Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
 - There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
@@ -954,6 +1199,75 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+
+## Widgets
+
+Tools for [dashboard][46] and [notebook][57] widget visualization, validation, and type conversion.
+
+### `get_widget`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read`*\
+Retrieves and visualizes Datadog metrics, traces, logs, and other data as interactive charts. Supports three modes: dashboard lookup, direct definition, or URL resolution.
+
+- Show the CPU usage timeseries for `service:api` over the last hour.
+- Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
+- Visualize the data from this Datadog share link.
+
+### `get_widget_reference_compressed`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Returns compressed TypeScript schemas and building instructions for widget types. Call before generating widget JSON. When building group widgets, include both `group` and any intended child widget types in one call for deduplication.
+
+- Get the compressed schema for a timeseries widget.
+- Show the building instructions for top list and query table widgets.
+
+### `search_datadog_widgets`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Searches and retrieves information about widgets across Datadog dashboards, including their IDs, titles, and underlying queries.
+
+- Find all timeseries widgets that query the `system.cpu.user` metric.
+- Search for widgets related to error rates across all dashboards.
+
+### `swap_widget_type`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Converts a widget definition from one visualization type to another while preserving queries. Supports formula-request-based widget types: timeseries, query_value, top list, query_table, treemap, sunburst, distribution, heatmap, geomap, and list_stream.
+
+- Convert this timeseries widget to a top list.
+- Change the query table widget to a treemap visualization.
+
+### `validate_notebook_cell`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries`*\
+Validates notebook cell widget definitions, including SQL correctness for analysis_sql cells. When validating an analysis_sql cell, include its upstream data source widgets so the endpoint can check SQL expressions against their schemas.
+
+- Validate these notebook cell definitions before saving.
+- Check if the analysis SQL cell references valid columns from the upstream widget.
+
+### `validate_notebook_cells`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries`*\
+Validates multiple notebook cell widget definitions in a single call, including SQL correctness for analysis_sql cells.
+
+- Validate all the cells in this notebook before publishing.
+- Check these three analysis cells for SQL errors.
+
+### `verify_widget_data`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read`*\
+Verifies whether widget definitions return data for the last hour. Call after adding widgets to a dashboard to confirm queries return real data. Returns one result per widget indicating whether data was found, with a reason if not.
+
+- Check if these widget definitions return data.
+- Verify the widgets added to the dashboard are showing real metrics.
+
+### `visualize_tabular_data`
+*Toolset: **widgets***\
+*Permissions Required: No specific permissions required.*\
+Renders tabular data as an interactive visualization (sunburst, treemap, or top list). Use after aggregating data from queries to visualize hierarchical relationships or rankings.
+
+- Visualize this grouped metric data as a sunburst chart.
+- Show this aggregated data as a treemap breakdown.
 
 ## Workflows
 
@@ -1024,3 +1338,8 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [51]: /feature_flags/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
+[55]: /containers/monitoring/kubernetes_explorer/
+[56]: /account_management/rbac/permissions/
+[57]: /notebooks/
+[58]: /real_user_monitoring/
+[59]: /real_user_monitoring/rum_without_limits/

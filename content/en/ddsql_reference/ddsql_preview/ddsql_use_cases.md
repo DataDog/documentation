@@ -42,7 +42,7 @@ WHERE
 ORDER BY lib.newer_versions_number DESC
 {{< /code-block >}}
 
-### List services running an old version of the tracer
+### List services running an old version of the SDK
 
 {{< code-block lang="sql" disable_copy="false">}}
 SELECT *

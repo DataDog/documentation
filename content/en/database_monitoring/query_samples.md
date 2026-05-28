@@ -24,12 +24,12 @@ The Samples page shows queries on all supported database products together (unli
 
 Enter tags into the Search field to filter the list of query samples, or use the facets listed on the left side. The facets include:
 
-- **Core**: Services, database product sources (Postgres or MySQL), host, and duration.
-- **Network**: Client IP address and ports for applications or proxies that connect to the database.
-- **Database**: Database names, an explain plan cost slider, indexes, a row count slider for the number of rows returned or affected by queries, query statements, and users.
-- **Postgres and MySQL specific facets**
+- {{< ui >}}Core{{< /ui >}}: Services, database product sources (Postgres or MySQL), host, and duration.
+- {{< ui >}}Network{{< /ui >}}: Client IP address and ports for applications or proxies that connect to the database.
+- {{< ui >}}Database{{< /ui >}}: Database names, an explain plan cost slider, indexes, a row count slider for the number of rows returned or affected by queries, query statements, and users.
+- {{< ui >}}Postgres and MySQL specific facets{{< /ui >}}
 
-Click **Options** to add columns to the table. Click on column headers to sort by a particular metric.
+Click {{< ui >}}Options{{< /ui >}} to add columns to the table. Click on column headers to sort by a particular metric.
 
 ### Explain plan cost
 
@@ -51,7 +51,7 @@ Filter or sort to find queries that take the longest to run over the time frame 
 
 ### Sample details
 
-Click on a query in the table to open its Sample Details page. Use the Source, Host, and Client IP tiles at the top to filter the Sample Queries page by the values for this sample, or to navigate to other Datadog information such as the host's dashboard or Network traffic metrics for the client IP.
+Click on a query in the table to open its Sample Details page. Use the {{< ui >}}Source{{< /ui >}}, {{< ui >}}Host{{< /ui >}}, and {{< ui >}}Client IP{{< /ui >}} tiles at the top to filter the Sample Queries page by the values for this sample, or to navigate to other Datadog information such as the host's dashboard or Network traffic metrics for the client IP.
 
 {{< img src="database_monitoring/dbm_sd_actions.png" alt="Sample details action tiles" style="width:100%;">}}
 
@@ -69,7 +69,7 @@ The explain plan also shows measures for each node (step) in the plan: startup c
 
 ## Explore other visualizations
 
-Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the **Visualize as** buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a data center, select **Timeseries**, group by `Statement` and graph the average duration:
+Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the {{< ui >}}Visualize as{{< /ui >}} buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a data center, select {{< ui >}}Timeseries{{< /ui >}}, group by `Statement` and graph the average duration:
 
 {{< img src="database_monitoring/dbm_qs_timeseries_viz.png" alt="Finding slowest queries" style="width:100%;">}}
 
@@ -79,11 +79,11 @@ Use table visualizations to produce report-like summaries to share with others. 
 
 {{< img src="database_monitoring/dbm_qs_p75_duration_table.png" alt="Table of p75 duration queries" style="width:100%;">}}
 
-Use the **Export** button to share the data with your engineering team to start a discussion about where to focus improvement efforts.
+Use the {{< ui >}}Export{{< /ui >}} button to share the data with your engineering team to start a discussion about where to focus improvement efforts.
 
 ## Database Monitoring dashboards
 
-For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at to top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
+For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the {{< ui >}}Dashboards{{< /ui >}} link at to top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
 
 ## Further Reading
 

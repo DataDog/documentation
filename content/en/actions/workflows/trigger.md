@@ -156,22 +156,22 @@ You can see the workflow run status in the {{< ui >}}Workflows{{< /ui >}} sectio
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
-## Software Catalog triggers
+## Catalog triggers
 
 To run a workflow from a software catalog entity, you must first add a software catalog trigger to your workflow:
 
 1. Add a software catalog trigger to your workflow:
-   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Software Catalog{{< /ui >}}.
-   - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Software Catalog{{< /ui >}}.
+   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}}.
+   - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Catalog{{< /ui >}}.
 2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
 3. Save your Workflow.
 4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-Run the workflow from your Software Catalog entity:
+Run the workflow from your Catalog entity:
 
-1. On the [Software Catalog page][14], choose an entity from the list.
+1. On the [Catalog page][14], choose an entity from the list.
 1. Click {{< ui >}}Run Workflow{{< /ui >}} at the top of the side panel.
-1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with Software Catalog triggers appear in the list.
+1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with Catalog triggers appear in the list.
 1. If your workflow requires input parameters, enter the values as required.
 1. Click {{< ui >}}Run{{< /ui >}} to run the workflow.
 
@@ -200,7 +200,9 @@ You can trigger a workflow from GitHub using the following steps.
 
 <div class="alert alert-info"><strong>Quick start</strong>: Click to create a <a href="https://app.datadoghq.com/workflow/create?source=slack">workflow</a> with a Slack trigger.</div>
 
-You can trigger a workflow from Slack using the following steps.
+You can trigger a workflow from Slack manually with the `/datadog workflow` command, or automatically when an emoji reaction is added to a message.
+
+### Manual Slack trigger
 
 1. Add a Slack trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}.
@@ -209,6 +211,18 @@ You can trigger a workflow from Slack using the following steps.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
+
+### Emoji reaction Slack trigger
+
+You can configure a workflow to trigger automatically when a user adds a specific emoji reaction to a message in Slack.
+
+1. Add a Slack trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Slack**.
+   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Slack**.
+1. In the **Configure** tab, select the Slack workspace where you want to listen for reactions.
+1. If the workspace requires the `emoji:read` permission, click **Enable Permission** to reinstall the Slack app with the necessary scope.
+1. Select one or more emoji reactions that trigger the workflow.
+1. Click **Save**, then **Publish**.
 
 ## API triggers
 

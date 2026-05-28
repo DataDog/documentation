@@ -30,7 +30,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
 
 Supported Agent versions
 : 7.36.1+
@@ -47,7 +47,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable **Resource Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
+Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][3].
 
 ## Configure Postgres settings
 

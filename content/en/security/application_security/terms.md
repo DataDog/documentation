@@ -21,7 +21,7 @@ attack attempt
 : Which security rule was triggered by the trace.
 
 Datadog library
-: _also_ tracer, tracing library
+: _also_ tracer, SDK
 : A programming language-specific library embedded in web applications. Datadog App and API Protection uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
 
 detection rule

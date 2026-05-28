@@ -7,15 +7,17 @@ This page describes how to instrument your applications for [Real User Monitorin
 
 ## Setup
 
-### Step 1 - Specify application details in the UI
+{% stepper %}
 
+{% step title="Specify application details in the UI" %}
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][3].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 
 To secure your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][6].
+{% /step %}
 
-### Step 2 - Instrument your application
+{% step title="Instrument your application" %}
 
 First, make sure you have your environment set up properly for each platform.
 
@@ -94,8 +96,9 @@ To secure data, you must use a client token. You cannot use Datadog API keys to 
 
 * If you are using RUM, set up a **Client Token** and **Application ID**.
 * If you are only using Logs, initialize the library with a client token.
+{% /step %}
 
-### Step 3 - Initialize the library
+{% step title="Initialize the library" %}
 
 You can initialize the library using one of two methods in your `main.dart` file.
 
@@ -171,6 +174,9 @@ To manage user data collection settings for client IP or geolocation data:
 3. Click **User Data Collection**, then toggle the settings to enable/disable **Collect geolocation data** and **Collect client IP data**.
 
 For more information about the data collected, see [Flutter Data Collected][4].
+{% /step %}
+
+{% /stepper %}
 
 ## Automatically track views
 

@@ -445,7 +445,7 @@ For more information, see [dSYMs commands][11].
 ## Limitations
 
 - dSYM files are limited in size to **2 GB** each.
-- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS and tvOS devices.
+- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS, iPadOS, tvOS, watchOS, and visionOS devices.
 
 ## Test your implementation
 
@@ -481,7 +481,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
-[14]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/#telemetry
+[14]: /real_user_monitoring/application_monitoring/mobile_vitals?tab=ios#telemetry
 [15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
 [16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [17]: /real_user_monitoring/explorer/search/#facets

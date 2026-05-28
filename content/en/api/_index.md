@@ -25,4 +25,10 @@ cascade:
     lang: en
   aliases:
     - /api/screenboards/
+- _target:
+    path: /api/latest/scorecards
+    lang: en
+  aliases:
+    - /api/latest/service-scorecards
+
 ---

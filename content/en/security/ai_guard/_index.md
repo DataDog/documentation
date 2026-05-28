@@ -4,6 +4,9 @@ further_reading:
 - link: /security/ai_guard/onboarding/
   tag: Documentation
   text: Get Started with AI Guard
+- link: /security/ai_guard/signals/
+  tag: Documentation
+  text: AI Guard Security Signals
 - link: https://www.datadoghq.com/blog/ai-guard/
   tag: Blog
   text: Protect agentic AI applications with Datadog AI Guard
@@ -12,7 +15,7 @@ further_reading:
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-security/"

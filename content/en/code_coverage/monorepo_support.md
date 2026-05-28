@@ -7,7 +7,7 @@ further_reading:
     text: "Set up Code Coverage"
   - link: "https://www.datadoghq.com/product/software-catalog/"
     tag: "Product page"
-    text: "Datadog Software Catalog"
+    text: "Datadog Catalog"
   - link: "https://www.datadoghq.com/blog/datadog-code-coverage"
     tag: "Blog"
     text: "Identify untested code across every level of your codebase"
@@ -29,25 +29,25 @@ Code Coverage provides two ways to split coverage data in a monorepo:
 
 ### By service
 
-1. **[Software Catalog][1] integration** (recommended): Automatically use service definitions from Datadog Software Catalog
+1. **[Catalog][1] integration** (recommended): Automatically use service definitions from Datadog Catalog
 2. **Manual configuration**: Define services using a YAML configuration file in your repository
 
 ### By code owner
 
 Automatically split coverage by code owner teams based on the `CODEOWNERS` file in your repository.
 
-These methods can be used together. Service splitting and code owner splitting work independently—you can have coverage split by both services and code owners simultaneously. For service definitions, Software Catalog integration takes priority over manual configuration. Coverage is calculated for up to 200 services and code owners per coverage report, with a total limit of 2000 services across your organization.
+These methods can be used together. Service splitting and code owner splitting work independently—you can have coverage split by both services and code owners simultaneously. For service definitions, Catalog integration takes priority over manual configuration. Coverage is calculated for up to 200 services and code owners per coverage report, with a total limit of 2000 services across your organization.
 
-## Software Catalog integration
+## Catalog integration
 
-If you use [Software Catalog][1], Code Coverage automatically uses the `codeLocations` attribute from your service definitions to calculate coverage for each service.
+If you use [Catalog][1], Code Coverage automatically uses the `codeLocations` attribute from your service definitions to calculate coverage for each service.
 
-<div class="alert alert-info">Using Software Catalog for service definitions is the recommended approach, as code locations configured in Software Catalog can be used by multiple Datadog products, including Code Coverage, Error Tracking, and Code Security. Use manual configuration only when Software Catalog integration is not available.</div>
+<div class="alert alert-info">Using Catalog for service definitions is the recommended approach, as code locations configured in Catalog can be used by multiple Datadog products, including Code Coverage, Error Tracking, and Code Security. Use manual configuration only when Catalog integration is not available.</div>
 
-### How Software Catalog integration works
+### How Catalog integration works
 
-When you define services in Software Catalog with `codeLocations` pointing to your repository, Code Coverage automatically:
-1. Reads the service definitions from Software Catalog
+When you define services in Catalog with `codeLocations` pointing to your repository, Code Coverage automatically:
+1. Reads the service definitions from Catalog
 2. Calculates coverage for each service based on the specified paths
 3. Displays coverage data in the Code Coverage UI
 
@@ -55,7 +55,7 @@ No additional configuration is needed in your repository.
 
 ### Service definition example
 
-<div class="alert alert-info">You can add or update service definitions by adding YAML files to your repository, using the Datadog UI, enabling automatic service discovery, or importing from a third-party integration. See the <a href="/internal_developer_portal/software_catalog/set_up/">Software Catalog documentation</a> for more details.</div>
+<div class="alert alert-info">You can add or update service definitions by adding YAML files to your repository, using the Datadog UI, enabling automatic service discovery, or importing from a third-party integration. See the <a href="/internal_developer_portal/catalog/set_up/">Catalog documentation</a> for more details.</div>
 
 {{< code-block lang="yaml" filename="service.datadog.yml" >}}
 apiVersion: v3
@@ -94,7 +94,7 @@ This happens automatically without requiring any configuration file.
 
 ## Manual service configuration
 
-<div class="alert alert-info">Manual service configuration should only be used when you cannot use Software Catalog integration. Software Catalog is the preferred method because code locations defined there can be utilized by multiple Datadog products.</div>
+<div class="alert alert-info">Manual service configuration should only be used when you cannot use Catalog integration. Catalog is the preferred method because code locations defined there can be utilized by multiple Datadog products.</div>
 
 To manually define services, add a `services` section to the `code-coverage.datadog.yml` file in your repository. See [Configuration][6] for file format details, configuration options, pattern syntax, and examples.
 
@@ -102,7 +102,7 @@ To manually define services, add a `services` section to the `code-coverage.data
 
 After services or code owners are configured, coverage data becomes available filtered by service or code owner for any coverage reports uploaded after the configuration changes.
 
-On the Branch overview, Pull Request details, and Commit details pages in [Code Coverage UI][5], use the **Code Owner** or **Service** selector dropdown at the top to:
+On the Branch overview, Pull Request details, and Commit details pages in [Code Coverage UI][5], use the {{< ui >}}Code Owner{{< /ui >}} or {{< ui >}}Service{{< /ui >}} selector dropdown at the top to:
 - View coverage metrics or detailed coverage data filtered to a specific service or code owner
 - Identify which files belong to each service or are owned by specific teams
 - Compare coverage across different services or code owners
@@ -118,7 +118,7 @@ You can configure [PR Gates][7] to enforce coverage thresholds for specific serv
 
 1. Navigate to [PR Gates rule creation][3].
 2. Configure the coverage threshold (total or patch coverage).
-3. In the **per service** or **per code owner** field, select one or more services or code owner teams the gate should apply to.
+3. In the {{< ui >}}per service{{< /ui >}} or {{< ui >}}per code owner{{< /ui >}} field, select one or more services or code owner teams the gate should apply to.
 4. Save the rule.
 
 {{< img src="/code_coverage/pr_gate_codeowners.png" text="Code Coverage PR gate creation page in Datadog" style="width:100%" >}}
@@ -155,27 +155,27 @@ Gates defined in the YAML file and in the Datadog UI are both evaluated when a p
 
 **Enforce high coverage for backend services:**
 
-- Condition type: `Overall Code Coverage`
+- Condition type: {{< ui >}}Overall Code Coverage{{< /ui >}}
 - Threshold: `80%`
-- Scope: `Per service`
+- Scope: {{< ui >}}Per service{{< /ui >}}
 - Services: `backend-*`
 
 {{< img src="/code_coverage/pr_gate_backend_services.png" text="Code Coverage PR gate configured for backend services" style="width:100%" >}}
 
 **Require all new code in frontend to be tested:**
 
-- Condition type: `Patch Code Coverage`
+- Condition type: {{< ui >}}Patch Code Coverage{{< /ui >}}
 - Threshold: `100%`
-- Scope: `Per service`
+- Scope: {{< ui >}}Per service{{< /ui >}}
 - Services: `admin-dashboard`, `frontend-*`
 
 {{< img src="/code_coverage/pr_gate_frontend.png" text="Code Coverage PR gate configured for frontend services" style="width:100%" >}}
 
 **Enforce coverage for specific team's code:**
 
-- Condition type: `Patch Code Coverage`
+- Condition type: {{< ui >}}Patch Code Coverage{{< /ui >}}
 - Threshold: `90%`
-- Scope: `Per code owner`
+- Scope: {{< ui >}}Per code owner{{< /ui >}}
 - Code owners: `@team/platform`
 
 {{< img src="/code_coverage/pr_gate_codeowners_team.png" text="Code Coverage PR gate configured for a specific team" style="width:100%" >}}
@@ -186,16 +186,16 @@ You can create multiple gates for the same repository, each applying to differen
 
 ## Troubleshooting
 
-### Software Catalog services are not appearing in the UI
+### Catalog services are not appearing in the UI
 
-When using Software Catalog integration, changes to service definitions in Software Catalog may take up to 10 minutes to synchronize with Code Coverage. After creating or updating service definitions in Software Catalog:
+When using Catalog integration, changes to service definitions in Catalog may take up to 10 minutes to synchronize with Code Coverage. After creating or updating service definitions in Catalog:
 
-1. Verify that the service definition in Software Catalog includes `codeLocations` with the correct `repositoryURL`.
+1. Verify that the service definition in Catalog includes `codeLocations` with the correct `repositoryURL`.
 2. Ensure the paths specified in `codeLocations` match the actual file structure.
 3. Wait up to 10 minutes for the changes to propagate.
 4. Upload a new coverage report after the synchronization completes.
 
-Software Catalog is queried when processing coverage reports, so changes only take effect for newly uploaded reports.
+Catalog is queried when processing coverage reports, so changes only take effect for newly uploaded reports.
 
 ### Manual service configuration not taking effect
 

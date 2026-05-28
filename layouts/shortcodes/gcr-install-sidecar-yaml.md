@@ -26,6 +26,8 @@ spec:
         - env:
             - name: DD_SERVICE
               value: '<SERVICE_NAME>'
+            - name: DD_LOGS_INJECTION
+              value: 'true'
           image: '<CONTAINER_IMAGE>'
           name: run-sidecar-1
           ports:
@@ -59,8 +61,6 @@ spec:
               value: '<VERSION>'
             - name: DD_LOG_LEVEL
               value: debug
-            - name: DD_LOGS_INJECTION
-              value: 'true'
             - name: DD_SOURCE
               value: '{{ .Get "language" }}'
             - name: DD_HEALTH_PORT
