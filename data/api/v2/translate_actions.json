@@ -2368,6 +2368,26 @@
     "request_description": "",
     "request_schema_description": "Request body for updating an existing OCI tenancy integration configuration."
   },
+  "ListOpsgenieAccounts": {
+    "description": "Get a list of all Opsgenie accounts from the Datadog Opsgenie integration.",
+    "summary": "Get all Opsgenie accounts"
+  },
+  "CreateOpsgenieAccount": {
+    "description": "Create a new Opsgenie account in the Datadog Opsgenie integration.",
+    "summary": "Create a new Opsgenie account",
+    "request_description": "Opsgenie account payload.",
+    "request_schema_description": "Create request for an Opsgenie account."
+  },
+  "DeleteOpsgenieAccount": {
+    "description": "Delete a single Opsgenie account from the Datadog Opsgenie integration.",
+    "summary": "Delete an Opsgenie account"
+  },
+  "UpdateOpsgenieAccount": {
+    "description": "Update a single Opsgenie account in the Datadog Opsgenie integration.",
+    "summary": "Update an Opsgenie account",
+    "request_description": "Opsgenie account payload.",
+    "request_schema_description": "Update request for an Opsgenie account."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"

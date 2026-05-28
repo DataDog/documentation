@@ -14450,6 +14450,54 @@ menu:
           - ListOpsgenieServices
         unstable: []
         order: 1
+    - name: Update an Opsgenie account
+      url: '#update-an-opsgenie-account'
+      identifier: opsgenie-integration-update-an-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpsgenieAccount
+        unstable: []
+        order: 8
+    - name: Delete an Opsgenie account
+      url: '#delete-an-opsgenie-account'
+      identifier: opsgenie-integration-delete-an-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpsgenieAccount
+        unstable: []
+        order: 9
+    - name: Create a new Opsgenie account
+      url: '#create-a-new-opsgenie-account'
+      identifier: opsgenie-integration-create-a-new-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpsgenieAccount
+        unstable: []
+        order: 7
+    - name: Get all Opsgenie accounts
+      url: '#get-all-opsgenie-accounts'
+      identifier: opsgenie-integration-get-all-opsgenie-accounts
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpsgenieAccounts
+        unstable: []
+        order: 6
     - name: Org Connections
       url: /api/latest/org-connections/
       identifier: org-connections
