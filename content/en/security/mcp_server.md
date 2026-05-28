@@ -14,8 +14,14 @@ further_reading:
 - link: "security/guide/findings-schema/?tab=library_vulnerability"
   tag: "Documentation"
   text: "Security Findings"
+- link: "security/detection_rules/"
+  tag: "Documentation"
+  text: "Detection Rules"
+- link: "security/suppressions/"
+  tag: "Documentation"
+  text: "Suppressions"
 algolia:
-  tags: ["mcp", "mcp server", "security", "security signals", "security findings"]
+  tags: ["mcp", "mcp server", "security", "security signals", "security findings", "detection rules", "suppressions"]
 ---
 
 ## Overview
@@ -29,9 +35,12 @@ The [Datadog MCP Server][1] lets AI agents query your security data through the 
 You can use the `security` toolset to:
 
 - **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
+- **Triage and bulk-update signals**: Update triage state or assignee across a set of matching signals in bulk.
 - **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
 - **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
+- **Inspect and manage detection rules**: List and retrieve detection rule definitions to understand what logic is generating signals.
+- **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 
 ## Quickstart
@@ -48,19 +57,63 @@ The `security` toolset is not enabled by default. You can enable it by adding a 
 
 ## Available tools
 
-The `security` toolset exposes the following tools to your AI client. Each tool performs a specific action on your security data, such as searching for signals or analyzing findings. When you ask a question in natural language, your AI client calls these tools on your behalf to retrieve the information it needs. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1].
+The `security` toolset exposes the following tools to your AI client. Each tool performs a specific action on your security data. When you ask a question in natural language, your AI client calls these tools on your behalf to retrieve the information it needs. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1].
+
+### Security Signals
 
 `search_datadog_security_signals`
 : Searches and retrieves security signals from Datadog, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals. Use this to surface and investigate suspicious activity.
 : *Permissions required: `Security Signals Read`*
 
 `analyze_datadog_security_signals`
-: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead.
+: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead. Call `datadog_security_signals_schema` first to discover queryable fields.
 : *Permissions required: `Security Signals Read`, `Timeseries`*
 
 `get_datadog_security_signal`
 : Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations. Use `search_datadog_security_signals` to find signal IDs first.
 : *Permissions required: `Security Signals Read`*
+
+`datadog_security_signals_schema`
+: Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
+: *Permissions required: `Security Signals Read`*
+
+`update_datadog_security_signals_triage`
+: Updates the triage state and/or assignee of one or more security signals in bulk. Accepts either a list of signal IDs or a filter query. Valid states: `open`, `archived`, `under_review`. An archive reason is required when archiving. Call `analyze_datadog_security_signals` first to count matching signals before bulk-updating.
+: *Permissions required: `Security Signals Write`*
+
+### Detection Rules
+
+`list_datadog_security_detection_rules`
+: Lists Cloud SIEM detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to retrieve the full definition of a specific rule.
+: *Permissions required: `Security Monitoring Rules Read`*
+
+`get_datadog_security_detection_rule`
+: Retrieves the full definition of a single Cloud SIEM detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
+: *Permissions required: `Security Monitoring Rules Read`*
+
+`get_datadog_security_detection_rules_schema`
+: Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules.
+: *Permissions required: `Security Monitoring Rules Read`*
+
+### Suppressions
+
+`get_datadog_security_suppressions`
+: Retrieves security monitoring suppressions. Supports three modes: list all suppressions, get a single suppression by ID, or get suppressions affecting a specific detection rule. Suppressions prevent detection rules from generating signals for matching conditions.
+: *Permissions required: `Security Monitoring Suppressions Read`*
+
+`create_datadog_security_suppression`
+: Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided. Call `get_datadog_security_detection_rule` first to inspect the target rule before writing the suppression query.
+: *Permissions required: `Security Monitoring Suppressions Write`*
+
+`update_datadog_security_suppression`
+: Updates an existing suppression rule. Only provided fields are changed. Call `get_datadog_security_suppressions` first to retrieve the current state and version; providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
+: *Permissions required: `Security Monitoring Suppressions Write`*
+
+`delete_datadog_security_suppression`
+: Deletes a suppression rule. This operation is irreversible and takes effect immediately. Call `get_datadog_security_suppressions` first to confirm the correct suppression will be deleted.
+: *Permissions required: `Security Monitoring Suppressions Write`*
+
+### Security Findings
 
 `security_findings_schema`
 : Returns the available fields and their types for security findings. Call this before using `analyze_security_findings` to discover which fields you can filter and group by. Supports filtering by finding type.
