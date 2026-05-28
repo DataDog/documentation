@@ -4626,6 +4626,11 @@ menu:
       identifier: live_debugger
       parent: tracing
       weight: 12
+    - name: Debug with Bits
+      url: tracing/live_debugger/debug-with-bits/
+      identifier: live_debugger_debug_with_bits
+      parent: live_debugger
+      weight: 1
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
