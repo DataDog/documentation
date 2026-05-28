@@ -126,10 +126,10 @@ export default function App() {
 
 1. Navigate to **Feature Flags** in the Datadog UI and click **\+ Create Flag**.
 2. Configure the flag:
-   * **Name**: for example, `cms_homepage_hero_variant`
-   * **Key**: `cms_homepage_hero_variant`
+   * **Name**: For example, `cms_homepage_hero_variant`
+   * **Key**: For example, `cms_homepage_hero_variant`
+   * **Which SDKs can request this flag?**: `Client`
    * **Variant type**: `string` (for simple entry ID mapping) or `JSON` (for multi-attribute mapping)
-   * **Distribution channels**: `Client-side`
    <div class="alert alert-info">The flag key cannot be changed after creation.</div>
 3. Add variants:
 
@@ -307,12 +307,12 @@ After your RUM actions are flowing, define the metrics your experiment measures.
 
 Use the following tools in Datadog to monitor and analyze your experiment results:
 
-- **Real-time flag health**: From the **Feature Flag details page**, monitor:
+- **Real-time flag health**: From the feature flag's details page, monitor:
   * Exposure counts per variant
   * Error rates per variant
   * Page load time per variant
 
-- **Experiment results**: Navigate to **Experiments \> \[your experiment\]** to see:
+- **Experiment results**: Navigate to your experiment's details page to see:
   * Statistical significance of results
   * Per-variant metric breakdowns
   * Guardrail metric status
