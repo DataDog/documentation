@@ -27,6 +27,8 @@ Use the [Function App slot Bicep template](https://github.com/DataDog/datadog-aa
 
 ```bicep
 // Version: 1.0.0
+// Description: Install Datadog APM extension on an Azure Function App deployment slot.
+
 @secure()
 param datadogApiKey string
 
@@ -91,7 +93,7 @@ Deploy:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file install-function-app-slot.bicep
 ```
 
-**Note:** Include all existing slot app settings in the `slot` resource's `appSettings` array — ARM replaces the full list. Pass your existing slot-sticky setting names in `existingStickyAppSettingNames` (pass `[]` for a new app). The `slotConfigNames` resource does a full replace of the sticky-settings list, so any name omitted from `existingStickyAppSettingNames` will be de-stickied.
+**Note:** The `slotConfigNames` resource does a full replace of the sticky-settings list, so you need to include all existing slot app settings in the `appSettings` array. Pass your existing slot-sticky setting names in `existingStickyAppSettingNames` or pass `[]` for a new app. Any name omitted from `existingStickyAppSettingNames` will be de-stickied.
 
 {{% /tab %}}
 {{% tab "ARM Template" %}}
@@ -102,15 +104,43 @@ Use the [Function App slot ARM template](https://github.com/DataDog/datadog-aas-
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "metadata": { "version": "1.0.0" },
+  "metadata": {
+    "description": "Install Datadog APM extension on an Azure Function App deployment slot. Applies WEBSITE_PRIVATE_EXTENSIONS=0 as a sticky slot setting to prevent MoveDirectory file-lock failures.",
+    "version": "1.0.0"
+  },
   "parameters": {
-    "webAppName": { "type": "string" },
-    "slotName": { "type": "string" },
-    "datadogApiKey": { "type": "securestring" },
-    "ddSite": { "type": "string", "defaultValue": "datadoghq.com" },
-    "ddService": { "type": "string", "defaultValue": "" },
-    "ddEnv": { "type": "string", "defaultValue": "staging" },
-    "ddVersion": { "type": "string", "defaultValue": "" },
+    "webAppName": {
+      "type": "string",
+      "metadata": { "description": "Name of the Azure Function App" }
+    },
+    "slotName": {
+      "type": "string",
+      "metadata": { "description": "Name of the deployment slot (e.g. staging)" }
+    },
+    "datadogApiKey": {
+      "type": "securestring",
+      "metadata": { "description": "Your Datadog API key" }
+    },
+    "ddSite": {
+      "type": "string",
+      "defaultValue": "datadoghq.com",
+      "metadata": { "description": "Your Datadog site (e.g. datadoghq.com, datadoghq.eu)" }
+    },
+    "ddService": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": { "description": "Service name for unified service tagging" }
+    },
+    "ddEnv": {
+      "type": "string",
+      "defaultValue": "staging",
+      "metadata": { "description": "Environment tag — set a distinct value for each slot" }
+    },
+    "ddVersion": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": { "description": "Version for unified service tagging" }
+    },
     "existingStickyAppSettingNames": {
       "type": "array",
       "metadata": { "description": "Names of app settings already marked slot-sticky on this Function App. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it." }
@@ -160,7 +190,7 @@ Deploy:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file install-function-app-slot.json
 ```
 
-**Note:** Include all existing slot app settings in the `appsettings` properties object. Pass your existing slot-sticky setting names in `existingStickyAppSettingNames` (pass `[]` for a new app). The `slotConfigNames` resource does a full replace of the sticky-settings list, so any name omitted from `existingStickyAppSettingNames` will be de-stickied.
+**Note:** The `slotConfigNames` resource does a full replace of the sticky-settings list, so you need to include all existing slot app settings in the `appSettings` array. Pass your existing slot-sticky setting names in `existingStickyAppSettingNames` or pass `[]` for a new app. Any name omitted from `existingStickyAppSettingNames` will be de-stickied.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -206,7 +236,7 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file ins
 
 ## Custom metrics
 
-The Azure App Service extension includes an instance of [DogStatsD][1], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Function Apps with the extension.
+The Azure App Service extension includes an instance of [DogStatsD][dogstatsd], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Function Apps with the extension.
 
 {{% aas-custom-metrics-dotnet %}}
 
@@ -244,42 +274,85 @@ Configure these environment variables in your Azure App Service Application Sett
 
 ## Programmatic management
 
-Datadog provides a PowerShell script for installing or updating the extension on a per-app basis. When `-SlotName` is provided against a Function App, the script automatically applies the `WEBSITE_PRIVATE_EXTENSIONS=0` sticky slot setting before stopping and installing.
+Datadog provides a PowerShell script for installing or updating the extension on a per-app basis. This script can handle configuration for variables such as `DD_SERVICE` and `DD_ENV`. When `-SlotName` is provided, the script automatically applies the `WEBSITE_PRIVATE_EXTENSIONS=0` sticky slot setting before stopping and installing. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programmatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
 
 ### Prerequisites
 
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) or [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview).
 - Azure App Service [user-scope credentials](https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials).
 
-### Installing or updating the extension {#powershell-install}
+### Installing the extension for the first time {#powershell-first-time}
+
+The install script adds the latest version of the extension to an Azure Web App or Azure Function App. This occurs on a per-app basis, rather than at a resource group level.
 
 1. Open the Azure CLI or Azure Cloud Shell.
-2. Download the install script:
+2. Download the installation script using the following command:
 
-   ```powershell
-   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
-   ```
+    ```
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
+    ```
 
-3. Run the script with `-SlotName`:
+3. Run the following command, passing in required and optional arguments as needed.
 
-   ```powershell
-   .\install-latest-extension.ps1 `
-     -SubscriptionId <SUBSCRIPTION_ID> `
-     -ResourceGroup <RESOURCE_GROUP_NAME> `
-     -SiteName <FUNCTION_APP_NAME> `
-     -SlotName <SLOT_NAME> `
-     -DDApiKey <DATADOG_API_KEY> `
-     -DDSite <DATADOG_SITE>
-   ```
+    ```
+    .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION> [-SlotName <SLOT_NAME>]
+    ```
 
-**Required arguments:**
+**Note**: The following arguments are required for the above command:
+
+- `<USERNAME>`: Your Azure user scope username.
+- `<PASSWORD>`: Your Azure user scope password.
 - `<SUBSCRIPTION_ID>`: Your Azure [subscription ID](https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to).
 - `<RESOURCE_GROUP_NAME>`: Your Azure resource group name.
-- `<FUNCTION_APP_NAME>`: The name of your Function App.
-- `<SLOT_NAME>`: Your deployment slot name (for example, `staging`).
+- `<SITE_NAME>`: The name of your app.
 - `<DATADOG_API_KEY>`: Your [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys).
 
-Set `<DATADOG_SITE>` to your [Datadog site][3]. Defaults to `datadoghq.com`.
+Also, set `DATADOG_SITE` to your [Datadog site][32]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
+
+To target a deployment slot instead of the main app, add `-SlotName <SLOT_NAME>`. On Azure Function Apps, this also automatically applies the `WEBSITE_PRIVATE_EXTENSIONS=0` sticky slot setting to prevent extension install failures.
+
+[32]: /getting_started/site/
+
+### Updating the extension for a resource group {#powershell-resource-group}
+
+The update script applies to an entire resource group. This script updates every app that has the extension installed. Apps that do not have the Datadog extension installed are not affected.
+
+1. Open the Azure CLI or Azure Cloud Shell.
+2. Download the update script using the following command:
+
+    ```
+    $baseUri="https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension"; Invoke-WebRequest -Uri "$baseUri/update-all-site-extensions.ps1" -OutFile "update-all-site-extensions.ps1"; Invoke-WebRequest -Uri "$baseUri/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
+    ```
+
+3. Run the following command. All arguments are required.
+
+    ```
+    .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
+    ```
+
+### Install a specific version of the extension {#powershell-specific-version}
+
+The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
+
+#### Install specific version on a single resource
+
+To install a specific version on a single instance, follow the [instructions for installing the extension for the first time](#powershell-first-time) and add the `-ExtensionVersion` parameter to the installation command.
+
+```
+.\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -ExtensionVersion <EXTENSION_VERSION>
+```
+
+Replace `<EXTENSION_VERSION>` with the version of the extension you wish to install. For instance, `1.4.0`.
+
+#### Install specific version on an entire resource group
+
+To install a specific version for a resource group, follow the [instructions for updating the extension for a resource group](#powershell-resource-group) and add the `-ExtensionVersion` parameter to the installation command.
+
+```
+.\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD> -ExtensionVersion <EXTENSION_VERSION>
+```
+
+Replace `<EXTENSION_VERSION>` with the version of the extension you wish to install. For instance, `1.4.0`.
 
 ## Troubleshooting
 
@@ -289,7 +362,7 @@ Azure Function Apps can fail with a "Could not execute MoveDirectory" error duri
 
 The fix is `WEBSITE_PRIVATE_EXTENSIONS=0` set as a **sticky slot setting**. If you are using the PowerShell script with `-SlotName`, the workaround is applied automatically. If you are using ARM or Bicep, ensure the templates above are deployed before attempting the extension install, and that the `WEBSITE_PRIVATE_EXTENSIONS` setting is present and sticky on your slot.
 
-**Without a slot (production-direct installs):** fully stop the Function App before installing, then start it after. The sticky setting workaround is not available without a slot.
+**Without a slot (production-direct installs):** Fully stop the Function App before installing, then start it after. The sticky setting workaround is not available without a slot.
 
 ### APM traces are not appearing
 
@@ -299,12 +372,9 @@ The fix is `WEBSITE_PRIVATE_EXTENSIONS=0` set as a **sticky slot setting**. If y
 
 Still need help? Contact [Datadog support][4].
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /serverless/azure_functions/
 [2]: /integrations/azure/
 [3]: /getting_started/site/
 [4]: /help
 [5]: /metrics/custom_metrics/
+[dogstatsd]: /extend/dogstatsd/
