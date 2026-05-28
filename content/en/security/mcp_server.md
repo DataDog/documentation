@@ -62,7 +62,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 ### Security Signals
 
 `datadog_security_signals_schema`
-: Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
+: Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
 : *Permissions required: `Security Signals Read`*
 
 `search_datadog_security_signals`
@@ -78,21 +78,21 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Signals Read`*
 
 `update_datadog_security_signals_triage`
-: Updates the triage state and/or assignee of one or more security signals in bulk. Accepts either a list of signal IDs or a filter query. Valid states: `open`, `archived`, `under_review`. An archive reason is required when archiving. Call `analyze_datadog_security_signals` first to count matching signals before bulk-updating.
+: Updates the triage state or assignee of one or more security signals in bulk (up to 500 signals). Accepts either a list of signal IDs or a filter query matching all signals to update.
 : *Permissions required: `Security Signals Write`*
 
 ### Detection Rules
 
 `get_datadog_security_detection_rules_schema`
-: Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules.
+: Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection, API security, and AppSec.
 : *Permissions required: `Security Monitoring Rules Read`*
 
 `list_datadog_security_detection_rules`
-: Lists Cloud SIEM detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to retrieve the full definition of a specific rule.
+: Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to retrieve the full definition of a specific rule.
 : *Permissions required: `Security Monitoring Rules Read`*
 
 `get_datadog_security_detection_rule`
-: Retrieves the full definition of a single Cloud SIEM detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
+: Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
 : *Permissions required: `Security Monitoring Rules Read`*
 
 ### Suppressions
@@ -102,15 +102,15 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Suppressions Read`*
 
 `create_datadog_security_suppression`
-: Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided. Call `get_datadog_security_detection_rule` first to inspect the target rule before writing the suppression query.
+: Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided.
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
 `update_datadog_security_suppression`
-: Updates an existing suppression rule. Only provided fields are changed. Call `get_datadog_security_suppressions` first to retrieve the current state and version; providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
+: Updates an existing suppression rule. Only provided fields are changed. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
 `delete_datadog_security_suppression`
-: Deletes a suppression rule. This operation is irreversible and takes effect immediately. Call `get_datadog_security_suppressions` first to confirm the correct suppression will be deleted.
+: Deletes a suppression rule.
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
 ### Security Findings

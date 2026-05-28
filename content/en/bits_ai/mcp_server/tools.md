@@ -1010,7 +1010,7 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 ### `datadog_security_signals_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
+Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
 
 - What fields can I use to filter security signals?
 - Show me the available fields for Cloud SIEM signals.
@@ -1045,7 +1045,7 @@ Retrieves the full details of a single security signal by ID, including attribut
 ### `update_datadog_security_signals_triage`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Write`*\
-Updates the triage state and/or assignee of one or more security signals in bulk. Accepts either a list of signal IDs or a filter query. Valid states: `open`, `archived`, `under_review`. An archive reason is required when archiving. Call `analyze_datadog_security_signals` to count matching signals before bulk-updating.
+Updates the triage state or assignee of one or more security signals in bulk (up to 500 signals). Accepts either a list of signal IDs or a filter query matching all signals to update.
 
 - Archive all signals from rule "Brute Force Login" in the last 24 hours.
 - Set all open signals for `service:checkout` to under review and assign them to me.
@@ -1054,7 +1054,7 @@ Updates the triage state and/or assignee of one or more security signals in bulk
 ### `get_datadog_security_detection_rules_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use this before authoring or querying detection rules. Returns static content with no network call.
+Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection, API security, and AppSec.
 
 - What fields and options are available when creating a threshold detection rule?
 - Show me the schema for sequence detection rules.
@@ -1063,7 +1063,7 @@ Returns the authoring reference and schema for Cloud SIEM detection rules. Cover
 ### `list_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Lists Cloud SIEM detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
 
 - List all enabled Cloud SIEM detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
@@ -1072,7 +1072,7 @@ Lists Cloud SIEM detection rules for the organization. Detection rules define th
 ### `get_datadog_security_detection_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Retrieves the full definition of a single Cloud SIEM detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
+Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
 
 - Get the full definition of detection rule `abc-123-def`.
 - Show me the queries and cases for the rule generating this signal.
@@ -1090,7 +1090,7 @@ Retrieves security monitoring suppressions. Supports three modes: list all suppr
 ### `create_datadog_security_suppression`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Write`*\
-Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided. Call `get_datadog_security_detection_rule` first to inspect the target rule before writing the suppression query.
+Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided.
 
 - Suppress signals from the brute force rule for IP `10.0.0.1`.
 - Create a suppression for the anomaly detection rule that ignores the `staging` environment.
@@ -1099,7 +1099,7 @@ Creates a new suppression rule that prevents a detection rule from generating si
 ### `update_datadog_security_suppression`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Write`*\
-Updates an existing suppression rule. Only provided fields are changed. Call `get_datadog_security_suppressions` first to retrieve the current state and version before editing.
+Updates an existing suppression rule. Only provided fields are changed. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
 
 - Update the suppression for the brute force rule to also exclude `10.0.0.2`.
 - Change the expiration date on suppression `sup-456-xyz` to next quarter.
@@ -1108,7 +1108,7 @@ Updates an existing suppression rule. Only provided fields are changed. Call `ge
 ### `delete_datadog_security_suppression`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Write`*\
-Deletes a suppression rule. This operation is irreversible and takes effect immediately. Call `get_datadog_security_suppressions` first to confirm the correct suppression will be deleted.
+Deletes a suppression rule.
 
 - Delete suppression `sup-456-xyz`.
 - Remove the suppression that was silencing the brute force detection rule.
