@@ -3148,6 +3148,18 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 57
+    - name: Bulk convert rules to Terraform
+      url: '#bulk-convert-rules-to-terraform'
+      identifier: security-monitoring-bulk-convert-rules-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkConvertExistingSecurityMonitoringRules
+        unstable: []
+        order: 127
     - name: Convert a rule from JSON to Terraform
       url: '#convert-a-rule-from-json-to-terraform'
       identifier: security-monitoring-convert-a-rule-from-json-to-terraform
