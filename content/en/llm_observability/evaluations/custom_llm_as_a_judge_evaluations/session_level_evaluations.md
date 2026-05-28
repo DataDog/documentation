@@ -28,7 +28,6 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
 1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select {{< ui >}}Session{{< /ui >}}. (You can also start from a [template evaluation][2].)
 1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
-1. Under {{< ui >}}Evaluation Scope{{< /ui >}} > {{< ui >}}Evaluate On{{< /ui >}}, select {{< ui >}}Session{{< /ui >}}.
 
    {{< img src="llm_observability/evaluations/session_level_evaluation_scope.png" alt="The Evaluate On scope picker with Session selected." style="width:100%;" >}}
 
