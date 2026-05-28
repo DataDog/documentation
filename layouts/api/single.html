@@ -9,10 +9,15 @@
     {{ $identifier := printf "%s-%s" $tagSlug $endpointSlug }}
 
     <!-- Look up the menu entry by identifier to get versions and operationids.
-         Endpoint entries live under .Children of their tag parent, not at the top level. -->
+         Endpoint entries live under .Children of their tag parent, not at the top level.
+         Also capture the tag-level parent entry to get the English tag name for spec lookups. -->
     {{ $menuEntry := dict }}
+    {{ $tagName := "" }}
     {{ with index .Site.Menus "api" }}
       {{ range . }}
+        {{ if eq .Identifier $tagSlug }}
+          {{ $tagName = .Name }}
+        {{ end }}
         {{ range .Children }}
           {{ if eq .Identifier $identifier }}
             {{ $menuEntry = . }}
@@ -23,13 +28,6 @@
 
     {{ $versions := $menuEntry.Params.versions | default (slice) }}
     {{ $operationids := $menuEntry.Params.operationids | default (slice) }}
-
-    <!-- Tag display name comes from the parent section page (always English, since translated content/ files don't exist). -->
-    {{ $tagPage := $dot.Site.GetPage (print "/api/latest/" $tagSlug) }}
-    {{ $tagName := "" }}
-    {{ with $tagPage }}
-      {{ $tagName = .Title }}
-    {{ end }}
 
     <!-- Load YAML specs using shared partial -->
     {{ $d := partial "api/load-specs.html" (dict "version" "v1") }}
