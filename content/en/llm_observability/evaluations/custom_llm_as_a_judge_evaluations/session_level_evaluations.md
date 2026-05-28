@@ -155,21 +155,6 @@ Respond with: consistent, mixed, inconsistent.
 
 **User**
 ```
-// `traces[*].meta.input.messages[*].content` → fans out over each LLM span's input messages
-//                                     and joins their content with newlines.
-Conversation:
-{{traces[*].spans[meta.span.kind:llm].meta.input.messages[*].content}}
-// `meta.input.messages[*].content` → fans out over each LLM span's input messages
-//                                     and joins their content with newlines.
-Conversation:
-{{traces[*].spans[meta.span.kind:llm].meta.input.messages[*].content}}
-
-// Same pattern, but on the LLM output messages—the assistant's replies.
-Assistant responses:
-{{traces[*].spans[meta.span.kind:llm].meta.output.messages[*].content}}
-// Same pattern, but on the LLM output messages—the assistant's replies.
-Assistant responses:
-{{spans[meta.span.kind:llm].meta.output.messages[*].content}}
 Session traces (chronological):
 {{traces}}
 ```
