@@ -261,7 +261,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 3. Trigger an update to your deployment and wait for it to finish.
 
-4. Optionally, to inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][13]. Add `dd_airflow_log_context.py` to your Astro project root so it is baked into the Docker image, then set `AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS=dd_airflow_log_context.LOGGING_CONFIG` through the [Astro UI][5] or your Dockerfile.
+4. Optionally, to inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][13].
 
 [1]: https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-1210
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
