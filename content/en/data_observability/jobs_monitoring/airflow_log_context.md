@@ -25,21 +25,16 @@ After setup, the following attributes appear as structured facets in Datadog:
 
 Datadog automatically flattens nested JSON into dot-notation facets. No log pipeline configuration is required.
 
+The injection mechanism differs between Airflow versions. Choose the tab that matches your deployment.
+
 ## Implementation
 
-The injection mechanism differs between Airflow versions:
-
-| | Airflow 2.x | Airflow 3.x |
-|---|---|---|
-| Context source | `set_context()` callback (same worker process) | `AIRFLOW_CTX_*` environment variables (task subprocess) |
-| Handler registration | Required | Not required |
-| `LOGGING_CONFIG` mutation | Required | Not required |
-
-### Airflow 2.x
+{{< tabs >}}
+{{% tab "Airflow 2.x" %}}
 
 Airflow 2.x calls `set_context(ti)` in the same worker process before each task runs. The implementation captures that context with a `ContextVar` and injects it into every log record through a process-wide log record factory.
 
-**Step 1: Verify your current logging configuration**
+### Step 1: Verify your current logging configuration
 
 Run the following before proceeding:
 
@@ -52,9 +47,9 @@ airflow config get-value logging logging_config_class
 
 **Note**: If `logging_config_class` points to a module that cannot be imported, Airflow falls back silently to the default configuration with no error. If you see no structured attributes in Datadog after setup, verify the module is importable from the worker environment.
 
-**Step 2: Create `dd_airflow_log_context.py`**
+### Step 2: Create `dd_airflow_log_context.py`
 
-Place this file somewhere importable in your Airflow environment — for example, alongside `airflow_local_settings.py`, or in any Python package installed in your Airflow image.
+Place this file somewhere importable in your Airflow environment — for example, alongside `airflow_local_settings.py`, or in any Python package installed in your Airflow image. On Astronomer (Astro), add it to your Astro project root so it is baked into the Docker image. On Google Cloud Composer, place it in the `plugins/` folder in your Composer GCS bucket.
 
 ```python
 from __future__ import annotations
@@ -103,7 +98,7 @@ logging.setLogRecordFactory(_dd_record_factory)
 
 
 # LOGGING_CONFIG
-# Used by Option A (logging_config_class). Safely ignored when imported via Option B.
+# Used by Option A (logging_config_class). Safely ignored when imported through Option B.
 
 LOGGING_CONFIG = deepcopy(DEFAULT_LOGGING_CONFIG)
 
@@ -118,7 +113,7 @@ _task_logger = LOGGING_CONFIG.setdefault("loggers", {}).setdefault(
 _task_logger.setdefault("handlers", []).append("dd_context")
 ```
 
-**Step 3: Configure Airflow to load the module**
+### Step 3: Configure Airflow to load the module
 
 **Option A** — `airflow.cfg` or environment variable (preferred when no existing custom configuration exists)
 
@@ -142,8 +137,6 @@ For Kubernetes deployments:
   **Note**: Kubernetes environment variable values do not expand shell references. Setting `value: /opt/airflow/dd_addons:$PYTHONPATH` passes the literal string `$PYTHONPATH`. Set the full explicit path instead.
 - Apply the environment variable to worker pods. Adding it to scheduler and triggerer pods is harmless and recommended for consistency.
 
-For Astronomer (Astro) deployments: add `dd_airflow_log_context.py` to your Astro project root (or `include/` directory) so it is baked into the Docker image, then set the environment variable through the [Astro UI][1] or your Dockerfile.
-
 **Option B** — existing `airflow_local_settings.py` (use when you already have a custom `LOGGING_CONFIG`)
 
 Append the following to the bottom of your existing `airflow_local_settings.py`:
@@ -161,7 +154,7 @@ _task_logger = LOGGING_CONFIG.setdefault("loggers", {}).setdefault(
 _task_logger.setdefault("handlers", []).append("dd_context")
 ```
 
-**Step 4: Verify**
+### Step 4: Verify
 
 Add the following to a `PythonOperator` in a test DAG:
 
@@ -180,7 +173,8 @@ Then query in Datadog:
 - If the log line appears without those facets, the file loaded but `set_context` was not called. Confirm the handler is in the `airflow.task` logger chain.
 - If the log line does not appear at all, the file did not load. Check `PYTHONPATH` and `logging_config_class`.
 
-### Airflow 3.x
+{{% /tab %}}
+{{% tab "Airflow 3.x" %}}
 
 Airflow 3.x runs tasks in a fully isolated subprocess (Task Execution Interface, AIP-72). The `set_context()` callback is invoked in the parent worker process before the subprocess spawns — the `ContextVar` is never populated inside the subprocess where task logs are produced.
 
@@ -193,9 +187,9 @@ The solution reads context from environment variables that Airflow exports into 
 | `AIRFLOW_CTX_TASK_ID` | `task.task_id` |
 | `AIRFLOW_CTX_TRY_NUMBER` | `task.attempt_id` |
 
-**Step 1: Create `dd_airflow_log_context.py`**
+### Step 1: Create `dd_airflow_log_context.py`
 
-This replaces the Airflow 2.x version of the file if you previously created one.
+Place this file somewhere importable in your Airflow environment. On Astronomer (Astro), add it to your Astro project root so it is baked into the Docker image.
 
 ```python
 from __future__ import annotations
@@ -239,17 +233,17 @@ logging.setLogRecordFactory(_dd_record_factory)
 LOGGING_CONFIG = deepcopy(DEFAULT_LOGGING_CONFIG)
 ```
 
-**Step 2: Configure Airflow to load the module**
+### Step 2: Configure Airflow to load the module
 
 The file must be imported inside the task subprocess before user code runs.
 
-**Option A** — `logging_config_class` (same as Airflow 2.x)
+**Option A** — `logging_config_class`
 
 ```shell
 AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS=dd_airflow_log_context.LOGGING_CONFIG
 ```
 
-Apply to worker pods. The same `PYTHONPATH` and Kubernetes notes from Step 3 of the Airflow 2.x section apply.
+Apply to worker pods. The same `PYTHONPATH` and Kubernetes notes from the Airflow 2.x section apply.
 
 **Note**: Whether Airflow 3.x's task subprocess honors `logging_config_class` depends on your deployment. Run the verification step before relying on this option. If the factory is not active, use Option B.
 
@@ -261,11 +255,9 @@ Add the following to a `sitecustomize.py` on your image's `PYTHONPATH`:
 import dd_airflow_log_context  # installs setLogRecordFactory
 ```
 
-Python runs `sitecustomize.py` at interpreter startup, so the factory is installed in every subprocess Airflow spawns, regardless of how the task runner invokes the interpreter.
+Python runs `sitecustomize.py` at interpreter startup, so the factory is installed in every subprocess Airflow spawns, regardless of how the task runner invokes the interpreter. On Astronomer (Astro), add both `dd_airflow_log_context.py` and `sitecustomize.py` to your Astro project root.
 
-For Astronomer (Astro) deployments: add both `dd_airflow_log_context.py` and `sitecustomize.py` to your Astro project so they are baked into the Docker image.
-
-**Step 3: Verify**
+### Step 3: Verify
 
 Add the following to a test task:
 
@@ -282,10 +274,13 @@ logging.getLogger("dd_probe").warning(
 - If `factory=_dd_record_factory` but no facets appear, the factory loaded but the environment variables were not set. Confirm the log was emitted from inside the task subprocess, not from the scheduler or triggerer.
 - If `factory` is something else, the file did not load in the subprocess. Switch to Option B (`sitecustomize.py`).
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Limitations
 
 - **Subprocess-spawning operators**: `setLogRecordFactory` affects only the current Python process. Log records from separate subprocesses or pods (such as `KubernetesPodOperator` or `BashOperator` spawning child processes) do not carry task context.
-- **Airflow 3.x deferred tasks**: Deferred operators resume in the triggerer process, which does not have `AIRFLOW_CTX_*` environment variables set. Logs during the deferred phase carry no task context. This matches Airflow 2.x behavior.
+- **Airflow 3.x deferred tasks**: Deferred operators resume in the triggerer process, which does not have `AIRFLOW_CTX_*` environment variables set. Logs during the deferred phase carry no task context.
 - **Long-running background threads (Airflow 2.x)**: Context is set once per task at task start. If a task spawns background threads that outlive the task, those threads may log with the next task's context.
 - **Mapped tasks (Airflow 3.x)**: `AIRFLOW_CTX_MAP_INDEX` is also exported. To surface the map index in Datadog, add `"map_index": os.environ.get("AIRFLOW_CTX_MAP_INDEX")` under `task` in the record factory.
 
@@ -300,5 +295,3 @@ The Python file itself has no effect unless imported.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui
