@@ -218,7 +218,6 @@ After the agent completes, commit the changes to your repository and set any new
 ## Next steps
 
 - Confirm data is flowing in the Datadog UI for the product you set up: [Error Tracking][6], [RUM > Applications][7], [Infrastructure > Hosts][8], [Serverless > Functions][9], or [Logs > Live Tail][10].
-- For team-wide rollout, propagate environment variables through your secret manager.
 
 [6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
