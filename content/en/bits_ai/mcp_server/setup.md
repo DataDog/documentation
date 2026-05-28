@@ -602,8 +602,8 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 ### Preview toolsets
 
-These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
-- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+These toolsets are in Preview. To request access, contact your Datadog account team or [Datadog support][47].
+- `apm`: Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `rum`: Tools for [Real User Monitoring][57], including summarizing application performance, inspecting application configuration, and running performance investigations
 
@@ -775,7 +775,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 [42]: /service_management/case_management/
 [43]: /actions/workflows/
 [44]: /ddsql_editor/
-[45]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
 [46]: /dashboards/
 [47]: /help/
 [48]: /reference_tables/

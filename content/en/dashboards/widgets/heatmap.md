@@ -17,9 +17,8 @@ further_reading:
   text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
-{{< callout url=https://www.datadoghq.com/product-preview/hostmap
- btn_hidden="false" header="Join the Preview!">}}
-A new Host Map experience is in Preview. Use this form to request early access to the new features.
+{{< callout btn_hidden="true" header="Join the Preview!">}}
+A new Host Map experience is in Preview. To request access, contact your Datadog account team or Datadog Support.
 {{< /callout >}}
 
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="Example heatmap graph visualization" style="width:100%;">}}
