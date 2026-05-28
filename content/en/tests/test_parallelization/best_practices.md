@@ -12,6 +12,10 @@ further_reading:
     text: "Troubleshooting Test Parallelization"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
+Test Parallelization is in Preview. Complete the form to request access.
+{{< /callout >}}
+
 ## Optimize the planning step
 
 Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.

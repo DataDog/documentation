@@ -12,6 +12,10 @@ further_reading:
     text: "Troubleshooting Test Optimization"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
+Test Parallelization is in Preview. Complete the form to request access.
+{{< /callout >}}
+
 ## Missing or invalid plan artifacts
 
 If `ddtest run --ci-node <N>` cannot find assigned test files, confirm that the `.testoptimization/` directory from the planning job is available in the test job.

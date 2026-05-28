@@ -15,6 +15,10 @@ further_reading:
     text: "Set up Test Optimization"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
+Test Parallelization is in Preview. Complete the form to request access.
+{{< /callout >}}
+
 ## Prerequisites
 
 Before setting up Test Parallelization:
