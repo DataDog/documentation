@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Datasets"
 ---
-{{< callout url="https://www.datadoghq.com/product/ai/llm-observability/" btn_hidden="false" header="Join the Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/ai-studio-bits-eval-patterns/" btn_hidden="false" header="Join the Preview">}}
 Patterns is in Preview.
 {{< /callout >}}
 
@@ -41,11 +41,11 @@ Each topic shows its interaction volume, share of total traffic, and a coherence
 ### Read the summary metrics
 
 The top of the Patterns page shows three metrics from your most recent run:
-- **Total interactions**: How many interactions were analyzed
-- **Identified topics**: The total number of distinct topics found, including parent and child topics
-- **Classified**: The percentage of analyzed interactions assigned to a named topic — interactions in Outliers count as unclassified
+- {{< ui >}}Total interactions{{< /ui >}}: How many interactions were analyzed
+- {{< ui >}}Identified topics{{< /ui >}}: The total number of distinct topics found, including parent and child topics
+- {{< ui >}}Classified{{< /ui >}}: The percentage of analyzed interactions assigned to a named topic — interactions in Outliers count as unclassified
 
-A high **Classified** percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types or a filter that spans very different use cases.
+A high {{< ui >}}Classified{{< /ui >}} percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types or a filter that spans very different use cases.
 
 {{< img src="llm_observability/Patterns.png" alt="The Patterns page displays traces grouped by topic." style="width:100%;" >}}
 

@@ -1075,6 +1075,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_2547523542",
+      "description": "Create an API test with MCP steps returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_3829801148",
       "description": "Create an API test with UDP subtype returns \"OK - Returns the created test details.\" response"
     },

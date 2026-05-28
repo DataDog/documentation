@@ -27,6 +27,14 @@ A sample application is [available on GitHub][6] with instructions on how to dep
 
 The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next section.
 
+## Use the Datadog MCP server
+
+Use the [Datadog MCP server][9] to set up monitoring for your AWS Lambda containers with AI assistance. After you connect, try a prompt like:
+
+```shell
+Help me monitor my AWS Lambda functions with Datadog
+```
+
 ## Instrumentation instructions
 
 {{< partial name="serverless/getting-started-languages.html" >}}
@@ -51,3 +59,4 @@ After you're done with instrumentation and you've set up telemetry collection, y
 [5]: /serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
+[9]: /agentic_onboarding/setup

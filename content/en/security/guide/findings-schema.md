@@ -71,7 +71,7 @@ There are eleven different categories for security findings. Click on a category
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "api-sec-001",
-    "name": "Read operation on route use predictable IDs",
+    "name": "Read operations on routes use predictable IDs",
     "type": "api_security",
     "version": 3
   },
@@ -92,7 +92,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Read operation on route use predictable IDs",
+  "title": "Read operations on routes use predictable IDs",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -1839,7 +1839,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>origin</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@origin</code><br>Detection origins that produced the finding, such as agentless scans, APM, SCI (Software Composition Analysis), or CI (Continuous Integration).</td>
+      <td><strong>Path:</strong> <code>@origin</code><br>Detection origins that produced the finding, such as agentless scans, APM, SCA (Software Composition Analysis), or CI (Continuous Integration).</td>
     </tr>
     <tr>
       <td><code>related_services</code></td>
@@ -1864,7 +1864,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@severity</code><br>Datadog-adjusted severity level of the finding. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+      <td><strong>Path:</strong> <code>@severity</code><br>Final severity level of the finding, after Datadog adjustments and any user-defined severity modifications. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>source_finding_raw_data</code></td>
@@ -2040,6 +2040,11 @@ Attributes identifying the cloud resource affected by the finding.
       <td><code>account</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@cloud_resource.account</code><br>Cloud account that owns the cloud resource (for example, AWS account, Azure subscription, GCP project, OCI tenancy).</td>
+    </tr>
+    <tr>
+      <td><code>account_name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@cloud_resource.account_name</code><br>Human-readable name of the cloud account owning the resource.</td>
     </tr>
     <tr>
       <td><code>category</code></td>
@@ -2248,6 +2253,47 @@ Metadata about the compliance agent that produced the finding.
       <td><code>evaluator</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@compliance.agent.evaluator</code><br>Name of the evaluator that assessed the compliance finding.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Frameworks
+
+Compliance frameworks mapped to the finding.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>control</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.frameworks.control</code><br>Identifier of the control within the compliance framework.</td>
+    </tr>
+    <tr>
+      <td><code>framework</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.frameworks.framework</code><br>Identifier of the compliance framework (e.g., <code>cis</code>, <code>pci-dss</code>).</td>
+    </tr>
+    <tr>
+      <td><code>is_default</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@compliance.frameworks.is_default</code><br><code>true</code> if this is the default framework mapping for the finding, <code>false</code> otherwise.</td>
+    </tr>
+    <tr>
+      <td><code>requirement</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.frameworks.requirement</code><br>Identifier of the requirement within the control.</td>
+    </tr>
+    <tr>
+      <td><code>version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.frameworks.version</code><br>Version of the compliance framework.</td>
     </tr>
   </tbody>
 </table>
@@ -2652,7 +2698,7 @@ Additional metadata about the finding, such as schema version or source context.
     <tr>
       <td><code>schema_version</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@metadata.schema_version</code><br>Indicates the findings schema version used for the finding. Current version: <code>2</code>.</td>
+      <td><strong>Path:</strong> <code>@metadata.schema_version</code><br>Indicates the findings schema version used for the finding.</td>
     </tr>
   </tbody>
 </table>
@@ -2685,7 +2731,7 @@ Package manager information. A package manager automates the installation, upgra
     <tr>
       <td><code>dependency_location_text</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@package.dependency_location_text</code><br>-</td>
+      <td><strong>Path:</strong> <code>@package.dependency_location_text</code><br>Text representation of the dependency location, such as the file path where the vulnerable package is declared.</td>
     </tr>
     <tr>
       <td><code>dependency_type</code></td>
@@ -3197,7 +3243,7 @@ Information about the finding's remediation.
     <tr>
       <td><code>code_update</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.code_update</code><br>-</td>
+      <td><strong>Path:</strong> <code>@remediation.code_update</code><br>Code changes to apply to remediate the finding.</td>
     </tr>
     <tr>
       <td><code>codegen</code></td>
@@ -3254,7 +3300,7 @@ Information about the finding's remediation.
 
 ### Code Update
 
--
+Code changes to apply to remediate the finding.
 
 <table>
   <thead>
@@ -3444,7 +3490,7 @@ Information about the latest Amazon Machine Image (AMI) that may remediate the v
   </tbody>
 </table>
 
-### Microsoft Kb
+### Microsoft KB
 
 Remediation strategy using a Microsoft Knowledge Base (KB) article.
 
@@ -3502,7 +3548,7 @@ Remediation package information.
     <tr>
       <td><code>base</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base</code><br>-</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base</code><br>Current package version that the finding was detected on, before any remediation is applied.</td>
     </tr>
     <tr>
       <td><code>closest_no_critical</code></td>
@@ -3529,7 +3575,7 @@ Remediation package information.
 
 ### Base
 
--
+Current package version that the finding was detected on, before any remediation is applied.
 
 <table>
   <thead>
@@ -3548,7 +3594,7 @@ Remediation package information.
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -3599,12 +3645,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3625,12 +3671,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3651,12 +3697,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3682,7 +3728,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -3733,12 +3779,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3759,12 +3805,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3785,12 +3831,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3816,7 +3862,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -3867,12 +3913,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3893,12 +3939,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3919,12 +3965,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -3950,7 +3996,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4001,12 +4047,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4027,12 +4073,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4053,12 +4099,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4084,7 +4130,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4135,12 +4181,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4161,12 +4207,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4187,12 +4233,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4213,7 +4259,7 @@ Remediation root package information.
     <tr>
       <td><code>base</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base</code><br>-</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base</code><br>Current package version that the finding was detected on, before any remediation is applied.</td>
     </tr>
     <tr>
       <td><code>closest_no_critical</code></td>
@@ -4240,7 +4286,7 @@ Remediation root package information.
 
 ### Base
 
--
+Current package version that the finding was detected on, before any remediation is applied.
 
 <table>
   <thead>
@@ -4259,7 +4305,7 @@ Remediation root package information.
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4310,12 +4356,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4336,12 +4382,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4362,12 +4408,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4393,7 +4439,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4444,12 +4490,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4470,12 +4516,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4496,12 +4542,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4527,7 +4573,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4578,12 +4624,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4604,12 +4650,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4630,12 +4676,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4661,7 +4707,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4712,12 +4758,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4738,12 +4784,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4764,12 +4810,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4795,7 +4841,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>has_incomplete_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore it may not be 100% accurate</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.has_incomplete_data</code><br>Flag to indicate whether the remediation may have incomplete dependency data and therefore may not be 100% accurate.</td>
     </tr>
     <tr>
       <td><code>is_auto_solvable</code></td>
@@ -4846,12 +4892,12 @@ Advisories that the remediation will fix.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4872,12 +4918,12 @@ Advisories that will appear if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4898,12 +4944,12 @@ Advisories that will remain unfixed if the remediation is applied.
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory that the remediation will fix.</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
   </tbody>
 </table>
@@ -4946,7 +4992,7 @@ Risk-related attributes for the finding. Each key must have a matching key in th
     <tr>
       <td><code>is_authenticated</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_authenticated</code><br><code>true</code> if the API endpoint requires authentication to access, <code>false</code> if the endpoint does not require authentication. Omitted if authentication status is unknown.</td>
+      <td><strong>Path:</strong> <code>@risk.is_authenticated</code><br><code>true</code> if the API endpoint requires authentication to access; <code>false</code> if the endpoint does not require authentication. Omitted if authentication status is unknown.</td>
     </tr>
     <tr>
       <td><code>is_crown_jewel</code></td>
@@ -4956,7 +5002,7 @@ Risk-related attributes for the finding. Each key must have a matching key in th
     <tr>
       <td><code>is_emerging</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_emerging</code><br><code>true</code> if the vulnerability is linked to an advisory classified as an emerging vulnerability, <code>false</code> otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_emerging</code><br><code>true</code> if the vulnerability is linked to an advisory classified as an emerging vulnerability; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_exposed_to_attacks</code></td>
@@ -5917,7 +5963,7 @@ Information about whether the tainted parts originate from the request URL.
   </tbody>
 </table>
 
-### Is Using Sha1
+### Is Using SHA1
 
 Information about whether SHA1 is used in a weak hash.
 
@@ -6021,6 +6067,11 @@ Groups attributes related to runtime context.
       <td>string</td>
       <td><strong>Path:</strong> <code>@runtime_context.trace_id</code><br>Trace identifier where the finding was detected. Available only for IAST (Interactive Application Security Testing).</td>
     </tr>
+    <tr>
+      <td><code>vulnerable_services</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@runtime_context.vulnerable_services</code><br>Lists running service versions affected by the finding, each identified by deployment environment, version, and Git commit SHA.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -6050,11 +6101,47 @@ Contains database monitoring context associated with the finding.
   </tbody>
 </table>
 
+### Vulnerable Services
+
+Lists running service versions affected by the finding, each identified by deployment environment, version, and Git commit SHA.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>commit_sha</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@runtime_context.vulnerable_services.commit_sha</code><br>Contains the Git commit SHA of the vulnerable service.</td>
+    </tr>
+    <tr>
+      <td><code>env</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@runtime_context.vulnerable_services.env</code><br>Indicates the deployment environment of the vulnerable service (for example, <code>prod</code>, <code>staging</code>).</td>
+    </tr>
+    <tr>
+      <td><code>service_name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@runtime_context.vulnerable_services.service_name</code><br>Contains the name of the vulnerable service.</td>
+    </tr>
+    <tr>
+      <td><code>version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@runtime_context.vulnerable_services.version</code><br>Contains the version identifier of the vulnerable service.</td>
+    </tr>
+  </tbody>
+</table>
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Secret" level="h3" id="secret" %}}
 
--
+Information specific to secret findings, such as the secret's validation status.
 
 <table>
   <thead>
@@ -6077,7 +6164,7 @@ Contains database monitoring context associated with the finding.
 
 {{% collapse-content title="Service" level="h3" id="service" %}}
 
--
+Information about the service where the finding was detected, including its name and source code metadata.
 
 <table>
   <thead>
@@ -6130,6 +6217,11 @@ Detailed severity information for the finding, including base and adjusted sever
       <td><code>base</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@severity_details.base</code><br>Base severity of the finding as defined by the original rule, advisory, or scanner, before any contextual adjustments.</td>
+    </tr>
+    <tr>
+      <td><code>user_adjusted</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@severity_details.user_adjusted</code><br>Severity of the finding after application of user-defined severity modifications.</td>
     </tr>
   </tbody>
 </table>
@@ -6202,6 +6294,37 @@ Base severity of the finding as defined by the original rule, advisory, or scann
       <td><code>vector</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@severity_details.base.vector</code><br>CVSS vector string.</td>
+    </tr>
+  </tbody>
+</table>
+
+### User Adjusted
+
+Severity of the finding after application of user-defined severity modifications.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>score</code></td>
+      <td>number</td>
+      <td><strong>Path:</strong> <code>@severity_details.user_adjusted.score</code><br>Numeric severity score (CVSS scale).</td>
+    </tr>
+    <tr>
+      <td><code>value</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.user_adjusted.value</code><br>Severity level. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
+    <tr>
+      <td><code>value_id</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@severity_details.user_adjusted.value_id</code><br>Numeric representation of the severity. Values: <code>critical</code> = <code>10</code>, <code>high</code> = <code>9</code>, <code>medium</code> = <code>7</code>, <code>low</code> = <code>4</code>, <code>none</code> = <code>0</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -6336,6 +6459,11 @@ All mutable information related to the management of a finding after it was dete
       <td><strong>Path:</strong> <code>@workflow.mute</code><br>Muting information and metadata.</td>
     </tr>
     <tr>
+      <td><code>severity_override</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override</code><br>Metadata about user-defined severity modifications applied to the finding.</td>
+    </tr>
+    <tr>
       <td><code>triage</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@workflow.triage</code><br>Assignment and status information. Assignment may be synchronized with case or Jira information.</td>
@@ -6369,7 +6497,7 @@ Information about any automation rules that apply to the finding.
     <tr>
       <td><code>rule_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.automations.rule_type</code><br>Type of the automation rule applying to the finding. Valid values: <code>mute</code>, <code>due_date</code>, <code>security_inbox</code>, <code>ticket_creation</code>.</td>
+      <td><strong>Path:</strong> <code>@workflow.automations.rule_type</code><br>Type of the automation rule applying to the finding. Valid values: <code>due_date</code>, <code>mute</code>, <code>security_inbox</code>, <code>severity_modifier</code>, <code>ticket_creation</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -6473,6 +6601,11 @@ Array of cases attached to the finding.
       <td><code>key</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@workflow.integrations.cases.key</code><br>Human-readable identifier for the case in the format <code>PROJECT-NUMBER</code> (for example, <code>CSMINV-66</code>).</td>
+    </tr>
+    <tr>
+      <td><code>linear_issue</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue</code><br>Linear issue attached to the case.</td>
     </tr>
     <tr>
       <td><code>servicenow_ticket</code></td>
@@ -6585,6 +6718,42 @@ Jira issue attached to the case.
   </tbody>
 </table>
 
+### Linear Issue
+
+Linear issue attached to the case.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>key</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.key</code><br>Linear issue identifier in the format <code>TEAM-NUMBER</code> (for example, <code>SEC-42</code>).</td>
+    </tr>
+    <tr>
+      <td><code>status</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.status</code><br>Current status of the Linear issue.</td>
+    </tr>
+    <tr>
+      <td><code>team_id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.team_id</code><br>UUID of the Linear team that owns the issue.</td>
+    </tr>
+    <tr>
+      <td><code>url</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.url</code><br>Full URL to the Linear issue.</td>
+    </tr>
+  </tbody>
+</table>
+
 ### Servicenow Ticket
 
 ServiceNow ticket attached to the case.
@@ -6611,7 +6780,7 @@ ServiceNow ticket attached to the case.
     <tr>
       <td><code>table_name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases.servicenow_ticket.table_name</code><br>The name of the table where the ticket is stored; accepted values are <code>incident</code> and <code>em_event</code>.</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.servicenow_ticket.table_name</code><br>The name of the table where the ticket is stored. Valid values: <code>incident</code>, <code>em_event</code>.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
@@ -6734,6 +6903,27 @@ User who muted the finding.
   </tbody>
 </table>
 
+### Severity Override
+
+Metadata about user-defined severity modifications applied to the finding.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>description</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.severity_override.description</code><br>Description of the user-defined severity modification applied to the finding.</td>
+    </tr>
+  </tbody>
+</table>
+
 ### Triage
 
 Assignment and status information. Assignment may be synchronized with case or Jira information.
@@ -6751,11 +6941,6 @@ Assignment and status information. Assignment may be synchronized with case or J
       <td><code>assignee</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@workflow.triage.assignee</code><br>User assigned to the finding.</td>
-    </tr>
-    <tr>
-      <td><code>time_to_acknowledge_seconds</code></td>
-      <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.time_to_acknowledge_seconds</code><br>Time in seconds between when the finding was first detected and the first manual triage action.</td>
     </tr>
   </tbody>
 </table>

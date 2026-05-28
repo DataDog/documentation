@@ -23,7 +23,7 @@ By default, when logs are received by the Datadog intake API, a timestamp is gen
 
 The log timestamp is located at the top section of the log panel. Timestamps are stored in UTC and displayed in the user's local timezone. In the above screenshot, the local profile is set to `UTC+1`, therefore the time the log was received is `11:06:16.807 UTC`.
 
-The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Preferences][1] and look at the **Time zone** section.
+The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Preferences][1] and look at the {{< ui >}}Time zone{{< /ui >}} section.
 
 If the timezone is correct, extract the timestamp from the message to override the log timestamp being shown.
 
@@ -34,8 +34,8 @@ If your raw logs are not showing the expected timestamp in Datadog, [extract](#e
 #### Extract the timestamp value with a parser
 
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
-2. Click **Add Processor**. 
-3. Select **Grok Parser** for the processor type. 
+2. Click {{< ui >}}Add Processor{{< /ui >}}. 
+3. Select {{< ui >}}Grok Parser{{< /ui >}} for the processor type. 
 4. Use the [date() matcher][3] to extract the date and pass it into a custom date attribute. See the below example, as well as [parsing dates examples][4], for details.
 
 For a log example like this:
@@ -70,11 +70,11 @@ The `date` attribute stores the `mytimestamp` value.
 Add a [Log Date Remapper][5] to make sure that the value of the `date` attribute overrides the current log timestamp.
 
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
-2. Click **Add Processor**. 
-3. Select **Date remapper** as the processor type.
+2. Click {{< ui >}}Add Processor{{< /ui >}}. 
+3. Select {{< ui >}}Date remapper{{< /ui >}} as the processor type.
 4. Enter a name for the processor.
 5. Add **date** to the Set date attribute(s) section.
-6. Click **Create**.
+6. Click {{< ui >}}Create{{< /ui >}}.
 
 The following log generated at `06:01:03 EST`, which correspond to `11:01:03 UTC`, is correctly displayed as 12:01:03 (the display timezone is UTC+1 in this case).
 
@@ -97,7 +97,7 @@ To make sure the `mytimestamp` attribute value overrides the current log timesta
 1. Go to your [Logs Pipeline][2]. 
 2. Hover over Preprocessing for JSON Logs, and click the pencil icon. 
 3. Add `mytimestamp` to the list of date attributes. The date remapper looks for each of the reserved attributes in the order they are listed. To ensure the date comes from the `mytimestamp` attribute, place it first in the list.
-4. Click **Save**.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 There are specific date formats to follow for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8], and [RFC3164][9].
 
@@ -110,11 +110,11 @@ If a different date format is being used, see [Custom date format](#custom-date-
 If the date format is not supported by the remapper by default, you can parse the date using a [Grok parser][5] and then convert it to a supported format. 
 
 1. Go to the [Pipeline][2] that is processing the logs. If you do not have a Pipeline configured for those logs yet, create a new Pipeline for it.
-2. Click **Add Processor**. 
-3. Select **Grok Parser** for the processor type. 
+2. Click {{< ui >}}Add Processor{{< /ui >}}. 
+3. Select {{< ui >}}Grok Parser{{< /ui >}} for the processor type. 
 4. Define the parsing rule based on your date format. See these [parsing dates examples][4] for details.
 5. In the Advanced Settings section, add `mytimestamp` to the `Extract from` section so that this parser is applied only to the custom `mytimestamp` attribute.
-6. Click **Create**.
+6. Click {{< ui >}}Create{{< /ui >}}.
 7. Add a [Log Date Remapper][5] to map the correct timestamp to the new logs.
 
 {{< partial name="whats-next/whats-next.html" >}}

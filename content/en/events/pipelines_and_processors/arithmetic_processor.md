@@ -9,7 +9,7 @@ Use the arithmetic processor to add a new attribute (without spaces or special c
 
 A arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
-By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
+By default, a calculation is skipped if an attribute is missing. Select {{< ui >}}Replace missing attribute by 0{{< /ui >}} to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 
 **Notes**:
 

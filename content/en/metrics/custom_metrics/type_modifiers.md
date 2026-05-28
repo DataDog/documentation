@@ -1,5 +1,6 @@
 ---
 title: Metric Type Modifiers
+description: "Use the as_count and as_rate in-app modifiers to switch metrics between count and rate representations."
 aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
