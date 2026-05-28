@@ -321,7 +321,7 @@ A **committer** is an active Git contributor identified by the `author_email` fi
 
 A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
 
-Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
+Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
 ### How email addresses are counted as committers
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
@@ -331,6 +331,15 @@ Commits finalized by known GitHub system accounts such as `noreply@github.com` a
 Commits using `@users.noreply.github.com` are not automatically excluded. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit can be attributed to an individual developer, it is counted.
 
 For clarification on how committers are counted in your environment, [contact Datadog Support][1].
+
+### Deduplicating committers across email addresses
+A single developer can author commits under more than one Git author email — for example, by running `git config user.email` in different repositories. Without deduplication, each email is counted as a separate committer.
+
+For repositories hosted on GitHub, Datadog maps each Git author email to the underlying GitHub user and counts that user once, even when they push under different emails. Deduplication requires a Datadog [GitHub App][28] installed on the affected repositories with the `Contents: Read` permission.
+
+Deduplication is only available for GitHub repositories. Repositories hosted on GitLab, Azure DevOps, or Bitbucket may still show duplicated committers.
+
+If you see duplicate committers for GitHub repositories, confirm that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
@@ -402,3 +411,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [25]: /security/code_security/dev_tool_int/pull_request_comments/
 [26]: /pr_gates/
 [27]: https://github.com/DataDog/datadog-sbom-generator/releases
+[28]: /integrations/github/
+[29]: https://app.datadoghq.com/integrations/github/
