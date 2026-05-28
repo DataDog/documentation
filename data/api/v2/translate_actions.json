@@ -2432,6 +2432,46 @@
     "description": "Get all users for a ServiceNow instance.",
     "summary": "List ServiceNow users"
   },
+  "DeleteStatuspageAccount": {
+    "description": "Delete the Statuspage account configured for your organization.",
+    "summary": "Delete the Statuspage account"
+  },
+  "GetStatuspageAccount": {
+    "description": "Get the Statuspage account configured for your organization.",
+    "summary": "Get the Statuspage account"
+  },
+  "UpdateStatuspageAccount": {
+    "description": "Update the Statuspage account configured for your organization.",
+    "summary": "Update the Statuspage account",
+    "request_description": "Statuspage account payload.",
+    "request_schema_description": "Update request for a Statuspage account."
+  },
+  "CreateStatuspageAccount": {
+    "description": "Create a Statuspage account for your organization. Only one Statuspage\naccount can be configured per organization.",
+    "summary": "Create the Statuspage account",
+    "request_description": "Statuspage account payload.",
+    "request_schema_description": "Create request for a Statuspage account."
+  },
+  "ListStatuspageUrlSettings": {
+    "description": "Get all Statuspage URL settings configured for your organization.",
+    "summary": "Get all Statuspage URL settings"
+  },
+  "CreateStatuspageUrlSetting": {
+    "description": "Create a Statuspage URL setting for your organization.",
+    "summary": "Create a Statuspage URL setting",
+    "request_description": "Statuspage URL setting payload.",
+    "request_schema_description": "Create request for a Statuspage URL setting."
+  },
+  "DeleteStatuspageUrlSetting": {
+    "description": "Delete a single Statuspage URL setting from your organization.",
+    "summary": "Delete a Statuspage URL setting"
+  },
+  "UpdateStatuspageUrlSetting": {
+    "description": "Update a single Statuspage URL setting in your organization.",
+    "summary": "Update a Statuspage URL setting",
+    "request_description": "Statuspage URL setting payload.",
+    "request_schema_description": "Update request for a Statuspage URL setting."
+  },
   "ListIntegrations": {
     "summary": "List Integrations"
   },
