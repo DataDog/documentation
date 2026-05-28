@@ -196,6 +196,13 @@
       "description": "Update App returns \"OK\" response"
     }
   ],
+  "CreateApplicationSecurityWafPolicy": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF Policy returns \"Created\" response"
+    }
+  ],
   "CreateApplicationSecurityWafExclusionFilter": [
     {
       "group": "application_security",

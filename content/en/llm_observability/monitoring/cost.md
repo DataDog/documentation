@@ -45,6 +45,35 @@ The cost metrics include a `source` tag to indicate where the value originated:
 - `source:user` — manually provided
 
 
+## Custom tags on cost and tokens metrics
+
+Datadog's LLM cost and token metrics ship with OOTB tags such as `model_name`, `model_provider`, and `ml_app`. To break down LLM spend by attributes specific to your application — for example team, customer tier or feature, you can promote a subset of your span tags as custom tags on the generated cost and token metrics.
+
+<div class="alert alert-info">Custom tags apply only to LLM <strong>cost</strong> (<code>ml_obs.span.* cost</code>) and <strong>tokens</strong> (<code>ml_obs.span.* tokens</code>) metrics. Other span metrics (such as <code>ml_obs.span.duration</code>) are not affected.</div>
+
+### How it works
+
+1. Tag your LLM spans with the attributes you want to break spend down by, using the SDK's `tags` parameter (or auto-instrumentation)
+2. In the same annotation, mark which of those tag keys should propagate to cost metrics by passing the keys to the `cost_tags` (Python) or `costTags` (Node.js) parameter. See the [SDK Reference][7] for the full instrumentation syntax and timing rules
+3. Once propagated, those tag keys appear as tags on the LLM cost and token metrics. You can use them anywhere in Datadog that consumes these metrics — dashboards, monitors, notebooks, and trace search
+
+<div class="alert alert-warning">Only configure tags with bounded values (such as <code>team</code>, <code>customer_tier</code>, or <code>feature</code>). Tags with unbounded or high-cardinality values (such as user IDs or request IDs) are not fully supported and may be truncated or omitted from the resulting metrics.</div>
+
+### Use case: Filter and group spend by an application attribute
+
+Use custom tags to break down spend by attributes that aren't part of the OOTB metric tags. Build a dashboard widget of `ml_obs.span.llm.total.cost` grouped by `team` to see which teams' LLM usage is driving consumption over time, and configure a metric monitor on the same query to alert independently for each team (or customer tier, feature, environment) when usage crosses a threshold.
+
+### Use case: Track prompt caching effectiveness
+
+Many LLM providers cache reused prompt prefixes to reduce repeated processing. Tagging spans with a prompt identifiers such as "prompt_version" or "prompt_template_id," which are then broken down by theese tags, allows you to:
+
+- Compare prompt variants by how effectively they reuse provider caching. For example, tracking the cache hit rate using the formula `ml_obs.span.llm.input.cache_read.tokens / ml_obs.span.llm.input.cache_write.tokens` 
+- Identify prompts that populate the cache but rarely reuse it, which is usually a sign of unstable prefixes or aggressive invalidation
+- Spot prompts that miss caching entirely because the prefix is too short to qualify or changes with every call.
+- Alert on caching regressions in token metrics before they result in increased costs
+
+{{< img src="llm_observability/cost_tags_cache.png" alt="Dashboard comparing cache read, cache write, and non-cached input tokens grouped by a custom prompt_version tag." style="width:100%;" >}}
+
 ## View costs in LLM Observability
 View your app in LLM Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
 - A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
@@ -124,3 +153,4 @@ How to fix:
 [4]: https://github.com/pydantic/genai-prices/tree/main?tab=readme-ov-file#providers
 [5]: /llm_observability/monitoring/metrics/#llm-cost-metrics
 [6]: /llm_observability/monitoring/prompt_tracking
+[7]: /llm_observability/instrumentation/sdk/#adding-custom-tags-to-cost-and-tokens-metrics

@@ -150,7 +150,7 @@ If the **Request** has a header `User-ID`, its value is applied as tag `http.req
 If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
 Added in version 1.18.3.<br>
 Response header support and entries without tag names added in version 1.26.0.<br>
-Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Software Catalog][17] UI. 
+Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -314,7 +314,7 @@ Added in version 3.40.0.
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
 Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].<br><br>
-Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Software Catalog][17] UI.
+Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Catalog][17] UI.
 
 ### Automatic instrumentation integration configuration
 
