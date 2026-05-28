@@ -17360,6 +17360,18 @@ menu:
       url: /api/latest/storage-management/
       identifier: storage-management
       generated: true
+    - name: Delete a Storage Management configuration
+      url: '#delete-a-storage-management-configuration'
+      identifier: storage-management-delete-a-storage-management-configuration
+      parent: storage-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyncConfig
+        unstable: []
+        order: 2
     - name: Enable Storage Management for a bucket
       url: '#enable-storage-management-for-a-bucket'
       identifier: storage-management-enable-storage-management-for-a-bucket

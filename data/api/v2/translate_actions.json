@@ -1095,6 +1095,10 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
   },
+  "DeleteSyncConfig": {
+    "description": "Delete a Storage Management configuration by its unique identifier. Deleting a configuration stops inventory file synchronization for the associated cloud account.",
+    "summary": "Delete a Storage Management configuration"
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
