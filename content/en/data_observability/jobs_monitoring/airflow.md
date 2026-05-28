@@ -119,7 +119,7 @@ To get started, follow the instructions below.
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][6].
 
-   To inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][11].
+   **Important:** For log correlation to work, you must inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][11].
 
 
 [1]: https://github.com/apache/airflow/releases/tag/2.7.0
