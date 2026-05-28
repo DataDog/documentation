@@ -169,7 +169,7 @@ When the session completes, the evaluation runs once with every trace and every 
 
 The walkthrough below highlights the parts of the configuration that are specific to session scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span- or trace-scoped evaluations.
 
-1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then {{< ui >}}Create your own{{< /ui >}}. (You can also start from a [template evaluation][2].)
+1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select {{< ui >}}Session{{< /ui >}}. (You can also start from a [template evaluation][2].)
 1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
 1. Under {{< ui >}}Evaluation Scope{{< /ui >}} > {{< ui >}}Evaluate On{{< /ui >}}, select {{< ui >}}Session{{< /ui >}}.
 
