@@ -3938,8 +3938,7 @@ menu:
           - v2
         operationids:
           - MuteSecurityFindings
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
