@@ -3691,6 +3691,10 @@
     "description": "List all data connections for an entity",
     "summary": "List connections"
   },
+  "GetPrunedTraceByID": {
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a pruned trace by ID"
+  },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
@@ -5722,6 +5726,10 @@
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
+  },
+  "GetTraceByID": {
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a trace by ID"
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
