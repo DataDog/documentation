@@ -402,13 +402,15 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | Also added to `metadata.conversation_id` and tags |
 
-**Recommended for traces with multiple top-level gen_ai spans.** When an
-APM trace contains multiple sibling gen_ai LLM calls under a non-gen_ai
-parent (for example, an HTTP handler that invokes several LLMs in
-parallel), LLM Observability renders each subtree as its own LLM
-Observability trace. Setting `gen_ai.conversation.id` to the same value
-on every gen_ai span keeps the resulting traces grouped together by
-`session_id` in the UI, even though they have distinct trace IDs.
+**Tip:** When an APM trace's top-most span is not a gen_ai span (for
+example, an HTTP handler that invokes several LLMs in parallel), LLM
+Observability produces a separate LLM Observability trace for each
+top-level gen_ai span in that APM trace. To keep these split traces
+grouped together in the UI, set `gen_ai.conversation.id` to the same
+value on every gen_ai span within the APM trace — LLM Observability
+groups by `session_id`, so the resulting traces appear together even
+though they have distinct LLM Observability trace IDs. This is the same
+attribute used for cross-request conversation grouping.
 
 #### Response attributes
 
