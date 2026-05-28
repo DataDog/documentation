@@ -31,7 +31,7 @@ For each OTel Collector, you can see:
 - Configuration view is enabled by default for Agents and OTel Collectors with version 7.47.0 and later. To enable it manually for older versions, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
 - Agent integration configuration is enabled by default in Agent version 7.49.0 or later. To enable it manually on older versions, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
 
-<div class="alert alert-info">Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> to display OpenTelemetry Collector configuration, pipelines, and topology. Configure the Extension before using the OTel Collector features described on this page.</div>
+<div class="alert alert-info">Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> to display OpenTelemetry Collector configuration, pipelines, and topology. Configure the extension before using the OTel Collector features described on this page.</div>
 
 ## Examine a Datadog Agent or OpenTelemetry Collector
 
@@ -56,7 +56,7 @@ To access these views:
 The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a single OTel Collector. Use the pipeline view to:
 
 - Validate telemetry routing between configured receivers, processors, and exporters.
-- Identify data flow issues such as data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
+- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
 - Investigate pipeline alerts by examining active monitor alerts surfaced on component nodes.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline view showing telemetry routing between OTel Collector components." style="width:100%;" >}}
@@ -69,7 +69,7 @@ The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel
 - Spot data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle to overlay data flow rates on each edge.
 - Investigate pipeline issues by examining active monitor alerts surfaced on Collector nodes.
 
-{{< img src="/agent/fleet_automation/fleet-automation-gateway-topology.png" alt="Topology view in Fleet Automation showing DaemonSet Collectors forwarding through gateway Collectors to Datadog." style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet-automation-gateway-topology.png" alt="Topology view showing DaemonSet Collectors forwarding through gateway Collectors to Datadog." style="width:100%;" >}}
 
 ## View Agent Audit Trail events
 
