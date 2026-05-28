@@ -1,4 +1,4 @@
 ---
-title: Catalog
+title: Software Catalog
 headless: true
 ---

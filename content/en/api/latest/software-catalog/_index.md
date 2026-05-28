@@ -1,3 +1,3 @@
 ---
-title: Catalog
+title: Software Catalog
 ---
