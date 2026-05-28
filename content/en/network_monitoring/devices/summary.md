@@ -22,26 +22,6 @@ The Network Device Monitoring (NDM) **Summary Page** is a command center for net
 
 {{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device performance, traffic, and recent changes." style="width:100%;" >}}
 
-## Prerequisites
-
-[Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
-
-## Filter and time range
-
-Filter the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, `device_model`, `geolocation`, or `subnet`) to narrow the view to a specific scope of your network.
-
-Use the time picker to adjust the lookback window. The default is **Past 1 Hour**.
-
-{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
-
-## Page sections
-
-### Network health
-
-The **Network health** section provides an at-a-glance assessment of your overall network status.
-
-{{< img src="network_device_monitoring/summary/network_health.png" alt="The Network health section showing a Bits AI summary on the left and a topology view with health-coded nodes on the right." style="width:100%;" >}}
-
 Each section of the Summary Page reports one of four health states:
 
 | State | Meaning |
@@ -50,6 +30,20 @@ Each section of the Summary Page reports one of four health states:
 | Degraded | Some metrics have crossed warning thresholds. |
 | Poor | Critical thresholds have been crossed on multiple devices or interfaces. |
 | Unknown | Not enough data is available to assess health. |
+
+**Note**: [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
+
+## Page sections
+
+Use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
+
+{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
+
+### Network health
+
+The **Network health** section provides an at-a-glance assessment of your overall network status.
+
+{{< img src="network_device_monitoring/summary/network_health.png" alt="The Network health section showing a Bits AI summary on the left and a topology view with health-coded nodes on the right." style="width:100%;" >}}
 
 A Bits AI summary explains the current state of your network, highlighting affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click **Chat with Bits Assistant** to ask follow-up questions.
 
@@ -116,15 +110,7 @@ Click **[View all changes][11]** to open the full change history for your curren
 
 ## Device side panel
 
-Click any device or interface in the **Interface health** or **Device health** sections to open the device side panel. The panel provides a detailed overview of the selected device, including:
-
-- **Device Summary**: Active issues, triggered monitors, and tags
-- **Interfaces**: Interface status and utilization, with a **View interfaces** link
-- **Dependencies**: Connected devices and VPN tunnels, with a **View dependencies** link
-- **Metrics**: CPU usage, memory usage, and uptime, with a **View all metrics** link
-- **Configuration**: Recent configuration details
-- **Traffic**: Traffic data
-- **Events**: Recent events
+Click any device or interface in the **Interface health** or **Device health** sections to open the device side panel. The panel provides a detailed overview of the selected device, including its active issues, triggered monitors, interface status, dependencies, metrics, configuration, and recent events.
 
 {{< img src="network_device_monitoring/summary/device-side-panel.png" alt="The device side panel showing sections for device summary, interfaces with status and utilization, dependencies, and metrics." style="width:100%;" >}}
 
