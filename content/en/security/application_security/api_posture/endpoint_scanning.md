@@ -9,7 +9,7 @@ Endpoint Scanning probes your API endpoints from outside your environment and re
 
 Endpoint Scanning sends only `GET` requests. It does not call `POST`, `PUT`, `PATCH`, or `DELETE` endpoints, and never modifies data on your endpoints.
 
-<div class="alert alert-info">At this time, Endpoint Scanning only scans endpoints that AAP discovers from APM traces.</div>
+<div class="alert alert-info">Endpoint Scanning only scans endpoints that AAP discovers from APM traces.</div>
 
 ## What Endpoint Scanning verifies
 
