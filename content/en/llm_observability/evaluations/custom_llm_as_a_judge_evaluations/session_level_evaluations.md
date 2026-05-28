@@ -213,7 +213,7 @@ After a session completes, its evaluation result is attached to the session and 
 
 Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every evaluation that ran for it, alongside the LLM judge's reasoning when {{< ui >}}Enable Reasoning{{< /ui >}} was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific trace or span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
 
-{{< img src="llm_observability/evaluations/session_level_eval_results.png" alt="The Evaluations tab of a completed session, showing the session-level evaluation result with the LLM judge's reasoning expanded." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/session_level_eval_results.png" alt="A session detail panel with the Session evaluations section expanded. The table lists eight evaluations — including goal completeness, toxicity, topic relevancy, tool selection, sentiment, and prompt injection — each with an outcome value shown as a colored badge (such as True, Not Toxic, or On Topic) and a preview of the LLM judge's reasoning." style="width:100%;" >}}
 
 ## Permissions
 
