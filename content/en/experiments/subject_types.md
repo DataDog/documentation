@@ -11,6 +11,9 @@ further_reading:
 - link: "/experiments/reading_results"
   tag: "Documentation"
   text: "Read Experiment Results"
+- link: "/experiments/guide/connecting_a_data_warehouse/"
+  tag: "Documentation"
+  text: "Connect your data warehouse"
 ---
 
 ## Overview
@@ -37,7 +40,7 @@ Randomization uses deterministic hashing. Each time the user returns to the appl
 
 ## Map experiment exposures to metrics
 
-When you [plan an experiment][1], select the subject type above the primary metric:
+When you [plan an experiment][1], select the appropriate subject type:
 
 {{< img src="/product_analytics/experiment/subject_types/select_subject_type.png" alt="The experiment setup page with the subject type selector above primary metric selection, showing User and Organization options." style="width:80%;" >}}
 
@@ -53,7 +56,7 @@ When you configure [Metric SQL Models][2], map warehouse columns to subject type
 
 <div class="alert alert-info">If you add a default warehouse column ID on the Subject Types page (for example, <code>user_id</code>), Datadog automatically maps columns with that name to the matching subject type.</div>
 
-Datadog uses the subject column to join experiment exposure data in the `g_exposures` table to your metric SQL. Make sure values in the subject column match the identifiers you pass as `targetingKey` in the SDK.
+Datadog writes experiment exposures to the `g_exposures` table in the output schema you configure when you [connect your warehouse][4]. Datadog joins that table to your Metric SQL on the subject column you mapped above. Values in the subject column must match the `targetingKey` you pass with the Datadog SDK.
 
 For example, if a Metric SQL Model uses a `user_id` column for the experiment subject type, Datadog analyzes results with SQL similar to the following:
 
@@ -103,3 +106,4 @@ When Datadog computes experiment results, it joins experiment exposures to Produ
 [1]: /experiments/plan_and_launch_experiments/
 [2]: /experiments/defining_metrics/?tab=warehouse#create-a-sql-model
 [3]: /experiments/analysis_methods/
+[4]: /experiments/guide/connecting_a_data_warehouse/
