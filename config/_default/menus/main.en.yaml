@@ -4119,6 +4119,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 7
+    - name: Cost Optimization Automation
+      url: cloud_cost_management/recommendations/cost_optimization_automation
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_optimization_automation
+      weight: 700
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
