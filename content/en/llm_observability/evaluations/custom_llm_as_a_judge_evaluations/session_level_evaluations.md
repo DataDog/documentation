@@ -78,7 +78,7 @@ Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every ev
 
 ## Example prompts
 
-### 1. Session goal completeness
+### Session goal completeness
 
 Score whether the user accomplished what they came to do across the entire session, including follow-up turns in separate traces.
 
@@ -102,7 +102,7 @@ Session traces:
 
 The managed [Goal Completeness][11] template evaluation implements this pattern.
 
-### 2. Multi-turn conversation quality
+### Multi-turn conversation quality
 
 Evaluate coherence, context retention, and tone across the full session rather than a single exchange.
 
@@ -125,7 +125,7 @@ User and assistant messages across the session:
 {{traces[meta.span.kind:llm].meta.output.messages[*].content}}
 ```
 
-### 3. User behavior and frustration signals
+### User behavior and frustration signals
 
 Detect behavioral patterns that only emerge when viewing the full session.
 
@@ -147,7 +147,7 @@ Full session:
 {{traces}}
 ```
 
-### 4. Agent consistency across a session
+### Agent consistency across a session
 
 Check whether the agent maintained quality and policy compliance across every turn in the session.
 
