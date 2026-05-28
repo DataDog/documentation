@@ -92,7 +92,7 @@ To view a host's OpenTelemetry Collector configuration, click the host to open t
 
 ## Export
 
-To download a copy of the Host List, click **Export** above the list to open the query in DDSQL, then download it from there. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
+Click **Export** > **Open in DDSQL Editor**, then download the results from the [DDSQL Editor][18]. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
 
 - The [host overview report][17].
 - The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
@@ -149,3 +149,4 @@ for host in infra['rows']:
 [15]: /infrastructure/resource_catalog/#investigate-a-host-or-resource
 [16]: /getting_started/search/
 [17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
+[18]: /ddsql_editor/#save-and-share-queries
