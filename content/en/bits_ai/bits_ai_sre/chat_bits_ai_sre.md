@@ -26,6 +26,7 @@ The Bits AI SRE chatbot has access to:
 | Look up information about a service            | `Are there any ongoing incidents for <web-store>?`                | Catalog and Incidents    |
 | Find recent changes for a service              | `Were there any recent changes on <web-store>?`                   | Change Tracking                   |
 | Query APM request, error, and duration metrics | `What's the current error rate for <web-store>?`                  | APM                               |
+| Query and analyze profiling data               | `What performance bottlenecks do you see for <web-store>?`        | Continuous Profiler                               |
 | Ask about Datadog products                     | `Does Bits AI SRE connect to Datadog Case Management?`            | Datadog Documentation             |
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
