@@ -16,6 +16,10 @@ further_reading:
       text: "Datadog MCP Server"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+Pup CLI is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 [Pup CLI][1] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes [Datadog's API surface][9] for use in AI agent workflows and automated pipelines.
