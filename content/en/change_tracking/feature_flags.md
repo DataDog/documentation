@@ -51,7 +51,7 @@ To track LaunchDarkly feature flags in your services' Change Tracking timeline:
 1. In {{< ui >}}Datadog tags{{< /ui >}}, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
 1. Click {{< ui >}}Save changes{{< /ui >}}.
 
-For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Software Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the Change Tracking timeline.
+For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the Change Tracking timeline.
 
 ### Custom feature flags
 

@@ -10,30 +10,30 @@ aliases:
   - /tracing/service_catalog/use_cases/dev_onboarding
   - /software_catalog/use_cases/dev_onboarding
 further_reading:
-  - link: "/software_catalog/scorecards/"
+  - link: "/internal_developer_portal/scorecards/"
     tag: "Documentation"
     text: "Datadog Scorecards"
-  - link: "/software_catalog/software_templates/"
+  - link: "/internal_developer_portal/self_service_actions/software_templates/"
     tag: "Documentation"
     text: "Datadog Software Templates"
   - link: "https://www.datadoghq.com/blog/software-catalog/"
     tag: "Blog"
-    text: "Improve developer experience and collaboration with Software Catalog"
+    text: "Improve developer experience and collaboration with Catalog"
 ---
 
-Datadog's Software Catalog automates key tasks and centralizes essential resources (such as docs, runbooks, [scorecards][1], and [templates][2]) to reduce time-to-first-commit and optimize the overall developer experience.
+Datadog's Catalog automates key tasks and centralizes essential resources (such as docs, runbooks, [scorecards][1], and [templates][2]) to reduce time-to-first-commit and optimize the overall developer experience.
 
 {{< img src="tracing/software_catalog/dev-onboarding-use-case-overview.png" alt="A service's home page, showing information like documentation and repository links, service owners, and on-call details." >}}
 
 ## Quick access to documentation and standards
 
-Software Catalog acts as a single source of truth for your engineering environment. Newly onboarded developers can:
+Catalog acts as a single source of truth for your engineering environment. Newly onboarded developers can:
 
 - Quickly locate relevant [APIs][3], entities, repositories, and dependencies.
 - Access up-to-date documentation, code snippets, and runbooks, enabling them to start making meaningful contributions.
 - Navigate [organized metadata and organizational inventory][4] to understand the team's structure, communication channels, and best practices.
 
-{{< img src="tracing/software_catalog/dev-onboarding-use-case-workflows.png" alt="The side panel view of an API in the Software Catalog, showing a flow chart of services that consume the API, an OpenAPI Preview, and API metadata." >}}
+{{< img src="tracing/software_catalog/dev-onboarding-use-case-workflows.png" alt="The side panel view of an API in the Catalog, showing a flow chart of services that consume the API, an OpenAPI Preview, and API metadata." >}}
 
 
 ## Automate onboarding workflows
@@ -53,8 +53,8 @@ Software Catalog acts as a single source of truth for your engineering environme
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /software_catalog/scorecards/
-[2]: /software_catalog/software_templates/
+[1]: /internal_developer_portal/scorecards/
+[2]: /internal_developer_portal/self_service_actions/software_templates/
 [3]: /api/latest/api-management/
 [4]: /account_management/teams/
 [5]: /service_management/app_builder/

@@ -2080,6 +2080,7 @@ components:
         - $ref: "#/components/schemas/FormulaAndFunctionMetricQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionEventQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionApmMetricsQueryDefinition"
     DistributionWidgetRequest:
       description: Updated distribution widget.
       properties:

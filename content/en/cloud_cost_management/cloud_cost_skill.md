@@ -25,7 +25,7 @@ The Cloud Cost skill runs in Bits AI Assistant. Fill out the Bits AI Assistant P
 
 ## Overview
 
-The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits AI Assistant][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and general cost questions. For example, you can ask Bits AI Assistant to:
+The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits AI Assistant][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and answering general cost questions. For example, you can ask Bits AI Assistant to:
 
 - Investigate [cost monitor alerts][2], [cost anomalies][3], and [cost changes][4]
 - Identify teams, services, accounts, regions, or resources driving spend
