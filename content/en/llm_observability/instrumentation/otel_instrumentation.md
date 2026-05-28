@@ -407,7 +407,7 @@ example, an HTTP handler that invokes several LLMs in parallel), LLM
 Observability produces a separate LLM Observability trace for each
 top-level gen_ai span in that APM trace. To keep these split traces
 grouped together in the UI, set `gen_ai.conversation.id` to the same
-value on every gen_ai span within the APM trace — LLM Observability
+value on each gen_ai span within the APM trace — LLM Observability
 groups by `session_id`, so the resulting traces appear together even
 though they have distinct LLM Observability trace IDs. This is the same
 attribute used for cross-request conversation grouping.
