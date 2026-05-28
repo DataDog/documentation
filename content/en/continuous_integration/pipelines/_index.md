@@ -29,7 +29,7 @@ cascade:
 
 Select your CI provider to set up CI Visibility in Datadog:
 
-{{< card-grid min_width="225px" >}}
+{{< card-grid card_width="225px" >}}
   {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
   {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
   {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}

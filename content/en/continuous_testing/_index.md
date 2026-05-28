@@ -60,7 +60,7 @@ To ensure your users have the best experience, you can automate [cross-browser t
 
 Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as [Slack][18] or [Jira][19] to merge workflows and avoid context switching.
 
-{{< card-grid min_width="115px" >}}
+{{< card-grid card_width="115px" >}}
   {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
   {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
   {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}

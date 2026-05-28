@@ -35,7 +35,7 @@ To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, 
 
 See the respective documentation for your cloud provider:
 
-{{< card-grid img_width="50" >}}
+{{< card-grid image_width="50" >}}
   {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" >}}
   {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" >}}
   {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" >}}

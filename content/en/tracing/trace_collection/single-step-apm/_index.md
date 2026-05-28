@@ -48,7 +48,7 @@ After instrumentation, you can optionally:
 
 Click on one of the following tiles to learn how to set up SSI for your deployment type:
 
-{{< card-grid min_width="170px" img_width="200" >}}
+{{< card-grid card_width="170px" image_width="200" >}}
   {{< image-card href="linux/" src="integrations_logos/linux.png" alt="linux" >}}
   {{< image-card href="docker/" src="integrations_logos/docker.png" alt="docker" >}}
   {{< image-card href="kubernetes/" src="integrations_logos/kubernetes.png" alt="kubernetes" >}}

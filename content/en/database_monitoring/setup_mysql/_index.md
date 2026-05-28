@@ -19,7 +19,7 @@ disable_sidebar: true
 
 For setup instructions, select your hosting type:
 
-{{< card-grid min_width="170px" >}}
+{{< card-grid card_width="170px" >}}
   {{< image-card href="/database_monitoring/setup_mysql/selfhosted" src="integrations_logos/mysql.png" alt="Selfhosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_mysql/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_mysql/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}

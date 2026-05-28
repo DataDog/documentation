@@ -78,7 +78,7 @@ To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16
 
 For more detailed instructions, select your runtime below:
 
-{{< card-grid min_width="170px" >}}
+{{< card-grid card_width="170px" >}}
   {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/dynamic_instrumentation/enabling/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}

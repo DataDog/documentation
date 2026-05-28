@@ -70,7 +70,7 @@ Accelerate your application development by combining testing and troubleshooting
 
 To integrate with a CI provider or a collaboration tool like [Slack][28] or [Jira][29], see the respective documentation:
 
-{{< card-grid min_width="170px" >}}
+{{< card-grid card_width="170px" >}}
   {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
   {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
   {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}

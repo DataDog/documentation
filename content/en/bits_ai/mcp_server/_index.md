@@ -41,7 +41,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
 
 **Ready to get started?** Select your agent below or see [Set Up the Datadog MCP Server][27] for connection instructions.
 
-{{< card-grid min_width="90px" >}}
+{{< card-grid card_width="90px" >}}
   {{< image-card href="/bits_ai/mcp_server/setup/?tab=cursor" src="integrations_logos/cursor_avatar.svg" alt="Cursor" tooltip="Cursor" >}}
   {{< image-card href="/bits_ai/mcp_server/setup/?tab=claudecode" src="integrations_logos/claude-code_avatar.svg" alt="Claude Code" tooltip="Claude Code" >}}
   {{< image-card href="/bits_ai/mcp_server/setup/?tab=geminicli" src="integrations_logos/google-gemini_avatar.svg" alt="Gemini CLI" tooltip="Gemini CLI" >}}

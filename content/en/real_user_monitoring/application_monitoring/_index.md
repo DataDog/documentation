@@ -27,7 +27,7 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 Select a platform to start collecting RUM data on your application:
 
-{{< card-grid img_width="200" >}}
+{{< card-grid image_width="200" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup" src="integrations_logos/javascript_large.svg" alt="browser" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_large.svg" alt="android" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_tv_large.svg" alt="android tv" >}}

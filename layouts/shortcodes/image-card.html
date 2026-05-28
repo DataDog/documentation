@@ -3,7 +3,7 @@
 {{ $alt := .Get "alt" | default "" }}
 {{ $title := .Get "title" }}
 {{ $subtitle := .Get "subtitle" }}
-{{ $img_width := .Get "img_width" | default (.Parent.Get "img_width") | default "150" }}
+{{ $img_width := .Get "image_width" | default (.Parent.Get "image_width") | default "150" }}
 {{ $tooltip := .Get "tooltip" }}
 
 <a class="card-grid-card{{ with $title }} has-title{{ end }}" href="{{ $href }}"{{ with $tooltip }} title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"{{ end }}>

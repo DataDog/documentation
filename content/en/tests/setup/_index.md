@@ -7,7 +7,7 @@ aliases:
 
 For information about configuration options for [Test Optimization][1], choose your language:
 
-{{< card-grid min_width="75px" >}}
+{{< card-grid card_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
   {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}

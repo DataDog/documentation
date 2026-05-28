@@ -72,7 +72,7 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 ### Instrument your application
 
-{{< card-grid img_width="400" >}}
+{{< card-grid image_width="400" >}}
   {{< image-card href="/profiler/enabling/?prog_lang=go" src="integrations_logos/go-metro.png" alt="go" >}}
   {{< image-card href="/profiler/enabling/?prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/profiler/enabling/?prog_lang=java&runtime=graalvm_native_image" src="integrations_logos/graalvm.png" alt="GraalVM" >}}

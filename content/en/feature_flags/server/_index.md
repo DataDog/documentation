@@ -16,7 +16,7 @@ Datadog Feature Flags for server-side applications allow you to remotely control
 
 This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
   {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}

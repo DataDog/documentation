@@ -34,7 +34,7 @@ API tests help you **proactively monitor** your most important services so they 
 
 Launch requests on the different network layers of your systems with these subtypes:
 
-{{< card-grid img_width="100">}}
+{{< card-grid image_width="100">}}
   {{< image-card href="/synthetics/api_tests/http_tests" src="synthetics/api_tests/http-test1.png" alt="HTTP" >}}
   {{< image-card href="/synthetics/api_tests/ssl_tests" src="synthetics/api_tests/ssl-test1.png" alt="SSL" >}}
   {{< image-card href="/synthetics/api_tests/dns_tests" src="synthetics/api_tests/dns-test1.png" alt="DNS" >}}

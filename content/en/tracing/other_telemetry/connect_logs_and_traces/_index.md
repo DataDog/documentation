@@ -21,7 +21,7 @@ Before correlating traces with logs, ensure your logs are either sent as JSON, o
 
 To learn more about automatically or manually connecting your logs to your traces, select your language below:
 
-{{< card-grid min_width="170px">}}
+{{< card-grid card_width="170px">}}
   {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}

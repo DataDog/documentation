@@ -41,7 +41,7 @@ CI Visibility tracks the performance and results of your CI pipelines, and displ
 
 To start sending pipeline metrics, see the documentation for one of the following CI providers that Datadog supports below.
 
-{{< card-grid min_width="200px">}}
+{{< card-grid card_width="200px">}}
   {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
   {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
   {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}

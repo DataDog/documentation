@@ -58,7 +58,7 @@ cascade:
 
 Select an option to configure Test Optimization in Datadog:
 
-{{< card-grid min_width="75px" >}}
+{{< card-grid card_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
   {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}

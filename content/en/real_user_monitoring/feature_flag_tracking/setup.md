@@ -126,7 +126,7 @@ You can start collecting feature flag data with [custom feature flag management 
 
 </div>
 
-{{< card-grid min_width="200" >}}
+{{< card-grid card_width="200" >}}
   {{< image-card href="/feature_flags" src="integrations_logos/datadog_large.svg" alt="datadog" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#amplitude-integration" src="integrations_logos/amplitude_large.svg" alt="amplitude" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#configcat-integration" src="integrations_logos/configcat_large.svg" alt="custom" >}}

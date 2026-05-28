@@ -75,7 +75,7 @@ The Query Metrics list shows Requests, Average latency, Total time, and Percent 
 
 To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
 
-{{< card-grid min_width="200px">}}
+{{< card-grid card_width="200px">}}
   {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
   {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
   {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}

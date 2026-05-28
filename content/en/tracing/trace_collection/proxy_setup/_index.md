@@ -10,7 +10,7 @@ algolia:
 
 You can set up tracing to include collecting trace information about proxies.
 
-{{< card-grid min_width="170px" >}}
+{{< card-grid card_width="170px" >}}
   {{< image-card href="httpd/" src="integrations_logos/apache.png" alt="httpd" >}}
   {{< image-card href="envoy/" src="integrations_logos/envoy.png" alt="envoy" >}}
   {{< image-card href="istio/" src="integrations_logos/istio.png" alt="istio" >}}

@@ -67,7 +67,7 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
 
 ### By language
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/data_streams/java/" src="integrations_logos/java.png" alt="java" >}}
   {{< image-card href="/data_streams/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/data_streams/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
@@ -79,7 +79,7 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
 
 ### By technology
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/data_streams/setup/technologies/kafka/" src="integrations_logos/kafka.png" alt="Kafka" >}}
   {{< image-card href="/data_streams/setup/technologies/sqs/" src="integrations_logos/sqs.png" alt="Amazon SQS" >}}
   {{< image-card href="/data_streams/setup/technologies/rabbitmq/" src="integrations_logos/rabbitmq.png" alt="RabbitMQ" >}}

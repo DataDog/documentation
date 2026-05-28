@@ -4,7 +4,7 @@ draft: true
 private: true
 ---
 
-## Image grid (4 cards, default min_width)
+## Image grid (4 cards, default card_width)
 
 {{< card-grid >}}
   {{< image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" >}}
@@ -27,26 +27,26 @@ private: true
 
 ## Text-only grid
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/getting_started/" title="Containers" >}}
   {{< image-card href="/getting_started/" title="Jobs" subtitle="(Preview)" >}}
   {{< image-card href="/getting_started/" title="Functions" >}}
 {{< /card-grid >}}
 
-## Custom min_width (200px)
+## Custom card_width (200px)
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" >}}
   {{< image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" >}}
   {{< image-card href="/getting_started/" src="integrations_logos/java.png" alt="Java" >}}
 {{< /card-grid >}}
 
-## Custom img_width
+## Custom image_width
 
 {{< card-grid >}}
-  {{< image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" img_width="50" >}}
-  {{< image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" img_width="50" >}}
-  {{< image-card href="/getting_started/" src="integrations_logos/java.png" alt="Java" img_width="50" >}}
+  {{< image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" image_width="50" >}}
+  {{< image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" image_width="50" >}}
+  {{< image-card href="/getting_started/" src="integrations_logos/java.png" alt="Java" image_width="50" >}}
 {{< /card-grid >}}
 
 ## Single card

@@ -26,7 +26,7 @@ The following AAP capabilities are supported relative to each language's SDK:
 Select your application language for details about framework compatibility and feature support.
 
 
-{{< card-grid min_width="225px" >}}
+{{< card-grid card_width="225px" >}}
   {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
   {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}

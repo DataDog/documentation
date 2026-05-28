@@ -303,7 +303,7 @@ See [Working with Data][8] for more information on transforming your data.
 
 The quickstart walked you through installing the Worker and deploying a sample pipeline configuration. For instructions on how to install the Worker to receive and route data from your Datadog Agents to Datadog or to receive and route data from your Splunk HEC to Splunk and Datadog, select your specific use case:
 
-{{< card-grid min_width="225px" >}}
+{{< card-grid card_width="225px" >}}
   {{< image-card href="datadog/" src="integrations_logos/datadog.png" alt="Datadog" >}}
   {{< image-card href="splunk/" src="integrations_logos/splunk.png" alt="Splunk" >}}
 {{< /card-grid >}}

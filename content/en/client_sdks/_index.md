@@ -19,7 +19,7 @@ Datadog Client SDKs enable you to instrument your web and mobile applications wi
 
 Select a platform to start instrumenting your application:
 
-{{< card-grid img_width="200" >}}
+{{< card-grid image_width="200" >}}
   {{< image-card href="/client_sdks/setup/?sdk=browser" src="integrations_logos/javascript_large.svg" alt="browser" >}}
   {{< image-card href="/client_sdks/setup/?sdk=android" src="integrations_logos/android_large.svg" alt="android" >}}
   {{< image-card href="/client_sdks/setup/?sdk=ios" src="integrations_logos/ios_large.svg" alt="ios" >}}

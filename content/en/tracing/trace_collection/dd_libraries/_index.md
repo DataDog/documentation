@@ -25,7 +25,7 @@ For containerized environments, follow the links below to enable trace collectio
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][8].
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
-{{< card-grid min_width="170px" >}}
+{{< card-grid card_width="170px" >}}
   {{< image-card href="/agent/docker/apm/?tab=java" src="integrations_logos/docker.png" alt="Docker" >}}
   {{< image-card href="/agent/kubernetes/apm/?tab=helm" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
   {{< image-card href="/agent/amazon_ecs/apm/?tab=python" src="integrations_logos/amazon_ecs.png" alt="Amazon ECS" >}}
@@ -66,7 +66,7 @@ For other environments, see the [Integrations][14] documentation for that enviro
 
 Set up your application to send [traces][2] using one of the following official Datadog SDKs:
 
-{{< card-grid min_width="225px" img_width="200">}}
+{{< card-grid card_width="225px" image_width="200">}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}

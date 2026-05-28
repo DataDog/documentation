@@ -18,7 +18,7 @@ disable_sidebar: true
 
 For setup instructions, select your hosting type:
 
-{{< card-grid min_width="220px" >}}
+{{< card-grid card_width="220px" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/selfhosted" src="integrations_logos/sqlserver.png" alt="Selfhosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/azure" src="integrations_logos/azure.png" alt="Aurora" >}}

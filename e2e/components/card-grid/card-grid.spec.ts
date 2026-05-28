@@ -73,7 +73,7 @@ test.describe('card-grid shortcode', () => {
         await expect(containersCard.locator('small')).toHaveCount(0);
     });
 
-    test('custom min_width sets CSS custom property', async ({ page }) => {
+    test('custom card_width sets CSS custom property', async ({ page }) => {
         const grid = gridSection(page, SECTION.CUSTOM_MIN_WIDTH);
         const minWidth = await grid.evaluate(el =>
             getComputedStyle(el).getPropertyValue('--card-min-width').trim()
@@ -81,7 +81,7 @@ test.describe('card-grid shortcode', () => {
         expect(minWidth).toBe('200px');
     });
 
-    test('default min_width is 150px', async ({ page }) => {
+    test('default card_width is 150px', async ({ page }) => {
         const grid = gridSection(page, SECTION.IMAGE_4);
         const minWidth = await grid.evaluate(el =>
             getComputedStyle(el).getPropertyValue('--card-min-width').trim()
@@ -89,7 +89,7 @@ test.describe('card-grid shortcode', () => {
         expect(minWidth).toBe('150px');
     });
 
-    test('custom img_width applies to images', async ({ page }) => {
+    test('custom image_width applies to images', async ({ page }) => {
         const card = gridSection(page, SECTION.CUSTOM_IMG_WIDTH).locator('.card-grid-card').first();
         const imgWidth = await card.locator('img').getAttribute('width');
         expect(imgWidth).toBe('50');

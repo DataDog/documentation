@@ -8,7 +8,7 @@ type: multi-code-lang
 
 For information about configuration options for [Test Impact Analysis][1], choose your language:
 
-{{< card-grid min_width="170px" img_width="80">}}
+{{< card-grid card_width="170px" image_width="80">}}
   {{< image-card href="/tests/test_impact_analysis/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
   {{< image-card href="/tests/test_impact_analysis/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/tests/test_impact_analysis/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}

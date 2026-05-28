@@ -33,7 +33,7 @@ To ensure proper correlation for **Browser Logs**, you must [match configuration
 
 To access the Logs setup pages, follow the links below based on your platform:
 
-{{< card-grid min_width="200" >}}
+{{< card-grid card_width="200" >}}
   {{< image-card href="/logs/log_collection/javascript" src="integrations_logos/javascript_large.svg" alt="browser" >}}
   {{< image-card href="/logs/log_collection/android" src="integrations_logos/android_large.svg" alt="android" >}}
   {{< image-card href="/logs/log_collection/ios" src="integrations_logos/ios_large.svg" alt="ios" >}}

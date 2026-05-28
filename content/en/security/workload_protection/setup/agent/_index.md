@@ -7,7 +7,7 @@ Use the following instructions to enable Workload Protection on the Datadog Agen
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 
-{{< card-grid min_width="225px" img_width="200" >}}
+{{< card-grid card_width="225px" image_width="200" >}}
   {{< image-card href="/security/workload_protection/setup/agent/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
   {{< image-card href="/security/workload_protection/setup/agent/docker/" src="integrations_logos/docker.png" alt="Docker" >}}
   {{< image-card href="/security/workload_protection/setup/agent/ecs_ec2/" src="integrations_logos/amazon_ecs.png" alt="ECS EC2" >}}

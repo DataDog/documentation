@@ -41,7 +41,7 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 
 ### Client-side SDKs
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
   {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
@@ -55,7 +55,7 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 
 ### Server-side SDKs
 
-{{< card-grid min_width="200px" >}}
+{{< card-grid card_width="200px" >}}
   {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
   {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}

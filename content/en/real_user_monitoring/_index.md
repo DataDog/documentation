@@ -113,7 +113,7 @@ Combined with RUM performance data, Session Replay is beneficial for error ident
 
 Select an application type to start collecting RUM data:
 
-{{< card-grid min_width="210" >}}
+{{< card-grid card_width="210" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/browser/" src="integrations_logos/javascript_large.svg" alt="browser" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_large.svg" alt="android" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/ios_large.svg" alt="ios" >}}

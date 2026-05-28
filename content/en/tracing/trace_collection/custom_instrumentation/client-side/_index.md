@@ -15,7 +15,7 @@ Use client-side custom instrumentation to capture observability data from your m
 
 Select your platform to get started:
 
-{{< card-grid min_width="240px" img_width="200">}}
+{{< card-grid card_width="240px" image_width="200">}}
   {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
 {{< /card-grid >}}

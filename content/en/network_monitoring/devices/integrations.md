@@ -25,7 +25,7 @@ Network Device Monitoring (NDM) supports a growing set of integrations for route
 
 The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
-{{< card-grid min_width="130px" >}}
+{{< card-grid card_width="130px" >}}
   {{< image-card href="/integrations/cisco-aci/" src="integrations_logos/cisco-aci_small.svg" alt="cisco-aci" >}}
   {{< image-card href="/integrations/cisco-sdwan/" src="integrations_logos/cisco-sdwan_small.svg" alt="cisco-sdwan" >}}
   {{< image-card href="/integrations/velocloud-sd-wan/" src="integrations_logos/velocloud-sd-wan_small.svg" alt="velocloud" >}}
@@ -45,7 +45,7 @@ The following integrations cover **software-defined and edge networking platform
 
 The following integrations cover **wireless networking platforms** that support NDM collection. These integrations provide visibility into wireless access points, client connections, and network performance across your wireless infrastructure.
 
-{{< card-grid min_width="200px">}}
+{{< card-grid card_width="200px">}}
   {{< image-card href="/integrations/meraki/" src="integrations_logos/meraki.png" alt="meraki" >}}
   {{< image-card href="/integrations/juniper-mist/" src="integrations_logos/juniper-mist_small.svg" alt="juniper-mist" >}}
   {{< image-card href="/integrations/aruba-central/" src="integrations_logos/aruba-central_small.svg" alt="aruba-central" >}}
@@ -61,7 +61,7 @@ The following integrations cover **wireless networking platforms** that support 
 
 NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
 
-{{< card-grid min_width="200px">}}
+{{< card-grid card_width="200px">}}
   {{< image-card href="/integrations/vsphere/" src="integrations_logos/vsphere.png" alt="vsphere" >}}
   {{< image-card href="/integrations/openstack/" src="integrations_logos/openstack.png" alt="openstack" >}}
   {{< image-card href="/integrations/proxmox/" src="integrations_logos/proxmox_small.svg" alt="proxmox" >}}

@@ -23,7 +23,7 @@ You can access Storage Management in Datadog by navigating to **Infrastructure**
 
 Use the guides below to set up Storage Management in Datadog for your cloud storage service.
 
-{{< card-grid min_width="225px" >}}
+{{< card-grid card_width="225px" >}}
   {{< image-card href="/infrastructure/storage_management/amazon_s3" src="integrations_logos/amazon_s3.png" alt="Amazon S3" >}}
   {{< image-card href="/infrastructure/storage_management/google_cloud_storage" src="integrations_logos/google_cloud_storage.png" alt="Google Cloud Storage" >}}
   {{< image-card href="/infrastructure/storage_management/azure_blob_storage" src="integrations_logos/azure_blob_storage.png" alt="Azure Blob Storage" >}}

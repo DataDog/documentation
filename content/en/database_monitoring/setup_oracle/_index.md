@@ -20,7 +20,7 @@ disable_sidebar: true
 
 ## Setup
 For setup instructions, select your hosting type:
-{{< card-grid min_width="160px" >}}
+{{< card-grid card_width="160px" >}}
   {{< image-card href="/database_monitoring/setup_oracle/selfhosted" src="integrations_logos/oracle.png" alt="Selfhosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_oracle/rds" src="integrations_logos/amazon_rds.png" alt="RDS" title="RDS" >}}
   {{< image-card href="/database_monitoring/setup_oracle/rac" src="integrations_logos/oracle.png" alt="RAC" title="RAC" >}}

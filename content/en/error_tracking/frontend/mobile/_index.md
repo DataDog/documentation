@@ -13,7 +13,7 @@ further_reading:
 
 For information about crash reporting and error tracking for your application, choose a platform:
 
-{{< card-grid img_width="200" >}}
+{{< card-grid image_width="200" >}}
   {{< image-card href="/error_tracking/frontend/mobile/android/" src="integrations_logos/android_large.svg" alt="android" >}}
   {{< image-card href="/error_tracking/frontend/mobile/ios/" src="integrations_logos/ios_large.svg" alt="ios" >}}
   {{< image-card href="/error_tracking/frontend/mobile/expo/" src="integrations_logos/rum-expo_large.svg" alt="rum-expo" >}}

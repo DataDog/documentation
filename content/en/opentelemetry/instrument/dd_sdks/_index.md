@@ -36,7 +36,7 @@ By [instrumenting your code with OpenTelemetry APIs][2], your code:
 
 To learn more, follow the link for your language:
 
-{{< card-grid min_width="170px">}}
+{{< card-grid card_width="170px">}}
   {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}

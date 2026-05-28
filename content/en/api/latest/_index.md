@@ -238,7 +238,7 @@ async fn main() {
 
 Or check out the libraries directly:
 
-{{< card-grid min_width="100px" >}}
+{{< card-grid card_width="100px" >}}
   {{< image-card href="https://github.com/DataDog/datadog-api-client-java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="https://github.com/DataDog/datadog-api-client-python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="https://github.com/DataDog/datadog-api-client-ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}

@@ -37,7 +37,7 @@ Help me monitor my AWS Lambda functions with Datadog
 
 ## Instrumentation instructions
 
-{{< card-grid min_width="30%" img_width="200" >}}
+{{< card-grid card_width="30%" image_width="200" >}}
   {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
   {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}

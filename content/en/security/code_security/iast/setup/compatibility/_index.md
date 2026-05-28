@@ -18,7 +18,7 @@ The following capabilities are supported relative to each language's SDK:
 
 Select your application language for details about framework compatibility and feature support.
 
-{{< card-grid min_width="170px" >}}
+{{< card-grid card_width="170px" >}}
   {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
   {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
