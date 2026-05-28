@@ -9450,6 +9450,11 @@ menu:
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
+      weight: 3
+    - name: Create Exposure SQL Models
+      url: experiments/exposure_sql
+      parent: pa_experiments
+      identifier: pa_experiments_exposure_sql
       weight: 4
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
