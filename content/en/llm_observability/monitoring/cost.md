@@ -30,6 +30,20 @@ To manually supply cost information, follow the instrumentation steps described 
 
 <div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
+#### How token counts are calculated
+The following relationships apply to token usage fields:
+{{< img src="llm_observability/llm_token_relationships.png" alt="Diagram showing how LLM Observability computes token counts: total_tokens is the sum of input_tokens and output_tokens; input_tokens is the sum of non_cached_input_tokens, cache_read_input_tokens, and cache_write_input_tokens; reasoning_output_tokens is a subset of output_tokens." style="width:100%;" >}}
+
+When all sub-components of a token field are provided, Datadog automatically calculates the parent token field, so it does not need to be sent separately.
+
+For example:
+- `input_tokens` can be inferred from `non_cached_input_tokens`, `cache_read_input_tokens`, and `cache_write_input_tokens`
+- `total_tokens` can be inferred from input_tokens and output_tokens
+
+Datadog recommends providing the full cache token breakdown whenever cache usage information is available. Datadog automatically applies provider-specific cache read and cache write pricing rates when calculating cached input costs.
+
+If only `input_tokens` is provided, Datadog treats all input tokens as non-cached input tokens. Providing only a partial cache breakdown may result in inaccurate token counts or cost discrepancies.
+
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
 
