@@ -92,7 +92,7 @@ To view a host's OpenTelemetry Collector configuration, click the host to open t
 
 ## Export
 
-Click **Export** > **Open in DDSQL Editor**, then download the results from the [DDSQL Editor][18]. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
+Click **Export** > **Open in DDSQL Editor**, then download the results from the [DDSQL Editor][18]. You can also export to a dashboard, notebook, or spreadsheet. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
 
 - The [host overview report][17].
 - The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
