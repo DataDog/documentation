@@ -1028,6 +1028,11 @@ menu:
       parent: sdk
       identifier: sdk_setup
       weight: 1
+    - name: Auto-Instrumentation
+      url: client_sdks/setup/server/
+      parent: sdk_setup
+      identifier: sdk_setup_server
+      weight: 1
     - name: Advanced Configuration
       url: client_sdks/advanced_configuration/
       parent: sdk
@@ -8679,11 +8684,6 @@ menu:
       parent: rum_browser_setup
       identifier: rum_browser_setup_client
       weight: 1101
-    - name: Auto-Instrumentation
-      url: real_user_monitoring/application_monitoring/browser/setup/server
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_server
-      weight: 1102
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/browser/advanced_configuration/
       parent: rum_browser

@@ -20,7 +20,7 @@ further_reading:
 ## Setup
 
 {{< whatsnext desc="Choose the instrumentation type for the Browser SDK:" >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server">}}<u>Auto-Instrumentation</u>: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.{{< /nextlink >}}
+  {{< nextlink href="/client_sdks/setup/server">}}<u>Auto-Instrumentation</u>: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/agentic_onboarding">}}<u>Agentic Onboarding</u>: Instrument your frontend applications with one prompt using LLM coding agents like Cursor or Claude.{{< /nextlink >}}
   {{< nextlink href="real_user_monitoring/application_monitoring/browser/setup/client">}}<u>Client-Side</u>: Instrument your browser-based web applications, deploy them, configure the initialization parameters you want to track, and use advanced configuration to further manage the data and context that RUM collects.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -39,7 +39,7 @@ further_reading:
   </tr>
   <tr style="background-color:#f2f2f2;">
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"></th>
-    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/real_user_monitoring/application_monitoring/browser/setup/server">Auto-Instrumentation (Preview)</a></th>
+    <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/client_sdks/setup/server">Auto-Instrumentation (Preview)</a></th>
     <th style="border:1px solid #ccc; border-right:2px solid #999; text-transform:uppercase; font-weight:bold;"><a href="/real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring">Agentic Onboarding (Preview)</a></th>
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side</a></th>
   </tr>

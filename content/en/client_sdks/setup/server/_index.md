@@ -6,6 +6,7 @@ type: multi-code-lang
 code_lang_weight: 2
 aliases:
   - /real_user_monitoring/browser/setup/server
+  - /real_user_monitoring/application_monitoring/browser/setup/server/
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'

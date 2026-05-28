@@ -7,8 +7,9 @@ type: multi-code-lang
 code_lang_weight: 5
 aliases:
   - /real_user_monitoring/browser/setup/server/nginx
+  - /real_user_monitoring/application_monitoring/browser/setup/server/nginx/
 further_reading:
-- link: '/real_user_monitoring/application_monitoring/browser/setup/server'
+- link: '/client_sdks/setup/server'
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
@@ -184,7 +185,7 @@ To manually instrument your RUM application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/server/#limitations
+[1]: /client_sdks/setup/server/#limitations
 [2]: /agent/
 [3]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 [4]: https://app.datadoghq.com/rum/list
