@@ -25,7 +25,7 @@ further_reading:
 - Launch [Bits AI SRE][2] investigations to pinpoint root causes
 - Take action by rolling back configuration changes directly from the investigation flow
 
-Navigate to [ {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Devices{{< /ui >}} > {{< ui >}}Health{{< /ui >}}][1] for a fleet-wide view of all device issues, or select a device from the [Devices][3] list or any NDM visualization to see any active issues in the {{< ui >}}Device Summary{{< /ui >}} panel.
+Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Devices{{< /ui >}} > {{< ui >}}Health{{< /ui >}}][1] for a fleet-wide view of all device issues, or select a device from the [Devices][3] list or any NDM visualization to see any active issues in the {{< ui >}}Device Summary{{< /ui >}} panel.
 
 ## Investigate an issue
 
