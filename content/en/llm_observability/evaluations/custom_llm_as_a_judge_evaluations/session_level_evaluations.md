@@ -18,17 +18,17 @@ further_reading:
 
 A session-level evaluation runs once per [user session][9], with every trace—and every span in those traces—available to the LLM judge in a single prompt. Sessions group related interactions under a shared `session_id` (for example, a chat conversation) and can include multiple traces over an extended interaction.
 
-This scope unlocks evaluations that trace-level and span-level judges cannot answer: questions about **agent performance and user behavior across an entire interaction**, not just a single request or span.
+Session scope answers questions about agent performance and user behavior across an entire interaction—questions that trace-level and span-level judges cannot answer from a single request or span.
 
 ## Why session-level evaluations are needed
 
-Many LLM applications emit **one trace per user turn**. Each trace captures a single exchange (one user message and the agent's response), but the user's actual goal often unfolds over many turns spread across separate traces.
+Many LLM applications emit one trace per user turn. Each trace captures a single exchange (one user message and the agent's response), but the user's actual goal often unfolds over many turns spread across separate traces.
 
 | Scope | What the judge sees | Typical blind spot |
 |---|---|---|
-| **Span** | One span's input and output | No cross-span or cross-trace context |
-| **Trace** | All spans in one trace | No prior or later turns in the same chat session |
-| **Session** | All traces (and spans) in a session | — |
+| Span | One span's input and output | No cross-span or cross-trace context |
+| Trace | All spans in one trace | No prior or later turns in the same chat session |
+| Session | All traces (and spans) in a session | — |
 
 Without session scope, you can score individual responses or single workflow runs, but you cannot reliably answer:
 
@@ -37,27 +37,27 @@ Without session scope, you can score individual responses or single workflow run
 - Did the user's behavior change over the session (repeated questions, escalation, abandonment)?
 - Did agent quality stay consistent, or degrade after several turns?
 
-Session-level evaluations close that gap by judging the **full user journey** in one pass.
+Session-level evaluations judge all traces in a session together, so they can answer these questions.
 
 ## When to use session scope over trace or span scope
 
-Use {{< ui >}}Session{{< /ui >}} scope when the evaluation needs context from **more than one trace** in the same user session:
+Use {{< ui >}}Session{{< /ui >}} scope when the evaluation needs context from more than one trace in the same user session:
 
-- **End-to-end user satisfaction** — whether the session as a whole met the user's intent, not just the last reply.
-- **Multi-turn coherence** — whether the assistant stayed on topic, maintained tone, and carried forward relevant context across turns that live in different traces.
-- **User behavior over time** — patterns such as frustration, confusion, topic switching, or giving up before the agent finished helping.
-- **Agent performance across a session** — consistency, regression after tool failures, or whether the agent recovered from mistakes in a later turn.
+- User satisfaction — whether the session as a whole met the user's intent, not just the last reply.
+- Multi-turn coherence — whether the assistant stayed on topic, maintained tone, and carried forward relevant context across turns that live in different traces.
+- User behavior over time — patterns such as frustration, confusion, topic switching, or giving up before the agent finished helping.
+- Agent performance across a session — consistency, regression after tool failures, or whether the agent recovered from mistakes in a later turn.
 
 
-Use {{< ui >}}Trace{{< /ui >}} scope when the answer depends on steps **within a single request**—for example, tool-call ordering, RAG faithfulness within one workflow run, or goal completion for one agent invocation. See [Trace-Level Evaluations][10].
+Use {{< ui >}}Trace{{< /ui >}} scope when the answer depends on steps within a single request—for example, tool-call ordering, RAG faithfulness within one workflow run, or goal completion for one agent invocation. See [Trace-Level Evaluations][10].
 
-Use {{< ui >}}Span{{< /ui >}} scope when the evaluation can be answered from **one span in isolation**—for example, scoring a single LLM response, classifying intent on one message, or validating tool arguments on one call.
+Use {{< ui >}}Span{{< /ui >}} scope when the evaluation can be answered from one span in isolation—for example, scoring a single LLM response, classifying intent on one message, or validating tool arguments on one call.
 
 <div class="alert alert-info">Session-level evaluations require spans to be tagged with a <code>session_id</code>. See <a href="/llm_observability/instrumentation/sdk/#tracking-user-sessions">Tracking user sessions</a> to instrument your application.</div>
 
 ## What session-level evaluations are most useful for
 
-Session scope is especially valuable for **LLM chatbots and long-running agent experiences** where users interact repeatedly over minutes rather than in a single shot.
+Session scope fits chatbots and long-running agents, where users interact over many turns.
 
 | Use case | Why session scope fits |
 |---|---|
@@ -67,7 +67,7 @@ Session scope is especially valuable for **LLM chatbots and long-running agent e
 | Escalation and abandonment | Signals like repeated failures or the user stopping mid-flow only appear across traces. |
 | Agent reliability | Detect drift, loops, or declining answer quality over the course of a session. |
 
-The managed [Goal Completeness][11] template evaluation is an example of this pattern: it analyzes a completed session to determine whether user intentions were resolved end to end.
+The managed [Goal Completeness][11] template evaluation is an example of this pattern: it analyzes a completed session to determine whether the user's intentions were resolved.
 
 ## Use cases and examples
 
@@ -161,7 +161,7 @@ Session traces (chronological):
 
 ## How session completion works
 
-A session-level evaluation triggers after Datadog considers a **session complete**. A session is **complete** after **30 minutes** of inactivity—that is, 30 minutes have passed with no new spans arriving for that session (measured from the most recent span).
+A session-level evaluation triggers after Datadog considers a session complete. A session is complete after 30 minutes of inactivity—that is, 30 minutes have passed with no new spans arriving for that session (measured from the most recent span).
 
 When the session completes, the evaluation runs once with every trace and every span in those traces from that session available in the judge prompt. Any spans that arrive more than 30 minutes after the previous span on a session are not included in the session-level evaluation.
 
@@ -175,7 +175,7 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    {{< img src="llm_observability/evaluations/session_level_evaluation_scope.png" alt="The Evaluate On scope picker with Session selected." style="width:100%;" >}}
 
-   <div class="alert alert-info">A session is considered complete after <strong>30 minutes</strong> of inactivity (no new spans for that session, measured from the most recent span), at which point the evaluation runs. Spans that arrive more than 30 minutes after the previous span are not included in the evaluation.</div>
+   <div class="alert alert-info">A session is considered complete after 30 minutes of inactivity (no new spans for that session, measured from the most recent span), at which point the evaluation runs. Spans that arrive more than 30 minutes after the previous span are not included in the evaluation.</div>
 
 1. Add a {{< ui >}}Query{{< /ui >}} and {{< ui >}}Sampling Rate{{< /ui >}} to control which sessions are evaluated.
 1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter the static instructions to the LLM judge—for example, the criteria the judge should use and the output it should produce. The System Prompt does not resolve `{{ ... }}` placeholders.
