@@ -1,1 +1,1 @@
--(Optional) Toggle **Verify certificate** to require connecting clients to present a valid client certificate. This enforces mutual TLS (mTLS), where the Worker verifies the identity of each connecting client.
+- (Optional) Toggle **Verify certificate** to require connecting clients to present a valid client certificate. This enforces mutual TLS (mTLS), where the Worker verifies the identity of each connecting client.
