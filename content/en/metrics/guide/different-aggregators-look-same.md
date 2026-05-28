@@ -1,5 +1,6 @@
 ---
 title: Switching between the sum/min/max/avg aggregators doesn't change the value
+description: "Understand why switching between sum, min, max, and avg can return the same value when a query is already at its most granular level."
 aliases:
     - /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
     - /dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same

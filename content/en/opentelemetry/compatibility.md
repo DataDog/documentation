@@ -38,7 +38,7 @@ The following table shows feature compatibility across different setups:
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
-| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
+| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | {{< tooltip text="Preview" tooltip="Kubernetes Explorer support for the OSS Collector is in Preview. Contact your account representative to request access." >}} | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
@@ -57,9 +57,9 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Java][34] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
+| [Java][34] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
+| [Ruby][36] | {{< X >}} | Alpha | {{< X >}} |
 | [PHP][37] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
 
 ## More details

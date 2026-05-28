@@ -28,7 +28,7 @@ The template is defined by both raw text and blocks with the syntax `%{attribute
 
 ## Setup
 
-Define the string builder processor on the [**Pipelines** page][1]:
+Define the string builder processor on the [{{< ui >}}Pipelines{{< /ui >}} page][1]:
 
 {{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
 

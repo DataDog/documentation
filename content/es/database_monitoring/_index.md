@@ -1,138 +1,153 @@
 ---
 algolia:
   tags:
-  - monitorización de base de datos
+  - database monitoring
   - dbm
 cascade:
   algolia:
     rank: 70
-description: Más información sobre la monitorización de base de datos y cómo empezar
+description: Conozca DBM y comience
 further_reading:
+- link: https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency
+  tag: Blog
+  text: Analizando la latencia de consulta de ida y vuelta
+- link: https://www.datadoghq.com/blog/database-monitoring-recommendations/
+  tag: Blog
+  text: Mejore el rendimiento del servidor de la base de datos y de las consultas
+    con las recomendaciones de DBM
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
   tag: Blog
-  text: Monitorizar y visualizar el rendimiento de las bases de datos
+  text: Supervise y visualice el rendimiento de la base de datos
 - link: https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/
   tag: Blog
-  text: Monitorizar bases de datos gestionadas por SQL Server y Azure con Datadog
-    DBM
+  text: Supervise SQL Server y bases de datos administradas de Azure con Datadog DBM
 - link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
   tag: Blog
-  text: Seguimiento y resolución de problemas de rendimiento de MongoDB
+  text: Rastree y solucione problemas de rendimiento de MongoDB con Datadog DBM
+- link: https://www.datadoghq.com/blog/datadog-database-research/
+  tag: Blog
+  text: Cómo las arquitecturas de microservicios han moldeado el uso de tecnologías
+    de bases de datos
 - link: /database_monitoring/data_collected/
   tag: Documentación
   text: Datos recopilados
 - link: /database_monitoring/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas
+  text: Resolución de problemas
 - link: https://dtdg.co/fe
-  tag: Habilitación de los fundamentos
-  text: Participar en una sesión interactiva para mejorar tu monitorización de base
-    de datos
-- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
-  tag: Blog
-  text: Seguimiento y resolución de problemas de rendimiento de MongoDB con la Monitorización
-    de bases de datos de Datadog
-title: Database Monitoring
+  tag: Habilitación de la fundación
+  text: Únase a una sesión interactiva para potenciar su DBM
+- link: https://learn.datadoghq.com/courses/database-monitoring
+  tag: Centro de aprendizaje
+  text: Supervisando una base de datos Postgres con Datadog DBM
+title: DBM
 ---
-
-
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
-  Con la monitorización de base de datos, aprende cuán rápido puedes identificar consultas lentas y costosas. Obtén detalles de ejecución precisos para abordar cuellos de botellas.
+{{< learning-center-callout header="Únase a una sesión de seminario web de habilitación" hide_image="true" btn_title="Regístrese" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
+  Con DBM, aprenda a identificar rápidamente consultas costosas y lentas. Profundice en los detalles de ejecución precisos para abordar cuellos de botella.
 {{< /learning-center-callout >}}
 
-La monitorización de la base de datos de Datadog ofrece una gran visibilidad de las bases de datos en todos tus hosts. Consulta las métricas de rendimiento de consultas históricas, planes de explicación y métricas a nivel de host todo en un solo lugar, para comprender el estado y el rendimiento de tus bases de datos y solucionar los problemas a medida que surgen.
+La DBM de Datadog proporciona una visibilidad profunda en las bases de datos de todos sus servidores Profundice en las métricas de rendimiento de consultas históricas, planes de explicación y métricas a nivel de servidor, todo en un solo lugar, para comprender la salud y el rendimiento de sus bases de datos y solucionar problemas a medida que surjan.
 
-## Para empezar
+## Comenzando {#getting-started}
 
-La Monitorización de bases de datos de Datadog es compatible con versiones autoalojadas y gestionadas en la nube de **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB** y **Amazon DocumentDB**. Para empezar a utilizar la Monitorización de bases de datos de Datadog, configura tu base de datos e instala el Datadog Agent. Para obtener instrucciones de configuración, selecciona tu tecnología de base de datos:
+La DBM de Datadog admite versiones autohospedadas y en la nube gestionadas de **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB** y **ClickHouse**. Para comenzar con DBM de Datadog, configure su base de datos e instale el Datadog Agent. Para instrucciones de configuración, seleccione su tecnología de base de datos:
 
-### Postgres
+### Postgres {#postgres}
 
 {{< partial name="dbm/dbm-setup-postgres" >}}
 <p></p>
 
-### MySQL
+### MySQL {#mysql}
 
 {{< partial name="dbm/dbm-setup-mysql" >}}
 <p></p>
 
-### Oracle
+### Oracle {#oracle}
 
 {{< partial name="dbm/dbm-setup-oracle" >}}
 <p></p>
 
-### SQL Server
+### SQL Server {#sql-server}
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
-### MongoDB
+### MongoDB {#mongodb}
 
 {{< partial name="dbm/dbm-setup-mongodb" >}}
 <p></p>
 
-### Amazon DocumentDB
+### Amazon DocumentDB {#amazon-documentdb}
 
 {{< partial name="dbm/dbm-setup-documentdb" >}}
 <p></p>
 
-## Explorar la monitorización de base de datos de Datadog
+### ClickHouse {#clickhouse}
 
-Ve a [Monitorización de base de datos][1] en Datadog.
+{{< partial name="dbm/dbm-setup-clickhouse" >}}
+<p></p>
 
-### Analizar las métricas de rendimiento de las consultas
+## Explore DBM de Datadog {#explore-datadog-database-monitoring}
 
-La [vista de Métricas de consulta][2] muestra el rendimiento histórico de las consultas normalizadas. Visualiza las tendencias de rendimiento por infraestructura o etiquetas personalizadas, como la zona de disponibilidad del centro de datos, y establece alertas para anomalías.
+Navegue a [DBM][1] en Datadog.
 
-- Identifica las consultas lentas y las que consumen más tiempo.
-- Muestra métricas a nivel de base de datos no capturadas por APM como filas actualizadas/retornadas.
-- Filtra y agrupa las consultas por dimensiones arbitrarias como equipo, usuario, clúster y host.
+### Profundice en las métricas de rendimiento de consultas {#dig-into-query-performance-metrics}
 
-{{< img src="database_monitoring/dbm-query-metrics-2.png" alt="Monitorización de base de datos" style="width:100%;">}}
+La [vista de Métricas de Consultas][2] muestra el rendimiento histórico de consultas normalizadas. Visualice las tendencias de rendimiento por infraestructura o etiquetas personalizadas, como Availability Zone del centro de datos, y establezca alertas para anomalías
 
-### Explorar ejemplos de consultas
+- Identifique consultas lentas y cuáles son las que consumen más tiempo.
+- Muestre métricas a nivel de base de datos que no son capturadas por APM, como filas actualizadas/devueltas.
+- Filtre y agrupe consultas por dimensiones arbitrarias, como equipo, usuario, clúster y servidor.
 
-La [Vista de muestras de consultas][3] te ayuda a comprender qué consultas se están ejecutando en un momento dado. Compara cada ejecución con el rendimiento medio de la consulta y las consultas relacionadas.
+{{< img src="database_monitoring/dbm-query-metrics-2.png" alt="DBM" style="width:100%;">}}
 
-- Identifica las consultas inusualmente lentas pero poco frecuentes no capturadas por métricas.
-- Encuentra outliers en el tiempo de ejecución o el coste de ejecución de una consulta.
-- Atribuye una ejecución de consulta específica a un usuario, aplicación o host de cliente.
+### Explore muestras de consultas {#explore-query-samples}
 
-{{< img src="database_monitoring/dbm-query-sample-2.png" alt="Monitorización de base de datos" style="width:100%;">}}
+La [vista de Muestras de Consultas][3] le ayuda a entender qué consultas se están ejecutando en un momento dado. Compare cada ejecución con el rendimiento promedio de la consulta y de las consultas relacionadas.
 
-### Comprender antes de ejecutar
+- Identifique consultas inusualmente lentas pero poco frecuentes que no son capturadas por métricas.
+- Encuentre valores anómalos en el tiempo de ejecución o costo de ejecución de una consulta.
+- Atribuya una ejecución de consulta específica a un usuario, aplicación o servidor cliente.
 
-[Los planes de explicación][4] ayudan a comprender cómo la base de datos planea ejecutar tus consultas.
+{{< img src="database_monitoring/dbm-query-sample-2.png" alt="DBM" style="width:100%;">}}
 
-- Repasa cada operación para identificar los cuellos de botella.
-- Mejora la eficacia de las consultas y ahorra escaneos secuenciales costosos en tablas de gran tamaño.
-- Ve cómo cambia el plan de una consulta a lo largo del tiempo.
+### Entienda antes de ejecutar {#understand-before-you-run}
 
-{{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Monitorización de base de datos" style="width:100%;">}}
+[Planes de Explicación][4] le ayudan a entender cómo la base de datos planea ejecutar sus consultas.
 
-### Visualizar todo en dashboards mejorados
+- Revise cada operación para identificar cuellos de botella.
+- Mejore la eficiencia de las consultas y ahorre en costosos escaneos secuenciales en tablas grandes.
+- Observe cómo cambia el plan de una consulta a lo largo del tiempo.
 
-Localiza rápidamente las áreas problemáticas mediante la visualización conjunta de la base de datos y las métricas del sistema en dashboards de integración mejorados, tanto para instancias autogestionadas como gestionadas en la nube. Clona dashboards para personalizarlos y mejorarlos con tus propias métricas personalizadas. Haz clic en el enlace **Dashboards** en la parte superior de las páginas Métricas de consulta y Muestras de consulta para ir a dashboards de monitorización de base de datos.
+{{< img src="database_monitoring/dbm-explain-plan-3.png" alt="DBM" style="width:100%;">}}
 
-{{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Monitorización de base de datos" style="width:100%;">}}
+### Recoga métricas personalizadas {#collect-custom-metrics}
 
-### Optimizar el estado y el rendimiento del host
+Utilice [`custom_queries`][7] para recoger métricas de sus propias tablas de base de datos: estado de la aplicación, contadores de negocio, profundidades de cola o cualquier dato que desee correlacionar con el rendimiento de la consulta.
 
-En la [página Bases de datos][1], puedes evaluar el estado y la actividad de tus hosts de base de datos. Ordena y filtra la lista para establecer prioridades de hosts con alertas activadas, alto volumen de consultas y otros criterios. Haz clic en un host individual para ver detalles como su configuración, las consultas de bloqueo comunes y las llamadas a servicios. Consulta [Exploración de hosts de bases de datos][5] para más detalles.
+### Visualice todo en tableros enriquecidos {#visualize-everything-on-enriched-dashboards}
 
-{{< img src="database_monitoring/databases-list.png" alt="La página de base de datos en Datadog" style="width:90%;" >}}
+Identifique rápidamente áreas problemáticas al ver métricas de base de datos y del sistema juntas en tableros de integración enriquecidos para instancias autohospedadas y gestionadas en la nube. Clone tableros para personalización y mejora con sus propias métricas personalizadas. Haga clic en el enlace {{< ui >}}Dashboards{{< /ui >}} en la parte superior de las páginas de Métricas de Consultas y Muestras de Consultas para ir a los tableros de DBM.
 
-### Ver recomendaciones de optimización
+{{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="DBM" style="width:100%;">}}
 
-La página [Recomendaciones][6] destaca los problemas y las oportunidades de optimización para ayudarte a ahorrar tiempo priorizando lo más importante. Selecciona una recomendación para ver los detalles, incluyendo un resumen del problema, así como los posibles pasos siguientes para solucionarlo.
+### Optimice la salud y el rendimiento del servidor {#optimize-host-health-and-performance}
 
-{{< img src="database_monitoring/recommendations-page.png" alt="Página Recomendaciones en Datadog" style="width:90%;" >}}
+En la [página de Bases de Datos][1], puede evaluar la salud y la actividad de sus servidores de base de datos. Ordene y filtre la lista para priorizar los servidores con alertas activadas, alto volumen de consultas y otros criterios. Haga clic en un servidor individual para ver detalles como su configuración, consultas comunes de bloqueo y servicios de llamada. Consulte [Explorando Hosts de Base de Datos][5] para más detalles.
+
+{{< img src="database_monitoring/databases-list.png" alt="La página de Bases de Datos en Datadog" style="width:90%;" >}}
+
+### Vea recomendaciones de optimización {#view-optimization-recommendations}
+
+La [página de Recomendaciones][6] destaca problemas y oportunidades de optimización, ayudándole a ahorrar tiempo al priorizar lo más importante. Seleccione una recomendación para visualizar detalles, incluyendo un resumen del problema, así como posibles próximos pasos para abordar el problema.
+
+{{< img src="database_monitoring/recommendations-page.png" alt="La página de Recomendaciones en Datadog" style="width:90%;" >}}
 
 
-## Para leer más
+## Lectura Adicional {#further-reading}
 
-{{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
-  El Centro de aprendizaje de Datadog está lleno de cursos prácticos para ayudarte a aprender sobre este tema. Inscríbete sin coste para identificar ineficiencias y optimizar tu base de datos de Postgres.
+{{< learning-center-callout header="Pruebe supervisar una base de datos Postgres con Datadog DBM en el Centro de Aprendizaje" btn_title="Inscríbase Ahora" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
+  El Centro de Aprendizaje de Datadog está lleno de cursos prácticos para ayudarle a aprender sobre este tema. Inscríbase sin costo para identificar ineficiencias y optimizar su base de datos Postgres.
 {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -143,3 +158,4 @@ La página [Recomendaciones][6] destaca los problemas y las oportunidades de opt
 [4]: /es/database_monitoring/query_metrics/#explain-plans
 [5]: /es/database_monitoring/database_hosts/
 [6]: /es/database_monitoring/recommendations/
+[7]: /es/database_monitoring/custom_metrics/

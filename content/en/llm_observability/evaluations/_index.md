@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Evaluations**][8].
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
 
 ### Custom LLM-as-a-judge evaluations
 
