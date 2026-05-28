@@ -34,7 +34,9 @@ Use the time picker to adjust the lookback window. The default is **Past 1 Hour*
 
 {{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
 
-## Network health
+## Page sections
+
+### Network health
 
 The **Network health** section provides an at-a-glance assessment of your overall network status.
 
@@ -55,19 +57,19 @@ Below the summary, a status panel shows the total device count broken down by st
 
 <!-- TODO: [5] is a placeholder path for the Device Health page, which does not yet have its own documentation. Update the link once the Device Health doc is published. -->
 
-## Issues
+### Issues
 
 The **Issues** list summarizes active alerts on network resources, grouped to reduce noise. Each issue card shows the affected devices, a description of what was detected, and the blast radius. Click an issue to open a side panel showing what happened, a proposed fix, and an option to investigate further with Bits AI.
 
 {{< img src="network_device_monitoring/summary/issues-view.png" alt="The Device Health view showing the Open Issues list with a high-severity issue card for a network interface and its dependencies." style="width:100%;" >}}
 
-## Interface performance
+### Interface performance
 
 The **Interface performance** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the [device side panel](#device-side-panel).
 
 {{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface performance section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
 
-### Interface health thresholds
+**Interface health thresholds**
 
 The following thresholds determine an interface's health state:
 
@@ -81,7 +83,7 @@ A Bits AI summary highlights patterns across the affected interfaces, such as mu
 
 Three cards below the list surface aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. In the Errors and Discards detail views, click any interface to open a side panel with additional context and an **Ask Bits** button for AI-assisted investigation.
 
-## Device performance
+### Device performance
 
 The **Device performance** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the [device side panel](#device-side-panel).
 
@@ -89,7 +91,7 @@ The **Device performance** section ranks the top devices operating outside healt
 
 By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure instead.
 
-### Device health thresholds
+**Device health thresholds**
 
 The following thresholds determine a device's health state:
 
@@ -100,11 +102,11 @@ The following thresholds determine a device's health state:
 
 A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed. Two cards below the list surface aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
 
-## Traffic
+### Traffic
 
 The **Traffic** section uses [NetFlow][3] data to visualize how traffic moves across your network as a Sankey diagram. The diagram shows traffic volume between sources and destinations within the current scope and time range. Click **View NetFlow** to explore flow data in detail.
 
-## Changes
+### Changes
 
 The **Changes** section lists recent network device configuration changes from [Configuration Management][4].
 
