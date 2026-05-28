@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server server-proxied start start-no-pre-build start-proxied start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs
+.PHONY: help clean-all clean start-preserve-build dependencies server server-proxied start start-no-pre-build start-proxied start-no-pre-build-proxied start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -96,6 +96,13 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 # Run Hugo with baseURL set for the Caddy proxy on :1314.
 # Pair with: Astro running on :4321, then `caddy run` from repo root.
 start-proxied: node_modules  ## Run Hugo configured for the Caddy proxy at localhost:1314.
+	@make setup-build-scripts
+	@make build-cdocs
+	@make server-proxied
+
+# Skip downloading any dependencies and run the site configured for the Caddy proxy on :1314.
+# Pair with: Astro running on :4321, then `caddy run` from repo root.
+start-no-pre-build-proxied: node_modules  ## Build and run docs excluding external content, configured for the Caddy proxy at localhost:1314.
 	@make setup-build-scripts
 	@make build-cdocs
 	@make server-proxied
