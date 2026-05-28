@@ -28,6 +28,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
+| Node.js    | Bun               | `bun.lock`                               |
 | Node.js    | npm               | `package-lock.json`                      |
 | Node.js    | pnpm              | `pnpm-lock.yaml`                         |
 | Node.js    | yarn              | `yarn.lock`                              |
