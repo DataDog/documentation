@@ -42,7 +42,7 @@ The **Network health** section provides an at-a-glance assessment of your overal
 
 {{< img src="network_device_monitoring/summary/network_health.png" alt="The Network health section showing a Bits AI summary on the left and a topology view with health-coded nodes on the right." style="width:100%;" >}}
 
-Each top-level section on the page reports one of four health states:
+Each section of the Summary Page reports one of four health states:
 
 | State | Meaning |
 |-------|---------|
