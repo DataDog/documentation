@@ -261,8 +261,6 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 3. Trigger an update to your deployment and wait for it to finish.
 
-4. Optionally, to inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog, see [Inject Airflow Task Context into Logs][13].
-
 [1]: https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-1210
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://www.astronomer.io/docs/astro/runtime-provider-reference
@@ -288,7 +286,6 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow Setup with the OpenLineage Validation DAG][12].
 
 [12]: /data_observability/jobs_monitoring/airflow_troubleshooting_dag/
-[13]: /data_observability/jobs_monitoring/airflow_log_context/
 
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
