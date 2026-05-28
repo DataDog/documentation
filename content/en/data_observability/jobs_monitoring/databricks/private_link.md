@@ -22,7 +22,7 @@ Private Link monitoring is built on the Private Action Runner's [polling archite
 
 The request flow works as follows:
 
-1. The [Private Action Runner][2] reaches out to the Datadog backend through the [VPC Endpoint][3] or over the public internet to query for pending requests. If a request is found, details are returned to the runner.
+1. The [Private Action Runner][2] reaches out to the Datadog backend (either over the public internet or using [Private Link][3]) to query for pending requests. If a request is found, details are returned to the runner.
 1. Databricks credentials (client ID and secret) are retrieved from secret storage. A token is generated for the session by calling the Databricks API from the runner using those credentials.
 1. The runner executes the fetched query against the Databricks API. The results are returned to the runner.
 1. The runner forwards the results back to the Datadog backend for processing.
