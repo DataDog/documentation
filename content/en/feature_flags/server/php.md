@@ -221,6 +221,86 @@ if ($details->isError()) {
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Complete examples
+
+The following examples combine initialization, evaluation context, typed evaluation, and evaluation details.
+
+### PHP 7 and PHP 8: Datadog API
+
+{{< code-block lang="php" >}}
+<?php
+
+use DDTrace\FeatureFlags\Client;
+
+$flags = new Client();
+
+$context = [
+    'targetingKey' => 'user-123',
+    'attributes' => [
+        'country' => 'US',
+        'tier' => 'premium',
+    ],
+];
+
+$details = $flags->getStringDetails('checkout-copy', 'control', $context);
+
+if ($details->isError()) {
+    error_log(sprintf(
+        'Flag evaluation failed: %s %s',
+        $details->getErrorCode(),
+        $details->getErrorMessage()
+    ));
+}
+
+if ($details->getValue() === 'treatment') {
+    showTreatmentCopy();
+} else {
+    showControlCopy();
+}
+{{< /code-block >}}
+
+### PHP 8: OpenFeature adapter
+
+{{< code-block lang="php" >}}
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use DDTrace\OpenFeature\DataDogProvider;
+use OpenFeature\implementation\flags\Attributes;
+use OpenFeature\implementation\flags\EvaluationContext;
+use OpenFeature\OpenFeatureAPI;
+
+$api = OpenFeatureAPI::getInstance();
+$api->setProvider(new DataDogProvider());
+
+$client = $api->getClient('checkout-service', '1.0.0');
+$context = new EvaluationContext(
+    'user-123',
+    new Attributes([
+        'country' => 'US',
+        'tier' => 'premium',
+    ])
+);
+
+$details = $client->getStringDetails('checkout-copy', 'control', $context);
+$error = $details->getError();
+
+if ($error !== null) {
+    error_log(sprintf(
+        'Flag evaluation failed: %s %s',
+        $error->getResolutionErrorCode()->getValue(),
+        $error->getResolutionErrorMessage()
+    ));
+}
+
+if ($details->getValue() === 'treatment') {
+    showTreatmentCopy();
+} else {
+    showControlCopy();
+}
+{{< /code-block >}}
+
 ## Evaluation without context
 
 You can evaluate flags without providing an evaluation context. This is useful for global flags that do not require user-specific targeting:
