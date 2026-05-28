@@ -44,6 +44,9 @@ export DD_REMOTE_CONFIG_ENABLED=true
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
 export DD_VERSION=<YOUR_APP_VERSION>
+
+# Required: Enable flag evaluation metrics
+export DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
 ## Installation
@@ -131,7 +134,7 @@ $context = new EvaluationContext(
 );
 {{< /code-block >}}
 
-<div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and booleans. Nested arrays, objects, and null values are ignored.</div>
+<div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and booleans. Nested arrays, objects, and null values are ignored for targeting and exposure reporting.</div>
 
 ## Evaluate flags
 
@@ -401,6 +404,20 @@ If targeting rules do not match as expected:
 - Pass custom targeting data under the `attributes` key when using the Datadog API.
 - Use only flat primitive attributes. Nested arrays, objects, and null values are ignored.
 - Verify the `DD_ENV` value appears in [{{< ui >}}Feature Flag Environments{{< /ui >}}][5].
+
+### Verify data appears in Datadog
+
+#### Flag evaluation metrics
+
+Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set for the PHP tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, verify the setting is enabled and the Datadog PHP SDK version supports it.
+
+#### Experiment exposures
+
+Exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
+
+1. Verify the flag is associated with an experiment in the Datadog UI.
+2. Verify the Agent's `DD_API_KEY` is correct and the Agent is receiving events.
+3. Verify the evaluation context uses flat primitive attributes. Nested arrays, objects, and null values are ignored for exposure reporting.
 
 ## Further reading
 
