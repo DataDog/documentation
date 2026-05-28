@@ -163,9 +163,7 @@ Session traces (chronological):
 
 A session-level evaluation triggers after Datadog considers a **session complete**. A session is **complete** after **30 minutes** of inactivity—that is, 30 minutes have passed with no new spans arriving for that session (measured from the most recent span).
 
-When the session completes, the evaluation runs once with every trace and every span in those traces from that session available in the judge prompt. Any spans that arrive more than 30 minutes after the previous span on a session are not included in the session-level evaluation—they start a new session boundary for evaluation purposes.
-
-If your application emits turns sporadically with gaps longer than 30 minutes, plan for those late spans to be evaluated as part of a separate session (or excluded from the prior session's evaluation). Ensure each interaction within the same chat is tagged with the same `session_id` so Datadog can group them correctly.
+When the session completes, the evaluation runs once with every trace and every span in those traces from that session available in the judge prompt. Any spans that arrive more than 30 minutes after the previous span on a session are not included in the session-level evaluation.
 
 ## Configure a session-level evaluation
 
