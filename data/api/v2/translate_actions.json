@@ -2759,6 +2759,18 @@
     "request_description": "Update dataset payload.",
     "request_schema_description": "Request to partially update an LLM Observability dataset."
   },
+  "BatchUpdateLLMObsDataset": {
+    "description": "Insert, update, and delete records in a single dataset operation. By default, a new dataset version is created when the batch is applied.",
+    "summary": "Batch update LLM Observability dataset records",
+    "request_description": "Batch update payload.",
+    "request_schema_description": "Request to batch-insert, update, and delete records in an LLM Observability dataset."
+  },
+  "CloneLLMObsDataset": {
+    "description": "Clone a dataset, copying its current records into a new dataset within the same project.",
+    "summary": "Clone an LLM Observability dataset",
+    "request_description": "Clone dataset payload.",
+    "request_schema_description": "Request to clone an LLM Observability dataset."
+  },
   "GetLLMObsDatasetDraftState": {
     "description": "Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.",
     "summary": "Get LLM Observability dataset draft state"
@@ -2770,6 +2782,10 @@
   "UnlockLLMObsDatasetDraftState": {
     "description": "Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.",
     "summary": "Unlock LLM Observability dataset draft state"
+  },
+  "ExportLLMObsDataset": {
+    "description": "Download the contents of a dataset as a CSV file. The download is streamed and includes one row per dataset record.",
+    "summary": "Export an LLM Observability dataset"
   },
   "ListLLMObsDatasetRecords": {
     "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
@@ -2793,9 +2809,21 @@
     "request_description": "Delete records payload.",
     "request_schema_description": "Request to delete records from an LLM Observability dataset."
   },
+  "RestoreLLMObsDatasetVersion": {
+    "description": "Restore a dataset to a previous version. The dataset's current version is bumped, and its records are replaced with the records from the specified prior version.",
+    "summary": "Restore an LLM Observability dataset version",
+    "request_description": "Restore dataset version payload.",
+    "request_schema_description": "Request to restore an LLM Observability dataset to a previous version."
+  },
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
     "summary": "List LLM Observability dataset versions"
+  },
+  "UploadLLMObsDatasetRecordsFile": {
+    "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
+    "summary": "Upload records to an LLM Observability dataset",
+    "request_description": "Multipart upload payload containing the records file.",
+    "request_schema_description": "Multipart payload for uploading dataset records from a file."
   },
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
