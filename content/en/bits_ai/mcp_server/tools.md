@@ -1007,6 +1007,15 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 - Scan my code for hardcoded secrets.
 - Check if there are any API keys or passwords committed in this file.
 
+### `datadog_security_signals_schema`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
+
+- What fields can I use to filter security signals?
+- Show me the available fields for Cloud SIEM signals.
+- What enum values are valid for the signal rule type field?
+
 ### `search_datadog_security_signals`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
@@ -1033,15 +1042,6 @@ Retrieves the full details of a single security signal by ID, including attribut
 - Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
 - Show me the rule, triage state, and linked cases for this signal.
 
-### `datadog_security_signals_schema`
-*Toolset: **security***\
-*Permissions Required: `Security Signals Read`*\
-Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
-
-- What fields can I use to filter security signals?
-- Show me the available fields for Cloud SIEM signals.
-- What enum values are valid for the signal rule type field?
-
 ### `update_datadog_security_signals_triage`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Write`*\
@@ -1050,6 +1050,15 @@ Updates the triage state and/or assignee of one or more security signals in bulk
 - Archive all signals from rule "Brute Force Login" in the last 24 hours.
 - Set all open signals for `service:checkout` to under review and assign them to me.
 - Mark signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu` as archived with reason "testing".
+
+### `get_datadog_security_detection_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use this before authoring or querying detection rules. Returns static content with no network call.
+
+- What fields and options are available when creating a threshold detection rule?
+- Show me the schema for sequence detection rules.
+- What tag conventions and query syntax does the detection rules API use?
 
 ### `list_datadog_security_detection_rules`
 *Toolset: **security***\
@@ -1068,15 +1077,6 @@ Retrieves the full definition of a single Cloud SIEM detection rule by ID, inclu
 - Get the full definition of detection rule `abc-123-def`.
 - Show me the queries and cases for the rule generating this signal.
 - What thresholds and group-by fields does this detection rule use?
-
-### `get_datadog_security_detection_rules_schema`
-*Toolset: **security***\
-*Permissions Required: `Security Monitoring Rules Read`*\
-Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use this before authoring or querying detection rules. Returns static content with no network call.
-
-- What fields and options are available when creating a threshold detection rule?
-- Show me the schema for sequence detection rules.
-- What tag conventions and query syntax does the detection rules API use?
 
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\

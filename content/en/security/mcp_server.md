@@ -61,6 +61,10 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 ### Security Signals
 
+`datadog_security_signals_schema`
+: Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
+: *Permissions required: `Security Signals Read`*
+
 `search_datadog_security_signals`
 : Searches and retrieves security signals from Datadog, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals. Use this to surface and investigate suspicious activity.
 : *Permissions required: `Security Signals Read`*
@@ -73,15 +77,15 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations. Use `search_datadog_security_signals` to find signal IDs first.
 : *Permissions required: `Security Signals Read`*
 
-`datadog_security_signals_schema`
-: Returns the available fields and their types for security signals. Call this before using `analyze_datadog_security_signals` to discover which fields you can filter and group by. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
-: *Permissions required: `Security Signals Read`*
-
 `update_datadog_security_signals_triage`
 : Updates the triage state and/or assignee of one or more security signals in bulk. Accepts either a list of signal IDs or a filter query. Valid states: `open`, `archived`, `under_review`. An archive reason is required when archiving. Call `analyze_datadog_security_signals` first to count matching signals before bulk-updating.
 : *Permissions required: `Security Signals Write`*
 
 ### Detection Rules
+
+`get_datadog_security_detection_rules_schema`
+: Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules.
+: *Permissions required: `Security Monitoring Rules Read`*
 
 `list_datadog_security_detection_rules`
 : Lists Cloud SIEM detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to retrieve the full definition of a specific rule.
@@ -89,10 +93,6 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 `get_datadog_security_detection_rule`
 : Retrieves the full definition of a single Cloud SIEM detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
-: *Permissions required: `Security Monitoring Rules Read`*
-
-`get_datadog_security_detection_rules_schema`
-: Returns the authoring reference and schema for Cloud SIEM detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules.
 : *Permissions required: `Security Monitoring Rules Read`*
 
 ### Suppressions
