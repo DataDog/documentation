@@ -210,12 +210,6 @@ Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every ev
 
 {{< img src="llm_observability/evaluations/session_level_eval_results.png" alt="The Evaluations tab of a completed session, showing the session-level evaluation result with the LLM judge's reasoning expanded." style="width:100%;" >}}
 
-### Monitor results
-
-Wire session-level evaluation results into [annotation queues][8] to route failures for human review:
-
-- **Route failures to an annotation queue.** Configure an [Automation Rule][8] that matches `@evaluation.<evaluation_name>.assessment:fail` and adds the session to an annotation queue for a human reviewer.
-
 ## Permissions
 
 Configuring evaluations requires the `LLM Observability Write` [permission][4].
