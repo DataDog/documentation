@@ -57,7 +57,7 @@ On any service page that is missing a `team` or `system` tag, click **Service Co
 
 Click **Add Tags** to open the tag enrichment rule modal pre-populated with that service.
 
-{{< img src="tracing/services/tag_enrichment/add-idp-tag-enrichment-rule.png" alt="The Add IDP tag enrichment rule modal pre-populated with a specific service, showing fields for selecting entities to enrich, tags to add, and the tag source method." >}}
+{{< img src="tracing/services/tag_enrichment/add-idp-tag-enrichment-rule.png" alt="The Add IDP tag enrichment rule modal, showing fields for selecting entities to enrich, tags to add, and the tag source method." >}}
 
 ## Tag enrichment behavior
 
