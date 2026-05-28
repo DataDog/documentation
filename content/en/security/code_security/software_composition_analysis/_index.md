@@ -194,16 +194,17 @@ A vulnerability is opened when Datadog detects a vulnerable library in the relev
 
 Software Composition Analysis (SCA) supports the following languages:
 
-{{< card-grid min_width="200px" img_width="100" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/python_avatar.svg" alt="python" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/javascript_large.png" alt="javascript" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/java_avatar.svg" alt="java" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/golang-avatar.png" alt="go" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/ruby_avatar.svg" alt="ruby" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/php_opcache.png" alt="php" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/rust.png" alt="rust" >}}
-  {{< image-card href="#set-up-sca" src="integrations_logos/c_sharp.png" alt="c sharp" >}}
+{{< card-grid img_width="80" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/python_avatar.svg" alt="python" img_width="50" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/javascript_large.png" alt="javascript" img_width="50" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/java_avatar.svg" alt="java" img_width="50" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/golang-avatar.png" alt="go" img_width="60" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/ruby_avatar.svg" alt="ruby" img_width="50" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/php_opcache.png" alt="php" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/rust.png" alt="rust" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/cpp.png" alt="c++" img_width="60" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/dart.svg" alt="dart" img_width="50" >}}
+  {{< image-card href="/security/code_security/software_composition_analysis/setup_static/?tab=github" src="integrations_logos/swift_avatar.svg" alt="swift" img_width="50" >}}
 {{< /card-grid >}}
 
 ## Customize your configuration
