@@ -13,11 +13,11 @@ further_reading:
   text: "Fleet Automation API"
 ---
 
-{{< callout btn_hidden="true" header="This feature is in Preview." >}}
-Configuring Agent integrations through Fleet Automation is in Preview.
+{{< callout btn_hidden="true" header="Join the Preview!" >}}
+Remote integration configuration is in Preview.
 {{< /callout >}}
 
-Use Fleet Automation to remotely configure Datadog Agent [integrations][1] across your fleet. Deploy integration configuration files (`conf.d`) to thousands of Agents from the Fleet Automation UI, without direct access to individual hosts.
+Fleet Automation can deploy, update, and remove [integration][1] configuration files (`conf.d`) on your Agents remotely. Select target Agents by host or tag, choose an integration, and Fleet Automation pushes the configuration change across your fleet.
 
 ## Prerequisites
 
@@ -44,11 +44,11 @@ Custom checks are **not** supported.
 
     <div class="alert alert-info">Fleet Automation can detect unconfigured integrations on your hosts. If a process is running on a host that has an available Datadog integration but no active configuration, it appears in the list of <strong>Unconfigured integrations detected on your hosts</strong>. Use this to identify monitoring gaps across your fleet.</div>
 
-1. Select an operation (see [How configuration changes are applied](#how-configuration-changes-are-applied) for more information):
+1. Select an operation (see [How configuration changes are applied](#how-configuration-changes-are-applied) for more information about each operation):
 
-        - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted.
-        - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a file{{< /ui >}} and choose the configuration file you want to replace, then fill in the new configuration as prompted.
-        - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}} and (tk).
+    - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted.
+    - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a file{{< /ui >}} and choose the configuration file you want to replace, then fill in the new configuration as prompted.
+    - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}} and (tk).
 
     <div class="alert alert-tip">Toggle between <strong>Visual</strong> and <strong>YAML</strong> mode when filling out the integration configuration. Use <strong>YAML</strong> mode to paste in YAML directly.</div>
 
