@@ -4,7 +4,7 @@ description: "Run an agentic investigation on a single operation to find root ca
 further_reading:
   - link: "/real_user_monitoring/ai_investigations/"
     tag: "Documentation"
-    text: "AI Investigations overview"
+    text: "AI Investigations"
   - link: "/real_user_monitoring/operations_monitoring/"
     tag: "Documentation"
     text: "Operations Monitoring"

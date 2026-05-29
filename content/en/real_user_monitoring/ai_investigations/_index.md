@@ -23,9 +23,9 @@ For more information, see [Single-View AI Investigation][1].
 
 ## Multi-view AI investigation
 
-Run an agentic investigation across a sample of views that share a slow Core Web Vital. Multi-View AI Investigation extends the same agentic analysis to a population of views, helping you identify what to fix when an entire (view × vital) pair is consistently slow across users. Available from the Optimization page for Loading Time, Largest Contentful Paint, First Contentful Paint, and Interaction to Next Paint.
+Run an agentic investigation across a sample of views that share a slow performance vital. Multi-View AI Investigation extends the same agentic analysis to a population of views, helping you identify what to fix when an entire (view × vital) pair is consistently slow across users. Available from the Optimization page for Loading Time, Largest Contentful Paint, First Contentful Paint, and Interaction to Next Paint.
 
-{{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="The Optimization page for a Core Web Vital, showing ranked recommendation cards with an Investigate button on each." style="width:100%;" >}}
+{{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="The Optimization page for a performance vital, showing ranked recommendation cards with an Investigate button on each." style="width:100%;" >}}
 
 For more information, see [Multi-View AI Investigation][2].
 

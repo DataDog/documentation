@@ -1,10 +1,10 @@
 ---
 title: Multi-View AI Investigation
-description: "Run an agentic investigation across views to find root causes for a slow Core Web Vital."
+description: "Run an agentic investigation across views to find root causes for a slow performance vital."
 further_reading:
   - link: "/real_user_monitoring/ai_investigations/"
     tag: "Documentation"
-    text: "AI Investigations overview"
+    text: "AI Investigations"
   - link: "/real_user_monitoring/ai_investigations/single_view_ai_investigation/"
     tag: "Documentation"
     text: "Single-View AI Investigation"
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Multi-View AI Investigation runs an agentic root-cause analysis across a sample of views that share a slow Core Web Vital. While [Single-View AI Investigation][1] explains why one view was slow, Multi-View AI Investigation explains why an entire (view × vital) pair is consistently slow across users. Use it from the Optimization page when you have identified a specific page and vital and want to know what to fix first.
+Multi-View AI Investigation runs an agentic root-cause analysis across a sample of views that share a slow performance vital. While [Single-View AI Investigation][1] explains why one view was slow, Multi-View AI Investigation explains why an entire (view × vital) pair is consistently slow across users. Use it from the Optimization page when you have identified a specific page and vital and want to know what to fix first.
 
 The investigation runs at the (view × vital) granularity and is available for the following vitals:
 
@@ -47,12 +47,12 @@ Multi-View AI Investigation is available for Browser RUM applications only.
 
 The agent groups its findings into four diagnostic types:
 
-| Source              | What is examined                                                                                              |
-|-------------------------|---------------------------------------------------------------------------------------------------------------|
-| Resource bottleneck     | Slow resources (HTML, scripts, images) impacting the vital across views.                                       |
-| Vital element           | DOM elements that contribute most to the LCP or INP score for the view.                                        |
-| Top JavaScript files    | Large JavaScript bundles or packages that dominate execution time.                                             |
-| Long tasks              | Long-running tasks that block the main thread during the vital window.                                         |
+| Source                  | What is examined                                                                                                               |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Resource bottleneck     | Slow resources (HTML, scripts, images) impacting the vital across views.                                                       |
+| Vital element           | DOM elements that contribute most to the Largest Contentful Paint (LCP) or Interaction to Next Paint (INP) score for the view. |
+| Top JavaScript files    | Large JavaScript bundles or packages that dominate execution time.                                                             |
+| Long tasks              | Long-running tasks that block the main thread during the vital window.                                                         |
 
 The richer the data available, the more precise the analysis. Correlating RUM with [APM Traces][3] and enabling [Browser profiling][4] helps the agent attribute findings to specific code paths.
 
