@@ -72,9 +72,9 @@ The CLI can set up the following products:
     ```
 
     - Replace the value of `--site` with the [Datadog site][16] for your account.
-    - Replace `<PRODUCT>` with one of the [identifiers above](#supported-products).
+    - Replace `<PRODUCT>` with one of the [supported products](#supported-products).
 
-1. Press <kbd>Enter</kbd> at the welcome screen, then choose whether you have a Datadog account. **Yes, sign in** links an existing account; **No, create one** bootstraps a new account. The CLI opens a browser for OAuth. Complete the flow and grant access to your Datadog account.
+1. Press <kbd>Enter</kbd> at the welcome screen and choose whether you have a Datadog account. A browser opens for OAuth (or for account creation if you don't have an account yet). Complete the flow and grant access to your Datadog account.
 
 1. If you ran the CLI without `--product`, select what to set up from the product menu. (Direct setup with `--product` skips this menu.)
 
@@ -126,11 +126,15 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-**Option 1: Install deeplink (recommended).** Click the install deeplink for your [Datadog site](/getting_started/site/), then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+**Option 1: Install deeplink (recommended)**
+
+Click the install deeplink for your [Datadog site](/getting_started/site/), then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
-**Option 2: Manual configuration.** Add the server to `~/.cursor/mcp.json`:
+**Option 2: Manual configuration**
+
+Add the server to `~/.cursor/mcp.json`:
 
 <pre><code>{
   "mcpServers": {
@@ -212,7 +216,7 @@ After the agent completes, commit the changes to your repository and set any new
 
 ## Next steps
 
-- Confirm data is flowing in the Datadog UI for the product you set up: [Error Tracking][6], [RUM > Applications][7], [Infrastructure > Hosts][8], [Serverless > Functions][9], or [Logs > Live Tail][10].
+Confirm data is flowing in the Datadog UI for the product you set up: [Error Tracking][6], [RUM > Applications][7], [Infrastructure > Hosts][8], [Serverless > Functions][9], or [Logs > Live Tail][10].
 
 [6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
