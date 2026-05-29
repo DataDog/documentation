@@ -58,9 +58,10 @@
   {{- hugo.Store.Set $indexKey ($sc.Get "i") -}}
 {{- end -}}
 
+{{- $result := $spec -}}
 {{- if $lookup -}}
   {{- $index := hugo.Store.Get $indexKey -}}
-  {{- return (index $index $lookup) -}}
+  {{- $result = index $index $lookup -}}
 {{- end -}}
 
-{{- return $spec -}}
+{{- return $result -}}
