@@ -24,7 +24,7 @@ describe("Header", () => {
     const expectedLeft = [
       header.product?.label,
       header.solutions?.label,
-      ...header.simpleLeft.map((m) => m.label),
+      ...header.leftLinks.map((m) => m.label),
     ].filter((s): s is string => Boolean(s));
 
     for (const label of expectedLeft) {

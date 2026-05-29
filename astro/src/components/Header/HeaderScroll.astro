@@ -9,7 +9,10 @@
 <script is:inline>
   (function () {
     var root = document.documentElement;
-    var DESKTOP_MIN_WIDTH = 992;
+    var DESKTOP_MIN_WIDTH = parseInt(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--hugo-breakpoint-desktop')
+    );
     var SCROLLED_THRESHOLD = 30;
     var ticking = false;
 

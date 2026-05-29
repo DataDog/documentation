@@ -140,7 +140,7 @@ export type HeaderData = {
     href: string;
     columns: SolutionsColumn[];
   } | null;
-  simpleLeft: IdentifiedLink[];
+  leftLinks: IdentifiedLink[];
   about: (SimpleLink & { children: SimpleLink[] }) | null;
   blog: (SimpleLink & { children: SimpleLink[] }) | null;
   login: SimpleLink | null;
@@ -163,7 +163,9 @@ function iconHtml(name: string): string {
   return categoryIconMap[key] ?? "";
 }
 
-function isDisabledForDocs(item: { params?: { disabled?: string[] } }): boolean {
+function isDisabledForDocs(item: {
+  params?: { disabled?: string[] };
+}): boolean {
   return Boolean(item.params?.disabled?.includes("documentation"));
 }
 
@@ -219,23 +221,30 @@ function buildMegaCategories(): MegaCategory[] {
   return productCategories
     .filter((c) => !c.mobile)
     .map((cat) => {
-      const subcategories: MegaSubcategory[] = (cat.children ?? []).map((sub) => {
-        const sections: MegaSection[] = sub.sections
-          ? sub.sections.map((section) => ({
-              label: i18n(section.lang_key),
-              products: resolveProductList(section.products),
-            }))
-          : sub.products
-            ? [{ label: i18n(sub.lang_key), products: resolveProductList(sub.products) }]
-            : [];
+      const subcategories: MegaSubcategory[] = (cat.children ?? []).map(
+        (sub) => {
+          const sections: MegaSection[] = sub.sections
+            ? sub.sections.map((section) => ({
+                label: i18n(section.lang_key),
+                products: resolveProductList(section.products),
+              }))
+            : sub.products
+              ? [
+                  {
+                    label: i18n(sub.lang_key),
+                    products: resolveProductList(sub.products),
+                  },
+                ]
+              : [];
 
-        return {
-          identifier: sub.identifier,
-          label: i18n(sub.lang_key),
-          related: sub.identifier.includes("related"),
-          sections,
-        };
-      });
+          return {
+            identifier: sub.identifier,
+            label: i18n(sub.lang_key),
+            related: sub.identifier.includes("related"),
+            sections,
+          };
+        },
+      );
 
       return {
         identifier: cat.identifier,
@@ -299,7 +308,7 @@ export function getHeaderData(): HeaderData {
           columns: buildSolutionsColumns(solutionsItem),
         }
       : null,
-    simpleLeft: left
+    leftLinks: left
       .filter(
         (m) =>
           m.identifier !== "product" &&
@@ -342,7 +351,8 @@ export function getFooterProductLinks(): SimpleLink[] {
   const out: SimpleLink[] = [];
   for (const cat of productCategories) {
     for (const sub of cat.children ?? []) {
-      const ids = sub.products ?? (sub.sections ?? []).flatMap((s) => s.products);
+      const ids =
+        sub.products ?? (sub.sections ?? []).flatMap((s) => s.products);
       for (const id of ids) {
         if (seen.has(id)) {
           continue;

@@ -58,12 +58,9 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
           }
 
           {
-            headerData.simpleLeft.map((item) => (
+            headerData.leftLinks.map((item) => (
               <li class={cl("header__menu-item")}>
-                <a
-                  class={cl("header__menu-link")}
-                  href={item.href}
-                >
+                <a class={cl("header__menu-link")} href={item.href}>
                   <span class={cl("header__menu-text")}>{item.label}</span>
                 </a>
               </li>
@@ -164,7 +161,9 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
             headerData.login && (
               <li class={cl("header__menu-item")}>
                 <a class={cl("header__menu-link")} href={headerData.login.href}>
-                  <span class={cl("header__menu-text")}>{headerData.login.label}</span>
+                  <span class={cl("header__menu-text")}>
+                    {headerData.login.label}
+                  </span>
                 </a>
               </li>
             )
