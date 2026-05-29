@@ -15883,6 +15883,42 @@ menu:
           - DeleteRetentionFilter
         unstable: []
         order: 5
+    - name: Update a permanent RUM retention filter
+      url: '#update-a-permanent-rum-retention-filter'
+      identifier: rum-retention-filters-update-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePermanentRetentionFilter
+        unstable: []
+        order: 9
+    - name: Get a permanent RUM retention filter
+      url: '#get-a-permanent-rum-retention-filter'
+      identifier: rum-retention-filters-get-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPermanentRetentionFilter
+        unstable: []
+        order: 8
+    - name: Get all permanent RUM retention filters
+      url: '#get-all-permanent-rum-retention-filters'
+      identifier: rum-retention-filters-get-all-permanent-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPermanentRetentionFilters
+        unstable: []
+        order: 7
     - name: Create a RUM retention filter
       url: '#create-a-rum-retention-filter'
       identifier: rum-retention-filters-create-a-rum-retention-filter
