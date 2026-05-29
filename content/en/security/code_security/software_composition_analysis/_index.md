@@ -157,7 +157,7 @@ To restore a muted finding, click **Unmute** in the details panel. You can also 
 
 ### Library vulnerability context in APM
 
-SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Software Catalog][10].
+SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Catalog][10].
 
 ## Understanding SCA views
 
