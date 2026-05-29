@@ -120,7 +120,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
 `update_datadog_security_suppression`
-: Updates an existing suppression rule. Only provided fields are changed. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
+: Updates an existing suppression rule. Only changes provided fields. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
 `delete_datadog_security_suppression`
