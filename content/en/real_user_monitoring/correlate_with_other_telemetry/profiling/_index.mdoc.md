@@ -38,7 +38,7 @@ Browser Profiling is in Preview.
 {% /callout %}
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png" 
-alt="Browser profiling example when analyzing an event sample." 
+alt="Browser profiling tab in the Sessions Explorer." 
 style="width:100%;" /%}
 
 Browser profiling provides visibility into how your application behaves in your users' browsers, helping you understand root causes behind unresponsive applications at page load or during the page life cycle. Use profiling data alongside RUM insights to identify which code executes during a [Long Animation Frame (LoAF)][1] and how JavaScript execution and rendering tasks impact user-perceived performance.
@@ -163,20 +163,20 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 ### Within the Profiling page
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience.png" alt="Browser profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found thorugh the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Focus on views**: Choose the views you'd like to analyze.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience_step_1.png" alt="Step one of the browser profiling aggregate experience showing which views to select." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_1.png" alt="Step 1 of the browser profiling aggregate experience showing which views to select." style="width:100%;" /%}
 
 2. **Select a measurement**: Pick a Core Web Vital, custom vital, or RUM action to dive into. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience_step_2.png" alt="Step two of the browser profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_2.png" alt="Step 2 of the browser profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
 
-3. **Compare (Optional)**:  Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience_step_3.png" alt="Step three of the browser profiling aggregate experience showing how to compare." style="width:100%;" /%}
+3. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_3.png" alt="Step 3 of the browser profiling aggregate experience showing how to compare." style="width:100%;" /%}
 
-4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or if you chose to compare see the differneces between group A and B.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience_step_4a.png" alt="Step 4 of the browser profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience_step_4b.png" alt="Step 4 of the browser profiling aggregate experience showing a flamegraph and top methods list." style="width:100%;" /%}
+4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or if you chose to compare see the differences between group A and B.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the browser profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the browser profiling aggregate experience showing a flamegraph and top methods list." style="width:100%;" /%}
 
 
 ### Within the Optimization page
