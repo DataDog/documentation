@@ -68,7 +68,13 @@ La lista de Métricas de consultas muestra métricas de solicitudes, latencia me
 
 Para ver una lista completa de métricas recopiladas, consulta la documentación Datos recopilados, de la integración correspondiente a tu producto de base de datos:
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 Las métricas utilizadas para las vistas de la Monitorización de bases de datos son, principalmente:

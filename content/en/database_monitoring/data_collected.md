@@ -11,7 +11,13 @@ These are standard Datadog metrics that you can use in [dashboards][1], [monitor
 
 To see a complete list of metrics collected, see the integration **Data Collected** documentation section for your database product:
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 The metrics used for Database Monitoring views are, primarily:
