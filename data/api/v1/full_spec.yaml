@@ -27809,7 +27809,10 @@ paths:
       x-menu-order: 1
   /api/v1/api_key:
     get:
-      description: Get all API keys available for your account.
+      description: |-
+        Get all API keys available for your account.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: ListAPIKeys
       responses:
         "200":
@@ -27843,7 +27846,10 @@ paths:
         permissions:
           - api_keys_read
     post:
-      description: Creates an API key with a given name.
+      description: |-
+        Creates an API key with a given name.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: CreateAPIKey
       requestBody:
         content:
@@ -27895,7 +27901,10 @@ paths:
           - api_keys_write
   /api/v1/api_key/{key}:
     delete:
-      description: Delete a given API key.
+      description: |-
+        Delete a given API key.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: DeleteAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27948,7 +27957,10 @@ paths:
         permissions:
           - api_keys_delete
     get:
-      description: Get a given API key.
+      description: |-
+        Get a given API key.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: GetAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27995,7 +28007,10 @@ paths:
         permissions:
           - api_keys_read
     put:
-      description: Edit an API key name.
+      description: |-
+        Edit an API key name.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: UpdateAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -28063,6 +28078,8 @@ paths:
       description: |-
         Get all application keys available for your Datadog account.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: ListApplicationKeys
       responses:
         "200":
@@ -28099,6 +28116,8 @@ paths:
       description: |-
         Create an application key with a given name.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: CreateApplicationKey
       requestBody:
         content:
@@ -28158,6 +28177,8 @@ paths:
       description: |-
         Delete a given application key.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: DeleteApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -28207,6 +28228,8 @@ paths:
       description: |-
         Get a given application key.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: GetApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -28256,6 +28279,8 @@ paths:
       description: |-
         Edit an application key name.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: UpdateApplicationKey
       parameters:
         - description: The specific APP key you are working with.
