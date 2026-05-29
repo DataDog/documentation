@@ -180,11 +180,11 @@ test.describe('card-grid shortcode', () => {
         await expect(card).not.toHaveAttribute('data-bs-toggle');
     });
 
-    test('tooltip grid emits script tag for page reload', async ({ page }) => {
+    test('tooltip grid emits Bootstrap tooltip init script', async ({ page }) => {
         const scripts = await page.locator('script').evaluateAll(els =>
             els.map(el => el.textContent?.trim())
         );
-        expect(scripts).toContain('void 0');
+        expect(scripts.some(s => s && s.includes('bootstrap.Tooltip'))).toBe(true);
     });
 
     test('tooltips work after sidenav navigation', async ({ page }) => {
