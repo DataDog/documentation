@@ -41,7 +41,7 @@ Multi-View AI Investigation is available for Browser RUM applications only.
    - Up to three **recommendation cards** below the summary. Each card represents a candidate root cause, ordered by impact.
 4. Click **Investigate** on a card to launch the agent on that issue.
 
-<!-- TODO: Screenshot — Optimization page showing the summary and ranked recommendation cards for a (view × vital) pair. -->
+{{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="Optimization page for a Largest Contentful Paint metric, showing the p75 distribution, time series, and ranked recommendation cards with an Investigate button on each card." style="width:100%;" >}}
 
 ## Data analyzed
 
@@ -64,7 +64,7 @@ When you click **Investigate** on a recommendation card, a side panel opens and 
 - **A root-cause explanation** with the supporting evidence the agent considered.
 - **A code-level finding** when the agent can attribute the issue to a specific file or function.
 
-<!-- TODO: Screenshot — Multi-View AI Investigation side panel with timeline, root-cause explanation, and code-level finding. -->
+{{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-code-finding.png" alt="A Code Investigation side panel showing the inspected DOM element, a timeline of layout and render events, the root-cause explanation, and the affected source code." style="width:100%;" >}}
 
 ## Take action
 

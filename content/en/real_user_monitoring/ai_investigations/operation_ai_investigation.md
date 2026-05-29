@@ -34,7 +34,7 @@ Operation AI Investigation runs an agentic root-cause analysis on a single opera
    - A ranked list of **recommendation cards** — one per failure mode (errors, timeouts, abandonment), one for latency regression, and one for sustained high latency. Each card is tagged with a priority badge (**P0**, **P1**, or **P2**) reflecting relative severity.
 4. Click **Investigate** on a card to open a detailed analysis.
 
-<!-- TODO: Screenshot — Operations page showing the summary and ranked recommendation cards. -->
+{{< img src="real_user_monitoring/ai_investigations/operation-ai-investigation-recommendations.png" alt="Operations page for an Add to Cart operation, showing execution volume, success rate, and completion time charts, with a plain-language health summary and ranked recommendation cards tagged with P1 and P2 priority badges." style="width:100%;" >}}
 
 ## What the agent investigates
 
@@ -73,7 +73,7 @@ Each finding includes:
 - **Correlated APM endpoints**: Each with a **View trace** link that opens the matching trace in APM.
 - **Error groups**: Affected session count, whether the error first appeared in a recent application version, and a **View Sample Session** link that opens the session in the RUM Explorer.
 
-<!-- TODO: Screenshot — Operation AI Investigation side panel with verdict, summary, and ranked findings. -->
+{{< img src="real_user_monitoring/ai_investigations/operation-ai-investigation-finding.png" alt="An Operation AI Investigation side panel showing the investigation summary with confidence and category badges, a ranked Findings section with a frontend code-level finding, and the affected source code snippet." style="width:100%;" >}}
 
 ## Take action
 
