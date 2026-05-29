@@ -4,7 +4,7 @@ private: true
 description: "Monitor and analyze critical user flows to troubleshoot user experience and technical issues."
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
@@ -19,7 +19,7 @@ A *journey* is a user flow defined by a start event and an end event. For exampl
 
 This gives engineering, product, and developer operations teams a shared view of journey health without switching between tools.
 
-{{< img src="journey_monitoring/journey-monitoring-map.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-map-1.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 ## Capabilities
 

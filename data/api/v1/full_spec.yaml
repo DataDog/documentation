@@ -3410,6 +3410,7 @@ components:
         - product_analytics
         - on_call_events
         - errors
+        - llm_observability
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3427,6 +3428,7 @@ components:
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
         - ERRORS
+        - LLM_OBSERVABILITY
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -4688,13 +4690,58 @@ components:
         - requests
       type: object
     HostMapWidgetDefinitionRequests:
-      description: List of definitions.
+      description: >-
+        Query definition for the host map widget. Supports two mutually exclusive formats distinguished by the presence of `request_type`: the legacy metric-based format (`fill`/`size`) and the infrastructure-backed format (`request_type`, `node_type`, `enrichments`).
       example: {}
       properties:
+        child:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequest"
+        conditional_formats:
+          description: List of conditional formatting rules applied to fill values.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        enrichments:
+          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          example:
+            - formulas:
+                - dimension: fill
+                  formula: "query1"
+              queries:
+                - data_source: metrics
+                  name: "query1"
+                  query: "avg:system.cpu.user{*} by {host}"
+              response_format: scalar
+          items:
+            $ref: "#/components/schemas/HostMapWidgetScalarRequest"
+          type: array
         fill:
           $ref: "#/components/schemas/HostMapRequest"
+        filter:
+          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          example: "env:prod"
+          type: string
+        group_by:
+          description: |-
+            Defines how entities are grouped into tiles. The ordering of entries implies
+            the grouping hierarchy.
+          items:
+            $ref: "#/components/schemas/HostMapWidgetGroupBy"
+          type: array
+        no_group_hosts:
+          description: Whether to hide entities that have no group assignment.
+          type: boolean
+        no_metric_hosts:
+          description: Whether to hide entities that have no enrichment data.
+          type: boolean
+        node_type:
+          $ref: "#/components/schemas/HostMapWidgetNodeType"
+        request_type:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
         size:
           $ref: "#/components/schemas/HostMapRequest"
+        style:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
       type: object
     HostMapWidgetDefinitionStyle:
       description: The style to apply to the widget.
@@ -4721,6 +4768,239 @@ components:
       type: string
       x-enum-varnames:
         - HOSTMAP
+    HostMapWidgetDimension:
+      description: Visual dimension driven by a formula in the infrastructure host map widget.
+      enum:
+        - node
+        - fill
+        - size
+      example: node
+      type: string
+      x-enum-varnames:
+        - NODE
+        - FILL
+        - SIZE
+    HostMapWidgetFormula:
+      description: |-
+        Formula for the infrastructure host map widget that specifies both the expression
+        and the visual dimension it populates.
+      properties:
+        alias:
+          description: Expression alias.
+          example: "my-metric"
+          type: string
+        dimension:
+          $ref: "#/components/schemas/HostMapWidgetDimension"
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: "query1"
+          type: string
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+      required:
+        - formula
+        - dimension
+      type: object
+    HostMapWidgetGroupBy:
+      description: Defines a grouping dimension for the infrastructure host map.
+      properties:
+        column:
+          description: Column name from the entity table (for example, `cloud_provider`, `tags`, `labels`).
+          example: tags
+          type: string
+        key:
+          description: Key within the column for nested attribute types (for example, `service` within `tags`).
+          example: service
+          type: string
+      required:
+        - column
+      type: object
+    HostMapWidgetInfrastructureRequest:
+      description: |-
+        Infrastructure-backed request for the host map widget. Supports entity-based
+        visualization with metric query enrichments, tag-based filtering, flexible grouping,
+        and hierarchical views.
+      properties:
+        child:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestLeaf"
+          description: |-
+            Optional child request for hierarchical visualization (for example, hosts containing
+            containers). Maximum one level of nesting.
+        conditional_formats:
+          description: List of conditional formatting rules applied to fill values.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        enrichments:
+          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          example:
+            - formulas:
+                - dimension: fill
+                  formula: "query1"
+              queries:
+                - data_source: metrics
+                  name: "query1"
+                  query: "avg:system.cpu.user{*} by {host}"
+              response_format: scalar
+          items:
+            $ref: "#/components/schemas/HostMapWidgetScalarRequest"
+          type: array
+        filter:
+          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          example: "env:prod"
+          type: string
+        group_by:
+          description: |-
+            Defines how entities are grouped into tiles. The ordering of entries implies
+            the grouping hierarchy.
+          items:
+            $ref: "#/components/schemas/HostMapWidgetGroupBy"
+          type: array
+        no_group_hosts:
+          description: Whether to hide entities that have no group assignment.
+          type: boolean
+        no_metric_hosts:
+          description: Whether to hide entities that have no enrichment data.
+          type: boolean
+        node_type:
+          $ref: "#/components/schemas/HostMapWidgetNodeType"
+        request_type:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
+        style:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
+      required:
+        - request_type
+        - node_type
+        - enrichments
+      type: object
+    HostMapWidgetInfrastructureRequestLeaf:
+      description: Infrastructure-backed host map child request (leaf node, no further nesting supported).
+      properties:
+        conditional_formats:
+          description: List of conditional formatting rules applied to fill values.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        enrichments:
+          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          example:
+            - formulas:
+                - dimension: fill
+                  formula: "query1"
+              queries:
+                - data_source: metrics
+                  name: "query1"
+                  query: "avg:system.cpu.user{*} by {host}"
+              response_format: scalar
+          items:
+            $ref: "#/components/schemas/HostMapWidgetScalarRequest"
+          type: array
+        filter:
+          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          example: "env:prod"
+          type: string
+        group_by:
+          description: |-
+            Defines how entities are grouped into tiles. The ordering of entries implies
+            the grouping hierarchy.
+          items:
+            $ref: "#/components/schemas/HostMapWidgetGroupBy"
+          type: array
+        no_group_hosts:
+          description: Whether to hide entities that have no group assignment.
+          type: boolean
+        no_metric_hosts:
+          description: Whether to hide entities that have no enrichment data.
+          type: boolean
+        node_type:
+          $ref: "#/components/schemas/HostMapWidgetNodeType"
+        request_type:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
+        style:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
+      required:
+        - request_type
+        - node_type
+        - enrichments
+      type: object
+    HostMapWidgetInfrastructureRequestRequestType:
+      description: Identifies this as an infrastructure-backed host map request.
+      enum:
+        - infrastructure_hostmap
+      example: infrastructure_hostmap
+      type: string
+      x-enum-varnames:
+        - INFRASTRUCTURE_HOSTMAP
+    HostMapWidgetInfrastructureStyle:
+      description: Style configuration for the infrastructure host map.
+      properties:
+        fill_max:
+          description: Maximum value for the fill color scale. Omit to use automatic scaling.
+          format: double
+          type: number
+        fill_min:
+          description: Minimum value for the fill color scale. Omit to use automatic scaling.
+          format: double
+          type: number
+        palette:
+          description: Color palette name or alias.
+          example: hostmap_blues
+          type: string
+        palette_flip:
+          description: Whether to invert the color palette.
+          type: boolean
+      type: object
+    HostMapWidgetNodeType:
+      description: Which type of infrastructure entity to visualize in the host map.
+      enum:
+        - host
+        - container
+        - pod
+        - cluster
+      example: host
+      type: string
+      x-enum-varnames:
+        - HOST
+        - CONTAINER
+        - POD
+        - CLUSTER
+    HostMapWidgetScalarRequest:
+      description: |-
+        Scalar formula request for the infrastructure host map widget. Each formula specifies
+        which visual dimension it drives.
+      properties:
+        formulas:
+          description: List of formulas that operate on queries, each assigned to a visual dimension.
+          example:
+            - dimension: fill
+              formula: "query1"
+          items:
+            $ref: "#/components/schemas/HostMapWidgetFormula"
+          type: array
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          example:
+            - data_source: "metrics"
+              name: "my_query"
+              query: "avg:system.cpu.user{*}"
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
+          type: array
+        response_format:
+          $ref: "#/components/schemas/HostMapWidgetScalarRequestResponseFormat"
+      required:
+        - response_format
+        - queries
+        - formulas
+      type: object
+    HostMapWidgetScalarRequestResponseFormat:
+      description: Response format for the scalar formula request. Only `scalar` is supported.
+      enum:
+        - scalar
+      example: scalar
+      type: string
+      x-enum-varnames:
+        - SCALAR
     HostMeta:
       description: Metadata associated with your host.
       properties:
@@ -27529,7 +27809,10 @@ paths:
       x-menu-order: 1
   /api/v1/api_key:
     get:
-      description: Get all API keys available for your account.
+      description: |-
+        Get all API keys available for your account.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: ListAPIKeys
       responses:
         "200":
@@ -27563,7 +27846,10 @@ paths:
         permissions:
           - api_keys_read
     post:
-      description: Creates an API key with a given name.
+      description: |-
+        Creates an API key with a given name.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: CreateAPIKey
       requestBody:
         content:
@@ -27615,7 +27901,10 @@ paths:
           - api_keys_write
   /api/v1/api_key/{key}:
     delete:
-      description: Delete a given API key.
+      description: |-
+        Delete a given API key.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: DeleteAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27668,7 +27957,10 @@ paths:
         permissions:
           - api_keys_delete
     get:
-      description: Get a given API key.
+      description: |-
+        Get a given API key.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: GetAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27715,7 +28007,10 @@ paths:
         permissions:
           - api_keys_read
     put:
-      description: Edit an API key name.
+      description: |-
+        Edit an API key name.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: UpdateAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27783,6 +28078,8 @@ paths:
       description: |-
         Get all application keys available for your Datadog account.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: ListApplicationKeys
       responses:
         "200":
@@ -27819,6 +28116,8 @@ paths:
       description: |-
         Create an application key with a given name.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: CreateApplicationKey
       requestBody:
         content:
@@ -27878,6 +28177,8 @@ paths:
       description: |-
         Delete a given application key.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: DeleteApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -27927,6 +28228,8 @@ paths:
       description: |-
         Get a given application key.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: GetApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -27976,6 +28279,8 @@ paths:
       description: |-
         Edit an application key name.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: UpdateApplicationKey
       parameters:
         - description: The specific APP key you are working with.

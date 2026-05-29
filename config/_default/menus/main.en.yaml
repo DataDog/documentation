@@ -1236,18 +1236,24 @@ menu:
       identifier: api
       parent: essentials_heading
       weight: 90000
+    - name: Command Line
+      url: cli/
+      pre: prompt-wui
+      identifier: cli
+      parent: essentials_heading
+      weight: 100000
     - name: Partners
       url: partners/
       pre: colab
       identifier: partners
       parent: essentials_heading
-      weight: 100000
+      weight: 110000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 110000
+      weight: 120000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -1283,7 +1289,7 @@ menu:
       pre: ddsql
       identifier: ddsql_reference
       parent: essentials_heading
-      weight: 110000
+      weight: 130000
     - name: Data Directory
       url: ddsql_reference/data_directory/
       identifier: ddsql_reference_data_directory
@@ -1294,7 +1300,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 120000
+      weight: 140000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -1305,7 +1311,7 @@ menu:
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 130000
+      weight: 150000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -1326,7 +1332,7 @@ menu:
       url: remote_configuration
       identifier: remote_configuration
       parent: essentials_heading
-      weight: 130000
+      weight: 160000
     - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
@@ -1509,7 +1515,7 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Bits AI SRE
+    - name: Bits Investigation
       url: bits_ai/bits_ai_sre
       identifier: bits_ai_sre
       parent: bits_ai
@@ -1524,7 +1530,7 @@ menu:
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE Integrations and Settings
+    - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
@@ -1534,12 +1540,12 @@ menu:
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
-    - name: Chat with Bits AI SRE
+    - name: Chat with Bits Investigation
       url: bits_ai/bits_ai_sre/chat_bits_ai_sre
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 500
-    - name: Bits AI Dev Agent
+    - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
       identifier: bits_ai_dev_agent
@@ -1554,7 +1560,7 @@ menu:
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
       weight: 3
-    - name: Bits AI Assistant
+    - name: Bits Chat
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
@@ -1574,7 +1580,7 @@ menu:
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
       weight: 502
-    - name: Agent Builder
+    - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
@@ -2308,7 +2314,7 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits AI Dev Agent
+    - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
       identifier: error_tracking_bits_ai_dev_agent
@@ -2841,7 +2847,7 @@ menu:
       weight: 9
     - name: Agents
       weight: 7
-    - name: Agent Builder
+    - name: Bits Agent Builder
       url: actions/agents/
       pre: robot-wui
       identifier: agents
@@ -5483,6 +5489,11 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
       weight: 40102
+    - name: Session-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
+      weight: 401021
     - name: Prompt Templating
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -8113,11 +8124,21 @@ menu:
       parent: application_security
       identifier: aws_waf_int
       weight: 8
-    - name: API Security Inventory
-      url: security/application_security/api-inventory/
+    - name: API Posture
+      url: security/application_security/api_posture/
       parent: application_security
-      identifier: asm_api_security
+      identifier: application_security_api_security
       weight: 9
+    - name: API Inventory
+      url: security/application_security/api_posture/api_inventory/
+      parent: application_security_api_security
+      identifier: asm_api_security
+      weight: 1
+    - name: Endpoint Scanning
+      url: security/application_security/api_posture/endpoint_scanning/
+      parent: application_security_api_security
+      identifier: application_security_endpoint_scanning
+      weight: 2
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
@@ -9455,6 +9476,11 @@ menu:
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
+      weight: 3
+    - name: Create Exposure SQL Models
+      url: experiments/exposure_sql
+      parent: pa_experiments
+      identifier: pa_experiments_exposure_sql
       weight: 4
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect

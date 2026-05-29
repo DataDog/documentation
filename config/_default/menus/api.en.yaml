@@ -1247,9 +1247,9 @@ menu:
           - CreatePersonalAccessToken
         unstable: []
         order: 15
-    - name: Get all personal access tokens
-      url: '#get-all-personal-access-tokens'
-      identifier: key-management-get-all-personal-access-tokens
+    - name: Get all access tokens
+      url: '#get-all-access-tokens'
+      identifier: key-management-get-all-access-tokens
       parent: key-management
       generated: true
       params:
@@ -3148,6 +3148,18 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 57
+    - name: Bulk convert rules to Terraform
+      url: '#bulk-convert-rules-to-terraform'
+      identifier: security-monitoring-bulk-convert-rules-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkConvertExistingSecurityMonitoringRules
+        unstable: []
+        order: 127
     - name: Convert a rule from JSON to Terraform
       url: '#convert-a-rule-from-json-to-terraform'
       identifier: security-monitoring-convert-a-rule-from-json-to-terraform
@@ -6508,6 +6520,36 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: APM Trace
+      url: /api/latest/apm-trace/
+      identifier: apm-trace
+      generated: true
+    - name: Get a trace by ID
+      url: '#get-a-trace-by-id'
+      identifier: apm-trace-get-a-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTraceByID
+        unstable:
+          - v2
+        order: 1
+    - name: Get a pruned trace by ID
+      url: '#get-a-pruned-trace-by-id'
+      identifier: apm-trace-get-a-pruned-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPrunedTraceByID
+        unstable:
+          - v2
+        order: 2
     - name: Action Connection
       url: /api/latest/action-connection/
       identifier: action-connection
@@ -6951,6 +6993,75 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
+        order: 1
+    - name: Annotations
+      url: /api/latest/annotations/
+      identifier: annotations
+      generated: true
+    - name: Update an annotation
+      url: '#update-an-annotation'
+      identifier: annotations-update-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnnotation
+        unstable:
+          - v2
+        order: 4
+    - name: Delete an annotation
+      url: '#delete-an-annotation'
+      identifier: annotations-delete-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnnotation
+        unstable:
+          - v2
+        order: 5
+    - name: Get annotations for a page
+      url: '#get-annotations-for-a-page'
+      identifier: annotations-get-annotations-for-a-page
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPageAnnotations
+        unstable:
+          - v2
+        order: 3
+    - name: Create an annotation
+      url: '#create-an-annotation'
+      identifier: annotations-create-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnnotation
+        unstable:
+          - v2
+        order: 2
+    - name: List annotations
+      url: '#list-annotations'
+      identifier: annotations-list-annotations
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnnotations
+        unstable:
+          - v2
         order: 1
     - name: App Builder
       url: /api/latest/app-builder/
@@ -12311,6 +12422,19 @@ menu:
         unstable:
           - v2
         order: 30
+    - name: Upload records to an LLM Observability dataset
+      url: '#upload-records-to-an-llm-observability-dataset'
+      identifier: llm-observability-upload-records-to-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadLLMObsDatasetRecordsFile
+        unstable:
+          - v2
+        order: 49
     - name: List LLM Observability dataset versions
       url: '#list-llm-observability-dataset-versions'
       identifier: llm-observability-list-llm-observability-dataset-versions
@@ -12324,6 +12448,19 @@ menu:
         unstable:
           - v2
         order: 44
+    - name: Restore an LLM Observability dataset version
+      url: '#restore-an-llm-observability-dataset-version'
+      identifier: llm-observability-restore-an-llm-observability-dataset-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RestoreLLMObsDatasetVersion
+        unstable:
+          - v2
+        order: 48
     - name: Delete LLM Observability dataset records
       url: '#delete-llm-observability-dataset-records'
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -12376,6 +12513,19 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Export an LLM Observability dataset
+      url: '#export-an-llm-observability-dataset'
+      identifier: llm-observability-export-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportLLMObsDataset
+        unstable:
+          - v2
+        order: 45
     - name: Unlock LLM Observability dataset draft state
       url: '#unlock-llm-observability-dataset-draft-state'
       identifier: llm-observability-unlock-llm-observability-dataset-draft-state
@@ -12415,6 +12565,32 @@ menu:
         unstable:
           - v2
         order: 41
+    - name: Clone an LLM Observability dataset
+      url: '#clone-an-llm-observability-dataset'
+      identifier: llm-observability-clone-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CloneLLMObsDataset
+        unstable:
+          - v2
+        order: 47
+    - name: Batch update LLM Observability dataset records
+      url: '#batch-update-llm-observability-dataset-records'
+      identifier: llm-observability-batch-update-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchUpdateLLMObsDataset
+        unstable:
+          - v2
+        order: 46
     - name: Update an LLM Observability dataset
       url: '#update-an-llm-observability-dataset'
       identifier: llm-observability-update-an-llm-observability-dataset
@@ -15707,6 +15883,42 @@ menu:
           - DeleteRetentionFilter
         unstable: []
         order: 5
+    - name: Update a permanent RUM retention filter
+      url: '#update-a-permanent-rum-retention-filter'
+      identifier: rum-retention-filters-update-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePermanentRetentionFilter
+        unstable: []
+        order: 9
+    - name: Get a permanent RUM retention filter
+      url: '#get-a-permanent-rum-retention-filter'
+      identifier: rum-retention-filters-get-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPermanentRetentionFilter
+        unstable: []
+        order: 8
+    - name: Get all permanent RUM retention filters
+      url: '#get-all-permanent-rum-retention-filters'
+      identifier: rum-retention-filters-get-all-permanent-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPermanentRetentionFilters
+        unstable: []
+        order: 7
     - name: Create a RUM retention filter
       url: '#create-a-rum-retention-filter'
       identifier: rum-retention-filters-create-a-rum-retention-filter

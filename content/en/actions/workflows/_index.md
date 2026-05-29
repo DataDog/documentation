@@ -40,7 +40,7 @@ further_reading:
   text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 - link: "https://www.datadoghq.com/blog/datadog-agent-builder/"
   tag: "Blog"
-  text: "Introducing Datadog Agent Builder: Build agentic workflows for alert response and remediation"
+  text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
