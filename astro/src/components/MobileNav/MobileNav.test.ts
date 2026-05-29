@@ -6,28 +6,15 @@ import { h } from 'preact';
 import type { ComponentType } from 'preact';
 import MobileNav from './MobileNav';
 
-// Cast for parity with Tabs test — h()'s children typing is stricter than the
-// component's prop signature in some cases.
 const MobileNavComponent = MobileNav as ComponentType<any>;
 
 afterEach(() => {
   cleanup();
-  // The open-state effect mutates <html style="overflow:hidden">; reset so
-  // tests don't leak state to each other.
   document.documentElement.style.overflow = '';
 });
 
-// BEM class names — supplied via the `classes` prop so we can assert on stable
-// DOM hooks rather than CSS-module hashes.
-const classes = {
-  hamburger: 'hamburger',
-  hamburgerOpen: 'hamburger--open',
-  hamburgerBar: 'hamburger__bar',
-};
-
-const quicknav = { home: 'Home', docs: 'Docs', api: 'API' };
 const search = { placeholder: 'Search', ariaLabel: 'Search' };
-const labels = { "Toggle navigation": 'Toggle navigation' };
+const labels = { "Toggle navigation": 'Toggle navigation', home: 'Home', docs: 'Docs', api: 'API' };
 const items = [
   { identifier: 'product', label: 'Product', url: 'https://www.datadoghq.com/product/' },
 ];
@@ -40,7 +27,7 @@ const categories = [
 ];
 
 const renderMobileNav = () =>
-  render(h(MobileNavComponent, { classes, quicknav, search, items, categories, labels }));
+  render(h(MobileNavComponent, { search, items, categories, labels }));
 
 function getToggle() {
   return document.querySelector<HTMLButtonElement>('.navbar-toggler')!;
@@ -85,10 +72,9 @@ describe('MobileNav — interactivity', () => {
     renderMobileNav();
 
     const toggle = getToggle();
-    expect(toggle.classList.contains('hamburger')).toBe(true);
-    expect(toggle.classList.contains('hamburger--open')).toBe(false);
+    expect(toggle.classList.contains('mobile-nav__hamburger')).toBe(true);
+    expect(toggle.classList.contains('mobile-nav__hamburger--open')).toBe(false);
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
-    // Closed state: document scroll is not locked.
     expect(document.documentElement.style.overflow).toBe('');
   });
 
@@ -99,16 +85,11 @@ describe('MobileNav — interactivity', () => {
     const toggle = getToggle();
     await user.click(toggle);
 
-    // BEM class state
-    expect(toggle.classList.contains('hamburger--open')).toBe(true);
-    // a11y / interactivity
+    expect(toggle.classList.contains('mobile-nav__hamburger--open')).toBe(true);
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
-    // Visibility side effect: body scroll locked while panel is open.
-    // The overflow is set from a useEffect, so wait for the post-commit flush.
     await waitFor(() => {
       expect(document.documentElement.style.overflow).toBe('hidden');
     });
-    // Panel and backdrop are present and rendered
     expect(getPanel()).toBeTruthy();
     expect(getBackdrop()).toBeTruthy();
   });
@@ -118,10 +99,10 @@ describe('MobileNav — interactivity', () => {
     renderMobileNav();
 
     const toggle = getToggle();
-    await user.click(toggle); // open
-    await user.click(toggle); // close
+    await user.click(toggle);
+    await user.click(toggle);
 
-    expect(toggle.classList.contains('hamburger--open')).toBe(false);
+    expect(toggle.classList.contains('mobile-nav__hamburger--open')).toBe(false);
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
     await waitFor(() => {
       expect(document.documentElement.style.overflow).toBe('');
@@ -134,11 +115,11 @@ describe('MobileNav — interactivity', () => {
 
     const toggle = getToggle();
     await user.click(toggle);
-    expect(toggle.classList.contains('hamburger--open')).toBe(true);
+    expect(toggle.classList.contains('mobile-nav__hamburger--open')).toBe(true);
 
     await user.click(getBackdrop());
 
-    expect(toggle.classList.contains('hamburger--open')).toBe(false);
+    expect(toggle.classList.contains('mobile-nav__hamburger--open')).toBe(false);
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
     await waitFor(() => {
       expect(document.documentElement.style.overflow).toBe('');

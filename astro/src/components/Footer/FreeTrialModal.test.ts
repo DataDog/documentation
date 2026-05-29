@@ -8,21 +8,9 @@ import FreeTrialModal from './FreeTrialModal';
 
 const FreeTrialModalComponent = FreeTrialModal as ComponentType<any>;
 
-const classes = {
-  overlay: 'free-trial-modal__overlay',
-  overlayOpen: 'free-trial-modal__overlay--open',
-  dialog: 'free-trial-modal__dialog',
-  header: 'free-trial-modal__header',
-  title: 'free-trial-modal__title',
-  close: 'free-trial-modal__close',
-  body: 'free-trial-modal__body',
-  iframe: 'free-trial-modal__iframe',
-};
-
 const defaultProps = {
   title: 'Start a free trial',
   iframeSrc: 'about:blank',
-  classes,
 };
 
 const renderModal = (props: Partial<typeof defaultProps> = {}) =>

@@ -29,7 +29,7 @@ const title = 'Footer';
       </table>
 
       <h2>Data flow</h2>
-      <p>Footer menu data comes from <code>src/lib/footerMenus.ts</code>, which reads <code>config/_default/menus/menus.en.yaml</code> directly from <code>@websites-modules</code> and exposes the <code>footer_resources</code>, <code>footer_about</code>, <code>footer_blog</code>, <code>footer_sub</code>, and <code>footer_social</code> lists (sorted by <code>weight</code>). URLs are normalized with <code>resolveFooterUrl()</code>. The Product column pulls from the same <code>menuData.ts</code> used by the header mega-menu, flattened and deduped. The language selector reads from <code>src/lib/languageNames.ts</code>.</p>
+      <p>Footer data is assembled at build time by <code>getFooterData()</code> in <code>src/lib/componentUtils/footerMenus.ts</code>, which reads <code>config/_default/menus/menus.en.yaml</code> from <code>@websites-modules</code>, sorts by <code>weight</code>, resolves URLs with <code>resolveFooterUrl()</code>, and splits each menu in half for the two-column layout. The Product column comes from <code>getFooterProductLinks()</code> in <code>menuData.ts</code> — flattened and deduped from the header mega-menu tree. The component receives a single view model with named slots (<code>accordionSections</code>, <code>sub</code>, <code>social</code>). The language selector reads from <code>src/lib/i18n/languageNames.ts</code>.</p>
 
       <h2>Properties (Free-trial modal)</h2>
       <table>

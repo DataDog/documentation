@@ -3,12 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 // @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
 import preactRenderer from "@astrojs/preact/server.js";
 import Header from "./Header.astro";
-import {
-  getMainLeft,
-  getMainRight,
-  getDesktopCategories,
-  isDisabledForDocs,
-} from "@lib/componentUtils/menuData";
+import { getHeaderData } from "@lib/componentUtils/menuData";
 import { i18n } from "@lib/i18n/i18n";
 
 async function createContainer() {
@@ -25,10 +20,12 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    const expectedLeft = getMainLeft()
-      .filter((m) => !isDisabledForDocs(m))
-      .filter((m) => m.identifier !== "search")
-      .map((m) => i18n(m.lang_key));
+    const header = getHeaderData();
+    const expectedLeft = [
+      header.product?.label,
+      header.solutions?.label,
+      ...header.simpleLeft.map((m) => m.label),
+    ].filter((s): s is string => Boolean(s));
 
     for (const label of expectedLeft) {
       expect(html).toContain(label);
@@ -75,11 +72,12 @@ describe("Header", () => {
     // markup should still include the product-dropdown marker and the product
     // menu link.
     expect(html).toContain("product-dropdown");
-    expect(html).toContain(i18n("product"));
-    // And the mobile product list's categories should render at build time.
-    const categories = getDesktopCategories();
-    for (const cat of categories) {
-      expect(html).toContain(i18n(cat.lang_key));
+    const header = getHeaderData();
+    expect(header.product).not.toBeNull();
+    expect(html).toContain(header.product!.label);
+    // And the desktop product mega-categories should render at build time.
+    for (const cat of header.product!.megaCategories) {
+      expect(html).toContain(cat.label);
     }
   });
 
@@ -87,12 +85,15 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    const mainRight = getMainRight();
-    for (const item of mainRight) {
-      if (isDisabledForDocs(item)) continue;
-      if (item.identifier === "docs" || item.identifier === "search") continue;
-      if (item.identifier === "get_started") continue;
-      expect(html).toContain(i18n(item.lang_key));
+    const header = getHeaderData();
+    const rightLabels = [
+      header.about?.label,
+      header.blog?.label,
+      header.login?.label,
+    ].filter((s): s is string => Boolean(s));
+
+    for (const label of rightLabels) {
+      expect(html).toContain(label);
     }
   });
 });

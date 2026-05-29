@@ -111,6 +111,54 @@ Instead, wrapper components like `CodeBlock` and `Tabs` render their content in 
 - Pass DOM references to the Preact island using the `externalContext` prop (typed as `ExternalContext<E>` from `src/utils/loadExternalContext.ts`). This prop carries a `scope` ID (the root element) and an `entries` map of named element IDs. Call `loadExternalContext(externalContext)` inside the island to resolve them to `HTMLElement` references at runtime.
 - The Preact island reads and manipulates the already-rendered DOM nodes (show/hide, copy text, toggle classes) using those references.
 
+## Passing i18n strings into components
+
+Preact islands run on the client and have no access to the `i18n()` helper, which is build-time-only. Resolve all translated strings in the `.astro` frontmatter and pass them in as a single `labels` prop.
+
+Always use the prop name `labels` — never individual named string props like `pricingLabel` or `hype`. Export the labels interface from the component file so callers can type-check their values.
+
+```ts
+// In the Preact component:
+export interface MyComponentLabels {
+  trigger: string;
+  pricing: string;
+  hype: string;
+}
+
+interface Props {
+  labels: MyComponentLabels;
+  // ...other props
+}
+```
+
+```astro
+// In the .astro parent:
+<MyComponent
+  labels={{ trigger: header.product.label, pricing: i18n("view_pricing"), hype: i18n("product_hype") }}
+/>
+```
+
+## Passing inline SVGs into components
+
+Pass inline SVG strings as a single `svgs` prop (a keyed object), never as individual named props like `carrotSvg`. Export the svgs interface from the component file.
+
+```ts
+// In the Preact component:
+export interface MyComponentSvgs {
+  carrot: string;
+}
+
+interface Props {
+  svgs: MyComponentSvgs;
+  // ...other props
+}
+```
+
+```astro
+// In the .astro parent:
+<MyComponent svgs={{ carrot: data.carrotSvg }} />
+```
+
 ## Markdoc adapter components
 
 Markdoc tag attributes are scalars — arrays and objects must be passed as JSON strings. When a component needs typed structured data, write a thin `*Markdoc.astro` wrapper that takes the JSON-string prop, parses it, and forwards the typed value to the real component. Register the wrapper (not the typed component) in `markdoc.config.mjs`.

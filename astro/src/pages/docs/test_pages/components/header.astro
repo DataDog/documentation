@@ -29,7 +29,7 @@ const title = 'Header';
       </table>
 
       <h2>Data flow</h2>
-      <p>Menu data is loaded at build time with <code>src/lib/menuData.ts</code>, which reads <code>data/menu_data/*.yaml</code> directly from <code>@websites-modules</code>. Labels go through the <code>i18n(key)</code> helper in <code>src/lib/i18n.ts</code>, which reads <code>i18n/*.yaml</code> from <code>@websites-modules</code>. URLs are normalized with <code>resolveUrl()</code> so relative paths become <code>https://www.datadoghq.com/…</code>.</p>
+      <p>Menu data is assembled at build time by <code>getHeaderData()</code> in <code>src/lib/componentUtils/menuData.ts</code>, which reads <code>data/menu_data/*.yaml</code> directly from <code>@websites-modules</code>, runs labels through <code>i18n(key)</code>, and resolves URLs so relative paths become <code>https://www.datadoghq.com/…</code>. The component receives a single structured view model with named slots (<code>product</code>, <code>solutions</code>, <code>about</code>, <code>blog</code>, <code>login</code>, <code>getStarted</code>, <code>simpleLeft</code>, <code>mobileItems</code>, <code>mobileCategories</code>) — no <code>find</code>/<code>filter</code> in the template.</p>
 
       <h2>Dimensions (Hugo-identical)</h2>
       <table>

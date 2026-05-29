@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'preact/hooks';
 import styles from './MobileNav.module.css';
+import { classListFactory } from '@lib/cssUtils/classListFactory';
+
+const cl = classListFactory(styles);
 
 interface NavLink {
   identifier?: string;
@@ -15,22 +18,19 @@ interface MobileCategory {
 
 export interface MobileNavLabels {
   "Toggle navigation": string;
+  home: string;
+  docs: string;
+  api: string;
 }
 
 interface Props {
-  classes: {
-    hamburger: string;
-    hamburgerOpen: string;
-    hamburgerBar: string;
-  };
-  quicknav: { home: string; docs: string; api: string };
   search: { placeholder: string; ariaLabel: string };
   items: NavLink[];
   categories: MobileCategory[];
   labels: MobileNavLabels;
 }
 
-export default function MobileNav({ classes, quicknav, search, items, categories, labels }: Props) {
+export default function MobileNav({ search, items, categories, labels }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -45,15 +45,15 @@ export default function MobileNav({ classes, quicknav, search, items, categories
     <>
       <button
         type="button"
-        class={`${classes.hamburger} ${open ? classes.hamburgerOpen : ''} navbar-toggler`}
+        class={`${cl('mobile-nav__hamburger')} ${open ? cl('mobile-nav__hamburger--open') : ''} navbar-toggler`}
         aria-expanded={open}
         aria-label={labels["Toggle navigation"]}
         onClick={() => setOpen((o) => !o)}
       >
-        <span class={classes.hamburgerBar}></span>
-        <span class={classes.hamburgerBar}></span>
-        <span class={classes.hamburgerBar}></span>
-        <span class={classes.hamburgerBar}></span>
+        <span class={cl('mobile-nav__hamburger-bar')}></span>
+        <span class={cl('mobile-nav__hamburger-bar')}></span>
+        <span class={cl('mobile-nav__hamburger-bar')}></span>
+        <span class={cl('mobile-nav__hamburger-bar')}></span>
       </button>
 
       <div
@@ -67,9 +67,9 @@ export default function MobileNav({ classes, quicknav, search, items, categories
         class={`${styles.mobileNav} ${open ? styles['mobileNav--open'] : ''}`}
       >
         <div class={styles.quicknav}>
-          <a href="https://www.datadoghq.com">{quicknav.home}</a>
-          <a href="/">{quicknav.docs}</a>
-          <a href="/api/">{quicknav.api}</a>
+          <a href="https://www.datadoghq.com">{labels.home}</a>
+          <a href="/">{labels.docs}</a>
+          <a href="/api/">{labels.api}</a>
         </div>
 
         <div class={styles.searchWrap}>

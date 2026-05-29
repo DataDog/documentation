@@ -8,9 +8,7 @@ import { parse as parseYaml } from 'yaml';
 import type { OpenAPIV3 } from 'openapi-types';
 import type { ApiVersion } from './schemas/version';
 
-// @ts-ignore — Vite raw import
 import v1Raw from '@hugo-site/data/api/v1/full_spec.yaml?raw';
-// @ts-ignore — Vite raw import
 import v2Raw from '@hugo-site/data/api/v2/full_spec.yaml?raw';
 
 export const API_VERSIONS: readonly ApiVersion[] = ['v1', 'v2'] as const;

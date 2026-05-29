@@ -1,23 +1,20 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
+import styles from './Header.module.css';
+import { classListFactory } from '@lib/cssUtils/classListFactory';
+
+const cl = classListFactory(styles);
+
+export interface NavDropdownLabels {
+  trigger: string;
+}
 
 interface Props {
-  /** Trigger label shown on the top-level nav bar. */
-  label: string;
+  labels: NavDropdownLabels;
   /** Href for the top-level trigger. */
   href: string;
   /** BEM identifier class appended to the <li>. */
   identifier: string;
-  /** CSS-modules class names — passed in from the parent so this island can use the
-      same module scope as `Header.module.css`. */
-  classes: {
-    menuItem: string;
-    menuItemOpen: string;
-    menuLink: string;
-    dropdownMenu: string;
-    dropdownMenuOpen: string;
-    solutionsMenu?: string;
-  };
   /** Set true for the Solutions/mega-menu width variant. */
   isSolutions?: boolean;
   /** Pre-rendered children (dropdown contents). Rendered at build time so SEO sees them. */
@@ -30,7 +27,7 @@ interface Props {
  * Hugo's Bootstrap-driven dropdowns use the same "hover to open, slight close
  * delay" behavior; we reproduce it without Bootstrap or Alpine.
  */
-export default function NavDropdown({ label, href, identifier, classes, isSolutions, children }: Props) {
+export default function NavDropdown({ labels, href, identifier, isSolutions, children }: Props) {
   const [open, setOpen] = useState(false);
   const timeoutRef = useRef<number | null>(null);
 
@@ -49,9 +46,9 @@ export default function NavDropdown({ label, href, identifier, classes, isSoluti
   useEffect(() => () => cancelClose(), []);
 
   const menuClass = [
-    classes.dropdownMenu,
-    open ? classes.dropdownMenuOpen : '',
-    isSolutions && classes.solutionsMenu ? classes.solutionsMenu : '',
+    cl('header__dropdown-menu'),
+    open ? cl('header__dropdown-menu--open') : '',
+    isSolutions ? cl('header__solutions-menu') : '',
     'dropdown-menu',
     isSolutions ? 'solutions-menu' : '',
   ]
@@ -60,15 +57,15 @@ export default function NavDropdown({ label, href, identifier, classes, isSoluti
 
   return (
     <li
-      class={`${classes.menuItem} ${open ? classes.menuItemOpen : ''} dropdown ${identifier}-dropdown`}
+      class={`${cl('header__menu-item')} ${open ? cl('header__menu-item--open') : ''} dropdown ${identifier}-dropdown`}
       onMouseEnter={() => {
         cancelClose();
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
     >
-      <a class={`${classes.menuLink} dropdown`} href={href}>
-        <span class="menu-text">{label}</span>
+      <a class={`${cl('header__menu-link')} dropdown`} href={href}>
+        <span class="menu-text">{labels.trigger}</span>
       </a>
       <div class={`${menuClass} ${identifier}-dropdown-menu`}>
         {children}

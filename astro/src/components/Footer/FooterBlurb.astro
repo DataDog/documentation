@@ -5,7 +5,10 @@
  * replacement, we always render it.
  */
 import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { resolveFooterUrl } from "@lib/componentUtils/footerMenus";
+
+const cl = classListFactory(styles);
 
 const heading = "Can't find something?";
 const desc =
@@ -14,13 +17,13 @@ const ctaLabel = "Contact Us";
 const ctaHref = resolveFooterUrl("help/");
 ---
 
-<div class={styles.blurbRow}>
-  <div class={styles.blurbCopy}>
-    <h2 class={styles.blurbHeading}>{heading}</h2>
-    <p class={styles.blurbDesc}>{desc}</p>
+<div class={cl("footer__blurb-row")}>
+  <div class={cl("footer__blurb-copy")}>
+    <h2 class={cl("footer__blurb-heading")}>{heading}</h2>
+    <p class={cl("footer__blurb-desc")}>{desc}</p>
   </div>
-  <div class={styles.blurbCta}>
-    <a class={styles.ctaPrimary} href={ctaHref}>
+  <div class={cl("footer__blurb-cta")}>
+    <a class={cl("footer__cta-primary")} href={ctaHref}>
       <span>{ctaLabel}</span>
     </a>
   </div>

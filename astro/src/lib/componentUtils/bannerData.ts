@@ -1,6 +1,5 @@
 import { parse as parseYaml } from 'yaml';
 import { z } from 'zod';
-// @ts-ignore — Vite raw import
 import PARAMS_EN_YAML_RAW from '@hugo-site/config/_default/params.en.yaml?raw';
 
 const BannerParamsSchema = z.object({

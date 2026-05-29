@@ -1,19 +1,13 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
+import styles from './Footer.module.css';
+import { classListFactory } from '@lib/cssUtils/classListFactory';
+
+const cl = classListFactory(styles);
 
 interface Props {
   title: string;
   /** URL loaded in the embedded iframe. Swap this to move off app.datadoghq.com. */
   iframeSrc: string;
-  classes: {
-    overlay: string;
-    overlayOpen: string;
-    dialog: string;
-    header: string;
-    title: string;
-    close: string;
-    body: string;
-    iframe: string;
-  };
 }
 
 /**
@@ -22,7 +16,7 @@ interface Props {
  * or the × button. Uses a plain div-based modal (not <dialog>) to avoid
  * test-environment quirks around dialog focus trapping.
  */
-export default function FreeTrialModal({ title, iframeSrc, classes }: Props) {
+export default function FreeTrialModal({ title, iframeSrc }: Props) {
   const [open, setOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -63,7 +57,7 @@ export default function FreeTrialModal({ title, iframeSrc, classes }: Props) {
   return (
     <div
       ref={overlayRef}
-      class={`${classes.overlay} ${open ? classes.overlayOpen : ''}`}
+      class={`${cl('free-trial-modal__overlay')} ${open ? cl('free-trial-modal__overlay--open') : ''}`}
       role="dialog"
       aria-modal="true"
       aria-label={title}
@@ -71,23 +65,23 @@ export default function FreeTrialModal({ title, iframeSrc, classes }: Props) {
       hidden={!open}
       onClick={handleOverlayClick}
     >
-      <div class={classes.dialog}>
-        <div class={classes.header}>
-          <h6 class={classes.title}>{title}</h6>
+      <div class={cl('free-trial-modal__dialog')}>
+        <div class={cl('free-trial-modal__header')}>
+          <h6 class={cl('free-trial-modal__title')}>{title}</h6>
           <button
             ref={closeButtonRef}
             type="button"
-            class={classes.close}
+            class={cl('free-trial-modal__close')}
             aria-label="close"
             onClick={() => setOpen(false)}
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class={classes.body}>
+        <div class={cl('free-trial-modal__body')}>
           {open && (
             <iframe
-              class={classes.iframe}
+              class={cl('free-trial-modal__iframe')}
               src={iframeSrc}
               title={title}
               width="100%"

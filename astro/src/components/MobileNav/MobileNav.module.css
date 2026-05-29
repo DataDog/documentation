@@ -155,3 +155,50 @@
 .productSublist a:hover {
   color: var(--hugo-nav-brand-primary);
 }
+
+/* --- Hamburger toggle (shown in mobile header row) --- */
+
+.mobile-nav__hamburger {
+  position: relative;
+  margin-left: auto;
+  padding: 9px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.mobile-nav__hamburger:focus {
+  outline: 0;
+}
+
+.mobile-nav__hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--hugo-nav-text);
+}
+
+.mobile-nav__hamburger-bar + .mobile-nav__hamburger-bar {
+  margin-top: 4px;
+}
+
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(2) {
+  transform: rotate(45deg) translateY(2.5px) translateX(6px);
+}
+
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(3) {
+  opacity: 0;
+}
+
+.mobile-nav__hamburger--open .mobile-nav__hamburger-bar:nth-child(4) {
+  transform: rotate(-45deg) translateY(-2.5px) translateX(6px);
+}
+
+@media (min-width: 992px) {
+  .mobile-nav__hamburger {
+    display: none;
+  }
+}

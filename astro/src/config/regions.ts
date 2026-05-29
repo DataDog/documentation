@@ -22,7 +22,6 @@
 import { parse as parseYaml } from 'yaml';
 // @ts-ignore — plain ES module import
 import regionsConfig from '@hugo-site/assets/scripts/config/regions.config.js';
-// @ts-ignore — Vite raw import
 import PARAMS_YAML_RAW from '@hugo-site/config/_default/params.yaml?raw';
 
 export interface AllowedRegion {

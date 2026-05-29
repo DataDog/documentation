@@ -15,17 +15,17 @@ export interface TypesenseEnv {
 }
 
 const live: TypesenseEnv = {
-  host: 'gk6e3zbyuntvc5dap',
-  publicKey: 'bDUaL3uKrCG0033PDb6Vbi8n46mKGaMG',
-  docsIndex: 'docs_alias',
-  partnersIndex: 'docs_partners_alias',
+  host: "gk6e3zbyuntvc5dap",
+  publicKey: "bDUaL3uKrCG0033PDb6Vbi8n46mKGaMG",
+  docsIndex: "docs_alias",
+  partnersIndex: "docs_partners_alias",
 };
 
 const preview: TypesenseEnv = {
-  host: 'dnm1k9zrpctsvjowp',
-  publicKey: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
-  docsIndex: 'docs_alias',
-  partnersIndex: 'docs_partners_alias',
+  host: "dnm1k9zrpctsvjowp",
+  publicKey: "O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu",
+  docsIndex: "docs_alias",
+  partnersIndex: "docs_partners_alias",
 };
 
 export function getTypesenseConfig(): TypesenseEnv {
@@ -33,4 +33,7 @@ export function getTypesenseConfig(): TypesenseEnv {
   return preview;
 }
 
+// TODO: These belong elsewhere, once the project
+// has a defined config structure
 export const HUGO_ORIGIN = import.meta.env.SITE as string;
+export const CORP_ORIGIN = "https://www.datadoghq.com";

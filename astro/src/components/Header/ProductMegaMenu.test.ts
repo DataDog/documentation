@@ -6,7 +6,6 @@ import { h } from 'preact';
 import type { ComponentType } from 'preact';
 import ProductMegaMenu, { type MegaCategory } from './ProductMegaMenu';
 
-// Cast to avoid Preact's strict children typing on default exports.
 const ProductMegaMenuComponent = ProductMegaMenu as ComponentType<any>;
 
 afterEach(cleanup);
@@ -54,27 +53,13 @@ const categories: MegaCategory[] = [
   },
 ];
 
-// Mimic CSS-module class names the Header passes in. The component combines
-// these with BEM-style "product-menu"/"dropdown-menu" hooks on the DOM.
-const classes = {
-  menuItem: 'menu-item',
-  menuItemOpen: 'menu-item--open',
-  menuLink: 'menu-link',
-  dropdownMenu: 'dropdown-menu',
-  dropdownMenuOpen: 'dropdown-menu--open',
-};
-
 const renderMenu = (props: Partial<Parameters<typeof ProductMegaMenu>[0]> = {}) =>
   render(
     h(ProductMegaMenuComponent, {
-      label: 'Product',
-      href: '/product',
+      labels: { trigger: 'Product', pricing: 'Pricing', hype: 'Hype!' },
+      hrefs: { product: '/product', pricing: '/pricing' },
       categories,
-      pricingLabel: 'Pricing',
-      pricingHref: '/pricing',
-      hype: 'Hype!',
-      carrotSvg: '<svg data-testid="carrot"></svg>',
-      classes,
+      svgs: { carrot: '<svg data-testid="carrot"></svg>' },
       ...props,
     }),
   );
@@ -86,10 +71,10 @@ function getDropdown() {
   return document.querySelector<HTMLElement>('.product-menu')!;
 }
 function getToggle(identifier: string) {
-  return document.querySelector<HTMLButtonElement>(`.category-toggle--${identifier}`)!;
+  return document.querySelector<HTMLButtonElement>(`.product-menu__category-toggle--${identifier}`)!;
 }
 function getDetail(identifier: string) {
-  return document.querySelector<HTMLElement>(`.product-category--${identifier}`)!;
+  return document.querySelector<HTMLElement>(`.product-menu__category--${identifier}`)!;
 }
 
 describe('ProductMegaMenu — static render', () => {
@@ -105,8 +90,8 @@ describe('ProductMegaMenu — static render', () => {
   it('is closed by default (no open BEM modifiers applied)', () => {
     renderMenu();
 
-    expect(getTrigger().classList.contains('menu-item--open')).toBe(false);
-    expect(getDropdown().classList.contains('dropdown-menu--open')).toBe(false);
+    expect(getTrigger().classList.contains('header__menu-item--open')).toBe(false);
+    expect(getDropdown().classList.contains('header__dropdown-menu--open')).toBe(false);
   });
 });
 
@@ -118,8 +103,8 @@ describe('ProductMegaMenu — interactivity (open/close)', () => {
     const trigger = getTrigger();
     await user.hover(trigger);
 
-    expect(trigger.classList.contains('menu-item--open')).toBe(true);
-    expect(getDropdown().classList.contains('dropdown-menu--open')).toBe(true);
+    expect(trigger.classList.contains('header__menu-item--open')).toBe(true);
+    expect(getDropdown().classList.contains('header__dropdown-menu--open')).toBe(true);
   });
 
   it('first category detail is visible on open; others are hidden', async () => {
@@ -131,8 +116,8 @@ describe('ProductMegaMenu — interactivity (open/close)', () => {
     const obsDetail = getDetail('observability');
     const secDetail = getDetail('security');
 
-    expect(obsDetail.classList.contains('product-category--active')).toBe(true);
-    expect(secDetail.classList.contains('product-category--active')).toBe(false);
+    expect(obsDetail.classList.contains('product-menu__category--active')).toBe(true);
+    expect(secDetail.classList.contains('product-menu__category--active')).toBe(false);
   });
 });
 
@@ -144,32 +129,27 @@ describe('ProductMegaMenu — interactivity (category switching)', () => {
     await user.hover(getTrigger());
     await user.hover(getToggle('security'));
 
-    // Wait out the 160ms debounce used by scheduleCategory.
     await new Promise((r) => setTimeout(r, 200));
 
-    const obsDetail = getDetail('observability');
-    const secDetail = getDetail('security');
-
-    expect(secDetail.classList.contains('product-category--active')).toBe(true);
-    expect(obsDetail.classList.contains('product-category--active')).toBe(false);
+    expect(getDetail('security').classList.contains('product-menu__category--active')).toBe(true);
+    expect(getDetail('observability').classList.contains('product-menu__category--active')).toBe(false);
   });
 
-  it('active category toggle receives the text-primary BEM-style state class', async () => {
+  it('active category toggle receives the product-menu__category-toggle--active BEM modifier', async () => {
     const user = userEvent.setup();
     renderMenu();
 
     const obsToggle = getToggle('observability');
     const secToggle = getToggle('security');
 
-    // On mount, the first category is active.
-    expect(obsToggle.classList.contains('text-primary')).toBe(true);
-    expect(secToggle.classList.contains('text-primary')).toBe(false);
+    expect(obsToggle.classList.contains('product-menu__category-toggle--active')).toBe(true);
+    expect(secToggle.classList.contains('product-menu__category-toggle--active')).toBe(false);
 
     await user.hover(getTrigger());
     await user.hover(secToggle);
     await new Promise((r) => setTimeout(r, 200));
 
-    expect(secToggle.classList.contains('text-primary')).toBe(true);
-    expect(obsToggle.classList.contains('text-primary')).toBe(false);
+    expect(secToggle.classList.contains('product-menu__category-toggle--active')).toBe(true);
+    expect(obsToggle.classList.contains('product-menu__category-toggle--active')).toBe(false);
   });
 });

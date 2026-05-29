@@ -92,13 +92,13 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await expect(megaMenu).toBeVisible();
 
     // Observability is the default.
-    const obs = page.locator('.product-category--observability');
+    const obs = page.locator('.product-menu__category--observability');
     await expect(obs).toBeVisible();
 
     // Hover a different category and wait for the 160ms debounce.
-    await page.locator('.category-toggle--security').hover();
+    await page.locator('.product-menu__category-toggle--security').hover();
     await page.waitForTimeout(250);
-    const security = page.locator('.product-category--security');
+    const security = page.locator('.product-menu__category--security');
     await expect(security).toBeVisible();
     await expect(obs).toBeHidden();
   });

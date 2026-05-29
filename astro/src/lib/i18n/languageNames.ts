@@ -4,7 +4,6 @@
  * languageNames('ja')('en') === '英語'.
  */
 import { parse as parseYaml } from "yaml";
-// @ts-ignore — Vite raw import
 import raw from "@websites-modules/data/language_names.yaml?raw";
 
 type LanguageNamesTable = Record<string, Record<string, string>>;

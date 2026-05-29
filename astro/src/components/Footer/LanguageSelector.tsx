@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
+import styles from './Footer.module.css';
+import { classListFactory } from '@lib/cssUtils/classListFactory';
+
+const cl = classListFactory(styles);
 
 export interface LanguageOption {
   /** Language code, e.g. "en", "ja". */
@@ -17,18 +21,6 @@ interface Props {
   /** Pre-rendered SVGs for the globe + caret icons, passed in to avoid coupling the island to Astro's import machinery. */
   worldIconHtml: string;
   caretIconHtml: string;
-  classes: {
-    wrapper: string;
-    button: string;
-    buttonLabel: string;
-    caret: string;
-    caretOpen: string;
-    popup: string;
-    popupOpen: string;
-    item: string;
-    primary: string;
-    secondary: string;
-  };
 }
 
 /**
@@ -43,7 +35,6 @@ export default function LanguageSelector({
   alternates,
   worldIconHtml,
   caretIconHtml,
-  classes,
 }: Props) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -67,13 +58,10 @@ export default function LanguageSelector({
   }, [open]);
 
   return (
-    <div
-      ref={wrapperRef}
-      class={`${classes.wrapper} footer-lang-toggle`}
-    >
+    <div ref={wrapperRef} class={cl('footer__lang-toggle')}>
       <button
         type="button"
-        class={classes.button}
+        class={cl('footer__lang-button')}
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((o) => !o)}
@@ -81,27 +69,27 @@ export default function LanguageSelector({
         <span style="display:inline-flex;align-items:center;">
           <span style="display:inline-flex;align-items:center;" dangerouslySetInnerHTML={{ __html: worldIconHtml }} />
           &nbsp;
-          <span class={classes.buttonLabel}>{currentLang.primary}</span>
+          <span class={cl('footer__lang-button-label')}>{currentLang.primary}</span>
         </span>
         <span
-          class={`${classes.caret} ${open ? classes.caretOpen : ''}`}
+          class={`${cl('footer__lang-caret')} ${open ? cl('footer__lang-caret--open') : ''}`}
           dangerouslySetInnerHTML={{ __html: caretIconHtml }}
         />
       </button>
 
       <div
-        class={`${classes.popup} ${open ? classes.popupOpen : ''}`}
+        class={`${cl('footer__lang-popup')} ${open ? cl('footer__lang-popup--open') : ''}`}
         role="listbox"
         hidden={!open}
       >
-        <a class={classes.item} href={currentLang.href}>
-          <div class={classes.primary}>{currentLang.primary}</div>
-          <div class={classes.secondary}>{currentLang.secondary}</div>
+        <a class={cl('footer__lang-item')} href={currentLang.href}>
+          <div class={cl('footer__lang-primary')}>{currentLang.primary}</div>
+          <div class={cl('footer__lang-secondary')}>{currentLang.secondary}</div>
         </a>
         {alternates.map((opt) => (
-          <a class={classes.item} href={opt.href}>
-            <div class={classes.primary}>{opt.primary}</div>
-            <div class={classes.secondary}>{opt.secondary}</div>
+          <a class={cl('footer__lang-item')} href={opt.href}>
+            <div class={cl('footer__lang-primary')}>{opt.primary}</div>
+            <div class={cl('footer__lang-secondary')}>{opt.secondary}</div>
           </a>
         ))}
       </div>

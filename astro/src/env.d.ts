@@ -5,3 +5,8 @@ declare module '*.astro' {
   const Component: AstroComponentFactory;
   export default Component;
 }
+
+declare module '*?raw' {
+  const content: string;
+  export default content;
+}

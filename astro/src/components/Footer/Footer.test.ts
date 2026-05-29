@@ -5,11 +5,7 @@ import preactRenderer from "@astrojs/preact/server.js";
 import Footer from "./Footer.astro";
 import FooterBlurb from "./FooterBlurb.astro";
 import {
-  getFooterResources,
-  getFooterAbout,
-  getFooterBlog,
-  getFooterSub,
-  getFooterSocial,
+  getFooterData,
   resolveFooterUrl,
   splitHalves,
 } from "@lib/componentUtils/footerMenus";
@@ -44,14 +40,14 @@ describe("Footer", () => {
     const container = await createContainer();
     const html = decodeEntities(await container.renderToString(Footer));
 
-    for (const it of [
-      ...getFooterResources(),
-      ...getFooterAbout(),
-      ...getFooterBlog(),
-      ...getFooterSub(),
-    ]) {
-      expect(html).toContain(it.name);
-      expect(html).toContain(resolveFooterUrl(it.url));
+    const footer = getFooterData();
+    const accordionLinks = footer.accordionSections
+      .filter((s) => s.id !== "product")
+      .flatMap((s) => [...s.firstColumn, ...s.secondColumn]);
+
+    for (const link of [...accordionLinks, ...footer.sub]) {
+      expect(html).toContain(link.label);
+      expect(html).toContain(link.href);
     }
   });
 
@@ -59,9 +55,10 @@ describe("Footer", () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
-    for (const s of getFooterSocial()) {
-      expect(html).toContain(`aria-label="${s.name} link"`);
-      expect(html).toContain(resolveFooterUrl(s.url));
+    const footer = getFooterData();
+    for (const s of footer.social) {
+      expect(html).toContain(`aria-label="${s.label} link"`);
+      expect(html).toContain(s.href);
     }
   });
 
@@ -96,7 +93,7 @@ describe("Footer", () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
-    expect(html).toContain("footer-lang-toggle");
+    expect(html).toContain("footer__lang-toggle");
     // Current language label in its own language — English.
     expect(html).toContain("English");
   });

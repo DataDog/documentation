@@ -1,52 +1,17 @@
 import { useEffect, useState } from 'preact/hooks';
+import type {
+  AccordionSectionId,
+  FooterLink,
+  FooterSection,
+} from '@lib/componentUtils/footerMenus';
+import styles from './Footer.module.css';
+import { classListFactory } from '@lib/cssUtils/classListFactory';
 
-type SectionKey = 'product' | 'resources' | 'about' | 'blog';
+export type { FooterLink, FooterSection };
 
-export interface FooterLink {
-  label: string;
-  href: string;
-  target?: '_blank';
-}
+type SectionKey = AccordionSectionId;
 
-/**
- * A section body lays out two sub-columns of links side-by-side. Product uses
- * the `half` layout; the other three use `halfLg100` so they stack into a
- * single column at ≥992px.
- */
-export interface FooterSection {
-  id: SectionKey;
-  title: string;
-  /** First half of the link list. */
-  firstColumn: FooterLink[];
-  /** Second half of the link list. */
-  secondColumn: FooterLink[];
-  /** Whether sub-columns stack vertically at ≥992px (true for Resources/About/Blog). */
-  stackOnDesktop: boolean;
-}
-
-interface Props {
-  sections: FooterSection[];
-  classes: {
-    column: string;
-    /** Per-section modifier classes keyed by section id (e.g. styles['column--product']).
-       Needed because the accordion is rendered as a `client:load` island; the
-       `<astro-island>` wrapper would break any .mainRow > :nth-child(N)
-       structural selectors. */
-    columnByKey: Record<SectionKey, string>;
-    header: string;
-    body: string;
-    bodyOpen: string;
-    divider: string;
-    dividerDesktop: string;
-    dividerMobile: string;
-    columnBodyFlex: string;
-    columnBodyFlexStacked: string;
-    menuLinks: string;
-    menuLinksHalf: string;
-    menuLinksHalfLg100: string;
-    menuLink: string;
-  };
-}
+const cl = classListFactory(styles);
 
 /**
  * Wraps the four footer menu columns so only one body stays open at a time
@@ -54,7 +19,7 @@ interface Props {
  * regardless of state, matching Hugo's `x-show.important="desktop || openSection === '...'"`.
  * Default open section is `resources`, matching Hugo's `openSection: 'resources'`.
  */
-export default function FooterAccordion({ sections, classes }: Props) {
+export default function FooterAccordion({ sections }: { sections: FooterSection[] }) {
   const [openSection, setOpenSection] = useState<SectionKey | false>('resources');
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -74,14 +39,16 @@ export default function FooterAccordion({ sections, classes }: Props) {
     <>
       {sections.map((s) => {
         const isOpen = isDesktop || openSection === s.id;
+        const halfClass = s.stackOnDesktop
+          ? cl('footer__menu-links--half-lg-100')
+          : cl('footer__menu-links--half');
         const bodyFlexClass = s.stackOnDesktop
-          ? `${classes.columnBodyFlex} ${classes.columnBodyFlexStacked}`
-          : classes.columnBodyFlex;
-        const halfClass = s.stackOnDesktop ? classes.menuLinksHalfLg100 : classes.menuLinksHalf;
+          ? `${cl('footer__column-body-flex')} ${cl('footer__column-body-flex--stacked')}`
+          : cl('footer__column-body-flex');
         return (
-          <div class={`${classes.column} ${classes.columnByKey[s.id]} footer-section footer-section--${s.id}`}>
+          <div class={`${cl('footer__column')} ${cl(`footer__column--${s.id}`)} footer-section footer-section--${s.id}`}>
             <p
-              class={classes.header}
+              class={cl('footer__section-header')}
               role="button"
               tabIndex={0}
               aria-expanded={isOpen}
@@ -95,26 +62,26 @@ export default function FooterAccordion({ sections, classes }: Props) {
             >
               {s.title}
             </p>
-            <div class={`${classes.divider} ${classes.dividerDesktop}`} aria-hidden="true" />
-            <div class={`${classes.body} ${isOpen ? classes.bodyOpen : ''}`}>
+            <div class={`${cl('footer__divider')} ${cl('footer__divider--desktop')}`} aria-hidden="true" />
+            <div class={`${cl('footer__section-body')} ${isOpen ? cl('footer__section-body--open') : ''}`}>
               <div class={bodyFlexClass}>
-                <div class={`${classes.menuLinks} ${halfClass}`}>
+                <div class={`${cl('footer__menu-links')} ${halfClass}`}>
                   {s.firstColumn.map((link) => (
-                    <a href={link.href} class={classes.menuLink} target={link.target}>
+                    <a href={link.href} class={cl('footer__menu-link')} target={link.target}>
                       {link.label}
                     </a>
                   ))}
                 </div>
-                <div class={`${classes.menuLinks} ${halfClass}`}>
+                <div class={`${cl('footer__menu-links')} ${halfClass}`}>
                   {s.secondColumn.map((link) => (
-                    <a href={link.href} class={classes.menuLink} target={link.target}>
+                    <a href={link.href} class={cl('footer__menu-link')} target={link.target}>
                       {link.label}
                     </a>
                   ))}
                 </div>
               </div>
             </div>
-            <div class={`${classes.divider} ${classes.dividerMobile}`} aria-hidden="true" />
+            <div class={`${cl('footer__divider')} ${cl('footer__divider--mobile')}`} aria-hidden="true" />
           </div>
         );
       })}

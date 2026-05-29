@@ -1,203 +1,34 @@
 ---
 import styles from "./Header.module.css";
-import "./ProductMegaMenu.css";
 import NavDropdown from "./NavDropdown.tsx";
-import ProductMegaMenu, {
-  type MegaCategory,
-  type MegaSubcategory,
-  type MegaSection,
-} from "./ProductMegaMenu.tsx";
+import ProductMegaMenu from "./ProductMegaMenu.tsx";
 import LogoDownloadPanel from "./LogoDownloadPanel.astro";
 import HeaderScroll from "./HeaderScroll.astro";
 import MobileNav, {
   type MobileNavLabels,
 } from "@components/MobileNav/MobileNav.tsx";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
-import {
-  getMainLeft,
-  getMainRight,
-  getDesktopCategories,
-  getMobileCategories,
-  getProduct,
-  isDisabledForDocs,
-  resolveUrl,
-  type MenuItem,
-} from "@lib/componentUtils/menuData.ts";
+import { getHeaderData } from "@lib/componentUtils/menuData.ts";
 import { i18n } from "@lib/i18n/i18n";
+import { IMAGES_URL } from "@config/images.ts";
 
 const cl = classListFactory(styles);
 
-const mainLeft = getMainLeft();
-const mainRight = getMainRight();
-const categories = getDesktopCategories();
-const mobileCategoriesRaw = getMobileCategories();
+const header = getHeaderData();
 
-// Raw imports for each product-category icon, keyed by the category's `icon` field.
-const categoryIconMap: Record<string, string> = import.meta.glob<string>(
-  "../../mocked-dependencies/websites_modules/static/icons/*.svg",
-  { query: "?raw", import: "default", eager: true },
-);
-
-function iconHtmlFor(name: string): string {
-  const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
-  return categoryIconMap[key] ?? "";
-}
-
-const carrotSvg = iconHtmlFor("right-carrot-normal-2");
-
-// Assemble the mega-menu data structure (translated, URL-resolved).
-const megaCategories: MegaCategory[] = categories.map((cat) => {
-  const subcategories: MegaSubcategory[] = (cat.children ?? []).map((sub) => {
-    const sections: MegaSection[] = sub.sections
-      ? sub.sections.map((section) => ({
-          label: i18n(section.lang_key),
-          products: section.products
-            .map((id) => {
-              const p = getProduct(id);
-              return p
-                ? {
-                    identifier: p.identifier,
-                    label: i18n(p.lang_key),
-                    url: resolveUrl(p.url),
-                  }
-                : null;
-            })
-            .filter(
-              (p): p is { identifier: string; label: string; url: string } =>
-                p !== null,
-            ),
-        }))
-      : sub.products
-        ? [
-            {
-              label: i18n(sub.lang_key),
-              products: sub.products
-                .map((id) => {
-                  const p = getProduct(id);
-                  return p
-                    ? {
-                        identifier: p.identifier,
-                        label: i18n(p.lang_key),
-                        url: resolveUrl(p.url),
-                      }
-                    : null;
-                })
-                .filter(
-                  (
-                    p,
-                  ): p is { identifier: string; label: string; url: string } =>
-                    p !== null,
-                ),
-            },
-          ]
-        : [];
-
-    return {
-      identifier: sub.identifier,
-      label: i18n(sub.lang_key),
-      related: sub.identifier.includes("related"),
-      sections,
-    };
-  });
-
-  return {
-    identifier: cat.identifier,
-    label: i18n(cat.lang_key),
-    descriptionLabel: i18n(cat.description_key),
-    gradient: cat.gradient ?? ["#000000", "#333333"],
-    iconHtml: iconHtmlFor(cat.icon),
-    subcategories,
-  };
-});
-
-const productItem = mainLeft.find((m) => m.identifier === "product");
-const solutionsItem = mainLeft.find((m) => m.identifier === "solutions");
-const simpleLeftItems = mainLeft.filter(
-  (m) =>
-    m.identifier !== "product" &&
-    m.identifier !== "solutions" &&
-    m.identifier !== "search" &&
-    !isDisabledForDocs(m),
-);
-
-const aboutItem = mainRight.find((m) => m.identifier === "about");
-const blogItem = mainRight.find((m) => m.identifier === "blog");
-const loginItem = mainRight.find((m) => m.identifier === "login");
-const getStartedItem = mainRight.find((m) => m.identifier === "get_started");
-
-// Solutions columns — flatten the tree for easy rendering.
-type SolutionsColumn = {
-  label: string;
-  items: { label: string; url: string }[];
-};
-const solutionsColumns: SolutionsColumn[] = (solutionsItem?.children ?? []).map(
-  (col) => ({
-    label: i18n(col.lang_key),
-    items: (col.children ?? []).map((child) => ({
-      label: i18n(child.lang_key),
-      url: resolveUrl(child.url),
-    })),
-  }),
-);
-
-function simpleChildren(item: MenuItem | undefined) {
-  if (!item) return [];
-  return (item.children ?? []).map((child) => ({
-    label: i18n(child.lang_key),
-    url: resolveUrl(child.url),
-  }));
-}
-
-const aboutChildren = simpleChildren(aboutItem);
-const blogChildren = simpleChildren(blogItem);
-
-// Mobile nav data — pre-shaped so MobileNav.tsx doesn't need to import
-// menuData/i18n/yaml on the client (was adding ~130KB to the island bundle).
-const mobileItems = mainLeft
-  .filter((m) => !isDisabledForDocs(m))
-  .map((item) => ({
-    identifier: item.identifier,
-    label: i18n(item.lang_key),
-    url: resolveUrl(item.url),
-  }));
-
-const mobileCategoriesData = mobileCategoriesRaw.map((cat) => ({
-  identifier: cat.identifier,
-  label: i18n(cat.lang_key),
-  products: (cat.mobile_products ?? [])
-    .map((id) => {
-      const p = getProduct(id);
-      return p
-        ? {
-            identifier: p.identifier,
-            label: i18n(p.lang_key),
-            url: resolveUrl(p.url),
-          }
-        : null;
-    })
-    .filter(
-      (p): p is { identifier: string; label: string; url: string } =>
-        p !== null,
-    ),
-}));
-
-const mobileNavQuicknav = {
-  home: i18n("home"),
-  docs: i18n("docs") || "Docs",
-  api: i18n("api"),
-};
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
 const mobileNavSearch = { placeholder: "Search", ariaLabel: "Search" };
 const mobileNavLabels: MobileNavLabels = {
   "Toggle navigation": "Toggle navigation",
+  home: i18n("home"),
+  docs: i18n("docs") || "Docs",
+  api: i18n("api"),
 };
 
-const bitsLogoUrl =
-  "https://imgix.datadoghq.com/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75";
-const textLogoUrl =
-  "https://imgix.datadoghq.com/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807";
-const mobileLogoUrl = "https://imgix.datadoghq.com/img/datadog_rbg_n_2x.png";
+const bitsLogoUrl = `${IMAGES_URL}/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75`;
+const textLogoUrl = `${IMAGES_URL}/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807`;
+const mobileLogoUrl = `${IMAGES_URL}/img/datadog_rbg_n_2x.png`;
 const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 ---
 
@@ -208,59 +39,41 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
       <div class={cl("header__desktop")}>
         <ul class={`${cl("header__left-list")} main-left`}>
           {
-            productItem && (
+            header.product && (
               <ProductMegaMenu
                 client:load
-                label={i18n(productItem.lang_key)}
-                href={resolveUrl(productItem.url)}
-                categories={megaCategories}
-                pricingLabel={i18n("view_pricing")}
-                pricingHref={resolveUrl("pricing/")}
-                hype={i18n("product_hype")}
-                carrotSvg={carrotSvg}
-                classes={{
-                  menuItem: cl("header__menu-item"),
-                  menuItemOpen: cl("header__menu-item--open"),
-                  menuLink: cl("header__menu-link"),
-                  dropdownMenu: cl("header__dropdown-menu"),
-                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
-                }}
+                labels={{ trigger: header.product.label, pricing: i18n("view_pricing"), hype: i18n("product_hype") }}
+                hrefs={{ product: header.product.href, pricing: `${import.meta.env.SITE}/pricing/` }}
+                categories={header.product.megaCategories}
+                svgs={{ carrot: header.product.carrotSvg }}
               />
             )
           }
 
           {
-            simpleLeftItems.map((item) => (
+            header.simpleLeft.map((item) => (
               <li class={`${cl("header__menu-item")} ${item.identifier}-item`}>
                 <a
                   class={`${cl("header__menu-link")} ${item.identifier}-menu`}
-                  href={resolveUrl(item.url)}
+                  href={item.href}
                 >
-                  <span class="menu-text">{i18n(item.lang_key)}</span>
+                  <span class="menu-text">{item.label}</span>
                 </a>
               </li>
             ))
           }
 
           {
-            solutionsItem && (
+            header.solutions && (
               <NavDropdown
                 client:load
-                label={i18n(solutionsItem.lang_key)}
-                href={resolveUrl(solutionsItem.url)}
+                labels={{ trigger: header.solutions.label }}
+                href={header.solutions.href}
                 identifier="solutions"
                 isSolutions={true}
-                classes={{
-                  menuItem: cl("header__menu-item"),
-                  menuItemOpen: cl("header__menu-item--open"),
-                  menuLink: cl("header__menu-link"),
-                  dropdownMenu: cl("header__dropdown-menu"),
-                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
-                  solutionsMenu: cl("header__solutions-menu"),
-                }}
               >
                 <div class={cl("header__solutions-grid")}>
-                  {solutionsColumns.map((col) => (
+                  {header.solutions.columns.map((col) => (
                     <div class={cl("header__solutions-column")}>
                       <p class={cl("header__solutions-header")}>{col.label}</p>
                       <ul class={cl("header__solutions-list")}>
@@ -305,24 +118,17 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 
         <ul class={`${cl("header__right-list")} main-right`}>
           {
-            aboutItem && (
+            header.about && (
               <NavDropdown
                 client:load
-                label={i18n(aboutItem.lang_key)}
-                href={resolveUrl(aboutItem.url)}
+                labels={{ trigger: header.about.label }}
+                href={header.about.href}
                 identifier="about"
-                classes={{
-                  menuItem: cl("header__menu-item"),
-                  menuItemOpen: cl("header__menu-item--open"),
-                  menuLink: cl("header__menu-link"),
-                  dropdownMenu: cl("header__dropdown-menu"),
-                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
-                }}
               >
                 <ul style="list-style:none;margin:0;padding:0;">
-                  {aboutChildren.map((child) => (
+                  {header.about.children.map((child) => (
                     <li>
-                      <a href={child.url}>{child.label}</a>
+                      <a href={child.href}>{child.label}</a>
                     </li>
                   ))}
                 </ul>
@@ -330,24 +136,17 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
             )
           }
           {
-            blogItem && (
+            header.blog && (
               <NavDropdown
                 client:load
-                label={i18n(blogItem.lang_key)}
-                href={resolveUrl(blogItem.url)}
+                labels={{ trigger: header.blog.label }}
+                href={header.blog.href}
                 identifier="blog"
-                classes={{
-                  menuItem: cl("header__menu-item"),
-                  menuItemOpen: cl("header__menu-item--open"),
-                  menuLink: cl("header__menu-link"),
-                  dropdownMenu: cl("header__dropdown-menu"),
-                  dropdownMenuOpen: cl("header__dropdown-menu--open"),
-                }}
               >
                 <ul style="list-style:none;margin:0;padding:0;">
-                  {blogChildren.map((child) => (
+                  {header.blog.children.map((child) => (
                     <li>
-                      <a href={child.url}>{child.label}</a>
+                      <a href={child.href}>{child.label}</a>
                     </li>
                   ))}
                 </ul>
@@ -355,23 +154,20 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
             )
           }
           {
-            loginItem && !isDisabledForDocs(loginItem) && (
+            header.login && (
               <li class={`${cl("header__menu-item")} login-item`}>
-                <a
-                  class={cl("header__menu-link")}
-                  href={resolveUrl(loginItem.url)}
-                >
-                  <span class="menu-text">{i18n(loginItem.lang_key)}</span>
+                <a class={cl("header__menu-link")} href={header.login.href}>
+                  <span class="menu-text">{header.login.label}</span>
                 </a>
               </li>
             )
           }
           {
-            getStartedItem && (
+            header.getStarted && (
               <li class={`${cl("header__menu-item")} get-started-item`}>
                 <a
                   class={cl("header__btn-gradient")}
-                  href={resolveUrl(getStartedItem.url)}
+                  href={header.getStarted.href}
                 >
                   <span class={cl("header__btn-gradient-full")}>
                     {i18n("get_started_free")}
@@ -400,15 +196,9 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
         </a>
         <MobileNav
           client:load
-          classes={{
-            hamburger: cl("header__hamburger"),
-            hamburgerOpen: cl("header__hamburger--open"),
-            hamburgerBar: cl("header__hamburger-bar"),
-          }}
-          quicknav={mobileNavQuicknav}
           search={mobileNavSearch}
-          items={mobileItems}
-          categories={mobileCategoriesData}
+          items={header.mobileItems}
+          categories={header.mobileCategories}
           labels={mobileNavLabels}
         />
       </div>

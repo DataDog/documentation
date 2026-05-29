@@ -1,48 +1,35 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
+import type { MegaCategory, MegaSubcategory, MegaSection } from "@lib/componentUtils/menuData.ts";
+import headerStyles from './Header.module.css';
+import pmStyles from './ProductMegaMenu.module.css';
+import { classListFactory } from '@lib/cssUtils/classListFactory';
 
-export type MegaCategory = {
-  identifier: string;
-  label: string;
-  descriptionLabel: string;
-  gradient: [string, string];
-  iconHtml: string;
-  subcategories: MegaSubcategory[];
-};
+export type { MegaCategory, MegaSubcategory, MegaSection };
 
-export type MegaSubcategory = {
-  identifier: string;
-  label: string;
-  /** True for the "related_products" variant that renders with a left border. */
-  related: boolean;
-  sections: MegaSection[];
-};
+const hCl = classListFactory(headerStyles);
+const cl = classListFactory(pmStyles);
 
-export type MegaSection = {
-  label: string;
-  products: { identifier: string; label: string; url: string }[];
-};
+export interface ProductMegaMenuLabels {
+  trigger: string;
+  pricing: string;
+  hype: string;
+}
+
+export interface ProductMegaMenuHrefs {
+  product: string;
+  pricing: string;
+}
+
+export interface ProductMegaMenuSvgs {
+  carrot: string;
+}
 
 interface Props {
-  /** Nav-bar trigger label (already translated). */
-  label: string;
-  /** Trigger href. */
-  href: string;
+  labels: ProductMegaMenuLabels;
+  hrefs: ProductMegaMenuHrefs;
   /** The resolved, translated list of categories. */
   categories: MegaCategory[];
-  /** Pricing link label + href (translated/resolved). */
-  pricingLabel: string;
-  pricingHref: string;
-  /** "Product hype" string. */
-  hype: string;
-  /** Carrot SVG raw string for the pricing link. */
-  carrotSvg: string;
-  classes: {
-    menuItem: string;
-    menuItemOpen: string;
-    menuLink: string;
-    dropdownMenu: string;
-    dropdownMenuOpen: string;
-  };
+  svgs: ProductMegaMenuSvgs;
 }
 
 /**
@@ -51,14 +38,10 @@ interface Props {
  * `x-data` + MutationObserver scheme with local Preact state.
  */
 export default function ProductMegaMenu({
-  label,
-  href,
+  labels,
+  hrefs,
   categories,
-  pricingLabel,
-  pricingHref,
-  hype,
-  carrotSvg,
-  classes,
+  svgs,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState<string>(categories[0]?.identifier ?? 'observability');
@@ -100,43 +83,43 @@ export default function ProductMegaMenu({
 
   return (
     <li
-      class={`${classes.menuItem} ${open ? classes.menuItemOpen : ''} dropdown product-dropdown`}
+      class={`${hCl('header__menu-item', open && 'header__menu-item--open')} dropdown product-dropdown`}
       onMouseEnter={() => {
         cancelClose();
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
     >
-      <a class={`${classes.menuLink} dropdown`} href={href}>
-        <span class="menu-text">{label}</span>
+      <a class={`${hCl('header__menu-link')} dropdown`} href={hrefs.product}>
+        <span class="menu-text">{labels.trigger}</span>
       </a>
       <div
-        class={`${classes.dropdownMenu} ${open ? classes.dropdownMenuOpen : ''} product-menu dropdown-menu`}
+        class={`${hCl('header__dropdown-menu', open && 'header__dropdown-menu--open')} ${cl('product-menu')} dropdown-menu`}
       >
-        <div class="product-menu__row">
-          <div class="product-menu__toggle-column">
-            <p class="product-hype">{hype}</p>
-            <ul class="category-toggle-list">
+        <div class={cl('product-menu__row')}>
+          <div class={cl('product-menu__toggle-column')}>
+            <p class={cl('product-menu__hype')}>{labels.hype}</p>
+            <ul class={cl('product-menu__category-list')}>
               {categories.map((cat) => (
                 <li key={cat.identifier}>
                   <button
                     type="button"
-                    class={`category-toggle category-toggle--${cat.identifier}${openCategory === cat.identifier ? ' text-primary' : ''}`}
+                    class={`${cl('product-menu__category-toggle', openCategory === cat.identifier && 'product-menu__category-toggle--active')} product-menu__category-toggle--${cat.identifier}`}
                     onMouseOver={() => scheduleCategory(cat.identifier)}
                     onMouseOut={clearCategoryTimer}
                   >
-                    <span class="category-icon" dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
+                    <span class={cl('product-menu__category-icon')} dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
                     {cat.label}
                   </button>
                 </li>
               ))}
             </ul>
-            <a href={pricingHref} class="pricing-link">
-              {pricingLabel}
-              <span class="pricing-carrot" dangerouslySetInnerHTML={{ __html: carrotSvg }} />
+            <a href={hrefs.pricing} class={cl('product-menu__pricing-link')}>
+              {labels.pricing}
+              <span class={cl('product-menu__pricing-carrot')} dangerouslySetInnerHTML={{ __html: svgs.carrot }} />
             </a>
           </div>
-          <div class="product-menu__detail-column">
+          <div class={cl('product-menu__detail-column')}>
             {categories.map((cat) => (
               <CategoryDetail
                 key={cat.identifier}
@@ -159,29 +142,29 @@ interface CategoryDetailProps {
 function CategoryDetail({ category: cat, open }: CategoryDetailProps) {
   return (
     <div
-      class={`product-category product-category--${cat.identifier}${open ? ' product-category--active' : ''}`}
+      class={`${cl('product-menu__category', open && 'product-menu__category--active')} product-menu__category--${cat.identifier}`}
       id={`${cat.identifier}-detail`}
     >
       <div
-        class="category-description"
+        class={cl('product-menu__category-description')}
         style={{ background: `linear-gradient(90deg, ${cat.gradient[0]} 0%, ${cat.gradient[1]} 100%)` }}
       >
-        <span class="category-description__icon" dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
-        <div class="info">
-          <p class="category-header">{cat.label}</p>
-          <p class="category-description-text">{cat.descriptionLabel}</p>
+        <span class={cl('product-menu__category-description-icon')} dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
+        <div class={cl('product-menu__info')}>
+          <p class={cl('product-menu__category-header')}>{cat.label}</p>
+          <p class={cl('product-menu__category-description-text')}>{cat.descriptionLabel}</p>
         </div>
       </div>
-      <div class="category-details">
+      <div class={cl('product-menu__category-details')}>
         {cat.subcategories.map((sub) => (
           <div
             key={sub.identifier}
-            class={`product-subcategory${sub.related ? ' related' : ''}`}
+            class={cl('product-menu__subcategory', sub.related && 'product-menu__subcategory--related')}
           >
             {sub.sections.map((section, idx) => (
               <div key={`${sub.identifier}-${idx}`}>
-                <p class="subcategory-header">{section.label}</p>
-                <ul class="product-list">
+                <p class={cl('product-menu__subcategory-header')}>{section.label}</p>
+                <ul class={cl('product-menu__list')}>
                   {section.products.map((p) => (
                     <li key={p.identifier}>
                       <a href={p.url}>{p.label}</a>

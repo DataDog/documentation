@@ -1,30 +1,33 @@
 /**
- * Typed loader for the Hugo docs footer menus. Parses the copied-verbatim
- * websites-modules menus.en.yaml and exposes the footer_* menu lists.
+ * Builds the footer view model from the websites-modules menus YAML at build
+ * time. Consumers (Footer.astro) get fully resolved, split-into-columns data
+ * via `getFooterData()` — no inline assembly in the component template.
  *
- * URL resolution mirrors footer_link.html: relative URLs get prefixed with
- * https://www.datadoghq.com/ (with an optional lang prefix once non-English
- * pages land), absolute URLs pass through.
+ * URL resolution mirrors footer_link.html: absolute URLs pass through;
+ * relative URLs are prefixed with the datadoghq.com host (plus an optional
+ * lang prefix once non-English pages land).
  */
-import { parse as parseYaml } from 'yaml';
-import { z } from 'zod';
-// @ts-ignore — Vite raw import
-import menusRaw from '@websites-modules/config/_default/menus/menus.en.yaml?raw';
+import { parse as parseYaml } from "yaml";
+import { z } from "zod";
+import menusRaw from "@websites-modules/config/_default/menus/menus.en.yaml?raw";
+import { CORP_ORIGIN } from "@config/typesense";
+import { i18n } from "@lib/i18n/i18n";
+import { getFooterProductLinks } from "@lib/componentUtils/menuData";
+
+// ---------------------------------------------------------------------------
+// Raw schema (internal)
+// ---------------------------------------------------------------------------
 
 const FooterMenuItemSchema = z.object({
   name: z.string(),
   url: z.string(),
-  target: z.literal('_blank').optional(),
+  target: z.literal("_blank").optional(),
   weight: z.number(),
 });
-
-export type FooterMenuItem = z.infer<typeof FooterMenuItemSchema>;
 
 const FooterSocialItemSchema = FooterMenuItemSchema.extend({
   pre: z.string(),
 });
-
-export type FooterSocialItem = z.infer<typeof FooterSocialItemSchema>;
 
 const MenusFileSchema = z.object({
   footer_resources: z.array(FooterMenuItemSchema),
@@ -36,43 +39,102 @@ const MenusFileSchema = z.object({
 
 const menus = MenusFileSchema.parse(parseYaml(menusRaw));
 
-const byWeight = <T extends { weight: number }>(a: T, b: T) => a.weight - b.weight;
+// ---------------------------------------------------------------------------
+// Public view-model types
+// ---------------------------------------------------------------------------
 
-export function getFooterResources(): FooterMenuItem[] {
-  return [...menus.footer_resources].sort(byWeight);
+export type FooterLink = {
+  label: string;
+  href: string;
+  target?: "_blank";
+};
+
+export type FooterSocialLink = FooterLink & { pre: string };
+
+export type AccordionSectionId = "product" | "resources" | "about" | "blog";
+
+export type FooterSection = {
+  id: AccordionSectionId;
+  title: string;
+  firstColumn: FooterLink[];
+  secondColumn: FooterLink[];
+  /** Whether sub-columns stack vertically at ≥992px (true for Resources/About/Blog). */
+  stackOnDesktop: boolean;
+};
+
+export type FooterData = {
+  /** Four accordion columns ready to pass to FooterAccordion. */
+  accordionSections: FooterSection[];
+  /** Bottom-row legal links (Privacy, Terms, …). */
+  sub: FooterLink[];
+  /** Bottom-row social icons. */
+  social: FooterSocialLink[];
+};
+
+// ---------------------------------------------------------------------------
+// Exported utilities (independently tested)
+// ---------------------------------------------------------------------------
+
+export function resolveFooterUrl(url: string, langPrefix = ""): string {
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  const trimmed = url.replace(/^\/+/, "");
+  return `${CORP_ORIGIN}/${langPrefix}${trimmed}`;
 }
 
-export function getFooterAbout(): FooterMenuItem[] {
-  return [...menus.footer_about].sort(byWeight);
-}
-
-export function getFooterBlog(): FooterMenuItem[] {
-  return [...menus.footer_blog].sort(byWeight);
-}
-
-export function getFooterSub(): FooterMenuItem[] {
-  return [...menus.footer_sub].sort(byWeight);
-}
-
-export function getFooterSocial(): FooterSocialItem[] {
-  return [...menus.footer_social].sort(byWeight);
-}
-
-/**
- * Resolve a footer menu URL exactly as footer_link.html does for non-corp-hugo
- * sites: hasPrefix "http" → pass through, else prepend the datadoghq.com host
- * (and optional lang prefix, empty for English).
- */
-export function resolveFooterUrl(url: string, langPrefix = ''): string {
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  const trimmed = url.replace(/^\/+/, '');
-  return `https://www.datadoghq.com/${langPrefix}${trimmed}`;
-}
-
-/** Split a list in half, first half is length-ceiling(len/2). Matches Hugo's `first`/`last` split. */
+/** Split a list in half; the first half gets the extra item when the count is odd. */
 export function splitHalves<T>(items: T[]): { first: T[]; second: T[] } {
   const len = items.length;
   const secondLen = Math.floor(len / 2);
   const firstLen = len - secondLen;
   return { first: items.slice(0, firstLen), second: items.slice(firstLen) };
+}
+
+// ---------------------------------------------------------------------------
+// Internal helpers
+// ---------------------------------------------------------------------------
+
+type RawItem = z.infer<typeof FooterMenuItemSchema>;
+type RawSocial = z.infer<typeof FooterSocialItemSchema>;
+
+const byWeight = <T extends { weight: number }>(a: T, b: T) => a.weight - b.weight;
+
+function toFooterLink(it: RawItem): FooterLink {
+  return { label: it.name, href: resolveFooterUrl(it.url), target: it.target };
+}
+
+function toSection(
+  id: AccordionSectionId,
+  title: string,
+  links: FooterLink[],
+  stackOnDesktop: boolean,
+): FooterSection {
+  const { first, second } = splitHalves(links);
+  return { id, title, firstColumn: first, secondColumn: second, stackOnDesktop };
+}
+
+function sortedLinks(items: RawItem[]): FooterLink[] {
+  return [...items].sort(byWeight).map(toFooterLink);
+}
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+
+export function getFooterData(): FooterData {
+  const social: FooterSocialLink[] = [...menus.footer_social]
+    .sort(byWeight)
+    .map((it: RawSocial) => ({ ...toFooterLink(it), pre: it.pre, label: it.name }));
+
+  return {
+    accordionSections: [
+      toSection("product", i18n("product"), getFooterProductLinks(), false),
+      toSection("resources", i18n("resources"), sortedLinks(menus.footer_resources), true),
+      toSection("about", i18n("about"), sortedLinks(menus.footer_about), true),
+      toSection("blog", i18n("blog"), sortedLinks(menus.footer_blog), true),
+    ],
+    sub: sortedLinks(menus.footer_sub),
+    social,
+  };
 }

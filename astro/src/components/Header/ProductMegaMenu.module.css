@@ -1,7 +1,4 @@
-/* Global styles for the product mega-menu. Kept global (rather than a CSS
-   module) because the Preact island markup uses class names directly, and
-   these class names were ported verbatim from Hugo so the CSS cascade and
-   inspector UX match the Hugo site. */
+/* BEM block: product-menu */
 
 .product-menu {
   min-height: var(--hugo-mega-menu-min-height);
@@ -30,23 +27,23 @@
   }
 }
 
-.product-menu .product-menu__row {
+.product-menu__row {
   display: grid;
   grid-template-columns: 1fr 2fr;
   min-height: var(--hugo-mega-menu-min-height);
 }
 
-.product-menu .product-menu__toggle-column {
+.product-menu__toggle-column {
   padding: 1rem 1rem 1rem 2rem;
   border-right: 1px solid var(--hugo-nav-border);
   position: relative;
 }
 
-.product-menu .product-menu__detail-column {
+.product-menu__detail-column {
   position: relative;
 }
 
-.product-menu p.product-hype {
+.product-menu__hype {
   color: var(--color-text);
   font-size: 28px;
   line-height: 32px;
@@ -55,7 +52,7 @@
   margin: 0;
 }
 
-.product-menu ul.category-toggle-list {
+.product-menu__category-list {
   list-style: none;
   display: block;
   margin: 0 0 60px 0;
@@ -63,16 +60,16 @@
 }
 
 @media (min-width: 1200px) {
-  .product-menu ul.category-toggle-list {
+  .product-menu__category-list {
     padding-right: 20px;
   }
 }
 
-.product-menu ul.category-toggle-list li {
+.product-menu__category-list li {
   list-style: none;
 }
 
-.product-menu ul.category-toggle-list button {
+.product-menu__category-toggle {
   all: unset;
   display: block;
   width: 100%;
@@ -87,17 +84,17 @@
   color: var(--hugo-nav-text);
 }
 
-.product-menu ul.category-toggle-list button:hover {
+.product-menu__category-toggle:hover {
   color: var(--hugo-nav-text-hover) !important;
   background: var(--hugo-nav-btn-hover-bg);
   border-radius: 4px;
 }
 
-.product-menu ul.category-toggle-list button.text-primary {
+.product-menu__category-toggle--active {
   color: var(--hugo-nav-brand-primary);
 }
 
-.product-menu ul.category-toggle-list button .category-icon {
+.product-menu__category-icon {
   display: inline-block;
   vertical-align: middle;
   margin-right: 8px;
@@ -105,13 +102,13 @@
   height: 22px;
 }
 
-.product-menu ul.category-toggle-list button .category-icon svg {
+.product-menu__category-icon svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
 }
 
-.product-menu a.pricing-link {
+.product-menu__pricing-link {
   all: unset;
   color: var(--hugo-nav-brand-primary);
   text-transform: uppercase;
@@ -126,11 +123,11 @@
   align-items: center;
 }
 
-.product-menu a.pricing-link:hover {
+.product-menu__pricing-link:hover {
   color: var(--hugo-nav-text-hover);
 }
 
-.product-menu a.pricing-link .pricing-carrot {
+.product-menu__pricing-carrot {
   display: inline-flex;
   align-items: center;
   margin-left: 5px;
@@ -139,18 +136,18 @@
   height: 12px;
 }
 
-.product-menu a.pricing-link .pricing-carrot svg {
+.product-menu__pricing-carrot svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
 }
 
-.product-menu .product-category {
+.product-menu__category {
   display: none;
   height: 100%;
 }
 
-.product-menu .product-category--active {
+.product-menu__category--active {
   display: flex;
   flex-direction: column;
   padding: 40px 40px 40px 25px;
@@ -159,14 +156,14 @@
   max-height: 80vh;
 }
 
-.product-menu .product-category .category-details {
+.product-menu__category-details {
   flex-grow: 1;
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
-.product-menu .category-description {
+.product-menu__category-description {
   padding: 28px;
   border-radius: 4px;
   display: flex;
@@ -174,7 +171,7 @@
   color: #ffffff;
 }
 
-.product-menu .category-description .category-header {
+.product-menu__category-header {
   font-size: 28px;
   line-height: 24px;
   font-weight: 700;
@@ -183,7 +180,7 @@
   color: #ffffff;
 }
 
-.product-menu .category-description .category-description-text {
+.product-menu__category-description-text {
   font-size: 18px;
   line-height: 22px;
   font-weight: var(--font-weight-medium);
@@ -191,7 +188,7 @@
   color: #ffffff;
 }
 
-.product-menu .category-description__icon {
+.product-menu__category-description-icon {
   display: inline-flex;
   align-items: center;
   font-size: 48px;
@@ -203,13 +200,13 @@
   flex-shrink: 0;
 }
 
-.product-menu .category-description__icon svg {
+.product-menu__category-description-icon svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
 }
 
-.product-menu p.subcategory-header {
+.product-menu__subcategory-header {
   font-size: 16px;
   line-height: 18px;
   padding: 12px;
@@ -218,22 +215,22 @@
   margin: 0;
 }
 
-.product-menu .product-subcategory {
+.product-menu__subcategory {
   width: 33%;
 }
 
-.product-menu .product-subcategory.related {
+.product-menu__subcategory--related {
   border-left: 1px solid var(--hugo-nav-border);
   padding-left: 8px;
 }
 
-.product-menu ul.product-list {
+.product-menu__list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.product-menu ul.product-list li a {
+.product-menu__list li a {
   display: block;
   padding: 12px;
   font-size: 18px;
@@ -247,7 +244,7 @@
   white-space: normal;
 }
 
-.product-menu ul.product-list li a:hover {
+.product-menu__list li a:hover {
   color: var(--hugo-nav-text-hover);
   background: var(--hugo-nav-btn-hover-bg);
 }

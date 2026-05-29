@@ -1,37 +1,13 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/preact';
+import { render, cleanup } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
 import type { ComponentType } from 'preact';
-import FooterAccordion, { type FooterSection } from './FooterAccordion';
+import FooterAccordion from './FooterAccordion';
+import type { FooterSection } from './FooterAccordion';
 
-// Cast to keep h() happy with the component's prop typing.
 const FooterAccordionComponent = FooterAccordion as ComponentType<any>;
-
-// Pass BEM-style class names through the `classes` prop so tests can assert on
-// stable DOM hooks instead of CSS-module hashes.
-const classes = {
-  column: 'footer-accordion__column',
-  columnByKey: {
-    product: 'footer-accordion__column--product',
-    resources: 'footer-accordion__column--resources',
-    about: 'footer-accordion__column--about',
-    blog: 'footer-accordion__column--blog',
-  },
-  header: 'footer-accordion__header',
-  body: 'footer-accordion__body',
-  bodyOpen: 'footer-accordion__body--open',
-  divider: 'footer-accordion__divider',
-  dividerDesktop: 'footer-accordion__divider--desktop',
-  dividerMobile: 'footer-accordion__divider--mobile',
-  columnBodyFlex: 'footer-accordion__column-body-flex',
-  columnBodyFlexStacked: 'footer-accordion__column-body-flex--stacked',
-  menuLinks: 'footer-accordion__menu-links',
-  menuLinksHalf: 'footer-accordion__menu-links--half',
-  menuLinksHalfLg100: 'footer-accordion__menu-links--half-lg-100',
-  menuLink: 'footer-accordion__menu-link',
-};
 
 const sections: FooterSection[] = [
   {
@@ -80,7 +56,7 @@ function mockMobileViewport() {
 }
 
 const renderAccordion = () =>
-  render(h(FooterAccordionComponent, { sections, classes }));
+  render(h(FooterAccordionComponent, { sections }));
 
 beforeEach(() => {
   mockMobileViewport();
@@ -92,20 +68,20 @@ describe('FooterAccordion — default state', () => {
   it('renders all section headers', () => {
     renderAccordion();
 
-    expect(document.querySelector<HTMLElement>('.footer-section--product')!).toBeTruthy();
-    expect(document.querySelector<HTMLElement>('.footer-section--resources')!).toBeTruthy();
-    expect(document.querySelector<HTMLElement>('.footer-section--about')!).toBeTruthy();
-    expect(document.querySelector<HTMLElement>('.footer-section--blog')!).toBeTruthy();
+    expect(document.querySelector('.footer-section--product')).toBeTruthy();
+    expect(document.querySelector('.footer-section--resources')).toBeTruthy();
+    expect(document.querySelector('.footer-section--about')).toBeTruthy();
+    expect(document.querySelector('.footer-section--blog')).toBeTruthy();
   });
 
   it('opens the resources section by default (BEM + aria)', () => {
     renderAccordion();
 
-    const resourcesSection = document.querySelector<HTMLElement>('.footer-section--resources')!;
-    const resourcesBody = resourcesSection.querySelector('.footer-accordion__body')!;
-    const resourcesHeader = resourcesSection.querySelector('.footer-accordion__header')!;
+    const resourcesSection = document.querySelector('.footer-section--resources')!;
+    const resourcesBody = resourcesSection.querySelector('.footer__section-body')!;
+    const resourcesHeader = resourcesSection.querySelector('.footer__section-header')!;
 
-    expect(resourcesBody.classList.contains('footer-accordion__body--open')).toBe(true);
+    expect(resourcesBody.classList.contains('footer__section-body--open')).toBe(true);
     expect(resourcesHeader.getAttribute('aria-expanded')).toBe('true');
   });
 
@@ -113,11 +89,11 @@ describe('FooterAccordion — default state', () => {
     renderAccordion();
 
     for (const id of ['product', 'about', 'blog']) {
-      const section = document.querySelector<HTMLElement>(`.footer-section--${id}`)!;
-      const body = section.querySelector('.footer-accordion__body')!;
-      const header = section.querySelector('.footer-accordion__header')!;
+      const section = document.querySelector(`.footer-section--${id}`)!;
+      const body = section.querySelector('.footer__section-body')!;
+      const header = section.querySelector('.footer__section-header')!;
 
-      expect(body.classList.contains('footer-accordion__body--open')).toBe(false);
+      expect(body.classList.contains('footer__section-body--open')).toBe(false);
       expect(header.getAttribute('aria-expanded')).toBe('false');
     }
   });
@@ -128,20 +104,20 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const productSection = document.querySelector<HTMLElement>('.footer-section--product')!;
-    const productHeader = productSection.querySelector('.footer-accordion__header')! as HTMLElement;
-    const productBody = productSection.querySelector('.footer-accordion__body')!;
+    const productSection = document.querySelector('.footer-section--product')!;
+    const productHeader = productSection.querySelector('.footer__section-header')! as HTMLElement;
+    const productBody = productSection.querySelector('.footer__section-body')!;
 
-    const resourcesSection = document.querySelector<HTMLElement>('.footer-section--resources')!;
-    const resourcesHeader = resourcesSection.querySelector('.footer-accordion__header')!;
-    const resourcesBody = resourcesSection.querySelector('.footer-accordion__body')!;
+    const resourcesSection = document.querySelector('.footer-section--resources')!;
+    const resourcesHeader = resourcesSection.querySelector('.footer__section-header')!;
+    const resourcesBody = resourcesSection.querySelector('.footer__section-body')!;
 
     await user.click(productHeader);
 
-    expect(productBody.classList.contains('footer-accordion__body--open')).toBe(true);
+    expect(productBody.classList.contains('footer__section-body--open')).toBe(true);
     expect(productHeader.getAttribute('aria-expanded')).toBe('true');
 
-    expect(resourcesBody.classList.contains('footer-accordion__body--open')).toBe(false);
+    expect(resourcesBody.classList.contains('footer__section-body--open')).toBe(false);
     expect(resourcesHeader.getAttribute('aria-expanded')).toBe('false');
   });
 
@@ -149,13 +125,13 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const resourcesSection = document.querySelector<HTMLElement>('.footer-section--resources')!;
-    const resourcesHeader = resourcesSection.querySelector('.footer-accordion__header')! as HTMLElement;
-    const resourcesBody = resourcesSection.querySelector('.footer-accordion__body')!;
+    const resourcesSection = document.querySelector('.footer-section--resources')!;
+    const resourcesHeader = resourcesSection.querySelector('.footer__section-header')! as HTMLElement;
+    const resourcesBody = resourcesSection.querySelector('.footer__section-body')!;
 
     await user.click(resourcesHeader);
 
-    expect(resourcesBody.classList.contains('footer-accordion__body--open')).toBe(false);
+    expect(resourcesBody.classList.contains('footer__section-body--open')).toBe(false);
     expect(resourcesHeader.getAttribute('aria-expanded')).toBe('false');
   });
 
@@ -163,14 +139,14 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const aboutSection = document.querySelector<HTMLElement>('.footer-section--about')!;
-    const aboutHeader = aboutSection.querySelector('.footer-accordion__header')! as HTMLElement;
-    const aboutBody = aboutSection.querySelector('.footer-accordion__body')!;
+    const aboutSection = document.querySelector('.footer-section--about')!;
+    const aboutHeader = aboutSection.querySelector('.footer__section-header')! as HTMLElement;
+    const aboutBody = aboutSection.querySelector('.footer__section-body')!;
 
     aboutHeader.focus();
     await user.keyboard('{Enter}');
 
-    expect(aboutBody.classList.contains('footer-accordion__body--open')).toBe(true);
+    expect(aboutBody.classList.contains('footer__section-body--open')).toBe(true);
     expect(aboutHeader.getAttribute('aria-expanded')).toBe('true');
   });
 
@@ -178,14 +154,14 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const blogSection = document.querySelector<HTMLElement>('.footer-section--blog')!;
-    const blogHeader = blogSection.querySelector('.footer-accordion__header')! as HTMLElement;
-    const blogBody = blogSection.querySelector('.footer-accordion__body')!;
+    const blogSection = document.querySelector('.footer-section--blog')!;
+    const blogHeader = blogSection.querySelector('.footer__section-header')! as HTMLElement;
+    const blogBody = blogSection.querySelector('.footer__section-body')!;
 
     blogHeader.focus();
     await user.keyboard(' ');
 
-    expect(blogBody.classList.contains('footer-accordion__body--open')).toBe(true);
+    expect(blogBody.classList.contains('footer__section-body--open')).toBe(true);
     expect(blogHeader.getAttribute('aria-expanded')).toBe('true');
   });
 });
