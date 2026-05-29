@@ -1247,9 +1247,9 @@ menu:
           - CreatePersonalAccessToken
         unstable: []
         order: 15
-    - name: Get all personal access tokens
-      url: '#get-all-personal-access-tokens'
-      identifier: key-management-get-all-personal-access-tokens
+    - name: Get all access tokens
+      url: '#get-all-access-tokens'
+      identifier: key-management-get-all-access-tokens
       parent: key-management
       generated: true
       params:
