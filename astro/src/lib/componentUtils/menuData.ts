@@ -3,13 +3,13 @@
  * time and exposes the `main_left`, `main_right`, product categories, and
  * product lookup as strongly-typed shapes.
  */
-import { parse as parseYaml } from 'yaml';
+import { parse as parseYaml } from "yaml";
 // @ts-ignore — Vite raw import
-import menusRaw from '@websites-modules/data/menu_data/menus.yaml?raw';
+import menusRaw from "@websites-modules/data/menu_data/menus.yaml?raw";
 // @ts-ignore — Vite raw import
-import categoriesRaw from '@websites-modules/data/menu_data/product_categories.yaml?raw';
+import categoriesRaw from "@websites-modules/data/menu_data/product_categories.yaml?raw";
 // @ts-ignore — Vite raw import
-import productsRaw from '@websites-modules/data/menu_data/products.yaml?raw';
+import productsRaw from "@websites-modules/data/menu_data/products.yaml?raw";
 
 export type MenuChild = {
   identifier?: string;
@@ -99,21 +99,23 @@ export function getProduct(identifier: string): Product | undefined {
 /**
  * Mirrors Hugo's behavior: an item is hidden on docs when `params.disabled`
  * contains the repo name. We hard-code "documentation" since the Astro site
- * only serves docs content for now.
+ * only serves docs content.
  */
-export function isDisabledForDocs(item: { params?: { disabled?: string[] } }): boolean {
-  return Boolean(item.params?.disabled?.includes('documentation'));
+export function isDisabledForDocs(item: {
+  params?: { disabled?: string[] };
+}): boolean {
+  return Boolean(item.params?.disabled?.includes("documentation"));
 }
 
 /**
  * Resolve a menu entry's URL to an absolute href. Hugo normalizes with
- * `absLangURL`; the Astro port assumes the datadoghq.com host for external
- * links and "/" for relative ones so the header behaves identically when
- * mounted under a docs subpath.
+ * `absLangURL`; the Astro port mirrors that by resolving relative paths
+ * against the configured site origin so the header behaves identically
+ * across dev, staging, and production.
  */
 export function resolveUrl(url: string | undefined): string {
-  if (!url) return '#';
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  if (url.startsWith('#')) return url;
-  return `https://www.datadoghq.com/${url.replace(/^\/+/, '')}`;
+  if (!url) return "#";
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  if (url.startsWith("#")) return url;
+  return `${import.meta.env.SITE}/${url.replace(/^\/+/, "")}`;
 }

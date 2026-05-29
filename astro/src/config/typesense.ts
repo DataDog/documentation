@@ -33,4 +33,4 @@ export function getTypesenseConfig(): TypesenseEnv {
   return preview;
 }
 
-export const HUGO_ORIGIN = "https://docs.datadoghq.com";
+export const HUGO_ORIGIN = import.meta.env.SITE as string;

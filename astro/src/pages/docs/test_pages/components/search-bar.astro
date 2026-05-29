@@ -53,7 +53,7 @@ const searchLabels: SearchBarLabels = {
           <tr
             ><td>Cross-site link routing</td><td
               >API hits open same-origin in Astro; all other categories link to <code
-                >https://docs.datadoghq.com{"${relpermalink}"}</code
+                >{import.meta.env.SITE}{"${relpermalink}"}</code
               > (target=_blank)</td
             ></tr
           >

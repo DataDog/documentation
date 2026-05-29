@@ -18,6 +18,7 @@ import {
   flattenSearchResult,
   type MultiSearchResponse,
 } from "@lib/search/typesense";
+import { HUGO_ORIGIN } from "@config/typesense";
 
 afterEach(() => {
   cleanup();
@@ -113,7 +114,7 @@ describe("SearchBar — no-hits state", () => {
 });
 
 describe("SearchBar — URL routing", () => {
-  it("keeps API hits same-origin and routes non-API hits to docs.datadoghq.com", async () => {
+  it("keeps API hits same-origin and routes non-API hits to the Astro site origin", async () => {
     const user = userEvent.setup();
     mount();
     await typeAndWait(user, "dashboard");
@@ -126,11 +127,9 @@ describe("SearchBar — URL routing", () => {
     // API hits resolve relative (same-origin in production).
     expect(hrefs).toContain("/api/latest/dashboards/");
     // Documentation hits go to the Hugo origin.
-    expect(hrefs).toContain("https://docs.datadoghq.com/dashboards/");
+    expect(hrefs).toContain(`${HUGO_ORIGIN}/dashboards/`);
     // Partner hits also go to the Hugo origin.
-    expect(hrefs).toContain(
-      "https://docs.datadoghq.com/partners/acme-dashboards/",
-    );
+    expect(hrefs).toContain(`${HUGO_ORIGIN}/partners/acme-dashboards/`);
   });
 });
 
@@ -173,7 +172,7 @@ describe("SearchBar — keyboard navigation", () => {
 });
 
 describe("SearchBar — Enter routes to Hugo's search page when no hit is selected", () => {
-  it("navigates to docs.datadoghq.com/search/?s=<query> when Enter is pressed without a selection", async () => {
+  it("navigates to {HUGO_ORIGIN}/search/?s=<query> when Enter is pressed without a selection", async () => {
     const user = userEvent.setup();
     mount();
     await typeAndWait(user, "monitor");
@@ -200,7 +199,7 @@ describe("SearchBar — Enter routes to Hugo's search page when no hit is select
       if (original) Object.defineProperty(window, "location", original);
     }
 
-    expect(hrefs).toContain("https://docs.datadoghq.com/search/?s=monitor");
+    expect(hrefs).toContain(`${HUGO_ORIGIN}/search/?s=monitor`);
   });
 });
 

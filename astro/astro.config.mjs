@@ -17,8 +17,19 @@ const hugoSite = fileURLToPath(new URL("..", import.meta.url));
 const proxied = process.env.PROXIED === "1";
 const proxyPort = 1314;
 
+function deriveSiteUrl() {
+  const env = process.env.CI_ENVIRONMENT_NAME;
+  if (env === "preview") {
+    return `https://docs-staging.datadoghq.com/${process.env.BRANCH}`;
+  }
+  if (env === "live") {
+    return "https://docs.datadoghq.com";
+  }
+  return proxied ? `http://localhost:${proxyPort}` : "http://localhost:4321";
+}
+
 export default defineConfig({
-  site: "https://docs.datadoghq.com",
+  site: deriveSiteUrl(),
   integrations: [markdoc(), preact()],
   build: {
     inlineStylesheets: "always",
