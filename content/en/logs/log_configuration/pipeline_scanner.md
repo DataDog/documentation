@@ -39,9 +39,9 @@ The Pipeline Scanner samples and annotates logs matching the search query with t
 1. Navigate to [Log Explorer][1].
 1. Click on a log where you want to find out which pipelines and processors are modifying it.
 1. Click the Pipeline Scanner icon in the upper right corner of the panel. If you hover over the icon, it says {{< ui >}}View pipelines for similar logs{{< /ui >}}.
-    Alternatively, click on an attribute in the log panel and select {{< ui >}}Scan pipelines for{{< /ui >}}. 
+    Alternatively, click on an attribute in the log panel and select {{< ui >}}Scan pipelines for{{< /ui >}}.
 1. You can further refine your query in the [Pipeline Scanner][2] page. This query cannot be changed after a session is started.
-1. Click {{< ui >}}Launch this session{{< /ui >}}.   
+1. Click {{< ui >}}Launch this session{{< /ui >}}.
     For the next 15 minutes, logs matching your query are tagged with information about which pipelines and processors are modifying those logs. The Live Tail in the scanner shows which pipelines and how many pipelines match each of the logs.
 1. Click a log to see the list of pipelines and processors matched to that log. Live Tail is paused at this point.
 
@@ -49,13 +49,13 @@ You can modify the pipelines and processors in the right side panel. The modific
 
 You can also access Pipeline Scanner from the Log Pipelines page:
 
-1. Navigate to [Log Pipelines][3]. 
+1. Navigate to [Log Pipelines][3].
 2. Click {{< ui >}}Pipeline Scanner{{< /ui >}}.
 3. Define the query for the logs you want to inspect.
 
 ### Limitations
 
-The `logs_write_pipelines` permission is required to use the Pipeline Scanner. See [Log Management RBAC permissions][4] for more information.
+The `logs_read_config` and `logs_write_pipelines` permissions are required to use the Pipeline Scanner. See [Log Management RBAC permissions][4] for more information.
 
 The number of sessions you can launch is limited to:
 

@@ -27,6 +27,7 @@ aliases:
   - /opentelemetry/instrument/api_support/python/metrics
   - /opentelemetry/instrument/api_support/python/traces
   - /opentelemetry/instrument/api_support/ruby/
+  - /opentelemetry/instrument/api_support/ruby/logs
   - /opentelemetry/instrument/api_support/ruby/metrics
   - /opentelemetry/instrument/api_support/ruby/traces
   - /opentelemetry/instrument/api_support/rust
@@ -63,15 +64,6 @@ further_reading:
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
 OpenTelemetry API support for logs is not available for PHP. Use [Datadog Log Collection][210] instead.
-{% /alert %}
-{% /if %}
-{% /if %}
-
-<!-- Ruby has traces and metrics only -->
-{% if equals($prog_lang, "ruby") %}
-{% if equals($platform, "logs") %}
-{% alert level="danger" %}
-OpenTelemetry API support for logs is not available for Ruby. Use [Datadog Log Collection][210] instead.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -867,7 +859,7 @@ Here is the minimum version required for each instrument type:
 {% if equals($platform, "logs") %}
 
 <!-- Show content only for languages that support logs -->
-{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust", "java"]) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust", "java", "ruby"]) %}
 
 ## Overview
 
@@ -883,10 +875,16 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 {% /alert %}
 {% /if %}
 
-<!-- Exporter-based implementation (Python) -->
-{% if equals($prog_lang, "python") %}
+<!-- Exporter-based implementation (Python, Ruby) -->
+{% if or(equals($prog_lang, "python"), equals($prog_lang, "ruby")) %}
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
+{% /if %}
+
+{% if equals($prog_lang, "ruby") %}
+{% alert level="warning" %}
+The Datadog SDK does not capture Ruby's built-in `Logger`. You must emit logs with the OpenTelemetry Logs API through `OpenTelemetry.logger_provider` and `on_emit`.
+{% /alert %}
 {% /if %}
 
 ## Prerequisites
@@ -921,6 +919,15 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 
 
 - **OpenTelemetry API**: `opentelemetry-api` version 1.27.0 (the version that introduced the stable Logs API) or later.
+{% /if %}
+{% if equals($prog_lang, "ruby") %}
+- **Datadog SDK**: `datadog` gem version 2.34.0 or later.
+- **OpenTelemetry Logs SDK**: `opentelemetry-logs-sdk` version 0.1 or later.
+- **OpenTelemetry OTLP Logs Exporter**: `opentelemetry-exporter-otlp-logs` version 0.1 or later.
+
+{% alert level="warning" %}
+If you run Ruby 3.1 or 3.2, pin `opentelemetry-logs-sdk` to `~> 0.4`. Version 0.5.0 and later require Ruby 3.3 or later.
+{% /alert %}
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
@@ -1055,6 +1062,37 @@ Follow these steps to enable OTel Logs API support in your application.
    ```sh
    export DD_LOGS_OTEL_ENABLED=true
    ```
+{% /if %}
+
+{% if equals($prog_lang, "ruby") %}
+1. Add the Datadog SDK and OTel gems:
+    ```ruby
+    # Add to your Gemfile
+    gem 'datadog'
+    gem 'opentelemetry-logs-sdk', '>= 0.1'
+    gem 'opentelemetry-exporter-otlp-logs', '>= 0.1'
+    ```
+2. Install dependencies:
+    ```sh
+    bundle install
+    ```
+3. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+4. Configure your application:
+    ```ruby
+    require 'opentelemetry/sdk'
+    require 'datadog/opentelemetry'
+
+    Datadog.configure do |c|
+      # Configure Datadog settings here
+    end
+
+    # Call after Datadog.configure to initialize logs
+    OpenTelemetry::SDK.configure
+    ```
+    When enabled, `datadog` automatically detects the OTel packages and configures the OTLP logs exporter to send logs to your OTLP destination.
 {% /if %}
 
 ## Examples
@@ -1400,6 +1438,46 @@ try (Scope scope = span.makeCurrent()) {
 ```
 {% /if %}
 
+{% if equals($prog_lang, "ruby") %}
+After the Datadog SDK is initialized, use the OpenTelemetry Logs API to get a logger and emit log records.
+
+### Emitting a log {% #emitting-log-ruby %}
+
+```ruby
+logger = OpenTelemetry.logger_provider.logger(name: 'my-service', version: '1.0.0')
+logger.on_emit(
+  severity_text: 'INFO',
+  severity_number: 9,
+  body: 'User clicked the checkout button.',
+  attributes: {
+    'cart.id' => 'c-12345',
+    'user.id' => 'u-54321'
+  }
+)
+```
+
+### Trace and log correlation {% #trace-log-correlation-ruby %}
+
+Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are added to the log record.
+
+```ruby
+Datadog::Tracing.trace('do.work') do
+  logger = OpenTelemetry.logger_provider.logger(name: 'my-service', version: '1.0.0')
+  logger.on_emit(
+    severity_text: 'INFO',
+    severity_number: 9,
+    body: 'This log is correlated to the active span.'
+  )
+  sleep 0.1
+  logger.on_emit(
+    severity_text: 'WARN',
+    severity_number: 13,
+    body: 'So is this one.'
+  )
+end
+```
+{% /if %}
+
 ## Supported configuration
 
 To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
@@ -1462,6 +1540,14 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
 {% /if %}
 
+{% if equals($prog_lang, "ruby") %}
+1. Remove your manual setup code (for example, `LoggerProvider`, `BatchLogRecordProcessor`, and `OTLPLogExporter` instantiation).
+2. Add the Datadog SDK (`datadog`) gem and call `Datadog.configure` before `OpenTelemetry::SDK.configure`.
+3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+
+The Datadog SDK programmatically configures the OTel SDK for you.
+{% /if %}
+
 ### Existing Datadog log injection
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
@@ -1500,6 +1586,11 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {% /if %}
 {% if equals($prog_lang, "java") %}
 - Verify the `dd-trace-java` javaagent is running. The javaagent registers itself as the global OTel LoggerProvider at startup; without it, OTel API calls fall through to no-op providers and no data is sent.
+{% /if %}
+{% if equals($prog_lang, "ruby") %}
+- Verify required gems (`opentelemetry-logs-sdk` and `opentelemetry-exporter-otlp-logs`) are installed in your Ruby environment.
+- Verify `Datadog.configure` is called before `OpenTelemetry::SDK.configure`.
+- Verify you are using `OpenTelemetry.logger_provider`, not Ruby's stdlib `Logger` or `OpenTelemetry.logger`.
 {% /if %}
 
 {% /if %}

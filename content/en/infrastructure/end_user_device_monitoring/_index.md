@@ -29,6 +29,7 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
 | **Network path analysis**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
+| **Application Inventory**         | Capture applications running on the device to verify version updates.                                          | 
 
 [1]: /infrastructure/process
 [2]: /integrations/wlan/
