@@ -36,10 +36,10 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    // The logo anchor carries the js-logo-download behavior class and href="/".
+    // The logo anchor has the header__logo-column BEM class and href="/".
     // Attribute order is implementation-defined, so accept either ordering.
     expect(html).toMatch(
-      /<a[^>]*(class="[^"]*js-logo-download[^"]*"[^>]*href="\/"|href="\/"[^>]*class="[^"]*js-logo-download)/,
+      /<a[^>]*(class="[^"]*header__logo-column[^"]*"[^>]*href="\/"|href="\/"[^>]*class="[^"]*header__logo-column)/,
     );
   });
 

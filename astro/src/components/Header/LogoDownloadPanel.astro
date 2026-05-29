@@ -4,7 +4,7 @@
 import NavIcon from './NavIcon.astro';
 ---
 
-<div class="logo-download-div js-logo-download-div" style="display:none;">
+<div class="logo-download-div" style="display:none;">
   <div class="logo-download__arrow">
     <NavIcon name="modal-up-arrow" />
   </div>
@@ -22,8 +22,8 @@ import NavIcon from './NavIcon.astro';
   (function () {
     // Tiny toggle that mirrors Hugo's `.js-logo-download` click behavior: clicking
     // the logo toggles the panel; clicking elsewhere closes it.
-    var trigger = document.querySelector('.js-logo-download');
-    var panel = document.querySelector('.js-logo-download-div');
+    var trigger = document.querySelector('.header__logo-column');
+    var panel = document.querySelector('.logo-download-div');
     if (!trigger || !panel) return;
 
     trigger.addEventListener('click', function (e) {

@@ -392,8 +392,8 @@ html[data-active-region='gov'] [data-region='gov'] {
   navigation: auto;
 }
 
-.main-nav {
-  view-transition-name: main-nav;
+.header__nav {
+  view-transition-name: header__nav;
 }
 
 .announcement-banner {
@@ -404,12 +404,12 @@ html[data-active-region='gov'] [data-region='gov'] {
   view-transition-name: sidenav;
 }
 
-::view-transition-group(main-nav),
+::view-transition-group(header__nav),
 ::view-transition-group(announcement-banner),
 ::view-transition-group(sidenav),
 ::view-transition-group(root),
-::view-transition-old(main-nav),
-::view-transition-new(main-nav),
+::view-transition-old(header__nav),
+::view-transition-new(header__nav),
 ::view-transition-old(announcement-banner),
 ::view-transition-new(announcement-banner),
 ::view-transition-old(sidenav),
@@ -419,7 +419,7 @@ html[data-active-region='gov'] [data-region='gov'] {
   animation: none;
 }
 
-::view-transition-old(main-nav),
+::view-transition-old(header__nav),
 ::view-transition-old(announcement-banner),
 ::view-transition-old(sidenav),
 ::view-transition-old(root) {

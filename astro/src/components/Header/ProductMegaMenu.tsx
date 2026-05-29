@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { MegaCategory, MegaSubcategory, MegaSection } from "@lib/componentUtils/menuData.ts";
-import headerStyles from './Header.module.css';
-import pmStyles from './ProductMegaMenu.module.css';
+import styles from './Header.module.css';
 import { classListFactory } from '@lib/cssUtils/classListFactory';
 
 export type { MegaCategory, MegaSubcategory, MegaSection };
 
-const hCl = classListFactory(headerStyles);
-const cl = classListFactory(pmStyles);
+const cl = classListFactory(styles);
 
 export interface ProductMegaMenuLabels {
   trigger: string;
@@ -83,18 +81,18 @@ export default function ProductMegaMenu({
 
   return (
     <li
-      class={`${hCl('header__menu-item', open && 'header__menu-item--open')} dropdown product-dropdown`}
+      class={`${cl('header__menu-item', open && 'header__menu-item--open')} dropdown product-dropdown`}
       onMouseEnter={() => {
         cancelClose();
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
     >
-      <a class={`${hCl('header__menu-link')} dropdown`} href={hrefs.product}>
-        <span class="menu-text">{labels.trigger}</span>
+      <a class={`${cl('header__menu-link')} dropdown`} href={hrefs.product}>
+        <span class={cl('header__menu-text')}>{labels.trigger}</span>
       </a>
       <div
-        class={`${hCl('header__dropdown-menu', open && 'header__dropdown-menu--open')} ${cl('product-menu')} dropdown-menu`}
+        class={`${cl('header__dropdown-menu', open && 'header__dropdown-menu--open')} ${cl('product-menu')} dropdown-menu`}
       >
         <div class={cl('product-menu__row')}>
           <div class={cl('product-menu__toggle-column')}>

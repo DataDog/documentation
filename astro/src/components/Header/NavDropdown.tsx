@@ -65,7 +65,7 @@ export default function NavDropdown({ labels, href, identifier, isSolutions, chi
       onMouseLeave={scheduleClose}
     >
       <a class={`${cl('header__menu-link')} dropdown`} href={href}>
-        <span class="menu-text">{labels.trigger}</span>
+        <span class={cl('header__menu-text')}>{labels.trigger}</span>
       </a>
       <div class={`${menuClass} ${identifier}-dropdown-menu`}>
         {children}

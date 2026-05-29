@@ -19,7 +19,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
 
-    const header = page.locator('.main-nav-wrapper .main-nav');
+    const header = page.locator('.header__wrapper .header__nav');
     const box = await header.boundingBox();
     expect(box).not.toBeNull();
     expect(Math.round(box!.height)).toBe(130);
@@ -30,7 +30,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
 
-    const header = page.locator('.main-nav-wrapper .main-nav');
+    const header = page.locator('.header__wrapper .header__nav');
     const box = await header.boundingBox();
     expect(box).not.toBeNull();
     expect(Math.round(box!.height)).toBe(60);
@@ -43,7 +43,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await page.waitForLoadState('networkidle');
 
     const headerHeight = async () =>
-      Math.round((await page.locator('.main-nav-wrapper .main-nav').boundingBox())!.height);
+      Math.round((await page.locator('.header__wrapper .header__nav').boundingBox())!.height);
 
     // At scroll 0, full height.
     await page.evaluate(() => window.scrollTo(0, 0));
@@ -72,7 +72,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await page.waitForLoadState('networkidle');
 
     const headerHeight = async () =>
-      Math.round((await page.locator('.main-nav-wrapper .main-nav').boundingBox())!.height);
+      Math.round((await page.locator('.header__wrapper .header__nav').boundingBox())!.height);
 
     expect(await headerHeight()).toBe(60);
     await page.evaluate(() => window.scrollTo(0, 200));
@@ -124,7 +124,7 @@ test.describe('Header — visual', () => {
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
 
-    await expect(page.locator('.main-nav-wrapper .main-nav')).toHaveScreenshot('header-desktop.png');
+    await expect(page.locator('.header__wrapper .header__nav')).toHaveScreenshot('header-desktop.png');
   });
 
   test('mobile collapsed with hamburger visible', async ({ page }) => {
@@ -133,7 +133,7 @@ test.describe('Header — visual', () => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.locator('.navbar-toggler')).toBeVisible();
-    await expect(page.locator('.main-nav-wrapper .main-nav')).toHaveScreenshot('header-mobile.png');
+    await expect(page.locator('.header__wrapper .header__nav')).toHaveScreenshot('header-mobile.png');
   });
 
   test('mobile nav overlay open', async ({ page }) => {
@@ -145,7 +145,7 @@ test.describe('Header — visual', () => {
     const overlay = page.locator('#mobile-nav');
     await expect(overlay).toBeVisible();
 
-    await expect(page.locator('.main-nav-wrapper .main-nav')).toHaveScreenshot('header-mobile-overlay-open.png');
+    await expect(page.locator('.header__wrapper .header__nav')).toHaveScreenshot('header-mobile-overlay-open.png');
   });
 
   test('mega menu open after hovering Product', async ({ page }) => {
@@ -161,7 +161,7 @@ test.describe('Header — visual', () => {
     // Allow category-switch debounce and any entry animation to settle.
     await page.waitForTimeout(250);
 
-    await expect(page.locator('.main-nav-wrapper .main-nav')).toHaveScreenshot('header-mega-menu-open.png');
+    await expect(page.locator('.header__wrapper .header__nav')).toHaveScreenshot('header-mega-menu-open.png');
   });
 
   test('scrolled-shrunk header state', async ({ page }) => {
@@ -173,6 +173,6 @@ test.describe('Header — visual', () => {
     // Wait for the shrink transition to clamp at 65px.
     await page.waitForTimeout(350);
 
-    await expect(page.locator('.main-nav-wrapper .main-nav')).toHaveScreenshot('header-scrolled-shrunk.png');
+    await expect(page.locator('.header__wrapper .header__nav')).toHaveScreenshot('header-scrolled-shrunk.png');
   });
 });
