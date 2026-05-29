@@ -1,6 +1,6 @@
 ---
 title: Bits for Data
-description: "Ask questions about your business data in natural language. Bits for Data writes the queries, runs them against your data warehouse, and returns answers without SQL or dashboard hunting."
+description: "Ask questions about your business data in natural language. Bits for Data writes the queries, runs them against your data warehouse, and returns answers without writing SQL or navigating dashboards."
 further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
