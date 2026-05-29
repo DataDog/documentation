@@ -22,7 +22,7 @@ The Network Device Monitoring (NDM) **Summary Page** is a command center for net
 
 {{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device performance, traffic, and recent changes." style="width:100%;" >}}
 
-Each section of the Summary Page reports one of four health states:
+The **Network health**, **Interface health**, and **Device health** sections each report one of four health states:
 
 | State | Meaning |
 |-------|---------|
