@@ -1,5 +1,6 @@
 ---
 title: AWS CloudWatch Metric Streams with Amazon Data Firehose
+description: "Stream CloudWatch metrics to Datadog through Amazon Data Firehose for low-latency ingestion."
 
 further_reading:
 - link: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html"

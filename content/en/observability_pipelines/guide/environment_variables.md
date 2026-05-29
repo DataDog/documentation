@@ -84,6 +84,9 @@ Some Observability Pipelines components require setting up environment variables
 ### CrowdStrike NG-SIEM
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
+### Databricks (Zerobus)
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
+
 ### Datadog Logs
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 

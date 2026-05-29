@@ -69,18 +69,6 @@ To collect additional JVM metrics beyond the default runtime instrumentation, in
 
 Configure the scraper with `otel.jmx.target.source=legacy` to collect these additional metrics. The scraper's `instrumentation` source emits the same semantic-convention metrics already produced natively by the OpenTelemetry Java SDK, so it does not provide additional coverage.
 
-#### Collector configuration
-
-The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
-
-```yaml
-processors:
-  deltatorate:
-    metrics:
-      - jvm.gc.collections.count
-      - jvm.gc.collections.elapsed
-```
-
 **Note**: The minimum supported version of the OpenTelemetry Java agent is [2.0.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.0.0).
 
 [3]: https://opentelemetry.io/docs/instrumentation/java/automatic/
@@ -97,29 +85,6 @@ processors:
 #### Manual instrumentation
 
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
-
-#### Collector configuration
-
-Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Verify that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` is not set to `delta`. Otherwise, metrics excluded by `cumulativetodelta` are ignored.
-
-```yaml
-processors:
-  transform/go-runtime:
-    error_mode: ignore
-    metric_statements:
-      - context: metric
-        statements:
-          - convert_sum_to_gauge() where name == "process.runtime.go.gc.pause_total_ns" or name == "process.runtime.go.gc.count" or name == "go.memory.allocated" or name == "go.memory.allocations"
-
-  cumulativetodelta:
-    exclude:
-      metrics:
-        - process.runtime.go.gc.pause_total_ns
-        - process.runtime.go.gc.count
-        - go.memory.allocated
-        - go.memory.allocations
-      match_type: strict
-```
 
 **Note**: The minimum supported version of [`go.opentelemetry.io/contrib/instrumentation/runtime`][4] is v0.46.0, which also requires Go 1.20+ and [OpenTelemetry Go SDK v1.21.0+](https://github.com/open-telemetry/opentelemetry-go/releases/tag/v1.21.0).
 
@@ -146,18 +111,6 @@ The default metric export interval for the .NET OTel SDK differs from the defaul
 
 ```
 OTEL_METRIC_EXPORT_INTERVAL=10000
-```
-
-#### Collector configuration
-
-The `dotnet.process.cpu.time` and `process.cpu.time` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
-
-```yaml
-processors:
-  deltatorate:
-    metrics:
-      - dotnet.process.cpu.time
-      - process.cpu.time
 ```
 
 **Note**: The minimum supported version of the .NET OpenTelemetry SDK is [1.5.0](https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0).

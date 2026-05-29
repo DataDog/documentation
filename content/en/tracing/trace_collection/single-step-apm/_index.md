@@ -62,7 +62,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/metrics/runtime_metrics/
-[3]: /tracing/software_catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
 [6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
@@ -71,7 +71,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
 [10]: /tracing/trace_collection/library_config/
 [11]: /tracing/metrics/runtime_metrics/
-[12]: /tracing/software_catalog/
+[12]: /internal_developer_portal/catalog/
 [13]: /tracing/glossary/#instrumentation
 [14]: /getting_started/tagging/unified_service_tagging
 [15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting

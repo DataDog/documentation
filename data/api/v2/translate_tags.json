@@ -11,6 +11,10 @@
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
   },
+  "apm-trace": {
+    "name": "APM Trace",
+    "description": "Retrieve full or pruned APM traces by trace ID."
+  },
   "aws-integration": {
     "name": "AWS Integration",
     "description": "Configure your Datadog-AWS integration directly through the Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services)."
@@ -30,6 +34,10 @@
   "agentless-scanning": {
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+  },
+  "annotations": {
+    "name": "Annotations",
+    "description": "Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time."
   },
   "app-builder": {
     "name": "App Builder",
@@ -155,6 +163,10 @@
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
+  "entity-integration-configs": {
+    "name": "Entity Integration Configs",
+    "description": "Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog."
+  },
   "entity-risk-scores": {
     "name": "Entity Risk Scores",
     "description": "Retrieves security risk scores for entities in your organization."
@@ -217,7 +229,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability projects, datasets, dataset records, experiments, and annotations."
+    "description": "Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, and annotations."
   },
   "logs": {
     "name": "Logs",
@@ -258,6 +270,10 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
+  "oauth2-client-public": {
+    "name": "OAuth2 Client Public",
+    "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
   },
   "oci-integration": {
     "name": "OCI Integration",

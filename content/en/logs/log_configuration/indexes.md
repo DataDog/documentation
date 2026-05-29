@@ -43,7 +43,7 @@ The Log Explorer supports [queries across multiple indexes][7].
 
 ### Add indexes
 
-Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
+Use the {{< ui >}}New Index{{< /ui >}} button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
 
 {{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 
@@ -55,7 +55,7 @@ Use the "New Index" button to create a new index. There is a maximum number of i
 
 ### Delete indexes
 
-To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with the `Logs delete data` permission can use this option.
+To delete an index from your organization, use the {{< ui >}}Delete{{< /ui >}} icon in the index action tray. Only users with the `Logs delete data` permission can use this option.
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
@@ -85,7 +85,7 @@ To add an exclusion filter:
 
 1. Navigate to [Log Indexes][11].
 2. Expand the index for which you want to add an exclusion filter. 
-3. Click **Add an Exclusion Filter**.
+3. Click {{< ui >}}Add an Exclusion Filter{{< /ui >}}.
 
 Exclusion filters are defined by a query, a sampling rule, and an active/inactive toggle:
 
