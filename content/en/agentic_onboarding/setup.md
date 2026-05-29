@@ -80,11 +80,11 @@ The CLI can set up the following products:
 
    {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' grouped by Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications, and CI Testing" style="width:80%;" >}}
 
-1. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
+   The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
 
    {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps" style="width:80%;" >}}
 
-1. When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify telemetry.
+   When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify telemetry.
 
    {{< img src="agentic_onboarding/success.png" alt="CLI showing 'Setup complete!' with check marks next to RUM, Error Tracking, and Product Analytics" style="width:80%;" >}}
 
