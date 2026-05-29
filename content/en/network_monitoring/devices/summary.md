@@ -24,7 +24,7 @@ The Network Device Monitoring (NDM) **Summary Page** is a command center for net
 
 {{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device performance, traffic, and recent changes." style="width:100%;" >}}
 
-## Page sections
+## Using the Summary Page
 
 Use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
 
