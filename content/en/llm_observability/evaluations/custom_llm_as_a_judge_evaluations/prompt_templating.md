@@ -5,96 +5,37 @@ further_reading:
 - link: "/llm_observability/evaluations/custom_llm_as_a_judge_evaluations"
   tag: "Documentation"
   text: "Custom LLM-as-a-Judge Evaluations"
-- link: "/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations"
-  tag: "Documentation"
-  text: "Trace-Level Evaluations"
 - link: "/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations"
   tag: "Documentation"
   text: "Session-Level Evaluations"
+- link: "/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations"
+  tag: "Documentation"
+  text: "Trace-Level Evaluations"
 ---
 
-Custom LLM-as-a-judge prompts inject span, trace, or session data into the {{< ui >}}User{{< /ui >}} message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time. Which paths are available depends on the evaluation scope you choose—span, trace, or session.
+Custom LLM-as-a-judge prompts inject session, trace, or span data into the {{< ui >}}User{{< /ui >}} message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time. Which paths are available depends on the evaluation scope you choose—session, trace, or span.
 
 ## At a glance
 
 | Pattern | Description |
 |---|---|
-| `{{name}}` | Direct field |
-| `{{meta.input.value}}` | Dot notation for nested fields |
-| `{{meta.input.messages[0].content}}` | Array index (0-based) |
-| `{{meta.input.messages[1,3].content}}` | Inclusive array range |
-| `{{meta.input.messages[*].content}}` | Array wildcard (fan-out) |
-| `{{meta.input.messages.content}}` | Implicit fan-out (same as `[*]`) |
-| `{{span_input}}`, `{{span_output}}` | Span-scope aliases |
-| `{{spans[0].name}}` | Pick one span from a trace (trace scope) |
-| `{{spans[name:my-span].meta.input.value}}` | Filter spans by attribute (trace scope) |
-| `{{spans}}` | Every span in the trace as JSON (trace scope) |
+| `{{traces}}` | Every trace in the session as JSON (session scope) |
 | `{{traces[0].spans[0].meta.input.value}}` | First span of the first trace (session scope) |
 | `{{traces[*].spans[*].name}}` | Fan-out across traces and spans (session scope) |
 | `{{traces[meta.span.kind:llm].spans[*].meta.output.value}}` | Filter spans by attribute across a session (session scope) |
-| `{{traces}}` | Every trace in the session as JSON (session scope) |
-| `{{*}}` | Entire span, trace, or session payload as JSON |
+| `{{spans}}` | Every span in the trace as JSON (trace scope) |
+| `{{spans[0].name}}` | Pick one span from a trace (trace scope) |
+| `{{spans[name:my-span].meta.input.value}}` | Filter spans by attribute (trace scope) |
+| `{{name}}` | Direct field (span scope) |
+| `{{meta.input.value}}` | Dot notation for nested fields (span scope) |
+| `{{meta.input.messages[0].content}}` | Array index (0-based) (span scope) |
+| `{{meta.input.messages[1,3].content}}` | Inclusive array range (span scope) |
+| `{{meta.input.messages[*].content}}` | Array wildcard (fan-out) (span scope) |
+| `{{meta.input.messages.content}}` | Implicit fan-out (same as `[*]`) (span scope) |
+| `{{span_input}}`, `{{span_output}}` | Span-scope aliases |
+| `{{*}}` | Entire session, trace, or span payload as JSON |
 
 The autocomplete dropdown opens after you type `{{` and lists fields available on the selected sample.
-
-## Span-scope syntax
-
-Span-scope evaluations expose a single span per evaluation. Reference fields by their JSON path on the span.
-
-### Built-in aliases
-
-| Alias | Resolves to |
-|---|---|
-| `{{span_input}}` | `meta.input.messages[*].content` for LLM spans, `meta.input.value` otherwise |
-| `{{span_output}}` | `meta.output.messages[*].content` for LLM spans, `meta.output.value` otherwise |
-
-The aliases adapt to the kind of span being evaluated, so you don't have to branch on whether the span is an LLM call or an agent step.
-
-### Direct field paths
-
-```
-{{name}}
-{{meta.input.value}}
-{{meta.output.value}}
-{{metrics.input_tokens}}
-```
-
-### Array access
-
-```
-{{meta.input.messages[0].content}}     # First message only
-{{meta.input.messages[*].content}}     # All messages, joined with newlines
-{{meta.input.messages[0,2].content}}   # Inclusive range; out-of-bounds ends are clamped
-{{meta.input.messages.content}}        # Implicit fan-out, equivalent to [*]
-```
-
-## Trace-scope syntax
-
-Trace-scope evaluations expose every span in the trace under the `spans` array. Use `{{spans...}}` paths to read across spans. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope.
-
-### Reference the whole trace
-
-```
-{{spans}}    # JSON of every span in the trace
-{{*}}        # Entire trace payload as JSON, including top-level metadata
-```
-
-### Pick a span by index
-
-```
-{{spans[0].meta.input.value}}    # First span
-{{spans[*].name}}                # Newline-joined names of every span
-```
-
-### Filter spans by attribute
-
-```
-{{spans[name:my-span].meta.input.value}}
-{{spans[meta.span.kind:llm].meta.output.value}}
-{{spans[meta.span.kind:tool].meta.input.parameters}}
-```
-
-`[field.path:value]` keeps only the spans whose field at `field.path` equals `value`. Combine with deeper paths to extract the inputs or outputs of the matching spans. The filter falls back to an empty string if no span matches.
 
 ## Session-scope syntax
 
@@ -137,6 +78,65 @@ Use `[*]` on `traces` or `spans` the same way as in trace scope: values from eve
 {{traces[meta.span.kind:llm].meta.output.messages[*].content}}
 ```
 
+## Trace-scope syntax
+
+Trace-scope evaluations expose every span in the trace under the `spans` array. Use `{{spans...}}` paths to read across spans. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope. See [Trace-Level Evaluations][3] for configuration, example prompts, and when to choose trace scope.
+
+### Reference the whole trace
+
+```
+{{spans}}    # JSON of every span in the trace
+{{*}}        # Entire trace payload as JSON, including top-level metadata
+```
+
+### Pick a span by index
+
+```
+{{spans[0].meta.input.value}}    # First span
+{{spans[*].name}}                # Newline-joined names of every span
+```
+
+### Filter spans by attribute
+
+```
+{{spans[name:my-span].meta.input.value}}
+{{spans[meta.span.kind:llm].meta.output.value}}
+{{spans[meta.span.kind:tool].meta.input.parameters}}
+```
+
+`[field.path:value]` keeps only the spans whose field at `field.path` equals `value`. Combine with deeper paths to extract the inputs or outputs of the matching spans. The filter falls back to an empty string if no span matches.
+
+## Span-scope syntax
+
+Span-scope evaluations expose a single span per evaluation. Reference fields by their JSON path on the span.
+
+### Built-in aliases
+
+| Alias | Resolves to |
+|---|---|
+| `{{span_input}}` | `meta.input.messages[*].content` for LLM spans, `meta.input.value` otherwise |
+| `{{span_output}}` | `meta.output.messages[*].content` for LLM spans, `meta.output.value` otherwise |
+
+The aliases adapt to the kind of span being evaluated, so you don't have to branch on whether the span is an LLM call or an agent step.
+
+### Direct field paths
+
+```
+{{name}}
+{{meta.input.value}}
+{{meta.output.value}}
+{{metrics.input_tokens}}
+```
+
+### Array access
+
+```
+{{meta.input.messages[0].content}}     # First message only
+{{meta.input.messages[*].content}}     # All messages, joined with newlines
+{{meta.input.messages[0,2].content}}   # Inclusive range; out-of-bounds ends are clamped
+{{meta.input.messages.content}}        # Implicit fan-out, equivalent to [*]
+```
+
 ## Resolution rules
 
 | Result | Behavior |
@@ -166,8 +166,8 @@ For example, given a span where `meta.input.messages` is:
 
 ## Tips
 
-- Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (span, trace, or session) and to the sample selected on the right.
-- Pick a sample in the panel on the right—{{< ui >}}Filtered Spans{{< /ui >}} (span scope), {{< ui >}}Spans in Selected Trace{{< /ui >}} (trace scope), or the sample session pane listing traces in the session (session scope)—then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving the configuration.
+- Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (session, trace, or span) and to the sample selected on the right.
+- Pick a sample in the panel on the right—the sample session pane listing traces in the session (session scope), {{< ui >}}Spans in Selected Trace{{< /ui >}} (trace scope), or {{< ui >}}Filtered Spans{{< /ui >}} (span scope)—then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving the configuration.
 - Use the three-dots menu on a sample's JSON view and select {{< ui >}}Add variable to message{{< /ui >}} to insert a field path into the prompt without typing it.
 - Pass `{{*}}` when you want the LLM judge to see the full payload—useful for free-form prompts that decide for themselves which fields matter.
 - Prefer `{{traces}}` or targeted `{{traces...].spans...}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluations][2] for scope guidance and example prompts.
@@ -178,3 +178,4 @@ For example, given a span where `meta.input.messages` is:
 
 [1]: /llm_observability/instrumentation/sdk/#tracking-user-sessions
 [2]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
+[3]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations

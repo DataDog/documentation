@@ -5484,21 +5484,21 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
-    - name: Trace-Level Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
-      weight: 40102
     - name: Session-Level Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
-      weight: 401021
+      weight: 40102
+    - name: Trace-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
+      weight: 40103
     - name: Prompt Templating
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
-      weight: 40103
+      weight: 40104
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
