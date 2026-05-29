@@ -328,7 +328,7 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Analyzes latency bottlenecks across traces during an anomaly period and returns a compact text summary using self-time calculations. Examines the top 30% slowest traces to identify which service and resource combinations consume the most self-time, detect cascading call patterns, and find root causes of latency spikes.
+Analyzes latency bottlenecks across traces in an anomaly period using self-time calculations. Identifies which service and resource combinations consume the most self-time, detects cascading call patterns, and surfaces root causes of latency spikes.
 
 - Summarize the latency bottlenecks for the checkout service between 2pm and 3pm today.
 - What is consuming the most self-time in the payments service during this latency spike?
