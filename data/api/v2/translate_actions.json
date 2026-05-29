@@ -2759,6 +2759,18 @@
     "request_description": "Update dataset payload.",
     "request_schema_description": "Request to partially update an LLM Observability dataset."
   },
+  "BatchUpdateLLMObsDataset": {
+    "description": "Insert, update, and delete records in a single dataset operation. By default, a new dataset version is created when the batch is applied.",
+    "summary": "Batch update LLM Observability dataset records",
+    "request_description": "Batch update payload.",
+    "request_schema_description": "Request to batch-insert, update, and delete records in an LLM Observability dataset."
+  },
+  "CloneLLMObsDataset": {
+    "description": "Clone a dataset, copying its current records into a new dataset within the same project.",
+    "summary": "Clone an LLM Observability dataset",
+    "request_description": "Clone dataset payload.",
+    "request_schema_description": "Request to clone an LLM Observability dataset."
+  },
   "GetLLMObsDatasetDraftState": {
     "description": "Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.",
     "summary": "Get LLM Observability dataset draft state"
@@ -2770,6 +2782,10 @@
   "UnlockLLMObsDatasetDraftState": {
     "description": "Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.",
     "summary": "Unlock LLM Observability dataset draft state"
+  },
+  "ExportLLMObsDataset": {
+    "description": "Download the contents of a dataset as a CSV file. The download is streamed and includes one row per dataset record.",
+    "summary": "Export an LLM Observability dataset"
   },
   "ListLLMObsDatasetRecords": {
     "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
@@ -2793,9 +2809,21 @@
     "request_description": "Delete records payload.",
     "request_schema_description": "Request to delete records from an LLM Observability dataset."
   },
+  "RestoreLLMObsDatasetVersion": {
+    "description": "Restore a dataset to a previous version. The dataset's current version is bumped, and its records are replaced with the records from the specified prior version.",
+    "summary": "Restore an LLM Observability dataset version",
+    "request_description": "Restore dataset version payload.",
+    "request_schema_description": "Request to restore an LLM Observability dataset to a previous version."
+  },
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
     "summary": "List LLM Observability dataset versions"
+  },
+  "UploadLLMObsDatasetRecordsFile": {
+    "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
+    "summary": "Upload records to an LLM Observability dataset",
+    "request_description": "Multipart upload payload containing the records file.",
+    "request_schema_description": "Multipart payload for uploading dataset records from a file."
   },
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
@@ -3554,28 +3582,28 @@
     "summary": "List permissions"
   },
   "ListPersonalAccessTokens": {
-    "description": "List all personal access tokens for the organization.",
-    "summary": "Get all personal access tokens"
+    "description": "List all access tokens for the organization.",
+    "summary": "Get all access tokens"
   },
   "CreatePersonalAccessToken": {
     "description": "Create a personal access token for the current user.",
     "summary": "Create a personal access token",
     "request_description": "",
-    "request_schema_description": "Request used to create a personal access token."
+    "request_schema_description": "Request used to create an access token."
   },
   "RevokePersonalAccessToken": {
     "description": "Revoke a specific personal access token.",
     "summary": "Revoke a personal access token"
   },
   "GetPersonalAccessToken": {
-    "description": "Get a specific personal access token by its UUID.",
+    "description": "Get a specific personal access token by its ID.",
     "summary": "Get a personal access token"
   },
   "UpdatePersonalAccessToken": {
     "description": "Update a specific personal access token.",
     "summary": "Update a personal access token",
     "request_description": "",
-    "request_schema_description": "Request used to update a personal access token."
+    "request_schema_description": "Request used to update an access token."
   },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
@@ -4014,6 +4042,20 @@
     "summary": "Create a RUM retention filter",
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
+  },
+  "ListPermanentRetentionFilters": {
+    "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
+    "summary": "Get all permanent RUM retention filters"
+  },
+  "GetPermanentRetentionFilter": {
+    "description": "Get a permanent RUM retention filter for a RUM application by its identifier.",
+    "summary": "Get a permanent RUM retention filter"
+  },
+  "UpdatePermanentRetentionFilter": {
+    "description": "Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.\nOnly fields marked as editable in the `editability` block of the filter can be updated.\nUpdating a non-editable field returns a `400` response.",
+    "summary": "Update a permanent RUM retention filter",
+    "request_description": "New configuration of the permanent RUM retention filter.",
+    "request_schema_description": "The permanent RUM retention filter body to update."
   },
   "DeleteRetentionFilter": {
     "description": "Delete a RUM retention filter for a RUM application.",
@@ -4677,6 +4719,12 @@
     "request_description": "",
     "request_schema_description": "Convert a rule from JSON to Terraform."
   },
+  "BulkConvertExistingSecurityMonitoringRules": {
+    "description": "Convert a list of existing security monitoring rules to Terraform for the Datadog provider\nresource `datadog_security_monitoring_rule`. Returns a ZIP archive containing one Terraform\nfile per rule. You can convert rules for the following types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection",
+    "summary": "Bulk convert rules to Terraform",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
+  },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
     "summary": "Test a rule",
@@ -4898,14 +4946,14 @@
     "summary": "Revoke an access token for a service account"
   },
   "GetServiceAccountAccessToken": {
-    "description": "Get a specific access token for a service account by its UUID.",
+    "description": "Get a specific access token for a service account by its ID.",
     "summary": "Get an access token for a service account"
   },
   "UpdateServiceAccountAccessToken": {
     "description": "Update a specific access token for a service account.",
     "summary": "Update an access token for a service account",
     "request_description": "",
-    "request_schema_description": "Request used to update a personal access token."
+    "request_schema_description": "Request used to update a service account access token."
   },
   "ListServiceAccountApplicationKeys": {
     "description": "List all application keys available for this service account.",

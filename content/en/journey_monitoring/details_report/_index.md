@@ -20,7 +20,7 @@ further_reading:
   text: 'Learn about journey uptime'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
@@ -28,7 +28,7 @@ Journey Monitoring is in Preview.
 
 Each journey has a details report that combines metrics and telemetry from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
 
-{{< img src="journey_monitoring/journey-monitoring-details-report.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-1.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
 
 ## Journey and variant filters
 
