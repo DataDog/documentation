@@ -10,9 +10,9 @@ further_reading:
     - link: '/integrations/amazon_sqs/'
       tag: 'Documentation'
       text: 'Amazon SQS Integration'
-    - link: '/tracing/software_catalog/'
+    - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
-      text: 'Software Catalog'
+      text: 'Catalog'
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
       tag: 'Blog'
       text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
@@ -117,7 +117,7 @@ Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup
 
 High lag on a consuming service, increased resource use on a Kafka broker, and increased RabbitMQ or Amazon SQS queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
 
-Click on the {{< ui >}}Throughput{{< /ui >}} tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Software Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
+Click on the {{< ui >}}Throughput{{< /ui >}} tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
 By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
@@ -135,7 +135,7 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_streams/go#manual-instrumentation
-[2]: /tracing/software_catalog/
+[2]: /internal_developer_portal/catalog/
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /integrations/kafka/
 [5]: /integrations/amazon_sqs/

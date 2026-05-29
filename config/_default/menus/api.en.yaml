@@ -3221,6 +3221,110 @@ menu:
         unstable:
           - v2
         order: 111
+    - name: Get the version history of a dataset
+      url: '#get-the-version-history-of-a-dataset'
+      identifier: security-monitoring-get-the-version-history-of-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetVersionHistory
+        unstable:
+          - v2
+        order: 126
+    - name: Get a dataset at a specific version
+      url: '#get-a-dataset-at-a-specific-version'
+      identifier: security-monitoring-get-a-dataset-at-a-specific-version
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDatasetByVersion
+        unstable:
+          - v2
+        order: 125
+    - name: Update a dataset
+      url: '#update-a-dataset'
+      identifier: security-monitoring-update-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 123
+    - name: Get a dataset
+      url: '#get-a-dataset'
+      identifier: security-monitoring-get-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 122
+    - name: Delete a dataset
+      url: '#delete-a-dataset'
+      identifier: security-monitoring-delete-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 124
+    - name: Get dataset dependencies
+      url: '#get-dataset-dependencies'
+      identifier: security-monitoring-get-dataset-dependencies
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchGetSecurityMonitoringDatasetDependencies
+        unstable:
+          - v2
+        order: 121
+    - name: Create a dataset
+      url: '#create-a-dataset'
+      identifier: security-monitoring-create-a-dataset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringDataset
+        unstable:
+          - v2
+        order: 120
+    - name: List datasets
+      url: '#list-datasets'
+      identifier: security-monitoring-list-datasets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringDatasets
+        unstable:
+          - v2
+        order: 119
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -3834,8 +3938,7 @@ menu:
           - v2
         operationids:
           - MuteSecurityFindings
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
@@ -6405,6 +6508,36 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: APM Trace
+      url: /api/latest/apm-trace/
+      identifier: apm-trace
+      generated: true
+    - name: Get a trace by ID
+      url: '#get-a-trace-by-id'
+      identifier: apm-trace-get-a-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTraceByID
+        unstable:
+          - v2
+        order: 1
+    - name: Get a pruned trace by ID
+      url: '#get-a-pruned-trace-by-id'
+      identifier: apm-trace-get-a-pruned-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPrunedTraceByID
+        unstable:
+          - v2
+        order: 2
     - name: Action Connection
       url: /api/latest/action-connection/
       identifier: action-connection
@@ -6848,6 +6981,75 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
+        order: 1
+    - name: Annotations
+      url: /api/latest/annotations/
+      identifier: annotations
+      generated: true
+    - name: Update an annotation
+      url: '#update-an-annotation'
+      identifier: annotations-update-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnnotation
+        unstable:
+          - v2
+        order: 4
+    - name: Delete an annotation
+      url: '#delete-an-annotation'
+      identifier: annotations-delete-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnnotation
+        unstable:
+          - v2
+        order: 5
+    - name: Get annotations for a page
+      url: '#get-annotations-for-a-page'
+      identifier: annotations-get-annotations-for-a-page
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPageAnnotations
+        unstable:
+          - v2
+        order: 3
+    - name: Create an annotation
+      url: '#create-an-annotation'
+      identifier: annotations-create-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnnotation
+        unstable:
+          - v2
+        order: 2
+    - name: List annotations
+      url: '#list-annotations'
+      identifier: annotations-list-annotations
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnnotations
+        unstable:
+          - v2
         order: 1
     - name: App Builder
       url: /api/latest/app-builder/
@@ -9023,6 +9225,19 @@ menu:
         unstable:
           - v2
         order: 59
+    - name: List Cloud Cost Management tag metadata months
+      url: '#list-cloud-cost-management-tag-metadata-months'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-metadata-months
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagMetadataMonths
+        unstable:
+          - v2
+        order: 66
     - name: List available Cloud Cost Management metrics
       url: '#list-available-cloud-cost-management-metrics'
       identifier: cloud-cost-management-list-available-cloud-cost-management-metrics
@@ -9086,6 +9301,54 @@ menu:
           - ListCostTagKeys
         unstable: []
         order: 46
+    - name: Generate a Cloud Cost Management tag description
+      url: '#generate-a-cloud-cost-management-tag-description'
+      identifier: cloud-cost-management-generate-a-cloud-cost-management-tag-description
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GenerateCostTagDescriptionByKey
+        unstable: []
+        order: 65
+    - name: Upsert a Cloud Cost Management tag description
+      url: '#upsert-a-cloud-cost-management-tag-description'
+      identifier: cloud-cost-management-upsert-a-cloud-cost-management-tag-description
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertCostTagDescriptionByKey
+        unstable: []
+        order: 64
+    - name: Get a Cloud Cost Management tag description
+      url: '#get-a-cloud-cost-management-tag-description'
+      identifier: cloud-cost-management-get-a-cloud-cost-management-tag-description
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostTagDescriptionByKey
+        unstable: []
+        order: 63
+    - name: Delete a Cloud Cost Management tag description
+      url: '#delete-a-cloud-cost-management-tag-description'
+      identifier: cloud-cost-management-delete-a-cloud-cost-management-tag-description
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCostTagDescriptionByKey
+        unstable: []
+        order: 62
     - name: List Cloud Cost Management tag descriptions
       url: '#list-cloud-cost-management-tag-descriptions'
       identifier: cloud-cost-management-list-cloud-cost-management-tag-descriptions
@@ -13541,6 +13804,62 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: OAuth2 Client Public
+      url: /api/latest/oauth2-client-public/
+      identifier: oauth2-client-public
+      generated: true
+    - name: Register an OAuth2 client
+      url: '#register-an-oauth2-client'
+      identifier: oauth2-client-public-register-an-oauth2-client
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RegisterOAuthClient
+        unstable:
+          - v2
+        order: 1
+    - name: Upsert an OAuth2 client scopes restriction
+      url: '#upsert-an-oauth2-client-scopes-restriction'
+      identifier: oauth2-client-public-upsert-an-oauth2-client-scopes-restriction
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertScopesRestriction
+        unstable:
+          - v2
+        order: 3
+    - name: Get an OAuth2 client scopes restriction
+      url: '#get-an-oauth2-client-scopes-restriction'
+      identifier: oauth2-client-public-get-an-oauth2-client-scopes-restriction
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScopesRestriction
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an OAuth2 client scopes restriction
+      url: '#delete-an-oauth2-client-scopes-restriction'
+      identifier: oauth2-client-public-delete-an-oauth2-client-scopes-restriction
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScopesRestriction
+        unstable:
+          - v2
+        order: 4
     - name: OCI Integration
       url: /api/latest/oci-integration/
       identifier: oci-integration
@@ -17243,6 +17562,18 @@ menu:
       url: /api/latest/storage-management/
       identifier: storage-management
       generated: true
+    - name: Delete a Storage Management configuration
+      url: '#delete-a-storage-management-configuration'
+      identifier: storage-management-delete-a-storage-management-configuration
+      parent: storage-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyncConfig
+        unstable: []
+        order: 2
     - name: Enable Storage Management for a bucket
       url: '#enable-storage-management-for-a-bucket'
       identifier: storage-management-enable-storage-management-for-a-bucket

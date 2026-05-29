@@ -267,6 +267,30 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "ListAnnotations": {
+    "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
+    "summary": "List annotations"
+  },
+  "CreateAnnotation": {
+    "description": "Creates a new annotation on a dashboard or notebook page.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Create an annotation",
+    "request_description": "Annotation to create.",
+    "request_schema_description": "Request body for creating an annotation."
+  },
+  "GetPageAnnotations": {
+    "description": "Returns all annotations on a specific page for a given time window, grouped by widget.\nUnlike `ListAnnotations`, this endpoint returns a single structured object with annotations\nindexed by their ID and a widget-to-annotation mapping for easy UI rendering.",
+    "summary": "Get annotations for a page"
+  },
+  "DeleteAnnotation": {
+    "description": "Deletes an existing annotation by ID.\nReturns `204 No Content` if the annotation does not exist (idempotent).",
+    "summary": "Delete an annotation"
+  },
+  "UpdateAnnotation": {
+    "description": "Updates an existing annotation.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Update an annotation",
+    "request_description": "Updated annotation payload.",
+    "request_schema_description": "Request body for updating an annotation."
+  },
   "AnonymizeUsers": {
     "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
     "summary": "Anonymize users",
@@ -1095,6 +1119,10 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
   },
+  "DeleteSyncConfig": {
+    "description": "Delete a Storage Management configuration by its unique identifier. Deleting a configuration stops inventory file synchronization for the associated cloud account.",
+    "summary": "Delete a Storage Management configuration"
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
@@ -1324,6 +1352,24 @@
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
   },
+  "DeleteCostTagDescriptionByKey": {
+    "description": "Delete a Cloud Cost Management tag key description. When `cloud` is omitted, deletes every description for the tag key, falling back to Datadog's global default when available. When `cloud` is provided, deletes only the description scoped to that cloud provider.",
+    "summary": "Delete a Cloud Cost Management tag description"
+  },
+  "GetCostTagDescriptionByKey": {
+    "description": "Get the Cloud Cost Management description for a single tag key. Use `filter[cloud]` to scope the lookup to a specific cloud provider; when omitted, the response resolves the description in fallback order (cloud-specific organization override, then cloudless organization default, then Datadog's global default).",
+    "summary": "Get a Cloud Cost Management tag description"
+  },
+  "UpsertCostTagDescriptionByKey": {
+    "description": "Create or update a Cloud Cost Management tag key description. The new description and optional cloud scoping are supplied in the request body. Omit `cloud` to set a cross-cloud default for the tag key.",
+    "summary": "Upsert a Cloud Cost Management tag description",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Cloud Cost Management tag key description."
+  },
+  "GenerateCostTagDescriptionByKey": {
+    "description": "Use AI to draft a Cloud Cost Management tag key description based on associated cost data. The generated description is returned in the response and is not persisted by this endpoint; follow up with `UpsertCostTagDescriptionByKey` to save it.",
+    "summary": "Generate a Cloud Cost Management tag description"
+  },
   "ListCostTagKeys": {
     "description": "List Cloud Cost Management tag keys.",
     "summary": "List Cloud Cost Management tag keys"
@@ -1343,6 +1389,10 @@
   "ListCostTagMetadataMetrics": {
     "description": "List Cloud Cost Management metrics that have data for the requested period.",
     "summary": "List available Cloud Cost Management metrics"
+  },
+  "ListCostTagMetadataMonths": {
+    "description": "List months that have Cloud Cost Management tag metadata for a given provider,\nordered most-recent first. The response is capped at 36 months.",
+    "summary": "List Cloud Cost Management tag metadata months"
   },
   "ListCostTagMetadataOrchestrators": {
     "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
@@ -3197,6 +3247,26 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "DeleteScopesRestriction": {
+    "description": "Delete the scopes restriction configured for the OAuth2 client.",
+    "summary": "Delete an OAuth2 client scopes restriction"
+  },
+  "GetScopesRestriction": {
+    "description": "Get the scopes restriction configured for the OAuth2 client.",
+    "summary": "Get an OAuth2 client scopes restriction"
+  },
+  "UpsertScopesRestriction": {
+    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
+    "summary": "Upsert an OAuth2 client scopes restriction",
+    "request_description": "",
+    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
+  },
+  "RegisterOAuthClient": {
+    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
+    "summary": "Register an OAuth2 client",
+    "request_description": "",
+    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
+  },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
     "summary": "List pipelines"
@@ -3620,6 +3690,10 @@
   "ListConnections": {
     "description": "List all data connections for an entity",
     "summary": "List connections"
+  },
+  "GetPrunedTraceByID": {
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a pruned trace by ID"
   },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
@@ -4532,6 +4606,44 @@
   "DeactivateContentPack": {
     "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
+  },
+  "ListSecurityMonitoringDatasets": {
+    "description": "List all Cloud SIEM datasets available to the organization, including both\ncustomer-defined datasets and Datadog out-of-the-box datasets.",
+    "summary": "List datasets"
+  },
+  "CreateSecurityMonitoringDataset": {
+    "description": "Create a new Cloud SIEM dataset. A dataset bundles a data source, a set of\nindexes, and a search query that can be referenced from detection rules.",
+    "summary": "Create a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a Cloud SIEM dataset."
+  },
+  "BatchGetSecurityMonitoringDatasetDependencies": {
+    "description": "Return, for each of the requested datasets, the list of detection rules that depend\non it. Useful for understanding the impact of updating or deleting a dataset.",
+    "summary": "Get dataset dependencies",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving dependencies of a batch of datasets."
+  },
+  "DeleteSecurityMonitoringDataset": {
+    "description": "Delete a Cloud SIEM dataset. Out-of-the-box datasets cannot be deleted and\ndeleting a dataset that is referenced by a detection rule is rejected.",
+    "summary": "Delete a dataset"
+  },
+  "GetSecurityMonitoringDataset": {
+    "description": "Get the current version of a Cloud SIEM dataset by ID.",
+    "summary": "Get a dataset"
+  },
+  "UpdateSecurityMonitoringDataset": {
+    "description": "Update an existing Cloud SIEM dataset. The current version of the dataset can be\nprovided to detect concurrent modifications.",
+    "summary": "Update a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a Cloud SIEM dataset."
+  },
+  "GetSecurityMonitoringDatasetByVersion": {
+    "description": "Retrieve a specific historical version of a Cloud SIEM dataset.",
+    "summary": "Get a dataset at a specific version"
+  },
+  "GetSecurityMonitoringDatasetVersionHistory": {
+    "description": "Retrieve the version history of a Cloud SIEM dataset, including the changes made at each version.",
+    "summary": "Get the version history of a dataset"
   },
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
@@ -5614,6 +5726,10 @@
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
+  },
+  "GetTraceByID": {
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a trace by ID"
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
