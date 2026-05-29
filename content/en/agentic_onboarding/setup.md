@@ -126,7 +126,7 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-**Option 1: Install deeplink (recommended).** Click the install deeplink for your [Datadog site][16], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+**Option 1: Install deeplink (recommended).** Click the install deeplink for your [Datadog site](/getting_started/site/), then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -143,7 +143,7 @@ In an active Claude Code session, run:
 
 {{% tab "Other MCP clients" %}}
 
-Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][16]:
+Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site](/getting_started/site/):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
 
@@ -187,24 +187,19 @@ Send the prompt that matches the product you want to set up:
 {{% tab "Serverless Monitoring" %}}
 
 **AWS Lambda**
-{{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
-```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
-```
+{{< code-block lang="text" >}}Add Datadog for AWS Lambda to my project{{< /code-block >}}
+
+{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
 
 **GCP Cloud Run containers**
-{{< code-block lang="text" >}}Help me monitor my GCP Cloud Run services with Datadog{{< /code-block >}}
+{{< code-block lang="text" >}}Add Datadog for GCP Cloud Run containers to my project{{< /code-block >}}
 
-```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
-```
+{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
 
 **GCP Cloud Run functions**
-{{< code-block lang="text" >}}Help me monitor my GCP Cloud Run functions with Datadog{{< /code-block >}}
+{{< code-block lang="text" >}}Add Datadog for GCP Cloud Run functions to my project{{< /code-block >}}
 
-```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions
-```
+{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
 
 
 {{% /tab %}}
