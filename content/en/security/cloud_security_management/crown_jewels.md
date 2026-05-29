@@ -23,7 +23,7 @@ Crown Jewels is an inventory of your most critical cloud resources, automaticall
 
 Most security teams have more findings than they can act on, but by knowing which resources matter most, you can start addressing the subset of findings that need attention first.
 
-Datadog generates the initial list for you by applying a set of detection rules across different sources of telemetry, including APM, logs, and cloud storage. From there, you can curate the list to match what matters most in your environment.
+Datadog generates the initial list for you by analyzing existing telemetry, including APM, logs, and cloud storage. From there, you can curate the list to match what matters most in your environment.
 
 ## What gets detected
 
@@ -39,15 +39,17 @@ Datadog adds a resource to the list when one or more detection signals indicate 
 
 ### Detection signals
 
+Crown Jewels can only make detections based on the telemetry sources that are enabled for a given resource. Coverage scales with the depth of your Datadog instrumentation; the richer your instrumentation is, the greater the surface Datadog can evaluate, and thus the more accurate your automatically detected list can be. 
+
+If a telemetry source for a signal type is missing and Datadog can't populate related resources automatically, you can still add resources manually.
+
 | Signal | Source | Example |
 |---|---|---|
 | Secrets in APM spans | APM trace data | A service with AWS access keys observed in span attributes |
-| Sensitive fields in logs | Sensitive Data Scanner | A service with credit card numbers, emails, or credentials detected in log events |
+| Sensitive fields in logs | Sensitive Data Scanner (must be enabled on relevant log indexes) | A service with credit card numbers, emails, or credentials detected in log events |
 | Sensitive column names | APM Database Monitoring | A database with columns named `password`, `ssn`, `email`, etc. |
 | Sensitive data at rest | Agentless Scanning + Sensitive Data Scanner | An S3 bucket containing PII, credentials, or other sensitive content |
 | Dependency choke point | APM service map | A service with high upstream caller count (failure or compromise has broad blast radius) |
-
-Crown Jewels can only make detections based on the telemetry sources that are enabled for a given resource. Coverage scales with the depth of your Datadog instrumentation.
 
 ## Use the list to filter findings
 
@@ -76,21 +78,6 @@ Treat the automatically generated list as a draft that you can curate so it refl
 
 - **Remove** entries that do not match your understanding of what is critical (for example, a service flagged because of a low-value URL string).
 - **Add** resources Datadog did not auto-detect but that you know are critical to your business.
-
-
-## Soft requirements
-
-Crown Jewels relies on telemetry from other Datadog products. The richer your instrumentation, the more accurate the auto-detected list. None of the items below are strictly required, you still get value from Crown Jewels without them, but each one increases the surface Datadog can evaluate.
-
-| To detect | You need |
-|---|---|
-| Services | APM enabled on the workload |
-| Database column names | APM with Database Monitoring instrumented queries |
-| Sensitive data in logs | Sensitive Data Scanner enabled on relevant log indexes |
-| Sensitive data in S3 | Agentless Scanning enabled with Sensitive Data Scanner for cloud storage |
-| Dependency choke points | APM service map populated (multiple instrumented services calling the target) |
-
-Crown Jewels does not require any new instrumentation. If a telemetry source is missing, the detection signals that depend on it are unavailable, and you can still add the corresponding resources manually.
 
 ## Privacy and data handling
 
