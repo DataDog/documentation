@@ -53,7 +53,7 @@ Ask Bits AI Data questions like:
 
 Query contexts are curated instructions per data domain, such as Product or Sales. Each context tells Bits AI Data which tables to use, which filters to apply, and which edge cases to avoid. Query contexts are what make Bits AI Data accurate and consistent.
 
-Bits AI Data can auto-generate query contexts from usage and metadata in your connected BI tools and data warehouses through [Data Observability][4]. Data teams then review and refine the generated instructions so anyone on the team can get reliable answers, without needing to be an analyst or wait on one.
+Bits AI Data can auto-generate query contexts from usage and metadata in your connected BI tools and data warehouses through [Data Observability][4]. Data teams then review and refine the generated instructions so anyone on the team can get reliable answers, without analyst expertise or analyst involvement.
 
 ### Example: revenue query context
 
@@ -64,7 +64,7 @@ A Revenue query context might include instructions such as:
 - Treat revenue as recognized in the currency of the parent account, converted to USD using the `fx_rate_daily` table.
 - Exclude churned customers from "active customer" counts unless the question explicitly asks about churn.
 
-### Evals
+### Evaluations
 
 Data teams can define evaluations against a query context to verify that Bits AI Data answers representative business questions correctly. An eval runs a set of expected question-and-answer pairs against the context. When an answer drifts from the expected result, the eval flags a regression so you can refine instructions before users see incorrect results.
 
