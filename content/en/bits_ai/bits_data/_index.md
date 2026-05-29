@@ -15,7 +15,9 @@ cascade:
     site_support_id: bits_data
 ---
 
-<div class="alert alert-info">Bits for Data is in Preview. Contact your Datadog representative to sign up.</div>
+{{< callout url="#" btn_hidden="true" header="false">}}
+  Bits for Data is in Preview. Contact your Datadog representative to sign up.
+{{< /callout >}}
 
 ## Overview
 
