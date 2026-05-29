@@ -7,29 +7,34 @@
  * pages land), absolute URLs pass through.
  */
 import { parse as parseYaml } from 'yaml';
+import { z } from 'zod';
 // @ts-ignore — Vite raw import
 import menusRaw from '@websites-modules/config/_default/menus/menus.en.yaml?raw';
 
-export type FooterMenuItem = {
-  name: string;
-  url: string;
-  target?: '_blank';
-  weight: number;
-};
+const FooterMenuItemSchema = z.object({
+  name: z.string(),
+  url: z.string(),
+  target: z.literal('_blank').optional(),
+  weight: z.number(),
+});
 
-export type FooterSocialItem = FooterMenuItem & {
-  pre: string;
-};
+export type FooterMenuItem = z.infer<typeof FooterMenuItemSchema>;
 
-type MenusFile = {
-  footer_resources: FooterMenuItem[];
-  footer_about: FooterMenuItem[];
-  footer_blog: FooterMenuItem[];
-  footer_sub: FooterMenuItem[];
-  footer_social: FooterSocialItem[];
-};
+const FooterSocialItemSchema = FooterMenuItemSchema.extend({
+  pre: z.string(),
+});
 
-const menus = parseYaml(menusRaw) as MenusFile;
+export type FooterSocialItem = z.infer<typeof FooterSocialItemSchema>;
+
+const MenusFileSchema = z.object({
+  footer_resources: z.array(FooterMenuItemSchema),
+  footer_about: z.array(FooterMenuItemSchema),
+  footer_blog: z.array(FooterMenuItemSchema),
+  footer_sub: z.array(FooterMenuItemSchema),
+  footer_social: z.array(FooterSocialItemSchema),
+});
+
+const menus = MenusFileSchema.parse(parseYaml(menusRaw));
 
 const byWeight = <T extends { weight: number }>(a: T, b: T) => a.weight - b.weight;
 

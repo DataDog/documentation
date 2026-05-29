@@ -1,23 +1,30 @@
 import { parse as parseYaml } from 'yaml';
+import { z } from 'zod';
 // @ts-ignore — Vite raw import
 import PARAMS_EN_YAML_RAW from '@hugo-site/config/_default/params.en.yaml?raw';
 
-export type BannerParams = {
-  desktop_message?: string;
-  mobile_message?: string;
-  background_color?: string;
-  gradient_color_one?: string;
-  gradient_color_two?: string;
-  external_link?: string;
-  link?: string;
-  custom_classes?: string;
-  icon?: string;
-  icon_color?: string;
-  custom_event_banner?: boolean;
-  html?: boolean;
-};
+const BannerParamsSchema = z.object({
+  desktop_message: z.string().optional(),
+  mobile_message: z.string().optional(),
+  background_color: z.string().optional(),
+  gradient_color_one: z.string().optional(),
+  gradient_color_two: z.string().optional(),
+  external_link: z.string().optional(),
+  link: z.string().optional(),
+  custom_classes: z.string().optional(),
+  icon: z.string().optional(),
+  icon_color: z.string().optional(),
+  custom_event_banner: z.boolean().optional(),
+  html: z.boolean().optional(),
+});
 
-const siteParams = parseYaml(PARAMS_EN_YAML_RAW) as { announcement_banner?: BannerParams };
+export type BannerParams = z.infer<typeof BannerParamsSchema>;
+
+const SiteParamsSchema = z.object({
+  announcement_banner: BannerParamsSchema.optional(),
+});
+
+const siteParams = SiteParamsSchema.parse(parseYaml(PARAMS_EN_YAML_RAW));
 
 export function getBannerParams(): BannerParams {
   return siteParams.announcement_banner ?? {};
