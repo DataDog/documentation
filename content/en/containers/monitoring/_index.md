@@ -33,7 +33,7 @@ Select the [**Autoscaling**][11] tab in the Kubernetes section to view scaling r
 
 ### Kubernetes Remediation
 
-Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits AI Dev Agent][14]. For more information, read the [Bits AI Kubernetes Remediation documentation][15].
+Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits Code][14]. For more information, read the [Bits AI Kubernetes Remediation documentation][15].
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-remediation/"
  btn_hidden="false" header="Join the Preview!">}}

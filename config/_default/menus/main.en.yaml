@@ -1515,7 +1515,7 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Bits AI SRE
+    - name: Bits Investigation
       url: bits_ai/bits_ai_sre
       identifier: bits_ai_sre
       parent: bits_ai
@@ -1530,7 +1530,7 @@ menu:
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE Integrations and Settings
+    - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
@@ -1540,12 +1540,12 @@ menu:
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
-    - name: Chat with Bits AI SRE
+    - name: Chat with Bits Investigation
       url: bits_ai/bits_ai_sre/chat_bits_ai_sre
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 500
-    - name: Bits AI Dev Agent
+    - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
       identifier: bits_ai_dev_agent
@@ -1560,7 +1560,7 @@ menu:
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
       weight: 3
-    - name: Bits AI Assistant
+    - name: Bits Chat
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
@@ -1580,7 +1580,7 @@ menu:
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
       weight: 502
-    - name: Agent Builder
+    - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
@@ -2314,7 +2314,7 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits AI Dev Agent
+    - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
       identifier: error_tracking_bits_ai_dev_agent
@@ -2847,7 +2847,7 @@ menu:
       weight: 9
     - name: Agents
       weight: 7
-    - name: Agent Builder
+    - name: Bits Agent Builder
       url: actions/agents/
       pre: robot-wui
       identifier: agents
