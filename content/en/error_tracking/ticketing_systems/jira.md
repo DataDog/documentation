@@ -174,7 +174,7 @@ When a Jira ticket is created from an Error Tracking issue, the ticket's {{< ui 
 
 ### A new Case Management project is created for each Jira ticket
 
-Datadog Case Management maps each Jira issue type to a different Case Management project. When you create a ticket from an Error Tracking issue using a Jira issue type that has not been used before, a new Case Management project is automatically created to link the Error Tracking issue and the Jira ticket. This means that creating tickets with several Jira issue types over time produces several Case Management projects, one per issue type.
+Datadog Case Management maps each Jira issue type to a different Case Management project. When you create a ticket from an Error Tracking issue using a Jira issue type that has not been used before, a new Case Management project is automatically created to link the Error Tracking issue and the Jira ticket. This behavior means that creating tickets with several Jira issue types over time produces several Case Management projects, one per issue type.
 
 ## Further reading
 
