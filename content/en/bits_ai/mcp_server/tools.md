@@ -1099,7 +1099,7 @@ Creates a new suppression rule that prevents a detection rule from generating si
 ### `update_datadog_security_suppression`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Write`*\
-Updates an existing suppression rule. Only provided fields are changed. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
+Updates an existing suppression rule. Only changes provided fields. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
 
 - Update the suppression for the brute force rule to also exclude `10.0.0.2`.
 - Change the expiration date on suppression `sup-456-xyz` to next quarter.
