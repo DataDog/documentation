@@ -28,18 +28,6 @@ const VIEW_MODES = ['fullscreen', 'floating', 'sidebar'];
 const DEFAULT_VIEW_MODE = 'fullscreen';
 const VIEW_MODE_STORAGE_KEY = 'docs-ai-view-mode';
 
-// Resize config for each mode that supports drag-to-resize. Each mode lists
-// the dimensions it exposes (width / height); a missing dimension means that
-// axis isn't resizable in that mode (e.g. sidebar has no height because it
-// spans the full viewport vertically).
-//
-// Per-dimension fields:
-//   - cssVar / storageKey: where the value is written / persisted
-//   - default / min / maxPx / maxViewportPct: clamp bounds (kept in sync
-//     with the matching CSS so JS and CSS agree on limits)
-//   - viewportOffset: distance in px from the corresponding viewport edge
-//     (right for width, bottom for height) to the panel's anchored edge —
-//     used to derive new size from raw pointer coordinates
 const RESIZABLE_MODES = {
     sidebar: {
         width: {
@@ -74,16 +62,12 @@ const RESIZABLE_MODES = {
     },
 };
 
-// Which dimensions each handle drives. The `data-resize` attribute in the
-// markup maps directly to a key here.
 const HANDLE_AXES = {
     left: ['width'],
     top: ['height'],
     corner: ['width', 'height'],
 };
 
-// Cursor shown on the body while a handle is being dragged. Inline on the
-// body so it overrides any element-specific cursors the pointer is over.
 const HANDLE_CURSORS = {
     left: 'col-resize',
     top: 'row-resize',
@@ -128,8 +112,6 @@ function clampSize(mode, dim, px) {
     return Math.max(cfg.min, Math.min(px, max));
 }
 
-// Walk every (mode, dim) pair in RESIZABLE_MODES. Saves three levels of
-// nested loops at every call site.
 function forEachResizable(callback) {
     Object.entries(RESIZABLE_MODES).forEach(([mode, dims]) => {
         Object.keys(dims).forEach((dim) => callback(mode, dim));
@@ -350,7 +332,6 @@ class ConversationalSearch {
             });
         });
 
-        // Click anywhere else closes the dropdown.
         document.addEventListener('click', (e) => {
             if (!this.isModeMenuOpen) return;
             if (this.modeMenu.contains(e.target) || this.modeToggleBtn.contains(e.target)) return;
@@ -358,9 +339,6 @@ class ConversationalSearch {
         });
     }
 
-    // Writes the clamped size into the mode/dim-specific CSS variable. The
-    // panel (and, for the sidebar's width, the body push + nav shrink) all
-    // read from there, so writing the variable is the entire "apply" step.
     applyPanelSize(mode, dim, px) {
         const cfg = RESIZABLE_MODES[mode]?.[dim];
         if (!cfg) return;
@@ -378,8 +356,6 @@ class ConversationalSearch {
             this.bindResizeHandle(handle, axes);
         });
 
-        // Re-clamp every resizable (mode, dim) on viewport resize so persisted
-        // values stay within bounds when the window shrinks.
         window.addEventListener('resize', () => {
             forEachResizable((mode, dim) => {
                 const current = this.panelSizes[mode][dim];
@@ -389,10 +365,6 @@ class ConversationalSearch {
         });
     }
 
-    // Wire pointerdown/move/up for a single handle. The handle's axes
-    // determine which dimension(s) the drag drives; the current `viewMode`
-    // determines whether the handle is active at all (a handle whose axes
-    // aren't all resizable in the current mode is a no-op).
     bindResizeHandle(handle, axes) {
         const axisKey = handle.dataset.resize;
         let pointerId = null;
@@ -400,9 +372,6 @@ class ConversationalSearch {
 
         const onPointerMove = (e) => {
             if (!activeMode) return;
-            // Each axis maps pointer coords to a size: width is distance from
-            // the right edge of the viewport (minus the panel's right gutter),
-            // height is distance from the bottom edge (minus bottom gutter).
             axes.forEach((dim) => {
                 const cfg = RESIZABLE_MODES[activeMode][dim];
                 if (!cfg) return;
@@ -441,8 +410,6 @@ class ConversationalSearch {
 
         handle.addEventListener('pointerdown', (e) => {
             const modeCfg = RESIZABLE_MODES[this.viewMode];
-            // Handle is only active if the current mode supports every axis
-            // this handle drives, and only for primary button / touch / pen.
             if (!modeCfg || e.button !== 0) return;
             if (!axes.every((dim) => modeCfg[dim])) return;
             e.preventDefault();
@@ -582,7 +549,6 @@ class ConversationalSearch {
             btn.setAttribute('aria-checked', String(isActive));
         });
 
-        // Floating/sidebar modes coexist with page content — no backdrop, no scroll lock.
         const isFullscreen = mode === 'fullscreen';
         if (this.isOpen) {
             this.overlay.classList.toggle('open', isFullscreen);
@@ -592,8 +558,6 @@ class ConversationalSearch {
         this.updateBodyPush();
     }
 
-    // Sidebar mode reserves space on the right by adding padding to <body>.
-    // Centralized so open()/close()/applyViewMode() all agree on the truth.
     updateBodyPush() {
         const shouldPush = this.isOpen && this.viewMode === 'sidebar';
         document.body.classList.toggle('docs-ai-sidebar-pushed', shouldPush);

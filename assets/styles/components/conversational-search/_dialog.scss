@@ -2,23 +2,12 @@
 $conv-float-btn-bg: #632CA6;
 $conv-float-btn-bg-hover: #4f2384;
 
-// Single source of truth for each resizable mode's width. JS owns the values
-// (drag handler clamps + writes them); CSS just reads them. Defaults here
-// only matter for the first render before JS has initialized.
-//   - sidebar:  shared by .mode-sidebar width, body.docs-ai-sidebar-pushed
-//               padding-right, and the right-edge clip applied to the fixed
-//               top chrome (one variable, three consumers, zero drift).
-//   - floating: feeds .mode-floating width.
 :root {
     --docs-ai-sidebar-width: 440px;
     --docs-ai-floating-width: 420px;
     --docs-ai-floating-height: 570px;
 }
 
-// Sidebar mode pushes the page content leftward by the sidebar width, and we
-// also pull the right edge of the fixed top chrome inward by the same amount
-// so the sidebar takes the full viewport height without ever covering the
-// navbar.
 body {
     transition: padding-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -27,8 +16,6 @@ body {
     }
 
     @media (max-width: 640px) {
-        // On small viewports the sidebar collapses to a full takeover, so the
-        // push effect (and its transition) would only cause a flicker.
         transition: none;
 
         &.docs-ai-sidebar-pushed {
@@ -37,9 +24,6 @@ body {
     }
 }
 
-// Fixed top chrome (announcement banner + main nav) shrinks from the right
-// when the sidebar is pushed. `transition` lives on the elements themselves
-// so the close animation is symmetric with the open one.
 .announcement-banner,
 .main-nav-wrapper,
 .main-nav-wrapper .main-nav {
@@ -160,10 +144,6 @@ body.docs-ai-sidebar-pushed {
     }
 
     // --- Mode: Floating (small bottom-right panel) ------------------------
-    // Width and height are both driven by CSS variables so the user can drag
-    // any of the three handles (left edge → width, top edge → height,
-    // top-left corner → both). `right: 24px; bottom: 24px;` keep the
-    // bottom-right corner pinned while dragging grows the panel up/left.
     &.mode-floating {
         bottom: 24px;
         right: 24px;
@@ -183,9 +163,6 @@ body.docs-ai-sidebar-pushed {
     }
 
     // --- Mode: Sidebar (right-docked, full height) ------------------------
-    // The sidebar spans the full viewport height — the top chrome is shrunk
-    // from the right by the same amount (see `body.docs-ai-sidebar-pushed`
-    // above) so the sidebar never has to dodge it.
     &.mode-sidebar {
         top: 0;
         right: 0;
@@ -194,8 +171,8 @@ body.docs-ai-sidebar-pushed {
         transform-origin: right center;
         width: var(--docs-ai-sidebar-width);
         min-width: 280px;
-        // String-interpolated so Sass passes the CSS-native min() through to
-        // the browser instead of trying to evaluate vw and px together.
+        // String-interpolated so Sass passes the CSS-native min() through
+        // verbatim instead of trying to evaluate vw and px together.
         max-width: #{"min(800px, 92vw)"};
         border-radius: 0;
         border-left: 1px solid $conv-search-border;
@@ -256,8 +233,7 @@ body.docs-ai-sidebar-pushed {
     border-bottom: 1px solid $conv-search-border;
     flex-shrink: 0;
     position: relative;
-    // Sits above .conv-search-messages (z-index: 1) so the view-mode dropdown
-    // can overlap the messages area instead of being clipped behind it.
+    // Above .conv-search-messages so the view-mode dropdown isn't clipped.
     z-index: 2;
 
     @media (max-width: 640px) {
@@ -567,7 +543,6 @@ body.docs-ai-sidebar-pushed {
     }
 }
 
-// Hide the mode switcher on small viewports — all modes collapse to fullscreen takeover.
 @media (max-width: 640px) {
     .conv-search-mode-switcher {
         display: none;
@@ -575,14 +550,6 @@ body.docs-ai-sidebar-pushed {
 }
 
 // --- Resize handles ----------------------------------------------------------
-// Three thin invisible strips/dots on the panel's edges, each tagged with
-// `data-resize` (the JS reads this to know which dimension(s) to drive).
-// Visibility is mode-gated below: sidebar mode shows just the left edge,
-// floating mode exposes all three (left, top, top-left corner).
-//
-// The visible "rail" is a 1px purple line that brightens on hover/drag and
-// sits flush with the panel's edge. The corner handle reuses the same look
-// via an L-shaped indicator.
 .conv-search-resize-handle {
     display: none;
     position: absolute;
@@ -590,7 +557,6 @@ body.docs-ai-sidebar-pushed {
     z-index: 2;
 }
 
-// Left edge — width resizer. Lives in both sidebar and floating modes.
 .conv-search-sidebar.mode-sidebar .conv-search-resize-handle--left,
 .conv-search-sidebar.mode-floating .conv-search-resize-handle--left {
     display: block;
@@ -613,7 +579,6 @@ body.docs-ai-sidebar-pushed {
     }
 }
 
-// Top edge — height resizer. Floating only (sidebar is already full height).
 .conv-search-sidebar.mode-floating .conv-search-resize-handle--top {
     display: block;
     top: 0;
@@ -635,9 +600,7 @@ body.docs-ai-sidebar-pushed {
     }
 }
 
-// Top-left corner — drives both width and height at once. Floating only.
-// Sits above the edge handles in the corner overlap so the diagonal cursor
-// wins over col/row when the pointer is in the corner zone.
+// z-index above the edge handles so the diagonal cursor wins in the overlap.
 .conv-search-sidebar.mode-floating .conv-search-resize-handle--corner {
     display: block;
     top: 0;
@@ -647,8 +610,6 @@ body.docs-ai-sidebar-pushed {
     cursor: nwse-resize;
     z-index: 3;
 
-    // L-shaped corner mark (two 1px segments) — same brighten behaviour as
-    // the edge indicators so the three handles feel like one family.
     &::after {
         content: "";
         position: absolute;
@@ -662,10 +623,8 @@ body.docs-ai-sidebar-pushed {
     }
 }
 
-// Lit-state for each indicator. Highlights are axis-scoped via the body
-// classes JS adds during a drag (`docs-ai-panel-resizing-width` /
-// `-height`), so dragging the left handle only lights the left rail,
-// dragging the corner lights all three (since it drives both axes).
+// Lit-state per axis. JS adds `docs-ai-panel-resizing-{width,height}` on
+// the body during a drag, so only the relevant rails light up.
 .conv-search-resize-handle--left:hover::after,
 body.docs-ai-panel-resizing-width .conv-search-resize-handle--left::after {
     background: $conv-search-purple;
@@ -682,9 +641,8 @@ body.docs-ai-panel-resizing-width.docs-ai-panel-resizing-height .conv-search-res
     border-left-color: $conv-search-purple;
 }
 
-// Floating mode has a 20px border-radius — inset the edge handles' hit areas
-// past the curve so they line up with the straight portions of the edges.
-// (The corner handle owns the rounded section itself.)
+// Inset past the 20px corner radius so edge handles align with the straight
+// portions of the edges; the corner handle owns the rounded section itself.
 .conv-search-sidebar.mode-floating .conv-search-resize-handle--left {
     top: 20px;
     bottom: 20px;
@@ -694,10 +652,7 @@ body.docs-ai-panel-resizing-width.docs-ai-panel-resizing-height .conv-search-res
     right: 20px;
 }
 
-// While the user is dragging any handle, kill transitions on everything
-// involved so the resize feels immediate (no rubber-banding from the
-// padding-right transition on body or width/height transition on the panel).
-// The actual cursor is set inline by JS based on which axis is active.
+// Kill transitions during a drag so the resize tracks the pointer 1:1.
 body.docs-ai-panel-resizing {
     user-select: none;
     transition: none !important;
@@ -708,8 +663,6 @@ body.docs-ai-panel-resizing {
 }
 
 // --- Compact-mode header tweaks (floating + sidebar) -------------------------
-// In the narrower modes there isn't room for a labeled "New Question" pill, so
-// we collapse it to a circular icon button that matches the close/mode icons.
 .conv-search-sidebar.mode-floating,
 .conv-search-sidebar.mode-sidebar {
     .conv-search-header {
