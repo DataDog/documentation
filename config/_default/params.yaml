@@ -281,7 +281,7 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   ai_agents_console: [gov, gov2]
-  bring_your_own_cloud: [gov]
+  byoc-logs: [gov]
   actions: [gov,gov2]
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
