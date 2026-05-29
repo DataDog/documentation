@@ -49,20 +49,21 @@ If a telemetry source for a signal type is missing and Datadog can't populate re
 | Sensitive fields in logs | Sensitive Data Scanner (must be enabled on relevant log indexes) | A service with credit card numbers, emails, or credentials detected in log events |
 | Sensitive column names | APM Database Monitoring | A database with columns named `password`, `ssn`, `email`, etc. |
 | Sensitive data at rest | Agentless Scanning + Sensitive Data Scanner | An S3 bucket containing PII, credentials, or other sensitive content |
-| Dependency choke point | APM service map | A service with high upstream caller count (failure or compromise has broad blast radius) |
+| Dependency fan-in | APM service map | A high fan-in service with a wide dependency has a major blast radius if compromised) |
 
 ## Use the list to filter findings
 
-Every resource on the Crown Jewels list is tagged `@risk.is_crown_jewel:true`. The tag propagates to findings associated with that resource through Datadog's security data model. All of the following would be marked as crown jewel findings:
+Every finding on the Crown Jewels list is tagged with `@risk.is_crown_jewel:true`. The tag propagates to findings associated with that resource through Datadog's security data model. All of the following would be marked as crown jewel findings:
 
 - A misconfiguration on a virtual machine attached to a crown jewel service
-- A vulnerability in a container image running on a crown jewel service
-- An identity risk involving a role with access to a crown jewel resource
+- A vulnerability in a container image used by a crown jewel service
 
 This propagation lets you use `@risk.is_crown_jewel:true` as a filter or facet in:
 
 - **Vulnerability Explorer** to focus remediation on findings tied to critical resources.
-- **Misconfiguration Explorer** to scope hardening work (including identity risks) to the assets that matter most.
+- **Misconfiguration Explorer** to scope hardening work to the assets that matter most.
+- **Notifications** to route notifications differently for crown jewel assets.
+- **Findings Automation** to define custom remediation patterns for findings related to crown jewels.
 
 You can combine the filter with other criteria; for example, you can filter the Vulnerability Explorer to `severity:critical` AND `@risk.is_crown_jewel:true`.
 
