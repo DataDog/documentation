@@ -51,10 +51,6 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
 1. Pick a sample session from the panel on the right. The pane lists the traces in that session, with the fields referenced by your prompt highlighted.
 
-   {{< img src="llm_observability/evaluations/session_level_sample_session.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
-
-   Clicking on a session then lists the traces in that session, with the fields referenced by your prompt highlighted.
-
    {{< img src="llm_observability/evaluations/session_level_sample_session_trace_view.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
 
 
