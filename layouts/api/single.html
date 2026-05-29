@@ -59,7 +59,7 @@
             {{ range $versionIndex, $versionNum := $versions }}
               {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
               {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
-              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "spec" $adat "generalRegions" $generalRegions ) }}
+              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
               <li class="nav-item">
                 <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt $versionCount 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq $versionCount 1) }}disabled{{ end }}" data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
@@ -80,7 +80,7 @@
         {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
         {{ $dot.Scratch.Set "regions" $generalRegions }}
 
-        {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "spec" $adat "generalRegions" $generalRegions ) }}
+        {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
         {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
 
         <div data-title="{{ $versionNum }}" id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="tab-pane {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">

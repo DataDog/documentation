@@ -33,7 +33,7 @@ v1 first but the active tab is v2; mirror that here using endpoint-visibility. *
 {{ range $versionNum := $versions }}
   {{ $vSpec := cond (eq $versionNum "v1") $d $d2 }}
   {{ $vRegions := partial "api/regions.html" (dict "servers" $vSpec.servers) }}
-  {{ $vEndpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "spec" $vSpec "generalRegions" $vRegions) }}
+  {{ $vEndpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "version" $versionNum "generalRegions" $vRegions) }}
   {{ if $vEndpoint }}
     {{ $vVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $vEndpoint) }}
     {{ if $vVisibility.isVisibleVersion }}
@@ -44,7 +44,7 @@ v1 first but the active tab is v2; mirror that here using endpoint-visibility. *
 
 {{ $adat := cond (eq $primaryVersion "v1") $d $d2 }}
 {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
-{{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions) }}
+{{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "version" $primaryVersion "generalRegions" $generalRegions) }}
 
 {{ if $endpoint }}
   {{ $isDeprecated := $endpoint.action.deprecated | default false }}
