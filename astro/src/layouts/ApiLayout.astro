@@ -127,14 +127,14 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
       transition: top 0.2s ease-in-out;
     }
 
-    :global(.main-nav-scrolled) .api-toolbar {
+    :global([data-scrolled]) .api-toolbar {
       top: calc(
         var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled)
       );
     }
   }
 
-  :global(.main-nav-scrolled) .api-toolbar {
+  :global([data-scrolled]) .api-toolbar {
     padding: var(--space-md) var(--space-xl) var(--space-md) 29px;
   }
 
@@ -152,7 +152,7 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
       padding: var(--space-sm) var(--space-md) 0;
     }
 
-    :global(.main-nav-scrolled) .api-toolbar {
+    :global([data-scrolled]) .api-toolbar {
       padding: var(--space-md);
     }
 

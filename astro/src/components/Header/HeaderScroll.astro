@@ -1,9 +1,9 @@
 ---
-// Inline scroll listener that toggles the `.main-nav-scrolled` class on
-// <html> once the user has scrolled past the threshold. The class drives
-// the discrete shrink: nav 130→65px, bits logo 75→50px, wordmark hidden,
-// and the LogoDownloadPanel offset. Matches Hugo's Tailwind nav partial
-// (`tailwind-main-nav.html` toggles `navScrolled` at `scrollY > 30`).
+// Inline scroll listener that sets `data-scrolled` on <html> once the user
+// has scrolled past the threshold. The attribute drives the discrete shrink:
+// nav 130→65px, bits logo 75→50px, wordmark hidden, and the LogoDownloadPanel
+// offset. Matches Hugo's Tailwind nav partial (`tailwind-main-nav.html`
+// toggles `navScrolled` at `scrollY > 30`).
 ---
 
 <script is:inline>
@@ -20,9 +20,9 @@
       var scrolled = window.innerWidth >= DESKTOP_MIN_WIDTH
         && window.scrollY > SCROLLED_THRESHOLD;
       if (scrolled) {
-        root.classList.add('main-nav-scrolled');
+        root.dataset.scrolled = '';
       } else {
-        root.classList.remove('main-nav-scrolled');
+        delete root.dataset.scrolled;
       }
       ticking = false;
     }

@@ -25,7 +25,7 @@
     transition: top 0.2s ease-in-out, max-height 0.2s ease-in-out;
   }
 
-  :global(.main-nav-scrolled) .api-side-nav {
+  :global([data-scrolled]) .api-side-nav {
     top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled));
     max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop-scrolled));
   }

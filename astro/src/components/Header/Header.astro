@@ -2,19 +2,21 @@
 import styles from "./Header.module.css";
 import NavDropdown from "./NavDropdown.tsx";
 import ProductMegaMenu from "./ProductMegaMenu.tsx";
-import LogoDownloadPanel from "./LogoDownloadPanel.astro";
+import { LogoDownloadPanel } from "./LogoDownloadPanel.tsx";
 import HeaderScroll from "./HeaderScroll.astro";
 import MobileNav, {
   type MobileNavLabels,
 } from "@components/MobileNav/MobileNav.tsx";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { getHeaderData } from "@lib/componentUtils/menuData.ts";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
 import { i18n } from "@lib/i18n/i18n";
 import { IMAGES_URL } from "@config/images.ts";
 
 const cl = classListFactory(styles);
 
 const headerData = getHeaderData();
+const logoTriggerId = generateElementId("header__logo-column");
 
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
@@ -30,6 +32,21 @@ const bitsLogoUrl = `${IMAGES_URL}/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&
 const textLogoUrl = `${IMAGES_URL}/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807`;
 const mobileLogoUrl = `${IMAGES_URL}/img/datadog_rbg_n_2x.png`;
 const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
+
+const logoPanelArrowIcons = import.meta.glob<string>(
+  "../../mocked-dependencies/websites_modules/static/icons/modal-up-arrow.svg",
+  { query: "?raw", import: "default", eager: true },
+);
+const logoPanelArrowSvg =
+  logoPanelArrowIcons[
+    "../../mocked-dependencies/websites_modules/static/icons/modal-up-arrow.svg"
+  ] ?? "";
+const logoPanelLabels = {
+  eyebrow: "Looking for Datadog logos?",
+  body: "You can find the logo assets on our press page.",
+  cta: "Download Media Assets",
+};
+const logoPanelCtaHref = "https://www.datadoghq.com/about/resources/";
 ---
 
 <div class={cl("header__wrapper")}>
@@ -101,7 +118,7 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 
         {/* Logo */}
         <div class="header__logo-slot">
-          <a href="/" class={cl("header__logo-column")}>
+          <a href="/" id={logoTriggerId} class={cl("header__logo-column")}>
             <img
               height="75"
               class={cl("header__logo-bits")}
@@ -116,7 +133,16 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
               srcset={`${textLogoUrl} 1x, ${textLogoUrl}&dpr=2 2x`}
               alt="Datadog"
             />
-            <LogoDownloadPanel />
+            <LogoDownloadPanel
+              client:load
+              externalContext={{
+                scope: logoTriggerId,
+                entries: { trigger: logoTriggerId },
+              }}
+              labels={logoPanelLabels}
+              svgs={{ arrow: logoPanelArrowSvg }}
+              ctaHref={logoPanelCtaHref}
+            />
           </a>
         </div>
 

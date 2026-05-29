@@ -42,7 +42,7 @@
     height: var(--hugo-header-height-desktop);
   }
 
-  :global(.main-nav-scrolled) .header__nav {
+  :global([data-scrolled]) .header__nav {
     height: var(--hugo-header-height-desktop-scrolled);
   }
 }
@@ -185,14 +185,13 @@
    opacity 1→0 both running for 200ms). The wordmark hides instantly because
    interpolating only `height` while `width` stays fixed at 93px visibly
    squashes the 807×14 source image. */
-:global(.main-nav-scrolled) .header__logo-text {
+:global([data-scrolled]) .header__logo-text {
   display: none;
 }
 
-:global(.main-nav-scrolled) .header__logo-bits {
+:global([data-scrolled]) .header__logo-bits {
   height: 50px;
 }
-
 
 /* Search toggle (not rendered on desktop docs; kept for parity / styling parent) */
 .header__search-toggle {
@@ -259,7 +258,7 @@
 }
 
 .header__btn-gradient:hover,
-:global(.main-nav-scrolled) .header__btn-gradient {
+:global([data-scrolled]) .header__btn-gradient {
   color: #ffffff;
   background: linear-gradient(
     to right,
