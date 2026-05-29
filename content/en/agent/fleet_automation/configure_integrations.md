@@ -23,7 +23,7 @@ Fleet Automation can deploy, update, and remove [integration][1] configuration f
 
 - [Remote Configuration][2] enabled for your organization
 - Agent version 7.76 or later
-- Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
+- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
 
 <div class="alert alert-info">
 Configuring integrations on Agents in containerized workloads is not supported.
@@ -59,12 +59,12 @@ Custom checks are **not** supported.
 
 Each operation applies changes to the integration's `conf.d` configuration file differently:
 
-- {{< ui >}}Add New{{< /ui >}}: Deploys a new integration configuration file. If an existing configuration file exists, it is replaced entirely and the YAML you provide becomes the complete new configuration for that integration on the target Agents.
+- {{< ui >}}Add New{{< /ui >}}: Deploys a new integration configuration file. If a configuration file already exists, it is replaced entirely and the YAML you provide becomes the complete new configuration for that integration on the target Agents.
 
 - {{< ui >}}Edit & Replace{{< /ui >}}: Applies a targeted change using JSON Merge Patch ([RFC 7386][5]). Only the fields you specify are modified; unmentioned fields remain unchanged.
 
   <div class="alert alert-warning">
-  Array fields (such as <code>tags</code>) are fully replaced during an Update, not merged. Include all desired values in your update. Any values you omit are removed.
+  Array fields (such as <code>tags</code>) are fully replaced during an Edit & Replace, not merged. Include all desired values in your update. Any values you omit are removed.
   </div>
 
 - {{< ui >}}Delete{{< /ui >}}: Removes the integration configuration file from the target Agents.
