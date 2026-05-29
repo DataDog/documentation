@@ -6,7 +6,7 @@ private: true
 
 {{< callout url="https://www.datadoghq.com/product-preview/findings" btn_hidden="false" header="Join the Preview for Log Findings!" >}}
 Findings for Log Explorer is in Preview.
-{{< /callout >}} -->
+{{< /callout >}}
 
 ## Overview
 
