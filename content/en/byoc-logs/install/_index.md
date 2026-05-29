@@ -37,9 +37,6 @@ BYOC Logs supports the following object storage types:
 - Amazon S3
 - Google Cloud Storage (GCS)
 - Azure Blob Storage
-- MinIO
-- Ceph Object Storage
-- Any S3-compatible storage
 
 ## Cloud-managed Kubernetes
 
