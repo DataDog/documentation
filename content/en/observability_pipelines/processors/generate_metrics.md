@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and networks logs. Use the generate metrics processor to generate either a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
+Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the generate metrics processor to generate count, gauge, or distribution metrics from logs that match a query.
 
 **Note**: The metrics generated are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
@@ -38,11 +38,11 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 
 You can generate these types of metrics for your logs. See the [Metrics types][3] and [Distributions][4] documentation for more details.
 
-| Metric type  | Description                                                                                                                                     | Example                                                                                             |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| COUNT        | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased.                | You want to count the number of logs with `status:error`.                                         |
-| GAUGE        | Represents a snapshot of events in one time interval.                                                                                           | You want to measure the latest CPU utilization per host for all logs in the production environment. |
-| DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made.                           |
+| Metric type  | Description                                                                                                                                         | Example                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| COUNT        | The total number of event occurrences in one time interval. Can be reset to zero, but cannot be decreased.                                          | You want to count the number of logs with `status:error`.                                     |
+| GAUGE        | A snapshot of a value at the time it is reported.                                                                                                   | You want to track the latest CPU utilization per host.                                        |
+| DISTRIBUTION | Raw values sent to Datadog so percentile aggregations (such as p95, p99) are computed server-side, globally across every host reporting the metric. | You want the global p95 of `response_time_seconds` across every host serving an API endpoint. |
 
 ##### Count metric example
 

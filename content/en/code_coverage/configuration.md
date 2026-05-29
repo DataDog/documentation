@@ -43,11 +43,13 @@ gates:
   - type: patch_coverage_percentage
     config:
       threshold: 95
+comments:
+  enabled: true
 ```
 
 ## Services configuration
 
-<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Software Catalog integration</a> is the recommended approach for defining services, as code locations configured in Software Catalog can be used by multiple Datadog products. Use manual configuration only when Software Catalog integration is not available.</div>
+<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Catalog integration</a> is the recommended approach for defining services, as code locations configured in Catalog can be used by multiple Datadog products. Use manual configuration only when Catalog integration is not available.</div>
 
 You can define services in your configuration file to split coverage data by service in monorepos. This is useful when multiple projects or teams share a single repository and you want to view coverage metrics for each service independently.
 
@@ -68,7 +70,7 @@ services:
   - `id` (required): Unique identifier for the service
   - `paths` (required): List of path patterns that belong to this service (see [Pattern syntax](#pattern-syntax))
 
-For complete details on monorepo support, including Software Catalog integration and code owner-based splitting, see [Monorepo Support][1].
+For complete details on monorepo support, including Catalog integration and code owner-based splitting, see [Monorepo Support][1].
 
 ### Examples
 
@@ -290,6 +292,18 @@ gates:
         - "!nightly-*"
 {{< /code-block >}}
 {{% /collapse-content %}}
+
+## PR Comments
+
+By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.enabled` field.
+
+PR Gate checks are not affected by this setting.
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+comments:
+  enabled: false
+{{< /code-block >}}
 
 ## Carryforward
 

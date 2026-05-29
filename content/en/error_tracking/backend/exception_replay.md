@@ -58,8 +58,8 @@ below for details.
 | **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
 
-To enable Exception Replay in-app, navigate to the Exception Replay **Settings** page in Error Tracking, select the
-desired environment or service, and toggle it to **Enabled**.
+To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in Error Tracking, select the
+desired environment or service, and toggle it to {{< ui >}}Enabled{{< /ui >}}.
 
 {{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="Enabling Exception Replay through the setting page" style="width:90%" >}}
 
@@ -100,8 +100,8 @@ snapshots become available.
 
 Exception Replay has two redaction modes:
 
-- **Strict Mode:** Redacts all values except numbers and Booleans.
-- **Targeted Mode:** Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in snapshots.
+- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans.
+- {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in snapshots.
 
 These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common
 pre-production environments like `staging` or `preprod`.

@@ -87,6 +87,41 @@ multifiltersearch:
       scope: Backend services
       recommendation_description: A backend application times out while calling a downstream dependency because the dependency responds too slowly, causing request failures that impact end users and increase the risk of cascading failures upstream.
       recommendation_prerequisite: APM + RUM
+    - category: Performance
+      recommendation_type: Missing Cache
+      scope: Backend services
+      recommendation_description: A service performs expensive, repeated work on the request path that could be served from a short-lived cache, reducing tail latency and downstream load.
+      recommendation_prerequisite: APM + AI Recs (Preview)
+    - category: Performance
+      recommendation_type: Tail Latency
+      scope: Backend services
+      recommendation_description: A service exhibits extreme tail latency driven by slow downstream spans on the critical path, often from unbounded dependency latency or sequential calls that could run concurrently.
+      recommendation_prerequisite: APM + AI Recs (Preview)
+    - category: Performance
+      recommendation_type: Excessive Serialization
+      scope: Backend services
+      recommendation_description: A service spends a significant share of request time on CPU-bound serialization or parsing work, adding avoidable latency and CPU overhead.
+      recommendation_prerequisite: APM + AI Recs (Preview)
+    - category: Performance
+      recommendation_type: Unbounded Payload
+      scope: Backend services
+      recommendation_description: A service accepts request parameters without size or range bounds, allowing oversized inputs to drive expensive downstream work, tail latency, and timeouts.
+      recommendation_prerequisite: APM + AI Recs (Preview)
+    - category: Performance
+      recommendation_type: Resource Contention
+      scope: Backend services
+      recommendation_description: Request handling is serialized behind a synchronization primitive or long-running critical section, causing tail latency under concurrency.
+      recommendation_prerequisite: APM + AI Recs (Preview)
+    - category: Reliability
+      recommendation_type: Connection Pool Exhaustion
+      scope: Backend services
+      recommendation_description: A service repeatedly exhausts its connection pool to a downstream dependency, queueing requests and causing latency spikes or failures under load.
+      recommendation_prerequisite: APM + AI Recs (Preview)
+    - category: Reliability
+      recommendation_type: Error Misclassification
+      scope: Backend services
+      recommendation_description: A service surfaces expected outcomes as errors in APM, inflating endpoint error rates and obscuring real reliability regressions.
+      recommendation_prerequisite: APM + AI Recs (Preview)
 ---
 
 APM Recommendations help you improve your applications' performance and reliability by surfacing optimization opportunities from your collected telemetry. These recommendations are designed to:
@@ -95,7 +130,11 @@ APM Recommendations help you improve your applications' performance and reliabil
 - Improve service reliability and uptime
 - Improve end-user experience
 
-{{< img src="/tracing/recommendations/apm_recommendations-2.png" alt="APM Recommendations page showing a list of recommendations with filters for status and type" style="width:100%;" >}}
+{{< img src="/tracing/recommendations/apm_recommendations-3.png" alt="APM Recommendations page with summary cards for reliability and performance issues and a list of recommendations to review" style="width:100%;" >}}
+
+{{< callout url="https://www.datadoghq.com/product-preview/apm-ai-recommendations/" header="Join the AI Recommendations Preview!" >}}
+AI-driven recommendation types are now available, expanding the set of [optimization opportunities](?recommendation_prerequisite=APM+%2B+AI+Recs+%28Preview%29#supported-recommendations) Datadog can detect.
+{{< /callout >}}
 
 ## Prerequisites
 
@@ -103,7 +142,7 @@ Certain recommendations rely on specific Datadog products. Use the **Recommendat
 
 ## How it works
 
-APM Recommendations are based on data collected from different parts of your stack:
+Recommendations are based on data collected from different parts of your stack:
 
 - Distributed traces from Application Performance Monitoring (APM)
 - Database telemetry from Database Monitoring (DBM)
@@ -113,7 +152,7 @@ Datadog correlates these sources to identify opportunities to improve performanc
 
 Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. The most critical insights for improving service reliability and performance appear first.
 
-## Using APM Recommendations
+## Using recommendations
 
 To review recommendations that need your attention:
 

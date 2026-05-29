@@ -149,7 +149,7 @@ Lists available metrics, with options for filtering and metadata.
 ### `search_datadog_services`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Software Catalog with details and team information.
+Lists services in Datadog's Catalog with details and team information.
 
 - Show me all services in our microservices architecture.
 - List services owned by the platform team.
@@ -720,6 +720,15 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `update_datadog_error_tracking_issue`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Updates the state or assignee of an Error Tracking Issue in Datadog.
+
+- Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
+- Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
+- Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+
 ## Feature Flags
 
 Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
@@ -941,6 +950,52 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
+## RUM
+
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
+
+<div class="alert alert-info">The <code>rum</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `search_rum_applications`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Lists your RUM applications and resolves the `application_id` to use for subsequent RUM tool calls.
+
+- Find the RUM application named "checkout-web" and return its application ID.
+- List all my RUM applications.
+
+### `get_rum_summary`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
+
+- Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
+- How did Core Web Vitals on my main RUM app change week-over-week?
+
+### `get_rum_insight`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Returns aggregated insights for RUM Views: waterfall, long tasks, vital distributions, and tag analysis.
+
+- For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
+- Break down INP distribution by device type for the home page.
+
+### `search_rum_metrics`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Explores RUM metrics for an application, including out-of-the-box metrics and custom metrics.
+
+- List the custom RUM metrics defined on the "checkout-web" application.
+- Show me available RUM metrics related to page load time on my main app.
+
+### `search_rum_retention_filters`
+*Toolset: **rum***\
+*Permissions Required: `RUM Retention Filters Read`*\
+Lists retention filters configured on a RUM application. Read-only; available for [RUM without Limits][59] customers.
+
+- List the retention filters configured on the "checkout-web" application.
+- What retention filters do I have on my main RUM app?
+
 ## Security
 
 Tools for code security scanning and searching [security signals][53] and [security findings][54].
@@ -1145,6 +1200,75 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+## Widgets
+
+Tools for [dashboard][46] and [notebook][57] widget visualization, validation, and type conversion.
+
+### `get_widget`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read`*\
+Retrieves and visualizes Datadog metrics, traces, logs, and other data as interactive charts. Supports three modes: dashboard lookup, direct definition, or URL resolution.
+
+- Show the CPU usage timeseries for `service:api` over the last hour.
+- Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
+- Visualize the data from this Datadog share link.
+
+### `get_widget_reference_compressed`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Returns compressed TypeScript schemas and building instructions for widget types. Call before generating widget JSON. When building group widgets, include both `group` and any intended child widget types in one call for deduplication.
+
+- Get the compressed schema for a timeseries widget.
+- Show the building instructions for top list and query table widgets.
+
+### `search_datadog_widgets`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Searches and retrieves information about widgets across Datadog dashboards, including their IDs, titles, and underlying queries.
+
+- Find all timeseries widgets that query the `system.cpu.user` metric.
+- Search for widgets related to error rates across all dashboards.
+
+### `swap_widget_type`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Converts a widget definition from one visualization type to another while preserving queries. Supports formula-request-based widget types: timeseries, query_value, top list, query_table, treemap, sunburst, distribution, heatmap, geomap, and list_stream.
+
+- Convert this timeseries widget to a top list.
+- Change the query table widget to a treemap visualization.
+
+### `validate_notebook_cell`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries`*\
+Validates notebook cell widget definitions, including SQL correctness for analysis_sql cells. When validating an analysis_sql cell, include its upstream data source widgets so the endpoint can check SQL expressions against their schemas.
+
+- Validate these notebook cell definitions before saving.
+- Check if the analysis SQL cell references valid columns from the upstream widget.
+
+### `validate_notebook_cells`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries`*\
+Validates multiple notebook cell widget definitions in a single call, including SQL correctness for analysis_sql cells.
+
+- Validate all the cells in this notebook before publishing.
+- Check these three analysis cells for SQL errors.
+
+### `verify_widget_data`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read`*\
+Verifies whether widget definitions return data for the last hour. Call after adding widgets to a dashboard to confirm queries return real data. Returns one result per widget indicating whether data was found, with a reason if not.
+
+- Check if these widget definitions return data.
+- Verify the widgets added to the dashboard are showing real metrics.
+
+### `visualize_tabular_data`
+*Toolset: **widgets***\
+*Permissions Required: No specific permissions required.*\
+Renders tabular data as an interactive visualization (sunburst, treemap, or top list). Use after aggregating data from queries to visualize hierarchical relationships or rankings.
+
+- Visualize this grouped metric data as a sunburst chart.
+- Show this aggregated data as a treemap breakdown.
+
 ## Workflows
 
 Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
@@ -1216,3 +1340,6 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
 [56]: /account_management/rbac/permissions/
+[57]: /notebooks/
+[58]: /real_user_monitoring/
+[59]: /real_user_monitoring/rum_without_limits/

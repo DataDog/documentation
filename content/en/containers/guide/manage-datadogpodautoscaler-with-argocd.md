@@ -25,6 +25,8 @@ The DatadogPodAutoscaler (DPA) is a Kubernetes custom resource definition (CRD) 
 
 ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes. It monitors Git repositories containing Kubernetes manifests and keeps your cluster synchronized with the desired state defined in Git. This approach provides version control, audit trails, and automated deployment of your autoscaling infrastructure.
 
+**Activating autoscaling at scale:** To roll out autoscaling across many workloads or namespaces with a shared policy, label the workloads or namespaces with `autoscaling.datadoghq.com/profile` instead of authoring one `DatadogPodAutoscaler` per workload. See [Cluster profiles][2] in the Kubernetes Autoscaling overview.
+
 ## Prerequisites
 
 Before you begin, ensure you have the following:
@@ -530,3 +532,4 @@ kubectl logs -n datadog -l agent.datadoghq.com/component=cluster-agent
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /containers/monitoring/autoscaling/
+[2]: /containers/monitoring/autoscaling/#cluster-profiles
