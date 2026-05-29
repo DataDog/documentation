@@ -27,10 +27,6 @@ Run an agentic investigation across a sample of views that share a slow Core Web
 
 {{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="The Optimization page for a Core Web Vital, showing ranked recommendation cards with an Investigate button on each." style="width:100%;" >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-multi-view-ai-investigation/" header="Join the Preview!">}}
-  Multi-View AI Investigation is in Preview.
-{{< /callout >}}
-
 For more information, see [Multi-View AI Investigation][2].
 
 ## Operation AI investigation
@@ -38,10 +34,6 @@ For more information, see [Multi-View AI Investigation][2].
 Run an agentic investigation on a single operation in [Operations Monitoring][3]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions.
 
 {{< img src="real_user_monitoring/ai_investigations/operation-ai-investigation-recommendations.png" alt="The Operations page for an operation, showing a plain-language health summary and ranked recommendation cards tagged with priority badges." style="width:100%;" >}}
-
-{{< callout url="https://www.datadoghq.com/product-preview/rum-operation-ai-investigation/" header="Join the Preview!">}}
-  Operation AI Investigation is in Preview.
-{{< /callout >}}
 
 For more information, see [Operation AI Investigation][4].
 
