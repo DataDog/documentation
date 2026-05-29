@@ -1,6 +1,6 @@
 ---
-title: Bits AI Assistant
-description: "Use Bits AI Assistant in Datadog to explore and act on your observability data using natural language."
+title: Bits Chat
+description: "Use Bits Chat in Datadog to explore and act on your observability data using natural language."
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
@@ -10,16 +10,16 @@ further_reading:
   text: "Coordinate incidents with Incident AI"
 - link: "/cloud_cost_management/cloud_cost_skill/"
   tag: "Documentation"
-  text: "Cloud Cost Skill in Bits AI Assistant"
+  text: "Cloud Cost Skill in Bits Chat"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
 ---
 
 ## Overview
-Bits AI Assistant is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits AI Assistant is available across the web application, mobile app, and Slack.
+Bits Chat is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack.
 
-Ask Bits AI Assistant questions across these categories:
+Ask Bits Chat questions across these categories:
 
 ### Investigate issues and remediate
 - `Summarize high severity incidents that have occurred in the last day`
@@ -47,22 +47,22 @@ Ask Bits AI Assistant questions across these categories:
 - `How can I put a team tag on this monitor?`
 - `Add a timeseries widget for request count over time to this notebook`
 
-{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits AI Assistant interface showing conversation history and prompt suggestions" style="width:100%;">}}
+{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Chat interface showing conversation history and prompt suggestions" style="width:100%;">}}
 
 ### Permissions
 
-#### Access to Bits AI Assistant
+#### Access to Bits Chat
 
-To use Bits AI Assistant, your role must have the **Bits Assistant Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
+To use Bits Chat, your role must have the **Bits Chat Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
 
-To manage this permission for custom roles, go to **Organization Settings** > **Roles**, select a role, and toggle **Bits Assistant Access** under **General Permissions**.
+To manage this permission for custom roles, go to **Organization Settings** > **Roles**, select a role, and toggle **Bits Chat Access** under **General Permissions**.
 
-#### Data access through Bits AI Assistant
+#### Data access through Bits Chat
 
-Bits AI Assistant uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, Bits AI Assistant can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, Bits AI Assistant cannot edit that dashboard on your behalf.
+Bits Chat uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, Bits Chat can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, Bits Chat cannot edit that dashboard on your behalf.
 
 ### Skills
-Bits AI Assistant has a range of specialized skills for tasks across Datadog. The most commonly used skills are described below.
+Bits Chat has a range of specialized skills for tasks across Datadog. The most commonly used skills are described below.
 
 #### Dashboards
 Build [dashboards][5] and widgets from natural language descriptions.
@@ -95,7 +95,7 @@ Example prompts:
 - `What's the latency bottleneck for this service?`
 
 #### Cloud Cost Management
-Investigate [cloud cost][4] changes and identify the teams or resources responsible. See [Cloud Cost Skill in Bits AI Assistant][9].
+Investigate [cloud cost][4] changes and identify the teams or resources responsible. See [Cloud Cost Skill in Bits Chat][9].
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
@@ -111,31 +111,31 @@ Example prompts:
 
 ### Reports
 
-The Bits AI Assistant Reports page provides visibility into how your organization uses Bits AI Assistant. Go to [**Bits AI** > **Assistant** > **Reports**][10] to view:
+The Bits Chat Reports page provides visibility into how your organization uses Bits Chat. Go to [**Bits AI** > **Chat** > **Reports**][10] to view:
 
-- **Top users**: See which team members use Bits AI Assistant the most, ranked by conversation count.
+- **Top users**: See which team members use Bits Chat the most, ranked by conversation count.
 - **Usage trends**: Track conversation volume over time to understand adoption and identify usage patterns.
 - **Conversation intent distribution**: See how conversations break down by intent category, such as investigating issues, exploring telemetry, learning Datadog concepts, and configuring observability.
 
 Use these insights to understand adoption patterns, identify power users for best-practice sharing, and assess which use cases deliver the most value for your organization.
 
 ### Web application
-There are multiple ways to open Bits AI Assistant in the Datadog web application:
+There are multiple ways to open Bits Chat in the Datadog web application:
 - In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}
-- In a Datadog product integrated with Bits AI Assistant, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon)
+- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon)
 - Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>
 - In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}
 
-{{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits AI Assistant side panel showing example prompts" style="width:40%;">}}
+{{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat side panel showing example prompts" style="width:40%;">}}
 
 ### Mobile application
 <div class="alert alert-info">
-Bits AI Assistant is available on iOS v5.8.4+ and Android v3.15+.
+Bits Chat is available on iOS v5.8.4+ and Android v3.15+.
 </div>
 
 1. [Download the mobile app and log in][2].
-2. On the home screen, tap {{< ui >}}Bits AI Assistant{{< /ui >}}.
-3. Start chatting with Bits AI Assistant in chat or voice mode.
+2. On the home screen, tap {{< ui >}}Bits Chat{{< /ui >}}.
+3. Start chatting with Bits Chat in chat or voice mode.
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack
