@@ -286,37 +286,14 @@ Searches for spans using APM query syntax, with support for pagination and tag f
 - Find slow database queries taking more than 2 seconds.
 - Search for spans with `service:payments` and `status:error`.
 
-### `apm_explore_trace`
+### `apm_query_trace`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Executes queries on trace data for deep analysis and exploration of specific spans within a trace.
+Queries a trace's span data to filter, aggregate, or rank spans, such as finding the highest self-time spans or tracing an error to its origin service.
 
-- Explore the spans in trace `abc123` and show me the database calls.
-- Analyze the error spans in this trace.
-
-### `apm_trace_summary`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Generates an AI-powered summary of a trace, providing high-level analysis of what the trace shows.
-
-- Summarize trace `7d5d747be160e280504c099d984bcfe0`.
-- Give me an overview of what happened in this trace.
-
-### `apm_trace_comparison`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Compares two traces to identify performance differences and bottlenecks between a fast trace and a slow trace.
-
-- Compare these two traces to find out why one is slower.
-- What changed between this baseline trace and the slow trace?
-
-### `apm_analyze_trace_metrics`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Analyzes APM trace metrics over time for a specific operation, querying metric data and providing AI-generated analysis.
-
-- Analyze latency trends for the `web.request` operation on `service:api` over the last 6 hours.
-- Show me error rate metrics for my database service.
+- Find the top 5 spans by self-time in trace `abc123`.
+- Show all error messages and their originating services in trace `abc123`.
+- Which database calls in this trace took longer than 500ms?
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
@@ -348,28 +325,30 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
 
-### `apm_search_change_stories`
+### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
-Searches for change stories (deployments, feature flags, and infrastructure changes) for a service within a time range.
+*Permissions Required: `APM Read`*\
+Analyzes latency bottlenecks across traces during an anomaly period and returns a compact text summary using self-time calculations. Examines the top 30% slowest traces to identify which service and resource combinations consume the most self-time, detect cascading call patterns, and find root causes of latency spikes.
+
+- Summarize the latency bottlenecks for the checkout service between 2pm and 3pm today.
+- What is consuming the most self-time in the payments service during this latency spike?
+- Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
+
+### `get_change_stories`
+*Toolset: **apm***\
+Retrieves change stories from the Change Tracking API for APM services. Use this to identify what changed (deployments, feature flags, configuration updates, and infrastructure events) during a time range and correlate changes with performance issues or incidents.
 
 - Show me recent deployments and changes for the payments service.
 - What infrastructure changes happened around the time of this latency spike?
+- Find feature flag and configuration changes for the checkout service in the last hour.
 
-### `apm_latency_bottleneck_analysis`
+### `semantic_search_change_stories`
 *Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Analyzes latency bottlenecks across traces in an anomaly period by calculating self-time.
+Searches change stories using natural language and AI-powered semantic search. Use this to find feature flag or deployment changes related to a behavior, a user-reported issue, or a part of the product you are investigating.
 
-- What are the latency bottlenecks for the checkout service during this anomaly?
-- Identify which spans are contributing the most to latency.
-
-### `apm_latency_tag_analysis`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Compares span tags between an anomaly period and a baseline period to identify what changed.
-
-- Compare tags between the anomaly window and baseline to find what changed.
-- What tag values are different during this latency spike?
+- What changed recently that could affect dashboard loading for trial users?
+- Which flags might impact authentication in the billing settings page?
+- Find changes related to missing telemetry data in the last week.
 
 ### `apm_search_recommendations`
 *Toolset: **apm***\
@@ -385,14 +364,6 @@ Searches for APM recommendations from Datadog.
 Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
-
-### `apm_investigation_methodology`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Provides guidance for investigating APM service issues like latency, errors, and performance problems.
-
-- How should I investigate a latency increase in my API service?
-- Guide me through debugging an error spike in production.
 
 ## Cases
 
