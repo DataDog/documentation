@@ -20,7 +20,15 @@ The NDM Summary Page is in Preview.
 
 The Network Device Monitoring (NDM) **Summary Page** is a command center for network engineers. It surfaces device and interface health, active issues, and recent configuration changes in a single view. Use it to identify problems across your network at a glance and take action.
 
+**Note**: [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
+
 {{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device performance, traffic, and recent changes." style="width:100%;" >}}
+
+## Page sections
+
+Use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
+
+{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
 
 The **Network health**, **Interface health**, and **Device health** sections each report one of four health states:
 
@@ -31,13 +39,7 @@ The **Network health**, **Interface health**, and **Device health** sections eac
 | Poor | Critical thresholds have been crossed on multiple devices or interfaces. |
 | Unknown | Not enough data is available to assess health. |
 
-**Note**: [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
-
-## Page sections
-
-Use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
-
-{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
+The sections below describe each part of the Summary Page in detail.
 
 ### Network health
 
@@ -59,7 +61,7 @@ The **Issues** list summarizes active alerts on network resources, grouped to re
 
 ### Interface health
 
-The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the [device side panel](#device-side-panel).
+The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open a side panel with detailed device information, including active issues, interfaces, dependencies, metrics, and configuration.
 
 {{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
 
@@ -79,7 +81,7 @@ Three cards below the list surface aggregate health for the fleet: [Bandwidth ut
 
 ### Device health
 
-The **Device health** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the [device side panel](#device-side-panel).
+The **Device health** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the same side panel described in [Interface health](#interface-health).
 
 {{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device health section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
 
@@ -107,16 +109,6 @@ The **Changes** section lists recent network device configuration changes from [
 {{< img src="network_device_monitoring/summary/changes-detail.png" alt="The Changes view showing a table of recent network device configuration changes with device name, change summary, and timestamp columns." style="width:100%;" >}}
 
 Click **[View all changes][11]** to open the full change history for your current scope and time range.
-
-## Device side panel
-
-Click any device or interface in the **Interface health** or **Device health** sections to open the device side panel. The panel provides a detailed overview of the selected device, including its active issues, triggered monitors, interface status, dependencies, metrics, configuration, and recent events.
-
-{{< img src="network_device_monitoring/summary/device-side-panel.png" alt="The device side panel showing sections for device summary, interfaces with status and utilization, dependencies, and metrics." style="width:100%;" >}}
-
-Click **Open Device Page** in the top-right corner to navigate to the full device page.
-
-**Note**: Full device page documentation is in development.
 
 ## Further Reading
 
