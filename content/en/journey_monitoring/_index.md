@@ -3,7 +3,7 @@ title: Journey Monitoring
 description: "Monitor and analyze critical user flows to troubleshoot user experience and technical issues."
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="false">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 

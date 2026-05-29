@@ -8709,7 +8709,7 @@ menu:
       pre: custom-action-wui
       identifier: journey_monitoring
       parent: digital_experience_heading
-      weight: 30000
+      weight: 10000
     - name: Map
       url: journey_monitoring/map/
       parent: journey_monitoring
