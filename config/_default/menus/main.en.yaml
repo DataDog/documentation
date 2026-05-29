@@ -5489,6 +5489,11 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
       weight: 40102
+    - name: Session-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
+      weight: 401021
     - name: Prompt Templating
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
       parent: llm_obs_custom_llm_as_a_judge_evaluations
