@@ -1,5 +1,6 @@
 ---
 title: Metrics FAQ
+description: "Frequently asked questions about Datadog metrics."
 cascade:
   - private: true
 ---

@@ -18,7 +18,7 @@ further_reading:
   text: "Learn about Workflows"
 - link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
   tag: "Blog"
-  text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog"
+  text: "Empower your engineering teams with Self-Service Actions in Datadog Catalog"
 ---
 
 [Self-Service Actions][17] help platform teams define and share templates to streamline tasks across the software development lifecycle. Developers can use these predefined actions to:
@@ -28,16 +28,16 @@ further_reading:
 - manage deployments across environments
 - actively monitor and optimize running services
 
-Each tile represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Action Catalog][7] and [Workflow Automation][1], and surfaced in Software Catalog to streamline developer workflows.
+Each tile represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Action Catalog][7] and [Workflow Automation][1], and surfaced in Catalog to streamline developer workflows.
 
 ## Automate developer workflows
 
-To create a new app in Software Catalog, you can start with an example or build from scratch. At a high level, creating a new app involves the following steps:
+To create a new app in Catalog, you can start with an example or build from scratch. At a high level, creating a new app involves the following steps:
 
 1. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers.
 1. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or transform data. 
 1. Use [Workflow Automation][1] to orchestrate end-to-end processes with multiple actions.
-1. Integrate your app with Datadog's Software Catalog to enable dynamic and self-service workflows.
+1. Integrate your app with Datadog's Catalog to enable dynamic and self-service workflows.
 
 {{< img src="tracing/software_catalog/self-service-ui.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
@@ -104,5 +104,5 @@ Once your Software Template is configured and tested, publish it so your team ca
 [13]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=provision-eks-cluster&viewMode=edit&visibleDataItemId=createOrUpdateFile0-action
 [14]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=data&showActionCatalog=false&template=rds_provision_instance&viewMode=edit&visibleDataItemId=createDbInstance0-action
 [15]: https://app.datadoghq.com/workflow/blueprints
-[16]: /software_catalog/self-service/software_templates
+[16]: /internal_developer_portal/self_service_actions/software_templates/
 [17]: https://app.datadoghq.com/software/self-service

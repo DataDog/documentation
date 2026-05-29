@@ -1,5 +1,6 @@
 ---
 title: Datadog-CrewAI integration for LLM Observability
+description: Learn how to integrate CrewAI with Datadog LLM Observability using auto-instrumentation to monitor and trace your CrewAI agent runs.
 ---
 
 This guide demonstrates how to integrate LLM Observability with [CrewAI][1] using [auto-instrumentation][2]. This also includes how to submit LLM Observability traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].

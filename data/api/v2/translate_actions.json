@@ -267,6 +267,30 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "ListAnnotations": {
+    "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
+    "summary": "List annotations"
+  },
+  "CreateAnnotation": {
+    "description": "Creates a new annotation on a dashboard or notebook page.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Create an annotation",
+    "request_description": "Annotation to create.",
+    "request_schema_description": "Request body for creating an annotation."
+  },
+  "GetPageAnnotations": {
+    "description": "Returns all annotations on a specific page for a given time window, grouped by widget.\nUnlike `ListAnnotations`, this endpoint returns a single structured object with annotations\nindexed by their ID and a widget-to-annotation mapping for easy UI rendering.",
+    "summary": "Get annotations for a page"
+  },
+  "DeleteAnnotation": {
+    "description": "Deletes an existing annotation by ID.\nReturns `204 No Content` if the annotation does not exist (idempotent).",
+    "summary": "Delete an annotation"
+  },
+  "UpdateAnnotation": {
+    "description": "Updates an existing annotation.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Update an annotation",
+    "request_description": "Updated annotation payload.",
+    "request_schema_description": "Request body for updating an annotation."
+  },
   "AnonymizeUsers": {
     "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
     "summary": "Anonymize users",
@@ -416,6 +440,70 @@
     "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Publish App"
   },
+  "UpdateAppFavorite": {
+    "description": "Add or remove an app from the current user's favorites. Favorited apps can be filtered for using the `filter[favorite]` query parameter on the [List Apps](https://docs.datadoghq.com/api/latest/app-builder/#list-apps) endpoint.",
+    "summary": "Update App Favorite Status",
+    "request_description": "",
+    "request_schema_description": "A request to add or remove an app from the current user's favorites."
+  },
+  "UpdateProtectionLevel": {
+    "description": "Update the publication protection level of an app. When set to `approval_required`, future publishes must go through an approval workflow before going live.",
+    "summary": "Update App Protection Level",
+    "request_description": "",
+    "request_schema_description": "A request to update an app's publication protection level."
+  },
+  "CreatePublishRequest": {
+    "description": "Create a publish request to ask for approval to publish an app whose protection level is `approval_required`. Publishing happens automatically once the request is approved by a user with the appropriate permissions.",
+    "summary": "Create Publish Request",
+    "request_description": "",
+    "request_schema_description": "A request to ask for approval to publish an app whose protection level is `approval_required`."
+  },
+  "RevertApp": {
+    "description": "Revert an app to a previous version. The version to revert to is selected through the `version` query parameter. The reverted version becomes the new latest version of the app.",
+    "summary": "Revert App"
+  },
+  "UpdateAppSelfService": {
+    "description": "Enable or disable self-service for an app. Self-service apps can be discovered and run by users in your organization without explicit access being granted.",
+    "summary": "Update App Self-Service Status",
+    "request_description": "",
+    "request_schema_description": "A request to enable or disable self-service for an app."
+  },
+  "UpdateAppTags": {
+    "description": "Replace the tags on an app. The provided list overwrites the existing tags entirely; tags not present in the request body are removed.",
+    "summary": "Update App Tags",
+    "request_description": "",
+    "request_schema_description": "A request to replace the tags on an app."
+  },
+  "UpdateAppVersionName": {
+    "description": "Assign a human-readable name to a specific version of an app. The version is selected through the `version` query parameter.",
+    "summary": "Name App Version",
+    "request_description": "",
+    "request_schema_description": "A request to assign a human-readable name to a specific app version."
+  },
+  "ListAppVersions": {
+    "description": "List the versions of an app. This endpoint is paginated.",
+    "summary": "List App Versions"
+  },
+  "GetBlueprint": {
+    "description": "Retrieve an app blueprint by its ID.",
+    "summary": "Get Blueprint"
+  },
+  "ListBlueprints": {
+    "description": "List available app blueprints.",
+    "summary": "List Blueprints"
+  },
+  "GetBlueprintsByIntegrationId": {
+    "description": "List app blueprints associated with a specific integration ID.",
+    "summary": "Get Blueprints by Integration ID"
+  },
+  "GetBlueprintsBySlugs": {
+    "description": "Retrieve app blueprints by their slugs.",
+    "summary": "Get Blueprints by Slugs"
+  },
+  "ListTags": {
+    "description": "List all tags associated with the authenticated user's apps.",
+    "summary": "List Tags"
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
@@ -492,6 +580,36 @@
     "request_description": "Case payload",
     "request_schema_description": "Case create request"
   },
+  "AggregateCases": {
+    "description": "Performs an aggregation query over cases, grouping results by specified fields and returning counts per group along with a total. Useful for dashboards and analytics.",
+    "summary": "Aggregate cases",
+    "request_description": "Case aggregate request payload.",
+    "request_schema_description": "Request payload for aggregating case counts with grouping. Use this to get faceted breakdowns of cases (for example, count of cases grouped by priority and status)."
+  },
+  "BulkUpdateCases": {
+    "description": "Applies a single action (such as changing priority, status, assignment, or archiving) to multiple cases at once. The list of case IDs and the action type with its payload are specified in the request body.",
+    "summary": "Bulk update cases",
+    "request_description": "Case bulk update request payload.",
+    "request_schema_description": "Request payload for applying a single action (such as changing priority, status, or assignment) to multiple cases at once."
+  },
+  "CountCases": {
+    "description": "Returns case counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.",
+    "summary": "Count cases"
+  },
+  "ListCaseLinks": {
+    "description": "Returns all links associated with a case. Links define relationships (for example, BLOCKS) between cases. Requires entity_type and entity_id query parameters.",
+    "summary": "List case links"
+  },
+  "CreateCaseLink": {
+    "description": "Creates a directional link between two cases (for example, case A blocks case B). The parent and child cases and their relationship type must be specified.",
+    "summary": "Create a case link",
+    "request_description": "Case link create request.",
+    "request_schema_description": "Request payload for creating a link between two entities."
+  },
+  "DeleteCaseLink": {
+    "description": "Deletes an existing link between cases by link ID.",
+    "summary": "Delete a case link"
+  },
   "GetProjects": {
     "description": "Get all projects.",
     "summary": "Get all projects"
@@ -501,6 +619,10 @@
     "summary": "Create a project",
     "request_description": "Project payload.",
     "request_schema_description": "Project create request."
+  },
+  "ListUserCaseProjectFavorites": {
+    "description": "Returns the list of case projects that the current authenticated user has marked as favorites.",
+    "summary": "List project favorites"
   },
   "DeleteProject": {
     "description": "Remove a project using the project's `id`.",
@@ -515,6 +637,14 @@
     "summary": "Update a project",
     "request_description": "Project payload.",
     "request_schema_description": "Project update request."
+  },
+  "UnfavoriteCaseProject": {
+    "description": "Removes a case project from the current user's favorites list.",
+    "summary": "Unfavorite a project"
+  },
+  "FavoriteCaseProject": {
+    "description": "Marks a case project as a favorite for the current authenticated user.",
+    "summary": "Favorite a project"
   },
   "GetProjectNotificationRules": {
     "description": "Get all notification rules for a project.",
@@ -536,6 +666,38 @@
     "request_description": "Notification rule payload",
     "request_schema_description": "Notification rule update request"
   },
+  "ListCaseAutomationRules": {
+    "description": "Returns all automation rules configured for a project. Automation rules allow automatic actions to be triggered by case events like creation, status transitions, or attribute changes.",
+    "summary": "List automation rules"
+  },
+  "CreateCaseAutomationRule": {
+    "description": "Creates an automation rule for a project. The rule defines a trigger event (for example, case created, status transitioned) and an action to execute.",
+    "summary": "Create an automation rule",
+    "request_description": "Automation rule payload.",
+    "request_schema_description": "Request payload for creating an automation rule."
+  },
+  "DeleteCaseAutomationRule": {
+    "description": "Permanently deletes an automation rule from a project.",
+    "summary": "Delete an automation rule"
+  },
+  "GetCaseAutomationRule": {
+    "description": "Returns a single automation rule identified by its UUID, including its trigger, action, and current state (enabled/disabled).",
+    "summary": "Get an automation rule"
+  },
+  "UpdateCaseAutomationRule": {
+    "description": "Updates the trigger, action, name, or state of an existing automation rule.",
+    "summary": "Update an automation rule",
+    "request_description": "Automation rule payload.",
+    "request_schema_description": "Request payload for updating an automation rule."
+  },
+  "DisableCaseAutomationRule": {
+    "description": "Disables an automation rule so it no longer triggers on case events. The rule configuration is preserved.",
+    "summary": "Disable an automation rule"
+  },
+  "EnableCaseAutomationRule": {
+    "description": "Enables a previously disabled automation rule so it triggers on matching case events.",
+    "summary": "Enable an automation rule"
+  },
   "GetAllCaseTypes": {
     "description": "Get all case types",
     "summary": "Get all case types"
@@ -544,7 +706,7 @@
     "description": "Create a Case Type",
     "summary": "Create a case type",
     "request_description": "Case type payload",
-    "request_schema_description": "Case type create request"
+    "request_schema_description": "Request payload for creating a case type."
   },
   "GetAllCustomAttributes": {
     "description": "Get all custom attributes",
@@ -554,6 +716,12 @@
     "description": "Delete a case type",
     "summary": "Delete a case type"
   },
+  "UpdateCaseType": {
+    "description": "Updates the name, emoji, or description of an existing case type.",
+    "summary": "Update a case type",
+    "request_description": "Case type payload.",
+    "request_schema_description": "Request payload for updating a case type."
+  },
   "GetAllCustomAttributeConfigsByCaseType": {
     "description": "Get all custom attribute config of case type",
     "summary": "Get all custom attributes config of case type"
@@ -562,11 +730,41 @@
     "description": "Create custom attribute config for a case type",
     "summary": "Create custom attribute config for a case type",
     "request_description": "Custom attribute config payload",
-    "request_schema_description": "Custom attribute config create request"
+    "request_schema_description": "Request payload for creating a custom attribute configuration."
   },
   "DeleteCustomAttributeConfig": {
     "description": "Delete custom attribute config",
     "summary": "Delete custom attributes config"
+  },
+  "UpdateCustomAttributeConfig": {
+    "description": "Updates the display name, description, type, or options of an existing custom attribute configuration for a case type.",
+    "summary": "Update custom attribute config",
+    "request_description": "Custom attribute config payload.",
+    "request_schema_description": "Request payload for updating a custom attribute configuration."
+  },
+  "ListCaseViews": {
+    "description": "Returns all saved case views for a given project. Views are saved search queries that allow quick access to filtered lists of cases.",
+    "summary": "List case views"
+  },
+  "CreateCaseView": {
+    "description": "Creates a new saved case view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.",
+    "summary": "Create a case view",
+    "request_description": "Case view payload.",
+    "request_schema_description": "Request payload for creating a case view."
+  },
+  "DeleteCaseView": {
+    "description": "Permanently deletes a saved case view.",
+    "summary": "Delete a case view"
+  },
+  "GetCaseView": {
+    "description": "Returns a single saved case view identified by its UUID, including its query, associated project, and timestamps.",
+    "summary": "Get a case view"
+  },
+  "UpdateCaseView": {
+    "description": "Updates the name, query, or notification rule of an existing case view.",
+    "summary": "Update a case view",
+    "request_description": "Case view payload.",
+    "request_schema_description": "Request payload for updating a case view."
   },
   "GetCase": {
     "description": "Get the details of case by `case_id`",
@@ -600,6 +798,12 @@
     "description": "Delete case comment",
     "summary": "Delete case comment"
   },
+  "UpdateCaseComment": {
+    "description": "Updates the text content of an existing comment on a case timeline. The comment is identified by its cell ID.",
+    "summary": "Update case comment",
+    "request_description": "Case update comment payload.",
+    "request_schema_description": "Request payload for updating a comment on a case timeline."
+  },
   "DeleteCaseCustomAttribute": {
     "description": "Delete custom attribute from case",
     "summary": "Delete custom attribute from case"
@@ -615,6 +819,24 @@
     "summary": "Update case description",
     "request_description": "Case description update payload",
     "request_schema_description": "Case update description request"
+  },
+  "UpdateCaseDueDate": {
+    "description": "Sets or updates the due date for a case. The due date is a calendar date (without a time component) indicating when the case should be resolved.",
+    "summary": "Update case due date",
+    "request_description": "Case due date update payload.",
+    "request_schema_description": "Request payload for updating a case's due date."
+  },
+  "RemoveCaseInsights": {
+    "description": "Removes one or more previously added insights from a case by specifying their type and resource identifier in the request body.",
+    "summary": "Remove insights from a case",
+    "request_description": "Case insights request.",
+    "request_schema_description": "Request payload for adding or removing case insights."
+  },
+  "AddCaseInsights": {
+    "description": "Adds one or more insights to a case. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.",
+    "summary": "Add insights to a case",
+    "request_description": "Case insights request.",
+    "request_schema_description": "Request payload for adding or removing case insights."
   },
   "UpdatePriority": {
     "description": "Update case priority",
@@ -662,11 +884,21 @@
     "request_description": "ServiceNow ticket creation request",
     "request_schema_description": "ServiceNow ticket creation request"
   },
+  "UpdateCaseResolvedReason": {
+    "description": "Sets the resolved reason for a security case (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type cases.",
+    "summary": "Update case resolved reason",
+    "request_description": "Case resolved reason update payload.",
+    "request_schema_description": "Request payload for updating the resolution reason on a closed security case."
+  },
   "UpdateStatus": {
     "description": "Update case status",
     "summary": "Update case status",
     "request_description": "Case status update payload",
     "request_schema_description": "Case update status request"
+  },
+  "ListCaseTimeline": {
+    "description": "Returns the timeline of events for a case, including comments, status changes, and other activity. Supports pagination and sort order.",
+    "summary": "Get case timeline"
   },
   "UpdateCaseTitle": {
     "description": "Update case title",
@@ -685,6 +917,18 @@
     "summary": "Unassign case",
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
+  },
+  "ListCaseWatchers": {
+    "description": "Returns the list of users who are watching a case. Watchers receive notifications about updates to the case.",
+    "summary": "List case watchers"
+  },
+  "UnwatchCase": {
+    "description": "Removes a user from the watchers list of a case. The user no longer receives notifications about updates to the case.",
+    "summary": "Unwatch a case"
+  },
+  "WatchCase": {
+    "description": "Adds a user (identified by their UUID) as a watcher of a case. The user receives notifications about subsequent updates to the case.",
+    "summary": "Watch a case"
   },
   "ListCatalogEntity": {
     "description": "Get a list of entities from Software Catalog.",
@@ -875,6 +1119,10 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
   },
+  "DeleteSyncConfig": {
+    "description": "Delete a Storage Management configuration by its unique identifier. Deleting a configuration stops inventory file synchronization for the associated cloud account.",
+    "summary": "Delete a Storage Management configuration"
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
@@ -886,6 +1134,10 @@
     "summary": "Get code coverage summary for a commit",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
+  },
+  "GetRuleBasedView": {
+    "description": "Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
+    "summary": "Get the rule-based view of compliance findings"
   },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
@@ -1012,6 +1264,38 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "GetCommitmentsCommitmentList": {
+    "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
+    "summary": "Get commitments list"
+  },
+  "GetCommitmentsCoverageScalar": {
+    "description": "Get scalar coverage metrics for cloud commitment programs, including hours and cost coverage percentages.",
+    "summary": "Get commitments coverage (scalar)"
+  },
+  "GetCommitmentsCoverageTimeseries": {
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "summary": "Get commitments coverage (timeseries)"
+  },
+  "GetCommitmentsOnDemandHotspotsScalar": {
+    "description": "Get scalar on-demand hot-spots data for cloud commitment programs, showing per-dimension breakdowns of on-demand spending with coverage metrics and potential savings.",
+    "summary": "Get commitments on-demand hot spots (scalar)"
+  },
+  "GetCommitmentsSavingsScalar": {
+    "description": "Get scalar savings metrics for cloud commitment programs, including realized savings and effective savings rate.",
+    "summary": "Get commitments savings (scalar)"
+  },
+  "GetCommitmentsSavingsTimeseries": {
+    "description": "Get timeseries savings metrics for cloud commitment programs, including actual cost, on-demand equivalent cost, realized savings, and effective savings rate over time.",
+    "summary": "Get commitments savings (timeseries)"
+  },
+  "GetCommitmentsUtilizationScalar": {
+    "description": "Get scalar utilization metrics for cloud commitment programs, including utilization percentage and unused cost.",
+    "summary": "Get commitments utilization (scalar)"
+  },
+  "GetCommitmentsUtilizationTimeseries": {
+    "description": "Get timeseries utilization metrics for cloud commitment programs, including used and unused cost series over time.",
+    "summary": "Get commitments utilization (timeseries)"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
@@ -1058,9 +1342,69 @@
     "description": "List the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
+  "SearchCostRecommendations": {
+    "description": "List cost recommendations matching a filter, with pagination and sorting.",
+    "summary": "Search cost recommendations",
+    "request_description": "",
+    "request_schema_description": "Request body for filtering cost recommendations."
+  },
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
+  },
+  "DeleteCostTagDescriptionByKey": {
+    "description": "Delete a Cloud Cost Management tag key description. When `cloud` is omitted, deletes every description for the tag key, falling back to Datadog's global default when available. When `cloud` is provided, deletes only the description scoped to that cloud provider.",
+    "summary": "Delete a Cloud Cost Management tag description"
+  },
+  "GetCostTagDescriptionByKey": {
+    "description": "Get the Cloud Cost Management description for a single tag key. Use `filter[cloud]` to scope the lookup to a specific cloud provider; when omitted, the response resolves the description in fallback order (cloud-specific organization override, then cloudless organization default, then Datadog's global default).",
+    "summary": "Get a Cloud Cost Management tag description"
+  },
+  "UpsertCostTagDescriptionByKey": {
+    "description": "Create or update a Cloud Cost Management tag key description. The new description and optional cloud scoping are supplied in the request body. Omit `cloud` to set a cross-cloud default for the tag key.",
+    "summary": "Upsert a Cloud Cost Management tag description",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Cloud Cost Management tag key description."
+  },
+  "GenerateCostTagDescriptionByKey": {
+    "description": "Use AI to draft a Cloud Cost Management tag key description based on associated cost data. The generated description is returned in the response and is not persisted by this endpoint; follow up with `UpsertCostTagDescriptionByKey` to save it.",
+    "summary": "Generate a Cloud Cost Management tag description"
+  },
+  "ListCostTagKeys": {
+    "description": "List Cloud Cost Management tag keys.",
+    "summary": "List Cloud Cost Management tag keys"
+  },
+  "GetCostTagKey": {
+    "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
+    "summary": "Get a Cloud Cost Management tag key"
+  },
+  "ListCostTagMetadata": {
+    "description": "List Cloud Cost Management tag key metadata, including row counts, cost covered, cardinality, and a sample of top tag values per cloud account. Use `filter[daily]=true` to return daily rows instead of the default monthly roll-up.",
+    "summary": "List Cloud Cost Management tag key metadata"
+  },
+  "GetCostTagMetadataCurrency": {
+    "description": "Get the dominant billing currency observed in Cloud Cost Management data for the requested period. The response wraps the currency in a JSON:API `data` array containing at most one entry; the array is empty when no currency data is available.",
+    "summary": "Get the Cloud Cost Management billing currency"
+  },
+  "ListCostTagMetadataMetrics": {
+    "description": "List Cloud Cost Management metrics that have data for the requested period.",
+    "summary": "List available Cloud Cost Management metrics"
+  },
+  "ListCostTagMetadataMonths": {
+    "description": "List months that have Cloud Cost Management tag metadata for a given provider,\nordered most-recent first. The response is capped at 36 months.",
+    "summary": "List Cloud Cost Management tag metadata months"
+  },
+  "ListCostTagMetadataOrchestrators": {
+    "description": "List container orchestrators (for example, `kubernetes`, `ecs`) detected in Cloud Cost Management data for the requested period.",
+    "summary": "List Cloud Cost Management orchestrators"
+  },
+  "ListCostTagKeySources": {
+    "description": "List Cloud Cost Management tag keys observed for the requested period, along with the origin sources that produced them (for example, `aws-user-defined`, `custom`).",
+    "summary": "List Cloud Cost Management tag sources"
+  },
+  "ListCostTags": {
+    "description": "List Cloud Cost Management tags for a given metric.",
+    "summary": "List Cloud Cost Management tags"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -1165,6 +1509,14 @@
     "summary": "Update a secure embed for a dashboard",
     "request_description": "Secure embed update request body.",
     "request_schema_description": "Request to update a secure embed shared dashboard."
+  },
+  "ListDashboardsUsage": {
+    "description": "Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set.",
+    "summary": "Get usage stats for all dashboards"
+  },
+  "GetDashboardUsage": {
+    "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score.",
+    "summary": "Get usage stats for a dashboard"
   },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
@@ -1334,12 +1686,6 @@
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
   },
-  "CreateEmailTransportWebhookIntake": {
-    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
-    "summary": "Ingest email transport webhook events",
-    "request_description": "",
-    "request_schema_description": "A batch of email transport webhook log events."
-  },
   "SearchIssues": {
     "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
     "summary": "Search error tracking issues",
@@ -1483,6 +1829,20 @@
     "summary": "Create or update HAMR organization connection",
     "request_description": "",
     "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
+  },
+  "DeleteEntityIntegrationConfig": {
+    "description": "Delete the configuration stored for a given integration in the caller's organization.",
+    "summary": "Delete an entity integration configuration"
+  },
+  "GetEntityIntegrationConfig": {
+    "description": "Retrieve the configuration currently stored for a given integration in the caller's organization.",
+    "summary": "Get an entity integration configuration"
+  },
+  "UpdateEntityIntegrationConfig": {
+    "description": "Create or replace the configuration for a given integration in the caller's organization. The shape of `data.attributes.config` depends on the integration:\n\n- For `github`: `config` must contain an `enabled_repos` array of objects with `hostname`, `github_org_name`, and `repo_name`.\n- For `jira`: `config` must contain an `enabled_projects` array of objects with `hostname`, `account_id`, and `project_key`.\n- For `pagerduty`: `config` must contain an `accounts` array of objects with a required `enabled` boolean and an optional `subdomain` string.",
+    "summary": "Create or update entity integration configuration",
+    "request_description": "",
+    "request_schema_description": "Request body used to create or replace the configuration for a given integration."
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
@@ -2229,6 +2589,16 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "DeleteLLMObsData": {
+    "description": "Submit a request to delete LLM Observability span data matching a trace ID filter within a specified time range.",
+    "summary": "Delete LLM Observability data",
+    "request_description": "Data deletion request payload.",
+    "request_schema_description": "Request to delete LLM Observability data."
+  },
+  "GetLLMObsAnnotatedInteractionsByTraceIDs": {
+    "description": "Returns annotated interactions across all annotation queues for the given content IDs. Results include queue metadata (ID and name) for each interaction.",
+    "summary": "Get annotated interactions by content IDs"
+  },
   "ListLLMObsAnnotationQueues": {
     "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
     "summary": "List LLM Observability annotation queues"
@@ -2254,7 +2624,7 @@
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
@@ -2274,6 +2644,24 @@
     "summary": "Update annotation queue label schema",
     "request_description": "Update label schema payload.",
     "request_schema_description": "Request to update the label schema of an annotation queue."
+  },
+  "AggregateLLMObsExperimentation": {
+    "description": "Execute an analytics aggregation over LLM Observability experimentation data.\nUse this endpoint to compute metrics (for example average eval scores) grouped by fields such as `span_id` or `experiment_id`.\n\nAt least one `compute` definition and one `index` must be provided.",
+    "summary": "Aggregate LLM Observability experimentation",
+    "request_description": "Analytics payload.",
+    "request_schema_description": "Request to run an analytics aggregation over LLM Observability experimentation data."
+  },
+  "SearchLLMObsExperimentation": {
+    "description": "Search across LLM Observability experimentation entities — projects, datasets, dataset records, experiments, and experiment runs — using cursor-based pagination.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.\n\nReturns `200 OK` when all results fit in a single page. Returns `206 Partial Content` with a cursor in `meta.after` when additional pages are available.",
+    "summary": "Search LLM Observability experimentation entities",
+    "request_description": "Experimentation search payload.",
+    "request_schema_description": "Request to search across LLM Observability experimentation entities using cursor-based pagination."
+  },
+  "SimpleSearchLLMObsExperimentation": {
+    "description": "Search across LLM Observability experimentation entities using offset-based (page-number) pagination.\nUse this endpoint when you need total page count or want to navigate to a specific page number.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.",
+    "summary": "Simple search experimentation entities",
+    "request_description": "Simple search payload.",
+    "request_schema_description": "Request to search across LLM Observability experimentation entities using offset-based pagination."
   },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
@@ -2303,6 +2691,20 @@
     "request_description": "Experiment events payload.",
     "request_schema_description": "Request to push spans and metrics for an LLM Observability experiment."
   },
+  "ListLLMObsIntegrationAccounts": {
+    "description": "Retrieve the list of configured accounts for the specified LLM provider integration.",
+    "summary": "List LLM integration accounts"
+  },
+  "CreateLLMObsIntegrationInference": {
+    "description": "Run an LLM inference request through the specified integration and account, returning the model response and token usage.",
+    "summary": "Run an LLM inference",
+    "request_description": "Inference request parameters.",
+    "request_schema_description": "Parameters for an LLM inference request."
+  },
+  "ListLLMObsIntegrationModels": {
+    "description": "Retrieve the list of models available for the specified LLM provider integration and account.",
+    "summary": "List LLM integration models"
+  },
   "ListLLMObsProjects": {
     "description": "List all LLM Observability projects sorted by creation date, newest first.",
     "summary": "List LLM Observability projects"
@@ -2324,6 +2726,16 @@
     "summary": "Update an LLM Observability project",
     "request_description": "Update project payload.",
     "request_schema_description": "Request to partially update an LLM Observability project."
+  },
+  "ListLLMObsSpans": {
+    "description": "List LLM Observability spans matching the specified filters.",
+    "summary": "List LLM Observability spans"
+  },
+  "SearchLLMObsSpans": {
+    "description": "Search LLM Observability spans using structured filters in the request body.",
+    "summary": "Search LLM Observability spans",
+    "request_description": "Search spans payload.",
+    "request_schema_description": "Request body for searching LLM Observability spans."
   },
   "ListLLMObsDatasets": {
     "description": "List all LLM Observability datasets for a project, sorted by creation date, newest first.",
@@ -2347,6 +2759,34 @@
     "request_description": "Update dataset payload.",
     "request_schema_description": "Request to partially update an LLM Observability dataset."
   },
+  "BatchUpdateLLMObsDataset": {
+    "description": "Insert, update, and delete records in a single dataset operation. By default, a new dataset version is created when the batch is applied.",
+    "summary": "Batch update LLM Observability dataset records",
+    "request_description": "Batch update payload.",
+    "request_schema_description": "Request to batch-insert, update, and delete records in an LLM Observability dataset."
+  },
+  "CloneLLMObsDataset": {
+    "description": "Clone a dataset, copying its current records into a new dataset within the same project.",
+    "summary": "Clone an LLM Observability dataset",
+    "request_description": "Clone dataset payload.",
+    "request_schema_description": "Request to clone an LLM Observability dataset."
+  },
+  "GetLLMObsDatasetDraftState": {
+    "description": "Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.",
+    "summary": "Get LLM Observability dataset draft state"
+  },
+  "LockLLMObsDatasetDraftState": {
+    "description": "Acquire the draft lock on a dataset for the calling user. The lock prevents other users from concurrently editing the dataset draft.",
+    "summary": "Lock LLM Observability dataset draft state"
+  },
+  "UnlockLLMObsDatasetDraftState": {
+    "description": "Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.",
+    "summary": "Unlock LLM Observability dataset draft state"
+  },
+  "ExportLLMObsDataset": {
+    "description": "Download the contents of a dataset as a CSV file. The download is streamed and includes one row per dataset record.",
+    "summary": "Export an LLM Observability dataset"
+  },
   "ListLLMObsDatasetRecords": {
     "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
     "summary": "List LLM Observability dataset records"
@@ -2368,6 +2808,26 @@
     "summary": "Delete LLM Observability dataset records",
     "request_description": "Delete records payload.",
     "request_schema_description": "Request to delete records from an LLM Observability dataset."
+  },
+  "RestoreLLMObsDatasetVersion": {
+    "description": "Restore a dataset to a previous version. The dataset's current version is bumped, and its records are replaced with the records from the specified prior version.",
+    "summary": "Restore an LLM Observability dataset version",
+    "request_description": "Restore dataset version payload.",
+    "request_schema_description": "Request to restore an LLM Observability dataset to a previous version."
+  },
+  "ListLLMObsDatasetVersions": {
+    "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
+    "summary": "List LLM Observability dataset versions"
+  },
+  "UploadLLMObsDatasetRecordsFile": {
+    "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
+    "summary": "Upload records to an LLM Observability dataset",
+    "request_description": "Multipart upload payload containing the records file.",
+    "request_schema_description": "Multipart payload for uploading dataset records from a file."
+  },
+  "ListLLMObsExperimentEvents": {
+    "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
+    "summary": "List events for an LLM Observability experiment"
   },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
@@ -2543,6 +3003,26 @@
     "request_description": "",
     "request_schema_description": "The request for a logs list."
   },
+  "ListMaintenanceWindows": {
+    "description": "Returns all configured maintenance windows for event management cases. Maintenance windows define time periods during which case notifications and automation rules are suppressed for cases matching a given query.",
+    "summary": "List maintenance windows"
+  },
+  "CreateMaintenanceWindow": {
+    "description": "Creates a maintenance window for event management cases with a name, case filter query, and time range (start and end).",
+    "summary": "Create a maintenance window",
+    "request_description": "Maintenance window payload.",
+    "request_schema_description": "Request payload for creating a maintenance window."
+  },
+  "DeleteMaintenanceWindow": {
+    "description": "Permanently deletes a maintenance window.",
+    "summary": "Delete a maintenance window"
+  },
+  "UpdateMaintenanceWindow": {
+    "description": "Updates the name, query, start time, or end time of an existing maintenance window.",
+    "summary": "Update a maintenance window",
+    "request_description": "Maintenance window payload.",
+    "request_schema_description": "Request payload for updating a maintenance window."
+  },
   "ListTagConfigurations": {
     "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
@@ -2600,8 +3080,72 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
+  },
+  "GetModelLabArtifactContent": {
+    "description": "Download the raw content of a Model Lab artifact file.",
+    "summary": "Get Model Lab artifact content"
+  },
+  "ListModelLabRunFacetKeys": {
+    "description": "List all available facet keys for filtering Model Lab runs.",
+    "summary": "List Model Lab run facet keys"
+  },
+  "ListModelLabRunFacetValues": {
+    "description": "List available facet values for a specific run facet key.",
+    "summary": "List Model Lab run facet values"
+  },
+  "ListModelLabProjectFacetKeys": {
+    "description": "List all available facet keys for filtering Model Lab projects.",
+    "summary": "List Model Lab project facet keys"
+  },
+  "ListModelLabProjectFacetValues": {
+    "description": "List available facet values for a specific project facet key.",
+    "summary": "List Model Lab project facet values"
+  },
+  "ListModelLabProjects": {
+    "description": "List all Model Lab projects for the current organization.",
+    "summary": "List Model Lab projects"
+  },
+  "GetModelLabProject": {
+    "description": "Get a single Model Lab project by its ID.",
+    "summary": "Get a Model Lab project"
+  },
+  "ListModelLabProjectArtifacts": {
+    "description": "List all artifact files for a specific Model Lab project.",
+    "summary": "List Model Lab project artifacts"
+  },
+  "UnstarModelLabProject": {
+    "description": "Remove the star from a Model Lab project for the current user.",
+    "summary": "Remove star from a Model Lab project"
+  },
+  "StarModelLabProject": {
+    "description": "Star a Model Lab project for the current user.",
+    "summary": "Star a Model Lab project"
+  },
+  "ListModelLabRuns": {
+    "description": "List all Model Lab runs for the current organization.",
+    "summary": "List Model Lab runs"
+  },
+  "DeleteModelLabRun": {
+    "description": "Delete a Model Lab run by its ID.",
+    "summary": "Delete a Model Lab run"
+  },
+  "GetModelLabRun": {
+    "description": "Get a single Model Lab run by its ID.",
+    "summary": "Get a Model Lab run"
+  },
+  "ListModelLabRunArtifacts": {
+    "description": "List artifact files for a specific Model Lab run.",
+    "summary": "List Model Lab run artifacts"
+  },
+  "UnpinModelLabRun": {
+    "description": "Remove the pin from a Model Lab run for the current user.",
+    "summary": "Unpin a Model Lab run"
+  },
+  "PinModelLabRun": {
+    "description": "Pin a Model Lab run for the current user.",
+    "summary": "Pin a Model Lab run"
   },
   "GetMonitorNotificationRules": {
     "description": "Returns a list of all monitor notification rules.",
@@ -2730,6 +3274,26 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "DeleteScopesRestriction": {
+    "description": "Delete the scopes restriction configured for the OAuth2 client.",
+    "summary": "Delete an OAuth2 client scopes restriction"
+  },
+  "GetScopesRestriction": {
+    "description": "Get the scopes restriction configured for the OAuth2 client.",
+    "summary": "Get an OAuth2 client scopes restriction"
+  },
+  "UpsertScopesRestriction": {
+    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
+    "summary": "Upsert an OAuth2 client scopes restriction",
+    "request_description": "",
+    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
+  },
+  "RegisterOAuthClient": {
+    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
+    "summary": "Register an OAuth2 client",
+    "request_description": "",
+    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
   },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
@@ -3018,28 +3582,28 @@
     "summary": "List permissions"
   },
   "ListPersonalAccessTokens": {
-    "description": "List all personal access tokens for the organization.",
-    "summary": "Get all personal access tokens"
+    "description": "List all access tokens for the organization.",
+    "summary": "Get all access tokens"
   },
   "CreatePersonalAccessToken": {
     "description": "Create a personal access token for the current user.",
     "summary": "Create a personal access token",
     "request_description": "",
-    "request_schema_description": "Request used to create a personal access token."
+    "request_schema_description": "Request used to create an access token."
   },
   "RevokePersonalAccessToken": {
     "description": "Revoke a specific personal access token.",
     "summary": "Revoke a personal access token"
   },
   "GetPersonalAccessToken": {
-    "description": "Get a specific personal access token by its UUID.",
+    "description": "Get a specific personal access token by its ID.",
     "summary": "Get a personal access token"
   },
   "UpdatePersonalAccessToken": {
     "description": "Update a specific personal access token.",
     "summary": "Update a personal access token",
     "request_description": "",
-    "request_schema_description": "Request used to update a personal access token."
+    "request_schema_description": "Request used to update an access token."
   },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
@@ -3155,6 +3719,10 @@
     "description": "List all data connections for an entity",
     "summary": "List connections"
   },
+  "GetPrunedTraceByID": {
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a pruned trace by ID"
+  },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
@@ -3266,6 +3834,30 @@
     "summary": "Update a WAF exclusion filter",
     "request_description": "The exclusion filter to update.",
     "request_schema_description": "Request object for updating a single WAF exclusion filter."
+  },
+  "ListApplicationSecurityWAFPolicies": {
+    "description": "Retrieve a list of WAF policies.",
+    "summary": "List all WAF policies"
+  },
+  "CreateApplicationSecurityWafPolicy": {
+    "description": "Create a new WAF policy.",
+    "summary": "Create a WAF Policy",
+    "request_description": "The new WAF policy.",
+    "request_schema_description": "Request object that includes the policy to create."
+  },
+  "DeleteApplicationSecurityWafPolicy": {
+    "description": "Delete a specific WAF policy.",
+    "summary": "Delete a WAF Policy"
+  },
+  "GetApplicationSecurityWafPolicy": {
+    "description": "Retrieve a WAF policy by ID.",
+    "summary": "Get a WAF Policy"
+  },
+  "UpdateApplicationSecurityWafPolicy": {
+    "description": "Update a specific WAF policy.\nReturns the policy object when the request is successful.",
+    "summary": "Update a WAF Policy",
+    "request_description": "New WAF policy.",
+    "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
@@ -3451,6 +4043,20 @@
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
+  "ListPermanentRetentionFilters": {
+    "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
+    "summary": "Get all permanent RUM retention filters"
+  },
+  "GetPermanentRetentionFilter": {
+    "description": "Get a permanent RUM retention filter for a RUM application by its identifier.",
+    "summary": "Get a permanent RUM retention filter"
+  },
+  "UpdatePermanentRetentionFilter": {
+    "description": "Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.\nOnly fields marked as editable in the `editability` block of the filter can be updated.\nUpdating a non-editable field returns a `400` response.",
+    "summary": "Update a permanent RUM retention filter",
+    "request_description": "New configuration of the permanent RUM retention filter.",
+    "request_schema_description": "The permanent RUM retention filter body to update."
+  },
   "DeleteRetentionFilter": {
     "description": "Delete a RUM retention filter for a RUM application.",
     "summary": "Delete a RUM retention filter"
@@ -3613,6 +4219,22 @@
     "request_description": "",
     "request_schema_description": "Definition of a group."
   },
+  "ListSCIMResourceTypes": {
+    "description": "List the SCIM resource types supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List resource types"
+  },
+  "GetSCIMResourceType": {
+    "description": "Get a single SCIM resource type using the `resource_id`.\nSupported `resource_id` values are `User` and `Group`.",
+    "summary": "Get resource type"
+  },
+  "ListSCIMSchemas": {
+    "description": "List the SCIM schemas supported by this service provider.\nSee [RFC 7644 Section 4](https://tools.ietf.org/html/rfc7644#section-4) for more information.",
+    "summary": "List schemas"
+  },
+  "GetSCIMSchema": {
+    "description": "Get a single SCIM schema using the `schema_id`. Supported `schema_id`\nvalues are `urn:ietf:params:scim:schemas:core:2.0:User` and\n`urn:ietf:params:scim:schemas:core:2.0:Group`.",
+    "summary": "Get schema"
+  },
   "ListSCIMUsers": {
     "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
     "summary": "List users"
@@ -3706,6 +4328,10 @@
   "ListScorecards": {
     "description": "Fetches all scorecards.",
     "summary": "List all scorecards"
+  },
+  "ListScorecardScores": {
+    "description": "Returns a list of scorecard scores for each aggregation type, with score breakdowns.",
+    "summary": "List all scores"
   },
   "UnassignSeatsUser": {
     "description": "Unassign seats from users for a product code.",
@@ -3905,6 +4531,40 @@
     "request_description": "New definition of the critical asset. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the critical asset."
   },
+  "ListSecurityMonitoringIntegrationConfigs": {
+    "description": "List the entity context sync configurations for Cloud SIEM. Each configuration connects Cloud SIEM\nto an external source that provides entities (for example, users from an identity provider) for use\nin signals and the entity explorer.",
+    "summary": "List entity context sync configurations"
+  },
+  "CreateSecurityMonitoringIntegrationConfig": {
+    "description": "Create a new entity context sync configuration so Cloud SIEM can ingest entities from an external\nsource. The credentials provided in `secrets` are validated against the source before the configuration\nis stored and never returned in subsequent responses.",
+    "summary": "Create an entity context sync configuration",
+    "request_description": "The definition of the new integration configuration.",
+    "request_schema_description": "Request body to create an entity context sync configuration."
+  },
+  "ValidateSecurityMonitoringIntegrationCredentials": {
+    "description": "Validate a set of credentials against the external entity source before creating a sync configuration.\nReturns a 200 status code if the credentials are valid.",
+    "summary": "Validate entity context sync credentials",
+    "request_description": "The credentials to validate.",
+    "request_schema_description": "Request body to validate credentials against an external entity source before creating a sync configuration."
+  },
+  "DeleteSecurityMonitoringIntegrationConfig": {
+    "description": "Delete an entity context sync configuration. Cloud SIEM stops ingesting entities from this source,\nand the credentials stored for the configuration are removed from the secrets store.",
+    "summary": "Delete an entity context sync configuration"
+  },
+  "GetSecurityMonitoringIntegrationConfig": {
+    "description": "Get the details of a specific entity context sync configuration.",
+    "summary": "Get an entity context sync configuration"
+  },
+  "UpdateSecurityMonitoringIntegrationConfig": {
+    "description": "Update an existing entity context sync configuration. Supports partial updates; only the fields provided in the request body are modified.",
+    "summary": "Update an entity context sync configuration",
+    "request_description": "The fields to update on the integration configuration.",
+    "request_schema_description": "Request body to update an entity context sync configuration. Supports partial updates."
+  },
+  "ValidateSecurityMonitoringIntegrationConfig": {
+    "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
+    "summary": "Validate an entity context sync configuration"
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
@@ -3914,6 +4574,10 @@
     "summary": "Create a security filter",
     "request_description": "The definition of the new security filter.",
     "request_schema_description": "Request object that includes the security filter that you would like to create."
+  },
+  "ListSecurityFilterVersions": {
+    "description": "Get the configured security filters at each historical version of the configuration.\nEach entry in the response represents the set of all security filters at a given version,\nordered from the most recent version to the oldest.",
+    "summary": "Get the version history of security filters"
   },
   "DeleteSecurityFilter": {
     "description": "Delete a specific security filter.",
@@ -3985,6 +4649,48 @@
     "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
+  "ListSecurityMonitoringDatasets": {
+    "description": "List all Cloud SIEM datasets available to the organization, including both\ncustomer-defined datasets and Datadog out-of-the-box datasets.",
+    "summary": "List datasets"
+  },
+  "CreateSecurityMonitoringDataset": {
+    "description": "Create a new Cloud SIEM dataset. A dataset bundles a data source, a set of\nindexes, and a search query that can be referenced from detection rules.",
+    "summary": "Create a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a Cloud SIEM dataset."
+  },
+  "BatchGetSecurityMonitoringDatasetDependencies": {
+    "description": "Return, for each of the requested datasets, the list of detection rules that depend\non it. Useful for understanding the impact of updating or deleting a dataset.",
+    "summary": "Get dataset dependencies",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving dependencies of a batch of datasets."
+  },
+  "DeleteSecurityMonitoringDataset": {
+    "description": "Delete a Cloud SIEM dataset. Out-of-the-box datasets cannot be deleted and\ndeleting a dataset that is referenced by a detection rule is rejected.",
+    "summary": "Delete a dataset"
+  },
+  "GetSecurityMonitoringDataset": {
+    "description": "Get the current version of a Cloud SIEM dataset by ID.",
+    "summary": "Get a dataset"
+  },
+  "UpdateSecurityMonitoringDataset": {
+    "description": "Update an existing Cloud SIEM dataset. The current version of the dataset can be\nprovided to detect concurrent modifications.",
+    "summary": "Update a dataset",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a Cloud SIEM dataset."
+  },
+  "GetSecurityMonitoringDatasetByVersion": {
+    "description": "Retrieve a specific historical version of a Cloud SIEM dataset.",
+    "summary": "Get a dataset at a specific version"
+  },
+  "GetSecurityMonitoringDatasetVersionHistory": {
+    "description": "Retrieve the version history of a Cloud SIEM dataset, including the changes made at each version.",
+    "summary": "Get the version history of a dataset"
+  },
+  "GetEntityContext": {
+    "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
+    "summary": "Get entity context"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -4012,6 +4718,12 @@
     "summary": "Convert a rule from JSON to Terraform",
     "request_description": "",
     "request_schema_description": "Convert a rule from JSON to Terraform."
+  },
+  "BulkConvertExistingSecurityMonitoringRules": {
+    "description": "Convert a list of existing security monitoring rules to Terraform for the Datadog provider\nresource `datadog_security_monitoring_rule`. Returns a ZIP archive containing one Terraform\nfile per rule. You can convert rules for the following types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection",
+    "summary": "Bulk convert rules to Terraform",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
   },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
@@ -4053,6 +4765,26 @@
     "description": "Get a rule's version history.",
     "summary": "Get a rule's version history"
   },
+  "ListSampleLogGenerationSubscriptions": {
+    "description": "Get the sample log generation subscriptions for the organization.\nSample log generation injects representative example logs for a given Cloud SIEM content pack into the Logs platform,\nwhich can be used to test detection rules without onboarding the underlying integration first.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an eligible\npricing model. Other organizations receive a `403 Forbidden` (non-trial orgs) or a `400 Bad Request`\n(feature disabled), and legacy pricing tiers receive a response with `status: not_available`.",
+    "summary": "Get sample log generation subscriptions"
+  },
+  "CreateSampleLogGenerationSubscription": {
+    "description": "Subscribe to sample log generation for a Cloud SIEM content pack. Sample logs for the\nrequested content pack are injected into the Logs platform for the duration of the subscription,\nso detection rules can be exercised without onboarding the underlying integration first.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
+    "summary": "Subscribe to sample log generation",
+    "request_description": "The content pack to subscribe to and the desired duration of the subscription.",
+    "request_schema_description": "Request body to create a sample log generation subscription for a single content pack."
+  },
+  "BulkCreateSampleLogGenerationSubscriptions": {
+    "description": "Subscribe to sample log generation for multiple Cloud SIEM content packs in a single call.\nEach requested content pack is processed independently; the response includes a per-item\nstatus so partial successes can be inspected.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive per-item responses with `status: not_available`.",
+    "summary": "Bulk subscribe to sample log generation",
+    "request_description": "The content packs to subscribe to and the desired duration of the subscriptions.",
+    "request_schema_description": "Request body to create sample log generation subscriptions for multiple content packs at once."
+  },
+  "DeleteSampleLogGenerationSubscription": {
+    "description": "Unsubscribe from sample log generation for a Cloud SIEM content pack.\nAfter unsubscribing, no more sample logs are generated for the requested content pack.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
+    "summary": "Unsubscribe from sample log generation"
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
@@ -4090,6 +4822,10 @@
     "summary": "Modify the triage assignee of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the assignee of a given security monitoring signal."
+  },
+  "GetSignalEntities": {
+    "description": "Get the list of entities related to a security signal, captured at the signal's timestamp.",
+    "summary": "Get entities related to a signal"
   },
   "EditSecurityMonitoringSignalIncidents": {
     "description": "Change the related incidents for a security signal.",
@@ -4210,14 +4946,14 @@
     "summary": "Revoke an access token for a service account"
   },
   "GetServiceAccountAccessToken": {
-    "description": "Get a specific access token for a service account by its UUID.",
+    "description": "Get a specific access token for a service account by its ID.",
     "summary": "Get an access token for a service account"
   },
   "UpdateServiceAccountAccessToken": {
     "description": "Update a specific access token for a service account.",
     "summary": "Update an access token for a service account",
     "request_description": "",
-    "request_schema_description": "Request used to update a personal access token."
+    "request_schema_description": "Request used to update a service account access token."
   },
   "ListServiceAccountApplicationKeys": {
     "description": "List all application keys available for this service account.",
@@ -4389,6 +5125,90 @@
     "request_description": "",
     "request_schema_description": "The top-level request object for resolving vulnerable symbols in a set of packages."
   },
+  "ListAiMemoryViolationResults": {
+    "description": "Get all AI memory violation results for the authenticated organization.",
+    "summary": "List AI memory violation results"
+  },
+  "CreateAiMemoryViolationResult": {
+    "description": "Add a new AI memory violation result for the authenticated organization.",
+    "summary": "Create an AI memory violation result",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI memory violation result."
+  },
+  "DeleteAiMemoryViolationResult": {
+    "description": "Delete an AI memory violation result by its numeric identifier.",
+    "summary": "Delete an AI memory violation result"
+  },
+  "ListAiPrompts": {
+    "description": "Get all AI prompts, including default prompts and custom AI rule prompts for the authenticated organization.",
+    "summary": "List AI prompts"
+  },
+  "ListAiCustomRulesets": {
+    "description": "Get all AI custom rulesets for the authenticated organization.",
+    "summary": "List AI custom rulesets"
+  },
+  "CreateAiCustomRuleset": {
+    "description": "Create a new AI custom ruleset for the authenticated organization.",
+    "summary": "Create an AI custom ruleset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI custom ruleset."
+  },
+  "DeleteAiCustomRuleset": {
+    "description": "Delete an AI custom ruleset by name.",
+    "summary": "Delete an AI custom ruleset"
+  },
+  "GetAiCustomRuleset": {
+    "description": "Get an AI custom ruleset by name.",
+    "summary": "Get an AI custom ruleset"
+  },
+  "UpdateAiCustomRuleset": {
+    "description": "Update the description of an existing AI custom ruleset.",
+    "summary": "Update an AI custom ruleset",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an AI custom ruleset."
+  },
+  "CreateAiCustomRule": {
+    "description": "Create a new AI custom rule within a ruleset.",
+    "summary": "Create an AI custom rule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI custom rule."
+  },
+  "DeleteAiCustomRule": {
+    "description": "Delete an AI custom rule by name within a ruleset.",
+    "summary": "Delete an AI custom rule"
+  },
+  "GetAiCustomRule": {
+    "description": "Get an AI custom rule by name within a ruleset.",
+    "summary": "Get an AI custom rule"
+  },
+  "ListAiCustomRuleRevisions": {
+    "description": "Get all revisions for an AI custom rule.",
+    "summary": "List AI custom rule revisions"
+  },
+  "CreateAiCustomRuleRevision": {
+    "description": "Create a new revision for an AI custom rule.",
+    "summary": "Create an AI custom rule revision",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AI custom rule revision."
+  },
+  "GetAiCustomRuleRevision": {
+    "description": "Get a specific revision of an AI custom rule.",
+    "summary": "Get an AI custom rule revision"
+  },
+  "ListStaticAnalysisCodegenRulesets": {
+    "description": "Get the rulesets relevant for code generation for the authenticated user.",
+    "summary": "List codegen rulesets"
+  },
+  "ListCustomRulesets": {
+    "description": "Get all custom rulesets for the authenticated organization.",
+    "summary": "List Custom Rulesets"
+  },
+  "CreateCustomRuleset": {
+    "description": "Create a new custom ruleset for the authenticated organization.",
+    "summary": "Create Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a custom ruleset."
+  },
   "DeleteCustomRuleset": {
     "description": "Delete a custom ruleset",
     "summary": "Delete Custom Ruleset"
@@ -4437,15 +5257,43 @@
     "description": "Get a specific revision of a custom rule",
     "summary": "Show Custom Rule Revision"
   },
+  "GetStaticAnalysisDefaultRulesets": {
+    "description": "Get the default SAST ruleset names for a given programming language.",
+    "summary": "Get default rulesets for a language"
+  },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",
     "summary": "Ruleset get multiple",
     "request_description": "",
     "request_schema_description": "The request payload for retrieving rules for multiple rulesets in a single batch call."
   },
+  "GetStaticAnalysisRuleset": {
+    "description": "Get a SAST ruleset by name, including all its rules.",
+    "summary": "Get a SAST ruleset"
+  },
   "GetSecretsRules": {
     "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
     "summary": "Returns a list of Secrets rules"
+  },
+  "CreateStaticAnalysisServerAnalysis": {
+    "description": "Run static analysis rules against a source code file and return violations found.",
+    "summary": "Analyze code",
+    "request_description": "",
+    "request_schema_description": "The request payload for running static analysis on source code."
+  },
+  "CreateStaticAnalysisAst": {
+    "description": "Parse source code into an abstract syntax tree (AST) for the specified language.",
+    "summary": "Get AST for source code",
+    "request_description": "",
+    "request_schema_description": "The request payload for parsing source code into an abstract syntax tree."
+  },
+  "GetStaticAnalysisNodeTypes": {
+    "description": "Retrieve tree-sitter node type definitions for a given programming language.",
+    "summary": "Get node types for a language"
+  },
+  "GetStaticAnalysisTreeSitterWasm": {
+    "description": "Download the WebAssembly binary for a tree-sitter grammar by file name.",
+    "summary": "Get tree-sitter WASM file"
   },
   "ListStatusPages": {
     "description": "Lists all status pages for the organization.",
@@ -4926,6 +5774,10 @@
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
+  },
+  "GetTraceByID": {
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a trace by ID"
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",

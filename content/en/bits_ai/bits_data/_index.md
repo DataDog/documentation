@@ -1,6 +1,6 @@
 ---
-title: Bits AI Data
-description: "Ask questions about your business data in natural language. Bits AI Data writes the queries, runs them against your data warehouse, and returns answers without SQL or dashboard hunting."
+title: Bits for Data
+description: "Ask questions about your business data in natural language. Bits for Data writes the queries, runs them against your data warehouse, and returns answers without SQL or dashboard hunting."
 further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
@@ -15,13 +15,13 @@ cascade:
     site_support_id: bits_data
 ---
 
-<div class="alert alert-info">Bits AI Data is in Preview. Contact your Datadog representative to sign up.</div>
+<div class="alert alert-info">Bits for Data is in Preview. Contact your Datadog representative to sign up.</div>
 
 ## Overview
 
-Bits AI Data is an agentic AI tool that lets you explore and analyze your business data through natural language. Ask questions about your revenue, customers, support, or sales pipeline. Bits AI Data identifies the relevant tables, writes the SQL, runs it against your connected data warehouse, and returns the results. Combine business data with your Datadog observability data in dashboards, notebooks, and [DDSQL][1] queries.
+Bits for Data is an agentic AI tool that lets you explore and analyze your business data through natural language. Ask questions about your revenue, customers, support, or sales pipeline. Bits for Data identifies the relevant tables, writes the SQL, runs it against your connected data warehouse, and returns the results. Combine business data with your Datadog observability data in dashboards, notebooks, and [DDSQL][1] queries.
 
-{{< img src="bits_ai/business_intelligence.png" alt="Bits AI Data chat interface answering a question about top customers driving Electronics growth, alongside an admin overview dashboard showing agent usage metrics and active users" style="width:100%;" >}}
+{{< img src="bits_ai/business_intelligence.png" alt="Bits for Data chat interface answering a question about top customers driving Electronics growth, alongside an admin overview dashboard showing agent usage metrics and active users" style="width:100%;" >}}
 
 ## Use cases
 
@@ -33,7 +33,7 @@ Bits AI Data is an agentic AI tool that lets you explore and analyze your busine
 
 ## Sample questions
 
-Ask Bits AI Data questions like:
+Ask Bits for Data questions like:
 
 - `What is the ARR for top customers this quarter?`
 - `Which products have the most active customers?`
@@ -45,15 +45,15 @@ Ask Bits AI Data questions like:
 ## How it works
 
 1. Type a question in natural language.
-2. Bits AI Data identifies the relevant tables, writes the SQL, and runs it against your connected data warehouse.
+2. Bits for Data identifies the relevant tables, writes the SQL, and runs it against your connected data warehouse.
 3. Results are returned as a table you can explore.
 4. Save the results to a notebook, refine the query, or turn it into a skill.
 
 ## Query contexts
 
-Query contexts are curated instructions per data domain, such as Product or Sales. Each context tells Bits AI Data which tables to use, which filters to apply, and which edge cases to avoid. Query contexts are what make Bits AI Data accurate and consistent.
+Query contexts are curated instructions per data domain, such as Product or Sales. Each context tells Bits for Data which tables to use, which filters to apply, and which edge cases to avoid. Query contexts are what make Bits for Data accurate and consistent.
 
-Bits AI Data can auto-generate query contexts from usage and metadata in your connected BI tools and data warehouses through [Data Observability][4]. Data teams then review and refine the generated instructions so anyone on the team can get reliable answers, without analyst expertise or analyst involvement.
+Bits for Data can auto-generate query contexts from usage and metadata in your connected BI tools and data warehouses through [Data Observability][4]. Data teams then review and refine the generated instructions so anyone on the team can get reliable answers, without analyst expertise or analyst involvement.
 
 ### Example: revenue query context
 
@@ -66,21 +66,21 @@ A Revenue query context might include instructions such as:
 
 ### Evaluations
 
-Data teams can define evaluations against a query context to verify that Bits AI Data answers representative business questions correctly. An eval runs a set of expected question-and-answer pairs against the context. When an answer drifts from the expected result, the eval flags a regression so you can refine instructions before users see incorrect results.
+Data teams can define evaluations against a query context to verify that Bits for Data answers representative business questions correctly. An eval runs a set of expected question-and-answer pairs against the context. When an answer drifts from the expected result, the eval flags a regression so you can refine instructions before users see incorrect results.
 
 ## Skills
 
-A skill is a saved set of instructions that Bits AI Data can execute on demand. Use skills to automate repeated workflows. For example, save a skill that returns weekly support ticket trends by product. You can then run the skill without rephrasing the question each time.
+A skill is a saved set of instructions that Bits for Data can execute on demand. Use skills to automate repeated workflows. For example, save a skill that returns weekly support ticket trends by product. You can then run the skill without rephrasing the question each time.
 
 Skills can be kept private, shared with your team, or shared across your company. Sharing lets others run the same workflow without recreating it.
 
 ## Permissions
 
-Bits AI Data only accesses data you have permission to query in your connected data warehouse. To expand your access, use your data warehouse's standard access workflow.
+Bits for Data only accesses data you have permission to query in your connected data warehouse. To expand your access, use your data warehouse's standard access workflow.
 
 ## Accuracy
 
-Bits AI Data works well for most questions, but its answers are generated by an AI model. Verify the underlying query and data sources before using results for important decisions, presentations, or external reporting.
+Bits for Data works well for most questions, but its answers are generated by an AI model. Verify the underlying query and data sources before using results for important decisions, presentations, or external reporting.
 
 ## Further reading
 

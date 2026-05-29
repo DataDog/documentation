@@ -1,50 +1,50 @@
 ---
-title: Bits AI Dev Agent
+title: Bits Code
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
     tag: "Blog"
-    text: "Automatically identify issues and generate fixes with the Bits AI Dev Agent"
+    text: "Automatically identify issues and generate fixes with Bits Code"
   - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
     tag: "Blog"
-    text: "Introducing Bits AI Dev Agent for Code Security"
+    text: "Introducing Bits Code for Code Security"
 ---
 
 ## Overview
 
-Bits AI Dev Agent is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
+Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
 
 {{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time the Dev Agent investigates an issue or generates a fix, it creates a [code session][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time Bits Code investigates an issue or generates a fix, it creates a [code session][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
-To get started with Bits AI Dev Agent, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
+To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
 
 ## Code sessions
-A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
+A code session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Code** > [**Code Sessions**][7].
 
 {{< img src="bits_ai/dev_agent/code_fix.png" alt="A code session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
 
 ### Start a code session
 After [completing setup][6], do one of the following to start a code session:
 - Enter a freeform prompt at [**Code Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
-- Invoke Bits AI Dev Agent in a [supported Datadog product][9]
+- Invoke Bits Code in a [supported Datadog product][9]
 
-A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
+A code session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
 ### View and manage code sessions
 On **[Code Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
 
-Click a session to view its details and continue working with the Dev Agent. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
+Click a session to view its details and continue working with Bits Code. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
 
 ## Supported Datadog products
 
-Bits AI Dev Agent can suggest code improvements in the following Datadog products:
+Bits Code can suggest code improvements in the following Datadog products:
 
 | Product                   | Capabilities                                                       |
 |---------------------------|--------------------------------------------------------------------|
 | [APM][20]                 | Proposes code changes for relevant [APM Recommendations][21]|
-| [Bits AI SRE][17]         | Generates code remediations based on Bits AI SRE investigations |
-| [Bits Assistant][16]      | Suggests code changes arising from Bits Assistant conversations |
+| [Bits Investigation][17]         | Generates code remediations based on Bits Investigations |
+| [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
 | [Code Security][2]        | Remediates code vulnerabilities individually or in bulk  |
@@ -52,27 +52,27 @@ Bits AI Dev Agent can suggest code improvements in the following Datadog product
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
 
-**Note**: Enabling Bits AI Dev Agent is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
+**Note**: Enabling Bits Code is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
 
 ## Key capabilities 
 
-The following sections detail how Bits AI Dev Agent integrates with Datadog products to generate contextual code fixes.
+The following sections detail how Bits Code integrates with Datadog products to generate contextual code fixes.
 
 ### Pull request assistance
 
-Bits AI Dev Agent integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
+Bits Code integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
 
 - Generates PR titles and descriptions based on your PR template.
 - Opens PRs as drafts, iterates using CI logs, and marks the PRs as ready for review when checks pass.
 - Continues iterating in response to chat messages and review feedback.
   
-  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
+  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Code never auto-merges PRs.
 
-See all PRs the Dev Agent is working on in **Bits AI** > **Dev Agent** > **[Code Sessions][7]**.
+See all PRs Bits Code is working on in **Bits AI** > **Code** > **[Code Sessions][7]**.
 
 ### Auto-push
 
-Auto-push allows the Dev Agent to create branches, push code, and open PRs when it detects something it can help you with. For example, the Dev Agent can:
+Auto-push allows Bits Code to create branches, push code, and open PRs when it detects something it can help you with. For example, Bits Code can:
 - Auto-create PRs for high-impact errors (such as 500s or crashes).
 - Update PRs in response to your comments in GitHub.
 - Update PRs to address CI failures.
@@ -83,13 +83,13 @@ Auto-push is available for Error Tracking and Test Optimization.
 
 #### Security considerations
 
-Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data the Dev Agent works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
+Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data Bits Code works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
 
 To balance safety and automation, you can configure auto-push behavior in [Datadog][14] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
 
 ### Error tracking
 
-In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tested fixes:
+In [Error Tracking][1], Bits Code diagnoses and remediates code issues with context and unit-tested fixes:
 - Determines whether an error can be fixed through code and generates a fix with unit tests.
 - Provides links within the chat to relevant files and methods for streamlined navigation.
 - Analyzes errors asynchronously as they arrive.
@@ -99,26 +99,26 @@ In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues w
 
 ### Flaky test management 
 
-Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Management in [Test Optimization][4] and attempts to verify that tests remain stable.
+Bits Code fixes flaky tests that are detected through Flaky Test Management in [Test Optimization][4] and attempts to verify that tests remain stable.
 
 [Auto-push](#auto-push) is available for this feature. 
 
 ### In-product recommendations
 
-Bits AI Dev Agent suggests code improvements and fixes in various Datadog products, such as CCM Recommendations, [APM Recommendations][21], and Profiling Insights. See [Supported Datadog products][9] for a full list.
+Bits Code suggests code improvements and fixes in various Datadog products, such as CCM Recommendations, [APM Recommendations][21], and Profiling Insights. See [Supported Datadog products][9] for a full list.
 
 ### Code security
 
-Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to large backlogs. You can:
+Bits Code remediates vulnerabilities at scale, from single issues to large backlogs. You can:
 - Create PR batches to fix multiple vulnerabilities at once.
 - Use the Campaign tool to push PRs incrementally and manage review workload across teams.
 
-Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through the Bits AI Dev Agent. Learn more about [AI-Enhanced Static Code Analysis][15].
+Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through Bits Code. Learn more about [AI-Enhanced Static Code Analysis][15].
 
 ## Limitations
 
-- Bits Dev is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
-- Bits AI Dev Agent does not support multi-repository investigations.
+- Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
+- Bits Code does not support multi-repository investigations.
 
 ## Further reading
 

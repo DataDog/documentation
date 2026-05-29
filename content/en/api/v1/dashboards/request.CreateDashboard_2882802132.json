@@ -1,0 +1,56 @@
+{
+  "title": "Example-Dashboard",
+  "description": null,
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 22
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "hostmap",
+        "requests": {
+          "request_type": "infrastructure_hostmap",
+          "node_type": "host",
+          "filter": "env:prod",
+          "group_by": [
+            {
+              "column": "tags",
+              "key": "service"
+            }
+          ],
+          "enrichments": [
+            {
+              "response_format": "scalar",
+              "queries": [
+                {
+                  "data_source": "metrics",
+                  "name": "query1",
+                  "query": "avg:system.cpu.user{*} by {host}"
+                }
+              ],
+              "formulas": [
+                {
+                  "formula": "query1",
+                  "dimension": "fill"
+                }
+              ]
+            }
+          ],
+          "style": {
+            "palette": "green_to_orange",
+            "palette_flip": false
+          }
+        }
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}
