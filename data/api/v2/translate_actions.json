@@ -4043,6 +4043,20 @@
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
+  "ListPermanentRetentionFilters": {
+    "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
+    "summary": "Get all permanent RUM retention filters"
+  },
+  "GetPermanentRetentionFilter": {
+    "description": "Get a permanent RUM retention filter for a RUM application by its identifier.",
+    "summary": "Get a permanent RUM retention filter"
+  },
+  "UpdatePermanentRetentionFilter": {
+    "description": "Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.\nOnly fields marked as editable in the `editability` block of the filter can be updated.\nUpdating a non-editable field returns a `400` response.",
+    "summary": "Update a permanent RUM retention filter",
+    "request_description": "New configuration of the permanent RUM retention filter.",
+    "request_schema_description": "The permanent RUM retention filter body to update."
+  },
   "DeleteRetentionFilter": {
     "description": "Delete a RUM retention filter for a RUM application.",
     "summary": "Delete a RUM retention filter"
