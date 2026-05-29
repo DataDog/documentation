@@ -2,7 +2,7 @@
 title: Chat with Bits AI SRE
 ---
 
-Within an investigation, you can chat with Bits AI SRE to gather additional information about the investigation, related telemetry, and more.
+Within an investigation, you can chat with Bits AI SRE to gather additional information about the investigation, steer the agent in real time, and more.
 
 {{< img src="bits_ai/bits_ai_sre_chat_example.png" alt="Example chat where a user asks Bits AI about related ongoing incidents, and Bits AI responds with a list of related incidents and an explanation on what makes them related" style="width:100%;" >}}
 
@@ -28,5 +28,6 @@ The Bits AI SRE chatbot has access to:
 | Query APM request, error, and duration metrics | `What's the current error rate for <web-store>?`                  | APM                               |
 | Ask about Datadog products                     | `Does Bits AI SRE connect to Datadog Case Management?`            | Datadog Documentation             |
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
+| Steer the agent mid-investigation              | `Focus on the <payments-service> logs from the last 30 minutes`   | Logs                              |
 
 [1]: bits_ai/bits_ai_sre/configure#confluence
