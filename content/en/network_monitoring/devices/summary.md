@@ -22,7 +22,7 @@ The Network Device Monitoring (NDM) **Summary Page** is a command center for net
 
 **Note**: [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
 
-{{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device performance, traffic, and recent changes." style="width:100%;" >}}
+{{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device health, traffic, and recent changes." style="width:100%;" >}}
 
 ## Using the Summary Page
 
@@ -43,13 +43,13 @@ The sections below describe each part of the Summary Page in detail.
 
 ### Network health
 
-The **Network health** section provides an at-a-glance assessment of your overall network status.
+The **Network health** section summarizes your overall network state.
 
 {{< img src="network_device_monitoring/summary/network_health.png" alt="The Network health section showing a Bits AI summary on the left and a topology view with health-coded nodes on the right." style="width:100%;" >}}
 
 A Bits AI summary explains the current state of your network, highlighting affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click **Chat with Bits Assistant** to ask follow-up questions.
 
-Below the summary, a status panel shows the total device count broken down by status (OK, unreachable, degraded, offline, and unmonitored), active monitor alert and warning counts, and the number of active issues. Click **View Health** to open the [Device Health][5] view.
+Below the summary, a status panel shows the total device count broken down by status (OK, unreachable, degraded, offline, and unmonitored), the number of active monitor alerts and warnings, and the number of active issues. Click **View Health** to open the [Device Health][5] view.
 
 ### Issues
 
@@ -59,7 +59,7 @@ The **Issues** list summarizes active alerts on network resources, grouped to re
 
 ### Interface health
 
-The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the device side panel, which includes a device summary, interface status, dependencies, metrics, configuration, traffic, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the full device page, with a dedicated tab for each of those sections.
+The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the device side panel, which includes a device summary, interface status, dependencies, metrics, configuration, traffic, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where each section has its own tab.
 
 {{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
 
