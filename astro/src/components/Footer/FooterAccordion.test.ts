@@ -59,6 +59,7 @@ const renderAccordion = () =>
   render(h(FooterAccordionComponent, { sections }));
 
 beforeEach(() => {
+  document.documentElement.style.setProperty('--hugo-breakpoint-desktop', '992px');
   mockMobileViewport();
 });
 

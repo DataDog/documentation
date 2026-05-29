@@ -86,7 +86,6 @@ export default function FreeTrialModal({ title, iframeSrc }: Props) {
               title={title}
               width="100%"
               height="600"
-              frameborder="0"
             />
           )}
         </div>

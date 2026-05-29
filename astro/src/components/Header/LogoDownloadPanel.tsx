@@ -19,11 +19,12 @@ export interface LogoDownloadPanelSvgs {
   arrow: string;
 }
 
+const CTA_HREF = "https://www.datadoghq.com/about/resources/";
+
 interface Props {
   externalContext: ExternalContext<{ trigger: string }>;
   labels: LogoDownloadPanelLabels;
   svgs: LogoDownloadPanelSvgs;
-  ctaHref: string;
 }
 
 // Hidden popover that appears when the Datadog logo is clicked. Mirrors Hugo's
@@ -34,7 +35,6 @@ export function LogoDownloadPanel({
   externalContext,
   labels,
   svgs,
-  ctaHref,
 }: Props) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -88,7 +88,7 @@ export function LogoDownloadPanel({
       />
       <p class={cl("logo-download__eyebrow")}>{labels.eyebrow}</p>
       <p class={cl("logo-download__body")}>{labels.body}</p>
-      <a href={ctaHref} class={cl("logo-download__btn")}>
+      <a href={CTA_HREF} class={cl("logo-download__btn")}>
         {labels.cta}
       </a>
     </div>

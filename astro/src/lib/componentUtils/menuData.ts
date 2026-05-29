@@ -158,7 +158,7 @@ const categoryIconMap: Record<string, string> = import.meta.glob<string>(
   { query: "?raw", import: "default", eager: true },
 );
 
-function iconHtml(name: string): string {
+export function iconHtml(name: string): string {
   const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
   return categoryIconMap[key] ?? "";
 }

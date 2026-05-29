@@ -8,7 +8,7 @@ import MobileNav, {
   type MobileNavLabels,
 } from "@components/MobileNav/MobileNav.tsx";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
-import { getHeaderData } from "@lib/componentUtils/menuData.ts";
+import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
 import { i18n } from "@lib/i18n/i18n";
 import { IMAGES_URL } from "@config/images.ts";
@@ -33,20 +33,14 @@ const textLogoUrl = `${IMAGES_URL}/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&au
 const mobileLogoUrl = `${IMAGES_URL}/img/datadog_rbg_n_2x.png`;
 const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 
-const logoPanelArrowIcons = import.meta.glob<string>(
-  "../../mocked-dependencies/websites_modules/static/icons/modal-up-arrow.svg",
-  { query: "?raw", import: "default", eager: true },
-);
-const logoPanelArrowSvg =
-  logoPanelArrowIcons[
-    "../../mocked-dependencies/websites_modules/static/icons/modal-up-arrow.svg"
-  ] ?? "";
+const logoPanelArrowSvg = iconHtml("modal-up-arrow");
+
+// TODO: Use i18n for translation
 const logoPanelLabels = {
   eyebrow: "Looking for Datadog logos?",
   body: "You can find the logo assets on our press page.",
   cta: "Download Media Assets",
 };
-const logoPanelCtaHref = "https://www.datadoghq.com/about/resources/";
 ---
 
 <div class={cl("header__wrapper")}>
@@ -141,7 +135,6 @@ const logoPanelCtaHref = "https://www.datadoghq.com/about/resources/";
               }}
               labels={logoPanelLabels}
               svgs={{ arrow: logoPanelArrowSvg }}
-              ctaHref={logoPanelCtaHref}
             />
           </a>
         </div>

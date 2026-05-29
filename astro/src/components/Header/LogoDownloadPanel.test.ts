@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, afterEach } from "vitest";
-import { render, cleanup } from "@testing-library/preact";
+import { render, cleanup, act } from "@testing-library/preact";
 import { h } from "preact";
 import {
   LogoDownloadPanel,
@@ -14,7 +14,6 @@ const labels: LogoDownloadPanelLabels = {
   cta: "Download Media Assets",
 };
 const svgs: LogoDownloadPanelSvgs = { arrow: "<svg data-arrow></svg>" };
-const ctaHref = "https://example.com/press";
 
 afterEach(() => {
   cleanup();
@@ -35,7 +34,6 @@ const mountPanel = (triggerId: string) =>
       externalContext: { scope: triggerId, entries: { trigger: triggerId } },
       labels,
       svgs,
-      ctaHref,
     }),
   );
 
@@ -59,7 +57,7 @@ describe("LogoDownloadPanel", () => {
     expect(p.textContent).toContain("You can find the logo assets");
     const cta = p.querySelector(".logo-download__btn") as HTMLAnchorElement;
     expect(cta.textContent).toBe("Download Media Assets");
-    expect(cta.href).toBe(ctaHref);
+    expect(cta.href).toBe("https://www.datadoghq.com/about/resources/");
     expect(p.querySelector(".logo-download__arrow svg")).toBeTruthy();
   });
 
@@ -73,21 +71,27 @@ describe("LogoDownloadPanel", () => {
     const trigger = setupTrigger("t2");
     mountPanel("t2");
 
-    const event = dispatchClick(trigger);
+    let event: MouseEvent;
+    act(() => {
+      event = dispatchClick(trigger);
+    });
 
     expect(panel()!.classList.contains("logo-download--open")).toBe(true);
-    expect(event.defaultPrevented).toBe(true);
+    expect(event!.defaultPrevented).toBe(true);
   });
 
   it("closes on second trigger click and allows navigation", () => {
     const trigger = setupTrigger("t3");
     mountPanel("t3");
 
-    dispatchClick(trigger);
-    const second = dispatchClick(trigger);
+    let second: MouseEvent;
+    act(() => {
+      dispatchClick(trigger);
+      second = dispatchClick(trigger);
+    });
 
     expect(panel()!.classList.contains("logo-download--open")).toBe(false);
-    expect(second.defaultPrevented).toBe(false);
+    expect(second!.defaultPrevented).toBe(false);
   });
 
   it("closes when a click lands outside the trigger and panel", () => {
@@ -96,10 +100,14 @@ describe("LogoDownloadPanel", () => {
     document.body.appendChild(outside);
     mountPanel("t4");
 
-    dispatchClick(document.getElementById("t4")!);
+    act(() => {
+      dispatchClick(document.getElementById("t4")!);
+    });
     expect(panel()!.classList.contains("logo-download--open")).toBe(true);
 
-    dispatchClick(outside);
+    act(() => {
+      dispatchClick(outside);
+    });
     expect(panel()!.classList.contains("logo-download--open")).toBe(false);
   });
 
@@ -107,10 +115,14 @@ describe("LogoDownloadPanel", () => {
     setupTrigger("t5");
     mountPanel("t5");
 
-    dispatchClick(document.getElementById("t5")!);
+    act(() => {
+      dispatchClick(document.getElementById("t5")!);
+    });
     const cta = panel()!.querySelector(".logo-download__btn")!;
 
-    dispatchClick(cta);
+    act(() => {
+      dispatchClick(cta);
+    });
 
     expect(panel()!.classList.contains("logo-download--open")).toBe(true);
   });
@@ -127,7 +139,9 @@ describe("LogoDownloadPanel", () => {
     const snapshot = panel()!;
 
     unmount();
-    dispatchClick(trigger);
+    act(() => {
+      dispatchClick(trigger);
+    });
 
     expect(snapshot.classList.contains("logo-download--open")).toBe(false);
   });
