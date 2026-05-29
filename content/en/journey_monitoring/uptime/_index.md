@@ -19,7 +19,7 @@ further_reading:
   text: 'Learn about journey variants'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
