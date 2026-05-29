@@ -18,7 +18,7 @@ The NDM Summary Page is in Preview.
 
 ## Overview
 
-The Network Device Monitoring (NDM) **Summary Page** is a command center for network engineers. It surfaces device and interface health, active issues, and recent configuration changes in a single view. Use it to identify problems across your network at a glance and take action.
+The Network Device Monitoring (NDM) **Summary Page** is a command center for network engineers. It surfaces device and interface health, active issues, and recent configuration changes in a single view. Use it to identify problems across your network at a glance.
 
 **Note**: [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
 
@@ -39,8 +39,6 @@ These controls scope every section of the page. Three sections — **Network hea
 | Poor | Critical thresholds have been crossed on multiple devices or interfaces. |
 | Unknown | Not enough data is available to assess health. |
 
-The sections below describe each part of the Summary Page in detail.
-
 ### Network health
 
 The **Network health** section summarizes your overall network state.
@@ -49,7 +47,7 @@ The **Network health** section summarizes your overall network state.
 
 A Bits AI summary explains the current state of your network, highlighting affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click **Chat with Bits Assistant** to ask follow-up questions.
 
-Below the summary, a status panel shows the total device count broken down by status (OK, unreachable, degraded, offline, and unmonitored), the number of active monitor alerts and warnings, and the number of active issues. Click **View Health** to open the [Device Health][5] view.
+Below the summary, a status panel shows the total device count broken down by status, the number of active monitor alerts and warnings, and the number of active issues. Click **View Health** to open the [Device Health][5] view.
 
 ### Issues
 
@@ -59,7 +57,7 @@ The **Issues** list summarizes active alerts on network resources, grouped to re
 
 ### Interface health
 
-The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the device side panel, which includes a device summary, interface status, dependencies, metrics, configuration, traffic, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where each section has its own tab.
+The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where each section has its own tab.
 
 {{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
 
@@ -75,7 +73,7 @@ The following thresholds determine an interface's health state:
 
 A Bits AI summary highlights patterns across the affected interfaces, such as multiple interfaces saturating at the same site or correlated error spikes after a configuration change.
 
-Three cards below the list surface aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. In the Errors and Discards detail views, click any interface to open a side panel with additional context and an **Ask Bits** button for AI-assisted investigation.
+Three cards below the list show aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. In the Errors and Discards detail views, click any interface to open a side panel with additional context and an **Ask Bits** button for AI-assisted investigation.
 
 ### Device health
 
@@ -83,7 +81,7 @@ The **Device health** section ranks the top devices operating outside healthy th
 
 {{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device health section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
 
-By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure instead.
+By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure.
 
 **Device health thresholds**
 
@@ -94,17 +92,17 @@ The following thresholds determine a device's health state:
 | CPU | 80% | 90% |
 | Memory | 85% | 95% |
 
-A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed. Two cards below the list surface aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
+A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed. Two cards below the list show aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
 
 ### Traffic
 
-The **Traffic** section uses [NetFlow][3] data to visualize how traffic moves across your network as a Sankey diagram. The diagram shows traffic volume between sources and destinations within the current scope and time range. Click **View NetFlow** to explore flow data in detail.
+The **Traffic** section uses [NetFlow][3] data to visualize traffic volume between sources and destinations as a Sankey diagram, scoped to your current filter and time range. Click **View NetFlow** to explore flow data in detail.
 
 ### Changes
 
 The **Changes** section lists recent network device configuration changes from [Configuration Management][4]. Each entry shows the affected device, a summary of what changed, and a timestamp.
 
-Click **[View all changes][11]** to open the full Changes view. The view inherits any filter or time range set on the Summary Page, and includes additional filters for namespace, type, vendor, model, and geolocation. Filters set in the full view persist when you return to the Summary Page. Click any row to open the device side panel with details about the change.
+Click **[View all changes][11]** to open the full Changes view. The view inherits any filter or time range set on the Summary Page, and includes filters for namespace, type, vendor, model, and geolocation. Filters set in the full view persist when you return to the Summary Page. Click any row to open the device side panel with details about the change.
 
 {{< img src="network_device_monitoring/summary/changes-detail.png" alt="The full Changes view with filter dropdowns at the top and a table of recent network device configuration changes with device name, change summary, and timestamp columns." style="width:100%;" >}}
 
