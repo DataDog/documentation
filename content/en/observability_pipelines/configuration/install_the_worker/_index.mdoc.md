@@ -960,28 +960,25 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 If you are using a firewall, these domains must be added to the allowlist:
 
-{% tabs %}
-{% tab label="Docker and Kubernetes" %}
+{% if includes($platform, ["docker","kubernetes","cloudformation","ecs_fargate"]) %}
 
-- `api.<DD_SITE>`
-- `config.<DD_SITE>`
-- `http-intake.<DD_SITE>`
-- `keys.datadoghq.com`
+- `api.`{% region-param key="dd_site" code=true /%}
+- `config.`{% region-param key="dd_site" code=true /%}
+- `http-intake.`{% region-param key="dd_site" code=true /%}
+- `keys.`{% region-param key="dd_site" code=true /%}
 
-{% /tab %}
-{% tab label="Linux" %}
+{% /if %}
 
-- `api.<DD_SITE>`
-- `config.<DD_SITE>`
-- `http-intake.<DD_SITE>`
-- `install.<DD_SITE>`
-- `yum.datadoghq.com`
-- `keys.datadoghq.com`
+{% if equals($platform, "linux") %}
 
-{% /tab %}
-{% /tabs %}
+- `api.`{% region-param key="dd_site" code=true /%}
+- `config.`{% region-param key="dd_site" code=true /%}
+- `http-intake.`{% region-param key="dd_site" code=true /%}
+- `keys.`{% region-param key="dd_site" code=true /%}
+- `install.`{% region-param key="dd_site" code=true /%}
+- `yum.`{% region-param key="dd_site" code=true /%}
 
-Replace `<DD_SITE>` with {% region-param key="dd_site" code=true link=false text="Datadog site" /%}.
+{% /if %}
 
 ## Index your Worker logs
 
