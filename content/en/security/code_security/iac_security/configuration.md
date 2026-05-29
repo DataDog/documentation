@@ -18,7 +18,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and categories. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities, categories, and platforms. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
 
@@ -33,10 +33,14 @@ You can configure IaC Security using:
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with `schema-version: v1.2`, followed by an `iac` key containing the analysis configuration. The full structure is as follows:
+The configuration file must begin with a `schema-version`, followed by an `iac` key containing the analysis configuration.
+
+Use `schema-version: v1.2` for global rule, severity, category, and path settings. Use `schema-version: v1.3` to also enable per-rule path scoping, per-rule severity overrides, and platform filters.
+
+The full structure for `v1.3` is as follows:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.3
 iac:
   # Do not run these rules.
   ignore-rules:
@@ -68,15 +72,32 @@ iac:
     # Report only findings in these categories.
     only-categories:
       - "Encryption"
+    # Do not run rules from these platforms (v1.3+).
+    ignore-platforms:
+      - Dockerfile
+    # Only run rules from these platforms (v1.3+).
+    only-platforms:
+      - Terraform
+      - Kubernetes
+  # Per-rule configurations (v1.3+).
+  rule-configs:
+    terraform-aws-s3-bucket-without-encryption:
+      ignore-paths:
+        - "test/"
+      severity: low
+    kubernetes-deployment-without-resource-limits:
+      only-paths:
+        - "k8s/production/"
 {{< /code-block >}}
 
 The `iac` key supports the following fields:
 
 | **Property** | **Type** | **Description** |
 | --- | --- | --- |
-| `ignore-rules` | Array | A list of rule IDs to ignore. |
-| `use-rules` | Array | A list of rule IDs to run. If this field is set, rules not listed are ignored. |
-| `global-config` | Object | Global settings for the repository. |
+| `ignore-rules` | Array | A list of rule IDs that will not be applied in scans. |
+| `use-rules` | Array | A list of rule IDs that will be applied in scans. If specified, only these rules will be used (unless other configuration causes them to be ignored). |
+| `global-config` | Object | Global settings for the IaC scanner. |
+| `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. Requires `schema-version: v1.3`. |
 
 ## Rule configuration
 
@@ -110,10 +131,12 @@ The `global-config` object controls repository-wide settings:
 | --- | --- | --- |
 | `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. |
 | `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. |
-| `only-severities` | Array | Severity levels to report. Findings with other severities are ignored. |
+| `only-severities` | Array | Severity levels to report. Findings with other severities are not reported. |
 | `ignore-severities` | Array | Severity levels to ignore. |
-| `only-categories` | Array | Categories to report. Findings in other categories are ignored. |
+| `only-categories` | Array | Categories to report. Findings in other categories are not reported. |
 | `ignore-categories` | Array | Categories to ignore. |
+| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied in scans. Requires `schema-version: v1.3`. |
+| `only-platforms` | Array | Platforms to scan. Only rules from these platforms are applied in scans. Requires `schema-version: v1.3`. |
 
 ### Severities
 
@@ -179,6 +202,75 @@ iac:
       - "Access Control"
       - "Best Practices"
 {{< /code-block >}}
+
+### Platforms
+
+Use `ignore-platforms` to skip specific platforms. Use `only-platforms` to restrict scanning to specific platforms. Requires `schema-version: v1.3`.
+
+**Possible values:**
+
+- `Ansible`
+- `CICD`
+- `CloudFormation`
+- `Dockerfile`
+- `Kubernetes`
+- `Terraform`
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.3
+iac:
+  global-config:
+    only-platforms:
+      - Terraform
+      - Kubernetes
+{{< /code-block >}}
+
+## Per-rule configuration
+
+Use `rule-configs` to configure a specific rule. Requires `schema-version: v1.3`.
+
+Each key under `rule-configs` is a rule ID. The following properties are supported per rule:
+
+| **Property** | **Type** | **Description** |
+| --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. |
+| `severity` | String | Change the severity of findings generated by this rule. Accepted values: `critical`, `high`, `medium`, `low`, `info`. |
+
+### Per-rule path scoping
+
+Exclude a rule from certain paths, or restrict it to specific paths:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.3
+iac:
+  rule-configs:
+    terraform-aws-s3-bucket-without-encryption:
+      # Do not apply this rule in test directories.
+      ignore-paths:
+        - "test/"
+        - "**/testdata/"
+    kubernetes-deployment-without-resource-limits:
+      # Apply this rule only in production manifests.
+      only-paths:
+        - "k8s/production/"
+{{< /code-block >}}
+
+Path patterns support glob syntax (`*`, `**`, `?`). Paths are relative to the repository root.
+
+### Per-rule severity override
+
+Change the severity of findings generated by a specific rule:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.3
+iac:
+  rule-configs:
+    terraform-aws-s3-bucket-without-encryption:
+      severity: low
+{{< /code-block >}}
+
+The configured severity is used for all findings generated by that rule.
 
 ## Legacy configuration
 
