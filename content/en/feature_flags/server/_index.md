@@ -8,6 +8,9 @@ further_reading:
 - link: "/remote_configuration/"
   tag: "Documentation"
   text: "Remote Configuration"
+- link: "/feature_flags/implementation_patterns/serverless/"
+  tag: "Documentation"
+  text: "Serverless Environments"
 ---
 
 ## Overview
@@ -129,4 +132,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /tracing/guide/#tutorials-enabling-tracing
-[5]: /feature_flags/server/serverless/
+[5]: /feature_flags/implementation_patterns/serverless/
