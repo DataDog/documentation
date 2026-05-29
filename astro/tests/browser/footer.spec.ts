@@ -55,7 +55,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
       document.querySelectorAll('footer astro-island[ssr]').length === 0
     );
 
-    const selector = page.locator('.footer-lang-toggle');
+    const selector = page.locator('.footer__lang-toggle');
     const button = selector.locator('button').first();
     const popup = selector.locator('[role="listbox"]');
 

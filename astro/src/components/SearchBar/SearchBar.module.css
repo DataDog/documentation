@@ -49,6 +49,11 @@
   padding: 0 var(--space-sm);
   color: var(--color-text-muted);
   cursor: pointer;
+  line-height: 1;
+}
+
+.search-bar__submit svg {
+  display: block;
 }
 
 .search-bar__submit:hover {
