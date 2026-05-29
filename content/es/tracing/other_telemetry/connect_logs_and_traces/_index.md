@@ -21,7 +21,16 @@ Antes de correlacionar trazas con registros, asegúrese de que sus registros se 
 
 Para aprender más sobre cómo conectar automáticamente o manualmente sus registros a sus trazas, seleccione su idioma a continuación:
 
-{{< partial name="apm/apm-connect-logs-and-traces.html" >}}
+{{< card-grid card_width="170px">}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="php/" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="opentelemetry/" src="integrations_logos/otel.png" alt="OpenTelemetry" >}}
+{{< /card-grid >}}
 
 [1]: /es/tracing/glossary/#trace
 [2]: /es/getting_started/tagging/unified_service_tagging

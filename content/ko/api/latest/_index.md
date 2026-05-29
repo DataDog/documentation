@@ -236,7 +236,14 @@ async fn main() {
 
 또는 라이브러리를 바로 확인하세요.
 
-{{< partial name="api/sdk-languages.html" >}}
+{{< card-grid card_width="100px" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-go" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-typescript" src="integrations_logos/typescript.png" alt="Typescript" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-rust" src="integrations_logos/rust.png" alt="Rust" >}}
+{{< /card-grid >}}
 </br>
 대신 애플리케이션으로 시작하고 싶나요? Datadog 일반 [시작하기 설명서][7]를 참고하세요.
 
