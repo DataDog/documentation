@@ -37,7 +37,6 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
    {{< nextlink href="bits_ai/bits_assistant" >}}Explore your observability data with Bits Assistant{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_data" >}}Explore your business data in natural language with Bits AI Data{{< /nextlink >}}
    {{< nextlink href="bits_ai/mcp_server" >}}Get observability insights from AI agents with the Datadog MCP server{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_data" >}}Explore your business data in natural language with Bits AI Data{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
