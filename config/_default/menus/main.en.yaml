@@ -6224,6 +6224,11 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Serverless Environments
+      url: feature_flags/server/serverless
+      parent: feature_flags_server
+      identifier: feature_flags_server_serverless
+      weight: 207
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags

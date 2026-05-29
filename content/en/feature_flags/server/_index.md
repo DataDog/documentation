@@ -18,6 +18,8 @@ This guide covers the common setup required for all server-side SDKs, including 
 
 {{< partial name="feature_flags/feature_flags_server.html" >}}
 
+For serverless runtimes, see [Serverless Environments][5] for the Agent-based architecture and limitations.
+
 ## Prerequisites
 
 Before setting up server-side feature flags, ensure you have:
@@ -127,3 +129,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /tracing/guide/#tutorials-enabling-tracing
+[5]: /feature_flags/server/serverless/
