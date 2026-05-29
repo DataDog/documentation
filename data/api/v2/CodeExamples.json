@@ -140,6 +140,20 @@
       "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
+  "CreateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Create an annotation returns \"OK\" response"
+    }
+  ],
+  "UpdateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Update an annotation returns \"OK\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",
@@ -194,6 +208,13 @@
       "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
+    }
+  ],
+  "CreateApplicationSecurityWafPolicy": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF Policy returns \"Created\" response"
     }
   ],
   "CreateApplicationSecurityWafExclusionFilter": [
@@ -1589,6 +1610,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1785209526",
+      "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
     },
@@ -1611,6 +1637,11 @@
       "group": "observability_pipelines",
       "suffix": "_2960728933",
       "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1130701356",
+      "description": "Validate an observability pipeline with Splunk HEC source valid_tokens returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",

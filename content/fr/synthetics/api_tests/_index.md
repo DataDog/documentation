@@ -32,7 +32,16 @@ Les tests API vous aident à **surveiller de façon proactive** vos services les
 
 Générez des requêtes sur les différentes couches réseau de vos systèmes grâce aux sous-types de tests suivants :
 
-{{< partial name="synthetics/network-layers.html" >}}
+{{< card-grid image_width="100">}}
+  {{< image-card href="/synthetics/api_tests/http_tests" src="synthetics/api_tests/http-test1.png" alt="HTTP" >}}
+  {{< image-card href="/synthetics/api_tests/ssl_tests" src="synthetics/api_tests/ssl-test1.png" alt="SSL" >}}
+  {{< image-card href="/synthetics/api_tests/dns_tests" src="synthetics/api_tests/dns-test1.png" alt="DNS" >}}
+  {{< image-card href="/synthetics/api_tests/websocket_tests" src="synthetics/api_tests/websocket-test1.png" alt="WebSocket" >}}
+  {{< image-card href="/synthetics/api_tests/tcp_tests" src="synthetics/api_tests/tcp-test1.png" alt="TCP" >}}
+  {{< image-card href="/synthetics/api_tests/udp_tests" src="synthetics/api_tests/udp-test1.png" alt="UDP" >}}
+  {{< image-card href="/synthetics/api_tests/icmp_tests" src="synthetics/api_tests/icmp-test1.png" alt="ICMP" >}}
+  {{< image-card href="/synthetics/api_tests/grpc_tests" src="synthetics/api_tests/grpc-test1.png" alt="gRPC" >}}
+{{< /card-grid >}}
 
 Si vos services sont moins réactifs ou si leurs réponses ne correspondent pas à vos attentes (corps de réponse inattendu ou enregistrement A erroné, par exemple), votre test peut [**prévenir votre équipe**][1], [**bloquer votre pipeline de CI**][2] et [**annuler le déploiement défectueux**][2].
 

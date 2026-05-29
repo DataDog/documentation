@@ -72,7 +72,7 @@ Preprocessing of JSON logs occurs before logs enter pipeline processing. Preproc
 
 JSON log preprocessing comes with a default configuration that works for standard log forwarders. To edit this configuration to adapt custom or specific log forwarding approaches:
 
-1. Navigate to [Pipelines][8] in Datadog and select [Preprocessing for JSON logs][9].
+1. Navigate to [Pipelines][8] in Datadog and select [{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9].
 
     **Note:** Preprocessing JSON logs is the only way to define one of your log attributes as `host` for your logs.
 
@@ -214,14 +214,14 @@ By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. 
 ## Create a pipeline
 
 1. Navigate to [Pipelines][8] in Datadog.
-2. Select **New Pipeline**.
-3. Select a log from the live tail preview to apply a filter, or apply your own filter. Choose a filter from the dropdown menu or create your own filter query by selecting the **</>** icon. Filters let you limit what kinds of logs a pipeline applies to.
+2. Select {{< ui >}}New Pipeline{{< /ui >}}.
+3. Select a log from the live tail preview to apply a filter, or apply your own filter. Choose a filter from the dropdown menu or create your own filter query by selecting the {{< ui >}}</>{{< /ui >}} icon. Filters let you limit what kinds of logs a pipeline applies to.
 
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
 4. Name your pipeline.
 5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][8].
-6. Press **Create**.
+6. Press {{< ui >}}Create{{< /ui >}}.
 
 An example of a log transformed by a pipeline:
 
@@ -261,7 +261,7 @@ It's also possible to copy an integration pipeline using the clone button.
 
 1. Navigate to [Pipelines][8] in Datadog.
 2. Hover over a pipeline and click the arrow next to it to expand processors and nested pipelines.
-3. Select **Add Processor** or **Add Nested Pipeline**.
+3. Select {{< ui >}}Add Processor{{< /ui >}} or {{< ui >}}Add Nested Pipeline{{< /ui >}}.
 
 ### Processors
 
@@ -279,9 +279,9 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 
 Move a pipeline into another pipeline to make it into a nested pipeline:
 
-1. Hover over the pipeline you want to move, and click on the **Move to** icon.
+1. Hover over the pipeline you want to move, and click on the {{< ui >}}Move to{{< /ui >}} icon.
 1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
-1. Click **Move**.
+1. Click {{< ui >}}Move{{< /ui >}}.
 
 ## Manage your pipelines
 
@@ -289,7 +289,7 @@ Identify when the last change to a pipeline or processor was made and which user
 
 {{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modificiation information, and the reordering modal" style="width:50%;">}}
 
-Reorder pipelines precisely with the `Move to` option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the `Move to` modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
+Reorder pipelines precisely with the {{< ui >}}Move to{{< /ui >}} option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the {{< ui >}}Move to{{< /ui >}} modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
 
