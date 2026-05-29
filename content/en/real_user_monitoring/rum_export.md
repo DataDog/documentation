@@ -14,32 +14,41 @@ further_reading:
   text: "Learn about Product Analytics"
 ---
 
-<div class="alert alert-warning">Export Pipelines is in Preview. Contact your Customer Success Manager or <a href="/help/">Datadog support</a> to request access.</div>
+{{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
+Export Pipelines is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format. From there you can load the data into your own data warehouse (such as Snowflake, BigQuery, or Databricks), or keep it as a long-term archive for compliance and ad-hoc investigations.
+Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.
 
 {{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:100%;">}}
 <!-- TODO: refresh screenshot to match the current Export Pipelines UI -->
 
-Datadog manages the export from your account to your cloud storage. Loading the data into a downstream warehouse is something you set up on your side.
+Use Export Pipelines to:
+- Load your event data into your own data warehouse (such as Snowflake, BigQuery, or Databricks) for custom analytics and reporting.
+- Meet compliance requirements or retain raw events for long-term archival and ad-hoc investigations.
+
+Datadog only manages the export from your Datadog account to your cloud storage system.
 
 ## How it works
 
-Export Pipelines are configured per RUM application. For each application you can create up to three pipelines:
+Export Pipelines is a shared feature between [Real User Monitoring][4] and [Product Analytics][5]. Pipelines are configured at two different levels:
 
-| Source             | Pipelines per application | Available presets                                                |
-|--------------------|---------------------------|------------------------------------------------------------------|
-| RUM                | One                       | *All RUM Event Types* **or** *Sessions, Views & Actions*         |
-| Product Analytics  | Up to two                 | *All Product Analytics Events* and *User and Account Profiles*   |
+| Scope | Source | Max pipelines | Available presets |
+|---|---|---|---|
+| Per application | RUM | 1 | *All RUM Event Types* or *Sessions, Views & Actions* |
+| Per application | Product Analytics | 1 | *All Product Analytics Events* |
+| Per organization | Product Analytics | 1 | *User and Account Profiles* |
 
-Each pipeline exports continuously and independently of the others. Events are not deduplicated across pipelines.
+The *User and Account Profiles* preset is limited to one pipeline per organization. Because user and profile data is shared across all your applications, creating one pipeline per application would result in duplicate records in your storage.
+
+Each pipeline exports continuously and independently of the others.
 
 ## Prerequisites
 
-- RUM is enabled on the application (or Product Analytics, for PA presets).
-- The Datadog integration for your cloud provider — AWS, Azure, or Google Cloud — is set up.
+- RUM is enabled on the application (or Product Analytics, or both).
+- The Datadog integration for your cloud provider is set up: [Amazon Web Services][6], [Azure][7], or [Google Cloud][8].
 - Your Datadog user has the `rum_write_archives` permission. See [Role Based Access Control][1].
 
 ## Set up an export pipeline
@@ -258,3 +267,8 @@ The API requires the `rum_write_archives` permission. See the [Datadog API refer
 [1]: /account_management/rbac/permissions/
 [2]: https://app.datadoghq.com/rum/list
 [3]: /api/latest/rum/
+[4]: /real_user_monitoring/
+[5]: /product_analytics/
+[6]: /integrations/amazon-web-services/
+[7]: /integrations/azure/
+[8]: /integrations/google_cloud_platform/
