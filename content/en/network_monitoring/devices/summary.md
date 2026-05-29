@@ -30,7 +30,7 @@ Use the filter bar to scope the page by device tag (for example, `device_namespa
 
 {{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
 
-The **Network health**, **Interface health**, and **Device health** sections each report one of four health states:
+These controls scope every section of the page. Three sections — **Network health**, **Interface health**, and **Device health** — also report a health state to summarize what they're tracking:
 
 | State | Meaning |
 |-------|---------|
