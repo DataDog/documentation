@@ -98,7 +98,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 ### Detection Rules
 
 `get_datadog_security_detection_rules_schema`
-: Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection, API security, and AppSec.
+: Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection and API security.
 : *Permissions required: `Security Monitoring Rules Read`*
 
 `list_datadog_security_detection_rules`
@@ -116,7 +116,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Suppressions Read`*
 
 `create_datadog_security_suppression`
-: Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided.
+: Creates a new suppression rule that prevents a detection rule from generating signals matching specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided.
 : *Permissions required: `Security Monitoring Suppressions Write`*
 
 `update_datadog_security_suppression`

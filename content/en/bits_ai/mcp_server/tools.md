@@ -998,7 +998,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ## Security
 
-Tools for code security scanning, searching and triaging [security signals][53], managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching and triaging [security signals][53], managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -1420,7 +1420,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
 [60]: /security/detection_rules/
-[61]: /security/cloud_siem/detect_and_monitor/suppressions/
+[61]: /security/suppressions/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
