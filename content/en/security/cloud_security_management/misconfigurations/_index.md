@@ -54,7 +54,7 @@ To remediate a misconfiguration, you can:
 
 ## Get started
 
-{{< learning-center-callout header="Try Detect, Prioritize, and Remediate Cloud Security Risks with Datadog Cloud Security in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
+{{< learning-center-callout header="Hands-on: Detect and fix cloud misconfigurations in a live environment" btn_title="Start the Lab" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to learn how to secure your cloud environments with Cloud Security misconfigurations.
 {{< /learning-center-callout >}}
 

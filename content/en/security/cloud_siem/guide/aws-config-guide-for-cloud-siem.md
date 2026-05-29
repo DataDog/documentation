@@ -38,6 +38,10 @@ This guide walks you through the following steps so that you can start detecting
 3. [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog)
 4. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
+{{< learning-center-callout header="Practice configuring Cloud SIEM for AWS in a sandbox environment" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/cloud-siem-configure-aws">}}
+  Follow along with this guide in a hands-on Datadog environment — set up Cloud SIEM for AWS without touching production.
+{{< /learning-center-callout >}}
+
 ## Set up AWS integration using CloudFormation
 
 {{% cloud-siem-aws-setup-cloudformation %}}

@@ -1,11 +1,6 @@
 ---
 title: Monitoring
 description: How to explore more of your application in LLM Observability.
-further_reading:
-- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
-  tag: "Learning Center"
-  text: "Investigate with LLM Observability"
-
 ---
 
 ## Overview

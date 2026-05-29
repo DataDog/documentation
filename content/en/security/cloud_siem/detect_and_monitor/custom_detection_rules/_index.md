@@ -52,6 +52,10 @@ Out-of-the-box detection rules help you cover the majority of threat scenarios, 
 
 {{< img src="security/security_monitoring/detection_rules/custom_detection_rules_ui.png" alt="The create a rule page showing the detection types and methods you can create" style="width:100%;" >}}
 
+{{< learning-center-callout header="Write custom Cloud SIEM detection rules hands-on" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/cloud-siem-custom-rules">}}
+  Practice writing, testing, and managing Cloud SIEM detection rules in a sandbox environment.
+{{< /learning-center-callout >}}
+
 ## Rule types
 
 You can create the following types of custom detection rules:

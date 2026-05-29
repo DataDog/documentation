@@ -49,6 +49,10 @@ Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lamb
 
 To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
 
+{{< learning-center-callout header="Get hands-on with AWS Lambda monitoring in a sandbox" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/visibility-aws-lambda">}}
+  Practice setting up and exploring Datadog Lambda monitoring in a live environment — no production risk.
+{{< /learning-center-callout >}}
+
 ## How it works
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}

@@ -51,6 +51,10 @@ Service Level Objectives, or SLOs, are a key part of the site reliability engine
 
 **Tip**: To open Service Level Objectives from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `slo`.
 
+{{< learning-center-callout header="Get started with Service Level Objectives hands-on" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-slos">}}
+  Learn how to create, manage, and alert on SLOs to measure and communicate service reliability.
+{{< /learning-center-callout >}}
+
 ## Key terminology
 
 Service Level Indicator (SLI)

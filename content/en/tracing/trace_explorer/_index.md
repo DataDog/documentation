@@ -12,9 +12,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-apm"
   tag: "Learning Center"
   text: "Getting Started with APM Metrics and Traces"
-- link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"
-  tag: "Learning Center"
-  text: "Diagnosing Application Bugs with Datadog APM"
 
 ---
 

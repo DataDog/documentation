@@ -17,6 +17,9 @@ further_reading:
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+    tag: "Learning Center"
+    text: "Detect Host and Container Compromises with Workload Protection"
 ---
 
 [Workload Protection][9] security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.

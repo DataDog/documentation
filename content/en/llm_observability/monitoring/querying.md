@@ -7,7 +7,7 @@ further_reading:
     text: "Trace Explorer Query Syntax"
   - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
     tag: "Learning Center"
-    text: "Investigate with LLM Observability"
+    text: "Debug LLM quality issues and trace hallucinations"
 
 ---
 

@@ -60,9 +60,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
   tag: "Learning Center"
   text: "Introduction to Cloud SIEM"
-- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
-  tag: "Learning Center"
-  text: "Automate Threat Investigation and Remediation with Security Workflows"
 
 ---
 

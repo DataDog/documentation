@@ -13,6 +13,9 @@ further_reading:
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+    tag: "Learning Center"
+    text: "Detect Host and Container Compromises with Workload Protection"
 ---
 
 

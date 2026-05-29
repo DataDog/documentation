@@ -17,9 +17,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/cloud-siem-detect-investigate-threats"
   tag: "Learning Center"
   text: "Detect and Investigate Threats with Cloud SIEM"
-- link: "https://learn.datadoghq.com/courses/cloud-siem-custom-rules"
-  tag: "Learning Center"
-  text: "Write Custom Cloud SIEM Detection Rules"
 
 ---
 
