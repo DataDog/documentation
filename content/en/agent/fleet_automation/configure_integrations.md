@@ -48,7 +48,7 @@ Custom checks are **not** supported.
 
         - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted.
         - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a file{{< /ui >}} and choose the configuration file you want to replace, then fill in the new configuration as prompted.
-        - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}} and 
+        - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}} and (tk).
 
     <div class="alert alert-tip">Toggle between <strong>Visual</strong> and <strong>YAML</strong> mode when filling out the integration configuration. Use <strong>YAML</strong> mode to paste in YAML directly.</div>
 
@@ -56,6 +56,8 @@ Custom checks are **not** supported.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][4].
 
 ## How configuration changes are applied
+
+Each operation applies changes to the integration's `conf.d` configuration file differently:
 
 - {{< ui >}}Add New{{< /ui >}}: Deploys a new integration configuration file. If an existing configuration file exists, it is replaced entirely and the YAML you provide becomes the complete new configuration for that integration on the target Agents.
 
