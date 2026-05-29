@@ -4,10 +4,6 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
