@@ -148,13 +148,11 @@ Requirements and limitations:
 
 After you fix a flaky test, it can take time for the fix to propagate to all branches, which can cause the test to keep flaking in stale branches. A grace period mechanism prevents flaky tests from appearing on stale branches after the fix is applied.
 
-A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog checks if the commit where the test run contains the fix:
-- If the fix is not present in the commit and the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
-- If the fix is not present in the commit and the test was **Disabled**, Datadog treats the test as **Disabled**.
-- If the fix is present in the commit, Datadog treats the test as healthy regardless of its previous status.
-This method avoids unnecessary CI failures and saves developer time.
+A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog treats the test based on its status before the grace period started:
+- If the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
+- If the test was **Disabled**, Datadog treats the test as **Disabled**.
 
-If a test inside the grace period flakes and the commit doesn't contain the fix, Datadog tags the test run event with `@test.test_management.flaky_fix_missing:true`.
+This method avoids unnecessary CI failures and saves developer time.
 
 ## AI-powered flaky test fixes
 
