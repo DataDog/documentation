@@ -9,11 +9,19 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 ## Setup
 
-**Choose your setup method:**
+Select a setup method based on how much control you need over your instrumentation:
 
-- **[Server-side auto-instrumentation][12]**: Automatically inject the RUM SDK into HTML responses through your web server or proxy.
-- **[Agentic Onboarding (in Preview)][13]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt.
-- **Manual client-side setup** (below): Manually add the SDK to your application code.
+{% collapse-content title="Manual client-side setup" expanded: true level="h4" %}
+Manually add the SDK to your application code. Best for full control over initialization and configuration.
+{% /collapse-content %}
+
+{% collapse-content title="Server-side auto-instrumentation" expanded: true level="h4" %}
+Automatically inject the RUM SDK into HTML responses through your web server or proxy. Best when you can't modify application code directly.
+{% /collapse-content %}
+
+{% collapse-content title="Agentic Onboarding (in Preview)" expanded: true level="h4" %}
+Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt. Best for getting started quickly.
+{% /collapse-content %}
 
 ### Manual client-side setup
 
@@ -315,6 +323,38 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 {% /step %}
 
 {% /stepper %}
+
+### Server-side auto-instrumentation
+
+{% site-region region="gov,gov2" %}
+{% alert level="danger" %}
+RUM Auto-Instrumentation is not available for the selected site ({% region-param key="dd_site_name" /%}). Use [Client-Side instrumentation](/real_user_monitoring/application_monitoring/browser/setup/client) instead.
+{% /alert %}
+{% /site-region %}
+
+RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
+
+RUM Auto-Instrumentation requires Datadog Agent version 7.34+.
+
+#### Getting started
+
+Select a platform to start collecting RUM data on your application:
+
+{% alert level="info" %}
+To request support for a web server that is not listed here, [fill out this form](https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/).
+{% /alert %}
+
+{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/java" %}Java{% /nextlink %}
+{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/nginx" %}NGINX{% /nextlink %}
+{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/windows_iis" %}Windows IIS{% /nextlink %}
+{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/apache" %}Apache{% /nextlink %}
+{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm" %}IBM HTTP Server{% /nextlink %}
+
+{% partial file="rum-browser-auto-instrumentation-limitations.mdoc.md" /%}
+
+### Agentic onboarding
+
+See [Agentic Onboarding][13] for more information.
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
