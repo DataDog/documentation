@@ -30,7 +30,7 @@ If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog acco
 | **Kubernetes Version** | 1.25 or higher                                                                           |
 | **Supported Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (NGINX Ingress Controller or AWS Load Balancer Controller)<br><br>OpenShift and OCI (Oracle Cloud) are not currently tested or supported. |
 | **Metadata Storage**   | PostgreSQL database                                                                      |
-| **Recommended PostgreSQL Options** | - AWS: RDS PostgreSQL<br>- GCP: Cloud SQL for PostgreSQL<br>- Azure: Azure Database for PostgreSQL<br>- Self-hosted: PostgreSQL with persistent storage |
+| **Recommended PostgreSQL Options** | - AWS: RDS PostgreSQL<br>- GCP: Cloud SQL for PostgreSQL<br>- Azure: Azure Database for PostgreSQL |
 
 ### Object storage
 BYOC Logs supports the following object storage types:
@@ -45,7 +45,6 @@ BYOC Logs supports the following object storage types:
   {{< nextlink href="/byoc-logs/install/azure_aks" >}}Install on Azure AKS{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/gcp_gke" >}}Install on GCP GKE{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/docker" >}}Install locally with Docker for testing{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/install/custom_k8s" >}}Install on Kubernetes with PostgreSQL and MinIO{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [2]: /byoc-logs/install/docker/
