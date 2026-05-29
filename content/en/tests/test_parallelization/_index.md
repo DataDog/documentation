@@ -14,6 +14,10 @@ Test Parallelization is designed to work with [Test Impact Analysis][1]. Test Im
 
 Use Test Parallelization when your test suite takes a long time to run. It distributes test files evenly across CI nodes or workers. When used with Test Impact Analysis, Test Parallelization runs only files with non-skipped tests. It also helps reduce CI costs by choosing only as many CI nodes as needed, which can lower total CPU minutes.
 
+## Setup
+
+Before setting up Test Parallelization, set up [Test Optimization][2]. Then follow [Set Up Test Parallelization][3] to install `ddtest` and configure your CI provider.
+
 ## Compatibility
 
 Test Parallelization is supported for the following language and frameworks:
@@ -22,7 +26,7 @@ Test Parallelization is supported for the following language and frameworks:
 | -------- | ---------- |
 | Ruby     | RSpec, Minitest |
 
-Before setting up Test Parallelization, set up [Test Optimization][2]. Ruby projects require the `datadog-ci` gem version `1.31.0` or later.
+Ruby projects require the `datadog-ci` gem version `1.31.0` or later.
 
 ## How it works
 
