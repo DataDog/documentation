@@ -15,8 +15,8 @@ aliases:
   - /cloudprem/guides/send_otel_logs_observability_pipelines/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
+{{< callout btn_hidden="true" header="Limited Availability" >}}
+  BYOC Logs is in Limited Availability.
 {{< /callout >}}
 
 ## Overview
@@ -32,7 +32,7 @@ By the end of this guide, you will be able to:
 
 ## Prerequisites
 
-- [BYOC Logs Preview][1] access.
+- BYOC Logs access. Contact your Datadog account team to request access.
 - **Datadog API Key**: [Get your API key][2].
 - **Datadog Application Key**: [Get your application key][3].
 - **Docker**: [Install Docker][4].

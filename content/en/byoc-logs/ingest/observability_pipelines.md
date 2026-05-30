@@ -19,8 +19,8 @@ further_reading:
   text: "Datadog BYOC Logs destination for Observability Pipelines"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
+{{< callout btn_hidden="true" header="Limited Availability" >}}
+  BYOC Logs is in Limited Availability.
 {{< /callout >}}
 
 ## Overview

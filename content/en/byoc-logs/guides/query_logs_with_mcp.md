@@ -15,8 +15,8 @@ aliases:
   - /cloudprem/guides/query_logs_with_mcp/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
+{{< callout btn_hidden="true" header="Limited Availability" >}}
+  BYOC Logs is in Limited Availability.
 {{< /callout >}}
 
 ## Overview

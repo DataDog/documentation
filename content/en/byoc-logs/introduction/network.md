@@ -8,8 +8,8 @@ aliases:
   - /cloudprem/introduction/network/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
+{{< callout btn_hidden="true" header="Limited Availability" >}}
+  BYOC Logs is in Limited Availability.
 {{< /callout >}}
 
 This document provides an overview of how BYOC Logs and Datadog communicate with each other.

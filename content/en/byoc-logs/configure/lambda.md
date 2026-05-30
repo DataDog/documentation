@@ -12,8 +12,8 @@ aliases:
   - /cloudprem/configure/lambda/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
+{{< callout btn_hidden="true" header="Limited Availability" >}}
+  BYOC Logs is in Limited Availability.
 {{< /callout >}}
 
 <div class="alert alert-warning">Lambda search offloading is an experimental feature.</div>
