@@ -8,14 +8,14 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 
 Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
 
-- [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without an AI coding assistant.
-- [MCP Server](#mcp-server): Set up Datadog through an LLM coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
+- [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
+- [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
 
 ## AI Setup CLI
 
-The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as bootstrapping a Datadog account.
+The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
 
 The CLI can:
 
@@ -27,7 +27,6 @@ The CLI can:
 ### Prerequisites
 
 - Node.js 20 or later
-- A Datadog account (optional; the CLI can create one for you)
 
 ### Supported products
 
@@ -80,15 +79,15 @@ The CLI can set up the following products:
 
    {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps" style="width:80%;" >}}
 
-   When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify telemetry.
+   When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify incoming data.
 
-   {{< img src="agentic_onboarding/success.png" alt="CLI showing 'Setup complete!' with check marks next to RUM, Error Tracking, and Product Analytics" style="width:80%;" >}}
+   {{< img src="agentic_onboarding/success.png" alt="CLI showing 'Setup complete!' with check marks next to RUM, Error Tracking, and Product Analytics." style="width:80%;" >}}
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
 
 After the CLI completes, see [Next steps](#next-steps).
 
-## MCP Server
+## MCP server
 
 The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
 
@@ -112,7 +111,7 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP (auto-detected from dependency manifests) |
 | Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |
 
-### Step 1: Install the MCP Server
+### Step 1: Install the MCP server
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
@@ -124,7 +123,7 @@ In an active Claude Code session, run:
 {{% tab "Cursor" %}}
 **Option 1: Install deeplink (recommended)**
 
-Click the install deeplink for your [Datadog site](/getting_started/site/), then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+Click the install deeplink for your [Datadog site][16], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -143,17 +142,17 @@ Add the server to `~/.cursor/mcp.json`:
 
 {{% tab "Other MCP clients" %}}
 
-Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site](/getting_started/site/):
+Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][16]:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Step 2: Authenticate the MCP Server
+### Step 2: Authenticate the MCP server
 
-1. After you install the MCP Server, your coding assistant prompts you to authenticate. Press <kbd>Enter</kbd> to open the Datadog OAuth screen in your browser.
-1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP Server access to your Datadog account.
+1. After you install the MCP server, your coding assistant prompts you to authenticate. Press <kbd>Enter</kbd> to open the Datadog OAuth screen in your browser.
+1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP server access to your Datadog account.
 1. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
 ### Step 3: Instrument your project
@@ -212,7 +211,13 @@ After the agent completes, commit the changes to your repository and set any new
 
 ## Next steps
 
-Confirm data is flowing in the Datadog UI for the product you set up: [Error Tracking][6], [RUM > Applications][7], [Infrastructure > Hosts][8], [Serverless > Functions][9], or [Logs > Live Tail][10].
+Confirm data is flowing in the Datadog UI for the product you set up:
+
+- [Error Tracking][6]
+- [RUM > Applications][7]
+- [Infrastructure > Hosts][8]
+- [Serverless > Functions][9]
+- [Logs > Live Tail][10]
 
 [6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
