@@ -189,11 +189,49 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 
 ## Data Collected
 
-### Metrics
+### Standard Metrics
 
 Refer to the [MongoDB integration documentation][2] for a comprehensive list of metrics collected by the MongoDB integration.
 
+### Query Metrics
+
+<div class="alert alert-info">
+  This requires Datadog Agent v7.78 or later and MongoDB 8.0+ for self hosted.
+</div>
+
+Query metrics provide insights into the performance of your MongoDB operations. For more information, see [Query Metrics][3].
+
+To collect query metrics, ensure you have granted the required permissions as described in the [Grant the Agent access](#grant-the-agent-access-to-your-mongodb-instances) section.
+
+Then enabled query metrics in the `conf.d/mongo.d/conf.yaml` configuration file, below is an example:
+
+{{< highlight yaml "hl_lines=11-12" >}}
+init_config:
+instances:
+  - hosts:
+      - <HOST>:<PORT>
+    username: datadog
+    password: "ENC[datadog_user_database_password]"
+    options:
+      authSource: admin
+    tls: true
+    dbm: true
+    query_metrics:
+      enabled: true
+    cluster_name: <MONGO_CLUSTER_NAME>
+    reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
+    additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
+    collections_indexes_stats: true
+    database_autodiscovery:
+      enabled: true
+{{< /highlight >}}
+
 {{% dbm-mongodb-agent-data-collected %}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/api-app-keys/
 [2]: /integrations/mongo/?tab=standalone#metrics
+[3]: /database_monitoring/query_metrics/
