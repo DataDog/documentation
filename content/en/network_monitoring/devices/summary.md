@@ -57,7 +57,9 @@ The **Issues** list summarizes active alerts on network resources, grouped to re
 
 ### Interface health
 
-The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed. Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where each section has its own tab.
+The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed.
+
+Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where you can investigate the device in more depth.
 
 {{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
 
