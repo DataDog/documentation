@@ -59,9 +59,13 @@ The **Issues** list summarizes active alerts on network resources, grouped to re
 
 The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed.
 
-Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where you can investigate the device in more depth.
-
 {{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
+
+A Bits AI summary highlights patterns across the affected interfaces, such as multiple interfaces saturating at the same site or correlated error spikes after a configuration change.
+
+Three cards below the list show aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. The Errors and Discards detail views also include an **Ask Bits** button for AI-assisted investigation.
+
+Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where you can investigate the device in more depth.
 
 **Interface health thresholds**
 
@@ -73,10 +77,6 @@ The following thresholds determine an interface's health state:
 | Errors In/Out | 0.10% | 5% |
 | Discards In/Out | 0.10% | 5% |
 
-A Bits AI summary highlights patterns across the affected interfaces, such as multiple interfaces saturating at the same site or correlated error spikes after a configuration change.
-
-Three cards below the list show aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. In the Errors and Discards detail views, click any interface to open a side panel with additional context and an **Ask Bits** button for AI-assisted investigation.
-
 ### Device health
 
 The **Device health** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the same device side panel described in [Interface health](#interface-health).
@@ -84,6 +84,10 @@ The **Device health** section ranks the top devices operating outside healthy th
 {{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device health section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
 
 By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure.
+
+A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed.
+
+Two cards below the list show aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
 
 **Device health thresholds**
 
@@ -93,8 +97,6 @@ The following thresholds determine a device's health state:
 |--------|------|----------|
 | CPU | 80% | 90% |
 | Memory | 85% | 95% |
-
-A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed. Two cards below the list show aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
 
 ### Traffic
 
