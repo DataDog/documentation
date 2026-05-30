@@ -16,6 +16,6 @@ With Findings, you can save log lines, visualizations, and queries to a canvas w
 
 Use Findings to collect possible evidence, compare results, and build context as your investigation evolves.
 
-{{< img src="logs/explorer/findings/findings_demo.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
+{{< img src="logs/explorer/findings_demo.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
 
 [1]: /logs/explorer/
