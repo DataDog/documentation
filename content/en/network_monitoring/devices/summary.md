@@ -20,17 +20,13 @@ The NDM Summary Page is in Preview.
 
 The Network Device Monitoring (NDM) **Summary Page** is a command center for network engineers. It surfaces device and interface health, active issues, and recent configuration changes in a single view. Use it to identify problems across your network at a glance.
 
-**Note**: [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
+**Note**: To use the Summary Page, [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
 
 {{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device health, traffic, and recent changes." style="width:100%;" >}}
 
 ## Using the Summary Page
 
-Use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
-
-{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
-
-These controls scope every section of the page. Three sections — **Network health**, **Interface health**, and **Device health** — also report a health state to summarize what they're tracking:
+The Summary Page is organized into sections that each cover a different aspect of your network's state and activity. Three of those sections — **Network health**, **Interface health**, and **Device health** — also report a health state to summarize what they're tracking:
 
 | State | Meaning |
 |-------|---------|
@@ -38,6 +34,10 @@ These controls scope every section of the page. Three sections — **Network hea
 | Degraded | Some metrics have crossed warning thresholds. |
 | Poor | Critical thresholds have been crossed on multiple devices or interfaces. |
 | Unknown | Not enough data is available to assess health. |
+
+To customize your view, use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
+
+{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
 
 ### Network health
 
