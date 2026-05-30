@@ -79,15 +79,15 @@ The following thresholds determine an interface's health state:
 
 ### Device health
 
-The **Device health** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. Click any device to open the same device side panel described in [Interface health](#interface-health).
+The **Device health** section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure.
 
 {{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device health section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
-
-By default, devices are sorted by **CPU**. Sort by **Memory** to surface devices under memory pressure.
 
 A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed.
 
 Two cards below the list show aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
+
+Click any device to open the device side panel, which includes details such as device status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to investigate the device in more depth.
 
 **Device health thresholds**
 
@@ -106,7 +106,7 @@ The **Traffic** section uses [NetFlow][3] data to visualize traffic volume betwe
 
 The **Changes** section lists recent network device configuration changes from [Configuration Management][4]. Each entry shows the affected device, a summary of what changed, and a timestamp.
 
-Click **[View all changes][11]** to open the full Changes view. The view inherits any filter or time range set on the Summary Page, and includes filters for namespace, type, vendor, model, and geolocation. Filters set in the full view persist when you return to the Summary Page. Click any row to open the device side panel with details about the change.
+Click **[View all changes][11]** to open the full Changes view. Filters and the time range are shared between the two views. Click any row to open the device side panel with details about the change.
 
 {{< img src="network_device_monitoring/summary/changes-detail.png" alt="The full Changes view with filter dropdowns at the top and a table of recent network device configuration changes with device name, change summary, and timestamp columns." style="width:100%;" >}}
 
