@@ -42,6 +42,7 @@ SaaS Cost Integrations allow you to send cost data **directly from your provider
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" src="integrations_logos/databricks_small.svg" alt="databricks" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" src="integrations_logos/openai_small.svg" alt="openai" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" src="integrations_logos/anthropic_small.svg" alt="anthropic" >}}
+  {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts" src="integrations_logos/cursor_small.svg" alt="cursor" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" src="integrations_logos/github_small.svg" alt="github" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts" src="integrations_logos/confluent-cloud_small.svg" alt="confluent cloud" >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts" src="integrations_logos/mongodb_small.svg" alt="mongodb" >}}
@@ -58,7 +59,7 @@ If your provider is not supported, use [Custom Costs][1] to upload any cost data
 
 Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click {{< ui >}}Configure{{< /ui >}} on a provider to collect cost data.
 
-{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, and GitHub" style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, Twilio, GitHub, and Cursor" style="width:100%" >}}
 
 {{< tabs >}}
 
@@ -180,6 +181,29 @@ Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administra
 3. Click {{< ui >}}Save{{< /ui >}}.
 
 After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+
+<div class="alert alert-warning">An Enterprise plan and team admin role are required to generate a Cursor Admin API key. Standard team plan accounts return access denied errors.</div>
+
+### 1. Generate an Admin API key
+
+Begin by getting an Admin API key from Cursor. This key allows access to usage and cost reports across your team.
+
+1. In the Cursor dashboard, navigate to **Settings > Advanced > Admin API Keys**.
+2. Create a new Admin API key and copy it to a secure location.
+
+### 2. Configure the Datadog integration
+
+1. In Datadog, go to [**Integrations > Cursor**][101].
+2. On the {{< ui >}}Configure{{< /ui >}} tab, under {{< ui >}}Account details{{< /ui >}}, paste in the {{< ui >}}Admin API Key{{< /ui >}} from Cursor.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+After you save your configuration, Datadog begins polling Cursor usage and cost endpoints using this key, and populates metrics in your environment. Your Cursor cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+[101]: https://app.datadoghq.com/integrations/cursor
 
 {{% /tab %}}
 
@@ -560,6 +584,19 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
 | `token_type` | The category of tokens consumed.|
 | `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `billing_group` | No description |
+| `charge_type` | No description |
+| `hour` | No description |
+| `is_headless` | No description |
+| `max_mode` | No description |
+| `user` | No description |
 
 {{% /tab %}}
 
