@@ -4,21 +4,21 @@ description: "Understand how AI Credits work, which products consume them, prici
 further_reading:
 - link: "/bits_ai/bits_assistant/"
   tag: "Documentation"
-  text: "Bits AI Assistant"
+  text: "Bits Chat"
 - link: "/bits_ai/bits_ai_dev_agent/"
   tag: "Documentation"
-  text: "Bits AI Dev Agent"
+  text: "Bits Code"
 - link: "/bits_ai/bits_ai_sre/"
   tag: "Documentation"
-  text: "Bits AI SRE"
+  text: "Bits Investigation"
 - link: "/actions/agents/"
   tag: "Documentation"
-  text: "Agent Builder"
+  text: "Bits Agent Builder"
 ---
 
 ## Overview
 
-AI Credits are how Datadog meters and bills usage of its AI products. One AI Credit represents a unit of intelligent work performed by a Datadog AI product—for example, a [Bits AI Assistant][1] query, a [Bits AI Dev][2] code fix, or a [Bits AI SRE][3] investigation.
+AI Credits are how Datadog meters and bills usage of its AI products. One AI Credit represents a unit of intelligent work performed by a Datadog AI product—for example, a [Bits Chat][1] query, a [Bits Code][2] code fix, or a [Bits Investigation][3] investigation.
 
 Use this page to understand which products consume AI Credits, how pricing works, how to track usage, and how to control access for your organization.
 
@@ -28,10 +28,10 @@ The following products consume AI Credits:
 
 | Product | What it does |
 |---|---|
-| [Bits AI Assistant][1] | Search, explore, and act across Datadog using natural language. |
-| [Bits AI SRE][3] | Investigate production issues end to end to help on-call engineers pinpoint root causes. |
-| [Bits AI Dev][2] | Diagnose issues and generate code fixes using Datadog observability data. |
-| [Agent Builder][4] | Build custom AI agents that automate operational tasks using Datadog tools and integrations. |
+| [Bits Chat][1] | Search, explore, and act across Datadog using natural language. |
+| [Bits Investigation][3] | Investigate production issues end to end to help on-call engineers pinpoint root causes. |
+| [Bits Code][2] | Diagnose issues and generate code fixes using Datadog observability data. |
+| [Bits Agent Builder][4] | Build custom AI agents that automate operational tasks using Datadog tools and integrations. |
 
 ## Pricing
 
@@ -49,7 +49,7 @@ AI Credits reset on the first day of each calendar month. Unused Commit credits 
 
 ### Overages
 
-If your usage exceeds your monthly Commit, additional credits are billed automatically at the On-Demand rate—you do not need to switch pricing tiers or top up manually. Any task already in flight is allowed to complete (for example, a Bits AI SRE investigation that is already running finishes its work).
+If your usage exceeds your monthly Commit, additional credits are billed automatically at the On-Demand rate—you do not need to switch pricing tiers or top up manually. Any task already in flight is allowed to complete (for example, a Bits Investigation that is already running finishes its work).
 
 ## Credit consumption by feature
 
@@ -57,15 +57,15 @@ These are average credit costs per feature. Actual consumption for any single re
 
 | Feature | Avg. credits per use |
 |---|---|
-| Bits AI Assistant — search and explore telemetry | 0.6 |
-| Bits AI Assistant — setup and optimize observability | 0.4 |
-| Bits AI Assistant — root cause analysis | 0.8 |
-| Bits AI Assistant — monitor creation | 0.5 |
-| Bits AI Assistant — dashboard creation | 0.6 |
-| Bits AI Assistant — notebook creation | 0.7 |
-| Bits AI SRE — autonomous investigation | 6.5 |
-| Bits AI Dev — code fix | 5 |
-| Agent Builder — message | 0.3 |
+| Bits Chat — search and explore telemetry | 0.6 |
+| Bits Chat — setup and optimize observability | 0.4 |
+| Bits Chat — root cause analysis | 0.8 |
+| Bits Chat — monitor creation | 0.5 |
+| Bits Chat — dashboard creation | 0.6 |
+| Bits Chat — notebook creation | 0.7 |
+| Bits Investigation — autonomous investigation | 6.5 |
+| Bits Code — code fix | 5 |
+| Bits Agent Builder — message | 0.3 |
 
 <div class="alert alert-info">These are the credit consumption rates as of May 27, 2026. Costs for each feature may change as models are optimized or new models become available.</div>
 
@@ -74,7 +74,7 @@ These are average credit costs per feature. Actual consumption for any single re
 All AI Credit management lives in **Plan & Usage > AI Credits**. From there, admins can:
 
 - **View usage**: See the current month's credit consumption, broken down by AI product.
-- **Enable or disable billable AI products**: A single org-level toggle controls all billable AI products. When disabled, users can still see product surfaces and view past results (for example, previous Bits AI SRE investigations or Bits AI Assistant conversations), but new requests are blocked.
+- **Enable or disable billable AI products**: A single org-level toggle controls all billable AI products. When disabled, users can still see product surfaces and view past results (for example, previous Bits Investigation reports or Bits Chat conversations), but new requests are blocked.
 
 ### Disable specific products
 
@@ -82,10 +82,10 @@ All AI Credits products are enabled by default with the Datadog Standard Role. T
 
 | Product | Permission |
 |---|---|
-| [Bits AI Assistant][1] | Bits Assistant Access |
-| [Bits AI SRE][3] | Bits SRE Investigations Write |
-| [Bits AI Dev][2] | Bits Dev Write |
-| [Agent Builder][4] | Agent Builder Write, Agent Builder Run |
+| [Bits Chat][1] | Bits Assistant Access |
+| [Bits Investigation][3] | Bits SRE Investigations Write |
+| [Bits Code][2] | Bits Dev Write |
+| [Bits Agent Builder][4] | Agent Builder Write, Agent Builder Run |
 
 To manage permissions, go to **Organization Settings > Roles**, select a role, and toggle the relevant permission.
 
