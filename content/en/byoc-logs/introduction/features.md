@@ -5,9 +5,6 @@ aliases:
   - /cloudprem/introduction/features/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
 ## Overview
 
 Datadog BYOC Logs brings core Log Explorer capabilities to your self-hosted environment. This page outlines available features, notes any differences from the SaaS platform, and helps you plan your log workflows.
