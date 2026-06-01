@@ -82,8 +82,8 @@ The evaluation path also affects gauge metrics when used with rollup-dependent f
 
 | Path | Evaluation order | Effect on sparse gauge metrics |
 |:-----|:-----------------|:-------------------------------|
-| **`classic_eval_path`** (no `as_count()`) | `pct_change()` applied per-bucket; values summed over the window | Can produce large negative values (for example, -1,500%) |
-| **`as_count_eval_path`** | Timeseries bucketed and aggregated first; `pct_change()` applied at the window level | Produces the intended window-level result |
+| **`classic_eval_path`** (no `as_count()`) | `pct_change()` is applied per-bucket, then values are summed over the window | Can produce large negative values (for example, -1,500%) |
+| **`as_count_eval_path`** | Timeseries is bucketed and aggregated first, then `pct_change()` is applied at the window level | Produces the intended window-level result |
 
 To use the count-style evaluation path on a gauge metric, add `as_count()` to the query.
 
