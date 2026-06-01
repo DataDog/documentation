@@ -1,10 +1,10 @@
 ---
 title: Debug with Bits
-description: Use Bits AI Dev Agent to create and manage Live Debugger sessions through a conversational interface.
+description: Use Bits Code to create and manage Live Debugger sessions through a conversational interface.
 further_reading:
 - link: "/bits_ai/bits_ai_dev_agent/"
   tag: "Documentation"
-  text: "Bits AI Dev Agent"
+  text: "Bits Code"
 - link: "/tracing/live_debugger/"
   tag: "Documentation"
   text: "Live Debugger"
@@ -24,7 +24,7 @@ Debug with Bits brings a conversational interface to Live Debugger for investiga
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
 <div class="alert alert-info">
-Debug with Bits uses <a href="/bits_ai/bits_ai_dev_agent/">Bits AI Dev Agent</a>, which may impact billing.
+Debug with Bits uses <a href="/bits_ai/bits_ai_dev_agent/">Bits Code</a>, which may impact billing.
 </div>
 
 ## Prerequisites
@@ -33,7 +33,7 @@ Before using Debug with Bits:
 
 - [Live Debugger][1] must be enabled for the target service. See [Requirements and setup][1] for details.
 - Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
-- [Bits AI Dev Agent][5] must be available in your organization.
+- [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
 
 
