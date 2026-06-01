@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-AI Credits are how Datadog meters and bills usage of its AI products. One AI Credit represents a unit of intelligent work performed by a Datadog AI product—for example, a [Bits Chat][1] query, a [Bits Code][2] code fix, or a [Bits Investigation][3] investigation.
+AI Credits are how Datadog meters and bills usage of its AI products. One AI Credit represents a unit of intelligent work performed by a Datadog AI product.
 
 Use this page to understand which products consume AI Credits, how pricing works, how to track usage, and how to control access for your organization.
 
@@ -65,14 +65,14 @@ If your usage exceeds your monthly Commit, additional credits are billed automat
 
 \* Estimates are per message.
 
-Average credit consumption for each feature set out above is provided only for reference. Actual consumption for any single request may vary with task complexity and the amount of context the model processes.
+<div class="alert alert-info">Average credit consumption for each feature set out above is provided only for reference. Actual consumption for any single request may vary with task complexity and the amount of context the model processes.</div>
 
 ## Admin controls
 
 All AI Credit management lives in **Plan & Usage > AI Credits**. From there, admins can:
 
 - **View usage**: See the current month's credit consumption, broken down by AI product.
-- **Enable or disable billable AI products**: A single org-level toggle controls all billable AI products. When disabled, users can still see product surfaces and view past results (for example, previous Bits Investigation reports or Bits Chat conversations), but new requests are blocked.
+- **Enable or disable AI products powered by AI Credits**: A single org-level toggle controls all AI products powered by AI Credits. When disabled, users can still see product surfaces and view past results, but new requests are blocked.
 
 ### Disable specific products
 
@@ -102,4 +102,4 @@ AI Credits are available to all Datadog customers except:
 [2]: /bits_ai/bits_ai_dev_agent/
 [3]: /bits_ai/bits_ai_sre/
 [4]: /actions/agents/
-[5]: https://www.datadoghq.com/pricing/
+[5]: https://www.datadoghq.com/pricing/?site=us&product=ai-credits#products
