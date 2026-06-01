@@ -24,6 +24,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
+    - link: "/mcp_server/"
+      tag: "Documentation"
+      text: "Get observability insights from AI agents with the Datadog MCP Server"
 ---
 
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
@@ -35,7 +38,6 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
    {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits Code{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_security_analyst" >}}Triage security threat signals with Bits AI Security Analyst{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_assistant" >}}Explore your observability data with Bits Chat{{< /nextlink >}}
-   {{< nextlink href="mcp_server" >}}Get observability insights from AI agents with the Datadog MCP server{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
