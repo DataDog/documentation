@@ -13,7 +13,7 @@ further_reading:
     text: "Single-View AI Investigation"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-operation-ai-investigation/" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/rum-investigation-operations/" header="Join the Preview!">}}
   Operation AI Investigation is in Preview.
 {{< /callout >}}
 

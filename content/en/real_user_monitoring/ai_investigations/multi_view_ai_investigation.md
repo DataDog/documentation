@@ -13,7 +13,7 @@ further_reading:
     text: "Optimize page performance with RUM"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-multi-view-ai-investigation/" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/rum-investigation-optimization/" header="Join the Preview!">}}
   Multi-View AI Investigation is in Preview.
 {{< /callout >}}
 
