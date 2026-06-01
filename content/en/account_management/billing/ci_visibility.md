@@ -29,7 +29,7 @@ Yes, you can exclude commits from specific people by using [exclusion filters][2
 
 ## Deduplicating committers across email addresses
 
-In some cases, a single developer's commits can be split across multiple Git author emails — for example, if they set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold described above, each counts as a separate committer.
+In some cases, a single developer's commits can be split across multiple Git author emails. For example, a developer might set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold described above, each counts as a separate committer.
 
 For repositories hosted on GitHub, Datadog can map each Git author email to the underlying GitHub user so that the developer is counted once, even when they push under different emails. This requires a Datadog [GitHub App][3] installed on the affected repositories with the `Contents: Read` permission.
 
