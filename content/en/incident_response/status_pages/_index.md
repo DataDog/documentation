@@ -209,7 +209,7 @@ By default, status page subscription emails are sent from a Datadog email addres
 
 <div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
 
-1. In your status page, go to **Settings** > **Subscriptions**.
+1. On your status page, go to **Settings** > **Subscriptions**.
 1. Under **Email Sender Domain**, click **Organization Settings**.
 1. In Organization Settings, [add and validate an SMTP server][3].
 1. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
