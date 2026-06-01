@@ -15092,6 +15092,18 @@ menu:
           - CreateReferenceTableUpload
         unstable: []
         order: 1
+    - name: List rows
+      url: '#list-rows'
+      identifier: reference-tables-list-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReferenceTableRows
+        unstable: []
+        order: 11
     - name: Upsert rows
       url: '#upsert-rows'
       identifier: reference-tables-upsert-rows
