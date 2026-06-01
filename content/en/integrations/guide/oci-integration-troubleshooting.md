@@ -76,5 +76,5 @@ Still need help? Contact [Datadog support][3].
 [3]: /help/
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
-[6]: /organization-settings/api-keys
-[8]: /organization-settings/application-keys
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: https://app.datadoghq.com/organization-settings/application-keys
