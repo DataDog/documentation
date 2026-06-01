@@ -33,11 +33,9 @@ You can configure IaC Security using:
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with a `schema-version`, followed by an `iac` key containing the analysis configuration.
+The configuration file must begin with `schema-version: v1.3`, followed by an `iac` key containing the analysis configuration.
 
-Use `schema-version: v1.2` for global rule, severity, category, and path settings. Use `schema-version: v1.3` to also enable per-rule path scoping, per-rule severity overrides, and platform filters.
-
-The full structure for `v1.3` is as follows:
+The full structure is as follows:
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.3
@@ -72,14 +70,14 @@ iac:
     # Report only findings in these categories.
     only-categories:
       - "Encryption"
-    # Do not run rules from these platforms (v1.3+).
+    # Do not run rules from these platforms.
     ignore-platforms:
       - Dockerfile
-    # Only run rules from these platforms (v1.3+).
+    # Only run rules from these platforms.
     only-platforms:
       - Terraform
       - Kubernetes
-  # Per-rule configurations (v1.3+).
+  # Per-rule configurations.
   rule-configs:
     terraform-aws-s3-bucket-without-encryption:
       ignore-paths:
@@ -97,7 +95,7 @@ The `iac` key supports the following fields:
 | `ignore-rules` | Array | A list of rule IDs that will not be applied in scans. |
 | `use-rules` | Array | A list of rule IDs that will be applied in scans. If specified, only these rules will be used (unless other configuration causes them to be ignored). |
 | `global-config` | Object | Global settings for the IaC scanner. |
-| `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. Requires `schema-version: v1.3`. |
+| `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. |
 
 ## Rule configuration
 
@@ -107,7 +105,7 @@ To modify which rules run:
 - **Disable specific rules**: List them under `ignore-rules`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.3
 iac:
   ignore-rules:
     - A
@@ -115,7 +113,7 @@ iac:
 {{< /code-block >}}
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.3
 iac:
   use-rules:
     - A
@@ -135,8 +133,8 @@ The `global-config` object controls repository-wide settings:
 | `ignore-severities` | Array | Severity levels to ignore. |
 | `only-categories` | Array | Categories to report. Findings in other categories are not reported. |
 | `ignore-categories` | Array | Categories to ignore. |
-| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied in scans. Requires `schema-version: v1.3`. |
-| `only-platforms` | Array | Platforms to scan. Only rules from these platforms are applied in scans. Requires `schema-version: v1.3`. |
+| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied in scans. |
+| `only-platforms` | Array | Platforms to scan. Only rules from these platforms are applied in scans. |
 
 ### Severities
 
@@ -151,7 +149,7 @@ Use `ignore-severities` to ignore findings based on severity level. Use `only-se
 - `info`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.3
 iac:
   global-config:
     ignore-severities:
@@ -164,7 +162,7 @@ iac:
 Use `ignore-paths` to exclude specific files or directories from scanning. Use `only-paths` to scan only specific files or directories. These options support glob patterns.
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.3
 iac:
   global-config:
     ignore-paths:
@@ -195,7 +193,7 @@ Use `ignore-categories` to ignore findings in specific categories. Use `only-cat
 - `Supply-Chain`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.3
 iac:
   global-config:
     ignore-categories:
@@ -205,7 +203,7 @@ iac:
 
 ### Platforms
 
-Use `ignore-platforms` to skip specific platforms. Use `only-platforms` to restrict scanning to specific platforms. Requires `schema-version: v1.3`.
+Use `ignore-platforms` to skip specific platforms. Use `only-platforms` to restrict scanning to specific platforms.
 
 **Possible values:**
 
@@ -227,7 +225,7 @@ iac:
 
 ## Per-rule configuration
 
-Use `rule-configs` to configure a specific rule. Requires `schema-version: v1.3`.
+Use `rule-configs` to configure a specific rule.
 
 Each key under `rule-configs` is a rule ID. The following properties are supported per rule:
 
