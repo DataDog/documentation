@@ -8730,6 +8730,37 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
       weight: 7
+    - name: Journey Monitoring
+      url: journey_monitoring/
+      pre: custom-action-wui
+      identifier: journey_monitoring
+      parent: digital_experience_heading
+      weight: 10000
+    - name: Map
+      url: journey_monitoring/map/
+      parent: journey_monitoring
+      identifier: journey_monitoring_map
+      weight: 1
+    - name: Suggested Journeys
+      url: journey_monitoring/map/suggested_journeys/
+      parent: journey_monitoring_map
+      identifier: journey_monitoring_map_suggested_journeys
+      weight: 101
+    - name: Details Report
+      url: journey_monitoring/details_report/
+      parent: journey_monitoring
+      identifier: journey_monitoring_details_report
+      weight: 2
+    - name: Variants
+      url: journey_monitoring/details_report/variants/
+      parent: journey_monitoring_details_report
+      identifier: journey_monitoring_details_report_variants
+      weight: 201
+    - name: Uptime
+      url: journey_monitoring/uptime/
+      parent: journey_monitoring
+      identifier: journey_monitoring_uptime
+      weight: 3
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
@@ -9482,27 +9513,32 @@ menu:
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Create Exposure SQL Models
       url: experiments/exposure_sql
       parent: pa_experiments
       identifier: pa_experiments_exposure_sql
-      weight: 4
+      weight: 5
+    - name: Manage Subject Types
+      url: experiments/subject_types
+      parent: pa_experiments
+      identifier: pa_experiments_subject_types
+      weight: 6
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 5
+      weight: 7
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 6
+      weight: 8
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 7
+      weight: 9
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
