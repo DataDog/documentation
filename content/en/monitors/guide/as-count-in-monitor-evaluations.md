@@ -78,7 +78,7 @@ In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but 
 
 ## Gauge metrics and pct_change()
 
-The evaluation path also affects gauge metrics when used with rollup-dependent functions like `pct_change()`. Without `as_count()`, the monitor uses the classic evaluation path: `pct_change()` is computed per-bucket and those values are summed over the evaluation window. For sparse gauge metrics, this can produce values well below -100%.
+The evaluation path also affects gauge metrics when used with rollup-dependent functions like `pct_change()`. Without `as_count()`, the monitor uses the classic evaluation path, in which `pct_change()` is computed per-bucket and those values are summed over the evaluation window. For sparse gauge metrics, this can produce values well below -100%.
 
 | Path | Evaluation order | Effect on sparse gauge metrics |
 |:-----|:-----------------|:-------------------------------|
