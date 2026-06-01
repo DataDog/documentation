@@ -48,7 +48,7 @@ Custom checks are **not** supported.
 
     - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted.
     - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a file{{< /ui >}} and choose the configuration file you want to replace, then fill in the new configuration as prompted.
-    - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}} and (tk).
+    - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}}.
 
     <div class="alert alert-tip">Toggle between <strong>Visual</strong> and <strong>YAML</strong> mode when filling out the integration configuration. Use <strong>YAML</strong> mode to paste in YAML directly.</div>
 
