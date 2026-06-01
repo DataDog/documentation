@@ -37,7 +37,7 @@ To remediate this, generate new credentials and update your integration deployme
 {{< tabs >}}
 {{% tab "QuickStart (ORM stack)" %}}
 
-1. Navigate to [Oracle Resource Manager stacks][7] and locate your Datadog QuickStart stack.
+1. Navigate to [Oracle Resource Manager stacks](https://cloud.oracle.com/resourcemanager/stacks) and locate your Datadog QuickStart stack.
 2. Click **Edit** on the stack.
 3. Click **Next** to reach the **Configure Variables** page.
 4. Update the **Datadog API Key** and **Datadog Application Key** values with the new credentials.
@@ -77,5 +77,4 @@ Still need help? Contact [Datadog support][3].
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
 [6]: /organization-settings/api-keys
-[7]: https://cloud.oracle.com/resourcemanager/stacks
 [8]: /organization-settings/application-keys
