@@ -49,7 +49,7 @@ When uploading results from third-party static analysis tools to Datadog, ensure
 To upload a SARIF report, follow the steps below:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optionally, set a [`DD_SITE` variable][7] (this defaults to `datadoghq.com`).
+2. Optionally, set a [`DD_SITE` variable][24] (this defaults to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
 
    ```bash
@@ -78,6 +78,15 @@ is too large, consider the following options:
 
 Update the configuration either through the Datadog application or by modifying the `code-security.datadog.yaml` file.
 
+### No PR comments or PR gates for third-party SARIF uploads
+
+[PR comments][25] and [PR gates][26] are only supported for results produced by Datadog's official static analysis tools:
+
+- [`datadog-static-analyzer`](https://github.com/DataDog/datadog-static-analyzer)
+- [`datadog-saist`](https://github.com/DataDog/datadog-saist)
+
+If you upload SARIF results from a third-party tool, findings appear in the Datadog UI but do not trigger PR comments or PR gate evaluations.
+
 ### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
@@ -103,7 +112,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 **If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
-If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
+If you are using Datadog’s analyzer, [diff-aware scanning][21] is enabled by default. If you are running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
 ### Diff-aware is not working
 
@@ -116,7 +125,7 @@ You can also run datadog-static-analyzer with the `--debug` option to get more i
 
 **Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
 
-## Software Composition Analysis
+## Software Composition Analysis (SCA)
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
 
@@ -125,6 +134,86 @@ For issues with Datadog Software Composition Analysis (SCA), include the followi
 - The URL of your repository (public or private)
 - The name of the branch you ran the analysis on
 - The list of dependency files in your repository (such as `package-lock.json`, `requirements.txt`, or `pom.xml`)
+
+### Scan Java JAR directories
+
+Some Java projects rely on third-party JAR files checked into the repository — for example, in a `lib/` directory — rather than a complete Maven or Gradle manifest. When your build pulls dependencies straight from those JARs, or when your dependency manifests are incomplete or out of sync with what your build actually uses, you can scan the JAR files directly and treat them as the source of truth.
+
+Datadog SBOM generator includes an opt-in parser that extracts Maven metadata embedded in each JAR and reports every detected artifact as a Maven component in the resulting SBOM. Use this approach when the JARs on disk are the most reliable record of what your build depends on. For projects with standard Maven or Gradle manifests, scan the supported manifests instead — they give you transitive dependencies and source-file matching that the JAR parser cannot.
+
+#### Requirements
+
+- `datadog-sbom-generator` version `1.10.2` or later. See the [releases page on GitHub][27].
+- Each JAR must include Maven metadata at `META-INF/maven/<groupId>/<artifactId>/pom.properties`. JARs without this metadata are skipped with a warning, and scanning continues.
+
+To confirm the JAR parser is available in your installed version, run:
+
+```shell
+datadog-sbom-generator parsers list
+```
+
+Look for `jar` in the output.
+
+#### Enable the JAR parser
+
+The JAR parser is not part of the default parser set. Enable it explicitly with `--enable-parsers jar`:
+
+```shell
+datadog-sbom-generator scan --enable-parsers jar /path/to/lib
+```
+
+Replace `/path/to/lib` with the directory that contains your JAR files. The scanner walks the directory and reads metadata from every file with a `.jar` extension.
+
+<div class="alert alert-warning"><code>--enable-parsers</code> replaces the default parser set. To scan JARs and standard manifests in the same run, list every parser you need. Otherwise, run separate scans.</div>
+
+To scan JAR files and Maven manifests together:
+
+```shell
+datadog-sbom-generator scan --enable-parsers jar,maven /path/to/repository
+```
+
+#### Upload the SBOM to Datadog
+
+Save the SBOM to a file, then upload it with `datadog-ci`:
+
+```shell
+datadog-sbom-generator scan \
+    --enable-parsers jar \
+    --output sbom.json \
+    /path/to/lib
+
+datadog-ci sbom upload sbom.json
+```
+
+Set `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` in your CI environment before you run the upload.
+
+#### How the JAR parser identifies components
+
+When Maven packages a JAR, it embeds a `pom.properties` file at:
+
+```text
+META-INF/maven/<groupId>/<artifactId>/pom.properties
+```
+
+The parser reads the `groupId`, `artifactId`, and `version` from that file and emits one Maven component per detected entry. A single JAR can contain more than one `pom.properties` entry — the parser emits one component for each.
+
+Components detected this way carry two SBOM properties:
+
+| Property | Value | Meaning |
+|---|---|---|
+| `datadog:opaque` | `true` | The component was detected from a binary, not a source manifest. |
+| `datadog:is-direct` | `true` | Every JAR present on disk is treated as a direct dependency. |
+
+#### Limitations
+
+The JAR parser is intentionally narrow. Use it with these constraints in mind:
+
+- Only files with a `.jar` extension are scanned. Other ZIP-based archives, including `.war` and `.ear`, are not scanned.
+- JARs without `META-INF/maven/.../pom.properties` are skipped. Components without embedded Maven metadata are not reported.
+- Transitive dependencies are not resolved. Each detected JAR is reported as a direct dependency.
+- Source-file matching is not available for components detected through the JAR parser.
+
+If you need transitive resolution, source matching, or richer dependency context, scan the standard Maven or Gradle manifests instead. The JAR parser is the right tool when your build does not have a trustworthy manifest to scan.
 
 ### Issues with SBOM uploads
 While the [Datadog SBOM generator][7] is recommended, Datadog supports the ingestion of any SBOM files. Please ensure your files adhere to either the Cyclone-DX 1.4 or Cyclone-DX 1.5 formats.
@@ -185,11 +274,11 @@ To ensure data quality, Datadog applies validation rules during SBOM processing.
 - **Invalid purl**: The package URL is present but not in a valid purl format.
 - **Unsupported language**: The library is associated with a programming language that Datadog does not support.
 
-## No vulnerabilities detected by Software Composition Analysis
+### No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
-### Confirming runtime detection is enabled
+#### Confirming runtime detection is enabled
 
 If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
@@ -199,13 +288,13 @@ If you have enabled Runtime Software Composition Analysis (SCA) on your services
 
 If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
-### Confirm tracer versions are updated
+#### Confirm tracer versions are updated
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the Application Security product set up documentation to validate you you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
 
-### Ensure the communication of telemetry data
+#### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
@@ -222,7 +311,7 @@ If you have enabled Runtime Code Analysis (IAST) on your services, you can use t
 
 If you are not seeing `datadog.appsec.risk_management.iast.host_instance`, check the [in-app instructions][20] to confirm that all steps for the initial setup are complete.
 
-Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][19].
@@ -295,7 +384,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [3]: /security/code_security/static_analysis/github_actions#inputs
 [4]: https://app.datadoghq.com/source-code/repositories
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
+[6]: /tracing/troubleshooting/connection_errors/
 [7]: https://github.com/DataDog/datadog-sbom-generator
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
@@ -304,6 +393,12 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [16]: https://app.datadoghq.com/services?&lens=Security
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-[19]: https://www.datadoghq.com/blog/monitoring-flask-apps-with-datadog/
-[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options
+[19]: /tracing/trace_collection/dd_libraries/python/
 [20]: /security/configuration/code-security/setup?steps=iast
+[21]: /security/code_security/static_analysis/setup/#diff-aware-scanning
+[22]: /tracing/troubleshooting/
+[23]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[24]: /getting_started/site/
+[25]: /security/code_security/dev_tool_int/pull_request_comments/
+[26]: /pr_gates/
+[27]: https://github.com/DataDog/datadog-sbom-generator/releases

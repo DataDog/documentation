@@ -35,17 +35,34 @@ Follow the installation instructions for your platform:
 
 ### Client-side SDKs
 
-{{< partial name="feature_flags/feature_flags_client.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
+  {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+  {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
+  {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
+  {{< image-card href="/feature_flags/client/reactnative/" src="integrations_logos/react-native_large.svg" alt="React Native" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/tv_os_large.svg" alt="tvOS" >}}
+  {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
+{{< /card-grid >}}
 
 ### Server-side SDKs
 
-{{< partial name="feature_flags/feature_flags_server.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+  {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 
 After installation, ensure you have initialized the Datadog provider with your credentials and set up an evaluation context that includes user attributes for targeting.
 
 ### 2. Set up and verify a new flag {#set-up-flag}
 
-1. Create a flag in Datadog by navigating to **Software Delivery** > **Feature Flags**, then clicking **Create Flag**.
+1. Create a flag in Datadog by navigating to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}, then clicking {{< ui >}}Create Flag{{< /ui >}}.
 2. Implement the flag in your application code (see the code examples below these steps).
 3. Test the flag in your local development environment to ensure it works as expected.
 4. Deploy the application to your staging or testing environments and verify the flag's functionality.
@@ -746,7 +763,7 @@ end
 
 <div class="alert alert-info">Datadog can help with migrating flags. Contact <a href="https://docs.datadoghq.com/help/">Support</a> for assistance.</div>
 
-1. In the Datadog UI, recreate the critical flags from LaunchDarkly by navigating to **Software Delivery** > **Feature Flags**.
+1. In the Datadog UI, recreate the critical flags from LaunchDarkly by navigating to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}.
 2. Ensure that the flag configurations - such as rollout percentages, targeting rules, and variations - are accurately replicated in the new service.
 3. For complex targeting rules, use the evaluation context attributes to implement equivalent logic.
 

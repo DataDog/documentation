@@ -50,24 +50,9 @@ To set up the rename field processor:
 
 ### Path notation example {#path-notation-example-remap}
 
- For the following message structure:
+{{% observability_pipelines/path_notation %}}
 
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to see the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation_dots %}}
 
 [1]: /observability_pipelines/guide/remap_reserved_attributes
 [2]: /observability_pipelines/search_syntax/logs/

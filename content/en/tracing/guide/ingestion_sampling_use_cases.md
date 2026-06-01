@@ -12,7 +12,7 @@ further_reading:
 
 Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there's usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
 
-Ingestion mechanisms are configurations within the Datadog Agent and Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
+Ingestion mechanisms are configurations within the Datadog Agent and Datadog SDKs. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
 
 This guide helps you understand when and how to use ingestion control configurations depending on the main use cases you might encounter. It covers:
 
@@ -29,9 +29,9 @@ To identify which ingestion mechanisms are currently used in your Datadog enviro
 
 The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows:
 - `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
-- `CONFIGURED` if a custom trace sampling rate configured in the tracing library is applied to the traces that start from the service.
+- `CONFIGURED` if a custom trace sampling rate configured in the SDK is applied to the traces that start from the service.
 
-Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services.
+Click on services to see details about what sampling decision makers (for example Agent or SDK, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
@@ -73,7 +73,7 @@ If some services and requests are critical to your business, you want higher vis
 
 #### Solution: Sampling rules
 
-By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][6] in the tracing library.
+By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][6] in the SDK.
 
 You can configure sampling rules by service. For traces that start from the rule's specified service, the defined percentage sampling rate is applied instead of the Agent's default sampling rate.
 
@@ -101,7 +101,7 @@ In addition to head-based sampled traces, you can increase the error sampling ra
 
 **Notes:**
 - Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
-- Starting with **Datadog Agent 6/7.41.0 and higher**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` can be set to include spans dropped by tracing library rules or `manual.drop`. More details can be found in the [Error traces section of the Ingestion Mechanisms doc][9].
+- Starting with **Datadog Agent 6/7.41.0 and higher**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` can be set to include spans dropped by SDK rules or `manual.drop`. More details can be found in the [Error traces section of the Ingestion Mechanisms doc][9].
 
 #### Configuring error sampling
 

@@ -18,59 +18,82 @@
   }
 }
 
-.js-group-header {
-  transition: box-shadow 0.125s;
+.group-header-container {
   position: relative;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  margin-bottom: 9px;
-  border-radius: 4px;
-  cursor: pointer;
-  overflow: hidden;
-  height: 28px;
-
+  isolation: isolate; // creates a new stacking context so child z-index values don't compete outside this container
+  
   .group-header-text {
-    margin-top: -1px;
-    i{
-      cursor: copy;
+    position: absolute;
+    left: 67px; // positioning within .js-group-header
+    bottom: 2px;
+
+    button.copy-anchor {
+      background: none;
+      border: none;
+      opacity: 0.5;
       position: relative;
-      top: 4px;
-      margin-left: 4px;
+      z-index: 2; // position above button.js-group-header
+      i{
+        position: relative;
+        top: 2px;
+        &.icon-check-bold {
+          display: none;
+        }
+      }
+      &:hover {
+        opacity: 1;
+      }
     }
   }
-
-  &:hover {
-    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  
+  .js-group-header {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    transition: box-shadow 0.125s;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    margin-bottom: 9px;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    height: 28px;
+    z-index: 1; // position above .group-header-text
+  
+    &:hover {
+      box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+    }
+    
+    &.active {
+      .js-group-header__arrow {
+        right: 12px !important;
+        transform: rotate(-90deg) !important;
+      }
+    }
   }
-  &.active + div {
-    display: block !important;
+  
+  .js-group-header__icon {
+    background: rgba(0,0,0,0.05);
   }
-  &.active {
-    .js-group-header__arrow {
-      right: 12px !important;
-      transform: rotate(-90deg) !important;
+  
+  .js-group-header__arrow {
+    transition: transform 0.125s;
+    top: 1px;
+    right: 7px;
+    position: absolute;
+    font-weight: 700;
+    font-size: 18px;
+    transform: rotate(90deg);
+  
+    // Point arrow inwards when collapsed
+    .js-group-header:not(.active) & {
+      transform: rotate(180deg);
+      top: 3px;
     }
   }
 }
 
-.js-group-header__icon {
-  background: rgba(0,0,0,0.05);
-}
-
-.js-group-header__arrow {
-  transition: transform 0.125s;
-  top: 1px;
-  right: 7px;
-  position: absolute;
-  font-weight: 700;
-  font-size: 18px;
-  transform: rotate(90deg);
-
-  // Point arrow inwards when collapsed
-  .js-group-header:not(.active) & {
-    transform: rotate(180deg);
-    top: 3px;
-  }
-}
 
 .rule-specification {
   p {

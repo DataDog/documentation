@@ -64,7 +64,7 @@ To configure the {{< ui >}}Executor{{< /ui >}} permission for the Datadog AWS In
 1. In the left pane, select the AWS Account you want to run actions with. 
 1. Click {{< ui >}}Set Permissions{{< /ui >}}.
     - If you see a {{< ui >}}Request Edit Access{{< /ui >}} button instead of a {{< ui >}}Set Permissions{{< /ui >}} button, ask your Datadog organization's admin to add you as an Editor for the AWS account. 
-1. Select a user, term, or organization and click {{< ui >}}Add{{< /ui >}}. 
+1. Select a user, team, or organization and click {{< ui >}}Add{{< /ui >}}. 
 1. Under {{< ui >}}People with access{{< /ui >}}, select the {{< ui >}}Executor{{< /ui >}} permission.
 1. Click {{< ui >}}Save{{< /ui >}}.
 

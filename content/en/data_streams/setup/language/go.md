@@ -23,7 +23,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 {{% tracing-go-v2 %}}
 
-Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
+Data Streams Monitoring has not been changed between v1 and v2 of the SDK.
 
 ### Supported libraries
 
@@ -41,7 +41,7 @@ Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
 
 #### Automatic Instrumentation
 
-Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports both the Sarama and Confluent Kafka libraries.
+Automatic instrumentation uses [Orchestrion][4] to install dd-trace-go and supports the Sarama, Confluent Kafka, and kafka-go libraries.
 
 To automatically instrument your service:
 

@@ -93,8 +93,8 @@ The following frameworks aren't directly instrumented by App and API Protection,
 | CodeIgniter   | 2.x       |  {{< X >}} | {{< X >}} |
 | FuelPHP       | 1.1        |  {{< X >}} | {{< X >}} |
 | Laravel       | 4.2, 5.x, 6.x, 8.x(tracer 0.52.0+), 9.x, 10.x        | {{< X >}} | {{< X >}} |
-| Lumen         | 1.9-2.29    |  {{< X >}} | {{< X >}} |
-| Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
+| Lumen         | 5.2+        |  {{< X >}} | {{< X >}} |
+| Magento       |  1, 2       |  {{< X >}} | {{< X >}} |
 | Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
 | Phalcon       | 3.1+        |  {{< X >}} | {{< X >}} |
 | Slim          | 3.1+        |  {{< X >}} | {{< X >}} |

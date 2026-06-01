@@ -1,5 +1,6 @@
 ---
 title: LLM Observability SDK Reference
+description: Reference documentation for the Datadog LLM Observability SDKs for Python, Node.js, and Java, covering automatic and manual instrumentation.
 aliases:
     - /tracing/llm_observability/sdk/python
     - /llm_observability/sdk/python
@@ -493,6 +494,8 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
+<div class="alert alert-info">If you are manually instrumenting an LLM span, you must record token counts (such as <code>input_tokens</code>, <code>output_tokens</code>, and <code>total_tokens</code>) yourself by annotating the span. See <a href="#enriching-spans">Enriching spans</a> for more information.</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm()`.
@@ -525,11 +528,17 @@ To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm(
 #### Example
 
 {{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
 @llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
+def llm_call(prompt):
     completion = ... # user application logic to invoke LLM
+    LLMObs.annotate(
+        input_data=[{"role": "user", "content": prompt}],
+        output_data=[{"role": "assistant", "content": completion}],
+        metrics={"input_tokens": 4, "output_tokens": 6, "total_tokens": 10},
+    )
     return completion
 {{< /code-block >}}
 {{% /tab %}}
@@ -565,8 +574,13 @@ To trace an LLM call, specify the span kind as `llm`, and optionally specify the
 #### Example
 
 {{< code-block lang="javascript" >}}
-function llmCall () {
+function llmCall (prompt) {
   const completion = ... // user application logic to invoke LLM
+  llmobs.annotate({
+    inputData: [{ role: "user", content: prompt }],
+    outputData: [{ role: "assistant", content: completion }],
+    metrics: { input_tokens: 4, output_tokens: 6, total_tokens: 10 }
+  })
   return completion
 }
 llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
@@ -616,6 +630,11 @@ public class MyJavaClass {
     LLMObsSpan llmSpan = LLMObs.startLLMSpan("my-llm-span-name", "my-llm-model", "my-company", "maybe-ml-app-override", "session-141");
     String inference = ... // user application logic to invoke LLM
     llmSpan.annotateIO(...); // record the input and output
+    llmSpan.setMetrics(Map.of(
+      "input_tokens", 617,
+      "output_tokens", 338,
+      "total_tokens", 955
+    ));
     llmSpan.finish();
     return inference;
   }
@@ -1292,6 +1311,10 @@ The `LLMObs.annotate()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
+`cost_tags`
+: optional - _list of strings_
+<br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as custom tags on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1385,6 +1408,10 @@ The `annotationOptions` object can contain the following:
 `tags`
 : optional - _object_
 <br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`costTags`
+: optional - _array of strings_
+<br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as custom tags on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -1704,6 +1731,10 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
+`cost_tags`
+: optional - _list of strings_
+<br />A list of tag keys to propagate as custom tags on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `LLMObs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1753,6 +1784,10 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 `tags`
 : optional - _object_
 <br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`costTags`
+: optional - _array of strings_
+<br />A list of tag keys to propagate as custom tags on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `llmobs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -1929,11 +1964,13 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 
 <div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform LLM Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
 
+### Use case: Using a common model provider
+Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with the model name, model provider, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
+
+To learn more about what each token represents and how Datadog calculates them, see [How token counts are calculated][16].
+
 {{< tabs >}}
 {{% tab "Python" %}}
-
-#### Use case: Using a common model provider
-Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1956,8 +1993,61 @@ def llm_call(prompt):
     return resp
 {{< /code-block >}}
 
-#### Use case: Using a custom model
-For custom or unsupported models, you must annotate the span manually with the cost data.
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+function llmCall (prompt) {
+  const resp = ... // llm call here
+  llmobs.annotate({
+    metrics: {
+      input_tokens: 50,
+      output_tokens: 120,
+      total_tokens: 170,
+      non_cached_input_tokens: 13,  // optional
+      cache_read_input_tokens: 22,  // optional
+      cache_write_input_tokens: 15  // optional
+    }
+  })
+  return resp
+}
+llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'openai' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import java.util.Map;
+
+public class MyJavaClass {
+  public String llmCall(String prompt) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("llm-call", "gpt-5.1", "openai", null, null);
+    String resp = ... // llm call here
+    llmSpan.setMetrics(Map.of(
+      "input_tokens", 50,
+      "output_tokens", 120,
+      "total_tokens", 170,
+      "non_cached_input_tokens", 13,  // optional
+      "cache_read_input_tokens", 22,  // optional
+      "cache_write_input_tokens", 15  // optional
+    ));
+    llmSpan.finish();
+    return resp;
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Use case: Using a custom model
+For custom or unsupported models, you must annotate the span manually with the cost data in dollars.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1978,6 +2068,123 @@ def llm_call(prompt):
         },
     )
     return resp
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+function llmCall (prompt) {
+  const resp = ... // llm call here
+  llmobs.annotate({
+    metrics: {
+      input_cost: 3,
+      output_cost: 7,
+      total_cost: 10,
+      non_cached_input_cost: 1,    // optional
+      cache_read_input_cost: 0.6,  // optional
+      cache_write_input_cost: 1.4  // optional
+    }
+  })
+  return resp
+}
+llmCall = llmobs.wrap({ kind: 'llm', modelName: 'custom_model', modelProvider: 'model_provider' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import java.util.Map;
+
+public class MyJavaClass {
+  public String llmCall(String prompt) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("llm-call", "custom_model", "model_provider", null, null);
+    String resp = ... // llm call here
+    llmSpan.setMetrics(Map.of(
+      "input_cost", 3,
+      "output_cost", 7,
+      "total_cost", 10,
+      "non_cached_input_cost", 1,    // optional
+      "cache_read_input_cost", 0.6,  // optional
+      "cache_write_input_cost", 1.4  // optional
+    ));
+    llmSpan.finish();
+    return resp;
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Adding custom tags to cost and tokens metrics
+By default, the LLM cost and token metrics carry a fixed set of OOTB tags such as `model_name`, `model_provider`, and `ml_app`. To slice LLM spend by attributes specific to your application — such as team, customer, or feature — mark a subset of the span's existing tag keys to propagate to those metrics as custom tags. For example use cases like custom dashboards and monitors, see [Custom tags on cost and tokens metrics][15].
+
+Each entry must be a string and must reference a key already supplied through the span's `tags` parameter at the time the annotation is applied. When annotating a single span, the key can be supplied through `tags` in the same annotation call or in an earlier annotation on the same span. When using an annotation context, only keys present in `tags` at span start qualify — keys added later through individual span annotations are not retained. Entries that don't reference an existing tag key are skipped.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="gpt-5.1", model_provider="openai")
+def llm_call(prompt):
+    resp = ... # llm call here
+    LLMObs.annotate(
+        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170},
+        tags={"team": "nlp", "customer_tier": "enterprise", "host": "host_name"},
+        cost_tags=["team", "customer_tier"],
+    )
+    return resp
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+function llmCall (prompt) {
+  const resp = ... // llm call here
+  llmobs.annotate({
+    metrics: { input_tokens: 50, output_tokens: 120, total_tokens: 170 },
+    tags: { team: 'nlp', customer_tier: 'enterprise', host: 'host_name' },
+    costTags: ['team', 'customer_tier']
+  })
+  return resp
+}
+llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'openai' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+You can also propagate tags this way through an annotation context to apply it to all auto-instrumented spans started inside the context.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+{{< code-block lang="python" >}}
+with LLMObs.annotation_context(
+    tags={"team": "nlp", "customer_tier": "enterprise"},
+    cost_tags=["team", "customer_tier"],
+):
+    resp = ... # llm call here
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+llmobs.annotationContext({
+  tags: { team: 'nlp', customer_tier: 'enterprise' },
+  costTags: ['team', 'customer_tier']
+}, () => {
+  const resp = ... // llm call here
+})
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -2782,3 +2989,5 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
 [14]: /llm_observability/monitoring/cost
+[15]: /llm_observability/monitoring/cost/#custom-tags-on-cost-and-tokens-metrics
+[16]: /llm_observability/monitoring/cost/#how-token-counts-are-calculated

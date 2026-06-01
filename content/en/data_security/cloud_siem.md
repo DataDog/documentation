@@ -41,9 +41,9 @@ Contact [support][2] if you want to prevent users from adding template variables
 
 ## Security rules can include triggering group-by values in the notification title
 
-In the **Describe your playbook** sections for [detection rules][3], you can add group-by values in the notification title. For example, if you are grouping by `service`, the service name shows in the title. Uncheck **Include triggering group-by values in notification title** to prevent group-by values from appearing in the title.
+In the {{< ui >}}Describe your playbook{{< /ui >}} sections for [detection rules][3], you can add group-by values in the notification title. For example, if you are grouping by `service`, the service name shows in the title. Uncheck {{< ui >}}Include triggering group-by values in notification title{{< /ui >}} to prevent group-by values from appearing in the title.
 
-Contact [support][2] if you want to remove the **Include triggering group-by values in notification title** option.
+Contact [support][2] if you want to remove the {{< ui >}}Include triggering group-by values in notification title{{< /ui >}} option.
 
 ## Security rules can use webhooks
 

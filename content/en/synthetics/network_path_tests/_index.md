@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
 ---
 
 ## Overview
@@ -75,7 +78,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Agent configuration
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">Network Path testing with the Datadog Agent is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
@@ -98,7 +101,10 @@ Requires [Agent version][7] `7.72` or higher.
    synthetics:
      collector:
        enabled: true
+       workers: 4 # default
    ```
+
+   **Note**: Set `workers` to a value greater than or equal to the number of Network Path tests running concurrently on the Agent.
 
 3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
 

@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
   tag: "Blog"
   text: "Manage your monitors more efficiently with Datadog Teams"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Customize Alert Monitor Notifications"
+
 ---
 
 ## Overview

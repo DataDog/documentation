@@ -1,5 +1,6 @@
 ---
 title: Azure Resource Manager (ARM)
+description: "Set up the Datadog-Azure integration with Azure Resource Manager to configure data and log forwarding."
 private: true
 further_reading:
   - link: "/integrations/azure/"

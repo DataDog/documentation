@@ -27,10 +27,11 @@ Before you remove integration overrides:
 
 | Language   | Minimum supported version |
 |------------|---------------------------|
+| C++        | All versions supported    |
 | .NET       | [3.4.0][1]                |
 | Go         | [1.55.0][2]               |
 | Java       | [1.20.0][3]               |
-| Node.js    | [4.16.0][4]               |
+| Node.js    | [3.37.0][13]-3.x or [4.16.0][4]               |
 | PHP        | [0.94.1][5]               |
 | Python     | [1.19.0][6]               |
 | Ruby       | [1.15.0][7]               |
@@ -39,7 +40,7 @@ Before you remove integration overrides:
 
 To remove integration overrides in Datadog:
 
-1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
+1. Navigate to **Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
 
    {{< img src="tracing/guide/base_service/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
 
@@ -102,4 +103,5 @@ This ensures the `service` attribute always uses the base service name instead o
 [10]: /tracing/guide/service_overrides
 [11]: /tracing/services/inferred_services/#peer-tags
 [12]: https://app.datadoghq.com/software/settings/service-remapping
+[13]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0
 

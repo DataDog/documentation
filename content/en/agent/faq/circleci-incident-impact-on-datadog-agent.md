@@ -1,32 +1,16 @@
 ---
 title: Impact of the CircleCI Security Incident on the Datadog Agent
 ---
-<details>
-  <summary><strong>Page changelog</strong></summary>
-  
-  <table>
-    <tr>
-        <td><strong>Date</strong></td>
-        <td><strong>Description</strong></td>
-    </tr>
-    <tr>
-        <td>13 Jan 2023</td>
-        <td>Initial publish</td>
-    </tr>
-    <tr>
-        <td>16 Jan 2023</td>
-        <td>Updated <code>rpm_check</code> script v1.1.0, edits for clarity</td>
-    </tr>
-    <tr>
-        <td>17 Jan 2023</td>
-        <td>Updated <a href="/resources/sh/rpm_check.sh"><code>rpm_check</code></a> script v1.2.0, clearer identify and remedy steps</td>
-    </tr>
-    <tr>
-        <td>3 Feb 2023</td>
-        <td>Clarify which Agents 5 versions are signed with the affected key</td>
-    </tr>
-</table>
-</details>
+{{% collapse-content title="Page changelog" level="h4" expanded=false %}}
+
+| Date | Description |
+|------|-------------|
+| 13 Jan 2023 | Initial publish |
+| 16 Jan 2023 | Updated `rpm_check` script v1.1.0, edits for clarity |
+| 17 Jan 2023 | Updated [`rpm_check`](/resources/sh/rpm_check.sh) script v1.2.0, clearer identify and remedy steps |
+| 3 Feb 2023 | Clarify which Agents 5 versions are signed with the affected key |
+
+{{% /collapse-content %}}
 
 <div class="alert alert-danger"><strong>Summary</strong>: Check your RPM-based Linux hosts (RHEL, CentOS, Rocky Linux, AlmaLinux, Amazon Linux, SUSE/SLES, Fedora) to find and fix any that trust the key with fingerprint <code>60A389A44A0C32BAE3C03F0B069B56F54172A230</code>.</a></div>
 

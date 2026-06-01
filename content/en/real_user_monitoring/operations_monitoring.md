@@ -38,6 +38,8 @@ The following table shows additional example features and their associated featu
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
+  - [Flutter (3.0.0)][7]
+      - **Note**: On Flutter Web, operations route through the Browser SDK, which requires the `feature_operation_vital` experimental feature to be enabled.
   - [Kotlin Multiplatform (1.4.0)][4]
   - [React Native (3.0.0)][5]
   - [Roku (1.4.0)][6]
@@ -48,7 +50,7 @@ Use the SDK APIs to define your operations.
 
 ### Start an operation
 
-Every operation must be started by calling the `startFeatureOperation`.
+Every operation must be started by calling `startOperation` (some SDKs may use the legacy name of this API - `startFeatureOperation`).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -73,9 +75,10 @@ options?: {
 {{% tab "Android" %}}
 
 ```kotlin
-GlobalRumMonitor.get().startFeatureOperation(
+GlobalRumMonitor.get().startOperation(
 	name: String,
 	operationKey: String?,
+	options: OperationOptions,
 	attributes: Map<String, Any?>
 )
 ```
@@ -84,10 +87,11 @@ GlobalRumMonitor.get().startFeatureOperation(
 
 {{% tab "iOS" %}}
 ```swift
-RUMMonitor.shared().startFeatureOperation(
+RUMMonitor.shared().startOperation(
 	name: String,
 	operationKey: String?,
-	attributes: [AttributeKey: AttributeValue]?
+	attributes: [AttributeKey: AttributeValue]?,
+	options: OperationOptions?
 )
 ```
 {{% /tab %}}
@@ -101,6 +105,18 @@ DdRum.startFeatureOperation(
 )
 
 ```
+{{% /tab %}}
+
+{{% tab "Flutter" %}}
+```dart
+DatadogSdk.instance.rum?.startFeatureOperation(
+    String name, {
+    String? operationKey,
+    Map<String, Object?> attributes = const {},
+  }
+)
+```
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
 {{% /tab %}}
 
 {{% tab "Roku" %}}
@@ -118,7 +134,7 @@ m.global.datadogRumAgent@.startOperation(
 
 ### Stop an operation with success
 
-Every started operation must have a stop. Use `succeedFeatureOperation` to stop an operation with a successful outcome.
+Every started operation must have a stop. Use `succeedOperation` to stop an operation with a successful outcome (some SDKs may use the legacy name of this API - `succeedFeatureOperation`).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -143,7 +159,7 @@ options?: {
 {{% tab "Android" %}}
 
 ```kotlin
-GlobalRumMonitor.get().succeedFeatureOperation(
+GlobalRumMonitor.get().succeedOperation(
 	name: String,
 	operationKey: String?,
 	attributes: Map<String, Any?>
@@ -155,7 +171,7 @@ GlobalRumMonitor.get().succeedFeatureOperation(
 {{% tab "iOS" %}}
 
 ```swift
-RUMMonitor.shared().succeedFeatureOperation(
+RUMMonitor.shared().succeedOperation(
 	name: String,
 	operationKey: String?,
 	attributes: [AttributeKey: AttributeValue]?
@@ -176,6 +192,20 @@ DdRum.succeedFeatureOperation(
 
 {{% /tab %}}
 
+{{% tab "Flutter" %}}
+
+```dart
+DatadogSdk.instance.rum?.succeedFeatureOperation(
+    String name, {
+    String? operationKey,
+    Map<String, Object?> attributes = const {},
+  }
+)
+```
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
+
+{{% /tab %}}
+
 {{% tab "Roku" %}}
 ```brightscript
 m.global.datadogRumAgent@.succeedOperation(
@@ -191,7 +221,7 @@ m.global.datadogRumAgent@.succeedOperation(
 
 ### Stop an operation with failure
 
-Every started operation must have a stop. Use `failFeatureOperation` to stop an operation with a failure outcome.
+Every started operation must have a stop. Use `failOperation` to stop an operation with a failure outcome (some SDKs may use the legacy name of this API - `failFeatureOperation`).
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -202,7 +232,7 @@ DD_RUM.init({
 enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to be enabled for the API to work
 })
 
-GlobalRumMonitor.get().failFeatureOperation: (
+failFeatureOperation: (
 name: string, 
 failureReason: FailureReason, //'error' | 'abandoned' | 'other'
 options?: {
@@ -217,10 +247,10 @@ options?: {
 {{% tab "Android" %}}
 
 ```kotlin
-GlobalRumMonitor.get().failFeatureOperation(
+GlobalRumMonitor.get().failOperation(
 	name: String,
 	operationKey: String?,
-	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, .other
+	failureReason: FailureReason,	// ERROR, ABANDONED, OTHER
 	attributes: Map<String, Any?>
 )
 ```
@@ -230,7 +260,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 {{% tab "iOS" %}}
 
 ```swift
-RUMMonitor.shared().failFeatureOperation(
+RUMMonitor.shared().failOperation(
 	name: String,
 	operationKey: String?,
     reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
@@ -263,10 +293,26 @@ DdRum.failFeatureOperation(
 ```
 {{% /tab %}}
 
+{{% tab "Flutter" %}}
+
+```dart
+DatadogSdk.instance.rum?.failFeatureOperation(
+    String name,
+    RumFeatureOperationFailureReason failureReason, // .error, .abandoned, .other
+    {
+    String? operationKey,
+    Map<String, Object?> attributes = const {},
+  }
+)
+```
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Parallelization
-You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startFeatureOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedFeatureOperation`.
+You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedOperation`.
 
 <div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with <code>@operation.failure_reason:timeout</code>. <br><br> If an operation stop API was called that was not started in the first place, the stop event emitted by the SDK is dropped upon ingestion.</div>
 
@@ -317,3 +363,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0
 
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
+[7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0

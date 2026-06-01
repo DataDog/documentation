@@ -1,79 +1,86 @@
 ---
 algolia:
-  category: Documentación
+  category: Documentation
   rank: 80
-  subcategory: Permisos de Rol en Datadog
+  subcategory: Datadog Role Permissions
 aliases:
 - /es/account_management/faq/managing-global-role-permissions
-description: Referencia completa de los permisos de Datadog, incluidas los roles gestionados,
-  los roles personalizados, los permisos confidenciales y la lista de permisos.
+description: Referencia completa de los permisos de Datadog, incluyendo roles gestionados,
+  roles personalizados, permisos sensibles y la lista de permisos.
 disable_toc: true
 further_reading:
 - link: /account_management/rbac/
   tag: Documentación
-  text: Aprende cómo crear, actualizar y borrar un rol.
+  text: Aprende cómo crear, actualizar y eliminar un rol
 - link: /api/v2/roles/#list-permissions
   tag: Documentación
-  text: Gestiona tus permisos con la API de permisos.
-title: Permisos de rol en Datadog
+  text: Gestiona tus permisos con la API de Permisos
+title: Permisos de roles de Datadog
 ---
+## Permisos {#permissions}
 
-## Permisos
+Los permisos definen el tipo de acceso que un usuario tiene a un recurso determinado. Típicamente, los permisos otorgan a un usuario el derecho a leer, editar o eliminar un objeto. Los permisos son la base de los derechos de acceso de todos los roles, incluyendo los tres roles gestionados y los roles personalizados.
 
-Los permisos definen el tipo de acceso que tiene un usuario a un recurso determinado. Por lo general, los permisos otorgan a un usuario el derecho a leer, editar o eliminar un objeto. Los permisos son la base de los derechos de acceso de todos los roles, incluidos los tres roles gestionados y los roles personalizados.
+### Permisos sensibles {#sensitive-permissions}
 
-### Permisos sensibles
+Algunos permisos de Datadog proporcionan acceso a funcionalidades más privilegiadas que es importante conocer, tales como:
 
-Algunos permisos de Datadog proporcionan acceso a funcionalidades más privilegiadas, que es importante conocer, como por ejemplo:
-
-- Acceso para cambiar parámetros de la organización
-- Acceso para leer datos potencialmente confidenciales
+- Acceso para cambiar la configuración de la organización
+- Acceso para leer datos potencialmente sensibles
 - Acceso para realizar operaciones privilegiadas
 
-Los permisos sensibles se marcan en las interfaces de Roles y Permisos para identificar que pueden necesitar un mayor análisis. Como práctica recomendada, los administradores que configuran las funciones deben prestar especial atención a estos permisos y confirmar cuáles de ellos están asignados a sus funciones y usuarios.
+Los permisos sensibles están marcados en las interfaces de Roles y Permisos para identificar que pueden necesitar un mayor escrutinio. Como mejor práctica, los administradores que configuran roles deben prestar especial atención a estos permisos y confirmar cuáles de estos permisos están asignados a sus roles y usuarios.
 
-### Permisos del modo de vista previa
+### Permisos de modo de vista previa {#preview-mode-permissions}
 
-Algunos permisos aparecen en "modo de vista previa" antes de aplicarse plenamente. Durante este periodo:
+Algunos permisos aparecen en "modo de vista previa" antes de ser completamente aplicados. Durante este período:
 
-- Los permisos de vista previa se marcan en la aplicación con un distintivo de "Vista previa".
-- No restringen el acceso hasta que finaliza el periodo de vista previa
-- La vista previa suele durar de 2 a 4 semanas antes de que comience la ejecución.
-- Los administradores deben configurar roles apropiados durante este período
+- Los permisos de vista previa están marcados en la aplicación con una insignia de "Vista previa"
+- No restringen el acceso hasta que finalice el período de vista previa
+- La vista previa generalmente dura de 2 a 4 semanas antes de que comience la aplicación
+- Los administradores deben configurar los roles adecuadamente durante este período
 
-El modo de vista previa ofrece a los administradores de tu organización la posibilidad de optar por determinados permisos nuevos, de modo que puedan evitar perder el acceso a recursos que antes no tenían restricciones. Las notas de la versión asociadas a cada permiso del modo de vista previa indican cuándo se crea el permiso y cuándo se aplicará. Aunque estos permisos no restringen el acceso durante la vista previa, Datadog recomienda actualizar las configuraciones de roles antes de que entren en vigor para evitar interrupciones.
+El modo de vista previa otorga a los administradores de su organización la capacidad de optar por ciertos nuevos permisos, para que puedan evitar perder el acceso a recursos que anteriormente no estaban restringidos. Las notas de la versión asociadas con cada permiso de modo de vista previa indican cuándo se crea el permiso y cuándo se aplicará. Si bien estos permisos no restringen el acceso durante la vista previa, Datadog recomienda actualizar las configuraciones de roles antes de que se apliquen para evitar interrupciones.
 
-## Roles
+## Roles {#roles}
 
-### Roles gestionados
+### Roles gestionados {#managed-roles}
 
-Por defecto, los usuarios existentes están asociados a uno de los tres roles gestionados:
+Por defecto, los usuarios existentes están asociados con uno de los tres roles gestionados:
 
-- Rol de administrador de Datadog
-- Rol estándar de Datadog
-- Rol de sólo lectura de Datadog
+- Datadog Admin Role
+- Datadog Standard Role
+- Datadog Read Only Role
 
-Todos los usuarios con uno de estos roles pueden leer datos, excepto los recursos [con restricción de lectura individual][1]. Los usuarios Admin y Standard tienen permisos de escritura sobre los recursos. Los usuarios Admin tienen permisos adicionales de lectura y escritura para activos confidenciales relacionados con la gestión de usuarios, la gestión de la organización, la facturación y el uso.
+Todos los usuarios con uno de estos roles pueden leer datos, excepto por los recursos [individualmente restringidos para lectura][1]. Los usuarios de Datadog Admin y Datadog Standard tienen permisos de escritura sobre los activos. Los usuarios de Datadog Admin tienen permisos adicionales de lectura y escritura para activos sensibles relacionados con la gestión de usuarios, la gestión de organizaciones, la facturación y el uso.
 
-Los roles gestionados son creados y mantenidos por Datadog. Sus permisos pueden ser actualizados automáticamente por Datadog a medida que se añaden nuevas funciones o cambian los permisos. Los usuarios no pueden modificar los roles gestionados directamente, pero pueden clonarlos para crear [roles personalizados](#custom-roles) con permisos específicos. Si es necesario, los usuarios pueden eliminar roles gestionados de sus cuentas.
+Los roles gestionados son creados y mantenidos por Datadog. Sus permisos pueden ser actualizados automáticamente por Datadog a medida que se agregan nuevas funciones o cambian los permisos. Los usuarios no pueden modificar los roles gestionados directamente, pero pueden clonarlos para crear [roles personalizados](#custom-roles) con permisos específicos. Si es necesario, los usuarios pueden eliminar roles gestionados de su cuenta.
 
-### Roles personalizados
+### Roles personalizados {#custom-roles}
 
-Crea un rol personalizado para combinar permisos en nuevos roles. Un rol personalizado te permite definir una persona, por ejemplo, un administrador de facturación, y luego asignar los permisos apropiados para ese rol. Después de crear un rol, asigna permisos a este rol o elimínalos directamente [updating the role in Datadog (actualizando el rol en Datadog)][2], o a través de la [Datadog Permission API (API de permiso de Datadog)][3].
+Crea un rol personalizado para combinar permisos en nuevos roles. Un rol personalizado te da la capacidad de definir una persona, por ejemplo, un administrador de facturación, y luego asignar los permisos apropiados para ese rol. Después de crear un rol, asigna o elimina permisos a este rol directamente actualizando el rol en Datadog, o a través del Datadog Permission API. También puedes agregar un permiso a múltiples roles personalizados a la vez seleccionando esos roles desde la página de Roles y presionando {{< ui >}}Add Permission{{< /ui >}}.
 
-A diferencia de los roles gestionados, los roles personalizados no reciben nuevos permisos cuando Datadog lanza nuevos productos y funciones. Los roles personalizados solo reciben nuevos permisos para mantener la compatibilidad cuando Datadog lanza un nuevo permiso que bloquea una funcionalidad existente.
+A diferencia de los roles gestionados, los roles personalizados no reciben nuevos permisos cuando Datadog lanza nuevos productos y características, a menos que estén configurados para recibir Actualizaciones Automáticas. Si las Actualizaciones Automáticas están desactivadas, los roles personalizados solo reciben nuevos permisos para mantener la compatibilidad cuando Datadog lanza un nuevo permiso que limita la funcionalidad existente.
 
-**Nota**: Al añadir un nuevo rol personalizado a un usuario, asegúrate de eliminar el rol de Datadog gestionado, asociado a ese usuario, para aplicar los permisos del nuevo rol.
+Para configurar Actualizaciones Automáticas para roles personalizados:
 
-## Lista de permisos
+1. Ve a la página de Configuración de la Organización y haz clic en la pestaña {{< ui >}}Roles{{< /ui >}}.
+2. Haz clic en el rol que deseas actualizar y haz clic en {{< ui >}}Edit Role{{< /ui >}}.
+3. En {{< ui >}}Automatically Receives Permissions{{< /ui >}}, elige una opción del menú desplegable: Ninguno, Rol de Solo Lectura de Datadog, Rol Estándar de Datadog o Rol de Administrador de Datadog.
 
-La siguiente tabla muestra el nombre, la descripción y el rol predeterminado de todos los permisos disponibles en Datadog. Cada tipo de recurso tiene sus correspondientes permisos de lectura y escritura.
+Si el rol personalizado está configurado para recibir actualizaciones automáticas, recibirá nuevos permisos cada vez que se publiquen en la plantilla de rol seleccionada. No se añaden permisos ya publicados. Puedes agregar o eliminar cualquier permiso de este rol y continuar recibiendo actualizaciones automáticas.
 
-Cada rol gestionado hereda todos los permisos de los roles menos potentes. Por lo tanto, el rol Estándar de Datadog tiene todos los permisos que se indican en la tabla con Datadog Sólo Lectura como rol por defecto. Además, el rol Administrador de Datadog contiene todos los permisos del rol Estándar de Datadog y del rol de Sólo lectura de Datadog.
+**Nota**: Al agregar un nuevo rol personalizado a un usuario, asegúrate de eliminar el rol administrado de Datadog asociado con ese usuario para hacer cumplir estrictamente los nuevos permisos del rol.
+
+## Lista de permisos {#permissions-list}
+
+La siguiente tabla enumera el nombre, la descripción y el rol predeterminado para todos los permisos disponibles en Datadog. Cada tipo de activo tiene permisos de lectura y escritura correspondientes.
+
+Cada rol gestionado hereda todos los permisos de los roles menos poderosos. Por lo tanto, el Datadog Standard Role tiene todos los permisos listados en la tabla, con el Datadog Read Only Role como rol predeterminado. Además, el Datadog Admin Role contiene todos los permisos tanto del Datadog Standard Role como del Datadog Read Only Role.
 
 {{% permissions %}}
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

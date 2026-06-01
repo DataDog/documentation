@@ -360,6 +360,31 @@ bootstrap:
 
 {{% /collapse-content %}}
 
+## Refresh secrets at runtime
+
+The Observability Pipelines Worker resolves secrets on startup and when its configuration is reloaded. To pick up rotated secret values without restarting the Worker, send a `SIGHUP` signal.
+
+**Note**: If a rotated secret has an invalid value, the reload fails. Datadog recommends rolling the reload one Worker or node at a time and verifying Worker health before continuing.
+
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+Send `SIGHUP` to the Worker process:
+
+```shell
+kill -HUP <worker_pid>
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Send `SIGHUP` to the Worker process inside each pod:
+
+```shell
+kubectl exec <pod_name> -- kill -HUP 1
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

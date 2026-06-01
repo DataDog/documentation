@@ -32,17 +32,17 @@ This step describes how to set up your service to use AAP.
 
 <div class="alert alert-info">If your service is already using AAP, you can go to <a href="#step-1.3:-validating-login-information-is-automatically-collected">Step 1.3: Validating whether login information is automatically collected</a>.</div>
 
-1. Go to [**Software Catalog**][2], click the **Security** lens, and search for your login service name. 
+1. Go to [**Catalog**][2], click the **Security** lens, and search for your login service name. 
 
-   {{<img src="security/ato/guide_service_catalog.png" alt="Software Catalog with a service managing authentication" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog.png" alt="Catalog with a service managing authentication" style="width:100%;" >}}
 
 2. Click on the service to open its details. If the **Threat management** pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
    
-   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
 
    If AAP isn't enabled, the panel displays the **Discover AAP** button.
 
-   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
 
    To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-aap-on-your-login-service).
 
@@ -65,7 +65,7 @@ To enable AAP using a new deployment, use the `APPSEC_ENABLED` environment varia
 
 When you see traces from your service in [AAP Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
 
-For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog Tracing Libraries][7].
+For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog SDKs][7].
 
 ### Step 1.3: Validating login information is automatically collected
 
@@ -117,7 +117,6 @@ To manually instrument your services, do the following:
 1. If auto-instrumentation is providing incorrect data (multiple events in a single trace), see [Disable auto-instrumentation][9].
 2. For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. Make sure to add the following metadata:
    * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts. Also, this field provides information on the location of the database used by the attacker. This value shouldn't be confused with `usr.id`.
-   * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
    * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
 
 **After deploying the code, validate the instrumentation is correct by following the steps in** [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
@@ -182,7 +181,7 @@ In microservice environments, services are generally reached by internal hosts r
  
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
   * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability.  
-  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
+  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the SDK to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
 * The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
   * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
   * **Solution:** Use the client user agent when calling subsequent services.

@@ -1,15 +1,15 @@
 ---
-title: Bits AI Dev Agent Setup
+title: Bits Code Setup
 disable_toc: false
 ---
 
 ## Overview
 
-Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog.  
+[Bits Code][8] integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
 
 ## Prerequisites
 
-To set up Bits AI Dev Agent, you need the **Bits Dev Agent Write** (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+To set up Bits Code, you need the **Bits Code Write** (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
 
 If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
 
@@ -17,22 +17,22 @@ If your organization uses custom roles, an admin must add this permission manual
 
 1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
 
-1. In your GitHub account, navigate to **Settings** > **Apps** > **Datadog** to configure GitHub permissions.
+1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
 
-   1. To enable basic Dev Agent functionality, set the following permissions:
+   1. To enable basic Bits Code functionality, set the following permissions:
 
-      - **Repository permissions**
+      - {{< ui >}}Repository permissions{{< /ui >}}
         - Repository contents: Read & write
         - Pull requests: Read & write
-      - **Subscribe to events**
+      - {{< ui >}}Subscribe to events{{< /ui >}}
         - Push
 
-   1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
+   1. (Optional) To allow Bits Code to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
-       - **Repository permissions**  
+       - {{< ui >}}Repository permissions{{< /ui >}}
          - Checks: Read  
          - Commit statuses: Read only 
-       - **Subscribe to events**  
+       - {{< ui >}}Subscribe to events{{< /ui >}}
          - Check run
          - Check suite  
          - Issue comment  
@@ -40,24 +40,24 @@ If your organization uses custom roles, an admin must add this permission manual
 
 ## Additional configuration  
 
-These optional configurations help you get the most out of Bits AI Dev Agent.
+These optional configurations help you get the most out of Bits Code.
 
 ### Configure telemetry tagging
 
-Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
+Bits Code uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
 
 To configure telemetry tagging, see [Tag your APM telemetry with Git information][4]. 
 
-You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][5] > **Service Repository Mapping**.
+You can also configure service-to-repository mapping manually in Bits Code settings under [{{< ui >}}Repositories{{< /ui >}}][5] > {{< ui >}}Service Repository Mapping{{< /ui >}}.
 
 ### Enable auto-push
-To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to [**Bits AI Dev** > **Settings** > **General**][12] , and set the toggle to **Enable**.
+To enable auto-push, so Bits Code can push commits directly to a branch, navigate to **Bits Code** > **Settings** > [**General**][6] , and set the toggle to **Enable**.
 
-**Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
+**Note**: If auto-push is disabled, you must review and approve code in Datadog before Bits Code can push it.
 
 ### Configure custom instructions
 
-The Dev Agent ingests custom instruction files from your repository, including:
+Bits Code ingests custom instruction files from your repository, including:
 
 - `.cursorrules`
 - `.windsurfrules`
@@ -67,17 +67,17 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `agent.md`
 
 
-You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section.
+You can also define global custom instructions, which apply to all Bits Code sessions, in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
 
 ## Environment setup
 
-Configure the Dev Agent's runtime environment, including network access policies and repository-specific tooling.
+Configure Bits Code's runtime environment, including network access policies and repository-specific tooling.
 
 ### Configure internet access
 
-By default, the Dev Agent has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits Code** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
-The default allowlist includes the following domains:
+The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
 | Language | Domains |
 |---|---|
@@ -89,23 +89,24 @@ The default allowlist includes the following domains:
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
+| Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 
 ### Configure repository environment
 
-Configure a custom environment for the Dev Agent to install dependencies, formatters, linters, and build tools that are needed for your codebase. Each repository runs in its own isolated sandbox, and the environment defines the settings for that sandbox. 
+Configure a custom environment for Bits Code to install dependencies, formatters, linters, and build tools that are needed for your codebase. Each repository runs in its own isolated sandbox, and the environment defines the settings for that sandbox. 
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][5], and find the **Environments** section.
-1. Click **Add Environment** to create a repository configuration:
+1. Go to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Repositories{{< /ui >}}][5], and find the {{< ui >}}Environments{{< /ui >}} section.
+1. Click {{< ui >}}Add Environment{{< /ui >}} to create a repository configuration:
    1. Select a repository from the dropdown.
-   1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
-   1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Dev Agent execution. Secrets are available as environment variables only during environment setup.
+   1. (Optional) Under {{< ui >}}Pre-installed Languages{{< /ui >}}, click {{< ui >}}Select Versions{{< /ui >}} to specify the language versions the sandbox should use.
+   1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Bits Code execution. Secrets are available as environment variables only during environment setup.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
-The Dev Agent runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [internet access](#configure-internet-access) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
+Bits Code runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [internet access](#configure-internet-access) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
@@ -123,3 +124,5 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
 [6]: https://app.datadoghq.com/code/settings
+[7]: /bits_ai/bits_ai_dev_agent/#start-a-code-session
+[8]: /bits_ai/bits_ai_dev_agent/

@@ -3,11 +3,6 @@ title: Service remapping rules
 site_support_id: service_remapping_rules
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-remapping-rules/"
- btn_hidden="false" header="Join the Preview!">}}
-Service remapping rules are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Update how your services appear across Datadog without changing tracer configuration or redeploying code. Service remapping rules allow you to rename, merge, or split services; or create new services based on infrastructure tags from the Datadog UI. You can also create remapping rules for other entity types, such as datastores and queues.
@@ -20,14 +15,15 @@ You must have the `apm_service_renaming_write` permission to create remapping ru
 
 ### Tracer version requirements
 
-You can create service remapping rules only for services instrumented with supported tracer versions. If a service is reporting from an older tracer version, upgrade the tracer before creating remapping rules for that service.
+You can create service remapping rules only for services instrumented with supported tracer versions. If a service is reporting from an older tracer version, upgrade the SDK before creating remapping rules for that service.
 
 | Language   | Minimum supported tracer version |
 |------------|----------------------------------|
+| C++        | All versions supported           |
 | Dotnet     | [3.4.0][3]                       |
 | Go         | [1.55.0][6]                      |
 | Java       | [1.20.0][2]                      |
-| JavaScript | [4.16.0][4]                      |
+| JavaScript | [3.37.0][16]-3.x or [4.16.0][4]  |
 | PHP        | [0.94.1][7]                      |
 | Python     | [1.19.0][5]                      |
 | Ruby       | [1.15.0][8]                      |
@@ -36,9 +32,9 @@ You can create service remapping rules only for services instrumented with suppo
 
 ### Step 1: Select remapping action and entities to target
 
-1. In Datadog, navigate to **APM** > **Software Catalog** > **Manage** > [**Manage Remapping Rules**][13] and click **+ Add Rule**. 
+1. In Datadog, navigate to **APM** > **Catalog** > **Manage** > [**Manage Remapping Rules**][13] and click **+ Add Rule**. 
 
-   Alternatively, navigate to **APM** > [**Software Catalog**][14] and click on a service to open the service side panel. From there, click **Service Page** > **Service Remapping**.
+   Alternatively, navigate to **APM** > [**Catalog**][14] and click on a service to open the service side panel. From there, click **Service Page** > **Service Remapping**.
    {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a service, showing the Service Page dropdown menu with a Service Remapping option" style="width:100%;" >}}
 1. Choose a remapping action to perform for your new remapping rule.
    - Select **Remap services** to split a single entity, rename an entity, merge multiple entities together, or rename several entities.
@@ -71,7 +67,13 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 - **Historical data:** Changes made by remapping rules affect only telemetry ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
 - **Logs service remapper:** Service remapping rules occur before logs pipelines. If the logs service remapper and remapping rules are both applied to a service, the remapping rules take precedence. 
 - **Dashboards and monitors:** Existing queries that reference old service names are not automatically updated. Review and update these manually.
-- **Integration overrides:** Remapping rules apply to base services; integration overrides are not remapped. [Remove integration overrides][15] for the best APM experience.
+**Integration and custom overrides:** If integration overrides or custom overrides fall within the scope of a remapping rule, they are also remapped. [Remove integration overrides][15] for the best APM experience.
+- **Service naming hierarchy:** Service names are determined by the following hierarchy, from highest to lowest priority:
+  1. Service remapping rules
+  2. Service defined in code (`tracer.Start(WithService(xx))`)
+  3. Service defined in the system property (`-Ddd.service={}`)
+  4. Service defined in the environment variable (`DD_SERVICE`)
+  5. Service defined in the config file (`application_monitoring.yaml`)
 
 [1]: /account_management/rbac/permissions
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.20.0
@@ -82,9 +84,10 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 [7]: https://github.com/DataDog/dd-trace-php/releases/tag/0.94.1
 [8]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.15.0
 [9]: /tracing/services/
-[10]: /internal_developer_portal/software_catalog/
+[10]: /internal_developer_portal/catalog/
 [11]: /logs/explorer/
 [12]: /metrics/explorer/
 [13]: https://app.datadoghq.com/software/settings/service-rename
 [14]: https://app.datadoghq.com/software
 [15]: /tracing/services/service_override_removal
+[16]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0

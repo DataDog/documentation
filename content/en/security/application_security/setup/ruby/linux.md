@@ -25,7 +25,7 @@ further_reading:
 - Ruby application
 - Root or sudo privileges
 - Your Datadog API key
-- Datadog Ruby tracing library (see [version requirements][1])
+- Datadog Ruby SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
