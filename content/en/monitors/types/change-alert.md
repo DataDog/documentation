@@ -91,7 +91,7 @@ This is a break down of the query with the following conditions:
     - To compare your notebook graph to the change alert monitor evaluation, scope your timeframe to match the change alert. 
     - For example, if you are looking to verify the value of a monitor evaluation over the last five minutes at 1:30, scope your notebook to 1:25 - 1:30. 
 
-**Note**: If your metric is a GAUGE type, the evaluation path affects how `pct_change()` is calculated. Without `as_count()`, the percentage change is computed per-bucket and those values are summed over the evaluation window, which can produce unexpectedly large negative values for sparse metrics. Add `as_count()` to the query to switch to the count-style evaluation path. See [as_count() in Monitor Evaluations][4] for details.
+**Note**: If your metric is a gauge type and `pct_change()` is producing unexpectedly large negative values, add `as_count()` to the query. See [as_count() in Monitor Evaluations][4] for details.
 
 ## Further reading
 
