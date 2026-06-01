@@ -28,10 +28,10 @@ The following products consume AI Credits:
 
 | Product | What it does |
 |---|---|
-| [Bits Chat][1] | Search, explore, and act across Datadog using natural language. |
-| [Bits Investigation][3] | Investigate production issues end to end to help on-call engineers pinpoint root causes. |
-| [Bits Code][2] | Diagnose issues and generate code fixes using Datadog observability data. |
-| [Bits Agent Builder][4] | Build custom AI agents that automate operational tasks using Datadog tools and integrations. |
+| [Bits Chat][1] | Search and analyze telemetry, create dashboards and notebooks, and inspect monitors with natural language. |
+| [Bits Investigation][3] | Automatically investigate alerts, correlate telemetry, identify root causes, summarize impact, and apply remediations. |
+| [Bits Code][2] | Turn Datadog context into faster fixes with AI-assisted code generation, review, and debugging. |
+| [Bits Agent Builder][4] | Build custom AI agents that automate high-value workflows like incident response and custom reporting. |
 
 ## Pricing
 
@@ -49,25 +49,23 @@ AI Credits reset on the first day of each calendar month. Unused Commit credits 
 
 ### Overages
 
-If your usage exceeds your monthly Commit, additional credits are billed automatically at the On-Demand rate—you do not need to switch pricing tiers or top up manually. Any task already in flight is allowed to complete (for example, a Bits Investigation that is already running finishes its work).
+If your usage exceeds your monthly Commit, additional credits are billed automatically at the On-Demand rate.
 
 ## Credit consumption by feature
 
-These are average credit costs per feature. Actual consumption for any single request varies with task complexity and the amount of context the model processes, so use these as planning estimates rather than exact-per-call quotes.
-
 | Feature | Avg. credits per use |
 |---|---|
-| Bits Chat — search and explore telemetry | 0.6 |
-| Bits Chat — setup and optimize observability | 0.4 |
-| Bits Chat — root cause analysis | 0.8 |
-| Bits Chat — monitor creation | 0.5 |
-| Bits Chat — dashboard creation | 0.6 |
-| Bits Chat — notebook creation | 0.7 |
-| Bits Investigation — autonomous investigation | 6.5 |
-| Bits Code — code fix | 5 |
-| Bits Agent Builder — message | 0.3 |
+| Bits Agent Builder — message | 0.3 credits |
+| Bits Chat — monitor creation / modification* | 0.5 credits |
+| Bits Chat — search and explore telemetry* | 0.6 credits |
+| Bits Chat — dashboard creation / modification* | 0.6 credits |
+| Bits Chat — notebook creation / modification* | 0.7 credits |
+| Bits Code — code fix | 5 credits |
+| Bits Investigation — autonomous investigation | 6.5 credits |
 
-<div class="alert alert-info">These are the credit consumption rates as of May 27, 2026. Costs for each feature may change as models are optimized or new models become available.</div>
+\* Estimates are per message.
+
+Average credit consumption for each feature set out above is provided only for reference. Actual consumption for any single request may vary with task complexity and the amount of context the model processes.
 
 ## Admin controls
 
@@ -82,10 +80,10 @@ All AI Credits products are enabled by default with the Datadog Standard Role. T
 
 | Product | Permission |
 |---|---|
-| [Bits Chat][1] | Bits Assistant Access |
-| [Bits Investigation][3] | Bits SRE Investigations Write |
-| [Bits Code][2] | Bits Dev Write |
-| [Bits Agent Builder][4] | Agent Builder Write, Agent Builder Run |
+| [Bits Chat][1] | Bits Chat Access |
+| [Bits Investigation][3] | Bits Investigations Write |
+| [Bits Code][2] | Bits Code Write |
+| [Bits Agent Builder][4] | Bits Agent Builder Write, Bits Agent Builder Run |
 
 To manage permissions, go to **Organization Settings > Roles**, select a role, and toggle the relevant permission.
 
