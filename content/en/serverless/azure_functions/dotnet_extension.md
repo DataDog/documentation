@@ -18,7 +18,7 @@ If you haven't already, set up the [Datadog-Azure integration][2] first.
 
 ## Installation
 
-<div class="alert alert-warning">Both initial install and upgrades require the app to be fully stopped. Use a deployment slot to avoid downtime.</div>
+<div class="alert alert-warning">Both initial install and upgrades require the app to be fully stopped. If you are using a deployment slot, install on the slot, then swap to production. <code>WEBSITE_PRIVATE_EXTENSIONS=0</code> is required on the slot to prevent MoveDirectory failures, but it also prevents the runtime from loading private extensions. The extension will become active after you swap the slot to production. Do not set <code>WEBSITE_PRIVATE_EXTENSIONS=0</code> on production.</div>
 
 {{< tabs >}}
 {{% tab "Bicep" %}}
@@ -94,6 +94,14 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file ins
 ```
 
 **Note:** The `slotConfigNames` resource does a full replace of the sticky-settings list, so you need to include all existing slot app settings in the `appSettings` array. Pass your existing slot-sticky setting names in `existingStickyAppSettingNames` or pass `[]` for a new app. Any name omitted from `existingStickyAppSettingNames` will be de-stickied.
+
+After the deployment completes, swap the slot to production:
+
+```shell
+az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NAME> --slot <SLOT_NAME> --target-slot production
+```
+
+**The extension only loads after the swap.** Because we set `WEBSITE_PRIVATE_EXTENSIONS=0`, the runtime does not load private extensions. Production must not have `WEBSITE_PRIVATE_EXTENSIONS=0`. Production will load the extension and send data as expected.
 
 {{% /tab %}}
 {{% tab "ARM Template" %}}
@@ -192,6 +200,14 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file ins
 
 **Note:** The `slotConfigNames` resource does a full replace of the sticky-settings list, so you need to include all existing slot app settings in the `appSettings` array. Pass your existing slot-sticky setting names in `existingStickyAppSettingNames` or pass `[]` for a new app. Any name omitted from `existingStickyAppSettingNames` will be de-stickied.
 
+After the deployment completes, swap the slot to production:
+
+```bash
+az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NAME> --slot <SLOT_NAME> --target-slot production
+```
+
+**The extension only loads after the swap.** Because we set `WEBSITE_PRIVATE_EXTENSIONS=0`, the runtime does not load private extensions. Production must not have `WEBSITE_PRIVATE_EXTENSIONS=0`. Production will load the extension and send data as expected.
+
 {{% /tab %}}
 {{% tab "Manual" %}}
 
@@ -226,6 +242,13 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file ins
 5. Navigate to **Extensions** and add the Datadog APM extension for your runtime.
 
 6. **Start the slot** by clicking **Start** on the slot's **Overview** page.
+
+7. **Swap the slot to production.** On the slot's **Overview** page, click **Swap** and select `production` as the target, or run:
+
+   ```shell
+   az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NAME> --slot <SLOT_NAME> --target-slot production
+   ```
+**The extension only loads after the swap.** Because we set `WEBSITE_PRIVATE_EXTENSIONS=0`, the runtime does not load private extensions. Production must not have `WEBSITE_PRIVATE_EXTENSIONS=0`. Production will load the extension and send data as expected.
 
 [5]: https://portal.azure.com/
 [6]: /account_management/api-app-keys/
@@ -311,6 +334,14 @@ Also, set `DATADOG_SITE` to your [Datadog site][32]. `DATADOG_SITE` defaults to 
 
 To target a deployment slot instead of the main app, add `-SlotName <SLOT_NAME>`. On Azure Function Apps, this also automatically applies the `WEBSITE_PRIVATE_EXTENSIONS=0` sticky slot setting to prevent extension install failures.
 
+After the script completes, swap the slot to production:
+
+```shell
+az webapp deployment slot swap --resource-group <RESOURCE_GROUP_NAME> --name <SITE_NAME> --slot <SLOT_NAME> --target-slot production
+```
+
+**The extension only loads after the swap.** Because we set `WEBSITE_PRIVATE_EXTENSIONS=0`, the runtime does not load private extensions. Production must not have `WEBSITE_PRIVATE_EXTENSIONS=0`. Production will load the extension and send data as expected.
+
 [32]: /getting_started/site/
 
 ### Updating the extension for a resource group {#powershell-resource-group}
@@ -360,15 +391,18 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 Azure Function Apps can fail with a "Could not execute MoveDirectory" error during extension install. This happens because the Functions runtime holds file locks on `C:\home\SiteExtensions\` after a code deployment, preventing Kudu from moving the staged extension into place.
 
-The fix is `WEBSITE_PRIVATE_EXTENSIONS=0` set as a **sticky slot setting**. If you are using the PowerShell script with `-SlotName`, the workaround is applied automatically. If you are using ARM or Bicep, ensure the templates above are deployed before attempting the extension install, and that the `WEBSITE_PRIVATE_EXTENSIONS` setting is present and sticky on your slot.
+The fix is `WEBSITE_PRIVATE_EXTENSIONS=0` set as a **sticky slot setting** on the deploy slot. If you are using the PowerShell script with `-SlotName`, the workaround is applied automatically. If you are using ARM or Bicep, confirm the templates above are deployed before attempting the extension install, and that the `WEBSITE_PRIVATE_EXTENSIONS` setting is present and sticky on your slot.
 
-**Without a slot (production-direct installs):** Fully stop the Function App before installing, then start it after. The sticky setting workaround is not available without a slot.
+After installation, **swap the slot to production**. The extension will not load on the slot itself because `WEBSITE_PRIVATE_EXTENSIONS=0` prevents private extension loading — this is expected. Telemetry only begins after the swap, when production installs the extension.
+
+**Without a slot (production-direct installs):** Fully stop the Function App before installing, then start it after. Do not set `WEBSITE_PRIVATE_EXTENSIONS=0` on production — the extension loads normally after the app starts.
 
 ### APM traces are not appearing
 
-1. Verify `DD_SITE` and `DD_API_KEY` are set correctly on the slot.
-2. Do a full stop and start of the slot (not the main app).
-3. If not resolved, uninstall and reinstall the extension.
+1. Verify `DD_SITE` and `DD_API_KEY` are set correctly on the production app.
+2. If you installed via a deployment slot, confirm you swapped the slot to production.
+3. Do a full stop and start of the production app.
+4. If not resolved, uninstall and reinstall the extension, then swap again.
 
 Still need help? Contact [Datadog support][4].
 
