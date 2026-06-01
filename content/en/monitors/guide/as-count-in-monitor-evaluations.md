@@ -76,16 +76,16 @@ sum(last_5m):total
 
 In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but **`sum`** aggregation with **`.as_count()`** is recommended for error rates. Aggregation methods other than **`sum`** do not make sense to use with (and cannot be used with) **`.as_count()`**.
 
-## GAUGE metrics and pct_change()
+## Gauge metrics and pct_change()
 
-The evaluation path also affects GAUGE metrics when used with rollup-dependent functions like `pct_change()`. Without `as_count()`, the monitor uses the classic evaluation path: `pct_change()` is computed per-bucket and those values are summed over the evaluation window. For sparse GAUGE metrics, this can produce values well below -100%.
+The evaluation path also affects gauge metrics when used with rollup-dependent functions like `pct_change()`. Without `as_count()`, the monitor uses the classic evaluation path: `pct_change()` is computed per-bucket and those values are summed over the evaluation window. For sparse gauge metrics, this can produce values well below -100%.
 
-| Path | Evaluation order | Effect on sparse GAUGE metrics |
+| Path | Evaluation order | Effect on sparse gauge metrics |
 |:-----|:-----------------|:-------------------------------|
 | **`classic_eval_path`** (no `as_count()`) | `pct_change()` applied per-bucket; values summed over the window | Can produce large negative values (for example, -1,500%) |
 | **`as_count_eval_path`** | Timeseries bucketed and aggregated first; `pct_change()` applied at the window level | Produces the intended window-level result |
 
-To use the count-style evaluation path on a GAUGE metric, add `as_count()` to the query.
+To use the count-style evaluation path on a gauge metric, add `as_count()` to the query.
 
 [Reach out to the Datadog support team][1] if you have any questions.
 
