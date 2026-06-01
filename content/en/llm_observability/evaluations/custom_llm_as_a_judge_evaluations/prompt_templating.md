@@ -13,16 +13,16 @@ further_reading:
   text: "Trace-Level Evaluations"
 ---
 
-Custom LLM-as-a-judge prompts inject session, trace, or span data into the {{< ui >}}User{{< /ui >}} message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time. Which paths are available depends on the evaluation scope you choose—session, trace, or span.
+Custom LLM-as-a-judge prompts inject session, trace, or span data into the {{< ui >}}User{{< /ui >}} message by wrapping a field path in `{{ ... }}`. The System Prompt holds the static instructions to the LLM judge and does not resolve placeholders. The same syntax works in both the test pane and at evaluation time. The available paths depend on the evaluation scope: session, trace, or span.
 
 ## At a glance
 
 | Pattern | Description |
 |---|---|
-| `{{traces}}` | Every trace in the session as JSON (session scope) |
-| `{{traces[0].spans[0].meta.input.value}}` | First span of the first trace (session scope) |
-| `{{traces[*].spans[*].name}}` | Fan-out across traces and spans (session scope) |
-| `{{traces[meta.span.kind:llm].spans[*].meta.output.value}}` | Filter spans by attribute across a session (session scope) |
+| `{{traces}}` | Every trace in the session as JSON |
+| `{{traces[0].spans[0].meta.input.value}}` | First span of the first trace |
+| `{{traces[*].spans[*].name}}` | Fan-out across traces and spans |
+| `{{traces[*].spans[meta.span.kind:llm].meta.output.value}}` | Filter spans by attribute across a session |
 | `{{spans}}` | Every span in the trace as JSON (trace scope) |
 | `{{spans[0].name}}` | Pick one span from a trace (trace scope) |
 | `{{spans[name:my-span].meta.input.value}}` | Filter spans by attribute (trace scope) |
@@ -32,16 +32,16 @@ Custom LLM-as-a-judge prompts inject session, trace, or span data into the {{< u
 | `{{meta.input.messages[1,3].content}}` | Inclusive array range (span scope) |
 | `{{meta.input.messages[*].content}}` | Array wildcard (fan-out) (span scope) |
 | `{{meta.input.messages.content}}` | Implicit fan-out (same as `[*]`) (span scope) |
-| `{{span_input}}`, `{{span_output}}` | Span-scope aliases |
-| `{{*}}` | Entire session, trace, or span payload as JSON |
+| `{{span_input}}`, `{{span_output}}` | Aliases for span input and output fields (span scope) |
+| `{{*}}` | Entire payload as JSON (session, trace, or span scope) |
 
 The autocomplete dropdown opens after you type `{{` and lists fields available on the selected sample.
 
 ## Session-scope syntax
 
-Session-scope evaluations expose every trace in the [user session][1] under the `traces` array. Each trace includes its own `spans` array, so you can read across traces and spans in one prompt. Use `{{traces...}}` paths (and nested `{{traces...].spans...}}` paths) to build session-level judges. The `{{span_input}}` and `{{span_output}}` aliases are not available in session scope.
+Session-scope evaluations expose every trace in the [user session][1] under the `traces` array. Each trace includes its own `spans` array, so you can read across traces and spans in one prompt. Use `{{traces[...]}}` paths (and nested `{{traces[...].spans[...]}}` paths) to build session-level judges. The `{{span_input}}` and `{{span_output}}` aliases are not available in session scope.
 
-Session-level evaluations require spans to be tagged with a `session_id`. See [Tracking user sessions][1] to instrument your application. A session is considered complete after **30 minutes** of inactivity (no new spans for that session, measured from the most recent span); the evaluation runs once at that point with every trace and span from the session. Spans that arrive more than 30 minutes after the previous span are not included. See [Session-Level Evaluations][2] for configuration, example prompts, and when to choose session scope over trace or span scope.
+Session-level evaluations require spans to be tagged with a `session_id`. See [Tracking user sessions][1] to instrument your application. See [Session-Level Evaluations][2] for configuration, example prompts, and when to choose session scope over trace or span scope.
 
 ### Reference the whole session
 
@@ -58,24 +58,23 @@ Session-level evaluations require spans to be tagged with a `session_id`. See [T
 {{traces[1].spans}}                        # JSON of every span in the second trace
 ```
 
-### Filter traces or spans by attribute
+### Filter spans by attribute
+
+`[field.path:value]` on `spans` keeps only the spans whose field at `field.path` equals `value`. Combine filters and deeper paths to extract inputs or outputs across the session. Filters fall back to an empty string when nothing matches.
 
 ```
 {{traces[0].spans[name:my-span].meta.input.value}}
 {{traces[*].spans[meta.span.kind:llm].meta.output.value}}
-{{traces[meta.span.kind:llm].spans[*].meta.output.value}}
-{{traces[meta.span.kind:tool].spans[*].meta.input.parameters}}
+{{traces[*].spans[meta.span.kind:tool].meta.input.parameters}}
 ```
-
-`[field.path:value]` on `traces` keeps only traces whose field at `field.path` equals `value`. The same filter syntax on `spans` (within a trace path) keeps only matching spans. Combine filters and deeper paths to extract inputs or outputs across the session. Filters fall back to an empty string when nothing matches.
 
 ### Fan-out across traces
 
-Use `[*]` on `traces` or `spans` the same way as in trace scope: values from every matching trace or span are collected and joined with newlines (`\n`), or serialized as JSON when the resolved values are objects.
+Use `[*]` on `traces` or `spans` to fan out: values from every matching element are joined with newlines (`\n`), or serialized as JSON when the resolved values are objects.
 
 ```
-{{traces[meta.span.kind:llm].meta.input.messages[*].content}}
-{{traces[meta.span.kind:llm].meta.output.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.input.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.output.messages[*].content}}
 ```
 
 ## Trace-scope syntax
@@ -98,13 +97,13 @@ Trace-scope evaluations expose every span in the trace under the `spans` array. 
 
 ### Filter spans by attribute
 
+`[field.path:value]` keeps only the spans whose field at `field.path` equals `value`. Combine with deeper paths to extract the inputs or outputs of the matching spans. The filter falls back to an empty string if no span matches.
+
 ```
 {{spans[name:my-span].meta.input.value}}
 {{spans[meta.span.kind:llm].meta.output.value}}
 {{spans[meta.span.kind:tool].meta.input.parameters}}
 ```
-
-`[field.path:value]` keeps only the spans whose field at `field.path` equals `value`. Combine with deeper paths to extract the inputs or outputs of the matching spans. The filter falls back to an empty string if no span matches.
 
 ## Span-scope syntax
 
@@ -121,6 +120,8 @@ The aliases adapt to the kind of span being evaluated, so you don't have to bran
 
 ### Direct field paths
 
+Reference any span field by its JSON path.
+
 ```
 {{name}}
 {{meta.input.value}}
@@ -129,6 +130,8 @@ The aliases adapt to the kind of span being evaluated, so you don't have to bran
 ```
 
 ### Array access
+
+Use bracket notation to index into, slice, or fan out over array fields.
 
 ```
 {{meta.input.messages[0].content}}     # First message only
@@ -167,10 +170,10 @@ For example, given a span where `meta.input.messages` is:
 ## Tips
 
 - Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (session, trace, or span) and to the sample selected on the right.
-- Pick a sample in the panel on the right—the sample session pane listing traces in the session (session scope), {{< ui >}}Spans in Selected Trace{{< /ui >}} (trace scope), or {{< ui >}}Filtered Spans{{< /ui >}} (span scope)—then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving the configuration.
+- Pick a sample in the panel on the right—{{< ui >}}Sample Session{{< /ui >}} listing traces in the session (session scope), {{< ui >}}Spans in Selected Trace{{< /ui >}} (trace scope), or {{< ui >}}Filtered Spans{{< /ui >}} (span scope)—then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving the configuration.
 - Use the three-dots menu on a sample's JSON view and select {{< ui >}}Add variable to message{{< /ui >}} to insert a field path into the prompt without typing it.
 - Pass `{{*}}` when you want the LLM judge to see the full payload—useful for free-form prompts that decide for themselves which fields matter.
-- Prefer `{{traces}}` or targeted `{{traces...].spans...}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluations][2] for scope guidance and example prompts.
+- Prefer `{{traces}}` or targeted `{{traces[...].spans[...]}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluations][2] for scope guidance and example prompts.
 
 ## Further Reading
 

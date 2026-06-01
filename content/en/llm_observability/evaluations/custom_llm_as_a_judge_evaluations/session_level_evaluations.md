@@ -41,7 +41,7 @@ The walkthrough below highlights the parts of the configuration that are specifi
    {{traces}}                                              # JSON of every trace in the session
    {{traces[0].spans[0].meta.input.value}}                 # First span of the first trace
    {{traces[*].spans[*].name}}                             # All span names, joined with newlines
-   {{traces[meta.span.kind:llm].spans[*].meta.output.value}}  # LLM outputs across the session
+   {{traces[*].spans[meta.span.kind:llm].meta.output.value}}  # LLM outputs across the session
    {{*}}                                                   # Entire session payload as JSON
    ```
 
@@ -116,8 +116,8 @@ Output one of: excellent, good, mixed, poor.
 **User**
 ```
 User and assistant messages across the session:
-{{traces[meta.span.kind:llm].meta.input.messages[*].content}}
-{{traces[meta.span.kind:llm].meta.output.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.input.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.output.messages[*].content}}
 ```
 
 ### User behavior and frustration signals
