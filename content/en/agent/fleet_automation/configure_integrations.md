@@ -69,7 +69,6 @@ Each operation applies changes to the integration's `conf.d` configuration file 
 
 - {{< ui >}}Delete{{< /ui >}}: Removes the integration configuration file from the target Agents.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
