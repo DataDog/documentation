@@ -101,6 +101,14 @@ Example prompts:
 - `Investigate why EC2 costs changed between January and February`
 - `Which teams are responsible for the highest S3 storage costs this month?`
 
+#### Network Device Monitoring
+
+Query and troubleshoot network devices, interfaces, and traffic patterns. For more information, see [NDM AI Tools][11].
+
+Example prompts:
+- `Show me all network devices in the us-east datacenter`
+- `Which interfaces have high error rates on device switch-prod-02?`
+
 #### DDSQL
 Generate and run [DDSQL][7] queries against Datadog [telemetry data][8] using natural language.
 
@@ -161,3 +169,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [8]: /ddsql_reference/data_directory/
 [9]: /cloud_cost_management/cloud_cost_skill/
 [10]: https://app.datadoghq.com/bits-ai/assistant/reports
+[11]: /network_monitoring/devices/ai_tools/
