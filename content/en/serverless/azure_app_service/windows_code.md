@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
   tag: "Blog"
   text: "Deploy ASP.NET Core applications to Azure App Service"
+- link: "/serverless/azure_functions/dotnet_extension/"
+  tag: "Documentation"
+  text: "Azure Functions .NET APM Extension"
 
 ---
 
@@ -33,10 +36,10 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 The extension supports the following:
 <ul>
   <li>App Service Web Apps: Supported for .NET, Java, and Node.js runtimes on Basic, Standard, and Premium plans.</li>
-  <li>Azure Functions: Supported only for the .NET runtime on Dedicated (App Service) or Premium plans.</li>
+  <li>Azure Functions: Supported only for the .NET runtime on Dedicated (App Service) or Premium plans. <a href="/serverless/azure_functions/dotnet_extension/">See specific configuration and troubleshooting for the Windows Extension on Azure Functions</a></li>
 </ul>
 
-For all other Azure Functions configurations, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
+For any non-.NET Azure Functions or .NET configurations on a non-Dedicated/Premium plan, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
 
 <strong>Interested in support for other App Service resource types or runtimes?</strong> <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
