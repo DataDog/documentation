@@ -42,7 +42,7 @@ To set up a retention quota for an application:
 3. Go to **Product Settings > Retention Filters**.
 4. Set a daily quota threshold, a reset time, and a behavior when the quota is reached.
 
-{{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:50%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:65%" >}}
 
 <div class="alert alert-info">Quotas do not apply to sessions retained by <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>.</div>
 
