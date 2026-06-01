@@ -73,11 +73,11 @@ The CLI can set up the following products:
 
 1. If you ran the CLI without `--product`, select what to set up from the product menu. (Direct setup with `--product` skips this menu.)
 
-   {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' grouped by Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications, and CI Testing" style="width:80%;" >}}
+   {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' grouped by Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications, and CI Testing." style="width:80%;" >}}
 
    The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
 
-   {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps" style="width:80%;" >}}
+   {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps." style="width:80%;" >}}
 
    When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify incoming data.
 
