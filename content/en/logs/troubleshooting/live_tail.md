@@ -38,7 +38,7 @@ Clearing your DNS cache may help with Live Tail problems.
 To clear your DNS cache using Google Chrome:
 1. Launch the Google Chrome browser.
 1. Type `chrome://net-internals/#dns` in the address bar, then click Enter.
-1. Click **Clear host cache**.
+1. Click {{< ui >}}Clear host cache{{< /ui >}}.
 
 ## Check browser plugins and extensions
 

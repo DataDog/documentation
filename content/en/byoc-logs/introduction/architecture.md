@@ -9,10 +9,6 @@ further_reading:
   text: "BYOC Logs Installation Prerequisites"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="/cloudprem/overview_architecture.png" alt="BYOC Logs architecture showing Indexers, Searchers, Metastore, and Control Plane components interacting with object storage" style="width:100%;" >}}

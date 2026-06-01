@@ -6,7 +6,7 @@ aliases:
   - /service_catalog/integrations
   - /software_catalog/integrations
 further_reading:
-- link: "/tracing/software_catalog/service_definition_api/"
+- link: "/internal_developer_portal/catalog/entity_model/"
   tag: "Documentation"
   text: "Learn about the Service Definition API"
 - link: "/integrations/opsgenie/"
@@ -24,7 +24,7 @@ PagerDuty and OpsGenie integrations for Internal Developer Portal are not suppor
   
 ## Overview
 
-When you configure a service account for a [Datadog integration][1], you can incorporate metadata from your integrations into [Software Catalog][16] entity definitions. From there, you can use the [Action Catalog][31] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
+When you configure a service account for a [Datadog integration][1], you can incorporate metadata from your integrations into [Catalog][16] entity definitions. From there, you can use the [Action Catalog][31] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
 
 {{< callout url="https://forms.gle/PzXWxrnGaQPiVf9M8" d_target="#signupModal" btn_hidden="false" header="Request a new integration" >}}
 {{< /callout >}}
@@ -33,8 +33,8 @@ When you configure a service account for a [Datadog integration][1], you can inc
 
 | Integration  | Description    | Example actions (Action Catalog) |
 |--------------|----------------|----------------------------------|
-| [PagerDuty][2] | Add PagerDuty metadata to a service so that the Software Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. | `Get current on-call`, `Trigger incident` <br> [See all available actions.][32] |
-| [OpsGenie][3] | Add OpsGenie metadata to a service so that the Software Catalog displays and links to information such as who is on-call for the service. | `Acknowledge alert`, `Get current on call` <br> [See all available actions.][33] |
+| [PagerDuty][2] | Add PagerDuty metadata to a service so that the Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. | `Get current on-call`, `Trigger incident` <br> [See all available actions.][32] |
+| [OpsGenie][3] | Add OpsGenie metadata to a service so that the Catalog displays and links to information such as who is on-call for the service. | `Acknowledge alert`, `Get current on call` <br> [See all available actions.][33] |
 | [StatusPage][4] | Create, update, and retrieve details about incidents and components. | `Create an incident`, `Update component status` <br> [See all available actions.][34] |
 | [Freshservice][5] | Create, update, and query Freshservice tickets. | `List tickets`, `Update ticket` <br> [See all available actions.][35] |
 | [Slack][6] | Send incident alerts or updates to Slack channels, and perform channel management. | `Invite users to channel`, `Set channel topic` <br> [See all available actions.][36] |
@@ -45,9 +45,9 @@ When you configure a service account for a [Datadog integration][1], you can inc
 
 ### Setup examples
 
-{{% collapse-content title="PagerDuty" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="PagerDuty" level="h4" expanded=false id="pagerduty-setup" %}}
 
-You can connect any service in your [PagerDuty Service Directory][63]. You can map one PagerDuty service to each service in Software Catalog.
+You can connect any service in your [PagerDuty Service Directory][63]. You can map one PagerDuty service to each service in Catalog.
 
 1. If you have not already done so, set up the [Datadog PagerDuty integration][2].
 1. Obtain your [PagerDuty API Access Key][61].
@@ -65,7 +65,7 @@ You can connect any service in your [PagerDuty Service Directory][63]. You can m
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="OpsGenie" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="OpsGenie" level="h4" expanded=false id="opsgenie-setup" %}}
 
 To add OpsGenie metadata to an entity definition: 
 
@@ -87,9 +87,9 @@ To add OpsGenie metadata to an entity definition:
    }
    ```
 
-Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab for services in Software Catalog.
+Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab for services in Catalog.
 
-{{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Software Catalog" style="width:85%;" >}}
+{{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Catalog" style="width:85%;" >}}
 
 {{% /collapse-content %}}
 
@@ -100,9 +100,9 @@ Once you've completed these steps, an **On Call** information box appears in the
 |--------------|----------------|----------------------------------|
 | [GitHub][11] | Create issues or PRs, manage repo files, and automate team access. | `Add labels to pull request`, `Get team membership` <br> [See all available actions.][41] |
 | [GitLab][12] | Manage issues, merge requests, branches, and commits. | `Approve merge request`, `Cherry pick commit` <br> [See all available actions.][42] |
-| Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Software Catalog or Action Catalog. | N/A; use HTTP actions and reqeusts to call platform APIs |
+| Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Catalog or Action Catalog. | N/A; use HTTP actions and reqeusts to call platform APIs |
 
-You can also use GitHub to manage entity definitions and configure the GitHub integration to automatically pull definitions into Software Catalog. Learn more about [creating entity definitions and importing them from GitHub][83].
+You can also use GitHub to manage entity definitions and configure the GitHub integration to automatically pull definitions into Catalog. Learn more about [creating entity definitions and importing them from GitHub][83].
 
 ## CI/CD
 
@@ -117,7 +117,7 @@ You can also use GitHub to manage entity definitions and configure the GitHub in
 ## CMDBs and internal developer portals
 
 
-You can import entities from ServiceNow and Backstage into Datadog's Software Catalog. Refer to the following documentation for details:
+You can import entities from ServiceNow and Backstage into Datadog's Catalog. Refer to the following documentation for details:
 
 - [Import entries from ServiceNow][84]
 - [Import entries from Backstage][85]
@@ -146,7 +146,7 @@ Datadog's Infrastructure integrations and [Resource Catalog][54] provides a comp
 [13]: /integrations/jenkins
 [14]: /integrations/circleci
 [15]: /integrations/azure_devops/
-[16]: /internal_developer_portal/software_catalog/
+[16]: /internal_developer_portal/catalog/
 [31]: /actions/actions_catalog/
 [32]: /actions/actions_catalog/?search=pagerduty
 [33]: /actions/actions_catalog/?search=opsgenie
@@ -172,9 +172,9 @@ Datadog's Infrastructure integrations and [Resource Catalog][54] provides a comp
 [61]: https://support.pagerduty.com/docs/api-access-keys
 [62]: https://support.atlassian.com/opsgenie/docs/api-key-management/
 [63]: https://support.pagerduty.com/docs/service-directory
-[82]: /internal_developer_portal/software_catalog/entity_model
-[83]: /internal_developer_portal/software_catalog/set_up/create_entities#github-integration
-[84]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow
-[85]: /internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage
+[82]: /internal_developer_portal/catalog/entity_model
+[83]: /internal_developer_portal/catalog/set_up/create_entities#github-integration
+[84]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
+[85]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
 
 

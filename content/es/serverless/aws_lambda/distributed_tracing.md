@@ -42,7 +42,14 @@ Las bibliotecas de rastreo de Python, Node.js, Ruby, Go, Java y .NET de Datadog 
 
 ### Recomendaciones sobre el tiempo de ejecución
 
-{{< partial name="serverless/serverless-apm-recommendations.html" >}}
+{{< card-grid card_width="30%" image_width="200">}}
+  {{< image-card href="/serverless/distributed_tracing#python-and-nodejs" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/distributed_tracing#python-and-nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/distributed_tracing#ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/distributed_tracing#java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/distributed_tracing#go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/distributed_tracing#net" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 #### Python y Node.js
 

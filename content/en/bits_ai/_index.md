@@ -11,19 +11,22 @@ further_reading:
       text: "Bits AI Agents"
     - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
       tag: "Blog"
-      text: "Introducing Bits AI SRE, your AI on-call teammate"
+      text: "Introducing Bits Investigation, your AI on-call teammate"
     - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
       tag: "Blog"
-      text: "Automatically identify issues and generate fixes with Bits AI Dev"
+      text: "Automatically identify issues and generate fixes with Bits Code"
     - link: "https://www.datadoghq.com/blog/bits-ai-security-analyst/"
       tag: "Blog"
       text: "Automate Cloud SIEM investigations with Bits AI Security Analyst"
     - link: "https://www.datadoghq.com/blog/introducing-bits-assistant/"
       tag: "Blog"
-      text: "Search and act across Datadog to resolve issues faster with Bits Assistant"
+      text: "Search and act across Datadog to resolve issues faster with Bits Chat"
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
+    - link: "/bits_ai/ai_credits/"
+      tag: "Documentation"
+      text: "AI Credits"
 ---
 
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
@@ -31,10 +34,10 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
-   {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts with Bits AI SRE{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits AI Dev Agent{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts with Bits Investigation{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits Code{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_security_analyst" >}}Triage security threat signals with Bits AI Security Analyst{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_assistant" >}}Explore your observability data with Bits Assistant{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_assistant" >}}Explore your observability data with Bits Chat{{< /nextlink >}}
    {{< nextlink href="bits_ai/mcp_server" >}}Get observability insights from AI agents with the Datadog MCP server{{< /nextlink >}}
 {{< /whatsnext >}}
 

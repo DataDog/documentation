@@ -5,20 +5,16 @@ aliases:
 - /cloudprem/ingest/agent/
 description: Configure the Datadog Agent to send logs to your BYOC Logs deployment
 further_reading:
-- link: "/byoc-logs/ingest_logs/observability_pipelines/"
+- link: "/byoc-logs/ingest/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines Integration"
-- link: "/byoc-logs/ingest_logs/rest_api/"
+- link: "/byoc-logs/ingest/api/"
   tag: "Documentation"
   text: "REST API Integration"
 - link: "/getting_started/containers/datadog_operator/"
   tag: "Documentation"
   text: "Datadog Operator Guide"
 ---
-
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
 
 ## Overview
 This document provides configuration steps for using the Datadog Agent to send logs to a Datadog BYOC Logs deployment. Unlike the Datadog SaaS platform, BYOC Logs requires specific Agent configurations to ensure logs are enriched with necessary host-level tags and sent to the correct endpoint. This guide covers how to set these configurations for the most common deployment methods.

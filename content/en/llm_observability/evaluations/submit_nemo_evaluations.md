@@ -1,5 +1,6 @@
 ---
 title: NeMo Evaluations
+description: Learn how to submit NVIDIA NeMo Evaluator model evaluation scores to LLM Observability to monitor benchmarking results alongside LLM traces.
 aliases:
  - /llm_observability/submit_nemo_evaluations/
 further_reading:
@@ -155,7 +156,7 @@ After you complete the setup steps, you can view NeMo Evaluator's model evaluati
 
 {{< img src="llm_observability/nemo-demo-after-eval.png" alt="An LLM Observability trace with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
-You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview. On the traces list, click on **Options** to add the evaluation scores as a column:
+You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview. On the traces list, click on {{< ui >}}Options{{< /ui >}} to add the evaluation scores as a column:
 
 {{< img src="llm_observability/nemo-demo-traces-view-eval.png" alt="An LLM Observability traces list with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
@@ -165,3 +166,4 @@ You can view a breakdown of your NeMo Evaluator's model evaluation results in LL
 
 [1]: /llm_observability/setup/sdk/python
 [2]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html
+[3]: https://docs.nvidia.com/nemo/microservices/latest/evaluator/index.html

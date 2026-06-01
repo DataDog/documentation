@@ -61,5 +61,5 @@ The initial run history for a workflow provides a panel with the list of previou
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
 
-[6]: #test-expressions-and-functions
+[6]: /actions/workflows/expressions/
 [10]: https://chat.datadoghq.com/
