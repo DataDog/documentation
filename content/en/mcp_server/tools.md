@@ -1,6 +1,8 @@
 ---
 title: Datadog MCP Server Tools
 description: "Browse all tools available in the Datadog MCP Server, organized by toolset, with example prompts."
+aliases:
+- /bits_ai/mcp_server/tools/
 algolia:
   tags: ["mcp", "mcp server", "mcp tools", "tools"]
   rank: 70

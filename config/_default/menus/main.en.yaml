@@ -1242,18 +1242,34 @@ menu:
       identifier: cli
       parent: essentials_heading
       weight: 100000
+    - name: MCP Server
+      url: mcp_server
+      pre: bits-ai
+      identifier: mcp_server
+      parent: essentials_heading
+      weight: 110000
+    - name: Setup
+      url: mcp_server/setup
+      identifier: mcp_server_setup
+      parent: mcp_server
+      weight: 1
+    - name: MCP Tools
+      url: mcp_server/tools
+      identifier: mcp_server_tools
+      parent: mcp_server
+      weight: 2
     - name: Partners
       url: partners/
       pre: colab
       identifier: partners
       parent: essentials_heading
-      weight: 110000
+      weight: 120000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 120000
+      weight: 130000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -1289,7 +1305,7 @@ menu:
       pre: ddsql
       identifier: ddsql_reference
       parent: essentials_heading
-      weight: 130000
+      weight: 140000
     - name: Data Directory
       url: ddsql_reference/data_directory/
       identifier: ddsql_reference_data_directory
@@ -1300,7 +1316,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 140000
+      weight: 150000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -1311,7 +1327,7 @@ menu:
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 150000
+      weight: 160000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -1565,21 +1581,6 @@ menu:
       identifier: bits_ai_bits_assistant
       parent: bits_ai
       weight: 4
-    - name: MCP Server
-      url: bits_ai/mcp_server
-      identifier: bits_ai_mcp_server
-      parent: bits_ai
-      weight: 5
-    - name: Setup
-      url: bits_ai/mcp_server/setup
-      identifier: bits_ai_mcp_server_setup
-      parent: bits_ai_mcp_server
-      weight: 501
-    - name: MCP Tools
-      url: bits_ai/mcp_server/tools
-      identifier: bits_ai_mcp_server_tools
-      parent: bits_ai_mcp_server
-      weight: 502
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder

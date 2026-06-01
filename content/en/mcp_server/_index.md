@@ -1,6 +1,8 @@
 ---
 title: Datadog MCP Server
 description: "Connect AI agents to Datadog observability data using the MCP Server to query metrics, logs, traces, and other insights."
+aliases:
+- /bits_ai/mcp_server/
 further_reading:
 - link: "ide_plugins/vscode/?tab=cursor"
   tag: "Documentation"
