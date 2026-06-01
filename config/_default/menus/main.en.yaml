@@ -6060,6 +6060,11 @@ menu:
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
+      weight: 5
+    - name: Dashboards
+      url: code_coverage/dashboards/
+      parent: code_coverage
+      identifier: code_coverage_dashboards
       weight: 6
     - name: PR Gates
       url: pr_gates/
