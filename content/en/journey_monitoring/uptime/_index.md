@@ -1,6 +1,5 @@
 ---
 title: Journey Uptime
-private: true
 description: "Measure the availability of your journey using the accompanying Synthetic test suite."
 further_reading:
 - link: '/journey_monitoring/'
