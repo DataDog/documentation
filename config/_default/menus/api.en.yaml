@@ -10644,6 +10644,70 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: End User Device Monitoring
+      url: /api/latest/end-user-device-monitoring/
+      identifier: end-user-device-monitoring
+      generated: true
+    - name: Get overview tiles
+      url: '#get-overview-tiles'
+      identifier: end-user-device-monitoring-get-overview-tiles
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMOverview
+        unstable: []
+        order: 2
+    - name: Get all device issue definitions
+      url: '#get-all-device-issue-definitions'
+      identifier: end-user-device-monitoring-get-all-device-issue-definitions
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMIssues
+        unstable: []
+        order: 4
+    - name: Get device counts grouped by attribute
+      url: '#get-device-counts-grouped-by-attribute'
+      identifier: end-user-device-monitoring-get-device-counts-grouped-by-attribute
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMGraph
+        unstable: []
+        order: 3
+    - name: Get a device
+      url: '#get-a-device'
+      identifier: end-user-device-monitoring-get-a-device
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevice
+        unstable: []
+        order: 1
+    - name: Get all devices
+      url: '#get-all-devices'
+      identifier: end-user-device-monitoring-get-all-devices
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevices
+        unstable: []
+        order: 5
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs

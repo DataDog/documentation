@@ -163,6 +163,10 @@
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
+  "end-user-device-monitoring": {
+    "name": "End User Device Monitoring",
+    "description": "Inspect devices reported by the Datadog Agent on end-user laptops, desktops,\nand mobile devices, including their health, hardware, and connectivity attributes."
+  },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",
     "description": "Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog."
