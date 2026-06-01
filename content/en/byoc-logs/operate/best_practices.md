@@ -13,10 +13,6 @@ further_reading:
   text: "Troubleshooting"
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 This page outlines operational best practices for running BYOC Logs in production to help reduce common deployment issues.

@@ -13,10 +13,6 @@ further_reading:
   text: "Configure Log Ingestion"
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 This document walks you through the process of configuring your AWS environment and installing BYOC Logs on AWS EKS.

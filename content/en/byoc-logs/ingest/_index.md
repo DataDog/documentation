@@ -5,10 +5,6 @@ aliases:
   - /cloudprem/ingest/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 After installing and configuring BYOC Logs, you need to set up log ingestion to start sending log data from your applications and infrastructure. BYOC Logs supports multiple ingestion methods to accommodate different architectures and requirements.

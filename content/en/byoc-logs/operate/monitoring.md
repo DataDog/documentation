@@ -5,10 +5,6 @@ aliases:
   - /cloudprem/operate/monitoring/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Dashboards
 
 BYOC Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.

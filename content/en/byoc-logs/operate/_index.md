@@ -5,10 +5,6 @@ aliases:
   - /cloudprem/operate/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 Manage your BYOC Logs deployment with guides on sizing, monitoring, and troubleshooting.

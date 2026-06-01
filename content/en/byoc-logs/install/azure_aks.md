@@ -6,10 +6,6 @@ aliases:
 description: Learn how to install and configure BYOC Logs on Azure AKS
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 This document walks you through the process of configuring your Azure environment and installing BYOC Logs on Azure AKS.

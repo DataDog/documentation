@@ -17,10 +17,6 @@ aliases:
 ---
 
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 {{< whatsnext desc="Explore the following guides:">}}
    {{< nextlink href="/byoc-logs/guides/query_logs_with_mcp/" >}}Query BYOC Logs with the Datadog MCP Server{{< /nextlink >}}
    {{< nextlink href="/byoc-logs/guides/send_otel_logs_observability_pipelines/" >}}Send OpenTelemetry Logs to BYOC Logs through Observability Pipelines{{< /nextlink >}}

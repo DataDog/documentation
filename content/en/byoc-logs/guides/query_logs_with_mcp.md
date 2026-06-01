@@ -15,10 +15,6 @@ aliases:
   - /cloudprem/guides/query_logs_with_mcp/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Datadog logs, including logs stored in BYOC Logs indexes, directly through AI-powered tools and integrations. Querying BYOC Logs with the Datadog MCP server unlocks several valuable capabilities, including:

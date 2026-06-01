@@ -11,10 +11,6 @@ aliases:
   - /cloudprem/install/gcp_gke/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 This installation setup walks you through deploying Datadog BYOC Logs on Google Kubernetes Engine (GKE).

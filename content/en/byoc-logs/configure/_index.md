@@ -12,10 +12,6 @@ aliases:
   - /cloudprem/configure/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 After installing BYOC Logs, you can configure your deployment to meet your environment, security, and performance requirements. Key configuration areas include account integration, cloud resource setup, cluster sizing, ingress, and processing options. These settings allow you to tailor BYOC Logs for your specific needs.

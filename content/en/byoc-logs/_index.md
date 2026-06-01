@@ -9,10 +9,6 @@ aliases:
   - /cloudprem/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 BYOC Logs is Datadog's log management solution for organizations that want to keep their data in their own cloud accounts and control costs using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory, and high-volume requirements.
 
 

@@ -12,10 +12,6 @@ aliases:
   - /cloudprem/quickstart/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 Get started with BYOC Logs locally in less than 5 minutes. This quickstart covers the following:

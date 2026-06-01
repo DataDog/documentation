@@ -13,10 +13,6 @@ aliases:
 ---
 
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 <div class="alert alert-warning">

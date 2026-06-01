@@ -15,10 +15,6 @@ aliases:
   - /cloudprem/guides/send_otel_logs_observability_pipelines/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 BYOC Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.

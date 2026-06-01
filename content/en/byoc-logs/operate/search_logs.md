@@ -15,10 +15,6 @@ aliases:
   - /cloudprem/operate/search_logs/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Explore BYOC Logs in the Logs Explorer
 
 1. Go to the [Datadog Log Explorer][1].

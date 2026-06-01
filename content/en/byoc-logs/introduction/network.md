@@ -8,10 +8,6 @@ aliases:
   - /cloudprem/introduction/network/
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 This document provides an overview of how BYOC Logs and Datadog communicate with each other.
 
 ## Reverse connection (default)

@@ -19,10 +19,6 @@ further_reading:
   text: "Datadog BYOC Logs destination for Observability Pipelines"
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC Logs, allowing you to process, transform, and route logs before they reach your BYOC Logs deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC Logs:

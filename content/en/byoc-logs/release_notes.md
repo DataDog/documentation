@@ -11,10 +11,6 @@ further_reading:
   text: "Troubleshoot BYOC Logs"
 ---
 
-{{< callout btn_hidden="true" header="Limited Availability" >}}
-  BYOC Logs is in Limited Availability.
-{{< /callout >}}
-
 ## Overview
 
 This page tracks releases of the **BYOC Logs binary**, distributed as a Docker image and bundled by the `datadog/cloudprem` Helm chart. New features and fixes ship in the binary; the chart packages them for deployment.
