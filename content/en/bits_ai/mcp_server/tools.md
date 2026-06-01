@@ -1007,7 +1007,7 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 - Scan my code for hardcoded secrets.
 - Check if there are any API keys or passwords committed in this file.
 
-### `datadog_security_signals_schema`
+### `get_datadog_security_signals_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
 Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
