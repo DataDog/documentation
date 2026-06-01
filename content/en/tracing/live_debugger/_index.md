@@ -153,7 +153,7 @@ Live Debugger data might contain sensitive information, especially when using th
 
 ### Debug with Bits
 
-Instead of creating and managing logpoints manually, you can investigate running services through a conversational interface. With [Debug with Bits][23], you describe what you want to investigate, and Bits AI Dev Agent places logpoints, retrieves variable snapshots, and helps interpret the results.
+Instead of creating and managing logpoints manually, you can investigate running services through a conversational interface. With [Debug with Bits][23], you describe what you want to investigate, and Bits Code places logpoints, retrieves variable snapshots, and helps interpret the results.
 
 ## Impact on performance and billing
 
