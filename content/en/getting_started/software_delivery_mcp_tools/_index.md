@@ -2,7 +2,7 @@
 title: Getting Started with Software Delivery MCP Tools
 description: Connect AI agents to your CI Visibility and Test Optimization data using the Datadog MCP Server.
 further_reading:
-- link: "bits_ai/mcp_server/setup"
+- link: "mcp_server/setup"
   tag: "Documentation"
   text: "Datadog MCP Server Setup"
 - link: "continuous_integration/"
@@ -101,7 +101,7 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/setup/
+[1]: /mcp_server/setup/
 [2]: https://modelcontextprotocol.io/
 [3]: /continuous_integration/
 [4]: /tests/

@@ -1,14 +1,16 @@
 ---
 title: Datadog MCP Server Tools
 description: "Browse all tools available in the Datadog MCP Server, organized by toolset, with example prompts."
+aliases:
+- /bits_ai/mcp_server/tools/
 algolia:
   tags: ["mcp", "mcp server", "mcp tools", "tools"]
   rank: 70
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "bits_ai/mcp_server/setup"
+- link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
 ---
@@ -1372,7 +1374,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 - Add an agent trigger to the deployment rollback workflow so I can run it from here.
 - Configure the incident response workflow to be triggerable by an agent.
 
-[1]: /bits_ai/mcp_server/setup#toolsets
+[1]: /mcp_server/setup#toolsets
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
