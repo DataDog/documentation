@@ -18,7 +18,7 @@ The NDM Summary Page is in Preview.
 
 ## Overview
 
-The Network Device Monitoring (NDM) **Summary Page** is a command center for network engineers. It surfaces device and interface health, active issues, and recent configuration changes in a single view. Use it to identify problems across your network at a glance.
+The Network Device Monitoring (NDM) **Summary Page** gives network engineers a single view of device and interface health, active issues, and recent configuration changes. Use it as a starting point for assessing your network's state and investigating problems.
 
 **Note**: To use the Summary Page, [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
 
@@ -51,7 +51,9 @@ Below the summary, a status panel shows the total device count broken down by st
 
 ### Issues
 
-The **Issues** list summarizes active alerts on network resources, grouped to reduce noise. Each issue card shows the affected devices, a description of what was detected, and the blast radius. Click an issue to open a side panel with a summary of what happened, the affected metric, a proposed fix, and an option to launch a Bits AI SRE investigation. For details, see [Device Health][5].
+The **Issues** list summarizes active alerts on network resources, grouped to reduce noise. Each issue card shows the affected devices, a description of what was detected, and the blast radius.
+
+Click an issue to open a side panel with a summary of what happened, the affected metric, a proposed fix, and an option to launch a Bits AI SRE investigation. For details, see [Device Health][5].
 
 {{< img src="network_device_monitoring/summary/issues-view.png" alt="The Device Health view showing the Open Issues list with a high-severity issue card for a network interface and its dependencies." style="width:100%;" >}}
 
