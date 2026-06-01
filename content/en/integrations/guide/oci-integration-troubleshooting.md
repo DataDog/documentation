@@ -18,7 +18,7 @@ See configuration issues with your OCI integration on the **Issues** tab of the 
 
 ## Invalid Datadog API or app key credentials
 
-This occurs when the Datadog application key configured in the OCI integration has expired or is invalid. Look for the following error in your ORM stack's job logs to confirm:
+This occurs when the Datadog API key or application key configured in the OCI integration has expired or is invalid. Both keys are validated during a stack apply. Look for the following error in your ORM stack's job logs to confirm:
 
 ```
 Error: unexpected response code '403': {"errors":["Forbidden"]}
@@ -28,10 +28,11 @@ Error: unexpected response code '403': {"errors":["Forbidden"]}
   15: resource "restapi_object" "datadog_tenancy_integration" {
 ```
 
-To remediate this:
+To remediate this, generate new credentials and update your integration deployment:
 
-1. Go to [Application Keys][6] in your Datadog organization settings and generate a new application key.
-2. Update your integration deployment with the new key and reapply it.
+1. Go to [API Keys][6] in your Datadog organization settings and generate a new API key.
+2. Go to [Application Keys][8] in your Datadog organization settings and generate a new application key.
+3. Update your integration deployment with the new keys and reapply it.
 
 {{< tabs >}}
 {{% tab "QuickStart (ORM stack)" %}}
@@ -39,14 +40,14 @@ To remediate this:
 1. Navigate to [Oracle Resource Manager stacks][7] and locate your Datadog QuickStart stack.
 2. Click **Edit** on the stack.
 3. Click **Next** to reach the **Configure Variables** page.
-4. Update the **Datadog Application Key** value with the new application key.
+4. Update the **Datadog API Key** and **Datadog Application Key** values with the new credentials.
 5. Click **Next**.
 6. Click **Save changes**.
 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-1. Update the `datadog_app_key` value in your Terraform `.tf` file with the new application key.
+1. Update the `datadog_api_key` and `datadog_app_key` values in your Terraform `.tf` file with the new credentials.
 2. Run `terraform apply` to apply the updated configuration.
 
 {{% /tab %}}
@@ -75,5 +76,6 @@ Still need help? Contact [Datadog support][3].
 [3]: /help/
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
-[6]: /organization-settings/application-keys
+[6]: /organization-settings/api-keys
 [7]: https://cloud.oracle.com/resourcemanager/stacks
+[8]: /organization-settings/application-keys
