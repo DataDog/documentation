@@ -61,7 +61,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 ### Security Signals
 
-`datadog_security_signals_schema`
+`get_datadog_security_signals_schema`
 : Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
 : *Permissions required: `Security Signals Read`*
 
@@ -70,7 +70,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Signals Read`*
 
 `analyze_datadog_security_signals`
-: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead. Call `datadog_security_signals_schema` first to discover queryable fields.
+: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead. Call `get_datadog_security_signals_schema` first to discover queryable fields.
 : *Permissions required: `Security Signals Read`, `Timeseries`*
 
 `get_datadog_security_signal`
