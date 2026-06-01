@@ -199,7 +199,8 @@ Begin by getting an Admin API key from Cursor. This key allows access to usage a
 
 1. In Datadog, go to [**Integrations > Cursor**][101].
 2. On the {{< ui >}}Configure{{< /ui >}} tab, under {{< ui >}}Account details{{< /ui >}}, paste in the {{< ui >}}Admin API Key{{< /ui >}} from Cursor.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `Cursor in Cloud Cost Management`.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 After you save your configuration, Datadog begins polling Cursor usage and cost endpoints using this key, and populates metrics in your environment. Your Cursor cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
