@@ -8,7 +8,7 @@ description: Learn how to install and configure BYOC Logs on Azure AKS
 
 ## Overview
 
-This document walks you through the process of configuring your Azure environment and installing BYOC Logs on Azure AKS.
+This document walks you through the process of configuring your Azure environment and installing BYOC (Bring Your Own Cloud) Logs on Azure AKS.
 
 ## Prerequisites
 
