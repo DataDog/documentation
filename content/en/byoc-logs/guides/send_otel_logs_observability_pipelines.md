@@ -15,10 +15,6 @@ aliases:
   - /cloudprem/guides/send_otel_logs_observability_pipelines/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 BYOC Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.
@@ -32,7 +28,7 @@ By the end of this guide, you will be able to:
 
 ## Prerequisites
 
-- [BYOC Logs Preview][1] access.
+- BYOC Logs access. Contact your Datadog account team to request access.
 - **Datadog API Key**: [Get your API key][2].
 - **Datadog Application Key**: [Get your application key][3].
 - **Docker**: [Install Docker][4].
