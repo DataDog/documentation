@@ -31,11 +31,10 @@ Debug with Bits uses <a href="/bits_ai/bits_ai_dev_agent/">Bits Code</a>, which 
 
 Before using Debug with Bits:
 
-- [Live Debugger][1] must be enabled for the target service. See [Requirements and setup][1] for details.
+- [Live Debugger][1] must be enabled for the target service. See [Requirements and setup][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
 - [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
-
 
 ## Available actions
 
@@ -84,3 +83,4 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [4]: https://app.datadoghq.com/debugging/sessions
 [5]: /bits_ai/bits_ai_dev_agent/
 [6]: /source_code/source-code-management/
+[7]: /tracing/live_debugger/#requirements-and-setup
