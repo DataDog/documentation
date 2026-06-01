@@ -133,7 +133,7 @@ The `global-config` object controls repository-wide settings:
 | `ignore-severities` | Array | Severity levels to ignore. |
 | `only-categories` | Array | Categories to report. Findings in other categories are not reported. |
 | `ignore-categories` | Array | Categories to ignore. |
-| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied in scans. |
+| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied. |
 | `only-platforms` | Array | Platforms to scan. Rules from other platforms are not applied. |
 
 ### Severities
