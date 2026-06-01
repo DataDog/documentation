@@ -23,7 +23,7 @@ The following log features are supported:
 **Dashboards and monitors**
 - Dashboards with BYOC Logs data
 - Log monitors on BYOC Logs indexes
-- Bits AI SRE
+- Bits Investigation
 
 **Index management**
 - Multiple indexes with independent retention periods and routing rules

@@ -28,13 +28,13 @@ attributes:
     data_type: |
        - **Audit logs (Audit Trail enabled)**: 90 days
        - **Audit logs (Audit Trail disabled)**: 7 days
-  - product: Bits AI Assistant
+  - product: Bits Chat
     data_type: |
        - **Messages**: 15 months
-  - product: Bits AI Dev Agent
+  - product: Bits Code
     data_type: |
        - **Source Code**: 7 days
-  - product: Bits AI SRE
+  - product: Bits Investigation
     data_type: |
        - **Investigations**: Retained for the duration of the account
   - product: Browser RUM
