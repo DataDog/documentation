@@ -15,7 +15,7 @@ Bits Code is a generative AI coding assistant that uses Datadog observability da
 
 {{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time Bits Code investigates an issue or generates a fix, it creates a [code session][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations] to have Bits Code run sessions on a schedule, or in response to signals from other Datadog products, like a new APM Recommendation or flaky test.
+Each time Bits Code investigates an issue or generates a fix, it creates a [code session][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][25] to have Bits Code run sessions on a schedule, or in response to signals from other Datadog products, like a new APM Recommendation or flaky test.
 
 To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
 
