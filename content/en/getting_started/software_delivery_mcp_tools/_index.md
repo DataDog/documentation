@@ -148,7 +148,7 @@ If the skill recommends quarantine, it presents the proposed action and requires
 
 ### Unblock PR
 
-`/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches — a blame guard that classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage and any code quality or security violations from PR insights. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section summarizing coverage and violations.
+`/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches. The skill classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage and any code quality or security violations from PR insights. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section summarizing coverage and violations.
 
 For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions, it retries failed jobs using `retry_datadog_ci_job` (MCP) or `gh run rerun` (pup fallback); for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
 
