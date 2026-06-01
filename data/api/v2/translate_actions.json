@@ -3781,6 +3781,10 @@
     "request_description": "",
     "request_schema_description": "The request body for creating or updating multiple rows into a reference table."
   },
+  "ListReferenceTableRows": {
+    "description": "List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.",
+    "summary": "List rows"
+  },
   "CreateReferenceTableUpload": {
     "description": "Create a reference table upload for bulk data ingestion",
     "summary": "Create reference table upload",
