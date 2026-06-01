@@ -19,7 +19,7 @@ OTLP trace export is in Preview. To provide feedback or request support, contact
 
 ## Overview
 
-Datadog SDKs support exporting traces in [OpenTelemetry Protocol (OTLP)][3] format. When using this mode, traces can be sent to any OTLP-compliant receiver or backend, including any OpenTelemetry Collector or the [Datadog Distribution of OpenTelemetry Collector (DDOT)][1].
+Datadog SDKs support exporting traces in [OpenTelemetry Protocol (OTLP)][3] format to any OTLP-compliant receiver or backend, including [DDOT][1] or any OpenTelemetry Collector.
 
 ## Language support
 
