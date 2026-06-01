@@ -41,7 +41,7 @@ The autocomplete dropdown opens after you type `{{` and lists fields available o
 
 Session-scope evaluations expose every trace in the [user session][1] under the `traces` array. Each trace includes its own `spans` array, so you can read across traces and spans in one prompt. Use `{{traces[...]}}` paths (and nested `{{traces[...].spans[...]}}` paths) to build session-level judges. The `{{span_input}}` and `{{span_output}}` aliases are not available in session scope.
 
-Session-level evaluations require spans to be tagged with a `session_id`. See [Tracking user sessions][1] to instrument your application. See [Session-Level Evaluations][2] for configuration, example prompts, and when to choose session scope over trace or span scope.
+Session-level evaluations require spans to be tagged with a `session_id`. See [Tracking user sessions][1] to instrument your application, and [Session-Level Evaluations][2] for configuration, example prompts, and guidance on when to choose session scope.
 
 ### Reference the whole session
 
@@ -60,7 +60,7 @@ Session-level evaluations require spans to be tagged with a `session_id`. See [T
 
 ### Filter spans by attribute
 
-`[field.path:value]` on `spans` keeps only the spans whose field at `field.path` equals `value`. Combine filters and deeper paths to extract inputs or outputs across the session. Filters fall back to an empty string when nothing matches.
+`[field.path:value]` on `spans` keeps only the spans whose field at `field.path` equals `value`. Combine with deeper paths to extract inputs or outputs across the session. Filters fall back to an empty string when nothing matches.
 
 ```
 {{traces[0].spans[name:my-span].meta.input.value}}
@@ -79,7 +79,7 @@ Use `[*]` on `traces` or `spans` to fan out: values from every matching element 
 
 ## Trace-scope syntax
 
-Trace-scope evaluations expose every span in the trace under the `spans` array. Use `{{spans...}}` paths to read across spans. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope. See [Trace-Level Evaluations][3] for configuration, example prompts, and when to choose trace scope.
+Trace-scope evaluations expose every span in the trace under the `spans` array. Use `{{spans...}}` paths to read across spans. The `{{span_input}}` and `{{span_output}}` aliases are not available in trace scope. See [Trace-Level Evaluations][3] for configuration, example prompts, and guidance on when to choose trace scope.
 
 ### Reference the whole trace
 
@@ -169,11 +169,11 @@ For example, given a span where `meta.input.messages` is:
 
 ## Tips
 
-- Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (session, trace, or span) and to the sample selected on the right.
-- Pick a sample in the panel on the right—{{< ui >}}Sample Session{{< /ui >}} listing traces in the session (session scope), {{< ui >}}Spans in Selected Trace{{< /ui >}} (trace scope), or {{< ui >}}Filtered Spans{{< /ui >}} (span scope)—then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving the configuration.
+- Type `{{` in the prompt editor to open the autocomplete dropdown. The list adapts to the scope (session, trace, or span) and to the sample selected.
+- Pick a sample in the panel on the right ({{< ui >}}Sample Session{{< /ui >}} for session scope, {{< ui >}}Spans in Selected Trace{{< /ui >}} for trace scope, or {{< ui >}}Filtered Spans{{< /ui >}} for span scope), then click {{< ui >}}Test Evaluation{{< /ui >}} to preview how each placeholder resolves on real data before saving.
 - Use the three-dots menu on a sample's JSON view and select {{< ui >}}Add variable to message{{< /ui >}} to insert a field path into the prompt without typing it.
 - Pass `{{*}}` when you want the LLM judge to see the full payload—useful for free-form prompts that decide for themselves which fields matter.
-- Prefer `{{traces}}` or targeted `{{traces[...].spans[...]}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluations][2] for scope guidance and example prompts.
+- Use `{{traces}}` or targeted `{{traces[...].spans[...]}}` paths for session judges when you need cross-turn context; use `{{spans}}` when a single trace is enough. See [Session-Level Evaluations][2] for scope guidance and example prompts.
 
 ## Further Reading
 
