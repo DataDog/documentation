@@ -23,7 +23,7 @@ Standalone App and API Protection is supported for the following SDK versions:
 | Language | Version |
 | -------- | ------- |
 | .NET     | 3.12.0  |
-| Go       | N/A     |
+| Go       | 1.73.0  |
 | Java     | 1.47.0  |
 | Node.js  | 5.40.0  |
 | PHP      | 1.8.0   |
