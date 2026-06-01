@@ -140,7 +140,7 @@ AI-driven recommendation types are now available, expanding the set of [optimiza
 
 Certain recommendations rely on specific Datadog products. Use the **Recommendation Prerequisite** dropdown to filter recommendations by the Datadog products in your setup.
 
-If you plan to use [Bits AI Dev Agent][3] to implement recommendations, you must [complete its setup][4].
+If you plan to use [Bits Code][3] to implement recommendations, you must [complete its setup][4].
 
 ## How it works
 
@@ -162,7 +162,7 @@ To review recommendations that need your attention:
 2. Filter your recommendations by status or type.
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
-5. (Optional) To use [Bits AI Dev Agent][3] to generate a code fix, under **Next Steps**, click **Fix with Bits**.
+5. (Optional) To use [Bits AI Code][3] to generate a code fix, under **Next Steps**, click **Fix with Bits**.
 6. (Optional) To track the fix in Jira or Case Management, under **Triage**, click **Add Jira Ticket** or **Add Case**.
 
 After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to **REVIEWED**, **IGNORED**, or **RESOLVED**.

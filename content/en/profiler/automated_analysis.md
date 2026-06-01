@@ -20,7 +20,7 @@ Automated Analysis automatically detects performance issues in your applications
 
 - A high-level summary explaining the issue and why it matters
 - Contextual insights from profiling data (for example, affected methods, packages, or processes)
-- Recommended next steps to help you resolve the issue, with optional auto-generated fixes from [Bits AI Dev Agent][2]
+- Recommended next steps to help you resolve the issue, with optional auto-generated fixes from [Bits Code][2]
 
 This reduces the profiling expertise needed to identify and resolve performance issues in your applications that might otherwise go unnoticed.
 
@@ -54,7 +54,7 @@ Each row represents an insight type, summarizing:
 You can filter insights by insight name, runtime, service, or environment to narrow the list to the most important insights. Teams often use this view to identify patterns, such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
 
 ## Take action on insights
-While viewing an insight, see **Next Steps** to view Datadog recommendations for improvements. Alternatively, click **Fix with Bits** to have [Bits AI Dev Agent][2] generate a fix.
+While viewing an insight, see **Next Steps** to view Datadog recommendations for improvements. Alternatively, click **Fix with Bits** to have [Bits Code][2] generate a fix.
 
 ## Supported insights
 

@@ -158,7 +158,7 @@ This method avoids unnecessary CI failures and saves developer time.
 
 After Test Optimization detects a flaky test, [Bits Code][16] can automatically diagnose and fix it. Bits Code analyzes the test's failure patterns and generates production-ready code changes. You can then create a GitHub pull request directly from Bits Code's suggestions.
 
-For Bits AI Dev Agent to create a fix, the flaky test must meet the following criteria:
+For Bits Code to create a fix, the flaky test must meet the following criteria:
 - **Failure rate**: At least 5%
 - **Wasted time**: At least 2 hours
 - **Failed pipelines**: At least 2 pipelines
@@ -171,7 +171,7 @@ For Bits AI Dev Agent to create a fix, the flaky test must meet the following cr
 
 To allow Bits Code to suggest flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically creates fixes for flaky tests detected by Test Optimization.
 
-After you have enabled Bits AI Dev Agent, when viewing a flaky test, click **Generate fix**.
+After you have enabled Bits Code, when viewing a flaky test, click **Generate fix**.
 
 ## AI-powered flaky test categorization
 

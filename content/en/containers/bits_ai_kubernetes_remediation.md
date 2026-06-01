@@ -27,7 +27,7 @@ You can launch Bits AI Kubernetes Remediation from multiple locations within Dat
 Any one of these actions opens a side panel with remediation information, including:
 
 - An AI-powered explanation for root cause, based on collected telemetry and known patterns
-- Recommended next steps, which you may be able to [perform directly from Datadog](#remediate-from-datadog) using the [Bits AI Dev Agent][5]
+- Recommended next steps, which you may be able to [perform directly from Datadog](#remediate-from-datadog) using [Bits Code][5]
 - Related information on an adjustable timeframe: recent deployments, error logs, Kubernetes events, etc., including relevant metrics based on specific issue type
 
 {{< img src="containers/remediation/side_panel2.png" alt="Remediation side panel opened for a workload with a CrashLoopBackOff error. Displays a What Happened section with a Bits AI-powered explanation of the error's root cause. Below, a Recommended Next Steps section where the user can inspect the workload manifest. Step-by-step instructions for a suggested fix are also displayed." style="width:80%;" >}}
@@ -39,7 +39,7 @@ Any one of these actions opens a side panel with remediation information, includ
 Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
-If your repositories are [connected to Datadog][4], and an error can be fixed by changing code in one of these connected repositories, then you can use the [Bits AI Dev Agent][5] to remediate directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
+If your repositories are [connected to Datadog][4] and an error can be fixed by changing code in one of these connected repositories, then you can use [Bits Code][5] to remediate directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
 
 {{% collapse-content title="Example: Increasing memory limit for a deployment" level="h4" expanded=true id="example-pr" %}}
 
