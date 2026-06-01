@@ -45,14 +45,14 @@ To disable Infrastructure Monitoring, set the Datadog Agent infrastructure mode 
 
 For more details, see [Datadog Agent infrastructure mode][8].
 
-### Disable APM tracing and enable AAP on the SDK
+### Disable APM tracing and enable AAP on the service
 
 On the instrumented service, set the following environment variables:
 
 - `DD_APM_TRACING_ENABLED=false`
 - `DD_APPSEC_ENABLED=true`
 
-`DD_APM_TRACING_ENABLED=false` limits the amount of APM data sent to the minimum required by App and API Protection. This environment variable can be combined with other [App and API Protection configuration options][4].
+`DD_APM_TRACING_ENABLED=false` disabled APM tracing and limits the amount of APM data sent to the minimum required by App and API Protection. This environment variable can be combined with other [App and API Protection configuration options][4].
 
 
 [1]: /security/workload_protection/
