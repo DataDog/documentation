@@ -267,6 +267,30 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "ListAnnotations": {
+    "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
+    "summary": "List annotations"
+  },
+  "CreateAnnotation": {
+    "description": "Creates a new annotation on a dashboard or notebook page.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Create an annotation",
+    "request_description": "Annotation to create.",
+    "request_schema_description": "Request body for creating an annotation."
+  },
+  "GetPageAnnotations": {
+    "description": "Returns all annotations on a specific page for a given time window, grouped by widget.\nUnlike `ListAnnotations`, this endpoint returns a single structured object with annotations\nindexed by their ID and a widget-to-annotation mapping for easy UI rendering.",
+    "summary": "Get annotations for a page"
+  },
+  "DeleteAnnotation": {
+    "description": "Deletes an existing annotation by ID.\nReturns `204 No Content` if the annotation does not exist (idempotent).",
+    "summary": "Delete an annotation"
+  },
+  "UpdateAnnotation": {
+    "description": "Updates an existing annotation.\nValid `color` values: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.\nValid `type` values: `pointInTime` (marks a single moment) or `timeRegion` (spans a range and requires `end_time`).",
+    "summary": "Update an annotation",
+    "request_description": "Updated annotation payload.",
+    "request_schema_description": "Request body for updating an annotation."
+  },
   "AnonymizeUsers": {
     "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
     "summary": "Anonymize users",
@@ -1095,6 +1119,10 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
   },
+  "DeleteSyncConfig": {
+    "description": "Delete a Storage Management configuration by its unique identifier. Deleting a configuration stops inventory file synchronization for the associated cloud account.",
+    "summary": "Delete a Storage Management configuration"
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
@@ -1323,6 +1351,24 @@
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
+  },
+  "DeleteCostTagDescriptionByKey": {
+    "description": "Delete a Cloud Cost Management tag key description. When `cloud` is omitted, deletes every description for the tag key, falling back to Datadog's global default when available. When `cloud` is provided, deletes only the description scoped to that cloud provider.",
+    "summary": "Delete a Cloud Cost Management tag description"
+  },
+  "GetCostTagDescriptionByKey": {
+    "description": "Get the Cloud Cost Management description for a single tag key. Use `filter[cloud]` to scope the lookup to a specific cloud provider; when omitted, the response resolves the description in fallback order (cloud-specific organization override, then cloudless organization default, then Datadog's global default).",
+    "summary": "Get a Cloud Cost Management tag description"
+  },
+  "UpsertCostTagDescriptionByKey": {
+    "description": "Create or update a Cloud Cost Management tag key description. The new description and optional cloud scoping are supplied in the request body. Omit `cloud` to set a cross-cloud default for the tag key.",
+    "summary": "Upsert a Cloud Cost Management tag description",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Cloud Cost Management tag key description."
+  },
+  "GenerateCostTagDescriptionByKey": {
+    "description": "Use AI to draft a Cloud Cost Management tag key description based on associated cost data. The generated description is returned in the response and is not persisted by this endpoint; follow up with `UpsertCostTagDescriptionByKey` to save it.",
+    "summary": "Generate a Cloud Cost Management tag description"
   },
   "ListCostTagKeys": {
     "description": "List Cloud Cost Management tag keys.",
@@ -2713,6 +2759,18 @@
     "request_description": "Update dataset payload.",
     "request_schema_description": "Request to partially update an LLM Observability dataset."
   },
+  "BatchUpdateLLMObsDataset": {
+    "description": "Insert, update, and delete records in a single dataset operation. By default, a new dataset version is created when the batch is applied.",
+    "summary": "Batch update LLM Observability dataset records",
+    "request_description": "Batch update payload.",
+    "request_schema_description": "Request to batch-insert, update, and delete records in an LLM Observability dataset."
+  },
+  "CloneLLMObsDataset": {
+    "description": "Clone a dataset, copying its current records into a new dataset within the same project.",
+    "summary": "Clone an LLM Observability dataset",
+    "request_description": "Clone dataset payload.",
+    "request_schema_description": "Request to clone an LLM Observability dataset."
+  },
   "GetLLMObsDatasetDraftState": {
     "description": "Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.",
     "summary": "Get LLM Observability dataset draft state"
@@ -2724,6 +2782,10 @@
   "UnlockLLMObsDatasetDraftState": {
     "description": "Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.",
     "summary": "Unlock LLM Observability dataset draft state"
+  },
+  "ExportLLMObsDataset": {
+    "description": "Download the contents of a dataset as a CSV file. The download is streamed and includes one row per dataset record.",
+    "summary": "Export an LLM Observability dataset"
   },
   "ListLLMObsDatasetRecords": {
     "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
@@ -2747,9 +2809,21 @@
     "request_description": "Delete records payload.",
     "request_schema_description": "Request to delete records from an LLM Observability dataset."
   },
+  "RestoreLLMObsDatasetVersion": {
+    "description": "Restore a dataset to a previous version. The dataset's current version is bumped, and its records are replaced with the records from the specified prior version.",
+    "summary": "Restore an LLM Observability dataset version",
+    "request_description": "Restore dataset version payload.",
+    "request_schema_description": "Request to restore an LLM Observability dataset to a previous version."
+  },
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
     "summary": "List LLM Observability dataset versions"
+  },
+  "UploadLLMObsDatasetRecordsFile": {
+    "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
+    "summary": "Upload records to an LLM Observability dataset",
+    "request_description": "Multipart upload payload containing the records file.",
+    "request_schema_description": "Multipart payload for uploading dataset records from a file."
   },
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
@@ -3201,6 +3275,26 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "DeleteScopesRestriction": {
+    "description": "Delete the scopes restriction configured for the OAuth2 client.",
+    "summary": "Delete an OAuth2 client scopes restriction"
+  },
+  "GetScopesRestriction": {
+    "description": "Get the scopes restriction configured for the OAuth2 client.",
+    "summary": "Get an OAuth2 client scopes restriction"
+  },
+  "UpsertScopesRestriction": {
+    "description": "Create or update the scopes restriction configured for the OAuth2 client.",
+    "summary": "Upsert an OAuth2 client scopes restriction",
+    "request_description": "",
+    "request_schema_description": "Request payload for creating or updating the scopes restriction of an OAuth2 client."
+  },
+  "RegisterOAuthClient": {
+    "description": "Register an OAuth2 client using the Dynamic Client Registration protocol defined in RFC 7591.",
+    "summary": "Register an OAuth2 client",
+    "request_description": "",
+    "request_schema_description": "Request payload for OAuth2 dynamic client registration as defined by RFC 7591."
+  },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",
     "summary": "List pipelines"
@@ -3488,28 +3582,28 @@
     "summary": "List permissions"
   },
   "ListPersonalAccessTokens": {
-    "description": "List all personal access tokens for the organization.",
-    "summary": "Get all personal access tokens"
+    "description": "List all access tokens for the organization.",
+    "summary": "Get all access tokens"
   },
   "CreatePersonalAccessToken": {
     "description": "Create a personal access token for the current user.",
     "summary": "Create a personal access token",
     "request_description": "",
-    "request_schema_description": "Request used to create a personal access token."
+    "request_schema_description": "Request used to create an access token."
   },
   "RevokePersonalAccessToken": {
     "description": "Revoke a specific personal access token.",
     "summary": "Revoke a personal access token"
   },
   "GetPersonalAccessToken": {
-    "description": "Get a specific personal access token by its UUID.",
+    "description": "Get a specific personal access token by its ID.",
     "summary": "Get a personal access token"
   },
   "UpdatePersonalAccessToken": {
     "description": "Update a specific personal access token.",
     "summary": "Update a personal access token",
     "request_description": "",
-    "request_schema_description": "Request used to update a personal access token."
+    "request_schema_description": "Request used to update an access token."
   },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
@@ -3624,6 +3718,10 @@
   "ListConnections": {
     "description": "List all data connections for an entity",
     "summary": "List connections"
+  },
+  "GetPrunedTraceByID": {
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a pruned trace by ID"
   },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
@@ -3842,7 +3940,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -3944,6 +4042,20 @@
     "summary": "Create a RUM retention filter",
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
+  },
+  "ListPermanentRetentionFilters": {
+    "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
+    "summary": "Get all permanent RUM retention filters"
+  },
+  "GetPermanentRetentionFilter": {
+    "description": "Get a permanent RUM retention filter for a RUM application by its identifier.",
+    "summary": "Get a permanent RUM retention filter"
+  },
+  "UpdatePermanentRetentionFilter": {
+    "description": "Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.\nOnly fields marked as editable in the `editability` block of the filter can be updated.\nUpdating a non-editable field returns a `400` response.",
+    "summary": "Update a permanent RUM retention filter",
+    "request_description": "New configuration of the permanent RUM retention filter.",
+    "request_schema_description": "The permanent RUM retention filter body to update."
   },
   "DeleteRetentionFilter": {
     "description": "Delete a RUM retention filter for a RUM application.",
@@ -4607,6 +4719,12 @@
     "request_description": "",
     "request_schema_description": "Convert a rule from JSON to Terraform."
   },
+  "BulkConvertExistingSecurityMonitoringRules": {
+    "description": "Convert a list of existing security monitoring rules to Terraform for the Datadog provider\nresource `datadog_security_monitoring_rule`. Returns a ZIP archive containing one Terraform\nfile per rule. You can convert rules for the following types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection",
+    "summary": "Bulk convert rules to Terraform",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
+  },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
     "summary": "Test a rule",
@@ -4828,14 +4946,14 @@
     "summary": "Revoke an access token for a service account"
   },
   "GetServiceAccountAccessToken": {
-    "description": "Get a specific access token for a service account by its UUID.",
+    "description": "Get a specific access token for a service account by its ID.",
     "summary": "Get an access token for a service account"
   },
   "UpdateServiceAccountAccessToken": {
     "description": "Update a specific access token for a service account.",
     "summary": "Update an access token for a service account",
     "request_description": "",
-    "request_schema_description": "Request used to update a personal access token."
+    "request_schema_description": "Request used to update a service account access token."
   },
   "ListServiceAccountApplicationKeys": {
     "description": "List all application keys available for this service account.",
@@ -5656,6 +5774,10 @@
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
+  },
+  "GetTraceByID": {
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "summary": "Get a trace by ID"
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",

@@ -13,10 +13,6 @@ aliases:
 ---
 
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 <div class="alert alert-warning">

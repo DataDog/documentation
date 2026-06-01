@@ -111,9 +111,9 @@ Select a user to open a detail view that includes their spend, lines generated, 
 
 The {{< ui >}}Bits AI Agents{{< /ui >}} tab shows usage of Datadog's built-in AI agents alongside your coding agents. The combined view of investigations, sessions, and executions across all Datadog agents lets you correlate Bits AI activity with the rest of your organization.
 
-Individual cards summarize activity for each Bits AI agent, including [Bits AI SRE][11], [Bits AI Dev Agent][12], and [Agent Builder][13]. Select {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
+Individual cards summarize activity for each Bits AI agent, including [Bits Investigation][11], [Bits Code][12], and [Bits Agent Builder][13]. Select {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
 
-{{< img src="ai_agents_console/bits-ai-agents.png" alt="Bits AI Agents tab with a combined agent activity chart over time and individual cards for Bits AI SRE, Bits AI Dev, and Agent Builder showing recent investigations, sessions, and executions" style="width:100%;" >}}
+{{< img src="ai_agents_console/bits-ai-agents.png" alt="Bits AI Agents tab with a combined agent activity chart over time and individual cards for Bits Investigation, Bits Code, and Bits Agent Builder showing recent investigations, sessions, and executions" style="width:100%;" >}}
 
 ## Set up
 
