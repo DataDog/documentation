@@ -9,7 +9,7 @@ algolia:
 further_reading:
 - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
   tag: "Blog"
-  text: "Introducing Bits AI Dev Agent for Code Security"
+  text: "Introducing Bits Code for Code Security"
 - link: https://www.datadoghq.com/blog/code-security-secret-scanning
   tag: Blog
   text: Detect and block exposed credentials with Datadog Secret Scanning
