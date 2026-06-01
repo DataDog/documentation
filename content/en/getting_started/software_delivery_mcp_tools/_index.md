@@ -106,7 +106,7 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines using your live CI and Test Optimization data.
 
-When the `software-delivery` MCP toolset is connected, skills are loaded automatically when your prompt matches their purpose — for example, "TestCheckoutServiceIntegration keeps failing in CI — investigate it" loads `/triage-flaky-test` without any installation required.
+After you connect the `software-delivery` MCP toolset, your AI assistant automatically loads skills when your prompt matches their purpose. For example, entering "TestCheckoutServiceIntegration keeps failing in CI — investigate it" loads `/triage-flaky-test` without any installation required.
 
 To invoke the skills explicitly with a slash command, install them locally:
 
