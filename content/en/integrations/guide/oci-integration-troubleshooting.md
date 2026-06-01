@@ -18,22 +18,35 @@ See configuration issues with your OCI integration on the **Issues** tab of the 
 
 ## Invalid Datadog API or app key credentials
 
-This occurs when Datadog API or app keys configured in the OCI integration tile have expired or are invalid. To remediate this, update the key in your integration deployment and reapply it.
+This occurs when the Datadog application key configured in the OCI integration has expired or is invalid. Look for the following error in your ORM stack's job logs to confirm:
+
+```
+Error: unexpected response code '403': {"errors":["Forbidden"]}
+
+  with module.integration[0].restapi_object.datadog_tenancy_integration,
+  on modules/integration/main.tf line 15, in resource "restapi_object" "datadog_tenancy_integration":
+  15: resource "restapi_object" "datadog_tenancy_integration" {
+```
+
+To remediate this:
+
+1. Go to [Application Keys][6] in your Datadog organization settings and generate a new application key.
+2. Update your integration deployment with the new key and reapply it.
 
 {{< tabs >}}
 {{% tab "QuickStart (ORM stack)" %}}
 
-1. Navigate to [Oracle Resource Manager stacks][6] and locate your Datadog QuickStart stack.
+1. Navigate to [Oracle Resource Manager stacks][7] and locate your Datadog QuickStart stack.
 2. Click **Edit** on the stack.
 3. Click **Next** to reach the **Configure Variables** page.
-4. Update the **Datadog API Key** and/or **Datadog Application Key** values with valid credentials.
-5. Click **Next**, then click **Save changes**.
-6. Click **Apply** to apply the updated configuration.
+4. Update the **Datadog Application Key** value with the new application key.
+5. Click **Next**.
+6. Click **Save changes**.
 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-1. Update the `datadog_api_key` and/or `datadog_app_key` values in your Terraform `.tf` file with valid credentials.
+1. Update the `datadog_app_key` value in your Terraform `.tf` file with the new application key.
 2. Run `terraform apply` to apply the updated configuration.
 
 {{% /tab %}}
@@ -62,4 +75,5 @@ Still need help? Contact [Datadog support][3].
 [3]: /help/
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
-[6]: https://cloud.oracle.com/resourcemanager/stacks
+[6]: /organization-settings/application-keys
+[7]: https://cloud.oracle.com/resourcemanager/stacks
