@@ -106,6 +106,7 @@ The Datadog MCP Server is optimized to provide responses in a way that AI agents
 
 - Responses are truncated based on the estimated length of responses each tool provides. The tools respond to AI agents with instructions on how to request more information if the response was truncated.
 - Most tools have a `max_tokens` parameter that enables AI agents to request less or more information.
+- You can limit available tools at connection time with `toolsets` and `omit_tools`. See [Set Up the Datadog MCP Server][27].
 
 ## Track tool calls in Audit Trail
 

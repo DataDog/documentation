@@ -20,10 +20,12 @@ To enable product-specific tools, include the `toolsets` query parameter at the 
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
+You can also exclude specific tools with the `omit_tools` query parameter.
+
 [2]: /getting_started/site/
 {{< /site-region >}}
 
-See [Set Up the Datadog MCP Server][1] for more information on connecting to the MCP Server and enabling toolsets.
+See [Set Up the Datadog MCP Server][1] for more information on connecting to the MCP Server, enabling toolsets, and omitting specific tools.
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
