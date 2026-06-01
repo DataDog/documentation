@@ -14,26 +14,6 @@
       "method": "GET"
     },
     {
-      "operationId": "GetDashboardListItems",
-      "summary": "Get items of a Dashboard List",
-      "slug": "get-items-of-a-dashboard-list",
-      "menuOrder": 1,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "CreateDashboardListItems",
-      "summary": "Add Items to a Dashboard List",
-      "slug": "add-items-to-a-dashboard-list",
-      "menuOrder": 2,
-      "versions": [
-        "v2"
-      ],
-      "method": "POST"
-    },
-    {
       "operationId": "CreateDashboardList",
       "summary": "Create a dashboard list",
       "slug": "create-a-dashboard-list",
@@ -52,26 +32,6 @@
         "v1"
       ],
       "method": "GET"
-    },
-    {
-      "operationId": "UpdateDashboardListItems",
-      "summary": "Update items of a dashboard list",
-      "slug": "update-items-of-a-dashboard-list",
-      "menuOrder": 3,
-      "versions": [
-        "v2"
-      ],
-      "method": "PUT"
-    },
-    {
-      "operationId": "DeleteDashboardListItems",
-      "summary": "Delete items from a dashboard list",
-      "slug": "delete-items-from-a-dashboard-list",
-      "menuOrder": 4,
-      "versions": [
-        "v2"
-      ],
-      "method": "DELETE"
     },
     {
       "operationId": "UpdateDashboardList",

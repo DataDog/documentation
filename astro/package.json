@@ -8,9 +8,8 @@
     "build:en": "SKIP_TRANSLATIONS=true astro build",
     "preview": "astro preview --port 4322",
     "preview:proxied": "PROXIED=1 astro preview --port 4321",
-    "test": "npm run build:en && SKIP_TRANSLATIONS=true vitest run",
-    "test:fast": "SKIP_TRANSLATIONS=true vitest run --exclude 'tests/headless/api-html-snapshots.test.ts'",
-    "test:i18n": "npm run build && vitest run",
+    "test": "vitest run",
+    "generate-fixture": "node scripts/generate-test-fixture.mjs",
     "test:browser": "SKIP_TRANSLATIONS=true playwright test --grep-invert i18n",
     "test:browser:i18n": "playwright test --grep i18n"
   },

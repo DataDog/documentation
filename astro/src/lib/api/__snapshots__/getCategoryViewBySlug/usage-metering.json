@@ -14,26 +14,6 @@
       "method": "GET"
     },
     {
-      "operationId": "GetUsageLambdaTracedInvocations",
-      "summary": "Get hourly usage for Lambda traced invocations",
-      "slug": "get-hourly-usage-for-lambda-traced-invocations",
-      "menuOrder": 1,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetUsageApplicationSecurityMonitoring",
-      "summary": "Get hourly usage for application security",
-      "slug": "get-hourly-usage-for-application-security",
-      "menuOrder": 2,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
       "operationId": "GetMonthlyUsageAttribution",
       "summary": "Get monthly usage attribution",
       "slug": "get-monthly-usage-attribution",
@@ -54,16 +34,6 @@
       "method": "GET"
     },
     {
-      "operationId": "GetUsageObservabilityPipelines",
-      "summary": "Get hourly usage for observability pipelines",
-      "slug": "get-hourly-usage-for-observability-pipelines",
-      "menuOrder": 3,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
       "operationId": "GetUsageTopAvgMetrics",
       "summary": "Get all custom metrics by hourly average",
       "slug": "get-all-custom-metrics-by-hourly-average",
@@ -74,42 +44,12 @@
       "method": "GET"
     },
     {
-      "operationId": "GetCostByOrg",
-      "summary": "Get cost across multi-org account",
-      "slug": "get-cost-across-multi-org-account",
-      "menuOrder": 4,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetEstimatedCostByOrg",
-      "summary": "Get estimated cost across your account",
-      "slug": "get-estimated-cost-across-your-account",
-      "menuOrder": 5,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
       "operationId": "GetUsageSummary",
       "summary": "Get usage across your account",
       "slug": "get-usage-across-your-account",
       "menuOrder": 5,
       "versions": [
         "v1"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetHistoricalCostByOrg",
-      "summary": "Get historical cost across your account",
-      "slug": "get-historical-cost-across-your-account",
-      "menuOrder": 6,
-      "versions": [
-        "v2"
       ],
       "method": "GET"
     },
@@ -134,42 +74,12 @@
       "method": "GET"
     },
     {
-      "operationId": "GetProjectedCost",
-      "summary": "Get projected cost across your account",
-      "slug": "get-projected-cost-across-your-account",
-      "menuOrder": 7,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
       "operationId": "GetUsageHosts",
       "summary": "Get hourly usage for hosts and containers",
       "slug": "get-hourly-usage-for-hosts-and-containers",
       "menuOrder": 8,
       "versions": [
         "v1"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetMonthlyCostAttribution",
-      "summary": "Get Monthly Cost Attribution",
-      "slug": "get-monthly-cost-attribution",
-      "menuOrder": 8,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetHourlyUsage",
-      "summary": "Get hourly usage by product family",
-      "slug": "get-hourly-usage-by-product-family",
-      "menuOrder": 9,
-      "versions": [
-        "v2"
       ],
       "method": "GET"
     },
@@ -194,42 +104,12 @@
       "method": "GET"
     },
     {
-      "operationId": "GetUsageAttributionTypes",
-      "summary": "Get usage attribution types",
-      "slug": "get-usage-attribution-types",
-      "menuOrder": 10,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetActiveBillingDimensions",
-      "summary": "Get active billing dimensions for cost attribution",
-      "slug": "get-active-billing-dimensions-for-cost-attribution",
-      "menuOrder": 11,
-      "versions": [
-        "v2"
-      ],
-      "method": "GET"
-    },
-    {
       "operationId": "GetUsageIndexedSpans",
       "summary": "Get hourly usage for indexed spans",
       "slug": "get-hourly-usage-for-indexed-spans",
       "menuOrder": 11,
       "versions": [
         "v1"
-      ],
-      "method": "GET"
-    },
-    {
-      "operationId": "GetBillingDimensionMapping",
-      "summary": "Get billing dimension mapping for usage endpoints",
-      "slug": "get-billing-dimension-mapping-for-usage-endpoints",
-      "menuOrder": 12,
-      "versions": [
-        "v2"
       ],
       "method": "GET"
     },

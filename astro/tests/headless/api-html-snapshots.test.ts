@@ -1,16 +1,30 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
+import preactRenderer from '@astrojs/preact/server.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { format as prettierFormat } from 'prettier';
 
+import IndexPage from '../../src/pages/[...lang]/api/latest/index.astro';
+import UsingTheApiPage from '../../src/pages/[...lang]/api/latest/using-the-api.astro';
+import RateLimitsPage from '../../src/pages/[...lang]/api/latest/rate-limits.astro';
+import ScopesPage from '../../src/pages/[...lang]/api/latest/scopes.astro';
+import CategoryPage from '../../src/pages/[...lang]/api/latest/[category].astro';
+import OperationPage from '../../src/pages/[...lang]/api/latest/[category]/[operation].astro';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DIST = path.resolve(__dirname, '../../dist');
 const SNAPSHOT_DIR = path.join(__dirname, 'api-html-snapshots');
+const BASE_URL = 'http://localhost:4321';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PageComponent = any;
 
 interface AuditPage {
   name: string;
-  url: string;
+  component: PageComponent;
+  params: Record<string, string | undefined>;
+  urlPath: string;
 }
 
 /**
@@ -18,49 +32,45 @@ interface AuditPage {
  * variation. Static pages and category landing pages are sampled at
  * the page level; representative operation pages exercise the per-op
  * route added by the shorter-API-pages migration.
+ *
+ * Pages render via AstroContainer against the frozen fixture in
+ * tests/fixtures/api/ (wired by the frozen-api-spec plugin in
+ * vitest.unit.config.ts), so snapshots are stable across live spec updates.
  */
 const AUDIT_PAGES: AuditPage[] = [
   // 1-4: Static pages (no operations)
-  { name: '01-api-latest-index', url: '/api/latest/' },
-  { name: '02-using-the-api', url: '/api/latest/using-the-api/' },
-  { name: '03-rate-limits', url: '/api/latest/rate-limits/' },
-  { name: '04-scopes', url: '/api/latest/scopes/' },
+  { name: '01-api-latest-index', component: IndexPage, params: {}, urlPath: '/api/latest/' },
+  { name: '02-using-the-api', component: UsingTheApiPage, params: {}, urlPath: '/api/latest/using-the-api/' },
+  { name: '03-rate-limits', component: RateLimitsPage, params: {}, urlPath: '/api/latest/rate-limits/' },
+  { name: '04-scopes', component: ScopesPage, params: {}, urlPath: '/api/latest/scopes/' },
 
   // 5-12: One landing page + one representative operation per dynamic category.
-  // Operation choice per category captures a meaningful variant (deprecated,
-  // unstable, mixed v1+v2, etc.) so a regression in any rendering path shows
-  // up in at least one operation snapshot.
-  { name: '05-authentication-landing', url: '/api/latest/authentication/' },
-  { name: '05-authentication-validate-api-key', url: '/api/latest/authentication/validate-api-key/' },
+  { name: '05-authentication-landing', component: CategoryPage, params: { category: 'authentication' }, urlPath: '/api/latest/authentication/' },
+  { name: '05-authentication-validate-api-key', component: OperationPage, params: { category: 'authentication', operation: 'validate-api-key' }, urlPath: '/api/latest/authentication/validate-api-key/' },
 
-  { name: '06-dashboards-landing', url: '/api/latest/dashboards/' },
-  { name: '06-dashboards-get-a-dashboard', url: '/api/latest/dashboards/get-a-dashboard/' },
+  { name: '06-dashboards-landing', component: CategoryPage, params: { category: 'dashboards' }, urlPath: '/api/latest/dashboards/' },
+  { name: '06-dashboards-get-a-dashboard', component: OperationPage, params: { category: 'dashboards', operation: 'get-a-dashboard' }, urlPath: '/api/latest/dashboards/get-a-dashboard/' },
 
-  { name: '07-incidents-landing', url: '/api/latest/incidents/' },
-  { name: '07-incidents-create-an-incident', url: '/api/latest/incidents/create-an-incident/' },
+  { name: '07-incidents-landing', component: CategoryPage, params: { category: 'incidents' }, urlPath: '/api/latest/incidents/' },
+  { name: '07-incidents-create-an-incident', component: OperationPage, params: { category: 'incidents', operation: 'create-an-incident' }, urlPath: '/api/latest/incidents/create-an-incident/' },
 
-  // aws-integration: multi-version case — v1 and v2 of "List all AWS
-  // integrations" share one page that renders both as version-tab pills.
-  { name: '08-aws-integration-landing', url: '/api/latest/aws-integration/' },
-  { name: '08-aws-integration-list', url: '/api/latest/aws-integration/list-all-aws-integrations/' },
+  // aws-integration: multi-version case — v1 and v2 share one page.
+  { name: '08-aws-integration-landing', component: CategoryPage, params: { category: 'aws-integration' }, urlPath: '/api/latest/aws-integration/' },
+  { name: '08-aws-integration-list', component: OperationPage, params: { category: 'aws-integration', operation: 'list-all-aws-integrations' }, urlPath: '/api/latest/aws-integration/list-all-aws-integrations/' },
 
-  { name: '09-monitors-landing', url: '/api/latest/monitors/' },
-  { name: '09-monitors-create-a-monitor', url: '/api/latest/monitors/create-a-monitor/' },
+  { name: '09-monitors-landing', component: CategoryPage, params: { category: 'monitors' }, urlPath: '/api/latest/monitors/' },
+  { name: '09-monitors-create-a-monitor', component: OperationPage, params: { category: 'monitors', operation: 'create-a-monitor' }, urlPath: '/api/latest/monitors/create-a-monitor/' },
 
   // dashboard-lists: category-level deprecation (with endpoints).
-  { name: '10-dashboard-lists-landing', url: '/api/latest/dashboard-lists/' },
-  { name: '10-dashboard-lists-get-all-dashboard-lists', url: '/api/latest/dashboard-lists/get-all-dashboard-lists/' },
+  { name: '10-dashboard-lists-landing', component: CategoryPage, params: { category: 'dashboard-lists' }, urlPath: '/api/latest/dashboard-lists/' },
+  { name: '10-dashboard-lists-get-all-dashboard-lists', component: OperationPage, params: { category: 'dashboard-lists', operation: 'get-all-dashboard-lists' }, urlPath: '/api/latest/dashboard-lists/get-all-dashboard-lists/' },
 
   // screenboards: empty deprecated category (no operations to sample).
-  { name: '11-screenboards-landing', url: '/api/latest/screenboards/' },
+  { name: '11-screenboards-landing', component: CategoryPage, params: { category: 'screenboards' }, urlPath: '/api/latest/screenboards/' },
 
-  { name: '12-usage-metering-landing', url: '/api/latest/usage-metering/' },
-  { name: '12-usage-metering-get-hourly-usage-for-lambda', url: '/api/latest/usage-metering/get-hourly-usage-for-lambda/' },
+  { name: '12-usage-metering-landing', component: CategoryPage, params: { category: 'usage-metering' }, urlPath: '/api/latest/usage-metering/' },
+  { name: '12-usage-metering-get-hourly-usage-for-lambda', component: OperationPage, params: { category: 'usage-metering', operation: 'get-hourly-usage-for-lambda' }, urlPath: '/api/latest/usage-metering/get-hourly-usage-for-lambda/' },
 ];
-
-function distFile(urlPath: string): string {
-  return path.join(DIST, urlPath.replace(/^\//, ''), 'index.html');
-}
 
 /**
  * Slice the document down to its `<main>` element. The surrounding chrome
@@ -74,7 +84,7 @@ function extractMain(html: string): string {
   const endTag = '</main>';
   const end = html.lastIndexOf(endTag);
   if (start === -1 || end === -1 || end < start) {
-    throw new Error('Could not locate <main>...</main> in built page');
+    throw new Error('Could not locate <main>...</main> in rendered page');
   }
   return html.slice(start, end + endTag.length);
 }
@@ -112,19 +122,10 @@ async function normalize(html: string): Promise<string> {
     (_m, before, raw, after) => `${before}${canonicalize(raw)}${after}`,
   );
 
-  // Component-generated IDs that include an 8-hex-char tail, e.g.:
-  //   id="api-response-accf4936"   id="api-response-accf4936-panel-0"
-  //   aria-controls="..."   data-foo="..."
+  // Component-generated IDs that include an 8-hex-char tail
   out = out.replace(/\b[a-f0-9]{8}\b/g, (raw) => canonicalize(raw));
 
-  // CSS-module-hashed class names from Vite, of the form
-  // `_<original-class>_<5-or-6-char-hash>_<line-or-counter>`. The leading
-  // underscore is Vite's convention for module-hashed classes; the trailing
-  // hash+counter both shift when the source CSS module is edited, even when
-  // the resulting markup is semantically identical. Collapse them to a
-  // stable `_<class>_MOD` form so unrelated CSS edits don't churn snapshots.
-  // The original static BEM class (no leading underscore) is emitted alongside
-  // by `classListFactory`, so the readable class name is preserved either way.
+  // CSS-module-hashed class names from Vite
   out = out.replace(
     /\b_([\w-]+?)_[a-z0-9]{5,6}_\d+\b/g,
     (_m, name) => `_${name}_MOD`,
@@ -137,32 +138,29 @@ async function normalize(html: string): Promise<string> {
 }
 
 describe('API page HTML snapshots', () => {
-  beforeAll(() => {
-    if (!existsSync(DIST)) {
-      throw new Error(
-        `dist/ not found at ${DIST}. Run \`npm run build\` before running this test suite.`,
-      );
-    }
+  let container: Awaited<ReturnType<typeof AstroContainer.create>>;
+
+  beforeAll(async () => {
+    container = await AstroContainer.create();
+    container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
   });
 
   for (const page of AUDIT_PAGES) {
-    // Some operation pages (notably dashboards/get-a-dashboard) generate
-    // very large HTML documents; Prettier's HTML formatter on those takes
-    // well past the default 5s timeout.
+    // Rendering complex pages and running Prettier can exceed the default 5s
+    // timeout — especially for operation pages with large schema tables.
     it(
-      `${page.name} (${page.url}) matches snapshot`,
+      `${page.name} (${page.urlPath}) matches snapshot`,
       async () => {
-        const filepath = distFile(page.url);
-        if (!existsSync(filepath)) {
-          throw new Error(`Built page not found at ${filepath}`);
-        }
-        const html = readFileSync(filepath, 'utf-8');
+        const html = await container.renderToString(page.component, {
+          params: page.params,
+          request: new Request(`${BASE_URL}${page.urlPath}`),
+        });
         const normalized = await normalize(extractMain(html));
         await expect(normalized).toMatchFileSnapshot(
           path.join(SNAPSHOT_DIR, `${page.name}.html`),
         );
       },
-      30_000,
+      60_000,
     );
   }
 });
