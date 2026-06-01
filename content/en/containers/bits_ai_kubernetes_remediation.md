@@ -51,7 +51,7 @@ When a pod is terminated because the memory usage exceeded its limit, you may be
 2. Adjust your limit so that it is higher than what your container normally uses.
 3. Click {{< ui >}}Fix with Bits AI{{< /ui >}}.
 4. On the next page, select the repository where your deployment is defined, and review the proposed changes. Click {{< ui >}}Fix with Bits{{< /ui >}} to create a pull request.
-5. You are redirected to a Bits [Code Session][3], where you can verify that the Bits AI Dev Agent identified the specific configuration file where your memory limits are defined. Click {{< ui >}}Create Pull Request{{< /ui >}} to initiate the creation of the pull request.
+5. You are redirected to a Bits [Code Session][3], where you can verify that Bits Code identified the specific configuration file where your memory limits are defined. Click {{< ui >}}Create Pull Request{{< /ui >}} to initiate the creation of the pull request.
 6. Click {{< ui >}}View Pull Request{{< /ui >}} to view the pull request in GitHub.
 {{% /collapse-content %}}
 

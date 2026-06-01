@@ -5,10 +5,6 @@ aliases:
   - /cloudprem/operate/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Manage your BYOC Logs deployment with guides on sizing, monitoring, and troubleshooting.

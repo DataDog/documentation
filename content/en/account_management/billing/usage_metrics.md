@@ -32,6 +32,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`, `datadog.estimated_usage.fargate_tasks.by_tag`  | Unique Fargate Tasks seen in the last 5 minutes.<br/><br/>**Note**: This metric tracks both ECS Fargate and EKS Fargate usage. |
 | Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
+| (Preview) Indexed Custom Metric Points | `datadog.estimated_usage.metrics.points.indexed`, `datadog.estimated_usage.metrics.points.indexed.by_tag`, `datadog.estimated_usage.metrics.points.indexed.hourly` | Estimated indexed points for custom metrics. |
+| (Preview) Ingested Custom Metric Points | `datadog.estimated_usage.metrics.points.ingested`, `datadog.estimated_usage.metrics.points.ingested.hourly` | Estimated ingesteds usage for custom metrics. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
 | Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |

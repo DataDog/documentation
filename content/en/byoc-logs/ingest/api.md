@@ -13,10 +13,6 @@ further_reading:
   text: "Observability Pipelines Integration"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 You can send logs to BYOC Logs using direct REST API calls. This method is useful for custom integrations or scripts that can't use a Datadog Agent or Observability Pipelines.
