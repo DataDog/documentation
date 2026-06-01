@@ -8,6 +8,7 @@ algolia:
   tags: ['proxies','tracing proxies','proxy']
 ---
 
+hello
 You can set up tracing to include collecting trace information about proxies.
 
 {{< card-grid card_width="170px" >}}
