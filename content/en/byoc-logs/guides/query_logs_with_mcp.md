@@ -127,7 +127,7 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/
+[1]: /mcp_server/
 [2]: https://app.datadoghq.com/logs
 [3]: https://app.datadoghq.com/byoc-logs
 [4]: /logs/explorer/search_syntax/

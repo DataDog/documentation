@@ -2,10 +2,10 @@
 title: Security MCP Tools
 description: Use AI agents to investigate security signals and analyze security findings with the Datadog MCP Server's security toolset.
 further_reading:
-- link: "bits_ai/mcp_server/setup"
+- link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server Overview"
 - link: "security/threats/security_signals/"
@@ -78,7 +78,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/
+[1]: /mcp_server/
 [2]: https://modelcontextprotocol.io/
 [3]: /getting_started/site/
-[4]: /bits_ai/mcp_server/setup/
+[4]: /mcp_server/setup/
