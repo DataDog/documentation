@@ -4,9 +4,9 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/software_catalog/'
+    - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
-      text: 'Software Catalog'
+      text: 'Catalog'
 aliases:
   - /data_streams/ruby
 ---

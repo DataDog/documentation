@@ -41,17 +41,32 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 
 ### Client-side SDKs
 
-{{< partial name="feature_flags/feature_flags_client.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
+  {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+  {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
+  {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
+  {{< image-card href="/feature_flags/client/reactnative/" src="integrations_logos/react-native_large.svg" alt="React Native" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/tv_os_large.svg" alt="tvOS" >}}
+  {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
+{{< /card-grid >}}
 
 ### Server-side SDKs
 
-{{< partial name="feature_flags/feature_flags_server.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+  {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 
 ## Configure your environments
 
-Your organization likely already has pre-configured environments for Development, Staging, and Production. If you need to configure these or any other environments, navigate to the [{{< ui >}}Environments{{< /ui >}}][3] page to create tag queries for each environment. You can also identify which environment should be considered a Production environment.
-
-{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list" style="width:100%;" >}}
+Your organization likely already has pre-configured environments for Development, Staging, and Production. For details on environment queries, production marking, and managing environments, see [Environments][4].
 
 ## Create your first feature flag
 
@@ -86,19 +101,15 @@ await OpenFeature.setProviderAndWait(provider);
 
 <div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
 
-More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
+More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][3].
 
 ### Step 2: Create a feature flag
 
 Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the following:
 
-- {{< ui >}}Name and key{{< /ui >}}: The flag's display name and the key referenced in code
-- {{< ui >}}Variant type{{< /ui >}}: The data type for the flag variants (Boolean, string, integer, number, or JSON)
-
-    **Note**: The {{< ui >}}flag key{{< /ui >}} and {{< ui >}}variant type{{< /ui >}} cannot be modified after creation.
-
-- {{< ui >}}Variant values{{< /ui >}}: The possible values the flag can return (you can add these later)
-- {{< ui >}}Distribution channels{{< /ui >}}: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
+- **Name and key**: The flag's display name and the key referenced in code
+- **Variant type** and **variant values**: See [Variants and Flag Types][5]
+- **Distribution channels**: See [Distribution Channels][6]
 
 <div class="alert alert-warning">
   {{< ui >}}Flag keys{{< /ui >}}, {{< ui >}}variant keys{{< /ui >}}, and {{< ui >}}variant values{{< /ui >}} should be considered public when sent to client SDKs.
@@ -138,27 +149,15 @@ After you've completed this step, redeploy the application to pick up these chan
 
 ### Step 4: Define targeting rules and enable the feature flag
 
-Now that the application is ready to check the value of your flag, you can start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature.
-
-Go to {{< ui >}}Feature Flags{{< /ui >}}, select your flag, select the environment whose rules you want to modify, and click {{< ui >}}Edit Targeting Rules{{< /ui >}}.
-
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules & Rollouts" style="width:100%;" >}}
-
-### Step 5: Publish the rules in your environments
-
-After saving changes to the targeting rules, publish those rules by enabling your flag in the environment of your choice.
+Configure [targeting rules][7] to define which subjects receive each variant. After saving your rules, enable the flag in your chosen environment.
 
 <div class="alert alert-info">
-As a general best practice, changes should be rolled out in a Staging environment before rolling out in Production.
+As a general best practice, roll out changes in a Staging environment before Production.
 </div>
 
-Toggle your selected environment to {{< ui >}}Enabled{{< /ui >}}.
+For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
-{{< img src="getting_started/feature_flags/publish-targeting-rules.png" alt="Publish targeting rules" style="width:100%;" >}}
-
-The flag serves your targeting rules in this environment. You can continue to edit these targeting rules to control where the variants are served.
-
-### Step 6: Monitor your rollout
+### Step 5: Monitor your rollout
 
 Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-Time Metric Overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
 
@@ -170,5 +169,9 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/settings/environments
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[3]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[4]: /feature_flags/concepts/environments/
+[5]: /feature_flags/concepts/variants_and_flag_types/
+[6]: /feature_flags/concepts/distribution_channels/
+[7]: /feature_flags/concepts/targeting_rules/
+[8]: /feature_flags/concepts/traffic_splitting/

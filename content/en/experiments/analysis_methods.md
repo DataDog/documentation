@@ -21,10 +21,9 @@ Datadog Experiments provides several methods for estimating experiment lift and 
 | --- | --- | --- | --- |
 | [**Fixed-sample frequentist**](#fixed-sample-frequentist-analysis) | Choose a sample size or duration before launching the experiment, wait until that point, then make a decision. | Provides the most power for a fixed sample size. | Requires an upfront plan and can lose its statistical guarantees if you stop early or extend the experiment based on observed results. |
 | [**Sequential frequentist**](#sequential-frequentist-analysis) | Monitor results while the experiment runs and make a decision when you are ready. | Supports flexible decision-making while controlling the false positive rate. | Has less power than fixed-sample analysis, so it can require more samples to detect the same effect. |
-| [**Sequential hybrid**](#sequential-hybrid-analysis) | Use sequential analysis before a pre-planned end date, then switch to a fixed sample interval on the end date if the experiment was not stopped early. | Combines early stopping with stronger power at the end of a planned experiment. | Requires an end date, and intervals are wider than fixed-sample intervals. |
 | [**Bayesian**](#bayesian-analysis) | Combine experiment data with a prior belief about plausible lifts, then make decisions from the posterior distribution. | Supports nuanced decisions, especially when sample sizes are small. | Requires trust in the prior and alignment on how to interpret probabilities. |
 
-Sequential frequentist analysis is the default because it lets you monitor results and make ship or rollback decisions without inflating the false positive rate. Fixed-sample analysis can be more powerful when everything goes according to plan, but it requires a stricter decision process. Sequential hybrid and Bayesian methods support more specialized decision-making workflows.
+Sequential frequentist analysis is the default because it lets you monitor results and make ship or rollback decisions without inflating the false positive rate. Fixed-sample analysis can be more powerful when everything goes according to plan, but it requires a stricter decision process. Bayesian analysis supports more specialized decision-making workflows.
 
 Configure the analysis method in the experiment's [statistical analysis plan][1].
 
@@ -50,14 +49,6 @@ Use sequential analysis when flexibility matters more than maximizing power for 
 - Stop early for large improvements or degradations.
 - Continue collecting data without invalidating the analysis.
 - Avoid restarting the experiment when the original sample size assumptions were wrong.
-
-## Sequential hybrid analysis
-
-Sequential hybrid analysis combines sequential and fixed-sample approaches. While the experiment is running, Datadog uses a sequential method so you can monitor results and stop early when needed. At the planned end date, Datadog switches to a fixed-sample interval, which gives the final analysis more power than a purely sequential method.
-
-The tradeoff is that sequential hybrid analysis requires a planned end date, and the intervals are slightly wider than fixed-sample intervals. This protects the statistical guarantees across both phases of the analysis.
-
-Use sequential hybrid analysis when you want to stop early for clear regressions, but prefer to wait until the planned end date before declaring a winning variant. In that workflow, teams often use the sequential phase to protect users from harmful variants and the fixed-sample phase to make final shipping decisions with more power.
 
 ## Bayesian analysis
 

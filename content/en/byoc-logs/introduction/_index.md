@@ -5,10 +5,6 @@ aliases:
   - /cloudprem/introduction/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 BYOC Logs is Datadog's log management solution that runs in your own infrastructure. It indexes and stores logs in your object storage, executes search and analytics queries, and connects to the Datadog UI for a fully integrated experience. BYOC Logs is designed for organizations with specific requirements:
@@ -22,7 +18,7 @@ Here is a high-level overview of how BYOC Logs works:
 The diagram illustrates the BYOC Logs hybrid architecture, highlighting how data is processed and stored within your infrastructure:
 
 *   **Ingestion**: Logs are collected from Datadog Agents and other sources using standard protocols.
-*   **Your Infrastructure**: The BYOC Logs platform runs entirely inside your infrastructure. It processes and stores logs in your own storage (S3, Azure Blob, MinIO).
+*   **Your Infrastructure**: The BYOC Logs platform runs entirely inside your infrastructure. It processes and stores logs in your own storage (S3, Azure Blob Storage, Google Cloud Storage, MinIO, Ceph, or any S3-compatible storage).
 *   **Datadog SaaS**: The Datadog platform is BYOC Logs' Control Plane. It hosts the Datadog UI and communicates with BYOC Logs through a secure connection to send log queries and receive results.
 
 {{< whatsnext desc="Explore BYOC Logs' architecture and capabilities:">}}
@@ -35,7 +31,7 @@ The diagram illustrates the BYOC Logs hybrid architecture, highlighting how data
 
 {{< whatsnext desc="Ready to deploy BYOC Logs? Follow these guides:">}}
   {{< nextlink href="/byoc-logs/quickstart/" >}}Quickstart - Run BYOC Logs locally in 5 minutes{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/install/" >}}Installation - Deploy BYOC Logs on AWS, Azure, or custom Kubernetes{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/install/" >}}Installation - Deploy BYOC Logs on AWS, GCP, Azure, or custom Kubernetes{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to BYOC Logs{{< /nextlink >}}
 {{< /whatsnext >}}
 
