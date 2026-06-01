@@ -129,32 +129,7 @@ Without explicit `codeLocations`, endpoints may not merge correctly with data fr
 
 ## Processing sensitive data
 
-[App and API Protection][4] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
-
-The matching occurs within your application, and none of the sensitive data is sent to Datadog.
-
-### Supported data types
-
-To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
-
-### Create API data scanners
-
-By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides API data scanners to define custom scanner data patterns beyond the defaults and improve visibility into the sensitive data of your API traffic. 
-
-In an API data scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
-
-When the scanner detects sensitive data, it tags the API endpoint with the category and type and displays it in [API Endpoints][1].
-
-To create an API data scanner and view its results, do the following:
-
-1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
-2. Click **New Scanner**.
-3. In **Select your scanner tags**, define the category and type to classify the sensitive data. The scanner tags API endpoints with the format `category:type`.
-4. In **Define conditions on JSON keys and values**, define the JSON key or value conditions to trigger the scanner.
-5. Click **Save Scanner**. The scanner is enabled by default.
-6. To view the results of the scanner, go to App and API Protection [API Endpoints][1].
-7. In the **Schema Sensitive Data** facet, the category and type of your custom scanner is listed in the format `category:type`. Custom scanner `category:type` tags are also visible in the **Sensitive Data** column of the explorer.
-
+App and API Protection detects and classifies sensitive data processed by your endpoints, tagging each endpoint with the category and type of data found. To see which endpoints process sensitive data and to create custom API data scanners, see [Sensitive Data][16].
 
 ## Business logic
 
@@ -171,7 +146,7 @@ Datadog marks an endpoint as public if the client IP address is outside these ra
 - 192.168.0.0/16
 - 169.254.1.0/16
 
-See [Configuring a client IP header][15] for more information on the required library configuration.
+See [Configuring a client IP header][14] for more information on the required library configuration.
 
 ## Endpoint authentication
 
@@ -180,7 +155,7 @@ Authentication is determined by:
 - The presence of `Authorization`, `Token` or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
-- Custom [Endpoint Tagging][16] rules that you configured
+- Custom [Endpoint Tagging][15] rules that you configured
 
 
 When the type of authentication is available, Datadog reports it in a header through the **Authentication Method** facet.
@@ -196,7 +171,7 @@ When the type of authentication is available, Datadog reports it in a header thr
 
 ### Custom Authentication support
 
-Custom authentication detection is possible by configuring [Endpoint Tagging Rules][16]. These rules require the following minimum tracer versions:
+Custom authentication detection is possible by configuring [Endpoint Tagging Rules][15]. These rules require the following minimum tracer versions:
 
 |Technology| Minimum tracer version |
 |----------|------------------------|
@@ -221,6 +196,6 @@ Custom authentication detection is possible by configuring [Endpoint Tagging Rul
 [11]: /security/application_security/api_posture/endpoint_scanning/
 [12]: /integrations/guide/source-code-integration/
 [13]: /internal_developer_portal/catalog/entity_model/
-[14]: https://app.datadoghq.com/security/appsec/policies/scanners
-[15]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
-[16]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
+[14]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
+[15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
+[16]: /security/application_security/api_posture/sensitive_data/
