@@ -10,7 +10,8 @@
     "preview:proxied": "PROXIED=1 astro preview --port 4321",
     "test": "vitest run",
     "generate-fixture": "node scripts/generate-test-fixture.mjs",
-    "test:browser": "SKIP_TRANSLATIONS=true playwright test --grep-invert i18n",
+    "test:browser": "USE_DEV_SERVER=true playwright test",
+    "test:browser:strict": "SKIP_TRANSLATIONS=true playwright test --grep-invert i18n",
     "test:browser:i18n": "playwright test --grep i18n"
   },
   "dependencies": {

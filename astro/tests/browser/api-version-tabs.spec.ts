@@ -36,6 +36,7 @@ test.describe('API operation page version tabs', () => {
     await page.goto(MULTI_VERSION_URL);
 
     const nav = versionTabsNav(page, 'list-all-aws-integrations');
+    await expect(nav).toHaveAttribute('data-hydrated', 'true');
     const v1Button = nav.locator('.tabs__button', { hasText: /^v1$/ });
     await v1Button.click();
 

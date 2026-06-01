@@ -16,6 +16,7 @@ test.describe('Tabs component', () => {
 
   test('pills layout switches tabs on click', async ({ page }) => {
     const pillsTabs = page.locator('.tabs.tabs--pills');
+    await expect(pillsTabs.locator('[role="tablist"][data-hydrated="true"]')).toBeVisible();
     const tab3 = pillsTabs.locator('.tabs__button[data-tab-index="2"]');
     await tab3.click();
 
@@ -40,6 +41,7 @@ test.describe('Tabs component', () => {
     const defaultTabs = page
       .locator('.tabs:not(.tabs--pills)')
       .first();
+    await expect(defaultTabs.locator('[role="tablist"][data-hydrated="true"]')).toBeVisible();
     await defaultTabs.locator('.tabs__button[data-tab-index="2"]').click();
     await expect(defaultTabs.locator('.tabs__button[data-tab-index="2"]')).toHaveAttribute(
       'aria-selected',
