@@ -18,7 +18,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities, categories, and platforms. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and categories. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
 
@@ -92,8 +92,8 @@ The `iac` key supports the following fields:
 
 | **Property** | **Type** | **Description** |
 | --- | --- | --- |
-| `ignore-rules` | Array | A list of rule IDs that will not be applied in scans. |
-| `use-rules` | Array | A list of rule IDs that will be applied in scans. If specified, only these rules will be used (unless other configuration causes them to be ignored). |
+| `ignore-rules` | Array | A list of rule IDs that are ignored in scans. |
+| `use-rules` | Array | A list of rule IDs that are applied in scans. If specified, _only_ these rules are applied in scans. `ignore-rules` takes precedence over `use-rules` (for example, a rule that is in both arrays is ignored). |
 | `global-config` | Object | Global settings for the IaC scanner. |
 | `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. |
 
