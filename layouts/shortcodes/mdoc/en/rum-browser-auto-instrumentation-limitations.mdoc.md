@@ -1,4 +1,4 @@
-## Limitations
+#### Limitations
 
 Auto-instrumentation for this server has the following limitations. If your use case requires more control, use [client-side instrumentation][101] instead.
 

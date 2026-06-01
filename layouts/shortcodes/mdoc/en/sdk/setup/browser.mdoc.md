@@ -11,19 +11,7 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 Select a setup method based on how much control you need over your instrumentation:
 
-{% collapse-content title="Manual client-side setup" expanded: true level="h4" %}
-Manually add the SDK to your application code. Best for full control over initialization and configuration.
-{% /collapse-content %}
-
-{% collapse-content title="Server-side auto-instrumentation" expanded: true level="h4" %}
-Automatically inject the RUM SDK into HTML responses through your web server or proxy. Best when you can't modify application code directly.
-{% /collapse-content %}
-
-{% collapse-content title="Agentic Onboarding (in Preview)" expanded: true level="h4" %}
-Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt. Best for getting started quickly.
-{% /collapse-content %}
-
-### Manual client-side setup
+### Option 1: Manual client-side setup
 
 {% stepper %}
 
@@ -324,7 +312,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% /stepper %}
 
-### Server-side auto-instrumentation
+### Option 2: Server-side auto-instrumentation
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
@@ -344,17 +332,39 @@ Select a platform to start collecting RUM data on your application:
 To request support for a web server that is not listed here, [fill out this form](https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/).
 {% /alert %}
 
-{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/java" %}Java{% /nextlink %}
-{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/nginx" %}NGINX{% /nextlink %}
-{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/windows_iis" %}Windows IIS{% /nextlink %}
-{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/apache" %}Apache{% /nextlink %}
-{% nextlink href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm" %}IBM HTTP Server{% /nextlink %}
+<div class="card-grid" style="--card-min-width: 130px;">
+  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/java">
+    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+      <img src="/integrations_logos/java_servlet_large.svg" class="img-fluid" alt="java_servlet" width="150">
+    </div>
+  </a>
+  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/nginx">
+    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+      <img src="/integrations_logos/nginx_large.svg" class="img-fluid" alt="nginx" width="150">
+    </div>
+  </a>
+  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/windows_iis">
+    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+      <img src="/integrations_logos/windows_iis_large.svg" class="img-fluid" alt="windowsiis" width="150">
+    </div>
+  </a>
+  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/apache">
+    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+      <img src="/integrations_logos/apache_large.svg" class="img-fluid" alt="apache" width="150">
+    </div>
+  </a>
+  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm">
+    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+      <img src="/integrations_logos/ibm_http_large.svg" class="img-fluid" alt="ibm" width="150">
+    </div>
+  </a>
+</div>
 
 {% partial file="rum-browser-auto-instrumentation-limitations.mdoc.md" /%}
 
-### Agentic onboarding
+### Option 3: Agentic Onboarding
 
-See [Agentic Onboarding][13] for more information.
+{% partial file="agentic-onboarding/setup.mdoc.md" /%}
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
