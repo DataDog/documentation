@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, and GitHub Copilot. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -44,6 +44,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
+| GitHub Copilot | [GitHub Copilot][] |
 
 ## AI cost summary
 
@@ -141,3 +142,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [12]: /cloud_cost_management/allocation/custom_allocation_rules/?tab=even
 [13]: /cloud_cost_management/allocation/tag_pipelines
 [14]: /cloud_cost_management/reporting
+[15]: /cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
