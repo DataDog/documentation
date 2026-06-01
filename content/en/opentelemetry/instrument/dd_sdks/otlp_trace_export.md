@@ -28,39 +28,29 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 {{< programming-lang-wrapper langs="java,python,nodejs,go,.net" >}}
 
 {{< programming-lang lang="java" >}}
-| | |
-|---|---|
-| **Minimum version** | v1.62.0 |
-| **Supported protocols** | `http/protobuf` (default), `grpc` |
+- **Minimum version**: v1.62.0
+- **Supported protocols**: `http/protobuf` (default), `grpc`
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-| | |
-|---|---|
-| **Minimum version** | v4.8.0 |
-| **Supported protocols** | `http/json` |
+- **Minimum version**: v4.8.0
+- **Supported protocols**: `http/json`
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
-| | |
-|---|---|
-| **Minimum version** | v5.98.0 |
-| **Supported protocols** | `http/json` |
+- **Minimum version**: v5.98.0
+- **Supported protocols**: `http/json`
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-| | |
-|---|---|
-| **Minimum version** | v2.8.0 |
-| **Supported protocols** | `http/protobuf` |
+- **Minimum version**: v2.8.0
+- **Supported protocols**: `http/protobuf`
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".net" >}}
-| | |
-|---|---|
-| **Minimum version** | v3.41.0 |
-| **Supported protocols** | `http/json` (default), `http/protobuf` (v3.45.0+) |
-| **Requirements** | .NET 6 or later |
+- **Minimum version**: v3.41.0
+- **Supported protocols**: `http/json` (default), `http/protobuf` (v3.45.0+)
+- **Requirements**: .NET 6 or later
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
@@ -69,7 +59,7 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 To export traces in OTLP format, set the following environment variables on the instrumented service:
 
-```
+```shell
 OTEL_TRACES_EXPORTER=otlp
 DD_TRACE_OTEL_ENABLED=true
 ```
