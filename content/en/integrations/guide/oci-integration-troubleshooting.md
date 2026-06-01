@@ -18,9 +18,26 @@ See configuration issues with your OCI integration on the **Issues** tab of the 
 
 ## Invalid Datadog API or app key credentials
 
-This occurs when Datadog API or App keys configured in the OCI integration tile have expired, or when OCI credentials used by Datadog are incorrect. To remediate this, reapply the existing Datadog integration ORM Stack in your OCI tenancy. 
+This occurs when Datadog API or app keys configured in the OCI integration tile have expired or are invalid. To remediate this, update the key in your integration deployment and reapply it.
 
-**Note**: Do not modify the stack before reapplying it.
+{{< tabs >}}
+{{% tab "QuickStart (ORM stack)" %}}
+
+1. Navigate to [Oracle Resource Manager stacks][6] and locate your Datadog QuickStart stack.
+2. Click **Edit** on the stack.
+3. Click **Next** to reach the **Configure Variables** page.
+4. Update the **Datadog API Key** and/or **Datadog Application Key** values with valid credentials.
+5. Click **Next**, then click **Save changes**.
+6. Click **Apply** to apply the updated configuration.
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+1. Update the `datadog_api_key` and/or `datadog_app_key` values in your Terraform `.tf` file with valid credentials.
+2. Run `terraform apply` to apply the updated configuration.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Required OCI IAM permissions are missing
 
@@ -45,3 +62,4 @@ Still need help? Contact [Datadog support][3].
 [3]: /help/
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
+[6]: https://cloud.oracle.com/resourcemanager/stacks
