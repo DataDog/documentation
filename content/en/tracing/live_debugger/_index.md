@@ -153,7 +153,7 @@ Live Debugger data might contain sensitive information, especially when using th
 
 ### Debug with Bits
 
-Instead of creating and managing logpoints manually, you can investigate running services through a conversational interface. With [Debug with Bits][23], you describe what you want to investigate, and Bits Code places logpoints, retrieves variable snapshots, and helps interpret the results.
+[Debug with Bits][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 ## Impact on performance and billing
 

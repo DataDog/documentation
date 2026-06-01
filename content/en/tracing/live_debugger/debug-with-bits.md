@@ -19,7 +19,7 @@ Debug with Bits is in Preview. Request access to join the waiting list.
 
 ## Overview
 
-Debug with Bits brings a conversational interface to Live Debugger for investigating running services through natural language. Describe what you want to investigate, and Bits places logpoints, retrieves variable snapshots, and interprets results. After Bits identifies a root cause, it can suggest code fixes based on its findings.
+Debug with Bits brings a conversational interface to Live Debugger for investigating running services through natural language. Describe what you want to investigate, and Bits places logpoints, retrieves variable snapshots, and interprets results. After Bits identifies a root cause, it can suggest code fixes.
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
@@ -61,10 +61,10 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
    - It configures and activates up to 5 logpoints at relevant code locations to capture the specific data it needs.
    - It retrieves and analyzes the logs and variable snapshots from the active logpoints to validate its hypothesis and formulate its response.
 
-1. Review the response from Bits and, optionally, explore the details of the logpoints, captured data, and any code fixes suggested. Reply to the chat to continue the investigation as needed.
+1. Review the response from Bits and, optionally, explore the details of the logpoints, captured data, and any code fixes suggested. Reply in the chat to continue the investigation as needed.
 1. To disable logpoints at any time, ask Bits or click the **Disable** button on an individual logpoint or the session.
 
-**Note**: Bits typically disables the logpoints it creates as soon as it has retrieved the data it needs. Logpoints also expire automatically after the configured time limit.
+**Note**: Bits typically disables the logpoints it creates as soon as it retrieves the data it needs. Logpoints also expire automatically after the configured time limit.
 
 ## Behavior and limitations
 
