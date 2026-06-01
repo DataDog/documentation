@@ -1243,18 +1243,18 @@ menu:
       parent: essentials_heading
       weight: 100000
     - name: MCP Server
-      url: bits_ai/mcp_server
+      url: mcp_server
       pre: bits-ai
       identifier: mcp_server
       parent: essentials_heading
       weight: 110000
     - name: Setup
-      url: bits_ai/mcp_server/setup
+      url: mcp_server/setup
       identifier: mcp_server_setup
       parent: mcp_server
       weight: 1
     - name: MCP Tools
-      url: bits_ai/mcp_server/tools
+      url: mcp_server/tools
       identifier: mcp_server_tools
       parent: mcp_server
       weight: 2

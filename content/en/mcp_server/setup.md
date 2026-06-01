@@ -1,6 +1,8 @@
 ---
 title: Set Up the Datadog MCP Server
 description: "Learn how to connect your AI agent to the Datadog MCP Server."
+aliases:
+- /bits_ai/mcp_server/setup/
 algolia:
   tags: ["mcp", "mcp server", "setup"]
   rank: 75
