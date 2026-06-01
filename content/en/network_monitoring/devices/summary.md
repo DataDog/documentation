@@ -26,7 +26,7 @@ The Network Device Monitoring (NDM) **Summary Page** is a command center for net
 
 ## Using the Summary Page
 
-The Summary Page is organized into sections that each cover a different aspect of your network's state and activity. Three of those sections — **Network health**, **Interface health**, and **Device health** — also report a health state to summarize what they're tracking:
+The Summary Page is organized into sections that each cover a different aspect of your network's state and activity. Three of those sections (**Network health**, **Interface health**, and **Device health**) also report a health state to summarize what they're tracking:
 
 | State | Meaning |
 |-------|---------|
@@ -45,7 +45,7 @@ The **Network health** section summarizes your overall network state.
 
 {{< img src="network_device_monitoring/summary/network_health.png" alt="The Network health section showing a Bits AI summary on the left and a topology view with health-coded nodes on the right." style="width:100%;" >}}
 
-A Bits AI summary explains the current state of your network, highlighting affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click **Chat with Bits Assistant** to ask follow-up questions.
+A Bits AI summary explains the current state of your network. It highlights affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click **Chat with Bits Assistant** to ask follow-up questions.
 
 Below the summary, a status panel shows the total device count broken down by status, the number of active monitor alerts and warnings, and the number of active issues. Click **View Health** to open the [Device Health][5] view.
 
