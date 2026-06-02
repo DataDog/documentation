@@ -101,7 +101,7 @@ Incident triggers can run a workflow automatically based on incident events, or 
 To add an incident trigger to your workflow:
 1. From the [Workflow creation page][6], scroll down to the Trigger options and click {{< ui >}}Incident{{< /ui >}}.
 1. Select the incident event type that should trigger your workflow, such as when an incident is declared or updated, or on a recurring schedule.
-   1. For a manual trigger, Workflows creates a handle which you can use in monitors or [incident notification rules][16].
+   For a manual trigger, Workflows creates a handle that you can use in monitors or [incident notification rules][16].
 1. Click {{< ui >}}Create{{< /ui >}}.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
