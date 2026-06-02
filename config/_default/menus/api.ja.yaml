@@ -9152,23 +9152,6 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
-    - name: Email Transport
-      url: /api/latest/email-transport/
-      identifier: email-transport
-      generated: true
-    - name: Ingest email transport webhook events
-      url: /api/latest/email-transport/ingest-email-transport-webhook-events/
-      identifier: email-transport-ingest-email-transport-webhook-events
-      parent: email-transport
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateEmailTransportWebhookIntake
-        unstable:
-          - v2
-        order: 1
     - name: Entity Risk Scores
       url: /api/latest/entity-risk-scores/
       identifier: entity-risk-scores
