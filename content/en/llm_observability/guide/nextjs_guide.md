@@ -52,18 +52,18 @@ export default nextConfig
 
 ### Initialization
 
-Either initialize the LLM Observability SDK via `NODE_OPTIONS` or, if not available, via `instrumentation.ts`.
+You can initialize the LLM Observability SDK using `NODE_OPTIONS` (recommended) or `instrumentation.ts`.
 
-#### Node Options initialization
-
+{{< tabs >}}
+{{% tab "Node options" %}}
 Set the following `NODE_OPTIONS` to allow `dd-trace` to instrument all relevant LLM client and agentic calls from your Next.js application:
 
 ```bash
 NODE_OPTIONS="--import dd-trace/initialize.mjs"
 ```
+{{% /tab %}}
 
-#### Instrumentation file initialization
-
+{{% tab "Instrumentation.ts" %}}
 **Note**: Utilizing `NODE_OPTIONS` is the preferred method for enabling auto-instrumentation for Next.js applications. Only apply `instrumentation.ts` changes when that is not available.
 
 Create an `instrumentation.ts` file in the root of your project (at the same level as `pages/` or `app/`):
@@ -80,6 +80,8 @@ export async function register() {
 ```
 
 The `NEXT_RUNTIME === 'nodejs'` check ensures the tracer is only initialized in the Node.js server runtime, not in the Edge runtime.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Set environment variables
 

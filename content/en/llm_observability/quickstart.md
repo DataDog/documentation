@@ -26,9 +26,9 @@ further_reading:
 
 This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
 
-### Try it out locally with `lapdog`
+### Try LLM Observability locally with lapdog
 
-To try LLM Observability locally, for free, follow the steps [here][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
+To try LLM Observability locally, for free, [follow the steps][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
 
 ### Prerequisites
 
