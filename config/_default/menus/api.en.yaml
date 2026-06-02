@@ -15184,6 +15184,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Insights
+      url: /api/latest/rum-insights/
+      identifier: rum-insights
+      generated: true
+    - name: Query aggregated waterfall
+      url: '#query-aggregated-waterfall'
+      identifier: rum-insights-query-aggregated-waterfall
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedWaterfall
+        unstable:
+          - v2
+        order: 1
+    - name: Query aggregated signals and problems
+      url: '#query-aggregated-signals-and-problems'
+      identifier: rum-insights-query-aggregated-signals-and-problems
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedSignalsProblems
+        unstable:
+          - v2
+        order: 3
+    - name: Query aggregated long tasks
+      url: '#query-aggregated-long-tasks'
+      identifier: rum-insights-query-aggregated-long-tasks
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedLongTasks
+        unstable:
+          - v2
+        order: 2
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
