@@ -27,7 +27,7 @@ Datadog provides a set of [Claude Code][1] skills that bring LLM Observability a
 | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
 | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your application to wire a real `task_fn` (no placeholder), auto-discovers credentials from `.env`, and accepts a free-form `--purpose` that directs evaluator selection |
 | `/llm-obs-eval-bootstrap` | Generate evaluator code from traces, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
-| `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, re-enter mid-flow with `--start-at`. |
+| `/llm-obs-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, re-enter mid-flow with `--start-at`. |
 
 The skills produce structured, actionable output — RCA reports with before/after fix proposals, generated evaluator code, experiment comparisons — that you can pass directly to a coding agent to apply fixes to your application. When Claude Code has access to your codebase, it can search for the relevant system prompt, tool definitions, or routing logic and propose specific diffs without leaving the session.
 
@@ -203,14 +203,13 @@ The first three modes share the same evaluator-proposal workflow and differ only
 Phase 1: Classify ml_app traces      → llm-obs-session-classify (ml_app mode)
 Phase 2: Root cause analysis         → llm-obs-trace-rca
 Phase 3: Bootstrap evaluators        → llm-obs-eval-bootstrap
-Phase 4: Create dataset from traces  → llm-obs-eval-bootstrap --emit-dataset
-Phase 5: Publish dataset             → LLMObs.create_dataset(records=...) (creates the project lazily)
-Phase 6: Generate experiment code    → llm-obs-experiment-py-bootstrap
-Phase 7: Run experiment              → python <generated_file>
-Phase 8: Analyze experiment          → llm-obs-experiment-analyzer
+Phase 4: Create + publish dataset    → llm-obs-eval-bootstrap --emit-dataset + LLMObs.create_dataset(records=...)
+Phase 5: Generate + run experiment   → llm-obs-experiment-py-bootstrap + python <generated_file>
+                                       (with an in-phase review beat between codegen and run)
+Phase 6: Analyze experiment          → llm-obs-experiment-analyzer
 ```
 
-Phases 5 and 7 are the only two that execute code on your machine; the rest are read-only or write generated files to `--output-dir`. The classic three-phase eval-pipeline behavior (classify → RCA → bootstrap evaluators only) is preserved by passing `--stop-after eval-bootstrap`.
+Phases 4 and 5 are the only two that execute code on your machine; the rest are read-only or write generated files to `--output-dir`. The classic three-phase eval-pipeline behavior (classify → RCA → bootstrap evaluators only) is preserved by passing `--stop-after eval-bootstrap`. Phase 5 pauses between codegen and execution so you can review the generated experiment file before any provider tokens are spent — type `run` to execute, `edit` to pause and adjust, or `stop` to exit cleanly.
 
 **Enter and exit at any phase.** The pipeline persists each phase's primary output (classification summary, RCA report, evaluator suite, dataset, published dataset name, experiment file, experiment run, analyzer report) to `<output-dir>/state/0N-<name>.{md,json}` before each checkpoint renders. This means:
 
@@ -222,29 +221,29 @@ Checkpoint vocabulary at every phase: `continue` advances, `stop` exits cleanly,
 | Option | Default | Description |
 |--------|---------|-------------|
 | `<ml_app>` | — (required) | The instrumented LLM application to onboard / evaluate against |
-| `--project-name` | derived from `pyproject.toml` / `setup.cfg` / `setup.py` / `package.json` / cwd | The Datadog project the pipeline writes datasets and experiments into. Surfaced in the Precheck and created lazily by `LLMObs.enable(project_name=...)` in Phase 5 |
+| `--project-name` | derived from `pyproject.toml` / `setup.cfg` / `setup.py` / `package.json` / cwd | The Datadog project the pipeline writes datasets and experiments into. Surfaced in the Precheck and created lazily by `LLMObs.enable(project_name=...)` in Phase 4 |
 | `--timeframe` | `now-7d` | Lookback window for Phase 1 classification and Phase 4 dataset sampling |
 | `--trace-limit` | `20` | Sampling cap for Phase 4. Phase 1 internally uses `min(20, --trace-limit)` for the classification sample |
-| `--format` | `py` | Passed to `llm-obs-experiment-py-bootstrap` in Phase 6: `py` (script) or `ipynb` (Jupyter notebook) |
-| `--evaluator-style` | `function` | Passed to Phase 3 and Phase 6: `function`, `class`, or `remote` |
+| `--format` | `py` | Passed to `llm-obs-experiment-py-bootstrap` in Phase 5: `py` (script) or `ipynb` (Jupyter notebook) |
+| `--evaluator-style` | `function` | Passed to Phase 3 and Phase 5: `function`, `class`, or `remote` |
 | `--data-only` | off | Phase 3 pass-through: emit a framework-agnostic JSON evaluator spec instead of Python SDK code |
 | `--publish` | off | Phase 3 pass-through: publish online LLM-judge evaluators to Datadog |
-| `--stop-after` | `analyze` (run everything) | Stop after the named phase completes. Accepts: `classify`, `rca`, `eval-bootstrap` *(matches the classic 3-phase behavior)*, `dataset`, `publish`, `experiment`, `run`, `analyze` |
+| `--stop-after` | `analyze` (run everything) | Stop after the named phase completes. Accepts: `classify`, `rca`, `eval-bootstrap` *(matches the classic 3-phase behavior)*, `dataset`, `experiment`, `analyze` |
 | `--start-at` | `classify` (start at the top) | Skip earlier phases and begin at the named phase. Same vocabulary as `--stop-after`. Auto-loads prior phase artifacts from `<output-dir>/state/` |
 | `--classification-summary` | auto-loaded from `state/01-classification.md` | Override the Phase 1 output that Phase 2 consumes (used with `--start-at rca` or later) |
 | `--rca-report` | auto-loaded from `state/02-rca-report.md` | Override the Phase 2 output that Phase 3 consumes |
-| `--dataset-file` | auto-loaded from `state/04-dataset.json` | The local `DatasetRecordRaw[]` JSON that Phase 5 publishes |
-| `--dataset-name` | auto-loaded from `state/05-published-dataset.json` | Name of the published Datadog dataset that Phase 6 wires the experiment to |
-| `--experiment-file` | auto-loaded from `state/06-experiment.json` | The generated experiment file Phase 7 executes |
-| `--experiment-id` / `--experiment-url` | auto-loaded from `state/07-experiment-run.json` | The Datadog experiment Phase 8 analyzes (mutually exclusive) |
-| `--app-root` | resolved from cwd / `pyproject.toml` etc. | Restricts Phase 6's task-function introspection to this directory tree |
+| `--dataset-file` | auto-loaded from `state/04-published-dataset.json`'s `dataset_file` field | The local `DatasetRecordRaw[]` JSON. Used by Phase 4's publish sub-step when re-publishing without re-sampling |
+| `--dataset-name` | auto-loaded from `state/04-published-dataset.json` | Name of the published Datadog dataset that Phase 5 wires the experiment to |
+| `--experiment-file` | auto-loaded from `state/05-experiment-run.json` | The generated experiment file. When present, Phase 5 skips codegen and goes straight to the review beat → run |
+| `--experiment-id` / `--experiment-url` | auto-loaded from `state/05-experiment-run.json` | The Datadog experiment Phase 6 analyzes (mutually exclusive) |
+| `--app-root` | resolved from cwd / `pyproject.toml` etc. | Restricts Phase 5's task-function introspection to this directory tree |
 | `--env-file` | none (auto-discovery walks standard locations) | Explicit `.env` path for credential loading; surfaced in the Precheck |
 | `--output-dir` | `./experiments` | Where the dataset JSON, publish script, generated experiment file, and `state/` directory are written |
 
 **Examples**
 
 ```
-# Full eight-phase walkthrough for a brand new ml_app
+# Full six-phase walkthrough for a brand new ml_app
 /llm-obs-eval-pipeline my-chatbot --project-name my-chatbot
 
 # Classic three-phase eval-pipeline behavior — preserves backward compatibility

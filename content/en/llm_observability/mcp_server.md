@@ -186,7 +186,7 @@ Restart Claude Code after running both commands for the skills to appear.
 | Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
 | Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
 | Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
-| Eval pipeline | `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
+| Eval pipeline | `/llm-obs-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
 
@@ -248,16 +248,14 @@ The dataset can come from a local JSON or CSV file, an existing Datadog dataset 
 
 #### End-to-end eval pipeline
 
-`/llm-obs-eval-pipeline` walks from production traces through evaluators, datasets, experiments, and analysis in eight narrated phases, with a user checkpoint between each:
+`/llm-obs-eval-pipeline` walks from production traces through evaluators, datasets, experiments, and analysis in six narrated phases, with a user checkpoint between each:
 
 1. **Classify ml_app traces** — sample and classify recent traces from your `ml_app`
 2. **Root cause analysis** — diagnose why failing traces are failing
 3. **Bootstrap evaluators** — propose an evaluator suite targeting the observed failure modes
-4. **Create dataset from prod traces** — extract input / expected_output pairs into a `DatasetRecordRaw[]` JSON
-5. **Publish dataset** — push the dataset to Datadog under your project (created lazily)
-6. **Generate experiment code** — emit a runnable `.py` or `.ipynb` that pulls the dataset and wires your app's task function
-7. **Run experiment** — execute the generated file end-to-end and capture `experiment.url`
-8. **Analyze experiment** — produce an analysis report with metric breakdowns and recommendations
+4. **Create + publish dataset** — extract input / expected_output pairs into a `DatasetRecordRaw[]` JSON and publish to Datadog under your project (created lazily)
+5. **Generate + run experiment** — emit a runnable `.py` or `.ipynb` that pulls the dataset and wires your app's task function, then execute it end-to-end and capture `experiment.url`. An in-phase review beat (`run` / `edit` / `stop`) sits between codegen and execution so you can inspect the generated file before it runs
+6. **Analyze experiment** — produce an analysis report with metric breakdowns and recommendations
 
 Each phase persists its output to `<output-dir>/state/0N-<name>.{md,json}` before its checkpoint renders, so you can `stop` cleanly at any point and resume later with `--start-at <next-phase>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
 
