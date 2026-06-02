@@ -6263,6 +6263,66 @@ menu:
       url: /api/latest/webhooks-integration/
       identifier: webhooks-integration
       generated: true
+    - name: Update an OAuth2 client credentials auth method
+      url: '#update-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-update-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOAuth2ClientCredentials
+        unstable: []
+        order: 4
+    - name: Get an OAuth2 client credentials auth method
+      url: '#get-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-get-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOAuth2ClientCredentials
+        unstable: []
+        order: 3
+    - name: Delete an OAuth2 client credentials auth method
+      url: '#delete-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-delete-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOAuth2ClientCredentials
+        unstable: []
+        order: 5
+    - name: Create an OAuth2 client credentials auth method
+      url: '#create-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-create-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOAuth2ClientCredentials
+        unstable: []
+        order: 2
+    - name: Get all auth methods
+      url: '#get-all-auth-methods'
+      identifier: webhooks-integration-get-all-auth-methods
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllAuthMethods
+        unstable: []
+        order: 1
     - name: Update a webhook
       url: '#update-a-webhook'
       identifier: webhooks-integration-update-a-webhook

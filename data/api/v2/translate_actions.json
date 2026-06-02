@@ -2492,6 +2492,30 @@
     "request_description": "Statuspage URL setting payload.",
     "request_schema_description": "Update request for a Statuspage URL setting."
   },
+  "GetAllAuthMethods": {
+    "description": "Get a list of all auth methods configured for the Webhooks integration in\nyour organization.",
+    "summary": "Get all auth methods"
+  },
+  "CreateOAuth2ClientCredentials": {
+    "description": "Create a new OAuth2 client credentials auth method for the Webhooks\nintegration. The `client_secret` is stored securely and never returned.",
+    "summary": "Create an OAuth2 client credentials auth method",
+    "request_description": "OAuth2 client credentials payload.",
+    "request_schema_description": "Create request for an OAuth2 client credentials auth method."
+  },
+  "DeleteOAuth2ClientCredentials": {
+    "description": "Delete an OAuth2 client credentials auth method by ID.",
+    "summary": "Delete an OAuth2 client credentials auth method"
+  },
+  "GetOAuth2ClientCredentials": {
+    "description": "Get a single OAuth2 client credentials auth method by ID.",
+    "summary": "Get an OAuth2 client credentials auth method"
+  },
+  "UpdateOAuth2ClientCredentials": {
+    "description": "Update an existing OAuth2 client credentials auth method.",
+    "summary": "Update an OAuth2 client credentials auth method",
+    "request_description": "OAuth2 client credentials payload.",
+    "request_schema_description": "Update request for an OAuth2 client credentials auth method."
+  },
   "ListIntegrations": {
     "summary": "List Integrations"
   },
