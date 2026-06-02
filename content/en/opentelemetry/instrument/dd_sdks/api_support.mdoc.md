@@ -1736,13 +1736,11 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {% /if %}
 
 {% if equals($prog_lang, "php") %}
-- Verify OpenTelemetry SDK version. Version 1.0.0 or later is required.
-- Verify `open-telemetry/exporter-otlp` is installed.
-- Verify `DD_LOGS_OTEL_ENABLED=true` is set before your application starts.
-- If `OpenTelemetry\API\Globals::loggerProvider()` returns a proxy or no-op provider, the global `LoggerProvider` was never registered. Either set `OTEL_PHP_AUTOLOAD_ENABLED=true` to use the OpenTelemetry SDK autoloader, or build a `LoggerProvider` in code and register it with `Sdk::builder()->setLoggerProvider(...)->buildAndRegisterGlobal()`.
-- If `OTEL_PHP_AUTOLOAD_ENABLED=true` activates traces or metrics export you did not intend, set `OTEL_TRACES_EXPORTER=none` and `OTEL_METRICS_EXPORTER=none` to disable the unused signals.
-- If your logs reach the destination but no trace correlation appears on a Monolog logger, confirm the OpenTelemetry Monolog handler is attached to that logger. Loggers without the handler still receive `dd.*` fields in their message context instead.
-- Enable debug logging with `DD_TRACE_DEBUG=true` to see detailed logs.
+- Verify that `open-telemetry/sdk` (1.0.0 or later) and `open-telemetry/exporter-otlp` are installed, and that `DD_LOGS_OTEL_ENABLED=true` is set before your application starts.
+- If `OpenTelemetry\API\Globals::loggerProvider()` returns a no-op provider, the `LoggerProvider` was never registered. Set `OTEL_PHP_AUTOLOAD_ENABLED=true` or register it manually: `Sdk::builder()->setLoggerProvider(...)->buildAndRegisterGlobal()`.
+- If `OTEL_PHP_AUTOLOAD_ENABLED=true` activates trace or metric exporters you didn't intend, set `OTEL_TRACES_EXPORTER=none` and `OTEL_METRICS_EXPORTER=none`.
+- If logs arrive but Monolog entries lack trace correlation, confirm the OpenTelemetry Monolog handler is attached to that logger.
+- For detailed debugging, set `DD_TRACE_DEBUG=true`.
 {% /if %}
 
 {% /if %}
