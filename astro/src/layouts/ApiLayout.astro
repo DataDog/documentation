@@ -138,11 +138,20 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     padding: var(--space-md) var(--space-xl) var(--space-md) 29px;
   }
 
-  @media (max-width: 768px) {
-    .api-shell {
-      flex-direction: column;
+  @media (max-width: 991px) {
+    .api-shell > :global(nav) {
+      display: none;
     }
 
+    .api-toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+      height: auto;
+      gap: var(--space-md);
+    }
+  }
+
+  @media (max-width: 768px) {
     .api-main {
       padding: var(--space-md);
     }
@@ -154,13 +163,6 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
 
     :global([data-scrolled]) .api-toolbar {
       padding: var(--space-md);
-    }
-
-    .api-shell > :global(nav) {
-      width: 100%;
-      height: auto;
-      max-height: 300px;
-      border-bottom: var(--border-width) solid var(--color-border);
     }
   }
 </style>
