@@ -10,10 +10,15 @@
 
     <!-- Look up the menu entry by identifier to get versions and operationids.
          Endpoint entries live under .Children of their tag parent, not at the top level.
-         Also capture the tag-level parent entry to get the English tag name for spec lookups. -->
+         Also capture the tag-level parent entry to get the English tag name for spec lookups.
+         Use the default-site (English) menu: menu params (versions, operationids) are
+         language-independent, and the tag name MUST be English to match spec tag names.
+         The per-language menu can contain stale/wrong translated names for the same
+         identifier (carried over from older menu structures), which would break the
+         spec tag lookup below and produce a blank page body. -->
     {{ $menuEntry := dict }}
     {{ $tagName := "" }}
-    {{ with index .Site.Menus "api" }}
+    {{ with index .Sites.Default.Menus "api" }}
       {{ range . }}
         {{ if eq .Identifier $tagSlug }}
           {{ $tagName = .Name }}
