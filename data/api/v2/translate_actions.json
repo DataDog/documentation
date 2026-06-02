@@ -4235,6 +4235,24 @@
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
   },
+  "QueryAggregatedLongTasks": {
+    "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.",
+    "summary": "Query aggregated long tasks",
+    "request_description": "",
+    "request_schema_description": "Request body for the aggregated long tasks endpoint."
+  },
+  "QueryAggregatedSignalsProblems": {
+    "description": "Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.",
+    "summary": "Query aggregated signals and problems",
+    "request_description": "",
+    "request_schema_description": "Request body for the aggregated signals and problems endpoint."
+  },
+  "QueryAggregatedWaterfall": {
+    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
+    "summary": "Query aggregated waterfall",
+    "request_description": "",
+    "request_schema_description": "Request body for the aggregated waterfall endpoint."
+  },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
     "summary": "List rum replay playlists"
