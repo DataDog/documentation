@@ -16,7 +16,7 @@ further_reading:
 
 Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
 
-{{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
+{{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
 Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
