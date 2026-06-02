@@ -13,7 +13,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-The host map widget displays your infrastructure as a grid of nodes—hosts, containers, pods, or clusters—where each node is colored by a metric query. Use it to spot anomalies, understand resource distribution, and monitor the health of your infrastructure at a glance. For the full-screen version, see the [Host Map][1] page.
+The host map widget displays your infrastructure as a color-coded grid of hosts, containers, pods, or clusters. Use it to spot anomalies, understand resource distribution, and monitor infrastructure health at a glance. For the full-screen version, see the [Host Map][1] page.
 
 {{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host map widget showing hosts grouped by availability zone and colored by CPU utilization, with darker hexagons indicating higher CPU usage" >}}
 
@@ -23,7 +23,10 @@ The host map widget displays your infrastructure as a grid of nodes—hosts, con
 
 ### Configuration
 
+<!-- "Node type" is a UI label referring to an infrastructure node, not Node.js -->
+<!-- vale Datadog.words_case_sensitive = NO -->
 1. {{< ui >}}Node type{{< /ui >}}: Choose which entity type to display: **Host**, **Container**, **Pod**, or **Cluster**.
+<!-- vale Datadog.words_case_sensitive = YES -->
 2. {{< ui >}}Filter by{{< /ui >}}: Narrow the set of nodes using a tag filter expression (for example, `env:prod`). Filter expressions support wildcards and logical operators. Leave blank to include all nodes of the selected type.
 3. {{< ui >}}Group by{{< /ui >}}: Aggregate nodes into hexagonal groups by one or more tags. Nodes that share a tag value appear together in the same group.
 4. {{< ui >}}Fill by{{< /ui >}}: Configure a metric query whose value determines the color of each node. The query is evaluated per node and mapped to the selected color palette.
@@ -33,7 +36,7 @@ The host map widget displays your infrastructure as a grid of nodes—hosts, con
    - {{< ui >}}Reverse palette{{< /ui >}}: Flip the direction of the palette.
    - {{< ui >}}Min{{< /ui >}} / {{< ui >}}Max{{< /ui >}}: Pin the color scale to specific metric values. Nodes below the minimum display in the first palette color; nodes above the maximum display in the last.
 7. {{< ui >}}Conditional formats{{< /ui >}} (optional): Apply color overrides to nodes whose fill value crosses a defined threshold.
-8. {{< ui >}}Hierarchical view{{< /ui >}} (optional): Configure a child node type that appears when zooming into a group—for example, **Container** within **Host**. The child layer has its own independent {{< ui >}}Fill by{{< /ui >}} query and {{< ui >}}Style{{< /ui >}} settings.
+8. {{< ui >}}Hierarchical view{{< /ui >}} (optional): Configure a child node type that appears when zooming into a group, for example **Container** within **Host**. The child layer has its own independent {{< ui >}}Fill by{{< /ui >}} query and {{< ui >}}Style{{< /ui >}} settings.
 
 ### Options
 
