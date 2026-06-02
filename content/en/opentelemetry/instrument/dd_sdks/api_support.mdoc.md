@@ -1538,7 +1538,7 @@ end
 {% if equals($prog_lang, "php") %}
 After the Datadog SDK is initialized, use the OpenTelemetry Logs API to get a logger and emit log records.
 
-### Emitting a log {% #emitting-log-php %}
+### Emit a log {% #emitting-log-php %}
 
 ```php
 use OpenTelemetry\API\Globals;
