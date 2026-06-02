@@ -37,6 +37,8 @@ After configuring a data source, follow these steps to launch your experiment:
 1. **[Create an experiment][5]** to define your hypothesis, choose an [analysis method][11], and optionally calculate a [sample size][8].
 1. **[Launch your experiment][7]** to see the impact of your change on business outcomes, user journey, and application performance.
 
+After your team has run several experiments against the same metric, use [Cumulative Impact][12] to see a noise-adjusted estimate of how much that metric has been moved over time.
+
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
 
 ## Further reading
@@ -53,3 +55,4 @@ After configuring a data source, follow these steps to launch your experiment:
 [9]: /getting_started/feature_flags/#feature-flags-sdks
 [10]: /experiments/guide/
 [11]: /experiments/analysis_methods
+[12]: /experiments/cumulative_impact
