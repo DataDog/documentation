@@ -33,7 +33,7 @@ Then follow the instructions below to add the MCP Server to your specific client
 ### Claude Code
 
 ```bash
-claude mcp add datadog -- ~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags
+claude mcp add datadog -- ~/.local/bin/datadog_mcp_cli --endpoint-path /v1/mcp?toolsets=feature-flags
 ```
 
 ### Cursor
@@ -44,7 +44,7 @@ Add this to `~/.cursor/mcp.json` (remember to save the file):
   "mcpServers": {
     "datadog-ff": {
       "type": "stdio",
-      "command": "~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags",
+      "command": "~/.local/bin/datadog_mcp_cli --endpoint-path /v1/mcp?toolsets=feature-flags",
       "args": [],
       "env": {}
     }
