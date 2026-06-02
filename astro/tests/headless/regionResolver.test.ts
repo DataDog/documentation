@@ -9,6 +9,7 @@ describe('getDefaultRegions', () => {
     expect(keys).toContain('us');
     expect(keys).toContain('eu');
     expect(keys).toContain('gov');
+    expect(keys).toContain('gov2');
     expect(keys).toContain('us3');
     expect(keys).toContain('us5');
     expect(keys).toContain('ap1');
@@ -25,9 +26,9 @@ describe('getDefaultRegions', () => {
     expect(eu.site).toBe('datadoghq.eu');
   });
 
-  it('orders regions by Hugo weight (US1, US3, US5, EU, AP1, AP2, US1-FED)', () => {
+  it('orders regions by Hugo weight (US1, US3, US5, EU, AP1, AP2, US1-FED, US2-FED)', () => {
     const regions = getDefaultRegions();
-    expect(regions.map((r) => r.key)).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov']);
+    expect(regions.map((r) => r.key)).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov', 'gov2']);
   });
 });
 

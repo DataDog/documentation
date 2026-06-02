@@ -12,7 +12,7 @@ describe('config/regions', () => {
   it('reads allowedRegions from the Hugo params.yaml snapshot', () => {
     const regions = getAllowedRegions();
     const keys = regions.map((r) => r.key);
-    expect(keys).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov']);
+    expect(keys).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov', 'gov2']);
   });
 
   it('uses Hugo-compatible region keys (lowercase short form)', () => {
