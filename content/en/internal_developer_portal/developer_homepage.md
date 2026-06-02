@@ -1,5 +1,5 @@
 ---
-title: IDP Homepage
+title: Homepage
 aliases:  
 - /software_catalog/developer_homepage  
 further_reading:  
