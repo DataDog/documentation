@@ -119,6 +119,12 @@ Bits Code remediates vulnerabilities at scale, from single issues to large backl
 
 Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through Bits Code. Learn more about [AI-Enhanced Static Code Analysis][15].
 
+### Automations
+
+[Automations][25] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull request, a draft PR, or a Slack notification.
+
+You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Code** > [**Automations**][26].
+
 ## Limitations
 
 - Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
@@ -149,3 +155,4 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [23]: /cloud_cost_management/recommendations
 [24]: /tests/flaky_management#bits-ai-powered-flaky-test-fixes
 [25]: /bits_ai/bits_ai_dev_agent/automations/
+[26]: https://app.datadoghq.com/code/automations
