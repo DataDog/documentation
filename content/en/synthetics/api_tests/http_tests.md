@@ -317,8 +317,8 @@ HTTP tests can run:
 
 ## One-click
 
-API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, Software Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
@@ -341,6 +341,18 @@ To display your list of variables, type `{{` in your desired field:
 ## Test failure
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
+
+{{< img src="synthetics/api_tests/api_test_summary_updated.png" alt="HTTP API test details page showing the Activity tab with global uptime, alert timeline, and a list of recent test runs in alert state" style="width:100%;">}}
+
+### Timeline summary
+
+The **Summary** panel identifies unique issues causing failures across test runs in the selected time frame. For each issue, the panel displays:
+
+- **First seen**: When the issue first appeared in test runs.
+- **Last seen**: When the issue most recently appeared in test runs.
+- **Classification**: Whether the issue is a **True failure** (a real problem with your application) or a **Test Misconfiguration** (an issue with the test setup), based on the AI failure summary.
+- **Description**: A brief description of the error.
+- **Latest alerts**: A list of the most recent alerts related to the issue.
 
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 

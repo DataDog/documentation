@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Datasets"
 ---
-{{< callout url="https://www.datadoghq.com/product/ai/llm-observability/" btn_hidden="false" header="Join the Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/ai-studio-bits-eval-patterns/" btn_hidden="false" header="Join the Preview">}}
 Patterns is in Preview.
 {{< /callout >}}
 

@@ -1967,7 +1967,7 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 ### Use case: Using a common model provider
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with the model name, model provider, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
-**Note**: When providing the cache breakdown, `input_tokens` should equal the sum of `non_cached_input_tokens`, `cache_read_input_tokens`, and `cache_write_input_tokens`. Datadog automatically applies the provider's cache read/write pricing rates to calculate the corresponding input costs.
+To learn more about what each token represents and how Datadog calculates them, see [How token counts are calculated][16].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2990,3 +2990,4 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
 [13]: /llm_observability/instrumentation/auto_instrumentation/
 [14]: /llm_observability/monitoring/cost
 [15]: /llm_observability/monitoring/cost/#custom-tags-on-cost-and-tokens-metrics
+[16]: /llm_observability/monitoring/cost/#how-token-counts-are-calculated
