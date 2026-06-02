@@ -62,12 +62,12 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Public Page Publish<br><code style="white-space: nowrap;">status_pages_public_page_publish</code></td>
-      <td>Publish and unpublish public status pages.</td>
+      <td>Publish and unpublish public Status Pages.</td>
       <td>None</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
-      <td>Publish and unpublish internal status pages.</td>
+      <td>Publish and unpublish internal Status Pages.</td>
       <td>None</td>
     </tr>
   </tbody>
