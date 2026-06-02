@@ -44,6 +44,8 @@ Additionally, when you use Cloud SIEM notifications to send new signal alerts to
 ### Supported sources
 
 Bits AI can run investigations on the following Security log sources:
+- Amazon GuardDuty
+  - [Finding categories][6] include anomalous IAM behavior, EC2 credential exfiltration and misuse, S3 data exposure, CloudTrail or S3 defense evasion, and attack sequences correlating IAM credential and S3 data compromise
 - AWS CloudTrail
 - Azure
 - GCP
@@ -109,3 +111,4 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
 [3]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst
 [4]: /actions/connections/
 [5]: https://app.datadoghq.com/security/siem/signals
+[6]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html
