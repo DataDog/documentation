@@ -21,7 +21,7 @@ You use Error Tracking to simplify debugging by grouping thousands of similar er
 Issue correlation also helps reduce noise from the issue list by identifying the most critical issues. This allows you to alert the right team and reach a quicker resolution. 
 
 ## Identify correlated issues
-To identify which issues across your services are correlated, navigate to the Error Tracking page at [**Error > Issues**][1].
+To identify which issues across your services are correlated, navigate to the Error Tracking page at [{{< ui >}}Error{{< /ui >}} > {{< ui >}}Issues{{< /ui >}}][1].
 
 {{< img src="error_tracking/issue-correlation-et-page-2.png" alt="The issues list in the Error Tracking Explorer" style="width:70%;" >}}
 
@@ -29,14 +29,14 @@ Select an issue to open the issue's details side panel.
 
 {{< img src="error_tracking/issue-correlation-side-panel-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:70%;" >}}
 
-Open the `Correlated issues` tab to see the issue correlation map.
+Open the {{< ui >}}Correlated issues{{< /ui >}} tab to see the issue correlation map.
 
 {{< img src="error_tracking/issue-correlation-correlation-tab-2.png" alt="The details of an issue in the Error Tracking Explorer focusing on the issue correlation tab" style="width:70%;" >}}
 
 The issue correlation map shows the following information about a given issue:
-- **Root cause**: the services that are likely to be causing the issue
-- **Current issue**: the issue selected along with whether it is assigned to a team
-- **Impact**: the resources, users, and sessions that are impacted
+- {{< ui >}}Root cause{{< /ui >}}: the services that are likely to be causing the issue
+- {{< ui >}}Current issue{{< /ui >}}: the issue selected along with whether it is assigned to a team
+- {{< ui >}}Impact{{< /ui >}}: the resources, users, and sessions that are impacted
 
 
 ## Further Reading
