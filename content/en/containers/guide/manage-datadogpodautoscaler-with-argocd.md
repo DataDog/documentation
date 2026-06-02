@@ -384,7 +384,7 @@ spec:
 
 ## Allow the Datadog Cluster Agent to update autoscaled workloads
 
-When `applyPolicy.mode: Apply` is set on a `DatadogPodAutoscaler`, the Datadog Cluster Agent mutates the target workload directly — it updates `spec.replicas`, container resources, and writes annotations under the `autoscaling.datadoghq.com/` prefix to track its recommendations and applied state. Without additional ArgoCD configuration, ArgoCD interprets these mutations as drift and, with `selfHeal: true` enabled, reverts them on every sync — fighting the autoscaler.
+When `applyPolicy.mode: Apply` is set on a `DatadogPodAutoscaler`, the Datadog Cluster Agent mutates the target workload directly. It updates `spec.replicas`, container resources, and writes annotations under the `autoscaling.datadoghq.com/` prefix to track its recommendations and applied state. Without additional ArgoCD configuration, ArgoCD interprets these mutations as drift and, with `selfHeal: true` enabled, reverts them on every sync. This causes a conflict between ArgoCD and the autoscaler.
 
 Two options are available to prevent this conflict:
 
@@ -401,13 +401,13 @@ The `ignoreDifferences` configuration must cover every workload kind that a `Dat
 | `StatefulSet` | `apps` | |
 | `Rollout` | `argoproj.io` | Applies only if you also run Argo Rollouts |
 
-### Option A — Per-application configuration
+### Option A: Per-application configuration
 
 Choose one of the following variants depending on whether server-side apply is active in your cluster.
 
 #### Variant 1: `managedFieldsManagers` (recommended, requires server-side apply)
 
-The `managedFieldsManagers` approach covers every field the Cluster Agent owns — `spec.replicas`, container resources, and all annotations — without enumerating them individually. It requires `ServerSideApply=true` so that Kubernetes populates the field-ownership database.
+The `managedFieldsManagers` approach covers every field the Cluster Agent owns (`spec.replicas`, container resources, and all annotations) without enumerating them individually. It requires `ServerSideApply=true` so that Kubernetes populates the field-ownership database.
 
 {{< code-block lang="yaml" >}}
 syncPolicy:
@@ -465,7 +465,7 @@ ignoreDifferences:
 
 **Limitation:** this variant only covers `autoscaling.datadoghq.com/` annotations. If the autoscaler also mutates `spec.replicas` or container resource requests, add separate `jqPathExpressions` entries for those fields. Variant 1 (`managedFieldsManagers`) avoids this gap by automatically covering all fields the Cluster Agent owns.
 
-### Option B — Global ArgoCD configuration
+### Option B: Global ArgoCD configuration
 
 To apply `ignoreDifferences` once across all Applications in an ArgoCD instance, configure the `argocd-cm` ConfigMap using `resource.customizations.ignoreDifferences.<group>_<kind>` keys.
 
@@ -536,9 +536,9 @@ Alternatively, use an `ApplicationSet` template to add the sync option to all ge
 
 ### Which option should I use?
 
-- **Few autoscaled workloads** — use Option A. The configuration stays colocated with the workload and is easy to review.
-- **Many workloads or ArgoCD-wide standardization** — use Option B combined with a project-level or `ApplicationSet`-level `RespectIgnoreDifferences=true`.
-- **Mixed environments (not all workloads are autoscaled)** — Option B is safe to apply globally; the `managedFieldsManagers` rule is a no-op for workloads that have no Datadog Cluster Agent field ownership.
+- **Few autoscaled workloads**: use Option A. The configuration stays colocated with the workload and is easy to review.
+- **Many workloads or ArgoCD-wide standardization**: use Option B combined with a project-level or `ApplicationSet`-level `RespectIgnoreDifferences=true`.
+- **Mixed environments (not all workloads are autoscaled)**: Option B is safe to apply globally. The `managedFieldsManagers` rule is a no-op for workloads that have no Datadog Cluster Agent field ownership.
 
 ## Deployment instructions
 
