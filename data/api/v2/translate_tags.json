@@ -455,6 +455,10 @@
     "name": "Users",
     "description": "Create, edit, and disable users."
   },
+  "webhooks-integration": {
+    "name": "Webhooks Integration",
+    "description": "Configure your [Datadog Webhooks integration](https://docs.datadoghq.com/integrations/webhooks/)\ndirectly through the Datadog API."
+  },
   "widgets": {
     "name": "Widgets",
     "description": "Create, read, update, and delete saved widgets. Widgets are reusable\nvisualization components stored independently from any dashboard or notebook,\npartitioned by experience type and identified by a UUID."
