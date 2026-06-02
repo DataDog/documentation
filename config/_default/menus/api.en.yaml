@@ -10751,6 +10751,19 @@ menu:
       url: /api/latest/entity-risk-scores/
       identifier: entity-risk-scores
       generated: true
+    - name: Get Entity Risk Score
+      url: '#get-entity-risk-score'
+      identifier: entity-risk-scores-get-entity-risk-score
+      parent: entity-risk-scores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityRiskScore
+        unstable:
+          - v2
+        order: 2
     - name: List Entity Risk Scores
       url: '#list-entity-risk-scores'
       identifier: entity-risk-scores-list-entity-risk-scores
