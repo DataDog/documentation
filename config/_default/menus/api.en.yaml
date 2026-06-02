@@ -1251,9 +1251,9 @@ menu:
           - CreatePersonalAccessToken
         unstable: []
         order: 15
-    - name: Get all personal access tokens
-      url: /api/latest/key-management/get-all-personal-access-tokens/
-      identifier: key-management-get-all-personal-access-tokens
+    - name: Get all access tokens
+      url: /api/latest/key-management/get-all-access-tokens/
+      identifier: key-management-get-all-access-tokens
       parent: key-management
       generated: true
       params:
@@ -3152,6 +3152,18 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 57
+    - name: Bulk convert rules to Terraform
+      url: /api/latest/security-monitoring/bulk-convert-rules-to-terraform/
+      identifier: security-monitoring-bulk-convert-rules-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkConvertExistingSecurityMonitoringRules
+        unstable: []
+        order: 127
     - name: Convert a rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-a-rule-from-json-to-terraform/
       identifier: security-monitoring-convert-a-rule-from-json-to-terraform
@@ -6255,6 +6267,66 @@ menu:
       url: /api/latest/webhooks-integration/
       identifier: webhooks-integration
       generated: true
+    - name: Update an OAuth2 client credentials auth method
+      url: /api/latest/webhooks-integration/update-an-oauth2-client-credentials-auth-method/
+      identifier: webhooks-integration-update-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOAuth2ClientCredentials
+        unstable: []
+        order: 4
+    - name: Get an OAuth2 client credentials auth method
+      url: /api/latest/webhooks-integration/get-an-oauth2-client-credentials-auth-method/
+      identifier: webhooks-integration-get-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOAuth2ClientCredentials
+        unstable: []
+        order: 3
+    - name: Delete an OAuth2 client credentials auth method
+      url: /api/latest/webhooks-integration/delete-an-oauth2-client-credentials-auth-method/
+      identifier: webhooks-integration-delete-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOAuth2ClientCredentials
+        unstable: []
+        order: 5
+    - name: Create an OAuth2 client credentials auth method
+      url: /api/latest/webhooks-integration/create-an-oauth2-client-credentials-auth-method/
+      identifier: webhooks-integration-create-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOAuth2ClientCredentials
+        unstable: []
+        order: 2
+    - name: Get all auth methods
+      url: /api/latest/webhooks-integration/get-all-auth-methods/
+      identifier: webhooks-integration-get-all-auth-methods
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllAuthMethods
+        unstable: []
+        order: 1
     - name: Update a webhook
       url: /api/latest/webhooks-integration/update-a-webhook/
       identifier: webhooks-integration-update-a-webhook
@@ -6512,6 +6584,36 @@ menu:
           - ListApmRetentionFilters
         unstable: []
         order: 1
+    - name: APM Trace
+      url: /api/latest/apm-trace/
+      identifier: apm-trace
+      generated: true
+    - name: Get a trace by ID
+      url: /api/latest/apm-trace/get-a-trace-by-id/
+      identifier: apm-trace-get-a-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTraceByID
+        unstable:
+          - v2
+        order: 1
+    - name: Get a pruned trace by ID
+      url: /api/latest/apm-trace/get-a-pruned-trace-by-id/
+      identifier: apm-trace-get-a-pruned-trace-by-id
+      parent: apm-trace
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPrunedTraceByID
+        unstable:
+          - v2
+        order: 2
     - name: Action Connection
       url: /api/latest/action-connection/
       identifier: action-connection
@@ -6955,6 +7057,75 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
+        order: 1
+    - name: Annotations
+      url: /api/latest/annotations/
+      identifier: annotations
+      generated: true
+    - name: Update an annotation
+      url: /api/latest/annotations/update-an-annotation/
+      identifier: annotations-update-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnnotation
+        unstable:
+          - v2
+        order: 4
+    - name: Delete an annotation
+      url: /api/latest/annotations/delete-an-annotation/
+      identifier: annotations-delete-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnnotation
+        unstable:
+          - v2
+        order: 5
+    - name: Get annotations for a page
+      url: /api/latest/annotations/get-annotations-for-a-page/
+      identifier: annotations-get-annotations-for-a-page
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPageAnnotations
+        unstable:
+          - v2
+        order: 3
+    - name: Create an annotation
+      url: /api/latest/annotations/create-an-annotation/
+      identifier: annotations-create-an-annotation
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnnotation
+        unstable:
+          - v2
+        order: 2
+    - name: List annotations
+      url: /api/latest/annotations/list-annotations/
+      identifier: annotations-list-annotations
+      parent: annotations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnnotations
+        unstable:
+          - v2
         order: 1
     - name: App Builder
       url: /api/latest/app-builder/
@@ -12315,6 +12486,19 @@ menu:
         unstable:
           - v2
         order: 30
+    - name: Upload records to an LLM Observability dataset
+      url: /api/latest/llm-observability/upload-records-to-an-llm-observability-dataset/
+      identifier: llm-observability-upload-records-to-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadLLMObsDatasetRecordsFile
+        unstable:
+          - v2
+        order: 49
     - name: List LLM Observability dataset versions
       url: /api/latest/llm-observability/list-llm-observability-dataset-versions/
       identifier: llm-observability-list-llm-observability-dataset-versions
@@ -12328,6 +12512,19 @@ menu:
         unstable:
           - v2
         order: 44
+    - name: Restore an LLM Observability dataset version
+      url: /api/latest/llm-observability/restore-an-llm-observability-dataset-version/
+      identifier: llm-observability-restore-an-llm-observability-dataset-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RestoreLLMObsDatasetVersion
+        unstable:
+          - v2
+        order: 48
     - name: Delete LLM Observability dataset records
       url: /api/latest/llm-observability/delete-llm-observability-dataset-records/
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -12380,6 +12577,19 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Export an LLM Observability dataset
+      url: /api/latest/llm-observability/export-an-llm-observability-dataset/
+      identifier: llm-observability-export-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportLLMObsDataset
+        unstable:
+          - v2
+        order: 45
     - name: Unlock LLM Observability dataset draft state
       url: /api/latest/llm-observability/unlock-llm-observability-dataset-draft-state/
       identifier: llm-observability-unlock-llm-observability-dataset-draft-state
@@ -12419,6 +12629,32 @@ menu:
         unstable:
           - v2
         order: 41
+    - name: Clone an LLM Observability dataset
+      url: /api/latest/llm-observability/clone-an-llm-observability-dataset/
+      identifier: llm-observability-clone-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CloneLLMObsDataset
+        unstable:
+          - v2
+        order: 47
+    - name: Batch update LLM Observability dataset records
+      url: /api/latest/llm-observability/batch-update-llm-observability-dataset-records/
+      identifier: llm-observability-batch-update-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchUpdateLLMObsDataset
+        unstable:
+          - v2
+        order: 46
     - name: Update an LLM Observability dataset
       url: /api/latest/llm-observability/update-an-llm-observability-dataset/
       identifier: llm-observability-update-an-llm-observability-dataset
@@ -14355,6 +14591,54 @@ menu:
           - ListOpsgenieServices
         unstable: []
         order: 1
+    - name: Update an Opsgenie account
+      url: /api/latest/opsgenie-integration/update-an-opsgenie-account/
+      identifier: opsgenie-integration-update-an-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpsgenieAccount
+        unstable: []
+        order: 8
+    - name: Delete an Opsgenie account
+      url: /api/latest/opsgenie-integration/delete-an-opsgenie-account/
+      identifier: opsgenie-integration-delete-an-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpsgenieAccount
+        unstable: []
+        order: 9
+    - name: Create a new Opsgenie account
+      url: /api/latest/opsgenie-integration/create-a-new-opsgenie-account/
+      identifier: opsgenie-integration-create-a-new-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpsgenieAccount
+        unstable: []
+        order: 7
+    - name: Get all Opsgenie accounts
+      url: /api/latest/opsgenie-integration/get-all-opsgenie-accounts/
+      identifier: opsgenie-integration-get-all-opsgenie-accounts
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpsgenieAccounts
+        unstable: []
+        order: 6
     - name: Org Connections
       url: /api/latest/org-connections/
       identifier: org-connections
@@ -14904,6 +15188,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Insights
+      url: /api/latest/rum-insights/
+      identifier: rum-insights
+      generated: true
+    - name: Query aggregated waterfall
+      url: /api/latest/rum-insights/query-aggregated-waterfall/
+      identifier: rum-insights-query-aggregated-waterfall
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedWaterfall
+        unstable:
+          - v2
+        order: 1
+    - name: Query aggregated signals and problems
+      url: /api/latest/rum-insights/query-aggregated-signals-and-problems/
+      identifier: rum-insights-query-aggregated-signals-and-problems
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedSignalsProblems
+        unstable:
+          - v2
+        order: 3
+    - name: Query aggregated long tasks
+      url: /api/latest/rum-insights/query-aggregated-long-tasks/
+      identifier: rum-insights-query-aggregated-long-tasks
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedLongTasks
+        unstable:
+          - v2
+        order: 2
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
@@ -14920,6 +15247,18 @@ menu:
           - CreateReferenceTableUpload
         unstable: []
         order: 1
+    - name: List rows
+      url: /api/latest/reference-tables/list-rows/
+      identifier: reference-tables-list-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReferenceTableRows
+        unstable: []
+        order: 11
     - name: Upsert rows
       url: /api/latest/reference-tables/upsert-rows/
       identifier: reference-tables-upsert-rows
@@ -15711,6 +16050,42 @@ menu:
           - DeleteRetentionFilter
         unstable: []
         order: 5
+    - name: Update a permanent RUM retention filter
+      url: /api/latest/rum-retention-filters/update-a-permanent-rum-retention-filter/
+      identifier: rum-retention-filters-update-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePermanentRetentionFilter
+        unstable: []
+        order: 9
+    - name: Get a permanent RUM retention filter
+      url: /api/latest/rum-retention-filters/get-a-permanent-rum-retention-filter/
+      identifier: rum-retention-filters-get-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPermanentRetentionFilter
+        unstable: []
+        order: 8
+    - name: Get all permanent RUM retention filters
+      url: /api/latest/rum-retention-filters/get-all-permanent-rum-retention-filters/
+      identifier: rum-retention-filters-get-all-permanent-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPermanentRetentionFilters
+        unstable: []
+        order: 7
     - name: Create a RUM retention filter
       url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
       identifier: rum-retention-filters-create-a-rum-retention-filter
@@ -15943,6 +16318,82 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Salesforce Integration
+      url: /api/latest/salesforce-integration/
+      identifier: salesforce-integration
+      generated: true
+    - name: Delete a connected Salesforce organization
+      url: /api/latest/salesforce-integration/delete-a-connected-salesforce-organization/
+      identifier: salesforce-integration-delete-a-connected-salesforce-organization
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSalesforceOrganization
+        unstable: []
+        order: 2
+    - name: Get all connected Salesforce organizations
+      url: /api/latest/salesforce-integration/get-all-connected-salesforce-organizations/
+      identifier: salesforce-integration-get-all-connected-salesforce-organizations
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSalesforceOrganizations
+        unstable: []
+        order: 1
+    - name: Update a Salesforce incident template
+      url: /api/latest/salesforce-integration/update-a-salesforce-incident-template/
+      identifier: salesforce-integration-update-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentTemplate
+        unstable: []
+        order: 5
+    - name: Delete a Salesforce incident template
+      url: /api/latest/salesforce-integration/delete-a-salesforce-incident-template/
+      identifier: salesforce-integration-delete-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentTemplate
+        unstable: []
+        order: 6
+    - name: Create a Salesforce incident template
+      url: /api/latest/salesforce-integration/create-a-salesforce-incident-template/
+      identifier: salesforce-integration-create-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentTemplate
+        unstable: []
+        order: 4
+    - name: Get all Salesforce incident templates
+      url: /api/latest/salesforce-integration/get-all-salesforce-incident-templates/
+      identifier: salesforce-integration-get-all-salesforce-incident-templates
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentTemplates
+        unstable: []
+        order: 3
     - name: Scorecards
       url: /api/latest/scorecards/
       identifier: scorecards
@@ -17463,6 +17914,106 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Statuspage Integration
+      url: /api/latest/statuspage-integration/
+      identifier: statuspage-integration
+      generated: true
+    - name: Update a Statuspage URL setting
+      url: /api/latest/statuspage-integration/update-a-statuspage-url-setting/
+      identifier: statuspage-integration-update-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatuspageUrlSetting
+        unstable: []
+        order: 7
+    - name: Delete a Statuspage URL setting
+      url: /api/latest/statuspage-integration/delete-a-statuspage-url-setting/
+      identifier: statuspage-integration-delete-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatuspageUrlSetting
+        unstable: []
+        order: 8
+    - name: Create a Statuspage URL setting
+      url: /api/latest/statuspage-integration/create-a-statuspage-url-setting/
+      identifier: statuspage-integration-create-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageUrlSetting
+        unstable: []
+        order: 6
+    - name: Get all Statuspage URL settings
+      url: /api/latest/statuspage-integration/get-all-statuspage-url-settings/
+      identifier: statuspage-integration-get-all-statuspage-url-settings
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStatuspageUrlSettings
+        unstable: []
+        order: 5
+    - name: Create the Statuspage account
+      url: /api/latest/statuspage-integration/create-the-statuspage-account/
+      identifier: statuspage-integration-create-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageAccount
+        unstable: []
+        order: 2
+    - name: Update the Statuspage account
+      url: /api/latest/statuspage-integration/update-the-statuspage-account/
+      identifier: statuspage-integration-update-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatuspageAccount
+        unstable: []
+        order: 3
+    - name: Get the Statuspage account
+      url: /api/latest/statuspage-integration/get-the-statuspage-account/
+      identifier: statuspage-integration-get-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStatuspageAccount
+        unstable: []
+        order: 1
+    - name: Delete the Statuspage account
+      url: /api/latest/statuspage-integration/delete-the-statuspage-account/
+      identifier: statuspage-integration-delete-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatuspageAccount
+        unstable: []
+        order: 4
     - name: Storage Management
       url: /api/latest/storage-management/
       identifier: storage-management

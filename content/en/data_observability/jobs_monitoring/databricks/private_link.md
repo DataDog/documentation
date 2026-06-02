@@ -18,11 +18,11 @@ Databricks workspaces deployed using [Private Link Connectivity][1] are isolated
 
 Private Link monitoring is built on the Private Action Runner's [polling architecture][4]. Datadog provides a custom version of the Private Action Runner image that includes a [script][5] for querying the Databricks API.
 
-{{< img src="data_jobs/databricks/privatelink-architecture.png" alt="Architecture diagram showing the Private Action Runner polling Datadog for requests, executing them against the Databricks API, and returning results through the VPC Endpoint." style="width:100%;" >}}
+{{< img src="data_jobs/databricks/privatelink-architecture-2.png" alt="Architecture diagram showing the Private Action Runner polling Datadog for requests, executing them against the Databricks API, and returning results through the VPC Endpoint." style="width:100%;" >}}
 
 The request flow works as follows:
 
-1. The [Private Action Runner][2] reaches out to the Datadog backend through the [VPC Endpoint][3] or over the public internet to query for pending requests. If a request is found, details are returned to the runner.
+1. The [Private Action Runner][2] reaches out to the Datadog backend (either over the public internet or using [Private Link][3]) to query for pending requests. If a request is found, details are returned to the runner.
 1. Databricks credentials (client ID and secret) are retrieved from secret storage. A token is generated for the session by calling the Databricks API from the runner using those credentials.
 1. The runner executes the fetched query against the Databricks API. The results are returned to the runner.
 1. The runner forwards the results back to the Datadog backend for processing.

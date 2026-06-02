@@ -15,10 +15,6 @@ aliases:
   - /cloudprem/guides/query_logs_with_mcp/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Datadog logs, including logs stored in BYOC Logs indexes, directly through AI-powered tools and integrations. Querying BYOC Logs with the Datadog MCP server unlocks several valuable capabilities, including:
@@ -131,7 +127,7 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/
+[1]: /mcp_server/
 [2]: https://app.datadoghq.com/logs
 [3]: https://app.datadoghq.com/byoc-logs
 [4]: /logs/explorer/search_syntax/
