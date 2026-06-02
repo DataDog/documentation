@@ -18,10 +18,12 @@ further_reading:
 
 ---
 
-{{< callout btn_hidden="true" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
 The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
 <br><br>
-Deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>in Preview</strong>. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
+The DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>Generally Available</strong>. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
+<br><br>
+Remote Configuration for the DDOT Collector is <strong>in Preview</strong>. Use this form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -49,10 +51,6 @@ The DDOT Collector offers:
 - Remotely manage fleets of DDOT Collectors with [Datadog Fleet Automation][9]
 - Gain visibility into your entire configuration, dependencies, and runtime environment
 - Onboard faster with out-of-the-box tagging enrichment for OTLP data, automatically enabling [unified service tagging][1]
-
-{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" btn_hidden="false" header="Join the Preview!" >}}
-Remote Configuration for the Datadog Distribution of the OpenTelemetry (DDOT) Collector is in Preview. Use this form to request access.
-{{< /callout >}}
 
 ### Enterprise reliability and resources
 
