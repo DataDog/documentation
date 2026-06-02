@@ -12,6 +12,6 @@ cascade:
 {{< whatsnext desc="General Product Analytics:" >}}
     {{< nextlink href="product_analytics/guide/rum_and_product_analytics" >}}Understanding RUM and Product Analytics{{< /nextlink >}}
     {{< nextlink href="session_replay/guide/diagnose-funnel-drop-offs-with-session-replay" >}}Diagnose funnel drop-offs with Session Replay{{< /nextlink >}}
-    {{< nextlink href="session_replay/guide/monitor-utm-campaigns-in-product-analytics" >}}Monitor UTM Campaigns{{< /nextlink >}}
+    {{< nextlink href="product_analytics/guide/monitor-utm-campaigns-in-product-analytics" >}}Monitor UTM Campaigns{{< /nextlink >}}
 
 {{< /whatsnext >}}
