@@ -10,7 +10,7 @@ further_reading:
       text: 'LLM Observability SDK Reference for manual instrumentation'
 ---
 
-This guide explains how to set up [Datadog LLM Observability][1] in a Next.js application using [auto-instrumentation][2]. After completing this guide, LLM calls made in your Next.js server-side code are automatically traced and visible in Datadog.
+Monitor Next.js applications using [Datadog LLM Observability][1] by instrumenting your server-side LLM and agent calls.
 
 ## Prerequisites
 
