@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog SDK and use Remote Configuration to receive flag updates in real time.
+Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog tracer for your language and use Remote Configuration to receive flag updates in real time.
+
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
 This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
 
@@ -36,7 +38,7 @@ Before setting up server-side feature flags, ensure you have:
 
 ## Agent configuration
 
-Server-side feature flags use [Remote Configuration][1] to deliver flag configurations to your application. Enable Remote Configuration in your Datadog Agent by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
+Server-side feature flags use [Remote Configuration][1] to deliver flag configurations to your application. Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Agent has Remote Configuration disabled, re-enable it by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across different deployment environments.
 
@@ -63,17 +65,16 @@ DD_VERSION=<YOUR_APP_VERSION>
 DD_AGENT_HOST=localhost
 DD_TRACE_AGENT_PORT=8126
 
-# Enable Remote Configuration in the SDK
-DD_REMOTE_CONFIG_ENABLED=true
-
-# Enable the feature flagging provider (required for most SDKs)
+# Required: Enable the feature flagging provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Enable flag evaluation metrics (required for flag evaluation tracking)
+# Optional: Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
 <div class="alert alert-warning">The <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> environment variable is required to enable the feature flagging provider. Java also supports the system property <code>-Ddd.experimental.flagging.provider.enabled=true</code>, and Ruby and Node.js support code-based configuration as an alternative. See the SDK-specific documentation for details.</div>
+
+<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
 <div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable flag evaluation metrics. Without this, the SDK does not emit metrics for flag evaluations. When enabled, each evaluation records a <code>feature_flag.evaluations</code> counter metric tagged with the flag key, result variant, and evaluation reason.</div>
 
