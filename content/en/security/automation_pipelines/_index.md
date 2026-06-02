@@ -3,6 +3,9 @@ title: Findings Automation Pipelines
 aliases:
   - /security/vulnerability_pipeline
 further_reading:
+  - link: "/security/automation_pipelines/modify_severity"
+    tag: "Documentation"
+    text: "Severity Modifier Rules"
   - link: "/security/automation_pipelines/mute"
     tag: "Documentation"
     text: "Mute Rules"
@@ -48,6 +51,14 @@ Automation Pipelines operates through a rules-based system that allows you to au
 - **Rule matching**: Automation Pipelines evaluates findings against your rules in the order you've listed them. As each finding is processed, Automation Pipelines moves through the list until it finds a matching rule, at which point the specified action—such as muting non-urgent issues or highlighting critical threats—is triggered. Automation Pipeline rules apply immediately to new findings. For existing findings, updates can take up to two hours.
 
 ## Use cases
+
+### Adjust finding severities to reflect your business context
+
+Override the default severity of findings to match your organization's risk profile. This allows you to:
+
+- **Downgrade low-risk findings**: Reduce the severity of findings on isolated environments which pose limited real-world risk.
+- **Upgrade high-value targets**: Increase the severity of findings on critical systems, such as databases containing PII or services with elevated compliance requirements.
+- **Calibrate severity to your organization's priorities**: Establish consistent severity standards which reflect your organization's priorities rather than relying solely on out-of-the-box scoring.
 
 ### Mute non-urgent findings to focus on what matters
 
