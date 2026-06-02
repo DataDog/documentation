@@ -44,7 +44,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
-| GitHub Copilot | [GitHub Copilot][] |
+| GitHub Copilot | [GitHub Copilot][15] |
 
 ## AI cost summary
 
