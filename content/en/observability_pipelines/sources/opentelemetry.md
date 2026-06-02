@@ -47,16 +47,20 @@ Set up this source when you [set up a pipeline][6]. You can set up a pipeline in
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your HTTP listener address. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your gRPC listener address. If you leave it blank, the [default](#set-secrets) is used.
+After you select the OpenTelemetry source in the pipeline UI:
+
+1. Enter the identifier for your HTTP listener address. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your gRPC listener address. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 
+{{% observability_pipelines/tls_settings_mtls %}}
+
 {{< img src="observability_pipelines/sources/otel_settings.png" alt="The OpenTelemetry source settings" style="width:35%;" >}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -16,7 +16,14 @@ Datadog Feature Flags for server-side applications allow you to remotely control
 
 This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
 
-{{< partial name="feature_flags/feature_flags_server.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+  {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 
 ## Prerequisites
 
@@ -25,7 +32,7 @@ Before setting up server-side feature flags, ensure you have:
 - **Datadog Agent 7.55 or later** installed and running
 - **Datadog [API key][2]** configured
 - **APM tracing** [enabled in your application][4]
-- **Remote Configuration** enabled for your organization. Verify this in [Organization Settings][3].
+- **Remote Configuration** enabled for your organization. Verify this in [{{< ui >}}Organization Settings{{< /ui >}}][3].
 
 ## Agent configuration
 
@@ -118,6 +125,8 @@ const evaluationContext = {
 {{< /code-block >}}
 
 ## Further reading
+
+For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
 
 {{< partial name="whats-next/whats-next.html" >}}
 

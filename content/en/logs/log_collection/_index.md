@@ -161,7 +161,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 ### Custom log forwarding
 
-Any custom process or logging library able to forward logs through **HTTP** can be used in conjunction with Datadog Logs.
+Any custom process or logging library able to forward logs through HTTP can be used in conjunction with Datadog Logs.
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][15] to get started.
 
@@ -169,7 +169,7 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 
 * The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 900kB (900000 bytes).
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
-* A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* A log event converted to JSON format should contain less than 2048 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
 <div class="alert alert-info">
@@ -224,7 +224,7 @@ For more information, see the complete [source code attributes documentation][11
 
 ## Next steps
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
+Once logs are collected and ingested, they are available in {{< ui >}}Log Explorer{{< /ui >}}. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
 {{< img src="logs/explore.png" alt="Logs appearing in the Log Explorer" style="width:100%" >}}
 

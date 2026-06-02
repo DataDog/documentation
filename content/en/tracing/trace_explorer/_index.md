@@ -40,6 +40,14 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 
 Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
 
+### Trace Patterns 
+
+{{< callout url="https://www.datadoghq.com/product-preview/apm-trace-patterns/" btn_hidden="false" header="Join the Preview!" >}}
+Trace Patterns is in Preview. Use this form to submit your request today.
+{{< /callout >}}
+
+Trace Patterns groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use Trace Patterns when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. 
+
 ### Trace volume control
 
 You can customize settings for both [ingestion and retention][6] to send and keep exactly what data is most relevant to you.

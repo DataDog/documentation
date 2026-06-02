@@ -81,7 +81,7 @@ Datadog supports associating the following resources with team handles:
 - [Incidents][6]
 - [Monitors][7]
 - [Resource Catalog][8]
-- [Software Catalog][9]
+- [Catalog][9]
 - [Service Level Objectives][10]
 - Synthetic Tests, Global Variables, Private Locations
 
@@ -134,7 +134,7 @@ The following table describes the products in which you can use the team filter:
 
 | Product List Page              | Filter basis                                                                       |
 |--------------------------------|------------------------------------------------------------------------------------|
-| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Catalog][12]) |
 | [Apps][21]                     | Team handle                                                                        |
 | [Case Management projects][22] | Team handle                                                                        |
 | [Connections][23]              | Team handle                                                                        |
@@ -145,12 +145,12 @@ The following table describes the products in which you can use the team filter:
 | [Dashboards][11]               | Team handle                                                                        |
 | [Incidents][13]                | Team handle                                                                        |
 | [Integrations][27]             | Team handle                                                                        |
-| [Logs Error Tracking][16]      | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Logs Error Tracking][16]      | Service owned by teams (determined by ownership inside the [Catalog][12]) |
 | [Logs Pipelines][28]           | Team handle                                                                        |
 | [Monitors][14]                 | Team handle                                                                        |
 | [Notebooks][20]                | Team handle                                                                        |
 | [Observability Pipelines][29]  | Team handle                                                                        |
-| [On-Call][30]                  | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [On-Call][30]                  | Service owned by teams (determined by ownership inside the [Catalog][12]) |
 | [Powerpacks][32]               | Team handle                                                                        |
 | [Private Action Runner][31]    | Team handle                                                                        |
 | [Reference tables][33]         | Team handle                                                                        |
@@ -160,7 +160,7 @@ The following table describes the products in which you can use the team filter:
 | [Security suppressions][36]    | Team handle                                                                        |
 | [Service Level Objectives][17] | Team handle                                                                        |
 | [Sheets][37]                   | Team handle                                                                        |
-| [Software Catalog][12]         | Team handle                                                                        |
+| [Catalog][12]         | Team handle                                                                        |
 | [Synthetic Tests][19]          | Team handle                                                                        |
 | [Workflows][38]                | Team handle                                                                        |
 
@@ -182,7 +182,7 @@ To customize your team, see [Team Management][3].
 [6]: /incident_response/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: https://app.datadoghq.com/infrastructure/catalog
-[9]: /tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /internal_developer_portal/catalog/entity_model/
 [10]: /service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services

@@ -17,13 +17,20 @@ further_reading:
 
 ## Overview
 
-Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
+Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths, automatically discover them, or use both methods simultaneously, depending on your needs.
 
 **Note**: If your network configuration restricts outbound traffic, follow the setup instructions on the [Agent proxy configuration][2] documentation.
 
 ## Setup
 
 <div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+
+Datadog provides two Agent-based collection methods. You can use either method on its own or combine both:
+
+| Method | When to use |
+|--------|-------------|
+| **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
+| **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
 
 ### Scheduled tests
 

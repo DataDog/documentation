@@ -855,7 +855,7 @@ docker service create \
   --env DD_SECRET_BACKEND_TYPE="docker.secrets" \
   --env DD_SITE="datadoghq.com" \
   --env DD_HOSTNAME="dd-agent" \
-  datadog/agent:latest
+  registry.datadoghq.com/agent:latest
 ```
 
 The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, and the Agent reads it using the `docker.secrets` backend.
@@ -869,7 +869,7 @@ version: '3.8'
 
 services:
   datadog:
-    image: datadog/agent:latest
+    image: registry.datadoghq.com/agent:latest
     environment:
       - DD_API_KEY=ENC[dd_api_key]
       - DD_SECRET_BACKEND_TYPE=docker.secrets
