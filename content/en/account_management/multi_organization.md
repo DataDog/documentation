@@ -51,7 +51,7 @@ Account settings, such as allow-listed IP addresses, are not inherited by child-
     - Invited users are assigned the [Datadog Admin role][5]. You can invite more users in
 Organization Settings after creating your organization.
     - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
-4. Click **Create**.
+4. Click {{< ui >}}Create{{< /ui >}}.
 
 The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][6].
 
@@ -84,11 +84,11 @@ To configure SAML for multi-organizations:
 Under some circumstances, you may be unable to access a newly created child organization. When an organization requires users to log in using SAML, its user accounts may lack passwords. Since child organizations do not inherit SAML settings from their parents, logging into the child organization requires a password that does not exist.
 
 To ensure that you can log into a child organization created from a SAML strict parent organization, take the following steps in the parent organization:
-1. Click **Organization Settings** from the account menu in the bottom of the left side navigation, or select **Organization Settings** from the header dropdown at the top of the Personal Settings page.
-2. In the left page menu, select **Users**.
+1. Click {{< ui >}}Organization Settings{{< /ui >}} from the account menu in the bottom of the left side navigation, or select {{< ui >}}Organization Settings{{< /ui >}} from the header dropdown at the top of the Personal Settings page.
+2. In the left page menu, select {{< ui >}}Users{{< /ui >}}.
 3. Select your user profile.
-4. Set the **Override Default Login Methods** toggle to the on position.
-5. Under **Select user's login methods**, place a checkmark in the **Password** checkbox.
+4. Set the {{< ui >}}Override Default Login Methods{{< /ui >}} toggle to the on position.
+5. Under {{< ui >}}Select user's login methods{{< /ui >}}, place a checkmark in the {{< ui >}}Password{{< /ui >}} checkbox.
 6. Ensure your account has a password. If you need help setting a password, contact [Datadog support][1].
 
 Following the steps above ensures that you can log into the parent account using an email and password combination. After creating your child organization, you can also log into it using your email and password.
@@ -101,8 +101,8 @@ The parent-organization can view the total and billable usage of all their organ
 
 The Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Usage page:
 
-* Overall
-* Individual Organizations
+* {{< ui >}}Overall{{< /ui >}}
+* {{< ui >}}Individual Organizations{{< /ui >}}
 
 ### Overall usage
 
@@ -132,7 +132,7 @@ This data can be downloaded as a CSV file.
 
 ### Individual organization usage
 
-On the **Individual Organizations** usage tab, you can view the usage of your child organizations in absolute units or as a percentage of total usage.
+On the {{< ui >}}Individual Organizations{{< /ui >}} usage tab, you can view the usage of your child organizations in absolute units or as a percentage of total usage.
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 

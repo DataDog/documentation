@@ -2,9 +2,18 @@
 title: Feature Flags
 description: Learn about feature flags in Datadog.
 further_reading:
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
+- link: "https://www.datadoghq.com/blog/guardrail-metrics"
+  tag: "Blog"
+  text: "Make use of guardrail metrics and stop babysitting your releases"
 - link: "/getting_started/feature_flags/"
   tag: "Documentation"
   text: "Getting started with Feature Flags"
+- link: "/feature_flags/concepts/"
+  tag: "Documentation"
+  text: "Learn the core concepts of Feature Flags"
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Set up Feature Flags for client-side applications"

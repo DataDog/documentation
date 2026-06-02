@@ -24,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
   tag: "Blog"
   text: "Reduce your mean time to repair with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -97,7 +100,7 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 
 The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
 
-You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits AI SRE monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
+You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits Investigation monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
@@ -267,7 +270,7 @@ You can also group by log patterns and select different log attributes for clust
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Catalog][17].
 
 ## Bits AI
 
@@ -284,23 +287,23 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Chat][27].
 
-### Bits AI SRE
+### Bits Investigation
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits Investigation results displayed on an On-Call page">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits Investigation results displayed on an On-Call page">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-When enabled, Bits AI SRE initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits AI SRE][28].
+When enabled, Bits Investigation initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits Investigation][28].
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
@@ -347,7 +350,7 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [14]: https://chat.datadoghq.com/
 [15]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [16]: /tracing/trace_explorer/query_syntax/
-[17]: https://docs.datadoghq.com/software_catalog/manage/
+[17]: https://docs.datadoghq.com/internal_developer_portal/catalog/set_up/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
 [20]: https://docs.datadoghq.com/incident_response/on-call/

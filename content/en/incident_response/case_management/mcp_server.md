@@ -3,7 +3,7 @@ title: MCP Server
 aliases:
 - /service_management/case_management/mcp_server/
 further_reading:
-- link: "/bits_ai/mcp_server"
+- link: "/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 ---
@@ -25,5 +25,5 @@ For setup instructions and full details on the `cases` toolset, see the [Datadog
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server
+[1]: /mcp_server
 [2]: https://modelcontextprotocol.io/

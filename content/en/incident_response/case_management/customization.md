@@ -4,6 +4,9 @@ description: "Customize Datadog Case Management with custom case types, attribut
 aliases:
 - /service_management/case_management/customization/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: "/incident_response/case_management/"
   tag: "Documentation"
   text: "Case Management Overview"

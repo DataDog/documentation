@@ -19,70 +19,104 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
-To enable APM on a Linux host:
+### New Agent installation
+
+If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
+2. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
    
    {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
-1. Copy and run the Agent installation command on your Linux host or VM.
-1. Restart your applications.
-
-<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
-
-## Set SDK tracer versions
-
-By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
-
-You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
-
-To customize SDK versions:
-
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. After you turn on **APM Instrumentation**, click **Customize Library Versions**.
+3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead:
+
+   Click **Customize Library Versions**, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
 
    {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
-1. Find your language(s) and use the dropdown to either:
-   - Select an exact SDK version, or
-   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
-1. Copy and run the updated installation command.
+   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
 
-[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[8]: https://github.com/DataDog/dd-trace-java/releases
+[9]: https://github.com/DataDog/dd-trace-js/releases
+[10]: https://github.com/DataDog/dd-trace-py/releases
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases
+[12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-php/releases
 
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. After you turn on **APM Instrumentation**, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
-   
-   ```
-   DD_API_KEY=<YOUR_DD_API_KEY> 
-   DD_SITE="US1-FED" 
-   DD_APM_INSTRUMENTATION_ENABLED=host 
-   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
+
+3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+
+   ```shell
+   DD_API_KEY=<YOUR_DD_API_KEY>
+   DD_SITE="US1-FED"
+   DD_APM_INSTRUMENTATION_ENABLED=host
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
-1. Find your language(s) and use the dropdown to either:
-   - Select an exact SDK version, or
-   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
-1. Copy and run the updated installation command.
+   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
 
-[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[8]: https://github.com/DataDog/dd-trace-java/releases
+[9]: https://github.com/DataDog/dd-trace-js/releases
+[10]: https://github.com/DataDog/dd-trace-py/releases
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases
+[12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-php/releases
 
 {{< /site-region >}}
 
-Available versions are listed in source repositories for each language:
+{{< site-region region="gov2" >}}
 
-- [Java][8] (`java`)
-- [Node.js][9] (`js`)
-- [Python][10] (`python`)
-- [.NET][11] (`dotnet`)
-- [Ruby][12] (`ruby`)
-- [PHP][13] (`php`)
+3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+
+   ```shell
+   DD_API_KEY=<YOUR_DD_API_KEY>
+   DD_SITE="US2-FED"
+   DD_APM_INSTRUMENTATION_ENABLED=host
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+
+[8]: https://github.com/DataDog/dd-trace-java/releases
+[9]: https://github.com/DataDog/dd-trace-js/releases
+[10]: https://github.com/DataDog/dd-trace-py/releases
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases
+[12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-php/releases
+
+{{< /site-region >}}
+
+4. Copy and run the Agent installation command on your Linux host or VM.
+5. Restart your applications.
+
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
+### Existing Agent installation
+
+If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
+
+1. In Datadog, go to [**Fleet Automation > Configuration**][21].
+1. Click **Configure Agents**.
+1. Apply filters to select the agents you want to configure, then click **Next**.
+
+   {{< img src="tracing/trace_collection/filter-agents.png" alt="The agent filtering screen in Fleet Automation, with options to scope by environment, operating system, and hostname" style="width:100%;" >}}
+
+1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
+
+   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="The product selection screen in Fleet Automation, showing the Application Performance Monitoring (APM) tile" style="width:80%;" >}}
+
+1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual SDK versions.
+
+   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
+
+1. Click **Next**.
+1. Review your configuration and click **Deploy Configuration**.
 
 ## Configure Unified Service Tags
 
@@ -117,10 +151,9 @@ To update the SDK versions:
 
 ### Define instrumentation rules
 
-{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
- btn_hidden="false" header="Join the Preview!">}}
-Instrumentation rules are in Preview.
-{{< /callout >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
@@ -153,14 +186,37 @@ Each rule consists of one or more conditions. A condition includes the following
 - **Value**: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
-| Attribute    | Description | Example |
-| ----------- | ----------- | --------- |
+| Attribute | Description | Example |
+| --------- | ----------- | ------- |
 | Operating System | OS of the host. | `linux` |
 | Executable | Executable name of the process. | `python3.11` |
-| Executable File Path | Full path of the executable. | `/usr/bin/python3.11` |
+| Executable Full Path | Full path of the executable. | `/usr/bin/python3.11` |
 | Arguments | Command-line arguments used to start the process. | `--env=production` |
 | Working Directory | Working directory of the process. | `/app` |
 | Language | Programming language detected for the process. | `python` |
+| Entry Point File | The specific file used to launch the application. | `app.py`, `server.js` |
+
+#### Example use cases
+
+Review the following examples demonstrating how to apply instrumentation rules:
+
+{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
+
+Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 2: Instrument only specific processes" level="h5" >}}
+
+Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
+
+For example, to instrument only a checkout service and a customer portal, create allow rules using <strong>Working Directory</strong>, then set the default behavior to <strong>Block Instrumentation</strong>.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Two allow instrumentation rules targeting services in specific working directories, with a default of block instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -193,5 +249,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [18]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-
-
+[21]: https://app.datadoghq.com/fleet/agent-management

@@ -19,15 +19,17 @@ With PATs, you can:
 - Limit the blast radius of leaked credentials through mandatory time-to-live (TTL) values. Expired tokens are automatically revoked, so inactive credentials do not persist indefinitely.
 - Separate concerns by reserving API keys for telemetry submission (Agent, logs, metrics) and use PATs for all other web API calls.
 
-### PATs compared to application keys
+### PATs compared to other credential types
 
-| | Personal Access Tokens | Application keys |
-|---|---|---|
-| Standalone authentication | Yes; no API key pairing needed | No; requires an API key |
-| Scoped by default | Yes; scopes are mandatory | Optional; unscoped by default |
-| Time-to-live (TTL) | Required (24 hours to one year) | No expiration |
-| Identifiable prefix | Yes; `ddpat_` | Yes; `ddap_` (new) |
-| Linked to | Individual user | Individual user |
+| | Personal Access Tokens | Service Access Tokens | Application keys |
+|---|---|---|---|
+| Standalone authentication | Yes; no API key pairing needed | Yes; no API key pairing needed | No; requires an API key |
+| Scoped by default | Yes; scopes are mandatory | Yes; scopes are mandatory | Optional; unscoped by default |
+| Time-to-live (TTL) | Required (24 hours to one year) | Optional; can be long-lived | No expiration |
+| Identifiable prefix | `ddpat_` | `ddsat_` | `ddapp_` (new) |
+| Linked to | Individual user | Service account | Individual user or service account |
+
+For Service Access Tokens, see [Service Access Tokens][7].
 
 ## Prerequisites
 
@@ -37,10 +39,10 @@ With PATs, you can:
 ## Create a Personal Access Token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1].
-2. Click **+ New Access Token**.
-3. Enter a **Name** for the token.
-4. Select an **Expiration Date**. The minimum expiration is 24 hours and the maximum is one year from creation.
-5. Click **Select Scopes** to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click **Save**.
+2. Click {{< ui >}}+ New Access Token{{< /ui >}}.
+3. Enter a {{< ui >}}Name{{< /ui >}} for the token.
+4. Select an {{< ui >}}Expiration Date{{< /ui >}}. The minimum expiration is 24 hours and the maximum is one year from creation.
+5. Click {{< ui >}}Select Scopes{{< /ui >}} to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.
 
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time. Copy and store it securely. You cannot retrieve it later.</div>
 
@@ -88,7 +90,7 @@ Organization administrators with the `org_app_keys_read` and `org_app_keys_write
 ### Revoke a token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1], or [**Organization Settings** > **Access Tokens**][2] for administrators.
-2. Mouse over the token you want to revoke and click the **Revoke Token** icon.
+2. Mouse over the token you want to revoke and click the {{< ui >}}Revoke Token{{< /ui >}} icon.
 
 Revoked tokens can no longer authenticate API calls. Revocation takes effect within seconds.
 
@@ -137,11 +139,14 @@ Manage PATs programmatically through the Datadog API:
 
 | Operation | Endpoint |
 |-----------|----------|
-| List PATs | `GET /api/v2/personal_access_tokens` |
+| List PATs and SATs | `GET /api/v2/personal_access_tokens` |
 | Create a PAT | `POST /api/v2/personal_access_tokens` |
 | Get a specific PAT | `GET /api/v2/personal_access_tokens/<PAT_ID>` |
 | Update a PAT | `PATCH /api/v2/personal_access_tokens/<PAT_ID>` |
 | Revoke a PAT | `DELETE /api/v2/personal_access_tokens/<PAT_ID>` |
+
+The `GET /api/v2/personal_access_tokens` endpoint returns both PATs and SATs in a single call.
+To manage SATs, see [Service Access Tokens][7].
 
 For the full API reference, see [Key Management][6].
 
@@ -155,3 +160,4 @@ PATs follow an eventual consistency model. After creation or revocation, changes
 [4]: /account_management/audit_trail/
 [5]: https://app.datadoghq.com/audit-trail
 [6]: /api/latest/key-management/
+[7]: /account_management/service-access-tokens/

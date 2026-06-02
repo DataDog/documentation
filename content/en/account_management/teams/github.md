@@ -39,18 +39,18 @@ Ensure your Datadog organization is [connected][3] to a GitHub organization. You
 
 ### Connect GitHub teams to Datadog Teams
 1. Navigate to [Teams][4].
-1. In the upper right, click **GitHub Connections**.
+1. In the upper right, click {{< ui >}}GitHub Connections{{< /ui >}}.
 1. Configure your connection by selecting options for import type, sync members, and cadence.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### View Datadog Teams
 1. Navigate to [GitHub Connections][5].
-1. If the list of created and linked teams is empty, click **Refresh**.
+1. If the list of created and linked teams is empty, click {{< ui >}}Refresh{{< /ui >}}.
 1. Optionally, manually update Datadog Teams to reach your desired state. 
 
 ### User configuration
 
-After an admin enables team provisioning from GitHub, a notification appears on the Team detail page. The notification asks users **Log in to GitHub** to connect their accounts from Datadog to GitHub through OAuth.
+After an admin enables team provisioning from GitHub, a notification appears on the Team detail page. The notification asks users {{< ui >}}Log in to GitHub{{< /ui >}} to connect their accounts from Datadog to GitHub through OAuth.
 
 {{< img src="account_management/teams/github/connect-to-github.png" alt="'Not Connected to GitHub' box with button to 'Log in to GitHub'" style="width:60%;">}}
 
@@ -61,7 +61,7 @@ After a user links their accounts, Datadog adds the user to any Datadog Teams th
 For example, assume that user B is a member of team A in GitHub. The following sequence occurs in Datadog:
 1. An admin enables Datadog Teams provisioning and user syncing from GitHub.
 1. Team A is created in Datadog, empty.
-1. User B sees a notification to **Log in to GitHub** and follows through.
+1. User B sees a notification to {{< ui >}}Log in to GitHub{{< /ui >}} and follows through.
 1. User B is provisioned into Team A in Datadog.
 
 ## Deleting teams

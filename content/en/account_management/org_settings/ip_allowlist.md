@@ -36,7 +36,7 @@ To allow mobile app clients to connect to Datadog when the IP allowlist feature 
 
 ### Functionality
 
-Only users with the **Org Management** permission can configure the IP allowlist.
+Only users with the {{< ui >}}Org Management{{< /ui >}} permission can configure the IP allowlist.
 
 With the IP allowlist API or UI, you can:
 - Check the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
@@ -59,8 +59,8 @@ When you enable or modify the IP allowlist, the system enforces constraints to m
 
 To find the [IP allowlist UI][6]:
 
-1. Navigate to **Organization Settings** from your account menu.
-1. Under **Security**, select **IP Allowlist**.
+1. Navigate to {{< ui >}}Organization Settings{{< /ui >}} from your account menu.
+1. Under {{< ui >}}Security{{< /ui >}}, select {{< ui >}}IP Allowlist{{< /ui >}}.
 
 The IP allowlist table lists the CIDR ranges contained in the IP allowlist.
 
@@ -68,28 +68,28 @@ The IP allowlist table lists the CIDR ranges contained in the IP allowlist.
 
 A banner at the top of the page shows the enabled or disabled status of the IP allowlist. It also shows your IP and whether that IP is in the allowlist.
 
-To toggle the IP allowlist status, click the **Enable** or **Disable** button.
+To toggle the IP allowlist status, click the {{< ui >}}Enable{{< /ui >}} or {{< ui >}}Disable{{< /ui >}} button.
 
 ### Add IP addresses or CIDR ranges
 
 {{< img src="account_management/org_settings/add_ip_2.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
 
-1. Click the **Add IP** button at the top right of the page. 
+1. Click the {{< ui >}}Add IP{{< /ui >}} button at the top right of the page. 
 1. Enter a valid IP address or CIDR range.
 1. Optionally, add a note, for example, to remind yourself why you are allowing access to certain addresses.
-1. Click **Confirm**.
+1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 ### Edit IP addresses or CIDR ranges
 
 1. In the IP allowlist table, hover over the row you wish to edit. 
-1. Click the pencil (**Edit**) icon. 
-1. Change the descriptive **Note** text.
-1. Click **Confirm**.
+1. Click the pencil ({{< ui >}}Edit{{< /ui >}}) icon. 
+1. Change the descriptive {{< ui >}}Note{{< /ui >}} text.
+1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 ### Delete IP addresses or CIDR ranges
 
 1. In the IP allowlist table, hover over the row you wish to delete. 
-1. Click the trash can (**Delete**) icon and confirm you want to delete it. 
+1. Click the trash can ({{< ui >}}Delete{{< /ui >}}) icon and confirm you want to delete it. 
 
 ## Managing the IP allowlist programmatically
 

@@ -11,14 +11,14 @@ Use the Keyspaces component to visualize Apache Cassandra-compatible database se
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D view or different colors for each.
-- **Capacity mode**: Select the capacity mode of your Keyspaces database.
-- **Writes (millions)**: Enter the total volume of writes to the database, in millions.
-- **Reads (millions)**: Enter the total volume of reads to the database, in millions.
-- **Quorum %**: Enter the percentage of your reads that uses `LOCAL_QUORUM` consistency.
-- **Dataset (GB)**: Enter the total volume of data in your database in gigabytes.
-- **TTL Deletes (millions)**: Enter the total volume of `DELETE` operations triggered by the TTL process, in millions.
-- **Point-in-time recovery**: Whether or not to use point-in-time recovery for your database.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D view or different colors for each.
+- {{< ui >}}Capacity mode{{< /ui >}}: Select the capacity mode of your Keyspaces database.
+- {{< ui >}}Writes (millions){{< /ui >}}: Enter the total volume of writes to the database, in millions.
+- {{< ui >}}Reads (millions){{< /ui >}}: Enter the total volume of reads to the database, in millions.
+- {{< ui >}}Quorum %{{< /ui >}}: Enter the percentage of your reads that uses `LOCAL_QUORUM` consistency.
+- {{< ui >}}Dataset (GB){{< /ui >}}: Enter the total volume of data in your database in gigabytes.
+- {{< ui >}}TTL Deletes (millions){{< /ui >}}: Enter the total volume of `DELETE` operations triggered by the TTL process, in millions.
+- {{< ui >}}Point-in-time recovery{{< /ui >}}: Whether or not to use point-in-time recovery for your database.
 
 ## API
 

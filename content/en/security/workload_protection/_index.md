@@ -14,6 +14,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
     tag: "Blog"
     text: "Turn fragmented runtime signals into coherent attack stories with Datadog Workload Protection"
+  - link: "https://www.datadoghq.com/blog/workload-protection-findings"
+    tag: "Blog"
+    text: "Surface and remediate runtime posture issues with Workload Protection Findings"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+    tag: "Learning Center"
+    text: "Detect Host and Container Compromises with Workload Protection"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"
+    tag: "Learning Center"
+    text: "Enable and Manage Workload Protection"
 cascade:
 - _target:
     path: /security/workload_protection/agent_expressions
@@ -50,6 +59,21 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
+
+## Respond to threats
+
+When a threat is confirmed, you can contain it directly from the Workload Protection signal side panel. This shortens response time and helps preserve forensic state while an investigation continues.
+
+Four response actions are available from any Workload Protection signal:
+
+- **Kill process** to terminate the offending process.
+- **Kill container** to terminate the offending container.
+- **Isolate process from network** to block network access for the process, with the option to block all traffic, all traffic except localhost, or only public traffic.
+- **Isolate container from network** to block network access for the container, with the same level of control.
+
+Response actions are manual and per-signal. Action status is reported in the signal's response table, investigation graph, and events timeline, and every action is recorded in the audit trail.
+
+To use response actions, you need the Datadog Agent v7.78.1 or later, [Remote Configuration][11] enabled, and the **Cloud Workload Security Agent Actions** [RBAC permission][12].
 
 ## Proactively block threats with Active Protection
 
@@ -104,3 +128,5 @@ Datadog is introducing a new feature called Active Protection to address the cry
 [8]: /security/workload_protection/security_signals
 [9]: /network_monitoring/performance/
 [10]: /security/workload_protection/guide/active-protection
+[11]: /agent/remote_config/
+[12]: /account_management/rbac/permissions/#cloud-security-platform

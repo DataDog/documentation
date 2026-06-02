@@ -46,7 +46,7 @@ Use tabs to organize widgets into named sections within a single dashboard. Tabs
 
 ### Create and manage tabs
 
-To add a tab, click on the **Add Widgets** dropdown at the top of the dashboard and click **Add New Tab**. New tabs are named automatically (for example, "Tab 1", "Tab 2") and a dashboard supports up to 100 tabs. Add subsequent tabs using the **+** button on the tab bar.
+To add your first tab, click on the arrow next to **Add Widgets** at the top of the dashboard and click **Add New Tab**. New tabs are named automatically (for example, "Tab 1", "Tab 2") and a dashboard supports up to 100 tabs. Add subsequent tabs using the **+** button on the tab bar.
 
 To **rename** a tab, double-click the tab name to edit it inline, or open the tab's options menu (⋮) and select **Rename**. Tab names support up to 100 characters.
 
@@ -66,7 +66,7 @@ Click {{< ui >}}Configure{{< /ui >}} to open a menu of configuration options ava
 | ----------- | ----------- |
 | {{< ui >}}Clone dashboard{{< /ui >}} | Copy the entire dashboard to a new dashboard. You are prompted to name the clone. |
 | {{< ui >}}Display UTC time{{< /ui >}} | Toggle between UTC time and your default time zone. |
-| {{< ui >}}Include Flex Logs{{< /ui >}} | Control whether widgets search [Flex Logs][3] or [Standard Indexed][4] logs. Switch between recent and historical data without editing individual widgets. This is a user-level preference that persists across sessions for this dashboard. |
+| {{< ui >}}Include Flex Logs{{< /ui >}} | Toggle to include [Flex Logs][3] in all Flex-configured widgets. When off, widgets use [Standard Indexed][4] logs instead. This is a user-level preference that persists across sessions for this dashboard. |
 | {{< ui >}}Increase density{{< /ui >}} | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
 | {{< ui >}}Keyboard&nbsp;shortcuts{{< /ui >}} | View a list of available keyboard shortcuts. |
 | {{< ui >}}Pause Auto-Refresh{{< /ui >}} | Pause automatic refresh by default for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |

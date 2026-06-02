@@ -18,14 +18,14 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/python">available on GitHub</a>.</div>
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
    Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}
 
-   Alternatively, you can install the tracer in your Dockerfile:
+   Alternatively, you can install the SDK in your Dockerfile:
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN pip install ddtrace
 {{< /code-block >}}

@@ -82,7 +82,7 @@ If the reference tables are not refreshing, select the **View Change Events** li
 
 **View Change Events** opens a page in **Event Management** showing potential error events for the ingestion. You can also filter in **Event Management** using the reference table name.
 
-<div class="alert alert-info">In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intellegence.</div>
+<div class="alert alert-info">In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intelligence.</div>
 
 Other useful cloud import details to remember:
 
