@@ -19,10 +19,6 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
-The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
-<br><br>
-The DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>Generally Available</strong>. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
-<br><br>
 Remote Configuration for the DDOT Collector is <strong>in Preview</strong>. Use this form to request access.
 {{< /callout >}}
 
