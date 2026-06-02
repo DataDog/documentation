@@ -4499,6 +4499,12 @@
     "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "List security findings"
   },
+  "UpdateFindingsAssignee": {
+    "description": "Assign or unassign security findings.\nYou can assign up to 100 security findings per request. Set `assignee_id` to the unique identifier of the Datadog user you want to assign the findings to. Omit `assignee_id` (or set it to `null`) to unassign the findings. Per-finding warnings and failures are returned in the response `meta` object.",
+    "summary": "Assign or unassign security findings",
+    "request_description": "",
+    "request_schema_description": "Request to assign or unassign security findings."
+  },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
@@ -4540,6 +4546,18 @@
     "summary": "Search security findings",
     "request_description": "",
     "request_schema_description": "The request body for searching security findings."
+  },
+  "AttachServiceNowTicket": {
+    "description": "Attach security findings to a ServiceNow ticket by providing the ServiceNow ticket URL.\nYou can attach up to 50 security findings per ServiceNow ticket. If the ServiceNow ticket is not linked to any case, this operation will create a case for the security findings and link the ServiceNow ticket to the newly created case. Security findings that are already attached to another ServiceNow ticket will be detached from their previous ServiceNow ticket and attached to the specified ServiceNow ticket.",
+    "summary": "Attach security findings to a ServiceNow ticket",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a ServiceNow ticket."
+  },
+  "CreateServiceNowTickets": {
+    "description": "Create ServiceNow tickets for security findings.\nThis operation creates a case in Datadog and a ServiceNow ticket linked to that case for bidirectional sync between Datadog and ServiceNow. You can create up to 50 ServiceNow tickets per request and associate up to 50 security findings per ServiceNow ticket. Security findings that are already attached to another ServiceNow ticket will be detached from their previous ServiceNow ticket and attached to the newly created ServiceNow ticket.",
+    "summary": "Create ServiceNow tickets for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create ServiceNow tickets for security findings."
   },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
