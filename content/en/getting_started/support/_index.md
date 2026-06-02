@@ -32,6 +32,9 @@ For the most efficient resolution of an issue, be ready to provide any of the re
    - If the issue is related to the functioning of the Datadog Agent, an [Agent flare][4]
    - Links to any documentation pages used
 
+To help us resolve your request as quickly as possible, please limit each Support Case to a single issue or question. Support Engineers work one case at a time, and combining multiple unrelated questions in one case can slow down resolution. If you have multiple issues, please open a separate Support Case for each one.
+Example : If you need help troubleshooting an AWS integration error and also want to understand how to configure a monitor threshold, please open two separate cases.
+
 ## Chat or support ticket?
 
 Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat).

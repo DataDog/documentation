@@ -35,7 +35,7 @@ Apdex thresholds must be set by administrators, per service, before Apdex scores
 
 To visualize your web application or service Apdex: 
 
-1. In [Software Catalog][3], hover over your web service and select **Service Page**.
+1. In [Catalog][3], hover over your web service and select **Service Page**.
 
 1. Click the **Latency** graph title to open a drop-down menu, and select **Apdex**. 
 
@@ -57,11 +57,11 @@ To visualize your web application or service Apdex:
 
    {{< img src="tracing/faq/apm_save.png" alt="Apdex graph after saving configuration changes" >}}
 
-## Display your Apdex on the Software Catalog
+## Display your Apdex on the Catalog
 
-To display Apdex scores on the [Software Catalog][2], select it in the configuration menu on the upper right corner of the page:
+To display Apdex scores on the [Catalog][2], select it in the configuration menu on the upper right corner of the page:
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Software Catalog" >}}
+{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Catalog" >}}
 
 [1]: https://www.apdex.org/
 [2]: https://app.datadoghq.com/services

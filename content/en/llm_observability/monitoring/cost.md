@@ -30,6 +30,20 @@ To manually supply cost information, follow the instrumentation steps described 
 
 <div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
+#### How token counts are calculated
+The following relationships apply to token usage fields:
+{{< img src="llm_observability/llm_token_relationships.png" alt="Diagram showing how LLM Observability computes token counts: total_tokens is the sum of input_tokens and output_tokens; input_tokens is the sum of non_cached_input_tokens, cache_read_input_tokens, and cache_write_input_tokens; reasoning_output_tokens is a subset of output_tokens." style="width:100%;" >}}
+
+When all sub-components of a token field are provided, Datadog automatically calculates the parent token field, so it does not need to be sent separately.
+
+For example:
+- `input_tokens` can be inferred from `non_cached_input_tokens`, `cache_read_input_tokens`, and `cache_write_input_tokens`
+- `total_tokens` can be inferred from input_tokens and output_tokens
+
+Datadog recommends providing the full cache token breakdown whenever cache usage information is available. Datadog automatically applies provider-specific cache read and cache write pricing rates when calculating cached input costs.
+
+If only `input_tokens` is provided, Datadog treats all input tokens as non-cached input tokens. Providing only a partial cache breakdown may result in inaccurate token counts or cost discrepancies.
+
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
 
@@ -44,6 +58,35 @@ The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
 - `source:user` — manually provided
 
+
+## Custom tags on cost and tokens metrics
+
+Datadog's LLM cost and token metrics ship with OOTB tags such as `model_name`, `model_provider`, and `ml_app`. To break down LLM spend by attributes specific to your application — for example team, customer tier or feature, you can promote a subset of your span tags as custom tags on the generated cost and token metrics.
+
+<div class="alert alert-info">Custom tags apply only to LLM <strong>cost</strong> (<code>ml_obs.span.* cost</code>) and <strong>tokens</strong> (<code>ml_obs.span.* tokens</code>) metrics. Other span metrics (such as <code>ml_obs.span.duration</code>) are not affected.</div>
+
+### How it works
+
+1. Tag your LLM spans with the attributes you want to break spend down by, using the SDK's `tags` parameter (or auto-instrumentation)
+2. In the same annotation, mark which of those tag keys should propagate to cost metrics by passing the keys to the `cost_tags` (Python) or `costTags` (Node.js) parameter. See the [SDK Reference][7] for the full instrumentation syntax and timing rules
+3. Once propagated, those tag keys appear as tags on the LLM cost and token metrics. You can use them anywhere in Datadog that consumes these metrics — dashboards, monitors, notebooks, and trace search
+
+<div class="alert alert-warning">Only configure tags with bounded values (such as <code>team</code>, <code>customer_tier</code>, or <code>feature</code>). Tags with unbounded or high-cardinality values (such as user IDs or request IDs) are not fully supported and may be truncated or omitted from the resulting metrics.</div>
+
+### Use case: Filter and group spend by an application attribute
+
+Use custom tags to break down spend by attributes that aren't part of the OOTB metric tags. Build a dashboard widget of `ml_obs.span.llm.total.cost` grouped by `team` to see which teams' LLM usage is driving consumption over time, and configure a metric monitor on the same query to alert independently for each team (or customer tier, feature, environment) when usage crosses a threshold.
+
+### Use case: Track prompt caching effectiveness
+
+Many LLM providers cache reused prompt prefixes to reduce repeated processing. Tagging spans with a prompt identifiers such as "prompt_version" or "prompt_template_id," which are then broken down by theese tags, allows you to:
+
+- Compare prompt variants by how effectively they reuse provider caching. For example, tracking the cache hit rate using the formula `ml_obs.span.llm.input.cache_read.tokens / ml_obs.span.llm.input.cache_write.tokens` 
+- Identify prompts that populate the cache but rarely reuse it, which is usually a sign of unstable prefixes or aggressive invalidation
+- Spot prompts that miss caching entirely because the prefix is too short to qualify or changes with every call.
+- Alert on caching regressions in token metrics before they result in increased costs
+
+{{< img src="llm_observability/cost_tags_cache.png" alt="Dashboard comparing cache read, cache write, and non-cached input tokens grouped by a custom prompt_version tag." style="width:100%;" >}}
 
 ## View costs in LLM Observability
 View your app in LLM Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
@@ -124,3 +167,4 @@ How to fix:
 [4]: https://github.com/pydantic/genai-prices/tree/main?tab=readme-ov-file#providers
 [5]: /llm_observability/monitoring/metrics/#llm-cost-metrics
 [6]: /llm_observability/monitoring/prompt_tracking
+[7]: /llm_observability/instrumentation/sdk/#adding-custom-tags-to-cost-and-tokens-metrics

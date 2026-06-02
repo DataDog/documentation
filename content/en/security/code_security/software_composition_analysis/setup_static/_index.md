@@ -28,6 +28,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
+| Node.js    | Bun               | `bun.lock`                               |
 | Node.js    | npm               | `package-lock.json`                      |
 | Node.js    | pnpm              | `pnpm-lock.yaml`                         |
 | Node.js    | yarn              | `yarn.lock`                              |
@@ -73,6 +74,8 @@ You must scan your default branch at least once before results appear in <b>Code
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/azure_devops" >}}Azure DevOps{{< /nextlink >}}
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
+
+If your Java project checks third-party JARs directly into the repository instead of using a Maven or Gradle manifest, see [Scan Java JAR directories][27].
 
 ## Select your source code management provider
 
@@ -231,7 +234,7 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
-[15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[15]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [16]: https://docs.datadoghq.com/account_management/teams/
 [17]: https://app.datadoghq.com/source-code/repositories
 [18]: https://cyclonedx.org/docs/1.4/json/
@@ -239,10 +242,11 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [20]: https://cyclonedx.org/docs/1.6/json/
 [21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [22]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-sbom
-[23]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
-[24]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[23]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
+[24]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [25]: https://docs.datadoghq.com/data_security/data_retention_periods/
 [26]: https://docs.datadoghq.com/account_management/teams/
-[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/
+[27]: /security/code_security/troubleshooting/#scan-java-jar-directories

@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/ingest/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-After installing and configuring BYOC Logs, you need to set up log ingestion to start sending log data from your applications and infrastructure. BYOC Logs supports multiple ingestion methods to accommodate different architectures and requirements.
+After installing and configuring BYOC (Bring Your Own Cloud) Logs, you need to set up log ingestion to start sending log data from your applications and infrastructure. BYOC Logs supports multiple ingestion methods to accommodate different architectures and requirements.
 
 ## Supported log format
 

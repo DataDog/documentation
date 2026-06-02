@@ -140,6 +140,20 @@
       "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
+  "CreateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Create an annotation returns \"OK\" response"
+    }
+  ],
+  "UpdateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Update an annotation returns \"OK\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",
@@ -194,6 +208,13 @@
       "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
+    }
+  ],
+  "CreateApplicationSecurityWafPolicy": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF Policy returns \"Created\" response"
     }
   ],
   "CreateApplicationSecurityWafExclusionFilter": [
