@@ -17,6 +17,12 @@ further_reading:
   - link: "https://argo-cd.readthedocs.io/en/stable/user-guide/sync-waves/"
     tag: "External Site"
     text: "ArgoCD Sync Waves"
+  - link: "https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/"
+    tag: "External Site"
+    text: "ArgoCD diffing customization"
+  - link: "https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/"
+    tag: "External Site"
+    text: "ArgoCD sync options"
 ---
 
 ## Overview
@@ -228,14 +234,17 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
   ignoreDifferences:
     - group: apps
       kind: Deployment
-      name: nginx-dka-demo
+      name: nginx
       namespace: nginx-dka-demo
       managedFieldsManagers:
         - datadog-cluster-agent
 {{< /code-block >}}
+
+The `ignoreDifferences` entry pairs with `RespectIgnoreDifferences=true` to instruct ArgoCD not to revert changes the Datadog Cluster Agent applies to the autoscaled workload. The `managedFieldsManagers` form leverages Kubernetes server-side apply field ownership, so any field the Cluster Agent owns (replicas, annotations under `autoscaling.datadoghq.com/`, container resources) is preserved automatically. See [Allow the Datadog Cluster Agent to update autoscaled workloads](#allow-the-datadog-cluster-agent-to-update-autoscaled-workloads) for the full rationale and global-configuration alternative.
 
 Create the Helm chart for the NGINX application:
 
@@ -372,6 +381,164 @@ spec:
       {{- toYaml .Values.autoscaler.scaleDown.rules | nindent 6 }}
 {{- end }}
 {{< /code-block >}}
+
+## Allow the Datadog Cluster Agent to update autoscaled workloads
+
+When `applyPolicy.mode: Apply` is set on a `DatadogPodAutoscaler`, the Datadog Cluster Agent mutates the target workload directly — it updates `spec.replicas`, container resources, and writes annotations under the `autoscaling.datadoghq.com/` prefix to track its recommendations and applied state. Without additional ArgoCD configuration, ArgoCD interprets these mutations as drift and, with `selfHeal: true` enabled, reverts them on every sync — fighting the autoscaler.
+
+Two options are available to prevent this conflict:
+
+- **Option A (per-Application):** Add `ignoreDifferences` and `RespectIgnoreDifferences=true` to each ArgoCD `Application` that contains an autoscaled workload. This is shown in [Stage 4](#stage-4-nginx-application-with-datadogpodautoscaler) above.
+- **Option B (global):** Configure `argocd-cm` once so the `ignoreDifferences` rule applies to every Application in the instance.
+
+### Supported target workload kinds
+
+The `ignoreDifferences` configuration must cover every workload kind that a `DatadogPodAutoscaler` can target via `spec.targetRef`:
+
+| Workload kind | API group | Note |
+|---|---|---|
+| `Deployment` | `apps` | |
+| `StatefulSet` | `apps` | |
+| `Rollout` | `argoproj.io` | Applies only if you also run Argo Rollouts |
+
+### Option A — Per-application configuration
+
+Choose one of the following variants depending on whether server-side apply is active in your cluster.
+
+#### Variant 1: `managedFieldsManagers` (recommended, requires server-side apply)
+
+The `managedFieldsManagers` approach covers every field the Cluster Agent owns — `spec.replicas`, container resources, and all annotations — without enumerating them individually. It requires `ServerSideApply=true` so that Kubernetes populates the field-ownership database.
+
+{{< code-block lang="yaml" >}}
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - ServerSideApply=true
+    - RespectIgnoreDifferences=true
+ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    managedFieldsManagers:
+      - datadog-cluster-agent
+  - group: apps
+    kind: StatefulSet
+    managedFieldsManagers:
+      - datadog-cluster-agent
+  - group: argoproj.io
+    kind: Rollout
+    managedFieldsManagers:
+      - datadog-cluster-agent
+{{< /code-block >}}
+
+This is the approach used in the Stage 4 example above. Only include the `kind` entries for the workload types present in each Application.
+
+#### Variant 2: `jqPathExpressions` (works with client-side apply)
+
+The `jqPathExpressions` approach explicitly targets only annotations beginning with `autoscaling.datadoghq.com/`, making it compatible with client-side apply. Use this variant if `ServerSideApply=true` is not available in your environment.
+
+{{< code-block lang="yaml" >}}
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - RespectIgnoreDifferences=true
+ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jqPathExpressions:
+      - .metadata.annotations | to_entries[] | select(.key | startswith("autoscaling.datadoghq.com")) | .key
+      - .spec.template.metadata.annotations | to_entries[] | select(.key | startswith("autoscaling.datadoghq.com")) | .key
+  - group: apps
+    kind: StatefulSet
+    jqPathExpressions:
+      - .metadata.annotations | to_entries[] | select(.key | startswith("autoscaling.datadoghq.com")) | .key
+      - .spec.template.metadata.annotations | to_entries[] | select(.key | startswith("autoscaling.datadoghq.com")) | .key
+  - group: argoproj.io
+    kind: Rollout
+    jqPathExpressions:
+      - .metadata.annotations | to_entries[] | select(.key | startswith("autoscaling.datadoghq.com")) | .key
+      - .spec.template.metadata.annotations | to_entries[] | select(.key | startswith("autoscaling.datadoghq.com")) | .key
+{{< /code-block >}}
+
+**Limitation:** this variant only covers `autoscaling.datadoghq.com/` annotations. If the autoscaler also mutates `spec.replicas` or container resource requests, add separate `jqPathExpressions` entries for those fields. Variant 1 (`managedFieldsManagers`) avoids this gap by automatically covering all fields the Cluster Agent owns.
+
+### Option B — Global ArgoCD configuration
+
+To apply `ignoreDifferences` once across all Applications in an ArgoCD instance, configure the `argocd-cm` ConfigMap using `resource.customizations.ignoreDifferences.<group>_<kind>` keys.
+
+#### ConfigMap (kubectl or Kustomize installs)
+
+{{< code-block lang="yaml" filename="argocd-cm patch" >}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  resource.customizations.ignoreDifferences.apps_Deployment: |
+    managedFieldsManagers:
+      - datadog-cluster-agent
+  resource.customizations.ignoreDifferences.apps_StatefulSet: |
+    managedFieldsManagers:
+      - datadog-cluster-agent
+  resource.customizations.ignoreDifferences.argoproj.io_Rollout: |
+    managedFieldsManagers:
+      - datadog-cluster-agent
+{{< /code-block >}}
+
+#### ArgoCD Helm chart values
+
+For users deploying ArgoCD via the official `argo/argo-cd` Helm chart, add the same keys under `configs.cm`:
+
+{{< code-block lang="yaml" filename="values.yaml" >}}
+configs:
+  cm:
+    resource.customizations.ignoreDifferences.apps_Deployment: |
+      managedFieldsManagers:
+        - datadog-cluster-agent
+    resource.customizations.ignoreDifferences.apps_StatefulSet: |
+      managedFieldsManagers:
+        - datadog-cluster-agent
+    resource.customizations.ignoreDifferences.argoproj.io_Rollout: |
+      managedFieldsManagers:
+        - datadog-cluster-agent
+{{< /code-block >}}
+
+Apply the values with:
+
+{{< code-block lang="bash" >}}
+helm upgrade --install argocd argo/argo-cd -f values.yaml -n argocd
+{{< /code-block >}}
+
+#### Important: `RespectIgnoreDifferences` is still required per-Application
+
+{{< callout type="warning" >}}
+Global `ignoreDifferences` configuration only suppresses diff display in the ArgoCD UI. For ArgoCD to actually preserve the Cluster Agent's mutations during automated self-heal, **each Application that contains an autoscaled workload must still set `RespectIgnoreDifferences=true` in its `syncOptions`**. There is no global equivalent for this sync option.
+{{< /callout >}}
+
+To avoid setting `RespectIgnoreDifferences=true` on each Application individually, define it at the `AppProject` level so all Applications in the project inherit it:
+
+{{< code-block lang="yaml" >}}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: default
+  namespace: argocd
+spec:
+  syncOptions:
+    - RespectIgnoreDifferences=true
+{{< /code-block >}}
+
+Alternatively, use an `ApplicationSet` template to add the sync option to all generated Applications automatically.
+
+### Which option should I use?
+
+- **Few autoscaled workloads** — use Option A. The configuration stays colocated with the workload and is easy to review.
+- **Many workloads or ArgoCD-wide standardization** — use Option B combined with a project-level or `ApplicationSet`-level `RespectIgnoreDifferences=true`.
+- **Mixed environments (not all workloads are autoscaled)** — Option B is safe to apply globally; the `managedFieldsManagers` rule is a no-op for workloads that have no Datadog Cluster Agent field ownership.
 
 ## Deployment instructions
 
@@ -518,6 +685,22 @@ Check DatadogPodAutoscaler events for scaling decisions and errors:
 {{< code-block lang="bash" >}}
 kubectl get events -n nginx-dka-demo --sort-by='.lastTimestamp'
 {{< /code-block >}}
+
+### Autoscaled workload keeps reverting
+
+If you observe the autoscaled workload's `spec.replicas` or `autoscaling.datadoghq.com/` annotations being repeatedly reset by ArgoCD (typically every ~3 minutes when `selfHeal: true` is enabled), one of the following is likely missing or misconfigured:
+
+1. **`RespectIgnoreDifferences=true` is absent** from the Application's `syncOptions`. Without this flag, ArgoCD only hides the drift in the UI but still overwrites the fields during apply.
+2. **The `ignoreDifferences` entry does not match the workload.** Verify that `group`, `kind`, `name`, and `namespace` in the entry exactly match the target workload.
+3. **`ServerSideApply=true` is not set** when using `managedFieldsManagers`. Without server-side apply, Kubernetes does not populate the field-ownership database, so the manager name cannot be matched.
+
+To confirm whether server-side apply is active and which manager owns a given field, run:
+
+{{< code-block lang="bash" >}}
+kubectl get deployment <name> -n <namespace> -o yaml --show-managed-fields
+{{< /code-block >}}
+
+Look for an entry where `manager: datadog-cluster-agent` and `operation: Apply`. If no such entry exists, server-side apply is not active for that resource.
 
 ### Cluster Agent logs
 
