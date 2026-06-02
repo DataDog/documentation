@@ -1,5 +1,5 @@
 ---
-title: SaaS Cost Integrations
+title: AI and SaaS Costs
 is_beta: true
 private: true
 disable_toc: false
@@ -30,12 +30,12 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
-SaaS Cost Integrations are in Preview.
+AI and SaaS Costs are in Preview.
 {{< /callout >}}
 
 ## Overview
 
-SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
+AI and SaaS Costs allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
 
 {{< card-grid >}}
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts" src="integrations_logos/snowflake_small.svg" alt="snowflake" >}}

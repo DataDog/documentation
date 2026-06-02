@@ -15,7 +15,7 @@ further_reading:
   text: "Learn about Datadog Costs"
 - link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
-  text: "Learn about SaaS Cost Integrations"
+  text: "AI and SaaS Costs"
 - link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Learn about Tag Pipelines"

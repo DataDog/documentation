@@ -3995,7 +3995,7 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
       weight: 205
-    - name: SaaS Integrations
+    - name: AI and SaaS Costs
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
