@@ -1582,7 +1582,7 @@ $monolog->info('User clicked the checkout button.', [
 
 Other Monolog handlers attached to the same logger continue to receive `dd.*` trace identifiers, so file or syslog output keeps its existing correlation behavior.
 
-### Trace and log correlation {% #trace-log-correlation-php %}
+### Correlate traces and logs {% #trace-log-correlation-php %}
 
 Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are added to the log record. To create spans with the OpenTelemetry tracing API as shown below, also set `DD_TRACE_OTEL_ENABLED=true`.
 
