@@ -3928,6 +3928,32 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 83
+    - name: Create ServiceNow tickets for security findings
+      url: '#create-servicenow-tickets-for-security-findings'
+      identifier: security-monitoring-create-servicenow-tickets-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateServiceNowTickets
+        unstable:
+          - v2
+        order: 129
+    - name: Attach security findings to a ServiceNow ticket
+      url: '#attach-security-findings-to-a-servicenow-ticket'
+      identifier: security-monitoring-attach-security-findings-to-a-servicenow-ticket
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachServiceNowTicket
+        unstable:
+          - v2
+        order: 130
     - name: Search security findings
       url: '#search-security-findings'
       identifier: security-monitoring-search-security-findings
@@ -4012,6 +4038,19 @@ menu:
           - DetachCase
         unstable: []
         order: 17
+    - name: Assign or unassign security findings
+      url: '#assign-or-unassign-security-findings'
+      identifier: security-monitoring-assign-or-unassign-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFindingsAssignee
+        unstable:
+          - v2
+        order: 128
     - name: List security findings
       url: '#list-security-findings'
       identifier: security-monitoring-list-security-findings
