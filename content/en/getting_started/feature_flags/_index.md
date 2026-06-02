@@ -228,9 +228,9 @@ client = api.get_client()
 
 | Credential | Used by | Where it goes | Sensitive? |
 | --- | --- | --- | --- |
-| Client token | Browser, mobile, and game SDKs | Client application configuration | Public-shipping token |
-| Application ID | Browser and RUM-backed client SDKs | Client application configuration | Public-shipping identifier |
-| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Secret |
+| Client token | Browser, mobile, and game SDKs | Client application configuration | No — safe to ship in public client code |
+| Application ID | Browser and RUM-backed client SDKs | Client application configuration | No — public identifier |
+| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Yes — keep server-side only |
 
 Do not put API keys in browser, mobile, or game applications.
 

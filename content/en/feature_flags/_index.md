@@ -32,7 +32,7 @@ further_reading:
 
 Datadog Feature Flags is Datadog's flag management product. You create flags in Datadog, deliver flag configuration to Datadog Feature Flags SDKs, and evaluate variants in your application through Datadog or OpenFeature APIs.
 
-Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. See OpenFeature's getting-started guide if you're new to OpenFeature concepts like providers, evaluation context, and hooks.
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
 Feature flags enable you to toggle features on and off, conduct A/B/n testing, gradually roll out new functionality, and personalize user experiences without the need for extensive code deployments. With feature flags, you can empower your team to make dynamic changes, iterate rapidly, and deliver enhanced user experiences.
 
@@ -47,8 +47,6 @@ Use a client-side SDK when the flag is evaluated in a browser, mobile app, or ga
 | Client token | Browser, mobile, and game SDKs | Client application configuration | No — safe to ship in public client code |
 | Application ID | Browser and RUM-backed client SDKs | Client application configuration | No — public identifier |
 | API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Yes — keep server-side only |
-| Application ID | Browser and RUM-backed client SDKs | Client application configuration | Public-shipping identifier |
-| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Secret |
 
 Do not put API keys in browser, mobile, or game applications.
 
