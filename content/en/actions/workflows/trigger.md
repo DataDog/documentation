@@ -68,7 +68,7 @@ To run the workflow:
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Monitor triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
-1. Save your Workflow.
+1. Save your workflow.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ### Add the workflow to your monitor
@@ -94,24 +94,16 @@ See the test and debug page for information on [how to test a monitor trigger][1
 
 ## Incident triggers
 
-To trigger a workflow from an incident notification rule, you must first add an incident trigger to your workflow:
-1. Add an incident trigger to your workflow:
-   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Incident{{< /ui >}}.
-   - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Incident{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
-1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
-1. Incident triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
-1. Save your Workflow.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+Incident triggers can run a workflow automatically based on incident events, or manually from within an incident.
 
-Add the workflow to your incident notification rule:
-1. [Incidents Settings][6] page, select {{< ui >}}Rules{{< /ui >}}.
-1. Click {{< ui >}}New Rule{{< /ui >}}.
-1. Configure a {{< ui >}}Severity{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, and {{< ui >}}Other attributes{{< /ui >}} for your notification rule.
-1. Under {{< ui >}}Notify{{< /ui >}}, paste the workflow handle that you copied earlier.
-1. In the {{< ui >}}Recipient{{< /ui >}} section, use the workflow mention name to find your workflow. For example, `@workflow-my-workflow`. The workflow must have an incident trigger before you can trigger it from an incident.
-1. Enter a {{< ui >}}Template{{< /ui >}} and configure the {{< ui >}}Renotify{{< /ui >}} settings for the notification rule.
-1. Click {{< ui >}}Save{{< /ui >}}.
+<div class="alert alert-info">To set up incident automations within Incident Management, with incident context built in and no additional billing, see <a href="/incident_response/incident_management/setup_and_configuration/automations">Incident Automations</a>. Use a workflow with an incident trigger when incident events are one trigger among others, or when the workflow is managed outside of Incident Management.</div>
+
+To add an incident trigger to your workflow:
+1. From the [Workflow creation page][6], scroll down to the Trigger options and click {{< ui >}}Incident{{< /ui >}}.
+1. Select the incident event type that should trigger your workflow, such as when an incident is declared or updated, or on a recurring schedule.
+   1. For a manual trigger, Workflows creates a handle which you can use in monitors or [incident notification rules][16].
+1. Click {{< ui >}}Create{{< /ui >}}.
+1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Security triggers
 
@@ -164,7 +156,7 @@ To run a workflow from a software catalog entity, you must first add a software 
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Catalog{{< /ui >}}.
 2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
-3. Save your Workflow.
+3. Save your workflow.
 4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 Run the workflow from your Catalog entity:
@@ -217,18 +209,18 @@ You can trigger a workflow from Slack manually with the `/datadog workflow` comm
 You can configure a workflow to trigger automatically when a user adds a specific emoji reaction to a message in Slack.
 
 1. Add a Slack trigger to your workflow:
-   - If your workflow doesn't have any triggers, click **Add Trigger** > **Slack**.
-   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Slack**.
-1. In the **Configure** tab, select the Slack workspace where you want to listen for reactions.
-1. If the workspace requires the `emoji:read` permission, click **Enable Permission** to reinstall the Slack app with the necessary scope.
+   - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}.
+   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Slack{{< /ui >}}.
+1. In the {{< ui >}}Configure{{< /ui >}} tab, select the Slack workspace where you want to listen for reactions.
+1. If the workspace requires the `emoji:read` permission, click {{< ui >}}Enable Permission{{< /ui >}} to reinstall the Slack app with the necessary scope.
 1. Select one or more emoji reactions that trigger the workflow.
-1. Click **Save**, then **Publish**.
+1. Click {{< ui >}}Save{{< /ui >}}, then {{< ui >}}Publish{{< /ui >}}.
 
 ## API triggers
 
 Triggering a workflow using an API call requires an [API key][8] and an [application key][9] with the `workflows_run` scope. For information on adding a scope to an application key, see [Scopes][10].
 
-<div class="alert alert-info">Unscoped keys do not include the <code>workflows_run</code> scope by default. Ensure that you're following security best practice and use an application key with the minimum scopes needed to perform the desired task.</div>
+<div class="alert alert-info">Unscoped keys do not include the <code>workflows_run</code> scope by default. Make sure you're following security best practices and use an application key with the minimum scopes needed to perform the desired task.</div>
 
 You can trigger a workflow by sending a POST request with the workflow ID to the endpoint `https://api.datadoghq.com/api/v2/workflows/WORKFLOW-ID/instances`. When you add an API trigger to a workflow, the trigger interface gives you an example cURL request that you can use to trigger the workflow.
 
@@ -301,7 +293,7 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
 [5]: /service_management/workflows/build/#input-parameters
-[6]: https://app.datadoghq.com/incidents/settings#Rules
+[6]: https://app.datadoghq.com/workflow/create
 [7]: https://chat.datadoghq.com/
 [8]: /account_management/api-app-keys/#api-keys
 [9]: /account_management/api-app-keys/#application-keys
@@ -310,3 +302,5 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [12]: /service_management/workflows/test_and_debug/#test-a-monitor-trigger
 [13]: /service_management/workflows/test_and_debug/#debug-a-failed-step
 [14]: https://app.datadoghq.com/software
+[15]: /incident_response/incident_management/setup_and_configuration/automations
+[16]: /incident_response/incident_management/setup_and_configuration/notification_rules/
