@@ -371,6 +371,10 @@
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
   },
+  "salesforce-integration": {
+    "name": "Salesforce Integration",
+    "description": "Configure your [Datadog Salesforce integration](https://docs.datadoghq.com/integrations/salesforce/)\ndirectly through the Datadog API."
+  },
   "scorecards": {
     "name": "Scorecards",
     "description": "API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information."

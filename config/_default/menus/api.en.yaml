@@ -16271,6 +16271,82 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Salesforce Integration
+      url: /api/latest/salesforce-integration/
+      identifier: salesforce-integration
+      generated: true
+    - name: Delete a connected Salesforce organization
+      url: '#delete-a-connected-salesforce-organization'
+      identifier: salesforce-integration-delete-a-connected-salesforce-organization
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSalesforceOrganization
+        unstable: []
+        order: 2
+    - name: Get all connected Salesforce organizations
+      url: '#get-all-connected-salesforce-organizations'
+      identifier: salesforce-integration-get-all-connected-salesforce-organizations
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSalesforceOrganizations
+        unstable: []
+        order: 1
+    - name: Update a Salesforce incident template
+      url: '#update-a-salesforce-incident-template'
+      identifier: salesforce-integration-update-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentTemplate
+        unstable: []
+        order: 5
+    - name: Delete a Salesforce incident template
+      url: '#delete-a-salesforce-incident-template'
+      identifier: salesforce-integration-delete-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentTemplate
+        unstable: []
+        order: 6
+    - name: Create a Salesforce incident template
+      url: '#create-a-salesforce-incident-template'
+      identifier: salesforce-integration-create-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentTemplate
+        unstable: []
+        order: 4
+    - name: Get all Salesforce incident templates
+      url: '#get-all-salesforce-incident-templates'
+      identifier: salesforce-integration-get-all-salesforce-incident-templates
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentTemplates
+        unstable: []
+        order: 3
     - name: Scorecards
       url: /api/latest/scorecards/
       identifier: scorecards

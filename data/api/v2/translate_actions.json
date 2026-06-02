@@ -2412,6 +2412,34 @@
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
   },
+  "GetIncidentTemplates": {
+    "description": "Get all Salesforce incident templates configured for your organization.",
+    "summary": "Get all Salesforce incident templates"
+  },
+  "CreateIncidentTemplate": {
+    "description": "Create a new Salesforce incident template for your organization. Template\nnames must be unique within an organization.",
+    "summary": "Create a Salesforce incident template",
+    "request_description": "Salesforce incident template payload.",
+    "request_schema_description": "Create request for a Salesforce incident template."
+  },
+  "DeleteIncidentTemplate": {
+    "description": "Delete a single Salesforce incident template from your organization.",
+    "summary": "Delete a Salesforce incident template"
+  },
+  "UpdateIncidentTemplate": {
+    "description": "Update a single Salesforce incident template in your organization.",
+    "summary": "Update a Salesforce incident template",
+    "request_description": "Salesforce incident template payload.",
+    "request_schema_description": "Update request for a Salesforce incident template."
+  },
+  "GetSalesforceOrganizations": {
+    "description": "Get all Salesforce organizations connected to your Datadog organization\nthrough the Salesforce integration. Salesforce organizations are connected\nthrough the OAuth setup flow in the Datadog Salesforce integration page.",
+    "summary": "Get all connected Salesforce organizations"
+  },
+  "DeleteSalesforceOrganization": {
+    "description": "Disconnect a Salesforce organization from your Datadog organization.\nThis also deletes any incident templates referencing the organization.",
+    "summary": "Delete a connected Salesforce organization"
+  },
   "ListServiceNowAssignmentGroups": {
     "description": "Get all assignment groups for a ServiceNow instance.",
     "summary": "List ServiceNow assignment groups"
