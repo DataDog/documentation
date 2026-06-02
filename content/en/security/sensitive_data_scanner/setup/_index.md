@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Set up Sensitive Data Scanner based on the data source you want to scan. Each source uses its own setup process, so you only need to configure the sources relevant to your needs.
+Set up Sensitive Data Scanner for each data source you want to scan. Each source uses its own setup process, so you only need to configure the sources relevant to your needs.
 
 - **Telemetry data:** Scan your logs, APM spans, RUM events, and events from Event Management. See [Telemetry Data][1] for setup instructions. To scan logs before they leave your network, use the [Sensitive Data Scanner processor for Observability Pipelines][5].
 - **LLM Observability data:** Scan LLM traces, prompts, and completions. Configure scanning from the [LLM Observability Settings page][3].
