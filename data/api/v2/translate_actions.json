@@ -5563,6 +5563,12 @@
     "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
     "summary": "Unpublish status page"
   },
+  "GetStegadographyWidgets": {
+    "description": "Extracts watermarks from a PNG image and returns the cached widget data\nassociated with each watermark found. The image must be uploaded as a\n`multipart/form-data` request with the file in the `image` field.\nOnly widgets belonging to the authenticated organization are returned.",
+    "summary": "Get widgets from an image",
+    "request_description": "PNG image to extract watermarks from.",
+    "request_schema_description": "Multipart form data containing the PNG image to scan for watermarks."
+  },
   "GetApiMultistepSubtests": {
     "description": "Get the list of API tests that can be added as subtests to a given API multistep test.\nThe current test is excluded from the list since a test cannot be a subtest of itself.",
     "summary": "Get available subtests for a multistep test"
