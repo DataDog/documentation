@@ -29,7 +29,7 @@ On the **Activity** tab, you can see:
 
 - The **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][24] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
 - A **Timeline** of alert triggers, recoveries, and test modifications.
-- A detail panel for the selected alert showing what happened, the failing result, and suggested next steps for investigation.
+- A **Summary** panel for the selected timeline event, showing what happened, the failing result, and suggested next steps for investigation.
 
 {{< img src="synthetics/browser_tests/synthetics_bits_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits AI SRE investigation" style="width:100%;" >}}
 

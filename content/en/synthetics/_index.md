@@ -64,7 +64,7 @@ You can create Synthetic tests in the [Datadog application][1], with the [API][2
 
 API tests allow you to launch [single][4] or [chained][5] requests to perform verifications on your key systems at various network levels: [HTTP test][6], [SSL test][7], [DNS test][8], [WebSocket test][9], [TCP test][10], [UDP test][11], [ICMP test][12], and [gRPC test][13]. 
 
-{{< img src="synthetics/api_tests/synthetics_api_test_new.png" alt="HTTP API test details page showing the Activity tab with global uptime, an alert timeline, and a list of latest test runs" style="width:100%;">}}
+{{< img src="synthetics/api_tests/api_test_shopist.png" alt="HTTP API test details page showing the Activity tab with global uptime, an alert timeline, and a list of latest test runs" style="width:100%;">}}
 
 ## Record browser tests
 
