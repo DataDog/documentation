@@ -1,36 +1,39 @@
 ---
 title: Host Map Widget
 widget_type: hostmap
-description: "Display the Datadog host map in your dashboards."
+description: "Get an at-a-glance view of the health and status of your infrastructure in your dashboards."
 aliases:
 - /graphing/widgets/hostmap/
 further_reading:
+- link: "/infrastructure/hostmap/"
+  tag: "Documentation"
+  text: "Host Map"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
 ---
 
-The host map widget graphs any metric across your hosts using the same visualization available from the main [Host Map][1] page:
+The host map widget displays your infrastructure as a grid of nodes—hosts, containers, pods, or clusters—where each node is colored by a metric query. Use it to spot anomalies, understand resource distribution, and monitor the health of your infrastructure at a glance. For the full-screen version, see the [Host Map][1] page.
 
-{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host Map" >}}
+{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host map widget showing hosts grouped by availability zone and colored by CPU utilization, with darker hexagons indicating higher CPU usage" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup" >}}
+{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="Host map widget configuration panel with node type set to Host, filter set to env:prod, grouped by availability-zone, and fill by a CPU utilization metric query" >}}
 
 ### Configuration
 
-Configuration of the host map widget is similar to the main [host map][1] page:
-
-1. {{< ui >}}Type{{< /ui >}}: Choose to display `hosts` or `containers`.
-2. {{< ui >}}Filter by{{< /ui >}}: Choose the hosts or containers to display.
-3. {{< ui >}}Group by{{< /ui >}}: Aggregate your hosts or containers by one or several tags.
-4. {{< ui >}}Fill by{{< /ui >}}: Choose a metric to fill your host or container map elements.
-5. {{< ui >}}Size by{{< /ui >}} (optional): Choose a metric to size your host or container map elements.
-6. {{< ui >}}Palette{{< /ui >}} (optional): Choose a color palette.
-7. {{< ui >}}Values{{< /ui >}} (optional): Define the min and max color palette fill values.
-
-**Note**: Free text search is not available for the host map widget.
+1. {{< ui >}}Node type{{< /ui >}}: Choose which entity type to display: **Host**, **Container**, **Pod**, or **Cluster**.
+2. {{< ui >}}Filter by{{< /ui >}}: Narrow the set of nodes using a tag filter expression (for example, `env:prod`). Filter expressions support wildcards and logical operators. Leave blank to include all nodes of the selected type.
+3. {{< ui >}}Group by{{< /ui >}}: Aggregate nodes into hexagonal groups by one or more tags. Nodes that share a tag value appear together in the same group.
+4. {{< ui >}}Fill by{{< /ui >}}: Configure a metric query whose value determines the color of each node. The query is evaluated per node and mapped to the selected color palette.
+5. {{< ui >}}Size by{{< /ui >}} (optional): Configure a second metric query to scale the relative size of each node. Not available when a hierarchical child layer is configured.
+6. {{< ui >}}Style{{< /ui >}}:
+   - {{< ui >}}Palette{{< /ui >}}: Choose a color palette.
+   - {{< ui >}}Reverse palette{{< /ui >}}: Flip the direction of the palette.
+   - {{< ui >}}Min{{< /ui >}} / {{< ui >}}Max{{< /ui >}}: Pin the color scale to specific metric values. Nodes below the minimum display in the first palette color; nodes above the maximum display in the last.
+7. {{< ui >}}Conditional formats{{< /ui >}} (optional): Apply color overrides to nodes whose fill value crosses a defined threshold.
+8. {{< ui >}}Hierarchical view{{< /ui >}} (optional): Configure a child node type that appears when zooming into a group—for example, **Container** within **Host**. The child layer has its own independent {{< ui >}}Fill by{{< /ui >}} query and {{< ui >}}Style{{< /ui >}} settings.
 
 ### Options
 
