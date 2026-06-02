@@ -4202,28 +4202,28 @@
     "request_schema_description": "RUM application update request."
   },
   "ListRumMetrics": {
-    "description": "Get the list of configured rum-based metrics with their definitions.",
-    "summary": "Get all rum-based metrics"
+    "description": "Get the list of configured RUM-based metrics with their definitions.",
+    "summary": "Get all RUM-based metrics"
   },
   "CreateRumMetric": {
-    "description": "Create a metric based on your organization's RUM data.\nReturns the rum-based metric object from the request body when the request is successful.",
-    "summary": "Create a rum-based metric",
-    "request_description": "The definition of the new rum-based metric.",
-    "request_schema_description": "The new rum-based metric body."
+    "description": "Create a metric based on your organization's RUM data.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "summary": "Create a RUM-based metric",
+    "request_description": "The definition of the new RUM-based metric.",
+    "request_schema_description": "The new RUM-based metric body."
   },
   "DeleteRumMetric": {
-    "description": "Delete a specific rum-based metric from your organization.",
-    "summary": "Delete a rum-based metric"
+    "description": "Delete a specific RUM-based metric from your organization.",
+    "summary": "Delete a RUM-based metric"
   },
   "GetRumMetric": {
-    "description": "Get a specific rum-based metric from your organization.",
-    "summary": "Get a rum-based metric"
+    "description": "Get a specific RUM-based metric from your organization.",
+    "summary": "Get a RUM-based metric"
   },
   "UpdateRumMetric": {
-    "description": "Update a specific rum-based metric from your organization.\nReturns the rum-based metric object from the request body when the request is successful.",
-    "summary": "Update a rum-based metric",
-    "request_description": "New definition of the rum-based metric.",
-    "request_schema_description": "The new rum-based metric body."
+    "description": "Update a specific RUM-based metric from your organization.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "summary": "Update a RUM-based metric",
+    "request_description": "New definition of the RUM-based metric.",
+    "request_schema_description": "The new RUM-based metric body."
   },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
@@ -4237,45 +4237,45 @@
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
-    "summary": "List rum replay playlists"
+    "summary": "List RUM replay playlists"
   },
   "CreateRumReplayPlaylist": {
     "description": "Create a playlist.",
-    "summary": "Create rum replay playlist",
+    "summary": "Create RUM replay playlist",
     "request_description": "",
     "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "DeleteRumReplayPlaylist": {
     "description": "Delete a playlist.",
-    "summary": "Delete rum replay playlist"
+    "summary": "Delete RUM replay playlist"
   },
   "GetRumReplayPlaylist": {
     "description": "Get a playlist.",
-    "summary": "Get rum replay playlist"
+    "summary": "Get RUM replay playlist"
   },
   "UpdateRumReplayPlaylist": {
     "description": "Update a playlist.",
-    "summary": "Update rum replay playlist",
+    "summary": "Update RUM replay playlist",
     "request_description": "",
     "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "BulkRemoveRumReplayPlaylistSessions": {
     "description": "Remove sessions from a playlist.",
-    "summary": "Bulk remove rum replay playlist sessions",
+    "summary": "Bulk remove RUM replay playlist sessions",
     "request_description": "",
     "request_schema_description": "A collection of session identifiers used for bulk add or remove operations on a playlist."
   },
   "ListRumReplayPlaylistSessions": {
     "description": "List sessions in a playlist.",
-    "summary": "List rum replay playlist sessions"
+    "summary": "List RUM replay playlist sessions"
   },
   "RemoveRumReplaySessionFromPlaylist": {
     "description": "Remove a session from a playlist.",
-    "summary": "Remove rum replay session from playlist"
+    "summary": "Remove RUM replay session from playlist"
   },
   "AddRumReplaySessionToPlaylist": {
     "description": "Add a session to a playlist.",
-    "summary": "Add rum replay session to playlist"
+    "summary": "Add RUM replay session to playlist"
   },
   "GetSegments": {
     "description": "Get segments for a view.",
@@ -4283,21 +4283,21 @@
   },
   "ListRumReplaySessionWatchers": {
     "description": "List session watchers.",
-    "summary": "List rum replay session watchers"
+    "summary": "List RUM replay session watchers"
   },
   "DeleteRumReplaySessionWatch": {
     "description": "Delete session watch history.",
-    "summary": "Delete rum replay session watch"
+    "summary": "Delete RUM replay session watch"
   },
   "CreateRumReplaySessionWatch": {
     "description": "Record a session watch.",
-    "summary": "Create rum replay session watch",
+    "summary": "Create RUM replay session watch",
     "request_description": "",
     "request_schema_description": "A single RUM replay session watch resource returned by create operations."
   },
   "ListRumReplayViewershipHistorySessions": {
     "description": "List watched sessions.",
-    "summary": "List rum replay viewership history sessions"
+    "summary": "List RUM replay viewership history sessions"
   },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
