@@ -71,7 +71,7 @@ To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the
 ## Current limitations
 
 - OTLP trace export is in Preview and supports core APM functionality for automatic and manually created traces. Other Datadog features and capabilities may not be supported, or may require the Datadog Agent even if traces are not sent through it.
-- Traces are exported with Datadog semantics.
+- Traces are exported with Datadog semantics. For example an HTTP status code is represented as `http.status_code` in Datadog semantics and `http.response.status_code` in OTel semantics.
 
 ## Further reading
 
