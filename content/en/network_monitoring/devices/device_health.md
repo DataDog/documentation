@@ -54,7 +54,7 @@ Take action directly from the issue panel by applying the proposed fix (such as 
 
 ### View impacted devices and dependencies
 
-The issue panel also shows other devices and dependencies affected by the same issue, helping you assess the scope of impact across your network.
+The issue panel also shows other devices and dependencies potentially affected by the same issue, helping you assess the scope of impact across your network.
 
 {{< img src="network_device_monitoring/health/affected-devices-and-dependencies.png" alt="A dependency map for the ny-edge device showing connected devices, and a list of nine affected devices all marked as degraded." style="width:100%;" >}}
 
