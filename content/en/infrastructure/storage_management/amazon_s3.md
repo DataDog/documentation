@@ -332,9 +332,9 @@ Seeing recommendations has the following prerequisites:
 
 ## Identify and act on cost savings with Bits Chat
 
-<div class="alert alert-info">Bits Chat for Storage Management is in Public Preview and is available through Bits Chat.</div>
+<div class="alert alert-info">Bits Chat for Storage Management is in Preview and is available through Bits Chat. To try this skill, fill out this [Interest Form][10] </div>
 
-FinOps and engineering teams can use Bits Chat and Storage Management to identify the largest S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. Bits Chat helps teams of all backgrounds isolate savings opportunities and take action. To use Bits Chat with Storage Management capability, enable the `storage` skill in the Bits Chat settings.
+FinOps and engineering teams can use Bits Chat and Storage Management to identify personalized S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. Bits Chat helps teams of all backgrounds isolate savings opportunities and take action. To use Bits Chat with Storage Management capability, enable the `storage` skill in the Bits Chat settings.
 
 With the `storage` skill enabled for Bits Chat, you can:
 
@@ -349,3 +349,4 @@ With the `storage` skill enabled for Bits Chat, you can:
 [7]: /cloud_cost_management/
 [8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
 [9]: https://app.datadoghq.com/storage-management/settings
+[10]: https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor
