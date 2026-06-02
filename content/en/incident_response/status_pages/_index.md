@@ -52,13 +52,23 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Write<br><code style="white-space: nowrap;">status_pages_settings_write</code></td>
-      <td>Create and launch new Status Pages, and configure Status Pages settings.</td>
+      <td>Create new Status Pages, and configure Status Pages settings.</td>
       <td>Datadog Admin Role</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
       <td>Publish and update Incidents.</td>
       <td>Datadog Admin Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Public Page Publish<br><code style="white-space: nowrap;">status_pages_public_page_publish</code></td>
+      <td>Publish and unpublish public status pages.</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
+      <td>Publish and unpublish internal status pages.</td>
+      <td>None</td>
     </tr>
   </tbody>
 </table>
