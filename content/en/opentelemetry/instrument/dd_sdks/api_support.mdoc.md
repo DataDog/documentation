@@ -921,7 +921,7 @@ If you run Ruby 3.1 or 3.2, pin `opentelemetry-logs-sdk` to `~> 0.4`. Version 0.
 - **Datadog SDK**: dd-trace-php version 1.20.0 or later.
 - **OpenTelemetry PHP SDK**: Version 1.0.0 or later (`open-telemetry/sdk`).
 - **OpenTelemetry OTLP Exporter**: The OTLP exporter package (`open-telemetry/exporter-otlp`).
-- **Monolog bridge** (optional, for PSR-3 / Monolog interoperability): `open-telemetry/opentelemetry-logger-monolog` version 1.0.0 or later.
+- **Monolog bridge** (optional, for PSR-3 and Monolog interoperability): `open-telemetry/opentelemetry-logger-monolog` version 1.0.0 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
