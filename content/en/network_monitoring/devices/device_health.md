@@ -25,15 +25,15 @@ further_reading:
 - Launch [Bits AI SRE][2] investigations to pinpoint root causes
 - Take action by rolling back configuration changes directly from the investigation flow
 
-Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Devices{{< /ui >}} > {{< ui >}}Health{{< /ui >}}][1] for a fleet-wide view of all device issues, or select a device from the [Devices][3] list or any NDM visualization to see any active issues in the device side panel.
+Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Devices{{< /ui >}} > {{< ui >}}Health{{< /ui >}}][1] for a fleet-wide view of all device issues. To see active issues for a specific device, select it from the [Devices][3] list or any NDM visualization to open any active issues in the device side panel.
 
 ## Investigate an issue
 
 Select an issue to see:
 
-- A plain-language summary of what happened.
-- A graph of the affected metric showing when the issue started and its severity.
-- A timeline overlay showing when configuration changes occurred on the device, so you can correlate metric anomalies with specific changes.
+- A plain-language summary of what happened
+- A graph of the affected metric showing when the issue started and its severity
+- A timeline overlay showing when configuration changes occurred on the device, so you can correlate metric anomalies with specific changes
 
 {{< img src="network_device_monitoring/health/investigate-issue.png" alt="A device health issue showing a bandwidth utilization drop on interface ge0/0, with a summary of the root cause, a timeseries graph with configuration change markers, and a button to investigate further with Bits AI SRE." style="width:100%;" >}}
 
