@@ -103,6 +103,20 @@ You can add components to your status page either on initial setup or through th
 If multiple notices affect the same component, the notice with the greatest impact takes precedence:
 Major Outage > Partial Outage > Degraded Performance > Maintenance > Operational
 
+### Component status and uptime
+
+Each component status affects the uptime bars and uptime percentage differently:
+
+| Status | Uptime bars | Uptime percentage |
+|--------|-------------|-------------------|
+| Major Outage | Shown | Counts as downtime |
+| Partial Outage | Shown | Counts as downtime |
+| Degraded Performance | Shown | Does not count as downtime |
+| Maintenance | Shown | Does not count as downtime |
+| Operational | Shown as healthy | No impact |
+
+**Note**: Partial Outage and Major Outage are weighted equally—the full duration at either status counts as downtime in the uptime percentage calculation.
+
 ## Publish your status page
 
 After you save your status page settings, click **Launch Status Page** to make the page available at its URL.
@@ -138,7 +152,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
-- Updates the uptime bars for impacted components.
+- Updates the uptime bars for impacted components. Components set to **Partial Outage** or **Major Outage** also have their uptime percentage reduced for the duration of the impact.
 - Is visible in the notice history timeline.
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
@@ -167,6 +181,12 @@ After reviewing and scheduling, the maintenance window:
 - Returns components to **Operational** when the window ends (unless manually overridden)
 
 You can post updates if plans change or reschedule the maintenance window as needed.
+
+### Backfill a maintenance window
+
+Backfilled maintenance windows allow you to retroactively document maintenance that occurred in the past. To create a backfilled maintenance window, set the start time to a historical date.
+
+The status page uses the historical start time—not when the notice was created—when rendering uptime bars and calculating the uptime percentage for that period.
 
 ## Email subscriptions
 
