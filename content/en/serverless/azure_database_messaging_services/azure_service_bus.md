@@ -8,6 +8,8 @@ Datadog APM uses **inferred spans** to collect traces and trace metrics from Azu
 
 For Python and Node.js, Datadog traces Service Bus producers and Azure Functions consumers. .NET supports full producer and consumer tracing. Service Bus distributed tracing requires no additional setup beyond existing instrumentation for APM users.
 
+{{< img src="serverless/azure_database_messaging/azure_service_bus/azure_service_bus_service_map.png" alt="Service map showing a request flowing through Azure API Management into backend services. Suggested alt text: Datadog distributed trace connecting frontend requests through Azure API Management to backend .NET services." style="width:100%;">}}
+
 ## Supported runtimes
 
 | Runtime | Min tracer version | Min Lambda Layer | Min Azure SDK |

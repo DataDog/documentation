@@ -6,6 +6,8 @@ title: Serverless Monitoring for Azure Cosmos DB
 
 Datadog APM uses **inferred spans** to collect traces and trace metrics from Azure Cosmos DB CRUD operations. These spans appear directly in flame graph and waterfall views. Cosmos DB distributed tracing requires no additional setup beyond existing instrumentation for APM users.
 
+{{< img src="serverless/azure_database_messaging/azure_cosmosdb/azure_cosmos_flame_graph.png" alt="Datadog flame graph displaying Cosmos DB database spans alongside API and queue-processing spans in a distributed .NET application." style="width:100%;">}}
+
 ## Supported runtimes
 
 | Runtime | Min tracer version | Min Lambda Layer | Min Azure SDK |
