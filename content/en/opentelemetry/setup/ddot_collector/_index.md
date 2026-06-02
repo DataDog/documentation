@@ -50,6 +50,10 @@ The DDOT Collector offers:
 - Gain visibility into your entire configuration, dependencies, and runtime environment
 - Onboard faster with out-of-the-box tagging enrichment for OTLP data, automatically enabling [unified service tagging][1]
 
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" btn_hidden="false" header="Join the Preview!" >}}
+Remote Configuration for the Datadog Distribution of the OpenTelemetry (DDOT) Collector is in Preview. Use this form to request access.
+{{< /callout >}}
+
 ### Enterprise reliability and resources
 
 - Benefit from Datadog's robust security practices, including regular vulnerability scans and analysis
