@@ -19,9 +19,16 @@ further_reading:
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
       text: 'Configure Evaluations on your application'
+    - link: '/llm_observability/lapdog'
+      tag: 'Documentation'
+      text: 'Local development tool for LLM Observability'
 ---
 
 This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
+
+### Try it out locally with `lapdog`
+
+To try LLM Observability locally, for free, follow the steps [here][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
 
 ### Prerequisites
 
@@ -75,10 +82,11 @@ After enabling, the SDK automatically traces calls to [supported Python framewor
 
 After enabling, the SDK automatically traces calls to [supported Node.js frameworks][1] such as OpenAI, LangChain, Vercel AI SDK, Bedrock, Anthropic, and more. If your framework is not listed, add [manual instrumentation][2] to trace your LLM calls directly.
 
-**Note**: Next.js and bundled applications (esbuild, Webpack) require additional configuration. See [Supported Node.js frameworks][1] for setup details.
+**Next.js**: See [Instrument a Next.js Application for LLM Observability][3] for properly configuring your Next.js applications with the LLM Observability SDK.
 
 [1]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
 [2]: /llm_observability/instrumentation/sdk?tab=nodejs
+[3]: /llm_observability/guide/nextjs_guide
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -222,3 +230,4 @@ See below for a simple application that can be used to begin exploring the LLM O
 [9]: /llm_observability/instrumentation/auto_instrumentation/?tab=java
 [10]: /llm_observability/instrumentation/api
 [11]: /llm_observability/instrumentation/otel_instrumentation
+[12]: /llm_observability/lapdog
