@@ -85,7 +85,7 @@ yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 Then, add the following to your project to initialize the SDK:
 
-<div class="alert alert-info">Browser Feature Flags are not supported on GovCloud sites.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider } from '@datadog/openfeature-browser';

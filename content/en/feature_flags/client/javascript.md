@@ -47,7 +47,7 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 Create a `DatadogProvider` instance with your Datadog credentials. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
 
-<div class="alert alert-info">Browser Feature Flags are not supported on GovCloud sites.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
