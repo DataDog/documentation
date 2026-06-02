@@ -23,9 +23,7 @@ Metric Name pricing bills custom metrics based on the number of unique metric na
 
 **Note**: This page applies if your contract uses Metric Name pricing SKUs. These SKUs are mutually exclusive with the Timeseries (cardinality) pricing SKUs. If your contract uses Timeseries pricing instead, see [Custom Metrics billing][1].
 
-Datadog distinguishes ingested datapoints (every metric datapoint your services send) from indexed datapoints (the subset that remains queryable, based on your tag and metric configuration). Indexed datapoints are what you query from dashboards, monitors, and other Datadog features. Ingested datapoints are the raw inputs from which indexed values are computed. Indexed volume is always less than or equal to ingested volume.
-
-Your free ingestion allowance covers ingested datapoints up to five times your indexed volume. Above that threshold, ingested volume is billed separately.
+Datadog distinguishes ingested datapoints (every metric datapoint your services send) from indexed datapoints (the points that remain queryable after your tag and metric configuration is applied). You control your indexed volume with [Metrics without Limits™][4]. Excluding tags you don't need reduces the indexed datapoints you're billed for. Ingested datapoints are the raw inputs from which indexed values are computed, and indexed volume is always less than or equal to ingested volume.
 
 ## SKUs
 
@@ -37,11 +35,11 @@ Metric Name pricing introduces three SKUs:
 | `indexed_points/FLEX-INDEXED-POINTS` | Indexed datapoints above the 10M-per-metric-name baseline |
 | `ingest_points/FLEX-INGEST-POINTS`   | Ingested datapoints above 5x your indexed volume |
 
-These SKUs are mutually incompatible with the Timeseries pricing SKUs (`timeseries/CM-100`, `ingested_timeseries/CM-INGEST`).
+These SKUs are mutually incompatible with the Timeseries (cardinality) pricing SKUs.
 
 ## Pricing structure
 
-Both metric names and indexed datapoints are priced with marginal, volume-based discounting across 15 tiers. Higher-volume tiers have lower per-unit rates. As your usage accumulates, the portion that crosses into each higher tier is billed at that tier's rate. Previously billed usage is never repriced.
+Both metric names and indexed datapoints are priced with marginal, volume-based discounting across 15 tiers. Higher-volume tiers have lower per-unit rates. As your usage increases, the portion that crosses into each higher tier is billed at that tier's rate. Previously billed usage is never repriced.
 
 {{< img src="account_management/billing/metric_name_pricing/marginal-pricing-tiers.png" alt="Diagram showing marginal pricing across five volume tiers. Each tier has a per-unit rate, visualized as a bar height; higher-volume tiers (right side) have progressively shorter bars, indicating lower per-unit rates than lower-volume tiers (left side)." style="width:100%;" >}}
 
@@ -87,17 +85,17 @@ At the end of the month:
 
 ## Ingestion behavior
 
-Under Metric Name pricing, every metric datapoint your services send to Datadog counts toward ingestion, independent of [Metrics without Limits&trade;][4] configuration. Indexed volume depends on your tag and metric configuration.
+Under Metric Name pricing, every metric datapoint your services send to Datadog counts toward ingestion, independent of [Metrics without Limits™][4] configuration. Indexed volume depends on your tag and metric configuration.
 
-You're charged for ingested datapoints only when ingested volume exceeds five times your indexed volume in a given month.
+Your free ingestion allowance covers ingested datapoints up to five times your indexed volume. You're charged for ingested datapoints only above that threshold in a given month.
 
 {{< img src="account_management/billing/metric_name_pricing/ingestion-billing.png" alt="Diagram showing the ingestion billing relationship under Metric Name pricing. Ingested volume splits into a free ingestion zone (up to five times the indexed volume) and a billable overage zone above that threshold. Indexed volume sits below as a separate measurement equal to one segment of the free ingestion zone." style="width:100%;" >}}
 
-**Note**: This is a change from the cardinality-based model, in which only metrics configured with Metrics without Limits&trade; contribute to ingested volume.
+**Note**: This is a change from the cardinality-based model, in which only metrics configured with Metrics without Limits™ contribute to ingested volume.
 
 ### Distribution metrics
 
-For [Distribution metrics][5], a multiplier applies to both ingested and indexed datapoints, regardless of whether the metric is configured with Metrics without Limits&trade;. The multiplier is **five times** by default (one each for the count, sum, min, max, and avg aggregations Datadog generates). When percentile aggregations (p50, p75, p90, p95, p99) are enabled, the multiplier is **ten times**.
+For [Distribution metrics][5], a multiplier applies to both ingested and indexed datapoints, regardless of whether the metric is configured with Metrics without Limits™. The multiplier is **five times** by default (one each for the count, sum, min, max, and avg aggregations Datadog generates). When percentile aggregations (p50, p75, p90, p95, p99) are enabled, the multiplier is **ten times**.
 
 - For unconfigured Distribution metrics, ingested and indexed volumes are equal after the multiplier is applied.
 - For configured Distribution metrics, the multiplier applies to ingested volume, while indexed volume can be lower depending on tag configuration and indexing rules.
