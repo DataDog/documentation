@@ -25,7 +25,7 @@ Datadog provides a set of [Claude Code][1] skills that bring LLM Observability a
 | `/llm-obs-session-classify` | Classify whether user intent was satisfied in a session, trace, or batch of sessions from an ml_app |
 | `/llm-obs-trace-rca` | Root cause analysis on failing production LLM traces |
 | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
-| `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK from a labeled dataset or sample fixtures |
+| `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your application to wire a real `task_fn` (no placeholder), auto-discovers credentials from `.env`, and accepts a free-form `--purpose` that directs evaluator selection |
 | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators from trace data |
 | `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, re-enter mid-flow with `--start-at`. |
 
@@ -135,28 +135,42 @@ The skill highlights which metrics improved or regressed, which event categories
 
 ### Generate experiment code with the Python SDK
 
-`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][7], with all eight sections present (env setup, `LLMObs.enable`, dataset, task placeholder, evaluators, experiment, run, results inspection) and a `# TODO(user)` marker on the task and evaluators so the placeholder cannot ship by accident.
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][7], with sections for env setup, `LLMObs.enable`, dataset wiring, the task function, evaluators, the experiment definition, run, and results inspection.
 
-The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is. Every generated experiment is tagged with `generated_by=claude-code` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+Three behaviors keep the generated file runnable out of the box without the manual cleanup that an unsupervised codegen would require:
+
+**Application introspection — real `task_fn`, not a placeholder.** Instead of emitting a `# TODO(user): replace with your actual LLM call` placeholder, the skill scans the project for LLM call sites (OpenAI / Anthropic / LiteLLM / LangChain / LlamaIndex / Vertex AI / Bedrock plus any function already decorated with `@LLMObs.*` / `@workflow` / `@agent`), ranks them, and emits a wrapper that imports and calls the most likely entry point with a signature adapter from the SDK's `(input_data, config)` shape to whatever args your function actually takes. Async, class methods, and `**kwargs` shapes are handled automatically. Pass `--task-source <module:function>` to skip the scan, or `--placeholder-task` to opt out of introspection entirely.
+
+**Credential auto-discovery — no manual `export` required.** The generated file ships an inline `_load_env_files` helper (no `python-dotenv` dependency) that walks `--env-file` overrides, the output directory, the project root, parent directories, and `~/.datadog/credentials` to find Datadog and provider credentials. Shell environment variables always win over file-loaded values, so `export DD_API_KEY=...` before re-running cleanly overrides whatever the file would have loaded. Provider-key assertions in the generated file are conditional on what introspection actually wired: `OPENAI_API_KEY` is only asserted if the task imports OpenAI; `ANTHROPIC_API_KEY` only for Anthropic; and so on.
+
+**`--purpose <free text>` directs evaluator selection.** Before introspection runs, the skill captures a one-sentence statement of what the experiment is meant to validate (passed via the flag, inferred from the invocation message, or prompted via `AskUserQuestion` with five seed options plus Other). The resulting string is *not* a fixed taxonomy — Claude reads whatever you typed and reasons per-invocation about what to do with it: bias the introspection ranking toward agent / retrieval / structured-output entry points if applicable, pick a richer `task_fn` return shape (`{output, tool_calls}`, `{answer, retrieved_docs}`) when the function exposes it, and seed evaluator *semantics* (the `--evaluator-style` flag still picks the *surface*). Common patterns: a tool-call purpose adds a `tool_calls_correct` LLMJudge rubric; a structured-output purpose leans on `JSONEvaluator`; a regression-test purpose drops the LLMJudge in favor of `exact_match` + a near-match check. The resolved purpose is embedded in the file's docstring header and in the experiment's `config`, `tags`, and `description` so it surfaces in the Datadog Experiments UI list view. Every generated experiment is also tagged with `generated_by=claude-code` in both `config` and `tags` so you can identify and filter Claude-generated experiments.
+
+The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is.
 
 | Option | Default | Description |
 |--------|---------|-------------|
+| `--purpose` | auto — prompted via `AskUserQuestion` if not set or inferable from the invocation message | Free-form string describing what the experiment is meant to validate (e.g. `"test that the agent picks the right tool for ambiguous user requests"`, `"verify SQL output always parses"`, `"regression-test prompt v3 against prod baseline"`). Biases introspection ranking, wrapper return shape, and evaluator semantics |
 | `--format` | `py` | `py` (single `.py` file) or `ipynb` (Jupyter notebook with one cell per section) |
 | `--dataset` | none (inline 3-record sample) | Path to a local `DatasetRecordRaw[]` JSON or CSV file. Mutually exclusive with `--dataset-name` |
 | `--dataset-name` | none | Name of an existing Datadog dataset to fetch at runtime with `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
 | `--dataset-version` | latest | Pin to a specific dataset version when using `--dataset-name` |
 | `--project-name` | `experiment-<service-name>` (inferred from the codebase) | Datadog project name visible in the LLM Experiments UI |
-| `--evaluator-style` | `function` | `function` (plain functions), `class` (`BaseEvaluator` subclasses), or `remote` (`RemoteEvaluator` instances) |
+| `--evaluator-style` | `function` | `function` (plain functions), `class` (`BaseEvaluator` subclasses), or `remote` (`RemoteEvaluator` instances). Picks the *surface*; `--purpose` picks the *semantics* |
+| `--task-source` | auto — discovered by introspection | Explicit `<dotted.module.path>:<function_name>` to wrap as `task_fn`. Skips the introspection scan |
+| `--placeholder-task` | off | Opt out of introspection and emit a generic placeholder task with a `# TODO(user)` marker |
+| `--app-root` | resolved from `pyproject.toml` / `setup.cfg` / `setup.py` / cwd | Restricts the introspection scan to this directory tree |
+| `--env-file` | none (auto-discovery walks standard locations) | Explicit absolute path to a `.env` file. Baked into the generated file as `ENV_FILE_OVERRIDE` and always tried first at runtime |
 | `--jobs` | `10` | Concurrency passed to `experiment.run(jobs=N)` |
 | `--output` | `./experiments/experiment.<ext>` | Output file path; extension derives from `--format` |
 
 **Examples**
 
 ```
-/llm-obs-experiment-py-bootstrap
-/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --purpose "validate output accuracy"
+/llm-obs-experiment-py-bootstrap --purpose "test tool selection on ambiguous queries" --dataset ./data/qa.json
 /llm-obs-experiment-py-bootstrap --dataset-name qa_v3 --project-name customer-qa
-/llm-obs-experiment-py-bootstrap --evaluator-style remote --jobs 5
+/llm-obs-experiment-py-bootstrap --task-source mymodule.handlers:respond --evaluator-style remote
+/llm-obs-experiment-py-bootstrap --placeholder-task --format ipynb
 ```
 
 ### Bootstrap evaluators from trace data

@@ -184,7 +184,7 @@ Restart Claude Code after running both commands for the skills to appear.
 | Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
 | Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
 | Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
-| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
+| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
 | Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
 | Eval pipeline | `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
@@ -230,12 +230,19 @@ When Claude Code has access to your codebase, the skill can search for the relev
 
 #### Generate experiment code with the Python SDK
 
-`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. Three behaviors keep the generated file runnable out of the box:
+
+- **Application introspection** — instead of emitting a `# TODO(user)` placeholder, the skill scans your project for LLM call sites (OpenAI / Anthropic / LiteLLM / LangChain / LlamaIndex / Bedrock / Gemini) and wires `task_fn` to the most likely entry point with a signature adapter. Override with `--task-source <module:function>`, or opt out with `--placeholder-task`.
+- **Credential auto-discovery** — the generated file ships an inline `.env` loader that walks the output dir, project root, cwd, parent directories, and `~/.datadog/credentials`. Shell env vars always win, so `export DD_API_KEY=...` overrides any file value.
+- **`--purpose <free text>`** — a one-sentence statement of what the experiment is meant to validate. It biases the introspection ranking, picks a richer `task_fn` return shape when the function exposes one (tool calls, retrieved docs), and seeds evaluator semantics. Not a fixed taxonomy — the skill prompts if you don't pass it.
+
+The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` and the resolved `purpose` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
 
 ```
-/llm-obs-experiment-py-bootstrap
-/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --purpose "validate output accuracy"
+/llm-obs-experiment-py-bootstrap --purpose "test tool selection" --dataset ./data/qa.json
 /llm-obs-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
+/llm-obs-experiment-py-bootstrap --task-source mymodule.handlers:respond
 ```
 
 #### End-to-end eval pipeline
