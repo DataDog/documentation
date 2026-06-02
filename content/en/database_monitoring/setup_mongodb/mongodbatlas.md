@@ -253,7 +253,7 @@ Query metrics provide insights into the performance of your MongoDB operations. 
 
 To collect query metrics, ensure you have granted the required permissions as described in the [Grant the Agent access](#grant-the-agent-access-to-your-mongodb-atlas-cluster) section.
 
-Then enabled query metrics in the `conf.d/mongo.d/conf.yaml` configuration file, below is an example:
+Enable query metrics in the `conf.d/mongo.d/conf.yaml` configuration file, below is an example:
 
 {{< highlight yaml "hl_lines=11-12" >}}
 init_config:
