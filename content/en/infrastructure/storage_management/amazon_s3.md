@@ -334,15 +334,14 @@ Seeing recommendations has the following prerequisites:
 
 <div class="alert alert-info">Bits Chat for Storage Management is in Public Preview and is available through Bits Chat.</div>
 
-FinOps and engineering teams can use Bits Chat and Storage Management to identify the largest S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. Bits Chat helps teams of all backgrounds isolate savings opportunities and take action.
+FinOps and engineering teams can use Bits Chat and Storage Management to identify the largest S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. Bits Chat helps teams of all backgrounds isolate savings opportunities and take action. To use Bits Chat with Storage Management capability, enable the `storage` skill in the Bits Chat settings.
 
-With Bits Chat, you can:
+With the `storage` skill enabled for Bits Chat, you can:
 
 - **Find the biggest savings opportunities**: Ask natural language questions to surface the highest-impact prefixes, storage classes, or buckets where lifecycle changes would reduce costs the most.
 - **Create reports through Notebooks**: Bits Chat generates a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
 - **Implement changes**: Get step-by-step guidance to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
 
-To use Bits Chat with Storage Management capability, enable the `storage` skill in the Bits Chat settings.
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [3]: https://app.datadoghq.com/storage-management
