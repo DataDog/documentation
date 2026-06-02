@@ -11,13 +11,19 @@ further_reading:
 
 ## Overview
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Azure automated log forwarding is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Use this guide to set up and manage Azure automated log forwarding. You can configure log forwarding directly in Datadog or deploy it with an Azure Resource Manager (ARM) template.
 
 The ARM template deploys resources from a series of Azure services (storage accounts and function apps) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of function apps deployed to a subscription and region of your choice. Storage accounts and function apps are deployed in each of the subscriptions forwarding logs to Datadog.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 **All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
+{{< /site-region >}}
 
-**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported. If you use Datadog government sites, you can only use this feature with workloads in Azure commercial cloud.
+**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
 
 ## How to choose between automated and manual setup
 
