@@ -941,7 +941,7 @@ Lists your RUM applications and resolves the `application_id` to use for subsequ
 
 ### `get_rum_summary`
 *Toolset: **rum***\
-*Permissions Required: `RUM Apps Read`*\
+*Permissions Required: `RUM Apps Read` and `Timeseries`*\
 Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
 
 - Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
