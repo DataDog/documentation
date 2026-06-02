@@ -1242,18 +1242,34 @@ menu:
       identifier: cli
       parent: essentials_heading
       weight: 100000
+    - name: MCP Server
+      url: mcp_server
+      pre: bits-ai
+      identifier: mcp_server
+      parent: essentials_heading
+      weight: 110000
+    - name: Setup
+      url: mcp_server/setup
+      identifier: mcp_server_setup
+      parent: mcp_server
+      weight: 1
+    - name: MCP Tools
+      url: mcp_server/tools
+      identifier: mcp_server_tools
+      parent: mcp_server
+      weight: 2
     - name: Partners
       url: partners/
       pre: colab
       identifier: partners
       parent: essentials_heading
-      weight: 110000
+      weight: 120000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 120000
+      weight: 130000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -1289,7 +1305,7 @@ menu:
       pre: ddsql
       identifier: ddsql_reference
       parent: essentials_heading
-      weight: 130000
+      weight: 140000
     - name: Data Directory
       url: ddsql_reference/data_directory/
       identifier: ddsql_reference_data_directory
@@ -1300,7 +1316,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 140000
+      weight: 150000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -1311,7 +1327,7 @@ menu:
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 150000
+      weight: 160000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -1565,21 +1581,6 @@ menu:
       identifier: bits_ai_bits_assistant
       parent: bits_ai
       weight: 4
-    - name: MCP Server
-      url: bits_ai/mcp_server
-      identifier: bits_ai_mcp_server
-      parent: bits_ai
-      weight: 5
-    - name: Setup
-      url: bits_ai/mcp_server/setup
-      identifier: bits_ai_mcp_server_setup
-      parent: bits_ai_mcp_server
-      weight: 501
-    - name: MCP Tools
-      url: bits_ai/mcp_server/tools
-      identifier: bits_ai_mcp_server_tools
-      parent: bits_ai_mcp_server
-      weight: 502
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
@@ -4631,6 +4632,11 @@ menu:
       identifier: live_debugger
       parent: tracing
       weight: 12
+    - name: Debug with Bits
+      url: tracing/live_debugger/debug-with-bits/
+      identifier: live_debugger_debug_with_bits
+      parent: live_debugger
+      weight: 1
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
@@ -5489,21 +5495,21 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
-    - name: Trace-Level Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
-      weight: 40102
     - name: Session-Level Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
-      weight: 401021
+      weight: 40102
+    - name: Trace-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
+      weight: 40103
     - name: Prompt Templating
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
-      weight: 40103
+      weight: 40104
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
@@ -9512,27 +9518,32 @@ menu:
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Create Exposure SQL Models
       url: experiments/exposure_sql
       parent: pa_experiments
       identifier: pa_experiments_exposure_sql
-      weight: 4
+      weight: 5
+    - name: Manage Subject Types
+      url: experiments/subject_types
+      parent: pa_experiments
+      identifier: pa_experiments_subject_types
+      weight: 6
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 5
+      weight: 7
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 6
+      weight: 8
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 7
+      weight: 9
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics

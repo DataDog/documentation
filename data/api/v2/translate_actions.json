@@ -2368,6 +2368,26 @@
     "request_description": "",
     "request_schema_description": "Request body for updating an existing OCI tenancy integration configuration."
   },
+  "ListOpsgenieAccounts": {
+    "description": "Get a list of all Opsgenie accounts from the Datadog Opsgenie integration.",
+    "summary": "Get all Opsgenie accounts"
+  },
+  "CreateOpsgenieAccount": {
+    "description": "Create a new Opsgenie account in the Datadog Opsgenie integration.",
+    "summary": "Create a new Opsgenie account",
+    "request_description": "Opsgenie account payload.",
+    "request_schema_description": "Create request for an Opsgenie account."
+  },
+  "DeleteOpsgenieAccount": {
+    "description": "Delete a single Opsgenie account from the Datadog Opsgenie integration.",
+    "summary": "Delete an Opsgenie account"
+  },
+  "UpdateOpsgenieAccount": {
+    "description": "Update a single Opsgenie account in the Datadog Opsgenie integration.",
+    "summary": "Update an Opsgenie account",
+    "request_description": "Opsgenie account payload.",
+    "request_schema_description": "Update request for an Opsgenie account."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -2431,6 +2451,46 @@
   "ListServiceNowUsers": {
     "description": "Get all users for a ServiceNow instance.",
     "summary": "List ServiceNow users"
+  },
+  "DeleteStatuspageAccount": {
+    "description": "Delete the Statuspage account configured for your organization.",
+    "summary": "Delete the Statuspage account"
+  },
+  "GetStatuspageAccount": {
+    "description": "Get the Statuspage account configured for your organization.",
+    "summary": "Get the Statuspage account"
+  },
+  "UpdateStatuspageAccount": {
+    "description": "Update the Statuspage account configured for your organization.",
+    "summary": "Update the Statuspage account",
+    "request_description": "Statuspage account payload.",
+    "request_schema_description": "Update request for a Statuspage account."
+  },
+  "CreateStatuspageAccount": {
+    "description": "Create a Statuspage account for your organization. Only one Statuspage\naccount can be configured per organization.",
+    "summary": "Create the Statuspage account",
+    "request_description": "Statuspage account payload.",
+    "request_schema_description": "Create request for a Statuspage account."
+  },
+  "ListStatuspageUrlSettings": {
+    "description": "Get all Statuspage URL settings configured for your organization.",
+    "summary": "Get all Statuspage URL settings"
+  },
+  "CreateStatuspageUrlSetting": {
+    "description": "Create a Statuspage URL setting for your organization.",
+    "summary": "Create a Statuspage URL setting",
+    "request_description": "Statuspage URL setting payload.",
+    "request_schema_description": "Create request for a Statuspage URL setting."
+  },
+  "DeleteStatuspageUrlSetting": {
+    "description": "Delete a single Statuspage URL setting from your organization.",
+    "summary": "Delete a Statuspage URL setting"
+  },
+  "UpdateStatuspageUrlSetting": {
+    "description": "Update a single Statuspage URL setting in your organization.",
+    "summary": "Update a Statuspage URL setting",
+    "request_description": "Statuspage URL setting payload.",
+    "request_schema_description": "Update request for a Statuspage URL setting."
   },
   "ListIntegrations": {
     "summary": "List Integrations"
@@ -3780,6 +3840,10 @@
     "summary": "Upsert rows",
     "request_description": "",
     "request_schema_description": "The request body for creating or updating multiple rows into a reference table."
+  },
+  "ListReferenceTableRows": {
+    "description": "List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.",
+    "summary": "List rows"
   },
   "CreateReferenceTableUpload": {
     "description": "Create a reference table upload for bulk data ingestion",
