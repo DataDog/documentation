@@ -143,26 +143,33 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
       display: none;
     }
 
+    .api-main {
+      padding: var(--space-md) var(--space-lg);
+    }
+
     .api-toolbar {
       flex-direction: column;
       align-items: flex-start;
       height: auto;
       gap: var(--space-md);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .api-main {
-      padding: var(--space-md);
-    }
-
-    .api-toolbar {
-      margin: 0 calc(-1 * var(--space-md)) var(--space-md);
-      padding: var(--space-sm) var(--space-md) 0;
+      margin: 0 calc(-1 * var(--space-lg)) 0;
+      padding: var(--space-sm) var(--space-lg) var(--space-md);
     }
 
     :global([data-scrolled]) .api-toolbar {
-      padding: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+    }
+  }
+
+  /* Match the header container's max-width/centering at the tablet range so
+     content aligns with the logo and hamburger. Below 768px the header
+     container is also unconstrained, so no max-width is needed there. */
+  /* The header container uses content-box sizing, so max-width: 750px gives
+     a total outer box of 750 + 12 + 12 = 774px. Match that so api-shell
+     centers on the same axis as the header container. */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .api-shell {
+      max-width: 774px;
     }
   }
 </style>
