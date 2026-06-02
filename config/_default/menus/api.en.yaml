@@ -18,10 +18,6 @@ menu:
       parent: API overview
       weight: 7
       identifier: rate-limits
-    - name: Ingest email transport webhook events
-      url: /api/latest/email-transport/ingest-email-transport-webhook-events/
-      identifier: email-transport-ingest-email-transport-webhook-events
-      parent: email-transport
     - name: AWS Integration
       url: /api/latest/aws-integration/
       identifier: aws-integration
