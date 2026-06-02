@@ -18,14 +18,14 @@ Bits Code is a generative AI coding assistant that uses Datadog observability da
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][25] to have Bits Code run sessions on a schedule, or in response to signals from other Datadog products, like a new APM Recommendation or flaky test.
+Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][25] to have Bits Code run sessions on a schedule or in response to signals from other Datadog products, like a new APM Recommendation or flaky test.
 
 To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Code** > [**Sessions**][7].
 
-{{< img src="bits_ai/dev_agent/code_fix.png" alt="A code session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
+{{< img src="bits_ai/dev_agent/code_fix.png" alt="A session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
 
 ### Start a session
 After [completing setup][6], do one of the following to start a Bits Code session:
