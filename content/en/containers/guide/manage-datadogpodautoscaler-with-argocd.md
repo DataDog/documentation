@@ -515,9 +515,9 @@ helm upgrade --install argocd argo/argo-cd -f values.yaml -n argocd
 
 #### Important: `RespectIgnoreDifferences` is still required per-Application
 
-{{< callout type="warning" >}}
-Global `ignoreDifferences` configuration only suppresses diff display in the ArgoCD UI. For ArgoCD to actually preserve the Cluster Agent's mutations during automated self-heal, **each Application that contains an autoscaled workload must still set `RespectIgnoreDifferences=true` in its `syncOptions`**. There is no global equivalent for this sync option.
-{{< /callout >}}
+<div class="alert alert-warning">
+Global <code>ignoreDifferences</code> configuration only suppresses diff display in the ArgoCD UI. For ArgoCD to actually preserve the Cluster Agent's mutations during automated self-heal, <strong>each Application that contains an autoscaled workload must still set <code>RespectIgnoreDifferences=true</code> in its <code>syncOptions</code></strong>. There is no global equivalent for this sync option.
+</div>
 
 To avoid setting `RespectIgnoreDifferences=true` on each Application individually, define it at the `AppProject` level so all Applications in the project inherit it:
 
