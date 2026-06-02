@@ -186,7 +186,7 @@ Restart Claude Code after running both commands for the skills to appear.
 | Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
 | Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
 | Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
-| Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
+| Eval pipeline | `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
 
@@ -240,11 +240,24 @@ When Claude Code has access to your codebase, the skill can search for the relev
 
 #### End-to-end eval pipeline
 
-`/llm-obs-eval-pipeline` chains session classification, trace RCA, and evaluator bootstrap into a single supervised workflow with user checkpoints between phases. It is the recommended starting point when you have no existing evaluators for an application.
+`/llm-obs-eval-pipeline` walks from production traces through evaluators, datasets, experiments, and analysis in eight narrated phases, with a user checkpoint between each:
+
+1. **Classify ml_app traces** — sample and classify recent traces from your `ml_app`
+2. **Root cause analysis** — diagnose why failing traces are failing
+3. **Bootstrap evaluators** — propose an evaluator suite targeting the observed failure modes
+4. **Create dataset from prod traces** — extract input / expected_output pairs into a `DatasetRecordRaw[]` JSON
+5. **Publish dataset** — push the dataset to Datadog under your project (created lazily)
+6. **Generate experiment code** — emit a runnable `.py` or `.ipynb` that pulls the dataset and wires your app's task function
+7. **Run experiment** — execute the generated file end-to-end and capture `experiment.url`
+8. **Analyze experiment** — produce an analysis report with metric breakdowns and recommendations
+
+Each phase persists its output to `<output-dir>/state/0N-<name>.{md,json}` before its checkpoint renders, so you can `stop` cleanly at any point and resume later with `--start-at <next-phase>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
 
 ```
-/llm-obs-eval-pipeline my-chatbot
-/llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
+/llm-obs-eval-pipeline my-chatbot --project-name my-chatbot
+/llm-obs-eval-pipeline my-chatbot --stop-after eval-bootstrap          # classic 3-phase
+/llm-obs-eval-pipeline my-chatbot --start-at experiment                # resume mid-flow
+/llm-obs-eval-pipeline my-chatbot --start-at analyze --experiment-id <UUID>
 ```
 
 For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
