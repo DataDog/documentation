@@ -41,7 +41,7 @@ These SKUs are mutually incompatible with the Timeseries (cardinality) pricing S
 
 Both metric names and indexed datapoints are priced with marginal, volume-based discounting across 15 tiers. Higher-volume tiers have lower per-unit rates. As your usage increases, the portion that crosses into each higher tier is billed at that tier's rate. Previously billed usage is never repriced.
 
-{{< img src="account_management/billing/metric_name_pricing/marginal-pricing-tiers.png" alt="Diagram showing marginal pricing across five volume tiers. Each tier has a per-unit rate, visualized as a bar height; higher-volume tiers (right side) have progressively shorter bars, indicating lower per-unit rates than lower-volume tiers (left side)." style="width:100%;" >}}
+{{< img src="account_management/billing/metric_name_pricing/marginal-pricing-tiers.png" alt="Diagram illustrating how marginal pricing works, simplified to five volume tiers. Each tier has a per-unit rate, visualized as a bar height; higher-volume tiers (right side) have progressively shorter bars, indicating lower per-unit rates than lower-volume tiers (left side)." style="width:100%;" >}}
 
 Per-unit rates vary by contract type:
 
@@ -142,6 +142,6 @@ For billing questions, contact your [Customer Success][3] Manager.
 [4]: /metrics/metrics-without-limits/
 [5]: /metrics/types/?tab=distribution#metric-types
 [6]: /metrics/custom_metrics/historical_metrics/
-[7]: /account_management/plan_and_usage/usage_details/
+[7]: /account_management/billing/usage_attribution/
 [8]: /metrics/custom_metrics/#standard-integrations
 [9]: /help/
