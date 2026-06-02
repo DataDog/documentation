@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-The Agent Restricted Shell (rshell) is the command execution layer behind the [`remote-actions` toolset](/bits_ai/mcp_server/tools/#remote-actions) in the Datadog MCP server. When an AI system or developer CLI calls [`datadog_remote_action_restricted_shell_run_command`](/bits_ai/mcp_server/tools/#remote-actions), rshell is what runs on the host.
+The Agent Restricted Shell (rshell) is the command execution layer behind the [`remote-actions` toolset][1] in the Datadog MCP server. When an AI system or developer CLI calls [`datadog_remote_action_restricted_shell_run_command`][1], rshell is what runs on the host.
 
-rshell is an open source, POSIX-compatible shell interpreter written in Go and embedded in the Private Action Runner (PAR) process. It is not a real host shell. There is no `bash`, `sh`, or `zsh` process spawned. Every command is a purpose-built Go implementation with explicit safety constraints. You can view the source at [github.com/DataDog/rshell](https://github.com/DataDog/rshell).
+rshell is an open source, POSIX-compatible shell interpreter written in Go and embedded in the Private Action Runner (PAR) process. It is not a real host shell. There is no `bash`, `sh`, or `zsh` process spawned. Every command is a purpose-built Go implementation with explicit safety constraints. You can view the source on [GitHub][2].
 
 ## How it works
 
@@ -34,7 +34,7 @@ The PAR is a customer-installed process. It handles the secure channel between t
 
 rshell enforces the following constraints by design:
 
-- **No write access.** rshell has no commands that write to the filesystem. The only output redirect allowed is `>/dev/null`. Files cannot be created, modified, or deleted.
+- **No write access.** rshell has no commands that write to the file system. The only output redirect allowed is `>/dev/null`. Files cannot be created, modified, or deleted.
 - **No external binary execution.** rshell cannot call binaries on the host. Every command is a Go builtin inside the PAR process. External commands are blocked unless an explicit ExecHandler is configured.
 - **No network egress.** Network diagnostic commands (`ping`, `ss`, `ip`) are read-only. `ping` blocks flood mode, broadcast, and multicast addresses. Background execution (`cmd &`) is not supported.
 - **Path allowlisting.** All file access is restricted to directories configured in `AllowedPaths`. You can further restrict this in your Agent configuration.
@@ -150,3 +150,6 @@ private_action_runner:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /bits_ai/mcp_server/tools/#remote-actions
+[2]: https://github.com/DataDog/rshell
