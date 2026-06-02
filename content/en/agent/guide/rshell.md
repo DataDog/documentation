@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Agent Restricted Shell (rshell) is the command execution layer behind the `remote-actions` toolset in the Datadog MCP server. When an AI system or developer CLI calls `datadog_remote_action_restricted_shell_run_command`, rshell is what runs on the host.
+The Agent Restricted Shell (rshell) is the command execution layer behind the [`remote-actions` toolset](/bits_ai/mcp_server/tools/#remote-actions) in the Datadog MCP server. When an AI system or developer CLI calls [`datadog_remote_action_restricted_shell_run_command`](/bits_ai/mcp_server/tools/#remote-actions), rshell is what runs on the host.
 
 rshell is an open source, POSIX-compatible shell interpreter written in Go and embedded in the Private Action Runner (PAR) process. It is not a real host shell. There is no `bash`, `sh`, or `zsh` process spawned. Every command is a purpose-built Go implementation with explicit safety constraints. You can view the source at [github.com/DataDog/rshell](https://github.com/DataDog/rshell).
 
@@ -143,8 +143,8 @@ private_action_runner:
       - /etc/datadog-agent/
       - /var/log/datadog/
     allowed_commands:
-      - cat
-      - grep
+      - rshell:cat
+      - rshell:grep
 ```
 
 ## Further reading

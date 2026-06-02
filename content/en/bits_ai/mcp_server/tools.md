@@ -216,21 +216,6 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
-## Remote Actions
-
-<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
-
-Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a restricted shell interpreter. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
-
-### `datadog_remote_action_restricted_shell_run_command`
-*Toolset: **remote-actions***\
-*Permissions Required: `tk`*\
-Runs a read-only shell command on a specified host. Supported commands include: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss`, and `ip`. Supports pipes, loops, conditionals, variable assignment, and globbing.
-
-- Show me the last 100 lines of the Datadog Agent log on host `prod-web-01`.
-- Find all ERROR entries in `/var/log/app/` on host `db-replica-3` from the last hour.
-- Get the contents of `/etc/datadog-agent/datadog.yaml` on host `prod-worker-07`.
-
 ## Alerting
 
 Tools for validating monitors, searching monitor groups, and retrieving monitor templates.
@@ -965,6 +950,21 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
 
+## Remote Actions
+
+<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
+
+Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a [restricted shell interpreter][60]. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
+
+### `datadog_remote_action_restricted_shell_run_command`
+*Toolset: **remote-actions***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a read-only shell command on a specified host. Supported commands include: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss`, and `ip`. Supports pipes, loops, conditionals, variable assignment, and globbing.
+
+- Show me the last 100 lines of the Datadog Agent log on host `prod-web-01`.
+- Find all ERROR entries in `/var/log/app/` on host `db-replica-3` from the last hour.
+- Get the contents of `/etc/datadog-agent/datadog.yaml` on host `prod-worker-07`.
+
 ## RUM
 
 Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, and inspecting application configuration.
@@ -1358,3 +1358,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[60]: /agent/guide/rshell/
