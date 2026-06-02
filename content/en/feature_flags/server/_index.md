@@ -74,7 +74,7 @@ DD_METRICS_OTEL_ENABLED=true
 
 <div class="alert alert-warning">The <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> environment variable is required to enable the feature flagging provider. Java also supports the system property <code>-Ddd.experimental.flagging.provider.enabled=true</code>, and Ruby and Node.js support code-based configuration as an alternative. See the SDK-specific documentation for details.</div>
 
-<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. On supported Agent versions it is enabled by default. Only set SDK-level Remote Configuration variables, such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>, if your tracer has Remote Configuration disabled and you need to override that setting.</div>
+<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
 <div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable flag evaluation metrics. Without this, the SDK does not emit metrics for flag evaluations. When enabled, each evaluation records a <code>feature_flag.evaluations</code> counter metric tagged with the flag key, result variant, and evaluation reason.</div>
 

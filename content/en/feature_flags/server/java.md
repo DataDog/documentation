@@ -155,7 +155,7 @@ The Datadog feature flagging system starts automatically when the tracer is init
 
 <div class="alert alert-danger">Feature flagging requires <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> and Remote Configuration connectivity. Without the provider setting, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
 
-<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. On supported Agent versions it is enabled by default. Only set SDK-level Remote Configuration variables, such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>, if your tracer has Remote Configuration disabled and you need to override that setting.</div>
+<div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
 ### Add the Java tracer to the JVM
 

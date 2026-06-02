@@ -38,13 +38,15 @@ Feature flags enable you to toggle features on and off, conduct A/B/n testing, g
 
 If your flags are managed by LaunchDarkly, Split, ConfigCat, or another provider and you only want Datadog to record evaluated variants in RUM, see [RUM Feature Flag Tracking](/real_user_monitoring/feature_flag_tracking/) instead.
 
-Use a client-side SDK when the flag must be evaluated in a browser, mobile app, or game client. Use a server-side SDK when the decision should happen in a backend service and the flag configuration can be delivered through the Datadog Agent and Remote Configuration.
+Use a client-side SDK when the flag is evaluated in a browser, mobile app, or game client. Use a server-side SDK when the flag is evaluated in a backend service that receives flag configuration through the Datadog Agent and Remote Configuration.
 
 ### Credentials at a glance
 
 | Credential | Used by | Where it goes | Sensitive? |
 | --- | --- | --- | --- |
-| Client token | Browser, mobile, and game SDKs | Client application configuration | Public-shipping token |
+| Client token | Browser, mobile, and game SDKs | Client application configuration | No — safe to ship in public client code |
+| Application ID | Browser and RUM-backed client SDKs | Client application configuration | No — public identifier |
+| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Yes — keep server-side only |
 | Application ID | Browser and RUM-backed client SDKs | Client application configuration | Public-shipping identifier |
 | API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Secret |
 

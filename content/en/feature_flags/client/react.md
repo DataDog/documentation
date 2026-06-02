@@ -47,7 +47,7 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sd
 
 Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
 
-Note: Browser Feature Flags are currently not supported on GovCloud sites.
+<div class="alert alert-info">Browser Feature Flags are not supported on GovCloud sites.</div>
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -305,7 +305,7 @@ The React provider uses the Datadog browser provider, which also supports these 
 | --- | --- | --- |
 | `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
-| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. This is the setting that can affect RUM usage. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
 | `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |

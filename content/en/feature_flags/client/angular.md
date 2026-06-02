@@ -52,7 +52,7 @@ pnpm add @datadog/openfeature-browser @openfeature/angular-sdk @openfeature/web-
 
 Create a `DatadogProvider` instance with your Datadog credentials. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
 
-Note: Browser Feature Flags are currently not supported on GovCloud sites.
+<div class="alert alert-info">Browser Feature Flags are not supported on GovCloud sites.</div>
 
 ```typescript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -502,7 +502,7 @@ The Angular provider uses the Datadog browser provider, which also supports thes
 | --- | --- | --- |
 | `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
-| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. This is the setting that can affect RUM usage. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
 | `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |

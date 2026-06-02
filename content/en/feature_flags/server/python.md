@@ -23,7 +23,7 @@ Before setting up the Python Feature Flags SDK, ensure you have:
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
 - **Datadog Python SDK** `ddtrace` version 3.19.0 or later
-- **OpenFeature Python SDK** `openfeature-sdk` version 0.7.0 or later if you use provider event handlers to wait for initialization. If you do not use that pattern, version 0.5.0 or later is sufficient.
+- **OpenFeature Python SDK** `openfeature-sdk`: version 0.5.0 or later (version 0.7.0 or later required if you use provider event handlers to wait for initialization)
 
 Set the following environment variables:
 
