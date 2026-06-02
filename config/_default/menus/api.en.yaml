@@ -17731,6 +17731,106 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Statuspage Integration
+      url: /api/latest/statuspage-integration/
+      identifier: statuspage-integration
+      generated: true
+    - name: Update a Statuspage URL setting
+      url: '#update-a-statuspage-url-setting'
+      identifier: statuspage-integration-update-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatuspageUrlSetting
+        unstable: []
+        order: 7
+    - name: Delete a Statuspage URL setting
+      url: '#delete-a-statuspage-url-setting'
+      identifier: statuspage-integration-delete-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatuspageUrlSetting
+        unstable: []
+        order: 8
+    - name: Create a Statuspage URL setting
+      url: '#create-a-statuspage-url-setting'
+      identifier: statuspage-integration-create-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageUrlSetting
+        unstable: []
+        order: 6
+    - name: Get all Statuspage URL settings
+      url: '#get-all-statuspage-url-settings'
+      identifier: statuspage-integration-get-all-statuspage-url-settings
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStatuspageUrlSettings
+        unstable: []
+        order: 5
+    - name: Create the Statuspage account
+      url: '#create-the-statuspage-account'
+      identifier: statuspage-integration-create-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageAccount
+        unstable: []
+        order: 2
+    - name: Update the Statuspage account
+      url: '#update-the-statuspage-account'
+      identifier: statuspage-integration-update-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatuspageAccount
+        unstable: []
+        order: 3
+    - name: Get the Statuspage account
+      url: '#get-the-statuspage-account'
+      identifier: statuspage-integration-get-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStatuspageAccount
+        unstable: []
+        order: 1
+    - name: Delete the Statuspage account
+      url: '#delete-the-statuspage-account'
+      identifier: statuspage-integration-delete-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatuspageAccount
+        unstable: []
+        order: 4
     - name: Storage Management
       url: /api/latest/storage-management/
       identifier: storage-management
