@@ -154,23 +154,24 @@ A 14-day grace period applies to every flaky test with a successful fix after us
 
 This method avoids unnecessary CI failures and saves developer time.
 
-## AI-powered flaky test fixes
+## Bits AI-powered flaky test fixes
 
-Bits Code can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
+After Test Optimization detects a flaky test, [Bits Code][16] can automatically diagnose and fix it. Bits Code analyzes the test's failure patterns and generates production-ready code changes. You can then create a GitHub pull request directly from Bits Code's suggestions.
 
-For Bits AI to create a fix, the flaky test must meet the following criteria:
+For Bits Code to create a fix, the flaky test must meet the following criteria:
 - **Failure rate**: At least 5%
 - **Wasted time**: At least 2 hours
 - **Failed pipelines**: At least 2 pipelines
 - **Branch**: Must have flaked in the default branch
+- **Failed executions**: Must have at least 1 failed execution that includes both `@error.message` and `@test.source.file` tags
 
 {{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits Code displaying a proposed fix for a flaky test" style="width:100%;" >}}
 
 ### Setup
 
-To enable AI-powered flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically create fixes for flaky tests detected by Test Optimization.
+To allow Bits Code to suggest flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically creates fixes for flaky tests detected by Test Optimization.
 
-<div class="alert alert-info">A flaky test must have at least one failed execution that includes both <code>@error.message</code> and <code>@test.source.file</code> tags to be eligible for a fix. Generating a fix may take some time.</div>
+After you have enabled Bits Code, when viewing a flaky test, click **Generate fix**.
 
 ## AI-powered flaky test categorization
 

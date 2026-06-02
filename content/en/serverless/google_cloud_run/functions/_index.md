@@ -5,7 +5,7 @@ further_reading:
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
     tag: 'Blog'
     text: 'Cloud Functions is now Cloud Run functions — event-driven programming in one unified serverless platform'
-  - link: "/bits_ai/mcp_server/tools/#serverless_onboarding"
+  - link: "/mcp_server/tools/#serverless_onboarding"
     tag: 'Documentation'
     text: 'Datadog MCP Server: serverless_onboarding tool'
 

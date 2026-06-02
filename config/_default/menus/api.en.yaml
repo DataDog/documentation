@@ -6263,6 +6263,66 @@ menu:
       url: /api/latest/webhooks-integration/
       identifier: webhooks-integration
       generated: true
+    - name: Update an OAuth2 client credentials auth method
+      url: '#update-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-update-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOAuth2ClientCredentials
+        unstable: []
+        order: 4
+    - name: Get an OAuth2 client credentials auth method
+      url: '#get-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-get-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOAuth2ClientCredentials
+        unstable: []
+        order: 3
+    - name: Delete an OAuth2 client credentials auth method
+      url: '#delete-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-delete-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOAuth2ClientCredentials
+        unstable: []
+        order: 5
+    - name: Create an OAuth2 client credentials auth method
+      url: '#create-an-oauth2-client-credentials-auth-method'
+      identifier: webhooks-integration-create-an-oauth2-client-credentials-auth-method
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOAuth2ClientCredentials
+        unstable: []
+        order: 2
+    - name: Get all auth methods
+      url: '#get-all-auth-methods'
+      identifier: webhooks-integration-get-all-auth-methods
+      parent: webhooks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAllAuthMethods
+        unstable: []
+        order: 1
     - name: Update a webhook
       url: '#update-a-webhook'
       identifier: webhooks-integration-update-a-webhook
@@ -10691,6 +10751,19 @@ menu:
       url: /api/latest/entity-risk-scores/
       identifier: entity-risk-scores
       generated: true
+    - name: Get Entity Risk Score
+      url: '#get-entity-risk-score'
+      identifier: entity-risk-scores-get-entity-risk-score
+      parent: entity-risk-scores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityRiskScore
+        unstable:
+          - v2
+        order: 2
     - name: List Entity Risk Scores
       url: '#list-entity-risk-scores'
       identifier: entity-risk-scores-list-entity-risk-scores
@@ -14527,6 +14600,54 @@ menu:
           - ListOpsgenieServices
         unstable: []
         order: 1
+    - name: Update an Opsgenie account
+      url: '#update-an-opsgenie-account'
+      identifier: opsgenie-integration-update-an-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpsgenieAccount
+        unstable: []
+        order: 8
+    - name: Delete an Opsgenie account
+      url: '#delete-an-opsgenie-account'
+      identifier: opsgenie-integration-delete-an-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpsgenieAccount
+        unstable: []
+        order: 9
+    - name: Create a new Opsgenie account
+      url: '#create-a-new-opsgenie-account'
+      identifier: opsgenie-integration-create-a-new-opsgenie-account
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpsgenieAccount
+        unstable: []
+        order: 7
+    - name: Get all Opsgenie accounts
+      url: '#get-all-opsgenie-accounts'
+      identifier: opsgenie-integration-get-all-opsgenie-accounts
+      parent: opsgenie-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpsgenieAccounts
+        unstable: []
+        order: 6
     - name: Org Connections
       url: /api/latest/org-connections/
       identifier: org-connections
@@ -15076,6 +15197,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Insights
+      url: /api/latest/rum-insights/
+      identifier: rum-insights
+      generated: true
+    - name: Query aggregated waterfall
+      url: '#query-aggregated-waterfall'
+      identifier: rum-insights-query-aggregated-waterfall
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedWaterfall
+        unstable:
+          - v2
+        order: 1
+    - name: Query aggregated signals and problems
+      url: '#query-aggregated-signals-and-problems'
+      identifier: rum-insights-query-aggregated-signals-and-problems
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedSignalsProblems
+        unstable:
+          - v2
+        order: 3
+    - name: Query aggregated long tasks
+      url: '#query-aggregated-long-tasks'
+      identifier: rum-insights-query-aggregated-long-tasks
+      parent: rum-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAggregatedLongTasks
+        unstable:
+          - v2
+        order: 2
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
@@ -15092,6 +15256,18 @@ menu:
           - CreateReferenceTableUpload
         unstable: []
         order: 1
+    - name: List rows
+      url: '#list-rows'
+      identifier: reference-tables-list-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReferenceTableRows
+        unstable: []
+        order: 11
     - name: Upsert rows
       url: '#upsert-rows'
       identifier: reference-tables-upsert-rows
@@ -16151,6 +16327,82 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Salesforce Integration
+      url: /api/latest/salesforce-integration/
+      identifier: salesforce-integration
+      generated: true
+    - name: Delete a connected Salesforce organization
+      url: '#delete-a-connected-salesforce-organization'
+      identifier: salesforce-integration-delete-a-connected-salesforce-organization
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSalesforceOrganization
+        unstable: []
+        order: 2
+    - name: Get all connected Salesforce organizations
+      url: '#get-all-connected-salesforce-organizations'
+      identifier: salesforce-integration-get-all-connected-salesforce-organizations
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSalesforceOrganizations
+        unstable: []
+        order: 1
+    - name: Update a Salesforce incident template
+      url: '#update-a-salesforce-incident-template'
+      identifier: salesforce-integration-update-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentTemplate
+        unstable: []
+        order: 5
+    - name: Delete a Salesforce incident template
+      url: '#delete-a-salesforce-incident-template'
+      identifier: salesforce-integration-delete-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentTemplate
+        unstable: []
+        order: 6
+    - name: Create a Salesforce incident template
+      url: '#create-a-salesforce-incident-template'
+      identifier: salesforce-integration-create-a-salesforce-incident-template
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentTemplate
+        unstable: []
+        order: 4
+    - name: Get all Salesforce incident templates
+      url: '#get-all-salesforce-incident-templates'
+      identifier: salesforce-integration-get-all-salesforce-incident-templates
+      parent: salesforce-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentTemplates
+        unstable: []
+        order: 3
     - name: Scorecards
       url: /api/latest/scorecards/
       identifier: scorecards
@@ -17671,6 +17923,106 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Statuspage Integration
+      url: /api/latest/statuspage-integration/
+      identifier: statuspage-integration
+      generated: true
+    - name: Update a Statuspage URL setting
+      url: '#update-a-statuspage-url-setting'
+      identifier: statuspage-integration-update-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatuspageUrlSetting
+        unstable: []
+        order: 7
+    - name: Delete a Statuspage URL setting
+      url: '#delete-a-statuspage-url-setting'
+      identifier: statuspage-integration-delete-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatuspageUrlSetting
+        unstable: []
+        order: 8
+    - name: Create a Statuspage URL setting
+      url: '#create-a-statuspage-url-setting'
+      identifier: statuspage-integration-create-a-statuspage-url-setting
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageUrlSetting
+        unstable: []
+        order: 6
+    - name: Get all Statuspage URL settings
+      url: '#get-all-statuspage-url-settings'
+      identifier: statuspage-integration-get-all-statuspage-url-settings
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStatuspageUrlSettings
+        unstable: []
+        order: 5
+    - name: Create the Statuspage account
+      url: '#create-the-statuspage-account'
+      identifier: statuspage-integration-create-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageAccount
+        unstable: []
+        order: 2
+    - name: Update the Statuspage account
+      url: '#update-the-statuspage-account'
+      identifier: statuspage-integration-update-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatuspageAccount
+        unstable: []
+        order: 3
+    - name: Get the Statuspage account
+      url: '#get-the-statuspage-account'
+      identifier: statuspage-integration-get-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStatuspageAccount
+        unstable: []
+        order: 1
+    - name: Delete the Statuspage account
+      url: '#delete-the-statuspage-account'
+      identifier: statuspage-integration-delete-the-statuspage-account
+      parent: statuspage-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatuspageAccount
+        unstable: []
+        order: 4
     - name: Storage Management
       url: /api/latest/storage-management/
       identifier: storage-management
