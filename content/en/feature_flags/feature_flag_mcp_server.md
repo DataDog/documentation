@@ -57,7 +57,7 @@ Add this to `~/.cursor/mcp.json` (remember to save the file):
 The MCP Server includes tools to help you manage feature flags in your codebase. The following use cases provide sample prompts for using the tools.
 
 <div class="alert alert-info">
-  The code-implementation tools, such as <code>check-flag-implementation</code>, currently target React applications. Other tools, such as <code>list-feature-flags</code> and <code>update-feature-flag-environment</code>, are framework-agnostic.
+  The code-implementation tools, such as <code>check-flag-implementation</code>, target React applications. Other tools, such as <code>list-feature-flags</code> and <code>update-feature-flag-environment</code>, are framework-agnostic.
 </div>
 
 ### Create feature flags
