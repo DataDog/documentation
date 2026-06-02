@@ -18,9 +18,9 @@ Bits Code is a generative AI coding assistant that uses Datadog observability da
 
 {{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time Bits Code investigates an issue or generates a fix, it creates a [session][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
-To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session][18].
+To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Code** > [**Sessions**][7].
@@ -30,7 +30,7 @@ A session captures a segment of work with Bits Code, including its analysis and 
 ### Start a session
 After [completing setup][6], do one of the following to start a Bits Code session:
 - Enter a freeform prompt at [**Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
-- Invoke Bits Code in a [supported Datadog product][9]
+- Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
@@ -108,7 +108,7 @@ Bits Code fixes flaky tests that are detected through Flaky Test Management in [
 
 ### In-product recommendations
 
-Bits Code suggests code improvements and fixes in various Datadog products, such as CCM Recommendations, [APM Recommendations][21], and Profiling Insights. See [Supported Datadog products][9] for a full list.
+Bits Code suggests code improvements and fixes in various Datadog products, such as CCM Recommendations, [APM Recommendations][21], and Profiling Insights. See [Supported Datadog products](#supported-datadog-products) for a full list.
 
 ### Code security
 
@@ -135,7 +135,6 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [6]: /bits_ai/bits_ai_dev_agent/setup/
 [7]: https://app.datadoghq.com/code
 [8]: /bits_ai/bits_ai_sre/
-[9]: #supported-datadog-products
 [10]: /profiler/automated_analysis/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
@@ -143,8 +142,6 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
 [16]: /bits_ai/bits_assistant/
 [17]: /bits_ai/bits_ai_sre/
-[18]: #start-a-session
-[19]: #sessions
 [20]: /tracing/
 [21]: /tracing/recommendations/
 [22]: /cloud_cost_management/
