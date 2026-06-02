@@ -144,7 +144,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
 [4]: /actions/workflows
 [5]: /ddsql_editor
 [6]: /account_management/rbac/data_access
-[7]: /bits_ai/mcp_server
+[7]: /mcp_server
 [8]: /security/automation_pipelines
 [9]: /security/cloud_security_management/misconfigurations/
 [10]: /security/cloud_security_management/identity_risks/

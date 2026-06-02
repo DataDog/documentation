@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
     tag: "Blog"
     text: "Meet the new Bits Investigation: Deeper reasoning, twice as fast"
+  - link: "/bits_ai/ai_credits/"
+    tag: "Documentation"
+    text: "AI Credits"
 cascade:
     site_support_id: bits_ai_sre
 ---

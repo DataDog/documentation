@@ -5,7 +5,7 @@ further_reading:
 - link: "getting_started/feature_flags"
   tag: "Documentation"
   text: "Getting Started with Feature Flags"
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 ---

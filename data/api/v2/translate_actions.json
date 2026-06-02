@@ -1511,11 +1511,11 @@
     "request_schema_description": "Request to update a secure embed shared dashboard."
   },
   "ListDashboardsUsage": {
-    "description": "Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set.",
+    "description": "Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set. Use `filter[edited_before]` or `filter[viewed_before]` to narrow results by recency. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
     "summary": "Get usage stats for all dashboards"
   },
   "GetDashboardUsage": {
-    "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score.",
+    "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
     "summary": "Get usage stats for a dashboard"
   },
   "GetAllDatasets": {
@@ -2368,6 +2368,26 @@
     "request_description": "",
     "request_schema_description": "Request body for updating an existing OCI tenancy integration configuration."
   },
+  "ListOpsgenieAccounts": {
+    "description": "Get a list of all Opsgenie accounts from the Datadog Opsgenie integration.",
+    "summary": "Get all Opsgenie accounts"
+  },
+  "CreateOpsgenieAccount": {
+    "description": "Create a new Opsgenie account in the Datadog Opsgenie integration.",
+    "summary": "Create a new Opsgenie account",
+    "request_description": "Opsgenie account payload.",
+    "request_schema_description": "Create request for an Opsgenie account."
+  },
+  "DeleteOpsgenieAccount": {
+    "description": "Delete a single Opsgenie account from the Datadog Opsgenie integration.",
+    "summary": "Delete an Opsgenie account"
+  },
+  "UpdateOpsgenieAccount": {
+    "description": "Update a single Opsgenie account in the Datadog Opsgenie integration.",
+    "summary": "Update an Opsgenie account",
+    "request_description": "Opsgenie account payload.",
+    "request_schema_description": "Update request for an Opsgenie account."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -2391,6 +2411,34 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
+  },
+  "GetIncidentTemplates": {
+    "description": "Get all Salesforce incident templates configured for your organization.",
+    "summary": "Get all Salesforce incident templates"
+  },
+  "CreateIncidentTemplate": {
+    "description": "Create a new Salesforce incident template for your organization. Template\nnames must be unique within an organization.",
+    "summary": "Create a Salesforce incident template",
+    "request_description": "Salesforce incident template payload.",
+    "request_schema_description": "Create request for a Salesforce incident template."
+  },
+  "DeleteIncidentTemplate": {
+    "description": "Delete a single Salesforce incident template from your organization.",
+    "summary": "Delete a Salesforce incident template"
+  },
+  "UpdateIncidentTemplate": {
+    "description": "Update a single Salesforce incident template in your organization.",
+    "summary": "Update a Salesforce incident template",
+    "request_description": "Salesforce incident template payload.",
+    "request_schema_description": "Update request for a Salesforce incident template."
+  },
+  "GetSalesforceOrganizations": {
+    "description": "Get all Salesforce organizations connected to your Datadog organization\nthrough the Salesforce integration. Salesforce organizations are connected\nthrough the OAuth setup flow in the Datadog Salesforce integration page.",
+    "summary": "Get all connected Salesforce organizations"
+  },
+  "DeleteSalesforceOrganization": {
+    "description": "Disconnect a Salesforce organization from your Datadog organization.\nThis also deletes any incident templates referencing the organization.",
+    "summary": "Delete a connected Salesforce organization"
   },
   "ListServiceNowAssignmentGroups": {
     "description": "Get all assignment groups for a ServiceNow instance.",
@@ -2431,6 +2479,70 @@
   "ListServiceNowUsers": {
     "description": "Get all users for a ServiceNow instance.",
     "summary": "List ServiceNow users"
+  },
+  "DeleteStatuspageAccount": {
+    "description": "Delete the Statuspage account configured for your organization.",
+    "summary": "Delete the Statuspage account"
+  },
+  "GetStatuspageAccount": {
+    "description": "Get the Statuspage account configured for your organization.",
+    "summary": "Get the Statuspage account"
+  },
+  "UpdateStatuspageAccount": {
+    "description": "Update the Statuspage account configured for your organization.",
+    "summary": "Update the Statuspage account",
+    "request_description": "Statuspage account payload.",
+    "request_schema_description": "Update request for a Statuspage account."
+  },
+  "CreateStatuspageAccount": {
+    "description": "Create a Statuspage account for your organization. Only one Statuspage\naccount can be configured per organization.",
+    "summary": "Create the Statuspage account",
+    "request_description": "Statuspage account payload.",
+    "request_schema_description": "Create request for a Statuspage account."
+  },
+  "ListStatuspageUrlSettings": {
+    "description": "Get all Statuspage URL settings configured for your organization.",
+    "summary": "Get all Statuspage URL settings"
+  },
+  "CreateStatuspageUrlSetting": {
+    "description": "Create a Statuspage URL setting for your organization.",
+    "summary": "Create a Statuspage URL setting",
+    "request_description": "Statuspage URL setting payload.",
+    "request_schema_description": "Create request for a Statuspage URL setting."
+  },
+  "DeleteStatuspageUrlSetting": {
+    "description": "Delete a single Statuspage URL setting from your organization.",
+    "summary": "Delete a Statuspage URL setting"
+  },
+  "UpdateStatuspageUrlSetting": {
+    "description": "Update a single Statuspage URL setting in your organization.",
+    "summary": "Update a Statuspage URL setting",
+    "request_description": "Statuspage URL setting payload.",
+    "request_schema_description": "Update request for a Statuspage URL setting."
+  },
+  "GetAllAuthMethods": {
+    "description": "Get a list of all auth methods configured for the Webhooks integration in\nyour organization.",
+    "summary": "Get all auth methods"
+  },
+  "CreateOAuth2ClientCredentials": {
+    "description": "Create a new OAuth2 client credentials auth method for the Webhooks\nintegration. The `client_secret` is stored securely and never returned.",
+    "summary": "Create an OAuth2 client credentials auth method",
+    "request_description": "OAuth2 client credentials payload.",
+    "request_schema_description": "Create request for an OAuth2 client credentials auth method."
+  },
+  "DeleteOAuth2ClientCredentials": {
+    "description": "Delete an OAuth2 client credentials auth method by ID.",
+    "summary": "Delete an OAuth2 client credentials auth method"
+  },
+  "GetOAuth2ClientCredentials": {
+    "description": "Get a single OAuth2 client credentials auth method by ID.",
+    "summary": "Get an OAuth2 client credentials auth method"
+  },
+  "UpdateOAuth2ClientCredentials": {
+    "description": "Update an existing OAuth2 client credentials auth method.",
+    "summary": "Update an OAuth2 client credentials auth method",
+    "request_description": "OAuth2 client credentials payload.",
+    "request_schema_description": "Update request for an OAuth2 client credentials auth method."
   },
   "ListIntegrations": {
     "summary": "List Integrations"
@@ -3080,7 +3192,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.",
     "summary": "List distinct metric volumes by metric name"
   },
   "GetModelLabArtifactContent": {
@@ -3781,6 +3893,10 @@
     "request_description": "",
     "request_schema_description": "The request body for creating or updating multiple rows into a reference table."
   },
+  "ListReferenceTableRows": {
+    "description": "List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.",
+    "summary": "List rows"
+  },
   "CreateReferenceTableUpload": {
     "description": "Create a reference table upload for bulk data ingestion",
     "summary": "Create reference table upload",
@@ -3940,7 +4056,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -4118,6 +4234,24 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "QueryAggregatedLongTasks": {
+    "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.",
+    "summary": "Query aggregated long tasks",
+    "request_description": "",
+    "request_schema_description": "Request body for the aggregated long tasks endpoint."
+  },
+  "QueryAggregatedSignalsProblems": {
+    "description": "Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.",
+    "summary": "Query aggregated signals and problems",
+    "request_description": "",
+    "request_schema_description": "Request body for the aggregated signals and problems endpoint."
+  },
+  "QueryAggregatedWaterfall": {
+    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
+    "summary": "Query aggregated waterfall",
+    "request_description": "",
+    "request_schema_description": "Request body for the aggregated waterfall endpoint."
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
@@ -4352,6 +4486,10 @@
   "ListEntityRiskScores": {
     "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
     "summary": "List Entity Risk Scores"
+  },
+  "GetEntityRiskScore": {
+    "description": "Get the risk score for a specific entity by its ID. Returns security risk assessment including risk score, severity, detected signals, misconfigurations, and identity risks.",
+    "summary": "Get Entity Risk Score"
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
