@@ -53,17 +53,19 @@ const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
         </button>
       )
     }
-    <code class={cl("schema-table__name")}>{field.name}</code>
-    {
-      /* TODO: translate "[required]", "DEPRECATED", "Default:", "Allowed enum
-        values:", "Show N more", and "Toggle <field>" once authoritative
-        translation keys exist in the Hugo i18n bundle. */
-    }
-    {
-      field.required && (
-        <span class={cl("schema-table__required")}> [required]</span>
-      )
-    }
+    <span class={cl("schema-table__name-group")}>
+      <code class={cl("schema-table__name")}>{field.name}</code>
+      {
+        /* TODO: translate "[required]", "DEPRECATED", "Default:", "Allowed enum
+          values:", "Show N more", and "Toggle <field>" once authoritative
+          translation keys exist in the Hugo i18n bundle. */
+      }
+      {
+        field.required && (
+          <span class={cl("schema-table__required")}> [required]</span>
+        )
+      }
+    </span>
   </div>
   <div class={cl("schema-table__cell-type")}>
     <span class={cl("schema-table__type")}>{field.type}</span>

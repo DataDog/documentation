@@ -108,7 +108,7 @@
   flex: 1;
   padding: 4px var(--space-md);
   min-width: 0;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .schema-table__toggle {
@@ -133,6 +133,11 @@
 
 .schema-table__toggle:hover {
   color: var(--color-brand);
+}
+
+.schema-table__name-group {
+  word-break: break-all;
+  min-width: 0;
 }
 
 .schema-table__name {
