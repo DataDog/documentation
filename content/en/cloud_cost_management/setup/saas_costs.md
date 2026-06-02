@@ -1,6 +1,5 @@
 ---
 title: SaaS and AI Costs
-is_beta: true
 disable_toc: false
 aliases:
 - /cloud_cost_management/saas_costs
