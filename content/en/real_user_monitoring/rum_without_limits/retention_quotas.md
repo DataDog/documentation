@@ -50,7 +50,7 @@ Configuration is done at the application level, which means you can apply differ
 
 ## Monitor quota usage
 
-The retention filters page shows a breakdown of user sessions retention, including sessions blocked once the quota was reached. For dashboards and alerts, use the metric `rum.measure.usage.quota_blocked_sessions`.
+The retention filters page shows a breakdown of retained user sessions, including sessions blocked once the quota is reached. For dashboards and alerts, use the metric `rum.measure.usage.quota_blocked_sessions`.
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-usage.png" alt="A daily breakdown chart showing user sessions retained by custom filters, sessions retained by permanent filters, and sessions blocked once the quota was reached." style="width:100%" >}}
 
