@@ -1,14 +1,16 @@
 ---
 title: Datadog MCP Server Tools
 description: "Browse all tools available in the Datadog MCP Server, organized by toolset, with example prompts."
+aliases:
+- /bits_ai/mcp_server/tools/
 algolia:
   tags: ["mcp", "mcp server", "mcp tools", "tools"]
   rank: 70
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "bits_ai/mcp_server/setup"
+- link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
 ---
@@ -939,7 +941,7 @@ Lists your RUM applications and resolves the `application_id` to use for subsequ
 
 ### `get_rum_summary`
 *Toolset: **rum***\
-*Permissions Required: `RUM Apps Read`*\
+*Permissions Required: `RUM Apps Read` and `Timeseries`*\
 Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
 
 - Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
@@ -971,7 +973,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ## Security
 
-Tools for code security scanning and searching [security signals][53] and [security findings][54].
+Tools for code security scanning, analyzing, searching and triaging [security signals][53], managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -979,6 +981,15 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 
 - Scan my code for hardcoded secrets.
 - Check if there are any API keys or passwords committed in this file.
+
+### `get_datadog_security_signals_schema`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
+
+- What fields can I use to filter security signals?
+- Show me the available fields for Cloud SIEM signals.
+- What enum values are valid for the signal rule type field?
 
 ### `search_datadog_security_signals`
 *Toolset: **security***\
@@ -1005,6 +1016,77 @@ Retrieves the full details of a single security signal by ID, including attribut
 
 - Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
 - Show me the rule, triage state, and linked cases for this signal.
+
+### `update_datadog_security_signals_triage`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Write`*\
+Updates the triage state or assignee of one or more security signals in bulk (up to 500 signals). Accepts either a list of signal IDs or a filter query matching all signals to update.
+
+- Archive all signals from rule "Brute Force Login" in the last 24 hours.
+- Set all open signals for `service:checkout` to under review and assign them to me.
+- Mark signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu` as archived with reason "testing".
+
+### `get_datadog_security_detection_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection, API security, and AppSec.
+
+- What fields and options are available when creating a threshold detection rule?
+- Show me the schema for sequence detection rules.
+- What tag conventions and query syntax does the detection rules API use?
+
+### `list_datadog_security_detection_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+
+- List all enabled Cloud SIEM detection rules.
+- Show me detection rules tagged with `source:cloudtrail`.
+- Which rules are configured for impossible travel detection?
+
+### `get_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
+
+- Get the full definition of detection rule `abc-123-def`.
+- Show me the queries and cases for the rule generating this signal.
+- What thresholds and group-by fields does this detection rule use?
+
+### `get_datadog_security_suppressions`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Suppressions Read`*\
+Retrieves security monitoring suppressions. Supports three modes: list all suppressions, get a single suppression by ID, or get suppressions affecting a specific detection rule. Suppressions prevent detection rules from generating signals for matching conditions.
+
+- List all active suppressions.
+- Show me suppressions for detection rule `abc-123-def`.
+- Get the full details of suppression `sup-456-xyz`.
+
+### `create_datadog_security_suppression`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Suppressions Write`*\
+Creates a new suppression rule that prevents a detection rule from generating signals for specific conditions. At least one of `suppression_query` or `data_exclusion_query` must be provided.
+
+- Suppress signals from the brute force rule for IP `10.0.0.1`.
+- Create a suppression for the anomaly detection rule that ignores the `staging` environment.
+- Suppress signals from rule `abc-123-def` where `@usr.email` matches our test accounts.
+
+### `update_datadog_security_suppression`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Suppressions Write`*\
+Updates an existing suppression rule. Only changes provided fields. Providing `version` enables optimistic concurrency control to prevent overwriting concurrent edits.
+
+- Update the suppression for the brute force rule to also exclude `10.0.0.2`.
+- Change the expiration date on suppression `sup-456-xyz` to next quarter.
+- Disable the suppression for the anomaly detection rule without deleting it.
+
+### `delete_datadog_security_suppression`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Suppressions Write`*\
+Deletes a suppression rule.
+
+- Delete suppression `sup-456-xyz`.
+- Remove the suppression that was silencing the brute force detection rule.
 
 ### `security_findings_schema`
 *Toolset: **security***\
@@ -1126,8 +1208,8 @@ Retrieves the Flaky Tests Management policies configured for a repository, inclu
 
 ### `search_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+*Permissions Required: `DORA Metrics Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID.
 
 - Show me deployments for the `checkout` service in the last 7 days.
 - Get details for DORA deployment `abc123`.
@@ -1135,8 +1217,8 @@ Searches DORA deployment events with filters, or fetches full details for a sing
 
 ### `aggregate_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+*Permissions Required: `Timeseries`*\
+Returns DORA metrics (deployment frequency, change lead time, change failure rate, recovery time) for a service, team, or repo, as scalar values or timeseries. Use for questions about software delivery performance over a time window.
 
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
@@ -1292,7 +1374,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 - Add an agent trigger to the deployment rollback workflow so I can run it from here.
 - Configure the incident response workflow to be triggerable by an agent.
 
-[1]: /bits_ai/mcp_server/setup#toolsets
+[1]: /mcp_server/setup#toolsets
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
@@ -1312,6 +1394,8 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
+[60]: /security/detection_rules/
+[61]: /security/suppressions/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/

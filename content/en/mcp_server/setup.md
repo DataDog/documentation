@@ -1,14 +1,16 @@
 ---
 title: Set Up the Datadog MCP Server
 description: "Learn how to connect your AI agent to the Datadog MCP Server."
+aliases:
+- /bits_ai/mcp_server/setup/
 algolia:
   tags: ["mcp", "mcp server", "setup"]
   rank: 75
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "bits_ai/mcp_server/tools"
+- link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
 - link: "ide_plugins/vscode/?tab=cursor"
@@ -151,7 +153,7 @@ Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin include
 
 [1]: https://cursor.com/marketplace/datadog
 [2]: /ide_plugins/vscode/?tab=cursor#installation
-[3]: /bits_ai/mcp_server/tools
+[3]: /mcp_server/tools
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -241,7 +243,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-[1]: /bits_ai/mcp_server#toolsets
+[1]: #toolsets
 [2]: https://goose-docs.ai/docs/getting-started/using-extensions#mcp-servers
 {{< /site-region >}}
 
@@ -342,9 +344,9 @@ Many developers use an agent CLI such as Claude Code, Codex, or Gemini CLI along
 The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
 
 [3]: /ide_plugins/idea/
-[4]: /bits_ai/mcp_server/setup/?tab=claudecode
-[5]: /bits_ai/mcp_server/setup/?tab=codex
-[6]: /bits_ai/mcp_server/setup/?tab=geminicli
+[4]: /mcp_server/setup/?tab=claudecode
+[5]: /mcp_server/setup/?tab=codex
+[6]: /mcp_server/setup/?tab=geminicli
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -470,7 +472,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
-[3]: /bits_ai/mcp_server/tools
+[3]: /mcp_server/tools
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -761,7 +763,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [9]: https://kiro.dev/
 [10]: https://kiro.dev/cli/
 [11]: https://cline.bot/
-[12]: /bits_ai/mcp_server/tools
+[12]: /mcp_server/tools
 [13]: /account_management/org_settings/service_accounts/
 [14]: https://modelcontextprotocol.io/specification/draft/basic/authorization
 [15]: /ide_plugins/vscode/?tab=cursor
@@ -798,7 +800,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [46]: /dashboards/
 [47]: /help/
 [48]: /reference_tables/
-[49]: /bits_ai/mcp_server/tools
+[49]: /mcp_server/tools
 [50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
 [52]: https://opencode.ai/
