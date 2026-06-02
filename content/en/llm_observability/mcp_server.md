@@ -185,7 +185,7 @@ Restart Claude Code after running both commands for the skills to appear.
 | Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
 | Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
 | Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
-| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
+| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
 | Eval pipeline | `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
@@ -211,12 +211,13 @@ When Claude Code has access to your codebase, the skill can search for the relev
 
 #### Evaluator bootstrap
 
-`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of three artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, or online LLM-judge evaluators published directly to Datadog.
+`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of four artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, online LLM-judge evaluators published directly to Datadog, or — via `--emit-dataset <path>` — a `DatasetRecordRaw[]` JSON sampled from production traces and shaped for `LLMObs.create_dataset(records=...)`. The dataset-emit mode skips the evaluator workflow entirely; it produces a dataset suitable for use as the input to an experiment.
 
 ```
 /llm-obs-eval-bootstrap ml_app=my-chatbot
 /llm-obs-eval-bootstrap ml_app=my-chatbot --publish
 /llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+/llm-obs-eval-bootstrap ml_app=my-chatbot --emit-dataset ./datasets/my_chatbot_seed.json
 ```
 
 #### Experiment analyzer

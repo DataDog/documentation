@@ -26,7 +26,7 @@ Datadog provides a set of [Claude Code][1] skills that bring LLM Observability a
 | `/llm-obs-trace-rca` | Root cause analysis on failing production LLM traces |
 | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
 | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your application to wire a real `task_fn` (no placeholder), auto-discovers credentials from `.env`, and accepts a free-form `--purpose` that directs evaluator selection |
-| `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators from trace data |
+| `/llm-obs-eval-bootstrap` | Generate evaluator code from traces, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
 | `/llm-obs-eval-pipeline` | Eight-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, re-enter mid-flow with `--start-at`. |
 
 The skills produce structured, actionable output — RCA reports with before/after fix proposals, generated evaluator code, experiment comparisons — that you can pass directly to a coding agent to apply fixes to your application. When Claude Code has access to your codebase, it can search for the relevant system prompt, tool definitions, or routing logic and propose specific diffs without leaving the session.
@@ -175,15 +175,16 @@ The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into 
 
 ### Bootstrap evaluators from trace data
 
-`/llm-obs-eval-bootstrap` analyzes production traces from an ml_app (or an RCA report already in context) and proposes a suite of evaluators that would catch the observed failure modes. It outputs one of three artifacts:
+`/llm-obs-eval-bootstrap` analyzes production traces from an ml_app (or an RCA report already in context) and proposes a suite of evaluators that would catch the observed failure modes. It outputs one of four artifacts:
 
 | Mode | Flag | Output |
 |------|------|--------|
 | SDK code (default) | — | Python `BaseEvaluator` / `LLMJudge` classes ready to drop into an [LLM Experiment][3] |
 | JSON spec | `--data-only` | Framework-agnostic evaluator spec, suitable for review or manual implementation |
 | Online judges | `--publish` | LLM-judge evaluators published directly to Datadog and enabled on your ml_app |
+| Dataset emission | `--emit-dataset <path>` | A `DatasetRecordRaw[]` JSON file sampled from production traces, shaped for `LLMObs.create_dataset(records=...)`. Skips the evaluator workflow entirely — this mode produces a dataset, not evaluators |
 
-The generated Python file is self-contained and ready to hand to a coding agent for integration into your experiment harness or CI pipeline.
+The first three modes share the same evaluator-proposal workflow and differ only in how the suite is materialized. The fourth mode (`--emit-dataset`) is independent — it samples root spans for the `ml_app` (filtered to `@status:ok`), extracts `input_data` and `expected_output` per record, runs a PII scrub on string values, and writes a JSON file you can publish to Datadog as a dataset and then run an experiment against. Per-record `tags` are auto-normalized (bare strings wrapped as `tag:<value>`) so `Dataset.append()` does not reject the record. The `expected_output` field is documented as the **production behavior baseline**, not ground truth — useful for regression-style experiments (does my refactor change observed outputs?) before being promoted to a labelled gold set.
 
 **Examples**
 
@@ -191,6 +192,7 @@ The generated Python file is self-contained and ready to hand to a coding agent 
 /llm-obs-eval-bootstrap ml_app=my-chatbot
 /llm-obs-eval-bootstrap ml_app=my-chatbot --publish
 /llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+/llm-obs-eval-bootstrap ml_app=my-chatbot --emit-dataset ./datasets/my_chatbot_seed.json --trace-limit 25
 ```
 
 ### Run the end-to-end pipeline
