@@ -7,7 +7,7 @@ further_reading:
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
-  text: "AI and SaaS Costs"
+  text: "SaaS and AI Costs"
 - link: "/cloud_cost_management/allocation/custom_allocation_rules"
   tag: "Documentation"
   text: "Custom Allocation Rules"
