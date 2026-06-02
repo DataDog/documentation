@@ -99,7 +99,10 @@ The following environment variables are supported:
 : Adds extra tags to cluster check metrics.
 
 `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED`
-: When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `false`.
+: When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `true` for Agent v7.73 or later (`false` for earlier versions).
+
+`DD_CLUSTER_CHECKS_KSM_SHARDING_ENABLED`
+: Enables Kubernetes State Metrics Resource Type Sharding that automatically splits the `kubernetes_state_core` cluster check into multiple shards based on resource type groups, enabling parallel execution across multiple Cluster Check Runners (CLC runners) for improved performance and scalability in large Kubernetes clusters. Requires Agent v7.74 or higher and `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` to be set to `true`.
 
 `DD_CLUSTER_CHECKS_CLC_RUNNERS_PORT`
 : The port used by the Cluster Agent client to reach cluster-level check runners and collect their stats. Default: `5005`.

@@ -1,5 +1,6 @@
 ---
 title: Data Security and RBAC
+description: Restrict access to sensitive LLM Observability data using data access controls, redact data with span processors, and integrate with Sensitive Data Scanner.
 further_reading:
   - link: "/account_management/rbac/data_access"
     tag: "Documentation"
@@ -10,10 +11,6 @@ further_reading:
 {{< /whatsnext >}}
 
 ## Data Access Control
-
-{{< callout url="#" header="false" btn_hidden="true">}}
-  Data Access Control is in Limited Availability.
-{{< /callout >}}
 
 LLM Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
 

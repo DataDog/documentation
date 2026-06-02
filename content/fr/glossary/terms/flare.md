@@ -1,4 +1,5 @@
 ---
+id: flare
 core_product:
 - datadog agent
 title: flare

@@ -72,6 +72,13 @@ The following tables list the different CNM metrics you can create monitors on.
 | TCP Resets | The number of TCP connections that were reset by the server.  |
 | Established Connections | Establishes connections between client/server. |
 | Closed Connections      | Closed connections between client/server.      |
+| TCP Retransmit Timeouts | The number of TCP retransmission timeouts (RTOs). An RTO occurs when an ACK is not received within the estimated round-trip time, forcing the sender to retransmit and halve its congestion window. |
+| TCP Fast Recovery Events | The number of TCP fast recovery events. Fast recovery retransmits lost segments detected through duplicate ACKs or selective acknowledgment (SACK) without waiting for a retransmission timeout. |
+| TCP Reordering Events | The number of times reordering of sent packets was detected. Reordering detection adjusts the duplicate ACK threshold, preventing spurious retransmissions caused by out-of-order delivery. |
+| TCP Out-of-Order Packets | The number of TCP packets received out of order. This indicates network-level packet reordering, which can degrade TCP performance by triggering spurious retransmissions and reducing throughput. |
+| TCP ECN Negotiated | Whether Explicit Congestion Notification (ECN) was negotiated during the TCP handshake. Only connections with ECN negotiated report non-zero TCP Congestion Events. |
+| TCP Congestion Events | The number of TCP segments acknowledged with the ECN Congestion Experienced (CE) mark, indicating that an upstream router marked packets as experiencing congestion. |
+| TCP Zero Window Probes | The number of TCP zero-window probes sent. These probes are sent when the receiver advertises a zero receive window, indicating it cannot accept more data. |
 
 ### DNS
 | Metric name              | Definition                               |

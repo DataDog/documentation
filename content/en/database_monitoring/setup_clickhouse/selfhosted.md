@@ -1,7 +1,6 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted ClickHouse
 description: Install and configure Database Monitoring for self-hosted ClickHouse.
-private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -26,7 +25,7 @@ Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into y
 ## Before you begin
 
 Supported ClickHouse versions
-: 21.1 and later (21.x, 22.x, 23.x, 24.x, 25.x). Recommended minimum: 21.1 LTS.
+: 23.x and later (23.x, 24.x, 25.x). Recommended minimum: 23.8 LTS.
 
 Supported Agent versions
 : 7.78+

@@ -38,7 +38,7 @@ This allows Datadog to detect risks in your Kubernetes deployments for each of t
 
 With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations explorer][11].
 
-Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within Cloud Security or by [executing a pre-defined workflow][8].
+Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a ticket][7] from within Cloud Security or by [executing a pre-defined workflow][8].
 
 **Note**: You can also use the [API to programmatically interact with findings][10].
 
@@ -76,7 +76,7 @@ After you create the detection rule, you can customize its severity (`Critical`,
 [4]: https://www.openpolicyagent.org/docs/latest/policy-language/
 [5]: /security/cloud_security_management/guide/writing_rego_rules/
 [6]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
-[7]: /security/cloud_security_management/review_remediate/jira
+[7]: /security/ticketing_integrations
 [8]: /security/cloud_security_management/review_remediate/workflows
 [9]: https://app.datadoghq.com/security/compliance/home
 [10]: /api/latest/security-monitoring/#list-findings

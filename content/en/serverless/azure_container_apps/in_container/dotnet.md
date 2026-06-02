@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog .NET tracer** in your Dockerfile.
+1. **Install the Datadog .NET SDK** in your Dockerfile.
 
    Because GitHub requests are rate limited, you must pass a GitHub token saved in the environment variable `GITHUB_TOKEN` as a [Docker build secret][1] `--secret id=github-token,env=GITHUB_TOKEN`.
 
@@ -73,6 +73,8 @@ logger.LogInformation("Hello World!");
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-in-container language="csharp" defaultSource="containerapp" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

@@ -11,7 +11,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
   text: Source code for dd-sdk-kotlin-multiplatform
-- link: real_user_monitoring/explorer/
+- link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
 ---

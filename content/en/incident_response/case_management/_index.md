@@ -4,6 +4,9 @@ aliases:
 - /monitors/case_management/
 - /service_management/case_management/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
   text: Turn feedback into action across your engineering org with Datadog Forms
@@ -37,6 +40,7 @@ While investigating, populate the case with graphs, logs, and other telemetry da
     {{< nextlink href="/incident_response/case_management/projects" >}}Projects{{< /nextlink >}}
     {{< nextlink href="/incident_response/case_management/view_and_manage" >}}View and manage cases{{< /nextlink >}}
     {{< nextlink href="/incident_response/case_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
+    {{< nextlink href="/incident_response/case_management/approvals" >}}Case approvals{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

@@ -188,6 +188,63 @@ datadog-security-cli image myapp:latest --fail-on high
 datadog-security-cli image myapp:latest --output json
 ```
 
+## Link Dockerfile to vulnerabilities
+
+To enable Datadog to link detected vulnerabilities back to the source code (Dockerfile), you must include specific **OCI image annotations** when building your container image.
+
+This allows Datadog to:
+- Display a **preview of the Dockerfile** directly in the Container Image Vulnerabilities panel
+- Enable **source-based remediation**, helping you identify and fix issues in context
+
+These annotations provide the metadata needed to associate a scanned image with its corresponding repository, commit, and Dockerfile path.
+
+### Required annotations
+
+Add the following annotations to your image at build time:
+
+- `org.opencontainers.image.source`
+  The repository URL (for example, `https://github.com/org/repo`)
+
+- `org.opencontainers.image.revision`
+  The commit SHA used to build the image
+
+- `com.datadoghq.image.source_path`
+  The path to the Dockerfile within the repository (for example, `Dockerfile` or `docker/Dockerfile`)
+
+### Optional annotations
+
+These annotations help Datadog improve base image remediation suggestions:
+
+- `org.opencontainers.image.base.name`
+  The base image name (for example, `ubuntu:22.04`)
+
+- `org.opencontainers.image.base.digest`
+  The base image digest
+
+For more details, see the [OCI Image Spec annotations documentation][14].
+
+### Example
+
+#### Using docker build
+
+Annotations are the preferred method. Labels are also supported as a fallback.
+
+```bash
+docker build \
+  --annotation org.opencontainers.image.source="https://github.com/org/repo" \
+  --annotation org.opencontainers.image.revision="$(git rev-parse HEAD)" \
+  --annotation com.datadoghq.image.source_path="Dockerfile" \
+  -t myapp:latest .
+```
+
+#### Using the Datadog Security CLI
+
+As an alternative to adding annotations manually, the Datadog Security CLI can inject the required metadata directly when scanning, using the `--dockerfile` flag:
+
+```bash
+datadog-security-cli image myapp:latest --dockerfile ./Dockerfile
+```
+
 ## Troubleshooting
 
 ### Authentication errors
@@ -230,3 +287,4 @@ For additional help, see the [Cloud Security troubleshooting guide][12] or conta
 [11]: /integrations/azure-devops-source-code/#setup
 [12]: /security/cloud_security_management/troubleshooting/vulnerabilities/
 [13]: /help/
+[14]: https://specs.opencontainers.org/image-spec/annotations/

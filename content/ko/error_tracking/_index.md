@@ -5,7 +5,7 @@ title: 오류 추적
 
 ## 개요
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

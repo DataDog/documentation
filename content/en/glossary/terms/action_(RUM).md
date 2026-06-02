@@ -1,4 +1,5 @@
 ---
+id: action_rum
 title: action
 core_product:
   - real user monitoring

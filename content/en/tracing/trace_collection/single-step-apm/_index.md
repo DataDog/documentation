@@ -23,6 +23,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
     tag: "Blog"
     text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
+  - link: "https://www.datadoghq.com/blog/rum-apm-single-step"
+    tag: "Blog"
+    text: "Enable end-to-end visibility into your Java apps with a single command"
 ---
 ## Overview
 
@@ -45,7 +48,12 @@ After instrumentation, you can optionally:
 
 Click on one of the following tiles to learn how to set up SSI for your deployment type:
 
-{{< partial name="apm/apm-single-step.html" >}} 
+{{< card-grid card_width="170px" image_width="200" >}}
+  {{< image-card href="linux/" src="integrations_logos/linux.png" alt="linux" >}}
+  {{< image-card href="docker/" src="integrations_logos/docker.png" alt="docker" >}}
+  {{< image-card href="kubernetes/" src="integrations_logos/kubernetes.png" alt="kubernetes" >}}
+  {{< image-card href="windows/" src="integrations_logos/windows.png" alt="windows" >}}
+{{< /card-grid >}}
 
 <br>
 
@@ -59,7 +67,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/metrics/runtime_metrics/
-[3]: /tracing/software_catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
 [6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility
@@ -68,10 +76,10 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
 [10]: /tracing/trace_collection/library_config/
 [11]: /tracing/metrics/runtime_metrics/
-[12]: /tracing/software_catalog/
+[12]: /internal_developer_portal/catalog/
 [13]: /tracing/glossary/#instrumentation
 [14]: /getting_started/tagging/unified_service_tagging
 [15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [16]: /tracing/trace_collection/custom_instrumentation/
-[17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[17]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [18]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/

@@ -1,4 +1,5 @@
 ---
+id: pipeline
 core_product:
 - log management
 - observability pipelines

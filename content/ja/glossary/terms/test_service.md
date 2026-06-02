@@ -1,9 +1,10 @@
 ---
+id: test_service
 core_product:
 - ci-cd
 - synthetic monitoring
 related_terms:
-- テストスイート
+- test_suite
 short_definition: テスト サービスとは、プロジェクトやリポジトリに関連付けられたテストのグループのことです。テスト サービスには、コードに対する個々のテストがすべて含まれており、オプションでテスト
   スイートにまとめることもできます。テスト スイートは、テストのフォルダーのようなものです。
 title: テストサービス

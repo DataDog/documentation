@@ -1,6 +1,6 @@
 ---
 title: Auto-Instrumentation
-description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration for seamless monitoring setup."
+description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration."
 code_lang: server
 type: multi-code-lang
 code_lang_weight: 2
@@ -15,7 +15,7 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
 {{< /site-region >}}
 
@@ -32,20 +32,17 @@ Select a platform to start collecting RUM data on your application:
 <div class="alert alert-info">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
 <br>
-{{< partial name="rum/rum-browser-setup.html" >}}
+{{< card-grid card_width="130px" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/java" src="integrations_logos/java_servlet_large.svg" alt="java_servlet" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/nginx" src="integrations_logos/nginx_large.svg" alt="nginx" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/windows_iis" src="integrations_logos/windows_iis_large.svg" alt="windowsiis" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/apache" src="integrations_logos/apache_large.svg" alt="apache" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm" src="integrations_logos/ibm_http_large.svg" alt="ibm" >}}
+{{< /card-grid >}}
 <br>
 
-## Limitations
-
-Consider the following limitations when using auto-instrumentation:
-
-- This instrumentation method **does not support [advanced RUM configurations][1]**.
-- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK **cannot be injected**. To ensure proper instrumentation:
-  - **Disable content compression** on the upstream server.
-  - **Enable TLS origination** on the web server.
+{{% rum-browser-auto-instrumentation-limitations %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

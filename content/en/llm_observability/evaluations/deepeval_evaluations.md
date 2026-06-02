@@ -1,6 +1,10 @@
 ---
 title: DeepEval Evaluations
 description: Use DeepEval evaluations with LLM Observability Experiments.
+further_reading:
+- link: "/llm_observability/evaluations/external_evaluations"
+  tag: "Documentation"
+  text: "Submit Evaluations"
 ---
 
 ## Overview
@@ -65,7 +69,7 @@ dataset = LLMObs.create_dataset(
     ],
 )
 
-def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
     question = input_data['question']
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"

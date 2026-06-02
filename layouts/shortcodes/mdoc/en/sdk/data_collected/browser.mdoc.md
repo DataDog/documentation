@@ -11,7 +11,7 @@ There are additional [attributes specific to a given event type](#event-specific
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Session   | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geo-location). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. |
+| Session   | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. |
 | View      | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error, and action events are linked to the related RUM view with the `view.id` attribute.                       |
 | Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a web page. It includes detailed loading timing information.                                                                                                              |
 | Long Task | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
@@ -24,11 +24,11 @@ The following diagram illustrates the RUM event hierarchy:
 
 ## Default attributes
 
-See a complete list of [Standard Attributes][1] for RUM Browser. By default, the attributes are attached to each event type, so you can use them regardless of the RUM event type being queried.
+See a complete list of [standard attributes][1] for RUM Browser. By default, the attributes are attached to each event type, so you can use them regardless of the RUM event type being queried.
 
 ## Event-specific attributes
 
-### Session attributes
+### Session timing attributes
 
 | Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
@@ -71,10 +71,16 @@ See a complete list of [Standard Attributes][1] for RUM Browser. By default, the
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
 | `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
+| `view.performance.lcp.sub_parts.load_delay`     | number (ns) | Time between `view.first_byte` and the start of the LCP resource load. `0` when the LCP element does not require a resource. |
+| `view.performance.lcp.sub_parts.load_time`      | number (ns) | Time to load the LCP resource. `0` when the LCP element does not require a resource. |
+| `view.performance.lcp.sub_parts.render_delay`   | number (ns) | Time between the LCP resource finishing loading and the LCP element being painted. |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                             |
 | `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
 | `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
 | `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
+| `view.performance.inp.sub_parts.input_delay`        | number (ns) | Time from the user input until the event handler starts running. |
+| `view.performance.inp.sub_parts.processing_duration`| number (ns) | Duration of the event handler execution for the INP interaction. |
+| `view.performance.inp.sub_parts.presentation_delay` | number (ns) | Time the browser took to render the next frame after the INP interaction. |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
 | `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][4].                                                                             |
@@ -118,6 +124,15 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                                    |
 | `resource.provider.domain` | string | The resource provider domain.                                                                        |
 | `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
+
+### Resource network headers
+
+When `trackResourceHeaders` is enabled, the SDK automatically collects additional network header metadata. See [`RumInitConfiguration.trackResourceHeaders`][16] for configuration details.
+
+| Attribute                   | Type   | Description                                                                                                              |
+|-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------|
+| `resource.request.headers`  | object | Request headers as key-value pairs (available only if `trackResourceHeaders` is enabled, for Fetch resources only).      |
+| `resource.response.headers` | object | Response headers as key-value pairs (available only if `trackResourceHeaders` is enabled, for Fetch and XHR resources).  |
 
 ### GraphQL attributes
 
@@ -208,3 +223,4 @@ Source errors include code-level information about the error. For more informati
 [13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
 [14]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
 [15]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-graphql-requests
+[16]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders

@@ -3,6 +3,9 @@ title: View and Manage Cases
 aliases:
 - /service_management/case_management/view_and_manage/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: "incident_response/case_management/settings"
   tag: "Documentation"
   text: "Case settings"
@@ -88,12 +91,13 @@ From an individual case:
 - Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident.
 - [Meet on CoScreen][6]: Share screens for collaborative debugging.
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
+- [Request approval][7]: Request sign-off from one or more team members before taking action on a case.
 
 ## Case Analytics
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
 
-Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][7] and [Notebooks][3] to analyze team productivity and identify patterns in issues.
+Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][8] and [Notebooks][3] to analyze team productivity and identify patterns in issues.
 
 The following widgets support Case Analytics: timeseries, top list, query value, table, tree map, pie chart, change, and list.
 
@@ -110,9 +114,10 @@ You can export cases directly from a case details page:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /incident_response/case_management/create_notifications_and_third_party_tickets
+[2]: /incident_response/case_management/notifications_integrations
 [3]: /notebooks/
 [4]: /incident_response/incident_management/#describing-the-incident
 [5]: /incident_response/case_management/settings/#jira
 [6]: /coscreen/
-[7]: https://docs.datadoghq.com/dashboards/
+[7]: /incident_response/case_management/approvals
+[8]: https://docs.datadoghq.com/dashboards/

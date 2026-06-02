@@ -36,7 +36,7 @@ Si aún no has configurado el SDK para iOS en Datadog, sigue las [instrucciones 
 
 ### Añadir la notificación de fallos
 
-Para habilitar la notificación de fallos, asegúrate de habilitar también [RUM][3] o los [logs][4]. A continuación, añade el paquete según tu gestor de dependencias y actualiza tu fragmento de inicialización.  
+Para activar Crash Reporting, asegúrate de activar también [RUM][3]. A continuación, añade el paquete según tu gestor de dependencias y actualiza tu fragmento de inicialización.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -53,7 +53,7 @@ pod 'DatadogCrashReporting'
 
 Para una integración utilizando Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 En tu proyecto, vincula las siguientes bibliotecas:
@@ -69,10 +69,9 @@ Puedes utilizar [Carthage][1] para instalar `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-En Xcode, vincula los siguientes marcos:
+En Xcode, vincula los siguientes frameworks:
 ```
 DatadogCrashReporting.xcframework
-CrashReporter.xcframework
 ```
 
 [1]: https://github.com/Carthage/Carthage
@@ -110,11 +109,11 @@ Cuando está habilitada, cualquier pausa del subproceso principal que sea superi
 
 - **Cuelgue fatal de la aplicación**: Cómo se informa de un cuelgue si nunca se recupera y se cierra la aplicación. Los cuelgues fatales de aplicaciones se marcan como "Fallo" en Seguimiento de errores y en el Explorador RUM.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="Cuelgue fatal de una aplicación en el panel lateral de errores de RUM." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="Cuelgue fatal de una aplicación en el panel lateral de errores de RUM." style="width:90%;" >}}
 
 - **Cuelgue no fatal de la aplicación**: Cómo se informa de un cuelgue si la aplicación se recupera de un cuelgue relativamente breve y sigue ejecutándose. Los cuelgues no fatales de aplicaciones no se marcan como "Fallo" en Seguimiento de errores y en el Explorador RUM.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="Cuelgue no fatal de una aplicación en el panel lateral de errores de RUM." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="Cuelgue no fatal de una aplicación en el panel lateral de errores de RUM." style="width:90%;" >}}
 
 #### Habilitar la monitorización de cuelgues de aplicaciones
 
@@ -133,7 +132,7 @@ Para habilitar la monitorización de cuelgues de aplicaciones:
    )
    ```
 
-3. Configura el parámetro `appHangThreshold` con la duración mínima de cuelgues de aplicaciones que quieres que se notifiquen. Por ejemplo, introduce `0.25` para informar de cuelgues que duren al menos 250 ms. Para obtener más información sobre cómo definir este valor, consulta [Configurar el umbral de cuelgues de aplicaciones[5].
+3. Configura el parámetro `appHangThreshold` con la duración mínima de cuelgues de aplicaciones que quieres que se notifiquen. Por ejemplo, introduce `0.25` para informar de cuelgues que duren al menos 250 ms. Para obtener más información sobre cómo definir este valor, consulta [Configurar el umbral de cuelgues de aplicaciones][5].
 
    Asegúrate de seguir los siguientes pasos para obtener [stack trazas de stack tecnológico desofuscadas][6].
 
@@ -315,7 +314,7 @@ Cuando se habilitan, los cierres watchdog se notifican y se adjuntan a la sesió
 
 - Y el dispositivo no se reinició (lo que incluye actualizaciones del sistema operativo).
 
-{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="Cierre watchdog en el panel lateral de errores de RUM." style="width:60%;" >}}
+{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination-1.png" alt="Un cierre de Watchdog en el panel lateral de errores de RUM." style="width:90%;" >}}
 
 #### Habilitar la notificación de cierres watchdog
 
@@ -348,6 +347,10 @@ Los archivos de asignación se utilizan para desofuscar trazas de stack tecnoló
 
 Para las aplicaciones iOS, la coincidencia de las trazas de stack tecnológico y los archivos de símbolos se basa en su campo `uuid`.
 
+### Lista de .dSYMs cargados
+
+Consulta la página [Símbolos de depuración RUM][20] para ver todos los símbolos cargados.
+
 ### Simbolización de informes de fallos
 
 Los informes de fallos se recopilan en un formato no procesado y contienen principalmente direcciones de memoria. Para convertir estas direcciones en información de símbolos legible, Datadog necesita archivos .`dSYM`, que se generan durante el proceso de compilación o distribución de tu aplicación.
@@ -356,12 +359,7 @@ Los informes de fallos se recopilan en un formato no procesado y contienen princ
 
 Cada aplicación iOS genera archivos `.dSYM` para cada módulo de la aplicación. Estos archivos minimizan el tamaño binario de una aplicación y permiten una mayor velocidad de descarga. Cada versión de la aplicación contiene un conjunto de archivos `.dSYM`. 
 
-Dependiendo de tu configuración, puede que tengas que descargar los archivos `.dSYM` desde App Store Connect o buscarlos en tu equipo local. 
-
-| Código de bits habilitado | Descripción |
-|---|---|
-| Sí | Los archivos `.dSYM` están disponibles después de que [App Store Connect][7] termina de procesar la compilación de tu aplicación. |
-| No | Xcode exporta los archivos `.dSYM` a `$DWARF_DSYM_FOLDER_PATH` al finalizar la compilación de tu aplicación. Asegúrate de que la configuración de la compilación de `DEBUG_INFORMATION_FORMAT` está definida como **DWARF with dSYM File**. Por defecto, los proyectos Xcode sólo definen `DEBUG_INFORMATION_FORMAT` como **DWARF with dSYM File** para la configuración del proyecto de lanzamiento. |
+Xcode exporta los archivos `.dSYM` a `$DWARF_DSYM_FOLDER_PATH` al finalizar la compilación de tu aplicación. Asegúrate de que la configuración de la compilación de `DEBUG_INFORMATION_FORMAT` está definida como **DWARF with dSYM File**. Por defecto, los proyectos Xcode sólo definen `DEBUG_INFORMATION_FORMAT` como **DWARF with dSYM File** para la configuración del proyecto de lanzamiento.
 
 ### Carga de tu archivo .dSYM
 
@@ -369,7 +367,7 @@ Al cargar tu archivo `.dSYM` en Datadog, obtienes acceso a la ruta del archivo y
 
 Una vez que tu aplicación falla y se reinicia, el SDK de iOS carga un informe de fallo en Datadog.
 
-**Nota**: Volver a cargar un mapa de origen no anula el existente si la versión no ha cambiado.
+**Nota**: Volver a cargar un mapa de fuente no anula el existente si la versión no ha cambiado.
 
 ### Uso de Datadog CI para cargar tu archivo .dSYM
 
@@ -385,7 +383,9 @@ npx @datadog/datadog-ci dsyms upload appDsyms.zip
 npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 ```
 
-**Nota**: Para configurar la herramienta utilizando el endpoint UE, configura la variable de entorno `DATADOG_SITE` como `datadoghq.eu`. Para anular la URL completa del endpoint de admisión, configura la variable de entorno `DATADOG_DSYM_INTAKE_URL`.
+**Notas**:
+- Para configurar la herramienta utilizando el endpoint EU, define la variable de entorno `DATADOG_SITE` como `datadoghq.eu`. Para anular la URL completa del endpoint de admisión, define la variable de entorno `DATADOG_DSYM_INTAKE_URL`.
+- El comando `datadog-ci dsyms upload` solo se ejecuta en macOS. 
 
 Si utilizas acciones de Fastlane o GitHub en tus flujos (flows) de trabajo, también puedes aprovechar estas integraciones, en lugar de `datadog-ci`:
 
@@ -443,27 +443,23 @@ Para obtener más información, consulta los [comandos de dSYM][11].
 
 ## Limitaciones
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Los archivos dSYM están limitados a **500** MB.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Los archivos dSYM están limitados a **500** MB.
-{{< /site-region >}}
+- El tamaño de los archivos dSYM está limitado a **2 GB** cada uno.
+- Los símbolos no son compatibles con simuladores. Los símbolos solo están disponibles para caídas en dispositivos iOS y tvOS físicos.
 
 ## Para probar tu implementación
 
 Para verificar la configuración de las notificaciones de fallos y el seguimiento de errores iOS, necesitas generar un error en tu aplicación RUM y confirmar que el error aparece en Datadog.
 
-1. Ejecuta tu aplicación en un simulador iOS o dispositivo real. Asegúrate de que el depurador no está conectado. De lo contrario, Xcode captura el fallo antes de que lo haga el SDK de iOS.
+1. Ejecuta tu aplicación en un simulador iOS o dispositivo real. Asegúrate de que el depurador no está conectado. De lo contrario, Xcode captura el fallo antes de que lo haga el SDK iOS.
 2. Ejecuta el código que contiene el fallo:
 
    ```swift
    func didTapButton() {
-   fatalError("Crash the app")
+     fatalError("Crash the app")
    }
    ```
 
-3. Después de que se produzca el fallo, reinicia tu aplicación y espera a que el SDK de iOS cargue el informe del fallo en [**Rastreo de errores**][1].
+3. Después de que se produzca el fallo, reinicia tu aplicación y espera a que el SDK iOS cargue el informe del fallo en [**Rastreo de errores**][1].
 
 **Nota:** RUM admite la simbolización de archivos de símbolos del sistema para la arquitectura iOS v14 arm64 y arm64e.
 
@@ -481,12 +477,13 @@ Para verificar la configuración de las notificaciones de fallos y el seguimient
 [8]: https://www.npmjs.com/package/@datadog/datadog-ci
 [9]: https://github.com/DataDog/datadog-fastlane-plugin
 [10]: https://github.com/marketplace/actions/datadog-upload-dsyms
-[11]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
+[11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [13]: /es/real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
-[14]: /es/real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry
+[14]: /es/real_user_monitoring/application_monitoring/mobile_vitals?tab=ios#telemetry
 [15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
 [16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [17]: /es/real_user_monitoring/explorer/search/#facets
 [18]: /es/dashboards/widgets/timeseries
 [19]: /es/real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
+[20]: https://app.datadoghq.com/source-code/setup/rum

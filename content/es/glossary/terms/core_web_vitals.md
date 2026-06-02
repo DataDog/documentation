@@ -1,4 +1,5 @@
 ---
+id: core_web_vitals
 core_product:
 - real user monitoring
 - monitorización Synthetic

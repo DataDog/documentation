@@ -1,4 +1,5 @@
 ---
+id: template_variable
 title: template variable
 core_product:
   - alerts

@@ -1,4 +1,5 @@
 ---
+id: delay
 core_product:
 - alerts
 title: 遅延

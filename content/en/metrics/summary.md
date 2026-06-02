@@ -127,20 +127,61 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric represents, why it exists, and how it is typically used. Use this field to view and update descriptions for your [custom metrics][4]. Descriptions are pre-populated for metrics coming from supported [integrations][9].
 
-For custom metrics with connected source code, Datadog can automatically generate descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence. To enable auto-generated descriptions from source code, [sign up for Metric Context: Source Code][40].
+#### AI-generated description
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+For custom metrics with connected source code, Datadog can automatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence.
+
+To enable auto-generated descriptions from source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+
+{{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics sidepanel" style="width:80%;">}}
 
 
 ## Source Code
 
-The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">Metric Source Code is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Source Code is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 
 Use the Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
 
-{{< img src="metrics/summary/metric_source_code_03042026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
-To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+### Troubleshooting missing metrics
+
+If a metric doesn't appear in Source Code, it may be due to how it's defined.
+
+Datadog detects metrics best when names are written as explicit strings. Metrics built using variables, constants, or custom helpers may not be detected.
+
+Common reasons for missing metrics:
+- Metric name is generated dynamically  
+- Metric is emitted through custom wrappers  
+- Repository is not fully indexed  
+
+Best practice:
+- Define metric names as explicit strings when possible  
+
+Example:
+
+Sending metric using a variable (not recommended)
+
+```java
+public static final String METRIC_NAME = "my.metric.name";
+statsEmitter.distribution(METRIC_NAME, value, tags);
+```
+
+Sending metric as explicit string (recommended):
+
+```java
+timer = meterRegistry.timer("my.metric.name");
+```
+
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 ### Tags table
 
@@ -205,7 +246,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Timeseries sent by the Datadog [Software Catalog][13] product from the APIM Endpoint.
+| API Catalog             | Timeseries sent by the Datadog [Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
 | Cloud Security                     | Timeseries sent by the Datadog [Cloud Security][14] product.
@@ -225,7 +266,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Software Catalog         | Timeseries sent by the Datadog [Software Catalog][25] product including [Scorecard][29] metrics.
+| Catalog         | Timeseries sent by the Datadog [Catalog][25] product including [Scorecard][29] metrics.
 | Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
 | USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
 
@@ -246,7 +287,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: /software_catalog/endpoints/
+[13]: /internal_developer_portal/catalog/endpoints/
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
@@ -258,11 +299,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/
-[25]: /software_catalog/
+[25]: /internal_developer_portal/catalog/
 [26]: /synthetics/
 [27]: /universal_service_monitoring/
 [28]: /logs/
-[29]: /software_catalog/scorecards/
+[29]: /internal_developer_portal/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/

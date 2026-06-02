@@ -9,7 +9,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
   tag: "Source Code"
   text: Source code for dd-sdk-unity
-- link: real_user_monitoring/explorer/
+- link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
 ---

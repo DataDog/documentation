@@ -57,7 +57,15 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 テストとトラブルシューティングを 1 つのプラットフォームで行うことにより、アプリケーション開発を迅速に進めることができます。以下の CI プロバイダーと [Slack][18] や [Jira][19] などのコラボレーションツールから選択し、ワークフローを統合し、コンテキストの切り替えを回避します。
 
-{{< partial name="continuous_testing/ct-getting-started.html" >}}
+{{< card-grid card_width="115px" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/circleci_orb/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/azure_devops_extension/" src="integrations_logos/azure_devops.png" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_upload/" src="integrations_logos/bitrise_upload.png" alt="bitrise upload-tests step" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
+{{< /card-grid >}}
 
 </br>
 

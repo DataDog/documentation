@@ -2,23 +2,19 @@
 title: Configure Integrations and Settings
 ---
 
-Set up integrations to extend Bits AI SRE’s capabilities:
+Set up integrations to extend Bits Investigation’s capabilities:
 - [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context.
 - [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms) to streamline incident response.
 - [Pull context from knowledge bases](#pull-context-from-knowledge-bases) to incorporate runbooks and documentation into investigations.
 
 ## Integrate with third-party observability and SCM platforms
 
-Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies an issue that can be resolved in code.
+Bits Investigation integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for Bits Code to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
 
 ### GitHub
 To configure GitHub:
 1. Install the [GitHub integration][13].
 1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-A subset of third-party integrations is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
 
 ## Send investigation findings to ITSM and collaboration platforms
 
@@ -30,25 +26,28 @@ For monitor alert investigations, a summary of the findings is available on the 
 ### Slack
 
 1. Ensure the [Datadog Slack app][3] is installed in your Slack workspace.
-1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [**Bits AI SRE** > **Settings** > **Integrations**][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
-   <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
+1. Lastly, go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
 
-<!-- Commenting out this feature which was delayed
-### Microsoft Teams
+<div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
+
+### Microsoft Teams (Preview)
+
 1. [Connect your Microsoft tenant to Datadog][12].
-1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
--->
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
+
+<div class="alert alert-info">
+The Microsoft Teams integration with Bits Investigation is in Preview for all customers.</div>
 
 ### Datadog Case Management
 
-Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits AI SRE automatically delivers its investigation findings to Jira and ServiceNow through Case Management.
+Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits Investigation automatically delivers its investigation findings to Jira and ServiceNow through Case Management.
 
 To set up Case Management, and the Jira and ServiceNow integrations:
 1. Create a [Case Management project][5] for your team.
-1. In Datadog, go to [**Case Management** > **Settings**][6]. In the list of projects, expand your project, go to **Integrations** > **Datadog Monitors**, and turn on the **Enable Datadog Monitors integration for this project** toggle. This generates your project's unique handle: `@case-{project_name}`.
-1. On the same page, under **Integrations**, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
-1. In your monitor, go to **Configure notifications and automations** and add the `@case-{project_name}` handle. When the monitor triggers:
+1. In Datadog, go to [{{< ui >}}Case Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
+1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@case-{project_name}` handle. When the monitor triggers:
    - Datadog automatically creates a new case
    - The case creates a linked Jira ticket or ServiceNow incident
    - Bits writes its investigation findings directly to the case, which gets appended to Jira as a timeline comment or ServiceNow as a work note
@@ -57,16 +56,16 @@ To set up Case Management, and the Jira and ServiceNow integrations:
 
 Datadog On-Call is a paging solution that unifies monitoring, paging, and incident response in a single platform.
 
-To set up On-Call, in your monitor, go to **Configure notifications and automations** and add the `@oncall-{team}` handle. Bits' findings can then appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
+To set up On-Call, in your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@oncall-{team}` handle. Bits' findings can then appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
 
 ## Pull context from knowledge bases
 
 ### Confluence
-Bits AI SRE integrates with Confluence to:
+Bits Investigation integrates with Confluence to:
 - Find relevant documentation and runbooks to support its monitor alert investigations
 - Let you interact with your Confluence content directly through chat
 
-To set up Bits AI SRE to use Confluence:
+To set up Bits Investigation to use Confluence:
 
 1. Connect your Confluence Cloud account by following the instructions in the [Confluence integration tile][7].
 1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. If you don't enable account crawling, Bits can still use Confluence to inform its investigation plan.
@@ -75,7 +74,7 @@ To set up Bits AI SRE to use Confluence:
 
 ## Configure permissions
 
-There are two RBAC permissions that apply to Bits AI SRE:
+There are two RBAC permissions that apply to Bits Investigation:
 
 | Name                                                    | Description                            | Default role           |
 |:--------------------------------------------------------|:---------------------------------------|:-----------------------|
@@ -86,7 +85,7 @@ These permissions are added by default to Managed Roles. If your organization us
 
 ## Configure rate limits
 
-Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
+Rate limits define the maximum number of automatic investigations Bits Investigation can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
 
 
 ### Types of rate limits
@@ -96,16 +95,16 @@ Per monitor limit
 : **Default:** Each monitor can trigger one automatic investigation per 24 hours.
 
 Organization limit
-: Defines the total number of automatic investigations Bits AI SRE can run across your entire organization within 24 hours.
+: Defines the total number of automatic investigations Bits Investigation can run across your entire organization within 24 hours.
 : **Default:** No limit.
 
 ### Set a rate limit
 
 To set a rate limit:
-1. Navigate to [**Bits AI SRE** > **Settings** > **Rate Limits**][10].
+1. Navigate to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Rate Limits{{< /ui >}}][10].
 2. Toggle on the rate limit you want to enable.
 3. Set the maximum number of investigations you want to run within a rolling 24-hour window.
-4. Click **Save**.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
@@ -119,7 +118,7 @@ You can monitor user-initiated actions with [Audit Trail][11]. Events are sent w
 
 ## Actions
 
-Bits AI SRE provides three [Actions][15]:
+Bits Investigation provides three [Actions][15]:
 - Trigger Investigation
 - Get Investigation
 - List Investigations
@@ -145,7 +144,7 @@ You can trigger and retrieve investigation details programmatically [via API][16
 [11]: /account_management/audit_trail/events/#bits-ai-sre
 [12]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [13]: /integrations/github/
-[14]: /integrations/source_code/service-mapping/?tab=go
+[14]: /source_code/service-mapping
 [15]: /actions/workflows/actions/
 
 <!-- Commenting out until API Docs are merged

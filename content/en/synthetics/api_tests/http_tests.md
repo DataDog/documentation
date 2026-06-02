@@ -125,7 +125,7 @@ You may create a test using one of the following options:
 
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime and to truncate the error message of failed JavaScript assertions. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 
 [1]: /data_security/synthetics
@@ -165,9 +165,11 @@ You can create up to 20 assertions per API test by clicking **New Assertion** or
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="Define assertions for your HTTP test to succeed or fail on" style="width:90%;" >}}
 
-To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion.
+To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion with the `matches regex` comparator.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+The response body is only returned if you have added assertions on its content and these assertions have failed. If a test contains an assertion on the response body and succeeds, the body payload drops and only a snippet of the first 50 characters of the response body is shown.
 
 If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
@@ -180,11 +182,16 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
 
-**Note:** When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
-<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+<div class="alert alert-info">
+  <ul>
+    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
+    <li>If a failed JavaScript assertion's error message might include sensitive data, under <strong>Advanced Options</strong> > <strong>Privacy</strong>, enable <strong>Do not save response body</strong>. This truncates the assertion error message.</li>
+  </ul>
+</div>
 
 #### Using dd.assert()
 
@@ -306,10 +313,12 @@ HTTP tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 ## One-click
 
-API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, Software Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 

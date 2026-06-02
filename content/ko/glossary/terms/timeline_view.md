@@ -1,4 +1,5 @@
 ---
+id: timeline_view
 core_product:
 - 연속 프로파일러
 title: 타임라인 보기

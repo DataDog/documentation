@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces
   tag: 설명서
   text: 로그 및 트레이스 연결
-- link: /real_user_monitoring/platform/connect_rum_and_traces/
+- link: /real_user_monitoring/correlate_with_other_telemetry/apm/
   tag: 설명서
   text: RUM & 세션 리플레이 및 트레이스 연결하기
 - link: /synthetics/apm/
@@ -66,39 +66,9 @@ title: 제품 간 상호 연결로 쉬운 트러블슈팅
 
 #### NGINX
 
-##### 오픈트레이싱 설정
+NGINX 로그와 트레이스를 연관시키려면 NGINX `log_format`이 트레이스 ID를 포함하도록 구성한 다음 Datadog 파이프라인을 구성하여 로그에서 해당 ID를 파싱하도록 해야 합니다.
 
-[NGINX 트레이싱 통합][5]을 참조하세요.
-
-##### 로그에 트레이스 ID 삽입
-
-트레이스 ID는 `opentelemetry_trace_id` 변수로 저장됩니다. NGINX 설정 파일 `/etc/nginx/nginx.conf`의 HTTP 섹션에 다음 설정 블록을 추가하여 NGINX 로그 형식을 업데이트합니다.
-
-```conf
-http {
-  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
-          '$status $body_bytes_sent "$http_referer" '
-          '"$http_user_agent" "$http_x_forwarded_for" ';
-
-  access_log /var/log/nginx/access.log;
-}
-```
-
-##### 파이프라인에서 트레이스 ID 파싱
-
-1. NGINX 파이프라인을 복제합니다.
-
-2. 첫 번째 [grok 파서][6]를 사용자 지정합니다.
-   - **파싱 규칙**에서 첫 번째 파싱 규칙을 다음과 같이 바꿉니다.
-   ```text
-   access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
-   ```
-   - **도움말 규칙**의 **고급 설정**에서 다음 코드를 추가합니다.
-   ```text
-   _trace_id %{notSpace:dd.trace_id:nullIf("-")}
-   ```
-
-3. `dd.trace_id` 속성에 [트레이스 ID 리매퍼(remapper)][7]를 추가합니다.
+전체 엔드투엔드 설정 지침은 [NGINX 계측][20]을 참고하세요.
 
 ### 데이터베이스 로그 상호 연결하기
 
@@ -235,10 +205,11 @@ RUM 보기와 서버 로그 사이에는 직접적 상관관계가 없습니다.
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /ko/logs/log_collection/javascript/
 [12]: /ko/account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /ko/real_user_monitoring/browser/setup/#initialization-parameters
+[13]: /ko/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
-[16]: /ko/real_user_monitoring/platform/connect_rum_and_traces
+[16]: /ko/real_user_monitoring/correlate_with_other_telemetry/apm
 [17]: /ko/synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /ko/synthetics/apm
+[20]: /ko/tracing/trace_collection/proxy_setup/nginx

@@ -11,27 +11,39 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
+- link: "/monitors/guide/troubleshooting-no-data/"
+  tag: "Guide"
+  text: "Troubleshooting No Data in monitors"
 ---
 
-*No Data* Alerts are a great way to be notified when an Integration/application is no longer submitting metrics to Datadog.
-When utilizing a [Metric Monitor][1] for a metric that isn't always reported at the same frequency or is reported with a timestamp slightly in the past, such as a metric from the [AWS Integration][2], you may receive No Data alerts despite seeing these values in Datadog. There are a couple Monitor configuration options that can be edited to properly evaluate over these types of metrics:
+## Overview
+
+When a [metric monitor][1] tracks a metric that doesn't always report at the same frequency, or arrives with a timestamp in the past (such as metrics from [AWS integrations][2]), you may receive `No Data` alerts even when data appears in Datadog. Adjust the following settings in your monitor's **Advanced Options** to reduce false `No Data` alerts.
+
+## Add an evaluation delay
+
+The evaluation delay pushes the monitor's evaluation window back in time, giving delayed metrics time to arrive in Datadog before the monitor evaluates.
 
 {{< img src="monitors/guide/AWS_Monitor_Config.png" alt="AWS monitor config" >}}
 
-1. The image above displays that this metric: `aws.ec2.cpuutilization` is coming in with a slight delay.
-This is due to the limitations on how soon this metric is available from Cloudwatch.
+This setting is recommended for:
+- **AWS and crawler-based metrics**: Set to at least 900 seconds (15 minutes) to account for CloudWatch delays.
+- **Other cloud provider metrics**: See [Cloud metric delays][4] for provider-specific recommendations.
 
-{{< img src="monitors/guide/require_full_window.png" alt="Require a Full Window of Data" >}}
+## Disable Require a Full Window of Data
 
-2. Delay Evaluation option.
-Since Monitors perform an evaluation every minute, it is looking back on the past X minutes of data. For backfilled metrics, like those coming from AWS, the monitor may be looking at a period of time when the data is not in Datadog. This causes false No Data alerts. Setting this field allows you to have the monitor wait, 900 seconds, so that the AWS metrics have 900 seconds to be available within Datadog before the monitor begins evaluation.
+The **Require a Full Window of Data** setting controls whether the monitor waits for a complete evaluation window before alerting. For sparse or backfilled metrics, requiring a full window can cause the monitor to skip evaluations or report `No Data`.
 
-3. This option is the [Require a Full Window of Data][3] (or the ability to not require).
-This option is typically recommended for metrics being reported by the Datadog Agent and ones that are coming in with the current timestamp. For slightly backfilled metrics, this option can cause No Data events or have the Monitor skip the current evaluation period due to the values not being present at the time the monitor evaluates. For this reason all sparse metrics or metrics that don't report at the same frequency should keep the default option "Do Not [Require a Full Window of Data][3]".
+{{< img src="monitors/guide/require_full_window.png" alt="Monitor Advanced Options - Require a Full Window of Data setting in the Datadog UI" style="width:80%;" >}}
 
-Lastly, when building effective monitors, it is important to understand these limitations. [Cloud Metric delays][4] are different for each cloud provider. To receive metrics with significant smaller delay, install the Datadog Agent on your cloud hosts when possible. Refer to the documentation on [installing the Datadog Agent on your cloud instances][5].
+- **Do not require** (recommended for sparse or delayed metrics): The monitor evaluates on partial data, reducing false `No Data` alerts.
+- **Require**: The monitor waits for a full window of data before evaluating. This is appropriate for metrics reported by the Datadog Agent at a consistent frequency.
 
-Contact [us][6] should you experience any issues.
+## Install the Datadog Agent on cloud hosts
+
+Cloud metrics have varying delays depending on the provider. To receive metrics with a smaller delay, install the Datadog Agent directly on your cloud hosts. See [installing the Datadog Agent on cloud instances][5] for more information.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -40,4 +52,3 @@ Contact [us][6] should you experience any issues.
 [3]: /monitors/types/metric/?tab=threshold#advanced-alert-conditions
 [4]: /integrations/guide/cloud-metric-delay/
 [5]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-[6]: /help/

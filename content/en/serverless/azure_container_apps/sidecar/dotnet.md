@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog .NET tracer** in your Dockerfile.
+1. **Install the Datadog .NET SDK** in your Dockerfile.
 
    {{< tabs >}}
    {{% tab "Standard Linux (glibc)" %}}
@@ -97,6 +97,8 @@ logger.LogInformation("Hello World!");
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-sidecar language="csharp" defaultSource="containerapp" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

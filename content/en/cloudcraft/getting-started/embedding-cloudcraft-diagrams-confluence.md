@@ -8,7 +8,7 @@ This process allows you to grant access to diagrams for authorized users without
 
 ## Installing the app
 
-To install Cloudcraft's Confluence application, log in to Confluence as an admin, navigate to [the Cloudcraft marketplace listing][1], and then click **Get it now**.
+To install Cloudcraft's Confluence application, log in to Confluence as an admin, navigate to [the Cloudcraft marketplace listing][1], and then click {{< ui >}}Get it now{{< /ui >}}.
 
 {{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/marketplace-listing.png" alt="Cloudcraft's app on the Atlassian Marketplace." responsive="true" style="width:100%;">}}
 
@@ -18,7 +18,7 @@ With a Confluence page open, type **/cloudcraft**, and then click the applicatio
 
 {{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/embed-command.png" alt="The Cloudcraft integration tool for embedding diagrams in a Confluence document." responsive="true" style="width:100%;">}}
 
-Next, click **Sign in** to log in to your Cloudcraft account.
+Next, click {{< ui >}}Sign in{{< /ui >}} to log in to your Cloudcraft account.
 
 {{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/signin-or-signup.png" alt="The Cloudcraft login page for the Confluence integration with options to sign in with Datadog, Google, or email." responsive="true" style="width:100%;">}}
 

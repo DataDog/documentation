@@ -35,6 +35,8 @@ Replace the hostname in the examples with the relevant [Datadog site][2] for you
 
 **Note**: To centralize configuration and avoid distributing API keys to every application, you can [set up the Datadog Agent as an OpenLineage proxy][4].
 
+**Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
+
 Use one of the following options to send [OpenLineage events][1] to Datadog:
 
 {{< tabs >}}
@@ -49,7 +51,25 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
         "eventTime": "2023-01-01T00:00:00Z",
         "eventType": "START",
         "run": { "runId": "123e4567-e89b-12d3-a456-426614174000" },
-        "job": { "namespace": "default", "name": "test-job" },
+        "job": {
+          "namespace": "default",
+          "name": "test-job",
+          "facets": {
+            "jobType": {
+              "_producer": "your-producer-id",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "inputs": [
+          {
+            "namespace": "postgres://demo-db.example.com:5432",
+            "name": "orders.public.orders"
+          }
+        ],
         "producer": "your-producer-id"
       }'
 ```
@@ -67,7 +87,8 @@ Use the [OpenLineage Python client][1] with a manually specified HTTP transport.
 from datetime import datetime
 import uuid
 from openlineage.client import OpenLineageClient, OpenLineageClientOptions
-from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run, InputDataset
+from openlineage.client.facet_v2 import job_type_job
 
 client = OpenLineageClient(
     url="https://data-obs-intake.datadoghq.com",
@@ -78,7 +99,23 @@ event = RunEvent(
     eventType=RunState.START,
     eventTime=datetime.utcnow().isoformat(),
     run=Run(runId=str(uuid.uuid4())),
-    job=Job(namespace="default", name="test-job"),
+    job=Job(
+        namespace="default",
+        name="test-job",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    inputs=[
+        InputDataset(
+            namespace="postgres://demo-db.example.com:5432",
+            name="orders.public.orders"
+        )
+    ],
     producer="your-producer-id"
 )
 
@@ -97,7 +134,8 @@ In OpenLineage 1.37.0+, use the [Datadog transport][1] for automatic configurati
 from datetime import datetime
 import uuid
 from openlineage.client import OpenLineageClient
-from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run, InputDataset
+from openlineage.client.facet_v2 import job_type_job
 from openlineage.client.transport.datadog import DatadogConfig, DatadogTransport
 
 config = DatadogConfig(
@@ -111,7 +149,23 @@ event = RunEvent(
     eventType=RunState.START,
     eventTime=datetime.utcnow().isoformat(),
     run=Run(runId=str(uuid.uuid4())),
-    job=Job(namespace="default", name="test-job"),
+    job=Job(
+        namespace="default",
+        name="test-job",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    inputs=[
+        InputDataset(
+            namespace="postgres://demo-db.example.com:5432",
+            name="orders.public.orders"
+        )
+    ],
     producer="your-producer-id"
 )
 
@@ -171,3 +225,4 @@ For the full list of supported facets, see [Supported Facets][6]. For integratio
 [6]: /data_observability/jobs_monitoring/openlineage/facets/
 [7]: /data_observability/jobs_monitoring/openlineage/integrations_and_naming/
 [8]: /data_observability/jobs_monitoring/openlineage/custom_events/
+[9]: https://openlineage.io/docs/spec/facets/job-facets/job-type/

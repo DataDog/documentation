@@ -10,21 +10,28 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Datadog Metrics destination to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
+ btn_hidden="false" header="Join the Preview!">}}
+Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
+{{< /callout >}}
+
+## Overview
+
+Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="preview" case="title" >}}) to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
 
 ## Setup
 
-Set up the Datadog Metrics destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Datadog Metrics destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The steps in this section are configured in the UI.
 
 {{< img src="observability_pipelines/destinations/datadog_metrics_settings.png" alt="The Datadog Metrics destination settings" style="width:40%;" >}}
 
-### Set up the destination
+### Optional buffering
 
-#### Optional settings
+After you select the Datadog Metrics destination in the pipeline UI, you can configure buffering.
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -46,9 +53,9 @@ There are no secret identifiers for this destination.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 100,000        | None            | 2                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 100,000        | None              | 2                   |
 
 ## AWS PrivateLink
 
@@ -63,3 +70,6 @@ To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, s
 [2]: https://docs.datadoghq.com/observability_pipelines/destinations/#event-batching
 [3]: https://docs.datadoghq.com/agent/guide/private-link/?tab=crossregionprivatelinkendpoints
 [4]: http://config.datadoghq.com
+[5]: /observability_pipelines/configuration/set_up_pipelines/
+[6]: /api/latest/observability-pipelines/
+[7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

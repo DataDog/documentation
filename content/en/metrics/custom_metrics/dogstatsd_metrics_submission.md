@@ -14,13 +14,17 @@ further_reading:
 - link: "/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
+- link: "https://learn.datadoghq.com/courses/create-custom-metrics-dogstatsd"
+  tag: "Learning Center"
+  text: "Create Custom Metrics with DogStatsD"
+
 ---
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for metrics split down by metric types, and introduces [sampling rates](#sample-rates) and [metric tagging](#metric-tagging) options specific to DogStatsD.
 
 [COUNT](#count), [GAUGE](#gauge), and [SET](#set) metric types are familiar to StatsD users. `TIMER` from StatsD is a sub-set of `HISTOGRAM` in DogStatsD. Additionally, you can submit [HISTOGRAM](#histogram) and [DISTRIBUTION](#distribution) metric types using DogStatsD.
 
-**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
+**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. To get RATE metrics through DogStatsD, submit either a [COUNT](#count) or [HISTOGRAM](#histogram) metric. Count metric values and `<HISTOGRAM>.count` values are time-normalized deltas of the metric's value over the StatsD flush period.
 
 ## Functions
 

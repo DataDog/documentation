@@ -5,7 +5,7 @@ title: Error Tracking
 
 ## Información general
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="Detalles de un incidente en el Explorador de seguimiento de erores" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Detalles de un incidente en el Explorador de seguimiento de erores" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

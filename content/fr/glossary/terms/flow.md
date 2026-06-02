@@ -1,4 +1,5 @@
 ---
+id: flow
 core_product:
 - network performance monitoring
 title: flux

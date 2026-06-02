@@ -36,7 +36,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
    - Reinstall if necessary: `npm install dd-trace`.
 
 3. Module loading errors:
-   - Check for conflicts with other tracing libraries.
+   - Check for conflicts with other SDKs.
    - Verify the tracer is required before other modules.
 
 ### Performance impact

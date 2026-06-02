@@ -191,6 +191,43 @@ get '/posts' do
 end
 ```
 
+### Manually creating spans around method calls using the method tracing API {% #manually-using-the-method-tracing-api-ruby %}
+
+Trace methods with a DSL-like module:
+
+```ruby
+require 'datadog/kit/tracing/method_tracer'
+
+class MyClass
+  extend Datadog::Kit::Tracing::MethodTracer
+
+  def foo; 'hello'; end
+
+  trace_method :foo, span_name: 'optional_span_name'
+
+  def self.bar; 'hi'; end
+
+  trace_singleton_class_method :bar, span_name: 'optional_span_name'
+end
+```
+
+Or more directly:
+
+```
+Datadog::Kit::Tracing::MethodTracer.trace_method(MyClass, :foo, span_name: 'optional_span_name')
+Datadog::Kit::Tracing::MethodTracer.trace_method(MyClass.singleton_class, :bar, span_name: 'optional_span_name')
+```
+
+Class argument is implicit via DSL usage; it is required otherwise, and can accept dynamic classes or modules.
+
+Span name is optional and defaults to 'Class#method' (or `Class.method` for singleton class methods) but is required if the class or module name is `nil`.
+
+Traced methods only create spans within an active trace. They do not create a new root span or trace on their own.
+
+Regular methods must be defined before `trace_method` can be called. For dynamic methods (including those handled through `method_missing` or defined after the call), use `dynamic: true`, which relaxes method existence checks but does not preserve method visibility.
+
+**Note:** Method tracing uses `Module#prepend`. To reduce the risk of an infinite recursion crash, do not use on methods that have been alias method chained.
+
 ### Post-processing traces {% #post-processing-traces-ruby %}
 
 Some applications might require that traces be altered or filtered out before they are sent to Datadog. The processing pipeline allows you to create *processors* to define such behavior.

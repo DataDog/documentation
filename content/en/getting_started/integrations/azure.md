@@ -41,8 +41,8 @@ Your Microsoft Entra ID user needs the following permissions:
 
 Within the subscriptions you wish to monitor, you must have either:
 
-- The **Owner** role
-- Both the **Contributor** and **User Access Admin** roles
+- The {{< ui >}}Owner{{< /ui >}} role
+- Both the {{< ui >}}Contributor{{< /ui >}} and {{< ui >}}User Access Admin{{< /ui >}} roles
 
 #### Permission to add and grant consent for Graph API permissions
 
@@ -64,7 +64,7 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 ## Setup
 
-Follow the instructions on this page to set up the **Azure integration** through an app registration, available for all Datadog sites.
+Follow the instructions on this page to set up the {{< ui >}}Azure integration{{< /ui >}} through an app registration, available for all Datadog sites.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
 
@@ -78,11 +78,11 @@ Follow the instructions on this page to set up the **Azure integration** through
 
 ### Instructions
 
-1. In the Azure integration tile, click **+ Add New App registration**, then select **Quickstart**.
+1. In the Azure integration tile, click {{< ui >}}+ Add New App registration{{< /ui >}}, then select {{< ui >}}Quickstart{{< /ui >}}.
 2. Copy the setup script, and run it in the Azure Cloud shell.
-3. Return to the Datadog UI. You should see **CONNECTED** at the top right corner of the setup script.
+3. Return to the Datadog UI. You should see {{< ui >}}CONNECTED{{< /ui >}} at the top right corner of the setup script.
 4. Select the subscriptions and management groups to collect data from.
-5. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the **Advanced Configuration** dropdown to filter metrics by:
+5. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
    - Resource provider
    - Tags
    - Hosts
@@ -99,11 +99,11 @@ You can also click to enable custom metric collection from [Azure Application In
       2. Select a control plane subscription for the log-forwarding orchestration (LFO).
       3. Select a region for the control plane.<br>
    **Note**: The resource group name, control plane subscription, and region fields only appear when creating a new log forwarder.
-   3. Optionally, open **Log filtering options** to filter logs by tags, or apply filtering for specific information (such as PII) using regex.
+   3. Optionally, open {{< ui >}}Log filtering options{{< /ui >}} to filter logs by tags, or apply filtering for specific information (such as PII) using regex.
 
    See the [Architecture section][34] of the automated log forwarding guide for more information about this architecture.
 
-8. Click **Confirm** to finish the setup.
+8. Click {{< ui >}}Confirm{{< /ui >}} to finish the setup.
 
 {{% /collapse-content %}}
 
@@ -122,9 +122,9 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
 {{< tabs >}}
 {{% tab "Create an app registration" %}}
 
-1. In the [Azure integration tile][100], click **+ Add New App registration**, then select **Terraform**.
+1. In the [Azure integration tile][100], click {{< ui >}}+ Add New App registration{{< /ui >}}, then select {{< ui >}}Terraform{{< /ui >}}.
 2. Select the subscriptions and management groups to collect data from.
-3. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the **Advanced Configuration** dropdown to filter metrics by:
+3. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
    - Resource provider
    - Tags
    - Hosts
@@ -141,7 +141,7 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
      1. Select a region for the control plane.
 
    See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
-6. Copy and run the command under **Initialize and apply the Terraform**.
+6. Copy and run the command under {{< ui >}}Initialize and apply the Terraform{{< /ui >}}.
 
 [100]: https://app.datadoghq.com/integrations/azure/
 [101]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
@@ -152,7 +152,7 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
 
 
 
-- You already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
+- You already have an app registration configured with the {{< ui >}}Monitoring Reader{{< /ui >}} role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
 
 1. Configure the [Datadog Terraform provider][200] to interact with the Datadog API through a Terraform configuration.
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
@@ -191,7 +191,7 @@ When critical errors are encountered, the Azure integration generates events in 
 
 Datadog provides a monitor template to help you get started. To use the monitor template:
 
-1. In Datadog, go to **Monitors** and click the **Browse Templates** button.
+1. In Datadog, go to {{< ui >}}Monitors{{< /ui >}} and click the {{< ui >}}Browse Templates{{< /ui >}} button.
 2. Search for and select the monitor template titled [[Azure] Integration Errors][26].
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
@@ -203,18 +203,18 @@ Datadog provides a monitor template to help you get started. To use the monitor 
 
 ### Choose the existing app registration setup method if..
 
-- You already have an app registration configured with the **Monitoring Reader** role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
+- You already have an app registration configured with the {{< ui >}}Monitoring Reader{{< /ui >}} role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
 
 If you need to set up an app registration for Datadog, see the [Quickstart](#quickstart-setup) or [Terraform](#terraform-setup) setup methods.
 
 ### Instructions
 
-1. In the [Datadog Azure integration tile][20], select **Add Existing**.
-2. In the **Tenant ID** field, paste your Directory (tenant) ID.
-3. In the **Client ID** field, paste the application (client) ID.
-4. In the **Client Secret Value** field, paste the value of the app registration's client secret.
-5. Optionally, click the **Monitor Automuting** toggle to disable monitor automuting.
-6. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the **Advanced Configuration** dropdown to filter metrics by:
+1. In the [Datadog Azure integration tile][20], select {{< ui >}}Add Existing{{< /ui >}}.
+2. In the {{< ui >}}Tenant ID{{< /ui >}} field, paste your Directory (tenant) ID.
+3. In the {{< ui >}}Client ID{{< /ui >}} field, paste the application (client) ID.
+4. In the {{< ui >}}Client Secret Value{{< /ui >}} field, paste the value of the app registration's client secret.
+5. Optionally, click the {{< ui >}}Monitor Automuting{{< /ui >}} toggle to disable monitor automuting.
+6. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
    - Resource provider
    - Tags
    - Hosts
@@ -224,7 +224,7 @@ If you need to set up an app registration for Datadog, see the [Quickstart](#qui
 You can also click to enable custom metric collection from [Azure Application Insights][36], and disable the collection of usage metrics.
 
 6. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
-7. Click **Create Configuration**.
+7. Click {{< ui >}}Create Configuration{{< /ui >}}.
 
 {{% /collapse-content %}}
 
@@ -236,11 +236,27 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
 
+### Resource tag filtering for metrics
+
+Use tag filters to control which Azure resources have their metrics collected by Datadog. Configure tag filters in the {{< ui >}}Configuration{{< /ui >}} tab of the [Azure integration tile][20]. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their metrics collected.
+
+You can use wildcards in your tag filters:
+- `?` matches a single character.
+- `*` matches multiple characters.
+
+To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes precedence over inclusion. A resource matches the filter if it matches any tag in the list.
+
+For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
+
+This filter collects metrics from resources tagged with `datadog:monitored` or `env:production`, excludes resources tagged with `plan_tier:basic`, and includes resources with an `instance-type` tag matching `c1.*`.
+
+If no tag filter is set, Datadog collects metrics from all Azure resources.
+
 ## Enable log collection
 
 You can use the automated log forwarding feature to setup and configure the services and diagnostic settings needed to forward logs to Datadog. If an automated log forwarding control plane already exists in the tenant, this flow modifies it and extends its scope to include the selected subscriptions or management groups. For more detail, see [Azure Automated Log Forwarding Setup][19].
 
-Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, you can use an Azure Resource Manager (ARM) template to [automate log forwarding setup][19] across your Azure environment with no manual configuration. This feature automatically manages and scales log forwarding services.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, use the {{< ui >}}Configure Log Forwarding{{< /ui >}} flow in the [Azure integration][20] to set up and manage automated log forwarding directly in Datadog. You can also deploy log forwarding with an [Azure Resource Manager (ARM) template][19]. Both methods automatically manage and scale log forwarding services.
 
 {{% collapse-content title="Automated (recommended)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
 
@@ -252,11 +268,28 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 
 ### Instructions
 
+#### Configure Log Forwarding (recommended)
+
+Use the {{< ui >}}Configure Log Forwarding{{< /ui >}} flow to set up new or manage existing log forwarders directly in Datadog:
+
+1. In Datadog, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][20].
+1. Click {{< ui >}}Configure Log Forwarding{{< /ui >}}.
+1. Copy the provided command and paste it in your Azure Cloud Shell.
+1. Select the subscriptions to forward logs from.
+1. Optionally, add or remove log filters.
+1. Click {{< ui >}}Confirm{{< /ui >}}.
+
+For more details, see [Azure Automated Log Forwarding Setup][19].
+
+#### ARM template
+
+Alternatively, deploy log forwarding with an Azure Resource Manager (ARM) template:
+
 1. Open the [Automated Log Forwarding ARM template][29] in Azure.
-2. Configure your Azure project and instance details on the [Basics tab][30].
-3. Enter your Datadog credentials on the [Datadog Configuration tab][31].
-4. Acknowledge deployment warnings on the [Deployment tab][32].
-5. Start the deployment process on the [Review + create tab][33].
+1. Configure your Azure project and instance details on the [Basics tab][30].
+1. Enter your Datadog credentials on the [Datadog Configuration tab][31].
+1. Acknowledge deployment warnings on the [Deployment tab][32].
+1. Start the deployment process on the [Review + create tab][33].
 
 {{< site-region region="us3" >}}
 
@@ -289,6 +322,22 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 
 {{% azure-log-archiving %}}
 
+### Resource tag filtering for logs
+
+Use tag filters to control which Azure resources have their logs forwarded to Datadog. To configure tag filters for logs, click {{< ui >}}Configure Log Forwarding{{< /ui >}} in the [Azure integration tile][20] and follow the flow. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their logs forwarded.
+
+You can use wildcards in your tag filters:
+- `?` matches a single character.
+- `*` matches multiple characters.
+
+To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes precedence over inclusion. A resource matches the filter if it matches any tag in the list.
+
+For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
+
+This filter forwards logs from resources tagged with `datadog:monitored` or `env:production`, excludes resources tagged with `plan_tier:basic`, and includes resources with an `instance-type` tag matching `c1.*`.
+
+If no tag filter is set, Datadog forwards logs from all Azure resources.
+
 ## Get more from the Datadog Platform
 
 ### Install the Agent for greater visibility into your application
@@ -306,11 +355,11 @@ Use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 V
 {{% tab "VM Extension" %}}
 
 1. In the [Azure portal][4], select the appropriate VM.
-2. From the left sidebar, under **Settings**, select **Extensions + applications**.
-3. Click **+ Add**.
-4. Search for and select the `Datadog Agent` extension.
-5. Click **Next**.
-6. Enter your [Datadog API key][2] and [Datadog site][1], and click **OK**.
+2. From the left sidebar, under {{< ui >}}Settings{{< /ui >}}, select {{< ui >}}Extensions + applications{{< /ui >}}.
+3. Click {{< ui >}}+ Add{{< /ui >}}.
+4. Search for and select the {{< ui >}}Datadog Agent{{< /ui >}} extension.
+5. Click {{< ui >}}Next{{< /ui >}}.
+6. Enter your [Datadog API key][2] and [Datadog site][1], and click {{< ui >}}OK{{< /ui >}}.
 
 To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][3].
 
@@ -327,9 +376,9 @@ To install the Agent based on operating system or CI and CD tool, see the [Datad
 The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension:
 
 1. Go to your AKS cluster in the Azure portal.
-2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
-3. Search for and select the `Datadog AKS Cluster Extension`.
-4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
+2. From the left sidebar of the AKS cluster, select {{< ui >}}Extensions + applications{{< /ui >}} under {{< ui >}}Settings{{< /ui >}}.
+3. Search for and select the {{< ui >}}Datadog AKS Cluster Extension{{< /ui >}}.
+4. Click {{< ui >}}Create{{< /ui >}}, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
 
 [1]: /account_management/api-app-keys/
 [2]: /getting_started/site/

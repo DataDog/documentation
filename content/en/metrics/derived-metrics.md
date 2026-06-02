@@ -1,5 +1,6 @@
 ---
 title: Derived Metrics 
+description: "Save a metrics query as a new metric you can reuse across dashboards, monitors, SLOs, and notebooks."
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-smoother-asap/"
   tag: "Blog"

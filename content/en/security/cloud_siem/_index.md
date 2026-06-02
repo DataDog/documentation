@@ -6,6 +6,9 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+  tag: "Blog"
+  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
@@ -54,6 +57,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
   tag: "Blog"
   text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
+  tag: "Learning Center"
+  text: "Introduction to Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
+  tag: "Learning Center"
+  text: "Automate Threat Investigation and Remediation with Security Workflows"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
@@ -97,7 +107,7 @@ Build searches in the Log Explorer using facets or by clicking fields directly i
 
 If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
 
-1. Navigate to [Cloud SIEM][3].
+1. Navigate to [Cloud SIEM][12].
 1. Click **Enable Cloud SIEM**.
 1. Follow the onboarding steps.
 
@@ -275,3 +285,4 @@ See which rules are the noisiest by calculating the percentage of signals that a
 [9]: /security/cloud_siem/content_packs/
 [10]: /logs/explorer/search_syntax/
 [11]: /logs/explorer/
+[12]: https://app.datadoghq.com/security/siem/intro

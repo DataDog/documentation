@@ -30,7 +30,7 @@ To start receiving daily data, an administrator needs to choose tags for the rep
 
 {{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;" >}}
 
-The **Edit Tags** popover allows:
+The {{< ui >}}Edit Tags{{< /ui >}} popover allows:
 
 - Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on both the root account and any child organizations under the account.
 - Deleting and editing existing tags.

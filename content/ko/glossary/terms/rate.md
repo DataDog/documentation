@@ -1,4 +1,5 @@
 ---
+id: rate
 core_product:
 - 메트릭
 title: 비율

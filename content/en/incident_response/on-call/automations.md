@@ -32,7 +32,7 @@ Each automation is configured at the team level and scoped to one or more schedu
 
 ### Prerequisites
 
-- You must have **Write** permission on the On-Call team to create, edit, or delete automations.
+- You must have **Write** permission on the On-Call Team to create, edit, or delete automations.
 - **Slack actions**: The [Datadog Slack app][2] must be installed in your workspace.
 - **Microsoft Teams actions**: The [Datadog Teams app][3] must be configured for your tenant.
 - **Slack: Update user group**: The Slack app requires additional `usergroups:read` and `usergroups:write` permissions. The UI displays a warning with a link to enable these if they are missing.

@@ -28,9 +28,15 @@ attributes:
     data_type: |
        - **Audit logs (Audit Trail enabled)**: 90 days
        - **Audit logs (Audit Trail disabled)**: 7 days
-  - product: Bits AI Dev Agent
+  - product: Bits Chat
+    data_type: |
+       - **Messages**: 15 months
+  - product: Bits Code
     data_type: |
        - **Source Code**: 7 days
+  - product: Bits Investigation
+    data_type: |
+       - **Investigations**: Retained for the duration of the account
   - product: Browser RUM
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
@@ -106,8 +112,8 @@ attributes:
        - **Incidents**: Retained for the duration of the account
   - product: LLM Observability
     data_type: |
-       - **Production Traces and spans**: 15 days
-       - **Experiments Traces and spans**: 90 days
+       - **Production Traces and spans**: 15 (default), 30, 60, or 90 days, determined by customer plan
+       - **Experiments Traces and spans**: 15 (default), 90, 180, 270, 365 days, determined by customer plan
        - **Datasets**: 3 years
   - product: Log Management
     data_type: |
@@ -137,7 +143,7 @@ attributes:
   - product: Product Analytics
     data_type: |
        - **Events**: 15 months
-       - **User Profiles**: 30 days
+       - **User Profiles**: 15 months, or 30 days if <a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product Analytics is not enabled</a>
   - product: PR Gates
     data_type: |
        - **Gate evaluations**: 30 days
@@ -162,8 +168,7 @@ attributes:
        - **Source Code**: 7 days
   - product: Synthetics
     data_type: |
-       - **Test results (not displayed in UI)**: 2 months
-       - **Test results (displayed in UI)**: 15 months
+       - **Test results**: 15 months
   - product: Test Visibility & Intelligent Test Runner
     data_type: |
        - **Tests**: 3 months
@@ -175,3 +180,4 @@ attributes:
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

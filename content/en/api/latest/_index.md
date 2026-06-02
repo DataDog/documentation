@@ -11,6 +11,9 @@ further_reading:
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits
+  - link: "https://learn.datadoghq.com/courses/dd-api-automation-iac"
+    tag: "Learning Center"
+    text: "Datadog API: Automation and Infrastructure as Code"
 cascade:
     algolia:
         rank: 10
@@ -235,7 +238,14 @@ async fn main() {
 
 Or check out the libraries directly:
 
-{{< partial name="api/sdk-languages.html" >}}
+{{< card-grid card_width="100px" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-go" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-typescript" src="integrations_logos/typescript.png" alt="Typescript" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-rust" src="integrations_logos/rust.png" alt="Rust" >}}
+{{< /card-grid >}}
 </br>
 Trying to get started with the application instead? Check out Datadog's general [Getting Started docs][7].
 

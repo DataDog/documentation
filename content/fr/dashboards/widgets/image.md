@@ -10,19 +10,16 @@ title: Widget Image
 widget_type: image
 ---
 
-Le widget Image vous permet d'intégrer une image à votre dashboard. Une image désigne un fichier PNG, JPG ou GIF animé accessible depuis une URL.
+Le widget Image vous permet d'intégrer une image dans votre dashboard. Une image peut être importée dans Datadog ou hébergée à un emplacement accessible par URL. Les formats de fichiers PNG, JPG et GIF sont pris en charge.
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}
 
 ## Configuration
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="Configuration du widget Image" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup2.png" alt="Configuration de l'image" style="width:80%;">}}
 
-1. Saisissez l'URL de votre image.
-2. Choisissez une option d'affichage :
-    * Zoom image to cover whole title
-    * Fit image on tile
-    * Center image on tile
+1. Importez votre image ou saisissez l'URL de votre image.
+2. Sélectionnez un modèle prédéfini ou personnalisez les options d'affichage.
 
 ## API
 

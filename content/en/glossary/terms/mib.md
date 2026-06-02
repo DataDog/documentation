@@ -1,4 +1,5 @@
 ---
+id: mib
 title: managed information base (MIB)
 core_product:
   - network device monitoring

@@ -1,5 +1,6 @@
 ---
 title: Custom Metrics
+description: "Learn what custom metrics are, how they're identified by name and tags, and how they're billed in Datadog."
 aliases:
   - /guides/metrics/
   - /metrictypes/
@@ -28,6 +29,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
+- link: "https://learn.datadoghq.com/courses/metrics-governance"
+  tag: "Learning Center"
+  text: "Metrics Governance"
 algolia:
   tags: ['custom metrics']
 ---

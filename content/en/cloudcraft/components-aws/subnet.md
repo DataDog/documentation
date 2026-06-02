@@ -13,10 +13,10 @@ Use the Subnet component to represent subnets from your Amazon Web Services arch
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Name**: Give the subnet a name.
-- **Shape**: Select a shape for the subnet.
-- **Padding**: Increase or decrease the amount of space inside the subnet.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Give the subnet a name.
+- {{< ui >}}Shape{{< /ui >}}: Select a shape for the subnet.
+- {{< ui >}}Padding{{< /ui >}}: Increase or decrease the amount of space inside the subnet.
 
 ## API
 

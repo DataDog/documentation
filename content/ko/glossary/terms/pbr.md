@@ -1,4 +1,5 @@
 ---
+id: pbr
 core_product:
 - network performance monitoring
 title: 정책 기반 라우팅(PBR)

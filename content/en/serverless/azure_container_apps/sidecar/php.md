@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog PHP tracer** in your Dockerfile.
+1. **Install the Datadog PHP SDK** in your Dockerfile.
 
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php \
@@ -85,6 +85,8 @@ logInfo('Hello World!');
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-sidecar language="php" defaultSource="containerapp" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

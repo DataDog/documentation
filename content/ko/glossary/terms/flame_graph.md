@@ -1,4 +1,5 @@
 ---
+id: flame_graph
 core_product:
 - apm
 - 연속 프로파일러

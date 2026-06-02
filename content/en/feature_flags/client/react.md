@@ -45,7 +45,7 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components.
+Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components. To create a client token, see [Client tokens][2].
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -293,8 +293,28 @@ await OpenFeature.setContext({
 });
 {{< /code-block >}}
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` is exported from `@openfeature/web-sdk`; install it as a development dependency and register it before rendering components under test:
+
+{{< code-block lang="javascript" >}}
+import { OpenFeature } from '@openfeature/react-sdk';
+import { TypedInMemoryProvider } from '@openfeature/web-sdk';
+
+await OpenFeature.setProviderAndWait(new TypedInMemoryProvider({
+  new_checkout_button: {
+    variants: { on: true, off: false },
+    defaultVariant: 'on',
+    disabled: false,
+  },
+}));
+{{< /code-block >}}
+
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Use `setProviderAndWait` (not `setProvider`) to avoid suspense races when the test renders flag-gated components immediately. For component tests that mount a React tree, `@openfeature/react-sdk` also exports an `OpenFeatureTestProvider` component that wraps children with an in-memory provider — see the [OpenFeature React SDK docs](https://openfeature.dev/docs/reference/technologies/client/web/react) for details.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens

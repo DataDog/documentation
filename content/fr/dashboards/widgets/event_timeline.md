@@ -6,4 +6,4 @@ private: true
 title: Widget Chronologie des événements
 ---
 
-<div class="alert alert-danger">Le widget Chronologie des événements est pris en charge via le <a href="https://docs.datadoghq.com/dashboards/<txprotected>widgets</txprotected>/timeseries/">widget Série temporelle</a>.</div>
+<div class="alert alert-danger">Le widget Event Timeline est pris en charge via le <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">widget Timeseries</a>.</div>

@@ -7,6 +7,9 @@ further_reading:
   tag: "Documentation"
   text: "On-Call Documentation"
 ---
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
 
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with Datadog On-Call.
 
@@ -97,7 +100,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-warning">
-On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
+On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. Datadog recommends installing the Datadog mobile app on your personal profile, subject to your organization's policies.
 </div>
 
 {{% /tab %}}
@@ -145,24 +148,24 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 </div>
 
 ## On-Call mobile widgets
-Add On-Call home screen and lock screen widgets to easily access your pages and shifts.
+Add On-Call home screen and lock screen widgets to easily access your Pages and shifts.
 
 ### On-Call home screen widget
 
-View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
+View your On-Call shifts and On-Call Pages on your mobile home screen with Datadog widgets.
 
 You can customize your On-Call shift widgets by filtering on:
 
 - Organization
 - Period of time
 
-You can customize your On-Call page widgets by filtering on:
+You can customize your On-Call Page widgets by filtering on:
 
 - Organization
 - Team
 - Order
 
-**Note**: You can add additional filters for the On-Call pages widget.
+**Note**: You can add additional filters for the On-Call Pages widget.
 
 #### Edit an On-Call shift widget
 

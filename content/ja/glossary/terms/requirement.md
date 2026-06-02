@@ -1,4 +1,5 @@
 ---
+id: requirement
 core_product:
 - security
 - cloud security

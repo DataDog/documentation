@@ -1,4 +1,5 @@
 ---
+id: hostmap
 title: hostmap
 core_product:
   - dashboards

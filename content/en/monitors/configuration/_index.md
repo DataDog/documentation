@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
   tag: "Blog"
   text: "Manage your monitors more efficiently with Datadog Teams"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Customize Alert Monitor Notifications"
+
 ---
 
 ## Overview
@@ -40,7 +44,7 @@ As you build or modify your query, the preview graph at the top of the configura
 
 {{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
 
-The Evaluation Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
+The Evaluated Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
 - See historical state transitions (for example, `OK` → `ALERT`).
 - Understand how your monitor would have behaved.
 - Preview who would be notified (including from notification rules)

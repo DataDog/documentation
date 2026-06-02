@@ -13,6 +13,10 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Guide"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://learn.datadoghq.com/courses/send-aws-logs"
+  tag: "Learning Center"
+  text: "Send AWS Logs"
+
 ---
 
 AWS service logs can be collected with the Datadog Forwarder Lambda function. This Lambda—which triggers on S3 Buckets, CloudWatch log groups, and EventBridge events—forwards logs to Datadog.
@@ -47,6 +51,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [ECS][16]                          | `-`                                                                                                            | [Use the Docker Agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Glue][76]                         | [Enable AWS Glue logs][77]                                                                                     | [Manual][77] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [IoT Core][74]                     | [Enable Amazon IoT Core logs][75]                                                                              | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
@@ -98,6 +103,7 @@ The following sources and locations are supported:
 | ECS Logs                    | CloudWatch     |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
+| Glue Jobs Logs              | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
 | IoT Core Logs                    | CloudWatch     |
@@ -142,6 +148,10 @@ The following sources and locations are supported:
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
+    "glue:BatchGetJobs",
+    "glue:GetJobs",
+    "glue:GetJob",
+    "glue:ListJobs",
     "iot:GetV2LoggingOptions",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
@@ -194,6 +204,10 @@ The following sources and locations are supported:
     | `ecs:ListTaskDefinitionFamilies`                            | List all task definition families.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
+    | `glue:BatchGetJobs`                                             | Get information about multiple Glue jobs.                                    |
+    | `glue:GetJob`                                               | Get information about a Glue job.                                            |
+    | `glue:GetJobs`                                              | List all Glue jobs.                                                          |
+    | `glue:ListJobs`                                             | List all Glue job names.                                                     |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
     | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
@@ -228,10 +242,10 @@ The following sources and locations are supported:
     | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.             |
 
 
-3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.
-4. In the **Datadog Forwarder Lambda** section, enter the ARN of the Lambda created in the previous section and click **Add**. The Lambda function appears in the table below with its name, version, and region.
-5. In the **Log Autosubscription** section, under **Log Sources**, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
-6. (Optional) In the **Log Source Tag Filters** section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected.
+3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the {{< ui >}}Log Collection{{< /ui >}} tab.
+4. In the {{< ui >}}Datadog Forwarder Lambda{{< /ui >}} section, enter the ARN of the Lambda created in the previous section and click {{< ui >}}Add{{< /ui >}}. The Lambda function appears in the table below with its name, version, and region.
+5. In the {{< ui >}}Log Autosubscription{{< /ui >}} section, under {{< ui >}}Log Sources{{< /ui >}}, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
+6. (Optional) In the {{< ui >}}Log Source Tag Filters{{< /ui >}} section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected. **Note**: Resource tags are automatically lowercased to match Datadog platform conventions. Define your tag filters in lowercase to avoid mismatches.
 7. If you have logs across multiple regions, you must create additional Lambda functions in those regions and add them in the **Datadog Forwarder Lambda** section.
 8. To stop collecting all AWS logs from a specific Lambda function, hover over the Lambda in the table and click the delete icon. All triggers for that function are removed.
 9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
@@ -245,12 +259,12 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 {{< tabs >}}
 {{% tab "AWS console" %}}
 
-1. In the AWS console, go to **Lambda**.
-2. Click **Functions** and select the Datadog Forwarder.
-3. Click **Add trigger** and select **CloudWatch Logs**.
+1. In the AWS console, go to {{< ui >}}Lambda{{< /ui >}}.
+2. Click {{< ui >}}Functions{{< /ui >}} and select the Datadog Forwarder.
+3. Click {{< ui >}}Add trigger{{< /ui >}} and select {{< ui >}}CloudWatch Logs{{< /ui >}}.
 4. Select the log group from the dropdown menu.
 5. Enter a name for your filter, and optionally specify a filter pattern.
-6. Click **Add**.
+6. Click {{< ui >}}Add{{< /ui >}}.
 7. Go to the [Datadog Log section][1] to explore any new log events sent to your log group.
 
 [1]: https://app.datadoghq.com/logs
@@ -452,3 +466,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [75]: /integrations/amazon-iot/#enable-logging
 [74]: /integrations/amazon-bedrock/
 [75]: /integrations/amazon-pcs/
+[76]: /integrations/amazon_glue/
+[77]: /integrations/amazon_glue/#log-collection

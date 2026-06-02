@@ -1,17 +1,13 @@
 ---
 title: End User Device Monitoring
 description: Monitor employee desktops and laptops to detect performance, connectivity, and application issues across your organization.
-further_reading:
-   - link: "/infrastructure/end_user_device_monitoring/setup"
-     tag: "Documentation"
-     text: "Set up End User Device Monitoring"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
 End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-{{< img src="/infrastructure/end_user_device_monitoring/end_user_devices.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}
+{{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}
 
 End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce.
 
@@ -32,11 +28,22 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | **Logs collection**               | Use [Logs][7] to collect and explore logs from end-user devices and applications for troubleshooting crashes, errors, and performance issues.                                                             |
 | **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
-| **Network path analysis**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
+| **Network path tracing**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
+| **Application Inventory**         | Capture applications running on the device to verify version updates.                                          | 
 
-## Further reading
+## Featured workflows
 
-{{< partial name="whats-next/whats-next.html" >}}
+### Trace network paths from user devices to SaaS applications
+
+When users report slow application performance or degraded video call quality (for example, on Zoom), the issue could be on the device, somewhere along the network path, or within the application itself. End User Device Monitoring integrates with [Network Path][4] to trace the full route from a user's device to the destination SaaS application, giving you visibility across all three layers.
+
+The traceroute visualization shows every hop along the path, from the local router and ISP through the public internet to the application's CDN and servers. Each hop includes latency data, so you can pinpoint where a slowdown is introduced rather than seeing only the total round-trip time.
+
+With network path tracing, you can:
+
+- **Compare paths across devices**: View traceroutes from multiple devices on the same network to determine whether an issue affects a single user or the broader network.
+- **Compare paths across time**: Examine how the network path changes before and after a reported issue to identify when and where latency increased.
+
 
 [1]: /infrastructure/process
 [2]: /integrations/wlan/
