@@ -29,10 +29,6 @@ further_reading:
   text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-SaaS and AI Costs are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 SaaS and AI Costs allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog.
