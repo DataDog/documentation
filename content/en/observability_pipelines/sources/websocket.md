@@ -1,0 +1,119 @@
+---
+title: WebSocket Source
+disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+---
+
+{{< product-availability >}}
+
+## Overview
+
+Use Observability Pipelines' WebSocket source to connect the Observability Pipelines Worker as a client to an upstream `ws://` or `wss://` endpoint and ingest the messages it receives as logs. Use this source when your upstream system streams data over a persistent WebSocket connection rather than exposing it through a request-based API.
+
+## Prerequisites
+
+{{% observability_pipelines/prerequisites/websocket %}}
+
+## Setup
+
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
+
+<div class="alert alert-danger">Only enter the identifiers for the WebSocket URI, your authentication strategy secrets, and, if applicable, your TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+After you select the WebSocket source in the pipeline UI:
+
+1. Enter the identifier for your WebSocket URI. This is the name of the environment variable that holds the `ws://` or `wss://` endpoint that the Worker connects to. If you leave it blank, the [default](#secret-defaults) is used.
+1. Select your authentication strategy. If you selected:
+   - **None**: No authentication is sent with the connection request. Use this when the endpoint does not require credentials.
+   - **Basic**:
+      - Enter the identifier for your WebSocket username. If you leave it blank, the [default](#secret-defaults) is used.
+      - Enter the identifier for your WebSocket password. If you leave it blank, the [default](#secret-defaults) is used.
+   - **Bearer**: Enter the identifier for your bearer token. The token is sent in the `Authorization` header as `Bearer <token>`. If you leave it blank, the [default](#secret-defaults) is used.
+   - **Custom**: Enter the identifier for your custom `Authorization` header value. The Worker sends this value as the `Authorization` header exactly as provided. Use this when the endpoint expects an authentication scheme other than basic or bearer. If you leave it blank, the [default](#secret-defaults) is used.
+1. In the **Decoding** dropdown menu, select the decoder to apply to incoming messages. Messages received from the endpoint must be in the selected format.
+
+   | Decoding | Description |
+   | -------- | ----------- |
+   | `bytes` | Pass each message through as raw bytes. The raw message is stored in the `message` field. |
+   | `gelf`  | Decode each message as a Graylog Extended Log Format (GELF) event. |
+   | `json`  | Decode each message as a JSON object. |
+   | `syslog`| Decode each message as a Syslog-formatted event. |
+
+   If your messages do not match one of the formats above, select `bytes` to ingest the raw message in the `message` field, then transform it with the [Custom Processor][6] using Vector Remap Language (VRL).
+
+### Optional TLS settings
+
+For `wss://` endpoints, configure TLS so that data is encrypted in transit. The WebSocket source supports two TLS modes:
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+#### Enable TLS with a client certificate
+
+To use mutual TLS (mTLS), where the Worker presents a client certificate to the endpoint, provide a client certificate in addition to enabling TLS:
+
+- `Client Certificate Path`: The path to the client certificate file in DER, PEM, or CRT (X.509) format. This field is required for mTLS.
+- `CA Certificate Path` (optional): The path to the Certificate Authority (CA) root file used to verify the endpoint, in DER, PEM, or CRT (X.509) format.
+- `Client Key Path` (optional): The path to the `.key` private key file that belongs to your client certificate, in DER, PEM, or CRT (PKCS #8) format.
+- If your client key is encrypted, enter the identifier for the key passphrase. If you leave it blank, the [default](#secret-defaults) is used.
+
+**Notes**:
+- The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][7] for more information.
+- The certificate and key files must be readable by the `observability-pipelines-worker` group and user.
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- WebSocket URI identifier:
+	- References the `ws://` or `wss://` endpoint that the Observability Pipelines Worker connects to and ingests log events from.
+	- The default identifier is `SOURCE_WEBSOCKET_URI`.
+- WebSocket TLS passphrase identifier (when a client certificate key is encrypted):
+	- The default identifier is `SOURCE_WEBSOCKET_KEY_PASS`.
+- If you are using basic authentication:
+	- WebSocket username identifier:
+		- The default identifier is `SOURCE_WEBSOCKET_USERNAME`.
+	- WebSocket password identifier:
+		- The default identifier is `SOURCE_WEBSOCKET_PASSWORD`.
+- If you are using bearer authentication:
+	- WebSocket bearer token identifier:
+		- The default identifier is `SOURCE_WEBSOCKET_BEARER_TOKEN`.
+- If you are using custom authentication:
+	- WebSocket custom `Authorization` header identifier:
+		- The default identifier is `SOURCE_WEBSOCKET_AUTH_TOKEN`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/websocket %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Troubleshooting
+
+If the WebSocket source does not ingest logs as expected, check the following:
+
+- **Authentication failures**: If the Worker logs show that the connection is rejected (for example, with a `401` or `403` response during the connection handshake), verify that you selected the correct authentication strategy and that the referenced environment variables hold valid credentials. For bearer authentication, confirm the token does not include the `Bearer` prefix, because the Worker adds it. For custom authentication, the environment variable must contain the complete `Authorization` header value.
+- **TLS failures**: If the connection to a `wss://` endpoint fails with a certificate or handshake error, confirm that the endpoint presents a certificate signed by a trusted Certificate Authority. If the endpoint requires mutual TLS, confirm that you provided a client certificate and that the certificate, key, and CA file paths are correct and readable by the `observability-pipelines-worker` user. Observability Pipelines does not accept self-signed certificates by default. See [TLS certificates][8] for more information.
+- **Decoding mismatches**: If logs arrive but their content is not parsed as expected, confirm that the decoder you selected matches the format of the messages the endpoint sends. For example, selecting `json` for messages that are not valid JSON can cause decoding errors. If you are unsure of the message format, select `bytes` to ingest the raw message in the `message` field, then parse it with a processor.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/processors/custom_processor/
+[7]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[8]: /observability_pipelines/sources/#tls-certificates
