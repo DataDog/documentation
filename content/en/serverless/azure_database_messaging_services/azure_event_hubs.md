@@ -1,0 +1,18 @@
+---
+title: Serverless Monitoring for Azure Event Hubs
+---
+
+## Overview
+
+Datadog APM uses **inferred spans** to collect traces and trace metrics from Azure Event Hubs. These spans appear directly in flame graph and waterfall views. 
+
+Python and Node.js support producers; .NET supports both producers and consumers. Event Hubs distributed tracing requires no additional setup beyond existing instrumentation for APM users.
+
+## Supported runtimes
+
+| Runtime | Min tracer version | Min Lambda Layer | Min Azure SDK |
+|---|---|---|---|
+| Python 3.8/3.9 (Producer only) | dd-trace-py v3.17.0 | lambda-python v3.19.6 | azure-eventhub >= 5.12.2 |
+| Python 3.10+ (Producer only) | dd-trace-py v3.17.0 | lambda-python v4.8.1 | azure-eventhub >= 5.12.2 |
+| Node.js (Producer only) | dd-trace-js v5.72.0 | lambda-js v12.129.0 | @azure/event-hubs >= 6.0.0 |
+| .NET (Producer & consumer) | dd-trace-dotnet v3.30.0 | N/A (NuGet) | Azure.Messaging.EventHubs >= 5.9.2 |
