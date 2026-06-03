@@ -134,7 +134,7 @@ You must replace the placeholders with these values:
     -p 8282:8088 datadog/observability-pipelines-worker run
     ```
 - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+- If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
@@ -143,8 +143,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Kubernetes -->
 {% if equals($platform, "kubernetes") %}
 
-1. Download the [Helm chart values file][14]. See the [full list of available configuration options][15].
-    If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
+1. Download the [Helm chart values file][14]. See the [full list of available configuration options][15]. If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 2. Add the Datadog chart repository to Helm:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -279,7 +278,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 1. Select the VPC and subnet you want to use to install the Worker.
 1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 
-**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+**Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
@@ -334,7 +333,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     -p 8282:8088 datadog/observability-pipelines-worker run
     ```
 - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+- If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 {% /if %}
@@ -387,7 +386,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     ```
 7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+**Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 {% /if %}
 
@@ -446,7 +445,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 8. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 9. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+**Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
@@ -655,7 +654,7 @@ Depending on your use case, configure either an [Application Load Balancer][22] 
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
 - If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+- If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
