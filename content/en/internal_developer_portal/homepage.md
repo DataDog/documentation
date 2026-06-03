@@ -1,7 +1,8 @@
 ---
-title: Developer Homepage
+title: Homepage
 aliases:  
 - /software_catalog/developer_homepage  
+- /internal_developer_portal/developer_homepage  
 further_reading:  
 - link: "/integrations/github/"  
   tag: "Documentation"  
@@ -9,12 +10,9 @@ further_reading:
 
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/developer-overview-page/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Developer Homepage!" >}}
-{{< /callout >}}
-
 ## Overview
 
-The [Developer Homepage][3] provides a centralized view of your team's entities and your daily tasks.  
+The [IDP Homepage][3] provides a centralized view of your team's entities and your daily tasks.  
 
 With this view, you can:
 - View key information about your team's entities, including scorecards, recent deployments, monitors, issues, incidents, dashboards, and on-call status. 
