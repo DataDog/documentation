@@ -13,17 +13,16 @@ further_reading:
 
 Inventory consists of two explorers:
 
-- **[API Endpoints][3]**: Each endpoint is a unique entry point where data or functionality can be accessed. The API Endpoints explorer surfaces shadow APIs (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan APIs (documented endpoints without traffic), and prioritizes risk at the endpoint level.
-- **[Services][4]**: A service groups multiple endpoints into a logical or deployed component, typically aligned with a microservice, app, or backend system. The Services explorer shows who owns each service and its overall risk.
+- **[API Endpoints][2]**: The API Endpoints explorer catalogs your individual endpoints, surfacing shadow APIs (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan APIs (documented endpoints without traffic), and helps you prioritize the endpoints most at risk.
+- **[Services][3]**: The Services explorer aggregates findings, vulnerabilities, and runtime signals by service, so you can assess each service's risk and security coverage.
 
-The rest of [API Posture][2] builds on what Inventory collects. To detect and respond to weaknesses, attacks, or misconfigurations, use [API Findings][5]. Each row in the API Endpoints explorer displays a findings chip; selecting it opens the finding in API Findings.
+To detect and respond to weaknesses, attacks, or misconfigurations on these endpoints, use [API Findings][4]. In the API Endpoints explorer, each row displays a findings chip that opens the related finding in API Findings.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/inventory/apis
-[2]: /security/application_security/api_posture/
-[3]: /security/application_security/api_posture/api_inventory/api_endpoints/
-[4]: /security/application_security/api_posture/api_inventory/services/
-[5]: /security/application_security/api_posture/api_findings/
+[2]: /security/application_security/api_posture/api_inventory/api_endpoints/
+[3]: /security/application_security/api_posture/api_inventory/services/
+[4]: /security/application_security/api_posture/api_findings/
