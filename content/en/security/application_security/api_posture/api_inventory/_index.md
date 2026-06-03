@@ -9,30 +9,21 @@ further_reading:
   text: "Mitigate the primary risks to API security"
 ---
 
-API security relies on visibility. The biggest failure mode in most applications isn't missed vulnerabilities, it's missed APIs.
+[API Inventory][1] is a continuously updated catalog of the API endpoints and services discovered across your environment. It shows security context for each endpoint, such as authentication status, public exposure, sensitive data flows, and associated findings.
 
-[API Inventory][1] provides a comprehensive, up-to-date catalog and risk assessment of all API endpoints and services in your environment.
+Inventory consists of two explorers:
 
-**Inventory** is comprised of explorers that correspond to distinct layers in the API security lifecycle:
+- **[API Endpoints][3]**: Each endpoint is a unique entry point where data or functionality can be accessed. The API Endpoints explorer surfaces shadow APIs (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan APIs (documented endpoints without traffic), and prioritizes risk at the endpoint level.
+- **[Services][4]**: A service groups multiple endpoints into a logical or deployed component, typically aligned with a microservice, app, or backend system. The Services explorer shows who owns each service and its overall risk.
 
-1. **API Endpoints:** *What APIs exist, and what risk do they expose?*
-    
-    Each API endpoint is a unique entry point where data or functionality can be accessed. The API Endpoints explorer enables shadow API (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan API (documented endpoints without traffic) detection, asset management, and risk prioritization at the granularity attackers exploit.
-
-2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
-    
-    A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
-
-The Inventory explorers cover the discovery and context steps of the API security operational flow:
-
-1. **Discover:** Identify what endpoints exist using **API Endpoints**.
-2. **Contextualize:** Identify ownership and dependencies using **Services**.
-
-To detect and respond to specific weaknesses, attacks, or misconfigurations, use **[API Findings][2]**. Each endpoint row in the API Endpoints explorer displays a findings chip; selecting it opens the finding in API Findings.
+The rest of [API Posture][2] builds on what Inventory collects. To detect and respond to weaknesses, attacks, or misconfigurations, use [API Findings][5]. Each row in the API Endpoints explorer displays a findings chip; selecting it opens the finding in API Findings.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/appsec/inventory/apis
-[2]: /security/application_security/api_posture/api_findings/
+[2]: /security/application_security/api_posture/
+[3]: /security/application_security/api_posture/api_inventory/api_endpoints/
+[4]: /security/application_security/api_posture/api_inventory/services/
+[5]: /security/application_security/api_posture/api_findings/
