@@ -108,3 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="github.com/DataDog/dd-database-monitoring-example"]');
+    if (link && window.DD_RUM) {
+        window.DD_RUM.addAction('dbm_terraform_example_repo_click', {
+            href: link.href,
+            page: window.location.pathname,
+        });
+    }
+});
