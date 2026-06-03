@@ -104,45 +104,9 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support for Next.js" level="h4" expanded=false id="nextjs-support" %}}
-Properly initialize the SDK in your application to ensure auto-instrumentation works correctly. If using TypeScript or ESM for your Next.js application, initialize the SDK in a `instrumentation.{ts/js}` file as follows, specifying your configuration options as environment variables:
+See [Instrument a Next.js Application for LLM Observability][1] for properly setting up LLM Observability in your Next.js app.
 
-```typescript
-// instrumentation.ts
-export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const initializeImportName = 'dd-trace/initialize.mjs';
-    await import(/* webpackIgnore: true */ initializeImportName as 'dd-trace/initialize.mjs')
-  }
-
-  // ...
-}
-```
-
-Otherwise, for CommonJS Next.js applications, you can use the `init` function directly:
-
-```javascript
-// instrumentation.js
-const tracer = require('dd-trace')
-
-function register () {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    tracer.init({}); // specify options here or they will be read from environment variables
-  }
-
-  // ...
-}
-
-module.exports = register;
-```
-
-
-Then, make sure to specify `dd-trace` and any other supported integration package names in `serverExternalPackages` in your `next.config.{ts/js}` file:
-```javascript
-// next.config.ts
-module.exports = {
-  serverExternalPackages: ['dd-trace', '<INTEGRATION_PACKAGE_NAME>'], // add any other supported integration package names here to be auto-instrumented
-}
-```
+[1]: /llm_observability/guide/nextjs_guide
 {{% /collapse-content %}}
 
 {{% /tab %}}

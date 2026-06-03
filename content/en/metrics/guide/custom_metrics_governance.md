@@ -1,5 +1,6 @@
 ---
 title: Best Practices for Custom Metrics Governance
+description: "Apply best practices for visibility, attribution, and prevention to manage custom metric volumes and costs."
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"

@@ -145,6 +145,7 @@ Learn more about how [forecasting][3] works and data requirements.
 |--------|---------------------|
 | View budgets | `cloud_cost_management_read` |
 | Create, edit, or delete a budget | `ccm_budget_write` |
+| Edit custom forecast values | `ccm_forecast_write` |
 
 For the full list of CCM permissions, see the [Permissions documentation][4].
 

@@ -4,9 +4,9 @@ aliases:
 - /opentelemetry/guide/otel_demo_to_datadog
 - /opentelemetry/otel_demo_to_datadog
 further_reading:
-- link: "/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Software Catalog"
+  text: "Catalog"
 - link: "/tracing/trace_explorer/"
   tag: "Documentation"
   text: "Trace Explorer"
@@ -316,13 +316,13 @@ documentation in the [language feature reference table][10].
 When the OTel Demo is running, the built-in load generator simulates traffic in the application.
 After a couple of seconds you can see data arriving in Datadog.
 
-### Software Catalog
+### Catalog
 
 View all services that are part of the OTel Demo:
 
-1. Go to [**APM** > **Software Catalog**][11].
+1. Go to [**APM** > **Catalog**][11].
 
-{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Software Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
 2. Select **Map** to see how the services are connected. Change the **Map layout** to **Cluster** or **Flow** to view the map in different modes.
 

@@ -1236,18 +1236,40 @@ menu:
       identifier: api
       parent: essentials_heading
       weight: 90000
+    - name: Command Line
+      url: cli/
+      pre: prompt-wui
+      identifier: cli
+      parent: essentials_heading
+      weight: 100000
+    - name: MCP Server
+      url: mcp_server
+      pre: bits-ai
+      identifier: mcp_server
+      parent: essentials_heading
+      weight: 110000
+    - name: Setup
+      url: mcp_server/setup
+      identifier: mcp_server_setup
+      parent: mcp_server
+      weight: 1
+    - name: MCP Tools
+      url: mcp_server/tools
+      identifier: mcp_server_tools
+      parent: mcp_server
+      weight: 2
     - name: Partners
       url: partners/
       pre: colab
       identifier: partners
       parent: essentials_heading
-      weight: 100000
+      weight: 120000
     - name: Datadog Mobile App
       url: mobile/
       pre: mobile
       identifier: mobile
       parent: essentials_heading
-      weight: 110000
+      weight: 130000
     - name: Enterprise Configuration
       url: mobile/enterprise_configuration
       identifier: mobile_enterprise_configuration
@@ -1283,7 +1305,7 @@ menu:
       pre: ddsql
       identifier: ddsql_reference
       parent: essentials_heading
-      weight: 110000
+      weight: 140000
     - name: Data Directory
       url: ddsql_reference/data_directory/
       identifier: ddsql_reference_data_directory
@@ -1294,7 +1316,7 @@ menu:
       pre: coscreen
       identifier: coscreen
       parent: essentials_heading
-      weight: 120000
+      weight: 150000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting
@@ -1305,7 +1327,7 @@ menu:
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 130000
+      weight: 160000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -1326,7 +1348,7 @@ menu:
       url: remote_configuration
       identifier: remote_configuration
       parent: essentials_heading
-      weight: 130000
+      weight: 160000
     - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
@@ -1509,7 +1531,7 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Bits AI SRE
+    - name: Bits Investigation
       url: bits_ai/bits_ai_sre
       identifier: bits_ai_sre
       parent: bits_ai
@@ -1524,7 +1546,7 @@ menu:
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE Integrations and Settings
+    - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
@@ -1534,12 +1556,12 @@ menu:
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
-    - name: Chat with Bits AI SRE
+    - name: Chat with Bits Investigation
       url: bits_ai/bits_ai_sre/chat_bits_ai_sre
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 500
-    - name: Bits AI Dev Agent
+    - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
       identifier: bits_ai_dev_agent
@@ -1554,31 +1576,21 @@ menu:
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
       weight: 3
-    - name: Bits AI Assistant
+    - name: Bits Chat
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
       weight: 4
-    - name: MCP Server
-      url: bits_ai/mcp_server
-      identifier: bits_ai_mcp_server
-      parent: bits_ai
-      weight: 5
-    - name: Setup
-      url: bits_ai/mcp_server/setup
-      identifier: bits_ai_mcp_server_setup
-      parent: bits_ai_mcp_server
-      weight: 501
-    - name: MCP Tools
-      url: bits_ai/mcp_server/tools
-      identifier: bits_ai_mcp_server_tools
-      parent: bits_ai_mcp_server
-      weight: 502
-    - name: Agent Builder
+    - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 6
+    - name: AI Credits
+      identifier: bits_ai_ai_credits
+      url: bits_ai/ai_credits/
+      parent: bits_ai
+      weight: 7
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2092,60 +2104,60 @@ menu:
       parent: platform_heading
       identifier: internal_developer_portal
       weight: 110000
-    - name: Software Catalog
-      url: internal_developer_portal/software_catalog/
+    - name: Catalog
+      url: internal_developer_portal/catalog/
       parent: internal_developer_portal
-      identifier: software_catalog
+      identifier: catalog
       weight: 1
     - name: Set Up
-      url: internal_developer_portal/software_catalog/set_up
-      parent: software_catalog
-      identifier: software_catalog_set_up
+      url: internal_developer_portal/catalog/set_up
+      parent: catalog
+      identifier: catalog_set_up
       weight: 101
     - name: Discover Entities
-      url: internal_developer_portal/software_catalog/set_up/discover_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_discover_entities
+      url: internal_developer_portal/catalog/set_up/discover_entities
+      parent: catalog_set_up
+      identifier: catalog_discover_entities
       weight: 1011
     - name: Create Entities
-      url: internal_developer_portal/software_catalog/set_up/create_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_create_entities
+      url: internal_developer_portal/catalog/set_up/create_entities
+      parent: catalog_set_up
+      identifier: catalog_create_entities
       weight: 1012
     - name: Import Entities
-      url: internal_developer_portal/software_catalog/set_up/import_entities
-      parent: software_catalog_set_up
-      identifier: software_catalog_import_entities
+      url: internal_developer_portal/catalog/set_up/import_entities
+      parent: catalog_set_up
+      identifier: catalog_import_entities
       weight: 1013
     - name: Define Ownership
-      url: internal_developer_portal/software_catalog/set_up/ownership
-      parent: software_catalog_set_up
-      identifier: software_catalog_ownership
+      url: internal_developer_portal/catalog/set_up/ownership
+      parent: catalog_set_up
+      identifier: catalog_ownership
       weight: 1014
     - name: Entity Model
-      url: internal_developer_portal/software_catalog/entity_model
-      parent: software_catalog
-      identifier: software_catalog_entity_model
+      url: internal_developer_portal/catalog/entity_model
+      parent: catalog
+      identifier: catalog_entity_model
       weight: 102
     - name: Native Entities
-      url: internal_developer_portal/software_catalog/entity_model/native_entities
-      parent: software_catalog_entity_model
-      identifier: software_catalog_native_entities
+      url: internal_developer_portal/catalog/entity_model/native_entities
+      parent: catalog_entity_model
+      identifier: catalog_native_entities
       weight: 1021
     - name: Custom Entities
-      url: internal_developer_portal/software_catalog/entity_model/custom_entities
-      parent: software_catalog_entity_model
-      identifier: software_catalog_custom_entities
+      url: internal_developer_portal/catalog/entity_model/custom_entities
+      parent: catalog_entity_model
+      identifier: catalog_custom_entities
       weight: 1022
     - name: AI-generated Systems
-      url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
-      parent: software_catalog_entity_model
-      identifier: software_catalog_ai_generated_systems
+      url: internal_developer_portal/catalog/entity_model/ai-generated-systems
+      parent: catalog_entity_model
+      identifier: catalog_ai_generated_systems
       weight: 1023
     - name: Troubleshooting
-      url: internal_developer_portal/software_catalog/troubleshooting
-      parent: software_catalog
-      identifier: software_catalog_troubleshooting
+      url: internal_developer_portal/catalog/troubleshooting
+      parent: catalog
+      identifier: catalog_troubleshooting
       weight: 103
     - name: Scorecards
       url: internal_developer_portal/scorecards
@@ -2202,10 +2214,10 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_custom
       weight: 404
-    - name: Developer Homepage
-      url: internal_developer_portal/developer_homepage
+    - name: Homepage
+      url: internal_developer_portal/homepage
       parent: internal_developer_portal
-      identifier: idp_developer_homepage
+      identifier: idp_homepage
       weight: 5
     - name: Campaigns
       url: internal_developer_portal/campaigns
@@ -2308,7 +2320,7 @@ menu:
       parent: error_tracking
       identifier: error_tracking_error_grouping
       weight: 4
-    - name: Bits AI Dev Agent
+    - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: error_tracking
       identifier: error_tracking_bits_ai_dev_agent
@@ -2841,7 +2853,7 @@ menu:
       weight: 9
     - name: Agents
       weight: 7
-    - name: Agent Builder
+    - name: Bits Agent Builder
       url: actions/agents/
       pre: robot-wui
       identifier: agents
@@ -4119,6 +4131,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 7
+    - name: Cost Optimization Automation
+      url: cloud_cost_management/recommendations/cost_optimization_automation
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_optimization_automation
+      weight: 700
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
@@ -4540,8 +4557,8 @@ menu:
       parent: tracing
       identifier: tracing_services
       weight: 9
-    - name: Software Catalog
-      url: /internal_developer_portal/software_catalog/
+    - name: Catalog
+      url: /internal_developer_portal/catalog/
       parent: tracing_services
       identifier: tracing_software_catalog
       weight: 901
@@ -4596,17 +4613,17 @@ menu:
       identifier: tracing_apm_monitors
       weight: 911
     - name: Endpoint Observability
-      url: internal_developer_portal/software_catalog/endpoints/
+      url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
       parent: tracing
       weight: 10
     - name: Explore Endpoints
-      url: internal_developer_portal/software_catalog/endpoints/explore_endpoints
+      url: internal_developer_portal/catalog/endpoints/explore_endpoints
       identifier: explore_endpoints
       parent: endpoint_observability
       weight: 1002
     - name: Monitor Endpoints
-      url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
+      url: internal_developer_portal/catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 1003
@@ -4615,6 +4632,11 @@ menu:
       identifier: live_debugger
       parent: tracing
       weight: 12
+    - name: Debug with Bits
+      url: tracing/live_debugger/debug-with-bits/
+      identifier: live_debugger_debug_with_bits
+      parent: live_debugger
+      weight: 1
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
@@ -5473,16 +5495,21 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
+    - name: Session-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
+      weight: 40102
     - name: Trace-Level Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
-      weight: 40102
+      weight: 40103
     - name: Prompt Templating
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
-      weight: 40103
+      weight: 40104
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
@@ -6044,6 +6071,11 @@ menu:
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
+      weight: 5
+    - name: Dashboards
+      url: code_coverage/dashboards/
+      parent: code_coverage
+      identifier: code_coverage_dashboards
       weight: 6
     - name: PR Gates
       url: pr_gates/
@@ -6143,6 +6175,46 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: Concepts
+      url: feature_flags/concepts
+      parent: feature_flags
+      identifier: feature_flags_concepts
+      weight: 3
+    - name: Environments
+      url: feature_flags/concepts/environments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_environments
+      weight: 301
+    - name: Variants and Flag Types
+      url: feature_flags/concepts/variants_and_flag_types
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_variants
+      weight: 302
+    - name: Targeting Rules and Filters
+      url: feature_flags/concepts/targeting_rules
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_rules
+      weight: 303
+    - name: Traffic Splitting and Randomization
+      url: feature_flags/concepts/traffic_splitting
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_traffic_splitting
+      weight: 304
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_distribution_channels
+      weight: 305
+    - name: Flag History
+      url: feature_flags/concepts/flag_history
+      parent: feature_flags_concepts
+      identifier: feature_flags_history
+      weight: 306
+    - name: MCP Server
+      url: feature_flags/feature_flag_mcp_server
+      parent: feature_flags
+      identifier: feature_flags_mcp_server
+      weight: 8
     - name: .NET
       url: feature_flags/server/dotnet
       parent: feature_flags_server
@@ -6173,16 +6245,6 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
-    - name: Flag History
-      url: feature_flags/history
-      parent: feature_flags
-      identifier: feature_flags_history
-      weight: 6
-    - name: MCP Server
-      url: feature_flags/feature_flag_mcp_server
-      parent: feature_flags
-      identifier: feature_flags_mcp_server
-      weight: 8
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
@@ -7936,7 +7998,7 @@ menu:
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 9
+      weight: 10
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -7947,11 +8009,21 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
-    - name: Severity Scoring
-      url: security/cloud_security_management/severity_scoring/
+    - name: Triage and Prioritize
+      url: security/cloud_security_management/triage_and_prioritize/
       parent: csm
+      identifier: csm_triage_and_prioritize
+      weight: 9
+    - name: Runtime Prioritization Engine
+      url: security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
+      parent: csm_triage_and_prioritize
+      identifier: csm_runtime_prioritization_engine
+      weight: 101
+    - name: Severity Scoring
+      url: security/cloud_security_management/triage_and_prioritize/severity_scoring/
+      parent: csm_triage_and_prioritize
       identifier: csm_severity_scoring
-      weight: 10
+      weight: 102
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
@@ -8073,11 +8145,21 @@ menu:
       parent: application_security
       identifier: aws_waf_int
       weight: 8
-    - name: API Security Inventory
-      url: security/application_security/api-inventory/
+    - name: API Posture
+      url: security/application_security/api_posture/
       parent: application_security
-      identifier: asm_api_security
+      identifier: application_security_api_security
       weight: 9
+    - name: API Inventory
+      url: security/application_security/api_posture/api_inventory/
+      parent: application_security_api_security
+      identifier: asm_api_security
+      weight: 1
+    - name: Endpoint Scanning
+      url: security/application_security/api_posture/endpoint_scanning/
+      parent: application_security_api_security
+      identifier: application_security_endpoint_scanning
+      weight: 2
     - name: Guides
       url: security/application_security/guide/
       parent: application_security
@@ -8663,6 +8745,37 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
       weight: 7
+    - name: Journey Monitoring
+      url: journey_monitoring/
+      pre: custom-action-wui
+      identifier: journey_monitoring
+      parent: digital_experience_heading
+      weight: 10000
+    - name: Map
+      url: journey_monitoring/map/
+      parent: journey_monitoring
+      identifier: journey_monitoring_map
+      weight: 1
+    - name: Suggested Journeys
+      url: journey_monitoring/map/suggested_journeys/
+      parent: journey_monitoring_map
+      identifier: journey_monitoring_map_suggested_journeys
+      weight: 101
+    - name: Details Report
+      url: journey_monitoring/details_report/
+      parent: journey_monitoring
+      identifier: journey_monitoring_details_report
+      weight: 2
+    - name: Variants
+      url: journey_monitoring/details_report/variants/
+      parent: journey_monitoring_details_report
+      identifier: journey_monitoring_details_report_variants
+      weight: 201
+    - name: Uptime
+      url: journey_monitoring/uptime/
+      parent: journey_monitoring
+      identifier: journey_monitoring_uptime
+      weight: 3
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
@@ -9416,21 +9529,31 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 4
+    - name: Create Exposure SQL Models
+      url: experiments/exposure_sql
+      parent: pa_experiments
+      identifier: pa_experiments_exposure_sql
+      weight: 5
+    - name: Manage Subject Types
+      url: experiments/subject_types
+      parent: pa_experiments
+      identifier: pa_experiments_subject_types
+      weight: 6
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 5
+      weight: 7
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 6
+      weight: 8
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 7
+      weight: 9
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
