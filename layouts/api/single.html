@@ -1,0 +1,119 @@
+{{ define "api-main" }}
+
+    {{ $dot := . }}
+
+    <!-- Derive tag slug + endpoint slug from URL so we don't need them in frontmatter. -->
+    {{ $relPath := strings.TrimSuffix "/" .RelPermalink }}
+    {{ $tagSlug := path.Base (path.Dir $relPath) }}
+    {{ $endpointSlug := path.Base $relPath }}
+    {{ $identifier := printf "%s-%s" $tagSlug $endpointSlug }}
+
+    <!-- Look up the menu entry by identifier to get versions and operationids.
+         Endpoint entries live under .Children of their tag parent, not at the top level.
+         Also capture the tag-level parent entry to get the English tag name for spec lookups.
+         Use the default-site (English) menu: menu params (versions, operationids) are
+         language-independent, and the tag name must be English to match spec tag names. -->
+    {{ $menuEntry := dict }}
+    {{ $tagName := "" }}
+    {{ with index .Sites.Default.Menus "api" }}
+      {{ range . }}
+        {{ if eq .Identifier $tagSlug }}
+          {{ $tagName = .Name }}
+        {{ end }}
+        {{ range .Children }}
+          {{ if eq .Identifier $identifier }}
+            {{ $menuEntry = . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ $versions := $menuEntry.Params.versions | default (slice) }}
+    {{ $operationids := $menuEntry.Params.operationids | default (slice) }}
+
+    <!-- Load YAML specs using shared partial -->
+    {{ $d := partial "api/load-specs.html" (dict "version" "v1") }}
+    {{ $d2 := partial "api/load-specs.html" (dict "version" "v2") }}
+
+    <!-- get lang specific data file -->
+    {{ $.Scratch.Set "translate_actions" (dict) }}
+    {{ if ne $.Page.Lang "en"}}
+        {{ range $v := $versions }}
+          {{ if (fileExists (print "data/api/" $v "/translate_actions." $.Page.Lang ".json")) }}
+            {{ $.Scratch.Set "translate_actions" (index (index $.Site.Data.api $v) (print "translate_actions." $.Page.Lang)) }}
+          {{ end }}
+        {{ end }}
+    {{ end }}
+    {{ $translate_actions := ($.Scratch.Get "translate_actions") }}
+
+    {{ $versionCount := (len $versions) }}
+    {{ $anchorStr := .Title }}
+
+    <div class="row">
+      <div class="col-12 {{ if gt $versionCount 0 }}col-md-9{{ end }}">
+          <h1 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
+              {{- $anchorStr -}}
+          </h1>
+      </div>
+      {{ if gt $versionCount 0 }}
+      <div class="col-12 col-md-3 api-version-label-wrapper">
+          <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
+            {{ range $versionIndex, $versionNum := $versions }}
+              {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
+              {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
+              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
+              <li class="nav-item">
+                <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt $versionCount 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq $versionCount 1) }}disabled{{ end }}" data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+              </li>
+            {{ end }}
+          </ul>
+      </div>
+      {{ end }}
+    </div>
+
+    {{ if gt $versionCount 0 }}
+
+    <div class="tab-content">
+    {{ range $versionIndex, $versionNum := $versions }}
+      {{ $adat := partial "api/load-specs.html" (dict "version" $versionNum) }}
+
+      {{ if $adat }}
+        {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+        {{ $dot.Scratch.Set "regions" $generalRegions }}
+
+        {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
+        {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
+
+        <div data-title="{{ $versionNum }}" id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="tab-pane {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
+
+        <!-- the version-specific resource page (provides examples.json) lives at /api/{v}/{tag}/ -->
+        {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $tagSlug "") }}
+
+        {{ $tags := $adat.tags | default (slice) }}
+        {{ range $tag := (first 1 (where $tags ".name" "==" $tagName)) }}
+          {{ if $endpoint }}
+            {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
+            {{ partial "api/endpoint.html" (dict
+                "dot" $dot
+                "endpoint" $endpoint
+                "endpointVisibility" $endpointVisibility
+                "versionNum" $versionNum
+                "versionCount" $versionCount
+                "menuChild" $menuEntry
+                "generalRegions" $generalRegions
+                "adat" $adat
+                "tag" $tag
+                "translate_action" $translate_action
+                "resourcePage" $resourcePage) }}
+          {{ else }}
+            {{ warnf "endpoint not found in api single.html lang: %q, version: %q, tag: %q, operationids: %v" $dot.Lang $versionNum $tagName $operationids }}
+          {{ end }}
+        {{ end }}
+        </div>
+      {{ end }}
+    {{ end }}
+    </div>
+    {{ end }}
+
+{{ end }}

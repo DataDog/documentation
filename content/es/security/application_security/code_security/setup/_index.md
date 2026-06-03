@@ -32,7 +32,12 @@ Antes de configurar Code Security, asegúrate de que se cumplen los siguientes r
 
 Selecciona el lenguaje de la aplicación para obtener información sobre cómo habilitar la seguridad del código para tu lenguaje y los tipos de infraestructura.
 
-{{< partial name="security-platform/appsec-languages-code-security.html" >}}</br>
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+{{< /card-grid >}}</br>
 
 ## Referencias adicionales
 

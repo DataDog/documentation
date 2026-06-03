@@ -20,14 +20,14 @@ The following Kubernetes errors are supported:
 ## Usage
 
 You can launch Bits AI Kubernetes Remediation from multiple locations within Datadog:
-- **From a Kubernetes monitor**: In the _Troubleshooting_ section, select a workload under _Problematic Workloads_.
-- **From [Kubernetes Explorer][2]**: Hover over a pod status with an error to see more information about the alert and the affected workload(s), and click _Start Remediation_.
+- **From a Kubernetes monitor**: In the **Troubleshooting** section, select a workload under **Problematic Workloads**.
+- **From [Kubernetes Explorer][2]**: Hover over a pod status with an error to see more information about the alert and the affected workload(s), and click **Start Remediation**.
 - **From the [Kubernetes Remediation][1] tab**: Select a workload from the list.
 
-Any one of these actions opens a Remediation side panel that displays:
+Any one of these actions opens a side panel with remediation information, including:
 
 - An AI-powered explanation for root cause, based on collected telemetry and known patterns
-- Recommended next steps, which you may be able to [perform directly from Datadog](#remediate-from-datadog)
+- Recommended next steps, which you may be able to [perform directly from Datadog](#remediate-from-datadog) using [Bits Code][5]
 - Related information on an adjustable timeframe: recent deployments, error logs, Kubernetes events, etc., including relevant metrics based on specific issue type
 
 {{< img src="containers/remediation/side_panel2.png" alt="Remediation side panel opened for a workload with a CrashLoopBackOff error. Displays a What Happened section with a Bits AI-powered explanation of the error's root cause. Below, a Recommended Next Steps section where the user can inspect the workload manifest. Step-by-step instructions for a suggested fix are also displayed." style="width:80%;" >}}
@@ -39,7 +39,7 @@ Any one of these actions opens a Remediation side panel that displays:
 Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
-If your repositories are [connected to Datadog][4], and an error can be fixed by changing code in one of these connected repositories, then you can use Bits AI to perform the remediation action directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
+If your repositories are [connected to Datadog][4] and an error can be fixed by changing code in one of these connected repositories, then you can use [Bits Code][5] to remediate directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
 
 {{% collapse-content title="Example: Increasing memory limit for a deployment" level="h4" expanded=true id="example-pr" %}}
 
@@ -51,7 +51,7 @@ When a pod is terminated because the memory usage exceeded its limit, you may be
 2. Adjust your limit so that it is higher than what your container normally uses.
 3. Click {{< ui >}}Fix with Bits AI{{< /ui >}}.
 4. On the next page, select the repository where your deployment is defined, and review the proposed changes. Click {{< ui >}}Fix with Bits{{< /ui >}} to create a pull request.
-5. You are redirected to a Bits [Code Session][3], where you can verify that the Bits AI Dev Agent identified the specific configuration file where your memory limits are defined. Click {{< ui >}}Create Pull Request{{< /ui >}} to initiate the creation of the pull request.
+5. You are redirected to a Bits Code [session][3], where you can verify that Bits Code identified the specific configuration file where your memory limits are defined. Click {{< ui >}}Create Pull Request{{< /ui >}} to initiate the creation of the pull request.
 6. Click {{< ui >}}View Pull Request{{< /ui >}} to view the pull request in GitHub.
 {{% /collapse-content %}}
 
@@ -63,3 +63,4 @@ When a pod is terminated because the memory usage exceeded its limit, you may be
 [2]: https://app.datadoghq.com/orchestration/explorer/pod
 [3]: https://app.datadoghq.com/code?tab=my-sessions
 [4]: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githubsaasonprem#connect-your-git-repositories-to-datadog
+[5]: /bits_ai/bits_ai_dev_agent/

@@ -1,6 +1,5 @@
 ---
 title: Journey Monitoring
-private: true
 description: "Monitor and analyze critical user flows to troubleshoot user experience and technical issues."
 ---
 

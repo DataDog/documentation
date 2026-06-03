@@ -5823,9 +5823,41 @@ components:
       required:
         - facet
       type: object
+    ListStreamIssuePersona:
+      description: Persona filter for the `issue_stream` data source.
+      enum:
+        - all
+        - browser
+        - mobile
+        - backend
+      type: string
+      x-enum-varnames:
+        - ALL
+        - BROWSER
+        - MOBILE
+        - BACKEND
+    ListStreamIssueState:
+      description: Issue state filter for the `issue_stream` data source.
+      enum:
+        - OPEN
+        - IGNORED
+        - ACKNOWLEDGED
+        - RESOLVED
+      type: string
+      x-enum-varnames:
+        - OPEN
+        - IGNORED
+        - ACKNOWLEDGED
+        - RESOLVED
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        assignee_uuids:
+          description: Filter by assignee UUIDs. Usable only with `issue_stream`.
+          items:
+            description: Assignee UUID.
+            type: string
+          type: array
         clustering_pattern_field_path:
           description: Specifies the field for logs pattern clustering. Usable only with logs_pattern_stream.
           example: "message"
@@ -5853,16 +5885,35 @@ components:
             description: Index.
             type: string
           type: array
+        persona:
+          $ref: "#/components/schemas/ListStreamIssuePersona"
         query_string:
           description: Widget query.
           example: "@service:app"
           type: string
         sort:
           $ref: "#/components/schemas/WidgetFieldSort"
+        states:
+          description: Filter by issue states. Usable only with `issue_stream`.
+          items:
+            $ref: "#/components/schemas/ListStreamIssueState"
+          type: array
         storage:
           description: Option for storage location. Feature in Private Beta.
           example: "indexes"
           type: string
+        suspected_causes:
+          description: Filter by suspected causes. Usable only with `issue_stream`.
+          items:
+            description: Suspected cause.
+            type: string
+          type: array
+        team_handles:
+          description: Filter by team handles. Usable only with `issue_stream`.
+          items:
+            description: Team handle.
+            type: string
+          type: array
       required:
         - query_string
         - data_source
@@ -5876,8 +5927,8 @@ components:
       x-enum-varnames:
         - EVENT_LIST
     ListStreamSource:
-      default: apm_issue_stream
-      description: Source from which to query items to display in the stream.
+      default: logs_stream
+      description: Source from which to query items to display in the stream. apm_issue_stream, rum_issue_stream, and logs_issue_stream are deprecated. Use issue_stream instead.
       enum:
         - logs_stream
         - audit_stream
@@ -5892,7 +5943,8 @@ components:
         - event_stream
         - rum_stream
         - llm_observability_stream
-      example: apm_issue_stream
+        - issue_stream
+      example: logs_stream
       type: string
       x-enum-varnames:
         - LOGS_STREAM
@@ -5908,6 +5960,7 @@ components:
         - EVENT_STREAM
         - RUM_STREAM
         - LLM_OBSERVABILITY_STREAM
+        - ISSUE_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
@@ -35407,7 +35460,7 @@ paths:
       description: |-
         Validate the monitor provided in the request.
 
-        **Note**: Log monitors require an unscoped App Key.
+        **Note**: Log monitors require an unscoped App Key and `logs_read_data` permission.
       operationId: ValidateMonitor
       requestBody:
         content:
@@ -35940,7 +35993,10 @@ paths:
           - monitors_write
   /api/v1/monitor/{monitor_id}/validate:
     post:
-      description: Validate the monitor provided in the request.
+      description: |-
+        Validate the monitor provided in the request.
+
+        **Note**: Log monitors require an unscoped App Key and `logs_read_data` permission.
       operationId: ValidateExistingMonitor
       parameters:
         - description: The ID of the monitor
