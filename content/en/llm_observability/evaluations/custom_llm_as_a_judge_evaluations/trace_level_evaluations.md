@@ -141,9 +141,9 @@ Any spans that arrive more than 3 minutes after the previous span on a trace are
 
 The walkthrough below highlights the parts of the configuration that are specific to trace scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span-scoped evaluations.
 
-1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then {{< ui >}}Create your own{{< /ui >}}. (You can also start from a [template evaluation][2].)
+1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select  {{< ui >}}Trace{{< /ui >}}. (You can also start from a [template evaluation][2].)
 1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
-1. Under {{< ui >}}Evaluation Scope{{< /ui >}} > {{< ui >}}Evaluate On{{< /ui >}}, select {{< ui >}}Trace{{< /ui >}}.
+1. Under {{< ui >}}Evaluation Type{{< /ui >}} >, select {{< ui >}}Trace{{< /ui >}}.
 
    {{< img src="llm_observability/evaluations/trace_level_evaluation_scope.png" alt="The Evaluate On scope picker with Trace selected and Span as the alternative." style="width:100%;" >}}
 
