@@ -36,7 +36,7 @@ A finding is prioritized when these signals show real, exploitable risk in your 
 
 ## Crown Jewels
 
-Crown Jewels are the resources (services, hosts, databases, containers, and more) that support your most critical business functions. Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
+Crown Jewels are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
 
 Crown Jewels update continuously as your environment changes. You can also add your own Crown Jewels manually in Datadog Cloud Security.
 
