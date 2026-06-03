@@ -7,7 +7,7 @@ further_reading:
     text: "Network Configuration Management"
   - link: "/bits_ai/bits_ai_sre/"
     tag: "Documentation"
-    text: "Bits AI SRE"
+    text: "Bits Investigation"
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
@@ -22,7 +22,7 @@ further_reading:
 
 - Identify degraded devices and affected metrics across your fleet
 - Correlate metric anomalies with configuration changes on a shared timeline
-- Launch [Bits AI SRE][2] investigations to pinpoint root causes
+- Launch [Bits Investigation][2] to pinpoint root causes
 - Take action by rolling back configuration changes directly from the investigation flow
 
 Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Devices{{< /ui >}} > {{< ui >}}Health{{< /ui >}}][1] for a fleet-wide view of all device issues. To see active issues for a specific device, select it from the [Devices][3] list or any NDM visualization to open any active issues in the device side panel.
@@ -35,16 +35,16 @@ Select an issue to see:
 - A graph of the affected metric showing when the issue started and its severity
 - A timeline overlay showing when configuration changes occurred on the device, so you can correlate metric anomalies with specific changes
 
-{{< img src="network_device_monitoring/health/investigate-issue.png" alt="A device health issue showing a bandwidth utilization drop on interface ge0/0, with a summary of the root cause, a timeseries graph with configuration change markers, and a button to investigate further with Bits AI SRE." style="width:100%;" >}}
+{{< img src="network_device_monitoring/health/investigate-issue.png" alt="A device health issue showing a bandwidth utilization drop on interface ge0/0, with a summary of the root cause, a timeseries graph with configuration change markers, and a button to investigate further with Bits Investigation." style="width:100%;" >}}
 
-### Launch a Bits AI SRE investigation
+### Launch a Bits Investigation
 
-From a selected issue, you can trigger a [Bits AI SRE][2] investigation. Bits AI SRE analyzes the issue and provides:
+From a selected issue, you can trigger a [Bits Investigation][2]. Bits Investigation analyzes the issue and provides:
 
 - A step-by-step summary of the investigation and its findings
 - Root cause analysis in plain language
 
-Click {{< ui >}}View Full Investigation{{< /ui >}} to open the complete Bits AI SRE investigation in a new tab. For more information, see [Bits AI SRE][2].
+Click {{< ui >}}View Full Investigation{{< /ui >}} to open the complete investigation in a new tab. For more information, see [Bits Investigation][2].
 
 ### Apply a proposed fix
 
