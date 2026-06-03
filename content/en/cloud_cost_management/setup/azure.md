@@ -22,9 +22,20 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Azure integration and create **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes.
 
 To determine your account type, see the [Azure documentation][10]. **Note:** If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
+
+<div class="alert alert-info">
+<strong>Pay as you go (PAYG) accounts</strong>
+<p>Datadog Cloud Cost Management requires <strong>Actual Cost</strong> and <strong>Amortized Cost</strong> exports from Azure. PAYG (Microsoft Online Services Program) subscriptions typically provide only <strong>Usage details (usage only)</strong> exports. Because they don't expose the <strong>Actual Cost</strong> and <strong>Amortized Cost</strong> exports that CCM requires, PAYG accounts can't be set up for CCM. For the export types supported by each Azure account type, see Microsoft's <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports">Cost Management exports documentation</a>.</p>
+<p>If your subscription is PAYG, consider one of the following options:</p>
+<ul>
+<li>Migrate to a Microsoft Customer Agreement (MCA) or Enterprise Agreement (EA), which support the required export types.</li>
+<li>Contact Microsoft Azure support to confirm the export types available for your subscription.</li>
+</ul>
+<p>For help with Datadog CCM setup or to discuss options, contact <a href="/help/">Datadog support</a>.</p>
+</div>
 
 ## Setup
 
@@ -315,7 +326,6 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [8]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
 [9]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
 [10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
-[11]: /help/
 [12]: /cloud_cost_management/tags
 [13]: /api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config
