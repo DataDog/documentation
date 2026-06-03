@@ -65,11 +65,9 @@ To share a dashboard with one or more email addresses:
 
 **Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
 
-The Maximum Access Period of an invitation can be configured by an organization admin in [Organization Settings > Public Sharing][3]. By default, it is not configured.
+The Maximum Access Period of an invitation can be configured by an organization admin in [Organization Settings > Public Sharing][3]. By default, it is not configured. To allow invitations with no expiration date, turn off the Maximum Access Period setting. If you are configuring this with the API, set the value to `null`. In the UI, setting the Maximum Access Period to `0` turns off the setting and sets the value to `null`.
 
 **Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
-
-To allow invitations with no expiration date, turn off the Maximum Access Period setting. If you are configuring this with the API, set the value to `null`. In the UI, setting the Maximum Access Period to `0` turns off the setting and sets the value to `null`.
 
 ### Access an invite-only shared dashboard
 
