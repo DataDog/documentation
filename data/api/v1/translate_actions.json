@@ -1144,7 +1144,7 @@
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get all usage across your account.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "description": "Get all usage across your account.\n\nNewly added billing dimensions and usage types appear as untyped keys on the\n`additionalProperties` map of `UsageSummaryResponse`, `UsageSummaryDate`, and\n`UsageSummaryDateOrg` instead of as typed fields. Call\n`GET /api/v2/usage/summary/available_fields` to enumerate every key returned\nat each response level—both typed fields and `additionalProperties` keys.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get usage across your account"
   },
   "GetUsageSynthetics": {

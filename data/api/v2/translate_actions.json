@@ -6002,6 +6002,10 @@
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
   },
+  "GetUsageSummaryAvailableFields": {
+    "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "summary": "Get available fields for usage summary"
+  },
   "GetUsageAttributionTypes": {
     "description": "Get usage attribution types.",
     "summary": "Get usage attribution types"

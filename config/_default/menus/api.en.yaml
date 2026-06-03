@@ -5556,6 +5556,18 @@ menu:
           - GetUsageAttributionTypes
         unstable: []
         order: 10
+    - name: Get available fields for usage summary
+      url: /api/latest/usage-metering/get-available-fields-for-usage-summary/
+      identifier: usage-metering-get-available-fields-for-usage-summary
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageSummaryAvailableFields
+        unstable: []
+        order: 13
     - name: Get projected cost across your account
       url: /api/latest/usage-metering/get-projected-cost-across-your-account/
       identifier: usage-metering-get-projected-cost-across-your-account
