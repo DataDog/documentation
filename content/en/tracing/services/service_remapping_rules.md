@@ -64,7 +64,7 @@ Remapping rules work by overriding the `service` tag for remapping services, or 
 Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profiling, NPM, Live Processes, Live Containers, Kubernetes, and Events.
 
 - **Historical data:** Changes made by remapping rules affect only telemetry ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
-- **Rule order:** Service remapping rules are applied in order. Rules at the top of the rule list are applied first. A service will be remapped only by the first rule that captures it (multiple rules will not be applied to the same service).
+- **Rule order:** Service remapping rules are applied in order. Rules at the top of the rule list are applied first. A service is remapped only by the first rule that captures it (multiple rules are not applied to the same service).
 - **Regular expressions:** Regular expressions can be used to define new service names, but greedy quantifiers are not allowed inside the capture group.
 - **Logs service remapper:** Service remapping rules occur before logs pipelines. If the logs service remapper and remapping rules are both applied to a service, the remapping rules take precedence. 
 - **Dashboards and monitors:** Existing queries that reference old service names are not automatically updated. Review and update these manually.
