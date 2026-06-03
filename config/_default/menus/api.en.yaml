@@ -15766,7 +15766,7 @@ menu:
       url: /api/latest/rum-metrics/
       identifier: rum-metrics
       generated: true
-    - name: Update a rum-based metric
+    - name: Update a RUM-based metric
       url: '#update-a-rum-based-metric'
       identifier: rum-metrics-update-a-rum-based-metric
       parent: rum-metrics
@@ -15778,7 +15778,7 @@ menu:
           - UpdateRumMetric
         unstable: []
         order: 4
-    - name: Get a rum-based metric
+    - name: Get a RUM-based metric
       url: '#get-a-rum-based-metric'
       identifier: rum-metrics-get-a-rum-based-metric
       parent: rum-metrics
@@ -15790,7 +15790,7 @@ menu:
           - GetRumMetric
         unstable: []
         order: 3
-    - name: Delete a rum-based metric
+    - name: Delete a RUM-based metric
       url: '#delete-a-rum-based-metric'
       identifier: rum-metrics-delete-a-rum-based-metric
       parent: rum-metrics
@@ -15802,7 +15802,7 @@ menu:
           - DeleteRumMetric
         unstable: []
         order: 5
-    - name: Create a rum-based metric
+    - name: Create a RUM-based metric
       url: '#create-a-rum-based-metric'
       identifier: rum-metrics-create-a-rum-based-metric
       parent: rum-metrics
@@ -15814,7 +15814,7 @@ menu:
           - CreateRumMetric
         unstable: []
         order: 2
-    - name: Get all rum-based metrics
+    - name: Get all RUM-based metrics
       url: '#get-all-rum-based-metrics'
       identifier: rum-metrics-get-all-rum-based-metrics
       parent: rum-metrics
@@ -15882,7 +15882,7 @@ menu:
       url: /api/latest/rum-replay-playlists/
       identifier: rum-replay-playlists
       generated: true
-    - name: Add rum replay session to playlist
+    - name: Add RUM replay session to playlist
       url: '#add-rum-replay-session-to-playlist'
       identifier: rum-replay-playlists-add-rum-replay-session-to-playlist
       parent: rum-replay-playlists
@@ -15894,7 +15894,7 @@ menu:
           - AddRumReplaySessionToPlaylist
         unstable: []
         order: 8
-    - name: Remove rum replay session from playlist
+    - name: Remove RUM replay session from playlist
       url: '#remove-rum-replay-session-from-playlist'
       identifier: rum-replay-playlists-remove-rum-replay-session-from-playlist
       parent: rum-replay-playlists
@@ -15906,7 +15906,7 @@ menu:
           - RemoveRumReplaySessionFromPlaylist
         unstable: []
         order: 9
-    - name: List rum replay playlist sessions
+    - name: List RUM replay playlist sessions
       url: '#list-rum-replay-playlist-sessions'
       identifier: rum-replay-playlists-list-rum-replay-playlist-sessions
       parent: rum-replay-playlists
@@ -15918,7 +15918,7 @@ menu:
           - ListRumReplayPlaylistSessions
         unstable: []
         order: 3
-    - name: Bulk remove rum replay playlist sessions
+    - name: Bulk remove RUM replay playlist sessions
       url: '#bulk-remove-rum-replay-playlist-sessions'
       identifier: rum-replay-playlists-bulk-remove-rum-replay-playlist-sessions
       parent: rum-replay-playlists
@@ -15930,7 +15930,7 @@ menu:
           - BulkRemoveRumReplayPlaylistSessions
         unstable: []
         order: 4
-    - name: Update rum replay playlist
+    - name: Update RUM replay playlist
       url: '#update-rum-replay-playlist'
       identifier: rum-replay-playlists-update-rum-replay-playlist
       parent: rum-replay-playlists
@@ -15942,7 +15942,7 @@ menu:
           - UpdateRumReplayPlaylist
         unstable: []
         order: 6
-    - name: Get rum replay playlist
+    - name: Get RUM replay playlist
       url: '#get-rum-replay-playlist'
       identifier: rum-replay-playlists-get-rum-replay-playlist
       parent: rum-replay-playlists
@@ -15954,7 +15954,7 @@ menu:
           - GetRumReplayPlaylist
         unstable: []
         order: 5
-    - name: Delete rum replay playlist
+    - name: Delete RUM replay playlist
       url: '#delete-rum-replay-playlist'
       identifier: rum-replay-playlists-delete-rum-replay-playlist
       parent: rum-replay-playlists
@@ -15966,7 +15966,7 @@ menu:
           - DeleteRumReplayPlaylist
         unstable: []
         order: 7
-    - name: Create rum replay playlist
+    - name: Create RUM replay playlist
       url: '#create-rum-replay-playlist'
       identifier: rum-replay-playlists-create-rum-replay-playlist
       parent: rum-replay-playlists
@@ -15978,7 +15978,7 @@ menu:
           - CreateRumReplayPlaylist
         unstable: []
         order: 1
-    - name: List rum replay playlists
+    - name: List RUM replay playlists
       url: '#list-rum-replay-playlists'
       identifier: rum-replay-playlists-list-rum-replay-playlists
       parent: rum-replay-playlists
@@ -16010,7 +16010,7 @@ menu:
       url: /api/latest/rum-replay-viewership/
       identifier: rum-replay-viewership
       generated: true
-    - name: List rum replay viewership history sessions
+    - name: List RUM replay viewership history sessions
       url: '#list-rum-replay-viewership-history-sessions'
       identifier: rum-replay-viewership-list-rum-replay-viewership-history-sessions
       parent: rum-replay-viewership
@@ -16022,7 +16022,7 @@ menu:
           - ListRumReplayViewershipHistorySessions
         unstable: []
         order: 1
-    - name: Create rum replay session watch
+    - name: Create RUM replay session watch
       url: '#create-rum-replay-session-watch'
       identifier: rum-replay-viewership-create-rum-replay-session-watch
       parent: rum-replay-viewership
@@ -16034,7 +16034,7 @@ menu:
           - CreateRumReplaySessionWatch
         unstable: []
         order: 2
-    - name: Delete rum replay session watch
+    - name: Delete RUM replay session watch
       url: '#delete-rum-replay-session-watch'
       identifier: rum-replay-viewership-delete-rum-replay-session-watch
       parent: rum-replay-viewership
@@ -16046,7 +16046,7 @@ menu:
           - DeleteRumReplaySessionWatch
         unstable: []
         order: 3
-    - name: List rum replay session watchers
+    - name: List RUM replay session watchers
       url: '#list-rum-replay-session-watchers'
       identifier: rum-replay-viewership-list-rum-replay-session-watchers
       parent: rum-replay-viewership
