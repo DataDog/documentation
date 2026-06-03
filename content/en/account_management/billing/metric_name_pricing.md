@@ -29,11 +29,11 @@ Datadog distinguishes ingested datapoints from indexed datapoints. **Ingested** 
 
 Metric Name pricing introduces three SKUs:
 
-| SKU                                  | What it bills                                                            |
-|--------------------------------------|--------------------------------------------------------------------------|
-| `metric_names/FLEX-METRIC-NAME`      | Each unique metric name submitted in a month with more than 100 indexed datapoints |
-| `indexed_points/FLEX-INDEXED-POINTS` | Indexed datapoints above the 10M-per-metric-name baseline |
-| `ingest_points/FLEX-INGEST-POINTS`   | Ingested datapoints above 5x your indexed volume |
+| SKU             | What it bills                                                                      |
+|-----------------|------------------------------------------------------------------------------------|
+| Metric-Name     | Each unique metric name submitted in a month with more than 100 indexed datapoints |
+| Indexed Points  | Indexed datapoints above the 10M-per-metric-name baseline                          |
+| Ingested Points | Ingested datapoints above 5x your indexed volume                                   |
 
 These SKUs are mutually incompatible with the Timeseries (cardinality) pricing SKUs.
 
