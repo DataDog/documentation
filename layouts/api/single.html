@@ -51,7 +51,7 @@
 
     <div class="row">
       <div class="col-12 {{ if gt $versionCount 0 }}col-md-9{{ end }}">
-          <h1 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
+          <h1 class="mb-0 api-task-description" id="{{ $anchorStr | anchorize }}">
               {{- $anchorStr -}}
           </h1>
       </div>
@@ -71,6 +71,8 @@
       </div>
       {{ end }}
     </div>
+
+    {{ partial "api/api-copy-btn.html" . }}
 
     {{ if gt $versionCount 0 }}
 
