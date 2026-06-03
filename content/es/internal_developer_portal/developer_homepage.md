@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/software_catalog/developer_homepage
-- /es/internal_developer_portal/developer_homepage
 further_reading:
 - link: /integrations/github/
   tag: Documentación
