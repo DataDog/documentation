@@ -33,7 +33,7 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 | **Business criticality** | Would a compromise have high impact? | Resource supports a critical business function ([Crown Jewel](#crown-jewels)). Runs with elevated privileges and processes sensitive data. |
 | **Actionability** | Can the right team fix it? | Service owner identified. Fix or mitigation available. |
 
-A finding is prioritized when these signals show real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
+The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
 
 ## Crown Jewels
 
