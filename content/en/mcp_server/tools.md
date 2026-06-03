@@ -973,7 +973,6 @@ Returns profiling data aggregated as timeseries (rate metrics). Best for trends,
 Discovers available tag names (such as service, host, env, version, family, runtime-id, kube_*) for filtering profiling data. Returns up to 50 results, sorted by relevance.
 
 - What tag names are available for filtering profiling data in production?
-- Show me the tag keys I can group profile data by.
 - List profiling tag names for `service:checkout-api`.
 
 ### `get_profiling_tag_values`
