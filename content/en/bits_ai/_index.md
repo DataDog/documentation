@@ -24,7 +24,7 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
-    - link: "/bits_ai/ai_credits/"
+    - link: "/account_management/billing/ai_credits/"
       tag: "Documentation"
       text: "AI Credits"
     - link: "/mcp_server/"
@@ -33,6 +33,8 @@ further_reading:
 ---
 
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
+
+Learn about Bits AI pricing on [AI Credits][1].
 
 ## Features
 
@@ -46,3 +48,5 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/billing/ai_credits/
