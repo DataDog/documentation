@@ -40,11 +40,15 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog has 
 
 When configuring tags on custom metrics, the **Manage Tags** modal estimates the impact of tag changes on **point volume** instead of cardinality volume.
 
+{{< img src="metrics/guide/metric_name_pricing_experience/manage-tags-modal.png" alt="The Manage Tags modal showing a usage projection chart with three lines: month-to-date usage, usage with current configuration, and usage with proposed configuration. Tags datacenter and service are configured in the Include tags tab." style="width:100%;" >}}
+
 For more information on configuring tags, see [Metrics without Limits™][2].
 
 ## Metric side panel
 
 The metric details side panel displays **ingested and indexed point volume** instead of timeseries volume.
+
+{{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="The metric details side panel showing INGESTED POINTS and INDEXED POINTS at the top, alongside Hosts and Tag Values." style="width:100%;" >}}
 
 To open the metric side panel, click any metric name on the [Metrics Summary page][3].
 
@@ -57,6 +61,8 @@ The Volume Overview graphs also display billing dimensions specific to Metric Na
 - Estimated unique metric names
 - Billable indexed point volume
 - Ingested-to-indexed points ratio
+
+{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Three Volume Overview graphs for Metric Name Pricing: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
 
 ## Plan & Usage page
 
