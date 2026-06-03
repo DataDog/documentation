@@ -3,7 +3,7 @@ title: API Findings
 description: Triage detected API risks across definitions, gateways, and live traffic.
 ---
 
-The [API Findings][1] explorer provides a central triage view of all detected API risks across definitions, gateways, and live traffic. It provides a set of default rules to detect common vulnerabilities and misconfigurations. You can also set up [custom rules][2] to adapt to specific use cases.
+The [API Findings][1] explorer provides a central triage view of the API risks detected across your definitions, gateways, and live traffic. Default rules detect common vulnerabilities and misconfigurations. You can also add [custom rules][2] for specific use cases.
 
 **API Findings** columns:
 
@@ -18,7 +18,7 @@ Use the **Service** facet to see each service's endpoints to identify ownership 
 Click a finding to view its details and perform a workflow such as Validate > Investigate > Fix > Track:
 
 1. Validate:
-   - Review **What Happened** and **Detected In** to ensure the detection is accurate (service, endpoint, method).
+   - Review **What Happened** and **Detected In** to confirm the detection is accurate (service, endpoint, method).
    - In **Next Steps**, choose whether to **Mute**, **Create Ticket**, or **Run Workflow** depending on ownership and impact.
 2. Investigate:
    - Use the **Context** tab to examine the endpoint snapshot and attributes (method, path, authentication flags, tags).
