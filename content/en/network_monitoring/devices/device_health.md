@@ -29,7 +29,7 @@ Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Devices{{< /ui >}} 
 
 ## Investigate an issue
 
-Select an issue to see:
+Select an issue to open the issue panel, which shows:
 
 - A plain-language summary of what happened
 - A graph of the affected metric showing when the issue started and its severity
@@ -54,7 +54,7 @@ Take action directly from the issue panel by applying the proposed fix (such as 
 
 ### View impacted devices and dependencies
 
-The issue panel also shows other devices and dependencies potentially affected by the same issue, helping you assess the scope of impact across your network.
+The issue panel also shows other devices and dependencies potentially affected by the same issue, helping you assess the scope of impact across your network. To investigate further, select any device in the diagram or the affected devices list to open its Device page.
 
 {{< img src="network_device_monitoring/health/affected-devices-and-dependencies.png" alt="A dependency map for the ny-edge device showing connected devices, and a list of nine affected devices all marked as degraded." style="width:100%;" >}}
 
