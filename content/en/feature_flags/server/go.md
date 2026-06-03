@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Go tracer (`dd-trace-go`).
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -20,7 +20,7 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 Before setting up the Go Feature Flags SDK, ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][2] enabled
+- **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
 - **Datadog Go SDK** `dd-trace-go` version 2.4.0 or later
 
@@ -30,10 +30,15 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Optional: Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
 ## Installation
 
@@ -51,7 +56,7 @@ go get github.com/open-feature/go-sdk/openfeature
 
 ## Initialize the SDK
 
-Start the Datadog SDK and register the Datadog OpenFeature provider. The SDK must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
+Start the Datadog Go tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
 
 ### Blocking initialization
 
@@ -153,6 +158,8 @@ client := openfeature.NewClient("my-service")
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="go" >}}
 evalCtx := openfeature.NewEvaluationContext(

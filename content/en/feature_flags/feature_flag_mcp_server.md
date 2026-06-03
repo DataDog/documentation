@@ -26,6 +26,10 @@ curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
 
 Then follow the instructions below to add the MCP Server to your specific client.
 
+<div class="alert alert-info">
+  The Feature Flags toolset is generally available on the Datadog MCP Server. The MCP Server endpoint uses the <code>/api/unstable/</code> path.
+</div>
+
 ### Claude Code
 
 ```bash
@@ -53,7 +57,7 @@ Add this to `~/.cursor/mcp.json` (remember to save the file):
 The MCP Server includes tools to help you manage feature flags in your codebase. The following use cases provide sample prompts for using the tools.
 
 <div class="alert alert-info">
-  The MCP Server only supports React applications.
+  The code-implementation tools, such as <code>check-flag-implementation</code>, target React applications. Other tools, such as <code>list-feature-flags</code> and <code>update-feature-flag-environment</code>, are framework-agnostic.
 </div>
 
 ### Create feature flags
