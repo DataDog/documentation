@@ -134,6 +134,8 @@ Size
 
 {{% /collapse-content %}}
 
+For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture network payloads** is enabled in the test's [advanced options](/synthetics/browser_tests#advanced-options).
+
 ### Backend traces
 
 Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 

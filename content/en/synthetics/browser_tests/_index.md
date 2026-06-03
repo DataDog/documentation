@@ -132,6 +132,8 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    This privacy option is available as an [advanced option][1] at the individual test step level and ensures that no sensitive data appears in your test results. Preventing the test from taking screenshots makes troubleshooting failures more difficult. For more information, see [Data Security][2].
 
+   Select **Capture network payloads** to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, payload details are available in the [Resources tab](/synthetics/browser_tests/test_results#resources) of your test results. Because this option captures request and response bodies, it may record sensitive data. For more information, see [Data Security][2].
+
 [1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /data_security/synthetics
    {{% /tab %}}
