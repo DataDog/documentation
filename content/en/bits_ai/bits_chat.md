@@ -17,10 +17,11 @@ further_reading:
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
+- /bits_ai/bits_assistant/
 ---
 
 ## Overview
-Bits Chat is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack.
+Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack.
 
 Ask Bits Chat questions across these categories:
 
@@ -50,7 +51,7 @@ Ask Bits Chat questions across these categories:
 - `How can I put a team tag on this monitor?`
 - `Add a timeseries widget for request count over time to this notebook`
 
-{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Chat interface showing conversation history and prompt suggestions" style="width:100%;">}}
+{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Chat interface with suggested tasks" style="width:100%;">}}
 
 ### Permissions
 
@@ -129,7 +130,7 @@ There are multiple ways to open Bits Chat in the Datadog web application:
 - Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>
 - In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}
 
-{{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat side panel showing example prompts" style="width:40%;">}}
+{{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat panel open alongside the Dashboards list" style="width:40%;">}}
 
 ### Mobile application
 <div class="alert alert-info">
@@ -163,4 +164,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [7]: /ddsql_editor/
 [8]: /ddsql_reference/data_directory/
 [9]: /cloud_cost_management/cloud_cost_skill/
-[10]: https://app.datadoghq.com/bits-ai/assistant/reports
+[10]: https://app.datadoghq.com/ask/usage
