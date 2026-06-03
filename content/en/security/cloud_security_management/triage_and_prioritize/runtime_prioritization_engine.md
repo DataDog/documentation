@@ -47,13 +47,6 @@ Ownership identifies the team or service owner responsible for fixing a security
 
 When ownership is known, the engine can route findings to the right team instead of leaving security teams to manually chase remediation owners.
 
-## Coverage
-
-| Finding type | Coverage |
-|---|---|
-| Vulnerabilities (host and container) | Preview |
-| Misconfigurations | In development |
-| Identity risks | In development |
 
 ## Get started
 
