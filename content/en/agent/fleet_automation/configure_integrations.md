@@ -61,7 +61,7 @@ Each operation applies changes to the integration's `conf.d` configuration file 
 
 - {{< ui >}}Add New{{< /ui >}}: Deploys a new integration configuration file. If a configuration file already exists, it is replaced entirely and the YAML you provide becomes the complete new configuration for that integration on the target Agents.
 
-- {{< ui >}}Edit & Replace{{< /ui >}}: Applies a targeted change using JSON Merge Patch ([RFC 7386][5]). Only the fields you specify are modified; unmentioned fields remain unchanged.
+- {{< ui >}}Edit & Replace{{< /ui >}}: Only the fields you specify are modified; unmentioned fields remain unchanged.
 
   <div class="alert alert-warning">
   Array fields (such as <code>tags</code>) are fully replaced during an Edit & Replace, not merged. Include all desired values in your update. Any values you omit are removed.
