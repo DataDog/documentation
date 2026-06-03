@@ -63,10 +63,10 @@ All actions—whether auto-approved or manually approved—are recorded in the a
 
 Actions that do not meet your auto-approve policy are routed to an approval workflow. The approval card displays:
 
-The detected issue
-The proposed action and confidence score
-The reasoning behind the confidence score
-{{< ui >}}Approve{{< /ui >}} and {{< ui >}}Reject{{< /ui >}} controls
+- The detected issue
+- The proposed action and confidence score
+- The reasoning behind the confidence score
+- {{< ui >}}Approve{{< /ui >}} and {{< ui >}}Reject{{< /ui >}} controls
 
 Approved actions execute immediately. A rollback option is available for a configurable window after execution.
 
