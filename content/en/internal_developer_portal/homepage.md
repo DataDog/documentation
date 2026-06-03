@@ -2,6 +2,7 @@
 title: Homepage
 aliases:  
 - /software_catalog/developer_homepage  
+- /internal_developer_portal/developer_homepage  
 further_reading:  
 - link: "/integrations/github/"  
   tag: "Documentation"  
