@@ -20,7 +20,7 @@ The [Runtime Prioritization Engine][1] combines runtime observability and securi
 
 ## Severity Scoring
 
-[Severity Scoring][2] turns the Runtime Prioritization Engine's output into a Datadog Severity Score on each finding. For vulnerabilities, it strictly follows the [CVSS 4.0][3] algorithm, enriching the base score with temporal factors (active exploits, exploitation probability) and environmental factors (runtime context, exposure, criticality of the affected resource). For misconfigurations and identity risks, severity is computed using a likelihood × impact matrix that weighs how an adversary could abuse the finding against the damage that abuse would cause.
+[Severity Scoring][2] turns the Runtime Prioritization Engine's output into a Datadog Severity Score on each finding. For vulnerabilities, it follows the [CVSS 4.0][3] algorithm, enriching the base score with temporal factors (such as active exploits or exploitation probability) and environmental factors (such as runtime context, exposure, or criticality of the affected resource). For misconfigurations and identity risks, it computes severity using a likelihood × impact matrix that weighs how an adversary could abuse the finding against the damage that abuse would cause.
 
 ## Further reading
 
