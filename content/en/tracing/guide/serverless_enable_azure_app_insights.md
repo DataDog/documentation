@@ -8,7 +8,7 @@ further_reading:
   text: "Microsoft Azure integration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/azure-app-insights-integration/" header="Join the Preview!" >}}
 The Azure App Insights Integration is in Preview. Use this form to request access.
 {{< /callout >}}
 
@@ -36,7 +36,7 @@ After conversion, the spans behave like any other Datadog APM spans. They appear
 Before you can use the Azure App Insights Integration, set up the following:
 
 1. **Enable Azure Application Insights** on the Azure workloads you want to trace.
-2. **Install the [Microsoft Azure integration][1].** It provides both the log forwarding path and the Azure resource metadata used for enrichment.
+2. **Install the [Microsoft Azure integration][1],** which collects Azure resource metadata.
 3. **Forward your Azure logs to Datadog.** App Insights records must arrive in Datadog Logs for the integration to read them. See [Azure Automated Log Forwarding Setup][2] for setup instructions.
 
 ## Supported Azure services
@@ -53,9 +53,7 @@ Traces from other Azure services are converted into APM spans, but without Azure
 
 ## Request access
 
-<!-- todo: Update the Preview form URL when the form is published (target: 2026-05-29). -->
-
-The Azure App Insights Integration is in Preview. To request access, sign up through the [Preview form](https://www.datadoghq.com/product-preview/).
+The Azure App Insights Integration is in Preview. To request access, sign up through the [Preview form][4].
 
 After you submit the form, the Datadog team responds within one week with installation instructions and next steps.
 
@@ -72,3 +70,4 @@ After you submit the form, the Datadog team responds within one week with instal
 [1]: /integrations/azure/
 [2]: /logs/guide/azure-automated-log-forwarding/
 [3]: /tracing/trace_collection/span_links/
+[4]: https://www.datadoghq.com/product-preview/azure-app-insights-integration/
