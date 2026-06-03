@@ -54,11 +54,6 @@ When ownership is known, the engine can route findings to the right team instead
 2. Enable [Runtime Package Tracking][4] on the Agent to surface the *package in use* signal on vulnerability findings.
 3. Open the [Cloud Security Summary][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [Security Inbox][6].
 
-## What's next
-
-- **Live attack corroboration**: elevate findings on resources receiving confirmed attack traffic from Cloud SIEM, App and API Protection, and Workload Protection.
-- **Ownership inference**: extend ownership coverage with tags, audit logs, infrastructure-as-code, and resource catalog signals.
-- **Container-aware severity adjustment**: tune severity based on whether the affected container runs as root or with elevated privileges.
 
 ## Further reading
 
