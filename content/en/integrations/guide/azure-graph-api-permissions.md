@@ -1,5 +1,6 @@
 ---
 title: Microsoft Graph API Permissions for Monitoring Azure
+description: "Grant Microsoft Graph API permissions to your Azure app registration so the Datadog-Azure integration can fetch tenant details."
 
 further_reading:
   - link: "/integrations/azure/"

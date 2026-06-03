@@ -42,19 +42,18 @@ First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-<details open>
-  <summary>Latest version</summary>
-  
+{{% collapse-content title="Latest version" level="h4" expanded=true %}}
+
 ```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
 ```
 
-</details>
-<details>
-  <summary>Before <code>v5.0.0</code></summary>
-  
+{{% /collapse-content %}}
+
+{{% collapse-content title="Before v5.0.0" level="h4" expanded=false %}}
+
 ```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
@@ -63,7 +62,8 @@ window.DD_RUM.init({
 ```
 
 Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
-</details>
+
+{{% /collapse-content %}}
 
 ## Usage
 

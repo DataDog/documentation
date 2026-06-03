@@ -98,6 +98,7 @@ You may create a test using one of the following options:
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.
      For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).
+   * **JWT**: Generate a signed JWT Bearer Token for authentication. Select a signing algorithm (`HS256`, `RS256`, or `ES256`) and provide a signing key: enter a text secret for `HS256`, or upload a PEM-formatted private key for `RS256` and `ES256`. Both accept `{{ GLOBAL_VARIABLE }}` references. Enter payload claims as a JSON object; claims can be strings, numbers, Booleans, arrays, or nested objects. The `iat` (issued at) and `exp` (expiration) claims are auto-added by default. If you include `iat` or `exp` in the payload JSON, those values take precedence over the auto-generated ones. Optionally, set the expiration window in seconds (default: `3600`), add custom JWT header fields such as `kid` or `x5t`, and customize the token prefix in the `Authorization` header (default: `Bearer`).
 
    {{% /tab %}}
 
@@ -125,7 +126,7 @@ You may create a test using one of the following options:
 
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime and to truncate the error message of failed JavaScript assertions. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 
 [1]: /data_security/synthetics
@@ -182,11 +183,16 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
 
-**Note:** When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
-<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+<div class="alert alert-info">
+  <ul>
+    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
+    <li>If a failed JavaScript assertion's error message might include sensitive data, under <strong>Advanced Options</strong> > <strong>Privacy</strong>, enable <strong>Do not save response body</strong>. This truncates the assertion error message.</li>
+  </ul>
+</div>
 
 #### Using dd.assert()
 
@@ -312,8 +318,8 @@ HTTP tests can run:
 
 ## One-click
 
-API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, Software Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
@@ -336,6 +342,18 @@ To display your list of variables, type `{{` in your desired field:
 ## Test failure
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
+
+{{< img src="synthetics/api_tests/api_test_summary_updated.png" alt="HTTP API test details page showing the Activity tab with global uptime, alert timeline, and a list of recent test runs in alert state" style="width:100%;">}}
+
+### Timeline summary
+
+The **Summary** panel identifies unique issues causing failures across test runs in the selected time frame. For each issue, the panel displays:
+
+- **First seen**: When the issue first appeared in test runs.
+- **Last seen**: When the issue most recently appeared in test runs.
+- **Classification**: Whether the issue is a **True failure** (a real problem with your application) or a **Test Misconfiguration** (an issue with the test setup), based on the AI failure summary.
+- **Description**: A brief description of the error.
+- **Latest alerts**: A list of the most recent alerts related to the issue.
 
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 

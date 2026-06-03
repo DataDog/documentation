@@ -155,7 +155,7 @@ To check if outlier handling is the cause:
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment's detail page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
-If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the **Edit Metric** page.
+If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the {{< ui >}}Edit Metric{{< /ui >}} page.
 
 {{< img src="/product_analytics/experiment/troubleshooting_outlier_handling.png" alt="The Edit Metric page with the Outlier handling toggles highlighted." style="width:90%;" >}}
 
