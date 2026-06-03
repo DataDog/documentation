@@ -136,6 +136,8 @@ The Trace Explorer combines automated Watchdog outlier detection with TAG Analys
 
 {{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="Analyzing anomalies with integrated insights" video="true" >}}
 
+<div class="alert alert-tip">When you sort the trace list by <strong>Duration</strong>, click <strong>Investigate With Bits AI</strong> to launch an automated latency investigation. Bits AI analyzes bottlenecks and tag divergence across the displayed traces.</div>
+
 ## Indexed spans search with 15 day retention
 
 {{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Indexed Search" >}}
