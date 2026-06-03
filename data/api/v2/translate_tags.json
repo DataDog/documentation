@@ -351,6 +351,10 @@
     "name": "Rum Audience Management",
     "description": "Auto-generated tag Rum Audience Management"
   },
+  "rum-config": {
+    "name": "Rum Config",
+    "description": "Manage the [Real User Monitoring (RUM)](https://docs.datadoghq.com/real_user_monitoring/) configuration for your organization."
+  },
   "rum-metrics": {
     "name": "Rum Metrics",
     "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
