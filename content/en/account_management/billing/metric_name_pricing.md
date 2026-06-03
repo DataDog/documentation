@@ -23,7 +23,7 @@ Metric Name pricing bills custom metrics based on the number of unique metric na
 
 **Note**: This page applies if your contract uses Metric Name pricing SKUs. These SKUs are mutually exclusive with the Timeseries (cardinality) pricing SKUs. If your contract uses Timeseries pricing instead, see [Custom Metrics billing][1].
 
-Datadog distinguishes ingested datapoints from indexed datapoints. **Ingested** datapoints are every metric datapoint your services send. **Indexed** datapoints are the points that remain queryable. By default, every ingested datapoint is also indexed. [Metrics without Limits™][4] optionally reduces your indexed volume. Excluding tags you don't need lowers the indexed datapoints you're billed for, leaving only the retained points queryable. Indexed volume is always less than or equal to ingested volume.
+Datadog distinguishes ingested datapoints from indexed datapoints. **Ingested** datapoints are every metric datapoint your services send. **Indexed** datapoints are the points that remain queryable. By default, every ingested datapoint is also indexed. [Metrics without Limits™][4] optionally reduces your indexed volume by excluding tags you don't need, so you're billed only for the datapoints that remain queryable. Indexed volume is always less than or equal to ingested volume.
 
 ## SKUs
 
