@@ -38,7 +38,7 @@ You can manage custom allocation rules using the [API][4], [Terraform][5], or di
 
    _Example: Untagged support costs, shared database costs._
 
-**Note:** When you define multiple source filters, they are combined with **AND** logic — a cost line must match **all** filter conditions to be selected for allocation. Within a single filter, the `in` and `not in` conditions use **OR** logic, matching **any** of the listed values. For example, filtering by `aws_product is mwaa` and `aws_usage_type in [MediumWorker, XLargeWorker]` selects costs where the product is MWAA **AND** the usage type is either MediumWorker **OR** XLargeWorker. To apply OR logic across different tags, create separate allocation rules.
+**Note:** When you define multiple source filters, they are combined with **AND** logic — a cost line must match **all** filter conditions to be selected for allocation. Within a single filter, the `in` and `not in` conditions use **OR** logic, matching **any** of the listed values. For example, filtering by `aws_product is ec2` and `aws_usage_type in [BoxUsage:m7g.16xlarge, BoxUsage:c6g.8xlarge]` selects costs where the product is EC2 **AND** the usage type is either of those instance types. To apply OR logic across different tags, create separate allocation rules.
 
 
 ### Step 2 - Choose an allocation method
