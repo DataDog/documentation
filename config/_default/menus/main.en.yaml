@@ -1577,8 +1577,8 @@ menu:
       parent: bits_ai
       weight: 3
     - name: Bits Chat
-      url: bits_ai/bits_assistant
-      identifier: bits_ai_bits_assistant
+      url: bits_ai/bits_chat
+      identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 4
     - name: Bits Agent Builder

@@ -2,7 +2,7 @@
 title: AI Credits
 description: "Understand how AI Credits work, which products consume them, pricing models, and how to manage usage for your organization."
 further_reading:
-- link: "/bits_ai/bits_assistant/"
+- link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
 - link: "/bits_ai/bits_ai_dev_agent/"
@@ -98,7 +98,7 @@ AI Credits are available to all Datadog customers except:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_assistant/
+[1]: /bits_ai/bits_chat/
 [2]: /bits_ai/bits_ai_dev_agent/
 [3]: /bits_ai/bits_ai_sre/
 [4]: /actions/agents/
