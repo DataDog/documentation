@@ -17,7 +17,7 @@ further_reading:
 Runtime Prioritization Engine is in Preview for Cloud Security Vulnerabilities. Use this form to request access.
 {{< /callout >}}
 
-Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many "critical" findings that are never exploited in practice. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
+Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many findings that are never exploited in practice as critical. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
 
 The Datadog Runtime Prioritization Engine combines runtime behavior, exploitability, exposure, and business context from Observability and Security data to identify the 5% of findings that pose real, exploitable risk, so you can focus only on what matters.
 
