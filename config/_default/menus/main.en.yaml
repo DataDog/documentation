@@ -3698,6 +3698,11 @@ menu:
       parent: serverless_azure
       identifier: serverless_azure_functions
       weight: 6
+    - name: .NET APM Extension
+      url: serverless/azure_functions/dotnet_extension
+      parent: serverless_azure_functions
+      identifier: serverless_azure_functions_dotnet_extension
+      weight: 601
     - name: Azure Logic Apps
       url: serverless/logic_apps
       parent: serverless_azure
