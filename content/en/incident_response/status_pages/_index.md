@@ -204,50 +204,39 @@ For **internal** status pages, the subscription process is the same, but users m
 
 ## Slack subscriptions
 
-In addition to email, visitors can subscribe to status page updates in Slack. When a notice is published or updated for a component they follow, the **Datadog Status Pages** Slack app posts the update to their chosen Slack channel. Slack subscriptions are configured independently of email subscriptions, so you can offer either or both on a status page.
+Visitors can subscribe to status page updates in Slack through the **Datadog Status Pages** Slack app. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, the app posts updates to each subscribed channel for the components it follows, using your page name and Slack app icon as the sender. Slack subscriptions are configured independently of [email subscriptions](#email-subscriptions).
 
 ### Enable Slack subscriptions
 
 1. From your status page, click **Settings**.
-1. In the subscription settings, enable **Slack subscriptions**.
-1. (Optional) Upload a Slack app icon. When set, status page notifications display your page name and this image as the sender in Slack.
+1. Enable **Slack subscriptions**.
+1. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
 
 {{< img src="service_management/status_pages/status_pages_enable_slack.png" alt="Status page settings showing the Enable Slack subscriptions toggle and the Slack App Icon upload" style="width:80%;" >}}
 
-When Slack subscriptions are enabled, a **Slack** option appears in the subscribe modal on the published page. When disabled, the Slack option is removed from the subscribe modal.
+When enabled, a **Subscribe** button appears on the published page with a **Slack** option in the subscribe modal.
 
 ### Subscribe in Slack
 
-From a published status page with Slack subscriptions enabled:
+From a published page with Slack subscriptions enabled:
 
-1. Open the subscribe modal and select **Slack**.
-1. (Optional) Choose specific components to follow, or subscribe to the entire page.
+1. Click **Subscribe** and open the **Slack** tab.
+1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
+1. Click **Subscribe via Slack**.
 
-   {{< img src="service_management/status_pages/status_pages_slack_subscription_modal.png" alt="Subscribe to Updates modal with the Slack tab selected and a Subscribe via Slack button" style="width:70%;" >}}
+{{< img src="service_management/status_pages/status_pages_slack_subscription_modal.png" alt="Subscribe to Updates modal with the Slack tab selected and a Subscribe via Slack button" style="width:70%;" >}}
 
-1. Authorize the **Datadog Status Pages** Slack app and select the channel that should receive updates.
+4. Authorize the **Datadog Status Pages** app for your workspace and select the channel to receive updates.
 
-   {{< img src="service_management/status_pages/status_pages_slack_oauth.png" alt="Slack authorization screen granting the Datadog Status Pages app access to a workspace and channel" style="width:70%;" >}}
+{{< img src="service_management/status_pages/status_pages_slack_oauth.png" alt="Slack authorization screen granting the Datadog Status Pages app access to a workspace and channel" style="width:70%;" >}}
 
-After authorization:
+For **private** channels, invite the **Datadog Status Pages** app to the channel so it can post. Direct message (DM) channels are not supported. On **internal** status pages, you must be logged in to the same Datadog organization to subscribe.
 
-- For **public** channels, the app joins the channel automatically and posts a welcome message confirming the subscription.
-- For **private** channels, the app cannot join on its own. It sends a direct message asking you to invite the app to the channel before it can post.
-- Direct message (DM) channels are not supported.
+### Manage subscriptions
 
-For **internal** status pages, you must be logged in to the same Datadog organization to subscribe.
+Subscribers can change the components they follow or unsubscribe at any time from the **Manage Preferences** link in any Slack notification.
 
-### Receive notifications
-
-When a degradation or scheduled maintenance is published or updated with **Notify subscribers** enabled, the app posts a message to each subscribed channel for any impacted component it follows. Notifications display the status page name, and the Slack app icon if one is uploaded, as the sender.
-
-### Manage a Slack subscription
-
-Subscribers can change the components they follow or unsubscribe at any time using the **Manage Preferences** link at the bottom of any Slack notification. When a channel unsubscribes, the app posts a confirmation message and stops sending updates to that channel.
-
-### Manage Slack subscribers
-
-Status page owners can review and manage Slack subscribers from the status page settings. The subscribers view lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page, and each affected channel receives a message noting that an administrator unsubscribed it.
+Status page owners can review subscribers in the status page settings, which lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page.
 
 ## Set a custom domain
 
