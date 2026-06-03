@@ -27,7 +27,7 @@ Journey Monitoring is in Preview.
 
 The **Journey Monitoring map** displays all created and suggested journeys in a frontend application. Each tile in the map displays metrics on a journey's volume and conversion rate. If the journey has at least one Synthetic test defined, the tile also displays the journey's [Synthetic test suite][1] uptime metric.
 
-<div class="alert alert-info"><p>Only frontend applications that are instrumented with RUM without Limits, Synthetic Monitoring & Testing, and Product Analytics are eligible for Journey Monitoring.</p></div>
+<div class="alert alert-danger"><p>Only frontend applications that are instrumented with RUM without Limits, Synthetic Monitoring & Testing, and Product Analytics are eligible for Journey Monitoring.</p></div>
 
 ## Explore and manage journeys
 
