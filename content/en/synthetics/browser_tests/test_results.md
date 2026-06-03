@@ -134,7 +134,7 @@ Size
 
 {{% /collapse-content %}}
 
-For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture network payloads** is enabled in the test's [advanced options](#advanced-options).
+For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture network payloads** is enabled in the test's [advanced options][28].
 
 ### Backend traces
 
@@ -275,3 +275,4 @@ Alerts from your Synthetic test monitors appear on the timeline in the [**Activi
 [25]: /synthetics/guide/step-duration/
 [26]: /synthetics/test_suites/
 [27]: /synthetics/platform/downtime/
+[28]: /synthetics/browser_tests/#advanced-options
