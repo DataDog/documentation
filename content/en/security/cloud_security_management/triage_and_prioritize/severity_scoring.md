@@ -1,5 +1,7 @@
 ---
 title: Severity Scoring
+aliases:
+- /security/cloud_security_management/severity_scoring/
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
