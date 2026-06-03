@@ -28,7 +28,7 @@ To determine your account type, see the [Azure documentation][10]. **Note:** If 
 
 <div class="alert alert-info">
 <strong>Pay as you go (PAYG) accounts</strong>
-<p>Datadog Cloud Cost Management requires <strong>Actual Cost</strong> and <strong>Amortized Cost</strong> exports from Azure. PAYG (Microsoft Online Services Program) subscriptions typically provide only <strong>Usage details (usage only)</strong> exports. Because they don't expose the <strong>Actual Cost</strong> and <strong>Amortized Cost</strong> exports that CCM requires, PAYG accounts can't be set up for CCM. For the export types supported by each Azure account type, see Microsoft's <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports">Cost Management exports documentation</a>.</p>
+<p>Datadog Cloud Cost Management requires <strong>Actual Cost</strong> and <strong>Amortized Cost</strong> exports from Azure. PAYG (Microsoft Online Services Program) subscriptions typically provide only <strong>Usage details (usage only)</strong> exports, so they can't be set up for CCM. For the export types available to each Azure account type, see Microsoft's <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports">Cost Management exports documentation</a>.</p>
 <p>If your subscription is PAYG, consider one of the following options:</p>
 <ul>
 <li>Migrate to a Microsoft Customer Agreement (MCA) or Enterprise Agreement (EA), which support the required export types.</li>
