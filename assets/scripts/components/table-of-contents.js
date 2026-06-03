@@ -117,7 +117,14 @@ export function onScroll() {
     const windowTopPosition = scrollTop(window);
     const windowHeight = window.innerHeight;
     let localOffset = 65;
-
+    
+    const getHeaderTop = (header) => {
+        // Treat hidden headings (e.g. display:none) as being below the
+        // scroll-spy threshold so they are never active/highlighted in TOC.
+        const rect = header.getBoundingClientRect();
+        return rect.height === 0 && rect.width === 0 ? (localOffset+1) : rect.top;
+    }
+    
     const isCustomizableDoc = document.getElementById('cdoc-selector') ? true : false;
     if (isCustomizableDoc) {
         localOffset += 65;
@@ -147,9 +154,9 @@ export function onScroll() {
 
             if (
                 windowTopPosition !== 0 &&
-                sideNavItem.header.getBoundingClientRect().top <= 0 + localOffset &&
+                getHeaderTop(sideNavItem.header) <= localOffset &&
                 (typeof nextSideNavItem === 'undefined' ||
-                    nextSideNavItem.header.getBoundingClientRect().top > 0 + localOffset)
+                    getHeaderTop(nextSideNavItem.header) > localOffset)
             ) {
                 sideNavItem.navLink.classList.add('toc_scrolled');
                 // Add toc open to parents of this toc_scrolled
