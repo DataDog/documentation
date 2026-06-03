@@ -62,7 +62,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 <!-- ECS Fargate - Overview -->
 {% if equals($platform, "ecs_fargate") %}
 
-This page describes one way you can set up the Observability Pipelines Worker in ECS Fargate.
+This page describes how you can set up the Observability Pipelines Worker in ECS Fargate.
 
 {% /if %}
 
@@ -144,7 +144,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% if equals($platform, "kubernetes") %}
 
 1. Download the [Helm chart values file][14]. See the [full list of available configuration options][15].
-    - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
+    If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 2. Add the Datadog chart repository to Helm:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -458,7 +458,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 ### Configuration setup
 
-The setup configuration for this example consists of a Fargate task, Fargate service, and a load balancer.
+In the following example, the setup configuration consists of a Fargate task, Fargate service, and a load balancer.
 
 {% img src="observability_pipelines/worker_fargate_architecture.png" alt="An architecture diagram with logs going to an application load balancer, a OP Worker task, and the Fargate service" style="width:100%;" /%}
 
