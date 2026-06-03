@@ -22,9 +22,7 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Azure integration and create **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes.
-
-To determine your account type, see the [Azure documentation][10].
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. To determine your account type, see the [Azure documentation][10].
 
 <div class="alert alert-info">
 <strong>Pay as you go (PAYG) accounts</strong>
