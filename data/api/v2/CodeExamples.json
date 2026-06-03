@@ -1240,11 +1240,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_2086017331",
-      "description": "Scalar cross product query with RUM data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_2533499017",
       "description": "Scalar cross product query with apm_dependency_stats data source returns \"OK\" response"
     },
@@ -1320,6 +1315,11 @@
     },
     {
       "group": "metrics",
+      "suffix": "_2312509843",
+      "description": "Scalar cross product query with rum data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
       "suffix": "_394862343",
       "description": "Scalar cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1351,11 +1351,6 @@
       "group": "metrics",
       "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
-      "suffix": "_4190640887",
-      "description": "Timeseries cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1431,6 +1426,11 @@
       "group": "metrics",
       "suffix": "_2673679719",
       "description": "Timeseries cross product query with profiles data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_123149143",
+      "description": "Timeseries cross product query with rum data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1879,14 +1879,14 @@
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Create a RUM-based metric returns \"Created\" response"
+      "description": "Create a rum-based metric returns \"Created\" response"
     }
   ],
   "UpdateRumMetric": [
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Update a RUM-based metric returns \"OK\" response"
+      "description": "Update a rum-based metric returns \"OK\" response"
     }
   ],
   "CreateRetentionFilter": [
