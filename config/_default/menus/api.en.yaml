@@ -15279,6 +15279,46 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Retention Filters Hardcoded
+      url: /api/latest/rum-retention-filters-hardcoded/
+      identifier: rum-retention-filters-hardcoded
+      generated: true
+    - name: Update a hardcoded retention filter
+      url: '#update-a-hardcoded-retention-filter'
+      identifier: rum-retention-filters-hardcoded-update-a-hardcoded-retention-filter
+      parent: rum-retention-filters-hardcoded
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateHardcodedRetentionFilter
+        unstable: []
+        order: 3
+    - name: Get a hardcoded retention filter
+      url: '#get-a-hardcoded-retention-filter'
+      identifier: rum-retention-filters-hardcoded-get-a-hardcoded-retention-filter
+      parent: rum-retention-filters-hardcoded
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHardcodedRetentionFilter
+        unstable: []
+        order: 2
+    - name: Get all hardcoded retention filters
+      url: '#get-all-hardcoded-retention-filters'
+      identifier: rum-retention-filters-hardcoded-get-all-hardcoded-retention-filters
+      parent: rum-retention-filters-hardcoded
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListHardcodedRetentionFilters
+        unstable: []
+        order: 1
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
