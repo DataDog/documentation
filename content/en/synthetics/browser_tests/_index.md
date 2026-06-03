@@ -94,8 +94,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    {{% tab "Request Options" %}}
 
-   Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test. To prevent the Content Security Policy (CSP) from blocking your test, select **Disable CSP**.
-
+   * **Disable CORS**: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
+   * **Disable CSP**: Select to prevent the Content Security Policy (CSP) from blocking your test.
+   * **Capture network payloads**: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, payload details are available in the [Resources tab](#resources) of your test results.
    * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
@@ -131,8 +132,6 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps.
 
    This privacy option is available as an [advanced option][1] at the individual test step level and ensures that no sensitive data appears in your test results. Preventing the test from taking screenshots makes troubleshooting failures more difficult. For more information, see [Data Security][2].
-
-   Select **Capture network payloads** to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, payload details are available in the [Resources tab](#resources) of your test results. Because this option captures request and response bodies, it may record sensitive data. For more information, see [Data Security][2].
 
 [1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /data_security/synthetics
