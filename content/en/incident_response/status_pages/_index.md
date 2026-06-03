@@ -212,6 +212,8 @@ In addition to email, visitors can subscribe to status page updates in Slack. Wh
 1. In the subscription settings, enable **Slack subscriptions**.
 1. (Optional) Upload a Slack app icon. When set, status page notifications display your page name and this image as the sender in Slack.
 
+{{< img src="service_management/status_pages/status_pages_enable_slack.png" alt="Status page settings showing the Enable Slack subscriptions toggle and the Slack App Icon upload" style="width:80%;" >}}
+
 When Slack subscriptions are enabled, a **Slack** option appears in the subscribe modal on the published page. When disabled, the Slack option is removed from the subscribe modal.
 
 ### Subscribe in Slack
@@ -220,7 +222,12 @@ From a published status page with Slack subscriptions enabled:
 
 1. Open the subscribe modal and select **Slack**.
 1. (Optional) Choose specific components to follow, or subscribe to the entire page.
+
+   {{< img src="service_management/status_pages/status_pages_slack_subscription_modal.png" alt="Subscribe to Updates modal with the Slack tab selected and a Subscribe via Slack button" style="width:70%;" >}}
+
 1. Authorize the **Datadog Status Pages** Slack app and select the channel that should receive updates.
+
+   {{< img src="service_management/status_pages/status_pages_slack_oauth.png" alt="Slack authorization screen granting the Datadog Status Pages app access to a workspace and channel" style="width:70%;" >}}
 
 After authorization:
 
