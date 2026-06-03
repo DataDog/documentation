@@ -37,11 +37,11 @@ After you create the configuration file, the analyzer runs automatically in the 
 
 To analyze an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Code Security > Analyze Folder** or **Analyze Workspace**.
 
-<div class="alert alert-info">Static Code Analysis does not require a Datadog account, as source files are analyzed locally.</div>
-
 ### Rule editor
 
 Write and test [custom Static Code Analysis rules][4] without leaving your IDE. Use the rule editor to design detection logic for internal standards, security patterns, or maintainability checks specific to your codebase.
+
+To open the rule editor, run the `Datadog: New DDSA Rule` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`), or right-click a YAML file in the file explorer and select **Datadog Code Security > Open in DDSA Rule Editor**.
 
 {{< img src="/ide_plugins/vscode/static-analysis-rule-editor.png" alt="SAST rule editor in the Datadog extension for VS Code" style="width:100%;" >}}
 
@@ -66,7 +66,7 @@ Secret Scanning is enabled by default and runs in the background whenever you op
 
 {{< img src="/ide_plugins/vscode/secret-scanning-batch-analysis.png" alt="Batch analysis report with a Secret Scanning section listing findings per file" style="width:100%;" >}}
 
-Unlike Static Code Analysis, Secret Scanning does not require a [`static-analysis.datadog.yml`][3] file in your repository, and it scans all text files regardless of programming language. Likely binary files are skipped automatically.
+No local configuration is required; the scan rules are fetched from Datadog. All text files are scanned, and binary files are skipped.
 
 <div class="alert alert-info">Secret Scanning requires you to be signed in to Datadog, because detection rules are fetched from your Datadog organization.</div>
 

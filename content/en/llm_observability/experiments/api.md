@@ -7,7 +7,7 @@ As an alternative to [using LLM Observability Experiments with the Python SDK][1
 
 ### Postman quickstart
 
-Datadog highly recommends importing the [Experiments Postman collection][2] into [Postman][3]. Postman's _View documentation_ feature can help you better understand this API.
+Datadog highly recommends importing the [Experiments Postman collection][2] into [Postman][3]. Postman's {{< ui >}}View documentation{{< /ui >}} feature can help you better understand this API.
 
 ### Request format
 

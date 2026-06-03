@@ -95,6 +95,16 @@ $conv-float-btn-bg-hover: #4f2384;
         visibility: visible;
     }
 
+
+    @media (min-width: 1280px) {
+        width: clamp(920px, 66vw, 1408px);
+        max-width: 92vw;
+    
+        height: clamp(733px, 79vh, 915px);
+        max-height: 90vh;
+    
+    }
+
     @media (max-width: 640px) {
         inset: 0;
         top: 0;

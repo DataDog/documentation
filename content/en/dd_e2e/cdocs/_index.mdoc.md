@@ -1,6 +1,7 @@
 ---
 title: Cdocs e2e tests
 draft: true
+private: true
 ---
 
 This folder contains a collection of pages used for e2e tests. These pages are not published to production.

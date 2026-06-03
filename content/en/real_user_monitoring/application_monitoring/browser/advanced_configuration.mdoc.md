@@ -492,7 +492,7 @@ For more information, see the [Enrich and control RUM data guide][14].
 
 ### Enrich RUM events
 
-Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
+Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events when requests are aborted:
 <!-- NPM -->
    {% if equals($lib_src, "npm") %}
    ```javascript
@@ -501,9 +501,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
    datadogRum.init({
       ...,
       beforeSend: (event, context) => {
-         // collect a RUM resource's response headers
-         if (event.type === 'resource' && event.resource.type === 'fetch') {
-               event.context.responseHeaders = Object.fromEntries(context.response.headers)
+         if (event.type === 'resource' && context.isAborted) {
+               event.context.aborted = true
          }
          return true
       },
@@ -519,9 +518,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
       window.DD_RUM.init({
          ...,
          beforeSend: (event, context) => {
-               // collect a RUM resource's response headers
-               if (event.type === 'resource' && event.resource.type === 'fetch') {
-                  event.context.responseHeaders = Object.fromEntries(context.response.headers)
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
                }
                return true
          },
@@ -538,9 +536,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
       window.DD_RUM.init({
          ...,
          beforeSend: (event, context) => {
-               // collect a RUM resource's response headers
-               if (event.type === 'resource' && event.resource.type === 'fetch') {
-                  event.context.responseHeaders = Object.fromEntries(context.response.headers)
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
                }
                return true
          },
@@ -1796,6 +1793,12 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 -   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
 -   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
 
+The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
+
+- `rum.measure.error`
+- `rum.measure.operation`
+- `rum.measure.operation.duration`
+
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
@@ -1819,3 +1822,4 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
+[24]: /real_user_monitoring/rum_without_limits/

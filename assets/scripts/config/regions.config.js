@@ -334,7 +334,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad',
-    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -387,6 +387,26 @@ export default {
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
+  },
+  aws_customer_access_id: {
+    us: '464622532012',
+    us3: '464622532012',
+    us5: '464622532012',
+    eu: '464622532012',
+    ap1: '417141415827',
+    ap2: '412381753143',
+    gov2: '382742775718',
+    gov: '392588925713'
+  },
+  aws_customer_access_govcloud_id: {
+    us: 'N/A',
+    us3: 'N/A',
+    us5: 'N/A',
+    eu: 'N/A',
+    ap1: 'N/A',
+    ap2: 'N/A',
+    gov2: '486737091498',
+    gov: '065115117704'
   },
   ip_ranges_url: {
     us: 'https://ip-ranges.datadoghq.com',

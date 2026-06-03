@@ -5,13 +5,13 @@ further_reading:
 - link: "getting_started/feature_flags"
   tag: "Documentation"
   text: "Getting Started with Feature Flags"
-- link: "bits_ai/mcp_server/setup"
+- link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
-- link: "bits_ai/mcp_server/tools#feature-flags"
+- link: "mcp_server/tools#feature-flags"
   tag: "Documentation"
   text: "Datadog MCP Server Feature Flags Tools"
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 ---
@@ -29,14 +29,18 @@ For your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), u
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=feature-flags</code></pre>
 
-For Claude Code, quote the endpoint URL when running the command:
+<div class="alert alert-info">
+  The Feature Flags toolset is generally available on the Datadog MCP Server. The MCP Server endpoint uses the <code>/api/unstable/</code> path.
+</div>
+
+For Claude Code manual MCP Server configuration, quote the endpoint URL when running the command:
 
 <pre><code>claude mcp add --transport http datadog-feature-flags "{{< region-param key="mcp_server_endpoint" >}}?toolsets=feature-flags"</code></pre>
 
-For other clients, see [Set Up the Datadog MCP Server][3]. Restart your AI client after updating its MCP configuration.
+For the recommended Claude Code plugin setup and other clients, see [Set Up the Datadog MCP Server][3]. Restart your AI client after updating its MCP configuration.
 
 [2]: /getting_started/site/
-[3]: /bits_ai/mcp_server/setup
+[3]: /mcp_server/setup
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -48,7 +52,7 @@ For other clients, see [Set Up the Datadog MCP Server][3]. Restart your AI clien
 The MCP Server includes tools to help you manage feature flags in your codebase. The following use cases provide sample prompts for using the tools.
 
 <div class="alert alert-info">
-  The MCP Server only supports React applications.
+  The code-implementation tools, such as <code>check_datadog_flag_implementation</code>, target React applications. Other tools, such as <code>list_datadog_feature_flags</code> and <code>update_datadog_feature_flag_environment</code>, are framework-agnostic.
 </div>
 
 ### Create feature flags

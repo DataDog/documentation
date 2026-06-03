@@ -1,13 +1,13 @@
 ---
 title: Tag Enrichment
-description: Automatically enrich telemetry with team and system tags from Software Catalog service definitions without redeploying code.
+description: Automatically enrich telemetry with team and system tags from Catalog service definitions without redeploying code.
 further_reading:
 - link: "/tracing/services/service_remapping_rules"
   tag: "Documentation"
   text: "Service remapping rules"
-- link: "/internal_developer_portal/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Software Catalog"
+  text: "Catalog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" >}}
@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Software Catalog.
+Use tag enrichment rules to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Catalog.
 
 ## Prerequisites
 
@@ -51,7 +51,13 @@ Custom rules let you target a specific set of services and configure exactly how
 
 ### Add a tag enrichment rule from a service page
 
-On any service page that is missing a `team` or `system` tag, click **Add Tags** on the top banner to enrich telemetry for that service.
+On any service page that is missing a `team` or `system` tag, click **Service Config** to open the configuration side panel. A banner at the top of the panel indicates which tags are missing.
+
+{{< img src="tracing/services/tag_enrichment/service-config-side-panel.png" alt="The Service Config side panel for a service, showing a banner that indicates the team and system tags are missing from telemetry, with an Add Tags button." >}}
+
+Click **Add Tags** to open the tag enrichment rule modal pre-populated with that service.
+
+{{< img src="tracing/services/tag_enrichment/add-idp-tag-enrichment-rule.png" alt="The Add IDP tag enrichment rule modal, showing fields for selecting entities to enrich, tags to add, and the tag source method." >}}
 
 ## Tag enrichment behavior
 
