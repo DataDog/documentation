@@ -12,8 +12,9 @@ further_reading:
   text: "Review prioritized findings in the Security Inbox"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Runtime Prioritization Engine is in Preview" >}}
-The Runtime Prioritization Engine is available in Preview for Cloud Security Vulnerabilities. Coverage for misconfigurations and identity risks is in active development.
+{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
+ btn_hidden="false" header="Join the Preview!">}}
+Runtime Prioritization Engine is in Preview for Cloud Security Vulnerabilities. Use this form to request access.
 {{< /callout >}}
 
 Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many "critical" findings that are never exploited in practice. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
