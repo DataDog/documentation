@@ -19,14 +19,14 @@ The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agent
 
 ## Setup
 
-See [Datadog MCP Server Tools][2] to enable the `feature-flags` toolset and view the available Feature Flags tools, permissions, and example prompts.
+See the [Datadog MCP Server documentation][2] to enable the `feature-flags` toolset and view the available [Feature Flags tools][3], permissions, and example prompts.
 
 ## Use cases
 
 The MCP Server includes tools to help you manage feature flags in your codebase. The following use cases provide sample prompts for using the tools.
 
 <div class="alert alert-info">
-  The code-implementation tools, such as <code>check_datadog_flag_implementation</code>, target React applications. Other tools, such as <code>list_datadog_feature_flags</code> and <code>update_datadog_feature_flag_environment</code>, are framework-agnostic.
+  The code implementation tools, such as <code>check_datadog_flag_implementation</code>, target React applications. Other tools, such as <code>list_datadog_feature_flags</code> and <code>update_datadog_feature_flag_environment</code>, are framework-agnostic.
 </div>
 
 ### Create feature flags
@@ -82,4 +82,5 @@ Example prompts:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/
-[2]: /mcp_server/tools/#feature-flags
+[2]: /mcp_server/setup/#toolsets
+[3]: /mcp_server/tools/#feature-flags
