@@ -15140,6 +15140,71 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Get service repository information
+      url: '#get-service-repository-information'
+      identifier: rum-get-service-repository-information
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceRepositoryInfo
+        unstable:
+          - v2
+        order: 14
+    - name: Restore source maps
+      url: '#restore-source-maps'
+      identifier: rum-restore-source-maps
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RestoreSourcemaps
+        unstable:
+          - v2
+        order: 13
+    - name: List source maps
+      url: '#list-source-maps'
+      identifier: rum-list-source-maps
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSourcemaps
+        unstable:
+          - v2
+        order: 12
+    - name: Get a JavaScript source map
+      url: '#get-a-javascript-source-map'
+      identifier: rum-get-a-javascript-source-map
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSourcemaps
+        unstable:
+          - v2
+        order: 10
+    - name: Delete source maps
+      url: '#delete-source-maps'
+      identifier: rum-delete-source-maps
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSourcemaps
+        unstable:
+          - v2
+        order: 11
     - name: Search RUM events
       url: '#search-rum-events'
       identifier: rum-search-rum-events
