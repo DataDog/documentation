@@ -5,9 +5,6 @@ further_reading:
 - link: "getting_started/feature_flags"
   tag: "Documentation"
   text: "Getting Started with Feature Flags"
-- link: "mcp_server/setup"
-  tag: "Documentation"
-  text: "Set Up the Datadog MCP Server"
 - link: "mcp_server/tools#feature-flags"
   tag: "Documentation"
   text: "Datadog MCP Server Feature Flags Tools"
@@ -22,30 +19,7 @@ The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agent
 
 ## Setup
 
-The Feature Flags tools are available through the Datadog MCP Server's `feature-flags` toolset. Set up the Datadog MCP Server for your AI client, then include `toolsets=feature-flags` in the endpoint URL.
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-For your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), use this endpoint:
-
-<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=feature-flags</code></pre>
-
-<div class="alert alert-info">
-  The Feature Flags toolset is generally available on the Datadog MCP Server. The MCP Server endpoint uses the <code>/api/unstable/</code> path.
-</div>
-
-For Claude Code manual MCP Server configuration, quote the endpoint URL when running the command:
-
-<pre><code>claude mcp add --transport http datadog-feature-flags "{{< region-param key="mcp_server_endpoint" >}}?toolsets=feature-flags"</code></pre>
-
-For the recommended Claude Code plugin setup and other clients, see [Set Up the Datadog MCP Server][3]. Restart your AI client after updating its MCP configuration.
-
-[2]: /getting_started/site/
-[3]: /mcp_server/setup
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+See [Datadog MCP Server Tools][2] to enable the `feature-flags` toolset and view the available Feature Flags tools, permissions, and example prompts.
 
 ## Use cases
 
@@ -108,3 +82,4 @@ Example prompts:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/
+[2]: /mcp_server/tools/#feature-flags
