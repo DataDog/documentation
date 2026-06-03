@@ -1,3 +1,3 @@
 ---
-title: List rum replay playlists
+title: List RUM replay playlists
 ---

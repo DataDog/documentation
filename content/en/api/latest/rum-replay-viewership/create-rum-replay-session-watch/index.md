@@ -1,3 +1,3 @@
 ---
-title: Create rum replay session watch
+title: Create RUM replay session watch
 ---

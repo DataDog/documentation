@@ -1,3 +1,3 @@
 ---
-title: Update a rum-based metric
+title: Update a RUM-based metric
 ---

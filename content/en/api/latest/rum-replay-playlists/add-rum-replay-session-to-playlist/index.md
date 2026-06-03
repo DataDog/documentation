@@ -1,3 +1,3 @@
 ---
-title: Add rum replay session to playlist
+title: Add RUM replay session to playlist
 ---

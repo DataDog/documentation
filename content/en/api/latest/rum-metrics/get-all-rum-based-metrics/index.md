@@ -1,3 +1,3 @@
 ---
-title: Get all rum-based metrics
+title: Get all RUM-based metrics
 ---

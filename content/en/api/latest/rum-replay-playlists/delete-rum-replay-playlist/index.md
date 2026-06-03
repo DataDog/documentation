@@ -1,3 +1,3 @@
 ---
-title: Delete rum replay playlist
+title: Delete RUM replay playlist
 ---

@@ -1,3 +1,3 @@
 ---
-title: Create rum replay playlist
+title: Create RUM replay playlist
 ---

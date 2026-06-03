@@ -1,3 +1,3 @@
 ---
-title: Create a rum-based metric
+title: Create a RUM-based metric
 ---

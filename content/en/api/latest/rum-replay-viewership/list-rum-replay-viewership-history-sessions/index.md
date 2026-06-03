@@ -1,3 +1,3 @@
 ---
-title: List rum replay viewership history sessions
+title: List RUM replay viewership history sessions
 ---

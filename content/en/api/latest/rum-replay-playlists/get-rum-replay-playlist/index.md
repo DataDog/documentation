@@ -1,3 +1,3 @@
 ---
-title: Get rum replay playlist
+title: Get RUM replay playlist
 ---

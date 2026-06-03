@@ -1,3 +1,3 @@
 ---
-title: List rum replay playlist sessions
+title: List RUM replay playlist sessions
 ---

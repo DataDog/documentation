@@ -1,3 +1,3 @@
 ---
-title: List rum replay session watchers
+title: List RUM replay session watchers
 ---

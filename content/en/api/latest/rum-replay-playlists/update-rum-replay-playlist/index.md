@@ -1,3 +1,3 @@
 ---
-title: Update rum replay playlist
+title: Update RUM replay playlist
 ---

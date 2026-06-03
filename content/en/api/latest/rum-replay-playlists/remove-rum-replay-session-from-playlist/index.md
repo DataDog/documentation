@@ -1,3 +1,3 @@
 ---
-title: Remove rum replay session from playlist
+title: Remove RUM replay session from playlist
 ---

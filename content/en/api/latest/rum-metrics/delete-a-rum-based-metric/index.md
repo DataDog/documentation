@@ -1,3 +1,3 @@
 ---
-title: Delete a rum-based metric
+title: Delete a RUM-based metric
 ---

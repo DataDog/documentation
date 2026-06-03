@@ -1,3 +1,3 @@
 ---
-title: Bulk remove rum replay playlist sessions
+title: Bulk remove RUM replay playlist sessions
 ---

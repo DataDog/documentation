@@ -1,3 +1,3 @@
 ---
-title: Delete rum replay session watch
+title: Delete RUM replay session watch
 ---
