@@ -1586,11 +1586,6 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 6
-    - name: AI Credits
-      identifier: bits_ai_ai_credits
-      url: bits_ai/ai_credits/
-      parent: bits_ai
-      weight: 7
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -9996,6 +9991,11 @@ menu:
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
       weight: 1520
+    - name: AI Credits
+      identifier: account_management_billing_ai_credits
+      url: account_management/billing/ai_credits/
+      parent: account_management_billing
+      weight: 1521
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

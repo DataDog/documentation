@@ -11,7 +11,7 @@ further_reading:
 - link: "/cloud_cost_management/cloud_cost_skill/"
   tag: "Documentation"
   text: "Cloud Cost Skill in Bits Chat"
-- link: "/bits_ai/ai_credits/"
+- link: "/account_management/billing/ai_credits/"
   tag: "Documentation"
   text: "AI Credits"
 aliases:
