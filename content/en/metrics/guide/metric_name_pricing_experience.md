@@ -21,7 +21,7 @@ private: true
 
 ## Overview
 
-With the [Metric Name Pricing billing model][1] for custom metrics, Datadog has updated the metrics experience to reflect how usage is measured. This guide describes what has changed in the Datadog UI and APIs for organizations on Metric Name Pricing.
+With the [Metric Name Pricing billing model][1] for custom metrics, Datadog updated the metrics experience to reflect how usage is measured. This guide describes what has changed in the Datadog UI and APIs for organizations on Metric Name Pricing.
 
 **Note**: This page applies only if your organization is on [Metric Name Pricing][1]. If your contract uses Timeseries (cardinality) pricing, your metrics experience is unchanged.
 
@@ -48,15 +48,15 @@ For more information on configuring tags, see [Metrics without Limits™][2].
 
 The metric details side panel displays **ingested and indexed point volume** instead of timeseries volume.
 
-{{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="The metric details side panel showing INGESTED POINTS and INDEXED POINTS at the top, alongside Hosts and Tag Values." style="width:100%;" >}}
-
 To open the metric side panel, click any metric name on the [Metrics Summary page][3].
+
+{{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="The metric details side panel showing INGESTED POINTS and INDEXED POINTS at the top, alongside Hosts and Tag Values." style="width:100%;" >}}
 
 ## Volume Management page
 
 The [Metrics Volume Management page][4] displays **ingested and indexed point volume**.
 
-The Volume Overview graphs also display billing dimensions specific to Metric Name Pricing, including:
+The Volume Overview graphs also display the following Metric Name Pricing billing dimensions:
 
 - Estimated unique metric names
 - Billable indexed point volume
@@ -76,7 +76,7 @@ Datadog provides estimated usage metrics so you can monitor your Metric Name Pri
 
 ### Billable usage metrics
 
-Use these metrics to estimate your month-to-date billable usage under Metric Name Pricing:
+Use these metrics to estimate your month-to-date billable usage:
 
 | Metric | What it represents |
 |--------|-------------------|
