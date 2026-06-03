@@ -27,7 +27,7 @@ private: true
 
 ## Text-only grid
 
-{% card-grid card_width="200px" %}
+{% card-grid card_width="200" %}
 {% image-card href="/getting_started/" title="Containers" /%}
 {% image-card href="/getting_started/" title="Jobs" subtitle="(Preview)" /%}
 {% image-card href="/getting_started/" title="Functions" /%}
@@ -35,7 +35,7 @@ private: true
 
 ## Custom card_width (200px)
 
-{% card-grid card_width="200px" %}
+{% card-grid card_width="200" %}
 {% image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" /%}
 {% image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" /%}
 {% image-card href="/getting_started/" src="integrations_logos/java.png" alt="Java" /%}

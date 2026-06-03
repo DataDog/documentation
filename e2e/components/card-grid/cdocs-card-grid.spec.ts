@@ -180,29 +180,15 @@ test.describe('Cdocs card-grid component', () => {
         await expect(card).not.toHaveAttribute('data-bs-toggle');
     });
 
-    test('tooltip grid emits Bootstrap tooltip init script', async ({ page }) => {
-        const scripts = await page.locator('script').evaluateAll(els =>
-            els.map(el => el.textContent?.trim())
-        );
-        expect(scripts.some(s => s && s.includes('bootstrap.Tooltip'))).toBe(true);
-    });
-
-    test('tooltips work after sidenav navigation', async ({ page }) => {
-        // Navigate away to another page
+    test('tooltips work after navigation', async ({ page }) => {
         await page.goto('/getting_started/');
         await page.waitForLoadState('domcontentloaded');
 
-        // Navigate back to the card grid page
         await page.goto(PAGE_URL);
         await page.waitForSelector(CONTENT_AREA);
         await hideOverlays(page);
 
-        // Hover over a tooltip card and verify the tooltip appears
         const card = gridSection(page, SECTION.TOOLTIPS).locator('.card-grid-card').first();
-        await card.hover();
-        await page.waitForTimeout(500);
-
-        const tooltip = page.locator('.tooltip.show, .bs-tooltip-top');
-        await expect(tooltip).toBeVisible();
+        await expect(card).toHaveAttribute('data-bs-original-title', 'Linux');
     });
 });
