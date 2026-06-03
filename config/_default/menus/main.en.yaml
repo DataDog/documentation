@@ -1561,16 +1561,11 @@ menu:
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 500
-    - name: Bits Infrastructure Operations
-      url: bits_ai/infrastructure
-      identifier: bits_ai_bits_infrastructure
-      parent: bits_ai
-      weight: 2
     - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 3
+      weight: 2
     - name: Setup
       url: bits_ai/bits_ai_dev_agent/setup
       parent: bits_ai_dev_agent
@@ -1580,12 +1575,12 @@ menu:
       url: bits_ai/bits_ai_security_analyst
       identifier: bits_ai_bits_ai_security_analyst
       parent: bits_ai
-      weight: 4
+      weight: 3
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 5
+      weight: 4
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
@@ -3100,12 +3095,6 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 204
-    - name: Bits Infrastructure Operations
-      url: infrastructure/bits_infrastructure 
-      pre: bits-ai 
-      identifier: bits_infrastructure
-      parent: infrastructure_heading
-      weight: 9000
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
