@@ -1,0 +1,123 @@
+---
+title: Bits Database Optimization
+description: Review and implement database query optimizations identified by Bits AI.
+further_reading:
+- link: "/database_monitoring/"
+  tag: "Documentation"
+  text: "Database Monitoring"
+- link: "/database_monitoring/query_metrics/"
+  tag: "Documentation"
+  text: "Exploring Query Metrics"
+- link: "/database_monitoring/connect_dbm_and_apm/"
+  tag: "Documentation"
+  text: "Correlate Database Monitoring and Traces"
+---
+
+## Overview
+
+Bits Database Optimization detects underperforming queries across your database fleet, identifies optimizations validated against a simulated copy of your environment, and delivers the result as a pull request fixing the exact code that issued the query.
+
+Optimization candidates are selected automatically from Database Monitoring telemetry, with no additional setup required. Candidates are identified by highest potential impact, focusing on query execution times, blocking queries, and regressed queries.
+
+Bits Database Optimization does not require write access to your database, and does not export or use actual data from your environment. Optimizations are empirically tested against database simulations populated with synthetic data using statistical properties of your schema.
+
+## Prerequisites
+
+- **Database Monitoring** is configured for the target database instances. See [Database Monitoring Setup][1].
+- **Schema collection** is enabled on the target instances.
+- For automated PR creation:
+    - **APM** must be configured for the services that issue the queries you want to address. See [Correlate Database Monitoring and Traces][2] for more information.
+    - A **GitHub repository** must be linked in your Datadog organization.
+
+## Reviewing and implementing database optimizations
+
+1. On the [Database Monitoring > Queries][3] screen, queries with optimizations available have an AI icon in the Status column. Hover over an icon to see a summary of the optimization, and click the icon to open the Optimization panel.
+    - To filter the query list by optimization type, select an option from **Optimizations** above the list.
+
+{{< img src="database_monitoring/database_optimization_queries.png" alt="The status column on the Queries screen, showing AI icons in query rows where an optimizations are available. " style="width:100%;">}}
+
+2. The Optimization panel includes a summary of the query issue, the optimized query used in the simulation, and a visualization of the Simulated Performance Impact.
+3. Explore the Simulated Performance Impact visualization for more details about improvements:
+    - Hover over the improvement summary (for example, "3.7x More Efficient") to view before-and-after execution times, logical reads, and shared blocks dirtied. The table shows the average, median, P95, and maximum for each metric.
+    - Hover over each item in the visualization to view more details.
+
+{{< img src="database_monitoring/database_optimization_simulated_performance_impact.png" alt="An example Simulated Performance Impact visualization, showing a query optimized to 44.7x more efficient and 92x faster." style="width:100%;">}}
+
+4. Click **Compare Plans** to view side-by-side comparisons of the current and optimized execution plans:
+    - **List View** shows a hierarchical list of the execution plan's operations, with node cost and row estimates for each step.
+    - **Map View** shows a visual representation of the execution plan, with the option to compare the plans by different metrics.
+    - **Raw** shows the raw execution plan output.
+
+{{< img src="database_monitoring/database_optimization_plan_comparison_map_view.png" alt="The Compare Plans Map View, showing added and removed operations for an optimized query. " style="width:100%;">}}
+
+5. To create a pull request to apply the optimization fix to your database, select **Review PR by Bits AI**. The GitHub PR opens with a pre-populated description that includes the simulation results.
+<div class="alert alert-info">Automated pull requests require APM configured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
+
+## Optimization types
+
+Bits Database Optimization identifies the following optimization types:
+
+### Missing index
+
+When a query lacks a supporting index, the database may scan more rows than necessary or switch to a less efficient query plan. Two patterns are detected:
+
+- **Plan flip**: The query planner switches to a worse plan as data grows, often scanning the full table instead of using an index. Bits Database Optimization generates an `ADD INDEX` statement targeted at the columns involved in the flip.
+- **Suboptimal index scan**: An existing index is used, but only partially. A more specific index reduces the rows read. Bits Database Optimization generates a narrower index recommendation.
+
+Missing index recommendations are surfaced only when adding the index would change the query plan for the specific query in question.
+
+### Query rewrite
+
+Bits Database Optimization identifies queries where the SQL can be restructured to run more efficiently. Each rewrite suggestion includes the original query, the rewritten version, and the transformation rules applied. When multiple rewrite options exist, the most impactful option is shown first.
+
+<!-- [PLACEHOLDER: Screenshot of a query rewrite card showing before/after SQL and the applied rule] -->
+
+### SELECT \*
+
+Queries that select all columns (`SELECT *`) force the database to read and return data you may not need, blocking index-only scans and increasing payload sizes. Bits Database Optimization expands the query using your schema to list the specific columns required.
+
+### OFFSET without ORDER BY
+
+Using `OFFSET` without a corresponding `ORDER BY` produces non-deterministic results where rows returned can vary between executions. This also prevents the query planner from using indexes efficiently. Bits Database Optimization rewrites the query to add an `ORDER BY` clause.
+
+### Large ORDER BY without LIMIT
+
+Sorting a large result set without a `LIMIT` forces the database to sort every matching row, often spilling to disk. Bits Database Optimization adds a `LIMIT` clause to bound the sort.
+
+### Idle in transaction
+
+Connections that hold an open transaction without performing work block other queries and hold locks longer than necessary. Bits Database Optimization reports the total idle time and the total blocked wait time caused by these connections, helping you understand the downstream impact.
+
+## Priority levels
+
+Optimizations are ranked by priority to help you focus on the highest-impact issues first:
+
+| Priority | Optimization types | Reason |
+|---|---|---|
+| High | OFFSET without ORDER BY, Idle in Transaction | Data correctness risk or blocking behavior |
+| Medium | Missing Index, Large ORDER BY without LIMIT | Significant performance impact |
+| Low | SELECT \*, Query Rewrite | Performance suggestions |
+
+<!-- [PLACEHOLDER: Screenshot of the PR in GitHub showing the embedded simulation summary and the diff] -->
+<!-- [PLACEHOLDER: Screenshot of the "View PR" link from the normalized query view in DBM] -->
+
+## Slack notifications
+
+You can configure a DBM [monitor][4] to notify your team in [Slack][5] when a new validated optimization is available.
+
+When triggered, the Slack notification includes:
+- A short description of the optimization
+- The projected impact from the simulation
+- A direct link to the optimization in DBM
+- A direct link to the pull request in GitHub
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /database_monitoring/setup_postgres/
+[2]: /database_monitoring/connect_dbm_and_apm/
+[3]: https://app.datadoghq.com/databases/queries
+[4]: /monitors/configuration/?tab=evaluateddata
+[5]: /integrations/slack/?tab=datadogforslack
