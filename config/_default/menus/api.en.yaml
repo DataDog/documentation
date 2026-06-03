@@ -17709,6 +17709,45 @@ menu:
         unstable:
           - v2
         order: 11
+    - name: Get the list of SPDX licenses
+      url: '#get-the-list-of-spdx-licenses'
+      identifier: static-analysis-get-the-list-of-spdx-licenses
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCALicenses
+        unstable:
+          - v2
+        order: 30
+    - name: Retrieve a dependency scan result
+      url: '#retrieve-a-dependency-scan-result'
+      identifier: static-analysis-retrieve-a-dependency-scan-result
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCAScan
+        unstable:
+          - v2
+        order: 32
+    - name: Submit libraries for vulnerability scanning
+      url: '#submit-libraries-for-vulnerability-scanning'
+      identifier: static-analysis-submit-libraries-for-vulnerability-scanning
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCAScan
+        unstable:
+          - v2
+        order: 31
     - name: Post dependencies for analysis
       url: '#post-dependencies-for-analysis'
       identifier: static-analysis-post-dependencies-for-analysis
