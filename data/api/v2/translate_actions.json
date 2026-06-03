@@ -5290,6 +5290,17 @@
     "request_description": "",
     "request_schema_description": "The top-level request object for submitting a Software Composition Analysis (SCA) scan result."
   },
+  "CreateSCAScan": {
+    "summary": "Submit libraries for vulnerability scanning",
+    "request_description": "",
+    "request_schema_description": "The top-level request object for submitting an MCP SCA dependency scan."
+  },
+  "GetSCAScan": {
+    "summary": "Retrieve a dependency scan result"
+  },
+  "ListSCALicenses": {
+    "summary": "Get the list of SPDX licenses"
+  },
   "CreateSCAResolveVulnerableSymbols": {
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",
