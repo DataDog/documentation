@@ -50,7 +50,6 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 {{< programming-lang lang=".net" >}}
 - **Minimum version**: v3.41.0
 - **Supported protocols**: `http/json` (default), `http/protobuf` (v3.45.0+)
-- **Requirements**: .NET 6 or later
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

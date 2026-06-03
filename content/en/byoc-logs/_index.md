@@ -9,7 +9,7 @@ aliases:
   - /cloudprem/
 ---
 
-BYOC Logs is Datadog's log management solution for organizations that want to keep their data in their own cloud accounts and control costs using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory, and high-volume requirements.
+BYOC (Bring Your Own Cloud) Logs is Datadog's log management solution for organizations that want to keep their data in their own cloud accounts and control costs using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory, and high-volume requirements.
 
 
 ## Get started

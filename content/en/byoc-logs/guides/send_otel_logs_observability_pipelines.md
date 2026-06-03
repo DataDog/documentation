@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-BYOC Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.
+BYOC (Bring Your Own Cloud) Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.
 
 By the end of this guide, you will be able to:
 1. [Start BYOC Logs locally](#step-1-start-byoc-logs).

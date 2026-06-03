@@ -331,6 +331,10 @@
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-retention-filters-hardcoded": {
+    "name": "RUM Retention Filters Hardcoded",
+    "description": "Manage hardcoded retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) in RUM."
+  },
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."
@@ -349,7 +353,7 @@
   },
   "rum-metrics": {
     "name": "Rum Metrics",
-    "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+    "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
@@ -438,6 +442,10 @@
   "statuspage-integration": {
     "name": "Statuspage Integration",
     "description": "Configure your [Datadog Statuspage integration](https://docs.datadoghq.com/integrations/statuspage/)\ndirectly through the Datadog API."
+  },
+  "stegadography": {
+    "name": "Stegadography",
+    "description": "Extract watermarks embedded in dashboard screenshots to retrieve cached widget state."
   },
   "storage-management": {
     "name": "Storage Management",

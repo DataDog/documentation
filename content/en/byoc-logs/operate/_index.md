@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Manage your BYOC Logs deployment with guides on sizing, monitoring, and troubleshooting.
+Manage your BYOC (Bring Your Own Cloud) Logs deployment with guides on sizing, monitoring, and troubleshooting.
 
 {{< whatsnext desc="Operate BYOC Logs:">}}
   {{< nextlink href="/byoc-logs/operate/sizing/" >}}Sizing Guide{{< /nextlink >}}

@@ -941,7 +941,7 @@ Lists your RUM applications and resolves the `application_id` to use for subsequ
 
 ### `get_rum_summary`
 *Toolset: **rum***\
-*Permissions Required: `RUM Apps Read`*\
+*Permissions Required: `RUM Apps Read` and `Timeseries`*\
 Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
 
 - Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
@@ -1208,8 +1208,8 @@ Retrieves the Flaky Tests Management policies configured for a repository, inclu
 
 ### `search_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+*Permissions Required: `DORA Metrics Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID.
 
 - Show me deployments for the `checkout` service in the last 7 days.
 - Get details for DORA deployment `abc123`.
@@ -1217,8 +1217,8 @@ Searches DORA deployment events with filters, or fetches full details for a sing
 
 ### `aggregate_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+*Permissions Required: `Timeseries`*\
+Returns DORA metrics (deployment frequency, change lead time, change failure rate, recovery time) for a service, team, or repo, as scalar values or timeseries. Use for questions about software delivery performance over a time window.
 
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.

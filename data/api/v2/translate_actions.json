@@ -3192,7 +3192,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.",
     "summary": "List distinct metric volumes by metric name"
   },
   "GetModelLabArtifactContent": {
@@ -4143,6 +4143,20 @@
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
   },
+  "ListHardcodedRetentionFilters": {
+    "description": "Get the list of hardcoded retention filters for a RUM application.",
+    "summary": "Get all hardcoded retention filters"
+  },
+  "GetHardcodedRetentionFilter": {
+    "description": "Get a single hardcoded retention filter for a RUM application.",
+    "summary": "Get a hardcoded retention filter"
+  },
+  "UpdateHardcodedRetentionFilter": {
+    "description": "Update the cross-product sample rates of a hardcoded retention filter for a RUM application.\nOnly fields whose matching flag in `cross_product_sampling_editability` is `true` can be updated.\nAny other field is read-only and cannot be sent in the payload.\nReturns the updated hardcoded retention filter when the request is successful.",
+    "summary": "Update a hardcoded retention filter",
+    "request_description": "New cross-product sample rates for the hardcoded retention filter.",
+    "request_schema_description": "The hardcoded retention filter body to update."
+  },
   "OrderRetentionFilters": {
     "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
     "summary": "Order RUM retention filters",
@@ -4202,28 +4216,28 @@
     "request_schema_description": "RUM application update request."
   },
   "ListRumMetrics": {
-    "description": "Get the list of configured rum-based metrics with their definitions.",
-    "summary": "Get all rum-based metrics"
+    "description": "Get the list of configured RUM-based metrics with their definitions.",
+    "summary": "Get all RUM-based metrics"
   },
   "CreateRumMetric": {
-    "description": "Create a metric based on your organization's RUM data.\nReturns the rum-based metric object from the request body when the request is successful.",
-    "summary": "Create a rum-based metric",
-    "request_description": "The definition of the new rum-based metric.",
-    "request_schema_description": "The new rum-based metric body."
+    "description": "Create a metric based on your organization's RUM data.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "summary": "Create a RUM-based metric",
+    "request_description": "The definition of the new RUM-based metric.",
+    "request_schema_description": "The new RUM-based metric body."
   },
   "DeleteRumMetric": {
-    "description": "Delete a specific rum-based metric from your organization.",
-    "summary": "Delete a rum-based metric"
+    "description": "Delete a specific RUM-based metric from your organization.",
+    "summary": "Delete a RUM-based metric"
   },
   "GetRumMetric": {
-    "description": "Get a specific rum-based metric from your organization.",
-    "summary": "Get a rum-based metric"
+    "description": "Get a specific RUM-based metric from your organization.",
+    "summary": "Get a RUM-based metric"
   },
   "UpdateRumMetric": {
-    "description": "Update a specific rum-based metric from your organization.\nReturns the rum-based metric object from the request body when the request is successful.",
-    "summary": "Update a rum-based metric",
-    "request_description": "New definition of the rum-based metric.",
-    "request_schema_description": "The new rum-based metric body."
+    "description": "Update a specific RUM-based metric from your organization.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "summary": "Update a RUM-based metric",
+    "request_description": "New definition of the RUM-based metric.",
+    "request_schema_description": "The new RUM-based metric body."
   },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
@@ -4255,45 +4269,45 @@
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
-    "summary": "List rum replay playlists"
+    "summary": "List RUM replay playlists"
   },
   "CreateRumReplayPlaylist": {
     "description": "Create a playlist.",
-    "summary": "Create rum replay playlist",
+    "summary": "Create RUM replay playlist",
     "request_description": "",
     "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "DeleteRumReplayPlaylist": {
     "description": "Delete a playlist.",
-    "summary": "Delete rum replay playlist"
+    "summary": "Delete RUM replay playlist"
   },
   "GetRumReplayPlaylist": {
     "description": "Get a playlist.",
-    "summary": "Get rum replay playlist"
+    "summary": "Get RUM replay playlist"
   },
   "UpdateRumReplayPlaylist": {
     "description": "Update a playlist.",
-    "summary": "Update rum replay playlist",
+    "summary": "Update RUM replay playlist",
     "request_description": "",
     "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "BulkRemoveRumReplayPlaylistSessions": {
     "description": "Remove sessions from a playlist.",
-    "summary": "Bulk remove rum replay playlist sessions",
+    "summary": "Bulk remove RUM replay playlist sessions",
     "request_description": "",
     "request_schema_description": "A collection of session identifiers used for bulk add or remove operations on a playlist."
   },
   "ListRumReplayPlaylistSessions": {
     "description": "List sessions in a playlist.",
-    "summary": "List rum replay playlist sessions"
+    "summary": "List RUM replay playlist sessions"
   },
   "RemoveRumReplaySessionFromPlaylist": {
     "description": "Remove a session from a playlist.",
-    "summary": "Remove rum replay session from playlist"
+    "summary": "Remove RUM replay session from playlist"
   },
   "AddRumReplaySessionToPlaylist": {
     "description": "Add a session to a playlist.",
-    "summary": "Add rum replay session to playlist"
+    "summary": "Add RUM replay session to playlist"
   },
   "GetSegments": {
     "description": "Get segments for a view.",
@@ -4301,21 +4315,21 @@
   },
   "ListRumReplaySessionWatchers": {
     "description": "List session watchers.",
-    "summary": "List rum replay session watchers"
+    "summary": "List RUM replay session watchers"
   },
   "DeleteRumReplaySessionWatch": {
     "description": "Delete session watch history.",
-    "summary": "Delete rum replay session watch"
+    "summary": "Delete RUM replay session watch"
   },
   "CreateRumReplaySessionWatch": {
     "description": "Record a session watch.",
-    "summary": "Create rum replay session watch",
+    "summary": "Create RUM replay session watch",
     "request_description": "",
     "request_schema_description": "A single RUM replay session watch resource returned by create operations."
   },
   "ListRumReplayViewershipHistorySessions": {
     "description": "List watched sessions.",
-    "summary": "List rum replay viewership history sessions"
+    "summary": "List RUM replay viewership history sessions"
   },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
@@ -4487,6 +4501,10 @@
     "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
     "summary": "List Entity Risk Scores"
   },
+  "GetEntityRiskScore": {
+    "description": "Get the risk score for a specific entity by its ID. Returns security risk assessment including risk score, severity, detected signals, misconfigurations, and identity risks.",
+    "summary": "Get Entity Risk Score"
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
@@ -4494,6 +4512,12 @@
   "ListSecurityFindings": {
     "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "List security findings"
+  },
+  "UpdateFindingsAssignee": {
+    "description": "Assign or unassign security findings.\nYou can assign up to 100 security findings per request. Set `assignee_id` to the unique identifier of the Datadog user you want to assign the findings to. Omit `assignee_id` (or set it to `null`) to unassign the findings. Per-finding warnings and failures are returned in the response `meta` object.",
+    "summary": "Assign or unassign security findings",
+    "request_description": "",
+    "request_schema_description": "Request to assign or unassign security findings."
   },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
@@ -4536,6 +4560,18 @@
     "summary": "Search security findings",
     "request_description": "",
     "request_schema_description": "The request body for searching security findings."
+  },
+  "AttachServiceNowTicket": {
+    "description": "Attach security findings to a ServiceNow ticket by providing the ServiceNow ticket URL.\nYou can attach up to 50 security findings per ServiceNow ticket. If the ServiceNow ticket is not linked to any case, this operation will create a case for the security findings and link the ServiceNow ticket to the newly created case. Security findings that are already attached to another ServiceNow ticket will be detached from their previous ServiceNow ticket and attached to the specified ServiceNow ticket.",
+    "summary": "Attach security findings to a ServiceNow ticket",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a ServiceNow ticket."
+  },
+  "CreateServiceNowTickets": {
+    "description": "Create ServiceNow tickets for security findings.\nThis operation creates a case in Datadog and a ServiceNow ticket linked to that case for bidirectional sync between Datadog and ServiceNow. You can create up to 50 ServiceNow tickets per request and associate up to 50 security findings per ServiceNow ticket. Security findings that are already attached to another ServiceNow ticket will be detached from their previous ServiceNow ticket and attached to the newly created ServiceNow ticket.",
+    "summary": "Create ServiceNow tickets for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create ServiceNow tickets for security findings."
   },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
@@ -5254,6 +5290,17 @@
     "request_description": "",
     "request_schema_description": "The top-level request object for submitting a Software Composition Analysis (SCA) scan result."
   },
+  "CreateSCAScan": {
+    "summary": "Submit libraries for vulnerability scanning",
+    "request_description": "",
+    "request_schema_description": "The top-level request object for submitting an MCP SCA dependency scan."
+  },
+  "GetSCAScan": {
+    "summary": "Retrieve a dependency scan result"
+  },
+  "ListSCALicenses": {
+    "summary": "Get the list of SPDX licenses"
+  },
   "CreateSCAResolveVulnerableSymbols": {
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",
@@ -5540,6 +5587,12 @@
   "UnpublishStatusPage": {
     "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
     "summary": "Unpublish status page"
+  },
+  "GetStegadographyWidgets": {
+    "description": "Extracts watermarks from a PNG image and returns the cached widget data\nassociated with each watermark found. The image must be uploaded as a\n`multipart/form-data` request with the file in the `image` field.\nOnly widgets belonging to the authenticated organization are returned.",
+    "summary": "Get widgets from an image",
+    "request_description": "PNG image to extract watermarks from.",
+    "request_schema_description": "Multipart form data containing the PNG image to scan for watermarks."
   },
   "GetApiMultistepSubtests": {
     "description": "Get the list of API tests that can be added as subtests to a given API multistep test.\nThe current test is excluded from the list since a test cannot be a subtest of itself.",
