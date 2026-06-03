@@ -12,7 +12,7 @@ further_reading:
   text: "Review prioritized findings in the Security Inbox"
 ---
 
-Cloud Security generates findings across vulnerabilities, misconfigurations, and identity risks. Triage and Prioritize covers two related capabilities: the engine that identifies the findings truly exposing your business-critical resources, and the scoring framework that translates that judgment into a per-finding severity score you can sort, filter, and route on.
+Cloud Security generates findings across vulnerabilities, misconfigurations, and identity risks. Triage and Prioritize covers two related capabilities: the engine that identifies the findings that expose your business-critical resources, and the scoring framework that translates that judgment into a per-finding severity score you can sort, filter, and route on.
 
 ## Runtime Prioritization Engine
 
