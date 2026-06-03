@@ -5,6 +5,12 @@ further_reading:
 - link: "getting_started/feature_flags"
   tag: "Documentation"
   text: "Getting Started with Feature Flags"
+- link: "bits_ai/mcp_server/setup"
+  tag: "Documentation"
+  text: "Set Up the Datadog MCP Server"
+- link: "bits_ai/mcp_server/tools#feature-flags"
+  tag: "Documentation"
+  text: "Datadog MCP Server Feature Flags Tools"
 - link: "bits_ai/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
@@ -12,41 +18,30 @@ further_reading:
 
 ## Overview
 
-The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agents with access to [Feature Flags][1] management capabilities, including flag creation, configuration, and React/JavaScript integration guidance.
+The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agents with access to [Feature Flags][1] management capabilities. These capabilities include flag creation, configuration, and React/JavaScript integration guidance.
 
 ## Setup
 
-The following configurations give your AI agent access to the Feature Flags toolset in the Datadog MCP Server. You must restart your agent after performing this setup.
+The Feature Flags tools are available through the Datadog MCP Server's `feature-flags` toolset. Set up the Datadog MCP Server for your AI client, then include `toolsets=feature-flags` in the endpoint URL.
 
-For all clients, install the MCP Server binary:
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), use this endpoint:
 
-```bash
-curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-```
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=feature-flags</code></pre>
 
-Then follow the instructions below to add the MCP Server to your specific client.
+For Claude Code, quote the endpoint URL when running the command:
 
-### Claude Code
+<pre><code>claude mcp add --transport http datadog-feature-flags "{{< region-param key="mcp_server_endpoint" >}}?toolsets=feature-flags"</code></pre>
 
-```bash
-claude mcp add datadog -- ~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags
-```
+For other clients, see [Set Up the Datadog MCP Server][3]. Restart your AI client after updating its MCP configuration.
 
-### Cursor
-Add this to `~/.cursor/mcp.json` (remember to save the file):
+[2]: /getting_started/site/
+[3]: /bits_ai/mcp_server/setup
+{{< /site-region >}}
 
-```json
-{
-  "mcpServers": {
-    "datadog-ff": {
-      "type": "stdio",
-      "command": "~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags",
-      "args": [],
-      "env": {}
-    }
-  }
-}
-```
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Use cases
 
@@ -58,20 +53,20 @@ The MCP Server includes tools to help you manage feature flags in your codebase.
 
 ### Create feature flags
 
-Use the `create-feature-flag` tool to create feature flags. You do not need to specify the tool name in the prompt, but it can provide more consistent results.
+Use the `create_datadog_feature_flag` tool to create feature flags. You do not need to specify the tool name in the prompt. Including it can provide more consistent results.
 The MCP Server has access to Datadog's documentation and uses it to implement the flag in your codebase.
 
 If you do not yet have feature flags implemented, mention in the prompt that you want to implement Datadog feature flags.
 
 Example prompts:
-- Use the `create-feature-flag` tool to create a flag to control the title on the main page.
-- I want to show a confirmation modal when `<SOME_EVENT>` happens. Use a Datadog feature flag to control whether the confirmation modal is shown.
+- Use the `create_datadog_feature_flag` tool to create a flag to control the title on the main page.
+- Show a confirmation modal when `<SOME_EVENT>` happens. Use a Datadog feature flag to control whether the confirmation modal is shown.
 
 ### Check feature flag implementation
 
-Use the `check-flag-implementation` tool to check if a feature flag is implemented correctly.
+Use the `check_datadog_flag_implementation` tool to check if a feature flag is implemented correctly.
 
-The tool checks that the flag is being referenced as the correct value type, is passing the correct subject attributes, and is providing the correct default value that agrees with the default in production environments.
+The tool checks whether the flag uses the correct value type, subject attributes, and default value. The default value should match the default in production environments.
 
 Example prompts:
 - Check if the `show-confirmation-modal` flag is implemented correctly.
@@ -85,23 +80,23 @@ This tool can also be used to add feature flags created in the UI to your codeba
 
 ### List feature flags
 
-Use the `list-feature-flags` tool to list all feature flags. For example:
+Use the `list_datadog_feature_flags` tool to list all feature flags. For example:
 
 - List all feature flags.
 
 ### List environments
 
-Use the `list-environments` tool to list all environments. For example:
+Use the `list_datadog_feature_flag_environments` tool to list all environments. For example:
 
-- List my flagging environments.
+- List the flagging environments.
 
 ### Update feature flag environments
-Use the `update-feature-flag-environment` tool to update a feature flag environment. This tool can control the default variants, and enable or disable the flag.
+Use the `update_datadog_feature_flag_environment` tool to update a feature flag environment. This tool controls default variants and can enable or disable the flag.
 It cannot modify flags in production environments.
 
 Example prompts:
 
-- I want `show-confirmation-modal` to serve true in development.
+- Serve true for `show-confirmation-modal` in development.
 - Disable `show-confirmation-modal` in staging.
 
 ## Further reading
