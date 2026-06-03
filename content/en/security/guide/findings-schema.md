@@ -1766,7 +1766,7 @@ There are eleven different categories for security findings. Click on a category
 
 ## Linking to findings
 
-The direct URL for a finding in Datadog varies by finding type. Use `/finding/[finding_id]`, where `[finding_id]` is the root-level `finding_id` value, to open the finding in the appropriate explorer. This format is useful when linking from AI agents or automations.
+The direct URL for a finding in Datadog varies by finding type. Use `/security/finding/[finding_id]`, where `[finding_id]` is the root-level `finding_id` value, to open the finding in the appropriate explorer. This format is useful when linking from AI agents or automations.
 
 ## Schema Reference
 
