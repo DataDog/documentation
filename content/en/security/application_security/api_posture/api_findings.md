@@ -3,7 +3,7 @@ title: API Findings
 description: Triage detected API risks across definitions, gateways, and live traffic.
 ---
 
-**API Findings** provides a central triage view of all detected API risks across definitions, gateways, and live traffic. It provides a set of default rules to detect common vulnerabilities and misconfigurations. You can also set up [custom rules][1] to adapt to specific use cases.
+The [API Findings][1] explorer provides a central triage view of all detected API risks across definitions, gateways, and live traffic. It provides a set of default rules to detect common vulnerabilities and misconfigurations. You can also set up [custom rules][2] to adapt to specific use cases.
 
 **API Findings** columns:
 
@@ -30,4 +30,5 @@ Click a finding to view its details and perform a workflow such as Validate > In
    - Use **Create Ticket** to link the issue to your tracking system.
    - Use **Reference Links** for developer education or code review.
 
-[1]: /security/application_security/policies/custom_rules/
+[1]: https://app.datadoghq.com/security/appsec/inventory/finding
+[2]: /security/application_security/policies/custom_rules/

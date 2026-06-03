@@ -3,7 +3,7 @@ title: Services
 description: View where API findings, vulnerabilities, and runtime signals converge by service.
 ---
 
-The **Services** explorer shows where findings from API Endpoints, vulnerabilities, and runtime signals converge by service. Consider it the operational risk view of your applications.
+The [Services][1] explorer shows where findings from API Endpoints, vulnerabilities, and runtime signals converge by service. Consider it the operational risk view of your applications.
 
 Review your services for the following:
 
@@ -31,3 +31,5 @@ For example, here are some use cases for **Coverage**:
   - Pinpoint where code-level vulnerability detection is missing.
   - Enable IAST for production or high-risk apps to uncover exploitable issues in live traffic.
   - Use results to confirm whether library vulnerabilities are actually reachable in code.
+
+[1]: https://app.datadoghq.com/security/appsec/inventory/services

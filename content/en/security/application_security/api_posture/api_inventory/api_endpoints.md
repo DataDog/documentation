@@ -3,7 +3,7 @@ title: API Endpoints
 description: Monitor API traffic to assess endpoint risk, authentication, sensitive data flows, and exposure.
 ---
 
-[API Endpoints][1] monitors your API traffic to provide visibility into the security posture of your APIs, including:
+The [API Endpoints][1] explorer monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
 - **Authentication**: Whether the API enforces authentication.
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
