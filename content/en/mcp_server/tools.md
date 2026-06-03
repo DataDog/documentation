@@ -981,9 +981,8 @@ Discovers available tag names (such as service, host, env, version, family, runt
 *Permissions Required: `Continuous Profiler Read`*\
 Returns values for a specific profiling tag (for example, all values of the service tag). Returns up to 50 results, sorted by frequency.
 
-- Show me all values for the service tag in profiling data.
-- List version tag values for the payments service profiles.
-- Get the top runtime-id values for `service:checkout-api`.
+- Which versions of the payments service do we have profiling data for in the past hour?
+- What are the two datacenters with most profiling data available for `service:checkout-api`?
 
 ### `get_profiling_fields`
 *Toolset: **profiling***\
