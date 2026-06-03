@@ -69,6 +69,8 @@ The Maximum Access Period of an invitation can be configured by an organization 
 
 **Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
 
+To allow invitations with no expiration date, turn off the Maximum Access Period setting. If you are configuring this with the API, set the value to `null`. In the UI, setting the Maximum Access Period to `0` turns off the setting and sets the value to `null`.
+
 ### Access an invite-only shared dashboard
 
 Invitees to shared dashboards are sent an email with a limited-time access link. The email recipients need to click on the link within 1 hour to gain access to the shared dashboard.
