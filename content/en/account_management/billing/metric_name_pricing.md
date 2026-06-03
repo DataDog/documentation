@@ -23,7 +23,7 @@ Metric Name pricing bills custom metrics based on the number of unique metric na
 
 **Note**: This page applies if your contract uses Metric Name pricing SKUs. These SKUs are mutually exclusive with the Timeseries (cardinality) pricing SKUs. If your contract uses Timeseries pricing instead, see [Custom Metrics billing][1].
 
-Datadog distinguishes ingested datapoints (every metric datapoint your services send) from indexed datapoints (the points that remain queryable after your tag and metric configuration is applied). You control your indexed volume with [Metrics without Limits™][4]. Excluding tags you don't need reduces the indexed datapoints you're billed for. Ingested datapoints are the raw inputs from which indexed values are computed, and indexed volume is always less than or equal to ingested volume.
+Datadog distinguishes ingested datapoints from indexed datapoints. **Ingested** datapoints are every metric datapoint your services send. **Indexed** datapoints are the points that remain queryable. By default, every ingested datapoint is also indexed. [Metrics without Limits™][4] optionally reduces your indexed volume. Excluding tags you don't need lowers the indexed datapoints you're billed for, leaving only the retained points queryable. Indexed volume is always less than or equal to ingested volume.
 
 ## SKUs
 
@@ -85,7 +85,7 @@ At the end of the month:
 
 ## Ingestion behavior
 
-Under Metric Name pricing, every metric datapoint your services send to Datadog counts toward ingestion, independent of [Metrics without Limits™][4] configuration. Indexed volume depends on your tag and metric configuration.
+Under Metric Name pricing, every metric datapoint your services send to Datadog counts toward ingestion, independent of [Metrics without Limits™][4] configuration. By default, all ingested datapoints are indexed. Configuring Metrics without Limits™ reduces your indexed volume.
 
 Your free ingestion allowance covers ingested datapoints up to five times your indexed volume. You're charged for ingested datapoints only above that threshold in a given month.
 
@@ -124,7 +124,7 @@ Usage Attribution for ingestion is not supported in the initial phase.
 
 ## Custom and standard metrics
 
-Datadog classifies metrics as custom (paid) or standard (free) based on metric name prefix, the same way as in cardinality pricing. Standard integrations follow the existing [custom metrics and standard integrations][8] rules.
+Metric Name pricing uses the same definition of custom and standard metrics as cardinality pricing. For what is considered a custom metric, see [Custom Metrics][8].
 
 ## Troubleshooting
 
@@ -143,5 +143,5 @@ For billing questions, contact your [Customer Success][3] Manager.
 [5]: /metrics/types/?tab=distribution#metric-types
 [6]: /metrics/custom_metrics/historical_metrics/
 [7]: /account_management/billing/usage_attribution/
-[8]: /metrics/custom_metrics/#standard-integrations
+[8]: /metrics/custom_metrics/
 [9]: /help/
