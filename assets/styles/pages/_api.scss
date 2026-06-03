@@ -1,6 +1,8 @@
 // API
 $ddpurple: #632ca6;
 
+// Endpoint page: stacked below the h1.
+// Category page (.api-intro-header) overrides layout below.
 .main-api .api-copy-btn {
     margin-top: -0.5rem;
     margin-bottom: 2rem;
@@ -23,6 +25,22 @@ $ddpurple: #632ca6;
 
     #page-copied-text {
         display: none;
+    }
+}
+
+// Category page: inline to the right of the h1
+.api-intro-header .api-copy-btn {
+    flex-shrink: 0;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+
+    a {
+        display: flex;
+        align-items: center;
+    }
+
+    .copy-btn-icon-wrapper {
+        top: 0;
     }
 }
 
