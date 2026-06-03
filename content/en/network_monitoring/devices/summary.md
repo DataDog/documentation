@@ -53,7 +53,7 @@ Below the summary, a status panel shows the total device count broken down by st
 
 The **Issues** list summarizes active alerts on network resources, grouped to reduce noise. Each issue card shows the affected devices, a description of what was detected, and the blast radius.
 
-Click an issue to open a side panel with a summary of what happened, the affected metric, a proposed fix, and an option to launch a Bits AI SRE investigation. For details, see [Device Health][5].
+Click an issue to open a side panel with a summary of what happened, the affected metric, a proposed fix, and an option to launch a Bits Investigation. For details, see [Device Health][5].
 
 {{< img src="network_device_monitoring/summary/issues-view.png" alt="The Device Health view showing the Open Issues list with a high-severity issue card for a network interface and its dependencies." style="width:100%;" >}}
 
