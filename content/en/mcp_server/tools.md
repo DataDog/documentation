@@ -892,6 +892,110 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+## Profiling
+
+Tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
+
+### `get_profiling_profile_types`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns available profile types and families given a query context (time range and query string) or a trace and span context. Use this tool first to discover what profiling data is queryable.
+
+- What profile types are available for the `checkout` service in the last hour?
+- Show me profiling families available in the production environment.
+- What profiling data exists for this trace?
+
+### `get_profiling_services`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Lists profiled services and their profiling families in scope.
+
+- Which services have profiling enabled in production?
+- List all services with CPU profiling data in the last hour.
+
+### `get_profiling_runtime_ids`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns individual profiled runtime IDs (processes or containers) in scope. Defaults to the top runtime by CPU usage.
+
+- Show me the top profiled runtimes for the `payments` service.
+- List runtime IDs for the `checkout` service in the last 30 minutes.
+
+### `get_profiling_service_insights`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns pre-computed service insights, including a high-level performance summary, contextual signals such as affected methods, packages, and processes, and recommended next steps.
+
+- What are the top performance issues in the `checkout` service?
+- Show me profiling insights for `service:payments` in the last hour.
+- Are there any known CPU hot spots in the API service?
+
+### `explore_profiling_flame_graph`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns the top-N stack traces by value contribution for a given profile type. Supports filtering by frame, endpoint, or attribute regex. Accepts a service and family, or a trace context.
+
+- Show me the top CPU-consuming functions in the `checkout` service.
+- Get the flame graph for CPU usage in `service:payments` over the last 15 minutes.
+- Show me the flame graph for the span from this trace.
+
+### `explore_profiling_call_graph`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a call-graph view (caller to callee edges) of the hottest functions for a given profile type. Defaults to top 20 nodes, 5% cutoff, and 5 edges per node.
+
+- Show me the call graph for memory allocations in the `api` service.
+- What functions are calling the hot database methods in `service:payments`?
+
+### `explore_profiling_timeline`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a timeline of lane groups (threads, GC, and so on) with CPU and I/O activity. Supports critical-path mode (Go only, requires trace context) to identify latency bottlenecks within a span.
+
+- Show me the thread timeline for `service:api` during the latency spike.
+- Analyze the critical path of this Go span to find latency bottlenecks.
+
+### `get_profiling_timeseries`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns profiling data aggregated as timeseries (rate metrics). Best for trends, cross-service comparison, and regression detection. Supports groupBy on frame fields, contexts, and tags.
+
+- Show me CPU usage trends for the `payments` service over the last 24 hours.
+- Compare wall-time profiling across services in the production environment.
+- Detect memory allocation regressions for `service:api` compared to yesterday.
+
+### `get_profiling_tag_names`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Discovers available tag names (such as `service`, `host`, `env`, `version`, and `family`) for filtering profiling data. Returns up to 50 results sorted by relevance.
+
+- What tags can I use to filter profiling data?
+- Show me available tag names for profiling.
+
+### `get_profiling_tag_values`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns values for a specific profiling tag, such as all values for the `service` tag. Returns up to 50 results sorted by frequency.
+
+- What values are available for the `service` tag in profiling data?
+- List all environments that have profiling data.
+
+### `get_profiling_fields`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Discovers frame and context facet fields (such as `@stack.function` and `@labels.trace_endpoint`) usable in `get_profiling_timeseries` for groupBy and filter operations. Scoped by sample type.
+
+- What fields can I group by in profiling timeseries queries?
+- Show me available frame fields for CPU profiling.
+
+### `get_profiling_field_values`
+*Toolset: **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns values for a specific frame or context field discovered with `get_profiling_fields`. Results are sorted by frequency.
+
+- What are the most common values for `@stack.function` in the `checkout` service?
+- Show me trace endpoint values for CPU profiling data.
+
 ## Reference Tables
 
 Tools for managing [Reference Tables][45], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -1400,3 +1504,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[62]: /profiler/
