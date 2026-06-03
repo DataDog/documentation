@@ -135,33 +135,25 @@ The skill highlights which metrics improved or regressed, which event categories
 
 ### Generate experiment code with the Python SDK
 
-`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][7], with sections for env setup, `LLMObs.enable`, dataset wiring, the task function, evaluators, the experiment definition, run, and results inspection.
+`/llm-obs-experiment-py-bootstrap` emits a self-contained `.py` script or Jupyter `.ipynb` notebook that uses the `ddtrace.llmobs` SDK and matches the canonical [reference notebooks][7].
 
-Three behaviors keep the generated file runnable out of the box without the manual cleanup that an unsupervised codegen would require:
-
-**Application introspection — real `task_fn`, not a placeholder.** Instead of emitting a `# TODO(user): replace with your actual LLM call` placeholder, the skill scans the project for LLM call sites (OpenAI / Anthropic / LiteLLM / LangChain / LlamaIndex / Vertex AI / Bedrock plus any function already decorated with `@LLMObs.*` / `@workflow` / `@agent`), ranks them, and emits a wrapper that imports and calls the most likely entry point with a signature adapter from the SDK's `(input_data, config)` shape to whatever args your function actually takes. Async, class methods, and `**kwargs` shapes are handled automatically. Pass `--task-source <module:function>` to skip the scan, or `--placeholder-task` to opt out of introspection entirely.
-
-**Credential auto-discovery — no manual `export` required.** The generated file ships an inline `_load_env_files` helper (no `python-dotenv` dependency) that walks `--env-file` overrides, the output directory, the project root, parent directories, and `~/.datadog/credentials` to find Datadog and provider credentials. Shell environment variables always win over file-loaded values, so `export DD_API_KEY=...` before re-running cleanly overrides whatever the file would have loaded. Provider-key assertions in the generated file are conditional on what introspection actually wired: `OPENAI_API_KEY` is only asserted if the task imports OpenAI; `ANTHROPIC_API_KEY` only for Anthropic; and so on.
-
-**`--purpose <free text>` directs evaluator selection.** Before introspection runs, the skill captures a one-sentence statement of what the experiment is meant to validate (passed via the flag, inferred from the invocation message, or prompted via `AskUserQuestion` with five seed options plus Other). The resulting string is *not* a fixed taxonomy — Claude reads whatever you typed and reasons per-invocation about what to do with it: bias the introspection ranking toward agent / retrieval / structured-output entry points if applicable, pick a richer `task_fn` return shape (`{output, tool_calls}`, `{answer, retrieved_docs}`) when the function exposes it, and seed evaluator *semantics* (the `--evaluator-style` flag still picks the *surface*). Common patterns: a tool-call purpose adds a `tool_calls_correct` LLMJudge rubric; a structured-output purpose leans on `JSONEvaluator`; a regression-test purpose drops the LLMJudge in favor of `exact_match` + a near-match check. The resolved purpose is embedded in the file's docstring header and in the experiment's `config`, `tags`, and `description` so it surfaces in the Datadog Experiments UI list view. Every generated experiment is also tagged with `generated_by=claude-code` in both `config` and `tags` so you can identify and filter Claude-generated experiments.
-
-The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is.
+The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a CSV (loaded at runtime via `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (`LLMObs.pull_dataset`), or — by default — a small inline 3-record sample.
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--purpose` | auto — prompted via `AskUserQuestion` if not set or inferable from the invocation message | Free-form string describing what the experiment is meant to validate (e.g. `"test that the agent picks the right tool for ambiguous user requests"`, `"verify SQL output always parses"`, `"regression-test prompt v3 against prod baseline"`). Biases introspection ranking, wrapper return shape, and evaluator semantics |
-| `--format` | `py` | `py` (single `.py` file) or `ipynb` (Jupyter notebook with one cell per section) |
-| `--dataset` | none (inline 3-record sample) | Path to a local `DatasetRecordRaw[]` JSON or CSV file. Mutually exclusive with `--dataset-name` |
-| `--dataset-name` | none | Name of an existing Datadog dataset to fetch at runtime with `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
-| `--dataset-version` | latest | Pin to a specific dataset version when using `--dataset-name` |
-| `--project-name` | `experiment-<service-name>` (inferred from the codebase) | Datadog project name visible in the LLM Experiments UI |
-| `--evaluator-style` | `function` | `function` (plain functions), `class` (`BaseEvaluator` subclasses), or `remote` (`RemoteEvaluator` instances). Picks the *surface*; `--purpose` picks the *semantics* |
-| `--task-source` | auto — discovered by introspection | Explicit `<dotted.module.path>:<function_name>` to wrap as `task_fn`. Skips the introspection scan |
-| `--placeholder-task` | off | Opt out of introspection and emit a generic placeholder task with a `# TODO(user)` marker |
-| `--app-root` | resolved from `pyproject.toml` / `setup.cfg` / `setup.py` / cwd | Restricts the introspection scan to this directory tree |
-| `--env-file` | none (auto-discovery walks standard locations) | Explicit absolute path to a `.env` file. Baked into the generated file as `ENV_FILE_OVERRIDE` and always tried first at runtime |
-| `--jobs` | `10` | Concurrency passed to `experiment.run(jobs=N)` |
-| `--output` | `./experiments/experiment.<ext>` | Output file path; extension derives from `--format` |
+| <span class="text-nowrap">`--purpose`</span> | prompted if not set or inferable | Free-form string describing what the experiment validates. Biases introspection ranking, wrapper return shape, and evaluator semantics |
+| <span class="text-nowrap">`--format`</span> | `py` | `py` or `ipynb` |
+| <span class="text-nowrap">`--dataset`</span> | inline 3-record sample | Local `DatasetRecordRaw[]` JSON or CSV. Mutually exclusive with `--dataset-name` |
+| <span class="text-nowrap">`--dataset-name`</span> | none | Existing Datadog dataset to fetch at runtime via `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
+| <span class="text-nowrap">`--dataset-version`</span> | latest | Pin a specific version when using `--dataset-name` |
+| <span class="text-nowrap">`--project-name`</span> | `experiment-<service-name>` inferred from codebase | Datadog project name shown in the Experiments UI |
+| <span class="text-nowrap">`--evaluator-style`</span> | `function` | `function` / `class` / `remote`. Picks the surface; `--purpose` picks the semantics |
+| <span class="text-nowrap">`--task-source`</span> | auto from introspection | Explicit `<module.path>:<function>` to wrap as `task_fn` |
+| <span class="text-nowrap">`--placeholder-task`</span> | off | Skip introspection and emit a generic `# TODO(user)` placeholder |
+| <span class="text-nowrap">`--app-root`</span> | inferred | Restricts introspection scan to this directory |
+| <span class="text-nowrap">`--env-file`</span> | none | Explicit `.env` path. Baked into the generated file as `ENV_FILE_OVERRIDE` |
+| <span class="text-nowrap">`--jobs`</span> | `10` | Concurrency passed to `experiment.run(jobs=N)` |
+| <span class="text-nowrap">`--output`</span> | `./experiments/experiment.<ext>` | Output file path |
 
 **Examples**
 
@@ -208,6 +200,17 @@ Phase 5: Generate + run experiment   → llm-obs-experiment-py-bootstrap + pytho
                                        (with an in-phase review beat between codegen and run)
 Phase 6: Analyze experiment          → llm-obs-experiment-analyzer
 ```
+
+Each phase has a canonical short name — the same value accepted by `--start-at` and `--stop-after`. Use these names whenever you need to refer to a single phase unambiguously (e.g. in scripts, in chat with teammates, or in support tickets):
+
+| # | Phase title | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">Stage name</span> | Sub-skill invoked | Summary | Output artifact |
+|---|-------------|----------------------------------------------------------------------------------------|-------------------|---------|-----------------|
+| 1 | Classify ml_app traces | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`classify`</span> | `/llm-obs-session-classify` (ml_app mode) | MCP `search_llmobs_spans` samples recent root spans for the `ml_app`. Each span is classified as success / partial / failure and grouped into common patterns. | Classification summary + per-unit blocks |
+| 2 | Root cause analysis | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`rca`</span> | `/llm-obs-trace-rca` | MCP `search_llmobs_spans` pulls full traces for the failing spans identified in Phase 1. The trace tree is walked to attribute each failure to a root span and a failure mode. | RCA report with failure-mode taxonomy and root causes |
+| 3 | Bootstrap evaluators | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`eval-bootstrap`</span> | `/llm-obs-eval-bootstrap` | Local reasoning over the Phase 2 RCA — no MCP calls. Emits Python evaluator code (`sdk_code`), a framework-agnostic JSON spec (`data_only`), or publishes online LLM-judge evaluators directly to Datadog via the public API (`publish`). | Evaluator suite (`sdk_code` / `data_only` / `publish` mode) |
+| 4 | Create and publish dataset | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`dataset`</span> | `/llm-obs-eval-bootstrap --emit-dataset` + `LLMObs.create_dataset(records=...)` | MCP `search_llmobs_spans` samples root spans, extracts `(input_data, expected_output)` pairs, scrubs PII, and writes a local JSON file. The publish sub-step then calls `LLMObs.create_dataset()` via the ddtrace SDK (not MCP) to push the dataset to Datadog. | Local `DatasetRecordRaw[]` JSON + published Datadog dataset (name, version, URL) |
+| 5 | Generate and run experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`experiment`</span> | `/llm-obs-experiment-py-bootstrap` + `python <generated_file>` (with a `run` / `edit` / `stop` review beat between codegen and execution) | Mostly local: the skill introspects your app for LLM call sites (OpenAI / Anthropic / LangChain / LiteLLM / LlamaIndex / Bedrock / Gemini decorators) and emits a self-contained Python file wiring `task_fn` to a real entry point. One MCP `list_llmobs_evals` call fires at startup as a connectivity + telemetry beacon. The generated file uses the ddtrace SDK at runtime; no MCP calls during the run itself. | Generated `.py` or `.ipynb` + experiment run with `experiment.url` |
+| 6 | Analyze experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`analyze`</span> | `/llm-obs-experiment-analyzer` | Heavy MCP user: `get_llmobs_experiment_summary` for top-line metrics, `get_llmobs_experiment_metric_values` for per-record scores, `list_llmobs_experiment_events` + `get_llmobs_experiment_event` to drill into individual rows, and `get_llmobs_experiment_dimension_values` for segment breakdowns. Synthesizes findings into a structured report. | Analysis report with metric breakdowns, segment performance, and recommended next experiments |
 
 Phases 4 and 5 are the only two that execute code on your machine; the rest are read-only or write generated files to `--output-dir`. The classic three-phase eval-pipeline behavior (classify → RCA → bootstrap evaluators only) is preserved by passing `--stop-after eval-bootstrap`. Phase 5 pauses between codegen and execution so you can review the generated experiment file before any provider tokens are spent — type `run` to execute, `edit` to pause and adjust, or `stop` to exit cleanly.
 

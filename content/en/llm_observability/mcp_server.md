@@ -231,13 +231,9 @@ When Claude Code has access to your codebase, the skill can search for the relev
 
 #### Generate experiment code with the Python SDK
 
-`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. Three behaviors keep the generated file runnable out of the box:
+`/llm-obs-experiment-py-bootstrap` emits a self-contained `.py` script or Jupyter `.ipynb` notebook that uses the `ddtrace.llmobs` SDK and matches the canonical reference notebook style.
 
-- **Application introspection** — instead of emitting a `# TODO(user)` placeholder, the skill scans your project for LLM call sites (OpenAI / Anthropic / LiteLLM / LangChain / LlamaIndex / Bedrock / Gemini) and wires `task_fn` to the most likely entry point with a signature adapter. Override with `--task-source <module:function>`, or opt out with `--placeholder-task`.
-- **Credential auto-discovery** — the generated file ships an inline `.env` loader that walks the output dir, project root, cwd, parent directories, and `~/.datadog/credentials`. Shell env vars always win, so `export DD_API_KEY=...` overrides any file value.
-- **`--purpose <free text>`** — a one-sentence statement of what the experiment is meant to validate. It biases the introspection ranking, picks a richer `task_fn` return shape when the function exposes one (tool calls, retrieved docs), and seeds evaluator semantics. Not a fixed taxonomy — the skill prompts if you don't pass it.
-
-The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` and the resolved `purpose` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a CSV (loaded at runtime via `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (`LLMObs.pull_dataset`), or — by default — a small inline 3-record sample. Every generated experiment is tagged with `generated_by=claude-code` and the resolved `--purpose` in both `config` and `tags`.
 
 ```
 /llm-obs-experiment-py-bootstrap --purpose "validate output accuracy"
@@ -257,7 +253,18 @@ The dataset can come from a local JSON or CSV file, an existing Datadog dataset 
 5. **Generate + run experiment** — emit a runnable `.py` or `.ipynb` that pulls the dataset and wires your app's task function, then execute it end-to-end and capture `experiment.url`. An in-phase review beat (`run` / `edit` / `stop`) sits between codegen and execution so you can inspect the generated file before it runs
 6. **Analyze experiment** — produce an analysis report with metric breakdowns and recommendations
 
-Each phase persists its output to `<output-dir>/state/0N-<name>.{md,json}` before its checkpoint renders, so you can `stop` cleanly at any point and resume later with `--start-at <next-phase>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
+Each phase has a canonical short name — the same value accepted by `--start-at` and `--stop-after`. The table below lists, per phase, which MCP tools the pipeline may invoke and a one-line description of the logic:
+
+| # | Phase title | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">Stage name</span> | MCP tools called | Summary |
+|---|-------------|----------------------------------------------------------------------------------------|------------------|---------|
+| 1 | Classify ml_app traces | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`classify`</span> | `search_llmobs_spans` | Samples recent root spans for the `ml_app`, classifies each as success / partial / failure, surfaces common patterns. |
+| 2 | Root cause analysis | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`rca`</span> | `search_llmobs_spans` | Pulls full traces for failing spans from Phase 1 and walks the trace tree to attribute each failure to a root span and a failure mode. |
+| 3 | Bootstrap evaluators | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`eval-bootstrap`</span> | None (local reasoning over the Phase 2 report); optional Datadog API call to publish online LLM-judge evaluators when `--publish` is set | Emits a Python evaluator suite (`sdk_code`), a framework-agnostic JSON spec (`data_only`), or publishes online evaluators (`publish`). |
+| 4 | Create and publish dataset | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`dataset`</span> | `search_llmobs_spans` for sampling; `LLMObs.create_dataset()` via the ddtrace SDK (not MCP) for publish | Samples root spans, extracts input / expected_output pairs, scrubs PII, writes a local JSON, then publishes to Datadog. |
+| 5 | Generate and run experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`experiment`</span> | `list_llmobs_evals` (one-shot startup beacon — connectivity + telemetry); runtime uses the ddtrace SDK | Introspects your app for LLM call sites, emits a self-contained `.py` or `.ipynb` wiring `task_fn` to a real entry point, then runs it. |
+| 6 | Analyze experiment | <span style="display:inline-block; min-width:11ch; white-space:nowrap !important; word-break:keep-all !important; overflow-wrap:normal !important">`analyze`</span> | `get_llmobs_experiment_summary`, `get_llmobs_experiment_metric_values`, `list_llmobs_experiment_events`, `get_llmobs_experiment_event`, `get_llmobs_experiment_dimension_values` | Pulls top-line metrics, per-record scores, segment dimensions, and drill-down events; synthesizes a structured analysis report. |
+
+You can `stop` cleanly at any checkpoint and resume later with `--start-at <stage-name>` — no re-running required. Pass `--stop-after eval-bootstrap` to preserve the classic three-phase eval-only behavior.
 
 ```
 /llm-obs-eval-pipeline my-chatbot --project-name my-chatbot
