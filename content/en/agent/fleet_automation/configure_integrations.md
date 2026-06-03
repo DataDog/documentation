@@ -37,6 +37,8 @@ Custom checks are **not** supported.
 
 ## Configure integrations across multiple Agents
 
+<div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</a></div>
+
 1. In Fleet Automation, open the [{{< ui >}}Configuration{{< /ui >}}][3] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
 1. Choose {{< ui >}}Agent integrations{{< /ui >}}.
