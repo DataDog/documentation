@@ -41,7 +41,7 @@ The walkthrough below highlights the parts of the configuration that are specifi
    {{traces}}                                              # JSON of every trace in the session
    {{traces[0].spans[0].meta.input.value}}                 # First span of the first trace
    {{traces[*].spans[*].name}}                             # All span names, joined with newlines
-   {{traces[meta.span.kind:llm].spans[*].meta.output.value}}  # LLM outputs across the session
+   {{traces[*].spans[meta.span.kind:llm].meta.output.value}}  # LLM outputs across the session
    {{*}}                                                   # Entire session payload as JSON
    ```
 
@@ -50,10 +50,6 @@ The walkthrough below highlights the parts of the configuration that are specifi
    {{< img src="llm_observability/evaluations/session_level_prompt_editor.png" alt="The User prompt editor for a session-level evaluation, with the autocomplete dropdown listing traces-prefixed fields after typing two open braces." style="width:100%;" >}}
 
 1. Pick a sample session from the panel on the right. The pane lists the traces in that session, with the fields referenced by your prompt highlighted.
-
-   {{< img src="llm_observability/evaluations/session_level_sample_session.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
-
-   Clicking on a session then lists the traces in that session, with the fields referenced by your prompt highlighted.
 
    {{< img src="llm_observability/evaluations/session_level_sample_session_trace_view.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
 
@@ -120,8 +116,8 @@ Output one of: excellent, good, mixed, poor.
 **User**
 ```
 User and assistant messages across the session:
-{{traces[meta.span.kind:llm].meta.input.messages[*].content}}
-{{traces[meta.span.kind:llm].meta.output.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.input.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.output.messages[*].content}}
 ```
 
 ### User behavior and frustration signals

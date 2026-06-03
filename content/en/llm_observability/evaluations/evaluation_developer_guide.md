@@ -41,12 +41,13 @@ The evaluation system has four main components:
 
 - **[EvaluatorContext](#evaluatorcontext)**: The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In Experiments, the SDK builds this automatically from each dataset record. In production, you construct the EvaluatorContext yourself.
 - **[EvaluatorResult](#evaluatorresult)**: The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`, `dict`) instead.
+- **[MultiEvaluatorResult](#multievaluatorresult)**: An optional container for returning multiple named metrics from a single evaluator. Each sub-value can be a plain value or its own `EvaluatorResult`. Useful when one evaluator pass produces several related metrics (for example, precision, recall, and F1).
 - **[Metric type](#metric-types)**: Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), `boolean` (pass/fail), or `json` (structured data).
 - **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
 
 The typical flow:
 
-- **Experiments**: Dataset record → `EvaluatorContext` → Evaluator → `EvaluatorResult` → (after all records) `SummaryEvaluatorContext` → Summary evaluator → summary result
+- **Experiments**: Dataset record → `EvaluatorContext` → Evaluator → `EvaluatorResult` (or `MultiEvaluatorResult`) → (after all records) `SummaryEvaluatorContext` → Summary evaluator → summary result
 - **Production**: Span data → `EvaluatorContext` (built manually) → Evaluator → `EvaluatorResult` → `LLMObs.submit_evaluation()` or HTTP API
 
 ## Building evaluators
@@ -459,13 +460,80 @@ def evaluator_function(
     input_data: Any,
     output_data: Any,
     expected_output: Any
-) -> Union[JSONType, EvaluatorResult]:
+) -> Union[JSONType, EvaluatorResult, MultiEvaluatorResult]:
     ...
 {{< /code-block >}}
 
-You can return either:
+You can return:
 - A plain value (`str`, `float`, `int`, `bool`, `dict`), or
-- An `EvaluatorResult` for rich results with reasoning and metadata
+- An `EvaluatorResult` for rich results with reasoning and metadata, or
+- A `MultiEvaluatorResult` to emit multiple named metrics from one evaluator call
+
+### Returning multiple values with MultiEvaluatorResult
+
+When a single evaluator produces several related metrics—for example, precision, recall, and a confusion-matrix category from one LLM judge call—return a `MultiEvaluatorResult` instead of a single value. Each entry is emitted as its own metric in Datadog.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import EvaluatorResult, MultiEvaluatorResult
+
+def confusion_matrix_evaluator(input_data, output_data, expected_output):
+    predicted = bool(output_data)
+    expected = bool(expected_output)
+    correct = predicted == expected
+
+    if predicted and expected:
+        category = "true_positive"
+    elif predicted and not expected:
+        category = "false_positive"
+    elif not predicted and expected:
+        category = "false_negative"
+    else:
+        category = "true_negative"
+
+    return MultiEvaluatorResult(
+        {
+            "correct": EvaluatorResult(
+                value=correct,
+                assessment="pass" if correct else "fail",
+                reasoning=f"predicted={predicted}, expected={expected}",
+            ),
+            "category": category,
+            "false_positive": category == "false_positive",
+        }
+    )
+{{< /code-block >}}
+
+By default, sub-metric labels are prefixed with the evaluator's name: `confusion_matrix_evaluator-correct`, `confusion_matrix_evaluator-category`, and so on. To emit raw keys without a prefix, pass `prefix=False`:
+
+{{< code-block lang="python" >}}
+return MultiEvaluatorResult({"precision": 0.9, "recall": 0.8}, prefix=False)
+{{< /code-block >}}
+
+<div class="alert alert-warning">If two evaluators emit the same metric label for the same dataset record (for example, both use <code>prefix=False</code> with the same key), the second value overwrites the first and a warning is logged.</div>
+
+`MultiEvaluatorResult` is also supported in class-based evaluators and summary evaluators:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import BaseEvaluator, EvaluatorContext, MultiEvaluatorResult
+
+class ConfusionMatrixEvaluator(BaseEvaluator):
+    def __init__(self):
+        super().__init__(name="confusion_matrix")
+
+    def evaluate(self, context: EvaluatorContext) -> MultiEvaluatorResult:
+        predicted = bool(context.output_data)
+        expected = bool(context.expected_output)
+        correct = predicted == expected
+        # Emitted labels: correct, false_positive, false_negative (prefix=False)
+        return MultiEvaluatorResult(
+            {
+                "correct": correct,
+                "false_positive": predicted and not expected,
+                "false_negative": not predicted and expected,
+            },
+            prefix=False
+        )
+{{< /code-block >}}
 
 ## Using evaluators in experiments
 
@@ -645,6 +713,17 @@ Allows you to return rich evaluation results with additional context. Used in bo
 | `assessment` | `Optional[str]` | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
 | `metadata` | `Optional[Dict[str, Any]]` | Additional metadata about the evaluation. |
 | `tags` | `Optional[Dict[str, str]]` | Tags to apply to the evaluation metric. |
+
+### MultiEvaluatorResult
+
+A container for emitting multiple named evaluation metrics from a single evaluator. Import from `ddtrace.llmobs`.
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `values` | `Dict[str, Union[str, float, int, bool, dict, EvaluatorResult]]` | — | Mapping of sub-metric name to a plain value or an `EvaluatorResult`. Must be non-empty; keys must follow evaluation [label naming conventions](#naming-conventions). |
+| `prefix` | `bool` | `True` | Controls label generation. `True` → `"<evaluator_name>-<key>"`. `False` → raw key. |
+
+Supported in function-based evaluators, class-based evaluators (`BaseEvaluator`), and summary evaluators (`BaseSummaryEvaluator`).
 
 ### SummaryEvaluatorContext
 
