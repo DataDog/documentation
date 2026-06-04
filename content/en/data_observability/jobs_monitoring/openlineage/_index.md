@@ -24,7 +24,7 @@ Custom jobs use the [OpenLineage][1] standard to send job and lineage events to 
 ## Prerequisites
 
 - A Datadog API key. See [API and Application Keys][6].
-- Your Datadog [site URL][3]. The examples on this page use `datadoghq.com`.
+- Your Datadog [site URL][3]. The examples on this page use `datadoghq.com`. Replace the hostname in the examples with the intake endpoint for your site. To find your site, see [Getting started with Datadog sites][3].
 
 ## Step 1: Send a `START` event
 
