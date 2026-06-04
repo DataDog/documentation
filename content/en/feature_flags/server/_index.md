@@ -72,14 +72,14 @@ DD_TRACE_AGENT_PORT=8126
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
+# See "Set Up Server-Side Flag Evaluation Metrics" documentation
 {{< /code-block >}}
 
 <div class="alert alert-warning">The <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> environment variable is required to enable the feature flagging provider. Java also supports the system property <code>-Ddd.experimental.flagging.provider.enabled=true</code>, and Ruby and Node.js support code-based configuration as an alternative. See the SDK-specific documentation for details.</div>
 
 <div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
-<div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable the experimental <code>feature_flag.evaluations</code> metric. Without this, the SDK does not emit metrics for flag evaluations. Additional Agent configuration is required. See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the full setup guide.</div>
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Testing with in-memory providers
 
