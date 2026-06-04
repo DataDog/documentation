@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This page outlines operational best practices for running BYOC Logs in production to help reduce common deployment issues.
+This page outlines operational best practices for running BYOC (Bring Your Own Cloud) Logs in production to help reduce common deployment issues.
 
 ## Enable monitoring from the start
 
