@@ -96,6 +96,14 @@ For more granular analysis, use the following real-time and hourly metrics:
 
 For more information, see [Estimated Usage Metrics][6].
 
+## Managing your metric usage
+
+To reduce your usage under Metric Name Pricing, use the following tools:
+
+- **Metric names**: Use [Agent-side filtering][9] to prevent unused or unwanted custom metrics from being sent to Datadog, reducing the count of billable metric names.
+- **Indexed and ingested points**: Use [Metrics without Limits™][2] to configure tag allowlists or blocklists on your custom metrics, reducing indexed point volume and your per-metric overage.
+- **Tag-level control across metrics**: Use [Tag Indexing Rules][10] to apply org-wide tag allowlists or blocklists to groups of metrics by name or prefix.
+
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][7].
@@ -114,3 +122,5 @@ For billing questions, contact your [Customer Success][8] Manager.
 [6]: /account_management/billing/usage_metrics/
 [7]: /help/
 [8]: mailto:success@datadoghq.com
+[9]: /metrics/guide/agent-filtering-for-custom-metrics/
+[10]: /metrics/guide/tag-indexing-rules/
