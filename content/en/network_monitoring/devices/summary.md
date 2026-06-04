@@ -61,6 +61,8 @@ Three cards below the list show aggregate health for the fleet: [Bandwidth utili
 
 Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where you can investigate the device in more depth.
 
+{{< img src="network_device_monitoring/summary/interface-side-panel.png" alt="The device side panel open on the Interfaces tab, showing interface status, bandwidth, and monitor data." style="width:100%;" >}}
+
 **Interface health thresholds**
 
 The following thresholds determine an interface's health state:
@@ -82,6 +84,8 @@ A Bits AI summary explains the current device health state and points to recent 
 Two cards below the list show aggregate health: [CPU][9] and [Memory][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
 
 Click any device to open the device side panel, which includes details such as device status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to investigate the device in more depth.
+
+{{< img src="network_device_monitoring/summary/device-side-panel.png" alt="The device side panel open on the Device Summary tab, showing triggered monitors, device tags, and interface status." style="width:100%;" >}}
 
 **Device health thresholds**
 
@@ -105,8 +109,6 @@ The **Changes** section lists recent network device configuration changes from [
 {{< img src="network_device_monitoring/summary/changes-panel.png" alt="The Changes section listing recent configuration changes per device with a summary and timestamp for each." style="width:100%;" >}}
 
 Click **[View all changes][11]** to open the full Changes view. Filters and the time range are shared between the two views. Click any row to open the device side panel with details about the change.
-
-{{< img src="network_device_monitoring/summary/changes-detail.png" alt="The full Changes view with filter dropdowns at the top and a table of recent network device configuration changes with device name, change summary, and timestamp columns." style="width:100%;" >}}
 
 ## Further Reading
 
