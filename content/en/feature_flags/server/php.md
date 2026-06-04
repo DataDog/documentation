@@ -46,6 +46,8 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 export DD_VERSION=<YOUR_APP_VERSION>
 {{< /code-block >}}
 
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
 ## Installation
 
 Feature Flagging is provided by Application Performance Monitoring (APM). Install and configure the Datadog PHP tracer by following [Tracing PHP Applications][4].
