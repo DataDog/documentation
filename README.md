@@ -12,6 +12,11 @@ Most pages on the documentation site feature an **Edit** button that sends you t
 
 For more information on contributing, see the [contribution guidelines][18].
 
+>[!NOTE]
+>**AI and content quality**
+>
+>The docs team are huge fans of AI tools like Claude Code and use them to generate content all the time. That said, we will always rely on human review to ensure that the content we publish continues to meet the high standard for quality we set for ourselves. If you submit a large AI-generated PR, remember that it takes time for us to think through how people take in and use information, and plan your timelines accordingly so we can give your PR the attention it deserves.
+
 ## Working on Docs
 
 ### Outside Contributors

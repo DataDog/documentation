@@ -12,7 +12,7 @@ further_reading:
     text: "Learn about Tags in Cloud Cost Management"
   - link: "/cloud_cost_management/cloud_cost_skill/"
     tag: "Documentation"
-    text: "Use Cloud Cost skill in Bits Assistant"
+    text: "Use Cloud Cost skill in Bits Chat"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
@@ -136,9 +136,9 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 
 ## Use AI for cost analysis
 
-Use the [Cloud Cost Skill in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams.
+Use the [Cloud Cost Skill in Bits Chat][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams.
 
-{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Assistant's investigation summary showing an initial analysis." style="width:60%;" >}}
+{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Chat's investigation summary showing an initial analysis." style="width:60%;" >}}
 
 ## Further reading
 

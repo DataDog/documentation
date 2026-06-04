@@ -1,0 +1,21 @@
+{{ $href := .Get "href" }}
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $title := .Get "title" }}
+{{ $subtitle := .Get "subtitle" }}
+{{ $img_width := .Get "image_width" | default (.Parent.Get "image_width") | default "150" }}
+{{ $tooltip := .Get "tooltip" }}
+
+<a class="card-grid-card{{ with $title }} has-title{{ end }}" href="{{ $href }}"{{ with $tooltip }} title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"{{ end }}>
+  <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+    {{ with $src }}
+      {{ partial "img.html" (dict "root" $ "src" . "class" "img-fluid" "alt" $alt "width" $img_width) }}
+    {{ end }}
+    {{ with $title }}
+      {{ if $src }}<p class="card-grid-card-title m-0">{{ . }}</p>{{ else }}<h5 class="m-0">{{ . }}</h5>{{ end }}
+    {{ end }}
+    {{ with $subtitle }}
+      <small>{{ . }}</small>
+    {{ end }}
+  </div>
+</a>
