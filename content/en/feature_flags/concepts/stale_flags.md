@@ -29,7 +29,7 @@ A flag is evaluated for staleness only if it is not archived, not marked as perm
 
 ## View stale flags in the flag list
 
-The [Feature Flags list page][1] shows a {{< ui >}}STALE{{< /ui >}} chip next to each flag that Datadog has identified as stale. Hover the chip to see which signal triggered it.
+The [Feature Flags list page][1] shows a {{< ui >}}STALE{{< /ui >}} chip next to each flag that Datadog has identified as stale. Hover over the chip to see which signal triggered it.
 
 - Use the {{< ui >}}Staleness{{< /ui >}} filter to narrow the list to stale flags only.
 - Filter by team to see the flag debt your team is responsible for.
