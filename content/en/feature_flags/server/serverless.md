@@ -19,7 +19,7 @@ Datadog Feature Flags server SDKs receive flag configuration through [Remote Con
 
 After the SDK receives the payload, flag evaluation happens locally in your application. The SDK does not make a network request to Datadog for each flag evaluation.
 
-Serverless runtimes that cannot run or reach a Datadog Agent do not support Feature Flags server SDK payload delivery. Deeper support for serverless environments is planned for a future release.
+Serverless runtimes that cannot run or reach a Datadog Agent do not support Feature Flags server SDK payload delivery.
 
 ## Recommended architecture
 
@@ -80,7 +80,7 @@ Cloud Run services can use Datadog serverless monitoring instrumentation, includ
 
 ### Google Cloud Run functions and Cloud Functions
 
-Cloud Run functions and Cloud Functions do not support direct Feature Flags server SDK payload delivery. Use a reachable stateful Agent if your networking model allows it, or rely on application defaults until first-class serverless support is available.
+Cloud Run functions and Cloud Functions do not support direct Feature Flags server SDK payload delivery. Use a reachable stateful Agent if your networking model allows it, or rely on application defaults.
 
 ### Azure Functions
 
@@ -98,7 +98,7 @@ Platforms such as Vercel Functions, Netlify Functions, and Cloudflare Workers ge
 
 The public [Feature Flags API][3] is intended for managing flags and environments. It is not a per-request flag evaluation API for server-side applications.
 
-Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK with an Agent-backed Remote Configuration path when available. If no Agent path is available, use application-owned defaults or static configuration until direct serverless support is available. This fallback is outside Remote Configuration delivery and does not provide signed payload validation or live updates.
+Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK with an Agent-backed Remote Configuration path when available. If no Agent path is available, use application-owned defaults or static configuration. This fallback is outside Remote Configuration delivery and does not provide signed payload validation or live updates.
 
 ## Validate the setup
 
