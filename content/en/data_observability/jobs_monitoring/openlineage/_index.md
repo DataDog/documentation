@@ -37,7 +37,7 @@ To also see lineage edges between your job and its datasets, include `inputs` an
 {{< tabs >}}
 {{% tab "Direct HTTP with curl" %}}
 
-Send a raw [OpenLineage RunEvent][1] as JSON to Datadog's intake endpoint.
+Send a raw [OpenLineage RunEvent](https://openlineage.io/docs/spec/run-cycle/) as JSON to Datadog's intake endpoint.
 
 ```shell
 curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
@@ -64,13 +64,12 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
       }'
 ```
 
-[1]: https://openlineage.io/docs/spec/run-cycle/
 
 {{% /tab %}}
 
 {{% tab "OpenLineage Python client (HTTP transport)" %}}
 
-Use the [OpenLineage Python client][1] with a manually specified HTTP transport.
+Use the [OpenLineage Python client](https://openlineage.io/docs/client/python) with a manually specified HTTP transport.
 
 ```python
 from datetime import datetime
@@ -105,13 +104,12 @@ client.emit(RunEvent(
 ))
 ```
 
-[1]: https://openlineage.io/docs/client/python
 
 {{% /tab %}}
 
 {{% tab "OpenLineage Python client (Datadog transport)" %}}
 
-In OpenLineage 1.37.0+, use the [Datadog transport][1] for automatic configuration and optimized event delivery.
+In OpenLineage 1.37.0+, use the [Datadog transport](https://openlineage.io/docs/client/python#datadog-transport) for automatic configuration and optimized event delivery.
 
 ```python
 from datetime import datetime
@@ -159,7 +157,6 @@ export OPENLINEAGE__TRANSPORT__TYPE=datadog
 client = OpenLineageClient.from_environment()
 ```
 
-[1]: https://openlineage.io/docs/client/python#datadog-transport
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -169,7 +166,7 @@ client = OpenLineageClient.from_environment()
 After sending your events, check the following:
 
 - [**Jobs Monitoring**][7]: Your job run appears with start time, duration, and status.
-- [**Lineage graph**][9]: Your job appears as a node connected to the input and output dataset nodes.
+- [**Lineage graph**][9]: If you included `inputs` or `outputs` in your event, your job appears as a node connected to the dataset nodes.
 
 ## Dataset naming conventions
 
