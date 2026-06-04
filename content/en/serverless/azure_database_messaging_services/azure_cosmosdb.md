@@ -14,4 +14,4 @@ Datadog APM uses **inferred spans** to collect traces and trace metrics from Azu
 |---|---|---|---|
 | Python 3.10+ | dd-trace-py v4.8.0 | lambda-python v8.125.0 | azure-cosmos >= 4.9.0 |
 | Node.js | dd-trace-js v5.105.0 | N/A | @azure/cosmos >= 4.4.1 |
-| .NET | dd-trace-dotnet v3.36.0 | N/A (NuGet) | Microsoft.Azure.Cosmos.Client >= 3.12.0 |
+| .NET | dd-trace-dotnet v3.36.0 | N/A | Microsoft.Azure.Cosmos.Client >= 3.12.0 |
