@@ -40,7 +40,7 @@ The [Feature Flags list page][1] shows a {{< ui >}}STALE{{< /ui >}} chip next to
 
 When you open a stale flag, a banner at the top of the flag details page explains why the flag is considered stale and recommends actions to resolve it. The banner highlights one **primary suggestion** based on the highest-confidence signal and the lowest-risk action, and provides additional secondary actions.
 
-{{< img src="feature_flags/stale_flag_banner.png" alt="Stale banner on the feature flag details page with recommended actions" style="width:100%;" >}}
+{{< img src="feature_flags/stale_flag_banner.png" alt="Stale banner on the feature flag details page with recommended actions." style="width:100%;" >}}
 
 ## Manage stale flags
 
