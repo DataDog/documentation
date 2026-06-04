@@ -31,18 +31,18 @@ Before setting up flag evaluation metrics:
 - `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
-| Language | Minimum tracer version |
-|----------|----------------------|
-| .NET | 3.44.0 |
-| Go | 2.8.0 |
-| Java | 1.62.0 |
-| Node.js | 5.99.0 |
-| Python | 4.7.0 |
-| Ruby | 2.32.0 |
-| C++ | Coming soon |
-| PHP | Coming soon |
-| Python Lambdas | Coming soon |
-| Rust | Coming soon |
+| Language       | Minimum tracer version |
+| -------------- | ---------------------- |
+| .NET           | 3.44.0                 |
+| Go             | 2.8.0                  |
+| Java           | 1.62.0                 |
+| Node.js        | 5.99.0                 |
+| Python         | 4.7.0                  |
+| Ruby           | 2.32.0                 |
+| C++            | Coming soon            |
+| PHP            | Coming soon            |
+| Python Lambdas | Coming soon            |
+| Rust           | Coming soon            |
 
 ## Step 1: Enable the Agent OTLP receiver
 
@@ -83,22 +83,19 @@ Replace `<AGENT_HOST>` with the hostname or IP address of your Datadog Agent. In
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
 services:
   datadog-agent:
-    image: gcr.io/datadoghq/agent:latest
     environment:
-      - DD_API_KEY=<YOUR_DATADOG_API_KEY>
       - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
       - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
       - HOST_PROC=/proc  # Required for Agent v7.61.0+ running in Docker
 
-  app:
+  app-go:
     environment:
-      - DD_SERVICE=<YOUR_SERVICE_NAME>
-      - DD_ENV=<YOUR_ENVIRONMENT>
       - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
       - DD_METRICS_OTEL_ENABLED=true
       - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://datadog-agent:4318/v1/metrics
     depends_on:
-      - datadog-agent
+      datadog-agent:
+        condition: service_healthy
 {{< /code-block >}}
 
 ## Step 3: Verify metrics are flowing
@@ -109,7 +106,7 @@ After deploying, confirm metrics are reaching Datadog:
 2. If the metric does not appear within a few minutes of your application evaluating flags, check:
    - The Agent OTLP receiver is enabled and the correct port is exposed.
    - `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` points to the Agent, not a separate collector.
-   - Your application is actively evaluating flags at runtime (the code path is being executed).
+   - Your application is actively evaluating flags via a server sdk at runtime (the code path is being executed).
 
 ## Step 4: Enable metric retention
 
@@ -130,11 +127,12 @@ sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant
 
 The `feature_flag.evaluations` metric is a counter with the following tags:
 
-| Tag | Description |
-|-----|-------------|
-| `feature_flag.key` | The flag key being evaluated |
-| `feature_flag.result.variant` | The variant returned by the evaluation |
-| `feature_flag.result.reason` | The reason for the evaluation result |
+| Tag                                  | Description                            |
+| ------------------------------------ | -------------------------------------- |
+| `feature_flag.key`                   | The flag key being evaluated           |
+| `feature_flag.result.variant`        | The variant returned by the evaluation |
+| `feature_flag.result.reason`         | The reason for the evaluation result   |
+| `feature_flag.result.allocation_key` | The targeting rule id                  |
 
 ## Further reading
 
