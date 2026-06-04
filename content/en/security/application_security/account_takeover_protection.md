@@ -1,6 +1,8 @@
 ---
 title: Account Takeover Protection
 disable_toc: false
+aliases:
+  - /security/account_takeover_protection/
 further_reading:
 - link: "security/application_security/terms/"
   tag: "Documentation"

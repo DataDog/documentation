@@ -7481,31 +7481,26 @@ menu:
       parent: security_platform
       identifier: security_access_control
       weight: 9
-    - name: Account Takeover Protection
-      url: security/account_takeover_protection
-      parent: security_platform
-      identifier: security_ato_protection
-      weight: 10
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 11
+      weight: 10
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 12
+      weight: 11
     - name: Security MCP Tools
       url: security/mcp_server
       parent: security_platform
       identifier: security_mcp_server
-      weight: 13
+      weight: 12
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 14
+      weight: 13
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -8145,11 +8140,16 @@ menu:
       parent: application_security
       identifier: aws_waf_int
       weight: 8
+    - name: Account Takeover Protection
+      url: security/application_security/account_takeover_protection/
+      parent: application_security
+      identifier: security_ato_protection
+      weight: 9
     - name: API Posture
       url: security/application_security/api_posture/
       parent: application_security
       identifier: application_security_api_security
-      weight: 9
+      weight: 10
     - name: API Inventory
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
@@ -8164,12 +8164,12 @@ menu:
       url: security/application_security/guide/
       parent: application_security
       identifier: appsec_guides
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: security/application_security/troubleshooting/
       parent: application_security
       identifier: appsec_troubleshooting
-      weight: 11
+      weight: 12
     - name: AI Guard
       url: /security/ai_guard/
       pre: siem

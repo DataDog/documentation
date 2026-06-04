@@ -1,5 +1,7 @@
 ---
 disable_toc: false
+aliases:
+  - /es/security/account_takeover_protection/
 further_reading:
 - link: security/application_security/terms/
   tag: Documentación
