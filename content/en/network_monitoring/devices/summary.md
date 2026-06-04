@@ -22,7 +22,7 @@ The Network Device Monitoring (NDM) **Summary Page** gives network engineers a s
 
 **Note**: To use the Summary Page, [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
 
-{{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, top issues, interface and device health, traffic, and recent changes." style="width:100%;" >}}
+{{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, interface and device health, traffic, and recent changes." style="width:100%;" >}}
 
 ## Using the Summary Page
 
@@ -35,9 +35,7 @@ The Summary Page is organized into sections that each cover a different aspect o
 | Poor | Critical thresholds have been crossed on multiple devices or interfaces. |
 | Unknown | Not enough data is available to assess health. |
 
-To customize your view, use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`) and the time picker to set the lookback window. The default time range is **Past 1 Hour**.
-
-{{< img src="network_device_monitoring/summary/filter_bar.png" alt="The Summary Page filter bar with dropdowns for namespace, device type, vendor, model, and geolocation, and a time picker." style="width:100%;" >}}
+To customize your view, use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`). The default time range is **Past 2 Hours**.
 
 ### Network health
 
@@ -49,14 +47,6 @@ A Bits AI summary explains the current state of your network. It highlights affe
 
 Below the summary, a status panel shows the total device count broken down by status, the number of active monitor alerts and warnings, and the number of active issues. Click **View Health** to open the [Device Health][5] view.
 
-### Issues
-
-The **Issues** list summarizes active alerts on network resources, grouped to reduce noise. Each issue card shows the affected devices, a description of what was detected, and the blast radius.
-
-Click an issue to open a side panel with a summary of what happened, the affected metric, a proposed fix, and an option to launch a Bits Investigation. For details, see [Device Health][5].
-
-{{< img src="network_device_monitoring/summary/issues-view.png" alt="The Device Health view showing the Open Issues list with a high-severity issue card for a network interface and its dependencies." style="width:100%;" >}}
-
 ### Interface health
 
 The **Interface health** section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed.
@@ -66,6 +56,8 @@ The **Interface health** section ranks the top interfaces operating outside heal
 A Bits AI summary highlights patterns across the affected interfaces, such as multiple interfaces saturating at the same site or correlated error spikes after a configuration change.
 
 Three cards below the list show aggregate health for the fleet: [Bandwidth utilization][6], [Errors][7], and [Discards][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. The Errors and Discards detail views also include an **Ask Bits** button for AI-assisted investigation.
+
+{{< img src="network_device_monitoring/summary/errors-detail.png" alt="The Errors detail view showing inbound and outbound error rate charts, a Bits AI summary, and a table of interfaces with error rate and packet counts." style="width:100%;" >}}
 
 Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click **Open Device Page** in the top-right corner to open the device page, where you can investigate the device in more depth.
 
