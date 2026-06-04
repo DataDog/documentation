@@ -26,7 +26,7 @@ With this view, you can:
 The Homepage aggregates data from your Datadog integrations. To populate the task sections, configure the following integrations and webhooks before using the Homepage:
 
 - **GitHub**: Install and configure the GitHub integration, and set up a GitHub webhook so that repository events (such as pull request activity) reach Datadog in real time. The **GitHub PRs** section requires this webhook to display current pull request data. For setup steps, see [GitHub][1].
-- **Jira**: Configure the Jira integration, and set up a Jira webhook so that issue events reach Datadog. The **Jira issues** section requires this webhook to display your assigned issues. For setup steps, see [Configure a Jira webhook][2].
+- **Jira**: Configure the Jira integration, and set up a Jira webhook so that issue events reach Datadog. The **Jira** tab in the **Your Tickets** section requires this webhook to display your assigned issues. For setup steps, see [Configure a Jira webhook][2].
 
 ## GitHub PRs
 
