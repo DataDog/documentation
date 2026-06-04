@@ -1,1 +1,1 @@
-original-branch-conflicting-line
+clean-final-line
