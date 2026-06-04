@@ -19,7 +19,7 @@ Metric units are displayed in places such as on timeseries graphs, query value w
 
 {{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units" style="width:100%;">}}
 
-On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: k, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
 
 For example, if you have a datapoint that is 3,000,000,000:
 
@@ -56,7 +56,7 @@ The following units may be associated with metrics submitted to Datadog:
 | FREQUENCY   | hertz (Hz) / kilohertz (kHz) / megahertz (MHz) / gigahertz (GHz)                                                                                                                                                                                                                                                           |
 | LOGGING     | entry                                                                                                                                                                                                                                                                                                                      |
 | TEMPERATURE | decidegree celsius (d°C) / degree celsius (°C) / degree fahrenheit (°F)                                                                                                                                                                                                                                                    |
-| CPU         | nanocore (ncores) / microcore (μcores) / millicore (mcores) / core / kilocore (Kcores) / megacore (Mcores) / gigacore (Gcores) / teracore (Tcores) / petacore (Pcores) / exacore (Ecores)                                                                                                                                  |
+| CPU         | nanocore (ncores) / microcore (μcores) / millicore (mcores) / core / kilocore (kcores) / megacore (Mcores) / gigacore (Gcores) / teracore (Tcores) / petacore (Pcores) / exacore (Ecores)                                                                                                                                  |
 | POWER       | nanowatt (nW) / microwatt (μW) / milliwatt (mW) / deciwatt (dW) / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                        |
 | CURRENT     | milliampere (mA) / ampere (A)                                                                                                                                                                                                                                                                                              |
 | POTENTIAL   | millivolt (mV) / volt (V)                                                                                                                                                                                                                                                                                                  |
@@ -67,7 +67,7 @@ The following units may be associated with metrics submitted to Datadog:
 
 ### Unitless formatting
 
-For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
+For unitless metrics, Datadog uses the [SI prefixes][2] `k`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
 
 #### Examples
 
@@ -75,7 +75,7 @@ For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. 
 |------------------------|-----------|
 | 1                      | 1         |
 | 2.7182818284           | 2.72      |
-| 1337                   | 1.34K     |
+| 1337                   | 1.34k     |
 | 31536000               | 31.54M    |
 | 4294967296             | 4.29G     |
 | 18446744073709552000   | 2e19      |
