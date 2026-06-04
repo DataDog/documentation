@@ -102,7 +102,7 @@ After linking your orgs, only the failover org displays this banner:
 
 Go to the [Organization Settings](https://app.datadoghq.com/organization-settings/users) in your DDR org to configure [SAML](https://docs.datadoghq.com/account_management/saml/#overview) or {{< ui >}}Google Login{{< /ui >}} for your users.
 
-Managed sync replicates user accounts from your primary org to your DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) to ensure your users can access the DDR org during a failover without needing to reset their password.
+Managed sync replicates user accounts from your primary org to your DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) so users can access the DDR org during a failover without needing to reset their password.
 
 {{% /collapse-content %}}
 
@@ -110,7 +110,7 @@ Managed sync replicates user accounts from your primary org to your DDR org. Dat
 
 See the [AWS](https://docs.datadoghq.com/integrations/amazon-web-services), [Azure](https://docs.datadoghq.com/integrations/azure), and [Google Cloud](https://docs.datadoghq.com/integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#overview) integrations for setup steps.
 
-Your cloud integrations must be configured in both primary and DDR orgs. Datadog ensures integrations run in only one org at a time: by default in the primary org, and in the DDR org during failover.
+Your cloud integrations must be configured in both primary and DDR orgs, but they run in only one org at a time: by default in the primary org, and in the DDR org during failover.
 
 For more information, see the [Cloud integrations failover](#id-for-cloud) section.
 
@@ -118,13 +118,13 @@ For more information, see the [Cloud integrations failover](#id-for-cloud) secti
 
 {{% collapse-content title="Set up credentials for managed resource sync" level="h5" id="syncing-data" %}}
 
-Datadog manages resource sync on your behalf using the open-source [datadog-sync-cli](https://github.com/DataDog/datadog-sync-cli) tool. You do not need to run or operate this tool yourself.
+Datadog manages resource sync on your behalf using the open source [datadog-sync-cli](https://github.com/DataDog/datadog-sync-cli) tool. You do not need to run or operate this tool yourself.
 
 Managed sync replicates resources from your primary org to your DDR org on a regular schedule. Replicated resources include dashboards, monitors, users, notebooks, and [34+ other resource types](https://github.com/DataDog/datadog-sync-cli#supported-resources). Replication runs on this schedule so your DDR org stays current before an outage.
 
-**Users are scoped to each Datadog site.** Managed sync replicates user accounts to your DDR org. However, users may need to reset their password on first login to the DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) to ensure seamless access without manual password resets.
+**Users are scoped to each Datadog site.** Managed sync replicates user accounts to your DDR org. However, users may need to reset their password on first login to the DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML](https://docs.datadoghq.com/account_management/saml/#just-in-time-jit-provisioning) so users can access the DDR org without manual password resets.
 
-**Managed sync uses a Datadog [service account](https://docs.datadoghq.com/account_management/org_settings/service_accounts/).** During onboarding, you will need to create a service account in your DDR org to read and replicate resources from your primary org. Resources synced by managed sync will be provisioned by a user mapped to their original owner when possible.
+**Managed sync uses a Datadog [service account](https://docs.datadoghq.com/account_management/org_settings/service_accounts/).** During onboarding, create a service account in your DDR org to read and replicate resources from your primary org. Resources synced by managed sync are provisioned by a user mapped to their original owner when possible.
 
 {{% /collapse-content %}}
 
@@ -140,9 +140,8 @@ Datadog strongly recommends using Remote Configuration for better failover contr
 
 {{% collapse-content title="Dual ship telemetry to DDR org during failover or drills" level="h5" %}}
 
-**Dual Shipping is disabled by default**, but you can enable it to support your periodic disaster recovery exercises and drills.
 
-To enable Dual Shipping, Datadog recommends using [Fleet Automation](https://docs.datadoghq.com/agent/fleet_automation/#overview) for easier management and scalability. Alternatively, you can configure it manually by editing your `datadog.yaml` file.
+To enable Dual Shipping, Datadog recommends using [Fleet Automation](https://docs.datadoghq.com/agent/fleet_automation/#overview) for management at scale. Alternatively, you can configure it manually by editing your `datadog.yaml` file.
 
 Contact your Datadog Customer Success Manager to schedule dedicated time windows for failover testing to measure performance and Recovery Time Objective (RTO).
 
@@ -202,7 +201,7 @@ To initiate a DNS failover, contact Datadog through your [Customer Success Manag
 
 {{% /collapse-content %}}
 
-### 3. Test run failover tests in various environments
+### 3. Run failover tests in various environments
 
 {{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
 
