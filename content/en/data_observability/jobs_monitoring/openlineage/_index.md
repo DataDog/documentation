@@ -30,7 +30,9 @@ Custom jobs use the [OpenLineage][1] standard to send job and lineage events to 
 
 Choose a method to send OpenLineage events to Datadog. All examples use the same `runId` UUID throughout the run — generate one and keep it.
 
-**Note**: Datadog requires the `jobType` [Job Facet][5] to process run events. To also see lineage edges between your job and its datasets, include `inputs` and `outputs` in your event. Dataset namespaces must match the format Datadog expects for each platform — see [Dataset naming conventions](#dataset-naming-conventions).
+**Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
+
+To also see lineage edges between your job and its datasets, include `inputs` and `outputs` in your event. Dataset namespaces must match the format Datadog expects for each platform. See [Dataset naming conventions](#dataset-naming-conventions).
 
 {{< tabs >}}
 {{% tab "Direct HTTP with curl" %}}
@@ -148,7 +150,7 @@ client.emit(RunEvent(
 You can also configure the Datadog transport with environment variables instead of `DatadogConfig`:
 
 ```shell
-export DD_API_KEY=<DD_API_KEY>
+export DD_API_KEY=<YOUR_API_KEY>
 export DD_SITE=datadoghq.com
 export OPENLINEAGE__TRANSPORT__TYPE=datadog
 ```
@@ -166,8 +168,8 @@ client = OpenLineageClient.from_environment()
 
 After sending your events, check the following:
 
-- [**Jobs Monitoring**](https://app.datadoghq.com/data-jobs): Your job run appears with start time, duration, and status.
-- [**Lineage graph**](https://app.datadoghq.com/data-obs/lineage): Your job appears as a node connected to the input and output dataset nodes.
+- [**Jobs Monitoring**][7]: Your job run appears with start time, duration, and status.
+- [**Lineage graph**][9]: Your job appears as a node connected to the input and output dataset nodes.
 
 ## Dataset naming conventions
 
@@ -242,4 +244,6 @@ Use `custom` for custom jobs. The values below are used by Datadog's native inte
 [4]: /data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/
 [5]: https://openlineage.io/docs/spec/facets/job-facets/job-type/
 [6]: /account_management/api-app-keys/
+[7]: https://app.datadoghq.com/data-jobs
 [8]: https://openlineage.io/docs/spec/naming/
+[9]: https://app.datadoghq.com/data-obs/lineage
