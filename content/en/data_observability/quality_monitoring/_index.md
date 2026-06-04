@@ -54,6 +54,7 @@ With Quality Monitoring, you can:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Trace lineage from these ELT tools:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/elt/airbyte" >}}Airbyte{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/elt/fivetran" >}}Fivetran{{< /nextlink >}}
 {{< /whatsnext >}}
 
