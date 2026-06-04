@@ -8,7 +8,15 @@ further_reading:
 - link: "logs/archives"
   tag: "Documentation"
   text: "Log Archives documentation"
+- link: "/logs/explorer/archive_search/"
+  tag: "Documentation"
+  text: "Archive Search"
 ---
+
+<div class="alert alert-info">
+<strong>Looking for a faster, more cost-effective way to query archived logs?</strong><br>
+<a href="/logs/explorer/archive_search/">Archive Search</a> is the recommended approach. It streams results in real time directly from your archive — no re-indexing required — and charges only for the data scanned. You can still rehydrate results when you need full platform access or longer retention.
+</div>
 
 ## Overview
 

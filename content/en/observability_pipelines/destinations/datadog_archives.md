@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can [rehydrate][2] these logs later when you want to analyze and investigate them in Datadog.
+Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs directly with [Archive Search][15], or [rehydrate][2] them to re-index into Datadog.
 
 **Note**: Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
 
@@ -195,4 +195,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [12]: /observability_pipelines/destinations/amazon_s3/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /api/latest/observability-pipelines/
+[15]: /logs/explorer/archive_search/
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
