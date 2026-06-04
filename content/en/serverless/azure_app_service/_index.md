@@ -35,7 +35,7 @@ In Datadog, use the [Serverless > Azure][4] page to troubleshoot all your Azure 
 
 ### Azure metrics and logs
 
-Install the [Azure integration][2] for [enriched metrics][3] and resource metadata for Azure App Service. 
+Install the [Azure integration][2] for [enriched metrics][3] and resource metadata for Azure App Service.
 
 Set up [Azure log forwarding][6] to automatically collect and send Azure App Service resource and application logs to Datadog.
 
@@ -70,4 +70,3 @@ Capabilities:
 [8]: /serverless/azure_app_service/linux_container
 [9]: /serverless/azure_app_service/windows_code
 [10]: /extend/dogstatsd/
-
