@@ -1,6 +1,6 @@
 ---
 title: Stale Flags
-description: 'Identify and clean up stale feature flags to reduce flag debt'
+description: 'Identify and clean up stale feature flags to reduce flag debt.'
 further_reading:
     - link: '/feature_flags/concepts/flag_history'
       tag: 'Documentation'
