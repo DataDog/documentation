@@ -18,6 +18,10 @@ further_reading:
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Heatmaps are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-landing.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. There are three different types of heatmaps:
