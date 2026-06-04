@@ -27,8 +27,6 @@ Organization Groups lets administrators manage multiple Datadog organizations as
 
 - **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
 - **Push policies from group to member organizations.** Define custom roles, access policies, and session settings in the parent organization and apply them to child organizations.
-- **Manage users centrally.** Add or remove users across multiple organizations from the parent without per-organization invitations. [coming soon!] 
-- **Configure roles, teams, and Data Access Control policies across organizations.** Define access rules once and apply them across organizations. [coming soon!] 
 
 ## Apply organization groups
 
