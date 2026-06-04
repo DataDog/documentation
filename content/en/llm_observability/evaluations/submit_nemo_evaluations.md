@@ -166,3 +166,4 @@ You can view a breakdown of your NeMo Evaluator's model evaluation results in LL
 
 [1]: /llm_observability/setup/sdk/python
 [2]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html
+[3]: https://docs.nvidia.com/nemo/microservices/latest/evaluator/index.html

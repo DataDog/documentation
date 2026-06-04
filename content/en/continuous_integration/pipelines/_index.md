@@ -29,7 +29,18 @@ cascade:
 
 Select your CI provider to set up CI Visibility in Datadog:
 
-{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="codefresh" >}}
+  {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="github actions" >}}
+  {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="gitlab" >}}
+  {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
+{{< /card-grid >}}
 <br />
 
 {{< whatsnext desc="For customization options, see the following sections:" >}}
@@ -46,6 +57,7 @@ Select your CI provider to set up CI Visibility in Datadog:
 | {{< ci-details title="Logs collection" >}}Retrieval of pipeline or job logs from the CI provider. Logs are displayed on the <strong>Logs</strong> tab in the Pipeline Execution view.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
 | {{< ci-details title="Infrastructure correlation" >}}Correlation of host-level information for the Datadog Agent, CI pipelines, or job runners to CI pipeline execution data.{{< /ci-details >}} |  |  | {{< X >}} |  |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | {{< X >}} | | | | | {{< X >}} | {{< X >}} | {{< X >}} | | {{< X >}} |
+| {{< ci-details title="Running jobs" >}}Identification of job executions that are running with associated tracing.{{< /ci-details >}} |  |  |  |  |  | {{< X >}} | {{< X >}} |  |  |  |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  {{< X >}} |
 | {{< ci-details title="Step granularity" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} |  |  |  |  | {{< X >}} | {{< X >}} |  | {{< X >}} <br /> (_Presented as job spans_) |  |  {{< X >}} |
 | {{< ci-details title="Manual steps" >}}Identification of when there is a job with a manual approval phase in the overall pipeline.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  {{< X >}} |

@@ -179,7 +179,7 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 
 | Variable                 | Description                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][1]. Example: `env:staging,team:data_engineering` |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][1]. For example: `env:staging,team:data_engineering` |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster. |
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][3] for more details. |
 
@@ -243,7 +243,7 @@ This approach is recommended for clusters in **Standard** access mode.
       |--------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------|
       | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
       | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                            | false   |
-      | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics, using comma- or space-separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+      | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
       | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
       | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
@@ -314,7 +314,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
@@ -374,7 +374,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. For example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
@@ -455,6 +455,16 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
 
 {{% djm-runtime-tagging %}}
 
+### Configure cluster tags
+
+Databricks custom cluster tags are automatically captured and available across Data Observability: Jobs Monitoring and the Datadog platform. The only exception is tags from Azure resource groups, which are not auto-captured.
+
+To add tags manually, set the `DD_TAGS` environment variable in the Spark environment variables of your cluster. This has the same effect as Databricks custom cluster tags but requires manual configuration. Use comma or space separated key:value pairs following [Datadog tag conventions][28]:
+
+```text
+DD_TAGS=env:staging,team:data_engineering
+```
+
 ### Aggregate cluster metrics from one-time job runs
    This configuration is applicable if you want cluster resource utilization data about your jobs and create a new job and cluster for each run via the [one-time run API endpoint][8] (common when using orchestration tools outside of Databricks such as Airflow or Azure Data Factory).
 
@@ -521,3 +531,4 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [25]: https://docs.datadoghq.com/api/latest/authentication/?code-lang=curl#validate-api-key
 [26]: https://docs.datadoghq.com/cloud_cost_management
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
+[28]: /getting_started/tagging/

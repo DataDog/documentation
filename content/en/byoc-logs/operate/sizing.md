@@ -18,13 +18,9 @@ further_reading:
 
 {{< jqmath-vanilla >}}
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-Proper cluster sizing helps ensure optimal performance, cost efficiency, and reliability for your BYOC Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention period, and the complexity of your log data.
+Proper cluster sizing helps ensure optimal performance, cost efficiency, and reliability for your BYOC (Bring Your Own Cloud) Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention period, and the complexity of your log data.
 
 The [sizing examples](#sizing-examples) below provide starting-point configurations for common daily log volumes. For deeper guidance on each component, see the sections that follow.
 

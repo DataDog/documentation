@@ -67,7 +67,7 @@ App and API Protection (AAP)
 : - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
-: - Configuration at runtime: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
+: - Configuration at runtime: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
 : - [Remotely set Agent sampling rate][35]: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 [Dynamic Instrumentation][36]
@@ -177,7 +177,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [16]: /remote_configuration
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
-[19]: /tracing/software_catalog/
+[19]: /internal_developer_portal/catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/

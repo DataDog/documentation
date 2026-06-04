@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/install/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-BYOC Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
+BYOC (Bring Your Own Cloud) Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
 
 <div class="alert alert-warning">
 <strong>Docker is for evaluation only.</strong> The Docker installation method is designed for exploring BYOC Logs features locally. For production workloads, deploy on a supported Kubernetes platform.
@@ -28,7 +24,7 @@ If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog acco
 | Requirement            | Details                                                                                  |
 |------------------------|------------------------------------------------------------------------------------------|
 | **Kubernetes Version** | 1.25 or higher                                                                           |
-| **Supported Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (Nginx controller)<br><br>OpenShift and OCI (Oracle Cloud) are not currently tested or supported. |
+| **Supported Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (NGINX Ingress Controller or AWS Load Balancer Controller)<br><br>OpenShift and OCI (Oracle Cloud) are not currently tested or supported. |
 | **Metadata Storage**   | PostgreSQL database                                                                      |
 | **Recommended PostgreSQL Options** | - AWS: RDS PostgreSQL<br>- GCP: Cloud SQL for PostgreSQL<br>- Azure: Azure Database for PostgreSQL<br>- Self-hosted: PostgreSQL with persistent storage |
 
@@ -37,9 +33,6 @@ BYOC Logs supports the following object storage types:
 - Amazon S3
 - Google Cloud Storage (GCS)
 - Azure Blob Storage
-- MinIO
-- Ceph Object Storage
-- Any S3-compatible storage
 
 ## Cloud-managed Kubernetes
 

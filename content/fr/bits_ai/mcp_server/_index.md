@@ -46,7 +46,22 @@ Le [Code Security MCP Server](/security/code_security/dev_tool_int/mcp_server/) 
 
 **Prêt à commencer ?** Sélectionnez votre agent ci-dessous ou consultez [Configurer le serveur MCP de Datadog][27] pour les instructions de connexion.
 
-{{< partial name="mcp_server/mcp_server_agents.html" >}}
+{{< card-grid card_width="90px" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=cursor" src="integrations_logos/cursor_avatar.svg" alt="Cursor" tooltip="Cursor" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=claudecode" src="integrations_logos/claude-code_avatar.svg" alt="Claude Code" tooltip="Claude Code" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=geminicli" src="integrations_logos/google-gemini_avatar.svg" alt="Gemini CLI" tooltip="Gemini CLI" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=vscode" src="integrations_logos/vscode_avatar.svg" alt="VS Code" tooltip="VS Code" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=warp" src="integrations_logos/warp_avatar.png" alt="Warp" tooltip="Warp" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=devin" src="integrations_logos/devin.png" alt="Devin" tooltip="Devin" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=jetbrainsides" src="integrations_logos/jetbrains-ides_avatar.svg" alt="JetBrains" tooltip="JetBrains" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=codex" src="integrations_logos/codex_avatar.svg" alt="Codex CLI" tooltip="Codex CLI" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=claude" src="integrations_logos/claude_app.png" alt="Claude Desktop" tooltip="Claude Desktop" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=goose" src="integrations_logos/goose.svg" alt="Goose" tooltip="Goose" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=opencode" src="integrations_logos/opencode.svg" alt="OpenCode" tooltip="OpenCode" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=vscode" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" tooltip="GitHub Copilot" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" tooltip="Kiro" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=other" src="icons/developers.png" alt="Custom Agent" tooltip="Custom Agent" >}}
+{{< /card-grid >}}
 
 Cette démo montre le serveur MCP de Datadog utilisé dans Cursor et Claude Code (activez le son pour l'audio) :
 
