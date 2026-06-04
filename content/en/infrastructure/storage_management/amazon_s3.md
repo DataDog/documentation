@@ -332,14 +332,17 @@ Seeing recommendations has the following prerequisites:
 
 ## Identify and act on cost savings with Bits Chat
 
-<div class="alert alert-info">Bits Chat for Storage Management is in Preview and is available through Bits Chat. To try this skill, fill out this [Interest Form][10] </div>
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor" >}}
+Bits Chat for Storage Management is in Preview. To try this skill, request access.
+{{< /callout >}} 
 
-FinOps and engineering teams can use Bits Chat and Storage Management to identify personalized S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. Bits Chat helps teams of all backgrounds isolate savings opportunities and take action. To use Bits Chat with Storage Management capability, enable the `storage` skill in the Bits Chat settings.
+
+FinOps and engineering teams can use Bits Chat and Storage Management to identify S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. To use Bits Chat with Storage Management, enable the `storage` skill in the Bits Chat settings.
 
 With the `storage` skill enabled for Bits Chat, you can:
 
 - **Find the biggest savings opportunities**: Ask natural language questions to surface the highest-impact prefixes, storage classes, or buckets where lifecycle changes would reduce costs the most.
-- **Create reports through Notebooks**: Bits Chat generates a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
+- **Create reports through Notebooks**: Generate a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
 - **Implement changes**: Get step-by-step guidance to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
 
 
@@ -349,4 +352,3 @@ With the `storage` skill enabled for Bits Chat, you can:
 [7]: /cloud_cost_management/
 [8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
 [9]: https://app.datadoghq.com/storage-management/settings
-[10]: https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor
