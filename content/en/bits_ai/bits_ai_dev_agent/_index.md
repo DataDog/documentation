@@ -7,7 +7,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
     tag: "Blog"
     text: "Introducing Bits Code for Code Security"
-  - link: "/bits_ai/ai_credits/"
+  - link: "/account_management/billing/ai_credits/"
     tag: "Documentation"
     text: "AI Credits"
 ---
@@ -140,7 +140,7 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
-[16]: /bits_ai/bits_assistant/
+[16]: /bits_ai/bits_chat/
 [17]: /bits_ai/bits_ai_sre/
 [20]: /tracing/
 [21]: /tracing/recommendations/
