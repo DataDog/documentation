@@ -12559,6 +12559,19 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: List LLM Observability experiment events (v2)
+      url: /api/latest/llm-observability/list-llm-observability-experiment-events-v2/
+      identifier: llm-observability-list-llm-observability-experiment-events-v2
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperimentEventsV2
+        unstable:
+          - v2
+        order: 51
     - name: List LLM Observability dataset versions
       url: /api/latest/llm-observability/list-llm-observability-dataset-versions/
       identifier: llm-observability-list-llm-observability-dataset-versions
@@ -12897,6 +12910,19 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: List LLM Observability experiment spans (v1)
+      url: /api/latest/llm-observability/list-llm-observability-experiment-spans-v1/
+      identifier: llm-observability-list-llm-observability-experiment-spans-v1
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperimentEventsV1
+        unstable:
+          - v2
+        order: 50
     - name: Update an LLM Observability experiment
       url: /api/latest/llm-observability/update-an-llm-observability-experiment/
       identifier: llm-observability-update-an-llm-observability-experiment

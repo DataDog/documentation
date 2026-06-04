@@ -2797,6 +2797,10 @@
     "request_description": "Update experiment payload.",
     "request_schema_description": "Request to partially update an LLM Observability experiment."
   },
+  "ListLLMObsExperimentEventsV1": {
+    "description": "Retrieve spans with their evaluation metrics for a given experiment. Returns spans only, with no summary metrics and no pagination. Deprecated in favor of `ListLLMObsExperimentEventsV3`.",
+    "summary": "List LLM Observability experiment spans (v1)"
+  },
   "CreateLLMObsExperimentEvents": {
     "description": "Push spans and metrics for an LLM Observability experiment.",
     "summary": "Push events for an LLM Observability experiment",
@@ -2930,6 +2934,10 @@
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
     "summary": "List LLM Observability dataset versions"
+  },
+  "ListLLMObsExperimentEventsV2": {
+    "description": "Retrieve spans and experiment-level summary metrics for a given experiment. Returns the full events payload without pagination. Deprecated: use `ListLLMObsExperimentEventsV3` instead.",
+    "summary": "List LLM Observability experiment events (v2)"
   },
   "UploadLLMObsDatasetRecordsFile": {
     "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
