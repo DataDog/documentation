@@ -3395,6 +3395,10 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "GetOAuth2WellKnownSites": {
+    "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
+    "summary": "Get OAuth2 well-known sites"
+  },
   "DeleteScopesRestriction": {
     "description": "Delete the scopes restriction configured for the OAuth2 client.",
     "summary": "Delete an OAuth2 client scopes restriction"
@@ -3566,6 +3570,12 @@
   "ListOrgs": {
     "description": "Returns the current organization and its managed organizations in JSON:API format.",
     "summary": "List your managed organizations"
+  },
+  "DisableCustomerOrg": {
+    "description": "Disable the Datadog organization associated with the authenticated user or API key.\nThe request body uses JSON:API format. If `org_uuid` is supplied, it must match\nthe authenticated org or the request is rejected. Successful calls disable the org\nand return the resulting state from the downstream service. Requires the\n`org_management` permission.",
+    "summary": "Disable the authenticated customer organization",
+    "request_description": "",
+    "request_schema_description": "Request payload for disabling the authenticated customer organization."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",

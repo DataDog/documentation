@@ -10310,6 +10310,23 @@ menu:
           - ListContainers
         unstable: []
         order: 1
+    - name: Customer Org
+      url: /api/latest/customer-org/
+      identifier: customer-org
+      generated: true
+    - name: Disable the authenticated customer organization
+      url: /api/latest/customer-org/disable-the-authenticated-customer-organization/
+      identifier: customer-org-disable-the-authenticated-customer-organization
+      parent: customer-org
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DisableCustomerOrg
+        unstable:
+          - v2
+        order: 1
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
@@ -14079,6 +14096,19 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Get OAuth2 well-known sites
+      url: /api/latest/oauth2-client-public/get-oauth2-well-known-sites/
+      identifier: oauth2-client-public-get-oauth2-well-known-sites
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOAuth2WellKnownSites
+        unstable:
+          - v2
+        order: 5
     - name: OCI Integration
       url: /api/latest/oci-integration/
       identifier: oci-integration
