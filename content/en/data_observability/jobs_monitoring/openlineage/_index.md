@@ -24,11 +24,11 @@ Custom jobs use the [OpenLineage][1] standard to send job and lineage events to 
 ## Prerequisites
 
 - A Datadog API key. See [API and Application Keys][6].
-- Your Datadog [site URL][3]. The examples on this page use `datadoghq.com`. Replace the hostname in the examples with the intake endpoint for your site. To find your site, see [Getting started with Datadog sites][3].
+- Your Datadog [site URL][3]. The examples on this page use `datadoghq.com`; replace the hostname with the intake endpoint for your site.
 
 ## Step 1: Send a `START` event
 
-Choose a method to send OpenLineage events to Datadog. All examples use the same `runId` UUID throughout the run—generate one and keep it.
+Choose a method to send OpenLineage events to Datadog. All examples use the same `runId` UUID throughout the run. Generate one and keep it.
 
 **Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
 
@@ -148,7 +148,7 @@ client.emit(RunEvent(
 You can also configure the Datadog transport with environment variables instead of `DatadogConfig`:
 
 ```shell
-export DD_API_KEY=<YOUR_API_KEY>
+export DD_API_KEY=<DD_API_KEY>
 export DD_SITE=datadoghq.com
 export OPENLINEAGE__TRANSPORT__TYPE=datadog
 ```
@@ -187,6 +187,23 @@ Datadog resolves datasets into a hierarchy of account, database, schema, and tab
 
 For platforms not listed here, follow the [OpenLineage naming conventions][8].
 
+The following example shows a job reading from a PostgreSQL table and writing to a Snowflake table:
+
+```json
+"inputs": [
+  {
+    "namespace": "postgres://db.example.com:5432",
+    "name": "mydb.public.raw_orders"
+  }
+],
+"outputs": [
+  {
+    "namespace": "snowflake://myorg-myaccount",
+    "name": "ANALYTICS.PUBLIC.ORDERS"
+  }
+]
+```
+
 **Note**: If a dataset namespace is not recognized, Datadog still creates a lineage node for it but does not surface it in the Data Observability product. Use a recognized namespace format to have datasets appear in the catalog and lineage graph.
 
 ## Supported facets
@@ -199,7 +216,7 @@ The `jobType` job facet is **required**. It determines how Datadog classifies an
 
 #### `integration` values
 
-Use `custom` for custom jobs. The values below are used by Datadog's native integrations—using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
+Use `custom` for custom jobs. The values below are used by Datadog's native integrations. Using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
 
 | Value | Platform |
 |---|---|
@@ -227,10 +244,10 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 
 | Facet | What Datadog does |
 |---|---|
-| parent | Creates parent-child job hierarchy in the lineage graph |
-| errorMessage | Generates error spans with `error.message` and `error.stack` tags |
-| tags | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
-| sql | Parses and masks the SQL query; generates query events |
+| `parent` | Creates parent-child job hierarchy in the lineage graph |
+| `errorMessage` | Generates error spans with `error.message` and `error.stack` tags |
+| `tags` | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
+| `sql` | Parses and masks the SQL query; generates query events |
 
 ## Further reading
 
