@@ -159,7 +159,7 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
      ]
    }
    ```
-     * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
+     * The `GetObject` and `ListBucket` permissions allow for [searching archives][2].
      * The `PutObject` permission is sufficient for uploading archives.
      * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets.
 
@@ -174,17 +174,18 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[2]: /logs/archives/rehydrating/
+[2]: /logs/explorer/archive_search/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Grant the Datadog app permission to write to and rehydrate from your storage account.
+1. Grant the Datadog app permission to write to and [search][2] your storage account.
 2. Select your storage account from the [Storage Accounts page][1], go to {{< ui >}}Access Control (IAM){{< /ui >}}, and select {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
 3. Input the Role called **Storage Blob Data Contributor**, select the Datadog app which you created to integrate with Azure, and save.
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
+[2]: /logs/explorer/archive_search/
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
@@ -298,7 +299,7 @@ To configure compression, select {{< ui >}}Compression Type{{< /ui >}} when crea
 
 You can either select a storage class for your archive or [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] only supports the following storage classes:
+[Archive Search][2] only supports the following storage classes:
 
 * S3 Standard
 * S3 Standard-IA
@@ -306,33 +307,33 @@ You can either select a storage class for your archive or [set a lifecycle confi
 * S3 Glacier Instant Retrieval
 * S3 Intelligent-Tiering, only if [the optional asynchronous archive access tiers][3] are both disabled.
 
-If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
+If your archive uses another storage class, you must first move it to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-[2]: /logs/archives/rehydrating/
+[2]: /logs/explorer/archive_search/
 [3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-Archiving and [Rehydration][1] only supports the following access tiers:
+Archiving and [Archive Search][1] only support the following access tiers:
 
 - Hot access tier
 - Cool access tier
 
-If you wish to rehydrate from archives in another access tier, you must first move them to one of the supported tiers above.
+If your archive uses another access tier, you must first move it to one of the supported tiers above.
 
-[1]: /logs/archives/rehydrating/
+[1]: /logs/explorer/archive_search/
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Archiving and [Rehydration][1] supports the following access tiers:
+Archiving and [Archive Search][1] support the following access tiers:
 
 - Standard
 - Nearline
 - Coldline
 - Archive
 
-[1]: /logs/archives/rehydrating/
+[1]: /logs/explorer/archive_search/
 {{% /tab %}}
 
 {{< /tabs >}}
