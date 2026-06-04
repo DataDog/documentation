@@ -219,7 +219,7 @@ Use `custom` for custom jobs. The values below are used by Datadog's native inte
 
 #### `jobType` values
 
-`JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, or `QUERY`.
+Common values include `JOB`, `TASK`, `DAG`, `MODEL`, and `COMMAND`.
 
 **Note**: If `jobType` is set to `QUERY`, Datadog does not generate lineage nodes for the job.
 
