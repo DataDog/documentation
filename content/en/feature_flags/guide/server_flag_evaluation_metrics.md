@@ -31,18 +31,14 @@ Before setting up flag evaluation metrics:
 - `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
-| Language       | Minimum tracer version |
-| -------------- | ---------------------- |
-| .NET           | 3.44.0                 |
-| Go             | 2.8.0                  |
-| Java           | 1.62.0                 |
-| Node.js        | 5.99.0                 |
-| Python         | 4.7.0                  |
-| Ruby           | 2.32.0                 |
-| C++            | Coming soon            |
-| PHP            | Coming soon            |
-| Python Lambdas | Coming soon            |
-| Rust           | Coming soon            |
+| Language | Minimum tracer version |
+| -------- | ---------------------- |
+| .NET     | 3.44.0                 |
+| Go       | 2.8.0                  |
+| Java     | 1.62.0                 |
+| Node.js  | 5.99.0                 |
+| Python   | 4.7.0                  |
+| Ruby     | 2.32.0                 |
 
 ## Step 1: Enable the Agent OTLP receiver
 

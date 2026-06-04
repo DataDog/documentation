@@ -8,11 +8,17 @@ further_reading:
 - link: "/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/"
   tag: "Documentation"
   text: "Java APM and Distributed Tracing"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 <div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
 
-<div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric emitted by <code>DD_METRICS_OTEL_ENABLED=true</code> is experimental and may change or be removed in a future release. Additional Agent configuration is required to emit this metric. See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a>.</div>
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Overview
 
@@ -124,7 +130,7 @@ Configure your Java application with the required environment variables or syste
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
+# See "Set Up Server-Side Flag Evaluation Metrics" documentation
 
 # Required: Service name
 export DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -144,7 +150,6 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{< code-block lang="bash" >}}
 java -javaagent:path/to/dd-java-agent.jar \
   -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.metrics.otel.enabled=true \
   -Ddd.service=<YOUR_SERVICE_NAME> \
   -Ddd.env=<YOUR_ENVIRONMENT> \
   -Ddd.version=<YOUR_APP_VERSION> \
@@ -163,9 +168,8 @@ The Datadog feature flagging system starts automatically when the tracer is init
 
 For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
-Make sure to include the feature flagging configuration flags:
+Make sure to include the feature flagging configuration flag:
 - `-Ddd.experimental.flagging.provider.enabled=true`
-- `-Ddd.metrics.otel.enabled=true` if you want flag evaluation metrics
 
 ## Initialize the OpenFeature provider
 
@@ -662,7 +666,7 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 #### Flag evaluation metrics
 
-Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set on the tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, verify the setting is enabled and the tracer version supports it.
+Flag evaluation counts appear in Datadog as a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the full setup guide and troubleshooting steps.
 
 #### Experiment exposures
 
