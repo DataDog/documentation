@@ -2409,6 +2409,42 @@ menu:
       url: /api/latest/organizations/
       identifier: organizations
       generated: true
+    - name: Update a SAML configuration
+      url: /api/latest/organizations/update-a-saml-configuration/
+      identifier: organizations-update-a-saml-configuration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSAMLConfiguration
+        unstable: []
+        order: 8
+    - name: Get a SAML configuration
+      url: /api/latest/organizations/get-a-saml-configuration/
+      identifier: organizations-get-a-saml-configuration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSAMLConfiguration
+        unstable: []
+        order: 7
+    - name: List SAML configurations
+      url: /api/latest/organizations/list-saml-configurations/
+      identifier: organizations-list-saml-configurations
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSAMLConfigurations
+        unstable: []
+        order: 6
     - name: Update a specific Org Config
       url: /api/latest/organizations/update-a-specific-org-config/
       identifier: organizations-update-a-specific-org-config
@@ -2445,6 +2481,19 @@ menu:
           - ListOrgConfigs
         unstable: []
         order: 1
+    - name: Update organization SAML preferences
+      url: /api/latest/organizations/update-organization-saml-preferences/
+      identifier: organizations-update-organization-saml-preferences
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgSamlConfigurations
+        unstable:
+          - v2
+        order: 9
     - name: Upload IdP metadata
       url: /api/latest/organizations/upload-idp-metadata/
       identifier: organizations-upload-idp-metadata
