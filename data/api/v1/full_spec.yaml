@@ -13284,13 +13284,16 @@ components:
       type: object
     SLOCorrectionCreateRequest:
       description: |-
-        An object that defines a correction to be applied to an SLO.
+        An object that defines a correction to be applied to one or more SLOs.
       properties:
         data:
           $ref: "#/components/schemas/SLOCorrectionCreateData"
       type: object
     SLOCorrectionCreateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be created.
+      description: |-
+        The attribute object associated with the SLO correction to be created.
+
+        Exactly one of `slo_id` or `slo_query` must be provided.
       properties:
         category:
           $ref: "#/components/schemas/SLOCorrectionCategory"
@@ -13314,8 +13317,15 @@ components:
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
-          description: ID of the SLO that this correction applies to.
+          description: ID of the single SLO that this correction applies to.
           example: sloId
+          type: string
+        slo_query:
+          description: |-
+            Query that matches the SLOs this correction applies to.
+            The query uses the [Events search syntax](https://docs.datadoghq.com/events/explorer/searching/)
+            and can filter SLOs by SLO tags.
+          example: "env:prod service:checkout"
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -13327,7 +13337,6 @@ components:
           example: UTC
           type: string
       required:
-        - slo_id
         - start
         - category
       type: object
@@ -13391,7 +13400,12 @@ components:
           nullable: true
           type: string
         slo_id:
-          description: ID of the SLO that this correction applies to.
+          description: ID of the single SLO that this correction applies to.
+          nullable: true
+          type: string
+        slo_query:
+          description: Query that matches the SLOs this correction applies to.
+          nullable: true
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -13462,6 +13476,13 @@ components:
             The recurrence rules as defined in the iCalendar RFC 5545. The supported rules for SLO corrections
             are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
+        slo_query:
+          description: |-
+            Query that matches the SLOs this correction applies to.
+            The query uses the [Events search syntax](https://docs.datadoghq.com/events/explorer/searching/)
+            and can filter SLOs by SLO tags.
+          example: "env:prod service:checkout"
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -38552,7 +38573,8 @@ paths:
           - slos_read
     post:
       description: |-
-        Create an SLO Correction.
+        Create an SLO correction. Use `slo_id` to apply the correction to a single SLO, or `slo_query` to apply the
+        correction to SLOs that match a query. Exactly one of `slo_id` or `slo_query` is required.
       operationId: CreateSLOCorrection
       requestBody:
         content:
@@ -38566,6 +38588,17 @@ paths:
                       description: "Planned maintenance window for database upgrade."
                       end: 1600003600
                       slo_id: sloId
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
+              slo_query:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Planned maintenance window for checkout services."
+                      end: 1600003600
+                      slo_query: "env:prod service:checkout"
                       start: 1600000000
                       timezone: UTC
                     type: correction
@@ -38728,6 +38761,17 @@ paths:
                       category: "Scheduled Maintenance"
                       description: "Updated correction for maintenance window."
                       end: 1600003600
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
+              slo_query:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Updated correction for checkout services."
+                      end: 1600003600
+                      slo_query: "env:prod service:checkout"
                       start: 1600000000
                       timezone: UTC
                     type: correction
