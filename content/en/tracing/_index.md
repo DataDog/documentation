@@ -25,7 +25,7 @@ further_reading:
     text: "Manage API performance, security, and ownership with Datadog API Catalog"
   - link: "https://www.datadoghq.com/blog/software-catalog/"
     tag: "Blog"
-    text: "Improve developer experience and collaboration with Software Catalog"
+    text: "Improve developer experience and collaboration with Catalog"
   - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
     tag: "Blog"
     text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"

@@ -7,7 +7,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/resource_page/"
@@ -36,7 +36,7 @@ algolia:
 
 ## Overview
 
-Selecting a service on the Software Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
+Selecting a service on the Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
@@ -62,7 +62,7 @@ Service health integrates multiple signals (monitors, incidents, and Watchdog In
 
 Service health is available in several places in Datadog:
 
-1. [Software Catalog][23]
+1. [Catalog][23]
 2. Service pages
 3. Service dependendency maps, if Watchdog detects that an issue spans multiple service dependencies.
 4. Service pills

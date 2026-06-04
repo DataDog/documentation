@@ -33,11 +33,11 @@ Select the [**Autoscaling**][11] tab in the Kubernetes section to view scaling r
 
 ### Kubernetes Remediation
 
-Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits AI Dev Agent][14]. For more information, read the [Bits AI Kubernetes Remediation documentation][15].
+Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits Code][14]. For more information, read the [Bits Remediation documentation][15].
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-remediation/"
  btn_hidden="false" header="Join the Preview!">}}
-Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+Automated fixes from Bits Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 ## Explore Amazon Elastic Container Service (ECS) resources

@@ -6,9 +6,9 @@ aliases:
   - /service_catalog/scorecards/custom_rules
   - /software_catalog/scorecards/custom_rules
 further_reading:
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Software Catalog"
+  text: "Catalog"
 - link: /api/latest/service-scorecards/
   tag: "Documentation" 
   text: "Scorecards API" 
@@ -66,13 +66,13 @@ After creating your custom rule, choose the **Add Workflow** option when prompte
 
 {{% collapse-content title="From scratch" level="h4" expanded=false id="workflow-from-scratch" %}}
 
-{{< img src="/tracing/software_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether an entity has a tier defined in Software Catalog" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether an entity has a tier defined in Catalog" style="width:90%;" >}}
 
 To create a workflow from scratch: 
 
 1. Set a schedule for your workflow to run on.
 1. Click the plus (+) icon to add a step.
-1. Select the [**List entity definitions** action][6] to fetch all defined entities from Software Catalog.
+1. Select the [**List entity definitions** action][6] to fetch all defined entities from Catalog.
 1. Click the plus (+) icon to add a step.
 1. Select the [For loop][7] to iterate over each entity one-by-one.
 1. Select the action needed to fetch your evaluation data (for example: "List monitors" or "Get repository content" from GitHub). 
@@ -123,7 +123,7 @@ You can also link an existing workflow to any custom rule that already generates
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /software_catalog/scorecards/scorecard_configuration/
+[1]: /internal_developer_portal/scorecards/scorecard_configuration/
 [2]: /api/latest/service-scorecards/
 [3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.updateScorecardRuleOutcome
 [4]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
