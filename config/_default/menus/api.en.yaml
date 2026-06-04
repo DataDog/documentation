@@ -11693,6 +11693,214 @@ menu:
       url: /api/latest/incidents/
       identifier: incidents
       generated: true
+    - name: Create a status page email subscription
+      url: '#create-a-status-page-email-subscription'
+      identifier: incidents-create-a-status-page-email-subscription
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatuspageEmailSubscription
+        unstable:
+          - v2
+        order: 92
+    - name: List status page email subscriptions
+      url: '#list-status-page-email-subscriptions'
+      identifier: incidents-list-status-page-email-subscriptions
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStatuspageEmailSubscriptions
+        unstable:
+          - v2
+        order: 93
+    - name: Get status page subscription preferences
+      url: '#get-status-page-subscription-preferences'
+      identifier: incidents-get-status-page-subscription-preferences
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStatuspageSubscriptionPreferences
+        unstable:
+          - v2
+        order: 94
+    - name: Create an incident Zoom meeting
+      url: '#create-an-incident-zoom-meeting'
+      identifier: incidents-create-an-incident-zoom-meeting
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentZoomMeeting
+        unstable:
+          - v2
+        order: 103
+    - name: Get incident timeline entry thread
+      url: '#get-incident-timeline-entry-thread'
+      identifier: incidents-get-incident-timeline-entry-thread
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentTimelineEntryThread
+        unstable:
+          - v2
+        order: 102
+    - name: Update an incident timeline entry
+      url: '#update-an-incident-timeline-entry'
+      identifier: incidents-update-an-incident-timeline-entry
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentTimelineEntry
+        unstable:
+          - v2
+        order: 100
+    - name: Delete an incident timeline entry
+      url: '#delete-an-incident-timeline-entry'
+      identifier: incidents-delete-an-incident-timeline-entry
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentTimelineEntry
+        unstable:
+          - v2
+        order: 101
+    - name: Create an incident timeline entry
+      url: '#create-an-incident-timeline-entry'
+      identifier: incidents-create-an-incident-timeline-entry
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentTimelineEntry
+        unstable:
+          - v2
+        order: 99
+    - name: List incident timeline entries
+      url: '#list-incident-timeline-entries'
+      identifier: incidents-list-incident-timeline-entries
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentTimelineEntries
+        unstable:
+          - v2
+        order: 98
+    - name: Update an incident status page notice
+      url: '#update-an-incident-status-page-notice'
+      identifier: incidents-update-an-incident-status-page-notice
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentStatusPageNotice
+        unstable:
+          - v2
+        order: 91
+    - name: Publish an incident status page notice
+      url: '#publish-an-incident-status-page-notice'
+      identifier: incidents-publish-an-incident-status-page-notice
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentStatusPageNotice
+        unstable:
+          - v2
+        order: 90
+    - name: Get incident status page suggestion
+      url: '#get-incident-status-page-suggestion'
+      identifier: incidents-get-incident-status-page-suggestion
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentStatusPagesSuggestion
+        unstable:
+          - v2
+        order: 95
+    - name: Batch update incident rule execution states
+      url: '#batch-update-incident-rule-execution-states'
+      identifier: incidents-batch-update-incident-rule-execution-states
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchUpdateIncidentRuleExecutionStates
+        unstable:
+          - v2
+        order: 83
+    - name: Batch create incident rule execution states
+      url: '#batch-create-incident-rule-execution-states'
+      identifier: incidents-batch-create-incident-rule-execution-states
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchCreateIncidentRuleExecutionStates
+        unstable:
+          - v2
+        order: 82
+    - name: List incident rule execution states
+      url: '#list-incident-rule-execution-states'
+      identifier: incidents-list-incident-rule-execution-states
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentRuleExecutionStates
+        unstable:
+          - v2
+        order: 81
+    - name: Render an incident template
+      url: '#render-an-incident-template'
+      identifier: incidents-render-an-incident-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RenderIncidentTemplate
+        unstable:
+          - v2
+        order: 97
     - name: Update an incident todo
       url: /api/latest/incidents/update-an-incident-todo/
       identifier: incidents-update-an-incident-todo
@@ -11823,6 +12031,45 @@ menu:
         unstable:
           - v2
         order: 51
+    - name: Get incident page source link
+      url: '#get-incident-page-source-link'
+      identifier: incidents-get-incident-page-source-link
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentPageSourceLink
+        unstable:
+          - v2
+        order: 87
+    - name: Create an incident Microsoft Teams online meeting
+      url: '#create-an-incident-microsoft-teams-online-meeting'
+      identifier: incidents-create-an-incident-microsoft-teams-online-meeting
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentMSTeamsOnlineMeeting
+        unstable:
+          - v2
+        order: 71
+    - name: Create an incident Jira issue
+      url: '#create-an-incident-jira-issue'
+      identifier: incidents-create-an-incident-jira-issue
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentJiraIssue
+        unstable:
+          - v2
+        order: 65
     - name: Delete an incident impact
       url: /api/latest/incidents/delete-an-incident-impact/
       identifier: incidents-delete-an-incident-impact
@@ -11859,6 +12106,123 @@ menu:
           - ListIncidentImpacts
         unstable: []
         order: 7
+    - name: Create an incident Google Meet space
+      url: '#create-an-incident-google-meet-space'
+      identifier: incidents-create-an-incident-google-meet-space
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentGoogleMeetSpace
+        unstable:
+          - v2
+        order: 64
+    - name: Update an incident communication
+      url: '#update-an-incident-communication'
+      identifier: incidents-update-an-incident-communication
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentCommunication
+        unstable:
+          - v2
+        order: 62
+    - name: Get an incident communication
+      url: '#get-an-incident-communication'
+      identifier: incidents-get-an-incident-communication
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentCommunication
+        unstable:
+          - v2
+        order: 61
+    - name: Delete an incident communication
+      url: '#delete-an-incident-communication'
+      identifier: incidents-delete-an-incident-communication
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentCommunication
+        unstable:
+          - v2
+        order: 63
+    - name: Create an incident communication
+      url: '#create-an-incident-communication'
+      identifier: incidents-create-an-incident-communication
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentCommunication
+        unstable:
+          - v2
+        order: 60
+    - name: List incident communications
+      url: '#list-incident-communications'
+      identifier: incidents-list-incident-communications
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentCommunications
+        unstable:
+          - v2
+        order: 59
+    - name: Get incident case source link
+      url: '#get-incident-case-source-link'
+      identifier: incidents-get-incident-case-source-link
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentCaseSourceLink
+        unstable:
+          - v2
+        order: 86
+    - name: Create or update incident automation data
+      url: '#create-or-update-incident-automation-data'
+      identifier: incidents-create-or-update-incident-automation-data
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertIncidentAutomationData
+        unstable:
+          - v2
+        order: 58
+    - name: Get incident automation data
+      url: '#get-incident-automation-data'
+      identifier: incidents-get-incident-automation-data
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentAutomationData
+        unstable:
+          - v2
+        order: 57
     - name: Update incident attachment
       url: /api/latest/incidents/update-incident-attachment/
       identifier: incidents-update-incident-attachment
@@ -11963,6 +12327,58 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Update a Statuspage incident for an incident
+      url: '#update-a-statuspage-incident-for-an-incident'
+      identifier: incidents-update-a-statuspage-incident-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentStatuspageIncident
+        unstable:
+          - v2
+        order: 89
+    - name: Create a Statuspage incident for an incident
+      url: '#create-a-statuspage-incident-for-an-incident'
+      identifier: incidents-create-a-statuspage-incident-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentStatuspageIncident
+        unstable:
+          - v2
+        order: 88
+    - name: Export incidents
+      url: '#export-incidents'
+      identifier: incidents-export-incidents
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportIncidents
+        unstable:
+          - v2
+        order: 85
+    - name: Search incidents
+      url: '#search-incidents'
+      identifier: incidents-search-incidents
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchIncidentsV2
+        unstable:
+          - v2
+        order: 84
     - name: Search for incidents
       url: /api/latest/incidents/search-for-incidents/
       identifier: incidents-search-for-incidents
@@ -11976,6 +12392,71 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Get an incident role assignment
+      url: '#get-an-incident-role-assignment'
+      identifier: incidents-get-an-incident-role-assignment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentRoleAssignment
+        unstable:
+          - v2
+        order: 79
+    - name: Delete an incident role assignment
+      url: '#delete-an-incident-role-assignment'
+      identifier: incidents-delete-an-incident-role-assignment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentRoleAssignment
+        unstable:
+          - v2
+        order: 80
+    - name: Create an incident role assignment
+      url: '#create-an-incident-role-assignment'
+      identifier: incidents-create-an-incident-role-assignment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentRoleAssignment
+        unstable:
+          - v2
+        order: 78
+    - name: Get PagerDuty related incidents
+      url: '#get-pagerduty-related-incidents'
+      identifier: incidents-get-pagerduty-related-incidents
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentPagerdutyRelatedIncidents
+        unstable:
+          - v2
+        order: 74
+    - name: List PagerDuty services
+      url: '#list-pagerduty-services'
+      identifier: incidents-list-pagerduty-services
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentPagerdutyServices
+        unstable:
+          - v2
+        order: 75
     - name: Import an incident
       url: /api/latest/incidents/import-an-incident/
       identifier: incidents-import-an-incident
@@ -11989,6 +12470,32 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident Zoom configuration
+      url: '#update-an-incident-zoom-configuration'
+      identifier: incidents-update-an-incident-zoom-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentZoomConfiguration
+        unstable:
+          - v2
+        order: 105
+    - name: Create an incident Zoom configuration
+      url: '#create-an-incident-zoom-configuration'
+      identifier: incidents-create-an-incident-zoom-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentZoomConfiguration
+        unstable:
+          - v2
+        order: 104
     - name: Update an incident user-defined field
       url: /api/latest/incidents/update-an-incident-user-defined-field/
       identifier: incidents-update-an-incident-user-defined-field
@@ -12119,6 +12626,45 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: List incident template variables
+      url: '#list-incident-template-variables'
+      identifier: incidents-list-incident-template-variables
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentTemplateVariables
+        unstable:
+          - v2
+        order: 96
+    - name: Get an incident reserved role
+      url: '#get-an-incident-reserved-role'
+      identifier: incidents-get-an-incident-reserved-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentReservedRole
+        unstable:
+          - v2
+        order: 77
+    - name: List incident reserved roles
+      url: '#list-incident-reserved-roles'
+      identifier: incidents-list-incident-reserved-roles
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentReservedRoles
+        unstable:
+          - v2
+        order: 76
     - name: Update postmortem template
       url: /api/latest/incidents/update-postmortem-template/
       identifier: incidents-update-postmortem-template
@@ -12262,6 +12808,19 @@ menu:
         unstable:
           - v2
         order: 32
+    - name: Partially update an incident notification rule
+      url: '#partially-update-an-incident-notification-rule'
+      identifier: incidents-partially-update-an-incident-notification-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchIncidentNotificationRule
+        unstable:
+          - v2
+        order: 106
     - name: Get an incident notification rule
       url: /api/latest/incidents/get-an-incident-notification-rule/
       identifier: incidents-get-an-incident-notification-rule
@@ -12314,6 +12873,97 @@ menu:
         unstable:
           - v2
         order: 29
+    - name: Update an incident Microsoft Teams configuration
+      url: '#update-an-incident-microsoft-teams-configuration'
+      identifier: incidents-update-an-incident-microsoft-teams-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentMicrosoftTeamsConfiguration
+        unstable:
+          - v2
+        order: 73
+    - name: Create an incident Microsoft Teams configuration
+      url: '#create-an-incident-microsoft-teams-configuration'
+      identifier: incidents-create-an-incident-microsoft-teams-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentMicrosoftTeamsConfiguration
+        unstable:
+          - v2
+        order: 72
+    - name: Update an incident Jira template
+      url: '#update-an-incident-jira-template'
+      identifier: incidents-update-an-incident-jira-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentJiraTemplate
+        unstable:
+          - v2
+        order: 69
+    - name: Get an incident Jira template
+      url: '#get-an-incident-jira-template'
+      identifier: incidents-get-an-incident-jira-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentJiraTemplate
+        unstable:
+          - v2
+        order: 68
+    - name: Delete an incident Jira template
+      url: '#delete-an-incident-jira-template'
+      identifier: incidents-delete-an-incident-jira-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentJiraTemplate
+        unstable:
+          - v2
+        order: 70
+    - name: Create an incident Jira template
+      url: '#create-an-incident-jira-template'
+      identifier: incidents-create-an-incident-jira-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentJiraTemplate
+        unstable:
+          - v2
+        order: 67
+    - name: List incident Jira templates
+      url: '#list-incident-jira-templates'
+      identifier: incidents-list-incident-jira-templates
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentJiraTemplates
+        unstable:
+          - v2
+        order: 66
     - name: Update global incident settings
       url: /api/latest/incidents/update-global-incident-settings/
       identifier: incidents-update-global-incident-settings

@@ -1884,6 +1884,42 @@
     "request_description": "",
     "request_schema_description": "Request payload for updating global incident settings."
   },
+  "ListIncidentJiraTemplates": {
+    "description": "List all incident Jira templates for the organization.",
+    "summary": "List incident Jira templates"
+  },
+  "CreateIncidentJiraTemplate": {
+    "description": "Create a new incident Jira template for the organization.",
+    "summary": "Create an incident Jira template",
+    "request_description": "",
+    "request_schema_description": "Create or update request for an incident Jira template."
+  },
+  "DeleteIncidentJiraTemplate": {
+    "description": "Delete an incident Jira template by its identifier.",
+    "summary": "Delete an incident Jira template"
+  },
+  "GetIncidentJiraTemplate": {
+    "description": "Get the details of an incident Jira template by its identifier.",
+    "summary": "Get an incident Jira template"
+  },
+  "UpdateIncidentJiraTemplate": {
+    "description": "Update an existing incident Jira template.",
+    "summary": "Update an incident Jira template",
+    "request_description": "",
+    "request_schema_description": "Create or update request for an incident Jira template."
+  },
+  "CreateIncidentMicrosoftTeamsConfiguration": {
+    "description": "Create a Microsoft Teams configuration for incidents.",
+    "summary": "Create an incident Microsoft Teams configuration",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a Microsoft Teams configuration."
+  },
+  "UpdateIncidentMicrosoftTeamsConfiguration": {
+    "description": "Update a Microsoft Teams configuration for incidents.",
+    "summary": "Update an incident Microsoft Teams configuration",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a Microsoft Teams configuration."
+  },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
     "summary": "List incident notification rules"
@@ -1901,6 +1937,12 @@
   "GetIncidentNotificationRule": {
     "description": "Retrieves a specific notification rule by its ID.",
     "summary": "Get an incident notification rule"
+  },
+  "PatchIncidentNotificationRule": {
+    "description": "Partially updates an existing notification rule.",
+    "summary": "Partially update an incident notification rule",
+    "request_description": "",
+    "request_schema_description": "Put request for a notification rule."
   },
   "UpdateIncidentNotificationRule": {
     "description": "Updates an existing notification rule with a complete replacement.",
@@ -1956,6 +1998,18 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a postmortem template."
   },
+  "ListIncidentReservedRoles": {
+    "description": "List all reserved roles for incidents.",
+    "summary": "List incident reserved roles"
+  },
+  "GetIncidentReservedRole": {
+    "description": "Get the details of a reserved role by its identifier.",
+    "summary": "Get an incident reserved role"
+  },
+  "ListIncidentTemplateVariables": {
+    "description": "List all available template variables for incident templates.",
+    "summary": "List incident template variables"
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -2004,15 +2058,71 @@
     "request_description": "Incident user-defined field update payload.",
     "request_schema_description": "Request body for updating an incident user-defined field."
   },
+  "CreateIncidentZoomConfiguration": {
+    "description": "Create a Zoom configuration for incidents.",
+    "summary": "Create an incident Zoom configuration",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a Zoom configuration."
+  },
+  "UpdateIncidentZoomConfiguration": {
+    "description": "Update a Zoom configuration for incidents.",
+    "summary": "Update an incident Zoom configuration",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a Zoom configuration."
+  },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
     "summary": "Import an incident",
     "request_description": "Incident import payload.",
     "request_schema_description": "Import request for an incident. Used to import historical incidents from external systems."
   },
+  "ListIncidentPagerdutyServices": {
+    "description": "List all PagerDuty services configured for the organization.",
+    "summary": "List PagerDuty services"
+  },
+  "GetIncidentPagerdutyRelatedIncidents": {
+    "description": "Get the list of Datadog incidents attached to a PagerDuty incident.",
+    "summary": "Get PagerDuty related incidents"
+  },
+  "CreateIncidentRoleAssignment": {
+    "description": "Create a new role assignment for an incident.",
+    "summary": "Create an incident role assignment",
+    "request_description": "",
+    "request_schema_description": "Request to create a role assignment."
+  },
+  "DeleteIncidentRoleAssignment": {
+    "description": "Delete a role assignment by its identifier.",
+    "summary": "Delete an incident role assignment"
+  },
+  "GetIncidentRoleAssignment": {
+    "description": "Get the details of a role assignment by its identifier.",
+    "summary": "Get an incident role assignment"
+  },
   "SearchIncidents": {
     "description": "Search for incidents matching a certain query.",
     "summary": "Search for incidents"
+  },
+  "SearchIncidentsV2": {
+    "description": "Search for incidents using advanced filtering and pagination.",
+    "summary": "Search incidents"
+  },
+  "ExportIncidents": {
+    "description": "Export incidents matching a search query as a CSV file.",
+    "summary": "Export incidents",
+    "request_description": "",
+    "request_schema_description": "Request to export incidents as CSV."
+  },
+  "CreateIncidentStatuspageIncident": {
+    "description": "Create a Statuspage incident linked to a Datadog incident.",
+    "summary": "Create a Statuspage incident for an incident",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a Statuspage incident."
+  },
+  "UpdateIncidentStatuspageIncident": {
+    "description": "Update a Statuspage incident linked to a Datadog incident.",
+    "summary": "Update a Statuspage incident for an incident",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a Statuspage incident."
   },
   "DeleteIncident": {
     "description": "Deletes an existing incident from the users organization.",
@@ -2052,6 +2162,48 @@
     "request_description": "",
     "request_schema_description": "Request to update an attachment."
   },
+  "GetIncidentAutomationData": {
+    "description": "Get automation data for a given incident and key.",
+    "summary": "Get incident automation data"
+  },
+  "UpsertIncidentAutomationData": {
+    "description": "Create or update automation data for a given incident and key.",
+    "summary": "Create or update incident automation data",
+    "request_description": "",
+    "request_schema_description": "Request to upsert automation data."
+  },
+  "GetIncidentCaseSourceLink": {
+    "description": "Get the source link for a case associated with an incident.",
+    "summary": "Get incident case source link"
+  },
+  "ListIncidentCommunications": {
+    "description": "List all communications for a given incident.",
+    "summary": "List incident communications"
+  },
+  "CreateIncidentCommunication": {
+    "description": "Create a new communication for a given incident.",
+    "summary": "Create an incident communication",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a communication."
+  },
+  "DeleteIncidentCommunication": {
+    "description": "Delete a communication for a given incident.",
+    "summary": "Delete an incident communication"
+  },
+  "GetIncidentCommunication": {
+    "description": "Get the details of a communication for a given incident.",
+    "summary": "Get an incident communication"
+  },
+  "UpdateIncidentCommunication": {
+    "description": "Update a communication for a given incident.",
+    "summary": "Update an incident communication",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a communication."
+  },
+  "CreateIncidentGoogleMeetSpace": {
+    "description": "Create a Google Meet space for a given incident.",
+    "summary": "Create an incident Google Meet space"
+  },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
     "summary": "List an incident's impacts"
@@ -2065,6 +2217,20 @@
   "DeleteIncidentImpact": {
     "description": "Delete an incident impact.",
     "summary": "Delete an incident impact"
+  },
+  "CreateIncidentJiraIssue": {
+    "description": "Create a Jira issue linked to a given incident.",
+    "summary": "Create an incident Jira issue",
+    "request_description": "",
+    "request_schema_description": "Request to create a Jira issue from an incident."
+  },
+  "CreateIncidentMSTeamsOnlineMeeting": {
+    "description": "Create a Microsoft Teams online meeting for a given incident.",
+    "summary": "Create an incident Microsoft Teams online meeting"
+  },
+  "GetIncidentPageSourceLink": {
+    "description": "Get the source link for a page associated with an incident.",
+    "summary": "Get incident page source link"
   },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
@@ -2113,6 +2279,74 @@
     "summary": "Update an incident todo",
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
+  },
+  "RenderIncidentTemplate": {
+    "description": "Render a template with incident-specific data.",
+    "summary": "Render an incident template",
+    "request_description": "",
+    "request_schema_description": "Request to render a template."
+  },
+  "ListIncidentRuleExecutionStates": {
+    "description": "List all rule execution states for a given incident.",
+    "summary": "List incident rule execution states"
+  },
+  "BatchCreateIncidentRuleExecutionStates": {
+    "description": "Batch create rule execution states for a given incident.",
+    "summary": "Batch create incident rule execution states",
+    "request_description": "",
+    "request_schema_description": "Request to batch create rule execution states."
+  },
+  "BatchUpdateIncidentRuleExecutionStates": {
+    "description": "Batch update rule execution states for a given incident.",
+    "summary": "Batch update incident rule execution states",
+    "request_description": "",
+    "request_schema_description": "Request to batch update rule execution states."
+  },
+  "GetIncidentStatusPagesSuggestion": {
+    "description": "Get an AI-generated suggestion for a status page notice for a given incident.",
+    "summary": "Get incident status page suggestion"
+  },
+  "CreateIncidentStatusPageNotice": {
+    "description": "Publish a status page notice for a given incident.",
+    "summary": "Publish an incident status page notice",
+    "request_description": "",
+    "request_schema_description": "Request to publish a status page notice."
+  },
+  "UpdateIncidentStatusPageNotice": {
+    "description": "Update a status page notice for a given incident.",
+    "summary": "Update an incident status page notice",
+    "request_description": "",
+    "request_schema_description": "Request to update a status page notice."
+  },
+  "ListIncidentTimelineEntries": {
+    "description": "Get the timeline for a given incident.",
+    "summary": "List incident timeline entries"
+  },
+  "CreateIncidentTimelineEntry": {
+    "description": "Create a new timeline entry for a given incident.",
+    "summary": "Create an incident timeline entry",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a timeline entry."
+  },
+  "DeleteIncidentTimelineEntry": {
+    "description": "Delete a timeline entry for a given incident.",
+    "summary": "Delete an incident timeline entry"
+  },
+  "UpdateIncidentTimelineEntry": {
+    "description": "Update a timeline entry for a given incident.",
+    "summary": "Update an incident timeline entry",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a timeline entry."
+  },
+  "GetIncidentTimelineEntryThread": {
+    "description": "Get the thread entries for a given timeline entry.",
+    "summary": "Get incident timeline entry thread"
+  },
+  "CreateIncidentZoomMeeting": {
+    "description": "Create a Zoom meeting for a given incident.",
+    "summary": "Create an incident Zoom meeting",
+    "request_description": "",
+    "request_schema_description": "Request to create a Zoom meeting for an incident."
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -5524,6 +5758,10 @@
     "description": "Lists all maintenances for the organization. Optionally filter by status and page.",
     "summary": "List maintenances"
   },
+  "GetStatuspageSubscriptionPreferences": {
+    "description": "Get the subscription preferences for the current user.",
+    "summary": "Get status page subscription preferences"
+  },
   "DeleteStatusPage": {
     "description": "Deletes a status page by its ID.",
     "summary": "Delete status page"
@@ -5613,6 +5851,16 @@
   "PublishStatusPage": {
     "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.",
     "summary": "Publish status page"
+  },
+  "ListStatuspageEmailSubscriptions": {
+    "description": "List all email subscriptions for a status page.",
+    "summary": "List status page email subscriptions"
+  },
+  "CreateStatuspageEmailSubscription": {
+    "description": "Create an email subscription for a status page.",
+    "summary": "Create a status page email subscription",
+    "request_description": "",
+    "request_schema_description": "Request to create an email subscription."
   },
   "UnpublishStatusPage": {
     "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
