@@ -46,9 +46,17 @@ To configure telemetry tagging, see [Tag your APM telemetry with Git information
 You can also configure service-to-repository mapping manually in Bits Code settings under [{{< ui >}}Repositories{{< /ui >}}][5] > {{< ui >}}Service Repository Mapping{{< /ui >}}.
 
 ### Enable auto-push
-To enable auto-push, so Bits Code can push commits directly to a branch, navigate to **Bits Code** > **Settings** > [**General**][6] , and set the toggle to **Enable**.
 
-**Note**: If auto-push is disabled, you must review and approve code in Datadog before Bits Code can push it.
+Auto-push allows Bits Code to create branches, push code, and open PRs when it detects something it can help you with. Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
+
+To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
+
+
+#### Security considerations
+
+Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data Bits Code works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
+
+To balance safety and automation, you can configure auto-push behavior in [Datadog][14] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
 
 ### Configure custom instructions
 
