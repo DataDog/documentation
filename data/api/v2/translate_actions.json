@@ -3395,6 +3395,10 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "GetOAuth2WellKnownSites": {
+    "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
+    "summary": "Get OAuth2 well-known sites"
+  },
   "DeleteScopesRestriction": {
     "description": "Delete the scopes restriction configured for the OAuth2 client.",
     "summary": "Delete an OAuth2 client scopes restriction"

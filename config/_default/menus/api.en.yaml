@@ -2572,10 +2572,6 @@ menu:
           - CreatePagerDutyIntegrationService
         unstable: []
         order: 1
-    - name: Screenboards
-      url: /api/latest/screenboards/
-      identifier: screenboards
-      generated: true
     - name: Security Monitoring
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
@@ -5536,10 +5532,6 @@ menu:
           - ListHostTags
         unstable: []
         order: 1
-    - name: Timeboards
-      url: /api/latest/timeboards/
-      identifier: timeboards
-      generated: true
     - name: Usage Metering
       url: /api/latest/usage-metering/
       identifier: usage-metering
@@ -14087,6 +14079,19 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: Get OAuth2 well-known sites
+      url: /api/latest/oauth2-client-public/get-oauth2-well-known-sites/
+      identifier: oauth2-client-public-get-oauth2-well-known-sites
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOAuth2WellKnownSites
+        unstable:
+          - v2
+        order: 5
     - name: OCI Integration
       url: /api/latest/oci-integration/
       identifier: oci-integration
