@@ -1,5 +1,7 @@
 ---
-title: Bits AI Security Analyst
+title: Bits Security Analyst
+aliases:
+  - /bits_ai/bits_ai_security_analyst
 further_reading:
   - link: https://www.datadoghq.com/blog/bits-ai-security-analyst/
     tag: Blog
@@ -11,19 +13,19 @@ further_reading:
 
 ## Overview
 
-Bits AI Security Analyst is an autonomous AI agent that investigates Cloud SIEM signals end to end. It queries security signals and logs, and uses data-based reasoning to help security engineers investigate threat alerts and make a recommendation on the verdict of each alert signal. By reducing manual effort and analyst fatigue, Bits AI Security Analyst makes security operations smoother and more efficient.
+Bits Security Analyst is an autonomous AI agent that investigates Cloud SIEM signals end to end. It queries security signals and logs, and uses data-based reasoning to help security engineers investigate threat alerts and make a recommendation on the verdict of each alert signal. By reducing manual effort and analyst fatigue, Bits Security Analyst makes security operations smoother and more efficient.
 
 ### Key capabilities
 
-Bits AI Security Analyst investigations are autonomous. If a detection rule is enabled, Bits AI autonomously investigates signals associated with it.
+Bits Security Analyst investigations are autonomous. If a detection rule is enabled, Bits AI autonomously investigates signals associated with it.
 
-In the [Cloud SIEM Signals Explorer][5], you can click the {{< ui >}}Bits AI Security Analyst{{< /ui >}} tab to only show signals that Bits AI investigated. In the Severity column, a Bits AI status displays as Investigating, until marking the signal as either Benign or Suspicious.
+In the [Cloud SIEM Signals Explorer][5], you can click the {{< ui >}}Bits Security Analyst{{< /ui >}} tab to only show signals that Bits AI investigated. In the Severity column, a Bits AI status displays as Investigating, until marking the signal as either Benign or Suspicious.
 
-{{< img src="bits_ai/bits_ai_security_analyst_signals_explorer.png" alt="The Cloud SIEM signals explorer, on the Bits AI Security Analyst tab" style="width:100%;" >}}
+{{< img src="bits_ai/bits_security_analyst_signals_explorer.png" alt="The Cloud SIEM signals explorer, on the Bits Security Analyst tab" style="width:100%;" >}}
 
 When you click a row with a Bits AI investigation, the Bits AI Investigation side panel opens:
 
-{{< img src="bits_ai/bits_ai_security_analyst_example.png" alt="Bits AI Security Analyst example detection, titled 'Okta phishing detection with FastPass origin check'." style="width:100%;" >}}
+{{< img src="bits_ai/bits_security_analyst_example.png" alt="Bits Security Analyst example detection, titled 'Okta phishing detection with FastPass origin check'." style="width:100%;" >}}
 
 In the side panel, you can see Bits AI's investigative findings, including:
 - Overall conclusion
@@ -59,26 +61,26 @@ Bits AI can run investigations on the following Security log sources:
 - SentinelOne
 - Email phishing
 
-## Set up Bits AI Security Analyst
+## Set up Bits Security Analyst
 
 ### Prerequisites
 
-To use Bits AI Security Analyst:
+To use Bits Security Analyst:
 - Ensure your organization is using a non-legacy version of Cloud SIEM. If you need assistance, contact [Datadog support][1].
-- To set up Bits AI Security Analyst, you need the **Bits AI Security Analyst Config Write** [permission][2].
-- To view investigations, you must have **14 days or more** of log history. If you have a shorter log history, you can still set up Bits AI Security Analyst, but won't see any investigations until you have that much history.
+- To set up Bits Security Analyst, you need the **Bits Security Analyst Config Write** [permission][2].
+- To view investigations, you must have **14 days or more** of log history. If you have a shorter log history, you can still set up Bits Security Analyst, but won't see any investigations until you have that much history.
 
 ### Setup
 
-When you enable Bits AI Security Analyst, Datadog analyzes your rules, including custom rules, to determine whether it can confidently investigate signals associated with them. For all eligible rules above medium severity, it starts autonomously investigating signals. 
+When you enable Bits Security Analyst, Datadog analyzes your rules, including custom rules, to determine whether it can confidently investigate signals associated with them. For all eligible rules above medium severity, it starts autonomously investigating signals. 
 
 Rule eligibility depends on whether Datadog has built the investigation capability for the log source, and whether the Agent is able to investigate the specific rule. If you have new custom rules to evaluate, or want to ask about a rule that wasn't made eligible, contact [Datadog support][1].
 
-1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits AI Security Analyst{{< /ui >}}][3].
-1. Turn on the toggle to enable Bits AI Security Analyst. Additional settings appear.
-1. (Optional) Configure which rules and which severities you want Bits AI Security Analyst to automatically investigate signals for. There are two ways to do so:
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits Security Analyst{{< /ui >}}][3].
+1. Turn on the toggle to {{< ui >}}Enable Bits Security Analyst{{< /ui >}}. Additional settings appear.
+1. (Optional) Configure which rules and which severities you want Bits Security Analyst to automatically investigate signals for. There are two ways to do so:
    - Click {{< ui >}}Rule Settings{{< /ui >}} to configure investigations for individual rules. You can change the minimum severity for signals to be investigated, and enable or disable individual rules for investigation.
-   - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so Bits AI Security Analyst only investigates signals that match your filter.
+   - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so Bits Security Analyst only investigates signals that match your filter.
 1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click {{< ui >}}Edit credentials{{< /ui >}}. In the {{< ui >}}Select or Add Connection{{< /ui >}} window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
    - Some log sources require additional setup so you can create HTTP connections. Here's an example:
      {{< collapse-content title="Configure SentinelOne" level="h4" expanded=false id="sentinelone" >}}
@@ -96,11 +98,11 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
      </ol>
      {{< /collapse-content >}}
 
-## Disable Bits AI Security Analyst
+## Disable Bits Security Analyst
 
-1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits AI Security Analyst{{< /ui >}}][3].
-1. Scroll to the bottom of the page. Under {{< ui >}}Disable Bits AI Security Analyst{{< /ui >}}, turn off the {{< ui >}}Enabled{{< /ui >}} toggle.
-   <div class="alert alert-warning">Disabling Bits AI Security Analyst permanently resets all configuration settings.</div>
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits Security Analyst{{< /ui >}}][3].
+1. Scroll to the bottom of the page. Under {{< ui >}}Disable Bits Security Analyst{{< /ui >}}, turn off the {{< ui >}}Enabled{{< /ui >}} toggle.
+   <div class="alert alert-warning">Disabling Bits Security Analyst permanently resets all configuration settings.</div>
 
 ## Further reading
 

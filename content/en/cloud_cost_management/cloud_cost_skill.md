@@ -5,7 +5,7 @@ algolia:
   tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits ai assistant", "bits assistant", "mcp"]
   rank: 75
 further_reading:
-- link: "/bits_ai/bits_assistant/"
+- link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
 - link: "/mcp_server/"
@@ -122,7 +122,7 @@ For connection instructions, supported clients, and toolset configuration, see [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_assistant/
+[1]: /bits_ai/bits_chat/
 [2]: https://app.datadoghq.com/cost/monitor/monitors
 [3]: https://app.datadoghq.com/cost/monitor/anomalies
 [4]: https://app.datadoghq.com/cost/summarize/overview

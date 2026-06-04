@@ -2797,6 +2797,10 @@
     "request_description": "Update experiment payload.",
     "request_schema_description": "Request to partially update an LLM Observability experiment."
   },
+  "ListLLMObsExperimentEventsV1": {
+    "description": "Retrieve spans with their evaluation metrics for a given experiment. Returns spans only, with no summary metrics and no pagination. Deprecated in favor of `ListLLMObsExperimentEventsV3`.",
+    "summary": "List LLM Observability experiment spans (v1)"
+  },
   "CreateLLMObsExperimentEvents": {
     "description": "Push spans and metrics for an LLM Observability experiment.",
     "summary": "Push events for an LLM Observability experiment",
@@ -2930,6 +2934,10 @@
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
     "summary": "List LLM Observability dataset versions"
+  },
+  "ListLLMObsExperimentEventsV2": {
+    "description": "Retrieve spans and experiment-level summary metrics for a given experiment. Returns the full events payload without pagination. Deprecated: use `ListLLMObsExperimentEventsV3` instead.",
+    "summary": "List LLM Observability experiment events (v2)"
   },
   "UploadLLMObsDatasetRecordsFile": {
     "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
@@ -3387,6 +3395,10 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "GetOAuth2WellKnownSites": {
+    "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
+    "summary": "Get OAuth2 well-known sites"
+  },
   "DeleteScopesRestriction": {
     "description": "Delete the scopes restriction configured for the OAuth2 client.",
     "summary": "Delete an OAuth2 client scopes restriction"
@@ -3558,6 +3570,12 @@
   "ListOrgs": {
     "description": "Returns the current organization and its managed organizations in JSON:API format.",
     "summary": "List your managed organizations"
+  },
+  "DisableCustomerOrg": {
+    "description": "Disable the Datadog organization associated with the authenticated user or API key.\nThe request body uses JSON:API format. If `org_uuid` is supplied, it must match\nthe authenticated org or the request is rejected. Successful calls disable the org\nand return the resulting state from the downstream service. Requires the\n`org_management` permission.",
+    "summary": "Disable the authenticated customer organization",
+    "request_description": "",
+    "request_schema_description": "Request payload for disabling the authenticated customer organization."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -5254,6 +5272,28 @@
   "GetSloStatus": {
     "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
     "summary": "Get SLO status"
+  },
+  "DeleteSourcemaps": {
+    "description": "Deletes source maps matching the specified filter criteria. Supports\ndry-run mode to preview which source maps would be deleted without\nperforming the actual deletion.",
+    "summary": "Delete source maps"
+  },
+  "GetSourcemaps": {
+    "description": "Retrieves the content of a specific JavaScript source map file by its\nfilename, service name, and version.",
+    "summary": "Get a JavaScript source map"
+  },
+  "ListSourcemaps": {
+    "description": "Retrieves a paginated list of source maps matching the specified filter criteria.",
+    "summary": "List source maps"
+  },
+  "RestoreSourcemaps": {
+    "description": "Restores previously deleted source maps matching the specified filter\ncriteria. Supports dry-run mode to preview which source maps would be\nrestored without performing the actual restoration.",
+    "summary": "Restore source maps"
+  },
+  "GetServiceRepositoryInfo": {
+    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "summary": "Get service repository information",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving service repository information."
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",

@@ -660,8 +660,9 @@ Each status tab displays the total estimated savings for recommendations in that
 
 ### Change a recommendation status
 
-You can change a recommendation status in two ways:
+You can change a recommendation status in three ways:
 
+- **Bulk update**: Select one or more recommendations in {{< ui >}}Active Recommendations{{< /ui >}}, then choose a status from the toolbar above the table to apply it to all selected recommendations.
 - **From the table**: Use the status dropdown in the {{< ui >}}Status{{< /ui >}} column to select a new status directly from the recommendation list.
 - **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
