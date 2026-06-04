@@ -26,9 +26,9 @@ Custom jobs use the [OpenLineage][1] standard to send job and lineage events to 
 - A Datadog API key. See [API and Application Keys][6].
 - Your Datadog [site URL][3]. The examples on this page use `datadoghq.com`.
 
-## Step 1: Send a START event
+## Step 1: Send a `START` event
 
-Choose a method to send OpenLineage events to Datadog. All examples use the same `runId` UUID throughout the run — generate one and keep it.
+Choose a method to send OpenLineage events to Datadog. All examples use the same `runId` UUID throughout the run—generate one and keep it.
 
 **Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
 
@@ -196,18 +196,18 @@ For platforms not listed here, follow the [OpenLineage naming conventions][8].
 
 Facets are structured metadata attached to OpenLineage events. Each facet requires `_producer` (a URI identifying the system that produced it) and `_schemaURL` (a URI referencing its JSON schema).
 
-### JobTypeJobFacet
+### `JobTypeJobFacet`
 
 The `jobType` job facet is **required**. It determines how Datadog classifies and displays the job.
 
 #### `integration` values
 
-Use `custom` for custom jobs. The values below are used by Datadog's native integrations — using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
+Use `custom` for custom jobs. The values below are used by Datadog's native integrations—using them for custom jobs may produce unexpected behavior. In particular, `SPARK` prevents span generation.
 
 | Value | Platform |
 |---|---|
 | `custom` | Custom or unsupported platforms |
-| `SPARK` | Apache Spark (native integration only — do not use for custom jobs) |
+| `SPARK` | Apache Spark (native integration only—do not use for custom jobs) |
 | `AIRFLOW` | Apache Airflow |
 | `DBT` | dbt |
 | `BIGQUERY` | Google BigQuery |
