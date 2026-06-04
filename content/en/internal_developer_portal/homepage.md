@@ -58,7 +58,7 @@ In addition to these permissions, the **GitHub PRs** section requires a configur
 
 If you have multiple GitHub orgs connected within Datadog, users must have the Datadog Integrations Read Permissions to toggle between orgs.
 
-## Your Tickets section
+## Your tickets
 
 {{< img src="tracing/software_catalog/homepage_tickets.png" alt="IDP Homepage showing a personalized view of GitHub pull requests awaiting review and Jira tickets" style="width:100%;" >}} 
 
