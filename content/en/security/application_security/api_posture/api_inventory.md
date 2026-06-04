@@ -96,7 +96,7 @@ The following data sources are explored.
 
 #### Amazon API Gateway
 
-<div class="alert alert-info">To disable this integration for a specific API, add the <code>dd_skip_endpoint:true</code> tag to the resource</div>
+<div class="alert alert-info">To disable this integration for a specific API, add the <code>dd_skip_endpoint:true</code> tag to the resource.</div>
 
 The Amazon API Gateway service formally defines your API structure. Datadog AWS integration reads this pre-defined configuration from the Amazon API Gateway, and then Datadog uses this configuration to create API endpoint entries in **Inventory**.
 
