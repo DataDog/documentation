@@ -19,7 +19,7 @@ Datadog Feature Flags provides graphs at two levels: the flags list page gives a
 
 ## Flags list page
 
-The flags list page shows a summary row for each flag, including evaluation sparklines and counts that let you quickly assess activity across your flag inventory without opening each flag individually.
+The flags list page shows a summary row for each flag, including evaluation sparklines and counts that let you assess activity across your flag inventory without opening each flag individually.
 
 {{< img src="feature_flags/flag_graphs/flags_list.png" alt="Feature flags list page showing evaluation counts and sparklines per flag" style="width:100%;" >}}
 
@@ -49,7 +49,7 @@ Raw total count of server-side flag evaluations, split by variant.
 
 {{< img src="feature_flags/flag_graphs/server_evaluations.png" alt="Server evaluations graph split by variant" style="width:100%;" >}}
 
-Use this graph to track overall server-side evaluation volume and compare variant distribution over time. Requires flag evaluation metrics to be enabled — see [Set Up Server-Side Flag Evaluation Metrics][1].
+Use this graph to track overall server-side evaluation volume and compare variant distribution over time. Requires flag evaluation metrics to be enabled. See [Set Up Server-Side Flag Evaluation Metrics][1].
 
 ### Client evaluations
 
