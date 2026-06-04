@@ -26,7 +26,7 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog upda
 
 ## Summary of changes
 
-| Feature | What changed |
+| Feature | Description |
 |---------|-------------|
 | [Manage Tags modal](#manage-tags-modal) | Estimates the impact of tag changes on point volume instead of cardinality volume. |
 | [Metric side panel](#metric-side-panel) | Displays ingested and indexed point volume instead of timeseries volume. |
@@ -70,7 +70,7 @@ The [Plan & Usage page][5] reflects the Metric Name Pricing billing breakdown fo
 
 Datadog provides estimated usage metrics so you can monitor your Metric Name Pricing usage in real time. Use these metrics to set up monitors and dashboards for cost visibility.
 
-<div class="alert alert-warning">Cardinality-based estimated usage metrics (<code>datadog.estimated_usage.metrics.custom</code> and related metrics) are no longer available for organizations on Metric Name Pricing. Any monitors, dashboards, or other assets that use the cardinality-based metrics stop receiving data. Use the points-volume metrics listed below instead.</div>
+<div class="alert alert-warning">Cardinality-based estimated usage metrics (<code>datadog.estimated_usage.metrics.custom</code> and related metrics) are no longer available for organizations on Metric Name Pricing. Any monitors, dashboards, or other assets that use the cardinality-based metrics have stopped receiving data. Use the points-volume metrics listed below instead.</div>
 
 ### Billable usage metrics
 
