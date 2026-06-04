@@ -64,6 +64,8 @@ The Volume Overview graphs on the [Metrics Volume Management page][4] display th
 
 The [Plan & Usage page][5] reflects the Metric Name Pricing billing breakdown for organizations on the new model.
 
+{{< img src="metrics/guide/metric_name_pricing_experience/plan-usage-page.png" alt="The Plan & Usage Cost Breakdown page showing Indexed Points, Ingest Points, and Metric Names as distinct product line items in the Summary table and Cumulative Cost Breakdown chart." style="width:100%;" >}}
+
 ## Estimated usage metrics
 
 Datadog provides estimated usage metrics so you can monitor your Metric Name Pricing usage in real time. Use these metrics to set up monitors and dashboards for cost visibility.
