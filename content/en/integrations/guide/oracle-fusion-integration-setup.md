@@ -19,8 +19,6 @@ Datadog queries Oracle Fusion REST APIs, including enterprise service scheduler 
 2. [**Integration User**](#create-a-fusion-integration-user): A dedicated Fusion user with read-only and ESS-related roles, created in Fusion Security Console.
 3. [**Role Assignments**](#assign-required-roles): Permissions for Datadog to read job logs and REST resources, granted to the integration user.
 4. [**Datadog tile configuration**](#configure-the-datadog-tile): The credentials and URLs collected during setup, entered in the Oracle Fusion integration tile.
-5. [**Confidential application user assignment**](#link-the-confidential-application-to-the-integration-user-optional) (optional): Associates the integration user with the confidential application so that OAuth tokens carry the correct identity and roles.
-
 After configuration is complete, Datadog obtains OAuth access tokens from your Fusion Identity Domain and uses them to call your Fusion REST APIs.
 
 ## Prerequisites
@@ -36,17 +34,21 @@ After configuration is complete, Datadog obtains OAuth access tokens from your F
 
 Create an OAuth client that Datadog uses to authenticate against your Fusion Identity Domain.
 
-1. Navigate to **Identity & Security** > **Domains** and open the Identity Domain Console.
-2. Navigate to **Applications** > **Add Application** > **Confidential Application**.
-3. Enter a name such as `Datadog Fusion Integration`.
-4. Under **Resources**, add your Fusion Applications resource server.
-5. Select the appropriate scope; for example, `urn:opc:resource:fa:instanceid=<INSTANCE_ID>urn:opc:resource:consumer::all`. This grants the confidential client access to call REST APIs for the Fusion instance.
-6. Save and **Activate** the application.
-7. Copy the following values to enter in Datadog later:
-   - **Client ID**
-   - **Client Secret**
-   - **Scope**
-   - **Token Endpoint (OAuth URL)**: `https://<IDENTITY_DOMAIN>/oauth2/v1/token`
+1. Navigate to **Identity & Security** > **Domains** and open the Identity Domain associated with your Oracle Fusion instance.
+2. Navigate to **Integrated Applications** > **Add Application** > **Confidential Application**.
+3. Enter a name such as `Datadog Fusion Integration` and click **Create**.
+4. Navigate to **OAuth Configuration** > **Edit OAuth configuration** and configure the following settings:
+   1. Select **Configure this application as a client now** and check **Client credentials** under **Allow grant types**.
+   1. Enable **Bypass consent** and allow client IP addresses from anywhere.
+   1. Under **Token Issuance Policy**, select **Specific** and toggle **Add Resources** on.
+   1. Under **Resources**, select **Add scope** and choose your Fusion application, typically called **Fusion Applications Cloud Service**.
+   1. Leave all other fields as default.
+5. Save the OAuth configuration changes, then activate the application under **Actions** at the top of the screen.
+6. Copy the following values to enter in Datadog later:
+   - **Client ID**: Found under **OAuth Configuration** > **General Information**
+   - **Client Secret**: Found under **OAuth Configuration** > **Client Secret**
+   - **Scope**: Found under **OAuth Configuration** > **Resources** > **Scope**
+   - **Token Endpoint (OAuth URL)**: `https://idcs-<IDENTITY_DOMAIN_ID>.identity.oraclecloud.com/oauth2/v1/token`. The identity domain value is found under **Domain Details** > **Domain URL**.
 
 For more information, see [Configure OAuth Using Client Credentials Grant Type][1] in the Oracle documentation.
 
@@ -66,11 +68,13 @@ Grant the following roles to the integration user so that Datadog can read ESS l
 1. In Fusion, navigate to **Security Console** > **Users** > **Edit User** > **Roles** > **Add Role**.
 2. Assign the following roles:
 
-| Role | Purpose |
-|------|---------|
-| ESS Monitor | Read ESS job requests and job logs |
-| Integration Specialist | Access ERP Integration REST endpoints |
-| Internal Auditor | Read-only access to audit data |
+| Role | Code | Purpose |
+|------|------|---------|
+| ESS Monitor | `ESSMonitor` | Read ESS job requests and job logs |
+| Integration Specialist | `ORA_FND_INTEGRATION_SPECIALIST_JOB` | Access ERP Integration REST endpoints |
+| Internal Auditor | `ORA_FND_INTERNAL_AUDITOR_JOB` | Read-only access to audit data |
+
+<div class="alert alert-info">The ESS Monitor role cannot be assigned directly to a user. To assign it, navigate to <strong>Security Console</strong> &gt; <strong>Roles</strong> &gt; <strong>Create Role</strong>, add <code>ESSMonitor</code> under <strong>Role Hierarchy</strong>, then assign the new role to the integration user.</div>
 
 ## Configure the Datadog tile
 
@@ -84,28 +88,14 @@ In the Datadog UI, enter the following values in the Oracle Fusion integration t
 
 ## Validation
 
-If you enabled ESS and audit logs during account creation, Datadog automatically validates your credentials and displays error messages with suggested remedies if the connection fails.
+Datadog automatically validates your credentials and displays error messages with suggested remedies if the connection fails.
 
 To confirm the integration is working after your account is created:
 
 - In the [Log Explorer][2], filter by `source:oracle-fusion` to view ESS and audit logs.
 - In the [Metrics Explorer][3], search for `oracle.fusion.*` to view Oracle Fusion metrics, such as `oracle.fusion.ess.jobs`.
 
-If the integration is not returning data, see the [optional linking step](#link-the-confidential-application-to-the-integration-user-optional) below.
-
-## Link the confidential application to the integration user (optional)
-
-This step may not be required for all environments.
-
-To associate the integration user with the confidential application so that OAuth tokens correctly represent the user:
-
-1. In the Identity Domain Console, navigate to **Applications** > **Datadog Fusion Integration** (your confidential application).
-2. Select **Users**.
-3. Click **Assign Users**.
-4. Select the user created in Fusion Security Console. If the user is not present in the Identity Domain, create a new user with the username set to the client ID from the previous step. Users in the Security Console and the Identity Domain must have the same username.
-5. Save.
-
-This association confirms that tokens issued when Datadog authenticates using client credentials carry the identity and roles of the integration user.
+If the integration is not returning data, verify that you have enabled logging in Fusion. Navigate to **Setup and Maintenance** > **Manage Audit Policies** and set all audit levels to **High**.
 
 
 ## Further reading
