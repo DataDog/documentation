@@ -32,7 +32,7 @@ Datadog Logging without Limits* decouples log ingestion and indexing. Choose whi
 - [Generate metrics from ingested logs][6] as cost-efficient way to summarize log data from an entire ingested stream.
 - Institute fine-grained control over your log management budget with [log indexes][7].
 - Forward ingested logs to your own cloud-hosted storage bucket to keep as an [archive][8] for future troubleshooting or compliance audits.
-- [Search an archive][12] directly in real time with Archive Search, or [rehydrate an archive][9] to re-index log events for full platform access.
+- [Search an archive][12] with Archive Search to query logs in real time directly from storage. Use **Search & Rehydration** mode when you need full platform access or longer retention — this replaces the legacy [Rehydration][9] workflow.
 - Restrict [logs data access][10] with restriction queries.
 
 ## Log Explorer

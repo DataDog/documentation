@@ -14,8 +14,8 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-<strong>Looking for a faster, more cost-effective way to query archived logs?</strong><br>
-<a href="/logs/explorer/archive_search/">Archive Search</a> is the recommended approach. It streams results in real time directly from your archive — no re-indexing required — and charges only for the data scanned. You can still rehydrate results when you need full platform access or longer retention.
+<strong><a href="/logs/explorer/archive_search/">Archive Search</a> is the recommended way to access archived logs.</strong><br>
+It streams results in real time directly from your archive without re-indexing, and charges only for the data scanned. When you need full platform access or longer retention, use Archive Search's <strong>Search &amp; Rehydration</strong> mode — it replaces the legacy Rehydration workflow and gives you the same outcome with a faster, interactive experience.
 </div>
 
 ## Overview

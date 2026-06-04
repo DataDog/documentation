@@ -68,7 +68,7 @@ If you want to retain logs for an extended time while maintaining querying speed
 
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Archive Search][32] to query them directly from storage in real time, or [Log Rehydration][3]™ to re-index them for full platform access. With multiple archives, you can both segment logs for compliance reasons and keep costs under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. Use [Archive Search][32] to query these logs directly from storage in real time. When you need full platform access or longer retention, use Archive Search's **Search & Rehydration** mode — this replaces the legacy [Log Rehydration][3]™ workflow. With multiple archives, you can segment logs for compliance reasons and keep costs under control.
 
 #### Set up max scan size to manage costs
 
