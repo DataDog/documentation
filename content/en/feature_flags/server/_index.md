@@ -11,6 +11,9 @@ further_reading:
 - link: "/feature_flags/guide/server_flag_evaluation_metrics/"
   tag: "Guide"
   text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
