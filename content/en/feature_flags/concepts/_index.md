@@ -12,4 +12,5 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/traffic_splitting" >}}Traffic Splitting and Randomization{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/distribution_channels" >}}Distribution Channels{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/flag_history" >}}Flag History{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/flag_graphs" >}}Feature Flag Graphs{{< /nextlink >}}
 {{< /whatsnext >}}
