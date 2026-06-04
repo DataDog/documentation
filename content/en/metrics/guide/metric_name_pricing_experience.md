@@ -16,7 +16,6 @@ further_reading:
   text: "Metrics Volume Management"
 algolia:
   tags: ['metric name pricing', 'custom metrics', 'estimated usage metrics']
-private: true
 ---
 
 ## Overview
@@ -31,10 +30,9 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog upda
 |---------|-------------|
 | [Manage Tags modal](#manage-tags-modal) | Estimates the impact of tag changes on point volume instead of cardinality volume. |
 | [Metric side panel](#metric-side-panel) | Displays ingested and indexed point volume instead of timeseries volume. |
-| [Volume Management page](#volume-management-page) | Displays ingested and indexed point volume, plus billing dimension graphs for Metric Name Pricing. |
+| [Volume Management page](#volume-management-page) | Volume Overview graphs display new billing dimensions for Metric Name Pricing. |
 | [Plan & Usage page](#plan--usage-page) | Reflects the Metric Name Pricing billing breakdown. |
 | [Estimated usage metrics](#estimated-usage-metrics) | New points-volume metrics replace cardinality-based estimated usage metrics. |
-| [Metric volume API endpoints](#metric-volume-api-endpoints) | Behavior changes for the metric volume estimate and volumes endpoints. |
 
 ## Manage Tags modal
 
@@ -54,9 +52,7 @@ To open the metric side panel, click any metric name on the [Metrics Summary pag
 
 ## Volume Management page
 
-The [Metrics Volume Management page][4] displays **ingested and indexed point volume**.
-
-The Volume Overview graphs also display the following Metric Name Pricing billing dimensions:
+The Volume Overview graphs on the [Metrics Volume Management page][4] display the following Metric Name Pricing billing dimensions:
 
 - Estimated unique metric names
 - Billable indexed point volume
@@ -97,13 +93,6 @@ For more granular analysis, use the following real-time and hourly metrics:
 | `datadog.estimated_usage.metrics.points.ingested.hourly` | Estimated total ingested custom metric points submitted each hour, for cumulative month-to-date calculations. |
 
 For more information, see [Estimated Usage Metrics][6].
-
-## Metric volume API endpoints
-
-The following API changes apply for organizations on Metric Name Pricing:
-
-- **`/api/v2/metrics/{metric_name}/estimate`**: This endpoint returns a 403 error. Use `/api/unstable/metrics/{metric_name}/points/estimate` instead to estimate point volume.
-- **`/api/v2/metrics/{metric_name}/volumes`**: This endpoint returns the **total point volume** in the look-back window.
 
 ## Troubleshooting
 
