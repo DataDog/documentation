@@ -129,9 +129,7 @@ const doOnLoad = () => {
         initCodeTabs();
     }
 
-    if (document.querySelector('.card-grid-card[data-bs-toggle="tooltip"]')) {
-        initCardGrid();
-    }
+    initCardGrid();
 
     // Only initialize the expression language evaluator if the page contains an expression evaluator.
     if (document.querySelector('.expression-evaluator')) {
