@@ -179,8 +179,8 @@ body.docs-ai-sidebar-pushed {
         // verbatim instead of trying to evaluate vw and px together.
         max-width: #{"min(800px, 92vw)"};
         border-radius: 0;
-        border-left: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.14);
+        border-left: 1px solid $conv-search-border;
+        box-shadow: none;
 
         &.open {
             transform: translateX(0);
@@ -554,9 +554,6 @@ body.docs-ai-sidebar-pushed {
 }
 
 // --- Resize handles ----------------------------------------------------------
-// z-index sits above .conv-search-header (z-index: 2) so the top handle, which
-// overlaps the header, still wins hit-testing — otherwise the header (later in
-// the DOM) paints over it and the row-resize cursor never shows.
 .conv-search-resize-handle {
     display: none;
     position: absolute;
