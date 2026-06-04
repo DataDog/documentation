@@ -19,16 +19,105 @@ further_reading:
 # Ingress-nginx support for Datadog
 
 [Ingress-nginx][1] is a [Kubernetes ingress controller][2]
-that uses nginx as a reverse proxy and load balancer. In a Kubernetes cluster, external access is restricted by default for security reasons.
+that uses NGINX as a reverse proxy and load balancer. In a Kubernetes cluster, external access is restricted by default for security reasons.
 An ingress controller uses rules to control how external traffic may reach your services.
 
-The ingress-nginx controller is managed through [Kubernetes resources][3],
-but customization of the underlying nginx configuration is typically limited beyond its intended use case. However, ingress-nginx allows
-the addition of extra nginx modules for extended functionality. To take advantage of this feature with `nginx-datadog`, we provide **init containers**.
+You can enable [App and API Protection][10] for your ingress-nginx controller to inspect and protect traffic at the edge of your cluster. Datadog supports two setup methods:
 
-## How to enable `nginx-datadog` in ingress-nginx?
+- **Automated configuration** (recommended): the Datadog Cluster Agent injects the `nginx-datadog` module into your ingress-nginx controller pods.
+- **Manual configuration**: you add a Datadog init container and NGINX configuration snippets yourself.
+
+## Automated configuration with App and API Protection for Kubernetes
+
+<div class="alert alert-info">
+  Automated configuration lets the Datadog Cluster Agent inject the <code>nginx-datadog</code> module into your ingress-nginx controller pods, without manual init container or NGINX snippet changes. This is the recommended approach for most users.
+</div>
+
+### Setup
+
+This setup requires:
+
+- The Datadog Cluster Agent `v7.79.0` or later.
+- For the Helm method, the Datadog Helm chart `v3.217.0` or later.
+
+Enable automatic configuration using the Datadog Operator or Helm.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Add annotations to your `DatadogAgent` resource:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/appsec.injector.enabled: "true"
+    agent.datadoghq.com/appsec.injector.proxies: '["ingress-nginx"]'
+    # Optional: override the path where the nginx-datadog module is mounted
+    # in the controller pod (default: /modules_mount)
+    # agent.datadoghq.com/appsec.nginx.module_mount_path: "/modules_mount"
+```
+
+Apply the configuration:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Add the following to your `values.yaml`:
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      proxies:
+        - ingress-nginx
+      # Optional: override the path where the nginx-datadog module is mounted
+      # in the controller pod (default: /modules_mount)
+      # nginx:
+      #   moduleMountPath: "/modules_mount"
+```
+
+Install or upgrade the Datadog Helm chart (`v3.217.0` or later):
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+After you enable this, the Datadog Cluster Agent:
+
+- Detects your ingress-nginx controller pods
+- Injects the `nginx-datadog` module into the controller
+- Configures the controller to load the module and apply App and API Protection
+
+You can turn App and API Protection on or off through [Remote Configuration][8] without changing this setup.
+
+For configuration options, see [App and API Protection for Kubernetes][9].
+
+### Validate
+
+{{% appsec-getstarted-2-plusrisk %}}
+
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+
+## Manual configuration (alternative)
+
+The ingress-nginx controller is managed through [Kubernetes resources][3],
+but customization of the underlying NGINX configuration is typically limited beyond its intended use case. However, ingress-nginx allows
+the addition of extra NGINX modules for extended functionality. To take advantage of this feature with `nginx-datadog`, Datadog provides **init containers**.
+
+### How to enable `nginx-datadog` in ingress-nginx?
 To integrate `nginx-datadog` with ingress-nginx, add a Datadog [init container][4] to your pod
-specification and configure nginx to load the `nginx-datadog` module.
+specification and configure NGINX to load the `nginx-datadog` module.
 
 The following Helm values demonstrate how to inject the `nginx-datadog` module into an ingress-nginx controller:
 
@@ -51,29 +140,29 @@ controller:
         distroless: false
 ```
 
-Check [our details examples][5] to help you set up ingress-nginx with `nginx-datadog`.
+See the [detailed examples][5] to help you set up ingress-nginx with `nginx-datadog`.
 
-## How does it work?
+### How does it work?
 Init containers are special containers that run before the main container in a Kubernetes pod. In this case,
-the Datadog init container is responsible for copying the `nginx-datadog` module into a shared volume that will be
-accessible by the main ingress-nginx container.
+the Datadog init container is responsible for copying the `nginx-datadog` module into a shared volume that the
+main ingress-nginx container can access.
 
-When the main ingrees-nginx controller starts, the nginx configuration must be updated with the `load_module` directive,
-allowing it to load the Datadog module seamlessly.
+When the main ingress-nginx controller starts, the NGINX configuration must be updated with the `load_module` directive,
+allowing it to load the Datadog module.
 
 <div class="alert alert-danger">
-We provide a specific init container **for each ingress-nginx controller version**, starting with <code>v1.10.0</code>. This is crucial because **each** init container must match the underlying nginx version. To ensure compatibility, ensure the version of the Datadog init container matches your ingress-nginx version.
+Datadog provides a specific init container **for each ingress-nginx controller version**, starting with <code>v1.10.0</code>. This is crucial because **each** init container must match the underlying NGINX version. To confirm compatibility, verify that the version of the Datadog init container matches your ingress-nginx version.
 </div>
 
-## Interaction with OpenTelemetry
+### Interaction with OpenTelemetry
 By default, ingress-nginx includes an OpenTelemetry (oTel) module that can be enabled using the `enable-opentelemetry: true` setting
 in the [ingress-nginx ConfigMap][6].
-However, if you are using `nginx-datadog` for tracing, we recommend **disabling** OpenTelemetry to prevent duplicate tracing data from both
+However, if you are using `nginx-datadog` for tracing, Datadog recommends **disabling** OpenTelemetry to prevent duplicate tracing data from both
 the oTel and Datadog modules.
 
 To disable OpenTelemetry, set `enable-opentelemetry: false`.
 
-## Enabling AppSec
+### Enabling AppSec
 
 You can enable the WAF provided by AppSec to protect your applications from security threats. To do so, update your Helm values to include the AppSec configuration:
 
@@ -104,11 +193,15 @@ controller:
 - `datadog_appsec_enabled on`: Enables the Application Security module for threat detection and protection. This can be omitted so that AppSec can be enabled or disabled through Remote Configuration.
 - `datadog_waf_thread_pool_name waf_thread_pool`: Associates the matching requests with the configured thread pool.
 
-Refer to the [configuration reference][7] for more configurable options.
+See the [configuration reference][7] for more configurable options.
 
 <div class="alert alert-info">
 For production environments, monitor the thread pool performance and adjust the <code>threads</code> and <code>max_queue</code> parameters based on your traffic volume and latency requirements.
 </div>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/kubernetes/ingress-nginx
 [2]: https://kubernetes.io/docs/concepts/services-networking/ingress/
@@ -117,3 +210,6 @@ For production environments, monitor the thread pool performance and adjust the 
 [5]: https://github.com/DataDog/nginx-datadog/tree/master/example/ingress-nginx
 [6]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#enable-opentelemetry
 [7]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[8]: /agent/remote_config/?tab=helm#enabling-remote-configuration
+[9]: /containers/kubernetes/appsec
+[10]: /security/application_security/
