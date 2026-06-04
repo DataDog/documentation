@@ -3571,6 +3571,12 @@
     "description": "Returns the current organization and its managed organizations in JSON:API format.",
     "summary": "List your managed organizations"
   },
+  "DisableCustomerOrg": {
+    "description": "Disable the Datadog organization associated with the authenticated user or API key.\nThe request body uses JSON:API format. If `org_uuid` is supplied, it must match\nthe authenticated org or the request is rejected. Successful calls disable the org\nand return the resulting state from the downstream service. Requires the\n`org_management` permission.",
+    "summary": "Disable the authenticated customer organization",
+    "request_description": "",
+    "request_schema_description": "Request payload for disabling the authenticated customer organization."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
