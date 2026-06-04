@@ -42,6 +42,8 @@ DD_REMOTE_CONFIG_ENABLED=true
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 {{< /code-block >}}
 
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
 Also configure the standard service tags used by the server SDK:
 
 {{< code-block lang="bash" >}}
@@ -94,7 +96,7 @@ Platforms such as Vercel Functions, Netlify Functions, and Cloudflare Workers ge
 
 ## Public API and local evaluation
 
-The public Feature Flags API is intended for managing flags and environments. It is not a per-request flag evaluation API for server-side applications.
+The public [Feature Flags API][3] is intended for managing flags and environments. It is not a per-request flag evaluation API for server-side applications.
 
 Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK with an Agent-backed Remote Configuration path when available. If no Agent path is available, use application-owned defaults or static configuration until direct serverless support is available. This fallback is outside Remote Configuration delivery and does not provide signed payload validation or live updates.
 
@@ -113,3 +115,4 @@ After deployment:
 
 [1]: /remote_configuration/
 [2]: /feature_flags/server/
+[3]: /api/latest/feature-flags/
