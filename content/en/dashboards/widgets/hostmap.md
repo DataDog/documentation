@@ -19,7 +19,7 @@ The host map widget displays your infrastructure as a color-coded grid of hosts,
 
 ## Setup
 
-{{< img src="dashboards/widgets/hostmap/hostmap_setup-2.png" alt="Host map widget configuration panel with node type set to Host, filter set to env:prod, grouped by availability-zone, and fill by a CPU utilization metric query" >}}
+{{< img src="dashboards/widgets/hostmap/hostmap_setup-2.png" alt="Host map widget configuration panel with node type set to Host, filter set to env:prod, grouped by availability-zone, and fill by a CPU utilization metric query." >}}
 
 ### Configuration
 
