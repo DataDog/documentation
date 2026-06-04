@@ -1,6 +1,5 @@
 ---
 title: Map
-private: true
 description: Visualize and monitor the performance of your journeys in the Journey Monitoring map.
 further_reading:
 - link: "/journey_monitoring"
@@ -20,7 +19,7 @@ further_reading:
   text: 'Learn about journey uptime'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
@@ -51,7 +50,7 @@ Journeys in the map and catalog may be color-coded based on their configuration 
 
 The leftmost node in the map represents the starting point for all user sessions in your application. All other nodes in the map are either pages or journeys. A page node can represent a parent path that expands to show its nested pages.
 
-{{< img src="journey_monitoring/journey-monitoring-map-zoom.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-map-zoom-1.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 The thicker the connection line, the more traffic flows between two nodes. Journeys that are not connected to the Session start node are journeys that users navigate to only after a session has already begun, rather than as an entry point into the application.
 

@@ -2080,6 +2080,7 @@ components:
         - $ref: "#/components/schemas/FormulaAndFunctionMetricQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionEventQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionApmMetricsQueryDefinition"
     DistributionWidgetRequest:
       description: Updated distribution widget.
       properties:
@@ -3409,6 +3410,7 @@ components:
         - product_analytics
         - on_call_events
         - errors
+        - llm_observability
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3426,6 +3428,7 @@ components:
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
         - ERRORS
+        - LLM_OBSERVABILITY
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -4687,13 +4690,58 @@ components:
         - requests
       type: object
     HostMapWidgetDefinitionRequests:
-      description: List of definitions.
+      description: >-
+        Query definition for the host map widget. Supports two mutually exclusive formats distinguished by the presence of `request_type`: the legacy metric-based format (`fill`/`size`) and the infrastructure-backed format (`request_type`, `node_type`, `enrichments`).
       example: {}
       properties:
+        child:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequest"
+        conditional_formats:
+          description: List of conditional formatting rules applied to fill values.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        enrichments:
+          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          example:
+            - formulas:
+                - dimension: fill
+                  formula: "query1"
+              queries:
+                - data_source: metrics
+                  name: "query1"
+                  query: "avg:system.cpu.user{*} by {host}"
+              response_format: scalar
+          items:
+            $ref: "#/components/schemas/HostMapWidgetScalarRequest"
+          type: array
         fill:
           $ref: "#/components/schemas/HostMapRequest"
+        filter:
+          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          example: "env:prod"
+          type: string
+        group_by:
+          description: |-
+            Defines how entities are grouped into tiles. The ordering of entries implies
+            the grouping hierarchy.
+          items:
+            $ref: "#/components/schemas/HostMapWidgetGroupBy"
+          type: array
+        no_group_hosts:
+          description: Whether to hide entities that have no group assignment.
+          type: boolean
+        no_metric_hosts:
+          description: Whether to hide entities that have no enrichment data.
+          type: boolean
+        node_type:
+          $ref: "#/components/schemas/HostMapWidgetNodeType"
+        request_type:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
         size:
           $ref: "#/components/schemas/HostMapRequest"
+        style:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
       type: object
     HostMapWidgetDefinitionStyle:
       description: The style to apply to the widget.
@@ -4720,6 +4768,239 @@ components:
       type: string
       x-enum-varnames:
         - HOSTMAP
+    HostMapWidgetDimension:
+      description: Visual dimension driven by a formula in the infrastructure host map widget.
+      enum:
+        - node
+        - fill
+        - size
+      example: node
+      type: string
+      x-enum-varnames:
+        - NODE
+        - FILL
+        - SIZE
+    HostMapWidgetFormula:
+      description: |-
+        Formula for the infrastructure host map widget that specifies both the expression
+        and the visual dimension it populates.
+      properties:
+        alias:
+          description: Expression alias.
+          example: "my-metric"
+          type: string
+        dimension:
+          $ref: "#/components/schemas/HostMapWidgetDimension"
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: "query1"
+          type: string
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+      required:
+        - formula
+        - dimension
+      type: object
+    HostMapWidgetGroupBy:
+      description: Defines a grouping dimension for the infrastructure host map.
+      properties:
+        column:
+          description: Column name from the entity table (for example, `cloud_provider`, `tags`, `labels`).
+          example: tags
+          type: string
+        key:
+          description: Key within the column for nested attribute types (for example, `service` within `tags`).
+          example: service
+          type: string
+      required:
+        - column
+      type: object
+    HostMapWidgetInfrastructureRequest:
+      description: |-
+        Infrastructure-backed request for the host map widget. Supports entity-based
+        visualization with metric query enrichments, tag-based filtering, flexible grouping,
+        and hierarchical views.
+      properties:
+        child:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestLeaf"
+          description: |-
+            Optional child request for hierarchical visualization (for example, hosts containing
+            containers). Maximum one level of nesting.
+        conditional_formats:
+          description: List of conditional formatting rules applied to fill values.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        enrichments:
+          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          example:
+            - formulas:
+                - dimension: fill
+                  formula: "query1"
+              queries:
+                - data_source: metrics
+                  name: "query1"
+                  query: "avg:system.cpu.user{*} by {host}"
+              response_format: scalar
+          items:
+            $ref: "#/components/schemas/HostMapWidgetScalarRequest"
+          type: array
+        filter:
+          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          example: "env:prod"
+          type: string
+        group_by:
+          description: |-
+            Defines how entities are grouped into tiles. The ordering of entries implies
+            the grouping hierarchy.
+          items:
+            $ref: "#/components/schemas/HostMapWidgetGroupBy"
+          type: array
+        no_group_hosts:
+          description: Whether to hide entities that have no group assignment.
+          type: boolean
+        no_metric_hosts:
+          description: Whether to hide entities that have no enrichment data.
+          type: boolean
+        node_type:
+          $ref: "#/components/schemas/HostMapWidgetNodeType"
+        request_type:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
+        style:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
+      required:
+        - request_type
+        - node_type
+        - enrichments
+      type: object
+    HostMapWidgetInfrastructureRequestLeaf:
+      description: Infrastructure-backed host map child request (leaf node, no further nesting supported).
+      properties:
+        conditional_formats:
+          description: List of conditional formatting rules applied to fill values.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        enrichments:
+          description: Metric or event queries joined to the entity set. Each formula specifies a visual dimension.
+          example:
+            - formulas:
+                - dimension: fill
+                  formula: "query1"
+              queries:
+                - data_source: metrics
+                  name: "query1"
+                  query: "avg:system.cpu.user{*} by {host}"
+              response_format: scalar
+          items:
+            $ref: "#/components/schemas/HostMapWidgetScalarRequest"
+          type: array
+        filter:
+          description: Filter string for the entity set in tag format (for example, `env:prod`).
+          example: "env:prod"
+          type: string
+        group_by:
+          description: |-
+            Defines how entities are grouped into tiles. The ordering of entries implies
+            the grouping hierarchy.
+          items:
+            $ref: "#/components/schemas/HostMapWidgetGroupBy"
+          type: array
+        no_group_hosts:
+          description: Whether to hide entities that have no group assignment.
+          type: boolean
+        no_metric_hosts:
+          description: Whether to hide entities that have no enrichment data.
+          type: boolean
+        node_type:
+          $ref: "#/components/schemas/HostMapWidgetNodeType"
+        request_type:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureRequestRequestType"
+        style:
+          $ref: "#/components/schemas/HostMapWidgetInfrastructureStyle"
+      required:
+        - request_type
+        - node_type
+        - enrichments
+      type: object
+    HostMapWidgetInfrastructureRequestRequestType:
+      description: Identifies this as an infrastructure-backed host map request.
+      enum:
+        - infrastructure_hostmap
+      example: infrastructure_hostmap
+      type: string
+      x-enum-varnames:
+        - INFRASTRUCTURE_HOSTMAP
+    HostMapWidgetInfrastructureStyle:
+      description: Style configuration for the infrastructure host map.
+      properties:
+        fill_max:
+          description: Maximum value for the fill color scale. Omit to use automatic scaling.
+          format: double
+          type: number
+        fill_min:
+          description: Minimum value for the fill color scale. Omit to use automatic scaling.
+          format: double
+          type: number
+        palette:
+          description: Color palette name or alias.
+          example: hostmap_blues
+          type: string
+        palette_flip:
+          description: Whether to invert the color palette.
+          type: boolean
+      type: object
+    HostMapWidgetNodeType:
+      description: Which type of infrastructure entity to visualize in the host map.
+      enum:
+        - host
+        - container
+        - pod
+        - cluster
+      example: host
+      type: string
+      x-enum-varnames:
+        - HOST
+        - CONTAINER
+        - POD
+        - CLUSTER
+    HostMapWidgetScalarRequest:
+      description: |-
+        Scalar formula request for the infrastructure host map widget. Each formula specifies
+        which visual dimension it drives.
+      properties:
+        formulas:
+          description: List of formulas that operate on queries, each assigned to a visual dimension.
+          example:
+            - dimension: fill
+              formula: "query1"
+          items:
+            $ref: "#/components/schemas/HostMapWidgetFormula"
+          type: array
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          example:
+            - data_source: "metrics"
+              name: "my_query"
+              query: "avg:system.cpu.user{*}"
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
+          type: array
+        response_format:
+          $ref: "#/components/schemas/HostMapWidgetScalarRequestResponseFormat"
+      required:
+        - response_format
+        - queries
+        - formulas
+      type: object
+    HostMapWidgetScalarRequestResponseFormat:
+      description: Response format for the scalar formula request. Only `scalar` is supported.
+      enum:
+        - scalar
+      example: scalar
+      type: string
+      x-enum-varnames:
+        - SCALAR
     HostMeta:
       description: Metadata associated with your host.
       properties:
@@ -5542,9 +5823,41 @@ components:
       required:
         - facet
       type: object
+    ListStreamIssuePersona:
+      description: Persona filter for the `issue_stream` data source.
+      enum:
+        - all
+        - browser
+        - mobile
+        - backend
+      type: string
+      x-enum-varnames:
+        - ALL
+        - BROWSER
+        - MOBILE
+        - BACKEND
+    ListStreamIssueState:
+      description: Issue state filter for the `issue_stream` data source.
+      enum:
+        - OPEN
+        - IGNORED
+        - ACKNOWLEDGED
+        - RESOLVED
+      type: string
+      x-enum-varnames:
+        - OPEN
+        - IGNORED
+        - ACKNOWLEDGED
+        - RESOLVED
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        assignee_uuids:
+          description: Filter by assignee UUIDs. Usable only with `issue_stream`.
+          items:
+            description: Assignee UUID.
+            type: string
+          type: array
         clustering_pattern_field_path:
           description: Specifies the field for logs pattern clustering. Usable only with logs_pattern_stream.
           example: "message"
@@ -5572,16 +5885,35 @@ components:
             description: Index.
             type: string
           type: array
+        persona:
+          $ref: "#/components/schemas/ListStreamIssuePersona"
         query_string:
           description: Widget query.
           example: "@service:app"
           type: string
         sort:
           $ref: "#/components/schemas/WidgetFieldSort"
+        states:
+          description: Filter by issue states. Usable only with `issue_stream`.
+          items:
+            $ref: "#/components/schemas/ListStreamIssueState"
+          type: array
         storage:
           description: Option for storage location. Feature in Private Beta.
           example: "indexes"
           type: string
+        suspected_causes:
+          description: Filter by suspected causes. Usable only with `issue_stream`.
+          items:
+            description: Suspected cause.
+            type: string
+          type: array
+        team_handles:
+          description: Filter by team handles. Usable only with `issue_stream`.
+          items:
+            description: Team handle.
+            type: string
+          type: array
       required:
         - query_string
         - data_source
@@ -5595,8 +5927,8 @@ components:
       x-enum-varnames:
         - EVENT_LIST
     ListStreamSource:
-      default: apm_issue_stream
-      description: Source from which to query items to display in the stream.
+      default: logs_stream
+      description: Source from which to query items to display in the stream. apm_issue_stream, rum_issue_stream, and logs_issue_stream are deprecated. Use issue_stream instead.
       enum:
         - logs_stream
         - audit_stream
@@ -5611,7 +5943,8 @@ components:
         - event_stream
         - rum_stream
         - llm_observability_stream
-      example: apm_issue_stream
+        - issue_stream
+      example: logs_stream
       type: string
       x-enum-varnames:
         - LOGS_STREAM
@@ -5627,6 +5960,7 @@ components:
         - EVENT_STREAM
         - RUM_STREAM
         - LLM_OBSERVABILITY_STREAM
+        - ISSUE_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
@@ -12950,13 +13284,16 @@ components:
       type: object
     SLOCorrectionCreateRequest:
       description: |-
-        An object that defines a correction to be applied to an SLO.
+        An object that defines a correction to be applied to one or more SLOs.
       properties:
         data:
           $ref: "#/components/schemas/SLOCorrectionCreateData"
       type: object
     SLOCorrectionCreateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be created.
+      description: |-
+        The attribute object associated with the SLO correction to be created.
+
+        Exactly one of `slo_id` or `slo_query` must be provided.
       properties:
         category:
           $ref: "#/components/schemas/SLOCorrectionCategory"
@@ -12980,8 +13317,15 @@ components:
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
-          description: ID of the SLO that this correction applies to.
+          description: ID of the single SLO that this correction applies to.
           example: sloId
+          type: string
+        slo_query:
+          description: |-
+            Query that matches the SLOs this correction applies to.
+            The query uses the [Events search syntax](https://docs.datadoghq.com/events/explorer/searching/)
+            and can filter SLOs by SLO tags.
+          example: "env:prod service:checkout"
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -12993,7 +13337,6 @@ components:
           example: UTC
           type: string
       required:
-        - slo_id
         - start
         - category
       type: object
@@ -13057,7 +13400,12 @@ components:
           nullable: true
           type: string
         slo_id:
-          description: ID of the SLO that this correction applies to.
+          description: ID of the single SLO that this correction applies to.
+          nullable: true
+          type: string
+        slo_query:
+          description: Query that matches the SLOs this correction applies to.
+          nullable: true
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -13128,6 +13476,13 @@ components:
             The recurrence rules as defined in the iCalendar RFC 5545. The supported rules for SLO corrections
             are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
+        slo_query:
+          description: |-
+            Query that matches the SLOs this correction applies to.
+            The query uses the [Events search syntax](https://docs.datadoghq.com/events/explorer/searching/)
+            and can filter SLOs by SLO tags.
+          example: "env:prod service:checkout"
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -22590,10 +22945,36 @@ components:
           $ref: "#/components/schemas/UsageSpecifiedCustomReportsMeta"
       type: object
     UsageSummaryDate:
-      description: Response with hourly report of all data billed by Datadog all organizations.
+      description: |-
+        Response with hourly report of all data billed by Datadog for all organizations.
+
+        Newly added billing dimensions and usage types appear as untyped keys on the
+        `additionalProperties` map instead of as typed fields. Call
+        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
+        at this response level—both typed fields and `additionalProperties` keys.
       properties:
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ai_credits_agent_builder_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Agent Builder over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ai_credits_bits_assistant_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Bits AI Assistant over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ai_credits_bits_dev_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Bits AI Dev over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ai_credits_bits_sre_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Bits AI SRE over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ai_credits_sum:
+          description: Shows the sum of all AI credits over all hours in the current date for all organizations.
           format: int64
           type: integer
         apm_azure_app_service_host_top99p:
@@ -22635,6 +23016,10 @@ components:
           type: integer
         audit_trail_enabled_hwm:
           description: Shows the number of organizations that had Audit Trail enabled in the current date.
+          format: int64
+          type: integer
+        audit_trail_event_forwarding_events_sum:
+          description: Shows the sum of all Audit Trail event forwarding events over all hours in the current date for all organizations.
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
@@ -22927,6 +23312,14 @@ components:
           description: Shows the sum of all Data Jobs Monitoring hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        data_stream_monitoring_host_count_sum:
+          description: Shows the sum of all Data Streams Monitoring hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        data_stream_monitoring_host_count_top99p:
+          description: Shows the 99th percentile of all Data Streams Monitoring hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         date:
           description: The date for the usage.
           format: date-time
@@ -23119,6 +23512,130 @@ components:
           description: Shows the sum of all log events indexed over all hours in the current date for all organizations.
           format: int64
           type: integer
+        indexed_points_sum:
+          description: Shows the sum of all indexed custom metrics points over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_avg:
+          description: Shows the average of all Infrastructure vCPU cores over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_basic_avg:
+          description: Shows the average of all default basic Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_basic_sum:
+          description: Shows the sum of all default basic Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_aws_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on AWS over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_aws_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on AWS over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_azure_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on Azure over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_azure_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on Azure over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_gcp_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on GCP over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_gcp_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on GCP over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on Nutanix over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_basic_avg:
+          description: Shows the average of all default basic Infrastructure host vCPU cores on Nutanix over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_basic_sum:
+          description: Shows the sum of all default basic Infrastructure host vCPU cores on Nutanix over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on Nutanix over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_opentelemetry_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_opentelemetry_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_agent_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_agent_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_aws_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on AWS over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_aws_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on AWS over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_azure_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on Azure over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_azure_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on Azure over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_gcp_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on GCP over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_gcp_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on GCP over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_nutanix_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on Nutanix over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_nutanix_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on Nutanix over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_opentelemetry_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_opentelemetry_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_sum:
+          description: Shows the sum of all Infrastructure vCPU cores over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         infra_edge_monitoring_devices_top99p:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current date for all organizations.
           format: int64
@@ -23143,8 +23660,20 @@ components:
           description: Shows the average number of storage management objects over all hours in the current date for all organizations.
           format: int64
           type: integer
+        ingest_points_sum:
+          description: Shows the sum of all ingested custom metrics points over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        iot_apm_host_sum:
+          description: Shows the sum of all Application Performance Monitoring IoT hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        iot_apm_host_top99p:
+          description: Shows the 99th percentile of all Application Performance Monitoring IoT hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         iot_device_sum:
@@ -23155,12 +23684,36 @@ components:
           description: Shows the 99th percentile of all IoT devices over all hours in the current date all organizations.
           format: int64
           type: integer
+        llm_observability_15day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_30day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_60day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        llm_observability_90day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         llm_observability_min_spend_sum:
           description: Sum of all LLM observability minimum spend over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_sum:
           description: Sum of all LLM observability sessions over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        logs_archive_search_gb_scanned_sum:
+          description: Shows the sum of all Logs Archive Search scanned data over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        metric_names_sum:
+          description: Shows the sum of all custom metric names over all hours in the current date for all organizations.
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
@@ -23571,6 +24124,14 @@ components:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current date for the given org.
           format: int64
           type: integer
+        snmp_device_count_sum:
+          description: Shows the sum of all Network Device Monitoring devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        snmp_device_count_top99p:
+          description: Shows the 99th percentile of all Network Device Monitoring devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours in the current date for all organizations.
           format: int64
@@ -23613,7 +24174,13 @@ components:
           type: integer
       type: object
     UsageSummaryDateOrg:
-      description: Global hourly report of all data billed by Datadog for a given organization.
+      description: |-
+        Global hourly report of all data billed by Datadog for a given organization.
+
+        Newly added billing dimensions and usage types appear as untyped keys on the
+        `additionalProperties` map instead of as typed fields. Call
+        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
+        at this response level—both typed fields and `additionalProperties` keys.
       properties:
         account_name:
           description: The account name.
@@ -23623,6 +24190,26 @@ components:
           type: string
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ai_credits_agent_builder_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Agent Builder over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ai_credits_bits_assistant_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Bits AI Assistant over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ai_credits_bits_dev_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Bits AI Dev over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ai_credits_bits_sre_ai_credits_sum:
+          description: Shows the sum of all AI credits used by Bits AI SRE over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ai_credits_sum:
+          description: Shows the sum of all AI credits over all hours in the current date for the given org.
           format: int64
           type: integer
         apm_azure_app_service_host_top99p:
@@ -23664,6 +24251,10 @@ components:
           type: integer
         audit_trail_enabled_hwm:
           description: Shows whether Audit Trail is enabled for the current date for the given org.
+          format: int64
+          type: integer
+        audit_trail_event_forwarding_events_sum:
+          description: Shows the sum of all Audit Trail event forwarding events over all hours in the current date for the given org.
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
@@ -23964,6 +24555,14 @@ components:
           description: Shows the sum of all Data Jobs Monitoring hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        data_stream_monitoring_host_count_sum:
+          description: Shows the sum of all Data Streams Monitoring hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        data_stream_monitoring_host_count_top99p:
+          description: Shows the 99th percentile of all Data Streams Monitoring hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         dbm_host_top99p_sum:
           description: Shows the 99th percentile of all Database Monitoring hosts over all hours in the current month for the given org.
           format: int64
@@ -24156,6 +24755,130 @@ components:
           description: Shows the sum of all log events indexed over all hours in the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        indexed_points_sum:
+          description: Shows the sum of all indexed custom metrics points over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_avg:
+          description: Shows the average of all Infrastructure vCPU cores over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_basic_avg:
+          description: Shows the average of all default basic Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_basic_sum:
+          description: Shows the sum of all default basic Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_aws_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on AWS over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_aws_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on AWS over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_azure_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on Azure over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_azure_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on Azure over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_gcp_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on GCP over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_gcp_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on GCP over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores on Nutanix over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_basic_avg:
+          description: Shows the average of all default basic Infrastructure host vCPU cores on Nutanix over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_basic_sum:
+          description: Shows the sum of all default basic Infrastructure host vCPU cores on Nutanix over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on Nutanix over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_opentelemetry_avg:
+          description: Shows the average of all default Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_opentelemetry_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_agent_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_agent_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_aws_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on AWS over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_aws_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on AWS over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_azure_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on Azure over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_azure_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on Azure over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_gcp_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on GCP over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_gcp_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on GCP over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_nutanix_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores on Nutanix over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_nutanix_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on Nutanix over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_opentelemetry_avg:
+          description: Shows the average of all observed Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_opentelemetry_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_cpu_sum:
+          description: Shows the sum of all Infrastructure vCPU cores over all hours in the current date for the given org.
+          format: int64
+          type: integer
         infra_edge_monitoring_devices_top99p:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current date for the given org.
           format: int64
@@ -24180,8 +24903,20 @@ components:
           description: Shows the average number of storage management objects over all hours in the current date for the given org.
           format: int64
           type: integer
+        ingest_points_sum:
+          description: Shows the sum of all ingested custom metrics points over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        iot_apm_host_sum:
+          description: Shows the sum of all Application Performance Monitoring IoT hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        iot_apm_host_top99p:
+          description: Shows the 99th percentile of all Application Performance Monitoring IoT hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         iot_device_agg_sum:
@@ -24192,12 +24927,36 @@ components:
           description: Shows the 99th percentile of all IoT devices over all hours in the current date for the given org.
           format: int64
           type: integer
+        llm_observability_15day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_30day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_60day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        llm_observability_90day_retention_spans_sum:
+          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current date for the given org.
+          format: int64
+          type: integer
         llm_observability_min_spend_sum:
           description: Shows the sum of all LLM Observability minimum spend over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_sum:
           description: Shows the sum of all LLM observability sessions over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        logs_archive_search_gb_scanned_sum:
+          description: Shows the sum of all Logs Archive Search scanned data over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        metric_names_sum:
+          description: Shows the sum of all custom metric names over all hours in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
@@ -24612,6 +25371,14 @@ components:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current date for the given org.
           format: int64
           type: integer
+        snmp_device_count_sum:
+          description: Shows the sum of all Network Device Monitoring devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        snmp_device_count_top99p:
+          description: Shows the 99th percentile of all Network Device Monitoring devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours in the current date for the given org.
           format: int64
@@ -24654,10 +25421,37 @@ components:
           type: integer
       type: object
     UsageSummaryResponse:
-      description: Response summarizing all usage aggregated across the months in the request for all organizations, and broken down by month and by organization.
+      description: |-
+        Response summarizing all usage aggregated across the months in the request for
+        all organizations, and broken down by month and by organization.
+
+        Newly added billing dimensions and usage types appear as untyped keys on the
+        `additionalProperties` map instead of as typed fields. Call
+        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
+        at this response level—both typed fields and `additionalProperties` keys.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ai_credits_agent_builder_ai_credits_agg_sum:
+          description: Shows the sum of all AI credits used by Agent Builder over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ai_credits_agg_sum:
+          description: Shows the sum of all AI credits over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ai_credits_bits_assistant_ai_credits_agg_sum:
+          description: Shows the sum of all AI credits used by Bits AI Assistant over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ai_credits_bits_dev_ai_credits_agg_sum:
+          description: Shows the sum of all AI credits used by Bits AI Dev over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        ai_credits_bits_sre_ai_credits_agg_sum:
+          description: Shows the sum of all AI credits used by Bits AI SRE over all hours in the current month for all organizations.
           format: int64
           type: integer
         apm_azure_app_service_host_top99p_sum:
@@ -24699,6 +25493,10 @@ components:
           type: integer
         audit_trail_enabled_hwm_sum:
           description: Shows the total number of organizations that had Audit Trail enabled over a specific number of months.
+          format: int64
+          type: integer
+        audit_trail_event_forwarding_events_agg_sum:
+          description: Shows the sum of all Audit Trail event forwarding events over all hours in the current month for all organizations.
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
@@ -25003,6 +25801,14 @@ components:
           description: Shows the sum of Data Jobs Monitoring hosts over all hours in the current months for all organizations
           format: int64
           type: integer
+        data_stream_monitoring_host_count_agg_sum:
+          description: Shows the sum of all Data Streams Monitoring hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        data_stream_monitoring_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Data Streams Monitoring hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         dbm_host_top99p_sum:
           description: Shows the 99th percentile of all Database Monitoring hosts over all hours in the current month for all organizations.
           format: int64
@@ -25196,6 +26002,130 @@ components:
           description: Shows the sum of all log events indexed over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        indexed_points_agg_sum:
+          description: Shows the sum of all indexed custom metrics points over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_agg_sum:
+          description: Shows the sum of all Infrastructure vCPU cores over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_avg_sum:
+          description: Shows the average of all Infrastructure vCPU cores over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_agg_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_avg_sum:
+          description: Shows the average of all default Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_basic_agg_sum:
+          description: Shows the sum of all default basic Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_agent_basic_avg_sum:
+          description: Shows the average of all default basic Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_aws_agg_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on AWS over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_aws_avg_sum:
+          description: Shows the average of all default Infrastructure host vCPU cores on AWS over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_azure_agg_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on Azure over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_azure_avg_sum:
+          description: Shows the average of all default Infrastructure host vCPU cores on Azure over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_gcp_agg_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on GCP over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_gcp_avg_sum:
+          description: Shows the average of all default Infrastructure host vCPU cores on GCP over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_agg_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores on Nutanix over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_avg_sum:
+          description: Shows the average of all default Infrastructure host vCPU cores on Nutanix over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_basic_agg_sum:
+          description: Shows the sum of all default basic Infrastructure host vCPU cores on Nutanix over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_nutanix_basic_avg_sum:
+          description: Shows the average of all default basic Infrastructure host vCPU cores on Nutanix over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_opentelemetry_agg_sum:
+          description: Shows the sum of all default Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_default_infra_host_vcpu_opentelemetry_avg_sum:
+          description: Shows the average of all default Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_agent_agg_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_agent_avg_sum:
+          description: Shows the average of all observed Infrastructure host vCPU cores reported by the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_aws_agg_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on AWS over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_aws_avg_sum:
+          description: Shows the average of all observed Infrastructure host vCPU cores on AWS over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_azure_agg_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on Azure over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_azure_avg_sum:
+          description: Shows the average of all observed Infrastructure host vCPU cores on Azure over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_gcp_agg_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on GCP over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_gcp_avg_sum:
+          description: Shows the average of all observed Infrastructure host vCPU cores on GCP over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_nutanix_agg_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores on Nutanix over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_nutanix_avg_sum:
+          description: Shows the average of all observed Infrastructure host vCPU cores on Nutanix over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_opentelemetry_agg_sum:
+          description: Shows the sum of all observed Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_cpu_observed_infra_host_vcpu_opentelemetry_avg_sum:
+          description: Shows the average of all observed Infrastructure host vCPU cores reported by OpenTelemetry over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         infra_edge_monitoring_devices_top99p_sum:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current month for all organizations.
           format: int64
@@ -25220,8 +26150,20 @@ components:
           description: Shows the average number of storage management objects over all hours in the current month for all organizations.
           format: int64
           type: integer
+        ingest_points_agg_sum:
+          description: Shows the sum of all ingested custom metrics points over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        iot_apm_host_agg_sum:
+          description: Shows the sum of all Application Performance Monitoring IoT hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        iot_apm_host_top99p_sum:
+          description: Shows the 99th percentile of all Application Performance Monitoring IoT hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         iot_device_agg_sum:
@@ -25245,6 +26187,22 @@ components:
           description: Shows the sum of all live logs bytes ingested over all hours in the current month for all organizations (data available as of December 1, 2020).
           format: int64
           type: integer
+        llm_observability_15day_retention_spans_agg_sum:
+          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_30day_retention_spans_agg_sum:
+          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_60day_retention_spans_agg_sum:
+          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        llm_observability_90day_retention_spans_agg_sum:
+          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         llm_observability_agg_sum:
           description: Sum of all LLM observability sessions for all hours in the current month for all organizations.
           format: int64
@@ -25253,8 +26211,16 @@ components:
           description: Minimum spend for LLM observability sessions for all hours in the current month for all organizations.
           format: int64
           type: integer
+        logs_archive_search_gb_scanned_agg_sum:
+          description: Shows the sum of all Logs Archive Search scanned data over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         logs_by_retention:
           $ref: "#/components/schemas/LogsByRetention"
+        metric_names_agg_sum:
+          description: Shows the sum of all custom metric names over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         mobile_rum_lite_session_count_agg_sum:
           deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
@@ -25669,6 +26635,14 @@ components:
           type: integer
         siem_analyzed_logs_add_on_count_agg_sum:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        snmp_device_count_agg_sum:
+          description: Shows the sum of all Network Device Monitoring devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        snmp_device_count_top99p_sum:
+          description: Shows the 99th percentile of all Network Device Monitoring devices over all hours in the current month for all organizations.
           format: int64
           type: integer
         start_date:
@@ -27528,7 +28502,10 @@ paths:
       x-menu-order: 1
   /api/v1/api_key:
     get:
-      description: Get all API keys available for your account.
+      description: |-
+        Get all API keys available for your account.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: ListAPIKeys
       responses:
         "200":
@@ -27562,7 +28539,10 @@ paths:
         permissions:
           - api_keys_read
     post:
-      description: Creates an API key with a given name.
+      description: |-
+        Creates an API key with a given name.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: CreateAPIKey
       requestBody:
         content:
@@ -27614,7 +28594,10 @@ paths:
           - api_keys_write
   /api/v1/api_key/{key}:
     delete:
-      description: Delete a given API key.
+      description: |-
+        Delete a given API key.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: DeleteAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27667,7 +28650,10 @@ paths:
         permissions:
           - api_keys_delete
     get:
-      description: Get a given API key.
+      description: |-
+        Get a given API key.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: GetAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27714,7 +28700,10 @@ paths:
         permissions:
           - api_keys_read
     put:
-      description: Edit an API key name.
+      description: |-
+        Edit an API key name.
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: UpdateAPIKey
       parameters:
         - description: The specific API key you are working with.
@@ -27782,6 +28771,8 @@ paths:
       description: |-
         Get all application keys available for your Datadog account.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: ListApplicationKeys
       responses:
         "200":
@@ -27818,6 +28809,8 @@ paths:
       description: |-
         Create an application key with a given name.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: CreateApplicationKey
       requestBody:
         content:
@@ -27877,6 +28870,8 @@ paths:
       description: |-
         Delete a given application key.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: DeleteApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -27926,6 +28921,8 @@ paths:
       description: |-
         Get a given application key.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: GetApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -27975,6 +28972,8 @@ paths:
       description: |-
         Edit an application key name.
         This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).
+
+        **Note**: This endpoint is disabled for the Government sites (US1-FED and US2-FED). Use the [V2 Key Management](https://docs.datadoghq.com/api/latest/key-management/) endpoints instead.
       operationId: UpdateApplicationKey
       parameters:
         - description: The specific APP key you are working with.
@@ -35101,7 +36100,7 @@ paths:
       description: |-
         Validate the monitor provided in the request.
 
-        **Note**: Log monitors require an unscoped App Key.
+        **Note**: Log monitors require an unscoped App Key and `logs_read_data` permission.
       operationId: ValidateMonitor
       requestBody:
         content:
@@ -35634,7 +36633,10 @@ paths:
           - monitors_write
   /api/v1/monitor/{monitor_id}/validate:
     post:
-      description: Validate the monitor provided in the request.
+      description: |-
+        Validate the monitor provided in the request.
+
+        **Note**: Log monitors require an unscoped App Key and `logs_read_data` permission.
       operationId: ValidateExistingMonitor
       parameters:
         - description: The ID of the monitor
@@ -37571,7 +38573,8 @@ paths:
           - slos_read
     post:
       description: |-
-        Create an SLO Correction.
+        Create an SLO correction. Use `slo_id` to apply the correction to a single SLO, or `slo_query` to apply the
+        correction to SLOs that match a query. Exactly one of `slo_id` or `slo_query` is required.
       operationId: CreateSLOCorrection
       requestBody:
         content:
@@ -37585,6 +38588,17 @@ paths:
                       description: "Planned maintenance window for database upgrade."
                       end: 1600003600
                       slo_id: sloId
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
+              slo_query:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Planned maintenance window for checkout services."
+                      end: 1600003600
+                      slo_query: "env:prod service:checkout"
                       start: 1600000000
                       timezone: UTC
                     type: correction
@@ -37747,6 +38761,17 @@ paths:
                       category: "Scheduled Maintenance"
                       description: "Updated correction for maintenance window."
                       end: 1600003600
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
+              slo_query:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Updated correction for checkout services."
+                      end: 1600003600
+                      slo_query: "env:prod service:checkout"
                       start: 1600000000
                       timezone: UTC
                     type: correction
@@ -43227,6 +44252,12 @@ paths:
       description: |-
         Get all usage across your account.
 
+        Newly added billing dimensions and usage types appear as untyped keys on the
+        `additionalProperties` map of `UsageSummaryResponse`, `UsageSummaryDate`, and
+        `UsageSummaryDateOrg` instead of as typed fields. Call
+        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
+        at each response level—both typed fields and `additionalProperties` keys.
+
         This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
       operationId: GetUsageSummary
       parameters:
@@ -43778,7 +44809,7 @@ paths:
         operator: OR
         permissions:
           - user_access_invite
-  "/api/v1/user/{user_handle}":
+  /api/v1/user/{user_handle}:
     delete:
       description: |-
         Delete a user from an organization.
@@ -44419,13 +45450,6 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/integrations/pagerduty/
     name: PagerDuty Integration
-  - description: >-
-      This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
-    externalDocs:
-      description: Documentation for old endpoints is available in the
-      url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
-    name: Screenboards
-    x-deprecated: true
   - description: |-
       Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information.
     name: "Security Monitoring"
@@ -44501,13 +45525,6 @@ tags:
 
       Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).
     name: Tags
-  - description: >-
-      This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
-    externalDocs:
-      description: Documentation for old endpoints is available in the
-      url: https://docs.datadoghq.com/dashboards/guide/timeboard-api-doc/
-    name: Timeboards
-    x-deprecated: true
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.

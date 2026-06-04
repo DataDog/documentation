@@ -13,13 +13,9 @@ further_reading:
   text: "Configure Log Ingestion"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-This document walks you through the process of configuring your AWS environment and installing BYOC Logs on AWS EKS.
+This document walks you through the process of configuring your AWS environment and installing BYOC (Bring Your Own Cloud) Logs on AWS EKS.
 
 ## Prerequisites
 
