@@ -1,0 +1,146 @@
+---
+title: Set Up Server-Side Flag Evaluation Metrics
+description: Configure the Datadog Agent and your application to emit and visualize flag evaluation metrics for server-side feature flags.
+further_reading:
+- link: "/feature_flags/server/"
+  tag: "Documentation"
+  text: "Server-Side Feature Flags"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Documentation"
+  text: "Feature Flag Graphs"
+- link: "/metrics/"
+  tag: "Documentation"
+  text: "Metrics"
+- link: "/dashboards/"
+  tag: "Documentation"
+  text: "Dashboards"
+---
+
+## Overview
+
+Flag evaluation metrics let you measure how often each variant of a feature flag is returned by your server-side application. Use these metrics to track flag adoption over time, verify targeting rules are working as expected, and graph flag evaluation data on dashboards.
+
+<div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
+
+## Prerequisites
+
+Before setting up flag evaluation metrics:
+
+- Server-side feature flags are already configured. See [Server-Side Feature Flags][1].
+- Datadog Agent 7.55 or later is running.
+- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
+- Your server-side tracer meets the minimum version for flag evaluation metrics support:
+
+| Language | Minimum tracer version |
+|----------|----------------------|
+| .NET | 3.44.0 |
+| Go | 2.8.0 |
+| Java | 1.62.0 |
+| Node.js | 5.99.0 |
+| Python | 4.7.0 |
+| Ruby | 2.32.0 |
+| C++ | Coming soon |
+| PHP | Coming soon |
+| Python Lambdas | Coming soon |
+| Rust | Coming soon |
+
+## Step 1: Enable the Agent OTLP receiver
+
+Flag evaluation metrics are emitted over OpenTelemetry (OTLP). The Datadog Agent includes an OTLP receiver, but it is off by default. Enable it with the following environment variables on your Agent:
+
+{{< code-block lang="bash" >}}
+# gRPC endpoint (port 4317)
+DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
+
+# HTTP endpoint (port 4318)
+DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
+{{< /code-block >}}
+
+You only need to enable the protocol your application uses. Both gRPC and HTTP are shown for reference.
+
+<div class="alert alert-info">If you are running Agent v7.61.0 or later in Docker, set <code>HOST_PROC=/proc</code> on the Agent container to work around a known issue with the OTLP pipeline.</div>
+
+## Step 2: Configure your application
+
+Set the following environment variables on your application in addition to the standard [server-side feature flag configuration][1]:
+
+{{< code-block lang="bash" >}}
+# Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+
+# Point OTLP metrics at the Datadog Agent
+# HTTP endpoint (note the /v1/metrics path suffix):
+OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://<AGENT_HOST>:4318/v1/metrics
+
+# Or use gRPC (no path suffix):
+# OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://<AGENT_HOST>:4317
+{{< /code-block >}}
+
+Replace `<AGENT_HOST>` with the hostname or IP address of your Datadog Agent. In a Docker Compose setup, this is typically the Agent container's service name.
+
+## Docker Compose example
+
+{{< code-block lang="yaml" filename="docker-compose.yml" >}}
+services:
+  datadog-agent:
+    image: gcr.io/datadoghq/agent:latest
+    environment:
+      - DD_API_KEY=<YOUR_DATADOG_API_KEY>
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
+      - HOST_PROC=/proc  # Required for Agent v7.61.0+ running in Docker
+
+  app:
+    environment:
+      - DD_SERVICE=<YOUR_SERVICE_NAME>
+      - DD_ENV=<YOUR_ENVIRONMENT>
+      - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+      - DD_METRICS_OTEL_ENABLED=true
+      - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://datadog-agent:4318/v1/metrics
+    depends_on:
+      - datadog-agent
+{{< /code-block >}}
+
+## Step 3: Verify metrics are flowing
+
+After deploying, confirm metrics are reaching Datadog:
+
+1. Go to [Metrics Explorer][2] and search for `feature_flag.evaluations`.
+2. If the metric does not appear within a few minutes of your application evaluating flags, check:
+   - The Agent OTLP receiver is enabled and the correct port is exposed.
+   - `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` points to the Agent, not a separate collector.
+   - Your application is actively evaluating flags at runtime (the code path is being executed).
+
+## Step 4: Enable metric retention
+
+By default, `feature_flag.evaluations` retains only one hour of data. To retain a longer history:
+
+1. Go to [Metrics Summary][3] and search for `feature_flag.evaluations`.
+2. Select the metric and enable **Historical Metrics**.
+
+This is an opt-in setting and is not enabled automatically for OTLP metrics.
+
+## Graph flag evaluations on a dashboard
+
+Use the following query to graph flag evaluations by flag key and variant on a [dashboard][4]:
+
+{{< code-block lang="text" >}}
+sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant}
+{{< /code-block >}}
+
+The `feature_flag.evaluations` metric is a counter with the following tags:
+
+| Tag | Description |
+|-----|-------------|
+| `feature_flag.key` | The flag key being evaluated |
+| `feature_flag.result.variant` | The variant returned by the evaluation |
+| `feature_flag.result.reason` | The reason for the evaluation result |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/server/
+[2]: https://app.datadoghq.com/metric/explorer
+[3]: https://app.datadoghq.com/metric/summary
+[4]: /dashboards/
