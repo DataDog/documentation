@@ -31,7 +31,7 @@ Governance Console provides centralized configuration and governance for multi-t
 
 The `governance_console_read` permission controls access to the Governance Console. Users with `governance_console_read` assigned to their role can view the Governance Console UI and associated reporting and insights.
 
-Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metrics_write` permission.
+Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metric_tags_write` permission.
 
 ## Using Governance Console
 

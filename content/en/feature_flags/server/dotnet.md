@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog .NET tracer (`dd-trace-dotnet`).
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -32,10 +32,15 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Optional: Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
 ## Installation
 
@@ -57,7 +62,7 @@ Or add them to your `.csproj` file:
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog .NET tracer's Remote Configuration system to receive flag configurations.
 
 ### Blocking initialization
 
@@ -108,6 +113,8 @@ var client = Api.Instance.GetClient("my-service");
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="csharp" >}}
 using OpenFeature.Model;
