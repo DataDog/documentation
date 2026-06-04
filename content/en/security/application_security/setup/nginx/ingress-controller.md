@@ -54,7 +54,6 @@ metadata:
   name: datadog
   annotations:
     agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.proxies: '["ingress-nginx"]'
     # Optional: override the path where the nginx-datadog module is mounted
     # in the controller pod (default: /modules_mount)
     # agent.datadoghq.com/appsec.nginx.module_mount_path: "/modules_mount"
@@ -76,8 +75,6 @@ datadog:
   appsec:
     injector:
       enabled: true
-      proxies:
-        - ingress-nginx
       # Optional: override the path where the nginx-datadog module is mounted
       # in the controller pod (default: /modules_mount)
       # nginx:
