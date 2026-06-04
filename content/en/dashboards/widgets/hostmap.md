@@ -15,7 +15,7 @@ further_reading:
 
 The host map widget displays your infrastructure as a color-coded grid of hosts, containers, pods, or clusters. Use it to spot anomalies, understand resource distribution, and monitor infrastructure health at a glance. For the full-screen version, see the [Host Map][1] page.
 
-{{< img src="dashboards/widgets/hostmap/hostmap-2.png" alt="Host map widget showing hosts grouped by availability zone and colored by CPU utilization, with darker hexagons indicating higher CPU usage" >}}
+{{< img src="dashboards/widgets/hostmap/hostmap-2.png" alt="Host map widget showing hosts grouped by availability zone and colored by CPU utilization, with darker hexagons indicating higher CPU usage." >}}
 
 ## Setup
 
