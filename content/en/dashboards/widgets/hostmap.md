@@ -36,7 +36,7 @@ The host map widget displays your infrastructure as a color-coded grid of hosts,
    - {{< ui >}}Reverse palette{{< /ui >}}: Flip the direction of the palette.
    - {{< ui >}}Min{{< /ui >}} / {{< ui >}}Max{{< /ui >}}: Pin the color scale to specific metric values. Nodes below the minimum display in the first palette color; nodes above the maximum display in the last.
 7. {{< ui >}}Conditional formats{{< /ui >}} (optional): Apply color overrides to nodes whose fill value crosses a defined threshold.
-8. {{< ui >}}Hierarchical view{{< /ui >}} (optional): Configure a child node type that appears when zooming into a group, for example **Container** within **Host**. The child layer has its own independent {{< ui >}}Fill by{{< /ui >}} query and {{< ui >}}Style{{< /ui >}} settings.
+8. {{< ui >}}Hierarchical view{{< /ui >}} (optional): Configure a child node type that appears when zooming into a group, such as **Container** within **Host**. The child layer has its own independent {{< ui >}}Fill by{{< /ui >}} query and {{< ui >}}Style{{< /ui >}} settings.
 
 ### Options
 
