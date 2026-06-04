@@ -8,6 +8,9 @@ further_reading:
 - link: "/remote_configuration/"
   tag: "Documentation"
   text: "Remote Configuration"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
 ---
 
 ## Overview
@@ -76,7 +79,7 @@ DD_METRICS_OTEL_ENABLED=true
 
 <div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
-<div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable flag evaluation metrics. Without this, the SDK does not emit metrics for flag evaluations. When enabled, each evaluation records a <code>feature_flag.evaluations</code> counter metric tagged with the flag key, result variant, and evaluation reason.</div>
+<div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable the experimental <code>feature_flag.evaluations</code> metric. Without this, the SDK does not emit metrics for flag evaluations. Additional Agent configuration is required — see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the full setup guide.</div>
 
 ## Testing with in-memory providers
 

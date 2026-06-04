@@ -368,6 +368,8 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
+For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -380,3 +382,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 [6]: /feature_flags/concepts/distribution_channels/
 [7]: /feature_flags/concepts/targeting_rules/
 [8]: /feature_flags/concepts/traffic_splitting/
+[9]: /feature_flags/guide/server_flag_evaluation_metrics/
