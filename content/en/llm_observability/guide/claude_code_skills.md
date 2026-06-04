@@ -41,18 +41,13 @@ The skills produce structured, actionable output — RCA reports with before/aft
 
 ### Install the skills
 
-The skills are published in the [agent-skills][6] repository. Clone the repository and copy the LLM Observability skills into your Claude Code skills directory:
+The skills are published in the [agent-skills][6] repository. Install them with the following command:
 
 ```shell
-git clone https://github.com/datadog-labs/agent-skills
-cp -r agent-skills/dd-llmo/llm-obs-experiment-analyzer ~/.claude/skills
-cp -r agent-skills/dd-llmo/llm-obs-eval-pipeline ~/.claude/skills
-cp -r agent-skills/dd-llmo/llm-obs-eval-bootstrap ~/.claude/skills
-cp -r agent-skills/dd-llmo/llm-obs-session-classify ~/.claude/skills
-cp -r agent-skills/dd-llmo/llm-obs-trace-rca ~/.claude/skills
+npx skills add datadog-labs/agent-skills/dd-llmo --full-depth -y
 ```
 
-The skills are available in any Claude Code session after copying.
+The skills are available in any Claude Code session after installing.
 
 ### Datadog MCP server
 
