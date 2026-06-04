@@ -63,7 +63,7 @@ Bits Code can suggest code improvements in the following Datadog products:
 
 Across [Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15].
 
-{{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button has the text 'Fix with Bits'" >}}
+{{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button has the text 'Fix with Bits'" style="width:25%" >}}
 
 In certain products, [Bits Chat][16] explores and investigates issues, then hands off its findings to Bits Code to implement a code change.
 
