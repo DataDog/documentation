@@ -44765,7 +44765,7 @@ paths:
         operator: OR
         permissions:
           - user_access_invite
-  "/api/v1/user/{user_handle}":
+  /api/v1/user/{user_handle}:
     delete:
       description: |-
         Delete a user from an organization.
@@ -45406,13 +45406,6 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/integrations/pagerduty/
     name: PagerDuty Integration
-  - description: >-
-      This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
-    externalDocs:
-      description: Documentation for old endpoints is available in the
-      url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
-    name: Screenboards
-    x-deprecated: true
   - description: |-
       Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information.
     name: "Security Monitoring"
@@ -45488,13 +45481,6 @@ tags:
 
       Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).
     name: Tags
-  - description: >-
-      This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
-    externalDocs:
-      description: Documentation for old endpoints is available in the
-      url: https://docs.datadoghq.com/dashboards/guide/timeboard-api-doc/
-    name: Timeboards
-    x-deprecated: true
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.

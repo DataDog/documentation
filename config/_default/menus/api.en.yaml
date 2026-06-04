@@ -2572,10 +2572,6 @@ menu:
           - CreatePagerDutyIntegrationService
         unstable: []
         order: 1
-    - name: Screenboards
-      url: /api/latest/screenboards/
-      identifier: screenboards
-      generated: true
     - name: Security Monitoring
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
@@ -5536,10 +5532,6 @@ menu:
           - ListHostTags
         unstable: []
         order: 1
-    - name: Timeboards
-      url: /api/latest/timeboards/
-      identifier: timeboards
-      generated: true
     - name: Usage Metering
       url: /api/latest/usage-metering/
       identifier: usage-metering
@@ -15179,7 +15171,7 @@ menu:
           - v2
         order: 9
     - name: Get service repository information
-      url: '#get-service-repository-information'
+      url: /api/latest/rum/get-service-repository-information/
       identifier: rum-get-service-repository-information
       parent: rum
       generated: true
@@ -15192,7 +15184,7 @@ menu:
           - v2
         order: 14
     - name: Restore source maps
-      url: '#restore-source-maps'
+      url: /api/latest/rum/restore-source-maps/
       identifier: rum-restore-source-maps
       parent: rum
       generated: true
@@ -15205,7 +15197,7 @@ menu:
           - v2
         order: 13
     - name: List source maps
-      url: '#list-source-maps'
+      url: /api/latest/rum/list-source-maps/
       identifier: rum-list-source-maps
       parent: rum
       generated: true
@@ -15218,7 +15210,7 @@ menu:
           - v2
         order: 12
     - name: Get a JavaScript source map
-      url: '#get-a-javascript-source-map'
+      url: /api/latest/rum/get-a-javascript-source-map/
       identifier: rum-get-a-javascript-source-map
       parent: rum
       generated: true
@@ -15231,7 +15223,7 @@ menu:
           - v2
         order: 10
     - name: Delete source maps
-      url: '#delete-source-maps'
+      url: /api/latest/rum/delete-source-maps/
       identifier: rum-delete-source-maps
       parent: rum
       generated: true
