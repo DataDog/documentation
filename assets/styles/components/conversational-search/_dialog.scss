@@ -4,44 +4,53 @@ $conv-float-btn-bg-hover: #4f2384;
 
 :root {
     --docs-ai-sidebar-width: 440px;
-    --docs-ai-floating-width: 420px;
+    --docs-ai-floating-width: 500px;
     --docs-ai-floating-height: 570px;
+    // Set by JS to the announcement banner height.
+    --docs-ai-sidebar-top-offset: 0px;
 }
 
+// Narrow the body (and make it a positioning context) instead of padding it,
+// so full-width children like `.greyside` reflow with it rather than the viewport.
 body {
-    transition: padding-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
     &.docs-ai-sidebar-pushed {
-        padding-right: var(--docs-ai-sidebar-width);
+        position: relative;
+        width: calc(100% - var(--docs-ai-sidebar-width));
     }
 
     @media (max-width: 640px) {
         transition: none;
 
         &.docs-ai-sidebar-pushed {
-            padding-right: 0;
+            width: 100%;
         }
     }
 }
 
-.announcement-banner,
+// The fixed nav isn't affected by the body width, so shrink its width to stay
+// aligned with the sidebar. The banner is left full-width (sidebar docks below it).
 .main-nav-wrapper,
 .main-nav-wrapper .main-nav {
-    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.docs-ai-sidebar-pushed {
-    .announcement-banner,
     .main-nav-wrapper,
     .main-nav-wrapper .main-nav {
-        right: var(--docs-ai-sidebar-width);
+        left: 0;
+        right: auto;
+        width: calc(100% - var(--docs-ai-sidebar-width));
     }
 
     @media (max-width: 640px) {
-        .announcement-banner,
         .main-nav-wrapper,
         .main-nav-wrapper .main-nav {
+            left: 0;
             right: 0;
+            width: 100%;
         }
     }
 }
@@ -141,6 +150,14 @@ body.docs-ai-sidebar-pushed {
             opacity: 1;
             visibility: visible;
         }
+
+        // Scale up on large viewports, clamped so it never grows unbounded.
+        @media (min-width: 1280px) {
+            width: clamp(920px, 66vw, 1408px);
+            max-width: 92vw;
+            height: clamp(733px, 79vh, 915px);
+            max-height: 90vh;
+        }
     }
 
     // --- Mode: Floating (small bottom-right panel) ------------------------
@@ -166,9 +183,9 @@ body.docs-ai-sidebar-pushed {
         }
     }
 
-    // --- Mode: Sidebar (right-docked, full height) ------------------------
+    // --- Mode: Sidebar (right-docked, below the announcement banner) ------
     &.mode-sidebar {
-        top: 0;
+        top: var(--docs-ai-sidebar-top-offset);
         right: 0;
         bottom: 0;
         transform: translateX(16px);
@@ -181,6 +198,11 @@ body.docs-ai-sidebar-pushed {
         border-radius: 0;
         border-left: 1px solid $conv-search-border;
         box-shadow: none;
+
+        .conv-search-header {
+            padding-top: 17px !important;
+            padding-bottom: 24px;
+        }
 
         &.open {
             transform: translateX(0);
@@ -664,7 +686,7 @@ body.docs-ai-panel-resizing {
     }
 }
 
-// --- Compact-mode header tweaks (floating + sidebar) -------------------------
+// --- Compact-mode tweaks (floating + sidebar) --------------------------------
 .conv-search-sidebar.mode-floating,
 .conv-search-sidebar.mode-sidebar {
     .conv-search-header {
@@ -680,6 +702,57 @@ body.docs-ai-panel-resizing {
 
         span {
             display: none;
+        }
+    }
+
+    // Tighten the footer/disclaimer so the answer area gets more room.
+    .conv-search-footer {
+        padding: 0 16px 14px;
+    }
+
+    .conv-search-input-container {
+        padding: 8px 8px 8px 16px;
+    }
+
+    .conv-search-input {
+        font-size: 16px;
+        line-height: 24px;
+        min-height: 24px;
+    }
+
+    .conv-search-disclaimer {
+        padding-top: 8px;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+    }
+
+    // Pull messages in to align with the footer's input box.
+    .conv-search-message-user,
+    .conv-search-message-assistant,
+    .conv-search-loading-state {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .conv-search-empty-state {
+        padding: 24px 16px 16px;
+    }
+
+    // Cap chips to the panel width and ellipsis-truncate so they never overflow.
+    .conv-search-suggestion {
+        max-width: 100%;
+        min-width: 0;
+        font-size: 14px;
+        line-height: 20px;
+        height: 32px;
+
+        span {
+            display: block;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
 }

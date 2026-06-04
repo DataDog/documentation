@@ -44,10 +44,10 @@ const RESIZABLE_MODES = {
         width: {
             cssVar: '--docs-ai-floating-width',
             storageKey: 'docs-ai-floating-width',
-            default: 420,
+            default: 500,
             min: 360,
-            maxPx: 720,
-            maxViewportPct: 0.8,
+            maxPx: 920,
+            maxViewportPct: 0.9,
             viewportOffset: 24,
         },
         height: {
@@ -312,6 +312,10 @@ class ConversationalSearch {
         this.bindTooltipEvents();
         this.bindClickDelegation();
         this.bindScrollFade();
+
+        window.addEventListener('resize', () => {
+            if (this.isOpen && this.viewMode === 'sidebar') this.applySidebarTopOffset();
+        });
     }
 
     bindModeSwitcher() {
@@ -561,6 +565,17 @@ class ConversationalSearch {
     updateBodyPush() {
         const shouldPush = this.isOpen && this.viewMode === 'sidebar';
         document.body.classList.toggle('docs-ai-sidebar-pushed', shouldPush);
+        if (shouldPush) this.applySidebarTopOffset();
+    }
+
+    // Dock the sidebar just below the announcement banner.
+    applySidebarTopOffset() {
+        const banner = document.querySelector('.announcement-banner');
+        const bannerRect = banner?.getBoundingClientRect();
+        const topOffset = bannerRect && bannerRect.height > 0 && bannerRect.top <= 1
+            ? Math.max(0, Math.round(bannerRect.bottom))
+            : 0;
+        document.documentElement.style.setProperty('--docs-ai-sidebar-top-offset', `${topOffset}px`);
     }
 
     setViewMode(mode) {
