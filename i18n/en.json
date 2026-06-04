@@ -241,8 +241,8 @@
   "copy": {
     "other": "Copy"
   },
-  "copy_page_contents": {
-    "other": "Copy page contents"
+  "copy_page": {
+    "other": "Copy page"
   },
   "copied": {
     "other": "Copied"
