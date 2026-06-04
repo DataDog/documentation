@@ -393,7 +393,7 @@ Two options are available to prevent this conflict:
 
 ### Supported target workload kinds
 
-The `ignoreDifferences` configuration must cover every workload kind that a `DatadogPodAutoscaler` can target via `spec.targetRef`:
+The `ignoreDifferences` configuration must cover every workload kind that a `DatadogPodAutoscaler` can target through `spec.targetRef`:
 
 | Workload kind | API group | Note |
 |---|---|---|
@@ -401,7 +401,7 @@ The `ignoreDifferences` configuration must cover every workload kind that a `Dat
 | `StatefulSet` | `apps` | |
 | `Rollout` | `argoproj.io` | Applies only if you also run Argo Rollouts |
 
-### Option A: Per-application configuration
+### Option A: per-application configuration
 
 Choose one of the following variants depending on whether server-side apply is active in your cluster.
 
@@ -465,11 +465,11 @@ ignoreDifferences:
 
 **Limitation:** this variant only covers `autoscaling.datadoghq.com/` annotations. If the autoscaler also mutates `spec.replicas` or container resource requests, add separate `jqPathExpressions` entries for those fields. Variant 1 (`managedFieldsManagers`) avoids this gap by automatically covering all fields the Cluster Agent owns.
 
-### Option B: Global ArgoCD configuration
+### Option B: global ArgoCD configuration
 
 To apply `ignoreDifferences` once across all Applications in an ArgoCD instance, configure the `argocd-cm` ConfigMap using `resource.customizations.ignoreDifferences.<group>_<kind>` keys.
 
-#### ConfigMap (kubectl or Kustomize installs)
+#### ConfigMap (kubectl or kustomize installs)
 
 {{< code-block lang="yaml" filename="argocd-cm patch" >}}
 apiVersion: v1
@@ -489,9 +489,9 @@ data:
       - datadog-cluster-agent
 {{< /code-block >}}
 
-#### ArgoCD Helm chart values
+#### ArgoCD helm chart values
 
-For users deploying ArgoCD via the official `argo/argo-cd` Helm chart, add the same keys under `configs.cm`:
+For users deploying ArgoCD with the official `argo/argo-cd` Helm chart, add the same keys under `configs.cm`:
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
 configs:
@@ -516,7 +516,7 @@ helm upgrade --install argocd argo/argo-cd -f values.yaml -n argocd
 #### Important: `RespectIgnoreDifferences` is still required per-Application
 
 <div class="alert alert-warning">
-Global <code>ignoreDifferences</code> configuration only suppresses diff display in the ArgoCD UI. For ArgoCD to actually preserve the Cluster Agent's mutations during automated self-heal, <strong>each Application that contains an autoscaled workload must still set <code>RespectIgnoreDifferences=true</code> in its <code>syncOptions</code></strong>. There is no global equivalent for this sync option.
+Global <code>ignoreDifferences</code> configuration only suppresses diff display in the ArgoCD UI. It does not prevent ArgoCD from overwriting those fields during a sync. Each Application containing an autoscaled workload must also set <strong><code>RespectIgnoreDifferences=true</code> in its <code>syncOptions</code></strong>. There is no global equivalent for this sync option.
 </div>
 
 To avoid setting `RespectIgnoreDifferences=true` on each Application individually, define it at the `AppProject` level so all Applications in the project inherit it:
@@ -534,9 +534,9 @@ spec:
 
 Alternatively, use an `ApplicationSet` template to add the sync option to all generated Applications automatically.
 
-### Which option should I use?
+### Which option to use
 
-- **Few autoscaled workloads**: use Option A. The configuration stays colocated with the workload and is easy to review.
+- **Few autoscaled workloads**: use Option A. The configuration stays colocated with the workload.
 - **Many workloads or ArgoCD-wide standardization**: use Option B combined with a project-level or `ApplicationSet`-level `RespectIgnoreDifferences=true`.
 - **Mixed environments (not all workloads are autoscaled)**: Option B is safe to apply globally. The `managedFieldsManagers` rule is a no-op for workloads that have no Datadog Cluster Agent field ownership.
 
@@ -688,7 +688,7 @@ kubectl get events -n nginx-dka-demo --sort-by='.lastTimestamp'
 
 ### Autoscaled workload keeps reverting
 
-If you observe the autoscaled workload's `spec.replicas` or `autoscaling.datadoghq.com/` annotations being repeatedly reset by ArgoCD (typically every ~3 minutes when `selfHeal: true` is enabled), one of the following is likely missing or misconfigured:
+With `selfHeal: true` enabled, ArgoCD syncs approximately every 3 minutes. If `spec.replicas` or `autoscaling.datadoghq.com/` annotations on the autoscaled workload are repeatedly reset, check for one of the following:
 
 1. **`RespectIgnoreDifferences=true` is absent** from the Application's `syncOptions`. Without this flag, ArgoCD only hides the drift in the UI but still overwrites the fields during apply.
 2. **The `ignoreDifferences` entry does not match the workload.** Verify that `group`, `kind`, `name`, and `namespace` in the entry exactly match the target workload.
