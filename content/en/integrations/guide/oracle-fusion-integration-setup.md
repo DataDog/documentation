@@ -74,7 +74,7 @@ Grant the following roles to the integration user so that Datadog can read ESS l
 | Integration Specialist | `ORA_FND_INTEGRATION_SPECIALIST_JOB` | Access ERP Integration REST endpoints |
 | Internal Auditor | `ORA_FND_INTERNAL_AUDITOR_JOB` | Read-only access to audit data |
 
-<div class="alert alert-info">The ESS Monitor role cannot be assigned directly to a user. To assign it, navigate to <strong>Security Console</strong> &gt; <strong>Roles</strong> &gt; <strong>Create Role</strong>, add <code>ESSMonitor</code> under <strong>Role Hierarchy</strong>, then assign the new role to the integration user.</div>
+<div class="alert alert-info">The ESS Monitor role cannot be assigned directly to a user. To assign it, navigate to <strong>Security Console</strong> &gt; <strong>Roles</strong> &gt; <strong>Create Role</strong> to create a custom role, add <code>ESSMonitor</code> under <strong>Role Hierarchy</strong>, then assign the new role to the integration user.</div>
 
 ## Configure the Datadog tile
 
