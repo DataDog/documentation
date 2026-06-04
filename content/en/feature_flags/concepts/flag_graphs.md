@@ -19,52 +19,51 @@ Datadog Feature Flags provides graphs at two levels: the flags list page gives a
 
 ## Flags list page
 
-The flags list page shows a summary row for each flag, including evaluation sparklines and counts that let you assess activity across your flag inventory without opening each flag individually.
+The flags list page shows a summary row for each flag, including total evaluation count and mini graph that let you assess activity across your flag inventory without opening each flag individually.
 
 {{< img src="feature_flags/flag_graphs/flags_list.png" alt="Feature flags list page showing evaluation counts and sparklines per flag" style="width:100%;" >}}
 
 Each row shows:
 
-- **Evaluation count**: total number of evaluations in the selected time window
-- **Sparkline**: a mini graph of evaluation volume over time, so you can spot sudden drops or spikes at a glance
-- **Variant breakdown**: the distribution of evaluations across variants
+- **Evaluation count**: total number of client and server evaluations in the past hour
+- **Mini graph**: individual client and server evaluations in the past hour, grouped by variant
+- **Variants**: the variant colors are the key for the mini graph
 
 ## Flag details page
 
-The flag details page includes several graphs to help you monitor how a single flag is performing.
+The flag details page includes observability insights to help you quickly identify how a single flag is performing.
 
-{{< img src="feature_flags/flag_graphs/flag_details_overview.png" alt="Flag details page showing all evaluation graphs" style="width:100%;" >}}
+### Targeting rule evaluation counts
 
-### Targeting rule distribution
+Shows the total client and server evaluations that fell through to each targeting rule in the given `Real-time metric overview` time range.
 
-Shows the percentage of traffic that fell through to each variant based on your targeting rules.
+{{< img src="feature_flags/flag_graphs/targeting_rule_distribution.png" alt="Targeting rule evaluation count" style="width:100%;" >}}
 
-{{< img src="feature_flags/flag_graphs/targeting_rule_distribution.png" alt="Targeting rule distribution graph" style="width:100%;" >}}
+Use this count to confirm that targeting rules are working as expected and to see how traffic is distributed across targeting rules in a given environment, including % of total traffic in the time range.
 
-Use this graph to confirm that targeting rules are working as expected and to see how traffic is distributed across variants in a given environment.
+### Client + Server evaluations
 
-### Server evaluations
+{{< img src="feature_flags/flag_graphs/evaluations.png" alt="Client + Server evaluations graph split by variant" style="width:100%;" >}}
 
-Raw total count of server-side flag evaluations, split by variant.
+Client SDK evaluations have two views, each grouped by variant:
 
-{{< img src="feature_flags/flag_graphs/server_evaluations.png" alt="Server evaluations graph split by variant" style="width:100%;" >}}
+- **Unique**: count of unique users or entities that evaluated each variant (deduplicated by targeting key)
+- **Total**: count of all evaluations by variant, including repeated evaluations of the same targeting key
 
-Use this graph to track overall server-side evaluation volume and compare variant distribution over time. Requires flag evaluation metrics to be enabled. See [Set Up Server-Side Flag Evaluation Metrics][1].
 
-### Client evaluations
-
-Two views are available for client-side evaluations:
-
-- **Deduplicated by targeting key**: counts unique users or entities that received each variant. Use this to measure the reach of each variant.
-- **Raw total count**: counts every evaluation, including repeated evaluations of the same targeting key. Use this to measure evaluation frequency.
+Server SDK evaluations show count of all evaluations by variant. Requires flag evaluation metrics to be enabled. See [Set Up Server-Side Flag Evaluation Metrics][1].
 
 ### Errors and latency
+
+{{< img src="feature_flags/flag_graphs/errors_latency.png" alt="Error and latency graphs" style="width:100%;" >}}
 
 Error rate and latency graphs are available for client evaluations. Server evaluation support is coming soon.
 
 ## Export to a dashboard
 
-Select any graph and choose **Export to Dashboard** to add it to a Datadog dashboard. From there, you can combine it with other metrics, apply custom time ranges, and set up monitors.
+{{< img src="feature_flags/flag_graphs/dashboard_export.png" alt="Export graph to a dashboard" style="width:100%;" >}}
+
+Choose **Export to Dashboard** to add it to a Datadog dashboard. From there, you can slice and dice the data for further insights.
 
 ## Further reading
 
