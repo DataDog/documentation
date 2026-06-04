@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/install/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-BYOC Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
+BYOC (Bring Your Own Cloud) Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
 
 <div class="alert alert-warning">
 <strong>Docker is for evaluation only.</strong> The Docker installation method is designed for exploring BYOC Logs features locally. For production workloads, deploy on a supported Kubernetes platform.
@@ -37,9 +33,6 @@ BYOC Logs supports the following object storage types:
 - Amazon S3
 - Google Cloud Storage (GCS)
 - Azure Blob Storage
-- MinIO
-- Ceph Object Storage
-- Any S3-compatible storage
 
 ## Cloud-managed Kubernetes
 
