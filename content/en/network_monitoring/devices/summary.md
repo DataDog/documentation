@@ -96,9 +96,13 @@ The following thresholds determine a device's health state:
 
 The **Traffic** section uses [NetFlow][3] data to visualize traffic volume between sources and destinations as a Sankey diagram, scoped to your current filter and time range. Click **View NetFlow** to explore flow data in detail.
 
+{{< img src="network_device_monitoring/summary/traffic-panel.png" alt="The Traffic section showing a Sankey diagram of the top 25 flows by volume, with source IPs, interface names, device names, and destination IPs." style="width:100%;" >}}
+
 ### Changes
 
 The **Changes** section lists recent network device configuration changes from [Configuration Management][4]. Each entry shows the affected device, a summary of what changed, and a timestamp.
+
+{{< img src="network_device_monitoring/summary/changes-panel.png" alt="The Changes section listing recent configuration changes per device with a summary and timestamp for each." style="width:100%;" >}}
 
 Click **[View all changes][11]** to open the full Changes view. Filters and the time range are shared between the two views. Click any row to open the device side panel with details about the change.
 
