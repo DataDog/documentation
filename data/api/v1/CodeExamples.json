@@ -963,6 +963,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "_1326388368",
       "description": "Create an SLO correction with rrule returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2888963657",
+      "description": "Create an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "UpdateSLOCorrection": [
@@ -970,6 +975,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "",
       "description": "Update an SLO correction returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2949191256",
+      "description": "Update an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "CreateSLO": [

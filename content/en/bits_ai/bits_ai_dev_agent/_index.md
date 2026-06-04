@@ -7,7 +7,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
     tag: "Blog"
     text: "Introducing Bits Code for Code Security"
-  - link: "/bits_ai/ai_credits/"
+  - link: "/account_management/billing/ai_credits/"
     tag: "Documentation"
     text: "AI Credits"
 ---
@@ -22,6 +22,8 @@ Each time Bits Code investigates an issue or generates a fix, it creates a [sess
 
 To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
+Learn how your Bits Code usage is billed on [AI Credits][27].
+
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Code** > [**Sessions**][7].
 
@@ -29,7 +31,7 @@ A session captures a segment of work with Bits Code, including its analysis and 
 
 ### Start a session
 After [completing setup][6], do one of the following to start a Bits Code session:
-- Enter a freeform prompt at [**Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
+- Enter a freeform prompt at [**Sessions**][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
@@ -41,7 +43,7 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported Datadog products
 
-Bits Code can suggest code improvements in the following Datadog products:
+Bits Code can suggest code improvements within several Datadog products, including the following:
 
 | Product                   | Capabilities                                                       |
 |---------------------------|--------------------------------------------------------------------|
@@ -54,8 +56,6 @@ Bits Code can suggest code improvements in the following Datadog products:
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
-
-**Note**: Enabling Bits Code is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
 
 ## Key capabilities 
 
@@ -111,3 +111,4 @@ Bits Code never auto-merges PRs. See all PRs Bits Code is working on in **Bits A
 [24]: /tests/flaky_management#bits-ai-powered-flaky-test-fixes
 [25]: /security/code_security/iac_security/
 [26]: /security/code_security/software_composition_analysis/
+[27]: /account_management/billing/ai_credits/
