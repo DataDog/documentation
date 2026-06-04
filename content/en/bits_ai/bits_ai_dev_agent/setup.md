@@ -49,9 +49,8 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 Auto-push allows Bits Code to create branches, push code, and open PRs when it detects something it can help you with. Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
-To enable auto-push, so Bits Code can push commits directly to a branch, navigate to **Bits Code** > **Settings** > [**General**][6].
+To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
 
-**Note**: If auto-push is disabled, you must review and approve code in Datadog before Bits Code can push it.
 
 #### Security considerations
 

@@ -52,7 +52,7 @@ Bits Code can suggest code improvements within several Datadog products, includi
 | [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
-| [Code Security][2]        | Remediates [SAST vulnerabilities][15], [IaC vulnerabilities][25], and [SCA vulnerabilities][26]---individually or in bulk  |
+| [Code Security][2]        | Remediates [SAST vulnerabilities][15], [IaC vulnerabilities][25], and [SCA vulnerabilities][26] (individually or in bulk)  |
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
@@ -61,9 +61,9 @@ Bits Code can suggest code improvements within several Datadog products, includi
 
 ### Code fixes and optimizations surfaced by Datadog products
 
-Across [Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15].
+Across [supported Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15].
 
-{{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button has the text 'Fix with Bits'" style="width:25%" >}}
+{{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button labeled with the text 'Fix with Bits.'" style="width:25%" >}}
 
 In certain products, [Bits Chat][16] explores and investigates issues, then hands off its findings to Bits Code to implement a code change.
 
@@ -78,7 +78,7 @@ Bits Code integrates with GitHub to:
 - Iterate on pull requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
 
-Bits Code never auto-merges PRs. See all PRs Bits Code is working on in **Bits AI** > **Code** > **[Sessions][7]**.
+Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in **Bits AI** > **Code** > **[Sessions][7]**.
 
 ## Limitations
 
