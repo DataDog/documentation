@@ -116,9 +116,7 @@ The Agent emits the per-component utilization data as metrics so you can build d
 | `logs_component_utilization.ratio_short` | The utilization ratio over the short moving-average window. Use this for near-real-time backpressure detection and alerting. |
 | `logs_component_utilization.items` | The number of items held in a component and its buffers. |
 
-{{< tip >}}
-Create a monitor on `logs_component_utilization.ratio_short` grouped by `name` and `instance` to catch a saturated component before it causes sustained backpressure.
-{{< /tip >}}
+**Note**: Create a monitor on `logs_component_utilization.ratio_short` grouped by `name` and `instance` to catch a saturated component before it causes sustained backpressure.
 
 If you continue to see sustained saturation after taking corrective action, [send an Agent flare][6] and [contact Datadog Support][7].
 
