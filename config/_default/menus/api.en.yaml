@@ -13018,7 +13018,7 @@ menu:
           - UpdateLLMObsAnnotationQueueLabelSchema
         unstable:
           - v2
-        order: 29
+        order: 53
     - name: Get annotation queue label schema
       url: /api/latest/llm-observability/get-annotation-queue-label-schema/
       identifier: llm-observability-get-annotation-queue-label-schema
@@ -13031,7 +13031,7 @@ menu:
           - GetLLMObsAnnotationQueueLabelSchema
         unstable:
           - v2
-        order: 28
+        order: 52
     - name: Delete annotation queue interactions
       url: /api/latest/llm-observability/delete-annotation-queue-interactions/
       identifier: llm-observability-delete-annotation-queue-interactions
@@ -13057,7 +13057,33 @@ menu:
           - CreateLLMObsAnnotationQueueInteractions
         unstable:
           - v2
-        order: 20
+        order: 22
+    - name: Delete annotations
+      url: /api/latest/llm-observability/delete-annotations/
+      identifier: llm-observability-delete-annotations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotations
+        unstable:
+          - v2
+        order: 29
+    - name: Create or update annotations
+      url: /api/latest/llm-observability/create-or-update-annotations/
+      identifier: llm-observability-create-or-update-annotations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertLLMObsAnnotations
+        unstable:
+          - v2
+        order: 28
     - name: Get annotated queue interactions
       url: /api/latest/llm-observability/get-annotated-queue-interactions/
       identifier: llm-observability-get-annotated-queue-interactions
@@ -13070,7 +13096,7 @@ menu:
           - GetLLMObsAnnotatedInteractions
         unstable:
           - v2
-        order: 21
+        order: 23
     - name: Update an LLM Observability annotation queue
       url: /api/latest/llm-observability/update-an-llm-observability-annotation-queue/
       identifier: llm-observability-update-an-llm-observability-annotation-queue
@@ -13083,7 +13109,7 @@ menu:
           - UpdateLLMObsAnnotationQueue
         unstable:
           - v2
-        order: 22
+        order: 20
     - name: Delete an LLM Observability annotation queue
       url: /api/latest/llm-observability/delete-an-llm-observability-annotation-queue/
       identifier: llm-observability-delete-an-llm-observability-annotation-queue
@@ -13096,7 +13122,7 @@ menu:
           - DeleteLLMObsAnnotationQueue
         unstable:
           - v2
-        order: 23
+        order: 21
     - name: Create an LLM Observability annotation queue
       url: /api/latest/llm-observability/create-an-llm-observability-annotation-queue/
       identifier: llm-observability-create-an-llm-observability-annotation-queue
