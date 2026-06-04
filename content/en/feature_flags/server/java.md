@@ -12,6 +12,8 @@ further_reading:
 
 <div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
 
+<div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric emitted by <code>DD_METRICS_OTEL_ENABLED=true</code> is experimental and may change or be removed in a future release. Additional Agent configuration is required to emit this metric — see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a>.</div>
+
 ## Overview
 
 This page describes how to instrument a Java application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.

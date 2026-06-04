@@ -46,6 +46,8 @@ DD_METRICS_OTEL_ENABLED=true
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
+<div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric emitted by <code>DD_METRICS_OTEL_ENABLED=true</code> is experimental and may change or be removed in a future release. Additional Agent configuration is required to emit this metric — see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a>.</div>
+
 Or enable the provider in code:
 
 ```javascript
