@@ -60,7 +60,7 @@ If you have multiple GitHub orgs connected within Datadog, users must have the D
 
 ## Your tickets
 
-{{< img src="tracing/software_catalog/homepage_tickets.png" alt="IDP Homepage showing a personalized view of GitHub pull requests awaiting review and Jira tickets" style="width:100%;" >}} 
+{{< img src="tracing/software_catalog/homepage_tickets.png" alt="Your Tickets section showing Jira and Cases tabs with items assigned to the user" style="width:100%;" >}}
 
 The **Your Tickets** section consolidates the items assigned to you across Jira and Datadog Case Management, so you can track your open work without leaving the Homepage. Switch between the **Jira** and **Cases** tabs to view each source, and use **Display** to change how items are shown.
 
