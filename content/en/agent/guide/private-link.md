@@ -53,7 +53,7 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
 {{% site-region region="ap2" %}}
-**AP2 customers:** each `Private DNS name` shown below is a routing record that covers multiple agent hostnames. See [AP2: agent hostnames covered by each VPC endpoint](#ap2-agent-hostnames-covered-by-each-vpc-endpoint) for the full mapping.
+**AP2 customers:** each `Private DNS name` shown below is a routing record covering one or more agent FQDNs. See [AP2: VPC endpoints by color](#ap2-vpc-endpoints-by-color) for the complete FQDN mapping.
 {{% /site-region %}}
 
 | Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
@@ -70,7 +70,6 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 | Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
 | CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
-| On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           | {{< region-param key="on_call_endpoint_private_link" code="true" >}}           |
 | Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
 | Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
 | Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
@@ -79,7 +78,6 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 | Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
 | RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
 | Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
-| On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  | {{< region-param key="on_call_secondary_endpoint_private_link" code="true" >}}  |
 | Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
 | Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
 | Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
@@ -164,7 +162,7 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 ## PrivateLink service names
 
 {{% site-region region="ap2" %}}
-**AP2 customers:** each `Private DNS name` shown below is a routing record that covers multiple agent hostnames. See [AP2: agent hostnames covered by each VPC endpoint](#ap2-agent-hostnames-covered-by-each-vpc-endpoint) for the full mapping.
+**AP2 customers:** each `Private DNS name` shown below is a routing record covering one or more agent FQDNs. See [AP2: VPC endpoints by color](#ap2-vpc-endpoints-by-color) for the complete FQDN mapping.
 {{% /site-region %}}
 
 | Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
@@ -181,7 +179,6 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 | Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
 | CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
-| On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           | {{< region-param key="on_call_endpoint_private_link" code="true" >}}           |
 | Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
 | Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
 | Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
@@ -190,7 +187,6 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
 | RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
 | Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
-| On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  | {{< region-param key="on_call_secondary_endpoint_private_link" code="true" >}}  |
 | Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
 | Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
 | Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
@@ -224,7 +220,7 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
 {{% site-region region="ap2" %}}
-**AP2 customers:** each `Private DNS name` shown below is a routing record that covers multiple agent hostnames. See [AP2: agent hostnames covered by each VPC endpoint](#ap2-agent-hostnames-covered-by-each-vpc-endpoint) for the full mapping.
+**AP2 customers:** each `Private DNS name` shown below is a routing record covering one or more agent FQDNs. See [AP2: VPC endpoints by color](#ap2-vpc-endpoints-by-color) for the complete FQDN mapping.
 {{% /site-region %}}
 
 | Datadog                   | PrivateLink service name                                                               |
@@ -241,7 +237,6 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
 | Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               |
 | CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     |
-| On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           |
 | Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     |
 | Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               |
 | Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           |
@@ -250,7 +245,6 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    |
 | RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         |
 | Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            |
-| On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  |
 | Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         |
 | Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           |
 | Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       |
@@ -294,7 +288,7 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 Use the list below to map service and DNS name to different parts of Datadog:
 
   {{% site-region region="ap2" %}}
-**AP2 customers:** each `Private DNS name` shown below is a routing record that covers multiple agent hostnames. See [AP2: agent hostnames covered by each VPC endpoint](#ap2-agent-hostnames-covered-by-each-vpc-endpoint) for the full mapping.
+**AP2 customers:** each `Private DNS name` shown below is a routing record covering one or more agent FQDNs. See [AP2: VPC endpoints by color](#ap2-vpc-endpoints-by-color) for the complete FQDN mapping.
 {{% /site-region %}}
 
 | Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
@@ -311,7 +305,6 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
   | Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
   | CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
-  | On-Call                   | {{< region-param key="aws_private_link_on_call_service_name" code="true" >}}           | {{< region-param key="on_call_endpoint_private_link" code="true" >}}           |
   | Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
   | Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
   | Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
@@ -320,7 +313,6 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
   | RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
   | Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
-  | On-Call (Secondary)       | {{< region-param key="aws_private_link_on_call_secondary_service_name" code="true" >}}  | {{< region-param key="on_call_secondary_endpoint_private_link" code="true" >}}  |
   | Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
   | Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
   | Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
@@ -434,175 +426,207 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 {{% site-region region="ap2" %}}
 
-## AP2: agent hostnames covered by each VPC endpoint
+## AP2: VPC endpoints by color
 
-On AP2, each PrivateLink endpoint's **Private DNS name** is a routing record
-that transparently covers multiple agent hostnames. Creating one VPC endpoint
-and one Route53 private hosted zone (for the listed Private DNS name) is
-sufficient — no per-hostname configuration is required. The complete list of
-agent hostnames covered by each endpoint follows.
+On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps to one VPC service endpoint and one Route53 private hosted zone, and covers one or more agent FQDNs. Create one VPC endpoint and one Route53 private hosted zone per color. No per-FQDN configuration is required.
 
-### Logs (HTTP intake)
+### Aqua (`vpce-svc-01b61a61d21fc7273`)
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace`
-- **Private DNS name (Route53 zone):** `gold.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `agent-http-intake.logs.ap2.datadoghq.com`
-    - `aws-kinesis-http-intake.logs.ap2.datadoghq.com`
-    - `eventbridge-intake.logs.ap2.datadoghq.com`
-    - `http-intake.logs.ap2.datadoghq.com`
-    - `lambda-http-intake.logs.ap2.datadoghq.com`
-    - `obpipeline-intake.ap2.datadoghq.com`
-    - `runtime-security-http-intake.logs.ap2.datadoghq.com`
-
-### Logs (GCP)
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273`
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273`
 - **Private DNS name (Route53 zone):** `aqua.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `gcp-intake.logs.ap2.datadoghq.com`
 
-### Logs (Live Tail)
+**FQDNs covered:**
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e`
-- **Private DNS name (Route53 zone):** `indigo.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `live.logs.ap2.datadoghq.com`
+| FQDN | Product |
+|------|---------|
+| `gcp-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
 
-### APM (Traces)
+### Beige (`vpce-svc-06a30d6a016b746ff`)
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09`
-- **Private DNS name (Route53 zone):** `lime.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `trace.agent.ap2.datadoghq.com`
-    - `data-obs-intake.ap2.datadoghq.com`
-
-### Metrics
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff`
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff`
 - **Private DNS name (Route53 zone):** `beige.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `agent.ap2.datadoghq.com`
-    - `*.agent.ap2.datadoghq.com`
 
-### Process Monitoring
+**FQDNs covered:**
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5`
+| FQDN | Product |
+|------|---------|
+| `*.agent.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
+| `agent.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
+
+### Bisque (`vpce-svc-0c26ca335d93a68b5`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5`
 - **Private DNS name (Route53 zone):** `bisque.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `process.ap2.datadoghq.com`
 
-### Container Monitoring
+**FQDNs covered:**
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902`
-- **Private DNS name (Route53 zone):** `linen.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `orchestrator.ap2.datadoghq.com`
+| FQDN | Product |
+|------|---------|
+| `process.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
 
-### Database Monitoring
+### Brown (`vpce-svc-04c61207a01a73496`)
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448`
-- **Private DNS name (Route53 zone):** `white.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `dbm-metrics-intake.ap2.datadoghq.com`
-    - `dbquery-intake.ap2.datadoghq.com`
-
-### API and Synthetics
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a`
-- **Private DNS name (Route53 zone):** `orchid.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `api.ap2.datadoghq.com`
-    - `synthetics.ap2.datadoghq.com`
-    - `*.synthetics.ap2.datadoghq.com`
-    - `quota.browser-intake-ap2-datadoghq.com`
-
-### Datadog Web (UI and wildcards)
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01911394f8bac8056`
-- **Private DNS name (Route53 zone):** `orange.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `*.ap2.datadoghq.com`
-    - `custom-domains.ap2.datadoghq.com`
-
-### Remote Configuration / Fleet Automation
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10`
-- **Private DNS name (Route53 zone):** `violet.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `config.ap2.datadoghq.com`
-
-### OpenTelemetry (OTLP)
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496`
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496`
 - **Private DNS name (Route53 zone):** `brown.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `otlp.ap2.datadoghq.com`
-    - `*.integrations.otlp.ap2.datadoghq.com`
-    - `opamp.ap2.datadoghq.com`
 
-### On-Call (Primary)
+**FQDNs covered:**
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-040d4694353f1958b`
-- **Private DNS name (Route53 zone):** `green.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `oncall-primary.ap2.datadoghq.com`
+| FQDN | Product |
+|------|---------|
+| `*.integrations.otlp.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
+| `opamp.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) |
+| `otlp.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
 
-### On-Call (Secondary)
+### Cyan (`vpce-svc-0d936da0e6a30d3cd`)
 
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c026794e409de082`
-- **Private DNS name (Route53 zone):** `ivory.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `oncall-secondary.ap2.datadoghq.com`
-
-### Source Maps
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5`
-- **Private DNS name (Route53 zone):** `plum.intake.ap2.datadoghq.com`
-- **Agent hostnames covered:**
-    - `sourcemap-intake.ap2.datadoghq.com`
-
-### General Intake (EVP All)
-
-- **PrivateLink service name:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd`
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd`
 - **Private DNS name (Route53 zone):** `cyan.intake.ap2.datadoghq.com`
-- **Agent hostnames covered (30 total):**
 
-  <details>
-  <summary>Show all 30 hostnames</summary>
+**FQDNs covered:**
 
-  - `agenthealth-intake.ap2.datadoghq.com`
-  - `awsmetrics-intake.ap2.datadoghq.com`
-  - `ci-intake.ap2.datadoghq.com`
-  - `cicodescan-intake.ap2.datadoghq.com`
-  - `cireport-intake.ap2.datadoghq.com`
-  - `citestcov-intake.ap2.datadoghq.com`
-  - `citestcycle-intake.ap2.datadoghq.com`
-  - `cloudplatform-intake.ap2.datadoghq.com`
-  - `contimage-intake.ap2.datadoghq.com`
-  - `contlcycle-intake.ap2.datadoghq.com`
-  - `cspm-intake.ap2.datadoghq.com`
-  - `cws-intake.ap2.datadoghq.com`
-  - `debugger-intake.ap2.datadoghq.com`
-  - `error-tracking-intake.ap2.datadoghq.com`
-  - `event-management-intake.ap2.datadoghq.com`
-  - `instrumentation-telemetry-intake.ap2.datadoghq.com`
-  - `intake.profile.ap2.datadoghq.com`
-  - `kubeops-intake.ap2.datadoghq.com`
-  - `llmobs-intake.ap2.datadoghq.com`
-  - `ndm-intake.ap2.datadoghq.com`
-  - `ndmflow-intake.ap2.datadoghq.com`
-  - `netpath-intake.ap2.datadoghq.com`
-  - `ocimetrics-intake.ap2.datadoghq.com`
-  - `resources-intake.ap2.datadoghq.com`
-  - `sbom-intake.ap2.datadoghq.com`
-  - `sds-intake.ap2.datadoghq.com`
-  - `sentry-intake.ap2.datadoghq.com`
-  - `snmp-traps-intake.ap2.datadoghq.com`
-  - `softinv-intake.ap2.datadoghq.com`
-  - `webhook-intake.ap2.datadoghq.com`
+| FQDN | Product |
+|------|---------|
+| `agenthealth-intake.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) |
+| `awsmetrics-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) |
+| `ci-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) |
+| `cicodescan-intake.ap2.datadoghq.com` | [Code Security](https://www.datadoghq.com/product/code-security/) |
+| `cireport-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) |
+| `citestcov-intake.ap2.datadoghq.com` | [Test Optimization](https://www.datadoghq.com/product/test-optimization/) |
+| `citestcycle-intake.ap2.datadoghq.com` | [Test Optimization](https://www.datadoghq.com/product/test-optimization/) |
+| `cloudplatform-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) |
+| `contimage-intake.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) |
+| `contlcycle-intake.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) |
+| `cspm-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
+| `cws-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
+| `debugger-intake.ap2.datadoghq.com` | [Dynamic Instrumentation](https://www.datadoghq.com/product/dynamic-instrumentation/) |
+| `error-tracking-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) |
+| `event-management-intake.ap2.datadoghq.com` | [Event Management](https://www.datadoghq.com/product/event-management/) |
+| `instrumentation-telemetry-intake.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
+| `intake.profile.ap2.datadoghq.com` | [Continuous Profiler](https://www.datadoghq.com/product/code-profiling/) |
+| `kubeops-intake.ap2.datadoghq.com` | [Kubernetes Autoscaling](https://www.datadoghq.com/product/kubernetes-autoscaling/) |
+| `llmobs-intake.ap2.datadoghq.com` | [LLM Observability](https://www.datadoghq.com/product/ai/llm-observability/) |
+| `ndm-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
+| `ndmflow-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
+| `netpath-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
+| `ocimetrics-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) |
+| `resources-intake.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
+| `sbom-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
+| `sds-intake.ap2.datadoghq.com` | [Sensitive Data Scanner](https://www.datadoghq.com/product/sensitive-data-scanner/) |
+| `sentry-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) |
+| `snmp-traps-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
+| `softinv-intake.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
+| `webhook-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) |
 
-  </details>
+### Gold (`vpce-svc-06460db30a7cfdace`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace`
+- **Private DNS name (Route53 zone):** `gold.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `agent-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| `eventbridge-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| `http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| `lambda-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| `obpipeline-intake.ap2.datadoghq.com` | [Observability Pipelines](https://www.datadoghq.com/product/observability-pipelines/) |
+| `runtime-security-http-intake.logs.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
+
+### Indigo (`vpce-svc-0545109555aa68e7e`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e`
+- **Private DNS name (Route53 zone):** `indigo.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `live.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+
+### Lime (`vpce-svc-0f3e01f4180b2ae09`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09`
+- **Private DNS name (Route53 zone):** `lime.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `data-obs-intake.ap2.datadoghq.com` | [Data Observability](https://www.datadoghq.com/product/data-observability/quality-monitoring/) |
+| `trace.agent.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
+
+### Linen (`vpce-svc-031da3ffac78ef902`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902`
+- **Private DNS name (Route53 zone):** `linen.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `orchestrator.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) |
+
+### Orange (`vpce-svc-01911394f8bac8056`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01911394f8bac8056`
+- **Private DNS name (Route53 zone):** `orange.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `*.ap2.datadoghq.com` | [Platform (multiple products)](https://www.datadoghq.com/product/) |
+| `custom-domains.ap2.datadoghq.com` | [Platform](https://www.datadoghq.com/product/) |
+
+### Orchid (`vpce-svc-06ec78b291ce8020a`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a`
+- **Private DNS name (Route53 zone):** `orchid.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `*.synthetics.ap2.datadoghq.com` | [Synthetic Monitoring](https://www.datadoghq.com/product/synthetic-monitoring/) |
+| `api.ap2.datadoghq.com` | [Platform (API)](https://www.datadoghq.com/product/) |
+| `quota.browser-intake-ap2-datadoghq.com` | [Real User Monitoring](https://www.datadoghq.com/product/real-user-monitoring/) |
+| `synthetics.ap2.datadoghq.com` | [Synthetic Monitoring](https://www.datadoghq.com/product/synthetic-monitoring/) |
+
+### Plum (`vpce-svc-028e4348e80fa73f5`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5`
+- **Private DNS name (Route53 zone):** `plum.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `sourcemap-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) |
+
+### Violet (`vpce-svc-01f8f80f4cb97bd10`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10`
+- **Private DNS name (Route53 zone):** `violet.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `config.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) |
+
+### White (`vpce-svc-094469ee7a178f448`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448`
+- **Private DNS name (Route53 zone):** `white.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN | Product |
+|------|---------|
+| `dbm-metrics-intake.ap2.datadoghq.com` | [Database Monitoring](https://www.datadoghq.com/product/database-monitoring/) |
+| `dbquery-intake.ap2.datadoghq.com` | [Database Monitoring](https://www.datadoghq.com/product/database-monitoring/) |
 
 {{% /site-region %}}
 
