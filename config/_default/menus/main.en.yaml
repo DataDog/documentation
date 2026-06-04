@@ -6210,16 +6210,6 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_history
       weight: 306
-    - name: Implementation Patterns
-      url: feature_flags/implementation_patterns
-      parent: feature_flags
-      identifier: feature_flags_implementation_patterns
-      weight: 4
-    - name: Serverless Environments
-      url: feature_flags/implementation_patterns/serverless
-      parent: feature_flags_implementation_patterns
-      identifier: feature_flags_implementation_patterns_serverless
-      weight: 401
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -6255,6 +6245,11 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Serverless
+      url: feature_flags/server/serverless
+      parent: feature_flags_server
+      identifier: feature_flags_server_serverless
+      weight: 207
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
