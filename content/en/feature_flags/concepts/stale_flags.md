@@ -34,7 +34,7 @@ The [Feature Flags list page][1] shows a {{< ui >}}STALE{{< /ui >}} chip next to
 - Use the {{< ui >}}Staleness{{< /ui >}} filter to narrow the list to stale flags only.
 - Filter by team to see the flag debt your team is responsible for.
 
-{{< img src="feature_flags/stale_flag_chip.png" alt="Feature flag list view showing the STALE chip and staleness filter" style="width:100%;" >}}
+{{< img src="feature_flags/stale_flag_chip.png" alt="Feature flag list view showing the STALE chip and staleness filter." style="width:100%;" >}}
 
 ## Review a stale flag
 
