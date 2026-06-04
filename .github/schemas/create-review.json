@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "create-review.json",
+  "title": "Claude review payload",
+  "description": "Slice of GitHub's `POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews` request body, sourced from github/rest-api-description (descriptions/api.github.com/api.github.com.json). The per-comment shape is copied from upstream with workflow-specific tightenings (see below); top-level constraints are tightened so the workflow controls what reaches the API: `commit_id` is omitted because the workflow injects it, `event` is locked to COMMENT to prevent the model from approving or requesting changes, and `comments` is capped at 100 entries as a sanity bound. Each comment requires `line` OR `position` — upstream lists both as optional, but GitHub's runtime requires one of them for inline comments; catching the absence here turns an all-or-nothing API rejection into a clean per-run schema failure. `side` and `start_side` are constrained to LEFT/RIGHT — upstream publishes them as plain strings with an example value, but the runtime API rejects any other value and would fail the entire review; the enum catches typos like `right` at the schema layer.",
+  "type": "object",
+  "required": ["body", "event", "comments"],
+  "additionalProperties": false,
+  "properties": {
+    "body": { "type": "string" },
+    "event": { "type": "string", "enum": ["COMMENT"] },
+    "comments": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["path", "body"],
+        "anyOf": [
+          { "required": ["line"] },
+          { "required": ["position"] }
+        ],
+        "properties": {
+          "path": { "type": "string" },
+          "body": { "type": "string" },
+          "position": { "type": "integer" },
+          "line": { "type": "integer" },
+          "side": { "type": "string", "enum": ["LEFT", "RIGHT"] },
+          "start_line": { "type": "integer" },
+          "start_side": { "type": "string", "enum": ["LEFT", "RIGHT"] }
+        }
+      }
+    }
+  }
+}

@@ -17,10 +17,9 @@ Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Lo
 
 Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-After you select the Sumo Logic destination in the pipeline UI:
+After you select the Sumo Logic destination in the pipeline UI, enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
-  - **Note**: Only enter the identifier for the Sumo Logic endpoint URL. Do **not** enter the actual value.
+**Note**: Only enter the identifier for the Sumo Logic endpoint URL. Do **not** enter the actual value.
 
 ### Optional settings
 

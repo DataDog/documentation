@@ -32,17 +32,17 @@ This step describes how to set up your service to use AAP.
 
 <div class="alert alert-info">If your service is already using AAP, you can go to <a href="#step-1.3:-validating-login-information-is-automatically-collected">Step 1.3: Validating whether login information is automatically collected</a>.</div>
 
-1. Go to [**Software Catalog**][2], click the **Security** lens, and search for your login service name. 
+1. Go to [**Catalog**][2], click the **Security** lens, and search for your login service name. 
 
-   {{<img src="security/ato/guide_service_catalog.png" alt="Software Catalog with a service managing authentication" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog.png" alt="Catalog with a service managing authentication" style="width:100%;" >}}
 
 2. Click on the service to open its details. If the **Threat management** pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
    
-   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_enabled.png" alt="Catalog with a service side-panel expended, showing Threat Management enabled" style="width:100%;" >}}
 
    If AAP isn't enabled, the panel displays the **Discover AAP** button.
 
-   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Software Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
+   {{<img src="security/ato/guide_service_catalog_disabled.png" alt="Catalog with a service side-panel expended, showing Threat Management isn't enabled and showing a link to learn more" style="width:100%;" >}}
 
    To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-aap-on-your-login-service).
 
@@ -702,7 +702,7 @@ In this guide, you did the following:
 
 This is general guidance. Depending on your applications and environments, there might be a need for additional response strategies.
 
-[1]: /security/account_takeover_protection/
+[1]: /security/application_security/account_takeover_protection/
 [2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
 [3]: /security/application_security/setup/compatibility/
 [4]: /remote_configuration
@@ -716,7 +716,7 @@ This is general guidance. Depending on your applications and environments, there
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
 [13]: /security/application_security/how-it-works/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat
-[15]: /security/account_takeover_protection/#attacker-strategies
+[15]: /security/application_security/account_takeover_protection/#attacker-strategies
 [16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
 [17]: /security/notifications/
 [18]: https://app.datadoghq.com/security/configuration/notification-rules/new?notificationData=

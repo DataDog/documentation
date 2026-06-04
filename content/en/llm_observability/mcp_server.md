@@ -1,8 +1,8 @@
 ---
-title: LLM Observability MCP Tools
+title: LLM Observability MCP and Skills
 description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/llm_observability/experiments"
@@ -11,14 +11,243 @@ further_reading:
 - link: "/llm_observability/monitoring"
   tag: "Documentation"
   text: "Monitor your application with LLM Observability"
+- link: "/llm_observability/guide/claude_code_skills"
+  tag: "Guide"
+  text: "Analyze LLM Applications with Claude Code Skills"
 ---
 
 ## Overview
 
 The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
+## Setup
+
+Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` toolset enabled.
+
+<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
+
+### Prerequisites
+
+- A Datadog account with permission to access LLM Observability data.
+- An MCP-compatible client (for example, Claude Code, Codex CLI, Cursor, Gemini CLI, or Kiro CLI).
+
+### Endpoint
+
+The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the LLM Observability and core toolsets.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+### Connect
+
+Choose remote authentication when possible. Use local binary authentication if your environment blocks the remote OAuth flow.
+
+{{< tabs >}}
+{{% tab "Remote authentication" %}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Remote authentication uses the MCP specification's [Streamable HTTP][1] transport.
+
+**Claude Code** (command line):
+
+<pre><code>claude mcp add --transport http datadog-mcp "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"</code></pre>
+
+**Codex CLI** (`~/.codex/config.toml`):
+
+<pre><code>[mcp_servers.datadog]
+url = "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
+</code></pre>
+
+After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.
+
+**Gemini CLI, Kiro CLI, and other MCP-compatible clients**:
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
+    }
+  }
+}
+</code></pre>
+
+[1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{% /tab %}}
+
+{{% tab "Local binary authentication" %}}
+
+Local binary authentication uses the MCP specification's [stdio][2] transport. Use this method if remote authentication is unavailable.
+
+1. Install the Datadog MCP Server binary:
+
+    ```bash
+    curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
+    ```
+
+    The binary installs to `~/.local/bin/datadog_mcp_cli`.
+
+2. Complete the OAuth login flow:
+
+    ```bash
+    datadog_mcp_cli login
+    ```
+
+3. Configure your AI client. For Claude Code, add the following to `~/.claude.json`, replacing `<USERNAME>` in the command path:
+
+    ```json
+    {
+      "mcpServers": {
+        "datadog": {
+          "type": "stdio",
+          "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
+          "args": [],
+          "env": {}
+        }
+      }
+    }
+    ```
+
+    Alternatively, add the server with the Claude Code CLI:
+
+    ```bash
+    claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
+    ```
+
+[2]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
+{{% /tab %}}
+{{< /tabs >}}
+
+### Authenticate with API keys
+
+The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datadog [API key and application key][6] as the `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core",
+      "headers": {
+          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
+          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+For security, scope the API key and application key to a [service account][7] with only the required permissions.
+
 ## Agent skills
-A set of agent skills that make use of these MCP endpoints can be found in the [datadog-labs/agent-skills](https://github.com/datadog-labs/agent-skills) repo. These help automate some of the manual work associated with the below use cases.  
+
+Agent skills are prebuilt instruction sets for AI coding agents that automate common LLM Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+
+### Install
+
+Install the `dd-llmo` skills with the following command:
+
+```shell
+npx skills add datadog-labs/agent-skills --skill dd-llmo --full-depth -y
+```
+
+The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
+
+```shell
+claude mcp add --scope user --transport http "datadog-llmo-mcp" \
+  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+```
+
+Restart Claude Code after running both commands for the skills to appear.
+
+### Available skills
+
+| Skill | Invoke with | What it does |
+|-------|-------------|-------------|
+| Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
+| Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
+| Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
+| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
+| Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
+
+#### Session classification
+
+`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: LLM Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+
+```
+/llm-obs-session-classify session_id=<SESSION_ID>
+/llm-obs-session-classify trace_id=<TRACE_ID>
+/llm-obs-session-classify ml_app=my-chatbot --timeframe now-7d
+```
+
+#### Trace root cause analysis
+
+`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
+
+When Claude Code has access to your codebase, the skill can search for the relevant source files and propose diffs inline.
+
+```
+/llm-obs-trace-rca ml_app=my-chatbot
+/llm-obs-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
+```
+
+#### Evaluator bootstrap
+
+`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of three artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, or online LLM-judge evaluators published directly to Datadog.
+
+```
+/llm-obs-eval-bootstrap ml_app=my-chatbot
+/llm-obs-eval-bootstrap ml_app=my-chatbot --publish
+/llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+```
+
+#### Experiment analyzer
+
+`/llm-obs-experiment-analyzer` retrieves experiment results and surfaces what changed between a candidate and a baseline: which metrics improved, which regressed, and where the candidate underperformed.
+
+```
+/llm-obs-experiment-analyzer experiment_id=<EXPERIMENT_ID>
+/llm-obs-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
+```
+
+#### Generate experiment code with the Python SDK
+
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+
+```
+/llm-obs-experiment-py-bootstrap
+/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
+```
+
+#### End-to-end eval pipeline
+
+`/llm-obs-eval-pipeline` chains session classification, trace RCA, and evaluator bootstrap into a single supervised workflow with user checkpoints between phases. It is the recommended starting point when you have no existing evaluators for an application.
+
+```
+/llm-obs-eval-pipeline my-chatbot
+/llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
+```
+
+For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
 
 ## Use cases
 
@@ -114,7 +343,7 @@ The `llmobs` toolset includes the following tools:
 
 ## Example prompts
 
-After you are connected, try prompts like:
+After connecting, try prompts like:
 
 - Review error traces for my `customer-support-bot` app over the past week. Summarize the most common failure patterns, how often they occur, and recommend which ones to fix first.
 - Find traces where my agent's responses were flagged by evaluations as low quality. Look at the inputs and outputs, then suggest specific changes to my system prompt to improve response quality.
@@ -142,135 +371,16 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 - Analyze experiment `exp-456`, compare the `accuracy` scores across each prompt version, and export the results to a Datadog Notebook that includes a Mermaid bar chart of the average score for each version.
 - Analyze experiment `exp-456` and export a Datadog Notebook that plots each prompt version on a Mermaid quadrant chart with `relevance` on one axis and `accuracy` on the other. Identify which versions are underperforming on both dimensions.
 
-## Setup
-
-To use the LLM Observability tools, connect to the Datadog MCP Server with the `llmobs` toolset enabled.
-
-<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/bits_ai/mcp_server/setup/">Set Up the Datadog MCP Server</a>.</div>
-
-Add the `toolsets=llmobs,core` query parameter to the MCP Server endpoint for your [Datadog site][5]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Your selected endpoint ({{< region-param key="dd_site_name" >}}):
-<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
-{{< /site-region >}}
-
-For example:
-- **US1**: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core`
-- **EU1**: `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=llmobs,core`
-
-{{< tabs >}}
-{{% tab "Remote authentication" %}}
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-This method uses the MCP specification's [Streamable HTTP][1] transport.
-
-**Claude Code** (command line):
-
-<pre><code>claude mcp add --transport http datadog-mcp "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"</code></pre>
-
-**Codex CLI** (`~/.codex/config.toml`):
-
-<pre><code>[mcp_servers.datadog]
-url = "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
-</code></pre>
-
-After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.
-
-**Gemini CLI, Kiro CLI, or other MCP-compatible clients**:
-
-<pre><code>{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
-    }
-  }
-}
-</code></pre>
-
-[1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-{{% /tab %}}
-
-{{% tab "Local binary authentication" %}}
-
-This method uses the MCP specification's [stdio][2] transport. Use this if direct remote authentication is not available for you.
-
-1. Install the Datadog MCP Server binary:
-
-    ```bash
-    curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-    ```
-
-    This installs the binary to `~/.local/bin/datadog_mcp_cli`.
-
-2. Run `datadog_mcp_cli login` to complete the OAuth login flow.
-
-3. Configure your AI client. For Claude Code, add the following code to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
-
-    ```json
-    {
-      "mcpServers": {
-        "datadog": {
-          "type": "stdio",
-          "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-          "args": [],
-          "env": {}
-        }
-      }
-    }
-    ```
-
-    Or run:
-
-    ```bash
-    claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
-    ```
-
-[2]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
-{{% /tab %}}
-{{< /tabs >}}
-
-### Authentication
-
-The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the OAuth flow, provide a Datadog [API key and application key][6] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-<pre><code>{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core",
-      "headers": {
-          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
-      }
-    }
-  }
-}
-</code></pre>
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-For security, use a scoped API key and application key from a [service account][7] that has only the required permissions.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/setup/
+[1]: /mcp_server/setup/
 [2]: /llm_observability/
 [3]: /notebooks/
 [4]: /notebooks/guide/build_diagrams_with_mermaidjs/
 [5]: /getting_started/site/
 [6]: /account_management/api-app-keys/
 [7]: /account_management/org_settings/service_accounts/
+[8]: https://github.com/datadog-labs/agent-skills
+[9]: /llm_observability/guide/claude_code_skills

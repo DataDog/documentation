@@ -13,6 +13,7 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 - **Pinpoint root cause**: Correlate configuration and schema changes with lag, throughput, and errors, and trace issues to the exact topic, schema version, or configuration change
 - **Connect services to topics**: See which producers and consumers interact with each topic, with linked owners, repos, on-call rotations, traces, and error logs
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
+- **Alert and automate responses**: Use [recommended monitor templates][4] and trigger Workflow Automation or webhooks when a Kafka condition fires
 
 To get started, see [Kafka Monitoring Setup][2].
 
@@ -58,3 +59,4 @@ The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partitio
 
 [2]: /data_streams/kafka/setup/
 [3]: /data_streams/kafka/setup/#enable-message-inspection
+[4]: /data_streams/kafka/monitors_and_automation/
