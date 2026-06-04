@@ -2,7 +2,7 @@
 title: LLM Observability MCP and Skills
 description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/llm_observability/experiments"
@@ -24,7 +24,7 @@ The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability]
 
 Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` toolset enabled.
 
-<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/bits_ai/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
+<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
 
 ### Prerequisites
 
@@ -375,7 +375,7 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/setup/
+[1]: /mcp_server/setup/
 [2]: /llm_observability/
 [3]: /notebooks/
 [4]: /notebooks/guide/build_diagrams_with_mermaidjs/

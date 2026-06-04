@@ -13,7 +13,7 @@ further_reading:
 
 {{< img src="/cloudprem/overview_architecture.png" alt="BYOC Logs architecture showing Indexers, Searchers, Metastore, and Control Plane components interacting with object storage" style="width:100%;" >}}
 
-BYOC Logs uses a decoupled architecture which separates the compute (indexing and searching) and data on an object storage. This allows for independent scaling and optimization of different cluster components based on workload demands.
+BYOC (Bring Your Own Cloud) Logs uses a decoupled architecture which separates the compute (indexing and searching) and data on an object storage. This allows for independent scaling and optimization of different cluster components based on workload demands.
 
 ## Components
 

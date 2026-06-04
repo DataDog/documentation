@@ -5,7 +5,7 @@ aliases:
 - /dashboards/ddsql_editor/
 - /ddsql_editor/getting_started/
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "ddsql_reference/ddsql_default"
@@ -89,4 +89,4 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 [6]: /ddsql_reference/ddsql_default/
 [7]: https://docs.datadoghq.com/ddsql_editor/#save-and-share-queries
 [8]: /help/
-[9]: /bits_ai/mcp_server/
+[9]: /mcp_server/
