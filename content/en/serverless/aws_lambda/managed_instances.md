@@ -35,7 +35,12 @@ To collect [enhanced Lambda metrics][2], set up the [Datadog Lambda Extension][3
 
 To collect traces, use Datadog's standard setup for instrumenting AWS Lambda functions. Choose your runtime:
 
-{{< partial name="serverless/lambda-managed-instances-runtimes.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 ## Data collected
 

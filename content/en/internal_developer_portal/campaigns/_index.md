@@ -22,7 +22,7 @@ Use the [**Campaigns** tab on the Scorecards page][2] to:
 - Track progress by rule, team, or status
 - Follow up with teams directly from the interface 
 
-If your service is part of a campaign, related rules and deadlines appear in the entity's **Scorecards** tab in Software Catalog, and on the entity page in the **Scorecards** section. This visibility lets teams act on campaign goals without relying on manual reminders or external documentation.
+If your service is part of a campaign, related rules and deadlines appear in the entity's **Scorecards** tab in Catalog, and on the entity page in the **Scorecards** section. This visibility lets teams act on campaign goals without relying on manual reminders or external documentation.
 
 ## Creating a campaign
 

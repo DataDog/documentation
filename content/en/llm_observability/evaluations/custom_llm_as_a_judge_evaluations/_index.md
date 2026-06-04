@@ -29,6 +29,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 - **Span scope**—score the input and output of one LLM call, agent step, or tool invocation in isolation.
 - **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluations][16] for the full walkthrough, use cases, and prompt examples.
+- **Session scope**—feed every trace in a user session (and every span in those traces) to the LLM judge in a single prompt, so the evaluation can reason across an entire multi-turn interaction. See [Session-Level Evaluations][17] for the full walkthrough, use cases, and prompt examples.
 
 ## Create a custom LLM-as-a-judge evaluation
 
@@ -89,7 +90,7 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the {{< ui >}}User{{< /ui >}} field, provide your user prompt. Explicitly specify what parts of the span or trace to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans—see [Prompt Templating][15] for the full reference. An autocomplete dropdown appears when you type `{{` to help you select available fields.
+8. In the {{< ui >}}User{{< /ui >}} field, provide your user prompt. Explicitly specify what parts of the span, trace, or session to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` paths to read across traces. See [Prompt Templating][15] for the full reference. An autocomplete dropdown appears when you type `{{` to help you select available fields.
 
    You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Spans in Selected Trace{{< /ui >}} in trace scope) to add span data as a variable:
    1. Choose an account and an application so that spans/traces show up on the right.
@@ -488,6 +489,7 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluatio
    - {{< ui >}}Evaluate On{{< /ui >}}: Choose one of the following:
       - {{< ui >}}Trace{{< /ui >}}: Evaluate the full trace, including all its spans, as a single unit. Use this when the answer depends on context across multiple spans (agent goal completion, tool-use chains, RAG faithfulness). See [Trace-Level Evaluations][16] for examples and details on how trace completion is determined.
       - {{< ui >}}Span{{< /ui >}}: Evaluate matching spans individually. Use the {{< ui >}}Query{{< /ui >}} field to scope to specific spans (for example, only root spans, only `llm` spans, or spans with a specific tag).
+      - {{< ui >}}Session{{< /ui >}}: Evaluate an entire user session, including every trace and its spans, as a single unit. Use this when the answer depends on context across multiple traces in the same session (user satisfaction, multi-turn coherence, or user behavior over time). Requires spans tagged with a `session_id`. See [Session-Level Evaluations][17] for examples and details on how session completion is determined.
    - {{< ui >}}Query{{< /ui >}}: (Optional) Enter a query using Datadog query syntax to filter which spans or traces are evaluated. For example:
       - `@name:agent.workflow` to filter by span name
       - `env:prod` to filter by tag
@@ -603,4 +605,5 @@ You can use basic CRUD operations to manipluate managed evaluation configs, one 
 [14]: /account_management/api-app-keys
 [15]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
 [16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
+[17]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
 
