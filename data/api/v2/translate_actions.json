@@ -5263,6 +5263,28 @@
     "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
     "summary": "Get SLO status"
   },
+  "DeleteSourcemaps": {
+    "description": "Deletes source maps matching the specified filter criteria. Supports\ndry-run mode to preview which source maps would be deleted without\nperforming the actual deletion.",
+    "summary": "Delete source maps"
+  },
+  "GetSourcemaps": {
+    "description": "Retrieves the content of a specific JavaScript source map file by its\nfilename, service name, and version.",
+    "summary": "Get a JavaScript source map"
+  },
+  "ListSourcemaps": {
+    "description": "Retrieves a paginated list of source maps matching the specified filter criteria.",
+    "summary": "List source maps"
+  },
+  "RestoreSourcemaps": {
+    "description": "Restores previously deleted source maps matching the specified filter\ncriteria. Supports dry-run mode to preview which source maps would be\nrestored without performing the actual restoration.",
+    "summary": "Restore source maps"
+  },
+  "GetServiceRepositoryInfo": {
+    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "summary": "Get service repository information",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving service repository information."
+  },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
     "summary": "Get SPA Recommendations"
