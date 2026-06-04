@@ -698,7 +698,7 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 ### `analyze_datadog_error_tracking_errors`
 *Toolset: **error-tracking***\
 *Permissions Required: `Error Tracking Read` and `Timeseries`*\
-Analyze Datadog Error Tracking errors using SQL queries for counting, aggregations, and numerical analysis. Operates on individual error samples, not Issues (groups of errors).
+Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregations, and numerical analysis. Operates on individual error samples, not Issues (groups of errors).
 
 - Count errors by service in the last hour.
 - Show me the top error types in the checkout service over the past week.
