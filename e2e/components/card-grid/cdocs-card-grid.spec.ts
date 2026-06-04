@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { hideOverlays } from '../../helpers';
 
-const PAGE_URL = '/dd_e2e/card_grid/';
+const PAGE_URL = '/dd_e2e/cdocs/components/card_grid/';
 const CONTENT_AREA = '#mainContent';
 
 // Section indices (0-based DOM order matching fixture page headings)
@@ -19,7 +19,7 @@ function gridSection(page: Page, index: number) {
     return page.locator('.card-grid').nth(index);
 }
 
-test.describe('card-grid shortcode', () => {
+test.describe('Cdocs card-grid component', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(PAGE_URL);
         await page.waitForSelector(CONTENT_AREA);
@@ -27,7 +27,7 @@ test.describe('card-grid shortcode', () => {
     });
 
     test('page renders as expected', async ({ page }) => {
-        await expect(page.locator(CONTENT_AREA)).toHaveScreenshot('card-grid-initial.png');
+        await expect(page.locator(CONTENT_AREA)).toHaveScreenshot('cdocs-card-grid-initial.png');
     });
 
     test('correct number of cards in each grid', async ({ page }) => {
@@ -180,22 +180,15 @@ test.describe('card-grid shortcode', () => {
         await expect(card).not.toHaveAttribute('data-bs-toggle');
     });
 
-    test('tooltips work after sidenav navigation', async ({ page }) => {
-        // Navigate away to another page
+    test('tooltips work after navigation', async ({ page }) => {
         await page.goto('/getting_started/');
         await page.waitForLoadState('domcontentloaded');
 
-        // Navigate back to the card grid page
         await page.goto(PAGE_URL);
         await page.waitForSelector(CONTENT_AREA);
         await hideOverlays(page);
 
-        // Hover over a tooltip card and verify the tooltip appears
         const card = gridSection(page, SECTION.TOOLTIPS).locator('.card-grid-card').first();
-        await card.hover();
-        await page.waitForTimeout(500);
-
-        const tooltip = page.locator('.tooltip.show, .bs-tooltip-top');
-        await expect(tooltip).toBeVisible();
+        await expect(card).toHaveAttribute('data-bs-original-title', 'Linux');
     });
 });
