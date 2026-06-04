@@ -1764,6 +1764,10 @@ There are eleven different categories for security findings. Click on a category
 {{% /tab %}}
 {{< /tabs >}}
 
+## Linking to findings
+
+The direct URL for a finding in Datadog varies by finding type. Use `/security/finding/[finding_id]`, where `[finding_id]` is the root-level `finding_id` value, to open the finding in the appropriate explorer. This format is useful when linking from AI agents or automations.
+
 ## Schema Reference
 
 The following sections describe all available attributes in the Security Findings schema, organized by namespace.
@@ -2443,7 +2447,7 @@ Git metadata linking a finding to source code context. Includes information abou
     <tr>
       <td><code>author</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@git.author</code><br>Details about the author of the commit.</td>
+      <td><strong>Path:</strong> <code>@git.author</code><br>Contains details about the original author of the commit, including name, email, and authoring timestamp. Remains unchanged when the commit is rebased, cherry-picked, or re-applied.</td>
     </tr>
     <tr>
       <td><code>branch</code></td>
@@ -2458,7 +2462,7 @@ Git metadata linking a finding to source code context. Includes information abou
     <tr>
       <td><code>committer</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@git.committer</code><br>Details about the committer.</td>
+      <td><strong>Path:</strong> <code>@git.committer</code><br>Contains details about the person who last applied the commit to the repository, including name, email, and commit timestamp. May differ from the author when the commit is rebased, amended, or applied with <code>git am</code>.</td>
     </tr>
     <tr>
       <td><code>default_branch</code></td>
@@ -2495,7 +2499,7 @@ Git metadata linking a finding to source code context. Includes information abou
 
 ### Author
 
-Details about the author of the commit.
+Contains details about the original author of the commit, including name, email, and authoring timestamp. Remains unchanged when the commit is rebased, cherry-picked, or re-applied.
 
 <table>
   <thead>
@@ -2526,7 +2530,7 @@ Details about the author of the commit.
 
 ### Committer
 
-Details about the committer.
+Contains details about the person who last applied the commit to the repository, including name, email, and commit timestamp. May differ from the author when the commit is rebased, amended, or applied with `git am`.
 
 <table>
   <thead>
@@ -6156,6 +6160,29 @@ Information specific to secret findings, such as the secret's validation status.
       <td><code>validation_status</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@secret.validation_status</code><br>Result of attempting to validate if the secret is active.</td>
+    </tr>
+  </tbody>
+</table>
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Sensitive Data" level="h3" id="sensitive-data" %}}
+
+Attributes specific to Sensitive Data Scanner (SDS) findings.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>match_action_type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@sensitive_data.match_action_type</code><br>Indicates the match action configured on the Sensitive Data Scanner rule, such as <code>redact</code> or <code>hash</code>.</td>
     </tr>
   </tbody>
 </table>

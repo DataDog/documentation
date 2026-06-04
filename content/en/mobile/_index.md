@@ -360,6 +360,6 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [24]: /dashboards/configure/#configuration-actions
 [25]: /logs/explorer/watchdog_insights/
 [26]: /watchdog/insights/?tab=logmanagement
-[27]: /bits_ai/bits_assistant/
+[27]: /bits_ai/bits_chat/
 [28]: /bits_ai/bits_ai_sre/
 [29]: /account_management/multi_organization/#custom-sub-domains

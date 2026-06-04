@@ -3,12 +3,12 @@
 {{ $api_v1_data := partial "api/load-specs.html" (dict "version" "v1") }}
 {{ $api_v2_data := partial "api/load-specs.html" (dict "version" "v2") }}
 
-{{ range (where $hugo_context.Site.AllPages "Type" "=" "api") }}
+{{/* Kind filter excludes per-endpoint pages, which also have Type=api but are indexed via their tag's spec entries below. */}}
+{{ range (where (where $hugo_context.Site.AllPages "Type" "=" "api") "Kind" "!=" "page") }}
     {{ if and (in .RelPermalink "latest/") }}
         {{ $page := . }}
         {{ $title := .Title }}
         {{ $lang := .Language.Lang }}
-        {{ $hugo_context.Scratch.Add "duplicate_operation_ids" slice }}
 
         {{/* API spec is not translated, so we need english title to access API action data properly */}}
         {{ if ne $lang "en" }}

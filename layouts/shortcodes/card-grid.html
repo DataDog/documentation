@@ -3,9 +3,3 @@
 <div class="card-grid" style="--card-min-width: {{ $min_width }};">
   {{ $inner }}
 </div>
-{{ if in $inner "data-bs-toggle" }}
-<script>
-document.querySelectorAll('.card-grid-card[data-bs-toggle="tooltip"]')
-  .forEach(el => new bootstrap.Tooltip(el));
-</script>
-{{ end }}

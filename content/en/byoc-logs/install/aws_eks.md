@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This document walks you through the process of configuring your AWS environment and installing BYOC Logs on AWS EKS.
+This document walks you through the process of configuring your AWS environment and installing BYOC (Bring Your Own Cloud) Logs on AWS EKS.
 
 ## Prerequisites
 
