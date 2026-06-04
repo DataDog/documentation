@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-BYOC Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
+BYOC (Bring Your Own Cloud) Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
 
 <div class="alert alert-warning">
 <strong>Docker is for evaluation only.</strong> The Docker installation method is designed for exploring BYOC Logs features locally. For production workloads, deploy on a supported Kubernetes platform.

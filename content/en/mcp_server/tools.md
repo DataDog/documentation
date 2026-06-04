@@ -695,6 +695,15 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `analyze_datadog_error_tracking_errors`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read` and `Timeseries`*\
+Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregations, and numerical analysis. Operates on individual error samples, not Issues (groups of errors).
+
+- Count errors by service in the last hour.
+- Show me the top error types in the checkout service over the past week.
+- Break down errors by version to identify which deployment introduced an issue.
+
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
@@ -941,7 +950,7 @@ Lists your RUM applications and resolves the `application_id` to use for subsequ
 
 ### `get_rum_summary`
 *Toolset: **rum***\
-*Permissions Required: `RUM Apps Read`*\
+*Permissions Required: `RUM Apps Read` and `Timeseries`*\
 Returns a summary of vital metrics for a RUM application, with period-over-period diffs.
 
 - Summarize the performance of the "checkout-web" RUM application for the last 24 hours.
@@ -1208,8 +1217,8 @@ Retrieves the Flaky Tests Management policies configured for a repository, inclu
 
 ### `search_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Searches DORA deployment events with filters, or fetches full details for a single deployment by ID. For aggregated trends such as deployment frequency, change lead time, and failure rate, use `aggregate_dora_deployments` instead.
+*Permissions Required: `DORA Metrics Read`*\
+Searches DORA deployment events with filters, or fetches full details for a single deployment by ID.
 
 - Show me deployments for the `checkout` service in the last 7 days.
 - Get details for DORA deployment `abc123`.
@@ -1217,8 +1226,8 @@ Searches DORA deployment events with filters, or fetches full details for a sing
 
 ### `aggregate_dora_deployments`
 *Toolset: **software-delivery***\
-*Permissions Required: `CI Visibility Read`*\
-Aggregates DORA metrics (deployment frequency, change lead time, change failure rate, and recovery time) as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+*Permissions Required: `Timeseries`*\
+Returns DORA metrics (deployment frequency, change lead time, change failure rate, recovery time) for a service, team, or repo, as scalar values or timeseries. Use for questions about software delivery performance over a time window.
 
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.

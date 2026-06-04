@@ -321,7 +321,7 @@ A **committer** is an active Git contributor identified by the `author_email` fi
 
 A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
 
-Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
+Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
 ### How email addresses are counted as committers
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
@@ -331,6 +331,15 @@ Commits finalized by known GitHub system accounts such as `noreply@github.com` a
 Commits using `@users.noreply.github.com` are not automatically excluded. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit can be attributed to an individual developer, it is counted.
 
 For clarification on how committers are counted in your environment, [contact Datadog Support][1].
+
+### Deduplicating committers across email addresses
+In some cases, a single developer's commits can be split across multiple Git author emails. For example, a developer might set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold, each counts as a separate committer.
+
+For repositories hosted on GitHub, Datadog can map each Git author email to the underlying GitHub user so that the developer is counted once, even when they push under different emails. This requires a Datadog [GitHub App][28] installed on the affected repositories with the `Contents: Read` permission.
+
+This mapping is available for GitHub repositories only. Repositories hosted on GitLab, Azure DevOps, or Bitbucket are not deduplicated.
+
+If your committer count looks higher than expected for GitHub repositories, check that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
@@ -402,3 +411,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [25]: /security/code_security/dev_tool_int/pull_request_comments/
 [26]: /pr_gates/
 [27]: https://github.com/DataDog/datadog-sbom-generator/releases
+[28]: /integrations/github/
+[29]: https://app.datadoghq.com/integrations/github/
