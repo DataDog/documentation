@@ -43,7 +43,7 @@ Crown Jewels update continuously as your environment changes. You can also add y
 
 ## Ownership
 
-Ownership identifies the team or service owner responsible for fixing a security finding. Datadog infers ownership from observability metadata such as service tags, team tags, deployment metadata, on-call configuration, source control links, service catalog entries, and more.
+[Ownership][7] identifies the team or service owner responsible for fixing a security finding. Datadog infers ownership from observability metadata such as service tags, team tags, deployment metadata, on-call configuration, source control links, service catalog entries, and more.
 
 When ownership is known, the engine can route findings to the right team instead of leaving security teams to manually chase remediation owners.
 
@@ -65,3 +65,4 @@ When ownership is known, the engine can route findings to the right team instead
 [4]: /security/cloud_security_management/setup/agent/
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
+[7]: /security/cloud_security_management/guide/frontier_group/ownership_agent/
