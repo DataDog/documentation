@@ -21,7 +21,7 @@ Datadog Feature Flags provides graphs at two levels: the flags list page gives a
 
 The flags list page shows a summary row for each flag, including total evaluation count and mini graph that let you assess activity across your flag inventory without opening each flag individually.
 
-{{< img src="feature_flags/flag_graphs/flags_list.png" alt="Feature flags list page showing evaluation counts and sparklines per flag" style="width:100%;" >}}
+{{< img src="feature_flags/flag_graphs/flag_list.png" alt="Feature flags list page showing evaluation counts and sparklines per flag" style="width:100%;" >}}
 
 Each row shows:
 
