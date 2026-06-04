@@ -16,19 +16,14 @@ If your organization uses custom roles, an admin must add this permission manual
 ## Setup
 
 1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
-
 1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
-
    1. To enable basic Bits Code functionality, set the following permissions:
-
       - {{< ui >}}Repository permissions{{< /ui >}}
         - Repository contents: Read & write
         - Pull requests: Read & write
       - {{< ui >}}Subscribe to events{{< /ui >}}
         - Push
-
    1. (Optional) To allow Bits Code to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
-
        - {{< ui >}}Repository permissions{{< /ui >}}
          - Checks: Read  
          - Commit statuses: Read only 
