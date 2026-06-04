@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
   tag: "Knowledge Center"
   text: "What are AI agents and how do they work?"
+- link: "/account_management/billing/ai_credits/"
+  tag: "Documentation"
+  text: "AI Credits"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
@@ -125,7 +128,7 @@ The agent executes with its configured tools and instructions, then returns its 
 [5]: https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison
 [6]: https://developers.openai.com/api/docs/models
 [7]: /actions/actions_catalog/
-[8]: /bits_ai/mcp_server
+[8]: /mcp_server
 [9]: https://app.datadoghq.com/workflow
 [10]: https://app.datadoghq.com/app-builder/apps/list
 [11]: /account_management/audit_trail/

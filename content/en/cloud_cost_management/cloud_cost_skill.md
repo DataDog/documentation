@@ -5,10 +5,10 @@ algolia:
   tags: ["cloud cost", "cloud cost management", "ccm", "finops", "cloud cost skill", "bits ai assistant", "bits assistant", "mcp"]
   rank: 75
 further_reading:
-- link: "/bits_ai/bits_assistant/"
+- link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
-- link: "/bits_ai/mcp_server/"
+- link: "/mcp_server/"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/cloud_cost_management/reporting/explorer/"
@@ -122,7 +122,7 @@ For connection instructions, supported clients, and toolset configuration, see [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_assistant/
+[1]: /bits_ai/bits_chat/
 [2]: https://app.datadoghq.com/cost/monitor/monitors
 [3]: https://app.datadoghq.com/cost/monitor/anomalies
 [4]: https://app.datadoghq.com/cost/summarize/overview
@@ -131,9 +131,9 @@ For connection instructions, supported clients, and toolset configuration, see [
 [7]: /account_management/rbac/permissions/#bits-assistant
 [8]: /cloud_cost_management/setup/permissions/
 [9]: /account_management/rbac/permissions/#notebooks
-[10]: /bits_ai/mcp_server/
-[11]: /bits_ai/mcp_server/setup/
-[12]: /bits_ai/mcp_server/tools/#get_datadog_metric
-[13]: /bits_ai/mcp_server/tools/#get_datadog_metric_context
-[14]: /bits_ai/mcp_server/tools/
+[10]: /mcp_server/
+[11]: /mcp_server/setup/
+[12]: /mcp_server/tools/#get_datadog_metric
+[13]: /mcp_server/tools/#get_datadog_metric_context
+[14]: /mcp_server/tools/
 [15]: /notebooks/
