@@ -25,38 +25,35 @@ Serverless runtimes that cannot run or reach a Datadog Agent do not support Feat
 
 For serverless workloads, run a Datadog Agent on stateful infrastructure that your serverless application can reach over a private network. For example, run the Agent on EC2, ECS, EKS, a Google Compute Engine VM, GKE, an Azure VM, or AKS.
 
-Configure the Agent with Remote Configuration enabled:
+1. Configure the Agent with Remote Configuration enabled:
 
-{{< code-block lang="bash" >}}
-DD_REMOTE_CONFIGURATION_ENABLED=true
-DD_API_KEY=<DATADOG_API_KEY>
-DD_SITE=<DATADOG_SITE>
-{{< /code-block >}}
+    {{< code-block lang="bash" >}}
+    DD_REMOTE_CONFIGURATION_ENABLED=true
+    DD_API_KEY=<DATADOG_API_KEY>
+    DD_SITE=<DATADOG_SITE>{{< /code-block >}}
 
-Then configure the serverless application to use the Agent as its trace Agent endpoint and enable the Feature Flags provider:
+1. Configure the serverless application to use the Agent as its trace Agent endpoint and enable the Feature Flags provider:
 
-{{< code-block lang="bash" >}}
-DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
-DD_TRACE_AGENT_PORT=8126
-DD_REMOTE_CONFIG_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
+    {{< code-block lang="bash" >}}
+    DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
+    DD_TRACE_AGENT_PORT=8126
+    DD_REMOTE_CONFIG_ENABLED=true
+    DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true{{< /code-block >}}
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+    <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
-Also configure the standard service tags used by the server SDK:
+1. Configure the standard service tags used by the server SDK:
 
-{{< code-block lang="bash" >}}
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
-DD_VERSION=<YOUR_APP_VERSION>
-{{< /code-block >}}
+    {{< code-block lang="bash" >}}
+    DD_SERVICE=<YOUR_SERVICE_NAME>
+    DD_ENV=<YOUR_ENVIRONMENT>
+    DD_VERSION=<YOUR_APP_VERSION>{{< /code-block >}}
 
-Use the language-specific Feature Flags server SDK setup after the Agent connection is available. See [Server-Side Feature Flags][2] for setup by language.
+1. Use the language-specific Feature Flags server SDK setup after the Agent connection is available. See [Server-Side Feature Flags][2] for setup by language.
 
 ## Operational considerations
 
-Treat the Agent as part of the runtime dependency chain for server-side flag delivery:
+Treat the Datadog Agent as part of the runtime dependency chain for server-side flag delivery:
 
 - **Network path**: The serverless workload must be able to reach the Agent on the trace Agent port, typically `8126`. The Agent must be able to reach Datadog over HTTPS.
 - **Private connectivity**: Keep the Agent endpoint on a private network. Do not expose the Agent trace intake publicly.
