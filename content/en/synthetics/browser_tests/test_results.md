@@ -31,7 +31,7 @@ On the **Activity** tab, you can see:
 - A **Timeline** of alert triggers, recoveries, and test modifications.
 - A **Summary** panel for the selected timeline event, showing what happened, the failing result, and suggested next steps for investigation.
 
-{{< img src="synthetics/browser_tests/synthetics_bits_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits AI SRE investigation" style="width:100%;" >}}
+{{< img src="synthetics/browser_tests/synthetics_bits_investigation.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits Investigation." style="width:100%;" >}}
 
 ## Test runs
 
@@ -134,6 +134,8 @@ Size
 
 {{% /collapse-content %}}
 
+For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture network payloads** is enabled in the test's [advanced options][28].
+
 ### Backend traces
 
 Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
@@ -212,7 +214,7 @@ When a browser test run fails, Datadog generates an AI failure summary to help y
 
 AI failure summaries appear on the test run details page for any failing browser test run. Treat them as a starting point for investigation, not as authoritative root cause analysis, because LLM-generated content can contain inaccuracies. Use the 👍 and 👎 buttons on the summary to share feedback and help improve future results.
 
-{{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries_new.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
 
 ### Compare screenshots
 
@@ -273,3 +275,4 @@ Alerts from your Synthetic test monitors appear on the timeline in the [**Activi
 [25]: /synthetics/guide/step-duration/
 [26]: /synthetics/test_suites/
 [27]: /synthetics/platform/downtime/
+[28]: /synthetics/browser_tests/#advanced-options
