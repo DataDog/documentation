@@ -62,7 +62,7 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - APM traces
 - Logs
 - RUM sessions
-- LLM Observability
+- Agent Observability
 
 The following are available as a Preview upon request:
 - Cloud costs
@@ -101,9 +101,9 @@ If you are concerned about unauthorized data access through monitors, Datadog re
   * `@git.repository.id`
   * `@gitlab.groups`
 
-### LLM Observability
+### Agent Observability
 
-When using [OpenTelemetry instrumentation][13], some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
+When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
 ## Select tags for access
