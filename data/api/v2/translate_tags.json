@@ -131,6 +131,10 @@
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
+  "customer-org": {
+    "name": "Customer Org",
+    "description": "Programmatic management of a customer's Datadog organization. Use this API to perform\nself-service organization lifecycle actions such as disabling the authenticated org."
+  },
   "dora-metrics": {
     "name": "DORA Metrics",
     "description": "Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
@@ -327,6 +331,14 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-insights": {
+    "name": "RUM Insights",
+    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+  },
+  "rum-retention-filters-hardcoded": {
+    "name": "RUM Retention Filters Hardcoded",
+    "description": "Manage hardcoded retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) in RUM."
+  },
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."
@@ -345,7 +357,7 @@
   },
   "rum-metrics": {
     "name": "Rum Metrics",
-    "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+    "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
@@ -434,6 +446,10 @@
   "statuspage-integration": {
     "name": "Statuspage Integration",
     "description": "Configure your [Datadog Statuspage integration](https://docs.datadoghq.com/integrations/statuspage/)\ndirectly through the Datadog API."
+  },
+  "stegadography": {
+    "name": "Stegadography",
+    "description": "Extract watermarks embedded in dashboard screenshots to retrieve cached widget state."
   },
   "storage-management": {
     "name": "Storage Management",

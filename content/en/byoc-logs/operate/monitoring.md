@@ -7,7 +7,7 @@ aliases:
 
 ## Dashboards
 
-BYOC Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
+BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
 
 ### Setup
 

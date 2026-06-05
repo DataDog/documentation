@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-BYOC Logs includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations.
+BYOC (Bring Your Own Cloud) Logs includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations.
 
 <div class="alert alert-info">BYOC Logs pipelines and processors are designed to match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
 
