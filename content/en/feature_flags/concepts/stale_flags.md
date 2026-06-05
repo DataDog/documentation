@@ -44,13 +44,13 @@ When you open a stale flag, a banner at the top of the flag details page explain
 
 ## Manage stale flags
 
-### Generate a removal PR with Bits AI
+### Generate a removal PR with Bits
 
 From the stale banner, select {{< ui >}}Generate Removal PR with Bits{{< /ui >}} to open a pull request that removes the flag-gating logic from your application code. This is the recommended action when the flag is fully rolled out and is still receiving evaluation traffic.
 
 **Note**: Remove the flag from your code and deploy the change before you archive the flag. Archiving a flag that is still referenced in code can cause unexpected behavior in your application.
 
-{{< img src="feature_flags/generate_removal_pr.png" alt="Generate Removal PR with Bits modal" style="width:100%;" >}}
+{{< img src="feature_flags/generate_removal_pr.png" alt="Generate Removal PR with Bits modal." style="width:100%;" >}}
 
 ### Archive the flag
 
@@ -58,9 +58,9 @@ Archiving marks the flag as inactive so it is no longer evaluated or editable. A
 
 ### Mark as permanent
 
-Some flags are intentionally long-lived, such as killswitches or permission gates. Select {{< ui >}}Mark as Permanent{{< /ui >}} on the stale banner to designate a flag as a permanent operational control and exclude it from future stale detection. Permanent flags show a {{< ui >}}PERMANENT{{< /ui >}} indicator in the flag details sidebar.
+Some flags are intentionally long-lived, such as kill switches or permission gates. Select {{< ui >}}Mark as Permanent{{< /ui >}} on the stale banner to designate a flag as a permanent operational control and exclude it from future stale detection. Permanent flags show a {{< ui >}}PERMANENT{{< /ui >}} indicator in the flag details sidebar.
 
-{{< img src="feature_flags/mark_as_permanent.png" alt="Feature flag marked as PERMANENT on the flag details page" style="width:100%;" >}}
+{{< img src="feature_flags/mark_as_permanent.png" alt="Feature flag marked as PERMANENT on the flag details page." style="width:100%;" >}}
 
 ### Dismiss for 30 days
 
