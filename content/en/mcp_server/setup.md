@@ -156,6 +156,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 regions only. To install, use the <a href="?tab=farts">ChatGPT App instructions</a>. Once you install the ChatGPT app, the Codex Plugin is automatically included as well.
+</div>
+
 [1]: /getting_started/site/
 {{% /tab %}}
 
