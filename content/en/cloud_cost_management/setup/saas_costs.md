@@ -181,7 +181,7 @@ Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administra
 
 After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
 
-**Note**: To track costs for both Anthropic Enterprise and platform accounts, add a separate account entry for each API key type. Use the platform Admin API key for standard platform usage, and the enterprise Analytics API key for Anthropic Enterprise usage.
+**Note**: To track costs for both Anthropic Enterprise and platform accounts, repeat the setup steps to add a separate account entry for each API key type. Use the [Admin API key](https://docs.anthropic.com/en/api/administration-api) for standard platform usage, and the Enterprise Analytics API key for Anthropic Enterprise usage.
 
 {{% /tab %}}
 
