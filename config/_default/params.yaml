@@ -297,6 +297,7 @@ unsupported_sites:
   apm_recommendations: [gov,gov2]
   application_security: [gov,gov2]
   autocomplete_search: [gov,gov2]
+  azure-automated-log-forwarding: [gov,gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2]
   backstage: [gov,gov2]
   bits_ai: [gov,gov2]

@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Datadog BYOC Logs brings core Log Explorer capabilities to your self-hosted environment. This page outlines available features, notes any differences from the SaaS platform, and helps you plan your log workflows.
+Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities to your self-hosted environment. This page outlines available features, notes any differences from the SaaS platform, and helps you plan your log workflows.
 
 ## Supported features
 
