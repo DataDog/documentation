@@ -256,7 +256,7 @@ HTML template:
 
 ## Long-running displays
 
-For dashboards that stay open for extended periods without user interaction — such as office TV displays, kiosks, or NOC walls — your embedding page must periodically replace the iFrame's URL with a freshly signed one. The original signed URL is single-use and cannot be reused after the initial page load.
+For dashboards that stay open for extended periods without user interaction, such as office TV displays, kiosks, or NOC walls, your embedding page must periodically replace the iFrame's URL with a freshly signed one. The original signed URL is single-use and cannot be reused after the initial page load.
 
 Embedded dashboards refresh themselves after extended periods of inactivity to keep their state current. Active user input resets this internal timer; unattended displays must instead supply a fresh signed URL on a regular schedule.
 
