@@ -21,6 +21,26 @@ further_reading:
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
 
 {{< tabs >}}
+{{% tab "ChatGPT" %}}
+
+Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app directory. The app authenticates with your Datadog organization through an OAuth flow.
+
+{{< site-region region="us" >}}
+<div class="alert alert-info">The Datadog ChatGPT app is in Preview. During the Preview, it is available for US1 customers only.</div>
+
+1. In ChatGPT, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Browse Apps{{< /ui >}} and search for **Datadog**. If the Datadog app is not available, contact your organization's ChatGPT administrator for approval.
+1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the guided setup.
+1. Complete the OAuth login flow when prompted.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,eu,ap1,ap2,gov,gov2" >}}
+<div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: https://chatgpt.com/apps/datadog--preview/asdk_app_69e8c7f174a08191a28b6da96c8062c4
+{{% /tab %}}
+
 {{% tab "Claude" %}}
 
 Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
@@ -130,15 +150,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
+<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 region only. To install, use the <a href="?tab=chatgpt">ChatGPT app instructions</a>. After you install the ChatGPT app, the Codex Plugin is automatically included as well.
+</div>
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-
-<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 regions only. To install, use the ChatGPT App instructions. Once you install the ChatGPT app, the Codex Plugin is automatically included as well.  
-</div>
 
 [1]: /getting_started/site/
 {{% /tab %}}
@@ -629,13 +647,14 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
-- `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
+- `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `rum`: Tools for [Real User Monitoring][57], including summarizing application performance, inspecting application configuration, and running performance investigations
 
 ## Supported clients
 
 | Client | Developer | Notes |
 |--------|------|------|
+| [ChatGPT][59] | OpenAI | In Preview, and available for US1 customers only. |
 | [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
@@ -820,4 +839,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 [55]: https://claude.com/plugins/datadog
 [56]: https://claude.ai/directory/connectors/datadog
 [57]: /real_user_monitoring/
-[58]:https://partners.datadoghq.com/s/login/SelfRegister
+[58]: https://partners.datadoghq.com/s/login/SelfRegister
+[59]: https://chatgpt.com/
+[60]: https://www.datadoghq.com/product-preview/mcp-codexec/
