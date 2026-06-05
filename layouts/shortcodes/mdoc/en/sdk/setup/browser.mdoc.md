@@ -15,7 +15,7 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 ## Setup
 
-### Option 1: Manual client-side setup
+{% collapse-content title="Option 1: Manual client-side setup" level="h3" %}
 
 {% stepper level="h4" %}
 
@@ -316,11 +316,15 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% /stepper %}
 
-### Option 2: Agentic Onboarding
+{% /collapse-content %}
+
+{% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
 
 Use the [Agentic Onboarding][16] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
-### Option 3: Server-side auto-instrumentation
+{% /collapse-content %}
+
+{% collapse-content title="Option 3: Server-side auto-instrumentation" level="h3" %}
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
@@ -353,6 +357,8 @@ To request support for a web server that is not listed here, [fill out this form
 {% /card-grid %}
 
 {% partial file="rum-browser-auto-instrumentation-limitations.mdoc.md" /%}
+
+{% /collapse-content %}
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
