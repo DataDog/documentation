@@ -2198,6 +2198,12 @@
     "description": "Get a list of AWS services that can send logs to Datadog.",
     "summary": "Get list of AWS log ready services"
   },
+  "ValidateAWSCCMConfig": {
+    "description": "Validate a Cloud Cost Management config for an AWS account using Cost and Usage Report\n(CUR) 2.0 against Datadog's ingest requirements without persisting it.",
+    "summary": "Validate AWS CCM config",
+    "request_description": "Validate a Cloud Cost Management config for an AWS account integration config.",
+    "request_schema_description": "AWS CCM config validation request body."
+  },
   "ListGCPSTSAccounts": {
     "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
     "summary": "List all GCP STS-enabled service accounts"
@@ -2708,7 +2714,7 @@
     "request_schema_description": "Request to delete LLM Observability data."
   },
   "GetLLMObsAnnotatedInteractionsByTraceIDs": {
-    "description": "Returns annotated interactions across all annotation queues for the given content IDs. Results include queue metadata (ID and name) for each interaction.",
+    "description": "Returns annotated interactions across all annotation queues for the given content IDs.\nResults include queue metadata (ID and name) for each interaction.",
     "summary": "Get annotated interactions by content IDs"
   },
   "ListLLMObsAnnotationQueues": {
@@ -2734,6 +2740,18 @@
   "GetLLMObsAnnotatedInteractions": {
     "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
+  },
+  "UpsertLLMObsAnnotations": {
+    "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.",
+    "summary": "Create or update annotations",
+    "request_description": "Payload for creating or updating annotations.",
+    "request_schema_description": "Request to create or update annotations on interactions in an annotation queue."
+  },
+  "DeleteLLMObsAnnotations": {
+    "description": "Delete one or more annotations from an annotation queue.",
+    "summary": "Delete annotations",
+    "request_description": "Delete annotations payload.",
+    "request_schema_description": "Request to delete annotations from an annotation queue."
   },
   "CreateLLMObsAnnotationQueueInteractions": {
     "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
@@ -3577,6 +3595,12 @@
     "request_description": "",
     "request_schema_description": "Request payload for disabling the authenticated customer organization."
   },
+  "UpdateOrgSamlConfigurations": {
+    "description": "Update the SAML preferences for the current organization.\n\nUse this endpoint to set the just-in-time (JIT) provisioning domains and the default role\nassigned to just-in-time provisioned users.",
+    "summary": "Update organization SAML preferences",
+    "request_description": "",
+    "request_schema_description": "Request to update an organization's SAML preferences."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -4349,11 +4373,25 @@
     "description": "List watched sessions.",
     "summary": "List RUM replay viewership history sessions"
   },
+  "ListSAMLConfigurations": {
+    "description": "Get the list of SAML configurations for the current organization. An organization has at most one SAML configuration.",
+    "summary": "List SAML configurations"
+  },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
     "request_description": "",
     "request_schema_description": "The form data submitted to upload IdP metadata"
+  },
+  "GetSAMLConfiguration": {
+    "description": "Get a single SAML configuration for the current organization by its UUID.",
+    "summary": "Get a SAML configuration"
+  },
+  "UpdateSAMLConfiguration": {
+    "description": "Update a single SAML configuration for the current organization.\n\nUse this endpoint to enable or disable identity-provider-initiated login, set the\njust-in-time provisioning domains, and set the default role assigned to\njust-in-time provisioned users. A default role is required to enable just-in-time provisioning.",
+    "summary": "Update a SAML configuration",
+    "request_description": "",
+    "request_schema_description": "Request to update a SAML configuration."
   },
   "ListSCIMGroups": {
     "description": "List groups in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",

@@ -22,6 +22,19 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: Validate AWS CCM config
+      url: /api/latest/aws-integration/validate-aws-ccm-config/
+      identifier: aws-integration-validate-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateAWSCCMConfig
+        unstable:
+          - v2
+        order: 18
     - name: Get AWS integration standard IAM permissions
       url: /api/latest/aws-integration/get-aws-integration-standard-iam-permissions/
       identifier: aws-integration-get-aws-integration-standard-iam-permissions
@@ -2409,6 +2422,42 @@ menu:
       url: /api/latest/organizations/
       identifier: organizations
       generated: true
+    - name: Update a SAML configuration
+      url: /api/latest/organizations/update-a-saml-configuration/
+      identifier: organizations-update-a-saml-configuration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSAMLConfiguration
+        unstable: []
+        order: 8
+    - name: Get a SAML configuration
+      url: /api/latest/organizations/get-a-saml-configuration/
+      identifier: organizations-get-a-saml-configuration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSAMLConfiguration
+        unstable: []
+        order: 7
+    - name: List SAML configurations
+      url: /api/latest/organizations/list-saml-configurations/
+      identifier: organizations-list-saml-configurations
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSAMLConfigurations
+        unstable: []
+        order: 6
     - name: Update a specific Org Config
       url: /api/latest/organizations/update-a-specific-org-config/
       identifier: organizations-update-a-specific-org-config
@@ -2445,6 +2494,19 @@ menu:
           - ListOrgConfigs
         unstable: []
         order: 1
+    - name: Update organization SAML preferences
+      url: /api/latest/organizations/update-organization-saml-preferences/
+      identifier: organizations-update-organization-saml-preferences
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgSamlConfigurations
+        unstable:
+          - v2
+        order: 9
     - name: Upload IdP metadata
       url: /api/latest/organizations/upload-idp-metadata/
       identifier: organizations-upload-idp-metadata
@@ -13035,7 +13097,7 @@ menu:
           - UpdateLLMObsAnnotationQueueLabelSchema
         unstable:
           - v2
-        order: 29
+        order: 53
     - name: Get annotation queue label schema
       url: /api/latest/llm-observability/get-annotation-queue-label-schema/
       identifier: llm-observability-get-annotation-queue-label-schema
@@ -13048,7 +13110,7 @@ menu:
           - GetLLMObsAnnotationQueueLabelSchema
         unstable:
           - v2
-        order: 28
+        order: 52
     - name: Delete annotation queue interactions
       url: /api/latest/llm-observability/delete-annotation-queue-interactions/
       identifier: llm-observability-delete-annotation-queue-interactions
@@ -13074,7 +13136,33 @@ menu:
           - CreateLLMObsAnnotationQueueInteractions
         unstable:
           - v2
-        order: 20
+        order: 22
+    - name: Delete annotations
+      url: /api/latest/llm-observability/delete-annotations/
+      identifier: llm-observability-delete-annotations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotations
+        unstable:
+          - v2
+        order: 29
+    - name: Create or update annotations
+      url: /api/latest/llm-observability/create-or-update-annotations/
+      identifier: llm-observability-create-or-update-annotations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertLLMObsAnnotations
+        unstable:
+          - v2
+        order: 28
     - name: Get annotated queue interactions
       url: /api/latest/llm-observability/get-annotated-queue-interactions/
       identifier: llm-observability-get-annotated-queue-interactions
@@ -13087,7 +13175,7 @@ menu:
           - GetLLMObsAnnotatedInteractions
         unstable:
           - v2
-        order: 21
+        order: 23
     - name: Update an LLM Observability annotation queue
       url: /api/latest/llm-observability/update-an-llm-observability-annotation-queue/
       identifier: llm-observability-update-an-llm-observability-annotation-queue
@@ -13100,7 +13188,7 @@ menu:
           - UpdateLLMObsAnnotationQueue
         unstable:
           - v2
-        order: 22
+        order: 20
     - name: Delete an LLM Observability annotation queue
       url: /api/latest/llm-observability/delete-an-llm-observability-annotation-queue/
       identifier: llm-observability-delete-an-llm-observability-annotation-queue
@@ -13113,7 +13201,7 @@ menu:
           - DeleteLLMObsAnnotationQueue
         unstable:
           - v2
-        order: 23
+        order: 21
     - name: Create an LLM Observability annotation queue
       url: /api/latest/llm-observability/create-an-llm-observability-annotation-queue/
       identifier: llm-observability-create-an-llm-observability-annotation-queue

@@ -1,10 +1,12 @@
 ---
-title: Bits AI Kubernetes Remediation
-description: Discover and automatically remediate Kubernetes errors with Bits AI Kubernetes Remediation
+title: Bits Remediation
+description: Discover and automatically remediate Kubernetes errors with Bits Remediation
 further_reading:
   - link: 'https://www.datadoghq.com/blog/bits-ai-kubernetes-remediation/'
     tag: 'blog'
     text: 'Troubleshoot and resolve Kubernetes issues with AI-powered guided remediation'
+aliases:
+  - containers/bits_ai_kubernetes_remediation
 ---
 
 Bits AI Kubernetes Remediation analyzes and fixes Kubernetes errors in your infrastructure.
@@ -19,7 +21,7 @@ The following Kubernetes errors are supported:
 
 ## Usage
 
-You can launch Bits AI Kubernetes Remediation from multiple locations within Datadog:
+You can launch Bits Remediation from multiple locations within Datadog:
 - **From a Kubernetes monitor**: In the **Troubleshooting** section, select a workload under **Problematic Workloads**.
 - **From [Kubernetes Explorer][2]**: Hover over a pod status with an error to see more information about the alert and the affected workload(s), and click **Start Remediation**.
 - **From the [Kubernetes Remediation][1] tab**: Select a workload from the list.
@@ -36,10 +38,10 @@ Any one of these actions opens a side panel with remediation information, includ
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-remediation/"
  btn_hidden="false" header="Join the Preview!">}}
-Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+Automated fixes from Bits Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
-If your repositories are [connected to Datadog][4] and an error can be fixed by changing code in one of these connected repositories, then you can use [Bits Code][5] to remediate directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
+If your repositories are [connected to Datadog][4] and an error can be fixed by changing code in one of these connected repositories, then you can use [Bits Code][5] to remediate directly from Datadog. For other problem scenarios, Bits provides a detailed list of remediation steps to follow.
 
 {{% collapse-content title="Example: Increasing memory limit for a deployment" level="h4" expanded=true id="example-pr" %}}
 
