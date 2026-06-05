@@ -392,6 +392,31 @@ writer.file     = log.txt
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][4].
 
+If you are manually injecting trace IDs using the Datadog `CorrelationIdentifier` API, add the `dd-trace-api` dependency to your project:
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+```xml
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>dd-trace-api</artifactId>
+    <version>${dd-trace-java.version}</version>
+</dependency>
+```
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+```groovy
+implementation 'com.datadoghq:dd-trace-api'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Replace `${dd-trace-java.version}` with the same version as your Datadog Java Agent (`dd-java-agent`).
+
 If you are _not_ correlating logs and traces, remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the previous configuration examples.
 
 For example, if you are using Log4j 2 but not correlating logs and traces, remove the following block from the example log layout template, `MyLayout.json`:
