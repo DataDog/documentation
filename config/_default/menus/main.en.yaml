@@ -560,16 +560,21 @@ menu:
       url: agent/fleet_automation/configure_agents
       parent: agent_fleet_automation
       weight: 802
+    - name: Configure Agent Integrations
+      identifier: configure_integrations
+      url: agent/fleet_automation/configure_integrations
+      parent: agent_fleet_automation
+      weight: 803
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 803
+      weight: 804
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 804
+      weight: 805
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -1571,6 +1576,11 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
+    - name: Automations
+      url: bits_ai/bits_ai_dev_agent/automations
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_automations
+      weight: 300
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -7999,6 +8009,11 @@ menu:
       parent: vulnerabilities
       identifier: vulnerabilities_hosts_containers_compatibility
       weight: 101
+    - name: Crown Jewels
+      url: security/cloud_security_management/crown_jewels/
+      parent: csm
+      identifier: csm_crown_jewels
+      weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
