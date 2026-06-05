@@ -12,7 +12,7 @@ Agentic Onboarding is available for the following frameworks: Android, Angular, 
 
 #### Setup
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Install the Datadog Onboarding MCP server" %}
 
