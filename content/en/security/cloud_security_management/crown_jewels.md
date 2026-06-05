@@ -45,11 +45,12 @@ If a telemetry source for a signal type is missing and Datadog can't populate re
 
 | Signal | Source | Example |
 |---|---|---|
-| Secrets in APM spans | APM trace data | A service with AWS access keys observed in span attributes |
-| Sensitive fields in logs | Sensitive Data Scanner (must be enabled on relevant log indexes) | A service with credit card numbers, emails, or credentials detected in log events |
-| Sensitive column names | APM Database Monitoring | A database with columns named `password`, `ssn`, `email`, etc. |
+| Secrets in APM spans | Sensitive Data Scanner on APM | A service with AWS access keys observed in span attributes |
+| Sensitive fields in logs | Sensitive Data Scanner on logs | A service with credit card numbers, emails, or credentials detected in log events |
+| Sensitive column names | Sensitive Data Scanner on APM | A database with columns named `password`, `ssn`, `email`, etc. |
 | Sensitive data at rest | Agentless Scanning + Sensitive Data Scanner | An S3 bucket containing PII, credentials, or other sensitive content |
-| Dependency fan-in | APM service map | A high fan-in service with a wide dependency has a major blast radius if compromised) |
+| Service dependency fan-in | APM service map | A high fan-in service with a wide dependency has a major blast radius if compromised) |
+| Sensitive Data in API traffic | App and API Protection | A service exposing endpoints with sensitive data like PII |
 
 ## Use the list to filter findings
 
