@@ -52,9 +52,9 @@ Click a template tile to be taken to the new automation form. You must configure
 ## Triggers
 A trigger defines when an automation runs and what Bits Code acts on. A trigger is built from up to three components: 
 
-- [Product finding](#product-finding-trigger)
-- [Custom prompt](#custom-prompt-trigger)
-- [Schedule](#schedule-trigger)
+- [Product finding](#product-finding-trigger): a signal from within Datadog, such as an Error Tracking issue
+- [Custom prompt](#custom-prompt-trigger): a freeform instruction telling Bits Code what to do against a chosen repository
+- [Schedule](#schedule-trigger): a recurring time interval, such as daily or on specific days of the week
 
 Click **Add Trigger** to add a component. You can combine a product finding with a schedule, a custom prompt with a schedule, or use a product finding on its own.
 
@@ -69,8 +69,10 @@ When setting up a product finding trigger, you can configure additional filters,
   - **Flaky Tests** supports filtering by **Repository**, **Branch** (defaults to the repository's default branch), and **Status**.
   - **Code Security (SAST)** supports filtering by **Repository**, **Severity**, **Rule to remediate**, and a toggle to **Filter out findings identified as false positives by Bits AI**.
 
+<div class="alert alert-warn">Each finding that triggers an automation is tied to a single session. Multiple findings cannot be fixed in a single session or pull request.</div>
+
 ### Custom prompt trigger
-A custom prompt tells Bits Code what to do each time the automation runs, in free-form text, against a chosen repository. Use a custom prompt for recurring maintenance tasks that aren't tied to a specific Datadog signal, such as updating dependencies or refreshing documentation.
+A custom prompt tells Bits Code what to do each time the automation runs, in freeform text, against a chosen repository. Use a custom prompt for recurring maintenance tasks that aren't tied to a specific Datadog signal, such as updating dependencies or refreshing documentation.
 
 ### Schedule trigger
 A schedule trigger controls when an automation runs. It can be used in combination with a [product finding](#product-finding-trigger) or a [custom prompt](#custom-prompt-trigger). When setting a schedule, you can choose from:
@@ -79,7 +81,6 @@ A schedule trigger controls when an automation runs. It can be used in combinati
 
 ## Outputs
 An output defines what Bits Code does after a [session][1] completes. An automation can have one or more outputs, including [opening a pull request](#pull-request-output) and [generating a Slack notification](#slack-message-output).
-
 
 ### Pull request output
 You can configure your automation to:
@@ -97,10 +98,6 @@ When you add a Slack message output, by default, Bits Code sends the message to 
 On [**Automations**][3], view the automations you created on the **My Automations** tab. Switch to **All** to see automations created by anyone in your organization.
 
 You can pause or resume any automation, but you can only edit or delete automations you created.
-
-## Limitations
-Bits Code automations has the following limitation:
-- When using a [product finding trigger](#product-finding-trigger), each finding that triggers an automation is tied to a single session. Multiple findings cannot be fixed in a single session or pull request.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
