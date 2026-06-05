@@ -12,4 +12,4 @@ Datadog APM uses **inferred spans** to collect traces and trace metrics from Azu
   {{< image-card href="azure_service_bus/" src="integrations_logos/azure_service_bus.png" alt="azure_service_bus" >}}
 {{< /card-grid >}}
 
-[1]: /serverless/azure_functions
+[1]: /serverless
