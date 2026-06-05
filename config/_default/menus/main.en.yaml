@@ -6235,16 +6235,21 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
       weight: 204
+    - name: PHP
+      url: feature_flags/server/php
+      parent: feature_flags_server
+      identifier: feature_flags_server_php
+      weight: 205
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 205
+      weight: 206
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 206
+      weight: 207
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
@@ -9529,36 +9534,41 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 4
+    - name: Cumulative Impact
+      url: experiments/cumulative_impact
+      parent: pa_experiments
+      identifier: pa_experiments_cumulative_impact
+      weight: 5
     - name: Create Exposure SQL Models
       url: experiments/exposure_sql
       parent: pa_experiments
       identifier: pa_experiments_exposure_sql
-      weight: 5
+      weight: 6
     - name: Manage Subject Types
       url: experiments/subject_types
       parent: pa_experiments
       identifier: pa_experiments_subject_types
-      weight: 6
+      weight: 7
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 7
+      weight: 8
     - name: Global Lift
       url: experiments/global_lift
       parent: pa_experiments
       identifier: pa_experiments_global_lift
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 9
+      weight: 10
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 10
+      weight: 11
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
