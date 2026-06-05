@@ -158,7 +158,7 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
-**Note**: Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. **During an integration failover, integrations run only in the DDR data center**. When no longer in failover, disable the failover policy to return integration data collection to the primary org.
+<div class="alert alert-danger">Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center.</strong> When no longer in failover, disable the failover policy to return integration data collection to the primary org.</div>
 
 {{% /tab %}}
 
@@ -189,7 +189,7 @@ multi_region_failover:
 
 DNS-based failover is a complementary approach to Agent-based failover. Instead of configuring Agents with a secondary site endpoint, you configure all your data sources to send telemetry to a single Datadog-provided custom intake URL. During a failover event, Datadog updates the DNS record for that URL to redirect traffic from your primary site to your DDR site.
 
-**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously.
+<div class="alert alert-info">DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously.</div>
 
 #### Receive your custom DNS endpoint
 
