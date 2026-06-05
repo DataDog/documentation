@@ -48,11 +48,11 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
         "eventType": "START",
         "run": { "runId": "<RUN_UUID>" },
         "job": {
-          "namespace": "<YOUR_PIPELINE_NAME>",
+          "namespace": "<YOUR_NAMESPACE>",
           "name": "<YOUR_JOB_NAME>",
           "facets": {
             "jobType": {
-              "_producer": "<YOUR_PIPELINE_NAME>",
+              "_producer": "<YOUR_PRODUCER_ID>",
               "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
               "processingType": "BATCH",
               "integration": "custom",
@@ -60,7 +60,19 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
             }
           }
         },
-        "producer": "<YOUR_PIPELINE_NAME>"
+        "inputs": [
+          {
+            "namespace": "postgres://demo-db.example.com:5432", // scheme://host:port
+            "name": "orders.public.orders"                      // database.schema.table
+          }
+        ],
+        "outputs": [
+          {
+            "namespace": "snowflake://myorg-myaccount",         // snowflake://org-account
+            "name": "ANALYTICS.PUBLIC.ORDERS"                   // DATABASE.SCHEMA.TABLE
+          }
+        ],
+        "producer": "<YOUR_PRODUCER_ID>"
       }'
 ```
 
@@ -75,7 +87,7 @@ Use the [OpenLineage Python client](https://openlineage.io/docs/client/python) w
 from datetime import datetime
 import uuid
 from openlineage.client import OpenLineageClient, OpenLineageClientOptions
-from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run, InputDataset, OutputDataset
 from openlineage.client.facet_v2 import job_type_job
 
 client = OpenLineageClient(
@@ -90,7 +102,7 @@ client.emit(RunEvent(
     eventTime=datetime.utcnow().isoformat(),
     run=Run(runId=run_id),
     job=Job(
-        namespace="<YOUR_PIPELINE_NAME>",
+        namespace="<YOUR_NAMESPACE>",
         name="<YOUR_JOB_NAME>",
         facets={
             "jobType": job_type_job.JobTypeJobFacet(
@@ -100,7 +112,19 @@ client.emit(RunEvent(
             )
         }
     ),
-    producer="<YOUR_PIPELINE_NAME>"
+    inputs=[
+        InputDataset(
+            namespace="postgres://demo-db.example.com:5432",
+            name="orders.public.orders"
+        )
+    ],
+    outputs=[
+        OutputDataset(
+            namespace="snowflake://myorg-myaccount",
+            name="ANALYTICS.PUBLIC.ORDERS"
+        )
+    ],
+    producer="<YOUR_PRODUCER_ID>"
 ))
 ```
 
@@ -115,7 +139,7 @@ In OpenLineage 1.37.0+, use the [Datadog transport](https://openlineage.io/docs/
 from datetime import datetime
 import uuid
 from openlineage.client import OpenLineageClient
-from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run, InputDataset, OutputDataset
 from openlineage.client.facet_v2 import job_type_job
 from openlineage.client.transport.datadog import DatadogConfig, DatadogTransport
 
@@ -131,7 +155,7 @@ client.emit(RunEvent(
     eventTime=datetime.utcnow().isoformat(),
     run=Run(runId=run_id),
     job=Job(
-        namespace="<YOUR_PIPELINE_NAME>",
+        namespace="<YOUR_NAMESPACE>",
         name="<YOUR_JOB_NAME>",
         facets={
             "jobType": job_type_job.JobTypeJobFacet(
@@ -141,7 +165,19 @@ client.emit(RunEvent(
             )
         }
     ),
-    producer="<YOUR_PIPELINE_NAME>"
+    inputs=[
+        InputDataset(
+            namespace="postgres://demo-db.example.com:5432",
+            name="orders.public.orders"
+        )
+    ],
+    outputs=[
+        OutputDataset(
+            namespace="snowflake://myorg-myaccount",
+            name="ANALYTICS.PUBLIC.ORDERS"
+        )
+    ],
+    producer="<YOUR_PRODUCER_ID>"
 ))
 ```
 
