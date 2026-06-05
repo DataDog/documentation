@@ -4006,7 +4006,7 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
       weight: 205
-    - name: SaaS Integrations
+    - name: SaaS and AI Costs
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
@@ -4031,36 +4031,41 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_anthropic
       weight: 104
+    - name: Cursor
+      url: cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_cursor
+      weight: 105
     - name: GitHub
       url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
-      weight: 105
+      weight: 106
     - name: Confluent Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 106
+      weight: 107
     - name: MongoDB
       url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 107
+      weight: 108
     - name: Elastic Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 108
+      weight: 109
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 109
+      weight: 110
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 110
+      weight: 111
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
@@ -6240,16 +6245,21 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
       weight: 204
+    - name: PHP
+      url: feature_flags/server/php
+      parent: feature_flags_server
+      identifier: feature_flags_server_php
+      weight: 205
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 205
+      weight: 206
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 206
+      weight: 207
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
@@ -9534,36 +9544,41 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 4
+    - name: Cumulative Impact
+      url: experiments/cumulative_impact
+      parent: pa_experiments
+      identifier: pa_experiments_cumulative_impact
+      weight: 5
     - name: Create Exposure SQL Models
       url: experiments/exposure_sql
       parent: pa_experiments
       identifier: pa_experiments_exposure_sql
-      weight: 5
+      weight: 6
     - name: Manage Subject Types
       url: experiments/subject_types
       parent: pa_experiments
       identifier: pa_experiments_subject_types
-      weight: 6
+      weight: 7
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 7
+      weight: 8
     - name: Global Lift
       url: experiments/global_lift
       parent: pa_experiments
       identifier: pa_experiments_global_lift
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 9
+      weight: 10
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 10
+      weight: 11
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
