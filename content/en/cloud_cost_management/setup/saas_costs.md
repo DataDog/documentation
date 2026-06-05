@@ -181,6 +181,8 @@ Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administra
 
 After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
 
+**Note**: To track costs for both Anthropic Enterprise and platform accounts, repeat the setup steps to add a separate account entry for each API key type. Use the [Admin API key](https://docs.anthropic.com/en/api/administration-api) for standard platform usage, and the Enterprise Analytics API key for Anthropic Enterprise usage.
+
 {{% /tab %}}
 
 {{% tab "GitHub" %}}
@@ -554,6 +556,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `org_id` | The unique identifier of the Anthropic organization. |
 | `org_name` | A tag-normalized version of the Anthropic organization's name. |
 | `display_org_name` | The unaltered name of the organization. |
+| `org_type` | The type of Anthropic account (for example, `enterprise`). Displays `N/A` for non-enterprise accounts. |
 | `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
 | `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
 | `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
