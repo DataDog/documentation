@@ -136,6 +136,10 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+
+<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 regions only. To install, use the ChatGPT App instructions. Once you install the ChatGPT app, the Codex Plugin is automatically included as well.  
+</div>
+
 [1]: /getting_started/site/
 {{% /tab %}}
 
@@ -693,6 +697,13 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
+### Adding OAuth clients
+
+You can allow-list your redirect URLs in [Organization Preferences][27] under `MCP OAuth Redirect URLs`. 
+
+If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][58].
+
+
 ### Local binary authentication
 
 Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
@@ -809,3 +820,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [55]: https://claude.com/plugins/datadog
 [56]: https://claude.ai/directory/connectors/datadog
 [57]: /real_user_monitoring/
+[58]:https://partners.datadoghq.com/s/login/SelfRegister
