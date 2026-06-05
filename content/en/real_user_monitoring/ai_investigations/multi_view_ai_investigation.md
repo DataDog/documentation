@@ -43,7 +43,7 @@ Multi-View AI Investigation is available for Browser RUM applications only.
 
 {{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="Optimization page for a Largest Contentful Paint metric, showing the p75 distribution, time series, and ranked recommendation cards with an Investigate button on each card." style="width:100%;" >}}
 
-## Data analyzed
+## What the agent investigates
 
 The agent groups its findings into four diagnostic types:
 

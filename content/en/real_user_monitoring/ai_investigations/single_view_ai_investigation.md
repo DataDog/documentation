@@ -30,7 +30,7 @@ Instead of manually combing through RUM events to figure out whether the cause w
 
 The investigation runs and streams results into the side panel as they become available, so you can start reading the first findings before the analysis is complete.
 
-## Data analyzed
+## What the agent investigates
 
 To investigate a view, Datadog's RUM agent inspects the data Datadog has collected for that view and accesses correlated telemetry when it's available:
 
