@@ -16040,6 +16040,49 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: Rum Rate Limit
+      url: /api/latest/rum-rate-limit/
+      identifier: rum-rate-limit
+      generated: true
+    - name: Create or update a RUM rate limit configuration
+      url: /api/latest/rum-rate-limit/create-or-update-a-rum-rate-limit-configuration/
+      identifier: rum-rate-limit-create-or-update-a-rum-rate-limit-configuration
+      parent: rum-rate-limit
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumRateLimitConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Get a RUM rate limit configuration
+      url: /api/latest/rum-rate-limit/get-a-rum-rate-limit-configuration/
+      identifier: rum-rate-limit-get-a-rum-rate-limit-configuration
+      parent: rum-rate-limit
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumRateLimitConfig
+        unstable:
+          - v2
+        order: 1
+    - name: Delete a RUM rate limit configuration
+      url: /api/latest/rum-rate-limit/delete-a-rum-rate-limit-configuration/
+      identifier: rum-rate-limit-delete-a-rum-rate-limit-configuration
+      parent: rum-rate-limit
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumRateLimitConfig
+        unstable:
+          - v2
+        order: 3
     - name: Rum Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps
