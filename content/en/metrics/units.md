@@ -19,7 +19,7 @@ Metric units are displayed in places such as on timeseries graphs, query value w
 
 {{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units" style="width:100%;">}}
 
-On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation (for example: k, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
 
 For example, if you have a datapoint that is 3,000,000,000:
 
@@ -67,7 +67,7 @@ The following units may be associated with metrics submitted to Datadog:
 
 ### Unitless formatting
 
-For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
+For unitless metrics, Datadog uses the [SI prefixes][2] `k`, `M`, `G`, and `T`. After `T`, numbers are converted to exponential notation, which is also used for tiny numbers. By default, Datadog rounds to two decimal places. For exponential notation, the default is zero decimal places.
 
 #### Examples
 
@@ -75,7 +75,7 @@ For unitless metrics, Datadog uses the [SI prefixes][2] `K`, `M`, `G`, and `T`. 
 |------------------------|-----------|
 | 1                      | 1         |
 | 2.7182818284           | 2.72      |
-| 1337                   | 1.34K     |
+| 1337                   | 1.34k     |
 | 31536000               | 31.54M    |
 | 4294967296             | 4.29G     |
 | 18446744073709552000   | 2e19      |
@@ -129,3 +129,4 @@ Time units between a minute and a year are split into multiple units to be more 
 [1]: https://app.datadoghq.com/metric/summary
 [2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes
 [3]: /dashboards/guide/unit-override/
+

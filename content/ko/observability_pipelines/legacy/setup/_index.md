@@ -303,7 +303,10 @@ Observability Pipelines Worker 도커 이미지는 도커 허브 [여기][1]에 
 
 빠른 시작은 작업자를 설치하고 샘플 파이프라인을 배포하는 과정을 안내합니다. Datadog 에이전트에서 Datadog으로 데이터를 수신 및 라우팅하거나 Splunk HEC 에서 Splunk 및 Datadog로 데이터를 수신 및 라우팅하기 위해 작업자를 설치하는 방법에 대한 지침은 다음의 특정 사용 사례를 선택하세요.
 
-{{< partial name="observability_pipelines/use_cases.html" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="datadog/" src="integrations_logos/datadog.png" alt="Datadog" >}}
+  {{< image-card href="splunk/" src="integrations_logos/splunk.png" alt="Splunk" >}}
+{{< /card-grid >}}
 
 여러 작업자를 배포 및 확장하는 방법에 대한 권장 사항을 확인하세요.
 

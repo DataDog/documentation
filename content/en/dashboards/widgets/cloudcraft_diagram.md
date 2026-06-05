@@ -14,6 +14,8 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
+{{< img src="/dashboards/widgets/cloudcraft/cloudcraft_widget.png" alt="Example Cloudcraft Diagram widget displaying a cloud architecture diagram" style="width:100%;" >}}
+
 The Cloudcraft Diagram widget displays a live architecture diagram of your AWS, Azure, or GCP infrastructure directly in a dashboard. Use it alongside other widgets to correlate infrastructure context with metrics, logs, or alerts.
 
 ## Setup

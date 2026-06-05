@@ -27,8 +27,8 @@ Before setting up the PHP Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog PHP SDK** `datadog/dd-trace` version 1.20.0 or later
-- **Supported PHP runtime** - use PHP 7 or later with the Datadog PHP API, or PHP 8 or later with the OpenFeature adapter
+- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later
+- **Supported PHP runtime**: PHP 7 or later with the Datadog PHP API, or PHP 8 or later with the OpenFeature adapter
 - **OpenFeature PHP SDK** `open-feature/sdk` version 2.1 or later, if you use the OpenFeature adapter
 
 Set the following environment variables:
@@ -45,9 +45,11 @@ export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
 export DD_VERSION=<YOUR_APP_VERSION>
 
-# Required: Enable flag evaluation metrics
+# Required for flag evaluation metrics
 export DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
 ## Installation
 
@@ -134,7 +136,7 @@ $context = new EvaluationContext(
 );
 {{< /code-block >}}
 
-<div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and booleans. Nested arrays, objects, and null values are ignored for targeting and exposure reporting.</div>
+<div class="alert alert-warning">Evaluation context attributes must be flat primitive values: strings, numbers, and Booleans. Nested arrays, objects, and null values are ignored for targeting and exposure reporting.</div>
 
 ## Evaluate flags
 
@@ -409,7 +411,7 @@ If targeting rules do not match as expected:
 
 #### Flag evaluation metrics
 
-Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set for the PHP tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, verify the setting is enabled and the Datadog PHP SDK version supports it.
+Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set for the PHP tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, confirm `DD_METRICS_OTEL_ENABLED=true` is set in your environment and that your PHP tracer version supports flag evaluation metrics.
 
 #### Experiment exposures
 
