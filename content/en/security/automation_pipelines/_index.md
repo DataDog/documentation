@@ -56,9 +56,9 @@ Automation Pipelines operates through a rules-based system that allows you to au
 
 Override the default severity of findings to match your organization's risk profile. This allows you to:
 
-- **Downgrade low-risk findings**: Reduce the severity of findings on isolated environments which pose limited real-world risk.
-- **Upgrade high-value targets**: Increase the severity of findings on critical systems, such as databases containing PII or services with elevated compliance requirements.
-- **Calibrate severity to your organization's priorities**: Establish consistent severity standards which reflect your organization's priorities rather than relying solely on out-of-the-box scoring.
+- **Downgrade low-risk findings**: Reduce the severity of findings on isolated environments, which pose limited real-world risk.
+- **Upgrade high-value targets**: Increase the severity of findings on critical systems, such as databases containing personally identifiable information or services with elevated compliance requirements.
+- **Calibrate severity to your organization's priorities**: Establish consistent severity standards to reflect your organization's priorities, rather than relying solely on out-of-the-box scoring.
 
 ### Mute non-urgent findings to focus on what matters
 

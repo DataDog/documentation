@@ -22,7 +22,7 @@ Configure severity modifier rules to adjust finding severities to reflect your o
 
 ## Create a severity modifier rule
 
-1. In Datadog, go to **Security** > **Settings** > [Findings Automation][2]. Click **Add a New Rule**, then select **Modify Severity Level**. The Create a New Rule page opens.
+1. In Datadog, go to **Security** > **Settings** > [**Findings Automation**][2]. Click **Add a New Rule**, then select **Modify Severity Level**. The Create a New Rule page opens.
 1. Under **Rule name**, enter a descriptive name for the rule; for example, "Increase severity for services accessing PII databases".
 1. Add your rule criteria into the following fields:
     - **Any of these types**: The types of findings that the rule should check for. Available types include:
