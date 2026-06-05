@@ -26,10 +26,10 @@ experiment.run()
 
 ## Multiple runs
 
-You can run the same experiment multiple times to account for model non-determinism. You can use the [LLM Observability Python SDK][1] or [Experiments API][2] to specify how many iterations to run; subsequently, each dataset record is executed that many times using the same tasks and evaluators. 
+You can run the same experiment multiple times to account for model non-determinism. You can use the [Agent Observability Python SDK][1] or [Experiments API][2] to specify how many iterations to run; subsequently, each dataset record is executed that many times using the same tasks and evaluators. 
 
 ### Multiple runs with the Python SDK
-<div class="alert alert-info">Requires LLM Observability Python SDK v4.1+.</div>
+<div class="alert alert-info">Requires Agent Observability Python SDK v4.1+.</div>
 
 Define an optional `runs` parameter in your experiment method, as shown in the following example:
 
