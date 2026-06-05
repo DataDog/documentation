@@ -193,7 +193,9 @@ Failing experiments are excluded from the model fit and from the cumulative aggr
 
 The model requires at least five eligible experiments. With fewer experiments, the MAP estimate of τ is unstable and the resulting shrinkage is unreliable. When this threshold is not met, no cumulative impact value or effect distribution is displayed.
 
-## Why aren't charts showing?
+## Troubleshooting
+
+### Charts not showing
 
 Cumulative impact requires at least five experiments with non-failing diagnostics to fit the model. If fewer than five eligible experiments are available, Datadog does not display a cumulative impact value. Extend the time frame or run more experiments against the metric to resolve this.
 
