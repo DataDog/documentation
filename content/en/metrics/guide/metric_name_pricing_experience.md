@@ -98,7 +98,7 @@ For more information, see [Estimated Usage Metrics][6].
 
 ## Managing your metric usage
 
-To reduce your usage under Metric Name Pricing, use the following tools:
+To optimize your usage under Metric Name Pricing, use the following tools:
 
 - **Metric names**: Use [Agent-side filtering][9] to prevent unused or unwanted custom metrics from being sent to Datadog, reducing the count of billable metric names.
 - **Indexed and ingested points**: Use [Metrics without Limits™][2] to configure tag allowlists or blocklists per metric, or [Tag Indexing Rules][10] to apply org-wide tag configurations across metric groups, reducing indexed point volume and your per-metric overage.
