@@ -8,8 +8,8 @@ This page describes how to instrument your web applications with the Datadog Bro
 Select a setup method based on your application stack and workflow:
 
 - **Manual client-side setup**: Add the SDK directly to your frontend code when you need full control over initialization and configuration.
-- **Server-side auto-instrumentation**: Inject the SDK through your web server or proxy when you can't modify frontend code directly.
 - **Agentic Onboarding**: Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
+- **Server-side auto-instrumentation (RUM only)**: Inject the SDK through your web server or proxy when you can't modify frontend code directly.
 
 The Browser SDK supports all modern desktop and mobile browsers.
 
@@ -316,13 +316,21 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% /stepper %}
 
-### Option 2: Server-side auto-instrumentation
+### Option 2: Agentic Onboarding
+
+Use the [Agentic Onboarding][16] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
+
+### Option 3: Server-side auto-instrumentation
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
 RUM Auto-Instrumentation is not available for the selected site ({% region-param key="dd_site_name" /%}). Use [Client-Side instrumentation](/real_user_monitoring/application_monitoring/browser/setup/client) instead.
 {% /alert %}
 {% /site-region %}
+
+{% alert level="info" %}
+Server-side auto-instrumentation only supports RUM. For Error Tracking, Session Replay, or Product Analytics, use Option 1 (manual client-side setup).
+{% /alert %}
 
 RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
 
@@ -345,10 +353,6 @@ To request support for a web server that is not listed here, [fill out this form
 {% /card-grid %}
 
 {% partial file="rum-browser-auto-instrumentation-limitations.mdoc.md" /%}
-
-### Option 3: Agentic Onboarding
-
-Use the [Agentic Onboarding][16] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
