@@ -17,6 +17,12 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 ### Option 1: Manual client-side setup
 
+- **[Server-side auto-instrumentation][12]**: Automatically inject the RUM SDK into HTML responses through your web server or proxy.
+- **[Agentic Onboarding (in Preview)][13]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt.
+- **Manual client-side setup** (below): Manually add the SDK to your application code.
+
+### Manual client-side setup
+
 {% stepper level="h4" %}
 
 {% step title="Create the application in the UI" %}

@@ -2198,6 +2198,12 @@
     "description": "Get a list of AWS services that can send logs to Datadog.",
     "summary": "Get list of AWS log ready services"
   },
+  "ValidateAWSCCMConfig": {
+    "description": "Validate a Cloud Cost Management config for an AWS account using Cost and Usage Report\n(CUR) 2.0 against Datadog's ingest requirements without persisting it.",
+    "summary": "Validate AWS CCM config",
+    "request_description": "Validate a Cloud Cost Management config for an AWS account integration config.",
+    "request_schema_description": "AWS CCM config validation request body."
+  },
   "ListGCPSTSAccounts": {
     "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
     "summary": "List all GCP STS-enabled service accounts"
@@ -2708,7 +2714,7 @@
     "request_schema_description": "Request to delete LLM Observability data."
   },
   "GetLLMObsAnnotatedInteractionsByTraceIDs": {
-    "description": "Returns annotated interactions across all annotation queues for the given content IDs. Results include queue metadata (ID and name) for each interaction.",
+    "description": "Returns annotated interactions across all annotation queues for the given content IDs.\nResults include queue metadata (ID and name) for each interaction.",
     "summary": "Get annotated interactions by content IDs"
   },
   "ListLLMObsAnnotationQueues": {
@@ -2734,6 +2740,18 @@
   "GetLLMObsAnnotatedInteractions": {
     "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
+  },
+  "UpsertLLMObsAnnotations": {
+    "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.",
+    "summary": "Create or update annotations",
+    "request_description": "Payload for creating or updating annotations.",
+    "request_schema_description": "Request to create or update annotations on interactions in an annotation queue."
+  },
+  "DeleteLLMObsAnnotations": {
+    "description": "Delete one or more annotations from an annotation queue.",
+    "summary": "Delete annotations",
+    "request_description": "Delete annotations payload.",
+    "request_schema_description": "Request to delete annotations from an annotation queue."
   },
   "CreateLLMObsAnnotationQueueInteractions": {
     "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
@@ -2796,6 +2814,10 @@
     "summary": "Update an LLM Observability experiment",
     "request_description": "Update experiment payload.",
     "request_schema_description": "Request to partially update an LLM Observability experiment."
+  },
+  "ListLLMObsExperimentEventsV1": {
+    "description": "Retrieve spans with their evaluation metrics for a given experiment. Returns spans only, with no summary metrics and no pagination. Deprecated in favor of `ListLLMObsExperimentEventsV3`.",
+    "summary": "List LLM Observability experiment spans (v1)"
   },
   "CreateLLMObsExperimentEvents": {
     "description": "Push spans and metrics for an LLM Observability experiment.",
@@ -2930,6 +2952,10 @@
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
     "summary": "List LLM Observability dataset versions"
+  },
+  "ListLLMObsExperimentEventsV2": {
+    "description": "Retrieve spans and experiment-level summary metrics for a given experiment. Returns the full events payload without pagination. Deprecated: use `ListLLMObsExperimentEventsV3` instead.",
+    "summary": "List LLM Observability experiment events (v2)"
   },
   "UploadLLMObsDatasetRecordsFile": {
     "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
@@ -3387,6 +3413,10 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "GetOAuth2WellKnownSites": {
+    "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
+    "summary": "Get OAuth2 well-known sites"
+  },
   "DeleteScopesRestriction": {
     "description": "Delete the scopes restriction configured for the OAuth2 client.",
     "summary": "Delete an OAuth2 client scopes restriction"
@@ -3558,6 +3588,18 @@
   "ListOrgs": {
     "description": "Returns the current organization and its managed organizations in JSON:API format.",
     "summary": "List your managed organizations"
+  },
+  "DisableCustomerOrg": {
+    "description": "Disable the Datadog organization associated with the authenticated user or API key.\nThe request body uses JSON:API format. If `org_uuid` is supplied, it must match\nthe authenticated org or the request is rejected. Successful calls disable the org\nand return the resulting state from the downstream service. Requires the\n`org_management` permission.",
+    "summary": "Disable the authenticated customer organization",
+    "request_description": "",
+    "request_schema_description": "Request payload for disabling the authenticated customer organization."
+  },
+  "UpdateOrgSamlConfigurations": {
+    "description": "Update the SAML preferences for the current organization.\n\nUse this endpoint to set the just-in-time (JIT) provisioning domains and the default role\nassigned to just-in-time provisioned users.",
+    "summary": "Update organization SAML preferences",
+    "request_description": "",
+    "request_schema_description": "Request to update an organization's SAML preferences."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -4331,11 +4373,25 @@
     "description": "List watched sessions.",
     "summary": "List RUM replay viewership history sessions"
   },
+  "ListSAMLConfigurations": {
+    "description": "Get the list of SAML configurations for the current organization. An organization has at most one SAML configuration.",
+    "summary": "List SAML configurations"
+  },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
     "request_description": "",
     "request_schema_description": "The form data submitted to upload IdP metadata"
+  },
+  "GetSAMLConfiguration": {
+    "description": "Get a single SAML configuration for the current organization by its UUID.",
+    "summary": "Get a SAML configuration"
+  },
+  "UpdateSAMLConfiguration": {
+    "description": "Update a single SAML configuration for the current organization.\n\nUse this endpoint to enable or disable identity-provider-initiated login, set the\njust-in-time provisioning domains, and set the default role assigned to\njust-in-time provisioned users. A default role is required to enable just-in-time provisioning.",
+    "summary": "Update a SAML configuration",
+    "request_description": "",
+    "request_schema_description": "Request to update a SAML configuration."
   },
   "ListSCIMGroups": {
     "description": "List groups in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
@@ -5254,6 +5310,28 @@
   "GetSloStatus": {
     "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
     "summary": "Get SLO status"
+  },
+  "DeleteSourcemaps": {
+    "description": "Deletes source maps matching the specified filter criteria. Supports\ndry-run mode to preview which source maps would be deleted without\nperforming the actual deletion.",
+    "summary": "Delete source maps"
+  },
+  "GetSourcemaps": {
+    "description": "Retrieves the content of a specific JavaScript source map file by its\nfilename, service name, and version.",
+    "summary": "Get a JavaScript source map"
+  },
+  "ListSourcemaps": {
+    "description": "Retrieves a paginated list of source maps matching the specified filter criteria.",
+    "summary": "List source maps"
+  },
+  "RestoreSourcemaps": {
+    "description": "Restores previously deleted source maps matching the specified filter\ncriteria. Supports dry-run mode to preview which source maps would be\nrestored without performing the actual restoration.",
+    "summary": "Restore source maps"
+  },
+  "GetServiceRepositoryInfo": {
+    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "summary": "Get service repository information",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving service repository information."
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",

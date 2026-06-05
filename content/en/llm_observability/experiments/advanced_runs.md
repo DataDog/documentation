@@ -233,6 +233,42 @@ jobs:
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
 ```
 
+### Querying and comparing CI/CD runs via the API
+When creating experiments for a CI/CD pipeline, use the `name` field to include a shared logical pipeline name and a per-run suffix (for example, `my-pipeline-<run-id>`), and use the `metadata` field for commit, branch, or other pipeline context (for example, `"metadata": {"commit": "abc123", "branch": "feat/foo"}`).
+
+To retrieve and compare runs through the API, call `GET /api/v2/llm-obs/v1/experiments` with these filters:
+- `filter[experiment]=<pipeline-name>` returns all runs sharing the same logical pipeline name.
+- `filter[metadata]={"branch":"main"}` returns runs whose metadata contains those key-value pairs.
+- Combine both filters to narrow comparisons, for example: `?filter[experiment]=my-pipeline&filter[metadata]={"commit":"abc123"}`.
+
+Each matching experiment includes `aggregate_data` with pre-computed eval score distributions, token costs, and error rates, so you can compare runs without querying individual spans.
+
+`page[cursor]` is not supported when `filter[experiment]` or `filter[metadata]` is used.
+
+`filter[experiment]` matches the shared logical pipeline name stored in the `experiment` column (for example, `my-pipeline`). This is distinct from the unique per-run `name` field (for example, `my-pipeline-<run-id>`).
+
+```http
+# Create experiment tagged with pipeline context
+POST /api/v2/llm-obs/v1/experiments
+{
+  "data": {
+    "type": "experiments",
+    "attributes": {
+      "project_id": "<project_id>",
+      "dataset_id": "<dataset_id>",
+      "name": "my-pipeline-<run-id>",
+      "metadata": {"commit": "abc123", "branch": "feat/foo"}
+    }
+  }
+}
+
+# Compare all runs of the same pipeline on main branch
+GET /api/v2/llm-obs/v1/experiments?filter[experiment]=my-pipeline&filter[metadata]={"branch":"main"}
+
+# Retrieve a specific commit's run
+GET /api/v2/llm-obs/v1/experiments?filter[experiment]=my-pipeline&filter[metadata]={"commit":"abc123"}
+```
+
 [1]: /llm_observability/instrumentation/sdk?tab=python
 [2]: /llm_observability/experiments/api
 [3]: https://app.datadoghq.com/llm/experiments

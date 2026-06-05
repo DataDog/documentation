@@ -1,8 +1,10 @@
 ---
 title: AI Credits
 description: "Understand how AI Credits work, which products consume them, pricing models, and how to manage usage for your organization."
+aliases:
+- /bits_ai/ai_credits/
 further_reading:
-- link: "/bits_ai/bits_assistant/"
+- link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
 - link: "/bits_ai/bits_ai_dev_agent/"
@@ -51,22 +53,6 @@ AI Credits reset on the first day of each calendar month. Unused Commit credits 
 
 If your usage exceeds your monthly Commit, additional credits are billed automatically at the On-Demand rate.
 
-## Credit consumption by feature
-
-| Feature | Avg. credits per use |
-|---|---|
-| Bits Agent Builder — message | 0.3 credits |
-| Bits Chat — monitor creation / modification* | 0.5 credits |
-| Bits Chat — search and explore telemetry* | 0.6 credits |
-| Bits Chat — dashboard creation / modification* | 0.6 credits |
-| Bits Chat — notebook creation / modification* | 0.7 credits |
-| Bits Code — code fix | 5 credits |
-| Bits Investigation — autonomous investigation | 6.5 credits |
-
-\* Estimates are per message.
-
-<div class="alert alert-info">Average credit consumption for each feature set out above is provided only for reference. Actual consumption for any single request may vary with task complexity and the amount of context the model processes.</div>
-
 ## Admin controls
 
 All AI Credit management lives in **Plan & Usage > AI Credits**. From there, admins can:
@@ -98,7 +84,7 @@ AI Credits are available to all Datadog customers except:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_assistant/
+[1]: /bits_ai/bits_chat/
 [2]: /bits_ai/bits_ai_dev_agent/
 [3]: /bits_ai/bits_ai_sre/
 [4]: /actions/agents/
