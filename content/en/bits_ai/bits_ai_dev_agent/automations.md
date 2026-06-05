@@ -69,7 +69,7 @@ When setting up a product finding trigger, you can configure additional filters,
   - **Flaky Tests** supports filtering by **Repository**, **Branch** (defaults to the repository's default branch), and **Status**.
   - **Code Security (SAST)** supports filtering by **Repository**, **Severity**, **Rule to remediate**, and a toggle to **Filter out findings identified as false positives by Bits AI**.
 
-<div class="alert alert-warn">Each finding that triggers an automation is tied to a single session. Multiple findings cannot be fixed in a single session or pull request.</div>
+<div class="alert alert-warning">Each finding that triggers an automation is tied to a single session. Multiple findings cannot be fixed in a single session or pull request.</div>
 
 ### Custom prompt trigger
 A custom prompt tells Bits Code what to do each time the automation runs, in freeform text, against a chosen repository. Use a custom prompt for recurring maintenance tasks that aren't tied to a specific Datadog signal, such as updating dependencies or refreshing documentation.
