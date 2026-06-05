@@ -3698,6 +3698,21 @@ menu:
       parent: serverless_azure
       identifier: serverless_azure_database_messaging_services
       weight: 6
+    - name: Cosmos DB
+      url: serverless/azure_database_messaging_services/azure_cosmosdb
+      parent: serverless_azure_database_messaging_services
+      identifier: serverless_azure_database_messaging_services_cosmosdb
+      weight: 601
+    - name: Event Hubs
+      url: serverless/azure_database_messaging_services/azure_event_hubs
+      parent: serverless_azure_database_messaging_services
+      identifier: serverless_azure_database_messaging_services_event_hubs
+      weight: 602
+    - name: Service Bus
+      url: serverless/azure_database_messaging_services/azure_service_bus
+      parent: serverless_azure_database_messaging_services
+      identifier: serverless_azure_database_messaging_services_service_bus
+      weight: 603
     - name: Azure Functions
       url: serverless/azure_functions
       parent: serverless_azure
