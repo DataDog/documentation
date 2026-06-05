@@ -29,7 +29,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 <div class="alert alert-info">The Datadog ChatGPT app is in Preview. During the Preview, it is available for US1 customers only.</div>
 
 1. In ChatGPT, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Browse Apps{{< /ui >}} and search for **Datadog**. If the Datadog app is not available, contact your organization's ChatGPT administrator for approval.
-1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the prompts.
+1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the guided setup.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 {{< /site-region >}}
@@ -654,6 +654,7 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 
 | Client | Developer | Notes |
 |--------|------|------|
+| [ChatGPT][58] | OpenAI | In Preview, and available for US1 customers only. |
 | [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
@@ -831,3 +832,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [55]: https://claude.com/plugins/datadog
 [56]: https://claude.ai/directory/connectors/datadog
 [57]: /real_user_monitoring/
+[58]: https://chatgpt.com/
