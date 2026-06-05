@@ -450,7 +450,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
 
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
@@ -694,6 +694,15 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+### `analyze_datadog_error_tracking_errors`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read` and `Timeseries`*\
+Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregations, and numerical analysis. Operates on individual error samples, not Issues (groups of errors).
+
+- Count errors by service in the last hour.
+- Show me the top error types in the checkout service over the past week.
+- Break down errors by version to identify which deployment introduced an issue.
 
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
