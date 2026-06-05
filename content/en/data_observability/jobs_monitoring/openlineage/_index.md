@@ -259,7 +259,7 @@ Use `custom` for custom jobs. The values below are used by Datadog's native inte
 | Value | Platform |
 |---|---|
 | `custom` | Custom or unsupported platforms |
-| `SPARK` | Apache Spark (native integration only—do not use for custom jobs) |
+| `SPARK` | Apache Spark (native integration only; do not use for custom jobs) |
 | `AIRFLOW` | Apache Airflow |
 | `DBT` | dbt |
 | `BIGQUERY` | Google BigQuery |
