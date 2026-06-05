@@ -225,7 +225,6 @@ If you want to see user activities, such as who changed the retention of an inde
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
 [2]: /logs/log_configuration/archives/
-[3]: /logs/log_configuration/rehydrating/
 [4]: /logs/log_configuration/archives/?tab=awss3#define-maximum-scan-size
 [5]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [6]: https://app.datadoghq.com/

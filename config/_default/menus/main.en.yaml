@@ -7074,11 +7074,6 @@ menu:
       url: logs/log_configuration/rehydrating
       parent: log_configuration
       weight: 210
-    - name: Archive Search
-      identifier: log_configuration_archive_search
-      url: logs/log_configuration/archive_search
-      parent: log_configuration
-      weight: 211
     - name: Forwarding
       identifier: log_configuration_forwarding
       url: logs/log_configuration/forwarding_custom_destinations/
@@ -7174,6 +7169,11 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 514
+    - name: Archive Search
+      identifier: log_explorer_archive_search
+      url: logs/explorer/archive_search/
+      parent: log_explorer
+      weight: 515
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
