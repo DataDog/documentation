@@ -3577,6 +3577,12 @@
     "request_description": "",
     "request_schema_description": "Request payload for disabling the authenticated customer organization."
   },
+  "UpdateOrgSamlConfigurations": {
+    "description": "Update the SAML preferences for the current organization.\n\nUse this endpoint to set the just-in-time (JIT) provisioning domains and the default role\nassigned to just-in-time provisioned users.",
+    "summary": "Update organization SAML preferences",
+    "request_description": "",
+    "request_schema_description": "Request to update an organization's SAML preferences."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -4349,11 +4355,25 @@
     "description": "List watched sessions.",
     "summary": "List RUM replay viewership history sessions"
   },
+  "ListSAMLConfigurations": {
+    "description": "Get the list of SAML configurations for the current organization. An organization has at most one SAML configuration.",
+    "summary": "List SAML configurations"
+  },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
     "request_description": "",
     "request_schema_description": "The form data submitted to upload IdP metadata"
+  },
+  "GetSAMLConfiguration": {
+    "description": "Get a single SAML configuration for the current organization by its UUID.",
+    "summary": "Get a SAML configuration"
+  },
+  "UpdateSAMLConfiguration": {
+    "description": "Update a single SAML configuration for the current organization.\n\nUse this endpoint to enable or disable identity-provider-initiated login, set the\njust-in-time provisioning domains, and set the default role assigned to\njust-in-time provisioned users. A default role is required to enable just-in-time provisioning.",
+    "summary": "Update a SAML configuration",
+    "request_description": "",
+    "request_schema_description": "Request to update a SAML configuration."
   },
   "ListSCIMGroups": {
     "description": "List groups in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
