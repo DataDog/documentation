@@ -18,5 +18,3 @@ For Python and Node.js, Datadog traces Service Bus producers and Azure Functions
 | Python 3.10+ (Producer + Azure Functions consumer) | dd-trace-py v3.10.0 | lambda-python v4.8.1 | azure-servicebus >= 7.14.2 |
 | Node.js (Producer + Azure Functions consumer) | dd-trace-js v5.73.0 | lambda-js v12.129.0 | @azure/service-bus >= 7.9.2 |
 | .NET (Producer & consumer) | dd-trace-dotnet v3.30.0 | N/A | Azure.Messaging.ServiceBus >= 7.14.0 |
-
-**Note**: To enable Service Bus tracing through the OpenTelemetry integration with dd-trace-dotnet v2.38.0 or later, set `DD_TRACE_OTEL_ENABLED=true`.
