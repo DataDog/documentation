@@ -54,7 +54,12 @@ En el caso de los entornos contenedorizados, sigue los siguientes enlaces para a
 1. Configura `apm_non_local_traffic: true` en la sección `apm_config` de tu principal [archivo de configuración de `datadog.yaml`][1].
 2. Consulta las instrucciones específicas de configuración para asegurarte de que el Agent está configurado para recibir trazas en un entorno contenedorizado:
 
-{{< partial name="apm/apm-containers.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/agent/docker/apm/?tab=java" src="integrations_logos/docker.png" alt="Docker" >}}
+  {{< image-card href="/agent/kubernetes/apm/?tab=helm" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
+  {{< image-card href="/agent/amazon_ecs/apm/?tab=python" src="integrations_logos/amazon_ecs.png" alt="Amazon ECS" >}}
+  {{< image-card href="/integrations/ecs_fargate/#trace-collection" src="integrations_logos/ecs_fargate.png" alt="ECS Fargate" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -90,7 +95,20 @@ Para otros entornos, consulta la documentación sobre [integraciones][5] para el
 
 Configura tu aplicación para enviar trazas utilizando una de los siguientes bibliotecas de rastreo oficiales de Datadog:
 
-{{< partial name="apm/apm-languages.html" >}}
+{{< card-grid card_width="225px" image_width="200">}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/cpp" src="integrations_logos/cpp.png" alt="C++" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/rust/" src="integrations_logos/rust.png" alt="Rust" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/dotnet-core" src="integrations_logos/dotnet-core.png" alt=".Net" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/dotnet-framework" src="integrations_logos/dotnet-framework.png" alt=".Net" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/android" src="integrations_logos/android.png" alt="Android" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/ios" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+{{< /card-grid >}}
 
 <br>
 
