@@ -215,7 +215,7 @@ Visitors can subscribe to status page updates in Slack through the **Datadog Sta
 
 {{< img src="service_management/status_pages/status_pages_enable_slack.png" alt="Status page settings showing the Enable Slack subscriptions toggle and the Slack App Icon upload" style="width:80%;" >}}
 
-When enabled, clicking **Subscribe** on the published page opens a modal with **Email** and **Slack** tabs.
+Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type.
 
 ### Subscribe in Slack
 
@@ -230,7 +230,7 @@ From a published page with Slack subscriptions enabled:
 
 After subscribing, the selected channel receives a welcome message confirming the subscription.
 
-**Private channels**: The app cannot be added automatically. After subscribing, the channel receives a message prompting you to invite the **Datadog Status Pages** bot. After you invite the bot to the channel, it can post updates. Direct message (DM) channels are not supported. On **internal** status pages, you must be logged in to the same Datadog organization to subscribe.
+**Private channels**: After subscribing, you receive a message in the **Messages** tab of the Slack app prompting you to invite the **Datadog Status Pages** bot to the channel. You must invite the bot before it can post updates. Direct message (DM) channels are not supported. On **internal** status pages, you must be logged in to the same Datadog organization to subscribe.
 
 ### Manage subscriptions
 
