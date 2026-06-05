@@ -27,7 +27,7 @@ Before setting up the PHP Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
-- **Datadog PHP SDK** `datadog/dd-trace` version 1.20.0 or later
+- **Datadog PHP SDK** `datadog/dd-trace` version 1.21.0 or later
 - **Supported PHP runtime**: PHP 7 or later with the Datadog PHP API, or PHP 8 or later with the OpenFeature adapter
 - **OpenFeature PHP SDK** `open-feature/sdk` version 2.1 or later, if you use the OpenFeature adapter
 
