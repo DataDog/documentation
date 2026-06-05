@@ -35,7 +35,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 {{< /site-region >}}
 
 {{< site-region region="us3,us5,eu,ap1,ap2,gov,gov2" >}}
-<div class="alert alert-danger">Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: https://chatgpt.com/apps/datadog--preview/asdk_app_69e8c7f174a08191a28b6da96c8062c4
