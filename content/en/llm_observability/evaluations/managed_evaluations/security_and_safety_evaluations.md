@@ -1,5 +1,5 @@
 ---
-title: Security and Safety Evaluations
+title: Sensitive Data Scanner
 description: Learn how to configure managed evaluations for your LLM applications.
 further_reading:
 - link: "/llm_observability/terms/"
@@ -9,12 +9,8 @@ further_reading:
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
 aliases:
-    - /llm_observability/evaluations/security_and_safety_evaluations
+    - /llm_observability/evaluations/sensitive_data_scanner
 ---
-
-Security and safety evaluations help ensure your LLM-powered applications resist malicious inputs and unsafe outputs. 
-
-#### Sensitive Data Scanning
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 

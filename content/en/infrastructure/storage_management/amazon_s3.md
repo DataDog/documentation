@@ -275,7 +275,7 @@ To verify your setup:
 Follow these best practices to optimize Storage Management setup:
 - **Configure lifecycle policies for inventory destination buckets**: S3 Inventory reports are generated daily and stored in your destination bucket. To prevent old inventory files from accumulating and incurring storage costs, add a lifecycle policy to automatically delete inventory reports older than three days.
 
-- **Configure lifecycle policies for S3 access logs**: If you have enabled S3 access logs for prefix-level request metrics, the raw log files accumulate in your destination bucket. After these logs are forwarded to Datadog, the raw files are no longer needed for Storage Management purposes. To automatically delete access log files after forwarding to Datadog, add a lifecycle rule.
+- **Configure life cycle policies for S3 access logs**: If you have enabled S3 access logs for prefix-level request metrics, the raw log files accumulate in your destination bucket. After these logs are forwarded to Datadog, the raw files are no longer needed for Storage Management purposes. To automatically delete access log files after forwarding to Datadog, add a life cycle rule.
 
   **Note**: Before enabling automatic deletion, verify that there are no compliance or audit requirements in your organization that mandate retaining raw S3 access logs for a specific period.
 
@@ -318,7 +318,7 @@ Storage Management analyzes your inventory data and access logs to surface prefi
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
 ### Prerequisites
-Seeing recommendations requires the following prerequisites:
+Seeing recommendations has the following prerequisites:
 1. Configure S3 buckets for Storage Management by following the steps above on this page.
 2. To see recommendations for moving infrequently accessed data to cheaper tiers by prefix, enable and forward S3 access logs to Datadog (Datadog Log Management fees apply).
 3. To see recommendations for identifying non-current versions in prefixes, include "All versions" as part of the S3 Inventory configuration.

@@ -104,6 +104,8 @@ Requires [Agent version][7] `7.72` or higher.
        workers: 4 # default
    ```
 
+   **Note**: Set `workers` to a value greater than or equal to the number of Network Path tests running concurrently on the Agent.
+
 3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
 
 4. [Restart the Agent][8] for it to appear in the list of available test locations.
@@ -125,7 +127,7 @@ Requires [Agent version][7] `7.72` or higher.
 Click on a Network Path test on the [Synthetic Tests page][1] to view the Test Details page, which displays comprehensive information about your test:
 
 - Test properties and configuration
-- Test history
+- Test activity
 - Individual test runs
 - Aggregated Network Path visualizations across all test runs
 
@@ -133,15 +135,15 @@ The Network Path visualization shows the routes packets take to complete queries
 
   <div class="alert alert-info">Changing the health bar does not affect the global time range at the top of the page.</div>
 
-  {{< img src="synthetics/network_tests/synthetics_network_path_hops.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
+  {{< img src="synthetics/network_tests/network_path_test_updated.png" alt="Network Path test details page showing the Network Path tab with source, hops, and destination, plus the latency and reachability timeline" style="width:100%;">}}
 
-Click on a test run in the table at the bottom of the page to view details for that specific run. The side panel displays:
- 
+On the **Test Runs** tab, click a test run to open a side panel with details for that specific run. The side panel displays:
+
 - Run information
 - Network Path visualization, aggregated across all traceroute queries (based on your tests [advanced options](#test-configuration))
 - Assertion results, aggregated across all end-to-end queries (based on your tests [advanced options](#test-configuration)) <br></br>
 
-  {{< img src="synthetics/network_tests/network_path_synthetics.png" alt="A single test run from a network test, displaying the side panel" style="width:80%;">}}
+  {{< img src="synthetics/network_tests/network_path_details.png" alt="Side panel for a single Network Path test run showing run status, latency, hops, jitter, the Network Path visualization, and assertion results" style="width:100%;">}}
 
 ## Retention
 

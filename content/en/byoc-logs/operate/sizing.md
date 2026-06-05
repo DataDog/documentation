@@ -16,18 +16,36 @@ further_reading:
   text: "Learn more about BYOC Logs Architecture"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
+{{< jqmath-vanilla >}}
 
 ## Overview
 
-Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your BYOC Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
+Proper cluster sizing helps ensure optimal performance, cost efficiency, and reliability for your BYOC (Bring Your Own Cloud) Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention period, and the complexity of your log data.
 
-This guide provides baseline recommendations for dimensioning your BYOC Logs cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
+The [sizing examples](#sizing-examples) below provide starting-point configurations for common daily log volumes. For deeper guidance on each component, see the sections that follow.
 
 <div class="alert alert-tip">
 Use your expected daily log volume and peak ingestion rates as starting points, then monitor your cluster's performance and adjust sizing as needed.
+</div>
+
+## Sizing examples
+
+The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations—adjust based on your observed performance.
+
+As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ingested—4 vCPUs for indexers and 8 vCPUs for searchers. Heavy analytics workloads need 2x more.
+
+These vCPU recommendations assume modern x86 CPUs such as AWS m6 instance types (or equivalent on other clouds). ARM-based CPUs such as AWS Graviton can offer better cost efficiency at the same throughput.
+
+| Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~6x compression) |
+|-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
+| **1 TB/day** | 2 | large | 2 | xlarge | ~5 TB |
+| **5 TB/day** | 5 | xlarge | 5 | 2xlarge | ~25 TB |
+| **10 TB/day** | 10 | xlarge | 5 | 4xlarge | ~50 TB |
+| **50 TB/day** | 25 | 2xlarge | 13 | 8xlarge | ~250 TB |
+| **100 TB/day** | 50 | 2xlarge | 25 | 8xlarge | ~500 TB |
+
+<div class="alert alert-info">
+<strong>Billing vs. provisioning:</strong> Provisioned vCPUs and billed vCPUs are different. A production cluster is intentionally overprovisioned to absorb ingestion and search spikes. Contact your Datadog representative for billing guidance.
 </div>
 
 ## Indexers
@@ -52,14 +70,27 @@ To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
 3. **Add headroom:** Start with one indexer pod configured with **3 vCPUs, 12 GB RAM, and a 200 GB disk**. Adjust these values based on observed performance and redundancy needs.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Sizing by event count" level="h4" expanded=false %}}
+If you know your daily event count but not your byte volume, use this formula to estimate:
+
+$$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size (bytes)"} / 10^{12}$$
+
+For example, with 1 billion events/day at 1 KB average size:
+
+`1,000,000,000 × 1,000 / 1,000,000,000,000 = 1 TB/day`
+
+Typical log event sizes range from 500 bytes (short syslog) to 2-3 KB (JSON with Kubernetes tags). Measure a representative sample of your logs to get an accurate average.
+{{% /collapse-content %}}
+
 ## Searchers
 
 Searchers handle search queries from the Datadog UI, reading metadata from the Metastore and fetching data from object storage.
 
-A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers.
+A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers. See our sizing examples.
 
-- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than aggregations.
+- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than wildcard or whole event search queries.
 - **Memory:** 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
+
 
 ## Other services
 
@@ -70,6 +101,30 @@ Allocate the following resources for these lightweight components:
 | **Control Plane** | 2 | 4 GB | 1 |
 | **Metastore** | 2 | 4 GB | 2 |
 | **Janitor** | 2 | 4 GB | 1 |
+
+## Object storage estimation
+
+BYOC Logs compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
+
+| Metric | Typical range |
+|--------|---------------|
+| **Compression ratio** | 5x to 8x (raw input to stored size) |
+| **Storage per TB/day ingested** | 125-200 GB/day on object storage |
+
+To estimate your object storage requirements:
+
+$$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
+
+$$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
+
+{{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h4" expanded=false %}}
+Assuming a 6x compression ratio:
+
+1. **Stored per day:** `10 TB / 6 ≈ 1.67 TB/day`
+2. **Total for 30 days:** `1.67 TB × 30 ≈ 50 TB`
+
+Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
+{{% /collapse-content %}}
 
 ## PostgreSQL database
 
@@ -91,58 +146,13 @@ The BYOC Logs Helm chart provides predefined sizing tiers through the `indexer.p
 | 6xlarge | 24 | 96 GB |
 | 8xlarge | 32 | 128 GB |
 
-{{% collapse-content title="Indexer configuration per tier" level="h4" expanded=false %}}
-
-The following values are automatically applied when you set `indexer.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Indexer configuration][1].
-
-| Size | split_store_max_num_bytes | split_store_max_num_splits |
-|------|---------------------------|----------------------------|
-| medium | 200G | 10000 |
-| large | 200G | 10000 |
-| xlarge | 200G | 10000 |
-| 2xlarge | 200G | 10000 |
-| 4xlarge | 200G | 10000 |
-| 6xlarge | 200G | 10000 |
-| 8xlarge | 200G | 10000 |
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Ingest API configuration per tier" level="h4" expanded=false %}}
-
-The following values are automatically applied when you set `indexer.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Ingest API configuration][2].
-
-| Size | max_queue_memory_usage | max_queue_disk_usage |
-|------|------------------------|----------------------|
-| medium | 2GiB | 4GiB |
-| large | 4GiB | 8GiB |
-| xlarge | 8GiB | 16GiB |
-| 2xlarge | 16GiB | 32GiB |
-| 4xlarge | 32GiB | 64GiB |
-| 6xlarge | 48GiB | 96GiB |
-| 8xlarge | 64GiB | 128GiB |
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Searcher configuration per tier" level="h4" expanded=false %}}
-
-The following values are automatically applied to searcher configuration when you set `searcher.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Searcher configuration][3].
-
-| Size | fast_field_cache_capacity | split_footer_cache_capacity | partial_request_cache_capacity | max_num_concurrent_split_searches | aggregation_memory_limit |
-|------|---------------------------|-----------------------------|-------------------------------|-----------------------------------|--------------------------|
-| medium | 1GiB | 500MiB | 64MiB | 2 | 500MiB |
-| large | 2GiB | 1GiB | 128MiB | 4 | 1GiB |
-| xlarge | 4GiB | 2GiB | 256MiB | 8 | 2GiB |
-| 2xlarge | 8GiB | 4GiB | 512MiB | 16 | 4GiB |
-| 4xlarge | 16GiB | 8GiB | 1GiB | 32 | 8GiB |
-| 6xlarge | 24GiB | 12GiB | 1536MiB | 48 | 12GiB |
-| 8xlarge | 32GiB | 16GiB | 2GiB | 64 | 16GiB |
-
-{{% /collapse-content %}}
+Values defining the ingest queue sizes and search cache sizes are automatically applied when you set `indexer.podSize` in the [Helm chart](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/sizing-map.yaml). For more details on each parameter, you can check the Quickwit documentation for [indexer parameters][2], [ingest api parameters][3] and [searcher parameters][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://quickwit.io/docs/configuration/node-config#indexer-configuration
-[2]: https://quickwit.io/docs/configuration/node-config#ingest-api-configuration
-[3]: https://quickwit.io/docs/configuration/node-config#searcher-configuration
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/sizing-map.yaml
+[2]: https://quickwit.io/docs/configuration/node-config#indexer-configuration
+[3]: https://quickwit.io/docs/configuration/node-config#ingest-api-configuration
+[4]: https://quickwit.io/docs/configuration/node-config#searcher-configuration

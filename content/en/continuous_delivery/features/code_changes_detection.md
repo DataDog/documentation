@@ -32,7 +32,7 @@ Hovering over the service value reveals whether the deployment has reached all e
 {{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
 
 Code changes are only detected for deployments that:
-- Have a service (`@deployment.service`) with file path specs defined in Software Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
+- Have a service (`@deployment.service`) with file path specs defined in Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
 - Have an environment (`@deployment.env`).
 - Have a repository URL (`@deployment.git.repository_url`) and a commit SHA (`@deployment.git.commit.sha`).
 
@@ -105,7 +105,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 To correctly understand the code changes that a deployment has introduced, only the commits affecting the specific service being deployed should be considered.
 
-This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
+This can be done in [Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
 If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
@@ -179,6 +179,6 @@ In this case, Code Changes Detection for deployments of the `shopist` service wi
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
 [3]: https://app.datadoghq.com/ci/commits
-[4]: /tracing/software_catalog/adding_metadata
-[5]: /tracing/software_catalog
+[4]: /internal_developer_portal/catalog/entity_model/
+[5]: /internal_developer_portal/catalog/
 

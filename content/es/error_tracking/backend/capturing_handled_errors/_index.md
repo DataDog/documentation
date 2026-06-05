@@ -35,7 +35,10 @@ La captura de errores gestionados sólo está disponible en APM Error Tracking o
 
 Configura tu aplicación para capturar los errores gestionados utilizando una de las siguientes bibliotecas de rastreo oficiales de Datadog:
 
-{{< partial name="error_tracking/error-tracking-handled-errors.html" >}}
+{{< card-grid card_width="350px" image_width="200" >}}
+  {{< image-card href="/error_tracking/backend/capturing_handled_errors/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/error_tracking/backend/capturing_handled_errors/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 <br />
 
 ## Referencias adicionales
