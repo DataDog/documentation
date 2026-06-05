@@ -6235,16 +6235,21 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
       weight: 204
+    - name: PHP
+      url: feature_flags/server/php
+      parent: feature_flags_server
+      identifier: feature_flags_server_php
+      weight: 205
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 205
+      weight: 206
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 206
+      weight: 207
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
