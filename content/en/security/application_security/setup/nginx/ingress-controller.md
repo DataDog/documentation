@@ -90,7 +90,7 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-After you enable this, the Datadog Cluster Agent:
+After you enable automatic configuration, the Datadog Cluster Agent:
 
 - Detects your ingress-nginx controller pods
 - Injects the `nginx-datadog` module into the controller
