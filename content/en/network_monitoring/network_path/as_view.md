@@ -19,27 +19,35 @@ further_reading:
 
 ## Overview
 
-The Autonomous Systems (AS) View shows which Autonomous Systems carry your Network Path traffic, and how traffic flows between them. Use this view to identify which service providers handle your traffic and to examine the upstream and downstream relationships between Autonomous Systems.
+The Autonomous Systems (AS) View provides visibility into the network providers and Internet Service Providers that carry your traffic across the BGP (Border Gateway Protocol) routing layer. This view monitors latency and performance metrics for every AS in your network paths, helping you pinpoint exactly which upstream providers are experiencing issues when your network performance degrades.
 
- Suboptimal Border Gateway Patrol (BGP) routes and issues with specific providers are often the root cause of performance degradation. The Autonomous Systems (AS) View maps BGP relationships for the Autonomous Systems in your paths, providing detailed insight into issue origination.
+BGP routing issues and provider-specific problems are difficult to diagnose because they sit outside your direct control. The AS View makes these invisible layers visible, giving you the data to answer questions like "Is this a peering issue?" or "Did our traffic shift to a different transit provider?" without manually tracing routes or parsing BGP tables.
 
 Select [**Autonomous Systems (AS)**][1] in the [Network Path Explorer][2] to get started. 
 
-## Summary section
+## Dashboard
 
-The Summary section includes an overview of global traffic, including blast radius, traffic categories, and traffic distribution by region.
+The dashboard surfaces performance data through several lenses:
 
 ### Global blast radius
 
-The global blast radius map shows average latency by country over the selected time frame. Click any country on the map to filter the [Autonomous Systems list](#autonomous-systems-list).
+The global blast radius map shows average latency by country over the selected time frame. Click any country on the map to filter the [Autonomous Systems list](#autonomous-systems-table).
 
-## Need Attention
+### Traffic categories
+The traffic categories panel shows whether your traffic primarily flows through hosting providers or traditional ISPs.
 
-The Need Attention section shows Autonomous Systems with the highest average latency over the selected time frame. Select an AS from the list to view its [details](#autonomous-system-details).
+### Traffic distribution
+The traffic distribution panel breaks down what percentage of your paths traverse each region. 
 
-## Autonomous Systems list
+### Need Attention
 
-The Autonomous Systems list shows the Autonomous Systems that your monitored network paths go through. Each row includes:
+The Need Attention section automatically flags ASes with latency spikes or performance anomalies, ranking them by severity so you know where to focus your investigation. Select an AS from the list to view its [details](#autonomous-system-details).
+
+## Autonomous Systems table
+
+The detailed AS table provides operational data for troubleshooting: which prefixes each AS announces, how many of your monitored paths traverse that AS, and what specific issues have been detected (latency spikes, routing changes, or connectivity problems). When a customer reports degraded performance, you can quickly determine whether the issue originates with your infrastructure, a specific transit provider, or a last-mile ISP—critical information for escalating to the right team or vendor.
+
+The AS table shows the Autonomous Systems that your monitored network paths go through. Each row includes:
 
 ASN
 : The Autonomous System Number.
