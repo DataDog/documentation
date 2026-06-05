@@ -63,7 +63,7 @@ To limit how many Bits Code sessions the automation can create in a given period
 ### Product finding trigger
 A product finding trigger runs the automation in response to new issues in another Datadog product (for example, Error Tracking or Code Security). You can use a product finding trigger by itself, which runs the automation whenever there is a new finding, or with a [schedule](#schedule-trigger) and lookback window you define (in the **New findings within** field).
 
-<div class="alert alert-info">While it's most common to use a product finding trigger alone (so that new findings are immediately remediated), coupling it with a schedule and lookback window may be useful if you'd like Bits Code to monitor for new findings during only certain times. For example, if you deploy weekly on Wednesdays, you may want to configure an APM Recommendations trigger to run every Thursday, looking back 24 hours.</div>
+<div class="alert alert-info">While it's common to use a product finding trigger alone (to immediately remediate new findings), coupling it with a schedule and lookback window lets you monitor for new findings only during certain times. For example, if you deploy weekly on Wednesdays, you may want to configure an APM Recommendations trigger to run every Thursday, looking back 24 hours.</div>
 
 When setting up a product finding trigger, you can configure additional filters, which vary by product. For example:
   - **Flaky Tests** supports filtering by **Repository**, **Branch** (defaults to the repository's default branch), and **Status**.
@@ -80,17 +80,16 @@ A schedule trigger controls when an automation runs. It can be used in combinati
 ## Outputs
 An output defines what Bits Code does after a [session][1] completes. An automation can have one or more outputs, including [opening a pull request](#pull-request-output) and [generating a Slack notification](#slack-message-output).
 
-To add an output, click **Add Output**. 
 
 ### Pull request output
 You can configure your automation to:
-- **Create a PR**: Opens a pull request with the proposed changes
-- **Draft a PR**: Opens a draft pull request with the proposed changes
+- **Create a PR**: Open a pull request with the proposed changes
+- **Draft a PR**: Open a draft pull request with the proposed changes
 
 As the author of a Bits Code automation, you are the author of all pull requests it generates.
 
 ### Slack message output
-You can configure your automation to **Send Slack message**, which sends a Slack message summarizing the [session][1] and code changes. If you use a pull request output in addition to a Slack output, Bits Code includes a link to the pull request in the Slack message.
+You can configure your automation to send a Slack message summarizing the [session][1] and code changes. If you use a pull request output in addition to a Slack output, Bits Code includes a link to the pull request in the Slack message.
 
 When you add a Slack message output, by default, Bits Code sends the message to the channel configured for the affected service in [Catalog][5]. You can set a fallback Slack channel, which is used when no channel is set in Catalog.
 

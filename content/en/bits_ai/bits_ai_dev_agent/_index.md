@@ -18,7 +18,7 @@ Bits Code is a generative AI coding assistant that uses Datadog observability da
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][25] to have Bits Code run sessions on a schedule or in response to signals from other Datadog products, like a new APM Recommendation or flaky test.
+Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][25] to have Bits Code run sessions on a schedule or in response to signals from other Datadog products, such as a new APM Recommendation or flaky test.
 
 To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
@@ -123,7 +123,7 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 
 [Automations][25] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull request, a draft PR, or a Slack notification.
 
-You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Code** > [**Automations**][26].
+You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][26].
 
 ## Limitations
 
