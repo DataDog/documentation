@@ -26,31 +26,34 @@ Install the Datadog OpenFeature provider and the OpenFeature React SDK using you
 {{< tabs >}}
 {{% tab "npm" %}}
 {{< code-block lang="bash" >}}
-npm install @datadog/openfeature-browser @openfeature/react-sdk @openfeature/core
+npm install @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "yarn" %}}
 {{< code-block lang="bash" >}}
-yarn add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/core
+yarn add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "pnpm" %}}
 {{< code-block lang="bash" >}}
-pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/core
+pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components. To create a client token, see [Client tokens][2].
+Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components. For live Browser Feature Flags configuration, `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 
 const provider = new DatadogProvider({
+  // Required client-side Datadog credentials
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
@@ -61,6 +64,8 @@ const provider = new DatadogProvider({
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using an evaluation context. The evaluation context includes user or session information used to determine which flag variations should be returned. Reference these attributes in your targeting rules to control who sees each variant.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 Set the provider along with the evaluation context:
 
@@ -175,10 +180,9 @@ Built-in [suspense](https://react.dev/reference/react/Suspense) support allows y
 For example:
 
 {{< code-block lang="jsx" >}}
-import { useBooleanFlag } from '@openfeature/react-sdk';
+import { useBooleanFlagValue } from '@openfeature/react-sdk';
 import { Suspense } from 'react';
 
-import
 function Content() {
   // Display a loading message if the component uses feature flags and the provider is not ready
   return (
@@ -189,7 +193,7 @@ function Content() {
 }
 
 function WelcomeMessage() {
-  const { value: showNewMessage } = useBooleanFlag('show-new-welcome-message', false, { suspend: true });
+  const showNewMessage = useBooleanFlagValue('show-new-welcome-message', false, { suspend: true });
 
   return (
     <>
@@ -292,6 +296,21 @@ await OpenFeature.setContext({
   plan: user.plan,
 });
 {{< /code-block >}}
+
+## Configure browser provider options
+
+The React provider uses the Datadog browser provider, which also supports these optional settings:
+
+| Option | Default | Use |
+| --- | --- | --- |
+| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
+| `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
+| `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
+| `initialFlagsConfiguration` | `{}` | Bootstrap with precomputed flags. |
+| `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
+| `customHeaders` | unset | Add headers to flag-fetch requests. |
+| `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
 
 ## Testing
 

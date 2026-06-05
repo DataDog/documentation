@@ -2,10 +2,10 @@
 title: Security MCP Tools
 description: Use AI agents to investigate security signals and analyze security findings with the Datadog MCP Server's security toolset.
 further_reading:
-- link: "bits_ai/mcp_server/setup"
+- link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server Overview"
 - link: "security/threats/security_signals/"
@@ -62,7 +62,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 ### Security Signals
 
-`datadog_security_signals_schema`
+`get_datadog_security_signals_schema`
 : Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
 : *Permissions required: `Security Signals Read`*
 
@@ -71,7 +71,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Signals Read`*
 
 `analyze_datadog_security_signals`
-: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead. Call `datadog_security_signals_schema` first to discover queryable fields.
+: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead. Call `get_datadog_security_signals_schema` first to discover queryable fields.
 : *Permissions required: `Security Signals Read`, `Timeseries`*
 
 `get_datadog_security_signal`
@@ -152,7 +152,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/
+[1]: /mcp_server/
 [2]: https://modelcontextprotocol.io/
 [3]: /getting_started/site/
-[4]: /bits_ai/mcp_server/setup/
+[4]: /mcp_server/setup/
