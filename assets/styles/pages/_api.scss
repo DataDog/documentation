@@ -1,14 +1,13 @@
 // API
 $ddpurple: #632ca6;
 
-// Endpoint page: stacked below the h1.
-// Category page (.api-intro-header) overrides layout below.
-.main-api .api-copy-btn {
-    margin-top: -0.5rem;
-    margin-bottom: 2rem;
+// Both endpoint and category pages: flush right alongside the h1.
+.main-api .api-copy-btn,
+.api-intro-header .api-copy-btn {
 
     a {
-        position: relative;
+        display: flex;
+        align-items: center;
         font-size: 16px;
         text-decoration: none;
         border-bottom: none;
@@ -17,7 +16,6 @@ $ddpurple: #632ca6;
     .copy-btn-icon-wrapper {
         position: relative;
         margin-right: 2px;
-        top: 5px;
         display: inline-block;
         width: 22px;
         height: 22px;
@@ -28,20 +26,13 @@ $ddpurple: #632ca6;
     }
 }
 
-// Category page: inline to the right of the h1
+// Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
 .api-intro-header .api-copy-btn {
     flex-shrink: 0;
-    margin-top: 0;
+}
+
+.api-intro-header {
     margin-bottom: 0.75rem;
-
-    a {
-        display: flex;
-        align-items: center;
-    }
-
-    .copy-btn-icon-wrapper {
-        top: 0;
-    }
 }
 
 .announcement.api {
