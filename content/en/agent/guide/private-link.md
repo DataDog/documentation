@@ -430,6 +430,8 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
 On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps to one VPC service endpoint and one Route53 private hosted zone, and covers one or more agent FQDNs. Create one VPC endpoint and one Route53 private hosted zone per color. No per-FQDN configuration is required.
 
+Each FQDN table lists the specific Datadog service it serves and the high-level category that service belongs to.
+
 ### Aqua (`vpce-svc-01b61a61d21fc7273`)
 
 - **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273`
@@ -437,9 +439,9 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `gcp-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `gcp-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
 
 ### Beige (`vpce-svc-06a30d6a016b746ff`)
 
@@ -448,10 +450,10 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `*.agent.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
-| `agent.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `*.agent.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) | Observability |
+| `agent.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) | Observability |
 
 ### Bisque (`vpce-svc-0c26ca335d93a68b5`)
 
@@ -460,9 +462,9 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `process.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `process.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) | Observability |
 
 ### Brown (`vpce-svc-04c61207a01a73496`)
 
@@ -471,11 +473,11 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `*.integrations.otlp.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
-| `opamp.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) |
-| `otlp.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `*.integrations.otlp.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) | Observability |
+| `opamp.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) | Platform Capabilities |
+| `otlp.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) | Observability |
 
 ### Cyan (`vpce-svc-0d936da0e6a30d3cd`)
 
@@ -484,38 +486,38 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `agenthealth-intake.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) |
-| `awsmetrics-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) |
-| `ci-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) |
-| `cicodescan-intake.ap2.datadoghq.com` | [Code Security](https://www.datadoghq.com/product/code-security/) |
-| `cireport-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) |
-| `citestcov-intake.ap2.datadoghq.com` | [Test Optimization](https://www.datadoghq.com/product/test-optimization/) |
-| `citestcycle-intake.ap2.datadoghq.com` | [Test Optimization](https://www.datadoghq.com/product/test-optimization/) |
-| `cloudplatform-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) |
-| `contimage-intake.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) |
-| `contlcycle-intake.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) |
-| `cspm-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
-| `cws-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
-| `debugger-intake.ap2.datadoghq.com` | [Dynamic Instrumentation](https://www.datadoghq.com/product/dynamic-instrumentation/) |
-| `error-tracking-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) |
-| `event-management-intake.ap2.datadoghq.com` | [Event Management](https://www.datadoghq.com/product/event-management/) |
-| `instrumentation-telemetry-intake.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
-| `intake.profile.ap2.datadoghq.com` | [Continuous Profiler](https://www.datadoghq.com/product/code-profiling/) |
-| `kubeops-intake.ap2.datadoghq.com` | [Kubernetes Autoscaling](https://www.datadoghq.com/product/kubernetes-autoscaling/) |
-| `llmobs-intake.ap2.datadoghq.com` | [LLM Observability](https://www.datadoghq.com/product/ai/llm-observability/) |
-| `ndm-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
-| `ndmflow-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
-| `netpath-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
-| `ocimetrics-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) |
-| `resources-intake.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
-| `sbom-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
-| `sds-intake.ap2.datadoghq.com` | [Sensitive Data Scanner](https://www.datadoghq.com/product/sensitive-data-scanner/) |
-| `sentry-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) |
-| `snmp-traps-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) |
-| `softinv-intake.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) |
-| `webhook-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `agenthealth-intake.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) | Platform Capabilities |
+| `awsmetrics-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) | Platform Capabilities |
+| `ci-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) | Software Delivery |
+| `cicodescan-intake.ap2.datadoghq.com` | [Code Security](https://www.datadoghq.com/product/code-security/) | Security |
+| `cireport-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) | Software Delivery |
+| `citestcov-intake.ap2.datadoghq.com` | [Test Optimization](https://www.datadoghq.com/product/test-optimization/) | Software Delivery |
+| `citestcycle-intake.ap2.datadoghq.com` | [Test Optimization](https://www.datadoghq.com/product/test-optimization/) | Software Delivery |
+| `cloudplatform-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) | Platform Capabilities |
+| `contimage-intake.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) | Observability |
+| `contlcycle-intake.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) | Observability |
+| `cspm-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) | Security |
+| `cws-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) | Security |
+| `debugger-intake.ap2.datadoghq.com` | [Dynamic Instrumentation](https://www.datadoghq.com/product/dynamic-instrumentation/) | Observability |
+| `error-tracking-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) | Digital Experience |
+| `event-management-intake.ap2.datadoghq.com` | [Event Management](https://www.datadoghq.com/product/event-management/) | Service Management |
+| `instrumentation-telemetry-intake.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) | Observability |
+| `intake.profile.ap2.datadoghq.com` | [Continuous Profiler](https://www.datadoghq.com/product/code-profiling/) | Observability |
+| `kubeops-intake.ap2.datadoghq.com` | [Kubernetes Autoscaling](https://www.datadoghq.com/product/kubernetes-autoscaling/) | Observability |
+| `llmobs-intake.ap2.datadoghq.com` | [LLM Observability](https://www.datadoghq.com/product/ai/llm-observability/) | AI |
+| `ndm-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) | Observability |
+| `ndmflow-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) | Observability |
+| `netpath-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) | Observability |
+| `ocimetrics-intake.ap2.datadoghq.com` | [Integrations](https://www.datadoghq.com/product/platform/integrations/) | Platform Capabilities |
+| `resources-intake.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) | Observability |
+| `sbom-intake.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) | Security |
+| `sds-intake.ap2.datadoghq.com` | [Sensitive Data Scanner](https://www.datadoghq.com/product/sensitive-data-scanner/) | Security |
+| `sentry-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) | Digital Experience |
+| `snmp-traps-intake.ap2.datadoghq.com` | [Network Monitoring](https://www.datadoghq.com/product/network-monitoring/) | Observability |
+| `softinv-intake.ap2.datadoghq.com` | [Infrastructure Monitoring](https://www.datadoghq.com/product/infrastructure-monitoring/) | Observability |
+| `webhook-intake.ap2.datadoghq.com` | [CI Visibility](https://www.datadoghq.com/product/ci-cd-monitoring/) | Software Delivery |
 
 ### Gold (`vpce-svc-06460db30a7cfdace`)
 
@@ -524,15 +526,15 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `agent-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
-| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
-| `eventbridge-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
-| `http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
-| `lambda-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
-| `obpipeline-intake.ap2.datadoghq.com` | [Observability Pipelines](https://www.datadoghq.com/product/observability-pipelines/) |
-| `runtime-security-http-intake.logs.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `agent-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
+| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
+| `eventbridge-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
+| `http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
+| `lambda-http-intake.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
+| `obpipeline-intake.ap2.datadoghq.com` | [Observability Pipelines](https://www.datadoghq.com/product/observability-pipelines/) | Observability |
+| `runtime-security-http-intake.logs.ap2.datadoghq.com` | [Cloud Security](https://www.datadoghq.com/product/cloud-security/) | Security |
 
 ### Indigo (`vpce-svc-0545109555aa68e7e`)
 
@@ -541,9 +543,9 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `live.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `live.logs.ap2.datadoghq.com` | [Log Management](https://www.datadoghq.com/product/log-management/) | Observability |
 
 ### Lime (`vpce-svc-0f3e01f4180b2ae09`)
 
@@ -552,10 +554,10 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `data-obs-intake.ap2.datadoghq.com` | [Data Observability](https://www.datadoghq.com/product/data-observability/quality-monitoring/) |
-| `trace.agent.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `data-obs-intake.ap2.datadoghq.com` | [Data Observability](https://www.datadoghq.com/product/data-observability/quality-monitoring/) | Observability |
+| `trace.agent.ap2.datadoghq.com` | [Application Performance Monitoring](https://www.datadoghq.com/product/apm/) | Observability |
 
 ### Linen (`vpce-svc-031da3ffac78ef902`)
 
@@ -564,21 +566,9 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `orchestrator.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) |
-
-### Orange (`vpce-svc-01911394f8bac8056`)
-
-- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01911394f8bac8056`
-- **Private DNS name (Route53 zone):** `orange.intake.ap2.datadoghq.com`
-
-**FQDNs covered:**
-
-| FQDN | Product |
-|------|---------|
-| `*.ap2.datadoghq.com` | [Platform (multiple products)](https://www.datadoghq.com/product/) |
-| `custom-domains.ap2.datadoghq.com` | [Platform](https://www.datadoghq.com/product/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `orchestrator.ap2.datadoghq.com` | [Container Monitoring](https://www.datadoghq.com/product/container-monitoring/) | Observability |
 
 ### Orchid (`vpce-svc-06ec78b291ce8020a`)
 
@@ -587,12 +577,12 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `*.synthetics.ap2.datadoghq.com` | [Synthetic Monitoring](https://www.datadoghq.com/product/synthetic-monitoring/) |
-| `api.ap2.datadoghq.com` | [Platform (API)](https://www.datadoghq.com/product/) |
-| `quota.browser-intake-ap2-datadoghq.com` | [Real User Monitoring](https://www.datadoghq.com/product/real-user-monitoring/) |
-| `synthetics.ap2.datadoghq.com` | [Synthetic Monitoring](https://www.datadoghq.com/product/synthetic-monitoring/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `*.synthetics.ap2.datadoghq.com` | [Synthetic Monitoring](https://www.datadoghq.com/product/synthetic-monitoring/) | Digital Experience |
+| `api.ap2.datadoghq.com` | [Platform (API)](https://www.datadoghq.com/product/) | Platform Capabilities |
+| `quota.browser-intake-ap2-datadoghq.com` | [Real User Monitoring](https://www.datadoghq.com/product/real-user-monitoring/) | Digital Experience |
+| `synthetics.ap2.datadoghq.com` | [Synthetic Monitoring](https://www.datadoghq.com/product/synthetic-monitoring/) | Digital Experience |
 
 ### Plum (`vpce-svc-028e4348e80fa73f5`)
 
@@ -601,9 +591,9 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `sourcemap-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `sourcemap-intake.ap2.datadoghq.com` | [Error Tracking](https://www.datadoghq.com/product/error-tracking/) | Digital Experience |
 
 ### Violet (`vpce-svc-01f8f80f4cb97bd10`)
 
@@ -612,9 +602,9 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `config.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `config.ap2.datadoghq.com` | [Fleet Automation](https://www.datadoghq.com/product/fleet-automation/) | Platform Capabilities |
 
 ### White (`vpce-svc-094469ee7a178f448`)
 
@@ -623,10 +613,10 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 **FQDNs covered:**
 
-| FQDN | Product |
-|------|---------|
-| `dbm-metrics-intake.ap2.datadoghq.com` | [Database Monitoring](https://www.datadoghq.com/product/database-monitoring/) |
-| `dbquery-intake.ap2.datadoghq.com` | [Database Monitoring](https://www.datadoghq.com/product/database-monitoring/) |
+| FQDN | Product | Category |
+|------|---------|----------|
+| `dbm-metrics-intake.ap2.datadoghq.com` | [Database Monitoring](https://www.datadoghq.com/product/database-monitoring/) | Observability |
+| `dbquery-intake.ap2.datadoghq.com` | [Database Monitoring](https://www.datadoghq.com/product/database-monitoring/) | Observability |
 
 {{% /site-region %}}
 
