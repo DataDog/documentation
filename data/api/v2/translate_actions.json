@@ -2198,6 +2198,12 @@
     "description": "Get a list of AWS services that can send logs to Datadog.",
     "summary": "Get list of AWS log ready services"
   },
+  "ValidateAWSCCMConfig": {
+    "description": "Validate a Cloud Cost Management config for an AWS account using Cost and Usage Report\n(CUR) 2.0 against Datadog's ingest requirements without persisting it.",
+    "summary": "Validate AWS CCM config",
+    "request_description": "Validate a Cloud Cost Management config for an AWS account integration config.",
+    "request_schema_description": "AWS CCM config validation request body."
+  },
   "ListGCPSTSAccounts": {
     "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
     "summary": "List all GCP STS-enabled service accounts"
