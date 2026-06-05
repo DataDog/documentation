@@ -450,7 +450,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
 
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. You can <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">sign up</a> for the preview here or contact <a href="/help">Datadog support</a> to request access.</div>
+<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 

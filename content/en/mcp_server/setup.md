@@ -137,7 +137,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 
-<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 regions only. To install, use the ChatGPT App instructions. Once the ChatGPT app is installed, the Codex Plugin should be automatically included as well.  
+<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 regions only. To install, use the ChatGPT App instructions. Once you install the ChatGPT app, the Codex Plugin is automatically included as well.  
 </div>
 
 [1]: /getting_started/site/
@@ -697,11 +697,11 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
-### Adding OAuth Clients
+### Adding OAuth clients
 
 You can allow-list your redirect URLs in [Organization Preferences][27] under `MCP OAuth Redirect URLs`. 
 
-If you are a partner or vendor adding Datadog to an MCP Directory for your AI Agent platform, please submit your interest through our [Technology Partner Signup][58]
+If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][58].
 
 
 ### Local binary authentication
