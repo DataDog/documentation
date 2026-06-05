@@ -33,7 +33,7 @@ This section is for experimenters and stakeholders who want to understand what t
 
 The challenge of aggregating experiment results is known as the *winner's curse*: the systematic tendency of statistically significant results to overestimate the true effect. Because experiments with large measured lifts are more likely to reach significance and ship, a list of "winning" experiments is biased toward measurements that landed above the truth. Summing those measurements compounds the bias.
 
-Historically, correcting for the winner's curse required data teams to build bespoke statistical models or rely on rules of thumb. Datadog Experiments performs this correction automatically by fitting a statistical model across all of your team's experiments on a metric and producing a corrected estimate of cumulative impact.
+Historically, correcting for the winner's curse required data teams to build custom statistical models or rely on rules of thumb. Datadog Experiments performs this correction automatically by fitting a statistical model across all of your team's experiments on a metric and producing a corrected estimate of cumulative impact.
 
 ### Reading the cumulative impact chart
 
