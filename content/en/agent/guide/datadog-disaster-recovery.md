@@ -189,7 +189,7 @@ multi_region_failover:
 
 DNS-based failover is a complementary approach to Agent-based failover. Instead of configuring Agents with a secondary site endpoint, you configure all your data sources to send telemetry to a single Datadog-provided custom intake URL. During a failover event, Datadog updates the DNS record for that URL to redirect traffic from your primary site to your DDR site.
 
-**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously. Dual shipping is not supported for DNS-based failover.
+**Note:** DNS failover is all-or-nothing. All telemetry sources using your custom endpoint cut over simultaneously.
 
 #### Receive your custom DNS endpoint
 
@@ -197,7 +197,7 @@ If you choose to use DNS-based failover, Datadog provisions a custom intake URL 
 
 #### Trigger a DNS failover
 
-To initiate a DNS failover, contact Datadog through your [Customer Success Manager][14] or [Datadog Support][15]. Datadog updates the DNS record to redirect traffic from your primary site to your DDR site. The target RTO from the time failover is initiated is 2 hours.
+To initiate a DNS failover, contact Datadog through your [Customer Success Manager][14] or [Datadog Support][15]. Datadog updates the DNS record to redirect traffic from your primary site to your DDR site. The target Recovery Time Objective (RTO) from the time failover is initiated is 2 hours.
 
 <div class="alert alert-info">A customer-controlled way to trigger DNS failover directly from the DDR org is in Preview. Contact your <a href="mailto:success@datadoghq.com">Customer Success Manager</a> to learn more.</div>
 
