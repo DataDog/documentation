@@ -178,14 +178,13 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Grant the Datadog app permission to write to and [search][2] your storage account.
+1. Grant the Datadog app permission to write to and read from your storage account.
 2. Select your storage account from the [Storage Accounts page][1], go to {{< ui >}}Access Control (IAM){{< /ui >}}, and select {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
 3. Input the Role called **Storage Blob Data Contributor**, select the Datadog app which you created to integrate with Azure, and save.
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
-[2]: /logs/explorer/archive_search/
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 

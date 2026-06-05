@@ -54,7 +54,6 @@ Once you've completed configuration, start investigating and troubleshooting log
 [6]: /logs/log_configuration/logs_to_metrics/
 [7]: /logs/log_configuration/indexes
 [8]: /logs/log_configuration/archives/
-[9]: /logs/log_configuration/rehydrating
 [10]: /logs/guide/logs-rbac/
 [11]: /logs/explorer/
 [12]: /logs/explorer/archive_search/

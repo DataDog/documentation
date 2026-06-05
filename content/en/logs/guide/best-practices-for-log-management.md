@@ -72,7 +72,7 @@ If you want to store your logs for longer periods of time, set up [Log Archives]
 
 #### Set up max scan size to manage costs
 
-Set a limit on the volume of logs that can be scanned at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned per Archive Search query or Rehydration. See [Define maximum scan size][4] for more information.
+Set a limit on the volume of logs that can be scanned at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned per Archive Search query or rehydration. See [Define maximum scan size][4] for more information.
 
 ### Set up RBAC for custom roles
 
