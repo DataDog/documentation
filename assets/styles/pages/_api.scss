@@ -24,6 +24,12 @@ $ddpurple: #632ca6;
     #page-copied-text {
         display: none;
     }
+
+    @include media-breakpoint-down(xl) {
+        #page-copy-text {
+            display: none;
+        }
+    }
 }
 
 // Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.

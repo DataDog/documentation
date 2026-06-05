@@ -50,12 +50,12 @@
     {{ $anchorStr := .Title }}
 
     <div class="row align-items-center">
-      <div class="col-12 col-md-9">
+      <div class="col-11 col-xl-9">
           <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
               {{- $anchorStr -}}
           </h1>
       </div>
-      <div class="col-12 col-md-3 d-flex justify-content-end">
+      <div class="col-1 col-xl-3 d-flex justify-content-end align-items-center">
           {{ partial "api/api-copy-btn.html" . }}
       </div>
     </div>
