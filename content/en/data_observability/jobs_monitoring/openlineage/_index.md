@@ -76,8 +76,6 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
       }'
 ```
 
-Including `inputs` and `outputs` is optional. Add them to create lineage edges between your job and its datasets.
-
 
 {{% /tab %}}
 
@@ -145,10 +143,12 @@ from openlineage.client.event_v2 import RunEvent, RunState, Job, Run, InputDatas
 from openlineage.client.facet_v2 import job_type_job
 from openlineage.client.transport.datadog import DatadogConfig, DatadogTransport
 
-client = OpenLineageClient(transport=DatadogTransport(DatadogConfig(
+config = DatadogConfig(
     apiKey="<DD_API_KEY>",
-    site="datadoghq.com"
-)))
+    site="datadoghq.com"  # Change if using a different Datadog site
+)
+
+client = OpenLineageClient(transport=DatadogTransport(config))
 
 event = RunEvent(
     eventType=RunState.START,
