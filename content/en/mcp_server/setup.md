@@ -29,7 +29,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 
 {{< site-region region="us" >}}
 1. In ChatGPT, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Browse Apps{{< /ui >}} and search for **Datadog**. If the Datadog app is not available, contact your organization's ChatGPT administrator for approval.
-1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the prompts. 
+1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the prompts.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 {{< /site-region >}}
@@ -156,7 +156,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 regions only. To install, use the <a href="?tab=farts">ChatGPT App instructions</a>. Once you install the ChatGPT app, the Codex Plugin is automatically included as well.
+<div class="alert alert-info">The <a href="https://github.com/openai/plugins/tree/main/plugins/datadog">Codex Plugin (Preview)</a> can be used in the Codex Desktop app in the US1 region only. To install, use the <a href="?tab=chatgpt">ChatGPT app instructions</a>. After you install the ChatGPT app, the Codex Plugin is automatically included as well.
 </div>
 
 [1]: /getting_started/site/
