@@ -17,12 +17,6 @@ The Browser SDK supports all modern desktop and mobile browsers.
 
 ### Option 1: Manual client-side setup
 
-- **[Server-side auto-instrumentation][12]**: Automatically inject the RUM SDK into HTML responses through your web server or proxy.
-- **[Agentic Onboarding (in Preview)][13]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt.
-- **Manual client-side setup** (below): Manually add the SDK to your application code.
-
-### Manual client-side setup
-
 {% stepper level="h4" %}
 
 {% step title="Create the application in the UI" %}
@@ -342,39 +336,19 @@ Select a platform to start collecting RUM data on your application:
 To request support for a web server that is not listed here, [fill out this form](https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/).
 {% /alert %}
 
-<div class="card-grid" style="--card-min-width: 130px;">
-  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/java">
-    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
-      <img src="/integrations_logos/java_servlet_large.svg" class="img-fluid" alt="java_servlet" width="150">
-    </div>
-  </a>
-  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/nginx">
-    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
-      <img src="/integrations_logos/nginx_large.svg" class="img-fluid" alt="nginx" width="150">
-    </div>
-  </a>
-  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/windows_iis">
-    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
-      <img src="/integrations_logos/windows_iis_large.svg" class="img-fluid" alt="windowsiis" width="150">
-    </div>
-  </a>
-  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/apache">
-    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
-      <img src="/integrations_logos/apache_large.svg" class="img-fluid" alt="apache" width="150">
-    </div>
-  </a>
-  <a class="card-grid-card" href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm">
-    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
-      <img src="/integrations_logos/ibm_http_large.svg" class="img-fluid" alt="ibm" width="150">
-    </div>
-  </a>
-</div>
+{% card-grid card_width=130 %}
+{% image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/java" src="integrations_logos/java_servlet_large.svg" alt="Java Servlet" tooltip="Java Servlet" /%}
+{% image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/nginx" src="integrations_logos/nginx_large.svg" alt="NGINX" tooltip="NGINX" /%}
+{% image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/windows_iis" src="integrations_logos/windows_iis_large.svg" alt="Windows IIS" tooltip="Windows IIS" /%}
+{% image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/apache" src="integrations_logos/apache_large.svg" alt="Apache HTTP Server" tooltip="Apache HTTP Server" /%}
+{% image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm" src="integrations_logos/ibm_http_large.svg" alt="IBM HTTP Server" tooltip="IBM HTTP Server" /%}
+{% /card-grid %}
 
 {% partial file="rum-browser-auto-instrumentation-limitations.mdoc.md" /%}
 
 ### Option 3: Agentic Onboarding
 
-{% partial file="agentic-onboarding/setup.mdoc.md" /%}
+Use the [Agentic Onboarding][16] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
@@ -387,4 +361,5 @@ To request support for a web server that is not listed here, [fill out this form
 [13]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [14]: /session_replay/browser/
 [15]: /product_analytics/
+[16]: /agentic_onboarding/setup/
 
