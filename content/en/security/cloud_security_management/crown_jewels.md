@@ -90,4 +90,4 @@ Crown Jewels runs on telemetry you have already sent to Datadog. It does not mov
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/critical-asset
+[1]: https://app.datadoghq.com/security/configuration/crown-jewels
