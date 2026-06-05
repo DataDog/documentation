@@ -38,10 +38,10 @@ Configure severity modifier rules to adjust finding severities to reflect your o
       - Identity Risk
       - API Security
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
-1. To add severity criteria to the rule, click **Add Severity**.
+1. Optionally, click **Add Severity** to filter findings by severity level. The rule matches against each finding's Datadog-adjusted severity, before any user-defined adjustments.
 1. Define the severity modification action:
-    - **Set to a specific level**: Sets matching findings to a fixed severity. Choose from **Info / None**, **Low**, **Medium**, **High**, or **Critical**. **Info / None** is only valid for finding types whose lowest severity is **Info** or **None**. Using it in a rule that targets finding types with **Low** as their lowest severity (Infrastructure as Code, Runtime Code Vulnerability, Secret, Static Code Vulnerability) results in a validation error. See [Severity floors by finding type](#severity-floors-by-finding-type).
-    - **Shift up or down one level**: Increases or decreases the severity of matching findings by one level. When a finding is already at its type's lowest or highest severity, the severity value stays unchanged; however, the rule still counts as a match. This prevents subsequent severity modifier rules from applying to that finding, and the CVSS score is still adjusted for finding types that have one.
+    - **Set to a specific level**: Sets matching findings to a fixed severity. Choose from **Info / None**, **Low**, **Medium**, **High**, or **Critical**. **Info / None** is not valid for all finding types; see [Severity floors by finding type](#severity-floors-by-finding-type).
+    - **Shift up or down one level**: Increases or decreases the severity of matching findings by one level. See [Severity floors by finding type](#severity-floors-by-finding-type) for behavior at severity bounds.
 1. Optionally, enter a **Description** explaining why the rule applies. This text appears in the severity breakdown panel when a user views a modified finding.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
@@ -49,13 +49,17 @@ Configure severity modifier rules to adjust finding severities to reflect your o
 
 ## Evaluation order
 
-Severity modifier rules are the first step in the automation pipeline and run before mute, due date, inbox, and ticket creation rules. Within severity modifier rules, Datadog uses a first-match policy: findings are evaluated against your rules in order, and the first matching rule is applied. No further severity modifier rules are evaluated for that finding.
+Severity modifier rules are the first step in the automation pipeline and run before mute, due date, inbox, and ticket creation rules. Within severity modifier rules, Datadog uses a first-match policy: findings are evaluated against your rules in order, and the first matching rule is applied. No further severity modifier rules are evaluated for that finding. A rule counts as a match whenever a finding meets the rule's criteria, even if the resulting severity is unchanged; for example, when a shift action reaches a severity bound, or when a set action targets the finding's current severity.
 
 Because severity modifier rules run first, all downstream automation rules—including mute rules—see the modified severity when they are evaluated.
 
 ## Identify modified findings
 
+**TODO:** Add a screenshot of a severity pill pop-over in an explorer.
+
 Findings affected by a severity modifier rule display a visual indicator in explorer list views and in the finding's side panel header. Hovering over the indicator shows the automation rule responsible for the change.
+
+**TODO:** Add a screenshot of a severity breakdown in side-panel.
 
 The side panel severity section for a modified finding includes a breakdown showing:
 - The original severity level before modification. For vulnerability findings that have a CVSS score, this also includes the original CVSS score and vector.
@@ -82,8 +86,6 @@ Not all finding types use the same severity scale. The following table shows the
 
 **Info / None** is not available for finding types that use **Low** as their lowest severity. Including such finding types in the rule and selecting **Info / None** results in a validation error.
 
-When the shift action reaches the lowest or highest severity for a finding type, the severity value does not change. The rule still counts as a match for that finding, so subsequent severity modifier rules are not evaluated for it. For finding types with a CVSS score, the score is still adjusted to the midpoint of the current severity band.
-
 ## Findings with Unknown severity
 
 Severity modifier rules handle findings with an **Unknown** severity as follows:
@@ -103,13 +105,11 @@ For vulnerability findings that have a Datadog-adjusted CVSS score, a severity m
 | High | 7.0–8.9 |
 | Critical | 9.0–10.0 |
 
-The original CVSS vector is never modified. No synthetic vector is generated to match the adjusted score.
+The original CVSS vector is never modified. No synthetic vector is generated to match the adjusted score. When a rule matches a finding, even if the resulting severity is unchanged, the score is still adjusted to the midpoint of the current severity band.
 
 ## Auto-closed and passed findings
 
 Severity modifiers are not cleared or updated for findings that transition to auto-closed or where the evaluation result is **pass**. If the rule that originally modified a finding is later edited or deleted, those findings retain the severity that was set when they closed.
-
-If you view an auto-closed or passed finding whose severity modifier rule was subsequently deleted, the side panel may reference a rule that no longer exists.
 
 ## Further reading
 

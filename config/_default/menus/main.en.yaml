@@ -7456,6 +7456,11 @@ menu:
       parent: automation_pipelines
       identifier: automation_pipelines_create_ticket
       weight: 10004
+    - name: Modify Severity Level
+      url: security/automation_pipelines/modify_severity
+      parent: automation_pipelines
+      identifier: automation_pipelines_modify_severity
+      weight: 10005
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
