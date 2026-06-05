@@ -68,7 +68,7 @@ The following container image registries are supported for container image scans
 
 | Registry                        | Support level | Notes                                                                                                                                                                          |
 |---------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amazon ECR (public and private) | GA            | Scans running container images **and** the last 1,000 pushed images at rest (by date). This is the only registry with at-rest scanning support<br />**Note:** To request at-rest registry scanning or to increase the number of at-rest images to scan, contact [Datadog Support][16]                                 |
+| Amazon ECR (public and private) | GA            | Scans running container images **and** the last 1,000 pushed images at rest (by date). This is the only registry with at-rest scanning support<br />**Note:** To increase the number of at-rest images to scan, contact [Datadog Support][16]                                 |
 | Google Artifact Registry (GAR)  | GA            | Scans images tied to running workloads (Cloud Run, GKE) only<br />**Note**: To request at-rest registry scanning, contact [Datadog Support][16]                                |
 | Azure Container Registry (ACR)  | GA            | Scans running container images from Azure Container Apps and Azure Container Instances only<br />**Note**: To request at-rest registry scanning, contact [Datadog Support][16] |
 
