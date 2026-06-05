@@ -188,7 +188,9 @@ To create an experiment:
    - **categorical**: returns a labeled category (string)
    - **json**: returns structured data (dict)
 
-   You can also return an `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
+   You can also return:
+   - An `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
+   - A `MultiEvaluatorResult` to emit multiple named metrics from a single evaluator call. For details and examples, see the [Evaluation Developer Guide][4].
 
    #### Function-based evaluators
 
@@ -213,6 +215,19 @@ To create an experiment:
            assessment="pass", # or fail
            tags={"task": "judge_llm_call"},
        )
+
+   # Return multiple metrics from one evaluator call
+   from ddtrace.llmobs import MultiEvaluatorResult
+
+   def multi_metric_evaluator(input_data, output_data, expected_output):
+       correct = output_data == expected_output
+       return MultiEvaluatorResult(
+           {
+               "correct": EvaluatorResult(value=correct, assessment="pass" if correct else "fail"),
+               "length": len(str(output_data)),
+           }
+       )
+       # Emitted as: multi_metric_evaluator-correct, multi_metric_evaluator-length
    ```
 
    #### Class-based evaluators

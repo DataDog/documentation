@@ -102,3 +102,4 @@
 /*/synthetics/notifications/template_variables/multistep.md
 /*/tracing/error_tracking/error_grouping.md
 /*/tracing/trace_collection/custom_instrumentation/server-side/_index.md
+/*/dd_e2e/cdocs/components/card_grid.md

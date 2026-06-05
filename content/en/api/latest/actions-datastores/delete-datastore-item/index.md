@@ -1,0 +1,3 @@
+---
+title: Delete datastore item
+---
