@@ -195,5 +195,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [12]: /observability_pipelines/destinations/amazon_s3/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /api/latest/observability-pipelines/
-[15]: /logs/explorer/archive_search/
+[16]: /logs/explorer/archive_search/
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
