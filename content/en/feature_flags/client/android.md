@@ -30,7 +30,7 @@ Here's a minimal example to get feature flags working in your Android app:
 ```kotlin
 // 1. Add dependencies (see Installation section)
 
-// 2. Initialize Datadog SDK (in Application.onCreate)
+// 2. Initialize the Datadog Android SDK (in Application.onCreate)
 val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
@@ -94,7 +94,7 @@ Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for provider creation and flag evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog Android SDK instance and prepare for provider creation and flag evaluation:
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
@@ -128,6 +128,8 @@ OpenFeatureAPI.setProviderAndWait(provider)
 
 Define who or what the flag evaluation applies to using an `ImmutableContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Set this before evaluating flags to help ensure proper targeting.
 
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+
 {{< code-block lang="kotlin" >}}
 import dev.openfeature.kotlin.sdk.ImmutableContext
 import dev.openfeature.kotlin.sdk.Value
@@ -143,7 +145,7 @@ OpenFeatureAPI.setEvaluationContext(
 )
 {{< /code-block >}}
 
-<div class="alert alert-info">All attribute values must use a <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
+<div class="alert alert-info">OpenFeature attributes must use flat <code>Value</code> primitives such as <code>Value.String()</code>, <code>Value.Integer()</code>, <code>Value.Double()</code>, or <code>Value.Boolean()</code>. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
 
 ## Evaluate flags
 
@@ -288,6 +290,7 @@ You can configure individual providers with custom endpoints before creating the
 val provider = FlagsClient.Builder()
     .useCustomFlagEndpoint("https://your-proxy.example.com/flags")
     .useCustomExposureEndpoint("https://your-proxy.example.com/exposure")
+    .useCustomEvaluationEndpoint("https://your-proxy.example.com/evaluations")
     .build()
     .asOpenFeatureProvider()
 
