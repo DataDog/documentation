@@ -28,7 +28,7 @@ Custom jobs use the [OpenLineage][1] standard to send job and lineage events to 
 
 ## Step 1: Send a `START` event
 
-Use one of the following options to send [OpenLineage events][1] to Datadog. All examples use the same `runId` UUID throughout the run. Generate one and keep it.
+Use one of the following options to send [OpenLineage events][1] to Datadog:
 
 **Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
 
@@ -62,19 +62,21 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
         },
         "inputs": [
           {
-            "namespace": "postgres://demo-db.example.com:5432", // scheme://host:port
-            "name": "orders.public.orders"                      // database.schema.table
+            "namespace": "postgres://demo-db.example.com:5432",
+            "name": "orders.public.orders"
           }
         ],
         "outputs": [
           {
-            "namespace": "snowflake://myorg-myaccount",         // snowflake://org-account
-            "name": "ANALYTICS.PUBLIC.ORDERS"                   // DATABASE.SCHEMA.TABLE
+            "namespace": "snowflake://myorg-myaccount",
+            "name": "ANALYTICS.PUBLIC.ORDERS"
           }
         ],
         "producer": "<YOUR_PRODUCER_ID>"
       }'
 ```
+
+Including `inputs` and `outputs` is optional. Add them to create lineage edges between your job and its datasets.
 
 
 {{% /tab %}}
@@ -95,12 +97,10 @@ client = OpenLineageClient(
     options=OpenLineageClientOptions(api_key="<DD_API_KEY>")
 )
 
-run_id = str(uuid.uuid4())
-
-client.emit(RunEvent(
+event = RunEvent(
     eventType=RunState.START,
     eventTime=datetime.utcnow().isoformat(),
-    run=Run(runId=run_id),
+    run=Run(runId=str(uuid.uuid4())),
     job=Job(
         namespace="<YOUR_NAMESPACE>",
         name="<YOUR_JOB_NAME>",
@@ -125,7 +125,9 @@ client.emit(RunEvent(
         )
     ],
     producer="<YOUR_PRODUCER_ID>"
-))
+)
+
+client.emit(event)
 ```
 
 
@@ -148,12 +150,10 @@ client = OpenLineageClient(transport=DatadogTransport(DatadogConfig(
     site="datadoghq.com"
 )))
 
-run_id = str(uuid.uuid4())
-
-client.emit(RunEvent(
+event = RunEvent(
     eventType=RunState.START,
     eventTime=datetime.utcnow().isoformat(),
-    run=Run(runId=run_id),
+    run=Run(runId=str(uuid.uuid4())),
     job=Job(
         namespace="<YOUR_NAMESPACE>",
         name="<YOUR_JOB_NAME>",
@@ -178,7 +178,9 @@ client.emit(RunEvent(
         )
     ],
     producer="<YOUR_PRODUCER_ID>"
-))
+)
+
+client.emit(event)
 ```
 
 You can also configure the Datadog transport with environment variables instead of `DatadogConfig`:
@@ -289,7 +291,7 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://openlineage.io/
+[1]: https://openlineage.io/docs/spec/run-cycle/
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: /data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/
 [5]: https://openlineage.io/docs/spec/facets/job-facets/job-type/
