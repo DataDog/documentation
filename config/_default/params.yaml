@@ -345,7 +345,6 @@ unsupported_sites:
   high_availability_datadog_agent: [gov,gov2]
   iac_security: [gov,gov2]
   incident_ai: [gov,gov2]
-  inferred_entity_remapping_rules: [gov,gov2]
   internal_developer_portal: [gov,gov2]
   ioc_explorer: [gov,gov2]
   jetbrains-ides: [gov,gov2]
