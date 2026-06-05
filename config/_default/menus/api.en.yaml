@@ -22,6 +22,19 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: Validate AWS CCM config
+      url: /api/latest/aws-integration/validate-aws-ccm-config/
+      identifier: aws-integration-validate-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateAWSCCMConfig
+        unstable:
+          - v2
+        order: 18
     - name: Get AWS integration standard IAM permissions
       url: /api/latest/aws-integration/get-aws-integration-standard-iam-permissions/
       identifier: aws-integration-get-aws-integration-standard-iam-permissions
