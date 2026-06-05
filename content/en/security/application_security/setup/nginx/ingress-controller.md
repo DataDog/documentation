@@ -148,7 +148,7 @@ When the main ingress-nginx controller starts, the NGINX configuration must be u
 allowing it to load the Datadog module.
 
 <div class="alert alert-danger">
-Datadog provides a specific init container **for each ingress-nginx controller version**, starting with <code>v1.10.0</code>. This is crucial because **each** init container must match the underlying NGINX version. To confirm compatibility, verify that the version of the Datadog init container matches your ingress-nginx version.
+Datadog provides a specific init container <b>for each ingress-nginx controller version</b>, starting with <code>v1.10.0</code>. This is crucial because <b>each</b> init container must match the underlying NGINX version. To confirm compatibility, verify that the version of the Datadog init container matches your ingress-nginx version.
 </div>
 
 ### Interaction with OpenTelemetry
