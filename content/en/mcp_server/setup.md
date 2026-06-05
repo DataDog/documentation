@@ -39,7 +39,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 1. When prompted for a URL, enter:
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -87,7 +87,7 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
        }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -116,7 +116,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -208,7 +208,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -237,7 +237,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    - **One-click install (recommended):** Use the Datadog MCP Server {{< region-param key="goose_mcp_install_deeplink" link="true" text="install deeplink" >}}.
    - **Manual configuration:** Follow Goose's instructions to [add an MCP server][2], using the endpoint listed in this section as the streamable HTTP server URL. To edit the configuration directly, modify `~/.config/goose/config.yaml`.
 
-1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools:
+1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools:
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -280,7 +280,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -306,7 +306,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -329,7 +329,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -381,7 +381,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -440,7 +440,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
   }
 }</code></pre>
 
-To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools:
+To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools:
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -503,7 +503,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -541,7 +541,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -614,7 +614,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters
-- `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
+- `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
