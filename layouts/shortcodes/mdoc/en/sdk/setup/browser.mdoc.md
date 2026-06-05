@@ -360,6 +360,12 @@ To request support for a web server that is not listed here, [fill out this form
 
 {% /collapse-content %}
 
+## Start monitoring
+
+Visualize the [data collected][17] in [dashboards][18] or create a search query in the [RUM Explorer][1].
+
+Your application appears as pending on the Applications page until Datadog starts receiving data.
+
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
@@ -372,4 +378,6 @@ To request support for a web server that is not listed here, [fill out this form
 [14]: /session_replay/browser/
 [15]: /product_analytics/
 [16]: /agentic_onboarding/setup/
+[17]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[18]: /real_user_monitoring/platform/dashboards/
 
