@@ -36,31 +36,31 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 ### Configure your test details
 
-1. In the Datadog site, hover over **Digital Experience** in the left hand menu and select **[Tests][2]** (under **Synthetic Monitoring & Testing**).
-2. In the top right corner, click **New Test** > **[Browser Test][3]**.
+1. In the Datadog site, hover over {{< ui >}}Digital Experience{{< /ui >}} in the left hand menu and select [{{< ui >}}Tests{{< /ui >}}][2] (under {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}).
+2. In the top right corner, click {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}Browser Test{{< /ui >}}][3].
 
 You may create a test using one of the following options:
 
 - **Create a test from a template**:
 
-    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
-    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+    1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
 
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 - **Build a test from scratch**:
 
-    1. Click the **+** template to start a new Browser Test from scratch.
+    1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
     1. Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
-    2. Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
+    2. Select {{< ui >}}Advanced Options{{< /ui >}} to set custom request options, certificates, authentication credentials, and more. 
     3. Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     4. Choose the browsers and devices you want to test with. 
-    5. Click **Save & Edit Recording** to submit your Browser Test.
+    5. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Browser Test.
 
 ### Select locations 
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more {{< ui >}}Managed Locations{{< /ui >}} or {{< ui >}}Private Locations{{< /ui >}} to run your test from.
 
 Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][4] instead.
 
@@ -107,7 +107,7 @@ For example, the following monitor message creates a monitor that iterates over 
    {{/each}}
    ```
 
-When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
+When you're ready to save your test configuration and monitor, click {{< ui >}}Save & Edit Recording{{< /ui >}}.
 
 For more information, see [Using Synthetic Test Monitors][8].
 
@@ -115,37 +115,35 @@ For more information, see [Using Synthetic Test Monitors][8].
 
 Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. (This Chrome extension can also be installed on a Microsoft Edge browser)
 
-Once you have installed the extension, click **Start Recording** to begin recording your test steps.
+Once you have installed the extension, click {{< ui >}}Start Recording{{< /ui >}} to begin recording your test steps.
 
 Navigate through the page in the iframe located on the right of the recorder page. When you select a div, image, or any area of the page, Datadog records and creates the associated step in the browser test. 
 
-To end recording your test steps, click **Stop Recording**.
+To end recording your test steps, click {{< ui >}}Stop Recording{{< /ui >}}.
 
 The example below demonstrates how to map a user journey from adding an item to a cart to successfully checking out in `https://www.shopist.io`:
 
-1. Navigate to one of the furniture sections on the example website such as **Chairs** and select **Add to cart**.
-2. Click on **Cart** and **Checkout**.
-3. Under **Add New**, select **Assertion** and click **"Test that some text is present on the active page"**.
-4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the **Value** field. 
-5. Press **Save & Quit**.
+1. Navigate to one of the furniture sections on the example website such as {{< ui >}}Chairs{{< /ui >}} and select {{< ui >}}Add to cart{{< /ui >}}.
+2. Click on {{< ui >}}Cart{{< /ui >}} and {{< ui >}}Checkout{{< /ui >}}.
+3. Under {{< ui >}}Add New{{< /ui >}}, select {{< ui >}}Assertion{{< /ui >}} and click {{< ui >}}"Test that some text is present on the active page"{{< /ui >}}.
+4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the {{< ui >}}Value{{< /ui >}} field. 
+5. Press {{< ui >}}Save & Quit{{< /ui >}}.
 
-It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.
+It is important to finish your browser test with an {{< ui >}}Assertion{{< /ui >}} to ensure your application resulted in the expected state after the defined user journey.
 
 {{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true" >}}
 
-The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Configure the monitor for this test** field, you receive an email notification when the test fails and recovers.
+The example website regularly throws an error causing it to intentionally fail. If you include your email address in the {{< ui >}}Configure the monitor for this test{{< /ui >}} field, you receive an email notification when the test fails and recovers.
 
 ## Look at test results
 
-The **Browser Test** details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
+The {{< ui >}}Browser Test{{< /ui >}} details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][10], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][11]**, **[Resources][12]**, and **[Core Web Vitals][13]** to diagnose the issue. 
+To troubleshoot a [failed test][10], review the failures on the **Activity** tab or the **Test Runs** tab. Select an alert from the timeline to see a **What happened?** summary describing the failing step and error message. From the **Next Steps** panel, you can investigate with Bits AI SRE, view the recovery, pause scheduling, or declare an incident. You can also review potential [{{< ui >}}Errors & Warnings{{< /ui >}}][11], [{{< ui >}}Resources{{< /ui >}}][12], and [{{< ui >}}Core Web Vitals{{< /ui >}}][13] to diagnose the issue.
 
-In the example below, the test failed as the result of a server timeout.
+{{< img src="synthetics/browser_tests/synthetics_bits_sre.png" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" style="width:100%;">}}
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true" >}}
-
-Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
+Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the {{< ui >}}Traces{{< /ui >}} tab.
 
 ## Further Reading
 
@@ -164,5 +162,5 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 [10]: /synthetics/browser_tests/test_results#test-failure
 [11]: /synthetics/browser_tests/test_results#errors
 [12]: /synthetics/browser_tests/test_results#resources
-[13]: /synthetics/browser_tests/test_results#page-performance
+[13]: /synthetics/browser_tests/test_results#test-performance
 [14]: /synthetics/apm/

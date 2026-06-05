@@ -1,37 +1,36 @@
 ---
 aliases:
 - /es/service_management/events/pipelines_and_processors/grok_parser/
-description: Crea reglas de grok personalizadas para analizar el mensaje completo
-  o atributos específicos de eventos sin procesar y convertirlos en datos estructurados.
-title: Analizador de Grok
+description: Crea reglas grok personalizadas para analizar el mensaje completo o atributos
+  específicos de eventos en bruto en datos estructurados.
+title: Analizador Grok
 ---
+## Descripción general {#overview}
 
-## Información general
-
-Crea reglas de Grok personalizadas para analizar el mensaje completo o un atributo específico de tu evento sin formato. Como práctica recomendada, se sugiere utilizar un máximo de 10 reglas de parseo en un procesador de Grok.
-
-
-{{< img src="service_management/events/grok-parser.png" alt="Ejemplo de parseo 1" style="width:80%;">}}
+Crea reglas grok personalizadas para analizar el mensaje completo o un atributo específico de su evento en bruto. Como mejor práctica, se recomienda utilizar un máximo de 10 reglas de análisis dentro de un procesador grok.
 
 
-Haz clic en **Parse My Events** (Analizar mis eventos) a fin de iniciar un conjunto de tres reglas de parseo para los eventos que fluyen a través del pipeline subyacente. Refina la denominación de atributos allí y añade reglas nuevas para otro tipo de eventos si es necesario. Esta característica requiere que los eventos correspondientes se indexen y realmente fluyan. Puedes desactivar o reducir de manera temporal los filtros de exclusión para que funcione.
-
-Selecciona una muestra haciendo clic en ella para activar su evaluación con la regla de análisis y mostrar el resultado en la parte inferior de la pantalla.
-
-Se pueden guardar hasta cinco muestras con el procesador, y cada muestra puede tener hasta 5000 caracteres de longitud. Todas las muestras presentan un estado (coincide o no coincide), que resalta si una de las reglas de parseo del analizador de Grok coincide con la muestra.
+{{< img src="service_management/events/grok-parser.png" alt="Ejemplo de análisis 1" style="width:80%;">}}
 
 
-### Sintaxis de Grok
+Haga clic en **Analizar Mis Eventos** para iniciar un conjunto de tres reglas de análisis para los eventos que fluyen a través de la canalización subyacente. Refine la nomenclatura de los atributos desde allí y agregue nuevas reglas para otros tipos de eventos si es necesario. Esta función requiere que los eventos correspondientes estén siendo indexados y fluyendo realmente; puede desactivar temporalmente o reducir los filtros de exclusión para que esto funcione para usted.
 
-El analizador de Grok extrae atributos de mensajes de texto semiestructurados. Grok cuenta con patrones reutilizables para analizar enteros, direcciones IP, nombres de host y más. Estos valores se deben enviar al analizador de Grok como cadenas.
+Seleccione una muestra haciendo clic en ella para activar su evaluación contra la regla de análisis y mostrar el resultado en la parte inferior de la pantalla.
 
-Puedes escribir reglas de análisis con la sintaxis `%{MATCHER:EXTRACT:FILTER}`:
+Se pueden guardar hasta cinco muestras con el procesador, y cada muestra puede tener hasta 5000 caracteres de longitud. Todas las muestras muestran un estado (coincidencia o no coincidencia), lo que resalta si una de las reglas de parseo del analizador grok coincide con la muestra.
 
-* **Matcher** (Emparejador): una regla (posiblemente una referencia a otra regla de token) que describe qué esperar (número, palabra, no espacio, etc.).
 
-* **Extract** (Fragmento) (opcional): un identificador que representa el destino del fragmento de texto que coincide con el *Matcher* (Emparejador).
+### Sintaxis Grok {#grok-syntax}
 
-* **Filter** (Filtro) (opcional): un postprocesador de la coincidencia para transformarla.
+El Analizador Grok extrae atributos de mensajes de texto semiestructurados. Grok viene con patrones reutilizables para analizar enteros, direcciones IP, nombres de host y más. Estos valores deben ser enviados al analizador grok como cadenas.
+
+Puede escribir reglas de análisis con la `%{MATCHER:EXTRACT:FILTER}` sintaxis:
+
+* **Coincidente**: Una regla (posiblemente una referencia a otra regla de token) que describe qué esperar (número, palabra, no espacio, etc.).
+
+* **Extraer** (opcional): Un identificador que representa el destino de captura para el fragmento de texto coincidente con el *Coincidente*.
+
+* **Filtrar** (opcional): Un post-procesador de la coincidencia para transformarla.
 
 Ejemplo de un evento clásico no estructurado:
 
@@ -45,105 +44,105 @@ Con la siguiente regla de análisis:
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
-Después del procesamiento, se genera el siguiente evento estructurado:
+Después de procesar, se genera el siguiente evento estructurado:
 
 {{< img src="logs/processing/processors/_parser.png" alt="Ejemplo de análisis 1" style="width:80%;">}}
 
 **Nota**:
 
-* Si tienes varias reglas de análisis en un único analizador grok:
-  * Solo una puede coincidir con cualquier evento. La primera que coincida, de arriba abajo, es la que realiza el parseo.
-  * Cada regla puede hacer referencia a reglas de análisis definidas por encima de ella en la lista.
-* Debes tener nombres de regla únicos dentro del mismo analizador grok.
-* El nombre de la regla sólo debe contener: caracteres alfanuméricos, `_` y `.`. Debe comenzar con un carácter alfanumérico.
+* Si tiene múltiples reglas de análisis en un solo Analizador Grok:
+  * Solo una puede coincidir con cualquier evento dado. La primera que coincida, de arriba hacia abajo, es la que realiza el análisis.
+  * Cada regla puede hacer referencia a reglas de análisis definidas por encima de sí misma en la lista.
+* Debe tener nombres de regla únicos dentro del mismo Analizador Grok.
+* El nombre de la regla debe contener solo: caracteres alfanuméricos, `_`, y `.`. Debe comenzar con un carácter alfanumérico.
 * Las propiedades con valores nulos o vacíos no se muestran.
-* El emparejador de expresiones regulares aplica un `^` implícito, para hacer coincidir el inicio de una cadena, y un `$`, para hacer coincidir el final de la cadena.
-* Algunos eventos pueden producir grandes espacios en blanco. Utiliza `\n` y `\s+` para tener en cuenta las líneas nuevas y los espacios en blanco.
+* El comparador de regex aplica un `^` implícito, para coincidir con el inicio de una cadena, y un `$`, para coincidir con el final de una cadena.
+* Ciertos eventos pueden producir grandes espacios en blanco. Utilice `\n` y `\s+` para tener en cuenta los saltos de línea y los espacios en blanco.
 
-### Emparejador y filtro
+### Comparador y filtro {#matcher-and-filter}
 
-En esta lista encontrarás todos los emparejadores y filtros implementados de forma nativa por Datadog:
+Aquí hay una lista de todos los matchers y filtros implementados nativamente por Datadog:
 
 {{< tabs >}}
-{{% tab "Matchers" %}}
+{{% tab "Comparadores" %}}
 
 `date("pattern"[, "timezoneId"[, "localeId"]])`
-: compara una fecha con el patrón especificado y la analiza para producir una marca temporal Unix. [Consulta los ejemplos del emparejador de fechas](#parsing-dates).
+: Coincide con una fecha con el patrón especificado y analiza para producir un timestamp Unix. [Vea los ejemplos del Matcher de fecha](#parsing-dates).
 
 `regex("pattern")`
-: Empareja una expresión regular. [Verifica los ejemplos del emparejador de expresiones regulares](#regex).
+: Coincide con una expresión regular. [Verifique los ejemplos del Matcher de expresión regular](#regex).
 
 `notSpace`
-: Empareja cualquier cadena hasta el siguiente espacio.
+: Coincide con cualquier cadena hasta el siguiente espacio.
 
 `boolean("truePattern", "falsePattern")`
-: Empareja un booleano y lo analiza, definiendo de manera opcional los patrones true (verdaderos) y false (falsos) (por defecto `true` y `false`, ignorando mayúsculas y minúsculas).
+: Coincide y analiza un booleano, definiendo opcionalmente los patrones de verdadero y falso (por defecto son `true` y `false`, ignorando mayúsculas y minúsculas).
 
 `numberStr`
-: Empareja un número decimal de coma flotante y lo analiza como una cadena.
+: Coincide con un número decimal de punto flotante y lo analiza como una cadena.
 
 `number`
-: Empareja un número decimal de coma flotante y lo analiza como un número de doble precisión.
+: Coincide con un número decimal de punto flotante y lo analiza como un número de doble precisión.
 
 `numberExtStr`
-: Empareja un número de coma flotante (con soporte de notación científica) y lo analiza como una cadena.
+: Coincide con un número de punto flotante (con soporte para notación científica) y lo analiza como una cadena.
 
 `numberExt`
-: Empareja un número de coma flotante (con soporte de notación científica) y lo analiza como un número de doble precisión.
+: Coincide con un número de punto flotante (con soporte para notación científica) y lo analiza como un número de doble precisión.
 
 `integerStr`
-: Empareja un número entero y lo analiza como una cadena.
+: Coincide con un número entero y lo analiza como una cadena.
 
 `integer`
-: Empareja un número entero y lo analiza como un número entero.
+: Coincide con un número entero y lo analiza como un número entero.
 
 `integerExtStr`
-: Empareja un número entero (con soporte de notación científica) y lo analiza como una cadena.
+: Coincide con un número entero (con soporte para notación científica) y lo analiza como una cadena.
 
 `integerExt`
-: Empareja un número entero (con soporte de notación científica) y lo analiza como un número entero.
+: Coincide con un número entero (con soporte para notación científica) y lo analiza como un número entero.
 
 `word`
-: Compara caracteres de a-z, A-Z, 0-9, incluido el carácter _ (guion bajo).
+: Coincide con caracteres de a-z, A-Z, 0-9, incluyendo el carácter _ (guion bajo).
 
 `doubleQuotedString`
-: Empareja una cadena entre comillas dobles.
+: Coincide con una cadena entre comillas dobles.
 
 `singleQuotedString`
-: Empareja una cadena entre comillas simples.
+: Coincide con una cadena entre comillas simples.
 
 `quotedString`
-: Empareja una cadena entre comillas dobles o simples.
+: Coincide con una cadena entre comillas dobles o simples.
 
 `uuid`
-: Empareja un UUID.
+: Coincide con un UUID.
 
 `mac`
-: Empareja una dirección MAC.
+: Coincide con una dirección MAC.
 
 `ipv4`
-: Empareja un IPV4.
+: Coincide con un IPV4.
 
 `ipv6`
-: Empareja un IPV6.
+: Coincide con un IPV6.
 
 `ip`
-: Empareja un IP (v4 o v6).
+: Coincide con una dirección IP (v4 o v6).
 
 `hostname`
-: Empareja un nombre de host.
+: Coincide con un nombre de host.
 
 `ipOrHost`
-: Empareja un nombre de host o IP.
+: Coincide con un nombre de host o una dirección IP.
 
 `port`
-: Empareja un número de puerto.
+: Coincide con un número de puerto.
 
 `data`
-: Empareja cualquier cadena, incluidos espacios y líneas nuevas. Equivale a `.*` en expresiones regulares. Utilízalo cuando ninguno de los patrones anteriores sea apropiado.
+: Coincide con cualquier cadena, incluyendo espacios y saltos de línea. Equivalente a `.*` en regex. Utilícelo cuando ninguno de los patrones anteriores sea apropiado.
 
 {{% /tab %}}
-{{% tab "Filters" %}}
+{{% tab "Filtros" %}}
 
 `number`
 : Analiza una coincidencia como un número de doble precisión.
@@ -152,25 +151,25 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Analiza una coincidencia como un número entero.
 
 `boolean`
-: Analiza cadenas 'true' (verdadero) y 'false' (falso) como booleanos, ignorando mayúsculas y minúsculas.
+: Analiza las cadenas 'true' y 'false' como booleanos ignorando mayúsculas y minúsculas.
 
 `nullIf("value")`
-: Devuelve un valor nulo, si la coincidencia es igual al valor proporcionado.
+: Devuelve nulo si la coincidencia es igual al valor proporcionado.
 
 `json`
-: Analiza un JSON con el formato adecuado.
+: Analiza JSON correctamente formateado.
 
 `rubyhash`
-: Analiza un hash de Ruby con el formato adecuado, como por ejemplo `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`
+: Analiza un hash de Ruby correctamente formateado como `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`
 
 `useragent([decodeuricomponent:true/false])`
-: Analiza un agente de usuario y devuelve un objeto JSON que contiene el dispositivo, el sistema operativo y el navegador representado por el Agent. [Verifica el procesador de Agents de usuario][1].
+: Analiza un user-agent y devuelve un objeto JSON que contiene el dispositivo, el sistema operativo y el navegador representado por el Agent. [Consulta el procesador de user-agent][1].
 
 `querystring`
-: Extrae todos los pares clave-valor de una cadena de consulta de URL coincidente (por ejemplo, `?productId=superproduct&promotionCode=superpromo`).
+: Extrae todos los pares clave-valor en una cadena de consulta de URL que coincida (por ejemplo, `?productId=superproduct&promotionCode=superpromo`).
 
 `decodeuricomponent`
-: Descodifica los componentes de URI. Por ejemplo, transforma `%2Fservice%2Ftest` en `/service/test`.
+: Decodifica componentes de URI. Por ejemplo, transforma `%2Fservice%2Ftest` en `/service/test`.
 
 `lowercase`
 : Devuelve la cadena en minúsculas.
@@ -179,42 +178,42 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Devuelve la cadena en mayúsculas.
 
 `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
-: Extrae el patrón de clave-valor y devuelve un objeto JSON. Consulta los [ejemplos de filtros de clave-valor](#key-value-or-logfmt).
+: Extrae el patrón de clave-valor y devuelve un objeto JSON. Consulta los [ejemplos de filtro de clave-valor](#key-value-or-logfmt).
 
 `xml`
-: Analiza un XML con formato adecuado. Consulta los [ejemplos de filtros de XML](#parsing-xml).
+: Analiza XML correctamente formateado. Consulta los [ejemplos de filtro XML](#parsing-xml).
 
 `csv(headers[, separator[, quotingcharacter]])`
-: Analiza líneas CSV o TSV con formato adecuado. Consulta los [ejemplos de filtros de CSV](#parsing-csv).
+: Analiza líneas de CSV o TSV correctamente formateadas. Consulta los [ejemplos de filtro CSV](#parsing-csv).
 
 `scale(factor)`
 : Multiplica el valor numérico esperado por el factor proporcionado.
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: Analiza una secuencia de cadena de tokens y la devuelve como una matriz. Consulta el ejemplo de [lista a matriz](#list-to-array).
+: Analiza una secuencia de tokens en una cadena y la devuelve como un arreglo. Consulta el [ejemplo de lista a arreglo](#list-to-array).
 
 `url`
-: analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON.
+: Analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuración avanzada
+## Configuraciones avanzadas {#advanced-settings}
 
-En la parte inferior de los cuadros de tu procesador grok se encuentra la sección **Advanced Settings** (Configuración avanzada):
+En la parte inferior de sus mosaicos del procesador Grok, hay una sección de **Configuraciones Avanzadas**:
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Configuración avanzada" style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Configuraciones Avanzadas" style="width:80%;">}}
 
-### Análisis de un atributo con texto específico
+### Analizando un atributo de texto específico {#parsing-a-specific-text-attribute}
 
-Utiliza el campo **Extract from** (Extraer de) para aplicar tu procesador grok en un atributo con texto determinado, en lugar del atributo `message` predeterminado.
+Utilice el campo **Extraer de** para aplicar su procesador Grok a un atributo de texto dado en lugar del atributo predeterminado `message`.
 
-Por ejemplo, considera un evento que contiene un atributo `command.line` que se debe analizar como una clave-valor. Podrías analizar este evento de la siguiente manera:
+Por ejemplo, considere un evento que contiene un atributo `command.line` que debe ser analizado como un par clave-valor. Podría analizar este evento de la siguiente manera:
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Análisis de una línea de comando" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Análisis de la Línea de Comando" style="width:80%;">}}
 
-### Uso de las reglas de ayuda para factorizar varias reglas de análisis
+### Usando reglas auxiliares para factorizar múltiples reglas de análisis {#using-helper-rules-to-factorize-multiple-parsing-rules}
 
-Utiliza el campo **Helper Rules** (Reglas de ayuda) para definir tokens para tus reglas de análisis. Las reglas de ayuda te permiten factorizar patrones grok en las reglas de análisis. Esto es útil cuando tienes varias reglas en el mismo analizador grok que utilizan los mismos tokens.
+Utilice el campo **Reglas Auxiliares** para definir tokens para sus reglas de análisis. Las reglas auxiliares le ayudan a factorizar patrones Grok en sus reglas de análisis. Esto es útil cuando tiene varias reglas en el mismo Analizador Grok que utilizan los mismos tokens.
 
 Ejemplo de un evento clásico no estructurado:
 
@@ -222,13 +221,13 @@ Ejemplo de un evento clásico no estructurado:
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-Utiliza la siguiente regla de análisis:
+Utilice la siguiente regla de análisis:
 
 ```text
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-Con las siguientes reglas de ayuda:
+Con los siguientes auxiliares:
 
 ```text
 user %{word:user.name} id:%{integer:user.id}
@@ -236,33 +235,33 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-{{< img src="logs/processing/parsing/helper_rules.png" alt="Reglas de ayuda" style="width:80%;">}}
+{{< img src="logs/processing/parsing/helper_rules.png" alt="reglas auxiliares" style="width:80%;">}}
 
-## Ejemplos
+## Ejemplos {#examples}
 
-Algunos ejemplos que demuestran cómo utilizar los analizadores:
+Algunos ejemplos que demuestran cómo usar analizadores:
 
-* [Clave-valor o logfmt](#key-value-or-logfmt)
-* [Análisis de fechas](#parsing-dates)
-* [Alternancia de patrones](#alternating-pattern)
+* [Clave valor o logfmt](#key-value-or-logfmt)
+* [Parseo de fechas](#parsing-dates)
+* [Patrones alternantes](#alternating-pattern)
 * [Atributo opcional](#optional-attribute)
 * [JSON anidado](#nested-json)
-* [Expresiones regulares](#regex)
-* [Lista a matrices](#list-to-array)
-* [Formato glog](#glog-format)
+* [Expresión regular](#regex)
+* [Listas y arreglos](#list-to-array)
+* [ Formato Glog](#glog-format)
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
-### Clave valor o logfmt
+### Clave-valor o logfmt {#key-value-or-logfmt}
 
-Este es el filtro principal de clave-valor: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`, donde:
+Este es el filtro central de clave-valor: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` donde:
 
-* `separatorStr`: define el separador entre la clave y los valores. Por defecto es `=`.
-* `characterAllowList`: define caracteres de valor de no escape, además de los caracteres `\\w.\\-_@` predeterminados. Sólo se utiliza para valores que no están entre comillas (por ejemplo, `key=@valueStr`).
-* `quotingStr`: define las comillas y sustituye la detección de comillas predeterminada: `<>`, `""`, `''`.
-* `delimiter`: define el separador entre los distintos pares clave-valor (por ejemplo, `|` es el delimitador en `key1=value1|key2=value2`). Por defecto es ` ` (normal space), `,` and `.
+* `separatorStr`: define el separador entre claves y valores. Por defecto es `=`.
+* `characterAllowList`: define caracteres adicionales de valor no escapados además del valor por defecto `\\w.\\-_@`. Se utiliza solo para valores no entrecomillados (por ejemplo, `key=@valueStr`).
+* `quotingStr`: define comillas, reemplazando la detección de comillas por defecto: `<>`, `""`, `''`.
+* `delimiter`: define el separador entre los diferentes pares de clave-valor (por ejemplo, `|` es el delimitador en `key1=value1|key2=value2`). Por defecto es ` ` (espacio normal), `,` y `;`.
 
-Utiliza filtros como **keyvalue** a fin de asignar con mayor facilidad cadenas a atributos para formatos keyvalue o logfmt:
+Utilice filtros como **clave-valor** para mapear más fácilmente cadenas a atributos para formatos de clave-valor o logfmt:
 
 **Evento:**
 
@@ -276,14 +275,14 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Ejemplo de análisis 2" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Ejemplo de parseo 2" style="width:80%;">}}
 
-No es necesario que especifiques el nombre de tus parámetros, puesto que ya se encuentran en el evento.
-Si añades un atributo de **extracción** `my_attribute` en tu patrón de reglas verás:
+No es necesario especificar el nombre de sus parámetros ya que ya están contenidos en el evento.
+Si agrega un **atributo de extracción** `my_attribute` en su patrón de regla, verá:
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Ejemplo de análisis 2 bis" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Ejemplo de parseo 2 bis" style="width:80%;">}}
 
-Si `=` no es el separador predeterminado entre la clave y los valores, añade un parámetro a la regla de análisis con un separador.
+Si `=` no es el separador predeterminado entre su clave y valores, agregue un parámetro en su regla de parseo con un separador.
 
 **Evento:**
 
@@ -299,7 +298,7 @@ rule %{data::keyvalue(": ")}
 
 {{< img src="logs/processing/parsing/key_value_parser.png" alt="Analizador de clave-valor" style="width:80%;" >}}
 
-Si el evento contiene caracteres especiales en un valor de atributo, como `/` en una URL por ejemplo, añádelo a la lista de permitidos en la regla de parseo:
+Si el evento contiene caracteres especiales en un valor de atributo, como `/` en una URL, agréguelo a la lista de permitidos en su regla de parseo:
 
 **Evento:**
 
@@ -313,24 +312,24 @@ url=https://app.datadoghq.com/event/stream user=john
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="Lista de permisos de clave-valor" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="Lista de permitidos de clave-valor" style="width:80%;" >}}
 
 Otros ejemplos:
 
-| **Cadena sin formato**               | **Regla de análisis**                                      | **Resultado**                            |
+| **Cadena cruda**               | **Regla de parseo**                                      | **Resultado**                            |
 |:-----------------------------|:------------------------------------------------------|:--------------------------------------|
-| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
-| key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
-| "key"="valueStr"             | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
-| key:valueStr                 | `%{data::keyvalue(":")}`                              | {"key": "valueStr"}                   |
-| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`                         | {"key": "/valueStr"}                  |
-| /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {"/key": "/valueStr"}                 |
-| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"key": "valueStr"}                   |
-| key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
-| key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
+| clave=valorStr                 | `%{data::keyvalue}`                                   | {"clave": "valorStr"}                   |
+| clave=\<valorStr>              | `%{data::keyvalue}`                                   | {"clave": "valorStr"}                   |
+| "clave"="valorStr"             | `%{data::keyvalue}`                                   | {"clave": "valorStr"}                   |
+| clave:valorStr                 | `%{data::keyvalue(":")}`                              | {"clave": "valorStr"}                   |
+| clave:"/valorStr"              | `%{data::keyvalue(":", "/")}`                         | {"clave": "/valorStr"}                  |
+| /clave:/valorStr               | `%{data::keyvalue(":", "/")}`                         | {"/clave": "/valorStr"}                 |
+| clave:={valorStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"clave": "valorStr"}                   |
+| clave1=valor1\|clave2=valor2 | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"clave1": "valor1", "clave2": "valor2"} |
+| clave1="valor1"\|clave2="valor2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"clave1": "valor1", "clave2": "valor2"} |
 
-**Ejemplo de varias cadenas de comillas**: cuando se definen varias cadenas de comillas, el comportamiento predeterminado se sustituye por un carácter de comillas definido.
-La clave-valor siempre coincide con las entradas sin caracteres de comillas, independientemente de lo que se especifique en `quotingStr`. Cuando se utilizan caracteres de comillas, se ignora `characterAllowList`, ya que se extrae todo lo que se encuentra entre los caracteres de comillas.
+**Ejemplo de cadena de múltiples comillas**: Cuando se definen múltiples cadenas de comillas, el comportamiento predeterminado se reemplaza con un carácter de comillas definido.
+La clave-valor siempre coincide con las entradas sin ningún carácter de comillas, independientemente de lo que se especifique en `quotingStr`. Cuando se utilizan caracteres de comillas, se ignora el `characterAllowList` ya que todo lo que está entre los caracteres de comillas se extrae.
 
 **Evento:**
 
@@ -353,42 +352,42 @@ La clave-valor siempre coincide con las entradas sin caracteres de comillas, ind
 **Nota**:
 
 * Los valores vacíos (`key=`) o los valores `null` (`key=null`) no se muestran en el JSON de salida.
-* Si defines un filtro *keyvalue* en un objeto `data` y este filtro no coincide, se devuelve un JSON `{}` vacío (por ejemplo, entrada: `key:=valueStr`, regla de análisis: `rule_test %{data::keyvalue("=")}`, salida: `{}`).
-* Definir `""` como `quotingStr` conserva la configuración predeterminada para las comillas.
+* Si define un filtro de *clave-valor* en un `data` objeto, y este filtro no coincide, entonces se devuelve un JSON vacío `{}` (por ejemplo, entrada: `key:=valueStr`, regla de parseo: `rule_test %{data::keyvalue("=")}`, salida: `{}`).
+* Definir `""` como `quotingStr` mantiene la configuración predeterminada para las comillas.
 
-### Análisis de fechas
+### Parseo de fechas {#parsing-dates}
 
-El emparejador de fechas transforma tu marca de tiempo en el formato EPOCH (unidad de medida en **milisegundos**).
+El comparador de fechas transforma su marca de tiempo en el formato EPOCH (unidad de medida **milisegundo**).
 
-| **Cadena sin formato**                       | **Regla de análisis**                                          | **Resultado**              |
+| **Cadena cruda**                       | **Regla de parseo**                                          | **Resultado**              |
 |:-------------------------------------|:----------------------------------------------------------|:------------------------|
 | 14:20:15                             | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
 | 02:20:15 PM                          | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
-| 10/11/2014                           | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
-| Jueves 16 de junio de 2016 08:29:03             | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
-| Martes 16 de noviembre de 2016 08:29:03              | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
-| 6/Mar/2013:01:36:30 +0900           | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
-| 29-11-2016T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
-| 29-11-2016T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
+| 11/10/2014                           | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
+| Jue Jun 16 08:29:03 2016             | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
+| Mar Nov 1 08:29:03 2016              | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
+| 06/Mar/2013:01:36:30 +0900           | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
+| 2016-11-29T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
+| 2016-11-29T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
 | 06/Feb/2009:12:14:14.655             | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
-| 31-08-2007 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
-| Jueves 16 de junio 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
-| Jueves 16 de junio 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
-| Jueves 16 de junio 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
+| 2007-08-31 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
+| Jue 16 de Jun 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
+| Jue 16 de Jun 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
+| Jue 16 de Jun 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> Utiliza el parámetro `timezone` si realizas tus propias localizaciones y tus marcas de tiempo no están en UTC.
-Los formatos compatibles para las zonas horarias son:
+<sup>1</sup> Utilice el `timezone` parámetro si realiza sus propias localizaciones y sus marcas de tiempo _no_ están en UTC.
+El formato soportado para zonas horarias es:
 
 * `GMT`, `UTC`, `UT` o `Z`
-* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss`. El rango máximo admitido es de +18:00 a -18:00.
-* Zonas horarias que comienzan por `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` o `UT-`. El rango máximo admitido es de +18:00 a -18:00.
-* Los ID de zona horaria extraídos de la base de datos TZ. Para obtener más información, consulta la [lista de nombres de bases de datos TZ][2].
+* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` o `-hhmmss` . El rango máximo soportado es de +18:00 a -18:00 inclusive.
+* Zonas horarias que comienzan con `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` o `UT-`. El rango máximo soportado es de +18:00 a -18:00 inclusive.
+* IDs de zona horaria extraídos de la base de datos TZ. Para más información, consulte [nombres de la base de datos TZ][2].
 
-**Nota**: Analizar una fecha **no** establece su valor como la fecha oficial del evento. Para ello utiliza el [reasignador de fechas de eventos][3] en un procesador posterior.
+**Nota**: El parseo de una fecha **no** establece su valor como la fecha oficial del evento. Para esto, utilice el [Remapeador de Fecha de Evento][3] en un Procesador posterior.
 
-### Alternancia de patrones
+### Patrón alternante {#alternating-pattern}
 
-Si tienes eventos con dos formatos posibles que solo difieren en un atributo, establece una única regla alternando con `(<REGEX_1>|<REGEX_2>)`. Esta regla equivale a un OR booleano.
+Si tiene eventos con dos formatos posibles que difieren en solo un atributo, establezca una única regla utilizando alternante con `(<REGEX_1>|<REGEX_2>)`. Esta regla es equivalente a un OR booleano.
 
 **Evento**:
 
@@ -398,7 +397,7 @@ john connected on 11/08/2017
 ```
 
 **Regla**:
-ten en cuenta que "id" es un número entero y no una cadena.
+Tenga en cuenta que "id" es un entero y no una cadena.
 
 ```text
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
@@ -406,13 +405,13 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Resultados**:
 
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Ejemplo de análisis 4" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Ejemplo de parseo 4" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Ejemplo de análisis 4 bis" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Ejemplo de parseo 4 bis" style="width:80%;" >}}
 
-### Atributo opcional
+### Atributo opcional {#optional-attribute}
 
-Algunos eventos contienen valores que solo aparecen una parte del tiempo. En este caso, haz que la extracción de atributos sea opcional con `()?`.
+Algunos eventos contienen valores que solo aparecen parte del tiempo. En este caso, haga que la extracción de atributos sea opcional con `()?`.
 
 **Evento**:
 
@@ -426,15 +425,15 @@ john 1234 connected on 11/08/2017
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Nota**: Una regla no coincidirá si incluyes un espacio después de la primera palabra en la sección opcional.
+**Nota**: Una regla no coincidirá si incluye un espacio después de la primera palabra en la sección opcional.
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Ejemplo de análisis 5" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Ejemplo de parseo 5" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Ejemplo de análisis 5 bis" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Ejemplo de parseo 5 bis" style="width:80%;" >}}
 
-### JSON anidado
+### JSON anidado {#nested-json}
 
-Utiliza el filtro `json` para analizar un objeto JSON anidado después de un prefijo de texto sin formato:
+Utilice el filtro `json` para analizar un objeto JSON anidado después de un prefijo de texto sin procesar:
 
 **Evento**:
 
@@ -448,9 +447,9 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":20
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Ejemplo de análisis de un JSON anidado" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/nested_json.png" alt="Ejemplo de parseo de JSON anidado" style="width:80%;" >}}
 
-### Expresiones regulares
+### Regex {#regex}
 
 **Evento**:
 
@@ -464,55 +463,55 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Ejemplo de análisis 6" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="Ejemplo de parseo 6" style="width:80%;" >}}
 
-### Lista a matriz
+### Lista a arreglo {#list-to-array}
 
-Utiliza el filtro `array([[openCloseStr, ] separator][, subRuleOrFilter)` para extraer una lista en una matriz en un solo atributo. El `subRuleOrFilter` es opcional y acepta estos [filtros][4].
+Utilice el filtro `array([[openCloseStr, ] separator][, subRuleOrFilter)` para extraer una lista en un arreglo en un solo atributo. El `subRuleOrFilter` es opcional y acepta estos [filtros][4].
 
 **Evento**:
 
 ```text
-Los usuarios [John, Oliver, Marc, Tom] se han añadido a la base de datos
+Users [John, Oliver, Marc, Tom] have been added to the database
 ```
 
 **Regla**:
 
 ```text
-myParsingRule Los usuario %{data:users:array("[]",",")} se han añadido a la base de datos
+myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="Ejemplo de análisis 6" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/array_parsing.png" alt="Ejemplo de parseo 6" style="width:80%;" >}}
 
 **Evento**:
 
 ```text
-Los usuarios {John-Oliver-Marc-Tom} se han añadido a la base de datos
+Users {John-Oliver-Marc-Tom} have been added to the database
 ```
 
 **Regla**:
 
 ```text
-myParsingRule Los usuarios %{data:users:array("{}","-")} se han añadido a la base de datos
+myParsingRule Users %{data:users:array("{}","-")} have been added to the database
 ```
 
-**Regla que utiliza `subRuleOrFilter`**:
+**Regla usando `subRuleOrFilter`**:
 
 ```text
-myParsingRule Los usuarios %{data:users:array("{}","-", uppercase)} se han añadido a la base de datos
+myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-### Formato glog
+### Formato Glog {#glog-format}
 
-A veces los componentes de Kubernetes gestionan logs en el formato `glog`. Este ejemplo es del elemento del programador de Kubernetes en la biblioteca de pipelines.
+Los componentes de Kubernetes a veces registran en el formato `glog`; este ejemplo es del elemento Kube Scheduler en la Biblioteca de Canalización.
 
-Evento de ejemplo:
+Ejemplo de Evento:
 
 ```text
 W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
 ```
 
-Regla de análisis:
+Regla de parseo:
 
 ```text
 kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
@@ -533,9 +532,9 @@ Y JSON extraído:
 }
 ```
 
-### Análisis de XML
+### Parseo XML {#parsing-xml}
 
-El analizador de XML transforma los mensajes con formato XML en JSON.
+El analizador XML transforma mensajes formateados en XML a JSON.
 
 **Evento:**
 
@@ -571,25 +570,25 @@ rule %{data::xml}
 
 **Notas**:
 
-* Si el XML contiene etiquetas (tags) que tienen un atributo y un valor de cadena entre las dos etiquetas, se genera un atributo `value`. Por ejemplo: `<title lang="en">Harry Potter</title>` se convierte en `{"title": {"lang": "en", "value": "Harry Potter" } }`
-* Las etiquetas repetidas se convierten automáticamente en matrices. Por ejemplo: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` se convierte en `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
+* Si el XML contiene etiquetas que tienen tanto un atributo como un valor de cadena entre las dos etiquetas, se genera un atributo `value`. Por ejemplo: `<title lang="en">Harry Potter</title>` se convierte en `{"title": {"lang": "en", "value": "Harry Potter" } }`
+* Las etiquetas repetidas se convierten automáticamente en arreglos. Por ejemplo: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` se convierte en `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
 
-### Análisis de CSV
+### Parseo CSV {#parsing-csv}
 
-Utiliza el filtro **CSV** para asignar cadenas a atributos con mayor facilidad cuando estén separadas por un carácter determinado (`,` por defecto).
+Utiliza el filtro **CSV** para mapear más fácilmente cadenas a atributos cuando están separadas por un carácter dado (`,` por defecto).
 
 El filtro CSV se define como `csv(headers[, separator[, quotingcharacter]])` donde:
 
-* `headers`: define el nombre de las claves separadas por `,`. Los nombres de las claves deben empezar por un carácter alfabético y pueden contener cualquier carácter alfanumérico además de `_`.
-* `separator`: define los separadores que se utilizan para separar los distintos valores. Sólo se acepta un carácter. Por defecto: `,`. **Nota**: Utiliza `tab` para que el `separator` represente el carácter de tabulación para los TSV.
-* `quotingcharacter`: define el carácter de comillas. Sólo se acepta un carácter. Por defecto: `"`
+* `headers`: Define los nombres de las claves separados por `,`. Los nombres de las claves deben comenzar con un carácter alfabético y pueden contener cualquier carácter alfanumérico además de `_`.
+* `separator`: Define los separadores utilizados para separar los diferentes valores. Solo se acepta un carácter. Predeterminado: `,`. **Nota**: Utilice `tab` para el `separator` para representar el carácter de tabulación para TSVs.
+* `quotingcharacter`: Define el carácter de comillas. Solo se acepta un carácter. Predeterminado: `"`
 
 **Nota**:
 
-* Los valores que contienen un carácter separador se deben colocar entre comillas.
-* Los valores entre comillas que contienen un carácter de comillas deben tener caracteres de escape entre comillas. Por ejemplo, `""` dentro de un valor entre comillas representa `"`.
-* Si el evento no contiene el mismo número de valores que el número de claves del encabezado, el analizador de CSV coincidirá con los primeros.
-* Los números enteros y dobles se convierten de manera automática, si es posible.
+* Los valores que contienen un carácter separador deben estar entre comillas.
+* Los valores entre comillas que contienen un carácter de comillas deben escaparse con un carácter de comillas. Por ejemplo, `""` dentro de un valor entre comillas representa `"`.
+* Si el evento no contiene la misma cantidad de valores que la cantidad de claves en el encabezado, el analizador CSV emparejará los primeros.
+* Los enteros y dobles se convierten automáticamente si es posible.
 
 **Evento**:
 
@@ -619,7 +618,7 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 
 Otros ejemplos:
 
-| **Cadena sin formato**               | **Regla de análisis**                                                         | **Resultado**                                      |
+| **Cadena cruda**               | **Regla de parseo**                                                         | **Resultado**                                      |
 |:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
 | `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
 | `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
@@ -630,9 +629,9 @@ Otros ejemplos:
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
-### Uso del emparejador de datos para descartar el texto innecesario
+### Utiliza el comparador de datos para descartar texto innecesario {#use-data-matcher-to-discard-unneeded-text}
 
-Si tienes un evento en el que después de haber analizado lo que se necesita sabes que es seguro descartar el texto posterior a ese punto, puedes utilizar el comparador de datos para hacerlo. Para el siguiente ejemplo de evento, puedes utilizar el comparador de `data` a fin de descartar el `%` al final.
+Si tiene un evento en el que, después de haber parseado lo necesario y saber que el texto posterior es seguro descartar, puede utilizar el comparador de datos para ello. Para el siguiente ejemplo de evento, puede usar el `data` comparador para descartar el `%` al final.
 
 **Evento**:
 
@@ -655,9 +654,9 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 }
 ```
 
-### Caracteres de control ASCII
+### Caracteres de control ASCII {#ascii-control-characters}
 
-Si tus eventos contienen caracteres de control ASCII, se serializarán al ingerirlos. Estos se pueden gestionar escapando de manera explícita del valor serializado dentro de tu analizador de Grok.
+Si sus eventos contienen caracteres de control ASCII, se serializan al ser ingeridos. Estos pueden ser manejados escapando explícitamente el valor serializado dentro de su parser grok.
 
 
 [1]: https://github.com/google/re2/wiki/Syntax

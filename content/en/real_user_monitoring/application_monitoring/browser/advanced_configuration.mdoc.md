@@ -40,6 +40,13 @@ further_reading:
 
 There are various ways you can modify the [data and context collected][1] by RUM, to support your needs for:
 
+## Testing
+
+{% card-grid %}
+{% image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" tooltip="Linux" /%}
+{% image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" tooltip="Docker" /%}
+{% /card-grid %}
+
 - Protecting sensitive data like personally identifiable information.
 - Connecting a user session with your internal identification of that user, to help with support.
 - Reducing how much RUM data you're collecting, through sampling the data.
@@ -492,7 +499,7 @@ For more information, see the [Enrich and control RUM data guide][14].
 
 ### Enrich RUM events
 
-Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
+Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events when requests are aborted:
 <!-- NPM -->
    {% if equals($lib_src, "npm") %}
    ```javascript
@@ -501,9 +508,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
    datadogRum.init({
       ...,
       beforeSend: (event, context) => {
-         // collect a RUM resource's response headers
-         if (event.type === 'resource' && event.resource.type === 'fetch') {
-               event.context.responseHeaders = Object.fromEntries(context.response.headers)
+         if (event.type === 'resource' && context.isAborted) {
+               event.context.aborted = true
          }
          return true
       },
@@ -519,9 +525,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
       window.DD_RUM.init({
          ...,
          beforeSend: (event, context) => {
-               // collect a RUM resource's response headers
-               if (event.type === 'resource' && event.resource.type === 'fetch') {
-                  event.context.responseHeaders = Object.fromEntries(context.response.headers)
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
                }
                return true
          },
@@ -538,9 +543,8 @@ Along with attributes added with the [Global Context API](#global-context) or th
       window.DD_RUM.init({
          ...,
          beforeSend: (event, context) => {
-               // collect a RUM resource's response headers
-               if (event.type === 'resource' && event.resource.type === 'fetch') {
-                  event.context.responseHeaders = Object.fromEntries(context.response.headers)
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
                }
                return true
          },
