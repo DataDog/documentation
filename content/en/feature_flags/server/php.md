@@ -407,7 +407,7 @@ If targeting rules do not match as expected:
 - Use only flat primitive attributes. Nested arrays, objects, and null values are ignored.
 - Verify the `DD_ENV` value appears in [{{< ui >}}Feature Flag Environments{{< /ui >}}][5].
 
-### Verify data appears in Datadog
+### Verify flag metrics and exposures in Datadog
 
 #### Flag evaluation metrics
 
