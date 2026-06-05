@@ -9,7 +9,7 @@ Alpine.store('integrationsModal', {
     isOpen: false,
     activeSlide: null, // a separate tracker from the main carousel
     openModal(activeSlide) {
-        // Opens modal with selected(active) slide 
+        // Opens the modal with the selected (active) slide
         this.isOpen = true
         this.activeSlide = activeSlide
     },
