@@ -62,15 +62,21 @@ Bits Code can suggest code improvements within several Datadog products, includi
 
 ### Code fixes and optimizations surfaced by Datadog products
 
-Across [supported Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15].
+Across [supported Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15]. In certain products, [Bits Chat][16] explores and investigates issues, then hands off its findings to Bits Code to implement a code change.
 
 {{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button labeled with the text 'Fix with Bits.'" style="width:25%" >}}
 
-In certain products, [Bits Chat][16] explores and investigates issues, then hands off its findings to Bits Code to implement a code change.
+You can manually prompt Bits Code to implement changes for a certain finding, or configure an [automation][28] so that it does so autonomously. 
 
 ### General coding tasks
 
 Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on general coding tasks.
+
+### Automations
+
+[Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull request, a draft PR, or a Slack notification.
+
+You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
 ### Pull request collaboration
 
@@ -80,12 +86,6 @@ Bits Code integrates with GitHub to:
 - Monitor CI logs and fix failures
 
 Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
-
-### Automations
-
-[Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull request, a draft PR, or a Slack notification.
-
-You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
 ## Limitations
 
