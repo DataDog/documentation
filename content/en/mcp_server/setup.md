@@ -636,6 +636,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
+- `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
@@ -720,8 +721,7 @@ For security, use a scoped API key and application key from a [service account][
 
 You can allow-list your redirect URLs in [Organization Preferences][27] under `MCP OAuth Redirect URLs`. 
 
-If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][58].
-
+If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
 
 ### Local binary authentication
 
@@ -842,3 +842,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [58]: https://partners.datadoghq.com/s/login/SelfRegister
 [59]: https://chatgpt.com/
 [60]: https://www.datadoghq.com/product-preview/mcp-codexec/
+[61]: /getting_started/profiler/
