@@ -21,13 +21,7 @@ Teams running experiments need to understand how much they have cumulatively mov
 
 Cumulative Impact is a metric-level view that aggregates the effect of every experiment a team has run against a single metric and produces a noise-adjusted estimate of the total movement. It is available on the metric overview page alongside the existing metric trend, and it includes two new components: a cumulative impact chart and an effect distribution.
 
-## Why aren't charts showing?
-
-Cumulative impact requires at least five experiments with non-failing diagnostics to fit the model. If fewer than five eligible experiments are available, Datadog does not display a cumulative impact value. Extending the time frame, or running more experiments against the metric, usually resolves this.
-
 ## Using cumulative impact
-
-This section is for experimenters and stakeholders who want to understand what the feature does, why it exists, and how to read it. No statistical background is required.
 
 ### Why naive aggregation overstates impact
 
@@ -37,16 +31,16 @@ Historically, correcting for the winner's curse required data teams to build cus
 
 ### Reading the cumulative impact chart
 
-The cumulative impact chart shows how the metric has been moved across the selected time period. Set the time-frame picker to the window you want to evaluate, for example the past quarter, and the chart populates with the experiments that concluded during that window.
+The cumulative impact chart shows how the metric has been moved across the selected time period. Set the **Time frame** picker to the window you want to evaluate, for example the past quarter, and the chart populates with the experiments that concluded during that window.
 
 The chart reports two numbers prominently:
 
 1. The number of experiments that ran during the window, and how many of those shipped a treatment variant.
 2. The cumulative impact on the metric, expressed as either a relative or absolute improvement.
 
-{{< img src="/product_analytics/experiment/cumulative_impact/cumulative_impact_overview.png" alt="The metric overview page showing the Cumulative Impact section with a time-frame picker set to the past 6 months, a +5.58% cumulative impact value labeled with the number of winning experiments, and the cumulative impact chart plotted over time." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/cumulative_impact/cumulative_impact_overview.png" alt="The metric overview page showing the Cumulative Impact section with a time frame picker set to the past 6 months, a +5.58% cumulative impact value labeled with the number of winning experiments, and the cumulative impact chart plotted over time." style="width:90%;" >}}
 
-Clicking on "Including X winning experiments" brings you to the experiments used in the cumulative impact calculation. Selecting an experiment from the list opens its result page, where you can see the original measured lift, the shipping decision, and the corrected estimate used in the cumulative calculation. This makes it possible to trace any single contribution back to its source, which is useful when communicating impact to leadership or auditing program-level claims.
+Click **Including X winning experiments** to see the experiments used in the cumulative impact calculation. Selecting an experiment from the list opens its result page, where you can see the original measured lift, the shipping decision, and the corrected estimate used in the cumulative calculation. This makes it possible to trace any single contribution back to its source, which is useful when communicating impact to leadership or auditing program-level claims.
 
 ### Reading the effect distribution
 
@@ -54,12 +48,12 @@ To the right of the cumulative impact chart is the effect distribution. This is 
 
 {{< img src="/product_analytics/experiment/cumulative_impact/effect_distribution.png" alt="The Experiment Effect Distribution panel showing an average effect size of +0.55% across 10 concluded experiments, a standard deviation of 0.15%, and a bell-shaped curve centered above zero between -1% and +1%." style="width:80%;" >}}
 
-A useful intuition is to think of the team as a slot machine and each experiment as a pull of the arm. Every pull produces some payout, and the effect distribution describes the kinds of payouts to expect on average. The distribution is noise-adjusted: noisy results do not stretch the distribution wider than the data supports.
+The distribution is noise-adjusted: noisy results do not stretch the distribution wider than the data supports.
 
 The effect distribution helps with two decisions:
 
-- **Where to invest.** A team whose distribution sits well above zero on a particular metric is producing reliable lifts and may want to keep investing in the surface. A team whose distribution straddles zero may want to redirect effort elsewhere.
-- **How to size future experiments.** If a team routinely powers experiments for a 5% [minimum detectable effect][1], but the distribution suggests their true effects are typically within plus or minus 3%, the experiments are likely underpowered. Useful responses include increasing sample sizes, broadening targeting, or focusing on opportunities with higher expected impact.
+- **Where to invest.** A team whose distribution sits well above zero on a particular metric is producing reliable lifts and may want to keep investing in this area. A team whose distribution straddles zero may want to redirect effort elsewhere.
+- **How to size future experiments.** If a team routinely powers experiments for a 5% [minimum detectable effect][1], but the distribution suggests their true effects are typically within plus or minus 3%, the experiments are likely underpowered. Consider increasing sample sizes, broadening targeting, or focusing on opportunities with higher expected impact.
 
 ### Which experiments are included
 
@@ -81,7 +75,7 @@ Both views use the same corrected estimates and differ only in how those estimat
 
 ### Choosing a time frame
 
-The time-frame picker controls which experiments are included. A longer window includes more experiments, which strengthens the model fit and produces a smoother effect distribution, but it can also mix together different team strategies if the team has changed direction.
+The time frame picker controls which experiments are included. A longer window includes more experiments, which strengthens the model fit and produces a smoother effect distribution, but it can also mix different team strategies if the team has changed direction.
 
 A reasonable starting point is the period over which your team's experimentation strategy has been roughly consistent, often a quarter or half. Comparing windows can also be informative: a team whose effect distribution has shifted upward over time is producing larger true effects, not only more shipping decisions.
 
@@ -117,7 +111,7 @@ Datadog uses weakly informative priors on the population parameters. On the resc
 τ ~ HalfCauchy(0, 0.25)
 ```
 
-The normal prior on μ is wide enough to be uninformative on most metric scales after rescaling. The half-Cauchy prior on τ is a common choice for hierarchical scale parameters: it has support on the non-negative reals, concentrates mass near zero (so the model favors homogeneity when the data is ambiguous), and has a heavy enough tail to allow large heterogeneity when the data supports it.
+The normal prior on μ is wide enough to be uninformative on most metric scales after rescaling. The half-Cauchy prior on τ is a common choice for hierarchical scale parameters. It has support on the non-negative reals and concentrates mass near zero, which means the model favors homogeneity when the data is ambiguous. Its heavy tail allows large heterogeneity when the data supports it.
 
 ### Rescaling for numerical stability
 
@@ -198,6 +192,10 @@ Failing experiments are excluded from the model fit and from the cumulative aggr
 ### Minimum sample size
 
 The model requires at least five eligible experiments. With fewer experiments, the MAP estimate of τ is unstable and the resulting shrinkage is unreliable. When this threshold is not met, no cumulative impact value or effect distribution is displayed.
+
+## Why aren't charts showing?
+
+Cumulative impact requires at least five experiments with non-failing diagnostics to fit the model. If fewer than five eligible experiments are available, Datadog does not display a cumulative impact value. Extend the time frame or run more experiments against the metric to resolve this.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
