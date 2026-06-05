@@ -28,7 +28,7 @@ Custom jobs use the [OpenLineage][1] standard to send job and lineage events to 
 
 ## Step 1: Send a `START` event
 
-Choose a method to send OpenLineage events to Datadog. All examples use the same `runId` UUID throughout the run. Generate one and keep it.
+Use one of the following options to send [OpenLineage events][1] to Datadog. All examples use the same `runId` UUID throughout the run. Generate one and keep it.
 
 **Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
 
