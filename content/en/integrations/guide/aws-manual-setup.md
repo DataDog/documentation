@@ -142,6 +142,21 @@ After configuring the role, return to the [AWS integration page][1] and save the
 
 If your AWS account is part of an AWS Organization, [Service Control Policies][10] can block the integration even when the IAM role and trust policy are correct. See [Missing metrics][11] in the troubleshooting guide for details.
 
+**Permissions boundaries:**
+
+A [permissions boundary][12] sets the maximum permissions a role can have. Effective permissions are the intersection of the role's identity-based policies and the boundary policy. If the boundary does not include an action required by the Datadog integration, AWS returns `AccessDenied` for that action, and the integration tile may show `Datadog is not authorized to monitor some of your services` even when the integration role policy appears to grant the action.
+
+To check whether a permissions boundary is attached to your integration role:
+
+- **Console**: In the AWS IAM console, open the role, and check the **Permissions boundary** tab.
+- **CLI**: Run the following command:
+  ```
+  aws iam get-role --role-name <DATADOG-INTEGRATION-ROLE> \
+    --query 'Role.{PermissionsBoundary:PermissionsBoundary,RoleName:RoleName}'
+  ```
+
+To resolve the issue, coordinate with your IAM or security team to ensure the boundary policy includes the required Datadog integration actions.
+
 <div class="alert alert-danger">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
 \*{{% mainland-china-disclaimer %}}
@@ -157,6 +172,7 @@ If your AWS account is part of an AWS Organization, [Service Control Policies][1
 [9]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
 [11]: /integrations/guide/aws-integration-troubleshooting/#missing-metrics
+[12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
