@@ -276,8 +276,6 @@ Regenerate the signed URL and update the iFrame `src` **every 9 minutes**.
 </script>
 ```
 
-For best reliability on unattended display hardware, disable OS-level sleep and power-saving features on the device running the browser. If the device sleeps, the refresh interval can drift and the iFrame may become unauthenticated before the next refresh fires.
-
 ## Multi-tenancy
 
 To serve multiple tenants from a single source dashboard, create one secure embed per tenant. Use `selectable_template_vars` to scope each tenant's default template variable values to their own resources. Each tenant gets a unique credential and base URL, which your backend stores and retrieves when generating iFrame URLs.
