@@ -37,7 +37,7 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 |------|-----------|---------------|
 | [Cursor][2] | &#x2714; | &#x2714; |
 | [Claude Code API][3] |  | &#x2714; |
-| GitHub Copilot (Coming soon) |  | &#x2714; |
+| [GitHub Copilot][4] |  | &#x2714; |
 
 ### Granularity modes
 
@@ -54,6 +54,7 @@ User Activity
 [1]: /delivery_performance/dora_metrics/setup/
 [2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
 [3]: /integrations/anthropic-usage-and-costs/
+[4]: /integrations/github-copilot/
 
 ## Impact metrics
 

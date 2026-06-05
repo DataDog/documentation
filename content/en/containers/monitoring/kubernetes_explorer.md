@@ -241,6 +241,53 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
 
+#### 5. Correlate logs, metrics, and traces with Kubernetes Explorer (optional)
+
+To navigate between Kubernetes resources and their related logs, metrics, and traces, add the [`k8sattributes`][108] and [`resourcedetection`][105] processors to your existing collector pipelines. For `resourcedetection` configuration, see [Processors and pipeline](#processors-and-pipeline) above.
+
+```yaml
+processors:
+  k8sattributes:
+    auth_type: "serviceAccount"
+    extract:
+      metadata:
+        - k8s.pod.name
+        - k8s.pod.uid
+        - k8s.deployment.name
+        - k8s.namespace.name
+        - k8s.node.name
+        - k8s.replicaset.name
+        - k8s.statefulset.name
+        - k8s.daemonset.name
+        - k8s.cronjob.name
+        - k8s.job.name
+        - k8s.container.name
+    pod_association:
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.uid
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.ip
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.name
+          - from: resource_attribute
+            name: k8s.namespace.name
+      - sources:
+          - from: connection
+
+service:
+  pipelines:
+    logs:
+      processors: [k8sattributes, resourcedetection, ...]
+    metrics:
+      processors: [k8sattributes, resourcedetection, ...]
+    traces:
+      processors: [k8sattributes, resourcedetection, ...]
+```
+
+For a complete reference example, see the [DaemonSet collector configuration][109].
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
@@ -250,6 +297,8 @@ Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name.
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [107]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
+[108]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
 [111]: /opentelemetry/integrations/kubernetes_metrics/#setup
 
 {{% /tab %}}
