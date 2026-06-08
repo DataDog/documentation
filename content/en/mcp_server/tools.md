@@ -1045,7 +1045,7 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 
 ## Remote Actions
 
-<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
+<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
 
 Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a [restricted shell interpreter][60]. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
 
