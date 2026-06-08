@@ -148,7 +148,7 @@ Contact your Datadog Customer Success Manager to schedule dedicated time windows
 {{< tabs >}}
 {{% tab "Using Fleet Automation (recommended)" %}}
 
-From the [Fleet Automation][13] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab, you can create a new failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites.
+From the [Fleet Automation][13] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab, you can create a failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites.
 
 To create a failover policy, click on {{< ui >}}Create Failover Policy{{< /ui >}}.
 
@@ -158,7 +158,7 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
-<div class="alert alert-danger">Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center.</strong> When no longer in failover, disable the failover policy to return integration data collection to the primary org.</div>
+<div class="alert alert-danger">Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over ceases Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center.</strong> When no longer in failover, disable the failover policy to return integration data collection to the primary org.</div>
 
 {{% /tab %}}
 
