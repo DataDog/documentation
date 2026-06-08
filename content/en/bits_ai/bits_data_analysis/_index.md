@@ -15,8 +15,8 @@ cascade:
     site_support_id: bits_data_analysis
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Bits Data Analysis is in Preview. Contact your Datadog representative to sign up.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-data-analysis/" >}}
+  Bits Data Analysis is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 ## Overview
