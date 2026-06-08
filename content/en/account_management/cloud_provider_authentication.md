@@ -87,7 +87,7 @@ To create an identity mapping:
 
 1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
-3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
+3. Enter a **Source Pattern (ARN)**. Use `/*` for wildcard patterns (for example, `assumed-role/terraform-runner/*`).
 4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
 5. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
@@ -276,7 +276,7 @@ To create an intake mapping:
 
 1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
-3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
+3. Enter a **Source Pattern (ARN)**. Use `/*` for wildcard patterns (for example, `assumed-role/DatadogAgentRole/*`).
 4. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
 {{< img src="account_management/cloud_provider_authentication/intake-mapping-create.png" alt="Create Intake Mapping dialog with fields for Cloud Provider and Source Pattern ARN" style="width:70%;" >}}

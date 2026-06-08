@@ -10,7 +10,7 @@ further_reading:
 ---
 
 ## Overview
-This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
+This page explains how to collect traces, trace metrics, runtime metrics, enhanced metrics, and custom metrics from your Azure Functions. [Enhanced metrics][11] are distinguished with the `azure.functions.enhanced.*` namespace. To collect additional metrics, install the [Datadog Azure integration][5].
 
 Here is the list of supported runtimes, operating systems (OS) and hosting plans for Azure Functions monitoring:
 - **Runtimes**: .NET, Node.js, Python, Java
@@ -237,5 +237,6 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [6]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
-[9]: /serverless/azure_app_service/windows_code/?tab=net
+[9]: /serverless/azure_functions/dotnet_extension/
 [10]: /profiler/
+[11]: /integrations/azure-functions/#metrics

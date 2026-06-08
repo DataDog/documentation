@@ -1,0 +1,3 @@
+---
+title: Get resource type
+---

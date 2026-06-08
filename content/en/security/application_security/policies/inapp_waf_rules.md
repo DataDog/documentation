@@ -145,4 +145,4 @@ Next, [configure detection rules to create security signals][1] based on those s
 [3]: /security/application_security/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 [5]: https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules
-[6]: /security/account_takeover_protection
+[6]: /security/application_security/account_takeover_protection/

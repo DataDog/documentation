@@ -12,7 +12,7 @@ products:
   url: /notebooks/
   icon: notebook
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/ddsql_editor/"
@@ -1578,4 +1578,4 @@ FROM (
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
-[10]: /bits_ai/mcp_server/
+[10]: /mcp_server/

@@ -11,7 +11,7 @@ further_reading:
 
 Configuration at runtime lets you modify Datadog SDK configuration from the Datadog UI, without needing to restart your application or service. You don't need to wait for a new deployment or code change to update your configuration. Instead, update it right away with configuration at runtime.
 
-{{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Walk through Software Catalog to use configuration at runtime." video="true" style="width:100%;">}}
+{{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Walk through Catalog to use configuration at runtime." video="true" style="width:100%;">}}
 
 ## Setup
 
@@ -21,7 +21,7 @@ Before you can use configuration at runtime, you must set up Remote Configuratio
 
 To make changes to a service's configuration at runtime:
 
-1. Go to the [Software Catalog][3] in APM.
+1. Go to the [Catalog][3] in APM.
 1. Hover over the service for which you want to update configuration.
 1. Click **Full Page** next to the service name.
 1. Click **Service Info**.
@@ -56,7 +56,7 @@ The following options are supported with configuration at runtime. The required 
 
 [1]: /tracing/guide/remote_config/
 [2]: /agent/
-[3]: /tracing/software_catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /account_management/rbac/permissions/
 [5]: /tracing/trace_explorer/trace_view
 [6]: https://app.datadoghq.com/organization-settings/remote-config

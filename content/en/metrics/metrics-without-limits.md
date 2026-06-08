@@ -1,5 +1,6 @@
 ---
 title: Metrics without Limits™
+description: "Decouple custom metric ingestion and indexing to control volumes and costs by selecting which tags remain queryable."
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/

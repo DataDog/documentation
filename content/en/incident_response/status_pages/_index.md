@@ -143,6 +143,21 @@ After a degradation notice is reviewed and published, it:
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
+**Note**: Each status page supports a maximum of 100 active (unresolved) degradations at a time.
+
+### Backfill a degradation
+
+Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Degradation**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the degradation. Each update requires a started at timestamp, status (Investigating or Resolved), description, and affected components. |
+
+{{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
+
 ### Schedule a maintenance window
 
 {{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
@@ -167,6 +182,21 @@ After reviewing and scheduling, the maintenance window:
 - Returns components to **Operational** when the window ends (unless manually overridden)
 
 You can post updates if plans change or reschedule the maintenance window as needed.
+
+**Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
+
+### Backfill a maintenance window
+
+Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Scheduled Maintenance**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the maintenance window. Each update requires a started at timestamp, status (In Progress or Completed), description, and affected components. |
+
+{{< img src="service_management/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
 
 ## Email subscriptions
 
