@@ -1,6 +1,6 @@
 ---
 title: External Evaluations
-description: Submit custom evaluations to Agent Observability using the Python SDK or the Agent Observability API to track user feedback and response quality.
+description: Submit custom evaluations to Agent Observability using the Python SDK or the Agent Observability API to track response quality.
 aliases:
     - /tracing/llm_observability/submit_evaluations
     - /llm_observability/submit_evaluations
@@ -18,11 +18,14 @@ further_reading:
     - link: '/llm_observability/evaluations/submit_nemo_evaluations'
       tag: 'Documentation'
       text: 'Learn about submitting evaluations from NVIDIA NeMo'
+    - link: '/llm_observability/evaluations/end_user_feedback'
+      tag: 'Documentation'
+      text: 'Learn about submitting end-user feedback'
 ---
 
 ## Overview
 
-In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
+In the context of LLM applications, it's important to evaluate the quality of your LLM application's responses.
 While Agent Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to Agent Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [Agent Observability API](#submitting-evaluations-with-the-api). Use this naming convention for the evaluation label:
 
 * Evaluation labels must start with a letter.
@@ -36,6 +39,8 @@ While Agent Observability provides a few out-of-the-box evaluations for your tra
 Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
 
 </div>
+
+<div class="alert alert-info">For feedback submitted by your users such as thumbs-up or thumbs-down ratings, accepted changes, free-text comments, and other signals, see <a href="/llm_observability/evaluations/end_user_feedback/">End-User Feedback</a>.</div>
 
 ## Submitting external evaluations with the SDK
 
@@ -97,16 +102,12 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
               "value": "1123132"
             }
           },
-          "span_id": "20245611112024561111",
-          "trace_id": "13932955089405749200",
           "ml_app": "weather-bot",
-          "timestamp_ms": 1609479200,
+          "timestamp_ms": 1765990800016,
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3,
-          // source:otel required only for OpenTelemetry spans
           "tags": ["source:otel"],
-          "timestamp_ms": 1765990800016,
           "assessment": "pass",
           "reasoning": "it makes sense"
         }

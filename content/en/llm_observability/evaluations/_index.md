@@ -24,9 +24,13 @@ Agent Observability offers several ways to support evaluations. They can be conf
 
 Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the Agent Observability application.
 
+### Submit end-user feedback
+
+[End-user feedback][13] lets you submit thumbs-up or thumbs-down ratings, accepted changes, free-text comments, and other user or agent feedback to Datadog. Feedback can be connected to spans, traces, sessions, or customer-defined entities with a feedback join key.
+
 ### Submit external evaluations
 
-You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize evaluation results within Datadog.
 
 ### Building custom evaluators
 
@@ -73,3 +77,4 @@ Agent Observability offers an [Export API][9] that you can use to retrieve spans
 [10]: /llm_observability/guide/evaluation_developer_guide
 [11]: /llm_observability/evaluations/annotation_queues
 [12]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[13]: /llm_observability/evaluations/end_user_feedback
