@@ -219,7 +219,7 @@ Or, modify the `package.json` file if you typically start an application with np
 
 ### AI/LLM compatibility
 
-The [Automatic Instrumentation for LLM Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
+The [Automatic Instrumentation for Agent Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
 
 
 ### Testing framework compatibility
