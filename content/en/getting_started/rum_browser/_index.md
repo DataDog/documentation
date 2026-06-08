@@ -212,9 +212,9 @@ Then fill in the values for your application:
 
 | Parameter | Value | Description |
 |---|---|---|
-| `clientToken` | Pre-filled by Datadog | Do not change. Determines where data is sent. |
-| `applicationId` | Pre-filled by Datadog | Do not change. Determines where data is sent. |
-| `site` | Pre-filled by Datadog | Do not change. Determines where data is sent. |
+| `clientToken` | Pre-filled by Datadog | Authenticates your application and authorizes it to send data to Datadog. Do not change. |
+| `applicationId` | Pre-filled by Datadog | Identifies which RUM application in Datadog receives the data. Do not change. |
+| `site` | Pre-filled by Datadog | The Datadog site your data is sent to, based on where your account is hosted. Do not change. |
 | `service` | You define | A short name for your app, such as `my-web-app`. Use lowercase. |
 | `env` | You define | The deployment environment, such as `production` or `staging`. Use lowercase. |
 | `version` | You define | The version of your code, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
