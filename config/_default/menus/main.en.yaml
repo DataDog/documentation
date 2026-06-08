@@ -1601,6 +1601,11 @@ menu:
       identifier: bits_data_analysis
       parent: bits_ai
       weight: 7
+    - name: Bits Detection
+      url: bits_ai/bits_detection
+      identifier: bits_detection
+      parent: bits_ai
+      weight: 8
     - name: Dashboards
       url: dashboards/
       pre: dashboard
