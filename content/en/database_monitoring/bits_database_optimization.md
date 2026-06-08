@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Bits Database Optimization detects underperforming queries across your database fleet, identifies optimizations validated against a simulated copy of your environment, and delivers the result as a pull request fixing the exact code that issued the query.
+Bits Database Optimization detects underperforming queries across your database fleet, identifies optimizations validated against a simulated copy of your environment, and delivers the result as a pull request fixing the exact code that triggered the query.
 
 Optimization candidates are selected automatically from Database Monitoring telemetry, with no additional setup required. Candidates are identified by highest potential impact, focusing on query execution times, blocking queries, and regressed queries.
 
@@ -62,13 +62,13 @@ Click **Compare Plans** to view side-by-side comparisons of the current and opti
 
 To review the PR for the optimization fix to your database, select **Review PR by Bits AI**. The GitHub PR opens with a pre-populated description that includes the simulation results.
 
-<div class="alert alert-info">Automated pull requests require APM configured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
+<div class="alert alert-info">Automated pull requests require APM to be configured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/setup_postgres/
+[1]: /database_monitoring/architecture/
 [2]: /database_monitoring/connect_dbm_and_apm/
 [3]: https://app.datadoghq.com/databases/queries
 [4]: /monitors/configuration/?tab=evaluateddata
