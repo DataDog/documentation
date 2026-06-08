@@ -12,7 +12,7 @@ further_reading:
   text: "Configuration Management"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/network-device-summary-page/" header="Join the Preview!">}}
 The NDM Summary Page is in Preview.
 {{< /callout >}}
 
