@@ -137,7 +137,7 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 ### Nested Queries
 
-Datadog’s nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
+Datadog's nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
 
 For more information, see the [Nested Queries][13] documentation.
 
@@ -168,7 +168,7 @@ jvm.heap_memory / jvm.heap_memory_max
 
 Use the {{< ui >}}Advanced...{{< /ui >}} option in the graph editor and select {{< ui >}}Add Query{{< /ui >}}. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
-Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
+Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To show only the formula result, see [Hide a query from the visualization](#hide-a-query-from-the-visualization).
 
 {{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
 
@@ -181,6 +181,10 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
+
+#### Hide a query from the visualization
+
+When a widget has multiple queries and a formula, you can hide individual queries so only the formula result appears on the graph. Click the query's letter label to toggle its visibility on the graph. A blue label indicates the query is displayed; a grey label indicates it is hidden. The hidden query is still used in the formula calculation.
 
 #### Minimum or Maximum between two queries
 
