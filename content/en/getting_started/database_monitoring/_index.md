@@ -51,7 +51,7 @@ The example application runs three containers: a PostgreSQL or MySQL database, t
 | Lock contention | The app uses `SELECT ... FOR UPDATE` to simulate concurrent row locks. |
 | APM ↔ DBM correlation | Traces from the orders service are linked to their database queries, enabling end-to-end visibility. |
 
-You can view all of this data in Datadog Database Monitoring.
+You can view this data in Datadog Database Monitoring.
 
 Follow these instructions to install the example application on macOS or Linux.
 
