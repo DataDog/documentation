@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-The [Datadog MCP Server][1] lets AI agents interact with your experiment data through the [Model Context Protocol (MCP)][2]. The `experiments` toolset gives AI clients like Cursor, Claude Code, and OpenAI Codex structured access to your experiments, metrics, and diagnostic data.
+The [Datadog MCP Server][1] lets AI agents interact with your experiment data through the [Model Context Protocol (MCP)][2]. The `experiments` toolset gives AI clients like Cursor, Claude Code, OpenAI Codex, and [Bits AI][6] structured access to your experiments, metrics, and diagnostic data.
 
 The toolset becomes most powerful when your AI client can also read your codebase — combining live experiment state with how the associated feature flag is installed in your code.
 
@@ -58,7 +58,7 @@ For feature flag management tools used alongside experiments — creating flags,
 
 ## Available tools
 
-The `experiments` toolset exposes the following tools to your AI client. When you ask a question in natural language, your AI client calls these tools on your behalf. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1].
+The `experiments` toolset exposes the following tools to your AI client. When you ask a question in natural language, your AI client calls these tools on your behalf. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1]. Each tool lists the [Datadog permissions][7] required to use it.
 
 ### Listing and browsing
 
@@ -135,3 +135,5 @@ The `experiments` toolset exposes the following tools to your AI client. When yo
 [3]: /mcp_server/setup/
 [4]: /feature_flags/feature_flag_mcp_server/
 [5]: /feature_flags/feature_flag_mcp_server/#check-feature-flag-implementation
+[6]: /bits_ai/
+[7]: /account_management/rbac/permissions/
