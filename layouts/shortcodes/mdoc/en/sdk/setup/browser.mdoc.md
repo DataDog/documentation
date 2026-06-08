@@ -373,7 +373,6 @@ Your application appears as pending on the Applications page until Datadog start
 [6]: /integrations/content_security_policy_logs/
 [7]: /real_user_monitoring/application_monitoring/browser/setup/client
 [11]: /error_tracking/frontend/browser
-[12]: /real_user_monitoring/application_monitoring/browser/setup/server
 [13]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [14]: /session_replay/browser/
 [15]: /product_analytics/
