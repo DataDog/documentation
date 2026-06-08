@@ -44,7 +44,7 @@ From a selected issue, you can trigger a [Bits Investigation][2]. Bits Investiga
 - A step-by-step summary of the investigation and its findings
 - Root cause analysis in plain language
 
-Click {{< ui >}}View Full Investigation{{< /ui >}} to open the complete investigation in a new tab. For more information, see [Bits Investigation][2].
+To start a Bits Investigation, click {{< ui >}}Investigate further with Bits{{< /ui >}}. Click {{< ui >}}View full investigation{{< /ui >}} to open the complete investigation in a new tab. For more information, see [Bits Investigation][2].
 
 ### Apply a proposed fix
 
