@@ -40,13 +40,6 @@ further_reading:
 
 There are various ways you can modify the [data and context collected][1] by RUM, to support your needs for:
 
-## Testing
-
-{% card-grid %}
-{% image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" tooltip="Linux" /%}
-{% image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" tooltip="Docker" /%}
-{% /card-grid %}
-
 - Protecting sensitive data like personally identifiable information.
 - Connecting a user session with your internal identification of that user, to help with support.
 - Reducing how much RUM data you're collecting, through sampling the data.

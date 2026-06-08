@@ -1,6 +1,6 @@
 ---
 title: Custom LLM-as-a-Judge Evaluations
-description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
+description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across Agent Observability.
 further_reading:
 - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
   tag: "Blog"
@@ -13,10 +13,10 @@ further_reading:
   text: "Building an LLM evaluation framework: best practices"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability terms and concepts"
+  text: "Learn about Agent Observability terms and concepts"
 - link: "/llm_observability/setup"
   tag: "Documentation"
-  text: "Learn how to set up LLM Observability"
+  text: "Learn how to set up Agent Observability"
 - link: "/llm_observability/evaluations/managed_evaluations"
   tag: "Documentation"
   text: "Learn about managed evaluations"
@@ -33,7 +33,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 ## Create a custom LLM-as-a-judge evaluation
 
-You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
+You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
 
 <div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
 
@@ -41,8 +41,8 @@ Learn more about the [compatibility requirements][6].
 
 ### Configure the prompt
 
-1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
-   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
+1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The Agent Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Use the {{< ui >}}Account{{< /ui >}} drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
     - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for.
@@ -234,7 +234,7 @@ An example schema for a JSON evaluation:
 
 
 4. Configure {{< ui >}}Assessment Criteria{{< /ui >}}.
-   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog Agent Observability, enabling monitors and dashboards to flag regressions or track overall health.
 
 {{< tabs >}}
 {{% tab "Boolean" %}}
@@ -475,7 +475,7 @@ function __evalPostProcessing(input) {
    - Select {{< ui >}}True{{< /ui >}} to mark a result as "Pass"
    - Select {{< ui >}}False{{< /ui >}} to mark a result as "Fail"
 
-   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog Agent Observability, enabling monitors and dashboards to flag regressions or track overall health.
 {{% /collapse-content %}}
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_5-2.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
@@ -509,7 +509,7 @@ Select a span to show JSON data available for use in an evaluation. Then, click 
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluation later.
 
-Results are available across LLM Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
+Results are available across Agent Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
@@ -526,14 +526,14 @@ For example:
 @evaluation.helpfulness-check.value
 ```
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
 
 
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
-- View aggregate results in the LLM Observability Overview page's Evaluation section
+- View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
 ## Using in experiments
