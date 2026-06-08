@@ -18,7 +18,7 @@ title: Pages de statut
 ---
 ## Aperçu {#overview}
 
-{{< img src="service_management/status_pages/shopist_status_page3.png" alt="Exemple de page de statut montrant les composants de service avec leur statut actuel et les mises à jour récentes des incidents" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Exemple de page de statut montrant les composants de service avec leur statut actuel et les mises à jour récentes des incidents" style="width:100%;" >}}
 
 Les pages de statut font partie de la suite de réponse aux incidents de Datadog, aux côtés de l'astreinte et de la gestion des incidents. Cela permet à votre équipe de communiquer de manière proactive **la disponibilité des services**, **les incidents** et **la maintenance planifiée** avec les clients ou les parties prenantes internes via une page web partageable.
 
@@ -118,7 +118,7 @@ Les avis sont des messages publiés sur une page de statut pour communiquer l'é
 
 ### Publish a degradation {#publish-a-degradation}
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations2.png" alt="Exemple de page de statut montrant que les composants de service subissent une dégradation" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Exemple de page de statut montrant que les composants de service subissent une dégradation" style="width:100%;" >}}
 
 Les avis de dégradation communiquent **unplanned service impact**, tels que des incidents ou des interruptions de service. Utilisez des avis de dégradation pour tenir les utilisateurs informés pendant qu'un problème est examiné, atténué et résolu.
 
@@ -133,7 +133,7 @@ Depuis une page de statut, cliquez sur **Publish Notice** et sélectionnez **Deg
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation_1.png" alt="Exemple de modal de publication d'avis pour les dégradations" style="width:60%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Exemple de modal de publication d'avis pour les dégradations" style="width:60%;" >}}
 
 Après qu'un avis de dégradation a été examiné et publié, il :
 - Appears on the **Status Pages List** under Active Notices.

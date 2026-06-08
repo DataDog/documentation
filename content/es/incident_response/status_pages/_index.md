@@ -18,7 +18,7 @@ title: Páginas de Estado
 ---
 ## Descripción general {#overview}
 
-{{< img src="service_management/status_pages/shopist_status_page3.png" alt="Ejemplo de página de estado que muestra los componentes del servicio con su estado actual y actualizaciones recientes de incidentes" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Ejemplo de página de estado que muestra los componentes del servicio con su estado actual y actualizaciones recientes de incidentes" style="width:100%;" >}}
 
 Las Páginas de Estado son parte de la suite de Incident Response de Datadog, junto con On-Call e Incident Management. Permite a su equipo comunicar proactivamente **la disponibilidad del servicio**, **los incidentes** y **el mantenimiento programado** a los clientes o interesados internos a través de una página web compartible.
 
@@ -118,7 +118,7 @@ Los avisos son mensajes publicados en una página de estado para comunicar el es
 
 ### Publique una degradación {#publish-a-degradation}
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations2.png" alt="Ejemplo de página de estado que muestra componentes de servicio que experimentan degradación" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Ejemplo de página de estado que muestra componentes de servicio que experimentan degradación" style="width:100%;" >}}
 
 Los avisos de degradación comunican **impacto de servicio no planificado**, como incidentes o interrupciones del servicio. Utilice avisos de degradación para mantener informados a los usuarios mientras se investiga, mitiga y resuelve un problema.
 
@@ -133,7 +133,7 @@ Desde una página de estado, haga clic en **Publicar aviso** y seleccione **Degr
 | **Impacto** | Nivel de impacto por componente: <br>- Operativo <br>- Rendimiento degradado <br>- Interrupción parcial <br>- Interrupción mayor |
 | **Notificar a los suscriptores** | Alternar para enviar actualizaciones a los usuarios suscritos |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation_1.png" alt="Ejemplo de ventana modal de aviso de publicación para degradaciones" style="width:60%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Ejemplo de ventana modal de aviso de publicación para degradaciones" style="width:60%;" >}}
 
 Después de que se revisa y publica un aviso de degradación, este:
 - Aparece en la **Lista de Páginas de Estado** bajo Avisos Activos.
