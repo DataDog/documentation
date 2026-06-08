@@ -31,7 +31,7 @@ On the **Activity** tab, you can see:
 - A **Timeline** of alert triggers, recoveries, and test modifications.
 - A **Summary** panel for the selected timeline event, showing what happened, the failing result, and suggested next steps for investigation.
 
-{{< img src="synthetics/browser_tests/synthetics_bits_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits AI SRE investigation" style="width:100%;" >}}
+{{< img src="synthetics/browser_tests/synthetics_bits_investigation.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits Investigation." style="width:100%;" >}}
 
 ## Test runs
 
@@ -214,7 +214,7 @@ When a browser test run fails, Datadog generates an AI failure summary to help y
 
 AI failure summaries appear on the test run details page for any failing browser test run. Treat them as a starting point for investigation, not as authoritative root cause analysis, because LLM-generated content can contain inaccuracies. Use the 👍 and 👎 buttons on the summary to share feedback and help improve future results.
 
-{{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries_new.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
 
 ### Compare screenshots
 
