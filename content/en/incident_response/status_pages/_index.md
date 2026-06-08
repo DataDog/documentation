@@ -143,6 +143,8 @@ After a degradation notice is reviewed and published, it:
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
+**Note**: Each status page supports a maximum of 100 active (unresolved) degradations at a time.
+
 ### Backfill a degradation
 
 Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
@@ -180,6 +182,8 @@ After reviewing and scheduling, the maintenance window:
 - Returns components to **Operational** when the window ends (unless manually overridden)
 
 You can post updates if plans change or reschedule the maintenance window as needed.
+
+**Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
 
 ### Backfill a maintenance window
 

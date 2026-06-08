@@ -24,6 +24,100 @@ const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
 const RENDER_THROTTLE = 50;
 
+const VIEW_MODES = ['fullscreen', 'floating', 'sidebar'];
+const DEFAULT_VIEW_MODE = 'fullscreen';
+const VIEW_MODE_STORAGE_KEY = 'docs-ai-view-mode';
+
+const RESIZABLE_MODES = {
+    sidebar: {
+        width: {
+            cssVar: '--docs-ai-sidebar-width',
+            storageKey: 'docs-ai-sidebar-width',
+            default: 440,
+            min: 280,
+            maxPx: 800,
+            maxViewportPct: 0.6,
+            viewportOffset: 0,
+        },
+    },
+    floating: {
+        width: {
+            cssVar: '--docs-ai-floating-width',
+            storageKey: 'docs-ai-floating-width',
+            default: 500,
+            min: 360,
+            maxPx: 920,
+            maxViewportPct: 0.9,
+            viewportOffset: 24,
+        },
+        height: {
+            cssVar: '--docs-ai-floating-height',
+            storageKey: 'docs-ai-floating-height',
+            default: 570,
+            min: 400,
+            maxPx: 900,
+            maxViewportPct: 0.85,
+            viewportOffset: 24,
+        },
+    },
+};
+
+const HANDLE_AXES = {
+    left: ['width'],
+    top: ['height'],
+    corner: ['width', 'height'],
+};
+
+const HANDLE_CURSORS = {
+    left: 'col-resize',
+    top: 'row-resize',
+    corner: 'nwse-resize',
+};
+
+function readStoredViewMode() {
+    try {
+        const stored = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
+        return VIEW_MODES.includes(stored) ? stored : DEFAULT_VIEW_MODE;
+    } catch (_) {
+        return DEFAULT_VIEW_MODE;
+    }
+}
+
+function persistViewMode(mode) {
+    try { localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode); } catch (_) { /* ignore */ }
+}
+
+function readStoredSize(mode, dim) {
+    const cfg = RESIZABLE_MODES[mode]?.[dim];
+    if (!cfg) return null;
+    try {
+        const raw = parseInt(localStorage.getItem(cfg.storageKey), 10);
+        return Number.isFinite(raw) ? raw : cfg.default;
+    } catch (_) {
+        return cfg.default;
+    }
+}
+
+function persistSize(mode, dim, px) {
+    const cfg = RESIZABLE_MODES[mode]?.[dim];
+    if (!cfg) return;
+    try { localStorage.setItem(cfg.storageKey, String(px)); } catch (_) { /* ignore */ }
+}
+
+function clampSize(mode, dim, px) {
+    const cfg = RESIZABLE_MODES[mode]?.[dim];
+    if (!cfg) return px;
+    const viewport = dim === 'width' ? window.innerWidth : window.innerHeight;
+    const max = Math.min(cfg.maxPx, viewport * cfg.maxViewportPct);
+    return Math.max(cfg.min, Math.min(px, max));
+}
+
+function forEachResizable(callback) {
+    Object.entries(RESIZABLE_MODES).forEach(([mode, dims]) => {
+        Object.keys(dims).forEach((dim) => callback(mode, dim));
+    });
+}
+
 // Auto-rotated client-side messages shown while we wait for the first server `thinking` event.
 // Aligned with the mapped server messages below so the user sees consistent copy either way.
 const LOADING_MESSAGES = [
@@ -87,8 +181,19 @@ class ConversationalSearch {
         this.homeAiBtnVisible = false;
         this.ready = false;
 
+        this.viewMode = readStoredViewMode();
+        this.isModeMenuOpen = false;
+        this.panelSizes = Object.fromEntries(
+            Object.keys(RESIZABLE_MODES).map((mode) => [mode, {}])
+        );
+        forEachResizable((mode, dim) => {
+            this.panelSizes[mode][dim] = clampSize(mode, dim, readStoredSize(mode, dim));
+        });
+
         if (!this.createElements()) return;
         this.bindEvents();
+        forEachResizable((mode, dim) => this.applyPanelSize(mode, dim, this.panelSizes[mode][dim]));
+        this.applyViewMode(this.viewMode);
         this.ready = true;
     }
 
@@ -143,6 +248,10 @@ class ConversationalSearch {
         this.messagesContainer = messagesContainer;
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
+        this.modeToggleBtn = this.sidebar.querySelector('.conv-search-mode-toggle');
+        this.modeMenu = this.sidebar.querySelector('.conv-search-mode-menu');
+        this.modeOptions = Array.from(this.sidebar.querySelectorAll('.conv-search-mode-option'));
+        this.resizeHandles = Array.from(this.sidebar.querySelectorAll('.conv-search-resize-handle'));
         return true;
     }
 
@@ -189,13 +298,136 @@ class ConversationalSearch {
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isOpen) this.close();
+            if (e.key !== 'Escape') return;
+            if (this.isModeMenuOpen) {
+                this.closeModeMenu();
+                return;
+            }
+            if (this.isOpen) this.close();
         });
 
+        this.bindModeSwitcher();
+        this.bindPanelResize();
         this.bindHomepageObserver();
         this.bindTooltipEvents();
         this.bindClickDelegation();
         this.bindScrollFade();
+
+        window.addEventListener('resize', () => {
+            if (this.isOpen && this.viewMode === 'sidebar') this.applySidebarTopOffset();
+        });
+    }
+
+    bindModeSwitcher() {
+        if (!this.modeToggleBtn || !this.modeMenu) return;
+
+        this.modeToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (this.isModeMenuOpen) this.closeModeMenu();
+            else this.openModeMenu();
+        });
+
+        this.modeOptions.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const mode = btn.dataset.mode;
+                if (mode) this.setViewMode(mode);
+                this.closeModeMenu();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!this.isModeMenuOpen) return;
+            if (this.modeMenu.contains(e.target) || this.modeToggleBtn.contains(e.target)) return;
+            this.closeModeMenu();
+        });
+    }
+
+    applyPanelSize(mode, dim, px) {
+        const cfg = RESIZABLE_MODES[mode]?.[dim];
+        if (!cfg) return;
+        const clamped = clampSize(mode, dim, px);
+        this.panelSizes[mode][dim] = clamped;
+        document.documentElement.style.setProperty(cfg.cssVar, `${clamped}px`);
+    }
+
+    bindPanelResize() {
+        if (!this.resizeHandles?.length) return;
+
+        this.resizeHandles.forEach((handle) => {
+            const axes = HANDLE_AXES[handle.dataset.resize];
+            if (!axes) return;
+            this.bindResizeHandle(handle, axes);
+        });
+
+        window.addEventListener('resize', () => {
+            forEachResizable((mode, dim) => {
+                const current = this.panelSizes[mode][dim];
+                const clamped = clampSize(mode, dim, current);
+                if (clamped !== current) this.applyPanelSize(mode, dim, clamped);
+            });
+        });
+    }
+
+    bindResizeHandle(handle, axes) {
+        const axisKey = handle.dataset.resize;
+        let pointerId = null;
+        let activeMode = null;
+
+        const onPointerMove = (e) => {
+            if (!activeMode) return;
+            axes.forEach((dim) => {
+                const cfg = RESIZABLE_MODES[activeMode][dim];
+                if (!cfg) return;
+                const value = dim === 'width'
+                    ? window.innerWidth - cfg.viewportOffset - e.clientX
+                    : window.innerHeight - cfg.viewportOffset - e.clientY;
+                this.applyPanelSize(activeMode, dim, value);
+            });
+        };
+
+        const stop = () => {
+            const finishedMode = activeMode;
+            if (pointerId !== null) {
+                try { handle.releasePointerCapture(pointerId); } catch (_) { /* ignore */ }
+                pointerId = null;
+            }
+            handle.removeEventListener('pointermove', onPointerMove);
+            handle.removeEventListener('pointerup', stop);
+            handle.removeEventListener('pointercancel', stop);
+            document.body.classList.remove('docs-ai-panel-resizing');
+            axes.forEach((dim) => document.body.classList.remove(`docs-ai-panel-resizing-${dim}`));
+            document.body.style.cursor = '';
+            if (finishedMode) {
+                axes.forEach((dim) => {
+                    persistSize(finishedMode, dim, this.panelSizes[finishedMode][dim]);
+                });
+                this.logInteraction('panel_resized', {
+                    mode: finishedMode,
+                    axes,
+                    width_px: this.panelSizes[finishedMode].width,
+                    height_px: this.panelSizes[finishedMode].height,
+                });
+            }
+            activeMode = null;
+        };
+
+        handle.addEventListener('pointerdown', (e) => {
+            const modeCfg = RESIZABLE_MODES[this.viewMode];
+            if (!modeCfg || e.button !== 0) return;
+            if (!axes.every((dim) => modeCfg[dim])) return;
+            e.preventDefault();
+            activeMode = this.viewMode;
+            pointerId = e.pointerId;
+            try { handle.setPointerCapture(pointerId); } catch (_) { /* ignore */ }
+            document.body.classList.add('docs-ai-panel-resizing');
+            axes.forEach((dim) => document.body.classList.add(`docs-ai-panel-resizing-${dim}`));
+            document.body.style.cursor = HANDLE_CURSORS[axisKey] || 'col-resize';
+
+            handle.addEventListener('pointermove', onPointerMove);
+            handle.addEventListener('pointerup', stop);
+            handle.addEventListener('pointercancel', stop);
+        });
     }
 
     bindHomepageObserver() {
@@ -308,6 +540,67 @@ class ConversationalSearch {
         });
     }
 
+    // --- View mode ---------------------------------------------------------------
+
+    applyViewMode(mode) {
+        if (!VIEW_MODES.includes(mode)) mode = DEFAULT_VIEW_MODE;
+        this.viewMode = mode;
+
+        VIEW_MODES.forEach((m) => this.sidebar.classList.toggle(`mode-${m}`, m === mode));
+
+        this.modeOptions.forEach((btn) => {
+            const isActive = btn.dataset.mode === mode;
+            btn.setAttribute('aria-checked', String(isActive));
+        });
+
+        const isFullscreen = mode === 'fullscreen';
+        if (this.isOpen) {
+            this.overlay.classList.toggle('open', isFullscreen);
+            document.body.style.overflow = isFullscreen ? 'hidden' : '';
+        }
+
+        this.updateBodyPush();
+    }
+
+    updateBodyPush() {
+        const shouldPush = this.isOpen && this.viewMode === 'sidebar';
+        document.body.classList.toggle('docs-ai-sidebar-pushed', shouldPush);
+        if (shouldPush) this.applySidebarTopOffset();
+    }
+
+    // Dock the sidebar just below the announcement banner.
+    applySidebarTopOffset() {
+        const banner = document.querySelector('.announcement-banner');
+        const bannerRect = banner?.getBoundingClientRect();
+        const topOffset = bannerRect && bannerRect.height > 0 && bannerRect.top <= 1
+            ? Math.max(0, Math.round(bannerRect.bottom))
+            : 0;
+        document.documentElement.style.setProperty('--docs-ai-sidebar-top-offset', `${topOffset}px`);
+    }
+
+    setViewMode(mode) {
+        if (!VIEW_MODES.includes(mode) || mode === this.viewMode) return;
+        this.logInteraction('view_mode_changed', { view_mode: mode });
+        this.applyViewMode(mode);
+        persistViewMode(mode);
+    }
+
+    openModeMenu() {
+        if (!this.modeMenu) return;
+        this.isModeMenuOpen = true;
+        this.modeMenu.classList.add('open');
+        this.modeMenu.setAttribute('aria-hidden', 'false');
+        this.modeToggleBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    closeModeMenu() {
+        if (!this.modeMenu) return;
+        this.isModeMenuOpen = false;
+        this.modeMenu.classList.remove('open');
+        this.modeMenu.setAttribute('aria-hidden', 'true');
+        this.modeToggleBtn.setAttribute('aria-expanded', 'false');
+    }
+
     // --- Open / Close / Reset ----------------------------------------------------
 
     open(trigger = 'entry_button') {
@@ -320,10 +613,15 @@ class ConversationalSearch {
 
         this.isOpen = true;
         this.sidebar.classList.add('open');
-        this.overlay.classList.add('open');
         this.floatButton.classList.add('hidden');
-        document.body.style.overflow = 'hidden';
 
+        const isFullscreen = this.viewMode === 'fullscreen';
+        if (isFullscreen) {
+            this.overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        this.updateBodyPush();
         setTimeout(() => this.input.focus(), 300);
     }
 
@@ -340,6 +638,8 @@ class ConversationalSearch {
         this.sidebar.classList.remove('open');
         this.overlay.classList.remove('open');
         document.body.style.overflow = '';
+        this.closeModeMenu();
+        this.updateBodyPush();
 
         if (!this.isHomepage || !this.homeAiBtnVisible) {
             this.floatButton.classList.remove('hidden');

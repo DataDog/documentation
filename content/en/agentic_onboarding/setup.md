@@ -26,7 +26,7 @@ The CLI can:
 
 ### Prerequisites
 
-- Node.js 20 or later
+- Node.js 22 or later
 
 ### Supported products
 
@@ -40,7 +40,7 @@ The CLI can set up the following products:
 | Error Tracking | `error-tracking` |
 | Infrastructure Monitoring | `infra-monitoring` |
 | Linux | `linux` |
-| LLM Observability | `llm-obs` |
+| Agent Observability | `llm-obs` |
 | OpenTelemetry | `otel` |
 | Product Analytics | `product-analytics` |
 | Real User Monitoring (RUM) | `rum` |
@@ -106,7 +106,7 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | Linux Observability | Terraform, Ansible, other IaC (Pulumi, CloudFormation, Puppet, Chef), and plain-shell install |
 | Serverless Monitoring (AWS Lambda) | AWS SAM, AWS CDK, Serverless Framework, Terraform, `datadog-ci lambda instrument` |
 | Serverless Monitoring (GCP Cloud Run and Cloud Run Functions) | Terraform, `gcloud run deploy`, Cloud Run YAML, Dockerfile, Gen 2 `gcloud functions deploy` |
-| LLM Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
+| Agent Observability | OpenAI, Anthropic, LangChain, Vercel AI SDK (auto-detected from project dependencies) |
 | OpenTelemetry | Node.js / server-side TS, Browser JS / React / Vite, Python (Django, Flask, FastAPI), Java, Go |
 | App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP (auto-detected from dependency manifests) |
 | Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |

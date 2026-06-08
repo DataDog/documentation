@@ -1,15 +1,15 @@
 ---
 title: Tracing Proxy Services
-description: Learn how to use LLM Observability to trace LLM calls through proxy or gateway services as part of a complete end-to-end trace.
+description: Learn how to use Agent Observability to trace LLM calls through proxy or gateway services as part of a complete end-to-end trace.
 ---
 
 ## Overview
 
-Like traditional applications, an LLM application can span multiple microservices. With LLM Observability, if one of these services is an LLM proxy or gateway, you can trace LLM calls within a complete end-to-end trace, capturing the full request path across services.
+Like traditional applications, an LLM application can span multiple microservices. With Agent Observability, if one of these services is an LLM proxy or gateway, you can trace LLM calls within a complete end-to-end trace, capturing the full request path across services.
 
-## Enabling LLM Observability for a proxy or gateway service
+## Enabling Agent Observability for a proxy or gateway service
 
-To enable LLM Observability for a proxy or gateway service used by multiple ML applications, you can configure it without specifying an ML application name. Instead, set the service name. This allows you to [filter spans specific to that proxy or gateway service within LLM observability](#observing-llm-gateway-and-proxy-services).
+To enable Agent Observability for a proxy or gateway service used by multiple ML applications, you can configure it without specifying an ML application name. Instead, set the service name. This allows you to [filter spans specific to that proxy or gateway service within Agent Observability](#observing-llm-gateway-and-proxy-services).
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -41,7 +41,7 @@ const llmobs = tracer.llmobs;
 {{< /tabs >}}
 
 
-If you have a service that orchestrates ML applications which send requests to an LLM proxy or gateway, enable LLM Observability with the ML application name:
+If you have a service that orchestrates ML applications which send requests to an LLM proxy or gateway, enable Agent Observability with the ML application name:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -98,7 +98,7 @@ main();
 {{% /tab %}}
 {{< /tabs >}}
 
-When the LLM application makes a request to the proxy or gateway service, the LLM Observability SDK automatically propagates the ML application name from the original LLM application. The propagated ML application name takes precedence over the ML application name specified in the proxy or gateway service.
+When the LLM application makes a request to the proxy or gateway service, the Agent Observability SDK automatically propagates the ML application name from the original LLM application. The propagated ML application name takes precedence over the ML application name specified in the proxy or gateway service.
 
 ## Observing LLM gateway and proxy services
 
