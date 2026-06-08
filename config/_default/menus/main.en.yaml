@@ -1596,6 +1596,11 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 6
+    - name: Bits Data Analysis
+      url: bits_ai/bits_data_analysis
+      identifier: bits_data_analysis
+      parent: bits_ai
+      weight: 7
     - name: Dashboards
       url: dashboards/
       pre: dashboard
