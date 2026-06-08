@@ -62,7 +62,7 @@ Click **Compare Plans** to view side-by-side comparisons of the current and opti
 
 To review the PR for the optimization fix to your database, select **Review PR by Bits AI**. The GitHub PR opens with a pre-populated description that includes the simulation results.
 
-<div class="alert alert-info">Automated pull requests require APM to beconfigured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
+<div class="alert alert-info">Automated pull requests require APM to be configured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
 
 ## Further reading
 
