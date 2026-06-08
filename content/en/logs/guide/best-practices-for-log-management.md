@@ -68,11 +68,11 @@ If you want to retain logs for an extended time while maintaining querying speed
 
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. Use [Archive Search][32] to query these logs directly from storage in real time. When you need full platform access or longer retention, use Archive Search's **Search & Rehydration** mode. With multiple archives, you can segment logs for compliance reasons and keep costs under control.
 
-#### Set up max scan size to manage expensive rehydrations
+#### Set up max scan size to manage costs
 
-Set a limit on the volume of logs that can be rehydrated at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned for Rehydration. See [Define maximum scan size][4] for more information.
+Set a limit on the volume of logs that can be scanned at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned per Archive Search query or rehydration. See [Define maximum scan size][4] for more information.
 
 ### Set up RBAC for custom roles
 
@@ -225,7 +225,6 @@ If you want to see user activities, such as who changed the retention of an inde
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
 [2]: /logs/log_configuration/archives/
-[3]: /logs/log_configuration/rehydrating/
 [4]: /logs/log_configuration/archives/?tab=awss3#define-maximum-scan-size
 [5]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [6]: https://app.datadoghq.com/
@@ -253,4 +252,5 @@ If you want to see user activities, such as who changed the retention of an inde
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /observability_pipelines/
 [30]: /logs/log_configuration/flex_logs/
-[31]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&group_by=%40asset.new_value.query.indexes](https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&agg_m=count&agg_m_source=base&agg_q=%40asset.new_value.query.indexes&agg_q_source=base&agg_t=count&audit__diff=unified&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=query_table&x_missing=true&from_ts=1768733389060&to_ts=1771325389060&live=true
+[31]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&agg_m=count&agg_m_source=base&agg_q=%40asset.new_value.query.indexes&agg_q_source=base&agg_t=count&audit__diff=unified&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=query_table&x_missing=true&live=true
+[32]: /logs/explorer/archive_search/

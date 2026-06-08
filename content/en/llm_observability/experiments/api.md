@@ -1,9 +1,9 @@
 ---
 title: Experiments API
-description: Reference the LLM Observability Experiments HTTP API.
+description: Reference the Agent Observability Experiments HTTP API.
 ---
 
-As an alternative to [using LLM Observability Experiments with the Python SDK][1], you can use the Experiments HTTP API to create and run experiments.
+As an alternative to [using Agent Observability Experiments with the Python SDK][1], you can use the Experiments HTTP API to create and run experiments.
 
 ### Postman quickstart
 
