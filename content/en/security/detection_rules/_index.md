@@ -71,6 +71,7 @@ To use the MITRE ATT&CK map, do the following:
    - Prioritizing Rule Creation: Focus on creating detection rules for techniques with low or no coverage.
    - Streamlining Rule Management: Manage and update detection rules, ensuring they align with the latest threat intelligence.
 The MITRE ATT&CK map available in SIEM or Workload Protection, but you can select Application and API Protection in the filter. Application and API Protection is included in the MITRE ATT&CK map for all-inclusive security coverage.
+
 ## Beta detection rules
 
 Datadog's Security Research team continually adds new OOTB security detection rules. While the aim is to deliver high quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research the time to either refine or deprecate detection opportunities that do not meet our standards.
@@ -102,6 +103,8 @@ For detailed instructions, see the following articles:
 
 ## Manage detection rules
 
+You can manage detection rules from both the [SIEM][16] or [Workload Protection][17] pages in Datadog. These instructions describe how to perform these actions from those pages, but these options are also available when you click on a detection rule to open it in a side panel.
+
 ### Enable or disable rules
 
 To enable or disable a rule, toggle the switch to the right of the rule name.
@@ -110,15 +113,14 @@ You can also bulk enable or disable rules:
 
 1. Click **Select Rules**.
 1. Select the rules you want to enable or disable.
-1. Click the **Edit Rules** dropdown menu.
+1. Click the **Bulk Actions** dropdown menu.
 1. Select **Enable Rules** or **Disable Rules**.
 
 ### Edit a rule
 
-For out-of-the-box detection rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you can [clone the default rule](#clone-a-rule) and use it as a template for a custom rule. You can then [disable the default rule](#enable-or-disable-rules).
+You can edit out-of-the-box and custom detection rules. If you want to preserve the original rule instead of editing it directly, you can [clone the rule](#clone-a-rule), make changes to the cloned rule, and [disable the original rule](#enable-or-disable-rules).
 
-- To edit a default rule, click the vertical three-dot menu for the rule and select **Edit default rule**.
-- To edit a custom rule, click the vertical three-dot menu for the rule and select **Edit rule**.
+To edit a rule, click the vertical three-dot menu for the rule and select **Edit default rule** or **Edit rule**, depending on the rule type.
 
 ### Clone a rule
 
@@ -128,9 +130,14 @@ Cloning a rule is helpful if you wish to duplicate an existing rule and lightly 
 
 ### Delete a rule
 
-To delete a custom rule, click the vertical three-dot menu for the rule and select **Delete rule**.
+To delete a rule, click the vertical three-dot menu for the rule and select **Delete rule**.
 
-**Note**: You can only delete custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
+You can also bulk delete rules:
+
+1. Click **Select Rules**.
+1. Select the rules you want to delete.
+1. Click the **Bulk Actions** dropdown menu.
+1. Select **Delete Rules**.
 
 ### See the version history for a rule
 
@@ -146,14 +153,12 @@ To see the version history of a rule:
     - For AAP: Click **App and API Protection** and then click **Detection Rules**.
     - For Cloud Security: Click **Cloud Security** and then click **Threat Detection Rules**.
     - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
-1. Click on the rule you are interested in.
-1. In the rule editor, click **Version History** to see past changes.
-1. Click a specific version to see what changes were made.
-1. Click **Open Version Comparison** to see what changed between versions.
-1. Select the two versions you want to compare.
-    - Data highlighted in red indicates data that was modified or removed.
-    - Data highlighted in green indicates data that was added.
-1. Click **Unified** if you want to see the comparison in the same panel.
+1. Click on the rule you are interested in, then click **Edit rule**.
+1. In the rule editor, click **Version History** to see past changes:
+   - Click a specific version to see what changes were made.
+   - Click **Open Version Comparison** to see what changed between versions, then select the two versions you want to compare. Click **Unified** if you want to see the comparison in the same panel.
+     - Data highlighted in red indicates data that was modified or removed.
+     - Data highlighted in green indicates data that was added.
 
 ### Restrict edit permissions
 
@@ -163,9 +168,16 @@ To see the version history of a rule:
 
 To view the security signals for a rule in the [Signals Explorer][1], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
 
-### Export a rule as JSON
+### Export a rule
 
-To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export as JSON**.
+To export a copy of a rule, click the rule to open it in the side panel. Click **Export**, then select either **Export rule to JSON** or **Export rule to Terraform**.
+
+You can also bulk export rules:
+
+1. Click **Select Rules**.
+1. Select the rules you want to export.
+1. Click the **Bulk Actions** dropdown menu.
+1. Select either **Export to JSON** or **Export to Terraform**.
 
 ## Rule deprecation
 
@@ -173,12 +185,12 @@ Regular audits of all detection rules are performed to maintain high fidelity si
 
 The rule deprecation process is as follows:
 
-1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
+- There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel (Cloud Security Misconfigurations only)
     - [Rule editor][10] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
-3. Once the rule is deleted, you can no longer clone and re-enable it.
+- After the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
+- After the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further reading
 

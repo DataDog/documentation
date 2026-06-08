@@ -113,7 +113,18 @@ Combined with RUM performance data, Session Replay is beneficial for error ident
 
 Select an application type to start collecting RUM data:
 
-{{< partial name="rum/rum-getting-started.html" >}}
+{{< card-grid card_width="210" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/" src="integrations_logos/javascript_large.svg" alt="browser" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_large.svg" alt="android" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/ios_large.svg" alt="ios" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup" src="integrations_logos/react-native_large.svg" alt="react native" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/flutter/setup" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_tv_large.svg" alt="android tv" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/tv_os_large.svg" alt="tv OS" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -153,6 +164,23 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
+
+### Additional endpoints for Browser Profiling
+
+When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
+
+| Site | Quota API URL                                             |
+|------|-----------------------------------------------------------|
+| US1  | `https://quota.browser-intake-datadoghq.com`             |
+| US3  | `https://quota.browser-intake-us3-datadoghq.com`         |
+| US5  | `https://quota.browser-intake-us5-datadoghq.com`         |
+| EU1  | `https://quota.browser-intake-datadoghq.eu`              |
+| US1-FED  | `https://quota.browser-intake-ddog-gov.com`          |
+| US2-FED  | `https://quota.browser-intake-us2-ddog-gov.com`      |
+| AP1  | `https://quota.browser-intake-ap1-datadoghq.com`         |
+| AP2  | `https://quota.browser-intake-ap2-datadoghq.com`         |
+
+If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure these `quota.` domains are also allowed. See the [Browser Profiling setup][19] page for details.
 
 ## Explore Datadog RUM
 
@@ -270,3 +298,6 @@ You must have edit access to restore general access to a restricted application.
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/
+[19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[20]: /real_user_monitoring/guide/proxy-rum-data
+[21]: /integrations/content_security_policy_logs

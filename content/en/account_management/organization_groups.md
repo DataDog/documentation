@@ -5,7 +5,7 @@ further_reading:
 - link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Managing Multiple-Organization Accounts"
-- link: "/getting_started/organization_topology/"
+- link: "/account_management/organization_topology/"
   tag: "Documentation"
   text: "Organization Topology"
 - link: "/account_management/rbac/"
@@ -26,9 +26,7 @@ For organizations that remain multi-organization, Organization Groups introduces
 Organization Groups lets administrators manage multiple Datadog organizations as a single unit. Instead of configuring roles, policies, and settings individually per organization, administrators define them once at the group level and push them to member organizations.
 
 - **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
-- **Push roles and policies from group to member organizations.** Define custom roles, access policies, and session settings in the parent organization and apply them to child organizations.
-- **Manage users centrally.** Add or remove users across multiple organizations from the parent without per-organization invitations.
-- **Configure roles, teams, and Data Access Control policies across organizations.** Define access rules once and apply them across organizations.
+- **Push policies from group to member organizations.** Define custom roles, access policies, and session settings in the parent organization and apply them to child organizations.
 
 ## Apply organization groups
 

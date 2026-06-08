@@ -16,7 +16,7 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ### Manual setup
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Declare the Android SDK as a dependency" %}
 Declare [dd-sdk-android-rum][4] and the [Gradle plugin][5] as dependencies in your **application module's** `build.gradle` file.

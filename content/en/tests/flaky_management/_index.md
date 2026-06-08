@@ -148,31 +148,30 @@ Requirements and limitations:
 
 After you fix a flaky test, it can take time for the fix to propagate to all branches, which can cause the test to keep flaking in stale branches. A grace period mechanism prevents flaky tests from appearing on stale branches after the fix is applied.
 
-A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog checks if the commit where the test run contains the fix:
-- If the fix is not present in the commit and the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
-- If the fix is not present in the commit and the test was **Disabled**, Datadog treats the test as **Disabled**.
-- If the fix is present in the commit, Datadog treats the test as healthy regardless of its previous status.
+A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog treats the test based on its status before the grace period started:
+- If the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
+- If the test was **Disabled**, Datadog treats the test as **Disabled**.
+
 This method avoids unnecessary CI failures and saves developer time.
 
-If a test inside the grace period flakes and the commit doesn't contain the fix, Datadog tags the test run event with `@test.test_management.flaky_fix_missing:true`.
+## Bits AI-powered flaky test fixes
 
-## AI-powered flaky test fixes
+After Test Optimization detects a flaky test, [Bits Code][16] can automatically diagnose and fix it. Bits Code analyzes the test's failure patterns and generates production-ready code changes. You can then create a GitHub pull request directly from Bits Code's suggestions.
 
-Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
-
-For Bits AI to create a fix, the flaky test must meet the following criteria:
+For Bits Code to create a fix, the flaky test must meet the following criteria:
 - **Failure rate**: At least 5%
 - **Wasted time**: At least 2 hours
 - **Failed pipelines**: At least 2 pipelines
 - **Branch**: Must have flaked in the default branch
+- **Failed executions**: Must have at least 1 failed execution that includes both `@error.message` and `@test.source.file` tags
 
-{{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
+{{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits Code displaying a proposed fix for a flaky test" style="width:100%;" >}}
 
 ### Setup
 
-To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
+To allow Bits Code to suggest flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically creates fixes for flaky tests detected by Test Optimization.
 
-<div class="alert alert-info">A flaky test must have at least one failed execution that includes both <code>@error.message</code> and <code>@test.source.file</code> tags to be eligible for a fix. Generating a fix may take some time.</div>
+After you have enabled Bits Code, when viewing a flaky test, click **Generate fix**.
 
 ## AI-powered flaky test categorization
 

@@ -1,6 +1,6 @@
 ---
 title: NeMo Evaluations
-description: Learn how to submit NVIDIA NeMo Evaluator model evaluation scores to LLM Observability to monitor benchmarking results alongside LLM traces.
+description: Learn how to submit NVIDIA NeMo Evaluator model evaluation scores to Agent Observability to monitor benchmarking results alongside LLM traces.
 aliases:
  - /llm_observability/submit_nemo_evaluations/
 further_reading:
@@ -12,13 +12,13 @@ further_reading:
 ## Overview
 NVIDIA NeMo Evaluator is a microservice that provides automated benchmarking for LLMs. For more information, see [NVIDIA's documentation][3].
 
-You can use LLM Observability to monitor NVIDIA NeMo Evaluator's model evaluation scores. NeMo evaluation scores appear as evaluation metrics tied to the original LLM trace.
+You can use Agent Observability to monitor NVIDIA NeMo Evaluator's model evaluation scores. NeMo evaluation scores appear as evaluation metrics tied to the original LLM trace.
 
 ## Setup
 
-These steps use the [LLM Observability Python SDK][1].
+These steps use the [Agent Observability Python SDK][1].
 
-To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo evaluation scores alongside `span_id` and `trace_id`.
+To integrate Agent Observability with NeMo Evaluator, submit your NeMo evaluation scores alongside `span_id` and `trace_id`.
 
 1. **Obtain span and trace IDs from `LLMObs.export_span()`**.
 
@@ -88,7 +88,7 @@ To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo e
 
    from ddtrace.llmobs import LLMObs
    LLMObs.enable(
-       # Enable the LLM Observability SDK with the same ml_app name as original application
+       # Enable the Agent Observability SDK with the same ml_app name as original application
        ml_app="nemos-demo",
    )
 
@@ -152,13 +152,13 @@ To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo e
    ```
 
 ### Usage
-After you complete the setup steps, you can view NeMo Evaluator's model evaluation scores attached to the LLM Observability trace in Datadog:
+After you complete the setup steps, you can view NeMo Evaluator's model evaluation scores attached to the Agent Observability trace in Datadog:
 
-{{< img src="llm_observability/nemo-demo-after-eval.png" alt="An LLM Observability trace with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
+{{< img src="llm_observability/nemo-demo-after-eval.png" alt="An Agent Observability trace with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
-You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview. On the traces list, click on **Options** to add the evaluation scores as a column:
+You can view a breakdown of your NeMo Evaluator's model evaluation results in Agent Observability's dashboard and Application Overview. On the traces list, click on {{< ui >}}Options{{< /ui >}} to add the evaluation scores as a column:
 
-{{< img src="llm_observability/nemo-demo-traces-view-eval.png" alt="An LLM Observability traces list with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
+{{< img src="llm_observability/nemo-demo-traces-view-eval.png" alt="An Agent Observability traces list with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
 ## Further reading
 
@@ -166,3 +166,4 @@ You can view a breakdown of your NeMo Evaluator's model evaluation results in LL
 
 [1]: /llm_observability/setup/sdk/python
 [2]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html
+[3]: https://docs.nvidia.com/nemo/microservices/latest/evaluator/index.html

@@ -1,5 +1,6 @@
 ---
 title: Metrics without Limits™
+description: "Decouple custom metric ingestion and indexing to control volumes and costs by selecting which tags remain queryable."
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
@@ -102,14 +103,25 @@ Configuring your tags gives you control over which custom metrics can be queried
 - **Ingested Custom Metrics**: The original volume of custom metrics based on all ingested tags.
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations).
 
-**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
+**Note: Under cardinality pricing, only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
 Learn more about [Custom Metrics Billing][8].
+
+### Under Metric Name pricing
+
+If your organization uses [Metric Name pricing][15] instead of cardinality pricing, the ingested-versus-indexed relationship works differently:
+
+| Aspect                                       | Cardinality pricing                                              | Metric Name pricing                                                                  |
+|----------------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| Metrics that contribute to ingested volume   | Only metrics configured with Metrics without Limits™             | All metrics (every datapoint submitted)                                              |
+| Distribution metric multiplier               | Behavior depends on Metrics without Limits™ configuration        | Applies to both ingested and indexed regardless of configuration                     |
+
+For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 
 ## Getting started with Metrics without Limits™
 
 1. Configure your Top 20 metrics on your [Plan & Usage page][9] from the Metrics Summary page or by using the [API][2].
-   You can use bulk metric configuration (`*` syntax) to quickly configure tags on multiple metrics. Datadog notifies you when the bulk configuration job is completed.
+   You can use bulk metric configuration (`*` syntax) to configure tags on multiple metrics. Datadog notifies you when the bulk configuration job is completed.
 
 **Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
 
@@ -151,3 +163,4 @@ Learn more about [Custom Metrics Billing][8].
 [12]: https://app.datadoghq.com/event/stream
 [13]: /api/latest/metrics/#configure-tags-for-multiple-metrics
 [14]: /api/latest/metrics/#delete-tags-for-multiple-metrics
+[15]: /account_management/billing/metric_name_pricing/

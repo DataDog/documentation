@@ -1,27 +1,31 @@
 ---
 title: Analyze LLM Applications with Claude Code Skills
-description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, and bootstrap evaluators against your live production data.
+description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators against your live production data.
 further_reading:
     - link: '/llm_observability/evaluations/'
       tag: 'Documentation'
-      text: 'LLM Observability Evaluations'
+      text: 'Agent Observability Evaluations'
     - link: '/llm_observability/experiments/'
       tag: 'Documentation'
       text: 'LLM Experiments'
     - link: '/llm_observability/guide/evaluation_developer_guide'
       tag: 'Guide'
       text: 'Evaluation Developer Guide: Build custom evaluators'
+    - link: 'https://github.com/datadog-labs/agent-skills'
+      tag: 'GitHub'
+      text: 'datadog-labs/agent-skills'
 ---
 
 ## Overview
 
-Datadog provides a set of [Claude Code][1] skills that bring LLM Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, and generate evaluators — all against your live production data.
+Datadog provides a set of [Claude Code][1] skills that bring Agent Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators — all against your live production data.
 
 | Skill | What it does |
 |-------|-------------|
 | `/llm-obs-session-classify` | Classify whether user intent was satisfied in a session, trace, or batch of sessions from an ml_app |
 | `/llm-obs-trace-rca` | Root cause analysis on failing production LLM traces |
 | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK from a labeled dataset or sample fixtures |
 | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators from trace data |
 | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify sessions → root cause analysis → bootstrap evaluators |
 
@@ -32,12 +36,27 @@ The skills produce structured, actionable output — RCA reports with before/aft
 ### Prerequisites
 
 - [Claude Code][1] installed and authenticated
-- At least one LLM application [instrumented with LLM Observability][2] and producing traces
-- A data backend: either the Datadog MCP server **or** the `pup` CLI 
+- At least one LLM application [instrumented with Agent Observability][2] and producing traces
+- A data backend: either the Datadog MCP server **or** the `pup` CLI
+
+### Install the skills
+
+The skills are published in the [agent-skills][6] repository. Clone the repository and copy the Agent Observability skills into your Claude Code skills directory:
+
+```shell
+git clone https://github.com/datadog-labs/agent-skills
+cp -r agent-skills/dd-llmo/llm-obs-experiment-analyzer ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-eval-pipeline ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-eval-bootstrap ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-session-classify ~/.claude/skills
+cp -r agent-skills/dd-llmo/llm-obs-trace-rca ~/.claude/skills
+```
+
+The skills are available in any Claude Code session after copying.
 
 ### Datadog MCP server
 
-To use the Datadog MCP server option, connect the LLM Observability MCP server to your Claude Code session:
+To use the Datadog MCP server option, connect the Agent Observability MCP server to your Claude Code session:
 
 ```shell
 claude mcp add --scope user --transport http datadog-llmo-mcp \
@@ -67,12 +86,12 @@ In pup mode, all Datadog API calls are made through `pup llm-obs` subcommands in
 | Mode | Invoke with | Use when |
 |------|-------------|----------|
 | Session | `session_id` | Evaluating a specific session |
-| Trace | `trace_id` | Evaluating a single LLM Observability trace |
+| Trace | `trace_id` | Evaluating a single Agent Observability trace |
 | App | `ml_app` | Sampling and classifying a batch of recent sessions or traces |
 
 The skill pulls from up to three signal sources, and accuracy improves the more data it has access to:
 
-- **LLM Observability traces** — the full span tree, conversation content, tool call results, and eval judge verdicts. Always available.
+- **Agent Observability traces** — the full span tree, conversation content, tool call results, and eval judge verdicts. Always available.
 - **RUM behavioral signals** — page views, custom actions, dwell time, and explicit feedback events that confirm or contradict what the trace shows. Available when RUM is instrumented for your app.
 - **Audit Trail** — server-confirmed write events (dashboards created, monitors modified, notebooks deleted) that prove whether the assistant's actions actually landed. Most authoritative signal when the session involved asset creation or editing.
 
@@ -112,6 +131,32 @@ The skill highlights which metrics improved or regressed, which event categories
 ```
 /llm-obs-experiment-analyzer experiment_id=exp-123
 /llm-obs-experiment-analyzer experiment_id=exp-456 baseline_id=exp-123
+```
+
+### Generate experiment code with the Python SDK
+
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The generated file is either a `.py` script or a Jupyter `.ipynb` notebook matching the canonical [reference notebooks][7], with all eight sections present (env setup, `LLMObs.enable`, dataset, task placeholder, evaluators, experiment, run, results inspection) and a `# TODO(user)` marker on the task and evaluators so the placeholder cannot ship by accident.
+
+The dataset source can be: a local `DatasetRecordRaw[]` JSON file (inlined into the generated code), a CSV (loaded at runtime with `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (fetched at runtime with `LLMObs.pull_dataset`), or — by default — a small inline sample so the file is runnable as-is. Every generated experiment is tagged with `generated_by=claude-code` in both the experiment `config` and `tags` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--format` | `py` | `py` (single `.py` file) or `ipynb` (Jupyter notebook with one cell per section) |
+| `--dataset` | none (inline 3-record sample) | Path to a local `DatasetRecordRaw[]` JSON or CSV file. Mutually exclusive with `--dataset-name` |
+| `--dataset-name` | none | Name of an existing Datadog dataset to fetch at runtime with `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
+| `--dataset-version` | latest | Pin to a specific dataset version when using `--dataset-name` |
+| `--project-name` | `experiment-<service-name>` (inferred from the codebase) | Datadog project name visible in the LLM Experiments UI |
+| `--evaluator-style` | `function` | `function` (plain functions), `class` (`BaseEvaluator` subclasses), or `remote` (`RemoteEvaluator` instances) |
+| `--jobs` | `10` | Concurrency passed to `experiment.run(jobs=N)` |
+| `--output` | `./experiments/experiment.<ext>` | Output file path; extension derives from `--format` |
+
+**Examples**
+
+```
+/llm-obs-experiment-py-bootstrap
+/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --dataset-name qa_v3 --project-name customer-qa
+/llm-obs-experiment-py-bootstrap --evaluator-style remote --jobs 5
 ```
 
 ### Bootstrap evaluators from trace data
@@ -187,3 +232,5 @@ If you are new to evaluating an LLM application, the recommended flow is:
 [3]: /llm_observability/experiments/
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: https://datadoghq.atlassian.net/wiki/spaces/BITSAI/pages/5226692942/pup+CLI
+[6]: https://github.com/datadog-labs/agent-skills
+[7]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks

@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Python tracer (`ddtrace`).
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -20,10 +20,10 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 Before setting up the Python Feature Flags SDK, ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][2] enabled
+- **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
 - **Datadog [API key][3]** configured on the Agent
 - **Datadog Python SDK** `ddtrace` version 3.19.0 or later
-- **OpenFeature Python SDK** `openfeature-sdk` version 0.5.0 or later
+- **OpenFeature Python SDK** `openfeature-sdk`: version 0.5.0 or later (version 0.7.0 or later required if you use provider event handlers to wait for initialization)
 
 Set the following environment variables:
 
@@ -31,10 +31,15 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Optional: Enable flag evaluation metrics
+export DD_METRICS_OTEL_ENABLED=true
+
 # Required: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
 ## Installation
 
@@ -53,7 +58,7 @@ openfeature-sdk>=0.5.0
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog Python tracer's Remote Configuration system to receive flag configurations.
 
 {{< code-block lang="python" >}}
 from ddtrace import tracer
@@ -76,6 +81,8 @@ client = api.get_client()
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="python" >}}
 from openfeature.evaluation_context import EvaluationContext
