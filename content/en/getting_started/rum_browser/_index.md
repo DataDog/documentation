@@ -21,12 +21,24 @@ further_reading:
 
 ## Overview
 
-Datadog Real User Monitoring (RUM) gives you visibility into your web application from your users' perspective. After setup, RUM automatically collects:
+Datadog Real User Monitoring (RUM) gives you visibility into your web application from your users' perspective. Backend monitoring tells you when a service is slow or throwing errors. RUM tells you what that looks like for users trying to complete a task.
+
+With RUM, you can answer questions like:
+
+- Which pages have the worst load times, and which users are affected?
+- Did a recent deployment introduce new JavaScript errors or performance regressions?
+- When a user reports a problem, what exactly did they experience?
+- Are users abandoning a flow because of an error, or because of friction in the UI?
+
+RUM automatically collects the data needed to answer these questions:
 
 - **Page performance**: Load times and Core Web Vitals for every pageview
 - **User interactions**: Clicks, form submissions, and navigation
 - **Errors**: JavaScript errors and network failures
 - **Resources**: Request timing for images, scripts, stylesheets, and API calls
+- **Sessions**: A full timeline of everything a user did, with optional video-like [Session Replay][5]
+
+When connected to Datadog APM, RUM links frontend sessions to backend traces for end-to-end visibility across your entire stack.
 
 This guide walks you through creating a RUM application, installing the Browser SDK, and exploring your first data in Datadog.
 
