@@ -13,7 +13,7 @@ further_reading:
     text: "NDM Troubleshooting"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/device-health/" btn_hidden="false" header="Device Health is in Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/network-device-remediation-with-bits/" btn_hidden="false" header="Device Health is in Preview">}}
 {{< /callout >}}
 
 ## Overview
