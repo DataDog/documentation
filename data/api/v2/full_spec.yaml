@@ -1780,6 +1780,14 @@ components:
       required: true
       schema:
         type: string
+    TagIndexingRuleId:
+      description: ID of the tag indexing rule.
+      example: 00000000-0000-0000-0000-000000000001
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
     TagKey:
       description: The Cloud Cost Management tag key. Tag keys can contain forward slashes (for example, `kubernetes/instance`).
       in: path
@@ -95067,6 +95075,414 @@ components:
       type: string
       x-enum-varnames:
         - TAG
+    TagIndexingRuleAttributes:
+      description: Attributes of a tag indexing rule.
+      properties:
+        created_at:
+          description: Timestamp when the rule was created.
+          example: "2024-01-15T12:00:00.000Z"
+          format: date-time
+          readOnly: true
+          type: string
+        created_by_handle:
+          description: Handle of the user who created the rule.
+          example: user@datadoghq.com
+          readOnly: true
+          type: string
+        exclude_tags_mode:
+          description: >-
+            When true, the rule excludes the listed tags and indexes all others. When false (default), the rule includes only the listed tags.
+          example: false
+          type: boolean
+        ignored_metric_name_matches:
+          description: Metric name prefixes excluded from the rule's scope.
+          example:
+            - "dd.test.excluded.*"
+          items:
+            type: string
+          type: array
+        metric_name_matches:
+          description: Metric name prefixes (glob patterns) this rule applies to.
+          example:
+            - "dd.test.*"
+          items:
+            type: string
+          type: array
+        modified_at:
+          description: Timestamp when the rule was last modified.
+          example: "2024-01-15T12:00:00.000Z"
+          format: date-time
+          readOnly: true
+          type: string
+        modified_by_handle:
+          description: Handle of the user who last modified the rule.
+          example: user@datadoghq.com
+          readOnly: true
+          type: string
+        name:
+          description: Human-readable name for the rule.
+          example: my-indexing-rule
+          type: string
+        options:
+          $ref: "#/components/schemas/TagIndexingRuleOptions"
+        rule_order:
+          description: >-
+            Evaluation order within the org. Lower values are evaluated first. Assigned server-side on create (max+1); pass on update to change the rule's position.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
+        tags:
+          description: Tag keys managed by this rule.
+          example:
+            - env
+            - service
+          items:
+            type: string
+          type: array
+      type: object
+    TagIndexingRuleCreateAttributes:
+      description: Attributes for creating a tag indexing rule.
+      properties:
+        exclude_tags_mode:
+          description: >-
+            When true, the rule excludes the listed tags and indexes all others. When false (default), the rule includes only the listed tags.
+          example: false
+          type: boolean
+        ignored_metric_name_matches:
+          description: Metric name prefixes excluded from the rule's scope.
+          items:
+            type: string
+          type: array
+        metric_name_matches:
+          description: Metric name prefixes (glob patterns) this rule applies to.
+          example:
+            - "dd.test.*"
+          items:
+            type: string
+          type: array
+        name:
+          description: Human-readable name for the rule.
+          example: my-indexing-rule
+          type: string
+        options:
+          $ref: "#/components/schemas/TagIndexingRuleOptions"
+        tags:
+          description: Tag keys managed by this rule.
+          example:
+            - env
+            - service
+          items:
+            type: string
+          type: array
+      required:
+        - name
+        - metric_name_matches
+      type: object
+    TagIndexingRuleCreateData:
+      description: Data object for creating a tag indexing rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleCreateAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleType"
+      required:
+        - type
+        - attributes
+      type: object
+    TagIndexingRuleCreateRequest:
+      description: Request body for creating a tag indexing rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleCreateData"
+      required:
+        - data
+      type: object
+    TagIndexingRuleData:
+      description: A tag indexing rule resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleAttributes"
+        id:
+          description: The unique identifier (UUID) of the tag indexing rule.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleType"
+      type: object
+    TagIndexingRuleDynamicTags:
+      description: Configuration for including dynamically queried tags.
+      properties:
+        queried_tags_window_seconds:
+          description: Window in seconds for evaluating queried tags.
+          example: 3600
+          format: int64
+          type: integer
+        related_asset_tags:
+          description: When true, tags from related assets are included.
+          example: false
+          type: boolean
+      type: object
+    TagIndexingRuleExemptionAttributes:
+      description: Attributes of a tag indexing rule exemption.
+      properties:
+        created_at:
+          description: Timestamp when the exemption was created.
+          example: "2024-01-15T12:00:00.000Z"
+          format: date-time
+          readOnly: true
+          type: string
+        created_by_handle:
+          description: Handle of the user who created the exemption.
+          example: user@datadoghq.com
+          readOnly: true
+          type: string
+        kind:
+          description: >-
+            Discriminates between an explicit exemption (`exemption`) and a pre-existing legacy tag configuration acting as an implicit exclusion (`legacy_tag_configuration`).
+          example: exemption
+          type: string
+        reason:
+          description: The reason the metric is exempt from tag indexing rules.
+          example: This metric has a pre-existing tag configuration.
+          type: string
+      type: object
+    TagIndexingRuleExemptionCreateAttributes:
+      description: Attributes for creating a tag indexing rule exemption.
+      properties:
+        reason:
+          description: The reason the metric is exempt from tag indexing rules.
+          example: This metric has a pre-existing tag configuration.
+          type: string
+      required:
+        - reason
+      type: object
+    TagIndexingRuleExemptionCreateData:
+      description: Data object for creating a tag indexing rule exemption.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionCreateAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionType"
+      required:
+        - type
+        - attributes
+      type: object
+    TagIndexingRuleExemptionCreateRequest:
+      description: Request body for creating a tag indexing rule exemption.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionCreateData"
+      required:
+        - data
+      type: object
+    TagIndexingRuleExemptionData:
+      description: A tag indexing rule exemption resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionAttributes"
+        id:
+          description: The metric name, used as the resource ID.
+          example: dd.test.metric
+          type: string
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionType"
+      type: object
+    TagIndexingRuleExemptionResponse:
+      description: Response containing a tag indexing rule exemption.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionData"
+      readOnly: true
+      type: object
+    TagIndexingRuleExemptionType:
+      default: tag_indexing_rule_exemptions
+      description: The tag indexing rule exemption resource type.
+      enum:
+        - tag_indexing_rule_exemptions
+      example: tag_indexing_rule_exemptions
+      type: string
+      x-enum-varnames:
+        - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleMetricMatch:
+      description: Criteria for matching metrics based on query state.
+      properties:
+        is_queried:
+          description: Match metrics that are being queried.
+          type: boolean
+        not_queried:
+          description: Match metrics that are not being queried.
+          type: boolean
+        not_used_in_assets:
+          description: Match metrics not used in any dashboards or monitors.
+          type: boolean
+        queried_window_seconds:
+          description: Window in seconds for evaluating query state.
+          example: 3600
+          format: int64
+          type: integer
+        used_in_assets:
+          description: Match metrics used in dashboards or monitors.
+          type: boolean
+      type: object
+    TagIndexingRuleOptions:
+      description: Versioned configuration options for a tag indexing rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleOptionsData"
+        version:
+          description: Options schema version. Only `1` is supported.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    TagIndexingRuleOptionsData:
+      description: Data payload for tag indexing rule options.
+      properties:
+        dynamic_tags:
+          $ref: "#/components/schemas/TagIndexingRuleDynamicTags"
+        manage_preexisting_metrics:
+          description: >-
+            When true, the rule applies to metrics that were ingested before the rule was created.
+          example: true
+          type: boolean
+        metric_match:
+          $ref: "#/components/schemas/TagIndexingRuleMetricMatch"
+        override_previous_rules:
+          description: >-
+            When true, this rule's tag list overrides tags configured by earlier rules for the same metric. When false (default), tags from all matching rules are combined.
+          example: false
+          type: boolean
+      type: object
+    TagIndexingRuleOrderAttributes:
+      description: Attributes for the reorder operation.
+      properties:
+        rule_ids:
+          description: >-
+            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list.
+          example:
+            - "00000000-0000-0000-0000-000000000001"
+            - "00000000-0000-0000-0000-000000000002"
+          items:
+            type: string
+          type: array
+      type: object
+    TagIndexingRuleOrderData:
+      description: Data object for the reorder operation.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleOrderAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleType"
+      required:
+        - type
+        - attributes
+      type: object
+    TagIndexingRuleOrderRequest:
+      description: Request body for reordering tag indexing rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleOrderData"
+      required:
+        - data
+      type: object
+    TagIndexingRuleResponse:
+      description: Response containing a single tag indexing rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleData"
+      readOnly: true
+      type: object
+    TagIndexingRuleType:
+      default: tag_indexing_rules
+      description: The tag indexing rule resource type.
+      enum:
+        - tag_indexing_rules
+      example: tag_indexing_rules
+      type: string
+      x-enum-varnames:
+        - TAG_INDEXING_RULES
+    TagIndexingRuleUpdateAttributes:
+      description: Attributes for updating a tag indexing rule. All fields are optional; omitted fields are unchanged.
+      properties:
+        exclude_tags_mode:
+          description: >-
+            When true, the rule excludes the listed tags and indexes all others.
+          type: boolean
+        ignored_metric_name_matches:
+          description: Metric name prefixes excluded from the rule's scope.
+          items:
+            type: string
+          type: array
+        metric_name_matches:
+          description: Metric name prefixes (glob patterns) this rule applies to.
+          example:
+            - "dd.test.*"
+          items:
+            type: string
+          type: array
+        name:
+          description: Human-readable name for the rule.
+          example: my-indexing-rule
+          type: string
+        options:
+          $ref: "#/components/schemas/TagIndexingRuleOptions"
+        rule_order:
+          description: >-
+            Desired evaluation order. Returns 409 if the value conflicts with another rule; use POST /api/v2/metrics/tag-indexing-rules/order for atomic re-sequencing.
+          example: 2
+          format: int64
+          type: integer
+        tags:
+          description: Tag keys managed by this rule.
+          example:
+            - env
+            - service
+          items:
+            type: string
+          type: array
+      type: object
+    TagIndexingRuleUpdateData:
+      description: Data object for updating a tag indexing rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleType"
+      required:
+        - type
+      type: object
+    TagIndexingRuleUpdateRequest:
+      description: Request body for updating a tag indexing rule.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleUpdateData"
+      required:
+        - data
+      type: object
+    TagIndexingRulesResponse:
+      description: Response containing a page of tag indexing rules.
+      properties:
+        data:
+          description: Array of tag indexing rule objects.
+          items:
+            $ref: "#/components/schemas/TagIndexingRuleData"
+          type: array
+        links:
+          $ref: "#/components/schemas/MetricsListResponseLinks"
+        meta:
+          $ref: "#/components/schemas/TagIndexingRulesResponseMeta"
+      readOnly: true
+      type: object
+    TagIndexingRulesResponseMeta:
+      description: Pagination metadata for a list of tag indexing rules.
+      properties:
+        total:
+          description: Total number of tag indexing rules in the org.
+          example: 5
+          format: int64
+          type: integer
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example: ["team:A"]
@@ -142055,6 +142471,423 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+  /api/v2/metrics/tag-indexing-rules:
+    get:
+      description: List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.
+      operationId: ListTagIndexingRules
+      parameters:
+        - description: Page size (1–1000, default 100).
+          in: query
+          name: page[limit]
+          schema:
+            type: integer
+        - description: Page offset from the start of the list (default 0).
+          in: query
+          name: page[offset]
+          schema:
+            type: integer
+        - description: Substring filter on rule name.
+          in: query
+          name: search
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          exclude_tags_mode: false
+                          metric_name_matches:
+                            - "dd.test.*"
+                          name: my-indexing-rule
+                          rule_order: 1
+                          tags:
+                            - env
+                            - service
+                        id: "00000000-0000-0000-0000-000000000001"
+                        type: tag_indexing_rules
+                    meta:
+                      total: 1
+              schema:
+                $ref: "#/components/schemas/TagIndexingRulesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: List tag indexing rules
+      tags:
+        - Metrics
+      x-menu-order: 17
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+    post:
+      description: |-
+        Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
+        among existing rules; use the reorder endpoint to change the evaluation order.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: CreateTagIndexingRule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      metric_name_matches:
+                        - "dd.test.*"
+                      name: my-indexing-rule
+                      tags:
+                        - env
+                        - service
+                    type: tag_indexing_rules
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        exclude_tags_mode: false
+                        metric_name_matches:
+                          - "dd.test.*"
+                        name: my-indexing-rule
+                        rule_order: 1
+                        tags:
+                          - env
+                          - service
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: tag_indexing_rules
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Create a tag indexing rule
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 18
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+  /api/v2/metrics/tag-indexing-rules/order:
+    post:
+      description: |-
+        Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
+        The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: ReorderTagIndexingRules
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      rule_ids:
+                        - "00000000-0000-0000-0000-000000000001"
+                        - "00000000-0000-0000-0000-000000000002"
+                    type: tag_indexing_rules
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleOrderRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Reorder tag indexing rules
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+  /api/v2/metrics/tag-indexing-rules/{id}:
+    delete:
+      description: |-
+        Soft-delete a tag indexing rule. Idempotent: returns 204 whether the rule existed or was already deleted.
+        Remaining rules in the org are automatically re-sequenced to keep `rule_order` dense and 1-based.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: DeleteTagIndexingRule
+      parameters:
+        - $ref: "#/components/parameters/TagIndexingRuleId"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Delete a tag indexing rule
+      tags:
+        - Metrics
+      x-menu-order: 22
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+    get:
+      description: Get a single tag indexing rule by its UUID.
+      operationId: GetTagIndexingRule
+      parameters:
+        - $ref: "#/components/parameters/TagIndexingRuleId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        exclude_tags_mode: false
+                        metric_name_matches:
+                          - "dd.test.*"
+                        name: my-indexing-rule
+                        rule_order: 1
+                        tags:
+                          - env
+                          - service
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: tag_indexing_rules
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: Get a tag indexing rule
+      tags:
+        - Metrics
+      x-menu-order: 20
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+    put:
+      description: |-
+        Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
+        Setting `rule_order` to a value already used by another rule returns 409; use the
+        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateTagIndexingRule
+      parameters:
+        - $ref: "#/components/parameters/TagIndexingRuleId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: my-updated-rule
+                      tags:
+                        - env
+                        - service
+                        - version
+                    type: tag_indexing_rules
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        exclude_tags_mode: false
+                        metric_name_matches:
+                          - "dd.test.*"
+                        name: my-updated-rule
+                        rule_order: 1
+                        tags:
+                          - env
+                          - service
+                          - version
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: tag_indexing_rules
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a tag indexing rule
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 21
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: |-
@@ -142443,6 +143276,235 @@ paths:
       tags:
         - Metrics
       x-menu-order: 13
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+  /api/v2/metrics/{metric_name}/tag-indexing-rule-exemptions:
+    delete:
+      description: |-
+        Remove a metric's exemption from tag indexing rules. Idempotent: returns 204 whether or not
+        an exemption existed. Any associated legacy tag configuration record is also removed.
+        Requires the `Manage Tags for Metrics` permission.
+      operationId: DeleteTagIndexingRuleExemption
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Delete a tag indexing rule exemption
+      tags:
+        - Metrics
+      x-menu-order: 26
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+    get:
+      description: |-
+        Returns why a metric is excluded from tag indexing rules.
+        Returns 200 with `kind=exemption` when an explicit exemption exists, 200 with
+        `kind=legacy_tag_configuration` when the metric has a legacy tag configuration acting as an
+        implicit exclusion, or 404 when neither applies.
+      operationId: GetTagIndexingRuleExemption
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        created_by_handle: user@datadoghq.com
+                        kind: exemption
+                        reason: This metric has a pre-existing tag configuration.
+                      id: dd.test.metric
+                      type: tag_indexing_rule_exemptions
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: Get a tag indexing rule exemption
+      tags:
+        - Metrics
+      x-menu-order: 24
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+    post:
+      description: |-
+        Exempt a metric from all tag indexing rules. The response includes the created
+        exemption resource. Requires the `Manage Tags for Metrics` permission.
+      operationId: CreateTagIndexingRuleExemption
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      reason: This metric has a pre-existing tag configuration.
+                    type: tag_indexing_rule_exemptions
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleExemptionCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        created_by_handle: user@datadoghq.com
+                        kind: exemption
+                        reason: This metric has a pre-existing tag configuration.
+                      id: dd.test.metric
+                      type: tag_indexing_rule_exemptions
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Create a tag indexing rule exemption
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 25
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+  /api/v2/metrics/{metric_name}/tag-indexing-rules:
+    get:
+      description: |-
+        List the tag indexing rules that apply to a given metric, sorted by `rule_order`.
+        Matching is performed server-side using each rule's `metric_name_matches` glob patterns.
+      operationId: ListTagIndexingRulesForMetric
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data: []
+                    meta:
+                      total: 0
+              schema:
+                $ref: "#/components/schemas/TagIndexingRulesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: List tag indexing rules for a metric
+      tags:
+        - Metrics
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
