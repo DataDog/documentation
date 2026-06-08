@@ -75,18 +75,18 @@ The following are available as a Preview upon request:
 
 ### Strict Mode
 
-By default, Data Access Control operates in _Standard mode_: any data outside a Restricted Dataset remains visible to users with appropriate permissions. _Strict Mode_ inverts this for a specific telemetry type: once enabled, users see no data for that telemetry type unless they are explicitly granted access through a Restricted Dataset.
+By default, Data Access Control operates in _Standard Mode_, which means any data outside a Restricted Dataset remains visible to users with appropriate permissions. _Strict Mode_ inverts this for a specific telemetry type: once enabled, users see no data for that telemetry type unless they are explicitly granted access through a Restricted Dataset.
 
 Strict Mode is useful for especially sensitive data, when:
-- Telemetry tagging is inconsistent, so a Standard-mode boundary risks leaving sensitive records uncovered.
+- Telemetry tagging is inconsistent, so a Standard Mode boundary risks leaving sensitive records uncovered.
 - New tag values are added frequently, and you cannot guarantee every new value is matched by an existing Restricted Dataset.
 - Compliance posture requires a default-deny stance for a telemetry type.
 
 Strict Mode is configured per telemetry type. A telemetry type must have at least one Restricted Dataset before it can be switched to Strict Mode. This prevents unintentional loss of access. If all Restricted Datasets are later deleted from a telemetry type in Strict Mode, only [Unrestricted User Groups](#unrestricted-user-groups) retain access until new datasets are created or the mode is switched back to Standard.
 
-Restricted Datasets cannot be shared between Standard and Strict mode (each dataset belongs to one mode).
+Restricted Datasets cannot be shared between Standard and Strict modes (each dataset belongs to one mode).
 
-**Before enabling Strict Mode**, verify what data is _not_ already in a Restricted Dataset for that telemetry type, since that data becomes hidden once Strict Mode turns on. Review the existing Restricted Datasets on the [Data Access Controls][7] page to confirm coverage.
+**Before enabling Strict Mode**, verify what data is _not_ already in a Restricted Dataset for that telemetry type. That data is hidden once Strict Mode is enabled. Review the existing Restricted Datasets on the [Data Access Controls][7] page to confirm coverage.
 
 To change restriction mode for a telemetry type, navigate to [Data Access Controls][7]. Users must have the [`user_access_manage` permission][5] to change restriction modes.
 
@@ -94,9 +94,9 @@ To change restriction mode for a telemetry type, navigate to [Data Access Contro
 
 Some users, such as high-privilege admins or central observability teams with access to data across the entire organization, need full visibility into a telemetry type regardless of any Restricted Datasets. Rather than adding these users to every Restricted Dataset individually, you can grant their team or role _unrestricted access_ for a specific telemetry type.
 
-A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or restriction mode. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type: a role can have unrestricted access to Logs without affecting access to RUM.
+A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or restriction mode. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM.
 
-Unrestricted User Groups pair especially well with Strict Mode: they let designated admins keep working without being added to every dataset.
+Unrestricted User Groups pair especially well with Strict Mode because they let designated admins keep working without being added to every dataset.
 
 **Note:** Other access control methods (such as [Logs Restriction Queries][11] and [Permissions][3]) still apply to users in Unrestricted User Groups.
 
