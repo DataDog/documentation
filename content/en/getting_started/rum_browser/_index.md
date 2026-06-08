@@ -208,6 +208,64 @@ Copy the snippet from the Datadog UI and add it as early as possible in the `<he
 {{< /code-block >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v7/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ap2.datadoghq.com',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
+      trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v7.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '{{< region-param key="dd_site" >}}',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
+      trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
 Fill in the values for your application:
 
 | Parameter | Value | Description |
