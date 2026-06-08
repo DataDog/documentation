@@ -58,22 +58,11 @@ Click **Compare Plans** to view side-by-side comparisons of the current and opti
 
 {{< img src="database_monitoring/database_optimization_plan_comparison_map_view.png" alt="The Compare Plans Map View, showing added and removed operations for an optimized query." style="width:100%;">}}
 
-### Create a pull request
+### Review the pull request
 
-To create a PR to apply the optimization fix to your database, select **Review PR by Bits AI**. The GitHub PR opens with a pre-populated description that includes the simulation results.
+To review the PR for the optimization fix to your database, select **Review PR by Bits AI**. The GitHub PR opens with a pre-populated description that includes the simulation results.
 
 <div class="alert alert-info">Automated pull requests require APM configured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
-
-## Priority levels
-
-Optimizations are ranked by priority to help you focus on the highest-impact issues first:
-
-| Priority | Optimization types | Reason |
-|---|---|---|
-| High | OFFSET without ORDER BY, Idle in Transaction | Data correctness risk or blocking behavior |
-| Medium | Missing Index, Large ORDER BY without LIMIT | Significant performance impact |
-| Low | SELECT \*, Query Rewrite | Performance suggestions |
-
 
 ## Further reading
 
