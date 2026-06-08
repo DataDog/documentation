@@ -40,17 +40,14 @@ To use the Slack integration, [connect your Slack workspace to Bits Investigatio
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-### APM latency (Preview)
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits Investigations started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+### APM latency
 
 #### APM latency graphs on service pages
 
-1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click {{< ui >}}Investigate{{< /ui >}}.
-1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
-1. Click {{< ui >}}Investigate with Bits Investigation{{< /ui >}} to run a deeper investigation.
+1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate.
+1. Next to the latency graph, click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+
+For more information, see [Latency investigations][2].
 
 #### APM latency Watchdog stories
 
@@ -177,7 +174,7 @@ Once the investigation is complete, you can switch to the {{< ui >}}Investigatio
 The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits Investigation on your on-call efficiency.
 
 [1]: https://app.datadoghq.com/apm/home
-[2]: /tracing/guide/latency_investigator/
+[2]: /bits_ai/bits_chat/#latency-investigations
 [3]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
 [4]: /change_tracking
 [5]: https://app.datadoghq.com/bits-ai/monitors/supported
