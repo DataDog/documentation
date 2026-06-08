@@ -1,7 +1,6 @@
 ---
 title: Autonomous Systems View
 description: Investigate the Network Path Autonomous Systems View
-is_beta: true
 further_reading:
 - link: "/network_monitoring/network_path/list_view"
   tag: "Documentation"
@@ -19,11 +18,11 @@ further_reading:
 
 ## Overview
 
-The Autonomous Systems (AS) View provides visibility into the network providers and Internet Service Providers that carry your traffic across the BGP (Border Gateway Protocol) routing layer. This view monitors latency and performance metrics for every AS in your network paths, helping you pinpoint exactly which upstream providers are experiencing issues when your network performance degrades.
+The Autonomous Systems (AS) View provides visibility into the network providers and internet service providers (ISPs) that carry your traffic across the Border Gateway Protocol (BGP) routing layer. This view monitors latency and performance metrics for every AS in your network paths, helping you pinpoint exactly which upstream providers are experiencing issues when your network performance degrades.
 
 BGP routing issues and provider-specific problems are difficult to diagnose because they sit outside your direct control. The AS View makes these invisible layers visible, giving you the data to answer questions like "Is this a peering issue?" or "Did our traffic shift to a different transit provider?" without manually tracing routes or parsing BGP tables.
 
-Select [**Autonomous Systems (AS)**][1] in the [Network Path Explorer][2] to get started. 
+To get started, go to the Network Path Explorer and click [**Autonomous Systems (AS)**][1].
 
 ## Dashboard
 
