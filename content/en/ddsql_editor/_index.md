@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
   tag: "Blog"
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-ddsql-editor"
+  tag: "Learning Center"
+  text: "Getting Started with DDSQL Editor"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
