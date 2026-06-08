@@ -1,6 +1,6 @@
 ---
 title: External Evaluations
-description: Submit custom evaluations to LLM Observability using the Python SDK or the LLM Observability API to track user feedback and response quality.
+description: Submit custom evaluations to Agent Observability using the Python SDK or the Agent Observability API to track user feedback and response quality.
 aliases:
     - /tracing/llm_observability/submit_evaluations
     - /llm_observability/submit_evaluations
@@ -11,7 +11,7 @@ further_reading:
       text: 'Learn about building custom evaluators'
     - link: '/llm_observability/setup/sdk'
       tag: 'Documentation'
-      text: 'Learn about the LLM Observability SDK for Python'
+      text: 'Learn about the Agent Observability SDK for Python'
     - link: '/llm_observability/setup/api'
       tag: 'Documentation'
       text: 'Learn about the Evaluations API'
@@ -23,7 +23,7 @@ further_reading:
 ## Overview
 
 In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
-While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). Use this naming convention for the evaluation label:
+While Agent Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to Agent Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [Agent Observability API](#submitting-evaluations-with-the-api). Use this naming convention for the evaluation label:
 
 * Evaluation labels must start with a letter.
 * Evaluation labels must only contain ASCII alphanumerics or underscores.
@@ -39,7 +39,7 @@ Evaluation labels must be unique for a given LLM application (<code>ml_app</code
 
 ## Submitting external evaluations with the SDK
 
-The LLM Observability SDK provides the methods `LLMObs.submit_evaluation()` and `LLMObs.export_span()` to help your traced LLM application submit external evaluations to LLM Observability. See the [Python][3] or [Node.js][4] SDK documentation for more details.
+The Agent Observability SDK provides the methods `LLMObs.submit_evaluation()` and `LLMObs.export_span()` to help your traced LLM application submit external evaluations to Agent Observability. See the [Python][3] or [Node.js][4] SDK documentation for more details.
 
 <div class="alert alert-info">For building reusable, class-based evaluators with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
@@ -76,7 +76,7 @@ def llm_call():
 
 ## Submitting external evaluations with the API
 
-You can use the evaluations API provided by LLM Observability to send evaluations associated with spans, traces, or sessions to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
+You can use the evaluations API provided by Agent Observability to send evaluations associated with spans, traces, or sessions to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
 
 To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation. Additionally, <code>span_id</code> and <code>trace_id</code> values must be provided as **decimal** strings. If your OpenTelemetry instrumentation produces hexadecimal IDs, convert them to decimal before submitting. For example, in Python: <code>str(int(hex_span_id, 16))</code>.
 
