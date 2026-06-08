@@ -1,0 +1,265 @@
+---
+title: Getting Started with Browser RUM
+description: Set up Real User Monitoring (RUM) to track user sessions, performance, and errors in your browser applications.
+further_reading:
+    - link: '/real_user_monitoring/application_monitoring/browser/'
+      tag: 'Documentation'
+      text: 'RUM Browser Monitoring'
+    - link: '/real_user_monitoring/explorer/'
+      tag: 'Documentation'
+      text: 'RUM Explorer'
+    - link: '/session_replay/browser/'
+      tag: 'Documentation'
+      text: 'Session Replay'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-rum'
+      tag: 'Learning Center'
+      text: 'Intro to Real User Monitoring (RUM)'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to boost your RUM understanding'
+---
+
+## Overview
+
+Datadog Real User Monitoring (RUM) gives you visibility into your web application from your users' perspective. After setup, RUM automatically collects:
+
+- **Page performance**: Load times and Core Web Vitals for every pageview
+- **User interactions**: Clicks, form submissions, and navigation
+- **Errors**: JavaScript errors and network failures
+- **Resources**: Request timing for images, scripts, stylesheets, and API calls
+
+This guide walks you through creating a RUM application, installing the Browser SDK, and exploring your first data in Datadog.
+
+## Prerequisites
+
+- A [Datadog account][1]
+- A browser-based web application
+
+## Create a RUM application
+
+1. In Datadog, go to [**Digital Experience** > **Add an Application**][2].
+1. Select **JavaScript** as the application type.
+1. Enter a name for your application, then click **Create Application**.
+
+Datadog generates a `clientToken` and `applicationId` for your application. Keep this page open, as you need these values in the next step.
+
+## Install the Browser SDK
+
+The Browser SDK collects RUM data from your application and sends it to Datadog. The fastest way to install it is with the CDN async method, which loads the SDK without blocking your page.
+
+Add the following snippet as early as possible in the `<head>` tag of every HTML page you want to monitor. Placing it early helps the SDK capture the full page load, including resources and errors that occur before the page finishes rendering.
+
+{{< site-region region="us" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.com',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v7/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.eu',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v7/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us3.datadoghq.com',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v7/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us5.datadoghq.com',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+{{< code-block lang="html" >}}
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v7/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ap1.datadoghq.com',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+{{< /code-block >}}
+{{< /site-region >}}
+
+Replace the following placeholder values:
+
+| Placeholder | Description |
+|---|---|
+| `<CLIENT_TOKEN>` | The client token generated when you created the RUM application |
+| `<APPLICATION_ID>` | The application ID generated when you created the RUM application |
+| `<SERVICE_NAME>` | A name for your application, such as `my-web-app` |
+| `<ENV_NAME>` | The environment your application runs in, such as `production` or `staging` |
+| `<APP_VERSION>` | The version of your application, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
+
+The `sessionSampleRate: 100` setting collects data for all sessions. The `sessionReplaySampleRate: 20` setting records [Session Replays][5] for a percentage of those sessions. **Note**: `sessionReplaySampleRate` is applied after `sessionSampleRate`, not independently. With the values above, 20% of all sessions have a replay. Adjust both to control data volume and cost.
+
+For alternative installation methods (npm, CDN synchronous), see [Browser Monitoring Setup][3].
+
+## Verify data in Datadog
+
+After deploying the SDK, navigate to your application and interact with a few pages. Then check that data is flowing:
+
+1. In Datadog, go to [**Digital Experience** > **RUM Applications**][2].
+1. Find your application. The status changes from **Pending** to active after Datadog receives the first events.
+1. Go to the [**RUM Explorer**][4] to see your first sessions.
+
+If your application still shows as **Pending** after several minutes, see [Troubleshooting][6].
+
+## Explore your data
+
+The [RUM Explorer][4] is where you search and analyze all collected data. Use it to:
+
+- **View sessions**: See everything a single user did in a session, including pages viewed, actions taken, and errors encountered
+- **Filter events**: Narrow sessions by browser, country, device, user attributes, or error type
+- **Visualize trends**: Switch from list view to timeseries, top lists, or other visualizations
+
+RUM also populates a prebuilt [Performance Overview dashboard][7] with Core Web Vitals, load times, and error rates for all your applications.
+
+## What's next?
+
+### Enable Session Replay
+
+[Session Replay][5] records video-like replays of user sessions, letting you watch exactly what a user did when they encountered a problem. Session Replay is already partially enabled with the `sessionReplaySampleRate: 20` setting in the snippet above. To view replays, go to the RUM Explorer and select **Session Replay available**.
+
+If your application displays sensitive data, configure `defaultPrivacyLevel` in your `DD_RUM.init()` call to control what appears in replays. The default masks all user input. See [Session Replay Privacy Options][12] for the full list of options.
+
+### Set up Error Tracking
+
+[Error Tracking][8] groups JavaScript errors into issues, tracks their volume over time, and alerts you when a new error appears. To get full stack traces instead of minified code, [upload source maps][9] as part of your build process.
+
+### Connect RUM with APM traces
+
+If you use Datadog APM, [connect RUM events with backend traces][10]. This gives you end-to-end visibility from user click, through your APIs, to database queries.
+
+### Identify users
+
+Associate RUM sessions with real users by calling `setUser` after authentication. This lets you search sessions by user ID, name, or email in the RUM Explorer and correlate issues to specific users.
+
+{{< code-block lang="javascript" >}}
+DD_RUM.onReady(function() {
+  DD_RUM.setUser({
+    id: '<USER_ID>',
+    name: '<USER_NAME>',
+    email: '<USER_EMAIL>',
+  });
+});
+{{< /code-block >}}
+
+### Advanced configuration
+
+After your initial setup, you can [configure the Browser SDK][11] to:
+
+- Override automatically detected view names
+- Capture custom actions and timings
+- Connect RUM to APM with `allowedTracingUrls`
+- Adjust sampling rates per environment
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.datadoghq.com/free-datadog-trial/
+[2]: https://app.datadoghq.com/rum/list
+[3]: /real_user_monitoring/application_monitoring/browser/setup/client/
+[4]: https://app.datadoghq.com/rum/explorer
+[5]: /session_replay/browser/
+[6]: /real_user_monitoring/application_monitoring/browser/troubleshooting/
+[7]: https://app.datadoghq.com/dash/integration/rum_overview
+[8]: /real_user_monitoring/error_tracking/browser/
+[9]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[10]: /real_user_monitoring/correlate_with_other_telemetry/
+[11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[12]: /session_replay/browser/privacy_options/
