@@ -133,7 +133,7 @@ Depuis une page de statut, cliquez sur **Publish Notice** et sélectionnez **Deg
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Exemple de modal de publication d'avis pour les dégradations" style="width:60%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_degradation_1.png" alt="Exemple de modal de publication d'avis pour les dégradations" style="width:60%;" >}}
 
 Après qu'un avis de dégradation a été examiné et publié, il :
 - Appears on the **Status Pages List** under Active Notices.
