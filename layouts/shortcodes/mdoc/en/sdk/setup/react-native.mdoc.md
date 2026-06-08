@@ -2,7 +2,9 @@
 React Native setup instructions.
 -->
 
-### Step 1 - Install the SDK
+{% stepper %}
+
+{% step title="Install the SDK" %}
 
 To install with npm, run:
 
@@ -16,7 +18,7 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native
 ```
 
-### Install dependencies for iOS
+#### Install dependencies for iOS
 
 Install the added pod:
 
@@ -24,7 +26,7 @@ Install the added pod:
 (cd ios && pod install)
 ```
 
-### Android
+#### Install dependencies for Android
 
 If you use a React Native version strictly over 0.67, make sure to use Java version 17. If you use React Native version equal or below 0.67, make sure to use Java version 11.
 
@@ -43,7 +45,9 @@ The minimum supported Android SDK version is API level 23. Make sure to set `min
 
 The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or higher in the Android application setup, which implies that you should use Build Tools version 31 or higher, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using a React Native version that's actively supported.
 
-### Step 2 - Specify application details in the UI
+{% /step %}
+
+{% step title="Specify application details in the UI" %}
 
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
 2. Choose `react-native` as the application type.
@@ -58,7 +62,9 @@ For data security, you must use a client token. If you used only [Datadog API ke
 
 For more information about setting up a client token, see the [Client Token documentation][10].
 
-### Step 3 - Initialize the library with application context
+{% /step %}
+
+{% step title="Initialize the library with application context" %}
 
 {% site-region region="us" %}
 
@@ -445,6 +451,9 @@ For example, if the current tracking consent is `.PENDING`:
 
 - If you change the value to `.GRANTED`, the React Native SDK sends all current and future data to Datadog;
 - If you change the value to `.NOTGRANTED`, the React Native SDK wipes all current data and does not collect future data.
+
+{% /step %}
+{% /stepper %}
 
 ### User interactions tracking
 

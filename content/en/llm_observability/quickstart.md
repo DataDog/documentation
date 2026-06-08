@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Get started with Datadog LLM Observability by instrumenting a Python, Node.js, or Java LLM application using the LLM Observability SDK.
+description: Get started with Agent Observability by instrumenting a Python, Node.js, or Java LLM application using the Agent Observability SDK.
 aliases:
     - /tracing/llm_observability/quickstart
 further_reading:
@@ -9,23 +9,30 @@ further_reading:
       text: 'Supported auto-instrumentation frameworks and libraries'
     - link: '/llm_observability/instrumentation/sdk'
       tag: 'Documentation'
-      text: 'LLM Observability SDK Reference for manual instrumentation'
+      text: 'Agent Observability SDK Reference for manual instrumentation'
     - link: '/llm_observability/instrumentation/api'
       tag: 'Documentation'
-      text: 'LLM Observability HTTP API for language-agnostic instrumentation'
+      text: 'Agent Observability HTTP API for language-agnostic instrumentation'
     - link: '/llm_observability/instrumentation/otel_instrumentation'
       tag: 'Documentation'
       text: 'Instrument with OpenTelemetry'
     - link: '/llm_observability/evaluations'
       tag: 'Evaluations'
       text: 'Configure Evaluations on your application'
+    - link: '/llm_observability/lapdog'
+      tag: 'Documentation'
+      text: 'Local development tool for Agent Observability'
 ---
 
-This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
+This page demonstrates using Datadog's Agent Observability SDK to instrument a Python, Node.js, or Java LLM application.
+
+### Try Agent Observability locally with lapdog
+
+To try Agent Observability locally, for free, [follow the steps][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
 
 ### Prerequisites
 
-LLM Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+Agent Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 ### Setup
 
@@ -64,7 +71,7 @@ After enabling, the SDK automatically traces calls to [supported Python framewor
    npm install dd-trace
    ```
 
-2. Import and initialize `dd-trace` with LLM Observability as the first dependency in your application entrypoint:
+2. Import and initialize `dd-trace` with Agent Observability as the first dependency in your application entrypoint:
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
@@ -75,10 +82,11 @@ After enabling, the SDK automatically traces calls to [supported Python framewor
 
 After enabling, the SDK automatically traces calls to [supported Node.js frameworks][1] such as OpenAI, LangChain, Vercel AI SDK, Bedrock, Anthropic, and more. If your framework is not listed, add [manual instrumentation][2] to trace your LLM calls directly.
 
-**Note**: Next.js and bundled applications (esbuild, Webpack) require additional configuration. See [Supported Node.js frameworks][1] for setup details.
+**Next.js**: See [Instrument a Next.js Application for Agent Observability][3] for properly configuring your Next.js applications with the Agent Observability SDK.
 
 [1]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
 [2]: /llm_observability/instrumentation/sdk?tab=nodejs
+[3]: /llm_observability/guide/nextjs_guide
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -106,7 +114,7 @@ After enabling, the SDK automatically traces calls to [supported Java frameworks
 {{% /tab %}}
 {{% tab "Other languages / HTTP API" %}}
 
-For languages other than Python, Node.js, or Java, use the [LLM Observability HTTP API][1] to send spans directly to Datadog without an SDK.
+For languages other than Python, Node.js, or Java, use the [Agent Observability HTTP API][1] to send spans directly to Datadog without an SDK.
 
 If your application emits [OpenTelemetry GenAI semantic convention][2]-compliant spans, see [OpenTelemetry Instrumentation][2] instead.
 
@@ -120,13 +128,13 @@ Your Datadog site is {{< region-param key="dd_site" code="true" >}}. Replace `<Y
 
 ### View traces
 
-Make requests to your application triggering LLM calls and then view traces in the {{< ui >}}Traces{{< /ui >}} tab [of the {{< ui >}}LLM Observability{{< /ui >}} page][3] in Datadog.
+Make requests to your application triggering LLM calls and then view traces in the {{< ui >}}Traces{{< /ui >}} tab [of the {{< ui >}}Agent Observability{{< /ui >}} page][3] in Datadog.
 
 If you don't see any traces:
 
 - **Check that your library is auto-instrumented**: Auto-instrumentation only captures calls to [supported frameworks and libraries][6]. Check the supported list for [Python][7], [Node.js][8], or [Java][9]. If your library is not listed, you need to add instrumentation manually.
-- **Add manual instrumentation**: Use the [LLM Observability SDK][5] to wrap your LLM calls with spans directly in code. This works for any library or model provider.
-- **Use the HTTP API**: The [LLM Observability HTTP API][10] accepts spans from any language or framework and does not require an SDK.
+- **Add manual instrumentation**: Use the [Agent Observability SDK][5] to wrap your LLM calls with spans directly in code. This works for any library or model provider.
+- **Use the HTTP API**: The [Agent Observability HTTP API][10] accepts spans from any language or framework and does not require an SDK.
 - **Use OpenTelemetry**: If your framework emits [OpenTelemetry GenAI semantic convention][11]-compliant spans, see [OpenTelemetry Instrumentation][11] for setup details.
 
 
@@ -140,7 +148,7 @@ After traces are being submitted from your application, you can:
 
 ## Example "Hello World" application
 
-See below for a simple application that can be used to begin exploring the LLM Observability product.
+See below for a simple application that can be used to begin exploring the Agent Observability product.
 
 
 {{< tabs >}}
@@ -222,3 +230,4 @@ See below for a simple application that can be used to begin exploring the LLM O
 [9]: /llm_observability/instrumentation/auto_instrumentation/?tab=java
 [10]: /llm_observability/instrumentation/api
 [11]: /llm_observability/instrumentation/otel_instrumentation
+[12]: /llm_observability/lapdog

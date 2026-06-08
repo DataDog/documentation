@@ -12,7 +12,7 @@ further_reading:
     - link: '/integrations/guide/source-code-integration/'
       tag: 'Documentation'
       text: 'Learn about Source Code Integration'
-    - link: '/bits_ai/mcp_server/'
+    - link: '/mcp_server/'
       tag: 'Documentation'
       text: 'Learn about the Datadog Model Context Protocol (MCP) Server'
     - link: 'https://www.datadoghq.com/blog/datadog-ide-plugins/'
@@ -91,7 +91,7 @@ The extension includes access to the [Datadog Model Context Protocol (MCP) Serve
 1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
-[3]: /bits_ai/mcp_server/
+[3]: /mcp_server/
 
 {{% /tab %}}
 
@@ -107,7 +107,7 @@ Install the extension either directly in the IDE, or from the web:
 Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can install the plugin from the [Cursor Marketplace][4] or in **Cursor Settings** > **Plugins**.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
-[3]: /bits_ai/mcp_server/setup/?tab=cursor
+[3]: /mcp_server/setup/?tab=cursor
 [4]: https://cursor.com/marketplace/datadog
 
 {{% /tab %}}

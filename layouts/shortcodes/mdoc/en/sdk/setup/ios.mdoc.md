@@ -23,7 +23,7 @@ Before you begin, you need:
 
 To send RUM data from your Apple platform application to Datadog, complete the following steps.
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Add the iOS SDK as a dependency" %}
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).

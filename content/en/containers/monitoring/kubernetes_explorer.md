@@ -83,16 +83,19 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 
 #### Prerequisites
 
-- OpenTelemetry Collector Contrib [v0.152.0][102] or later.
+- OpenTelemetry Collector Contrib [v0.153.0][102] or later.
+- OpenTelemetry Collector [Helm chart][107] v0.156.2 or later.
 - Access enabled on your Datadog instance. Contact your account representative to verify activation.
 
 #### Limitations
 
-The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server. Modify the time interval in [Resource collection](#resource-collection) if you experience issues.
+The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
 
 Recommendations:
 1. Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
 2. Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
+
+The following steps walk through the required components for Kubernetes Explorer. For a complete reference example that also collects Kubernetes infrastructure metrics, see [Kubernetes Metrics][111].
 
 #### 1. Create a Datadog API key secret
 
@@ -105,11 +108,11 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
 
 #### 2. Configure the cluster collector
 
-This setup deploys the OTel Collector as a Kubernetes Deployment. Create a `deployment-collector.yaml` file and add each of the following configuration sections.
+This setup deploys the OTel Collector as a Kubernetes Deployment. Create a `deployment-collector.yaml` file with the following configuration blocks, or merge them into your existing OpenTelemetry Collector values file.
 
 ##### Collector image and mode
 
-Set the Collector to run as a single-replica Deployment using the Contrib distribution:
+Set the Collector to run as a single-replica Deployment or as a DaemonSet using the Contrib distribution:
 
 ```yaml
 mode: deployment
@@ -117,7 +120,7 @@ replicaCount: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib
-  tag: 0.152.0
+  tag: 0.153.0
   pullPolicy: IfNotPresent
 
 extraEnvs:
@@ -128,77 +131,22 @@ extraEnvs:
         key: api-key
 ```
 
-##### RBAC permissions
+To run as a DaemonSet, set `mode: daemonset` and remove `replicaCount`.
 
-The `k8sobjects` receiver needs read access to the Kubernetes API. Grant `get`, `list`, and `watch` permissions for each resource type you want to appear in the Explorer:
+##### Kubernetes objects collection
+
+The `kubernetesObjects` [preset][107] automatically provisions the service account, RBAC permissions, and `k8sobjects` receiver defaults required to populate Kubernetes Explorer. Override the receiver `interval` to `3m`, which is required for Kubernetes Explorer:
 
 ```yaml
-clusterRole:
-  create: true
-  rules:
-    - apiGroups: [""]
-      resources:
-        - namespaces
-        - nodes
-        - nodes/spec
-        - nodes/stats
-        - pods
-        - pods/status
-        - replicationcontrollers
-        - replicationcontrollers/status
-        - resourcequotas
-        - services
-        - persistentvolumes
-        - persistentvolumeclaims
-        - serviceaccounts
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["apps"]
-      resources:
-        - daemonsets
-        - deployments
-        - replicasets
-        - statefulsets
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["extensions"]
-      resources:
-        - daemonsets
-        - deployments
-        - replicasets
-        - statefulsets
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["batch"]
-      resources:
-        - jobs
-        - cronjobs
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["autoscaling"]
-      resources:
-        - horizontalpodautoscalers
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["policy"]
-      resources:
-        - poddisruptionbudgets
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["rbac.authorization.k8s.io"]
-      resources:
-        - roles
-        - rolebindings
-        - clusterroles
-        - clusterrolebindings
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["storage.k8s.io"]
-      resources:
-        - storageclasses
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["networking.k8s.io"]
-      resources:
-        - networkpolicies
-        - ingresses
-      verbs: ["get", "list", "watch"]
-    - apiGroups: ["apiextensions.k8s.io"]
-      resources:
-        - customresourcedefinitions
-      verbs: ["get", "list", "watch"]
+presets:
+  kubernetesObjects:
+    enabled: true
+    watch: true
+
+config:
+  receivers:
+    k8sobjects:
+      interval: 3m
 ```
 
 ##### Datadog exporter
@@ -216,158 +164,6 @@ config:
         enabled: true
 ```
 
-##### Resource collection
-
-The [`k8sobjects`][100] receiver collects Kubernetes resource data using two modes for each resource type:
-- **`pull`**: Periodically fetches a full snapshot of the resource (every 3 minutes).
-- **`watch`**: Streams real-time updates as changes occur.
-
-```yaml
-  receivers:
-    k8sobjects:
-      auth_type: serviceAccount
-      objects:
-        - name: namespaces
-          mode: pull
-          interval: 3m
-        - name: namespaces
-          mode: watch
-        - name: pods
-          mode: pull
-          interval: 3m
-        - name: pods
-          mode: watch
-        - name: nodes
-          mode: pull
-          interval: 3m
-        - name: nodes
-          mode: watch
-        - name: replicasets
-          mode: pull
-          interval: 3m
-        - name: replicasets
-          mode: watch
-        - name: daemonsets
-          mode: pull
-          interval: 3m
-        - name: daemonsets
-          mode: watch
-        - name: statefulsets
-          mode: pull
-          interval: 3m
-          group: apps
-        - name: statefulsets
-          mode: watch
-          group: apps
-        - name: cronjobs
-          mode: pull
-          interval: 3m
-        - name: cronjobs
-          mode: watch
-        - name: jobs
-          mode: pull
-          interval: 3m
-        - name: jobs
-          mode: watch
-        - name: services
-          mode: pull
-          interval: 3m
-        - name: services
-          mode: watch
-        - name: deployments
-          mode: pull
-          interval: 3m
-          group: apps
-        - name: deployments
-          mode: watch
-          group: apps
-        - name: horizontalpodautoscalers
-          mode: pull
-          interval: 3m
-          group: autoscaling
-        - name: horizontalpodautoscalers
-          mode: watch
-          group: autoscaling
-        - name: roles
-          mode: pull
-          interval: 3m
-          group: rbac.authorization.k8s.io
-        - name: roles
-          mode: watch
-          group: rbac.authorization.k8s.io
-        - name: rolebindings
-          mode: pull
-          interval: 3m
-          group: rbac.authorization.k8s.io
-        - name: rolebindings
-          mode: watch
-          group: rbac.authorization.k8s.io
-        - name: clusterroles
-          mode: pull
-          interval: 3m
-          group: rbac.authorization.k8s.io
-        - name: clusterroles
-          mode: watch
-          group: rbac.authorization.k8s.io
-        - name: clusterrolebindings
-          mode: pull
-          interval: 3m
-          group: rbac.authorization.k8s.io
-        - name: clusterrolebindings
-          mode: watch
-          group: rbac.authorization.k8s.io
-        - name: storageclasses
-          mode: pull
-          interval: 3m
-          group: storage.k8s.io
-        - name: storageclasses
-          mode: watch
-          group: storage.k8s.io
-        - name: networkpolicies
-          mode: pull
-          interval: 3m
-          group: networking.k8s.io
-        - name: networkpolicies
-          mode: watch
-          group: networking.k8s.io
-        - name: ingresses
-          mode: pull
-          interval: 3m
-          group: networking.k8s.io
-        - name: ingresses
-          mode: watch
-          group: networking.k8s.io
-        - name: persistentvolumes
-          mode: pull
-          interval: 3m
-        - name: persistentvolumes
-          mode: watch
-        - name: persistentvolumeclaims
-          mode: pull
-          interval: 3m
-        - name: persistentvolumeclaims
-          mode: watch
-        - name: poddisruptionbudgets
-          mode: pull
-          interval: 3m
-          group: policy
-        - name: poddisruptionbudgets
-          mode: watch
-          group: policy
-        - name: serviceaccounts
-          mode: pull
-          interval: 3m
-        - name: serviceaccounts
-          mode: watch
-        - name: customresourcedefinitions
-          mode: pull
-          interval: 3m
-          group: apiextensions.k8s.io
-        - name: customresourcedefinitions
-          mode: watch
-          group: apiextensions.k8s.io
-```
-
 ##### Processors and pipeline
 
 Add a [`resourcedetection`][105] processor to detect the cluster UID and name.
@@ -376,7 +172,7 @@ Add a [`resourcedetection`][105] processor to detect the cluster UID and name.
 - Cluster name detection depends on your cloud provider. Check the [`resourcedetection` processor documentation][105] for supported providers (EKS, AKS, GCP) and required permissions.
 - If your provider is not supported, use a `resource/add-cluster-name` processor to set the cluster name manually. Replace `<YOUR_CLUSTER_NAME>` with your cluster name.
 
-Then wire the components together in a `logs/orchestrator` pipeline.
+Then connect the components in a `logs` pipeline.
 
 The following examples show two approaches. Use the cloud provider example if you run on EKS, AKS, or GCP. Use the manual fallback if your provider is not supported.
 
@@ -398,7 +194,7 @@ The following examples show two approaches. Use the cloud provider example if yo
 
   service:
     pipelines:
-      logs/orchestrator:
+      logs:
         receivers: [k8sobjects]
         processors: [resourcedetection]
         exporters: [datadog]
@@ -423,7 +219,7 @@ If the `resourcedetection` processor does not support your cloud provider, set t
 
   service:
     pipelines:
-      logs/orchestrator:
+      logs:
         receivers: [k8sobjects]
         processors: [resourcedetection, resource/add-cluster-name]
         exporters: [datadog]
@@ -445,13 +241,65 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
 
+#### 5. Correlate logs, metrics, and traces with Kubernetes Explorer (optional)
+
+To navigate between Kubernetes resources and their related logs, metrics, and traces, add the [`k8sattributes`][108] and [`resourcedetection`][105] processors to your existing collector pipelines. For `resourcedetection` configuration, see [Processors and pipeline](#processors-and-pipeline) above.
+
+```yaml
+processors:
+  k8sattributes:
+    auth_type: "serviceAccount"
+    extract:
+      metadata:
+        - k8s.pod.name
+        - k8s.pod.uid
+        - k8s.deployment.name
+        - k8s.namespace.name
+        - k8s.node.name
+        - k8s.replicaset.name
+        - k8s.statefulset.name
+        - k8s.daemonset.name
+        - k8s.cronjob.name
+        - k8s.job.name
+        - k8s.container.name
+    pod_association:
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.uid
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.ip
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.name
+          - from: resource_attribute
+            name: k8s.namespace.name
+      - sources:
+          - from: connection
+
+service:
+  pipelines:
+    logs:
+      processors: [k8sattributes, resourcedetection, ...]
+    metrics:
+      processors: [k8sattributes, resourcedetection, ...]
+    traces:
+      processors: [k8sattributes, resourcedetection, ...]
+```
+
+For a complete reference example, see the [DaemonSet collector configuration][109].
+
 [1]: https://app.datadoghq.com/orchestration/overview
 [100]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.152.0
+[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.153.0
 [104]: /getting_started/site/
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
+[107]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
+[108]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
+[111]: /opentelemetry/integrations/kubernetes_metrics/#setup
 
 {{% /tab %}}
 {{< /tabs >}}
