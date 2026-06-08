@@ -37,7 +37,7 @@ The Runtime Prioritization Engine prioritizes a finding when these signals indic
 
 ## Crown Jewels
 
-Crown Jewels are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
+[Crown Jewels][8] are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
 
 Crown Jewels update continuously as your environment changes. You can also add your own Crown Jewels manually in Datadog Cloud Security.
 
@@ -66,3 +66,4 @@ When ownership is known, the engine can route findings to the right team instead
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
 [7]: /security/cloud_security_management/guide/frontier_group/ownership_agent/
+[8]: /security/cloud_security_management/crown_jewels/

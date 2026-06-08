@@ -4,10 +4,10 @@ description: Learn about Datadog's Language Mismatch evaluation.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability terms and concepts"
+  text: "Learn about Agent Observability terms and concepts"
 - link: "/llm_observability/setup"
   tag: "Documentation"
-  text: "Learn how to set up LLM Observability"
+  text: "Learn how to set up Agent Observability"
 aliases:
     - /llm_observability/evaluations/quality_evaluations
     - /llm_observability/evaluations/managed_evaluations/quality_evaluations
@@ -21,7 +21,7 @@ Language mismatch is only supported for natural language prompts. Input and outp
 Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegian Bokmal, Bosnian, Bulgarian, Chinese, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, Georgian, German, Greek, Gujarati, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Irish, Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, Macedonian, Malay, Marathi, Mongolian, Norwegian Nynorsk, Persian, Polish, Portuguese, Punjabi, Romanian, Russian, Serbian, Slovak, Slovene, Spanish, Swahili, Swedish, Tamil, Telugu, Thai, Turkish, Ukrainian, Urdu, Vietnamese, Yoruba, Zulu
 {{% /collapse-content %}}
 
-{{< img src="llm_observability/evaluations/language_mismatch_4.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/language_mismatch_4.png" alt="A Language Mismatch evaluation detected by an open source model in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|

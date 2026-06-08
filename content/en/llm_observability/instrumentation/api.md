@@ -1,6 +1,6 @@
 ---
 title: HTTP API Reference
-description: Reference documentation for the LLM Observability HTTP API, used to send LLM traces and spans to Datadog from applications in any language.
+description: Reference documentation for the Agent Observability HTTP API, used to send LLM traces and spans to Datadog from applications in any language.
 aliases:
     - /tracing/llm_observability/api
     - /llm_observability/api
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The LLM Observability HTTP API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, Node.js, or Java, you can use the [LLM Observability SDKs][1].
+The Agent Observability HTTP API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, Node.js, or Java, you can use the [Agent Observability SDKs][1].
 
 The API accepts spans with timestamps no more than 24 hours old, allowing limited backfill of delayed data.
 
@@ -216,7 +216,7 @@ If the request is successful, the API responds with a 202 network code and an em
 
 #### Prompt
 
-<div class="alert alert-info">LLM Observability registers new versions of templates when the <code>template</code> or <code>chat_template</code> value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
+<div class="alert alert-info">Agent Observability registers new versions of templates when the <code>template</code> or <code>chat_template</code> value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
 
 {{< tabs >}}
 {{% tab "Model" %}}
@@ -224,7 +224,7 @@ If the request is successful, the API responds with a 202 network code and an em
 |----------------------|--------|--------------------------|
 | id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
 | name | string | Human-readable name for the prompt. |
-| version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, LLM Observability automatically generates a version by computing a hash of the template content. |
+| version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, Agent Observability automatically generates a version by computing a hash of the template content. |
 | template | string | Single string template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables. This should not be set with `chat_template`. |
 | chat_template | [[Message]](#message) | Multi-message template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables in message content. This should not be set with `template`. |
 | variables | Dict[key (string), string] | Variables used to render the template. Keys correspond to placeholder names in the template. |
