@@ -499,7 +499,7 @@ options:
 - label: OpenTelemetry
   id: otel_api
 
-- label: Datadog
+- label: Datadog API
   id: dd_api
 
 - label: C++
@@ -507,3 +507,24 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: BigQuery
+  id: bigquery
+
+- label: Databricks
+  id: databricks
+
+- label: Redshift
+  id: redshift
+
+- label: Snowflake
+  id: snowflake
+
+- label: JVM
+  id: jvm
+
+- label: C
+  id: c
+
+- label: GraalVM Native Image
+  id: graalvm_native_image

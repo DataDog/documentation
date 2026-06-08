@@ -9,6 +9,9 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"
+- link: "https://learn.datadoghq.com/courses/discovering-table-list-widgets"
+  tag: "Learning Center"
+  text: "Discovering Table, List, SLO, and Architecture Widgets"
 algolia:
   tags: ['event stream', 'log stream']
 ---

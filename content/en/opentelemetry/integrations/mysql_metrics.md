@@ -130,7 +130,7 @@ Add `hostmetrics` and `filelog` receiver if you configured them, for example:
 
 {{< mapping-table resource="mysql.csv">}}
 
-See [OpenTelemetry Metrics Mapping][2] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
 ## Further reading
 

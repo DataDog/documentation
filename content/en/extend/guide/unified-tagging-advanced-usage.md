@@ -64,7 +64,7 @@ tags.datadoghq.com/<container>.version
 
 ### Standard tags injection
 
-The [Datadog Admission Controller][5] converts standard tag labels into environment variables, and injects them into the user's application pod template. These environment variables are used by the APM tracers, DogStatsD clients, and the Datadog Agent. The Datadog Agent maps these values to tags:
+The [Datadog Admission Controller][5] converts standard tag labels into environment variables, and injects them into the user's application pod template. These environment variables are used by the Datadog SDKs, DogStatsD clients, and the Datadog Agent. The Datadog Agent maps these values to tags:
 
 ```
 tags.datadoghq.com/version -> DD_VERSION

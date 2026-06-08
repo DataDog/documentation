@@ -1,11 +1,11 @@
 ---
 title: Monitors
-description: "Use the Monitors overlay in Cloudcraft to view monitor states for your resources and services, and investigate alerting monitors with Bits AI SRE."
+description: "Use the Monitors overlay in Cloudcraft to view monitor states for your resources and services, and investigate alerting monitors with Bits Investigation."
 site_support_id: cloudcraft_monitors_overlay
 further_reading:
 - link: "/bits_ai/bits_ai_sre/"
   tag: "Documentation"
-  text: "Bits AI SRE"
+  text: "Bits Investigation"
 ---
 
 {{< callout btn_hidden="true" header="" >}}
@@ -37,15 +37,15 @@ Use the legend at the bottom of the diagram to filter monitors by alerting statu
 
 ### Hover panel
 
-Hover over a resource or service with monitors to see a count breakdown of associated monitors by status. The hover panel includes an **Investigate with Bits AI SRE** button that loads the three most recent alerting events for the selected monitor. From there, you can initiate an investigation or view an existing one.
+Hover over a resource or service with monitors to see a count breakdown of associated monitors by status. The hover panel includes an {{< ui >}}Investigate with Bits Investigation{{< /ui >}} button that loads the three most recent alerting events for the selected monitor. From there, you can initiate an investigation or view an existing one.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_hover_panel.png" alt="Cloudcraft Monitors overlay hover panel showing a monitor count breakdown by status and the Investigate with Bits AI SRE button." style="width:80%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_hover_panel.png" alt="Cloudcraft Monitors overlay hover panel showing a monitor count breakdown by status and the Investigate with Bits Investigation button." style="width:80%;" >}}
 
-For more information, see [Bits AI SRE][1].
+For more information, see [Bits Investigation][1].
 
 ### Side panel
 
-Click a monitor pin on the diagram to open a side panel listing all monitors associated with that resource or service. For resource monitors, you can also initiate or view a [Bits AI SRE][1] investigation for any alerting monitor from this panel.
+Click a monitor pin on the diagram to open a side panel listing all monitors associated with that resource or service. For resource monitors, you can also initiate or view a [Bits Investigation][1] investigation for any alerting monitor from this panel.
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_side_panel.png" alt="Cloudcraft Monitors overlay side panel showing a list of monitors associated with a resource." style="width:100%;" >}}
 

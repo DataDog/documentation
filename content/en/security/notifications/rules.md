@@ -76,7 +76,7 @@ To delete a notification rule, click the vertical three-dot menu on the notifica
 
 ## Dynamic routing
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< beta-callout url="https://www.datadoghq.com/product-preview/dynamic-routing-for-security-notifications/" >}}
 Dynamic routing for notification rules is in Preview and is only available for non-aggregated finding notifications.
 {{< /beta-callout >}}
 

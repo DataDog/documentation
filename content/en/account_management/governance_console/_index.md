@@ -16,8 +16,12 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
+
+{{< callout url="/help/" header="Get Started with Governance Console" >}}
+Governance Console is available for customers on an enterprise plan only. Request access by contacting support.
+{{< /callout >}}
 
 ## Overview
 
@@ -27,7 +31,7 @@ Governance Console provides centralized configuration and governance for multi-t
 
 The `governance_console_read` permission controls access to the Governance Console. Users with `governance_console_read` assigned to their role can view the Governance Console UI and associated reporting and insights.
 
-Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metrics_write` permission.
+Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metric_tags_write` permission.
 
 ## Using Governance Console
 

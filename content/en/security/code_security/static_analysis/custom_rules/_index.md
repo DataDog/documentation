@@ -6,7 +6,7 @@ algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST', 'custom rule']
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
@@ -28,6 +28,8 @@ ruleset names are `python-security`, `cobra-team-checks`, or `my-company-securit
 ## Write rules with the VS Code extension
 
 The [Datadog VS Code Extension][6] includes the DDSA Rule Editor for interactively writing and testing custom rules.
+
+{{< img src="security/code_security/static_analysis/rule-editor-vscode.mp4" alt="DDSA Rule Editor in VS Code" video=true style="width:100%;" >}}
 
 ### Prerequisites
 

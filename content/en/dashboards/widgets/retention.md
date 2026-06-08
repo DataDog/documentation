@@ -11,7 +11,7 @@ further_reading:
   text: "Measure long-term user engagement with Datadog Retention Analysis"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
 The Retention widget is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>

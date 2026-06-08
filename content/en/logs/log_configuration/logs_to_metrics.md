@@ -11,6 +11,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
       tag: "Blog"
       text: "Use CIDR notation queries to filter your network traffic logs"
+    - link: "https://learn.datadoghq.com/courses/log-investigations"
+      tag: "Learning Center"
+      text: "Track Logs for Alerting and Investigations"
 algolia:
   tags: ['log metrics', 'generating logs from metrics']
 ---
@@ -32,10 +35,10 @@ With log-based metrics, you can generate a count metric of logs that match a que
 To generate a new log-based metric:
 
 1. Navigate to the [Generate Metrics][5] page.
-1. Select the **Generate Metrics** tab.
-1. Click **+New Metric**.
+1. Select the {{< ui >}}Generate Metrics{{< /ui >}} tab.
+1. Click {{< ui >}}+New Metric{{< /ui >}}.
 
-You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
+You can also create metrics from an Analytics search by selecting the {{< ui >}}Generate new metric{{< /ui >}} option from the {{< ui >}}Export{{< /ui >}} menu.
 
 {{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="Generate Logs to metric" style="width:80%;">}}
 
@@ -43,11 +46,11 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation. The index must be excluded from the query.
-2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
-3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
-4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
-5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][10].
+1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation. The index must be excluded from the query.
+2. {{< ui >}}Select the field you would like to track{{< /ui >}}: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
+3. {{< ui >}}Add dimensions to `group by`{{< /ui >}}: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
+4. {{< ui >}}Add percentile aggregations{{< /ui >}}: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
+5. {{< ui >}}Name your metric{{< /ui >}}: Log-based metric names must follow the [custom metric naming convention][10].
 
 **Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
 
@@ -61,7 +64,7 @@ After a metric is created, the following fields can be updated:
 
 - Stream filter query: To change the set of matching logs to be aggregated into metrics
 - Aggregation groups: To update the tags or manage the cardinality of the generated metrics
-- Percentile selection: Check or uncheck the **Calculate percentiles** box to remove or generate percentile metrics
+- Percentile selection: Check or uncheck the {{< ui >}}Calculate percentiles{{< /ui >}} box to remove or generate percentile metrics
 
 To change the metric type or name, a new metric must be created.
 

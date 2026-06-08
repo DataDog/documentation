@@ -117,6 +117,7 @@ The [recommended keywords][15] are used by default when library rules are added.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
     - **Note**: You cannot have more than 20 keywords for a rule.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
@@ -149,6 +150,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+    - For structured events, keywords are also matched against attribute names in the event path. Separators such as `-`, `_`, and `.` in attribute names count as word boundaries, so the keyword `card` matches an attribute named `card_number` or `card-type`. The character limit does not apply to attribute name matching.
       **Note**: You cannot have more than 20 keywords for a rule.
 {{% sds-suppressions %}}
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
@@ -366,7 +368,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
 [8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /logs/guide/logs-rbac/
-[10]: /logs/log_configuration/processors/?tab=ui#remapper
+[10]: /logs/log_configuration/processors/remapper/
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/

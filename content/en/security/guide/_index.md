@@ -21,7 +21,7 @@ disable_toc: true
     {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/" >}}Google Cloud Configuration Guide for Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Azure Configuration Guide for Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Monitor Authentication Logs for Security Threats{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api" >}}Security Filters with the Cloud SIEM API{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Customize which logs Cloud SIEM analyzes{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security Guides:" >}}
@@ -57,6 +57,3 @@ disable_toc: true
    {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}Investigate Sensitive Data Findings{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Troubleshooting Guides:" >}}
-   {{< nextlink href="/security/guide/troubleshoot-cribl-stream-cloud-siem" >}}Troubleshoot the Cribl Stream integration with Cloud SIEM{{< /nextlink >}}
-{{< /whatsnext >}}

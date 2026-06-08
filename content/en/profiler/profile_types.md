@@ -10,6 +10,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
+    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
+      tag: "Learning Center"
+      text: "Diagnose Code Performance Issues with Continuous Profiler"
+
 ---
 
 
@@ -214,7 +218,7 @@ Live Heap (v3.28+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+ but Datadog recommends .NET 10+ for more accurate sampling.
 
-Outgoing HTTP requests (in Timeline) (in beta v3.19+)
+Outgoing HTTP requests (in Timeline) (Preview, v3.19+)
 : Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
 _Requires: .NET 7+_
 
@@ -252,10 +256,10 @@ _Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2
 Thrown Exceptions (v0.92+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type.
 
-File I/O (in beta, v1.7.2+)
+File I/O (Preview, v1.7.2+)
 : The time each method spent reading from and writing to files, as well as the amount of bytes read from and written to files.
 
-Socket I/O (in beta, v1.7.2+)
+Socket I/O (Preview, v1.7.2+)
 : The time each method spent reading from and writing to a socket, as well as the amount of bytes read from and written to sockets.
 
 [1]: /profiler/enabling/php/#requirements

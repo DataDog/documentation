@@ -11,6 +11,10 @@
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
   },
+  "apm-trace": {
+    "name": "APM Trace",
+    "description": "Retrieve full or pruned APM traces by trace ID."
+  },
   "aws-integration": {
     "name": "AWS Integration",
     "description": "Configure your Datadog-AWS integration directly through the Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services)."
@@ -30,6 +34,10 @@
   "agentless-scanning": {
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+  },
+  "annotations": {
+    "name": "Annotations",
+    "description": "Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time."
   },
   "app-builder": {
     "name": "App Builder",
@@ -107,6 +115,10 @@
     "name": "Code Coverage",
     "description": "Retrieve and analyze code coverage data from Code Coverage. See the [Code Coverage page](https://docs.datadoghq.com/code_coverage/) for more information."
   },
+  "compliance": {
+    "name": "Compliance",
+    "description": "Datadog Cloud Security Misconfigurations provides aggregated views of\ncompliance rules and findings across your cloud resources, helping you assess\nposture against industry frameworks (such as HIPAA, SOC 2, ISO 27001) and custom\nframeworks. Learn more at https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/#maintain-compliance-with-industry-frameworks-and-benchmarks."
+  },
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
@@ -119,6 +131,10 @@
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
+  "customer-org": {
+    "name": "Customer Org",
+    "description": "Programmatic management of a customer's Datadog organization. Use this API to perform\nself-service organization lifecycle actions such as disabling the authenticated org."
+  },
   "dora-metrics": {
     "name": "DORA Metrics",
     "description": "Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
@@ -130,6 +146,10 @@
   "dashboard-secure-embed": {
     "name": "Dashboard Secure Embed",
     "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
+  },
+  "dashboards": {
+    "name": "Dashboards",
+    "description": "Get usage statistics for the dashboards in your organization, including view\ncounts, last-edit times, widget counts, and quality scores. See the\n[Dashboards documentation](https://docs.datadoghq.com/dashboards/) for more\ninformation."
   },
   "datasets": {
     "name": "Datasets",
@@ -146,6 +166,10 @@
   "downtimes": {
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+  },
+  "entity-integration-configs": {
+    "name": "Entity Integration Configs",
+    "description": "Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog."
   },
   "entity-risk-scores": {
     "name": "Entity Risk Scores",
@@ -191,10 +215,6 @@
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
-  "incident-teams": {
-    "name": "Incident Teams",
-    "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."
-  },
   "incidents": {
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
@@ -213,7 +233,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability projects, datasets, dataset records, experiments, and annotations."
+    "description": "Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, and annotations."
   },
   "logs": {
     "name": "Logs",
@@ -243,6 +263,10 @@
     "name": "Microsoft Teams Integration",
     "description": "Configure your [Datadog Microsoft Teams integration](https://docs.datadoghq.com/integrations/microsoft_teams/)\ndirectly through the Datadog API. Note: These endpoints do not support legacy connector handles."
   },
+  "model-lab-api": {
+    "name": "Model Lab API",
+    "description": "Manage Model Lab projects, runs, artifacts, and facets for ML experiment tracking."
+  },
   "monitors": {
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
@@ -250,6 +274,10 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
+  "oauth2-client-public": {
+    "name": "OAuth2 Client Public",
+    "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
   },
   "oci-integration": {
     "name": "OCI Integration",
@@ -303,6 +331,14 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-insights": {
+    "name": "RUM Insights",
+    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+  },
+  "rum-retention-filters-hardcoded": {
+    "name": "RUM Retention Filters Hardcoded",
+    "description": "Manage hardcoded retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) in RUM."
+  },
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."
@@ -321,7 +357,11 @@
   },
   "rum-metrics": {
     "name": "Rum Metrics",
-    "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+    "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
+  "rum-rate-limit": {
+    "name": "Rum Rate Limit",
+    "description": "Manage RUM rate limit configurations for your organization's RUM applications."
   },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
@@ -346,6 +386,10 @@
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
+  },
+  "salesforce-integration": {
+    "name": "Salesforce Integration",
+    "description": "Configure your [Datadog Salesforce integration](https://docs.datadoghq.com/integrations/salesforce/)\ndirectly through the Datadog API."
   },
   "scorecards": {
     "name": "Scorecards",
@@ -403,6 +447,18 @@
     "name": "Status Pages",
     "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
   },
+  "statuspage-integration": {
+    "name": "Statuspage Integration",
+    "description": "Configure your [Datadog Statuspage integration](https://docs.datadoghq.com/integrations/statuspage/)\ndirectly through the Datadog API."
+  },
+  "stegadography": {
+    "name": "Stegadography",
+    "description": "Extract watermarks embedded in dashboard screenshots to retrieve cached widget state."
+  },
+  "storage-management": {
+    "name": "Storage Management",
+    "description": "Enable Storage Management for S3 buckets, GCS buckets, and Azure containers. Each configuration registers the destination that holds inventory reports for the storage being monitored."
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Synthetic tests use simulated requests and actions so you can monitor the availability and performance of systems and applications. Datadog supports the following types of synthetic tests:\n- [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\n- [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)\n- [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)\n- [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)\nYou can use the Datadog API to create, manage, and organize tests and test suites programmatically.\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
@@ -422,6 +478,10 @@
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
+  },
+  "webhooks-integration": {
+    "name": "Webhooks Integration",
+    "description": "Configure your [Datadog Webhooks integration](https://docs.datadoghq.com/integrations/webhooks/)\ndirectly through the Datadog API."
   },
   "widgets": {
     "name": "Widgets",

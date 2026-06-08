@@ -14,12 +14,12 @@ This page discusses using OpenTelemetry with Datadog Serverless Monitoring for A
 
 There are multiple ways to instrument AWS Lambda functions with OpenTelemetry and send the data to Datadog:
 
-- [OpenTelemetry API support in the Datadog tracers](#opentelemetry-api-support-within-datadog-tracers) (recommended)
+- [OpenTelemetry API support in the Datadog SDKs](#opentelemetry-api-support-within-datadog-sdks) (recommended)
 - [Send OpenTelemetry traces from any OpenTelemetry SDK through the Datadog Lambda Extension](#sdk) (Preview)
 
-### OpenTelemetry API support within Datadog tracers
+### OpenTelemetry API support within Datadog SDKs
 
-The Datadog tracing library, which is included in the Datadog Lambda Extension upon installation, accepts custom spans and traces created with OpenTelemetry-instrumented code, processes the telemetry, and sends it to Datadog.
+The Datadog SDK, which is included in the Datadog Lambda Extension upon installation, accepts custom spans and traces created with OpenTelemetry-instrumented code, processes the telemetry, and sends it to Datadog.
 
 You can use this approach if, for example, your main goal is to code has already been instrumented with the OpenTelemetry API. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog’s native implementation, tagging, and features. 
 

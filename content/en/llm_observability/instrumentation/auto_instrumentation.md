@@ -1,5 +1,6 @@
 ---
-title: Automatic Instrumentation for LLM Observability
+title: Automatic Instrumentation for Agent Observability
+description: Enable automatic tracing for LLM frameworks and libraries in your Python or Node.js application using Agent Observability integrations.
 aliases:
     - /tracing/llm_observability/auto_instrumentation
     - /llm_observability/auto_instrumentation
@@ -8,7 +9,7 @@ aliases:
 further_reading:
     - link: '/llm_observability/instrumentation/sdk/'
       tag: 'Documentation'
-      text: 'LLM Observability SDK Reference'
+      text: 'Agent Observability SDK Reference'
     - link: https://www.datadoghq.com/blog/llm-prompt-tracking
       tag: Blog
       text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
@@ -19,9 +20,9 @@ further_reading:
 
 ## Overview
 
-Datadog's LLM Observability can automatically trace and annotate calls to supported LLM frameworks and libraries through various [LLM integrations](#llm-integrations). When you [run your LLM application with the LLM Observability SDK][2], these LLM integrations are enabled by default and provide out-of-the-box traces and observability, without you having to change your code.
+Agent Observability can automatically trace and annotate calls to supported LLM frameworks and libraries through various [LLM integrations](#llm-integrations). When you [run your LLM application with the Agent Observability SDK][2], these LLM integrations are enabled by default and provide out-of-the-box traces and observability, without you having to change your code.
 
-<div class="alert alert-info">Automatic instrumentation works for calls to <a href="#supported-frameworks-and-libraries">supported frameworks and libraries</a>. To trace other calls (for example: API calls, database queries, internal functions), see the <a href="/llm_observability/instrumentation/sdk">LLM Observability SDK reference</a> for how to add manual instrumentation.</div>
+<div class="alert alert-info">Automatic instrumentation works for calls to <a href="#supported-frameworks-and-libraries">supported frameworks and libraries</a>. To trace other calls (for example: API calls, database queries, internal functions), see the <a href="/llm_observability/instrumentation/sdk">Agent Observability SDK reference</a> for how to add manual instrumentation.</div>
 
 
 ### Supported frameworks and libraries
@@ -32,18 +33,20 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [Amazon Bedrock](#amazon-bedrock)               | >= 1.31.57         | >= 2.9.0       |
 | [Amazon Bedrock Agents](#amazon-bedrock-agents) | >= 1.38.26         | >= 3.10.0      |
 | [Anthropic](#anthropic)                         | >= 0.28.0          | >= 2.10.0      |
+| [Claude Agent SDK](#claude-agent-sdk)           | >= 0.0.23          | >= 4.5.0       |
 | [CrewAI](#crewai)                               | >= 0.105.0         | >= 3.5.0       |
 | [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 | [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
-| [LangChain](#langchain)                         | >= 0.0.192         | >= 2.9.0       |
+| [LangChain](#langchain)                         | >= 0.1.0           | >= 2.9.0       |
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
-| [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
+| [LiteLLM](#litellm)                             | >= 1.65.4          | >= 3.9.0       |
 | [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
-| [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 0.26.5          | >= 2.9.0       |
+| [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 1.0.0           | >= 2.9.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
 | [Strands Agents](#strands-agents)               | >= 1.11.0          | Any            |
 | [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
+| [vLLM](#vllm)                                   | >= 0.10.2          | >= 4.2.0       |
 
 
 {{% /tab %}}
@@ -77,7 +80,7 @@ NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support for bundled applications (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
-To use LLM Observability integrations in bundled applications (esbuild, Webpack), you must exclude these integrations' modules from bundling.
+To use Agent Observability integrations in bundled applications (esbuild, Webpack), you must exclude these integrations' modules from bundling.
 
 ##### esbuild
 If you are using esbuild, see [Bundling with the Node.js tracer](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
@@ -101,45 +104,9 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support for Next.js" level="h4" expanded=false id="nextjs-support" %}}
-Properly initialize the tracer in your application to ensure auto-instrumentation works correctly. If using TypeScript or ESM for your Next.js application, initialize the tracer in a `instrumentation.{ts/js}` file as follows, specifying your configuration options as environment variables:
+See [Instrument a Next.js Application for Agent Observability][1] for properly setting up Agent Observability in your Next.js app.
 
-```typescript
-// instrumentation.ts
-export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const initializeImportName = 'dd-trace/initialize.mjs';
-    await import(/* webpackIgnore: true */ initializeImportName as 'dd-trace/initialize.mjs')
-  }
-
-  // ...
-}
-```
-
-Otherwise, for CommonJS Next.js applications, you can use the `init` function directly:
-
-```javascript
-// instrumentation.js
-const tracer = require('dd-trace')
-
-function register () {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    tracer.init({}); // specify options here or they will be read from environment variables
-  }
-
-  // ...
-}
-
-module.exports = register;
-```
-
-
-Then, make sure to specify `dd-trace` and any other supported integration package names in `serverExternalPackages` in your `next.config.{ts/js}` file:
-```javascript
-// next.config.ts
-module.exports = {
-  serverExternalPackages: ['dd-trace', '<INTEGRATION_PACKAGE_NAME>'], // add any other supported integration package names here to be auto-instrumented
-}
-```
+[1]: /llm_observability/guide/nextjs_guide
 {{% /collapse-content %}}
 
 {{% /tab %}}
@@ -151,7 +118,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Datadog LLM Observability also supports any framework that natively emits <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI semantic convention v1.37+</a>-compliant spans, without requiring the Datadog tracer. See <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry Instrumentation</a> for details.</div>
+<div class="alert alert-info">Agent Observability also supports any framework that natively emits <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI semantic convention v1.37+</a>-compliant spans, without requiring the Datadog SDK. See <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry Instrumentation</a> for setup details and <a href="/llm_observability/instrumentation/otel_instrumentation#tested-frameworks-and-libraries">tested frameworks</a>.</div>
 
 ## LLM integrations
 
@@ -278,6 +245,30 @@ The Anthropic integration instruments the following methods:
 [2]: https://docs.claude.com/en/api/client-sdks#typescript
 [3]: https://docs.anthropic.com/en/api/messages
 [4]: https://docs.anthropic.com/en/api/messages-streaming
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Claude Agent SDK" level="h3" expanded=false id="claude-agent-sdk" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+The Claude Agent SDK integration provides automatic tracing for agent queries made through the [Claude Agent SDK for Python][1].
+
+**Package name:** `claude-agent-sdk`
+**Integration name:** `claude_agent_sdk`
+
+### Traced methods
+
+The Claude Agent SDK integration instruments the following methods:
+
+- [One-shot queries][2]:
+  - `claude_agent_sdk.query()`
+- [Interactive client queries][3]:
+  - `ClaudeSDKClient.query()` (finished by `ClaudeSDKClient.receive_messages()`)
+
+[1]: https://github.com/anthropics/claude-agent-sdk-python
+[2]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#basic-usage
+[3]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#with-claudesdkclient-continuous-conversation
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -668,7 +659,7 @@ The provider (OpenAI vs Azure OpenAI) is automatically detected based on the `ba
 {{< tabs >}}
 {{% tab "Python" %}}
 The OpenAI Agents integration converts the [built-in tracing][1] from the [OpenAI Agents SDK][2] into
-LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
+Agent Observability format and sends it to Agent Observability product by adding a Datadog trace processor.
 
 **Package name:** `openai-agents`
 **Integration name:** `openai_agents`
@@ -722,7 +713,7 @@ The Pydantic AI integration instruments the following methods:
 {{% collapse-content title="Strands Agents" level="h3" expanded=false id="strands-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-Starting from [v1.11.0][1], [Strands Agents][2] natively emits spans compliant with [OpenTelemetry GenAI semantic conventions v1.37][3], which Datadog LLM Observability automatically ingests without requiring the Datadog tracer.
+Starting from [v1.11.0][1], [Strands Agents][2] natively emits spans compliant with [OpenTelemetry GenAI semantic conventions v1.37][3], which Agent Observability automatically ingests without requiring the Datadog SDK.
 
 For setup instructions and a complete example, see [OpenTelemetry Instrumentation — Using Strands Agents][4].
 
@@ -737,7 +728,7 @@ For setup instructions and a complete example, see [OpenTelemetry Instrumentatio
 {{% collapse-content title="Vercel AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
 {{< tabs >}}
 {{% tab "Node.js" %}}
-The [Vercel AI SDK][1] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core [Vercel AI SDK][2] and converting them into Datadog LLM Observability spans.
+The [Vercel AI SDK][1] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core [Vercel AI SDK][2] and converting them into Agent Observability spans.
 
 **Package name:** `ai`
 **Integration name:** `ai`
@@ -757,7 +748,7 @@ The [Vercel AI SDK][1] integration automatically traces text and object generati
 
 ### Vercel AI Core SDK telemetry
 
-This integration automatically patches the tracer passed into each of the traced methods under the [`experimental_telemetry` option][7]. If no `experimental_telemetry` configuration is passed in, the integration enables it to still send LLM Observability spans.
+This integration automatically patches the tracer passed into each of the traced methods under the [`experimental_telemetry` option][7]. If no `experimental_telemetry` configuration is passed in, the integration enables it to still send Agent Observability spans.
 
 ```javascript
 require('dd-trace').init({
@@ -775,18 +766,18 @@ async function main () {
     ...
     experimental_telemetry: {
       isEnabled: true,
-      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Agent Observability
     }
   });
 
   result = await generateText({
     model: openai('gpt-4o'),
     ...
-  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
+  }); // since no tracer is passed in, the integration will enable it to still send Agent Observability spans
 }
 ```
 
-**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to LLM Observability.
+**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to Agent Observability.
 
 [1]: /integrations/vercel-ai-sdk
 [2]: https://ai-sdk.dev/docs/introduction
@@ -846,6 +837,28 @@ The Vertex AI integration instruments the following methods:
 [2]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest
 [3]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
 [4]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="vLLM" level="h3" expanded=false id="vllm" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+The vLLM integration automatically traces request processing and token generation in the [vLLM][1] inference engine. It captures model name, input and output tokens, and latency metrics (time to first token, queue time, prefill time, decode time, and inference time).
+
+**Package name:** `vllm`
+**Integration name:** `vllm`
+
+### Traced methods
+
+The vLLM integration instruments the following methods on both `LLMEngine` (offline) and `AsyncLLM` (online):
+
+- Input processing:
+  - `Processor.process_inputs`
+- Output processing:
+  - `OutputProcessor.process_outputs`
+
+[1]: https://docs.vllm.ai/
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -938,13 +951,23 @@ tracer.use('langchain', true);
 
 For more specific control over library patching and the integration that starts the span, you can set the following environment variables:
 
-`DD_TRACE_DISABLED_PLUGINS`
-: A comma-separated string of integration names that are automatically disabled when the tracer is initialized.<br>
-**Example**: `DD_TRACE_DISABLED_PLUGINS=openai,http`
+{{< tabs >}}
+{{% tab "Python" %}}
+
+`DD_PATCH_MODULES`
+: A comma-separated list of modules to enable or disable patching for. Overrides the default patching behavior. Use the format `module:true,module:false`. Available in version 2.17.4+.<br>
+**Example**: `DD_PATCH_MODULES=openai:false,langchain:false`
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
 
 `DD_TRACE_DISABLED_INSTRUMENTATIONS`
 : A comma-separated string of library names that are not patched when the tracer is initialized.<br>
 **Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
