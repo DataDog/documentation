@@ -78,7 +78,7 @@ To manage permissions, go to **Organization Settings > Roles**, select a role, a
 | Product | Metric | Description |
 |---|---|---|
 | [Bits Chat][1] | `datadog.estimated_usage.bits_chat.ai_credits` | AI Credits consumed by Bits Chat. |
-| [Bits Investigation][3] | `datadog.estimated_usage.bits_investigations.ai_credits` | AI Credits consumed by Bits Investigation. |
+| [Bits Investigation][3] | `datadog.estimated_usage.bits_investigation.ai_credits` | AI Credits consumed by Bits Investigation. |
 | [Bits Code][2] | `datadog.estimated_usage.bits_code.ai_credits` | AI Credits consumed by Bits Code. |
 | [Bits Agent Builder][4] | `datadog.estimated_usage.bits_agent_builder.ai_credits` | AI Credits consumed by Bits Agent Builder. |
 
