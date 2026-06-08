@@ -2851,11 +2851,21 @@ menu:
       parent: case_management
       identifier: case_management_approvals
       weight: 7
-    - name: MCP Server
-      url: incident_response/case_management/mcp_server
+    - name: AI
+      url: incident_response/case_management/ai
       parent: case_management
-      identifier: case_management_mcp_server
+      identifier: case_management_ai
       weight: 8
+    - name: MCP Server
+      url: incident_response/case_management/ai/mcp_server
+      parent: case_management_ai
+      identifier: case_management_ai_mcp_server
+      weight: 1
+    - name: Custom Agents
+      url: incident_response/case_management/ai/custom_agents
+      parent: case_management_ai
+      identifier: case_management_ai_custom_agents
+      weight: 2
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management

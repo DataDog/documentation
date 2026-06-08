@@ -2,6 +2,7 @@
 title: MCP Server
 aliases:
 - /service_management/case_management/mcp_server/
+- /incident_response/case_management/mcp_server/
 further_reading:
 - link: "/mcp_server"
   tag: "Documentation"
