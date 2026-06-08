@@ -112,6 +112,8 @@ Datadog provides out-of-the-box graphs for any given service. Use the dropdown a
 
 {{% apm-ootb-graphs %}}
 
+<div class="alert alert-tip">When you hover over a latency spike in the latency graph, click <strong>Investigate With Bits AI</strong> to launch an automated investigation. Bits AI analyzes tag divergence and bottlenecks across the affected traces. For more information, see <a href="/bits_ai/bits_chat/#latency-investigations">Latency investigations</a>.</div>
+
 ### Export
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][10]:
