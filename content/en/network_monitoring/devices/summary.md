@@ -110,7 +110,7 @@ The **Changes** section lists recent network device configuration changes from [
 
 Click **[View all changes][11]** to open the full Changes view. Filters and the time range are shared between the two views. Click any row to open the device side panel with details about the change.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
