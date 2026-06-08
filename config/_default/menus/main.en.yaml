@@ -6194,6 +6194,16 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_history
       weight: 306
+    - name: Implementation Patterns
+      url: feature_flags/implementation_patterns
+      parent: feature_flags
+      identifier: feature_flags_implementation_patterns
+      weight: 4
+    - name: Feature Flags with OpenTelemetry
+      url: feature_flags/implementation_patterns/opentelemetry
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_opentelemetry
+      weight: 401
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
