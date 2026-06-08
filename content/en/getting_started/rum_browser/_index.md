@@ -59,9 +59,7 @@ Datadog generates a ready-to-use SDK snippet with your `clientToken`, `applicati
 
 The Browser SDK collects RUM data from your application and sends it to Datadog. Datadog recommends the CDN async method: the SDK loads from Datadog's CDN without blocking your page.
 
-Copy the snippet from the Datadog UI (or use the one below) and add it as early as possible in the `<head>` tag of every HTML page you want to monitor. Placing it early helps the SDK capture the full page load.
-
-Then fill in the values for your application:
+Copy the snippet from the Datadog UI and add it as early as possible in the `<head>` tag of every HTML page you want to monitor. Placing it early helps the SDK capture the full page load. The snippet looks like this:
 
 
 
@@ -209,6 +207,8 @@ Then fill in the values for your application:
 </script>
 {{< /code-block >}}
 {{< /site-region >}}
+
+Fill in the values for your application:
 
 | Parameter | Value | Description |
 |---|---|---|
