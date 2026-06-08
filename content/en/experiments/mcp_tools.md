@@ -24,6 +24,8 @@ The [Datadog MCP Server][1] lets AI agents interact with your experiment data th
 
 The toolset becomes most powerful when your AI client can also read your codebase — combining live experiment state with how the associated feature flag is installed in your code.
 
+<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="#setup">Setup</a> for instructions on enabling it.</div>
+
 ### Use cases
 
 **Before launching an experiment**, point an agent at [`check-flag-implementation`][5] (part of the `feature-flags` toolset) alongside your source code to audit the flag installation:
@@ -41,8 +43,6 @@ For metric movements, `get-metric-definition` returns the underlying event query
 **At conclusion**, an agent can take the winning variant decision, find the flag in the source, and draft the code change: inline the winning branch, remove the losing branch, delete the SDK call default that no longer needs a fallback.
 
 **For program-wide operations**, an agent can sweep all running experiments for diagnostic warnings, surface stuck drafts with no allocation, and generate a standup-ready status summary.
-
-<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="#setup">Setup</a> for instructions on enabling it.</div>
 
 ## Setup
 
