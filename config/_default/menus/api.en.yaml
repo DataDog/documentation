@@ -22,6 +22,19 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: Validate AWS CCM config
+      url: /api/latest/aws-integration/validate-aws-ccm-config/
+      identifier: aws-integration-validate-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateAWSCCMConfig
+        unstable:
+          - v2
+        order: 18
     - name: Get AWS integration standard IAM permissions
       url: /api/latest/aws-integration/get-aws-integration-standard-iam-permissions/
       identifier: aws-integration-get-aws-integration-standard-iam-permissions
@@ -1777,6 +1790,54 @@ menu:
           - DeleteTagConfiguration
         unstable: []
         order: 4
+    - name: List tag indexing rules for a metric
+      url: /api/latest/metrics/list-tag-indexing-rules-for-a-metric/
+      identifier: metrics-list-tag-indexing-rules-for-a-metric
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRulesForMetric
+        unstable: []
+        order: 23
+    - name: Create a tag indexing rule exemption
+      url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
+      identifier: metrics-create-a-tag-indexing-rule-exemption
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTagIndexingRuleExemption
+        unstable: []
+        order: 25
+    - name: Get a tag indexing rule exemption
+      url: /api/latest/metrics/get-a-tag-indexing-rule-exemption/
+      identifier: metrics-get-a-tag-indexing-rule-exemption
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagIndexingRuleExemption
+        unstable: []
+        order: 24
+    - name: Delete a tag indexing rule exemption
+      url: /api/latest/metrics/delete-a-tag-indexing-rule-exemption/
+      identifier: metrics-delete-a-tag-indexing-rule-exemption
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTagIndexingRuleExemption
+        unstable: []
+        order: 26
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
       identifier: metrics-get-tag-key-cardinality-details
@@ -1837,6 +1898,78 @@ menu:
           - ListActiveMetricConfigurations
         unstable: []
         order: 7
+    - name: Update a tag indexing rule
+      url: /api/latest/metrics/update-a-tag-indexing-rule/
+      identifier: metrics-update-a-tag-indexing-rule
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagIndexingRule
+        unstable: []
+        order: 21
+    - name: Get a tag indexing rule
+      url: /api/latest/metrics/get-a-tag-indexing-rule/
+      identifier: metrics-get-a-tag-indexing-rule
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagIndexingRule
+        unstable: []
+        order: 20
+    - name: Delete a tag indexing rule
+      url: /api/latest/metrics/delete-a-tag-indexing-rule/
+      identifier: metrics-delete-a-tag-indexing-rule
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTagIndexingRule
+        unstable: []
+        order: 22
+    - name: Reorder tag indexing rules
+      url: /api/latest/metrics/reorder-tag-indexing-rules/
+      identifier: metrics-reorder-tag-indexing-rules
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderTagIndexingRules
+        unstable: []
+        order: 19
+    - name: Create a tag indexing rule
+      url: /api/latest/metrics/create-a-tag-indexing-rule/
+      identifier: metrics-create-a-tag-indexing-rule
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTagIndexingRule
+        unstable: []
+        order: 18
+    - name: List tag indexing rules
+      url: /api/latest/metrics/list-tag-indexing-rules/
+      identifier: metrics-list-tag-indexing-rules
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagIndexingRules
+        unstable: []
+        order: 17
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -16066,6 +16199,49 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: Rum Rate Limit
+      url: /api/latest/rum-rate-limit/
+      identifier: rum-rate-limit
+      generated: true
+    - name: Create or update a RUM rate limit configuration
+      url: /api/latest/rum-rate-limit/create-or-update-a-rum-rate-limit-configuration/
+      identifier: rum-rate-limit-create-or-update-a-rum-rate-limit-configuration
+      parent: rum-rate-limit
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumRateLimitConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Get a RUM rate limit configuration
+      url: /api/latest/rum-rate-limit/get-a-rum-rate-limit-configuration/
+      identifier: rum-rate-limit-get-a-rum-rate-limit-configuration
+      parent: rum-rate-limit
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumRateLimitConfig
+        unstable:
+          - v2
+        order: 1
+    - name: Delete a RUM rate limit configuration
+      url: /api/latest/rum-rate-limit/delete-a-rum-rate-limit-configuration/
+      identifier: rum-rate-limit-delete-a-rum-rate-limit-configuration
+      parent: rum-rate-limit
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumRateLimitConfig
+        unstable:
+          - v2
+        order: 3
     - name: Rum Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps
