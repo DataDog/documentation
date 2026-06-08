@@ -13,7 +13,7 @@ further_reading:
   text: "Network Path terms and concepts"
 - link: "/network_monitoring/network_path/setup"
   tag: "Documentation"
-  text: "Setup Network Path"
+  text: "Network Path Setup"
 ---
 
 ## Overview
@@ -82,7 +82,7 @@ The **Neighbors** tab shows a full visualization of the upstream and downstream 
 
 ### Path list
 
-The path list includes individual paths through the AS, with the following columns:
+The path list includes individual paths through the AS, with the below columns. Click any path row in the list to open it in the [Path View][2].
 
 Source
 : The source of the path.
@@ -104,5 +104,5 @@ Avg RTT
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/network-path/autonomous-systems
-[2]: hhttps://app.datadoghq.com/network-path
+[2]: /network_monitoring/network_path/path_view/
 
