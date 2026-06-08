@@ -18,6 +18,7 @@ aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
 - /bits_ai/bits_assistant/
+- /tracing/guide/latency_investigator/
 ---
 
 ## Overview
