@@ -85,6 +85,9 @@ Then fill in the values for your application:
       sessionReplaySampleRate: 20,
       defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
     });
   })
 </script>
@@ -111,6 +114,9 @@ Then fill in the values for your application:
       sessionReplaySampleRate: 20,
       defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
     });
   })
 </script>
@@ -137,6 +143,9 @@ Then fill in the values for your application:
       sessionReplaySampleRate: 20,
       defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
     });
   })
 </script>
@@ -163,6 +172,9 @@ Then fill in the values for your application:
       sessionReplaySampleRate: 20,
       defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
     });
   })
 </script>
@@ -189,23 +201,35 @@ Then fill in the values for your application:
       sessionReplaySampleRate: 20,
       defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
+      storeContextAcrossPages: true,
+      trackSessionAcrossSubdomains: true,
+      allowedTracingUrls: [/https:\/\/api\.example\.com/],
     });
   })
 </script>
 {{< /code-block >}}
 {{< /site-region >}}
 
-Replace the placeholder values with your own:
+The `clientToken`, `applicationId`, and `site` values are pre-filled by Datadog when you create the application. Do not change them.
 
-| Placeholder | Where it comes from | Description |
+Replace the remaining placeholder values and configure the parameters for your application:
+
+| Parameter | Description |
+|---|---|
+| `service` | A short name for your app, such as `my-web-app`. Use lowercase. |
+| `env` | The deployment environment, such as `production` or `staging`. Use lowercase. |
+| `version` | The version of your code, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
+| `allowedTracingUrls` | A list of your backend API URL patterns. RUM connects frontend sessions to APM backend traces for requests matching these URLs. Only include your own backend URLs, not third-party services. |
+
+The other parameters are set to recommended defaults:
+
+| Parameter | Default | Why |
 |---|---|---|
-| `<CLIENT_TOKEN>` | Pre-filled by Datadog | Identifies your application; use the value from the Datadog UI |
-| `<APPLICATION_ID>` | Pre-filled by Datadog | Identifies your application; use the value from the Datadog UI |
-| `<SERVICE_NAME>` | You define this | A short name for your app, such as `my-web-app`. Use lowercase. |
-| `<ENV_NAME>` | You define this | The deployment environment, such as `production` or `staging`. Use lowercase. |
-| `<APP_VERSION>` | You define this | The version of your code, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
+| `storeContextAcrossPages` | `true` | Preserves user context (such as user ID and custom attributes) across page navigations |
+| `trackSessionAcrossSubdomains` | `true` | Keeps a single session when users navigate between subdomains of the same site |
+| `trackUserInteractions` | `true` | Automatically captures clicks, taps, and other user interactions |
 
-The sampling parameters work together:
+The sampling and privacy parameters:
 
 - `sessionSampleRate: 100` collects data for all sessions.
 - `sessionReplaySampleRate: 20` records [Session Replays][5] for a percentage of those sessions. **Note**: this is applied after `sessionSampleRate`, not independently. With the values above, 20% of all sessions have a replay.
