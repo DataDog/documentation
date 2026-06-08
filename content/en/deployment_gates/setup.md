@@ -1,10 +1,13 @@
 ---
 title: Set Up Deployment Gates
-description: "Configure gates and rules in Datadog UI, then integrate with deployment pipelines using the datadog-ci CLI, Argo Rollouts, or API calls."
+description: "Evaluate deployment quality rules in your CI/CD pipeline — define rules inline (JIT, default) or use gates pre-configured in Datadog."
 further_reading:
 - link: "/deployment_gates/explore"
   tag: "Documentation"
   text: "Learn about the Deployment Gates explorer"
+- link: "/api/latest/deployment-gates"
+  tag: "API Reference"
+  text: "Deployment Gates API reference"
 ---
 
 {{< site-region region="gov,gov2" >}}
@@ -15,62 +18,83 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-The Deployment Gates product consists of two main components:
+A **Deployment Gate** evaluates one or more **rules** against a service and environment to decide whether a deployment should proceed. Deployment Gates support two modes:
 
-- A **Gate** is defined for a service and environment, and contains one or more rules to evaluate.
-- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors.
+- **JIT (Just-In-Time, default)**: define rules inline in the evaluation request. No prior setup in Datadog is required.
+- **Pre-configured**: create gates and rules ahead of time in the Datadog UI, API, or Terraform, then reference them by service and environment at evaluation time.
 
-Setting up Deployment Gates involves two steps:
+Both modes use the same [Rule types](#rule-types) and the same asynchronous evaluation lifecycle (`in_progress` → `pass` or `fail`).
 
-1. Configure the gate and rules in the Datadog UI.
-2. Update your deployment pipeline to interact with the Deployment Gates API.
+## Get started with JIT
 
-## Create Deployment Gates
+To evaluate a Deployment Gate with JIT, send a request to the evaluation endpoint with inline rules. No gate needs to exist in Datadog ahead of time.
 
-### Create a gate
+Replace the following before running:
 
-<div class="alert alert-info">In addition to using the Deployment Gates UI, you can manage gates and rules programmaticaly with the <a href="https://docs.datadoghq.com/api/latest/deployment-gates">Deployment Gates API</a> or <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate">Datadog Terraform provider</a>.</div>
+- `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
+- `<YOUR_API_KEY>`: Your [API key][2]
+- `<YOUR_APP_KEY>`: Your [application key][3]
 
-1. Go to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Deployment Gates{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][1].
-2. Click {{< ui >}}Create Gate{{< /ui >}}.
-3. Configure the following settings:
-   - {{< ui >}}Service{{< /ui >}}: The service name (example: `transaction-backend`).
-   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`).
-   - {{< ui >}}Identifier{{< /ui >}} (optional, default value is `default`): Unique name for multiple gates on the same service/environment. This can be used to:
-     - Allow different deployment strategies (example: `fast-deploy` vs `default`)
-     - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
-     - Define canary stages (example: `pre-deploy` vs `canary-20pct`)
-   - {{< ui >}}Evaluation Mode{{< /ui >}}: Enable {{< ui >}}Dry Run{{< /ui >}} to test gate behavior without impacting deployments. The evaluation of
-a dry run gate always responds with a pass status, but the in-app result is the real status based
-on rules evaluation. This is particularly useful when performing an initial evaluation of the
-gate behavior without impacting the deployment pipeline.
+```bash
+curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
+-d @- << 'EOF'
+{
+  "data": {
+    "type": "deployment_gates_evaluation_request",
+    "attributes": {
+      "service": "transaction-backend",
+      "env": "production",
+      "version": "1.2.3",
+      "configuration": {
+        "dry_run": false,
+        "rules": [
+          {
+            "type": "monitor",
+            "name": "error rate monitors",
+            "options": {
+              "query": "service:transaction-backend env:production",
+              "duration": 300
+            }
+          },
+          {
+            "type": "faulty_deployment_detection",
+            "name": "apm faulty deployment",
+            "options": {
+              "duration": 900,
+              "excluded_resources": ["GET /healthcheck"]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+EOF
+```
 
-### Add rules to a gate
+A successful request returns a 202 status code with an `evaluation_id`. Poll the evaluation status endpoint with that ID to retrieve the final result. See [Evaluate a Deployment Gate](#evaluate-a-deployment-gate) for production integrations that handle polling and retries for you, and the [Deployment Gates API reference][4] for the complete request and response schema.
 
-Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
+## Rule types
 
-1. {{< ui >}}Name{{< /ui >}}: Enter a descriptive label (for example, `Check all P0 monitors`).
-2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}} or {{< ui >}}Faulty Deployment Detection{{< /ui >}}.
-3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for more information.
-4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
-
-
-#### Rule types
+Each rule has a `type` and a set of `options`. The same options apply whether the rule is defined inline (JIT) or attached to a gate in Datadog (pre-configured). For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
-The Monitors rule allows you to evaluate the state of a set of monitors over a configurable period of time. It will fail if at any time during the evaluation period:
+The Monitor rule evaluates the state of a set of monitors over a configurable period of time. It fails if at any time during the evaluation period:
 - No monitors match the query.
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
 
-##### Configuration settings
+**Key options** ({{< ui >}}UI field{{< /ui >}} / `JSON field`):
 
-* {{< ui >}}Search Query{{< /ui >}}: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
+- {{< ui >}}Search Query{{< /ui >}} / `query`: The query used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitor tags:
   * Monitor static tags - `service:transaction-backend`
   * Tags within the monitor's query - `scope:"service:transaction-backend"`
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
-* {{< ui >}}Duration{{< /ui >}}: Enter the period of time (in seconds) for which the matching monitors should be evaluated. The default duration is 0, which means that monitors are evaluated instantly.
+- {{< ui >}}Duration{{< /ui >}} / `duration`: The period of time (in seconds) for which the matching monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
 
 ##### Example queries
 
@@ -91,16 +115,16 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to 
 * New types of errors.
 * Significant increases in error rates compared to previous versions.
 
-The analysis is automatically done for all APM-instrumented services, and no prior setup is required.
+The analysis is automatically performed for all APM-instrumented services, and no prior setup is required.
 
-##### Configuration settings
+**Key options** ({{< ui >}}UI field{{< /ui >}} / `JSON field`):
 
-* {{< ui >}}Operation Name{{< /ui >}}: Auto-populated from the service's [APM primary operation][3] settings.
-* {{< ui >}}Duration{{< /ui >}}: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
-* {{< ui >}}Excluded Resources{{< /ui >}}: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+- {{< ui >}}Operation Name{{< /ui >}} (UI only): Auto-populated from the service's [APM primary operation][3] settings.
+- {{< ui >}}Duration{{< /ui >}} / `duration`: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
+- {{< ui >}}Excluded Resources{{< /ui >}} / `excluded_resources`: [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
 ##### Notes
-- The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it when [requesting a gate evaluation](#evaluate-deployment-gates) (see below).
+- The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. To consider only a single primary tag, specify it when [requesting a gate evaluation](#evaluate-a-deployment-gate).
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
 
@@ -111,49 +135,169 @@ The analysis is automatically done for all APM-instrumented services, and no pri
 {{% /tab %}}
 {{< /tabs >}}
 
-## Evaluate Deployment Gates
+## Evaluate a Deployment Gate
 
-Once you have configured the gates and rules, you can request a gate evaluation when deploying the related service, and decide whether to block or continue the deployment based on the result.
+You can request a gate evaluation from your deployment pipeline in several ways. Each method supports both modes:
 
-A gate evaluation can be requested in several ways:
+- **JIT**: pass inline rules at evaluation time.
+- **Pre-configured**: reference a gate that already exists in Datadog by service and environment.
+
+The `datadog-ci` CLI, Argo Rollouts integration, and GitHub Action accept inline rules through a JSON config file using **camelCase** keys (`dryRun`). Direct API calls and the generic script send the same configuration in the request payload using **snake_case** keys (`dry_run`), matching the API schema. See the [Deployment Gates API reference][4] for the full request schema.
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
-The [datadog-ci][1] `deployment gate` command includes all the required logic to evaluate Deployment Gates in a single command:
+The [datadog-ci][1] `deployment gate` command includes all the required logic to evaluate Deployment Gates in a single command.
+
+**JIT mode** — pass a JSON config file with the `--config` flag:
+
+```bash
+datadog-ci deployment gate --service transaction-backend --env production --version 1.2.3 --config ./gate-config.json
+```
+
+Example `gate-config.json` (camelCase):
+
+```json
+{
+  "dryRun": false,
+  "rules": [
+    {
+      "type": "monitor",
+      "name": "error rate monitors",
+      "options": {
+        "query": "service:transaction-backend env:production",
+        "duration": 300
+      }
+    },
+    {
+      "type": "faulty_deployment_detection",
+      "name": "apm faulty deployment",
+      "options": {
+        "duration": 900,
+        "excluded_resources": ["GET /healthcheck"]
+      }
+    }
+  ]
+}
+```
+
+**Pre-configured mode** — omit `--config` to evaluate a gate that already exists in Datadog:
 
 ```bash
 datadog-ci deployment gate --service transaction-backend --env staging
 ```
 
-If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `--version 1.0.1`).
+If the Deployment Gate contains APM Faulty Deployment Detection rules, also specify the version (for example, `--version 1.0.1`).
 
 The command has the following behavior:
 * It sends a request to start the gate evaluation and blocks until the evaluation is complete.
 * It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
 * It has built-in automatic retries for errors.
-* It allows you to customize its behavior in case of unexpected Datadog errors with the `--fail-on-error` parameter.
+* You can customize its behavior in case of unexpected Datadog errors with the `--fail-on-error` parameter.
 
-Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
+The `deployment gate` command is available in datadog-ci versions v3.17.0 and above. The `--config` flag requires a more recent version — see the [datadog-ci release notes][5].
 
 **Required environment variables**:
 * `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
 * `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
 * `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
-For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][4].
+For complete configuration options and detailed usage examples, see the [`deployment gate` command documentation][4].
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
+[5]: https://github.com/DataDog/datadog-ci/releases
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
-You can call Deployment Gates from an Argo Rollouts Kubernetes Resource by creating an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template should contain a Kubernetes job that executes the [datadog-ci deployment gate command][7] to interact with the Deployment Gates API.
+You can call Deployment Gates from an Argo Rollouts Kubernetes Resource by creating an [AnalysisTemplate][1] or a [ClusterAnalysisTemplate][1]. The template contains a Kubernetes job that runs the [datadog-ci deployment gate command][7] to interact with the Deployment Gates API.
 
 Use the template below as a starting point:
-- Replace `<YOUR_DD_SITE>` below with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
-- Define the [API key][5] and [application key][6] as environment variables. The example below relies on a [Kubernetes Secret][3] called `datadog` holding two data values: `api-key` and `app-key`. Alternatively, you can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
+- Replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
+- Define the [API key][5] and [application key][6] as environment variables. The example below uses a [Kubernetes Secret][3] called `datadog` holding two data values: `api-key` and `app-key`. You can also pass the values in plain text using `value` instead of `valueFrom` in the script below.
+
+**JIT mode** — store the gate config (camelCase) in a ConfigMap and mount it into the job, then pass `--config` to the CLI. Use a datadog-ci image version that supports the `--config` flag — see the [datadog-ci release notes][8]:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gate-config
+data:
+  gate-config.json: |
+    {
+      "dryRun": false,
+      "rules": [
+        {
+          "type": "monitor",
+          "name": "error rate monitors",
+          "options": {
+            "query": "service:transaction-backend env:production",
+            "duration": 300
+          }
+        },
+        {
+          "type": "faulty_deployment_detection",
+          "name": "apm faulty deployment",
+          "options": {
+            "duration": 900,
+            "excluded_resources": ["GET /healthcheck"]
+          }
+        }
+      ]
+    }
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ClusterAnalysisTemplate
+metadata:
+  name: datadog-job-analysis
+spec:
+  args:
+    - name: service
+    - name: env
+    - name: version
+  metrics:
+    - name: datadog-job
+      provider:
+        job:
+          spec:
+            ttlSecondsAfterFinished: 300
+            backoffLimit: 0
+            template:
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: datadog-check
+                    image: datadog/ci:latest
+                    env:
+                      - name: DD_BETA_COMMANDS_ENABLED
+                        value: "1"
+                      - name: DD_SITE
+                        value: "<YOUR_DD_SITE>"
+                      - name: DD_API_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: datadog
+                            key: api-key
+                      - name: DD_APP_KEY
+                        valueFrom:
+                          secretKeyRef:
+                            name: datadog
+                            key: app-key
+                    command: ["/bin/sh", "-c"]
+                    args:
+                      - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }} --version {{ args.version }} --config /etc/datadog/gate-config.json
+                    volumeMounts:
+                      - name: gate-config
+                        mountPath: /etc/datadog
+                volumes:
+                  - name: gate-config
+                    configMap:
+                      name: gate-config
+```
+
+**Pre-configured mode** — omit the ConfigMap and the `--config` flag, and reference a gate that already exists in Datadog:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -197,11 +341,11 @@ spec:
                       - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }}
 ```
 
-* The analysis template can receive arguments from the Rollout resource. In this case, the arguments are `service` and `env`. Add any other optional fields if needed (such as `version`). For more information, see the [official Argo Rollouts docs][4].
-* The `ttlSecondsAfterFinished` field removes the finished jobs after 5 minutes.
-* The `backoffLimit` field is set to 0 as the job might fail if the gate evaluation fails, and it should not be retried in that case.
+* The analysis template can receive arguments from the Rollout resource (such as `service`, `env`, and `version`). For more information, see the [official Argo Rollouts docs][4].
+* The `ttlSecondsAfterFinished` field removes finished jobs after 5 minutes.
+* The `backoffLimit` field is set to 0 because the job might fail if the gate evaluation fails, and it should not be retried in that case.
 
-After you have created the analysis template, reference it from the Argo Rollouts strategy:
+After you create the analysis template, reference it from the Argo Rollouts strategy:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -230,7 +374,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Only required if one or more APM Faulty Deployment Detection rules are evaluated
+              - name: version #Required for APM Faulty Deployment Detection rules
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -244,12 +388,13 @@ spec:
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
+[8]: https://github.com/DataDog/datadog-ci/releases
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 The [`Datadog Deployment Gate GitHub Action`][4] includes all the required logic to evaluate a Deployment Gate during the deployment of a service.
 
-Add a `DataDog/deployment-gate-github-action` step to your existing deployment workflow, for example:
+**JIT mode** — commit a gate config file (camelCase) to the repository and pass its path with the `config` input. Use a version of the action that supports the `config` input — see the [action's releases][5]:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
@@ -260,11 +405,60 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
       - name: Deploy Canary
         run: |
           echo "Deploying canary release for service:'my-service' in 'production'. Version 1.0.1"
           # Your deployment commands here
 
+      - name: Evaluate Deployment Gate
+        uses: DataDog/deployment-gate-github-action@v1
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        with:
+          service: my-service
+          env: production
+          version: 1.0.1
+          config: .github/gate-config.json
+
+      - name: Deploy
+        run: |
+          echo "Deployment Gate passed, proceeding with deployment"
+          # Your deployment commands here
+```
+
+Example `.github/gate-config.json`:
+
+```json
+{
+  "dryRun": false,
+  "rules": [
+    {
+      "type": "monitor",
+      "name": "error rate monitors",
+      "options": {
+        "query": "service:my-service env:production",
+        "duration": 300
+      }
+    },
+    {
+      "type": "faulty_deployment_detection",
+      "name": "apm faulty deployment",
+      "options": {
+        "duration": 900,
+        "excluded_resources": ["GET /healthcheck"]
+      }
+    }
+  ]
+}
+```
+
+**Pre-configured mode** — omit the `config` input to evaluate a gate that already exists in Datadog:
+
+```yaml
       - name: Evaluate Deployment Gate
         uses: DataDog/deployment-gate-github-action@v1.0.0
         env:
@@ -274,19 +468,14 @@ jobs:
           service: my-service
           env: production
           identifier: default
-
-      - name: Deploy
-        run: |
-          echo "Deployment Gate passed, proceeding with deployment"
-          # Your deployment commands here
 ```
 
-If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `version: 1.0.1`).
+If the Deployment Gate contains APM Faulty Deployment Detection rules, also specify the version (for example, `version: 1.0.1`).
 The action has the following behavior:
 * It sends a request to start the gate evaluation and blocks until the evaluation is complete.
 * It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
 * It has built-in automatic retries for errors.
-* It allows you to customize its behavior in case of unexpected Datadog errors with the `fail-on-error` parameter.
+* You can customize its behavior in case of unexpected Datadog errors with the `fail-on-error` parameter.
 
 **Required environment variables**:
 * `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
@@ -298,11 +487,14 @@ For complete configuration options and detailed usage examples, see the [`DataDo
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://github.com/DataDog/deployment-gate-github-action
+[5]: https://github.com/DataDog/deployment-gate-github-action/releases
 
 {{% /tab %}}
 {{% tab "Generic script" %}}
 
-Use this script as a starting point. Be sure to replace the following:
+Use this script as a starting point. It evaluates a gate using inline JIT rules by default. To evaluate a pre-configured gate instead, remove the `configuration` field from the `PAYLOAD` block.
+
+Replace the following:
 
 - `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
 - `<YOUR_API_KEY>`: Your [API key][2]
@@ -327,7 +519,28 @@ PAYLOAD=$(cat <<EOF
     "attributes": {
       "service": "$1",
       "env": "$2",
-      "version": "$3"
+      "version": "$3",
+      "configuration": {
+        "dry_run": false,
+        "rules": [
+          {
+            "type": "monitor",
+            "name": "error rate monitors",
+            "options": {
+              "query": "service:$1 env:$2",
+              "duration": 300
+            }
+          },
+          {
+            "type": "faulty_deployment_detection",
+            "name": "apm faulty deployment",
+            "options": {
+              "duration": 900,
+              "excluded_resources": ["GET /healthcheck"]
+            }
+          }
+        ]
+      }
     }
   }
 }
@@ -435,19 +648,18 @@ done
 
 The script has the following characteristics:
 
-* It receives three inputs: `service`, `environment`, and `version` (optionally add `identifier` and `primary_tag` if needed). The `version` is only required if one or more APM Faulty Deployment Detection rules are evaluated.
-* It sends a request to start the evaluation and records the evaluation_id. It handles various HTTP response codes appropriately:
+* It receives three inputs: `service`, `environment`, and `version` (optionally add `identifier` and `primary_tag` if needed). The `version` is required if one or more APM Faulty Deployment Detection rules are evaluated.
+* It sends a request to start the evaluation and records the `evaluation_id`. It handles HTTP response codes:
   * 5xx: Server errors, retries with delay.
   * 4xx: Client error, evaluation fails.
   * 2xx: Evaluation started successfully.
-* It polls the evaluation status endpoint using the evaluation_id until the evaluation is complete.
-* It handles various HTTP response codes appropriately:
+* It polls the evaluation status endpoint using the `evaluation_id` until the evaluation is complete:
   * 5xx: Server errors, retries with delay.
   * 404: Gate evaluation not started yet, retries with delay.
   * 4xx errors (except 404): Client error, evaluation fails.
   * 2xx: Successful response, check for gate status and retry with delay if not complete yet.
-* The script polls every 10 seconds indefinitely until the evaluation completes or the maximum polling time (10800 seconds = 3 hours by default) is reached.
-* If all the retries are exhausted for the initial request (5xx responses), the script treats this as success to be resilient to API failures.
+* The script polls every 15 seconds until the evaluation completes or the maximum polling time (10800 seconds = 3 hours by default) is reached.
+* If all retries are exhausted for the initial request (5xx responses), the script treats this as success to be resilient to API failures.
 
 This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
 
@@ -458,17 +670,59 @@ This is a general behavior, and you should change it based on your personal use 
 {{% /tab %}}
 {{% tab "Direct API calls" %}}
 
-Deployment Gate evaluations are asynchronous, as the evaluation process can take some time to complete. When you trigger an evaluation, it's started in the background, and the API returns an evaluation ID that can be used to track its progress. The high-level interaction with the Deployment Gates API is the following:
+Deployment Gate evaluations are asynchronous. When you trigger an evaluation, it's started in the background, and the API returns an evaluation ID that you can use to track its progress. The high-level interaction with the Deployment Gates API is:
 
-- First, request a Deployment Gate evaluation, which initiates the process and returns an evaluation ID.
-- Then, periodically poll the evaluation status endpoint using the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
+- First, request a Deployment Gate evaluation, which starts the process and returns an evaluation ID.
+- Then, periodically poll the evaluation status endpoint with the evaluation ID to retrieve the result when the evaluation is complete. Polling every 10-20 seconds is recommended.
 
-A Deployment Gate evaluation can be requested with an API call.
-
-Be sure to replace the following:
+Replace the following:
 - `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
 - `<YOUR_API_KEY>`: Your [API key][2]
 - `<YOUR_APP_KEY>`: Your [application key][3]
+
+**JIT mode** — pass `configuration` with inline rules (snake_case at the API boundary):
+
+```bash
+curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
+-d @- << 'EOF'
+{
+  "data": {
+    "type": "deployment_gates_evaluation_request",
+    "attributes": {
+      "service": "transaction-backend",
+      "env": "production",
+      "version": "1.2.3",
+      "configuration": {
+        "dry_run": false,
+        "rules": [
+          {
+            "type": "monitor",
+            "name": "error rate monitors",
+            "options": {
+              "query": "service:transaction-backend env:production",
+              "duration": 300
+            }
+          },
+          {
+            "type": "faulty_deployment_detection",
+            "name": "apm faulty deployment",
+            "options": {
+              "duration": 900,
+              "excluded_resources": ["GET /healthcheck"]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+EOF
+```
+
+**Pre-configured mode** — omit the `configuration` field to evaluate a gate that already exists in Datadog:
 
 ```bash
 curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
@@ -482,17 +736,23 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
     "attributes": {
       "service": "transaction-backend",
       "env": "staging",
-      "identifier": "my-custom-identifier", # Optional, defaults to "default"
-      "version": "v123-456",                # Required for APM Faulty Deployment Detection rules
-      "primary_tag": "region:us-central-1"  # Optional, scopes down APM Faulty Deployment Detection rules analysis to the selected primary tag
+      "identifier": "my-custom-identifier",
+      "version": "v123-456",
+      "primary_tag": "region:us-central-1"
     }
   }
-}'
+}
+EOF
 ```
 
-**Note**: A 404 HTTP response can be because the gate was not found, or because the gate was found but has no rules.
+Optional attributes for the pre-configured mode:
+- `identifier`: Optional, defaults to `default`.
+- `version`: Required for APM Faulty Deployment Detection rules.
+- `primary_tag`: Optional, scopes down APM Faulty Deployment Detection analysis to the selected primary tag.
 
-If the gate evaluation was successfully started, a 202 HTTP status code is returned. The response is in the following format:
+**Note**: In pre-configured mode, a 404 HTTP response can mean the gate was not found, or the gate was found but has no rules.
+
+If the gate evaluation was successfully started, a 202 HTTP status code is returned:
 
 ```json
 {
@@ -508,7 +768,7 @@ If the gate evaluation was successfully started, a 202 HTTP status code is retur
 
 The field `data.attributes.evaluation_id` contains the unique identifier for this gate evaluation.
 
-You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
+Fetch the status of a gate evaluation by polling the status endpoint with the gate evaluation ID:
 
 ```bash
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
@@ -516,7 +776,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<eva
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
 
-**Note**: If you call this endpoint too quickly after requesting the evaluation, a 404 HTTP response may be returned because the evaluation did not start yet. If this is the case, retry a few seconds later.
+**Note**: If you call this endpoint too soon after requesting the evaluation, a 404 HTTP response may be returned because the evaluation did not start yet. Retry a few seconds later.
 
 When a 200 HTTP response is returned, it has the following format:
 
@@ -544,9 +804,9 @@ When a 200 HTTP response is returned, it has the following format:
 }
 ```
 
-The field `data.attributes.gate_status` contains the result of the evaluation. It can contain one of these values:
+The field `data.attributes.gate_status` contains the result of the evaluation, with one of these values:
 
-* `in_progress`: The Deployment Gate evaluation is still in progress; you should continue polling.
+* `in_progress`: The Deployment Gate evaluation is still in progress; continue polling.
 * `pass`: The Deployment Gate evaluation passed.
 * `fail`: The Deployment Gate evaluation failed.
 
@@ -559,16 +819,51 @@ The field `data.attributes.gate_status` contains the result of the evaluation. I
 {{% /tab %}}
 {{< /tabs >}}
 
+## Pre-configured gates (alternative)
+
+If you want to manage gates as persistent entities in Datadog — for example, to share rules across services, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI — create them ahead of time and reference them by service and environment at evaluation time.
+
+### Create a gate
+
+<div class="alert alert-info">In addition to using the Deployment Gates UI, you can manage gates and rules programmatically with the <a href="https://docs.datadoghq.com/api/latest/deployment-gates">Deployment Gates API</a> or <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate">Datadog Terraform provider</a>.</div>
+
+1. Go to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Deployment Gates{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][5].
+2. Click {{< ui >}}Create Gate{{< /ui >}}.
+3. Configure the following settings:
+   - {{< ui >}}Service{{< /ui >}}: The service name (example: `transaction-backend`).
+   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`).
+   - {{< ui >}}Identifier{{< /ui >}} (optional, default value is `default`): Unique name for multiple gates on the same service/environment. Use this to:
+     - Allow different deployment strategies (example: `fast-deploy` vs `default`)
+     - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
+     - Define canary stages (example: `pre-deploy` vs `canary-20pct`)
+   - {{< ui >}}Evaluation Mode{{< /ui >}}: Enable {{< ui >}}Dry Run{{< /ui >}} to test gate behavior without impacting deployments. The evaluation of a dry run gate always responds with a pass status, but the in-app result is the real status based on rules evaluation. This is useful when performing an initial evaluation of the gate behavior without impacting the deployment pipeline.
+
+### Add rules to a gate
+
+Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
+
+1. {{< ui >}}Name{{< /ui >}}: A descriptive label (for example, `Check all P0 monitors`).
+2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}} or {{< ui >}}Faulty Deployment Detection{{< /ui >}}.
+3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for the available options.
+4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
+
 ## Recommendation for first-time onboarding
 
-When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase is recommended to confirm the product is working as expected before it impacts deployments. You can do this using the Dry Run evaluation mode and the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page:
-1. Create a gate for a service and set the evaluation mode as {{< ui >}}Dry Run{{< /ui >}}.
-2. Add the gate evaluation in your deployment process. As the evaluation mode is dry run, the Deployment Gates API response always contains a `pass` status and the deployments are not impacted by the gate result.
-3. After a certain period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see what were the statuses of the gates and rules evaluated. On the contrary to the API responses, the gate status in the UI doesn't take into consideration the evaluation mode ({{< ui >}}Dry Run{{< /ui >}} or {{< ui >}}Active{{< /ui >}}). It means you can understand when the gate would have failed and what was the reason behind it.
-4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from {{< ui >}}Dry Run{{< /ui >}} to {{< ui >}}Active{{< /ui >}}. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
+When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use the Dry Run evaluation mode and the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page:
+
+1. Run the gate in dry-run mode:
+   - **JIT**: set `dry_run: true` on the `configuration` (or `dryRun: true` in the CLI config file), or per individual rule.
+   - **Pre-configured**: create the gate with Evaluation Mode set to {{< ui >}}Dry Run{{< /ui >}}.
+2. Add the gate evaluation to your deployment process. Because the evaluation is in dry-run mode, the Deployment Gates API response always contains a `pass` status and deployments are not impacted by the gate result.
+3. After a period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see the statuses of the gates and rules evaluated. The gate status in the UI does not take into account the dry-run mode — you can see when the gate would have failed and the reason behind it.
+4. When you are confident the gate behavior is as you expect, switch off dry-run mode. Afterwards, the API starts returning the real status and deployments are promoted or rolled back based on the gate result.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/deployment-gates/gates
+[1]: /getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: /api/latest/deployment-gates
+[5]: https://app.datadoghq.com/ci/deployment-gates/gates
