@@ -47,7 +47,7 @@ The example application runs three containers: a PostgreSQL or MySQL database, t
 |---|---|
 | Query metrics | Per-query latency, execution count, and rows examined. |
 | Explain plans | Execution plans sampled at runtime, surfacing costly operations. |
-| Full table scan | The `SELECT * FROM orders WHERE status = ?` query has no index on `status`, causing a sequential scan — a built-in slow-query example. |
+| Full table scan | The `SELECT * FROM orders WHERE status = ?` query has no index on `status`, causing a sequential scan.
 | Lock contention | The app uses `SELECT ... FOR UPDATE` to simulate concurrent row locks. |
 | APM ↔ DBM correlation | Traces from the orders service are linked to their database queries, enabling end-to-end visibility. |
 
