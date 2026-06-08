@@ -14,11 +14,11 @@ further_reading:
 
 The Path View section in Network Path allows for detailed examination of a particular route, assisting in resolving potential problems that might occur from the source to the destination. It offers comprehensive data on both end-to-end latency and packet loss throughout the route.
 
-To access the path view page, click into a path from the [List view][2]. On this page, you have the ability to change the latency threshold colors, and view the status of each hop.
+To access the path view page, click into a path from the [List view][2] or [AS view][3]. On this page, you have the ability to change the latency threshold colors, and view the status of each hop.
 
 {{< img src="network_performance_monitoring/network_path/network_path_view_5.png" alt="Network Path view showing a reachable destination with 0% packet loss, 103ms latency, and latency and reachability history" >}}
 
-Click any path from the hop between the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click **View Device Details** to navigate to the Device details in [NDM][3] for the selected device.
+Click any path from the hop between the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click **View Device Details** to navigate to the Device details in [NDM][4] for the selected device.
 
 {{< img src="network_performance_monitoring/network_path/path_details.png" alt="Path view in Network path highlighting path details." style="width:30%;" >}}
 
@@ -102,4 +102,5 @@ The hop-to-hop latency graph provides a detailed view of the latency for each ho
 
 [1]: https://app.datadoghq.com/network/path
 [2]: /network_monitoring/network_path/list_view
-[3]: /network_monitoring/devices
+[3]: /network_monitoring/network_path/as_view/
+[4]: /network_monitoring/devices
