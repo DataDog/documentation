@@ -16,7 +16,18 @@ further_reading:
 
 Datadog On-Call supports multiple triggering sources beyond native Datadog monitors. Use third-party tools to send Pages directly to your On-Call teams, so alerts from any part of your stack reach the right responders through your configured escalation policies.
 
+The following integrations are supported:
+
+| Integration | Trigger method |
+|-------------|---------------|
+| [Slack](#slack) | Slash command |
+| [Prometheus Alertmanager](#prometheus-alertmanager) | Webhook |
+| [Pingdom](#pingdom) | Webhook |
+| [Sentry](#sentry) | Webhook (with forwarder) |
+
 ## Slack
+
+{{% collapse-content title="Set up the Slack integration" level="h3" %}}
 
 Use the Datadog Slack app to manage On-Call operations directly from Slack.
 
@@ -37,7 +48,11 @@ Select the team to page and provide a title and description for the Page.
 
 Pages sent from Slack are always `high` urgency.
 
+{{% /collapse-content %}}
+
 ## Prometheus Alertmanager
+
+{{% collapse-content title="Set up the Prometheus Alertmanager integration" level="h3" %}}
 
 Route Prometheus alerts to Datadog On-Call through Alertmanager's webhook receiver.
 
@@ -80,7 +95,11 @@ Setting `send_resolved: true` ensures Alertmanager notifies Datadog when alerts 
 
 To route different alerts to different On-Call teams, define multiple receivers with different `oncall_team` values and use `matchers` in your route configuration to direct alerts accordingly.
 
+{{% /collapse-content %}}
+
 ## Pingdom
+
+{{% collapse-content title="Set up the Pingdom integration" level="h3" %}}
 
 Route Pingdom uptime check alerts to Datadog On-Call through a webhook integration.
 
@@ -111,7 +130,11 @@ After saving, enable the integration on your uptime checks:
 
 When a Pingdom check changes status (for example, from up to down), Pingdom sends a POST request to the configured webhook URL. Datadog routes the resulting event to the specified On-Call team. When the check recovers, Pingdom sends a resolved notification that automatically closes the Page.
 
+{{% /collapse-content %}}
+
 ## Sentry
+
+{{% collapse-content title="Set up the Sentry integration" level="h3" %}}
 
 Route Sentry alerts to Datadog On-Call through an internal integration and webhook forwarder.
 
@@ -165,6 +188,8 @@ The aggregation key used to correlate and resolve events depends on the event ty
 |------------|-----------------|
 | Error events | Issue ID parsed from `data.error.issue_url` (the URL path segment after `issues/`) |
 | Issue events | `data.issue.id` (truncated to 100 characters; MD5-hashed if over the limit) |
+
+{{% /collapse-content %}}
 
 ## Further Reading
 
