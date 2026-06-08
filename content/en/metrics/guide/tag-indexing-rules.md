@@ -13,7 +13,6 @@ further_reading:
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
 algolia:
   tags: ['custom metrics']
-private: true
 ---
 
 ## Overview
