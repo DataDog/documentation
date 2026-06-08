@@ -17,7 +17,7 @@ further_reading:
 
 You can add [Datadog Feature Flags][1] to an application that uses [OpenTelemetry (OTel)][2] for tracing. Datadog supports two integration paths. In both cases, feature flags evaluate correctly and your existing OpenTelemetry API instrumentation code remains the same.
 
-Choose an integration option based on whether you are open to changing your tracing provider initialization:
+Choose an integration option based on whether you can change your tracing provider initialization:
 
 - **Option A:** Register the Datadog SDK as the TracerProvider
 - **Option B:** Run the Datadog SDK alongside OpenTelemetry
@@ -26,7 +26,7 @@ If you can change your tracing provider initialization, Option A is recommended.
 
 ## Prerequisites
 
-Start by following the Datadog Feature Flags installation guide for your stack:
+Follow the Datadog Feature Flags installation guide for your language:
 
 - [.NET Feature Flags](/feature_flags/server/dotnet/)
 - [Go Feature Flags](/feature_flags/server/go/)
@@ -40,7 +40,7 @@ Start by following the Datadog Feature Flags installation guide for your stack:
 
 In this option, the Datadog SDK replaces the OTel SDK as the `TracerProvider`. Your existing OpenTelemetry API instrumentation code — spans, attributes, events, and context propagation — stays the same.
 
-<div class="alert alert-warning">Be sure to remove any existing OpenTelemetry TracerProvider and exporter initialization to avoid duplicate traces.</div>
+<div class="alert alert-warning">Remove any existing OpenTelemetry TracerProvider and exporter initialization to avoid duplicate traces.</div>
 
 {{< tabs >}}
 {{% tab ".NET" %}}
@@ -530,16 +530,16 @@ is_enabled = client.fetch_boolean_value(
 {{% /tab %}}
 {{< /tabs >}}
 
-In both integration options, feature flags evaluate the same way. Flag configurations are delivered through the same Remote Configuration channel. There is no difference in feature flag functionality between the two options.
+In both integration options, feature flags evaluate the same way. Flag configurations are delivered through the same Remote Configuration channel.
 
 For complete setup instructions, typed getters, evaluation context requirements, and testing patterns, see your language's server-side SDK documentation:
 
-- [.NET Feature Flags][9]
-- [Go Feature Flags][10]
-- [Java Feature Flags][11]
-- [Node.js Feature Flags][12]
-- [Python Feature Flags][13]
-- [Ruby Feature Flags][14]
+- [.NET Feature Flags][3]
+- [Go Feature Flags][4]
+- [Java Feature Flags][5]
+- [Node.js Feature Flags][6]
+- [Python Feature Flags][7]
+- [Ruby Feature Flags][8]
 
 ## Further reading
 
@@ -547,15 +547,9 @@ For complete setup instructions, typed getters, evaluation context requirements,
 
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
-[3]: /remote_configuration/
-[4]: /feature_flags/server/#agent-configuration
-[5]: /account_management/api-app-keys/#api-keys
-[6]: https://openfeature.dev/
-[7]: /tracing/trace_explorer/
-[9]: /feature_flags/server/dotnet/
-[10]: /feature_flags/server/go/
-[11]: /feature_flags/server/java/
-[12]: /feature_flags/server/nodejs/
-[13]: /feature_flags/server/python/
-[14]: /feature_flags/server/ruby/
-[15]: /feature_flags/server/ruby/#prerequisites
+[3]: /feature_flags/server/dotnet/
+[4]: /feature_flags/server/go/
+[5]: /feature_flags/server/java/
+[6]: /feature_flags/server/nodejs/
+[7]: /feature_flags/server/python/
+[8]: /feature_flags/server/ruby/

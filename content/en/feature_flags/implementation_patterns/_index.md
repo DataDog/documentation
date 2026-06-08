@@ -1,6 +1,6 @@
 ---
 title: Implementation Patterns
-description: Learn common patterns for deploying Datadog Feature Flags with your application stack.
+description: Learn common patterns for integrating Datadog Feature Flags with your application stack.
 ---
 
 Explore implementation patterns for integrating Datadog Feature Flags with your existing tooling, SDKs, and observability stack.

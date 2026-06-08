@@ -22,7 +22,7 @@ further_reading:
   text: "Set up Feature Flags for server-side applications"
 - link: "/feature_flags/implementation_patterns/"
   tag: "Documentation"
-  text: "Implementation patterns for Feature Flags"
+  text: "Implementation Patterns"
 - link: "/feature_flags/guide/migrate_from_launchdarkly"
   tag: "Guide"
   text: "Migrate Your Feature Flags from LaunchDarkly"
