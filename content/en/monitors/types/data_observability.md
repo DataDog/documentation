@@ -104,12 +104,6 @@ Combine any of these filters with `AND` or `OR`, use parentheses to group condit
 
 A single monitor can track up to 5,000 tables, views, or columns. This limit cannot be increased. If your query matches more, split them across multiple monitors.
 
-Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
-
-{{< code-block lang="text" >}}
-search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
-{{< /code-block >}}
-
 ## Select your metric type
 
 Choose a metric type based on the data quality signal you want to track. Each monitor tracks one metric type.
