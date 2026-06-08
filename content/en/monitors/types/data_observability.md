@@ -55,7 +55,7 @@ To create a Data Observability monitor in Datadog, navigate to [**Data Observabi
 
 First, select whether to monitor the **Table** or **Column** level:
 
-{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Choose data to monitor: entity type selector, query input, and lineage relationship filter" style="width:60%;" >}}
 
 Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field.
 
