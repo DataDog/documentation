@@ -359,6 +359,10 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "rum-rate-limit": {
+    "name": "Rum Rate Limit",
+    "description": "Manage RUM rate limit configurations for your organization's RUM applications."
+  },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
     "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."

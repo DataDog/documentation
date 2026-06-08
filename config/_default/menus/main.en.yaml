@@ -1596,6 +1596,11 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 6
+    - name: Bits Data Analysis
+      url: bits_ai/bits_data_analysis
+      identifier: bits_data_analysis
+      parent: bits_ai
+      weight: 7
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -3698,21 +3703,41 @@ menu:
       parent: serverless_container_apps
       weight: 502
       identifier: serverless_container_apps_sidecar
+    - name: Azure Database & Messaging Services
+      url: serverless/azure_database_messaging_services
+      parent: serverless_azure
+      identifier: serverless_azure_database_messaging_services
+      weight: 6
+    - name: Cosmos DB
+      url: serverless/azure_database_messaging_services/azure_cosmosdb
+      parent: serverless_azure_database_messaging_services
+      identifier: serverless_azure_database_messaging_services_cosmosdb
+      weight: 601
+    - name: Event Hubs
+      url: serverless/azure_database_messaging_services/azure_event_hubs
+      parent: serverless_azure_database_messaging_services
+      identifier: serverless_azure_database_messaging_services_event_hubs
+      weight: 602
+    - name: Service Bus
+      url: serverless/azure_database_messaging_services/azure_service_bus
+      parent: serverless_azure_database_messaging_services
+      identifier: serverless_azure_database_messaging_services_service_bus
+      weight: 603
     - name: Azure Functions
       url: serverless/azure_functions
       parent: serverless_azure
       identifier: serverless_azure_functions
-      weight: 6
+      weight: 7
     - name: .NET APM Extension
       url: serverless/azure_functions/dotnet_extension
       parent: serverless_azure_functions
       identifier: serverless_azure_functions_dotnet_extension
-      weight: 601
+      weight: 701
     - name: Azure Logic Apps
       url: serverless/logic_apps
       parent: serverless_azure
       identifier: serverless_logic_apps
-      weight: 7
+      weight: 8
     - name: Google
       url: serverless/google
       parent: serverless
@@ -3722,42 +3747,42 @@ menu:
       url: serverless/google_cloud_run
       parent: serverless_google
       identifier: serverless_gcr
-      weight: 8
+      weight: 9
     - name: Containers
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
-      weight: 701
+      weight: 901
       identifier: serverless_gcr_containers
     - name: Jobs (Preview)
       url: serverless/google_cloud_run/jobs
       parent: serverless_gcr
-      weight: 702
+      weight: 902
       identifier: serverless_gcr_jobs
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 703
+      weight: 903
       identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 704
+      weight: 904
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
       parent: serverless
       identifier: libraries_integrations
-      weight: 9
+      weight: 10
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 10
+      weight: 11
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 11
+      weight: 12
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
@@ -5380,7 +5405,7 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
-    - name: LLM Observability
+    - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
       identifier: llm_obs
@@ -7099,11 +7124,6 @@ menu:
       url: logs/log_configuration/rehydrating
       parent: log_configuration
       weight: 210
-    - name: Archive Search
-      identifier: log_configuration_archive_search
-      url: logs/log_configuration/archive_search
-      parent: log_configuration
-      weight: 211
     - name: Forwarding
       identifier: log_configuration_forwarding
       url: logs/log_configuration/forwarding_custom_destinations/
@@ -7199,6 +7219,11 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 514
+    - name: Archive Search
+      identifier: log_explorer_archive_search
+      url: logs/explorer/archive_search/
+      parent: log_explorer
+      weight: 515
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
