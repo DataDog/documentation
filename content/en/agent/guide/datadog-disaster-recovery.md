@@ -160,6 +160,8 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 
 <div class="alert alert-danger">Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over ceases Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center.</strong> When no longer in failover, disable the failover policy to return integration data collection to the primary org.</div>
 
+[13]: https://app.datadoghq.com/fleet
+
 {{% /tab %}}
 
 {{% tab "Manually" %}}
@@ -306,7 +308,6 @@ During testing, integration telemetry is spread over both organizations. If you 
 [10]: /account_management/org_settings/service_accounts/
 [11]: /agent/remote_config/?tab=configurationyamlfile
 [12]: /agent/fleet_automation/#overview
-[13]: https://app.datadoghq.com/fleet
 [14]: mailto:success@datadoghq.com
 [15]: https://www.datadoghq.com/support/
 [16]: https://app.datadoghq.com/signup
