@@ -335,6 +335,39 @@ DD_RUM.onReady(function() {
 });
 {{< /code-block >}}
 
+### Add global context
+
+Use `setGlobalContextProperty` to attach custom attributes to every RUM event collected in a session. This is useful for adding properties that you want available across all events, such as subscription plan, feature flags, or tenant ID.
+
+{{< code-block lang="javascript" >}}
+DD_RUM.onReady(function() {
+  DD_RUM.setGlobalContextProperty('plan', 'premium');
+  DD_RUM.setGlobalContextProperty('tenant_id', '<TENANT_ID>');
+});
+{{< /code-block >}}
+
+For more options, see [Global context][13].
+
+### Filter or scrub events
+
+Use the `beforeSend` callback in your `DD_RUM.init()` call to inspect, modify, or discard events before they are sent to Datadog. This is useful for removing sensitive data from event payloads or excluding internal traffic.
+
+{{< code-block lang="javascript" >}}
+DD_RUM.onReady(function() {
+  DD_RUM.init({
+    // ... other init options
+    beforeSend: (event) => {
+      // discard events triggered by internal users
+      if (event.context.is_internal) {
+        return false;
+      }
+    },
+  });
+});
+{{< /code-block >}}
+
+For more options, see [Enrich and control RUM data][14].
+
 ### Advanced configuration
 
 After your initial setup, you can [configure the Browser SDK][11] to:
@@ -360,3 +393,5 @@ After your initial setup, you can [configure the Browser SDK][11] to:
 [10]: /real_user_monitoring/correlate_with_other_telemetry/
 [11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
 [12]: /session_replay/browser/privacy_options/
+[13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#global-context
+[14]: /real_user_monitoring/guide/enrich-and-control-rum-data
