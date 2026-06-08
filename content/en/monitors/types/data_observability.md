@@ -102,6 +102,10 @@ Combine any of these filters with `AND` or `OR`, use parentheses to group condit
 | Tables owned by a specific team | `owner:data-platform-team` |
 | The most depended-on tables in a database | `database:ANALYTICS_DB AND lineage_score:1.00` |
 
+**Filter by lineage relationship:**
+
+To scope your selection to assets that are connected to another asset in your lineage graph, click **Add Lineage Filter**. Choose **Upstream of** or **Downstream of**, then select a specific asset or use the same `key:value` filters to match a set of assets. For example, monitor every table that is upstream of a critical dashboard, or every column downstream of a specific source table.
+
 A single monitor can track up to 5,000 tables, views, or columns. This limit cannot be increased. If your query matches more, split them across multiple monitors.
 
 ## Select your metric type
