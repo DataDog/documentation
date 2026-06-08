@@ -22,11 +22,11 @@ algolia:
 
 The [Datadog MCP Server][1] lets AI agents interact with your experiment data through the [Model Context Protocol (MCP)][2]. The `experiments` toolset gives AI clients like Cursor, Claude Code, and OpenAI Codex structured access to your experiments, metrics, and diagnostic data.
 
-The toolset becomes most powerful when your AI client can also read your codebase. When an agent can compare experiment state against how the feature flag is used in your source code, it can catch configuration bugs before they corrupt data, explain why a diagnostic warning is happening, reason through the implications of a result, and draft the code cleanup after you ship.
+The toolset becomes most powerful when your AI client can also read your codebase — combining live experiment state with how the associated feature flag is installed in your code.
 
 ### Use cases
 
-**Before launching an experiment**, point an agent at `check-flag-implementation` alongside your source code to audit the flag installation:
+**Before launching an experiment**, point an agent at [`check-flag-implementation`][5] (part of the `feature-flags` toolset) alongside your source code to audit the flag installation:
 
 - Is the flag read with the right value type and context attributes for its targeting rules? Is the default value consistent with what production serves today?
 - Does the code correctly emit the metric events the experiment depends on — or is there a path where a metric fires in one variant but not another, or fires twice?
@@ -34,13 +34,15 @@ The toolset becomes most powerful when your AI client can also read your codebas
 
 **While an experiment is running**, the toolset covers about a dozen diagnostic dimensions — sample ratio mismatch (SRM), unreliable metrics, zero-data metrics, per-variant exposure imbalances, and more. When `get-experiment-diagnostics` identifies an issue, an agent with source access can trace the root cause: an SDK call inside a conditional that excludes some assigned subjects, or an exposure event that only fires after a late-loading component.
 
-For metric movements, `get-metric-definition` returns the underlying event query and the recommended Datadog MCP tool to call next. An agent can chain into the raw event data and reason through causality against the code — turning "revenue is up 3%" into a specific mechanism in the diff.
+For metric movements, `get-metric-definition` returns the underlying event query and the recommended Datadog MCP tool to call next. An agent can chain into the raw event data and reason through what in your code change is most likely driving the movement.
 
-**Before concluding**, use `explore-experiment-results` to build confidence in the interpretation. An agent can slice the primary metric by device type, country, plan tier, or any other assignment property to check whether the result holds across subgroups or is being carried by one cohort. It can also plot the metric over time to confirm the lift is stable rather than a novelty effect that faded after the first few days. This segmentation work — which would otherwise require navigating multiple dashboard views — happens in a single conversational thread alongside the diagnostic and results data already in context.
+**Before concluding**, use `explore-experiment-results` to build confidence in the interpretation. An agent can slice the primary metric by device type, country, plan tier, or any other assignment property to check whether the result holds across subgroups or is being carried by one cohort. It can also examine time-bucketed results to check whether the lift held steady over time or faded after the first few days. This segmentation work — which would otherwise require navigating multiple dashboard views — happens in a single conversational thread alongside the diagnostic and results data already in context.
 
 **At conclusion**, an agent can take the winning variant decision, find the flag in the source, and draft the code change: inline the winning branch, remove the losing branch, delete the SDK call default that no longer needs a fallback.
 
 **For program-wide operations**, an agent can sweep all running experiments for diagnostic warnings, surface stuck drafts with no allocation, and generate a standup-ready status summary.
+
+<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="#setup">Setup</a> for instructions on enabling it.</div>
 
 ## Setup
 
@@ -132,3 +134,4 @@ The `experiments` toolset exposes the following tools to your AI client. When yo
 [2]: https://modelcontextprotocol.io/
 [3]: /mcp_server/setup/
 [4]: /feature_flags/feature_flag_mcp_server/
+[5]: /feature_flags/feature_flag_mcp_server/#check-feature-flag-implementation
