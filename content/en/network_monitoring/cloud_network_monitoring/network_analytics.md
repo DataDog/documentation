@@ -191,9 +191,9 @@ The top of the sidepanel displays common client and server tags shared by the in
 
 ### Traces
 
-The **Traces** tab shows APM traces associated with the selected network flow. Use this tab to pivot from a network-level issue—such as high latency or elevated retransmit counts—to the application traces for the services involved, giving you end-to-end visibility from network traffic to application performance.
+The **Traces** tab shows APM traces associated with the selected network flow. Use this tab to pivot from a network-level issue—such as high latency or elevated retransmit counts—to the application traces for the services involved.
 
-For more information, see [APM Distributed Tracing][17].
+For more information, see [APM][17].
 
 ### Security
 
