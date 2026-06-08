@@ -210,32 +210,21 @@ Then fill in the values for your application:
 {{< /code-block >}}
 {{< /site-region >}}
 
-The `clientToken`, `applicationId`, and `site` values are pre-filled by Datadog when you create the application. Do not change them.
-
-Replace the remaining placeholder values and configure the parameters for your application:
-
-| Parameter | Description |
-|---|---|
-| `service` | A short name for your app, such as `my-web-app`. Use lowercase. |
-| `env` | The deployment environment, such as `production` or `staging`. Use lowercase. |
-| `version` | The version of your code, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
-| `allowedTracingUrls` | A list of your backend API URL patterns. RUM connects frontend sessions to APM backend traces for requests matching these URLs. Only include your own backend URLs, not third-party services. |
-
-The other parameters are set to recommended defaults:
-
-| Parameter | Default | Why |
+| Parameter | Value | Description |
 |---|---|---|
-| `storeContextAcrossPages` | `true` | Preserves user context (such as user ID and custom attributes) across page navigations |
-| `trackSessionAcrossSubdomains` | `true` | Keeps a single session when users navigate between subdomains of the same site |
-| `trackUserInteractions` | `true` | Automatically captures clicks, taps, and other user interactions |
-
-The sampling and privacy parameters:
-
-| Parameter | Default | Description |
-|---|---|---|
+| `clientToken` | Pre-filled by Datadog | Do not change. Determines where data is sent. |
+| `applicationId` | Pre-filled by Datadog | Do not change. Determines where data is sent. |
+| `site` | Pre-filled by Datadog | Do not change. Determines where data is sent. |
+| `service` | You define | A short name for your app, such as `my-web-app`. Use lowercase. |
+| `env` | You define | The deployment environment, such as `production` or `staging`. Use lowercase. |
+| `version` | You define | The version of your code, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
+| `allowedTracingUrls` | You define | A list of your backend API URL patterns. RUM links frontend sessions to APM backend traces for matching requests. Only include your own backend URLs, not third-party services. |
 | `sessionSampleRate` | `100` | Percentage of sessions to collect. `100` captures all sessions. |
 | `sessionReplaySampleRate` | `20` | Percentage of collected sessions to record as [Session Replays][5]. Applied after `sessionSampleRate`, not independently. With the defaults above, 20% of all sessions have a replay. |
-| `defaultPrivacyLevel` | `'mask-user-input'` | Controls what appears in Session Replays. `'mask-user-input'` masks form fields while leaving other content visible. Use `'mask'` if your app displays sensitive data outside of form fields (such as health or account information in page content). See [Session Replay Privacy Options][12]. |
+| `defaultPrivacyLevel` | `'mask-user-input'` | Controls what appears in Session Replays. `'mask-user-input'` masks form fields while leaving other content visible. Use `'mask'` if your app displays sensitive data outside of form fields (such as health or account information). See [Session Replay Privacy Options][12]. |
+| `trackUserInteractions` | `true` | Automatically captures clicks, taps, and other user interactions. |
+| `storeContextAcrossPages` | `true` | Preserves user context (such as user ID and custom attributes) across page navigations. |
+| `trackSessionAcrossSubdomains` | `true` | Keeps a single session when users navigate between subdomains of the same site. |
 
 For alternative installation methods (npm, CDN synchronous), see [Browser Monitoring Setup][3].
 
