@@ -11,7 +11,7 @@ further_reading:
     - link: "https://github.com/DataDog/pup/blob/main/docs/COMMANDS.md"
       tag: "GitHub"
       text: "Command reference"
-    - link: "bits_ai/mcp_server/"
+    - link: "mcp_server/"
       tag: "Documentation"
       text: "Datadog MCP Server"
 ---
