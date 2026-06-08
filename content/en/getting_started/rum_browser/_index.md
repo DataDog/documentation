@@ -83,6 +83,7 @@ Then fill in the values for your application:
       version: '<APP_VERSION>',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
     });
   })
@@ -108,6 +109,7 @@ Then fill in the values for your application:
       version: '<APP_VERSION>',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
     });
   })
@@ -133,6 +135,7 @@ Then fill in the values for your application:
       version: '<APP_VERSION>',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
     });
   })
@@ -158,6 +161,7 @@ Then fill in the values for your application:
       version: '<APP_VERSION>',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
     });
   })
@@ -183,6 +187,7 @@ Then fill in the values for your application:
       version: '<APP_VERSION>',
       sessionSampleRate: 100,
       sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
       trackUserInteractions: true,
     });
   })
@@ -200,7 +205,11 @@ Replace the placeholder values with your own:
 | `<ENV_NAME>` | You define this | The deployment environment, such as `production` or `staging`. Use lowercase. |
 | `<APP_VERSION>` | You define this | The version of your code, such as `1.0.0` or a Git commit SHA. Used to filter data by deployment in the RUM Explorer. |
 
-The `sessionSampleRate: 100` setting collects data for all sessions. The `sessionReplaySampleRate: 20` setting records [Session Replays][5] for a percentage of those sessions. **Note**: `sessionReplaySampleRate` is applied after `sessionSampleRate`, not independently. With the values above, 20% of all sessions have a replay. Adjust both to control data volume and cost.
+The sampling parameters work together:
+
+- `sessionSampleRate: 100` collects data for all sessions.
+- `sessionReplaySampleRate: 20` records [Session Replays][5] for a percentage of those sessions. **Note**: this is applied after `sessionSampleRate`, not independently. With the values above, 20% of all sessions have a replay.
+- `defaultPrivacyLevel: 'mask-user-input'` masks form fields and user input in Session Replays, while leaving other page content visible. This is the recommended default for most applications. If your application displays sensitive data outside of form fields (such as account numbers or health information in page content), use `'mask'` to mask all text. See [Session Replay Privacy Options][12] for details.
 
 For alternative installation methods (npm, CDN synchronous), see [Browser Monitoring Setup][3].
 
@@ -230,7 +239,6 @@ RUM also populates a prebuilt [Performance Overview dashboard][7] with Core Web 
 
 [Session Replay][5] records video-like replays of user sessions, letting you watch exactly what a user did when they encountered a problem. Session Replay is already partially enabled with the `sessionReplaySampleRate: 20` setting in the snippet above. To view replays, go to the RUM Explorer and select **Session Replay available**.
 
-If your application displays sensitive data, configure `defaultPrivacyLevel` in your `DD_RUM.init()` call to control what appears in replays. The default masks all user input. See [Session Replay Privacy Options][12] for the full list of options.
 
 ### Set up Error Tracking
 
