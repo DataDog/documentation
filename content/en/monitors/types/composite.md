@@ -4,6 +4,8 @@ aliases:
     - /guides/composite_monitors
     - /monitors/monitor_types/composite
     - /monitors/create/types/composite/
+    - /monitors/guide/create-monitor-dependencies/
+    - /monitors/faq/can-i-create-monitor-dependencies
 description: "Alert on an expression combining multiple monitors"
 further_reading:
 - link: "/monitors/guide/composite_use_cases"
