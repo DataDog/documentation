@@ -3879,56 +3879,61 @@ menu:
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
       weight: 30106
+    - name: Summary Page
+      url: network_monitoring/devices/summary
+      parent: ndm
+      identifier: ndm_summary
+      weight: 302
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
       identifier: ndm_integrations
-      weight: 302
+      weight: 303
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 303
+      weight: 304
     - name: Getting Started
       url: network_monitoring/devices/profiles/device_profiles
       parent: ndm_profiles
       identifier: ndm_profiles_getting_started
-      weight: 30301
+      weight: 30401
     - name: Advanced
       url: network_monitoring/devices/profiles/advanced_profiles
       parent: ndm_profiles
       identifier: ndm_profiles_advanced
-      weight: 30302
+      weight: 30402
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 304
+      weight: 305
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
       identifier: ndm_network_maps
-      weight: 305
+      weight: 306
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 307
+      weight: 308
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 308
+      weight: 309
     - name: Terms and Concepts
       url: network_monitoring/devices/glossary
       parent: ndm
       identifier: ndm_glossary
-      weight: 309
+      weight: 310
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
