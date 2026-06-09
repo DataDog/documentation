@@ -9,7 +9,7 @@ further_reading:
   text: "Action Catalog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/" btn_hidden="false" header="Join the Preview!">}} Case Management integration with custom agents is in Preview.{{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview!">}} Case Management integration with custom agents is in Preview.{{< /callout >}}
 
 ## Overview
 
