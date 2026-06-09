@@ -8083,6 +8083,88 @@ menu:
           - GetCSMCloudAccountsCoverageAnalysis
         unstable: []
         order: 1
+    - name: CSM Settings
+      url: /api/latest/csm-settings/
+      identifier: csm-settings
+      generated: true
+    - name: List unified host facets
+      url: /api/latest/csm-settings/list-unified-host-facets/
+      identifier: csm-settings-list-unified-host-facets
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMUnifiedHostFacets
+        unstable:
+          - v2
+        order: 5
+    - name: Get unified host facet info
+      url: /api/latest/csm-settings/get-unified-host-facet-info/
+      identifier: csm-settings-get-unified-host-facet-info
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMUnifiedHostFacetInfo
+        unstable:
+          - v2
+        order: 6
+    - name: List unified hosts
+      url: /api/latest/csm-settings/list-unified-hosts/
+      identifier: csm-settings-list-unified-hosts
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMUnifiedHosts
+        unstable:
+          - v2
+        order: 4
+    - name: List agentless host facets
+      url: /api/latest/csm-settings/list-agentless-host-facets/
+      identifier: csm-settings-list-agentless-host-facets
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMAgentlessHostFacets
+        unstable:
+          - v2
+        order: 2
+    - name: Get agentless host facet info
+      url: /api/latest/csm-settings/get-agentless-host-facet-info/
+      identifier: csm-settings-get-agentless-host-facet-info
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMAgentlessHostFacetInfo
+        unstable:
+          - v2
+        order: 3
+    - name: List agentless hosts
+      url: /api/latest/csm-settings/list-agentless-hosts/
+      identifier: csm-settings-list-agentless-hosts
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMAgentlessHosts
+        unstable:
+          - v2
+        order: 1
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats
