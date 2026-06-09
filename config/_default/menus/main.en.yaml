@@ -10096,9 +10096,9 @@ menu:
       url: account_management/guide/
       parent: account_management
       weight: 17
-    - name: Cloud-based Authentication
-      identifier: account_management_cloud_auth
-      url: account_management/cloud_provider_authentication/
+    - name: Workload Identity Federation
+      identifier: account_management_workload_identity_federation
+      url: account_management/workload_identity_federation/
       parent: account_management
       weight: 18
     - name: Data Security
