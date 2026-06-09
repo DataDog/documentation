@@ -30,6 +30,7 @@ Enable the Google APIs you plan to use in your workflows and apps:
 | Google Sheets | Google Sheets API |
 | Google Forms | Google Forms API |
 | Google Chat | Google Chat API |
+| Google Workspace Admin | Admin SDK API |
 
 ### Configure the OAuth consent screen
 
@@ -147,6 +148,7 @@ Select only the scopes required by the actions you intend to use.
 | Admin: View Users | `https://www.googleapis.com/auth/admin.directory.user.readonly` | View users in the directory |
 | Admin: Manage Groups | `https://www.googleapis.com/auth/admin.directory.group` | Create, read, update, and delete groups |
 | Admin: View Groups | `https://www.googleapis.com/auth/admin.directory.group.readonly` | View groups in the directory |
+| Admin: Manage User Security | `https://www.googleapis.com/auth/admin.directory.user.security` | Manage user security information, including session sign-out and third-party application tokens |
 
 ## Further reading
 
@@ -161,3 +163,4 @@ Select only the scopes required by the actions you intend to use.
 [5]: https://console.cloud.google.com/apis/credentials
 [6]: https://app.datadoghq.com/actions/action-catalog
 [7]: https://chat.datadoghq.com/
+[8]: https://console.cloud.google.com/apis/library/admin.googleapis.com
