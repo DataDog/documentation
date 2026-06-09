@@ -17,12 +17,17 @@ Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send o
 
 <div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-You might prefer this option if you're looking for a straightforward setup and want to send telemetry directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+Your setup depends on where your telemetry is coming from. Some environments require a dedicated endpoint or additional headers before you configure signal-specific options.
 
-- [OTLP logs intake endpoint][3]
-- [OTLP metrics intake endpoint][4]
-- [Instrumenting for Agent Observability][5]
-- OTLP traces intake endpoint (in Preview): To request access for use, contact your Customer Success Manager.
+| If your telemetry comes from... | Start here |
+|---|---|
+| A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
+| A serverless environment sending traces (Lambda, Azure Functions, Cloud Run, ECS Fargate) | [Serverless][7] |
+| Your own app, host, container, or OpenTelemetry Collector | [Logs][3], [Metrics][4], or Traces (in Preview) |
+
+For Traces in Preview, contact your Customer Success Manager to request access.
+
+See also: [Instrumenting for Agent Observability][5].
 
 ## Further reading
 
@@ -33,3 +38,5 @@ You might prefer this option if you're looking for a straightforward setup and w
 [3]: /opentelemetry/setup/intake_endpoint/otlp_logs
 [4]: /opentelemetry/setup/intake_endpoint/otlp_metrics
 [5]: /llm_observability/instrumentation/otel_instrumentation/?tab=python#setup
+[6]: /opentelemetry/setup/otlp_ingest/managed_platforms/
+[7]: /opentelemetry/setup/otlp_ingest/serverless/
