@@ -22,16 +22,12 @@ Data Streams Monitoring supports tracing event-driven pipelines where AWS Lambda
 | Node.js | Automatic | Automatic | Manual |
 | Python | Automatic | Automatic | Manual |
 | Go | Manual | Manual | Manual |
+| .NET | Manual | Manual | Manual |
+| Java | Manual | Manual | Manual |
 
 ## Prerequisites
 
 Install the [Datadog Lambda Extension][5] on your Lambda functions.
-
-| Language | Minimum library version |
-|---|---|
-| Node.js | [`datadog-lambda-js` v12.128.0][1] |
-| Python | [`datadog-lambda-python` v112][2] |
-| Go | [`dd-trace-go` v1.56.1][3] |
 
 ## Setup
 
@@ -282,6 +278,270 @@ func handler(ctx context.Context, event events.SQSEvent) (lambdainternal.BatchRe
 ```
 
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+### Amazon SQS
+
+.NET Lambda functions automatically instrument Amazon SQS with Data Streams Monitoring at the producer side. In your consuming Lambda function you need to manually extract the DSM context and set the checkpoint.
+
+Set the following environment variable on both your producer and consumer Lambda functions:
+
+```yaml
+environment:
+  DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+In your consuming Lambda function, extract the DSM context and set the checkpoint:
+
+```csharp
+public class FunctionHandler(SQSEvent evt) {
+    foreach (var record in evt.Records)
+    {
+        new SpanContextExtractor().ExtractIncludingDsm(record, ContextExtractionUtils.GetValuesFromMessage, "sqs", record.EventSourceArn.Split(':').LastOrDefault());
+    }
+}
+
+public static IEnumerable<string?> GetValuesFromMessage(SQSEvent.SQSMessage message, string key)
+{
+    var datadogAttribute = message.MessageAttributes["_datadog"];
+
+    if (datadogAttribute is null)
+    {
+        yield break;
+    }
+
+    if (datadogAttribute.StringValue is not null)
+    {
+        var jsonDocument = JsonDocument.Parse(datadogAttribute.StringValue);
+
+        if (jsonDocument.RootElement.TryGetProperty(key, out var value))
+        {
+            yield return value.GetString();
+        }
+    }
+    else if (datadogAttribute.BinaryValue is not null)
+    {
+        using var reader = new StreamReader(datadogAttribute.BinaryValue, Encoding.UTF8, leaveOpen: true);
+        string binaryValue = reader.ReadToEnd();
+
+        byte[] jsonBytes = Convert.FromBase64String(binaryValue);
+        using JsonDocument doc = JsonDocument.Parse(jsonBytes);
+
+        if (doc.RootElement.TryGetProperty(key, out var value))
+        {
+            yield return value.GetString();
+        }
+    }
+}
+```
+
+{{% data_streams/monitoring-sqs-pipelines %}}
+
+### Amazon SNS
+
+
+.NET Lambda functions automatically instrument Amazon SQS with Data Streams Monitoring at the producer side. In your consuming Lambda function you need to manually extract the DSM context and set the checkpoint.
+
+Set the following environment variable on both your producer and consumer Lambda functions:
+
+```yaml
+environment:
+  DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+In your consuming Lambda function, extract the DSM context and set the checkpoint. You can use the above Amazon SQS example as a reference.
+
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
+
+### Amazon EventBridge
+
+Amazon EventBridge does not support message attributes. Data Streams Monitoring context must be embedded directly in the event `detail` object. Use [manual instrumentation][4] to set produce and consume checkpoints on your Lambda functions.
+
+#### Producer Lambda
+
+```csharp
+public async Task PublishMessage() {
+  var carrier = CreateCarrier(eventBusName, evt.Type);
+
+  evt = evt with
+  {
+      Dsm = carrier.Count > 0 ? carrier : null,
+      TraceParent = carrier.TryGetValue("traceparent", out var traceParent) ? traceParent : null
+  };
+
+  await _eventBridgeClient.PutEventsAsync(
+      new PutEventsRequest
+      {
+          Entries =
+          [
+              new PutEventsRequestEntry
+              {
+                  EventBusName = eventBusName,
+                  Source = evt.Source,
+                  DetailType = evt.Type,
+                  Detail = JsonSerializer.Serialize(evt, SerializerOptions)
+              }
+          ]
+      });
+}
+
+private Dictionary<string, string> CreateCarrier(string eventBusName, string detailType)
+{
+    var activeSpan = Tracer.Instance.ActiveScope?.Span;
+
+    var carrier = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+    if (activeSpan?.Context is null) return carrier;
+
+    new SpanContextInjector().InjectIncludingDsm(
+        carrier,
+        static (headers, key, value) => headers[key] = value,
+        activeSpan.Context,
+        $"eventbridge",
+        $"{eventBusName}:{detailType}");
+
+    return carrier;
+}
+```
+
+#### Consumer Lambda
+
+This applies if you are consuming directly from EventBridge using a Lambda function, or you first send the message to SQS and then on to Lambda.
+
+```csharp
+public Task Consume(
+    EventBridgeEnvelope<EventBridgeCloudEventEnvelope<SqsDemoPayload>> evnt,
+    ILambdaContext context)
+{
+    new SpanContextExtractor().ExtractIncludingDsm(
+        evnt.Detail.Dsm,
+        ContextExtractionUtils.ExtractFromDictionary,
+        $"eventbridge",
+        $"{Environment.GetEnvironmentVariable("EVENT_BUS_NAME") ?? "default"}:{evnt.Detail.Type}");
+
+    return Task.CompletedTask;
+}
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+### Amazon SQS
+
+Node.js Lambda functions automatically instrument Amazon SQS with Data Streams Monitoring. Set the following environment variable on both your producer and consumer Lambda functions:
+
+```yaml
+environment:
+  DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+As a default, the context is **only** injected into the first message in the batch. If you need to inject the context into all messages in the batch set the following environment variable:
+
+```yaml
+environment:
+  DD_TRACE_AWS_SDK_BATCH_PROPAGATION_ENABLED: "true"
+```
+
+{{% data_streams/monitoring-sqs-pipelines %}}
+
+### Amazon SNS
+
+Node.js Lambda functions automatically instrument Amazon SNS with Data Streams Monitoring. Set the following environment variable on your producer Lambda function:
+
+```yaml
+environment:
+  DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+As a default, the context is **only** injected into the first message in the batch. If you need to inject the context into all messages in the batch set the following environment variable:
+
+```yaml
+environment:
+  DD_TRACE_AWS_SDK_BATCH_PROPAGATION_ENABLED: "true"
+```
+
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
+
+### Amazon Kinesis
+
+Node.js Lambda functions automatically instrument Amazon Kinesis with Data Streams Monitoring. Set the following environment variable on your producer Lambda function:
+
+```yaml
+environment:
+  DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+As a default, the context is **only** injected into the first message in the batch. If you need to inject the context into all messages in the batch set the following environment variable:
+
+```yaml
+environment:
+  DD_TRACE_AWS_SDK_BATCH_PROPAGATION_ENABLED: "true"
+```
+
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
+
+### Amazon EventBridge
+
+Amazon EventBridge does not support message attributes. Data Streams Monitoring context must be embedded directly in the event `detail` object. Use [manual instrumentation][4] to set produce and consume checkpoints on your Lambda functions.
+
+#### Producer Lambda
+
+```typescript
+// EventBridge does not carry message attributes, so we inject the DSM carrier manually
+const carrier: Record<string, string> = {};
+
+// Calling `setProduceCheckpoint` creates the DSM checkpoint, and then injects the DSM context
+// into the `carrier` object.
+tracer.dataStreamsCheckpointer.setProduceCheckpoint(
+  `eventbridge:${eventBusName}`,
+  evt.type,
+  carrier,
+);
+
+// Construct the Event
+const putEventsEntry: PutEventsRequestEntry = {
+  EventBusName: eventBusName,
+  Source: evt.source,
+  DetailType: evt.type,
+  Detail: JSON.stringify({
+    ...evt,
+    _dsm: carrier,
+  }),
+};
+
+await ebClient.send(
+  new PutEventsCommand({
+    Entries: [putEventsEntry],
+  }),
+);
+```
+
+#### Consumer Lambda
+
+This applies if you are consuming directly from EventBridge using a Lambda function, or you first send the message to SQS and then on to Lambda.
+
+```typescript
+// Extract the _dsm carrier from the event detail to parse the DSM context
+const datadogHeaders = (event.detail as Record<string, unknown>)["_dsm"];
+const dsmCarrier: Record<string, string> =
+  datadogHeaders && typeof datadogHeaders === "object"
+    ? { ...(datadogHeaders as Record<string, string>) }
+    : {};
+
+tracer.dataStreamsCheckpointer.setConsumeCheckpoint(
+  process.env.EVENT_BUS_NAME ?? (() => { throw new Error("EVENT_BUS_NAME environment variable is not set"); })(),
+  event["detail-type"],
+  dsmCarrier,
+);
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading
