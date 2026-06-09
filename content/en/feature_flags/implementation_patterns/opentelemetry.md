@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-You can add [Datadog Feature Flags][1] to an application that uses [OpenTelemetry (OTel)][2] for tracing. Datadog supports two integration paths. In both cases, feature flags evaluate correctly and your existing OpenTelemetry API instrumentation code remains the same.
+You can add [Datadog Feature Flags][1] to an application that uses [OpenTelemetry (OTel)][2] for tracing. Datadog supports two integration options. In both cases, feature flags evaluate correctly and your existing OpenTelemetry API instrumentation code remains the same.
 
 Choose an integration option based on whether you can change your tracing provider initialization:
 
@@ -28,13 +28,12 @@ If you can change your tracing provider initialization, Option A is recommended.
 
 Follow the Datadog Feature Flags installation guide for your language:
 
-- [.NET Feature Flags](/feature_flags/server/dotnet/)
-- [Go Feature Flags](/feature_flags/server/go/)
-- [Java Feature Flags](/feature_flags/server/java/)
-- [Node.js Feature Flags](/feature_flags/server/nodejs/)
-- [Python Feature Flags](/feature_flags/server/python/)
-- [Ruby Feature Flags](/feature_flags/server/ruby/)
-
+- [.NET Feature Flags][3]
+- [Go Feature Flags][4]
+- [Java Feature Flags][5]
+- [Node.js Feature Flags][6]
+- [Python Feature Flags][7]
+- [Ruby Feature Flags][8]
 
 ## Option A: Register the Datadog SDK as the TracerProvider
 
@@ -66,7 +65,7 @@ var client = Api.Instance.GetClient("my-service");
 // Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for .NET](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net&platform=traces).
+For more detail, see [OpenTelemetry API Support for .NET][9].
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -115,7 +114,7 @@ func main() {
 }
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go&platform=traces).
+For more detail, see [OpenTelemetry API Support for Go][10].
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -142,7 +141,7 @@ Client client = api.getClient("my-app");
 /* Your existing OpenTelemetry API calls continue to work unchanged */
 {{< /code-block >}}
 
-**Note**: Depend on the OpenTelemetry API only, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces).
+**Note**: Depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java][11].
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -180,7 +179,7 @@ const otelTracer = otel.trace.getTracer('my-service');
 otelTracer.startActiveSpan('my-operation', (span) => { ... });
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Node.js](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces).
+For more detail, see [OpenTelemetry API Support for Node.js][12].
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -208,7 +207,7 @@ client = api.get_client()
 # Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Python](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python&platform=traces).
+For more detail, see [OpenTelemetry API Support for Python][13].
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -243,7 +242,7 @@ client = OpenFeature::SDK.build_client
 # Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Ruby](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby&platform=traces).
+For more detail, see [OpenTelemetry API Support for Ruby][14].
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -273,7 +272,7 @@ await Api.Instance.SetProviderAsync(provider);
 
 var client = Api.Instance.GetClient("my-service");
 
-// Your existing OpenTelemetry SDK initialization stays unchanged.
+// Your existing OpenTelemetry SDK initialization stays unchanged
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -313,7 +312,7 @@ func main() {
 
     client := openfeature.NewClient("my-service")
 
-    // Your existing OpenTelemetry SDK initialization stays unchanged.
+    // Your existing OpenTelemetry SDK initialization stays unchanged
 }
 {{< /code-block >}}
 
@@ -339,7 +338,7 @@ OpenFeatureAPI api = OpenFeatureAPI.getInstance();
 api.setProviderAndWait(new Provider());
 Client client = api.getClient("my-app");
 
-/* Your existing OpenTelemetry SDK initialization stays unchanged. */
+/* Your existing OpenTelemetry SDK initialization stays unchanged */
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -369,7 +368,7 @@ tracer.init({
 // Register the Datadog OpenFeature provider
 OpenFeature.setProvider(tracer.openfeature);
 
-// Your existing OpenTelemetry SDK initialization stays unchanged.
+// Your existing OpenTelemetry SDK initialization stays unchanged
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -395,7 +394,7 @@ provider = DataDogProvider()
 api.set_provider(provider)
 client = api.get_client()
 
-# Your existing OpenTelemetry SDK initialization stays unchanged.
+# Your existing OpenTelemetry SDK initialization stays unchanged
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -426,7 +425,7 @@ end
 
 client = OpenFeature::SDK.build_client
 
-# Your existing OpenTelemetry SDK initialization stays unchanged.
+# Your existing OpenTelemetry SDK initialization stays unchanged
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -553,3 +552,9 @@ For complete setup instructions, typed getters, evaluation context requirements,
 [6]: /feature_flags/server/nodejs/
 [7]: /feature_flags/server/python/
 [8]: /feature_flags/server/ruby/
+[9]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net&platform=traces
+[10]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go&platform=traces
+[11]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces
+[12]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces
+[13]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python&platform=traces
+[14]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby&platform=traces
