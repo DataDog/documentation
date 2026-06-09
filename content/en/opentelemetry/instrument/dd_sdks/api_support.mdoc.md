@@ -1561,7 +1561,7 @@ $logger->emit($record);
 
 ### Bridge Monolog to OTel logs {% #monolog-bridge-php %}
 
-To export logs written with Monolog through the OTel pipeline, attach the OpenTelemetry Monolog handler to your logger. The Datadog SDK detects this bridge and skips its standard `dd.*` injection on those loggers, because trace correlation is carried in the OTLP log record's dedicated `trace_id` and `span_id` fields.
+To export logs written with Monolog through the OTel pipeline, attach the OpenTelemetry Monolog handler to your logger. When you attach this handler, the Datadog SDK skips its standard `dd.*` log injection on that logger. Trace correlation is instead carried in the OTLP log record's `trace_id` and `span_id` fields.
 
 ```php
 use Monolog\Logger;
