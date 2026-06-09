@@ -23,7 +23,9 @@ Configure the SentinelOne destination when you [set up a pipeline][4]. You can s
 
 After you select the SentinelOne destination in the pipeline UI:
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the token. Do <b>not</b> enter the actual value.<br><br>If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with <code>DD_OP</code>. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is <code>DD_OP_PASSWORD_1</code>.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the token. Do <b>not</b> enter the actual value.</div>
+
+<div class="alert alert-info">If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with <code>DD_OP</code>. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is <code>DD_OP_PASSWORD_1</code>.</div>
 
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your SentinelOne logs environment in the dropdown menu.
