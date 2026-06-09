@@ -432,6 +432,19 @@ On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps 
 
 Each FQDN table lists the specific Datadog service it serves and the high-level category that service belongs to.
 
+<!--
+  INTENTIONAL OMISSIONS — do not add the following endpoints to this section:
+
+  - On Call (primary):   green.intake.ap2.datadoghq.com  (aws_private_link_on_call_service_name / on_call_endpoint_private_link)
+  - On Call (secondary): ivory.intake.ap2.datadoghq.com  (aws_private_link_on_call_secondary_service_name / on_call_secondary_endpoint_private_link)
+  - Datadog Web (orange): orange.intake.ap2.datadoghq.com (aws_private_link_web_ddog_service_name / web_ddog_endpoint_private_link)
+
+  These three endpoints serve non-agent, non-telemetry purposes (On-Call notification delivery and
+  Datadog web UI access) and are not intended for customer PrivateLink configuration. They are
+  defined in regions.config.js for completeness but should not appear in this color reference or
+  in the service-name tables above.
+-->
+
 ### Aqua (`vpce-svc-01b61a61d21fc7273`)
 
 - **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273`
