@@ -40,9 +40,7 @@ The logs pipeline moves each log line through a series of components:
 launcher -> tailer -> decoder -> processor -> strategy -> sender -> destination
 ```
 
-Each component samples how busy it is and reports a *utilization ratio*: the fraction of time the component spends doing work versus sitting idle. The Agent measures this ratio as an exponential moving average over a short (approximately 15-second) window, and also samples mid-operation so that a component blocked inside a single long call still registers as busy. A component whose utilization stays at or near 100% is busy nearly all the time and is a likely bottleneck.
-
-The status output reports current utilization alongside averages and maximums over longer windows so you can distinguish a brief spike from sustained pressure. It also reports how long each component has spent saturated and when it was last saturated, so you can correlate backpressure with the time you observed missing logs.
+Each component reports a *utilization* percentage: how much of its time it spends doing work rather than sitting idle. A component near 100% is busy almost constantly and is a likely bottleneck. The status output shows current utilization alongside recent averages and peaks, so you can tell a brief spike apart from sustained pressure. It also records when each component was last saturated, so you can match backpressure to the time your logs went missing.
 
 The diagnostics cover these pipeline components:
 
@@ -160,17 +158,7 @@ If saturation coincides with log loss from rotating files, also reduce the chanc
 - Increase source-side retention so rotated files remain on disk longer, giving the Agent time to catch up after a backpressure episode.
 - Confirm that the [`open_files_limit`][5] is high enough that the Agent does not stop tailing active files.
 
-## Monitor backpressure with metrics
-
-The Agent emits per-component utilization as metrics so you can build dashboards and monitors that alert before backpressure causes a slowdown. Each metric is tagged with `name` (the component) and `instance`.
-
-| Metric | Description |
-|--------|-------------|
-| `logs_component_utilization.ratio` | The utilization ratio for a component. Use this for trend dashboards and alerting. |
-| `logs_component_utilization.items` | The number of items held in a component and its buffers. A growing value indicates the component is buffering work it cannot drain. |
-| `logs_component_utilization.bytes` | The number of bytes held in a component and its buffers. |
-
-**Note**: Create a monitor on `logs_component_utilization.ratio` grouped by `name` and `instance` to catch a saturated component before it causes sustained backpressure. For diagnosing a short, severe spike after the fact, use the **Last saturated** timestamp in the status output rather than the smoothed metric.
+## Get help
 
 If you continue to see sustained saturation after taking corrective action, [send an Agent flare][6] and [contact Datadog Support][7].
 
