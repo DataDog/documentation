@@ -54,8 +54,6 @@ Select your cloud provider for platform-specific resource attribute configuratio
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-<!-- TODO: AWS resource attributes are unconfirmed. Need eng to verify cloud.provider/cloud.platform values for Lambda and ECS Fargate, plus any additional required attributes. -->
-
 ### Lambda
 
 The [AWS Distro for OpenTelemetry (ADOT) Lambda layer][100] provides automatic instrumentation and resource detection for Lambda functions.
@@ -69,23 +67,49 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-sourc
 export OTEL_SERVICE_NAME="my-lambda-function"
 ```
 
-The ADOT layer handles resource attribute detection automatically. To set resource attributes manually instead:
+The ADOT layer handles resource attribute detection automatically. To set resource attributes manually, `cloud.provider` and `faas.id` (a parseable Lambda ARN) are required:
 
 ```shell
-export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,cloud.platform=aws_lambda"
+export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,faas.id=arn:aws:lambda:us-east-1:123456789012:function:my-function"
 ```
+
+If `faas.id` is not set, add `cloud.platform=aws_lambda` so Datadog can identify the platform.
+
+| Attribute | Required | Description |
+|---|---|---|
+| `cloud.provider` | Yes | Set to `aws` |
+| `faas.id` | Yes | Lambda function ARN |
+| `cloud.platform` | Conditional | Set to `aws_lambda` if `faas.id` is not set |
+| `cloud.region` | No | AWS region |
+| `faas.name` | No | Function name |
+| `faas.version` | No | Function version |
+| `faas.instance` | No | Instance identifier |
+| `faas.max_memory` | No | Max memory configured (bytes) |
 
 ### ECS Fargate
 
-Configure the OpenTelemetry SDK to export traces directly from your ECS task:
+ECS Fargate identification is driven by the task ARN and launch type, not by `cloud.provider` or `cloud.platform`. Configure the OpenTelemetry SDK to export traces directly from your ECS task:
 
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
 export OTEL_SERVICE_NAME="my-ecs-service"
-export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,cloud.platform=aws_ecs"
+export OTEL_RESOURCE_ATTRIBUTES="aws.ecs.task.arn=arn:aws:ecs:us-east-1:123456789012:task/my-cluster/1234567890abcdef,aws.ecs.launchtype=fargate"
 ```
+
+| Attribute | Required | Description |
+|---|---|---|
+| `aws.ecs.task.arn` | Yes | ECS task ARN |
+| `aws.ecs.launchtype` | Yes | Set to `fargate` (case-insensitive) |
+| `cloud.provider` | No | Defaults to `aws` |
+| `cloud.platform` | No | Defaults to `aws_ecs` |
+| `cloud.region` | No | AWS region |
+| `cloud.availability_zone` | No | Availability zone |
+| `aws.ecs.cluster.arn` | No | Cluster ARN |
+| `aws.ecs.task.family` | No | Task definition family |
+| `aws.ecs.task.id` | No | Task ID |
+| `aws.ecs.task.revision` | No | Task definition revision |
 
 [100]: https://aws-otel.github.io/docs/getting-started/lambda
 
