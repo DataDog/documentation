@@ -87,8 +87,8 @@ Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted das
 
 ## Search syntax {#search-syntax}
 
-{{< callout url="#" btn_hidden="true" header="New" >}}
-Dashboard search syntax is available on the Dashboard List page.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Dashboard search syntax is in Preview.
 {{< /callout >}}
 
 Use the search bar at the top of the Dashboard List page to filter dashboards by name, author, tags, or widget content. The search supports free-text queries, key:value filters, boolean operators, and range comparisons.
