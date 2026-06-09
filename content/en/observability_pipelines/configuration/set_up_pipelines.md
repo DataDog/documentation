@@ -94,7 +94,7 @@ Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq
 1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
 1. Set up the [Datadog Metrics][5] destination.
-1. Click **Edit** in the processor group to add, test, and validate your [processors][4] using [Pipeline Simulation][6].   
+1. Click **Edit** in the processor group to add, test, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
