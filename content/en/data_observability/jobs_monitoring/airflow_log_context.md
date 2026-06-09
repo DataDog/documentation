@@ -42,9 +42,6 @@ Run the following command:
 airflow config get-value logging logging_config_class
 ```
 
-- **Empty output**: No custom logging configuration is active. Use Option A in Step 2.
-- **Non-empty output**: You already have a custom configuration. Use Option B in Step 2 to avoid replacing it.
-
 **Note:** If `logging_config_class` points to a module that cannot be imported, Airflow falls back silently to the default configuration with no error. If you see no structured attributes in Datadog after setup, verify the module is importable from the worker environment.
 
 ### Step 2: Create `dd_airflow_log_context.py`
@@ -118,7 +115,11 @@ _task_logger.setdefault("handlers", []).append("dd_context")
 
 ### Step 3: Configure Airflow to load the module
 
-**Option A** — `airflow.cfg` or environment variable (preferred when no existing custom configuration exists)
+Choose one of the following options based on your Step 1 output:
+- **Empty output**: No custom logging configuration is active. Use Option A.
+- **Non-empty output**: You already have a custom configuration. Use Option B to avoid replacing it.
+
+**Option A**: `airflow.cfg` or environment variable (preferred when no existing custom configuration exists)
 
 Set the following in `airflow.cfg`:
 
@@ -140,7 +141,7 @@ For Kubernetes deployments:
   **Note:** Kubernetes environment variable values do not expand shell references. Setting `value: /opt/airflow/dd_addons:$PYTHONPATH` passes the literal string `$PYTHONPATH`. Set the full explicit path instead.
 - Apply the environment variable to worker pods. Adding it to scheduler and triggerer pods is harmless and recommended for consistency.
 
-**Option B** — existing `airflow_local_settings.py` (use when you already have a custom `LOGGING_CONFIG`)
+**Option B**: existing `airflow_local_settings.py` (use when you already have a custom `LOGGING_CONFIG`)
 
 Append the following to the bottom of your existing `airflow_local_settings.py`:
 
@@ -238,9 +239,9 @@ LOGGING_CONFIG = deepcopy(DEFAULT_LOGGING_CONFIG)
 
 ### Step 2: Configure Airflow to load the module
 
-The file must be imported inside the task subprocess before user code runs.
+The file must be imported inside the task subprocess before user code runs. Choose one of the following options:
 
-**Option A** — `logging_config_class`
+**Option A**: `logging_config_class`
 
 ```shell
 AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS=dd_airflow_log_context.LOGGING_CONFIG
@@ -250,7 +251,7 @@ Apply to worker pods. The same `PYTHONPATH` and Kubernetes notes from the Airflo
 
 **Note:** Whether Airflow 3.x's task subprocess honors `logging_config_class` depends on your deployment. Run the verification step before relying on this option. If the factory is not active, use Option B.
 
-**Option B** — `sitecustomize.py` (most reliable)
+**Option B**: `sitecustomize.py` (most reliable)
 
 Add the following to a `sitecustomize.py` on your image's `PYTHONPATH`:
 
