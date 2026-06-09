@@ -19,10 +19,13 @@ Use Observability Pipelines' syslog destinations to send logs to rsyslog or sysl
 
 Configure the rsyslog or syslog-ng destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the endpoint URL. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
 After you select the rsyslog or syslog-ng destination in the pipeline UI:
 
 - Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
-	- **Note**: Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do **not** enter the actual values.
 
 See [Matching log fields to syslog fields](#matching-log-fields-to-syslog-fields) for information on how fields are matched.
 
