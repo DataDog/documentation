@@ -91,7 +91,7 @@ Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted das
 Dashboard search syntax is in Preview.
 {{< /callout >}}
 
-Use the search bar at the top of the Dashboard List page to filter dashboards by name, author, tags, or widget content. The search supports free-text queries, key:value filters, boolean operators, and range comparisons.
+Use the search bar at the top of the Dashboard List page to filter dashboards by name, author, tags, or widget content. The search supports free-text queries, key:value filters, Boolean operators, and range comparisons.
 
 ### Free-text search
 
@@ -115,7 +115,7 @@ Narrow results to a specific field using `key:value` syntax.
 | `favorites:true` | Dashboards you have starred | `favorites:true` |
 | `type:<value>` | Dashboard type. Use `custom`, `integration`, or concrete values such as `custom_timeboard`, `custom_screenboard`, `integration_timeboard`, `integration_screenboard`. | `type:integration` |
 | `is_shared:true` | Dashboards with link sharing enabled | `is_shared:true` |
-| `popularity:<range>` | Popularity score (0–1) | `popularity:>=0.5` |
+| `popularity:<range>` | Popularity score (0 to 1) | `popularity:>=0.5` |
 | `widgets.count:<range>` | Number of widgets | `widgets.count:<5` |
 | `widgets.title:<value>` | Widget title | `widgets.title:cpu` |
 | `widgets.type:<value>` | Widget type | `widgets.type:geomap` |
