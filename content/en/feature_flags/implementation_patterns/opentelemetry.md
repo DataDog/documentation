@@ -524,14 +524,7 @@ is_enabled = client.fetch_boolean_value(
 
 In both integration options, feature flags evaluate the same way. Flag configurations are delivered through the same Remote Configuration channel.
 
-For complete setup instructions, typed getters, evaluation context requirements, and testing patterns, see your language's server-side SDK documentation:
-
-- [.NET Feature Flags][3]
-- [Go Feature Flags][4]
-- [Java Feature Flags][5]
-- [Node.js Feature Flags][6]
-- [Python Feature Flags][7]
-- [Ruby Feature Flags][8]
+For complete setup instructions, typed getters, evaluation context requirements, and testing patterns, see your language's [server-side SDK documentation][1].
 
 ## Further reading
 
