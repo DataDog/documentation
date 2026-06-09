@@ -85,10 +85,10 @@ Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted das
 
 {{< img src="dashboards/list/recently_deleted_restore.png" alt="Restore deleted dashboard on the Recently Deleted list" style="width:100%;">}}
 
-## Search syntax
+## Search syntax {#search-syntax}
 
 {{< callout url="#" btn_hidden="true" header="New" >}}
-Dashboard search syntax is available on the updated Dashboard List page.
+Dashboard search syntax is available on the Dashboard List page.
 {{< /callout >}}
 
 Use the search bar at the top of the Dashboard List page to filter dashboards by name, author, tags, or widget content. The search supports free-text queries, key:value filters, boolean operators, and range comparisons.
@@ -104,11 +104,11 @@ Type one or more words to search across dashboard titles, descriptions, author n
 
 ### Key:value filters
 
-Narrow results to a specific field using `field:value` syntax.
+Narrow results to a specific field using `key:value` syntax.
 
 | Filter | Description | Example |
 |--------|-------------|---------|
-| `author:<value>` | Dashboards whose author handle or display name matches | `author:brandon` |
+| `author:<value>` | Dashboards whose author handle or display name matches | `author:jane.doe` |
 | `title:<value>` | Dashboard title | `title:elasticsearch` |
 | `description:<value>` | Dashboard description | `description:latency` |
 | `team:<value>` | Team tag | `team:dashboards-backend` |
@@ -134,7 +134,7 @@ Combine filters with `AND`, `OR`, and `NOT` (case-sensitive). The `-` prefix and
 | `AND` | Both conditions must match | `type:integration AND team:platform` |
 | `OR` | Either condition must match | `k8s OR kubernetes` |
 | `NOT` / `-` / `!` | Exclude matching dashboards | `NOT type:integration` |
-| `field:(A OR B)` | Match either value for the same field | `team:(backend OR frontend)` |
+| `field:(A OR B)` | Match either value within a single field | `team:(backend OR frontend)` |
 
 ### Range operators
 
