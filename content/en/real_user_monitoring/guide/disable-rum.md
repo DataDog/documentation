@@ -26,7 +26,7 @@ These two components are independent. Disabling one does not automatically disab
 
 | Action | Result |
 |---|---|
-| Delete application from Datadog UI, but SDK still in your code | The SDK continues sending data. Depending on how the application deletion is handled server-side, events may still be ingested. |
+| Delete application from Datadog UI, but SDK still in your code | The application is marked as disabled. The SDK continues running in your code, but Datadog rejects the data at intake—events are not ingested or billed. |
 | Remove SDK from your code, but application still in Datadog | No new data is sent. The application remains visible in Datadog with a "no data" state, and its dashboards and monitors remain intact. |
 
 ## Disable the SDK in your application
