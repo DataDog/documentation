@@ -148,7 +148,7 @@ Contact your Datadog Customer Success Manager to schedule dedicated time windows
 {{< tabs >}}
 {{% tab "Using Fleet Automation (recommended)" %}}
 
-From the [Fleet Automation][13] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab, you can create a failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites.
+From the [Fleet Automation][100] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab, you can create a failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites.
 
 To create a failover policy, click on {{< ui >}}Create Failover Policy{{< /ui >}}.
 
