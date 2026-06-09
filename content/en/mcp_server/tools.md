@@ -18,7 +18,7 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and LLM Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -875,9 +875,9 @@ Guides you through onboarding Kubernetes clusters to Datadog.
 
 ### `llm_observability_onboarding`
 *Toolset: **onboarding***\
-Guides you through onboarding LLM Observability in Datadog.
+Guides you through onboarding Agent Observability in Datadog.
 
-- Help me set up LLM Observability for my AI application.
+- Help me set up Agent Observability for my AI application.
 
 ### `test_optimization_onboarding`
 *Toolset: **onboarding***\
@@ -1042,6 +1042,21 @@ Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud St
 
 - Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
 - Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
+
+## Remote Actions
+
+<div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
+
+Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a [restricted shell interpreter][63]. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
+
+### `datadog_remote_action_restricted_shell_run_command`
+*Toolset: **remote-actions***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a read-only shell command on a specified host. Supported commands include: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss`, and `ip`. Supports pipes, loops, conditionals, variable assignment, and globbing.
+
+- Show me the last 100 lines of the Datadog Agent log on host `prod-web-01`.
+- Find all ERROR entries in `/var/log/app/` on host `db-replica-3` from the last hour.
+- Get the contents of `/etc/datadog-agent/datadog.yaml` on host `prod-worker-07`.
 
 ## RUM
 
@@ -1519,3 +1534,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[63]: /agent/guide/rshell/
