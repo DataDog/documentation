@@ -5189,16 +5189,21 @@ menu:
       parent: dbm
       identifier: dbm_database_investigator
       weight: 17
+    - name: Bits Database Optimization
+      url: database_monitoring/bits_database_optimization
+      parent: dbm
+      identifier: dbm_bits_database_optimization
+      weight: 18
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 18
+      weight: 19
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 19
+      weight: 20
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
