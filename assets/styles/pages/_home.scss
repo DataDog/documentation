@@ -166,6 +166,9 @@
     }
 }
 
+$product-collapse-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+$product-collapse-duration: 300ms;
+
 .product-section {
     display: flex;
     flex-direction: column;
@@ -182,6 +185,58 @@
         display: flex;
         align-items: center;
         gap: 0.6rem;
+    }
+
+    &__caret-button {
+        margin-left: auto;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        background: none;
+        border: 0;
+        border-radius: 6px;
+        cursor: pointer;
+        color: rgba(28, 43, 52, 0.5);
+        transition: background-color 150ms ease;
+
+        &:hover  { background-color: rgba(28, 43, 52, 0.05); }
+        &:active { background-color: rgba(28, 43, 52, 0.08); }
+        &:focus-visible {
+            outline: 2px solid $brand-primary;
+            outline-offset: 2px;
+        }
+    }
+
+    &__caret {
+        display: inline-flex;
+        align-items: center;
+        line-height: 1;
+        transition: transform $product-collapse-duration $product-collapse-ease;
+    }
+
+    &.is-open &__caret {
+        transform: rotate(90deg);
+    }
+
+    &__collapsible {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows $product-collapse-duration $product-collapse-ease;
+    }
+
+    &.is-open &__collapsible {
+        grid-template-rows: 1fr;
+    }
+
+    &__collapsible-inner {
+        overflow: hidden;
+        min-height: 0;
     }
 
     &__icon {
@@ -218,7 +273,7 @@
     }
 
     &__card {
-        flex: 1;
+        height: 100%;
         background: white;
         border-radius: 8px;
         padding: 28px 32px;
