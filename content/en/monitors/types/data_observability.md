@@ -86,7 +86,7 @@ In addition to your own tags, Datadog computes attributes for your data assets t
 
 | Attribute | Values | Description |
 |---|---|---|
-| `lineage_score` | `0.00`, `0.10`, `0.30`, `0.50`, `0.70`, `0.90`, or `1.00` | A relative measure of how connected an asset is in your lineage graph, based on how many downstream assets depend on it compared to other assets of the same type. Higher values identify the tables, views, and columns that the most downstream consumers depend on. |
+| `lineage_score` | `0.00`, `0.10`, `0.30`, `0.50`, `0.70`, `0.90`, or `1.00` | A relative measure of how connected an asset is in your lineage graph, based on how many downstream assets depend on it compared to other assets of the same type. Higher values identify the tables, views, and columns that the downstream consumers depend on. |
 
 `lineage_score` is bucketed into the discrete tiers listed above rather than taking a continuous value, so filter on one of those exact values. Match a single tier, or combine tiers with `OR`. For example, `lineage_score:1.00` returns your most depended-on assets, and `lineage_score:(0.90 OR 1.00)` returns the top two tiers.
 
