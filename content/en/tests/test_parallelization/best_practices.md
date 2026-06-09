@@ -1,5 +1,6 @@
 ---
 title: Test Parallelization Best Practices
+description: Optimize Test Parallelization planning and test discovery for Ruby and Rails test suites.
 further_reading:
   - link: "/tests/test_parallelization/setup/"
     tag: "Documentation"

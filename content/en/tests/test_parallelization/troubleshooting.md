@@ -1,5 +1,6 @@
 ---
 title: Test Parallelization Troubleshooting
+description: Troubleshoot Test Parallelization plan artifacts, CI node selection, skippable tests, and custom commands.
 further_reading:
   - link: "/tests/test_parallelization/setup/"
     tag: "Documentation"

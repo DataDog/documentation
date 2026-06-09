@@ -1,5 +1,6 @@
 ---
 title: Test Parallelization
+description: Reduce CI testing time by distributing test files across CI nodes or workers with Test Optimization data.
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}

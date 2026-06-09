@@ -1,5 +1,6 @@
 ---
 title: Configure Test Parallelization
+description: Configure Test Parallelization environment variables, parallelism selection, worker settings, and plan artifacts.
 further_reading:
   - link: "/tests/test_parallelization/setup/"
     tag: "Documentation"
@@ -9,7 +10,7 @@ further_reading:
     text: "Troubleshooting Test Parallelization"
   - link: "/tests/test_parallelization/best_practices/"
     tag: "Documentation"
-    text: "Test Parallelization best practices"
+    text: "Test Parallelization Best Practices"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
@@ -18,7 +19,7 @@ Test Parallelization is in Preview. Complete the form to request access.
 
 ## Environment variables
 
-Every `ddtest` setting can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables.
+Most `ddtest` settings can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables.
 
 `DD_TEST_OPTIMIZATION_RUNNER_PLATFORM`
 : Programming language.<br/>
@@ -33,7 +34,7 @@ Every `ddtest` setting can be passed as a CLI flag or as an environment variable
 **Example:** `rspec`, `minitest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. For more information, see [Custom test commands][2].<br/>
+: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
 **Example:** `bundle exec rspec --profile`
@@ -51,7 +52,7 @@ Every `ddtest` setting can be passed as a CLI flag or as an environment variable
 **Example:** `8`
 
 `DD_TEST_OPTIMIZATION_RUNNER_CI_JOB_OVERHEAD`
-: Estimated overhead of launching an additional CI node. The `ddtest` planner adds another CI node only if that node reduces wall time by at least this value.<br/>See [Parallelism selection][3] to learn more.<br/>
+: Estimated overhead of launching an additional CI node. The `ddtest` planner adds another CI node only if that node reduces wall-clock time by at least this value.<br/>See [Parallelism selection](#parallelism-selection) to learn more.<br/>
 **CLI flag:** `--ci-job-overhead`<br/>
 **Default:** `25s`<br/>
 **Example:** `25s`, `45s`, `1m`, `1500ms`, `0s`
@@ -69,7 +70,7 @@ Every `ddtest` setting can be passed as a CLI flag or as an environment variable
 **Example:** `2`, `ncpu`
 
 `DD_TEST_OPTIMIZATION_RUNNER_WORKER_ENV`
-: Sets environment variables for each worker process. Use `{{nodeIndex}}` and `{{workerIndex}}` placeholders to give each worker a unique value. For more information, see [Worker environment variables][1].<br/>
+: Sets environment variables for each worker process. Use `{{nodeIndex}}` and `{{workerIndex}}` placeholders to give each worker a unique value. For more information, see [Worker environment variables](#worker-environment-variables).<br/>
 **CLI flag:** `--worker-env`<br/>
 **Default:** Empty<br/>
 **Example:** `DB_NAME=testdb{{nodeIndex}}_{{workerIndex}};FIXTURE=fixture{{nodeIndex}}`
@@ -87,7 +88,8 @@ Every `ddtest` setting can be passed as a CLI flag or as an environment variable
 **Example:** `{"os.platform":"linux","os.version":"7.8.9","runtime.name":"ruby","runtime.version":"3.3.0"}`
 
 `DD_TEST_OPTIMIZATION_RUNNER_REPORT_ENABLED`
-: `ddtest` prints human-readable reports after command execution. Set to `false` to disable reports.<br/>
+: Controls whether `ddtest` prints human-readable reports after command execution. This setting is only available as an environment variable.<br/>
+**CLI flag:** None<br/>
 **Default:** `true`<br/>
 **Example:** `false`
 
@@ -99,9 +101,9 @@ In CI-node mode, this value is the CI node count. On a single CI node, this valu
 
 The optimal parallelism value is determined by the following criteria (in decreasing priority):
 
-- the lowest expected wall-clock time
-- the smallest imbalance between nodes/workers
-- the smallest number of nodes/workers
+- The lowest expected wall-clock time
+- The smallest imbalance between nodes or workers
+- The smallest number of nodes or workers
 
 `ddtest` uses the `--ci-job-overhead` setting to avoid always selecting the maximum number of CI nodes. With the default value of `25s`, `ddtest` adds another CI node only when that node is expected to save at least 25 seconds of wall-clock time.
 
@@ -162,7 +164,3 @@ Files under `.testoptimization/runner/cache/`, `.testoptimization/tests-discover
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: #worker-environment-variables
-[2]: #custom-test-commands
-[3]: #parallelism-selection

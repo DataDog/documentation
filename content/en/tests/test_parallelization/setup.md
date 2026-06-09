@@ -1,5 +1,6 @@
 ---
 title: Set Up Test Parallelization
+description: Set up Test Parallelization with ddtest, configure CI providers, and distribute test execution across CI nodes.
 further_reading:
   - link: "/tests/test_parallelization/configuration/"
     tag: "Documentation"
