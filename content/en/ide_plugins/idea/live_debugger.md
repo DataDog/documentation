@@ -13,6 +13,9 @@ further_reading:
 ---
 
 ## Overview
+
+<div class="alert alert-info">This feature is in limited support.</div>
+
 The Live Debugger enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging. The logpoints are set dynamically in running systems, so there is no need to redeploy your code to investigate and resolve issues. Logpoints are grouped into sessions and you can activate, edit, deactivate, or delete sessions (or individual logpoints) at any time. All sessions and logpoints automatically deactivate after 60 minutes.
 
 ## Live Debugger tab
