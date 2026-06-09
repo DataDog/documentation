@@ -1,6 +1,6 @@
 ---
 title: Set Up Deployment Gates
-description: "Evaluate deployment quality rules in your CI/CD pipeline — define rules inline (JIT, default) or use gates pre-configured in Datadog."
+description: "Evaluate deployment quality rules in your CI/CD pipeline — define rules inline (JIT, default) or use gates preconfigured in Datadog."
 further_reading:
 - link: "/deployment_gates/explore"
   tag: "Documentation"
@@ -21,7 +21,7 @@ Deployment Gates are in Preview. If you're interested in this feature, complete 
 A **Deployment Gate** evaluates one or more **rules** against a service and environment to decide whether a deployment should proceed. Deployment Gates support two modes:
 
 - **JIT (Just-In-Time, default)**: define rules inline in the evaluation request. No prior setup in Datadog is required.
-- **Pre-configured**: create gates and rules ahead of time in the Datadog UI, API, or Terraform, then reference them by service and environment at evaluation time.
+- **Preconfigured**: create gates and rules ahead of time in the Datadog UI, API, or Terraform, then reference them by service and environment at evaluation time.
 
 Both modes use the same [Rule types](#rule-types) and the same asynchronous evaluation lifecycle (`in_progress` → `pass` or `fail`).
 
@@ -79,7 +79,7 @@ A successful request returns a 202 status code with an `evaluation_id`. Poll the
 
 ## Rule types
 
-Each rule has a `type` and a set of `options`. The same options apply whether the rule is defined inline (JIT) or attached to a gate in Datadog (pre-configured). For the full schema and all available options, see the [Deployment Gates API reference][4].
+Each rule has a `type` and a set of `options`. The same options apply whether the rule is defined inline (JIT) or attached to a gate in Datadog (preconfigured). For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
@@ -140,7 +140,7 @@ The analysis is automatically performed for all APM-instrumented services, and n
 You can request a gate evaluation from your deployment pipeline in several ways. Each method supports both modes:
 
 - **JIT**: pass inline rules at evaluation time.
-- **Pre-configured**: reference a gate that already exists in Datadog by service and environment.
+- **Preconfigured**: reference a gate that already exists in Datadog by service and environment.
 
 The `datadog-ci` CLI, Argo Rollouts integration, and GitHub Action accept inline rules through a JSON config file using **camelCase** keys (`dryRun`). Direct API calls and the generic script send the same configuration in the request payload using **snake_case** keys (`dry_run`), matching the API schema. See the [Deployment Gates API reference][4] for the full request schema.
 
@@ -180,7 +180,7 @@ Example `gate-config.json` (camelCase):
 }
 ```
 
-**Pre-configured mode** — omit `--config` to evaluate a gate that already exists in Datadog:
+**Preconfigured mode** — omit `--config` to evaluate a gate that already exists in Datadog:
 
 ```bash
 datadog-ci deployment gate --service transaction-backend --env staging
@@ -297,7 +297,7 @@ spec:
                       name: gate-config
 ```
 
-**Pre-configured mode** — omit the ConfigMap and the `--config` flag, and reference a gate that already exists in Datadog:
+**Preconfigured mode** — omit the ConfigMap and the `--config` flag, and reference a gate that already exists in Datadog:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -456,7 +456,7 @@ Example `.github/gate-config.json`:
 }
 ```
 
-**Pre-configured mode** — omit the `config` input to evaluate a gate that already exists in Datadog:
+**Preconfigured mode** — omit the `config` input to evaluate a gate that already exists in Datadog:
 
 ```yaml
       - name: Evaluate Deployment Gate
@@ -492,7 +492,7 @@ For complete configuration options and detailed usage examples, see the [`DataDo
 {{% /tab %}}
 {{% tab "Generic script" %}}
 
-Use this script as a starting point. It evaluates a gate using inline JIT rules by default. To evaluate a pre-configured gate instead, remove the `configuration` field from the `PAYLOAD` block.
+Use this script as a starting point. It evaluates a gate using inline JIT rules by default. To evaluate a preconfigured gate instead, remove the `configuration` field from the `PAYLOAD` block.
 
 Replace the following:
 
@@ -722,7 +722,7 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
 EOF
 ```
 
-**Pre-configured mode** — omit the `configuration` field to evaluate a gate that already exists in Datadog:
+**Preconfigured mode** — omit the `configuration` field to evaluate a gate that already exists in Datadog:
 
 ```bash
 curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
@@ -745,12 +745,12 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
 EOF
 ```
 
-Optional attributes for the pre-configured mode:
+Optional attributes for the preconfigured mode:
 - `identifier`: Optional, defaults to `default`.
 - `version`: Required for APM Faulty Deployment Detection rules.
 - `primary_tag`: Optional, scopes down APM Faulty Deployment Detection analysis to the selected primary tag.
 
-**Note**: In pre-configured mode, a 404 HTTP response can mean the gate was not found, or the gate was found but has no rules.
+**Note**: In preconfigured mode, a 404 HTTP response can mean the gate was not found, or the gate was found but has no rules.
 
 If the gate evaluation was successfully started, a 202 HTTP status code is returned:
 
@@ -819,7 +819,7 @@ The field `data.attributes.gate_status` contains the result of the evaluation, w
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pre-configured gates (alternative)
+## Preconfigured gates (alternative)
 
 If you want to manage gates as persistent entities in Datadog — for example, to share rules across services, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI — create them ahead of time and reference them by service and environment at evaluation time.
 
@@ -853,7 +853,7 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 
 1. Run the gate in dry-run mode:
    - **JIT**: set `dry_run: true` on the `configuration` (or `dryRun: true` in the CLI config file), or per individual rule.
-   - **Pre-configured**: create the gate with Evaluation Mode set to {{< ui >}}Dry Run{{< /ui >}}.
+   - **Preconfigured**: create the gate with Evaluation Mode set to {{< ui >}}Dry Run{{< /ui >}}.
 2. Add the gate evaluation to your deployment process. Because the evaluation is in dry-run mode, the Deployment Gates API response always contains a `pass` status and deployments are not impacted by the gate result.
 3. After a period of time (for example, 1-2 weeks), check the gate and rule executions in the UI to see the statuses of the gates and rules evaluated. The gate status in the UI does not take into account the dry-run mode — you can see when the gate would have failed and the reason behind it.
 4. When you are confident the gate behavior is as you expect, switch off dry-run mode. Afterwards, the API starts returning the real status and deployments are promoted or rolled back based on the gate result.
