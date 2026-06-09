@@ -1,23 +1,23 @@
 ---
 title: Lapdog
-description: "Run an LLM Observability dashboard locally to inspect coding-agent and application traces in your browser without a Datadog account."
+description: "Run an Agent Observability dashboard locally to inspect coding-agent and application traces in your browser without a Datadog account."
 further_reading:
     - link: 'https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md'
       tag: 'GitHub'
       text: 'Lapdog README on GitHub'
     - link: '/llm_observability/instrumentation/sdk'
       tag: 'Documentation'
-      text: 'Instrument your application with the LLM Observability SDK'
+      text: 'Instrument your application with the Agent Observability SDK'
     - link: '/llm_observability/instrumentation/auto_instrumentation'
       tag: 'Documentation'
-      text: 'Auto-instrumentation for LLM Observability'
+      text: 'Auto-instrumentation for Agent Observability'
 ---
 
 ## Overview
 
-Lapdog is a local development tool for LLM Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
+Lapdog is a local development tool for Agent Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
 
-Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in LLM Observability alongside your production traffic.
+Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in Agent Observability alongside your production traffic.
 
 ## What you get
 
@@ -86,7 +86,7 @@ If you've changed the local port, override it from the {{< ui >}}Collecting sess
 
 ## Forward events to Datadog
 
-To dual-ship captured events to LLM Observability in Datadog, set your API key and pass `--forward`:
+To dual-ship captured events to Agent Observability in Datadog, set your API key and pass `--forward`:
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude

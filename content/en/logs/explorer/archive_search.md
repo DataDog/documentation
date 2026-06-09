@@ -1,6 +1,8 @@
 ---
 title: Archive Search
 description: Instantly search and analyze logs from long-term archives without re-indexing.
+aliases:
+  - /logs/log_configuration/archive_search/
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
