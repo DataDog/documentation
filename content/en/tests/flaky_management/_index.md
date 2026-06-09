@@ -207,7 +207,7 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 
 You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] page in Software Delivery settings.
 
-Notifications are bundled over a short period to reduce noise.
+Notifications are bundled over a short period to reduce noise. The weekly digest summary is only sent to notification rules that have code owners configured.
 
 ### Notification types
 
@@ -219,6 +219,7 @@ Notifications are bundled over a short period to reduce noise.
 | **Fix successful** | A test passes all retries in the remediation flow and is marked as "fix in progress". |
 | **Fix failed** | A test fails during the remediation flow. |
 | **Manual state change** | A user manually changes the state of a flaky test. |
+| **Weekly digest summary** | A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. |
 
 {{< img src="tests/flaky_management_notifications_settings-2.png" alt="Notifications settings UI" style="width:100%;" >}}
 
