@@ -31,6 +31,8 @@ You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_ob
 
 Agent Observability converts [OpenTelemetry span links][9] on your GenAI spans into Agent Observability span links. Span links express relationships that aren't parent/child—most commonly that one span's output fed another span's input. When two linked spans are in the same trace, the link is drawn as an edge in that trace's **Execution Graph**, so you can see how data flows between sibling spans (for example, a tool's output feeding a downstream LLM call).
 
+{{< img src="llm_observability/instrumentation/otel-span-links-execution-graph.png" alt="Execution Graph for a multi-agent content-pipeline trace. The orchestrator contains research-agent, writer-agent, and editor-agent, connected by span-link edges that show data flowing from a search_web tool into the research LLM, then from research to writer to editor." style="width:100%;" >}}
+
 To match the convention used by the Agent Observability SDK, describe the linked endpoints with `from` and `to` attributes:
 
 ```python
