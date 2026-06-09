@@ -9462,6 +9462,16 @@ menu:
       parent: rum_ai_investigations
       identifier: rum_ai_investigations_single_view
       weight: 901
+    - name: Multi-View AI Investigation
+      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
+      parent: rum_ai_investigations
+      identifier: rum_ai_investigations_multi_view
+      weight: 902
+    - name: Operation AI Investigation
+      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
+      parent: rum_ai_investigations
+      identifier: rum_ai_investigations_operation
+      weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
       parent: rum
