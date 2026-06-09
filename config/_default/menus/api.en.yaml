@@ -11677,6 +11677,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Forms
+      url: /api/latest/forms/
+      identifier: forms
+      generated: true
+    - name: Get a form
+      url: /api/latest/forms/get-a-form/
+      identifier: forms-get-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetForm
+        unstable:
+          - v2
+        order: 5
+    - name: Delete a form
+      url: /api/latest/forms/delete-a-form/
+      identifier: forms-delete-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteForm
+        unstable:
+          - v2
+        order: 4
+    - name: Create and publish a form
+      url: /api/latest/forms/create-and-publish-a-form/
+      identifier: forms-create-and-publish-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAndPublishForm
+        unstable:
+          - v2
+        order: 3
+    - name: Create a form
+      url: /api/latest/forms/create-a-form/
+      identifier: forms-create-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateForm
+        unstable:
+          - v2
+        order: 2
+    - name: List forms
+      url: /api/latest/forms/list-forms/
+      identifier: forms-list-forms
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListForms
+        unstable:
+          - v2
+        order: 1
     - name: Google Chat Integration
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration
