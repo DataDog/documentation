@@ -13,8 +13,8 @@ further_reading:
       text: "Cloud-Based Authentication"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Service Access Tokens are in Preview.
+{{< callout btn_hidden="true" header="New: Service Access Tokens" >}}
+Service Access Tokens are now generally available.
 {{< /callout >}}
 
 ## Overview
