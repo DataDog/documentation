@@ -27,6 +27,31 @@ For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt T
 
 You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
+### Span links
+
+Agent Observability converts [OpenTelemetry span links][9] on your GenAI spans into Agent Observability span links. Span links express relationships that aren't parent/child—most commonly that one span's output fed another span's input. When two linked spans are in the same trace, the link is drawn as an edge in that trace's **Execution Graph**, so you can see how data flows between sibling spans (for example, a tool's output feeding a downstream LLM call).
+
+To match the convention used by the Agent Observability SDK, describe the linked endpoints with `from` and `to` attributes:
+
+```python
+from opentelemetry import trace
+from opentelemetry.trace import Link
+
+tracer = trace.get_tracer(__name__)
+
+# A tool span whose output feeds a downstream LLM call.
+with tracer.start_as_current_span("lookup_order") as tool_span:
+    tool_span.set_attribute("gen_ai.operation.name", "execute_tool")
+    tool_ctx = tool_span.get_span_context()
+
+# The LLM span links back to the tool span: its output became this span's input.
+link = Link(context=tool_ctx, attributes={"from": "output", "to": "input"})
+with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
+    llm_span.set_attribute("gen_ai.operation.name", "chat")
+```
+
+<div class="alert alert-info">A span link that points to a span in a different trace is preserved, but is not drawn in the Execution Graph, which visualizes a single trace.</div>
+
 ## Setup
 
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
@@ -404,6 +429,18 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 
 When an APM trace's top-most span is not a gen_ai span (for example, an HTTP handler that invokes several LLMs in parallel), Agent Observability produces a separate Agent Observability trace for each top-level gen_ai span in that APM trace. To keep these split traces grouped together in the UI, set `gen_ai.conversation.id` to the same value on each gen_ai span within the APM trace: Agent Observability groups by `session_id`, so the resulting traces appear together even though they have distinct Agent Observability trace IDs. This is the same attribute used for cross-request conversation grouping.
 
+#### Span links
+
+OpenTelemetry span links on a GenAI span are converted to Agent Observability span links on the resulting span.
+
+| OTel span link field | Agent Observability Field | Notes |
+|----------------------|--------------|-------|
+| `trace_id` | `span_links[].trace_id` | 128-bit trace IDs are emitted as hex. A link to a span in the same trace resolves to that span's Agent Observability trace ID. |
+| `span_id` | `span_links[].span_id` | Decimal |
+| `attributes` | `span_links[].attributes` | Dots in attribute keys are replaced with underscores (for example, `messaging.operation` becomes `messaging_operation`). |
+
+Links between spans in the same trace are drawn as edges in that trace's Execution Graph.
+
 #### Response attributes
 
 | OTel Attribute | Agent Observability Field |
@@ -578,4 +615,5 @@ with tracer.start_as_current_span("my-span") as span:
 [6]: /llm_observability/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
+[9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 
