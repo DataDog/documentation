@@ -54,7 +54,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 | Azure Service Bus | | | {{< X >}} | | | |
-| Google Pub/Sub | {{< X >}} | | | {{< X >}} | | |
+| Google Pub/Sub | {{< X >}} | {{< X >}} | | {{< X >}} | | |
 | IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
