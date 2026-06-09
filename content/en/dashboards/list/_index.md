@@ -86,6 +86,68 @@ Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted das
 
 {{< img src="dashboards/list/recently_deleted_restore.png" alt="Restore deleted dashboard on the Recently Deleted list" style="width:100%;">}}
 
+## Search syntax
+
+Use the search bar at the top of the Dashboard List page to filter dashboards by name, author, tags, or widget content. The search supports free-text queries, key:value filters, boolean operators, and range comparisons.
+
+### Free-text search
+
+Type one or more words to search across dashboard titles, descriptions, author names, tags, and widget content.
+
+- **Single token**: `redis` matches dashboards with "redis" in the title, author, tags, or widgets.
+- **Multiple tokens**: `redis postgres` is equivalent to `redis AND postgres`—both tokens must appear.
+- **Quoted phrase**: `"web latency"` matches that exact phrase.
+- **Wildcard**: `elastic*` matches "elasticsearch", "elastic-search", and similar.
+
+### Key:value filters
+
+Narrow results to a specific field using `field:value` syntax.
+
+| Filter | Description | Example |
+|--------|-------------|---------|
+| `author:<value>` | Dashboards whose author handle or display name matches | `author:brandon` |
+| `title:<value>` | Dashboard title | `title:elasticsearch` |
+| `description:<value>` | Dashboard description | `description:latency` |
+| `team:<value>` | Team tag | `team:dashboards-backend` |
+| `type:<value>` | Dashboard type. Use `custom`, `integration`, or concrete values such as `custom_timeboard`, `custom_screenboard`, `integration_timeboard`, `integration_screenboard`. | `type:integration` |
+| `is_shared:true` | Dashboards with link sharing enabled | `is_shared:true` |
+| `popularity:<range>` | Popularity score (0–1) | `popularity:>=0.5` |
+| `widgets.count:<range>` | Number of widgets | `widgets.count:<5` |
+| `widgets.title:<value>` | Widget title | `widgets.title:cpu` |
+| `widgets.type:<value>` | Widget type | `widgets.type:geomap` |
+| `widgets.metrics:<value>` | Metric used in a widget | `widgets.metrics:system.cpu.user` |
+| `template_variables.name:<value>` | Template variable name | `template_variables.name:service` |
+| `template_variables.prefix:<value>` | Template variable prefix | `template_variables.prefix:env` |
+| `template_variables.defaults:<value>` | Template variable default value | `template_variables.defaults:prod` |
+| `template_variables.available_values:<value>` | Available template variable value | `template_variables.available_values:us-east` |
+
+**Note**: `team:` works as a tag filter. Any tag in `key:value` format can be searched the same way—for example, `env:prod` or `service:web`.
+
+### Boolean operators
+
+Combine filters with `AND`, `OR`, and `NOT` (case-sensitive). The `-` prefix and `!` prefix are equivalent to `NOT`.
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `AND` | Both conditions must match | `type:integration AND team:platform` |
+| `OR` | Either condition must match | `k8s OR kubernetes` |
+| `NOT` / `-` / `!` | Exclude matching dashboards | `NOT type:integration` |
+| `field:(A OR B)` | Match either value for the same field | `team:(backend OR frontend)` |
+
+### Range operators
+
+Use `<`, `>`, `<=`, and `>=` with numeric fields.
+
+| Filter | Description | Example |
+|--------|-------------|---------|
+| `widgets.count:<N` | Fewer than N widgets | `widgets.count:<3` |
+| `widgets.count:>=N` | N or more widgets | `widgets.count:>=10` |
+| `popularity:>=N` | Popularity at or above threshold | `popularity:>=0.2` |
+
+### Favorites
+
+Use the {{< ui >}}Starred{{< /ui >}} toggle above the dashboard table to show only dashboards you have starred. This is separate from the search bar.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
