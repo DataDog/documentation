@@ -73,8 +73,12 @@ These are the available destinations:
 {{% tab "Metrics" %}}
 
 - [Datadog Metrics][1]
+- [Elasticsearch][2]
+- [HTTP/S Client][3]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
+[2]: /observability_pipelines/destinations/elasticsearch/
+[3]: /observability_pipelines/destinations/http_client/
 
 {{% /tab %}}
 {{< /tabs >}}
