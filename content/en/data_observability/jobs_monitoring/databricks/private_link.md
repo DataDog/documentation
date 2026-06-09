@@ -49,6 +49,10 @@ All authentication to Datadog is handled by the underlying Private Action Runner
 
 ### Step 2: Databricks prerequisites
 
+{{< tabs >}}
+
+{{% tab "Databricks Managed Service Principal" %}}
+
 1. Create a Databricks service principal ([Databricks documentation][9]):
    1. As a workspace admin, log in to the Databricks workspace.
    1. Click your username in the top bar and select **Settings**.
@@ -56,7 +60,6 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Next to **Service principals**, click **Manage**.
    1. Click **Add service principal**, then click **Add new** and enter a name.
       - Alternatively, to reuse a service principal from another workspace, select an existing service principal and skip the next step.
-      <div class="alert alert-info">Datadog does not support Microsoft Entra ID managed Service Principals over Private Link.</div>
    1. Click **Add**.
 1. Generate secrets for the Databricks service principal ([Databricks documentation][10]):
    1. Select the service principal created above.
@@ -79,6 +82,32 @@ All authentication to Datadog is handled by the underlying Private Action Runner
       1. Click **Add**.
    1. To access Databricks cost data or monitor serverless jobs, grant the service principal `CAN USE` on the SQL Warehouse and read access to [system tables][20] in Unity Catalog. See [Permissions][11] for details.
 
+{{% /tab %}}
+
+{{% tab "Entra Managed Service Principal" %}}
+
+1. Create an Entra service principal ([Databricks documentation][9]):
+   1. <TO FILL IN>
+1. Generate secrets for the Databricks service principal ([Databricks documentation][10]):
+   1. <TO FILL IN>
+   1. Make the Databricks credentials available to the runner using **one** of the following methods:
+      - **Cloud secret storage** (AWS Secrets Manager, AWS Parameter Store, or Azure Key Vault): Store the credentials as a JSON blob:
+        ```json
+        {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>", "tenant_id": "<TENANT_ID>"}
+        ```
+        Make note of the secret path (AWS ARN or AKV URL). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
+      - **Environment variables**: Set `DATABRICKS_CLIENT_ID`, `DATABRICKS_CLIENT_SECRET`, and `DATABRICKS_AZURE_TENANT_ID` directly on the runner container or pod. When using this method, leave the **Secret Path** field blank in the integration tile.
+1. Provision workspace access and entitlements for the service principal. See [Permissions][11] for full details.
+   1. Grant the service principal **Workspace Admin** privileges. This allows Datadog to manage init script installations and updates automatically. Alternatively, assign more [granular permissions][11] for monitoring jobs, clusters, and queries.
+      1. Click the **Identity and access** tab.
+      1. Next to **Groups**, click **Manage**.
+      1. Select the **admins** group.
+      1. Click **Add members** and select the service principal added above.
+      1. Click **Add**.
+   1. To access Databricks cost data or monitor serverless jobs, grant the service principal `CAN USE` on the SQL Warehouse and read access to [system tables][20] in Unity Catalog. See [Permissions][11] for details.
+
+{{% /tab %}}
+
 ### Step 3: Set up the Private Action Runner
 
 Set up your Private Action Runner using **one** of the following options.
@@ -94,9 +123,9 @@ Set up your Private Action Runner using **one** of the following options.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Update the existing `values.yaml` (referencing the [Helm chart values][4]):
    1. Set `image.repository` to `gcr.io/datadoghq/dd-data-observability-par`.
-   1. Set `image.tag` to `1.21.0-0`.
+   1. Set `image.tag` to `1.21.0-1`.
 1. Configure credentials on the Private Action Runner using one of the following methods:
-    - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
+    - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. If using an Entra managed Service Principal, also set `DATABRICKS_AZURE_TENANT_ID`. Leave "Secret Path" in the integration tile blank.
     - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5] or [IAM Role][6]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the deployment for these changes to take effect.
 
@@ -116,11 +145,11 @@ Set up your Private Action Runner using **one** of the following options.
    1. Select the **Script** option, then click **Next**.
    1. Follow the instructions under **Docker**.
 
-      **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.21.0-0`.
+      **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.21.0-1`.
 
    1. The Private Action Runner should show up at the bottom as "successfully installed."
 1. Configure credentials on the Private Action Runner using one of the following methods:
-    - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
+    - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. If using an Entra managed Service Principal, also set `DATABRICKS_AZURE_TENANT_ID`. Leave "Secret Path" in the integration tile blank.
     - Use cloud secret storage. Ensure an identity is assigned to the instance ([Managed Identity][5] or [IAM Role][6]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the Docker container for the changes to take effect.
 
