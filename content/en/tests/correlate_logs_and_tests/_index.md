@@ -84,11 +84,11 @@ Use the following environment variable to enable log submission for agentless mo
 
 If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS_INJECTION=true` in the environment.
 
-#### Background job workers
+#### Out of process logs
 
-When a background job worker executes tests, each job carries a `trace_id` and `span_id` from the parent test trace. Use `ddtrace.testing.logs.DDTestLogsHandler` (`ddtrace >= 4.11.0`) to ship the worker's log records to the Datadog logs intake, correlated with those test traces.
+When a separate process executes code triggered by a test, it needs a `trace_id` and `span_id` from that test trace to correlate its logs. Use `ddtrace.testing.logs.DDTestLogsHandler` (`ddtrace >= 4.11.0`) to ship those log records to the Datadog logs intake, correlated with the originating test trace.
 
-`DDTestLogsHandler` reads standard environment variables to detect the backend (agentless or EVP proxy), so it works in subprocesses where only public variables are available.
+`DDTestLogsHandler` reads the same environment variables as the pytest plugin to detect the backend (agentless or EVP proxy), so it works in any subprocess where those variables are available.
 
 **Agentless mode** (set `DD_CIVISIBILITY_AGENTLESS_ENABLED=true`):
 
@@ -126,7 +126,7 @@ with DDTestLogsHandler(service="my-service") as handler:
 
 `DDTestLogsHandler` flushes buffered records automatically when used as a context manager. Call `handler.close()` explicitly if you do not use the context manager form.
 
-##### asyncio workers
+##### Asyncio workers
 
 For asyncio-based workers, subclass `CorrelationFilter` and use a `contextvars.ContextVar` for storage so each `asyncio.Task` sees its own correlation IDs:
 
