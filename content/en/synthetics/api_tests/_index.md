@@ -34,7 +34,16 @@ API tests help you **proactively monitor** your most important services so they 
 
 Launch requests on the different network layers of your systems with these subtypes:
 
-{{< partial name="synthetics/network-layers.html" >}}
+{{< card-grid image_width="100">}}
+  {{< image-card href="/synthetics/api_tests/http_tests" src="synthetics/api_tests/http-test1.png" alt="HTTP" >}}
+  {{< image-card href="/synthetics/api_tests/ssl_tests" src="synthetics/api_tests/ssl-test1.png" alt="SSL" >}}
+  {{< image-card href="/synthetics/api_tests/dns_tests" src="synthetics/api_tests/dns-test1.png" alt="DNS" >}}
+  {{< image-card href="/synthetics/api_tests/websocket_tests" src="synthetics/api_tests/websocket-test1.png" alt="WebSocket" >}}
+  {{< image-card href="/synthetics/api_tests/tcp_tests" src="synthetics/api_tests/tcp-test1.png" alt="TCP" >}}
+  {{< image-card href="/synthetics/api_tests/udp_tests" src="synthetics/api_tests/udp-test1.png" alt="UDP" >}}
+  {{< image-card href="/synthetics/api_tests/icmp_tests" src="synthetics/api_tests/icmp-test1.png" alt="ICMP" >}}
+  {{< image-card href="/synthetics/api_tests/grpc_tests" src="synthetics/api_tests/grpc-test1.png" alt="gRPC" >}}
+{{< /card-grid >}}
 
 If your service starts answering slower or in an unexpected way (such as an unexpected response body or wrong A record), your test can [alert your team][1], [block your CI pipeline][2], and [roll back the faulty deployment][2].
 

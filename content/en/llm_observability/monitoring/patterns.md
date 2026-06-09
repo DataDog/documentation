@@ -7,15 +7,15 @@ aliases:
 further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
-  text: "Learn about LLM Observability"
+  text: "Learn about Agent Observability"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability Key Terms and Concepts"
+  text: "Learn about Agent Observability Key Terms and Concepts"
 - link: "/llm_observability/experiments/datasets"
   tag: "Documentation"
   text: "Learn about Datasets"
 ---
-{{< callout url="https://www.datadoghq.com/product/ai/llm-observability/" btn_hidden="false" header="Join the Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/ai-studio-bits-eval-patterns/" btn_hidden="false" header="Join the Preview">}}
 Patterns is in Preview.
 {{< /callout >}}
 

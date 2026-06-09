@@ -1,5 +1,6 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
+import initCardGrid from './card-grid';
 import { redirectToRegion, hideTOCItems } from '../region-redirects';
 import { initCopyCode } from './copy-code';
 import { initCopyPageButton } from './copy-page-button';
@@ -245,6 +246,8 @@ function loadPage(newUrl) {
 
             // sets query params if code tabs are present
             initCodeTabs();
+
+            initCardGrid();
 
             const regionSelector = document.querySelector('.js-region-select');
 

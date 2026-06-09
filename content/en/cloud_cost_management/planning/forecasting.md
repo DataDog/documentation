@@ -18,7 +18,7 @@ further_reading:
 Cloud Cost Management (CCM) Forecasts help you predict future cloud costs based on historical spending patterns. Use forecasts to anticipate cost trends, plan budgets more effectively, and make data-driven decisions about resource allocation.
 
 Forecasts are available in:
-- [**Reports**](#view-forecasts-in-reports): Enable the forecast toggle to visualize predicted costs alongside your budget.
+- [**Reports**](#view-forecasts-in-reports): Enable the forecast toggle on Cost reports and Budget reports to visualize predicted costs.
 - [**Budgets**](#view-forecasts-in-budgets): View forecasted costs directly on budget cards to see if you're projected to go over budget.
 
 With Forecasts, you can:
@@ -52,7 +52,24 @@ To generate accurate forecasts, CCM requires:
 
 ## View forecasts in reports
 
-Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your budget reports.
+Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts on Cost reports and Budget reports.
+
+### Cost reports
+
+1. Open or create a {{< ui >}}Cost{{< /ui >}} report.
+2. In the left panel, toggle {{< ui >}}Show forecast{{< /ui >}} to enable forecasting.
+3. Select the forecast period from the {{< ui >}}Until end of{{< /ui >}} dropdown (next period, current month, current year, or a custom range).
+4. Choose a rollup interval (daily, weekly, or monthly).
+
+{{< img src="cloud_cost/forecasts/cost-report-with-forecast.png" alt="Cost report showing the Show Forecast toggle in the left panel and forecasted costs displayed alongside historical data with a hatched pattern" style="width:100%;" >}}
+
+The report displays:
+- {{< ui >}}Forecast toggle and controls{{< /ui >}}: Enable forecasting, select the time period, and pick the rollup interval.
+- {{< ui >}}Historical costs{{< /ui >}}: Your actual spending shown in solid colors.
+- {{< ui >}}Forecasted costs{{< /ui >}}: Predicted costs shown with a hatched pattern.
+- {{< ui >}}Forecast summary card{{< /ui >}}: Shows the total forecasted cost for the selected period.
+
+### Budget reports
 
 1. Create a report or open an existing {{< ui >}}Budget{{< /ui >}} report.
 2. In the left panel, toggle {{< ui >}}Show forecast{{< /ui >}} to enable forecasting.

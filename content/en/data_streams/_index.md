@@ -10,9 +10,9 @@ further_reading:
     - link: '/integrations/amazon_sqs/'
       tag: 'Documentation'
       text: 'Amazon SQS Integration'
-    - link: '/tracing/software_catalog/'
+    - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
-      text: 'Software Catalog'
+      text: 'Catalog'
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
       tag: 'Blog'
       text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
@@ -67,12 +67,29 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
 
 ### By language
 
-{{< partial name="data_streams/setup-languages.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/data_streams/java/" src="integrations_logos/java.png" alt="java" >}}
+  {{< image-card href="/data_streams/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/data_streams/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+  {{< image-card href="/data_streams/nodejs/" src="integrations_logos/node.png" alt="Node" >}}
+  {{< image-card href="/data_streams/go" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="/data_streams/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 
 
 ### By technology
 
-{{< partial name="data_streams/setup-technologies.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/data_streams/setup/technologies/kafka/" src="integrations_logos/kafka.png" alt="Kafka" >}}
+  {{< image-card href="/data_streams/setup/technologies/sqs/" src="integrations_logos/sqs.png" alt="Amazon SQS" >}}
+  {{< image-card href="/data_streams/setup/technologies/rabbitmq/" src="integrations_logos/rabbitmq.png" alt="RabbitMQ" >}}
+  {{< image-card href="/data_streams/setup/technologies/sns/" src="integrations_logos/amazon_sns.png" alt="Amazon SNS" >}}
+  {{< image-card href="/data_streams/setup/technologies/kinesis/" src="integrations_logos/amazon_kinesis.png" alt="Kinesis" >}}
+  {{< image-card href="/data_streams/setup/technologies/google_pubsub/" src="integrations_logos/google_cloud_pubsub.png" alt="Google Cloud Pub/Sub" >}}
+  {{< image-card href="/data_streams/setup/technologies/ibm_mq/" src="integrations_logos/ibm_mq.png" alt="IBM MQ" >}}
+  {{< image-card href="/data_streams/setup/technologies/azure_service_bus/" src="integrations_logos/azure_service_bus.png" alt="Azure Service Bus" >}}
+  {{< image-card href="/data_streams/setup/technologies/bullmq/" src="integrations_logos/bullmq2.png" alt="BullMQ" >}}
+{{< /card-grid >}}
 
 ### AWS Lambda
 
@@ -123,7 +140,7 @@ Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup
 
 High lag on a consuming service, increased resource use on a Kafka broker, and increased RabbitMQ or Amazon SQS queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
 
-Click on the {{< ui >}}Throughput{{< /ui >}} tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Software Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
+Click on the {{< ui >}}Throughput{{< /ui >}} tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
 By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
@@ -141,7 +158,7 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_streams/go#manual-instrumentation
-[2]: /tracing/software_catalog/
+[2]: /internal_developer_portal/catalog/
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /integrations/kafka/
 [5]: /integrations/amazon_sqs/

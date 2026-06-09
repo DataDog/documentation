@@ -280,6 +280,8 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  ai_agents_console: [gov, gov2]
+  byoc-logs: [gov, gov2]
   actions: [gov,gov2]
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
@@ -295,10 +297,12 @@ unsupported_sites:
   apm_recommendations: [gov,gov2]
   application_security: [gov,gov2]
   autocomplete_search: [gov,gov2]
+  azure-automated-log-forwarding: [gov,gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2]
   backstage: [gov,gov2]
   bits_ai: [gov,gov2]
   bits_ai_sre: [gov,gov2]
+  bits_data_analysis: [gov,gov2]
   byoti: [gov, gov2]
   case_management: [gov,gov2]
   ci_visibility: [gov,gov2]
@@ -338,6 +342,7 @@ unsupported_sites:
   google-hangouts-chat: [gov,gov2]
   google_chat: [gov,gov2]
   gpu_monitoring: [gov, gov2]
+  heatmaps: [gov,gov2]
   high_availability_datadog_agent: [gov,gov2]
   iac_security: [gov,gov2]
   incident_ai: [gov,gov2]
@@ -349,6 +354,7 @@ unsupported_sites:
   jira_error_tracking: [gov,gov2]
   launchdarkly: [gov,gov2]
   linear: [gov,gov2]
+  linear_error_tracking: [gov,gov2]
   live_debugger: [gov,gov2]
   llm_observability: [gov,gov2]
   mcp_server: [gov,gov2]
