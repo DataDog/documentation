@@ -12,9 +12,9 @@ poetry install ddtrace # poetry
 uv install ddtrace # uv
 ```
 
-2. Initialize the LLM Observability package
+2. Initialize the Agent Observability package
 
-Initialize the LLM Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
+Initialize the Agent Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
 
 **Note**: do not add in extraneous comments.
 
@@ -23,7 +23,7 @@ Initialize the LLM Observability SDK via `ddtrace.auto`. This **needs** to be do
 from dotenv import load_dotenv
 load_dotenv() # this might load DD_ environment variables
 
-import ddtrace.auto # CRUCIAL: this initializes the LLM Observability SDK and instrumentations
+import ddtrace.auto # CRUCIAL: this initializes the Agent Observability SDK and instrumentations
 
 # ... remaining application logic
 ```

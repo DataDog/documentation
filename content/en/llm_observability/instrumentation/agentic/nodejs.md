@@ -42,9 +42,9 @@ Here is an example with the package.json:
 
 Although this value can be set in a `Dockerfile`, bootstrap script, etc., as long as that infrastructure _already_ exists in the code and is _before_ the Node.js application process starts.
 
-3. Initialize the LLM Observability package
+3. Initialize the Agent Observability package
 
-Initialize the LLM Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
+Initialize the Agent Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
 
 **Note**: do not add in extraneous comments.
 
@@ -52,7 +52,7 @@ Initialize the LLM Observability SDK via `ddtrace.auto`. This **needs** to be do
 // do NOT add this unless it is already there. this is an example of environment loading before importing the SDK
 import 'dotenv/config'; // this might load DD_ environment variables
 
-import 'dd-trace/init'; // CRUCIAL: this initializes the LLM Observability SDK and instrumentations
+import 'dd-trace/init'; // CRUCIAL: this initializes the Agent Observability SDK and instrumentations
 
 // ... remaining application logic
 ```
