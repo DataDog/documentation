@@ -22,7 +22,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
 
 Supported Azure PostgreSQL deployment types
 : PostgreSQL on Azure VMs, Single Server, Flexible Server
@@ -62,7 +62,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 |----------------------| -- | --- |
 | `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][1] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value, queries longer than `1024` characters are not collected. |
-| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.track` | `ALL` | Required for Database Monitoring to collect query metrics on Flexible Server. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
@@ -315,7 +315,7 @@ For Postgres 9.6, add the following settings to the instance config where host a
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

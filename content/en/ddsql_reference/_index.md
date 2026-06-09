@@ -12,12 +12,15 @@ products:
   url: /notebooks/
   icon: notebook
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/ddsql_editor/"
   tag: "Documentation"
   text: "DDSQL Editor"
+- link: "https://learn.datadoghq.com/courses/getting-started-ddsql-editor"
+  tag: "Learning Center"
+  text: "Getting Started with DDSQL Editor"
 ---
 
 {{< product-availability >}}
@@ -1212,4 +1215,4 @@ FROM aws.ec2_instance
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
-[10]: /bits_ai/mcp_server/
+[10]: /mcp_server/

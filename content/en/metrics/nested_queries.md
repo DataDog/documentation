@@ -1,5 +1,6 @@
 ---
 title: Nested Queries
+description: "Apply additional layers of aggregation to metric queries for multilayer rollups, percentiles, and higher-resolution historical views."
 further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"

@@ -1,6 +1,6 @@
 ---
 title: Automation Rules
-description: Route LLM Observability traces into annotation queues or datasets automatically using filter-based rules.
+description: Route Agent Observability traces into annotation queues or datasets automatically using filter-based rules.
 further_reading:
   - link: /llm_observability/evaluations/annotation_queues
     tag: Documentation
@@ -10,7 +10,7 @@ further_reading:
     text: Build datasets from production traces
   - link: /api/latest/llm-observability/
     tag: API
-    text: LLM Observability API reference
+    text: Agent Observability API reference
 ---
 
 ## Overview
@@ -23,24 +23,24 @@ Automation Rules continuously route production LLM traces to annotation queues o
 
 <div class="alert alert-info">Automations apply going forward: new traces matching your rule are routed to the destination as they arrive. Existing traces matching the filter are not added retroactively.</div>
 
-Each rule is evaluated **per span**, in real time, as spans stream into LLM Observability. The rule-matcher does not buffer or join across spans, which constrains the filter set (see [Supported filter fields](#supported-filter-fields)).
+Each rule is evaluated **per span**, in real time, as spans stream into Agent Observability. The rule-matcher does not buffer or join across spans, which constrains the filter set (see [Supported filter fields](#supported-filter-fields)).
 
 ## Configuring an automation
 
-You configure automations from the Trace Explorer's **Automate Query** button. The flow is the same regardless of destination:
+You configure automations from the Trace Explorer's {{< ui >}}Automate Query{{< /ui >}} button. The flow is the same regardless of destination:
 
-1. Apply a filter in [**AI Observability > Traces**][1] using [supported filter fields](#supported-filter-fields).
-2. Click **Automate Query**.
+1. Apply a filter in [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][1] using [supported filter fields](#supported-filter-fields).
+2. Click {{< ui >}}Automate Query{{< /ui >}}.
 3. Configure the sampling rate (see [Sampling and limits](#sampling-and-limits)).
 4. Pick the destination action:
-   - **Add to Annotation Queue**. See [Annotation Queues][2] for queue-specific setup.
-   - **Add to Dataset**. See [Datasets][3] for dataset-specific setup.
+   - {{< ui >}}Add to Annotation Queue{{< /ui >}}. See [Annotation Queues][2] for queue-specific setup.
+   - {{< ui >}}Add to Dataset{{< /ui >}}. See [Datasets][3] for dataset-specific setup.
 
-Manage your rules from [**AI Observability > Settings > Automations**][4]. You can enable, disable, edit, or delete rules at any time.
+Manage your rules from [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4]. You can enable, disable, edit, or delete rules at any time.
 
 ## Supported filter fields
 
-Automation filters use a subset of the Trace Explorer search syntax. The table below shows commonly-used fields by category. It is illustrative, not exhaustive. The **Automate Query** button is disabled when a filter contains an unsupported field, and the tooltip names the offending field. Use the tooltip as the source of truth for what is accepted.
+Automation filters use a subset of the Trace Explorer search syntax. The table below shows commonly-used fields by category. It is illustrative, not exhaustive. The {{< ui >}}Automate Query{{< /ui >}} button is disabled when a filter contains an unsupported field, and the tooltip names the offending field. Use the tooltip as the source of truth for what is accepted.
 
 | Filter for | Example fields |
 |---|---|

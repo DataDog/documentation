@@ -29,6 +29,8 @@ After you select the Splunk TCP source in the pipeline UI, enter the identifier 
 
 {{% observability_pipelines/tls_settings %}}
 
+{{% observability_pipelines/tls_settings_mtls %}}
+
 ## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}

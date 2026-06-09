@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Database Investigator is in Preview" >}}
-Database Investigator is in Preview for all customers monitoring Postgres with Database Monitoring. SQL Server support is in early access: open a SQL Server host within Database Monitoring and click <strong>Get early access</strong> to request it. Support for other databases covered by Database Monitoring is in development.
+Database Investigator is in Preview for all customers monitoring Postgres or SQL Server with Database Monitoring.
 {{< /callout >}}
 
 ## Overview
@@ -84,13 +84,17 @@ To use Database Investigator, your role must have the **Database Monitoring Read
 
 Database Investigator reads the telemetry your account already collects, including query metrics, query samples, explain plans, instance and host metrics. It also reads related APM service dependencies, incidents, events, and metrics in your Datadog organization. It accesses only the resources permitted by your role.
 
+### Is data sent to Database Investigator used to train AI models?
+
+Database Investigator operates under zero-retention and zero-training agreements with the third-party AI service providers that power it. Data processed during an investigation is not retained by those providers and is not used to train or improve their models.
+
 ### Does Database Investigator modify the database?
 
 No. Database Investigator reads observability data and produces recommendations. It does not connect to your database, run SQL against it, or change configuration. SQL changes in its responses are suggestions for you to review and apply.
 
 ### Which databases are supported?
 
-Postgres is supported in Preview for all Database Monitoring customers. SQL Server is supported in early access. Request access from inside Database Monitoring on a SQL Server host. Support for other databases covered by Database Monitoring is in development.
+Postgres and SQL Server are supported in Preview for all Database Monitoring customers.
 
 ### Are there usage limits?
 
@@ -110,4 +114,4 @@ The data sources that Database Investigator uses are also exposed through the [D
 
 [1]: /notebooks/
 [2]: /service_management/incident_management/
-[3]: /bits_ai/mcp_server/
+[3]: /mcp_server/
