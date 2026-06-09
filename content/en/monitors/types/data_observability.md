@@ -78,7 +78,7 @@ Filter on any tag applied to your data assets by using the tag key as the filter
 | `platform:snowflake` | Match assets tagged with `platform:snowflake`. |
 | `environment:production` | Match assets tagged with `environment:production`. |
 
-Tag filters support the same `*` wildcards and quoting as name filters, for example `owner:data-*` or `platform:"Snowflake Prod"`.
+Tag filters support the same `*` wildcards and quoting as name filters, for example, `owner:data-*` or `platform:"Snowflake Prod"`.
 
 **Filter by computed attribute:**
 
