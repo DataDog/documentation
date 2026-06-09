@@ -122,7 +122,7 @@ export function onScroll() {
         // Treat hidden headings (e.g. display:none) as being below the
         // scroll-spy threshold so they are never active/highlighted in TOC.
         const rect = header.getBoundingClientRect();
-        return rect.height === 0 && rect.width === 0 ? (localOffset+1) : rect.top;
+        return rect.height === 0 && rect.width === 0 ? Infinity : rect.top;
     }
     
     const isCustomizableDoc = document.getElementById('cdoc-selector') ? true : false;
@@ -145,11 +145,16 @@ export function onScroll() {
         // TOC mapping
         for (let i = 0; i < sidenavMapping.length; i++) {
             const sideNavItem = sidenavMapping[i];
-            let j = i + 1;
-            if (j > sidenavMapping.length) {
-                j = 0;
+            // Skip hidden headings when finding the next sibling so that a
+            // section before a hidden heading correctly hands off to the next
+            // visible section.
+            let nextSideNavItem;
+            for (let j = i + 1; j < sidenavMapping.length; j++) {
+                if (getHeaderTop(sidenavMapping[j].header) !== Infinity) {
+                    nextSideNavItem = sidenavMapping[j];
+                    break;
+                }
             }
-            const nextSideNavItem = sidenavMapping[j];
             sideNavItem.navLink.classList.remove('toc_scrolled');
 
             if (
