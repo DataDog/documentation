@@ -243,8 +243,8 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 
 ## Set up Workload Identity Federation for the Datadog Agent
 
-{{< callout btn_hidden="true" header="Enterprise feature" >}}
-Workload Identity Federation for the Datadog Agent is available for customers on an Enterprise plan only. Contact your Datadog account team to request access.
+{{< callout url="/help/" header="Enterprise feature" >}}
+Workload Identity Federation for the Datadog Agent is available for customers on an enterprise plan only. Request access by contacting support.
 {{< /callout >}}
 
 Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
