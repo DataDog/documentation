@@ -25,59 +25,36 @@ With **JIT (Just-In-Time)** Deployment Gates, rules are defined inline in the ev
 
 Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [Preconfigured Deployment Gates][5].
 
-## Get started
+## Configuration
 
-To evaluate a Deployment Gate with JIT, send a request to the evaluation endpoint with inline rules. Replace the following:
+The shape of `configuration`:
 
-- `<YOUR_DD_SITE>`: Your [Datadog site name][1] (for example, {{< region-param key="dd_site" code="true" >}})
-- `<YOUR_API_KEY>`: Your [API key][2]
-- `<YOUR_APP_KEY>`: Your [application key][3]
-
-```bash
-curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: <YOUR_API_KEY>" \
--H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
--d @- << 'EOF'
+```json
 {
-  "data": {
-    "type": "deployment_gates_evaluation_request",
-    "attributes": {
-      "service": "transaction-backend",
-      "env": "production",
-      "version": "1.2.3",
-      "configuration": {
-        "dry_run": false,
-        "rules": [
-          {
-            "type": "monitor",
-            "name": "error rate monitors",
-            "options": {
-              "query": "service:transaction-backend env:production",
-              "duration": 300
-            }
-          },
-          {
-            "type": "faulty_deployment_detection",
-            "name": "apm faulty deployment",
-            "options": {
-              "duration": 900,
-              "excluded_resources": ["GET /healthcheck"]
-            }
-          }
-        ]
-      }
-    }
+  "configuration": {
+    "dry_run": false,
+    "rules": [
+      { "type": "...", "name": "...", "options": { ... } }
+    ]
   }
 }
-EOF
 ```
 
-A successful request returns a 202 status code with an `evaluation_id`. Poll the evaluation status endpoint with that ID to retrieve the final result. See [Evaluate a gate from your pipeline](#evaluate-a-gate-from-your-pipeline) for production integrations that handle polling and retries, and the [Deployment Gates API reference][4] for the complete request and response schema.
+Top-level fields:
+
+- `rules` (required): one or more rule entries. All rules must pass for the gate to pass.
+- `dry_run` (optional): when `true`, the gate always returns `pass` over the API while the real result is recorded in the UI. Useful for onboarding. See [Recommendation for first-time onboarding](#recommendation-for-first-time-onboarding).
+
+Each rule has these fields:
+
+- `type` (required): the rule type — `monitor` or `faulty_deployment_detection`. See [Rule types](#rule-types) for what each evaluates.
+- `name` (required): a human-readable label that shows up on the [Deployment Gates Evaluations][6] page.
+- `options` (required): rule-specific settings — see [Rule types](#rule-types).
+- `dry_run` (optional): per-rule dry-run override. Overrides the gate-level `dry_run`.
 
 ## Rule types
 
-Each rule has a `type` and a set of `options`. For the full schema and all available options, see the [Deployment Gates API reference][4].
+For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
@@ -87,7 +64,7 @@ The Monitor rule evaluates the state of a set of monitors over a configurable pe
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
 
-**Key options**:
+**Options**:
 
 - `query`: The monitor search query, based on the [Search Monitor syntax][1]. Filter on monitor tags:
   - Monitor static tags: `service:transaction-backend`
@@ -100,7 +77,7 @@ Example inline rule:
 ```json
 {
   "type": "monitor",
-  "name": "error rate monitors",
+  "name": "Service monitors",
   "options": {
     "query": "service:transaction-backend env:production",
     "duration": 300
@@ -108,7 +85,7 @@ Example inline rule:
 }
 ```
 
-##### Notes
+**Notes**:
 - `group` filters evaluate only matching groups.
 - Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
 
@@ -123,17 +100,18 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to 
 
 The analysis is automatically performed for all APM-instrumented services, and no prior setup is required.
 
-**Key options**:
+**Options**:
 
 - `duration`: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
-- `excluded_resources`: [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+- `included_resources` (optional): [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed.
+- `excluded_resources` (optional): [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
 Example inline rule:
 
 ```json
 {
   "type": "faulty_deployment_detection",
-  "name": "apm faulty deployment",
+  "name": "APM Faulty Deployment Detection",
   "options": {
     "duration": 900,
     "excluded_resources": ["GET /healthcheck"]
@@ -141,7 +119,7 @@ Example inline rule:
 }
 ```
 
-##### Notes
+**Notes**:
 - The rule is evaluated for each [additional primary tag][3] value as well as an aggregate analysis. To consider only a single primary tag, specify it as `primary_tag` in the request attributes.
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
@@ -164,7 +142,7 @@ The [datadog-ci][1] `deployment gate` command runs the evaluation in a single co
 datadog-ci deployment gate --service transaction-backend --env production --version 1.2.3 --config ./gate-config.json
 ```
 
-Example `gate-config.json` (camelCase):
+Example `gate-config.json`:
 
 ```json
 {
@@ -172,7 +150,7 @@ Example `gate-config.json` (camelCase):
   "rules": [
     {
       "type": "monitor",
-      "name": "error rate monitors",
+      "name": "Service monitors",
       "options": {
         "query": "service:transaction-backend env:production",
         "duration": 300
@@ -180,7 +158,7 @@ Example `gate-config.json` (camelCase):
     },
     {
       "type": "faulty_deployment_detection",
-      "name": "apm faulty deployment",
+      "name": "APM Faulty Deployment Detection",
       "options": {
         "duration": 900,
         "excluded_resources": ["GET /healthcheck"]
@@ -223,7 +201,7 @@ Use the template below as a starting point:
 - Define the [API key][5] and [application key][6] as environment variables. The example uses a [Kubernetes Secret][3] called `datadog` with two data values: `api-key` and `app-key`. You can also pass the values in plain text with `value` instead of `valueFrom`.
 - Use a datadog-ci image version that supports the `--config` flag — see the [datadog-ci release notes][8].
 
-Store the gate config (camelCase) in a ConfigMap, then mount it into the job and pass `--config` to the CLI:
+Store the gate config in a ConfigMap, then mount it into the job and pass `--config` to the CLI:
 
 ```yaml
 apiVersion: v1
@@ -237,7 +215,7 @@ data:
       "rules": [
         {
           "type": "monitor",
-          "name": "error rate monitors",
+          "name": "Service monitors",
           "options": {
             "query": "service:transaction-backend env:production",
             "duration": 300
@@ -245,7 +223,7 @@ data:
         },
         {
           "type": "faulty_deployment_detection",
-          "name": "apm faulty deployment",
+          "name": "APM Faulty Deployment Detection",
           "options": {
             "duration": 900,
             "excluded_resources": ["GET /healthcheck"]
@@ -354,7 +332,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-The [`Datadog Deployment Gate GitHub Action`][4] runs the evaluation as part of a workflow. Commit a gate config file (camelCase) to the repository and pass its path with the `config` input. Use a version of the action that supports the `config` input — see the [action's releases][5]:
+The [`Datadog Deployment Gate GitHub Action`][4] runs the evaluation as part of a workflow. Commit a gate config file to the repository and pass its path with the `config` input. Use a version of the action that supports the `config` input — see the [action's releases][5]:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
@@ -398,7 +376,7 @@ Example `.github/gate-config.json`:
   "rules": [
     {
       "type": "monitor",
-      "name": "error rate monitors",
+      "name": "Service monitors",
       "options": {
         "query": "service:my-service env:production",
         "duration": 300
@@ -406,7 +384,7 @@ Example `.github/gate-config.json`:
     },
     {
       "type": "faulty_deployment_detection",
-      "name": "apm faulty deployment",
+      "name": "APM Faulty Deployment Detection",
       "options": {
         "duration": 900,
         "excluded_resources": ["GET /healthcheck"]
@@ -472,7 +450,7 @@ PAYLOAD=$(cat <<EOF
         "rules": [
           {
             "type": "monitor",
-            "name": "error rate monitors",
+            "name": "Service monitors",
             "options": {
               "query": "service:$1 env:$2",
               "duration": 300
@@ -480,7 +458,7 @@ PAYLOAD=$(cat <<EOF
           },
           {
             "type": "faulty_deployment_detection",
-            "name": "apm faulty deployment",
+            "name": "APM Faulty Deployment Detection",
             "options": {
               "duration": 900,
               "excluded_resources": ["GET /healthcheck"]
@@ -638,7 +616,7 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
         "rules": [
           {
             "type": "monitor",
-            "name": "error rate monitors",
+            "name": "Service monitors",
             "options": {
               "query": "service:transaction-backend env:production",
               "duration": 300
@@ -646,7 +624,7 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
           },
           {
             "type": "faulty_deployment_detection",
-            "name": "apm faulty deployment",
+            "name": "APM Faulty Deployment Detection",
             "options": {
               "duration": 900,
               "excluded_resources": ["GET /healthcheck"]
@@ -701,7 +679,7 @@ When a 200 HTTP response is returned, it has the following format:
            "gate_status": "pass",
            "rules": [
                {
-                   "name": "error rate monitors",
+                   "name": "Service monitors",
                    "status": "fail",
                    "reason": "One or more monitors in ALERT state: https://app.datadoghq.com/monitors/34330981",
                    "dry_run": false
@@ -727,21 +705,19 @@ The field `data.attributes.gate_status` contains the result of the evaluation, w
 {{% /tab %}}
 {{< /tabs >}}
 
-## Onboarding in dry-run mode
+## Recommendation for first-time onboarding
 
 When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use dry-run mode and the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page:
 
 1. Set `dry_run: true` on the `configuration` (or `dryRun: true` in the CLI config file). To mark only some rules as dry-run, set `dry_run` per rule. A dry-run evaluation always returns `pass` over the API, but the real result is recorded in the UI.
 2. Add the gate evaluation to your deployment process. Deployments are not impacted by the gate result while dry-run is enabled.
 3. After a period of time (for example, 1-2 weeks), check the gate and rule executions on the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page. The UI shows the real status, so you can see when the gate would have failed and the reason behind it.
-4. When you are confident the gate behavior is as you expect, switch `dry_run` to `false`. Deployments are then promoted or rolled back based on the gate result.
+4. When you are confident that the gate behavior is as you expect, switch `dry_run` to `false`. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/site/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /api/latest/deployment-gates
 [5]: /deployment_gates/setup/preconfigured
+[6]: https://app.datadoghq.com/ci/deployment-gates/evaluations

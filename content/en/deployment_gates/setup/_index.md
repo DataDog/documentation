@@ -1,6 +1,6 @@
 ---
 title: Set Up Deployment Gates
-description: "Choose between JIT (default) and preconfigured Deployment Gates and follow the setup walkthrough for the chosen mode."
+description: "Compare JIT and preconfigured Deployment Gates and follow the setup walkthrough for your chosen mode."
 further_reading:
 - link: "/deployment_gates/setup/jit"
   tag: "Documentation"
@@ -24,9 +24,16 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-A **Deployment Gate** evaluates one or more **rules** against a service and environment to decide whether a deployment should proceed. Deployment Gates support two modes — pick the one that matches how you want to manage gate configuration.
+Deployment Gates have two main components:
 
-## Choose a mode
+- A **Gate** is defined for a service and environment, and evaluates one or more rules to decide whether a deployment should proceed.
+- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors or running APM Faulty Deployment Detection analysis on the deployed version.
+
+Gate evaluations are asynchronous — the API returns immediately with an evaluation ID, and the result resolves to `pass` or `fail` over time as the rules run.
+
+Deployment Gates support two evaluation modes: JIT and preconfigured.
+
+## Deployment Gate evaluation modes
 
 | | **[JIT (Just-In-Time)][1]** (default) | **[Preconfigured][2]** |
 |---|---|---|
@@ -35,9 +42,9 @@ A **Deployment Gate** evaluates one or more **rules** against a service and envi
 | **Best for** | Rules-as-code, per-deployment flexibility, teams that own their own gate config | Shared rules across services, central management, non-CI editing |
 | **How to evaluate** | Send rules in the evaluation request | Reference the gate by service and environment |
 
-Both modes use the same [rule types](/deployment_gates/setup/jit/#rule-types) (Monitor and APM Faulty Deployment Detection) and the same asynchronous evaluation lifecycle (`in_progress` → `pass` or `fail`).
+You can use different modes across different gates if needed.
 
-For the request and response schema in either mode, see the [Deployment Gates API reference][3].
+If you're unsure where to start, or you want to get started quickly, use JIT.
 
 ## Further reading
 
@@ -45,4 +52,3 @@ For the request and response schema in either mode, see the [Deployment Gates AP
 
 [1]: /deployment_gates/setup/jit
 [2]: /deployment_gates/setup/preconfigured
-[3]: /api/latest/deployment-gates

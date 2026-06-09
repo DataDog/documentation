@@ -5875,12 +5875,12 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
-    - name: JIT
+    - name: Just-In-Time gates
       url: deployment_gates/setup/jit/
       parent: deployment_gates_setup
       identifier: deployment_gates_setup_jit
       weight: 1
-    - name: Preconfigured
+    - name: Preconfigured gates
       url: deployment_gates/setup/preconfigured/
       parent: deployment_gates_setup
       identifier: deployment_gates_setup_preconfigured

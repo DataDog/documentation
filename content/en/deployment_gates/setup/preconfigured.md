@@ -44,7 +44,7 @@ Looking to define rules inline in your deployment config? See [JIT Deployment Ga
 
 Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
-1. {{< ui >}}Name{{< /ui >}}: A descriptive label (for example, `Check all P0 monitors`).
+1. {{< ui >}}Name{{< /ui >}}: A descriptive label that shows up on the [Deployment Gates Evaluations][7] page (for example, `Check all P0 monitors`).
 2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}} or {{< ui >}}Faulty Deployment Detection{{< /ui >}}.
 3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for the available options.
 4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
@@ -76,7 +76,7 @@ The Monitor rule evaluates the state of a set of monitors over a configurable pe
 - `tag:"use_deployment_gates" team:payment`
 - `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
-##### Notes
+**Notes**:
 - `group` filters evaluate only matching groups.
 - Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
 
@@ -95,9 +95,10 @@ The analysis is automatically performed for all APM-instrumented services, and n
 
 - {{< ui >}}Operation Name{{< /ui >}}: Auto-populated from the service's [APM primary operation][3] settings.
 - {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
-- {{< ui >}}Excluded Resources{{< /ui >}}: A comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+- {{< ui >}}Included Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed.
+- {{< ui >}}Excluded Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
-##### Notes
+**Notes**:
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. To consider only a single primary tag, specify it when [requesting a gate evaluation](#evaluate-a-gate-from-your-pipeline).
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
@@ -560,14 +561,14 @@ The field `data.attributes.gate_status` contains the result of the evaluation, w
 {{% /tab %}}
 {{< /tabs >}}
 
-## Onboarding in dry-run mode
+## Recommendation for first-time onboarding
 
 When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use the Dry Run evaluation mode and the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page:
 
 1. Create a gate for a service and set the {{< ui >}}Evaluation Mode{{< /ui >}} to {{< ui >}}Dry Run{{< /ui >}}.
 2. Add the gate evaluation to your deployment process. While the gate is in dry-run mode, the API always returns `pass` and deployments are not impacted by the gate result.
 3. After a period of time (for example, 1-2 weeks), check the gate and rule executions on the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page. The UI shows the real status, so you can see when the gate would have failed and the reason behind it.
-4. When you are confident the gate behavior is as you expect, switch {{< ui >}}Evaluation Mode{{< /ui >}} from {{< ui >}}Dry Run{{< /ui >}} to {{< ui >}}Active{{< /ui >}}. Deployments are then promoted or rolled back based on the gate result.
+4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from {{< ui >}}Dry Run{{< /ui >}} to {{< ui >}}Active{{< /ui >}}. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
 
 ## Further reading
 
@@ -579,3 +580,4 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [4]: /api/latest/deployment-gates
 [5]: /deployment_gates/setup/jit
 [6]: https://app.datadoghq.com/ci/deployment-gates/gates
+[7]: https://app.datadoghq.com/ci/deployment-gates/evaluations
