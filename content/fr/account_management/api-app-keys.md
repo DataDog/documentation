@@ -6,155 +6,196 @@ aliases:
 - /fr/account_management/faq/how-do-i-reset-my-application-keys/
 - /fr/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /fr/account_management/faq/api-app-key-management/
+description: Gérez les clés API, les clés d'application et les jetons clients pour
+  les applications web avec des fonctionnalités de sécurité.
 title: Clés d'API et clés d'application
 ---
+## Clés API {#api-keys}
 
-## Clés d'API
+Les clés API sont uniques à votre organisation. Une [clé API][1] est requise par l'Agent Datadog pour soumettre des métriques et des événements à Datadog.
 
-Les clés d'API sont uniques à votre organisation. Une [clé d'API][1] est requise par l'Agent Datadog pour envoyer des métriques et des événements à Datadog.
+## Clés d'application {#application-keys}
 
-## Clés d'application
+Les [clés d'application][2], en conjonction avec la clé API de votre organisation, permettent aux utilisateurs d'accéder à l'API programmatique de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et, par défaut, ont les permissions de l'utilisateur qui les a créées.
 
-Les [clés d'application][2], associées à la clé API de votre organisation, permettent aux utilisateurs d'accéder à l'API programmatique de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et disposent par défaut des autorisations de l'utilisateur qui les a créées.
+### Mode de lecture unique {#one-time-read-mode}
 
-### Portées
+Le mode de lecture unique (OTR) est une fonctionnalité de sécurité qui limite la visibilité des secrets de clé d'application uniquement au moment de leur création. Lorsque le mode OTR est activé, les secrets de clé d'application ne sont affichés qu'une seule fois lors de leur création et ne peuvent pas être récupérés ultérieurement pour des raisons de sécurité.
 
-Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des portées d'autorisation à vos clés d'application, de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
+#### Pour les nouvelles organisations {#for-new-organizations}
 
-Lorsque vous appliquez des portées à des clés d'application, il est recommandé d'accorder uniquement les privilèges et les autorisations dont l'application a besoin pour fonctionner correctement. Seules les portées spécifiées par l'utilisateur sont appliquées à la clé d'application : aucune autre autorisation n'est accordée. Vous pouvez modifier la portée d'autorisation d'une clé d'application à tout moment, mais il est essentiel de réfléchir à l'impact que ces modifications auront sur le fonctionnement de votre application et les données auxquelles elle pourra accéder.
+Toutes les clés d'application pour les nouvelles organisations parentes (et leurs organisations enfants) créées après le 20 août 2025 ont le mode OTR activé par défaut. Ce paramètre est permanent et ne peut pas être modifié.
 
-**Remarques :**
+#### Pour les organisations existantes {#for-existing-organizations}
 
-- Les utilisateurs ou les comptes de service qui disposent des [autorisations][4] pour créer ou modifier des clés d'application peuvent également définir des portées de clés d'application. L'utilisateur doit disposer de l'autorisation `user_app_keys` pour appliquer une portée à ses propres clés d'application, ou de l'autorisation `org_app_keys_write` pour appliquer une portée aux clés d'application des autres utilisateurs de son organisation. L'utilisateur doit disposer de l'autorisation `service_account_write` pour appliquer une portée aux clés d'application des comptes de service.
-- Le propriétaire d'une application ne peut pas autoriser une application s'il ne dispose pas de l'ensemble des autorisations requises, même s'il applique une portée d'autorisation qu'il ne possède pas à une clé d'application.
-- En cas d'autorisation manquante lors de l'écriture d'une clé d'application ou de l'autorisation d'une application, une erreur `403 Forbidden` est renvoyée. Pour en savoir plus sur les différentes erreurs pouvant être renvoyées, consultez la documentation de l'[API Datadog][5].
-- Si le rôle ou les autorisations d'un utilisateur changent, les portées d'autorisation pour ses clés d'application restent identiques.
+Les administrateurs d'organisation peuvent activer ou désactiver le mode OTR depuis [**Paramètres de l'organisation** > **Clés d'application**][2]. Après avoir activé le mode OTR :
 
-## Tokens client
+- Les secrets de clé d'application ne sont visibles qu'une seule fois, au moment de leur création
+- Ils ne peuvent plus être récupérés via l'interface utilisateur ou l'API
+- Le paramètre peut être activé ou désactivé par les administrateurs d'organisation pendant 3 mois après l'activation
+- Après 3 mois d'activation continue, le mode OTR devient permanent et l'option de basculement est supprimée.
 
-Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis une application pour navigateur, mobile ou téléviseur : celles-ci seraient exposées côté client. Les applications conçues pour les utilisateurs finaux reposent donc sur des tokens client pour transmettre des données à Datadog.
+**Permissions** : Les utilisateurs doivent avoir à la fois les permissions `org_app_keys_write` et `org_management` pour activer ou désactiver le mode OTR pour leur organisation.
+
+### Scopes {#scopes}
+
+Pour mieux protéger et sécuriser vos applications, vous pouvez spécifier des portées d'autorisation pour vos clés d'application afin de définir des permissions plus granulaires et de minimiser l'accès que les applications ont à vos données Datadog. Cela vous donne un contrôle d'accès granulaire sur vos applications et minimise les vulnérabilités de sécurité en limitant l'accès superflu. Par exemple, une application qui ne fait que lire des tableaux de bord n'a pas besoin de droits administratifs pour gérer des utilisateurs ou supprimer des données de votre organisation.
+
+La meilleure pratique recommandée pour définir les clés d'application consiste à leur accorder les privilèges minimaux et les permissions minimales nécessaires pour que l'application fonctionne comme prévu. Les clés d'application définies ne reçoivent que les portées spécifiées par l'utilisateur, et aucune autre permission supplémentaire. Bien que vous puissiez modifier les portées d'autorisation de vos clés d'application à tout moment, considérez comment ces modifications peuvent affecter la fonctionnalité ou l'accès existants de votre application.
+
+**Notes :**
+
+- Les utilisateurs ou comptes de service disposant de [permissions][3] pour créer ou modifier des clés d'application peuvent définir des portées pour les clés d'application. Un utilisateur doit avoir la permission `user_app_keys` pour définir ses propres clés d'application, ou la permission `org_app_keys_write` pour définir des clés d'application appartenant à tout utilisateur de son organisation. Un utilisateur doit avoir la permission `service_account_write` pour définir des clés d'application pour des comptes de service.
+- Les propriétaires d'application ne peuvent pas autoriser une application s'ils manquent de permissions requises, même s'ils définissent une clé d'application avec des portées d'autorisation qu'ils ne possèdent pas.
+- Les erreurs dues à des permissions manquantes lors de l'écriture de clés d'application ou de l'autorisation d'applications affichent une erreur `403 Forbidden`. Plus d'informations sur les différentes réponses d'erreur peuvent être trouvées dans la documentation de l'[API Datadog][4].
+- Si le rôle ou les permissions d'un utilisateur changent, les portées d'autorisation spécifiées pour ses clés d'application restent inchangées.
+
+### Accès à l'API Actions {#actions-api-access}
+
+Les API d'actions incluent :
+- [App Builder][5]
+- [Actions Connections][6]
+- [Automatisation des flux de travail][7]
+
+Pour utiliser des clés d'application avec ces API, vous devez activer l'accès à l'API Actions sur la clé d'application. Cela peut être fait [via l'interface utilisateur][2] ou [l'API][21]. Par défaut, les clés d'application ne peuvent pas être utilisées avec ces API.
+
+{{< img src="account_management/click-enable-actions-api-access.png" alt="Cliquez sur Activer l'accès à l'API Actions" style="width:80%;" >}}
+
+**Remarque** : La section {{< ui >}}Last used{{< /ui >}} n'apparaît que si [le journal d'audit est activé][22] dans le compte et que vous avez la permission [`Audit Trail Read`][23].
+
+## Jetons clients {#client-tokens}
+
+Pour des raisons de sécurité, les clés API ne peuvent pas être utilisées pour envoyer des données depuis un navigateur, une application mobile ou une application TV, car elles seraient exposées côté client. Au lieu de cela, les applications destinées aux utilisateurs finaux utilisent des jetons clients pour envoyer des données à Datadog.
 
  Plusieurs types de clients doivent utiliser un token client pour envoyer des données. Par exemple :
-- Les collecteurs de logs pour les [navigateurs Web][6], [Android][7], [iOS][8], [React Native][9], [Flutter][10], et [Roku][11], qui envoient des logs.
-- Les applications [Real User Monitoring][12], qui envoient des événements et des logs
+- Les collecteurs de journaux pour [navigateur web][8], [Android][9], [iOS][10], [React Native][11], [Flutter][12] et [Roku][13] soumettent des journaux.
+- Les applications de [Surveillance des utilisateurs réels][14] soumettent des événements et des journaux.
 
-Les tokens client sont uniques à votre organisation. Pour les gérer, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
+Les jetons clients sont uniques à votre organisation. Pour gérer vos jetons clients, allez à {{< ui >}}Organization Settings{{< /ui >}}, puis cliquez sur l'onglet {{< ui >}}Client Tokens{{< /ui >}}.
 
-**Remarque** : lorsqu'un utilisateur ayant créé un token client est désactivé, le token client demeure valide.
+**Remarque** : Lorsqu'un utilisateur qui a créé un jeton client est désactivé, le jeton client reste actif.
 
-## Ajouter une clé d'API ou un token client
+## Ajoutez une clé API ou un jeton client {#add-an-api-key-or-client-token}
 
 Pour ajouter une clé d'API Datadog ou un token client, procédez comme suit :
 
-1. Accédez aux paramètres d'organisation, puis cliquez sur l'onglet [**API keys**][1] ou [**Client Tokens**][13].
-2. Cliquez sur le bouton **New Key** ou **New Client Token**, en fonction de l'élément à créer.
-3. Attribuez un nom à votre clé ou à votre token.
-4. Cliquez sur **Create API key** ou **Create Client Token**.
+1. Accédez aux paramètres de l'organisation, puis cliquez sur l'onglet [**Clés API**][1] ou [**Jetons clients**][15].
+2. Cliquez sur le bouton {{< ui >}}New Key{{< /ui >}} ou {{< ui >}}New Client Token{{< /ui >}}, selon celui que vous créez.
+3. Entrez un nom pour votre clé ou votre jeton.
+4. Cliquez sur {{< ui >}}Create API key{{< /ui >}} ou {{< ui >}}Create Client Token{{< /ui >}}.
 
-{{< img src="account_management/api-key.png" alt="Accédez à la page des clés dʼAPI de votre organisation dans Datadog" style="width:80%;" >}}
+{{< img src="account_management/api-key.png" alt="Accédez à la page des clés API pour votre organisation dans Datadog." style="width:80%;" >}}
 
-**Remarques :**
+**Notes :**
 
-- Votre organisation doit posséder entre une et 50 clés d'API.
-- Les noms de clé doivent être uniques au sein de votre organisation.
+- Votre organisation doit avoir au moins une clé API et au maximum 50 clés API.
+- Les noms de clés doivent être uniques au sein de votre organisation.
 
-## Supprimer des clés d'API ou des tokens client
+## Supprimez les clés API ou les jetons clients {#remove-api-keys-or-client-tokens}
 
-Pour supprimer une clé d'API ou un token client Datadog, accédez à la liste des clés ou tokens, puis cliquez sur l'icône en forme de **corbeille** de l'option **Revoke** en regard de la clé ou du token à supprimer.
+Pour supprimer une clé API ou un jeton client Datadog, accédez à la liste des clés ou des jetons, puis cliquez sur le {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icône à côté de la clé ou du jeton que vous souhaitez supprimer.
 
-## Ajouter des clés d'application
+## Ajouter des clés d'application {#add-application-keys}
 
-Pour ajouter une clé d'application Datadog, accédez à [**Organization Settings** > **Application Keys**][2]. Cliquez ensuite sur **New Key**. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer des clés d'application.
+Pour ajouter une clé d'application Datadog, accédez à [**Paramètres de l'organisation** > **Clés d'application**][2]. Si vous avez la [permission][3] de créer des clés d'application, cliquez sur {{< ui >}}New Key{{< /ui >}}.
 
-{{< img src="account_management/app-key.png" alt="Accédez à la page des clés dʼapplication de votre organisation dans Datadog" style="width:80%;" >}}
+{{< img src="account_management/app-key.png" alt="Accédez à la page des clés d'application pour votre organisation dans Datadog" style="width:80%;" >}}
 
-{{< site-region region="ap2,gov" >}}
-<div class="alert alert-danger">Assurez-vous de stocker votre clé d'application en toute sécurité dès sa création, car le secret de la clé ne peut pas être récupéré ultérieurement.</div>
+{{< site-region region="ap2,gov,gov2" >}}
+<div class="alert alert-danger">Assurez-vous de stocker en toute sécurité votre clé d'application immédiatement après sa création, car le secret de la clé ne peut pas être récupéré ultérieurement.</div>
 {{< /site-region >}}
 
-**Remarques :**
+<div class="alert alert-info">Si votre organisation a le mode Lecture Unique (OTR) activé, assurez-vous de stocker en toute sécurité votre clé d'application immédiatement après sa création, car le secret de la clé ne peut pas être récupéré ultérieurement.</div>
 
-- Les noms de clé d'application ne peuvent pas être vides.
+**Notes :**
 
-## Supprimer des clés d'application
+- Les noms de clés d'application ne peuvent pas être vides.
 
-Pour supprimer une clé d'application Datadog, accédez à [**Organization Settings** > **Application Keys**][2]. Vos clés d'application s'affichent alors. Cliquez ensuite sur l'option **Revoke** en regard de la clé à révoquer. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer et gérer des clés d'application. Si vous êtes autorisé à gérer toutes les clés d'application de votre organisation, vous pouvez rechercher la clé à révoquer, puis cliquer sur l'option **Revoke** correspondante.
+## Supprimer des clés d'application {#remove-application-keys}
 
-## Propagation des clés et cohérence éventuelle
+Pour supprimer une clé d'application Datadog, accédez à [**Paramètres de l'organisation** > **Clés d'application**][2]. Si vous avez la [permission][3] de créer et de gérer des clés d'application, vous pouvez voir vos propres clés et cliquer sur {{< ui >}}Revoke{{< /ui >}} à côté de la clé que vous souhaitez révoquer. Si vous avez la permission de gérer toutes les clés d'application de l'organisation, vous pouvez rechercher la clé que vous souhaitez révoquer et cliquer sur {{< ui >}}Revoke{{< /ui >}} à côté de celle-ci.
 
-Les clés API et les clés d'application de Datadog suivent un modèle de cohérence éventuelle. En raison de l'architecture distribuée du système, les mises à jour de clés, comme leur création ou révocation, peuvent prendre quelques secondes pour se propager complètement.
+## Délai de propagation des clés et cohérence éventuelle {#key-propagation-delay-and-eventual-consistency}
+
+Les clés API et d'application de Datadog suivent un modèle de cohérence éventuelle. En raison de la nature distribuée des systèmes de Datadog, les mises à jour des clés, telles que la création et la révocation, peuvent prendre quelques secondes pour se propager complètement.
 
 En conséquence :
 
-- N'utilisez pas immédiatement une nouvelle clé API ou d'application dans des workflows critiques. Prévoyez quelques secondes pour sa propagation. Mettez en place une stratégie de nouvelle tentative avec backoff exponentiel court pour gérer les erreurs transitoires durant la propagation.
-- Pour vérifier si une clé API est active, utilisez l'endpoint [/api/v1/validate][18].
-- Pour vérifier si une clé d'application est active, utilisez l'endpoint `/api/v2/validate_keys` avec les bonnes paires de clés.
+- N'utilisez pas immédiatement de nouvelles clés API ou d'application dans des workflows critiques. Laissez un bref délai (quelques secondes) pour la propagation. Vous pouvez mettre en œuvre une stratégie de réessai avec un court délai exponentiel pour gérer les erreurs transitoires pendant la fenêtre de propagation.
+- Pour valider si une clé API est active et utilisable, appelez le point de terminaison [/api/v1/validate][16].
+- Pour vérifier qu'une clé d'application est active, utilisez le point de terminaison `/api/v2/validate_keys` avec la paire de clés appropriée.
 
 L'utilisation d'une clé nouvellement créée avant sa propagation complète peut entraîner des erreurs d'authentification temporaires, telles que 403 Forbidden ou 401 Unauthorized.
 
-## Définir le champ d'application d'une clé d'application
+## Définir la portée des clés d'application {#scope-application-keys}
 
-Pour appliquer des portées d'autorisation à des clés d'application, créez ou modifiez une clé d'application en [envoyant une requête sur l'API Datadog][5] ou lʼIU pour créer ou modifier une clé dʼapplication. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][14] ou à un [compte de service][15]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
+Pour spécifier des portées d'autorisation pour les clés d'application, [faites une demande à l'API Datadog][4] ou à l'interface utilisateur pour créer ou modifier une clé d'application. Des portées peuvent être spécifiées pour les clés d'application appartenant à [l'utilisateur actuel][17] ou à un [compte de service][18]. Si ce champ n'est pas spécifié, les clés d'application ont par défaut toutes les mêmes portées et permissions que l'utilisateur qui les a créées.
 
-**Remarques :**
+**Remarques :**
 
-- Les noms des portées sont sensibles à la casse.
+- Les noms de portée sont sensibles à la casse.
 
-## Utilisation de plusieurs clés d'API
+## Utilisation de plusieurs clés API {#using-multiple-api-keys}
 
-Pensez à configurer plusieurs clés d'API pour votre organisation. Par exemple, utilisez des clés d'API différentes pour chacune de vos méthodes de déploiement : une pour le déploiement d'un Agent sur Kubernetes dans AWS, une pour le déploiement sur site avec Chef, une pour les scripts Terraform qui automatisent vos dashboards ou monitors, et une pour les développeurs qui réalisent des déploiements localement.
+Envisagez de configurer plusieurs clés API pour votre organisation. Par exemple, utilisez différentes clés API pour chacune de vos différentes méthodes de déploiement : une pour déployer un Agent sur Kubernetes dans AWS, une pour le déployer sur site avec Chef, une pour les scripts Terraform qui automatisent vos tableaux de bord ou vos moniteurs, et une pour les développeurs déployant localement.
 
 L'utilisation de plusieurs clés d'API vous permet d'effectuer une rotation des clés dans le cadre de vos mesures de sécurité ou de révoquer une clé spécifique si elle est exposée par inadvertance ou si vous cessez d'utiliser le service auquel elle est associée.
 
-Si la limite de 50 clés d'API est insuffisante pour votre organisation, contactez l'[assistance][16] pour demander d'augmenter ce nombre.
+Si votre organisation a besoin de plus que la limite intégrée de 50 clés API, contactez [Support][19] pour demander une augmentation de votre limite.
 
-## Désactiver un compte utilisateur
+## Désactivation d'un compte utilisateur {#disabling-a-user-account}
 
-Si le compte d'un utilisateur est désactivé, les clés d'application créées par cet utilisateur sont révoquées. Les clés d'API créées par le compte désactivé ne sont pas supprimées et restent valides.
+Si le compte d'un utilisateur est désactivé, toutes les clés d'application que l'utilisateur a créées sont révoquées. Toutes les clés API qui ont été créées par le compte désactivé ne sont pas supprimées et restent valides.
 
-## Transferts de clé
+## Transfert de clés {#transferring-keys}
 
-Pour des raisons de sécurité, Datadog ne transfère pas les clés d'application d'un utilisateur à un autre. Si vous devez partager une clé d'application, utilisez un [compte de service][17].
+Pour des raisons de sécurité, Datadog ne transfère pas les clés d'application d'un utilisateur à un autre. Si vous devez partager une clé d'application, utilisez un [compte de service][20].
 
-## Que faire en cas d'exposition d'une clé d'API ou d'application
+## Que faire si une clé API ou d'application a été exposée {#what-to-do-if-an-api-or-application-key-was-exposed}
 
-Si une clé privée a été compromise ou exposée publiquement, vous devez prendre des mesures pour sécuriser votre compte aussi vite que possible. Le fait de supprimer le fichier contenant la clé d'un site public comme GitHub ne garantit **pas** qu'un tiers n'y a pas déjà accédé.
+Si une clé privée a été compromise ou exposée publiquement, des mesures doivent être prises le plus rapidement possible pour garantir la sécurité de votre compte. Supprimer le fichier contenant la clé d'un site public tel que GitHub **ne** garantit pas qu'il n'a pas déjà été consulté par une autre partie.
 
 Suivez ces étapes pour protéger votre compte :
 
-**Remarque :** la révocation d'une clé active peut affecter le fonctionnement de vos services. Si la portée de la clé est vaste ou inconnue, nous vous conseillons de suivre les étapes 2 à 5 **avant** de révoquer la clé affectée.
+**Remarque :** Révoquer une clé active peut avoir un impact sur vos services. Si l'étendue de l'utilisation est large ou indéterminée, envisagez les étapes 2-5 **avant** de révoquer la clé concernée.
 
-1. Révoquez la clé affectée.
-2. Supprimez le code contenant la clé privée de tous les fichiers accessibles publiquement :
-    - Publiez le fichier corrigé sur votre dépôt public.
+1. Révoquez la clé concernée.
+2. Supprimez le code contenant la clé privée de tous les fichiers accessibles publiquement :
+    - Publiez le fichier assaini dans votre dépôt public.
     - Supprimez les données sensibles de votre historique de commits.
 3. Créez une nouvelle clé.
-4. Mettez à jour la clé pour les services affectés.
-5. Vérifiez que votre compte n'a fait l'objet d'aucun accès non autorisé :
+4. Mettez à jour les services concernés avec la nouvelle clé.
+5. Examinez votre compte pour tout accès non approuvé :
     - Utilisateurs récemment ajoutés
     - Nouvelles ressources
-    - Modifications apportées aux rôles ou aux autorisations
+    - Changements de rôles ou de permissions
 
-Si vous avez identifié une activité inhabituelle ou que vous avez besoin d'aide pour sécuriser votre compte, contactez l'[assistance Datadog][16].
+Si une activité inhabituelle est identifiée, ou si vous avez besoin d'aide supplémentaire pour sécuriser votre compte, contactez [Datadog support][19].
 
-## Dépannage
+## Dépannage {#troubleshooting}
 
-Besoin d'aide ? Contactez [l'assistance Datadog][16].
+Besoin d'aide ? Contactez [Datadog support][19].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://app.datadoghq.com/access/application-keys
-[4]: /fr/account_management/rbac/permissions
-[5]: /fr/api/latest/key-management/
-[6]: /fr/logs/log_collection/javascript/
-[7]: /fr/logs/log_collection/android/
-[8]: /fr/logs/log_collection/ios/
-[9]: /fr/logs/log_collection/reactnative/
-[10]: /fr/logs/log_collection/flutter/
-[11]: /fr/logs/log_collection/roku/
-[12]: /fr/real_user_monitoring/
-[13]: https://app.datadoghq.com/organization-settings/client-tokens
-[14]: /fr/api/latest/key-management/#create-an-application-key-for-current-user
-[15]: /fr/api/latest/service-accounts/
-[16]: /fr/help/
-[17]: /fr/account_management/org_settings/service_accounts/
-[18]: /fr/api/latest/authentication/#validate-api-key
+[2]: https://app.datadoghq.com/organization-settings/application-keys
+[3]: /fr/account_management/rbac/permissions
+[4]: /fr/api/latest/key-management/
+[5]: /fr/api/latest/app-builder/
+[6]: /fr/api/latest/action-connection/
+[7]: /fr/api/latest/workflow-automation/
+[8]: /fr/logs/log_collection/javascript/
+[9]: /fr/logs/log_collection/android/
+[10]: /fr/logs/log_collection/ios/
+[11]: /fr/logs/log_collection/reactnative/
+[12]: /fr/logs/log_collection/flutter/
+[13]: /fr/logs/log_collection/roku/
+[14]: /fr/real_user_monitoring/
+[15]: https://app.datadoghq.com/organization-settings/client-tokens
+[16]: /fr/api/latest/authentication/#validate-api-key
+[17]: /fr/api/latest/key-management/#create-an-application-key-for-current-user
+[18]: /fr/api/latest/service-accounts/
+[19]: /fr/help/
+[20]: /fr/account_management/org_settings/service_accounts/
+[21]: /fr/api/latest/action-connection/#register-a-new-app-key
+[22]: /fr/account_management/audit_trail/#setup
+[23]: /fr/account_management/rbac/permissions/#compliance

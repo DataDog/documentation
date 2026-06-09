@@ -88,7 +88,7 @@ Container installations must use BCFKS key store format. Use the `keytool` utili
    ```shell
    keytool -keystore java-app-keystore -genkey -alias java-app -dname CN=java-app -validity 365 -keyalg ec -storepass changeit
 
-   docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
+   docker run --rm -v $(pwd):/ssl registry.datadoghq.com/agent:latest-fips-jmx \
      keytool -keystore /ssl/jmxfetch-keystore -genkey -alias jmxfetch -dname CN=jmxfetch -validity 365 -keyalg ec -storepass changeit -keypass changeit
    ```
 
@@ -97,7 +97,7 @@ Container installations must use BCFKS key store format. Use the `keytool` utili
    ```shell
    keytool -keystore java-app-keystore -export -alias java-app -rfc -file java-app-cert.pem -storepass changeit
 
-   docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
+   docker run --rm -v $(pwd):/ssl registry.datadoghq.com/agent:latest-fips-jmx \
      keytool -keystore /ssl/jmxfetch-keystore -export -alias jmxfetch -rfc -file /ssl/jmxfetch-cert.pem -storepass changeit
    ```
 
@@ -106,7 +106,7 @@ Container installations must use BCFKS key store format. Use the `keytool` utili
    ```shell
    keytool -keystore java-app-truststore -import -alias jmxfetch -file jmxfetch-cert.pem -storepass changeit -noprompt
 
-   docker run --rm -v $(pwd):/ssl datadog/agent:latest-fips-jmx \
+   docker run --rm -v $(pwd):/ssl registry.datadoghq.com/agent:latest-fips-jmx \
      keytool -keystore /ssl/jmxfetch-truststore -import -alias java-app -file /ssl/java-app-cert.pem -storepass changeit -noprompt
    ```
 

@@ -1,5 +1,6 @@
 ---
-title: LLM Observability SDK Reference
+title: Agent Observability SDK Reference
+description: Reference documentation for the Agent Observability SDKs for Python, Node.js, and Java, covering automatic and manual instrumentation.
 aliases:
     - /tracing/llm_observability/sdk/python
     - /llm_observability/sdk/python
@@ -22,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Datadog's LLM Observability SDKs provide automatic instrumentation as well as manual instrumentation APIs to provide observability and insights into your LLM applications.
+Agent Observability SDKs provide automatic instrumentation as well as manual instrumentation APIs to provide observability and insights into your LLM applications.
 
 ## Setup
 
@@ -49,7 +50,7 @@ Datadog's LLM Observability SDKs provide automatic instrumentation as well as ma
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- You have downloaded the latest [`dd-trace-java` JAR][1]. The LLM Observability SDK is supported in `dd-trace-java` v1.51.0+ (Java 8+ required).
+- You have downloaded the latest [`dd-trace-java` JAR][1]. The Agent Observability SDK is supported in `dd-trace-java` v1.51.0+ (Java 8+ required).
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
@@ -59,9 +60,9 @@ Datadog's LLM Observability SDKs provide automatic instrumentation as well as ma
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
+Enable Agent Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 
-**Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
+**Note**: `ddtrace-run` automatically turns on all Agent Observability integrations.
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -76,7 +77,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ENABLED`
 : required - _integer or string_
-<br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
+<br />Toggle to enable submitting data to Agent Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
@@ -95,7 +96,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"` and specifying the required environment variables.
+Enable Agent Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"` and specifying the required environment variables.
 
 **Note**: `dd-trace/initialize.mjs` automatically turns on all APM integrations.
 
@@ -112,7 +113,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ENABLED`
 : required - _integer or string_
-<br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
+<br />Toggle to enable submitting data to Agent Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
@@ -131,7 +132,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Enable LLM Observability by running your application with `dd-trace-java` and specifying the required parameters as environment variables or system properties.
+Enable Agent Observability by running your application with `dd-trace-java` and specifying the required parameters as environment variables or system properties.
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -149,7 +150,7 @@ You can supply the following parameters as environment variables (for example, `
 
 `DD_LLMOBS_ENABLED` or `dd.llmobs.enabled`
 : required - _integer or string_
-<br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
+<br />Toggle to enable submitting data to Agent Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`
 : optional - _string_
@@ -172,12 +173,12 @@ You can supply the following parameters as environment variables (for example, `
 
 {{% collapse-content title="In-code setup" level="h3" expanded=false id="in-code-setup" %}}
 
-Instead of using [command-line setup](#command-line-setup), you can also enable LLM Observability programmatically.
+Instead of using [command-line setup](#command-line-setup), you can also enable Agent Observability programmatically.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Use the `LLMObs.enable()` function to enable LLM Observability.
+Use the `LLMObs.enable()` function to enable Agent Observability.
 
 <div class="alert alert-info">
 Do not use this setup method with the <code>ddtrace-run</code> command.
@@ -232,7 +233,7 @@ LLMObs.enable(
 Do not use this setup method with the <code>dd-trace/initialize.mjs</code> command.
 </div>
 
-Use the `init()` function to enable LLM Observability.
+Use the `init()` function to enable Agent Observability.
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
@@ -286,7 +287,7 @@ Set the following values as environment variables. They cannot be configured pro
 
 {{% collapse-content title="AWS Lambda Setup" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-To instrument an existing AWS Lambda function with LLM Observability, you can use the Datadog Extension and respective language layers.
+To instrument an existing AWS Lambda function with Agent Observability, you can use the Datadog Extension and respective language layers.
 
 1. Open a Cloudshell in the AWS console.
 2. Install the Datadog CLI client
@@ -302,7 +303,7 @@ If you already have or prefer to use a secret in Secrets Manager, you can set th
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. Install your Lambda function with LLM Observability (this requires at least version 77 of the Datadog Extension layer)
+4. Install your Lambda function with Agent Observability (this requires at least version 77 of the Datadog Extension layer)
 {{< tabs >}}
 {{% tab "Python" %}}
 ```shell
@@ -323,9 +324,9 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
+4. Invoke your Lambda function and verify that Agent Observability traces are visible in the Datadog UI.
 
-Manually flush LLM Observability traces by using the `flush` method before the Lambda function returns.
+Manually flush Agent Observability traces by using the `flush` method before the Lambda function returns.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -353,7 +354,7 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-After installing the SDK and running your application you should expect to see some data in LLM Observability from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
+After installing the SDK and running your application you should expect to see some data in Agent Observability from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
 
 ## Manual instrumentation
 
@@ -399,7 +400,7 @@ To trace a span, use `llmobs.wrap(options, function)` as a function wrapper for 
 
 Span kinds are required, and are specified on the `options` object passed to the `llmobs` tracing functions (`trace`, `wrap`, and `decorate`). See the [Span Kinds documentation][1] for a list of supported span kinds.
 
-**Note:** Spans with an invalid span kind are not submitted to LLM Observability.
+**Note:** Spans with an invalid span kind are not submitted to Agent Observability.
 
 ### Automatic function argument/output/name capturing
 
@@ -1310,6 +1311,10 @@ The `LLMObs.annotate()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
+`cost_tags`
+: optional - _list of strings_
+<br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as custom tags on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1403,6 +1408,10 @@ The `annotationOptions` object can contain the following:
 `tags`
 : optional - _object_
 <br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`costTags`
+: optional - _array of strings_
+<br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as custom tags on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -1722,6 +1731,10 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
+`cost_tags`
+: optional - _list of strings_
+<br />A list of tag keys to propagate as custom tags on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `LLMObs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1772,6 +1785,10 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 : optional - _object_
 <br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
+`costTags`
+: optional - _array of strings_
+<br />A list of tag keys to propagate as custom tags on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `llmobs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1800,7 +1817,7 @@ function ragWorkflow(userQuestion) {
 
 ## Prompt tracking
 
-Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, LLM Observability also provides [version tracking](#version-tracking) based on template content changes.
+Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, Agent Observability also provides [version tracking](#version-tracking) based on template content changes.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1931,11 +1948,11 @@ function answerQuestion(text) {
 
 ### Version tracking
 
-LLM Observability provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, LLM Observability uses your specified version label instead of auto-generating one.
+Agent Observability provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, Agent Observability uses your specified version label instead of auto-generating one.
 
 The versioning system works as follows:
-- **Auto versioning**: When no `version` tag is provided, LLM Observability computes a hash of the `template` or `chat_template` content to automatically generate a numerical version identifier
-- **Manual versioning**: When a `version` tag is provided, LLM Observability uses your specified version label exactly as provided
+- **Auto versioning**: When no `version` tag is provided, Agent Observability computes a hash of the `template` or `chat_template` content to automatically generate a numerical version identifier
+- **Manual versioning**: When a `version` tag is provided, Agent Observability uses your specified version label exactly as provided
 - **Version history**: Both auto-generated and manual versions are maintained in the version history to track prompt evolution over time
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
@@ -1945,13 +1962,15 @@ Attach token metrics (for automatic cost tracking) or cost metrics (for manual c
 
 If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
 
-<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform LLM Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
+<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform Agent Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
+
+### Use case: Using a common model provider
+Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with the model name, model provider, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
+
+To learn more about what each token represents and how Datadog calculates them, see [How token counts are calculated][16].
 
 {{< tabs >}}
 {{% tab "Python" %}}
-
-#### Use case: Using a common model provider
-Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1974,8 +1993,61 @@ def llm_call(prompt):
     return resp
 {{< /code-block >}}
 
-#### Use case: Using a custom model
-For custom or unsupported models, you must annotate the span manually with the cost data.
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+function llmCall (prompt) {
+  const resp = ... // llm call here
+  llmobs.annotate({
+    metrics: {
+      input_tokens: 50,
+      output_tokens: 120,
+      total_tokens: 170,
+      non_cached_input_tokens: 13,  // optional
+      cache_read_input_tokens: 22,  // optional
+      cache_write_input_tokens: 15  // optional
+    }
+  })
+  return resp
+}
+llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'openai' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import java.util.Map;
+
+public class MyJavaClass {
+  public String llmCall(String prompt) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("llm-call", "gpt-5.1", "openai", null, null);
+    String resp = ... // llm call here
+    llmSpan.setMetrics(Map.of(
+      "input_tokens", 50,
+      "output_tokens", 120,
+      "total_tokens", 170,
+      "non_cached_input_tokens", 13,  // optional
+      "cache_read_input_tokens", 22,  // optional
+      "cache_write_input_tokens", 15  // optional
+    ));
+    llmSpan.finish();
+    return resp;
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Use case: Using a custom model
+For custom or unsupported models, you must annotate the span manually with the cost data in dollars.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1999,12 +2071,129 @@ def llm_call(prompt):
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+function llmCall (prompt) {
+  const resp = ... // llm call here
+  llmobs.annotate({
+    metrics: {
+      input_cost: 3,
+      output_cost: 7,
+      total_cost: 10,
+      non_cached_input_cost: 1,    // optional
+      cache_read_input_cost: 0.6,  // optional
+      cache_write_input_cost: 1.4  // optional
+    }
+  })
+  return resp
+}
+llmCall = llmobs.wrap({ kind: 'llm', modelName: 'custom_model', modelProvider: 'model_provider' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import java.util.Map;
+
+public class MyJavaClass {
+  public String llmCall(String prompt) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("llm-call", "custom_model", "model_provider", null, null);
+    String resp = ... // llm call here
+    llmSpan.setMetrics(Map.of(
+      "input_cost", 3,
+      "output_cost", 7,
+      "total_cost", 10,
+      "non_cached_input_cost", 1,    // optional
+      "cache_read_input_cost", 0.6,  // optional
+      "cache_write_input_cost", 1.4  // optional
+    ));
+    llmSpan.finish();
+    return resp;
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Adding custom tags to cost and tokens metrics
+By default, the LLM cost and token metrics carry a fixed set of OOTB tags such as `model_name`, `model_provider`, and `ml_app`. To slice LLM spend by attributes specific to your application — such as team, customer, or feature — mark a subset of the span's existing tag keys to propagate to those metrics as custom tags. For example use cases like custom dashboards and monitors, see [Custom tags on cost and tokens metrics][15].
+
+Each entry must be a string and must reference a key already supplied through the span's `tags` parameter at the time the annotation is applied. When annotating a single span, the key can be supplied through `tags` in the same annotation call or in an earlier annotation on the same span. When using an annotation context, only keys present in `tags` at span start qualify — keys added later through individual span annotations are not retained. Entries that don't reference an existing tag key are skipped.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="gpt-5.1", model_provider="openai")
+def llm_call(prompt):
+    resp = ... # llm call here
+    LLMObs.annotate(
+        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170},
+        tags={"team": "nlp", "customer_tier": "enterprise", "host": "host_name"},
+        cost_tags=["team", "customer_tier"],
+    )
+    return resp
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+function llmCall (prompt) {
+  const resp = ... // llm call here
+  llmobs.annotate({
+    metrics: { input_tokens: 50, output_tokens: 120, total_tokens: 170 },
+    tags: { team: 'nlp', customer_tier: 'enterprise', host: 'host_name' },
+    costTags: ['team', 'customer_tier']
+  })
+  return resp
+}
+llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'openai' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+You can also propagate tags this way through an annotation context to apply it to all auto-instrumented spans started inside the context.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+{{< code-block lang="python" >}}
+with LLMObs.annotation_context(
+    tags={"team": "nlp", "customer_tier": "enterprise"},
+    cost_tags=["team", "customer_tier"],
+):
+    resp = ... # llm call here
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+{{< code-block lang="javascript" >}}
+llmobs.annotationContext({
+  tags: { team: 'nlp', customer_tier: 'enterprise' },
+  costTags: ['team', 'customer_tier']
+}, () => {
+  const resp = ... // llm call here
+})
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 
 ## Evaluations
 
-The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
+The Agent Observability SDK provides methods to export and submit your evaluations to Datadog.
 
 <div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
@@ -2071,7 +2260,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). To migrate, rename your <code>LLMObs.submit_evaluation_for</code> calls with <code>LLMObs.submit_evaluation</code>.</div>
 
-**Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][1] page in Datadog.
+**Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**Agent Observability** > **Settings** > **Evaluations**][1] page in Datadog.
 
 The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
@@ -2651,7 +2840,7 @@ def separate_task(workflow_span):
 
 #### Force flushing in serverless environments
 
-`LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
+`LLMObs.flush()` is a blocking function that submits all buffered Agent Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all Agent Observability traces are submitted.
 
 ### Tracing multiple applications
 
@@ -2721,7 +2910,7 @@ function processMessage () {
 
 ### Function decorators in TypeScript
 
-The Node.js LLM Observability SDK offers an `llmobs.decorate` function which serves as a function decorator for TypeScript applications. This functions tracing behavior is the same as `llmobs.wrap`.
+The Node.js Agent Observability SDK offers an `llmobs.decorate` function which serves as a function decorator for TypeScript applications. This functions tracing behavior is the same as `llmobs.wrap`.
 
 #### Example
 
@@ -2748,7 +2937,7 @@ class MyAgent {
 
 ### Force flushing in serverless environments
 
-`llmobs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
+`llmobs.flush()` is a blocking function that submits all buffered Agent Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all Agent Observability traces are submitted.
 
 ### Tracing multiple applications
 
@@ -2800,3 +2989,5 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
 [14]: /llm_observability/monitoring/cost
+[15]: /llm_observability/monitoring/cost/#custom-tags-on-cost-and-tokens-metrics
+[16]: /llm_observability/monitoring/cost/#how-token-counts-are-calculated

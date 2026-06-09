@@ -59,7 +59,7 @@ The following products and features are supported with Remote Configuration.
 
 Fleet Automation
 : - [Send flares][27] directly from the Datadog site. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
-: - [Upgrade your Agents][29] (Preview).
+: - [Upgrade your Agents][29].
 
 App and API Protection (AAP)
 : - [1-click AAP activation][33]: Enable AAP in 1-click from the Datadog UI.
@@ -67,7 +67,7 @@ App and API Protection (AAP)
 : - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
-: - Configuration at runtime: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
+: - Configuration at runtime: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
 : - [Remotely set Agent sampling rate][35]: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 [Dynamic Instrumentation][36]
@@ -105,20 +105,20 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 
 Enabling Remote Configuration impacts the following products. Each product defines a set of role-based access controls that need to be granted to their users. For general information on access management, see [Access Control][37].
 
- Remote Configuration Enabled Product | Role-Based Access Controls |
-| --- | --- |
-| Fleet Automation | `FLEET_POLICIES_WRITE`<br>`AGENT_UPGRADE_WRITE`<br>`FLEET_FLARE`<br><br>For more information, see [Fleet Automation][38]. |
-| App and API Protection | `APPSEC_ACTIVATION_READ`<br>`APPSEC_ACTIVATION_WRITE`<br>`APPSEC_PROTECT_READ`<br>`APPSEC_PROTECT_WRITE`<br><br>For more information, see [Access Control][39]. |
-| APM | `APM_SERVICE_INGEST_READ`<br>`APM_SERVICE_INGEST_WRITE`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>For more information, see [Adaptive Sampling][40]. |
-| Dynamic Instrumentation | `DEBUGGER_READ`<br>`DEBUGGER_WRITE`<br>`DEBUGGER_WRITE_PRE_PROD`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>For more information, see [APM][41]. |
-| Workload Protection | `SECURITY_MONITORING_CWS_AGENT_RULES_WRITE`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_READ`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_ACTIONS`<br><br>For more information, see [Security][42]. |
-| CSM Side Scanning | `ORG_MANAGEMENT`<br>`MANAGE_INTEGRATIONS`<br><br> For more information, see [Enable Agentless Scanning][43].|
-| Observability Pipelines | `OBSERVABILITY_PIPELINES_READ`<br>`OBSERVABILITY_PIPELINES_WRITE`<br>`OBSERVABILITY_PIPELINES_DELETE`<br>`OBSERVABILITY_PIPELINES_DEPLOY`<br>`OBSERVABILITY_PIPELINES_CAPTURE_WRITE`<br>`OBSERVABILITY_PIPELINES_CAPTURE_READ`<br><br>For more information, see [Observability Pipelines][44]. |
-| Private Action Runner | `ON_PREM_RUNNER_WRITE`<br>`ON_PREM_RUNNER_READ`<br>`ON_PREM_RUNNER_USE`<br><br>For more information, see [App Builder & Workflow Automation][45]. |
-| Network Device Monitoring (NDM) | `NDM_DEVICE_PROFILES_VIEW`<br>`NDM_DEVICE_PROFILES_EDIT` |
-| Container Autoscaling | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ` |
-| Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46]. |
-| Feature Flags | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>For more information, see [Feature Flags][48]. |
+ | Remote Configuration Enabled Product   | Role-Based Access Controls                                                                                                                                                                                                                                                                     |
+ |----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+ | Fleet Automation                       | `FLEET_POLICIES_WRITE`<br>`AGENT_UPGRADE_WRITE`<br>`FLEET_FLARE`<br><br>For more information, see [Fleet Automation][38].                                                                                                                                                                      |
+ | App and API Protection                 | `APPSEC_ACTIVATION_READ`<br>`APPSEC_ACTIVATION_WRITE`<br>`APPSEC_PROTECT_READ`<br>`APPSEC_PROTECT_WRITE`<br><br>For more information, see [Access Control][39].                                                                                                                                |
+ | APM                                    | `APM_SERVICE_INGEST_READ`<br>`APM_SERVICE_INGEST_WRITE`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>For more information, see [Adaptive Sampling][40].                                                                                                       |
+ | Dynamic Instrumentation                | `DEBUGGER_READ`<br>`DEBUGGER_WRITE`<br>`DEBUGGER_WRITE_PRE_PROD`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>For more information, see [APM][41].                                                                                                            |
+ | Workload Protection                    | `SECURITY_MONITORING_CWS_AGENT_RULES_WRITE`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_READ`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_ACTIONS`<br><br>For more information, see [Security][42].                                                                                                    |
+ | CSM Side Scanning                      | `ORG_MANAGEMENT`<br>`MANAGE_INTEGRATIONS`<br><br> For more information, see [Enable Agentless Scanning][43].                                                                                                                                                                                   |
+ | Observability Pipelines                | `OBSERVABILITY_PIPELINES_READ`<br>`OBSERVABILITY_PIPELINES_WRITE`<br>`OBSERVABILITY_PIPELINES_DELETE`<br>`OBSERVABILITY_PIPELINES_DEPLOY`<br>`OBSERVABILITY_PIPELINES_CAPTURE_WRITE`<br>`OBSERVABILITY_PIPELINES_CAPTURE_READ`<br><br>For more information, see [Observability Pipelines][44]. |
+ | Private Action Runner                  | `ON_PREM_RUNNER_WRITE`<br>`ON_PREM_RUNNER_READ`<br>`ON_PREM_RUNNER_USE`<br><br>For more information, see [App Builder & Workflow Automation][45].                                                                                                                                              |
+ | Network Device Monitoring (NDM)        | `NDM_DEVICE_PROFILES_VIEW`<br>`NDM_DEVICE_PROFILES_EDIT`                                                                                                                                                                                                                                       |
+ | Container Autoscaling                  | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ`                                                                                                                                                                          |
+ | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46].                                                                                                                                                             |
+ | Feature Flags                          | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>For more information, see [Feature Flags][48].                                                                                           |
 
 ## Enable Remote Configuration
 
@@ -131,16 +131,16 @@ In most cases, Remote Configuration is enabled by default for your organization.
 
 Consult the documentation below for instructions specific to the product you're configuring.
 
-| Product | Setup instructions |
-| ------- | --------------------- |
-| Fleet Automation | [Setup Fleet Automation][31] |
-| APM | [Configuration at runtime](/tracing/guide/remote_config/) |
-| Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
-| Workload Protection | [Workload Protection][3] |
+| Product                 | Setup instructions                                                                                             |
+|-------------------------|----------------------------------------------------------------------------------------------------------------|
+| Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
+| APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
+| Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started)                      |
+| Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
-| Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
-| Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
-| Feature Flags | [Server-Side Feature Flags](/feature_flags/server/) |
+| Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
+| Private Action Runner   | [Private Actions Overview](/actions/private_actions/)                                                          |
+| Feature Flags           | [Server-Side Feature Flags](/feature_flags/server/)                                                            |
 
 ## Best practices
 
@@ -177,7 +177,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [16]: /remote_configuration
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
-[19]: /tracing/software_catalog/
+[19]: /internal_developer_portal/catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/
@@ -185,9 +185,9 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
-[27]: /agent/fleet_automation/#send-a-remote-flare
+[27]: /agent/fleet_automation/fleet_view/#send-a-remote-flare
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
-[29]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
+[29]: /agent/fleet_automation/upgrade_agents/
 [30]: /actions/private_actions/use_private_actions/
 [31]: /agent/guide/setup_remote_config
 [32]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=api-key-enablement-step&standalone=1

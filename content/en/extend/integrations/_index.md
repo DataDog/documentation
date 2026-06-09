@@ -70,11 +70,11 @@ Depending on what your integration does, the following are also required:
 
 Before you begin developing an integration:
 
-1. Apply to the [Datadog Partner Network's][1] **Technology Partner** track. After your application is approved, a member of the Datadog Technology Partner team reaches out to schedule an introductory call.
+1. Apply to the [Datadog Partner Network's][1] {{< ui >}}Technology Partner{{< /ui >}} track. After your application is approved, a member of the Datadog Technology Partner team reaches out to schedule an introductory call.
 2. Request a dedicated Datadog sandbox account for development:
    1. Log in to the [Datadog Partner Portal][1].
-   2. On your personal homepage, click **Learn More** under **Sandbox Access**.
-   3. Select **Request Sandbox Upgrade**.
+   2. On your personal homepage, click {{< ui >}}Learn More{{< /ui >}} under {{< ui >}}Sandbox Access{{< /ui >}}.
+   3. Select {{< ui >}}Request Sandbox Upgrade{{< /ui >}}.
 
 After your sandbox is created, you can [invite members from your organization][7] to collaborate.
 

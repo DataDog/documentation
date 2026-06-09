@@ -48,8 +48,8 @@ With Cloud Security, Security and DevOps teams can act on the shared context of 
 1. Check out the [Cloud Security homepage][13] to get an overview of your organization's risks and threats.
 1. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 1. Review [Cloud Security Misconfigurations findings][16].
-1. Review and remediate identity risks on the [Identity Risks][29] page.
-1. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
+1. Review and remediate identity risks on the [{{< ui >}}Identity Risks{{< /ui >}}][29] page.
+1. Review container vulnerabilities on the [{{< ui >}}Container Images{{< /ui >}}][25] page, and a consolidated list of vulnerabilities on the [{{< ui >}}Infrastructure Vulnerability{{< /ui >}}][30] page.
 1. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
 ## Phase 2: Customization

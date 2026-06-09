@@ -19,7 +19,55 @@ further_reading:
 
 Set up Datadog Feature Flags for your applications. Follow the platform-specific guides below to integrate feature flags into your application and start collecting feature flag data:
 
-{{< partial name="feature_flags/feature_flags_client.html" >}}
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
+
+{{< card-grid card_width="200px">}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
+  {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+  {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
+  {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
+  {{< image-card href="/feature_flags/client/reactnative/" src="integrations_logos/react-native_large.svg" alt="React Native" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/tv_os_large.svg" alt="tvOS" >}}
+  {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
+{{< /card-grid >}}
+
+## Telemetry options by platform
+
+The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
+
+<div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift">dd-openfeature-provider-swift</a>) is available for use as a pre-1.0 package. Until it reaches 1.0, version updates may include breaking changes. For the most stable iOS API surface, use the <code>FlagsClient</code> API directly.</div>
+
+### Send exposure events
+
+Default: `true`. Set to `false` to disable.
+
+- **Web** (`@datadog/openfeature-browser`): `enableExposureLogging`
+- **Android** (`dd-sdk-android-flags`): `trackExposures`
+- **iOS** (`DatadogFlags`): `trackExposures`
+- **React Native**: `trackExposures`
+- **Unity**: `trackExposures`
+
+### Send aggregated evaluation telemetry
+
+Default: `true`. Set to `false` to disable.
+
+- **Web** (`@datadog/openfeature-browser`): `enableFlagEvaluationTracking`
+- **Android** (`dd-sdk-android-flags`): `trackEvaluations`
+- **iOS** (`DatadogFlags`): `trackEvaluations`
+- **React Native**: Not exposed
+- **Unity**: `trackEvaluations`
+
+### Attach evaluations to RUM
+
+Default: `true`. Set to `false` to disable.
+
+- **Web** (`@datadog/openfeature-browser`): `enableRumFeatureFlagTracking`
+- **Android** (`dd-sdk-android-flags`): `rumIntegrationEnabled`
+- **iOS** (`DatadogFlags`): `rumIntegrationEnabled`
+- **React Native**: `rumIntegrationEnabled`
+- **Unity**: Not exposed
 
 ## Testing with in-memory providers
 
@@ -70,5 +118,7 @@ const evaluationContext = {
 {{< /code-block >}}
 
 ## Further reading
+
+For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
 
 {{< partial name="whats-next/whats-next.html" >}}
