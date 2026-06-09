@@ -26,6 +26,8 @@ Datadog creates AI Guard security signals when it detects a threat based on a co
 - **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
 - **Custom runbooks**: Custom remediation guidance and response procedures for specific threat scenarios
 
+To help you prioritize your remediation efforts, AI Guard automatically assigns a severity level to every security signal. You can create [custom detection rules](#create-detection-rules) to customize severity levels and define specific security responses.
+
 ## Create detection rules
 
 You can create custom detection rules by defining thresholds for when you want to receive notifications; for example, more than 5 `DENY` actions in 10 minutes. When AI Guard evaluations exceed those thresholds, it generates security signals.
@@ -33,6 +35,7 @@ You can create custom detection rules by defining thresholds for when you want t
 To create AI Guard detection rules:
 1. In Datadog, go to the [AI Guard detection rule explorer][2], then click **New Rule**.
    {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+1. Under **Define your Real-time rule**, choose the type of rule to create.
 1. Under **Define Search Queries**, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
    <table>
      <thead>
@@ -89,8 +92,14 @@ To create AI Guard detection rules:
        </tr>
      </tbody>
    </table>
-1. Under **Define Rule Conditions**, define your threshold conditions, set severity levels, choose who should get notifications for new signals and how often, and choose security responses to take.
+1. Under **Define Rule Conditions**:
+   1. Define your threshold conditions, if applicable to the type of rule you chose.
+   1. Set the severity level of the security signals AI Guard generates with this rule.
+   1. Choose who should get notifications for new signals and how often.
+   1. Choose security responses to take, such as automated IP or user blocking, and IP flagging.
+   1. Configure additional settings, such as updating the same signal instead of creating a new one if AI Guard detects new values within a set amount of time, and decreasing signal severity for non-production environments.
 1. Under **Describe your Playbook**, customize the notification and define tags to send with the signals.
+1. Click **Save Rule**.
 
 For more comprehensive detection rule capabilities, see [detection rules][3].
 
@@ -104,6 +113,27 @@ To view and investigate AI Guard security signals, and correlate them with other
 
 The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
 
+You can create or link cases directly from an AI Guard security signal, and click any signal to open a side panel containing additional context.
+
+## Get additional context with spans
+
+AI Guard spans offer detailed information about the assessments it made and why. When you open a span from the [Investigate][6] page or from a signal, you can get context on the specific prompts your AI agent used, read exact inputs and outputs, and see any attack categories that contributed to AI Guard assessing a tool call as unsafe.
+
+### Get context on a span
+
+When you click on a span in the explorer, you can see:
+- The service and environment the requests occurred in
+- The [blocking policy][7] configured for that service, which determines whether AI Guard blocks unsafe requests, or detects and tags them without blocking them
+- The user who interacted with the agent
+- The specific inputs and outputs from your agent, and whether they came from LLMs or external tools
+- Whether AI Guard assessed each request as safe or unsafe
+- Whether AI Guard blocked the request
+- If AI Guard assessed the call as unsafe, which attack categories it included
+- Whether the request included sensitive data, and if so, what type of sensitive data
+- Additional tags, which you can use to filter spans in the explorer
+
+Additionally, you can click **Explore in graph view** to see the requests in the conversation graphed out, or view the span in [APM][8] or [LLM Observability][9].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -113,3 +143,7 @@ The Security Signals explorers allow you to filter, prioritize, and investigate 
 [3]: /security/detection_rules/
 [4]: https://app.datadoghq.com/security/ai-guard/signals
 [5]: https://app.datadoghq.com/security/siem/signals
+[6]: https://app.datadoghq.com/security/ai-guard/investigate
+[7]: /security/ai_guard/setup/#blocking-policy
+[8]: /tracing/
+[9]: /llm_observability/
