@@ -1,0 +1,13 @@
+{{- $data := site.Data.products -}}
+
+<section class="products-browse">
+    <div class="products-browse__inner">
+        <h2 class="products-browse__heading">{{ $data.heading }}</h2>
+
+        <div class="products-browse__grid">
+            {{- range $data.products }}
+                {{ partial "home/product-section.html" (dict "product" . "ctx" $) }}
+            {{- end }}
+        </div>
+    </div>
+</section>

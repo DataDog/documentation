@@ -1,0 +1,195 @@
+heading: Browse by product
+
+products:
+  - title: Observability
+    icon: eye-4
+    span: 9
+    subheaders:
+      - title: Infrastructure
+        links:
+          - title: Infrastructure
+            link: infrastructure/
+          - title: Metrics
+            link: metrics/
+          - title: Container Monitoring
+            link: containers/
+          - title: Serverless
+            link: serverless/
+          - title: Network Monitoring
+            link: network_monitoring/
+          - title: Cloud Cost Management
+            link: cloud_cost_management/
+          - title: Cloudcraft
+            link: cloudcraft/
+          - title: Storage Management
+            link: infrastructure/storage_management/
+      - title: Applications
+        links:
+          - title: APM
+            link: tracing/
+          - title: Universal Service Monitoring
+            link: universal_service_monitoring/
+          - title: Continuous Profiler
+            link: profiler/
+      - title: Data
+        links:
+          - title: Database Monitoring
+            link: database_monitoring/
+          - title: Data Streams Monitoring
+            link: data_streams/
+          - title: Data Observability
+            link: data_observability/
+      - title: Logs
+        links:
+          - title: Log Management
+            link: logs/
+          - title: Sensitive Data Scanner
+            link: security/sensitive_data_scanner/
+          - title: Observability Pipelines
+            link: observability_pipelines/
+          - title: Error Tracking
+            link: error_tracking/
+
+  - title: Digital Experience
+    icon: rum
+    span: 3
+    subheaders:
+      - title: Synthetic Testing
+        links:
+          - title: Synthetic Monitoring
+            link: synthetics/
+          - title: Mobile App Testing
+            link: mobile_app_testing/
+      - title: Real User Monitoring
+        links:
+          - title: Real User Monitoring
+            link: real_user_monitoring/
+          - title: Session Replay
+            link: session_replay/
+      - title: Product Analytics
+        links:
+          - title: Product Analytics
+            link: product_analytics/
+
+  - title: AI
+    icon: bits-ai
+    span: 4
+    subheaders:
+      - title: AI
+        links:
+          - title: Bits AI Agents
+            link: bits_ai/
+          - title: Watchdog
+            link: watchdog/
+          - title: LLM Observability
+            link: llm_observability/
+
+  - title: Security
+    icon: security-platform
+    span: 8
+    subheaders:
+      - title: Code Security
+        links:
+          - title: Code Security
+            link: security/code_security/
+      - title: Cloud Security
+        links:
+          - title: Cloud Security
+            link: security/cloud_security_management/
+          - title: Workload Protection
+            link: security/workload_protection/
+      - title: Cloud SIEM
+        links:
+          - title: Cloud SIEM
+            link: security/cloud_siem/
+          - title: App and API Protection
+            link: security/application_security/
+          - title: Sensitive Data Scanner
+            link: security/sensitive_data_scanner/
+
+  - title: Software Delivery
+    icon: ci
+    span: 6
+    subheaders:
+      - title: CI/CD
+        links:
+          - title: CI Visibility
+            link: continuous_integration/
+          - title: Test Optimization
+            link: tests/
+          - title: Continuous Testing
+            link: continuous_testing/
+          - title: Code Coverage
+            link: code_coverage/
+      - title: Developer Efficiency
+        links:
+          - title: Internal Developer Portal
+            link: internal_developer_portal/
+          - title: DORA Metrics
+            link: delivery_performance/dora_metrics/
+          - title: IDE Plugins
+            link: ide_plugins/
+          - title: Feature Flags
+            link: feature_flags/
+
+  - title: Service Management
+    icon: service-catalog
+    span: 6
+    subheaders:
+      - title: Incident Response
+        links:
+          - title: Incident Management
+            link: service_management/incident_management/
+          - title: On-Call
+            link: incident_response/on-call/
+          - title: Status Pages
+            link: incident_response/status_pages/
+          - title: Event Management
+            link: events/
+      - title: Actions
+        links:
+          - title: Workflow Automation
+            link: service_management/workflows/
+          - title: App Builder
+            link: service_management/app_builder/
+          - title: Case Management
+            link: incident_response/case_management/
+          - title: Service Level Objectives
+            link: service_level_objectives/
+
+  - title: Platform & Administration
+    icon: gear
+    span: 12
+    subheaders:
+      - title: Core Platform
+        links:
+          - title: Dashboards
+            link: dashboards/
+          - title: Notebooks
+            link: notebooks/
+          - title: Monitors and Alerting
+            link: monitors/
+          - title: Mobile App
+            link: mobile/
+          - title: CoScreen
+            link: coscreen/
+      - title: Extend
+        links:
+          - title: Integrations
+            link: integrations/
+          - title: API
+            link: api/latest/
+          - title: OpenTelemetry
+            link: opentelemetry/
+          - title: Extend Datadog
+            link: extend/
+          - title: Partners
+            link: partners/
+      - title: Govern
+        links:
+          - title: Fleet Automation
+            link: agent/fleet_automation/
+          - title: Account Management
+            link: account_management/
+          - title: Data Security
+            link: data_security/
