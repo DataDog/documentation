@@ -178,7 +178,7 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 {{% /tab %}}
 {{< /tabs >}}
 
-<!-- TODO: Ibraheem raised concern about documenting dd-otlp-span-mapping while operation name v2 is still stabilizing. Keep or remove this section pending eng decision. -->
+<!-- TODO: Eng raised concern about documenting dd-otlp-span-mapping while operation name v2 is still stabilizing. Keep or remove this section pending eng decision. -->
 ## (Optional) Map or filter spans
 
 Use the `dd-otlp-span-mapping` header to configure span mapping and filtering. The header accepts a JSON value with the following fields:
