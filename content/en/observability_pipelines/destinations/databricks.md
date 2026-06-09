@@ -103,7 +103,7 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
-<div class="alert alert-info">If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with <code>DD_OP</code>. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is <code>DD_OP_PASSWORD_1</code>.</div>
+{{% observability_pipelines/secrets_env_var_note %}}
 
 1. Enter the **Ingestion Endpoint** for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
 1. Enter the **Table Name** in the format `catalog.schema.table`, such as `main.obs_pipelines.apache_common_logs`.

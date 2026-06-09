@@ -21,7 +21,7 @@ After you select the Socket destination in the pipeline UI:
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</div>
 
-<div class="alert alert-info">If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with <code>DD_OP</code>. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is <code>DD_OP_PASSWORD_1</code>.</div>
+{{% observability_pipelines/secrets_env_var_note %}}
 
 1. Enter the identifier for your address. If you leave it blank, the [default](#secret-defaults) is used.
 1.  In the **Mode** dropdown menu, select the socket type to use.

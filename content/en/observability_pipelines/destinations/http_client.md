@@ -22,7 +22,7 @@ Configure the HTTP Client destination when you [set up a pipeline][3]. You can s
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-<div class="alert alert-info">If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with <code>DD_OP</code>. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is <code>DD_OP_PASSWORD_1</code>.</div>
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the HTTP Client destination in the pipeline UI:
 
