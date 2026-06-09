@@ -76,7 +76,6 @@ Preset lists are out-of-the-box dashboard lists in Datadog:
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
 | All Shared               | Dashboards with authenticated or public link sharing enabled.             |
 | Created By You           | Custom dashboards created by the current user.                            |
-| Frequently Viewed By You | All dashboards frequently viewed by the current user.                     |
 | Recently Deleted         | Dashboards deleted within the last 30 days. [Restore deleted dashboards](#restore-deleted-dashboards) from this list.|
 | Security and Compliance  | Out-of-the-box Security dashboards.                                       |
 
@@ -87,6 +86,10 @@ Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted das
 {{< img src="dashboards/list/recently_deleted_restore.png" alt="Restore deleted dashboard on the Recently Deleted list" style="width:100%;">}}
 
 ## Search syntax
+
+{{< callout url="#" btn_hidden="true" header="New" >}}
+Dashboard search syntax is available on the updated Dashboard List page.
+{{< /callout >}}
 
 Use the search bar at the top of the Dashboard List page to filter dashboards by name, author, tags, or widget content. The search supports free-text queries, key:value filters, boolean operators, and range comparisons.
 
@@ -109,6 +112,7 @@ Narrow results to a specific field using `field:value` syntax.
 | `title:<value>` | Dashboard title | `title:elasticsearch` |
 | `description:<value>` | Dashboard description | `description:latency` |
 | `team:<value>` | Team tag | `team:dashboards-backend` |
+| `favorites:true` | Dashboards you have starred | `favorites:true` |
 | `type:<value>` | Dashboard type. Use `custom`, `integration`, or concrete values such as `custom_timeboard`, `custom_screenboard`, `integration_timeboard`, `integration_screenboard`. | `type:integration` |
 | `is_shared:true` | Dashboards with link sharing enabled | `is_shared:true` |
 | `popularity:<range>` | Popularity score (0–1) | `popularity:>=0.5` |
@@ -120,8 +124,6 @@ Narrow results to a specific field using `field:value` syntax.
 | `template_variables.prefix:<value>` | Template variable prefix | `template_variables.prefix:env` |
 | `template_variables.defaults:<value>` | Template variable default value | `template_variables.defaults:prod` |
 | `template_variables.available_values:<value>` | Available template variable value | `template_variables.available_values:us-east` |
-
-**Note**: `team:` works as a tag filter. Any tag in `key:value` format can be searched the same way—for example, `env:prod` or `service:web`.
 
 ### Boolean operators
 
@@ -143,10 +145,6 @@ Use `<`, `>`, `<=`, and `>=` with numeric fields.
 | `widgets.count:<N` | Fewer than N widgets | `widgets.count:<3` |
 | `widgets.count:>=N` | N or more widgets | `widgets.count:>=10` |
 | `popularity:>=N` | Popularity at or above threshold | `popularity:>=0.2` |
-
-### Favorites
-
-Use the {{< ui >}}Starred{{< /ui >}} toggle above the dashboard table to show only dashboards you have starred. This is separate from the search bar.
 
 ## Further Reading
 
