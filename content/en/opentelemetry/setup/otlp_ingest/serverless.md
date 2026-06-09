@@ -9,6 +9,9 @@ further_reading:
     text: "Datadog Serverless Monitoring"
 ---
 
+<!-- TODO: This page documents the traces intake endpoint, which _index.md labels as Preview. Add a Preview callout or sign-up link so these pages don't contradict each other at publish time. -->
+<!-- TODO: Confirm scope — is this traces-only, or should it cover metrics/logs too? Resource attributes (cloud.provider, cloud.platform, etc.) are set at the SDK level and apply to all signals, not just traces. -->
+
 ## Overview
 
 Datadog's OTLP traces intake endpoint accepts traces from serverless workloads directly through HTTP/protobuf, without requiring a [Datadog Agent][1]. This page covers traces only. For metrics and logs from serverless environments, see the [OTLP logs][3] and [OTLP metrics][4] intake endpoints. For workloads on third-party managed platforms (Cloudflare, Vercel, Heroku, and others) that use dedicated OTLP subdomains, see [Managed platforms][5].
@@ -17,6 +20,7 @@ Supported platforms:
 
 - **AWS**: Lambda, ECS Fargate
 - **Azure**: Container Apps, Web Apps (App Service), Azure Functions
+<!-- TODO: GKE is not serverless. Either add a sentence explaining this page covers cloud-managed environments where running an Agent is impractical (not only serverless), or move GKE guidance elsewhere. -->
 - **GCP**: Cloud Run, Cloud Run Functions, GKE
 
 <div class="alert alert-info">For production workloads that need buffering, retry logic, and centralized sampling, consider using an <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> instead of direct ingest.</div>
@@ -130,6 +134,7 @@ export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure_funct
 
 | Platform | `cloud.provider` | `cloud.platform` | `cloud.resource_id` |
 |---|---|---|---|
+<!-- TODO: Verify Azure cloud.platform values against OTel semantic conventions. OTel semconv may use azure.app_service and azure.functions (dot-separated) rather than underscores. Also confirm whether Azure Functions cloud.resource_id should identify the specific function, not just the function app. -->
 | Container Apps | `azure` | `azure.container_apps` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.App/containerApps/{appName}` |
 | Web Apps | `azure` | `azure_app_service` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{appName}` |
 | Azure Functions | `azure` | `azure_functions` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{functionAppName}` |
@@ -173,6 +178,7 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 {{% /tab %}}
 {{< /tabs >}}
 
+<!-- TODO: Ibraheem raised concern about documenting dd-otlp-span-mapping while operation name v2 is still stabilizing. Keep or remove this section pending eng decision. -->
 ## (Optional) Map or filter spans
 
 Use the `dd-otlp-span-mapping` header to configure span mapping and filtering. The header accepts a JSON value with the following fields:

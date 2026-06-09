@@ -22,7 +22,8 @@ Your setup depends on where your telemetry is coming from. Some environments req
 | If your telemetry comes from... | Start here |
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
-| A serverless environment sending traces (Lambda, Azure Functions, Cloud Run, ECS Fargate) | [Serverless][7] |
+<!-- TODO: Add Preview/sign-up callout for traces once product provides the link. Align with serverless and managed platform pages so Preview framing is consistent. -->
+| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE) | [Serverless][7] |
 | Your own app, host, container, or OpenTelemetry Collector | [Logs][3], [Metrics][4], or Traces (in Preview) |
 
 For Traces in Preview, contact your Customer Success Manager to request access.

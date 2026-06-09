@@ -61,6 +61,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Cloudflare | `cloudflare` | [Cloudflare Workers observability][11] |
 | Cribl | `cribl` | — |
 | GitHub Actions | `github-actions` | — |
+<!-- TODO: Clarify what the gcp and gae managed platform endpoints cover vs. Cloud Run/Functions/GKE on the serverless page. A Cloud Run user could pick either path and get a different endpoint. Needs answer from Amanda. -->
 | Google App Engine | `gae` | — |
 | Google Cloud | `gcp` | — |
 | Grafbase | `grafbase` | [Grafbase observability][12] |
@@ -97,6 +98,7 @@ Trace metrics are not computed by default because traffic from managed platforms
 
 Some Datadog features depend on metadata added by the Collector or Agent (for example, the Infrastructure Host List). See the [OpenTelemetry compatibility list][4] for features that are unavailable when using direct ingest endpoints.
 
+<!-- TODO: Ibraheem raised concern about documenting dd-otlp-span-mapping while operation name v2 is still stabilizing. Keep or remove this section pending eng decision. -->
 ## (Optional) Map or filter spans
 
 Use the `dd-otlp-span-mapping` header to configure span mapping and filtering. The header accepts a JSON value with the following fields:
