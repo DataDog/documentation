@@ -100,7 +100,6 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
           "span_id": "20245611112024561111",
           "trace_id": "13932955089405749200",
           "ml_app": "weather-bot",
-          "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3,
