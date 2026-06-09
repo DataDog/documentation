@@ -14,7 +14,7 @@ further_reading:
 
 This page describes how to inject Airflow task context attributes into every log record emitted during task execution, including logs from custom Python loggers, without modifying your DAGs.
 
-After setup, the following attributes appear as structured facets in Datadog:
+After completing the steps on this page, the following attributes appear as structured facets in Datadog:
 
 | Attribute | Description |
 |---|---|
@@ -36,7 +36,7 @@ Airflow 2.x calls `set_context(ti)` in the same worker process before each task 
 
 ### Step 1: Verify your current logging configuration
 
-Run the following before proceeding:
+Run the following command:
 
 ```shell
 airflow config get-value logging logging_config_class
@@ -45,11 +45,14 @@ airflow config get-value logging logging_config_class
 - **Empty output**: No custom logging configuration is active. Use Option A in Step 2.
 - **Non-empty output**: You already have a custom configuration. Use Option B in Step 2 to avoid replacing it.
 
-**Note**: If `logging_config_class` points to a module that cannot be imported, Airflow falls back silently to the default configuration with no error. If you see no structured attributes in Datadog after setup, verify the module is importable from the worker environment.
+**Note:** If `logging_config_class` points to a module that cannot be imported, Airflow falls back silently to the default configuration with no error. If you see no structured attributes in Datadog after setup, verify the module is importable from the worker environment.
 
 ### Step 2: Create `dd_airflow_log_context.py`
 
-Place this file somewhere importable in your Airflow environment — for example, alongside `airflow_local_settings.py`, or in any Python package installed in your Airflow image. On Astronomer (Astro), add it to your Astro project root so it is baked into the Docker image. On Google Cloud Composer, place it in the `plugins/` folder in your Composer GCS bucket.
+Place this file in a location that Airflow can import:
+- **General**: Place it alongside `airflow_local_settings.py` or in any Python package installed in your Airflow image.
+- **Astronomer (Astro)**: Add it to your Astro project root. It is built into the Docker image during the build process.
+- **Google Cloud Composer**: Place it in the `plugins/` folder in your Composer GCS bucket.
 
 ```python
 from __future__ import annotations
@@ -124,17 +127,17 @@ Set the following in `airflow.cfg`:
 logging_config_class = dd_airflow_log_context.LOGGING_CONFIG
 ```
 
-Or as an environment variable:
+Alternatively, set it as an environment variable:
 
 ```shell
 AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS=dd_airflow_log_context.LOGGING_CONFIG
 ```
 
 For Kubernetes deployments:
-- Bake `dd_airflow_log_context.py` into your Airflow Docker image, or mount it with a ConfigMap.
-- The mount path must be on `PYTHONPATH` inside the container.
+- Include `dd_airflow_log_context.py` in your Airflow Docker image, or mount it with a ConfigMap.
+- Ensure the mount path is on `PYTHONPATH` inside the container.
 
-  **Note**: Kubernetes environment variable values do not expand shell references. Setting `value: /opt/airflow/dd_addons:$PYTHONPATH` passes the literal string `$PYTHONPATH`. Set the full explicit path instead.
+  **Note:** Kubernetes environment variable values do not expand shell references. Setting `value: /opt/airflow/dd_addons:$PYTHONPATH` passes the literal string `$PYTHONPATH`. Set the full explicit path instead.
 - Apply the environment variable to worker pods. Adding it to scheduler and triggerer pods is harmless and recommended for consistency.
 
 **Option B** — existing `airflow_local_settings.py` (use when you already have a custom `LOGGING_CONFIG`)
@@ -245,7 +248,7 @@ AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS=dd_airflow_log_context.LOGGING_CONFIG
 
 Apply to worker pods. The same `PYTHONPATH` and Kubernetes notes from the Airflow 2.x section apply.
 
-**Note**: Whether Airflow 3.x's task subprocess honors `logging_config_class` depends on your deployment. Run the verification step before relying on this option. If the factory is not active, use Option B.
+**Note:** Whether Airflow 3.x's task subprocess honors `logging_config_class` depends on your deployment. Run the verification step before relying on this option. If the factory is not active, use Option B.
 
 **Option B** — `sitecustomize.py` (most reliable)
 
