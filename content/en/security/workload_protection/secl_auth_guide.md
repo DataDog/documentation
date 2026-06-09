@@ -6,7 +6,6 @@ aliases:
   - /security/workload_protection/guide/custom-rules-guidelines
 ---
 
-<<<<<<< HEAD
 This guide shows you how to write effective SECL (Security Language) rules for Datadog Workload Protection.
 
 ## SECL overview
@@ -39,8 +38,6 @@ open.file.path == "/etc/shadow" && process.file.path not in ["/usr/sbin/vipw"]
 
 {{< /code-block >}}  
 
-=======
->>>>>>> a763d59036 ([WP] Agent rules and secl guide)
 ## Quickstart
 
 Here's a summary of the process:
