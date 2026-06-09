@@ -546,12 +546,6 @@ For complete setup instructions, typed getters, evaluation context requirements,
 
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
-[3]: /feature_flags/server/dotnet/
-[4]: /feature_flags/server/go/
-[5]: /feature_flags/server/java/
-[6]: /feature_flags/server/nodejs/
-[7]: /feature_flags/server/python/
-[8]: /feature_flags/server/ruby/
 [9]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net&platform=traces
 [10]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go&platform=traces
 [11]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces
