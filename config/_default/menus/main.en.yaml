@@ -3879,56 +3879,61 @@ menu:
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
       weight: 30106
+    - name: Summary Page
+      url: network_monitoring/devices/summary
+      parent: ndm
+      identifier: ndm_summary
+      weight: 302
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
       identifier: ndm_integrations
-      weight: 302
+      weight: 303
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 303
+      weight: 304
     - name: Getting Started
       url: network_monitoring/devices/profiles/device_profiles
       parent: ndm_profiles
       identifier: ndm_profiles_getting_started
-      weight: 30301
+      weight: 30401
     - name: Advanced
       url: network_monitoring/devices/profiles/advanced_profiles
       parent: ndm_profiles
       identifier: ndm_profiles_advanced
-      weight: 30302
+      weight: 30402
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 304
+      weight: 305
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
       identifier: ndm_network_maps
-      weight: 305
+      weight: 306
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 307
+      weight: 308
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 308
+      weight: 309
     - name: Terms and Concepts
       url: network_monitoring/devices/glossary
       parent: ndm
       identifier: ndm_glossary
-      weight: 309
+      weight: 310
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
@@ -3959,21 +3964,26 @@ menu:
       parent: network_path
       identifier: network_path_path_view
       weight: 504
+    - name: Autonomous Systems View
+      url: network_monitoring/network_path/as_view/
+      parent: network_path
+      identifier: network_path_as_view
+      weight: 505
     - name: Monitors
       url: monitors/types/network_path/
       parent: network_path
       identifier: network_path_monitor
-      weight: 505
+      weight: 506
     - name: Guides
       url: network_monitoring/network_path/guide
       parent: network_path
       identifier: network_path_guides
-      weight: 506
+      weight: 507
     - name: Terms and Concepts
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 507
+      weight: 508
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -6332,45 +6342,45 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 1
-    - name: Error Tracking
-      url: ide_plugins/idea/error_tracking/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_error_tracking
-      weight: 101
-    - name: Logs
-      url: ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 102
-    - name: Live Debugger
-      url: ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 103
     - name: Code Security
       url: ide_plugins/idea/code_security/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
+      weight: 101
+    - name: Error Tracking
+      url: ide_plugins/idea/error_tracking/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_error_tracking
+      weight: 102
+    - name: Logs
+      url: ide_plugins/idea/logs/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_logs
+      weight: 103
+    - name: Live Debugger
+      url: ide_plugins/idea/live_debugger/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_debugger
       weight: 104
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 2
-    - name: Logs
-      url: ide_plugins/vscode/logs/
+    - name: Code Security
+      url: ide_plugins/vscode/code_security/
       parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_logs
+      identifier: ide_plugins_vscode_code_security
       weight: 101
     - name: Code Insights
       url: ide_plugins/vscode/code_insights/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: Code Security
-      url: ide_plugins/vscode/code_security/
+    - name: Logs
+      url: ide_plugins/vscode/logs/
       parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_code_security
+      identifier: ide_plugins_vscode_logs
       weight: 103
     - name: Exception Replay
       url: ide_plugins/vscode/exception_replay/
@@ -9452,6 +9462,16 @@ menu:
       parent: rum_ai_investigations
       identifier: rum_ai_investigations_single_view
       weight: 901
+    - name: Multi-View AI Investigation
+      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
+      parent: rum_ai_investigations
+      identifier: rum_ai_investigations_multi_view
+      weight: 902
+    - name: Operation AI Investigation
+      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
+      parent: rum_ai_investigations
+      identifier: rum_ai_investigations_operation
+      weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
       parent: rum
