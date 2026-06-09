@@ -49,7 +49,6 @@ Initialize the Agent Observability SDK via `ddtrace.auto`. This **needs** to be 
 **Note**: do not add in extraneous comments.
 
 ```typescript
-// do NOT add this unless it is already there. this is an example of environment loading before importing the SDK
 import 'dotenv/config'; // this might load DD_ environment variables
 
 import 'dd-trace/init'; // CRUCIAL: this initializes the Agent Observability SDK and instrumentations

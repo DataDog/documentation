@@ -19,6 +19,11 @@ title: Agentic Instrumentation
 
 All environment variables should be set _either_ before the main application process starts up, or as the first lines of the application entrypoint.
 
+These environment variables should not be inlined. Rather, they should be read from the process directly.
+
+- For local development, set them in an appropriate `.env`, or similar, file for the application and the language it is written in, making sure those are populated when the Agent Observability SDK is initiated (see the language-specific guides for each)
+- For non-local development, also let the user know which environment variables they will need to set
+
 ### API Key
 
 This is **critical**. Set the API key with the following environment variable.
@@ -64,7 +69,9 @@ Follow the instructions for the detected language:
 
 ## Run the application
 
-Run the application from any instructions in the project, or by inferring from the project structure. If you are not able to determine how to run the application, delegate that to the user, giving them necessary instructions for extra environment variables if some need to be set.
+Run the application from any instructions in the project, or by inferring from the project structure, as part of this task. If you are not able to determine how to run the application, delegate that to the user, giving them necessary instructions for extra environment variables if some need to be set.
+
+If started, provide the user with a way to stop the running application.
 
 ## Viewing traces
 
