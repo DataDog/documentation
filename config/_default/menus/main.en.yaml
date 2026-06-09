@@ -5875,6 +5875,16 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
+    - name: JIT
+      url: deployment_gates/setup/jit/
+      parent: deployment_gates_setup
+      identifier: deployment_gates_setup_jit
+      weight: 1
+    - name: Preconfigured
+      url: deployment_gates/setup/preconfigured/
+      parent: deployment_gates_setup
+      identifier: deployment_gates_setup_preconfigured
+      weight: 2
     - name: Explore
       url: deployment_gates/explore/
       parent: deployment_gates
