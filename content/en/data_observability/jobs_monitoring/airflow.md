@@ -106,6 +106,8 @@ To get started, follow the instructions below.
 
 4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Observability: Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][5].
 
+   **Note:** For log correlation to work, inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog. See [Inject Airflow Task Context into Logs][11].
+
    The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
    ```yaml
    ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
@@ -118,8 +120,6 @@ To get started, follow the instructions below.
    **Note**: Log collection requires the Datadog Agent to already be installed on your Kubernetes cluster. If you haven't installed it yet, see the [Kubernetes installation documentation][8].
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][6].
-
-   **Note:** For log correlation to work, you must inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog. See [Inject Airflow Task Context into Logs][11].
 
 
 [1]: https://github.com/apache/airflow/releases/tag/2.7.0
