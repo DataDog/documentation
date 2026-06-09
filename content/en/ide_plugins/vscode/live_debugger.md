@@ -13,6 +13,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">This feature is in limited support.</div>
+
 The **Live Debugger** lets you add logpoints—auto-expiring, non-breaking breakpoints—to your running services to collect information for debugging. Logpoints are set dynamically, so you don't need to redeploy your code to investigate an issue. Logpoints are grouped into sessions, and you can activate, edit, deactivate, or delete sessions (or individual logpoints) at any time. All sessions and logpoints automatically deactivate after 60 minutes, and log events are rate-limited to one execution per second.
 
 To use this feature, your service must be set up for [Datadog Dynamic Instrumentation][1], and remote code is matched to your local files using [Source Code Integration][2].
