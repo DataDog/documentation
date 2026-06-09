@@ -1090,7 +1090,7 @@ Follow these steps to enable OTel Logs API support in your application.
 {% /if %}
 
 {% if equals($prog_lang, "php") %}
-1. Install the Datadog PHP SDK following the [official installation instructions][400].
+1. [Install the Datadog PHP SDK][400].
 2. Install the required OpenTelemetry packages:
     ```sh
     composer require open-telemetry/sdk
