@@ -35,7 +35,7 @@ To use Pipeline Simulation:
 
 The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
 
-{{< img src="observability_pipelines/pipeline_simulation_overview.png" alt="Pipeline Simulation showing an unparsed log in the Entry column and the parsed output in the Exit column" style="width:100%;" >}}
+{{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_overview.png" alt="Pipeline Simulation showing an unparsed log in the Entry column and the parsed output in the Exit column" style="width:100%;" >}}
 
 ## Permissions
 
@@ -59,7 +59,7 @@ Before running a simulation, you need a sample of log data to test against. Pipe
 1. [Set up a pipeline][4] or select a pipeline and click **Edit Pipeline** on the top right side of the page.
 1. On the pipeline's edit page, you can expand a processor in a processor group to view its read-only configuration. To edit any processors, capture data, and run a simulation, click **Edit** on a processor group.
 
-{{< img src="observability_pipelines/pipeline_simulation_edit_processor_group.png" alt="A pipeline's edit page with the Edit button on a processor group highlighted" style="width:100%;" >}}
+{{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_edit_processor_group.png" alt="A pipeline's edit page with the Edit button on a processor group highlighted" style="width:100%;" >}}
 
 The status of a pipeline determines whether a simulation can be run with live data, imported data, or both.
 
@@ -165,7 +165,7 @@ After using Live Capture to pull data from your pipeline, results are stored for
 1. Click the down arrow next to **Capture Again** and select **See Saved Samples**.
 1. Click **Use as Sample Data** for the live capture or previously imported data you want to use.
 
-{{< img src="observability_pipelines/pipeline_simulation_saved_samples.png" alt="The Saved Samples view with the Use as Sample Data button for a previous capture" style="width:100%;" >}}
+{{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_saved_samples.png" alt="The Saved Samples view with the Use as Sample Data button for a previous capture" style="width:100%;" >}}
 
 ## Run a pipeline simulation
 
@@ -176,14 +176,14 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
 1. On the pipeline edit page, click **Edit** on a processor group to edit your pipeline and run a simulation.
 1. On the left side of the Pipeline Simulation page, select the **Processor group** with the processors you want to update, test, and validate.
     - You can hover over the **Processor Group** to see a snapshot of where the processors are in the pipeline.
-  {{< img src="observability_pipelines/pipeline_simulation_processor_group_snapshot.png" alt="Hovering over a processor group shows a snapshot of where the processors are in the pipeline" style="width:50%;" >}}
-1. Make updates to your processors. You can update multiple processors for one simulation.
+  {{< img src="observability_pipelines/pipeline_simulation/processor_group_map.mp4" alt="Hovering over a processor group shows a snapshot of where the processors are in the pipeline" video="true" width="60%" >}}
+1. Add and make updates to your processors. You can update multiple processors for one simulation. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
 1. Choose a simulation scenario:
     - **Run a simulation up to a specific processor group**: Keep the **End-to-End Preview** toggle disabled to see the result of logs transformed by all processors in the current processor group and the prior processor groups. See [Run a simulation up to a specific processor group](#run-a-simulation-up-to-a-specific-processor-group) for more information.
     - **Run an end-to-end preview simulation**: Enable the **End-to-End Preview** toggle to run a simulation through all processor groups and see the data that is sent to the destination. See [End-to-end preview](#end-to-end-preview) for more information.
-  {{< img src="observability_pipelines/pipeline_simulation_end_to_end_toggle.png" alt="The End-to-End Preview toggle on the Pipeline Simulation page" style="width:100%;" >}}
+  {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_end_to_end_toggle.png" alt="The End-to-End Preview toggle on the Pipeline Simulation page" style="width:100%;" >}}
 1. Click **Preview** at the bottom of the processors panel to run the simulation.
-  {{< img src="observability_pipelines/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel" style="width:50%;" >}}
+  {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel" style="width:60%;" >}}
 1. After the simulation is complete, you can:
     - See the log data that the processor received and sent out.
     - Enter a free text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
@@ -196,7 +196,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
             - Logs created by the [Split Array][10] processor.
         - `Dropped only` shows only dropped events.
     - Use the dropdown menu to show `Logs only`, `Metrics only`, or `All telemetry` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
-  {{< img src="observability_pipelines/pipeline_simulation_results.png" alt="The simulation results showing the log data the processor received and sent out, the search bar, and the status and telemetry filter dropdowns" style="width:50%;" >}}
+     {{< img src="observability_pipelines/pipeline_simulation/view_simulation.mp4" alt="The video shows the log data the processor received and sent out, the search bar, and the status and telemetry filter dropdowns" video="true" width="70%" >}}
 1. Click **Save** at the bottom right side of the page to save your changes.
 1. Click **Back to Pipeline** on the top right side of the page.
 1. To deploy your updates to production, do one of the following:
@@ -214,7 +214,7 @@ When you run a simulation, you can choose to send your data through to a specifi
 
 On the Simulation Pipeline page, you can choose which set of processors you want to test and validate. The simulation sends data through the previous processor groups and the selected group. For example, if you run a simulation for processor group 2, the processed data you see is the result from sending the logs through groups 1 and 2. Similarly, if you run a simulation for group 3, your result is after processing the data through processor groups 1, 2, and 3.
 
-{{< img src="observability_pipelines/pipeline_simulation_specific_processor_group.png" alt="The list of processor groups with groups 1,2, and 3 highlighted" style="width:50%;" >}}
+{{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_specific_processor_group.png" alt="The list of processor groups with groups 1,2, and 3 highlighted" style="width:40%;" >}}
 
 #### End-to-end preview
 
