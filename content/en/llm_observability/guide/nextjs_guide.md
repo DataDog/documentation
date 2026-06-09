@@ -1,16 +1,16 @@
 ---
-title: Instrument a Next.js Application for LLM Observability
-description: Learn how to set up Datadog LLM Observability in a Next.js application using auto-instrumentation to monitor and trace your LLM calls.
+title: Instrument a Next.js Application for Agent Observability
+description: Learn how to set up Agent Observability in a Next.js application using auto-instrumentation to monitor and trace your LLM calls.
 further_reading:
     - link: '/llm_observability/instrumentation/auto_instrumentation'
       tag: 'Documentation'
       text: 'Supported auto-instrumentation frameworks and libraries'
     - link: '/llm_observability/instrumentation/sdk'
       tag: 'Documentation'
-      text: 'LLM Observability SDK Reference for manual instrumentation'
+      text: 'Agent Observability SDK Reference for manual instrumentation'
 ---
 
-Monitor Next.js applications using [Datadog LLM Observability][1] by instrumenting your server-side LLM and agent calls.
+Monitor Next.js applications using [Agent Observability][1] by instrumenting your server-side LLM and agent calls.
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ export default nextConfig
 
 ### Initialization
 
-You can initialize the LLM Observability SDK using `NODE_OPTIONS` (recommended) or `instrumentation.ts`.
+You can initialize the Agent Observability SDK using `NODE_OPTIONS` (recommended) or `instrumentation.ts`.
 
 {{< tabs >}}
 {{% tab "Node options" %}}
@@ -96,7 +96,7 @@ DD_API_KEY=<YOUR_DATADOG_API_KEY>
 
 Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
-**Note**: If you are using `NODE_OPTIONS`, define these environment variables at the same level as `NODE_OPTIONS`, otherwise LLM Observability will not be properly enabled.
+**Note**: If you are using `NODE_OPTIONS`, define these environment variables at the same level as `NODE_OPTIONS`, otherwise Agent Observability will not be properly enabled.
 
 ### Start the application
 
@@ -109,7 +109,7 @@ After startup, the SDK automatically traces LLM calls made in server-side code t
 
 ## View traces in Datadog
 
-After making LLM calls, view the resulting traces in the [LLM Observability Traces view][7] in Datadog. Select your ML application name from the top-left dropdown.
+After making LLM calls, view the resulting traces in the [Agent Observability Traces view][7] in Datadog. Select your ML application name from the top-left dropdown.
 
 Each trace shows token usage, model, latency, and the full input and output for the LLM call.
 

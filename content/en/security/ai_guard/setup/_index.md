@@ -80,15 +80,33 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 
 AI Guard provides settings to control how evaluations are enforced, how sensitive threat detection is, and whether sensitive data scanning is enabled.
 
-### Blocking policy {#blocking-policy}
+### Configure service policies {#service-policies}
 
-By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the [blocking policy][6] for your services.
+On the **Security** > **AI Guard** > **Settings** > [**Services**][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
+- [**Enforcement mode**](#blocking-policy): Monitor only, or block unsafe requests
+- [**Sensitive data detection**](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
+
+Beside **Default policy**, click **Edit** to set AI Guard's default behavior. To override the default behavior, click **Add Service Policy**, select the service and environment you want your override to apply to, then configure the more specialized policy.
+
+#### Blocking policy {#blocking-policy}
+
+By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the blocking policy for your services.
 
 You can configure blocking at different levels of granularity, with more specific settings taking priority:
 - **Organization-wide**: Apply a default blocking policy to all services and environments.
 - **Per environment**: Override the organization default for a specific environment.
 - **Per service**: Override the organization default for a specific service.
 - **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+
+#### Sensitive data scanning {#sensitive-data-scanning}
+
+AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. When you create or edit a policy for a service, you can choose to enable or disable sensitive data detection.
+
+When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only; findings do not independently trigger blocking.
+
+### Block specific tools
+
+You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to **Security** > **AI Guard** > **Settings** > [**Tool Blocklist**][8]. Click **Add Tool Blocking Configuration**, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
 
 ### Evaluation sensitivity {#evaluation-sensitivity}
 
@@ -97,12 +115,6 @@ AI Guard assigns a confidence score to each threat category it detects (for exam
 Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
 - A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
-
-### Sensitive data scanning {#sensitive-data-scanning}
-
-AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. To enable sensitive data scanning, go to **Security** > **AI Guard** > **Settings** > [**Services**][8], then configure sensitive data detection for your services.
-
-When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
 
 ## 6. (Optional) Limit access to AI Guard spans {#limit-access}
 
@@ -119,7 +131,7 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 [5]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [6]: https://app.datadoghq.com/security/ai-guard/settings/services
 [7]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
-[8]: https://app.datadoghq.com/security/ai-guard/settings/services
+[8]: https://app.datadoghq.com/security/ai-guard/settings/tools
 [9]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [10]: /security/ai_guard/setup/automatic_integrations/
 [11]: /security/ai_guard/setup/manual_integrations/

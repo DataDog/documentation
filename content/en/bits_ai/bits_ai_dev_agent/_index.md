@@ -7,7 +7,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
     tag: "Blog"
     text: "Introducing Bits Code for Code Security"
-  - link: "/bits_ai/ai_credits/"
+  - link: "/account_management/billing/ai_credits/"
     tag: "Documentation"
     text: "AI Credits"
 ---
@@ -18,19 +18,22 @@ Bits Code is a generative AI coding assistant that uses Datadog observability da
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][28] to have Bits Code run sessions on a schedule or in response to signals from other Datadog products, such as a new APM Recommendation or flaky test.
 
 To get started with Bits Code, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
-## Sessions
-A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Code** > [**Sessions**][7].
+Learn how your Bits Code usage is billed on [AI Credits][27].
 
-{{< img src="bits_ai/dev_agent/code_fix.png" alt="A code session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
+## Sessions
+A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
+
+{{< img src="bits_ai/dev_agent/code_fix.png" alt="A session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
 
 ### Start a session
 After [completing setup][6], do one of the following to start a Bits Code session:
-- Enter a freeform prompt at [**Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
+- Enter a freeform prompt at [**Sessions**][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
+- Set up a Bits Code [automation][28]
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
@@ -41,7 +44,7 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported Datadog products
 
-Bits Code can suggest code improvements in the following Datadog products:
+Bits Code can suggest code improvements within several Datadog products, including the following:
 
 | Product                   | Capabilities                                                       |
 |---------------------------|--------------------------------------------------------------------|
@@ -50,73 +53,39 @@ Bits Code can suggest code improvements in the following Datadog products:
 | [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
-| [Code Security][2]        | Remediates [SAST vulnerabilities][15] individually or in bulk  |
+| [Code Security][2]        | Remediates [SAST vulnerabilities][15], [IaC vulnerabilities][25], and [SCA vulnerabilities][26] (individually or in bulk)  |
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
 
-**Note**: Enabling Bits Code is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
-
 ## Key capabilities 
 
-The following sections detail how Bits Code integrates with Datadog products to generate contextual code fixes.
+### Code fixes and optimizations surfaced by Datadog products
 
-### Pull request assistance
+Across [supported Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15]. In certain products, [Bits Chat][16] explores and investigates issues, then hands off its findings to Bits Code to implement a code change.
 
-Bits Code integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
+{{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button labeled with the text 'Fix with Bits.'" style="width:25%" >}}
 
-- Generates PR titles and descriptions based on your PR template.
-- Opens PRs as drafts, iterates using CI logs, and marks the PRs as ready for review when checks pass.
-- Continues iterating in response to chat messages and review feedback.
-  
-  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Code never auto-merges PRs.
+You can manually prompt Bits Code to implement changes for a certain finding, or configure an [automation][28] so that it does so autonomously. 
 
-See all PRs Bits Code is working on in **Bits AI** > **Code** > **[Sessions][7]**.
+### General coding tasks
 
-### Auto-push
+Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on general coding tasks.
 
-Auto-push allows Bits Code to create branches, push code, and open PRs when it detects something it can help you with. For example, Bits Code can:
-- Auto-create PRs for high-impact errors (such as 500s or crashes).
-- Update PRs in response to your comments in GitHub.
-- Update PRs to address CI failures.
+### Automations
 
-Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
+[Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull request, a draft PR, or a Slack notification.
 
-Auto-push is available for Error Tracking and Test Optimization. 
+You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
-#### Security considerations
+### Pull request collaboration
 
-Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data Bits Code works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
+Bits Code integrates with GitHub to:
+- Create pull requests, generating titles and descriptions based on your repository's pull request template
+- Iterate on pull requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
+- Monitor CI logs and fix failures
 
-To balance safety and automation, you can configure auto-push behavior in [Datadog][14] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
-
-### Error tracking
-
-In [Error Tracking][1], Bits Code diagnoses and remediates code issues with context and unit-tested fixes:
-- Determines whether an error can be fixed through code and generates a fix with unit tests.
-- Provides links within the chat to relevant files and methods for streamlined navigation.
-- Analyzes errors asynchronously as they arrive.
-- Marks errors with a {{< ui >}}Fix available{{< /ui >}} status and enables filtering to surface those issues.
-
-[Auto-push](#auto-push) is available for this feature. 
-
-### Flaky test management 
-
-Bits Code fixes flaky tests that are detected through Flaky Test Management in [Test Optimization][4] and attempts to verify that tests remain stable.
-
-[Auto-push](#auto-push) is available for this feature. 
-
-### In-product recommendations
-
-Bits Code suggests code improvements and fixes in various Datadog products, such as CCM Recommendations, [APM Recommendations][21], and Profiling Insights. See [Supported Datadog products](#supported-datadog-products) for a full list.
-
-### Code security
-
-Bits Code remediates vulnerabilities at scale, from single issues to large backlogs. You can:
-- Create PR batches to fix multiple vulnerabilities at once.
-- Use the Campaign tool to push PRs incrementally and manage review workload across teams.
-
-Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through Bits Code. Learn more about [AI-Enhanced Static Code Analysis][15].
+Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
 
 ## Limitations
 
@@ -140,10 +109,15 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
-[16]: /bits_ai/bits_assistant/
+[16]: /bits_ai/bits_chat/
 [17]: /bits_ai/bits_ai_sre/
 [20]: /tracing/
 [21]: /tracing/recommendations/
 [22]: /cloud_cost_management/
 [23]: /cloud_cost_management/recommendations
 [24]: /tests/flaky_management#bits-ai-powered-flaky-test-fixes
+[25]: /security/code_security/iac_security/
+[26]: /security/code_security/software_composition_analysis/
+[27]: /account_management/billing/ai_credits/
+[28]: /bits_ai/bits_ai_dev_agent/automations/
+[29]: https://app.datadoghq.com/code/automations
