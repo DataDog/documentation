@@ -26,14 +26,7 @@ If you can change your tracing provider initialization, Option A is recommended.
 
 ## Prerequisites
 
-Follow the Datadog Feature Flags installation guide for your language:
-
-- [.NET Feature Flags][3]
-- [Go Feature Flags][4]
-- [Java Feature Flags][5]
-- [Node.js Feature Flags][6]
-- [Python Feature Flags][7]
-- [Ruby Feature Flags][8]
+Follow the Datadog [Server-Side Feature Flags][1] installation guide for your language.
 
 ## Option A: Register the Datadog SDK as the TracerProvider
 
