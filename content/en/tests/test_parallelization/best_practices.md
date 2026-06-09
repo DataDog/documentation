@@ -22,7 +22,7 @@ Test Parallelization adds a planning step that discovers tests before execution.
 
 ### Preinstall system dependencies with Docker
 
-If your tests need operating system packages, bake them into a CI base image instead of installing them during every CI run.
+If your tests need operating system packages, include them in a CI base image instead of installing them during every CI run.
 
 {{< code-block lang="dockerfile" filename="ci/Dockerfile.test" >}}
 FROM ruby:3.3
@@ -60,7 +60,7 @@ return if ENV["DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED"].present?
 ActiveRecord::Migration.maintain_test_schema! unless ENV["DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED"].present?
 
 RSpec.configure do |config|
-  unless ENV["DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED"]
+  unless ENV["DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED"].present?
     config.use_transactional_fixtures = true
   else
     config.use_transactional_fixtures = false

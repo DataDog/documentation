@@ -9,7 +9,7 @@ further_reading:
     text: "Troubleshooting Test Parallelization"
   - link: "/tests/test_parallelization/best_practices/"
     tag: "Documentation"
-    text: "Test Parallelization best practices"
+    text: "Test Parallelization Best Practices"
   - link: "/tests/setup/"
     tag: "Documentation"
     text: "Set up Test Optimization"

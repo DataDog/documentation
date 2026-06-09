@@ -51,7 +51,7 @@ Every `ddtest` setting can be passed as a CLI flag or as an environment variable
 **Example:** `8`
 
 `DD_TEST_OPTIMIZATION_RUNNER_CI_JOB_OVERHEAD`
-: Estimated expected overhead of launching an additional CI node. The `ddtest` planner adds another CI node only if that node reduces wall time by at least this value.<br/>See [Parallelism selection][3] to learn more.<br/>
+: Estimated overhead of launching an additional CI node. The `ddtest` planner adds another CI node only if that node reduces wall time by at least this value.<br/>See [Parallelism selection][3] to learn more.<br/>
 **CLI flag:** `--ci-job-overhead`<br/>
 **Default:** `25s`<br/>
 **Example:** `25s`, `45s`, `1m`, `1500ms`, `0s`
@@ -99,7 +99,7 @@ In CI-node mode, this value is the CI node count. On a single CI node, this valu
 
 The optimal parallelism value is determined by the following criteria (in decreasing priority):
 
-- the lowest expected wall time
+- the lowest expected wall-clock time
 - the smallest imbalance between nodes/workers
 - the smallest number of nodes/workers
 
