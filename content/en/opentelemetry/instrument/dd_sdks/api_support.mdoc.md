@@ -1104,7 +1104,7 @@ Follow these steps to enable OTel Logs API support in your application.
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
     ```
-    Alternatively, set it in your `php.ini`:
+    Alternatively, enable OTel logs export in `php.ini`:
     ```ini
     datadog.logs_otel_enabled = true
     ```
