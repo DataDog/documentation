@@ -65,8 +65,7 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 2. Expand the **Azure** section.
 3. To enable Posture Management for a subscription, switch the **Posture Management** toggle to the on position.
-4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
-5. Click **Done**.
+4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the subscription you want to filter on. A side panel with configuration options will open. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][5].
 
 [1]: /integrations/azure
 [2]: /integrations/guide/azure-graph-api-permissions/
@@ -98,8 +97,7 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
 1. On the [**Cloud Security Setup**][2] page, click **Cloud Integrations**.
 2. Expand the **GCP** section.
 3. To enable Posture Management for a project, switch the **Posture Management** toggle to the on position.
-4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
-5. Click **Done**.
+4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the project you want to filter on. A side panel with configuration options will open. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][5].
 
 [1]: /integrations/google_cloud_platform
 [2]: https://app.datadoghq.com/security/configuration/csm/setup
