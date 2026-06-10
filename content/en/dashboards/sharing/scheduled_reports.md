@@ -32,13 +32,14 @@ For emails, the report PDF is included as an email attachment or as a link, depe
 
 Create a report from any [dashboard or timeboard][1] that has at least one [supported widget](#unsupported-widget-types).
 
-Click the {{< ui >}}Share{{< /ui >}} button at the top of your dashboard and select {{< ui >}}Schedule report{{< /ui >}}.
+Click the {{< ui >}}Share{{< /ui >}} button at the top of your dashboard and select {{< ui >}}Schedule report{{< /ui >}}. Reports are generated as portrait-oriented PDFs (8.5 × 11 in).
+
 
 ### 1. Set a schedule
 
 In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent.
 
-**{{< img src="dashboards/scheduled_reports/set_schedule.png" alt="Section for defining a report schedule. Includes a schedule preview table showing the next 5 scheduled report dates." style="width:90%;" >}}**
+{{< img src="dashboards/scheduled_reports/set_schedule.png" alt="Section for defining a report schedule. Includes a schedule preview table showing the next 5 scheduled report dates." style="width:90%;" >}}
 
 ### 2. Configure report
 
@@ -46,11 +47,11 @@ Define the report title and set a time frame to determine the range of time disp
 
 **Note:** Modifying the report time frame updates the {{< ui >}}Schedule Preview{{< /ui >}} dropdown table above.
 
-**{{< img src="dashboards/scheduled_reports/configure_report.png" alt="Section for defining a report schedule" style="width:90%;" >}}**
+{{< img src="dashboards/scheduled_reports/configure_report.png" alt="Section for defining a report schedule" style="width:90%;" >}}
 
 Click {{< ui >}}Edit Variables{{< /ui >}} to modify the filters applied when the report is sent. These values do not affect the dashboard's default template variable values.
 
-**{{< img src="dashboards/scheduled_reports/edit_variables.png" alt="The configuration modal section for customizing the report title, timeframe and variables." style="width:90%;" >}}**
+{{< img src="dashboards/scheduled_reports/edit_variables.png" alt="The configuration modal section for customizing the report title, timeframe and variables." style="width:90%;" >}}
 
 ### 3. Add recipients
 
@@ -60,7 +61,7 @@ To add email recipients to your report, enter their email addresses. The email a
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations.
 
-**{{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}**
+{{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}
 
 To see the report before saving the schedule, click {{< ui >}}Send Test Email{{< /ui >}}. You can pause a report schedule at any time.
 
@@ -68,7 +69,7 @@ To see the report before saving the schedule, click {{< ui >}}Send Test Email{{<
 
 To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][8] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click {{< ui >}}Send Test Message{{< /ui >}}.
 
-**{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
+{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}
 
 #### Microsoft Teams recipients
 
