@@ -1726,11 +1726,10 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {% /if %}
 
 {% if equals($prog_lang, "php") %}
-- Verify that `open-telemetry/sdk` (1.0.0 or later) and `open-telemetry/exporter-otlp` are installed, and that `DD_LOGS_OTEL_ENABLED=true` is set before your application starts.
+- Verify that `open-telemetry/sdk` (1.0.0 or later) and `open-telemetry/exporter-otlp` are installed. 
 - If `OpenTelemetry\API\Globals::loggerProvider()` returns a no-op provider, the `LoggerProvider` was never registered. Set `OTEL_PHP_AUTOLOAD_ENABLED=true` or register it manually: `Sdk::builder()->setLoggerProvider(...)->buildAndRegisterGlobal()`.
 - If `OTEL_PHP_AUTOLOAD_ENABLED=true` activates trace or metric exporters you didn't intend, set `OTEL_TRACES_EXPORTER=none` and `OTEL_METRICS_EXPORTER=none`.
 - If logs arrive but Monolog entries lack trace correlation, confirm the OpenTelemetry Monolog handler is attached to that logger.
-- For detailed debugging, set `DD_TRACE_DEBUG=true`.
 {% /if %}
 
 {% /if %}
