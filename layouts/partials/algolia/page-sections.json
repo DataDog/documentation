@@ -9,6 +9,21 @@
 {{ $section_header := "" }}
 {{ $section_content := "" }}
 
+{{- define "partials/first-heading-html" -}}
+  {{- $page := .page -}}
+  {{- $heading_html := "" -}}
+  {{- range .data -}}
+      {{- if not $heading_html -}}
+          {{- $restr := printf "<h([1-4]).*?id=\"%s\".*?>.*<\\/h[1-4]>" .ID -}}
+          {{- $heading_html = index (findRE $restr $page.Content 1) 0 | default "" -}}
+          {{- if not $heading_html -}}
+              {{- $heading_html = partial "first-heading-html" (dict "data" .Headings "page" $page) -}}
+          {{- end -}}
+      {{- end -}}
+  {{- end -}}
+  {{- return $heading_html -}}
+{{- end -}}
+
 {{- define "partials/heading-sections" -}}
   {{- $ctx := .ctx -}}
   {{- $hugo_context := .ctx.context -}}
@@ -76,6 +91,41 @@
       {{- $order = partial "heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
   {{- end -}}
   {{- return $order -}}
+{{- end -}}
+
+{{- $first_heading_html := partial "first-heading-html" (dict "data" $page.Fragments.Headings "page" $page) -}}
+{{- if $first_heading_html -}}
+    {{- $intro_content_block := index (split $page.Content $first_heading_html) 0 -}}
+    {{- $intro_content := $intro_content_block | plainify | htmlUnescape | safeHTML -}}
+    {{- $intro_content_words := split $intro_content " " -}}
+    {{- $intro_content_words_count := len $intro_content_words -}}
+    {{- if gt $intro_content_words_count 100000 -}}
+        {{- $intro_content_words_count = 100000 -}}
+    {{- end -}}
+
+    {{- range $i := (seq 0 500 $intro_content_words_count) -}}
+        {{- $chunk := delimit (first 500 (after $i $intro_content_words) ) " " -}}
+        {{- if gt (len $chunk) 2 -}}
+            {{- $object_id := (print $page.File.UniqueID "_" $page.Language.Lang "_intro_" $i "_-1") -}}
+            {{- $hugo_context.Scratch.Add "algoliaindex" (
+                dict "objectID" $object_id
+                "id" $object_id
+                "title" $title
+                "section_header" ""
+                "content" $chunk
+                "type" $page.Type
+                "relpermalink" $page.RelPermalink
+                "distinct_base_url" $page.RelPermalink
+                "full_url" $page.Permalink
+                "language" $page.Language.Lang
+                "category" $category
+                "subcategory" $subcategory
+                "rank" $rank
+                "order" -1
+                "tags" ($page.Params.algolia.tags | default slice)
+            ) -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
 
 {{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
