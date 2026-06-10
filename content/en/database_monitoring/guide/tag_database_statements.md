@@ -11,7 +11,7 @@ This guide assumes that you have configured [Database Monitoring][1].
 ## Before you begin
 
 Supported databases
-: Postgres, MySQL, SQL Server
+: Postgres, MySQL, SQL Server, ClickHouse (Agent 7.79+)
 
 Supported Agent versions
 : 7.36.1+

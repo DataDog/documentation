@@ -57,7 +57,23 @@ Database Monitoring collects the following data from ClickHouse:
 : Logical query execution plans automatically collected for queries observed in query completions. The Agent runs `EXPLAIN json=1` against sampled `SELECT` and `WITH` statements and attaches the obfuscated plan to the corresponding query completion record. Rate-limited to avoid overhead on high-throughput clusters.
 
 **Query tagging** (Agent 7.79+)
-: If your application annotates SQL queries with APM trace context using SQL comments (for example, `/* dd.service='my-app',dd.env='prod' */`), DBM automatically extracts and surfaces those tags alongside each query sample, completion, and error record. This enables direct linking between slow queries and the application traces that caused them.
+: Tags injected into SQL statements as comments using the [sqlcommenter][sqlcommenter] or [marginalia][marginalia] format are automatically extracted and surfaced in DBM as Propagated Tags on query samples, completions, and explain plans. Using any database API that supports SQL execution, add a comment to your statement:
+
+  ```sql
+  /*key='val'*/ SELECT * from FOO
+  ```
+
+  Separate multiple tags with commas:
+
+  ```sql
+  /*key1='val1',key2='val2'*/ SELECT * from FOO
+  ```
+
+  Tags appear on the Sample Details page under **Propagated Tags** and can be used to filter the Explain Plans and Query Samples views. See [Tagging SQL Statements][tag-statements] for full details.
+
+[sqlcommenter]: https://google.github.io/sqlcommenter
+[marginalia]: https://github.com/basecamp/marginalia
+[tag-statements]: /database_monitoring/guide/tag_database_statements/
 
 **Parts and merges** (Agent 7.80+)
 : Per-table storage health metrics and a real-time event stream consumed by the DBM Storage Health timeline view. The Agent queries `system.parts`, `system.merges`, `system.mutations`, and `system.replication_queue` on each collection cycle and emits the following gauges:
