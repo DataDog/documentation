@@ -22,7 +22,7 @@ Supported platforms:
 
 - **AWS**: Lambda, ECS Fargate
 - **Azure**: Container Apps, Web Apps (App Service), Azure Functions
-- **GCP**: Cloud Run, Cloud Run Functions
+- **GCP**: Cloud Run, Cloud Run Functions, GKE
 
 <div class="alert alert-info">Use direct ingest when running a Collector is impractical (for example, Lambda). If you can run a Collector, see <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> for buffering, retry, and centralized sampling.</div>
 
@@ -187,11 +187,23 @@ export OTEL_SERVICE_NAME="my-cloud-run-service"
 
 The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `faas.id`, `faas.instance`, `faas.name`, `faas.version`.
 
+### GKE
+
+```shell
+export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
+export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
+export OTEL_SERVICE_NAME="my-gke-service"
+```
+
+The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `host.id`, `k8s.cluster.name`.
+
 ### Resource attributes reference
 
 | Platform | Attributes populated by GCP Resource Detector |
 |---|---|
 | Cloud Run / Cloud Run Functions | `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `faas.id`, `faas.instance`, `faas.name`, `faas.version` |
+| GKE | `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `host.id`, `k8s.cluster.name` |
 
 {{% /tab %}}
 {{< /tabs >}}
