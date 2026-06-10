@@ -44,8 +44,8 @@ For single-node and multi-node examples, see [Set Up Test Parallelization][3].
 {{< whatsnext desc="Install ddtest, configure your CI provider, and customize how Test Parallelization splits test files." >}}
 {{< nextlink href="/tests/test_parallelization/setup/" >}}Set up Test Parallelization{{< /nextlink >}}
 {{< nextlink href="/tests/test_parallelization/configuration/" >}}Configure Test Parallelization{{< /nextlink >}}
-{{< nextlink href="/tests/test_parallelization/best_practices/" >}}Best Practices{{< /nextlink >}}
-{{< nextlink href="/tests/test_parallelization/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
+{{< nextlink href="/tests/test_parallelization/best_practices/" >}}Best Practices for Test Parallelization{{< /nextlink >}}
+{{< nextlink href="/tests/test_parallelization/troubleshooting/" >}}Troubleshooting Test Parallelization{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /tests/test_impact_analysis/
