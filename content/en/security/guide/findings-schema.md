@@ -1764,10 +1764,6 @@ There are eleven different categories for security findings. Click on a category
 {{% /tab %}}
 {{< /tabs >}}
 
-## Linking to findings
-
-The direct URL for a finding in Datadog varies by finding type. Use `/security/finding/[finding_id]`, where `[finding_id]` is the root-level `finding_id` value, to open the finding in the appropriate explorer. This format is useful when linking from AI agents or automations.
-
 ## Schema Reference
 
 The following sections describe all available attributes in the Security Findings schema, organized by namespace.
@@ -2323,6 +2319,11 @@ Container image where the finding was detected, including registry, repository, 
       <td><strong>Path:</strong> <code>@container_image.architectures</code><br>Architectures associated with the container image.</td>
     </tr>
     <tr>
+      <td><code>base_images</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@container_image.base_images</code><br>Base images the container image is built on, ordered from the outermost base image to the innermost. Empty when no base image is identified.</td>
+    </tr>
+    <tr>
       <td><code>git_repository_url</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@container_image.git_repository_url</code><br>URL of the Git repository for the code used to build the container image. Available only when Source Code Integration is configured.</td>
@@ -2371,6 +2372,42 @@ Container image where the finding was detected, including registry, repository, 
       <td><code>versions</code></td>
       <td>array (string)</td>
       <td><strong>Path:</strong> <code>@container_image.versions</code><br>Versions of the container image where the finding was detected.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Base Images
+
+Base images the container image is built on, ordered from the outermost base image to the innermost. Empty when no base image is identified.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>layer_diff_ids</code></td>
+      <td>array (string)</td>
+      <td><strong>Path:</strong> <code>@container_image.base_images.layer_diff_ids</code><br>Diff IDs of the base image layers, including layers inherited from deeper base images. Each diff ID is the SHA256 of the uncompressed layer contents.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@container_image.base_images.name</code><br>Full name of the base image, including any tag that identifies its version or flavor (for example, <code>golang</code> or <code>python:3.12-slim</code>).</td>
+    </tr>
+    <tr>
+      <td><code>repo_digest</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@container_image.base_images.repo_digest</code><br>Repository digest of the base image.</td>
+    </tr>
+    <tr>
+      <td><code>tags</code></td>
+      <td>array (string)</td>
+      <td><strong>Path:</strong> <code>@container_image.base_images.tags</code><br>Tags associated with the base image (for example, <code>1.26-alpine3.23</code>).</td>
     </tr>
   </tbody>
 </table>
@@ -6402,6 +6439,11 @@ Information specific to vulnerabilities.
       <td><strong>Path:</strong> <code>@vulnerability.is_emerging</code><br><code>true</code> if the vulnerability is classified as an emerging threat; <code>false</code> otherwise.</td>
     </tr>
     <tr>
+      <td><code>is_inherited_from_base_image</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@vulnerability.is_inherited_from_base_image</code><br><code>true</code> if the vulnerability originates in a base image layer, <code>false</code> if it originates in a layer added by the container image author.</td>
+    </tr>
+    <tr>
       <td><code>last_commit</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@vulnerability.last_commit</code><br>The commit in which the vulnerability was fixed.</td>
@@ -6767,11 +6809,6 @@ Linear issue attached to the case.
       <td><code>status</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.status</code><br>Current status of the Linear issue.</td>
-    </tr>
-    <tr>
-      <td><code>team_id</code></td>
-      <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases.linear_issue.team_id</code><br>UUID of the Linear team that owns the issue.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
