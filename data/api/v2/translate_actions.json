@@ -1434,6 +1434,32 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "ListOwnershipInferences": {
+    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
+    "summary": "List ownership inferences for a resource"
+  },
+  "ListOwnershipHistory": {
+    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership inference history for a resource"
+  },
+  "GetOwnershipInference": {
+    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
+    "summary": "Get an ownership inference by owner type"
+  },
+  "GetOwnershipEvidence": {
+    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
+    "summary": "Get the evidence for an ownership inference"
+  },
+  "CreateOwnershipFeedback": {
+    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
+    "summary": "Submit feedback on an ownership inference",
+    "request_description": "",
+    "request_schema_description": "The request body for submitting ownership feedback."
+  },
+  "ListOwnershipHistoryByOwnerType": {
+    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership history by owner type"
+  },
   "ListCSMAgentlessHosts": {
     "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
     "summary": "List agentless hosts"
