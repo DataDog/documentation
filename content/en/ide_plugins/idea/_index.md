@@ -26,12 +26,6 @@ cascade:
   site_support_id: ide_plugins_idea
 ---
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">
-    The Datadog extension for JetBrains IDEs is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
-
 ## Overview
 
 The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Code Security][24], [Error Tracking][25], [Logs][23], and [Live Debugger][20] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
