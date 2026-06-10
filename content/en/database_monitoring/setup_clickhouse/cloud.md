@@ -78,7 +78,7 @@ Database Monitoring collects the following data from ClickHouse:
   | Metric | Description |
   |--------|-------------|
   | `clickhouse.table.parts.active` | Active part count per table |
-  | `clickhouse.table.parts.level_zero` | Level-zero (unflushed) parts — high values indicate merge backpressure |
+  | `clickhouse.table.parts.level_zero` | Level-zero (unflushed) parts; high values indicate merge backpressure |
   | `clickhouse.table.parts.compact` | Compact-format parts per table |
   | `clickhouse.table.parts.wide` | Wide-format parts per table |
   | `clickhouse.table.parts.rows` | Total rows across active parts |
