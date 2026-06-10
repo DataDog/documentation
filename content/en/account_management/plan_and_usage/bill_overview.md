@@ -107,7 +107,7 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 - {{< ui >}}Usage Types{{< /ui >}} bar chart: Day-by-day usage stacked by sub-dimension
 - {{< ui >}}Allotment Usage{{< /ui >}}: Progress bar showing consumed vs. contracted allotment; displays ">100%" when usage exceeds the allotment
 - {{< ui >}}Drilldown in Usage Attribution{{< /ui >}}: Click to open {{< ui >}}Usage Attribution{{< /ui >}}, pre-filtered to the selected billing dimension.
-- {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}: For Infra Hosts, export the individual hosts behind your billable total as a CSV.
+- {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}: For Infra Hosts, download the individual hosts that make up your billable total as a CSV.
 
 ### Download billable hosts as CSV
 
