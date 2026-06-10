@@ -4203,6 +4203,18 @@
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
   },
+  "CreateReportSchedule": {
+    "description": "Create a new scheduled report. A schedule renders a dashboard or integration dashboard\non a recurring cadence and delivers it to the configured recipients over email, Slack,\nor Microsoft Teams.\nRequires the `generate_dashboard_reports` permission.",
+    "summary": "Create a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a report schedule."
+  },
+  "PatchReportSchedule": {
+    "description": "Update an existing scheduled report by its identifier. The editable attributes\nare replaced with the supplied values; the targeted resource (`resource_id` and\n`resource_type`) cannot be changed after creation.\nRequires the `generate_dashboard_reports` permission and schedule ownership.",
+    "summary": "Update a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a report schedule."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
