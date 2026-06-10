@@ -1862,6 +1862,30 @@
     "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
     "summary": "Unarchive a feature flag"
   },
+  "ListForms": {
+    "description": "Get all forms for the authenticated user's organization.",
+    "summary": "List forms"
+  },
+  "CreateForm": {
+    "description": "Create a new form. The form is created in draft mode and must be published before it can be used. This also creates a new datastore for form responses and links it to the form.",
+    "summary": "Create a form",
+    "request_description": "",
+    "request_schema_description": "A request to create a form."
+  },
+  "CreateAndPublishForm": {
+    "description": "Creates a new form and immediately publishes its initial version. This also creates a new datastore for form responses and links it to the form.",
+    "summary": "Create and publish a form",
+    "request_description": "",
+    "request_schema_description": "A request to create a form."
+  },
+  "DeleteForm": {
+    "description": "Delete a form by its ID. This will also try to delete the associated datastore.",
+    "summary": "Delete a form"
+  },
+  "GetForm": {
+    "description": "Get a form definition by its ID.",
+    "summary": "Get a form"
+  },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
     "summary": "Get HAMR organization connection"

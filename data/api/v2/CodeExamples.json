@@ -800,6 +800,20 @@
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
+  "CreateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create a form returns \"OK\" response"
+    }
+  ],
+  "CreateAndPublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create and publish a form returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
