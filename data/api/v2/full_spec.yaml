@@ -1971,12 +1971,7 @@ components:
       content:
         "application/json":
           schema:
-            properties:
-              data:
-                items:
-                  $ref: "#/components/schemas/NotificationRule"
-                type: array
-            type: object
+            $ref: "#/components/schemas/NotificationRulesListResponse"
       description: The list of notification rules.
     PreconditionFailedResponse:
       content:
@@ -10282,6 +10277,7 @@ components:
           description: HTTP-like status code describing the outcome for this finding.
           example: 500
           format: int32
+          maximum: 599
           type: integer
         title:
           description: Short label describing the outcome for this finding.
@@ -18042,7 +18038,8 @@ components:
       description: "The value of the set action"
       oneOf:
         - type: string
-        - type: integer
+        - format: int64
+          type: integer
         - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: "The array of actions the rule can perform if triggered"
@@ -40630,6 +40627,7 @@ components:
         - 4
         - 5
       example: 4
+      format: int64
       type: integer
       x-enum-varnames:
         - UNSPECIFIED
@@ -59643,6 +59641,14 @@ components:
         data:
           $ref: "#/components/schemas/NotificationRule"
       type: object
+    NotificationRulesListResponse:
+      description: The list of notification rules.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/NotificationRule"
+          type: array
+      type: object
     NotificationRulesType:
       description: The rule type associated to notification rules.
       enum:
@@ -71087,6 +71093,7 @@ components:
           description: Notification destinations (1=email, 2=slack, 3=in-app).
           items:
             description: Notification channel identifier (1=email, 2=slack, 3=in-app).
+            format: int64
             type: integer
           type: array
         enabled:
@@ -88733,6 +88740,7 @@ components:
             - 50
             - 30
           items:
+            format: int64
             type: integer
           type: array
         names:
@@ -111375,6 +111383,7 @@ paths:
           name: limit
           required: false
           schema:
+            format: int64
             type: integer
       responses:
         "200":
@@ -114579,6 +114588,7 @@ paths:
           required: false
           schema:
             default: 100
+            format: int64
             type: integer
         - description: Zero-based page number for pagination.
           in: query
@@ -114586,6 +114596,7 @@ paths:
           required: false
           schema:
             default: 0
+            format: int64
             type: integer
         - description: "If `true`, returns timeline cells in chronological order (oldest first). Defaults to `false` (newest first)."
           in: query
@@ -117851,6 +117862,7 @@ paths:
           required: false
           schema:
             example: 200
+            format: int64
             type: integer
         - description: Pagination offset. Defaults to `0`.
           in: query
@@ -117858,6 +117870,7 @@ paths:
           required: false
           schema:
             example: 0
+            format: int64
             type: integer
         - description: Optional repeated cloud or SaaS provider filters, such as `aws`, `gcp`, `azure`, `Oracle`, `datadog`, `OpenAI`, or `Anthropic`.
           explode: true
@@ -126071,6 +126084,7 @@ paths:
           name: limit
           schema:
             default: 100
+            format: int64
             maximum: 1000
             minimum: 1
             type: integer
@@ -126080,6 +126094,7 @@ paths:
           name: offset
           schema:
             default: 0
+            format: int64
             minimum: 0
             type: integer
       responses:
@@ -126225,6 +126240,7 @@ paths:
           name: limit
           schema:
             default: 100
+            format: int64
             maximum: 1000
             minimum: 1
             type: integer
@@ -126234,6 +126250,7 @@ paths:
           name: offset
           schema:
             default: 0
+            format: int64
             minimum: 0
             type: integer
       responses:
@@ -143378,11 +143395,13 @@ paths:
           in: query
           name: page[limit]
           schema:
+            format: int64
             type: integer
         - description: Page offset from the start of the list (default 0).
           in: query
           name: page[offset]
           schema:
+            format: int64
             type: integer
         - description: Substring filter on rule name.
           in: query
@@ -145041,6 +145060,7 @@ paths:
           required: false
           schema:
             default: 25
+            format: int64
             maximum: 100
             type: integer
         - description: Page number (1-indexed).
@@ -145049,6 +145069,7 @@ paths:
           required: false
           schema:
             default: 1
+            format: int64
             type: integer
       responses:
         "200":
@@ -145369,6 +145390,7 @@ paths:
           required: false
           schema:
             default: 25
+            format: int64
             maximum: 100
             type: integer
         - description: Page number (1-indexed).
@@ -145377,6 +145399,7 @@ paths:
           required: false
           schema:
             default: 1
+            format: int64
             type: integer
       responses:
         "200":
@@ -155802,6 +155825,7 @@ paths:
           name: page[limit]
           schema:
             example: 10
+            format: int64
             type: integer
         - description: Filter by application ID.
           in: query
@@ -158629,12 +158653,14 @@ paths:
           name: page[number]
           schema:
             example: 0
+            format: int64
             type: integer
         - description: Number of items per page.
           in: query
           name: page[size]
           schema:
             example: 25
+            format: int64
             type: integer
       responses:
         "200":
@@ -158717,6 +158743,7 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
       responses:
         "204":
@@ -158741,6 +158768,7 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
       responses:
         "200":
@@ -158777,6 +158805,7 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
       requestBody:
         content:
@@ -158831,6 +158860,7 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
       requestBody:
         content:
@@ -158867,18 +158897,21 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
         - description: Page number for pagination (0-indexed).
           in: query
           name: page[number]
           schema:
             example: 0
+            format: int64
             type: integer
         - description: Number of items per page.
           in: query
           name: page[size]
           schema:
             example: 25
+            format: int64
             type: integer
       responses:
         "200":
@@ -158916,6 +158949,7 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
         - description: Unique identifier of the session.
           in: path
@@ -158961,6 +158995,7 @@ paths:
           required: true
           schema:
             example: 1234567
+            format: int64
             type: integer
         - description: Unique identifier of the session.
           in: path
@@ -159045,6 +159080,7 @@ paths:
           name: max_list_size
           schema:
             example: 1048576
+            format: int64
             type: integer
         - description: Paging token for pagination.
           in: query
@@ -159075,12 +159111,14 @@ paths:
           name: page[size]
           schema:
             example: 25
+            format: int64
             type: integer
         - description: Page number for pagination (0-indexed).
           in: query
           name: page[number]
           schema:
             example: 0
+            format: int64
             type: integer
         - description: Unique identifier of the session.
           in: path
@@ -159211,6 +159249,7 @@ paths:
           name: page[number]
           schema:
             example: 0
+            format: int64
             type: integer
         - description: Filter by user UUID. Defaults to current user if not specified.
           in: query
@@ -159236,6 +159275,7 @@ paths:
           name: page[size]
           schema:
             example: 25
+            format: int64
             type: integer
         - description: Filter by application ID.
           in: query
@@ -161564,6 +161604,7 @@ paths:
           required: false
           schema:
             default: 0
+            format: int64
             type: integer
         - description: Number of scores to return. Max is 1000.
           in: query
@@ -161571,6 +161612,7 @@ paths:
           required: false
           schema:
             default: 100
+            format: int64
             type: integer
       responses:
         "200":
@@ -161680,6 +161722,7 @@ paths:
           name: page[limit]
           required: false
           schema:
+            format: int64
             type: integer
         - description: Cursor for pagination.
           in: query
@@ -161809,6 +161852,7 @@ paths:
           schema:
             default: 10
             example: 10
+            format: int64
             type: integer
         - description: Page number to return (1-indexed).
           in: query
@@ -161817,6 +161861,7 @@ paths:
           schema:
             default: 1
             example: 1
+            format: int64
             type: integer
         - description: Query ID for pagination consistency.
           in: query
@@ -172228,6 +172273,7 @@ paths:
           schema:
             default: 20
             example: 20
+            format: int64
             type: integer
         - description: The page number to retrieve, starting from 1.
           in: query
@@ -172235,6 +172281,7 @@ paths:
           schema:
             default: 1
             example: 1
+            format: int64
             type: integer
         - description: |-
             Filter by service names (multiple values allowed). Required for
@@ -175127,6 +175174,7 @@ paths:
           required: false
           schema:
             default: 0
+            format: int64
             type: integer
         - description: Pagination limit
           in: query
@@ -175134,6 +175182,7 @@ paths:
           required: false
           schema:
             default: 10
+            format: int64
             type: integer
       responses:
         "200":
@@ -175841,12 +175890,14 @@ paths:
           name: page[offset]
           schema:
             default: 0
+            format: int64
             type: integer
         - description: The number of status pages to return per page.
           in: query
           name: page[limit]
           schema:
             default: 50
+            format: int64
             type: integer
         - description: Filter status pages by exact domain prefix match. Returns at most one result.
           in: query
@@ -175989,12 +176040,14 @@ paths:
           name: page[offset]
           schema:
             default: 0
+            format: int64
             type: integer
         - description: The number of degradations to return per page.
           in: query
           name: page[limit]
           schema:
             default: 50
+            format: int64
             type: integer
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
           in: query
@@ -176061,12 +176114,14 @@ paths:
           name: page[offset]
           schema:
             default: 0
+            format: int64
             type: integer
         - description: The number of maintenances to return per page.
           in: query
           name: page[limit]
           schema:
             default: 50
+            format: int64
             type: integer
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
           in: query
@@ -184111,6 +184166,7 @@ paths:
           name: page[number]
           schema:
             default: 0
+            format: int64
             minimum: 0
             type: integer
         - description: Number of widgets per page.
@@ -184118,6 +184174,7 @@ paths:
           name: page[size]
           schema:
             default: 50
+            format: int64
             maximum: 100
             type: integer
       responses:
