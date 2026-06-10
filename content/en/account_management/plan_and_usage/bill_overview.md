@@ -121,7 +121,7 @@ To export the list:
 The CSV contains one row per host with the following columns:
 
 | Column | Description |
-| --- | --- |
+|---|---|
 | `Org Name` | Organization name. |
 | `Public ID` | The organization's public identifier. |
 | `Timestamp` | For organizations billed at the 99th percentile, the hour in the month when usage was measured at the 99th percentile. For organizations billed on a sum basis, the first day of the month. |
