@@ -192,7 +192,11 @@ This behavior can be fine-tuned with the following environment variables:
 
 <div class="alert alert-info">Failed Test Replay is only supported for Java, JavaScript, and .NET.</a></div>
 
-In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
+In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace.
+
+Failed Test Replay requires Auto Test Retries to be enabled, because it captures variable data from the retried test runs.
+
+Enable Failed Test Replay in [**CI/CD Settings**][4] under **Mitigation** > **Failed Test Replay**. You can apply the setting at the organization, repository, or test service level.
 
 #### Create a logs index
 
