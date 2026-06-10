@@ -7,7 +7,7 @@ This page describes how to instrument your applications for [Real User Monitorin
 
 ## Setup
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Specify application details in the UI" %}
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][3].
