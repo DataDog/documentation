@@ -118,7 +118,7 @@ Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 
 ### Steer AI Guard with system prompt context {#system-prompt-context}
 
-AI Guard evaluates the full conversation, including your system prompt, when assessing threats. Adding context about your agent's purpose, the data it handles, and the tools it is authorized to use helps AI Guard distinguish legitimate operations from genuine threats—reducing false positives without weakening security coverage.
+AI Guard evaluates the full conversation, including your system prompt, when assessing threats. Adding context about your agent's purpose, the data it handles, and the tools it is authorized to use helps AI Guard distinguish legitimate operations from genuine threats—reducing false positives without reducing security coverage.
 
 #### What to include
 
