@@ -28,6 +28,10 @@
   {{- if and (ne $.Params.disable_opengraph_meta_tags true) .File -}}
     {{- partial "meta.html" . -}}
   {{- end -}}
+
+  {{- if and .IsPage .File -}}
+    {{- partial "structured-data.html" . -}}
+  {{- end -}}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
