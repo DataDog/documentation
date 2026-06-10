@@ -57,13 +57,7 @@ Database Monitoring collects the following data from ClickHouse:
 : Logical query execution plans automatically collected for queries observed in query completions. The Agent runs `EXPLAIN json=1` against sampled `SELECT` and `WITH` statements and attaches the obfuscated plan to the corresponding query completion record. Rate-limited to avoid overhead on high-throughput clusters.
 
 **Query tagging** (Agent 7.79+)
-: Tags injected into SQL statements as comments using the [sqlcommenter][sqlcommenter] or [marginalia][marginalia] format are automatically extracted and surfaced in DBM as Propagated Tags on query samples, completions, and explain plans. Using any database API that supports SQL execution, add a comment to your statement:
-
-  ```sql
-  /*key='val'*/ SELECT * from FOO
-  ```
-
-  Separate multiple tags with commas:
+: Tags injected into SQL statements as comments using the [sqlcommenter][sqlcommenter] or [marginalia][marginalia] format are automatically extracted and surfaced in DBM as Propagated Tags on query samples, completions, and explain plans. Using any database API that supports SQL execution, add a comment to your SQL statement with comma-separated key-value pairs:
 
   ```sql
   /*key1='val1',key2='val2'*/ SELECT * from FOO
