@@ -51,7 +51,7 @@ Database Monitoring collects the following data from ClickHouse:
 : Records of individual completed query executions, capturing all successfully executed queries. Use query completions alongside query samples to ensure complete visibility into all query activity, including short-lived queries not observed during sampling. Starting with Agent 7.82, each completion record includes per-query CPU fields (`cpu_virtual_time_us`, `cpu_wait_us`).
 
 **Query errors** (Agent 7.79+)
-: Records of failed query executions — queries that raised an exception before starting (`ExceptionBeforeStart`) or during processing (`ExceptionWhileProcessing`). Each error record includes the exception message, ClickHouse error code, and stack trace. Enabled by default alongside query completions.
+: Records of failed query executions: queries that raised an exception before starting (`ExceptionBeforeStart`) or during processing (`ExceptionWhileProcessing`). Each error record includes the exception message, ClickHouse error code, and stack trace. Enabled by default alongside query completions.
 
 **Explain plans** (Agent 7.79+)
 : Logical query execution plans automatically collected for queries observed in query completions. The Agent runs `EXPLAIN json=1` against sampled `SELECT` and `WITH` statements and attaches the obfuscated plan to the corresponding query completion record. Rate-limited to avoid overhead on high-throughput clusters.
