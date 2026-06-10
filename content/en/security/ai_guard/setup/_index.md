@@ -131,7 +131,7 @@ In your system prompt, describe:
 
 A system prompt with minimal context is more likely to result in false positives for legitimate operations:
 
-```
+```text
 You are a helpful assistant.
 ```
 
