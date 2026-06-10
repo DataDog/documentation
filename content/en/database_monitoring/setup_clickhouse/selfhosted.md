@@ -27,8 +27,12 @@ Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into y
 Supported ClickHouse versions
 : 23.x and later (23.x, 24.x, 25.x). Recommended minimum: 23.8 LTS.
 
-Supported Agent versions
-: 7.78+
+Supported Agent versions by feature
+: - Query metrics, query samples, query completions: Agent 7.78+
+  - Query errors, explain plans, query tagging: Agent 7.79+
+  - Parts and merges monitoring: Agent 7.80+
+  - Schema collection: Agent 7.81+
+  - CPU time per query: Agent 7.82+
 
 ## Data collected
 
@@ -38,13 +42,50 @@ Database Monitoring collects the following data from ClickHouse:
 : Periodic collection (every 5 minutes) of instance information including version, hostname, and configuration. Custom tags defined in the `tags` option are attached to the instance for filtering and grouping by environment, region, cluster, or any other custom dimensions.
 
 **Query metrics**
-: Aggregated performance metrics for executed queries, enabling analysis of query behavior and trends over time. Collected from `system.query_log`.
+: Aggregated performance metrics for executed queries, enabling analysis of query behavior and trends over time. Collected from `system.query_log`. Starting with Agent 7.82, includes CPU time fields (`total_cpu_virtual_time_us`, `total_cpu_wait_us`) that distinguish CPU-bound queries from I/O-bound ones.
 
 **Query samples**
 : Point-in-time snapshots of currently running queries are captured from `system.processes` at a 1-second interval. Because ClickHouse queries often complete in under one second, short-lived queries may not always appear in samples.
 
 **Query completions**
-: Records of individual completed query executions, capturing all successfully executed queries. Use query completions alongside query samples to ensure complete visibility into all query activity, including short-lived queries not observed during sampling.
+: Records of individual completed query executions, capturing all successfully executed queries. Use query completions alongside query samples to ensure complete visibility into all query activity, including short-lived queries not observed during sampling. Starting with Agent 7.82, each completion record includes per-query CPU fields (`cpu_virtual_time_us`, `cpu_wait_us`).
+
+**Query errors** (Agent 7.79+)
+: Records of failed query executions — queries that raised an exception before starting (`ExceptionBeforeStart`) or during processing (`ExceptionWhileProcessing`). Each error record includes the exception message, ClickHouse error code, and stack trace. Enabled by default alongside query completions.
+
+**Explain plans** (Agent 7.79+)
+: Logical query execution plans automatically collected for queries observed in query completions. The Agent runs `EXPLAIN json=1` against sampled `SELECT` and `WITH` statements and attaches the obfuscated plan to the corresponding query completion record. Rate-limited to avoid overhead on high-throughput clusters.
+
+**Query tagging** (Agent 7.79+)
+: If your application annotates SQL queries with APM trace context using SQL comments (for example, `/* dd.service='my-app',dd.env='prod' */`), DBM automatically extracts and surfaces those tags alongside each query sample, completion, and error record. This enables direct linking between slow queries and the application traces that caused them.
+
+**Parts and merges** (Agent 7.80+)
+: Per-table storage health metrics and a real-time event stream consumed by the DBM Storage Health timeline view. The Agent queries `system.parts`, `system.merges`, `system.mutations`, and `system.replication_queue` on each collection cycle and emits the following gauges:
+
+  | Metric | Description |
+  |--------|-------------|
+  | `clickhouse.table.parts.active` | Active part count per table |
+  | `clickhouse.table.parts.level_zero` | Level-zero (unflushed) parts — high values indicate merge backpressure |
+  | `clickhouse.table.parts.compact` | Compact-format parts per table |
+  | `clickhouse.table.parts.wide` | Wide-format parts per table |
+  | `clickhouse.table.parts.rows` | Total rows across active parts |
+  | `clickhouse.table.parts.bytes_on_disk` | Compressed bytes on disk |
+  | `clickhouse.table.parts.compressed_bytes` | Compressed bytes (storage) |
+  | `clickhouse.table.parts.uncompressed_bytes` | Uncompressed bytes (in-memory size) |
+  | `clickhouse.table.parts.max_merge_level` | Highest merge level of any active part |
+  | `clickhouse.table.detached_parts.count` | Total detached parts per table |
+  | `clickhouse.table.detached_parts.corrupted` | Corrupted detached parts |
+  | `clickhouse.merges.active` | Active (in-progress) merges per table |
+  | `clickhouse.merges.stalled` | Merges running longer than the stall threshold |
+  | `clickhouse.mutations.in_progress` | In-progress mutations per table |
+  | `clickhouse.mutations.failing` | Mutations with at least one failed attempt |
+  | `clickhouse.replication.queue_depth` | Replication queue depth per table |
+  | `clickhouse.replication.stuck_tasks` | Replication queue entries with repeated failures |
+
+**Schema collection** (Agent 7.81+)
+: Catalog metadata — databases, tables, views, and columns — collected periodically and surfaced in the DBM Schema Explorer. The Agent queries `system.tables` and `system.columns` (and `system.view_refreshes` for ClickHouse 24.3+) and emits one structured payload per cycle. Disabled by default; enable with `collect_schemas.enabled: true`.
+
+  Also available: `schema_metrics` emits per-table size gauges (`clickhouse.table.*`) and per-view refresh status gauges. This is independent of catalog collection and can be enabled without Schema Explorer.
 
 ## Setup
 
@@ -70,6 +111,14 @@ GRANT SELECT ON system.query_log TO datadog;
 ```
 
 The `system.processes` and `system.query_log` grants are required for DBM query collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+
+If you are enabling **schema collection** (Agent 7.81+), add the following grants:
+
+```sql
+GRANT SELECT ON system.tables TO datadog;
+GRANT SELECT ON system.columns TO datadog;
+GRANT SELECT ON system.view_refreshes TO datadog;  -- required for view refresh status (ClickHouse 24.3+)
+```
 
 ### Step 2: Configure the Agent
 
@@ -109,6 +158,18 @@ instances:
     query_completions:
       enabled: true
       collection_interval: 10
+
+    # Query errors: enabled by default (Agent 7.79+)
+    query_errors:
+      enabled: true
+
+    # Parts and merges: enabled by default (Agent 7.80+)
+    parts_and_merges:
+      enabled: true
+
+    # Schema collection: disabled by default, opt in (Agent 7.81+)
+    # collect_schemas:
+    #   enabled: true
 
   # Add an entry for each additional node
   - dbm: true
@@ -219,5 +280,70 @@ Collects records of individual completed queries from `system.query_log`.
 | `query_completions.enabled` | boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
 | `query_completions.collection_interval` | number | `10` | Collection interval in seconds. |
 | `query_completions.samples_per_hour_per_query` | number | `15` | Maximum samples collected per hour per unique query signature. |
+
+### Query errors (Agent 7.79+)
+
+Collects failed query events from `system.query_log`.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `query_errors.enabled` | boolean | `true` | Enable query error collection. Requires `dbm: true`. Collects `ExceptionBeforeStart` and `ExceptionWhileProcessing` events including exception message, error code, and stack trace. |
+| `query_errors.collection_interval` | number | `10` | Collection interval in seconds. |
+| `query_errors.samples_per_hour_per_query` | number | `60` | Maximum error samples collected per hour per unique query signature. |
+
+### Explain plans (Agent 7.79+)
+
+Explain plans are collected automatically for queries observed in query completions. There is no separate `enabled` flag — plans are gathered whenever `query_completions` is active and the Agent version is 7.79+.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `explained_queries_per_hour_per_query` | number | `60` | Maximum explain plans collected per hour per unique query signature. Reduce this on very high-throughput clusters to limit overhead. |
+| `explained_queries_cache_maxsize` | integer | `5000` | Maximum number of unique query signatures to track in the explain plan rate-limit cache. |
+
+### Parts and merges (Agent 7.80+)
+
+Collects MergeTree storage health data from `system.parts`, `system.merges`, `system.mutations`, and `system.replication_queue`.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `parts_and_merges.enabled` | boolean | `true` | Enable parts and merges monitoring. Requires `dbm: true`. |
+| `parts_and_merges.collection_interval` | number | `60` | Collection interval in seconds. |
+| `parts_and_merges.max_parts_rows` | integer | `500` | Maximum rows in the per-cycle parts event payload, ordered by active part count descending. |
+| `parts_and_merges.max_mutations_rows` | integer | `200` | Maximum rows in the per-cycle mutations payload, ordered by creation time ascending. |
+| `parts_and_merges.max_replication_queue_rows` | integer | `1000` | Maximum rows returned from `system.replication_queue` per cycle. |
+| `parts_and_merges.table_metrics_include_partition_tag` | boolean | `false` | Add a `partition` tag to parts gauges. Disabled by default to avoid high cardinality. |
+| `parts_and_merges.table_metrics_max_tables` | integer | `200` | Cap per-table gauge emission to the top N tables by active part count. |
+| `parts_and_merges.stalled_merge_elapsed_threshold_seconds` | integer | `3600` | Seconds a merge must be running before it is counted as stalled. |
+| `parts_and_merges.stuck_replication_num_tries` | integer | `3` | Minimum failed attempts before a replication queue entry is counted as stuck. |
+
+### Schema collection (Agent 7.81+)
+
+Collects catalog metadata (databases, tables, views, columns) for the DBM Schema Explorer.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `collect_schemas.enabled` | boolean | `false` | Enable catalog metadata collection. Requires `dbm: true`. When enabled, the Agent polls `system.tables`, `system.columns`, and `system.view_refreshes` (ClickHouse 24.3+). |
+| `collect_schemas.collection_interval` | number | `600` | Collection interval in seconds. Catalog data changes slowly; 600 s (10 min) is a reasonable default. |
+| `collect_schemas.max_tables` | integer | `300` | Maximum number of tables and views to collect per cycle across all databases. |
+| `collect_schemas.max_columns` | integer | `1000` | Maximum number of columns to collect per table or view. |
+| `collect_schemas.include_databases` | list | - | Regex patterns for databases to include. If empty, all databases (except system databases) are included. |
+| `collect_schemas.exclude_databases` | list | - | Regex patterns for databases to exclude. System databases (`system`, `INFORMATION_SCHEMA`, `information_schema`) are always excluded. |
+| `collect_schemas.include_tables` | list | - | Regex patterns for tables to include. If empty, all tables are included. |
+| `collect_schemas.exclude_tables` | list | - | Regex patterns for tables to exclude. |
+
+### Schema metrics (Agent 7.81+)
+
+Emits per-table size gauges and per-view refresh status gauges. Independent of `collect_schemas` — enable this without Schema Explorer to track table sizes on dashboards.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `schema_metrics.enabled` | boolean | `false` | Enable per-table size and per-view refresh gauges. Requires `dbm: true`. |
+| `schema_metrics.collection_interval` | number | `60` | Collection interval in seconds. |
+
+## Coming soon
+
+<div class="alert alert-info">
+<strong>Async insert observability</strong> — visibility into ClickHouse async insert buffers and flush history from <code>system.asynchronous_inserts</code> and <code>system.asynchronous_insert_log</code> is planned for a future Agent release. This will surface per-table buffer sizes, flush rates, and error rates as DBM metrics.
+</div>
 
 {{< partial name="whats-next/whats-next.html" >}}
