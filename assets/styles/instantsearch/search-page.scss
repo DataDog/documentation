@@ -22,6 +22,9 @@
     .ais-SearchBox-input {
         background-color: #e6e6e6;
         padding-right: 30px;
+        @media screen and (max-width: 1280px) {
+            padding-right: initial;
+        }
     }
 
     #count {
