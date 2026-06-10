@@ -44,7 +44,7 @@ Deployment Gates support two evaluation modes: JIT and preconfigured.
 
 You can use different modes across different gates if needed.
 
-If you're unsure where to start, or you want to get started quickly, use JIT.
+If you're unsure where to start, use JIT.
 
 ## Further reading
 

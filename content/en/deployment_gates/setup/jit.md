@@ -674,7 +674,7 @@ When a 200 HTTP response is returned, it has the following format:
        "attributes": {
            "dry_run": false,
            "evaluation_id": "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
-           "evaluation_url": "https://app.datadoghq.com/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f14f-4f4b-494b-86e5-52f03e10c8e9",
+           "evaluation_url": "https://app.datadoghq.com/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f04f-4f4b-494b-86e5-52f03e10c8e9",
            "gate_id": "e140302e-0cba-40d2-978c-6780647f8f1c",
            "gate_status": "pass",
            "rules": [
