@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import difflib
 import os
 import sys
 from pathlib import Path
@@ -18,6 +19,28 @@ with config_path.open() as f:
 top_level = set(config.get("top_level", []))
 moves_to_hugo = set(config.get("moves_to_hugo", []))
 ignore = set(config.get("ignore", []))
+
+
+def show_diff(original: str, updated: str, filename: str = "") -> None:
+    """Print a colored unified diff between original and updated text."""
+    orig_lines = original.splitlines(keepends=True)
+    upd_lines = updated.splitlines(keepends=True)
+    diff = list(difflib.unified_diff(
+        orig_lines, upd_lines,
+        fromfile=f"a/{filename}", tofile=f"b/{filename}",
+        n=2,
+    ))
+    if not diff:
+        return
+    for line in diff:
+        if line.startswith("+") and not line.startswith("+++"):
+            print(f"\033[32m{line}\033[0m", end="")
+        elif line.startswith("-") and not line.startswith("---"):
+            print(f"\033[31m{line}\033[0m", end="")
+        elif line.startswith("@@"):
+            print(f"\033[36m{line}\033[0m", end="")
+        else:
+            print(line, end="")
 
 # Sanity-check the config itself for conflicts.
 conflicts = top_level & moves_to_hugo
@@ -111,6 +134,10 @@ print(f"\n  .gitignore: {len(hugo_only_segments)} segment(s) -> hugo/.gitignore 
       f"{len(both_segments)} generic kept in both")
 print(f"    root: {len(root_lines)} line(s), hugo/: {len(hugo_lines)} line(s) "
       f"(was {len(gi_lines)} duplicated wholesale)")
+original_gi = "".join(gi_lines)
+show_diff(original_gi, "".join(root_lines), ".gitignore")
+print("  --- new file: hugo/.gitignore ---")
+show_diff("", "".join(hugo_lines), "hugo/.gitignore")
 answer = input("  Apply? [y/N] ").strip().lower()
 if answer == "y":
     gitignore.write_text("".join(root_lines))
@@ -144,6 +171,7 @@ for yml_file in sorted(workflows_dir.glob("*.yml")):
         if old not in updated:
             continue
         print(f"\n  {yml_file.name}: {old!r} → {new!r}")
+        show_diff(updated, updated.replace(old, new), yml_file.name)
         answer = input("  Apply? [y/N] ").strip().lower()
         if answer == "y":
             updated = updated.replace(old, new)
@@ -172,6 +200,7 @@ for py_file in sorted(husky_dir.glob("*.py")):
         if old not in updated:
             continue
         print(f"\n  {py_file.name}: {old!r} → {new!r}")
+        show_diff(updated, updated.replace(old, new), py_file.name)
         answer = input("  Apply? [y/N] ").strip().lower()
         if answer == "y":
             updated = updated.replace(old, new)
@@ -252,6 +281,10 @@ for segment in sorted(changes_by_segment):
     new_pattern = entries[0][2].lstrip().split(maxsplit=1)[0]
     print(f"\n  CODEOWNERS: prefix {len(entries)} pattern(s) under {segment!r} "
           f"with hugo/  (e.g. {old_pattern!r} → {new_pattern!r})")
+    preview = lines[:]
+    for idx, _, new_line in entries:
+        preview[idx] = new_line
+    show_diff("".join(lines), "".join(preview), "CODEOWNERS")
     answer = input("  Apply? [y/N] ").strip().lower()
     if answer == "y":
         for idx, _, new_line in entries:
