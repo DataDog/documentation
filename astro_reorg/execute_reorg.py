@@ -134,10 +134,6 @@ print(f"\n  .gitignore: {len(hugo_only_segments)} segment(s) -> hugo/.gitignore 
       f"{len(both_segments)} generic kept in both")
 print(f"    root: {len(root_lines)} line(s), hugo/: {len(hugo_lines)} line(s) "
       f"(was {len(gi_lines)} duplicated wholesale)")
-original_gi = "".join(gi_lines)
-show_diff(original_gi, "".join(root_lines), ".gitignore")
-print("  --- new file: hugo/.gitignore ---")
-show_diff("", "".join(hugo_lines), "hugo/.gitignore")
 answer = input("  Apply? [y/N] ").strip().lower()
 if answer == "y":
     gitignore.write_text("".join(root_lines))
