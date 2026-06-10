@@ -19,7 +19,7 @@ Configure the Socket destination when you [set up a pipeline][2]. You can set up
 
 After you select the Socket destination in the pipeline UI:
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the socket address and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
