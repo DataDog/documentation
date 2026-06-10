@@ -26,7 +26,7 @@ This page provides an overview of these features.
 | [Detection](#detection)                    | Malicious PR protection: Detect potentially malicious changes or suspicious diffs                      | At PR time                               | Flags PRs introducing novel risky code                                        |
 | [Detection](#ai-native-sast)               | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy       | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
 | [Validation](#validation-and-triage)       | False positive filtering: Deprioritize low-likelihood findings                                         | After scan                               | Reduce noise, allow focus on actual issues                                    |
-| [Remediation](#remediation)                | Batched remediation: Generate suggested fixes (and optionally PRs) for one or multiple vulnerabilities | After scan                               | Reduces developer effort, accelerates fix cycle                               |
+| [Remediation](#remediation)                | Automated remediation: Generate suggested fixes (and optionally PRs) for vulnerabilities manually or with automation | After scan                               | Reduces developer effort, accelerates fix cycle                               |
 
 ## Detection
 
@@ -138,67 +138,50 @@ Both methods operate as complementary components. The static analyzer continues 
 
 [Bits AI][9] reviews the context of each SAST finding and assesses whether it is more likely to be a true or false positive, along with a short explanation of the reasoning.
 
-To narrow down your initial list for triage, in [Vulnerabilities][6], select **Filter out false positives**. This option uses the `-bitsAssessment:"False Positive"` query.
+To narrow down your initial list for triage, in [Vulnerabilities][6], enable the **Filter out false positives** toggle. This option uses the `-bitsAssessment:"False Positive"` query.
 
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
 ## Remediation
 
-Datadog SAST uses the [Bits Code][10] to generate code fixes for vulnerabilities. You can remediate individual vulnerabilities or fix multiple vulnerabilities using bulk remediation campaigns.
+Datadog SAST uses [Bits Code][10] to generate code fixes for vulnerabilities. In addition to remediating an individual vulnerability, you can set up an [automation][13] so that Bits Code automatically acts on similar vulnerabilities in the future.
 
 To view and remediate vulnerabilities:
 
-1. In Datadog, navigate to [**Security** > **Code Security** > **Vulnerabilities**][6], and select **Static Code (SAST)** on the left sidebar.
+1. In Datadog, navigate to [**Security** > **Code Security** > **Vulnerabilities**][6], and select **Static Code (SAST)**.
 1. Select a vulnerability to open a side panel with details about the finding and the affected code.
-1. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
-    - To generate a fix, select [**Single fix**](#single-fix) or [**Bulk fix**](#bulk-fix-campaigns).
-    - If a fix has already been generated, select **View fix and create PR** to view the existing [remediation session](#remediation-session-details).
+1. In the **Next Steps** > **Remediation** section, click **Fix with Bits**, then one of the following options:
+    - [**Single fix**](#single-fix): Generates a code fix for this vulnerability
+      - If a fix has already been generated, select **View fix and create PR** to view the existing [remediation session](#remediation-session-details).
+    - [**Create automation**](#create-automation): Opens a pop-up modal where you can create a [Bits Code automation][13]
 
 ### Single fix
 
-Use **Single fix** to open a code session for Bits AI to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+Use **Single fix** to open a Bits Code session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
 
-### Bulk fix (campaigns)
+View all Bits Code sessions on **Bits AI** > **Bits Code** > [**Sessions**][7].
 
-Use **Bulk fix** to create a remediation campaign that fixes multiple vulnerabilities at the same time.
+### Create automation
 
-Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal where you can configure the following:
+Use **Create automation** to create a [Bits Code automation][13] to generate fixes for SAST vulnerabilities automatically, either as they are found or on a schedule.
 
-- **Campaign title**: A descriptive title for your campaign.
-- **Repositories**: The repositories and paths you want Bits AI to scan.
-- **PR grouping options**: How Bits AI should group findings into pull requests (for example, one PR per repository, file, or finding). You can also limit the number of open PRs and the number of findings per PR.
-- **Custom instructions** (optional): Additional guidance for how Bits AI should generate fixes, such as changelog requirements or pull request title formatting.
+Selecting this option opens an **Automate with Bits** modal with the **Remediate SAST vulnerabilities** action pre-filled. Complete the form, including specifying a trigger and output, then click **Create Automation**. See [Automations][13] to learn more about actions, triggers, and outputs.
 
-After you create a campaign, Bits Code loads the in-scope findings, generates patches based on your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes.
-
-<div class="alert alert-info">
-<ul>
-  <li>Automatic PR creation is disabled by default. Enable it in <a href="https://app.datadoghq.com/code/settings">Settings</a>.</li>
-  <li>Campaigns do not track fixes created outside the campaign. If you generate a single fix and later create a campaign, Bits AI may generate the same fix again.</li>
-</ul>
-</div>
-
-#### View campaign progress
-
-To view all campaigns, navigate to [**Bits AI** > **Bits Code** > **Sessions** > **Campaigns**][12].
-
-Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits Code][10].
-
-{{< img src="/code_security/static_analysis/campaigner-hero-image.png" alt="Campaigns page in Bits Code" style="width:100%;">}}
+View all Bits Code automations on **Bits AI** > **Bits Code** > [**Automations**][14].
 
 ### Remediation session details
 
-Each code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
+Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
 
 - The original security finding and proposed code change
-- An explanation of how and why the AI generated the fix
+- An explanation of how and why Bits Code generated the fix
 - CI results (if enabled) to validate the patch is safe to deploy
 - Options to refine the fix or **Create PR** to apply the changes to your source code repository
 
 To open the remediation session, select the vulnerability from the [**Vulnerabilities**][6] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**.
 
-You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Sessions**][7] views.
+You can also view all remediation sessions on [**Sessions**][7].
 
 {{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light-png.png" alt="Concluded remediation session in Bits Code showing generated fixes and pull request options" style="width:100%;">}}
 
@@ -216,4 +199,5 @@ You can also navigate to remediation sessions through the [**Campaigns**][12] an
 [9]: /bits_ai/
 [10]: /bits_ai/bits_ai_dev_agent
 [11]: https://app.datadoghq.com/code/settings
-[12]: https://app.datadoghq.com/code/campaigns
+[13]: /bits_ai/bits_ai_dev_agent/automations
+[14]: https://app.datadoghq.com/code/automations
