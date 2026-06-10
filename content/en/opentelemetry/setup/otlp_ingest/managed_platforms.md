@@ -15,7 +15,7 @@ further_reading:
 
 Datadog provides dedicated OTLP intake endpoints for managed platforms, allowing you to send traces, metrics, and logs directly to Datadog with minimal configuration. Each supported platform has its own OTLP subdomain (for example, `cloudflare.integrations.otlp.datadoghq.com`).
 
-Use this option when you run workloads on a managed platform where installing a [Datadog Agent][1] or [OpenTelemetry Collector][2] is not feasible. For serverless workloads on AWS, Azure, or GCP that use the standard OTLP traces endpoint, see [Serverless][5].
+Use this option when you run workloads on a managed platform where installing a [Datadog Agent][1] or [OpenTelemetry Collector][2] is not feasible. If your platform is not in the table below and you run on AWS, Azure, or GCP serverless compute, see [Serverless Traces][5].
 
 <div class="alert alert-danger">Host metadata sent to managed platform endpoints does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
@@ -97,15 +97,6 @@ Trace metrics are not computed by default because traffic from managed platforms
 ### Feature coverage
 
 Some Datadog features depend on metadata added by the Collector or Agent (for example, the Infrastructure Host List). See the [OpenTelemetry compatibility list][4] for features that are unavailable when using direct ingest endpoints.
-
-<!-- TODO: Eng raised concern about documenting dd-otlp-span-mapping while operation name v2 is still stabilizing. Keep or remove this section pending eng decision. -->
-## (Optional) Map or filter spans
-
-Use the `dd-otlp-span-mapping` header to configure span mapping and filtering. The header accepts a JSON value with the following fields:
-
-- `ignore_resources`: A list of regular expressions to disable traces based on their resource name.
-- `span_name_remappings`: A map of Datadog span names to preferred names.
-- `span_name_as_resource_name`: Specifies whether to use the OpenTelemetry span name as the Datadog span operation name (default: `true`). If `false`, the operation name is derived from a combination of the instrumentation scope name and span kind.
 
 ## Further reading
 

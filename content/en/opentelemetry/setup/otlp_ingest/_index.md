@@ -17,16 +17,15 @@ Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send o
 
 <div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-Your setup depends on where your telemetry is coming from. Some environments require a dedicated endpoint or additional headers before you configure signal-specific options.
+Your setup depends on where your telemetry is coming from. Some environments require a dedicated endpoint or additional headers before you configure signal-specific options. Check the managed platforms table first; if your platform has a dedicated endpoint, use it. If not, use the serverless or signal-specific pages.
+
+<!-- TODO: Add Preview sign-up link once product provides it. -->
 
 | If your telemetry comes from... | Start here |
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
-<!-- TODO: Add Preview/sign-up callout for traces once product provides the link. Align with serverless and managed platform pages so Preview framing is consistent. -->
-| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE) | [Serverless][7] |
-| Your own app, host, container, or OpenTelemetry Collector | [Logs][3], [Metrics][4], or Traces (in Preview) |
-
-For Traces in Preview, contact your Customer Success Manager to request access.
+| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run) | [Serverless Traces][7] (Preview) |
+| Your own app, host, container, or OpenTelemetry Collector | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
 
 See also: [Instrumenting for Agent Observability][5].
 

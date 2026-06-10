@@ -802,7 +802,7 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40233
       identifier: otel_setup_managed_platforms
-    - name: Serverless
+    - name: Serverless Traces
       url: /opentelemetry/setup/otlp_ingest/serverless
       parent: otel-setup-intake-endpoint
       weight: 40234
