@@ -96,7 +96,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Access local variable information</a> on retried failed tests.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* The feature is opt-in, and needs to be enabled on the [**Test Optimization Settings** page][2].
+\* The feature is opt-in, and needs to be enabled in [**CI/CD Settings**][2].
 
 ## Default configurations
 
@@ -185,7 +185,7 @@ When you're evaluating failed or flaky tests, or the performance of a CI test, y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test/health
-[2]: https://app.datadoghq.com/ci/settings/test-optimization
+[2]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
 [5]: https://app.datadoghq.com/notebook/list
