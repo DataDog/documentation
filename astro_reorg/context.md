@@ -9,3 +9,5 @@ This repo is currently a Hugo site. We instead want it to contain a `hugo` and `
 `astro_reorg/rollback.py` functions as an "undo" action for the reorg.
 
 `astro_reorg/validate_reorg.py` verifies the functionality of affected entities where possible.
+
+You can ignore the `astro` folder, it's a remnant from another branch where an Astro site is being developed. It is completely out of scope.
