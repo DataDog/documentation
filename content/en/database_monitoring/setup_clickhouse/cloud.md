@@ -127,7 +127,7 @@ GRANT REMOTE ON *.* TO datadog;
 The <code>REMOTE</code> privilege is required because the Agent uses ClickHouse's <code>clusterAllReplicas()</code> table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution—it does <strong>not</strong> grant access to any additional databases or tables beyond what was explicitly granted above. The <code>ON *.*</code> syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
 </div>
 
-If you are enabling **schema collection** (Agent 7.81+), add the following grants:
+To enable **schema collection** (Agent 7.81+), add the following grants:
 
 ```sql
 GRANT SELECT ON system.tables TO datadog;
