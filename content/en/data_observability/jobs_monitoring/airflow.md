@@ -17,6 +17,44 @@ further_reading:
 
 [Data Observability: Jobs Monitoring][1] provides visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
 
+## OpenLineage provider compatibility
+
+Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
+
+| Airflow version | Recommended `apache-airflow-providers-openlineage` version | Notes |
+|---|---|---|
+| Airflow 2.11 or later, including Airflow 3 | `2.18.0` | This is the newest provider release. Provider `2.9.0` and later requires Airflow 2.11 or later. |
+| Airflow 2.10.x | `2.8.0` | This is the newest provider release compatible with Airflow 2.10. Provider `2.9.0` and later requires Airflow 2.11 or later. |
+| Airflow 2.9.x | `2.2.0` | This is the newest provider release compatible with Airflow 2.9. Provider `2.3.0` and later requires Airflow 2.10 or later. |
+| Airflow 2.8.x | `1.14.0` | This is the newest provider release compatible with Airflow 2.8. Provider `2.0.0` and later requires Airflow 2.9 or later. |
+| Airflow 2.7.x | `1.10.0` | This is the newest provider release compatible with Airflow 2.7. Provider `1.11.0` and later requires Airflow 2.8 or later. For Airflow 2.7 and 2.8, add the extra configuration variables shown in the setup steps. If you use Amazon MWAA 2.7.2, see the MWAA upgrade guide for Datadog-patched wheels. |
+
+Datadog recommends using the newest compatible provider release available for your Airflow version. Review the [OpenLineage provider changelog](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/changelog.html) before upgrading, because provider releases can change the minimum supported Airflow version or add required dependency constraints.
+
+## Update the OpenLineage provider
+
+To update to the newest compatible OpenLineage provider release in a self-managed Airflow deployment:
+
+1. Check your Airflow version:
+
+   ```shell
+   airflow version
+   ```
+
+2. Use the compatibility table and the [OpenLineage provider changelog](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/changelog.html) to identify the newest provider release that supports your Airflow version.
+
+3. Pin the provider version in the dependency file used by both schedulers and workers:
+
+   ```text
+   apache-airflow-providers-openlineage==<PROVIDER_VERSION>
+   ```
+
+4. If your deployment uses constraints, update the Airflow constraints file for every OpenLineage package that the provider requires. Include `apache-airflow-providers-openlineage`, `apache-airflow-providers-common-sql`, `apache-airflow-providers-common-compat`, `openlineage-integration-common`, `openlineage-python`, and `openlineage-sql` when they are present in your constraints.
+
+5. Redeploy Airflow, then trigger a DAG run and verify that it appears in Data Observability: Jobs Monitoring.
+
+For Amazon MWAA, dependency resolution is controlled by MWAA constraints. If the newest compatible provider conflicts with MWAA defaults, follow the custom constraints pattern in the [MWAA upgrade guide](/data_observability/jobs_monitoring/airflow_mwaa_upgrade/).
+
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 ### Requirements
@@ -129,8 +167,6 @@ To get started, follow the instructions below.
 [7]: /integrations/airflow/?tab=containerized
 [8]: /containers/kubernetes/installation/?tab=datadogoperator#installation
 [9]: /containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
-
-
 ### Validation
 
 In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
