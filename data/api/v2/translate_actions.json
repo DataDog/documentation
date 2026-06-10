@@ -15,14 +15,6 @@
     "description": "Retrieve a paginated list of tracers for a specific agent.\n\nThis endpoint returns tracers associated with a given agent key, identified by the\nagent's hostname. Use this to discover telemetry-derived service names for a particular host.",
     "summary": "List tracers for a specific agent"
   },
-  "ListFleetClusters": {
-    "description": "Retrieve a paginated list of Kubernetes clusters in the fleet.\n\nThis endpoint returns clusters with metadata including node counts, agent versions,\nenabled products, and associated services. Use the `page_number` and `page_size`\nquery parameters to paginate through results.",
-    "summary": "List all fleet clusters"
-  },
-  "ListFleetInstrumentedPods": {
-    "description": "Retrieve the list of pods targeted for Single Step Instrumentation (SSI) injection\nin a specific Kubernetes cluster.\n\nThis endpoint returns pod groups organized by owner reference (deployment, statefulset, etc.)\nwith their injection annotations and applied targets. Use the clusters list endpoint\nto discover available cluster names.",
-    "summary": "List instrumented pods for a cluster"
-  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
