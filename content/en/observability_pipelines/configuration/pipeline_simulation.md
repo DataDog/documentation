@@ -46,7 +46,7 @@ The following example of Pipeline Simulation shows an unparsed log that a proces
 
 Only users with the `Observability Pipelines Live Capture Write` permission can set up captures. Users with the `Observability Pipelines Live Capture Read` permission can only view the events that have already been captured. See [Observability Pipelines Permissions][1] for a list of permissions for Observability Pipelines assets.
 
-Datadog Admins have read and write permissions by default. Standard users only have read permission by default. See [Access Control][2] for more information about default Datadog roles and how to create custom roles.
+Datadog Admins have read and write permissions by default. Standard users have only read permission by default. See [Access Control][2] for more information about default Datadog roles and how to create custom roles.
 
 ### Add domains to firewall allowlist
 
