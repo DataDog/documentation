@@ -1676,7 +1676,7 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 
 {% if equals($prog_lang, "php") %}
 1. [Install the Datadog PHP SDK][400].
-2. Remove any code that manually configures the OTLP logs endpoint. The Datadog SDK derives the endpoint from `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and registers it with the OpenTelemetry SDK automatically.
+2. Remove any code that manually configures the OTLP logs endpoint. The Datadog SDK automatically registers the correct endpoint with the OpenTelemetry SDK.
 3. Set `DD_LOGS_OTEL_ENABLED=true`.
 {% /if %}
 
