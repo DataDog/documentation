@@ -13,10 +13,6 @@ further_reading:
       text: "Workload Identity Federation"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Service Access Tokens are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Service Access Tokens (SATs) are credentials that authenticate Datadog API calls on behalf of a
