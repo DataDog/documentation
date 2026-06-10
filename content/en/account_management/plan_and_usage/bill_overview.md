@@ -111,7 +111,7 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 
 ### Export billable hosts
 
-Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Plan & Usage page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
+Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Bill Overview page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
 
 To export the list:
 
