@@ -84,7 +84,7 @@ Use the following environment variable to enable log submission for agentless mo
 
 If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS_INJECTION=true` in the environment.
 
-#### Out of process logs
+#### Out-of-process logs
 
 When a separate process executes code triggered by a test, it needs a `trace_id` and `span_id` from that test trace to correlate its logs. Use `ddtrace.testing.logs.DDTestLogsHandler` (`ddtrace >= 4.11.0`) to ship those log records to the Datadog logs intake, correlated with the originating test trace.
 
@@ -107,7 +107,7 @@ When a separate process executes code triggered by a test, it needs a `trace_id`
 
 ##### Thread-per-worker
 
-For the common case of one thread per test worker, use `ThreadLocalCorrelationFilter` to associate each thread's log records with the correct test trace:
+For one thread per test worker, use `ThreadLocalCorrelationFilter` to associate each thread's log records with the correct test trace:
 
 ```python
 import logging
@@ -124,7 +124,7 @@ with DDTestLogsHandler(service="my-service") as handler:
         run_test(job.item)
 ```
 
-`DDTestLogsHandler` flushes buffered records automatically when used as a context manager. Call `handler.close()` explicitly if you do not use the context manager form.
+`DDTestLogsHandler` flushes buffered records automatically when used as a context manager. Call `handler.close()` if you do not use the context manager form.
 
 ##### Asyncio workers
 
