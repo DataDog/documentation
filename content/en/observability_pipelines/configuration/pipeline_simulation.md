@@ -2,6 +2,7 @@
 title: Pipeline Simulation
 disable_toc: false
 private: true
+description: Use Pipeline Simulation to preview how your processors modify your log data before deploying your pipeline configuration.
 further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
@@ -22,7 +23,7 @@ products:
 
 ## Overview
 
-When you configure or edit a pipeline in Observability Pipelines, you often have to update filter queries, sampling rules, or Packs that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.
+When you configure or edit a pipeline in Observability Pipelines, you often have to update filter queries, sampling rules, or [Packs][12] that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.
 
 Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your log data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify your logs as expected. You can test your configuration with live logs sent through the pipeline or import your own sample data.
 
@@ -30,7 +31,7 @@ To use Pipeline Simulation:
 
 1. [Capture a snapshot of your data](#capture-data-for-a-pipeline-simulation).
 1. [Run a simulation with that data for your processor configuration](#run-a-pipeline-simulation).
-1. Inspect the data that the processor group received and the modified data after it was processed. Confirm that the data modified after processing is as expected. If it is not, update your processors and run another simulation.
+1. Inspect the data the processor group received and the resulting output. Confirm the processed data is what you expect. If it is not, update your processors and run another simulation.
 1. After you validate that the processed data is what you expect, deploy the changes to production.
 
 The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
@@ -45,7 +46,7 @@ Datadog Admins have read and write permissions by default. Standard users only h
 
 ### Add domains to firewall allowlist
 
-If you want to use Pipeline Simulation and are using a firewall, you must add these domains to the allowlist:
+If you are using a firewall, add these domains to the allowlist:
 
 - `api.{{< region-param key="dd_site" >}}`
 - `obpipeline-intake.{{< region-param key="dd_site" >}}`
@@ -102,7 +103,7 @@ When you import sample data in JSON format, the data must be:
 - Structured as a set of JSON objects wrapped in an array
 - Comma separated between each log event
 
-Below is an example set of logs in JSON you can import for a simulation:
+The following is an example set of logs in JSON you can import for a simulation:
 
 ```json
 [
@@ -148,7 +149,7 @@ Below is an example set of logs in JSON you can import for a simulation:
 
 A JSONL file must contain multiple JSON objects, where each object is on its own line, separated by a newline.
 
-An example JSONL file you can import for a capture:
+The following is an example JSONL file you can import for a simulation:
 
 ```json
 {"name":"process_payload_ms.count","tags":{"host":"i-abcd123","version":"7.77.3"},"timestamp":"2026-05-08T20:16:10Z","interval_ms":10000,"kind":"incremental","counter":{"value":0.0}}

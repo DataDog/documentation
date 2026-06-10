@@ -48,7 +48,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{% tab "Logs" %}}
 
 1. Navigate to [Observability Pipelines][1].
-1. Select a [template][2] based on your use case or click **New Pipeline** on the top right side of the page..
+1. Select a [template][2] based on your use case or click **New Pipeline** on the top right side of the page.
 1. Select and set up a [log source][3].
 1. Add [processors][4] to transform, redact, and enrich your log data. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
