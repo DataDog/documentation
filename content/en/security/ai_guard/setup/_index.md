@@ -116,6 +116,42 @@ Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
 - A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
 
+### Add context with your system prompt {#system-prompt-context}
+
+AI Guard evaluates the full conversation, including your system prompt, when assessing threats. Adding context about your agent's purpose, the data it handles, and the tools it is authorized to use helps AI Guard distinguish legitimate operations from genuine threats—reducing false positives without reducing security coverage.
+
+#### What to include
+
+In your system prompt, describe:
+- **Agent purpose**: The agent's role and intended scope.
+- **Authorized data**: The categories of data the agent is expected to read, write, or export.
+- **Authorized tools**: The tools and operations the agent is permitted to call.
+
+#### Example
+
+A system prompt with minimal context is more likely to result in false positives for legitimate operations:
+
+```text
+You are a helpful assistant.
+```
+
+A system prompt with explicit context helps AI Guard evaluate intent accurately:
+
+```
+You are a financial data analyst assistant for internal employees. You are authorized to:
+- Query internal financial databases (read-only) using the `sql_query` tool.
+- Export query results to CSV or PDF using the `file_export` tool.
+- Retrieve and summarize internal financial reports.
+
+Do not access external systems or process requests unrelated to financial reporting.
+```
+
+With this context, AI Guard treats SQL queries and file exports as expected, authorized operations, and is less likely to flag them as data exfiltration or destructive tool calls.
+
+#### Limitations
+
+Do not use the system prompt to override AI Guard's security checks or to instruct AI Guard directly. AI Guard evaluates the system prompt as part of the conversation context, and ignores instructions that attempt to disable or weaken its own security checks.
+
 ## 6. (Optional) Limit access to AI Guard spans {#limit-access}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][9]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
