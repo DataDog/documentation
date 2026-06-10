@@ -87,7 +87,7 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 
 To disable the CI Visibility GitHub Actions integration:
 
-1. Go to the [CI GitHub Settings][14] page.
+1. Open [**CI/CD Settings** > **GitHub Actions**][14].
 2. Choose the GitHub account that you want to disable CI Visibility for, and click {{< ui >}}Account Enabled{{< /ui >}}.
 3. Untoggle {{< ui >}}Enable CI Visibility{{< /ui >}}, or choose which repository you want to disable it for individually.
 
@@ -147,7 +147,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [11]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [12]: https://app.datadoghq.com/integrations/github/
 [13]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[14]: https://app.datadoghq.com/ci/settings/provider
+[14]: https://app.datadoghq.com/ci/settings/ci-cd/github
 [15]: /logs/
 [16]: /logs/guide/best-practices-for-log-management/
 [17]: https://app.datadoghq.com/ci/pipelines

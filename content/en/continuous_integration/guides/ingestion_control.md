@@ -22,7 +22,7 @@ Exclusion filters are not required for setting up Pipeline Visibility. By defaul
 
 To create filters for your organization, your user account must have the `ci_ingestion_control_write` [permission][1].
 
-1. In Datadog, navigate to {{< ui >}}CI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Ingestion Settings{{< /ui >}}.
+1. In Datadog, open [{{< ui >}}CI/CD Settings{{< /ui >}} > {{< ui >}}Ingestion{{< /ui >}}][6].
 2. Select {{< ui >}}Add an Exclusion Filter{{< /ui >}}.
 
 {{< img src="ci/add-ci-exclusion-filter.png" alt="Add an Exclusion Filter button" style="width:90%;">}}
@@ -68,7 +68,7 @@ A toggle on the right hand side of each filter allows you to enable and disable 
 **Note**: In most scenarios, filters are applied to ingested data within <1 second (p95) of being enabled. However, it is possible that an enabled filter takes up to a few minutes to take effect.
 
 ### Updating filters
-You can rename a filter or modify the query for an exclusion filter at any time within the {{< ui >}}Ingestion Settings{{< /ui >}} page.
+You can rename a filter or modify the query for an exclusion filter at any time on the [{{< ui >}}CI/CD Settings{{< /ui >}} > {{< ui >}}Ingestion{{< /ui >}}][6] page.
 
 {{< img src="ci/exclusion-filter-edit.png" alt="Ingestion control edit exclusion filter button" style="width:90%;">}}
 
@@ -84,4 +84,4 @@ You can delete a filter by clicking on the deletion icon.
 [3]: /getting_started/tagging/
 [4]: /account_management/rbac/permissions/#ci-visibility
 [5]: /account_management/audit_trail/events/#ci-visibility-events
-[6]: /monitors/types/apm/
+[6]: https://app.datadoghq.com/ci/settings/ci-cd/ingestion
