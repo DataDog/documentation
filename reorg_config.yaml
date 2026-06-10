@@ -1,0 +1,123 @@
+# Files and folders that stay at the top level (not moved into hugo/).
+# Everything else moves into hugo/.
+
+top_level:
+  # Sites
+  - astro
+
+  # Repo scripts
+  - reorg.py
+  - reorg_rollback.py
+  - reorg_config.yaml
+
+  # Created by reorg.py as the move target
+  - hugo
+
+  # Git / CI / repo-wide tooling
+  - .git
+  - .github
+  - .gitlab-ci.yml
+  - .gitignore
+  - .gitattributes
+  - .husky
+  - .claude
+
+  # Editor / IDE config
+  - .editorconfig
+  - .vscode
+
+  # Repo docs
+  - README.md
+  - LICENSE
+  - CONTRIBUTING.md
+  - CLAUDE.md
+
+  # Node / Yarn (shared by both sites)
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - .yarnrc.yml
+  - .yarn
+  - node_modules
+  - .nvmrc
+
+  # Linting / formatting (shared)
+  - .eslintrc
+  - .eslintignore
+  - .vale.ini
+  - .rubocop.yml
+  - .prettierignore
+  - prettier.config.js
+  - static-analysis.datadog.yml
+
+  # Datadog CI / synthetics
+  - datadog-ci.preview.json
+  - general.preview.synthetics.json
+  - repository.datadog.yml
+
+  # Docker
+  - docker-compose-docs.yml
+
+  # Go module (top-level)
+  - go.mod
+  - go.sum
+
+moves_to_hugo:
+  # Hugo core
+  - archetypes
+  - assets
+  - config
+  - content
+  - data
+  - i18n
+  - layouts
+  - static
+  - resources
+  - public
+
+  # Hugo build tooling
+  - Makefile
+  - Makefile.config
+  - Makefile.config.example
+  - local
+  - hugpython
+  - gradle
+  - _vendor
+
+  # Hugo build artifacts / state
+  - .hugo_build.lock
+  - logs
+  - integrations_data
+
+  # Node / JS (Hugo-specific)
+  - babel.config.js
+  - jest.config.js
+  - postcss.config.js
+  - markdoc.config.json
+  - customization_config
+
+  # Testing (Hugo-specific)
+  - playwright.config.ts
+  - playwright-report
+  - test-results
+  - e2e
+
+  # Content tooling
+  - translate.yaml
+  - .translate
+  - typesense.config.json
+  - .htmltest.yml
+  - .apigentools-info
+  - agent_config_types_list.txt
+
+  # Examples / docs
+  - examples
+  - docs
+  - plans
+
+  # Static assets (Hugo)
+  - usage-notifications-email.png
+
+ignore:
+  # macOS metadata
+  - .DS_Store
