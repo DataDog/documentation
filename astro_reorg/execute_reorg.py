@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import difflib
 import os
 import sys
 from pathlib import Path
@@ -19,28 +18,6 @@ with config_path.open() as f:
 top_level = set(config.get("top_level", []))
 moves_to_hugo = set(config.get("moves_to_hugo", []))
 ignore = set(config.get("ignore", []))
-
-
-def show_diff(original: str, updated: str, filename: str = "") -> None:
-    """Print a colored unified diff between original and updated text."""
-    orig_lines = original.splitlines(keepends=True)
-    upd_lines = updated.splitlines(keepends=True)
-    diff = list(difflib.unified_diff(
-        orig_lines, upd_lines,
-        fromfile=f"a/{filename}", tofile=f"b/{filename}",
-        n=2,
-    ))
-    if not diff:
-        return
-    for line in diff:
-        if line.startswith("+") and not line.startswith("+++"):
-            print(f"\033[32m{line}\033[0m", end="")
-        elif line.startswith("-") and not line.startswith("---"):
-            print(f"\033[31m{line}\033[0m", end="")
-        elif line.startswith("@@"):
-            print(f"\033[36m{line}\033[0m", end="")
-        else:
-            print(line, end="")
 
 # Sanity-check the config itself for conflicts.
 conflicts = top_level & moves_to_hugo
@@ -130,18 +107,13 @@ for raw in gi_lines:
         hugo_lines.append(raw)
         both_segments.add(segment)
 
-print(f"\n  .gitignore: {len(hugo_only_segments)} segment(s) -> hugo/.gitignore only, "
-      f"{len(both_segments)} generic kept in both")
-print(f"    root: {len(root_lines)} line(s), hugo/: {len(hugo_lines)} line(s) "
-      f"(was {len(gi_lines)} duplicated wholesale)")
-answer = input("  Apply? [y/N] ").strip().lower()
-if answer == "y":
-    gitignore.write_text("".join(root_lines))
-    (hugo_dir / ".gitignore").write_text("".join(hugo_lines))
-    print("  Written: .gitignore (root, pruned) and hugo/.gitignore")
-    if both_segments:
-        print("  NOTE: kept in both (first path segment not in astro_reorg/config.yaml): "
-              + ", ".join(sorted(both_segments)))
+gitignore.write_text("".join(root_lines))
+(hugo_dir / ".gitignore").write_text("".join(hugo_lines))
+print(f"  Written: .gitignore (root, pruned) and hugo/.gitignore "
+      f"({len(hugo_only_segments)} segment(s) -> hugo/ only, {len(both_segments)} generic kept in both)")
+if both_segments:
+    print("  NOTE: kept in both (first path segment not in astro_reorg/config.yaml): "
+          + ", ".join(sorted(both_segments)))
 
 # Update .github/workflows/ files to reference paths under hugo/.
 WORKFLOW_SUBSTITUTIONS = [
@@ -164,13 +136,7 @@ for yml_file in sorted(workflows_dir.glob("*.yml")):
     original = yml_file.read_text()
     updated = original
     for old, new in WORKFLOW_SUBSTITUTIONS:
-        if old not in updated:
-            continue
-        print(f"\n  {yml_file.name}: {old!r} → {new!r}")
-        show_diff(updated, updated.replace(old, new), yml_file.name)
-        answer = input("  Apply? [y/N] ").strip().lower()
-        if answer == "y":
-            updated = updated.replace(old, new)
+        updated = updated.replace(old, new)
     if updated != original:
         yml_file.write_text(updated)
         print(f"  Written: {yml_file.name}")
@@ -193,13 +159,7 @@ for py_file in sorted(husky_dir.glob("*.py")):
     original = py_file.read_text()
     updated = original
     for old, new in HUSKY_SUBSTITUTIONS:
-        if old not in updated:
-            continue
-        print(f"\n  {py_file.name}: {old!r} → {new!r}")
-        show_diff(updated, updated.replace(old, new), py_file.name)
-        answer = input("  Apply? [y/N] ").strip().lower()
-        if answer == "y":
-            updated = updated.replace(old, new)
+        updated = updated.replace(old, new)
     if updated != original:
         py_file.write_text(updated)
         print(f"  Written: {py_file.name}")
@@ -246,12 +206,9 @@ def route_codeowners_pattern(pattern):
 print("\nUpdating .github/CODEOWNERS...")
 codeowners = repo_root / ".github" / "CODEOWNERS"
 lines = codeowners.read_text().splitlines(keepends=True)
-
-# Group rewritable lines by first path segment so we prompt once per segment
-# (one y/N covers every "content/..." rule) instead of once per line.
-changes_by_segment = {}   # segment -> list of (line_index, old_pattern, new_line)
 left_alone = set()        # first segments in neither config list (surfaced below)
 
+changed = False
 for i, raw in enumerate(lines):
     newline = "\n" if raw.endswith("\n") else ""
     line = raw[:-len(newline)] if newline else raw
@@ -266,31 +223,13 @@ for i, raw in enumerate(lines):
         if segment is not None and segment not in top_level:
             left_alone.add(segment)
         continue
-    changes_by_segment.setdefault(segment, []).append(
-        (i, pattern, indent + new_pattern + rest + newline)
-    )
-
-applied = False
-for segment in sorted(changes_by_segment):
-    entries = changes_by_segment[segment]
-    old_pattern = entries[0][1]
-    new_pattern = entries[0][2].lstrip().split(maxsplit=1)[0]
-    print(f"\n  CODEOWNERS: prefix {len(entries)} pattern(s) under {segment!r} "
-          f"with hugo/  (e.g. {old_pattern!r} → {new_pattern!r})")
-    preview = lines[:]
-    for idx, _, new_line in entries:
-        preview[idx] = new_line
-    show_diff("".join(lines), "".join(preview), "CODEOWNERS")
-    answer = input("  Apply? [y/N] ").strip().lower()
-    if answer == "y":
-        for idx, _, new_line in entries:
-            lines[idx] = new_line
-        applied = True
+    lines[i] = indent + new_pattern + rest + newline
+    changed = True
 
 if left_alone:
     print("\n  NOTE: left unchanged (first path segment not in astro_reorg/config.yaml): "
           + ", ".join(sorted(left_alone)))
 
-if applied:
+if changed:
     codeowners.write_text("".join(lines))
     print("  Written: CODEOWNERS")
