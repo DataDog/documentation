@@ -9,7 +9,7 @@ Select a setup method based on your application stack and workflow:
 
 - **Manual client-side setup**: Add the SDK directly to your frontend code when you need full control over initialization and configuration.
 - **Agentic Onboarding**: Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
-- **Server-side auto-instrumentation (RUM only)**: Inject the SDK through your web server or proxy when you can't modify frontend code directly.
+- **Server-side auto-instrumentation (RUM only)**: Inject the SDK through your web server or proxy when you cannot modify frontend code directly.
 
 The Browser SDK supports all modern desktop and mobile browsers.
 
@@ -331,7 +331,7 @@ RUM Auto-Instrumentation is not available for the selected site ({% region-param
 {% /site-region %}
 
 {% alert level="info" %}
-Server-side auto-instrumentation only supports RUM. For Error Tracking, Session Replay, or Product Analytics, use Option 1 (manual client-side setup).
+Server-side auto-instrumentation only supports RUM. For Error Tracking, Session Replay, or Product Analytics, use [manual client-side setup][14].
 {% /alert %}
 
 RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
