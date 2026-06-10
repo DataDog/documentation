@@ -109,7 +109,7 @@ Use `feedback_join_key` when feedback is not tied to a single span, trace, or se
 
 To create a dashboard widget for feedback, create the widget as you would for an evaluation and add the filter `@event_kind:feedback`.
 
-<div class="alert alert-info">Support for filtering spans, traces, or sessions by feedback will be added soon. For example, you cannot yet filter traces to only traces with thumbs-down feedback. Use dashboards scoped to <code>@event_kind:feedback</code> until feedback filtering is available.</div>
+<div class="alert alert-info">Support for filtering spans, traces, or sessions by feedback is not available. For example, you cannot yet filter traces to only traces with thumbs-down feedback. Use dashboards scoped to <code>@event_kind:feedback</code> instead.</div>
 
 ## Further Reading
 
