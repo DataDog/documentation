@@ -40,8 +40,8 @@ To create a routing rule:
    - **Send Microsoft Teams message** (Preview): Select a Teams tenant, team, and channel.
    - **Run Workflow** (Preview): Select an existing [Workflow][4].
 
-1. If you selected **Page escalation policy**, optionally configure [acknowledgement timeout](#acknowledgement-timeout):
-   1. Toggle on **Acknowledgement timeout**.
+1. If you selected **Page escalation policy**, optionally configure [acknowledgment timeout](#acknowledgment-timeout):
+   1. Toggle on **Acknowledgment timeout**.
    1. Set the timeout duration.
 
 1. Add more rules as needed, and click **Save**.
@@ -89,14 +89,14 @@ Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m., both 
 
 {{% /collapse-content %}}
 
-### Acknowledgement timeout
+### Acknowledgment timeout
 
-When you add an escalation policy as a target, you can enable **Acknowledgement timeout**. When enabled, if a page is acknowledged but not resolved within the configured duration, Datadog moves it back to triggered and re-notifies whoever is currently on-call.
+When you add an escalation policy as a target, you can enable **Acknowledgement timeout**. When enabled, if a Page is acknowledged but not resolved within the configured duration, Datadog moves it back to triggered and re-notifies the active on-call responder.
 
-To configure acknowledgement timeout:
+To configure acknowledgment timeout:
 
 1. Under **Set targets**, select **Page escalation policy** as the target type.
-1. Toggle on **Acknowledgement timeout**.
+1. Toggle on **Acknowledgment timeout**.
 1. Set the timeout duration.
 
 ### Pages in Slack and Microsoft Teams
