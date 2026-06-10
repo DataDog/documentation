@@ -129,7 +129,7 @@ In your system prompt, describe:
 
 #### Example
 
-A system prompt with minimal context is more likely to produce false positives for legitimate operations:
+A system prompt with minimal context is more likely to result in false positives for legitimate operations:
 
 ```
 You are a helpful assistant.
