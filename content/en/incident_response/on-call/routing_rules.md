@@ -91,7 +91,7 @@ Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m., both 
 
 ### Acknowledgment timeout
 
-When you add an escalation policy as a target, you can enable **Acknowledgement timeout**. When enabled, if a Page is acknowledged but not resolved within the configured duration, Datadog moves it back to triggered and re-notifies the active on-call responder.
+When you add an escalation policy as a target, you can enable **Acknowledgment timeout**. When enabled, if a Page is acknowledged but not resolved within the configured duration, Datadog moves it back to triggered and re-notifies the active on-call responder.
 
 To configure acknowledgment timeout:
 
