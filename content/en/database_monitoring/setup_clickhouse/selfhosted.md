@@ -128,7 +128,7 @@ GRANT SELECT ON system.query_log TO datadog;
 
 The `system.processes` and `system.query_log` grants are required for DBM query collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
 
-If you are enabling **schema collection** (Agent 7.81+), add the following grants:
+To enable **schema collection** (Agent 7.81+), add the following grants:
 
 ```sql
 GRANT SELECT ON system.tables TO datadog;
