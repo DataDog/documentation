@@ -22,6 +22,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn more about Source Code Integration"
+cascade:
+  site_support_id: ide_plugins_idea
 ---
 
 {{% site-region region="gov,gov2" %}}
