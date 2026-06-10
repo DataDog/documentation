@@ -130,7 +130,7 @@ The CSV contains one row per host with the following columns:
 | `Usage Value` | For organizations billed at the 99th percentile, `1` per host. For organizations billed on a sum basis, the host's host-hours over the month, for example `720` for a host present for a full 30-day month. |
 | `Tags` | A JSON object of the host's key-value tags. Empty (`{}`) when the host has no tags. |
 
-The sum of `Usage Value` across all rows matches the Infra Hosts total shown on the Plan & Usage page: a host count for organizations billed at the 99th percentile, and host-hours for organizations billed on a sum basis.
+The sum of `Usage Value` across all rows matches the Infra Hosts total shown on the Bill Overview page: a host count for organizations billed at the 99th percentile, and host-hours for organizations billed on a sum basis.
 
 ## Revert to the previous layout
 
