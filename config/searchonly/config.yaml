@@ -6,8 +6,8 @@ disableLanguages:
 
 module:
   mounts:
-    - source: content/en/mcp_server
-      target: content/mcp_server
+    - source: content/en/api
+      target: content/api
       lang: en
     - source: layouts
       target: layouts
