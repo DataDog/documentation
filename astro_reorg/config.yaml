@@ -121,3 +121,5 @@ moves_to_hugo:
 ignore:
   # macOS metadata
   - .DS_Store
+  # Python bytecode cache
+  - __pycache__
