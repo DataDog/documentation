@@ -16,7 +16,7 @@ The serverless OTLP traces intake endpoint is in Preview.
 
 ## Overview
 
-Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead; this page covers platforms without one. This page covers traces only. For metrics and logs, see the [OTLP logs][3] and [OTLP metrics][4] intake endpoints.
+Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead; this page covers traces from platforms without a dedicated endpoint. For metrics and logs, see the [OTLP logs][3] and [OTLP metrics][4] intake endpoints.
 
 Supported platforms:
 
@@ -70,26 +70,27 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-sourc
 export OTEL_SERVICE_NAME="my-lambda-function"
 ```
 
-The ADOT layer handles resource attribute detection automatically. To set resource attributes manually, `cloud.provider` and `faas.id` (a parseable Lambda ARN) are required:
+The ADOT layer handles resource attribute detection automatically. To set resource attributes manually, `cloud.provider` is required. Set `faas.id` (a parseable Lambda ARN) for full platform identification; if `faas.id` is not available, set `cloud.platform=aws_lambda` instead:
 
 ```shell
 export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,faas.id=arn:aws:lambda:us-east-1:123456789012:function:my-function"
 ```
 
-If `faas.id` is not set, add `cloud.platform=aws_lambda` so Datadog can identify the platform.
-
 <!-- TODO: Eng to confirm whether backend accepts cloud.resource_id (faas.id is deprecated in OTel semconv). -->
+<!-- TODO: Source docs disagree on whether compute_stats=true is required or optional for serverless. Eng to confirm whether serverless trace metrics should default on. -->
 
 | Attribute | Required | Description |
 |---|---|---|
 | `cloud.provider` | Yes | Set to `aws` |
-| `faas.id` | Yes | Lambda function ARN |
+| `faas.id` | Recommended | Lambda function ARN (preferred for platform identification) |
 | `cloud.platform` | Conditional | Set to `aws_lambda` if `faas.id` is not set |
 | `cloud.region` | No | AWS region |
 | `faas.name` | No | Function name |
 | `faas.version` | No | Function version |
 | `faas.instance` | No | Instance identifier |
 | `faas.max_memory` | No | Max memory configured (bytes) |
+| `aws.log.group.names` | No | CloudWatch log group names (enables trace-log correlation) |
+| `aws.log.stream.names` | No | CloudWatch log stream names |
 
 ### ECS Fargate
 
@@ -115,6 +116,8 @@ export OTEL_RESOURCE_ATTRIBUTES="aws.ecs.task.arn=arn:aws:ecs:us-east-1:12345678
 | `aws.ecs.task.family` | No | Task definition family |
 | `aws.ecs.task.id` | No | Task ID |
 | `aws.ecs.task.revision` | No | Task definition revision |
+| `aws.log.group.names` | No | CloudWatch log group names (enables trace-log correlation) |
+| `aws.log.stream.names` | No | CloudWatch log stream names |
 
 [100]: https://aws-otel.github.io/docs/getting-started/lambda
 

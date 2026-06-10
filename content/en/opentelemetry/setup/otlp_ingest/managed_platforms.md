@@ -85,6 +85,8 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Trigger.dev | `triggerdev` | — |
 | Vercel | `vercel` | [Vercel Marketplace][17] |
 
+To enable OTLP export from a managed platform not listed above, contact your Customer Success Manager.
+
 ## Limitations
 
 ### No client-side buffering or retry
@@ -97,7 +99,7 @@ Trace metrics are not computed by default because traffic from managed platforms
 
 ### Feature coverage
 
-Some Datadog features depend on metadata added by the Collector or Agent (for example, the Infrastructure Host List). See the [OpenTelemetry compatibility list][4] for features that are unavailable when using direct ingest endpoints.
+Some Datadog features depend on metadata added by the Collector or Agent (for example, the Infrastructure Host List). See the [OpenTelemetry compatibility list][4] for features that are unavailable when using direct ingest endpoints. Sampling ability is also limited in this setup.
 
 ## Further reading
 
