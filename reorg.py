@@ -59,3 +59,209 @@ for name in sorted(os.listdir(repo_root)):
     moved += 1
 
 print(f"Done. {moved} item(s) moved into hugo/.")
+
+# Split .gitignore between the root and hugo/ instead of copying it wholesale.
+#
+# A .gitignore is interpreted RELATIVE TO ITS OWN DIRECTORY, so — unlike
+# CODEOWNERS — a moved rule needs NO "hugo/" prefix; it simply belongs in
+# hugo/.gitignore. We therefore only ROUTE each line, never rewrite it, by its
+# FIRST PATH SEGMENT (driven entirely by reorg_config.yaml, same as CODEOWNERS):
+#   first segment in moves_to_hugo  -> hugo/.gitignore only
+#   first segment in top_level      -> root .gitignore only
+#   first segment in neither         -> generic/pure glob, kept in BOTH
+# Comments and blank lines are kept in both to preserve section readability.
+def route_gitignore_segment(line):
+    """Return the first path segment of a .gitignore pattern, or None for a
+    comment/blank line. A leading '!' (negation) and '/' (root anchor) are
+    stripped before taking segment 0; the line text itself is never altered.
+    """
+    stripped = line.strip()
+    if not stripped or stripped.startswith("#"):
+        return None
+    body = stripped[1:] if stripped.startswith("!") else stripped   # un-negate
+    body = body.lstrip("/")                                          # un-anchor
+    return body.split("/", 1)[0]
+
+
+print("\nSplitting .gitignore between root and hugo/...")
+gitignore = repo_root / ".gitignore"
+gi_lines = gitignore.read_text().splitlines(keepends=True)
+
+root_lines = []
+hugo_lines = []
+hugo_only_segments = set()   # routed off root into hugo/ (for the summary)
+both_segments = set()        # in neither config list -> kept in both (surfaced)
+
+for raw in gi_lines:
+    segment = route_gitignore_segment(raw)
+    if segment is None:                       # comment / blank -> keep in both
+        root_lines.append(raw)
+        hugo_lines.append(raw)
+    elif segment in moves_to_hugo:
+        hugo_lines.append(raw)
+        hugo_only_segments.add(segment)
+    elif segment in top_level:
+        root_lines.append(raw)
+    else:
+        root_lines.append(raw)
+        hugo_lines.append(raw)
+        both_segments.add(segment)
+
+print(f"\n  .gitignore: {len(hugo_only_segments)} segment(s) -> hugo/.gitignore only, "
+      f"{len(both_segments)} generic kept in both")
+print(f"    root: {len(root_lines)} line(s), hugo/: {len(hugo_lines)} line(s) "
+      f"(was {len(gi_lines)} duplicated wholesale)")
+answer = input("  Apply? [y/N] ").strip().lower()
+if answer == "y":
+    gitignore.write_text("".join(root_lines))
+    (hugo_dir / ".gitignore").write_text("".join(hugo_lines))
+    print("  Written: .gitignore (root, pruned) and hugo/.gitignore")
+    if both_segments:
+        print("  NOTE: kept in both (first path segment not in reorg_config.yaml): "
+              + ", ".join(sorted(both_segments)))
+
+# Update .github/workflows/ files to reference paths under hugo/.
+WORKFLOW_SUBSTITUTIONS = [
+    ("- 'content/en/",           "- 'hugo/content/en/"),
+    ("- 'layouts/shortcodes/",   "- 'hugo/layouts/shortcodes/"),
+    ("- 'static/images/",        "- 'hugo/static/images/"),
+    ("python local/bin/",        "python hugo/local/bin/"),
+    # vale_linter.yml passes the template path to vale via --output=
+    ("--output=local/bin/",      "--output=hugo/local/bin/"),
+    (" static |",                " hugo/static |"),
+    ("^static/images/",          "^hugo/static/images/"),
+    ("-- 'content/en/**/*.md'",  "-- 'hugo/content/en/**/*.md'"),
+    # bump_* and version_getter_shared workflows cp/commit data files by ./ path
+    ("./data/",                  "./hugo/data/"),
+]
+
+print("\nUpdating .github/workflows/...")
+workflows_dir = repo_root / ".github" / "workflows"
+for yml_file in sorted(workflows_dir.glob("*.yml")):
+    original = yml_file.read_text()
+    updated = original
+    for old, new in WORKFLOW_SUBSTITUTIONS:
+        if old not in updated:
+            continue
+        print(f"\n  {yml_file.name}: {old!r} → {new!r}")
+        answer = input("  Apply? [y/N] ").strip().lower()
+        if answer == "y":
+            updated = updated.replace(old, new)
+    if updated != original:
+        yml_file.write_text(updated)
+        print(f"  Written: {yml_file.name}")
+
+# Update .husky/ hook scripts to reference paths under hugo/content/.
+HUSKY_SUBSTITUTIONS = [
+    ("content/en/{dir_name}/{name}",  "hugo/content/en/{dir_name}/{name}"),
+    ("content/en/{dir_name}/",        "hugo/content/en/{dir_name}/"),
+    ("Path('content/en')",            "Path('hugo/content/en')"),
+    ('Path("content/.gitignore")',    'Path("hugo/content/.gitignore")'),
+    ("f.startswith('content/en/')",   "f.startswith('hugo/content/en/')"),
+    (".replace('content/en/', '')",   ".replace('hugo/content/en/', '')"),
+    ("repo_root / 'content' / 'en'",  "repo_root / 'hugo' / 'content' / 'en'"),
+    ('repo_pattern = "content"',      'repo_pattern = "hugo/content"'),
+]
+
+print("\nUpdating .husky/...")
+husky_dir = repo_root / ".husky"
+for py_file in sorted(husky_dir.glob("*.py")):
+    original = py_file.read_text()
+    updated = original
+    for old, new in HUSKY_SUBSTITUTIONS:
+        if old not in updated:
+            continue
+        print(f"\n  {py_file.name}: {old!r} → {new!r}")
+        answer = input("  Apply? [y/N] ").strip().lower()
+        if answer == "y":
+            updated = updated.replace(old, new)
+    if updated != original:
+        py_file.write_text(updated)
+        print(f"  Written: {py_file.name}")
+
+# Update .github/CODEOWNERS to reference paths under hugo/.
+#
+# CODEOWNERS is not YAML; it is a line-based format where each rule is
+# "<pattern>  <owner...>". Rather than blanket str.replace() over the whole
+# file (which let a short pattern like "config/" corrupt a longer one like
+# "customization_config/"), we parse each line and route its pattern by its
+# FIRST PATH SEGMENT. The decision is made on a whole segment, never a raw
+# substring, so "config" can never match inside "customization_config" and the
+# substitution list no longer has to be hand-ordered or kept in sync with the
+# move list — it is derived entirely from reorg_config.yaml.
+def route_codeowners_pattern(pattern):
+    """Rewrite one CODEOWNERS pattern for the hugo/ move.
+
+    Returns (segment, new_pattern). new_pattern is None when the line is left
+    untouched; segment is None for the global '*' owner. A leading '/'
+    (repo-root anchor) is preserved; owners are never touched because we only
+    ever rewrite the pattern token.
+    """
+    if pattern == "*":
+        return None, None
+
+    anchored = pattern.startswith("/")          # leading '/' = repo-root-anchored
+    body = pattern[1:] if anchored else pattern
+    segment = body.split("/", 1)[0]
+
+    # Carried over from the original script: ".local/" is a misspelling of
+    # "local/" (which moves into hugo/). Normalize the segment before routing
+    # so the typo'd entry is repathed alongside the real one.
+    if segment == ".local":
+        body = "local" + body[len(".local"):]
+        segment = "local"
+
+    if segment not in moves_to_hugo:
+        return segment, None
+
+    new_body = "hugo/" + body
+    return segment, (("/" + new_body) if anchored else new_body)
+
+
+print("\nUpdating .github/CODEOWNERS...")
+codeowners = repo_root / ".github" / "CODEOWNERS"
+lines = codeowners.read_text().splitlines(keepends=True)
+
+# Group rewritable lines by first path segment so we prompt once per segment
+# (one y/N covers every "content/..." rule) instead of once per line.
+changes_by_segment = {}   # segment -> list of (line_index, old_pattern, new_line)
+left_alone = set()        # first segments in neither config list (surfaced below)
+
+for i, raw in enumerate(lines):
+    newline = "\n" if raw.endswith("\n") else ""
+    line = raw[:-len(newline)] if newline else raw
+    stripped = line.lstrip()
+    if not stripped or stripped.startswith("#"):
+        continue
+    indent = line[:len(line) - len(stripped)]
+    pattern = stripped.split(maxsplit=1)[0]
+    rest = stripped[len(pattern):]            # original spacing + owners, verbatim
+    segment, new_pattern = route_codeowners_pattern(pattern)
+    if new_pattern is None:
+        if segment is not None and segment not in top_level:
+            left_alone.add(segment)
+        continue
+    changes_by_segment.setdefault(segment, []).append(
+        (i, pattern, indent + new_pattern + rest + newline)
+    )
+
+applied = False
+for segment in sorted(changes_by_segment):
+    entries = changes_by_segment[segment]
+    old_pattern = entries[0][1]
+    new_pattern = entries[0][2].lstrip().split(maxsplit=1)[0]
+    print(f"\n  CODEOWNERS: prefix {len(entries)} pattern(s) under {segment!r} "
+          f"with hugo/  (e.g. {old_pattern!r} → {new_pattern!r})")
+    answer = input("  Apply? [y/N] ").strip().lower()
+    if answer == "y":
+        for idx, _, new_line in entries:
+            lines[idx] = new_line
+        applied = True
+
+if left_alone:
+    print("\n  NOTE: left unchanged (first path segment not in reorg_config.yaml): "
+          + ", ".join(sorted(left_alone)))
+
+if applied:
+    codeowners.write_text("".join(lines))
+    print("  Written: CODEOWNERS")

@@ -9,6 +9,9 @@ top_level:
   - reorg.py
   - reorg_rollback.py
   - reorg_config.yaml
+  - reorg_harness.py
+  - reorg_context.md
+  - reorg_issues.md
 
   # Created by reorg.py as the move target
   - hugo
@@ -32,15 +35,6 @@ top_level:
   - CONTRIBUTING.md
   - CLAUDE.md
 
-  # Node / Yarn (shared by both sites)
-  - package.json
-  - package-lock.json
-  - yarn.lock
-  - .yarnrc.yml
-  - .yarn
-  - node_modules
-  - .nvmrc
-
   # Linting / formatting (shared)
   - .eslintrc
   - .eslintignore
@@ -57,10 +51,6 @@ top_level:
 
   # Docker
   - docker-compose-docs.yml
-
-  # Go module (top-level)
-  - go.mod
-  - go.sum
 
 moves_to_hugo:
   # Hugo core
@@ -95,6 +85,20 @@ moves_to_hugo:
   - postcss.config.js
   - markdoc.config.json
   - customization_config
+
+  # Go module — powers Hugo Modules (imports websites-modules, vendors into
+  # _vendor/). Hugo requires go.mod in the project root; Astro uses no Go.
+  - go.mod
+  - go.sum
+
+  # Node / Yarn (Hugo site owns these; Astro has its own under astro/)
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - .yarnrc.yml
+  - .yarn
+  - node_modules
+  - .nvmrc
 
   # Testing (Hugo-specific)
   - playwright.config.ts
