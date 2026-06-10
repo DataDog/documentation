@@ -322,7 +322,7 @@ Use the [Agentic Onboarding][10] page to instrument your browser application usi
 
 {% /collapse-content %}
 
-{% collapse-content title="Option 3: Server-side auto-instrumentation" level="h3" %}
+{% collapse-content title="Option 3: Server-side auto-instrumentation (RUM only)" level="h3" %}
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
