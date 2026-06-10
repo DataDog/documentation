@@ -89,7 +89,7 @@ Toggle between {{< ui >}}Monthly{{< /ui >}} and {{< ui >}}Daily{{< /ui >}} views
 
 Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the {{< ui >}}Product List{{< /ui >}} table to open the product detail page for a single billing dimension.
 
-{{< img src="account_management/plan_and_usage/bill-overview-detail-light.png" alt="Product detail page showing Cost Overview and Usage Overview sections with daily bar charts" >}}
+{{< img src="account_management/plan_and_usage/bill-overview-detail-light-2.png" alt="Product detail page showing Cost Overview and Usage Overview sections, including the Download Billable Hosts as CSV button" >}}
 
 ### Cost Overview
 
