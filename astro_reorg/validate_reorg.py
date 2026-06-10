@@ -73,7 +73,7 @@ def git(*args, check=False):
 
 
 def load_config():
-    """Load reorg/config.yaml and return (top_level, moves_to_hugo) name sets."""
+    """Load astro_reorg/config.yaml and return (top_level, moves_to_hugo) name sets."""
     config_path = Path(__file__).parent / "config.yaml"
     with config_path.open() as f:
         config = yaml.safe_load(f)
@@ -462,7 +462,7 @@ def check_husky_circular_aliases():
         "aliases:\n"
         f"  - /{MARKER}_alias/selftest\n"
         "---\n\n"
-        "Temporary file created by reorg/validate_reorg.py.\n"
+        "Temporary file created by astro_reorg/validate_reorg.py.\n"
     )
     try:
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -680,7 +680,7 @@ def check_rollback_roundtrip():
 
     try:
         # Representative fixture. Every top-level name here must appear in
-        # reorg/config.yaml or execute_reorg.py refuses to run; the mix below routes
+        # astro_reorg/config.yaml or execute_reorg.py refuses to run; the mix below routes
         # across moves_to_hugo, top_level, and generic-glob cases.
         write(".gitignore",
               "# build\n"
@@ -724,10 +724,10 @@ def check_rollback_roundtrip():
         write("babel.config.js", "module.exports = {};\n")
 
         # The scripts resolve repo_root as their parent's parent, so place them
-        # under a reorg/ subfolder that mirrors the real repo layout.
-        (work / "reorg").mkdir()
+        # under an astro_reorg/ subfolder that mirrors the real repo layout.
+        (work / "astro_reorg").mkdir()
         for tool in ("execute_reorg.py", "rollback.py", "config.yaml"):
-            shutil.copy2(repo_root / "reorg" / tool, work / "reorg" / tool)
+            shutil.copy2(repo_root / "astro_reorg" / tool, work / "astro_reorg" / tool)
 
         git_work("init", "-q")
         git_work("add", "-A")
@@ -745,7 +745,7 @@ def check_rollback_roundtrip():
         # execute_reorg.py is interactive (single y/N per mutation section); answer y to
         # all. Far more lines than prompts is fine — the extras are ignored.
         reorg = subprocess.run(
-            ["python3", str(work / "reorg" / "execute_reorg.py")],
+            ["python3", str(work / "astro_reorg" / "execute_reorg.py")],
             cwd=work, capture_output=True, text=True, input="y\n" * 100,
         )
         if reorg.returncode != 0 or not (work / "hugo").exists():
@@ -754,7 +754,7 @@ def check_rollback_roundtrip():
             return
 
         rollback = subprocess.run(
-            ["python3", str(work / "reorg" / "rollback.py")],
+            ["python3", str(work / "astro_reorg" / "rollback.py")],
             cwd=work, capture_output=True, text=True,
         )
         if rollback.returncode != 0 or (work / "hugo").exists():
@@ -787,7 +787,7 @@ def check_rollback_roundtrip():
 
 def main():
     if not hugo_dir.exists():
-        print("hugo/ does not exist — run reorg/execute_reorg.py first.", file=sys.stderr)
+        print("hugo/ does not exist — run astro_reorg/execute_reorg.py first.", file=sys.stderr)
         sys.exit(1)
 
     branch = git("branch", "--show-current").stdout.strip()

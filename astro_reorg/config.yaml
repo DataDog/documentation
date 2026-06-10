@@ -6,7 +6,7 @@ top_level:
   - astro
 
   # Repo scripts
-  - reorg
+  - astro_reorg
   - reorg_issues.md
 
   # Created by reorg.py as the move target
