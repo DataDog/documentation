@@ -63,7 +63,7 @@ Database Monitoring collects the following data from ClickHouse:
   /*key1='val1',key2='val2'*/ SELECT * FROM foo
   ```
 
-  Tags appear on the Sample Details page under **Propagated Tags** and can be used to filter the Explain Plans and Query Samples views. See [Tagging SQL Statements][tag-statements] for full details.
+  Tags appear on the Sample Details page under **Propagated Tags** and can be used to filter the **Explain Plans** and **Query Samples** views. See [Tagging SQL Statements][tag-statements] for full details.
 
 [sqlcommenter]: https://google.github.io/sqlcommenter
 [marginalia]: https://github.com/basecamp/marginalia
