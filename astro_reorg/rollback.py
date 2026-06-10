@@ -12,6 +12,7 @@ if not hugo_dir.exists():
     sys.exit(1)
 
 moved = 0
+moved_names = []
 for name in sorted(os.listdir(hugo_dir)):
     # reorg.py SPLITS .gitignore in place (it prunes the root copy and writes a
     # routed subset to hugo/.gitignore). Skip it here so this rename can't clobber
@@ -24,6 +25,7 @@ for name in sorted(os.listdir(hugo_dir)):
     print(f"Moving hugo/{name} -> {name}")
     src.rename(dst)
     moved += 1
+    moved_names.append(name)
 
 # Discard the hugo/.gitignore the split created before emptying the directory.
 gitignore_copy = hugo_dir / ".gitignore"
@@ -46,3 +48,27 @@ subprocess.run(
     check=True,
 )
 print("Restored .gitignore, .github/workflows/, .github/CODEOWNERS, and .husky/ from git.")
+
+# The move-back above restores whatever was in hugo/ verbatim — but a build run
+# between execute_reorg.py and this rollback (e.g. `make start`) can clean
+# committed-but-generated files (API code examples, service_checks JSON,
+# integration pages) and, if interrupted, never regenerate them. That leaves the
+# moved tree INCOMPLETE, so rollback alone wouldn't restore a clean working tree.
+# Restore the moved, git-tracked paths to their committed state to absorb that.
+#
+# Scope strictly to the names we moved: astro_reorg/ and other untouched root
+# paths are never passed to checkout. Filter to paths git actually tracks so
+# untracked/ignored moves (node_modules, public, _vendor, resources) are skipped
+# — passing one of those to `git checkout` would match no tracked files and
+# abort the whole restore.
+tracked = subprocess.run(
+    ["git", "ls-files", "--", *moved_names],
+    cwd=repo_root, capture_output=True, text=True, check=True,
+).stdout.split()
+tracked_top = sorted({Path(p).parts[0] for p in tracked})
+if tracked_top:
+    subprocess.run(
+        ["git", "checkout", "--", *tracked_top],
+        cwd=repo_root, check=True,
+    )
+    print(f"Restored moved tracked paths to HEAD: {', '.join(tracked_top)}")
