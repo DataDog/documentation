@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
-  text: "Learn about LLM Observability"
+  text: "Learn about Agent Observability"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability Key Terms and Concepts"
+  text: "Learn about Agent Observability Key Terms and Concepts"
 - link: "/llm_observability/experiments/datasets"
   tag: "Documentation"
   text: "Learn about Datasets"
