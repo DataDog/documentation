@@ -240,18 +240,12 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 
 ### Slack notifications are not delivered
 
-If Slack notifications are not being delivered, verify that the handle format in your
-notification rule includes the Slack account name:
+If Slack notifications are not being delivered, check that your notification rule uses the `@slack-ACCOUNT-CHANNEL` format.
 
-- `@slack-ACCOUNT-CHANNEL` — recommended; routes to the named channel in the specified
-  Slack account (the name you gave the workspace in the [Datadog Slack integration][5]).
-- `@slack-CHANNEL` — works only if your organization has a single Slack account
-  connected. For organizations with multiple Slack workspaces, omitting the account name
-  causes the notification to be routed to the first configured account, which may not be
-  the intended workspace.
+If you are using `@slack-CHANNEL` (without the account name), the notification is routed to the first configured Slack account. For organizations with multiple Slack workspaces, this may not be the intended workspace.
 
 To find your account name, go to the [Slack integration tile][5] and check the
-**Account Name** field for the workspace you want to target.
+**Account Name** field for the workspace you want to use.
 
 ## Further reading
 
