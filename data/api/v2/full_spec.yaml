@@ -24728,6 +24728,189 @@ components:
         type:
           $ref: "#/components/schemas/CSMAgentsType"
       type: object
+    CsmAgentlessHostAttributes:
+      description: Attributes of an agentless host.
+      properties:
+        account_id:
+          description: The ID of the cloud account that the host belongs to.
+          example: "123456789012"
+          type: string
+        cloud_provider:
+          $ref: "#/components/schemas/CsmCloudProvider"
+        has_posture_management:
+          description: Whether CSM Misconfigurations is enabled for this host. `true` if enabled; `false` if disabled.
+          example: true
+          type: boolean
+        has_vulnerability_scanning:
+          description: Whether CSM Vulnerabilities is enabled for this host. `true` if enabled; `false` if disabled.
+          example: true
+          type: boolean
+        resource_type:
+          $ref: "#/components/schemas/CsmAgentlessHostResourceType"
+      required:
+        - account_id
+        - cloud_provider
+        - resource_type
+        - has_posture_management
+        - has_vulnerability_scanning
+      type: object
+    CsmAgentlessHostData:
+      description: A single agentless host resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CsmAgentlessHostAttributes"
+        id:
+          description: The resource identifier of the agentless host.
+          example: i-0123456789abcdef0
+          type: string
+        type:
+          $ref: "#/components/schemas/CsmAgentlessHostType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CsmAgentlessHostFacetAttributes:
+      description: Attributes of an agentless host facet.
+      properties:
+        bounded:
+          description: Whether the facet has a bounded set of allowed values. `true` indicates a fixed value set and `false` indicates free-form values.
+          example: true
+          type: boolean
+        bundled:
+          description: Whether the facet is bundled as part of the default facet set. `true` indicates bundled and `false` indicates custom.
+          example: true
+          type: boolean
+        bundledAndUsed:
+          description: Whether the facet is both bundled and actively used. `true` indicates in use; `false` indicates unused.
+          example: true
+          type: boolean
+        defaultValues:
+          $ref: "#/components/schemas/CsmHostFacetDefaultValues"
+        description:
+          description: A human-readable description of what the facet represents.
+          example: The cloud provider of the resource
+          type: string
+        editable:
+          description: Whether the facet can be edited by users. `true` indicates editable; `false` indicates read-only.
+          example: false
+          type: boolean
+        facetType:
+          description: The UI display type for the facet, such as `list`.
+          example: list
+          type: string
+        groups:
+          $ref: "#/components/schemas/CsmHostFacetGroups"
+        name:
+          description: The display name of the facet.
+          example: Cloud Provider
+          type: string
+        path:
+          description: The field path used when filtering by this facet.
+          example: cloud_provider
+          type: string
+        source:
+          description: The data source that provides the facet values.
+          example: core
+          type: string
+        type:
+          description: The data type of the facet values.
+          example: string
+          type: string
+        values:
+          $ref: "#/components/schemas/CsmHostFacetValues"
+      required:
+        - name
+        - path
+        - description
+        - groups
+        - bounded
+        - bundled
+        - bundledAndUsed
+        - defaultValues
+        - editable
+        - facetType
+        - source
+        - type
+        - values
+      type: object
+    CsmAgentlessHostFacetData:
+      description: A single agentless host facet resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CsmAgentlessHostFacetAttributes"
+        id:
+          description: The identifier of the facet, corresponding to the field path.
+          example: cloud_provider
+          type: string
+        type:
+          $ref: "#/components/schemas/CsmAgentlessHostFacetType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CsmAgentlessHostFacetItems:
+      description: The list of available facets for agentless hosts.
+      items:
+        $ref: "#/components/schemas/CsmAgentlessHostFacetData"
+      type: array
+    CsmAgentlessHostFacetType:
+      default: agentless_host_facet
+      description: The JSON:API type for agentless host facet resources. The value should always be `agentless_host_facet`.
+      enum:
+        - agentless_host_facet
+      example: agentless_host_facet
+      type: string
+      x-enum-varnames:
+        - AGENTLESS_HOST_FACET
+    CsmAgentlessHostFacetsResponse:
+      description: The response returned when listing facets for agentless hosts.
+      properties:
+        data:
+          $ref: "#/components/schemas/CsmAgentlessHostFacetItems"
+      required:
+        - data
+      type: object
+    CsmAgentlessHostItems:
+      description: The list of agentless hosts for the current page.
+      items:
+        $ref: "#/components/schemas/CsmAgentlessHostData"
+      type: array
+    CsmAgentlessHostResourceType:
+      description: The type of cloud resource for an agentless host.
+      enum:
+        - aws_ec2_instance
+        - azure_virtual_machine_instance
+        - gcp_compute_instance
+        - oci_instance
+      example: aws_ec2_instance
+      type: string
+      x-enum-varnames:
+        - AWS_EC2_INSTANCE
+        - AZURE_VIRTUAL_MACHINE_INSTANCE
+        - GCP_COMPUTE_INSTANCE
+        - OCI_INSTANCE
+    CsmAgentlessHostType:
+      default: agentless_host
+      description: The JSON:API type for agentless host resources. The value should always be `agentless_host`.
+      enum:
+        - agentless_host
+      example: agentless_host
+      type: string
+      x-enum-varnames:
+        - AGENTLESS_HOST
+    CsmAgentlessHostsResponse:
+      description: The response returned when listing agentless hosts.
+      properties:
+        data:
+          $ref: "#/components/schemas/CsmAgentlessHostItems"
+        meta:
+          $ref: "#/components/schemas/CsmSettingsMeta"
+      required:
+        - data
+        - meta
+      type: object
     CsmAgentsAttributes:
       description: "A CSM Agent returned by the API."
       properties:
@@ -24846,6 +25029,20 @@ components:
         data:
           $ref: "#/components/schemas/CsmCloudAccountsCoverageAnalysisData"
       type: object
+    CsmCloudProvider:
+      description: The cloud provider of a host resource.
+      enum:
+        - aws
+        - gcp
+        - azure
+        - oci
+      example: aws
+      type: string
+      x-enum-varnames:
+        - AWS
+        - GCP
+        - AZURE
+        - OCI
     CsmCoverageAnalysis:
       description: CSM Coverage Analysis.
       properties:
@@ -24870,6 +25067,103 @@ components:
           format: int64
           type: integer
       type: object
+    CsmFacetInfoType:
+      default: facet_info
+      description: The JSON:API type for facet info resources. The value should always be `facet_info`.
+      enum:
+        - facet_info
+      example: facet_info
+      type: string
+      x-enum-varnames:
+        - FACET_INFO
+    CsmHostFacetDefaultValues:
+      description: The list of default filter values for the facet.
+      example: []
+      items:
+        type: string
+      type: array
+    CsmHostFacetGroups:
+      description: The list of UI groups that this facet belongs to.
+      example:
+        - agentless
+      items:
+        type: string
+      type: array
+    CsmHostFacetInfoAttributes:
+      description: Attributes of a facet info response, containing the value distribution for the requested facet.
+      properties:
+        items:
+          $ref: "#/components/schemas/CsmHostFacetInfoItems"
+      required:
+        - items
+      type: object
+    CsmHostFacetInfoData:
+      description: The data wrapper for a facet info response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CsmHostFacetInfoAttributes"
+        id:
+          description: The identifier of the facet.
+          example: cloud_provider
+          type: string
+        meta:
+          $ref: "#/components/schemas/CsmHostFacetInfoMeta"
+        type:
+          $ref: "#/components/schemas/CsmFacetInfoType"
+      required:
+        - id
+        - type
+        - attributes
+        - meta
+      type: object
+    CsmHostFacetInfoItem:
+      description: A single value and its occurrence count for a facet.
+      properties:
+        count:
+          description: The number of resources with this facet value.
+          example: 100
+          format: int64
+          type: integer
+        value:
+          description: The facet value.
+          example: aws
+          type: string
+      required:
+        - value
+        - count
+      type: object
+    CsmHostFacetInfoItems:
+      description: The list of facet value entries for the current page.
+      items:
+        $ref: "#/components/schemas/CsmHostFacetInfoItem"
+      type: array
+    CsmHostFacetInfoMeta:
+      description: Metadata for the facet info response.
+      properties:
+        total_count:
+          description: The total number of distinct values for this facet.
+          example: 4
+          format: int64
+          type: integer
+      required:
+        - total_count
+      type: object
+    CsmHostFacetInfoResponse:
+      description: The response returned when requesting value distribution for a specific facet.
+      properties:
+        data:
+          $ref: "#/components/schemas/CsmHostFacetInfoData"
+      required:
+        - data
+      type: object
+    CsmHostFacetValues:
+      description: The list of allowed filter values for bounded facets. Empty for unbounded facets.
+      example:
+        - aws
+        - gcp
+      items:
+        type: string
+      type: array
     CsmHostsAndContainersCoverageAnalysisAttributes:
       description: CSM Hosts and Containers Coverage Analysis attributes.
       properties:
@@ -24941,6 +25235,235 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/CsmServerlessCoverageAnalysisData"
+      type: object
+    CsmSettingsMeta:
+      description: Pagination metadata for a CSM settings list response.
+      properties:
+        page_index:
+          description: The current page index (zero-based).
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: The number of resources returned per page.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered:
+          description: The total number of resources matching the filter criteria.
+          example: 100
+          format: int64
+          type: integer
+      required:
+        - total_filtered
+        - page_index
+        - page_size
+      type: object
+    CsmUnifiedHostAttributes:
+      description: Attributes of a unified host, combining data from agent and agentless sources.
+      properties:
+        account_id:
+          description: The ID of the cloud account that the host belongs to. Present only when the host was discovered through agentless scanning.
+          example: "123456789012"
+          nullable: true
+          type: string
+        agent_csm_vm_containers_enabled:
+          description: Whether CSM Vulnerabilities is enabled for containers through the Datadog Agent. `true` if enabled; `false` if disabled.
+          example: false
+          nullable: true
+          type: boolean
+        agent_csm_vm_hosts_enabled:
+          description: Whether CSM Vulnerabilities is enabled for hosts through the Datadog Agent. `true` if enabled; `false` if disabled.
+          example: true
+          nullable: true
+          type: boolean
+        agent_cws_enabled:
+          description: Whether CSM Threats is enabled for this host through the Datadog Agent. `true` if enabled; `false` if disabled.
+          example: false
+          nullable: true
+          type: boolean
+        agent_posture_management:
+          description: Whether CSM Misconfigurations is enabled for this host through the Datadog Agent. `true` if enabled; `false` if disabled.
+          example: true
+          nullable: true
+          type: boolean
+        agent_version:
+          description: The version of the Datadog Agent running on this host.
+          example: 7.50.0
+          nullable: true
+          type: string
+        agentless_posture_management:
+          description: Whether CSM Misconfigurations is enabled for this host via agentless scanning. `true` if enabled; `false` if disabled.
+          example: false
+          nullable: true
+          type: boolean
+        agentless_vulnerability_scanning:
+          description: Whether CSM Vulnerabilities is enabled for this host via agentless scanning. `true` if enabled; `false` if disabled.
+          example: true
+          nullable: true
+          type: boolean
+        cloud_provider:
+          $ref: "#/components/schemas/CsmCloudProvider"
+        cluster_name:
+          description: The name of the Kubernetes cluster the host belongs to, if applicable.
+          example: my-cluster
+          nullable: true
+          type: string
+        datadog_agent_key:
+          description: The Datadog Agent key associated with this host. Present only for agent-sourced hosts.
+          example: key123
+          nullable: true
+          type: string
+        env:
+          description: The list of environment tags associated with this host.
+          example:
+            - prod
+          items:
+            type: string
+          nullable: true
+          type: array
+        host_id:
+          description: The internal Datadog host identifier. Present only for agent-sourced hosts.
+          example: 12345678
+          format: int64
+          nullable: true
+          type: integer
+        install_method_tool:
+          description: The tool used to install the Datadog Agent on this host.
+          example: helm
+          nullable: true
+          type: string
+        os:
+          description: The operating system of the host. Present only for agent-sourced hosts.
+          example: linux
+          nullable: true
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/CsmAgentlessHostResourceType"
+        source:
+          $ref: "#/components/schemas/CsmUnifiedHostSource"
+      required:
+        - source
+      type: object
+    CsmUnifiedHostData:
+      description: A single unified host resource, combining agent and agentless data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CsmUnifiedHostAttributes"
+        id:
+          description: The resource identifier of the unified host.
+          example: i-0123456789abcdef0
+          type: string
+        type:
+          $ref: "#/components/schemas/CsmUnifiedHostType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CsmUnifiedHostFacetData:
+      description: A single unified host facet resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CsmAgentlessHostFacetAttributes"
+        id:
+          description: The identifier of the facet, corresponding to the field path.
+          example: cloud_provider
+          type: string
+        type:
+          $ref: "#/components/schemas/CsmUnifiedHostFacetType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CsmUnifiedHostFacetItems:
+      description: The list of available facets for unified hosts.
+      items:
+        $ref: "#/components/schemas/CsmUnifiedHostFacetData"
+      type: array
+    CsmUnifiedHostFacetType:
+      default: unified_host_facet
+      description: The JSON:API type for unified host facet resources. The value should always be `unified_host_facet`.
+      enum:
+        - unified_host_facet
+      example: unified_host_facet
+      type: string
+      x-enum-varnames:
+        - UNIFIED_HOST_FACET
+    CsmUnifiedHostFacetsResponse:
+      description: The response returned when listing facets for unified hosts.
+      properties:
+        data:
+          $ref: "#/components/schemas/CsmUnifiedHostFacetItems"
+      required:
+        - data
+      type: object
+    CsmUnifiedHostItems:
+      description: The list of unified hosts for the current page.
+      items:
+        $ref: "#/components/schemas/CsmUnifiedHostData"
+      type: array
+    CsmUnifiedHostSource:
+      description: The source of a unified host entry, indicating whether it was discovered via agent, agentless scanning, or both.
+      enum:
+        - agent
+        - agentless
+        - both
+      example: agent
+      type: string
+      x-enum-varnames:
+        - AGENT
+        - AGENTLESS
+        - BOTH
+    CsmUnifiedHostType:
+      default: unified_host
+      description: The JSON:API type for unified host resources. The value should always be `unified_host`.
+      enum:
+        - unified_host
+      example: unified_host
+      type: string
+      x-enum-varnames:
+        - UNIFIED_HOST
+    CsmUnifiedHostsMeta:
+      description: Pagination metadata for a unified hosts list response.
+      properties:
+        page_index:
+          description: The current page index (zero-based).
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: The number of hosts returned per page.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered:
+          description: The total number of hosts matching the filter criteria.
+          example: 100
+          format: int64
+          type: integer
+        total_pages:
+          description: The total number of pages available.
+          example: 10
+          format: int64
+          type: integer
+      required:
+        - total_filtered
+        - page_index
+        - page_size
+        - total_pages
+      type: object
+    CsmUnifiedHostsResponse:
+      description: The response returned when listing unified hosts.
+      properties:
+        data:
+          $ref: "#/components/schemas/CsmUnifiedHostItems"
+        meta:
+          $ref: "#/components/schemas/CsmUnifiedHostsMeta"
+      required:
+        - data
+        - meta
       type: object
     CustomAttributeConfig:
       description: "A custom attribute configuration that defines an organization-specific metadata field on cases. Custom attributes are scoped to a case type and can hold text, URLs, numbers, or predefined select options."
@@ -121277,6 +121800,381 @@ paths:
       summary: Get all CSM Serverless Agents
       tags: ["CSM Agents"]
       x-menu-order: 4
+  /api/v2/csm/settings/agentless_hosts:
+    get:
+      description: Get the list of agentless hosts for CSM, with optional pagination and filtering.
+      operationId: ListCSMAgentlessHosts
+      parameters:
+        - description: The page index for pagination (zero-based).
+          in: query
+          name: page
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int32
+            maximum: 1000000
+            minimum: 0
+            type: integer
+        - description: The number of agentless hosts to return per page.
+          in: query
+          name: size
+          required: false
+          schema:
+            default: 10
+            example: 10
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: A search query string to filter agentless hosts.
+          in: query
+          name: query
+          required: false
+          schema:
+            example: "cloud_provider:aws"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_id: "123456789012"
+                          cloud_provider: aws
+                          has_posture_management: true
+                          has_vulnerability_scanning: true
+                          resource_type: aws_ec2_instance
+                        id: i-0123456789abcdef0
+                        type: agentless_host
+                    meta:
+                      page_index: 0
+                      page_size: 10
+                      total_filtered: 1
+              schema:
+                $ref: "#/components/schemas/CsmAgentlessHostsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List agentless hosts
+      tags: ["CSM Settings"]
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/settings/agentless_hosts/facet_info:
+    get:
+      description: Get the value distribution for a specific agentless host facet, with optional search and filtering.
+      operationId: GetCSMAgentlessHostFacetInfo
+      parameters:
+        - description: The facet identifier to retrieve value distribution for. Valid values are `resource_name`, `account_id`, `resource_type`, `cloud_provider`, `has_vulnerability_scanning`, and `has_posture_management`.
+          in: query
+          name: facet
+          required: true
+          schema:
+            example: cloud_provider
+            type: string
+        - description: A search string to filter the facet values.
+          in: query
+          name: search
+          required: false
+          schema:
+            example: aws
+            type: string
+        - description: A filter query to scope the facet value counts.
+          in: query
+          name: query
+          required: false
+          schema:
+            example: "cloud_provider:aws"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - count: 100
+                            value: aws
+                          - count: 50
+                            value: gcp
+                      id: cloud_provider
+                      meta:
+                        total_count: 2
+                      type: facet_info
+              schema:
+                $ref: "#/components/schemas/CsmHostFacetInfoResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get agentless host facet info
+      tags: ["CSM Settings"]
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/settings/agentless_hosts/facets:
+    get:
+      description: Get the list of available facets for filtering agentless hosts.
+      operationId: ListCSMAgentlessHostFacets
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          bounded: true
+                          bundled: true
+                          bundledAndUsed: true
+                          defaultValues: []
+                          description: The cloud provider of the resource.
+                          editable: false
+                          facetType: list
+                          groups:
+                            - agentless
+                          name: Cloud Provider
+                          path: cloud_provider
+                          source: core
+                          type: string
+                          values:
+                            - aws
+                            - gcp
+                            - azure
+                            - oci
+                        id: cloud_provider
+                        type: agentless_host_facet
+              schema:
+                $ref: "#/components/schemas/CsmAgentlessHostFacetsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List agentless host facets
+      tags: ["CSM Settings"]
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/settings/hosts:
+    get:
+      description: Get the list of unified hosts for CSM, combining agent and agentless host data, with optional pagination and filtering.
+      operationId: ListCSMUnifiedHosts
+      parameters:
+        - description: The page index for pagination (zero-based).
+          in: query
+          name: page
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int32
+            maximum: 1000000
+            minimum: 0
+            type: integer
+        - description: The number of hosts to return per page.
+          in: query
+          name: size
+          required: false
+          schema:
+            default: 10
+            example: 10
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: A search query string to filter unified hosts.
+          in: query
+          name: query
+          required: false
+          schema:
+            example: "source:agent"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          agent_cws_enabled: false
+                          agent_posture_management: true
+                          agent_version: 7.50.0
+                          datadog_agent_key: key123
+                          os: linux
+                          source: agent
+                        id: agent-host
+                        type: unified_host
+                      - attributes:
+                          account_id: "123456789012"
+                          agentless_posture_management: true
+                          agentless_vulnerability_scanning: true
+                          cloud_provider: aws
+                          resource_type: aws_ec2_instance
+                          source: agentless
+                        id: i-0123456789abcdef0
+                        type: unified_host
+                    meta:
+                      page_index: 0
+                      page_size: 10
+                      total_filtered: 2
+                      total_pages: 1
+              schema:
+                $ref: "#/components/schemas/CsmUnifiedHostsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List unified hosts
+      tags: ["CSM Settings"]
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/settings/hosts/facet_info:
+    get:
+      description: Get the value distribution for a specific unified host facet, with optional search and filtering.
+      operationId: GetCSMUnifiedHostFacetInfo
+      parameters:
+        - description: The facet identifier to retrieve value distribution for. Valid values include `resource_name`, `account_id`, `resource_type`, `cloud_provider`, `agentless_vulnerability_scanning`, `agentless_posture_management`, `hostname`, `agent_version`, `os`, `cluster_name`, `agent_posture_management`, `agent_cws_enabled`, `agent_csm_vm_hosts_enabled`, and `agent_csm_vm_containers_enabled`.
+          in: query
+          name: facet
+          required: true
+          schema:
+            example: cloud_provider
+            type: string
+        - description: A search string to filter the facet values.
+          in: query
+          name: search
+          required: false
+          schema:
+            example: aws
+            type: string
+        - description: A filter query to scope the facet value counts.
+          in: query
+          name: query
+          required: false
+          schema:
+            example: "cloud_provider:aws"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - count: 100
+                            value: aws
+                          - count: 50
+                            value: gcp
+                      id: cloud_provider
+                      meta:
+                        total_count: 2
+                      type: facet_info
+              schema:
+                $ref: "#/components/schemas/CsmHostFacetInfoResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get unified host facet info
+      tags: ["CSM Settings"]
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/settings/hosts/facets:
+    get:
+      description: Get the list of available facets for filtering unified hosts.
+      operationId: ListCSMUnifiedHostFacets
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          bounded: true
+                          bundled: true
+                          bundledAndUsed: true
+                          defaultValues: []
+                          description: The cloud provider of the resource.
+                          editable: false
+                          facetType: list
+                          groups:
+                            - hosts
+                          name: Cloud Provider
+                          path: cloud_provider
+                          source: core
+                          type: string
+                          values:
+                            - aws
+                            - gcp
+                            - azure
+                            - oci
+                        id: cloud_provider
+                        type: unified_host_facet
+              schema:
+                $ref: "#/components/schemas/CsmUnifiedHostFacetsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List unified host facets
+      tags: ["CSM Settings"]
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/current_user:
     get:
       description: |-
@@ -184237,6 +185135,11 @@ tags:
       all in a unified view for seamless collaboration and faster remediation.
       Go to https://docs.datadoghq.com/security/cloud_security_management to learn more.
     name: "CSM Coverage Analysis"
+  - description: |-
+      Datadog Cloud Security Management (CSM) Settings APIs allow you to list and filter
+      your cloud hosts monitored by CSM, covering both agentless and agent-based discovery.
+      For more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management).
+    name: "CSM Settings"
   - description: |-
       Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.
 

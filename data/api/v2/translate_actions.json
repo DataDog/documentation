@@ -1434,6 +1434,30 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "ListCSMAgentlessHosts": {
+    "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
+    "summary": "List agentless hosts"
+  },
+  "GetCSMAgentlessHostFacetInfo": {
+    "description": "Get the value distribution for a specific agentless host facet, with optional search and filtering.",
+    "summary": "Get agentless host facet info"
+  },
+  "ListCSMAgentlessHostFacets": {
+    "description": "Get the list of available facets for filtering agentless hosts.",
+    "summary": "List agentless host facets"
+  },
+  "ListCSMUnifiedHosts": {
+    "description": "Get the list of unified hosts for CSM, combining agent and agentless host data, with optional pagination and filtering.",
+    "summary": "List unified hosts"
+  },
+  "GetCSMUnifiedHostFacetInfo": {
+    "description": "Get the value distribution for a specific unified host facet, with optional search and filtering.",
+    "summary": "Get unified host facet info"
+  },
+  "ListCSMUnifiedHostFacets": {
+    "description": "Get the list of available facets for filtering unified hosts.",
+    "summary": "List unified host facets"
+  },
   "GetCurrentUser": {
     "description": "Get the user associated with the current authentication context.\nThe response includes the user's profile attributes (name, email, handle,\nstatus, MFA state), along with related resources: the user's organization,\nassigned roles with their granted permissions, and team-scoped roles.\nNo additional permissions are required beyond valid authentication.",
     "summary": "Get current user"
