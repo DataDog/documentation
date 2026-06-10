@@ -147,7 +147,14 @@ You can import the {{< ui >}}CI Visibility - CI Jobs Failure Analysis{{< /ui >}}
 
 You can add jobs failure analysis in your PR comments.
 
-For PR Comments to be posted, your repositories need to be integrated with Datadog. To learn more about integrating repositories with Datadog, review how to [Connect your Git repositories to Datadog][7] documentation.
+For PR Comments to be posted, your repositories must be integrated with Datadog. To learn more, see [Connect your Git repositories to Datadog][7].
+
+Enable PR Comments from [**CI/CD Settings** > **Repository settings**][11]:
+
+1. Choose where to apply the setting:
+   - **Organization** tab to enable PR Comments for every repository by default.
+   - **Repository-specific** tab to enable it for a single repository.
+1. Under **General**, toggle **PR Comments** on.
 
 {{< img src="continuous_integration/pr_comment.png" alt="PR comment with included jobs failure analysis" width="90%">}}
 
@@ -165,3 +172,4 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [8]:/continuous_integration/pipelines/azure/
 [9]:/logs/log_configuration/indexes#exclusion-filters
 [10]:/continuous_integration/pipelines/automatic_retries/
+[11]:https://app.datadoghq.com/ci/settings/ci-cd/repositories
