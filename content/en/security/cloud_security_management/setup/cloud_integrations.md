@@ -150,8 +150,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{% tab "Azure" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **Azure**.
-1. To stop Posture Management for an account, switch the **Posture Management** toggle to the off position.
-1. Click **Done**.
+2. To stop Posture Management for an account, switch the **Posture Management** toggle to the off position.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/azure
@@ -160,8 +159,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{% tab "Google Cloud" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **GCP**.
-1. To stop Posture Management for an account, switch the **Posture Management** toggle to the off position.
-1. Click **Done**.
+2. To stop Posture Management for an account, switch the **Posture Management** toggle to the off position.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/google-cloud-platform
@@ -169,8 +167,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{% /tab %}}
 {{% tab "Oracle Cloud" %}}
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **OCI**.
-1. To stop Posture Management for a tenancy, switch the **Posture Management** toggle to the off position.
-1. Click **Done**.
+2. To stop Posture Management for a tenancy, switch the **Posture Management** toggle to the off position.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 {{% /tab %}}
