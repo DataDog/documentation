@@ -1140,16 +1140,6 @@ Follow these steps to enable OTel Logs API support in your application.
         ->setAutoShutdown(true)
         ->buildAndRegisterGlobal();
     ```
-
-5. If your Datadog Agent runs on a non-default location, configure the endpoint:
-    ```sh
-    # Option 1: Using the Agent URL
-    export DD_TRACE_AGENT_URL=http://your-agent-host:8126
-
-    # Option 2: Using the Agent host
-    export DD_AGENT_HOST=your-agent-host
-    ```
-    The Datadog SDK resolves the appropriate OTLP endpoint (port 4318 for HTTP, port 4317 for gRPC).
 {% /if %}
 
 ## Examples
