@@ -68037,6 +68037,569 @@ components:
       required:
         - data
       type: object
+    OwnershipEvidenceAttributes:
+      description: The attributes of an ownership evidence response.
+      properties:
+        evidence_versions:
+          $ref: "#/components/schemas/OwnershipEvidenceVersions"
+      required:
+        - evidence_versions
+      type: object
+    OwnershipEvidenceData:
+      description: The data wrapper for an ownership evidence response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipEvidenceAttributes"
+        id:
+          description: The identifier of the resource the evidence applies to.
+          example: test-resource
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipEvidenceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipEvidenceResponse:
+      description: The response returned when retrieving the evidence backing an ownership inference for an owner type.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipEvidenceData"
+      required:
+        - data
+      type: object
+    OwnershipEvidenceType:
+      default: ownership_evidence
+      description: The type of the ownership evidence resource. The value should always be `ownership_evidence`.
+      enum:
+        - ownership_evidence
+      example: ownership_evidence
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_EVIDENCE
+    OwnershipEvidenceVersion:
+      additionalProperties: {}
+      description: A single evidence version entry describing how an inference was produced.
+      example:
+        pipeline_id: p1
+        version: v3
+      type: object
+    OwnershipEvidenceVersions:
+      description: The list of evidence versions associated with an inference.
+      example:
+        - pipeline_id: p1
+          version: v3
+      items:
+        $ref: "#/components/schemas/OwnershipEvidenceVersion"
+      nullable: true
+      type: array
+    OwnershipFeedbackAction:
+      description: The feedback action to apply to an inference.
+      enum:
+        - confirm
+        - reject
+        - correct
+        - persist
+      example: confirm
+      type: string
+      x-enum-varnames:
+        - CONFIRM
+        - REJECT
+        - CORRECT
+        - PERSIST
+    OwnershipFeedbackRequest:
+      description: The request body for submitting ownership feedback.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipFeedbackRequestData"
+      required:
+        - data
+      type: object
+    OwnershipFeedbackRequestAttributes:
+      description: The attributes of an ownership feedback request.
+      properties:
+        action:
+          $ref: "#/components/schemas/OwnershipFeedbackAction"
+        actor_handle:
+          description: The handle of the actor submitting the feedback.
+          example: user@example.com
+          type: string
+        actor_type:
+          description: The type of actor submitting the feedback, for example `user` or `service`.
+          example: user
+          type: string
+        corrected_owner_handle:
+          description: The corrected owner handle. Required when `action` is `correct`.
+          example: team-b
+          nullable: true
+          type: string
+        corrected_owner_type:
+          description: The corrected owner type. Required when `action` is `correct`.
+          example: team
+          nullable: true
+          type: string
+        inference_checksum:
+          description: The checksum of the inference being acted upon. Must match the current inference checksum or the request returns a conflict.
+          example: abc123
+          type: string
+        reason:
+          description: An optional free-form reason explaining the feedback.
+          example: Confirmed by team lead.
+          nullable: true
+          type: string
+      required:
+        - action
+        - actor_handle
+        - actor_type
+        - inference_checksum
+      type: object
+    OwnershipFeedbackRequestData:
+      description: The data wrapper for an ownership feedback request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipFeedbackRequestAttributes"
+        type:
+          $ref: "#/components/schemas/OwnershipFeedbackType"
+      required:
+        - type
+        - attributes
+      type: object
+    OwnershipFeedbackResponse:
+      description: The response returned after applying ownership feedback to an inference.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipFeedbackResultData"
+      required:
+        - data
+      type: object
+    OwnershipFeedbackResultAttributes:
+      description: The attributes of an ownership feedback result.
+      properties:
+        action:
+          $ref: "#/components/schemas/OwnershipFeedbackAction"
+        checksum:
+          description: The checksum of the inference after the feedback was applied.
+          example: abc123
+          type: string
+        new_status:
+          $ref: "#/components/schemas/OwnershipInferenceStatus"
+        owner_type:
+          $ref: "#/components/schemas/OwnershipOwnerType"
+        previous_status:
+          $ref: "#/components/schemas/OwnershipInferenceStatus"
+        primary_contact_ref:
+          description: The primary contact reference for the inferred owner after the feedback was applied, formatted as `ref:handle/<owner_handle>`.
+          example: ref:handle/team-a
+          nullable: true
+          type: string
+        updated_at:
+          description: The time when the inference was updated by the feedback.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - action
+        - previous_status
+        - new_status
+        - owner_type
+        - checksum
+        - updated_at
+      type: object
+    OwnershipFeedbackResultData:
+      description: The data wrapper for an ownership feedback result response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipFeedbackResultAttributes"
+        id:
+          description: The identifier of the resource that the feedback was applied to.
+          example: res-1
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipFeedbackResultType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipFeedbackResultType:
+      default: ownership_feedback_result
+      description: The type of the ownership feedback result resource. The value should always be `ownership_feedback_result`.
+      enum:
+        - ownership_feedback_result
+      example: ownership_feedback_result
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_FEEDBACK_RESULT
+    OwnershipFeedbackType:
+      default: ownership_feedback
+      description: The type of the ownership feedback request resource. The value should always be `ownership_feedback`.
+      enum:
+        - ownership_feedback
+      example: ownership_feedback
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_FEEDBACK
+    OwnershipHistoryAttributes:
+      description: The attributes of an ownership history response.
+      properties:
+        items:
+          $ref: "#/components/schemas/OwnershipHistoryItems"
+        pagination:
+          $ref: "#/components/schemas/OwnershipHistoryPagination"
+      required:
+        - items
+        - pagination
+      type: object
+    OwnershipHistoryData:
+      description: The data wrapper for an ownership history response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipHistoryAttributes"
+        id:
+          description: The resource identifier for which history is returned.
+          example: res-1
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipHistoryType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipHistoryItem:
+      description: A single ownership inference history entry.
+      properties:
+        checksum:
+          description: A checksum identifying the state of the inference at this point in time.
+          example: ""
+          type: string
+        confidence:
+          description: The confidence score of the inference, expressed as a numeric string with up to four decimal places.
+          example: "0.9000"
+          type: string
+        created_at:
+          description: The time this history entry was created.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          type: string
+        evidence_versions:
+          $ref: "#/components/schemas/OwnershipEvidenceVersions"
+        explanation:
+          description: A human-readable explanation of how the inference was produced.
+          example: ""
+          type: string
+        failed_at:
+          description: The time when this inference failed, if applicable.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        failure_reason:
+          description: The reason why this inference failed, if applicable.
+          example: missing evidence
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier of the history entry.
+          example: 100
+          format: int64
+          type: integer
+        owner_type:
+          $ref: "#/components/schemas/OwnershipOwnerType"
+        primary_contact_ref:
+          description: The primary contact reference for the inferred owner, formatted as `ref:handle/<owner_handle>`.
+          example: ref:handle/team-a
+          nullable: true
+          type: string
+        resource_id:
+          description: The identifier of the resource that the inference applies to.
+          example: res-1
+          type: string
+        retry_schedule:
+          description: The scheduled retry time for a failed inference, if applicable.
+          example: "2026-01-15T11:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        sources:
+          $ref: "#/components/schemas/OwnershipInferenceSources"
+        status:
+          $ref: "#/components/schemas/OwnershipInferenceStatus"
+      required:
+        - id
+        - resource_id
+        - owner_type
+        - confidence
+        - explanation
+        - evidence_versions
+        - sources
+        - checksum
+        - status
+        - created_at
+      type: object
+    OwnershipHistoryItems:
+      description: The list of history entries returned for this page.
+      items:
+        $ref: "#/components/schemas/OwnershipHistoryItem"
+      type: array
+    OwnershipHistoryPagination:
+      description: Cursor-based pagination metadata for the history response.
+      properties:
+        has_more:
+          description: Whether more history entries are available beyond this page.
+          example: false
+          type: boolean
+        next_cursor:
+          description: An opaque, base64-encoded cursor token. Pass it as the `cursor` query parameter to retrieve the next page. Absent or `null` when there are no further pages.
+          example: eyJpZCI6OTh9
+          nullable: true
+          type: string
+      required:
+        - has_more
+      type: object
+    OwnershipHistoryResponse:
+      description: The response returned when listing the inference history for a resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipHistoryData"
+      required:
+        - data
+      type: object
+    OwnershipHistoryType:
+      default: ownership_history
+      description: The type of the ownership history resource. The value should always be `ownership_history`.
+      enum:
+        - ownership_history
+      example: ownership_history
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_HISTORY
+    OwnershipInferenceAttributes:
+      description: The attributes of a single ownership inference.
+      properties:
+        checksum:
+          description: A checksum that uniquely identifies the current state of the inference. Required when submitting feedback.
+          example: abc123
+          type: string
+        confidence:
+          description: The confidence score of the inference, expressed as a numeric string with up to four decimal places.
+          example: "0.9500"
+          type: string
+        created_at:
+          description: The time when the inference was created.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          type: string
+        evidence_versions:
+          $ref: "#/components/schemas/OwnershipEvidenceVersions"
+        explanation:
+          description: A human-readable explanation of how the inference was produced.
+          example: High confidence match
+          type: string
+        owner_type:
+          $ref: "#/components/schemas/OwnershipOwnerType"
+        primary_contact_ref:
+          description: The primary contact reference for the inferred owner, formatted as `ref:handle/<owner_handle>`.
+          example: ref:handle/team-a
+          nullable: true
+          type: string
+        sources:
+          $ref: "#/components/schemas/OwnershipInferenceSources"
+        status:
+          $ref: "#/components/schemas/OwnershipInferenceStatus"
+        updated_at:
+          description: The time when the inference was last updated.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - owner_type
+        - confidence
+        - explanation
+        - evidence_versions
+        - sources
+        - status
+        - checksum
+        - created_at
+        - updated_at
+      type: object
+    OwnershipInferenceData:
+      description: The data wrapper for a single ownership inference response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipInferenceAttributes"
+        id:
+          description: The identifier of the inference, formatted as `resource_id:owner_type`.
+          example: test-resource:team
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipInferenceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipInferenceItem:
+      description: A single ownership inference, scoped to a specific owner type.
+      properties:
+        checksum:
+          description: A checksum that uniquely identifies the current state of the inference. Required when submitting feedback.
+          example: abc123
+          type: string
+        confidence:
+          description: The confidence score of the inference, expressed as a numeric string with up to four decimal places.
+          example: "0.9500"
+          type: string
+        created_at:
+          description: The time when the inference was created.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          type: string
+        evidence_versions:
+          $ref: "#/components/schemas/OwnershipEvidenceVersions"
+        explanation:
+          description: A human-readable explanation of how the inference was produced.
+          example: High confidence match
+          type: string
+        id:
+          description: The identifier of the inference, formatted as `resource_id:owner_type`.
+          example: test-resource:team
+          type: string
+        owner_type:
+          $ref: "#/components/schemas/OwnershipOwnerType"
+        primary_contact_ref:
+          description: The primary contact reference for the inferred owner, formatted as `ref:handle/<owner_handle>`.
+          example: ref:handle/team-a
+          nullable: true
+          type: string
+        sources:
+          $ref: "#/components/schemas/OwnershipInferenceSources"
+        status:
+          $ref: "#/components/schemas/OwnershipInferenceStatus"
+        updated_at:
+          description: The time when the inference was last updated.
+          example: "2026-01-15T10:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - owner_type
+        - confidence
+        - explanation
+        - evidence_versions
+        - sources
+        - status
+        - checksum
+        - created_at
+        - updated_at
+      type: object
+    OwnershipInferenceItems:
+      description: The list of inferences for a resource, with one inference per owner type.
+      items:
+        $ref: "#/components/schemas/OwnershipInferenceItem"
+      type: array
+    OwnershipInferenceListAttributes:
+      description: The attributes of the ownership inferences collection response.
+      properties:
+        items:
+          $ref: "#/components/schemas/OwnershipInferenceItems"
+      required:
+        - items
+      type: object
+    OwnershipInferenceListData:
+      description: The data wrapper for the ownership inferences collection response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipInferenceListAttributes"
+        id:
+          description: The resource identifier associated with the returned inferences.
+          example: test-resource
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipInferencesType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipInferenceListResponse:
+      description: The response returned when listing all current ownership inferences for a resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipInferenceListData"
+      required:
+        - data
+      type: object
+    OwnershipInferenceResponse:
+      description: The response returned when retrieving a single ownership inference for an owner type.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipInferenceData"
+      required:
+        - data
+      type: object
+    OwnershipInferenceSource:
+      additionalProperties: {}
+      description: A source describing how an inference was derived.
+      example:
+        kind: code_owners
+      type: object
+    OwnershipInferenceSources:
+      description: The list of sources backing an ownership inference. Empty when the inference status is not whitelisted to expose sources.
+      example:
+        - kind: code_owners
+      items:
+        $ref: "#/components/schemas/OwnershipInferenceSource"
+      type: array
+    OwnershipInferenceStatus:
+      description: The lifecycle status of an ownership inference.
+      enum:
+        - suggested
+        - persisted
+        - overridden
+        - failed
+        - unknown
+      example: suggested
+      type: string
+      x-enum-varnames:
+        - SUGGESTED
+        - PERSISTED
+        - OVERRIDDEN
+        - FAILED
+        - UNKNOWN
+    OwnershipInferenceType:
+      default: ownership_inference
+      description: The type of the ownership inference resource. The value should always be `ownership_inference`.
+      enum:
+        - ownership_inference
+      example: ownership_inference
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_INFERENCE
+    OwnershipInferencesType:
+      default: ownership_inferences
+      description: The type of the ownership inferences collection resource. The value should always be `ownership_inferences`.
+      enum:
+        - ownership_inferences
+      example: ownership_inferences
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_INFERENCES
+    OwnershipOwnerType:
+      description: The owner type for an ownership inference.
+      enum:
+        - user
+        - team
+        - service
+        - unknown
+      example: team
+      type: string
+      x-enum-varnames:
+        - USER
+        - TEAM
+        - SERVICE
+        - UNKNOWN
     PESymbolFileEvent:
       description: Metadata for a PE/PDB symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -121416,6 +121979,500 @@ paths:
       summary: Get all CSM Serverless Agents
       tags: ["CSM Agents"]
       x-menu-order: 4
+  /api/v2/csm/ownership/{resource_id}:
+    get:
+      description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
+      operationId: ListOwnershipInferences
+      parameters:
+        - description: The identifier of the resource to retrieve ownership inferences for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - checksum: abc123
+                            confidence: "0.9500"
+                            created_at: "2026-01-15T10:00:00Z"
+                            evidence_versions:
+                              - pipeline_id: p1
+                            explanation: High confidence match
+                            id: test-resource:team
+                            owner_type: team
+                            primary_contact_ref: ref:handle/team-a
+                            sources: []
+                            status: suggested
+                            updated_at: "2026-01-15T10:00:00Z"
+                      id: test-resource
+                      type: ownership_inferences
+              schema:
+                $ref: "#/components/schemas/OwnershipInferenceListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ownership inferences for a resource
+      tags: ["CSM Ownership"]
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/ownership/{resource_id}/history:
+    get:
+      description: List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.
+      operationId: ListOwnershipHistory
+      parameters:
+        - description: The identifier of the resource to retrieve inference history for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: res-1
+            type: string
+        - description: An opaque, base64-encoded cursor token returned by a previous call in `pagination.next_cursor`. Omit to fetch the first page.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            example: eyJpZCI6OTh9
+            type: string
+        - description: The maximum number of history entries to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            example: 25
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - checksum: ""
+                            confidence: "0.9000"
+                            created_at: "2026-01-15T10:00:00Z"
+                            evidence_versions:
+                            explanation: ""
+                            failed_at:
+                            failure_reason:
+                            id: 100
+                            owner_type: team
+                            primary_contact_ref: ref:handle/team-a
+                            resource_id: res-1
+                            retry_schedule:
+                            sources: []
+                            status: suggested
+                        pagination:
+                          has_more: false
+                          next_cursor:
+                      id: res-1
+                      type: ownership_history
+              schema:
+                $ref: "#/components/schemas/OwnershipHistoryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ownership inference history for a resource
+      tags: ["CSM Ownership"]
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/ownership/{resource_id}/{owner_type}:
+    get:
+      description: |-
+        Get the current ownership inference for a resource for a specific owner type.
+
+        This endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.
+      operationId: GetOwnershipInference
+      parameters:
+        - description: The identifier of the resource to retrieve the ownership inference for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+        - description: The owner type of the inference to retrieve.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+        - description: A previously returned `ETag` value. When supplied and the resource has not changed, the endpoint returns `304 Not Modified`.
+          in: header
+          name: If-None-Match
+          required: false
+          schema:
+            example: '"abc123"'
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        checksum: abc123
+                        confidence: "0.9500"
+                        created_at: "2026-01-15T10:00:00Z"
+                        evidence_versions:
+                          - pipeline_id: p1
+                        explanation: High confidence match
+                        owner_type: team
+                        primary_contact_ref: ref:handle/team-a
+                        sources: []
+                        status: suggested
+                        updated_at: "2026-01-15T10:00:00Z"
+                      id: test-resource:team
+                      type: ownership_inference
+              schema:
+                $ref: "#/components/schemas/OwnershipInferenceResponse"
+          description: OK
+          headers:
+            Cache-Control:
+              description: The cache control directives applied to the response.
+              schema:
+                example: private, max-age=60
+                type: string
+            ETag:
+              description: A strong validator that identifies the current state of the inference.
+              schema:
+                example: '"abc123"'
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an ownership inference by owner type
+      tags: ["CSM Ownership"]
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/ownership/{resource_id}/{owner_type}/evidence:
+    get:
+      description: |-
+        Get the evidence versions backing the current ownership inference for a resource and owner type.
+
+        This endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.
+      operationId: GetOwnershipEvidence
+      parameters:
+        - description: The identifier of the resource to retrieve evidence for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+        - description: The owner type of the inference to retrieve evidence for.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+        - description: A previously returned weak `ETag` value. When supplied and the evidence has not changed, the endpoint returns `304 Not Modified`.
+          in: header
+          name: If-None-Match
+          required: false
+          schema:
+            example: W/"f2e126916327bda8"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        evidence_versions:
+                          - pipeline_id: p1
+                            version: v3
+                      id: test-resource
+                      type: ownership_evidence
+              schema:
+                $ref: "#/components/schemas/OwnershipEvidenceResponse"
+          description: OK
+          headers:
+            ETag:
+              description: A weak validator that identifies the current state of the evidence.
+              schema:
+                example: W/"f2e126916327bda8"
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get the evidence for an ownership inference
+      tags: ["CSM Ownership"]
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/ownership/{resource_id}/{owner_type}/feedback:
+    post:
+      description: |-
+        Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.
+
+        The request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.
+
+        When `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.
+      operationId: CreateOwnershipFeedback
+      parameters:
+        - description: The identifier of the resource that the feedback applies to.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: res-1
+            type: string
+        - description: The type of owner that the feedback applies to.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action: confirm
+                      actor_handle: user@example.com
+                      actor_type: user
+                      inference_checksum: abc123
+                    type: ownership_feedback
+            schema:
+              $ref: "#/components/schemas/OwnershipFeedbackRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: confirm
+                        checksum: abc123
+                        new_status: suggested
+                        owner_type: team
+                        previous_status: suggested
+                        primary_contact_ref: ref:handle/team-a
+                        updated_at: "2026-01-15T10:00:00Z"
+                      id: res-1
+                      type: ownership_feedback_result
+              schema:
+                $ref: "#/components/schemas/OwnershipFeedbackResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OwnershipInferenceResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Submit feedback on an ownership inference
+      tags: ["CSM Ownership"]
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/ownership/{resource_id}/{owner_type}/history:
+    get:
+      description: List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.
+      operationId: ListOwnershipHistoryByOwnerType
+      parameters:
+        - description: The identifier of the resource to retrieve inference history for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: res-1
+            type: string
+        - description: The owner type to filter history by.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+        - description: An opaque, base64-encoded cursor token returned by a previous call in `pagination.next_cursor`. Omit to fetch the first page.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            example: eyJpZCI6OTh9
+            type: string
+        - description: The maximum number of history entries to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            example: 25
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - checksum: ""
+                            confidence: "0.9000"
+                            created_at: "2026-01-15T10:00:00Z"
+                            evidence_versions:
+                            explanation: ""
+                            failed_at:
+                            failure_reason:
+                            id: 100
+                            owner_type: team
+                            primary_contact_ref: ref:handle/team-a
+                            resource_id: res-1
+                            retry_schedule:
+                            sources: []
+                            status: suggested
+                        pagination:
+                          has_more: false
+                          next_cursor:
+                      id: res-1
+                      type: ownership_history
+              schema:
+                $ref: "#/components/schemas/OwnershipHistoryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ownership history by owner type
+      tags: ["CSM Ownership"]
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/csm/settings/agentless_hosts:
     get:
       description: Get the list of agentless hosts for CSM, with optional pagination and filtering.
@@ -184795,6 +185852,13 @@ tags:
       all in a unified view for seamless collaboration and faster remediation.
       Go to https://docs.datadoghq.com/security/cloud_security_management to learn more.
     name: "CSM Coverage Analysis"
+  - description: |-
+      Datadog Cloud Security Management (CSM) Ownership infers the most likely owner
+      for a cloud resource by combining ownership signals from across the platform,
+      and lets you review the inference, inspect its evidence, and submit feedback to
+      persist, override, or correct the inferred owner.
+      For more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management).
+    name: "CSM Ownership"
   - description: |-
       Datadog Cloud Security Management (CSM) Settings APIs allow you to list and filter
       your cloud hosts monitored by CSM, covering both agentless and agent-based discovery.

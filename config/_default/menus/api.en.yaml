@@ -8083,6 +8083,88 @@ menu:
           - GetCSMCloudAccountsCoverageAnalysis
         unstable: []
         order: 1
+    - name: CSM Ownership
+      url: /api/latest/csm-ownership/
+      identifier: csm-ownership
+      generated: true
+    - name: List ownership history by owner type
+      url: /api/latest/csm-ownership/list-ownership-history-by-owner-type/
+      identifier: csm-ownership-list-ownership-history-by-owner-type
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipHistoryByOwnerType
+        unstable:
+          - v2
+        order: 4
+    - name: Submit feedback on an ownership inference
+      url: /api/latest/csm-ownership/submit-feedback-on-an-ownership-inference/
+      identifier: csm-ownership-submit-feedback-on-an-ownership-inference
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOwnershipFeedback
+        unstable:
+          - v2
+        order: 6
+    - name: Get the evidence for an ownership inference
+      url: /api/latest/csm-ownership/get-the-evidence-for-an-ownership-inference/
+      identifier: csm-ownership-get-the-evidence-for-an-ownership-inference
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipEvidence
+        unstable:
+          - v2
+        order: 5
+    - name: Get an ownership inference by owner type
+      url: /api/latest/csm-ownership/get-an-ownership-inference-by-owner-type/
+      identifier: csm-ownership-get-an-ownership-inference-by-owner-type
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipInference
+        unstable:
+          - v2
+        order: 2
+    - name: List ownership inference history for a resource
+      url: /api/latest/csm-ownership/list-ownership-inference-history-for-a-resource/
+      identifier: csm-ownership-list-ownership-inference-history-for-a-resource
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipHistory
+        unstable:
+          - v2
+        order: 3
+    - name: List ownership inferences for a resource
+      url: /api/latest/csm-ownership/list-ownership-inferences-for-a-resource/
+      identifier: csm-ownership-list-ownership-inferences-for-a-resource
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipInferences
+        unstable:
+          - v2
+        order: 1
     - name: CSM Settings
       url: /api/latest/csm-settings/
       identifier: csm-settings
