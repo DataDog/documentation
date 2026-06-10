@@ -13,16 +13,17 @@ products:
 
 Use Observability Pipelines' syslog destinations to send logs to rsyslog or syslog-ng.
 
-## Setup
+**Note**: The rsyslog and syslog-ng destinations support the [RFC5424][5] format.
 
-<div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
+## Setup
 
 Configure the rsyslog or syslog-ng destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
-After you select the rsyslog or syslog-ng destination in the pipeline UI:
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the syslog endpoint URL and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
-	- **Note**: Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do **not** enter the actual values.
+{{% observability_pipelines/secrets_env_var_note %}}
+
+After you select the rsyslog or syslog-ng destination in the pipeline UI, enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
 See [Matching log fields to syslog fields](#matching-log-fields-to-syslog-fields) for information on how fields are matched.
 
@@ -87,3 +88,4 @@ The rsyslog and syslog-ng destinations do not batch events.
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /api/latest/observability-pipelines/
 [4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[5]: https://datatracker.ietf.org/doc/html/rfc5424

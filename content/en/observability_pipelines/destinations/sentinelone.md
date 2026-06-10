@@ -23,7 +23,9 @@ Configure the SentinelOne destination when you [set up a pipeline][4]. You can s
 
 After you select the SentinelOne destination in the pipeline UI:
 
-<div class="alert alert-danger">Only enter the identifier for the token. Do <b>not</b> enter the actual value.</a></div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the token. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your SentinelOne logs environment in the dropdown menu.
