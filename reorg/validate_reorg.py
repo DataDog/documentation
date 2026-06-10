@@ -462,7 +462,7 @@ def check_husky_circular_aliases():
         "aliases:\n"
         f"  - /{MARKER}_alias/selftest\n"
         "---\n\n"
-        "Temporary file created by reorg/harness.py.\n"
+        "Temporary file created by reorg/validate_reorg.py.\n"
     )
     try:
         target.parent.mkdir(parents=True, exist_ok=True)

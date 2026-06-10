@@ -8,4 +8,4 @@ This repo is currently a Hugo site. We instead want it to contain a `hugo` and `
 
 `reorg/rollback.py` functions as an "undo" action for the reorg.
 
-`reorg/harness.py` verifies the functionality of affected entities where possible.
+`reorg/validate_reorg.py` verifies the functionality of affected entities where possible.
