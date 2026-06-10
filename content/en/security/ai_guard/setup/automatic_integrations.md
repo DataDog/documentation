@@ -20,16 +20,16 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 {{% tab "Python" %}}
 | Package                      | Supported Versions | SDK Version |
 |------------------------------|--------------------|-------------|
-| [LangChain](#langchain)      | >= 0.1.20          | >= 3.14.0   |
-| [OpenAI](#openai)            | >= 1.102.0         | >= 4.10.0   |
-| [Anthropic](#anthropic)      | >= 0.28.0          | >= 4.11.0   |
+| [LangChain](#python)         | >= 0.1.20          | >= 3.14.0   |
+| [OpenAI](#python)            | >= 1.102.0         | >= 4.10.0   |
+| [Anthropic](#python)         | >= 0.28.0          | >= 4.11.0   |
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 | Package                          | Supported Versions | SDK Version |
 |----------------------------------|--------------------|-------------|
-| [AI SDK](#ai-sdk)                | v6                 | >= 5.95.0   |
-| [OpenAI](#openai-1)              | >= 4.87.0          | >= 5.105.0  |
+| [AI SDK](#nodejs)                | v6                 | >= 5.95.0   |
+| [OpenAI](#nodejs)                | >= 4.87.0          | >= 5.105.0  |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -88,15 +88,14 @@ AI Guard automatically evaluates the following Anthropic operations:
   - `client.messages.create()`
   - `client.messages.stream()`
 
-For Anthropic SDK >= 0.37.0, AI Guard also evaluates beta messages operations:
+For the `anthropic` package >= 0.37.0, AI Guard also evaluates the following beta messages operations:
 
-- [Beta messages][3]:
+- Beta messages:
   - `client.beta.messages.create()`
   - `client.beta.messages.stream()`
 
 [1]: https://github.com/anthropics/anthropic-sdk-python
 [2]: https://docs.anthropic.com/en/api/messages
-[3]: https://docs.anthropic.com/en/api/messages
 {{% /tab %}}
 {{< /tabs >}}
 
