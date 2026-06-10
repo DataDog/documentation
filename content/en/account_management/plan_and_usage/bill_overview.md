@@ -115,7 +115,7 @@ Download a CSV of the individual hosts that make up your billable Infra Hosts to
 
 To export the list:
 
-1. In the side panel, use the month selector at the top right to choose a month. The export supports month boundaries only.
+1. In the side panel, use the month selector at the top right to choose a month. You can only export data for complete calendar months.
 2. Under {{< ui >}}Usage Overview{{< /ui >}}, click {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}.
 
 The CSV contains one row per host with the following columns:
