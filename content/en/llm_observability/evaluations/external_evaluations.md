@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-In the context of LLM applications, it's important to evaluate the quality of your LLM application's responses.
+Evaluations measure the quality of your LLM application's responses.
 While Agent Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to Agent Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [Agent Observability API](#submitting-evaluations-with-the-api). Use this naming convention for the evaluation label:
 
 * Evaluation labels must start with a letter.

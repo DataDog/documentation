@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-End-user feedback lets you bring signals from the users of your LLM application into Agent Observability. Examples include thumbs-up or thumbs-down ratings, whether a user accepted an agent's change, and free-text comments about a response.
+End-user feedback captures input from users of your LLM application in Agent Observability. Examples include thumbs-up or thumbs-down ratings, whether a user accepted an agent's change, and free-text comments about a response.
 
 Feedback is different from an evaluation. Use feedback for signals submitted by an end user. Use [external evaluations][1] for results produced by your own evaluator logic, where who submitted the evaluation is not relevant. Use [Annotation Queues][2] for structured review workflows run by your team.
 
-Submitted feedback will appear when viewing AI Observability sessions, traces, or spans.
+Submitted feedback appears when viewing Agent Observability sessions, traces, or spans.
 
 ## Submit feedback
 

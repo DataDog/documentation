@@ -30,7 +30,7 @@ Datadog builds and supports [managed evaluations][2] to support common use cases
 
 ### Submit external evaluations
 
-You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize evaluation results within Datadog.
+You can also submit [external evaluations][3] using Datadog's API. Use this approach when you have your own evaluation system but want to centralize evaluation results within Datadog.
 
 ### Building custom evaluators
 
