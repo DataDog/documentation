@@ -77,12 +77,12 @@ If you keep getting errors while trying to login with SAML, your identity provid
 
 ### Switch organizations
 
-To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**. 
+To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**.
 
 **Note**: You may need to reauthenticate when you switch organizations.
 
 ### Log out
-To log out, navigate to the **Settings** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure. 
+To log out, navigate to the **Settings** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure.
 
 ## On-Call
 {{< tabs >}}
@@ -162,9 +162,9 @@ The Notification Center lists all push notifications received so that notificati
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range.
 
-**Note**: 
+**Note**:
 - To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
 - Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
 - Not all widget types are available, which means they do not display data on the mobile app. This includes Topology Map, List Widget (all data sources), Legacy treemap widget, and SLO Summary widget.
@@ -277,17 +277,17 @@ On the Services page, you can view, search and filter all services that you have
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in ios where a user asks about a service">}}
+{{< img src="/service_management/mobile/bits_chat_ios_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chat page in the iOS Datadog mobile app with a user query about a service">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in Android where a user asks about a service">}}
+{{< img src="service_management/mobile/bits_chat_android_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chat page in the Android Datadog mobile app with a user query about a service">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Chat][27].
+On the Bits AI home page, you can ask questions about your system or active incident by voice or text. Bits Chat has context on Datadog public documentation, telemetry, and ownership. For more information, see [Bits Chat][27].
 
 ### Bits Investigation
 {{< tabs >}}
@@ -307,7 +307,7 @@ When enabled, Bits Investigation initiates investigations directly on On-Call pa
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
-Upon successful authentication to the mobile app, you will remain logged in for 90 days.  
+Upon successful authentication to the mobile app, you will remain logged in for 90 days.
 
 **Note**: If you have notifications enabled, proactive notifications will be sent 10 days prior to token expiration.
 
@@ -320,7 +320,7 @@ If you are automatically logged out during the 90 day token period, you will sti
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
 
 ### Will I receive notifications for all organizations that I am signed into?
-Yes, regardless of the organization that you switch to, you receive notifications for all organizations you are signed into. This includes critical push notifications. 
+Yes, regardless of the organization that you switch to, you receive notifications for all organizations you are signed into. This includes critical push notifications.
 
 ### What happens if a user is disabled?
 The mobile app token will be invalid and force the user to log out.
