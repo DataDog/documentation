@@ -12,9 +12,9 @@ Use the following instructions to enable Misconfigurations and Identity Risks (C
 <div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Enable resource scanning
+## Enable Posture Management
 
-To enable resource scanning for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastucture account.
+To enable posture management for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastucture account.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -64,7 +64,7 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 
 1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 2. Expand the **Azure** section.
-3. To enable resource scanning for a subscription, switch the **Resource Scanning** toggle to the on position.
+3. To enable Posture Management for a subscription, switch the **Posture Management** toggle to the on position.
 4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
 5. Click **Done**.
 
@@ -97,7 +97,7 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
 
 1. On the [**Cloud Security Setup**][2] page, click **Cloud Integrations**.
 2. Expand the **GCP** section.
-3. To enable resource scanning for a project, switch the **Resource Scanning** toggle to the on position.
+3. To enable Posture Management for a project, switch the **Posture Management** toggle to the on position.
 4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
 5. Click **Done**.
 
@@ -122,7 +122,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 ### Enable Cloud Security for your OCI tenancy
 1. On the [**Cloud Security Setup**][2] page, click **Cloud Integrations**.
 1. Expand the **OCI** section.
-1. To enable resource scanning for a tenancy, switch the **Resource Scanning** toggle to the on position.
+1. To enable Posture Management for a tenancy, switch the **Posture Management** toggle to the on position.
 1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters**. For more information, see [Use Filters to Exclude Resources from Evaluation][3].
 1. Click **Done**.
 
@@ -134,15 +134,15 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 
 {{< /tabs >}}
 
-## Disable resource scanning
+## Disable Posture Management
 
-<div class="alert alert-info">You can access historical findings from the past 15 months even if resource scanning is disabled.</div>
+<div class="alert alert-info">You can access historical findings from the past 15 months even if Posture Management is disabled.</div>
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **AWS**.
-2. If required, use filters to find the account you want to stop resource scanning for. Click the account to open the side panel that contains its settings.
+2. If required, use filters to find the account you want to stop Posture Management for. Click the account to open the side panel that contains its settings.
 3. On the **Features** tab, beside **Posture Management**, switch the **Enable** toggle to the off position.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -152,7 +152,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{% tab "Azure" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **Azure**.
-1. To stop resource scanning for an account, switch the **Resource Scanning** toggle to the off position.
+1. To stop Posture Management for an account, switch the **Posture Management** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -162,7 +162,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{% tab "Google Cloud" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **GCP**.
-1. To stop resource scanning for an account, switch the **Resource Scanning** toggle to the off position.
+1. To stop Posture Management for an account, switch the **Posture Management** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -171,7 +171,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 {{% /tab %}}
 {{% tab "Oracle Cloud" %}}
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **OCI**.
-1. To stop resource scanning for a tenancy, switch the **Resource Scanning** toggle to the off position.
+1. To stop Posture Management for a tenancy, switch the **Posture Management** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
