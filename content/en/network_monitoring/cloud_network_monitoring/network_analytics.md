@@ -189,6 +189,12 @@ The top of the sidepanel displays common client and server tags shared by the in
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
+### Traces
+
+The **Traces** tab shows APM traces associated with the selected network flow. Use this tab to pivot from a network-level issue—such as high latency or elevated retransmit counts—to the application traces for the services involved.
+
+For more information, see [APM][17].
+
 ### Security
 
 The **Security** tab highlights potential network threats and findings detected by [Workload Protection][6] and [Cloud Security Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
@@ -371,4 +377,5 @@ network:
 [12]: /getting_started/tagging/unified_service_tagging/
 [15]: /network_monitoring/cloud_network_monitoring/tags_reference/#neutral-tags
 [16]: /network_monitoring/cloud_network_monitoring/tags_reference/
+[17]: /tracing/
 
