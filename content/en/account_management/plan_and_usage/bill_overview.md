@@ -107,6 +107,30 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 - {{< ui >}}Usage Types{{< /ui >}} bar chart: Day-by-day usage stacked by sub-dimension
 - {{< ui >}}Allotment Usage{{< /ui >}}: Progress bar showing consumed vs. contracted allotment; displays ">100%" when usage exceeds the allotment
 - {{< ui >}}Drilldown in Usage Attribution{{< /ui >}}: Click to open {{< ui >}}Usage Attribution{{< /ui >}}, pre-filtered to the selected billing dimension.
+- {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}: For Infrastructure Hosts, export the individual hosts behind your billable total as a CSV.
+
+### Export billable hosts
+
+Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Plan & Usage page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
+
+To export the list:
+
+1. In the side panel, use the month selector at the top right to choose a month. The export supports month boundaries only.
+2. Under {{< ui >}}Usage Overview{{< /ui >}}, click {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}.
+
+The CSV contains one row per host with the following columns:
+
+| Column | Description |
+| --- | --- |
+| `Org Name` | Organization name. |
+| `Public ID` | The organization's public identifier. |
+| `Timestamp` | For organizations billed at the 99th percentile, the hour in the month when usage was measured at the 99th percentile. For organizations billed on a sum basis, the first day of the month. |
+| `Resource Type` | The type of resource, for example `agent`, `aws`, or `vsphere`. |
+| `Resource Name` | The host name or identifier, for example a hostname or instance ID. |
+| `Usage Value` | For organizations billed at the 99th percentile, `1` per host. For organizations billed on a sum basis, the host's host-hours over the month, for example `720` for a host present for a full 30-day month. |
+| `Tags` | A JSON object of the host's key-value tags. Empty (`{}`) when the host has no tags. |
+
+The sum of `Usage Value` across all rows matches the Infra Hosts total shown on the Plan & Usage page: a host count for organizations billed at the 99th percentile, and host-hours for organizations billed on a sum basis.
 
 ## Revert to the previous layout
 
