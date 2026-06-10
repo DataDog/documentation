@@ -199,7 +199,314 @@ client = OpenLineageClient.from_environment()
 {{% /tab %}}
 {{< /tabs >}}
 
-## Step 2: Verify in Datadog
+## Step 2: Send a `RUNNING` event (optional)
+
+While the job is in progress, send a `RUNNING` event to track it in Datadog's Jobs Monitoring. Use the same `runId` from the `START` event.
+
+{{< tabs >}}
+{{% tab "Direct HTTP with curl" %}}
+
+```shell
+curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
+  -H "Authorization: Bearer <DD_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "eventTime": "2024-01-01T10:02:00Z",
+        "eventType": "RUNNING",
+        "run": { "runId": "<RUN_UUID>" },
+        "job": {
+          "namespace": "<YOUR_NAMESPACE>",
+          "name": "<YOUR_JOB_NAME>",
+          "facets": {
+            "jobType": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "producer": "<YOUR_PRODUCER_ID>"
+      }'
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (HTTP transport)" %}}
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job
+
+running_event = RunEvent(
+    eventType=RunState.RUNNING,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(running_event)
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (Datadog transport)" %}}
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job
+
+running_event = RunEvent(
+    eventType=RunState.RUNNING,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(running_event)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Step 3: Send a `COMPLETE` or `FAIL` event
+
+When the job finishes, send a `COMPLETE` or `FAIL` event using the same `runId` from the `START` event.
+
+{{< tabs >}}
+{{% tab "Direct HTTP with curl" %}}
+
+**Success**
+
+```shell
+curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
+  -H "Authorization: Bearer <DD_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "eventTime": "2024-01-01T10:05:00Z",
+        "eventType": "COMPLETE",
+        "run": { "runId": "<RUN_UUID>" },
+        "job": {
+          "namespace": "<YOUR_NAMESPACE>",
+          "name": "<YOUR_JOB_NAME>",
+          "facets": {
+            "jobType": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "producer": "<YOUR_PRODUCER_ID>"
+      }'
+```
+
+**Failure**
+
+```shell
+curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
+  -H "Authorization: Bearer <DD_API_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "eventTime": "2024-01-01T10:05:00Z",
+        "eventType": "FAIL",
+        "run": {
+          "runId": "<RUN_UUID>",
+          "facets": {
+            "errorMessage": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/1-0-1/ErrorMessageRunFacet.json",
+              "message": "Job failed: division by zero",
+              "programmingLanguage": "Python",
+              "stackTrace": "Traceback (most recent call last):\n  File \"job.py\", line 42, in run\n    result = total / count\nZeroDivisionError: division by zero"
+            }
+          }
+        },
+        "job": {
+          "namespace": "<YOUR_NAMESPACE>",
+          "name": "<YOUR_JOB_NAME>",
+          "facets": {
+            "jobType": {
+              "_producer": "<YOUR_PRODUCER_ID>",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
+              "processingType": "BATCH",
+              "integration": "custom",
+              "jobType": "JOB"
+            }
+          }
+        },
+        "producer": "<YOUR_PRODUCER_ID>"
+      }'
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (HTTP transport)" %}}
+
+**Success**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+
+complete_event = RunEvent(
+    eventType=RunState.COMPLETE,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(complete_event)
+```
+
+**Failure**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import error_message_run
+
+fail_event = RunEvent(
+    eventType=RunState.FAIL,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(
+        runId="<RUN_UUID>",  # same runId as START
+        facets={
+            "errorMessage": error_message_run.ErrorMessageRunFacet(
+                message="Job failed: division by zero",
+                programmingLanguage="Python",
+                stackTrace="Traceback (most recent call last):\n  File \"job.py\", line 42, in run\n    result = total / count\nZeroDivisionError: division by zero"
+            )
+        }
+    ),
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(fail_event)
+```
+
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (Datadog transport)" %}}
+
+**Success**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job
+
+complete_event = RunEvent(
+    eventType=RunState.COMPLETE,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(runId="<RUN_UUID>"),  # same runId as START
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(complete_event)
+```
+
+**Failure**
+
+```python
+from datetime import datetime
+from openlineage.client.event_v2 import RunEvent, RunState, Job, Run
+from openlineage.client.facet_v2 import job_type_job, error_message_run
+
+fail_event = RunEvent(
+    eventType=RunState.FAIL,
+    eventTime=datetime.utcnow().isoformat(),
+    run=Run(
+        runId="<RUN_UUID>",  # same runId as START
+        facets={
+            "errorMessage": error_message_run.ErrorMessageRunFacet(
+                message="Job failed: division by zero",
+                programmingLanguage="Python",
+                stackTrace="Traceback (most recent call last):\n  File \"job.py\", line 42, in run\n    result = total / count\nZeroDivisionError: division by zero"
+            )
+        }
+    ),
+    job=Job(
+        namespace="<YOUR_NAMESPACE>",
+        name="<YOUR_JOB_NAME>",
+        facets={
+            "jobType": job_type_job.JobTypeJobFacet(
+                processingType="BATCH",
+                integration="custom",
+                jobType="JOB"
+            )
+        }
+    ),
+    producer="<YOUR_PRODUCER_ID>"
+)
+
+client.emit(fail_event)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Step 4: Verify in Datadog
 
 After sending your events, check the following:
 
