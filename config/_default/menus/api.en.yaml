@@ -11681,32 +11681,6 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: List instrumented pods for a cluster
-      url: /api/latest/fleet-automation/list-instrumented-pods-for-a-cluster/
-      identifier: fleet-automation-list-instrumented-pods-for-a-cluster
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetInstrumentedPods
-        unstable:
-          - v2
-        order: 18
-    - name: List all fleet clusters
-      url: /api/latest/fleet-automation/list-all-fleet-clusters/
-      identifier: fleet-automation-list-all-fleet-clusters
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetClusters
-        unstable:
-          - v2
-        order: 17
     - name: List tracers for a specific agent
       url: /api/latest/fleet-automation/list-tracers-for-a-specific-agent/
       identifier: fleet-automation-list-tracers-for-a-specific-agent
