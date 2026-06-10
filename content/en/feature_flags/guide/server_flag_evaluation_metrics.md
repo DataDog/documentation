@@ -24,10 +24,10 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 ## Prerequisites
 
-Before setting up flag evaluation metrics:
+Before setting up flag evaluation metrics, confirm the following:
 
-- Server-side feature flags are already configured. See [Server-Side Feature Flags][1].
-- Datadog Agent 7.55 or later is running.
+- [Server-side feature flags][1] are already configured.
+- Datadog Agent 7.32.0 or later is running.
 - `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
@@ -37,44 +37,51 @@ Before setting up flag evaluation metrics:
 | Go       | 2.8.0                  |
 | Java     | 1.62.0                 |
 | Node.js  | 5.99.0                 |
+| PHP      | 1.21.1                 |
 | Python   | 4.7.0                  |
 | Ruby     | 2.32.0                 |
 
 ## Step 1: Enable the Agent OTLP receiver
 
-Flag evaluation metrics are emitted over OpenTelemetry (OTLP). The Datadog Agent includes an OTLP receiver, but it is off by default. Enable it with the following environment variables on your Agent:
+Flag evaluation metrics are emitted over OpenTelemetry (OTLP). The Datadog Agent includes an OTLP receiver that is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2].
 
-{{< code-block lang="bash" >}}
-# gRPC endpoint (port 4317)
-DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
-
-# HTTP endpoint (port 4318)
-DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
-{{< /code-block >}}
-
-You only need to enable the protocol your application uses. Both gRPC and HTTP are shown for reference.
+You only need to enable the protocol your application uses (gRPC on port 4317, or HTTP on port 4318).
 
 <div class="alert alert-info">If you are running Agent v7.61.0 or later in Docker, set <code>HOST_PROC=/proc</code> on the Agent container to work around a known issue with the OTLP pipeline.</div>
 
 ## Step 2: Configure your application
 
-Set the following environment variables on your application in addition to the standard [server-side feature flag configuration][1]:
+Set the following environment variable on your application, in addition to the standard [server-side feature flag configuration][1]:
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
-
-# Point OTLP metrics at the Datadog Agent
-# HTTP endpoint (note the /v1/metrics path suffix):
-OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://<AGENT_HOST>:4318/v1/metrics
-
-# Or use gRPC (no path suffix):
-# OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://<AGENT_HOST>:4317
 {{< /code-block >}}
 
-Replace `<AGENT_HOST>` with the hostname or IP address of your Datadog Agent. In a Docker Compose setup, this is typically the Agent container's service name.
+By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318`. If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 
-## Docker Compose example
+Set an OTLP endpoint explicitly in either of these cases:
+
+- The Agent is not reachable at `DD_AGENT_HOST` on the default OTLP port (for example, a remote Agent or a non-default port).
+- You use the **Java** tracer. The Java tracer does not derive the endpoint from `DD_AGENT_HOST`; it defaults to `localhost:4318`. Set the endpoint whenever the Agent is not on `localhost`.
+
+To set the endpoint, use the standard OpenTelemetry variable:
+
+{{< code-block lang="bash" >}}
+# Point OTLP data at the Datadog Agent (HTTP, port 4318)
+OTEL_EXPORTER_OTLP_ENDPOINT=http://<AGENT_HOST>:4318
+
+# Or use gRPC (port 4317). The default protocol is http/protobuf, so you must also
+# set the protocol to grpc when using the gRPC port:
+# OTEL_EXPORTER_OTLP_ENDPOINT=http://<AGENT_HOST>:4317
+# OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+{{< /code-block >}}
+
+Replace `<AGENT_HOST>` with the hostname or IP address of your Datadog Agent.
+
+To set the metrics endpoint independently of other OTLP signals, use `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` instead, and append the `/v1/metrics` path for HTTP.
+
+Docker Compose example:
 
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
 services:
@@ -82,13 +89,13 @@ services:
     environment:
       - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
       - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
-      - HOST_PROC=/proc  # Required for Agent v7.61.0+ running in Docker
+      - HOST_PROC=/proc  # If running Agent v7.61.0+ in Docker
 
   app-go:
     environment:
       - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
       - DD_METRICS_OTEL_ENABLED=true
-      - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://datadog-agent:4318/v1/metrics
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://datadog-agent:4318
     depends_on:
       datadog-agent:
         condition: service_healthy
@@ -98,24 +105,24 @@ services:
 
 After deploying, confirm metrics are reaching Datadog:
 
-1. Go to [Metrics Explorer][2] and search for `feature_flag.evaluations`.
+1. Go to [Metrics Explorer][3] and search for `feature_flag.evaluations`.
 2. If the metric does not appear within a few minutes of your application evaluating flags, check:
    - The Agent OTLP receiver is enabled and the correct port is exposed.
-   - `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` points to the Agent, not a separate collector.
-   - Your application is actively evaluating flags via a server sdk at runtime (the code path is being executed).
+   - `OTEL_EXPORTER_OTLP_ENDPOINT` points to the Agent, not a separate collector.
+   - Your application is actively evaluating flags with a server SDK at runtime (the code path is being executed).
 
 ## Step 4: Enable metric retention
 
 By default, `feature_flag.evaluations` retains only one hour of data. To retain a longer history:
 
-1. Go to [Metrics Summary][3] and search for `feature_flag.evaluations`.
+1. Go to [Metrics Summary][4] and search for `feature_flag.evaluations`.
 2. Select the metric and enable **Historical Metrics**.
 
 This is an opt-in setting and is not enabled automatically for OTLP metrics.
 
 ## Graph flag evaluations on a dashboard
 
-Use the following query to graph flag evaluations by flag key and variant on a [dashboard][4]:
+Use the following query to graph flag evaluations by flag key and variant on a [dashboard][5]:
 
 {{< code-block lang="text" >}}
 sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant}
@@ -123,18 +130,20 @@ sum:feature_flag.evaluations{*} by {feature_flag.key,feature_flag.result.variant
 
 The `feature_flag.evaluations` metric is a counter with the following tags:
 
-| Tag                                  | Description                            |
-| ------------------------------------ | -------------------------------------- |
-| `feature_flag.key`                   | The flag key being evaluated           |
-| `feature_flag.result.variant`        | The variant returned by the evaluation |
-| `feature_flag.result.reason`         | The reason for the evaluation result   |
-| `feature_flag.result.allocation_key` | The targeting rule id                  |
+| Tag                                  | Description                                        |
+| ------------------------------------ | -------------------------------------------------- |
+| `feature_flag.key`                   | The flag key being evaluated                       |
+| `feature_flag.result.variant`        | The variant returned by the evaluation             |
+| `feature_flag.result.reason`         | The reason for the evaluation result               |
+| `feature_flag.result.allocation_key` | The identifier for the evaluated targeting rules (emitted only when present) |
+| `error.type`                         | The error type (emitted only on error evaluations) |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/server/
-[2]: https://app.datadoghq.com/metric/explorer
-[3]: https://app.datadoghq.com/metric/summary
-[4]: /dashboards/
+[2]: /opentelemetry/setup/otlp_ingest_in_the_agent/
+[3]: https://app.datadoghq.com/metric/explorer
+[4]: https://app.datadoghq.com/metric/summary
+[5]: /dashboards/
