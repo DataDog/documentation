@@ -5194,16 +5194,21 @@ menu:
       parent: dbm
       identifier: dbm_database_investigator
       weight: 17
+    - name: Bits Database Optimization
+      url: database_monitoring/bits_database_optimization
+      parent: dbm
+      identifier: dbm_bits_database_optimization
+      weight: 18
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 18
+      weight: 19
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 19
+      weight: 20
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -6056,41 +6061,66 @@ menu:
       parent: test_impact_analysis
       identifier: test_impact_analysis_troubleshooting
       weight: 903
+    - name: Test Parallelization
+      url: tests/test_parallelization/
+      parent: tests
+      identifier: test_parallelization
+      weight: 10
+    - name: Setup
+      url: tests/test_parallelization/setup/
+      parent: test_parallelization
+      identifier: test_parallelization_setup
+      weight: 1001
+    - name: Configuration
+      url: tests/test_parallelization/configuration/
+      parent: test_parallelization
+      identifier: test_parallelization_configuration
+      weight: 1002
+    - name: Best Practices
+      url: tests/test_parallelization/best_practices/
+      parent: test_parallelization
+      identifier: test_parallelization_best_practices
+      weight: 1003
+    - name: Troubleshooting
+      url: tests/test_parallelization/troubleshooting/
+      parent: test_parallelization
+      identifier: test_parallelization_troubleshooting
+      weight: 1004
     - name: Developer Workflows
       url: tests/developer_workflows
       parent: tests
       identifier: tests_developer_workflows
-      weight: 10
+      weight: 11
     - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
-      weight: 11
+      weight: 12
     - name: Instrument Browser Tests with RUM
       url: tests/browser_tests
       parent: tests
       identifier: tests_browser_tests
-      weight: 12
+      weight: 13
     - name: Instrument Swift Tests with RUM
       url: tests/swift_tests
       parent: tests
       identifier: tests_swift_tests
-      weight: 13
+      weight: 14
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests
       parent: tests
       identifier: tests_correlate_logs_and_tests
-      weight: 14
+      weight: 15
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 15
+      weight: 16
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 16
+      weight: 17
     - name: Code Coverage
       url: code_coverage/
       pre: ci
@@ -10101,9 +10131,9 @@ menu:
       url: account_management/guide/
       parent: account_management
       weight: 17
-    - name: Cloud-based Authentication
-      identifier: account_management_cloud_auth
-      url: account_management/cloud_provider_authentication/
+    - name: Workload Identity Federation
+      identifier: account_management_workload_identity_federation
+      url: account_management/workload_identity_federation/
       parent: account_management
       weight: 18
     - name: Data Security
