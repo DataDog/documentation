@@ -326,7 +326,7 @@ Use the [Agentic Onboarding][10] page to instrument your browser application usi
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
-RUM Auto-Instrumentation is not available for the selected site ({% region-param key="dd_site_name" /%}). Use [Client-Side instrumentation][1] instead.
+RUM Auto-Instrumentation is not available for the selected site ({% region-param key="dd_site_name" /%}). Use [Client-Side instrumentation][14] instead.
 {% /alert %}
 {% /site-region %}
 
@@ -364,7 +364,7 @@ Visualize the [data collected][11] in [dashboards][12] or create a search query 
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/client
+[1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/browser
 [3]: /session_replay/browser/
 [4]: /product_analytics/
@@ -377,4 +377,5 @@ Your application appears as pending on the Applications page until Datadog start
 [11]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [12]: /real_user_monitoring/platform/dashboards/
 [13]: /private-beta/rum-sdk-auto-injection/
+[14]: /real_user_monitoring/application_monitoring/browser/setup/client
 
