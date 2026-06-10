@@ -140,7 +140,7 @@ Automation Pipelines apply to both newly detected findings and findings that alr
 
 ### Code-level vulnerability context in APM
 
-IAST enriches the information that Application Performance Monitoring (APM) already collects by flagging services where code-level vulnerabilities have been confirmed. Vulnerable services are highlighted directly in the Security view in the [APM Software Catalog][17], so you can pivot from a vulnerable service to its traces, logs, and infrastructure context in a single click.
+IAST enriches the information that Application Performance Monitoring (APM) already collects by flagging services where code-level vulnerabilities have been confirmed. Vulnerable services are highlighted directly in the Security view in the [APM Catalog][17], so you can pivot from a vulnerable service to its traces, logs, and infrastructure context in a single click.
 
 ## Vulnerability lifecycle
 

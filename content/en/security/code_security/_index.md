@@ -4,7 +4,7 @@ disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
   tag: "Blog"
-  text: "Introducing Bits AI Dev Agent for Code Security"
+  text: "Introducing Bits Code for Code Security"
 - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
   tag: "Blog"
   text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"

@@ -1,36 +1,39 @@
 ---
-title: LLM Observability MCP Tools
-description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
+title: Agent Observability MCP and Skills
+description: "Connect AI agents to your Agent Observability traces and experiments using the Datadog MCP Server."
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/llm_observability/experiments"
   tag: "Documentation"
-  text: "Set up and use LLM Observability Experiments"
+  text: "Set up and use Agent Observability Experiments"
 - link: "/llm_observability/monitoring"
   tag: "Documentation"
-  text: "Monitor your application with LLM Observability"
+  text: "Monitor your application with Agent Observability"
+- link: "/llm_observability/guide/claude_code_skills"
+  tag: "Guide"
+  text: "Analyze LLM Applications with Claude Code Skills"
 ---
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [Datadog MCP Server][1] enables AI agents to access your [Agent Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Setup
 
 Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` toolset enabled.
 
-<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/bits_ai/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
+<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
 
 ### Prerequisites
 
-- A Datadog account with permission to access LLM Observability data.
+- A Datadog account with permission to access Agent Observability data.
 - An MCP-compatible client (for example, Claude Code, Codex CLI, Cursor, Gemini CLI, or Kiro CLI).
 
 ### Endpoint
 
-The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the LLM Observability and core toolsets.
+The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the Agent Observability and core toolsets.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
@@ -155,11 +158,100 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-A set of agent skills that use these MCP endpoints is available in the [datadog-labs/agent-skills](https://github.com/datadog-labs/agent-skills) repository. These skills automate some of the manual work for the use cases below.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `dd-llmo` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+
+### Install
+
+Install the `dd-llmo` skills with the following command:
+
+```shell
+npx skills add datadog-labs/agent-skills --skill dd-llmo --full-depth -y
+```
+
+The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
+
+```shell
+claude mcp add --scope user --transport http "datadog-llmo-mcp" \
+  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+```
+
+Restart Claude Code after running both commands for the skills to appear.
+
+### Available skills
+
+| Skill | Invoke with | What it does |
+|-------|-------------|-------------|
+| Session classify | `/llm-obs-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
+| Trace RCA | `/llm-obs-trace-rca` | Root cause analysis on failing production traces |
+| Experiment analyzer | `/llm-obs-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment Python codegen | `/llm-obs-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK |
+| Eval bootstrap | `/llm-obs-eval-bootstrap` | Generate evaluator code or publish online LLM-judge evaluators |
+| Eval pipeline | `/llm-obs-eval-pipeline` | End-to-end pipeline: classify → RCA → bootstrap evaluators |
+
+#### Session classification
+
+`/llm-obs-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: Agent Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+
+```
+/llm-obs-session-classify session_id=<SESSION_ID>
+/llm-obs-session-classify trace_id=<TRACE_ID>
+/llm-obs-session-classify ml_app=my-chatbot --timeframe now-7d
+```
+
+#### Trace root cause analysis
+
+`/llm-obs-trace-rca` diagnoses why an LLM application is producing poor results. It selects an analysis mode based on the strongest available signal (LLM-judge eval verdicts, runtime errors, or structural anomalies) and compiles a structured RCA report. The report includes a failure taxonomy and concrete `BEFORE` / `AFTER` fix proposals grounded in trace evidence.
+
+When Claude Code has access to your codebase, the skill can search for the relevant source files and propose diffs inline.
+
+```
+/llm-obs-trace-rca ml_app=my-chatbot
+/llm-obs-trace-rca ml_app=my-chatbot eval_name=faithfulness --timeframe now-24h
+```
+
+#### Evaluator bootstrap
+
+`/llm-obs-eval-bootstrap` analyzes production traces and proposes a suite of evaluators targeting the observed failure modes. It outputs one of three artifacts: Python `BaseEvaluator` / `LLMJudge` classes for offline experiments, a framework-agnostic JSON spec, or online LLM-judge evaluators published directly to Datadog.
+
+```
+/llm-obs-eval-bootstrap ml_app=my-chatbot
+/llm-obs-eval-bootstrap ml_app=my-chatbot --publish
+/llm-obs-eval-bootstrap ml_app=my-chatbot --data-only
+```
+
+#### Experiment analyzer
+
+`/llm-obs-experiment-analyzer` retrieves experiment results and surfaces what changed between a candidate and a baseline: which metrics improved, which regressed, and where the candidate underperformed.
+
+```
+/llm-obs-experiment-analyzer experiment_id=<EXPERIMENT_ID>
+/llm-obs-experiment-analyzer experiment_id=<CANDIDATE_ID> baseline_id=<BASELINE_ID>
+```
+
+#### Generate experiment code with the Python SDK
+
+`/llm-obs-experiment-py-bootstrap` generates a self-contained Python experiment client that uses the `ddtrace.llmobs` SDK. The output is either a runnable `.py` script or a Jupyter `.ipynb` notebook matching the canonical reference notebook style. The dataset can come from a local JSON or CSV file, an existing Datadog dataset fetched by name, or a built-in inline sample. Every generated experiment is tagged with `generated_by=claude-code` so you can identify and filter Claude-generated experiments in the LLM Experiments list.
+
+```
+/llm-obs-experiment-py-bootstrap
+/llm-obs-experiment-py-bootstrap --dataset ./data/qa.json --format ipynb
+/llm-obs-experiment-py-bootstrap --dataset-name <DATASET_NAME> --project-name <PROJECT_NAME>
+```
+
+#### End-to-end eval pipeline
+
+`/llm-obs-eval-pipeline` chains session classification, trace RCA, and evaluator bootstrap into a single supervised workflow with user checkpoints between phases. It is the recommended starting point when you have no existing evaluators for an application.
+
+```
+/llm-obs-eval-pipeline my-chatbot
+/llm-obs-eval-pipeline my-chatbot --timeframe now-30d --publish
+```
+
+For a complete guide to these skills and a recommended end-to-end workflow, see [Analyze LLM Applications with Claude Code Skills][9].
 
 ## Use cases
 
-The LLM Observability MCP tools enable AI-assisted workflows for:
+The Agent Observability MCP tools enable AI-assisted workflows for:
 
 - **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then examine span hierarchies and content to identify failures.
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
@@ -263,7 +355,7 @@ After connecting, try prompts like:
 
 ## Combine with other Datadog tools
 
-The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with LLM Observability analysis.
+The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with Agent Observability analysis.
 
 ### Export analysis to Datadog Notebooks
 
@@ -283,10 +375,12 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server/setup/
+[1]: /mcp_server/setup/
 [2]: /llm_observability/
 [3]: /notebooks/
 [4]: /notebooks/guide/build_diagrams_with_mermaidjs/
 [5]: /getting_started/site/
 [6]: /account_management/api-app-keys/
 [7]: /account_management/org_settings/service_accounts/
+[8]: https://github.com/datadog-labs/agent-skills
+[9]: /llm_observability/guide/claude_code_skills

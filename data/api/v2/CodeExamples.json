@@ -140,6 +140,20 @@
       "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
+  "CreateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Create an annotation returns \"OK\" response"
+    }
+  ],
+  "UpdateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Update an annotation returns \"OK\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",
@@ -154,11 +168,53 @@
       "description": "Delete Multiple Apps returns \"OK\" response"
     }
   ],
+  "UpdateAppVersionName": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Name App Version returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppFavorite": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Favorite Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateProtectionLevel": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Protection Level returns \"OK\" response"
+    }
+  ],
+  "UpdateAppSelfService": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Self-Service Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppTags": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Tags returns \"No Content\" response"
+    }
+  ],
   "UpdateApp": [
     {
       "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
+    }
+  ],
+  "CreateApplicationSecurityWafPolicy": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF Policy returns \"Created\" response"
     }
   ],
   "CreateApplicationSecurityWafExclusionFilter": [
@@ -744,6 +800,20 @@
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
+  "CreateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create a form returns \"OK\" response"
+    }
+  ],
+  "CreateAndPublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create and publish a form returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
@@ -1176,11 +1246,30 @@
       "description": "Create a tag configuration returns \"Created\" response"
     }
   ],
+  "CreateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a tag indexing rule returns \"Created\" response"
+    }
+  ],
+  "ReorderTagIndexingRules": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Reorder tag indexing rules returns \"No Content\" response"
+    }
+  ],
   "QueryScalarData": [
     {
       "group": "metrics",
       "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2086017331",
+      "description": "Scalar cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1259,11 +1348,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_2312509843",
-      "description": "Scalar cross product query with rum data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_394862343",
       "description": "Scalar cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1295,6 +1379,11 @@
       "group": "metrics",
       "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4190640887",
+      "description": "Timeseries cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1373,11 +1462,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_123149143",
-      "description": "Timeseries cross product query with rum data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_2884575435",
       "description": "Timeseries cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1397,6 +1481,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "UpdateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a tag indexing rule returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [
@@ -1554,6 +1645,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1785209526",
+      "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
     },
@@ -1576,6 +1672,11 @@
       "group": "observability_pipelines",
       "suffix": "_2960728933",
       "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1130701356",
+      "description": "Validate an observability pipeline with Splunk HEC source valid_tokens returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -1813,14 +1914,14 @@
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Create a rum-based metric returns \"Created\" response"
+      "description": "Create a RUM-based metric returns \"Created\" response"
     }
   ],
   "UpdateRumMetric": [
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Update a rum-based metric returns \"OK\" response"
+      "description": "Update a RUM-based metric returns \"OK\" response"
     }
   ],
   "CreateRetentionFilter": [
@@ -1983,6 +2084,11 @@
       "group": "security_monitoring",
       "suffix": "_1965169892",
       "description": "Create a detection rule with type 'application_security 'returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3243059428",
+      "description": "Create a detection rule with type 'impossible_travel' and baselineUserLocationsDuration returns \"OK\" response"
     },
     {
       "group": "security_monitoring",

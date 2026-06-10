@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-In Datadog, you can remap inferred entities, including datastores and queues, to make them easier to identify and manage. Remapping rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions. This functionality applies across all of APM, not only in the [Software Catalog][3]. After a rule is created, the updated names appear consistently in service maps, Trace Explorer, monitors, dashboards, and any other APM view.
+In Datadog, you can remap inferred entities, including datastores and queues, to make them easier to identify and manage. Remapping rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions. This functionality applies across all of APM, not only in the [Catalog][3]. After a rule is created, the updated names appear consistently in service maps, Trace Explorer, monitors, dashboards, and any other APM view.
 
 Remapping is useful when:
 - The default name does not match your preferences or conventions.  
@@ -29,9 +29,9 @@ You must have the `apm_service_renaming_write` permission to create remapping ru
 
 ### Step 1: Select remapping action and entities to target
 
-1. In Datadog, navigate to **APM > Software Catalog > Manage > Manage Remapping Rules** and click **+ Add Rule**. 
+1. In Datadog, navigate to **APM > Catalog > Manage > Manage Remapping Rules** and click **+ Add Rule**. 
 
-   Alternatively, navigate to **APM > Software Catalog** and click on a service to open the service side panel. From there, click **Service Page > Service Remapping**.
+   Alternatively, navigate to **APM > Catalog** and click on a service to open the service side panel. From there, click **Service Page > Service Remapping**.
 
    {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a particular service, showing the Service Page dropdown menu with a Service Remapping option" style="width:100%;" >}}
 
@@ -63,5 +63,5 @@ You must have the `apm_service_renaming_write` permission to create remapping ru
 
 [1]: /tracing/services/inferred_services
 [2]: /account_management/rbac/permissions
-[3]: /internal_developer_portal/software_catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /tracing/services/service_remapping_rules/
