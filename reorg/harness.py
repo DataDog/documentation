@@ -2,7 +2,7 @@
 """
 Post-reorg validation harness.
 
-Run this AFTER reorg.py, from the repo root, on a feature branch (not master).
+Run this AFTER execute_reorg.py, from the repo root, on a feature branch (not master).
 It verifies that the things the reorg could silently break still work:
 
   A. Layout        - hugo/ holds the moved dirs; nothing moved is left at root;
@@ -10,7 +10,7 @@ It verifies that the things the reorg could silently break still work:
                      Node/build file lingers at the root competing with Astro.
   B. Workflows     - no .github/workflows/ file references a moved path (dir OR
                      file) without the hugo/ prefix, in shell scalars and in
-                     structured on.*.paths filters (catches gaps in reorg.py).
+                     structured on.*.paths filters (catches gaps in execute_reorg.py).
   C. CODEOWNERS    - every concrete path pattern still resolves on disk, and
                      every moved pattern (globs included) carries the hugo/ prefix.
   D. Husky hooks   - each pre-commit check still REJECTS a known-bad input planted
@@ -19,7 +19,7 @@ It verifies that the things the reorg could silently break still work:
   E. Vale          - vale still flags a known violation using the Datadog style,
                      proving StylesPath resolves from the new content location.
   F. Hugo build    - static presence check only; run `make start` manually (todo #5).
-  G. Rollback      - on a throwaway repo, reorg.py then reorg_rollback.py must
+  G. Rollback      - on a throwaway repo, execute_reorg.py then rollback.py must
                      restore the tree byte-for-byte (the only test of rollback).
 
 The harness is non-destructive. Every file it creates lives under a
@@ -41,7 +41,7 @@ except ImportError:
     print("Error: PyYAML is required. Install with: pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
-repo_root = Path(__file__).parent
+repo_root = Path(__file__).parent.parent
 hugo_dir = repo_root / "hugo"
 
 # Distinctive marker so anything we create is obvious and easy to clean up.
@@ -73,8 +73,8 @@ def git(*args, check=False):
 
 
 def load_config():
-    """Load reorg_config.yaml and return (top_level, moves_to_hugo) name sets."""
-    config_path = repo_root / "reorg_config.yaml"
+    """Load reorg/config.yaml and return (top_level, moves_to_hugo) name sets."""
+    config_path = Path(__file__).parent / "config.yaml"
     with config_path.open() as f:
         config = yaml.safe_load(f)
     return set(config.get("top_level", [])), set(config.get("moves_to_hugo", []))
@@ -133,7 +133,7 @@ def check_layout(top_level, moves_to_hugo):
         record("PASS", "layout: top-level anchors intact",
                ", ".join(must_stay))
 
-    # Both .gitignore files should exist (reorg.py splits one into two;
+    # Both .gitignore files should exist (execute_reorg.py splits one into two;
     # check_gitignore_split below verifies the split routed correctly).
     if (repo_root / ".gitignore").exists() and (hugo_dir / ".gitignore").exists():
         record("PASS", "layout: .gitignore present at root and in hugo/")
@@ -143,7 +143,7 @@ def check_layout(top_level, moves_to_hugo):
 
 
 def check_gitignore_split(top_level, moves_to_hugo):
-    """Verify reorg.py routed .gitignore rules to the correct side.
+    """Verify execute_reorg.py routed .gitignore rules to the correct side.
 
     A .gitignore is relative to its own directory, so after the split no
     surviving rule should point at a path that lives on the OTHER side:
@@ -233,7 +233,7 @@ def check_workflows(moves_to_hugo):
     trailing-slash token, so a workflow that referenced a moved *file* —
     babel.config.js, markdoc.config.json, the Makefile, go.mod — was never
     validated. We now route every path-like token by its first segment exactly
-    as reorg.py does: a token whose first segment moved into hugo/ must be
+    as execute_reorg.py does: a token whose first segment moved into hugo/ must be
     hugo/-prefixed (after a correct reorg its first segment is 'hugo', so it no
     longer matches). A token counts as a path reference when it contains a '/',
     or when the whole token is the exact name of a moved file — so a bare word
@@ -242,7 +242,7 @@ def check_workflows(moves_to_hugo):
     A moved file whose name ALSO exists under astro/ (package.json, yarn.lock,
     node_modules, .nvmrc) is left out of the bare-name match: a standalone
     'package.json' is genuinely ambiguous (it may be Astro's), which is exactly
-    why reorg.py never blind-substitutes those names. They are still validated
+    why execute_reorg.py never blind-substitutes those names. They are still validated
     when they appear inside a slashed path routed by its first segment.
     """
     workflows_dir = repo_root / ".github" / "workflows"
@@ -396,7 +396,7 @@ def check_codeowners_prefixing(moves_to_hugo):
     check_codeowners() above only proves that *concrete* paths still RESOLVE on
     disk; it skips every glob (layouts/shortcodes/**/*.md) and never confirms a
     moved pattern was actually repathed. Here we route each pattern by its first
-    path segment exactly as reorg.py's route_codeowners_pattern does and assert
+    path segment exactly as execute_reorg.py's route_codeowners_pattern does and assert
     that a moved segment is prefixed. After a correct reorg the pattern's first
     segment is 'hugo', so a flagged pattern means a substitution was missed.
     """
@@ -408,7 +408,7 @@ def check_codeowners_prefixing(moves_to_hugo):
     def first_segment(pattern):
         body = pattern[1:] if pattern.startswith("/") else pattern   # un-anchor
         seg = body.split("/", 1)[0]
-        # reorg.py normalizes the '.local' typo to 'local' before routing.
+        # execute_reorg.py normalizes the '.local' typo to 'local' before routing.
         return "local" if seg == ".local" else seg
 
     unprefixed = []
@@ -462,7 +462,7 @@ def check_husky_circular_aliases():
         "aliases:\n"
         f"  - /{MARKER}_alias/selftest\n"
         "---\n\n"
-        "Temporary file created by reorg_harness.py.\n"
+        "Temporary file created by reorg/harness.py.\n"
     )
     try:
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -632,9 +632,9 @@ def check_build_presence():
 # --------------------------------------------------------------------------
 
 def check_rollback_roundtrip():
-    """reorg.py then reorg_rollback.py must restore the tree byte-for-byte.
+    """execute_reorg.py then rollback.py must restore the tree byte-for-byte.
 
-    This is the only check that exercises reorg_rollback.py at all. Rather than
+    This is the only check that exercises rollback.py at all. Rather than
     mutate the live repo (and risk leaving it half-reorganized if a step fails),
     it builds a small throwaway git repo holding one representative item for
     every code path the two scripts touch — a mixed .gitignore (rules that route
@@ -642,11 +642,11 @@ def check_rollback_roundtrip():
     CODEOWNERS with a moved rule, a husky hook with a substitutable path, plus a
     few moved/stayed files — then:
 
-        snapshot -> run reorg.py (answering y to every prompt)
-                 -> run reorg_rollback.py -> snapshot again
+        snapshot -> run execute_reorg.py (answering y to every prompt)
+                 -> run rollback.py -> snapshot again
                  -> assert byte-identical.
 
-    It specifically catches the easy-to-miss case where reorg.py edits a file in
+    It specifically catches the easy-to-miss case where execute_reorg.py edits a file in
     place (the root .gitignore split) that rollback must restore from git rather
     than merely delete.
     """
@@ -680,7 +680,7 @@ def check_rollback_roundtrip():
 
     try:
         # Representative fixture. Every top-level name here must appear in
-        # reorg_config.yaml or reorg.py refuses to run; the mix below routes
+        # reorg/config.yaml or execute_reorg.py refuses to run; the mix below routes
         # across moves_to_hugo, top_level, and generic-glob cases.
         write(".gitignore",
               "# build\n"
@@ -723,9 +723,11 @@ def check_rollback_roundtrip():
         write("go.mod", "module example.com/fixture\n\ngo 1.21\n")
         write("babel.config.js", "module.exports = {};\n")
 
-        # The scripts resolve repo_root from their own location, so copy them in.
-        for tool in ("reorg.py", "reorg_rollback.py", "reorg_config.yaml"):
-            shutil.copy2(repo_root / tool, work / tool)
+        # The scripts resolve repo_root as their parent's parent, so place them
+        # under a reorg/ subfolder that mirrors the real repo layout.
+        (work / "reorg").mkdir()
+        for tool in ("execute_reorg.py", "rollback.py", "config.yaml"):
+            shutil.copy2(repo_root / "reorg" / tool, work / "reorg" / tool)
 
         git_work("init", "-q")
         git_work("add", "-A")
@@ -740,23 +742,23 @@ def check_rollback_roundtrip():
 
         before = snapshot()
 
-        # reorg.py is interactive (single y/N per mutation section); answer y to
+        # execute_reorg.py is interactive (single y/N per mutation section); answer y to
         # all. Far more lines than prompts is fine — the extras are ignored.
         reorg = subprocess.run(
-            ["python3", str(work / "reorg.py")],
+            ["python3", str(work / "reorg" / "execute_reorg.py")],
             cwd=work, capture_output=True, text=True, input="y\n" * 100,
         )
         if reorg.returncode != 0 or not (work / "hugo").exists():
-            record("FAIL", "rollback: reorg.py failed on the fixture",
+            record("FAIL", "rollback: execute_reorg.py failed on the fixture",
                    (reorg.stderr or reorg.stdout).strip()[:200])
             return
 
         rollback = subprocess.run(
-            ["python3", str(work / "reorg_rollback.py")],
+            ["python3", str(work / "reorg" / "rollback.py")],
             cwd=work, capture_output=True, text=True,
         )
         if rollback.returncode != 0 or (work / "hugo").exists():
-            record("FAIL", "rollback: reorg_rollback.py failed on the fixture",
+            record("FAIL", "rollback: rollback.py failed on the fixture",
                    (rollback.stderr or rollback.stdout).strip()[:200])
             return
 
@@ -785,7 +787,7 @@ def check_rollback_roundtrip():
 
 def main():
     if not hugo_dir.exists():
-        print("hugo/ does not exist — run reorg.py first.", file=sys.stderr)
+        print("hugo/ does not exist — run reorg/execute_reorg.py first.", file=sys.stderr)
         sys.exit(1)
 
     branch = git("branch", "--show-current").stdout.strip()

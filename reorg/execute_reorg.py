@@ -9,8 +9,8 @@ except ImportError:
     print("Error: PyYAML is required. Install with: pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
-repo_root = Path(__file__).parent
-config_path = repo_root / "reorg_config.yaml"
+repo_root = Path(__file__).parent.parent
+config_path = Path(__file__).parent / "config.yaml"
 
 with config_path.open() as f:
     config = yaml.safe_load(f)
@@ -41,8 +41,8 @@ for name in os.listdir(repo_root):
 
 if errors:
     for name in sorted(errors):
-        print(f"ERROR: '{name}' is not listed in reorg_config.yaml", file=sys.stderr)
-    print(f"{len(errors)} error(s) found. Update reorg_config.yaml before running.", file=sys.stderr)
+        print(f"ERROR: '{name}' is not listed in reorg/config.yaml", file=sys.stderr)
+    print(f"{len(errors)} error(s) found. Update reorg/config.yaml before running.", file=sys.stderr)
     sys.exit(1)
 
 hugo_dir = repo_root / "hugo"
@@ -65,7 +65,7 @@ print(f"Done. {moved} item(s) moved into hugo/.")
 # A .gitignore is interpreted RELATIVE TO ITS OWN DIRECTORY, so — unlike
 # CODEOWNERS — a moved rule needs NO "hugo/" prefix; it simply belongs in
 # hugo/.gitignore. We therefore only ROUTE each line, never rewrite it, by its
-# FIRST PATH SEGMENT (driven entirely by reorg_config.yaml, same as CODEOWNERS):
+# FIRST PATH SEGMENT (driven entirely by reorg/config.yaml, same as CODEOWNERS):
 #   first segment in moves_to_hugo  -> hugo/.gitignore only
 #   first segment in top_level      -> root .gitignore only
 #   first segment in neither         -> generic/pure glob, kept in BOTH
@@ -117,7 +117,7 @@ if answer == "y":
     (hugo_dir / ".gitignore").write_text("".join(hugo_lines))
     print("  Written: .gitignore (root, pruned) and hugo/.gitignore")
     if both_segments:
-        print("  NOTE: kept in both (first path segment not in reorg_config.yaml): "
+        print("  NOTE: kept in both (first path segment not in reorg/config.yaml): "
               + ", ".join(sorted(both_segments)))
 
 # Update .github/workflows/ files to reference paths under hugo/.
@@ -188,7 +188,7 @@ for py_file in sorted(husky_dir.glob("*.py")):
 # FIRST PATH SEGMENT. The decision is made on a whole segment, never a raw
 # substring, so "config" can never match inside "customization_config" and the
 # substitution list no longer has to be hand-ordered or kept in sync with the
-# move list — it is derived entirely from reorg_config.yaml.
+# move list — it is derived entirely from reorg/config.yaml.
 def route_codeowners_pattern(pattern):
     """Rewrite one CODEOWNERS pattern for the hugo/ move.
 
@@ -259,7 +259,7 @@ for segment in sorted(changes_by_segment):
         applied = True
 
 if left_alone:
-    print("\n  NOTE: left unchanged (first path segment not in reorg_config.yaml): "
+    print("\n  NOTE: left unchanged (first path segment not in reorg/config.yaml): "
           + ", ".join(sorted(left_alone)))
 
 if applied:

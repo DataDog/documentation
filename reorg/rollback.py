@@ -4,7 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-repo_root = Path(__file__).parent
+repo_root = Path(__file__).parent.parent
 hugo_dir = repo_root / "hugo"
 
 if not hugo_dir.exists():
