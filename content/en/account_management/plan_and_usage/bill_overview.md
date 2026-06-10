@@ -109,7 +109,7 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 - {{< ui >}}Drilldown in Usage Attribution{{< /ui >}}: Click to open {{< ui >}}Usage Attribution{{< /ui >}}, pre-filtered to the selected billing dimension.
 - {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}: For Infra Hosts, export the individual hosts behind your billable total as a CSV.
 
-### Export billable hosts
+### Download billable hosts as CSV
 
 Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Bill Overview page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
 
