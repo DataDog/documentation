@@ -139,6 +139,8 @@ Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, 
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the MySQL URI connection string. Do <b>not</b> enter the actual value.</div>
 
+{{% observability_pipelines/secrets_env_var_note %}}
+
 After you select the MySQL source in the pipeline UI:
 
 1. Enter the identifier for your URI connection string. If you leave it blank, the [default](#secret-defaults) is used.
