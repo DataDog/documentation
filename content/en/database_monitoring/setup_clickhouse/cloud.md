@@ -90,7 +90,7 @@ Database Monitoring collects the following data from ClickHouse:
   | `clickhouse.replication.stuck_tasks` | Replication queue entries with repeated failures |
 
 **Schema collection** (Agent 7.81+)
-: Catalog metadata — databases, tables, views, and columns — collected periodically and surfaced in the DBM Schema Explorer. The Agent queries `system.tables` and `system.columns` (and `system.view_refreshes` for ClickHouse 24.3+) and emits one structured payload per cycle. Disabled by default; enable with `collect_schemas.enabled: true`.
+: Catalog metadata (databases, tables, views, and columns) collected periodically and surfaced in the DBM Schema Explorer. The Agent queries `system.tables` and `system.columns` (and `system.view_refreshes` for ClickHouse 24.3+) and emits one structured payload per cycle. Disabled by default; enable with `collect_schemas.enabled: true`.
 
   Also available: `schema_metrics` emits per-table size gauges (`clickhouse.table.*`) and per-view refresh status gauges. This is independent of catalog collection and can be enabled without Schema Explorer.
 
