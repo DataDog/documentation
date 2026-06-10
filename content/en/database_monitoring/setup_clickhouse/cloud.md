@@ -57,7 +57,7 @@ Database Monitoring collects the following data from ClickHouse:
 : Tags injected into SQL statements as comments using the [sqlcommenter][sqlcommenter] or [marginalia][marginalia] format are automatically extracted and surfaced in DBM as Propagated Tags on query samples, completions, and explain plans. Using any database API that supports SQL execution, add a comment to your SQL statement with comma-separated key-value pairs:
 
   ```sql
-  /*key1='val1',key2='val2'*/ SELECT * from FOO
+  /*key1='val1',key2='val2'*/ SELECT * FROM foo
   ```
 
   Tags appear on the Sample Details page under **Propagated Tags** and can be used to filter the **Explain Plans** and **Query Samples** views. See [Tagging SQL Statements][tag-statements] for full details.
