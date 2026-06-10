@@ -146,7 +146,7 @@ You are a financial data analyst assistant for internal employees. You are autho
 Do not access external systems or process requests unrelated to financial reporting.
 ```
 
-With this context, AI Guard understands that SQL queries and file exports are expected, authorized operations—and is less likely to flag them as data exfiltration or destructive tool calls.
+With this context, AI Guard treats SQL queries and file exports as expected, authorized operations, and is less likely to flag them as data exfiltration or destructive tool calls.
 
 #### Limitations
 
