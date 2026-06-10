@@ -43,13 +43,15 @@ Before implementing Early Flake Detection, you must configure [Test Optimization
 
 ### Configuration
 
-After you have set up your Datadog library for Test Optimization, you can configure Early Flake Detection from the [Test Optimization Settings page][7].
+After you set up your Datadog library for Test Optimization, configure Early Flake Detection in [**CI/CD Settings**][7]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="Early flake Detection in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/early_flake_detection_test_settings-1.png" alt="Early Flake Detection toggle in CI/CD Settings." style="width:100%" >}}
 
-1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][7].
-1. Click **Configure** on the Early Flake Detection column for a test service.
-1. Click the toggle to enable Early Flake Detection.
+1. Open [**CI/CD Settings** > **Repository settings**][7].
+1. Choose where to apply the setting:
+   - **Organization** tab to update the organization default.
+   - **Repository-specific** tab to override the default for a single repository, or to apply an override to one of its test services.
+1. Under **Prevention**, toggle **Early Flake Detection** on.
 
 ## Compatibility
 {{< tabs >}}
@@ -128,7 +130,7 @@ You can use the following facets to query sessions that run Early Flake Detectio
 
 ## Troubleshooting
 
-If you suspect there are issues with Early Flake Detection, navigate to the [Test Optimization Settings page][7], look for your repository, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
+If you suspect there are issues with Early Flake Detection, open [**CI/CD Settings**][7], find your repository or test service, and toggle Early Flake Detection off.
 
 ### A new test is not being retried
 
@@ -155,6 +157,6 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [4]: /pr_gates/
 [5]: /pr_gates/setup
 [6]: /tests
-[7]: https://app.datadoghq.com/ci/settings/test-optimization
+[7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /tests/explorer/
 [9]: /help/
