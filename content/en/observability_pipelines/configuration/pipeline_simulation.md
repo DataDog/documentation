@@ -19,7 +19,9 @@ products:
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
-<div class="alert alert-info">Pipeline Simulation is in Preview. Reach out to your account manager to request access.</div>
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+Pipeline Simulation is in Preview. Reach out to your account manager to request access.
+{{< /callout >}}
 
 ## Overview
 
@@ -33,6 +35,8 @@ To use Pipeline Simulation:
 1. [Run a simulation with that data for your processor configuration](#run-a-pipeline-simulation).
 1. Inspect the data the processor group received and the resulting output. Confirm the processed data is what you expect. If it is not, update your processors and run another simulation.
 1. After you validate that the processed data is what you expect, deploy the changes to production.
+
+This document goes over each of those steps in detail.
 
 The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
 
@@ -174,8 +178,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
 1. Navigate to [Observability Pipelines][3].
 1. Select your pipeline and click **Edit Pipeline** on the top right side of the page.
 1. On the pipeline edit page, click **Edit** on a processor group to add or edit processors in your pipeline.
-1. On the left side of the Pipeline Simulation page, select the **Processor group** with the processors you want to update, test, and validate.
-    - You can hover over **Processor Group** to see a snapshot of where the processors are in the pipeline.
+1. In the **Processor Group** dropdown menu on the left side of the Pipeline Simulation page, select the processor group with the processors you want to update and test. You can hover over **Processor Group** to see a snapshot of where the processors are in the pipeline.
   {{< img src="observability_pipelines/pipeline_simulation/processor_group_map.mp4" alt="Hovering over a processor group shows a snapshot of where the processors are in the pipeline." video="true" width="60%" >}}
 1. Add and update your processors. You can update multiple processors for one simulation. **Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
 1. Choose a simulation scenario:
@@ -187,7 +190,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
 1. After the simulation is complete, you can:
     - See the log data that the processor received and sent out.
     - Enter a free text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
-    - Use the dropdown menu to show events based on status:
+    - Use the **All events** dropdown menu to view events by status:
         - `Modified only` shows only modified events.
         - `Unmodified only` shows only unmodified events.
         - `Rerouted only` shows only logs rerouted to an overflow destination by the [Quota processor][8].
@@ -195,7 +198,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
             - Metrics generated from logs with the [Generate Logs-Based Metrics][9] processor.
             - Logs created by the [Split Array][10] processor.
         - `Dropped only` shows only dropped events.
-    - Use the dropdown menu to show `Logs only`, `Metrics only`, or `All telemetry` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
+    - Use the **All telemetry** dropdown menu to view `Logs only` or `Metrics only` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
      {{< img src="observability_pipelines/pipeline_simulation/view_simulation.mp4" alt="The log data the processor received and sent out, with the search bar and the status and telemetry filter dropdowns." video="true" width="70%" >}}
 1. Click **Save** at the bottom right side of the page to save your changes.
 1. Click **Back to Pipeline** on the top right side of the page.
