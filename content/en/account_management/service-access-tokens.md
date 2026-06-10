@@ -8,9 +8,9 @@ further_reading:
     - link: "/account_management/personal-access-tokens/"
       tag: "Documentation"
       text: "Personal Access Tokens"
-    - link: "/account_management/cloud_provider_authentication/"
+    - link: "/account_management/workload_identity_federation/"
       tag: "Documentation"
-      text: "Cloud-Based Authentication"
+      text: "Workload Identity Federation"
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!" >}}
