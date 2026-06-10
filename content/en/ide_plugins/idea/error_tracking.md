@@ -10,6 +10,9 @@ further_reading:
 ---
 
 ## Overview
+
+<div class="alert alert-info">This feature is in limited support.</div>
+
 The [Error Tracking][1] integration in the Datadog plugin for JetBrains IDEs helps you find and fix runtime errors from production, without leaving your IDE.
 
 ## Source editor

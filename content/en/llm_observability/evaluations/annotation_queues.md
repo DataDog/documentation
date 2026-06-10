@@ -16,7 +16,7 @@ further_reading:
     text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
   - link: /api/latest/llm-observability/
     tag: API
-    text: LLM Observability API reference
+    text: Agent Observability API reference
 ---
 
 ## Overview
@@ -37,7 +37,7 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 2. Click {{< ui >}}Create Queue{{< /ui >}} 
 3. On the {{< ui >}}About{{< /ui >}} tab, configure:
    - {{< ui >}}Name{{< /ui >}}: Descriptive name reflecting the queue's purpose (for example, "Failed Evaluations Review - Q1 2026")
-   - {{< ui >}}Project{{< /ui >}}: LLM Observability project this queue belongs to
+   - {{< ui >}}Project{{< /ui >}}: Agent Observability project this queue belongs to
    - {{< ui >}}Description{{< /ui >}} (optional): Explain the queue's purpose and any special instructions for annotators
 
 4. Then click {{< ui >}}Next{{< /ui >}}.
@@ -287,11 +287,11 @@ To delete a queue:
 2. Open the queue.
 3. Click {{< ui >}}Delete{{< /ui >}} in the Details panel.
 
-<div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
+<div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from Agent Observability. Traces remain accessible in Trace Explorer.</div>
 
 ## Using the API
 
-You can manage annotation queues programmatically. The following endpoints are available in the [LLM Observability API reference][4]:
+You can manage annotation queues programmatically. The following endpoints are available in the [Agent Observability API reference][4]:
 
 | Endpoint | Description |
 |----------|-------------|
