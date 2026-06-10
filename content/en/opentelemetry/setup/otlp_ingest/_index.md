@@ -17,9 +17,9 @@ Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send o
 
 <div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-Your setup depends on where your telemetry is coming from. Some environments require a dedicated endpoint or additional headers before you configure signal-specific options. Check the managed platforms table first; if your platform has a dedicated endpoint, use it. If not, use the serverless or signal-specific pages.
-
 <!-- TODO: Add Preview sign-up link once product provides it. -->
+
+Your setup depends on where your telemetry is coming from. Some environments require a dedicated endpoint or additional headers before you configure signal-specific options. Check the [Managed platforms][6] list first; if your platform has a dedicated endpoint, use it. If not, use the serverless or signal-specific pages.
 
 | If your telemetry comes from... | Start here |
 |---|---|

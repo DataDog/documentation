@@ -51,6 +51,8 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},compute_stats
 
 ## Supported platforms
 
+<!-- TODO: Clarify what the gcp and gae managed platform endpoints cover vs. Cloud Run/Functions on the serverless page. A Cloud Run user could pick either path and get a different endpoint. -->
+
 All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< region-param key="dd_site" >}}/`.
 
 | Platform | Subdomain | Setup guide |
@@ -61,7 +63,6 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Cloudflare | `cloudflare` | [Cloudflare Workers observability][11] |
 | Cribl | `cribl` | — |
 | GitHub Actions | `github-actions` | — |
-<!-- TODO: Clarify what the gcp and gae managed platform endpoints cover vs. Cloud Run/Functions/GKE on the serverless page. A Cloud Run user could pick either path and get a different endpoint. -->
 | Google App Engine | `gae` | — |
 | Google Cloud | `gcp` | — |
 | Grafbase | `grafbase` | [Grafbase observability][12] |
