@@ -52,7 +52,7 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
     llm_span.set_attribute("gen_ai.operation.name", "chat")
 ```
 
-<div class="alert alert-info">A span link that points to a span in a different trace is preserved, but is not drawn in the Execution Graph, which visualizes a single trace.</div>
+<div class="alert alert-info">A span link that points to a span in a different trace is stored, but is not drawn in the Execution Graph, which visualizes a single trace.</div>
 
 ## Setup
 
