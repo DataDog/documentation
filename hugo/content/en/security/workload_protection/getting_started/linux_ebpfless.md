@@ -5,7 +5,7 @@ disable_toc: false
 
 This guide describes how to set up the Workload Protection eBPF-less solution for eBPF disabled environments.
 
-<div class="alert alert-info">If you wish to deploy our eBPF-less agent on Fargate, we invite you to go to [the dedicated Fargate deployment page][3].</div>
+<div class="alert alert-info">If you wish to deploy our eBPF-less agent on Fargate, we invite you to go to <a href="/security/workload_protection/getting_started/fargate/">the dedicated Fargate deployment page</a>.</div>
 
 ## Summary of Agent options
 
@@ -411,7 +411,6 @@ To attach to an application, you’ll need the following:
 
 [1]: https://ebpf.io/what-is-ebpf/
 [2]: https://github.com/DataDog/datadog-agent
-[3]: /security/workload_protection/getting_started/fargate
 [4]: https://app.datadoghq.com/security/configuration/workload/setup
 [5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: https://docs.docker.com/network/

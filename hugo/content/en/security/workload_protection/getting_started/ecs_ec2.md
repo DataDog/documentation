@@ -5,7 +5,7 @@ disable_toc: false
 
 Use the following instructions to enable Workload Protection.
 
-<div class="alert alert-info">If you wish to deploy Workload Protection on ECS configured with the Fargate compute option, we invite you to go to [the dedicated Fargate deployment page][3].</div>
+<div class="alert alert-info">If you wish to deploy Workload Protection on ECS configured with the Fargate compute option, we invite you to go to <a href="/security/workload_protection/getting_started/fargate/">the dedicated Fargate deployment page</a>.</div>
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 
