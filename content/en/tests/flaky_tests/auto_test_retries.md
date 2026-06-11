@@ -101,7 +101,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you set up Test Visibility, configure Auto Test Retries in [**CI/CD Settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -124,7 +124,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Configuration
 
-After you set up Test Visibility, configure Auto Test Retries in [**CI/CD Settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
