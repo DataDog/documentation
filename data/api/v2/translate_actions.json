@@ -2582,6 +2582,10 @@
     "description": "Get all users for a ServiceNow instance.",
     "summary": "List ServiceNow users"
   },
+  "ListSlackUserBindings": {
+    "description": "List all Slack user bindings for a given Datadog user from the Datadog Slack integration.",
+    "summary": "List Slack user bindings"
+  },
   "DeleteStatuspageAccount": {
     "description": "Delete the Statuspage account configured for your organization.",
     "summary": "Delete the Statuspage account"
