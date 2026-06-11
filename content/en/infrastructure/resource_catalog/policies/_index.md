@@ -20,9 +20,6 @@ cascade:
     site_support_id: resource_catalog_policies
 ---
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> Resource Catalog Policies is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
   Resource Policies are in Preview.
 {{< /callout >}} 
