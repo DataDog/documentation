@@ -19,6 +19,10 @@ To use most source code-related features, you must connect your Git repositories
 
 ## Source code management providers
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+{{< /site-region >}}
+
 Datadog supports the following features for the SCM providers listed below. See [Features][1] for more details about each feature:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
@@ -28,10 +32,6 @@ Datadog supports the following features for the SCM providers listed below. See 
 | **Context Links** | Yes | Yes | Yes | Yes |
 | **Code Snippets** | Yes | Yes | Yes | No |
 | **PR Comments** | Yes | Yes | Yes | No |
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The GitLab Source Code integration is not supported on US1-FED (app.ddog-gov.com) or US2-FED (us2.ddog-gov.com). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
-{{< /site-region >}}
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
@@ -49,7 +49,7 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The GitLab Source Code integration is not supported on US1-FED (app.ddog-gov.com) or US2-FED (us2.ddog-gov.com). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+<div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">
