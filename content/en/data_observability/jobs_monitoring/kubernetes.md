@@ -19,7 +19,6 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Ku
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
 2. [Enable Single Step Instrumentation](#enable-single-step-instrumentation).
-3. [Configure your Spark jobs](#configure-your-spark-jobs).
 
 ### Install the Datadog Agent on your Kubernetes cluster
 
@@ -231,20 +230,6 @@ helm upgrade <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
 
 After applying, restart the targeted pods for the init container to be injected.
 
-### Configure your Spark jobs
-
-#### Example: spark-submit
-
-```shell
-spark-submit \
-  --class org.apache.spark.examples.SparkPi \
-  --master k8s://<CLUSTER_ENDPOINT> \
-  --conf spark.kubernetes.container.image=<SPARK_IMAGE> \
-  --conf spark.kubernetes.namespace=<NAMESPACE> \
-  --conf spark.kubernetes.authenticate.driver.serviceAccountName=<SERVICE_ACCOUNT> \
-  --conf spark.kubernetes.authenticate.executor.serviceAccountName=<SERVICE_ACCOUNT> \
-  local:///usr/lib/spark/examples/jars/spark-examples.jar 20
-```
 
 ## Validation
 
