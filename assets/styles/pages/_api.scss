@@ -4,6 +4,7 @@ $ddpurple: #632ca6;
 // Both endpoint and category pages: flush right alongside the h1.
 .main-api .api-copy-btn,
 .api-intro-header .api-copy-btn {
+    margin-top: 10px;
 
     a {
         display: flex;
