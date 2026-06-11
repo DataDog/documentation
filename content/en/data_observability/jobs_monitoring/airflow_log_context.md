@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Inject Airflow task context attributes into every log record emitted during task execution, including logs from custom Python loggers, without modifying your DAGs.
+This page describes how to inject Airflow task context attributes into every log record emitted during task execution, including logs from custom Python loggers, without modifying your DAGs.
 
 After you complete the steps on this page, the following attributes appear as structured facets in Datadog:
 
@@ -32,11 +32,11 @@ The injection mechanism differs between Airflow versions. Choose the tab that ma
 {{< tabs >}}
 {{% tab "Airflow 2.x" %}}
 
-Airflow 2.x calls `set_context(ti)` in the same worker process before each task runs. The implementation captures that context with a `ContextVar` and injects it into every log record through a process-wide log record factory.
+Airflow 2.x calls `set_context(ti)` in the same worker process before each task runs. The following implementation captures that context with a `ContextVar` and injects it into every log record through a process-wide log record factory.
 
 ### Step 1: Create `dd_airflow_log_context.py`
 
-Create `dd_airflow_log_context.py` in a location that Airflow can import:
+Create `dd_airflow_log_context.py` in a directory on your `PYTHONPATH` so Airflow can import it:
 - **General**: Place it alongside `airflow_local_settings.py` or in any Python package installed in your Airflow image.
 - **Google Cloud Composer**: Place it in the `plugins/` folder in your Composer GCS bucket.
 
@@ -196,7 +196,7 @@ Airflow exports the following environment variables into the task subprocess. Ea
 
 ### Step 1: Create `dd_airflow_log_context.py`
 
-Create `dd_airflow_log_context.py` somewhere importable in your Airflow environment. Add the following code to the file:
+Create `dd_airflow_log_context.py` in a directory on your `PYTHONPATH` so Airflow can import it. Add the following code to the file:
 
 ```python
 from __future__ import annotations
@@ -242,7 +242,9 @@ LOGGING_CONFIG = deepcopy(DEFAULT_LOGGING_CONFIG)
 
 ### Step 2: Configure Airflow to load the module
 
-To import the file inside the task subprocess before user code runs, choose one of the following options. `sitecustomize.py` is the most reliable method across deployments. Use `logging_config_class` only if your deployment honors it; if the factory is not active after the verification step, switch to `sitecustomize.py`.
+To import the file inside the task subprocess before user code runs, choose one of the following options: 
+
+<div class="alert alert-info"><code>sitecustomize.py</code> is the most reliable method across deployments. Use <code>logging_config_class</code> only if your deployment honors it; if the factory is not active after the verification step, switch to <code>sitecustomize.py</code>.</div>
 
 **Import with `sitecustomize.py` (recommended)**
 
