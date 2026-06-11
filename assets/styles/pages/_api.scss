@@ -49,7 +49,8 @@ $ddpurple: #632ca6;
     }
 }
 
-// Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
+// Shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
+.main-api .api-copy-btn,
 .api-intro-header .api-copy-btn {
     flex-shrink: 0;
 }
