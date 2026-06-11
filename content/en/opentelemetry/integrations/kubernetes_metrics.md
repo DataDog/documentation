@@ -34,7 +34,7 @@ To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state
 
 * **Helm**: The setup uses Helm to deploy resources. To install Helm, see the [official Helm documentation][2].
 * **Helm chart**: OpenTelemetry Collector [Helm chart][9] v0.156.2 or later.
-* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.153.0` image or newer.
+* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.154.0` image or newer.
 
 ### Installation
 
@@ -77,13 +77,13 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
      -f daemonset-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.153.0
+     --set image.tag=0.154.0
 
    # Install the Cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
      -f cluster-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.153.0
+     --set image.tag=0.154.0
    ```
 
 ## Correlating traces with infrastructure metrics
