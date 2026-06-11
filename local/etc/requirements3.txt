@@ -6,7 +6,9 @@ cffi==1.15.0
 cssutils>=1.0.0
 htmlmin>=0.1.10
 pycparser==2.14
-requests==2.23.0
+# Python 3.12: requests 2.23 + urllib3 1.x can break (urllib3.packages.six); use 2.x stack
+requests==2.32.3
+urllib3==2.2.3
 PyYAML==6.0.1
 tqdm==4.43.0
 Pygments==2.7.4
@@ -16,4 +18,5 @@ Jinja2==3.0.1
 GitPython
 feedparser>=6.0.10
 ruamel.yaml>=0.17.32
+
 
