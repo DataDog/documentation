@@ -15995,6 +15995,36 @@ menu:
           - BatchRowsQuery
         unstable: []
         order: 10
+    - name: Report Schedules
+      url: /api/latest/report-schedules/
+      identifier: report-schedules
+      generated: true
+    - name: Update a report schedule
+      url: /api/latest/report-schedules/update-a-report-schedule/
+      identifier: report-schedules-update-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchReportSchedule
+        unstable:
+          - v2
+        order: 2
+    - name: Create a report schedule
+      url: /api/latest/report-schedules/create-a-report-schedule/
+      identifier: report-schedules-create-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReportSchedule
+        unstable:
+          - v2
+        order: 1
     - name: Restriction Policies
       url: /api/latest/restriction-policies/
       identifier: restriction-policies
