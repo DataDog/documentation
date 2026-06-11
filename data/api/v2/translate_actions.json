@@ -1886,6 +1886,36 @@
     "description": "Get a form definition by its ID.",
     "summary": "Get a form"
   },
+  "UpdateForm": {
+    "description": "Update a form's properties such as its name, description, or datastore configuration.",
+    "summary": "Update a form",
+    "request_description": "",
+    "request_schema_description": "A request to update a form."
+  },
+  "CloneForm": {
+    "description": "Clone an existing form. The clone is created in draft mode using the source form's latest version.",
+    "summary": "Clone a form",
+    "request_description": "",
+    "request_schema_description": "A request to clone a form."
+  },
+  "PublishForm": {
+    "description": "Publish a specific version of a form, making it available for submissions.",
+    "summary": "Publish a form version",
+    "request_description": "",
+    "request_schema_description": "A request to publish a form version."
+  },
+  "UpsertFormVersion": {
+    "description": "Create or update the latest draft version of a form. The `upsert_params` field controls\noptimistic concurrency behavior.",
+    "summary": "Create or update a form version",
+    "request_description": "",
+    "request_schema_description": "A request to create or update a form version."
+  },
+  "UpsertAndPublishFormVersion": {
+    "description": "Upsert the latest form version and publish it in a single atomic transaction.",
+    "summary": "Upsert and publish a form version",
+    "request_description": "",
+    "request_schema_description": "A request to upsert and publish a form version in a single transaction."
+  },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
     "summary": "Get HAMR organization connection"

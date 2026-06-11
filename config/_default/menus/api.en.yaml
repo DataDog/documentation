@@ -11844,6 +11844,71 @@ menu:
       url: /api/latest/forms/
       identifier: forms
       generated: true
+    - name: Upsert and publish a form version
+      url: /api/latest/forms/upsert-and-publish-a-form-version/
+      identifier: forms-upsert-and-publish-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertAndPublishFormVersion
+        unstable:
+          - v2
+        order: 10
+    - name: Create or update a form version
+      url: /api/latest/forms/create-or-update-a-form-version/
+      identifier: forms-create-or-update-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertFormVersion
+        unstable:
+          - v2
+        order: 7
+    - name: Publish a form version
+      url: /api/latest/forms/publish-a-form-version/
+      identifier: forms-publish-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishForm
+        unstable:
+          - v2
+        order: 8
+    - name: Clone a form
+      url: /api/latest/forms/clone-a-form/
+      identifier: forms-clone-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CloneForm
+        unstable:
+          - v2
+        order: 9
+    - name: Update a form
+      url: /api/latest/forms/update-a-form/
+      identifier: forms-update-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateForm
+        unstable:
+          - v2
+        order: 6
     - name: Get a form
       url: /api/latest/forms/get-a-form/
       identifier: forms-get-a-form
