@@ -13,7 +13,7 @@ further_reading:
   text: "Correlate Database Monitoring and Traces"
 ---
 
-<div class="alert alert-info">Bits Database Optimization is currently only available for PostgreSQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
+<div class="alert alert-info">Bits Database Optimization is only available for PostgreSQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
 
 ## Overview
 
