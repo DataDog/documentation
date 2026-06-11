@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry Metrics
+description: "Send OpenTelemetry metrics to Datadog using the OpenTelemetry Collector, the Datadog Agent, or an Agentless deployment."
 aliases:
   - /opentelemetry/otel_metrics
   - /opentelemetry/reference/otel_metrics

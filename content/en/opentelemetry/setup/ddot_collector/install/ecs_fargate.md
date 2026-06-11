@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on ECS Fargate
 code_lang: ecs_fargate
 type: multi-code-lang
-code_lang_weight: 4
+code_lang_weight: 5
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -66,6 +66,10 @@ Use the following task definition as a starting point:
                 {
                     "name": "DD_OTELCOLLECTOR_ENABLED",
                     "value": "true"
+                },
+                {
+                    "name": "DD_OTELCOLLECTOR_INSTALLATION_METHOD",
+                    "value": "ecs-fargate"
                 },
                 {
                     "name": "DD_SITE",

@@ -30,7 +30,7 @@ First, create a [metric-based SLO][2]. This example uses APM trace metrics to me
 
 ### SLO widget
 
-Select the SLO in the [SLO widget editor][1]. You can apply additional filters in the widget configuration to further scope the results displayed. This does not modify the original definition of the SLO. In the example, we add the `$env` and `$availability-zone` tags to the **filter by** field of the widget. 
+Select the SLO in the [SLO widget editor][1]. You can apply additional filters in the widget configuration to further scope the results displayed. This does not modify the original definition of the SLO. In the example, we add the `$env` and `$availability-zone` tags to the {{< ui >}}filter by{{< /ui >}} field of the widget. 
 
 {{< img src="service_management/service_level_objectives/slo_graph_query/slo_filter_by.png" alt="SLO Summary editor with dynamic tags for $env and $availability-zone" style="width:100%;" >}}
 

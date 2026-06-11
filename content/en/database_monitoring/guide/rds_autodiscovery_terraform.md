@@ -47,7 +47,7 @@ export TF_VAR_datadog_api_key="<YOUR_DATADOG_API_KEY>"
 export TF_VAR_datadog_db_password="<YOUR_DATADOG_DB_PASSWORD>"
 ```
 
-Your Datadog API key can be found at **Organization Settings → API Keys** in the Datadog UI.
+Your Datadog API key can be found at {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}} in the Datadog UI.
 
 ## Deploy the Agent with Terraform
 

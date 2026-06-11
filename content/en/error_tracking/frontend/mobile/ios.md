@@ -20,7 +20,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
 
 To symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Compatibility
 
@@ -88,10 +88,10 @@ DatadogRUM.xcframework
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to **Error Tracking** > **[Settings][2]** > **Browser and Mobile**.
-2. Click **New Application**.
-3. Enter an application name and select **iOS** as the application type.
-4. Click **Create Application** to generate a unique Datadog application ID and client token.
+1. Navigate to {{< ui >}}Error Tracking{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][2] > {{< ui >}}Browser and Mobile{{< /ui >}}.
+2. Click {{< ui >}}New Application{{< /ui >}}.
+3. Enter an application name and select {{< ui >}}iOS{{< /ui >}} as the application type.
+4. Click {{< ui >}}Create Application{{< /ui >}} to generate a unique Datadog application ID and client token.
 
 ### Step 3 - Initialize the library
 
@@ -268,6 +268,38 @@ configuration.site = [DDSite us1_fed];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .us2_fed,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us2_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -414,7 +446,7 @@ CrashReporting.enable()
 
 ### Step 5 - Add app hang reporting
 
-App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]). By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. App hangs are reported through the iOS SDK (not through [Logs][10]). By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last longer than a duration you can specify in the `appHangThreshold` initialization parameter. When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [{{< ui >}}Error Tracking{{< /ui >}}][1]. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
 
 There are two types of hangs:
 
@@ -502,7 +534,7 @@ Depending on your setup, you may need to download `.dSYM` files from App Store C
 | Bitcode Enabled | Description |
 |---|---|
 | Yes | `.dSYM` files are available after [App Store Connect][12] completes processing your application's build. |
-| No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
+| No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to {{< ui >}}DWARF with dSYM File{{< /ui >}}. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to {{< ui >}}DWARF with dSYM File{{< /ui >}} for the Release project configuration. |
 
 {{% /collapse-content %}}
 
@@ -624,7 +656,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
    }
    ```
 
-3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Advanced Error Tracking features
 

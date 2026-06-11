@@ -1,5 +1,5 @@
 ---
-title: Add the Datadog Tracing Library
+title: Add the Datadog SDK
 aliases:
     - /tracing/languages
     - /tracing/setup_overview/setup/undefined
@@ -12,7 +12,7 @@ aliases:
 To automatically instrument your application with Datadog libraries:
 
 1. [Install and configure the Agent](#install-and-configure-the-agent).
-2. [Add the Datadog tracing library to your code](#instrument-your-application).
+2. [Add the Datadog SDK to your code](#instrument-your-application).
 
 ## Install and configure the Agent
 
@@ -25,7 +25,12 @@ For containerized environments, follow the links below to enable trace collectio
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][8].
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
-{{< partial name="apm/apm-containers.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/agent/docker/apm/?tab=java" src="integrations_logos/docker.png" alt="Docker" >}}
+  {{< image-card href="/agent/kubernetes/apm/?tab=helm" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
+  {{< image-card href="/agent/amazon_ecs/apm/?tab=python" src="integrations_logos/amazon_ecs.png" alt="Amazon ECS" >}}
+  {{< image-card href="/integrations/ecs_fargate/#trace-collection" src="integrations_logos/ecs_fargate.png" alt="ECS Fargate" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -41,7 +46,7 @@ For containerized environments, follow the links below to enable trace collectio
 
    Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist, then stats are sent to `http://localhost:8125`.
 
-{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,gov,gov2,ap1,ap2" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -59,13 +64,26 @@ For other environments, see the [Integrations][14] documentation for that enviro
 
 ## Instrument your application
 
-Set up your application to send [traces][2] using one of the following official Datadog tracing libraries:
+Set up your application to send [traces][2] using one of the following official Datadog SDKs:
 
-{{< partial name="apm/apm-languages.html" >}}
+{{< card-grid card_width="225px" image_width="200">}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/cpp" src="integrations_logos/cpp.png" alt="C++" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/rust/" src="integrations_logos/rust.png" alt="Rust" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/dotnet-core" src="integrations_logos/dotnet-core.png" alt=".Net" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/dotnet-framework" src="integrations_logos/dotnet-framework.png" alt=".Net" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/android" src="integrations_logos/android.png" alt="Android" >}}
+  {{< image-card href="/tracing/trace_collection/dd_libraries/ios" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+{{< /card-grid >}}
 
 <br>
 
-To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
+To instrument an application written in a language that does not have official library support, see the list of [community SDKs][1].
 
 
 [1]: /extend/community/libraries/#apm-tracing-client-libraries

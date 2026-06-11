@@ -32,7 +32,7 @@ On the Observability overlay, you can take action on individual resources or gro
 
 ## View Datadog coverage
 
-In the bottom left legend, the **View Datadog coverage by** dropdown allows you to inspect the installation status for specific features. Each row shows:
+In the bottom left legend, the {{< ui >}}View Datadog coverage by{{< /ui >}} dropdown allows you to inspect the installation status for specific features. Each row shows:
 
 - Feature name (for example, APM, Logs, CNM)
 - Numerical coverage: X / Y (for example, 16/35), where:

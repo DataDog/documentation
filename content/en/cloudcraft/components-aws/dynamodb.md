@@ -11,13 +11,13 @@ Use the DynamoDB component to represent and visualize NoSQL, serverless, managed
 
 Use the toolbar to configure the component. Available options include:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for both the 2D and 3D views, or choose different colors for each.
-- **Table class**: Select the class of the DynamoDB table.
-- **Capacity mode**: Select the capacity mode of the DynamoDB table.
-- **Dataset (GiB)**: Enter the size of the dataset in GiB.
-- **Read units**: Enter the number of read capacity units.
-- **Write units**: Enter the number of write capacity units.
-- **Read consistency**: Select the read consistency of the DynamoDB table.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for both the 2D and 3D views, or choose different colors for each.
+- {{< ui >}}Table class{{< /ui >}}: Select the class of the DynamoDB table.
+- {{< ui >}}Capacity mode{{< /ui >}}: Select the capacity mode of the DynamoDB table.
+- {{< ui >}}Dataset (GiB){{< /ui >}}: Enter the size of the dataset in GiB.
+- {{< ui >}}Read units{{< /ui >}}: Enter the number of read capacity units.
+- {{< ui >}}Write units{{< /ui >}}: Enter the number of write capacity units.
+- {{< ui >}}Read consistency{{< /ui >}}: Select the read consistency of the DynamoDB table.
 
 ## API
 

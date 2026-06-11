@@ -1,0 +1,34 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "interval": 5000,
+      "queries": [
+        {
+          "data_source": "ci_pipelines",
+          "name": "a",
+          "compute": {
+            "aggregation": "count"
+          },
+          "search": {
+            "query": "*"
+          },
+          "indexes": [
+            "*"
+          ]
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "timeseries_request"
+  }
+}

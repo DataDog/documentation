@@ -39,12 +39,14 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 ## Set up a pipeline in the UI
 
+### Set up pipeline components
+
 {{< tabs >}}
 {{% tab "Logs" %}}
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case.
-1. Select and set up your [source][3].
+1. Select and set up a [log source][3].
 1. Add [processors][4] to transform, redact, and enrich your log data. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
 1. Select and set up [destinations][5] for your processed logs.
@@ -71,22 +73,23 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/
-[3]: /observability_pipelines/sources/
+[3]: /observability_pipelines/sources/?tab=logs#sources
 [4]: /observability_pipelines/processors/
-[5]: /observability_pipelines/destinations/
+[5]: /observability_pipelines/destinations/?tab=logs#destinations
 [11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-### Set up pipeline components
+<div class="alert alert-info">
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
-1. Set up the [Datadog Agent][3] source.
+1. Select and set up a [metrics source][3].
 1. Add [processors][4] to filter and transform your metrics. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
-1. Set up the [Datadog Metrics][5] destination.
+1. Select and set up [destinations][5] for your processed metrics.
 
 #### Add another processor group
 
@@ -96,9 +99,9 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
-[3]: /observability_pipelines/sources/datadog_agent/?tab=metrics
-[4]: /observability_pipelines/processors/
-[5]: /observability_pipelines/destinations/datadog_metrics/
+[3]: /observability_pipelines/sources/?tab=metrics#sources
+[4]: /observability_pipelines/processors/?tab=metrics#processors
+[5]: /observability_pipelines/destinations/?tab=metrics#destinations
 [11]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}

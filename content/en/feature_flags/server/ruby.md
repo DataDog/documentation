@@ -15,17 +15,18 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK. The Ruby SDK integrates with [OpenFeature][3], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK. The Ruby SDK integrates with [OpenFeature][3], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Ruby tracer (`datadog` gem).
 
 ## Prerequisites
 
 Before setting up the Ruby Feature Flags SDK, ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][1] enabled
-- **Datadog Ruby tracer** `datadog` version 2.23.0 or later
-- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
+- **Datadog Agent** version 7.55 or later with [Remote Configuration][1] enabled
+- **Datadog [API key][4]** configured on the Agent
+- **Datadog Ruby SDK** `datadog` version 2.24.0 or later
+- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later if you need flag evaluation metrics support
 - **Service and environment configured** - Feature flags are targeted by service and environment
-- **Supported operating system** - Feature flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
+- **Supported operating system** - Production support is limited to [Linux operating systems][2]. macOS and Windows are not natively supported production targets, but Dockerized Linux environments running on those operating systems are. For local development on macOS, you can use a compatible prebuilt native artifact when one is available.
 
 
 ## Installing and initializing
@@ -33,8 +34,22 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
 
 ```shell
-gem install ddtrace openfeature-sdk
+gem install datadog openfeature-sdk
 ```
+
+You can enable Feature Flags with environment variables:
+
+```shell
+# Required: Enable the feature flags provider
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
+# Optional: Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+```
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+Or enable the provider in code:
 
 ```ruby
 require 'datadog'
@@ -67,6 +82,8 @@ Using `set_provider_and_wait` blocks your application from proceeding until the 
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
@@ -204,6 +221,51 @@ if maintenance_mode
 end
 ```
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `Datadog::OpenFeature::Provider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships with `openfeature-sdk`, so no additional gem is required.
+
+The Ruby SDK's `InMemoryProvider` takes a plain hash of flag keys to values — variants and targeting rules are not supported. The OpenFeature provider is set on a process-global singleton, so tests that swap the provider must restore it in teardown to avoid leaking flag state across examples. An `around` hook handles setup, restoration, and exceptions cleanly in a single block.
+
+```ruby
+# spec/support/feature_flags.rb
+require 'open_feature/sdk'
+require 'open_feature/sdk/provider/in_memory_provider'
+
+RSpec.configure do |config|
+  config.around(:each, :feature_flags) do |example|
+    original = OpenFeature::SDK::API.instance.provider
+    OpenFeature::SDK.configure do |c|
+      c.set_provider(OpenFeature::SDK::Provider::InMemoryProvider.new(
+        'new-checkout-flow' => true,
+        'ui-theme' => 'dark',
+        'discount-rate' => 0.15
+      ))
+    end
+    example.run
+  ensure
+    OpenFeature::SDK.configure { |c| c.set_provider(original) } if original
+  end
+end
+
+# spec/checkout_spec.rb
+require 'spec_helper'
+
+RSpec.describe Checkout, :feature_flags do
+  let(:client) { OpenFeature::SDK.build_client }
+
+  it 'returns the in-memory flag value' do
+    expect(client.fetch_boolean_value(flag_key: 'new-checkout-flow', default_value: false)).to be true
+  end
+
+  it 'falls back to the default for unknown flags' do
+    expect(client.fetch_boolean_value(flag_key: 'does-not-exist', default_value: false)).to be false
+  end
+end
+```
+
+To mutate flag state during a test, call `add_flag(flag_key:, value:)` on the provider instance. The same pattern applies to Minitest — replace the `around` hook with `setup`/`teardown` methods.
+
 ## Troubleshooting
 
 ### Feature flags always return default values
@@ -217,7 +279,7 @@ If feature flags unexpectedly always return default values, check the following:
 
 ### Remote Configuration connection issues
 
-Check the Datadog tracer logs for Remote Configuration status:
+Check the Datadog Ruby tracer logs for Remote Configuration status:
 
 ```ruby
 # Enable startup and debug logging
@@ -241,3 +303,4 @@ Look for messages about:
 [1]: /agent/remote_config/
 [2]: /tracing/trace_collection/compatibility/ruby/#supported-operating-systems
 [3]: https://openfeature.dev/
+[4]: /account_management/api-app-keys/#api-keys

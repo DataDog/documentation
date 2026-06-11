@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [**Logs > Pipelines**][1].
+Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1].
 
 ## Configuration options
 
@@ -32,7 +32,7 @@ Datadog Logging without Limits* decouples log ingestion and indexing. Choose whi
 - [Generate metrics from ingested logs][6] as cost-efficient way to summarize log data from an entire ingested stream.
 - Institute fine-grained control over your log management budget with [log indexes][7].
 - Forward ingested logs to your own cloud-hosted storage bucket to keep as an [archive][8] for future troubleshooting or compliance audits.
-- [Rehydrate an archive][9] to analyze or investigate log events that are older or excluded from indexing.
+- [Search an archive][12] with Archive Search to query logs in real time directly from storage. Use **Search & Rehydration** mode when you need full platform access or longer retention.
 - Restrict [logs data access][10] with restriction queries.
 
 ## Log Explorer
@@ -54,6 +54,6 @@ Once you've completed configuration, start investigating and troubleshooting log
 [6]: /logs/log_configuration/logs_to_metrics/
 [7]: /logs/log_configuration/indexes
 [8]: /logs/log_configuration/archives/
-[9]: /logs/log_configuration/rehydrating
 [10]: /logs/guide/logs-rbac/
 [11]: /logs/explorer/
+[12]: /logs/explorer/archive_search/

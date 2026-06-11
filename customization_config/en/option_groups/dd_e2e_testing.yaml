@@ -38,3 +38,18 @@ dd_e2e_mongo_db_host_options:
   - id: replica_set
   - id: sharded_cluster
 
+dd_e2e_platform_options:
+  - id: ios
+    default: true
+  - id: android
+
+dd_e2e_ios_prog_lang_options:
+  - id: swift
+    default: true
+  - id: objective_c
+
+dd_e2e_android_prog_lang_options:
+  - id: kotlin
+    default: true
+  - id: java
+

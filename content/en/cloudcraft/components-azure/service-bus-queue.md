@@ -12,14 +12,14 @@ You can use the Service Bus Queue component to represent and visualize cloud mes
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the service tier for your service bus queue.
-- **Operations (M/month)**: Enter the number of monthly operations in millions. Not available for service tier Premium.
-- **Brokered connections**: Enter the number of brokered connections for your queue. Only available on service tier Standard.
-- **Hybrid connections**: Enter the number of hybrid connections for your queue. Only available on service tier Standard.
-- **Data transfer (GB)**: Enter the total volume of data transferred monthly in gigabytes. Only available on service tier Standard.
-- **Relay hours**: Enter the number of relay hours for your queue. Only available on service tier Standard.
-- **Relay messages (K/mo)**: Enter the number of monthly relayed messages in thousands. Only available on service tier Standard.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the service tier for your service bus queue.
+- {{< ui >}}Operations (M/month){{< /ui >}}: Enter the number of monthly operations in millions. Not available for service tier Premium.
+- {{< ui >}}Brokered connections{{< /ui >}}: Enter the number of brokered connections for your queue. Only available on service tier Standard.
+- {{< ui >}}Hybrid connections{{< /ui >}}: Enter the number of hybrid connections for your queue. Only available on service tier Standard.
+- {{< ui >}}Data transfer (GB){{< /ui >}}: Enter the total volume of data transferred monthly in gigabytes. Only available on service tier Standard.
+- {{< ui >}}Relay hours{{< /ui >}}: Enter the number of relay hours for your queue. Only available on service tier Standard.
+- {{< ui >}}Relay messages (K/mo){{< /ui >}}: Enter the number of monthly relayed messages in thousands. Only available on service tier Standard.
 
 ## API
 

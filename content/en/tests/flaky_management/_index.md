@@ -11,32 +11,35 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
   tag: "Knowledge Center"
   text: "Flaky Tests Overview"
+- link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+  tag: "Learning Center"
+  text: "Getting Started with Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
+The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
 
 {{< img src="tests/flaky_management-2.png" alt="Overview of the Flaky Tests Management UI" style="width:100%;" >}}
 
-## Change a flaky test's status
+## Change a flaky test's state
 
-Use the status drop-down to change how a flaky test is handled in your CI pipeline. This can help reduce CI noise while retaining traceability and control. Available statuses are:
+Use the state drop-down to change how a flaky test is handled in your CI pipeline. This can help reduce CI noise while retaining traceability and control. Available states are:
 
-| Status    | Description |
+| State     | Description |
 | ----------- | ----------- |
 | **Active** | The test is known to be flaky and is running in CI. |
 | **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
-| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this status after it is merged into the default branch. |
+| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
-<div class="alert alert-info">Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
+<div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
 ## Configure policies to automate the flaky test lifecycle
 
@@ -61,7 +64,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
            <p>Toggle to allow flaky tests to be quarantined for this repository.</p>
            <p>Customize automation rules based on:</p>
            <ul>
-             <li><strong>Time</strong>: Quarantine a test if its status is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
+             <li><strong>Time</strong>: Quarantine a test if its state is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
              <li><strong>Branch</strong>: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
              <li><strong>Failure rate</strong>: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
            </ul>
@@ -73,7 +76,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
            <p>Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness.</p>
            <p>Customize automation rules based on:</p>
            <ul>
-             <li><strong>Status and time</strong>: Disable a test if it has a specified status for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
+             <li><strong>State and time</strong>: Disable a test if it has a specified state for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
              <li><strong>Branch</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
              <li><strong>Failure rate</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
            </ul>
@@ -85,7 +88,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
        </tr>
        <tr>
          <td><strong>Fixed</strong></td>
-         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized.</td>
+         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</td>
        </tr>
      </tbody>
    </table>
@@ -128,7 +131,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
     - If all retries pass, marks the fix as **in progress** in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:true` in test run events.
       - Starts a 14-day [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
-    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+    - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
 
 ### Track fixes that are in progress
@@ -145,34 +148,30 @@ Requirements and limitations:
 
 After you fix a flaky test, it can take time for the fix to propagate to all branches, which can cause the test to keep flaking in stale branches. A grace period mechanism prevents flaky tests from appearing on stale branches after the fix is applied.
 
-A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog checks if the commit where the test run contains the fix:
-- If the fix is not present in the commit and the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
+A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog treats the test based on its status before the grace period started:
+- If the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
 - If the test was **Disabled**, Datadog treats the test as **Disabled**.
+
 This method avoids unnecessary CI failures and saves developer time.
 
-If a test inside the grace period flakes and the commit doesn't contain the fix, Datadog tags the test run event with `@test.test_management.flaky_fix_missing:true`.
+## Bits AI-powered flaky test fixes
 
-## AI-powered flaky test fixes
+After Test Optimization detects a flaky test, [Bits Code][16] can automatically diagnose and fix it. Bits Code analyzes the test's failure patterns and generates production-ready code changes. You can then create a GitHub pull request directly from Bits Code's suggestions.
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
-
-Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
-
-For Bits AI to create a fix, the flaky test must meet the following criteria:
+For Bits Code to create a fix, the flaky test must meet the following criteria:
 - **Failure rate**: At least 5%
 - **Wasted time**: At least 2 hours
 - **Failed pipelines**: At least 2 pipelines
 - **Branch**: Must have flaked in the default branch
+- **Failed executions**: Must have at least 1 failed execution that includes both `@error.message` and `@test.source.file` tags
 
-{{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
+{{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits Code displaying a proposed fix for a flaky test" style="width:100%;" >}}
 
 ### Setup
 
-To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
+To allow Bits Code to suggest flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically creates fixes for flaky tests detected by Test Optimization.
 
-<div class="alert alert-info">A flaky test must have at least one failed execution that includes both <code>@error.message</code> and <code>@test.source.file</code> tags to be eligible for a fix. Generating a fix may take some time.</div>
+After you have enabled Bits Code, when viewing a flaky test, click **Generate fix**.
 
 ## AI-powered flaky test categorization
 
@@ -201,15 +200,31 @@ Flaky Tests Management uses AI to automatically assign a root cause category to 
 
 ## Receive notifications
 
-Set up notifications to track changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notification for each repository from the  [**Flaky Test Policies**][13] page in Software Delivery settings.
+Set up notifications to track changes to your flaky tests. Notifications are sent when:
+- A new flaky test is detected on the default branch of the repository.
+- A user or policy changes the state of a flaky test.
+- The remediation flow for a flaky test succeeds or fails.
 
-Notifications are not sent immediately; they are batched every few minutes to reduce noise.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] page in Software Delivery settings.
+
+Notifications are bundled over a short period to reduce noise.
+
+### Notification types
+
+| Notification type | Description |
+|---|---|
+| **New flaky test detected** | A new flaky test is detected on the default branch of the repository. |
+| **Test quarantined** | A test is quarantined by an automated policy rule (time-based, branch-based, or failure rate). |
+| **Test disabled** | A test is disabled by an automated policy rule (time-based, branch-based, or failure rate). |
+| **Fix successful** | A test passes all retries in the remediation flow and is marked as "fix in progress". |
+| **Fix failed** | A test fails during the remediation flow. |
+| **Manual state change** | A user manually changes the state of a flaky test. |
 
 {{< img src="tests/flaky_management_notifications_settings-2.png" alt="Notifications settings UI" style="width:100%;" >}}
 
 ## Compatibility
 
-To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
+To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog SDK required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
@@ -220,6 +235,17 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 | [Python][10]    | 3.3.0+                        | 3.8.0+                       |
 | [Ruby][11]      | 1.13.0+                       | 1.17.0+                      |
 | [Swift][12]     | 2.6.1+                        | 2.6.1+                       |
+
+## Troubleshooting
+
+### Slack notifications are not delivered
+
+If Slack notifications are not being delivered, check that your notification rule uses the `@slack-ACCOUNT-CHANNEL` format.
+
+If you are using `@slack-CHANNEL` (without the account name), the notification is routed to the first configured Slack account. For organizations with multiple Slack workspaces, this may not be the intended workspace.
+
+To find your account name, go to the [Slack integration tile][5] and check the
+**Account Name** field for the workspace you want to use.
 
 ## Further reading
 

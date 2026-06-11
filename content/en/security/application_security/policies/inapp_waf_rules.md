@@ -8,11 +8,11 @@ aliases:
 
 ## Overview
 
-With App and API Protection (AAP) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
+With App and API Protection (AAP) enabled, the Datadog SDK actively monitors all web services and API requests for suspicious security activity.
 
-An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box AAP In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules.
+An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog SDK includes hundreds of out-of-the-box AAP In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules.
 
-You can add to the In-App WAF rules without upgrading the tracing library.
+You can add to the In-App WAF rules without upgrading the SDK.
 
 ## Structure of an AAP In-App WAF rule
 
@@ -145,4 +145,4 @@ Next, [configure detection rules to create security signals][1] based on those s
 [3]: /security/application_security/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 [5]: https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules
-[6]: /security/account_takeover_protection
+[6]: /security/application_security/account_takeover_protection/

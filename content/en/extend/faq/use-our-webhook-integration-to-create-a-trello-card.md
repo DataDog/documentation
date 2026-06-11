@@ -46,7 +46,7 @@ In the configuration:
 
 * "URL" is `https://api.trello.com/1/cards`
 
-Enable Custom Payload and fill in a JSON object that looks like:
+{{< ui >}}Enable Custom Payload{{< /ui >}} and fill in a JSON object that looks like:
 
 ```json
 {

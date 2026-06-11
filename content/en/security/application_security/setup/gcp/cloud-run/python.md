@@ -53,11 +53,11 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Install the Datadog Python tracer.
+2. Install the Datadog Python SDK.
    ```dockerfile
    RUN pip install --target /dd_tracer/python/ ddtrace
    ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
+   If you install the Datadog SDK directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
 3. (Optional) Add Datadog tags.
    ```dockerfile
