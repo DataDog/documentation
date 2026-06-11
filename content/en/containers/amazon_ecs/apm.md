@@ -121,8 +121,8 @@ If you are updating a local file for your Agent's task definition, [register you
 
 ## Configure your application container to submit traces to Datadog Agent
 
-### Install the tracing library
-Follow the [setup instructions for installing the Datadog tracing library][2] for your application's language. For ECS install the tracer into your application's container image.
+### Install the SDK
+Follow the [setup instructions for installing the Datadog SDK][2] for your application's language. For ECS install the SDK into your application's container image.
 
 ### Provide the UDS configuration
 
@@ -174,7 +174,7 @@ To configure this in your application's task definition:
 Once deployed, the Application container and Datadog Agent container will share the `sourcePath` typed volume at `/var/run/datadog` and can communicate through the sockets in this folder.
 
 ### Provide the private IP address for the EC2 instance
-If you are not using UDS, provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
+If you are not using UDS, provide the SDK with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the SDK endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
 Use one of the following methods to dynamically get the private IP address:
 
@@ -212,11 +212,11 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{% /tab %}}
 {{< /tabs >}}
 
-Provide the result of this request to the tracer by setting the `DD_AGENT_HOST` environment variable for each application container that sends traces.
+Provide the result of this request to the SDK by setting the `DD_AGENT_HOST` environment variable for each application container that sends traces.
 
 ### Configure the Trace Agent endpoint
 
-In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entry point, include this call as part of the script, otherwise add it to the ECS Task Definition's `entryPoint`.
+In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the SDK endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entry point, include this call as part of the script, otherwise add it to the ECS Task Definition's `entryPoint`.
 
 For other supported languages (Python, JavaScript, Ruby, and Go) you can alternatively set the hostname in your application's source code.
 
@@ -253,7 +253,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly:
+You can alternatively update your code to have the SDK set the hostname explicitly:
 
 ```javascript
 const tracer = require('dd-trace').init();
@@ -280,7 +280,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly:
+You can alternatively update your code to have the SDK set the hostname explicitly:
 
 ```ruby
 require 'datadog' # Use 'ddtrace' if you're using v1.x
@@ -307,7 +307,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly. {{% tracing-go-v2 %}}
+You can alternatively update your code to have the SDK set the hostname explicitly. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -347,9 +347,9 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Java Startup Command>"
 ]
 ```
-The Java startup command should include your `-javaagent:/path/to/dd-java-agent.jar`, see the [Java tracing docs for adding the tracer to the JVM][1] for further examples.
+The Java startup command should include your `-javaagent:/path/to/dd-java-agent.jar`, see the [Java tracing docs for adding the SDK to the JVM][1] for further examples.
 
-[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-tracer-to-the-jvm
+[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-sdk-to-the-jvm
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}

@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
   tag: "Blog"
   text: "Manage your monitors more efficiently with Datadog Teams"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Customize Alert Monitor Notifications"
+
 ---
 
 ## Overview
@@ -46,7 +50,7 @@ The Evaluated Data graph shows how your monitor would have evaluated the data us
 - Preview who would be notified (including from notification rules)
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, and Deployment monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, Agent Observability, and Deployment monitors.
 
 {{% /tab %}}
 

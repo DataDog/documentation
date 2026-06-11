@@ -14,6 +14,9 @@ further_reading:
 - link: "/synthetics/test_suites/"
   tag: "Documentation"
   text: "Test Suites"
+- link: "/api/latest/synthetics/#list-synthetics-downtimes"
+  tag: "API"
+  text: "Synthetics Downtimes API"
 ---
 
 ## Overview
@@ -91,6 +94,10 @@ To apply an existing downtime to multiple tests or test suites at once:
 - When viewing the calendar with multiple downtimes configured, filter by a specific downtime to avoid a crowded view.
 - For complex recurrence patterns, split requirements into multiple time slots within the same downtime.
 
+## Manage downtimes programmatically
+
+You can create, update, list, and delete Synthetic Monitoring downtimes through the [Synthetics API][4]. Use the API to integrate downtime management into your deployment pipelines or automation scripts.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +105,4 @@ To apply an existing downtime to multiple tests or test suites at once:
 [1]: /monitors/downtimes/
 [2]: https://app.datadoghq.com/synthetics/settings/downtimes
 [3]: https://app.datadoghq.com/synthetics/tests
+[4]: /api/latest/synthetics/#list-synthetics-downtimes

@@ -8,8 +8,8 @@ further_reading:
   text: "Backtest detection rules with Datadog Cloud SIEM Historical Jobs"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">This feature is not supported for the US1-FED site.</div>
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">This feature is not supported for the {{% region-param key="dd_datacenter" %}} site.</div>
 {{% /site-region %}}
 
 Historical Jobs allows you to backtest detections by running them against historical logs stored in Datadog Cloud SIEM.

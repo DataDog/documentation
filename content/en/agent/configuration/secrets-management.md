@@ -417,7 +417,7 @@ The GCP Secret Manager implementation uses [Application Default Credentials (ADC
 
 To interact with GCP Secret Manager, the service account used by the Datadog Agent (such as the VM's service account, a workload identity, or locally activated credentials) requires the `secretmanager.versions.access` permission.
 
-This can be granted with the predefined role **Secret Manager Secret Accessor** (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
+This can be granted with the predefined role {{< ui >}}Secret Manager Secret Accessor{{< /ui >}} (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
 
 On GCE or GKE runtimes, ADC is configured automatically through the instance or pod's attached service account. The attached service account needs to have the proper roles to access GCP Secret Manager. In addition, the GCE or GKE runtime requires the `cloud-platform` [OAuth access scope][5003].
 
@@ -855,7 +855,7 @@ docker service create \
   --env DD_SECRET_BACKEND_TYPE="docker.secrets" \
   --env DD_SITE="datadoghq.com" \
   --env DD_HOSTNAME="dd-agent" \
-  datadog/agent:latest
+  registry.datadoghq.com/agent:latest
 ```
 
 The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, and the Agent reads it using the `docker.secrets` backend.
@@ -869,7 +869,7 @@ version: '3.8'
 
 services:
   datadog:
-    image: datadog/agent:latest
+    image: registry.datadoghq.com/agent:latest
     environment:
       - DD_API_KEY=ENC[dd_api_key]
       - DD_SECRET_BACKEND_TYPE=docker.secrets

@@ -50,7 +50,7 @@ To enable listening for SNMP traps, use the following instructions:
          authKey: myAuthKey2
          authProtocol: "SHA" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
          privKey: myPrivKey2
-         privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+         privProtocol: "AES" # choices: DES, AES, AES192, AES192C, AES256, AES256C
    ```
 
    **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.

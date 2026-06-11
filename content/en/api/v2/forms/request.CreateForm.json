@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "anonymous": false,
+      "data_definition": {},
+      "description": "A form to collect user feedback.",
+      "idp_survey": false,
+      "name": "User Feedback Form",
+      "single_response": false,
+      "ui_definition": {}
+    },
+    "type": "forms"
+  }
+}

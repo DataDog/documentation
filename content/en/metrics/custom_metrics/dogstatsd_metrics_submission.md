@@ -14,6 +14,10 @@ further_reading:
 - link: "/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
+- link: "https://learn.datadoghq.com/courses/create-custom-metrics-dogstatsd"
+  tag: "Learning Center"
+  text: "Create Custom Metrics with DogStatsD"
+
 ---
 
 While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for metrics split down by metric types, and introduces [sampling rates](#sample-rates) and [metric tagging](#metric-tagging) options specific to DogStatsD.

@@ -24,6 +24,10 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
       tag: "Blog"
       text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
+    - link: "https://learn.datadoghq.com/courses/create-custom-metrics-dogstatsd"
+      tag: "Learning Center"
+      text: "Create Custom Metrics with DogStatsD"
+
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:

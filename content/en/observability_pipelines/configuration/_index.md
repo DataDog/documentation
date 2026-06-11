@@ -105,12 +105,12 @@ An example of a metric:
 
 The available metric types:
 
-| Metric type | Description | Example |
-| ----------- | ----------- | ------- |
-| COUNTER     | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased. | You want to count the number of logs with `status:error`. |
-| GAUGE       | Represents a snapshot of events in one time interval. | You want to measure the latest CPU utilization per host for all logs in the production environment. |
-| DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made. |
-| HISTOGRAM   | Represents the statistical distribution of a set of values calculated in one time interval. | You want to measure response time distributions for a service or endpoint. |
+| Metric type  | Description                                                                                                                                                       | Example                                                                                       |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| COUNTER      | The total number of event occurrences in one time interval. Can be reset to zero, but cannot be decreased.                                                        | You want to count the number of logs with `status:error`.                                     |
+| GAUGE        | A snapshot of a value at the time it is reported.                                                                                                                 | You want to track the latest CPU utilization for each host.                                   |
+| HISTOGRAM    | Statistical aggregations (`avg`, `min`, `max`, `count`, `median`, percentiles) computed per host by the Datadog Agent in one time interval, then sent to Datadog. | You want per-host request latency aggregations from each web server.                          |
+| DISTRIBUTION | Raw values sent to Datadog so percentile aggregations are computed server-side, globally across every host reporting the metric in one time interval.             | You want the global p95 latency of an API endpoint, calculated across every host serving it.  |
 
 See [Metric Types][3] for more information.
 

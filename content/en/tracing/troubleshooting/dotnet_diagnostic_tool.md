@@ -5,13 +5,13 @@ description: Use the dd-dotnet diagnostic tool to troubleshoot .NET tracing setu
 
 If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
 
-The diagnostic tool  `dd-dotnet` is bundled with the tracing library starting with version 2.42.0. It is located in the tracing library's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
+The diagnostic tool  `dd-dotnet` is bundled with the SDK starting with version 2.42.0. It is located in the SDK's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
 
 ## Installing `dd-trace`
 
-**This section is for versions of the tracer older than 2.42.0.**
+**This section is for versions of the SDK older than 2.42.0.**
 
-Older versions of the tracer did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
+Older versions of the SDK did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
 
 You can install `dd-trace` in one of the following ways:
 

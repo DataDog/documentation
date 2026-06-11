@@ -19,13 +19,13 @@ If you want to encapsulate logic within your app, you can use state variables.
 ## Create a state variable
 
 To add a state variable with Bits AI:
-   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Click the {{< ui >}}Build with AI{{< /ui >}} icon (**<i class="icon-bits-ai"></i>**).
    1. Enter a custom prompt for a variable, or try the prompt `How can you help me with variables?`.
 
 To add a state variable manually:
 
-1. In your app, click the Data (**{&nbsp;}**) icon to open the Data tab.
-1. Click the plus (**+**), then select **Variable**.
+1. In your app, click the {{< ui >}}Data{{< /ui >}} ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab.
+1. Click the plus ({{< ui >}}+{{< /ui >}}), then select {{< ui >}}Variable{{< /ui >}}.
 1. Optionally, click the variable name and rename it.
 1. Define the initial value for your state variable.
 
@@ -37,22 +37,22 @@ To create an app that uses a button to change a callout value component's style 
 
 ### Create the variables
 
-1. In your app, click the Data (**{&nbsp;}**) icon to open the Data tab.
-1. Click the plus (**+**), then select **Variable**.
-1. Name the variable `callout_value` and set its **Initial Value** to `Pass`.
-1. Click the plus (**+**) to create another variable.
-1. Name this variable `callout_color` and set its **Initial Value** to `green`.
+1. In your app, click the {{< ui >}}Data{{< /ui >}} ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab.
+1. Click the plus ({{< ui >}}+{{< /ui >}}), then select {{< ui >}}Variable{{< /ui >}}.
+1. Name the variable `callout_value` and set its {{< ui >}}Initial Value{{< /ui >}} to `Pass`.
+1. Click the plus ({{< ui >}}+{{< /ui >}}) to create another variable.
+1. Name this variable `callout_color` and set its {{< ui >}}Initial Value{{< /ui >}} to `green`.
 
 ### Create the components
 
 1. Add a callout value component to your app. Give it the following values:
-    * **Value**: `${callout_value.value}`
-    * **Style**: `${callout_color.value}`
+    * {{< ui >}}Value{{< /ui >}}: `${callout_value.value}`
+    * {{< ui >}}Style{{< /ui >}}: `${callout_color.value}`
 1. Add a button component to your app and set its label to `Change status`.
-1. Under **Events**, add an event. Give it the following values:
-    * **Event**: `click`
-    * **Reaction**: `custom`
-    * **Callback**:
+1. Under {{< ui >}}Events{{< /ui >}}, add an event. Give it the following values:
+    * {{< ui >}}Event{{< /ui >}}: `click`
+    * {{< ui >}}Reaction{{< /ui >}}: `custom`
+    * {{< ui >}}Callback{{< /ui >}}:
         ```
         ${ () => {
             if(callout_color.value !== "green"){
@@ -64,8 +64,8 @@ To create an app that uses a button to change a callout value component's style 
             }
         } }
         ```
-1. Click **Preview** to preview your app.<br>
-    When you click the **Change status** button in your app, the color and text of the callout value element alternate between a green Pass and a red Fail.
+1. Click {{< ui >}}Preview{{< /ui >}} to preview your app.<br>
+    When you click the {{< ui >}}Change status{{< /ui >}} button in your app, the color and text of the callout value element alternate between a green Pass and a red Fail.
 
 ## Further reading
 

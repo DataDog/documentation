@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives'
       tag: 'Blog'
       text: 'Using LLMs to filter out false positives from static code analysis'
+    - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+      tag: "Blog"
+      text: "Introducing Bits Code for Code Security"
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.
@@ -142,11 +145,7 @@ Each finding includes a section with an explanation of the assessment. You can p
 
 ## Remediation
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-AI-suggested remediation for SAST is powered by the Bits AI Dev Agent and is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
-
-Datadog SAST uses the [Bits AI Dev Agent][10] to generate code fixes for vulnerabilities. You can remediate individual vulnerabilities or fix multiple vulnerabilities using bulk remediation campaigns.
+Datadog SAST uses the [Bits Code][10] to generate code fixes for vulnerabilities. You can remediate individual vulnerabilities or fix multiple vulnerabilities using bulk remediation campaigns.
 
 To view and remediate vulnerabilities:
 
@@ -171,7 +170,7 @@ Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal w
 - **PR grouping options**: How Bits AI should group findings into pull requests (for example, one PR per repository, file, or finding). You can also limit the number of open PRs and the number of findings per PR.
 - **Custom instructions** (optional): Additional guidance for how Bits AI should generate fixes, such as changelog requirements or pull request title formatting.
 
-After you create a campaign, Bits AI Dev Agent loads the in-scope findings, generates patches based on your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes.
+After you create a campaign, Bits Code loads the in-scope findings, generates patches based on your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes.
 
 <div class="alert alert-info">
 <ul>
@@ -182,11 +181,11 @@ After you create a campaign, Bits AI Dev Agent loads the in-scope findings, gene
 
 #### View campaign progress
 
-To view all campaigns, navigate to [**Bits AI** > **Dev Agent** > **Code Sessions** > **Campaigns**][12].
+To view all campaigns, navigate to [**Bits AI** > **Bits Code** > **Sessions** > **Campaigns**][12].
 
-Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits AI Dev Agent][10].
+Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits Code][10].
 
-{{< img src="/code_security/static_analysis/campaigner-hero-image.png" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
+{{< img src="/code_security/static_analysis/campaigner-hero-image.png" alt="Campaigns page in Bits Code" style="width:100%;">}}
 
 ### Remediation session details
 
@@ -199,9 +198,9 @@ Each code session shows the life cycle of an AI-generated fix so you can review 
 
 To open the remediation session, select the vulnerability from the [**Vulnerabilities**][6] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**.
 
-You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Code Sessions**][7] views.
+You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Sessions**][7] views.
 
-{{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light-png.png" alt="Concluded remediation session in Bits AI Dev Agent showing generated fixes and pull request options" style="width:100%;">}}
+{{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light-png.png" alt="Concluded remediation session in Bits Code showing generated fixes and pull request options" style="width:100%;">}}
 
 ## Further reading
 

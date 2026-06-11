@@ -12,7 +12,7 @@ further_reading:
 
 Event Management correlates related events and automatically consolidates them into a single case. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
-From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **Case Management** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
+From the [Correlation][1] page, find the pattern you want to analyze and click {{< ui >}}Triage Cases{{< /ui >}} at the end of the same row. You can also click {{< ui >}}Case Management{{< /ui >}} at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
 ## Event Management Case
 
@@ -31,11 +31,11 @@ From the [Correlation][1] page, find the pattern you want to analyze and click *
 For more information on Case Management operations, see the [Case Management documentation][5].
 
 ### Investigation
-1. From the case Overview, click **Investigation**
-1. Under the *Correlations* section, you can see a list of alerts and events
+1. From the case Overview, click {{< ui >}}Investigation{{< /ui >}}
+1. Under the {{< ui >}}Correlations{{< /ui >}} section, you can see a list of alerts and events
 1. Click into any of the alerts or events to view all related metrics and logs in context of the alert
 1. (Optional) Select any alerts or events you want to remove that are not related to the case
-1. Under the *Related Metrics* section, compare all related metrics or group by tags
+1. Under the {{< ui >}}Related Metrics{{< /ui >}} section, compare all related metrics or group by tags
 
 
 ## Create a notification or ticket
@@ -44,7 +44,7 @@ With correlated events, you can configure one notification for a group. So, inst
 
 ### Ticketing
 
-On the Project Settings page, configure the Integrations you want your projects to send notifications to. Datadog supports the following integrations with manual and automatic ticket creation, and bi-directional syncing:
+On the {{< ui >}}Project Settings{{< /ui >}} page, configure the Integrations you want your projects to send notifications to. Datadog supports the following integrations with manual and automatic ticket creation, and bi-directional syncing:
 - ServiceNow
 - Jira
 
@@ -52,7 +52,7 @@ For setup instructions, see the [Case Management Settings][3] documentation.
 
 ## Notifications
 
-In case management, _views_ group cases based on a configured query. You can set up a notification when a case matching this query is created. Datadog supports, **Pagerduty**, **Email**, **Webhook**, **Microsoft Teams**, and **Slack**. To learn how to create a view, see the [Case Management Views][4] documentation.
+In case management, _views_ group cases based on a configured query. You can set up a notification when a case matching this query is created. Datadog supports {{< ui >}}Pagerduty{{< /ui >}}, {{< ui >}}Email{{< /ui >}}, {{< ui >}}Webhook{{< /ui >}}, {{< ui >}}Microsoft Teams{{< /ui >}}, and {{< ui >}}Slack{{< /ui >}}. To learn how to create a view, see the [Case Management Views][4] documentation.
 
 **Note**: You need to reconfigure underlying monitors to remove multiple notifications. Grouping monitor events does not mute individual notifications.
 

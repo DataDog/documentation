@@ -60,7 +60,7 @@ Fast retries automatically re-run failed test executions. A test configured with
 
 If you have a [minimum duration](#alerting-rules) configured as an alerting rule, the timer starts when the final fast retry execution fails. Fast retry runs appear in test results with a `(fast retry)` label in the **Run Type** column.
 
-{{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_test_runs_2.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:100%;" >}}
+{{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_test_runs_3.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:100%;" >}}
 
 ## Alerting rules
 

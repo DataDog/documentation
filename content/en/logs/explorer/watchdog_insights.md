@@ -32,7 +32,7 @@ To see an overview of all insights, expand the Watchdog Insight banner:
 
 {{< img src="logs/explorer/watchdog_insights/banner_expanded.png" alt="The Watchdog Insights banner showing three error outliers" style="width:100%;" >}}
 
-To access the full Watchdog Insights side panel, click **View all**:
+To access the full Watchdog Insights side panel, click {{< ui >}}View all{{< /ui >}}:
 
 {{< img src="logs/explorer/watchdog_insights/side_panel.png" alt="The Watchdog Insights side panel showing more details about the error outliers" style="width:100%;" >}}
 
@@ -75,18 +75,18 @@ Error outliers display fields such as [faceted tags or attributes][4] containing
 
 Typical examples of error outliers include `env:staging`, `docker_image:acme:3.1`, and `http.useragent_details.browser.family:curl`.
 
-In the **banner card** view, you can see:
+In the {{< ui >}}banner card{{< /ui >}} view, you can see:
 
   * The field name.
   * The proportion of errors and overall logs that the field contributes to.
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
 
-In the **side panel card** view, you can see the main [log pattern][5] of error logs with the field.
+In the {{< ui >}}side panel card{{< /ui >}} view, you can see the main [log pattern][5] of error logs with the field.
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="Error Outlier card (L)" style="width:100%;" >}}
 
-In the **full side panel** view, you can see:
+In the {{< ui >}}full side panel{{< /ui >}} view, you can see:
 
   * The timeseries of error logs that contain the field.
   * Tags that are often associated with the error logs.
