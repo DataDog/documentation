@@ -1,6 +1,7 @@
 ---
 title: Library Configuration
 aliases:
+  - /security/application_security/policies/library_configuration/
   - /security_platform/application_security/setup_and_configure
   - /security/application_security/setup_and_configure
   - /security/application_security/setup_and_configure

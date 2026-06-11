@@ -198,6 +198,6 @@ Custom authentication detection is possible by configuring [Endpoint Tagging Rul
 [11]: /security/application_security/api_posture/endpoint_scanning/
 [12]: /integrations/guide/source-code-integration/
 [13]: /internal_developer_portal/catalog/entity_model/
-[14]: /security/application_security/policies/library_configuration/#configuring-a-client-ip-header
+[14]: /security/application_security/threat_protection/policies/library_configuration/#configuring-a-client-ip-header
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
 [16]: /security/application_security/api_posture/sensitive_data/

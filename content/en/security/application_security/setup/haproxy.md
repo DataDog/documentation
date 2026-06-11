@@ -166,7 +166,7 @@ For additional details on the HAProxy integration compatibilities, refer to the 
 [4]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fhaproxy-spoa
 [5]: https://github.com/DataDog/dd-trace-go
 [6]: /tracing/trace_collection/library_config/go/
-[7]: /security/application_security/policies/library_configuration/
+[7]: /security/application_security/threat_protection/policies/library_configuration/
 [8]: https://github.com/DataDog/dd-trace-go/tree/main/contrib/haproxy/stream-processing-offload/cmd/spoa/haproxyconf/
 [9]: https://github.com/DataDog/dd-trace-go/blob/main/contrib/haproxy/stream-processing-offload/cmd/spoa/haproxyconf/CHANGELOG.md
 [10]: /security/application_security/setup/compatibility/haproxy

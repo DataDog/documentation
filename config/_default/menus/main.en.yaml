@@ -8191,37 +8191,37 @@ menu:
       identifier: application_security_threat_protection
       weight: 5
     - name: Security Signals
-      url: security/application_security/security_signals
+      url: security/application_security/threat_protection/security_signals
       parent: application_security_threat_protection
       identifier: application_security_security_signals
       weight: 1
     - name: Attackers Explorer
-      url: security/application_security/security_signals/attacker-explorer/
+      url: security/application_security/threat_protection/security_signals/attacker-explorer/
       parent: application_security_security_signals
       identifier: threats_attackers
       weight: 1
     - name: Attacker Fingerprint
-      url: security/application_security/security_signals/attacker_fingerprint/
+      url: security/application_security/threat_protection/security_signals/attacker_fingerprint/
       parent: application_security_security_signals
       identifier: threats_attacker_fingerprint
       weight: 2
     - name: Attacker Clustering
-      url: security/application_security/security_signals/attacker_clustering/
+      url: security/application_security/threat_protection/security_signals/attacker_clustering/
       parent: application_security_security_signals
       identifier: threats_attacker_clustering
       weight: 3
     - name: Users Explorer
-      url: security/application_security/security_signals/users_explorer/
+      url: security/application_security/threat_protection/security_signals/users_explorer/
       parent: application_security_security_signals
       identifier: threats_users
       weight: 4
     - name: Policies
-      url: security/application_security/policies/
+      url: security/application_security/threat_protection/policies/
       parent: application_security_threat_protection
       identifier: application_security_policies
       weight: 2
     - name: Custom Rules
-      url: security/application_security/policies/custom_rules/
+      url: security/application_security/threat_protection/policies/custom_rules/
       parent: application_security_policies
       identifier: application_security_policies_custom_rules
       weight: 1
@@ -8231,27 +8231,27 @@ menu:
       identifier: application_security_policies_ootb_rules
       weight: 2
     - name: In-App WAF Rules
-      url: security/application_security/policies/inapp_waf_rules/
+      url: security/application_security/threat_protection/policies/inapp_waf_rules/
       parent: application_security_policies
       identifier: application_security_policies_inappwaf_rules
       weight: 3
     - name: Tracing Library Configuration
-      url: security/application_security/policies/library_configuration/
+      url: security/application_security/threat_protection/policies/library_configuration/
       parent: application_security_policies
       identifier: application_security_policies_tracing_lib
       weight: 4
     - name: Exploit Prevention
-      url: security/application_security/exploit-prevention/
+      url: security/application_security/threat_protection/exploit-prevention/
       parent: application_security_threat_protection
       identifier: exploit_prevention
       weight: 3
     - name: WAF Integrations
-      url: security/application_security/waf-integration/
+      url: security/application_security/threat_protection/waf-integration/
       parent: application_security_threat_protection
       identifier: aws_waf_int
       weight: 4
     - name: Account Takeover Protection
-      url: security/application_security/account_takeover_protection/
+      url: security/application_security/threat_protection/account_takeover_protection/
       parent: application_security_threat_protection
       identifier: security_ato_protection
       weight: 5

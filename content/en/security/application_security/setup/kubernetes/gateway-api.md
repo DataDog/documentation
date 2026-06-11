@@ -185,7 +185,7 @@ For finer-grained analysis and other AAP features, consider trying other AAP int
 [2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [6]: https://github.com/DataDog/dd-trace-go
 [7]: /tracing/trace_collection/library_config/go/
-[8]: /security/application_security/policies/library_configuration/
+[8]: /security/application_security/threat_protection/policies/library_configuration/
 [9]: https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api
 [10]: https://gateway-api.sigs.k8s.io/implementations
 [11]: https://go.dev/doc/install

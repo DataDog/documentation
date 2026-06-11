@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /security/application_security/security_signals/users_explorer/
 title: Users Explorer
 disable_toc: false
 ---
@@ -168,11 +170,11 @@ Here are some investigation tips for comparing each datapoint across two (or mor
 
 
 [1]: https://app.datadoghq.com/security/appsec/users
-[2]: /security/application_security/policies/
+[2]: /security/application_security/threat_protection/policies/
 [3]: https://app.datadoghq.com/security/appsec/traces
-[4]: /security/application_security/security_signals/attacker-explorer/
+[4]: /security/application_security/threat_protection/security_signals/attacker-explorer/
 [5]: /security/threat_intelligence/#threat-intelligence-categories
-[6]: /security/application_security/policies/#denylist
+[6]: /security/application_security/threat_protection/policies/#denylist
 [7]: https://app.datadoghq.com/security/appsec/denylist
 [8]: /security/application_security/how-it-works/add-user-info/?tab=java#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [9]: https://app.datadoghq.com/security

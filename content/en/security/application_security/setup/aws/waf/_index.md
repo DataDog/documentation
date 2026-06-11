@@ -4,7 +4,7 @@ further_reading:
     - link: "/security/application_security/how-it-works/"
       tag: "Documentation"
       text: "How App and API Protection Works"
-    - link: "/security/application_security/waf-integration/"
+    - link: "/security/application_security/threat_protection/waf-integration/"
       tag: "Documentation"
       text: "Learn more about WAF Integrations"
     - link: "/security/application_security/troubleshooting"

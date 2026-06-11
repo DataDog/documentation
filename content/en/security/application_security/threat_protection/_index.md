@@ -27,8 +27,8 @@ Threat Protection brings together several capabilities, all built on the same li
 
 [1]: /security/application_security/
 [2]: /security/application_security/setup/
-[3]: /security/application_security/security_signals/
-[4]: /security/application_security/policies/
-[5]: /security/application_security/exploit-prevention/
-[6]: /security/application_security/waf-integration/
-[7]: /security/application_security/account_takeover_protection/
+[3]: /security/application_security/threat_protection/security_signals/
+[4]: /security/application_security/threat_protection/policies/
+[5]: /security/application_security/threat_protection/exploit-prevention/
+[6]: /security/application_security/threat_protection/waf-integration/
+[7]: /security/application_security/threat_protection/account_takeover_protection/
