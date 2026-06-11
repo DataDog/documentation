@@ -95,7 +95,7 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 2. Sort the Normalized Query table by {{< ui >}}Percent time{{< /ui >}} to see the query that the database spends the most time executing.
 
-   The query that consumes the most database time appears on the first line. Look for the query scanning the `orders` table by `status` — for example, `SELECT * FROM orders WHERE status = ?`. This query is expensive because there is no index on the `status` column, so the database performs a full sequential scan of the table on every execution.
+   The query that consumes the most database time appears on the first line. Look for the query scanning the `orders` table by `status`— or example, `SELECT * FROM orders WHERE status = ?`. This query is expensive because there is no index on the `status` column, so the database performs a full sequential scan of the table on every execution.
 
    {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
