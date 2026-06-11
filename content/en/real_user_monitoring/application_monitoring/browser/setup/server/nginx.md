@@ -213,11 +213,9 @@ To manually remove RUM from your auto-instrumented web server:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 [4]: https://app.datadoghq.com/rum/list
-[5]: /real_user_monitoring/guide/sampling-browser-plans/
 [6]: /help
 [7]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.0.so.tgz
 [8]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.0.so.tgz
@@ -279,6 +277,3 @@ To manually remove RUM from your auto-instrumented web server:
 [64]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.29.8.so.tgz
 [65]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.30.0.so.tgz
 [66]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.30.0.so.tgz
-[67]: https://nginx.org/en/docs/ngx_core_module.html#error_log
-[68]: /tracing/trace_collection/single-step-apm/
-[69]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
