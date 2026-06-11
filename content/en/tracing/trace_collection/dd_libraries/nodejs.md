@@ -194,7 +194,7 @@ esbuild.build({
 
 This library provides experimental Webpack support in the form of a Webpack plugin. To use the plugin, make sure you have `dd-trace@5.94.0+` installed, and then require the `dd-trace/webpack` module when building your bundle.
 
-Here's an example of how one might use `dd-trace` with Webpack:
+The following example shows how to use `dd-trace` with Webpack:
 
 ```javascript
 const path = require('path')
