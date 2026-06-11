@@ -3398,6 +3398,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 51
+    - name: Get a single entity context
+      url: /api/latest/security-monitoring/get-a-single-entity-context/
+      identifier: security-monitoring-get-a-single-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSingleEntityContext
+        unstable:
+          - v2
+        order: 132
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context

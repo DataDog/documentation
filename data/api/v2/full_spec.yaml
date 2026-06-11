@@ -31331,9 +31331,10 @@ components:
       additionalProperties: {}
       description: The set of attributes recorded for the entity at this revision. The keys depend on the kind of entity.
       example:
+        accounts:
+          - linked-account-123
         display_name: Test User
-        emails:
-          - user@example.com
+        email: user@example.com
         principal_id: user@example.com
       type: object
     EntityData:
@@ -89452,6 +89453,14 @@ components:
       type: string
       x-enum-varnames:
         - AGGREGATED_DNS
+    SingleEntityContextResponse:
+      description: Response from the single entity context endpoint, containing the matching entity.
+      properties:
+        data:
+          $ref: "#/components/schemas/EntityContextEntity"
+      required:
+        - data
+      type: object
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -169327,9 +169336,10 @@ paths:
                       - attributes:
                           revisions:
                             - attributes:
+                                accounts:
+                                  - linked-account-123
                                 display_name: Test User
-                                emails:
-                                  - user@example.com
+                                email: user@example.com
                                 principal_id: user@example.com
                               first_seen_at: "2026-04-01T00:00:00Z"
                               last_seen_at: "2026-05-01T00:00:00Z"
@@ -169361,7 +169371,99 @@ paths:
         permissions:
           - siem_entities_read
       x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/entity_context/{id}:
+    get:
+      description: |-
+        Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical
+        revisions of the entity in the requested time range. The endpoint can either return revisions across an
+        interval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes
+        are mutually exclusive.
+      operationId: GetSingleEntityContext
+      parameters:
+        - description: The unique identifier of the entity to retrieve.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: user@example.com
+            type: string
+        - description: |-
+            The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
+            Defaults to `now-7d`. Ignored when `as_of` is set.
+          in: query
+          name: from
+          required: false
+          schema:
+            default: now-7d
+            example: now-7d
+            type: string
+        - description: |-
+            The end of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now`).
+            Defaults to `now`. Ignored when `as_of` is set.
+          in: query
+          name: to
+          required: false
+          schema:
+            default: now
+            example: now
+            type: string
+        - description: |-
+            A point in time at which to query the entity revisions, as an RFC3339 timestamp, a Unix timestamp
+            (in seconds), or a relative time (for example, `now-1d`). When set, `from` and `to` are ignored.
+            Cannot be combined with custom `from` / `to` values.
+          example: now-1d
+          in: query
+          name: as_of
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        revisions:
+                          - attributes:
+                              accounts:
+                                - linked-account-123
+                              display_name: Test User
+                              email: user@example.com
+                              principal_id: user@example.com
+                            first_seen_at: "2026-04-01T00:00:00Z"
+                            last_seen_at: "2026-05-01T00:00:00Z"
+                      id: user@example.com
+                      type: siem_entity_identity
+              schema:
+                $ref: "#/components/schemas/SingleEntityContextResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - siem_entities_read
+      summary: Get a single entity context
+      tags: ["Security Monitoring"]
+      x-menu-order: 132
+      x-permission:
+        operator: OR
+        permissions:
+          - siem_entities_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules:
     get:

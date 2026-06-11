@@ -7226,10 +7226,11 @@
                 "revisions": [
                   {
                     "attributes": {
-                      "display_name": "Test User",
-                      "emails": [
-                        "user@example.com"
+                      "accounts": [
+                        "linked-account-123"
                       ],
+                      "display_name": "Test User",
+                      "email": "user@example.com",
                       "principal_id": "user@example.com"
                     },
                     "first_seen_at": "2026-04-01T00:00:00Z",
@@ -7259,6 +7260,72 @@
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "GetSingleEntityContext": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "revisions": [
+                {
+                  "attributes": {
+                    "accounts": [
+                      "linked-account-123"
+                    ],
+                    "display_name": "Test User",
+                    "email": "user@example.com",
+                    "principal_id": "user@example.com"
+                  },
+                  "first_seen_at": "2026-04-01T00:00:00Z",
+                  "last_seen_at": "2026-05-01T00:00:00Z"
+                }
+              ]
+            },
+            "id": "user@example.com",
+            "type": "siem_entity_identity"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A single entity returned by the entity context endpoint.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The attributes of an entity context entry, grouping all the historical revisions of the entity.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> revisions&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The historical revisions of the entity, ordered chronologically.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"revisions\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The set of attributes recorded for the entity at this revision. The keys depend on the kind of entity.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"revisions\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">first_seen_at&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">date-time</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The first time the entity was observed at this revision.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"revisions\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">last_seen_at&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">date-time</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The last time the entity was observed at this revision.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The unique identifier of the entity.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The type of the entity. Reflects the underlying entity kind from the entity context store\n(for example, <code>siem_entity_identity</code> for identities). Defaults to <code>entity</code> when the kind is unknown.</p><p>default: <code>entity</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
         "json": {
           "errors": [
             "Bad Request"
