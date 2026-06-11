@@ -50,8 +50,6 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case or click **New Pipeline** on the top right side of the page.
 1. Select and set up a [log source][3].
-1. Add [processors][4] to transform, redact, and enrich your log data. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
-    - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
 1. Select and set up [destinations][5] for your processed logs.
 1. Click **Edit** on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
@@ -95,8 +93,6 @@ Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
 1. Select and set up a [metrics source][3].
-1. Add [processors][4] to filter and transform your metrics. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
-    - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
 1. Select and set up [destinations][5] for your processed metrics.
 1. Click **Edit** on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
