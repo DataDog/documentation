@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Bits Investigation is built into Error Tracking. When you open an issue, it investigates the error and reports the likely root cause, who and what is affected, and the recommended next step. When the resolution is a code change, it hands off to [Bits Code][1] to generate the fix.
+Bits Investigation is built into Error Tracking. When you open an issue, it investigates the error and reports the likely root cause, the impact, and the recommended next step. When the resolution is a code change, it hands off to [Bits Code][1] to generate the fix.
 
 This page covers Bits Investigation in Error Tracking. To investigate alerts and monitors during on-call, see [Bits Investigation for on-call operations][2].
 
@@ -38,9 +38,9 @@ You run an investigation on demand from the issue panel. Bits Investigation then
 3. Forms a hypothesis about the root cause and checks it against the available data.
 4. Returns a result: the likely root cause with its supporting evidence, an impact assessment (how many users, sessions, and accounts are affected), suspect commits when source code is connected, and a recommended next step.
 
-From the result, you decide what to do next: generate a code fix with Bits Code, copy the context into your own AI assistant, create a ticket, or resolve or ignore the issue.
+From the result, you decide what to do next, as described in [Resolve the issue](#resolve-the-issue).
 
-<div class="alert alert-info">Connecting your source code has the largest effect on result quality. With <a href="#connect-your-source-code">Source Code Integration</a> set up, Bits Investigation reads the code that was running when the error occurred, which sharpens root cause analysis and makes suspect commits and code fixes possible. Without it, investigations still run, but they work from error patterns and telemetry alone and the results are less precise.</div>
+<div class="alert alert-info">Connecting your source code has the largest effect on result quality. With <a href="#connect-your-source-code">Source Code Integration</a> set up, Bits Investigation reads the code that was running when the error occurred. This sharpens root cause analysis and makes suspect commits and code fixes possible. Without it, investigations still run on error patterns and telemetry alone, so the results are less precise.</div>
 
 ## Prerequisites and setup
 
@@ -60,8 +60,8 @@ How you send Git information depends on the platform:
 | Platform        | What to configure                                       |
 |-----------------|---------------------------------------------------------|
 | Backend service | Set Git information in your deployment configuration.   |
-| Browser / RUM   | [Upload source maps][6] with Git information.           |
-| Mobile          | Upload debug symbols with Git information.              |
+| Browser         | [Upload source maps][6] with Git information.           |
+| Mobile          | [Upload debug symbols][7] with Git information.         |
 
 For setup steps, see [Source Code Integration][3].
 
@@ -76,9 +76,11 @@ From a result, you can:
 
 You can re-run an investigation at any time, and add your own context to guide it.
 
+<!-- TODO: add screenshot of re-running with added context (pencil icon at the top right of the Resolve tab). {{< img src="error_tracking/bits_investigation/rerun_with_context.png" alt="Re-running a Bits Investigation with added context from the Resolve tab" style="width:100%;" >}} -->
+
 ## Find issues with investigations
 
-Use the **with investigation** filter in the Error Tracking Explorer to find issues that already have a result. Issues with an investigation show an icon on their Explorer card.
+Use the **Investigation Ready** filter in the Error Tracking Explorer to find issues that already have a result. Issues with an investigation show an icon on their Explorer card.
 
 ## Availability
 
@@ -105,3 +107,4 @@ Running investigations and reading results does not require a personal Git conne
 [4]: /error_tracking/ticketing_systems/
 [5]: /error_tracking/issue_states/
 [6]: /real_user_monitoring/guide/upload-javascript-source-maps
+[7]: /error_tracking/frontend/mobile/
