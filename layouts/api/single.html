@@ -49,9 +49,9 @@
     {{ $versionCount := (len $versions) }}
     {{ $anchorStr := .Title }}
 
-    <div class="row align-items-center">
+    <div class="row align-items-center mb-1">
       <div class="col-11 col-xl-9">
-          <h1 class="api-task-description mb-1" id="{{ $anchorStr | anchorize }}">
+          <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
               {{- $anchorStr -}}
           </h1>
       </div>
