@@ -13,7 +13,6 @@ further_reading:
       text: "Cloud-Based Authentication"
 ---
 
-
 ## Overview
 
 Service Access Tokens (SATs) are credentials that authenticate Datadog API calls on behalf of a
