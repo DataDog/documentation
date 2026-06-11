@@ -800,6 +800,20 @@
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
+  "CreateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create a form returns \"OK\" response"
+    }
+  ],
+  "CreateAndPublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create and publish a form returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
@@ -1232,6 +1246,20 @@
       "description": "Create a tag configuration returns \"Created\" response"
     }
   ],
+  "CreateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a tag indexing rule returns \"Created\" response"
+    }
+  ],
+  "ReorderTagIndexingRules": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Reorder tag indexing rules returns \"No Content\" response"
+    }
+  ],
   "QueryScalarData": [
     {
       "group": "metrics",
@@ -1453,6 +1481,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "UpdateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a tag indexing rule returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [
@@ -2230,6 +2265,13 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
+  "SendSecurityMonitoringNotificationPreview": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a notification rule returns \"OK\" response"
     }
   ],
   "TestSecurityMonitoringRule": [
