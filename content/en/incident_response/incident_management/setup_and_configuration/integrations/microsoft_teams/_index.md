@@ -120,8 +120,6 @@ When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Team
 
 When the meeting ends, a final post-meeting summary is posted to the same locations.
 
-When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.
-
 ## Using the Datadog tab in Microsoft Teams
 
 In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
@@ -145,6 +143,10 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 
 For a full list of available `@Datadog` commands, see the [Microsoft Teams integration documentation][5].
 
+
+## Data retention
+
+When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.
 
 ## Further reading
 
