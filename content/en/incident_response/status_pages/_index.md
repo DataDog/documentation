@@ -111,8 +111,8 @@ Each component status affects the uptime bars and uptime percentage differently:
 |--------|-------------|-------------------|
 | Major Outage | Shown | Counts as downtime |
 | Partial Outage | Shown | Counts as downtime |
-| Degraded Performance | Shown | Does not count as downtime |
-| Maintenance | Shown | Does not count as downtime |
+| Degraded Performance | Shown | No impact |
+| Maintenance | Shown | No impact |
 | Operational | Shown as healthy | No impact |
 
 **Note**: Partial Outage and Major Outage are weighted equally—the full duration at either status counts as downtime in the uptime percentage calculation.
