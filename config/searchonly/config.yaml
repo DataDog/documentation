@@ -1,0 +1,30 @@
+disableLanguages:
+  - fr
+  - ja
+  - ko
+  - es
+
+module:
+  mounts:
+    - source: content/en/api
+      target: content/api
+      lang: en
+    - source: layouts
+      target: layouts
+      excludeFiles:
+        - 'shortcodes/.cdocs_temp/*'
+        - 'shortcodes/mdoc/*'
+    - source: data
+      target: data
+    - source: i18n
+      target: i18n
+    - source: static
+      target: static
+    - source: static
+      target: assets
+    - source: assets
+      target: assets
+    - source: "./node_modules/@datadog/browser-rum/bundle/datadog-rum.js"
+      target: "assets/node_modules/datadog-rum.js"
+    - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
+      target: "assets/node_modules/datadog-logs.js"
