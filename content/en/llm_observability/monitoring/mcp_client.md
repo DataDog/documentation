@@ -1,6 +1,6 @@
 ---
 title: MCP Clients
-description: Learn how to instrument and monitor MCP clients with LLM Observability.
+description: Learn how to instrument and monitor MCP clients with Agent Observability.
 
 further_reading:
   - link: https://www.datadoghq.com/blog/mcp-client-monitoring
@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-You can monitor your MCP clients with Datadog LLM Observability in two ways:
+You can monitor your MCP clients with Agent Observability in two ways:
 
 - [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1]
 - [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using the official MCP Python SDK, or your MCP clients are written in Node.js or Java
@@ -42,9 +42,9 @@ ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 ## Manually instrument your MCP client
 
-You can also manually instrument your MCP client by using Datadog's [LLM Observability SDKs][2] for Python, Node.js, and Java. Use the following steps to add the required tags and spans:
+You can also manually instrument your MCP client by using the [Agent Observability SDKs][2] for Python, Node.js, and Java. Use the following steps to add the required tags and spans:
 
-1. Import the LLM Observability SDK:
+1. Import the Agent Observability SDK:
 
    {{< tabs >}}
 

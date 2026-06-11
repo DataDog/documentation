@@ -800,6 +800,20 @@
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
+  "CreateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create a form returns \"OK\" response"
+    }
+  ],
+  "CreateAndPublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create and publish a form returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
@@ -1232,11 +1246,30 @@
       "description": "Create a tag configuration returns \"Created\" response"
     }
   ],
+  "CreateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a tag indexing rule returns \"Created\" response"
+    }
+  ],
+  "ReorderTagIndexingRules": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Reorder tag indexing rules returns \"No Content\" response"
+    }
+  ],
   "QueryScalarData": [
     {
       "group": "metrics",
       "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2086017331",
+      "description": "Scalar cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1315,11 +1348,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_2312509843",
-      "description": "Scalar cross product query with rum data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_394862343",
       "description": "Scalar cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1351,6 +1379,11 @@
       "group": "metrics",
       "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4190640887",
+      "description": "Timeseries cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1429,11 +1462,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_123149143",
-      "description": "Timeseries cross product query with rum data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_2884575435",
       "description": "Timeseries cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1453,6 +1481,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "UpdateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a tag indexing rule returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [
@@ -1879,14 +1914,14 @@
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Create a rum-based metric returns \"Created\" response"
+      "description": "Create a RUM-based metric returns \"Created\" response"
     }
   ],
   "UpdateRumMetric": [
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Update a rum-based metric returns \"OK\" response"
+      "description": "Update a RUM-based metric returns \"OK\" response"
     }
   ],
   "CreateRetentionFilter": [
@@ -2230,6 +2265,13 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
+  "SendSecurityMonitoringNotificationPreview": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a notification rule returns \"OK\" response"
     }
   ],
   "TestSecurityMonitoringRule": [

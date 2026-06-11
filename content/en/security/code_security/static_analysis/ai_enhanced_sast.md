@@ -181,7 +181,7 @@ After you create a campaign, Bits Code loads the in-scope findings, generates pa
 
 #### View campaign progress
 
-To view all campaigns, navigate to [**Bits AI** > **Bits Code** > **Code Sessions** > **Campaigns**][12].
+To view all campaigns, navigate to [**Bits AI** > **Bits Code** > **Sessions** > **Campaigns**][12].
 
 Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits Code][10].
 
@@ -198,7 +198,7 @@ Each code session shows the life cycle of an AI-generated fix so you can review 
 
 To open the remediation session, select the vulnerability from the [**Vulnerabilities**][6] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**.
 
-You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Code Sessions**][7] views.
+You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Sessions**][7] views.
 
 {{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light-png.png" alt="Concluded remediation session in Bits Code showing generated fixes and pull request options" style="width:100%;">}}
 
