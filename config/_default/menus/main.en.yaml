@@ -5380,6 +5380,11 @@ menu:
       identifier: jobs_monitoring_airflow
       parent: data_jobs
       weight: 200000
+    - name: Logs Correlation 
+      url: data_observability/jobs_monitoring/airflow_log_context
+      identifier: jobs_monitoring_airflow_log_context
+      parent: jobs_monitoring_airflow
+      weight: 100000
     - name: Troubleshooting DAG
       url: data_observability/jobs_monitoring/airflow_troubleshooting_dag
       identifier: jobs_monitoring_airflow_troubleshooting_dag
