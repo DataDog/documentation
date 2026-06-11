@@ -145172,7 +145172,10 @@ paths:
           - metrics_read
   /api/v2/metrics/config/bulk-tags:
     delete:
+      deprecated: true
       description: |-
+        **Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.
+
         Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.
         Metrics are selected by passing a metric name prefix.
         Results can be sent to a set of account email addresses, just like the same operation in the Datadog web app.
@@ -145244,8 +145247,12 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-sunset: "2027-01-01"
     post:
+      deprecated: true
       description: |-
+        **Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.
+
         Create and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.
         Metrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.
         Results can be sent to a set of account email addresses, just like the same operation in the Datadog web app.
@@ -145325,6 +145332,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
+      x-sunset: "2027-01-01"
   /api/v2/metrics/tag-indexing-rules:
     get:
       description: List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.
