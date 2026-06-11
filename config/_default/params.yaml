@@ -280,7 +280,6 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
-  fleet_view: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
   actions: [gov,gov2]
@@ -335,7 +334,7 @@ unsupported_sites:
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2]
-  fleet_automation: [gov,gov2]
+  fleet-automation-standard-features: [gov,gov2]
   forwarding_audit_events: [gov,gov2]
   gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2]
   getting_started_feature_flags: [gov,gov2]

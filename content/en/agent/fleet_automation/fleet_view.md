@@ -10,6 +10,13 @@ further_reading:
   text: "Send a flare"
 ---
 
+{{< site-region region="gov,gov2" >}}
+Fleet View is in Preview on Datadog Government sites (US1-FED and US2-FED).
+
+Additional Fleet Automation functionality such as Configuring Agents, Upgrading Agents and Upgrading SDKs are still not supported for your selected Datadog site.
+{{< /site-region >}}
+
+
 Use [Fleet View][1] to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues.
 
 For each Datadog Agent, you can see:
