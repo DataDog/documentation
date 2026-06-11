@@ -92,6 +92,34 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
    2. (Optional) Specify the incident criteria that creates a Microsoft Teams meeting. If left blank, any changes to an incident without an existing Microsoft Teams meeting will create a Microsoft Teams meeting.
 4. Save your settings.
 
+### Meeting summaries
+
+Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
+
+#### Enabling meeting summaries
+
+To enable meeting summaries for incident Microsoft Teams meetings:
+
+1. Navigate to [Incident Settings][2].
+2. In Microsoft Teams, select your connected Microsoft Teams tenant.
+3. Toggle on **Enable meeting creation**.
+4. Toggle on **Generate AI meeting summaries**.
+5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
+6. Save your settings.
+
+#### Summarizing an incident meeting
+
+Meeting summaries are created for Microsoft Teams meetings attached to an incident.
+
+When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. Once admitted, during the meeting, live summaries are periodically posted to:
+
+- The **incident timeline**, under a "Meeting Summary" entry.
+- The **incident chat channel**, in the meeting card thread and broadcast to the channel.
+
+When the meeting ends, a final post-meeting summary is posted to the same locations.
+
+When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.
+
 ## Using the Datadog tab in Microsoft Teams
 
 In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
