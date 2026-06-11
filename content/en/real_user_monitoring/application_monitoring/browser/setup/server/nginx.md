@@ -60,6 +60,8 @@ When you run the Agent installation with RUM enabled, Datadog:
 
 Use this method to configure your RUM application settings in the Datadog UI before running the automated NGINX installation command.
 
+This method is best for teams that need to configure sampling rates or application settings before deploying.
+
 1. In Datadog, navigate to **Digital Experience > Manage Applications**, click [**New Application**][4], and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **NGINX**.
 3. Configure your application parameters. See [guidance on configuring sampling][5].
@@ -78,7 +80,7 @@ Use this method to configure your RUM application settings in the Datadog UI bef
 {{% /tab %}}
 {{% tab "Manual Instructions" %}}
 
-If you need finer control over more parameters than what the automatic instrumentation provides, you can manually load the module onto your web server instead of running the installation script.
+This method is best for environments where you cannot run the installation script or need full control over the NGINX configuration. Manually download the NGINX module and update your NGINX configuration directly.
 
 ### Download the appropriate `.tgz` file
 
