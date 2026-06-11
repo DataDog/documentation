@@ -103,9 +103,9 @@ function displaySuccessFeedback() {
     const copyText = document.getElementById('page-copy-text');
     const copiedText = document.getElementById('page-copied-text');
     const textWrapper = document.querySelector('.copy-btn-text');
-    const textVisible = textWrapper && window.getComputedStyle(textWrapper).display !== 'none';
+    const btnTextIsVisible = textWrapper && window.getComputedStyle(textWrapper).display !== 'none';
 
-    if (textVisible) {
+    if (btnTextIsVisible) {
         copyText.style.visibility = 'hidden';
         copiedText.style.display = 'inline';
     }
@@ -117,7 +117,7 @@ function displaySuccessFeedback() {
     afterIcon.style.opacity = '1';
 
     setTimeout(() => {
-        if (textVisible) {
+        if (btnTextIsVisible) {
             copyText.style.visibility = '';
             copiedText.style.display = '';
         }
