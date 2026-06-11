@@ -19,10 +19,6 @@ further_reading:
   text: "Budgets"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Cloud Cost skill is in Preview" >}}
-The Cloud Cost skill runs in Bits Chat. Fill out the Bits Chat Preview form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Chat][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and answering general cost questions. For example, you can ask Bits Chat to:

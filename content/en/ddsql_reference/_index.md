@@ -18,6 +18,9 @@ further_reading:
 - link: "/ddsql_editor/"
   tag: "Documentation"
   text: "DDSQL Editor"
+- link: "https://learn.datadoghq.com/courses/getting-started-ddsql-editor"
+  tag: "Learning Center"
+  text: "Getting Started with DDSQL Editor"
 ---
 
 {{< product-availability >}}
