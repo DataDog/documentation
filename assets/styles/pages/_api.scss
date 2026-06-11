@@ -11,6 +11,13 @@ $ddpurple: #632ca6;
         font-size: 16px;
         text-decoration: none;
         border-bottom: none;
+
+        &:hover,
+        &:focus,
+        &:focus-visible {
+            text-decoration: none;
+            border-bottom: none;
+        }
     }
 
     .copy-btn-icon-wrapper {
@@ -21,12 +28,22 @@ $ddpurple: #632ca6;
         height: 22px;
     }
 
-    #page-copied-text {
-        display: none;
+    .copy-btn-text {
+        position: relative;
+        display: inline-block;
+
+        #page-copied-text {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+        }
     }
 
     @include media-breakpoint-down(xl) {
-        #page-copy-text {
+        .copy-btn-text {
             display: none;
         }
     }

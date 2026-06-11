@@ -102,9 +102,13 @@ async function loadPageText() {
 function displaySuccessFeedback() {
     const copyText = document.getElementById('page-copy-text');
     const copiedText = document.getElementById('page-copied-text');
+    const textWrapper = document.querySelector('.copy-btn-text');
+    const textVisible = textWrapper && window.getComputedStyle(textWrapper).display !== 'none';
 
-    copyText.style.display = 'none';
-    copiedText.style.display = 'inline';
+    if (textVisible) {
+        copyText.style.visibility = 'hidden';
+        copiedText.style.display = 'inline';
+    }
 
     const beforeIcon = document.querySelector('#page-copy-btn .copy-btn-icon__before');
     const afterIcon = document.querySelector('#page-copy-btn .copy-btn-icon__after');
@@ -113,8 +117,10 @@ function displaySuccessFeedback() {
     afterIcon.style.opacity = '1';
 
     setTimeout(() => {
-        copyText.style.display = 'inline';
-        copiedText.style.display = 'none';
+        if (textVisible) {
+            copyText.style.visibility = '';
+            copiedText.style.display = '';
+        }
         beforeIcon.style.opacity = '1';
         afterIcon.style.opacity = '0';
     }, 3000);
