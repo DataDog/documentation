@@ -115,7 +115,6 @@ Creating a pull request from a code fix also requires connecting your individual
 
 ## Limitations
 
-- iOS error investigations are currently limited to error patterns and telemetry, because stack symbolication is not yet available. <!-- TODO: confirm current iOS status before publishing. -->
 - Bits Investigation works within a single repository. It does not investigate across multiple repositories.
 - Bits Investigation uses AI and can make mistakes. Review and test any generated code before you merge it.
 
