@@ -4931,6 +4931,12 @@
     "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
     "summary": "Validate an entity context sync configuration"
   },
+  "SendSecurityMonitoringNotificationPreview": {
+    "description": "Send a notification preview to test that a notification rule's targets are properly configured.",
+    "summary": "Test a notification rule",
+    "request_description": "",
+    "request_schema_description": "Body of the notification rule create request."
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
