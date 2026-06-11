@@ -6,10 +6,10 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
-  text: "Mitigate the primary risks to API security"
+  text: "Mitigate the primary API security risks"
 ---
 
-[API Inventory][1] is a continuously updated catalog of the API endpoints and services discovered across your environment. It shows security context for each endpoint, such as authentication status, public exposure, sensitive data flows, and associated findings.
+[API Inventory][1] is a continuously updated catalog of the API endpoints and services API Posture discovers across your environment. It shows security context for each endpoint, such as authentication status, public exposure, sensitive data flows, and associated findings.
 
 Inventory consists of two explorers:
 

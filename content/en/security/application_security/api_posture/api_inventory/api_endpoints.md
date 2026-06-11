@@ -8,7 +8,7 @@ The [API Endpoints][1] explorer monitors your API traffic to provide visibility 
 - **Authentication**: Whether the API enforces authentication.
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
-- **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
+- **Sensitive data flows**: Sensitive data handled by the API, and the flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks.
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][2] and [Software Composition Analysis][3]).
@@ -135,7 +135,7 @@ App and API Protection detects and classifies sensitive data processed by your e
 
 ## Business logic
 
-These tags (`(users.login.success`, `users.login.failure`, etc.) are determined by the presence of business logic traces associated with the endpoint.
+These tags (`users.login.success`, `users.login.failure`, etc.) are determined by the presence of business logic traces associated with the endpoint.
 
 <div class="alert alert-tip">Datadog can suggest a business logic tag for your endpoint based on its HTTP method, response status codes, and URL.</div>
 
@@ -171,7 +171,7 @@ When the type of authentication is available, Datadog reports it in a header thr
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
-### Custom Authentication support
+### Custom authentication support
 
 Custom authentication detection is possible by configuring [Endpoint Tagging Rules][15]. These rules require the following minimum tracer versions:
 
