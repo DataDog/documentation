@@ -1,3 +1,14 @@
+rum_sdk_platform_options_v3:
+  - id: browser
+    default: true
+  - id: android
+  - id: flutter
+  - id: ios
+  - id: kotlin_multiplatform
+  - id: react_native
+  - id: roku
+  - id: unity
+
 rum_sdk_platform_options:
   - id: android
     default: true
