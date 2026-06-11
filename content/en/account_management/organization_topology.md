@@ -8,9 +8,9 @@ further_reading:
 - link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Managing Multiple-Organization Accounts"
-- link: "/account_management/organization_groups/"
+- link: "/account_management/organizational_groups/"
   tag: "Documentation"
-  text: "Organization Groups"
+  text: "Organizational Groups"
 - link: "/account_management/org_settings/cross_org_visibility/"
   tag: "Documentation"
   text: "Cross-Organization Visibility"
@@ -128,9 +128,9 @@ Mergers and acquisitions often create temporary multi-organization states. The a
 
 ### Compare org capabilities
 
-In the following chart, "no change" indicates that Organization Groups do not introduce new capabilities.
+In the following chart, "no change" indicates that Organizational Groups do not introduce new capabilities.
 
-| Capability | Single organization | Multi-organization | With Organization Groups |
+| Capability | Single organization | Multi-organization | With Organizational Groups |
 | :---- | :---- | :---- | :---- |
 | End-to-end distributed traces | Full | Cannot cross organization boundaries | No change |
 | Telemetry data | Full | Share metrics, logs, and CI data into dashboards with [Cross-Organization Visibility][2] | No change |
@@ -143,7 +143,7 @@ In the following chart, "no change" indicates that Organization Groups do not in
 | Billing and usage | Usage attribution per organization | Datadog aggregates usage across all child organizations and bills it at the parent organization level | No change |
 | Feature rollout | Immediate | Must enable per organization | Centralized from group |
 
-If your use case requires multi-organization, see [Organization Groups][12] for centralized governance across organizations.
+If your use case requires multi-organization, see [Organizational Groups][12] for centralized governance across organizations.
 
 ## Further reading
 
@@ -160,4 +160,4 @@ If your use case requires multi-organization, see [Organization Groups][12] for 
 [9]: /dashboards/sharing/shared_dashboards/#invite-only-shared-dashboards
 [10]: /account_management/org_settings/ip_allowlist/
 [11]: /account_management/scim/
-[12]: /account_management/organization_groups/
+[12]: /account_management/organizational_groups/
