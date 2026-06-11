@@ -5,7 +5,6 @@ aliases:
     - /account_management/faq/personal-access-tokens/
 ---
 
-{{< callout btn_hidden="true" header="New: Personal Access Tokens" >}}
 Personal Access Tokens are now generally available.
 {{< /callout >}}
 
