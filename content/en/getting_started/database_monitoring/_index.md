@@ -113,17 +113,9 @@ In addition to identifying slow queries, Datadog Database Monitoring can help yo
 
 4. Find a query in the table with data in the {{< ui >}}Explain Plan{{< /ui >}} column and click on it to open the Sample Details page. 
 
-5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query performs a **Seq Scan** on the `orders` table. Because there is no index on the `status` column, PostgreSQL reads every row in the table to find matches.
+5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. The list view breaks down each step the database takes to execute the query — the operation type, the table it runs against, and cost estimates — giving you a starting point to understand why a query is slow.
 
    {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Seq Scan on orders table">}}
-
-   To fix this, add an index on the `status` column:
-
-   ```sql
-   CREATE INDEX idx_orders_status ON orders(status);
-   ```
-
-   After adding the index, the explain plan changes from a Seq Scan to an Index Scan, and query latency drops significantly.
 
 ## Correlate traces and database queries
 
