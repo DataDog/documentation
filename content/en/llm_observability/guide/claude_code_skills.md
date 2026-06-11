@@ -139,6 +139,8 @@ The skill highlights which metrics improved or regressed, which event categories
 
 The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a CSV (loaded at runtime via `LLMObs.create_dataset_from_csv`), an existing Datadog dataset by name (`LLMObs.pull_dataset`), or — by default — a small inline 3-record sample.
 
+**All flags below are optional.** Invoke `/llm-obs-experiment-py-bootstrap` with no arguments and the skill prompts for what it needs and emits a runnable file against the default 3-record sample.
+
 | Option | Default | Description |
 |--------|---------|-------------|
 | <span class="text-nowrap">`--purpose`</span> | prompted if not set or inferable | Free-form string describing what the experiment validates. Biases introspection ranking, wrapper return shape, and evaluator semantics |
@@ -220,6 +222,8 @@ Phases 4 and 5 are the only two that execute code on your machine; the rest are 
 - **`--start-at <phase>`** loads every prior phase's state file (or accepts an override flag if you supplied one) and skips directly to the named phase. You can resume hours or days later, or jump straight to "just re-analyze this experiment" without re-running anything earlier.
 
 Checkpoint vocabulary at every phase: `continue` advances, `stop` exits cleanly, `redo` re-runs the current phase (with optional adjustment notes appended), `back` steps backward one phase. Any other input is treated as adjustment.
+
+**Only `<ml_app>` is required.** Every flag below is optional — the skill picks sensible defaults for each one. The minimal invocation is `/llm-obs-eval-pipeline <ml_app>`; the rest of the table is for when you want to override a default, resume mid-flow, or pin a specific output location.
 
 | Option | Default | Description |
 |--------|---------|-------------|
