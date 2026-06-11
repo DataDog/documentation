@@ -1,5 +1,5 @@
 ---
-title: Agent Builder
+title: Bits Agent Builder
 description: Build and deploy custom AI agents that automate operational tasks using Datadog's tools and integrations.
 further_reading:
 - link: "/actions/actions_catalog/"
@@ -11,29 +11,32 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
   tag: "Knowledge Center"
   text: "What are AI agents and how do they work?"
+- link: "/account_management/billing/ai_credits/"
+  tag: "Documentation"
+  text: "AI Credits"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Agent Builder is in Preview.
+Bits Agent Builder is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create cases, send messages, or perform any action from the [Action Catalog][7].
+Bits Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create cases, send messages, or perform any action from the [Action Catalog][7].
 
 Use agents to handle work that's too complex for static automation but too repetitive for humans. For example, triaging errors, responding to incidents, analyzing trends, and escalating issues.
 
-{{< img src="/actions/agents/agent-builder-interface.png" alt="The Agent Builder editor showing instructions, model, tools, and automation configuration" style="width:100%;" >}}
+{{< img src="/actions/agents/agent-builder-interface.png" alt="The Bits Agent Builder editor showing instructions, model, tools, and automation configuration" style="width:100%;" >}}
 
 ## Create an agent
 
-From the [Agent Builder page][1], click **New Agent**. From there, you can create an agent in three ways:
+From the [Bits Agent Builder page][1], click **New Agent**. From there, you can create an agent in three ways:
 
-- **Build with AI**: Describe what you want the agent to do in plain language. Agent Builder generates the instructions, selects relevant tools, and configures the agent for you.
+- **Build with AI**: Describe what you want the agent to do in plain language. Bits Agent Builder generates the instructions, selects relevant tools, and configures the agent for you.
 - **Start from a blueprint**: Choose a prebuilt template for common use cases such as error triage, incident response, security analysis, or DevOps assistance. Blueprints come preconfigured with instructions, tools, and automations, and are customizable.
 - **Start from scratch**: Configure the agent manually—write instructions, pick a model, and add tools.
 
-{{< img src="/actions/agents/empty-state.png" alt="The Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
+{{< img src="/actions/agents/empty-state.png" alt="The Bits Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
 
 ## Configure your agent
 
@@ -125,7 +128,7 @@ The agent executes with its configured tools and instructions, then returns its 
 [5]: https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison
 [6]: https://developers.openai.com/api/docs/models
 [7]: /actions/actions_catalog/
-[8]: /bits_ai/mcp_server
+[8]: /mcp_server
 [9]: https://app.datadoghq.com/workflow
 [10]: https://app.datadoghq.com/app-builder/apps/list
 [11]: /account_management/audit_trail/

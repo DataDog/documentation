@@ -3,6 +3,9 @@ title: Custom Metrics Billing
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 further_reading:
+- link: "/account_management/billing/metric_name_pricing/"
+  tag: "Documentation"
+  text: "Metric Name Pricing for Custom Metrics"
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"
   text: "Learn more about custom metrics"
@@ -14,6 +17,8 @@ algolia:
 ---
 
 ## Overview
+
+**Note**: This page describes the cardinality-based Custom Metrics billing model. If your contract uses Metric Name pricing SKUs, see [Metric Name Pricing for Custom Metrics][15] instead.
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]. Certain standard integrations can also potentially emit custom metrics. For more information, see [custom metrics and standard integrations][14].
 
@@ -329,3 +334,4 @@ For billing questions, contact your [Customer Success][12] Manager.
 [12]: mailto:success@datadoghq.com
 [13]: /help/
 [14]: /metrics/custom_metrics/#standard-integrations
+[15]: /account_management/billing/metric_name_pricing/

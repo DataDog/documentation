@@ -11,6 +11,10 @@
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
   },
+  "apm-trace": {
+    "name": "APM Trace",
+    "description": "Retrieve full or pruned APM traces by trace ID."
+  },
   "aws-integration": {
     "name": "AWS Integration",
     "description": "Configure your Datadog-AWS integration directly through the Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services)."
@@ -30,6 +34,10 @@
   "agentless-scanning": {
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+  },
+  "annotations": {
+    "name": "Annotations",
+    "description": "Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time."
   },
   "app-builder": {
     "name": "App Builder",
@@ -66,6 +74,14 @@
   "csm-coverage-analysis": {
     "name": "CSM Coverage Analysis",
     "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more."
+  },
+  "csm-ownership": {
+    "name": "CSM Ownership",
+    "description": "Datadog Cloud Security Management (CSM) Ownership infers the most likely owner\nfor a cloud resource by combining ownership signals from across the platform,\nand lets you review the inference, inspect its evidence, and submit feedback to\npersist, override, or correct the inferred owner.\nFor more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)."
+  },
+  "csm-settings": {
+    "name": "CSM Settings",
+    "description": "Datadog Cloud Security Management (CSM) Settings APIs allow you to list and filter\nyour cloud hosts monitored by CSM, covering both agentless and agent-based discovery.\nFor more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)."
   },
   "csm-threats": {
     "name": "CSM Threats",
@@ -122,6 +138,10 @@
   "containers": {
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+  },
+  "customer-org": {
+    "name": "Customer Org",
+    "description": "Programmatic management of a customer's Datadog organization. Use this API to perform\nself-service organization lifecycle actions such as disabling the authenticated org."
   },
   "dora-metrics": {
     "name": "DORA Metrics",
@@ -182,6 +202,10 @@
   "fleet-automation": {
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
+  },
+  "forms": {
+    "name": "Forms",
+    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform.\nYou can configure form settings, manage versions, and publish forms."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -263,6 +287,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "network-health-insights": {
+    "name": "Network Health Insights",
+    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
+  },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
     "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
@@ -319,9 +347,21 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-insights": {
+    "name": "RUM Insights",
+    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+  },
+  "rum-retention-filters-hardcoded": {
+    "name": "RUM Retention Filters Hardcoded",
+    "description": "Manage hardcoded retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) in RUM."
+  },
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."
+  },
+  "report-schedules": {
+    "name": "Report Schedules",
+    "description": "Create and manage scheduled reports. A scheduled report renders a dashboard or integration\ndashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,\nor Microsoft Teams."
   },
   "restriction-policies": {
     "name": "Restriction Policies",
@@ -337,7 +377,11 @@
   },
   "rum-metrics": {
     "name": "Rum Metrics",
-    "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+    "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
+  "rum-rate-limit": {
+    "name": "Rum Rate Limit",
+    "description": "Manage RUM rate limit configurations for your organization's RUM applications."
   },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
@@ -362,6 +406,10 @@
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
+  },
+  "salesforce-integration": {
+    "name": "Salesforce Integration",
+    "description": "Configure your [Datadog Salesforce integration](https://docs.datadoghq.com/integrations/salesforce/)\ndirectly through the Datadog API."
   },
   "scorecards": {
     "name": "Scorecards",
@@ -419,6 +467,14 @@
     "name": "Status Pages",
     "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
   },
+  "statuspage-integration": {
+    "name": "Statuspage Integration",
+    "description": "Configure your [Datadog Statuspage integration](https://docs.datadoghq.com/integrations/statuspage/)\ndirectly through the Datadog API."
+  },
+  "stegadography": {
+    "name": "Stegadography",
+    "description": "Extract watermarks embedded in dashboard screenshots to retrieve cached widget state."
+  },
   "storage-management": {
     "name": "Storage Management",
     "description": "Enable Storage Management for S3 buckets, GCS buckets, and Azure containers. Each configuration registers the destination that holds inventory reports for the storage being monitored."
@@ -442,6 +498,10 @@
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
+  },
+  "webhooks-integration": {
+    "name": "Webhooks Integration",
+    "description": "Configure your [Datadog Webhooks integration](https://docs.datadoghq.com/integrations/webhooks/)\ndirectly through the Datadog API."
   },
   "widgets": {
     "name": "Widgets",

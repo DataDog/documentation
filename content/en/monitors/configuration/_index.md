@@ -50,7 +50,7 @@ The Evaluated Data graph shows how your monitor would have evaluated the data us
 - Preview who would be notified (including from notification rules)
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, and Deployment monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, Agent Observability, and Deployment monitors.
 
 {{% /tab %}}
 

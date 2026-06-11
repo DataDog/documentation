@@ -1,6 +1,5 @@
 ---
 title: Journey Details Report
-private: true
 description: Inspect each journey's performance with a detailed report combining Product Analytics, Real User Monitoring, Synthetic Monitoring & Testing, and Session Replay data.
 further_reading:
 - link: "/journey_monitoring/"
@@ -20,7 +19,7 @@ further_reading:
   text: 'Learn about journey uptime'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
@@ -28,7 +27,7 @@ Journey Monitoring is in Preview.
 
 Each journey has a details report that combines metrics and telemetry from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
 
-{{< img src="journey_monitoring/journey-monitoring-details-report.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-details-report-1.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
 
 ## Journey and variant filters
 
@@ -66,7 +65,7 @@ Click on an operation to open a side panel with details about its performance. D
 - The volume, success rate, and latency of the operation
 - Where the operation executed within the journey's life cycle
 
-If the RUM [distributed tracing][11] integration is enabled, the side panel also includes a list of the backend services the operation depends on. Each entry includes metrics on the backend service's performance. Clicking on a backend service opens the service's entry in the APM [Software Catalog][8].
+If the RUM [distributed tracing][11] integration is enabled, the side panel also includes a list of the backend services the operation depends on. Each entry includes metrics on the backend service's performance. Clicking on a backend service opens the service's entry in the APM [Catalog][8].
 
 ### Error count
 
@@ -96,7 +95,7 @@ Click on **View Test Suite** to visit the journey's test suite and edit it direc
 [5]: /journey_monitoring/details_report/variants/
 [6]: /product_analytics/charts/funnel_analysis/
 [7]: /real_user_monitoring/operations_monitoring/
-[8]: /internal_developer_portal/software_catalog/
+[8]: /internal_developer_portal/catalog/
 [9]: /error_tracking/
 [10]: /journey_monitoring/uptime/
 [11]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
