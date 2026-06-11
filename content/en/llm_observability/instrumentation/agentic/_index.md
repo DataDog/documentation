@@ -65,6 +65,8 @@ Follow the instructions for the detected language:
 |----------|-------------|
 | Python | [Python Application Agentic Instrumentation](/llm_observability/instrumentation/agentic/python.md) |
 | Node.js | [Node.js Application Agentic Instrumentation](/llm_observability/instrumentation/agentic/nodejs.md) |
+| Java | [Java Application Agentic Instrumentation](/llm_observability/instrumentation/agentic/java.md) |
+| OpenTelemetry | [OpenTelemetry Instrumentation](/llm_observability/instrumentation/otel_instrumentation.md) |
 
 
 ## Run the application
