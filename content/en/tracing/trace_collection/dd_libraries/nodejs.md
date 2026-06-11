@@ -153,11 +153,11 @@ Datadog recommends you have custom-built bundler plugins. These plugins are able
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
-#### Bundling with ESBuild
+#### Bundling with esbuild
 
-This library provides ESBuild support in the form of an ESBuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
+This library provides esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
-Here's an example of how one might use `dd-trace` with ESBuild:
+Here's an example of how one might use `dd-trace` with esbuild:
 
 ```javascript
 const ddPlugin = require('dd-trace/esbuild')
