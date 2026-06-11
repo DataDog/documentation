@@ -11,13 +11,6 @@ $ddpurple: #632ca6;
         font-size: 16px;
         text-decoration: none;
         border-bottom: none;
-
-        &:hover,
-        &:focus,
-        &:focus-visible {
-            text-decoration: none;
-            border-bottom: none;
-        }
     }
 
     .copy-btn-icon-wrapper {
@@ -28,36 +21,20 @@ $ddpurple: #632ca6;
         height: 22px;
     }
 
-    .copy-btn-text {
-        position: relative;
-        display: inline-block;
-
-        #page-copied-text {
-            display: none;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            white-space: nowrap;
-        }
+    #page-copied-text {
+        display: none;
     }
 
     @include media-breakpoint-down(xl) {
-        .copy-btn-text {
+        #page-copy-text {
             display: none;
         }
     }
 }
 
-// Shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
-.main-api .api-copy-btn,
+// Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
 .api-intro-header .api-copy-btn {
     flex-shrink: 0;
-}
-
-.main-api .api-copy-btn {
-    position: relative;
-    top: -2px;
 }
 
 .api-intro-header {
