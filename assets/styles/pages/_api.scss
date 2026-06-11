@@ -55,6 +55,11 @@ $ddpurple: #632ca6;
     flex-shrink: 0;
 }
 
+.main-api .api-copy-btn {
+    position: relative;
+    top: -2px;
+}
+
 .api-intro-header {
     margin-bottom: 0.75rem;
 }
