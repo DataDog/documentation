@@ -16,13 +16,15 @@ The serverless OTLP traces intake endpoint is in Preview.
 
 ## Overview
 
-Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead; this page covers traces from platforms without a dedicated endpoint. For metrics and logs, see the [OTLP logs][3] and [OTLP metrics][4] intake endpoints.
+Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead; this page covers traces from platforms without a dedicated endpoint.
+
+Serverless workloads can also send logs and metrics through the general [OTLP logs][3] and [OTLP metrics][4] intake endpoints. The resource attributes configured on this page apply to all signals your application exports.
 
 Supported platforms:
 
 - **AWS**: Lambda, ECS Fargate
 - **Azure**: Container Apps, Web Apps (App Service), Azure Functions
-- **GCP**: Cloud Run, Cloud Run Functions, GKE
+- **GCP**: Cloud Run, Cloud Run Functions, GKE Autopilot
 
 <div class="alert alert-info">Use direct ingest when running a Collector is impractical (for example, Lambda). If you can run a Collector, see <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> for buffering, retry, and centralized sampling.</div>
 
@@ -190,7 +192,9 @@ export OTEL_SERVICE_NAME="my-cloud-run-service"
 
 The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `faas.id`, `faas.instance`, `faas.name`, `faas.version`.
 
-### GKE
+### GKE Autopilot
+
+GKE Autopilot is a serverless Kubernetes mode. Standard GKE is not a serverless platform and should use the general [traces endpoint][8] instead.
 
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
@@ -206,7 +210,7 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 | Platform | Attributes populated by GCP Resource Detector |
 |---|---|
 | Cloud Run / Cloud Run Functions | `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `faas.id`, `faas.instance`, `faas.name`, `faas.version` |
-| GKE | `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `host.id`, `k8s.cluster.name` |
+| GKE Autopilot | `cloud.account.id`, `cloud.platform`, `cloud.provider`, `cloud.region`, `host.id`, `k8s.cluster.name` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -220,3 +224,4 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 [3]: /opentelemetry/setup/otlp_ingest/logs/
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
 [5]: /opentelemetry/setup/otlp_ingest/managed_platforms/
+[8]: /opentelemetry/setup/otlp_ingest/traces/
