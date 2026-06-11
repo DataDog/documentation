@@ -134,7 +134,7 @@ AI Guard automatically evaluates the following OpenAI operations:
 - [Responses API][3]:
   - `client.responses.create()`
 
-**Note**: Streaming requests (`stream: true`) are not evaluated by AI Guard.
+**Note:** Streaming requests (`stream: true`) are not evaluated by AI Guard.
 
 [1]: https://github.com/openai/openai-node
 [2]: https://platform.openai.com/docs/api-reference/chat
