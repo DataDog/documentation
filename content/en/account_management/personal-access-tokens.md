@@ -5,10 +5,6 @@ aliases:
     - /account_management/faq/personal-access-tokens/
 ---
 
-{{< callout btn_hidden="true" header="New: Personal Access Tokens" >}}
-Personal Access Tokens are now generally available.
-{{< /callout >}}
-
 ## Overview
 
 Personal Access Tokens (PATs) are a credential type that authenticates Datadog API calls. Unlike application keys, PATs do not need to be paired with an API key. They are short-lived and scoped by default, giving you tighter control over what each token can access and how long it remains valid.
