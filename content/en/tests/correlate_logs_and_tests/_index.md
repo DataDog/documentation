@@ -88,7 +88,7 @@ If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS
 
 When a separate process executes code triggered by a test, it needs a `trace_id` and `span_id` from that test trace to correlate its logs. Use `ddtrace.testing.logs.DDTestLogsHandler` (`ddtrace >= 4.11.0`) to ship those log records to the Datadog logs intake, correlated with the originating test trace.
 
-`DDTestLogsHandler` reads the same environment variables as the pytest plugin to detect the backend (agentless or EVP proxy), so it works in any subprocess where those variables are available.
+`DDTestLogsHandler` reads the same environment variables as the pytest plugin to detect the backend (agentless or EVP proxy). It works in any subprocess where those variables are available.
 
 **Agentless mode** (set `DD_CIVISIBILITY_AGENTLESS_ENABLED=true`):
 
