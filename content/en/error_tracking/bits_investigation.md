@@ -19,7 +19,7 @@ further_reading:
   text: 'Bits Investigation for alerts and monitors (on-call)'
 ---
 
-<div class="alert alert-info">Bits Investigation in Error Tracking is in trial. Behavior and availability can change, and the product shows a trial badge while the trial is active.</div>
+<div class="alert alert-info">Bits Investigation in Error Tracking is in trial. Behavior and availability can change.</div>
 
 ## Overview
 
@@ -27,77 +27,54 @@ Bits Investigation is built into Error Tracking. When you open an issue, it inve
 
 This page covers Bits Investigation in Error Tracking. To investigate alerts and monitors during on-call, see [Bits Investigation for on-call operations][2].
 
-<!-- TODO: add screenshot. {{< img src="error_tracking/bits_investigation/overview.png" alt="A Bits Investigation result in the Error Tracking issue side panel" style="width:100%;" >}} -->
+<!-- TODO: add screenshot. {{< img src="error_tracking/bits_investigation/overview.png" alt="A Bits Investigation result in the Error Tracking issue panel" style="width:100%;" >}} -->
 
 ## How it works
 
-You start an investigation from the issue side panel. Bits Investigation then:
+You run an investigation on demand from the issue panel. Bits Investigation then:
 
 1. Reads the issue, including the stack trace, error attributes, and related telemetry (logs, traces, and RUM events).
 2. Reads the relevant source code when [Source Code Integration](#connect-your-source-code) is set up.
 3. Forms a hypothesis about the root cause and checks it against the available data.
-4. Returns a result: the root cause, an impact assessment, suspect commits, and a recommended next step.
+4. Returns a result: the likely root cause with its supporting evidence, an impact assessment (how many users, sessions, and accounts are affected), suspect commits when source code is connected, and a recommended next step.
 
 From the result, you decide what to do next: generate a code fix with Bits Code, copy the context into your own AI assistant, create a ticket, or resolve or ignore the issue.
 
-When source code is not connected, the investigation still runs but works from error patterns and telemetry only, so the result has less detail. The side panel marks these results so you know the investigation ran with reduced context.
+<div class="alert alert-info">Connecting your source code has the largest effect on result quality. With <a href="#connect-your-source-code">Source Code Integration</a> set up, Bits Investigation reads the code that was running when the error occurred, which sharpens root cause analysis and makes suspect commits and code fixes possible. Without it, investigations still run, but they work from error patterns and telemetry alone and the results are less precise.</div>
 
 ## Prerequisites and setup
-
-Setup happens at three levels: your organization, each service, and your individual account.
 
 ### Enable Bits in your organization
 
 Bits Investigation requires Bits to be enabled and AI providers to be allowed for your organization.
 
-- If Bits is not enabled, turn it on from the Bits settings page. The settings page has two options: enabling Bits and enabling AI code fixes.
+- If Bits is not enabled, enable it from the Bits settings page.
 - If AI providers are blocked, Datadog AI features are unavailable for your organization. Contact your account admin or Datadog support to enable them.
 
 ### Connect your source code
 
-Source Code Integration lets Bits Investigation read the code that was running when the error occurred. This improves accuracy and is required for suspect commits and code fixes. Connect a supported Git provider (GitHub or GitLab) and make sure your telemetry carries Git metadata.
+Source Code Integration lets Bits Investigation read the code that was running when the error occurred. It is required for suspect commits and code fixes, and it improves accuracy. Connect a supported Git provider (GitHub or GitLab) and make sure your telemetry carries Git information.
 
-The setup depends on the platform:
+How you send Git information depends on the platform:
 
-| Platform        | What to configure                                              |
-|-----------------|----------------------------------------------------------------|
-| Backend service | Set Git information in your deployment configuration.          |
-| Browser / RUM   | Upload source maps with Git metadata.                          |
-| Mobile          | Upload debug symbols with Git metadata.                        |
+| Platform        | What to configure                                       |
+|-----------------|---------------------------------------------------------|
+| Backend service | Set Git information in your deployment configuration.   |
+| Browser / RUM   | [Upload source maps][6] with Git information.           |
+| Mobile          | Upload debug symbols with Git information.              |
 
-For the full steps, see [Source Code Integration][3].
-
-### Connect your GitHub account
-
-Creating a pull request from a code fix requires connecting your individual GitHub account. You can run investigations and read results without it.
-
-## Run an investigation
-
-Investigations run on demand.
-
-1. Open an issue in Error Tracking.
-2. In the issue side panel, click **Investigate**.
-3. Wait for the investigation to finish. The result appears in the side panel.
-
-## Investigation results
-
-A result includes:
-
-- **Root cause**: the most likely reason the error occurs, with the evidence used to reach it.
-- **Impact**: how many users, sessions, and accounts the issue affects.
-- **Suspect commits**: the commits most likely to have introduced the error, when source code is connected.
-- **Next step**: the recommended way to resolve the issue.
-
-If the investigation ran without source code, the result shows a reduced-context indicator and a link to set up Source Code Integration.
+For setup steps, see [Source Code Integration][3].
 
 ## Resolve the issue
 
-From the result, you can:
+From a result, you can:
 
-- **Fix with Bits Code**: when the issue is fixable through a code change, hand off to [Bits Code][1] to generate a fix and open a pull request. This option appears when Bits Investigation determines the issue is fixable in code.
+- **Fix with Bits Code**: when the issue is fixable through a code change, hand off to [Bits Code][1] to generate a fix and open a pull request. This option appears when Bits Investigation determines the issue is fixable in code, and you can also trigger a fix manually when it does not.
 - **Copy as Markdown**: copy the issue context for your AI assistant, then paste it into the agent of your choice.
 - **Create a ticket**: open a ticket in [Jira, Linear, or Case Management][4].
 - **Resolve or ignore**: change the [issue state][5] directly from the panel.
+
+You can re-run an investigation at any time, and add your own context to guide it.
 
 ## Find issues with investigations
 
@@ -105,13 +82,13 @@ Use the **with investigation** filter in the Error Tracking Explorer to find iss
 
 ## Availability
 
-Bits Investigation in Error Tracking is in trial. While the trial is active, the product shows a trial badge.
+Bits Investigation in Error Tracking is in trial.
 
 ## Permissions
 
-Access to Bits Investigation follows your Bits AI permissions. Reading investigations and triggering them are controlled by your read and write access. <!-- TODO: confirm the exact role/permission name to cite publicly. -->
+Access to Bits Investigation follows your Bits AI permissions: reading and triggering investigations are controlled by your read and write access. <!-- TODO: confirm the exact role/permission name to cite publicly. -->
 
-Creating a pull request from a code fix also requires connecting your individual GitHub account, as described in [Connect your GitHub account](#connect-your-github-account).
+Running investigations and reading results does not require a personal Git connection. Creating a pull request from a code fix does: connect your individual GitHub or GitLab account first.
 
 ## Limitations
 
@@ -127,3 +104,4 @@ Creating a pull request from a code fix also requires connecting your individual
 [3]: /integrations/guide/source-code-integration/
 [4]: /error_tracking/ticketing_systems/
 [5]: /error_tracking/issue_states/
+[6]: /real_user_monitoring/guide/upload-javascript-source-maps
