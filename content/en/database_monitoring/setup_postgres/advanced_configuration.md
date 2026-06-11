@@ -57,7 +57,7 @@ instances:
 
 ## Configuring column statistics collection
 
-Column statistics collection reads per-column statistics from `pg_stats` (`n_distinct`, `null_frac`, `avg_width`, `correlation`, `most_common_freqs`) on a periodic schedule. This requires the `datadog.column_statistics()` function to exist in every monitored database — see [Setting Up Database Monitoring for Self-Hosted Postgres][1] for the function definition.
+Column statistics collection reads per-column statistics from `pg_stats` (`n_distinct`, `null_frac`, `avg_width`, `correlation`, `most_common_freqs`) on a periodic schedule. This requires the `datadog.column_statistics()` function to exist in every monitored database—see [Setting Up Database Monitoring for Self-Hosted Postgres][1] for the function definition.
 
 Once the function exists, enable and tune collection in your Postgres instance config:
 
