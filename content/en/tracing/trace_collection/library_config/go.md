@@ -72,8 +72,6 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Go SDK (legacy)][21].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 
@@ -98,5 +96,4 @@ The previous version of this configuration documentation is still available at [
 [18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
-[21]: /tracing/trace_collection/library_config_legacy/go/
 [22]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib

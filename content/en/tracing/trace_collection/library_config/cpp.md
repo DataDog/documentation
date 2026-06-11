@@ -25,8 +25,6 @@ To configure the SDK using environment variables, set the variables before launc
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the C++ SDK (legacy)][7].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 ## Further Reading
@@ -38,5 +36,3 @@ The previous version of this configuration documentation is still available at [
 [3]: /agent/configuration/network/#configure-ports
 [4]: /tracing/configure_data_security#telemetry-collection
 [5]: /remote_configuration
-[6]: /tracing/trace_collection/library_config_legacy/#traces
-[7]: /tracing/trace_collection/library_config_legacy/cpp/

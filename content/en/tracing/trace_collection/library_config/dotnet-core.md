@@ -104,8 +104,6 @@ To configure the SDK using a JSON file, create `datadog.json` in the instrumente
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the .NET Core SDK (legacy)][24].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 ## Further reading
@@ -131,6 +129,4 @@ The previous version of this configuration documentation is still available at [
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
 [21]: /tracing/trace_collection/trace_context_propagation/
-[22]: /tracing/trace_collection/library_config_legacy/#traces
 [23]: /profiler/
-[24]: /tracing/trace_collection/library_config_legacy/dotnet-core/

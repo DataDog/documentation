@@ -38,8 +38,6 @@ Unless otherwise stated, you can convert between system properties and environme
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Java SDK (legacy)][24].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 **Note**:
@@ -194,7 +192,5 @@ See the [Java integration documentation][14] to learn more about Java metrics co
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
 [19]: /security/application_security/setup/threat_detection/java/
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
-[21]: /tracing/trace_collection/library_config_legacy/#traces
 [22]: /profiler/
 [23]: /database_monitoring/connect_dbm_and_apm/?tab=java
-[24]: /tracing/trace_collection/library_config_legacy/java/

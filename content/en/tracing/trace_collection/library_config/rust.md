@@ -23,8 +23,6 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Rust SDK (legacy)][3].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 ## Further reading
@@ -33,4 +31,3 @@ The previous version of this configuration documentation is still available at [
 
 [1]: /tracing/trace_collection/custom_instrumentation/rust
 [2]: /tracing/trace_collection/trace_context_propagation
-[3]: /tracing/trace_collection/library_config_legacy/rust/

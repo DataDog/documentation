@@ -34,8 +34,6 @@ For more examples of how to work with the library see [API documentation][2].
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Node.js SDK (legacy)][17].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 ## Further Reading
@@ -51,5 +49,3 @@ The previous version of this configuration documentation is still available at [
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
-[16]: /tracing/trace_collection/library_config_legacy/#traces
-[17]: /tracing/trace_collection/library_config_legacy/nodejs/

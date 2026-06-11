@@ -91,8 +91,6 @@ DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the PHP SDK (legacy)][23].
-
 {{< partial name="apm/registry-config-list.html" >}}
 
 #### Integration names
@@ -220,6 +218,4 @@ When the application runs in a docker container, the path `/proc/self` should al
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
 [20]: /opentelemetry/interoperability/environment_variable_support
-[21]: /tracing/trace_collection/library_config_legacy/#traces
 [22]: https://www.w3.org/TR/baggage/
-[23]: /tracing/trace_collection/library_config_legacy/php/
