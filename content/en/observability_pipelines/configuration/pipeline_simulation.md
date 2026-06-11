@@ -105,7 +105,7 @@ To import sample data for your pipeline simulation:
 When you import sample data in JSON format, the data must be:
 
 - Structured as a set of JSON objects wrapped in an array
-- Comma separated between each log event
+- Comma-separated between each log event
 
 The following is an example set of logs in JSON you can import for a simulation:
 
@@ -189,7 +189,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel." style="width:60%;" >}}
 1. After the simulation is complete, you can:
     - See the log data that the processor received and sent out.
-    - Enter a free text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
+    - Enter a free-text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
     - Use the **All events** dropdown menu to view events by status:
         - `Modified only` shows only modified events.
         - `Unmodified only` shows only unmodified events.
