@@ -3519,6 +3519,10 @@
     "request_description": "",
     "request_schema_description": "Response for listing interface tags."
   },
+  "ListNetworkHealthInsights": {
+    "description": "Return network health insights for the organization within the given time window.\nInsights are produced by analyzing DNS failures pre-classified by `network-dns-logger`,\nTLS certificate metrics, and denied security group connections. Each insight\nidentifies the client and server services involved, the type of issue, and the\nmagnitude of the failure observed during the query window.",
+    "summary": "List network health insights"
+  },
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"

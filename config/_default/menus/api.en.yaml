@@ -14480,6 +14480,23 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: Network Health Insights
+      url: /api/latest/network-health-insights/
+      identifier: network-health-insights
+      generated: true
+    - name: List network health insights
+      url: /api/latest/network-health-insights/list-network-health-insights/
+      identifier: network-health-insights-list-network-health-insights
+      parent: network-health-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNetworkHealthInsights
+        unstable:
+          - v2
+        order: 1
     - name: OAuth2 Client Public
       url: /api/latest/oauth2-client-public/
       identifier: oauth2-client-public
