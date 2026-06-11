@@ -13,7 +13,6 @@ further_reading:
       text: "Cloud-Based Authentication"
 ---
 
-{{< callout btn_hidden="true" header="New: Service Access Tokens" >}}
 Service Access Tokens are now generally available.
 {{< /callout >}}
 
