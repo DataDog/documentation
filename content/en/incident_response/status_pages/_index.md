@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page3.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
 Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
@@ -32,9 +32,7 @@ Use Status Pages to:
 
 ## Configure permissions
 
-There are three RBAC permissions that are relevant to Status Pages. Users with the Datadog Admin Role have all the necessary permissions.
-
-To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_incident_write` RBAC permissions. For more information, see [Access Control][1].
+To create, update, or publish Status Pages, you must have the appropriate RBAC permissions. For more information, see [Access Control][1].
 
 <table>
   <thead>
@@ -52,13 +50,23 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Write<br><code style="white-space: nowrap;">status_pages_settings_write</code></td>
-      <td>Create and launch new Status Pages, and configure Status Pages settings.</td>
+      <td>Create new Status Pages, and configure Status Pages settings.</td>
       <td>Datadog Admin Role</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
       <td>Publish and update Incidents.</td>
       <td>Datadog Admin Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Public Page Publish<br><code style="white-space: nowrap;">status_pages_public_page_publish</code></td>
+      <td>Publish and unpublish public Status Pages.</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
+      <td>Publish and unpublish internal Status Pages.</td>
+      <td>None</td>
     </tr>
   </tbody>
 </table>
@@ -119,7 +127,7 @@ Notices are messages published to a status page to communicate system status. St
 
 ### Publish a degradation
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page_degradations2.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
 
 Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
 
@@ -134,7 +142,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_degradation_1.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
@@ -142,6 +150,21 @@ After a degradation notice is reviewed and published, it:
 - Is visible in the notice history timeline.
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
+
+**Note**: Each status page supports a maximum of 100 active (unresolved) degradations at a time.
+
+### Backfill a degradation
+
+Backfilled degradations allow you to retroactively document service disruptions that were not previously announced. Each update can be assigned its original timestamp, so the incident timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Degradation**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the degradation. Each update requires a started at timestamp, status (Investigating or Resolved), description, and affected components. |
+
+{{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
 
 ### Schedule a maintenance window
 
@@ -168,14 +191,20 @@ After reviewing and scheduling, the maintenance window:
 
 You can post updates if plans change or reschedule the maintenance window as needed.
 
-## Backfill a notice
+**Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
 
-If an incident occurred and you did not publish a notice to the status page while it was happening, you can still document it retroactively using a backfilled notice. Unlike a regular notice, a backfilled notice is built from a list of updates, each with its own start time, so the notice accurately reflects the full incident timeline in the uptime history.
+### Backfill a maintenance window
 
-1. From a status page, under **Publish Notice**, click **Publish Backfilled Notice**.
-1. Enter a **Title** for the notice.
-1. Add one or more **Updates**. For each update, provide a start time and any relevant details.
-1. Click **Publish Notice**.
+Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
+
+From a status page, select the dropdown next to **Publish Notice**, select **Publish Backfilled Notice** > **Scheduled Maintenance**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Updates** | Exactly two timestamped updates representing the start and end of the maintenance window. Each update requires a started at timestamp, status (In Progress or Completed), description, and affected components. |
+
+{{< img src="service_management/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
 
 ## Email subscriptions
 

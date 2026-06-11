@@ -21,12 +21,12 @@ further_reading:
   tag: Documentation
   text: Envoyer des données à Datadog
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
-  tag: GitHub
+  tag: Blog
   text: Partenariat de Datadog avec OpenTelemetry
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: GitHub
-  text: Surveiller les applications instrumentées avec OpenTelemetry grâce à la prise
-    en charge du contexte des traces W3C
+  tag: Blog
+  text: Surveiller les apps instrumentées avec OpenTelemetry grâce à la prise en charge
+    du contexte des traces W3C
 - link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: Blog
   text: Envoyer des métriques et des traces depuis le Collector OpenTelemetry vers
@@ -55,93 +55,93 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/otel-with-datadog
   tag: Centre d'apprentissage
   text: Introduction à OpenTelemetry avec Datadog
+- link: https://learn.datadoghq.com/courses/understanding-opentelemetry
+  tag: Centre d'apprentissage
+  text: Comprendre OpenTelemetry
 title: OpenTelemetry dans Datadog
 ---
-
-{{< learning-center-callout hide_image="true" header="Try \"Essayez l'Introduction à OTel avec Datadog dans le centre d'apprentissage" btn_title="Inscrivez-vous" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
-  Découvrez comment configurer OpenTelemetry pour exporter des métriques, des traces et des logs vers Datadog, et explorez les données collectées sur la plateforme.
+{{< learning-center-callout hide_image="true" header="Essayez \"Introduction à OTel avec Datadog\" dans le Centre d'apprentissageer" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+  Apprenez à configurer OpenTelemetry pour exporter des métriques, des traces et des journaux vers Datadog, et explorez les données collectées sur la plateforme.
 {{< /learning-center-callout >}}
 
-## Section Overview
+## Aperçu {#overview}
 
-[OpenTelemetry][1] (OTel) fournit des protocoles standardisés pour collecter et router les données de télémétrie. Datadog prend en charge plusieurs méthodes pour collecter et analyser les données de télémétrie issues d'applications instrumentées avec OpenTelemetry, que vous utilisiez l'infrastructure Datadog existante ou une configuration indépendante du fournisseur.
+[OpenTelemetry][1] (OTel) fournit des protocoles standardisés pour la collecte et le routage des données de télémétrie. Datadog prend en charge plusieurs façons de collecter et d'analyser les données de télémétrie provenant d'applications instrumentées par OpenTelemetry, que vous utilisiez l'infrastructure Datadog existante ou que vous préfériez une configuration neutre vis-à-vis des fournisseurs.
 
-### Pourquoi utiliser OpenTelemetry avec Datadog ?
+### Pourquoi OpenTelemetry avec Datadog&nbsp;? {#why-opentelemetry-with-datadog}
 
-Datadog fournit une observabilité avancée pour toute votre télémétrie applicative, quelle qu'en soit la source. En prenant en charge OpenTelemetry, Datadog propose :
+Datadog fournit une observabilité avancée pour toute la télémétrie d'application, quelle que soit sa source. En prenant en charge OpenTelemetry, Datadog offre :
 
-- **La souplesse et la liberté** : utilisez une instrumentation standardisée tout en conservant la flexibilité nécessaire à l'évolution de votre infrastructure.
-- **La prise en charge complète des langages** : surveillez vos applications de façon cohérente sur l'ensemble de votre pile technologique.
-- **Une instrumentation unifiée** : appliquez une approche unique à l'instrumentation de vos systèmes.
-- **Des analyses puissantes** : associez la standardisation d'OpenTelemetry aux capacités d'analyse, de visualisation et d'alerte de Datadog.
+- **Flexibilité et choix**&nbsp;: Utilisez une instrumentation standardisée tout en conservant la liberté de vous adapter à l'évolution de vos besoins technologiques.
+- **Support complet des langages**&nbsp;: Surveillez de manière cohérente les applications sur l'ensemble de votre pile technologique.
+- **Instrumentation unifiée**&nbsp;: Maintenez une approche unique de l'instrumentation à travers vos systèmes.
+- **Analytique puissante**&nbsp;: Combinez la standardisation d'OpenTelemetry avec les capacités d'analyse, de visualisation et d'alerte robustes de Datadog.
 
 Que vous utilisiez déjà OpenTelemetry ou que vous envisagiez de l'adopter, Datadog propose des options flexibles pour répondre à vos besoins.
 
-### Décisions clés
+### Décisions clés {#key-decisions}
 
 Deux décisions principales sont à prendre lorsque vous utilisez OpenTelemetry avec Datadog :
 
-- [Comment instrumenter vos applications](#instrumenter-vos-applications) 
-- [Comment envoyer vos données à Datadog](#envoyer-des-donnees-opentelemetry-a-datadog)
+- [Comment instrumenter vos applications](#instrument-your-applications)
+- [Comment envoyer vos données à Datadog](#send-opentelemetry-data-to-datadog)
 
-Les fonctionnalités disponibles dépendent de ces choix. Par exemple, l'utilisation de l'API OpenTelemetry avec le SDK de Datadog donne accès à plus de fonctionnalités Datadog que l'utilisation du SDK OpenTelemetry seul.
+Les fonctionnalités qui vous sont disponibles dépendent de ces choix. Par exemple, utiliser l'API OpenTelemetry avec le SDK Datadog donne accès à plus de fonctionnalités Datadog que d'utiliser uniquement le SDK OpenTelemetry.
 
 Pour en savoir plus, consultez la page relative à la [compatibilité des fonctionnalités][9].
 
-## Instrumenter vos applications
+## Instrumentez vos applications {#instrument-your-applications}
 
-Il existe plusieurs manières d'instrumenter vos applications avec OpenTelemetry et Datadog. Chaque approche propose des fonctionnalités et un niveau d'indépendance vis-à-vis des fournisseurs différents.
+Il existe plusieurs façons d'instrumenter vos applications avec OpenTelemetry et Datadog. Chaque approche offre différentes fonctionnalités et niveaux de neutralité vis-à-vis des fournisseurs.
 
-- **OpenTelemetry complet** : utilisez le SDK et l'API OpenTelemetry pour une configuration neutre vis-à-vis du fournisseur.
-- **API OpenTelemetry** : utilisez l'API OpenTelemetry avec l'implémentation du SDK de Datadog.
-- **Bibliothèques d'instrumentation OpenTelemetry** : étendez l'observabilité de Datadog à d'autres frameworks et technologies.
+- **OpenTelemetry complet**&nbsp;: Utilisez le SDK et l'API OpenTelemetry pour une configuration neutre vis-à-vis des fournisseurs.
+- **API OpenTelemetry**&nbsp;: Utilisez l'API OpenTelemetry avec l'implémentation SDK de Datadog.
+- **Bibliothèques d'instrumentation OpenTelemetry**&nbsp;: Étendez l'observabilité de Datadog à d'autres frameworks et technologies.
 
 Pour en savoir plus, consultez la section [Instrumenter vos applications][8].
 
-## Envoyer des données OpenTelemetry à Datadog
+## Envoyez les données OpenTelemetry à Datadog {#send-opentelemetry-data-to-datadog}
 
 Si vos applications et services sont instrumentés avec des bibliothèques OpenTelemetry, vous pouvez choisir comment envoyer les données de traces, de métriques et de logs à Datadog.
 
-<div class="alert alert-info"><strong>Vous ne savez pas quelle configuration est la plus adaptée ?</strong><br> Consultez le tableau <a href="/opentelemetry/compatibility/">Compatibilité des fonctionnalités</a> pour savoir quelles fonctionnalités Datadog sont prises en charge.</div>
+<div class="alert alert-info"><strong>Vous ne savez pas quelle configuration est la bonne pour vous ?</strong><br> Consultez le tableau <a href="/opentelemetry/compatibility/">Compatibilité des fonctionnalités</a> pour comprendre quelles fonctionnalités de Datadog sont prises en charge.</div>
 
-### Option 1 : utiliser le collector OpenTelemetry
+### Option 1 : Utilisez l'Agent Datadog avec le Collecteur DDOT (Recommandé) {#option-1-use-the-datadog-agent-with-ddot-collector-recommended}
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagramme : le SDK OpenTelemetry dans le code envoie des données via OTLP vers un host exécutant le collector OpenTelemetry avec le Datadog Exporter, qui les transmet à la plateforme d'observabilité de Datadog." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Aperçu de l'architecture pour le Collecteur DDOT, qui est intégré dans l'Agent Datadog." style="width:100%;" >}}
 
-**Idéal pour** : les utilisateurs OTel (nouveaux ou existants) souhaitant une configuration totalement indépendante du fournisseur.
+**Idéal pour**&nbsp;: Les utilisateurs cherchant à bénéficier à la fois de la neutralité vis-à-vis des fournisseurs OTel et des innovations de l'écosystème Datadog, telles que&nbsp;:
 
-- Neutralité totale vis-à-vis du fournisseur pour l'envoi des données OpenTelemetry vers Datadog
-- Options de configuration flexibles comme l'échantillonnage basé sur la fin des traces (tail-based sampling) et les transformations de données
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}En savoir plus sur l'utilisation du collector OTel{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Option 2 : Utiliser l'Agent Datadog avec le collector DDOT
-
-{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Vue d'ensemble de l'architecture du collector DDOT, intégré à l'Agent Datadog." style="width:100%;" >}}
-
-**Idéal pour** : les utilisateurs actuels de Datadog ou les équipes ayant besoin de fonctionnalités basées sur l'Agent, comme :
-
-- Fleet Automation
-- Container Monitoring en direct
-- Kubernetes Explorer
-- Live processes
+- Automatisation de flotte
+- Surveillance en temps réel des conteneurs
+- Explorateur Kubernetes
+- Processus en temps réel
 - Surveillance du réseau cloud
-- Universal Service Monitoring
-- {{< translate key="integration_count" >}}+ intégrations Datadog
-
-<div class="alert alert-info">Pour consulter la liste complète des fonctionnalités basées sur l'Agent, consultez la section <strong>OTel vers l'Agent Datadog (OTLP)</strong> dans la page relative à la <a href="/opentelemetry/compatibility/">compatibilité des fonctionnalités</a>.</div>
+- Surveillance des services universels
+- {{< translate key="integration_count" >}}+ Intégrations Datadog
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/" >}}En savoir plus sur l'utilisation de l'Agent Datadog avec le collector DDOT{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/" >}}En savoir plus sur l'utilisation de l'Agent Datadog avec le Collecteur DDOT{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Autres options de configuration
+### Option 2 : Utilisez le Collecteur OpenTelemetry {#option-2-use-the-opentelemetry-collector}
 
-Pour d'autres options de configuration, y compris un déploiement sans Agent, consultez la section [Envoyer des données à Datadog][7].
+{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagramme : le SDK OpenTelemetry dans le code envoie des données via OTLP à un hôte exécutant le Collecteur OpenTelemetry avec l'Exportateur Datadog, qui les transfère à la Plateforme d'Observabilité de Datadog." style="width:100%;" >}}
 
-## Pour aller plus loin
+**Idéal pour** : les utilisateurs d'OTel, qu'ils soient nouveaux ou existants, souhaitant une configuration entièrement neutre vis-à-vis des fournisseurs.
+
+- Neutralité totale vis-à-vis des fournisseurs pour l'envoi de données OpenTelemetry à Datadog
+- Options de configuration flexibles telles que le tail-based sampling et les transformations de données
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}En savoir plus sur l'utilisation du Collecteur OTel{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Options de configuration supplémentaires {#additional-setup-options}
+
+Pour d'autres options de configuration, y compris l'ingestion directe d'OTLP, voir [Envoyer des données à Datadog][7].
+
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

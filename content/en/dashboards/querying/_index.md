@@ -47,7 +47,7 @@ Select your visualization from the available [widgets][3].
 
 Choose the metric to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`.
 
-You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's {{< ui >}}Semantic Mode{{< /ui >}} selector to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
+You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's [Telemetry source][19] query modifier to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
@@ -137,7 +137,7 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 ### Nested Queries
 
-Datadog’s nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
+Datadog's nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
 
 For more information, see the [Nested Queries][13] documentation.
 
@@ -146,7 +146,7 @@ For more information, see the [Nested Queries][13] documentation.
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][14].
 
-Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations and comparison functions. Use `+`, `-`, `/`, `*`, `minimum()`, and `maximum()` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
@@ -168,7 +168,7 @@ jvm.heap_memory / jvm.heap_memory_max
 
 Use the {{< ui >}}Advanced...{{< /ui >}} option in the graph editor and select {{< ui >}}Add Query{{< /ui >}}. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
-Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
+Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To show only the formula result, see [Hide a query from the visualization](#hide-a-query-from-the-visualization).
 
 {{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
 
@@ -182,22 +182,31 @@ status:error / status:info
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
+#### Hide a query from the visualization
+
+When a widget has multiple queries and a formula, you can hide individual queries so only the formula result appears on the graph. Click the query's letter label to toggle its visibility on the graph. A blue label indicates the query is displayed; a grey label indicates it is hidden. The hidden query is still used in the formula calculation.
+
 #### Minimum or Maximum between two queries
-Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.
+
+Use `minimum()` and `maximum()` to compare two queries point by point and return the lower or higher value at each timestamp.
+
+**Note**: Using `min()` and `max()` for arithmetic comparison is deprecated. Use `minimum()` and `maximum()` instead. This deprecation applies only to arithmetic comparison syntax. Aggregation methods such as `min by`, `max by`, and nested-query aggregation with `min` and `max` are unchanged.
+
+Here is an example using `maximum()` to find the maximum CPU usage between two availability zones.
 
 ```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
+maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
 
-Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and warning statuses.
+Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 
 ```text
-min(status:error, status:warn)
+minimum(status:error, status:warn)
 ```
 
-{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
 
 ### Create an alias
 
@@ -262,3 +271,4 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [16]: /dashboards/widgets/timeseries/#event-overlay
 [17]: /logs/explorer/search_syntax/
 [18]: /metrics/open_telemetry/query_metrics
+[19]: /dashboards/functions/telemetry_source/

@@ -1,44 +1,43 @@
 ---
-title: Suggested Features
-private: true
-description: Create features based on Datadog's automatically generated suggestions.
+title: Suggested Journeys
+description: Create journeys based on Datadog's automatically generated suggestions.
 further_reading:
 - link: '/journey_monitoring/'
   tag: 'Documentation'
-  text: 'Learn about Feature Monitoring'
+  text: 'Learn about Journey Monitoring'
 - link: '/journey_monitoring/map/'
   tag: 'Documentation'
   text: 'Learn about the map'
 - link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
-  text: 'Learn about feature details reports'
+  text: 'Learn about journey details reports'
 - link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
-  text: 'Learn about feature variants'
+  text: 'Learn about journey variants'
 - link: '/journey_monitoring/uptime/'
   tag: 'Documentation'
-  text: 'Learn about feature uptime'
+  text: 'Learn about journey uptime'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="false">}}
-Feature Monitoring is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+Journey Monitoring is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-Every Wednesday midnight UTC, Datadog analyzes the previous 30 days of page views and clicks in your frontend applications and automatically generates suggested features. Each suggested feature includes:
-- A feature name
-- A feature description
+Every Wednesday midnight UTC, Datadog analyzes the previous 30 days of page views and clicks in your frontend applications and automatically generates suggested journeys. Each suggested journey includes:
+- A journey name
+- A journey description
 - A start event
 - An end event
 
-Suggested features are starting points to create new features. Clicking on a suggested feature from the [map][1] or catalog takes you to the feature creation page. The start event, end event, and description are automatically populated from the suggestion.
+Suggested journeys are starting points to create new journeys. Clicking on a suggested journey from the [map][1] or catalog takes you to the journey creation page. The start event, end event, and description are automatically populated from the suggestion.
 
-<div class="alert alert-warning"><p>Suggested features do not appear if your organization has opted out of applied AI experiences.</p></div>
+<div class="alert alert-warning"><p>Suggested journeys do not appear if your organization has opted out of applied AI experiences.</p></div>
 
-## Dismissing suggested features
+## Dismissing suggested journeys
 
-Click the three-dot menu in the catalog to dismiss a suggested feature. A dismissed feature suggestion is not regenerated.
+Click the three-dot menu in the catalog to dismiss a suggested journey. A dismissed journey suggestion is not regenerated.
 
 ## Further reading
 

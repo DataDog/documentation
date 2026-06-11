@@ -5,10 +5,6 @@ aliases:
     - /account_management/faq/personal-access-tokens/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Personal Access Tokens are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Personal Access Tokens (PATs) are a credential type that authenticates Datadog API calls. Unlike application keys, PATs do not need to be paired with an API key. They are short-lived and scoped by default, giving you tighter control over what each token can access and how long it remains valid.
@@ -26,7 +22,7 @@ With PATs, you can:
 | Standalone authentication | Yes; no API key pairing needed | Yes; no API key pairing needed | No; requires an API key |
 | Scoped by default | Yes; scopes are mandatory | Yes; scopes are mandatory | Optional; unscoped by default |
 | Time-to-live (TTL) | Required (24 hours to one year) | Optional; can be long-lived | No expiration |
-| Identifiable prefix | `ddpat_` | `ddpat_` | `ddapp_` (new) |
+| Identifiable prefix | `ddpat_` | `ddsat_` | `ddapp_` (new) |
 | Linked to | Individual user | Service account | Individual user or service account |
 
 For Service Access Tokens, see [Service Access Tokens][7].

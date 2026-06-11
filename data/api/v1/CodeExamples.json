@@ -288,6 +288,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2882802132",
+      "description": "Create a new dashboard with hostmap infra widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1200099236",
       "description": "Create a new dashboard with hostmap widget"
     },
@@ -403,6 +408,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2844071429",
+      "description": "Create a new dashboard with sankey widget and RUM data source"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_258152475",
       "description": "Create a new dashboard with sankey widget and network data source"
     },
@@ -410,11 +420,6 @@
       "group": "dashboards",
       "suffix": "_373890042",
       "description": "Create a new dashboard with sankey widget and product analytics data source"
-    },
-    {
-      "group": "dashboards",
-      "suffix": "_2932151909",
-      "description": "Create a new dashboard with sankey widget and rum data source"
     },
     {
       "group": "dashboards",
@@ -811,6 +816,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2589528326",
+      "description": "Create a Data Jobs monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3626832481",
       "description": "Create a Data Quality monitor returns \"OK\" response"
     },
@@ -953,6 +963,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "_1326388368",
       "description": "Create an SLO correction with rrule returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2888963657",
+      "description": "Create an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "UpdateSLOCorrection": [
@@ -960,6 +975,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "",
       "description": "Update an SLO correction returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2949191256",
+      "description": "Update an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "CreateSLO": [
@@ -1067,6 +1087,11 @@
       "group": "synthetics",
       "suffix": "_1072503741",
       "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2547523542",
+      "description": "Create an API test with MCP steps returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

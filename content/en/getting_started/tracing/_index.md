@@ -139,12 +139,12 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
 ## Explore traces in Datadog
 
-1. In Datadog, go to [**APM** > **Services**][3]. You should see a Python service named `hello`:
+1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3]. You should see a Python service named `hello`:
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Catalog shows the new Python service." style="width:100%;" >}}
 
 1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
-1. Go to [**APM** > **Traces**][4]. You should see a trace for the `hello` service:
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]. You should see a trace for the `hello` service:
 
    {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace explorer shows the trace for the hello service." style="width:100%;" >}}
 
@@ -200,21 +200,21 @@ To add custom instrumentation:
    ```shell
    curl http://0.0.0.0:5050/
    ```
-1. In Datadog, go to [**APM** > **Traces**][4].
-1. Select the **hello** trace.
+1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4].
+1. Select the `hello` trace.
 1. Find the new custom `get_quote` span in the flame graph and hover over it:
 
    {{< img src="/getting_started/apm/custom-instrumentation.png" alt="The get_quote custom span displays in the flame graph. On hover, the quote span tag is displayed. " style="width:100%;" >}}
 
-1. Notice that the custom `quote` span tag displays on the **Info** tab.
+1. Notice that the custom `quote` span tag displays on the {{< ui >}}Info{{< /ui >}} tab.
 
 ## What's next?
 
 After you set up tracing and your application is sending data to Datadog, explore additional APM features:
 
-### Software Catalog
+### Catalog
 
-[Software Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
+[Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
 
 ### Trace ingestion and retention
 
@@ -232,7 +232,7 @@ Control costs and manage data volume by configuring [ingestion controls][11] and
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /internal_developer_portal/software_catalog/
-[10]: /internal_developer_portal/software_catalog/entity_model/
+[9]: /internal_developer_portal/catalog/
+[10]: /internal_developer_portal/catalog/entity_model/
 [11]: /tracing/trace_pipeline/ingestion_controls/
 [12]: /tracing/trace_pipeline/trace_retention/

@@ -15,10 +15,6 @@ aliases:
   - /cloudprem/operate/search_logs/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Explore BYOC Logs in the Logs Explorer
 
 1. Go to the [Datadog Log Explorer][1].
@@ -26,7 +22,7 @@ aliases:
 
 You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
 
-BYOC Logs index names follow this format:
+BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
 ```
 byoc--<CLUSTER_NAME>--<INDEX_NAME>
