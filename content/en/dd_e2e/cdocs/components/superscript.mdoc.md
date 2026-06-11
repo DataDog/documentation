@@ -1,6 +1,7 @@
 ---
 title: Superscript
 draft: true
+private: true
 ---
 
 ## Overview

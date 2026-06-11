@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-JavaScript (JS) is available in workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
+JavaScript (JS) is available in workflows using inline expressions or through the dedicated JS {{< ui >}}Function{{< /ui >}} and {{< ui >}}Expression{{< /ui >}} actions.
 
 ## Inline JavaScript expressions
 
@@ -20,9 +20,9 @@ The [Lodash][1] utility library is available in inline expressions. The Lodash u
 
 #### Retrieve a timestamp
 
-The following example uses the Lodash `now()` function inside a **Get hosts total** step to get the count of hosts in the last minute.
+The following example uses the Lodash `now()` function inside a {{< ui >}}Get hosts total{{< /ui >}} step to get the count of hosts in the last minute.
 
-The action uses the following inline expression in the **From** field:
+The action uses the following inline expression in the {{< ui >}}From{{< /ui >}} field:
 ```js
 ${ Math.floor(now() / 1000) - 60 }
 ```
@@ -31,9 +31,9 @@ ${ Math.floor(now() / 1000) - 60 }
 
 #### Increment a value
 
-The following example increments the desired capacity inside a **Set desired capacity** step by 1.
+The following example increments the desired capacity inside a {{< ui >}}Set desired capacity{{< /ui >}} step by 1.
 
-The action uses the following inline expression in the **Desired capacity** field:
+The action uses the following inline expression in the {{< ui >}}Desired capacity{{< /ui >}} field:
 ```js
 ${ Steps.Describe_auto_scaling_group.autoScalingGroup.DesiredCapacity + 1 }
 ```
@@ -62,17 +62,17 @@ _.includes($.Steps.Array_function.data, "Bits")
 The function action allows for variable assignments and complex data transformations requiring multiple expressions.
 
 To add a function action:
-- In a new workflow, click **Add step** and search for `function`. Select the **Function** action to add it to your workflow.
-- In an existing workflow, click **+** and search for `function`. Select the **Function** action to add it to your workflow.
+- In a new workflow, click {{< ui >}}Add step{{< /ui >}} and search for `function`. Select the {{< ui >}}Function{{< /ui >}} action to add it to your workflow.
+- In an existing workflow, click {{< ui >}}+{{< /ui >}} and search for `function`. Select the {{< ui >}}Function{{< /ui >}} action to add it to your workflow.
 
 #### Write function steps with AI
 
-You can use Bits AI to help you write the JavaScript for a **Function** step. To use this feature, perform the following steps:
+You can use Bits AI to help you write the JavaScript for a {{< ui >}}Function{{< /ui >}} step. To use this feature, perform the following steps:
 
-1. Add a **Function** step to your workflow.
-1. Under **General**, in the **Script** field, click **<i class="icon-bits-ai"></i> Write with Bits AI**.
-1. In the **Describe your transformation script** field, enter a description of what you want your script to do. Click the up arrow (**↑**) to submit your description.
-1. Choose an option to **Replace script**, **Insert in script**, or **Copy to clipboard**.
+1. Add a {{< ui >}}Function{{< /ui >}} step to your workflow.
+1. Under {{< ui >}}General{{< /ui >}}, in the {{< ui >}}Script{{< /ui >}} field, click {{< ui >}}<i class="icon-bits-ai"></i> Write with Bits AI{{< /ui >}}.
+1. In the {{< ui >}}Describe your transformation script{{< /ui >}} field, enter a description of what you want your script to do. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to submit your description.
+1. Choose an option to {{< ui >}}Replace script{{< /ui >}}, {{< ui >}}Insert in script{{< /ui >}}, or {{< ui >}}Copy to clipboard{{< /ui >}}.
 1. Check the script and change it as necessary to fit your needs.
 
 ### Expression step
@@ -80,8 +80,8 @@ You can use Bits AI to help you write the JavaScript for a **Function** step. To
 In most cases, use an inline expression instead of a dedicated expression step. Expression actions accept a single line of code. For example, `[1, 2, 3].filter(x => x < 3)`. Variable assignments are not available in expressions.
 
 To add an expression action:
-- In a new workflow, click **Add step** and search for `expression`. Select the **Expression** action to add it to your workflow.
-- In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
+- In a new workflow, click {{< ui >}}Add step{{< /ui >}} and search for `expression`. Select the {{< ui >}}Expression{{< /ui >}} action to add it to your workflow.
+- In an existing workflow, click {{< ui >}}+{{< /ui >}} and search for `expression`. Select the {{< ui >}}Expression{{< /ui >}} action to add it to your workflow.
 
 In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Variables and parameters][2].
 

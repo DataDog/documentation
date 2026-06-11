@@ -23,7 +23,7 @@ further_reading:
 - Docker installed on your host
 - Node.js application containerized with Docker
 - Your Datadog API key
-- Datadog Node.js tracing library (see [version requirements][1])
+- Datadog Node.js SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -58,7 +58,7 @@ ENV DD_APPSEC_ENABLED=true
 ENV DD_SERVICE=<YOUR_SERVICE_NAME>
 ENV DD_ENV=<YOUR_ENVIRONMENT>
 
-# Start the application with the Datadog tracer
+# Start the application with the Datadog SDK
 CMD ["node", "--require", "dd-trace/init", "app.js"]
 ```
 
@@ -88,7 +88,7 @@ ENV DD_APM_TRACING_ENABLED=false
 ENV DD_SERVICE=<YOUR_SERVICE_NAME>
 ENV DD_ENV=<YOUR_ENVIRONMENT>
 
-# Start the application with the Datadog tracer
+# Start the application with the Datadog SDK
 CMD ["node", "--require", "dd-trace/init", "app.js"]
 ```
 

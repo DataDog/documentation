@@ -33,7 +33,15 @@ To ensure proper correlation for **Browser Logs**, you must [match configuration
 
 To access the Logs setup pages, follow the links below based on your platform:
 
-{{< partial name="rum/rum-correlate-rum-and-logs.html" >}}
+{{< card-grid card_width="200" >}}
+  {{< image-card href="/logs/log_collection/javascript" src="integrations_logos/javascript_large.svg" alt="browser" >}}
+  {{< image-card href="/logs/log_collection/android" src="integrations_logos/android_large.svg" alt="android" >}}
+  {{< image-card href="/logs/log_collection/ios" src="integrations_logos/ios_large.svg" alt="ios" >}}
+  {{< image-card href="/logs/log_collection/flutter/" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
+  {{< image-card href="/logs/log_collection/reactnative" src="integrations_logos/react-native_large.svg" alt="react native" >}}
+  {{< image-card href="/logs/log_collection/roku" src="integrations_logos/roku_large.svg" alt="Roku" >}}
+  {{< image-card href="/logs/log_collection/kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+{{< /card-grid >}}
 
 ## Further Reading
 

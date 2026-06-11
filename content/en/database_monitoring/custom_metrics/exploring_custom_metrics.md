@@ -10,7 +10,7 @@ further_reading:
   text: "Database Monitoring"
 ---
 
-The **Custom Metrics** section appears on the database instance detail page and displays timeseries graphs for any custom queries you have defined in your Datadog Agent configuration.
+The {{< ui >}}Custom Metrics{{< /ui >}} section appears on the database instance detail page and displays timeseries graphs for any custom queries you have defined in your Datadog Agent configuration.
 
 ## Overview
 
@@ -93,7 +93,7 @@ Each column in a custom query is assigned a type that controls how the metric is
 
 ## Viewing the source SQL
 
-Each graph has a **View SQL query** button in the top-right corner. Clicking it shows the raw SQL statement that produces the metric, so you can understand and audit what is being measured.
+Each graph has a {{< ui >}}View SQL query{{< /ui >}} button in the top-right corner. Clicking it shows the raw SQL statement that produces the metric, so you can understand and audit what is being measured.
 
 ## Collection interval
 

@@ -73,7 +73,15 @@ Continuous Testing에서 테스트와 트러블슈팅 를 결합하여 애플리
 
 CI 공급자 또는 [Slack][28] 또는 [Jira][29]와 같은 협업 도구와 통합하려면 해당 문서를 참조하세요:
 
-{{< partial name="getting_started/continuous_testing/providers.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/circleci_orb/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/azure_devops_extension/" src="integrations_logos/azure_devops.png" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_upload/" src="integrations_logos/bitrise_upload.png" alt="bitrise upload-tests step" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
+{{< /card-grid >}}
 
 </br>
 

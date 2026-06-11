@@ -14,6 +14,9 @@ further_reading:
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to level up your Database Monitoring'
+    - link: 'https://learn.datadoghq.com/courses/database-monitoring'
+      tag: 'Learning Center'
+      text: 'Monitoring a Postgres Database with Datadog DBM'
 ---
 
 ## Overview
@@ -68,9 +71,9 @@ The command continues to run until you stop it by pressing Ctrl + C.
 
 Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. On the [Database Monitoring][6] page, click the **Query metrics** tab in the UI.
+1. On the [Database Monitoring][6] page, click the {{< ui >}}Query metrics{{< /ui >}} tab in the UI.
 
-2. Sort the Normalized Query table by **Percent time** to see the query that the database spends the most time executing.
+2. Sort the Normalized Query table by {{< ui >}}Percent time{{< /ui >}} to see the query that the database spends the most time executing.
 
    The query that consumes the most database time appears on the first line:
 
@@ -80,17 +83,17 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
 
-1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the **Samples** tab.
+1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the {{< ui >}}Samples{{< /ui >}} tab.
 
-2. In the **In** dropdown, select **Explain Plans**. 
+2. In the {{< ui >}}In{{< /ui >}} dropdown, select {{< ui >}}Explain Plans{{< /ui >}}. 
 
-3. Sort the Normalized Query table by **Duration**.
+3. Sort the Normalized Query table by {{< ui >}}Duration{{< /ui >}}.
 
    {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="Normalized query samples sorted by duration">}}
 
-4. Find a query in the table with data in the **Explain Plan** column and click on it to open the Sample Details page. 
+4. Find a query in the table with data in the {{< ui >}}Explain Plan{{< /ui >}} column and click on it to open the Sample Details page. 
 
-5. Under **Explain Plan**, click **List View**. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query requires an _Index Scan_.
+5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query requires an {{< ui >}}Index Scan{{< /ui >}}.
 
    {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Index Scan">}}
 
@@ -100,23 +103,23 @@ To understand the health and performance of your databases at a glance, add Data
 
 ### View changes in query volume
 
-For example, you can see the absolute change in query volume in the past hour by adding a **Change** widget to track a query count metric.
+For example, you can see the absolute change in query volume in the past hour by adding a {{< ui >}}Change{{< /ui >}} widget to track a query count metric.
 
-1. Select **Dashboards > New Dashboard** in the UI.
+1. Select {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}New Dashboard{{< /ui >}} in the UI.
 
-2. Enter a name for your dashboard. Click the **New Dashboard** button to go to your new dashboard.
+2. Enter a name for your dashboard. Click the {{< ui >}}New Dashboard{{< /ui >}} button to go to your new dashboard.
 
-2. To add content to your dashboard, click **Add Widgets**.
+2. To add content to your dashboard, click {{< ui >}}Add Widgets{{< /ui >}}.
 
-3. In the widget carousel, select the **Change** widget.
+3. In the widget carousel, select the {{< ui >}}Change{{< /ui >}} widget.
 
-4. Select `postgresql.queries.count` in the **Metric** dropdown. This metric counts the number of queries sent to a PostgreSQL database.
+4. Select `postgresql.queries.count` in the {{< ui >}}Metric{{< /ui >}} dropdown. This metric counts the number of queries sent to a PostgreSQL database.
 
-5. Select `host` in the **Break it down by** dropdown so that the widget aggregates queries by host.
+5. Select `host` in the {{< ui >}}Break it down by{{< /ui >}} dropdown so that the widget aggregates queries by host.
 
    {{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configure change widget for postgres queries metric" style="width:100%;">}}
 
-7. Click the **Save** button. The dashboard shows your new widget.
+7. Click the {{< ui >}}Save{{< /ui >}} button. The dashboard shows your new widget.
 
    {{< img src="database_monitoring/dashboard_change_widget.png" alt="Change widget showing query count" style="width:100%;">}}
 
@@ -124,7 +127,7 @@ For example, you can see the absolute change in query volume in the past hour by
 
 Observe current database activity, resource utilization, and more on out-of-the-box dashboards provided by Datadog Database Monitoring.
 
-To access the dashboards, from the [Database Monitoring][6] page, select the **Dashboards** tab and choose the dashboard that you want to see.
+To access the dashboards, from the [Database Monitoring][6] page, select the {{< ui >}}Dashboards{{< /ui >}} tab and choose the dashboard that you want to see.
 
 You can clone and modify out-of-the-box dashboards to suit your needs.
 

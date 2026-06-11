@@ -129,6 +129,10 @@ The metric description helps you understand what a metric represents, why it exi
 
 #### AI-generated description
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 For custom metrics with connected source code, Datadog can automatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence.
 
 To enable auto-generated descriptions from source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
@@ -137,6 +141,10 @@ To enable auto-generated descriptions from source code, ensure that you've insta
 
 
 ## Source Code
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">Metric Source Code is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 
@@ -238,7 +246,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
-| API Catalog             | Timeseries sent by the Datadog [Software Catalog][13] product from the APIM Endpoint.
+| API Catalog             | Timeseries sent by the Datadog [Catalog][13] product from the APIM Endpoint.
 | APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
 | Cloud Security                     | Timeseries sent by the Datadog [Cloud Security][14] product.
@@ -248,7 +256,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Timeseries generated from the Datadog Events platform.
-| LLM Observability       | Timeseries emitted by the LLM Observability product using the `lmobs_to_metrics` service.
+| Agent Observability       | Timeseries emitted by the Agent Observability product using the `lmobs_to_metrics` service.
 | Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
 | Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
@@ -258,7 +266,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.
 | SAAS Integrations       | Timeseries collected from popular SAAS platforms like Slack, Docker, PagerDuty etc.
 | Serverless              | Timeseries sent by the Datadog [Serverless][24] platform including Function, App Services, Cloud Run, and Container App Metrics.
-| Software Catalog         | Timeseries sent by the Datadog [Software Catalog][25] product including [Scorecard][29] metrics.
+| Catalog         | Timeseries sent by the Datadog [Catalog][25] product including [Scorecard][29] metrics.
 | Synthetic Monitoring    | Synthetic monitoring and continuous testing metrics generated from the Datadog [Synthetic Monitoring][26] product. 
 | USM                     | Timeseries generated from the Datadog [Universal Service Monitoring][27] product. 
 
@@ -279,7 +287,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [10]: /integrations/agent_metrics/
 [11]: /account_management/billing/usage_metrics/
 [12]: /metrics/summary/#metric-origin-definitions
-[13]: /software_catalog/endpoints/
+[13]: /internal_developer_portal/catalog/endpoints/
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
@@ -291,11 +299,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/
-[25]: /software_catalog/
+[25]: /internal_developer_portal/catalog/
 [26]: /synthetics/
 [27]: /universal_service_monitoring/
 [28]: /logs/
-[29]: /software_catalog/scorecards/
+[29]: /internal_developer_portal/scorecards/
 [30]: /metrics/custom_metrics/historical_metrics/#bulk-configuration-for-multiple-metrics
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/

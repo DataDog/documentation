@@ -1,5 +1,6 @@
 ---
 title: Best Practices for Custom Metrics Governance
+description: "Apply best practices for visibility, attribution, and prevention to manage custom metric volumes and costs."
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"
@@ -19,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/govern-custom-metrics/"
   tag: "Blog"
   text: "A FinOps engineer's guide to governing custom metrics"
+- link: "https://learn.datadoghq.com/courses/metrics-governance"
+  tag: "Learning Center"
+  text: "Metrics Governance"
 ---
 
 ## Overview

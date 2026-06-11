@@ -45,9 +45,9 @@ Select your visualization from the available [widgets][3].
 
 ### Define the metric
 
-Choose the metric to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
+Choose the metric to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`.
 
-You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's {{< ui >}}Semantic Mode{{< /ui >}} selector to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
+You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's [Telemetry source][19] query modifier to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
@@ -76,7 +76,7 @@ Regardless of the options chosen above, there is always some aggregation of data
 
 In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][10]. See the [Rollup][11] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
 
-To manually rollup the data, use the [rollup function][12]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
+To manually rollup the data, use the [rollup function][12]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds.
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
@@ -133,11 +133,11 @@ For more about using the JSON view, see [Graphing with JSON][1].
 
 Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
 
-Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
+Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data.
 
 ### Nested Queries
 
-Datadog’s nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
+Datadog's nested queries feature allows you to add additional layers of time and/or space aggregation on the results of existing metric queries. This advanced query capability also allows you to compute percentiles and standard deviations on aggregated query results of count/rate/gauge type metrics and access higher resolution queries over historical time frames.
 
 For more information, see the [Nested Queries][13] documentation.
 
@@ -146,7 +146,7 @@ For more information, see the [Nested Queries][13] documentation.
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][14].
 
-Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations and comparison functions. Use `+`, `-`, `/`, `*`, `minimum()`, and `maximum()` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
@@ -168,7 +168,7 @@ jvm.heap_memory / jvm.heap_memory_max
 
 Use the {{< ui >}}Advanced...{{< /ui >}} option in the graph editor and select {{< ui >}}Add Query{{< /ui >}}. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
-Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
+Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To show only the formula result, see [Hide a query from the visualization](#hide-a-query-from-the-visualization).
 
 {{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
 
@@ -182,40 +182,31 @@ status:error / status:info
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
+#### Hide a query from the visualization
+
+When a widget has multiple queries and a formula, you can hide individual queries so only the formula result appears on the graph. Click the query's letter label to toggle its visibility on the graph. A blue label indicates the query is displayed; a grey label indicates it is hidden. The hidden query is still used in the formula calculation.
+
 #### Minimum or Maximum between two queries
-Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
+
+Use `minimum()` and `maximum()` to compare two queries point by point and return the lower or higher value at each timestamp.
+
+**Note**: Using `min()` and `max()` for arithmetic comparison is deprecated. Use `minimum()` and `maximum()` instead. This deprecation applies only to arithmetic comparison syntax. Aggregation methods such as `min by`, `max by`, and nested-query aggregation with `min` and `max` are unchanged.
+
+Here is an example using `maximum()` to find the maximum CPU usage between two availability zones.
 
 ```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
 
-Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and warning statuses.
+Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 
 ```text
-min(status:error, status:warn)
+minimum(status:error, status:warn)
 ```
 
-{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
-
-#### Exponentiation
-
-You can now use the `pow()` function to raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
-
-Here is an example of how to forecast user growth by applying an exponential growth factor to a prior time window:
-
-```text
-users.sessions{*} * pow(1.1, timeshift(-1))
-```
-
-Here is an example of how to surface anomalies by amplifying value using exponentiation: 
-
-```text
-pow(ping{region:*}, 2)
-```
-
-To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
 
 ### Create an alias
 
@@ -239,7 +230,7 @@ Click {{< ui >}}Done{{< /ui >}} to save your work and exit the editor. You can a
 
 View event correlations by using the {{< ui >}}Event Overlays{{< /ui >}} section in the graphing editor for the [Timeseries][16] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][17].
 
-The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
+The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service.
 
 With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
 - RUM error rates with deployment events overlaid
@@ -250,7 +241,7 @@ With the event overlay, you can quickly see how actions within the organization 
 
 ### Split graph
 
-With split graphs, you can see your metric visualizations broken out by tags. 
+With split graphs, you can see your metric visualizations broken out by tags.
 
 {{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the fullscreen widget" style="width:100%;" >}}
 
@@ -280,3 +271,4 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [16]: /dashboards/widgets/timeseries/#event-overlay
 [17]: /logs/explorer/search_syntax/
 [18]: /metrics/open_telemetry/query_metrics
+[19]: /dashboards/functions/telemetry_source/

@@ -28,7 +28,7 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 Data Access Control allows you to create a Restricted Dataset, specifying data that only users in designated teams or roles can access.
 
-To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the **Access** heading.
+To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
 
 ### Datadog site
 
@@ -36,7 +36,7 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 
 1. Navigate to [Organization Settings][6].
 1. On the left side of the page, select [Data Access Controls][7].
-1. Click **New Restricted Dataset**.
+1. Click {{< ui >}}New Restricted Dataset{{< /ui >}}.
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
 
@@ -53,16 +53,16 @@ Grant access
 
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
-After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
+After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
 
-You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, reach out to Support.
+You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. Enterprise customers using [Strict Mode](#strict-mode) may create up to 1,000 Restricted Datasets.
 
 ### Supported telemetry types {#supported-telemetry}
 
 - APM traces
 - Logs
 - RUM sessions
-- LLM Observability
+- Agent Observability
 
 The following are available as a Preview upon request:
 - Cloud costs
@@ -70,6 +70,35 @@ The following are available as a Preview upon request:
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
+
+## Advanced configuration
+
+### Strict Mode
+
+By default, Data Access Control operates in _Standard Mode_, which means any data outside a Restricted Dataset remains visible to users with appropriate permissions. _Strict Mode_ inverts this for a specific telemetry type: once enabled, users see no data for that telemetry type unless they are explicitly granted access through a Restricted Dataset.
+
+Strict Mode is useful for especially sensitive data, when:
+- Telemetry tagging is inconsistent, so a Standard Mode boundary risks leaving sensitive records uncovered.
+- New tag values are added frequently, and you cannot guarantee every new value is matched by an existing Restricted Dataset.
+- Compliance posture requires a default-deny stance for a telemetry type.
+
+Strict Mode is configured per telemetry type. A telemetry type must have at least one Restricted Dataset before it can be switched to Strict Mode. This prevents unintentional loss of access. If all Restricted Datasets are later deleted from a telemetry type in Strict Mode, only [Unrestricted User Groups](#unrestricted-user-groups) retain access until new datasets are created or the mode is switched back to Standard.
+
+Restricted Datasets cannot be shared between Standard and Strict modes (each dataset belongs to one mode).
+
+**Before enabling Strict Mode**, verify what data is _not_ already in a Restricted Dataset for that telemetry type. That data is hidden once Strict Mode is enabled. Review the existing Restricted Datasets on the [Data Access Controls][7] page to confirm coverage.
+
+To change restriction mode for a telemetry type, navigate to [Data Access Controls][7]. Users must have the [`user_access_manage` permission][5] to change restriction modes.
+
+### Unrestricted User Groups
+
+Some users, such as high-privilege admins or central observability teams with access to data across the entire organization, need full visibility into a telemetry type regardless of any Restricted Datasets. Rather than adding these users to every Restricted Dataset individually, you can grant their team or role _unrestricted access_ for a specific telemetry type.
+
+A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or restriction mode. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM.
+
+Unrestricted User Groups pair especially well with Strict Mode because they let designated admins keep working without being added to every dataset.
+
+**Note:** Other access control methods (such as [Logs Restriction Queries][11] and [Permissions][3]) still apply to users in Unrestricted User Groups.
 
 ## Usage constraints
 
@@ -101,9 +130,9 @@ If you are concerned about unauthorized data access through monitors, Datadog re
   * `@git.repository.id`
   * `@gitlab.groups`
 
-### LLM Observability
+### Agent Observability
 
-When using [OpenTelemetry instrumentation][13], some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
+When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
 ## Select tags for access
@@ -159,11 +188,11 @@ Before configuring Data Access Control, it's important to evaluate your access s
 If you have already identified which data needs to be protected, you can build your Data Access Control configuration around only this specific data. This ensures that non-sensitive data is generally available to your users, allowing them to collaborate and understand ongoing issues or incidents.
 
 For example, if you have a single application that is instrumented with Real User Monitoring (RUM) and captures sensitive inputs from users, consider creating a Restricted Dataset only for that application:
-* **Name dataset:** Restricted RUM data
-* **Select data to be included in this Dataset:**
+* {{< ui >}}Name dataset:{{< /ui >}} Restricted RUM data
+* {{< ui >}}Select data to be included in this Dataset:{{< /ui >}}
     * Telemetry type: RUM
         * Filters: `@application.id:<rum-app-id>`
-* **Grant access:**
+* {{< ui >}}Grant access:{{< /ui >}}
     * Teams or roles of users who can see this RUM data
 
 This configuration example would protect the RUM data from this application, and keep other data from this application available to existing users in your organization.
@@ -174,8 +203,8 @@ If you are instead looking to protect data from a specific service, you can buil
 
 For example, if you have a service `NewService` that is instrumented with Real User Monitoring (RUM) and capturing sensitive inputs from users, consider creating a Restricted Dataset only for that application:
 
-* **Name Dataset:** Restricted NewService data
-* **Select data to be included in this Dataset:**
+* {{< ui >}}Name Dataset:{{< /ui >}} Restricted NewService data
+* {{< ui >}}Select data to be included in this Dataset:{{< /ui >}}
     * Telemetry type: RUM
         * Filters: `@service:NewService`
     * Telemetry type: Custom Metrics
@@ -184,14 +213,14 @@ For example, if you have a service `NewService` that is instrumented with Real U
         * Filters: `@service:NewService`
     * Telemetry type: Logs
         * Filters: `@service:NewService`
-* **Grant access:**
+* {{< ui >}}Grant access:{{< /ui >}}
     * Team who owns the service
 
 This configuration example protects all supported data from `NewService`.
 
 ### Teams and roles
 
-Data Access Control supports granting access to users through Datadog roles or teams. When granting access, consider your existing access control configuration and access strategy. If you are pursuing a service-based approach and are already [customizing the Software Catalog][9], take advantage of the service ownership model by using Teams as part of your Data Access Control configuration.
+Data Access Control supports granting access to users through Datadog roles or teams. When granting access, consider your existing access control configuration and access strategy. If you are pursuing a service-based approach and are already [customizing the Catalog][9], take advantage of the service ownership model by using Teams as part of your Data Access Control configuration.
 
 **Note:** Teams used for Data Access Control must be configured such that adding or removing users can only be done by team members or an administrator, not `Anyone in the organization`.
 
@@ -225,7 +254,7 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [6]: https://app.datadoghq.com/organization-settings/
 [7]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [8]: /data_security/
-[9]: /software_catalog/customize/
+[9]: /internal_developer_portal/catalog/set_up/
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/

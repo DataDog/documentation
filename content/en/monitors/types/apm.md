@@ -17,6 +17,10 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+  tag: "Learning Center"
+  text: "APM Monitors and Alerting"
+
 ---
 
 ## Overview
@@ -143,7 +147,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-**Note**: Find service level monitors on the [Software Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
+**Note**: Find service level monitors on the [Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 
 ## Further Reading
 

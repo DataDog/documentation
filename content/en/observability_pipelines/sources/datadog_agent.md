@@ -35,19 +35,17 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-To configure your Datadog Agent source:
+{{% observability_pipelines/secrets_env_var_note %}}
 
-<div class="alert alert-danger">Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
-
-Enter the identifier for your Datadog Agent address. If you leave it blank, the [default](#set-secrets) is used.
+After you select the Datadog Agent source in the pipeline UI, enter the identifier for your Datadog Agent address. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -78,13 +76,13 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 **Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][1] or [Setting environment variables for Helm][2] for more information.
 
-{{% collapse-content title="Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent configuration file" level="h4" expanded=false id="logs-agent-config-file" %}}
 
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="logs-agent-helm-values-file" %}}
 
 {{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
 
@@ -101,7 +99,7 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 **Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Metrics Collection][1] or [Setting environment variables for Helm][2] for more information.
 
-{{% collapse-content title="Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent configuration file" level="h4" expanded=false id="metrics-agent-config-file" %}}
 
 To send Datadog Agent metrics to the Observability Pipelines Worker, update your [Agent configuration file][1] with the following:
 
@@ -126,7 +124,7 @@ After you [restart the Agent][2], your observability data should be going to the
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="metrics-agent-helm-values-file" %}}
 
 To send Datadog Agent metrics to the Observability Pipelines Worker, update your Datadog Helm chart [datadog-values.yaml][1] with the following environment variables. See [Agent Environment Variables][2] for more information.
 

@@ -152,7 +152,7 @@ Elixir does not support the Datadog API. Select **OpenTelemetry** from the API d
 
 <!-- Elixir: show only the Elixir-specific note, no overview -->
 {% if equals($prog_lang, "elixir") %}
-Datadog does not provide an Elixir tracing library. To send traces to Datadog, use the [OpenTelemetry SDK for Elixir][8].
+Datadog does not provide an Elixir SDK. To send traces to Datadog, use the [OpenTelemetry SDK for Elixir][8].
 {% /if %}
 
 <!-- Full content for languages with full OTel support (not C++, not Elixir) -->

@@ -11,12 +11,12 @@ Use the Glacier component to visualize long-term storage classes from your Amazo
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D view or different colors for each.
-- **Storage (GB)**: Enter the total volume of storage available for your vault in gigabytes.
-- **Retrieval Type**: Choose the retrieval type for your vault.
-- **Retrieval Req. / mo (K)**: Enter the number of retrieval requests per month in the thousands.
-- **Retrieval Data (GB)**: Enter the volume of data retrieved in gigabytes.
-- **Upload Req. / mo (K)**: Enter the number of retrieval upload requests per month in the thousands.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D view or different colors for each.
+- {{< ui >}}Storage (GB){{< /ui >}}: Enter the total volume of storage available for your vault in gigabytes.
+- {{< ui >}}Retrieval Type{{< /ui >}}: Choose the retrieval type for your vault.
+- {{< ui >}}Retrieval Req. / mo (K){{< /ui >}}: Enter the number of retrieval requests per month in the thousands.
+- {{< ui >}}Retrieval Data (GB){{< /ui >}}: Enter the volume of data retrieved in gigabytes.
+- {{< ui >}}Upload Req. / mo (K){{< /ui >}}: Enter the number of retrieval upload requests per month in the thousands.
 
 ## API
 

@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-[Datadog tracing libraries][1] provide out-of-the-box support for instrumenting a variety of libraries.
+[Datadog SDKs][1] provide out-of-the-box support for instrumenting a variety of libraries.
 These instrumentations generate spans to represent logical units of work in distributed systems.
 Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. Naming conventions describe the name and content that can be used in span events.
 
@@ -51,7 +51,7 @@ Span tags provide context related to the span. For instance, host or container t
 
 The list of added tags can be found for [Kubernetes][7], [Docker][8] and [Amazon ECS][9].
 
-Tags are usually enriched from other data sources like tags sourced from host, container, or Software Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
+Tags are usually enriched from other data sources like tags sourced from host, container, or Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
 To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 

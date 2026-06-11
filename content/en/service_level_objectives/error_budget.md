@@ -8,6 +8,10 @@ further_reading:
 - link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Overview of Service Level Objectives"
+- link: "https://learn.datadoghq.com/courses/getting-started-slos"
+  tag: "Learning Center"
+  text: "Getting Started with Service Level Objectives (SLOs)"
+
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: Monitor your AWS billing details
+description: "Collect AWS billing metrics with Datadog by enabling the Billing namespace on the AWS integration."
 
 aliases:
   - /integrations/faq/how-do-i-monitor-my-aws-billing-details

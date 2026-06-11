@@ -9,6 +9,13 @@ further_reading:
 - link: 'tracing/trace_explorer/search'
   tag: 'Documentation'
   text: 'Search Spans'
+- link: "https://learn.datadoghq.com/courses/getting-started-apm"
+  tag: "Learning Center"
+  text: "Getting Started with APM Metrics and Traces"
+- link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"
+  tag: "Learning Center"
+  text: "Diagnosing Application Bugs with Datadog APM"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
@@ -32,6 +39,14 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 {{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data indicator" style="width:75%;" >}}
 
 Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
+
+### Trace Patterns 
+
+{{< callout url="https://www.datadoghq.com/product-preview/apm-trace-patterns/" btn_hidden="false" header="Join the Preview!" >}}
+Trace Patterns is in Preview. Use this form to submit your request today.
+{{< /callout >}}
+
+Trace Patterns groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use Trace Patterns when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. 
 
 ### Trace volume control
 
@@ -120,6 +135,8 @@ The Trace Explorer combines automated Watchdog outlier detection with TAG Analys
 - **RED metrics**: The "Analyze" button next to error and latency graphs is highlighted when relevant outliers are detected.
 
 {{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="Analyzing anomalies with integrated insights" video="true" >}}
+
+<div class="alert alert-tip">When you sort the trace list by <strong>Duration</strong>, click <strong>Investigate With Bits AI</strong> to launch an automated latency investigation. Bits AI analyzes bottlenecks and tag divergence across the displayed traces. For more information, see <a href="/bits_ai/bits_chat/#latency-investigations">Latency investigations</a>.</div>
 
 ## Indexed spans search with 15 day retention
 

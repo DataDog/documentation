@@ -11,11 +11,11 @@ Use the ElastiCache component to represent in-memory cache or data stores from y
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Colors**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Engine**: Select the engine used to power the ElastiCache instance.
-- **Instance type**: Select the type of instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: Select the size of ElastiCache instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Billing option**: The pricing model used for the instance.
+- {{< ui >}}Colors{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Engine{{< /ui >}}: Select the engine used to power the ElastiCache instance.
+- {{< ui >}}Instance type{{< /ui >}}: Select the type of instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: Select the size of ElastiCache instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Billing option{{< /ui >}}: The pricing model used for the instance.
 
 ## API
 

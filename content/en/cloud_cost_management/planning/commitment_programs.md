@@ -41,9 +41,9 @@ Review these Key Performance Indicators (KPIs) for your cloud providers and serv
 
 {{< img src="cloud_cost/planning/commitments-inventory.png" alt="Commitments Overview dashboard showing key savings metrics and a bar chart comparing commitment costs to equivalent on-demand costs over time." style="width:100%;" >}}
 
-- **Effective Savings Rate (ESR)**: Percentage of cost savings achieved by your discount programs compared to on-demand prices, factoring in both utilized and underutilized commitments.
+- {{< ui >}}Effective Savings Rate (ESR){{< /ui >}}: Percentage of cost savings achieved by your discount programs compared to on-demand prices, factoring in both utilized and underutilized commitments.
   - _Example: Your RIs may offer a 62% discount, but if your ESR is only 45%, underutilized commitments are reducing your actual savings._
-- **Realized Savings**: Total dollar amount saved by using commitment programs versus on-demand rates.
+- {{< ui >}}Realized Savings{{< /ui >}}: Total dollar amount saved by using commitment programs versus on-demand rates.
   - _Example: You spent $10,000 on cloud services last month, but would have spent $14,000 at on-demand rates, so your absolute savings is $4,000._
 
 ## On-demand hot-spots
@@ -52,9 +52,9 @@ On-demand hot-spots highlight areas with high on-demand costs, which may indicat
 
 {{< img src="cloud_cost/planning/commitments-on-demand-2.png" alt="On-Demand Hot-Spots table for AWS RDS showing region, instance family, DB engine, coverage percentage, and on-demand cost." style="width:100%;" >}}
 
-Use the **Cost** and **Hours** tabs to toggle between on-demand spend in dollars or usage in hours. Use the available filters to narrow results—filters vary based on the selected product.
+Use the {{< ui >}}Cost{{< /ui >}} and {{< ui >}}Hours{{< /ui >}} tabs to toggle between on-demand spend in dollars or usage in hours. Use the available filters to narrow results—filters vary based on the selected product.
 
-The table columns correspond to the filters for the selected product, showing the dimensions that characterize the on-demand usage (such as region, instance family, or database engine), along with **Coverage** (percentage of usage covered by commitments) and **On-Demand Cost** (sorted in descending order to surface the highest-spend hot-spots first).
+The table columns correspond to the filters for the selected product, showing the dimensions that characterize the on-demand usage (such as region, instance family, or database engine), along with {{< ui >}}Coverage{{< /ui >}} (percentage of usage covered by commitments) and {{< ui >}}On-Demand Cost{{< /ui >}} (sorted in descending order to surface the highest-spend hot-spots first).
 
 ## Commitments inventory
 
@@ -62,13 +62,13 @@ Commitments Inventory provides a detailed view of commitments active during the 
 
 {{< img src="cloud_cost/planning/commitments-inventory-1.png" alt="Commitments Inventory section showing the Savings Plans tab with a utilization chart and a table of EC2 savings plan commitments." style="width:100%;" >}}
 
-Use the **Savings Plans** and **Reserved Instances** tabs to switch between commitment types. Each tab shows:
+Use the {{< ui >}}Savings Plans{{< /ui >}} and {{< ui >}}Reserved Instances{{< /ui >}} tabs to switch between commitment types. Each tab shows:
 
-- **Utilization**: Percentage of the commitment type being used during the selected period.
-- **Unused spend**: Total spend on unused commitments.
-- **Daily chart**: Tracks used and unused commitment spend alongside the utilization rate over time.
+- {{< ui >}}Utilization{{< /ui >}}: Percentage of the commitment type being used during the selected period.
+- {{< ui >}}Unused spend{{< /ui >}}: Total spend on unused commitments.
+- {{< ui >}}Daily chart{{< /ui >}}: Tracks used and unused commitment spend alongside the utilization rate over time.
 
-Use the **Only show Expiring** checkbox to filter the table to commitments nearing their end date.
+Use the {{< ui >}}Only show Expiring{{< /ui >}} checkbox to filter the table to commitments nearing their end date.
 
 The table lists your active commitments. Columns vary depending on the product and commitment type, but common columns include:
 
@@ -82,7 +82,7 @@ The table lists your active commitments. Columns vary depending on the product a
 | End Date | Date the commitment expires. |
 | Utilization | Percentage of the commitment used during the selected period. |
 
-Use the **Columns** button to show or hide additional columns.
+Use the {{< ui >}}Columns{{< /ui >}} button to show or hide additional columns.
 
 ## Least used savings plans
 
@@ -90,15 +90,15 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 {{< img src="cloud_cost/planning/commitment-programs-least-used-savings-plans-1.png" alt="Least Used Savings Plans section showing a bar chart of daily average unused savings plan spend by day of week, a table of the most wasteful savings plans with waste amount, utilization, and ARN, and a heat map of hourly unused committed spend percentage by day of week." style="width:100%;" >}}
 
-**Daily average unused Savings Plans**: A bar chart showing the average daily cost of unused savings plan spend for each day of the week. Use this to spot patterns, such as higher waste on weekends when workloads may be lower.
+{{< ui >}}Daily average unused Savings Plans{{< /ui >}}: A bar chart showing the average daily cost of unused savings plan spend for each day of the week. Use this to spot patterns, such as higher waste on weekends when workloads may be lower.
 
-**Savings Plans with most waste**: A table listing underutilized savings plans, sorted by total waste. Columns include:
+{{< ui >}}Savings Plans with most waste{{< /ui >}}: A table listing underutilized savings plans, sorted by total waste. Columns include:
 
-- **Waste**: Total dollar amount of unused committed spend during the selected period.
-- **Utilization**: Percentage of the savings plan being used, shown as a percentage and progress bar.
-- **Savings Plan ARN**: Unique identifier for the savings plan.
+- {{< ui >}}Waste{{< /ui >}}: Total dollar amount of unused committed spend during the selected period.
+- {{< ui >}}Utilization{{< /ui >}}: Percentage of the savings plan being used, shown as a percentage and progress bar.
+- {{< ui >}}Savings Plan ARN{{< /ui >}}: Unique identifier for the savings plan.
 
-**Hourly unused committed spend percentage**: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
+{{< ui >}}Hourly unused committed spend percentage{{< /ui >}}: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
 
 ## Example use cases
 
@@ -107,8 +107,8 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 **Scenario**: Your Effective Savings Rate (ESR) is lower than expected, even though your coverage is high.
 
 **How to use commitment programs**:  
-1. Go to the **Commitments Overview** and check the utilization KPI.
-2. In the **Commitments inventory**, sort by utilization in ascending order to identify the least-used commitments. For savings plans, also check the **Savings Plans with most waste** table in the [Least used savings plans](#least-used-savings-plans) section.
+1. Go to the {{< ui >}}Commitments Overview{{< /ui >}} and check the utilization KPI.
+2. In the {{< ui >}}Commitments inventory{{< /ui >}}, sort by utilization in ascending order to identify the least-used commitments. For savings plans, also check the {{< ui >}}Savings Plans with most waste{{< /ui >}} table in the [Least used savings plans](#least-used-savings-plans) section.
 3. Reallocate workloads to use these commitments more effectively, or consider modifying or selling unused commitments if your cloud provider allows it.
 
 ### Plan for expiring commitments
@@ -116,7 +116,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 **Scenario**: Several Reserved Instances are expiring soon, and you want to avoid unexpected on-demand charges.
 
 **How to use commitment programs**: 
-1. In the **Commitments Explorer**, review the list of commitments and their expiration dates.
+1. In the {{< ui >}}Commitments Explorer{{< /ui >}}, review the list of commitments and their expiration dates.
 2. Use the filters to focus on soon-to-expire commitments.
 3. Plan renewals or replacements in advance to maintain coverage and maximize savings.
 
@@ -125,7 +125,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 **Scenario**: Your cloud costs show consistently high on-demand usage for a particular service or region.
 
 **How to use commitment programs**:
-1. Use **On-demand hot-spots** to identify which services, regions, or accounts have significant and steady on-demand costs.
+1. Use {{< ui >}}On-demand hot-spots{{< /ui >}} to identify which services, regions, or accounts have significant and steady on-demand costs.
 2. Analyze usage patterns to confirm they are predictable.
 3. Purchase new commitments to cover the consistent usage and reduce costs.
 
@@ -134,7 +134,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 **Scenario**: You have underutilized savings plans and high on-demand costs running in parallel.
 
 **How to use commitment programs**:
-1. Use the **Least used savings plans** section to identify recurring patterns of low utilization—for example, consistently unused capacity on certain days or hours.
+1. Use the {{< ui >}}Least used savings plans{{< /ui >}} section to identify recurring patterns of low utilization—for example, consistently unused capacity on certain days or hours.
 2. Identify on-demand workloads that could be scheduled during those low-utilization windows to take advantage of unused savings plan coverage.
 3. Shift or reschedule those workloads to reduce on-demand spend and improve savings plan utilization.
 
