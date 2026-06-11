@@ -237,7 +237,7 @@ If your setup is not on Fargate, you can `exec` into the Datadog Agent container
 
 Look for the APM Agent section to confirm whether it is running:
 
-**Note**: Starting with Agent 7.80.0, the trace-agent process only starts after receiving data to reduce memory usage, a process named trace-loader runs in the meantime. If no traces have been received yet, the APM Agent section shows as not running or unreachable rather than the output below.
+**Note**: Starting with Agent 7.80.0, the trace-agent starts only after receiving trace data. This reduces memory usage, but means the APM Agent section may show as not running or unreachable rather than the output below, even when APM is correctly configured. A process named trace-loader runs in the meantime.
 
 ```text
 =========
