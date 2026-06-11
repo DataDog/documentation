@@ -7456,11 +7456,6 @@ menu:
       identifier: security_platform
       parent: security_platform_heading
       weight: 10000
-    - name: Detection Rules
-      url: security/detection_rules/
-      parent: security_platform
-      identifier: security_rules
-      weight: 1
     - name: OOTB Rules
       url: security/default_rules/#all
       parent: security_rules
@@ -8115,51 +8110,11 @@ menu:
       parent: workload_protection
       identifier: workload_protection_respond_and_report
       weight: 93
-    - name: Detection Rules
-      url: security/workload_protection/workload_security_rules
-      parent: workload_protection
-      identifier: workload_protection_workload_security_rules
-      weight: 201
     - name: OOTB Rules
       url: /security/workload_protection/setup/ootb_rules
       parent: workload_protection_workload_security_rules
       identifier: workload_protection_ootb_rules
       weight: 100
-    - name: Custom Rules
-      url: security/workload_protection/workload_security_rules/custom_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_custom_rules
-      weight: 101
-    - name: Investigate Security Signals
-      url: security/workload_protection/security_signals
-      parent: workload_protection
-      identifier: workload_protection_security_signals
-      weight: 202
-    - name: Investigate Agent Events
-      url: security/workload_protection/investigate_agent_events
-      parent: workload_protection
-      identifier: workload_protection_agent_events
-      weight: 203
-    - name: Creating Agent Rule Expressions
-      url: security/workload_protection/agent_expressions
-      parent: workload_protection
-      identifier: workload_protection_agent_expressions
-      weight: 204
-    - name: Writing Custom Rule Expressions
-      url: security/workload_protection/secl_auth_guide
-      parent: workload_protection_agent_expressions
-      identifier: workload_protection_secl_guide
-      weight: 1
-    - name: Linux Syntax
-      url: security/workload_protection/linux_expressions
-      parent: workload_protection_agent_expressions
-      identifier: linux_expressions
-      weight: 2
-    - name: Windows Syntax
-      url: security/workload_protection/windows_expressions
-      parent: workload_protection_agent_expressions
-      identifier: windows_expressions
-      weight: 3
     - name: Coverage and Posture Management
       url: security/workload_protection/inventory
       parent: workload_protection
@@ -8493,66 +8448,6 @@ menu:
       parent: security_platform_heading
       identifier: workload_protection
       weight: 70000
-    - name: Setup
-      url: security/workload_protection/setup
-      parent: workload_protection
-      identifier: workload_protection_setup
-      weight: 100
-    - name: Deploy the Agent
-      url: security/workload_protection/setup/agent
-      parent: workload_protection_setup
-      identifier: workload_protection_workload_setup_agent
-      weight: 1
-    - name: Workload Protection Agent Variables
-      url: security/workload_protection/setup/agent_variables
-      parent: workload_protection_setup
-      identifier: workload_protection_agent_variables
-      weight: 2
-    - name: Detection Rules
-      url: security/workload_protection/workload_security_rules
-      parent: workload_protection
-      identifier: workload_protection_workload_security_rules
-      weight: 201
-    - name: OOTB Rules
-      url: /security/workload_protection/setup/ootb_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_ootb_rules
-      weight: 100
-    - name: Custom Rules
-      url: security/workload_protection/workload_security_rules/custom_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_custom_rules
-      weight: 101
-    - name: Investigate Security Signals
-      url: security/workload_protection/security_signals
-      parent: workload_protection
-      identifier: workload_protection_security_signals
-      weight: 202
-    - name: Investigate Agent Events
-      url: security/workload_protection/investigate_agent_events
-      parent: workload_protection
-      identifier: workload_protection_agent_events
-      weight: 203
-    - name: Creating Agent Rule Expressions
-      url: security/workload_protection/agent_expressions
-      parent: workload_protection
-      identifier: workload_protection_agent_expressions
-      weight: 204
-    - name: Writing Custom Rule Expressions
-      url: security/workload_protection/secl_auth_guide
-      parent: workload_protection_agent_expressions
-      identifier: workload_protection_secl_guide
-      weight: 1
-    - name: Linux Syntax
-      url: security/workload_protection/linux_expressions
-      parent: workload_protection_agent_expressions
-      identifier: linux_expressions
-      weight: 2
-    - name: Windows Syntax
-      url: security/workload_protection/windows_expressions
-      parent: workload_protection_agent_expressions
-      identifier: windows_expressions
-      weight: 3
     - name: Coverage and Posture Management
       url: security/workload_protection/inventory
       parent: workload_protection
