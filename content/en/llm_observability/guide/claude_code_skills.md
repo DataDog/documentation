@@ -141,21 +141,21 @@ The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a 
 
 **All flags below are optional.** Invoke `/llm-obs-experiment-py-bootstrap` with no arguments and the skill prompts for what it needs and emits a runnable file against the default 3-record sample.
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| <span class="text-nowrap">`--purpose`</span> | prompted if not set or inferable | Free-form string describing what the experiment validates. Biases introspection ranking, wrapper return shape, and evaluator semantics |
-| <span class="text-nowrap">`--format`</span> | `py` | `py` or `ipynb` |
-| <span class="text-nowrap">`--dataset`</span> | inline 3-record sample | Local `DatasetRecordRaw[]` JSON or CSV. Mutually exclusive with `--dataset-name` |
-| <span class="text-nowrap">`--dataset-name`</span> | none | Existing Datadog dataset to fetch at runtime via `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
-| <span class="text-nowrap">`--dataset-version`</span> | latest | Pin a specific version when using `--dataset-name` |
-| <span class="text-nowrap">`--project-name`</span> | `experiment-<service-name>` inferred from codebase | Datadog project name shown in the Experiments UI |
-| <span class="text-nowrap">`--evaluator-style`</span> | `function` | `function` / `class` / `remote`. Picks the surface; `--purpose` picks the semantics |
-| <span class="text-nowrap">`--task-source`</span> | auto from introspection | Explicit `<module.path>:<function>` to wrap as `task_fn` |
-| <span class="text-nowrap">`--placeholder-task`</span> | off | Skip introspection and emit a generic `# TODO(user)` placeholder |
-| <span class="text-nowrap">`--app-root`</span> | inferred | Restricts introspection scan to this directory |
-| <span class="text-nowrap">`--env-file`</span> | none | Explicit `.env` path. Baked into the generated file as `ENV_FILE_OVERRIDE` |
-| <span class="text-nowrap">`--jobs`</span> | `10` | Concurrency passed to `experiment.run(jobs=N)` |
-| <span class="text-nowrap">`--output`</span> | `./experiments/experiment.<ext>` | Output file path |
+| Option | Optional? | Default | Description |
+|--------|-----------|---------|-------------|
+| <span class="text-nowrap">`--purpose`</span> | Yes | prompted if not set or inferable | Free-form string describing what the experiment validates. Biases introspection ranking, wrapper return shape, and evaluator semantics |
+| <span class="text-nowrap">`--format`</span> | Yes | `py` | `py` or `ipynb` |
+| <span class="text-nowrap">`--dataset`</span> | Yes | inline 3-record sample | Local `DatasetRecordRaw[]` JSON or CSV. Mutually exclusive with `--dataset-name` |
+| <span class="text-nowrap">`--dataset-name`</span> | Yes | none | Existing Datadog dataset to fetch at runtime via `LLMObs.pull_dataset`. Mutually exclusive with `--dataset` |
+| <span class="text-nowrap">`--dataset-version`</span> | Yes | latest | Pin a specific version when using `--dataset-name` |
+| <span class="text-nowrap">`--project-name`</span> | Yes | `experiment-<service-name>` inferred from codebase | Datadog project name shown in the Experiments UI |
+| <span class="text-nowrap">`--evaluator-style`</span> | Yes | `function` | `function` / `class` / `remote`. Picks the surface; `--purpose` picks the semantics |
+| <span class="text-nowrap">`--task-source`</span> | Yes | auto from introspection | Explicit `<module.path>:<function>` to wrap as `task_fn` |
+| <span class="text-nowrap">`--placeholder-task`</span> | Yes | off | Skip introspection and emit a generic `# TODO(user)` placeholder |
+| <span class="text-nowrap">`--app-root`</span> | Yes | inferred | Restricts introspection scan to this directory |
+| <span class="text-nowrap">`--env-file`</span> | Yes | none | Explicit `.env` path. Baked into the generated file as `ENV_FILE_OVERRIDE` |
+| <span class="text-nowrap">`--jobs`</span> | Yes | `10` | Concurrency passed to `experiment.run(jobs=N)` |
+| <span class="text-nowrap">`--output`</span> | Yes | `./experiments/experiment.<ext>` | Output file path |
 
 **Examples**
 
@@ -225,27 +225,27 @@ Checkpoint vocabulary at every phase: `continue` advances, `stop` exits cleanly,
 
 **Only `<ml_app>` is required.** Every flag below is optional — the skill picks sensible defaults for each one. The minimal invocation is `/llm-obs-eval-pipeline <ml_app>`; the rest of the table is for when you want to override a default, resume mid-flow, or pin a specific output location.
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `<ml_app>` | — (required) | The instrumented LLM application to onboard / evaluate against |
-| `--project-name` | derived from `pyproject.toml` / `setup.cfg` / `setup.py` / `package.json` / cwd | The Datadog project the pipeline writes datasets and experiments into. Surfaced in the Precheck and created lazily by `LLMObs.enable(project_name=...)` in Phase 4 |
-| `--timeframe` | `now-7d` | Lookback window for Phase 1 classification and Phase 4 dataset sampling |
-| `--trace-limit` | `20` | Sampling cap for Phase 4. Phase 1 internally uses `min(20, --trace-limit)` for the classification sample |
-| `--format` | `py` | Passed to `llm-obs-experiment-py-bootstrap` in Phase 5: `py` (script) or `ipynb` (Jupyter notebook) |
-| `--evaluator-style` | `function` | Passed to Phase 3 and Phase 5: `function`, `class`, or `remote` |
-| `--data-only` | off | Phase 3 pass-through: emit a framework-agnostic JSON evaluator spec instead of Python SDK code |
-| `--publish` | off | Phase 3 pass-through: publish online LLM-judge evaluators to Datadog |
-| `--stop-after` | `analyze` (run everything) | Stop after the named phase completes. Accepts: `classify`, `rca`, `eval-bootstrap` *(matches the classic 3-phase behavior)*, `dataset`, `experiment`, `analyze` |
-| `--start-at` | `classify` (start at the top) | Skip earlier phases and begin at the named phase. Same vocabulary as `--stop-after`. Auto-loads prior phase artifacts from `<output-dir>/state/` |
-| `--classification-summary` | auto-loaded from `state/01-classification.md` | Override the Phase 1 output that Phase 2 consumes (used with `--start-at rca` or later) |
-| `--rca-report` | auto-loaded from `state/02-rca-report.md` | Override the Phase 2 output that Phase 3 consumes |
-| `--dataset-file` | auto-loaded from `state/04-published-dataset.json`'s `dataset_file` field | The local `DatasetRecordRaw[]` JSON. Used by Phase 4's publish sub-step when re-publishing without re-sampling |
-| `--dataset-name` | auto-loaded from `state/04-published-dataset.json` | Name of the published Datadog dataset that Phase 5 wires the experiment to |
-| `--experiment-file` | auto-loaded from `state/05-experiment-run.json` | The generated experiment file. When present, Phase 5 skips codegen and goes straight to the review beat → run |
-| `--experiment-id` / `--experiment-url` | auto-loaded from `state/05-experiment-run.json` | The Datadog experiment Phase 6 analyzes (mutually exclusive) |
-| `--app-root` | resolved from cwd / `pyproject.toml` etc. | Restricts Phase 5's task-function introspection to this directory tree |
-| `--env-file` | none (auto-discovery walks standard locations) | Explicit `.env` path for credential loading; surfaced in the Precheck |
-| `--output-dir` | `./experiments` | Where the dataset JSON, publish script, generated experiment file, and `state/` directory are written |
+| Option | Optional? | Default | Description |
+|--------|-----------|---------|-------------|
+| `<ml_app>` | **No** | — (required) | The instrumented LLM application to onboard / evaluate against |
+| `--project-name` | Yes | derived from `pyproject.toml` / `setup.cfg` / `setup.py` / `package.json` / cwd | The Datadog project the pipeline writes datasets and experiments into. Surfaced in the Precheck and created lazily by `LLMObs.enable(project_name=...)` in Phase 4 |
+| `--timeframe` | Yes | `now-7d` | Lookback window for Phase 1 classification and Phase 4 dataset sampling |
+| `--trace-limit` | Yes | `20` | Sampling cap for Phase 4. Phase 1 internally uses `min(20, --trace-limit)` for the classification sample |
+| `--format` | Yes | `py` | Passed to `llm-obs-experiment-py-bootstrap` in Phase 5: `py` (script) or `ipynb` (Jupyter notebook) |
+| `--evaluator-style` | Yes | `function` | Passed to Phase 3 and Phase 5: `function`, `class`, or `remote` |
+| `--data-only` | Yes | off | Phase 3 pass-through: emit a framework-agnostic JSON evaluator spec instead of Python SDK code |
+| `--publish` | Yes | off | Phase 3 pass-through: publish online LLM-judge evaluators to Datadog |
+| `--stop-after` | Yes | `analyze` (run everything) | Stop after the named phase completes. Accepts: `classify`, `rca`, `eval-bootstrap` *(matches the classic 3-phase behavior)*, `dataset`, `experiment`, `analyze` |
+| `--start-at` | Yes | `classify` (start at the top) | Skip earlier phases and begin at the named phase. Same vocabulary as `--stop-after`. Auto-loads prior phase artifacts from `<output-dir>/state/` |
+| `--classification-summary` | Yes | auto-loaded from `state/01-classification.md` | Override the Phase 1 output that Phase 2 consumes (used with `--start-at rca` or later) |
+| `--rca-report` | Yes | auto-loaded from `state/02-rca-report.md` | Override the Phase 2 output that Phase 3 consumes |
+| `--dataset-file` | Yes | auto-loaded from `state/04-published-dataset.json`'s `dataset_file` field | The local `DatasetRecordRaw[]` JSON. Used by Phase 4's publish sub-step when re-publishing without re-sampling |
+| `--dataset-name` | Yes | auto-loaded from `state/04-published-dataset.json` | Name of the published Datadog dataset that Phase 5 wires the experiment to |
+| `--experiment-file` | Yes | auto-loaded from `state/05-experiment-run.json` | The generated experiment file. When present, Phase 5 skips codegen and goes straight to the review beat → run |
+| `--experiment-id` / `--experiment-url` | Yes | auto-loaded from `state/05-experiment-run.json` | The Datadog experiment Phase 6 analyzes (mutually exclusive) |
+| `--app-root` | Yes | resolved from cwd / `pyproject.toml` etc. | Restricts Phase 5's task-function introspection to this directory tree |
+| `--env-file` | Yes | none (auto-discovery walks standard locations) | Explicit `.env` path for credential loading; surfaced in the Precheck |
+| `--output-dir` | Yes | `./experiments` | Where the dataset JSON, publish script, generated experiment file, and `state/` directory are written |
 
 **Examples**
 
