@@ -119,7 +119,7 @@ with DDTestLogsHandler(service="my-service") as handler:
     logging.getLogger().addHandler(handler)
 
     while True:
-        job = queue.get()
+        job = queue.get()  # queue and run_test are provided by your worker framework
         correlation.set_context(trace_id=job.trace_id, span_id=job.span_id)
         run_test(job.item)
 ```
@@ -128,7 +128,7 @@ with DDTestLogsHandler(service="my-service") as handler:
 
 ##### Asyncio workers
 
-For asyncio-based workers, subclass `CorrelationFilter` and use a `contextvars.ContextVar` for storage so each `asyncio.Task` sees its own correlation IDs:
+For asyncio-based workers, `ThreadLocalCorrelationFilter` is not suitable because thread-local storage does not propagate across `asyncio.Task` boundaries. Subclass `CorrelationFilter` and use a `contextvars.ContextVar` instead, which the event loop propagates automatically across `await` boundaries:
 
 ```python
 import asyncio
