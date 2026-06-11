@@ -13,6 +13,8 @@ further_reading:
   text: "Correlate Database Monitoring and Traces"
 ---
 
+<div class="alert alert-info">Bits Database Optimization is currently only available for PostgreSQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
+
 ## Overview
 
 Bits Database Optimization detects underperforming queries across your database fleet, identifies optimizations validated against a simulated copy of your environment, and delivers the result as a pull request fixing the exact code that triggered the query.
