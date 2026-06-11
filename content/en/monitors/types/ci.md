@@ -58,7 +58,11 @@ Choose one of the monitor types:
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
     * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Pipeline events by multiple dimensions (optional):
-    * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
+    * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
+        * **1 facet**: 1000 top values
+        * **2 facets**: 30 top values per facet (at most 900 groups)
+        * **3 facets**: 10 top values per facet (at most 1000 groups)
+        * **4 facets**: 5 top values per facet (at most 625 groups)
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@ci.pipeline.name` to receive a separate alert for each CI Pipeline name when the number of errors is high.
 
@@ -88,7 +92,11 @@ The following example is of a pipeline error rate monitor using a formula that c
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
     * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Test events by multiple dimensions (optional):
-    * All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
+    * All CI Test events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
+        * **1 facet**: 1000 top values
+        * **2 facets**: 30 top values per facet (at most 900 groups)
+        * **3 facets**: 10 top values per facet (at most 1000 groups)
+        * **4 facets**: 5 top values per facet (at most 625 groups)
 5. Configure the alerting grouping strategy (optional):
     * If the query has a `group by`, an alert is sent for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, for example: `MySuite.myTest`. In Swift, test full name is a combination of a test bundle, and suite and name, for example: `MyBundle.MySuite.myTest`.
 
@@ -142,7 +150,11 @@ In the `Notification message` section of your monitor, add text similar to the c
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
     * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CD Deployment measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CD Deployment events by multiple dimensions (optional):
-    * All CD Deployment events matching the query are aggregated into groups based on the value of up to four facets.
+    * All CD Deployment events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
+        * **1 facet**: 1000 top values
+        * **2 facets**: 30 top values per facet (at most 900 groups)
+        * **3 facets**: 10 top values per facet (at most 1000 groups)
+        * **4 facets**: 5 top values per facet (at most 625 groups)
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@deployment.name` to receive a separate alert for each CD Deployment name when the number of errors is high.
 
