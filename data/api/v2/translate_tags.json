@@ -205,7 +205,7 @@
   },
   "forms": {
     "name": "Forms",
-    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform. You can configure form settings, manage versions, publish forms, and handle sharing configurations."
+    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform.\nYou can configure form settings, manage versions, and publish forms."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -286,6 +286,10 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
+  "network-health-insights": {
+    "name": "Network Health Insights",
+    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
   },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
