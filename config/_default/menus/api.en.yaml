@@ -3398,6 +3398,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 51
+    - name: Get a single entity context
+      url: /api/latest/security-monitoring/get-a-single-entity-context/
+      identifier: security-monitoring-get-a-single-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSingleEntityContext
+        unstable:
+          - v2
+        order: 132
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context
@@ -3734,6 +3747,18 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 28
+    - name: Test a notification rule
+      url: /api/latest/security-monitoring/test-a-notification-rule/
+      identifier: security-monitoring-test-a-notification-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SendSecurityMonitoringNotificationPreview
+        unstable: []
+        order: 131
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -8083,6 +8108,88 @@ menu:
           - GetCSMCloudAccountsCoverageAnalysis
         unstable: []
         order: 1
+    - name: CSM Ownership
+      url: /api/latest/csm-ownership/
+      identifier: csm-ownership
+      generated: true
+    - name: List ownership history by owner type
+      url: /api/latest/csm-ownership/list-ownership-history-by-owner-type/
+      identifier: csm-ownership-list-ownership-history-by-owner-type
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipHistoryByOwnerType
+        unstable:
+          - v2
+        order: 4
+    - name: Submit feedback on an ownership inference
+      url: /api/latest/csm-ownership/submit-feedback-on-an-ownership-inference/
+      identifier: csm-ownership-submit-feedback-on-an-ownership-inference
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOwnershipFeedback
+        unstable:
+          - v2
+        order: 6
+    - name: Get the evidence for an ownership inference
+      url: /api/latest/csm-ownership/get-the-evidence-for-an-ownership-inference/
+      identifier: csm-ownership-get-the-evidence-for-an-ownership-inference
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipEvidence
+        unstable:
+          - v2
+        order: 5
+    - name: Get an ownership inference by owner type
+      url: /api/latest/csm-ownership/get-an-ownership-inference-by-owner-type/
+      identifier: csm-ownership-get-an-ownership-inference-by-owner-type
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipInference
+        unstable:
+          - v2
+        order: 2
+    - name: List ownership inference history for a resource
+      url: /api/latest/csm-ownership/list-ownership-inference-history-for-a-resource/
+      identifier: csm-ownership-list-ownership-inference-history-for-a-resource
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipHistory
+        unstable:
+          - v2
+        order: 3
+    - name: List ownership inferences for a resource
+      url: /api/latest/csm-ownership/list-ownership-inferences-for-a-resource/
+      identifier: csm-ownership-list-ownership-inferences-for-a-resource
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipInferences
+        unstable:
+          - v2
+        order: 1
     - name: CSM Settings
       url: /api/latest/csm-settings/
       identifier: csm-settings
@@ -11681,32 +11788,6 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: List instrumented pods for a cluster
-      url: /api/latest/fleet-automation/list-instrumented-pods-for-a-cluster/
-      identifier: fleet-automation-list-instrumented-pods-for-a-cluster
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetInstrumentedPods
-        unstable:
-          - v2
-        order: 18
-    - name: List all fleet clusters
-      url: /api/latest/fleet-automation/list-all-fleet-clusters/
-      identifier: fleet-automation-list-all-fleet-clusters
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetClusters
-        unstable:
-          - v2
-        order: 17
     - name: List tracers for a specific agent
       url: /api/latest/fleet-automation/list-tracers-for-a-specific-agent/
       identifier: fleet-automation-list-tracers-for-a-specific-agent
@@ -11756,6 +11837,75 @@ menu:
           - v2
         operationids:
           - ListFleetAgentVersions
+        unstable:
+          - v2
+        order: 1
+    - name: Forms
+      url: /api/latest/forms/
+      identifier: forms
+      generated: true
+    - name: Get a form
+      url: /api/latest/forms/get-a-form/
+      identifier: forms-get-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetForm
+        unstable:
+          - v2
+        order: 5
+    - name: Delete a form
+      url: /api/latest/forms/delete-a-form/
+      identifier: forms-delete-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteForm
+        unstable:
+          - v2
+        order: 4
+    - name: Create and publish a form
+      url: /api/latest/forms/create-and-publish-a-form/
+      identifier: forms-create-and-publish-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAndPublishForm
+        unstable:
+          - v2
+        order: 3
+    - name: Create a form
+      url: /api/latest/forms/create-a-form/
+      identifier: forms-create-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateForm
+        unstable:
+          - v2
+        order: 2
+    - name: List forms
+      url: /api/latest/forms/list-forms/
+      identifier: forms-list-forms
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListForms
         unstable:
           - v2
         order: 1
@@ -15870,6 +16020,36 @@ menu:
           - BatchRowsQuery
         unstable: []
         order: 10
+    - name: Report Schedules
+      url: /api/latest/report-schedules/
+      identifier: report-schedules
+      generated: true
+    - name: Update a report schedule
+      url: /api/latest/report-schedules/update-a-report-schedule/
+      identifier: report-schedules-update-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchReportSchedule
+        unstable:
+          - v2
+        order: 2
+    - name: Create a report schedule
+      url: /api/latest/report-schedules/create-a-report-schedule/
+      identifier: report-schedules-create-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReportSchedule
+        unstable:
+          - v2
+        order: 1
     - name: Restriction Policies
       url: /api/latest/restriction-policies/
       identifier: restriction-policies

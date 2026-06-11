@@ -15,14 +15,6 @@
     "description": "Retrieve a paginated list of tracers for a specific agent.\n\nThis endpoint returns tracers associated with a given agent key, identified by the\nagent's hostname. Use this to discover telemetry-derived service names for a particular host.",
     "summary": "List tracers for a specific agent"
   },
-  "ListFleetClusters": {
-    "description": "Retrieve a paginated list of Kubernetes clusters in the fleet.\n\nThis endpoint returns clusters with metadata including node counts, agent versions,\nenabled products, and associated services. Use the `page_number` and `page_size`\nquery parameters to paginate through results.",
-    "summary": "List all fleet clusters"
-  },
-  "ListFleetInstrumentedPods": {
-    "description": "Retrieve the list of pods targeted for Single Step Instrumentation (SSI) injection\nin a specific Kubernetes cluster.\n\nThis endpoint returns pod groups organized by owner reference (deployment, statefulset, etc.)\nwith their injection annotations and applied targets. Use the clusters list endpoint\nto discover available cluster names.",
-    "summary": "List instrumented pods for a cluster"
-  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
@@ -1434,6 +1426,32 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "ListOwnershipInferences": {
+    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
+    "summary": "List ownership inferences for a resource"
+  },
+  "ListOwnershipHistory": {
+    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership inference history for a resource"
+  },
+  "GetOwnershipInference": {
+    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
+    "summary": "Get an ownership inference by owner type"
+  },
+  "GetOwnershipEvidence": {
+    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
+    "summary": "Get the evidence for an ownership inference"
+  },
+  "CreateOwnershipFeedback": {
+    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
+    "summary": "Submit feedback on an ownership inference",
+    "request_description": "",
+    "request_schema_description": "The request body for submitting ownership feedback."
+  },
+  "ListOwnershipHistoryByOwnerType": {
+    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership history by owner type"
+  },
   "ListCSMAgentlessHosts": {
     "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
     "summary": "List agentless hosts"
@@ -1843,6 +1861,30 @@
   "UnarchiveFeatureFlag": {
     "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
     "summary": "Unarchive a feature flag"
+  },
+  "ListForms": {
+    "description": "Get all forms for the authenticated user's organization.",
+    "summary": "List forms"
+  },
+  "CreateForm": {
+    "description": "Create a new form. The form is created in draft mode and must be published before it can be used. This also creates a new datastore for form responses and links it to the form.",
+    "summary": "Create a form",
+    "request_description": "",
+    "request_schema_description": "A request to create a form."
+  },
+  "CreateAndPublishForm": {
+    "description": "Creates a new form and immediately publishes its initial version. This also creates a new datastore for form responses and links it to the form.",
+    "summary": "Create and publish a form",
+    "request_description": "",
+    "request_schema_description": "A request to create a form."
+  },
+  "DeleteForm": {
+    "description": "Delete a form by its ID. This will also try to delete the associated datastore.",
+    "summary": "Delete a form"
+  },
+  "GetForm": {
+    "description": "Get a form definition by its ID.",
+    "summary": "Get a form"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -4161,6 +4203,18 @@
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
   },
+  "CreateReportSchedule": {
+    "description": "Create a new scheduled report. A schedule renders a dashboard or integration dashboard\non a recurring cadence and delivers it to the configured recipients over email, Slack,\nor Microsoft Teams.\nRequires the `generate_dashboard_reports` permission.",
+    "summary": "Create a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a report schedule."
+  },
+  "PatchReportSchedule": {
+    "description": "Update an existing scheduled report by its identifier. The editable attributes\nare replaced with the supplied values; the targeted resource (`resource_id` and\n`resource_type`) cannot be changed after creation.\nRequires the `generate_dashboard_reports` permission and schedule ownership.",
+    "summary": "Update a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a report schedule."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -4877,6 +4931,12 @@
     "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
     "summary": "Validate an entity context sync configuration"
   },
+  "SendSecurityMonitoringNotificationPreview": {
+    "description": "Send a notification preview to test that a notification rule's targets are properly configured.",
+    "summary": "Test a notification rule",
+    "request_description": "",
+    "request_schema_description": "Body of the notification rule create request."
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
@@ -5002,6 +5062,10 @@
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get entity context"
+  },
+  "GetSingleEntityContext": {
+    "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
+    "summary": "Get a single entity context"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
