@@ -4203,6 +4203,18 @@
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
   },
+  "CreateReportSchedule": {
+    "description": "Create a new scheduled report. A schedule renders a dashboard or integration dashboard\non a recurring cadence and delivers it to the configured recipients over email, Slack,\nor Microsoft Teams.\nRequires the `generate_dashboard_reports` permission.",
+    "summary": "Create a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a report schedule."
+  },
+  "PatchReportSchedule": {
+    "description": "Update an existing scheduled report by its identifier. The editable attributes\nare replaced with the supplied values; the targeted resource (`resource_id` and\n`resource_type`) cannot be changed after creation.\nRequires the `generate_dashboard_reports` permission and schedule ownership.",
+    "summary": "Update a report schedule",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a report schedule."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -4919,6 +4931,12 @@
     "description": "Validate the credentials currently stored on an existing entity context sync configuration.\nReturns a 200 status code if the credentials are still valid against the external entity source.",
     "summary": "Validate an entity context sync configuration"
   },
+  "SendSecurityMonitoringNotificationPreview": {
+    "description": "Send a notification preview to test that a notification rule's targets are properly configured.",
+    "summary": "Test a notification rule",
+    "request_description": "",
+    "request_schema_description": "Body of the notification rule create request."
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
@@ -5044,6 +5062,10 @@
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get entity context"
+  },
+  "GetSingleEntityContext": {
+    "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
+    "summary": "Get a single entity context"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",

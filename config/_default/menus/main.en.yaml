@@ -5540,6 +5540,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 403
+    - name: End-User Feedback
+      url: llm_observability/evaluations/end_user_feedback
+      parent: llm_obs_evaluations
+      identifier: llm_obs_end_user_feedback
+      weight: 4030
     - name: Developer Guide
       url: llm_observability/evaluations/evaluation_developer_guide
       parent: llm_obs_evaluations
