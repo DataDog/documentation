@@ -25,10 +25,13 @@ You need to have Datadog's [Azure integration][3] installed to set up Datadog Lo
 
 Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Azure connection string. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
 After you select the Azure Storage destination in the pipeline UI:
 
 1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#secret-defaults) is used.
-    - **Note**: Only enter the identifier for the connection string. Do **not** enter the actual connection string.
 1. Enter the name of the Azure container you created earlier.
 
 ### Optional settings

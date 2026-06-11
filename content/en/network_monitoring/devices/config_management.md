@@ -8,8 +8,6 @@ further_reading:
 site_support_id: network_config_management
 ---
 
-<div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>
-
 ## Overview
 
 Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)][1] to include configuration awareness and change tracking. NCM allows you to:
@@ -20,12 +18,9 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
-**Note**: NCM is read-only in Preview. 
-
 ## Prerequisites
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
-- Install the custom Datadog Agent build provided by your Datadog representative.
 
 ## Setup
 

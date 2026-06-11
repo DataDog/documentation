@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
 
 ### Custom LLM-as-a-judge evaluations
 
@@ -22,11 +22,15 @@ LLM Observability offers several ways to support evaluations. They can be config
 
 ### Managed evaluations
 
-Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the LLM Observability application.
+Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the Agent Observability application.
+
+### Submit end-user feedback
+
+[End-user feedback][13] lets you submit thumbs-up or thumbs-down ratings, accepted changes, free-text comments, and other user or agent feedback to Datadog. Feedback can be connected to spans, traces, sessions, or customer-defined entities with a feedback join key.
 
 ### Submit external evaluations
 
-You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+You can also submit [external evaluations][3] using Datadog's API. Use this approach when you have your own evaluation system but want to centralize evaluation results within Datadog.
 
 ### Building custom evaluators
 
@@ -42,7 +46,7 @@ Datadog also supports integrations with some 3rd party evaluation frameworks, su
 
 ### Sensitive Data Scanner integration
 
-In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information. For a list of the out-of-the-box rules included with Sensitive Data Scanner, see [Library Rules][12].
+In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, Agent Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information. For a list of the out-of-the-box rules included with Sensitive Data Scanner, see [Library Rules][12].
 
 ### Security
 
@@ -52,11 +56,11 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 ### Permissions
 
-[`LLM Observability Write` permissions][7] are necessary to configure evaluations.
+[`Agent Observability Write` permissions][7] are necessary to configure evaluations.
 
 ### Retrieving spans
 
-LLM Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
+Agent Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
 
 ## Further Reading
 
@@ -73,3 +77,4 @@ LLM Observability offers an [Export API][9] that you can use to retrieve spans f
 [10]: /llm_observability/guide/evaluation_developer_guide
 [11]: /llm_observability/evaluations/annotation_queues
 [12]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[13]: /llm_observability/evaluations/end_user_feedback
