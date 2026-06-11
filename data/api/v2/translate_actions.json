@@ -1926,6 +1926,20 @@
     "request_description": "",
     "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
+  "ListIdentityProviders": {
+    "description": "Get all identity providers available for the current organization.",
+    "summary": "List identity providers"
+  },
+  "UpdateIdentityProvider": {
+    "description": "Enable or disable an identity provider for the current organization.",
+    "summary": "Update an identity provider",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an organization identity provider."
+  },
+  "ListIdentityProviderUsers": {
+    "description": "Get all users in the organization whose login method has been overridden\nto use the specified identity provider.",
+    "summary": "List users with an identity provider override"
+  },
   "DeleteEntityIntegrationConfig": {
     "description": "Delete the configuration stored for a given integration in the caller's organization.",
     "summary": "Delete an entity integration configuration"
@@ -3748,6 +3762,36 @@
     "summary": "Update organization SAML preferences",
     "request_description": "",
     "request_schema_description": "Request to update an organization's SAML preferences."
+  },
+  "ListOrgAuthorizedClients": {
+    "description": "Get a list of all OAuth2 clients authorized for the current organization.",
+    "summary": "List org authorized clients"
+  },
+  "DeleteOrgAuthorizedClient": {
+    "description": "Disable an OAuth2 client authorization for the current organization, revoking access for all users.",
+    "summary": "Delete an org authorized client"
+  },
+  "GetOrgAuthorizedClient": {
+    "description": "Get a single OAuth2 client authorized for the current organization.",
+    "summary": "Get an org authorized client"
+  },
+  "UpdateOrgAuthorizedClient": {
+    "description": "Enable or disable an OAuth2 client authorization for the current organization.",
+    "summary": "Update an org authorized client",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an org authorized client."
+  },
+  "DeleteOrgAuthorizedClientAllUserAuthorizations": {
+    "description": "Disable all authorizations for a specific user for the specified OAuth2 client in the current organization.",
+    "summary": "Delete a user's authorizations for a client"
+  },
+  "ListOrgAuthorizedClientUserAuthorizations": {
+    "description": "Get a list of user authorizations for the specified OAuth2 client in the current organization.",
+    "summary": "List user authorizations for a client"
+  },
+  "DeleteOrgAuthorizedClientUserAuthorization": {
+    "description": "Disable a specific user authorization for the specified OAuth2 client in the current organization.",
+    "summary": "Delete a user authorization for a client"
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -6272,6 +6316,22 @@
     "description": "Get usage attribution types.",
     "summary": "Get usage attribution types"
   },
+  "ListUserAuthorizedClients": {
+    "description": "Get a list of all OAuth2 clients authorized by the current user.",
+    "summary": "List user authorized clients"
+  },
+  "DeleteUserAuthorizedClientsByClient": {
+    "description": "Disable all authorizations the current user has granted to the specified OAuth2 client.",
+    "summary": "Delete all user authorized clients for a client"
+  },
+  "DeleteUserAuthorizedClient": {
+    "description": "Disable the current user's authorization for the specified OAuth2 client.",
+    "summary": "Delete a user authorized client"
+  },
+  "GetUserAuthorizedClient": {
+    "description": "Get a single OAuth2 client authorization for the current user.",
+    "summary": "Get a user authorized client"
+  },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",
     "summary": "Send invitation emails",
@@ -6306,6 +6366,10 @@
     "request_description": "",
     "request_schema_description": "Update a user."
   },
+  "GetUserIdentityProviders": {
+    "description": "Get the identity provider overrides for a specific user in the organization.\nWhen a user has no overrides set, they use the organization's default identity providers.",
+    "summary": "Get identity provider overrides for a user"
+  },
   "DeleteUserInvitations": {
     "description": "Cancel all pending invitations for a specified user.\nRequires the `user_access_invite` permission.",
     "summary": "Delete a pending user's invitations"
@@ -6317,6 +6381,12 @@
   "ListUserPermissions": {
     "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
     "summary": "Get a user permissions"
+  },
+  "UpdateUserIdentityProviders": {
+    "description": "Set the identity provider overrides for a specific user in the organization.\nPass an empty list to remove all overrides, reverting the user to the organization's\ndefault identity providers.",
+    "summary": "Update identity provider overrides for a user",
+    "request_description": "",
+    "request_schema_description": "Request body for setting identity provider overrides for a user."
   },
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",

@@ -6347,6 +6347,18 @@ menu:
       url: /api/latest/users/
       identifier: users
       generated: true
+    - name: Update identity provider overrides for a user
+      url: /api/latest/users/update-identity-provider-overrides-for-a-user/
+      identifier: users-update-identity-provider-overrides-for-a-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateUserIdentityProviders
+        unstable: []
+        order: 15
     - name: Get a user permissions
       url: /api/latest/users/get-a-user-permissions/
       identifier: users-get-a-user-permissions
@@ -6383,6 +6395,18 @@ menu:
           - DeleteUserInvitations
         unstable: []
         order: 11
+    - name: Get identity provider overrides for a user
+      url: /api/latest/users/get-identity-provider-overrides-for-a-user/
+      identifier: users-get-identity-provider-overrides-for-a-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserIdentityProviders
+        unstable: []
+        order: 14
     - name: Get a user invitation
       url: /api/latest/users/get-a-user-invitation/
       identifier: users-get-a-user-invitation
@@ -12108,6 +12132,46 @@ menu:
           - GetIPAllowlist
         unstable: []
         order: 1
+    - name: Identity Providers
+      url: /api/latest/identity-providers/
+      identifier: identity-providers
+      generated: true
+    - name: List users with an identity provider override
+      url: /api/latest/identity-providers/list-users-with-an-identity-provider-override/
+      identifier: identity-providers-list-users-with-an-identity-provider-override
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIdentityProviderUsers
+        unstable: []
+        order: 1
+    - name: Update an identity provider
+      url: /api/latest/identity-providers/update-an-identity-provider/
+      identifier: identity-providers-update-an-identity-provider
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIdentityProvider
+        unstable: []
+        order: 2
+    - name: List identity providers
+      url: /api/latest/identity-providers/list-identity-providers/
+      identifier: identity-providers-list-identity-providers
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIdentityProviders
+        unstable: []
+        order: 3
     - name: Incident Services
       url: /api/latest/incident-services/
       identifier: incident-services
@@ -15269,6 +15333,94 @@ menu:
           - ListOpsgenieAccounts
         unstable: []
         order: 6
+    - name: Org Authorized Clients
+      url: /api/latest/org-authorized-clients/
+      identifier: org-authorized-clients
+      generated: true
+    - name: Delete a user authorization for a client
+      url: /api/latest/org-authorized-clients/delete-a-user-authorization-for-a-client/
+      identifier: org-authorized-clients-delete-a-user-authorization-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClientUserAuthorization
+        unstable: []
+        order: 2
+    - name: List user authorizations for a client
+      url: /api/latest/org-authorized-clients/list-user-authorizations-for-a-client/
+      identifier: org-authorized-clients-list-user-authorizations-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgAuthorizedClientUserAuthorizations
+        unstable: []
+        order: 3
+    - name: Delete a user's authorizations for a client
+      url: /api/latest/org-authorized-clients/delete-a-users-authorizations-for-a-client/
+      identifier: org-authorized-clients-delete-a-users-authorizations-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClientAllUserAuthorizations
+        unstable: []
+        order: 1
+    - name: Update an org authorized client
+      url: /api/latest/org-authorized-clients/update-an-org-authorized-client/
+      identifier: org-authorized-clients-update-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgAuthorizedClient
+        unstable: []
+        order: 5
+    - name: Get an org authorized client
+      url: /api/latest/org-authorized-clients/get-an-org-authorized-client/
+      identifier: org-authorized-clients-get-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgAuthorizedClient
+        unstable: []
+        order: 6
+    - name: Delete an org authorized client
+      url: /api/latest/org-authorized-clients/delete-an-org-authorized-client/
+      identifier: org-authorized-clients-delete-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClient
+        unstable: []
+        order: 4
+    - name: List org authorized clients
+      url: /api/latest/org-authorized-clients/list-org-authorized-clients/
+      identifier: org-authorized-clients-list-org-authorized-clients
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgAuthorizedClients
+        unstable: []
+        order: 7
     - name: Org Connections
       url: /api/latest/org-connections/
       identifier: org-connections
@@ -19408,6 +19560,58 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: User Authorized Clients
+      url: /api/latest/user-authorized-clients/
+      identifier: user-authorized-clients
+      generated: true
+    - name: Get a user authorized client
+      url: /api/latest/user-authorized-clients/get-a-user-authorized-client/
+      identifier: user-authorized-clients-get-a-user-authorized-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserAuthorizedClient
+        unstable: []
+        order: 3
+    - name: Delete a user authorized client
+      url: /api/latest/user-authorized-clients/delete-a-user-authorized-client/
+      identifier: user-authorized-clients-delete-a-user-authorized-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserAuthorizedClient
+        unstable: []
+        order: 2
+    - name: Delete all user authorized clients for a client
+      url: /api/latest/user-authorized-clients/delete-all-user-authorized-clients-for-a-client/
+      identifier: user-authorized-clients-delete-all-user-authorized-clients-for-a-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserAuthorizedClientsByClient
+        unstable: []
+        order: 1
+    - name: List user authorized clients
+      url: /api/latest/user-authorized-clients/list-user-authorized-clients/
+      identifier: user-authorized-clients-list-user-authorized-clients
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserAuthorizedClients
+        unstable: []
+        order: 4
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets
