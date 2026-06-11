@@ -114,7 +114,7 @@ airflow config get-value logging logging_config_class
 
 If the command returns no output, no custom logging configuration is active. If it returns non-empty output, you already have a custom logging configuration.
 
-**Note:** If `logging_config_class` points to a module that cannot be imported, Airflow falls back silently to the default configuration with no error. If you see no structured attributes in Datadog after setup, verify the module is importable from the worker environment.
+**Note:** If `logging_config_class` points to a module that cannot be imported, Airflow falls back silently to the default configuration with no error. If you see no structured attributes in Datadog after setup, run the following inside the Airflow worker container to verify the module is importable: `python -c 'import dd_airflow_log_context'`
 
 ### Step 3: Configure Airflow to load the module
 
@@ -196,7 +196,7 @@ Airflow exports the following environment variables into the task subprocess. Ea
 
 ### Step 1: Create `dd_airflow_log_context.py`
 
-Create `dd_airflow_log_context.py` somewhere importable in your Airflow environment. On Astronomer (Astro), add it to your Astro project root so it is baked into the Docker image. Add the following code to the file:
+Create `dd_airflow_log_context.py` somewhere importable in your Airflow environment. Add the following code to the file:
 
 ```python
 from __future__ import annotations
@@ -246,7 +246,7 @@ To import the file inside the task subprocess before user code runs, choose one 
 
 **Import with `sitecustomize.py` (recommended)**
 
-Add the following to a `sitecustomize.py` on your image's `PYTHONPATH`. On Astronomer (Astro), add both `dd_airflow_log_context.py` and `sitecustomize.py` to your Astro project root.
+Add the following to a `sitecustomize.py` on your image's `PYTHONPATH`.
 
 ```python
 import dd_airflow_log_context  # installs setLogRecordFactory
@@ -288,7 +288,7 @@ logging.getLogger("dd_probe").warning(
 - If `factory=_dd_record_factory` but no facets appear, the factory loaded but the environment variables were not set. Confirm the log was emitted from inside the task subprocess, not from the scheduler or triggerer.
 - If `factory` is something else, the file did not load in the subprocess. Switch to `sitecustomize.py`.
 
-[TEI]: https://cwiki.apache.org/confluence/display/AIRFLOW/AIP-72+Task+Execution+Interface
+[TEI]: https://cwiki.apache.org/confluence/display/AIRFLOW/AIP-72+Task+Execution+Interface+aka+Task+SDK
 
 {{% /tab %}}
 {{< /tabs >}}
