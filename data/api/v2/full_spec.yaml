@@ -59528,6 +59528,191 @@ components:
       type: string
       x-enum-varnames:
         - NDK_SYMBOL_FILE
+    NetworkHealthInsight:
+      description: A single network health insight describing a service-to-service connectivity issue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/NetworkHealthInsightAttributes"
+        id:
+          description: Unique identifier for this network health insight.
+          example: example-insight-id
+          type: string
+        type:
+          $ref: "#/components/schemas/NetworkHealthInsightsType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    NetworkHealthInsightAttributes:
+      description: Detailed attributes of a network health insight.
+      properties:
+        account_id:
+          description: AWS account identifier where the certificate is located. Only set for `tls-cert` insights.
+          example: "123456789012"
+          type: string
+        certificate_id:
+          description: ARN or identifier of the certificate. Only set for `tls-cert` insights.
+          example: "arn:aws:acm:us-east-1:123456789012:certificate/abcd1234-a123-456b-a123-12345678901f"
+          type: string
+        certificate_lifetime_percent:
+          description: |-
+            Percentage of the certificate's validity period that has elapsed, ranging from 0 to 100.
+            Only set for `tls-cert` insights.
+          example: 96.7
+          format: double
+          type: number
+        client_region:
+          description: AWS region where the client is located. Only set for `tls-cert` insights.
+          example: us-west-2
+          type: string
+        client_service:
+          description: |-
+            Name of the service making the request (DNS query or TLS-secured connection).
+            Set to `N/A` when the client service cannot be determined.
+          example: network-logger
+          type: string
+        days_until_expiration:
+          description: |-
+            Number of days remaining until the certificate expires. Negative values indicate the
+            certificate has already expired. Only set for `tls-cert` insights.
+          example: 3
+          format: int64
+          type: integer
+        dns_query:
+          description: Domain name that was being resolved when the DNS failure occurred. Only set for `dns` insights.
+          example: kafka-broker.internal.domain.com
+          type: string
+        dns_server:
+          description: DNS server that received the failing query. Only set for `dns` insights.
+          example: cluster-dns
+          type: string
+        domain_name:
+          description: Domain name covered by the certificate. Only set for `tls-cert` insights.
+          example: api.example.com
+          type: string
+        failure_magnitude:
+          description: |-
+            Count of failed events observed during the query window. Only set for `dns`, `tcp`,
+            and `security-group` insights.
+          example: 150
+          format: int64
+          minimum: 0
+          type: integer
+        failure_rate:
+          description: |-
+            Percentage of requests that failed during the query window, ranging from 0 to 100.
+            Only set for `dns`, `tcp`, and `security-group` insights.
+          example: 91
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+        failure_type:
+          $ref: "#/components/schemas/NetworkHealthInsightFailureType"
+        loadbalancer_id:
+          description: ARN of the load balancer using the certificate. Only set for `tls-cert` insights.
+          example: "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/my-lb/50dc6c495c0c9188"
+          type: string
+        server_region:
+          description: AWS region where the server or load balancer is located. Only set for `tls-cert` insights.
+          example: us-east-1
+          type: string
+        server_service:
+          description: Name of the target service the client was trying to reach.
+          example: kafka
+          type: string
+        total_requests:
+          description: |-
+            Total number of requests observed during the query window. Provides context for
+            `failure_magnitude` and `failure_rate`. Only set for `dns`, `tcp`, and `security-group` insights.
+          example: 1200
+          format: int64
+          minimum: 0
+          type: integer
+        traffic_volume:
+          $ref: "#/components/schemas/NetworkHealthInsightTrafficVolume"
+        type:
+          $ref: "#/components/schemas/NetworkHealthInsightCategory"
+      type: object
+    NetworkHealthInsightCategory:
+      description: |-
+        Category of network health insight. Indicates whether the insight relates to a DNS issue (`dns`),
+        a TCP issue (`tcp`), a TLS certificate issue (`tls-cert`), or a security group denial (`security-group`).
+      enum:
+        - dns
+        - tcp
+        - tls-cert
+        - security-group
+      example: dns
+      type: string
+      x-enum-varnames:
+        - DNS
+        - TCP
+        - TLS_CERT
+        - SECURITY_GROUP
+    NetworkHealthInsightFailureType:
+      description: |-
+        Specific failure type within the insight category. For DNS insights: `timeout`, `nxdomain`,
+        `servfail`, or `general_failure`. For TLS certificate insights: `expired` or `expiring_soon`.
+        For security group insights: `denied`.
+      enum:
+        - timeout
+        - nxdomain
+        - servfail
+        - general_failure
+        - expired
+        - expiring_soon
+        - denied
+      example: nxdomain
+      type: string
+      x-enum-varnames:
+        - TIMEOUT
+        - NXDOMAIN
+        - SERVFAIL
+        - GENERAL_FAILURE
+        - EXPIRED
+        - EXPIRING_SOON
+        - DENIED
+    NetworkHealthInsightTrafficVolume:
+      description: Network traffic volume metrics between the client and server services during the query window.
+      properties:
+        bytes_read:
+          description: Total bytes read from the server to the client during the query window.
+          example: 1800000
+          format: int64
+          type: integer
+        bytes_written:
+          description: Total bytes written from the client to the server during the query window.
+          example: 2500000
+          format: int64
+          type: integer
+        total_traffic:
+          description: Sum of bytes written and bytes read across the query window.
+          example: 4300000
+          format: int64
+          type: integer
+      type: object
+    NetworkHealthInsightsResponse:
+      description: Response containing a list of network health insights for the organization.
+      properties:
+        data:
+          description: Array of network health insights returned for the query window.
+          items:
+            $ref: "#/components/schemas/NetworkHealthInsight"
+          type: array
+      required:
+        - data
+      type: object
+    NetworkHealthInsightsType:
+      default: network-health-insights
+      description: The resource type for network health insights. Always `network-health-insights`.
+      enum:
+        - network-health-insights
+      example: network-health-insights
+      type: string
+      x-enum-varnames:
+        - NETWORK_HEALTH_INSIGHTS
     NodeType:
       additionalProperties: {}
       description: A tree-sitter node type definition for a given language, describing the node's structure, subtypes, and fields.
@@ -149138,6 +149323,119 @@ paths:
       tags:
         - Network Device Monitoring
       x-menu-order: 7
+  /api/v2/network-health-insights:
+    get:
+      description: |-
+        Return network health insights for the organization within the given time window.
+        Insights are produced by analyzing DNS failures pre-classified by `network-dns-logger`,
+        TLS certificate metrics, and denied security group connections. Each insight
+        identifies the client and server services involved, the type of issue, and the
+        magnitude of the failure observed during the query window.
+      operationId: ListNetworkHealthInsights
+      parameters:
+        - description: |-
+            Unix timestamp (number of seconds since epoch) of the start of the query window.
+            If not provided, the start of the query window will be 15 minutes before the `to` timestamp.
+            If neither `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+          example: "1716800000"
+          in: query
+          name: from
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Unix timestamp (number of seconds since epoch) of the end of the query window.
+            If not provided, the end of the query window will be the current time.
+            If neither `from` nor `to` are provided, the query window will be `[now - 15m, now]`.
+          example: "1716800900"
+          in: query
+          name: to
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          client_service: "network-logger"
+                          dns_query: "kafka-broker.internal.domain.com"
+                          dns_server: "cluster-dns"
+                          failure_magnitude: 150
+                          failure_rate: 91
+                          failure_type: "nxdomain"
+                          server_service: "kafka"
+                          total_requests: 1200
+                          traffic_volume:
+                            bytes_read: 1800000
+                            bytes_written: 2500000
+                            total_traffic: 4300000
+                          type: "dns"
+                        id: "example-insight-id"
+                        type: "network-health-insights"
+                      - attributes:
+                          account_id: "123456789012"
+                          certificate_id: "arn:aws:acm:us-east-1:123456789012:certificate/abcd1234-a123-456b-a123-12345678901f"
+                          certificate_lifetime_percent: 96.7
+                          client_region: "us-west-2"
+                          client_service: "N/A"
+                          days_until_expiration: 3
+                          domain_name: "api.example.com"
+                          failure_type: "expiring_soon"
+                          loadbalancer_id: "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/my-lb/50dc6c495c0c9188"
+                          server_region: "us-east-1"
+                          server_service: "web-frontend"
+                          type: "tls-cert"
+                        id: "example-cert-insight-id"
+                        type: "network-health-insights"
+                      - attributes:
+                          client_service: "web-frontend"
+                          failure_magnitude: 85
+                          failure_rate: 68.5
+                          failure_type: "denied"
+                          server_service: "database"
+                          total_requests: 124
+                          type: "security-group"
+                        id: "example-security-group-insight-id"
+                        type: "network-health-insights"
+              schema:
+                $ref: "#/components/schemas/NetworkHealthInsightsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: List network health insights
+      tags:
+        - Network Health Insights
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - network_health_insights_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/network/connections/aggregate:
     get:
       description: Get all aggregated connections.
@@ -187801,6 +188099,11 @@ tags:
   - description: |-
       The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information.
     name: Network Device Monitoring
+  - description: |-
+      Analyze network health by surfacing actionable insights for services experiencing connectivity issues.
+      Insights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),
+      TLS certificate health (expired, expiring soon), and security group denials.
+    name: Network Health Insights
   - description: |-
       Configure OAuth2 clients for Datadog.
       Supports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions.
