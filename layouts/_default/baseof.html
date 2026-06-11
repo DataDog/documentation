@@ -29,7 +29,7 @@
     {{- partial "meta.html" . -}}
   {{- end -}}
 
-  {{- if and .IsPage .File -}}
+  {{- if and (or .IsPage .IsSection) (not .IsHome) .File -}}
     {{- partial "structured-data.html" . -}}
   {{- end -}}
 </head>
