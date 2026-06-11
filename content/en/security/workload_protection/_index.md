@@ -62,6 +62,10 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 
 ## Respond to threats
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger"> This feature is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 When a threat is confirmed, you can contain it directly from the Workload Protection signal side panel. This shortens response time and helps preserve forensic state while an investigation continues.
 
 Four response actions are available from any Workload Protection signal:
