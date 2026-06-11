@@ -237,7 +237,7 @@ If your setup is not on Fargate, you can `exec` into the Datadog Agent container
 
 Look for the APM Agent section to confirm whether it is running:
 
-**Note**: On Linux, starting with Agent 7.80.0, the trace-agent starts only after receiving trace data. This reduces memory usage, but means the APM Agent section may show as not running or unreachable rather than the output below, even when APM is correctly configured. To disable this behavior, set `apm_config.socket_activation.enabled: false` in `datadog.yaml`, or set `DD_APM_SOCKET_ACTIVATION_ENABLED=false` in your environment.
+**Note:** On Linux, starting with Agent 7.80.0, the trace-agent starts only after receiving trace data. This reduces memory usage, but means the APM Agent section may show as not running or unreachable even when APM is correctly configured. If no traces have been sent yet, this is expected behavior. To disable this behavior, set `apm_config.socket_activation.enabled: false` in `datadog.yaml`, or set `DD_APM_SOCKET_ACTIVATION_ENABLED=false` in your environment.
 
 ```text
 =========
