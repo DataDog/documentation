@@ -26,12 +26,12 @@ Disabling RUM involves two independent components:
 
 These two components are independent. Disabling one does not automatically disable the other. To fully stop data collection and remove the application from Datadog, you must address both.
 
-## Understand what happens if you only disable one component
+## What happens if you only disable one component
 
 | Action | Result |
 |---|---|
-| Delete application from Datadog UI, but SDK still in your code | The application is marked as disabled. The SDK continues running in your code, but Datadog rejects the data at intake—events are not ingested or billed. |
-| Remove SDK from your code, but application still in Datadog | No new data is sent. The application remains visible in Datadog with a "no data" state, and its dashboards and monitors remain intact. |
+| Delete the application from Datadog, but keep the SDK in your code | The application is marked as disabled. The SDK continues running in your code, but Datadog rejects the data at intake; events are not ingested or billed. |
+| Remove the SDK from your code, but keep the application in Datadog | No new data is sent. The application remains visible in Datadog with a "no data" state, and its dashboards and monitors remain intact. |
 
 ## Disable the SDK in your application
 
@@ -118,7 +118,7 @@ Set the session sample rate to `0` to stop sending data without removing the SDK
 
 <!-- Android -->
 {% if equals($platform, "android") %}
-1. Set the session sample rate to `0.0f` in your RUM configuration and deploy the change. This takes effect after the next app launch.
+1. Set `sessionSampleRate` to `0.0f` in your RUM configuration and deploy the change. This takes effect after the next app launch.
 
    ```kotlin
    val rumConfig = RumConfiguration.Builder(applicationId)
@@ -187,7 +187,7 @@ Set the session sample rate to `0` to stop sending data without removing the SDK
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-1. Set the session sample rate to `0.0f` in your RUM configuration and deploy the change. This takes effect after the next app launch.
+1. Set `sessionSampleRate` to `0.0f` in your RUM configuration and deploy the change. This takes effect after the next app launch.
 
    ```kotlin
    val rumConfig = RumConfiguration.Builder(applicationId)
@@ -350,7 +350,9 @@ After disabling the SDK, delete the RUM application from Datadog to remove its c
 1. Select **Delete application**.
 1. Confirm the deletion.
 
+{% alert level="warning" %}
 Deleting an application is permanent. All associated data, monitors, and dashboards for that application are removed from Datadog.
+{% /alert %}
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
