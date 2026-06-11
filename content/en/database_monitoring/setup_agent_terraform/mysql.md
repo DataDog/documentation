@@ -168,7 +168,7 @@ The Datadog Agent is installed on Amazon EKS with EC2 node groups through the of
 The example supports two modes:
 
 - **Bring your own EKS cluster (BYO)** — installs the Datadog Helm chart into your existing cluster and opens an ingress rule on the database security group from the node SG. Default mode.
-- **Provision a new EKS cluster (greenfield)** — provisions an EKS cluster + managed node group + IAM roles, then installs the Agent. Adds ongoing AWS cost — see the [example README][7] for details.
+- **Provision a new EKS cluster (greenfield)** — provisions an EKS cluster + managed node group + IAM roles, then installs the Agent. Adds ongoing AWS cost while the cluster exists.
 
 ## Prerequisites
 
@@ -200,7 +200,7 @@ The example supports two modes:
 
 - **AWS credentials** with permission to create EKS clusters, IAM roles + policy attachments, EKS managed node groups, and security-group rules.
 - **At least two private subnets in different AZs** in the database's VPC, with NAT egress so the control plane and worker nodes can reach Datadog and ECR.
-- **Awareness of ongoing cost** — provisioning a new EKS cluster adds approximately $0.10/hr for the control plane plus the EC2 node hourly rate, billed continuously while the cluster exists. See the [example README][7] for the full breakdown.
+- **Awareness of ongoing cost** — provisioning a new EKS cluster adds ongoing AWS charges for the control plane and worker nodes, billed continuously while the cluster exists.
 
 ## Apply the Terraform
 
@@ -313,7 +313,6 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
 [2]: /database_monitoring/
 [3]: /database_monitoring/setup_mysql/rds/
 [6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/mysql/aws/amazon-eks
-[7]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/mysql/aws/amazon-eks/README.md
 [8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/mysql/aws/amazon-eks/variables.tf
 
 {{% /tab %}}
