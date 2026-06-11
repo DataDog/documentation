@@ -52,6 +52,9 @@ When you run the Agent installation with RUM enabled, Datadog:
 4. Copy the generated installation command and run it on your host.
 5. Restart NGINX to begin collecting RUM sessions.
 
+[68]: /tracing/trace_collection/single-step-apm/
+[69]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+
 {{% /tab %}}
 {{% tab "Managed Instrumentation" %}}
 
@@ -67,6 +70,10 @@ Use this method to manually create your RUM application through **Digital Experi
    ```javascript
    error_log <file> info;
    ```
+
+[4]: https://app.datadoghq.com/rum/list
+[5]: /real_user_monitoring/guide/sampling-browser-plans/
+[67]: https://nginx.org/en/docs/ngx_core_module.html#error_log
 
 {{% /tab %}}
 {{% tab "Manual Instructions" %}}
