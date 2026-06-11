@@ -58,7 +58,7 @@ When you run the Agent installation with RUM enabled, Datadog:
 {{% /tab %}}
 {{% tab "Managed Instrumentation" %}}
 
-Use this method to manually create your RUM application through **Digital Experience > Manage Applications > New Application**, then run the NGINX installation command on your host.
+Use this method to configure your RUM application settings in the Datadog UI before running the automated NGINX installation command.
 
 1. In Datadog, navigate to **Digital Experience > Manage Applications**, click [**New Application**][4], and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **NGINX**.
