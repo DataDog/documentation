@@ -50,7 +50,7 @@ Use the Service Page or Monitor List to review how Bits Detection is monitoring 
 
 To open the Bits Detection view for a service, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][2], select a service, and open the monitoring overview from the monitor status bar or the Bits Detection card.
 
-<!-- image placeholder -->
+{{< img src="bits_ai/bits_detection/service_page_bits_detection_card.png" alt="The Bits Detection card on the APM Services page showing monitoring status and critical endpoints for a service." style="width:90%;" >}}
 
 The Service Page shows Bits Detection monitors for the service, including their current status and alerting history, alongside the endpoints Bits considers critical. Bits prioritizes endpoints most likely to affect customers directly—such as checkout, signup, or authentication paths—and each endpoint includes a criticality justification explaining why it was selected.
 
@@ -67,7 +67,7 @@ From the Service Page, you can:
 
 To view Bits Detection monitors, go to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}List{{< /ui >}}][3] and select the {{< ui >}}Bits Managed{{< /ui >}} filter. The summary banner shows the number of managed monitors in each status. Expand a service row to view its managed monitors.
 
-<!-- image placeholder -->
+{{< img src="bits_ai/bits_detection/monitor_list_bits_managed.png" alt="The Monitor List filtered to Bits Managed monitors, showing services grouped by managed monitor status." style="width:90%;" >}}
 
 The Monitor List groups Bits Detection monitors by service. For each service, you can review the status, priority, monitor name, and tags for each managed monitor. Bits Detection monitors are labeled with a sparkle icon so you can distinguish them from monitors your teams create and maintain.
 
@@ -91,7 +91,7 @@ Use feedback to tune Bits Detection for your environment. You can flag alerts as
 **Provide feedback on an alert**
 
 1. Open the Bits Detection alert.
-1. In the feedback prompt, click {{< ui >}}Yes{{< /ui >}} if Bits should have alerted you, or click {{< ui >}}No, Because…{{< /ui >}} if it should not have. <!-- image placeholder -->
+1. In the feedback prompt, click {{< ui >}}Yes{{< /ui >}} if Bits should have alerted you, or click {{< ui >}}No, Because…{{< /ui >}} if it should not have.
 1. If you clicked {{< ui >}}No, Because…{{< /ui >}}, select a reason.
 1. Click {{< ui >}}Send Feedback{{< /ui >}}.
 
