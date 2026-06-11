@@ -40,8 +40,13 @@
     border-radius: 7px 7px 0 0;
 }
 
-.collapsible-section[open] > .collapsible-header .header-text-inner {
+.collapsible-section[open] > .collapsible-header .header-text-inner,
+.collapsible-section[open] > .collapsible-header .header-text-inner a {
     color: white;
+}
+
+.collapsible-section[open] > .collapsible-header .header-text-inner a:hover {
+    border-bottom-color: white;
 }
 
 .header-text-inner {
