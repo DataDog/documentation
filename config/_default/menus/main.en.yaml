@@ -8185,11 +8185,16 @@ menu:
       parent: application_security
       identifier: application_security_overview
       weight: 4
+    - name: Threat Protection
+      url: security/application_security/threat_protection/
+      parent: application_security
+      identifier: application_security_threat_protection
+      weight: 5
     - name: Security Signals
       url: security/application_security/security_signals
-      parent: application_security
+      parent: application_security_threat_protection
       identifier: application_security_security_signals
-      weight: 5
+      weight: 1
     - name: Attackers Explorer
       url: security/application_security/security_signals/attacker-explorer/
       parent: application_security_security_signals
@@ -8212,9 +8217,9 @@ menu:
       weight: 4
     - name: Policies
       url: security/application_security/policies/
-      parent: application_security
+      parent: application_security_threat_protection
       identifier: application_security_policies
-      weight: 6
+      weight: 2
     - name: Custom Rules
       url: security/application_security/policies/custom_rules/
       parent: application_security_policies
@@ -8237,24 +8242,24 @@ menu:
       weight: 4
     - name: Exploit Prevention
       url: security/application_security/exploit-prevention/
-      parent: application_security
+      parent: application_security_threat_protection
       identifier: exploit_prevention
-      weight: 7
+      weight: 3
     - name: WAF Integrations
       url: security/application_security/waf-integration/
-      parent: application_security
+      parent: application_security_threat_protection
       identifier: aws_waf_int
-      weight: 8
+      weight: 4
     - name: Account Takeover Protection
       url: security/application_security/account_takeover_protection/
-      parent: application_security
+      parent: application_security_threat_protection
       identifier: security_ato_protection
-      weight: 9
+      weight: 5
     - name: API Posture
       url: security/application_security/api_posture/
       parent: application_security
       identifier: application_security_api_security
-      weight: 10
+      weight: 6
     - name: API Inventory
       url: security/application_security/api_posture/api_inventory/
       parent: application_security_api_security
@@ -8289,12 +8294,12 @@ menu:
       url: security/application_security/guide/
       parent: application_security
       identifier: appsec_guides
-      weight: 11
+      weight: 7
     - name: Troubleshooting
       url: security/application_security/troubleshooting/
       parent: application_security
       identifier: appsec_troubleshooting
-      weight: 12
+      weight: 8
     - name: AI Guard
       url: /security/ai_guard/
       pre: siem
