@@ -13,6 +13,9 @@ further_reading:
 - link: '/session_replay/browser/'
   tag: 'Documentation'
   text: 'Session Replay'
+- link: '/real_user_monitoring/guide/disable-rum/'
+  tag: 'Guide'
+  text: 'Disable RUM'
 ---
 
 ## Overview
