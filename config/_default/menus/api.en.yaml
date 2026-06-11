@@ -3734,6 +3734,18 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 28
+    - name: Test a notification rule
+      url: /api/latest/security-monitoring/test-a-notification-rule/
+      identifier: security-monitoring-test-a-notification-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SendSecurityMonitoringNotificationPreview
+        unstable: []
+        order: 131
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
