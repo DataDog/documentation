@@ -115,6 +115,36 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Create the column statistics function
+
+Create the following function **in every database** to enable the Agent to collect column-level table statistics from `pg_stats`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs FROM pg_catalog.pg_stats; $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+After the function exists, enable collection in your Postgres instance config:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+For tuning options, see [Advanced Configuration][14].
+
 ### Securely store your password
 {{% dbm-secret %}}
 
@@ -430,3 +460,4 @@ If you have installed and configured the integrations and Agent as described and
 [11]: /integrations/google_cloudsql
 [12]: /database_monitoring/troubleshooting/?tab=postgres
 [13]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L638-L662
+[14]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection

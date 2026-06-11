@@ -26,7 +26,7 @@ Session scope answers questions about agent performance and user behavior across
 
 The walkthrough below highlights the parts of the configuration that are specific to session scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span- or trace-scoped evaluations.
 
-1. Navigate to the LLM Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select {{< ui >}}Session{{< /ui >}}. (You can also start from a [template evaluation][2].)
+1. Navigate to the Agent Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select {{< ui >}}Session{{< /ui >}}. (You can also start from a [template evaluation][2].)
 1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
 
    {{< img src="llm_observability/evaluations/session_level_evaluation_scope.png" alt="The Evaluate On scope picker with Session selected." style="width:100%;" >}}
@@ -41,7 +41,7 @@ The walkthrough below highlights the parts of the configuration that are specifi
    {{traces}}                                              # JSON of every trace in the session
    {{traces[0].spans[0].meta.input.value}}                 # First span of the first trace
    {{traces[*].spans[*].name}}                             # All span names, joined with newlines
-   {{traces[meta.span.kind:llm].spans[*].meta.output.value}}  # LLM outputs across the session
+   {{traces[*].spans[meta.span.kind:llm].meta.output.value}}  # LLM outputs across the session
    {{*}}                                                   # Entire session payload as JSON
    ```
 
@@ -50,10 +50,6 @@ The walkthrough below highlights the parts of the configuration that are specifi
    {{< img src="llm_observability/evaluations/session_level_prompt_editor.png" alt="The User prompt editor for a session-level evaluation, with the autocomplete dropdown listing traces-prefixed fields after typing two open braces." style="width:100%;" >}}
 
 1. Pick a sample session from the panel on the right. The pane lists the traces in that session, with the fields referenced by your prompt highlighted.
-
-   {{< img src="llm_observability/evaluations/session_level_sample_session.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
-
-   Clicking on a session then lists the traces in that session, with the fields referenced by your prompt highlighted.
 
    {{< img src="llm_observability/evaluations/session_level_sample_session_trace_view.png" alt="The configuration page in session scope, with the sample session pane on the right showing traces and highlighted span fields." style="width:100%;" >}}
 
@@ -69,7 +65,7 @@ When the session completes, the evaluation runs once with every trace and every 
 
 ## View results
 
-After a session completes, its evaluation result is attached to the session and is available across LLM Observability in near-real-time. While the session is still within its 30-minute inactivity window, the result shows up as {{< ui >}}Pending{{< /ui >}} in the side panel; after the session completes, the pending row is replaced by the final result.
+After a session completes, its evaluation result is attached to the session and is available across Agent Observability in near-real-time. While the session is still within its 30-minute inactivity window, the result shows up as {{< ui >}}Pending{{< /ui >}} in the side panel; after the session completes, the pending row is replaced by the final result.
 
 Unfold the {{< ui >}}Session evaluations{{< /ui >}} on a session to see every evaluation that ran for it, alongside the LLM judge's reasoning when {{< ui >}}Enable Reasoning{{< /ui >}} was turned on at configuration time. The reasoning explains *why* the judge produced that value and references specific trace or span fields it relied on—use it to triage individual failures and decide whether to refine the prompt or accept the verdict.
 
@@ -120,8 +116,8 @@ Output one of: excellent, good, mixed, poor.
 **User**
 ```
 User and assistant messages across the session:
-{{traces[meta.span.kind:llm].meta.input.messages[*].content}}
-{{traces[meta.span.kind:llm].meta.output.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.input.messages[*].content}}
+{{traces[*].spans[meta.span.kind:llm].meta.output.messages[*].content}}
 ```
 
 ### User behavior and frustration signals
@@ -188,7 +184,7 @@ Use {{< ui >}}Span{{< /ui >}} scope when the evaluation can be answered from one
 
 ## Permissions
 
-Configuring evaluations requires the `LLM Observability Write` [permission][4].
+Configuring evaluations requires the `Agent Observability Write` [permission][4].
 
 ## Further Reading
 

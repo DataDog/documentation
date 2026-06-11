@@ -57,6 +57,19 @@ After you create the service account, continue to [Step 1](#step-1-prepare-the-g
 If you plan to use other Google Cloud observability functionality in Datadog, see [Datadog's Google Cloud Platform integration documentation][10] to determine which resources to enable.
 {% /alert %}
 
+## Allow Datadog IP addresses
+
+If your Google Cloud project uses [VPC Service Controls][22] to restrict access to BigQuery, add Datadog's outbound IP addresses to the access policy for your service perimeter. For standard BigQuery connections through a service account, this step is not required.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
 ## Step 1: Prepare the Google Cloud resources
 
 Datadog Experiments uses a BigQuery dataset for caching experiment results and a Cloud Storage bucket for staging experiment records.
@@ -147,10 +160,6 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
    1. Click {% ui %}Generate{% /ui %}.
    1. Note your {% ui %}Secret{% /ui %} and {% ui %}Client ID{% /ui %}.
    1. Click {% ui %}Done{% /ui %}.
-1. In the {% ui %}Settings{% /ui %} menu, click {% ui %}Identity and access{% /ui %}.
-1. On the {% ui %}Groups{% /ui %} row, click {% ui %}Manage{% /ui %}, then:
-   1. Click {% ui %}admins{% /ui %}, then {% ui %}Add members{% /ui %}.
-   1. Enter the service principal name and click {% ui %}Add{% /ui %}.
 
 After you create the service principal, continue to [Step 1](#step-1-grant-permissions-to-the-service-principal) to grant the required permissions.
 
@@ -159,6 +168,21 @@ After you create the service principal, continue to [Step 1](#step-1-grant-permi
 {% alert %}
 If you plan to use other warehouse observability functionality in Datadog, see [Datadog's Databricks integration documentation][13] to determine which resources to enable.
 {% /alert %}
+
+## Allow Datadog IP addresses
+
+If your Databricks workspace has [IP access lists][24] enabled, add Datadog's outbound IP addresses to the workspace allowlist so Datadog can connect.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
+After retrieving the IPs, add them to your workspace's IP access list. See [Databricks documentation on IP access lists][24] for instructions.
 
 ## Step 1: Grant permissions to the service principal
 
@@ -232,6 +256,10 @@ To connect your Databricks Workspace to Datadog for warehouse-native experiment 
 1. Toggle off the {% ui %}Metrics - Model Serving{% /ui %} resource.
 1. Click {% ui %}Save Databricks Workspace{% /ui %}.
 
+{% alert %}
+If you turn on other features in the {% ui %}Configure{% /ui %} tab, additional configuration steps may be required. See the documentation for those features to complete their setup.
+{% /alert %}
+
 {% /if %}
 <!-- end Databricks -->
 
@@ -273,6 +301,23 @@ You can follow your configuration's completion steps under {% ui %}Deployment St
 {% alert %}
 If you plan to use other warehouse observability functionality in Datadog, see [Datadog's Amazon Web Services integration documentation][17] to determine which resources to enable.
 {% /alert %}
+
+## Allow Datadog IP addresses
+
+Add Datadog's outbound IP addresses as inbound rules to the VPC security group associated with your Redshift cluster. This allows Datadog to connect to your cluster and run experiment queries.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
+### Update the Redshift security group
+
+Add each IP address as an inbound rule in the [VPC security group][25] associated with your Redshift cluster, allowing TCP traffic on port `5439` (or your cluster's configured port). See [Amazon's documentation on VPC security groups][25] for instructions.
 
 ## Step 1: Prepare the Redshift cluster
 
@@ -393,6 +438,21 @@ To set this up for Snowflake, connect a Snowflake service account to Datadog and
 - [Preparing a Snowflake service account](#step-1-prepare-the-snowflake-service-account)
 - [Connecting it to Datadog](#step-2-connect-snowflake-to-datadog)
 - [Configuring experiment settings](#step-3-configure-experiment-settings)
+
+## Allow Datadog IP addresses
+
+If your Snowflake account uses [network policies][23] to restrict connections by IP address, add Datadog's outbound IP addresses to a network policy and apply it to the Datadog Experiments service user.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
+After retrieving the IPs, see [Snowflake documentation on network policies][23] to create a policy that allows those addresses and apply it to the service user you create in [Step 1](#step-1-prepare-the-snowflake-service-account).
 
 ## Step 1: Prepare the Snowflake service account
 
@@ -616,3 +676,8 @@ After you save your warehouse connection, [create experiment metrics][1] using y
 [18]: https://docs.snowflake.com/en/user-guide/key-pair-auth
 [19]: https://docs.snowflake.com/en/user-guide/organizations-connect
 [20]: https://docs.datadoghq.com/integrations/snowflake-web/
+[21]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[22]: https://cloud.google.com/vpc-service-controls/docs/overview
+[23]: https://docs.snowflake.com/en/user-guide/network-policies
+[24]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
+[25]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
