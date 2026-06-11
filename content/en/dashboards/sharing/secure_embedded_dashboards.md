@@ -260,7 +260,7 @@ For dashboards that stay open for extended periods without user interaction, suc
 
 Embedded dashboards refresh themselves after extended periods of inactivity to keep their state current. Active user input resets this internal timer. Unattended displays must instead supply a fresh signed URL on a regular schedule.
 
-Regenerate the signed URL and update the iFrame `src` **every 10 minutes**.
+Regenerate the signed URL and update the iFrame `src` **every 30 minutes**.
 
 ```html
 <iframe id="dashboard" src=""></iframe>
@@ -274,7 +274,7 @@ Regenerate the signed URL and update the iFrame `src` **every 10 minutes**.
   }
 
   refreshEmbed();
-  setInterval(refreshEmbed, 10 * 60 * 1000);
+  setInterval(refreshEmbed, 30 * 60 * 1000);
 </script>
 ```
 
