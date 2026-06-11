@@ -28,7 +28,7 @@
       {{ end }}
     {{ end }}
 
-    {{ $versions := $menuEntry.Params.versions | default (slice) }}
+    {{ $versions := $menuEntry.Params.versions | default (slice) | sort | collections.Reverse }}
     {{ $operationids := $menuEntry.Params.operationids | default (slice) }}
 
     <!-- Load YAML specs using shared partial -->
