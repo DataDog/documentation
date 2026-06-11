@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Database Investigator is in Preview" >}}
-Database Investigator is in Preview for all customers monitoring Postgres or SQL Server with Database Monitoring.
+Database Investigator is in Preview for all customers monitoring Postgres or SQL Server with Database Monitoring. MySQL and Oracle Database support is in early access: open a MySQL or Oracle Database host within Database Monitoring and click <strong>Get early access</strong> to request it. Support for other databases covered by Database Monitoring is in development.
 {{< /callout >}}
 
 ## Overview
@@ -94,7 +94,7 @@ No. Database Investigator reads observability data and produces recommendations.
 
 ### Which databases are supported?
 
-Postgres and SQL Server are supported in Preview for all Database Monitoring customers.
+Postgres and SQL Server are supported in Preview for all Database Monitoring customers. MySQL and Oracle Database are supported in early access. Request access from inside Database Monitoring on a MySQL or Oracle Database host. Support for other databases covered by Database Monitoring is in development.
 
 ### Are there usage limits?
 
