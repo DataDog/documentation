@@ -305,8 +305,10 @@ logging.getLogger("dd_probe").warning(
 ## Rollback
 
 To disable:
-- **`logging_config_class` approach**: Unset `AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS` and restart the affected pods.
-- **`airflow_local_settings.py` or `sitecustomize.py` approach**: Remove the `import dd_airflow_log_context` line.
+- `logging_config_class` approach: 
+   Unset `AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS` and restart the affected pods.
+- `airflow_local_settings.py` or `sitecustomize.py` approach: 
+   Remove the `import dd_airflow_log_context` line.
 
 The Python file itself has no effect unless imported.
 
