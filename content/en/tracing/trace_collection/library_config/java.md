@@ -430,8 +430,7 @@ When set to `true`, stop extracting trace context when a valid one is found.
 `dd.propagate.context`
 : **Environment Variable**: `DD_PROPAGATE_CONTEXT`<br>
 **Default**: `false`<br>
-When `true`, distributed trace context (for example, `tracecontext` and `baggage` headers) is extracted and injected even when tracing is disabled (`dd.trace.enabled=false`). Spans are created to carry and propagate  context, but traces are not reported to Datadog. This lets a service participate in context propagation without sending trace data. Has no effect when tracing is enabled.
-
+When `true`, distributed trace context (for example, `tracecontext` and `baggage` headers) is extracted and injected even when tracing is disabled (`dd.trace.enabled=false`). Spans are created to carry and propagate context, but traces are not reported to Datadog. This lets a service participate in context propagation without sending trace data. Has no effect when tracing is enabled.
 
 ### JMX metrics
 
