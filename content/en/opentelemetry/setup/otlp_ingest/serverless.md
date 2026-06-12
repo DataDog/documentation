@@ -1,5 +1,6 @@
 ---
-title: Serverless Traces
+title: OTLP Intake for Serverless
+description: Send traces from AWS Lambda, ECS Fargate, Azure Functions, Cloud Run, and other serverless platforms directly to Datadog without a Datadog Agent or Collector.
 further_reading:
   - link: "/opentelemetry/setup/otlp_ingest/"
     tag: "Documentation"

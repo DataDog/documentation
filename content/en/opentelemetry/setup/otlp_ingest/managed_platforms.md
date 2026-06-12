@@ -1,5 +1,6 @@
 ---
-title: Managed Platforms
+title: OTLP Intake for Managed Platforms
+description: Send traces, metrics, and logs from managed platforms like Cloudflare, Vercel, and Heroku directly to Datadog through dedicated OTLP endpoints.
 aliases:
   - /opentelemetry/setup/agentless/managed_platforms
 further_reading:

@@ -797,12 +797,12 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
-    - name: Managed Platforms
+    - name: Managed Platforms Endpoint
       url: /opentelemetry/setup/otlp_ingest/managed_platforms
       parent: otel-setup-intake-endpoint
       weight: 40233
       identifier: otel_setup_managed_platforms
-    - name: Serverless Traces
+    - name: Serverless Endpoint
       url: /opentelemetry/setup/otlp_ingest/serverless
       parent: otel-setup-intake-endpoint
       weight: 40234
