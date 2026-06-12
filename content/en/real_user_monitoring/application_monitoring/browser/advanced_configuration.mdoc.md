@@ -887,11 +887,16 @@ window.DD_RUM && window.DD_RUM.clearUser()
 
 ### Track unauthenticated users
 
-If `setUser` is not called—for example, before a user logs in or for visitors who never authenticate—the RUM SDK automatically tracks activity using `usr.anonymous_id`.
+For unauthenticated visitors or users who have not yet logged in, the RUM SDK automatically tracks activity using `usr.anonymous_id`. This lets you analyze user behavior without requiring authentication.
 
-`usr.anonymous_id` is a randomly generated UUID (v4) that is not derived from any user PII, IP address, device fingerprint, or hardware identifier. It is stored in the Datadog session cookie (`_dd_s`) and persists for up to one year across sessions. The ID is scoped per browser and domain and does not track users across sites, devices, or browsers.
+`usr.anonymous_id` is a randomly generated UUID (v4). It is not derived from any user PII, IP address, device fingerprint, or hardware identifier.
 
-The `anonymous_id` is cleared if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears their cookies.
+The ID has the following properties:
+
+- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s`).
+- **Scope**: Per-browser and per-domain. Incognito mode, cookie clearing, or switching browsers or devices produces a new `anonymous_id`.
+
+The ID resets if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears cookies.
 
 **Note**: `usr.anonymous_id` is enabled by default. To disable it, set `trackAnonymousUser: false` in your `init` config.
 
