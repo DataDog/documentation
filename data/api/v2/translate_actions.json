@@ -1532,6 +1532,10 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ListSharedDashboardsByDashboardId": {
+    "description": "Retrieve shared dashboards associated with the specified dashboard.",
+    "summary": "List shared dashboards for a dashboard"
+  },
   "CreateDashboardSecureEmbed": {
     "description": "Create a secure embed share for a dashboard. The response includes a one-time `credential` used for HMAC-SHA256 signing. Store it securely — it cannot be retrieved again.",
     "summary": "Create a secure embed for a dashboard",
