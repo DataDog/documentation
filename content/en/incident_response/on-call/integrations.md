@@ -19,10 +19,10 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
 {{< card-grid card_width="200px" >}}
   {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack.png" alt="Slack" title="Slack" >}}
   {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus.png" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
-  {{< image-card href="/integrations/pingdom/" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
-  {{< image-card href="/integrations/sentry/#setup" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
+  {{< image-card href="/integrations/pingdom/#page-a-datadog-on-call-team" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
+  {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
   {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon_sns.png" alt="Amazon CloudWatch" title="Amazon CloudWatch" >}}
-  {{< image-card href="/integrations/azure-monitor-alerts/" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
+  {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
 {{< /card-grid >}}
 
 ## Further Reading
