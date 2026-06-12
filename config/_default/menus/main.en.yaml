@@ -1545,52 +1545,57 @@ menu:
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
-      weight: 100
+      weight: 101
     - name: Take Action
       url: bits_ai/bits_ai_sre/take_action
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
-      weight: 200
+      weight: 102
     - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 300
+      weight: 103
     - name: Knowledge Sources
       url: bits_ai/bits_ai_sre/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 400
+      weight: 104
     - name: Chat with Bits Investigation
       url: bits_ai/bits_ai_sre/chat_bits_ai_sre
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 500
+      weight: 105
+    - name: Bits Detection
+      url: bits_ai/bits_detection
+      identifier: bits_detection
+      parent: bits_ai
+      weight: 2
     - name: Bits Code
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 2
+      weight: 3
     - name: Setup
       url: bits_ai/bits_ai_dev_agent/setup
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
-      weight: 200
+      weight: 301
     - name: Automations
       url: bits_ai/bits_ai_dev_agent/automations
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
-      weight: 300
+      weight: 302
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 3
+      weight: 4
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
