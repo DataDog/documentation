@@ -18,6 +18,9 @@
       {{- end -}}<br>
     {{- end -}}
   {{- end -}}
+  {{/* Defensive fallback: registry-config-list filters empty descriptions upstream,
+     so this branch shouldn't trigger in practice. Kept in case the partial is
+     rendered standalone or the filter is bypassed. */}}
   {{- $desc := .description | default "" -}}
   {{- if or (eq $desc "null") (lt (len $desc) 5) -}}
     <em class="text-warning">No description provided.</em>

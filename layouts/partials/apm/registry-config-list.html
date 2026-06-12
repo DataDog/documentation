@@ -21,7 +21,15 @@
 
   {{/* TODO: Add version filtering here to exclude retired configs (those with a specific
      to_version like "v1.57.0"). Configs with to_version null or "latest" are current. */}}
-  {{- $currentConfigs := $configs -}}
+  {{/* Hide entries whose description is missing, "null", or too short to be useful.
+     Publishing incomplete entries would expose undocumented keys to docs.datadoghq.com. */}}
+  {{- $currentConfigs := slice -}}
+  {{- range $configs -}}
+    {{- $desc := .description | default "" -}}
+    {{- if and (ne $desc "") (ne $desc "null") (ge (len $desc) 5) -}}
+      {{- $currentConfigs = $currentConfigs | append . -}}
+    {{- end -}}
+  {{- end -}}
 
   <p class="registry-config-total"><strong>{{ len $currentConfigs }}</strong> configuration keys available for this library.</p>
 
