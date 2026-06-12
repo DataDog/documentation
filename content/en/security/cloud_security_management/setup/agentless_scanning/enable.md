@@ -363,10 +363,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "AWS" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
 1. If required, use filters to find the account you want to stop Agentless Scanning for. Click the account to open the side panel that contains its settings.
-1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-1. Under **How would you like to set up Agentless Scanning?**, click **Terraform**.
-1. Under **Enable Features**, beside **Enable Agentless Vulnerability management**, switch the toggle to the off position.
-1. Click **Done**.
+1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -374,10 +371,8 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 
 {{% tab "Azure" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
-1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
-1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" alt="Edit" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
-1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
-1. Click **Done**.
+2. Expand the tenant containing the subscription where you want to disable Agentless Scanning. Click the subscription to open the side panel that contains its settings.
+3. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -385,10 +380,8 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 
 {{% tab "GCP" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
-1. Expand the account containing the project where you want to disable Agentless Scanning.
-1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" alt="Edit" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
-1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
-1. Click **Done**.
+1. Expand the account containing the project where you want to disable Agentless Scanning. Click the project to open the side panel that contains its settings.
+3. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
