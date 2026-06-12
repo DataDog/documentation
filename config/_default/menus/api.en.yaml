@@ -2627,6 +2627,18 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: List global orgs
+      url: /api/latest/organizations/list-global-orgs/
+      identifier: organizations-list-global-orgs
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGlobalOrgs
+        unstable: []
+        order: 10
     - name: Upload IdP metadata
       url: /api/latest/organizations/upload-idp-metadata/
       identifier: organizations-upload-idp-metadata

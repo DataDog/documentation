@@ -1920,6 +1920,10 @@
     "request_description": "",
     "request_schema_description": "A request to upsert and publish a form version in a single transaction."
   },
+  "ListGlobalOrgs": {
+    "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
+    "summary": "List global orgs"
+  },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
     "summary": "Get HAMR organization connection"
