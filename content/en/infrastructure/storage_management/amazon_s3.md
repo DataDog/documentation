@@ -286,7 +286,25 @@ Follow these best practices to optimize Storage Management setup:
 If you don't see data for buckets you set up for Storage Management, use the [Storage Management Settings][9] page to view all configured buckets, their inventory status, and any configuration errors. The page surfaces issues with actionable remediation steps.
 If you have any questions, [contact Datadog][1].
 
+## Identify and act on cost savings with Bits Chat
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor" >}}
+Bits Chat for Storage Management is in Preview. To try this skill, request access.
+{{< /callout >}} 
+
+
+FinOps and engineering teams can use Bits Chat and Storage Management to identify S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. To use Bits Chat with Storage Management, enable the `storage` skill in the Bits Chat settings.
+
+With the `storage` skill enabled for Bits Chat, you can:
+
+- **Find the biggest savings opportunities**: Ask natural language questions to surface the highest-impact prefixes, storage classes, or buckets where lifecycle changes would reduce costs the most.
+- **Create reports through Notebooks**: Generate a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
+- **Implement changes**: Get step-by-step guidance with [Bits Code][10] to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
+
+
 ## Visualize granular S3 usage with inventory metrics
+
+An out-of-the-box [Storage Management S3 dashboard template][8] is available to help you visualize the below metrics. You can clone and customize it to fit your needs.
 
 | Metric Name                                            | Notable Tags                                                                                  | Description                                                                                                                                    |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -309,7 +327,6 @@ If you have any questions, [contact Datadog][1].
 
   **Note:** For the most accurate monitoring and visualization, include all object versions to see non-current object recommendations or metrics.
 
-An out-of-the-box [Storage Management S3 dashboard template][8] is available to help you visualize these metrics. You can clone and customize it to fit your needs.
 
 ## Act on optimizations with Storage Management Recommendations
 
@@ -330,21 +347,6 @@ Seeing recommendations has the following prerequisites:
 
   {{< img src="infrastructure/storage_management/storage-recs.png" alt="Storage Management Recommendations" responsive="true">}}
 
-## Identify and act on cost savings with Bits Chat
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor" >}}
-Bits Chat for Storage Management is in Preview. To try this skill, request access.
-{{< /callout >}} 
-
-
-FinOps and engineering teams can use Bits Chat and Storage Management to identify S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. To use Bits Chat with Storage Management, enable the `storage` skill in the Bits Chat settings.
-
-With the `storage` skill enabled for Bits Chat, you can:
-
-- **Find the biggest savings opportunities**: Ask natural language questions to surface the highest-impact prefixes, storage classes, or buckets where lifecycle changes would reduce costs the most.
-- **Create reports through Notebooks**: Generate a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
-- **Implement changes**: Get step-by-step guidance with [Bits Code][https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/] to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
-
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [3]: https://app.datadoghq.com/storage-management
@@ -352,3 +354,4 @@ With the `storage` skill enabled for Bits Chat, you can:
 [7]: /cloud_cost_management/
 [8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
 [9]: https://app.datadoghq.com/storage-management/settings
+[10]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/

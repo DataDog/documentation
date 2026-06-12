@@ -4705,6 +4705,18 @@ menu:
       url: /api/latest/slack-integration/
       identifier: slack-integration
       generated: true
+    - name: List Slack user bindings
+      url: /api/latest/slack-integration/list-slack-user-bindings/
+      identifier: slack-integration-list-slack-user-bindings
+      parent: slack-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSlackUserBindings
+        unstable: []
+        order: 1
     - name: Update a Slack integration channel
       url: /api/latest/slack-integration/update-a-slack-integration-channel/
       identifier: slack-integration-update-a-slack-integration-channel
@@ -10878,6 +10890,23 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Dashboard Sharing
+      url: /api/latest/dashboard-sharing/
+      identifier: dashboard-sharing
+      generated: true
+    - name: List shared dashboards for a dashboard
+      url: /api/latest/dashboard-sharing/list-shared-dashboards-for-a-dashboard/
+      identifier: dashboard-sharing-list-shared-dashboards-for-a-dashboard
+      parent: dashboard-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSharedDashboardsByDashboardId
+        unstable:
+          - v2
+        order: 5
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
@@ -11978,6 +12007,66 @@ menu:
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration
       generated: true
+    - name: Update a target audience
+      url: /api/latest/google-chat-integration/update-a-target-audience/
+      identifier: google-chat-integration-update-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGoogleChatTargetAudience
+        unstable: []
+        order: 15
+    - name: Get a target audience
+      url: /api/latest/google-chat-integration/get-a-target-audience/
+      identifier: google-chat-integration-get-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGoogleChatTargetAudience
+        unstable: []
+        order: 14
+    - name: Delete a target audience
+      url: /api/latest/google-chat-integration/delete-a-target-audience/
+      identifier: google-chat-integration-delete-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGoogleChatTargetAudience
+        unstable: []
+        order: 16
+    - name: Create a target audience
+      url: /api/latest/google-chat-integration/create-a-target-audience/
+      identifier: google-chat-integration-create-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGoogleChatTargetAudience
+        unstable: []
+        order: 13
+    - name: Get all target audiences
+      url: /api/latest/google-chat-integration/get-all-target-audiences/
+      identifier: google-chat-integration-get-all-target-audiences
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGoogleChatTargetAudiences
+        unstable: []
+        order: 12
     - name: Update organization handle
       url: /api/latest/google-chat-integration/update-organization-handle/
       identifier: google-chat-integration-update-organization-handle
@@ -12038,6 +12127,54 @@ menu:
           - ListOrganizationHandles
         unstable: []
         order: 1
+    - name: Get the delegated user
+      url: /api/latest/google-chat-integration/get-the-delegated-user/
+      identifier: google-chat-integration-get-the-delegated-user
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGoogleChatDelegatedUser
+        unstable: []
+        order: 10
+    - name: Delete the delegated user
+      url: /api/latest/google-chat-integration/delete-the-delegated-user/
+      identifier: google-chat-integration-delete-the-delegated-user
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGoogleChatDelegatedUser
+        unstable: []
+        order: 11
+    - name: Get a Google Chat organization binding
+      url: /api/latest/google-chat-integration/get-a-google-chat-organization-binding/
+      identifier: google-chat-integration-get-a-google-chat-organization-binding
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGoogleChatOrganization
+        unstable: []
+        order: 8
+    - name: Delete a Google Chat organization binding
+      url: /api/latest/google-chat-integration/delete-a-google-chat-organization-binding/
+      identifier: google-chat-integration-delete-a-google-chat-organization-binding
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGoogleChatOrganization
+        unstable: []
+        order: 9
     - name: Get space information by display name
       url: /api/latest/google-chat-integration/get-space-information-by-display-name/
       identifier: google-chat-integration-get-space-information-by-display-name
@@ -12050,6 +12187,18 @@ menu:
           - GetSpaceByDisplayName
         unstable: []
         order: 6
+    - name: Get all Google Chat organization bindings
+      url: /api/latest/google-chat-integration/get-all-google-chat-organization-bindings/
+      identifier: google-chat-integration-get-all-google-chat-organization-bindings
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGoogleChatOrganizations
+        unstable: []
+        order: 7
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
@@ -14173,6 +14322,18 @@ menu:
           - ListWorkflowsWebhookHandles
         unstable: []
         order: 7
+    - name: Delete user binding
+      url: /api/latest/microsoft-teams-integration/delete-user-binding/
+      identifier: microsoft-teams-integration-delete-user-binding
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMSTeamsUserBinding
+        unstable: []
+        order: 12
     - name: Update tenant-based handle
       url: /api/latest/microsoft-teams-integration/update-tenant-based-handle/
       identifier: microsoft-teams-integration-update-tenant-based-handle

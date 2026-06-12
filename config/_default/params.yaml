@@ -280,6 +280,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
   actions: [gov,gov2]
