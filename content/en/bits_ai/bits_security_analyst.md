@@ -94,6 +94,12 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
            <li>Under {{< ui >}}Token Auth{{< /ui >}}, enter a name for your token in the {{< ui >}}Token Name{{< /ui >}} field, and your API token in the {{< ui >}}Token Value{{< /ui >}} field.</li>
          </ul>
        </li>
+       <li>Still under {{< ui >}}Token Auth{{< /ui >}}, select the {{< ui >}}Headers{{< /ui >}} tab. Under {{< ui >}}Request Headers{{< /ui >}}, add the following headers:
+         <ul>
+           <li>In the {{< ui >}}Authorization{{< /ui >}} header, enter <code>Bearer</code> followed by a space, then insert your {{< ui >}}Token Value{{< /ui >}}.</li>
+           <li>Add a {{< ui >}}Content-Type{{< /ui >}} header with the value <code>application/json</code>.</li>
+         </ul>
+       </li>
        <li>Click {{< ui >}}Next, Confirm Access{{< /ui >}} to verify your connection.</li>
      </ol>
      {{< /collapse-content >}}
