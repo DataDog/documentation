@@ -14,7 +14,7 @@ Use the following instructions to enable Misconfigurations and Identity Risks (C
 
 ## Enable Posture Management
 
-To enable posture management for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastucture account.
+To enable Posture Management for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastructure account.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -65,7 +65,7 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 1. Expand the **Azure** section.
 1. To enable Posture Management for a subscription, switch the **Posture Management** toggle to the on position.
-1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the subscription you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][5].
+1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the subscription you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
 
 [1]: /integrations/azure
 [2]: /integrations/guide/azure-graph-api-permissions/
@@ -97,7 +97,7 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
 1. On the [**Cloud Security Setup**][2] page, click **Cloud Integrations**.
 1. Expand the **GCP** section.
 1. To enable Posture Management for a project, switch the **Posture Management** toggle to the on position.
-1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the project you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][5].
+1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the project you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
 
 [1]: /integrations/google_cloud_platform
 [2]: https://app.datadoghq.com/security/configuration/csm/setup
