@@ -893,12 +893,12 @@ For unauthenticated visitors or users who have not yet logged in, the RUM SDK au
 
 The ID has the following properties:
 
-- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s`).
+- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s_v2`).
 - **Scope**: Per-browser and per-domain. Incognito mode, cookie clearing, or switching browsers or devices produces a new `anonymous_id`.
 
 The ID resets if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears cookies.
 
-**Note**: `usr.anonymous_id` is enabled by default. To disable it, set `trackAnonymousUser: false` in your `init` config.
+**Note**: `usr.anonymous_id` is enabled by default. To disable it, set [`trackAnonymousUser: false`](https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackanonymoususer) in your `init` config.
 
 ## Account
 
