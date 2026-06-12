@@ -35,8 +35,8 @@ See also: [Instrumenting for Agent Observability][5].
 
 [1]: /opentelemetry/otlp_ingest_in_the_agent/
 [2]: /opentelemetry/setup/collector_exporter/
-[3]: /opentelemetry/setup/intake_endpoint/otlp_logs
-[4]: /opentelemetry/setup/intake_endpoint/otlp_metrics
+[3]: /opentelemetry/setup/otlp_ingest/logs/
+[4]: /opentelemetry/setup/otlp_ingest/metrics/
 [5]: /llm_observability/instrumentation/otel_instrumentation/?tab=python#setup
 [6]: /opentelemetry/setup/otlp_ingest/managed_platforms/
 [7]: /opentelemetry/setup/otlp_ingest/serverless/

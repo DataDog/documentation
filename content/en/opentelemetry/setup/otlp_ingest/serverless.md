@@ -16,9 +16,9 @@ The serverless OTLP traces intake endpoint is in Preview.
 
 ## Overview
 
-Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead; this page covers traces from platforms without a dedicated endpoint.
+Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead.
 
-Serverless workloads can also send logs and metrics through the general [OTLP logs][3] and [OTLP metrics][4] intake endpoints. The resource attributes configured on this page apply to all signals your application exports.
+Serverless workloads can also send logs and metrics through the general [OTLP logs][3] and [OTLP metrics][4] intake endpoints. The resource attributes on this page apply to all signals your application exports.
 
 Supported platforms:
 
@@ -43,7 +43,7 @@ To enable [trace metrics][2], add `compute_stats=true` to your headers.
 
 **Service name**: Set `OTEL_SERVICE_NAME` to identify your service. Without it, traces appear as `unknown_service`.
 
-**Resource attributes**: Resource attributes are set at the SDK level with `OTEL_RESOURCE_ATTRIBUTES` and apply to all signals your application exports, not only traces.
+**Resource attributes**: Set platform-specific attributes with `OTEL_RESOURCE_ATTRIBUTES`. See each cloud provider tab below for required and optional attributes.
 
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"

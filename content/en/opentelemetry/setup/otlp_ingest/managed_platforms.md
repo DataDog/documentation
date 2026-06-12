@@ -47,7 +47,7 @@ export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="https://{platform}.integrations.otlp.
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},compute_stats=true"
 ```
 
-<div class="alert alert-info">Managed platform endpoints do not use the <code>dd-otlp-source</code> header. If you previously configured this header on the generic OTLP endpoint, remove it. Managed platform endpoints silently drop it.</div>
+<div class="alert alert-info">Managed platform endpoints do not use the <code>dd-otlp-source</code> header. If you migrate from the generic OTLP endpoint, remove this header from your configuration.</div>
 
 ## Supported platforms
 
