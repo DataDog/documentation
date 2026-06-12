@@ -326,7 +326,7 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 {{% site-region region="ap2" %}}
 ## VPC Endpoint Service IDs
 
-AP2 uses a two-level DNS architecture for PrivateLink. Every customer-facing DNS record CNAMEs to a dedicated `color.intake.ap2.datadoghq.com` VPC endpoint address. Setting up a VPC endpoint for a given anchor address covers all customer-facing records that CNAME to it.
+AP2 uses a two-level DNS architecture for PrivateLink. Every customer-facing DNS record maps to a dedicated `color.intake.ap2.datadoghq.com` VPC endpoint address. Setting up a VPC endpoint for a given anchor address covers all customer-facing records that map to it.
 
 Use the following table to identify which VPC endpoints to set up for the Datadog features you use, then follow the steps below. More specific DNS records take precedence over wildcards—for example, `trace.agent.ap2.datadoghq.com` resolves to `lime.intake.ap2.datadoghq.com` even though `*.agent.ap2.datadoghq.com` points to `beige.intake.ap2.datadoghq.com`.
 
