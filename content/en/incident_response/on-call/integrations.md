@@ -18,6 +18,7 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
 
 {{< card-grid card_width="200px" >}}
   {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack.png" alt="Slack" title="Slack" >}}
+  {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" src="integrations_logos/microsoft_teams.png" alt="Microsoft Teams" title="Microsoft Teams" >}}
   {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus.png" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
   {{< image-card href="/integrations/pingdom/#page-a-datadog-on-call-team" src="integrations_logos/pingdom.png" alt="Pingdom" title="Pingdom" >}}
   {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
