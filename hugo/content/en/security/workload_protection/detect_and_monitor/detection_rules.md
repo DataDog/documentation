@@ -63,7 +63,7 @@ Datadog solves this problem by keeping the Agent lightweight with only a few rul
 
 Only when the Agent observes an event that matches its rules does it send a detection to the Datadog backend. The Datadog backend then evaluates the detection to determine if it meets its threat detection rule expressions. Only if there is a match does the Datadog backend create a signal.
 
-### Custom rule design
+### Custom rule design {#custom-rule-design}
 
 Understanding the dependency threat detection rules have on Agent rules is important when you want to use custom rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
@@ -72,7 +72,16 @@ There are two use cases:
 - **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
 - **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
-For a detailed explanation, see [Workload Protection Detection Rules][11].
+When you want to create both components in one workflow, continue to [Create the custom Agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
+
+### Create the custom Agent and detection rules together {#create-the-custom-agent-and-detection-rules-together}
+
+For how default Agent rules are packaged in policies and deployed in the app, see the [Agent rules](/security/workload_protection/detect_and_monitor/agent_rules/#ootb-rules) overview and [Policy management][21].
+
+You can define a matching Agent rule and threat detection rule in one of these ways:
+
+- **Assisted rule creator:** In the Datadog app, start a custom Workload Protection [detection rule][3] and use the wizard to configure both the Agent expression and the backend threat detection logic.
+- **Manual rule creator:** From [Agent Configuration][9], open or create a policy and choose **Manual rule creator** to author the Agent rule first, then add a threat detection rule that references it. For UI steps and deployment, see [Policy management][21].
 
 ## Agent rules summary
 
@@ -121,5 +130,5 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 [8]: /security/workload_protection/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: /security/workload_protection/workload_security_rules/custom_rules
+[21]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management#create-a-custom-agent-rule
 [12]: /security/workload_protection/guide/active-protection
