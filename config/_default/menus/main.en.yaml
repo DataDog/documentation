@@ -2794,11 +2794,16 @@ menu:
       parent: oncall
       identifier: oncall_profile_settings
       weight: 7
+    - name: Integrations
+      url: incident_response/on-call/integrations/
+      parent: oncall
+      identifier: oncall_integrations
+      weight: 8
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 8
+      weight: 9
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
