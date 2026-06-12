@@ -45,7 +45,9 @@ If your forwarders are globally configured to enable SSL, you need the appropria
 
 Set up this source when you [set up a pipeline][6]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the OpenTelemetry source in the pipeline UI:
 
@@ -55,6 +57,8 @@ After you select the OpenTelemetry source in the pipeline UI:
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
 
 {{< img src="observability_pipelines/sources/otel_settings.png" alt="The OpenTelemetry source settings" style="width:35%;" >}}
 

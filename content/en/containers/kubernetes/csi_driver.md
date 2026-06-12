@@ -64,7 +64,124 @@ To install and activate the Datadog CSI Driver, set `datadog.csi.enabled` to `tr
 
 {{% tab "Datadog Operator" %}}
 
-If the Datadog Agent is deployed using the Datadog Operator, you must install the Datadog CSI Driver Helm chart before you activate Datadog CSI in the Datadog Agent.
+<div class="alert alert-info">
+Operator-managed CSI Driver installation requires Datadog Operator <strong>v1.26.0</strong> or later. If you are using an earlier version, see <a href="#legacy-helm-based-installation">Legacy Helm-based installation</a>.
+</div>
+
+Starting with Datadog Operator v1.26.0, the Operator can install and manage the CSI Driver automatically. Set `csi.enabled` to `true` in your `DatadogAgent` resource, and the Operator automatically creates a `DatadogCSIDriver` custom resource to deploy the driver:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    csi:
+      enabled: true
+```
+
+By default, `csi.autoManage` is `true`, which means the Operator owns the life cycle of the `DatadogCSIDriver` resource. To customize scheduling, add the following `DatadogAgent` spec:
+
+```yaml
+    csi:
+      enabled: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+```
+
+{{% collapse-content title="Advanced setup with DatadogCSIDriver CR" level="h4" %}}
+
+If you need configuration options not exposed through the `DatadogAgent` spec (for example, custom images, container resource limits, update strategies, or per-container environment variables), you can manage the `DatadogCSIDriver` custom resource directly:
+
+1. **Disable automatic management** by setting `csi.autoManage` to `false` in your `DatadogAgent` resource:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       csi:
+         enabled: true
+         autoManage: false
+   ```
+
+2. **Create your own `DatadogCSIDriver` resource** with the desired customizations:
+
+   ```yaml
+   apiVersion: datadoghq.com/v1alpha1
+   kind: DatadogCSIDriver
+   metadata:
+     name: datadog-agent
+   spec:
+     csiDriverImage:
+       tag: "1.1.0"
+     registrarImage:
+       tag: v2.0.0
+     apmSocketPath: /var/run/datadog/apm.socket
+     dsdSocketPath: /var/run/datadog/dsd.socket
+     override:
+       labels:
+         team: platform
+       annotations:
+         custom.example.com/env: production
+       tolerations:
+         - key: node-role.kubernetes.io/control-plane
+           effect: NoSchedule
+       nodeSelector:
+         kubernetes.io/os: linux
+       priorityClassName: system-node-critical
+       updateStrategy:
+         type: RollingUpdate
+         rollingUpdate:
+           maxUnavailable: "5%"
+       containers:
+         csi-node-driver:
+           env:
+             - name: DD_APM_ENABLED
+               value: "false"
+           resources:
+             requests:
+               cpu: 100m
+               memory: 128Mi
+             limits:
+               cpu: 200m
+               memory: 256Mi
+         csi-node-driver-registrar:
+           resources:
+             requests:
+               cpu: 50m
+               memory: 64Mi
+             limits:
+               cpu: 100m
+               memory: 128Mi
+   ```
+
+   See the full [DatadogCSIDriver CRD reference](https://github.com/DataDog/datadog-operator/blob/main/bundle/manifests/datadoghq.com_datadogcsidrivers.yaml) for all available fields.
+
+{{% /collapse-content %}}
+
+<div class="alert alert-warning">
+<strong>Migrating from Helm-based CSI Driver installation</strong>
+<p>If you previously installed the CSI Driver with the standalone Helm chart, Datadog recommends migrating to Operator-managed installation. Choose one of the following approaches:</p>
+<ul>
+<li><strong>Let the Operator manage the CSI Driver</strong>: Uninstall the Helm chart (<code>helm uninstall datadog-csi-driver</code>) and keep the default values for <code>csi.enabled</code> and <code>csi.autoManage</code>. The Operator automatically creates a new <code>DatadogCSIDriver</code> resource and deploys the driver.</li>
+<li><strong>Keep managing the CSI Driver with Helm</strong>: No action is required. The Operator detects the existing <code>k8s.csi.datadoghq.com</code> CSIDriver and defers to it, regardless of the <code>csi.autoManage</code> value. The Operator does not interfere with your existing Helm-managed driver. To make this intent explicit, set <code>csi.autoManage: false</code>.</li>
+</ul>
+</div>
+
+{{% collapse-content title="Legacy Helm-based installation (Operator < v1.26.0)" level="h4" id="legacy-helm-based-installation" %}}
+
+If the Datadog Agent is deployed using a Datadog Operator version earlier than v1.26.0, you must install the Datadog CSI Driver Helm chart separately before you activate Datadog CSI in the Datadog Agent.
 
 1. **Add the Datadog CSI Helm repository.**
 
@@ -72,7 +189,6 @@ If the Datadog Agent is deployed using the Datadog Operator, you must install th
    ```shell
    helm repo add datadog-csi-driver https://helm.datadoghq.com
    helm repo update
-
    ```
 
 2. **Install the Datadog CSI Driver Helm chart.**
@@ -85,7 +201,7 @@ If the Datadog Agent is deployed using the Datadog Operator, you must install th
 
 3. **Activate Datadog CSI in your `DatadogAgent` resource.**
 
-   ```
+   ```yaml
    apiVersion: datadoghq.com/v2alpha1
    kind: DatadogAgent
    metadata:
@@ -99,6 +215,8 @@ If the Datadog Agent is deployed using the Datadog Operator, you must install th
        csi:
          enabled: true
    ```
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 

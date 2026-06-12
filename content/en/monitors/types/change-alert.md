@@ -91,6 +91,8 @@ This is a break down of the query with the following conditions:
     - To compare your notebook graph to the change alert monitor evaluation, scope your timeframe to match the change alert. 
     - For example, if you are looking to verify the value of a monitor evaluation over the last five minutes at 1:30, scope your notebook to 1:25 - 1:30. 
 
+**Note**: If your metric is a gauge and `pct_change()` is producing unexpectedly large negative values, add `as_count()` to the query. See [as_count() in Monitor Evaluations][4] for details.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +103,4 @@ This is a break down of the query with the following conditions:
 [7]: /monitors/notify/
 [8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
 [9]: https://app.datadoghq.com/monitors/create/metric/change
+[4]: /monitors/guide/as-count-in-monitor-evaluations/

@@ -86,13 +86,15 @@ Dynamic routing is only available when **Trigger immediately for each individual
 
 ### How routing works
 
-When a finding triggers a notification, the system checks all of the following conditions. If all conditions are met, the notification is delivered to the team's configured notification channel. If any condition is not met, the notification is sent to the fallback channel you configured.
+When a finding triggers a notification, the system checks all of the following conditions. If all conditions are met, the notification is delivered to the team's Slack or Microsoft Teams channel. If any condition is not met, the notification is sent to the fallback channel you configured.
 
-| Condition                             | Description                                                                       |
-| ------------------------------------- | --------------------------------------------------------------------------------- |
-| **Team configured**                   | The team referenced by the finding's `team` tag must exist in [Datadog Teams][3]. |
-| **Team notification channel defined** | A [notification channel][4] must be configured for the team in Datadog Teams.     |
-| **Team tag on finding**               | The security finding must have exactly one `team` tag attached.                   |
+| Condition                                         | Description                                                                                                              |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Team configured**                               | The team referenced by the finding's `team` tag must exist in [Datadog Teams][3].                                        |
+| **Team Slack or Microsoft Teams channel defined** | A Slack or Microsoft Teams [notification channel][4] must be configured for the team in Datadog Teams. Other notification targets are not used for dynamic routing. |
+| **Team tag on finding**                           | The security finding must have exactly one `team` tag attached.                                                          |
+
+If a team has both a Slack or Microsoft Teams channel and other notification targets configured, the notification is delivered only to the Slack or Microsoft Teams channel.
 
 ### Fallback channel
 
@@ -100,7 +102,7 @@ When you enable dynamic routing, you must specify a fallback channel. The fallba
 
 - The finding has no `team` tag or more than one `team` tag.
 - The team does not exist in Datadog Teams.
-- The team has no notification channel configured.
+- The team has no Slack or Microsoft Teams notification channel configured.
 
 The fallback channel is also used for test notifications.
 

@@ -1,6 +1,6 @@
 ---
-title: Automatic Instrumentation for LLM Observability
-description: Enable automatic tracing for LLM frameworks and libraries in your Python or Node.js application using Datadog LLM Observability integrations.
+title: Automatic Instrumentation for Agent Observability
+description: Enable automatic tracing for LLM frameworks and libraries in your Python or Node.js application using Agent Observability integrations.
 aliases:
     - /tracing/llm_observability/auto_instrumentation
     - /llm_observability/auto_instrumentation
@@ -9,7 +9,7 @@ aliases:
 further_reading:
     - link: '/llm_observability/instrumentation/sdk/'
       tag: 'Documentation'
-      text: 'LLM Observability SDK Reference'
+      text: 'Agent Observability SDK Reference'
     - link: https://www.datadoghq.com/blog/llm-prompt-tracking
       tag: Blog
       text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
@@ -20,9 +20,9 @@ further_reading:
 
 ## Overview
 
-Datadog's LLM Observability can automatically trace and annotate calls to supported LLM frameworks and libraries through various [LLM integrations](#llm-integrations). When you [run your LLM application with the LLM Observability SDK][2], these LLM integrations are enabled by default and provide out-of-the-box traces and observability, without you having to change your code.
+Agent Observability can automatically trace and annotate calls to supported LLM frameworks and libraries through various [LLM integrations](#llm-integrations). When you [run your LLM application with the Agent Observability SDK][2], these LLM integrations are enabled by default and provide out-of-the-box traces and observability, without you having to change your code.
 
-<div class="alert alert-info">Automatic instrumentation works for calls to <a href="#supported-frameworks-and-libraries">supported frameworks and libraries</a>. To trace other calls (for example: API calls, database queries, internal functions), see the <a href="/llm_observability/instrumentation/sdk">LLM Observability SDK reference</a> for how to add manual instrumentation.</div>
+<div class="alert alert-info">Automatic instrumentation works for calls to <a href="#supported-frameworks-and-libraries">supported frameworks and libraries</a>. To trace other calls (for example: API calls, database queries, internal functions), see the <a href="/llm_observability/instrumentation/sdk">Agent Observability SDK reference</a> for how to add manual instrumentation.</div>
 
 
 ### Supported frameworks and libraries
@@ -80,7 +80,7 @@ NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support for bundled applications (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
-To use LLM Observability integrations in bundled applications (esbuild, Webpack), you must exclude these integrations' modules from bundling.
+To use Agent Observability integrations in bundled applications (esbuild, Webpack), you must exclude these integrations' modules from bundling.
 
 ##### esbuild
 If you are using esbuild, see [Bundling with the Node.js tracer](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
@@ -104,45 +104,9 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support for Next.js" level="h4" expanded=false id="nextjs-support" %}}
-Properly initialize the SDK in your application to ensure auto-instrumentation works correctly. If using TypeScript or ESM for your Next.js application, initialize the SDK in a `instrumentation.{ts/js}` file as follows, specifying your configuration options as environment variables:
+See [Instrument a Next.js Application for Agent Observability][1] for properly setting up Agent Observability in your Next.js app.
 
-```typescript
-// instrumentation.ts
-export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const initializeImportName = 'dd-trace/initialize.mjs';
-    await import(/* webpackIgnore: true */ initializeImportName as 'dd-trace/initialize.mjs')
-  }
-
-  // ...
-}
-```
-
-Otherwise, for CommonJS Next.js applications, you can use the `init` function directly:
-
-```javascript
-// instrumentation.js
-const tracer = require('dd-trace')
-
-function register () {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    tracer.init({}); // specify options here or they will be read from environment variables
-  }
-
-  // ...
-}
-
-module.exports = register;
-```
-
-
-Then, make sure to specify `dd-trace` and any other supported integration package names in `serverExternalPackages` in your `next.config.{ts/js}` file:
-```javascript
-// next.config.ts
-module.exports = {
-  serverExternalPackages: ['dd-trace', '<INTEGRATION_PACKAGE_NAME>'], // add any other supported integration package names here to be auto-instrumented
-}
-```
+[1]: /llm_observability/guide/nextjs_guide
 {{% /collapse-content %}}
 
 {{% /tab %}}
@@ -154,7 +118,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Datadog LLM Observability also supports any framework that natively emits <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI semantic convention v1.37+</a>-compliant spans, without requiring the Datadog SDK. See <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry Instrumentation</a> for setup details and <a href="/llm_observability/instrumentation/otel_instrumentation#tested-frameworks-and-libraries">tested frameworks</a>.</div>
+<div class="alert alert-info">Agent Observability also supports any framework that natively emits <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI semantic convention v1.37+</a>-compliant spans, without requiring the Datadog SDK. See <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry Instrumentation</a> for setup details and <a href="/llm_observability/instrumentation/otel_instrumentation#tested-frameworks-and-libraries">tested frameworks</a>.</div>
 
 ## LLM integrations
 
@@ -695,7 +659,7 @@ The provider (OpenAI vs Azure OpenAI) is automatically detected based on the `ba
 {{< tabs >}}
 {{% tab "Python" %}}
 The OpenAI Agents integration converts the [built-in tracing][1] from the [OpenAI Agents SDK][2] into
-LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
+Agent Observability format and sends it to Agent Observability product by adding a Datadog trace processor.
 
 **Package name:** `openai-agents`
 **Integration name:** `openai_agents`
@@ -749,7 +713,7 @@ The Pydantic AI integration instruments the following methods:
 {{% collapse-content title="Strands Agents" level="h3" expanded=false id="strands-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-Starting from [v1.11.0][1], [Strands Agents][2] natively emits spans compliant with [OpenTelemetry GenAI semantic conventions v1.37][3], which Datadog LLM Observability automatically ingests without requiring the Datadog SDK.
+Starting from [v1.11.0][1], [Strands Agents][2] natively emits spans compliant with [OpenTelemetry GenAI semantic conventions v1.37][3], which Agent Observability automatically ingests without requiring the Datadog SDK.
 
 For setup instructions and a complete example, see [OpenTelemetry Instrumentation — Using Strands Agents][4].
 
@@ -764,7 +728,7 @@ For setup instructions and a complete example, see [OpenTelemetry Instrumentatio
 {{% collapse-content title="Vercel AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
 {{< tabs >}}
 {{% tab "Node.js" %}}
-The [Vercel AI SDK][1] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core [Vercel AI SDK][2] and converting them into Datadog LLM Observability spans.
+The [Vercel AI SDK][1] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core [Vercel AI SDK][2] and converting them into Agent Observability spans.
 
 **Package name:** `ai`
 **Integration name:** `ai`
@@ -784,7 +748,7 @@ The [Vercel AI SDK][1] integration automatically traces text and object generati
 
 ### Vercel AI Core SDK telemetry
 
-This integration automatically patches the tracer passed into each of the traced methods under the [`experimental_telemetry` option][7]. If no `experimental_telemetry` configuration is passed in, the integration enables it to still send LLM Observability spans.
+This integration automatically patches the tracer passed into each of the traced methods under the [`experimental_telemetry` option][7]. If no `experimental_telemetry` configuration is passed in, the integration enables it to still send Agent Observability spans.
 
 ```javascript
 require('dd-trace').init({
@@ -802,18 +766,18 @@ async function main () {
     ...
     experimental_telemetry: {
       isEnabled: true,
-      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Agent Observability
     }
   });
 
   result = await generateText({
     model: openai('gpt-4o'),
     ...
-  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
+  }); // since no tracer is passed in, the integration will enable it to still send Agent Observability spans
 }
 ```
 
-**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to LLM Observability.
+**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to Agent Observability.
 
 [1]: /integrations/vercel-ai-sdk
 [2]: https://ai-sdk.dev/docs/introduction
