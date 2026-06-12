@@ -96,7 +96,7 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
        </li>
        <li>Still under {{< ui >}}Token Auth{{< /ui >}}, select the {{< ui >}}Headers{{< /ui >}} tab. Under {{< ui >}}Request Headers{{< /ui >}}, click {{< ui >}}Add a Header{{< /ui >}} and add the following two headers, entering each header's name in the {{< ui >}}Name{{< /ui >}} field and its value in the {{< ui >}}Value{{< /ui >}} field:
          <ul>
-           <li>Name: <code>Authorization</code>. Value: <code>Bearer</code> followed by a space, then insert your {{< ui >}}Token Value{{< /ui >}}.</li>
+           <li>Name: <code>Authorization</code>. Value: <code>Bearer</code> followed by a space, then insert the {{< ui >}}Token Name{{< /ui >}} you defined.</li>
            <li>Name: <code>Content-Type</code>. Value: <code>application/json</code>.</li>
          </ul>
        </li>
