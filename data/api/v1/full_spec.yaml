@@ -13284,13 +13284,16 @@ components:
       type: object
     SLOCorrectionCreateRequest:
       description: |-
-        An object that defines a correction to be applied to an SLO.
+        An object that defines a correction to be applied to one or more SLOs.
       properties:
         data:
           $ref: "#/components/schemas/SLOCorrectionCreateData"
       type: object
     SLOCorrectionCreateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be created.
+      description: |-
+        The attribute object associated with the SLO correction to be created.
+
+        Exactly one of `slo_id` or `slo_query` must be provided.
       properties:
         category:
           $ref: "#/components/schemas/SLOCorrectionCategory"
@@ -13314,8 +13317,15 @@ components:
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
-          description: ID of the SLO that this correction applies to.
+          description: ID of the single SLO that this correction applies to.
           example: sloId
+          type: string
+        slo_query:
+          description: |-
+            Query that matches the SLOs this correction applies to.
+            The query uses the [Events search syntax](https://docs.datadoghq.com/events/explorer/searching/)
+            and can filter SLOs by SLO tags.
+          example: "env:prod service:checkout"
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -13327,7 +13337,6 @@ components:
           example: UTC
           type: string
       required:
-        - slo_id
         - start
         - category
       type: object
@@ -13391,7 +13400,12 @@ components:
           nullable: true
           type: string
         slo_id:
-          description: ID of the SLO that this correction applies to.
+          description: ID of the single SLO that this correction applies to.
+          nullable: true
+          type: string
+        slo_query:
+          description: Query that matches the SLOs this correction applies to.
+          nullable: true
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -13462,6 +13476,13 @@ components:
             The recurrence rules as defined in the iCalendar RFC 5545. The supported rules for SLO corrections
             are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
+          type: string
+        slo_query:
+          description: |-
+            Query that matches the SLOs this correction applies to.
+            The query uses the [Events search syntax](https://docs.datadoghq.com/events/explorer/searching/)
+            and can filter SLOs by SLO tags.
+          example: "env:prod service:checkout"
           type: string
         start:
           description: Starting time of the correction in epoch seconds.
@@ -17495,6 +17516,7 @@ components:
         - $ref: "#/components/schemas/SyntheticsBasicAuthDigest"
         - $ref: "#/components/schemas/SyntheticsBasicAuthOauthClient"
         - $ref: "#/components/schemas/SyntheticsBasicAuthOauthROP"
+        - $ref: "#/components/schemas/SyntheticsBasicAuthJWT"
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
       properties:
@@ -17522,6 +17544,78 @@ components:
       type: string
       x-enum-varnames:
         - DIGEST
+    SyntheticsBasicAuthJWT:
+      description: Object to handle JWT authentication when performing the test.
+      properties:
+        addClaims:
+          $ref: "#/components/schemas/SyntheticsBasicAuthJWTAddClaims"
+        algorithm:
+          $ref: "#/components/schemas/SyntheticsBasicAuthJWTAlgorithm"
+        expiresIn:
+          description: Token time-to-live in seconds.
+          example: 3600
+          format: int64
+          minimum: 1
+          type: integer
+        header:
+          description: Custom JWT header as a JSON string.
+          example: '{"kid": "my-key-id"}'
+          type: string
+        payload:
+          description: JWT claims as a JSON string.
+          example: '{"sub": "1234567890", "name": "John Doe"}'
+          type: string
+        secret:
+          description: |-
+            Signing key for the JWT authentication. Use the shared secret for `HS256`
+            or the private key (PEM format) for `RS256` and `ES256`.
+          example: "mysecretkey"
+          type: string
+        tokenPrefix:
+          description: Prefix added before the token in the `Authorization` header. Defaults to `Bearer`.
+          example: "Bearer"
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsBasicAuthJWTType"
+      required:
+        - algorithm
+        - payload
+        - secret
+        - type
+      type: object
+    SyntheticsBasicAuthJWTAddClaims:
+      description: Standard JWT claims to automatically inject.
+      properties:
+        exp:
+          description: Whether to inject the `exp` (expiration) claim.
+          example: true
+          type: boolean
+        iat:
+          description: Whether to inject the `iat` (issued at) claim.
+          example: true
+          type: boolean
+      type: object
+    SyntheticsBasicAuthJWTAlgorithm:
+      description: Algorithm to use for the JWT authentication.
+      enum:
+        - HS256
+        - RS256
+        - ES256
+      example: "HS256"
+      type: string
+      x-enum-varnames:
+        - HS256
+        - RS256
+        - ES256
+    SyntheticsBasicAuthJWTType:
+      default: "jwt"
+      description: The type of authentication to use when performing the test.
+      enum:
+        - jwt
+      example: "jwt"
+      type: string
+      x-enum-varnames:
+        - JWT
     SyntheticsBasicAuthNTLM:
       description: Object to handle `NTLM` authentication when performing the test.
       properties:
@@ -38552,7 +38646,8 @@ paths:
           - slos_read
     post:
       description: |-
-        Create an SLO Correction.
+        Create an SLO correction. Use `slo_id` to apply the correction to a single SLO, or `slo_query` to apply the
+        correction to SLOs that match a query. Exactly one of `slo_id` or `slo_query` is required.
       operationId: CreateSLOCorrection
       requestBody:
         content:
@@ -38566,6 +38661,17 @@ paths:
                       description: "Planned maintenance window for database upgrade."
                       end: 1600003600
                       slo_id: sloId
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
+              slo_query:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Planned maintenance window for checkout services."
+                      end: 1600003600
+                      slo_query: "env:prod service:checkout"
                       start: 1600000000
                       timezone: UTC
                     type: correction
@@ -38728,6 +38834,17 @@ paths:
                       category: "Scheduled Maintenance"
                       description: "Updated correction for maintenance window."
                       end: 1600003600
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
+              slo_query:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Updated correction for checkout services."
+                      end: 1600003600
+                      slo_query: "env:prod service:checkout"
                       start: 1600000000
                       timezone: UTC
                     type: correction
@@ -44765,7 +44882,7 @@ paths:
         operator: OR
         permissions:
           - user_access_invite
-  "/api/v1/user/{user_handle}":
+  /api/v1/user/{user_handle}:
     delete:
       description: |-
         Delete a user from an organization.
@@ -45406,13 +45523,6 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/integrations/pagerduty/
     name: PagerDuty Integration
-  - description: >-
-      This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
-    externalDocs:
-      description: Documentation for old endpoints is available in the
-      url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
-    name: Screenboards
-    x-deprecated: true
   - description: |-
       Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information.
     name: "Security Monitoring"
@@ -45488,13 +45598,6 @@ tags:
 
       Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).
     name: Tags
-  - description: >-
-      This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.
-    externalDocs:
-      description: Documentation for old endpoints is available in the
-      url: https://docs.datadoghq.com/dashboards/guide/timeboard-api-doc/
-    name: Timeboards
-    x-deprecated: true
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.

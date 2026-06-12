@@ -468,7 +468,13 @@ Track your indexed historical metrics through the Usage Summary section of the [
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Usage Summary section of the Plan and Usage page, which shows both custom indexed and historical indexed metrics" style="width:100%;" >}}
 
 For more information, see the [Custom Metrics billing][3] documentation.
- 
+
+### Billing under Metric Name pricing
+
+If your organization uses [Metric Name pricing][5] instead of cardinality pricing, HMI billing differs. HMI usage is calculated based on ingestion time rather than the metric's original timestamp. Each HMI datapoint contributes to both ingested and indexed volume.
+
+For details on the Metric Name pricing model, see [Metric Name Pricing for Custom Metrics][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -477,3 +483,4 @@ For more information, see the [Custom Metrics billing][3] documentation.
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
+[5]: /account_management/billing/metric_name_pricing/

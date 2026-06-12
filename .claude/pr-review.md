@@ -71,6 +71,7 @@ All vale rules can be found in the [datadog-vale](https://github.com/DataDog/dat
 
 **Use inline comments for all feedback:**
 - For each specific issue, suggestion, or style violation, create an inline comment on the exact line using the `mcp__github_inline_comment__create_inline_comment` tool
+- Always include the file path and line number in your comment (e.g., `path/to/file.md:42`) so the location is easy to spot
 - Include the issue type in your comment: "**Issue**:", "**Suggestion**:", or "**Style**:"
 - **When you have a specific fix to propose, use GitHub's suggestion format so the author can apply it with one click:**
   ```suggestion

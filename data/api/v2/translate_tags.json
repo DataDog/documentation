@@ -75,6 +75,14 @@
     "name": "CSM Coverage Analysis",
     "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more."
   },
+  "csm-ownership": {
+    "name": "CSM Ownership",
+    "description": "Datadog Cloud Security Management (CSM) Ownership infers the most likely owner\nfor a cloud resource by combining ownership signals from across the platform,\nand lets you review the inference, inspect its evidence, and submit feedback to\npersist, override, or correct the inferred owner.\nFor more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)."
+  },
+  "csm-settings": {
+    "name": "CSM Settings",
+    "description": "Datadog Cloud Security Management (CSM) Settings APIs allow you to list and filter\nyour cloud hosts monitored by CSM, covering both agentless and agent-based discovery.\nFor more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)."
+  },
   "csm-threats": {
     "name": "CSM Threats",
     "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
@@ -130,6 +138,10 @@
   "containers": {
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+  },
+  "customer-org": {
+    "name": "Customer Org",
+    "description": "Programmatic management of a customer's Datadog organization. Use this API to perform\nself-service organization lifecycle actions such as disabling the authenticated org."
   },
   "dora-metrics": {
     "name": "DORA Metrics",
@@ -190,6 +202,10 @@
   "fleet-automation": {
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
+  },
+  "forms": {
+    "name": "Forms",
+    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform. You can configure form settings, manage versions, publish forms, and handle sharing configurations."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -354,6 +370,10 @@
   "rum-metrics": {
     "name": "Rum Metrics",
     "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
+  "rum-rate-limit": {
+    "name": "Rum Rate Limit",
+    "description": "Manage RUM rate limit configurations for your organization's RUM applications."
   },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
