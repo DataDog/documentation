@@ -38,8 +38,7 @@ The following configuration applies to all platforms.
 
 - `dd-api-key`: Your Datadog API key.
 - `dd-otlp-source`: Set to `serverless`.
-
-To enable [trace metrics][2], add `compute_stats=true` to your headers.
+- `compute_stats`: Set to `true` to enable [trace metrics][2].
 
 **Service name**: Set `OTEL_SERVICE_NAME` to identify your service. Without it, traces appear as `unknown_service`.
 
@@ -79,7 +78,6 @@ export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,faas.id=arn:aws:lambda:us-ea
 ```
 
 <!-- TODO: Eng to confirm whether backend accepts cloud.resource_id (faas.id is deprecated in OTel semconv). -->
-<!-- TODO: Source docs disagree on whether compute_stats=true is required or optional for serverless. Eng to confirm whether serverless trace metrics should default on. -->
 
 | Attribute | Required | Description |
 |---|---|---|
@@ -149,7 +147,7 @@ export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
 export OTEL_SERVICE_NAME="my-web-app"
-export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure_app_service,cloud.resource_id=/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{appName}"
+export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure.app_service,cloud.resource_id=/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{appName}"
 ```
 
 ### Azure Functions
@@ -161,20 +159,18 @@ export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
 export OTEL_SERVICE_NAME="my-azure-function"
-export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure_functions,cloud.resource_id=/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{functionAppName}"
+export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure.functions,cloud.resource_id=/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{functionAppName}"
 ```
 
 ### Resource attributes reference
 
-<!-- TODO: Verify Azure cloud.platform values against OTel semantic conventions. OTel semconv may use azure.app_service and azure.functions (dot-separated) rather than underscores. Also confirm whether Azure Functions cloud.resource_id should identify the specific function, not just the function app. -->
+<!-- TODO: Confirm whether Azure Functions cloud.resource_id should identify the specific function, not just the function app. -->
 
 | Platform | `cloud.provider` | `cloud.platform` | `cloud.resource_id` |
 |---|---|---|---|
 | Container Apps | `azure` | `azure.container_apps` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.App/containerApps/{appName}` |
-| Web Apps | `azure` | `azure_app_service` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{appName}` |
-| Azure Functions | `azure` | `azure_functions` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{functionAppName}` |
-
-<div class="alert alert-info"><code>cloud.platform</code> values are intentionally inconsistent across Azure services. Container Apps uses <code>azure.container_apps</code> (dot-separated), while Web Apps and Functions use underscores.</div>
+| Web Apps | `azure` | `azure.app_service` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{appName}` |
+| Azure Functions | `azure` | `azure.functions` | `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Web/sites/{functionAppName}` |
 
 {{% /tab %}}
 {{% tab "GCP" %}}
