@@ -9846,6 +9846,11 @@ menu:
       url: account_management/org_settings/cross_org_visibility
       parent: organization_settings
       weight: 308
+    - name: SMTP Configuration
+      url: account_management/org_settings/smtp_configuration
+      parent: organization_settings
+      identifier: account_management_org_settings_smtp_configuration
+      weight: 309
     - name: Access Control
       url: account_management/rbac/
       parent: account_management
