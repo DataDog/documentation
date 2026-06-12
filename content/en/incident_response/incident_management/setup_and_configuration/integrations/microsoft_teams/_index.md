@@ -96,6 +96,8 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
 
 Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
 
+<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.</div>
+
 #### Enabling meeting summaries
 
 To enable meeting summaries for incident Microsoft Teams meetings:
@@ -142,11 +144,6 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 ## Microsoft Teams commands
 
 For a full list of available `@Datadog` commands, see the [Microsoft Teams integration documentation][5].
-
-
-## Data retention
-
-When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.
 
 ## Further reading
 
