@@ -246,15 +246,15 @@ Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions.
    - **Resource providers**: When possible, it registers these resource providers in the scanner subscription: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
 1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel.
-2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-3. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
-4. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
-5. Select the **Azure subscriptions** you want to scan.
-6. Configure the scanner:
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
+1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
+1. Select the **Azure subscriptions** you want to scan.
+1. Configure the scanner:
    - If you already have scanners deployed, you can choose to **use an existing scanner** (recommended) or **deploy a new scanner**.
    - If you choose **deploy a new scanner**, select the **scanner subscription** (which must be one of the selected subscriptions) and the **scanner locations** (Azure regions, up to four). Datadog recommends deploying scanners in every region where you have more than 150 hosts.
-7. Click **Copy command** to copy the generated command, and click **Open Azure Cloud Shell** to open [Azure Cloud Shell](https://shell.azure.com). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme) to deploy and configure the scanner in your selected subscription and location(s).
-8.  After the command completes, return to the Datadog setup page and click **Done**.
+1. Click **Copy command** to copy the generated command, and click **Open Azure Cloud Shell** to open [Azure Cloud Shell](https://shell.azure.com). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme) to deploy and configure the scanner in your selected subscription and location(s).
+1. After the command completes, return to the Datadog setup page and click **Done**.
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Resource Manager" level="h3" id="azure-resource-manager-setup" %}}
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
@@ -275,11 +275,11 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel
-2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-3. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
-4. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme).
-5. Click **Done**.
+1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme).
+1. Click **Done**.
 
 {{% /collapse-content %}}
 
@@ -310,16 +310,16 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
    - If you see a 403 error on **Setting up Terraform state storage**, see [GCP: Failed to create state bucket][26] in the troubleshooting guide.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
-1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel
-2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-3. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
-4. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
-5. Select the **GCP projects** you want to scan.
-6. Configure the scanner:
+1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
+1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
+1. Select the **GCP projects** you want to scan.
+1. Configure the scanner:
    - If you already have scanners deployed, you can choose to **use an existing scanner** (recommended) or **deploy a new scanner**.
    - If you choose **deploy a new scanner**, select the **scanner project** (which must be one of the selected projects) and the **scanner regions**. Datadog recommends installing scanners in every region where you have more than 150 hosts.
-7. Click **Copy command** to copy the generated command, and click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region(s).
-8. After the command completes, return to the Datadog setup page and click **Done**.
+1. Click **Copy command** to copy the generated command, and click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region(s).
+1. After the command completes, return to the Datadog setup page and click **Done**.
 
 [26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 {{% /collapse-content %}}
@@ -327,11 +327,11 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
-1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel
-2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-3. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
-4. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme).
-5. Click **Done**.
+1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme).
+1. Click **Done**.
 {{% /collapse-content %}}
 
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
@@ -363,7 +363,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "AWS" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
 1. If required, use filters to find the account you want to stop Agentless Scanning for. Click the account to open the side panel that contains its settings.
-1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position
+1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -371,8 +371,8 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 
 {{% tab "Azure" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
-2. Expand the tenant containing the subscription where you want to disable Agentless Scanning. Click the subscription to open the side panel that contains its settings.
-3. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position
+1. Expand the tenant containing the subscription where you want to disable Agentless Scanning. Click the subscription to open the side panel that contains its settings.
+1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -381,7 +381,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "GCP" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
 1. Expand the account containing the project where you want to disable Agentless Scanning. Click the project to open the side panel that contains its settings.
-3. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position
+1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
