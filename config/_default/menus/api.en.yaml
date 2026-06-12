@@ -2627,6 +2627,18 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Update the maximum session duration
+      url: /api/latest/organizations/update-the-maximum-session-duration/
+      identifier: organizations-update-the-maximum-session-duration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLoginOrgConfigsMaxSessionDuration
+        unstable: []
+        order: 11
     - name: List global orgs
       url: /api/latest/organizations/list-global-orgs/
       identifier: organizations-list-global-orgs
