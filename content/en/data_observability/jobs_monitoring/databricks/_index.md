@@ -213,7 +213,7 @@ This approach is recommended for clusters in **Standard** access mode.
     1. At the volume level, grant the `READ VOLUME` permission to all account users.
     1. At the catalog level, grant the `USE CATALOG` permission to all account users.
 
-   <div class="alert alert-info"><strong>Note</strong>: Databricks evaluates Unity Catalog Volume permissions against the <strong>cluster owner</strong>, not the principal running the cluster.</div>
+   <div class="alert alert-info">Databricks evaluates Unity Catalog Volume permissions against the <strong>cluster owner</strong>, not the principal running the cluster.</div>
 
 1. **Add the init script to the allowlist**: For clusters in **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
 
@@ -346,7 +346,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
     1. At the volume level, grant the `READ VOLUME` permission to all account users.
     1. At the catalog level, grant the `USE CATALOG` permission to all account users.
 
-   <div class="alert alert-info"><strong>Note</strong>: Databricks evaluates Unity Catalog Volume permissions against the <strong>cluster owner</strong>, not the principal running the cluster.</div>
+   <div class="alert alert-info">Databricks evaluates Unity Catalog Volume permissions against the <strong>cluster owner</strong>, not the principal running the cluster.</div>
 
 1. **Add the init script to the allowlist** (required for **Standard** access mode clusters): If your cluster uses **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
 
