@@ -7777,7 +7777,7 @@ __metadata:
     traverse: "npm:0.6.8"
     typesense: "npm:^3.0.1"
     typesense-instantsearch-adapter: "npm:^2.9.0"
-    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-streaming-fix-invalid-string/typesense-sync-v2.0.1-beta.3.tgz"
+    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-streaming-fix-invalid-string/typesense-sync-v2.0.1-beta.5.tgz"
     yaml-lint: "npm:^1.7.0"
   languageName: unknown
   linkType: soft
@@ -16100,6 +16100,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stream-chain@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "stream-chain@npm:2.2.5"
+  checksum: 10/f9c65fe21251106083ca753d8b36f5a35dc426f5cb12851d9a872b6eb69e30ea2c94d87887bfda8c820503e842183812922532fb2adab18d5878d31a4516b956
+  languageName: node
+  linkType: hard
+
 "stream-combiner@npm:*":
   version: 0.2.2
   resolution: "stream-combiner@npm:0.2.2"
@@ -16116,6 +16123,15 @@ __metadata:
   dependencies:
     stubs: "npm:^3.0.0"
   checksum: 10/969ce82e34bfbef5734629cc06f9d7f3705a9ceb8fcd6a526332f9159f1f8bbfdb1a453f3ced0b728083454f7706adbbe8428bceb788a0287ca48ba2642dc3fc
+  languageName: node
+  linkType: hard
+
+"stream-json@npm:^1.7.0":
+  version: 1.9.1
+  resolution: "stream-json@npm:1.9.1"
+  dependencies:
+    stream-chain: "npm:^2.2.5"
+  checksum: 10/8c97d3078127aaf70197b0e4b5ca668307f1768a4eb1ac4c2030056e1f862d7a11b83094b87d2b04c3c14f76a8a8657eb87b1760d57781c172e3a513c7e2b5fd
   languageName: node
   linkType: hard
 
@@ -17081,18 +17097,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-streaming-fix-invalid-string/typesense-sync-v2.0.1-beta.3.tgz":
-  version: 2.0.1-beta.3
-  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-streaming-fix-invalid-string/typesense-sync-v2.0.1-beta.3.tgz"
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-streaming-fix-invalid-string/typesense-sync-v2.0.1-beta.5.tgz":
+  version: 2.0.1-beta.5
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/typesense-sync-streaming-fix-invalid-string/typesense-sync-v2.0.1-beta.5.tgz"
   dependencies:
     "@babel/runtime": "npm:^7.25.0"
     dotenv: "npm:^16.4.5"
     lodash: "npm:^4.17.21"
     split2: "npm:^4.2.0"
+    stream-json: "npm:^1.7.0"
     typesense: "npm:^3.0.1"
     winston: "npm:^3.14.2"
     yargs: "npm:^17.7.2"
-  checksum: 10/7c24f9209593da91797dc74a31ea4b65a4f47eebc3e72a70320bf4c654d42952ced06911edeb1646ba335cb57304eac5b0cefb164e90e96063be8a5e9aa4653d
+  checksum: 10/3dccba2ec73db0eba69b78b76700b250b8ec6f2ad77a8eace19f91f0c773d421662f5b28d59556ae3e6840a52e5044407933e7df5e1f6d32a0bf6701228d204f
   languageName: node
   linkType: hard
 
