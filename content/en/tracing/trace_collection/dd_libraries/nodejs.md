@@ -188,8 +188,6 @@ esbuild.build({
 })
 ```
 
-**Note**: Every application is different and you may need to experiment with the list of `external` packages.
-
 #### Bundling with Webpack
 
 This library provides experimental Webpack support in the form of a Webpack plugin. To use the plugin, make sure you have `dd-trace@5.94.0+` installed, and then require the `dd-trace/webpack` module when building your bundle.
@@ -237,8 +235,6 @@ const compiler = webpack({
   ],
 })
 ```
-
-**Note**: Every application is different and you may need to experiment with the list of `externals` packages.
 
 #### Bundling with Next.js
 
