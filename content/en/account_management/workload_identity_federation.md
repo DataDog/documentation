@@ -243,6 +243,10 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 
 ## Set up Workload Identity Federation for the Datadog Agent
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Workload Identity Federation for the Datadog Agent is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="/help/" header="Enterprise feature" >}}
 Workload Identity Federation for the Datadog Agent is available for customers on an enterprise plan only. Request access by contacting support.
 {{< /callout >}}
