@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Monitoring coverage drifts over time. As engineers add endpoints, move dependencies, and change user flows, monitors keep reflecting the system as it was — and a service can appear healthy at the top level while one critical path is failing. Bits Detection identifies which endpoints need coverage, sets detection logic from observed production behavior, and keeps coverage current without your team manually creating, tuning, and maintaining every monitor.
+Monitoring coverage drifts over time. As engineers add endpoints, move dependencies, and change user flows, monitors keep reflecting the system as it was. A service can appear healthy at the top level while one critical path is failing. Bits Detection identifies which endpoints need coverage, sets detection logic from observed production behavior, and keeps coverage current without your team manually creating, tuning, and maintaining every monitor.
 
 When Bits Detection flags an issue, it points to the affected endpoint and related telemetry as the starting point for triage. It is the first step in the Bits AI workflow, which continues through investigation with [Bits Investigation][4] to root cause analysis and remediation.
 
@@ -23,7 +23,7 @@ When Bits Detection flags an issue, it points to the affected endpoint and relat
 
 After you enable Bits Detection, it initializes monitoring for the 100 most critical services in your environment, based on service telemetry, dependencies, ownership metadata, recent changes, and user impact signals. Coverage is supported for APM-instrumented HTTP and gRPC services, prioritizing monitoring at the edge of your application. To request coverage for additional resource types, contact [Datadog Support][1].
 
-Your team's existing monitors stay in place—Bits Detection works alongside them, adding adaptive coverage for the parts of your system that change too quickly to model by hand.
+Your team's existing monitors stay in place. Bits Detection works alongside them, adding adaptive coverage for the parts of your system that change too quickly to model by hand.
 
 To enable Bits Detection for additional services:
 
@@ -94,7 +94,6 @@ Use feedback to tune Bits Detection for your environment. You can flag alerts as
 1. In the feedback prompt, click {{< ui >}}Yes{{< /ui >}} if Bits should have alerted you, or click {{< ui >}}No, Because…{{< /ui >}} if it should not have.
 1. If you clicked {{< ui >}}No, Because…{{< /ui >}}, select a reason.
 1. Click {{< ui >}}Send Feedback{{< /ui >}}.
-
 
 **Provide feedback on resource criticality**
 
