@@ -148,7 +148,7 @@ Contact your Datadog Customer Success Manager to schedule dedicated time windows
 {{< tabs >}}
 {{% tab "Using Fleet Automation (recommended)" %}}
 
-From the [Fleet Automation][13] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab, you can create a failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites.
+From the [Fleet Automation][100] page in your failover org, on the {{< ui >}}Configure Agents{{< /ui >}} tab, you can create a failover policy or reuse an existing one, and apply it to your fleet of Agents. Soon after the policy is enabled, Agents begin dual-shipping telemetry to both the primary and DDR (failover) observability sites.
 
 To create a failover policy, click on {{< ui >}}Create Failover Policy{{< /ui >}}.
 
@@ -160,7 +160,7 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 
 <div class="alert alert-danger">Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over ceases Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center.</strong> When no longer in failover, disable the failover policy to return integration data collection to the primary org.</div>
 
-[13]: https://app.datadoghq.com/fleet
+[100]: https://app.datadoghq.com/fleet
 
 {{% /tab %}}
 
@@ -168,9 +168,9 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 
 During a failover or failover exercises, update your Datadog Agent's `datadog.yaml` configuration file as shown in the example below and restart the Agent.
 
-- `enabled: true` allows the Agent to send {{< tooltip text="metadata" tooltip="Data about the Agent and the infrastructure host. For example, `host name`, `host tags`, `Agent version`. " >}} to the DDR Datadog site so you can view Agents and your Infra hosts in the DDR org. This allows you to see your Agents and infrastructure hosts in the failover org.
+- `enabled: true` allows the Agent to send {{< tooltip text="metadata" tooltip="Data about the Agent and the infrastructure host. For example, `host name`, `host tags`, `Agent version`." >}} to the DDR Datadog site so you can view Agents and your Infra hosts in the DDR org. This allows you to see your Agents and infrastructure hosts in the failover org.
 
-- `failover_metrics`, `failover_logs`, and `failover_apm` are `false` by default. Setting these to `true` causes the Agent to start sending {{< tooltip text="telemetry" tooltip="Data that is sent to the Datadog platform. For example, `logs`, `metrics`, `traces`. " >}} to the DDR org.
+- `failover_metrics`, `failover_logs`, and `failover_apm` are `false` by default. Setting these to `true` causes the Agent to start sending {{< tooltip text="telemetry" tooltip="Data that is sent to the Datadog platform. For example, `logs`, `metrics`, `traces`." >}} to the DDR org.
 
 ```shell
 multi_region_failover:
@@ -308,6 +308,7 @@ During testing, integration telemetry is spread over both organizations. If you 
 [10]: /account_management/org_settings/service_accounts/
 [11]: /agent/remote_config/?tab=configurationyamlfile
 [12]: /agent/fleet_automation/#overview
+[13]: https://app.datadoghq.com/fleet
 [14]: mailto:success@datadoghq.com
 [15]: https://www.datadoghq.com/support/
 [16]: https://app.datadoghq.com/signup
