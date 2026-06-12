@@ -2627,6 +2627,18 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: List global orgs
+      url: /api/latest/organizations/list-global-orgs/
+      identifier: organizations-list-global-orgs
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGlobalOrgs
+        unstable: []
+        order: 10
     - name: Upload IdP metadata
       url: /api/latest/organizations/upload-idp-metadata/
       identifier: organizations-upload-idp-metadata
@@ -3398,6 +3410,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 51
+    - name: Get a single entity context
+      url: /api/latest/security-monitoring/get-a-single-entity-context/
+      identifier: security-monitoring-get-a-single-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSingleEntityContext
+        unstable:
+          - v2
+        order: 132
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context
@@ -3734,6 +3759,18 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 28
+    - name: Test a notification rule
+      url: /api/latest/security-monitoring/test-a-notification-rule/
+      identifier: security-monitoring-test-a-notification-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SendSecurityMonitoringNotificationPreview
+        unstable: []
+        order: 131
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -4680,6 +4717,18 @@ menu:
       url: /api/latest/slack-integration/
       identifier: slack-integration
       generated: true
+    - name: List Slack user bindings
+      url: /api/latest/slack-integration/list-slack-user-bindings/
+      identifier: slack-integration-list-slack-user-bindings
+      parent: slack-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSlackUserBindings
+        unstable: []
+        order: 1
     - name: Update a Slack integration channel
       url: /api/latest/slack-integration/update-a-slack-integration-channel/
       identifier: slack-integration-update-a-slack-integration-channel
@@ -8083,6 +8132,170 @@ menu:
           - GetCSMCloudAccountsCoverageAnalysis
         unstable: []
         order: 1
+    - name: CSM Ownership
+      url: /api/latest/csm-ownership/
+      identifier: csm-ownership
+      generated: true
+    - name: List ownership history by owner type
+      url: /api/latest/csm-ownership/list-ownership-history-by-owner-type/
+      identifier: csm-ownership-list-ownership-history-by-owner-type
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipHistoryByOwnerType
+        unstable:
+          - v2
+        order: 4
+    - name: Submit feedback on an ownership inference
+      url: /api/latest/csm-ownership/submit-feedback-on-an-ownership-inference/
+      identifier: csm-ownership-submit-feedback-on-an-ownership-inference
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOwnershipFeedback
+        unstable:
+          - v2
+        order: 6
+    - name: Get the evidence for an ownership inference
+      url: /api/latest/csm-ownership/get-the-evidence-for-an-ownership-inference/
+      identifier: csm-ownership-get-the-evidence-for-an-ownership-inference
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipEvidence
+        unstable:
+          - v2
+        order: 5
+    - name: Get an ownership inference by owner type
+      url: /api/latest/csm-ownership/get-an-ownership-inference-by-owner-type/
+      identifier: csm-ownership-get-an-ownership-inference-by-owner-type
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipInference
+        unstable:
+          - v2
+        order: 2
+    - name: List ownership inference history for a resource
+      url: /api/latest/csm-ownership/list-ownership-inference-history-for-a-resource/
+      identifier: csm-ownership-list-ownership-inference-history-for-a-resource
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipHistory
+        unstable:
+          - v2
+        order: 3
+    - name: List ownership inferences for a resource
+      url: /api/latest/csm-ownership/list-ownership-inferences-for-a-resource/
+      identifier: csm-ownership-list-ownership-inferences-for-a-resource
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOwnershipInferences
+        unstable:
+          - v2
+        order: 1
+    - name: CSM Settings
+      url: /api/latest/csm-settings/
+      identifier: csm-settings
+      generated: true
+    - name: List unified host facets
+      url: /api/latest/csm-settings/list-unified-host-facets/
+      identifier: csm-settings-list-unified-host-facets
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMUnifiedHostFacets
+        unstable:
+          - v2
+        order: 5
+    - name: Get unified host facet info
+      url: /api/latest/csm-settings/get-unified-host-facet-info/
+      identifier: csm-settings-get-unified-host-facet-info
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMUnifiedHostFacetInfo
+        unstable:
+          - v2
+        order: 6
+    - name: List unified hosts
+      url: /api/latest/csm-settings/list-unified-hosts/
+      identifier: csm-settings-list-unified-hosts
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMUnifiedHosts
+        unstable:
+          - v2
+        order: 4
+    - name: List agentless host facets
+      url: /api/latest/csm-settings/list-agentless-host-facets/
+      identifier: csm-settings-list-agentless-host-facets
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMAgentlessHostFacets
+        unstable:
+          - v2
+        order: 2
+    - name: Get agentless host facet info
+      url: /api/latest/csm-settings/get-agentless-host-facet-info/
+      identifier: csm-settings-get-agentless-host-facet-info
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCSMAgentlessHostFacetInfo
+        unstable:
+          - v2
+        order: 3
+    - name: List agentless hosts
+      url: /api/latest/csm-settings/list-agentless-hosts/
+      identifier: csm-settings-list-agentless-hosts
+      parent: csm-settings
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCSMAgentlessHosts
+        unstable:
+          - v2
+        order: 1
     - name: CSM Threats
       url: /api/latest/csm-threats/
       identifier: csm-threats
@@ -10689,6 +10902,23 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Dashboard Sharing
+      url: /api/latest/dashboard-sharing/
+      identifier: dashboard-sharing
+      generated: true
+    - name: List shared dashboards for a dashboard
+      url: /api/latest/dashboard-sharing/list-shared-dashboards-for-a-dashboard/
+      identifier: dashboard-sharing-list-shared-dashboards-for-a-dashboard
+      parent: dashboard-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSharedDashboardsByDashboardId
+        unstable:
+          - v2
+        order: 5
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
@@ -11599,32 +11829,6 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: List instrumented pods for a cluster
-      url: /api/latest/fleet-automation/list-instrumented-pods-for-a-cluster/
-      identifier: fleet-automation-list-instrumented-pods-for-a-cluster
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetInstrumentedPods
-        unstable:
-          - v2
-        order: 18
-    - name: List all fleet clusters
-      url: /api/latest/fleet-automation/list-all-fleet-clusters/
-      identifier: fleet-automation-list-all-fleet-clusters
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetClusters
-        unstable:
-          - v2
-        order: 17
     - name: List tracers for a specific agent
       url: /api/latest/fleet-automation/list-tracers-for-a-specific-agent/
       identifier: fleet-automation-list-tracers-for-a-specific-agent
@@ -11677,10 +11881,204 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Forms
+      url: /api/latest/forms/
+      identifier: forms
+      generated: true
+    - name: Upsert and publish a form version
+      url: /api/latest/forms/upsert-and-publish-a-form-version/
+      identifier: forms-upsert-and-publish-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertAndPublishFormVersion
+        unstable:
+          - v2
+        order: 10
+    - name: Create or update a form version
+      url: /api/latest/forms/create-or-update-a-form-version/
+      identifier: forms-create-or-update-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertFormVersion
+        unstable:
+          - v2
+        order: 7
+    - name: Publish a form version
+      url: /api/latest/forms/publish-a-form-version/
+      identifier: forms-publish-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishForm
+        unstable:
+          - v2
+        order: 8
+    - name: Clone a form
+      url: /api/latest/forms/clone-a-form/
+      identifier: forms-clone-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CloneForm
+        unstable:
+          - v2
+        order: 9
+    - name: Update a form
+      url: /api/latest/forms/update-a-form/
+      identifier: forms-update-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateForm
+        unstable:
+          - v2
+        order: 6
+    - name: Get a form
+      url: /api/latest/forms/get-a-form/
+      identifier: forms-get-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetForm
+        unstable:
+          - v2
+        order: 5
+    - name: Delete a form
+      url: /api/latest/forms/delete-a-form/
+      identifier: forms-delete-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteForm
+        unstable:
+          - v2
+        order: 4
+    - name: Create and publish a form
+      url: /api/latest/forms/create-and-publish-a-form/
+      identifier: forms-create-and-publish-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAndPublishForm
+        unstable:
+          - v2
+        order: 3
+    - name: Create a form
+      url: /api/latest/forms/create-a-form/
+      identifier: forms-create-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateForm
+        unstable:
+          - v2
+        order: 2
+    - name: List forms
+      url: /api/latest/forms/list-forms/
+      identifier: forms-list-forms
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListForms
+        unstable:
+          - v2
+        order: 1
     - name: Google Chat Integration
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration
       generated: true
+    - name: Update a target audience
+      url: /api/latest/google-chat-integration/update-a-target-audience/
+      identifier: google-chat-integration-update-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGoogleChatTargetAudience
+        unstable: []
+        order: 15
+    - name: Get a target audience
+      url: /api/latest/google-chat-integration/get-a-target-audience/
+      identifier: google-chat-integration-get-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGoogleChatTargetAudience
+        unstable: []
+        order: 14
+    - name: Delete a target audience
+      url: /api/latest/google-chat-integration/delete-a-target-audience/
+      identifier: google-chat-integration-delete-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGoogleChatTargetAudience
+        unstable: []
+        order: 16
+    - name: Create a target audience
+      url: /api/latest/google-chat-integration/create-a-target-audience/
+      identifier: google-chat-integration-create-a-target-audience
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGoogleChatTargetAudience
+        unstable: []
+        order: 13
+    - name: Get all target audiences
+      url: /api/latest/google-chat-integration/get-all-target-audiences/
+      identifier: google-chat-integration-get-all-target-audiences
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGoogleChatTargetAudiences
+        unstable: []
+        order: 12
     - name: Update organization handle
       url: /api/latest/google-chat-integration/update-organization-handle/
       identifier: google-chat-integration-update-organization-handle
@@ -11741,6 +12139,54 @@ menu:
           - ListOrganizationHandles
         unstable: []
         order: 1
+    - name: Get the delegated user
+      url: /api/latest/google-chat-integration/get-the-delegated-user/
+      identifier: google-chat-integration-get-the-delegated-user
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGoogleChatDelegatedUser
+        unstable: []
+        order: 10
+    - name: Delete the delegated user
+      url: /api/latest/google-chat-integration/delete-the-delegated-user/
+      identifier: google-chat-integration-delete-the-delegated-user
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGoogleChatDelegatedUser
+        unstable: []
+        order: 11
+    - name: Get a Google Chat organization binding
+      url: /api/latest/google-chat-integration/get-a-google-chat-organization-binding/
+      identifier: google-chat-integration-get-a-google-chat-organization-binding
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGoogleChatOrganization
+        unstable: []
+        order: 8
+    - name: Delete a Google Chat organization binding
+      url: /api/latest/google-chat-integration/delete-a-google-chat-organization-binding/
+      identifier: google-chat-integration-delete-a-google-chat-organization-binding
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGoogleChatOrganization
+        unstable: []
+        order: 9
     - name: Get space information by display name
       url: /api/latest/google-chat-integration/get-space-information-by-display-name/
       identifier: google-chat-integration-get-space-information-by-display-name
@@ -11753,6 +12199,18 @@ menu:
           - GetSpaceByDisplayName
         unstable: []
         order: 6
+    - name: Get all Google Chat organization bindings
+      url: /api/latest/google-chat-integration/get-all-google-chat-organization-bindings/
+      identifier: google-chat-integration-get-all-google-chat-organization-bindings
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGoogleChatOrganizations
+        unstable: []
+        order: 7
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
@@ -11811,75 +12269,6 @@ menu:
           - GetIPAllowlist
         unstable: []
         order: 1
-    - name: Incident Services
-      url: /api/latest/incident-services/
-      identifier: incident-services
-      generated: true
-    - name: Update an existing incident service
-      url: /api/latest/incident-services/update-an-existing-incident-service/
-      identifier: incident-services-update-an-existing-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentService
-        unstable:
-          - v2
-        order: 3
-    - name: Get details of an incident service
-      url: /api/latest/incident-services/get-details-of-an-incident-service/
-      identifier: incident-services-get-details-of-an-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentService
-        unstable:
-          - v2
-        order: 1
-    - name: Delete an existing incident service
-      url: /api/latest/incident-services/delete-an-existing-incident-service/
-      identifier: incident-services-delete-an-existing-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentService
-        unstable:
-          - v2
-        order: 2
-    - name: Create a new incident service
-      url: /api/latest/incident-services/create-a-new-incident-service/
-      identifier: incident-services-create-a-new-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentService
-        unstable:
-          - v2
-        order: 5
-    - name: Get a list of all incident services
-      url: /api/latest/incident-services/get-a-list-of-all-incident-services/
-      identifier: incident-services-get-a-list-of-all-incident-services
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListIncidentServices
-        unstable:
-          - v2
-        order: 4
     - name: Incidents
       url: /api/latest/incidents/
       identifier: incidents
@@ -13876,6 +14265,18 @@ menu:
           - ListWorkflowsWebhookHandles
         unstable: []
         order: 7
+    - name: Delete user binding
+      url: /api/latest/microsoft-teams-integration/delete-user-binding/
+      identifier: microsoft-teams-integration-delete-user-binding
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMSTeamsUserBinding
+        unstable: []
+        order: 12
     - name: Update tenant-based handle
       url: /api/latest/microsoft-teams-integration/update-tenant-based-handle/
       identifier: microsoft-teams-integration-update-tenant-based-handle
@@ -14247,6 +14648,23 @@ menu:
         operationids:
           - ListDevices
         unstable: []
+        order: 1
+    - name: Network Health Insights
+      url: /api/latest/network-health-insights/
+      identifier: network-health-insights
+      generated: true
+    - name: List network health insights
+      url: /api/latest/network-health-insights/list-network-health-insights/
+      identifier: network-health-insights-list-network-health-insights
+      parent: network-health-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNetworkHealthInsights
+        unstable:
+          - v2
         order: 1
     - name: OAuth2 Client Public
       url: /api/latest/oauth2-client-public/
@@ -15788,6 +16206,36 @@ menu:
           - BatchRowsQuery
         unstable: []
         order: 10
+    - name: Report Schedules
+      url: /api/latest/report-schedules/
+      identifier: report-schedules
+      generated: true
+    - name: Update a report schedule
+      url: /api/latest/report-schedules/update-a-report-schedule/
+      identifier: report-schedules-update-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchReportSchedule
+        unstable:
+          - v2
+        order: 2
+    - name: Create a report schedule
+      url: /api/latest/report-schedules/create-a-report-schedule/
+      identifier: report-schedules-create-a-report-schedule
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReportSchedule
+        unstable:
+          - v2
+        order: 1
     - name: Restriction Policies
       url: /api/latest/restriction-policies/
       identifier: restriction-policies
