@@ -390,7 +390,7 @@ secret_backend_config:
   clientid: {clientID}
 ```
 
-When using environment variables, convert the configuration to JSON like so:
+When using environment variables, convert the configuration to JSON:
 
 ```sh
 DD_SECRET_BACKEND_TYPE="azure.keyvault"
