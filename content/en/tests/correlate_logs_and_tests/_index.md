@@ -88,7 +88,7 @@ If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS
 
 When a separate process executes code triggered by a test, it needs a `trace_id` and `span_id` from that test trace to correlate its logs. Use `ddtrace.testing.logs.DDTestLogsHandler` (`ddtrace >= 4.11.0`) to ship those log records to the Datadog logs intake, correlated with the originating test trace.
 
-`DDTestLogsHandler` reads the same environment variables as the pytest plugin to detect the backend (agentless or EVP proxy). It works in any subprocess where those variables are available.
+`DDTestLogsHandler` reads the same environment variables as the pytest plugin to detect the backend (agentless or EVP proxy). It is available in any subprocess where those variables are available.
 
 **Agentless mode** (set `DD_CIVISIBILITY_AGENTLESS_ENABLED=true`):
 
@@ -128,7 +128,7 @@ with DDTestLogsHandler(service="my-service") as handler:
 
 ##### Asyncio workers
 
-For asyncio-based workers, `ThreadLocalCorrelationFilter` is not suitable because thread-local storage does not propagate across `asyncio.Task` boundaries. Subclass `CorrelationFilter` and use a `contextvars.ContextVar` instead, which the event loop propagates automatically across `await` boundaries:
+For asyncio-based workers, `ThreadLocalCorrelationFilter` is not compatible with asyncio-based workers because thread-local storage does not propagate across `asyncio.Task` boundaries. Subclass `CorrelationFilter` and use a `contextvars.ContextVar` instead, which the event loop propagates automatically across `await` boundaries:
 
 ```python
 import asyncio
