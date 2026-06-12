@@ -114,5 +114,5 @@ The [PKCE protocol][11] integrates with the authorization code grant flow by com
 [13]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.2
 [14]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.3
 [15]: https://datatracker.ietf.org/doc/html/rfc6234#section-4.1
-[16]: https://app.datadoghq.com/apps
+[16]: https://app.datadoghq.com/publishing-platform
 [17]: /getting_started/site/
