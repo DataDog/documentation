@@ -259,6 +259,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
+- **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
 
 ## Available tools
 
@@ -321,6 +322,29 @@ The `llmobs` toolset includes the following tools:
 `delete_llmobs_evaluator`
 : Delete an LLM-judge evaluator configuration by name.
 
+### Patterns tools
+
+`list_llmobs_pattern_configs`
+: List all Patterns configurations for the org. Returns each config's `id`, `name`, `evp_query`, sampling settings, and timestamps. Start here to find a `config_id`.
+
+`get_llmobs_pattern_config`
+: Get the most-recently-modified Patterns configuration for the org.
+
+`get_llmobs_pattern_run_status`
+: Get the status and per-activity progress of the most recent Patterns run for a config. Use this to check whether clustering is running, completed, or failed before reading topics.
+
+`list_llmobs_pattern_runs`
+: List all completed Patterns runs for a config, newest first. Returns each run's `id`, `status`, timestamps, and the `config_snapshot` used.
+
+`get_llmobs_patterns`
+: Get the topic hierarchy discovered by a Patterns run. Topics are organized into levels, each with a `name`, `description`, and `point_count`. Omit `run_id` to read the most recent completed run.
+
+`get_llmobs_patterns_with_points`
+: Get the topic hierarchy for a run with span IDs inlined on each leaf topic. Set `include_metrics=true` to also include per-span duration, cost, token counts, and evaluations.
+
+`get_llmobs_pattern_points`
+: Get a cursor-paginated page of clustering points (individual spans) assigned to a single topic. Each point includes the `span_id`, `session_id`, and a span input preview. Pass `next_page_token` back as `page_token` to continue paging.
+
 ## Recommended workflows
 
 ### Trace analysis
@@ -340,6 +364,15 @@ The `llmobs` toolset includes the following tools:
 3. **Inspect events**: Use `get_llmobs_experiment_event` to view full details for a specific event.
 4. **Analyze metrics**: Use `get_llmobs_experiment_metric_values` to get percentile distributions, true/false rates, or compare across dimension segments.
 5. **Discover dimensions**: Use `get_llmobs_experiment_dimension_values` to find valid filter and segment values.
+
+### Patterns analysis
+
+1. **List configs**: Use `list_llmobs_pattern_configs` to find available Patterns configurations and their `config_id` values.
+2. **Check run status**: Use `get_llmobs_pattern_run_status` to verify the most recent run is complete.
+3. **Read topics**: Use `get_llmobs_patterns` to get the full topic hierarchy with names, descriptions, and coherence scores.
+4. **Inspect spans**: Use `get_llmobs_patterns_with_points` to get topics with span IDs inlined, or `get_llmobs_pattern_points` to page through the spans of a specific topic.
+5. **Analyze span content**: Use `get_llmobs_span_details` or `get_llmobs_span_content` with the `span_id` values from the previous step to inspect the actual inputs, outputs, and metadata of individual spans within a topic.
+6. **Browse past runs**: Use `list_llmobs_pattern_runs` to see historical runs and pass a specific `run_id` to compare topic distributions over time.
 
 ## Example prompts
 
