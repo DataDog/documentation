@@ -2334,9 +2334,29 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "ListGoogleChatOrganizations": {
+    "description": "Get a list of all Google Chat organization bindings in the Datadog Google Chat integration.",
+    "summary": "Get all Google Chat organization bindings"
+  },
   "GetSpaceByDisplayName": {
     "description": "Get the resource name and organization binding ID of a space in the Datadog Google Chat integration.",
     "summary": "Get space information by display name"
+  },
+  "DeleteGoogleChatOrganization": {
+    "description": "Delete a Google Chat organization binding from the Datadog Google Chat integration.",
+    "summary": "Delete a Google Chat organization binding"
+  },
+  "GetGoogleChatOrganization": {
+    "description": "Get a Google Chat organization binding from the Datadog Google Chat integration.",
+    "summary": "Get a Google Chat organization binding"
+  },
+  "DeleteGoogleChatDelegatedUser": {
+    "description": "Delete the delegated user for a Google Chat organization binding from the Datadog Google Chat integration.",
+    "summary": "Delete the delegated user"
+  },
+  "GetGoogleChatDelegatedUser": {
+    "description": "Get the delegated user for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Get the delegated user"
   },
   "ListOrganizationHandles": {
     "description": "Get a list of all organization handles from the Datadog Google Chat integration.",
@@ -2361,6 +2381,30 @@
     "summary": "Update organization handle",
     "request_description": "Organization handle payload.",
     "request_schema_description": "Update organization handle request."
+  },
+  "ListGoogleChatTargetAudiences": {
+    "description": "Get a list of all target audiences for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Get all target audiences"
+  },
+  "CreateGoogleChatTargetAudience": {
+    "description": "Create a target audience for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Create a target audience",
+    "request_description": "Target audience payload.",
+    "request_schema_description": "Create target audience request."
+  },
+  "DeleteGoogleChatTargetAudience": {
+    "description": "Delete a target audience from a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Delete a target audience"
+  },
+  "GetGoogleChatTargetAudience": {
+    "description": "Get a target audience for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Get a target audience"
+  },
+  "UpdateGoogleChatTargetAudience": {
+    "description": "Update a target audience for a Google Chat organization binding in the Datadog Google Chat integration.",
+    "summary": "Update a target audience",
+    "request_description": "Target audience payload.",
+    "request_schema_description": "Update target audience request."
   },
   "ListJiraAccounts": {
     "description": "Get all Jira accounts for the organization.",
