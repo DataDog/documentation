@@ -95,6 +95,14 @@ Pages sent from Slack are always `high` urgency.
 
 To receive Page notifications in Slack, see [Routing Rules][4].
 
+#### Through Microsoft Teams
+
+1. Install the [Datadog Microsoft Teams app][9].
+1. In any channel or chat, enter `@Datadog page`.
+1. Select a Team to send a Page to.
+
+Pages sent from Microsoft Teams are always `high` urgency.
+
 ## Respond to a Page
 
 Go to [**On-Call** > **Pages**][7] to view all active and historical Pages. Click a Page to open its side panel and take action, or select the checkbox next to one or more Pages to bulk-edit them.
@@ -185,3 +193,4 @@ To add a comment, open the Page and enter your text in the **Timeline** section.
 [6]: /incident_response/incident_management/
 [7]: https://app.datadoghq.com/on-call/pages
 [8]: /monitors/notify/#renotify
+[9]: /integrations/microsoft-teams/
