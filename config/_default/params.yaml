@@ -323,6 +323,7 @@ unsupported_sites:
   data_observability: [gov,gov2]
   data_streams: [gov,gov2]
   datadog_disaster_recovery: [gov,gov2]
+  deployment_gates: [gov,gov2]
   dora_metrics: [gov,gov2]
   dynamic_instrumentation: [gov,gov2]
   dynamic_quotas: [gov,gov2]
