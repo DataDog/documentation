@@ -1012,6 +1012,13 @@ components:
       required: true
       schema:
         type: string
+    MicrosoftTeamsTenantIDPathParameter:
+      description: Your tenant id.
+      in: path
+      name: tenant_id
+      required: true
+      schema:
+        type: string
     MicrosoftTeamsTenantIDQueryParameter:
       description: Your tenant id.
       in: query
@@ -136298,6 +136305,27 @@ paths:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+  /api/v2/integration/ms-teams/configuration/user-binding/{tenant_id}:
+    delete:
+      description: Delete the user binding for a given tenant from the Datadog Microsoft Teams integration.
+      operationId: DeleteMSTeamsUserBinding
+      parameters:
+        - $ref: "#/components/parameters/MicrosoftTeamsTenantIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete user binding
+      tags:
+        - Microsoft Teams Integration
+      x-menu-order: 12
   /api/v2/integration/ms-teams/configuration/workflows-webhook-handles:
     get:
       description: Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.
