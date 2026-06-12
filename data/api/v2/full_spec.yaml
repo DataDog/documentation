@@ -1744,6 +1744,14 @@ components:
       schema:
         example: "my-service"
         type: string
+    SharedDashboardDashboardIDPathParameter:
+      description: ID of the dashboard.
+      in: path
+      name: dashboard_id
+      required: true
+      schema:
+        example: abc-def-ghi
+        type: string
     SignalID:
       description: The ID of the signal.
       in: path
@@ -54132,6 +54140,23 @@ components:
         meta:
           $ref: "#/components/schemas/ServiceAccessTokenResponseMeta"
       type: object
+    ListSharedDashboardsResponse:
+      description: Response containing shared dashboards for a dashboard.
+      properties:
+        data:
+          description: Shared dashboards for the dashboard.
+          items:
+            $ref: "#/components/schemas/SharedDashboardResponse"
+          type: array
+        included:
+          description: Users and dashboards related to the shared dashboards.
+          items:
+            $ref: "#/components/schemas/SharedDashboardIncluded"
+          type: array
+      required:
+        - data
+        - included
+      type: object
     ListSourcemapsResponse:
       description: Response containing a paginated list of source maps.
       properties:
@@ -89288,6 +89313,347 @@ components:
       required:
         - type
       type: object
+    SharedDashboardGlobalTime:
+      additionalProperties: {}
+      description: Default time range configuration for the shared dashboard.
+      example:
+        live_span: 1h
+      nullable: true
+      type: object
+    SharedDashboardIncluded:
+      description: Resource included with a shared dashboard.
+      oneOf:
+        - $ref: "#/components/schemas/SharedDashboardIncludedDashboard"
+        - $ref: "#/components/schemas/SharedDashboardIncludedUser"
+    SharedDashboardIncludedDashboard:
+      description: Included dashboard resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SharedDashboardIncludedDashboardAttributes"
+        id:
+          description: ID of the dashboard.
+          example: abc-def-ghi
+          type: string
+        type:
+          $ref: "#/components/schemas/SharedDashboardIncludedDashboardType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SharedDashboardIncludedDashboardAttributes:
+      description: Attributes of the included dashboard.
+      properties:
+        title:
+          description: Dashboard title.
+          example: Q1 Metrics Dashboard
+          type: string
+      required:
+        - title
+      type: object
+    SharedDashboardIncludedDashboardType:
+      default: dashboard
+      description: Included dashboard resource type.
+      enum:
+        - dashboard
+      example: dashboard
+      type: string
+      x-enum-varnames:
+        - DASHBOARD
+    SharedDashboardIncludedUser:
+      description: Included user resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SharedDashboardIncludedUserAttributes"
+        id:
+          description: ID of the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/UserResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SharedDashboardIncludedUserAttributes:
+      description: Attributes of the included user.
+      properties:
+        handle:
+          description: User handle.
+          example: jane.doe@example.com
+          type: string
+        name:
+          description: User display name.
+          example: Jane Doe
+          type: string
+      required:
+        - handle
+        - name
+      type: object
+    SharedDashboardInvitee:
+      description: Invitee that can access an invite-only shared dashboard.
+      properties:
+        access_expiration:
+          description: Time when the invitee's access expires.
+          example: "2026-01-15T09:30:00.000Z"
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: Time when the invitee was added.
+          example: "2026-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        email:
+          description: Email address of the invitee.
+          example: jane.doe@example.com
+          type: string
+      required:
+        - email
+        - access_expiration
+        - created_at
+      type: object
+    SharedDashboardRelationshipDashboard:
+      description: Dashboard associated with the shared dashboard.
+      properties:
+        data:
+          $ref: "#/components/schemas/SharedDashboardRelationshipDashboardData"
+      required:
+        - data
+      type: object
+    SharedDashboardRelationshipDashboardData:
+      description: Dashboard relationship data.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: abc-def-ghi
+          type: string
+        type:
+          $ref: "#/components/schemas/SharedDashboardIncludedDashboardType"
+      required:
+        - id
+        - type
+      type: object
+    SharedDashboardRelationshipSharer:
+      description: User who shared the dashboard.
+      properties:
+        data:
+          $ref: "#/components/schemas/UserRelationshipData"
+      required:
+        - data
+      type: object
+    SharedDashboardRelationships:
+      description: Relationships of a shared dashboard.
+      properties:
+        dashboard:
+          $ref: "#/components/schemas/SharedDashboardRelationshipDashboard"
+        sharer:
+          $ref: "#/components/schemas/SharedDashboardRelationshipSharer"
+      required:
+        - dashboard
+        - sharer
+      type: object
+    SharedDashboardResponse:
+      description: A shared dashboard response resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SharedDashboardResponseAttributes"
+        id:
+          description: ID of the shared dashboard.
+          example: "12345"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/SharedDashboardRelationships"
+        type:
+          $ref: "#/components/schemas/SharedDashboardType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    SharedDashboardResponseAttributes:
+      description: Attributes of a shared dashboard response.
+      properties:
+        created_at:
+          description: Time when the shared dashboard was created.
+          example: "2026-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        embeddable_domains:
+          description: Domains where embed-type shared dashboards can be embedded.
+          example: ["https://example.com"]
+          items:
+            description: An embeddable domain.
+            type: string
+          type: array
+        expiration:
+          description: Time when the shared dashboard expires.
+          example: "2026-02-01T00:00:00.000Z"
+          format: date-time
+          nullable: true
+          type: string
+        global_time:
+          $ref: "#/components/schemas/SharedDashboardGlobalTime"
+        global_time_selectable:
+          description: Whether viewers can select a different global time setting.
+          example: false
+          type: boolean
+        invitees:
+          description: Invitees for invite-only shared dashboards.
+          items:
+            $ref: "#/components/schemas/SharedDashboardInvitee"
+          type: array
+        last_accessed:
+          description: Time when the shared dashboard was last accessed.
+          example: "2026-01-15T09:30:00.000Z"
+          format: date-time
+          nullable: true
+          type: string
+        selectable_template_vars:
+          description: Template variables that viewers can modify.
+          items:
+            $ref: "#/components/schemas/SharedDashboardSelectableTemplateVariable"
+          type: array
+        share_type:
+          $ref: "#/components/schemas/SharedDashboardShareType"
+        sharer_disabled:
+          description: Whether the user who shared the dashboard is disabled.
+          example: false
+          type: boolean
+        status:
+          $ref: "#/components/schemas/SharedDashboardStatus"
+        title:
+          description: Display title for the shared dashboard.
+          example: Q1 Metrics Dashboard
+          type: string
+        token:
+          description: Token assigned to the shared dashboard.
+          example: abc-123-token
+          type: string
+        url:
+          description: URL for the shared dashboard.
+          example: https://p.datadoghq.com/sb/abc-123-token
+          type: string
+        viewing_preferences:
+          $ref: "#/components/schemas/SharedDashboardViewingPreferences"
+      required:
+        - token
+        - title
+        - url
+        - viewing_preferences
+        - global_time_selectable
+        - global_time
+        - selectable_template_vars
+        - created_at
+        - last_accessed
+        - status
+        - share_type
+        - invitees
+        - embeddable_domains
+        - expiration
+        - sharer_disabled
+      type: object
+    SharedDashboardSelectableTemplateVariable:
+      description: A template variable that viewers can modify on the shared dashboard.
+      properties:
+        allow_any_value:
+          description: Whether viewers can see all tag values for the template variable and specify any value.
+          example: false
+          type: boolean
+        default_values:
+          description: Default selected values for the variable.
+          example: ["prod"]
+          items:
+            description: A default value for the template variable.
+            type: string
+          type: array
+        name:
+          description: Name of the template variable.
+          example: environment
+          type: string
+        prefix:
+          description: Tag prefix for the variable.
+          example: env
+          type: string
+        type:
+          description: Type of the template variable.
+          example: group
+          type: string
+        visible_tags:
+          description: Restricts which tag values are visible to the viewer.
+          example: ["prod"]
+          items:
+            description: A visible tag value for the template variable.
+            type: string
+          type: array
+      required:
+        - name
+        - prefix
+        - type
+        - allow_any_value
+        - default_values
+        - visible_tags
+      type: object
+    SharedDashboardShareType:
+      description: Type of dashboard sharing.
+      enum:
+        - open
+        - invite
+        - embed
+        - secure-embed
+      example: invite
+      type: string
+      x-enum-varnames:
+        - OPEN
+        - INVITE
+        - EMBED
+        - SECURE_EMBED
+    SharedDashboardStatus:
+      description: Status of the shared dashboard.
+      enum:
+        - active
+        - paused
+      example: active
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - PAUSED
+    SharedDashboardType:
+      default: shared_dashboard
+      description: Shared dashboard resource type.
+      enum:
+        - shared_dashboard
+      example: shared_dashboard
+      type: string
+      x-enum-varnames:
+        - SHARED_DASHBOARD
+    SharedDashboardViewingPreferences:
+      description: Display settings for the shared dashboard.
+      properties:
+        high_density:
+          description: Whether widgets are displayed in high-density mode.
+          example: false
+          type: boolean
+        theme:
+          $ref: "#/components/schemas/SharedDashboardViewingPreferencesTheme"
+      required:
+        - high_density
+        - theme
+      type: object
+    SharedDashboardViewingPreferencesTheme:
+      description: The theme of the shared dashboard view. `system` follows the viewer's system default.
+      enum:
+        - system
+        - light
+        - dark
+      example: system
+      type: string
+      x-enum-varnames:
+        - SYSTEM
+        - LIGHT
+        - DARK
     Shift:
       description: An on-call shift with its associated data and relationships.
       example:
@@ -124901,6 +125267,96 @@ paths:
         - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 3
+  /api/v2/dashboard/{dashboard_id}/shared:
+    get:
+      description: Retrieve shared dashboards associated with the specified dashboard.
+      operationId: ListSharedDashboardsByDashboardId
+      parameters:
+        - $ref: "#/components/parameters/SharedDashboardDashboardIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00.000Z"
+                          embeddable_domains: []
+                          expiration:
+                          global_time:
+                            live_span: 1h
+                          global_time_selectable: false
+                          invitees:
+                            - access_expiration:
+                              created_at: "2026-01-01T00:00:00.000Z"
+                              email: jane.doe@example.com
+                          last_accessed:
+                          selectable_template_vars: []
+                          share_type: invite
+                          sharer_disabled: false
+                          status: active
+                          title: Q1 Metrics Dashboard
+                          token: abc-123-token
+                          url: https://p.datadoghq.com/sb/abc-123-token
+                          viewing_preferences:
+                            high_density: false
+                            theme: system
+                        id: "12345"
+                        relationships:
+                          dashboard:
+                            data:
+                              id: abc-def-ghi
+                              type: dashboard
+                          sharer:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000000
+                              type: user
+                        type: shared_dashboard
+                    included:
+                      - attributes:
+                          title: Q1 Metrics Dashboard
+                        id: abc-def-ghi
+                        type: dashboard
+                      - attributes:
+                          handle: jane.doe@example.com
+                          name: Jane Doe
+                        id: 00000000-0000-0000-0000-000000000000
+                        type: user
+              schema:
+                $ref: "#/components/schemas/ListSharedDashboardsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Dashboard Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - dashboards_read
+      summary: List shared dashboards for a dashboard
+      tags:
+        - Dashboard Sharing
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - dashboards_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/dashboard/{dashboard_id}/shared/secure-embed:
     post:
       description: >-
@@ -188593,6 +189049,8 @@ tags:
       - **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.
       - You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints.
     name: Dashboard Secure Embed
+  - description: Manage dashboard sharing configurations.
+    name: Dashboard Sharing
   - description: |-
       Get usage statistics for the dashboards in your organization, including view
       counts, last-edit times, widget counts, and quality scores. See the
