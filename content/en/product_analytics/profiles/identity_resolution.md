@@ -32,7 +32,7 @@ No additional SDK configuration is required. Identity Resolution uses the anonym
 
 ## Feature behavior
 
-After Identity Resolution is enabled, the following Product Analytics features automatically reflect resolved identity:
+The following Product Analytics features automatically reflect resolved identity:
 
 | Feature | Behavior |
 |---------|----------|
@@ -57,15 +57,9 @@ Identity Resolution only links identifiers your application has already associat
 
 ## Filter by authentication status
 
-Identity Resolution expands the scope of user-based metrics to include anonymous activity not previously attributed to known users. As a result, you may see an increase in user counts, funnel volumes, and retention cohorts after enablement.
+Identity Resolution expands the scope of user-based metrics to include anonymous activity not previously attributed to known users. As a result, you may see an increase in user counts, funnel volumes, and retention cohorts. 
 
-### Filter for authenticated users
-
-To filter for authenticated users, set the User Id filter to `is not public`.
-
-### Filter for anonymous users
-
-To filter for anonymous users, set the User Id filter to `is public`.
+To reproduce previous metrics, filter for authenticated users by setting the User Id filter to `is not public`.
 
 ## Further reading
 
