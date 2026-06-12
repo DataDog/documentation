@@ -245,7 +245,7 @@ Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions.
    - **Terraform state**: By default, it creates an Azure Storage Account in the **scanner** subscription. To reuse an existing storage account in the scanner resource group instead, set `TF_STATE_STORAGE_ACCOUNT` before you run the command; the script does not create a new account when that variable is set.
    - **Resource providers**: When possible, it registers these resource providers in the scanner subscription: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel
+1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel.
 2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 3. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
 4. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
