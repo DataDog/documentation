@@ -24,6 +24,8 @@ The following integrations are supported:
 | [Prometheus Alertmanager](#prometheus-alertmanager) | Webhook |
 | [Pingdom](#pingdom) | Webhook |
 | [Sentry](#sentry) | Webhook (with forwarder) |
+| [Amazon CloudWatch](#amazon-cloudwatch) | SNS webhook |
+| [Azure Monitor](#azure-monitor) | Webhook |
 
 ## Slack
 
@@ -193,6 +195,70 @@ The aggregation key used to correlate and resolve events depends on the event ty
 
 {{% /collapse-content %}}
 
+## Amazon CloudWatch
+
+{{% collapse-content title="Set up the Amazon CloudWatch integration" level="h3" %}}
+
+Route Amazon CloudWatch alarms to Datadog On-Call through Amazon SNS.
+
+### Prerequisites
+
+- The [Amazon Web Services integration][5] configured in Datadog
+- A Datadog API key
+
+### Setup
+
+1. In AWS, create an SNS topic (for example, `datadog-oncall-alerts`).
+1. Add an HTTPS subscription to the topic using the following webhook URL:
+   ```
+   https://app.datadoghq.com/intake/webhook/sns?api_key=<DATADOG_API_KEY>&oncall_team=<TEAM_HANDLE>
+   ```
+   Replace `<DATADOG_API_KEY>` with your Datadog API key and `<TEAM_HANDLE>` with your On-Call team handle.
+1. In CloudWatch, open the alarm you want to route to On-Call.
+1. Under **Notification**, set the **In alarm** action to send a notification to the SNS topic you created.
+
+### How it works
+
+When a CloudWatch alarm enters the **In alarm** state, it publishes a message to the SNS topic. SNS delivers the message to Datadog, which creates a Page and routes it to the specified On-Call team. When the alarm recovers, SNS sends a resolution notification that automatically closes the Page.
+
+To route alarms from different services or teams, create one SNS topic per team, each with its own Datadog subscription URL using a different `oncall_team` value.
+
+For more details, see the [Amazon SNS integration docs][6].
+
+{{% /collapse-content %}}
+
+## Azure Monitor
+
+{{% collapse-content title="Set up the Azure Monitor integration" level="h3" %}}
+
+Route Azure Monitor alerts to Datadog On-Call through an Azure Action Group webhook.
+
+### Prerequisites
+
+- Access to the Azure Portal with permissions to manage Monitor alerts and Action Groups
+- A Datadog API key
+
+### Setup
+
+1. In Azure Portal, go to **Monitor > Alerts > Action Groups**.
+1. Create or edit an Action Group and add a **Webhook** action with the following URL:
+   ```
+   https://event-management-intake.datadoghq.com/api/v2/events/webhook?integration_id=azure-monitor-alerts&dd-api-key=<DATADOG_API_KEY>&oncall_team=<TEAM_HANDLE>
+   ```
+   Replace `<DATADOG_API_KEY>` with your Datadog API key and `<TEAM_HANDLE>` with your On-Call team handle. For non-US1 sites, replace `event-management-intake.datadoghq.com` with the endpoint for your [Datadog site][7].
+1. Enable **Common Alert Schema** on the webhook action. This is required for Datadog to parse the payload correctly.
+1. Attach the Action Group to your alert rules by editing each rule and selecting the Action Group under **Actions**.
+
+**Note**: Do not use the Azure built-in test button to verify the integration. It sends payloads with outdated timestamps that Datadog rejects. Use a real test alert instead.
+
+### How it works
+
+When an Azure Monitor alert fires, Azure sends a POST request to the configured webhook URL. Datadog routes the resulting event to the specified On-Call team. When the alert resolves, Azure sends a resolution notification that automatically closes the Page.
+
+For more details, see the [Azure Monitor Alerts integration docs][8].
+
+{{% /collapse-content %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -201,3 +267,7 @@ The aggregation key used to correlate and resolve events depends on the event ty
 [2]: https://my.pingdom.com/integrations/settings
 [3]: https://my.pingdom.com/newchecks/checks
 [4]: /integrations/sentry/#step-1-deploy-the-webhook-forwarder
+[5]: /integrations/amazon_web_services/
+[6]: /integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns
+[7]: /getting_started/site/
+[8]: /integrations/azure-monitor-alerts/
