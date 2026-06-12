@@ -55,14 +55,14 @@ To triage an event:
 
 1. Select the event in the **AGENT RULE** column in the [Agent Events explorer][13].
 2. Select **Click to copy**.
-3. Open the [OOTB rules documention][12].
+3. Open the [OOTB detection rules documentation][12].
 4. In the search field, paste the copied rule name.
 5. Select the rule from the results.
 6. Review the rule **Goal**, **Strategy**, and follow the steps in **Triage and response**.
 
 
 [11]: /security/workload_protection/security_signals
-[12]: /security/default_rules/#cat-cloud-security-management
+[12]: /security/workload_protection/detect_and_monitor/detection_rules/#ootb-detection-rules
 [13]: https://app.datadoghq.com/security/agent-events
 [14]: /events/explorer/
 [15]: /infrastructure/process/
