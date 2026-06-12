@@ -601,7 +601,7 @@ secret_backend_config:
     project_id: <PROJECT_ID>
 ```
 
-When using environment variables, convert the configuration to JSON like so:
+When using environment variables, convert the configuration to JSON:
 
 ```sh
 DD_SECRET_BACKEND_TYPE="gcp.secretmanager"
