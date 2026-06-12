@@ -193,6 +193,18 @@ When enabled, each task graph run appears as a trace in APM with individual task
    - For the top-level task graph span, filter by `operation_name:snowflake.task_graph`
    - For individual task spans, filter by `operation_name:snowflake.task`
 
+## Object tags
+
+Datadog ingests [Snowflake object tags][6] applied to your tables and attaches them to the corresponding table in Data Observability. Tags are read from `SNOWFLAKE.ACCOUNT_USAGE.TAG_REFERENCES` using the `SNOWFLAKE.GOVERNANCE_VIEWER` database role granted during setup, so no additional permissions are required.
+
+Ingested tags are available as attributes on the **Data Observability Metrics** data source, alongside `database`, `schema`, `table`, and `entity_id`. In the Metrics Explorer and dashboard widget editor, you can use them to:
+
+- Filter table metrics by a business dimension (for example, `data_source` or `data_domain`).
+- Group metrics by a tag value.
+- Drive template variables on dashboards.
+
+Datadog ingests up to 50 tags per table, which is Snowflake's documented limit. Tags are refreshed on each crawl, so changes in Snowflake appear after the next sync.
+
 ## Next steps
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
@@ -240,3 +252,4 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 [3]: https://app.datadoghq.com/datasets/settings/integrations
 [4]: https://app.datadoghq.com/apm/traces
 [5]: /monitors/types/data_observability/
+[6]: https://docs.snowflake.com/en/user-guide/object-tagging
