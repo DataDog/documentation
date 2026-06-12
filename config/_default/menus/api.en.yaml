@@ -4705,6 +4705,18 @@ menu:
       url: /api/latest/slack-integration/
       identifier: slack-integration
       generated: true
+    - name: List Slack user bindings
+      url: /api/latest/slack-integration/list-slack-user-bindings/
+      identifier: slack-integration-list-slack-user-bindings
+      parent: slack-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSlackUserBindings
+        unstable: []
+        order: 1
     - name: Update a Slack integration channel
       url: /api/latest/slack-integration/update-a-slack-integration-channel/
       identifier: slack-integration-update-a-slack-integration-channel
