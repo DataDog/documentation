@@ -111,9 +111,9 @@ To enable meeting summaries for incident Microsoft Teams meetings:
 
 {{< img src="incident_response/incident_management/integrations/ms_teams_enable_meeting_summaries.png" alt="The Microsoft Teams tenant settings page with the Generate AI meeting summaries toggle enabled." style="width:90%;" >}}
 
-#### Summarizing an incident meeting
+#### How meeting summaries work
 
-Meeting summaries are created for Microsoft Teams meetings attached to an incident.
+Meeting summaries are generated for Microsoft Teams meetings attached to an incident.
 
 When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
 
