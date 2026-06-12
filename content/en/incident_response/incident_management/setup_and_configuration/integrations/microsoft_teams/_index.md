@@ -117,7 +117,7 @@ Meeting summaries are created for Microsoft Teams meetings attached to an incide
 
 When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
 
-- The **incident timeline**, under a "Meeting Summary" entry.
+- The **incident timeline**, under a **Meeting Summary** entry.
 - The **incident chat channel**, in the meeting card thread and broadcast to the channel.
 
 When the meeting ends, a final post-meeting summary is posted to the same locations.
