@@ -759,12 +759,12 @@ export default {
     gov: 'intake.synthetics.ddog-gov.com'
   },
   mcp_server_endpoint: {
-    us: 'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp',
-    us3: 'https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp',
-    us5: 'https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp',
-    eu: 'https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp',
-    ap1: 'https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp',
-    ap2: 'https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp',
+    us: 'https://mcp.datadoghq.com/v1/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/v1/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/v1/mcp',
+    eu: 'https://mcp.datadoghq.eu/v1/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
     gov2: 'The MCP Server endpoint for US2-FED is not supported.',
     gov: 'The MCP Server endpoint for GOV is not supported.'
   },
@@ -779,12 +779,12 @@ export default {
     gov: 'N/A'
   },
   goose_mcp_install_deeplink: {
-    us: 'goose://extension?url=https://mcp.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    eu: 'goose://extension?url=https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us: 'goose://extension?url=https://mcp.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    eu: 'goose://extension?url=https://mcp.datadoghq.eu/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
     gov: 'N/A'
   },
   microsoft_teams_app_name: {
