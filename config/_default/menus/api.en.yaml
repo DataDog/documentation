@@ -10878,6 +10878,23 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Dashboard Sharing
+      url: /api/latest/dashboard-sharing/
+      identifier: dashboard-sharing
+      generated: true
+    - name: List shared dashboards for a dashboard
+      url: /api/latest/dashboard-sharing/list-shared-dashboards-for-a-dashboard/
+      identifier: dashboard-sharing-list-shared-dashboards-for-a-dashboard
+      parent: dashboard-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSharedDashboardsByDashboardId
+        unstable:
+          - v2
+        order: 5
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
