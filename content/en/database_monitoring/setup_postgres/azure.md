@@ -62,7 +62,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 |----------------------| -- | --- |
 | `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][1] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value, queries longer than `1024` characters are not collected. |
-| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.track` | `ALL` | Required for Database Monitoring to collect query metrics on Flexible Server. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
@@ -191,6 +191,36 @@ LANGUAGE 'plpgsql'
 RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
+
+### Create the column statistics function
+
+Create the following function **in every database** to enable the Agent to collect column-level table statistics from `pg_stats`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs FROM pg_catalog.pg_stats; $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+After the function exists, enable collection in your Postgres instance config:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+For tuning options, see [Advanced Configuration][14].
 
 ### Securely store your password
 {{% dbm-secret %}}
@@ -581,3 +611,4 @@ If you have installed and configured the integrations and Agent as described, an
 [11]: /integrations/azure_db_for_postgresql/
 [12]: /database_monitoring/setup_postgres/troubleshooting/
 [13]: /database_monitoring/guide/managed_authentication
+[14]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection

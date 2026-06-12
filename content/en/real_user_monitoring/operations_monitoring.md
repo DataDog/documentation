@@ -7,7 +7,7 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Operations Monitoring is in Preview.
 {{< /callout >}}
 
@@ -337,6 +337,10 @@ Both metrics are retained for 15 months, and include several dimensions:
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
 
+## Investigate root causes with AI
+
+You can run an agentic investigation on a single operation directly from the Operations page. The agent analyzes both the success rate and the latency of the operation and surfaces focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions. For more information, see [Operation AI Investigation][8].
+
 ## Configure retention filters
 
 Operations are a new type of event in RUM. Operations are bound to a RUM Session, but can span across multiple RUM Views. Operations can be targeted in retention filters. This allows you to align your retention strategy on features that are cornerstones for your user experiences. For example, you can programmatically keep RUM Sessions that had specific operations fail or are taking longer than desired.
@@ -364,3 +368,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
 [7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
+[8]: /real_user_monitoring/ai_investigations/operation_ai_investigation/

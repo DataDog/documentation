@@ -1,10 +1,10 @@
 ---
 title: Monitoring
-description: How to explore more of your application in LLM Observability.
+description: How to explore more of your application in Agent Observability.
 further_reading:
 - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
   tag: "Learning Center"
-  text: "Investigate with LLM Observability"
+  text: "Investigate with Agent Observability"
 
 ---
 
@@ -18,20 +18,20 @@ Monitor performance, debug issues, evaluate quality, and secure your LLM-powered
 
 Monitor your LLM application's operational health with built-in metrics and dashboards:
 
-{{< img src="llm_observability/index/llm_dashboard_light.png" alt="LLM Observability Operational Insights dashboard, showing various metrics and visualizations. Includes an Overview section with total number of traces and spans, success and error rates, etc.; and an LLM Calls section with a donut chart of model usage,average input and output tokens per call, etc." style="width:100%">}}
+{{< img src="llm_observability/index/llm_dashboard_light.png" alt="Agent Observability Operational Insights dashboard, showing various metrics and visualizations. Includes an Overview section with total number of traces and spans, success and error rates, etc.; and an LLM Calls section with a donut chart of model usage,average input and output tokens per call, etc." style="width:100%">}}
 
 - **Request volume and latency**: Track requests per second, response times, and performance bottlenecks across different models, operations, and endpoints.
 - **Error tracking**: Monitor HTTP errors, model timeouts, and failed requests with detailed error context.
 - **Token consumption**: Track prompt tokens, cached tokens, completion tokens, and total usage to optimize costs.
 - **Model usage analytics**: Monitor which models are being called, their frequency, and performance characteristics.
 
-The out-of-the-box [LLM Observability Operational Insights dashboard][6] provides consolidated views of trace-level and span-level metrics, error rates, latency breakdowns, token consumption trends, and triggered monitors.
+The out-of-the-box [Agent Observability Operational Insights dashboard][6] provides consolidated views of trace-level and span-level metrics, error rates, latency breakdowns, token consumption trends, and triggered monitors.
 
 ### Production debugging and troubleshooting
 
 Debug complex LLM workflows with detailed execution visibility:
 
-{{< img src="llm_observability/index/llm_trace_light.png" alt="Detail view of a trace in LLM Observability, featuring a flame graph that visually represents each service call. 'OpenAI.createResponse' is selected, and a detailed span view is displayed — including input messages and output messages." style="width:100%">}}
+{{< img src="llm_observability/index/llm_trace_light.png" alt="Detail view of a trace in Agent Observability, featuring a flame graph that visually represents each service call. 'OpenAI.createResponse' is selected, and a detailed span view is displayed — including input messages and output messages." style="width:100%">}}
 
 - **End-to-end trace analysis**: Visualize complete request flows from user input through model calls, tool calls, and response generation.
 - **Span-level debugging**: Examine individual operations within chains, including preprocessing steps, model calls, and post-processing logic.
@@ -40,15 +40,15 @@ Debug complex LLM workflows with detailed execution visibility:
 
 ### Quality and safety evaluations
 
-{{< img src="llm_observability/index/llm_example_eval_light.png" alt="Detail view of a span in LLM Observability, Evaluations tab. Displays a Hallucination evaluation with 'Confirmed Contradiction', the flagged output, context quote, and an explanation of why this was flagged." style="width:100%">}}
+{{< img src="llm_observability/index/llm_example_eval_light.png" alt="Detail view of a span in Agent Observability, Evaluations tab. Displays a Hallucination evaluation with 'Confirmed Contradiction', the flagged output, context quote, and an explanation of why this was flagged." style="width:100%">}}
 
 Ensure your LLM agents or applications meets quality standards with online evaluations. For comprehensive information about Datadog-hosted and managed evaluations, ingesting custom evaluations, and safety monitoring capabilities, see the [Evaluations documentation][5].
 
 ### Query your LLM application's traces and spans
 
-{{< img src="llm_observability/index/llm_query_example_light.png" alt="LLM Observability > Traces view, where the user has entered the query `ml_app:shopist-chat-v2 'purchase' -'discount' @trace.total_tokens:>=20` and various traces are displayed." style="width:100%">}}
+{{< img src="llm_observability/index/llm_query_example_light.png" alt="Agent Observability > Traces view, where the user has entered the query `ml_app:shopist-chat-v2 'purchase' -'discount' @trace.total_tokens:>=20` and various traces are displayed." style="width:100%">}}
 
-Learn how to use Datadog's LLM Observability query interface to search, filter, and analyze traces and spans generated by your LLM applications. The [Querying documentation][1] covers how to:
+Learn how to use Agent Observability query interface to search, filter, and analyze traces and spans generated by your LLM applications. The [Querying documentation][1] covers how to:
 
 - Use the search bar to filter traces and spans by attributes such as model, user, or error status.
 - Apply advanced filters to focus on specific LLM operations or timeframes.
@@ -57,11 +57,11 @@ Learn how to use Datadog's LLM Observability query interface to search, filter, 
 This enables you to quickly identify issues, monitor performance, and gain insights into your LLM application's behavior in production.
 
 
-### Correlate APM and LLM Observability
+### Correlate APM and Agent Observability
 
-{{< img src="llm_observability/index/llm_apm_example_light.png" alt="A trace in Datadog APM. The Overview tab displays a section titled LLM Obervability, with a link to view the span in LLM Observability, as well as input and output text." style="width:100%">}}
+{{< img src="llm_observability/index/llm_apm_example_light.png" alt="A trace in Datadog APM. The Overview tab displays a section titled LLM Obervability, with a link to view the span in Agent Observability, as well as input and output text." style="width:100%">}}
 
-For applications instrumented with Datadog APM, you can [correlate APM and LLM Observability][2] through the SDK. Correlating APM with LLM Observability full end-to-end visibility and thorough analysis, from app issues to LLM-specific root causes.
+For applications instrumented with Datadog APM, you can [correlate APM and Agent Observability][2] through the SDK. Correlating APM with Agent Observability full end-to-end visibility and thorough analysis, from app issues to LLM-specific root causes.
 
 ### Patterns
 
