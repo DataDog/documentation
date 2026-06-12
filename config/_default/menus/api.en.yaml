@@ -14202,6 +14202,18 @@ menu:
           - ListWorkflowsWebhookHandles
         unstable: []
         order: 7
+    - name: Delete user binding
+      url: /api/latest/microsoft-teams-integration/delete-user-binding/
+      identifier: microsoft-teams-integration-delete-user-binding
+      parent: microsoft-teams-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMSTeamsUserBinding
+        unstable: []
+        order: 12
     - name: Update tenant-based handle
       url: /api/latest/microsoft-teams-integration/update-tenant-based-handle/
       identifier: microsoft-teams-integration-update-tenant-based-handle
