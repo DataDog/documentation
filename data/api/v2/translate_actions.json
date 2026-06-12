@@ -2422,6 +2422,10 @@
     "request_description": "Tenant-based handle payload.",
     "request_schema_description": "Update tenant-based handle request."
   },
+  "DeleteMSTeamsUserBinding": {
+    "description": "Delete the user binding for a given tenant from the Datadog Microsoft Teams integration.",
+    "summary": "Delete user binding"
+  },
   "ListWorkflowsWebhookHandles": {
     "description": "Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.",
     "summary": "Get all Workflows webhook handles"
