@@ -21,6 +21,8 @@ User and account profiles are generated from RUM events collected through the RU
 
 User profiles are grouped by the `user_id` attribute, while account profiles are grouped by `account_id`.
 
+For unauthenticated users or visitors who never call `setUser`, the RUM SDK automatically tracks activity using `usr.anonymous_id`. See [Track unauthenticated users][9] for details.
+
 You can also customize these pages by adding attributes that matter most to your team. See the [Custom Attributes section](#use-custom-attributes-to-enrich-profiles) to learn how to tailor profile data to your needs.
 
 
@@ -188,3 +190,4 @@ You can filter these custom attributes throughout the product analytics platform
 [6]: https://app.datadoghq.com/product-analytics/segments
 [7]: https://app.datadoghq.com/product-analytics/profiles
 [8]: https://app.datadoghq.com/product-analytics/profiles/accounts
+[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#track-unauthenticated-users
