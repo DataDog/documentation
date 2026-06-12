@@ -38,7 +38,7 @@ The following configuration applies to all platforms.
 
 - `dd-api-key`: Your Datadog API key.
 - `dd-otlp-source`: Set to `serverless`.
-- `compute_stats`: Set to `true` to enable [trace metrics][2].
+- `compute_stats`: Set to `true`. Required for [trace metrics][2] and serverless platform detection.
 
 **Service name**: Set `OTEL_SERVICE_NAME` to identify your service. Without it, traces appear as `unknown_service`.
 
@@ -71,7 +71,7 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-sourc
 export OTEL_SERVICE_NAME="my-lambda-function"
 ```
 
-The ADOT layer handles resource attribute detection automatically. To set resource attributes manually, `cloud.provider` is required. Set `faas.id` (a parseable Lambda ARN) for full platform identification; if `faas.id` is not available, set `cloud.platform=aws_lambda` instead:
+The ADOT layer handles resource attribute detection automatically. If you are not using ADOT, set resource attributes manually. `cloud.provider` is required. Set `faas.id` (a parseable Lambda ARN) for full platform identification; if `faas.id` is not available, set `cloud.platform=aws_lambda` instead:
 
 ```shell
 export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,faas.id=arn:aws:lambda:us-east-1:123456789012:function:my-function"
