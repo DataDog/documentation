@@ -1,10 +1,10 @@
 ---
-title: "Provision the Datadog Agent for Postgres Database Monitoring with Terraform"
-description: Provision the Datadog Agent for Postgres Database Monitoring with Terraform on AWS.
+title: "Provision the Datadog Agent for MySQL Database Monitoring with Terraform"
+description: Provision the Datadog Agent for MySQL Database Monitoring with Terraform on AWS.
 further_reading:
-- link: "/database_monitoring/setup_postgres/rds/"
+- link: "/database_monitoring/setup_mysql/rds/"
   tag: "Documentation"
-  text: "Set up Database Monitoring for Postgres on RDS"
+  text: "Set up Database Monitoring for MySQL on RDS"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Database Monitoring data collected"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This page walks through provisioning the Datadog Agent for Postgres Database Monitoring with Terraform on AWS. Select the tab for where the **Agent runs**.
+This page walks through provisioning the Datadog Agent for MySQL Database Monitoring with Terraform on AWS. Select the tab for where the **Agent runs**.
 
 The Terraform examples used on this page are available in [`DataDog/dd-database-monitoring-example`][1]. Each combination has its own directory with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`, and a `terraform.tfvars.example` you can copy and edit. The path scheme is:
 
@@ -23,7 +23,7 @@ The Terraform examples used on this page are available in [`DataDog/dd-database-
 terraform/<database>/<cloud>/<agent-runtime>/
 ```
 
-The directory tree is keyed on **cloud** rather than the hosting type — one Terraform module typically covers all of a cloud's database hosting options that share the same VPC and security-group semantics. For example, the ECS Fargate Agent against any AWS-side Postgres is available at `terraform/postgres/aws/ecs-fargate/` and works for RDS, Aurora, and self-hosted Postgres on EC2.
+The directory tree is keyed on **cloud** rather than the hosting type — one Terraform module typically covers all of a cloud's database hosting options that share the same VPC and security-group semantics. For example, the ECS Fargate Agent against any AWS-side MySQL is available at `terraform/mysql/aws/ecs-fargate/` and works for RDS, Aurora, and self-hosted MySQL on EC2.
 
 This page covers the **Agent** side of the setup. It does not provision the database, set database-side parameters, or create the `datadog` user inside the database. For those steps, see the per-database setup pages from [Database Monitoring][2].
 
@@ -32,49 +32,48 @@ This page covers the **Agent** side of the setup. It does not provision the data
 
 ## Hosting note
 
-The Terraform module for this combination works for any Postgres database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
+The Terraform module for this combination works for any MySQL database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
 
-- **Amazon RDS Postgres**: The RDS endpoint and the RDS security group.
-- **Amazon Aurora Postgres**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
-- **Self-hosted Postgres on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
+- **Amazon RDS MySQL**: The RDS endpoint and the RDS security group.
+- **Amazon Aurora MySQL**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
+- **Self-hosted MySQL on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the MySQL EC2 instance.
 
-For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For MySQL self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
 
 ## Architecture
 
-A single Datadog Agent task runs on AWS ECS Fargate inside the same VPC as your Postgres database. The Agent uses Autodiscovery to connect to the database endpoint and ships metrics, query samples, and execution plans to Datadog.
+A single Datadog Agent task runs on AWS ECS Fargate inside the same VPC as your MySQL database. The Agent uses Autodiscovery to connect to the database endpoint and ships metrics, query samples, and execution plans to Datadog.
 
 ## Prerequisites
 
 - **Terraform 1.5 or later**, and AWS credentials with permission to create ECS, IAM, security group, and CloudWatch log group resources in the target region.
-- **An existing Postgres instance** (Postgres 10 or later) — RDS, Aurora, or self-hosted on EC2.
+- **An existing MySQL instance** (MySQL 5.7 or later, or MariaDB 10.5 or later) — RDS, Aurora, or self-hosted on EC2.
 - **A private subnet in the database's VPC** that has NAT egress to the internet — the Agent needs to reach `*.${DD_SITE}`.
 - **A Datadog API key** for the destination organization.
-- **A parameter group (RDS/Aurora) or `postgresql.conf` (self-hosted)** with the DBM-required parameters set:
+- **A parameter group (RDS/Aurora) or `my.cnf` (self-hosted)** with the DBM-required parameters set:
 
   | Parameter | Value | Purpose |
   |---|---|---|
-  | `shared_preload_libraries` | `pg_stat_statements` | Required for query metric collection |
-  | `track_activity_query_size` | `4096` | Increases captured SQL text size |
-  | `pg_stat_statements.track` | `ALL` | Captures statements inside functions and procedures |
-  | `pg_stat_statements.max` | `10000` | Retains more normalized queries |
-  | `pg_stat_statements.track_utility` | `off` | Skips PREPARE and EXPLAIN noise |
+  | `performance_schema` | `ON` | Required for query metric collection (on by default in MySQL 5.6+) |
+  | `performance-schema-consumer-events-statements-current` | `ON` | Captures currently running statements |
+  | `performance-schema-consumer-events-statements-history` | `ON` | Retains recent statement history per thread |
+  | `performance-schema-consumer-events-statements-history-long` | `ON` | Retains recent statement history globally |
 
-  Changing `shared_preload_libraries` requires a database restart (for RDS/Aurora, an instance reboot).
+  Changing `performance_schema` requires a database restart (for RDS/Aurora, an instance reboot).
 
-- **The `datadog` Postgres user** with the required grants and the `pg_stat_statements` extension installed in each monitored database. See [Set up Database Monitoring for Postgres on RDS][3] for the SQL.
+- **The `datadog` MySQL user** with the required grants. See [Set up Database Monitoring for MySQL on RDS][3] for the SQL.
 
 ## Apply the Terraform
 
-The example for this combination is available at [`terraform/postgres/aws/ecs-fargate/`][4] in `dd-database-monitoring-example`.
+The example for this combination is available at [`terraform/mysql/aws/ecs-fargate/`][4] in `dd-database-monitoring-example`.
 
 ```bash
 git clone https://github.com/DataDog/dd-database-monitoring-example.git
-cd dd-database-monitoring-example/terraform/postgres/aws/ecs-fargate
+cd dd-database-monitoring-example/terraform/mysql/aws/ecs-fargate
 
 cp terraform.tfvars.example terraform.tfvars
 # Fill in: vpc_id, subnet_ids, db_security_group_id, db_endpoint,
-# database_name, datadog_user_password, datadog_api_key, datadog_site
+# datadog_user_password, datadog_api_key, datadog_site
 
 terraform init
 terraform plan
@@ -86,7 +85,7 @@ terraform apply
 - A Fargate task definition
 - An ECS service
 - An Agent task security group
-- An ingress rule on the database security group for port 5432
+- An ingress rule on the database security group for port 3306
 - An IAM execution role with the standard policy attached
 - A CloudWatch log group
 
@@ -98,10 +97,10 @@ To attach the Agent service to an ECS cluster you already operate, set `existing
 |---|---|
 | `vpc_id` | The VPC containing the database. |
 | `subnet_ids` | One or more private subnets with NAT egress. |
-| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For RDS, the RDS instance SG; for Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
+| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 3306. For RDS, the RDS instance SG; for Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
 | `db_endpoint` | The database endpoint host (no port). For RDS, the RDS endpoint; for Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
-| `database_name` | The Postgres database to monitor. |
-| `datadog_user_password` | The password for the Postgres `datadog` user. |
+| `db_port` *(optional)* | MySQL TCP port. Default `3306`. |
+| `datadog_user_password` | The password for the MySQL `datadog` user. |
 | `datadog_api_key` | The API key for the destination organization. |
 | `datadog_site` | For example, `datadoghq.com` or `datadoghq.eu`. |
 | `existing_ecs_cluster_name` *(optional)* | Name of an existing ECS cluster to attach the Agent service to. Leave empty to provision a new cluster. |
@@ -119,13 +118,13 @@ For the full input list and defaults, see [`variables.tf`][5] in the example dir
      --query 'services[0].{running:runningCount,desired:desiredCount}'
    ```
 
-2. To verify that the Agent's Postgres check runs cleanly, tail the Agent logs:
+2. To verify that the Agent's MySQL check runs cleanly, tail the Agent logs:
 
    ```bash
    aws logs tail $(terraform output -raw log_group_name) --follow
    ```
 
-   Look for `Running check postgres` and the absence of `pg_stat_statements` errors.
+   Look for `Running check mysql` and the absence of `performance_schema` errors.
 
 3. In the Datadog UI, verify that:
 
@@ -138,15 +137,15 @@ For the full input list and defaults, see [`variables.tf`][5] in the example dir
 | Symptom | Likely cause |
 |---|---|
 | Agent logs show `connection refused` to the database | The database security-group ingress rule didn't apply, or the task is in a subnet with no route to the database. |
-| Agent logs show `pg_stat_statements is not loaded` | The parameter group / `postgresql.conf` is missing `shared_preload_libraries=pg_stat_statements`, or the database was not restarted after the change. |
-| Agent logs show `permission denied for relation pg_stat_activity` | The `pg_monitor` role is not granted to the `datadog` user. |
+| Agent logs show `performance_schema is not enabled` | The parameter group is missing `performance_schema=ON`, or the database was not restarted after the change. |
+| Agent logs show `Access denied` | The `datadog` MySQL user is missing required grants — see [Set up Database Monitoring for MySQL on RDS][3] for the SQL. |
 | No data in the Datadog UI | The API key is wrong, `datadog_site` is mismatched, or the task can't reach `*.${DD_SITE}` (NAT egress missing). |
-| `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database. |
+| `query_samples` is empty | The `performance_schema` consumers for statement history are not enabled. |
 
 [2]: /database_monitoring/
-[3]: /database_monitoring/setup_postgres/rds/
-[4]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ecs-fargate
-[5]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ecs-fargate/variables.tf
+[3]: /database_monitoring/setup_mysql/rds/
+[4]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/mysql/aws/ecs-fargate
+[5]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/mysql/aws/ecs-fargate/variables.tf
 
 {{% /tab %}}
 
@@ -154,17 +153,17 @@ For the full input list and defaults, see [`variables.tf`][5] in the example dir
 
 ## Hosting note
 
-The Terraform module for this combination works for any Postgres database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
+The Terraform module for this combination works for any MySQL database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
 
-- **Amazon RDS Postgres**: The RDS endpoint and the RDS security group.
-- **Amazon Aurora Postgres**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
-- **Self-hosted Postgres on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
+- **Amazon RDS MySQL**: The RDS endpoint and the RDS security group.
+- **Amazon Aurora MySQL**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
+- **Self-hosted MySQL on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the MySQL EC2 instance.
 
-For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For MySQL self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
 
 ## Architecture
 
-The Datadog Agent is installed on Amazon EKS with EC2 node groups through the official Helm chart. The Postgres check is configured as a **cluster check**: the Cluster Agent dispatches it to a dedicated Cluster Check Runner pod, so DBM data is emitted **once cluster-wide** rather than duplicated per node. The runner pod connects to the Postgres database from inside the cluster's VPC.
+The Datadog Agent is installed on Amazon EKS with EC2 node groups through the official Helm chart. The MySQL check is configured as a **cluster check**: the Cluster Agent dispatches it to a dedicated Cluster Check Runner pod, so DBM data is emitted **once cluster-wide** rather than duplicated per node. The runner pod connects to the MySQL database from inside the cluster's VPC.
 
 The example supports two modes:
 
@@ -176,21 +175,20 @@ The example supports two modes:
 ### For both modes
 
 - **Terraform 1.5 or later** with the `aws`, `helm`, and `kubernetes` providers.
-- **An existing Postgres instance** (Postgres 10 or later) — RDS, Aurora, or self-hosted on EC2 — in a VPC reachable from the EKS nodes.
+- **An existing MySQL instance** (MySQL 5.7 or later, or MariaDB 10.5 or later) — RDS, Aurora, or self-hosted on EC2 — in a VPC reachable from the EKS nodes.
 - **A Datadog API key** for the destination organization (and an app key if you want Cluster Agent features beyond DBM).
-- **A parameter group (RDS/Aurora) or `postgresql.conf` (self-hosted)** with the DBM-required parameters set:
+- **A parameter group (RDS/Aurora) or `my.cnf` (self-hosted)** with the DBM-required parameters set:
 
   | Parameter | Value | Purpose |
   |---|---|---|
-  | `shared_preload_libraries` | `pg_stat_statements` | Required for query metric collection |
-  | `track_activity_query_size` | `4096` | Increases captured SQL text size |
-  | `pg_stat_statements.track` | `ALL` | Captures statements inside functions and procedures |
-  | `pg_stat_statements.max` | `10000` | Retains more normalized queries |
-  | `pg_stat_statements.track_utility` | `off` | Skips PREPARE and EXPLAIN noise |
+  | `performance_schema` | `ON` | Required for query metric collection (on by default in MySQL 5.6+) |
+  | `performance-schema-consumer-events-statements-current` | `ON` | Captures currently running statements |
+  | `performance-schema-consumer-events-statements-history` | `ON` | Retains recent statement history per thread |
+  | `performance-schema-consumer-events-statements-history-long` | `ON` | Retains recent statement history globally |
 
-  Changing `shared_preload_libraries` requires a database restart (for RDS/Aurora, an instance reboot).
+  Changing `performance_schema` requires a database restart (for RDS/Aurora, an instance reboot).
 
-- **The `datadog` Postgres user** with the required grants and the `pg_stat_statements` extension installed in each monitored database. See [Set up Database Monitoring for Postgres on RDS][3] for the SQL.
+- **The `datadog` MySQL user** with the required grants. See [Set up Database Monitoring for MySQL on RDS][3] for the SQL.
 
 ### Additional prerequisites for BYO mode
 
@@ -206,16 +204,16 @@ The example supports two modes:
 
 ## Apply the Terraform
 
-The example for this combination is available at [`terraform/postgres/aws/amazon-eks/`][6] in `dd-database-monitoring-example`.
+The example for this combination is available at [`terraform/mysql/aws/amazon-eks/`][6] in `dd-database-monitoring-example`.
 
 ```bash
 git clone https://github.com/DataDog/dd-database-monitoring-example.git
-cd dd-database-monitoring-example/terraform/postgres/aws/amazon-eks
+cd dd-database-monitoring-example/terraform/mysql/aws/amazon-eks
 
 cp terraform.tfvars.example terraform.tfvars
 # Pick BYO or greenfield in the file header, then fill in the rest:
-# db_security_group_id, db_endpoint, database_name,
-# datadog_user_password, datadog_api_key, datadog_site
+# db_security_group_id, db_endpoint, datadog_user_password,
+# datadog_api_key, datadog_site
 
 terraform init
 terraform plan
@@ -248,10 +246,10 @@ Depending on the mode, the Terraform creates:
 |---|---|
 | `eks_cluster_name` | Name of the existing EKS cluster. |
 | `eks_node_security_group_id` | Security group attached to the EKS worker nodes — the example adds an ingress rule on the database SG from this SG. |
-| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
+| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 3306. For Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
 | `db_endpoint` | The database endpoint host (no port). For Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
-| `database_name` | The Postgres database to monitor. |
-| `datadog_user_password` | The password for the Postgres `datadog` user. |
+| `db_port` *(optional)* | MySQL TCP port. Default `3306`. |
+| `datadog_user_password` | The password for the MySQL `datadog` user. |
 | `datadog_api_key` | The API key for the destination organization. |
 | `datadog_site` | For example, `datadoghq.com` or `datadoghq.eu`. |
 
@@ -275,7 +273,7 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
    kubectl -n $(terraform output -raw namespace) get pods
    ```
 
-2. Verify that the Postgres check is dispatched as a cluster check. From the Cluster Agent leader pod:
+2. Verify that the MySQL check is dispatched as a cluster check. From the Cluster Agent leader pod:
 
    ```bash
    kubectl -n $(terraform output -raw namespace) exec -it \
@@ -283,16 +281,16 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
      agent clusterchecks
    ```
 
-   Look for a `postgres` entry assigned to one of the Cluster Check Runner pods.
+   Look for a `mysql` entry assigned to one of the Cluster Check Runner pods.
 
-3. To verify that the Agent's Postgres check runs cleanly, tail the runner logs:
+3. To verify that the Agent's MySQL check runs cleanly, tail the runner logs:
 
    ```bash
    kubectl -n $(terraform output -raw namespace) \
      logs -l app=$(terraform output -raw cluster_check_runner_deployment) -f
    ```
 
-   Look for `Running check postgres` and the absence of `pg_stat_statements` errors.
+   Look for `Running check mysql` and the absence of `performance_schema` errors.
 
 4. In the Datadog UI, verify that:
 
@@ -305,17 +303,17 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
 | Symptom | Likely cause |
 |---|---|
 | Cluster Check Runner logs show `connection refused` to the database | The database security-group ingress rule didn't apply, or runner pods are on nodes whose SG isn't `eks_node_security_group_id`. |
-| Runner logs show `pg_stat_statements is not loaded` | The parameter group / `postgresql.conf` is missing `shared_preload_libraries=pg_stat_statements`, or the database was not restarted. |
-| Runner logs show `permission denied for relation pg_stat_activity` | The `pg_monitor` role is not granted to the `datadog` user. |
-| `agent clusterchecks` on the Cluster Agent shows the postgres check as unscheduled | `clusterChecksRunner.enabled` was disabled, or the runner deployment has zero ready pods. |
+| Runner logs show `performance_schema is not enabled` | The parameter group is missing `performance_schema=ON`, or the database was not restarted. |
+| Runner logs show `Access denied` | The `datadog` MySQL user is missing required grants — see [Set up Database Monitoring for MySQL on RDS][3] for the SQL. |
+| `agent clusterchecks` on the Cluster Agent shows the mysql check as unscheduled | `clusterChecksRunner.enabled` was disabled, or the runner deployment has zero ready pods. |
 | No data in the Datadog UI | The API key is wrong, `datadog_site` is mismatched, or pods can't reach `*.${DD_SITE}` (NAT egress / VPC endpoint missing). |
-| `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database. |
+| `query_samples` is empty | The `performance_schema` consumers for statement history are not enabled. |
 | `terraform plan` fails reading the EKS cluster | The IAM principal running Terraform lacks `eks:DescribeCluster` / `eks:GetToken`, or is not mapped in `aws-auth` / EKS access entries for the cluster. |
 
 [2]: /database_monitoring/
-[3]: /database_monitoring/setup_postgres/rds/
-[6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/amazon-eks
-[8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/variables.tf
+[3]: /database_monitoring/setup_mysql/rds/
+[6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/mysql/aws/amazon-eks
+[8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/mysql/aws/amazon-eks/variables.tf
 
 {{% /tab %}}
 
@@ -323,52 +321,51 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
 
 ## Hosting note
 
-The Terraform module for this combination works for any Postgres database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
+The Terraform module for this combination works for any MySQL database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
 
-- **Amazon RDS Postgres**: The RDS endpoint and the RDS security group.
-- **Amazon Aurora Postgres**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
-- **Self-hosted Postgres on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
+- **Amazon RDS MySQL**: The RDS endpoint and the RDS security group.
+- **Amazon Aurora MySQL**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
+- **Self-hosted MySQL on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the MySQL EC2 instance.
 
-For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For MySQL self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
 
 ## Architecture
 
-A single Datadog Agent runs in a Docker container on a dedicated Amazon EC2 instance (Amazon Linux 2023) inside the same VPC as your Postgres database. `cloud-init` installs Docker, adds the Postgres check config to `/etc/datadog-agent/conf.d/postgres.d/conf.yaml`, and starts the Agent container with that directory bind-mounted.
+A single Datadog Agent runs in a Docker container on a dedicated Amazon EC2 instance (Amazon Linux 2023) inside the same VPC as your MySQL database. `cloud-init` installs Docker, adds the MySQL check config to `/etc/datadog-agent/conf.d/mysql.d/conf.yaml`, and starts the Agent container with that directory bind-mounted.
 
 You can run the host in either a **public subnet** (with SSH ingress from a CIDR you control) or a **private subnet** (with SSM Session Manager — no SSH key required, since the example attaches the `AmazonSSMManagedInstanceCore` policy to the instance profile).
 
 ## Prerequisites
 
 - **Terraform 1.5 or later**, and AWS credentials with permission to create EC2, IAM, and security group resources in the target region.
-- **An existing Postgres instance** (Postgres 10 or later) — RDS, Aurora, or self-hosted on EC2.
+- **An existing MySQL instance** (MySQL 5.7 or later, or MariaDB 10.5 or later) — RDS, Aurora, or self-hosted on EC2.
 - **A subnet in the database's VPC** with internet egress (an Internet Gateway for a public subnet, or NAT for a private subnet) — the Agent needs to pull its container image and reach `*.${DD_SITE}`.
 - **A Datadog API key** for the destination organization.
-- **A parameter group (RDS/Aurora) or `postgresql.conf` (self-hosted)** with the DBM-required parameters set:
+- **A parameter group (RDS/Aurora) or `my.cnf` (self-hosted)** with the DBM-required parameters set:
 
   | Parameter | Value | Purpose |
   |---|---|---|
-  | `shared_preload_libraries` | `pg_stat_statements` | Required for query metric collection |
-  | `track_activity_query_size` | `4096` | Increases captured SQL text size |
-  | `pg_stat_statements.track` | `ALL` | Captures statements inside functions and procedures |
-  | `pg_stat_statements.max` | `10000` | Retains more normalized queries |
-  | `pg_stat_statements.track_utility` | `off` | Skips PREPARE and EXPLAIN noise |
+  | `performance_schema` | `ON` | Required for query metric collection (on by default in MySQL 5.6+) |
+  | `performance-schema-consumer-events-statements-current` | `ON` | Captures currently running statements |
+  | `performance-schema-consumer-events-statements-history` | `ON` | Retains recent statement history per thread |
+  | `performance-schema-consumer-events-statements-history-long` | `ON` | Retains recent statement history globally |
 
-  Changing `shared_preload_libraries` requires a database restart (for RDS/Aurora, an instance reboot).
+  Changing `performance_schema` requires a database restart (for RDS/Aurora, an instance reboot).
 
-- **The `datadog` Postgres user** with the required grants and the `pg_stat_statements` extension installed in each monitored database. See [Set up Database Monitoring for Postgres on RDS][3] for the SQL.
+- **The `datadog` MySQL user** with the required grants. See [Set up Database Monitoring for MySQL on RDS][3] for the SQL.
 - *(Optional)* An existing **EC2 key pair** if you want to SSH into the Agent host. Otherwise, leave `key_pair_name = ""` and use SSM Session Manager.
 
 ## Apply the Terraform
 
-The example for this combination is available at [`terraform/postgres/aws/ec2/`][9] in `dd-database-monitoring-example`.
+The example for this combination is available at [`terraform/mysql/aws/ec2/`][9] in `dd-database-monitoring-example`.
 
 ```bash
 git clone https://github.com/DataDog/dd-database-monitoring-example.git
-cd dd-database-monitoring-example/terraform/postgres/aws/ec2
+cd dd-database-monitoring-example/terraform/mysql/aws/ec2
 
 cp terraform.tfvars.example terraform.tfvars
 # Fill in: vpc_id, subnet_id, db_security_group_id, db_endpoint,
-# database_name, datadog_user_password, datadog_api_key, datadog_site
+# datadog_user_password, datadog_api_key, datadog_site
 
 terraform init
 terraform plan
@@ -378,7 +375,7 @@ terraform apply
 `terraform apply` creates:
 - An EC2 instance running the Datadog Agent in Docker
 - An Agent host security group
-- An ingress rule on the database security group for port 5432 from the Agent host SG
+- An ingress rule on the database security group for port 3306 from the Agent host SG
 - An IAM role with `AmazonSSMManagedInstanceCore` attached
 - An EC2 instance profile
 
@@ -388,13 +385,12 @@ terraform apply
 |---|---|
 | `vpc_id` | The VPC containing the database. |
 | `subnet_id` | A subnet in that VPC with internet egress (IGW for public, NAT for private). |
-| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For RDS, the RDS instance SG; for Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
+| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 3306. For RDS, the RDS instance SG; for Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
 | `db_endpoint` | The database endpoint host (no port). For RDS, the RDS endpoint; for Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
-| `database_name` | The Postgres database to monitor. |
-| `datadog_user_password` | The password for the Postgres `datadog` user. |
+| `db_port` *(optional)* | MySQL TCP port. Default `3306`. |
+| `datadog_user_password` | The password for the MySQL `datadog` user. |
 | `datadog_api_key` | The API key for the destination organization. |
 | `datadog_site` | For example, `datadoghq.com` or `datadoghq.eu`. |
-| `assign_public_ip` *(optional)* | `true` for a public-subnet demo with SSH; `false` for a private subnet (use SSM). Default `true`. |
 | `key_pair_name`, `ssh_ingress_cidrs` *(optional)* | Provide both to enable SSH access. Leave both empty to disable SSH and rely on SSM Session Manager. |
 
 For the full input list and defaults, see [`variables.tf`][10] in the example directory.
@@ -411,7 +407,7 @@ For the full input list and defaults, see [`variables.tf`][10] in the example di
 2. Open a shell on the Agent host. Use whichever path matches your configuration:
 
    ```bash
-   # SSH (assign_public_ip = true and key_pair_name set)
+   # SSH (key_pair_name set and public subnet)
    $(terraform output -raw ec2_ssh_command)
 
    # SSM (any subnet, no SSH key needed)
@@ -422,10 +418,10 @@ For the full input list and defaults, see [`variables.tf`][10] in the example di
 
    ```bash
    docker ps
-   docker logs datadog-agent | grep -E '(postgres|dbm)' | tail -50
+   docker logs datadog-agent | grep -E '(mysql|dbm)' | tail -50
    ```
 
-   Look for `Running check postgres` and the absence of `pg_stat_statements` errors.
+   Look for `Running check mysql` and the absence of `performance_schema` errors.
 
 4. In the Datadog UI, verify that:
 
@@ -438,16 +434,16 @@ For the full input list and defaults, see [`variables.tf`][10] in the example di
 | Symptom | Likely cause |
 |---|---|
 | Agent logs show `connection refused` to the database | The database security-group ingress rule didn't apply, or the EC2 instance is in a subnet with no route to the database. |
-| Agent logs show `pg_stat_statements is not loaded` | The parameter group / `postgresql.conf` is missing `shared_preload_libraries=pg_stat_statements`, or the database was not restarted after the change. |
-| Agent logs show `permission denied for relation pg_stat_activity` | The `pg_monitor` role is not granted to the `datadog` user. |
+| Agent logs show `performance_schema is not enabled` | The parameter group is missing `performance_schema=ON`, or the database was not restarted after the change. |
+| Agent logs show `Access denied` | The `datadog` MySQL user is missing required grants — see [Set up Database Monitoring for MySQL on RDS][3] for the SQL. |
 | No data in the Datadog UI | The API key is wrong, `datadog_site` is mismatched, or the instance can't reach `*.${DD_SITE}` (no IGW or NAT egress). |
-| `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database. |
+| `query_samples` is empty | The `performance_schema` consumers for statement history are not enabled. |
 | `docker: command not found` on first SSH | `cloud-init` is still running. Wait ~60 seconds and re-check with `cloud-init status --wait`. |
 
 [2]: /database_monitoring/
-[3]: /database_monitoring/setup_postgres/rds/
-[9]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ec2
-[10]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ec2/variables.tf
+[3]: /database_monitoring/setup_mysql/rds/
+[9]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/mysql/aws/ec2
+[10]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/mysql/aws/ec2/variables.tf
 
 {{% /tab %}}
 {{< /tabs >}}
