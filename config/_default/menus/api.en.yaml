@@ -6681,6 +6681,22 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
+    - name: AI Guard
+      url: /api/latest/ai-guard/
+      identifier: ai-guard
+      generated: true
+    - name: Evaluate an AI Guard request
+      url: /api/latest/ai-guard/evaluate-an-ai-guard-request/
+      identifier: ai-guard-evaluate-an-ai-guard-request
+      parent: ai-guard
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EvaluateAIGuardRequest
+        unstable: []
+        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
