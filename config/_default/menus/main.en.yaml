@@ -1747,24 +1747,26 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
-    - name: Widget Public URLs
+    - name: Widget Share URLs
       identifier: dashboards_sharing_widget_public_urls
       url: dashboards/sharing/widget_public_urls
+      parent: dashboards_sharing
+      weight: 1003
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1004
+      weight: 1005
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1005
+      weight: 1006
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
