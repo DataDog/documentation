@@ -5,7 +5,7 @@ description: Automatically scale your clusters with Kubernetes Cluster Autoscali
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-cluster-autoscaling/"
  btn_hidden="false" header="Join the Preview!">}}
-Datadog Kubernetes Cluster Autoscaling is in Preview. Use this form to submit your request today.
+Datadog Kubernetes Cluster Autoscaling is in Limited Availability. E-mail kubernetes-beta@datadoghq.com for more information and support.
 {{< /callout >}}
 
 <div class="alert alert-warning">During the Preview period, Datadog recommends <strong>non-production use only</strong> of Datadog Kubernetes Autoscaling.</div>
