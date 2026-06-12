@@ -172,7 +172,7 @@ The skills require the `llmobs` MCP toolset to be connected. If you have not alr
 
 ```shell
 claude mcp add --scope user --transport http "datadog-llmo-mcp" \
-  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+  'https://mcp.datadoghq.com/v1/mcp?toolsets=llmobs'
 ```
 
 Restart Claude Code after running both commands for the skills to appear.
