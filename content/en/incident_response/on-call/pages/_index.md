@@ -95,6 +95,8 @@ To receive Page notifications in Slack, see [Routing Rules][4].
 
 Pages sent from Microsoft Teams are always `high` urgency.
 
+To receive Page notifications in Microsoft Teams, see [Routing Rules][4].
+
 ## Respond to a Page
 
 Go to [**On-Call** > **Pages**][7] to view all active and historical Pages. Click a Page to open its side panel and take action, or select the checkbox next to one or more Pages to bulk-edit them.
