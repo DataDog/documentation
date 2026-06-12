@@ -158,6 +158,8 @@ Deploy an intermediate service that:
 
 Replace `<DATADOG_API_KEY>` with your Datadog API key and `<TEAM_HANDLE>` with your On-Call team handle.
 
+For detailed forwarder setup instructions, see the [Sentry integration docs][4].
+
 #### Step 2: Create a Sentry internal integration
 
 1. In Sentry, go to **Settings > Developer Settings > Internal Integrations**.
@@ -198,3 +200,4 @@ The aggregation key used to correlate and resolve events depends on the event ty
 [1]: /integrations/slack/?tab=datadogforslack
 [2]: https://my.pingdom.com/integrations/settings
 [3]: https://my.pingdom.com/newchecks/checks
+[4]: /integrations/sentry/#step-1-deploy-the-webhook-forwarder
