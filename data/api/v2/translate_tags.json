@@ -75,6 +75,10 @@
     "name": "CSM Coverage Analysis",
     "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more."
   },
+  "csm-ownership": {
+    "name": "CSM Ownership",
+    "description": "Datadog Cloud Security Management (CSM) Ownership infers the most likely owner\nfor a cloud resource by combining ownership signals from across the platform,\nand lets you review the inference, inspect its evidence, and submit feedback to\npersist, override, or correct the inferred owner.\nFor more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)."
+  },
   "csm-settings": {
     "name": "CSM Settings",
     "description": "Datadog Cloud Security Management (CSM) Settings APIs allow you to list and filter\nyour cloud hosts monitored by CSM, covering both agentless and agent-based discovery.\nFor more information, see [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)."
@@ -151,6 +155,10 @@
     "name": "Dashboard Secure Embed",
     "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
   },
+  "dashboard-sharing": {
+    "name": "Dashboard Sharing",
+    "description": "Manage dashboard sharing configurations."
+  },
   "dashboards": {
     "name": "Dashboards",
     "description": "Get usage statistics for the dashboards in your organization, including view\ncounts, last-edit times, widget counts, and quality scores. See the\n[Dashboards documentation](https://docs.datadoghq.com/dashboards/) for more\ninformation."
@@ -198,6 +206,10 @@
   "fleet-automation": {
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
+  },
+  "forms": {
+    "name": "Forms",
+    "description": "The Datadog Forms API lets you create and manage forms within the App Builder platform.\nYou can configure form settings, manage versions, and publish forms."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -279,6 +291,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "network-health-insights": {
+    "name": "Network Health Insights",
+    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
+  },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
     "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
@@ -346,6 +362,10 @@
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."
+  },
+  "report-schedules": {
+    "name": "Report Schedules",
+    "description": "Create and manage scheduled reports. A scheduled report renders a dashboard or integration\ndashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,\nor Microsoft Teams."
   },
   "restriction-policies": {
     "name": "Restriction Policies",
@@ -426,6 +446,10 @@
   "servicenow-integration": {
     "name": "ServiceNow Integration",
     "description": "Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations."
+  },
+  "slack-integration": {
+    "name": "Slack Integration",
+    "description": "Configure your [Datadog Slack integration](https://docs.datadoghq.com/integrations/slack/)\ndirectly through the Datadog API."
   },
   "software-catalog": {
     "name": "Software Catalog",

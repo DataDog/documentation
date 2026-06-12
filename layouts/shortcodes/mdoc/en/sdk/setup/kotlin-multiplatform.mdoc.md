@@ -9,7 +9,7 @@ The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iO
 
 ## Setup
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Declare the Kotlin Multiplatform SDK as a dependency" %}
 Declare [`dd-sdk-kotlin-multiplatform-rum`][3] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.

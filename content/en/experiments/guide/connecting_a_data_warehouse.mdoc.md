@@ -160,10 +160,6 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
    1. Click {% ui %}Generate{% /ui %}.
    1. Note your {% ui %}Secret{% /ui %} and {% ui %}Client ID{% /ui %}.
    1. Click {% ui %}Done{% /ui %}.
-1. In the {% ui %}Settings{% /ui %} menu, click {% ui %}Identity and access{% /ui %}.
-1. On the {% ui %}Groups{% /ui %} row, click {% ui %}Manage{% /ui %}, then:
-   1. Click {% ui %}admins{% /ui %}, then {% ui %}Add members{% /ui %}.
-   1. Enter the service principal name and click {% ui %}Add{% /ui %}.
 
 After you create the service principal, continue to [Step 1](#step-1-grant-permissions-to-the-service-principal) to grant the required permissions.
 
@@ -259,6 +255,10 @@ To connect your Databricks Workspace to Datadog for warehouse-native experiment 
 1. Toggle off {% ui %}Jobs Monitoring{% /ui %} and all other products.
 1. Toggle off the {% ui %}Metrics - Model Serving{% /ui %} resource.
 1. Click {% ui %}Save Databricks Workspace{% /ui %}.
+
+{% alert %}
+If you turn on other features in the {% ui %}Configure{% /ui %} tab, additional configuration steps may be required. See the documentation for those features to complete their setup.
+{% /alert %}
 
 {% /if %}
 <!-- end Databricks -->
