@@ -668,6 +668,13 @@ components:
       required: true
       schema:
         type: string
+    GoogleChatTargetAudienceIdPathParameter:
+      description: Your target audience ID.
+      in: path
+      name: target_audience_id
+      required: true
+      schema:
+        type: string
     HistoricalJobID:
       description: The ID of the job.
       in: path
@@ -40243,6 +40250,84 @@ components:
       required:
         - attributes
       type: object
+    GoogleChatDelegatedUserAttributes:
+      description: Google Chat delegated user attributes.
+      properties:
+        display_name:
+          description: The delegated user's display name.
+          example: "fake-display-name"
+          type: string
+        email:
+          description: The delegated user's email address.
+          example: "user@example.com"
+          type: string
+        features:
+          description: The list of features enabled for the delegated user.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleChatDelegatedUserData:
+      description: Google Chat delegated user data from a response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GoogleChatDelegatedUserAttributes"
+        id:
+          description: The ID of the delegated user.
+          example: "2b3c4d5e-6f78-9012-bcde-f23456789012"
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: "#/components/schemas/GoogleChatDelegatedUserType"
+      type: object
+    GoogleChatDelegatedUserResponse:
+      description: Response containing a Google Chat delegated user.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleChatDelegatedUserData"
+      required:
+        - data
+      type: object
+    GoogleChatDelegatedUserType:
+      default: google-chat-delegated-user
+      description: Google Chat delegated user resource type.
+      enum:
+        - google-chat-delegated-user
+      example: google-chat-delegated-user
+      type: string
+      x-enum-varnames:
+        - GOOGLE_CHAT_DELEGATED_USER_TYPE
+    GoogleChatOrganizationAttributes:
+      description: Google Chat organization attributes.
+      properties:
+        domain_id:
+          description: The Google Chat organization domain ID.
+          example: "fake-domain-id"
+          maxLength: 255
+          type: string
+        domain_name:
+          description: The Google Chat organization domain name.
+          example: "example.com"
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatOrganizationData:
+      description: Google Chat organization data from a response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GoogleChatOrganizationAttributes"
+        id:
+          description: The ID of the Google Chat organization binding.
+          example: "5ce87709-a12f-4086-fcc8-147045b73a19"
+          maxLength: 100
+          minLength: 1
+          type: string
+        relationships:
+          $ref: "#/components/schemas/GoogleChatOrganizationRelationships"
+        type:
+          $ref: "#/components/schemas/GoogleChatOrganizationType"
+      type: object
     GoogleChatOrganizationHandleResponse:
       description: Organization handle for monitor notifications to a Google Chat space within a Google organization.
       properties:
@@ -40301,6 +40386,184 @@ components:
           example: [{"attributes": {"name": "general-handle", "space_display_name": "General", "space_resource_name": "spaces/AAAAAAAAA"}, "id": "596da4af-0563-4097-90ff-07230c3f9db3", "type": "google-chat-organization-handle"}, {"attributes": {"name": "general-handle-2", "space_display_name": "General2", "space_resource_name": "spaces/BBBBBBBBB"}, "id": "596da4af-0563-4097-90ff-07230c3f9db4", "type": "google-chat-organization-handle"}]
           items:
             $ref: "#/components/schemas/GoogleChatOrganizationHandleResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    GoogleChatOrganizationRelationships:
+      description: Google Chat organization relationships.
+      properties:
+        delegated_user:
+          $ref: "#/components/schemas/GoogleChatOrganizationRelationshipsDelegatedUser"
+      type: object
+    GoogleChatOrganizationRelationshipsDelegatedUser:
+      description: The delegated user relationship.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleChatOrganizationRelationshipsDelegatedUserData"
+      type: object
+    GoogleChatOrganizationRelationshipsDelegatedUserData:
+      description: Delegated user relationship data.
+      properties:
+        id:
+          description: The ID of the delegated user.
+          example: "2b3c4d5e-6f78-9012-bcde-f23456789012"
+          type: string
+        type:
+          $ref: "#/components/schemas/GoogleChatDelegatedUserType"
+      type: object
+    GoogleChatOrganizationResponse:
+      description: Response containing a Google Chat organization binding.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleChatOrganizationData"
+      required:
+        - data
+      type: object
+    GoogleChatOrganizationType:
+      default: google-chat-organization
+      description: Google Chat organization resource type.
+      enum:
+        - google-chat-organization
+      example: google-chat-organization
+      type: string
+      x-enum-varnames:
+        - GOOGLE_CHAT_ORGANIZATION_TYPE
+    GoogleChatOrganizationsResponse:
+      description: Response containing a list of Google Chat organization bindings.
+      properties:
+        data:
+          description: An array of Google Chat organization bindings.
+          items:
+            $ref: "#/components/schemas/GoogleChatOrganizationData"
+          type: array
+      required:
+        - data
+      type: object
+    GoogleChatTargetAudienceAttributes:
+      description: Google Chat target audience attributes.
+      properties:
+        audience_id:
+          description: The audience ID.
+          example: "fake-audience-id-1"
+          maxLength: 255
+          type: string
+        audience_name:
+          description: The audience name.
+          example: "fake audience name 1"
+          maxLength: 255
+          type: string
+      required:
+        - audience_name
+        - audience_id
+      type: object
+    GoogleChatTargetAudienceCreateRequest:
+      description: Create target audience request.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceCreateRequestData"
+      required:
+        - data
+      type: object
+    GoogleChatTargetAudienceCreateRequestAttributes:
+      description: Attributes for creating a Google Chat target audience.
+      properties:
+        audience_id:
+          description: The audience ID.
+          example: "fake-audience-id-1"
+          maxLength: 255
+          type: string
+        audience_name:
+          description: The audience name.
+          example: "fake audience name 1"
+          maxLength: 255
+          type: string
+      required:
+        - audience_name
+        - audience_id
+      type: object
+    GoogleChatTargetAudienceCreateRequestData:
+      description: Data for a create target audience request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceCreateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceType"
+      required:
+        - type
+        - attributes
+      type: object
+    GoogleChatTargetAudienceData:
+      description: Google Chat target audience data from a response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceAttributes"
+        id:
+          description: The ID of the target audience.
+          example: "1f3e5ce6-944a-4075-97ae-105b5920b5cb"
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceType"
+      type: object
+    GoogleChatTargetAudienceResponse:
+      description: Response containing a Google Chat target audience.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceData"
+      required:
+        - data
+      type: object
+    GoogleChatTargetAudienceType:
+      default: google-chat-target-audience
+      description: Google Chat target audience resource type.
+      enum:
+        - google-chat-target-audience
+      example: google-chat-target-audience
+      type: string
+      x-enum-varnames:
+        - GOOGLE_CHAT_TARGET_AUDIENCE_TYPE
+    GoogleChatTargetAudienceUpdateRequest:
+      description: Update target audience request.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceUpdateRequestData"
+      required:
+        - data
+      type: object
+    GoogleChatTargetAudienceUpdateRequestAttributes:
+      description: Attributes for updating a Google Chat target audience.
+      properties:
+        audience_id:
+          description: The audience ID.
+          example: "fake-audience-id-1"
+          maxLength: 255
+          type: string
+        audience_name:
+          description: The audience name.
+          example: "fake audience name 1"
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatTargetAudienceUpdateRequestData:
+      description: Data for an update target audience request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceUpdateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/GoogleChatTargetAudienceType"
+      required:
+        - type
+        - attributes
+      type: object
+    GoogleChatTargetAudiencesResponse:
+      description: Response containing a list of Google Chat target audiences.
+      properties:
+        data:
+          description: An array of Google Chat target audiences.
+          items:
+            $ref: "#/components/schemas/GoogleChatTargetAudienceData"
           type: array
       required:
         - data
@@ -135510,6 +135773,44 @@ paths:
         operator: OR
         permissions:
           - gcp_configuration_edit
+  /api/v2/integration/google-chat/organizations:
+    get:
+      description: Get a list of all Google Chat organization bindings in the Datadog Google Chat integration.
+      operationId: ListGoogleChatOrganizations
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          domain_id: fake-domain-id
+                          domain_name: example.com
+                        id: 00000000-0000-0000-0000-000000000001
+                        relationships:
+                          delegated_user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: google-chat-delegated-user
+                        type: google-chat-organization
+                      - attributes:
+                          domain_id: fake-domain-id-2
+                          domain_name: example2.com
+                        id: 00000000-0000-0000-0000-000000000003
+                        type: google-chat-organization
+              schema:
+                $ref: "#/components/schemas/GoogleChatOrganizationsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get all Google Chat organization bindings
+      tags:
+        - Google Chat Integration
+      x-menu-order: 7
   /api/v2/integration/google-chat/organizations/app/named-spaces/{domain_name}/{space_display_name}:
     get:
       description: Get the resource name and organization binding ID of a space in the Datadog Google Chat integration.
@@ -135547,6 +135848,114 @@ paths:
       tags:
         - Google Chat Integration
       x-menu-order: 6
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}:
+    delete:
+      description: Delete a Google Chat organization binding from the Datadog Google Chat integration.
+      operationId: DeleteGoogleChatOrganization
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+      responses:
+        "204":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Google Chat organization binding
+      tags:
+        - Google Chat Integration
+      x-menu-order: 9
+    get:
+      description: Get a Google Chat organization binding from the Datadog Google Chat integration.
+      operationId: GetGoogleChatOrganization
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        domain_id: fake-domain-id
+                        domain_name: example.com
+                      id: 00000000-0000-0000-0000-000000000001
+                      relationships:
+                        delegated_user:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000002
+                            type: google-chat-delegated-user
+                      type: google-chat-organization
+              schema:
+                $ref: "#/components/schemas/GoogleChatOrganizationResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Google Chat organization binding
+      tags:
+        - Google Chat Integration
+      x-menu-order: 8
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/delegated-user:
+    delete:
+      description: Delete the delegated user for a Google Chat organization binding from the Datadog Google Chat integration.
+      operationId: DeleteGoogleChatDelegatedUser
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+      responses:
+        "204":
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete the delegated user
+      tags:
+        - Google Chat Integration
+      x-menu-order: 11
+    get:
+      description: Get the delegated user for a Google Chat organization binding in the Datadog Google Chat integration.
+      operationId: GetGoogleChatDelegatedUser
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        display_name: fake-display-name
+                        email: user@example.com
+                        features:
+                          - incident-automatic-space-creation
+                          - workflow-space-creation
+                      id: 00000000-0000-0000-0000-000000000002
+                      type: google-chat-delegated-user
+              schema:
+                $ref: "#/components/schemas/GoogleChatDelegatedUserResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get the delegated user
+      tags:
+        - Google Chat Integration
+      x-menu-order: 10
   /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles:
     get:
       description: Get a list of all organization handles from the Datadog Google Chat integration.
@@ -135752,6 +136161,196 @@ paths:
         - Google Chat Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/target-audiences:
+    get:
+      description: Get a list of all target audiences for a Google Chat organization binding in the Datadog Google Chat integration.
+      operationId: ListGoogleChatTargetAudiences
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          audience_id: fake-audience-id-1
+                          audience_name: fake audience name 1
+                        id: 00000000-0000-0000-0000-000000000004
+                        type: google-chat-target-audience
+                      - attributes:
+                          audience_id: fake-audience-id-2
+                          audience_name: fake-audience-name-2
+                        id: 00000000-0000-0000-0000-000000000005
+                        type: google-chat-target-audience
+              schema:
+                $ref: "#/components/schemas/GoogleChatTargetAudiencesResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get all target audiences
+      tags:
+        - Google Chat Integration
+      x-menu-order: 12
+    post:
+      description: Create a target audience for a Google Chat organization binding in the Datadog Google Chat integration.
+      operationId: CreateGoogleChatTargetAudience
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      audience_id: fake-audience-id-1
+                      audience_name: fake audience name 1
+                    type: google-chat-target-audience
+            schema:
+              $ref: "#/components/schemas/GoogleChatTargetAudienceCreateRequest"
+        description: Target audience payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        audience_id: fake-audience-id-1
+                        audience_name: fake audience name 1
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: google-chat-target-audience
+              schema:
+                $ref: "#/components/schemas/GoogleChatTargetAudienceResponse"
+          description: CREATED
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a target audience
+      tags:
+        - Google Chat Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/target-audiences/{target_audience_id}:
+    delete:
+      description: Delete a target audience from a Google Chat organization binding in the Datadog Google Chat integration.
+      operationId: DeleteGoogleChatTargetAudience
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+        - $ref: "#/components/parameters/GoogleChatTargetAudienceIdPathParameter"
+      responses:
+        "204":
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a target audience
+      tags:
+        - Google Chat Integration
+      x-menu-order: 16
+    get:
+      description: Get a target audience for a Google Chat organization binding in the Datadog Google Chat integration.
+      operationId: GetGoogleChatTargetAudience
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+        - $ref: "#/components/parameters/GoogleChatTargetAudienceIdPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        audience_id: fake-audience-id-1
+                        audience_name: fake audience name 1
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: google-chat-target-audience
+              schema:
+                $ref: "#/components/schemas/GoogleChatTargetAudienceResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a target audience
+      tags:
+        - Google Chat Integration
+      x-menu-order: 14
+    patch:
+      description: Update a target audience for a Google Chat organization binding in the Datadog Google Chat integration.
+      operationId: UpdateGoogleChatTargetAudience
+      parameters:
+        - $ref: "#/components/parameters/GoogleChatOrganizationBindingIdPathParameter"
+        - $ref: "#/components/parameters/GoogleChatTargetAudienceIdPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      audience_id: updated-audience-id
+                      audience_name: updated-audience-name
+                    type: google-chat-target-audience
+            schema:
+              $ref: "#/components/schemas/GoogleChatTargetAudienceUpdateRequest"
+        description: Target audience payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        audience_id: updated-audience-id
+                        audience_name: updated-audience-name
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: google-chat-target-audience
+              schema:
+                $ref: "#/components/schemas/GoogleChatTargetAudienceResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a target audience
+      tags:
+        - Google Chat Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 15
   /api/v2/integration/jira/accounts:
     get:
       description: |-
