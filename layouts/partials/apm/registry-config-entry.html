@@ -6,6 +6,12 @@
 {{- $anchor := .name | lower | replaceRE "[^a-z0-9]+" "-" -}}
 <dt id="{{ $anchor }}"><code>{{ .name }}</code><a class="registry-copy-link" href="#{{ $anchor }}" title="Copy link" aria-label="Copy link to {{ .name }}">{{ partial "icon" (dict "name" "link-wui") }}</a></dt>
 <dd>
+  {{/* Retired marker: to_version holds the version where this key was removed.
+     Shown only when set to a concrete version (not null, empty, or "latest"). */}}
+  {{- $to := .to_version | default "" -}}
+  {{- if and (ne $to "") (ne $to "latest") -}}
+    <strong class="text-danger">Removed in {{ $to }}.</strong><br>
+  {{- end -}}
   {{- with .type -}}<strong>Type</strong>: <code>{{ . }}</code><br>{{- end -}}
   {{- with .default_value -}}<strong>Default</strong>: <code>{{ . }}</code><br>{{- end -}}
   {{- with .from_version -}}<strong>Since</strong>: <code>{{ . }}</code><br>{{- end -}}

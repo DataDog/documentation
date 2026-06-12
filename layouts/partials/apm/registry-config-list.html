@@ -19,19 +19,30 @@
 {{- if $data -}}
   {{- $configs := $data.configurations -}}
 
-  {{/* TODO: Add version filtering here to exclude retired configs (those with a specific
-     to_version like "v1.57.0"). Configs with to_version null or "latest" are current. */}}
-  {{/* Hide entries whose description is missing, "null", or too short to be useful.
-     Publishing incomplete entries would expose undocumented keys to docs.datadoghq.com. */}}
-  {{- $currentConfigs := slice -}}
+  {{/* Split configurations into active and retired.
+       - Active:  to_version is null, "latest", or empty.
+       - Retired: to_version is a specific version (e.g. "v1.57.0"); the key was supported
+                  in versions strictly less than that. Rendered separately in a collapsed
+                  subsection at the end of each category.
+       Entries with missing, "null", or too-short descriptions are dropped from either set —
+       publishing incomplete docs would expose undocumented keys. */}}
+  {{- $activeConfigs := slice -}}
+  {{- $retiredConfigs := slice -}}
   {{- range $configs -}}
+    {{- $to := .to_version | default "" -}}
+    {{- $isCurrent := or (eq $to "") (eq $to "latest") -}}
     {{- $desc := .description | default "" -}}
-    {{- if and (ne $desc "") (ne $desc "null") (ge (len $desc) 5) -}}
-      {{- $currentConfigs = $currentConfigs | append . -}}
+    {{- $hasDesc := and (ne $desc "") (ne $desc "null") (ge (len $desc) 5) -}}
+    {{- if $hasDesc -}}
+      {{- if $isCurrent -}}
+        {{- $activeConfigs = $activeConfigs | append . -}}
+      {{- else -}}
+        {{- $retiredConfigs = $retiredConfigs | append . -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 
-  <p class="registry-config-total"><strong>{{ len $currentConfigs }}</strong> configuration keys available for this library.</p>
+  <p class="registry-config-total"><strong>{{ len $activeConfigs }}</strong> configuration keys available for this library.</p>
 
   {{- if $categories -}}
     {{/* Inline SVG for collapsible chevron icon */}}
@@ -48,11 +59,17 @@
       {{- $isIntegrations := isset . "integrationPattern" -}}
       {{- $kinds := cond (isset . "kinds") (index . "kinds") slice -}}
 
-      {{/* Filter configs for this category */}}
+      {{/* Filter active and retired configs for this category */}}
       {{- $catConfigs := slice -}}
-      {{- range $currentConfigs -}}
+      {{- range $activeConfigs -}}
         {{- if eq .category $catId -}}
           {{- $catConfigs = $catConfigs | append . -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $catRetired := slice -}}
+      {{- range $retiredConfigs -}}
+        {{- if eq .category $catId -}}
+          {{- $catRetired = $catRetired | append . -}}
         {{- end -}}
       {{- end -}}
 
@@ -215,6 +232,33 @@
               </dl>
             {{- end -}}
 
+            {{/* Retired keys for this category: nested, collapsed by default */}}
+            {{- if gt (len $catRetired) 0 -}}
+              {{- $retiredAnchor := printf "registry-retired-%s" $catId -}}
+              <details class="collapsible-section" id="{{ $retiredAnchor }}">
+                <summary class="collapsible-header">
+                  <div class="header-content">
+                    <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
+                    <div class="header-text flex-wrap">
+                      <h4 class="header-text-inner me-1">Retired keys</h4>
+                      <small>({{ len $catRetired }})</small>
+                    </div>
+                  </div>
+                </summary>
+                <a class="registry-copy-link" href="#{{ $retiredAnchor }}" title="Copy link" aria-label="Copy link to retired keys for {{ $catTitle }}">
+                  {{ partial "icon" (dict "name" "link-wui") }}
+                </a>
+                <div class="collapsible-content">
+                  <p>These keys are no longer supported in current versions of the library. They are listed here for reference if you are running an older version.</p>
+                  <dl class="registry-config-list">
+                    {{- range sort $catRetired "name" -}}
+                      {{ partial "apm/registry-config-entry" . }}
+                    {{- end -}}
+                  </dl>
+                </div>
+              </details>
+            {{- end -}}
+
           </div>
         </details>
       {{- end -}}
@@ -268,7 +312,7 @@
   {{- else -}}
     {{/* Fallback: no categories file, render flat list like before */}}
     <dl class="registry-config-list">
-      {{- range sort $currentConfigs "name" -}}
+      {{- range sort $activeConfigs "name" -}}
         {{ partial "apm/registry-config-entry" . }}
       {{- end -}}
     </dl>
