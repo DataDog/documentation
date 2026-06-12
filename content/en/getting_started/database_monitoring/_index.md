@@ -95,7 +95,7 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 2. Sort the Normalized Query table by {{< ui >}}Percent time{{< /ui >}} to see the query that the database spends the most time executing.
 
-   The query that consumes the most database time appears on the first line. Look for the query scanning the `orders` table by `status`— or example, `SELECT * FROM orders WHERE status = ?`. This query is expensive because there is no index on the `status` column, so the database performs a full sequential scan of the table on every execution.
+   The query that consumes the most database time appears on the first line. Look for the query scanning the `orders` table by `status`—for example, `SELECT * FROM orders WHERE status = ?`. This query is expensive because there is no index on the `status` column, so the database performs a full sequential scan of the table on every execution.
 
    {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
@@ -113,7 +113,7 @@ In addition to identifying slow queries, Datadog Database Monitoring can help yo
 
 4. Find a query in the table with data in the {{< ui >}}Explain Plan{{< /ui >}} column and click on it to open the Sample Details page. 
 
-5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. The list view breaks down each step the database takes to execute the query — the operation type, the table it runs against, and cost estimates — giving you a starting point to understand why a query is slow.
+5. Under {{< ui >}}Explain Plan{{< /ui >}}, click {{< ui >}}List View{{< /ui >}}. The list view breaks down each step the database takes to execute the query—the operation type, the table it runs against, and cost estimates—giving you a starting point to understand why a query is slow.
 
    {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Seq Scan on orders table">}}
 
