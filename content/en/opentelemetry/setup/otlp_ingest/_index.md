@@ -24,7 +24,7 @@ Your setup depends on where your telemetry is coming from. Some environments req
 | If your telemetry comes from... | Start here |
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
-| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless Traces][7] (Preview) |
+| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] (Preview) |
 | Your own app, host, container, or OpenTelemetry Collector | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
 
 See also: [Instrumenting for Agent Observability][5].

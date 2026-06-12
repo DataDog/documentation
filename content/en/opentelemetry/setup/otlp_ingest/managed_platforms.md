@@ -16,7 +16,7 @@ further_reading:
 
 Datadog provides dedicated OTLP intake endpoints for managed platforms, allowing you to send traces, metrics, and logs directly to Datadog with minimal configuration. Each supported platform has its own OTLP subdomain (for example, `cloudflare.integrations.otlp.datadoghq.com`).
 
-Use this option when you run workloads on a managed platform where installing a [Datadog Agent][1] or [OpenTelemetry Collector][2] is not feasible. If your platform is not in the table below and you run on AWS, Azure, or GCP serverless compute, see [Serverless Traces][5].
+Use this option when you run workloads on a managed platform where installing a [Datadog Agent][1] or [OpenTelemetry Collector][2] is not feasible. If your platform is not in the table below and you run on AWS, Azure, or GCP serverless compute, see [Serverless][5].
 
 <div class="alert alert-danger">Host metadata sent to managed platform endpoints does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
