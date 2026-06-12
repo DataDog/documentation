@@ -1766,6 +1766,14 @@ components:
       required: false
       schema:
         type: boolean
+    SlackUserUuidQueryParameter:
+      description: The UUID of the Datadog user to list Slack bindings for.
+      in: query
+      name: user_uuid
+      required: true
+      schema:
+        format: uuid
+        type: string
     SloID:
       description: The ID of the SLO.
       in: path
@@ -90205,6 +90213,37 @@ components:
       required:
         - slackTrigger
       type: object
+    SlackUserBindingData:
+      description: Slack team ID data from a response.
+      properties:
+        id:
+          description: The Slack team ID.
+          example: "T01234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SlackUserBindingType"
+      type: object
+    SlackUserBindingType:
+      default: team_id
+      description: Slack user binding resource type.
+      enum:
+        - team_id
+      example: team_id
+      type: string
+      x-enum-varnames:
+        - TEAM_ID
+    SlackUserBindingsResponse:
+      description: Response with a list of Slack user bindings.
+      properties:
+        data:
+          description: An array of Slack user bindings.
+          example: [{"id": "T01234567", "type": "team_id"}, {"id": "T09876543", "type": "team_id"}]
+          items:
+            $ref: "#/components/schemas/SlackUserBindingData"
+          type: array
+      required:
+        - data
+      type: object
     SloDataSource:
       default: slo
       description: A data source for SLO queries.
@@ -137778,6 +137817,37 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 8
+  /api/v2/integration/slack/user-bindings:
+    get:
+      description: List all Slack user bindings for a given Datadog user from the Datadog Slack integration.
+      operationId: ListSlackUserBindings
+      parameters:
+        - $ref: "#/components/parameters/SlackUserUuidQueryParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - id: T01234567
+                        type: team_id
+                      - id: T09876543
+                        type: team_id
+              schema:
+                $ref: "#/components/schemas/SlackUserBindingsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Slack user bindings
+      tags:
+        - Slack Integration
+      x-menu-order: 1
   /api/v2/integration/statuspage/account:
     delete:
       description: Delete the Statuspage account configured for your organization.
@@ -189417,6 +189487,13 @@ tags:
     name: Service Level Objectives
   - description: Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations.
     name: ServiceNow Integration
+  - description: |-
+      Configure your [Datadog Slack integration](https://docs.datadoghq.com/integrations/slack/)
+      directly through the Datadog API.
+    externalDocs:
+      description: For more information about the Datadog Slack integration, see the integration page.
+      url: https://docs.datadoghq.com/integrations/slack/
+    name: Slack Integration
   - description: |-
       API to create, update, retrieve, and delete Software Catalog entities.
     externalDocs:

@@ -447,6 +447,10 @@
     "name": "ServiceNow Integration",
     "description": "Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations."
   },
+  "slack-integration": {
+    "name": "Slack Integration",
+    "description": "Configure your [Datadog Slack integration](https://docs.datadoghq.com/integrations/slack/)\ndirectly through the Datadog API."
+  },
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
