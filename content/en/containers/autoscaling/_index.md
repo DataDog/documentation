@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Autoscaling
-site_support_id: containers_autoscaling
+cascade:
+  site_support_id: containers_autoscaling
 description: Automatically scale Kubernetes workloads using Datadog metrics and intelligent scaling recommendations
 aliases:
 - /containers/monitoring/autoscaling
