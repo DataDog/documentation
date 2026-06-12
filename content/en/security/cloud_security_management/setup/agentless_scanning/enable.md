@@ -245,16 +245,16 @@ Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions.
    - **Terraform state**: By default, it creates an Azure Storage Account in the **scanner** subscription. To reuse an existing storage account in the scanner resource group instead, set `TF_STATE_STORAGE_ACCOUNT` before you run the command; the script does not create a new account when that variable is set.
    - **Resource providers**: When possible, it registers these resource providers in the scanner subscription: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Under the tenant that contains the subscription where you want to deploy the Agentless scanner, click **Enable** for that subscription. Expand the tenant or subscription list first if it is collapsed. The **Vulnerability Scanning** modal opens.
-1. Turn on the **Vulnerability Scanning** toggle.
-1. In the **How would you like to set up Agentless Scanning?** section, select **Azure Cloud Shell**.
-1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
-1. Select the **Azure subscriptions** you want to scan.
-1. Configure the scanner:
+1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel
+2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+3. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
+4. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
+5. Select the **Azure subscriptions** you want to scan.
+6. Configure the scanner:
    - If you already have scanners deployed, you can choose to **use an existing scanner** (recommended) or **deploy a new scanner**.
    - If you choose **deploy a new scanner**, select the **scanner subscription** (which must be one of the selected subscriptions) and the **scanner locations** (Azure regions, up to four). Datadog recommends deploying scanners in every region where you have more than 150 hosts.
-1. Click **Copy command** to copy the generated command, and click **Open Azure Cloud Shell** to open [Azure Cloud Shell](https://shell.azure.com). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme) to deploy and configure the scanner in your selected subscription and location(s).
-1. After the command completes, return to the Datadog setup page and click **Done**.
+7. Click **Copy command** to copy the generated command, and click **Open Azure Cloud Shell** to open [Azure Cloud Shell](https://shell.azure.com). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme) to deploy and configure the scanner in your selected subscription and location(s).
+8.  After the command completes, return to the Datadog setup page and click **Done**.
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Resource Manager" level="h3" id="azure-resource-manager-setup" %}}
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
@@ -275,11 +275,11 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Under the tenant that contains the subscription where you want to deploy the Agentless scanner, click **Enable** for that subscription. Expand the tenant or subscription list first if it is collapsed.
-1. Toggle **Vulnerability Scanning** to the on position.
-1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
-1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme).
-1. Click **Done**.
+1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel
+2. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+3. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+4. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme).
+5. Click **Done**.
 
 {{% /collapse-content %}}
 

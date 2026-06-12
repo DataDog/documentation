@@ -6,10 +6,12 @@ Complete the following steps to enable Agentless Scanning for your Azure subscri
 1. Locate the tenant ID of your subscription.
 1. **(Optional)** To enable detection of misconfigurations, toggle **Resource Scanning** to the on position.
 1. Expand the list of Azure subscriptions and locate the subscription where you want to deploy the Agentless scanner.
-1. Click the **Enable** button under **Vulnerability Scanning**.
-1. The **Vulnerability Scanning** dialog is displayed. Toggle **Vulnerability Scanning** to the on position.
-1. Under **How would you like to set up Agentless Scanning?**, select **Azure Resource Manager**.
-1. Click **Launch Azure Resource Manager** to be redirected to the Azure portal.
+2. Click the subscription where you want to deploy the Agentless scanner to open the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+2. Under **How would you like to set up Agentless Scanning?**, select **Azure Resource Manager**.
+3. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled.
+4. Select An application key
+5. Click **Launch Azure Resource Manager** to be redirected to the Azure portal.
 
 ##### Azure portal
 
