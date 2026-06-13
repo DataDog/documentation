@@ -1,0 +1,73 @@
+{{- /*
+    Indexes the hand-written API content pages that carry `type: api` but have
+    no matching OpenAPI spec endpoints, so they are skipped by both the main
+    markdown indexer (filtered out by `Type != api`) and the endpoint indexer
+    (`api-pages-full-index.json`, which only emits records for spec endpoints
+    matched by tag == page title).
+
+    Without this partial, the body text of these pages is not searchable.
+    Records are emitted as full-page records (their headings come from the
+    `h2` shortcode and are not present in `$page.Fragments`).
+*/ -}}
+{{ $hugo_context := .context }}
+
+{{- /* Path suffixes (no leading slash) so all language variants are matched. */ -}}
+{{ $apiContentPages := slice
+    "api/latest/"
+    "api/latest/scopes/"
+    "api/latest/rate-limits/"
+    "api/latest/using-the-api/"
+}}
+
+{{ range (where $hugo_context.Site.AllPages "Type" "=" "api") }}
+    {{ $page := . }}
+    {{ if and (not $page.Draft) (not (isset $page.Params "external_redirect")) }}
+        {{ $is_content_page := false }}
+        {{ range $apiContentPages }}
+            {{ if hasSuffix $page.RelPermalink . }}
+                {{ $is_content_page = true }}
+            {{ end }}
+        {{ end }}
+
+        {{ if $is_content_page }}
+            {{ $rel_path := "" }}
+            {{ with $page.File }}
+                {{ $rel_path = (print $page.Language.Lang "/" .Path) }}
+            {{ else }}
+                {{ $rel_path = $page.RelPermalink }}
+            {{ end }}
+            {{ $object_id := md5 $rel_path }}
+            {{ $title := $page.Params.integration_title | default $page.Title }}
+            {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
+            {{ $tags := $page.Params.algolia.tags }}
+            {{ $rank := $page.Params.algolia.rank | default 70 }}
+            {{ $category := $page.Params.algolia.category | default "API" }}
+            {{ $subcategory := $page.Params.algolia.subcategory | default $title }}
+
+            {{- $record := (
+                dict "objectID" $object_id
+                "id" $object_id
+                "title" $title
+                "section_header" ""
+                "content" $content
+                "type" $page.Type
+                "relpermalink" $page.RelPermalink
+                "distinct_base_url" $page.RelPermalink
+                "full_url" $page.Permalink
+                "language" $page.Language.Lang
+                "category" $category
+                "subcategory" $subcategory
+                "rank" $rank
+                "order" -1
+                "tags" (slice)
+            ) -}}
+
+            {{- if $tags -}}
+                {{- $tags_dict := (dict "tags" $tags) -}}
+                {{- $record = merge $record $tags_dict -}}
+            {{- end -}}
+
+            {{- $hugo_context.Scratch.Add "algoliaindex" $record -}}
+        {{ end }}
+    {{ end }}
+{{ end }}
