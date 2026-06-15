@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-[Bits Code][8] integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
+[Bits Code][8] integrates with GitHub and GitLab to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
 
 ## Prerequisites
 
@@ -14,6 +14,9 @@ To set up Bits Code, you need the **Bits Code Write** (`bits_dev_write`) permiss
 If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
 
 ## Setup
+
+{{< tabs >}}
+{{% tab "GitHub" %}}
 
 1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
 1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
@@ -32,6 +35,17 @@ If your organization uses custom roles, an admin must add this permission manual
          - Check suite  
          - Issue comment  
          - Status
+
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+1. Install the [GitLab Source Code integration][9]. For full installation and configuration steps, see the [GitLab Source Code integration guide][10].
+1. Configure the following permissions for Bits Code:
+   - The service account must have the `Developer` role on the project. This role can be inherited from the group.
+   - The service account's token must have the `api`, `write_repository`, and `read_user` scopes.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Additional configuration  
 
@@ -129,3 +143,5 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [6]: https://app.datadoghq.com/code/settings
 [7]: /bits_ai/bits_ai_dev_agent/#start-a-session
 [8]: /bits_ai/bits_ai_dev_agent/
+[9]: https://app.datadoghq.com/integrations/gitlab-source-code
+[10]: /integrations/gitlab-source-code/
