@@ -40,12 +40,13 @@ The following metric submission types are accepted:
 - [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
-These different metric submission types are mapped to four in-app metric types found within the Datadog web application:
+These different metric submission types are mapped to five in-app metric types found within the Datadog web application:
 
 - COUNT
 - RATE
 - GAUGE
 - DISTRIBUTION
+- (Exponential, Explicit) HISTOGRAM
 
 **Note**: If you submit a metric to Datadog without a type, the metric type appears as `Not Assigned` within Datadog. The `Not Assigned` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
 
