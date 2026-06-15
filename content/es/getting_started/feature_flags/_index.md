@@ -41,11 +41,29 @@ Esta guía utiliza el SDK de navegador de JavaScript como ejemplo. Puede integra
 
 ### SDKs del lado del cliente {#client-side-sdks}
 
-{{< partial name="feature_flags/feature_flags_client.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+  {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
+  {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+  {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
+  {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
+  {{< image-card href="/feature_flags/client/reactnative/" src="integrations_logos/react-native_large.svg" alt="React Native" >}}
+  {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/tv_os_large.svg" alt="tvOS" >}}
+  {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
+{{< /card-grid >}}
 
 ### SDKs del lado del servidor {#server-side-sdks}
 
-{{< partial name="feature_flags/feature_flags_server.html" >}}
+{{< card-grid card_width="200px" >}}
+  {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+  {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/feature_flags/server/php/" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
 
 ## Configure sus entornos {#configure-your-environments}
 
