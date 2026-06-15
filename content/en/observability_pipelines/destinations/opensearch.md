@@ -17,7 +17,9 @@ Use Observability Pipelines' OpenSearch destination to send logs to OpenSearch.
 
 Configure the OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the OpenSearch destination in the pipeline UI:
 

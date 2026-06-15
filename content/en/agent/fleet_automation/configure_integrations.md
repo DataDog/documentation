@@ -11,6 +11,7 @@ further_reading:
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
+site-support-id: fleet-automation-standard-features  
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!" >}}
