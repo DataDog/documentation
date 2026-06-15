@@ -52,7 +52,7 @@ Some commonly-used integrations come with default configuration for Autodiscover
 
 Otherwise:
 
-1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart) that suits your use case.
+1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, a Helm chart, or the `DatadogInstrumentation` custom resource) that suits your use case.
 2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_NAME>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 
@@ -349,6 +349,40 @@ See [Cluster Checks][3] for more context.
 [1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
 [2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
 [3]: /agent/cluster_agent/clusterchecks
+{{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+<div class="alert alert-info">Configuring Autodiscovery with the <code>DatadogInstrumentation</code> custom resource is in beta.</div>
+
+You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <NAME>
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: <INTEGRATION_NAME>
+        containerImage:
+          - <CONTAINER_IMAGE>
+        initConfig:
+          <INIT_CONFIG>
+        instances:
+          - <INSTANCES_CONFIG>
+        logs:
+          - <LOGS_CONFIG>
+```
+
+For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with the DatadogInstrumentation CRD][29].
+
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 {{% /tab %}}
 
 {{< /tabs >}}
