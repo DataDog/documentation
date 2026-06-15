@@ -27,7 +27,7 @@ Journey Monitoring is in Preview.
 
 The **Journey Monitoring map** displays all created and suggested journeys in a frontend application. Each tile in the map displays metrics on a journey's volume and conversion rate. If the journey has at least one Synthetic test defined, the tile also displays the journey's [Synthetic test suite][1] uptime metric.
 
-<div class="alert alert-warning"><p>Only frontend applications that are instrumented with RUM without Limits, Synthetic Monitoring & Testing, and Product Analytics are eligible for Journey Monitoring.</p></div>
+<div class="alert alert-danger"><p>Only frontend applications that are instrumented with RUM without Limits, Synthetic Monitoring & Testing, and Product Analytics are eligible for Journey Monitoring.</p></div>
 
 ## Explore and manage journeys
 
@@ -50,7 +50,7 @@ Journeys in the map and catalog may be color-coded based on their configuration 
 
 The leftmost node in the map represents the starting point for all user sessions in your application. All other nodes in the map are either pages or journeys. A page node can represent a parent path that expands to show its nested pages.
 
-{{< img src="journey_monitoring/journey-monitoring-map-zoom.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-map-zoom-1.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 The thicker the connection line, the more traffic flows between two nodes. Journeys that are not connected to the Session start node are journeys that users navigate to only after a session has already begun, rather than as an entry point into the application.
 

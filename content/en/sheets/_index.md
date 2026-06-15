@@ -207,7 +207,7 @@ Create tables and analyze the data pulled from the following data sources:
 | Database Queries     | [Database Monitoring][16] |
 | Events               | [Event Management][14] |
 | Infrastructure       | [Host List][6] |
-| LLM Observability    | [LLM Observability][13] |
+| Agent Observability    | [Agent Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
 | Product Analytics    | [Product Analytics Events][20] |
