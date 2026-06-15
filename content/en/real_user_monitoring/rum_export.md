@@ -23,7 +23,7 @@ Export Pipelines is in Preview.
 
 Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.
 
-{{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:100%;">}}
+{{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:75%;">}}
 <!-- TODO: refresh screenshot to match the current Export Pipelines UI -->
 
 Use Export Pipelines to:
@@ -196,22 +196,18 @@ In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Und
 
    **File format**
 
-   {{< img src="real_user_monitoring/rum_export/rum-export-data-format.png" alt="Data selection and file format options in the Export Pipeline configuration panel" style="width:100%;">}}
+   {{< img src="real_user_monitoring/rum_export/rum-export-data-format.png" alt="Data selection and file format options in the Export Pipeline configuration panel" style="width:75%;">}}
 
    - **Parquet**: best for loading directly into a data warehouse such as BigQuery, Snowflake, or Databricks.
    - **JSON**: best when you want to process the data with your own pipeline.
 
    **Select Storage Type and Configure Bucket**
 
-   {{< img src="real_user_monitoring/rum_export/rum-export-bucket-config.png" alt="Bucket configuration options in the Export Pipeline configuration panel" style="width:100%;">}}
-
    | Provider | Fields |
    |---|---|
    | **Amazon S3** | AWS account and role (from your AWS integration); **Bucket** (required); **Path** (optional prefix) |
    | **Azure Blob Storage** | Azure tenant and client (from your Azure integration); **Storage Account** (required); **Container** (required); **Path** (optional prefix) |
    | **Google Cloud Storage** | GCP service account (from your Google Cloud integration); **Bucket** (required); **Path** (optional prefix) |
-
-   {{< img src="real_user_monitoring/rum_export/rum-export-test-save.png" alt="Test Configuration and Add Export Pipeline buttons in the configuration panel" style="width:100%;">}}
 
 5. Optionally, click **Test Configuration**. Datadog writes a small test file to your bucket and reads it back to verify access. Fix any reported permissions or naming issues before saving.
 6. Click **Add Export Pipeline** to start the pipeline.
