@@ -44,8 +44,8 @@ Worker version 2.17.0 gives you access to the following:
 - HTTP metrics emitted by the Quota processor's background sync now have correct component tags (`component_kind:transform`, `component_type:quota`, `component_id:quota_global_state`).
 - The Enrichment Table processor using Reference Tables now skips sending empty event batches, preventing fatal errors with disk buffers.
 - The Generate Metrics processor now uses a static component ID so that associated metrics share the same `component_id` across workers and restarts.
-- A parsing filter queries issue with whitespace inside parentheses, such as `service:( web OR api )`, has been fixed.
-- Live Capture now works correctly for sources with multiple named output ports, such as the OpenTelemetry source, has been fixed.
+- An issue with parsing filter queries that contain whitespace inside parentheses, such as `service:( web OR api )`, has been fixed.
+- Live Capture now works correctly for sources with multiple named output ports, such as the OpenTelemetry source.
 - An issue where a Worker crash could occur if a source or a processor sends an empty event batch to the next component has been fixed.
 - For the Custom Processor:
     - Error messages and unused variable diagnostics have been fixed. The processor now reports every unhandled error in a single compilation.
@@ -105,7 +105,7 @@ Worker version 2.16.0 gives you access to the following:
 #### Fixes
 
 - A race condition in the Reference Tables processor has been fixed to prevent dropping buffered events during a Worker shutdown.
-- The follow Live Capture issues have been fixed:
+- The following Live Capture issues have been fixed:
     - Live Capture events were dropped when too many events were sent at the same time.
     - Metrics events sent by the Generate Metrics processors were dropped in Live Capture when there was a log processor after the Generate Metrics processor.
 - The Worker no longer logs `Root metadata expired` or `potential freeze attack` on startup after refreshing embedded Remote Config trusted-root metadata.
