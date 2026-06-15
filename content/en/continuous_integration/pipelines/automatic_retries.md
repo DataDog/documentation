@@ -42,9 +42,9 @@ To use automatic job retries:
 
 ## Enable automatic job retries
 
-After the prerequisites are met, enable automatic job retries from CI/CD Settings:
+After the prerequisites are met, enable automatic job retries from CI/CD Optimization settings:
 
-1. Open [**CI/CD Settings** > **Repository settings**][7].
+1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][7].
 1. Choose where to apply the setting:
    - Select the **Organization** tab to enable Auto Job Retries for every repository by default.
    - Select the **Repository-specific** tab to enable Auto Job Retries for a single repository. To apply to many repositories at once, select them and use **Bulk Apply Settings**.

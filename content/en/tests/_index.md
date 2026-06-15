@@ -96,7 +96,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Access local variable information</a> on retried failed tests.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* The feature is opt-in, and needs to be enabled in [**CI/CD Settings**][2].
+\* The feature is opt-in, and needs to be enabled in [**CI/CD Optimization settings**][2].
 
 ## Default configurations
 

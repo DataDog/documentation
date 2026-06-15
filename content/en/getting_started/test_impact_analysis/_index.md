@@ -54,7 +54,7 @@ To set up Test Impact Analysis, see the following documentation for your program
 
 To enable Test Impact Analysis:
 
-1. Open [{{< ui >}}CI/CD Settings{{< /ui >}} > {{< ui >}}Repository settings{{< /ui >}}][3].
+1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][3].
 1. Choose where to apply the setting:
    - Select the {{< ui >}}Organization{{< /ui >}} tab to enable Test Impact Analysis for every repository by default.
    - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to enable Test Impact Analysis for a single repository, or to apply an override to one of its test services.
@@ -72,14 +72,14 @@ You can configure Test Impact Analysis to prevent specific tests from being skip
 
 To configure Test Impact Analysis:
 
-1. From the {{< ui >}}Repository-specific{{< /ui >}} tab in [{{< ui >}}CI/CD Settings{{< /ui >}} > {{< ui >}}Repository settings{{< /ui >}}][3], open the repository.
+1. From the {{< ui >}}Repository-specific{{< /ui >}} tab in [{{< ui >}}CI/CD Repository settings{{< /ui >}}][3], open the repository.
 1. In the {{< ui >}}Test Impact Analysis{{< /ui >}} row, specify any branches to exclude (typically the default branch of a repository). Test Impact Analysis does not skip tests for these branches.
 1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Test Impact Analysis runs all CI tests when any of these tracked files change.
 1. Save your changes.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Enable Test Impact Analysis, provide branches for Test Impact Analysis to exclude, and add files for Test Impact Analysis to track and run tests when any changes happen." style="width:100%" >}}
 
-Once you've configured Test Impact Analysis on a test service, execute a test suite run on your default branch. This establishes a baseline for Test Impact Analysis to accurately skip irrelevant tests in future commits. 
+After you've configured Test Impact Analysis on a test service, execute a test suite run on your default branch. This establishes a baseline for Test Impact Analysis to accurately skip irrelevant tests in future commits. 
 
 ## Use Test Impact Analysis data
 

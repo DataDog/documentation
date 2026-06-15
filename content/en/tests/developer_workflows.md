@@ -49,7 +49,7 @@ You can enable test summaries in pull requests with the following steps:
 1. Install the [GitHub integration][4]:
    1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
    1. Give the application read and write permissions for pull requests.
-1. Open [**CI/CD Settings** > **Repository settings**][3].
+1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][3].
 1. Choose where to apply the setting:
    - Select the **Organization** tab to enable PR Comments for every repository by default.
    - Select the **Repository-specific** tab to enable PR Comments for a single repository.

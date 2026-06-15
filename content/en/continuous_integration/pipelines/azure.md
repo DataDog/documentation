@@ -165,7 +165,7 @@ To enable log collection for Azure DevOps pipelines:
 
 1. Set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14].
 
-2. In Datadog, open [**CI/CD Settings** > **Azure DevOps**][23].
+2. In Datadog, open [**CI/CD Optimization** > **Settings** > **Azure DevOps**][23].
 3. Enable log pulling for Azure DevOps.
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.

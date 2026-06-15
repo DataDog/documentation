@@ -65,12 +65,12 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-After you have set up your Datadog library for Test Impact Analysis, configure it from [**CI/CD Settings**][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
+After you have set up your Datadog library for Test Impact Analysis, configure it from [**CI/CD Optimization settings**][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
 
 Test Impact Analysis can be configured at three levels, and lower levels can override values from the level above:
 
-- **Organization defaults**: Apply to every repository unless overridden. Open **CI/CD Settings** > **Repository settings**, then select the **Organization** tab.
-- **Repository**: Overrides organization defaults for a specific repository. Open **CI/CD Settings** > **Repository settings**, select the **Repository-specific** tab, and choose a repository.
+- **Organization defaults**: Apply to every repository unless overridden. Open **CI/CD Optimization** > **Settings** > **Repositories**, then select the **Organization** tab.
+- **Repository**: Overrides organization defaults for a specific repository. Open **CI/CD Optimization** > **Settings** > **Repositories**, select the **Repository-specific** tab, and choose a repository.
 - **Test service**: Overrides the repository setting for a specific test service. Open the repository, then edit overrides for the target test service.
 
 At the repository and test service levels, each setting can either **Inherit** the value from the level above or be set to a **Custom** value at the current level.
