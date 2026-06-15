@@ -191,8 +191,6 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 
 ### GKE Autopilot
 
-GKE Autopilot is a serverless Kubernetes mode. Standard GKE is not a serverless platform and should use the general [traces endpoint][8] instead.
-
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
@@ -221,4 +219,3 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 [3]: /opentelemetry/setup/otlp_ingest/logs/
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
 [5]: /opentelemetry/setup/otlp_ingest/managed_platforms/
-[8]: /opentelemetry/setup/otlp_ingest/traces/
