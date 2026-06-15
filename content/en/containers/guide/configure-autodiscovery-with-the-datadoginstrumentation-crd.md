@@ -1,0 +1,198 @@
+---
+title: Configure Autodiscovery with the DatadogInstrumentation CRD
+description: Configure Autodiscovery checks for Kubernetes workloads through the DatadogInstrumentation custom resource instead of pod annotations.
+further_reading:
+- link: "/containers/kubernetes/integrations/"
+  tag: "Documentation"
+  text: "Configure integrations with Autodiscovery"
+- link: "/getting_started/containers/autodiscovery/"
+  tag: "Documentation"
+  text: "Getting Started with Autodiscovery"
+- link: "/containers/guide/autodiscovery-examples/"
+  tag: "Documentation"
+  text: "Autodiscovery scenarios and examples"
+- link: "/containers/cluster_agent/"
+  tag: "Documentation"
+  text: "Datadog Cluster Agent"
+---
+
+<div class="alert alert-info">Configuring Autodiscovery with the <code>DatadogInstrumentation</code> custom resource is in beta.</div>
+
+## Overview
+
+The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscovery][1] checks for specific Kubernetes workloads through a single Kubernetes resource, instead of [pod annotations][2]. With this approach, you can enable, update, and roll back integration configurations without editing pod specs or triggering Agent or application rollouts.
+
+Use the `DatadogInstrumentation` CR when you want to:
+
+- Configure Autodiscovery checks without modifying workload manifests or adding annotations.
+- Centrally manage per-workload check configuration as a dedicated, version-controlled Kubernetes resource.
+- Update or remove check configuration without restarting your application pods.
+
+The configuration is reconciled by a controller in the [Datadog Cluster Agent][3]. When you create or update a `DatadogInstrumentation` resource, the Cluster Agent generates the corresponding check configurations and applies them to the matching workload's containers.
+
+## Requirements
+
+- Datadog Agent and Cluster Agent v7.81 or later.
+- To install the CRD and enable the controller, Datadog Operator v1.28 or later, or Datadog Helm chart v2.223.0 or later.
+
+## Enable the controller
+
+The `DatadogInstrumentation` controller runs in the Cluster Agent and is disabled by default. Enable it with the Datadog Operator or Helm.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+While the feature is in beta, opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.81.0 or later.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/instrumentation-crd-enabled: "true"
+spec:
+  global:
+    [...]
+```
+
+Apply the change:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+```
+
+The Operator sets the required environment variables and RBAC on the Cluster Agent automatically.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In your `datadog-values.yaml` file, enable the controller:
+
+```yaml
+datadog:
+  instrumentationCrd:
+    enabled: true
+```
+
+Upgrade your release:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+When the controller is enabled, it waits for the `DatadogInstrumentation` CRD to be installed in the cluster before it starts reconciling resources.
+
+## Configure a check
+
+A `DatadogInstrumentation` resource has two main parts:
+
+- `spec.targetRef`: identifies the workload to configure, by `apiVersion`, `kind`, and `name`. The resource and the target workload must be in the same namespace.
+- `spec.config.checks`: a list of Autodiscovery check configurations to apply to the target workload's containers.
+
+The following example configures the [Redis integration][4] for a `Deployment` named `redis`, including log collection. It mirrors the [annotation-based example][2], using the same [template variables][5] such as `%%host%%`:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: redis-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: redis
+  config:
+    checks:
+      - integration: redisdb
+        containerImage:
+          - redis
+        initConfig: {}
+        instances:
+          - host: "%%host%%"
+            port: "6379"
+            password: "%%env_REDIS_PASSWORD%%"
+        logs:
+          - type: file
+            path: /var/log/redis_6379.log
+            source: redis
+            service: redis_service
+```
+
+Apply the resource:
+
+```shell
+kubectl apply -f redis-instrumentation.yaml
+```
+
+Each entry in `checks` accepts the following fields:
+
+`integration`
+: The name of the Datadog integration to run, such as `redisdb`.
+
+`containerImage`
+: A list of container image identifiers to match against the target workload's containers. The check is applied to containers whose image matches an entry in this list.
+
+`initConfig`
+: The `init_config` section for the integration. This section is usually empty (`{}`).
+
+`instances`
+: A list of instance configurations for the check. Each instance supports [Autodiscovery template variables][5], such as `%%host%%`.
+
+`logs`
+: The log collection configuration for the matching containers.
+
+### Endpoint and cluster checks
+
+To configure an [endpoint check][6], set `targetRef` to a `Service`:
+
+```yaml
+spec:
+  targetRef:
+    apiVersion: v1
+    kind: Service
+    name: my-service
+```
+
+## Precedence
+
+When more than one configuration source applies to a workload, Datadog resolves them in the following order (highest precedence first):
+
+1. Pod annotations
+2. `DatadogInstrumentation` resources
+3. Static configuration (such as auto-configuration or mounted files)
+
+If a workload already has annotation-based Autodiscovery configuration for a check, the `DatadogInstrumentation` configuration does not override it.
+
+## One resource per workload
+
+A workload can be the target of only one `DatadogInstrumentation` resource within a namespace. A validating admission webhook rejects a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
+
+## Check the status
+
+The controller reports the result of reconciling each resource through Kubernetes status conditions. To view the status, including whether the configuration was applied and the resolved target workload:
+
+```shell
+kubectl describe datadoginstrumentation redis-instrumentation
+```
+
+## Limitations
+
+- This capability is in beta.
+- The `DatadogInstrumentation` CRD is served at `apiVersion: datadoghq.com/v1alpha1`.
+- This page covers Autodiscovery checks only. Configuring APM Single Step Instrumentation through the `DatadogInstrumentation` resource is tracked separately.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/containers/autodiscovery/
+[2]: /containers/kubernetes/integrations/
+[3]: /containers/cluster_agent/
+[4]: /integrations/redisdb/
+[5]: /containers/guide/template_variables/
+[6]: /containers/cluster_agent/endpointschecks/
