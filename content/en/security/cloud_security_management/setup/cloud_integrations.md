@@ -60,12 +60,12 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 - `RoleManagement.Read.All`
 - `User.Read.All`
 
-### Enable Cloud Security for your Azure subscriptions
+### Enable Cloud Security for your Azure accounts
 
 1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 1. Expand the **Azure** section.
-1. To enable Posture Management for a subscription, switch the **Posture Management** toggle to the on position.
-1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the subscription you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
+2. To enable Posture Management for an account, switch the **Posture Management** toggle to the on position.
+3. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the subscription you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
 
 [1]: /integrations/azure
 [2]: /integrations/guide/azure-graph-api-permissions/
@@ -92,12 +92,12 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
     - Repeat the process above to use multiple service accounts.
     - Use the same service account by updating the `project_id` in the downloaded JSON file. Then, upload the file to Datadog as described in steps 1-3.
 
-### Enable Cloud Security for your Google Cloud projects
+### Enable Cloud Security for your Google Cloud accounts
 
 1. On the [**Cloud Security Setup**][2] page, click **Cloud Integrations**.
 1. Expand the **GCP** section.
-1. To enable Posture Management for a project, switch the **Posture Management** toggle to the on position.
-1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the project you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
+2. To enable Posture Management for an account, switch the **Posture Management** toggle to the on position.
+3. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the project you want to filter on. A side panel with configuration options opens. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
 
 [1]: /integrations/google_cloud_platform
 [2]: https://app.datadoghq.com/security/configuration/csm/setup
