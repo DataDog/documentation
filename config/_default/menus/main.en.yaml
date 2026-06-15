@@ -6463,46 +6463,51 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_set_up_pipelines
       weight: 102
+    - name: Pipeline Simulation
+      url: observability_pipelines/configuration/pipeline_simulation/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_pipeline_simulation
+      weight: 103
     - name: Install the Worker
       url: observability_pipelines/configuration/install_the_worker/
       identifier: observability_pipelines_install_the_worker
       parent: observability_pipelines_configuration
-      weight: 103
+      weight: 104
     - name: Advanced Worker Configuration
       url: observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
       parent: observability_pipelines_install_the_worker
       identifier: observability_pipelines_advanced_worker_configurations
-      weight: 10301
+      weight: 10401
     - name: Run Multiple Pipelines on a Host
       identifier: observability_run_multiple_pipelines_on_a_host
       url: /observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/
       parent: observability_pipelines_install_the_worker
-      weight: 10302
+      weight: 10402
     - name: Secrets Management
       url: observability_pipelines/configuration/secrets_management
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_secrets_management
-      weight: 104
+      weight: 105
     - name: Live Capture
       identifier: observability_pipelines/configuration/live_capture/
       url: /observability_pipelines/configuration/live_capture/
       parent: observability_pipelines_configuration
-      weight: 105
+      weight: 106
     - name: Update Existing Pipelines
       url: observability_pipelines/configuration/update_existing_pipelines
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
-      weight: 106
+      weight: 107
     - name: Export Pipeline
       url: observability_pipelines/configuration/export_pipeline_configuration/
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
-      weight: 107
+      weight: 108
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 108
+      weight: 109
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
