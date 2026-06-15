@@ -44,9 +44,9 @@ Worker version 2.17.0 gives you access to the following:
 - HTTP metrics emitted by the Quota processor's background sync now have correct component tags (`component_kind:transform`, `component_type:quota`, `component_id:quota_global_state`).
 - The Enrichment Table processor using Reference Tables now skips sending empty event batches, preventing fatal errors with disk buffers.
 - The Generate Metrics processor now uses a static component ID so that associated metrics share the same `component_id` across workers and restarts.
-- An issue with parsing filter queries with whitespaces inside parentheses, such as `service:( web OR api )`, has been fixed.
-- An issue with Live Capture for sources with multiple named output ports, such as the OpenTelemetry source, has been fixed.
-- An issue where a Worker crash can occur if a source or a processor sends an empty event batch to the next component has been fixed.
+- A parsing filter queries issue with whitespace inside parentheses, such as `service:( web OR api )`, has been fixed.
+- Live Capture now works correctly for sources with multiple named output ports, such as the OpenTelemetry source, has been fixed.
+- An issue where a Worker crash could occur if a source or a processor sends an empty event batch to the next component has been fixed.
 - For the Custom Processor:
     - Error messages and unused variable diagnostics have been fixed. The processor now reports every unhandled error in a single compilation.
     - You can now use `SCREAMING_SNAKE` case in functions such as `pascalcase` and `camelcase`.
@@ -90,7 +90,7 @@ Worker version 2.16.0 gives you access to the following:
 - The Amazon S3 destination now supports Apache Parquet batch encoding with flexible schema definitions and configurable compression (Snappy, ZSTD, GZIP, LZ4, or none).
 - For the Custom Processor:
     - The `encode_proto` function now accepts an `allow_lossy_string_coercion` argument.
-    - Protobuf encoding now coerces compatible scalar types into the target field type: integers and strings are accepted for `bool` fields, and integers are accepted for `float`/`double` fields.
+    - Protobuf encoding now coerces compatible scalar types into the target field type: integers and strings are accepted for `bool` fields, and integers are accepted for `float` or `double` fields.
 
 #### Enhancements
 
@@ -105,12 +105,12 @@ Worker version 2.16.0 gives you access to the following:
 #### Fixes
 
 - A race condition in the Reference Tables processor has been fixed to prevent dropping buffered events during a Worker shutdown.
-- Issues that have been fixed for Live Capture:
-    - Captured events in Live Capture were dropped when too many events were sent at the same time.
-    - Metrics events sent by the Generate Metrics processors were dropped when there was a log processor after the Generate Metrics processor.
+- The follow Live Capture issues have been fixed:
+    - Live Capture events were dropped when too many events were sent at the same time.
+    - Metrics events sent by the Generate Metrics processors were dropped in Live Capture when there was a log processor after the Generate Metrics processor.
 - The Worker no longer logs `Root metadata expired` or `potential freeze attack` on startup after refreshing embedded Remote Config trusted-root metadata.
 - The Splunk HEC source now emits `authentication_failed` as the `error_type` in error logs and metrics when authentication fails due to a missing or invalid authorization header.
-- Fixed the Datadog Logs destination healthcheck endpoint computation to preserve site prefixes, such as `us3.`, `us5.`, `ap1.`, when deriving the API URL from intake endpoints.
+- Fixed the Datadog Logs destination health check endpoint computation to preserve site prefixes, such as `us3.`, `us5.`, `ap1.`, when deriving the API URL from intake endpoints.
 - An issue where a destination with a configured disk buffer would stall for `batch.timeout_sec` before gracefully reloading has been fixed. This fix also resolves cases where the Worker ignored SIGINT during a pipeline stall.
 - Fixed the Custom Processor so an `else` or `else if` keyword can be on a new line after the closing curly brace (`}`) of an `if`-block.
 
