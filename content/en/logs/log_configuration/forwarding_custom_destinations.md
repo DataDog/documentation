@@ -73,9 +73,9 @@ Due to security protocols for the {{< region-param key="dd_datacenter" >}} site,
 {{% tab "Splunk" %}}
 
 7. Enter a name for the destination.
-8. In the {{< ui >}}Configure Destination{{< /ui >}} section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`.
+8. In the {{< ui >}}Configure Destination{{< /ui >}} section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`.  
     **Note**: `/services/collector/event` is automatically appended to the endpoint.
-9. In the {{< ui >}}Configure Authentication{{< /ui >}} section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
+9. In the {{< ui >}}Configure Authentication{{< /ui >}} section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.  
     **Note**: The [indexer acknowledgment][2] needs to be disabled.
 10. Optionally, in the {{< ui >}}Configure Sourcetype{{< /ui >}} section, specify the Splunk sourcetype to assign to the forwarded events. See [Why Sourcetype matters][3] for more information about the Splunk Sourcetype. If left unset, the default sourcetype `_json` is used. To send events without any sourcetype, select **Send without sourcetype**.
     **Note**: On update, omitting the sourcetype field preserves the previously configured value.
