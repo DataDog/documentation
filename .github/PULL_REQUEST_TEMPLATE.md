@@ -11,7 +11,7 @@ If you're waiting for a release or there are other considerations that you want 
 ## For Datadog employees:
 
 - ⚠️ Your branch name **MUST** follow the `<name>/<description>` convention and include the forward slash (`/`). If you've already created your PR with an incorrect branch name, please rename your branch and open a fresh PR.
-- 🤖 **New**: Comment with `/review` to run an automated Claude review on your PR.
+- 🤖 **New**: Comment with `/review` to run an automated check that catches common issues before a Documentation team member reviews your PR.
 
 ### AI assistance
 
