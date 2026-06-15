@@ -4,7 +4,7 @@ description: Use Datadog's Claude Code skills to classify sessions, diagnose fai
 further_reading:
     - link: '/llm_observability/evaluations/'
       tag: 'Documentation'
-      text: 'LLM Observability Evaluations'
+      text: 'Agent Observability Evaluations'
     - link: '/llm_observability/experiments/'
       tag: 'Documentation'
       text: 'LLM Experiments'
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog provides a set of [Claude Code][1] skills that bring LLM Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators — all against your live production data.
+Datadog provides a set of [Claude Code][1] skills that bring Agent Observability analysis directly into your development workflow. Rather than navigating dashboards manually, you can invoke these skills from a Claude Code session to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators — all against your live production data.
 
 | Skill | What it does |
 |-------|-------------|
@@ -36,12 +36,12 @@ The skills produce structured, actionable output — RCA reports with before/aft
 ### Prerequisites
 
 - [Claude Code][1] installed and authenticated
-- At least one LLM application [instrumented with LLM Observability][2] and producing traces
+- At least one LLM application [instrumented with Agent Observability][2] and producing traces
 - A data backend: either the Datadog MCP server **or** the `pup` CLI
 
 ### Install the skills
 
-The skills are published in the [agent-skills][6] repository. Clone the repository and copy the LLM Observability skills into your Claude Code skills directory:
+The skills are published in the [agent-skills][6] repository. Clone the repository and copy the Agent Observability skills into your Claude Code skills directory:
 
 ```shell
 git clone https://github.com/datadog-labs/agent-skills
@@ -56,11 +56,11 @@ The skills are available in any Claude Code session after copying.
 
 ### Datadog MCP server
 
-To use the Datadog MCP server option, connect the LLM Observability MCP server to your Claude Code session:
+To use the Datadog MCP server option, connect the Agent Observability MCP server to your Claude Code session:
 
 ```shell
 claude mcp add --scope user --transport http datadog-llmo-mcp \
-  'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs'
+  'https://mcp.datadoghq.com/v1/mcp?toolsets=llmobs'
 ```
 
 All skills detect the MCP server automatically at startup and use it throughout.
@@ -86,12 +86,12 @@ In pup mode, all Datadog API calls are made through `pup llm-obs` subcommands in
 | Mode | Invoke with | Use when |
 |------|-------------|----------|
 | Session | `session_id` | Evaluating a specific session |
-| Trace | `trace_id` | Evaluating a single LLM Observability trace |
+| Trace | `trace_id` | Evaluating a single Agent Observability trace |
 | App | `ml_app` | Sampling and classifying a batch of recent sessions or traces |
 
 The skill pulls from up to three signal sources, and accuracy improves the more data it has access to:
 
-- **LLM Observability traces** — the full span tree, conversation content, tool call results, and eval judge verdicts. Always available.
+- **Agent Observability traces** — the full span tree, conversation content, tool call results, and eval judge verdicts. Always available.
 - **RUM behavioral signals** — page views, custom actions, dwell time, and explicit feedback events that confirm or contradict what the trace shows. Available when RUM is instrumented for your app.
 - **Audit Trail** — server-confirmed write events (dashboards created, monitors modified, notebooks deleted) that prove whether the assistant's actions actually landed. Most authoritative signal when the session involved asset creation or editing.
 

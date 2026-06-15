@@ -2,7 +2,9 @@
 title: Configure Integrations and Settings
 ---
 
-Set up integrations to extend Bits Investigation’s capabilities:
+<div class="alert alert-danger">Bits Investigation does not have an org-level disable option. To stop using the feature, see <a href="#disable-bits-investigation">Disable Bits Investigation</a>.</div>
+
+Set up integrations to extend Bits Investigation's capabilities:
 - [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context.
 - [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms) to streamline incident response.
 - [Pull context from knowledge bases](#pull-context-from-knowledge-bases) to incorporate runbooks and documentation into investigations.
@@ -82,6 +84,10 @@ There are two RBAC permissions that apply to Bits Investigation:
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role  |
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or has previously modified the default roles, an admin with the User Access Manage permission needs to manually add these permissions to the appropriate roles. For details, see [Access Control][8].
+
+### Disable Bits Investigation
+
+There is no org-level option to disable Bits Investigation. To prevent your organization from using the feature, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
 
 ## Configure rate limits
 

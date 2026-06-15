@@ -1,6 +1,6 @@
 ---
 title: Status Pages
-description: Share real-time service availability, incident status, and planned maintenance updates with customers or stakeholders using Datadog Status Pages.
+description: Communicate service availability, incidents, and planned maintenance with customers or internal stakeholders through a shareable status page.
 aliases:
 - /service_management/status_pages/
 further_reading:
@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page3.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
 Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
@@ -33,9 +33,7 @@ Use Status Pages to:
 
 ## Configure permissions
 
-There are three RBAC permissions that are relevant to Status Pages. Users with the Datadog Admin Role have all the necessary permissions.
-
-To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_incident_write` RBAC permissions. For more information, see [Access Control][1].
+To create, update, or publish Status Pages, you must have the appropriate RBAC permissions. For more information, see [Access Control][1].
 
 <table>
   <thead>
@@ -53,13 +51,23 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Write<br><code style="white-space: nowrap;">status_pages_settings_write</code></td>
-      <td>Create and launch new Status Pages, and configure Status Pages settings.</td>
+      <td>Create new Status Pages, and configure Status Pages settings.</td>
       <td>Datadog Admin Role</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
       <td>Publish and update Incidents.</td>
       <td>Datadog Admin Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Public Page Publish<br><code style="white-space: nowrap;">status_pages_public_page_publish</code></td>
+      <td>Publish and unpublish public Status Pages.</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
+      <td>Publish and unpublish internal Status Pages.</td>
+      <td>None</td>
     </tr>
   </tbody>
 </table>
@@ -120,7 +128,7 @@ Notices are messages published to a status page to communicate system status. St
 
 ### Publish a degradation
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page_degradations2.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
 
 Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
 
@@ -135,7 +143,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_degradation_1.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
@@ -143,6 +151,8 @@ After a degradation notice is reviewed and published, it:
 - Is visible in the notice history timeline.
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
+
+**Note**: Each status page supports a maximum of 100 active (unresolved) degradations at a time.
 
 ### Backfill a degradation
 
@@ -182,6 +192,8 @@ After reviewing and scheduling, the maintenance window:
 
 You can post updates if plans change or reschedule the maintenance window as needed.
 
+**Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
+
 ### Backfill a maintenance window
 
 Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
@@ -203,6 +215,18 @@ For **internal** status pages, the subscription process is the same, but users m
 
 {{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
+
+## Configure a custom email sender domain
+
+By default, status page subscription emails are sent from a Datadog email address. To send notifications from your own domain, configure a custom SMTP server in Organization Settings.
+
+<div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
+
+1. On your status page, go to **Settings** > **Subscriptions**.
+2. Under **Email Sender Domain**, click **Organization Settings**.
+3. In Organization Settings, [add and validate an SMTP server][3].
+4. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+
 ## Slack subscriptions
 
 Visitors can subscribe to status page updates in Slack through the **Datadog Status Pages** Slack app. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, the app posts updates to each subscribed channel for the components it follows, using your page name and Slack app icon as the sender. Slack subscriptions are configured independently of [email subscriptions](#email-subscriptions).
@@ -210,8 +234,8 @@ Visitors can subscribe to status page updates in Slack through the **Datadog Sta
 ### Enable Slack subscriptions
 
 1. From your status page, click **Settings**.
-1. Enable **Slack subscriptions**.
-1. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
+2. Enable **Slack subscriptions**.
+3. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
 
 {{< img src="service_management/status_pages/status_pages_enable_slack.png" alt="Status page settings showing the Enable Slack subscriptions toggle and the Slack App Icon upload" style="width:80%;" >}}
 
@@ -240,7 +264,7 @@ Status page owners can review subscribers in the status page settings, which lis
 
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
+To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
 1. From your status page, click **Settings**.
 1. Select **Custom Domain**.
@@ -253,7 +277,7 @@ To match your branding, you have the option to map your status page to a custom 
 
 - DNS propagation may take several minutes.
 - You can revert to the default Datadog domain at any time.
-- Ensure DNS changes are made by someone with access to your domain registrar.
+- DNS changes must be made by someone with access to your domain registrar.
 
 ## Further reading
 
@@ -261,3 +285,4 @@ To match your branding, you have the option to map your status page to a custom 
 
 [1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/status-pages
+[3]: /account_management/org_settings/smtp_configuration

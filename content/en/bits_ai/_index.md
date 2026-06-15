@@ -24,7 +24,7 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
-    - link: "/bits_ai/ai_credits/"
+    - link: "/account_management/billing/ai_credits/"
       tag: "Documentation"
       text: "AI Credits"
     - link: "/mcp_server/"
@@ -34,15 +34,21 @@ further_reading:
 
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
 
+Learn about Bits AI pricing on [AI Credits][1].
+
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
    {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts with Bits Investigation{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits Code{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_ai_security_analyst" >}}Triage security threat signals with Bits AI Security Analyst{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_assistant" >}}Explore your observability data with Bits Chat{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_security_analyst" >}}Triage security threat signals with Bits Security Analyst{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_chat" >}}Explore your observability data with Bits Chat{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_data_analysis" >}}Explore your business data in natural language with Bits Data Analysis{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_detection" >}}Autonomously monitor for impactful service degradations with Bits Detection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/billing/ai_credits/
