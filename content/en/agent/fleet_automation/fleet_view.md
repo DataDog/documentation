@@ -8,6 +8,9 @@ further_reading:
 - link: "/agent/troubleshooting/send_a_flare/"
   tag: "Documentation"
   text: "Send a flare"
+- link: "/containers/kubernetes/installation/"
+  tag: "Documentation"
+  text: "Install the Datadog Agent on Kubernetes"
 ---
 
 Use [Fleet View][1] to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues.
@@ -38,6 +41,13 @@ For each OTel Collector, you can see:
 Select a Datadog Agent or OTel Collector to view its configuration, connected integrations, audit events, and a support tab for sending a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="The Agent detail panel showing configuration, connected integrations, and audit events." style="width:100%;" >}}
+
+## Search and filter
+
+Use the search bar at the top of Fleet View to find specific Agents, OTel Collectors, or clusters across your fleet. You can:
+
+- Perform free-text search by hostname or cluster name
+- Filter by host and Agent tags, such as operating system, environment (`env`), team, and enabled products (`products_enabled`)
 
 ## Visualize OTel pipelines
 
@@ -88,6 +98,46 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 
 {{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="The support tab for an Agent with the Send Flare button." style="width:100%;" >}}
 
+## Kubernetes view
+
+You can also view Datadog Agents and OTel Collectors running in Kubernetes environments, giving you a unified view of your fleet across both host-based and containerized infrastructure.
+
+By default, Fleet View lists infrastructure as individual hosts. Use the {{< ui >}}View by infra type{{< /ui >}} toggle to switch to [Kubernetes view][4], which shows Agents by Kubernetes cluster instead.
+
+Each row is a cluster managed by the [Datadog Operator][5] or Helm chart, and the Agents in it (Node Agents, Cluster Agent, Cluster Check Runners) appear grouped per cluster instead of as individual hosts.
+
+### Prerequisites for Kubernetes view
+
+- [Remote Configuration][6] must be enabled for your organization
+
+Some capabilities require specific versions:
+
+- To view the `DatadogAgent` custom resource configuration: Datadog Operator v1.24 or later
+- To edit the `DatadogAgent` configuration from Fleet View: Datadog Operator v1.27 or later
+- To view the list of integrations running on a Cluster Agent: Agent v7.72.0 or later. On Agent v7.79.0 or later, the integration list also includes status.
+
+### View Kubernetes clusters
+
+Clusters are listed alphabetically by cluster name. The table lists each cluster's name, deployment method (Datadog Operator or Helm), namespace, Agent version, Agent pod status, readiness, age, and number of restarts.
+
+To find a specific cluster, you can [search](#search-and-filter) by cluster name.
+
+Click a cluster to view:
+
+- Cluster details, such as environment and tags
+- Cluster-level Agents (Cluster Agent and Cluster Check Runners)
+- Node Agents
+
+For clusters managed with the Datadog Operator v1.24 or later, the {{< ui >}}Configuration{{< /ui >}} tab shows the cluster's configuration data. With Datadog Operator v1.27 or later, you can also edit the configuration from this tab.
+
+### Limitations
+
+Compared to host view, Kubernetes view has the following limitations:
+
+- You cannot send remote support flares. [under development v7.80]
+- You can see which OTel Collectors are running, but you cannot view their configuration in Kubernetes view.
+- Fleet Automation API access is not available.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -95,3 +145,6 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [3]: /agent/configuration/agent-configuration-files/
+[4]: https://app.datadoghq.com/fleet?view_by=clusters
+[5]: /containers/datadog_operator
+[6]: /agent/guide/setup_remote_config

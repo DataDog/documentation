@@ -38,6 +38,7 @@ With Fleet Automation, you can:
 - **[Configure Datadog Agents][4]** to centralize setup and gain visibility into your environments faster.
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
 - **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
+- **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
 
 ## Fleet Automation API
 
@@ -70,3 +71,4 @@ For information on setting up roles and permissions, see [Access Control][2].
 [4]: /agent/fleet_automation/configure_agents/
 [5]: /agent/fleet_automation/upgrade_agents/
 [6]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[7]: /agent/fleet_automation/fleet_view/#kubernetes-view
