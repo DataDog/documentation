@@ -77,7 +77,7 @@ Due to security protocols for the {{< region-param key="dd_datacenter" >}} site,
     **Note**: `/services/collector/event` is automatically appended to the endpoint.
 9. In the {{< ui >}}Configure Authentication{{< /ui >}} section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.  
     **Note**: The [indexer acknowledgment][2] needs to be disabled.
-10. (Optional) In the {{< ui >}}Configure Sourcetype{{< /ui >}} section, specify the Splunk sourcetype to assign to the forwarded events. See [Why Sourcetype matters][3] for more information about the Splunk Sourcetype. If left unset, the default sourcetype `_json` is used. To send events without any sourcetype, select **Send without sourcetype**.
+10. (Optional) In the {{< ui >}}Configure Sourcetype{{< /ui >}} section, specify the Splunk sourcetype to assign to the forwarded events. See [Why Sourcetype matters][3] for more information about the Splunk sourcetype. If left unset, the default sourcetype `_json` is used. To send events without any sourcetype, select **Send without sourcetype**.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 [2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
