@@ -38,7 +38,7 @@ Export Pipelines is a shared feature between [Real User Monitoring][4] and [Prod
 
 | Scope | Source | Max pipelines | Available presets |
 |---|---|---|---|
-| Per application | RUM | 1 | *All RUM Event Types* or *Sessions, Views & Actions* |
+| Per application | RUM | 1 | *All RUM event types*, or *Sessions, Views & Actions only* |
 | Per application | Product Analytics | 1 | *All Product Analytics Events* |
 | Per organization | Product Analytics | 1 | *User and Account Profiles* |
 
@@ -185,24 +185,25 @@ In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Und
 
 ### 4. Configure the pipeline in Datadog
 
-1. Go to **[Real User Monitoring][2]**, open the application you want to export from, and select **Export Pipelines** in the application settings.
-2. Click **New Export Pipeline**.
-3. Fill in each section of the side panel:
+1. In Datadog, navigate to **Digital Experience > Real User Monitoring > Manage Applications**.
+2. Select your application, then go to **Routing > Export Pipelines**.
+3. Click **New Export Pipeline**.
+4. Fill in each section of the side panel:
 
    **Define Data to Export**
-   - **Source**: Real User Monitoring or Product Analytics.
-   - **Preset**:
-     - RUM — *All RUM Event Types* or *Sessions, Views & Actions*
-     - Product Analytics — *All Product Analytics Events* or *User and Account Profiles*
+
+   Choose the data you want to export. The source and preset options are clearly labeled in the UI.
 
    **File format**
+
+   {{< img src="real_user_monitoring/rum_export/rum-export-data-format.png" alt="Data selection and file format options in the Export Pipeline configuration panel" style="width:100%;">}}
+
    - **Parquet**: best for loading directly into a data warehouse such as BigQuery, Snowflake, or Databricks.
    - **JSON**: best when you want to process the data with your own pipeline.
 
-   **Select Storage Type**
-   - Amazon S3, Google Cloud Storage, or Azure Blob Storage.
+   **Select Storage Type and Configure Bucket**
 
-   **Configure Bucket**
+   {{< img src="real_user_monitoring/rum_export/rum-export-bucket-config.png" alt="Bucket configuration options in the Export Pipeline configuration panel" style="width:100%;">}}
 
    | Provider | Fields |
    |---|---|
@@ -210,8 +211,10 @@ In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Und
    | **Azure Blob Storage** | Azure tenant and client (from your Azure integration); **Storage Account** (required); **Container** (required); **Path** (optional prefix) |
    | **Google Cloud Storage** | GCP service account (from your Google Cloud integration); **Bucket** (required); **Path** (optional prefix) |
 
-4. Click **Test Configuration**. Datadog writes a small test file to your bucket and reads it back to verify both directions. Fix any reported permissions or naming issues before saving.
-5. Click **Save** to start the pipeline.
+   {{< img src="real_user_monitoring/rum_export/rum-export-test-save.png" alt="Test Configuration and Add Export Pipeline buttons in the configuration panel" style="width:100%;">}}
+
+5. Optionally, click **Test Configuration**. Datadog writes a small test file to your bucket and reads it back to verify access. Fix any reported permissions or naming issues before saving.
+6. Click **Add Export Pipeline** to start the pipeline.
 
 ## Pipeline statuses
 
