@@ -107,7 +107,7 @@ Worker version 2.16.0 gives you access to the following:
 - A race condition in the Reference Tables processor has been fixed to prevent dropping buffered events during a Worker shutdown.
 - The following Live Capture issues have been fixed:
     - Live Capture events were dropped when too many events were sent at the same time.
-    - Metrics events sent by the Generate Metrics processors were dropped in Live Capture when there was a log processor after the Generate Metrics processor.
+    - Metrics events sent by the Generate Metrics processor were dropped in Live Capture when there was a log processor after the Generate Metrics processor.
 - The Worker no longer logs `Root metadata expired` or `potential freeze attack` on startup after refreshing embedded Remote Config trusted-root metadata.
 - The Splunk HEC source now emits `authentication_failed` as the `error_type` in error logs and metrics when authentication fails due to a missing or invalid authorization header.
 - Fixed the Datadog Logs destination health check endpoint computation to preserve site prefixes, such as `us3.`, `us5.`, `ap1.`, when deriving the API URL from intake endpoints.
