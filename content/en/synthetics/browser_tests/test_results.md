@@ -134,7 +134,7 @@ Size
 
 {{% /collapse-content %}}
 
-For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture network payloads** is enabled in the test's [advanced options][28].
+For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when **Capture HTTP payloads** is enabled in the test's [advanced options][28].
 
 ### Backend traces
 

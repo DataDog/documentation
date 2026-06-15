@@ -158,7 +158,9 @@ Example: `service:web-ui`
 
 ## More information
 
-The height-adjustable bottom of the Trace View shows selected span and trace information. 
+The height-adjustable bottom of the Trace View shows selected span and trace information.
+
+<div class="alert alert-tip">On traces that contain errors, click <strong>Investigate With Bits AI</strong> in the trace detail panel to launch an automated investigation. Bits AI walks the span tree to identify where the request failed and correlates findings with associated logs. For more information, see <a href="/bits_ai/bits_chat/#trace-analysis">Trace analysis</a>.</div>
 
 The span header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
 
