@@ -226,6 +226,10 @@ By default, status page subscription emails are sent from a Datadog email addres
 1. In Organization Settings, [add and validate an SMTP server][3].
 1. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
 
+<div class="alert alert-info">
+If the selected SMTP server fails, notifications will be sent to subscribers via Datadog Default(no-reply@dtdg.co).
+</div>
+
 ## Set a custom domain
 
 To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
