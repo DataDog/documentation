@@ -123,7 +123,7 @@ In an active Claude Code session, run:
 {{% tab "Cursor" %}}
 **Option 1: Install deeplink (recommended)**
 
-Click the install deeplink for your [Datadog site][16], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+Click the install deeplink for your [Datadog site][1], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -138,13 +138,18 @@ Add the server to `~/.cursor/mcp.json`:
     }
   }
 }</code></pre>
+
+[1]: /getting_started/site/
+
 {{% /tab %}}
 
 {{% tab "Other MCP clients" %}}
 
-Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][16]:
+Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][1]:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
+
+[1]: /getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
