@@ -1564,6 +1564,14 @@
     "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
     "summary": "Get usage stats for a dashboard"
   },
+  "GetDataObservabilityMonitorRunStatus": {
+    "description": "Retrieves the current status of a data observability monitor run. Poll this endpoint after triggering a run to determine when evaluation is complete.",
+    "summary": "Get data observability monitor run status"
+  },
+  "RunDataObservabilityMonitor": {
+    "description": "Manually triggers a run for a data observability monitor. Only monitors that are not scheduled (manually-runnable) can be triggered this way.",
+    "summary": "Run a data observability monitor"
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
@@ -4410,20 +4418,6 @@
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
-  },
-  "ListHardcodedRetentionFilters": {
-    "description": "Get the list of hardcoded retention filters for a RUM application.",
-    "summary": "Get all hardcoded retention filters"
-  },
-  "GetHardcodedRetentionFilter": {
-    "description": "Get a single hardcoded retention filter for a RUM application.",
-    "summary": "Get a hardcoded retention filter"
-  },
-  "UpdateHardcodedRetentionFilter": {
-    "description": "Update the cross-product sample rates of a hardcoded retention filter for a RUM application.\nOnly fields whose matching flag in `cross_product_sampling_editability` is `true` can be updated.\nAny other field is read-only and cannot be sent in the payload.\nReturns the updated hardcoded retention filter when the request is successful.",
-    "summary": "Update a hardcoded retention filter",
-    "request_description": "New cross-product sample rates for the hardcoded retention filter.",
-    "request_schema_description": "The hardcoded retention filter body to update."
   },
   "OrderRetentionFilters": {
     "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
