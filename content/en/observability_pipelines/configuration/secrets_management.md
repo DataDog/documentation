@@ -47,8 +47,8 @@ backend_config:
     aws_region: <region_name>
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
-[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
+[2]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -64,7 +64,7 @@ bootstrap:
           aws_region: <region_name>
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management
 [2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
 
 {{% /tab %}}
@@ -106,7 +106,7 @@ secret:
       aws_region: <region_name>
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
@@ -123,7 +123,7 @@ bootstrap:
           aws_region: <region_name>
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management
 [2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
 
 {{% /tab %}}
@@ -152,7 +152,7 @@ backend_config:
   keyvaulturl: <key_vault_url>
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
@@ -168,7 +168,7 @@ bootstrap:
         keyvaulturl: <key_vault_url>
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management
 [2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
 
 {{% /tab %}}
@@ -229,7 +229,7 @@ secret:
       # ... additional session settings
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
@@ -250,7 +250,7 @@ bootstrap:
           # ... additional session settings
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management
 [2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
 
 {{% /tab %}}
@@ -287,7 +287,7 @@ Create the file `/path/to/json/file.json` to store the identifiers and their sec
 }
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 
@@ -338,7 +338,7 @@ us1_api: "<api_key>"
 secret_identifier1: "<secret1>"
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
@@ -391,7 +391,7 @@ kubectl exec <pod_name> -- kill -HUP 1
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[3]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
 [4]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [5]: https://developer.hashicorp.com/
 [6]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables
