@@ -63,12 +63,12 @@ You can combine a saved filter with other conditions in the same rule. For detai
 
 To edit a saved filter, open it from **Settings > Saved Filters** and update its name, description, or conditions.
 
-When you save changes to a filter's conditions, the update applies to every enabled flag that uses the filter, and those flags begin evaluating against the updated logic immediately. Before you apply a change, review the **Flags** list in the filter's panel to see which flags are affected.
+When you save changes to a filter's conditions, the update applies to every enabled flag that uses the filter, and those flags begin evaluating against the updated logic immediately. To see which flags are affected, review the **Flags** list in the filter's panel before saving.
 
 <!-- TODO(FFL-2478) screenshot: The saved filter side panel showing the Filters section and the Flags list of flags that use the filter. Suggested path static/images/feature_flags/saved_filters/saved-filter-panel.png. Insert with: {{</* img src="feature_flags/saved_filters/saved-filter-panel.png" alt="The saved filter side panel showing its conditions and the list of flags that use it." style="width:100%;" */>}} -->
 
 <div class="alert alert-info">
-Because changes propagate to all flags that use the filter, a single edit can change targeting behavior across many flags at once. Review the affected flags before saving.
+A single edit can change targeting behavior across many flags at once.
 </div>
 
 ## Permissions and approvals
