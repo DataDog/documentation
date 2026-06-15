@@ -196,7 +196,7 @@ In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Und
 
    **File format**
 
-   {{< img src="real_user_monitoring/rum_export/rum-export-data-format.png" alt="Data selection and file format options in the Export Pipeline configuration panel" style="width:75%;">}}
+   {{< img src="real_user_monitoring/rum_export/rum-export-data-format.png" alt="Data selection and file format options in the Export Pipeline configuration panel" style="width:85%;">}}
 
    - **Parquet**: best for loading directly into a data warehouse such as BigQuery, Snowflake, or Databricks.
    - **JSON**: best when you want to process the data with your own pipeline.
