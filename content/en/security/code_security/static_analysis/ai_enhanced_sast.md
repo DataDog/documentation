@@ -147,7 +147,7 @@ Each finding includes a section with an explanation of the assessment. You can p
 
 Bits AI Memories lets teams add rule-specific context that Bits AI uses when assessing SAST findings. Use memories to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details that help Bits AI interpret findings for that rule.
 
-In the SAST rule side panel, open **Memories** to review false positive reports for the selected rule and edit custom context. Memories apply at the organization and rule level for SAST.
+In the SAST rule side panel, expand the false positive reports accordion to review reports shared by your organization for the selected rule. Use the custom context tab in the same section to add guidance for future Bits AI assessments. Memories apply at the organization and rule level for SAST.
 
 ## Remediation
 
