@@ -143,6 +143,12 @@ To narrow down your initial list for triage, in [Vulnerabilities][6], select **F
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
+### Bits AI memories
+
+Bits AI Memories lets teams add rule-specific context that Bits AI uses when assessing SAST findings. Use memories to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details that help Bits AI interpret findings for that rule.
+
+In the SAST rule side panel, open **Memories** to review false positive reports for the selected rule and edit custom context. Memories apply at the organization and rule level for SAST.
+
 ## Remediation
 
 Datadog SAST uses the [Bits Code][10] to generate code fixes for vulnerabilities. You can remediate individual vulnerabilities or fix multiple vulnerabilities using bulk remediation campaigns.
