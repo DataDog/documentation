@@ -25,16 +25,16 @@ Datadog supports two types of saved filters:
 
 | Type | Description |
 |------|-------------|
-| **Saved Rule** | A reusable targeting rule built from one or more conditions, combined with `AND`/`OR` logic. Use this for multi-attribute targeting, such as `country` **is one of** `US`, `CA` **and** `tier` **equals** `premium`. |
+| **Saved Rule** | A reusable targeting rule built from one or more conditions, combined with `AND` or `OR` logic. Use this for multi-attribute targeting, such as `country` **is one of** `US`, `CA` **and** `tier` **equals** `premium`. |
 | **Saved List** | A reusable list of values for a single attribute, evaluated with **is one of** or **is not one of**. Use this for membership-style targeting, such as a list of user IDs or email addresses. You can import the values from a CSV file. |
 
-A saved filter cannot reference another saved filter. Saved filters contain attribute conditions only and cannot be nested.
+Saved filters contain only attribute conditions and cannot be nested or reference other saved filters.
 
 <!-- TODO(FFL-2478) screenshot: Saved Filters list page under Settings, showing existing Saved Rule and Saved List filters. Suggested path static/images/feature_flags/saved_filters/saved-filters-list.png. Insert with: {{</* img src="feature_flags/saved_filters/saved-filters-list.png" alt="The Saved Filters list page in Feature Flags settings." style="width:100%;" */>}} -->
 
 ## Create a saved filter
 
-1. Navigate to **Feature Flags** and go to **Settings > Saved Filters**.
+1. In **Feature Flags**, go to **Settings > Saved Filters**.
 2. Click **New Saved Filter**.
 3. Enter a **Name** and an optional **Description**.
 4. Choose a **Filter type**:
@@ -44,7 +44,7 @@ A saved filter cannot reference another saved filter. Saved filters contain attr
 
 <!-- TODO(FFL-2478) screenshot: The New Saved Filter modal with the Filter type toggle (Saved Rule / Saved List) and the rule editor. Suggested path static/images/feature_flags/saved_filters/create-saved-filter.png. Insert with: {{</* img src="feature_flags/saved_filters/create-saved-filter.png" alt="The New Saved Filter modal showing the filter type toggle and rule editor." style="width:100%;" */>}} -->
 
-The saved filter is now available to apply to any flag in your organization.
+The saved filter is available to apply to any flag in your organization.
 
 ## Reuse a saved filter in a targeting rule
 
@@ -86,7 +86,7 @@ When a saved filter is no longer needed, archive it from its panel. An archived 
 - Can no longer be edited.
 - Cannot be assigned to any additional flags.
 
-Flags that already use the filter continue to work. You can unarchive a filter at any time to edit or reuse it again.
+Flags that already use the filter continue to work. You can unarchive a filter at any time to edit or reuse it.
 
 ## Further reading
 
