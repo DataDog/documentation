@@ -58,12 +58,18 @@ Set the following environment variable on your application, in addition to the s
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
-By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318`. If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
+By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 
-Set an OTLP endpoint explicitly in either of these cases:
+Set an OTLP endpoint explicitly in any of these cases:
 
 - The Agent is not reachable at `DD_AGENT_HOST` on the default OTLP port (for example, a remote Agent or a non-default port).
 - You use the **Java** tracer. The Java tracer does not derive the endpoint from `DD_AGENT_HOST`; it defaults to `localhost:4318`. Set the endpoint whenever the Agent is not on `localhost`.
+- You use the **Python** tracer. The Python tracer defaults to gRPC on port `4317`, not HTTP. Enable the gRPC OTLP receiver on the Agent, or override the protocol to use HTTP instead:
+
+{{< code-block lang="bash" >}}
+OTEL_EXPORTER_OTLP_ENDPOINT=http://<AGENT_HOST>:4318
+OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+{{< /code-block >}}
 
 To set the endpoint, use the standard OpenTelemetry variable:
 
@@ -71,15 +77,13 @@ To set the endpoint, use the standard OpenTelemetry variable:
 # Point OTLP data at the Datadog Agent (HTTP, port 4318)
 OTEL_EXPORTER_OTLP_ENDPOINT=http://<AGENT_HOST>:4318
 
-# Or use gRPC (port 4317). The default protocol is http/protobuf, so you must also
-# set the protocol to grpc when using the gRPC port:
+# Or use gRPC (port 4317). For most tracers, the default protocol is http/protobuf,
+# so set the protocol explicitly when switching to gRPC:
 # OTEL_EXPORTER_OTLP_ENDPOINT=http://<AGENT_HOST>:4317
 # OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 {{< /code-block >}}
 
 Replace `<AGENT_HOST>` with the hostname or IP address of your Datadog Agent.
-
-To set the metrics endpoint independently of other OTLP signals, use `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` instead, and append the `/v1/metrics` path for HTTP.
 
 Docker Compose example:
 
