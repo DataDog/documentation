@@ -204,6 +204,10 @@ def check_workflows(moves_to_hugo):
         for lineno, line in enumerate(yml.read_text().splitlines(), 1):
             if any(marker in line for marker in exempt):
                 continue
+            # Lines that use ${HUGO_ROOT} or $HUGO_ROOT are correctly parameterized
+            # at runtime — their bare path tokens only look unprefixed statically.
+            if "HUGO_ROOT" in line:
+                continue
             for token in token_re.findall(line):
                 seg, normalized = first_segment(token)
                 # Only treat a token as a path reference if it's an actual path
@@ -263,12 +267,23 @@ def check_workflow_path_filters(moves_to_hugo):
             if not isinstance(spec, dict):
                 continue
             for key in ("paths", "paths-ignore"):
-                for entry in spec.get(key) or []:
+                entries = spec.get(key) or []
+                # Build the set of anchored (negation/slash-stripped) entries so we
+                # can detect intentional dual-entry pairs: a pre-reorg entry like
+                # 'content/en/**' alongside its post-reorg twin 'hugo/content/en/**'
+                # is the "works before and after reorg" strategy, not a bug.
+                anchored_set = {
+                    e.lstrip("!").lstrip("/")
+                    for e in entries if isinstance(e, str)
+                }
+                for entry in entries:
                     if not isinstance(entry, str):
                         continue
                     seg = first_segment(entry)
                     anchored = entry.lstrip("!").lstrip("/")
                     if seg in moves_to_hugo and not anchored.startswith("hugo/"):
+                        if ("hugo/" + anchored) in anchored_set:
+                            continue  # intentional dual-entry pair
                         problems.append(f"{yml.name}: on.{event}.{key}: {entry}")
 
     if problems:
