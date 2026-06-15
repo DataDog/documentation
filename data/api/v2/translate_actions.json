@@ -1564,6 +1564,14 @@
     "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
     "summary": "Get usage stats for a dashboard"
   },
+  "GetDataObservabilityMonitorRunStatus": {
+    "description": "Retrieves the current status of a data observability monitor run. Poll this endpoint after triggering a run to determine when evaluation is complete.",
+    "summary": "Get data observability monitor run status"
+  },
+  "RunDataObservabilityMonitor": {
+    "description": "Manually triggers a run for a data observability monitor. Only monitors that are not scheduled (manually-runnable) can be triggered this way.",
+    "summary": "Run a data observability monitor"
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
@@ -5230,6 +5238,10 @@
   "ConvertExistingSecurityMonitoringRule": {
     "description": "Convert an existing rule from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert an existing rule from JSON to Terraform"
+  },
+  "RestoreSecurityMonitoringRule": {
+    "description": "Restores a custom detection rule to a previously saved historical version.\nOnly custom rules can be restored. Default and partner rules return 400.\nThe restore creates a new version entry; it does not overwrite history.",
+    "summary": "Restore a rule to a historical version"
   },
   "TestExistingSecurityMonitoringRule": {
     "description": "Test an existing rule.",
