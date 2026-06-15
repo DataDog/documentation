@@ -6101,6 +6101,34 @@
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for global variable."
   },
+  "ListTagPolicies": {
+    "description": "Retrieve all tag policies for the organization. Optionally include disabled or deleted\npolicies, filter by telemetry source, and include each policy's current compliance score\nvia the `include=score` query parameter.",
+    "summary": "List tag policies"
+  },
+  "CreateTagPolicy": {
+    "description": "Create a new tag policy for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`policy_id`, `version`, and the timestamp/audit fields are assigned by the server.",
+    "summary": "Create a tag policy",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a new tag policy."
+  },
+  "DeleteTagPolicy": {
+    "description": "Delete a tag policy. By default the policy is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe policy permanently.",
+    "summary": "Delete a tag policy"
+  },
+  "GetTagPolicy": {
+    "description": "Retrieve a single tag policy by ID. Optionally include the policy's current compliance\nscore via the `include=score` query parameter. Policies belonging to other organizations\ncannot be retrieved.",
+    "summary": "Get a tag policy"
+  },
+  "UpdateTagPolicy": {
+    "description": "Update one or more attributes of an existing tag policy. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The policy's\n`source` cannot be changed after creation.",
+    "summary": "Update a tag policy",
+    "request_description": "",
+    "request_schema_description": "Payload for updating an existing tag policy. Only the supplied fields are modified."
+  },
+  "GetTagPolicyScore": {
+    "description": "Retrieve the compliance score for a single tag policy. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the policy. A `null` score indicates that\nno relevant telemetry was found.",
+    "summary": "Get a tag policy compliance score"
+  },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
     "summary": "List tag pipeline rulesets"

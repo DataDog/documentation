@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanning Rules
+description: Understand how Sensitive Data Scanner uses scanning rules to match sensitive data, including predefined library rules and custom regex rules for telemetry data and cloud storage.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules
