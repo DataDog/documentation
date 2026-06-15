@@ -1,51 +1,67 @@
 ---
-description: Gestiona la entrega de funciones con capacidad de observación integrada,
-  métricas en tiempo real y lanzamientos graduales compatibles con OpenFeature.
+description: Administra la entrega de funciones con observabilidad integrada, métricas
+  en tiempo real y implementaciones graduales compatibles con OpenFeature.
 further_reading:
-- link: https://openfeature.dev/docs/reference/technologies/client/web/
-  tag: Sitio externo
-  text: Documentación del kit de desarrollo de software (SDK)  de OpenFeature Web
+- link: /feature_flags/client/
+  tag: Documentación
+  text: SDKs del lado del cliente
+- link: /feature_flags/server/
+  tag: Documentación
+  text: SDKs del lado del servidor
 - link: https://www.datadoghq.com/blog/feature-flags/
   tag: Blog
-  text: Envía funciones de forma más rápida y segura con Datadog Feature Flags
+  text: Envía funciones más rápido y de manera más segura con Feature Flags de Datadog
+- link: https://www.datadoghq.com/blog/experimental-data-datadog/
+  tag: Blog
+  text: Cómo equilibrar velocidad y calidad en experimentos a través de datos unificados
+- link: https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/
+  tag: Blog
+  text: Cómo Datadog Feature Flags es resiliente a fallas de proveedores de la nube
+- link: https://www.datadoghq.com/blog/guardrail-metrics
+  tag: Blog
+  text: Utilice métricas de guardrail y deje de microgestionar sus lanzamientos
 site_support_id: getting_started_feature_flags
-title: Empezando con los Feature Flags
+title: Introducción a Feature Flags
 ---
+## Descripción general {#overview}
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags está en vista previa. Completa el formulario para solicitar acceso.
-{{< /callout >}}
+Las Feature Flags de Datadog ofrecen una forma poderosa e integrada de gestionar la entrega de funciones, con observabilidad incorporada e integración fluida en toda la plataforma.
 
-## Información general
+- **Métricas en tiempo real:** Comprenda quién está recibiendo cada variante, así como cómo su Feature Flag impacta la salud y el rendimiento de su aplicación, todo en tiempo real.
 
-Los marcadores de funciones de Datadog ofrecen una forma potente e integrada de gestionar la entrega de funciones, con capacidad de observación incorporada y una integración perfecta en toda la plataforma.
+- **Soporta cualquier tipo de dato:** Utilice booleanos, cadenas, números u objetos JSON completos, lo que su caso de uso requiera.
 
-* **Métricas en tiempo real:** Conoce quién recibe cada variante y la manera en que tu marcador afecta al estado y al rendimiento de tu aplicación, todo en tiempo real.
+- **Construido para la experimentación:** Dirija audiencias específicas para pruebas A/B, despliegue funciones gradualmente con lanzamientos canarios y retroceda automáticamente cuando se detecten regresiones.
 
-* **Admite cualquier tipo de datos:** Utiliza booleanos, cadenas, números u objetos completos de JSON, el que necesite tu uso en case (incidencia).
+- **Compatible con OpenFeature:** Construido sobre el estándar OpenFeature, asegurando la compatibilidad con implementaciones existentes de OpenFeature y proporcionando un enfoque neutral respecto a proveedores para la gestión de Feature Flags.
 
-* **Creado para la experimentación:** Dirígete a audiencias específicas para tests A/B, lanza funciones gradualmente con versiones canarias y retrocede automáticamente cuando se detecten regresiones.
+## Feature Flags SDKs {#feature-flags-sdks}
 
-* **Compatible con OpenFeature:** Se basa en la norma de OpenFeature, lo que garantiza la compatibilidad con las implementaciones existentes de OpenFeature y proporciona un enfoque independiente del proveedor para la gestión de marcadores de funciones.
+Esta guía utiliza el SDK de navegador de JavaScript como ejemplo. Puede integrar Feature Flags de Datadog en cualquier aplicación utilizando uno de los siguientes SDKs:
 
-## Configura tus entornos
+### SDKs del lado del cliente {#client-side-sdks}
 
-Es probable que tu organización ya disponga de entornos preconfigurados para Desarrollo, Escenificación y Producción. Si necesitas configurar estos u otros entornos, ve a la page (página) [**Entornos**][3] para crear consultas de etiquetas para cada entorno. También puedes identificar qué entorno debe considerarse como entorno de Producción.
+{{< partial name="feature_flags/feature_flags_client.html" >}}
 
-{{< img src="getting_started/feature_flags/environments-list.png" alt="Lista de entornos" style="width:100%;" >}}
+### SDKs del lado del servidor {#server-side-sdks}
 
-## Crea tu primer marcador de funciones
+{{< partial name="feature_flags/feature_flags_server.html" >}}
 
-### Step (UI) / paso (generic) 1: Importar e inicializar el kit de desarrollo de software (SDK)
+## Configure sus entornos {#configure-your-environments}
 
-En primer lugar, instala `@datadog/openfeature-browser`, `@openfeature/web-sdk`, y `@openfeature/core` como dependencias en tu project (proyecto):
+Su organización probablemente ya tiene entornos preconfigurados para Desarrollo, Staging y Producción. Para detalles sobre consultas de entornos, marcado de producción y gestión de entornos, consulte [Entornos][4].
 
+## Cree su primer Feature Flag {#create-your-first-feature-flag}
+
+### Paso 1: Importe e inicialice el SDK {#step-1-import-and-initialize-the-sdk}
+
+Primero, instale `@datadog/openfeature-browser`, `@openfeature/web-sdk` y `@openfeature/core` como dependencias en su proyecto:
 
 ```
-yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
+yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 ```
 
-A continuación, añade lo siguiente a tu project (proyecto) para inicializar el kit de desarrollo de software (SDK):
+Luego, agregue lo siguiente a su proyecto para inicializar el SDK:
 
 ```js
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -53,28 +69,40 @@ import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
 const provider = new DatadogProvider({
-   clientToken: '<CLIENT_TOKEN>',
-   applicationId: '<APPLICATION_ID>',
-   enableExposureLogging: true,
-   site: 'datadoghq.com',
-   env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
-   service: '<SERVICE_NAME>',
-   version: '1.0.0',
+    clientToken: '<CLIENT_TOKEN>',
+    applicationId: '<APPLICATION_ID>',
+    enableExposureLogging: true, // Can impact RUM costs if enabled
+    site: 'datadoghq.com',
+    env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
+    service: '<SERVICE_NAME>',
+    version: '1.0.0'
 });
 
 // Set the provider
 await OpenFeature.setProviderAndWait(provider);
 ```
 
-Puedes encontrar más información sobre las opciones de configuración del kit de desarrollo de software (SDK) de OpenFeature en tu [documentación][1]. Para obtener más información sobre la creación de tokens del cliente e identificadores de la aplicación, consulta [Claves de API y de aplicaciones][4].
+<div class="alert alert-warning">Configuración <code>enableExposureLogging</code> a <code>true</code> puede impactar los costos de <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a>, ya que envía eventos de exposición a Datadog a través de RUM. Puede desactivarlo si no necesita rastrear la exposición de funciones o el estado de las métricas de guardrail.</div>
 
-### Ptep (UI) / paso (generic) 2: Crear un marcador de función
+Más información sobre las opciones de configuración del SDK de OpenFeature se puede encontrar en su [documentación][1]. Para más información sobre la creación de tokens de cliente e IDs de aplicación, consulte [API y Claves de Aplicación][3].
 
-Utiliza la [interfaz de usuario de creación de marcadores de funciones][2] para arrancar tu primer marcador de función. En forma predeterminada, el marcador está desactivado en todos los entornos.
+### Paso 2: Cree un Feature Flag {#step-2-create-a-feature-flag}
 
-### Step (UI) / paso (generic) 3: Evaluar el marcador y escribir el código de la función
+Vaya a [{{< ui >}}Create Feature Flag{{< /ui >}}][2] en Datadog y configure lo siguiente:
 
-En el código de tu aplicación, utiliza el kit de desarrollo de software (SDK) para evaluar el marcador y la puerta de la nueva función.
+- **Name and key**: El nombre de visualización del Feature Flag y la clave referenciada en el código
+- **Variant type** y **variant values**: Consulte [Variants and Flag Types][5]
+- **Distribution channels**: Consulte [Distribution Channels][6]
+
+<div class="alert alert-warning">
+  {{< ui >}}Flag keys{{< /ui >}}, {{< ui >}}variant keys{{< /ui >}} y {{< ui >}}variant values{{< /ui >}} deben considerarse públicos cuando se envían a los SDK de clientes.
+</div>
+
+{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Cree Feature Flag" style="width:100%;" >}}
+
+### Paso 3: Evalúe el Feature Flag y escriba el código para implementar la nueva funcionalidad {#step-3-evaluate-the-flag-and-write-feature-code}
+
+En el código de su aplicación, utilice el SDK para evaluar el Feature Flag y habilitar la nueva funcionalidad.
 
 ```js
 import { OpenFeature } from '@openfeature/web-sdk';
@@ -84,10 +112,10 @@ const client = OpenFeature.getClient();
 // If applicable, set relevant attributes on the client's global context
 // (e.g. org id, user email)
 await OpenFeature.setContext({
-   org_id: 2,
-   user_id: 'user-123',
-   email: 'user@example.com',
-   targetingKey: 'user-123',
+    org_id: 2,
+    user_id: 'user-123',
+    email: 'user@example.com',
+    targetingKey: 'user-123'
 });
 
 // This is what the SDK returns if the flag is disabled in
@@ -96,45 +124,37 @@ const fallback = false;
 
 const showFeature = await client.getBooleanValue('show-new-feature', fallback);
 if (showFeature) {
-   // Feature code here
+    // Feature code here
 }
 ```
 
-Una vez que hayas finalizado este step (UI) / paso (generic), vuelve a desplegar la aplicación para recoger estos cambios. Puedes encontrar más ejemplos de uso en la [documentación][1] del kit de desarrollo de software (SDK).
+Después de completar este paso, vuelva a implementar la aplicación para aplicar estos cambios. Ejemplos adicionales de uso se pueden encontrar en la [documentación][1] del SDK.
 
-### Step (UI) / paso (generic) 4: Definir las reglas de selección y activar el marcador de función
+### Paso 4: Defina las reglas de segmentación y habilite el Feature Flag {#step-4-define-targeting-rules-and-enable-the-feature-flag}
 
-Ahora que la aplicación está lista para check el valor de su marcador, puedes empezar a añadir reglas de orientación. Las reglas de orientación te permiten definir dónde o a quién servir diferentes variantes de tu función.
-
-Ve a **Feature Flags**, selecciona tu marcador y busca la sección **Targeting Rules & Rollouts** (Reglas de oriengación y lanzamientos. Selecciona el entorno cuyas reglas deseas modificar y haz clic en **Edit Targeting Rules** (Editar reglas de orientación).
-
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Reglas de orientación y lanzamientos" style="width:100%;" >}}
-
-### Ptep (UI) / paso (generic) 5: Publicar las normas en tus entornos
-
-Tras guardar los cambios en las reglas de orientación, publícalas activando tu marcador en el entorno que desees.
+Configure las [reglas de segmentación][7] para definir qué sujetos reciben cada variante. Después de guardar sus reglas, habilite el Feature Flag en el entorno seleccionado.
 
 <div class="alert alert-info">
-Como práctica general, los cambios deben implementarse en un entorno de pruebas antes de implementarlos en producción.
+Como buena práctica general, implemente los cambios en un entorno de Staging antes de la Producción.
 </div>
 
-En la sección **Reglas de orientación y lanzamientos**, cambia el entorno seleccionado a **Activado**.
+Consulte [Traffic Splitting and Randomization][8].
 
-{{< img src="getting_started/feature_flags/publish-targeting-rules.png" alt="Publicar reglas de orientación" style="width:100%;" >}}
+### Paso 5: Monitoree su implementación {#step-5-monitor-your-rollout}
 
-El marcador sirve tus reglas de orientación en este entorno. Puedes seguir editando estas reglas de orientación para controlar dónde se sirven las variantes.
+Monitoree el despliegue de la función desde la página de detalles del Feature Flag, que proporciona seguimiento de exposición en tiempo real y métricas como {{< ui >}}error rate{{< /ui >}} y {{< ui >}}page load time{{< /ui >}}. A medida que implemente de forma incremental la función con el Feature Flag, visualice el panel {{< ui >}}Real-Time Metric Overview{{< /ui >}} en la interfaz de usuario de Datadog para ver cómo la función impacta el rendimiento de la aplicación.
 
-### Step (UI) / paso (generic) 6: Monitorizar tu despliegue
+{{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Panel de métricas de Feature Flag en tiempo real" style="width:100%;" >}}
 
-Monitoriza el despliegue de la función desde la page (página) de detalles del marcador de función, en que se proporciona un rastreo de la exposición en tiempo real y métricas como **la tasa de errores** y **el tiempo de carga de la page (página) **. A medida que vayas lanzando la función con el marcador, consulta el panel **Real-Time Metric Overview** (Información general de métricas en tiempo real) de la interfaz de usuario de Datadog para ver cómo afecta la función al rendimiento de la aplicación.
-
-{{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Panel de métricas de marcadores en tiempo real" style="width:100%;" >}}
-
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/environments
-[4]: https://docs.datadoghq.com/es/account_management/api-app-keys/#client-tokens
+[3]: https://docs.datadoghq.com/es/account_management/api-app-keys/#client-tokens
+[4]: /es/feature_flags/concepts/environments/
+[5]: /es/feature_flags/concepts/variants_and_flag_types/
+[6]: /es/feature_flags/concepts/distribution_channels/
+[7]: /es/feature_flags/concepts/targeting_rules/
+[8]: /es/feature_flags/concepts/traffic_splitting/
