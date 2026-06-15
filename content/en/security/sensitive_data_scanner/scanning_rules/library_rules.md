@@ -1,5 +1,5 @@
 ---
-title: Library Rules
+title: Sensitive Data Scanner Library Rules
 aliases:
   - /sensitive_data_scanner/library_rules/
   - /sensitive_data_scanner/scanning_rules/library_rules

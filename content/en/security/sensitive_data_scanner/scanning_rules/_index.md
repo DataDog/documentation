@@ -1,5 +1,5 @@
 ---
-title: Scanning Rules
+title: Sensitive Data Scanning Rules
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules

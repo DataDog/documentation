@@ -1,5 +1,5 @@
 ---
-title: Cloud Storage
+title: Set Up Sensitive Data Scanner for Cloud Storage
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/cloud_storage

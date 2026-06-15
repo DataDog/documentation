@@ -1,5 +1,5 @@
 ---
-title: Telemetry Data
+title: Set Up Sensitive Data Scanner for Telemetry Data
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data

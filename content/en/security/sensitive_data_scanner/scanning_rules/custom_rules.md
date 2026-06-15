@@ -1,5 +1,5 @@
 ---
-title: Custom Rules
+title: Sensitive Data Scanner Custom Rules
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/regular_expression_syntax/

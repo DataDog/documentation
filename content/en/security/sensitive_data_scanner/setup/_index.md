@@ -1,5 +1,5 @@
 ---
-title: Setup
+title: Sensitive Data Scanner Setup
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup
