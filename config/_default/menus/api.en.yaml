@@ -3278,6 +3278,19 @@ menu:
           - TestExistingSecurityMonitoringRule
         unstable: []
         order: 56
+    - name: Restore a rule to a historical version
+      url: /api/latest/security-monitoring/restore-a-rule-to-a-historical-version/
+      identifier: security-monitoring-restore-a-rule-to-a-historical-version
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RestoreSecurityMonitoringRule
+        unstable:
+          - v2
+        order: 133
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
       identifier: security-monitoring-convert-an-existing-rule-from-json-to-terraform
