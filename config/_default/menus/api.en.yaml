@@ -13415,6 +13415,136 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: List patterns topics with clustered points
+      url: /api/latest/llm-observability/list-patterns-topics-with-clustered-points/
+      identifier: llm-observability-list-patterns-topics-with-clustered-points
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTopicsWithClusteredPoints
+        unstable:
+          - v2
+        order: 61
+    - name: List patterns topics
+      url: /api/latest/llm-observability/list-patterns-topics/
+      identifier: llm-observability-list-patterns-topics
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTopics
+        unstable:
+          - v2
+        order: 59
+    - name: Get patterns run status
+      url: /api/latest/llm-observability/get-patterns-run-status/
+      identifier: llm-observability-get-patterns-run-status
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPatternsRunStatus
+        unstable:
+          - v2
+        order: 57
+    - name: Trigger a patterns run
+      url: /api/latest/llm-observability/trigger-a-patterns-run/
+      identifier: llm-observability-trigger-a-patterns-run
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerLLMObsPatterns
+        unstable:
+          - v2
+        order: 56
+    - name: List patterns runs
+      url: /api/latest/llm-observability/list-patterns-runs/
+      identifier: llm-observability-list-patterns-runs
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsRuns
+        unstable:
+          - v2
+        order: 58
+    - name: Delete a patterns configuration
+      url: /api/latest/llm-observability/delete-a-patterns-configuration/
+      identifier: llm-observability-delete-a-patterns-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 55
+    - name: Get a patterns configuration
+      url: /api/latest/llm-observability/get-a-patterns-configuration/
+      identifier: llm-observability-get-a-patterns-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 62
+    - name: Create or update a patterns configuration
+      url: /api/latest/llm-observability/create-or-update-a-patterns-configuration/
+      identifier: llm-observability-create-or-update-a-patterns-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 54
+    - name: List patterns configurations
+      url: /api/latest/llm-observability/list-patterns-configurations/
+      identifier: llm-observability-list-patterns-configurations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsConfigs
+        unstable:
+          - v2
+        order: 63
+    - name: List patterns clustered points
+      url: /api/latest/llm-observability/list-patterns-clustered-points/
+      identifier: llm-observability-list-patterns-clustered-points
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsClusteredPoints
+        unstable:
+          - v2
+        order: 60
     - name: Search LLM Observability spans
       url: /api/latest/llm-observability/search-llm-observability-spans/
       identifier: llm-observability-search-llm-observability-spans

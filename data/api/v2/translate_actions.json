@@ -3035,6 +3035,50 @@
     "request_description": "Search spans payload.",
     "request_schema_description": "Request body for searching LLM Observability spans."
   },
+  "ListLLMObsPatternsClusteredPoints": {
+    "description": "List the data points grouped into a topic. For a parent topic, points from all\nof its leaf topics are returned.",
+    "summary": "List patterns clustered points"
+  },
+  "ListLLMObsPatternsConfigs": {
+    "description": "List all patterns configurations for the organization.",
+    "summary": "List patterns configurations"
+  },
+  "UpsertLLMObsPatternsConfig": {
+    "description": "Create a new patterns configuration, or update an existing one when a configuration ID is provided.",
+    "summary": "Create or update a patterns configuration",
+    "request_description": "Patterns configuration payload.",
+    "request_schema_description": "Request to create or update an LLM Observability patterns configuration."
+  },
+  "GetLLMObsPatternsConfig": {
+    "description": "Retrieve the patterns configuration for the organization.",
+    "summary": "Get a patterns configuration"
+  },
+  "DeleteLLMObsPatternsConfig": {
+    "description": "Delete a patterns configuration by its ID.",
+    "summary": "Delete a patterns configuration"
+  },
+  "ListLLMObsPatternsRuns": {
+    "description": "List the completed patterns runs for a configuration.",
+    "summary": "List patterns runs"
+  },
+  "TriggerLLMObsPatterns": {
+    "description": "Start a patterns run for a given configuration. The run executes asynchronously.",
+    "summary": "Trigger a patterns run",
+    "request_description": "Trigger patterns payload.",
+    "request_schema_description": "Request to trigger an LLM Observability patterns run."
+  },
+  "GetLLMObsPatternsRunStatus": {
+    "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
+    "summary": "Get patterns run status"
+  },
+  "ListLLMObsPatternsTopics": {
+    "description": "List the topics discovered by a patterns run. When no run is specified,\nthe most recent completed run is used.",
+    "summary": "List patterns topics"
+  },
+  "ListLLMObsPatternsTopicsWithClusteredPoints": {
+    "description": "List the topics discovered by a patterns run, with the clustered points attached\ninline to each leaf topic. When no run is specified, the most recent completed\nrun is used.",
+    "summary": "List patterns topics with clustered points"
+  },
   "ListLLMObsDatasets": {
     "description": "List all LLM Observability datasets for a project, sorted by creation date, newest first.",
     "summary": "List LLM Observability datasets"
