@@ -175,6 +175,40 @@ for py_file in sorted(husky_dir.glob("*.py")):
         py_file.write_text(updated)
         print(f"  Written: {py_file.name}")
 
+# Update Makefile: static/ stays at repo root, so paths that were ./static/
+# must become ../static/ relative to the hugo/ project root.
+MAKEFILE_SUBSTITUTIONS = [
+    ("@git clean -Xf ./static/", "@git clean -Xf ../static/"),
+]
+
+print("\nUpdating Makefile...")
+makefile = hugo_dir / "Makefile"
+if makefile.exists():
+    original = makefile.read_text()
+    updated = original
+    for old, new in MAKEFILE_SUBSTITUTIONS:
+        updated = updated.replace(old, new)
+    if updated != original:
+        makefile.write_text(updated)
+        print("  Written: Makefile")
+
+# Update assets/scripts/ JS build scripts: static/ stays at repo root, so
+# ./static/ references must become ../static/ relative to hugo/.
+ASSETS_SCRIPTS_SUBSTITUTIONS = [
+    ("./static/resources/json/", "../static/resources/json/"),
+]
+
+print("\nUpdating assets/scripts/...")
+scripts_dir = hugo_dir / "assets" / "scripts"
+for js_file in sorted(scripts_dir.glob("*.js")):
+    original = js_file.read_text()
+    updated = original
+    for old, new in ASSETS_SCRIPTS_SUBSTITUTIONS:
+        updated = updated.replace(old, new)
+    if updated != original:
+        js_file.write_text(updated)
+        print(f"  Written: assets/scripts/{js_file.name}")
+
 # Update .github/CODEOWNERS to reference paths under hugo/.
 #
 # CODEOWNERS is not YAML; it is a line-based format where each rule is
@@ -244,3 +278,13 @@ if left_alone:
 if changed:
     codeowners.write_text("".join(lines))
     print("  Written: CODEOWNERS")
+
+# TODO: Update Cdocs so the reorg can support *.mdoc.md files. Until then,
+# delete all *.mdoc.md files from hugo/ to avoid Hugo build errors — they are
+# excluded from Hugo's ignoreFiles list (config/_default/config.yaml) but the
+# source .mdoc.md files still need to be absent until Cdocs is reorg-aware.
+print("\nDeleting *.mdoc.md files from hugo/...")
+mdoc_files = list(hugo_dir.rglob("*.mdoc.md"))
+for f in sorted(mdoc_files):
+    f.unlink()
+print(f"  Deleted {len(mdoc_files)} *.mdoc.md file(s).")
