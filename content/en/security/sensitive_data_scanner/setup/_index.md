@@ -15,7 +15,7 @@ further_reading:
 Set up Sensitive Data Scanner to scan your:
 
 - Telemetry data, so you can identify sensitive data in your logs, APM spans, RUM events, and events from Event Management. See [Set Up for Telemetry Data][1] for instructions.
-- Agent Observability data, so you can identify sensitive data in LLM traces, prompts, and completions. Navigate to the [Agent Observability Settings page][3] to configure scanning.
+- Agent Observability data, so you can identify sensitive data in LLM traces, prompts, and completions. Configure scanning on the [Agent Observability Settings page][3]. See [Agent Observability Data Security and RBAC][5] for details.
 - Cloud storage data, so you can identify sensitive data in your Amazon S3 buckets. See [Set Up for Cloud Storage][2] for instructions.
 - Code repositories, so you can detect exposed secrets in source code. See [Secret Scanning][4] for instructions.
 
@@ -27,3 +27,4 @@ Set up Sensitive Data Scanner to scan your:
 [2]: /security/sensitive_data_scanner/setup/cloud_storage/
 [3]: https://app.datadoghq.com/sensitive-data-scanner/configuration/llm-spans
 [4]: /security/code_security/secret_scanning/
+[5]: /llm_observability/data_security_and_rbac/
