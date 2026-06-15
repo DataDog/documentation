@@ -1,5 +1,6 @@
 ---
 title: Custom Rules
+description: Write custom Sensitive Data Scanner rules with PCRE2 regex patterns. Full syntax reference including character classes, assertions, quantifiers, flags, and unsupported patterns.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/regular_expression_syntax/

@@ -1,5 +1,6 @@
 ---
 title: Cloud Storage
+description: Deploy Datadog Agentless scanners to scan Amazon S3 buckets for sensitive data with Sensitive Data Scanner. Covers Remote Configuration setup and CloudFormation or Terraform deployment.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/cloud_storage
