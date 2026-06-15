@@ -48,7 +48,7 @@ backend_config:
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
-[2]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
