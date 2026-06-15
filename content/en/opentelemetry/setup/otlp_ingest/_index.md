@@ -11,21 +11,25 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send observability data directly to Datadog. With this feature, you don't need to run the [Datadog Agent][1] or [OpenTelemetry Collector + Datadog Exporter][2].
+For production workloads, Datadog recommends sending OpenTelemetry data through a [Datadog Agent][1] or [OpenTelemetry Collector with the Datadog Exporter][2]. These components provide buffering, retry, batching, metadata enrichment, and centralized sampling.
+
+Use the direct OTLP intake endpoints on this page when deploying a Collector or Agent is not feasible — for example, serverless functions, managed platforms that export telemetry on your behalf, or environments with strict resource constraints.
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
 
-<div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
+<div class="alert alert-danger">Host metadata sent to this endpoint does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
 <!-- TODO: Add Preview sign-up link once product provides it. -->
 
-Your setup depends on where your telemetry is coming from. Some environments require a dedicated endpoint or additional headers before you configure signal-specific options. Check the [Managed platforms][6] list first; if your platform has a dedicated endpoint, use it. If not, use the serverless or signal-specific pages.
+Your setup depends on where your telemetry is coming from. Check the [Managed platforms][6] list first; if your platform has a dedicated endpoint, use it. Otherwise, use the serverless or signal-specific pages.
 
 | If your telemetry comes from... | Start here |
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
 | A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] (Preview) |
-| Your own app, host, container, or OpenTelemetry Collector | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
+| Your own app, host, or container | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
+
+<div class="alert alert-info">If you can deploy a Collector or Agent, see <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> or <a href="/opentelemetry/otlp_ingest_in_the_agent/">OTLP in the Datadog Agent</a> instead.</div>
 
 See also: [Instrumenting for Agent Observability][5].
 
