@@ -363,7 +363,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "AWS" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
 1. If required, use filters to find the account you want to stop Agentless Scanning for. Click the account to open the side panel that contains its settings.
-1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position.
+1. On the **Features** tab, under **Requires setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -372,7 +372,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "Azure" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
 1. Expand the tenant containing the subscription where you want to disable Agentless Scanning. Click the subscription to open the side panel that contains its settings.
-1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position.
+1. On the **Features** tab, under **Requires setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -381,7 +381,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 {{% tab "GCP" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
 1. Expand the account containing the project where you want to disable Agentless Scanning. Click the project to open the side panel that contains its settings.
-1. On the **Features** tab, under **Require setup of the Agentless Scanners:** switch the toggles to the off position.
+1. On the **Features** tab, under **Requires setup of the Agentless Scanners:** switch the toggles to the off position.
 
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 
