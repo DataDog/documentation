@@ -8483,6 +8483,11 @@ menu:
       identifier: sds_guides
       parent: sensitive_data_scanner
       weight: 3
+    - name: Troubleshooting
+      url: /security/sensitive_data_scanner/troubleshooting/
+      identifier: sds_troubleshooting
+      parent: sensitive_data_scanner
+      weight: 4
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
