@@ -86,7 +86,7 @@ Worker version 2.16.0 gives you access to the following:
 
 - [Databricks Zerobus][47] destination: Send log data to Databricks Unity Catalog tables using the Zerobus ingestion service. The Databricks destination supports OAuth 2.0 authentication, automatic schema fetching from Unity Catalog, and protobuf batch encoding.
 - The Splunk HEC source now accepts an optional `valid_tokens` list for token-based authentication managed using environment variables or a configured secrets backend.
-- The Splunk HEC source now supports enriching incoming log events using VRL decoder.
+- The Splunk HEC source now supports enriching incoming log events using the VRL decoder.
 - The Amazon S3 destination now supports Apache Parquet batch encoding with flexible schema definitions and configurable compression (Snappy, ZSTD, GZIP, LZ4, or none).
 - For the Custom Processor:
     - The `encode_proto` function now accepts an `allow_lossy_string_coercion` argument.
