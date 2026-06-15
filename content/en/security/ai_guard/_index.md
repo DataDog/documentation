@@ -18,10 +18,10 @@ further_reading:
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-{{< callout url="" btn_hidden="true" header="Join a Preview!">}}
-AI Guard is in Preview. Use one of these forms to request access:
-- <a href="https://www.datadoghq.com/product-preview/ai-security/">Custom Agent Runtime Protection</a>
-- <a href="https://www.datadoghq.com/product-preview/coding-agent-security-guardrails/">Coding Agent Runtime Protection</a>
+{{< callout url="" btn_hidden="true" header="Get access to AI Guard!">}}
+Use one of these forms to request access to AI Guard features:
+- <a href="https://www.datadoghq.com/product-preview/ai-security/">Custom Agent Runtime Protection</a> (Limited Access)
+- <a href="https://www.datadoghq.com/product-preview/coding-agent-security-guardrails/">Coding Agent Runtime Protection</a> (Preview)
 {{< /callout >}}
 
 Datadog AI Guard is a defense-in-depth product designed to **inspect**, **block**, and **govern** AI behavior in real time. AI Guard is built to plug in directly with existing Datadog tracing and observability workflows to secure agentic AI systems in production. It sits **inline with your AI app/agent** and layers on top of existing prompt templates, guardrails, and policy checks, to **secure your LLM workflows in the critical path**.
