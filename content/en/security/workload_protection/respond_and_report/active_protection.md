@@ -1,58 +1,38 @@
 ---
-title: Proactively block crypto mining threats with Active Protection
+title: Active Protection
+disable_toc: false
 site_support_id: workload_security_active_protection
 aliases:
+  - /security/workload_protection/guide/active-protection
   - /security/cloud_security_management/guide/active-protection
 further_reading:
-- link: "security/workload_protection/workload_security_rules"
+- link: "security/workload_protection/detect_and_monitor/detection_rules"
   tag: "Documentation"
-  text: "Workload Protection Detection Rules"
+  text: "Workload Protection detection rules"
 - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
   tag: "Learning Center"
   text: "Detect Host and Container Compromises with Workload Protection"
-
 ---
 
 <div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
 <div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 
-This topic explains how to use the Workload Protection **Active Protection** feature to block crypto mining threats automatically. 
+This topic explains how to use the Workload Protection **Active Protection** feature to block threats automatically.
 
-By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for crypto threats. 
+Active Protection enables you to proactively block and terminate threats identified by the Datadog Agent detection rules.
 
-Active Protection enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
-
-Active Protection streamlines threat detection and targeted response, resulting in risk reduction, allowing DevSecOps and security teams to tackle evolving crypto mining threats effectively:
+Active Protection streamlines threat detection and targeted response, resulting in risk reduction, allowing DevSecOps and security teams to tackle evolving threats effectively:
 
 - Security decides which threats warrant an automated action.
 - DevOps decides which applications and resources are resilient enough to withstand targeted protection.
 
-The end result is crypto mining threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
+The end result is threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
 
-## RBAC for Active Protection
-
-Here are some important [role and permissions][5] to use for custom rules and Active Protection RBAC:
-
-- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the Active Protection feature. 
-  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
-- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
-
-## Protection options
-
-You have three options for Agent rules:
-
-- **Monitoring:** This is the default setting for enabled rules, regardless of whether Active Protection is enabled. The Agent monitors for the enabled rule and displays detections in [Signals][1]. 
-- **Blocking:** 
-  - Blocking is available when Active Protection is enabled. Blocking is available on select OOTB rules that have high confidence, true positives.
-  - The Agent monitors for the enabled rule, terminates the corresponding actions instantly, and displays detections in [Signals][1].
-- **Disabled:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
-
-<div class="alert alert-info">Blocking is applied to all threats detected after blocking is enabled. Blocking is not retroactive.</div>
 
 ## Active Protection availability
 
-Active Protection is enabled at the organization level. 
+Active Protection is enabled at the organization level.
 
 <div class="alert alert-info">Active Protection blocking functionality is available in a subset of the OOTB Agent rules only. Agent rule monitoring runs regardless of whether Active Protection is enabled.</div>
 
@@ -64,23 +44,30 @@ If Active Protection is available for a crypto mining rule, then **Monitoring** 
 
 If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that crypto mining rule yet.
 
-When Active Protection is enabled, and applies to a crypto mining rule that generated a signal, you can see it by doing the following:
+When Active Protection is enabled, and applies to a rule that generated a signal, you can see it by doing the following:
 
 1. In [Signals][1], open a signal.
-2. In the signal, view **Next Steps**. 
+2. In the signal, view **Next Steps**.
    - If Active Protection is enabled, in **Proactively block threats**, the **Active Protection Enabled** is displayed.
    - If Active Protection is not enabled, **Active Protection Enabled** is not displayed.
 
-If Active Protection is enabled and available for an Agent crypto mining rule, you can see it by looking at the rule:
+If Active Protection is enabled and available for an Agent rule, you can see it by looking at the rule:
 
-1. In [Agent Configuration][2], select a crypto mining rule.
-2. In the crypto mining rule, if Active Protection is enabled and available, there is a **Protection** section.
+1. In [Agent Configuration][2], select the rule.
+2. In the rule, if Active Protection is enabled and available, there is a **Protection** section.
+### RBAC for Active Protection
 
-## Enable Active Protection
+Here are some important [role and permissions][5] to use for custom rules and Active Protection RBAC:
+
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the Active Protection feature.
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
+
+### Enable Active Protection
 
 When you enable Active Protection, you are enabling the Active Protection capability for your entire Datadog org. Active Protection is not limited to individual users.
 
-By default, all OOTB Agent crypto mining rules are in a monitoring state. Enabling Active Protection does not immediately change the default state. Enabling Active Protection allows you to change the state of a crypto mining rule from monitoring to blocking.
+By default, all OOTB Agent rules (such as the crypto mining) are in a monitoring state. Enabling Active Protection does not immediately change the default state. Enabling Active Protection allows you to change the state of a rule from monitoring to blocking.
 
 Consequently, you do not need to worry that enabling Active Protection immediately changes the state of threat detection.
 
@@ -99,26 +86,36 @@ The **Protection** column indicates if a rule is in the **Monitoring** or **Bloc
 
 After Active Protection is enabled, you can disable it on each Agent Configuration rule.
 
-## Block threats detected by an Agent rule
+## Configure blocking on Agent rules
 
-After Active Protection is enabled, you can configure the **Blocking** option on an Agent crypto mining rule and the Agent will terminate the corresponding crypto mining actions instantly.
+After Active Protection is enabled, you can change the protection option to **Blocking**  on an Agent rule and the Agent will terminate the corresponding processes instantly.
+
+### Protection options
+
+You have three options for Agent rules:
+
+- **Monitoring:** This is the default setting for enabled rules, regardless of whether Active Protection is enabled. The Agent monitors for the enabled rule and displays detections in [Signals][1].
+- **Blocking:**
+  - Blocking is available when Active Protection is enabled. Blocking is available on select OOTB rules that have high confidence, true positives.
+  - The Agent monitors for the enabled rule, terminates the corresponding actions instantly, and displays detections in [Signals][1].
+- **Disabled:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
+
+<div class="alert alert-info">Blocking is applied to all threats detected after blocking is enabled. Blocking is not retroactive.</div>
+
 
 To enable blocking on an Agent rule:
 
-1. In [Agent Configuration][2], open a crypto mining rule that has **Monitoring** in the **Protection** column. If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that rule yet.
+1. In [Agent Configuration][2], open a rule that has **Monitoring** in the **Protection** column. If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that rule yet.
 2. In the Agent rule, in **Protection**, select **Blocking**.
-   
+
    {{< img src="security/cws/guide/protection-blocking-option.png" alt="An Agent rule Protection section displaying the Blocking option" style="width:100%;" >}}
 3. In **Where**, select **Everywhere** or **Custom**. For details on these options, see [Scoping the Agent rule][3] below.
 4. Select **Save Changes**.
 5. In Agent Configuration, select **Deploy Agent Policy**.
 
-
 ### Scoping the Agent rule
 
-When you create or edit an Agent crypto mining rule after Active Protection is enabled, you can select **Blocking** in the rule **Protection** setting. 
-
-When you select **Blocking**, you can scope where Datadog should apply the rule using the **Everywhere** and **Custom** options. 
+When you select **Blocking**, you can scope where Datadog should apply the rule using the **Everywhere** and **Custom** options.
 
 #### Everywhere
 
@@ -140,7 +137,7 @@ You can use services and tags to generate an expression. Datadog matches the rul
     - `image_tag`: `2.5`.
     - `short_image`: `MY_IMAGE`.
 
-## Blocked attack example
+## Report blocked attack attempts
 
 After Active Protection is enabled and set to **Blocking** for an Agent rule, blocked threats appear in [Signals][1].
 
@@ -148,13 +145,8 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 
 {{< img src="security/cws/guide/active-protection-signal-messages.png" alt="Signal messages" style="width:100%;" >}}
 
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
-[4]: /security/workload_protection/workload_security_rules
+[4]: /security/workload_protection/detect_and_monitor/detection_rules
 [5]: /account_management/rbac/permissions

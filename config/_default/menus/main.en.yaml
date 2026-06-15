@@ -8110,6 +8110,16 @@ menu:
       parent: workload_protection
       identifier: workload_protection_respond_and_report
       weight: 93
+    - name: Active Protection
+      url: security/workload_protection/respond_and_report/active_protection
+      parent: workload_protection_respond_and_report
+      identifier: workload_protection_respond_and_report_active_protection
+      weight: 10
+    - name: Remediation
+      url: security/workload_protection/respond_and_report/remediation
+      parent: workload_protection_respond_and_report
+      identifier: workload_protection_respond_and_report_remediation
+      weight: 20
     - name: OOTB Rules
       url: /security/workload_protection/setup/ootb_rules
       parent: workload_protection_workload_security_rules

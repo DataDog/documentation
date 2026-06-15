@@ -201,7 +201,7 @@ After you [set up Sensitive Data Scanner][25], use the Findings page to see deta
 [28]: /security/code_security/software_composition_analysis/
 [29]: /security/code_security/iast/
 [30]: /security/code_security/secret_scanning/
-[31]: /security/workload_protection/guide/active-protection
+[31]: /security/workload_protection/respond_and_report/active_protection
 [32]: /security/workload_protection/workload_security_rules
 [33]: /security/notifications/
 [34]: /security/workload_protection/security_signals

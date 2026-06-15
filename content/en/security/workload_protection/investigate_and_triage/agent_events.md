@@ -68,4 +68,4 @@ To triage an event:
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process
-[18]: /security/workload_protection/guide/active-protection
+[18]: /security/workload_protection/respond_and_report/active_protection
