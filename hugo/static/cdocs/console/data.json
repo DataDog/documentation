@@ -1,0 +1,1505 @@
+{
+  "timestamp": 1781549218887,
+  "errorsByFilePath": {},
+  "customizationConfig": {
+    "traitsById": {
+      "api_type": {
+        "id": "api_type",
+        "type": "text",
+        "label": "API",
+        "internal_notes": "The instrumentation API type, such as OpenTelemetry API or Datadog native API."
+      },
+      "database": {
+        "id": "database",
+        "type": "text",
+        "label": "Database"
+      },
+      "host": {
+        "id": "host",
+        "type": "text",
+        "label": "Host",
+        "internal_notes": "Hosting platform, such as AWS or GCP. Can also refer to containers like Kubernetes."
+      },
+      "host_type": {
+        "id": "host_type",
+        "type": "text",
+        "label": "Host type",
+        "internal_notes": "The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection."
+      },
+      "lib_src": {
+        "id": "lib_src",
+        "type": "text",
+        "label": "Source",
+        "internal_notes": "The source of a software library that the customer is trying to use in their code, such as an SDK. This is most often a package manager like NPM. But it could also have a more general value, like \"CDN\" or \"GitHub\"."
+      },
+      "mobile_os": {
+        "id": "mobile_os",
+        "type": "text",
+        "label": "OS",
+        "internal_notes": "Mobile operating system, such as Android."
+      },
+      "os": {
+        "id": "os",
+        "type": "text",
+        "label": "OS",
+        "internal_notes": "Env operating system, such as Linux or Windows. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options."
+      },
+      "platform": {
+        "id": "platform",
+        "type": "text",
+        "label": "Platform",
+        "internal_notes": "The target platform (language, framework, specific env) for a library, SDK, or other third-party entity. Do not use if every option is a pure programming language (Go, Python, etc.) -- use `prog_lang` instead. Re-label to \"Framework\", \"SDK\", etc. if it's more appropriate for your context."
+      },
+      "product": {
+        "id": "product",
+        "type": "text",
+        "label": "Product",
+        "internal_notes": "On pages that support more than one Datadog product, this trait allows the customer to choose one."
+      },
+      "prog_lang": {
+        "id": "prog_lang",
+        "type": "text",
+        "label": "Programming Language",
+        "internal_notes": "Do not use for frameworks like Next or React Native. Instead, use `platform`."
+      },
+      "protocol": {
+        "id": "protocol",
+        "type": "text",
+        "label": "Protocol",
+        "internal_notes": "For example, HTTP, gRPC, or SOCKS."
+      },
+      "interface": {
+        "id": "interface",
+        "type": "text",
+        "label": "Interface",
+        "internal_notes": "The tool through which the user is performing a task or otherwise accessing Datadog features. For example, web UI, API, CLI, or Terraform."
+      },
+      "runtime": {
+        "id": "runtime",
+        "type": "text",
+        "label": "Runtime",
+        "internal_notes": "The runtime environment, such as JVM or GraalVM Native Image. Used when a language has multiple runtime targets."
+      },
+      "secrets_source": {
+        "id": "secrets_source",
+        "type": "text",
+        "label": "Secrets source",
+        "internal_notes": "The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables."
+      },
+      "rum_browser_sdk_version": {
+        "id": "rum_browser_sdk_version",
+        "type": "semver",
+        "label": "SDK version",
+        "internal_notes": "The customer's version of the RUM browser SDK. Its value should be a semantic version represented in snake case, such as \"1_2_3\", \"lt_1_2_3\", \"gt_1_2_3\", \"lte_1_2_3\", etc."
+      },
+      "synthetics_variables": {
+        "id": "synthetics_variables",
+        "type": "text",
+        "label": "Synthetics Variables",
+        "internal_notes": "The variables available for use in in Synthetic Monitoring test notifications."
+      }
+    },
+    "optionsById": {
+      "dot_net": {
+        "id": "dot_net",
+        "label": ".NET"
+      },
+      "agent": {
+        "id": "agent",
+        "label": "Agent"
+      },
+      "agentless_using_an_api_key": {
+        "id": "agentless_using_an_api_key",
+        "label": "Agentless (using an API key)"
+      },
+      "amazon_ecs": {
+        "id": "amazon_ecs",
+        "label": "Amazon ECS"
+      },
+      "amazon_opensearch": {
+        "id": "amazon_opensearch",
+        "label": "Amazon OpenSearch"
+      },
+      "android": {
+        "id": "android",
+        "label": "Android"
+      },
+      "ansible": {
+        "id": "ansible",
+        "label": "Ansible"
+      },
+      "api": {
+        "id": "api",
+        "label": "API"
+      },
+      "apm": {
+        "id": "apm",
+        "label": "APM"
+      },
+      "auth": {
+        "id": "auth",
+        "label": "Authentication"
+      },
+      "aws": {
+        "id": "aws",
+        "label": "AWS"
+      },
+      "aws_cdk": {
+        "id": "aws_cdk",
+        "label": "AWS CDK"
+      },
+      "aws_cli": {
+        "id": "aws_cli",
+        "label": "AWS CLI"
+      },
+      "amazon_eks": {
+        "id": "amazon_eks",
+        "label": "Amazon EKS"
+      },
+      "aws_fargate": {
+        "id": "aws_fargate",
+        "label": "AWS Fargate"
+      },
+      "aws_s3": {
+        "id": "aws_s3",
+        "label": "AWS S3"
+      },
+      "aws_sam": {
+        "id": "aws_sam",
+        "label": "AWS SAM"
+      },
+      "azure": {
+        "id": "azure",
+        "label": "Azure"
+      },
+      "azure_aks": {
+        "id": "azure_aks",
+        "label": "Azure AKS"
+      },
+      "azure_storage": {
+        "id": "azure_storage",
+        "label": "Azure Storage"
+      },
+      "bash": {
+        "id": "bash",
+        "label": "Bash"
+      },
+      "browser": {
+        "id": "browser",
+        "label": "Browser"
+      },
+      "carthage": {
+        "id": "carthage",
+        "label": "Carthage"
+      },
+      "cdn_async": {
+        "id": "cdn_async",
+        "label": "CDN async"
+      },
+      "cdn_sync": {
+        "id": "cdn_sync",
+        "label": "CDN sync"
+      },
+      "check_alert": {
+        "id": "check_alert",
+        "label": "Check Alert"
+      },
+      "chef": {
+        "id": "chef",
+        "label": "Chef"
+      },
+      "chronicle": {
+        "id": "chronicle",
+        "label": "Chronicle"
+      },
+      "cloudformation": {
+        "id": "cloudformation",
+        "label": "CloudFormation"
+      },
+      "cluster_alert": {
+        "id": "cluster_alert",
+        "label": "Cluster Alert"
+      },
+      "cocoapods": {
+        "id": "cocoapods",
+        "label": "CocoaPods"
+      },
+      "configmap": {
+        "id": "configmap",
+        "label": "ConfigMap"
+      },
+      "container_image": {
+        "id": "container_image",
+        "label": "Container Image"
+      },
+      "containerized": {
+        "id": "containerized",
+        "label": "Containerized"
+      },
+      "containerized_agent": {
+        "id": "containerized_agent",
+        "label": "Containerized Agent"
+      },
+      "cucumber": {
+        "id": "cucumber",
+        "label": "Cucumber"
+      },
+      "curl": {
+        "id": "curl",
+        "label": "curl"
+      },
+      "daemonset": {
+        "id": "daemonset",
+        "label": "DaemonSet"
+      },
+      "datadog": {
+        "id": "datadog",
+        "label": "Datadog"
+      },
+      "datadog_application": {
+        "id": "datadog_application",
+        "label": "Datadog application"
+      },
+      "datadog_archives": {
+        "id": "datadog_archives",
+        "label": "Datadog Archives"
+      },
+      "datadog_cli": {
+        "id": "datadog_cli",
+        "label": "Datadog CLI"
+      },
+      "datadog_operator": {
+        "id": "datadog_operator",
+        "label": "Datadog Operator"
+      },
+      "debian": {
+        "id": "debian",
+        "label": "Debian"
+      },
+      "ubuntu": {
+        "id": "ubuntu",
+        "label": "Ubuntu"
+      },
+      "dedupe": {
+        "id": "dedupe",
+        "label": "Dedupe"
+      },
+      "docker": {
+        "id": "docker",
+        "label": "Docker"
+      },
+      "docker_cli": {
+        "id": "docker_cli",
+        "label": "Docker CLI"
+      },
+      "docker_compose": {
+        "id": "docker_compose",
+        "label": "Docker Compose"
+      },
+      "dockerfile": {
+        "id": "dockerfile",
+        "label": "Dockerfile"
+      },
+      "elasticsearch": {
+        "id": "elasticsearch",
+        "label": "Elasticsearch"
+      },
+      "flutter": {
+        "id": "flutter",
+        "label": "Flutter"
+      },
+      "github_actions": {
+        "id": "github_actions",
+        "label": "Github Actions"
+      },
+      "go": {
+        "id": "go",
+        "label": "Go"
+      },
+      "google": {
+        "id": "google",
+        "label": "Google"
+      },
+      "google_cloud": {
+        "id": "google_cloud",
+        "label": "Google Cloud"
+      },
+      "google_cloud_storage": {
+        "id": "google_cloud_storage",
+        "label": "Google Cloud Storage"
+      },
+      "google_gke": {
+        "id": "google_gke",
+        "label": "Google GKE"
+      },
+      "gradle": {
+        "id": "gradle",
+        "label": "Gradle"
+      },
+      "grok_parser": {
+        "id": "grok_parser",
+        "label": "Grok Parser"
+      },
+      "helm": {
+        "id": "helm",
+        "label": "Helm"
+      },
+      "http": {
+        "id": "http",
+        "label": "HTTP"
+      },
+      "https": {
+        "id": "https",
+        "label": "HTTPS"
+      },
+      "http_https": {
+        "id": "http_https",
+        "label": "HTTP/HTTPS"
+      },
+      "socks": {
+        "id": "socks",
+        "label": "SOCKS"
+      },
+      "ios": {
+        "id": "ios",
+        "label": "iOS"
+      },
+      "java": {
+        "id": "java",
+        "label": "Java"
+      },
+      "javascript": {
+        "id": "javascript",
+        "label": "JavaScript"
+      },
+      "jenkins": {
+        "id": "jenkins",
+        "label": "Jenkins"
+      },
+      "json": {
+        "id": "json",
+        "label": "JSON"
+      },
+      "kotlin": {
+        "id": "kotlin",
+        "label": "Kotlin"
+      },
+      "kotlin_multiplatform": {
+        "id": "kotlin_multiplatform",
+        "label": "Kotlin Multiplatform"
+      },
+      "kubernetes": {
+        "id": "kubernetes",
+        "label": "Kubernetes"
+      },
+      "linux": {
+        "id": "linux",
+        "label": "Linux"
+      },
+      "linux_apt": {
+        "id": "linux_apt",
+        "label": "Linux (APT)"
+      },
+      "linux_rpm": {
+        "id": "linux_rpm",
+        "label": "Linux (RPM)"
+      },
+      "log4j": {
+        "id": "log4j",
+        "label": "Log4j"
+      },
+      "log4j_2": {
+        "id": "log4j_2",
+        "label": "Log4j 2"
+      },
+      "logs": {
+        "id": "logs",
+        "label": "Logs"
+      },
+      "mac_os": {
+        "id": "mac_os",
+        "label": "MacOS"
+      },
+      "manual": {
+        "id": "manual",
+        "label": "Manual"
+      },
+      "maven": {
+        "id": "maven",
+        "label": "Maven"
+      },
+      "metrics": {
+        "id": "metrics",
+        "label": "Metrics"
+      },
+      "mongo_db": {
+        "id": "mongo_db",
+        "label": "MongoDB"
+      },
+      "multitenant": {
+        "id": "multitenant",
+        "label": "Multi-tenant"
+      },
+      "mysql": {
+        "id": "mysql",
+        "label": "MySQL"
+      },
+      "n_log": {
+        "id": "n_log",
+        "label": "NLog"
+      },
+      "node_js": {
+        "id": "node_js",
+        "label": "Node.js"
+      },
+      "non_cdb": {
+        "id": "non_cdb",
+        "label": "Non-CDB"
+      },
+      "npm": {
+        "id": "npm",
+        "label": "NPM"
+      },
+      "nu_get": {
+        "id": "nu_get",
+        "label": "NuGet"
+      },
+      "objective_c": {
+        "id": "objective_c",
+        "label": "Objective-C"
+      },
+      "on_premises_ci_provider": {
+        "id": "on_premises_ci_provider",
+        "label": "On-Premises CI Provider"
+      },
+      "open_search": {
+        "id": "open_search",
+        "label": "OpenSearch"
+      },
+      "operator": {
+        "id": "operator",
+        "label": "Operator"
+      },
+      "oracle": {
+        "id": "oracle",
+        "label": "Oracle"
+      },
+      "php": {
+        "id": "php",
+        "label": "PHP"
+      },
+      "pip": {
+        "id": "pip",
+        "label": "pip"
+      },
+      "poetry": {
+        "id": "poetry",
+        "label": "Poetry"
+      },
+      "postgres": {
+        "id": "postgres",
+        "label": "Postgres"
+      },
+      "puppet": {
+        "id": "puppet",
+        "label": "Puppet"
+      },
+      "python": {
+        "id": "python",
+        "label": "Python"
+      },
+      "quota": {
+        "id": "quota",
+        "label": "Quota"
+      },
+      "rate": {
+        "id": "rate",
+        "label": "RATE"
+      },
+      "rds": {
+        "id": "rds",
+        "label": "RDS"
+      },
+      "react_native": {
+        "id": "react_native",
+        "label": "React Native"
+      },
+      "expo": {
+        "id": "expo",
+        "label": "Expo"
+      },
+      "codepush": {
+        "id": "codepush",
+        "label": "CodePush"
+      },
+      "redhat": {
+        "id": "redhat",
+        "label": "RedHat"
+      },
+      "roku": {
+        "id": "roku",
+        "label": "Roku"
+      },
+      "error_tracking": {
+        "id": "error_tracking",
+        "label": "Error Tracking"
+      },
+      "centos": {
+        "id": "centos",
+        "label": "CentOS"
+      },
+      "suse": {
+        "id": "suse",
+        "label": "SUSE"
+      },
+      "reduce": {
+        "id": "reduce",
+        "label": "Reduce"
+      },
+      "replica_set": {
+        "id": "replica_set",
+        "label": "Replica Set"
+      },
+      "ruby": {
+        "id": "ruby",
+        "label": "Ruby"
+      },
+      "rum": {
+        "id": "rum",
+        "label": "RUM"
+      },
+      "rust": {
+        "id": "rust",
+        "label": "Rust"
+      },
+      "sensitive_data_scanner": {
+        "id": "sensitive_data_scanner",
+        "label": "Sensitive Data Scanner"
+      },
+      "serilog": {
+        "id": "serilog",
+        "label": "Serilog"
+      },
+      "server": {
+        "id": "server",
+        "label": "Server"
+      },
+      "serverless_framework": {
+        "id": "serverless_framework",
+        "label": "Serverless Framework"
+      },
+      "sharded_cluster": {
+        "id": "sharded_cluster",
+        "label": "Sharded Cluster"
+      },
+      "show_all": {
+        "id": "show_all",
+        "label": "Show all"
+      },
+      "splunk_hec": {
+        "id": "splunk_hec",
+        "label": "Splunk HEC"
+      },
+      "standalone": {
+        "id": "standalone",
+        "label": "Standalone"
+      },
+      "standard": {
+        "id": "standard",
+        "label": "Standard"
+      },
+      "sumo_logic": {
+        "id": "sumo_logic",
+        "label": "Sumo Logic"
+      },
+      "swift": {
+        "id": "swift",
+        "label": "Swift"
+      },
+      "spm": {
+        "id": "spm",
+        "label": "Swift Package Manager (SPM)"
+      },
+      "syslog": {
+        "id": "syslog",
+        "label": "Syslog"
+      },
+      "tcp": {
+        "id": "tcp",
+        "label": "TCP"
+      },
+      "terraform": {
+        "id": "terraform",
+        "label": "Terraform"
+      },
+      "terraform_aws": {
+        "id": "terraform_aws",
+        "label": "Terraform (AWS)"
+      },
+      "threshold": {
+        "id": "threshold",
+        "label": "Threshold"
+      },
+      "toml": {
+        "id": "toml",
+        "label": "TOML"
+      },
+      "traces": {
+        "id": "traces",
+        "label": "Traces"
+      },
+      "unity": {
+        "id": "unity",
+        "label": "Unity"
+      },
+      "wget": {
+        "id": "wget",
+        "label": "Wget"
+      },
+      "windows": {
+        "id": "windows",
+        "label": "Windows"
+      },
+      "windows_host": {
+        "id": "windows_host",
+        "label": "Windows Host"
+      },
+      "windows_powershell": {
+        "id": "windows_powershell",
+        "label": "Windows PowerShell"
+      },
+      "yaml": {
+        "id": "yaml",
+        "label": "YAML"
+      },
+      "sql_server": {
+        "id": "sql_server",
+        "label": "SQL Server"
+      },
+      "self_hosted": {
+        "id": "self_hosted",
+        "label": "Self-hosted"
+      },
+      "fluent": {
+        "id": "fluent",
+        "label": "Fluent"
+      },
+      "http_client": {
+        "id": "http_client",
+        "label": "HTTP Client"
+      },
+      "splunk_forwarders": {
+        "id": "splunk_forwarders",
+        "label": "Splunk Forwarders (TCP)"
+      },
+      "sumo_logic_hosted_collector": {
+        "id": "sumo_logic_hosted_collector",
+        "label": "Sumo Logic Hosted Collector"
+      },
+      "mobile": {
+        "id": "mobile",
+        "label": "Mobile"
+      },
+      "multistep": {
+        "id": "multistep",
+        "label": "Multistep API"
+      },
+      "test_info": {
+        "id": "test_info",
+        "label": "Test info"
+      },
+      "test_results": {
+        "id": "test_results",
+        "label": "Test results"
+      },
+      "step_details": {
+        "id": "step_details",
+        "label": "Step details"
+      },
+      "local_and_global": {
+        "id": "local_and_global",
+        "label": "Local & Global"
+      },
+      "dns": {
+        "id": "dns",
+        "label": "DNS"
+      },
+      "ssl": {
+        "id": "ssl",
+        "label": "SSL"
+      },
+      "websocket": {
+        "id": "websocket",
+        "label": "WebSocket"
+      },
+      "udp": {
+        "id": "udp",
+        "label": "UDP"
+      },
+      "icmp": {
+        "id": "icmp",
+        "label": "ICMP"
+      },
+      "grpc": {
+        "id": "grpc",
+        "label": "gRPC"
+      },
+      "otel_api": {
+        "id": "otel_api",
+        "label": "OpenTelemetry"
+      },
+      "dd_api": {
+        "id": "dd_api",
+        "label": "Datadog API"
+      },
+      "cpp": {
+        "id": "cpp",
+        "label": "C++"
+      },
+      "elixir": {
+        "id": "elixir",
+        "label": "Elixir"
+      },
+      "bigquery": {
+        "id": "bigquery",
+        "label": "BigQuery"
+      },
+      "databricks": {
+        "id": "databricks",
+        "label": "Databricks"
+      },
+      "redshift": {
+        "id": "redshift",
+        "label": "Redshift"
+      },
+      "snowflake": {
+        "id": "snowflake",
+        "label": "Snowflake"
+      },
+      "jvm": {
+        "id": "jvm",
+        "label": "JVM"
+      },
+      "c": {
+        "id": "c",
+        "label": "C"
+      },
+      "graalvm_native_image": {
+        "id": "graalvm_native_image",
+        "label": "GraalVM Native Image"
+      },
+      "lt_2_13_0": {
+        "id": "lt_2_13_0",
+        "label": "<2.13.0"
+      },
+      "gte_2_13_0": {
+        "id": "gte_2_13_0",
+        "label": ">=2.13.0"
+      },
+      "gte_2_17_0": {
+        "id": "gte_2_17_0",
+        "label": ">=2.17.0"
+      },
+      "gte_4_13_0": {
+        "id": "gte_4_13_0",
+        "label": ">=4.13.0"
+      },
+      "lt_4_34_0": {
+        "id": "lt_4_34_0",
+        "label": "<4.34.0"
+      },
+      "gte_4_34_0": {
+        "id": "gte_4_34_0",
+        "label": ">=4.34.0"
+      },
+      "gte_5_4_0": {
+        "id": "gte_5_4_0",
+        "label": ">=5.4.0"
+      },
+      "gte_4_49_0": {
+        "id": "gte_4_49_0",
+        "label": ">=4.49.0"
+      },
+      "gte_5_22_0": {
+        "id": "gte_5_22_0",
+        "label": ">=5.22.0"
+      },
+      "gte_5_28_0": {
+        "id": "gte_5_28_0",
+        "label": ">=5.28.0"
+      },
+      "gte_6_4_0": {
+        "id": "gte_6_4_0",
+        "label": ">=6.4.0"
+      }
+    },
+    "optionGroupsById": {
+      "client_sdk_platform_options": [
+        {
+          "default": true,
+          "id": "browser",
+          "label": "Browser"
+        },
+        {
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "flutter",
+          "label": "Flutter"
+        },
+        {
+          "id": "react_native",
+          "label": "React Native"
+        },
+        {
+          "id": "kotlin_multiplatform",
+          "label": "Kotlin Multiplatform"
+        },
+        {
+          "id": "roku",
+          "label": "Roku"
+        },
+        {
+          "id": "unity",
+          "label": "Unity"
+        }
+      ],
+      "client_sdk_product_options": [
+        {
+          "default": true,
+          "id": "rum",
+          "label": "RUM"
+        },
+        {
+          "id": "error_tracking",
+          "label": "Error Tracking"
+        }
+      ],
+      "cloud_cost_provider_options": [
+        {
+          "default": true,
+          "id": "aws",
+          "label": "AWS"
+        },
+        {
+          "id": "azure",
+          "label": "Azure"
+        },
+        {
+          "id": "google",
+          "label": "Google"
+        }
+      ],
+      "dd_e2e_mobile_prog_lang_options": [
+        {
+          "default": true,
+          "id": "swift",
+          "label": "Swift"
+        },
+        {
+          "id": "kotlin",
+          "label": "Kotlin"
+        },
+        {
+          "id": "java",
+          "label": "Java"
+        }
+      ],
+      "dd_e2e_backend_prog_lang_options": [
+        {
+          "default": true,
+          "id": "javascript",
+          "label": "JavaScript"
+        },
+        {
+          "id": "python",
+          "label": "Python"
+        },
+        {
+          "id": "ruby",
+          "label": "Ruby"
+        },
+        {
+          "id": "go",
+          "label": "Go"
+        },
+        {
+          "id": "java",
+          "label": "Java"
+        }
+      ],
+      "dd_e2e_database_options": [
+        {
+          "default": true,
+          "id": "postgres",
+          "label": "Postgres"
+        },
+        {
+          "id": "mysql",
+          "label": "MySQL"
+        },
+        {
+          "id": "mongo_db",
+          "label": "MongoDB"
+        }
+      ],
+      "dd_e2e_postgres_host_options": [
+        {
+          "default": true,
+          "id": "self_hosted",
+          "label": "Self-hosted"
+        },
+        {
+          "id": "rds",
+          "label": "RDS"
+        },
+        {
+          "id": "docker",
+          "label": "Docker"
+        },
+        {
+          "id": "kubernetes",
+          "label": "Kubernetes"
+        }
+      ],
+      "dd_e2e_mysql_host_options": [
+        {
+          "default": true,
+          "id": "self_hosted",
+          "label": "Self-hosted"
+        },
+        {
+          "id": "rds",
+          "label": "RDS"
+        },
+        {
+          "id": "docker",
+          "label": "Docker"
+        },
+        {
+          "id": "kubernetes",
+          "label": "Kubernetes"
+        }
+      ],
+      "dd_e2e_mongo_db_host_options": [
+        {
+          "default": true,
+          "id": "standalone",
+          "label": "Standalone"
+        },
+        {
+          "id": "replica_set",
+          "label": "Replica Set"
+        },
+        {
+          "id": "sharded_cluster",
+          "label": "Sharded Cluster"
+        }
+      ],
+      "dd_e2e_platform_options": [
+        {
+          "default": true,
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "android",
+          "label": "Android"
+        }
+      ],
+      "dd_e2e_ios_prog_lang_options": [
+        {
+          "default": true,
+          "id": "swift",
+          "label": "Swift"
+        },
+        {
+          "id": "objective_c",
+          "label": "Objective-C"
+        }
+      ],
+      "dd_e2e_android_prog_lang_options": [
+        {
+          "default": true,
+          "id": "kotlin",
+          "label": "Kotlin"
+        },
+        {
+          "id": "java",
+          "label": "Java"
+        }
+      ],
+      "error_tracking_product_options": [
+        {
+          "default": true,
+          "id": "apm",
+          "label": "APM"
+        },
+        {
+          "id": "logs",
+          "label": "Logs"
+        },
+        {
+          "id": "rum",
+          "label": "RUM"
+        }
+      ],
+      "apm_error_grouping_context_options": [
+        {
+          "default": true,
+          "id": "server",
+          "label": "Server"
+        }
+      ],
+      "logs_error_grouping_context_options": [
+        {
+          "id": "show_all",
+          "label": "Show all"
+        },
+        {
+          "default": true,
+          "id": "server",
+          "label": "Server"
+        },
+        {
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "flutter",
+          "label": "Flutter"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "react_native",
+          "label": "React Native"
+        }
+      ],
+      "rum_error_grouping_context_options": [
+        {
+          "id": "show_all",
+          "label": "Show all"
+        },
+        {
+          "default": true,
+          "id": "browser",
+          "label": "Browser"
+        },
+        {
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "flutter",
+          "label": "Flutter"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "react_native",
+          "label": "React Native"
+        }
+      ],
+      "otel_api_support_language_options": [
+        {
+          "default": true,
+          "id": "java",
+          "label": "Java"
+        },
+        {
+          "id": "python",
+          "label": "Python"
+        },
+        {
+          "id": "node_js",
+          "label": "Node.js"
+        },
+        {
+          "id": "go",
+          "label": "Go"
+        },
+        {
+          "id": "ruby",
+          "label": "Ruby"
+        },
+        {
+          "id": "dot_net",
+          "label": ".NET"
+        },
+        {
+          "id": "php",
+          "label": "PHP"
+        },
+        {
+          "id": "rust",
+          "label": "Rust"
+        }
+      ],
+      "otel_api_support_signal_options": [
+        {
+          "default": true,
+          "id": "traces",
+          "label": "Traces"
+        },
+        {
+          "id": "metrics",
+          "label": "Metrics"
+        },
+        {
+          "id": "logs",
+          "label": "Logs"
+        }
+      ],
+      "experiments_warehouse_options": [
+        {
+          "default": true,
+          "id": "bigquery",
+          "label": "BigQuery"
+        },
+        {
+          "id": "databricks",
+          "label": "Databricks"
+        },
+        {
+          "id": "redshift",
+          "label": "Redshift"
+        },
+        {
+          "id": "snowflake",
+          "label": "Snowflake"
+        }
+      ],
+      "profiler_language_options": [
+        {
+          "default": true,
+          "id": "java",
+          "label": "Java"
+        },
+        {
+          "id": "python",
+          "label": "Python"
+        },
+        {
+          "id": "go",
+          "label": "Go"
+        },
+        {
+          "id": "ruby",
+          "label": "Ruby"
+        },
+        {
+          "id": "node_js",
+          "label": "Node.js"
+        },
+        {
+          "id": "dot_net",
+          "label": ".NET"
+        },
+        {
+          "id": "php",
+          "label": "PHP"
+        },
+        {
+          "id": "c",
+          "label": "C"
+        },
+        {
+          "id": "cpp",
+          "label": "C++"
+        },
+        {
+          "id": "rust",
+          "label": "Rust"
+        }
+      ],
+      "java_profiler_runtime_options": [
+        {
+          "default": true,
+          "id": "jvm",
+          "label": "JVM"
+        },
+        {
+          "id": "graalvm_native_image",
+          "label": "GraalVM Native Image"
+        }
+      ],
+      "rum_sdk_platform_options": [
+        {
+          "default": true,
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "react_native",
+          "label": "React Native"
+        }
+      ],
+      "rum_sdk_platform_options_v2": [
+        {
+          "default": true,
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "react_native",
+          "label": "React Native"
+        },
+        {
+          "id": "flutter",
+          "label": "Flutter"
+        }
+      ],
+      "rum_sdk_profiling_options": [
+        {
+          "default": true,
+          "id": "browser",
+          "label": "Browser"
+        },
+        {
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        }
+      ],
+      "rum_session_replay_sdk_options": [
+        {
+          "default": true,
+          "id": "android",
+          "label": "Android"
+        },
+        {
+          "id": "ios",
+          "label": "iOS"
+        },
+        {
+          "id": "kotlin_multiplatform",
+          "label": "Kotlin Multiplatform"
+        },
+        {
+          "id": "react_native",
+          "label": "React Native"
+        },
+        {
+          "id": "flutter",
+          "label": "Flutter"
+        }
+      ],
+      "rum_mobile_proxy_protocol_options": [
+        {
+          "default": true,
+          "id": "http_https",
+          "label": "HTTP/HTTPS"
+        },
+        {
+          "id": "socks",
+          "label": "SOCKS"
+        }
+      ],
+      "rum_browser_sdk_source_options": [
+        {
+          "default": true,
+          "id": "npm",
+          "label": "NPM"
+        },
+        {
+          "id": "cdn_async",
+          "label": "CDN async"
+        },
+        {
+          "id": "cdn_sync",
+          "label": "CDN sync"
+        }
+      ],
+      "rum_browser_sdk_version_for_proxying_options": [
+        {
+          "default": true,
+          "id": "gte_5_4_0",
+          "label": ">=5.4.0"
+        },
+        {
+          "id": "gte_4_34_0",
+          "label": ">=4.34.0"
+        },
+        {
+          "id": "lt_4_34_0",
+          "label": "<4.34.0"
+        }
+      ],
+      "rum_browser_sdk_version_for_advanced_config_options": [
+        {
+          "id": "lt_2_13_0",
+          "label": "<2.13.0"
+        },
+        {
+          "id": "gte_2_13_0",
+          "label": ">=2.13.0"
+        },
+        {
+          "id": "gte_2_17_0",
+          "label": ">=2.17.0"
+        },
+        {
+          "id": "gte_4_13_0",
+          "label": ">=4.13.0"
+        },
+        {
+          "id": "gte_4_49_0",
+          "label": ">=4.49.0"
+        },
+        {
+          "id": "gte_5_22_0",
+          "label": ">=5.22.0"
+        },
+        {
+          "id": "gte_5_28_0",
+          "label": ">=5.28.0"
+        },
+        {
+          "default": true,
+          "id": "gte_6_4_0",
+          "label": ">=6.4.0"
+        }
+      ],
+      "rum_react_native_framework_options": [
+        {
+          "default": true,
+          "id": "react_native",
+          "label": "React Native"
+        },
+        {
+          "id": "expo",
+          "label": "Expo"
+        }
+      ],
+      "synthetics_protocol_options": [
+        {
+          "default": true,
+          "id": "http",
+          "label": "HTTP"
+        },
+        {
+          "id": "dns",
+          "label": "DNS"
+        },
+        {
+          "id": "ssl",
+          "label": "SSL"
+        },
+        {
+          "id": "websocket",
+          "label": "WebSocket"
+        },
+        {
+          "id": "udp",
+          "label": "UDP"
+        },
+        {
+          "id": "tcp",
+          "label": "TCP"
+        },
+        {
+          "id": "icmp",
+          "label": "ICMP"
+        },
+        {
+          "id": "grpc",
+          "label": "gRPC"
+        }
+      ],
+      "synthetics_variables_options": [
+        {
+          "default": true,
+          "id": "test_results",
+          "label": "Test results"
+        },
+        {
+          "id": "test_info",
+          "label": "Test info"
+        },
+        {
+          "id": "step_details",
+          "label": "Step details"
+        },
+        {
+          "id": "local_and_global",
+          "label": "Local & Global"
+        }
+      ],
+      "custom_instrumentation_language_options": [
+        {
+          "default": true,
+          "id": "java",
+          "label": "Java"
+        },
+        {
+          "id": "python",
+          "label": "Python"
+        },
+        {
+          "id": "node_js",
+          "label": "Node.js"
+        },
+        {
+          "id": "go",
+          "label": "Go"
+        },
+        {
+          "id": "ruby",
+          "label": "Ruby"
+        },
+        {
+          "id": "dot_net",
+          "label": ".NET"
+        },
+        {
+          "id": "php",
+          "label": "PHP"
+        },
+        {
+          "id": "cpp",
+          "label": "C++"
+        },
+        {
+          "id": "rust",
+          "label": "Rust"
+        },
+        {
+          "id": "elixir",
+          "label": "Elixir"
+        }
+      ],
+      "custom_instrumentation_api_options": [
+        {
+          "default": true,
+          "id": "otel_api",
+          "label": "OpenTelemetry"
+        },
+        {
+          "id": "dd_api",
+          "label": "Datadog"
+        }
+      ]
+    }
+  }
+}
