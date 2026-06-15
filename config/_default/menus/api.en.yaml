@@ -10931,6 +10931,36 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Data Observability
+      url: /api/latest/data-observability/
+      identifier: data-observability
+      generated: true
+    - name: Run a data observability monitor
+      url: /api/latest/data-observability/run-a-data-observability-monitor/
+      identifier: data-observability-run-a-data-observability-monitor
+      parent: data-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RunDataObservabilityMonitor
+        unstable:
+          - v2
+        order: 1
+    - name: Get data observability monitor run status
+      url: /api/latest/data-observability/get-data-observability-monitor-run-status/
+      identifier: data-observability-get-data-observability-monitor-run-status
+      parent: data-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataObservabilityMonitorRunStatus
+        unstable:
+          - v2
+        order: 2
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
