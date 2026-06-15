@@ -48,6 +48,9 @@ top_level:
   # Docker
   - docker-compose-docs.yml
 
+  # Static assets (shared; Hugo mounts via ../static)
+  - static
+
 moves_to_hugo:
   # Hugo core
   - archetypes
@@ -57,7 +60,6 @@ moves_to_hugo:
   - data
   - i18n
   - layouts
-  - static
   - resources
   - public
 

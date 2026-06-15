@@ -133,12 +133,9 @@ if both_segments:
 WORKFLOW_SUBSTITUTIONS = [
     ("- 'content/en/",           "- 'hugo/content/en/"),
     ("- 'layouts/shortcodes/",   "- 'hugo/layouts/shortcodes/"),
-    ("- 'static/images/",        "- 'hugo/static/images/"),
     ("python local/bin/",        "python hugo/local/bin/"),
     # vale_linter.yml passes the template path to vale via --output=
     ("--output=local/bin/",      "--output=hugo/local/bin/"),
-    (" static |",                " hugo/static |"),
-    ("^static/images/",          "^hugo/static/images/"),
     ("-- 'content/en/**/*.md'",  "-- 'hugo/content/en/**/*.md'"),
     # bump_* and version_getter_shared workflows cp/commit data files by ./ path
     ("./data/",                  "./hugo/data/"),
