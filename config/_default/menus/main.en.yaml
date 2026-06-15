@@ -9810,6 +9810,11 @@ menu:
       parent: pa_data_collected
       identifier: pa_data_collected_server_side_events
       weight: 601
+    - name: Export Pipelines
+      url: product_analytics/export_pipelines/
+      parent: product_analytics
+      identifier: pa_export_pipelines
+      weight: 7
     - name: Experiments
       url: experiments/
       pre: experiment-wui
