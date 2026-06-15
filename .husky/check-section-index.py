@@ -4,6 +4,8 @@ import sys
 import subprocess
 from pathlib import Path
 
+_hugo_prefix = "hugo/" if Path("hugo/content").exists() else ""
+
 
 def get_repo_root():
     """Get the git repository root directory."""
@@ -26,7 +28,7 @@ def get_staged_files():
             check=True
         )
         staged_files = [f for f in result.stdout.strip().split('\n')
-                       if f.endswith('.md') and f.startswith('content/en/')]
+                       if f.endswith('.md') and f.startswith(f'{_hugo_prefix}content/en/')]
         return staged_files if staged_files != [''] else []
     except subprocess.CalledProcessError:
         return []
@@ -56,7 +58,7 @@ def dir_exists_on_base_branch(dir_name):
         merge_base = result.stdout.strip()
         # Check if the directory existed at the merge base
         result = subprocess.run(
-            ['git', 'ls-tree', '--name-only', merge_base, f'content/en/{dir_name}/'],
+            ['git', 'ls-tree', '--name-only', merge_base, f'{_hugo_prefix}content/en/{dir_name}/'],
             capture_output=True,
             text=True,
             check=True
@@ -66,7 +68,7 @@ def dir_exists_on_base_branch(dir_name):
         # If there's no merge base (e.g. first commit), check if dir exists in HEAD
         try:
             result = subprocess.run(
-                ['git', 'ls-tree', '--name-only', 'HEAD', f'content/en/{dir_name}/'],
+                ['git', 'ls-tree', '--name-only', 'HEAD', f'{_hugo_prefix}content/en/{dir_name}/'],
                 capture_output=True,
                 text=True,
                 check=True
@@ -78,12 +80,12 @@ def dir_exists_on_base_branch(dir_name):
 
 def has_index_file(repo_root, dir_name):
     """Check if a top-level directory has an _index.md or _index.mdoc.md."""
-    dir_path = repo_root / 'content' / 'en' / dir_name
+    dir_path = repo_root / f'{_hugo_prefix}content' / 'en' / dir_name
     if (dir_path / '_index.md').exists() or (dir_path / '_index.mdoc.md').exists():
         return True
     # Also check if either variant is staged (new but not yet on disk)
     for name in ('_index.md', '_index.mdoc.md'):
-        relative = f'content/en/{dir_name}/{name}'
+        relative = f'{_hugo_prefix}content/en/{dir_name}/{name}'
         try:
             subprocess.run(
                 ['git', 'show', f':{relative}'],
@@ -131,9 +133,9 @@ def main():
         print('=====================================', file=sys.stderr)
 
         for dir_name in missing:
-            print(f'\n  Directory: content/en/{dir_name}/', file=sys.stderr)
+            print(f'\n  Directory: {_hugo_prefix}content/en/{dir_name}/', file=sys.stderr)
             print(f'  URL path:  /{dir_name}/', file=sys.stderr)
-            print(f'  Fix:       Create content/en/{dir_name}/_index.md', file=sys.stderr)
+            print(f'  Fix:       Create {_hugo_prefix}content/en/{dir_name}/_index.md', file=sys.stderr)
 
         print('\n=====================================', file=sys.stderr)
         print(f'Found {len(missing)} directory(ies) missing _index.md.', file=sys.stderr)

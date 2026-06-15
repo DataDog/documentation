@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'content/en/**/*.md'
+      - 'hugo/content/en/**/*.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
@@ -17,6 +18,8 @@ jobs:
   check-site-region:
     if: github.head_ref != 'guacbot/translation-pipeline'
     runs-on: ubuntu-latest
+    env:
+      HUGO_ROOT: ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -27,7 +30,7 @@ jobs:
       - name: Get changed markdown files
         id: changed_files
         run: |
-          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- 'content/en/**/*.md' | xargs)
+          FILES=$(git diff --diff-filter=AMD --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} -- "${HUGO_ROOT}content/en/**/*.md" | xargs)
           echo "files=$FILES" >> $GITHUB_OUTPUT
 
       - name: Check for site-region at top of page with support language

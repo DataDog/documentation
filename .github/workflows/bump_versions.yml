@@ -11,6 +11,8 @@ jobs:
       id-token: write # Needed to federate tokens.
 
     runs-on: ubuntu-latest
+    env:
+      HUGO_ROOT: ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
     steps:
       - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
         id: octo-sts
@@ -49,9 +51,9 @@ jobs:
       - name: Write version
         id: write-version
         run: |-
-          mkdir -p ./data
-          echo '${{steps.set-versions.outputs.result}}' > ./data/sdk_versions.json
-          git add ./data/sdk_versions.json
+          mkdir -p ./${HUGO_ROOT}data
+          echo '${{steps.set-versions.outputs.result}}' > ./${HUGO_ROOT}data/sdk_versions.json
+          git add ./${HUGO_ROOT}data/sdk_versions.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .

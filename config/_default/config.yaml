@@ -133,8 +133,10 @@ module:
     - source: content/es
       target: content
       lang: es
-    - source: ../static
+    - source: static
       target: static
+    - source: ../static/images
+      target: static/images
     - source: layouts
       target: layouts
       excludeFiles:
@@ -142,8 +144,10 @@ module:
         - 'shortcodes/mdoc/*'
     - source: data
       target: data
-    - source: ../static
+    - source: static
       target: assets
+    - source: ../static/images
+      target: assets/images
     - source: assets
       target: assets
     - source: i18n

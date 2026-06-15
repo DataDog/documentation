@@ -6,6 +6,8 @@ import subprocess
 import re
 from pathlib import Path
 
+_hugo_prefix = "hugo/" if Path("hugo/content").exists() else ""
+
 def parse_frontmatter(content):
     """Parse YAML frontmatter from markdown content."""
     # Match frontmatter between --- delimiters
@@ -62,12 +64,12 @@ def get_staged_files():
             text=True,
             check=True
         )
-        staged_files = [f for f in result.stdout.strip().split('\n') 
-                       if f.endswith('.md') and f.startswith('content/en/')]
+        staged_files = [f for f in result.stdout.strip().split('\n')
+                       if f.endswith('.md') and f.startswith(f'{_hugo_prefix}content/en/')]
         return staged_files if staged_files != [''] else []
     except subprocess.CalledProcessError:
         # Fallback to all markdown files for testing
-        content_dir = Path('content/en')
+        content_dir = Path(f'{_hugo_prefix}content/en')
         if content_dir.exists():
             return [str(f) for f in content_dir.rglob('*.md')]
         return []
@@ -100,10 +102,10 @@ def check_circular_aliases():
             # Calculate expected location path
             if file_path.endswith('/_index.md'):
                 # For _index.md files: content/en/foo/bar/_index.md -> foo/bar
-                expected_location = file_path.replace('content/en/', '').replace('/_index.md', '')
+                expected_location = file_path.replace(f'{_hugo_prefix}content/en/', '').replace('/_index.md', '')
             else:
                 # For regular .md files: content/en/foo/bar.md -> foo/bar
-                expected_location = file_path.replace('content/en/', '').replace('.md', '')
+                expected_location = file_path.replace(f'{_hugo_prefix}content/en/', '').replace('.md', '')
             
             # Check each alias for circular reference
             for alias in aliases:
