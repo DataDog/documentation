@@ -19,7 +19,7 @@ jobs:
     if: contains(github.head_ref, '/')
     runs-on: ubuntu-latest
     env:
-      HUGO_ROOT: ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
+      HUGO_ROOT: 'hugo/'  # TODO: Remove once HUGO_DIR repo var is set; replace with ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
     steps:
     - name: Checkout
       uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0

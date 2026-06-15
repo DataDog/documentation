@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Find latest private action runner version
     env:
-      HUGO_ROOT: ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
+      HUGO_ROOT: 'hugo/'  # TODO: Remove once HUGO_DIR repo var is set; replace with ${{ vars.HUGO_DIR && format('{0}/', vars.HUGO_DIR) || '' }}
     steps:
       - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
         id: octo-sts
