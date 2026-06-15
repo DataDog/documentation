@@ -19154,6 +19154,88 @@ menu:
           - UpsertSyncConfig
         unstable: []
         order: 1
+    - name: Tag Policies
+      url: /api/latest/tag-policies/
+      identifier: tag-policies
+      generated: true
+    - name: Get a tag policy compliance score
+      url: /api/latest/tag-policies/get-a-tag-policy-compliance-score/
+      identifier: tag-policies-get-a-tag-policy-compliance-score
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicyScore
+        unstable:
+          - v2
+        order: 6
+    - name: Update a tag policy
+      url: /api/latest/tag-policies/update-a-tag-policy/
+      identifier: tag-policies-update-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagPolicy
+        unstable:
+          - v2
+        order: 4
+    - name: Get a tag policy
+      url: /api/latest/tag-policies/get-a-tag-policy/
+      identifier: tag-policies-get-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicy
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a tag policy
+      url: /api/latest/tag-policies/delete-a-tag-policy/
+      identifier: tag-policies-delete-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTagPolicy
+        unstable:
+          - v2
+        order: 5
+    - name: Create a tag policy
+      url: /api/latest/tag-policies/create-a-tag-policy/
+      identifier: tag-policies-create-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTagPolicy
+        unstable:
+          - v2
+        order: 2
+    - name: List tag policies
+      url: /api/latest/tag-policies/list-tag-policies/
+      identifier: tag-policies-list-tag-policies
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPolicies
+        unstable:
+          - v2
+        order: 1
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
