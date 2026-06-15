@@ -26,7 +26,7 @@ This page provides an overview of these features.
 | [Detection](#detection)                    | Malicious PR protection: Detect potentially malicious changes or suspicious diffs                      | At PR time                               | Flags PRs introducing novel risky code                                        |
 | [Detection](#ai-native-sast)               | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy       | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
 | [Validation](#validation-and-triage)       | False positive filtering: Deprioritize low-likelihood findings                                         | After scan                               | Reduce noise, allow focus on actual issues                                    |
-| [Remediation](#remediation)                | Automated remediation: Generate suggested fixes (and optionally PRs) for vulnerabilities manually or with automation | After scan                               | Reduces developer effort, accelerates fix cycle                               |
+| [Remediation](#remediation)                | Automated remediation: Generate suggested fixes (and optionally PRs) for vulnerabilities manually or automatically | After scan                               | Reduces developer effort, accelerates fix cycle                               |
 
 ## Detection
 
@@ -138,14 +138,14 @@ Both methods operate as complementary components. The static analyzer continues 
 
 [Bits AI][9] reviews the context of each SAST finding and assesses whether it is more likely to be a true or false positive, along with a short explanation of the reasoning.
 
-To narrow down your initial list for triage, in [Vulnerabilities][6], enable the **Filter out false positives** toggle. This option uses the `-bitsAssessment:"False Positive"` query.
+To narrow down your initial list for triage, in [Vulnerabilities][6], turn on the **Filter out false positives** toggle. This option uses the `-bitsAssessment:"False Positive"` query.
 
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
 ## Remediation
 
-Datadog SAST uses [Bits Code][10] to generate code fixes for vulnerabilities. In addition to remediating an individual vulnerability, you can set up an [automation][13] so that Bits Code automatically acts on similar vulnerabilities in the future.
+Datadog SAST uses [Bits Code][10] to generate code fixes for vulnerabilities. You can also create an [automation][13] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
 
 To view and remediate vulnerabilities:
 
