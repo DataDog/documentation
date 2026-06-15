@@ -1171,15 +1171,15 @@ Discover filterable fields and their values for [IoC Explorer][64]. Omit `filter
 ### `get_datadog_ioc_indicator`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-Retrieve full detail for one [IoC Explorer][64] indicator by value (score, category, AS info, GeoIP, log sources, services, signal counts, OCSF fields).
+Retrieve full detail for one [IoC Explorer][64] indicator by value (score, category, AS info, GeoIP, log sources, signal counts).
 
-- Get details for the threat indicator 185.220.101.45.
-- Show me everything we know about malicious.example.com.
+- Get details for the threat indicator `192.0.2.1`.
+- Show me everything we know about `malicious.example.com`.
 
 ### `list_datadog_ioc_indicators`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-List [IoC Explorer][64] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Returns IoC indicators, not security signals; `signal_count` is contextual (signals that referenced the indicator). Default sort is `score` desc, ties broken by `signal_count` then `log_count`. Pair with `get_datadog_ioc_indicator` for full detail and `triage_datadog_ioc_indicator` to mark reviewed.
+List [IoC Explorer][64] indicators (IPs, domains, URLs, file hashes) matched against threat intel feeds. Pair with `get_datadog_ioc_indicator` for full detail and `triage_datadog_ioc_indicator` to mark reviewed.
 
 - Show me the highest-scoring malicious IP indicators.
 - List IoC indicators in the `residential_proxy` category with a Medium or higher score.
@@ -1188,10 +1188,10 @@ List [IoC Explorer][64] indicators (IPs, domains, URLs, file hashes) matched aga
 ### `triage_datadog_ioc_indicator`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Write`*\
-Set the triage state of an [IoC Explorer][64] indicator. Each call appends an immutable audit row.
+Set the triage state of an [IoC Explorer][64] indicator.
 
-- Mark indicator 185.220.101.45 as reviewed.
-- Set evil-domain.example.com back to not reviewed.
+- Mark indicator `192.0.2.1` as reviewed.
+- Set `evil-domain.example.com` back to not reviewed.
 
 ### `get_datadog_security_detection_rules_schema`
 *Toolset: **security***\
