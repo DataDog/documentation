@@ -213,6 +213,8 @@ This approach is recommended for clusters in **Standard** access mode.
     1. At the volume level, grant the `READ VOLUME` permission to all account users.
     1. At the catalog level, grant the `USE CATALOG` permission to all account users.
 
+   <div class="alert alert-info">Databricks evaluates Unity Catalog Volume permissions against the <strong>cluster owner</strong>, not the principal running the cluster.</div>
+
 1. **Add the init script to the allowlist**: For clusters in **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
 
 **Configure the compute policy**
@@ -340,6 +342,12 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
    The script above downloads and runs the latest init script for Data Observability: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL (for example, `install-databricks-0.14.0.sh` to use version `0.14.0`). You can find the source code used to generate this script, and the changes between script versions, on the [Datadog Agent repository][3].
 
+1. Grant read-only permissions to the init script:
+    1. At the volume level, grant the `READ VOLUME` permission to all account users.
+    1. At the catalog level, grant the `USE CATALOG` permission to all account users.
+
+   <div class="alert alert-info">Databricks evaluates Unity Catalog Volume permissions against the <strong>cluster owner</strong>, not the principal running the cluster.</div>
+
 1. **Add the init script to the allowlist** (required for **Standard** access mode clusters): If your cluster uses **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
 
 1. On the cluster configuration page, click the {{< ui >}}Advanced options{{< /ui >}} toggle.
@@ -411,7 +419,21 @@ If some jobs are not visible, navigate to the [Configuration][9] page to underst
 
 If you don't see any data in DJM after installing the product, follow these steps.
 
-1. **API Key Validation:** If the init script was manually installed, but cluster data still isn't showing up in the DJM product, use the [Validate API key endpoint][25] to ensure that the Datadog API key specified in the script is valid.
+### Init script not running or failing
+
+1. **Restart the cluster**: The init script is only run on cluster startup. Ensure the cluster has been restarted since the init script was added.
+1. **Confirm the init script ran**: In Databricks, click into the cluster and navigate to the {{< ui >}}Event log{{< /ui >}} tab. If `INIT_SCRIPTS_STARTED` is not present, the init script was not picked up by this cluster. Return to the [installation steps](#install-the-datadog-agent) to ensure the init script has been added to the cluster.
+1. **Confirm the init script succeeded**: Find the `INIT_SCRIPTS_FINISHED` action in the event log and click into it to inspect the JSON, which indicates whether the init script exited with a failure.
+1. **Investigate init script failures**: If `INIT_SCRIPTS_FINISHED` shows a failure, enable [cluster log delivery][29] to send init script logs to your preferred destination. Sending logs to a Unity Catalog volume is recommended.
+   {{< img src="data_jobs/databricks/compute_logging_config.png" alt="The Databricks cluster configuration page showing the Logging tab with options to configure a log delivery destination." style="width:100%;" >}}
+   After restarting the cluster with log delivery enabled, navigate to the log destination. The stdout and stderr logs can be found under the following path:
+   ```
+   <cluster-log-path>/<cluster-id>/init_scripts/<cluster-id>_<script-hash>/
+   ```
+
+### Data not appearing after a successful init script run
+
+1. **API Key Validation:** If the init script was manually installed, use the [Validate API key endpoint][25] to ensure that the Datadog API key specified in the script is valid.
 1. **Agent Validation:** The init script installs the Datadog Agent. To make sure it is properly installed, connect to the cluster with SSH and run the Agent status command:
   ```shell
   sudo datadog-agent status
@@ -532,3 +554,4 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [26]: https://docs.datadoghq.com/cloud_cost_management
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /getting_started/tagging/
+[29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
