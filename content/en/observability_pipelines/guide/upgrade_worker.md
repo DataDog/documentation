@@ -99,8 +99,8 @@ Worker version 2.16.0 gives you access to the following:
 - The Reference Tables processor's buffer now emits `buffer_size_events` and `buffer_size_bytes` gauge metrics to replace the deprecated `buffer_events` and `buffer_byte_size` metrics. The deprecated metrics are still being sent for backward compatibility.
 - The Datadog Logs destination now supports overrides for per-site logs endpoint using the bootstrap `logs-sites` field or `DD_OP_LOGS_<SITE>` environment variable, such as `DD_OP_LOGS_US1`. Environment variables take precedence over the bootstrap file.
 - Sources now record these distribution metrics:
-    - `source_send_latency_seconds`: Time spent blocking on a single events chunk send operation
-    - `source_send_batch_latency_seconds`: Encompassing all chunks within a received events batch
+    - `source_send_latency_seconds`: The time it takes for the source to send a chunk of events to the next component.
+    - `source_send_batch_latency_seconds`: The time it takes for the source to send a batch, which can contain multiple event chunks, to the next component.
 
 #### Fixes
 
