@@ -253,6 +253,10 @@ Checkpoint vocabulary at every phase: `continue` advances, `stop` exits cleanly,
 # Full six-phase walkthrough for a brand new ml_app
 /llm-obs-eval-pipeline my-chatbot --project-name my-chatbot
 
+# Organize the dataset and experiment under a specific Datadog project
+# (the project is created lazily — no need to pre-create it in the UI)
+/llm-obs-eval-pipeline my-chatbot --project-name customer-qa-eval
+
 # Classic three-phase eval-pipeline behavior — preserves backward compatibility
 /llm-obs-eval-pipeline my-chatbot --stop-after eval-bootstrap
 
@@ -265,6 +269,8 @@ Checkpoint vocabulary at every phase: `continue` advances, `stop` exits cleanly,
 # Run a single phase in isolation
 /llm-obs-eval-pipeline my-chatbot --start-at dataset --stop-after dataset
 ```
+
+> **Project name** — if `--project-name` is omitted, the skill auto-derives it from your codebase (in order: `pyproject.toml` → `setup.cfg` → `setup.py` → `package.json` → cwd basename), falling back to `experiment-sdk-default`. The resolved name is surfaced in the Precheck output before any phase runs, so you can confirm or override it without re-invoking. The Datadog project itself is created lazily by `LLMObs.enable(project_name=...)` when Phase 4 publishes the dataset — you never need to pre-create it in the UI.
 
 ## Typical workflow
 
