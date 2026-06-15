@@ -1564,6 +1564,14 @@
     "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
     "summary": "Get usage stats for a dashboard"
   },
+  "GetDataObservabilityMonitorRunStatus": {
+    "description": "Retrieves the current status of a data observability monitor run. Poll this endpoint after triggering a run to determine when evaluation is complete.",
+    "summary": "Get data observability monitor run status"
+  },
+  "RunDataObservabilityMonitor": {
+    "description": "Manually triggers a run for a data observability monitor. Only monitors that are not scheduled (manually-runnable) can be triggered this way.",
+    "summary": "Run a data observability monitor"
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
@@ -3027,6 +3035,50 @@
     "request_description": "Search spans payload.",
     "request_schema_description": "Request body for searching LLM Observability spans."
   },
+  "ListLLMObsPatternsClusteredPoints": {
+    "description": "List the data points grouped into a topic. For a parent topic, points from all\nof its leaf topics are returned.",
+    "summary": "List patterns clustered points"
+  },
+  "ListLLMObsPatternsConfigs": {
+    "description": "List all patterns configurations for the organization.",
+    "summary": "List patterns configurations"
+  },
+  "UpsertLLMObsPatternsConfig": {
+    "description": "Create a new patterns configuration, or update an existing one when a configuration ID is provided.",
+    "summary": "Create or update a patterns configuration",
+    "request_description": "Patterns configuration payload.",
+    "request_schema_description": "Request to create or update an LLM Observability patterns configuration."
+  },
+  "GetLLMObsPatternsConfig": {
+    "description": "Retrieve the patterns configuration for the organization.",
+    "summary": "Get a patterns configuration"
+  },
+  "DeleteLLMObsPatternsConfig": {
+    "description": "Delete a patterns configuration by its ID.",
+    "summary": "Delete a patterns configuration"
+  },
+  "ListLLMObsPatternsRuns": {
+    "description": "List the completed patterns runs for a configuration.",
+    "summary": "List patterns runs"
+  },
+  "TriggerLLMObsPatterns": {
+    "description": "Start a patterns run for a given configuration. The run executes asynchronously.",
+    "summary": "Trigger a patterns run",
+    "request_description": "Trigger patterns payload.",
+    "request_schema_description": "Request to trigger an LLM Observability patterns run."
+  },
+  "GetLLMObsPatternsRunStatus": {
+    "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
+    "summary": "Get patterns run status"
+  },
+  "ListLLMObsPatternsTopics": {
+    "description": "List the topics discovered by a patterns run. When no run is specified,\nthe most recent completed run is used.",
+    "summary": "List patterns topics"
+  },
+  "ListLLMObsPatternsTopicsWithClusteredPoints": {
+    "description": "List the topics discovered by a patterns run, with the clustered points attached\ninline to each leaf topic. When no run is specified, the most recent completed\nrun is used.",
+    "summary": "List patterns topics with clustered points"
+  },
   "ListLLMObsDatasets": {
     "description": "List all LLM Observability datasets for a project, sorted by creation date, newest first.",
     "summary": "List LLM Observability datasets"
@@ -3122,6 +3174,12 @@
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
     "summary": "List events for an LLM Observability experiment"
+  },
+  "UpdateLoginOrgConfigsMaxSessionDuration": {
+    "description": "Update the maximum session duration for the current organization.\nThe duration is specified in seconds.",
+    "summary": "Update the maximum session duration",
+    "request_description": "",
+    "request_schema_description": "A request to update the maximum session duration for an organization."
   },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
@@ -4405,20 +4463,6 @@
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
   },
-  "ListHardcodedRetentionFilters": {
-    "description": "Get the list of hardcoded retention filters for a RUM application.",
-    "summary": "Get all hardcoded retention filters"
-  },
-  "GetHardcodedRetentionFilter": {
-    "description": "Get a single hardcoded retention filter for a RUM application.",
-    "summary": "Get a hardcoded retention filter"
-  },
-  "UpdateHardcodedRetentionFilter": {
-    "description": "Update the cross-product sample rates of a hardcoded retention filter for a RUM application.\nOnly fields whose matching flag in `cross_product_sampling_editability` is `true` can be updated.\nAny other field is read-only and cannot be sent in the payload.\nReturns the updated hardcoded retention filter when the request is successful.",
-    "summary": "Update a hardcoded retention filter",
-    "request_description": "New cross-product sample rates for the hardcoded retention filter.",
-    "request_schema_description": "The hardcoded retention filter body to update."
-  },
   "OrderRetentionFilters": {
     "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
     "summary": "Order RUM retention filters",
@@ -5224,6 +5268,10 @@
   "ConvertExistingSecurityMonitoringRule": {
     "description": "Convert an existing rule from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert an existing rule from JSON to Terraform"
+  },
+  "RestoreSecurityMonitoringRule": {
+    "description": "Restores a custom detection rule to a previously saved historical version.\nOnly custom rules can be restored. Default and partner rules return 400.\nThe restore creates a new version entry; it does not overwrite history.",
+    "summary": "Restore a rule to a historical version"
   },
   "TestExistingSecurityMonitoringRule": {
     "description": "Test an existing rule.",
