@@ -9719,7 +9719,7 @@ menu:
       parent: rum
       identifier: rum_managed_archive
       weight: 11
-    - name: RUM Export
+    - name: Export Pipelines
       url: real_user_monitoring/rum_export/
       parent: rum
       identifier: rum_export

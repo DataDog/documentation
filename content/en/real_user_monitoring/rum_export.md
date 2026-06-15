@@ -17,6 +17,7 @@ further_reading:
 {{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
 Export Pipelines is in Preview.
 {{< /callout >}}
+<div class="alert alert-info">Once reaching General Availability, Export Pipelines will be a paying add-on SKU.</div>
 
 ## Overview
 
@@ -136,30 +137,21 @@ In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Und
      "Version": "2012-10-17",
      "Statement": [
        {
-         "Sid": "DatadogUploadAndRehydrateRUMArchives",
+         "Sid": "DatadogExportPipelineFiles",
          "Effect": "Allow",
          "Action": ["s3:PutObject", "s3:GetObject"],
          "Resource": [
            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
          ]
-       },
-       {
-         "Sid": "DatadogRehydrateRUMArchivesListBucket",
-         "Effect": "Allow",
-         "Action": "s3:ListBucket",
-         "Resource": [
-           "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-           "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-         ]
        }
      ]
    }
    ```
 
-   * `PutObject` is sufficient to upload exports.
-   * `GetObject` and `ListBucket` are required only if you plan to rehydrate archives back into Datadog.
-   * The resource value under `s3:PutObject` and `s3:GetObject` must end with `/*` — these permissions apply to objects inside the buckets.
+   * `PutObject` is required to upload export files.
+   * `GetObject` is required to run **Test Configuration**, which writes a test file and reads it back to verify access.
+   * The resource value must end with `/*` — these permissions apply to objects inside the buckets.
 
 2. Edit the bucket names.
 3. Optionally, restrict the policy to specific paths.
@@ -245,18 +237,13 @@ Files are organized in a directory structure that makes it easy to query archive
 | Format  | Extension     | Notes                                                          |
 |---------|---------------|----------------------------------------------------------------|
 | JSON    | `.json.gz`    | Gzip-compressed newline-delimited JSON.                        |
-| Parquet | `.parquet`    | <!-- TODO: confirm Parquet file naming convention and per-record schema with the Product Analytics team --> |
+| Parquet | `.parquet`    | Native Parquet encoding (no gzip wrapper). One row per event with typed columns. Directly loadable by Snowflake, BigQuery, and Databricks without preprocessing. |
 
 <!-- TODO: confirm the directory structure above still applies for both formats in the new Export Pipelines backend -->
 
 ## Programmatic management
 
-A public REST API for managing RUM exports is available at `/api/v2/rum/forwarding`. The API exposes a few advanced options that are not currently surfaced in the UI:
-
-- A custom RUM query filter on events to forward.
-- For S3 destinations: server-side encryption — `SSE_S3` or `SSE_KMS` with a customer-managed key — and storage class (`STANDARD`, `STANDARD_IA`, `ONEZONE_IA`, `INTELLIGENT_TIERING`, `GLACIER_IR`).
-- An `include_tags` toggle.
-- Rehydration tags and an optional `rehydration_max_scan_size_gb` for rehydration jobs.
+Export Pipelines can be managed via API at `/api/v2/rum/forwarding`. The API exposes one advanced option not currently surfaced in the UI: a custom RUM query filter to restrict which events are forwarded.
 
 The API requires the `rum_write_archives` permission. See the [Datadog API reference][3] for full request and response schemas.
 
