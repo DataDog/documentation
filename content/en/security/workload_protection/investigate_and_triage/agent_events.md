@@ -74,4 +74,8 @@ To triage an event:
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process
+<<<<<<< HEAD
 [18]: /security/workload_protection/guide/active-protection
+=======
+[18]: /security/workload_protection/respond_and_report/active_protection
+>>>>>>> e03bd12584 (WIP repond and report)

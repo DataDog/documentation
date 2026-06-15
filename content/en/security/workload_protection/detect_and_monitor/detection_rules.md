@@ -36,4 +36,4 @@ You can define a matching Agent rule and threat detection rule in one of these w
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
 [21]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management#create-a-custom-agent-rule
-[12]: /security/workload_protection/guide/active-protection
+[12]: /security/workload_protection/respond_and_report/active_protection
