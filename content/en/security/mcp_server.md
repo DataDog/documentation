@@ -51,7 +51,7 @@ The `security` toolset is not enabled by default. You can enable it by adding a 
 1. [Set up the Datadog MCP Server][4].
 2. When connecting to the Datadog MCP Server, add `security` to the `toolsets` parameter. For example, for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), use:
    ```text
-   https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,security
+   https://mcp.{{< region-param key="dd_site" >}}/v1/mcp?toolsets=core,security
    ```
 
 <div class="alert alert-warning"><code>?toolsets=security</code> must be in the URL. Otherwise, security tools are not available to your AI client, even if the MCP Server is otherwise connected and working.</div>
