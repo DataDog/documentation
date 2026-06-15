@@ -244,12 +244,6 @@ Files are organized in a directory structure that makes it easy to query archive
 
 <!-- TODO: confirm the directory structure above still applies for both formats in the new Export Pipelines backend -->
 
-## Programmatic management
-
-Export Pipelines can be managed via API at `/api/v2/rum/forwarding`. The API exposes one advanced option not currently surfaced in the UI: a custom RUM query filter to restrict which events are forwarded.
-
-The API requires the `rum_write_archives` permission. See the [Datadog API reference][3] for full request and response schemas.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
