@@ -47,7 +47,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
 
 1. Click the **Policy Settings** button at the upper right of the Flaky Management page. You can also open [**CI/CD Settings** > **Repository settings**][13] and click the **Flaky Test Policies** row to configure the default policies for your organization or override them per repository.
 2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
-    {{< img src="tests/flaky-policies-4.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
+    {{< img src="tests/flaky-policies-4.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy." style="width:100%;" >}}
 
 3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
    <table>
@@ -205,7 +205,7 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 - A user or policy changes the state of a flaky test.
 - The remediation flow for a flaky test succeeds or fails.
 
-You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] sidepanel in CI/CD Settings.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] side panel in CI/CD Settings.
 
 Notifications are bundled over a short period to reduce noise.
 
@@ -220,7 +220,7 @@ Notifications are bundled over a short period to reduce noise.
 | **Fix failed** | A test fails during the remediation flow. |
 | **Manual state change** | A user manually changes the state of a flaky test. |
 
-{{< img src="tests/flaky_management_notifications_settings-3.png" alt="Notifications settings UI" style="width:100%;" >}}
+{{< img src="tests/flaky_management_notifications_settings-3.png" alt="Notifications settings UI." style="width:100%;" >}}
 
 ## Compatibility
 

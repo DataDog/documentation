@@ -49,8 +49,8 @@ After you set up your Datadog library for Test Optimization, configure Early Fla
 
 1. Open [**CI/CD Settings** > **Repository settings**][7].
 1. Choose where to apply the setting:
-   - **Organization** tab to update the organization default.
-   - **Repository-specific** tab to override the default for a single repository, or to apply an override to one of its test services.
+   - Select the **Organization** tab to update the organization default.
+   - Select the **Repository-specific** tab to override the default for a single repository, or to apply an override to one of its test services.
 1. Under **Prevention**, toggle **Early Flake Detection** on.
 
 ## Compatibility

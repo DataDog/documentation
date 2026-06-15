@@ -65,17 +65,17 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-Once you have set up your Datadog library for Test Impact Analysis, configure it from [**CI/CD Settings**][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
+After you have set up your Datadog library for Test Impact Analysis, configure it from [**CI/CD Settings**][5]. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
 
 Test Impact Analysis can be configured at three levels, and lower levels can override values from the level above:
 
-- **Organization defaults** — apply to every repository unless overridden. Open **CI/CD Settings** > **Repository settings**, then select the **Organization** tab.
-- **Repository** — overrides organization defaults for a specific repository. Open **CI/CD Settings** > **Repository settings**, select the **Repository-specific** tab, and choose a repository.
-- **Test service** — overrides the repository setting for a specific test service. Open the repository, then edit overrides for the target test service.
+- **Organization defaults**: Apply to every repository unless overridden. Open **CI/CD Settings** > **Repository settings**, then select the **Organization** tab.
+- **Repository**: Overrides organization defaults for a specific repository. Open **CI/CD Settings** > **Repository settings**, select the **Repository-specific** tab, and choose a repository.
+- **Test service**: Overrides the repository setting for a specific test service. Open the repository, then edit overrides for the target test service.
 
 At the repository and test service levels, each setting can either **Inherit** the value from the level above or be set to a **Custom** value at the current level.
 
-{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page" style="width:80%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." style="width:80%" >}}
 
 ### Git executable
 
@@ -101,7 +101,7 @@ When you specify a set of tracked files, Test Impact Analysis runs all tests if 
 
 All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
-{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Select branches to exclude and tracked files" style="width:80%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Select branches to exclude and tracked files." style="width:80%" >}}
 
 ## Explore test sessions
 

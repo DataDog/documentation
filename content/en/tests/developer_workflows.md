@@ -51,11 +51,11 @@ You can enable test summaries in pull requests with the following steps:
    1. Give the application read and write permissions for pull requests.
 1. Open [**CI/CD Settings** > **Repository settings**][3].
 1. Choose where to apply the setting:
-   - **Organization** tab to enable PR Comments for every repository by default.
-   - **Repository-specific** tab to enable PR Comments for a single repository.
+   - Select the **Organization** tab to enable PR Comments for every repository by default.
+   - Select the **Repository-specific** tab to enable PR Comments for a single repository.
 1. Under **General**, toggle **PR Comments** on.
 
-{{< img src="ci/enable-settings-github-comments-1.png" alt="The PR Comments toggle on the CI/CD Settings page" style="width:100%;">}}
+{{< img src="ci/enable-settings-github-comments-1.png" alt="The PR Comments toggle on the CI/CD Settings page." style="width:100%;">}}
 
 Comments only appear on pull requests that have run at least one test for an enabled repository.
 

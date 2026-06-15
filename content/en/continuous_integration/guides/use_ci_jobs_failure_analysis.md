@@ -152,8 +152,8 @@ For PR Comments to be posted, your repositories must be integrated with Datadog.
 Enable PR Comments from [**CI/CD Settings** > **Repository settings**][11]:
 
 1. Choose where to apply the setting:
-   - **Organization** tab to enable PR Comments for every repository by default.
-   - **Repository-specific** tab to enable it for a single repository.
+   - Select the **Organization** tab to enable PR Comments for every repository by default.
+   - Select the **Repository-specific** tab to enable PR Comments for a single repository.
 1. Under **General**, toggle **PR Comments** on.
 
 {{< img src="continuous_integration/pr_comment.png" alt="PR comment with included jobs failure analysis" width="90%">}}
