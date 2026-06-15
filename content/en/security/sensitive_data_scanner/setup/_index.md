@@ -1,5 +1,5 @@
 ---
-title: Setup
+title: Sensitive Data Scanner Setup
 description: Set up Sensitive Data Scanner to detect and redact sensitive data across telemetry data, Agent Observability traces, Amazon S3 cloud storage, and code repositories.
 disable_toc: false
 aliases:

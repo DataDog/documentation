@@ -1,5 +1,5 @@
 ---
-title: Telemetry Data
+title: Set Up Sensitive Data Scanner for Telemetry Data
 description: Set up Sensitive Data Scanner scanning groups and rules to detect and redact sensitive data in Datadog logs, APM spans, RUM events, and events from Event Management. Covers permissions, Terraform resources, sampling, and excluded namespaces.
 disable_toc: false
 aliases:
