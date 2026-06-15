@@ -23,7 +23,7 @@ Export Pipelines is in Preview.
 
 Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.
 
-{{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:75%;">}}
+{{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:100%;">}}
 <!-- TODO: refresh screenshot to match the current Export Pipelines UI -->
 
 Use Export Pipelines to:
