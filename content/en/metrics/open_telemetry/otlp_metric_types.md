@@ -75,7 +75,7 @@ Both types have one feature that influences the mapping:
 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
-The default mapping for both histogram temporality types is as follows:
+The default mapping for both temporality types is as follows:
 
 - **Delta (Default and Recommended)**: Explicit Bucket and Exponential Histograms are ingested natively and reported as Datadog distributions. The original bucket structure is preserved — no conversion to DDSketch occurs. Histograms with a count of 0 are dropped.
 - **Cumulative**: The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
