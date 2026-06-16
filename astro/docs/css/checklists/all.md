@@ -16,6 +16,8 @@ Query the user if you recommend another approach in any case.
 
 - Design token names are not tied to a particular element, with the exception of very high-level layout tokens. For example, colors should just be colors, like `--color-text-muted` (good example). They should not be associated with a specific component, such as `--color-breadcrumb` (bad example). See [token naming conventions](../reference/token_naming_conventions.md).
 
+- All new design tokens are necessary; for each new design token, there was no existing design token that could have been used instead.
+
 - Every token defined in `:root` has a corresponding dark mode override in `[data-theme='dark']` if the value would look wrong on a dark background.
 
 ### Global styles

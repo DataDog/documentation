@@ -6,6 +6,10 @@ Query the user if you recommend another approach in any case.
 
 ## Checklist
 
+### Markdoc vs. vanilla Astro
+
+- The component is only configured as a Markdoc component if it would logically be used inside `.mdoc` files. For example, the site header does not need to be a Markdoc component; that would just complicate the implementation and clutter the Markdoc schema for no benefit.
+
 ### CSS
 
 - All items in the [CSS checklist](../../css/checklists/all.md) have been verified.

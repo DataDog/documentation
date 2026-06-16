@@ -1,21 +1,27 @@
 # Astro Docs
 
+## About this project
+
 We intend to eventually deprecate Hugo, having moved all of its content into this Astro site. For now, to avoid breaking existing CI/CD while we build the site, we've left the repo intact and simply added an Astro folder. 
 
-Prompts will often refer to the "Hugo docs", which is referring either to the general Hugo site setup or the API docs specifically, depending on the context of the request.
-
 The scope of this new Astro site is just the API docs. In Hugo, the HTML for the API docs can be found in [public/api](../public/api/). Those docs are generated from [the spec YAML in this folder](./../data/api). We've made a copy of that data to use for development of the Astro API docs.
+
+Prompts often refer to the "Hugo docs". This refers either to the general Hugo site setup (footer, header, etc.) or the API docs content specifically, depending on the context of the request.
 
 ## Operating instructions
 
 - Flag any concerns and suggest any potential improvements to what I've asked for. 
 - If I left gaps in my instructions, ask questions.
 - After you implement something, list any best practices you used that aren't well known.
+
+## Testing
+
+- Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass.
 - Use `npm run test` for the headless tests and `npm run test:browser` for browser tests. Don't run vitest directly, it will fail to set necessary env variables.
 
 ## Stay inside `astro/`
 
-Do not edit any files outside the `astro/` directory. Everything outside this folder belongs to the live Hugo site — including but not limited to `i18n/`, `layouts/`, `content/`, `data/`, `assets/`, `static/`, `config/`, and the root-level `package.json` / `Makefile`. Changes there ship to production immediately and can break the live docs site.
+Do not edit any files outside the `astro/` directory. Everything outside this folder belongs to the live Hugo site.
 
 This applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `TODO` comment so the key can be added authoritatively later.
 
@@ -33,6 +39,14 @@ If a task seems to require a Hugo-side change, stop and ask first.
 - **Markdoc** — Content authoring format (`.mdoc` files)
 - **Preact** — UI components (TSX)
 - **TypeScript** — Strict mode
+
+## Coding guidelines
+
+Prioritize readability. For example: 
+
+- When looping over an array of buttons, use `button` as the loop variable, not `b`.
+- When a component or function has deeply nested elements or loops, look for opportunities to break it up into subcomponents (especially in Preact, where subcomponents can be included in the same file) or private functions.
+- When possible, aim for highly readable top-level driver code, which should mostly be invocations of clearly named functions that provide a narrative to a human reader.
 
 ## Mocked dependencies vs. test fixtures
 
