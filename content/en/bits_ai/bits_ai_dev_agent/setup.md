@@ -131,9 +131,9 @@ Bits Code runs the setup command at startup and can use any tools installed in y
 
 ## Troubleshooting
 
-### Creation of PRs fails unexpectedly
+### Creation of GitHub PRs fails unexpectedly
 
-In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [Source Code Integration][2].
+In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [GitHub Source Code Integration][2].
 
 **Note**: This permission allows Bits AI to create workflows in your repository and has security implications.
 
