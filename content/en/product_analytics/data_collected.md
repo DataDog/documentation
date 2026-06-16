@@ -22,7 +22,7 @@ Product Analytics collects user activity data as events. Each event has two type
 
 Every event includes the [default attributes](#default-attributes). Each event type also has [specific telemetry and attributes](#event-specific-attributes).
 
-To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes.
+To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes. For unauthenticated users or visitors who never log in, the RUM SDK automatically assigns a `usr.anonymous_id` to track activity. See [Track unauthenticated users][4] for details.
 
 <div class="alert alert-info">Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM) to collect data. Unlike RUM, Product Analytics does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
 
@@ -88,6 +88,7 @@ You can enable [tracking user info][3] globally to collect and apply user attrib
 | `usr.id` | string | Identifier of the user. |
 | `usr.name` | string | Name of the user. |
 | `usr.email` | string | Email of the user. |
+| `usr.anonymous_id` | string | Randomly generated UUID assigned to unauthenticated users. Persists for up to one year. See [Track unauthenticated users][4]. |
 
 ## Event-specific attributes
 
@@ -172,3 +173,4 @@ The following attributes are specific to each event type.
 [1]: /product_analytics/guide/action_management/
 [2]: https://app.datadoghq.com/rum/list
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-session
+[4]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#track-unauthenticated-users

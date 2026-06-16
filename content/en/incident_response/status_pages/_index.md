@@ -1,5 +1,6 @@
 ---
 title: Status Pages
+description: Communicate service availability, incidents, and planned maintenance with customers or internal stakeholders through a shareable status page.
 aliases:
 - /service_management/status_pages/
 further_reading:
@@ -32,9 +33,7 @@ Use Status Pages to:
 
 ## Configure permissions
 
-There are three RBAC permissions that are relevant to Status Pages. Users with the Datadog Admin Role have all the necessary permissions.
-
-To create, update, or publish Status Pages, you must have `status_pages_settings_read`, `status_pages_settings_write`, and `status_pages_incident_write` RBAC permissions. For more information, see [Access Control][1].
+To create, update, or publish Status Pages, you must have the appropriate RBAC permissions. For more information, see [Access Control][1].
 
 <table>
   <thead>
@@ -52,13 +51,23 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Write<br><code style="white-space: nowrap;">status_pages_settings_write</code></td>
-      <td>Create and launch new Status Pages, and configure Status Pages settings.</td>
+      <td>Create new Status Pages, and configure Status Pages settings.</td>
       <td>Datadog Admin Role</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;">Status Pages Notice Write<br><code style="white-space: nowrap;">status_pages_incident_write</code></td>
       <td>Publish and update Incidents.</td>
       <td>Datadog Admin Role</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Public Page Publish<br><code style="white-space: nowrap;">status_pages_public_page_publish</code></td>
+      <td>Publish and unpublish public Status Pages.</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
+      <td>Publish and unpublish internal Status Pages.</td>
+      <td>None</td>
     </tr>
   </tbody>
 </table>
@@ -206,9 +215,20 @@ For **internal** status pages, the subscription process is the same, but users m
 
 {{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
+## Configure a custom email sender domain
+
+By default, status page subscription emails are sent from a Datadog email address. To send notifications from your own domain, configure a custom SMTP server in Organization Settings.
+
+<div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
+
+1. On your status page, go to **Settings** > **Subscriptions**.
+1. Under **Email Sender Domain**, click **Organization Settings**.
+1. In Organization Settings, [add and validate an SMTP server][3].
+1. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
+To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
 1. From your status page, click **Settings**.
 1. Select **Custom Domain**.
@@ -221,7 +241,7 @@ To match your branding, you have the option to map your status page to a custom 
 
 - DNS propagation may take several minutes.
 - You can revert to the default Datadog domain at any time.
-- Ensure DNS changes are made by someone with access to your domain registrar.
+- DNS changes must be made by someone with access to your domain registrar.
 
 ## Further reading
 
@@ -229,3 +249,4 @@ To match your branding, you have the option to map your status page to a custom 
 
 [1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/status-pages
+[3]: /account_management/org_settings/smtp_configuration
