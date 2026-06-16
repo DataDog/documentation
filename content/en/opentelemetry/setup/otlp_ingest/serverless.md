@@ -16,7 +16,7 @@ The serverless OTLP traces intake endpoint is in Preview.
 
 ## Overview
 
-Send traces from serverless workloads directly to Datadog over HTTP/protobuf, without requiring a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead.
+Send traces from serverless workloads directly to the Datadog OTLP traces endpoint at {{< region-param key="otlp_trace_endpoint" code="true" >}}, with the `dd-otlp-source: serverless` header. This does not require a [Datadog Agent][1] or OpenTelemetry Collector. If your platform appears in the [Managed platforms][5] table, use its dedicated endpoint instead.
 
 Serverless workloads can also send logs and metrics through the general [OTLP logs][3] and [OTLP metrics][4] intake endpoints. The resource attributes on this page apply to all signals your application exports.
 
