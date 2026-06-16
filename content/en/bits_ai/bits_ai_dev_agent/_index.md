@@ -89,7 +89,7 @@ You can build automations from triggers (a product finding, a custom prompt, a s
 
 ### Pull request collaboration
 
-Bits Code integrates with GitHub to:
+Bits Code integrates with [source code providers](#supported-source-code-platforms) to:
 - Create pull requests, generating titles and descriptions based on your repository's pull request template
 - Iterate on pull requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
