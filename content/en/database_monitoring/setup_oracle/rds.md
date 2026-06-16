@@ -117,6 +117,14 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
+**Note:** When the Agent runs on a host whose system hostname does not match the RDS endpoint (for example, an EC2 instance), set the `reported_hostname` field on each instance to the RDS endpoint. Without it, the database may appear in Datadog under an internal hostname (such as `ip-10-0-0-12`) rather than the RDS endpoint, making it harder to correlate with the AWS RDS integration. See [Troubleshooting][12] for details.
+
+```yaml
+  - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
+    reported_hostname: '<RDS_INSTANCE_ENDPOINT_1>'
+    # ... other options
+```
+
 Once all Agent configuration is complete, [restart the Datadog Agent][2].
 
 ### Validate the setup
@@ -140,6 +148,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [9]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [10]: /database_monitoring/architecture/
 [11]: /integrations/guide/oracle-check-upgrade-7.50.1/
+[12]: /database_monitoring/setup_oracle/troubleshooting/#no-oracle-db-hostname-reported
 
 ## Further reading
 
