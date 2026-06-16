@@ -9,9 +9,9 @@ further_reading:
   text: "Meet the new Bits Investigation: Deeper reasoning, twice as fast"
 ---
 
-## Start a Bits Investigation
+## Start a Bits investigation
 
-You can launch a Bits Investigation from several entry points:
+You can launch a Bits investigation from several entry points:
 
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
@@ -41,9 +41,9 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 ### Synthetic tests (Preview)
 
 <div class="alert alert-info">
-Bits Investigations started from Synthetic Browser and API tests are in Preview.</div>
+Bits investigations started from Synthetic Browser and API tests are in Preview.</div>
 
-When a Synthetic Browser or API test monitor triggers, you can launch a Bits Investigation to identify the root cause. Bits Investigation analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+When a Synthetic Browser or API test monitor triggers, you can launch a Bits investigation to identify the root cause. Bits analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
 #### From the Synthetic test details page
 
@@ -76,7 +76,7 @@ Bad example:
 You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits Investigation automatically uses the entire thread as investigation context.
 
 <div class="alert alert-info">
-Starting Bits Investigations from a prompt is in Preview for all customers. During this period, the number of investigations per day is rate-limited. This limit does not apply to generally available entry points, such as monitors.</div>
+Starting Bits investigations from a prompt is in Preview for all customers. During this period, the number of investigations per day is rate-limited. This limit does not apply to generally available entry points, such as monitors.</div>
 
 ### Enable automatic investigations
 
@@ -107,12 +107,12 @@ Bits is able to run investigations on the following monitor types:
   - SLOs (Preview)
   - Synthetics API and Browser tests (Preview)
 
-## How Bits Investigation investigates
-When Bits Investigation investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits Investigation updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
+## How Bits investigates
+When Bits investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
 
-At the end of an investigation, Bits Investigation either presents a clear, evidence-backed conclusion or marks the investigation as inconclusive when the available data is insufficient to support a defensible conclusion.
+At the end of an investigation, Bits either presents a clear, evidence-backed conclusion or marks the investigation as inconclusive when the available data is insufficient to support a defensible conclusion.
 
-{{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits Investigation built and tested" style="width:100%;" >}}
+{{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits built and tested" style="width:100%;" >}}
 
 ### Supported data sources
 Bits uses the following data sources during investigations:
@@ -131,7 +131,7 @@ Bits uses the following data sources during investigations:
 - Database Monitoring
 - Continuous Profiler
 
-<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits Investigation correlate data more accurately.</div>
+<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>
 
 #### Third-party integrations
 - Grafana
@@ -147,11 +147,11 @@ Third-party integrations are in Preview for all customers.</div>
 For best practices on maximizing the effectiveness of investigations, see [Knowledge sources][9].
 
 ### Investigation display modes
-There are two display modes: Agent Trace and Investigation.
+There are two display modes: Investigation Steps and Hypothesis Tree.
 
-While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the {{< ui >}}Agent Trace{{< /ui >}} view. This provides a real-time, detailed record of the agent’s reasoning process.
+While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the {{< ui >}}Investigation Steps{{< /ui >}} view. This provides a real-time, detailed record of the agent’s reasoning process.
 
-Once the investigation is complete, you can switch to the {{< ui >}}Investigation{{< /ui >}} view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
+Once the investigation is complete, you can switch to the {{< ui >}}Hypothesis Tree{{< /ui >}} view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
 
 
 ## Reports

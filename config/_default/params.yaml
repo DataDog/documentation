@@ -280,6 +280,8 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  resource_catalog_policies: [gov, gov2]
+  runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
   actions: [gov,gov2]
@@ -313,6 +315,7 @@ unsupported_sites:
   configuration_at_runtime: [gov,gov2]
   confluence: [gov,gov2]
   confluent_cloud_integration: [gov,gov2]
+  containers_autoscaling: [gov,gov2]
   containers_kubernetes_appsec: [gov,gov2]
   continuous_delivery: [gov,gov2]
   continuous_integration: [gov,gov2]
@@ -334,7 +337,7 @@ unsupported_sites:
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2]
-  fleet_automation: [gov,gov2]
+  fleet-automation-standard-features: [gov,gov2]
   forwarding_audit_events: [gov,gov2]
   gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2]
   getting_started_feature_flags: [gov,gov2]
@@ -344,6 +347,7 @@ unsupported_sites:
   gpu_monitoring: [gov, gov2]
   heatmaps: [gov,gov2]
   high_availability_datadog_agent: [gov,gov2]
+  ide_plugins_idea: [gov,gov2]
   iac_security: [gov,gov2]
   incident_ai: [gov,gov2]
   inferred_entity_remapping_rules: [gov,gov2]
@@ -391,6 +395,7 @@ unsupported_sites:
   synthetics_safari: [gov,gov2]
   test_optimization: [gov,gov2]
   universal_service_monitoring: [gov,gov2]
+  ide_plugins_vscode: [gov,gov2]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2]
   wiz: [gov,gov2]
   workflow-automation: [gov,gov2]
