@@ -54,6 +54,8 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
+**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 **Response:**
 
 The result dataset is comprised of the `data` object, as depicted in the following example response.
@@ -542,3 +544,5 @@ In the response, the next two results, `joe` with 500 `pageviews` and `chris` wi
 [3]: /account_management/api-app-keys/#application-keys
 [4]: https://curl.haxx.se/download.html
 [5]: /logs/explorer/search_syntax/
+[6]: /account_management/personal-access-tokens/
+[7]: /account_management/service-access-tokens/

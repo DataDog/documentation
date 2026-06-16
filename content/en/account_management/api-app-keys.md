@@ -9,6 +9,18 @@ algolia:
   tags: ['api key']
 ---
 
+## Credential types overview
+
+Datadog supports three credential types for API authentication:
+
+| Credential type | Authentication | Requires pairing | Linked to |
+|---|---|---|---|
+| API key + application key | `DD-API-KEY` + `DD-APPLICATION-KEY` headers | Yes | Individual user or service account |
+| [Personal Access Token (PAT)][22] | `Authorization: Bearer <token>` header | No | Individual user |
+| [Service Access Token (SAT)][23] | `Authorization: Bearer <token>` header | No | Service account |
+
+PATs and SATs are scoped by default and do not require pairing with an API key. Use them for programmatic API calls when you want tighter credential control. Reserve API keys for telemetry intake (Agent, logs, metrics).
+
 ## API keys
 
 API keys are unique to your organization. An [API key][1] is required by the Datadog Agent to submit metrics and events to Datadog.
@@ -60,7 +72,7 @@ In order to use application keys with these APIs, you must enable Actions API ac
 
 {{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
 
-**Note**: The {{< ui >}}Last used{{< /ui >}} section only shows if [Audit Trail is enabled][22] in the account and you have [`Audit Trail Read`][23] permission.
+**Note**: The {{< ui >}}Last used{{< /ui >}} section only shows if [Audit Trail is enabled][24] in the account and you have [`Audit Trail Read`][25] permission.
 
 ## Client tokens
 
@@ -196,5 +208,7 @@ Need help? Contact [Datadog support][19].
 [19]: /help/
 [20]: /account_management/org_settings/service_accounts/
 [21]: /api/latest/action-connection/#register-a-new-app-key
-[22]: /account_management/audit_trail/#setup
-[23]: /account_management/rbac/permissions/#compliance
+[22]: /account_management/personal-access-tokens/
+[23]: /account_management/service-access-tokens/
+[24]: /account_management/audit_trail/#setup
+[25]: /account_management/rbac/permissions/#compliance

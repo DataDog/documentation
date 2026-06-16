@@ -203,6 +203,8 @@ curl -X GET "https://api.datadoghq.com/api/v2/roles" \
  -H "DD-APPLICATION-KEY: <app_key>"
 {{< /code-block >}}
 
+**Note**: You can also authenticate with a [Personal Access Token (PAT)][1] or [Service Access Token (SAT)][2] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 This endpoint allows organizations to:
 - Audit the Datadog Admin Role
 - Inspect assigned permissions
@@ -293,3 +295,6 @@ Typically, administrators manage these controls within the Datadog organization 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/personal-access-tokens/
+[2]: /account_management/service-access-tokens/

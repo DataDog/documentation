@@ -91,6 +91,8 @@ Content-Type: application/json
 }
 ```
 
+**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -112,3 +114,5 @@ Content-Type: application/json
 [1]: /account_management/audit_trail/
 [2]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-synthetics#run-tests-command
 [3]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
+[4]: /account_management/personal-access-tokens/
+[5]: /account_management/service-access-tokens/

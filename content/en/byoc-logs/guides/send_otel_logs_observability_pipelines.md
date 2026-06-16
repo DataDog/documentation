@@ -113,6 +113,8 @@ curl -s -X POST "https://api.${DD_SITE}/api/v2/obs-pipelines/pipelines" \
   }' | jq -r '.data.id'
 ```
 
+**Note**: You can also authenticate with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 This command returns the `pipeline_id`. Save it for the next step.
 
 **Note**: The custom processor adds a `ddtags` field with custom tags to all logs through the `remaps` configuration.
@@ -231,4 +233,6 @@ docker rm byoc-logs opw
 [4]: https://docs.docker.com/get-docker/
 [5]: https://app.datadoghq.com/logs
 [6]: /observability_pipelines/
+[7]: /account_management/personal-access-tokens/
+[8]: /account_management/service-access-tokens/
 

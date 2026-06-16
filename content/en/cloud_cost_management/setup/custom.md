@@ -253,6 +253,8 @@ curl -L -X PUT "{{< region-param key="custom_costs_endpoint" >}}" \
 -F "file=${file};type=text/json"
 ```
 
+**Note**: You can also authenticate with a [Personal Access Token (PAT)][11] or [Service Access Token (SAT)][12] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 To send the content of the file programmatically, use the `PUT api/v2/cost/custom_costs` endpoint.
 
 For example, using cURL:
@@ -303,3 +305,5 @@ You can view custom costs data on the [**Cloud Cost Explorer** page][6], the [Cl
 [8]: /dashboards
 [9]: /notebooks
 [10]: /monitors/types/cloud_cost/
+[11]: /account_management/personal-access-tokens/
+[12]: /account_management/service-access-tokens/

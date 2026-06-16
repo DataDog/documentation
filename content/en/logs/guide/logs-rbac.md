@@ -74,6 +74,8 @@ If you plan to use the Datadog API, use the [Permissions API][11] to get all exi
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
+**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][22] or [Service Access Token (SAT)][23] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 ## Setting up roles
 
 This section guides you through creating two roles, `ACME Admin` and `ACME User`, granting them basic log permissions, and assigning users to these roles.
@@ -231,3 +233,5 @@ Create one or multiple [archives][17] for `team:acme` logs. Assign the [Read Arc
 [19]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
 [20]: /logs/archives#datadog-permissions
 [21]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
+[22]: /account_management/personal-access-tokens/
+[23]: /account_management/service-access-tokens/

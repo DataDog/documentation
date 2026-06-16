@@ -325,6 +325,8 @@ curl -X POST "https://api.datadoghq.com/api/v1/dashboard" \
 -d @DatadogAgentVersionCheck.json
 ```
 
+**Note**: You can also authenticate with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 **Note**: The Datadog Agent Version Check dashboard does not show older versions of the Datadog Agent (v5), because those versions are not vulnerable.
 
 ### With the CLI
@@ -341,3 +343,5 @@ You can also check specific Agent version information with the Agent CLI `versio
 [4]: /dashboards/#copy-import-or-export-dashboard-json
 [5]: /resources/json/agent-version-dashboard.json
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#other-commands
+[7]: /account_management/personal-access-tokens/
+[8]: /account_management/service-access-tokens/

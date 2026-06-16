@@ -36,6 +36,8 @@ curl -X GET "https://api.datadoghq.com/api/v2/domain_allowlist" \
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 
+**Note**: You can also authenticate with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 ### Response
 
 {{< tabs >}}
@@ -219,3 +221,5 @@ Too many requests
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/org_settings/domain_allowlist
+[2]: /account_management/personal-access-tokens/
+[3]: /account_management/service-access-tokens/

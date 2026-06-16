@@ -164,6 +164,8 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
 }'
 ```
 
+**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][10] or [Service Access Token (SAT)][11] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 Example response:
 
 ```json
@@ -377,3 +379,5 @@ If you restrict analysis to specific categories of logs, take care not to exclud
 [7]: /security/cloud_siem/ingest_and_enrich/content_packs
 [8]: /logs/log_configuration/pipelines/
 [9]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
+[10]: /account_management/personal-access-tokens/
+[11]: /account_management/service-access-tokens/

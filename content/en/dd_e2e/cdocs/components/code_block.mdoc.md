@@ -37,6 +37,8 @@ if __name__ == "__main__":
     print(data)
 ```
 
+**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][1] or [Service Access Token (SAT)][2] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 ### Copy disabled
 
 ```bash {% filename="dangerous_command.sh" collapsible=false disable_copy=true wrap=false %}
@@ -91,3 +93,6 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 statsd.increment('example.counter')
 statsd.gauge('example.gauge', 42)
 ```
+
+[1]: /account_management/personal-access-tokens/
+[2]: /account_management/service-access-tokens/

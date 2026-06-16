@@ -34,6 +34,8 @@ You can configure log processing pipelines using a JSON file that adheres to the
     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > pipelines-config.json
    ```
 
+   **Note**: You can also authenticate with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+
 This JSON file can be used directly with BYOC Logs.
 
 2. To set the configuration in the Helm Chart, provide the path to your JSON configuration file using the `pipelinesConfig` parameter in the BYOC Logs Helm chart:
@@ -138,3 +140,5 @@ Ignored processors appear as a warning in the indexer logs.
 [1]: /logs/log_configuration/pipelines/?tab=source
 [2]: /api/latest/logs-pipelines/#get-all-pipelines
 [3]: /logs/log_configuration/processors/
+[4]: /account_management/personal-access-tokens/
+[5]: /account_management/service-access-tokens/

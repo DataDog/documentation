@@ -29,7 +29,22 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 ### Getting started
 
-Authenticate to the API with an [API key][1] using the header `DD-API-KEY`. For some endpoints, you also need an [Application key][2], which uses the header `DD-APPLICATION-KEY`.
+You can authenticate to the Datadog API with one of the following credential types:
+
+- **API key and application key**: Pass your [API key][1] in the `DD-API-KEY` header and your [application key][2] in the `DD-APPLICATION-KEY` header.
+
+  ```bash
+  curl -X GET "https://api.datadoghq.com/api/v2/users" \
+    -H "DD-API-KEY: ${DD_API_KEY}" \
+    -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+  ```
+
+- **Personal Access Token (PAT) or Service Access Token (SAT)**: Pass the token as a Bearer credential in the `Authorization` header. PATs and SATs authenticate without an API key. See [Personal Access Tokens][8] and [Service Access Tokens][9].
+
+  ```bash
+  curl -X GET "https://api.datadoghq.com/api/v2/users" \
+    -H "Authorization: Bearer <YOUR_PAT_OR_SAT>"
+  ```
 
 To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa)
 
@@ -260,3 +275,5 @@ Trying to get started with the application instead? Check out Datadog's general 
 [5]: https://brew.sh
 [6]: https://docs.datadoghq.com/extend/community/libraries/
 [7]: /getting_started/application/
+[8]: /account_management/personal-access-tokens/
+[9]: /account_management/service-access-tokens/
