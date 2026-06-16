@@ -352,8 +352,6 @@ See [Cluster Checks][3] for more context.
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-<div class="alert alert-info">Configuring Autodiscovery with the <code>DatadogInstrumentation</code> custom resource is in beta.</div>
-
 You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
 
 ```yaml

@@ -31,7 +31,7 @@ For more information about containers and integrations, see [Docker and Integrat
 
 All examples make use of Datadog's Autodiscovery feature, which allows you to define configuration templates for Agent Checks on designated sets of containers. For more information about Autodiscovery, see [Getting Started with Containers: Autodiscovery][1].
 
-To configure these checks for a specific workload without using pod annotations, see [Configure Autodiscovery with the DatadogInstrumentation CRD][13] (beta).
+To configure these checks for a specific workload without using pod annotations, see [Configure Autodiscovery with the DatadogInstrumentation CRD][13].
 
 ## Redis integration for all Redis containers
 
