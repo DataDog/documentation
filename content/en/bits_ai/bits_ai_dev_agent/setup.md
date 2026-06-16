@@ -18,9 +18,9 @@ If your organization uses custom roles, an admin must add this permission manual
 Set up Bits Code for one of the [supported source code providers][11].
 
 {{< tabs >}}
-{{% tab "GitHub" %}}
 
-1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
+{{% tab "GitHub" %}}
+1. Install the [GitHub integration][1]. For full installation and configuration steps, see the [GitHub integration guide][2].
 1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
    1. To enable basic Bits Code functionality, set the following permissions:
       - {{< ui >}}Repository permissions{{< /ui >}}
@@ -38,15 +38,24 @@ Set up Bits Code for one of the [supported source code providers][11].
          - Issue comment  
          - Status
 
+[1]: https://app.datadoghq.com/integrations/github
+[2]: /integrations/github/
 {{% /tab %}}
+
 {{% tab "GitLab" %}}
+1. Install the [GitLab Source Code integration][1]. For full installation and configuration steps, see the [GitLab Source Code integration guide][2].
+1. Ensure the GitLab [service account][3] has the following configurations:
+   - The service account must have the [`Developer` role][4] on the project. This role can be inherited from a [group][5].
+   - The service account's personal access token must have the following [scopes][6]: `api`, `write_repository`, and `read_user`.
 
-1. Install the [GitLab Source Code integration][9]. For full installation and configuration steps, see the [GitLab Source Code integration guide][10].
-1. Ensure the GitLab [service account][16] has the following configurations:
-   - The service account must have the [`Developer` role][12] on the project. This role can be inherited from a [group][13].
-   - The service account's personal access token must have the following [scopes][15]: `api`, `write_repository`, and `read_user`.
-
+[1]: https://app.datadoghq.com/integrations/gitlab-source-code
+[2]: /integrations/gitlab-source-code/
+[3]: https://docs.gitlab.com/user/profile/service_accounts/
+[4]: https://docs.gitlab.com/user/permissions/#default-roles
+[5]: https://docs.gitlab.com/user/permissions/#groups
+[6]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ## Additional configuration  
@@ -77,14 +86,12 @@ To balance safety and automation, you can configure auto-push behavior in [Datad
 ### Configure custom instructions
 
 Bits Code ingests custom instruction files from your repository, including:
-
 - `.cursorrules`
 - `.windsurfrules`
 - `copilot-instructions.md`
 - `CLAUDE.md`
 - `AGENTS.md`
 - `agent.md`
-
 
 You can also define global custom instructions, which apply to all Bits Code sessions, in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
 
@@ -139,16 +146,9 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 
 [1]: /account_management/rbac/permissions/#bits-ai
 [2]: https://app.datadoghq.com/integrations/github
-[3]: /integrations/github/
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
 [6]: https://app.datadoghq.com/code/settings
 [7]: /bits_ai/bits_ai_dev_agent/#start-a-session
 [8]: /bits_ai/bits_ai_dev_agent/
-[9]: https://app.datadoghq.com/integrations/gitlab-source-code
-[10]: /integrations/gitlab-source-code/
 [11]: /bits_ai/bits_ai_dev_agent/#supported-source-code-providers
-[12]: https://docs.gitlab.com/user/permissions/#default-roles
-[13]: https://docs.gitlab.com/user/permissions/#groups
-[15]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
-[16]: https://docs.gitlab.com/user/profile/service_accounts/
