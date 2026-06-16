@@ -39,11 +39,11 @@ Para utilizar la creación automática de tickets, instala la integración a tra
 4. Añade una condición para definir cuándo crear automáticamente un problema de Jira. Si esta condición se deja en blanco, se crea un problema de Jira para todos los incidents (incidentes) nuevos.
 5. Define una plantilla con variables dinámicas para rellenar los campos del ticket de Jira. Escribe `{{` para insertar variables de plantilla de incident (incidente) en campos como **Summary** (Resumen), **Reporter** (Informador) y **Description** (Descripción). Las variables dinámicas solo funcionan con **string** (cadenas) [tipos de campo de Jira][5].
 
-{{< img src="incident_response/incident_management/guide/jira/incident_jira_settings.png" alt="Configuraciones de integración de Jira en las que se muestran ajustes de la cuenta, reglas de creación condicionales y propiedades de Jira con variables de plantilla" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/guides/jira/incident_jira_settings.png" alt="Configuraciones de integración de Jira en las que se muestran ajustes de la cuenta, reglas de creación condicionales y propiedades de Jira con variables de plantilla" style="width:80%;" >}}
 
 6. Configura las asignaciones de estado y gravedad para sincronizar los estados y gravedad de incident (incidente) con los estados y prioridades de Jira.
 
-{{< img src="incident_response/incident_management/guide/jira/incident_jira_mappings.png" alt="Asignaciones de estado y de gravedad de Jira en las que se muestran estados de incident (incidente) asignados a estados y niveles de gravedad de Jira asignados a propiedades de Jira" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/guides/jira/incident_jira_mappings.png" alt="Asignaciones de estado y de gravedad de Jira en las que se muestran estados de incident (incidente) asignados a estados y niveles de gravedad de Jira asignados a propiedades de Jira" style="width:80%;" >}}
 
 A medida que se crean incidents (incidentes), también se crea un problema en la instancia de Jira correspondiente. Este problema de Jira se vincula al incident (incidente) en Datadog como referencia.
 El problema de Jira se sincroniza unidireccionalmente con el incident (incidente) en función de la plantilla y de las asignaciones definidas en la [page (página) de Configuración de integración][3].
