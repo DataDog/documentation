@@ -90,17 +90,21 @@ To enable OTLP export from a managed platform not listed above, contact your Cus
 
 ## Limitations
 
-### No client-side buffering or retry
+### No metadata enrichment
 
-Because there is no client-side component, managed platform endpoints do not support buffering, batching, or retry logic. If network connectivity drops or traffic spikes, data loss may occur. The [OpenTelemetry Collector][2] and [Datadog Agent][1] handle these scenarios automatically.
+Without a Collector or Agent, telemetry is not enriched with host metadata. Features that depend on this metadata (for example, the [Infrastructure Host List][8]) are unavailable. See the [OpenTelemetry compatibility list][4] for the full list of affected features.
+
+### Limited normalization
+
+Some signal processing that a Collector or Agent performs automatically does not happen with direct ingest. For example, cumulative-to-delta metric conversion requires a stateful component. If your platform exports cumulative metrics, configure your SDK or pipeline to export delta temporality.
 
 ### Trace metrics
 
 Trace metrics are not computed by default because traffic from managed platforms may already be sampled at the source. To enable trace metrics, add `compute_stats=true` to your exporter headers.
 
-### Feature coverage
+### Sampling
 
-Some Datadog features depend on metadata added by the Collector or Agent (for example, the Infrastructure Host List). See the [OpenTelemetry compatibility list][4] for features that are unavailable when using direct ingest endpoints. Sampling ability is also limited in this setup.
+Sampling controls available in the Collector (tail-based sampling, probabilistic sampling) are not available with direct ingest. Managed platforms may apply their own sampling before export.
 
 ## Further reading
 
@@ -113,6 +117,7 @@ Some Datadog features depend on metadata added by the Collector or Agent (for ex
 [5]: /opentelemetry/setup/otlp_ingest/serverless/
 [6]: /opentelemetry/setup/otlp_ingest/logs/
 [7]: /opentelemetry/setup/otlp_ingest/metrics/
+[8]: /infrastructure/list/
 [10]: https://buildkite.com/docs/pipelines/integrations/observability/opentelemetry
 [11]: https://developers.cloudflare.com/workers/observability/exporting-opentelemetry-data/
 [12]: https://grafbase.com/docs/gateway/observability

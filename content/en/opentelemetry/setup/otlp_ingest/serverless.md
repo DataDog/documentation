@@ -27,7 +27,7 @@ Supported platforms:
 - **Azure**: Container Apps, Web Apps (App Service), Azure Functions
 - **GCP**: Cloud Run, Cloud Run Functions, GKE Autopilot
 
-<div class="alert alert-info">Use direct ingest when running a Collector is impractical (for example, Lambda). If you can run a Collector, see <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> for buffering, retry, and centralized sampling.</div>
+<div class="alert alert-info">Use direct ingest when running a Collector is impractical (for example, Lambda). If you can run a Collector, see <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> for metadata enrichment, normalization, and centralized sampling.</div>
 
 ## Prerequisites
 
