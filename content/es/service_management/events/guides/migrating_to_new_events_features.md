@@ -45,18 +45,18 @@ El Events Explorer muestra los eventos más recientes generados por tu infraestr
 
 ### Event Analytics
 
-{{< img src="service_management/events/events-analytics.png" alt="Visualización de Events Analytics filtrada por 'source:cloudtrail'" >}}
+{{< img src="events/events-analytics.png" alt="Visualización de Events Analytics filtrada por 'source:cloudtrail'" >}}
 
 Además de ver y buscar eventos en el Explorer, ahora puedes realizar gráficas como la serie temporal, lista principal o tabla y agrupar el número de eventos para una consulta determinada. Consulta la sección de [Event Analytics][2] para obtener más información.
 
 También puedes [generar métricas][3] con retención de 15 meses a partir de cualquier consulta de búsqueda de eventos para crear monitores y alertas basados en eventos históricos.
 
-{{< img src="service_management/events/generate-metrics.png" alt="Imagen de métricas con la consulta de búsqueda de eventos." >}}
+{{< img src="events/generate-metrics.png" alt="Imagen de métricas con la consulta de búsqueda de eventos." >}}
 
 
 ### Graficar eventos en dashboards
 
-{{< img src="service_management/events/graph-events.png" alt="Events Analytics">}}
+{{< img src="events/graph-events.png" alt="Events Analytics">}}
 
 Ahora puedes graficar eventos para una consulta determinada en tus dashboards como una gráfica de serie temporal, valor de consulta, lista principal, tabla y mucho más.
 
@@ -68,7 +68,7 @@ Los monitores de eventos se han adaptado para utilizar el mismo conjunto estanda
 
 Al crear monitores de eventos, el campo de búsqueda de consultas nuevo utiliza la función de autocompletar, en lugar de la consulta heredada para completar espacios en blanco.
 
-{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="Interfaz de usuario nueva para la sintaxis de consulta de monitores" style="width:100%;" >}}
+{{< img src="events/guides/events-migration-monitor-new.png" alt="Interfaz de usuario nueva para la sintaxis de consulta de monitores" style="width:100%;" >}}
 
 La búsqueda de consultas nueva te permite utilizar consultas complejas en monitores de eventos con funcionalidades nuevas, como operadores booleanos o comodines.
 
@@ -194,10 +194,10 @@ Los monitores de eventos heredados no admiten el rollup de cardinalidad.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /es/service_management/events/explorer
-[2]: /es/service_management/events/explorer/analytics
-[3]: /es/service_management/events/usage/#custom-metrics
+[1]: /es/events/explorer
+[2]: /es/events/explorer/analytics
+[3]: /es/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
-[5]: /es/service_management/events/guides/new_events_sources/
+[5]: /es/events/guides/new_events_sources/
 [6]: /es/help/
 [7]: /es/api/latest/monitors/#create-a-monitor

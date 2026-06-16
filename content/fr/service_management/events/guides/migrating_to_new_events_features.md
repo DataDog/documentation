@@ -46,18 +46,18 @@ L'Events Explorer affiche les événements les plus récents générés par vot
 
 ### Analyse d'événements
 
-{{< img src="service_management/events/events-analytics.png" alt="Écran d'analyse d'événements avec le filtre « source:cloudtrail »" >}}
+{{< img src="events/events-analytics.png" alt="Écran d'analyse d'événements avec le filtre « source:cloudtrail »" >}}
 
 En plus de visualiser et rechercher des événements dans l'Events Explorer, vous pouvez désormais créer des graphiques sous forme de séries temporelles, de top list ou de tableau et regrouper les événements associés à une requête donnée. Consultez la section sur l'[analyse d'événements][2] pour en savoir plus.
 
 Vous pouvez également [générer des métriques][3] avec une période de rétention de 15 mois à partir de n'importe quelle requête de recherche d'événements pour créer des monitors et des alertes en fonction des événements historiques.
 
-{{< img src="service_management/events/generate-metrics.png" alt="Image de métriques avec la requête de recherche d'événements." >}}
+{{< img src="events/generate-metrics.png" alt="Image de métriques avec la requête de recherche d'événements." >}}
 
 
 ### Créer des graphiques d'événements dans les dashboards
 
-{{< img src="service_management/events/graph-events.png" alt="Analyse d'événements">}}
+{{< img src="events/graph-events.png" alt="Analyse d'événements">}}
 
 Vous pouvez désormais créer des graphiques d'événements pour une requête donnée au sein de vos dashboards sous forme de série temporelle, de valeur de requête, de top list, de tableau, et plus encore.
 
@@ -69,7 +69,7 @@ Les nouveaux monitors d'événement ont été conçus pour offrir les mêmes fon
 
 Lorsque vous créez des monitors d'événement, le nouveau champ de requête de recherche prend désormais en charge l'autocomplétion : vous n'avez plus besoin de tout saisir manuellement.
 
-{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="Nouvelle interface pour la syntaxe de requête de monitor" style="width:100%;" >}}
+{{< img src="events/guides/events-migration-monitor-new.png" alt="Nouvelle interface pour la syntaxe de requête de monitor" style="width:100%;" >}}
 
 La nouvelle syntaxe de recherche vous permet d'utiliser des requêtes complexes dans des monitors d'événement, notamment grâce à la prise en charge des opérateurs booléens ou des wildcards.
 
@@ -195,10 +195,10 @@ Les anciens monitors d'événement ne prennent pas en charge la méthode de roll
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/service_management/events/explorer
-[2]: /fr/service_management/events/explorer/analytics
-[3]: /fr/service_management/events/#generate-custom-metrics-from-events
+[1]: /fr/events/explorer
+[2]: /fr/events/explorer/analytics
+[3]: /fr/events/#generate-custom-metrics-from-events
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
-[5]: /fr/service_management/events/guides/new_events_sources/
+[5]: /fr/events/guides/new_events_sources/
 [6]: /fr/help/
 [7]: /fr/api/latest/monitors/#create-a-monitor
