@@ -19816,7 +19816,7 @@ menu:
         operationids:
           - CancelWorkflowInstance
         unstable: []
-        order: 8
+        order: 9
     - name: Get a workflow instance
       url: /api/latest/workflow-automation/get-a-workflow-instance/
       identifier: workflow-automation-get-a-workflow-instance
@@ -19828,7 +19828,7 @@ menu:
         operationids:
           - GetWorkflowInstance
         unstable: []
-        order: 7
+        order: 8
     - name: Execute a workflow
       url: /api/latest/workflow-automation/execute-a-workflow/
       identifier: workflow-automation-execute-a-workflow
@@ -19840,7 +19840,7 @@ menu:
         operationids:
           - CreateWorkflowInstance
         unstable: []
-        order: 6
+        order: 7
     - name: List workflow instances
       url: /api/latest/workflow-automation/list-workflow-instances/
       identifier: workflow-automation-list-workflow-instances
@@ -19852,7 +19852,7 @@ menu:
         operationids:
           - ListWorkflowInstances
         unstable: []
-        order: 5
+        order: 6
     - name: Update an existing Workflow
       url: /api/latest/workflow-automation/update-an-existing-workflow/
       identifier: workflow-automation-update-an-existing-workflow
@@ -19864,7 +19864,7 @@ menu:
         operationids:
           - UpdateWorkflow
         unstable: []
-        order: 3
+        order: 4
     - name: Get an existing Workflow
       url: /api/latest/workflow-automation/get-an-existing-workflow/
       identifier: workflow-automation-get-an-existing-workflow
@@ -19876,7 +19876,7 @@ menu:
         operationids:
           - GetWorkflow
         unstable: []
-        order: 1
+        order: 2
     - name: Delete an existing Workflow
       url: /api/latest/workflow-automation/delete-an-existing-workflow/
       identifier: workflow-automation-delete-an-existing-workflow
@@ -19888,7 +19888,7 @@ menu:
         operationids:
           - DeleteWorkflow
         unstable: []
-        order: 4
+        order: 5
     - name: Create a Workflow
       url: /api/latest/workflow-automation/create-a-workflow/
       identifier: workflow-automation-create-a-workflow
@@ -19900,4 +19900,16 @@ menu:
         operationids:
           - CreateWorkflow
         unstable: []
-        order: 2
+        order: 3
+    - name: List workflows
+      url: /api/latest/workflow-automation/list-workflows/
+      identifier: workflow-automation-list-workflows
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflows
+        unstable: []
+        order: 1
