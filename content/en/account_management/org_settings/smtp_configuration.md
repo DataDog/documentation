@@ -23,7 +23,7 @@ The SMTP Configuration page in Organization Settings lets you connect your own S
 After you add and validate your SMTP server, you can select it as the email sender domain on your [status pages][2].
 
 <div class="alert alert-info">
-If the selected SMTP server fails, notifications are sent through Datadog Default (`no-reply@dtdg.co`).
+If the selected SMTP server fails, notifications are sent through Datadog Default (<code>no-reply@dtdg.co</code>).
 </div>
 
 ## Supported providers
