@@ -29,7 +29,7 @@ Learn how your Bits Code usage is billed on [AI Credits][27].
 Bits Code supports the following source code platforms:
 
 - **GitHub**: GitHub.com and GitHub Enterprise Cloud
-- **GitLab**: GitLab.com
+- **GitLab**: GitLab.com and GitLab Dedicated
 
 Self-hosted platforms, such as GitHub Enterprise Server and GitLab Self-Managed, are not supported.
 
