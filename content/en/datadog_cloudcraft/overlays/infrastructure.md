@@ -35,7 +35,7 @@ Resources are organized in a hierarchical structure. The grouping labels vary by
 | Level | AWS | Azure | GCP | OCI | vSphere |
 |-------|-----|-------|-----|-----|---------|
 | Top-level | Account | Subscription | Project | Tenancy | vCenter |
-| Second | — | — | — | Compartment | Datacenter |
+| Second | — | Resource Group | — | Compartment | Datacenter |
 | Geographic | Region | Region | Region | Region | — |
 | Network | VPC | Virtual Network | VPC | VCN | Cluster |
 
