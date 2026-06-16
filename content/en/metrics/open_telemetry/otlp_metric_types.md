@@ -82,7 +82,7 @@ The default mapping for both histogram temporality types is as follows:
 
 **Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for configuration instructions.
 
-Explicit and Exponential Histograms are stored natively in Datadog, preserving the original bucket boundaries and counts. Percentile aggregations are computed directly from the native bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
+Percentile aggregations are computed directly from the native bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
 
 The Datadog Agent and the OpenTelemetry Collector OTLP Exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:
