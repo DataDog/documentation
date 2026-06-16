@@ -54,7 +54,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 **Response:**
 

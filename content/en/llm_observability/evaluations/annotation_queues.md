@@ -204,7 +204,7 @@ curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
   --data-urlencode "filter[trace_id]=<TRACE_ID>"
 {{< /code-block >}}
 
-**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][15] or [Service Access Token (SAT)][16] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][15] or [Service Access Token (SAT)][16] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 **By session ID**:
 

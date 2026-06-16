@@ -238,7 +238,7 @@ curl -X POST \
   https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
 {{< /code-block >}}
 
-   **Note**: You can also authenticate with a [Personal Access Token (PAT)][17] or [Service Access Token (SAT)][18] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+   **Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][17] or [Service Access Token (SAT)][18] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
    If the workflow includes input parameters, include them in the request payload. The following example uses two input parameters, `example_input1` and `example_input2`:
 

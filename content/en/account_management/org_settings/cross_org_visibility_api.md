@@ -30,7 +30,7 @@ curl -X get "https://{datadog_site}/api/v2/org_connections/" \
   -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
 {{< /code-block >}}
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 ## Create a connection
 

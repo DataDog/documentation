@@ -248,7 +248,7 @@ curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
   }'
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][11] or [Service Access Token (SAT)][12] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][11] or [Service Access Token (SAT)][12] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 To use the example above:
 - Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.

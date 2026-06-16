@@ -90,7 +90,7 @@ curl -X POST "https://api.${DD_SITE}/api/v2/query/scalar" \
   }'
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][5] or [Service Access Token (SAT)][6] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][5] or [Service Access Token (SAT)][6] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 | Field | Description |
 |-------|-------------|

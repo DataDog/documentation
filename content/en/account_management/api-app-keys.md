@@ -13,13 +13,13 @@ algolia:
 
 Datadog supports three credential types for API authentication:
 
-| Credential type | Authentication | Requires pairing | Linked to |
-|---|---|---|---|
-| API key + application key | `DD-API-KEY` + `DD-APPLICATION-KEY` headers | Yes | Individual user or service account |
-| [Personal Access Token (PAT)][22] | `Authorization: Bearer <token>` header | No | Individual user |
-| [Service Access Token (SAT)][23] | `Authorization: Bearer <token>` header | No | Service account |
+| Credential type | Authentication | Requires pairing | Linked to | Recommended |
+|---|---|---|---|---|
+| [Personal Access Token (PAT)][22] | `Authorization: Bearer <token>` header | No | Individual user | Yes |
+| [Service Access Token (SAT)][23] | `Authorization: Bearer <token>` header | No | Service account | Yes |
+| API key + application key | `DD-API-KEY` + `DD-APPLICATION-KEY` headers | Yes | Individual user or service account | - |
 
-PATs and SATs are scoped by default and do not require pairing with an API key. Use them for programmatic API calls when you want tighter credential control. Reserve API keys for telemetry intake (Agent, logs, metrics).
+Datadog recommends PATs and SATs for programmatic API calls. They are scoped by default and do not require pairing credentials. Reserve API keys for telemetry intake (Agent, logs, metrics).
 
 ## API keys
 

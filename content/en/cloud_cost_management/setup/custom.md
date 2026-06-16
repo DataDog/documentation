@@ -253,7 +253,7 @@ curl -L -X PUT "{{< region-param key="custom_costs_endpoint" >}}" \
 -F "file=${file};type=text/json"
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][11] or [Service Access Token (SAT)][12] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][11] or [Service Access Token (SAT)][12] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 To send the content of the file programmatically, use the `PUT api/v2/cost/custom_costs` endpoint.
 

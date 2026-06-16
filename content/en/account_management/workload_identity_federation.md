@@ -116,7 +116,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 }'
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 ##### Map an AWS ARN to a Datadog service account
 For `account_identifier`, you can use either:

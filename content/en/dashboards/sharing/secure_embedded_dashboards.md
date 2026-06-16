@@ -398,7 +398,7 @@ def manage_tenant(tenant_id: str):
         delete_tenant_credentials(tenant_id)
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 ### Generate the iFrame URL
 

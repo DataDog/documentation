@@ -37,7 +37,7 @@ if __name__ == "__main__":
     print(data)
 ```
 
-**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][1] or [Service Access Token (SAT)][2] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][1] or [Service Access Token (SAT)][2] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 ### Copy disabled
 

@@ -113,7 +113,7 @@ curl -s -X POST "https://api.${DD_SITE}/api/v2/obs-pipelines/pipelines" \
   }' | jq -r '.data.id'
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 This command returns the `pipeline_id`. Save it for the next step.
 

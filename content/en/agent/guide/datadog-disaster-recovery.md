@@ -88,7 +88,7 @@ curl -v -H "Content-Type: application/json" -H \
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][18] or [Service Access Token (SAT)][19] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][18] or [Service Access Token (SAT)][19] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 After linking your orgs, only the failover org displays this banner:
 

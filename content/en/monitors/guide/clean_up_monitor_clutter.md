@@ -61,7 +61,7 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_muted.csv
 ```
 
-**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][12] or [Service Access Token (SAT)][13] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][12] or [Service Access Token (SAT)][13] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 This gives you the details of your monitors in a CSV file for readability. You can refine the query to your specific use case.
 

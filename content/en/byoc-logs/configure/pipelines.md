@@ -34,7 +34,7 @@ You can configure log processing pipelines using a JSON file that adheres to the
     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > pipelines-config.json
    ```
 
-   **Note**: You can also authenticate with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+   **Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 This JSON file can be used directly with BYOC Logs.
 

@@ -74,7 +74,7 @@ If you plan to use the Datadog API, use the [Permissions API][11] to get all exi
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
-**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][22] or [Service Access Token (SAT)][23] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][22] or [Service Access Token (SAT)][23] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 ## Setting up roles
 

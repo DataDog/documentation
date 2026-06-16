@@ -451,7 +451,7 @@ The script has the following characteristics:
 
 This is a general behavior, and you should change it based on your personal use case and preferences. The script uses `curl` (to perform the request) and `jq` (to process the returned JSON). If those commands are not available, install them at the beginning of the script (for example, by adding `apk add --no-cache curl jq`).
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys

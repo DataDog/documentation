@@ -61,7 +61,7 @@ curl -s -XPOST \
   https://app.datadoghq.com/api/v2/ai-guard/evaluate
 ```
 
-**Note**: You can also authenticate these API calls with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 #### Response {#api-example-generic-response}
 

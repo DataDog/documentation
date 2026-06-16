@@ -36,7 +36,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/domain_allowlist" \
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 
-**Note**: You can also authenticate with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header, without pairing an API key with an application key.
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 ### Response
 
