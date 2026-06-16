@@ -4,7 +4,7 @@ Review the changes on the current branch for the `astro/` site. This command sup
 
 ## 1. Establish the diff
 
-1. Ask the user what code to review. Usually, this will be `git diff --staged`, not the entire branch against master. This is a very large feature branch, don't review all of it.
+1. Review `git diff --staged`, not the entire branch against master. This is a very large feature branch, don't review all of it.
 
 2. Review **only what's in the identified diff.** Don't flag pre-existing issues in untouched code. If you spot one and it's important, note it separately as "out of scope," don't block on it.
 

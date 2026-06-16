@@ -92,3 +92,11 @@ The API reference pages are generated at build time from the v1 and v2 OpenAPI s
 ## Auditing guidelines
 
 To manually audit the Astro API docs against the Hugo API docs, you don't need to review every category page — a representative set covers every rendering path. For the page inventory, the minimum audit set, and the per-endpoint checklist, see [docs/api/reference/audit_cases.md](docs/api/reference/audit_cases.md).
+
+## Claude Code commands
+
+This project includes a custom Claude Code slash command for code review.
+
+### `/staged-code-review`
+
+Reviews staged changes using the relevant checklists. To run it, open Claude Code in the `astro/` directory and type `/staged-code-review`.
