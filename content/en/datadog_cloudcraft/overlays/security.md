@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-**Note**: The Security overlay is not available for vSphere accounts.
+<div class="alert alert-info">The Security overlay is not available for vSphere accounts.</div>
 
 The Security overlay highlights potential security exposures in your architecture, grouping resources by Region, VPC, and Security Group. It displays security findings detected by Cloud Security, helping you:
 
