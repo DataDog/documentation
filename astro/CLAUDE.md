@@ -13,6 +13,7 @@ Prompts often refer to the "Hugo docs". This refers either to the general Hugo s
 - Flag any concerns and suggest any potential improvements to what I've asked for. 
 - If I left gaps in my instructions, ask questions.
 - After you implement something, list any best practices you used that aren't well known.
+- If you recommend a different approach than what was asked for, query the user before proceeding.
 
 ## Testing
 
@@ -66,7 +67,7 @@ The unit Vitest config redirects live spec imports to these fixtures via a plugi
 
 ## References
 
-Read these additional files as needed, when they are relevant to the task you're performing.
+Read these additional files as needed, when they are relevant to the task you're performing. Each checklist may link to sub-checklists or reference docs — only follow those links if the sub-topic applies to your current task.
 
 Read [docs/css/checklists/all.md](docs/css/checklists/all.md) before
 - adding HTML to the project
@@ -82,3 +83,6 @@ Read [docs/api/checklists/all.md](docs/api/checklists/all.md) before
 - adding or changing a field on an API view shape or its Zod schema
 - adding or updating API spec test fixtures or snapshots
 
+Read [docs/testing/checklists/all.md](docs/testing/checklists/all.md) before
+- writing or updating tests
+- adding test fixtures or snapshot baselines

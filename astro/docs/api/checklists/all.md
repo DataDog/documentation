@@ -2,8 +2,6 @@
 
 Read [docs/api/reference/pipeline.md](../reference/pipeline.md) first to understand the data flow, then use this checklist when you add to or change any part of [src/lib/api/](../../../src/lib/api/). Check items off once your change is implemented.
 
-Query the user if you recommend another approach in any case.
-
 ## Checklist
 
 ### Schemas are the source of truth

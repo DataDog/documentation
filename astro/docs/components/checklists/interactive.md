@@ -14,19 +14,7 @@ When you create or update an interactive component, read this checklist ahead of
 
 ### Testing
 
-- `cleanup()` from `@testing-library/preact` is called in an `afterEach` to prevent DOM leakage between tests.
-
-### Headless testing (Vitest)
-
-- Preact components are rendered with `@testing-library/preact`.
-
-- User interactions are driven with `@testing-library/user-event`.
-
-- The tests cover any potential user interactions (clicking, typing, keyboard navigations).
-
-- The tests cover the visibility states of any elements that can be revealed or hidden.
-
-- The tests assert that the correct BEM modifier classes (e.g. `tabs__button--active`) are applied after interaction. These classes are the stable DOM hook for identifying component state; CSS-module hashes are not.
+- All items in the [interactive components testing checklist](../../testing/checklists/interactive_components.md) have been verified.
 
 ### Translation
 

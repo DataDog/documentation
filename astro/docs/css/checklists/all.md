@@ -2,8 +2,6 @@
 
 When you create or update CSS, read this checklist ahead of time so it can inform your design, then check it off once your design has been implemented. 
 
-Query the user if you recommend another approach in any case.
-
 ## Checklist
 
 ### Modularity

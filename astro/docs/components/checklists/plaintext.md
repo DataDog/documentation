@@ -5,8 +5,6 @@ alongside its component at `src/components/<Name>/plaintext/<Name>.ts`, with tes
 
 When you create or update a plaintext twin — or change the HTML component it mirrors — read this checklist ahead of time so it can inform your design, then check it off once your change is implemented.
 
-Query the user if you recommend another approach in any case.
-
 ## Checklist
 
 ### It is a twin, not a new renderer

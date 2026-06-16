@@ -2,8 +2,6 @@
 
 When you create or update CSS for an Astro or Preact component, read this checklist ahead of time so it can inform your design, then check it off once your design has been implemented. 
 
-Query the user if you recommend another approach in any case.
-
 ## Checklist
 
 - Every meaningful HTML chunk inside a component should have a BEM class (e.g. `tabs__button--active`) for stable DOM identification. See [BEM class usage](../reference/bem_class_usage.md).
