@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code platforms](#supported-source-code-platforms) to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
+Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
@@ -24,14 +24,14 @@ To get started with Bits Code, [set up the GitHub or GitLab integration][6] and 
 
 Learn how your Bits Code usage is billed on [AI Credits][27].
 
-## Supported source code platforms
+## Supported source code providers
 
-Bits Code supports the following source code platforms:
+Bits Code supports the following source code providers:
 
 - **GitHub**: GitHub.com and GitHub Enterprise Cloud
 - **GitLab**: GitLab.com and GitLab Dedicated
 
-Self-hosted platforms, such as GitHub Enterprise Server and GitLab Self-Managed, are not supported.
+Self-hosted providers, such as GitHub Enterprise Server and GitLab Self-Managed, are not supported.
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
@@ -89,7 +89,7 @@ You can build automations from triggers (a product finding, a custom prompt, a s
 
 ### Pull request collaboration
 
-Bits Code integrates with [source code providers](#supported-source-code-platforms) to:
+Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull requests, generating titles and descriptions based on your repository's pull request template
 - Iterate on pull requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
