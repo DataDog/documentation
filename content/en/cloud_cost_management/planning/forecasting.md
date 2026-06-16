@@ -52,9 +52,9 @@ To generate accurate forecasts, CCM requires:
 
 ## Bits and custom forecasts
 
-The forecast that Datadog generates automatically from your historical spend is called the **Bits forecast**. Because it is trend-based, it projects past patterns forward but cannot account for business events you are planning, such as a product launch, a migration, or seasonal demand.
+The forecast that Datadog generates automatically from your historical spend is called the **Bits forecast**. Because it is trend-based, it projects past patterns forward but cannot account for planned business events, such as a product launch, migration, or seasonal demand.
 
-In [budgets][3], you can override the Bits forecast with your own monthly values, called a **custom forecast**. Datadog will overlay your custom forecast on top of the Bits forecast, so your overrides take precedence wherever you set them. The forecast with your overrides is what budgets and budget monitors use by default.
+In [budgets][3], you can override the Bits forecast with your own monthly values, called a **custom forecast**. Datadog overlays your custom forecast on the Bits forecast, so your overrides take precedence wherever you set them. Budgets and budget monitors use the forecast with your overrides by default.
 
 To set custom forecast values, see [Customize your budget forecast][4].
 
@@ -112,7 +112,7 @@ To view detailed forecast information:
 
 {{< img src="cloud_cost/forecasts/updated_budget_status_forecast-1.png" alt="Budget performance view showing the forecast toggle and forecasted costs displayed with a hatched pattern" style="width:100%;" >}}
 
-By default, Datadog combines the automatic Bits forecast with any custom forecast values you set in the budgets. To override the Bits forecast with your own monthly values, see [Customize your budget forecast][4].
+By default, Datadog combines the automatic Bits forecast with any custom forecast values you set in budgets. To override the Bits forecast with your own monthly values, see [Customize your budget forecast][4].
 
 ## Further reading
 

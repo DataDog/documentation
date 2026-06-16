@@ -141,7 +141,7 @@ Learn more about how [forecasting][3] works and data requirements.
 
 ## Customize your budget forecast
 
-Datadog automatically generates a **Bits forecast** for each budget, projecting future costs from your historical spend. When you have knowledge that the automatic forecast cannot capture, such as a planned product launch, a migration, seasonal demand, or workloads being retired, you can override the Bits forecast with your own values. This override is called a **custom forecast**.
+Datadog automatically generates a **Bits forecast** for each budget, projecting future costs from your historical spend. When you have knowledge that the Bits forecast cannot capture, such as a planned product launch, migration, seasonal demand, or retired workloads, you can override it with your own values. This override is called a **custom forecast**.
 
 Custom forecast values are:
 
@@ -164,24 +164,29 @@ Once set, your custom values take precedence over the Bits forecast on the budge
 
 1. Each forecast cell displays the Bits forecast as a gray placeholder. Enter a dollar amount to override it. Negative values are not allowed.
 
+   The preview chart updates as you edit, so you can review the final forecast before saving.
+
   {{< img src="cloud_cost/budgets/cust-fcst-during-create-table.png" alt="Toggle Customize Bits Forecast to display forecast columns" style="width:100%;">}}
 
-1. The preview chart updates as you edit, so you can review the final forecast before saving.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{% /tab %}}
 {{% tab "When editing a budget" %}}
 
-1. On the [Budgets page](https://app.datadoghq.com/cost/plan/budgets), click the edit icon for a budget.
-1. The forecast columns appear automatically when you have the `ccm_forecast_write` permission. Each forecast cell displays your saved override, or the Bits forecast as a gray placeholder when no override exists.
+1. On the [Budgets page][1], click the edit icon for a budget.
+
+   The forecast columns appear automatically if you have the `ccm_forecast_write` permission. Each forecast cell displays your saved override, or the Bits forecast as a gray placeholder when no override exists.
+
 1. Enter or change a dollar amount in any forecast cell. Negative values are not allowed.
 1. To compare your overrides against the original automatic values, toggle {{< ui >}}Show Bits AI forecast{{< /ui >}} to display a read-only Bits AI column next to each forecast column.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
+[1]: https://app.datadoghq.com/cost/plan/budgets
+
 {{% /tab %}}
 {{< /tabs >}}
 
-While editing, the appearance of a forecast cell indicates its state:
+While editing, the appearance of each forecast cell indicates its state:
 
 | Cell appearance | Meaning |
 |---|---|
@@ -191,13 +196,13 @@ While editing, the appearance of a forecast cell indicates its state:
 
 To remove an override, clear the cell. The cell reverts to the gray Bits forecast placeholder.
 
-<div class="alert alert-info">Datadog saves the budget first, and then the custom forecast. If the budget saves but the custom forecast does not, a notification prompts you to retry from the edit page.</div>
+<div class="alert alert-info">Datadog saves the budget first, and then saves the custom forecast. If the budget saves but the custom forecast does not, a notification prompts you to retry from the edit page.</div>
 
 ### How custom forecasts are used
 
 - **Budget status**: The budget status page and the forecast totals on the Budgets page include your custom forecast.
-- **Budget monitors**: [Budget monitors][2] when evaluating, a custom forecast takes precedence over the Bits forecast when one is present.
-- **CSV export**: Downloading a budget as CSV includes the custom forecast values where it was set.
+- **Budget monitors**: When [budget monitors][2] evaluate, a custom forecast takes precedence over the Bits forecast when one is present.
+- **CSV export**: Downloading a budget as a CSV includes the custom forecast values where they are set.
 - **Deleting a budget**: Deleting a budget also deletes its associated custom forecast values.
 
 ## Permissions
