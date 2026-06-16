@@ -14,7 +14,9 @@ const webServer = useDevServer
   : { command: `${buildCommand} && npm run preview`, port: 4322, reuseExistingServer: false, timeout: 600_000, stdout: 'pipe' as const, stderr: 'pipe' as const };
 
 export default defineConfig({
-  testDir: 'tests/browser',
+  testDir: '.',
+  testMatch: ['src/components/**/tests/browser.test.ts', 'src/components/**/tests/*.browser.test.ts', 'tests/browser/**/*.spec.ts'],
+  snapshotPathTemplate: '{testFileDir}/{testFileName}-snapshots/{arg}{-projectName}{-snapshotSuffix}{ext}',
   timeout: 30_000,
   reporter: [['list'], ['html', { open: 'on-failure' }]],
   webServer,

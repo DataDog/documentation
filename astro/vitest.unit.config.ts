@@ -60,9 +60,10 @@ export default getViteConfig({
     name: "unit",
     include: [
       "tests/headless/**/*.test.ts",
-      "src/components/**/*.test.ts",
-      "src/utils/**/*.test.ts",
+      "src/components/**/tests/unit.test.ts",
+      "src/components/**/tests/*.unit.test.ts",
       "src/lib/**/*.test.ts",
+      "src/config/**/*.test.ts",
     ],
   },
 });
