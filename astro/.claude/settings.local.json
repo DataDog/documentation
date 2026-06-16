@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(wait:*)",
+      "Bash(grep -E \"\\\\.\\(js|ts|tsx\\)$\")",
+      "Bash(npx vitest:*)",
+      "Bash(curl -s http://localhost:4322/api/latest/)",
+      "Bash(pkill -f \"astro dev\")",
+      "Bash(curl -s http://localhost:1314/api/latest/action-connection/)",
+      "Bash(SKIP_TRANSLATIONS=true npx vitest run src/components/Header/LogoDownloadPanel.test.ts)",
+      "Bash(SKIP_TRANSLATIONS=true npx vitest run tests/headless/api-html-snapshots.test.ts --update)",
+      "Bash(SKIP_TRANSLATIONS=true npx vitest run)",
+      "Bash(git log:*)",
+      "Bash(grep -r \"space-\" /Users/jen.gilbert/go/src/github.com/DataDog/documentation/astro/src/styles/tokens/*.css)",
+      "Bash(identify tests/browser/search-bar.spec.ts-snapshots/search-bar-closed-chromium-darwin.png)",
+      "Bash(sips -g pixelHeight -g pixelWidth tests/browser/search-bar.spec.ts-snapshots/search-bar-closed-chromium-darwin.png)",
+      "Bash(identify -format \"%wx%h\" png:-)",
+      "Bash(sips -g pixelWidth -g pixelHeight /tmp/old-search-bar-snapshot.png)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4322/docs/test_pages/components/search-bar)",
+      "Bash(SKIP_TRANSLATIONS=true npx playwright:*)"
+    ]
+  }
+}
