@@ -30,7 +30,7 @@ Datadog supports two types of saved filters:
 
 Saved filters contain only attribute conditions and cannot be nested or reference other saved filters.
 
-<!-- TODO(FFL-2478) screenshot: Saved Filters list page under Settings, showing existing Saved Rule and Saved List filters. Suggested path static/images/feature_flags/saved_filters/saved-filters-list.png. Insert with: {{</* img src="feature_flags/saved_filters/saved-filters-list.png" alt="The Saved Filters list page in Feature Flags settings." style="width:100%;" */>}} -->
+{{< img src="feature_flags/saved_filters/saved-filters-list.png" alt="The Saved Filters list page in Feature Flags settings." style="width:100%;" >}}
 
 ## Create a saved filter
 
@@ -42,7 +42,7 @@ Saved filters contain only attribute conditions and cannot be nested or referenc
    - **Saved List**: Provide the attribute and its values. You can enter values directly or import them from a CSV file.
 5. Click **Save**.
 
-<!-- TODO(FFL-2478) screenshot: The New Saved Filter modal with the Filter type toggle (Saved Rule / Saved List) and the rule editor. Suggested path static/images/feature_flags/saved_filters/create-saved-filter.png. Insert with: {{</* img src="feature_flags/saved_filters/create-saved-filter.png" alt="The New Saved Filter modal showing the filter type toggle and rule editor." style="width:100%;" */>}} -->
+{{< img src="feature_flags/saved_filters/create-saved-filter.png" alt="The New Saved Filter modal showing the filter type toggle and rule editor." style="width:100%;" >}}
 
 The saved filter is available to apply to any flag in your organization.
 
@@ -55,7 +55,7 @@ After you create a saved filter, reference it when you configure a flag's target
 3. Add or edit a targeting rule, then click **Add > Add Saved Filter**.
 4. Select the saved filter you want to apply.
 
-<!-- TODO(FFL-2478) screenshot: A flag's targeting rule editor with the Add menu open, showing the "Add Saved Filter" option. Suggested path static/images/feature_flags/saved_filters/add-saved-filter-to-rule.png. Insert with: {{</* img src="feature_flags/saved_filters/add-saved-filter-to-rule.png" alt="The Add menu in a targeting rule, showing the Add Saved Filter option." style="width:100%;" */>}} -->
+{{< img src="feature_flags/saved_filters/add-saved-filter-to-rule.png" alt="The Add menu in a targeting rule, showing the Add Saved Filter option." style="width:100%;" >}}
 
 You can combine a saved filter with other conditions in the same rule. For details about how targeting rules are evaluated, see [Targeting Rules and Filters](/feature_flags/concepts/targeting_rules/).
 
@@ -65,7 +65,7 @@ To edit a saved filter, open it from **Settings > Saved Filters** and update its
 
 When you save changes to a filter's conditions, the update applies to every enabled flag that uses the filter, and those flags begin evaluating against the updated logic immediately. To see which flags are affected, review the **Flags** list in the filter's panel before saving.
 
-<!-- TODO(FFL-2478) screenshot: The saved filter side panel showing the Filters section and the Flags list of flags that use the filter. Suggested path static/images/feature_flags/saved_filters/saved-filter-panel.png. Insert with: {{</* img src="feature_flags/saved_filters/saved-filter-panel.png" alt="The saved filter side panel showing its conditions and the list of flags that use it." style="width:100%;" */>}} -->
+{{< img src="feature_flags/saved_filters/saved-filter-panel.png" alt="The saved filter side panel showing its conditions and the list of flags that use it." style="width:100%;" >}}
 
 <div class="alert alert-info">
 A single edit can change targeting behavior across many flags at once.
