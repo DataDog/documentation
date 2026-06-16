@@ -52,8 +52,11 @@ Supported build systems:
 |---|---|
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
+| Bazel | Preview |
 
-Other build systems, such as Ant, Bazel, or SBT are supported with the following limitations:
+Use Datadog's official [Bazel rules for Java tests][bazel-java] to configure Test Optimization for Java test targets in Bazel.
+
+Other build systems, such as Ant or SBT, are supported with the following limitations:
 - Automatic coverage configuration and reporting is not supported.
 - When building a multi-module project, every module is reported in a separate trace.
 
@@ -571,3 +574,4 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [8]: /tests/#parameterized-test-configurations
 [9]: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-display-names
 [10]: /tracing/trace_collection/compatibility/java#integrations
+[bazel-java]: /tests/setup/bazel/java/
