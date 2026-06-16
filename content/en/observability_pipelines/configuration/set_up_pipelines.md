@@ -146,7 +146,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 
 1. You can use the [datadog_observability_pipeline][10] module to create a pipeline using Terraform.
 
-1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.
+1. After creating the pipeline, [install the Worker][16] to send data through the pipeline.
     - See [Environment Variables][9] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
 Use the [datadog_observability_pipeline][10] module to make any changes to an existing pipeline.
@@ -187,7 +187,7 @@ To delete a pipeline in the UI:
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
-[7]: /observability_pipelines/configuration/install_the_worker/?tab=docker#api-or-terraform-pipeline-setup
+[7]: /observability_pipelines/configuration/install_the_worker/?interface=api&platform=docker&secrets_source=secrets_management
 [8]: /api/latest/observability-pipelines/#update-a-pipeline
 [9]: /observability_pipelines/guide/environment_variables/
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
@@ -195,3 +195,4 @@ To delete a pipeline in the UI:
 [12]: /observability_pipelines/configuration/install_the_worker/
 [13]: /monitors/types/metric/
 [14]: /observability_pipelines/configuration/export_pipeline_configuration/
+[16]: /observability_pipelines/configuration/install_the_worker/?interface=terraform&platform=docker&secrets_source=secrets_management
