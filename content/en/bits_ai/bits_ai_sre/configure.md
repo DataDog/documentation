@@ -2,8 +2,6 @@
 title: Configure Integrations and Settings
 ---
 
-<div class="alert alert-danger">Bits Investigation does not have an org-level disable option. To stop using the feature, see <a href="#disable-bits-investigation">Disable Bits Investigation</a>.</div>
-
 Set up integrations to extend Bits Investigation's capabilities:
 - [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context.
 - [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms) to streamline incident response.
@@ -20,7 +18,7 @@ To configure GitHub:
 
 ## Send investigation findings to ITSM and collaboration platforms
 
-By default, all investigations are listed on the [Bits AI Investigations][1] page.
+By default, all investigations are listed on the [Bits Investigations][1] page.
 
 For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has `@slack`, `@case`, or `@oncall` [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below.
 
@@ -87,12 +85,13 @@ These permissions are added by default to Managed Roles. If your organization us
 
 ### Disable Bits Investigation
 
-There is no org-level option to disable Bits Investigation. To prevent your organization from using the feature, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
+To prevent your organization from using Bits Investigation, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
+
+Or, an admin can disable all AI products billable through AI Credits using the org-level toggle in [Plan & Usage > AI Credits][16]. For details, see [Admin controls for AI Credits][17].
 
 ## Configure rate limits
 
-Rate limits define the maximum number of automatic investigations Bits Investigation can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
-
+Rate limits define the maximum number of automatic investigations Bits can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
 
 ### Types of rate limits
 
@@ -101,7 +100,7 @@ Per monitor limit
 : **Default:** Each monitor can trigger one automatic investigation per 24 hours.
 
 Organization limit
-: Defines the total number of automatic investigations Bits Investigation can run across your entire organization within 24 hours.
+: Defines the total number of automatic investigations Bits can run across your entire organization within 24 hours.
 : **Default:** No limit.
 
 ### Set a rate limit
@@ -131,11 +130,9 @@ Bits Investigation provides three [Actions][15]:
 
 You can use these Actions to build Workflows, Agents, and Apps tailored to your use case.
 
-<!-- Commenting out until API Docs are merged
 ## API
 
-You can trigger and retrieve investigation details programmatically [via API][16].
--->
+You can trigger and retrieve investigations programmatically [via API][18].
 
 [1]: https://app.datadoghq.com/bits-ai/investigations
 [2]: /monitors/notify
@@ -152,7 +149,6 @@ You can trigger and retrieve investigation details programmatically [via API][16
 [13]: /integrations/github/
 [14]: /source_code/service-mapping
 [15]: /actions/workflows/actions/
-
-<!-- Commenting out until API Docs are merged
-[16]: /api/latest/?tab=java
--->
+[16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
+[17]: /account_management/billing/ai_credits/#admin-controls
+[18]: /api/latest/bits-ai/

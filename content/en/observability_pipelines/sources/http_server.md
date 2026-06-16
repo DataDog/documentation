@@ -23,7 +23,9 @@ You can also [send AWS vended logs with Datadog Lambda Forwarder to Observabilit
 
 Set up this source when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP/S Server address and, if applicable, the username and password for plain (also known as basic) authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the HTTP/S Server address and, if applicable, the username and password for plain (also known as basic) authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the HTTP/S Server source in the pipeline UI:
 

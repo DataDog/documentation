@@ -814,6 +814,34 @@
       "description": "Create and publish a form returns \"OK\" response"
     }
   ],
+  "UpsertFormVersion": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create or update a form version returns \"OK\" response"
+    }
+  ],
+  "PublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Publish a form version returns \"OK\" response"
+    }
+  ],
+  "UpdateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Update a form returns \"OK\" response"
+    }
+  ],
+  "UpsertAndPublishFormVersion": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Upsert and publish a form version returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
@@ -889,20 +917,6 @@
       "group": "ip_allowlist",
       "suffix": "",
       "description": "Update IP Allowlist returns \"OK\" response"
-    }
-  ],
-  "CreateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Create a new incident service returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Update an existing incident service returns \"OK\" response"
     }
   ],
   "UpdateIncident": [
@@ -2215,13 +2229,6 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "MuteFindings": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Mute or unmute a batch of findings returns \"OK\" response"
-    }
-  ],
   "MuteSecurityFindings": [
     {
       "group": "security_monitoring",
@@ -2265,6 +2272,13 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
+  "SendSecurityMonitoringNotificationPreview": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a notification rule returns \"OK\" response"
     }
   ],
   "TestSecurityMonitoringRule": [

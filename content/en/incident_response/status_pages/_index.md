@@ -1,5 +1,6 @@
 ---
 title: Status Pages
+description: Communicate service availability, incidents, and planned maintenance with customers or internal stakeholders through a shareable status page.
 aliases:
 - /service_management/status_pages/
 further_reading:
@@ -214,9 +215,20 @@ For **internal** status pages, the subscription process is the same, but users m
 
 {{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
+## Configure a custom email sender domain
+
+By default, status page subscription emails are sent from a Datadog email address. To send notifications from your own domain, configure a custom SMTP server in Organization Settings.
+
+<div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
+
+1. On your status page, go to **Settings** > **Subscriptions**.
+1. Under **Email Sender Domain**, click **Organization Settings**.
+1. In Organization Settings, [add and validate an SMTP server][3].
+1. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
+To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
 1. From your status page, click **Settings**.
 1. Select **Custom Domain**.
@@ -229,7 +241,7 @@ To match your branding, you have the option to map your status page to a custom 
 
 - DNS propagation may take several minutes.
 - You can revert to the default Datadog domain at any time.
-- Ensure DNS changes are made by someone with access to your domain registrar.
+- DNS changes must be made by someone with access to your domain registrar.
 
 ## Further reading
 
@@ -237,3 +249,4 @@ To match your branding, you have the option to map your status page to a custom 
 
 [1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/status-pages
+[3]: /account_management/org_settings/smtp_configuration
