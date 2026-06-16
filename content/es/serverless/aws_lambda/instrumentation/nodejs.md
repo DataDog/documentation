@@ -202,7 +202,7 @@ El [macro de CloudFormation de Datadog][1] transforma automáticamente su planti
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
-    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `último`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `último-alpine`. Puedes ver una lista completa de posibles etiquetas en el [repositorio de Amazon ECR][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. Puedes ver una lista completa de posibles etiquetas en el [repositorio de Amazon ECR][1].
 
 3. Redirigir la función manejadora
 

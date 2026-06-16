@@ -1,5 +1,5 @@
 ---
-description: '[Datadog Agent][60] を使用してログを Datadog に送信します'
+description: Datadog Agent を使用してログを Datadog に送信します
 further_reading:
 - link: agent/logs/agent_tags/
   tag: よくあるご質問

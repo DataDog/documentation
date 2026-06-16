@@ -78,11 +78,11 @@ Où se trouve votre `<DATADOG_SITE>` {{< region-param key="dd_site" code="true" 
 Utilisez les variables d'environnement suivantes pour configurer le traçage pour l'Agent Docker. Voir le [fichier d'exemple `config_template.yaml`][8] pour plus de détails.
 
 `DD_API_KEY`                      
-:  requis - _ chaîne _
+:  requis - _chaîne_
 <br/>Votre [clé API Datadog][1].
 
 `DD_SITE`
-:  optionnel - _ chaîne _
+:  optionnel - _chaîne_
 <br/>Votre [site Datadog][7]. Définissez ceci sur `{{< region-param key="dd_site" >}}`.
 <br/>**Default**: `datadoghq.com`
 
@@ -140,19 +140,19 @@ Utilisez les variables d'environnement suivantes pour configurer le traçage pou
 <br/>Définit le nom d'hôte à utiliser pour les métriques si la détection automatique du nom d'hôte échoue, ou lors de l'exécution du Datadog Cluster Agent.
 
 `DD_DOGSTATSD_PORT`                
-: optionnel - _ entier _ - **par défaut** : `8125` 
+: optionnel - _entier_ - **par défaut** : `8125` 
 <br/>Définit le port DogStatsD.
 
 `DD_PROXY_HTTPS`                   
-: optionnel - _ chaîne _
+: optionnel - _chaîne_
 <br/>Pour utiliser un [proxy][4] pour se connecter à Internet, fournissez l'URL. 
 
 `DD_BIND_HOST`                     
-: optionnel - _ chaîne _ - **par défaut** : `localhost` 
+: optionnel - _chaîne_ - **par défaut** : `localhost` 
 <br/>Définit l'hôte sur lequel écouter pour DogStatsD et les traces.
 
 `DD_LOG_LEVEL`                     
-: optionnel - _ chaîne _ - **par défaut** : `info` 
+: optionnel - _chaîne_ - **par défaut** : `info` 
 <br/>Définit le niveau de journalisation minimal. Options valides : `trace`, `debug`, `info`, `warn`, `error`, `critical` et `off`.
 
 ##  Traçage depuis d'autres conteneurs {#tracing-from-other-containers}

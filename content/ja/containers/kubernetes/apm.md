@@ -286,7 +286,7 @@ APM の構成で利用可能な環境変数のリスト:
 | `DD_APM_RECEIVER_SOCKET` | UDS 経由のトレース用。設定されている場合、有効なソケットファイルを指す必要があります。|
 | `DD_APM_RECEIVER_PORT`     | TCP 経由のトレースの場合、Datadog Agent のトレースレシーバーがリッスンするポート。<br/>**デフォルト**: `8126` |
 | `DD_APM_NON_LOCAL_TRAFFIC` | 他のコンテナからのトレース時に非ローカルトラフィックを許可します。<br/>**デフォルト**: `true` (Agent 7.18 以降) |
-| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイント: `https://trace.agent。{{< region-param key="dd_site" >}}`. <br/>**Default**:  `https://trace.agent.datadoghq.com` |
+| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイント: `https://trace.agent.{{< region-param key="dd_site" >}}`. <br/>**Default**:  `https://trace.agent.datadoghq.com` |
 | `DD_APM_TARGET_TPS`     | The target traces per second to sample. <br/>**Default**: `10` |
 | `DD_APM_ERROR_TPS`     | The target error trace chunks to receive per second. <br/>**Default**: `10` |
 | `DD_APM_MAX_EPS`     | Maximum number of APM events per second to sample. <br/>**Default**: `200` |
