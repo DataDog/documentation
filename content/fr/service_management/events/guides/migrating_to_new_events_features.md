@@ -52,7 +52,7 @@ En plus de visualiser et rechercher des événements dans l'Events Explorer, vo
 
 Vous pouvez également [générer des métriques][3] avec une période de rétention de 15 mois à partir de n'importe quelle requête de recherche d'événements pour créer des monitors et des alertes en fonction des événements historiques.
 
-{{< img src="events/generate-metrics.png" alt="Image de métriques avec la requête de recherche d'événements." >}}
+{{< img src="events/guides/usage/generate-metrics.png" alt="Image de métriques avec la requête de recherche d'événements." >}}
 
 
 ### Créer des graphiques d'événements dans les dashboards

@@ -51,7 +51,7 @@ Además de ver y buscar eventos en el Explorer, ahora puedes realizar gráficas 
 
 También puedes [generar métricas][3] con retención de 15 meses a partir de cualquier consulta de búsqueda de eventos para crear monitores y alertas basados en eventos históricos.
 
-{{< img src="events/generate-metrics.png" alt="Imagen de métricas con la consulta de búsqueda de eventos." >}}
+{{< img src="events/guides/usage/generate-metrics.png" alt="Imagen de métricas con la consulta de búsqueda de eventos." >}}
 
 
 ### Graficar eventos en dashboards
