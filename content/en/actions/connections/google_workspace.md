@@ -148,7 +148,7 @@ Select only the scopes required by the actions you intend to use.
 | Admin: View Users | `https://www.googleapis.com/auth/admin.directory.user.readonly` | View users in the directory |
 | Admin: Manage Groups | `https://www.googleapis.com/auth/admin.directory.group` | Create, read, update, and delete groups |
 | Admin: View Groups | `https://www.googleapis.com/auth/admin.directory.group.readonly` | View groups in the directory |
-| Admin: Manage User Security | `https://www.googleapis.com/auth/admin.directory.user.security` | Manage user security information, including session sign-out and third-party application tokens |
+| Admin: Manage User Security | `https://www.googleapis.com/auth/admin.directory.user.security` | Manage user security features |
 
 ## Further reading
 
