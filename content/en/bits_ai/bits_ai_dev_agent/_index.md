@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with GitHub and GitLab to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
+Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code platforms](#supported-source-code-platforms) to create production-ready pull requests, then iterates on changes using CI logs and developer feedback.
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
@@ -23,6 +23,15 @@ Each time Bits Code investigates an issue or generates a fix, it creates a [sess
 To get started with Bits Code, [set up the GitHub or GitLab integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
 Learn how your Bits Code usage is billed on [AI Credits][27].
+
+## Supported source code platforms
+
+Bits Code supports the following source code platforms:
+
+- **GitHub**: GitHub.com and GitHub Enterprise Cloud
+- **GitLab**: GitLab.com
+
+Self-hosted platforms, such as GitHub Enterprise Server and GitLab Self-Managed or Dedicated, are not yet supported.
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
