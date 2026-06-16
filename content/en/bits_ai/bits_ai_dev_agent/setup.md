@@ -72,7 +72,7 @@ To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6]
 
 Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data Bits Code works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
 
-To balance safety and automation, you can configure auto-push behavior in [Datadog][14] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
+To balance safety and automation, you can configure auto-push behavior in [Datadog][6] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
 
 ### Configure custom instructions
 
@@ -152,4 +152,3 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [13]: https://docs.gitlab.com/user/permissions/#groups
 [15]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
 [16]: https://docs.gitlab.com/user/profile/service_accounts/
-[14]: https://app.datadoghq.com/code/settings
