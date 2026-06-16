@@ -2229,13 +2229,6 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "MuteFindings": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Mute or unmute a batch of findings returns \"OK\" response"
-    }
-  ],
   "MuteSecurityFindings": [
     {
       "group": "security_monitoring",
