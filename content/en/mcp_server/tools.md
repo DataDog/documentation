@@ -459,7 +459,7 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 - What are my top cloud cost-saving recommendations?
 - How much could I save per day, and how many open recommendations do I have?
-- Show me open AWS recommendations for my Kubernetes clusters.
+- Which of our Kubernetes cluster optimizations does the team already have underway?
 
 ## Code Execution
 
