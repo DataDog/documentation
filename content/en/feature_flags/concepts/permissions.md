@@ -29,7 +29,11 @@ Assign these permissions through [Datadog roles](/account_management/rbac/).
 
 ## Granular access on individual flags
 
-Restrict edit access on a specific flag from the flag's **Settings** page. You can limit edit access to:
+Restrict edit access on a specific flag by selecting **Settings > Permissions** on the flag details page:
+
+{{< img src="getting_started/feature_flags/flag-grace-modal.png" alt="Flag Grace modal on the feature flag settings page for choosing who can edit the flag." style="width:100%;" >}}
+
+You can limit edit access to:
 
 - Individual users
 - Service accounts
