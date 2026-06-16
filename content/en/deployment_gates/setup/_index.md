@@ -40,7 +40,7 @@ Deployment Gates support two evaluation modes: Just-In-Time (JIT) and preconfigu
 
 You can use different modes across different gates if needed.
 
-If you're unsure where to start, use JIT — it requires no setup in Datadog and lets you iterate on rules directly in your deployment configuration.
+If you're unsure where to start, use JIT. It requires no setup in Datadog and lets you iterate on rules directly in your deployment configuration.
 
 ## Further reading
 

@@ -23,7 +23,7 @@ Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [
 
 ## Configuration
 
-The shape of `configuration`:
+Example `configuration`:
 
 ```json
 {
