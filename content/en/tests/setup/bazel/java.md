@@ -162,12 +162,45 @@ dd_topt_java_test(
     srcs = ["HelloTest.java"],
     deps = [":pkg_lib"],
     test_class = "com.example.pkg.HelloTest",
+    stage_sources = True,
     topt_data = topt_data,
     agent_jar = "@dd_java_agent//file",
 )
 ```
 
 The macro injects the Datadog Java tracer with `-javaagent` and adds the agent JAR to test runtime data. It also enables Test Optimization for the Java test process and configures payloads to be written as JSON files under `TEST_UNDECLARED_OUTPUTS_DIR`.
+
+### Optional parameters
+
+`dd_topt_java_test` accepts the following optional parameters:
+
+| Parameter | Default | Description |
+|---|---|---|
+| `stage_sources` | `false` | When `true`, stages the target's direct `srcs` into test runfiles so the Java tracer can populate the `test.source.file`, `test.source.start`, and `test.source.end` tags. Without it, tests still pass and upload payloads, but source location metadata is absent. |
+| `java_test_rule` | `java_test` | Overrides the underlying `java_test` rule. Set this only when you wrap a custom test macro. See [Use a repository-owned Java wrapper](#use-a-repository-owned-java-wrapper). |
+
+## Use a repository-owned Java wrapper
+
+If your repository already owns a Java test wrapper, pass it with `java_test_rule`:
+
+```starlark
+load("@datadog-rules-test-optimization-java//:topt_java_test.bzl", "dd_topt_java_test")
+load("@test_optimization_data//:export.bzl", "topt_data")
+load("//tools/build:java_test.bzl", "repo_java_test")
+
+dd_topt_java_test(
+    name = "pkg_java_test",
+    srcs = ["HelloTest.java"],
+    deps = [":pkg_lib"],
+    test_class = "com.example.pkg.HelloTest",
+    java_test_rule = repo_java_test,
+    stage_sources = True,
+    topt_data = topt_data,
+    agent_jar = "@dd_java_agent//file",
+)
+```
+
+The repository wrapper must preserve the `env`, `jvm_flags`, `data`, `tags`, and visibility values passed by `dd_topt_java_test`, and it must run a real Java test process. Keep repository-specific feature flags, scheduling, flaky-test policy, and framework selection in the wrapper layer.
 
 ## Run and validate tests
 
@@ -229,6 +262,7 @@ dd_topt_java_test(
     name = "pkg_java_test",
     srcs = ["HelloTest.java"],
     test_class = "com.example.pkg.HelloTest",
+    stage_sources = True,
     topt_data = topt_data_by_service,
     topt_service = "java_service_a",
     agent_jar = "@dd_java_agent//file",
