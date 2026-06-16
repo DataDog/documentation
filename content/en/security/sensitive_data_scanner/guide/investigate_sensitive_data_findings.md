@@ -1,5 +1,6 @@
 ---
 title: Investigate Sensitive Data Findings
+description: Triage and investigate Sensitive Data Scanner findings on the Findings page, including Blast Radius analysis, impacted services, Case Management, and Incident Management integration.
 aliases:
   - /sensitive_data_scanner/investigate_sensitive_data_issues/
   - /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
