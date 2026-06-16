@@ -13,7 +13,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">Data Observability: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.64.0 or later, <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later, and <a href="https://github.com/DataDog/datadog-operator/releases" target="_blank">Datadog Operator</a> version 1.13.0 or later (if using the Operator).</div>
+<div class="alert alert-info">Data Observability: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.64.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
 
 Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Kubernetes.
 
@@ -158,6 +158,8 @@ kubectl get pod <SUBMITTER_POD_NAME> -n <NAMESPACE> --show-labels
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
+Requires [Datadog Operator][8] version 1.13.0 or later.
+
 Add the `features.apm.instrumentation` section to your `datadog-agent.yaml` and apply it:
 
 ```yaml
@@ -265,3 +267,4 @@ To attach service, environment, and version tags to your job traces, pass the fo
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
+[8]: https://github.com/DataDog/datadog-operator/releases
