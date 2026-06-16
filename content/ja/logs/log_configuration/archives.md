@@ -424,4 +424,4 @@ Datadog がストレージバケットに転送するログアーカイブは、
 [12]: /ja/account_management/rbac/permissions#logs_read_index_data
 [13]: /ja/account_management/rbac/permissions#logs_read_data
 [14]: /ja/logs/explorer/live_tail/
-[15]: /ja/service_management/events/explorer/
+[15]: /ja/events/explorer/
