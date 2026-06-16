@@ -1645,7 +1645,7 @@
     "request_schema_description": "Parameters for updating a deployment gate."
   },
   "TriggerDeploymentGatesEvaluation": {
-    "description": "Triggers an asynchronous deployment gate evaluation for the given service and environment.\nReturns an evaluation ID that can be used to poll for the result via the\n`GET /api/v2/deployments/gates/evaluation/{id}` endpoint.",
+    "description": "Triggers an asynchronous deployment gate evaluation for the given service and environment.\nReturns an evaluation ID that can be used to poll for the result via the\n`GET /api/v2/deployments/gates/evaluation/{id}` endpoint.\n\nWhen the `configuration` attribute is provided, rules are evaluated inline from that configuration\nand no pre-configured gate is required. When `configuration` is omitted, rules are resolved from the\ngate pre-configured for the given service and environment through the Datadog UI, API, or Terraform.",
     "summary": "Trigger a deployment gate evaluation",
     "request_description": "",
     "request_schema_description": "Request body for triggering a deployment gate evaluation."
