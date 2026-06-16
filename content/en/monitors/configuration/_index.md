@@ -237,18 +237,22 @@ In most cases this setting is not useful because you only want an alert to resol
 
 #### Group retention time
 
-You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours. For multi alert monitors, select {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
+Group retention controls how long a monitor group is kept in the monitor's status after data stops reporting. After the retention period passes, the group ages out and is dropped from the monitor status.
+
+By default, a group keeps the status for 24 hours before it is dropped. Host monitors and service checks that notify on missing data keep the status for 48 hours.
+
+For the multi alert monitor types that support it, you can set a custom retention between 1 hour and 72 hours. Select **Remove the non-reporting group after `N (length of time)`**.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
-Similar to the [Auto-resolve option][3], the group retention works when data is no longer being submitted. This option controls how long the group is kept in the monitor's status once data stops reporting. By default, a group keeps the status for 24 hours before it is dropped. The start time of the group retention and the Auto-resolve option are **identical** as soon as the monitor query returns no data.
+Similar to the [Auto-resolve option][3], group retention works when data is no longer being submitted. The start time of the group retention and the Auto-resolve option are **identical** as soon as the monitor query returns no data.
 
-Some use cases to define a group retention time include:
+Some use cases to define a custom group retention time include:
 
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
+**Note**: The custom group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
 #### New group delay
 
