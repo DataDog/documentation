@@ -43,7 +43,7 @@ Worker version 2.17.0 gives you access to the following:
 
 - HTTP metrics emitted by the Quota processor's background sync now have correct component tags (`component_kind:transform`, `component_type:quota`, `component_id:quota_global_state`).
 - The Enrichment Table processor using Reference Tables now skips sending empty event batches, preventing fatal errors with disk buffers.
-- The Generate Metrics processor now uses a static component ID so that associated metrics share the same `component_id` across workers and restarts.
+- The Generate Metrics processor now uses a static component ID so that associated metrics share the same `component_id` across Workers and restarts.
 - An issue with parsing filter queries that contain whitespace inside parentheses, such as `service:( web OR api )`, has been fixed.
 - Live Capture now works correctly for sources with multiple named output ports, such as the OpenTelemetry source.
 - An issue where a Worker crash could occur if a source or a processor sends an empty event batch to the next component has been fixed.
@@ -67,7 +67,7 @@ Worker version 2.16.1 gives you access to the following:
 
 #### Fixes
 
-- The Worker no longer fails when fetching configurations in non-US1 datacenters.
+- The Worker no longer fails when fetching configurations in non-US1 data centers.
 
 ---
 
