@@ -8,10 +8,12 @@ export async function streamDocsAiChat({
     history = [],
     conversationId,
     anchorUrl = '',
+    isAgentic = false,
     rewriteQuery = false,
     signal,
     onToken,
     onThinking,
+    onToolCall,
     onError
 }) {
     const attributes = { query };
@@ -24,6 +26,8 @@ export async function streamDocsAiChat({
     if (anchorUrl) {
         attributes.anchor_url = anchorUrl;
     }
+    // Toggles the agentic backend (tool-calling) path on the API side.
+    attributes.isAgentic = isAgentic;
     // Tells the API to rewrite the query for better retrieval (first message only)
     if (rewriteQuery) {
         attributes.rewrite_query = true;
@@ -67,9 +71,20 @@ export async function streamDocsAiChat({
                 const parsed = JSON.parse(payload);
                 if (parsed.type === 'thinking' && onThinking) {
                     onThinking(parsed.content);
+                } else if (parsed.type === 'tool_call' && onToolCall) {
+                    onToolCall({
+                        id: parsed.id,
+                        name: parsed.name,
+                        args: parsed.args,
+                        status: parsed.status,
+                        summary: parsed.summary
+                    });
                 } else if (parsed.type === 'markdown_fragment') {
-                    fullMessage += parsed.content;
-                    if (onToken) onToken(parsed.content, fullMessage);
+                    const content = parsed.content || '';
+                    fullMessage += content;
+                    // Skip empty fragments so consumers can keep the loading
+                    // state visible until the first real content token arrives.
+                    if (content && onToken) onToken(content, fullMessage);
                 }
             } catch (e) {
                 if (onError) onError(e);

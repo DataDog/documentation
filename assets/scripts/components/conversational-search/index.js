@@ -22,6 +22,11 @@ let IS_DOCS_AI_ENABLED = true;
 
 const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
+// Agentic mode toggles the tool-calling backend path (server reads `isAgentic`).
+// On by default; the user's choice is remembered across sessions.
+const AGENTIC_MODE_STORAGE_KEY = 'docs-ai-agentic-mode';
+const DEFAULT_AGENTIC_MODE = true;
+
 const RENDER_THROTTLE = 50;
 
 const VIEW_MODES = ['fullscreen', 'floating', 'sidebar'];
@@ -87,6 +92,21 @@ function persistViewMode(mode) {
     try { localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode); } catch (_) { /* ignore */ }
 }
 
+function readStoredAgenticMode() {
+    try {
+        const stored = localStorage.getItem(AGENTIC_MODE_STORAGE_KEY);
+        if (stored === 'true') return true;
+        if (stored === 'false') return false;
+        return DEFAULT_AGENTIC_MODE;
+    } catch (_) {
+        return DEFAULT_AGENTIC_MODE;
+    }
+}
+
+function persistAgenticMode(isAgentic) {
+    try { localStorage.setItem(AGENTIC_MODE_STORAGE_KEY, String(isAgentic)); } catch (_) { /* ignore */ }
+}
+
 function readStoredSize(mode, dim) {
     const cfg = RESIZABLE_MODES[mode]?.[dim];
     if (!cfg) return null;
@@ -145,6 +165,27 @@ function mapThinkingMessage(serverMessage) {
     return serverMessage;
 }
 
+// Compact one-line render of tool-call args for the agentic step strip
+// e.g. { query: "list apm services" } -> 'query: "list apm services"'
+function formatToolArgs(args) {
+    if (!args || typeof args !== 'object') return '';
+    const MAX_VAL = 60;
+    return Object.entries(args)
+        .map(([key, value]) => {
+            let serialized;
+            try {
+                serialized = JSON.stringify(value);
+            } catch (_) {
+                serialized = String(value);
+            }
+            if (serialized && serialized.length > MAX_VAL) {
+                serialized = serialized.slice(0, MAX_VAL - 1) + '…"';
+            }
+            return `${key}: ${serialized}`;
+        })
+        .join(', ');
+}
+
 let isDatadogUser = false;
 
 initializeFeatureFlags().then(async (client) => {
@@ -173,6 +214,8 @@ class ConversationalSearch {
         this.hasLoggedFirstOpen = false;
         this.isSuggestionQuery = false;
 
+        this.isAgentic = readStoredAgenticMode();
+
         // Rewrites the initial user query for better retrieval before answering.
         // Only applied on the first message (no history). Follow-ups use history context instead.
         this.shouldRewriteQuery = true;
@@ -191,6 +234,7 @@ class ConversationalSearch {
         });
 
         if (!this.createElements()) return;
+        this.setupAgenticToggle();
         this.bindEvents();
         forEachResizable((mode, dim) => this.applyPanelSize(mode, dim, this.panelSizes[mode][dim]));
         this.applyViewMode(this.viewMode);
@@ -246,6 +290,7 @@ class ConversationalSearch {
         this.closeBtn = this.sidebar.querySelector('.conv-search-close');
         this.newChatBtn = this.sidebar.querySelector('.conv-search-new');
         this.messagesContainer = messagesContainer;
+        this.agenticToggle = this.sidebar.querySelector('#conv-search-agentic-toggle');
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
         this.modeToggleBtn = this.sidebar.querySelector('.conv-search-mode-toggle');
@@ -253,6 +298,11 @@ class ConversationalSearch {
         this.modeOptions = Array.from(this.sidebar.querySelectorAll('.conv-search-mode-option'));
         this.resizeHandles = Array.from(this.sidebar.querySelectorAll('.conv-search-resize-handle'));
         return true;
+    }
+
+    setupAgenticToggle() {
+        if (!this.agenticToggle) return;
+        this.agenticToggle.checked = this.isAgentic;
     }
 
     injectEmptyState(container) {
@@ -295,6 +345,11 @@ class ConversationalSearch {
         this.input.addEventListener('input', () => {
             this.input.style.height = 'auto';
             this.input.style.height = Math.min(this.input.scrollHeight, 120) + 'px';
+        });
+
+        this.agenticToggle?.addEventListener('change', (e) => {
+            this.isAgentic = e.target.checked;
+            persistAgenticMode(this.isAgentic);
         });
 
         document.addEventListener('keydown', (e) => {
@@ -705,9 +760,11 @@ class ConversationalSearch {
 
     /**
      * Shows a spinner + status text while waiting for the first content token.
-     * Returns { updateStatus, stop } — call updateStatus(text) when the server
-     * sends a thinking event (auto-rotation is killed on first call); call stop()
-     * to remove the indicator.
+     * Returns { updateStatus, updateToolCall, stop }.
+     *  - updateStatus(text): replaces the status copy and stops the auto-rotation.
+     *  - updateToolCall({ id, name, args, status, summary }): appends or updates
+     *    a tool-call row keyed by `id`, surfacing agentic steps as they run.
+     *  - stop(): removes the entire indicator.
      */
     showLoadingIndicator() {
         const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
@@ -722,7 +779,12 @@ class ConversationalSearch {
             '<span class="conv-search-loading-spinner"></span>' +
             `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>`;
 
+        const toolCallsContainer = document.createElement('div');
+        toolCallsContainer.className = 'conv-search-tool-calls';
+        toolCallsContainer.hidden = true;
+
         wrapper.appendChild(indicator);
+        wrapper.appendChild(toolCallsContainer);
         this.messagesContainer.appendChild(wrapper);
         this.scrollToBottom(true);
 
@@ -733,11 +795,40 @@ class ConversationalSearch {
             if (el) el.textContent = LOADING_MESSAGES[msgIndex];
         }, 3000);
 
+        const toolCallRows = new Map();
+
         return {
             updateStatus: (text) => {
                 if (interval) { clearInterval(interval); interval = null; }
                 const el = wrapper.querySelector('.conv-search-status-text');
                 if (el) el.textContent = text;
+            },
+            updateToolCall: (toolCall) => {
+                if (!toolCall || !toolCall.id) return;
+
+                let row = toolCallRows.get(toolCall.id);
+                if (!row) {
+                    row = document.createElement('div');
+                    row.className = 'conv-search-tool-call';
+                    row.innerHTML =
+                        '<span class="conv-search-tool-call-spinner"></span>' +
+                        '<span class="conv-search-tool-call-name"></span>' +
+                        '<span class="conv-search-tool-call-args"></span>' +
+                        '<span class="conv-search-tool-call-summary"></span>';
+                    toolCallsContainer.appendChild(row);
+                    toolCallRows.set(toolCall.id, row);
+                    toolCallsContainer.hidden = false;
+                }
+
+                row.dataset.status = toolCall.status || 'running';
+                row.querySelector('.conv-search-tool-call-name').textContent = toolCall.name || 'tool';
+                row.querySelector('.conv-search-tool-call-args').textContent = formatToolArgs(toolCall.args);
+
+                const summaryEl = row.querySelector('.conv-search-tool-call-summary');
+                summaryEl.textContent = toolCall.summary || '';
+                summaryEl.hidden = !toolCall.summary;
+
+                this.scrollToBottom();
             },
             stop: () => {
                 if (interval) clearInterval(interval);
@@ -838,11 +929,15 @@ class ConversationalSearch {
                 history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
                 conversationId: this.conversationId,
                 anchorUrl: window.location.href,
+                isAgentic: this.isAgentic,
                 rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
                 signal: this.abortController.signal,
                 onThinking: (message) => {
                     const mapped = mapThinkingMessage(message);
                     if (mapped) loadingIndicator.updateStatus(mapped);
+                },
+                onToolCall: (toolCall) => {
+                    loadingIndicator.updateToolCall(toolCall);
                 },
                 onToken: (_token, fullMessage) => {
                     if (!responseContainer) {

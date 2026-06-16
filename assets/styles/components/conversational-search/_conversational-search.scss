@@ -409,6 +409,95 @@ $conv-neutral-200: #efefef;
     to { opacity: 1; transform: translateY(0); }
 }
 
+// Live strip listing the agentic tool calls (search_docs, fetch_page, …) as
+// they run/complete. Renders below the spinner inside the loading state and
+// disappears once content streaming begins.
+.conv-search-tool-calls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 6px 0 12px 32px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: $conv-neutral-200;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    font-family: $font-family-monospace, monospace;
+    font-size: 11.5px;
+    line-height: 16px;
+    color: $conv-neutral-700;
+
+    @media (max-width: 640px) {
+        margin-left: 0;
+    }
+}
+
+.conv-search-tool-call {
+    display: grid;
+    grid-template-columns: 14px auto auto 1fr;
+    align-items: baseline;
+    gap: 6px;
+    opacity: 0;
+    animation: conv-search-tool-call-in 0.25s ease-out forwards;
+
+    &[data-status="done"] .conv-search-tool-call-spinner {
+        border-color: $conv-neutral-500;
+        border-top-color: $conv-neutral-500;
+        animation: none;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: 50%;
+            background: $conv-neutral-500;
+        }
+    }
+}
+
+.conv-search-tool-call-spinner {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid $conv-neutral-400;
+    border-top-color: $conv-search-purple;
+    animation: conv-search-tool-call-spin 0.8s linear infinite;
+    align-self: center;
+}
+
+.conv-search-tool-call-name {
+    font-weight: 600;
+    color: $conv-search-purple;
+}
+
+.conv-search-tool-call-args {
+    color: $conv-neutral-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 360px;
+}
+
+.conv-search-tool-call-summary {
+    color: $conv-neutral-500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:not([hidden])::before {
+        content: '· ';
+        color: $conv-neutral-400;
+    }
+}
+
+@keyframes conv-search-tool-call-in {
+    to { opacity: 1; }
+}
+
+@keyframes conv-search-tool-call-spin {
+    to { transform: rotate(360deg); }
+}
+
 .conv-search-cursor {
     display: inline-block;
     width: 2px;
@@ -441,6 +530,77 @@ $conv-neutral-200: #efefef;
         bottom: 0;
         z-index: 10;
     }
+}
+
+// Agentic mode toggle, shown above the input.
+.conv-search-agentic-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px;
+
+    @media (max-width: 640px) {
+        margin-bottom: 8px;
+    }
+}
+
+.conv-search-agentic-switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.conv-search-agentic-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:focus-visible + .conv-search-agentic-slider {
+        outline: 2px solid rgba($conv-search-purple, 0.4);
+        outline-offset: 2px;
+    }
+
+    &:checked + .conv-search-agentic-slider {
+        background: $conv-search-purple;
+
+        &::before {
+            transform: translateX(16px);
+        }
+    }
+}
+
+.conv-search-agentic-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    border-radius: 20px;
+    background: $conv-neutral-400;
+    transition: background 0.2s ease;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s ease;
+    }
+}
+
+.conv-search-agentic-label {
+    margin: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: $conv-neutral-600;
+    cursor: pointer;
+    user-select: none;
 }
 
 .conv-search-input-container {
