@@ -7,25 +7,5 @@
         "editor.defaultFormatter": "stripe.markdoc-language-support",
         "editor.formatOnSave": false,
         "editor.tabSize": 2
-    },
-    "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#7b3acb",
-        "activityBar.background": "#7b3acb",
-        "activityBar.foreground": "#e7e7e7",
-        "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#d0894e",
-        "activityBarBadge.foreground": "#15202b",
-        "commandCenter.border": "#e7e7e799",
-        "sash.hoverBorder": "#7b3acb",
-        "statusBar.background": "#632ca6",
-        "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#7b3acb",
-        "statusBarItem.remoteBackground": "#632ca6",
-        "statusBarItem.remoteForeground": "#e7e7e7",
-        "titleBar.activeBackground": "#632ca6",
-        "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#632ca699",
-        "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.color": "#632CA6"
+    }
 }
