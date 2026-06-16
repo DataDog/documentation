@@ -196,7 +196,7 @@ Set how often the monitor evaluates your data:
 
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
-- **Manual**: The monitor only runs when triggered programmatically. Trigger these monitors using the [Data Observability API][10].
+- **Manual**: The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10].
 
 ### Set alert conditions
 
