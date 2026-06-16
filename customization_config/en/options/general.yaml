@@ -424,6 +424,8 @@ options:
 - label: Traces
   id: traces
 
+- label: UI
+  id: ui
 - label: Unity
   id: unity 
 
@@ -528,3 +530,13 @@ options:
 
 - label: GraalVM Native Image
   id: graalvm_native_image
+
+- label: Secrets Management
+  id: secrets_management
+
+- label: Environment Variables
+  id: environment_variables
+
+- label: ECS Fargate
+  id: ecs_fargate
+  
