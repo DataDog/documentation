@@ -482,6 +482,8 @@ Rum.enable(rumConfig);
 
 ANRs are only reported through the SDK (not through Logs).
 
+**Note**: If you see `com.datadog.android.rum.internal.anr.ANRException` in your crash reports, the Datadog SDK did not cause the ANR. `ANRException` is the SDK's mechanism for detecting and surfacing ANRs in Error Tracking. The root cause is always application code blocking the main thread.
+
 #### Reporting fatal ANRs
 Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
 
