@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-[Bits Code][8] integrates with GitHub and GitLab to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
+[Bits Code][8] integrates with GitHub and GitLab to open, update, and iterate on pull/merge requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
 
 ## Prerequisites
 
@@ -63,7 +63,7 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 ### Enable auto-push
 
-Auto-push allows Bits Code to create branches, push code, and open PRs when it detects something it can help you with. Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
+Auto-push allows Bits Code to create branches, push code, and open PR/MRs when it detects something it can help you with. Auto-push only opens PR/MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
 To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
 
