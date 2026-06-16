@@ -16,12 +16,14 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
+<div class="alert alert-info">The Cloud Cost Management overlay is not available for vSphere accounts.</div>
+
 ## Overview
 
 The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your cloud architecture diagrams. This overlay provides two views: [{{< ui >}}Cost{{< /ui >}}](#cost-view) and [{{< ui >}}Recommendations{{< /ui >}}](#recommendations-view).
 
 <!-- TODO (DOCS-14700): Confirm with PM whether OCI supports both Cost and Recommendations views, or Recommendations only (like GCP). -->
-**Note**: The Cost view is not available for GCP accounts. The Recommendations view is supported for GCP. The Cloud Cost Management overlay is not available for vSphere accounts.
+**Note**: The Cost view is not available for GCP accounts; GCP accounts support the Recommendations view only.
 
 ## Cost view
 
