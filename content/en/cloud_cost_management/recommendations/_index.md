@@ -598,6 +598,8 @@ You can see the detailed logic for each recommendation type, along with observab
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
+You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the Datadog MCP Server.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -705,3 +707,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [13]: /bits_ai/bits_ai_dev_agent/setup
 [14]: /bits_ai/bits_ai_dev_agent/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
+[16]: /mcp_server/tools/#cost_recommendations
