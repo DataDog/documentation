@@ -15,6 +15,8 @@ If your organization uses custom roles, an admin must add this permission manual
 
 ## Setup
 
+Set up Bits Code for one of the [supported source code platforms][11].
+
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
@@ -145,3 +147,4 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [8]: /bits_ai/bits_ai_dev_agent/
 [9]: https://app.datadoghq.com/integrations/gitlab-source-code
 [10]: /integrations/gitlab-source-code/
+[11]: /bits_ai/bits_ai_dev_agent/#supported-source-code-platforms
