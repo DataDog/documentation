@@ -115,7 +115,7 @@ After the gate is configured, request an evaluation when deploying the related s
 The [datadog-ci][1] `deployment gate` command runs the evaluation in a single command:
 
 ```bash
-datadog-ci deployment gate --service transaction-backend --env staging
+datadog-ci deployment gate --service transaction-backend --env staging --identifier default
 ```
 
 If the Deployment Gate contains APM Faulty Deployment Detection rules, also specify the version (for example, `--version 1.0.1`).
@@ -190,7 +190,7 @@ spec:
                             key: app-key
                     command: ["/bin/sh", "-c"]
                     args:
-                      - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }}
+                      - datadog-ci deployment gate --service {{ args.service }} --env {{ args.env }} --identifier default
 ```
 
 - The analysis template can receive arguments from the Rollout resource (such as `service`, `env`, and `version`). For more information, see the [official Argo Rollouts docs][4].
@@ -559,7 +559,7 @@ The field `data.attributes.gate_status` contains the result of the evaluation, w
 
 ## Recommendation for first-time onboarding
 
-When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use the Dry Run evaluation mode and the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page:
+When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use the Dry Run evaluation mode and the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][7] page:
 
 1. Create a gate for a service and set the {{< ui >}}Evaluation Mode{{< /ui >}} to {{< ui >}}Dry Run{{< /ui >}}.
 2. Add the gate evaluation to your deployment process. While the gate is in dry-run mode, the API always returns `pass` and deployments are not impacted by the gate result.
