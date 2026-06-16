@@ -13,7 +13,7 @@ title: Clipboard de Datadog
 
 El portapapeles de Datadog es una herramienta multiplataforma para recopilar y compartir señales en distintos contextos. Es personal para cada usuario y almacena todos los gráficos copiados junto con los enlaces guardados. Las señales pueden agruparse y exportarse a un dashboard, notebook o incidencia.
 
-{{< img src="incident_response/incident_management/clipboard-full.png" alt="Portapapeles principal">}}
+{{< img src="dashboards/guide/clipboard-full.png" alt="Portapapeles principal">}}
 
 ## Exploración entre páginas
 
@@ -23,7 +23,7 @@ El portapapeles funciona en todas las páginas de Datadog y mantiene un registro
 
 Para abrir el portapapeles, copie cualquier gráfico y haga clic en **Open Clipboard** (Abrir portapapeles) en la ventana emergente.
 
-{{< img src="incident_response/incident_management/open-clipboard.png" alt="Abrir un gráfico en el portapapeles" style="width:80%;">}}
+{{< img src="dashboards/guide/open-clipboard.png" alt="Abrir un gráfico en el portapapeles" style="width:80%;">}}
 
 O bien, haz clic en "`Cmd/Ctrl + Shift + K` para abrir" en el portapapeles minimizado.
 
@@ -35,13 +35,13 @@ Para añadir un gráfico, cópialo con `Cmd/Ctrl + C` o haz clic en **Copy** (Co
 
 Para añadir una URL, abre el portapapeles y haz clic en **Add current page** (Añadir página actual).
 
-{{< img src="incident_response/incident_management/add-page.png" alt="Añadir un dashboard al portapapeles" style="width:80%;">}}
+{{< img src="dashboards/guide/add-page.png" alt="Añadir un dashboard al portapapeles" style="width:80%;">}}
 
 ## Gestión de clips
 
 Cada elemento del portapapeles puede abrirse, clonarse o borrarse; estas opciones están disponibles al pasar el ratón por encima de cualquier señal. Al abrir un elemento, se navega hasta el enlace de la señal original. Abre la fuente de cualquier gráfico (como el dashboard del que se recortó) al hacer clic en el título del elemento.
 
-{{< img src="incident_response/incident_management/managing-clips.png" alt="Gestiona tus clips" style="width:80%;">}}
+{{< img src="dashboards/guide/managing-clips.png" alt="Gestiona tus clips" style="width:80%;">}}
 
 El portapapeles contiene un máximo de 20 señales. Elimina las señales al borrarlas individualmente, o al hacer clic en **Remove All** (Eliminar todas). Si se añaden más de 20 señales, las más antiguas, almacenadas más a la izquierda, se eliminan automáticamente.
 
@@ -51,7 +51,7 @@ Los elementos del portapapeles pueden exportarse a dashboards, notebooks, o inci
 
 Alternativamente, exporta tu selección a un dashboard, notebook, o incidencia nueva o existente utilizando el menú de exportación. Solo los [gráficos compatibles][1] pueden exportarse a notebooks.
 
-{{< img src="incident_response/incident_management/exporting.png" alt="Exportar desde el portapapeles" style="width:80%;">}}
+{{< img src="dashboards/guide/exporting.png" alt="Exportar desde el portapapeles" style="width:80%;">}}
 
 
 ## Leer más

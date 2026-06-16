@@ -13,7 +13,7 @@ title: Datadog クリップボード
 
 Datadog クリップボードは、さまざまなコンテキストを収集して共有するためのクロスプラットフォーム型ツールです。各ユーザーが個別に使用でき、コピーしたすべてのグラフを保存したリンクと一緒に保存できます。また、シグナルは分類して、ダッシュボード、ノートブック、インシデントにエクスポートできます。
 
-{{< img src="incident_response/incident_management/clipboard-full.png" alt="クリップボード">}}
+{{< img src="dashboards/guide/clipboard-full.png" alt="クリップボード">}}
 
 ## クロスページ検索
 
@@ -23,7 +23,7 @@ Datadog クリップボードは、さまざまなコンテキストを収集し
 
 クリップボードを開くには、いずれかのグラフをコピーして、ポップアップ内で **Open Clipboard** をクリックします。
 
-{{< img src="incident_response/incident_management/open-clipboard.png" alt="クリップボードでグラフを開く" style="width:80%;">}}
+{{< img src="dashboards/guide/open-clipboard.png" alt="クリップボードでグラフを開く" style="width:80%;">}}
 
 または、最小化されたクリップボード上で "`Cmd/Ctrl + Shift + K` to open" をクリックします。
 
@@ -35,13 +35,13 @@ Datadog クリップボードは、さまざまなコンテキストを収集し
 
 URL を追加するには、クリップボードを開き、**Add current page** をクリクします。
 
-{{< img src="incident_response/incident_management/add-page.png" alt="クリップボードにダッシュボードを追加" style="width:80%;">}}
+{{< img src="dashboards/guide/add-page.png" alt="クリップボードにダッシュボードを追加" style="width:80%;">}}
 
 ## クリップの管理
 
 クリップボードの各アイテムは、開く、閉じる、削除することができます。シグナルの上にカーソルを置くと、これらの操作を実行できます。アイテムを開くと、元のシグナルのリンクへと移動します。アイテムのタイトルをクリックすると、グラフのソース (クリップ元のダッシュボードなど) が開きます。
 
-{{< img src="incident_response/incident_management/managing-clips.png" alt="クリップを管理" style="width:80%;">}}
+{{< img src="dashboards/guide/managing-clips.png" alt="クリップを管理" style="width:80%;">}}
 
 クリップボードには、最大 20 個の信号を保存できます。削除する場合は、1 つずつ削除するか、**Remove All** をクリックします。20 個を超える信号が追加された場合、一番古い信号 (一番左側に保存) が自動的に削除されます。
 
@@ -51,7 +51,7 @@ URL を追加するには、クリップボードを開き、**Add current page*
 
 または、エクスポートメニューを使用して、選択内容を新規または既存のダッシュボード、ノートブック、またはインシデントにエクスポートします。ノートブックにエクスポートできるのは[サポートされているグラフ][1]のみです。
 
-{{< img src="incident_response/incident_management/exporting.png" alt="クリップボードからエクスポート" style="width:80%;">}}
+{{< img src="dashboards/guide/exporting.png" alt="クリップボードからエクスポート" style="width:80%;">}}
 
 
 ## その他の参考資料
