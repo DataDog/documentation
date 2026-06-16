@@ -57,7 +57,7 @@ Datadog SCA scans manifest files **only when no supported lockfile is detected**
 - `pyproject.toml`: PEP 621 `dependencies` and `optional-dependencies`, PEP 735 `dependency-groups`, and Poetry dependency sections
 
 <div class="alert alert-info">
-Because manifests declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range by selecting the newest published version that satisfies the range. Pre-release versions are excluded.
+Because manifests can declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range by selecting the newest published version that satisfies the range. Pre-release versions are excluded.
 </div>
 
 ## Select where to run static SCA scans
