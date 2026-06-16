@@ -10,9 +10,8 @@ further_reading:
     text: "Datadog Serverless Monitoring"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
+{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" header="false" btn_hidden="false">}}
 The serverless OTLP traces intake endpoint is in Preview.
-<!-- TODO: Insert Preview sign-up form URL from product -->
 {{< /callout >}}
 
 ## Overview
