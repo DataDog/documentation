@@ -196,6 +196,7 @@ Set how often the monitor evaluates your data:
 
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
+- **Manual**: The monitor only runs when triggered programmatically. You can triggers these monitors using the APIs found [here](https://docs.datadoghq.com/api/latest/data-observability/).
 
 ### Set alert conditions
 
