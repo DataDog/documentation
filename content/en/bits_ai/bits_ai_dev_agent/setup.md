@@ -43,7 +43,7 @@ Set up Bits Code for one of the [supported source code platforms][11].
 
 1. Install the [GitLab Source Code integration][9]. For full installation and configuration steps, see the [GitLab Source Code integration guide][10].
 1. Configure the following permissions for Bits Code:
-   - The service account must have the `Developer` role on the project. This role can be inherited from the group.
+   - The service account must have the [`Developer` role][12] on the project. This role can be inherited from [a group][13].
    - The service account's token must have the `api`, `write_repository`, and `read_user` scopes.
 
 {{% /tab %}}
@@ -148,3 +148,5 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [9]: https://app.datadoghq.com/integrations/gitlab-source-code
 [10]: /integrations/gitlab-source-code/
 [11]: /bits_ai/bits_ai_dev_agent/#supported-source-code-platforms
+[12]: https://docs.gitlab.com/user/permissions/#default-roles
+[13]: https://docs.gitlab.com/user/permissions/#groups
