@@ -51,6 +51,8 @@ This page explains the basic usage of these checks, which enable you to scrape c
 
 Configure your OpenMetrics or Prometheus check using Autodiscovery. Use pod annotations or `DatadogInstrumentation` custom resources.
 
+If you're coming from the Prometheus Operator, `DatadogInstrumentation` is the CRD-based equivalent: target a workload as you would with a `PodMonitor`, or a `Service` as you would with a `ServiceMonitor`. See [Configure Autodiscovery with the DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
+
 {{< tabs >}}
 {{% tab "Annotations (AD v2)" %}}
 
@@ -128,7 +130,7 @@ spec:
           - <CONTAINER_IMAGE>
         initConfig: {}
         instances:
-          - openmetrics_endpoint: "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> "
+          - openmetrics_endpoint: "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT>"
             namespace: "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>"
             metrics:
               - "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
