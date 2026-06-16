@@ -16,18 +16,25 @@ Work through the diff and apply every checklist that matches. A single PR can hi
 
 ### If CSS or HTML changed
 
-QA against [the CSS checklist](../../docs/css/checklists/all.md).
+1. QA against [the CSS checklist](../../docs/css/checklists/all.md).
+
+2. Verify that the CSS checklist and its referenced documentation are up to date. Has a decision been made that would change this information? Query on any recommended changes.
 
 ### If a component was added or changed
 
 For each affected component:
 
 1. Determine whether it's static or interactive.
+
 2. QA against the relevant sections of [the component checklist](../../docs/components/checklists/all.md).
+
+3. Verify that the component checklist and its referenced documentation are up to date. Has a decision been made that would change this information? Query on any recommended changes.
 
 ### The API spec pipeline changed (`src/lib/api/`, schemas, fixtures, `.md.ts` routes)
 
-QA against [the API spec pipeline checklist](../../docs/api/checklists/all.md).
+1. QA against [the API spec pipeline checklist](../../docs/api/checklists/all.md).
+
+2. Verify that the API spec pipeline checklist and its referenced documentation are up to date. Has a decision been made that would change this information? Query on any recommended changes.
 
 ## 3. Enforce the project rules
 
