@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-[Bits Code][8] integrates with GitHub and GitLab to open, update, and iterate on pull/merge requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
+[Bits Code][8] integrates with [source code providers][11] to open, update, and iterate on pull/merge requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ Set up Bits Code for one of the [supported source code providers][11].
 {{% tab "GitLab" %}}
 
 1. Install the [GitLab Source Code integration][9]. For full installation and configuration steps, see the [GitLab Source Code integration guide][10].
-1. Configure the [service account][16] in GitLab:
+1. Ensure the GitLab [service account][16] has the following configurations:
    - The service account must have the [`Developer` role][12] on the project. This role can be inherited from a [group][13].
    - The service account's personal access token must have the following [scopes][15]: `api`, `write_repository`, and `read_user`.
 
