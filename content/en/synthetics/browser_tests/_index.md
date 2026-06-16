@@ -96,7 +96,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    * **Disable CORS**: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
    * **Disable CSP**: Select to prevent the Content Security Policy (CSP) from blocking your test.
-   * **Capture network payloads**: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [Resources tab][3] of your test results to view request and response headers and body.
+   * **Capture HTTP payloads**: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [Resources tab][3] of your test results to view request and response headers and body.
    * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
