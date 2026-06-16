@@ -92,7 +92,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 In Project Settings, you can manage membership, configure the auto-closing of cases, and set up third-party integrations like Jira and ServiceNow.
 
 {{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
-{{< img src="/service_management/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/settings/settings_jira.png" alt="Jira configuration options for case management settings" style="width:100%;" >}}
 
 1. Ensure the Jira integration is configured.
 1. In Case Management project settings, enable **Jira** for manual Jira issue creation from the project.
@@ -157,7 +157,7 @@ Manual incident declaration during high event volumes can cause delays and incre
 
 Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate cases to Incidents**.
 
-{{< img src="/service_management/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
+{{< img src="/incident_response/case_management/notifications_integrations/case_auto_escalation.png" alt="Case Management settings page showing incident auto-escalation configuration" style="width:70%;" >}}
 
 When enabled, any case that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
 

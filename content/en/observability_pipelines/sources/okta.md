@@ -94,7 +94,7 @@ After configuring the Amazon EventBridge, you can view your Okta logs in [Log Ex
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#secret-defaults
-[3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
+[3]: /observability_pipelines/configuration/install_the_worker/
 [4]: https://help.okta.com/en-us/content/topics/reports/log-streaming/add-aws-eb-log-stream.htm
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/logs

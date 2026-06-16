@@ -2,7 +2,7 @@
 title: Status Events
 description: "View and manage monitor events on the status page including quick actions, event details, and troubleshooting tools."
 further_reading:
-- link: "service_management/events/"
+- link: "events/"
   tag: "Documentation"
   text: "Event Management"
 ---
