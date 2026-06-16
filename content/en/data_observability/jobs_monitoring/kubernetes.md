@@ -165,7 +165,7 @@ features:
   apm:
     instrumentation:
       enabled: true
-      enabledNamespaces:        # limits injection to these namespaces; without this, SSI instruments all namespaces
+      enabledNamespaces:
         - <NAMESPACE>
       targets:
         - name: spark-driver
@@ -202,7 +202,7 @@ datadog:
   apm:
     instrumentation:
       enabled: true
-      enabledNamespaces:        # limits injection to these namespaces; without this, SSI instruments all namespaces
+      enabledNamespaces:
         - <NAMESPACE>
       targets:
         - name: spark-driver
