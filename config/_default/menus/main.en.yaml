@@ -6407,11 +6407,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
       weight: 103
-    - name: Live Debugger
-      url: ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 104
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6437,11 +6432,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_exception_replay
       weight: 104
-    - name: Live Debugger
-      url: ide_plugins/vscode/live_debugger/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_live_debugger
-      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
