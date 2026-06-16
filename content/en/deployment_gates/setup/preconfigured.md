@@ -1,10 +1,10 @@
 ---
 title: Set Up Preconfigured Deployment Gates
-description: "Create gates and rules in Datadog ahead of time, then reference them by service and environment at deployment time."
+description: "Create gates and rules in Datadog in advance, then reference them by service and environment at deployment time."
 further_reading:
 - link: "/deployment_gates/setup/jit"
   tag: "Documentation"
-  text: "Set up JIT Deployment Gates"
+  text: "Set up Just-In-Time (JIT) Deployment Gates"
 - link: "/deployment_gates/explore"
   tag: "Documentation"
   text: "Learn about the Deployment Gates explorer"
@@ -19,7 +19,7 @@ Deployment Gates are in Preview. If you're interested in this feature, complete 
 
 With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
-Looking to define rules inline in your deployment config? See [JIT Deployment Gates][5].
+Looking to define rules inline in your deployment config? See [Just-In-Time (JIT) Deployment Gates][5].
 
 ## Create a gate
 
@@ -40,7 +40,7 @@ Looking to define rules inline in your deployment config? See [JIT Deployment Ga
 
 Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
-1. {{< ui >}}Name{{< /ui >}}: A descriptive label that shows up on the [Deployment Gates Evaluations][7] page (for example, `Check all P0 monitors`).
+1. {{< ui >}}Name{{< /ui >}}: A descriptive label that appears on the [Deployment Gates Evaluations][7] page (for example, `Check all P0 monitors`).
 2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}} or {{< ui >}}Faulty Deployment Detection{{< /ui >}}.
 3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for the available options.
 4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
@@ -50,7 +50,7 @@ Each gate requires one or more rules to evaluate. All rules must pass for the ga
 For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
-{{% tab "Monitors" %}}
+{{% tab "Monitor" %}}
 The Monitor rule evaluates the state of a set of monitors over a configurable period of time. It fails if at any time during the evaluation period:
 
 - No monitors match the query.
@@ -132,7 +132,7 @@ The `deployment gate` command is available in datadog-ci versions v3.17.0 and ab
 **Required environment variables**:
 
 - `DD_API_KEY`: Your [API key][2].
-- `DD_APP_KEY`: Your [Application key][3].
+- `DD_APP_KEY`: Your [application key][3].
 - `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command.
 
 For complete configuration options and usage examples, see the [`deployment gate` command documentation][4].
@@ -243,7 +243,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-The [`Datadog Deployment Gate GitHub Action`][4] runs the evaluation as part of a workflow.
+The [Datadog Deployment Gate GitHub Action][4] runs the evaluation as part of a workflow.
 
 Add a `DataDog/deployment-gate-github-action` step to your existing deployment workflow:
 
@@ -289,7 +289,7 @@ The action:
 **Required environment variables**:
 
 - `DD_API_KEY`: Your [API key][2].
-- `DD_APP_KEY`: Your [Application key][3].
+- `DD_APP_KEY`: Your [application key][3].
 
 For complete configuration options and usage examples, see the [`DataDog/deployment-gate-github-action` repository][4].
 
@@ -564,7 +564,7 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 1. Create a gate for a service and set the {{< ui >}}Evaluation Mode{{< /ui >}} to {{< ui >}}Dry Run{{< /ui >}}.
 2. Add the gate evaluation to your deployment process. While the gate is in dry-run mode, the API always returns `pass` and deployments are not impacted by the gate result.
 3. After a period of time (for example, 1-2 weeks), check the gate and rule executions on the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page. The UI shows the real status, so you can see when the gate would have failed and the reason behind it.
-4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from {{< ui >}}Dry Run{{< /ui >}} to {{< ui >}}Active{{< /ui >}}. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
+4. When you are confident that the gate behavior is as you expect, edit the gate and switch the evaluation mode from {{< ui >}}Dry Run{{< /ui >}} to {{< ui >}}Active{{< /ui >}}. Afterwards, the API starts returning the actual status and deployments start getting promoted or rolled back based on the gate result.
 
 ## Further reading
 

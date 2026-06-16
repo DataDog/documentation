@@ -1,10 +1,10 @@
 ---
 title: Set Up Deployment Gates
-description: "Compare JIT and preconfigured Deployment Gates and follow the setup walkthrough for your chosen mode."
+description: "Compare Just-In-Time (JIT) and preconfigured Deployment Gates and follow the setup walkthrough for your chosen mode."
 further_reading:
 - link: "/deployment_gates/setup/jit"
   tag: "Documentation"
-  text: "Set up JIT Deployment Gates"
+  text: "Set up Just-In-Time (JIT) Deployment Gates"
 - link: "/deployment_gates/setup/preconfigured"
   tag: "Documentation"
   text: "Set up preconfigured Deployment Gates"
@@ -27,15 +27,15 @@ Deployment Gates have two main components:
 
 Gate evaluations are asynchronous — the API returns immediately with an evaluation ID, and the result resolves to `pass` or `fail` over time as the rules run.
 
-Deployment Gates support two evaluation modes: JIT and preconfigured.
-
 ## Deployment Gate evaluation modes
+Deployment Gates support two evaluation modes: Just-In-Time (JIT) and preconfigured.
 
-| | **[JIT (Just-In-Time)][1]** (default) | **[Preconfigured][2]** |
+
+| | **[JIT][1]** (default) | **[Preconfigured][2]** |
 |---|---|---|
-| **Where rules live** | Inline in your deployment config or CI step | Persisted in Datadog (UI, API, or Terraform) |
+| **Where rules live** | Inline in your deployment configuration or CI step | Persisted in Datadog (UI, API, or Terraform) |
 | **Setup in Datadog** | None | Create a gate and rules ahead of time |
-| **Best for** | Rules-as-code, per-deployment flexibility, teams that own their own gate config | Shared rules across services, central management, non-CI editing |
+| **Best for** | Rules-as-code, per-deployment flexibility, teams that own their own gate configuration | Shared rules across services, central management, non-CI editing |
 | **How to evaluate** | Send rules in the evaluation request | Reference the gate by service and environment |
 
 You can use different modes across different gates if needed.

@@ -1,5 +1,5 @@
 ---
-title: Set Up JIT Deployment Gates
+title: Set Up Just-In-Time (JIT) Deployment Gates
 description: "Evaluate Deployment Gates by sending rules inline in the evaluation request — no gate needs to exist in Datadog ahead of time."
 further_reading:
 - link: "/deployment_gates/setup/preconfigured"
@@ -17,7 +17,7 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-With **JIT (Just-In-Time)** Deployment Gates, rules are defined inline in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes JIT a good fit for rules-as-code and per-deployment flexibility.
+With **Just-In-Time (JIT)** Deployment Gates, rules are defined inline in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes JIT a good fit for rules-as-code and per-deployment flexibility.
 
 Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [Preconfigured Deployment Gates][5].
 
@@ -38,22 +38,22 @@ The shape of `configuration`:
 
 Top-level fields:
 
-- `rules` (required): one or more rule entries. All rules must pass for the gate to pass.
-- `dry_run` (optional): when `true`, the gate always returns `pass` over the API while the real result is recorded in the UI. Useful for onboarding. See [Recommendation for first-time onboarding](#recommendation-for-first-time-onboarding).
+- `rules` (required): One or more rule entries. All rules must pass for the gate to pass.
+- `dry_run` (optional): When `true`, the gate always returns `pass` over the API while the real result is recorded in the UI. Useful for onboarding. See [Recommendation for first-time onboarding](#recommendation-for-first-time-onboarding).
 
 Each rule has these fields:
 
-- `type` (required): the rule type — `monitor` or `faulty_deployment_detection`. See [Rule types](#rule-types) for what each evaluates.
-- `name` (required): a human-readable label that shows up on the [Deployment Gates Evaluations][6] page.
-- `options` (required): rule-specific settings — see [Rule types](#rule-types).
-- `dry_run` (optional): per-rule dry-run override. Overrides the gate-level `dry_run`.
+- `type` (required): The rule type, `monitor` or `faulty_deployment_detection`. See [Rule types](#rule-types) for what each evaluates.
+- `name` (required): A human-readable label that shows up on the [Deployment Gates Evaluations][6] page.
+- `options` (required): Rule-specific settings; see [Rule types](#rule-types).
+- `dry_run` (optional): Per-rule dry-run override. Overrides the gate-level `dry_run`.
 
 ## Rule types
 
 For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
-{{% tab "Monitors" %}}
+{{% tab "Monitor" %}}
 The Monitor rule evaluates the state of a set of monitors over a configurable period of time. It fails if at any time during the evaluation period:
 
 - No monitors match the query.
@@ -128,7 +128,7 @@ Example inline rule:
 
 ## Evaluate a gate from your pipeline
 
-You can request a gate evaluation from your deployment pipeline in several ways. The `datadog-ci` CLI, Argo Rollouts integration, and GitHub Action accept inline rules through a JSON config file using **camelCase** keys (`dryRun`). Direct API calls and the generic script send the same configuration in the request payload using **snake_case** keys (`dry_run`), matching the API schema.
+You can request a gate evaluation from your deployment pipeline in several ways. The `datadog-ci` CLI, Argo Rollouts integration, and GitHub Action accept inline rules through a JSON config file using camel case keys (`dryRun`). Direct API calls and the generic script send the same configuration in the request payload using snake case keys (`dry_run`), matching the API schema.
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
@@ -171,13 +171,13 @@ The command:
 - Has built-in automatic retries for errors.
 - Accepts `--fail-on-error` to customize behavior on unexpected Datadog errors.
 
-The `deployment gate` command is available in datadog-ci versions v3.17.0 and above. The `--config` flag requires a more recent version — see the [datadog-ci release notes][5].
+The `deployment gate` command is available in datadog-ci versions v3.17.0 and above. The `--config` flag requires a more recent version; see the [datadog-ci release notes][5].
 
 **Required environment variables**:
 
 - `DD_API_KEY`: Your [API key][2].
-- `DD_APP_KEY`: Your [Application key][3].
-- `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command.
+- `DD_APP_KEY`: Your [application key][3].
+- `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a Preview command.
 
 For complete configuration options and usage examples, see the [`deployment gate` command documentation][4].
 
@@ -195,7 +195,7 @@ Use the template below as a starting point:
 
 - Replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
 - Define the [API key][5] and [application key][6] as environment variables. The example uses a [Kubernetes Secret][3] called `datadog` with two data values: `api-key` and `app-key`. You can also pass the values in plain text with `value` instead of `valueFrom`.
-- Use a datadog-ci image version that supports the `--config` flag — see the [datadog-ci release notes][8].
+- Use a datadog-ci image version that supports the `--config` flag; see the [datadog-ci release notes][8].
 
 Store the gate config in a ConfigMap, then mount it into the job and pass `--config` to the CLI:
 
@@ -328,7 +328,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-The [`Datadog Deployment Gate GitHub Action`][4] runs the evaluation as part of a workflow. Commit a gate config file to the repository and pass its path with the `config` input. Use a version of the action that supports the `config` input — see the [action's releases][5]:
+The [Datadog Deployment Gate GitHub Action][4] runs the evaluation as part of a workflow. Commit a gate configuration file to the repository and pass its path with the `config` input. Use a version of the action that supports the `config` input — see the [action's releases][5]:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
@@ -400,7 +400,7 @@ The action:
 **Required environment variables**:
 
 - `DD_API_KEY`: Your [API key][2].
-- `DD_APP_KEY`: Your [Application key][3].
+- `DD_APP_KEY`: Your [application key][3].
 
 For complete configuration options and usage examples, see the [`DataDog/deployment-gate-github-action` repository][4].
 
@@ -708,7 +708,7 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 1. Set `dry_run: true` on the `configuration` (or `dryRun: true` in the CLI config file). To mark only some rules as dry-run, set `dry_run` per rule. A dry-run evaluation always returns `pass` over the API, but the real result is recorded in the UI.
 2. Add the gate evaluation to your deployment process. Deployments are not impacted by the gate result while dry-run is enabled.
 3. After a period of time (for example, 1-2 weeks), check the gate and rule executions on the {{< ui >}}Deployment Gates Evaluations{{< /ui >}} page. The UI shows the real status, so you can see when the gate would have failed and the reason behind it.
-4. When you are confident that the gate behavior is as you expect, switch `dry_run` to `false`. Afterwards, the API starts returning the "real" status and deployments start getting promoted or rolled back based on the gate result.
+4. When you are confident that the gate behavior is as you expect, switch `dry_run` to `false`. Afterwards, the API starts returning the actual status and deployments start getting promoted or rolled back based on the gate result.
 
 ## Further reading
 
