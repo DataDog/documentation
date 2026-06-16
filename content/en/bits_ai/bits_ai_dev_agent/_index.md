@@ -31,7 +31,7 @@ Bits Code supports the following source code platforms:
 - **GitHub**: GitHub.com and GitHub Enterprise Cloud
 - **GitLab**: GitLab.com
 
-Self-hosted platforms, such as GitHub Enterprise Server and GitLab Self-Managed or Dedicated, are not yet supported.
+Self-hosted platforms, such as GitHub Enterprise Server and GitLab Self-Managed, are not supported.
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
