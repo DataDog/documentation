@@ -34,7 +34,7 @@ When you join an incident channel in Slack (connected to Datadog Incident Manage
 
 When an incident is changed to resolved, Incident AI posts a final summary. This is visible to everyone in the channel.
 
-{{< img src="service_management/incidents/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
+{{< img src="incident_response/incident_management/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
 ## Related incident detection
 

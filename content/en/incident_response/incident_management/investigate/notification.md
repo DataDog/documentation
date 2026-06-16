@@ -46,7 +46,7 @@ To page a team or user using [Datadog On-Call][4]:
 
 ## View all notifications
 
-{{< img src="/service_management/incidents/notification/incident_notifications_sent.png" alt="Notification tab of an incident showing example list of sent messages" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/notification/incident_notifications_sent.png" alt="Notification tab of an incident showing example list of sent messages" style="width:90%;" >}}
 
 The Notifications tab of an incident lists notifications as **Drafts** and **Sent**. Both lists display:
 - The (intended) recipients of a notification.
