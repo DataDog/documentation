@@ -16,8 +16,6 @@ further_reading:
   text: "Datadog Cluster Agent"
 ---
 
-<div class="alert alert-info">Configuring Autodiscovery with the <code>DatadogInstrumentation</code> custom resource is in beta.</div>
-
 ## Overview
 
 The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscovery][1] checks for specific Kubernetes workloads through a single Kubernetes resource, instead of [pod annotations][2]. With this approach, you can enable, update, and roll back integration configurations without editing pod specs or triggering Agent or application rollouts.
@@ -47,7 +45,7 @@ The `DatadogInstrumentation` controller runs in the Cluster Agent and is disable
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-While the feature is in beta, opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.81.0 or later.
+Opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.81.0 or later.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1

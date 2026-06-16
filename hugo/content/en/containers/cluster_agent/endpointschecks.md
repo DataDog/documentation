@@ -261,8 +261,6 @@ ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 
 This syntax supports a `%%host%%` [template variable][11] which is replaced by the IP of each endpoint. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
 
-To manage the same endpoint-check configuration without annotating the Service, use a `DatadogInstrumentation` resource with `targetRef.kind: Service`. See [Configure Autodiscovery with the DatadogInstrumentation CRD][14].
-
 **Note**: Custom endpoints log configuration is only supported during Docker socket log collection, and not Kubernetes log file collection.
 
 #### Example: HTTP check on an NGINX-backed service with an NGINX check on the service's endpoints
@@ -396,6 +394,29 @@ spec:
 [14]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/#service-targets
 {{% /tab %}}
 {{< /tabs >}}
+
+### Configuration from DatadogInstrumentation CRD
+
+To manage endpoint-check configuration without annotating the Service, use a `DatadogInstrumentation` resource that targets a Service. For setup steps and an example, see [Configure Autodiscovery with the DatadogInstrumentation CRD][14].
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: nginx-endpoints
+spec:
+  targetRef:
+    apiVersion: v1
+    kind: Service
+    name: nginx
+  config:
+    checks:
+      - integration: nginx
+        initConfig: {}
+        instances:
+          - name: "My Nginx Service Endpoints"
+            nginx_status_url: "http://%%host%%:%%port%%/status/"
+```
 
 ## Further Reading
 

@@ -186,12 +186,7 @@ The `source` tag can be important for your logs, as the [out of box log pipeline
 
 Setting a `source` and `service` tag on these log configurations is strongly recommended. Match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] so your logs are automatically enriched; you can also find a [library of pipelines in Datadog][16]. The `service` tag powers [Unified Service Tagging][4], linking your logs with metrics and traces from the same service. If `source` and `service` are omitted, the Agent falls back to the `service` tag from Unified Service Tagging (when set), and otherwise to the container's short image name.
 
-### Autodiscovery log configuration
-
-With Autodiscovery, configure log collection with pod annotations or a `DatadogInstrumentation` custom resource.
-
-{{< tabs >}}
-{{% tab "Annotations" %}}
+### Autodiscovery annotations
 
 The Agent searches Pod annotations for integration templates. To apply a specific configuration to a container, add the annotation `ad.datadoghq.com/<CONTAINER_NAME>.logs` to your Pod with the JSON formatted log configuration.
 
@@ -218,36 +213,6 @@ spec:
     - name: '<CONTAINER_NAME>'
 # (...)
 ```
-
-{{% /tab %}}
-{{% tab "DatadogInstrumentation CRD" %}}
-
-Use a [`DatadogInstrumentation` custom resource][23] to configure the same Autodiscovery log configuration shown in annotation examples, without modifying pod annotations.
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: <CR_NAME>
-  namespace: <WORKLOAD_NAMESPACE>
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: <WORKLOAD_NAME>
-  config:
-    checks:
-      - integration: <INTEGRATION_NAME>
-        containerImage:
-          - <CONTAINER_IMAGE>
-        logs:
-          - <LOG_CONFIG>
-```
-
-For more details, see [Configure Autodiscovery with the DatadogInstrumentation CRD][23].
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Example log Autodiscovery annotations
 
@@ -276,31 +241,6 @@ spec:
           image: owner/example-image:latest
 ```
 
-You can apply the same log configuration with a `DatadogInstrumentation` custom resource:
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: example-logs
-  namespace: <WORKLOAD_NAMESPACE>
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: example
-  config:
-    checks:
-      - integration: <INTEGRATION_NAME>
-        containerImage:
-          - owner/example-image
-        logs:
-          - source: java
-            service: example-app
-            tags:
-              - foo:bar
-```
-
 #### Configure two different containers
 To apply two different integration templates to two different containers within your Pod, `<CONTAINER_NAME_1>` and `<CONTAINER_NAME_2>`, add the following annotations to your Pod:
 
@@ -320,6 +260,35 @@ spec:
     # (...)
     - name: '<CONTAINER_NAME_2>'
 # (...)
+```
+
+### Autodiscovery with DatadogInstrumentation CRD
+
+Use a [`DatadogInstrumentation` custom resource][23] to configure Autodiscovery log collection without modifying pod annotations. For more details, see [Configure Autodiscovery with the DatadogInstrumentation CRD][23].
+
+The following example configures log collection for the `example` Deployment. It sets logs from the `app` container with the tags `source:java`, `service:example-app`, and `foo:bar`.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: example-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: example
+  config:
+    checks:
+      - integration: logs
+        containerImage:
+          - owner/example-image
+        logs:
+          - source: java
+            service: example-app
+            tags:
+              - foo:bar
 ```
 
 ### Autodiscovery configuration files
