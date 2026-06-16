@@ -111,8 +111,6 @@ The Datadog Agent and the OpenTelemetry Collector OTLP Exporter allow changing t
 
 **Note**: `send_aggregation_metrics` is useful only when not using the distributions mode. Before the OTLP Exporter v0.75.0 and the Datadog Agent v6.45.0 and v7.45.0 use `send_count_sum_metrics` instead.
 
-[1]: /metrics/distributions
-[2]: /dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
 {{% tab "Summary" %}}
 
