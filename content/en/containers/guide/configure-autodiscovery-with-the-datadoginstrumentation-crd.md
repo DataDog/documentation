@@ -34,7 +34,11 @@ The configuration is reconciled by a controller in the [Datadog Cluster Agent][3
 ## Requirements
 
 - Datadog Agent and Cluster Agent v7.81 or later.
-- To install the CRD and enable the controller, Datadog Operator v1.28 or later, or Datadog Helm chart v2.223.0 or later.
+
+To install the CRD and enable the controller, use one of the following:
+
+- Datadog Operator v1.28 or later.
+- Datadog Helm chart v2.223.0 or later.
 
 ## Enable the controller
 
@@ -97,27 +101,23 @@ If you manage Datadog CRDs separately, install or upgrade the Datadog CRDs Helm 
 helm upgrade --install datadog-crds datadog/datadog-crds
 ```
 
-When the controller is enabled, it waits for the `DatadogInstrumentation` CRD to be installed in the cluster before it starts reconciling resources.
-
 ## Configure a workload check
 
 A `DatadogInstrumentation` resource has two main parts:
 
 - `spec.targetRef`: identifies the workload to configure, by `apiVersion`, `kind`, and `name`. The resource and the target workload must be in the same namespace.
-- `spec.config.checks`: a list of Autodiscovery check configurations to apply to the target workload's containers.
+- `spec.config.checks`: defines the Autodiscovery configurations applied to the target.
 
-For Autodiscovery, `targetRef` supports the following target kinds:
+You can target the following Kubernetes resources:
 
-| `apiVersion` | `kind` | Behavior |
-| --- | --- | --- |
-| `apps/v1` | `Deployment` | Targets Deployment pods. |
-| `apps/v1` | `DaemonSet` | Targets DaemonSet pods. |
-| `apps/v1` | `StatefulSet` | Targets StatefulSet pods. |
-| `batch/v1` | `CronJob` | Targets pods from CronJob Jobs. |
-| `batch/v1` | `Job` | Targets Job pods. |
-| `v1` | `Service` | Targets each Service endpoint. See [Service targets](#service-targets). |
+- Deployment
+- DaemonSet
+- StatefulSet
+- CronJob
+- Job
+- Service. Service targets schedule endpoint checks. See [Service targets](#service-targets).
 
-The following example configures the [Redis integration][4] for a `Deployment` named `redis`, including log collection. It mirrors the [annotation-based example][2], using the same [template variables][5] such as `%%host%%`:
+This example configures a [Redis integration][4] for a `Deployment` named `redis`, including log collection. It mirrors this [annotation-based example][2], using the same [template variables][5], including `%%host%%`:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -157,17 +157,10 @@ Check the resource status:
 kubectl describe datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE>
 ```
 
-The status conditions show the state of the check configuration, including whether Datadog resolved the target workload and applied the configuration. To view only the conditions:
-
-```shell
-kubectl get datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE> \
-  -o jsonpath='{range .status.conditions[*]}{.type}{"\t"}{.status}{"\t"}{.reason}{"\t"}{.message}{"\n"}{end}'
-```
-
 Each entry in `checks` accepts the following fields. For workload targets, provide `instances`, `logs`, or both. If neither is provided, the resource is rejected.
 
 `integration`
-: Required. The name of the Datadog integration to run, such as `redisdb`.
+: Required. The name of the Datadog integration to run, for example `redisdb`.
 
 `containerImage`
 : Required for workload targets. Not used for Service targets. A list of container image identifiers to match against the target workload's containers.
@@ -176,7 +169,7 @@ Each entry in `checks` accepts the following fields. For workload targets, provi
 : Optional. The `init_config` section for the integration.
 
 `instances`
-: Optional. A list of instance configurations for the check. Each instance supports [Autodiscovery template variables][5], such as `%%host%%`.
+: Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
 `logs`
 : Optional. The log collection configuration for the matching containers.
@@ -226,7 +219,7 @@ If a workload already has annotation-based Autodiscovery configuration for a che
 
 ## One resource per target
 
-A workload or Service can be the target of only one `DatadogInstrumentation` resource within a namespace. A validating admission webhook rejects a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
+A workload or Service can be the target of only one `DatadogInstrumentation` resource within a namespace. A validation webhook will reject a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
 
 ## Check the status
 
