@@ -489,7 +489,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Sign in to your Datadog account.
 1. **Restart the IDE.**
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Open the chat panel, select agent mode, and click the {{< ui >}}Configure Tools{{< /ui >}} button.
-   {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
+   {{< img src="mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 

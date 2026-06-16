@@ -59,5 +59,5 @@ La integración Redmine no incluye checks de servicio.
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://app.datadoghq.com/integrations/redmine
-[2]: https://docs.datadoghq.com/es/service_management/events/explorer/
+[2]: https://docs.datadoghq.com/es/events/explorer/
 [3]: https://docs.datadoghq.com/es/help/

@@ -24318,6 +24318,7 @@ components:
           format: int64
           type: integer
       type: object
+      x-keep-typed-in-additional-properties: true
     UsageSummaryDateOrg:
       description: |-
         Global hourly report of all data billed by Datadog for a given organization.
@@ -25637,6 +25638,7 @@ components:
           format: int64
           type: integer
       type: object
+      x-keep-typed-in-additional-properties: true
     UsageSummaryResponse:
       description: |-
         Response summarizing all usage aggregated across the months in the request for
@@ -26984,6 +26986,7 @@ components:
           format: int64
           type: integer
       type: object
+      x-keep-typed-in-additional-properties: true
     UsageSyntheticsAPIHour:
       description: Number of Synthetics API tests run for each hour for a given organization.
       properties:

@@ -3290,7 +3290,7 @@ menu:
           - RestoreSecurityMonitoringRule
         unstable:
           - v2
-        order: 133
+        order: 132
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
       identifier: security-monitoring-convert-an-existing-rule-from-json-to-terraform
@@ -3447,7 +3447,7 @@ menu:
           - GetSingleEntityContext
         unstable:
           - v2
-        order: 132
+        order: 131
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context
@@ -3795,7 +3795,7 @@ menu:
         operationids:
           - SendSecurityMonitoringNotificationPreview
         unstable: []
-        order: 131
+        order: 130
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -4178,9 +4178,8 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTickets
-        unstable:
-          - v2
-        order: 129
+        unstable: []
+        order: 128
     - name: Attach security findings to a ServiceNow ticket
       url: /api/latest/security-monitoring/attach-security-findings-to-a-servicenow-ticket/
       identifier: security-monitoring-attach-security-findings-to-a-servicenow-ticket
@@ -4191,9 +4190,8 @@ menu:
           - v2
         operationids:
           - AttachServiceNowTicket
-        unstable:
-          - v2
-        order: 130
+        unstable: []
+        order: 129
     - name: Search security findings
       url: /api/latest/security-monitoring/search-security-findings/
       identifier: security-monitoring-search-security-findings
@@ -4290,7 +4288,7 @@ menu:
           - UpdateFindingsAssignee
         unstable:
           - v2
-        order: 128
+        order: 2
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
       identifier: security-monitoring-list-security-findings
@@ -4316,19 +4314,6 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Mute or unmute a batch of findings
-      url: /api/latest/security-monitoring/mute-or-unmute-a-batch-of-findings/
-      identifier: security-monitoring-mute-or-unmute-a-batch-of-findings
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - MuteFindings
-        unstable:
-          - v2
-        order: 2
     - name: List findings
       url: /api/latest/security-monitoring/list-findings/
       identifier: security-monitoring-list-findings
@@ -7682,6 +7667,19 @@ menu:
       url: /api/latest/application-security/
       identifier: application-security
       generated: true
+    - name: Get Application Security details for a service
+      url: /api/latest/application-security/get-application-security-details-for-a-service/
+      identifier: application-security-get-application-security-details-for-a-service
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAsmServiceByName
+        unstable:
+          - v2
+        order: 16
     - name: Update a WAF Policy
       url: /api/latest/application-security/update-a-waf-policy/
       identifier: application-security-update-a-waf-policy
@@ -19154,6 +19152,88 @@ menu:
           - UpsertSyncConfig
         unstable: []
         order: 1
+    - name: Tag Policies
+      url: /api/latest/tag-policies/
+      identifier: tag-policies
+      generated: true
+    - name: Get a tag policy compliance score
+      url: /api/latest/tag-policies/get-a-tag-policy-compliance-score/
+      identifier: tag-policies-get-a-tag-policy-compliance-score
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicyScore
+        unstable:
+          - v2
+        order: 6
+    - name: Update a tag policy
+      url: /api/latest/tag-policies/update-a-tag-policy/
+      identifier: tag-policies-update-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagPolicy
+        unstable:
+          - v2
+        order: 4
+    - name: Get a tag policy
+      url: /api/latest/tag-policies/get-a-tag-policy/
+      identifier: tag-policies-get-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicy
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a tag policy
+      url: /api/latest/tag-policies/delete-a-tag-policy/
+      identifier: tag-policies-delete-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTagPolicy
+        unstable:
+          - v2
+        order: 5
+    - name: Create a tag policy
+      url: /api/latest/tag-policies/create-a-tag-policy/
+      identifier: tag-policies-create-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTagPolicy
+        unstable:
+          - v2
+        order: 2
+    - name: List tag policies
+      url: /api/latest/tag-policies/list-tag-policies/
+      identifier: tag-policies-list-tag-policies
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPolicies
+        unstable:
+          - v2
+        order: 1
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -19736,7 +19816,7 @@ menu:
         operationids:
           - CancelWorkflowInstance
         unstable: []
-        order: 8
+        order: 9
     - name: Get a workflow instance
       url: /api/latest/workflow-automation/get-a-workflow-instance/
       identifier: workflow-automation-get-a-workflow-instance
@@ -19748,7 +19828,7 @@ menu:
         operationids:
           - GetWorkflowInstance
         unstable: []
-        order: 7
+        order: 8
     - name: Execute a workflow
       url: /api/latest/workflow-automation/execute-a-workflow/
       identifier: workflow-automation-execute-a-workflow
@@ -19760,7 +19840,7 @@ menu:
         operationids:
           - CreateWorkflowInstance
         unstable: []
-        order: 6
+        order: 7
     - name: List workflow instances
       url: /api/latest/workflow-automation/list-workflow-instances/
       identifier: workflow-automation-list-workflow-instances
@@ -19772,7 +19852,7 @@ menu:
         operationids:
           - ListWorkflowInstances
         unstable: []
-        order: 5
+        order: 6
     - name: Update an existing Workflow
       url: /api/latest/workflow-automation/update-an-existing-workflow/
       identifier: workflow-automation-update-an-existing-workflow
@@ -19784,7 +19864,7 @@ menu:
         operationids:
           - UpdateWorkflow
         unstable: []
-        order: 3
+        order: 4
     - name: Get an existing Workflow
       url: /api/latest/workflow-automation/get-an-existing-workflow/
       identifier: workflow-automation-get-an-existing-workflow
@@ -19796,7 +19876,7 @@ menu:
         operationids:
           - GetWorkflow
         unstable: []
-        order: 1
+        order: 2
     - name: Delete an existing Workflow
       url: /api/latest/workflow-automation/delete-an-existing-workflow/
       identifier: workflow-automation-delete-an-existing-workflow
@@ -19808,7 +19888,7 @@ menu:
         operationids:
           - DeleteWorkflow
         unstable: []
-        order: 4
+        order: 5
     - name: Create a Workflow
       url: /api/latest/workflow-automation/create-a-workflow/
       identifier: workflow-automation-create-a-workflow
@@ -19820,4 +19900,16 @@ menu:
         operationids:
           - CreateWorkflow
         unstable: []
-        order: 2
+        order: 3
+    - name: List workflows
+      url: /api/latest/workflow-automation/list-workflows/
+      identifier: workflow-automation-list-workflows
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflows
+        unstable: []
+        order: 1
