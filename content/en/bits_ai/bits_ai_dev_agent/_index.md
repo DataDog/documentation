@@ -116,7 +116,6 @@ Bits Code never auto-merges PRs. See all the PRs that Bits Code is working on in
 [10]: /profiler/automated_analysis/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
-[14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
 [16]: /bits_ai/bits_chat/
 [17]: /bits_ai/bits_ai_sre/
