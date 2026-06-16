@@ -30,17 +30,7 @@ The Infrastructure overlay is ideal for:
 
 ## Resource grouping
 
-Resources are organized in a hierarchical structure. The default Group By hierarchy varies by provider:
-
-| Provider | Default Group By hierarchy |
-|----------|---------------------------|
-| AWS | Account > Region > VPC > Service > Security Group Subnet |
-| Azure | Subscription > Resource Group > Security Group \| VNet > Service > Subnet |
-| GCP | Project > Firewall > VPC > Region > Service > Subnet |
-| OCI | Tenancy > Compartment > Region > VCN > Service > Security Group Subnet |
-| vSphere | vCenter > Datacenter > Cluster > Service |
-
-This hierarchy helps you understand how resources are distributed across your cloud infrastructure.
+Resources are grouped by a provider-specific hierarchy. Use the **Group by** controls at the top of the diagram to customize the grouping.
 
 ## Interact with resources
 
