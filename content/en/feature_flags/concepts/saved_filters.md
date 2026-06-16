@@ -35,11 +35,11 @@ Saved filters contain only attribute conditions and cannot be nested or referenc
 ## Create a saved filter
 
 1. In **Feature Flags**, go to **Settings > Saved Filters** and click **New Saved Filter**.
-3. Enter a **Name** and an optional **Description**.
-4. Choose a **Filter type**:
+2. Enter a **Name** and an optional **Description**.
+3. Choose a **Filter type**:
    - **Saved Rule**: Build your conditions in the rule editor. Each condition uses an attribute from your SDK's [evaluation context][1], an operator, and one or more values.
    - **Saved List**: Provide the attribute and its values. You can enter values directly or import them from a CSV file.
-5. Click **Save**.
+4. Click **Save**.
 
 {{< img src="feature_flags/saved_filters/create-saved-filter.png" alt="The New Saved Filter modal showing the filter type toggle and rule editor." style="width:100%;" >}}
 
