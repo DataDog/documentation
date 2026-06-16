@@ -11,7 +11,7 @@ Desde la página de [Información de configuración de incidentes][1], puedes pe
 
 ## Niveles de gravedad
 
- {{< img src="/service_management/incidents/incident_settings/settings_info_severity_levels.png" alt="Niveles de gravedad personalizables en la configuración del incidente" style="width:100%;" >}}
+ {{< img src="/incident_response/incident_management/incident_settings/settings_info_severity_levels.png" alt="Niveles de gravedad personalizables en la configuración del incidente" style="width:100%;" >}}
 
 Utiliza la configuración del nivel de gravedad para:
 
@@ -25,7 +25,7 @@ Utiliza la configuración del nivel de gravedad para:
 
 ## Niveles de estado
 
-{{< img src="/service_management/incidents/incident_settings/settings_info_status_levels.png" alt="Niveles de estado personalizables en la configuración del incidente" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/incident_settings/settings_info_status_levels.png" alt="Niveles de estado personalizables en la configuración del incidente" style="width:100%;" >}}
 
 Utiliza la configuración de nivel de estado para:
 
@@ -36,7 +36,7 @@ Utiliza la configuración de nivel de estado para:
 
 ## Texto auxiliar
 
-{{< img src="/service_management/incidents/incident_settings/settings_info_helper_text.png" alt="Configuración del texto auxiliar de Declarar incidente" style="width:100%;">}}
+{{< img src="/incident_response/incident_management/incident_settings/settings_info_helper_text.png" alt="Configuración del texto auxiliar de Declarar incidente" style="width:100%;">}}
 
 El texto auxiliar aparece junto al [Modal de creación de incidentes][4] y ayuda a tus respondedores a entender cómo deben definir el incidente.
 

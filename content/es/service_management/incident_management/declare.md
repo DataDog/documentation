@@ -34,7 +34,7 @@ En el modal *Declare incident (incidente)* se muestra un panel lateral plegable 
 
 Puedes declarar un incidente directamente desde un monitor desde el desplegable Acciones. Selecciona **Declare Incident** (Declarar incident (incidente)) para abrir un modal de creación de incidents (incidentes) y el monitor (noun) se añadirá al incident (incidente) como una señal. También puedes añadir un monitor (noun) a un incident (incidente) existente.
 
-{{< img src="service_management/incidents/declare/declare_monitor.png" alt="Menú desplegable de Acciones en monitores donde puedes seleccionar la opción Declarar incidente" style="width:50%;" >}}
+{{< img src="incident_response/incident_management/declare/declare_monitor.png" alt="Menú desplegable de Acciones en monitores donde puedes seleccionar la opción Declarar incidente" style="width:50%;" >}}
 
 Alternativamente, puedes hacer que un monitor (noun) cree automáticamente un incident (incidente) cuando pase a un estado `warn`, `alert` o `no data`. Para activarlo, haz clic en **Add Incident** (Añadir incident (incidente)) en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones) de un monitor (noun) y selecciona una opción de `@incident-`. Los administradores pueden crear opciones de `@incident-` en [Parámetros de incident (Incidente)][9].
 
@@ -47,29 +47,29 @@ Declare una incident (incidente) directamente desde el panel lateral de una señ
 Declara un incident (incidente) desde una señal de protección de la aplicación y la API a través de las acciones que aparecen en el panel lateral de señales. Haz clic en **Show all actions** (Mostrar todas las acciones) y haz clic en **Declare Incident** Declarar incident (incidente)).
 Para obtener más información, consulta [Investigar señales de seguridad][4] para la protección de la aplicación y la API.
 
-{{< img src="/service_management/incidents/declare/declare_asm.png" alt="Tu descripción de imagen" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/declare/declare_asm.png" alt="Tu descripción de imagen" style="width:90%;" >}}
 
 ## A partir de un caso
 
 Declarar un incidente desde [Gestión de Casos][5]. En la página de detalles del caso individual, haz clic en **Declarar incidente** para elevar un caso a la categoría de incidente.
 
-{{< img src="service_management/incidents/declare/declare_case_management.png" alt="Ejemplo de una página de un caso donde está resaltado el botón Declarar incidente en la parte superior de la página" style="width:90%;" >}}
+{{< img src="incident_response/incident_management/declare/declare_case_management.png" alt="Ejemplo de una página de un caso donde está resaltado el botón Declarar incidente en la parte superior de la página" style="width:90%;" >}}
 
 ## A partir de un gráfico
 Puedes declarar una incidencia directamente desde un gráfico al hacer clic en el botón de exportación del gráfico y, a continuación, en **Declare incident** (Declarar incidencia). Aparecerá el modo de creación de incidencias y el gráfico se añadirá a la incidencia como una señal.
 
-{{< img src="service_management/incidents/from-a-graph.png" alt="Crear una incidencia desde un gráfico" style="width:80%;">}}
+{{< img src="incident_response/incident_management/from-a-graph.png" alt="Crear una incidencia desde un gráfico" style="width:80%;">}}
 
 ## A partir de un test de Sintético 
 
 Crea incidentes directamente desde un [Test de Sintético][8] a través del desplegable Acciones. Selecciona **Declarar incidente** para abrir un modal de creación de incidentes, donde se añade un resumen del test a tu línea de tiempo de incidentes, que te permite continuar la investigación desde ahí.
 
-{{< img src="service_management/incidents/declare/synthetics_declare_incident.png" alt="Declara un incidente desde un test de Sintético." style="width:90%;" >}}
+{{< img src="incident_response/incident_management/declare/synthetics_declare_incident.png" alt="Declara un incidente desde un test de Sintético." style="width:90%;" >}}
 
 ## Desde el portapapeles de Datadog 
 Utiliza el [Portapapeles de Datadog][6] para reunir varios monitores y gráficos y generar un incidente. Para declarar un incidente desde el portapapeles, copia un gráfico que desees investigar y abre el portapapeles con el comando `Cmd/Ctrl + Shift + K`. Haz clic en **Declarar incidente** o en el icono de exportación para añadirlo al incidente como señal.
 
-{{< img src="service_management/incidents/declare/declare_clipboard.png" alt="Declara un incidente desde el portapapeles de Datadog" style="width:90%;" >}}
+{{< img src="incident_response/incident_management/declare/declare_clipboard.png" alt="Declara un incidente desde el portapapeles de Datadog" style="width:90%;" >}}
 
 ## Desde una page (página) de Datadog On-Call
 
@@ -81,7 +81,7 @@ Si tienes habilitada la opción [Integración de Datadog en Slack][7], puedes de
 
 Si el usuario que declara el incidente conecta su Slack a su cuenta Datadog, en forma predeterminada, ese usuario aparece como Comandante de incidentes. El Comandante de incidentes (CI) puede cambiarse posteriormente en la aplicación si fuera necesario. Si el usuario que declara un incidente no es miembro de una cuenta Datadog, el CI se asigna a una cuenta genérica `Slack app user` y puede asignarse a otro CI en la aplicación.
 
-{{< img src="service_management/incidents/from-slack.png" alt="Crear una incidencia desde Slack" style="width:60%;">}}
+{{< img src="incident_response/incident_management/from-slack.png" alt="Crear una incidencia desde Slack" style="width:60%;">}}
 
 Después de declarar un incidente desde Slack, se genera un canal de incidentes.
 
@@ -94,7 +94,7 @@ La notificación de traspaso muestra tarjetas de aviso cuando se te llama o se t
 - Vista previa de los mensajes de Slack desde los canales de incident (incidente) 
 - Tomar medidas directas sobre los incidents (incidentes)
 
-{{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Tarjeta de notificación de traspaso en que se muestran detalles de incident (incidente) con opciones para visualizar, acusar recibo y tomar medidas" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/declare/handoff_notification_card.png" alt="Tarjeta de notificación de traspaso en que se muestran detalles de incident (incidente) con opciones para visualizar, acusar recibo y tomar medidas" style="width:100%;" >}}
 
 Las tarjetas de notificación de traspaso permanecen visibles hasta que se retiren o hasta que cambie el estado del incident (incidente). Puedes expandir, contraer o descartar todo el contenedor de traspasos en lugar de tarjetas individuales.
 
