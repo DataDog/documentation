@@ -213,6 +213,8 @@ For tuning options, see [Advanced Configuration][16].
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
+**Note**: After installing and configuring the Agent, you can also run `datadog-agent diagnose` to automatically validate your Postgres DBM setup, including connection, version support, required GUCs, role membership, and per-database schema/function prerequisites. The diagnostics report actionable remediation hints for common configuration issues.
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
