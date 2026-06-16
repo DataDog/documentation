@@ -21,7 +21,7 @@ When you update a saved filter, the change propagates to every flag that uses it
 
 ## Saved filter types
 
-Datadog supports two types of saved filters:
+Datadog supports these types of saved filters:
 
 | Type | Description |
 |------|-------------|
@@ -34,8 +34,7 @@ Saved filters contain only attribute conditions and cannot be nested or referenc
 
 ## Create a saved filter
 
-1. In **Feature Flags**, go to **Settings > Saved Filters**.
-2. Click **New Saved Filter**.
+1. In **Feature Flags**, go to **Settings > Saved Filters** and click **New Saved Filter**.
 3. Enter a **Name** and an optional **Description**.
 4. Choose a **Filter type**:
    - **Saved Rule**: Build your conditions in the rule editor. Each condition uses an attribute from your SDK's [evaluation context][1], an operator, and one or more values.
@@ -63,7 +62,7 @@ You can combine a saved filter with other conditions in the same rule. For detai
 
 To edit a saved filter, open it from **Settings > Saved Filters** and update its name, description, or conditions.
 
-When you save changes to a filter's conditions, the update applies to every enabled flag that uses the filter, and those flags begin evaluating against the updated logic immediately. To see which flags are affected, review the **Flags** list in the filter's panel before saving.
+When you save changes to a filter's conditions, the update applies to every enabled flag that uses the filter. Those flags begin evaluating against the updated logic immediately. To see which flags are affected, review the **Flags** list in the filter's panel before saving.
 
 {{< img src="feature_flags/saved_filters/saved-filter-panel.png" alt="The saved filter side panel showing its conditions and the list of flags that use it." style="width:100%;" >}}
 
@@ -73,7 +72,7 @@ A single edit can change targeting behavior across many flags at once.
 
 ## Permissions and approvals
 
-Editing saved filters requires feature flag write access. Some changes can be blocked by governance on the flags that use the filter:
+Editing saved filters requires feature flag write access. Governance settings on the flags that use a filter can block some changes:
 
 - **Permission restrictions**: A saved filter can have its own access restrictions. If you do not have permission to edit a filter, request access from the filter's panel.
 - **Change approvals on downstream flags**: If a saved filter is used by flags that require approval for changes, edits to the filter are blocked until those requirements are satisfied. This helps prevent an upstream filter change from bypassing approval on the flags that depend on it.
