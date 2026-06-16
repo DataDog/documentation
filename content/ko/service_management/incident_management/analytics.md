@@ -7,7 +7,7 @@ title: 인시던트 관리 분석
 
 ## 개요
 
-{{< img src="incident_response/incident_management/incident_analytics.mp4" alt="인시던트 관리 분석" video=true style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics/incident_analytics.mp4" alt="인시던트 관리 분석" video=true style="width:80%;">}}
 
 인시던트 관리 분석은 집계된 인시던트 통계에 대해 질의 요청 가능한 데이터 소스입니다. [대시보드][1] 및 [노트북][2]의 다양한 그래프 위젯에서 이러한 분석을 질의하여, 시간 경과에 따른 인시던트 대응 기록을 분석할 수 있습니다. 출발점을 제공하기 위해 Datadog은 필요에 따라 복제하고 사용자 지정할 수 있도록 인시던트 관리 개요 [대시보드 템플릿][3] 및 [노트북 템플릿][4]을 제공합니다.
 

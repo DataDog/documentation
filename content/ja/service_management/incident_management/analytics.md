@@ -7,7 +7,7 @@ title: インシデント管理分析
 
 ## 概要
 
-{{< img src="incident_response/incident_management/incident_analytics.mp4" alt="Incident Management Analytics" video=true style="width:80%;">}}
+{{< img src="incident_response/incident_management/analytics/incident_analytics.mp4" alt="Incident Management Analytics" video=true style="width:80%;">}}
 
 Incident Management Analytics は、インシデントの統計情報を集計したクエリ可能なデータソースです。[ダッシュボード][1]と[ノートブック][2]の両方で、さまざまなグラフウィジェットでこれらの分析結果をクエリし、インシデント対応の履歴を時系列で分析することができます。Datadog では、インシデント管理の概要を示す [Dashboard テンプレート][3]と [Notebook テンプレート][4]を提供しており、必要に応じて複製してカスタマイズすることができます。
 
