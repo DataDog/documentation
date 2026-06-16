@@ -50,7 +50,7 @@ In addition to viewing and searching events in the Explorer, you can now graph a
 
 You may also [generate metrics][3] with 15-month retention from any event search query to create monitors and alerts based on historical events.
 
-{{< img src="events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+{{< img src="events/guides/usage/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
 
 ### Graph events in dashboards
