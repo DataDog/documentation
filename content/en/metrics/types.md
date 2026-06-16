@@ -46,7 +46,7 @@ These different metric submission types are mapped to five in-app metric types f
 - RATE
 - GAUGE
 - DISTRIBUTION
-- (Exponential, Explicit) HISTOGRAM
+- HISTOGRAM (Explicit, Exponential)
 
 **Note**: If you submit a metric to Datadog without a type, the metric type appears as `Not Assigned` within Datadog. The `Not Assigned` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
 
