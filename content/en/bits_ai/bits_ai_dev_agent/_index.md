@@ -94,7 +94,7 @@ Bits Code integrates with [source code providers](#supported-source-code-provide
 - Iterate on pull/merge requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
 
-Bits Code never auto-merges PR/MRs. See all the PR/MRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
+Bits Code never auto-merges PRs/MRs. See all the PRs/MRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
 
 ## Limitations
 
