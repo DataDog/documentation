@@ -138,7 +138,13 @@ To get started using Cloudcraft, use the following steps:
 
 {{< img src="datadog_cloudcraft/getting_started_3.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the {{< ui >}}Account{{< /ui >}} dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the {{< ui >}}Subscription{{< /ui >}} name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the {{< ui >}}Project{{< /ui >}} dropdown lists your GCP project IDs from the Google Cloud integration tile. For OCI, the {{< ui >}}Tenancy{{< /ui >}} name comes from your tenancy in the Oracle Cloud Infrastructure integration tile.
+<div class="alert alert-tip">Provider account names in the dropdowns come from their respective integration tiles:
+<ul>
+<li><strong>AWS</strong>: The {{< ui >}}Account{{< /ui >}} name comes from your AWS account tags in the AWS integration tile.</li>
+<li><strong>Azure</strong>: The {{< ui >}}Subscription{{< /ui >}} name comes from the subscription name in your Azure integration tile's list of managed subscriptions.</li>
+<li><strong>GCP</strong>: The {{< ui >}}Project{{< /ui >}} dropdown lists your GCP project IDs from the Google Cloud integration tile.</li>
+<li><strong>OCI</strong>: The {{< ui >}}Tenancy{{< /ui >}} name comes from your tenancy in the Oracle Cloud Infrastructure integration tile.</li>
+</ul>
 </div>
 
 ### Group By
