@@ -9359,16 +9359,21 @@ menu:
       parent: rum_cpp
       identifier: rum_cpp_data_collected
       weight: 104
+    - name: Advanced Build Configuration
+      url: real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+      parent: rum_cpp
+      identifier: rum_cpp_advanced_build_configuration
+      weight: 105
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/cpp/troubleshooting
       parent: rum_cpp
       identifier: rum_cpp_troubleshooting
-      weight: 105
+      weight: 106
     - name: Supported Versions
       url: real_user_monitoring/application_monitoring/cpp/supported_versions
       parent: rum_cpp
       identifier: rum_cpp_supported_versions
-      weight: 106
+      weight: 107
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
