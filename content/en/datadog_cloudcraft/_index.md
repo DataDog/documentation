@@ -118,7 +118,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 {{% tab "vSphere" %}}
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
-- The Datadog Agent must be installed in your vSphere environment. The vSphere check is included in the Agent package.
+- The Datadog Agent must be installed in your vSphere environment. The vSphere check is included in the Datadog Agent package.
 - The [vSphere integration][22] must be enabled and configured.
 
 **Note**: Only the Infrastructure and Monitors overlays are available for vSphere accounts.
