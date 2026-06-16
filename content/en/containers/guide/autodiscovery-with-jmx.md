@@ -70,7 +70,7 @@ Use one of the following methods:
 
 In this method, a JMX check configuration is applied using annotations on your Java-based Pods. This allows the Agent to automatically configure the JMX check when a new container starts. Ensure these annotations are on the created Pod, and not on the object (Deployment, DaemonSet, etc.) creating the Pod. 
 
-Alternatively, use the [`DatadogInstrumentation` custom resource][8] to define the same check as a separate Kubernetes resource.
+Alternatively, use the [`DatadogInstrumentation` custom resource][8] to define the same check as a separate Kubernetes resource, instead of an Autodiscovery annotation.
 
 Use the following template for Autodiscovery annotations:
 

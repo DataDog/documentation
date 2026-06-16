@@ -108,7 +108,7 @@ spec:
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-Use the [`DatadogInstrumentation` custom resource][17] to configure an OpenMetrics check for a supported Kubernetes workload or Service without changing pod annotations. This example targets a Deployment; for Service targets, omit `containerImage`.
+Use the [`DatadogInstrumentation` custom resource][17] to configure an OpenMetrics check for a supported Kubernetes workload without changing pod annotations. For more information, see [Configure Autodiscovery with the DatadogInstrumentation CRD][17].
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -141,7 +141,8 @@ With the following configuration placeholder values:
 
 | Placeholder                              | Description                                                                                        |
 |------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `<YOUR_CR_NAME>`                         | Name of your `DatadogInstrumentation` resource.                                                    |
+| `<CR_NAME>`                              | Name of your `DatadogInstrumentation` resource.                                                    |
+| `<WORKLOAD_NAMESPACE>`                   | Namespace that contains the target workload and the `DatadogInstrumentation` resource.             |
 | `<WORKLOAD_NAME>`                        | Name of the workload targeted by the `DatadogInstrumentation` resource.                            |
 | `<CONTAINER_NAME>`                       | Matches the name of the container that exposes the metrics.                                        |
 | `<CONTAINER_IMAGE>`                      | Matches the image of the container that exposes the metrics.                                       |
