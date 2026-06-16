@@ -254,7 +254,7 @@ From a published page with Slack subscriptions enabled:
 
 After subscribing, the selected channel receives a welcome message confirming the subscription.
 
-**Private channels**: After subscribing, you receive a message in the **Messages** tab of the Slack app prompting you to invite the **Datadog Status Pages** bot to the channel. You must invite the bot before it can post updates. Direct message (DM) channels are not supported. On **internal** status pages, you must be logged in to the same Datadog organization to subscribe.
+**Private channels**: After subscribing, the user receives a message in the **Messages** tab of the Slack app prompting them to invite the **Datadog Status Pages** bot to the channel. The bot must be invited before it can post updates. Direct message (DM) channels are not supported. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
 
 ### Manage subscriptions
 
