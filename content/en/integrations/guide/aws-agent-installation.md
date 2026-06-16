@@ -1,6 +1,6 @@
 ---
 title: Install the Datadog Agent through the AWS Integration
-description: "Deploy the Datadog Agent to your EC2 and EKS resources directly from the AWS integration"
+description: "Deploy the Datadog Agent to your EC2 and EKS resources directly from the AWS integration."
 private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry in integrations/guide/_index.md at that time
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -9,12 +9,15 @@ further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-manual-setup/"
   tag: "Documentation"
   text: "AWS Manual Setup Guide"
+- link: "https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/"
+  tag: "Documentation"
+  text: "Why install the Datadog Agent on your cloud instances?"
 - link: "https://docs.datadoghq.com/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
 - link: "https://docs.datadoghq.com/agent/configuration/"
   tag: "Documentation"
-  text: "Basic Agent Usage"
+  text: "Agent Configuration"
 ---
 
 ## Overview
@@ -49,7 +52,7 @@ When you install the Agent through the AWS integration, you choose the resources
 
 You approve one CloudFormation stack, one time, during initial setup. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
 
-{{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flow of installing the Datadog Agent through the AWS integration. In Datadog: connect your AWS account, Datadog discovers eligible EC2 and EKS resources, select resources or opt in to all eligible, and approve the CloudFormation stack once. In your AWS account: the CloudFormation stack creates an install role, the Agent is installed through SSM with IAM remediated if needed, and Agents come online and report to Datadog. Back in Datadog, view the installed Agents." style="width:70%;" >}}
+{{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
 ## Install the Agent
 
@@ -57,7 +60,7 @@ Start Agent installation as part of AWS integration setup, or from the AWS integ
 
 <!-- TODO(DOCS-14545): confirm exact entry point and UI labels at launch. -->
 
-1. In Datadog, open the [AWS integration page][4].
+1. In Datadog, open the [AWS integration page][3].
 1. Enable Agent installation. During initial CloudFormation setup, this appears as a toggle alongside log and resource collection.
 1. Opt in to all eligible resources, or select specific EC2 instances and EKS clusters from the resource list.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
@@ -69,7 +72,7 @@ Start Agent installation as part of AWS integration setup, or from the AWS integ
 
 After the installation completes:
 
-- The newly installed Agents appear in the [Infrastructure List][5] and on the host map.
+- The newly installed Agents appear in the [Infrastructure List][4] and on the host map.
 - Fleet Automation lists the same Agents in the Fleet View.
 
 <!-- TODO(DOCS-14545): add expected time-to-data once confirmed. -->
@@ -84,7 +87,7 @@ From this page, you can:
 - Install the Agent on new resources in your AWS environment.
 - Uninstall Agents from resources you no longer want to monitor.
 
-Manage Agent configuration and version upgrades through [Fleet Automation][6].
+Manage Agent configuration and version upgrades through [Fleet Automation][5].
 
 ## Troubleshooting
 
@@ -106,6 +109,6 @@ If installation can't complete because of missing permissions, Datadog shows a n
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
-[4]: https://app.datadoghq.com/integrations/amazon-web-services
-[5]: https://app.datadoghq.com/infrastructure
-[6]: https://docs.datadoghq.com/agent/fleet_automation/
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://app.datadoghq.com/infrastructure
+[5]: https://docs.datadoghq.com/agent/fleet_automation/
