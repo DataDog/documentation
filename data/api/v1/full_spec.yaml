@@ -20003,6 +20003,9 @@ components:
             description: A URL pattern to block during the Synthetic test.
             type: string
           type: array
+        captureNetworkPayloads:
+          description: Capture HTTP request/response headers and bodies for Fetch/XHR calls made during browser tests.
+          type: boolean
         checkCertificateRevocation:
           description: |-
             For SSL tests, whether or not the test should fail on revoked certificate in stapled OCSP.
