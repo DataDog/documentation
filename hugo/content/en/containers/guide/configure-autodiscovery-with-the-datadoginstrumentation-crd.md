@@ -25,10 +25,11 @@ The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscov
 Use the `DatadogInstrumentation` CR when you want to:
 
 - Configure Autodiscovery checks without modifying workload manifests or adding annotations.
+- Use a structured resource spec with validation instead of raw JSON in annotations.
 - Centrally manage per-workload check configuration as a dedicated, version-controlled Kubernetes resource.
 - Update or remove check configuration without restarting your application pods.
 
-The configuration is reconciled by a controller in the [Datadog Cluster Agent][3]. When you create or update a `DatadogInstrumentation` resource, the Cluster Agent generates the corresponding check configurations and applies them to the matching workload's containers.
+The configuration is reconciled by a controller in the [Datadog Cluster Agent][3]. When you create or update a `DatadogInstrumentation` resource, the Cluster Agent validates the target, reports resource status, and schedules checks against the targeted workload.
 
 ## Requirements
 
@@ -84,14 +85,37 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
+Make sure the `DatadogInstrumentation` CRD is installed before creating resources:
+
+```shell
+kubectl get crd datadoginstrumentations.datadoghq.com
+```
+
+If you manage Datadog CRDs separately, install or upgrade the Datadog CRDs Helm chart:
+
+```shell
+helm upgrade --install datadog-crds datadog/datadog-crds
+```
+
 When the controller is enabled, it waits for the `DatadogInstrumentation` CRD to be installed in the cluster before it starts reconciling resources.
 
-## Configure a check
+## Configure a workload check
 
 A `DatadogInstrumentation` resource has two main parts:
 
 - `spec.targetRef`: identifies the workload to configure, by `apiVersion`, `kind`, and `name`. The resource and the target workload must be in the same namespace.
 - `spec.config.checks`: a list of Autodiscovery check configurations to apply to the target workload's containers.
+
+For Autodiscovery, `targetRef` supports the following target kinds:
+
+| `apiVersion` | `kind` | Behavior |
+| --- | --- | --- |
+| `apps/v1` | `Deployment` | Targets Deployment pods. |
+| `apps/v1` | `DaemonSet` | Targets DaemonSet pods. |
+| `apps/v1` | `StatefulSet` | Targets StatefulSet pods. |
+| `batch/v1` | `CronJob` | Targets pods from CronJob Jobs. |
+| `batch/v1` | `Job` | Targets Job pods. |
+| `v1` | `Service` | Targets each Service endpoint. See [Service targets](#service-targets). |
 
 The following example configures the [Redis integration][4] for a `Deployment` named `redis`, including log collection. It mirrors the [annotation-based example][2], using the same [template variables][5] such as `%%host%%`:
 
@@ -99,8 +123,8 @@ The following example configures the [Redis integration][4] for a `Deployment` n
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogInstrumentation
 metadata:
-  name: redis-instrumentation
-  namespace: default
+  name: <YOUR_CR_NAME>
+  namespace: <YOUR_TARGETS_NAMESPACE>
 spec:
   targetRef:
     apiVersion: apps/v1
@@ -117,9 +141,7 @@ spec:
             port: "6379"
             password: "%%env_REDIS_PASSWORD%%"
         logs:
-          - type: file
-            path: /var/log/redis_6379.log
-            source: redis
+          - source: redis
             service: redis_service
 ```
 
@@ -129,33 +151,67 @@ Apply the resource:
 kubectl apply -f redis-instrumentation.yaml
 ```
 
-Each entry in `checks` accepts the following fields:
+Check the resource status:
+
+```shell
+kubectl describe datadoginstrumentation <YOUR_CR_NAME>
+```
+
+The status conditions show the state of the check configuration, including whether Datadog resolved the target workload and applied the configuration. To view only the conditions:
+
+```shell
+kubectl get datadoginstrumentation <YOUR_CR_NAME> \
+  -o jsonpath='{range .status.conditions[*]}{.type}{"\t"}{.status}{"\t"}{.reason}{"\t"}{.message}{"\n"}{end}'
+```
+
+Each entry in `checks` accepts the following fields. For workload targets, provide `instances`, `logs`, or both. If neither is provided, the resource is rejected.
 
 `integration`
-: The name of the Datadog integration to run, such as `redisdb`.
+: Required. The name of the Datadog integration to run, such as `redisdb`.
 
 `containerImage`
-: A list of container image identifiers to match against the target workload's containers. The check is applied to containers whose image matches an entry in this list.
+: Required for workload targets. Not used for Service targets. A list of container image identifiers to match against the target workload's containers.
 
 `initConfig`
-: The `init_config` section for the integration. This section is usually empty (`{}`).
+: Optional. The `init_config` section for the integration.
 
 `instances`
-: A list of instance configurations for the check. Each instance supports [Autodiscovery template variables][5], such as `%%host%%`.
+: Optional. A list of instance configurations for the check. Each instance supports [Autodiscovery template variables][5], such as `%%host%%`.
 
 `logs`
-: The log collection configuration for the matching containers.
+: Optional. The log collection configuration for the matching containers.
 
-### Endpoint and cluster checks
+### Service targets
 
-To configure an [endpoint check][6], set `targetRef` to a `Service`:
+To configure an [endpoint check][6], set `targetRef` to a `Service`. Service targets behave the same way as endpoint checks configured with Kubernetes service annotations:
+
+- Datadog schedules one endpoint check for each endpoint of the Service.
+- `%%host%%` resolves to the endpoint IP.
+- If an endpoint is backed by a Kubernetes Pod, Datadog adds the Pod and container tags collected for that Pod.
+- If an endpoint is not backed by a Pod, Datadog schedules a regular endpoint check without Pod-specific tags.
+
+Service targets do not use `containerImage`; omit that field.
+
+Example: configure NGINX for endpoints behind a `Service` named `nginx`:
 
 ```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <YOUR_CR_NAME>
+  namespace: <YOUR_SERVICES_NAMESPACE>
 spec:
   targetRef:
     apiVersion: v1
     kind: Service
-    name: my-service
+    name: nginx
+  config:
+    checks:
+      - integration: nginx
+        initConfig: {}
+        instances:
+          - name: "My NGINX Service Endpoints"
+            nginx_status_url: "http://%%host%%:%%port%%/status/"
 ```
 
 ## Precedence
@@ -164,27 +220,21 @@ When more than one configuration source applies to a workload, Datadog resolves 
 
 1. Pod annotations
 2. `DatadogInstrumentation` resources
-3. Static configuration (such as auto-configuration or mounted files)
+3. Static configuration, such as auto-configuration or mounted files
 
-If a workload already has annotation-based Autodiscovery configuration for a check, the `DatadogInstrumentation` configuration does not override it.
+If a workload already has annotation-based Autodiscovery configuration for a check, your `DatadogInstrumentation` configuration will not override it.
 
-## One resource per workload
+## One resource per target
 
-A workload can be the target of only one `DatadogInstrumentation` resource within a namespace. A validating admission webhook rejects a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
+A workload or Service can be the target of only one `DatadogInstrumentation` resource within a namespace. A validating admission webhook rejects a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
 
 ## Check the status
 
-The controller reports the result of reconciling each resource through Kubernetes status conditions. To view the status, including whether the configuration was applied and the resolved target workload:
+The controller reports the result of reconciling each resource through Kubernetes status conditions. Use the status to view the state of the check configuration, including target resolution and whether the configuration was applied:
 
 ```shell
-kubectl describe datadoginstrumentation redis-instrumentation
+kubectl describe datadoginstrumentation <YOUR_CR_NAME>
 ```
-
-## Limitations
-
-- This capability is in beta.
-- The `DatadogInstrumentation` CRD is served at `apiVersion: datadoghq.com/v1alpha1`.
-- This page covers Autodiscovery checks only. Configuring APM Single Step Instrumentation through the `DatadogInstrumentation` resource is tracked separately.
 
 ## Further reading
 
