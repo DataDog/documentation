@@ -7667,6 +7667,19 @@ menu:
       url: /api/latest/application-security/
       identifier: application-security
       generated: true
+    - name: Get Application Security details for a service
+      url: /api/latest/application-security/get-application-security-details-for-a-service/
+      identifier: application-security-get-application-security-details-for-a-service
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAsmServiceByName
+        unstable:
+          - v2
+        order: 16
     - name: Update a WAF Policy
       url: /api/latest/application-security/update-a-waf-policy/
       identifier: application-security-update-a-waf-policy
