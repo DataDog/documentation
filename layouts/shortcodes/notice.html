@@ -1,0 +1,13 @@
+{{- /*
+  notice: a configurable admonition-style panel.
+  Params:
+    label: the badge text shown at the top (default "NOTE")
+    color: the bar and label color, any CSS color (default "#006bc2")
+  Inner content is rendered as markdown.
+*/ -}}
+{{- $color := .Get "color" | default "#006bc2" -}}
+{{- $label := .Get "label" | default "NOTE" -}}
+<div class="alert" style="border-left: 4px solid {{ $color }}; padding-top: 32px; position: relative;">
+  <span style="position: absolute; top: 8px; left: 16px; color: {{ $color }}; font-size: 14px; font-weight: 600;">{{ $label }}</span>
+  {{ .Inner | markdownify }}
+</div>
