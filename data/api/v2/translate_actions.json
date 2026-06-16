@@ -6464,6 +6464,10 @@
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
+  "ListWorkflows": {
+    "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
+    "summary": "List workflows"
+  },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Create a Workflow",
