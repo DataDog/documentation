@@ -1,0 +1,90 @@
+---
+title: Splunk HTTP Event Collector (HEC) Destination
+description: Learn how to set up the Splunk HEC destination for metrics in Observability Pipelines.
+disable_toc: false
+code_lang: metrics
+type: multi-code-lang
+weight: 2
+---
+
+## Overview
+
+Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to send metrics to Splunk HEC.
+
+## Setup
+
+Configure the Splunk HEC destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
+
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+After you select the Splunk HEC destination in the pipeline UI:
+
+1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+
+### Optional settings
+
+#### Default namespace
+
+Enter a default namespace.
+
+#### Compression
+
+If you want to compress your metrics with gzip, select **gzip** in the dropdown menu. The default compression is **None**.
+
+#### Splunk index
+
+Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][6] if you want to route metrics to different indexes based on specific fields in your metrics.
+
+#### Source
+
+Enter a source field and value if you want them added to your metrics.
+
+#### Source type override
+
+Set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][6] if you want to route metrics to different source types based on specific fields in your metrics.
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+{{% observability_pipelines/splunk_hec_secrets %}}
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### How the destination works
+
+#### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+|    TKTK        |     TKTK          |          TKTK       |
+
+[1]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: /observability_pipelines/destinations/#event-batching
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/destinations/#template-syntax
