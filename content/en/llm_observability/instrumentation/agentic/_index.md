@@ -12,7 +12,7 @@ title: Agentic Instrumentation
 
 ## Pre-requisites
 
-1. A Datadog API key is required to send Agent Observability data to Datadog. If not provided as part of the prompt, ask the user to input one before continuing on to subsequent steps. Without an API key, the user will not receive Agent Observability data, so this is a **hard requirement**.
+1. A Datadog API key is required to send Agent Observability data to Datadog. Without an API key, the user will not receive Agent Observability data, so this is a **hard requirement**. If the user has not provided one already and does not wish to provide one, continue instrumenting their application, making sure in an explicit call-out at the end that they must set it, and point them to where it can be set.
 2. Determine the programming language and framework being used in the application to instrument. This is important for correctly instrumenting the application.
 
 ## Environment variables
@@ -67,13 +67,6 @@ Follow the instructions for the detected language:
 | Node.js | [Node.js Application Agentic Instrumentation](/llm_observability/instrumentation/agentic/nodejs.md) |
 | Java | [Java Application Agentic Instrumentation](/llm_observability/instrumentation/agentic/java.md) |
 | OpenTelemetry | [OpenTelemetry Instrumentation](/llm_observability/instrumentation/otel_instrumentation.md) |
-
-
-## Run the application
-
-Run the application from any instructions in the project, or by inferring from the project structure, as part of this task. If you are not able to determine how to run the application, delegate that to the user, giving them necessary instructions for extra environment variables if some need to be set.
-
-If started, provide the user with a way to stop the running application.
 
 ## Viewing traces
 
