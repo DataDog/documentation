@@ -38,7 +38,7 @@ Saved filters contain only attribute conditions and cannot be nested or referenc
 2. Click **New Saved Filter**.
 3. Enter a **Name** and an optional **Description**.
 4. Choose a **Filter type**:
-   - **Saved Rule**: Build your conditions in the rule editor. Each condition uses an attribute from your SDK's [evaluation context](/feature_flags/concepts/targeting_rules/#filters-and-evaluation-context), an operator, and one or more values.
+   - **Saved Rule**: Build your conditions in the rule editor. Each condition uses an attribute from your SDK's [evaluation context][1], an operator, and one or more values.
    - **Saved List**: Provide the attribute and its values. You can enter values directly or import them from a CSV file.
 5. Click **Save**.
 
@@ -57,7 +57,7 @@ After you create a saved filter, reference it when you configure a flag's target
 
 {{< img src="feature_flags/saved_filters/add-saved-filter-to-rule.png" alt="The Add menu in a targeting rule, showing the Add Saved Filter option." style="width:100%;" >}}
 
-You can combine a saved filter with other conditions in the same rule. For details about how targeting rules are evaluated, see [Targeting Rules and Filters](/feature_flags/concepts/targeting_rules/).
+You can combine a saved filter with other conditions in the same rule. For details about how targeting rules are evaluated, see [Targeting Rules and Filters][2].
 
 ## Edit a saved filter and apply changes
 
@@ -91,3 +91,6 @@ Flags that already use the filter continue to work. You can unarchive a filter a
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/concepts/targeting_rules/#filters-and-evaluation-context
+[2]: /feature_flags/concepts/targeting_rules/
