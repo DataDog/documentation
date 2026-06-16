@@ -22,6 +22,8 @@ The cluster check feature provides the ability to [Autodiscover][1] and perform 
 
 The [Cluster Agent][2] discovers endpoint check configurations based on [Autodiscovery][1] annotations on the Kubernetes services. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
 
+You can also configure endpoint checks for a Service with the [`DatadogInstrumentation` custom resource][14], instead of Kubernetes service annotations.
+
 The Agents connect to the Cluster Agent every ten seconds and retrieve the check configurations to run. Metrics coming from endpoints checks are submitted with service tags, [Kubernetes tags][3], host tags, and the `kube_endpoint_ip` tag based on the evaluated IP address.
 
 **Versioning**:
@@ -259,6 +261,8 @@ ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 
 This syntax supports a `%%host%%` [template variable][11] which is replaced by the IP of each endpoint. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
 
+To manage the same endpoint-check configuration without annotating the Service, use a `DatadogInstrumentation` resource with `targetRef.kind: Service`. See [Configure Autodiscovery with the DatadogInstrumentation CRD][14].
+
 **Note**: Custom endpoints log configuration is only supported during Docker socket log collection, and not Kubernetes log file collection.
 
 #### Example: HTTP check on an NGINX-backed service with an NGINX check on the service's endpoints
@@ -319,6 +323,7 @@ spec:
 [11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
 [12]: /integrations/nginx/
 [13]: /getting_started/tagging/unified_service_tagging
+[14]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/#service-targets
 
 {{% /tab %}}
 
@@ -388,6 +393,7 @@ spec:
 [11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
 [12]: /integrations/nginx/
 [13]: /getting_started/tagging/unified_service_tagging
+[14]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/#service-targets
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -408,3 +414,4 @@ spec:
 [11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
 [12]: /integrations/nginx/
 [13]: /getting_started/tagging/unified_service_tagging
+[14]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/#service-targets

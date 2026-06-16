@@ -354,13 +354,13 @@ See [Cluster Checks][3] for more context.
 
 <div class="alert alert-info">Configuring Autodiscovery with the <code>DatadogInstrumentation</code> custom resource is in beta.</div>
 
-You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods.
+You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogInstrumentation
 metadata:
-  name: <NAME>
+  name: <CR_NAME>
   namespace: default
 spec:
   targetRef:
@@ -446,7 +446,7 @@ For more information about tag cardinality, see [Per-check tag configuration][27
 
 The Datadog Agent automatically recognizes and supplies basic configuration for some common technologies. For a complete list, see [Autodiscovery auto-configuration][20].
 
-Configurations set with Kubernetes annotations take precedence over auto-configuration, but auto-configuration takes precedence over configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
+Configurations set with Kubernetes annotations take precedence over `DatadogInstrumentation` resources and auto-configuration. `DatadogInstrumentation` resources take precedence over static configuration, including auto-configuration and configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
 
 ## Integrations security
 

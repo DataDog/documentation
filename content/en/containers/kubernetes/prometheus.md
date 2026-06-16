@@ -49,10 +49,10 @@ This page explains the basic usage of these checks, which enable you to scrape c
 
 ### Configuration
 
-Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying the following `annotations` to your **pod** exposing the OpenMetrics/Prometheus metrics:
+Configure your OpenMetrics or Prometheus check using Autodiscovery. Use pod annotations or the `DatadogInstrumentation` custom resource.
 
 {{< tabs >}}
-{{% tab "Kubernetes (AD v2)" %}}
+{{% tab "Annotations (AD v2)" %}}
 
 **Note:** AD Annotations v2 was introduced in Datadog Agent version 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
@@ -81,7 +81,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Kubernetes (AD v1)" %}}
+{{% tab "Annotations (AD v1)" %}}
 
 ```yaml
 # (...)
@@ -106,13 +106,45 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+Use the [`DatadogInstrumentation` custom resource][17] to configure an OpenMetrics check for a supported Kubernetes workload or Service without changing pod annotations. This example targets a Deployment; for Service targets, omit `containerImage`.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <CR_NAME>
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: openmetrics
+        containerImage:
+          - <CONTAINER_IMAGE>
+        initConfig: {}
+        instances:
+          - openmetrics_endpoint: "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> "
+            namespace: "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>"
+            metrics:
+              - "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 With the following configuration placeholder values:
 
 | Placeholder                              | Description                                                                                        |
 |------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `<CONTAINER_NAME>`                 | Matches the name of the container that exposes the metrics. |
+| `<YOUR_CR_NAME>`                         | Name of your `DatadogInstrumentation` resource.                                                    |
+| `<WORKLOAD_NAME>`                        | Name of the workload targeted by the `DatadogInstrumentation` resource.                            |
+| `<CONTAINER_NAME>`                       | Matches the name of the container that exposes the metrics.                                        |
+| `<CONTAINER_IMAGE>`                      | Matches the image of the container that exposes the metrics.                                       |
 | `<PROMETHEUS_ENDPOINT>`                  | URL path for the metrics served by the container, in Prometheus format.                            |
 | `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Set namespace to be prefixed to every metric when viewed in Datadog.                               |
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                 |
@@ -439,3 +471,4 @@ Official integrations have their own dedicated directories. There's a default in
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [15]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/common/types/prometheus.go#L57-L123
 [16]: https://app.datadoghq.com/fleet?query=integration:openmetrics
+[17]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
