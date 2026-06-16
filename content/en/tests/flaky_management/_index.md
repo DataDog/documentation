@@ -124,7 +124,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
-1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit: Datadog checks the commit that triggered the test run and scans up to the 10 most recent commits in its history, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
+1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit, because Datadog also checks the recent commits leading up to it, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
     - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
       - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
     - Runs tests even if they are marked as `Disabled`.
@@ -133,8 +133,6 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
       - Starts a 14-day [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
     - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
-
-Datadog scans up to the 10 most recent commits, starting from the commit that triggered the test run. If you push more than 10 commits at once, include the test key within the 10 most recent commits. For squash merges, the original commits are combined into a single commit, so Datadog reads only the squash commit's message. Most providers include the original commit messages in the squash commit, so a key in any of them is preserved; if your provider omits them, add the key to the squash commit message.
 
 ### Track fixes that are in progress
 
@@ -248,6 +246,14 @@ If you are using `@slack-CHANNEL` (without the account name), the notification i
 
 To find your account name, go to the [Slack integration tile][5] and check the
 **Account Name** field for the workspace you want to use.
+
+### Attempt-to-fix remediation does not trigger after linking a fix
+
+After you include the test key (for example, `DD_ABC123`) in a commit, Datadog scans the commit that triggered the test run and up to the 10 most recent commits in its history. If the remediation flow does not start, check the following:
+
+- **The key is in an older commit.** Only the 10 most recent commits in the triggering commit's history are scanned. If you push more than 10 commits at once, include the key in the triggering commit or within its 10 most recent commits.
+- **The fix was squash-merged.** A squash merge combines the original commits into a single commit, so Datadog reads only the squash commit's message; the individual pre-squash commits are no longer scanned. Most providers include the original commit messages in the squash commit, so a key in any of them is preserved. If your provider omits them, add the key to the squash commit message.
+- **The key does not match the expected format.** Use the exact key shown in the Flaky Tests Management UI (for example, `DD_ABC123`) in the commit title or message.
 
 ## Further reading
 
