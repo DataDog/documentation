@@ -18,7 +18,7 @@ title: Análisis de la gestión de incidencias
 
 ## Información general
 
-{{< img src="incident_response/incident_management/analytics/incident_analytics.mp4" alt="Desplazarse por el dashboard con información general de la Gestión de incidentes" video=true style="width:100%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/incident_analytics.mp4" alt="Desplazarse por el dashboard con información general de la Gestión de incidentes" video=true style="width:100%;">}}
 
 Utiliza Incident Analytics para aprender de incidentes anteriores y comprender la eficacia y el rendimiento de tu proceso de respuesta a incidentes. El Análisis de incidentes te permite extraer estadísticas agregadas de tus incidentes a lo largo del tiempo. Puedes utilizar estas estadísticas para crear informes que te ayuden a:
 - Analizar si tu proceso de respuesta a incidentes está mejorando con el tiempo
@@ -85,7 +85,7 @@ Para configurar tu gráfico con los datos del análisis de gestión de incidenci
 
 ### Ejemplo: duración del impacto en el cliente de los cortes semanales, agrupada por servicio
 
-{{< img src="/incident_response/incident_management/analytics/analytics_graph_configuration.png" alt="Configuración de un gráfico de series temporales que muestra la fuente de los datos de incidentes, filtrada por gravedad, donde se ve la duración del impacto en el cliente, agrupada por servicio" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/analytics_and_reporting/analytics_graph_configuration.png" alt="Configuración de un gráfico de series temporales que muestra la fuente de los datos de incidentes, filtrada por gravedad, donde se ve la duración del impacto en el cliente, agrupada por servicio" style="width:90%;" >}}
 
 Este ejemplo de configuración te muestra una agregación de tus incidentes SEV-1 o SEV-2. El gráfico muestra la duración del impacto en el cliente de esos incidentes, agrupada por servicio. 
 

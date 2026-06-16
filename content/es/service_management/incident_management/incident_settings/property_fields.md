@@ -18,7 +18,7 @@ Puedes mover cualquier campo de propiedad a una tabla diferente o reordenarlos e
 
 ## Campos
 
-{{< img src="/incident_response/incident_management/incident_settings/settings_property_fields.png" alt="Parámetros de los campos de propiedad" style="width:100%;">}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/settings_property_fields.png" alt="Parámetros de los campos de propiedad" style="width:100%;">}}
 
 Los campos de propiedades son piezas clave de los metadatos con que puedes etiquetar tus incidentes. Esto facilita la búsqueda de subconjuntos específicos de incidentes en la [página de inicio][2] y la realización de consultas más sólidas en [Análisis de gestión de incidentes][3]. Hay cinco campos predeterminados:
 

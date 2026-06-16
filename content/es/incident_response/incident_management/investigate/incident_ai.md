@@ -75,7 +75,7 @@ Incident AI puede rellenar dinámicamente detalles clave en las notificaciones a
         </tr>
     </tbody>
    </table>
-   {{< img src="incident_response/incident_management/incident_ai/message_template_variables.png" alt="Plantilla de nuevo mensaje con variables de IA en ella" style="width:100%;" >}}
+   {{< img src="incident_response/incident_management/investigate/incident_ai/message_template_variables.png" alt="Plantilla de nuevo mensaje con variables de IA en ella" style="width:100%;" >}}
 1. Haz clic en **Save** (Guardar) para guardar la plantilla.
 1. Ve a las [reglas de notificación][2] de tu incidente.
 1. Haz clic en **Nueva Regla**.
@@ -88,7 +88,7 @@ Al unirte a un canal de incidentes en Slack (conectado a Datadog Incident Manage
 
 Cuando un incidente pasa a resuelto, Incident AI publica un resumen final. Esto es visible para todos en el canal.
 
-{{< img src="incident_response/incident_management/incident_ai/incident_summary.png" alt="Ejemplo de resumen de incidentes en Slack" style="width:100%;" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Ejemplo de resumen de incidentes en Slack" style="width:100%;" >}}
 
 ## Sugerencia de tarea de seguimiento proactiva
 
