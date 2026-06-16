@@ -13,7 +13,7 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">Data Observability: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.64.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
+<div class="alert alert-info">Data Observability: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.64.0 or later, <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later, and <a href="https://github.com/DataDog/datadog-operator/releases" target="_blank">Datadog Operator</a> version 1.13.0 or later (if using the Operator).</div>
 
 Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Kubernetes.
 
@@ -165,6 +165,8 @@ features:
   apm:
     instrumentation:
       enabled: true
+      enabledNamespaces:        # limits injection to these namespaces; without this, SSI instruments all namespaces
+        - <NAMESPACE>
       targets:
         - name: spark-driver
           podSelector:
@@ -200,6 +202,8 @@ datadog:
   apm:
     instrumentation:
       enabled: true
+      enabledNamespaces:        # limits injection to these namespaces; without this, SSI instruments all namespaces
+        - <NAMESPACE>
       targets:
         - name: spark-driver
           podSelector:
