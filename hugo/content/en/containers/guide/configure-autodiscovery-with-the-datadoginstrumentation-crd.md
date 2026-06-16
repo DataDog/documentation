@@ -213,18 +213,57 @@ When more than one configuration source applies to a workload, Datadog resolves 
 2. `DatadogInstrumentation` resources
 3. Static configuration, such as auto-configuration or mounted files
 
-If a workload already has annotation-based Autodiscovery configuration for a check, your `DatadogInstrumentation` configuration will not override it.
+If a workload already has annotation-based Autodiscovery configuration for a check, your `DatadogInstrumentation` configuration does not override it.
 
 ## One resource per target
 
-A workload or Service can be the target of only one `DatadogInstrumentation` resource within a namespace. A validation webhook will reject a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
+A workload or Service can be the target of only one `DatadogInstrumentation` resource within a namespace. A validation webhook rejects a resource whose `targetRef` already belongs to another resource, or whose `targetRef` points to an unsupported kind.
 
-## Check the status
+## Verify scheduled checks
 
-The controller reports the result of reconciling each resource through Kubernetes status conditions. Use the status to view the state of the check configuration, including target resolution and whether the configuration was applied:
+Resource status confirms that the configuration was accepted. To confirm that the resulting checks are scheduled, run `agent configcheck` in the Node Agent running on a node where the target workload is scheduled.
 
-```shell
-kubectl describe datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE>
+Checks configured through a `DatadogInstrumentation` resource list `instrumentation-checks` as the configuration provider, and `datadoginstrumentation:<NAMESPACE>/<CR_NAME>` as the configuration source. The following example shows the output for a `redisdb` check scheduled from a resource that targets a Redis service:
+
+```text
+> agent configcheck
+# other configs...
+
+=== redisdb check ===
+Configuration provider: instrumentation-checks
+Configuration source: datadoginstrumentation:cache/redis-instrumentation
+Config for instance ID: redisdb:d5dd267b580bc10e
+host: 10.244.0.7
+password: "********"
+port: 6379
+tags:
+  - container_id:86fd26bd7ee8c8cd1864103b2a575cdac0d23b1d0961085c000cb96d0f4a2cc9
+  - container_name:redis
+  - display_container_name:redis_redis-6b4c7b565b-6dhfh
+  - env:staging
+  - image_id:********@sha256:0a972391db0b24ec336e35d1bc98b237237e26f82bf5120cf2f6b1688d1df973
+  - image_name:redis
+  - image_tag:latest
+  - kube_container_name:redis
+  - kube_deployment:redis
+  - kube_namespace:cache
+  - kube_ownerref_kind:replicaset
+  - kube_ownerref_name:redis-6b4c7b565b
+  - kube_qos:BestEffort
+  - kube_replica_set:redis-6b4c7b565b
+  - kube_service:redis
+  - pod_name:redis-6b4c7b565b-6dhfh
+  - pod_phase:running
+  - service:redis
+  - short_image:redis
+~
+Init Config:
+{}
+Log Config:
+- service: redis
+  source: redis
+Auto-discovery IDs:
+* redis
 ```
 
 ## Further reading
