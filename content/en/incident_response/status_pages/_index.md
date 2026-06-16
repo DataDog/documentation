@@ -227,7 +227,7 @@ By default, status page subscription emails are sent from a Datadog email addres
 1. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
 
 <div class="alert alert-info">
-If the selected SMTP server fails, notifications are sent to subscribers through Datadog Default (<code>no-reply@dtdg.co</code>).
+If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
 </div>
 
 ## Set a custom domain
