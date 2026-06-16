@@ -19,8 +19,6 @@ Use the direct OTLP intake endpoints on this page when deploying a Collector or 
 
 <div class="alert alert-danger">Host metadata sent to this endpoint does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-<!-- TODO: Add Preview sign-up link once product provides it. -->
-
 Your setup depends on where your telemetry is coming from. Check the [Managed platforms][6] list first; if your platform has a dedicated endpoint, use it. Otherwise, use the serverless or signal-specific pages.
 
 | If your telemetry comes from... | Start here |
@@ -29,7 +27,7 @@ Your setup depends on where your telemetry is coming from. Check the [Managed pl
 | A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] (Preview) |
 | Your own app, host, or container | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
 
-<div class="alert alert-info">If you can deploy a Collector or Agent, see <a href="/opentelemetry/setup/collector_exporter/">OpenTelemetry Collector</a> or <a href="/opentelemetry/otlp_ingest_in_the_agent/">OTLP in the Datadog Agent</a> instead.</div>
+<div class="alert alert-info">If you want to send data from an OpenTelemetry Collector, <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">enroll in the Preview</a> for the full Collector experience. You can also send OTLP data through the <a href="/opentelemetry/otlp_ingest_in_the_agent/">Datadog Agent</a>.</div>
 
 See also: [Instrumenting for Agent Observability][5].
 

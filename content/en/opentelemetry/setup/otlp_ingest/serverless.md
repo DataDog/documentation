@@ -39,7 +39,7 @@ The following configuration applies to all platforms.
 
 - `dd-api-key`: Your Datadog API key.
 - `dd-otlp-source`: Set to `serverless`.
-- `compute_stats`: Set to `true`. Required for [trace metrics][2] and serverless platform detection.
+- `compute_stats`: Set to `true`. Required for [trace metrics][2].
 
 **Service name**: Set `OTEL_SERVICE_NAME` to identify your service. Without it, traces appear as `unknown_service`.
 

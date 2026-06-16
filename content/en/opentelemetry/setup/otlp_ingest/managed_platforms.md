@@ -40,19 +40,17 @@ export OTEL_EXPORTER_OTLP_ENDPOINT="https://{platform}.integrations.otlp.{{< reg
 export OTEL_EXPORTER_OTLP_HEADERS="dd-api-key=${DD_API_KEY}"
 ```
 
-To send only traces with [trace metrics][3] enabled:
+To send only traces:
 
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="https://{platform}.integrations.otlp.{{< region-param key="dd_site" >}}/v1/traces"
-export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},compute_stats=true"
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY}"
 ```
 
 <div class="alert alert-info">Managed platform endpoints do not use the <code>dd-otlp-source</code> header. If you migrate from the generic OTLP endpoint, remove this header from your configuration.</div>
 
 ## Supported platforms
-
-<!-- TODO: Clarify what the gcp and gae managed platform endpoints cover vs. Cloud Run/Functions on the serverless page. A Cloud Run user could pick either path and get a different endpoint. -->
 
 All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< region-param key="dd_site" >}}/`.
 
@@ -64,8 +62,6 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Cloudflare | `cloudflare` | [Cloudflare Workers observability][11] |
 | Cribl | `cribl` | — |
 | GitHub Actions | `github-actions` | — |
-| Google App Engine | `gae` | — |
-| Google Cloud | `gcp` | — |
 | Grafbase | `grafbase` | [Grafbase observability][12] |
 | Heroku | `heroku` | [Heroku telemetry][13] |
 | IBM | `ibm` | — |
@@ -100,7 +96,7 @@ Some signal processing that a Collector or Agent performs automatically does not
 
 ### Trace metrics
 
-Trace metrics are not computed by default because traffic from managed platforms may already be sampled at the source. To enable trace metrics, add `compute_stats=true` to your exporter headers.
+[Trace metrics][3] are computed by default for managed platform endpoints. Managed platforms may sample traffic before export, which can affect trace metric accuracy.
 
 ### Sampling
 
