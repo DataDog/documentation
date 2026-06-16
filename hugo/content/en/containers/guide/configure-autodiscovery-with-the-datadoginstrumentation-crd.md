@@ -63,7 +63,7 @@ Apply the change:
 kubectl apply -f datadog-agent.yaml
 ```
 
-The Operator sets the required environment variables and RBAC on the Cluster Agent automatically.
+The Operator sets the required Cluster Agent and Node Agent environment variables, and configures the required RBAC for the Cluster Agent automatically.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -154,13 +154,13 @@ kubectl apply -f redis-instrumentation.yaml
 Check the resource status:
 
 ```shell
-kubectl describe datadoginstrumentation <YOUR_CR_NAME>
+kubectl describe datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE>
 ```
 
 The status conditions show the state of the check configuration, including whether Datadog resolved the target workload and applied the configuration. To view only the conditions:
 
 ```shell
-kubectl get datadoginstrumentation <YOUR_CR_NAME> \
+kubectl get datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE> \
   -o jsonpath='{range .status.conditions[*]}{.type}{"\t"}{.status}{"\t"}{.reason}{"\t"}{.message}{"\n"}{end}'
 ```
 
@@ -188,7 +188,7 @@ To configure an [endpoint check][6], set `targetRef` to a `Service`. Service tar
 - Datadog schedules one endpoint check for each endpoint of the Service.
 - `%%host%%` resolves to the endpoint IP.
 - If an endpoint is backed by a Kubernetes Pod, Datadog adds the Pod and container tags collected for that Pod.
-- If an endpoint is not backed by a Pod, Datadog schedules a regular endpoint check without Pod-specific tags.
+- If an endpoint is not backed by a Pod, Datadog converts the check into a regular cluster check without Pod-specific tags.
 
 Service targets do not use `containerImage`; omit that field.
 
@@ -233,7 +233,7 @@ A workload or Service can be the target of only one `DatadogInstrumentation` res
 The controller reports the result of reconciling each resource through Kubernetes status conditions. Use the status to view the state of the check configuration, including target resolution and whether the configuration was applied:
 
 ```shell
-kubectl describe datadoginstrumentation <YOUR_CR_NAME>
+kubectl describe datadoginstrumentation <YOUR_CR_NAME> -n <YOUR_TARGETS_NAMESPACE>
 ```
 
 ## Further reading

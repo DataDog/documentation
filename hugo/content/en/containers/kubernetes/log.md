@@ -253,8 +253,6 @@ For more details, see [Configure Autodiscovery with the DatadogInstrumentation C
 
 The following Pod annotation defines the integration template for an example container. It is defined within the Pod template's annotations, rather than on the Deployment itself. This log configuration sets all the logs from the `app` container with the tags `source:java`, `service:example-app`, and the extra tag `foo:bar`.
 
-You can apply the same log configuration with a `DatadogInstrumentation` custom resource.
-
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -276,6 +274,31 @@ spec:
       containers:
         - name: app
           image: owner/example-image:latest
+```
+
+You can apply the same log configuration with a `DatadogInstrumentation` custom resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: example-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: example
+  config:
+    checks:
+      - integration: <INTEGRATION_NAME>
+        containerImage:
+          - owner/example-image
+        logs:
+          - source: java
+            service: example-app
+            tags:
+              - foo:bar
 ```
 
 #### Configure two different containers
