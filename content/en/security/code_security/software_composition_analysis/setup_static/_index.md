@@ -45,7 +45,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 
 ## Lockfile-less scanning
 
-When a repository does not contain a supported lockfile, Datadog SCA can scan manifest files directly to identify dependencies.
+Datadog SCA scans manifest files **only when no supported lockfile is detected**. When a lockfile is present, it takes precedence and the manifest is not scanned.
 
 | Language | Package Manager        | File             |
 |----------|------------------------|------------------|
@@ -57,7 +57,7 @@ When a repository does not contain a supported lockfile, Datadog SCA can scan ma
 - `pyproject.toml`: PEP 621 `dependencies` and `optional-dependencies`, PEP 735 `dependency-groups`, and Poetry dependency sections
 
 <div class="alert alert-info">
-Because manifests declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range to a published version. Results may differ from what a package manager would install. Where a lockfile is available, it takes precedence and provides more precise version resolution.
+Because manifests declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range by selecting the newest published version that satisfies the range. Pre-release versions are excluded.
 </div>
 
 ## Select where to run static SCA scans
