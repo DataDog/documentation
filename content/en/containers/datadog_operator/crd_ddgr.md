@@ -2,18 +2,12 @@
 title: DatadogGenericResource CRD
 description: Create and manage Datadog resources using the DatadogGenericResource custom resource definition with the Datadog Operator
 further_reading:
-  - link: "/api/latest/monitors/#create-a-monitor"
-    tag: "Datadog API"
-    text: "API Reference: Create a Datadog monitor"
-  - link: "/api/latest/dashboards/#create-a-new-dashboard"
-    tag: "Datadog API"
-    text: "API Reference: Create a Datadog dashboard"
-  - link: "/api/latest/service-level-objectives/#create-an-slo-object"
-    tag: "Datadog API"
-    text: "API Reference: Create a Datadog SLO"
-  - link: "https://github.com/DataDog/helm-charts/blob/main/crds/datadoghq.com_datadoggenericresources.yaml"
+  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/datadoggenericresource/datadog_generic_resource.md"
     tag: "GitHub"
-    text: "DatadogGenericResource CRD"
+    text: "DatadogGenericResource guide"
+  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/datadoggenericresource/datadog_generic_resource_migration.md"
+    tag: "GitHub"
+    text: "Migrating to DatadogGenericResource"
 ---
 
 To create and manage Datadog resources with the Datadog Operator, use the `DatadogGenericResource` custom resource definition (CRD). `DatadogGenericResource` uses the Datadog API JSON payload for each supported resource type in `spec.jsonSpec`.
@@ -43,7 +37,7 @@ To create and manage Datadog resources with the Datadog Operator, use the `Datad
 1. Run the installation command, substituting your Datadog API and application keys:
 
    ```shell
-   helm install my-datadog-operator datadog/datadog-operator \
+   helm install datadog-operator datadog/datadog-operator \
      --set apiKey=<DATADOG_API_KEY> \
      --set appKey=<DATADOG_APP_KEY> \
      --set datadogCRDs.crds.datadogGenericResources=true \
@@ -59,7 +53,7 @@ To create and manage Datadog resources with the Datadog Operator, use the `Datad
    kind: DatadogGenericResource
    metadata:
      name: example-monitor
-     namespace: datadog
+     namespace: <operator namespace>
    spec:
      type: monitor
      jsonSpec: |-
