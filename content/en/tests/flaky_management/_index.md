@@ -124,7 +124,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
-1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit, because Datadog also checks the recent commits leading up to it, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
+1. When Datadog detects the test key, it automatically triggers the remediation flow for that test. The key does not need to be in the most recent commit. Datadog also checks recent preceding commits, so the flow still triggers when you push several commits together or when your CI provider reports only the most recent commit. The remediation flow:
     - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
       - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
     - Runs tests even if they are marked as `Disabled`.
