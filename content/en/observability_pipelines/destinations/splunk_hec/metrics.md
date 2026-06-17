@@ -86,7 +86,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
-|    TKTK        |     TKTK          |          TKTK       |
+|    None        |     1             |          1          |
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/destinations/#event-batching
