@@ -429,7 +429,7 @@ Use the following table to gather the values for your environment, then add the 
 
 ### (Optional) Create an IAM role for Redshift to read exposure data
 
-This step is required only if you use Datadog Feature Flagging and want Datadog to synchronize your feature flag exposures into Redshift so metrics in your warehouse can be used in experiments. Datadog Experiments stages exposure data in the S3 bucket you created, then runs a Redshift `COPY` command to load that data into your warehouse. The `COPY` command uses a dedicated IAM role that your Redshift cluster assumes to read from the bucket. This role is separate from the role your Datadog AWS integration uses.
+This step is required only if you use Datadog Feature Flagging. It enables Datadog to synchronize your feature flag exposures into Redshift so that metrics in your warehouse can be used in experiments. Datadog Experiments stages exposure data in the S3 bucket you created, then runs a Redshift `COPY` command to load that data into your warehouse. The `COPY` command uses a dedicated IAM role that your Redshift cluster assumes to read from the bucket. This role is separate from the role your Datadog AWS integration uses.
 
 If you use your own feature flagging solution, exposure data already lives in your systems and Datadog does not synchronize exposures into Redshift. In that case, skip this step and leave the **Copy IAM role ARN** field blank in [Step 3](#step-3-configure-experiment-settings).
 
