@@ -15,7 +15,7 @@ further_reading:
 - link: /synthetics/explore/results_explorer
   tag: Documentación
   text: Más información sobre Synthetic Monitoring y Testing Results Explorer
-- link: /service_management/events/explorer
+- link: /events/explorer
   tag: Documentación
   text: Información sobre el explorador de eventos
 title: Buscar y gestionar tests Synthetic
