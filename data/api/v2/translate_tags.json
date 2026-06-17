@@ -23,6 +23,10 @@
     "name": "AWS Logs Integration",
     "description": "Configure your Datadog-AWS-Logs integration directly through Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)."
   },
+  "aws-wif": {
+    "name": "AWS WIF",
+    "description": "Manage AWS Workload Identity Federation (WIF) mappings.\nPersona mappings link IAM role ARN patterns to Datadog users for delegated-token authentication.\nIntake mappings link IAM role ARN patterns to managed-rotation API keys for agent telemetry ingestion."
+  },
   "action-connection": {
     "name": "Action Connection",
     "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
@@ -171,6 +175,10 @@
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
   },
+  "delegated-token": {
+    "name": "Delegated Token",
+    "description": "Exchange a cloud-provider identity proof or Datadog credential for a short-lived delegated-user JWT\nvia Workload Identity Federation."
+  },
   "deployment-gates": {
     "name": "Deployment Gates",
     "description": "Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information."
@@ -238,6 +246,10 @@
   "incidents": {
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
+  },
+  "intake-key": {
+    "name": "Intake Key",
+    "description": "Exchange a cloud-provider identity proof for a Datadog API key via Workload Identity Federation intake mappings."
   },
   "integrations": {
     "name": "Integrations",

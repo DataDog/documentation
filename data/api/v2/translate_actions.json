@@ -1596,6 +1596,10 @@
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
+  "GetDelegatedToken": {
+    "description": "Exchange a Workload Identity Federation (WIF) proof or Datadog credentials for a short-lived access token\nscoped to a Datadog user.\n\nTo authenticate with a WIF identity, pass the cloud-provider token in the `Authorization` header using\nthe `Bearer` or `Delegated` scheme. Datadog resolves the Datadog user from the persona mapping configured\nfor that cloud identity.\n\nTo obtain a token for the calling user directly, authenticate with standard Datadog API and application keys.\n\nUse the returned `access_token` as a bearer token in subsequent API calls.",
+    "summary": "Get a delegated token"
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"
@@ -2229,6 +2233,10 @@
     "summary": "Update an incident todo",
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
+  },
+  "GetIntakeKey": {
+    "description": "Exchanges a Workload Identity Federation (WIF) identity proof for a Datadog API key associated with the matching WIF intake mapping.\n\nPass a cloud-provider token in the `Authorization` header using the `Bearer` or `Delegated` scheme.\nThe token is validated against the WIF intake mappings configured for the caller's organization. On success,\na managed-rotation API key is returned that the workload can use to send telemetry to Datadog.\n\nUnlike the delegated-token endpoint (`POST /api/v2/delegated-token`), this endpoint authenticates\nthe cloud workload at the organization level rather than mapping it to a specific Datadog user.\n\nStandard Datadog API and application key authentication is not accepted. Authenticate using a\ncloud-provider token in the `Authorization: Bearer` header.",
+    "summary": "Get an intake API key"
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -6473,6 +6481,42 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListAwsWifIntakeMappings": {
+    "description": "List every AWS WIF intake mapping configured for the caller's organization.",
+    "summary": "List AWS WIF intake mappings"
+  },
+  "CreateAwsWifIntakeMapping": {
+    "description": "Create an AWS WIF intake mapping. The mapping binds an IAM role ARN pattern to a managed-rotation API key, allowing AWS workloads to send telemetry to Datadog without requiring a delegated user token.",
+    "summary": "Create an AWS WIF intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AWS WIF intake mapping."
+  },
+  "DeleteAwsWifIntakeMapping": {
+    "description": "Delete an AWS WIF intake mapping by UUID. The associated managed-rotation API key is left intact, but AWS workloads that previously matched this mapping will lose intake access.",
+    "summary": "Delete an AWS WIF intake mapping"
+  },
+  "GetAwsWifIntakeMapping": {
+    "description": "Retrieve a single AWS WIF intake mapping by UUID.",
+    "summary": "Get an AWS WIF intake mapping"
+  },
+  "ListAwsWifPersonaMappings": {
+    "description": "List every AWS WIF persona mapping configured for the caller's organization.",
+    "summary": "List AWS WIF persona mappings"
+  },
+  "CreateAwsWifPersonaMapping": {
+    "description": "Create an AWS Workload Identity Federation (WIF) persona mapping. The mapping binds an IAM role ARN pattern to a Datadog user handle, which is used to authenticate delegated-token requests from that AWS identity.",
+    "summary": "Create an AWS WIF persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an AWS WIF persona mapping."
+  },
+  "DeleteAwsWifPersonaMapping": {
+    "description": "Delete an AWS WIF persona mapping by UUID. Subsequent delegated-token requests from the previously mapped AWS identity will be denied.",
+    "summary": "Delete an AWS WIF persona mapping"
+  },
+  "GetAwsWifPersonaMapping": {
+    "description": "Retrieve a single AWS WIF persona mapping by UUID.",
+    "summary": "Get an AWS WIF persona mapping"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

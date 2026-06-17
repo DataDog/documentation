@@ -6909,6 +6909,106 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: AWS WIF
+      url: /api/latest/aws-wif/
+      identifier: aws-wif
+      generated: true
+    - name: Get an AWS WIF persona mapping
+      url: /api/latest/aws-wif/get-an-aws-wif-persona-mapping/
+      identifier: aws-wif-get-an-aws-wif-persona-mapping
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAwsWifPersonaMapping
+        unstable: []
+        order: 3
+    - name: Delete an AWS WIF persona mapping
+      url: /api/latest/aws-wif/delete-an-aws-wif-persona-mapping/
+      identifier: aws-wif-delete-an-aws-wif-persona-mapping
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAwsWifPersonaMapping
+        unstable: []
+        order: 4
+    - name: Create an AWS WIF persona mapping
+      url: /api/latest/aws-wif/create-an-aws-wif-persona-mapping/
+      identifier: aws-wif-create-an-aws-wif-persona-mapping
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsWifPersonaMapping
+        unstable: []
+        order: 1
+    - name: List AWS WIF persona mappings
+      url: /api/latest/aws-wif/list-aws-wif-persona-mappings/
+      identifier: aws-wif-list-aws-wif-persona-mappings
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAwsWifPersonaMappings
+        unstable: []
+        order: 2
+    - name: Get an AWS WIF intake mapping
+      url: /api/latest/aws-wif/get-an-aws-wif-intake-mapping/
+      identifier: aws-wif-get-an-aws-wif-intake-mapping
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAwsWifIntakeMapping
+        unstable: []
+        order: 7
+    - name: Delete an AWS WIF intake mapping
+      url: /api/latest/aws-wif/delete-an-aws-wif-intake-mapping/
+      identifier: aws-wif-delete-an-aws-wif-intake-mapping
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAwsWifIntakeMapping
+        unstable: []
+        order: 8
+    - name: Create an AWS WIF intake mapping
+      url: /api/latest/aws-wif/create-an-aws-wif-intake-mapping/
+      identifier: aws-wif-create-an-aws-wif-intake-mapping
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsWifIntakeMapping
+        unstable: []
+        order: 5
+    - name: List AWS WIF intake mappings
+      url: /api/latest/aws-wif/list-aws-wif-intake-mappings/
+      identifier: aws-wif-list-aws-wif-intake-mappings
+      parent: aws-wif
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAwsWifIntakeMappings
+        unstable: []
+        order: 6
     - name: Action Connection
       url: /api/latest/action-connection/
       identifier: action-connection
@@ -11056,6 +11156,22 @@ menu:
         unstable:
           - v2
         order: 3
+    - name: Delegated Token
+      url: /api/latest/delegated-token/
+      identifier: delegated-token
+      generated: true
+    - name: Get a delegated token
+      url: /api/latest/delegated-token/get-a-delegated-token/
+      identifier: delegated-token-get-a-delegated-token
+      parent: delegated-token
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDelegatedToken
+        unstable: []
+        order: 1
     - name: Deployment Gates
       url: /api/latest/deployment-gates/
       identifier: deployment-gates
@@ -13083,6 +13199,22 @@ menu:
         unstable:
           - v2
         order: 50
+    - name: Intake Key
+      url: /api/latest/intake-key/
+      identifier: intake-key
+      generated: true
+    - name: Get an intake API key
+      url: /api/latest/intake-key/get-an-intake-api-key/
+      identifier: intake-key-get-an-intake-api-key
+      parent: intake-key
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIntakeKey
+        unstable: []
+        order: 1
     - name: Integrations
       url: /api/latest/integrations/
       identifier: integrations
