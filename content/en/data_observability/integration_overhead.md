@@ -88,7 +88,7 @@ Data Observability runs these queries with bounded concurrency and a per-query t
 Jobs Monitoring collects telemetry in one of two ways, each with a different overhead profile:
 
 - **Datadog Agent**: for Spark jobs on Databricks, Amazon EMR, Google Dataproc, and Kubernetes, you install the Datadog Agent on your compute. Its footprint is described in this section.
-- **OpenLineage events**: for Apache Airflow, dbt, and custom pipelines, you run an open-source OpenLineage integration in your own environment, which emits events to Datadog. See [OpenLineage-based integrations](#openlineage-based-integrations).
+- **OpenLineage events**: for Apache Airflow, dbt, and custom pipelines, you run an open source OpenLineage integration in your own environment, which emits events to Datadog. See [OpenLineage-based integrations](#openlineage-based-integrations).
 
 On Databricks **classic** clusters (all-purpose or job clusters), the Agent is installed on the cluster nodes through an init script. On **serverless** compute, no Agent installation is required.
 
@@ -117,7 +117,7 @@ Jobs Monitoring can surface the DBU cost of your Databricks jobs. This cost data
 
 ### OpenLineage-based integrations
 
-Apache Airflow, dbt, and custom pipelines are monitored without the Datadog Agent. Instead, you run an open-source [OpenLineage][3] integration in your own environment, and it emits lineage events to Datadog over HTTP. These components are maintained by the OpenLineage and Apache Airflow projects, and their configuration and performance are documented there. The overhead is the integration's, not the Datadog Agent's.
+Apache Airflow, dbt, and custom pipelines are monitored without the Datadog Agent. Instead, you run an open source [OpenLineage][3] integration in your own environment, and it emits lineage events to Datadog over HTTP. These components are maintained by the OpenLineage and Apache Airflow projects, and their configuration and performance are documented there. The overhead is the integration's, not the Datadog Agent's.
 
 In all cases the integration runs in-process where your jobs run, captures run, job, and dataset metadata, and emits events at run lifecycle points. Its cost is proportional to the number of runs and tasks and the metadata collected, not to your data volume.
 
@@ -129,7 +129,7 @@ For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineag
 
 ## Notes
 
-The behaviors above are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, how often monitors run, and (on warehouse-based platforms) your auto-stop configuration. To size it, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management.
+The behaviors above are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To size it, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management.
 
 [1]: /tracing/troubleshooting/agent_apm_resource_usage/
 [2]: /data_observability/jobs_monitoring/databricks/
