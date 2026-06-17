@@ -12279,6 +12279,23 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
+    - name: Governance Insights
+      url: /api/latest/governance-insights/
+      identifier: governance-insights
+      generated: true
+    - name: List governance insights
+      url: /api/latest/governance-insights/list-governance-insights/
+      identifier: governance-insights-list-governance-insights
+      parent: governance-insights
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceInsights
+        unstable:
+          - v2
+        order: 1
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
