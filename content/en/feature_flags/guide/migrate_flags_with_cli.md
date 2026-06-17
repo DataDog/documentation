@@ -18,8 +18,8 @@ The [Datadog Flag Migration CLI][1] is a command-line tool that helps you migrat
 
 Before running the CLI, make sure your Datadog organization is set up:
 
-- **Users and Teams**: Datadog organization should be provisioned with the users and teams needed to manage flags.
-- **Feature Flag Environments**: Create the [feature flag environments][3] you plan to migrate into before running the CLI. The CLI does not create environments for you.
+- **Users and Teams**: Your Datadog organization should be provisioned with the users and teams needed to manage flags. The CLI does not create users or teams for you.
+- **Feature Flag Environments**: The [feature flag environments][3] you plan to migrate into should be created before running the CLI. The CLI does not create environments for you.
 
 For details on how the migration works and the providers it supports, see the [GitHub repository][1].
 
