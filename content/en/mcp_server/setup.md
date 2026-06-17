@@ -489,7 +489,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Sign in to your Datadog account.
 1. **Restart the IDE.**
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Open the chat panel, select agent mode, and click the {{< ui >}}Configure Tools{{< /ui >}} button.
-   {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
+   {{< img src="mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -626,6 +626,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `dbm`: Tools for interacting with [Database Monitoring][33]
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
@@ -649,6 +650,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
+- `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 - `rum`: Tools for [Real User Monitoring][57], including summarizing application performance, inspecting application configuration, and running performance investigations
 
 ## Supported clients
@@ -843,3 +845,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [59]: https://chatgpt.com/
 [60]: https://www.datadoghq.com/product-preview/mcp-codexec/
 [61]: /getting_started/profiler/
+[62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
+[63]: /cloud_cost_management/

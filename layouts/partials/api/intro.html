@@ -5,7 +5,10 @@
 {{ $title := .title }}
 {{ $translate_tag := .translate_tag }}
 {{ range $tag := first 1 (where ($tagsV1 | append $tagsV2) ".name" "==" $title) }}
-<h1>{{ $translate_tag.name | default $tag.name }}</h1>
+<div class="api-intro-header d-flex flex-wrap align-items-start justify-content-between">
+    <h1 class="mb-0">{{ $translate_tag.name | default $tag.name }}</h1>
+    {{ partial "api/api-copy-btn.html" $.dot }}
+</div>
 <div class="row">
     <div class="col-12 col-lg-9">
         {{ $markdown := $translate_tag.description | default $tag.description | markdownify }}

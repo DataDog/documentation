@@ -386,7 +386,7 @@ Consulta esta lista para encontrar los enlaces a cada una de las siguientes secc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/getting_started/tagging/assigning_tags/
-[2]: /es/service_management/events/explorer
+[2]: /es/events/explorer
 [3]: /es/integrations/
 [4]: /es/infrastructure/hostmap/
 [5]: /es/infrastructure/

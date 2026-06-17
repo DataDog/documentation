@@ -15,9 +15,7 @@ further_reading:
 
 ## Overview
 
-Getting visibility into users and accounts in APM helps you understand which users are affected by performance issues or errors. User and account information is displayed in the [APM Investigator][8] and [Error Tracking issues][9].
-
-{{< img src="tracing/guide/user-accounts/user-account-apm-investigator.png" alt="User and account information displayed in APM Investigator showing impacted users and accounts" style="width:100%;" >}}
+Getting visibility into users and accounts in APM helps you understand which users are affected by performance issues or errors. User and account information is displayed in [Error Tracking issues][9].
 
 By tagging traces with user and account identifiers, you can:
 - Track which users are impacted by backend errors or latency issues.
@@ -84,7 +82,7 @@ Analyze error patterns and latency issues across your user base to prioritize fi
 
 - Use [Tag Analysis][17] to identify which users or accounts are disproportionately affected by errors or high latency on backend services.
 - [Group queries][18] by `usr.id` or `account.id` to analyze error rates or latency percentiles by user or account.
-- View user and account impact directly in the [APM Investigator][8] and [Error Tracking issues][9] to understand the scope of production problems.
+- View user and account impact directly in [Error Tracking issues][9] to understand the scope of production problems.
 
 This helps you prioritize incident response based on the number of affected users or the importance of affected accounts.
 
@@ -110,7 +108,6 @@ This enables proactive monitoring and ensures you can respond quickly when high-
 [5]: /tracing/trace_collection/custom_instrumentation/
 [6]: /tracing/trace_collection/trace_context_propagation/#baggage
 [7]: /product_analytics/profiles/
-[8]: /tracing/guide/latency_investigator/
 [9]: /error_tracking/explorer/
 [10]: /tracing/glossary/#baggage
 [11]: /glossary/#service-entry-span

@@ -137,9 +137,13 @@ Store the SQL query that the Worker executes in a local file.
 
 Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the MySQL URI connection string. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
 After you select the MySQL source in the pipeline UI:
 
-1. Enter the connection string.
+1. Enter the identifier for your URI connection string. If you leave it blank, the [default](#secret-defaults) is used.
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to the local file containing the validated SQL query.
@@ -156,11 +160,25 @@ After you select the MySQL source in the pipeline UI:
     | Every 1 min                | `*/1 * * * *`   |
     | Once daily at 8 AM         | `0 8 * * *`     |
 
-## Set the environment variables
+## Secret defaults
 
-- URI connection string
-  - The URI that contains the necessary parameters, such as the database engine, host, port, and credentials, to connect to a database.
-  - Stored as environment variable: `DB_SOURCE_DATABASE_CONNECTION_STRING`
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- MySQL URI connection string identifier:
+	- References the URI that contains the necessary parameters, such as the database engine, host, port, and credentials, to connect to a database.
+	- The default identifier is `SOURCE_MYSQL_CONNECTION_STRING`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Limits and requirements
 

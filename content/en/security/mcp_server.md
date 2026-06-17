@@ -38,6 +38,7 @@ You can use the `security` toolset to:
 - **Triage security signals**: Update triage state or assignee across a set of matching signals in bulk.
 - **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
 - **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
+- **Triage security findings**: Create Jira issues, ServiceNow tickets, or Case Management cases for findings. Assign findings to team members, or mute false positives and accepted risks.
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
 - **Inspect and manage detection rules**: List and retrieve detection rule definitions to understand what logic is generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
@@ -50,7 +51,7 @@ The `security` toolset is not enabled by default. You can enable it by adding a 
 1. [Set up the Datadog MCP Server][4].
 2. When connecting to the Datadog MCP Server, add `security` to the `toolsets` parameter. For example, for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), use:
    ```text
-   https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,security
+   https://mcp.{{< region-param key="dd_site" >}}/v1/mcp?toolsets=core,security
    ```
 
 <div class="alert alert-warning"><code>?toolsets=security</code> must be in the URL. Otherwise, security tools are not available to your AI client, even if the MCP Server is otherwise connected and working.</div>
@@ -83,17 +84,37 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 ### Security Findings
 
-`security_findings_schema`
-: Returns the available fields and their types for security findings. Call this before using `analyze_security_findings` to discover which fields you can filter and group by. Supports filtering by finding type.
+`get_datadog_security_findings_schema`
+: Returns the available fields and their types for security findings. Call this before using `analyze_datadog_security_findings` to discover which fields you can filter and group by. Supports filtering by finding type.
 : *Permissions required: `Security Monitoring Findings Read`*
 
-`analyze_security_findings`
-: Primary tool for analyzing security findings using SQL. Queries live data from the last 24 hours with support for aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields.
+`analyze_datadog_security_findings`
+: Primary tool for analyzing security findings using SQL. Queries live data from the last 24 hours with support for aggregations, filtering, and grouping. Call `get_datadog_security_findings_schema` first to discover available fields.
 : *Permissions required: `Security Monitoring Findings Read`, `Timeseries`*
 
-`search_security_findings`
-: Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
+`search_datadog_security_findings`
+: Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_datadog_security_findings` for most analysis tasks.
 : *Permissions required: `Security Monitoring Findings Read`*
+
+`get_datadog_security_findings_ticket_suggestions`
+: Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+: *Permissions required: `Security Monitoring Findings Read`, `Cases Read`*
+
+`create_datadog_security_findings_ticket`
+: Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+: *Permissions required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*
+
+`detach_datadog_security_findings_ticket`
+: Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
+: *Permissions required: `Security Monitoring Findings Write`, `Cases Write`*
+
+`mute_datadog_security_findings`
+: Mutes or unmutes security findings to suppress them from alerts and dashboards. Requires a mute reason (`PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, or `OTHER`) and supports an optional description and expiration date.
+: *Permissions required: `Security Monitoring Findings Write`*
+
+`assign_datadog_security_findings`
+: Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
+: *Permissions required: `Security Monitoring Findings Write`*
 
 ### Detection Rules
 

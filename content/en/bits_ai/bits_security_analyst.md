@@ -82,21 +82,43 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
    - Click {{< ui >}}Rule Settings{{< /ui >}} to configure investigations for individual rules. You can change the minimum severity for signals to be investigated, and enable or disable individual rules for investigation.
    - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so Bits Security Analyst only investigates signals that match your filter.
 1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click {{< ui >}}Edit credentials{{< /ui >}}. In the {{< ui >}}Select or Add Connection{{< /ui >}} window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
-   - Some log sources require additional setup so you can create HTTP connections. Here's an example:
-     {{< collapse-content title="Configure SentinelOne" level="h4" expanded=false id="sentinelone" >}}
-     <ol>
-       <li>In SentinelOne, ensure you have permission to create an API token. Create an S1 API service user, then assign the {{< ui >}}Viewer{{< /ui >}} role to that user.</li>
-       <li>In Datadog, in the {{< ui >}}Select or Add Connection{{< /ui >}} window, in the dropdown, select {{< ui >}}New Connection{{< /ui >}}, then click the {{< ui >}}HTTP{{< /ui >}} tile.</li>
-       <li>Add the following information:
-         <ul>
-           <li>In the {{< ui >}}Description{{< /ui >}} field, Datadog recommends adding your token expiry date, to make it easily accessible.</li>
-           <li>In the {{< ui >}}Base URL{{< /ui >}} field, enter your SentinelOne Management Console URL.</li>
-           <li>Under {{< ui >}}Token Auth{{< /ui >}}, enter a name for your token in the {{< ui >}}Token Name{{< /ui >}} field, and your API token in the {{< ui >}}Token Value{{< /ui >}} field.</li>
-         </ul>
-       </li>
-       <li>Click {{< ui >}}Next, Confirm Access{{< /ui >}} to verify your connection.</li>
-     </ol>
-     {{< /collapse-content >}}
+   
+   Some log sources require additional setup so you can create HTTP connections. Here's an example:
+   {{< collapse-content title="Configure SentinelOne" level="h4" expanded=false id="sentinelone" >}}
+   <ol>
+     <li>In SentinelOne, ensure you have permission to create an API token. Create an S1 API service user, then assign the {{< ui >}}Viewer{{< /ui >}} role to that user.</li>
+     <li>In Datadog, in the {{< ui >}}Select or Add Connection{{< /ui >}} window, in the dropdown, select {{<  ui >}}New Connection{{< /ui >}}, then click the {{< ui >}}HTTP{{< /ui >}} tile.</li>
+     <li>Add the following information:
+       <ul>
+         <li>In the {{< ui >}}Description{{< /ui >}} field, Datadog recommends adding your token expiry date, to make it easily accessible.</li>
+         <li>In the {{< ui >}}Base URL{{< /ui >}} field, enter your SentinelOne Management Console URL.</li>
+         <li>Under {{< ui >}}Token Auth{{< /ui >}}:
+           <ol>
+             <li>Enter a name for your token in the {{< ui >}}Token Name{{< / ui >}} field, and your API token in the {{< ui >}}Token Value{{< /ui >}} field.</li>
+             <li>On the {{< ui >}}Headers{{< /ui >}} tab, under {{< ui  >}}Request Headers{{< /ui >}}, click {{< ui >}}Add a Header{{< /ui >}}. Add the following two headers:
+               <table>
+                 <thead>
+                   <tr>
+                     <th>Name</th>
+                     <th>Value</th>
+                   </tr>
+                 </thead>
+                 <tr>
+                   <td><code>Authorization</code></td>
+                   <td><code>Bearer</code> followed by a space, then insert the  {{< ui >}}Token Name{{< /ui >}} you defined</td>
+                 </tr>
+                 <tr>
+                   <td><code>Content-Type</code></td>
+                   <td><code>application/json</code></td>
+                 </tr>
+               </table>
+             </li>
+           </ol>
+       </ul>
+     </li>
+     <li>Click {{< ui >}}Next, Confirm Access{{< /ui >}} to verify your connection.</li>
+   </ol>
+   {{< /collapse-content >}}
 
 ## Disable Bits Security Analyst
 

@@ -1,6 +1,6 @@
 ---
 title: Advanced Configuration
-description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, and control sampling for your application's needs."
+description: "Configure RUM Browser SDK to modify data collection, override view names, manage user sessions, track unauthenticated users, and control sampling for your application's needs."
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -39,13 +39,6 @@ further_reading:
 ## Overview
 
 There are various ways you can modify the [data and context collected][1] by RUM, to support your needs for:
-
-## Testing
-
-{% card-grid %}
-{% image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" tooltip="Linux" /%}
-{% image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" tooltip="Docker" /%}
-{% /card-grid %}
 
 - Protecting sensitive data like personally identifiable information.
 - Connecting a user session with your internal identification of that user, to help with support.
@@ -891,6 +884,21 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.clearUser()
 ```
 {% /if %}
+
+### Track unauthenticated users
+
+For unauthenticated visitors or users who have not yet logged in, the RUM SDK automatically tracks activity using `usr.anonymous_id`. This lets you analyze user behavior without requiring authentication.
+
+`usr.anonymous_id` is a randomly generated UUID (v4). It is not derived from any user PII, IP address, device fingerprint, or hardware identifier.
+
+The ID has the following properties:
+
+- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s_v2`).
+- **Scope**: Per-browser and per-domain. Incognito mode, cookie clearing, or switching browsers or devices produces a new `anonymous_id`.
+
+The ID resets if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears cookies.
+
+**Note**: `usr.anonymous_id` is enabled by default. To disable it, set [`trackAnonymousUser: false`](https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackanonymoususer) in your `init` config.
 
 ## Account
 
