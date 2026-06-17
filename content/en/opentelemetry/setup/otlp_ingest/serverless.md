@@ -44,16 +44,16 @@ The following configuration applies to all platforms.
 
 **Resource attributes**: Set platform-specific attributes with `OTEL_RESOURCE_ATTRIBUTES`. See each cloud provider tab below for required and optional attributes.
 
-<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}: Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}} in the following examples.</div>
-
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
-export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="${YOUR_ENDPOINT}"
+export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
 export OTEL_SERVICE_NAME="my-service"
 ```
 
 ## Setup
+
+<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}: Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}} in the following examples.</div>
 
 Select your cloud provider for platform-specific resource attribute configuration:
 
