@@ -9,27 +9,29 @@ further_reading:
 
 ## Overview
 
-Segmenting helps you focus on specific user groups based on characteristics or behaviors. This allows you to uncover insights, identify trends, and make data-driven decisions about your product.
+Segmenting helps you focus on specific groups of users or accounts based on characteristics or behaviors. This allows you to uncover insights, identify trends, and make data-driven decisions about your product.
 
-For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
+For example, you can segment users by purchase amount, by activity within a specific country, or by trial status. You can also segment accounts by attributes like annual recurring revenue (ARR) or start date.
 
-After creating a segment, you can reuse it across charts and dashboards to compare how different groups of users behave.
+After creating a segment, you can reuse it across charts and dashboards to compare how different groups behave.
 
 ## Build a segment
 To create a segment:
 1. Navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and click **Create Segment**.
    
-1. Then, select a data source:
-   - [Product Analytics data](#segment-pana): Define users based on their activity in your product.
-   - [CSV file](#segment-csv): Upload a predefined list of users.
+1. Under **Define your audience**, select the type of profiles to include in the segment:
+   - **Users**: Create a segment of individual users.
+   - **Accounts**: Create a segment of accounts (organizations).
 
-{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
+   {{< img src="product_analytics/segmentation/segments_define_audience.png" alt="The Create A New Segment page showing the Define your audience section with Users and Accounts options, and the Define your segment section with Filter Builder and Importing with CSV tabs." style="width:55%;">}}
+
+   <div class="alert alert-info">A segment returns either user or account profiles, not both.</div>
 
 {{% collapse-content title="Using Product Analytics data" level="h4" expanded=false id="segment-pana" %}}
 
 To create a segment using Product Analytics data:
 
-1. Select **Product Analytics** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
+1. Select **Product Analytics** on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
 
 2. Select a **condition** for the users in the segment:
       - **performed event(s)**
@@ -39,23 +41,23 @@ To create a segment using Product Analytics data:
 
 3. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
-   In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
+   The following image shows a segment filtered to users from Brazil. The segment captures users who were on the `/cart` page and clicked the checkout button within the same session in the past week:
 
    {{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="Segment page filtered to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
-<p class="text-black">With the filtering and segmentation capabilities on the <strong>Users & Segments</strong> page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the <strong> Create Segment</strong> button:
+<p class="text-black">The <strong>Users & Segments</strong> page lets you determine which users almost bought an item but dropped before checking out. <br><br> To begin, filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles</a> page, then add additional event properties using the <strong>Create Segment</strong> button:
 {{< img src="product_analytics/segmentation/segment_create_button_0.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
 
 Or, directly click <strong>Create Segment</strong> to select your data source:
 
 {{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
-On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new segment</a> page, add the properties specifying the users: <br>
-– who **viewed** the <code>/cart</code> page <br>
-– **then** <code> did not</code> <br>
-– perform the **action** of <code> click on CHECKOUT</code> <br>
+On the <a href="https://app.datadoghq.com/product-analytics/segments/create">segment creation page</a>, add the properties specifying the users: <br>
+- who **viewed** the <code>/cart</code> page <br>
+- **then** <code> did not</code> <br>
+- perform the **action** of <code> click on CHECKOUT</code> <br>
 
 {{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
 
@@ -66,19 +68,43 @@ You can define additional attributes, such as the Device Type, to further specif
 
 {{% collapse-content title="Importing CSV files" level="h4" expanded=false id="segment-csv" %}}
 
-If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV file and turn it into a segment.
+If you have a list of users from a survey, experiment, or CRM, upload it as a CSV file to turn it into a segment.
 
 To create a segment using an uploaded list of users from your own file:
 
-1. Select **CSV File** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
+1. Select **CSV File** on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
 
 2. Click **Browse files** to upload your CSV file.
 
-The file needs a column containing either user IDs or user emails so the data can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
+The file needs a column with user IDs or user emails to map with the `usr.id` or `usr.email` attributes in Product Analytics.
 
 The following example maps the Product Analytics attribute `@usr.id` to the column named `id` in the CSV file.
 
 {{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attributes." style="width:80%">}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Account segments" level="h4" expanded=false id="segment-accounts" %}}
+
+Account segments group accounts—such as organizations or companies—based on their attributes or the events their users performed. Use them to analyze groups like accounts with ARR over $100k or accounts that adopted a specific feature.
+
+To create an account segment:
+
+1. Select **Accounts** under **Define your audience**.
+
+2. Under **Define your segment**, select a method:
+   - **Filter Builder**: Add conditions to filter accounts by attributes or events.
+   - **Importing with CSV**: Upload a predefined list of account IDs.
+
+**Filter Builder**
+
+Add one or both conditions:
+- **Performed events**: Matches accounts where at least one user performed the specified event.
+- **Have attributes**: Filter by account properties such as ARR, start date, account IDs, or any imported account attributes.
+
+**Importing with CSV**
+
+Upload a CSV file with a column containing account IDs. The account IDs map to the account ID attribute in Product Analytics.
 
 {{% /collapse-content %}}
 
@@ -91,7 +117,7 @@ Filter the Pathways visualization to focus on a specific segment and see how tho
 
 ### In Analytics Explorer
 
-Filter the Analytics Explorer visualization to see how a segment uses your product. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
+Filter the Analytics Explorer visualization to see how a segment uses your product. The following example shows users in the "Premium Shopist Customers" segment who were active in the last month, organized by total events.
 
 {{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
