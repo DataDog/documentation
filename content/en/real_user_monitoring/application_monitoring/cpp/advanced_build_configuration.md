@@ -90,7 +90,7 @@ If you are not using CMake to build your application, you must first build the S
    cp -r include-cpp/ external/datadog-sdk/include/
    ```
 
-5. Copy the compiled library from `build/src/` into your project:
+5. Copy the compiled library from `build/src/` into your project. The filename varies by platform and build type: `libddsdkcpp.a` on Linux and macOS (static), `libddsdkcpp.so` or `libddsdkcpp.dylib` (shared), or `ddsdkcpp.lib` on Windows.
 
    ```shell
    cp build/src/libddsdkcpp.a external/datadog-sdk/lib/
@@ -115,8 +115,8 @@ The following options are most relevant when building for integration into an ex
 | Option | Default | Description |
 |--------|---------|-------------|
 | `DD_CRASH_MODE` | `inprocess` | Crash handler mode. `noop` disables crash reporting entirely; `inprocess` uses a signal/exception handler in the application process; `crashpad` uses an external `crashpad_handler` process. |
-| `DD_BUILD_SHARED` | `OFF` | Build the SDK as a shared library instead of a static library. |
-| `DD_HTTP_USE_SYSTEM_LIBCURL` | `ON` | Link against the system-installed `libcurl`. Disable to have the SDK build and bundle `libcurl` from source. |
+| `DD_BUILD_SHARED` | `${BUILD_SHARED_LIBS}` (default: `OFF`) | Build the SDK as a shared library instead of a static library. |
+| `DD_HTTP_USE_SYSTEM_LIBCURL` | `ON` (Linux/macOS), `OFF` (Windows) | Link against the system-installed `libcurl`. Disable to have the SDK build and bundle `libcurl` from source. Windows defaults to `OFF` because `libcurl` does not ship with Windows. |
 
 ## Linker dependencies
 
@@ -126,9 +126,11 @@ When integrating the SDK without CMake, link against the following libraries in 
 |----------|---------------------|
 | Linux | `-luuid` (for UUID generation), `-lcurl` (default HTTP client) |
 | macOS | `-framework CoreFoundation`, `-lcurl` (default HTTP client) |
-| Windows | `-lcurl` (default HTTP client) |
+| Windows | `ole32.lib` (for UUID generation via `CoCreateGuid`), `wbemuuid.lib` (for WMI device info) |
 
-`-lcurl` is required when the SDK was built with `DD_HTTP_USE_SYSTEM_LIBCURL=ON` (the default). If you built the SDK with `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`, `libcurl` is compiled into the SDK and does not need to be linked separately.
+`-lcurl` is required on Linux and macOS when the SDK was built with `DD_HTTP_USE_SYSTEM_LIBCURL=ON` (the POSIX default). If you built the SDK with `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`, `libcurl` is compiled into the SDK and does not need to be linked separately.
+
+On Windows, `ole32.lib` and `wbemuuid.lib` are linked automatically when building with MSVC (via `#pragma comment(lib, ...)`). If you are using a different toolchain such as MinGW, add them explicitly. If the SDK was built with `DD_HTTP_USE_SYSTEM_LIBCURL=ON` (non-default on Windows), also link `-lcurl`.
 
 A complete `Makefile` linker configuration for Linux looks like:
 
