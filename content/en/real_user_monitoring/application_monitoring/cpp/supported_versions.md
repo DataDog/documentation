@@ -15,28 +15,23 @@ further_reading:
 
 ## Overview
 
-The Datadog C++ SDK supports native C and C++ applications on Linux, macOS, and Windows, and is tested in 64-bit builds across a range of compiler toolchains. Integrating the SDK requires CMake 3.21 or later.
+The Datadog C++ SDK supports native C and C++ applications on Linux, macOS, and Windows, and is tested in 64-bit builds across a range of compiler toolchains.
 
-## Supported platforms
+The SDK is built with CMake and officially integrates via CMake 3.21 or later. Applications using other build systems can link against precompiled SDK binaries directly.
 
-| Platform | Tested OS | Architecture | Compiler toolchains |
-|----------|-----------|--------------|---------------------|
-| Linux | Ubuntu 22.04 | x86_64 | GCC 11, GCC 13, Clang 15, Clang 20 |
-| macOS | macOS 14 (Sonoma) | x86_64, arm64 | AppleClang 15 (Xcode 15.3) |
-| Windows | Windows Server 2022 | x86_64 | MSVC 2022 (v17.14, toolset v143) |
+## Compiler support
 
-Other OS versions and compilers with C++17 support may work but are not validated in CI.
+Builds of the C++ SDK are officially tested on these operating systems, compilers, and architectures:
 
-## Supported compiler toolchains
+| Platform | Compiler toolchain                 | Built on                                |
+|----------|------------------------------------|-----------------------------------------|
+| Linux    | GCC 11, GCC 13, Clang 15, Clang 20 | Ubuntu 22.04 (x86_64)                   |
+| macOS    | AppleClang 15 (Xcode 15.3)         | macOS 14 Sonoma (arm64)                 |
+| Windows  | MSVC 2022 (v17.14, toolset v143)   | Windows Server 2022 (x86_64) |
 
-| Toolchain | Tested versions | Platform |
-|-----------|-----------------|----------|
-| GCC | 11, 13 | Linux |
-| Clang / LLVM | 15, 20 | Linux |
-| AppleClang | 15 (Xcode 15.3) | macOS |
-| MSVC | 2022 (v17.14, toolset v143) | Windows |
+Other compilers with C++17 support are expected to work but are not officially validated in CI.
 
-The SDK is written in C++17. The C API (`datadog.h`) is compatible with C99, so C++ language support in the application is not required to use the C API.
+The C API is compatible with C99 and can be used by applications without C++ language support.
 
 ## Dependencies
 
@@ -46,13 +41,11 @@ For a full list of third-party components, see [`LICENSE-3rdparty.csv`][2] in th
 
 The SDK uses libcurl for HTTP transport. On Linux and macOS, the SDK links against the system-provided libcurl by default; you can override this to bundle a static libcurl build by setting the CMake option `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`. On Windows, libcurl is always built from source as part of the SDK build.
 
-<!--
+<!--CRASHPAD--
 ### Crashpad
 
-Crashpad is an optional crash reporting backend. When building with Crashpad (`DD_CRASH_MODE=crashpad`), you must deploy the `crashpad_handler` executable alongside your application.
-
-**Note:** Crashpad support is not officially available.
--->
+When built with `DD_CRASH_MODE=crashpad`, the SDK's Crash Reporting functionality uses Crashpad, and a crashpad handler executable must be included with your application. See [Crash Reporting][3] for more details.
+--CRASHPAD-->
 
 ## Further Reading
 
@@ -60,3 +53,4 @@ Crashpad is an optional crash reporting backend. When building with Crashpad (`D
 
 [1]: /real_user_monitoring/application_monitoring/cpp/setup
 [2]: https://github.com/DataDog/dd-sdk-cpp/blob/main/LICENSE-3rdparty.csv
+[3]: /real_user_monitoring/application_monitoring/cpp/error_tracking
