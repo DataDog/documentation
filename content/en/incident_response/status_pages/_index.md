@@ -112,6 +112,20 @@ You can add components to your status page either on initial setup or through th
 If multiple notices affect the same component, the notice with the greatest impact takes precedence:
 Major Outage > Partial Outage > Degraded Performance > Maintenance > Operational
 
+### Component status and uptime
+
+Each component status affects the uptime bars and uptime percentage differently:
+
+| Status | Uptime bars | Uptime percentage |
+|--------|-------------|-------------------|
+| Major Outage | Shown | Counts as downtime |
+| Partial Outage | Shown | Counts as downtime |
+| Degraded Performance | Shown | No impact |
+| Maintenance | Shown | No impact |
+| Operational | Shown as healthy | No impact |
+
+**Note**: Partial Outage and Major Outage are weighted equally. The full duration at either status counts as downtime in the uptime percentage calculation.
+
 ## Publish your status page
 
 After you save your status page settings, click **Launch Status Page** to make the page available at its URL.
@@ -147,7 +161,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
-- Updates the uptime bars for impacted components.
+- Updates the uptime bars for impacted components. Components set to **Partial Outage** or **Major Outage** also have their uptime percentage reduced for the duration of the impact.
 - Is visible in the notice history timeline.
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
