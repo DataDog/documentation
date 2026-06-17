@@ -178,7 +178,7 @@ The command:
 - Has built-in automatic retries for errors.
 - Accepts `--fail-on-error` to customize behavior on unexpected Datadog errors.
 
-The `deployment gate` command is available in datadog-ci versions v3.17.0 and above. The `--config` flag requires a more recent version; see the [datadog-ci release notes][5].
+The `deployment gate` command is available in datadog-ci versions v3.17.0 and above. The `--config` flag requires version v5.19.0 or above.
 
 **Required environment variables**:
 
@@ -192,7 +192,6 @@ For complete configuration options and usage examples, see the [`deployment gate
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
-[5]: https://github.com/DataDog/datadog-ci/releases
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
@@ -202,7 +201,7 @@ Use the template below as a starting point:
 
 - Replace `<YOUR_DD_SITE>` with your [Datadog site name][2] (for example, {{< region-param key="dd_site" code="true" >}}).
 - Define the [API key][5] and [application key][6] as environment variables. The example uses a [Kubernetes Secret][3] called `datadog` with two data values: `api-key` and `app-key`. You can also pass the values in plain text with `value` instead of `valueFrom`.
-- Use a datadog-ci image version that supports the `--config` flag; see the [datadog-ci release notes][8].
+- Use a datadog-ci image version that supports the `--config` flag (version v5.19.0 or higher).
 
 Store the gate config in a ConfigMap, then mount it into the job and pass `--config` to the CLI:
 
@@ -331,7 +330,6 @@ spec:
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
-[8]: https://github.com/DataDog/datadog-ci/releases
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
