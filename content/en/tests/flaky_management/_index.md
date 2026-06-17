@@ -251,7 +251,7 @@ To find your account name, go to the [Slack integration tile][5] and check the
 
 After you include the test key (for example, `DD_ABC123`) in a commit, Datadog scans the commit that triggered the test run and up to the 10 most recent commits before it. If the remediation flow does not start, check the following:
 
-- **The key is in an older commit.** Only the 10 most recent commits in the triggering commit's history are scanned. If you push more than 10 commits at once, include the key in the triggering commit or within its 10 most recent commits.
+- **The key is in an older commit.** Datadog scans only the triggering commit and the 10 most recent commits in its history. If you push more than 10 commits at once, include the key in the triggering commit or one of the 10 most recent commits.
 - **The fix was squash-merged.** A squash merge combines the original commits into a single commit, so Datadog reads only the squash commit's message; the individual pre-squash commits are no longer scanned. Most providers include the original commit messages in the squash commit, so a key in any of them is preserved. If your provider omits them, add the key to the squash commit message.
 - **The key does not match the expected format.** Use the exact key shown in the Flaky Tests Management UI (for example, `DD_ABC123`) in the commit title or message.
 
