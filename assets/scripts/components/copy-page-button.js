@@ -125,7 +125,7 @@ function displaySuccessFeedback() {
  * (used as a fallback if fetching the .md file fails).
  */
 function extractPageText() {
-    const mainContent = document.getElementById('mainContent');
+    const mainContent = document.getElementById('mainContent') || document.querySelector('.main-api');
     if (!mainContent) {
         return '';
     }

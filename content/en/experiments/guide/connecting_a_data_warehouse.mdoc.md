@@ -427,6 +427,73 @@ Use the following table to gather the values for your environment, then add the 
 }
 ```
 
+### Create an IAM role for Redshift to read exposure data
+
+Datadog Experiments stages flagging exposure data in the S3 bucket you created, then runs a Redshift `COPY` command to load that data into your warehouse. The `COPY` command uses a dedicated IAM role that your Redshift cluster assumes to read from the bucket. This role is separate from the role your Datadog AWS integration uses.
+
+Create this role and associate it with your cluster.
+
+#### Create an IAM policy
+
+Create an IAM policy that grants read access to the S3 bucket you created. Replace `[bucket-name]` with your bucket name (for example, `datadog-experimentation-[aws_account_id]`).
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListStagingBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "arn:aws:s3:::[bucket-name]"
+    },
+    {
+      "Sid": "ReadStagedExposures",
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::[bucket-name]/*"
+    }
+  ]
+}
+```
+
+#### Create a role that Redshift can assume
+
+Create an IAM role and use the following trust policy so the Redshift service can assume the role:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "redshift.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+#### Attach the policy to the role
+
+Attach the policy you created to the role. For instructions, see [Adding and removing IAM identity permissions][26] in the AWS documentation.
+
+#### Associate the role with your Redshift cluster
+
+Associate the role with your cluster so the `COPY` command can assume it:
+
+- For a provisioned cluster, open your cluster in the [Amazon Redshift console][27], select {% ui %}Actions{% /ui %} > {% ui %}Manage IAM roles{% /ui %}, add the role, and save.
+- For Redshift Serverless, open your namespace, go to {% ui %}Security and encryption{% /ui %} > {% ui %}Manage IAM roles{% /ui %}, add the role, and save.
+
+For more details, see [Associating IAM roles with clusters][28] in the AWS documentation.
+
+After the role is associated, note its ARN (for example, `arn:aws:iam::[aws_account_id]:role/[role-name]`). You enter this ARN when configuring experiment settings in [Step 3](#step-3-configure-experiment-settings).
+
 {% /if %}
 <!-- end Redshift -->
 
@@ -624,6 +691,7 @@ After you set up your AWS integration and Redshift cluster, configure the experi
    - {% ui %}Database user{% /ui %}: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-database) (for example, `datadog_experiments_user`).
    - {% ui %}Schema{% /ui %}: The schema you created in [Step 1](#create-a-redshift-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - {% ui %}Temp S3 bucket{% /ui %}: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
+   - {% ui %}Copy IAM role ARN{% /ui %}: The ARN of the IAM role you created in [Step 2](#create-an-iam-role-for-redshift-to-read-exposure-data) for Redshift to read exposure data from S3 (for example, `arn:aws:iam::[aws_account_id]:role/[role-name]`).
 1. Click {% ui %}Save{% /ui %}.
 
 {% img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing warehouse type tiles for Snowflake, BigQuery, Redshift (selected), and Databricks, with three sections: Select AWS Account with an AWS account dropdown, Cluster Connection with fields for AWS region, Cluster identifier, Cluster endpoint, and Port, and Database and Storage with fields for Database, Database user, Schema, and Temp S3 bucket." style="width:90%;" /%}
@@ -681,3 +749,6 @@ After you save your warehouse connection, [create experiment metrics][1] using y
 [23]: https://docs.snowflake.com/en/user-guide/network-policies
 [24]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
 [25]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+[26]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
+[27]: https://console.aws.amazon.com/redshiftv2/
+[28]: https://docs.aws.amazon.com/redshift/latest/mgmt/copy-unload-iam-role.html

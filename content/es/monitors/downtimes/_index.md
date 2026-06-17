@@ -196,7 +196,7 @@ Datadog puede silenciar proactivamente monitores relacionados con el apagado man
 [7]: /es/monitors/notify/#overview
 [8]: /es/integrations/#cat-notification
 [9]: /es/monitors/status/
-[10]: /es/service_management/events/explorer
+[10]: /es/events/explorer
 [11]: /es/api/latest/downtimes/#cancel-a-downtime
 [12]: /es/account_management/#preferences
 [13]: /es/integrations/amazon_ec2/#ec2-automuting
