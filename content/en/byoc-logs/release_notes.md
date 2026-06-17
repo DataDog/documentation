@@ -37,6 +37,19 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 
 ## Releases
 
+### v0.1.29 — 2026-06-05
+
+*Bundled in chart: `0.4.2`.*
+
+#### Changed
+- Faster execution for common log analysis queries, including at least 6x faster numeric range filters, percentile aggregations, and range/date-histogram aggregation queries.
+- Treats `field:*` filters as existence queries, and fixes sorting by percentile aggregations.
+- Reduced memory usage for Google Cloud Storage uploads to improve indexing stability.
+
+#### Helm chart changes
+- Enables BYOC service telemetry by default with `datadog.byocTelemetry.enabled`; this exports BYOC service logs and metrics only, not customer-ingested logs, metrics, or traces.
+- Deprecates and ignores `cloudprem.index.retention`, and no longer sets `CP_RETENTION_PERIOD`.
+
 ### v0.1.26 — 2026-05-05
 
 *Bundled in chart: `0.4.0`.*
