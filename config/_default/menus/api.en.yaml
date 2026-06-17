@@ -2627,6 +2627,30 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Update the maximum session duration
+      url: /api/latest/organizations/update-the-maximum-session-duration/
+      identifier: organizations-update-the-maximum-session-duration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLoginOrgConfigsMaxSessionDuration
+        unstable: []
+        order: 11
+    - name: List global orgs
+      url: /api/latest/organizations/list-global-orgs/
+      identifier: organizations-list-global-orgs
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGlobalOrgs
+        unstable: []
+        order: 10
     - name: Upload IdP metadata
       url: /api/latest/organizations/upload-idp-metadata/
       identifier: organizations-upload-idp-metadata
@@ -3254,6 +3278,19 @@ menu:
           - TestExistingSecurityMonitoringRule
         unstable: []
         order: 56
+    - name: Restore a rule to a historical version
+      url: /api/latest/security-monitoring/restore-a-rule-to-a-historical-version/
+      identifier: security-monitoring-restore-a-rule-to-a-historical-version
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RestoreSecurityMonitoringRule
+        unstable:
+          - v2
+        order: 132
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
       identifier: security-monitoring-convert-an-existing-rule-from-json-to-terraform
@@ -3410,7 +3447,7 @@ menu:
           - GetSingleEntityContext
         unstable:
           - v2
-        order: 132
+        order: 131
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context
@@ -3758,7 +3795,7 @@ menu:
         operationids:
           - SendSecurityMonitoringNotificationPreview
         unstable: []
-        order: 131
+        order: 130
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -4141,9 +4178,8 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTickets
-        unstable:
-          - v2
-        order: 129
+        unstable: []
+        order: 128
     - name: Attach security findings to a ServiceNow ticket
       url: /api/latest/security-monitoring/attach-security-findings-to-a-servicenow-ticket/
       identifier: security-monitoring-attach-security-findings-to-a-servicenow-ticket
@@ -4154,9 +4190,8 @@ menu:
           - v2
         operationids:
           - AttachServiceNowTicket
-        unstable:
-          - v2
-        order: 130
+        unstable: []
+        order: 129
     - name: Search security findings
       url: /api/latest/security-monitoring/search-security-findings/
       identifier: security-monitoring-search-security-findings
@@ -4253,7 +4288,7 @@ menu:
           - UpdateFindingsAssignee
         unstable:
           - v2
-        order: 128
+        order: 2
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
       identifier: security-monitoring-list-security-findings
@@ -4279,19 +4314,6 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Mute or unmute a batch of findings
-      url: /api/latest/security-monitoring/mute-or-unmute-a-batch-of-findings/
-      identifier: security-monitoring-mute-or-unmute-a-batch-of-findings
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - MuteFindings
-        unstable:
-          - v2
-        order: 2
     - name: List findings
       url: /api/latest/security-monitoring/list-findings/
       identifier: security-monitoring-list-findings
@@ -7645,6 +7667,19 @@ menu:
       url: /api/latest/application-security/
       identifier: application-security
       generated: true
+    - name: Get Application Security details for a service
+      url: /api/latest/application-security/get-application-security-details-for-a-service/
+      identifier: application-security-get-application-security-details-for-a-service
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAsmServiceByName
+        unstable:
+          - v2
+        order: 16
     - name: Update a WAF Policy
       url: /api/latest/application-security/update-a-waf-policy/
       identifier: application-security-update-a-waf-policy
@@ -10907,6 +10942,36 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Data Observability
+      url: /api/latest/data-observability/
+      identifier: data-observability
+      generated: true
+    - name: Run a data observability monitor
+      url: /api/latest/data-observability/run-a-data-observability-monitor/
+      identifier: data-observability-run-a-data-observability-monitor
+      parent: data-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RunDataObservabilityMonitor
+        unstable:
+          - v2
+        order: 1
+    - name: Get data observability monitor run status
+      url: /api/latest/data-observability/get-data-observability-monitor-run-status/
+      identifier: data-observability-get-data-observability-monitor-run-status
+      parent: data-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataObservabilityMonitorRunStatus
+        unstable:
+          - v2
+        order: 2
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
@@ -12257,75 +12322,6 @@ menu:
           - GetIPAllowlist
         unstable: []
         order: 1
-    - name: Incident Services
-      url: /api/latest/incident-services/
-      identifier: incident-services
-      generated: true
-    - name: Update an existing incident service
-      url: /api/latest/incident-services/update-an-existing-incident-service/
-      identifier: incident-services-update-an-existing-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentService
-        unstable:
-          - v2
-        order: 3
-    - name: Get details of an incident service
-      url: /api/latest/incident-services/get-details-of-an-incident-service/
-      identifier: incident-services-get-details-of-an-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentService
-        unstable:
-          - v2
-        order: 1
-    - name: Delete an existing incident service
-      url: /api/latest/incident-services/delete-an-existing-incident-service/
-      identifier: incident-services-delete-an-existing-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentService
-        unstable:
-          - v2
-        order: 2
-    - name: Create a new incident service
-      url: /api/latest/incident-services/create-a-new-incident-service/
-      identifier: incident-services-create-a-new-incident-service
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentService
-        unstable:
-          - v2
-        order: 5
-    - name: Get a list of all incident services
-      url: /api/latest/incident-services/get-a-list-of-all-incident-services/
-      identifier: incident-services-get-a-list-of-all-incident-services
-      parent: incident-services
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListIncidentServices
-        unstable:
-          - v2
-        order: 4
     - name: Incidents
       url: /api/latest/incidents/
       identifier: incidents
@@ -13417,6 +13413,136 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: List patterns topics with clustered points
+      url: /api/latest/llm-observability/list-patterns-topics-with-clustered-points/
+      identifier: llm-observability-list-patterns-topics-with-clustered-points
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTopicsWithClusteredPoints
+        unstable:
+          - v2
+        order: 61
+    - name: List patterns topics
+      url: /api/latest/llm-observability/list-patterns-topics/
+      identifier: llm-observability-list-patterns-topics
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTopics
+        unstable:
+          - v2
+        order: 59
+    - name: Get patterns run status
+      url: /api/latest/llm-observability/get-patterns-run-status/
+      identifier: llm-observability-get-patterns-run-status
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPatternsRunStatus
+        unstable:
+          - v2
+        order: 57
+    - name: Trigger a patterns run
+      url: /api/latest/llm-observability/trigger-a-patterns-run/
+      identifier: llm-observability-trigger-a-patterns-run
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerLLMObsPatterns
+        unstable:
+          - v2
+        order: 56
+    - name: List patterns runs
+      url: /api/latest/llm-observability/list-patterns-runs/
+      identifier: llm-observability-list-patterns-runs
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsRuns
+        unstable:
+          - v2
+        order: 58
+    - name: Delete a patterns configuration
+      url: /api/latest/llm-observability/delete-a-patterns-configuration/
+      identifier: llm-observability-delete-a-patterns-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 55
+    - name: Get a patterns configuration
+      url: /api/latest/llm-observability/get-a-patterns-configuration/
+      identifier: llm-observability-get-a-patterns-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 62
+    - name: Create or update a patterns configuration
+      url: /api/latest/llm-observability/create-or-update-a-patterns-configuration/
+      identifier: llm-observability-create-or-update-a-patterns-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 54
+    - name: List patterns configurations
+      url: /api/latest/llm-observability/list-patterns-configurations/
+      identifier: llm-observability-list-patterns-configurations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsConfigs
+        unstable:
+          - v2
+        order: 63
+    - name: List patterns clustered points
+      url: /api/latest/llm-observability/list-patterns-clustered-points/
+      identifier: llm-observability-list-patterns-clustered-points
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsClusteredPoints
+        unstable:
+          - v2
+        order: 60
     - name: Search LLM Observability spans
       url: /api/latest/llm-observability/search-llm-observability-spans/
       identifier: llm-observability-search-llm-observability-spans
@@ -16087,46 +16213,6 @@ menu:
         unstable:
           - v2
         order: 2
-    - name: RUM Retention Filters Hardcoded
-      url: /api/latest/rum-retention-filters-hardcoded/
-      identifier: rum-retention-filters-hardcoded
-      generated: true
-    - name: Update a hardcoded retention filter
-      url: /api/latest/rum-retention-filters-hardcoded/update-a-hardcoded-retention-filter/
-      identifier: rum-retention-filters-hardcoded-update-a-hardcoded-retention-filter
-      parent: rum-retention-filters-hardcoded
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateHardcodedRetentionFilter
-        unstable: []
-        order: 3
-    - name: Get a hardcoded retention filter
-      url: /api/latest/rum-retention-filters-hardcoded/get-a-hardcoded-retention-filter/
-      identifier: rum-retention-filters-hardcoded-get-a-hardcoded-retention-filter
-      parent: rum-retention-filters-hardcoded
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetHardcodedRetentionFilter
-        unstable: []
-        order: 2
-    - name: Get all hardcoded retention filters
-      url: /api/latest/rum-retention-filters-hardcoded/get-all-hardcoded-retention-filters/
-      identifier: rum-retention-filters-hardcoded-get-all-hardcoded-retention-filters
-      parent: rum-retention-filters-hardcoded
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListHardcodedRetentionFilters
-        unstable: []
-        order: 1
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
@@ -19066,6 +19152,88 @@ menu:
           - UpsertSyncConfig
         unstable: []
         order: 1
+    - name: Tag Policies
+      url: /api/latest/tag-policies/
+      identifier: tag-policies
+      generated: true
+    - name: Get a tag policy compliance score
+      url: /api/latest/tag-policies/get-a-tag-policy-compliance-score/
+      identifier: tag-policies-get-a-tag-policy-compliance-score
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicyScore
+        unstable:
+          - v2
+        order: 6
+    - name: Update a tag policy
+      url: /api/latest/tag-policies/update-a-tag-policy/
+      identifier: tag-policies-update-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagPolicy
+        unstable:
+          - v2
+        order: 4
+    - name: Get a tag policy
+      url: /api/latest/tag-policies/get-a-tag-policy/
+      identifier: tag-policies-get-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicy
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a tag policy
+      url: /api/latest/tag-policies/delete-a-tag-policy/
+      identifier: tag-policies-delete-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTagPolicy
+        unstable:
+          - v2
+        order: 5
+    - name: Create a tag policy
+      url: /api/latest/tag-policies/create-a-tag-policy/
+      identifier: tag-policies-create-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTagPolicy
+        unstable:
+          - v2
+        order: 2
+    - name: List tag policies
+      url: /api/latest/tag-policies/list-tag-policies/
+      identifier: tag-policies-list-tag-policies
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPolicies
+        unstable:
+          - v2
+        order: 1
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -19648,7 +19816,7 @@ menu:
         operationids:
           - CancelWorkflowInstance
         unstable: []
-        order: 8
+        order: 9
     - name: Get a workflow instance
       url: /api/latest/workflow-automation/get-a-workflow-instance/
       identifier: workflow-automation-get-a-workflow-instance
@@ -19660,7 +19828,7 @@ menu:
         operationids:
           - GetWorkflowInstance
         unstable: []
-        order: 7
+        order: 8
     - name: Execute a workflow
       url: /api/latest/workflow-automation/execute-a-workflow/
       identifier: workflow-automation-execute-a-workflow
@@ -19672,7 +19840,7 @@ menu:
         operationids:
           - CreateWorkflowInstance
         unstable: []
-        order: 6
+        order: 7
     - name: List workflow instances
       url: /api/latest/workflow-automation/list-workflow-instances/
       identifier: workflow-automation-list-workflow-instances
@@ -19684,7 +19852,7 @@ menu:
         operationids:
           - ListWorkflowInstances
         unstable: []
-        order: 5
+        order: 6
     - name: Update an existing Workflow
       url: /api/latest/workflow-automation/update-an-existing-workflow/
       identifier: workflow-automation-update-an-existing-workflow
@@ -19696,7 +19864,7 @@ menu:
         operationids:
           - UpdateWorkflow
         unstable: []
-        order: 3
+        order: 4
     - name: Get an existing Workflow
       url: /api/latest/workflow-automation/get-an-existing-workflow/
       identifier: workflow-automation-get-an-existing-workflow
@@ -19708,7 +19876,7 @@ menu:
         operationids:
           - GetWorkflow
         unstable: []
-        order: 1
+        order: 2
     - name: Delete an existing Workflow
       url: /api/latest/workflow-automation/delete-an-existing-workflow/
       identifier: workflow-automation-delete-an-existing-workflow
@@ -19720,7 +19888,7 @@ menu:
         operationids:
           - DeleteWorkflow
         unstable: []
-        order: 4
+        order: 5
     - name: Create a Workflow
       url: /api/latest/workflow-automation/create-a-workflow/
       identifier: workflow-automation-create-a-workflow
@@ -19732,4 +19900,16 @@ menu:
         operationids:
           - CreateWorkflow
         unstable: []
-        order: 2
+        order: 3
+    - name: List workflows
+      url: /api/latest/workflow-automation/list-workflows/
+      identifier: workflow-automation-list-workflows
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWorkflows
+        unstable: []
+        order: 1
