@@ -39,7 +39,7 @@ Export Pipelines is a shared feature between [Real User Monitoring][4] and [Prod
 | Scope | Source | Max pipelines | Available presets |
 |---|---|---|---|
 | Per application | RUM | 1 | *All RUM event types*, or *Sessions, Views & Actions only* |
-| Per application | Product Analytics | 1 | *All Product Analytics Events* |
+| Per application | Product Analytics | 1 | *All Product Analytics Events* (sessions, views, actions & server-side events) |
 | Per organization | Product Analytics | 1 | *User and Account Profiles* |
 
 The *User and Account Profiles* preset is limited to one pipeline per organization. Because user and profile data is shared across all your applications, creating one pipeline per application would result in duplicate records in your storage.

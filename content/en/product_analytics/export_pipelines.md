@@ -39,7 +39,7 @@ Export Pipelines is a shared feature between [Real User Monitoring][4] and [Prod
 | Scope | Source | Max pipelines | Available presets |
 |---|---|---|---|
 | Per application | RUM | 1 | *All RUM event types*, or *Sessions, Views & Actions only* |
-| Per application | Product Analytics | 1 | *All Product Analytics Events* |
+| Per application | Product Analytics | 1 | *All Product Analytics Events* (sessions, views, actions & server-side events) |
 | Per organization | Product Analytics | 1 | *User and Account Profiles* |
 
 The *User and Account Profiles* preset is limited to one pipeline per organization. Because user and profile data is shared across all your applications, creating one pipeline per application would result in duplicate records in your storage.
@@ -185,7 +185,7 @@ In the [Google Cloud console][1], [create a GCS bucket][2] for your exports. Und
 
 ### 4. Configure the pipeline in Datadog
 
-1. In Datadog, navigate to **Digital Experience > Real User Monitoring > Manage Applications**.
+1. From Product Analytics, navigate to **App Management** in the bottom left of the navigation.
 2. Select your application, then go to **Routing > Export Pipelines**.
 3. Click **New Export Pipeline**.
 4. Fill in each section of the side panel:
