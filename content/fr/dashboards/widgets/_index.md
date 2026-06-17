@@ -59,13 +59,13 @@ Les widgets peuvent visualiser des données provenant de plusieurs sources Datad
 - **Événements** : Événements personnalisés, déploiements et annotations
 - **Journaux** : Événements de journal, analyses de journaux et métriques basées sur les journaux
 - **Métriques** : Infrastructure, application et métriques personnalisées
-- **RUM** : Surveillance des utilisateurs réels et données de tests synthétiques
-- **SLOs** : Objectifs de niveau de service et budgets d'erreur
+- **RUM** : Real User Monitoring et données de tests synthétiques
+- **SLOs** : Service Level Objectives et budgets d'erreur
 - **Sécurité** : Signaux de sécurité et données de conformité
 
 ## Cas d'utilisation courants {#common-use-cases}
 
-{{% collapse-content title="Surveillance d'infrastructure" level="h4" expanded=false %}}
+{{% collapse-content title="Infrastructure Monitoring" level="h4" expanded=false %}}
 - Utilisez **des widgets Timeseries** pour les métriques CPU, mémoire et réseau dans le temps
 - Utilisez **des widgets Hostmap** pour visualiser l'utilisation des ressources dans votre infrastructure
 - Utilisez **des widgets Top List** pour identifier les hôtes ou services les plus gourmands en ressources
@@ -83,7 +83,7 @@ Les widgets peuvent visualiser des données provenant de plusieurs sources Datad
 - Utilisez **des widgets Retention** pour analyser l'engagement des utilisateurs et le taux de désabonnement
 {{% /collapse-content %}}
 
-{{% collapse-content title="Réponse aux incidents" level="h4" expanded=false %}}
+{{% collapse-content title="Incident Response" level="h4" expanded=false %}}
 - Utilisez **des widgets Alert Graph** pour montrer l'historique et les tendances des alertes
 - Utilisez **des widgets Monitor Summary** pour l'état actuel des alertes dans votre infrastructure
 - Utilisez **des widgets Event Stream** pour la surveillance des événements en temps réel

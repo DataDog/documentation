@@ -22,7 +22,7 @@ La configuration du chemin réseau implique de configurer votre environnement po
 
 ## Configuration {#setup}
 
-<div class="alert alert-info">Cette page couvre la configuration du chemin réseau pour la configuration basée sur l'Agent dans la surveillance réseau. Pour créer des tests de chemin réseau dans la surveillance synthétique, voir <a href="/synthetics/network_path_tests/">Tests de chemin réseau dans la surveillance synthétique</a>.</div>
+<div class="alert alert-info">Cette page couvre la configuration du chemin réseau pour la configuration basée sur l'Agent dans Network Monitoring. Pour créer des tests de chemin réseau dans Synthetic Monitoring, voir <a href="/synthetics/network_path_tests/">Tests de chemin réseau dans Synthetic Monitoring</a>.</div>
 
 Datadog fournit deux méthodes de collecte basées sur l'Agent. Vous pouvez utiliser l'une ou l'autre méthode seule ou combiner les deux :
 
