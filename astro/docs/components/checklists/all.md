@@ -14,7 +14,7 @@ When you create or update a component, read this checklist ahead of time so it c
 
 ### Documentation page
 
-- The component has a documentation page at `src/content/docs/test_pages/components/<component-name>.mdoc` (kebab-case). Documentation pages are used to drive Playwright browser tests.
+- The component has a documentation page at `src/content/docs/test_pages/components/<component-name>.mdoc` (kebab-case) if it's a Markdoc component, or `.astro` if it's not a Markdoc component (such as the site header). Documentation pages are used to drive Playwright browser tests.
 
 - The documentation page includes a table of all the component's properties, their valid values, and default values.
 
@@ -25,6 +25,10 @@ When you create or update a component, read this checklist ahead of time so it c
 ### Interactive components
 
 - The items in the [interactive components checklist](./interactive.md) are satisfied.
+
+### Markdoc components
+
+- If this change adds or alters a Markdoc tag or node override (registration, attributes, or a transform), the items in the [Markdoc tag checklist](./markdoc_tag.md) are satisfied.
 
 ### Plaintext twin
 
@@ -45,8 +49,4 @@ When you create or update a component, read this checklist ahead of time so it c
 ### Testing
 
 - All items in the [testing checklist](../../testing/checklists/all.md) have been verified.
-
-### Markdoc compatibility
-
-- Markdoc tag attributes are scalars — arrays and objects must be passed as JSON strings. When a component needs typed structured data, [a Markdoc adapter component](../reference/markdoc/adapter_components.md) is used to bridge the gap between attribute types and prop types.
 

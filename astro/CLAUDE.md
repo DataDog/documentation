@@ -10,15 +10,14 @@ Prompts often refer to the "Hugo docs". This refers either to the general Hugo s
 
 ## Operating instructions
 
-- Flag any concerns and suggest any potential improvements to what I've asked for. 
-- If I left gaps in my instructions, ask questions.
 - After you implement something, list any best practices you used that aren't well known.
 - If you recommend a different approach than what was asked for, query the user before proceeding.
 
 ## Testing
 
 - Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass.
-- Use `npm run test` for the headless tests and `npm run test:browser` for browser tests. Don't run vitest directly, it will fail to set necessary env variables.
+- Use `npm run test:unit` for the headless tests and `npm run test:browser` for browser tests; `npm run test` runs both. Don't run vitest directly, it will fail to set necessary env variables.
+- While developing, run only the tests relevant to your change — `npm run test:unit -- <path>` for unit tests, or `npm run test:browser -- <file>` for browser tests. Run the full `npm run test` (both suites) once before considering the feature done, to catch broader regressions.
 
 ## Stay inside `astro/`
 
@@ -43,9 +42,8 @@ If a task seems to require a Hugo-side change, stop and ask first.
 
 ## Coding guidelines
 
-Prioritize readability. For example: 
-
-- When looping over an array of buttons, use `button` as the loop variable, not `b`.
+- Long var names are better than unclear var names. For example, when looping over an array of buttons, use `button` as the loop variable, not `b`.
+- Type-mapped and attribute-mapped var names are helpful. For example, an array of `SomeType` could just be called `someTypes`. A record of `SomeType`s keyed by `id` could be `someTypesById`.
 - When a component or function has deeply nested elements or loops, look for opportunities to break it up into subcomponents (especially in Preact, where subcomponents can be included in the same file) or private functions.
 - When possible, aim for highly readable top-level driver code, which should mostly be invocations of clearly named functions that provide a narrative to a human reader.
 
@@ -69,6 +67,8 @@ The unit Vitest config redirects live spec imports to these fixtures via a plugi
 
 Read these additional files as needed, when they are relevant to the task you're performing. Each checklist may link to sub-checklists or reference docs — only follow those links if the sub-topic applies to your current task.
 
+If a link in a checklist or reference doc is broken, stop and flag it.
+
 Read [docs/css/checklists/all.md](docs/css/checklists/all.md) before
 - adding HTML to the project
 - adding CSS to the project
@@ -77,6 +77,10 @@ Read [docs/css/checklists/all.md](docs/css/checklists/all.md) before
 Read [docs/components/checklists/all.md](docs/components/checklists/all.md) before
 - revising an existing component
 - creating a new component
+
+Read [docs/components/checklists/markdoc_tag.md](docs/components/checklists/markdoc_tag.md) before
+- adding or changing a Markdoc tag or node override (`markdoc.config.mjs` / `markdoc.schema.mjs`)
+- writing or changing a Markdoc `transform`
 
 Read [docs/api/checklists/all.md](docs/api/checklists/all.md) before 
 - changing how the OpenAPI spec is parsed, resolved, or built into view shapes (`src/lib/api/`)

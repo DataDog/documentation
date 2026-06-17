@@ -12,19 +12,19 @@ When writing or updating tests, read this checklist ahead of time so it can info
 
 ### Test colocation
 
-- Vitest tests live alongside the code they test (e.g., `src/components/<ComponentName>/<ComponentName>.test.ts`).
+- Tests are colocated when possible. For example, `someProcessingFile.test.ts` would live alongside `someProcessingFile.ts`. 
 
-- Playwright browser tests are centralized in `tests/browser/` (e.g., `alert.spec.ts`), because they test the rendered page rather than a single source file.
+- If a component is being tested, the tests are in `<COMPONENT_FOLDER>/tests` as `unit.test.ts` and `browser.test.ts`, respectively. 
+
+- When a component is made up of multiple subcomponents, include the component names in the tests (`SomeComponent.unit.test.ts`, etc.).
 
 ### Selectors
 
-- Use stable BEM class names as selectors in both Vitest assertions and Playwright locators. CSS-module hashes change on rebuild and are not stable selectors.
+- Use stable BEM class names as selectors in both Vitest assertions and Playwright locators. CSS-module hashes change on rebuild and are not stable selectors. See the [selectors in tests example](#selectors-in-tests).
 
-- Use `data-testid` only where no stable BEM class exists and adding one would be awkward (e.g., purely structural fixtures inside tests).
+- Use `data-testid` only where no stable BEM class exists and adding one would be awkward (e.g., purely structural fixtures inside tests). Generally, `data-testid` should not be necessary.
 
 ### Playwright testing (browser testing)
-
-- The component's browser tests are up to date. These live in `tests/browser/` (e.g. `alert.spec.ts`).
 
 - Screenshot baselines are up to date. Regenerate with `npx playwright test --update-snapshots` after an intentional visual change.
 
@@ -33,12 +33,6 @@ When writing or updating tests, read this checklist ahead of time so it can info
 - Screenshot baselines are retina (2x `deviceScaleFactor`), captured at a fixed 1440×900 viewport with animations disabled.
 
 - Screenshot baselines are Mac-only (`*-chromium-darwin.png`) because CI isn't wired up for Playwright yet.
-
-### Documentation page
-
-- The component has a documentation page at `src/content/docs/test_pages/components/<component-name>.mdoc` (kebab-case). Documentation pages are used to drive Playwright browser tests.
-
-- The documentation page includes a table of all the component's properties, their valid values, and default values.
 
 ### Interactive components
 
