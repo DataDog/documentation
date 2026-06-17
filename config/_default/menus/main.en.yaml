@@ -9653,6 +9653,11 @@ menu:
       parent: product_analytics
       identifier: pa_profiles
       weight: 4
+    - name: Identity Resolution
+      url: product_analytics/profiles/identity_resolution
+      parent: pa_profiles
+      identifier: pa_identity_resolution
+      weight: 401
     - name: Data Collected
       url: product_analytics/data_collected
       parent: product_analytics
