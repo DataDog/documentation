@@ -21,5 +21,5 @@ El procesador de claves de agregación realiza las siguientes acciones:
 * Si hay varios valores en la clave de la etiqueta, todos los valores se ordenan alfabéticamente y se concatenan para generar la clave de agregación.
 * Basándose en estos valores, genera un hash y añade la clave de agregación generada al evento.
 
-[1]: /es/service_management/events/correlation/
+[1]: /es/events/correlation/
 [2]: /es/getting_started/tagging/

@@ -63,7 +63,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
 
 This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unmute for audio):
 
-{{< img src="bits_ai/mcp_server/mcp_cursor_demo_3.mp4" alt="Demo of Datadog MCP Server in Cursor and Claude Code" video="true" >}}
+{{< img src="mcp_server/mcp_cursor_demo_3.mp4" alt="Demo of Datadog MCP Server in Cursor and Claude Code" video="true" >}}
 
 
 ## Disclaimers

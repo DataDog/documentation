@@ -141,7 +141,7 @@ Utiliza la barra de búsqueda de esta sección para ver los datos y las opciones
 [15]: /es/tracing/trace_pipeline/generate_metrics/
 [16]: /es/real_user_monitoring/platform/generate_metrics/
 [17]: /es/infrastructure/process/increase_process_retention/#generate-a-process-based-metric
-[18]: /es/service_management/events/guides/usage/#custom-metrics
+[18]: /es/events/guides/usage/#custom-metrics
 [19]: /es/metrics/metrics-without-limits/
 [20]: /es/metrics/distributions/
 [21]: /es/metrics/custom_metrics/historical_metrics/

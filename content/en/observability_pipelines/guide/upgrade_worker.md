@@ -453,7 +453,7 @@ Worker version 2.7.0 gives you access to the following:
 [34]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
 [35]: /observability_pipelines/processors/filter/?tab=metrics
 [36]: /observability_pipelines/processors/tag_control/metrics
-[37]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#upgrade-the-worker
+[37]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management#upgrade-the-worker
 [38]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.0
 [39]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.2
 [40]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.15.0

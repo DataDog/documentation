@@ -446,6 +446,21 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Cloud Cost Management
+
+Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+
+### `cost_recommendations`
+*Toolset: **cost***\
+*Permissions Required: `Cloud Cost Management Read`*\
+Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+
+#### Examples of queries:
+
+- What are my top cloud cost-saving recommendations?
+- How much could I save per day, and how many open recommendations do I have?
+- Which of our Kubernetes cluster optimizations does the team already have underway?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
@@ -1221,32 +1236,76 @@ Deletes a suppression rule.
 - Delete suppression `sup-456-xyz`.
 - Remove the suppression that was silencing the brute force detection rule.
 
-### `security_findings_schema`
+### `get_datadog_security_findings_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
-Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
+Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_datadog_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
 - What fields are available for security findings?
 - Show me the schema for library vulnerability findings.
 - Get the full schema including descriptions for misconfiguration findings.
 
-### `analyze_security_findings`
+### `analyze_datadog_security_findings`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read` and `Timeseries`*\
-Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
+Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `get_datadog_security_findings_schema` first to discover available fields, then use this tool to query.
 
 - Show me the top 10 rules with the most critical findings.
 - Count open findings grouped by severity and finding type.
 - Find library vulnerabilities with exploits available, grouped by resource.
 
-### `search_security_findings`
+### `search_datadog_security_findings`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
-Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
+Fallback tool for retrieving full security finding details. Prefer `analyze_datadog_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
 
 - Get full details for critical findings in my AWS environment.
 - Retrieve complete finding objects for a specific rule.
 - List all open identity risk findings with full metadata.
+
+### `get_datadog_security_findings_ticket_suggestions`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
+Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+
+- What Jira projects can I use to create tickets for security findings?
+- Show me available ServiceNow projects for ticketing.
+- Which Case Management projects are most used for findings?
+
+### `create_datadog_security_findings_ticket`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
+Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+
+- Create a Jira ticket for these critical findings in project SECURITY.
+- Open a Case Management case for the findings from this rule.
+- Create a ServiceNow ticket for these library vulnerabilities.
+
+### `detach_datadog_security_findings_ticket`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`, `Cases Write`*\
+Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
+
+- Detach these findings from their linked Jira ticket.
+- Remove the case association for these findings.
+
+### `mute_datadog_security_findings`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Mutes or unmutes security findings to suppress them from alerts and dashboards. Requires a mute reason (`PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, or `OTHER`) and supports an optional description and expiration date.
+
+- Mute these findings as false positives.
+- Mute this misconfiguration as accepted risk with a 90-day expiration.
+- Unmute findings that were previously marked as pending fix.
+
+### `assign_datadog_security_findings`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
+
+- Assign these critical findings to the security team lead.
+- Unassign findings that are no longer relevant.
+- Assign all findings from this rule to me.
 
 ## Software Delivery
 
@@ -1535,3 +1594,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
+[64]: /cloud_cost_management/
