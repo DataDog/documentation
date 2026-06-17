@@ -95,7 +95,9 @@ To monitor jobs on Databricks **classic** clusters (all-purpose or job clusters)
 
 ### Footprint
 
-The Agent is a lightweight process that shares the CPU and memory you already provision for your workloads. It does not add separate, Datadog-provisioned compute to classic clusters. Its resource use is driven mainly by the volume of Spark spans produced and by whether log collection is enabled. (Jobs with high task fan-out emit more spans and use more CPU.) For the underlying trace Agent's resource profile, see [APM Agent resource usage][1].
+The Agent is a lightweight process that shares the CPU and memory you already provision for your workloads. It does not add separate, Datadog-provisioned compute to classic clusters.
+
+Jobs Monitoring traces are coarse-grained. The Spark integration emits one span per application, job, stage, SQL execution, and streaming micro-batch, plus one span for each *failed* task. Successful tasks are aggregated into stage-level metrics instead of emitting individual spans. As a result, trace volume scales with a job's number of stages and jobs, not its task count or data volume. Trace throughput therefore stays low for typical jobs. The larger contributors to the Agent's footprint are Spark metric collection and, if enabled, log collection. For the trace Agent's resource profile, see [APM Agent resource usage][1].
 
 The cluster Agent issues **no queries against your warehouse**, so it adds no warehouse cost on its own.
 
