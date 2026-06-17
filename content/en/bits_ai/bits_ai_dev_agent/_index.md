@@ -25,13 +25,13 @@ To get started with Bits Code, [set up a source code integration][6] and complet
 Learn how your Bits Code usage is billed on [AI Credits][27].
 
 ## Supported source code providers
-
 Bits Code supports the following source code providers:
+- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
+- **GitLab**: GitLab.com
 
-- **GitHub**: GitHub.com and GitHub Enterprise Cloud
-- **GitLab**: GitLab.com and GitLab Dedicated
-
-Self-hosted providers, such as GitHub Enterprise Server and GitLab Self-Managed, are not supported.
+The following plans are not supported:
+- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
+- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
 
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
@@ -129,3 +129,6 @@ Bits Code never auto-merges PRs/MRs. See all the PRs/MRs that Bits Code is worki
 [27]: /account_management/billing/ai_credits/
 [28]: /bits_ai/bits_ai_dev_agent/automations/
 [29]: https://app.datadoghq.com/code/automations
+[30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
+[31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
+[32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
