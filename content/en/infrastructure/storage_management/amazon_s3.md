@@ -113,12 +113,19 @@ provider "datadog" {
 }
 
 module "datadog_storage_management" {
-  source = "DataDog/storage-management/aws"
+  source = "DataDog/storage-management-datadog/aws"
 
   name                              = "<MODULE_NAME>"
   datadog_aws_integration_role_name = "<DATADOG_AWS_INTEGRATION_ROLE_NAME>"
   source_bucket_names               = ["<SOURCE_BUCKET_1>", "<SOURCE_BUCKET_2>"]
   destination_bucket_name           = "<DESTINATION_BUCKET_NAME>"
+
+  # Prefix within the destination bucket where inventory files are written.
+  # Defaults to "datadog-inventories/". The module keeps the inventory
+  # configuration, bucket policy, and IAM permissions consistent with this
+  # value, so leave it at the default unless you have a specific reason to
+  # change it.
+  # destination_prefix = "datadog-inventories/"
 
   # Bucket policy: "none", "create", or "merge" (default)
   destination_bucket_policy_management = "merge"
@@ -148,7 +155,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
    **Note**: Use only one destination bucket for all inventory files generated in an AWS account.
-2. Create a prefix within the destination bucket (optional).
+2. Decide on the destination prefix within the bucket where inventory files are written. If left empty, the prefix defaults to `datadog-inventories`. You can set a custom prefix, but you must use the same value in every later step: the S3 Inventory configuration, the destination bucket policy, the integration role permissions, and the API registration call. Mismatched prefixes prevent Datadog from reading your inventory files.
 
 [201]: https://console.aws.amazon.com/s3/bucket/create
 {{% /collapse-content %}}
@@ -198,7 +205,7 @@ For each bucket you want to monitor:
      {{< img src="integrations/guide/storage_monitoring/all-versions.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
    - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
 
-      **Note**: To use a prefix on the destination bucket, add this as well.
+      **Note**: Add the destination prefix you chose in step 1. Use the same value here that you register with Datadog in the post-setup step.
    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
    - **Output format**: CSV
    - **Status**: Enabled
@@ -252,7 +259,7 @@ To use the example above:
 - Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
 - Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
 - Replace `<DESTINATION_BUCKET_REGION>` with the AWS region of the destination bucket.
-- Replace `<DESTINATION_PREFIX>` with the prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
+- Replace `<DESTINATION_PREFIX>` with the prefix where your inventory files are written. This must match the destination prefix in your S3 Inventory configuration. If left empty, the prefix defaults to `datadog-inventories`. Enter the prefix without a leading slash, for example `datadog-inventories`. A trailing slash is optional and handled automatically. Don't add a leading slash or repeat the slash, which creates an invalid path and prevents Datadog from finding your inventory files.
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
 
