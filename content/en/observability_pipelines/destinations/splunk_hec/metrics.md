@@ -15,6 +15,10 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 
 Configure the Splunk HEC destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
+**Notes**:
+- The Splunk index you send your metrics to must be a metrics index. If you send them to an events index, you can't view the metrics in Splunk using any metrics type queries, such as `mcatalog` and `mstats`.
+- If you don't attach your index to the Splunk authentication token you are using for Observability Pipelines, you must enter the name of the [index](#splunk-index) when you set up the destination.
+
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 {{% observability_pipelines/secrets_env_var_note %}}
@@ -36,11 +40,13 @@ If you want to compress your metrics with gzip, select **gzip** in the dropdown 
 
 #### Splunk index
 
-Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][6] if you want to route metrics to different indexes based on specific fields in your metrics.
+Enter the name of the Splunk metrics index to which you are sending metrics. See [template syntax][6] if you want to route metrics to different indexes based on specific fields in your metrics.
+
+**Note**: This **Index** field is only optional if you have an index attached to the Splunk authentication token you are using for Observability Pipelines. Otherwise, you must enter the name of the Splunk index to which you want to send metrics.
 
 #### Source
 
-Enter a source field and value if you want them added to your metrics.
+Enter a source value if you want the source field added to your metrics.
 
 #### Source type override
 
