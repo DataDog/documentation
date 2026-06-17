@@ -433,7 +433,7 @@ This step is required only if you use Datadog Feature Flagging. It enables Datad
 
 If you use your own feature flagging solution, exposure data already lives in your systems and Datadog does not synchronize exposures into Redshift. In that case, skip this step and leave the **Copy IAM role ARN** field blank in [Step 3](#step-3-configure-experiment-settings).
 
-If you do need exposure synchronization, create this role and associate it with your cluster.
+If you do need to synchronize exposures, create this role and associate it with your cluster.
 
 #### Create an IAM policy
 
