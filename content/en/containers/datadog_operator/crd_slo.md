@@ -3,6 +3,8 @@ title: DatadogSLO CRD
 description: Create and manage Datadog Service Level Objectives (SLOs) using the DatadogSLO custom resource definition
 ---
 
+<div class="alert alert-info"><strong>Soft deprecation notice:</strong> For new SLO resources, prefer <a href="/containers/datadog_operator/crd_ddgr/">DatadogGenericResource</a> with <code>type: slo</code>. <code>DatadogSLO</code> remains supported for existing users, but DatadogGenericResource is the preferred path for new Datadog API capabilities.</div>
+
 To create a [Service Level Objective][1] (SLO), you can use the Datadog Operator and `DatadogSLO` custom resource definition (CRD).
 
 ### Prerequisites
@@ -21,7 +23,7 @@ To create a [Service Level Objective][1] (SLO), you can use the Datadog Operator
    kind: DatadogSLO
    metadata:
      name: example-slo-monitor3
-     namespace: system 
+     namespace: system
    spec:
      name: example-slo-monitor3
      description: "This is an example monitor SLO from datadog-operator"
@@ -42,7 +44,7 @@ To create a [Service Level Objective][1] (SLO), you can use the Datadog Operator
    kind: DatadogSLO
    metadata:
      name: example-slo
-     namespace: system 
+     namespace: system
    spec:
      name: example-slo
      description: "This is an example metric SLO from datadog-operator"

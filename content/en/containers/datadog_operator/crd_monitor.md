@@ -10,6 +10,8 @@ further_reading:
     text: "DatadogMonitor CRD"
 ---
 
+<div class="alert alert-info"><strong>Soft deprecation notice:</strong> For new monitor resources, prefer <a href="/containers/datadog_operator/crd_ddgr/">DatadogGenericResource</a> with <code>type: monitor</code>. <code>DatadogMonitor</code> remains supported for existing users, but DatadogGenericResource is the preferred path for new Datadog API capabilities.</div>
+
 To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonitor` custom resource definition (CRD).
 
 ## Prerequisites

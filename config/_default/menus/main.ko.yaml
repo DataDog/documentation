@@ -3194,16 +3194,21 @@ menu:
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
       weight: 707
+    - name: DatadogGenericResource CRD
+      url: containers/datadog_operator/crd_ddgr
+      identifier: containers_datadog_operator_crd_ddgr
+      parent: containers_datadog_operator
+      weight: 708
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 708
+      weight: 709
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 709
+      weight: 710
     - name: Datadog CSI Driver
       url: containers/csi_driver
       parent: containers
