@@ -73,7 +73,6 @@ OTLP defines two histogram types for representing value distributions:
 
 *Aggregation temporality*, which can be cumulative or delta, determines the mapping for both histogram types:
 
-
 - **Delta (default and recommended)**: Time windows don't overlap. Explicit Bucket and Exponential Histograms are ingested natively and reported as Datadog distributions. The original bucket structure is preserved; no conversion to DDSketch occurs. Histograms with a count of 0 are dropped.
 - **Cumulative**: Time windows extend from a fixed start point. The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
 
