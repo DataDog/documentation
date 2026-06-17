@@ -80,7 +80,7 @@ The default mapping for both temporality types is as follows:
 - **Delta (default and recommended)**: Explicit Bucket and Exponential Histograms are ingested natively and reported as Datadog distributions. The original bucket structure is preserved — no conversion to DDSketch occurs. Histograms with a count of 0 are dropped.
 - **Cumulative**: The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
 
-**Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for configuration instructions.
+**Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for instructions on configuring your SDK or Collector to emit delta temporality.
 
 Percentile aggregations are computed directly from the native bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
 
