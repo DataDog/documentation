@@ -24,8 +24,19 @@
        - Retired: to_version is a specific version (e.g. "v1.57.0"); the key was supported
                   in versions strictly less than that. Rendered separately in a collapsed
                   subsection at the end of each category.
+       A retired entry is only shown if no active entry exists for the same key name —
+       otherwise it's just a prior version of a still-current key, which would mislead
+       readers into thinking the key was removed.
        Entries with missing, "null", or too-short descriptions are dropped from either set —
        publishing incomplete docs would expose undocumented keys. */}}
+  {{- $activeNames := dict -}}
+  {{- range $configs -}}
+    {{- $to := .to_version | default "" -}}
+    {{- if or (eq $to "") (eq $to "latest") -}}
+      {{- $activeNames = merge $activeNames (dict .name true) -}}
+    {{- end -}}
+  {{- end -}}
+
   {{- $activeConfigs := slice -}}
   {{- $retiredConfigs := slice -}}
   {{- range $configs -}}
@@ -36,7 +47,7 @@
     {{- if $hasDesc -}}
       {{- if $isCurrent -}}
         {{- $activeConfigs = $activeConfigs | append . -}}
-      {{- else -}}
+      {{- else if not (index $activeNames .name) -}}
         {{- $retiredConfigs = $retiredConfigs | append . -}}
       {{- end -}}
     {{- end -}}
