@@ -6,7 +6,7 @@ categories:
 custom_kind: integración
 description: Recopilar eventos de RSS Feed en Datadog
 further_reading:
-- link: https://docs.datadoghq.com/service_management/events/usage
+- link: https://docs.datadoghq.com/events/usage
   tag: documentación
   text: Proporcionar documentación
 integration_version: 1.0.0
@@ -55,4 +55,4 @@ Consulta el [Events Explorer](https://app.datadoghq.com/event/explorer) para ver
 
 Documentación útil adicional, enlaces y artículos:
 
-- [Uso de eventos](https://docs.datadoghq.com/service_management/events/usage)
+- [Uso de eventos](https://docs.datadoghq.com/events/usage)

@@ -47,7 +47,7 @@ To sync fields between an incident and its linked Jira work item, enable the **S
 
 <div class="alert alert-danger">To enable bidirectional sync, you must configure a Jira webhook. See <a href="/integrations/jira/#configure-a-jira-webhook">Configure a Jira webhook</a> for instructions.</a></div>
 
-{{< img src="/incident_response/incident_management/integrations/sync_between_incident_jira.png" alt="Field configuration table for syncing between Datadog Incident Management and Jira" style="width:80%;" >}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/integrations/sync_between_incident_jira.png" alt="Field configuration table for syncing between Datadog Incident Management and Jira" style="width:80%;" >}}
 
 For each field you want to sync, configure the following:
 - **Jira field**: The Jira field to populate. You can use any standard or custom Jira field.
