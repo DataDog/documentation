@@ -85,7 +85,12 @@ Data Observability runs these queries with bounded concurrency and a per-query t
 
 ## Jobs Monitoring overhead
 
-To monitor jobs on Databricks **classic** clusters (all-purpose or job clusters), the Datadog Agent is installed on the cluster nodes through an init script. On **serverless** compute, no Agent installation is required. The same in-process model applies to other Spark-based compute that Jobs Monitoring supports.
+Jobs Monitoring collects telemetry in one of two ways, each with a different overhead profile:
+
+- **Datadog Agent**: for Spark jobs on Databricks, Amazon EMR, Google Dataproc, and Kubernetes, you install the Datadog Agent on your compute. Its footprint is described in this section.
+- **OpenLineage events**: for Apache Airflow, dbt, and custom pipelines, you run an open-source OpenLineage integration in your own environment, which emits events to Datadog. See [OpenLineage-based integrations](#openlineage-based-integrations).
+
+On Databricks **classic** clusters (all-purpose or job clusters), the Agent is installed on the cluster nodes through an init script. On **serverless** compute, no Agent installation is required.
 
 ### What runs on the cluster
 
@@ -110,12 +115,30 @@ The cluster Agent issues **no queries against your warehouse**, so it adds no wa
 
 Jobs Monitoring can surface the DBU cost of your Databricks jobs. This cost data is read from Datadog's own cost metrics; collecting it does not add queries to your monitored clusters. Populating Databricks cost requires the Datadog Databricks cost integration, which reads from Databricks system tables through a SQL warehouse you grant access to. For the required permissions, see the [Jobs Monitoring for Databricks setup][2].
 
+### OpenLineage-based integrations
+
+Apache Airflow, dbt, and custom pipelines are monitored without the Datadog Agent. Instead, you run an open-source [OpenLineage][3] integration in your own environment, and it emits lineage events to Datadog over HTTP. These components are maintained by the OpenLineage and Apache Airflow projects, and their configuration and performance are documented there. The overhead is the integration's, not the Datadog Agent's.
+
+In all cases the integration runs in-process where your jobs run, captures run, job, and dataset metadata, and emits events at run lifecycle points. Its cost is proportional to the number of runs and tasks and the metadata collected, not to your data volume.
+
+- **Airflow**: the [`apache-airflow-providers-openlineage`][4] provider runs in your Airflow schedulers and workers and emits an event at task and DAG lifecycle points. Its [configuration reference][5] documents options that affect overhead, such as selectively enabling OpenLineage and limiting collected metadata.
+- **dbt**: the [`openlineage-dbt`][6] wrapper (`dbt-ol`) runs your dbt command, then parses dbt's run-result files after the run completes and emits events. Because it runs after the dbt run rather than alongside it, it adds little overhead; its cost scales with the number of models.
+- **Custom pipelines**: you emit events yourself with the OpenLineage client or a raw HTTP call, so the overhead is whatever your emitting code does. You can also instrument Spark directly with OpenLineage instead of using the Agent-based Spark monitoring above. In that case, the Spark integration provides a [circuit breaker][7] that bounds the listener's time and memory overhead.
+
+For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineage][8]. Refer to the OpenLineage documentation for the full set of tuning and overhead controls.
+
 ## Notes
 
 The behaviors above are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, how often monitors run, and (on warehouse-based platforms) your auto-stop configuration. To size it, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management.
 
 [1]: /tracing/troubleshooting/agent_apm_resource_usage/
 [2]: /data_observability/jobs_monitoring/databricks/
+[3]: https://openlineage.io/docs/integrations/about
+[4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/
+[5]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html
+[6]: https://openlineage.io/docs/integrations/dbt
+[7]: https://openlineage.io/docs/integrations/spark/configuration/circuit_breaker
+[8]: /data_observability/jobs_monitoring/openlineage/
 
 ## Further reading
 
