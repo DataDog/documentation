@@ -71,7 +71,7 @@ OTLP defines two histogram types for representing value distributions:
 - **Histogram (Explicit Bucket)**: Uses fixed, user-defined or SDK-default bucket boundaries. Each bucket counts how many measured values fall within its bounds. Also stores sum, count, and optional min/max.
 - **ExponentialHistogram**: Uses dynamically computed bucket boundaries based on a scale parameter (base = 2^(2^(-scale))), which allows high dynamic range with small relative error. Datadog supports scales in the range [-4, 8].
 
- Aggregation temporality, which can be cumulative or delta, determines the mapping for both histogram types:
+*Aggregation temporality*, which can be cumulative or delta, determines the mapping for both histogram types:
 
 
 - **Delta (default and recommended)**: Time windows don't overlap. Explicit Bucket and Exponential Histograms are ingested natively and reported as Datadog distributions. The original bucket structure is preserved; no conversion to DDSketch occurs. Histograms with a count of 0 are dropped.
