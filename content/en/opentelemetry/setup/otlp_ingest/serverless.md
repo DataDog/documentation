@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" header="false" btn_hidden="false">}}
-The serverless OTLP traces intake endpoint is in Preview.
+The OTLP traces intake endpoint is in Preview.
 {{< /callout >}}
 
 ## Overview
