@@ -10,8 +10,8 @@ further_reading:
     text: "Datadog Serverless Monitoring"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/otel-native-instrumentation/" header="false" btn_hidden="false">}}
-The OTLP traces intake endpoint is in Preview.
+{{< callout header="false" btn_hidden="true">}}
+Serverless traces use the OTLP traces intake endpoint, which is in Preview. To send serverless traces, you must have access to the OTLP traces endpoint.
 {{< /callout >}}
 
 ## Overview
