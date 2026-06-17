@@ -376,6 +376,8 @@ Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessio
 
 {% step title="Instrument view transitions" %}
 
+Call `StartView` whenever your application transitions to a new screen, scene, or meaningful state:
+
 {% tabs %}
 {% tab label="Cpp" %}
 ```cpp
@@ -390,6 +392,12 @@ dd_rum_start_view(rum, "startup_screen", "Startup Screen", NULL);
 ```
 {% /tab %}
 {% /tabs %}
+
+For more information on RUM instrumentation, see [Instrument your application][6].
+
+{% /step %}
+
+{% /stepper %}
 
 ## Verify your setup
 
@@ -421,20 +429,17 @@ Once the SDK is correctly configured, tracking consent is granted, and your call
 [DATADOG DEBUG] Scheduled next upload cycle for feature
 ```
 
-**Note:** Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][6].
+**Note:** Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][8].
 
 ### View your data in Datadog
 
 After running your app, navigate to the [RUM Explorer][7] to see sessions from your application. You should see session data within a few minutes.
-
-{% /step %}
-
-{% /stepper %}
 
 [1]: /real_user_monitoring/
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/rum_without_limits/
 [4]: https://github.com/DataDog/dd-sdk-cpp/releases
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
-[6]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration
+[6]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration#instrument-your-application
 [7]: /real_user_monitoring/explorer/
+[8]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration#diagnostic-logging
