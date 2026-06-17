@@ -23021,10 +23021,11 @@ components:
       description: |-
         Response with hourly report of all data billed by Datadog for all organizations.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at this response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields at this response level are accessible through the
+        `additionalProperties` map. Existing typed-field getters are unchanged. New billing
+        dimensions will not have typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key.
       properties:
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours in the current date for all organizations.
@@ -24323,10 +24324,11 @@ components:
       description: |-
         Global hourly report of all data billed by Datadog for a given organization.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at this response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields at this response level are accessible through the
+        `additionalProperties` map. Existing typed-field getters are unchanged. New billing
+        dimensions will not have typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key.
       properties:
         account_name:
           description: The account name.
@@ -25644,10 +25646,11 @@ components:
         Response summarizing all usage aggregated across the months in the request for
         all organizations, and broken down by month and by organization.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at this response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields at this response level are accessible through the
+        `additionalProperties` map. Existing typed-field getters are unchanged. New billing
+        dimensions will not have typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours in the current month for all organizations.
@@ -44544,11 +44547,12 @@ paths:
       description: |-
         Get all usage across your account.
 
-        Newly added billing dimensions and usage types appear as untyped keys on the
-        `additionalProperties` map of `UsageSummaryResponse`, `UsageSummaryDate`, and
-        `UsageSummaryDateOrg` instead of as typed fields. Call
-        `GET /api/v2/usage/summary/available_fields` to enumerate every key returned
-        at each response level—both typed fields and `additionalProperties` keys.
+        For SDK users only: all fields on `UsageSummaryResponse`, `UsageSummaryDate`, and
+        `UsageSummaryDateOrg` are accessible through each object's `additionalProperties` map.
+        Existing typed-field getters are unchanged. New billing dimensions will not have
+        typed-field getters. Use
+        [Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)
+        to enumerate every available key at each response level.
 
         This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
       operationId: GetUsageSummary
