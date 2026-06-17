@@ -26,7 +26,7 @@ Data Observability monitors your data through two products, each with a differen
 - **Quality Monitoring** evaluates data-quality metrics (such as freshness, row count, and column statistics) on a schedule. Depending on the warehouse and metric, an evaluation either reads table metadata or runs a SQL query against your data, so its cost is measured in **warehouse compute** (for example, Snowflake credits, Databricks DBUs, or BigQuery bytes scanned).
 - **Jobs Monitoring** observes the performance of your jobs by running the **Datadog Agent** on your compute (for example, Databricks or Spark clusters). The Agent shares a small amount of the CPU and memory you already provision for your workloads.
 
-This page describes both overhead sources and the levers you have to control them. Because actual cost depends heavily on your environment—warehouse size, table and partition sizes, monitor cadence, and warehouse auto-stop settings—this page focuses on *what* consumes resources rather than a single benchmark number.
+This page describes both overhead sources and how to control them. Actual cost depends heavily on your environment: warehouse size, the amount of data scanned, how often monitors run, and warehouse auto-stop settings. Rather than a single benchmark number, this page focuses on *what* consumes resources.
 
 ## Quality Monitoring overhead
 
@@ -35,14 +35,14 @@ A Data Observability monitor evaluates its metric on a fixed schedule that you c
 {{< tabs >}}
 {{% tab "Snowflake" %}}
 
-On Snowflake, **row count** and **table freshness** are read from table metadata rather than by scanning the table. Datadog reads the `ROW_COUNT` and `LAST_ALTERED` columns from `INFORMATION_SCHEMA.TABLES`, and batches many tables in a database into a single query. This reads metadata only—it does not scan table data—but querying `INFORMATION_SCHEMA` requires a running warehouse, so it uses a small, roughly fixed amount of warehouse compute per batch, independent of table size.
+On Snowflake, **row count** and **table freshness** are read from table metadata rather than by scanning the table. Datadog reads the `ROW_COUNT` and `LAST_ALTERED` columns from `INFORMATION_SCHEMA.TABLES`, and batches many tables in a database into a single query. This reads metadata only and does not scan table data. However, querying `INFORMATION_SCHEMA` requires a running warehouse, so it uses a small, roughly fixed amount of warehouse compute per batch, regardless of table size.
 
 **Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, and column-level freshness) and **Custom SQL** run as `SELECT` queries against your tables and are billed as normal warehouse usage. Column metrics on the same table that share the same filter and grouping are combined into a single query.
 
 {{% /tab %}}
 {{% tab "Databricks" %}}
 
-On Databricks, every metric is collected by running a SQL statement on the SQL warehouse you connect for Quality Monitoring. There is no separate no-cost metadata layer for row count or freshness—these values are computed by querying the warehouse, so each evaluation requires that SQL warehouse to be active and consumes DBUs while it runs.
+On Databricks, every metric is collected by running a SQL statement on the SQL warehouse you connect for Quality Monitoring. There is no separate no-cost metadata layer for row count or freshness; these values are computed by querying the warehouse. As a result, each evaluation requires that SQL warehouse to be active and consumes DBUs while it runs.
 
 | Metric | Statement run on the SQL warehouse | Notes |
 |---|---|---|
@@ -67,12 +67,12 @@ On BigQuery, **row count** and **table freshness** are read through BigQuery's t
 
 Warehouse compute consumed by Quality Monitoring scales with:
 
-- **Cadence** — an hourly monitor re-runs its query 24 times as often as a daily monitor.
-- **Number of distinct queries** — cost scales with the number of distinct *(table, filter, grouping)* combinations being monitored, not the raw number of metrics. Multiple column metrics on the same table are batched into one query.
-- **Data scanned per query** — row-count and column-statistic queries are aggregates over the table, so larger tables and partitions cost more (on Databricks and BigQuery especially). Freshness checks are lightweight: metadata reads on Snowflake and BigQuery, and lightweight metadata commands on Databricks.
-- **Warehouse warm time** — on warehouse-based platforms (Snowflake, Databricks), the dominant factor on most bills is how long your warehouse stays running. Frequent checks against a warehouse with a long idle timeout keep it warm and accrue cost even between queries. BigQuery on-demand is serverless and bills only by bytes scanned, so it has no warm-time cost.
+- **Cadence**: an hourly monitor re-runs its query 24 times as often as a daily monitor.
+- **Number of distinct queries**: cost scales with the number of distinct *(table, filter, grouping)* combinations being monitored, not the raw number of metrics. Multiple column metrics on the same table are batched into one query.
+- **Data scanned per query**: row-count and column-statistic queries are aggregates over the table, so larger tables and partitions cost more (on Databricks and BigQuery especially). Freshness checks are lightweight: metadata reads on Snowflake and BigQuery, and lightweight metadata commands on Databricks.
+- **Warehouse warm time**: on warehouse-based platforms (Snowflake, Databricks), the dominant factor on most bills is how long your warehouse stays running. Frequent checks against a warehouse with a long idle timeout keep it warm and accrue cost even between queries. BigQuery on-demand is serverless and bills only by bytes scanned, so it has no warm-time cost.
 
-Data Observability runs these queries with bounded concurrency and a per-query timeout, so a backlog of monitors does not flood your warehouse with unbounded parallel queries.
+Data Observability runs these queries with bounded concurrency and a per-query timeout. A backlog of monitors does not flood your warehouse with unbounded parallel queries.
 
 ### Reducing Quality Monitoring overhead
 
@@ -95,7 +95,7 @@ To monitor jobs on Databricks **classic** clusters (all-purpose or job clusters)
 
 ### Footprint
 
-The Agent is a lightweight process that shares the CPU and memory of compute you already provision for your workloads—it does not add separate, Datadog-provisioned compute to classic clusters. Its resource use is driven mainly by the volume of Spark spans produced (jobs with very high task fan-out emit more spans and use more CPU) and by whether log collection is enabled. For the underlying trace Agent's resource profile, see [APM Agent resource usage][1].
+The Agent is a lightweight process that shares the CPU and memory you already provision for your workloads. It does not add separate, Datadog-provisioned compute to classic clusters. Its resource use is driven mainly by the volume of Spark spans produced and by whether log collection is enabled. (Jobs with very high task fan-out emit more spans and use more CPU.) For the underlying trace Agent's resource profile, see [APM Agent resource usage][1].
 
 The cluster Agent issues **no queries against your warehouse**, so it adds no warehouse cost on its own.
 
@@ -106,7 +106,7 @@ The cluster Agent issues **no queries against your warehouse**, so it adds no wa
 
 ### A note on Databricks cost data
 
-Jobs Monitoring can surface the DBU cost of your Databricks jobs. This cost data is read from Datadog's own cost metrics; collecting it does not add queries to your monitored clusters. Populating Databricks cost requires the Datadog Databricks cost integration to be configured, which reads from Databricks system tables through a SQL warehouse you grant access to—see the [Jobs Monitoring for Databricks setup][2] for the required permissions.
+Jobs Monitoring can surface the DBU cost of your Databricks jobs. This cost data is read from Datadog's own cost metrics; collecting it does not add queries to your monitored clusters. Populating Databricks cost requires the Datadog Databricks cost integration, which reads from Databricks system tables through a SQL warehouse you grant access to. For the required permissions, see the [Jobs Monitoring for Databricks setup][2].
 
 ## Notes
 
