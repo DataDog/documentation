@@ -69,7 +69,7 @@ Warehouse compute consumed by Quality Monitoring scales with:
 
 - **Cadence**: an hourly monitor re-runs its query 24 times as often as a daily monitor.
 - **Number of distinct queries**: cost scales with the number of distinct *(table, filter, grouping)* combinations being monitored, not the raw number of metrics. Multiple column metrics on the same table are batched into one query.
-- **Data scanned per query**: row-count and column-statistic queries are aggregates over the table, so larger tables and partitions cost more (on Databricks and BigQuery especially). Freshness checks are lightweight: metadata reads on Snowflake and BigQuery, and lightweight metadata commands on Databricks.
+- **Data scanned per query**: column-statistic queries (and Custom SQL) are aggregates that scan table data, so larger tables and partitions cost more on every warehouse. Row count scans the table only on Databricks (`COUNT`); on Snowflake and BigQuery it is a metadata read that does not grow with table size. Freshness checks are lightweight everywhere: metadata reads on Snowflake and BigQuery, and metadata commands on Databricks.
 - **Warehouse warm time**: on warehouse-based platforms (Snowflake, Databricks), the dominant factor on most bills is how long your warehouse stays running. Frequent checks against a warehouse with a long idle timeout keep it warm and accrue cost even between queries. BigQuery on-demand is serverless and bills only by bytes scanned, so it has no warm-time cost.
 
 Data Observability runs these queries with bounded concurrency and a per-query timeout. A backlog of monitors does not flood your warehouse with unbounded parallel queries.
