@@ -191,6 +191,31 @@ if (login_succeeded) {
 
 For full details, see [Operations Monitoring][3].
 
+## Tracking consent
+
+To update the SDK's tracking consent after initialization, call `SetTrackingConsent` on the core at any time. The SDK adjusts its behavior immediately:
+
+- `Granted`: The SDK sends all pending and future data to Datadog.
+- `Pending`: The SDK continues collecting data and storing it locally, but does not send it to Datadog.
+- `NotGranted`: The SDK deletes all pending data and stops collecting new data.
+
+{% tabs %}
+{% tab label="Cpp" %}
+
+```cpp
+core->SetTrackingConsent(datadog::TrackingConsent::Granted);
+```
+
+{% /tab %}
+{% tab label="C" %}
+
+```c
+dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_GRANTED);
+```
+
+{% /tab %}
+{% /tabs %}
+
 ## Custom attributes
 
 Custom attributes are key-value pairs that you attach to RUM events to enrich them with application-specific context. They can be scoped either globally (applied to all subsequent events) or per-view (applied only to events generated within that view).
