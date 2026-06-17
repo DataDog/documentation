@@ -24,7 +24,7 @@ Your setup depends on where your telemetry is coming from. Check the [Managed pl
 | If your telemetry comes from... | Start here |
 |---|---|
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
-| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] (Preview) |
+| A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] |
 | Your own app, host, or container | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
 
 <div class="alert alert-info">If you want to send data from an OpenTelemetry Collector, <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">enroll in the Preview</a> for the full Collector experience. You can also send OTLP data through the <a href="/opentelemetry/otlp_ingest_in_the_agent/">Datadog Agent</a>.</div>
