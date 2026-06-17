@@ -42,7 +42,7 @@ If you want to compress your metrics with gzip, select **gzip** in the dropdown 
 
 Enter the name of the Splunk metrics index to which you are sending metrics. See [template syntax][6] if you want to route metrics to different indexes based on specific fields in your metrics.
 
-**Note**: This **Index** field is only optional if you have an index attached to the Splunk authentication token you are using for Observability Pipelines. Otherwise, you must enter the name of the Splunk index to which you want to send metrics.
+**Note**: This **Index** field is only optional if you have an index attached to the Splunk authentication token you are using for Observability Pipelines. Otherwise, you must enter the name of the Splunk metrics index.
 
 #### Source
 
