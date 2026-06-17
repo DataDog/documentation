@@ -4925,6 +4925,12 @@
     "description": "Get detailed information about a specific indicator of compromise (IoC).",
     "summary": "Get an indicator of compromise"
   },
+  "CreateIoCTriageState": {
+    "description": "Set the triage state of an indicator of compromise (IoC). This creates or\nupdates the triage state for the indicator in your organization.",
+    "summary": "Create or update an indicator triage state",
+    "request_description": "The triage state to set for the indicator.",
+    "request_schema_description": "Request body for creating or updating an indicator triage state."
+  },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
     "summary": "Get the list of signal-based notification rules"
