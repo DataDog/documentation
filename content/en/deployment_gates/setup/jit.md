@@ -333,7 +333,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-The [Datadog Deployment Gate GitHub Action][4] runs the evaluation as part of a workflow. Commit a gate configuration file to the repository and pass its path with the `config` input. Use a version of the action that supports the `config` input — see the [action's releases][5]:
+The [Datadog Deployment Gate GitHub Action][4] runs the evaluation as part of a workflow. Commit a gate configuration file to the repository and pass its path with the `config` input. The `config` input requires version v2.1.0 or above:
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
@@ -353,7 +353,7 @@ jobs:
           # Your deployment commands here
 
       - name: Evaluate Deployment Gate
-        uses: DataDog/deployment-gate-github-action@v1
+        uses: DataDog/deployment-gate-github-action@v2.1.0
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
@@ -413,7 +413,6 @@ For complete configuration options and usage examples, see the [`DataDog/deploym
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: https://github.com/DataDog/deployment-gate-github-action
-[5]: https://github.com/DataDog/deployment-gate-github-action/releases
 
 {{% /tab %}}
 {{% tab "Generic script" %}}
