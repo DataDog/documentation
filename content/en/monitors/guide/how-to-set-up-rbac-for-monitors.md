@@ -49,6 +49,8 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 --header 'DD-APPLICATION-KEY: <DD-APPLICATION-KEY>'
 ```
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][5] or [Service Access Token (SAT)][6] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 ```bash
 {
     "meta": {
@@ -147,3 +149,5 @@ All monitors also display the role restriction option regardless of the underlyi
 [2]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [3]: /api/latest/monitors/#edit-a-monitor
 [4]: /api/latest/restriction-policies/
+[5]: /account_management/personal-access-tokens/
+[6]: /account_management/service-access-tokens/

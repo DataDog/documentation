@@ -91,6 +91,8 @@ EOF
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 ## List spans
 
 Use this endpoint to retrieve a list of Agent Observability spans.
@@ -425,3 +427,5 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 
 [1]: https://jsonapi.org/format/#fetching-pagination
+[2]: /account_management/personal-access-tokens/
+[3]: /account_management/service-access-tokens/

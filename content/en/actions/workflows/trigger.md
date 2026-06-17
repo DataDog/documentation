@@ -238,6 +238,8 @@ curl -X POST \
   https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
 {{< /code-block >}}
 
+   **Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][17] or [Service Access Token (SAT)][18] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
    If the workflow includes input parameters, include them in the request payload. The following example uses two input parameters, `example_input1` and `example_input2`:
 
    {{< code-block lang="shell" >}}
@@ -304,3 +306,5 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [14]: https://app.datadoghq.com/software
 [15]: /incident_response/incident_management/setup_and_configuration/automations
 [16]: /incident_response/incident_management/setup_and_configuration/notification_rules/
+[17]: /account_management/personal-access-tokens/
+[18]: /account_management/service-access-tokens/

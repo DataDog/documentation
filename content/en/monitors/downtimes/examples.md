@@ -49,6 +49,8 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v2/downtime" \
 -d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-09-16T00:00","duration":"24h","rrule":"FREQ=WEEKLY;INTERVAL=1;BYDAY=SA,SU"}]}}}'
 ```
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 Optionally, add a `message` to your Downtime to let others know the reason and purpose of the Downtime you are creating. For instance, `Muting all monitors in production environment over the weekend`.
 
 Replace the placeholder value `<DATADOG_SITE>` with the site parameter of your Datadog account, see the [Datadog Sites][1] documentation. Replace the `start` and `end` parameter to match your wanted schedule. For example:
@@ -345,3 +347,5 @@ Open the [Manage Downtime page][1] and add a new downtime. Select `recurring` an
 [3]: https://docs.datadoghq.com/monitors/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html
+[6]: /account_management/personal-access-tokens/
+[7]: /account_management/service-access-tokens/

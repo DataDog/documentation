@@ -61,6 +61,8 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_muted.csv
 ```
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][12] or [Service Access Token (SAT)][13] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 This gives you the details of your monitors in a CSV file for readability. You can refine the query to your specific use case.
 
 ### 3. Delete the monitors
@@ -1415,3 +1417,5 @@ To help you get started, import the following JSON dashboard definition directly
 [9]: https://app.datadoghq.com/dashboard/lists
 [10]: /account_management/rbac/permissions/#monitors
 [11]: /monitors/types/composite/
+[12]: /account_management/personal-access-tokens/
+[13]: /account_management/service-access-tokens/

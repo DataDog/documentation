@@ -90,6 +90,8 @@ curl -X POST "https://api.${DD_SITE}/api/v2/query/scalar" \
   }'
 ```
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][5] or [Service Access Token (SAT)][6] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 | Field | Description |
 |-------|-------------|
 | `data.type` | Must be `scalar_request` |
@@ -502,3 +504,5 @@ python identify_sequential_scans.py
 [2]: /database_monitoring/setup_postgres/
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/databases/samples
+[5]: /account_management/personal-access-tokens/
+[6]: /account_management/service-access-tokens/

@@ -398,6 +398,8 @@ def manage_tenant(tenant_id: str):
         delete_tenant_credentials(tenant_id)
 ```
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][6] or [Service Access Token (SAT)][7] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 ### Generate the iFrame URL
 
 The iFrame URL generation follows the same pattern as single-tenant setups. The difference is that your backend looks up the correct credential and base URL for the requesting user's tenant.
@@ -445,3 +447,5 @@ If you are using client-side rendering and see CORS errors when your frontend fe
 [3]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [4]: https://app.datadoghq.com/organization-settings/roles
 [5]: /api/latest/dashboard-secure-embed/
+[6]: /account_management/personal-access-tokens/
+[7]: /account_management/service-access-tokens/

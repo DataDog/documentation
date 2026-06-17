@@ -47,6 +47,8 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list" \
     }'
 ```
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][2] or [Service Access Token (SAT)][3] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 Example result:
 
 ```json
@@ -196,3 +198,5 @@ Which returns these results:
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /api/v1/logs/#get-a-list-of-logs
+[2]: /account_management/personal-access-tokens/
+[3]: /account_management/service-access-tokens/

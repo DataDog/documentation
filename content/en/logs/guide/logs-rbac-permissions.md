@@ -288,6 +288,7 @@ curl -X POST \
             }'
 ```
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][17] or [Service Access Token (SAT)][18] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
 
 [1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
@@ -367,3 +368,5 @@ curl -X POST \
 [14]: /account_management/rbac/permissions/#access-management
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
+[17]: /account_management/personal-access-tokens/
+[18]: /account_management/service-access-tokens/

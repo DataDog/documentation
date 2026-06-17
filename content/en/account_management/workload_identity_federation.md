@@ -116,6 +116,8 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 }'
 ```
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][7] or [Service Access Token (SAT)][8] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 ##### Map an AWS ARN to a Datadog service account
 For `account_identifier`, you can use either:
 - The service account's **UUID**: Go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Service accounts{{< /ui >}}, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
@@ -435,3 +437,5 @@ delegated_auth:
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
 [6]: https://app.datadoghq.com/organization-settings/workload-identity-federation
+[7]: /account_management/personal-access-tokens/
+[8]: /account_management/service-access-tokens/

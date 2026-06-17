@@ -88,6 +88,8 @@ curl -v -H "Content-Type: application/json" -H \
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][18] or [Service Access Token (SAT)][19] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 After linking your orgs, only the failover org displays this banner:
 
 {{< img src="agent/guide/ddr/ddr-banner.png" alt="The DDR banner in the DDR org" >}}
@@ -313,3 +315,5 @@ During testing, integration telemetry is spread over both organizations. If you 
 [15]: https://www.datadoghq.com/support/
 [16]: https://app.datadoghq.com/signup
 [17]: /getting_started/site#access-the-datadog-site
+[18]: /account_management/personal-access-tokens/
+[19]: /account_management/service-access-tokens/

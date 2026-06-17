@@ -71,6 +71,8 @@ curl -X POST \
 - Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][3] or [Service Access Token (SAT)][4] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Response" %}}
@@ -610,3 +612,5 @@ curl -X POST \
 
 [1]: /account_management/saml/mapping
 [2]: /api/v2/roles/#list-roles
+[3]: /account_management/personal-access-tokens/
+[4]: /account_management/service-access-tokens/

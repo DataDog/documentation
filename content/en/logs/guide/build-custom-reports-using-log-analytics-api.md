@@ -70,6 +70,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }'
 ```
 
+**Note**: Datadog recommends authenticating these API calls with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 **Response:**
 
 The result dataset comprises the `buckets` object as shown in the following sample response. In this example, `c0` represents the total `count`.
@@ -868,3 +870,5 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 [1]: https://docs.datadoghq.com/api/v2/logs/
 [2]: /account_management/api-app-keys/#api-keys
 [3]: /account_management/api-app-keys/#application-keys
+[4]: /account_management/personal-access-tokens/
+[5]: /account_management/service-access-tokens/

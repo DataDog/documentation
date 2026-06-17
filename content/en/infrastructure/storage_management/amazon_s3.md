@@ -248,6 +248,8 @@ curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
   }'
 ```
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][11] or [Service Access Token (SAT)][12] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 To use the example above:
 - Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
 - Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
@@ -355,3 +357,5 @@ Seeing recommendations has the following prerequisites:
 [8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
 [9]: https://app.datadoghq.com/storage-management/settings
 [10]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/
+[11]: /account_management/personal-access-tokens/
+[12]: /account_management/service-access-tokens/

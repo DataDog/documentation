@@ -30,6 +30,8 @@ curl -X get "https://{datadog_site}/api/v2/org_connections/" \
   -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
 {{< /code-block >}}
 
+**Note**: Datadog recommends authenticating with a [Personal Access Token (PAT)][4] or [Service Access Token (SAT)][5] using the `Authorization: Bearer <token>` header. API key and application key authentication is also supported.
+
 ## Create a connection
 
 Creates a connection from this organization to the destination organization. You must perform this operation in the to-be-source organization. Creating connections requires the _Org Connections Write_ permission.
@@ -121,3 +123,5 @@ curl -X DELETE "https://{datadog_site}/api/v2/org_connections/{connection_id}" \
 [1]: /account_management/org_settings/cross_org_visibility
 [2]: /account_management/rbac/permissions/#access-management
 [3]: /api/latest/organizations/#list-your-managed-organizations
+[4]: /account_management/personal-access-tokens/
+[5]: /account_management/service-access-tokens/
