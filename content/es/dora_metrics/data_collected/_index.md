@@ -76,7 +76,7 @@ Estas métricas pueden consultarse mediante programación utilizando los endpoin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/service_management/events/explorer/
+[1]: /es/events/explorer/
 [2]: /es/api/latest/metrics/#query-timeseries-points
 [3]: /es/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights

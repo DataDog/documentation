@@ -33,9 +33,9 @@ Ensure [Test Optimization][1] is configured for your test runs.
 The test framework compatibility is the same as [Test Optimization Compatibility][3], with the exception of `Scala Weaver`.
 
 ### Configuration
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -43,7 +43,7 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ONLY_KNOWN_FLAKES` - if this environment variable is set to `true`, only the test cases that Test Optimization considers [flaky][2] are retried.
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - can be set to any non-negative number to change the maximum number of retries per test case.
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [2]: /tests/flaky_test_management/
 [3]: /tests/setup/java/#compatibility
 {{% /tab %}}
@@ -56,9 +56,9 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -66,7 +66,7 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to 0 or false to explicitly disable retries even if the remote setting is enabled (default: true).
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 
 {{% /tab %}}
 
@@ -78,9 +78,9 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -90,7 +90,7 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -101,9 +101,9 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 By default, the feature retries any failing test case up to 5 times.
 Customize the Auto Test Retries with the following environment variables:
@@ -113,7 +113,7 @@ Customize the Auto Test Retries with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 {{% /tab %}}
 
 {{% tab "Go" %}}
@@ -124,9 +124,9 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Configuration
 
-After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 By default, the feature retries each failing test case up to 5 times.
 Customize the Auto Test Retries with the following environment variables:
@@ -136,7 +136,7 @@ Customize the Auto Test Retries with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 {{% /tab %}}
 
 {{% tab "Python" %}}
@@ -147,9 +147,9 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Configuration
 
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to five times. Tests that originally fail either the original setup, teardown, or fixtures in Pytest, are not retried.
 
@@ -159,7 +159,7 @@ You can fine tune this behavior with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: `5`).
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: `1000`)
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 
 {{% /tab %}}
 
@@ -171,9 +171,9 @@ You can fine tune this behavior with the following environment variables:
 
 ### Configuration
 
-After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
+After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -183,16 +183,20 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: 1000)
 
 
-[1]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### Failed Test Replay
 
-<div class="alert alert-info">Failed Test Replay is only supported for Java, JavaScript, and .NET.</a></div>
+<div class="alert alert-info">Failed Test Replay is only supported for Java, JavaScript, and .NET.</div>
 
-In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
+In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace.
+
+Failed Test Replay requires Auto Test Retries to be enabled, because it captures variable data from the retried test runs.
+
+Enable Failed Test Replay in [**CI/CD Optimization settings**][4] under **Mitigation** > **Failed Test Replay**. You can apply the setting at the organization, repository, or test service level.
 
 #### Create a logs index
 
@@ -218,7 +222,7 @@ You can query the retried tests in the [Test Optimization Explorer][2]: they hav
 
 ## Troubleshooting
 
-If you suspect there are any issues with Auto Test Retries, navigate to the [Test Service Settings page][4], look for your test service, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
+If you suspect there are any issues with Auto Test Retries, open [**CI/CD Optimization settings**][4], find your repository or service, and toggle Auto Test Retries off.
 
 ## Further Reading
 
@@ -227,7 +231,7 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 [1]: /tests/setup/
 [2]: /tests/explorer/
 [3]: /tests/flaky_test_management/early_flake_detection
-[4]: https://app.datadoghq.com/ci/settings/test-optimization
+[4]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [5]: /logs/log_configuration/indexes/#exclusion-filters
 [6]: /logs/log_configuration/indexes/#add-indexes
 [7]: https://www.npmjs.com/package/jest-image-snapshot
