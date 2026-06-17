@@ -55,6 +55,29 @@ After configuring your targeting rules, click **Save Changes**, then enable the 
 SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
 </div>
 
+## Copy rules to another environment
+You can copy one or more targeting rules from the current environment to a different environment. This is useful when you want to promote a rollout configuration from staging to production, or replicate targeting logic across environments without manually recreating it.
+To copy rules:
+1. Hover over the targeting rule you want to copy.
+2. Click the **Copy** icon that appears in the rule's action toolbar.
+3. In the **Copy rules to another environment** modal:
+   - Under **Rules to copy**, select the rules you want to copy. Select **All rules** to copy every eligible rule at once.
+   - Under **Select which environment you want to copy to**, choose the target environment.
+4. Click **Copy rules** to confirm.
+
+### What is copied
+The following rule properties are copied to the target environment:
+- Filter conditions
+- Variant assignments and traffic exposure percentages
+- Progressive rollout step configuration (the schedule is reset and starts fresh in the target environment)
+- Guardrail metric configuration
+
+### Limitations
+- **Experiment rules cannot be copied.** Rules linked to an experiment are not eligible for copying. Only feature gate and progressive rollout rules can be copied.
+- **Rules with an active progressive rollout cannot be copied.** A rule is only eligible if its rollout has not started yet or has already completed.
+- **Unsaved changes are discarded.** If you have unsaved changes in the current environment, a warning is displayed. Proceeding with the copy switches the active environment and discards your unsaved changes.
+
+
 ## Filters and evaluation context
 
 Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
