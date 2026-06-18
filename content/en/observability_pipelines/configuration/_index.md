@@ -81,7 +81,7 @@ Metrics sent to Observability Pipelines include the following:
 - `timestamp`: The date and time the metric is created.
 - `tags`: Includes tags such as `host`.
 
-The `counter` metric type is the only `incremental` metric. `gauge`, `distribution`, and `histogram` metric types are `absolute` metrics.
+Whether the metrics a source sends is `incremental` or `absolute` depends on the specific source. For example, [OpenTelemetry](7) can send either kinds of metrics, depending on the use case.
 
 An example of a metric:
 
@@ -131,3 +131,4 @@ See [Metric Types][3] for more information.
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
+[7]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
