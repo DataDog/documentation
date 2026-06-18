@@ -4,10 +4,22 @@
 
     {{ with .Content}}
        <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} ps-0">
-        <div class="api-hardcoded-header d-flex justify-content-end">
-          {{ partial "api/api-copy-btn.html" $dot }}
-        </div>
-        {{ . }}
+        <!-- Hardcoded Overview pages bake their heading into the content; lift the first
+             heading out so the copy button can sit beside it, matching generated pages. -->
+        {{ $re := `(?s)<h2[^>]*>.*?</h2>` }}
+        {{ $heading := index (findRE $re . 1) 0 }}
+        {{ with $heading }}
+          <div class="api-intro-header d-flex flex-wrap align-items-start justify-content-between">
+            {{ . | safeHTML }}
+            {{ partial "api/api-copy-btn.html" $dot }}
+          </div>
+          {{ replaceRE $re "" $dot.Content 1 | safeHTML }}
+        {{ else }}
+          <div class="d-flex justify-content-end">
+            {{ partial "api/api-copy-btn.html" $dot }}
+          </div>
+          {{ . }}
+        {{ end }}
        </div>
     {{ end }}
 
