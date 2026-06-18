@@ -8,6 +8,9 @@ further_reading:
 - link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server Overview"
+- link: "mcp_server/tools"
+  tag: "Documentation"
+  text: "Datadog MCP Server Tools"
 - link: "experiments/"
   tag: "Documentation"
   text: "Datadog Experiments"
@@ -28,21 +31,21 @@ The toolset becomes most powerful when your AI client can also read your codebas
 
 ### Use cases
 
-**Before launching an experiment**, point an agent at [`check-flag-implementation`][5] (part of the `feature-flags` toolset) alongside your source code to audit the flag installation:
+**Before launching an experiment**, point an agent at [`check_datadog_flag_implementation`][5] (part of the `feature-flags` toolset) alongside your source code to audit the flag installation:
 
-- Is the flag read with the right value type and context attributes for its targeting rules? Is the default value consistent with what production serves today?
-- Does the code correctly emit the metric events the experiment depends on — or is there a path where a metric fires in one variant but not another, or fires twice?
-- Are there nearby events or user behaviors in the code that aren't captured by any metric, or segments worth adding because the code path diverges by platform or context?
+- Whether the flag is read with the correct value type and context attributes for its targeting rules, and whether the default value matches what production serves
+- Whether the code emits metric events correctly in all variants, or whether there is a path where a metric fires in one variant but not another, or fires twice
+- Whether nearby events or behaviors in the code aren't captured by any metric, and whether segments are worth adding because the code path diverges by platform or context
 
-**While an experiment is running**, the toolset covers about a dozen diagnostic dimensions — sample ratio mismatch (SRM), unreliable metrics, zero-data metrics, per-variant exposure imbalances, and more. When `get-experiment-diagnostics` identifies an issue, an agent with source access can trace the root cause: an SDK call inside a conditional that excludes some assigned subjects, or an exposure event that only fires after a late-loading component.
+**While an experiment is running**, the toolset covers several diagnostic dimensions - sample ratio mismatch (SRM), unreliable metrics, zero-data metrics, per-variant exposure imbalances, and more. When `get-experiment-diagnostics` identifies an issue, an agent with source access can trace the root cause: an SDK call inside a conditional that excludes some assigned subjects, or an exposure event that only fires after a late-loading component.
 
-For metric movements, `get-metric-definition` returns the underlying event query and the recommended Datadog MCP tool to call next. An agent can chain into the raw event data and reason through what in your code change is most likely driving the movement.
+For metric movements, `get-metric-definition` returns the underlying event query and the recommended Datadog MCP tool to call next. An agent can then query the raw event data and reason through what change in your code is most likely driving the movement.
 
-**Before concluding**, use `explore-experiment-results` to build confidence in the interpretation. An agent can slice the primary metric by device type, country, plan tier, or any other assignment property to check whether the result holds across subgroups or is being carried by one cohort. It can also examine time-bucketed results to check whether the lift held steady over time or faded after the first few days. This segmentation work — which would otherwise require navigating multiple dashboard views — happens in a single conversational thread alongside the diagnostic and results data already in context.
+**Before concluding**, use `explore-experiment-results` to build confidence in the interpretation. An agent can segment the primary metric by device type, country, plan tier, or any other assignment property to check whether the result holds across subgroups or is driven by a single cohort. It can also examine time-bucketed results to check whether the lift held steady over time or faded after the first few days. This segmentation work, which would otherwise require multiple dashboard views, happens within a single conversation.
 
-**At conclusion**, an agent can take the winning variant decision, find the flag in the source, and draft the code change: inline the winning branch, remove the losing branch, delete the SDK call default that no longer needs a fallback.
+**At conclusion**, an agent can record the winning variant decision, find the flag in the source, and draft the code change: inline the winning branch, remove the losing branch, delete the SDK call default that no longer needs a fallback.
 
-**For program-wide operations**, an agent can sweep all running experiments for diagnostic warnings, surface stuck drafts with no allocation, and generate a standup-ready status summary.
+**For program-wide operations**, an agent can sweep all running experiments for diagnostic warnings, surface draft experiments with no allocation, and generate a status summary.
 
 ## Setup
 
@@ -99,7 +102,7 @@ The `experiments` toolset exposes the following tools to your AI client. When yo
 : *Permissions required: `Product Analytics Experiments Read`*
 
 `get-experiment-results`
-: Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not re-derive significance from raw p-values or confidence intervals.
+: Returns computed per-variant, per-metric results. The `verdict` field (`better`, `worse`, `inconclusive`, or `unreliable`) is authoritative — do not recalculate significance from raw p-values or confidence intervals.
 : *Permissions required: `Product Analytics Experiments Read`*
 
 `explore-experiment-results`
@@ -117,7 +120,7 @@ The `experiments` toolset exposes the following tools to your AI client. When yo
 ### Metric investigation
 
 `get-metric-definition`
-: Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool to call next to investigate why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field pointing to `aggregate_rum_events` or `run_analytics_query` along with the structured filter and aggregation pieces needed to assemble the call. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
+: Returns the definition of an experiment metric — the underlying event query, data source, and the recommended Datadog MCP tool for investigating why the metric moved. For `datadog`-sourced metrics, the response includes a `recommended_tool_call` field pointing to `aggregate_rum_events` or `run_analytics_query` along with the structured filter and aggregation parameters needed to assemble the call. Not for Datadog infrastructure or APM metrics; use `get_datadog_metric` for those.
 : *Permissions required: `Product Analytics Metrics Read`*
 
 ### Troubleshooting
