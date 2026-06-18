@@ -107,9 +107,9 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 
 ## Kubernetes view
 
-You can also view Datadog Agents and OTel Collectors running in Kubernetes environments, giving you a unified view of your fleet across both host-based and containerized infrastructure.
+The Kubernetes view lets you see Datadog Agents and OTel Collectors running in Kubernetes environments, giving you a unified view of your fleet across both host-based and containerized infrastructure.
 
-By default, Fleet View lists infrastructure as individual hosts. Use the {{< ui >}}View by infra type{{< /ui >}} toggle to switch to [Kubernetes view][4], which shows Agents by Kubernetes cluster instead.
+By default, Fleet View lists infrastructure as individual hosts. Use the {{< ui >}}View by infra type{{< /ui >}} toggle to switch to the [Kubernetes view][4], which shows Agents by Kubernetes cluster instead.
 
 Each row is a cluster managed by the [Datadog Operator][5] or Helm chart, and the Agents in it (Node Agents, Cluster Agent, Cluster Check Runners) appear grouped per cluster instead of as individual hosts.
 
@@ -139,10 +139,10 @@ For clusters managed with the Datadog Operator v1.24 or later, the {{< ui >}}Con
 
 ### Limitations
 
-Compared to host view, Kubernetes view has the following limitations:
+Compared to the default view, the Kubernetes view has the following limitations:
 
 - You cannot send remote support flares. [under development v7.80]
-- You can see which OTel Collectors are running, but you cannot view their configuration in Kubernetes view.
+- You can see which OTel Collectors are running, but you cannot view their configuration in the Kubernetes view.
 - Fleet Automation API access is not available.
 
 ## Further Reading
