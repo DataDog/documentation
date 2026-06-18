@@ -21,7 +21,7 @@ This page covers build configuration topics beyond the standard CMake setup desc
 
 ## CMake targets and datadog_enable()
 
-The recommended approach for adding the SDK as a dependency in your CMake project is to use the `datadog_enable()` function, passing your program's executable target as an argument:
+To add the SDK as a dependency in your CMake project, pass your executable target to `datadog_enable()`:
 
 ```cmake
 add_executable(my-app main.cpp)
@@ -98,7 +98,7 @@ These are several important options to consider when building the SDK from sourc
     <tr>
       <td><code>DD_CRASH_MODE</code></td>
       <td>
-        <code>inprocess</code> <i>(default)</i>: The SDK uses a simple in-process handler to detect crashes.<br>
+        <code>inprocess</code> <i>(default)</i>: The SDK uses an in-process handler to detect crashes.<br>
         <!--CRASHPAD--<code>crashpad</code>: The SDK launches a separate executable to detect crashes.<br>--CRASHPAD-->
         <code>noop</code>: The SDK does not detect crashes.</li>
       </td>
@@ -107,7 +107,7 @@ These are several important options to consider when building the SDK from sourc
       <td><code>DD_HTTP_USE_SYSTEM_LIBCURL</code></td>
       <td>
         <code>OFF</code>: libcurl is built from source as a static library and linked into the SDK.<br>
-        <code>ON</code>: The SDK will use system-installed shared libraries for libcurl.<br>
+        <code>ON</code>: The SDK uses system-installed shared libraries for libcurl.<br>
         Defaults to <code>OFF</code> for Windows builds, <code>ON</code> for Linux and macOS.
       </td>
     </tr>
@@ -152,11 +152,11 @@ cmake --install build --config RelWithDebInfo --prefix "%YOUR_PROJECT%\external\
 {{% /tab %}}
 {{< /tabs >}}
 
-This will populate `external/datadog-sdk/`, placing all required files in `include/`, `lib/`, etc.
+This populates `external/datadog-sdk/`, placing all required files in `include/`, `lib/`, etc.
 
 ### Configuring compiler and linker dependencies
 
-Once you have a redistributable build of the SDK in place, make the following changes to your project's build configuration:
+After preparing a redistributable build of the SDK, make the following changes to your project's build configuration:
 
 - **Include directories:** Add `external/datadog-sdk/include/`
 - **Library directories:** Add `external/datadog-sdk/lib/`
@@ -194,13 +194,13 @@ MSVC should include these libraries automatically thanks to `#pragma` directives
 
 ### Deploying additional files
 
-If you've built the SDK as a shared library, you'll need to ensure that the shared library is bundled with your application:
+If you've built the SDK as a shared library, bundle the shared library with your application:
 
 - **Linux:** `libddsdkcpp.so`
 - **macOS:** `libddsdkcpp.dylib`
 - **Windows:** `ddsdkcpp.dll`
 
-On macOS and Linux, you'll also need to configure your executable's runtime search path so that it can find this file.
+On macOS and Linux, your executable's runtime search path must also include the location of this file.
 
 <!--CRASHPAD--
 If using `DD_CRASH_MODE=crashpad`, you'll also need to copy the crashpad handler executable to the same directory as your application's executable.

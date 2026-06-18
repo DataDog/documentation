@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-The Datadog C++ SDK supports native C and C++ applications on Linux, macOS, and Windows, and is tested in 64-bit builds across a range of compiler toolchains.
+The Datadog C++ SDK supports native C and C++ applications on Linux, macOS, and Windows. SDK builds are tested on a range of compiler toolchains and 64-bit CPU architectures.
 
-The SDK is built with CMake and officially integrates via CMake 3.21 or later. Applications using other build systems can link against precompiled SDK binaries directly.
+The SDK is built with CMake and officially integrates with CMake 3.21 or later. Applications using other build systems can link against precompiled SDK binaries directly.
 
 ## Compiler support
 
@@ -39,7 +39,7 @@ For a full list of third-party components, see [`LICENSE-3rdparty.csv`][2] in th
 
 ### libcurl
 
-The SDK uses libcurl for HTTP transport. On Linux and macOS, the SDK links against the system-provided libcurl by default; you can override this to bundle a static libcurl build by setting the CMake option `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`. On Windows, libcurl is always built from source as part of the SDK build.
+The SDK uses libcurl for HTTP transport. On Linux and macOS, the SDK links against the system-provided libcurl by default. You can override this to bundle a static libcurl build by setting the CMake option `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`. On Windows, libcurl is always built from source as part of the SDK build.
 
 <!--CRASHPAD--
 ### Crashpad
