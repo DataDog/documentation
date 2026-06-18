@@ -1370,7 +1370,7 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 ### `get_datadog_code_coverage_pr_summary`
 *Toolset: **software-delivery***\
 *Permissions Required: `Code Coverage read`*\
-Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service/codeowner breakdowns.
+Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
 
 - Show me the code coverage for PR #123 in `github.com/my-org/my-repo`.
 - What's the patch coverage for pull request #456 in `github.com/my-org/my-repo`?
@@ -1382,7 +1382,7 @@ Fetches per-file code coverage line data for a repository commit, branch, or pul
 
 - Show me per-file coverage for PR #123 in `github.com/my-org/my-repo`.
 - Get changed-file coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
-- Show coverage details filtered by codeowner `@my-org/my-team` for the `main` branch of `github.com/my-org/my-repo`.
+- Show coverage for the `main` branch of `github.com/my-org/my-repo`, filtered by codeowner `@my-org/my-team`.`
 
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
