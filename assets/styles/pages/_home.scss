@@ -1,10 +1,4 @@
 .kind-home {
-    background:
-        linear-gradient(180deg, #ffffff 0%, #ffffff 25%, rgba(255, 255, 255, 0) 90%),
-        linear-gradient(45deg, #f1d4c0 0%, #f8e8d8 20%, #fefcfa 40%, #e8d4ee 70%, #d6c0e2 100%);
-    background-attachment: fixed;
-    background-size: 100% 100%;
-
     .home-hero {
         background: linear-gradient(127.95deg, #b025b5 0%, #3923ae 100%);
         background-size: cover;
@@ -28,13 +22,13 @@
     }
 
     .guides {
-        margin: -60px auto 30px auto;
+        margin: -60px auto 0 auto;
         background-color: white;
         border-radius: 3px;
         box-shadow: 0px 1px 1px rgba(30, 5, 36, 0.16), 0px 1px 4px rgba(30, 5, 36, 0.24);
         position: relative;
         @media (min-width: 768px) {
-            margin: -60px auto 50px auto;
+            margin: -60px auto 0 auto;
         }
         @media (min-width: 1200px) {
             max-width: 1000px;
@@ -137,8 +131,80 @@
 
 }
 
+// Wraps everything below .home-hero (guides + products-browse).
+// Owns the white + radial-blob background so it stretches continuously
+// from the bottom of the hero down through the products section,
+// eliminating any body-white stripe between sections at any viewport.
+.home-content {
+    position: relative;
+
+    &__blobs {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    &__blob {
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    // Concept 2 blob configuration from docs-site-prototype (App.tsx CONCEPT_2_BLOBS),
+    // rescaled so blob-to-wrapper proportions match the prototype's blob-to-page
+    // proportions. Centers land in the lower (products) portion; their large
+    // radii bleed warmth upward through the cards into the heading area.
+    &__blob--1 {
+        left: -46.6%; top: 37%;
+        width: 193.2%; height: 95%;
+        opacity: 0.22;
+        background: radial-gradient(ellipse at center,
+            #F5D0E0 0%, rgba(245, 208, 224, 0.4) 25%,
+            rgba(245, 208, 224, 0.13) 55%, transparent 80%);
+    }
+
+    &__blob--2 {
+        left: -65.8%; top: 42%;
+        width: 183.6%; height: 79%;
+        opacity: 0.2;
+        background: radial-gradient(ellipse at center,
+            #FBCFE8 0%, rgba(251, 207, 232, 0.4) 25%,
+            rgba(251, 207, 232, 0.13) 55%, transparent 80%);
+    }
+
+    &__blob--3 {
+        left: -14.4%; top: 43%;
+        width: 178.8%; height: 79%;
+        opacity: 0.16;
+        background: radial-gradient(ellipse at center,
+            #DDD6FE 0%, rgba(221, 214, 254, 0.4) 25%,
+            rgba(221, 214, 254, 0.13) 55%, transparent 80%);
+    }
+
+    &__blob--4 {
+        left: -28%; top: -41%;
+        width: 72%; height: 211%;
+        opacity: 0.14;
+        background: radial-gradient(ellipse at center,
+            #FB923C 0%, rgba(251, 146, 60, 0.4) 25%,
+            rgba(251, 146, 60, 0.13) 55%, transparent 80%);
+    }
+
+    &__blob--5 {
+        left: 56%; top: -41%;
+        width: 72%; height: 211%;
+        opacity: 0.13;
+        background: radial-gradient(ellipse at center,
+            #A78BFA 0%, rgba(167, 139, 250, 0.4) 25%,
+            rgba(167, 139, 250, 0.13) 55%, transparent 80%);
+    }
+}
+
 .products-browse {
-    padding: 0 0 120px;
+    position: relative;
+    z-index: 1;
+    padding: 64px 0 120px;
 
     &__inner {
         max-width: 1200px;
@@ -272,12 +338,18 @@ $product-collapse-duration: 300ms;
         transform: translateY(2px);
     }
 
+    // Glass-card styling pulled from docs-site-prototype HoverCard + CONCEPT_2_DESIGN:
+    //   cardOpacity: 55, cardBorder: 85, cardBlur: 24, cardRadius: 8, cardPadding: 32,
+    //   shadowY: 4, shadowBlur: 8, shadowSpread: -4, shadowOpacity: 5
     &__card {
         height: 100%;
-        background: white;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(0, 0, 0, 0.068);
         border-radius: 8px;
-        padding: 28px 32px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(28, 43, 52, 0.04);
+        padding: 32px;
+        box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.05);
     }
 
     &__subheaders {
