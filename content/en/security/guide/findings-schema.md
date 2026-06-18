@@ -5635,7 +5635,7 @@ Evidence used to determine whether the function is reachable.
     <tr>
       <td><code>unreachable_at</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.unreachable_at</code><br>Timestamp in milliseconds (UTC) at which the finding will transition to unreachable if the vulnerable function has not been called.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.unreachable_at</code><br>Timestamp in milliseconds (UTC) at which the finding transitions to an unreachable state if the vulnerable function is not called.</td>
     </tr>
   </tbody>
 </table>
