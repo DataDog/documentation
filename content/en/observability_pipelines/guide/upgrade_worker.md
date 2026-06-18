@@ -127,7 +127,7 @@ Worker version 2.15.1 gives you access to the following:
 
 #### New features
 
-- The following VRL functions are now available for the Custom Processor: `to_entries`, `from_entries`, and `with_entries` for converting between objects and arrays of key-value pairs (jq-style).
+- The following VRL functions are now available for the Custom Processor: `to_entries` and `from_entries` for converting between objects and arrays of key-value pairs (jq-style).
 
 #### Enhancements
 
