@@ -51,7 +51,7 @@ If data is being sent, you should see network requests targeting `api/v2/rum` (t
 
 {% img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="RUM requests to Datadog intake" /%}
 
-After the data reaches the intake, it is available in the Datadog UI within approximately 1 minute 30 seconds at p99.
+After the data reaches the intake, it is typically available in the Datadog UI within a few minutes.
 
 ## RUM cookies
 
