@@ -259,7 +259,7 @@ To use the example above:
 - Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
 - Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
 - Replace `<DESTINATION_BUCKET_REGION>` with the AWS region of the destination bucket.
-- Replace `<DESTINATION_PREFIX>` with the prefix where your inventory files are written. This must match the destination prefix in your S3 Inventory configuration. If left empty, the prefix defaults to `datadog-inventories`. Enter the prefix without a leading slash, for example `datadog-inventories`. A trailing slash is optional and handled automatically. Don't add a leading slash or repeat the slash, which creates an invalid path and prevents Datadog from finding your inventory files.
+- Replace `<DESTINATION_PREFIX>` with the prefix where your inventory files are written. This must match the destination prefix in your S3 Inventory configuration. If left empty, the prefix defaults to `datadog-inventories`. Enter the prefix with a trailing slash and no leading slash, for example `datadog-inventories/`. Don't add a leading slash or repeat the slash, which creates an invalid path and prevents Datadog from finding your inventory files.
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
 
