@@ -1,4 +1,5 @@
 ---
+id: csrf
 title: cross-site request forgery (CSRF)
 synonyms:
   - XSRF

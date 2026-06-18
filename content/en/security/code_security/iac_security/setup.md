@@ -9,15 +9,15 @@ further_reading:
   - link: "/security/code_security/iac_security"
     tag: "Documentation"
     text: "IaC Security"
-  - link: "/security/code_security/iac_security/exclusions"
+  - link: "/security/code_security/iac_security/configuration"
     tag: "Documentation"
-    text: "Configure IaC Security Exclusions"
+    text: "Configure IaC Security"
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
 ---
 
-Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security. IaC Security supports Terraform and Kubernetes configurations stored in GitHub, GitLab, or Azure DevOps repositories.
+Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security. IaC Security supports multiple IaC configurations stored in GitHub, GitLab, or Azure DevOps repositories.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}

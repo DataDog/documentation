@@ -20,7 +20,7 @@ The NetFlow view in Network Device Monitoring provides visibility into network t
 
 The NetFlow view displays traffic metrics aggregated by device and interface. Use it to identify which devices or interfaces are consuming the most bandwidth, generating the most packets, or contributing to traffic spikes.
 
-{{< img src="network_device_monitoring/netflow/netflow_home_2.png" alt="The NetFlow Monitoring page containing a collapsible legend for traffic volume, device health, flows and more." style="width:100%;" >}}
+{{< img src="network_device_monitoring/netflow/netflow.png" alt="The NetFlow Monitoring page containing a collapsible legend for traffic volume, device health, flows and more." style="width:100%;" >}}
 
 ## Side Navigation
 
@@ -87,13 +87,19 @@ Datadog enriches IPs with public cloud provider service and region for IPv4 addr
 
 Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443). 
 
-#### Custom port enrichment
+### Custom port enrichment
 
 You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
 From the **Configuration** tab in NetFlow, click **+ Add Enrichment** to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
+
+### Custom IP enrichment
+
+You can also add your own custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+
+From the [**Enrichment** settings page][10], click **+ Add Enrichment** to add mappings manually or upload a CSV file to add mappings in bulk.
 
 ### Reverse DNS private IP enrichment
 
@@ -228,6 +234,20 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
 
+## Conversation stitching
+
+By default, NetFlow records separate unidirectional flows for each direction of traffic between two endpoints (A → B and B → A). Conversation stitching combines these into a single bidirectional record, giving you a complete view of the total traffic exchanged between two endpoints (A ↔ B).
+
+With conversation stitching, you can:
+
+- See total traffic exchanged between two endpoints as one conversation instead of separate directional flows
+- Identify true initiators and responders so that source and destination widgets reflect accurate roles
+- Remove noise where servers incorrectly appear as top sources
+
+To toggle between stitched (bidirectional) and unstitched (unidirectional) views, navigate to any endpoint-based NetFlow view and use the **Bidirectional** toggle under the time picker.
+
+{{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="Conversation stitching toggle in the NetFlow view" width="100%" >}}
+
 ## Sampling rate
 
 NetFlow's sampling rate is taken into account in the computation of bytes and packets by default. The displayed values for bytes and packets are computed with the sampling rate applied.
@@ -240,6 +260,56 @@ To visualize the raw bytes/packets (sampled) sent by your devices, you can query
 NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention.
 
 <div class="alert alert-warning">To retain NetFlow data for longer periods of time, contact your account representative.</div>
+
+## Limit flow volume per flush interval
+
+To control NetFlow volume and associated costs, configure the Agent to cap the number of flow records submitted per flush interval. The flush interval is the period during which flows are aggregated before being forwarded to Datadog.
+
+When this limit is enabled, the Agent retains only the **top flows by byte count** up to the configured maximum, and drops lower-volume flows for that flush interval.
+
+### Configuration
+
+**Note**: Requires Agent version `7.75.1` or later.
+
+Configure the following in your `datadog.yaml`:
+
+```yaml
+network_devices:
+  netflow:
+    enabled: true
+    aggregator_max_flows_per_flush_interval: 10000
+```
+
+With this configuration, the Agent submits at most 10,000 NetFlow records per flush interval (5 minutes by default). The Agent prioritizes the highest-volume flows and drops the rest.
+
+### Estimating daily volume
+
+Your approximate daily maximum flow count is:
+
+`max_flows_per_flush_interval * (minutes_per_day / flush_interval_minutes)`
+
+For example, with `10,000` flows per flush and a 5-minute flush interval:
+
+`10,000 * (1440 / 5) = 2,880,000 flows/day`
+
+### Expected behavior
+
+- **Top talkers are prioritized:** This is best for workflows focused on high-volume traffic (for example, bandwidth drivers and noisy links).
+- **Reduced visibility for low-volume flows:** Lower-traffic source/destination pairs may not appear when the cap is reached.
+- **Per-Agent behavior:** The limit is enforced on each Agent independently. If multiple Agents see traffic for the same conversations, they are not globally aggregated before truncation.
+
+### Monitoring truncation
+
+When flow limiting is enabled, the Agent emits metrics you can use to understand how much data is being kept versus dropped:
+
+- `ndm.flow_truncation.flows_total`
+- `ndm.flow_truncation.flows_kept`
+- `ndm.flow_truncation.flows_dropped`
+- `ndm.flow_truncation.keep_ratio`
+- `ndm.flow_truncation.threshold_value`
+- `ndm.flow_truncation.runtime_ms`
+
+Use these metrics to validate your chosen cap and to detect when truncation is occurring frequently (which may indicate you should adjust the cap or the flush interval).
 
 ## Troubleshooting
 
@@ -300,3 +370,4 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
 [8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
 [9]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
+[10]: https://app.datadoghq.com/devices/settings/enrichment/ip

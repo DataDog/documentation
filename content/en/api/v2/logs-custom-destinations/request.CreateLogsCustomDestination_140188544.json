@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": false,
+      "forward_tags": false,
+      "forwarder_destination": {
+        "access_token": "my-access-token",
+        "endpoint": "https://example.com",
+        "type": "splunk_hec",
+        "sourcetype": "my-sourcetype"
+      },
+      "name": "Nginx logs",
+      "query": "source:nginx"
+    },
+    "type": "custom_destination"
+  }
+}

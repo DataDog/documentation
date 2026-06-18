@@ -58,7 +58,7 @@ The enablement method depends on your tracer version, see the table below for de
 |---|---|---|
 | **How to Enable** | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.24.0<br>[PHP][10] ≥ 1.5.0<br>[Go][22] ≥ 2.2.3 (or 1.74.6) |
+| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.29.0<br>[PHP][10] ≥ 1.5.0<br>[Go][22] ≥ 2.2.3 (or 1.74.6) |
 
 To enable Live Debugger in-app, navigate to the Live Debugger **Settings** page, select the desired service, and toggle
 it to **Enabled**.
@@ -67,7 +67,16 @@ it to **Enabled**.
 
 If in-app enablement isn't available, follow the instructions below for your target language:
 
-{{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/go" src="integrations_logos/go-metro.png" alt="Go" >}}
+{{< /card-grid >}}
 
 <div class="alert alert-info">
 <b>Why DI instructions?</b>
@@ -142,6 +151,10 @@ Live Debugger data might contain sensitive information, especially when using th
 1. Use the built-in [sensitive data scrubbing][1] mechanisms.
 2. Use [Sensitive Data Scanner][17] to identify and redact sensitive information based on regular expressions.
 
+### Debug with Bits
+
+[Debug with Bits][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
+
 ## Impact on performance and billing
 
 Enabling Live Debugger on a service does not trigger data capture or impact performance. Data capture only occurs when there are active Debug Sessions on that service.
@@ -185,3 +198,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
 [22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[23]: /tracing/live_debugger/debug-with-bits/

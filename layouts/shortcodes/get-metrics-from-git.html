@@ -11,6 +11,7 @@
   {{- if in $exceptions $int_name -}}
     {{- $data := index .Site.Data (print $int_name "_metadata") -}}
     {{- if $data -}}
+      <div class="metrics-table-wrapper">
       <table>
         {{- range $data -}}
           {{- $metric := . -}}
@@ -33,6 +34,7 @@
           {{- end -}}
         {{- end -}}
       </table>
+      </div>
     {{- else -}}
       {{ warnf "%s_metadata.json datafile not found for %s integration." $int_name $int_name }}
     {{- end -}}
@@ -55,11 +57,13 @@
       {{- if not $matches -}}
         {{ warnf "No ### Metrics section found in '%s' integration documentation (get-metrics-from-git shortcode)." $int_name }}
       {{- else -}}
+        <div class="metrics-table-wrapper">
         {{- range $matches -}}
           {{- $content := strings.TrimPrefix "### Metrics\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
           {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
           {{- $content | markdownify -}}
         {{- end -}}
+        </div>
       {{- end -}}
     {{- end -}}
   {{- end -}}

@@ -37,8 +37,8 @@ Datadog RUM supports profiling for browser, iOS, and Android applications. Use p
 Browser Profiling is in Preview.
 {% /callout %}
 
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" 
-alt="Browser profiling example when analyzing an event sample." 
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png" 
+alt="Browser profiling tab in the Sessions Explorer." 
 style="width:100%;" /%}
 
 Browser profiling provides visibility into how your application behaves in your users' browsers, helping you understand root causes behind unresponsive applications at page load or during the page life cycle. Use profiling data alongside RUM insights to identify which code executes during a [Long Animation Frame (LoAF)][1] and how JavaScript execution and rendering tasks impact user-perceived performance.
@@ -57,7 +57,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 
 ### Step 2 - Configure the profiling sampling rate
 
-1. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 sessions).
+1. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 ingested sessions).
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -83,7 +83,11 @@ To start collecting data, set up [RUM Browser Monitoring][2].
         });
     ```
 
-3. Set up Cross-Origin Resource Sharing (CORS) if needed.
+3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session will receive profiling data.
+
+    If you use a [proxy][13] or [CSP][14], you must also allow the `quota.` subdomain of your site's standard intake origin (for example, `https://quota.browser-intake-datadoghq.com` for US1, serving the `/api/v2/profiling/quota` endpoint). See the full list of quota endpoints per site in the [Supported endpoints][15] section, and refer to the [proxy setup documentation][13] for details on routing subdomain-specific requests.
+
+4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
       This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
     
@@ -101,7 +105,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
        });
        ```
 
-{% collapse-content title="Browser profiling and CORS" %}
+{% collapse-content title="Browser profiling and CORS" id="cors"%}
 
 #### Requirements for Cross-Origin Scripts (CORS)
 
@@ -157,15 +161,23 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_action_panel.png" alt="Browser profiling tab in the Action panel." style="width:100%;" /%}
 
 ### Within the Profiling page
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience.mp4" alt="Browser profiling event waterfall example within the Optimization page." video="true" style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience.png" alt="Browser profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found thorugh the top bar navigation, lets you analyze profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Focus on views**: Choose the views you'd like to analyze.
-2. **Select a measurement**: Pick a Core Web Vital, custom vital, or RUM action to dive into.
-3. **Refine your selection**: Narrow to the most relevant slice of data by percentile or time range so you focus on the worst-performing or most critical segment.
-4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first.
-5. **View the flame graph**: Explore the call hierarchy to see how those functions relate and where time is spent across the stack.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_1.png" alt="Step 1 of the browser profiling aggregate experience showing which views to select." style="width:100%;" /%}
+
+2. **Select a measurement**: Pick a Core Web Vital, custom vital, or RUM action to dive into. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_2.png" alt="Step 2 of the browser profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
+
+3. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_3.png" alt="Step 3 of the browser profiling aggregate experience showing how to compare." style="width:100%;" /%}
+
+4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or if you chose to compare see the differences between group A and B.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the browser profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the browser profiling aggregate experience showing a flamegraph and top methods list." style="width:100%;" /%}
+
 
 ### Within the Optimization page
 
@@ -251,6 +263,8 @@ The [ProfilingManager API][7] also supports disabling rate limiting during debug
 
 ## Explore profiling data
 
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+
 ### During the time to initial display
 
 Android application launch profiling data is attached to the [time to initial display][8] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
@@ -321,6 +335,8 @@ If no value is specified, the default `applicationLaunchSampleRate` is 5 percent
 
 ## Explore profiling data
 
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+
 ### During the time to initial display
 
 iOS application launch profiling data is attached to the [time to initial display][12] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
@@ -346,3 +362,6 @@ Use the **flame graph** to identify which functions consume the most Wall time d
 [10]: /real_user_monitoring/rum_without_limits/ 
 [11]: /real_user_monitoring/application_monitoring/ios
 [12]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
+[13]: /real_user_monitoring/guide/proxy-rum-data
+[14]: /integrations/content_security_policy_logs
+[15]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

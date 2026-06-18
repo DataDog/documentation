@@ -1,4 +1,5 @@
 ---
+id: horizontalpodautoscaler
 core_product:
 - monitorización de la infraestructura
 title: Horizontal Pod Autoscaler (HPA)

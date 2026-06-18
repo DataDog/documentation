@@ -8,7 +8,7 @@ further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Learn how to setup APM tracing with your application'
-    - link: 'tracing/software_catalog/'
+    - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
       text: 'Discover and catalog the services reporting to Datadog'
     - link: 'tracing/services/service_page'
@@ -137,9 +137,9 @@ In most cases, trace metrics are calculated based on all application traffic. Ho
 
 ### Application-side sampling 
 
-Some tracing libraries support application-side sampling, which reduces the number of spans before they are sent to the Datadog Agent. For example, the Ruby tracing library offers application-side sampling to lower performance overhead. However, this can affect trace metrics, as the Datadog Agent needs all spans to calculate accurate metrics. 
+Some SDKs support application-side sampling, which reduces the number of spans before they are sent to the Datadog Agent. For example, the Ruby SDK offers application-side sampling to lower performance overhead. However, this can affect trace metrics, as the Datadog Agent needs all spans to calculate accurate metrics. 
 
-Very few tracing libraries support this setting, and using it is generally not recommended.
+Very few SDKs support this setting, and using it is generally not recommended.
 
 ### OpenTelemetry sampling
 
@@ -161,6 +161,6 @@ X-Ray spans are sampled before they are sent to Datadog, which means trace metri
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/software_catalog/#services-types
+[8]: /internal_developer_portal/catalog/#service-types
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

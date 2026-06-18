@@ -4,9 +4,9 @@ aliases:
 - /opentelemetry/guide/otel_demo_to_datadog
 - /opentelemetry/otel_demo_to_datadog
 further_reading:
-- link: "/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
-  text: "Software Catalog"
+  text: "Catalog"
 - link: "/tracing/trace_explorer/"
   tag: "Documentation"
   text: "Trace Explorer"
@@ -69,7 +69,7 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 To send the demo's telemetry data to Datadog you need to add the following components to the OpenTelemetry Collector configuration:
 
-- `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
+- `Resource Processor` is an `optional` but recommended component used to set the `deployment.environment.name` resource attribute, which Datadog maps to the `env` tag.
 - `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
 - `Datadog Exporter` is responsible for exporting Traces, Metrics and Logs to Datadog.
 - `Datadog Extension` is an `optional` component which allows you to view OpenTelemetry Collector configuration within infrastructure monitoring. (Read more at [Datadog Extension][13]).
@@ -137,14 +137,16 @@ Complete the following steps to configure these components.
       extensions: [datadog/extension]
       pipelines:
         traces:
-          processors: [memory_limiter, resource, resourcedetection, transform]
-          exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
+          receivers: [otlp]
+          processors: [resourcedetection, memory_limiter, resource, transform/sanitize_spans]
+          exporters: [otlp_grpc/jaeger, debug, spanmetrics, datadog, datadog/connector]
         metrics:
           receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
-          processors: [memory_limiter, resource, resourcedetection, transform]
-          exporters: [otlphttp/prometheus, debug, datadog]
+          processors: [resourcedetection, memory_limiter, resource]
+          exporters: [otlp_http/prometheus, debug, datadog]
         logs:
-          processors: [memory_limiter, resource, resourcedetection, transform]
+          receivers: [otlp]
+          processors: [resourcedetection, memory_limiter, resource]
           exporters: [opensearch, debug, datadog]
     ```
 
@@ -314,13 +316,13 @@ documentation in the [language feature reference table][10].
 When the OTel Demo is running, the built-in load generator simulates traffic in the application.
 After a couple of seconds you can see data arriving in Datadog.
 
-### Software Catalog
+### Catalog
 
 View all services that are part of the OTel Demo:
 
-1. Go to [**APM** > **Software Catalog**][11].
+1. Go to [**APM** > **Catalog**][11].
 
-{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Software Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
 2. Select **Map** to see how the services are connected. Change the **Map layout** to **Cluster** or **Flow** to view the map in different modes.
 

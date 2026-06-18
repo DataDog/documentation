@@ -28,6 +28,8 @@ To create a PR Gates rule in Datadog:
    - Software Composition Analysis (SCA)
    - Code Coverage
    - Infrastructure as Code Scanning (IaC)
+   - Secret Scanning
+   - New Flaky Tests
 
 1. Under **Define condition**, set the conditions that will cause the rule to fail. Each rule type has its own condition options, and you can use the existing default condition settings when you select a rule type.
 
@@ -37,7 +39,7 @@ To create a PR Gates rule in Datadog:
 
    The following example illustrates a Static Code Analysis (SAST) rule that fails when a pull request introduces at least one Static Code Analysis code vulnerability violation with at least `Critical` severity. The rule evaluates all repositories configured for Static Code Analysis:
 
-   {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Code Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
+   {{< img src="pr_gates/setup/static_analysis_4.png" alt="A Static Code Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
 1. Under **Preview checks**, select your source code management provider to preview the status check to be added to pull requests. To set the check so it blocks PRs when it fails, follow your provider's instructions for making a status check _required_:
 

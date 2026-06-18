@@ -1,4 +1,5 @@
 ---
+id: mute
 core_product:
 - alerts
 title: mise en sourdine

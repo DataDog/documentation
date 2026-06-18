@@ -57,9 +57,13 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.slack_channel_name}}` | The name of the incident's Slack channel. |
 | `{{incident.slack_channel_url}}` | The URL of the incident's Slack channel. |
 | `{{incident.slack_channel_link}}` | A Markdown link to the incident's Slack channel. |
+| `{{incident.slack_channel_id}}` | The ID of the incident's Slack channel. |
 | `{{incident.ms_teams_channel_name}}` | The name of the incident's Microsoft Teams channel. |
 | `{{incident.ms_teams_channel_url}}` | The URL of the incident's Microsoft Teams channel. |
 | `{{incident.ms_teams_channel_link}}` | A Markdown link to the incident's Microsoft Teams channel. |
+| `{{incident.ms_teams_channel_id}}` | The ID of the incident's Microsoft Teams channel. |
+| `{{incident.ms_teams_meeting_link}}` | A Markdown link to the incident's Microsoft Teams meeting. The display text is `Microsoft Teams Meeting {id}` |
+| `{{incident.ms_teams_meeting_id}}` | The ID of the incident's Microsoft Teams meeting. |
 | `{{incident.zoom_id}}` | The Zoom meeting ID. |
 | `{{incident.zoom_join_url}}` | The Zoom join URL. |
 | `{{incident.zoom_password}}` | The Zoom meeting password, if one exists. |
@@ -75,7 +79,7 @@ The following variables work only in postmortem templates. They are not availabl
 | `{{incident.timeline}}` | Copies all timeline events from the incident into the postmortem when used in a postmortem template. |
 
 ## AI variables
-{{< site-region region="gov" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 AI variables are available in notification and postmortem templates. Your organization must have AI enabled.
 

@@ -1,4 +1,5 @@
 ---
+id: scatter_plot
 title: scatter plot
 core_product:
   - dashboards

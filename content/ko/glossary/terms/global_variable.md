@@ -1,4 +1,5 @@
 ---
+id: global_variable
 core_product:
 - synthetic monitoring
 title: 전역 변수

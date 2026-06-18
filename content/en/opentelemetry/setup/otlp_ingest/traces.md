@@ -15,7 +15,6 @@ further_reading:
   - link: "https://opentelemetry.io/docs/reference/specification/protocol/exporter/ "
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
-site_support_id: otlp_agentless
 ---
 {{< callout header="false" btn_hidden="true">}}
   The Datadog OTLP traces intake endpoint is in Preview. To request access, contact your Customer Success Manager.
@@ -43,6 +42,8 @@ To export OTLP data to the Datadog OTLP traces intake endpoint:
 
 To send OTLP data to the Datadog OTLP traces intake endpoint, you need to use the OTLP HTTP Protobuf exporter. The process differs depending on whether you are using automatic or manual instrumentation for OpenTelemetry.
 
+[Trace metrics][7] are not computed by default for traces sent directly to the Datadog OTLP traces intake endpoint. The following examples include `compute_stats=true` to enable trace metrics.
+
 #### Automatic instrumentation
 
 If you are using [OpenTelemetry automatic instrumentation][3], set the following environment variables:
@@ -50,7 +51,7 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE},compute_stats=true"
 ```
 
 <div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
@@ -75,6 +76,7 @@ const exporter = new OTLPTraceExporter({
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
     'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
+    'compute_stats': 'true',
   },
 });
 ```
@@ -94,6 +96,7 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
     .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
+    .addHeader("compute_stats", "true")
     .build();
 ```
 
@@ -116,6 +119,7 @@ traceExporter, err := otlptracehttp.New(
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
 			"dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
+			"compute_stats": "true",
 		}),
 )
 ```
@@ -135,7 +139,8 @@ exporter = OTLPSpanExporter(
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
+        "dd-otlp-source": "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
+        "compute_stats": "true",
     },
 )
 ```
@@ -181,7 +186,8 @@ exporters:
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-span-mapping: "{span_name_as_resource_name: false}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
+      dd-otlp-source: "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
+      compute_stats: "true"
 ...
 
 service:
@@ -267,3 +273,4 @@ This ensures that the span operation names are consistent across the Datadog OTL
 [4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
 [5]: https://github.com/open-telemetry/opentelemetry-go/issues/3706
 [6]: https://github.com/open-telemetry/opentelemetry-specification/issues/3203
+[7]: /tracing/metrics/

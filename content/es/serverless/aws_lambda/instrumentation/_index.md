@@ -33,7 +33,14 @@ Para los tiempos de ejecución de Node.js y Python, puedes utilizar la [instrume
 
 Para otros tiempos de ejecución Lambda (o para instrumentar tus funciones Node.js o Python sin instrumentación remota) consulta las instrucciones detalladas de instrumentación:
 
-{{< partial name="serverless/getting-started-languages.html" >}}
+{{< card-grid card_width="30%" image_width="200" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 ## Configuraciones avanzadas
 

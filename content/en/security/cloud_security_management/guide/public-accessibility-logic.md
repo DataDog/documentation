@@ -16,7 +16,7 @@ Datadog uses a graph processing framework to map relationships between cloud res
 The following diagrams show how related resources are used to determine whether other resources are publicly accessible. For example, an AWS CloudTrail Trail stored in a public Amazon S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Misconfigurations resource relationships graph.
 
 
-**Note**: Not all resources with the Publicly Accessible attribute are shown in these diagrams.
+<div class="alert alert-info">Not all resources with the Publicly Accessible attribute are shown in these diagrams.</div>
 
 ### AWS
 
@@ -36,23 +36,23 @@ For more information on AWS network reachability, see the [AWS documentation][34
 
 ### Amazon S3 bucket
 
-An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
+An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible in either of the following cases:
 
-* _Public by bucket policy:_
+* **Public by bucket policy** if all of the following are true:
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|The bucket policy allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
-| None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `restrict_public_buckets` set to `true`. | None of the buckets or accounts explicitly block public access, meaning that the public bucket policy takes effect. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | The bucket policy allows risky S3 actions (read, write, delete, or management permissions) unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. Wildcard actions such as `s3:*` or `s3:Put*` are also matched. |
+  | None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `restrict_public_buckets` set to `true`. | None of the buckets or accounts explicitly block public access, meaning that the public bucket policy takes effect. |
 
 ***OR***
 
-* _Public by Access Control List (ACL):_
+* **Public by Access Control List (ACL)** if all of the following are true:
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|The bucket has ACL grants that allow insecure permissions to public grantees. |The bucket's ACL grants one or more of the following permissions (`full_control`, `read`, `write`, `write_acp`) to either authenticated users (`http://acs.amazonaws.com/groups/global/authenticatedusers`) or all users (`http://acs.amazonaws.com/groups/global/allusers`). |
-| None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `ignore_public_acls` set to `true`. | None of the buckets or accounts explicitly ignore public ACLs, meaning that the public ACL grants take effect. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | The bucket has ACL grants that allow insecure permissions to public grantees. |The bucket's ACL grants one or more of the following permissions (`full_control`, `read`, `write`, `write_acp`) to either authenticated users (`http://acs.amazonaws.com/groups/global/authenticatedusers`) or all users (`http://acs.amazonaws.com/groups/global/allusers`). |
+  | None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `ignore_public_acls` set to `true`. | None of the buckets or accounts explicitly ignore public ACLs, meaning that the public ACL grants take effect. |
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 
@@ -66,7 +66,7 @@ A [CloudTrail trail][3] (`aws_cloudtrail_trail`) is considered publicly accessib
 
 ### Amazon VPC subnet
 
-A [subnet][4] (`aws_subnet`) is considered public if:
+A [subnet][4] (`aws_subnet`) is considered public if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -77,11 +77,11 @@ See [Subnets for your VPC][8] for the AWS definition of a public subnet.
 
 ### Amazon Redshift cluster
 
-A [Redshift cluster][9] (`aws_redshift_cluster`) is considered publicly accessible if:
+A [Redshift cluster][9] (`aws_redshift_cluster`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|If it has `publicly_accessible` set to `true` in its configuration.|See [Managing clusters in a VPC][10]. |
+|It has `publicly_accessible` set to `true` in its configuration.|See [Managing clusters in a VPC][10]. |
 |It's in a public [VPC][11]. |A public VPC is a VPC with at least one public subnet, connected to one or more network ACLs that have at least one ingress and at least one egress entry that have a CIDR block of `"0.0.0.0/0"`, or an IPv6 CIDR block of `"::/0"`.|
 |It's associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
 |It's connected to one or more [route tables][5] that are connected to an [Internet gateway][6], and that route to a destination CIDR block of `"0.0.0.0/0"`, or an IPv6 CIDR block of `"::/0"`.| The route table attached to this subnet routes egress traffic through an Internet gateway, meaning resources in the subnet can access the public Internet.|
@@ -90,7 +90,7 @@ See [Make a private Amazon Redshift Cluster publicly accessible][13] for more in
 
 ### Amazon RDS DB instance
 
-An [RDS DB instance][14] (`aws_rds_instance`) is considered publicly accessible if:
+An [RDS DB instance][14] (`aws_rds_instance`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -112,7 +112,7 @@ See [Sharing a DB snapshot][17] for more information.
 
 ### Amazon Elastic Load Balancer
 
-An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if:
+An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -123,26 +123,26 @@ See [Create an Application Load Balancer][20] for more information about Interne
 
 ### Amazon EC2 instance
 
-An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
+An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in either of the following cases:
 
-* _"Public subnet"-determined access:_
+* **"Public subnet"-determined access** if all of the following are true:
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|It has one or more [public IP addresses][18].|A public IP address allows your instance to be reached from the internet.|
-|It's in a public [subnet][4].|-|
-|It's associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  |It has one or more [public IP addresses][18].|A public IP address allows your instance to be reached from the internet.|
+  |It's in a public [subnet][4].|-|
+  |It's associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
 
 ***OR***
 
-* _ELB-determined access:_
+* **ELB-determined access** if all of the following are true:
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-| A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`. | This opens the load balancer to incoming traffic from the internet on a specific port. |
-| The load balancer has a listener accepting traffic on port `X`. | A [listener][37] is a process that checks for connection requests using the protocol and port that you configure. |
-| The load balancer has a target group forwarding traffic to some port `Y`. | [Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
-| The EC2 instance is listed as a target of the target group, and has a security group with at least one rule that allows ingress traffic on port `Y` from `0.0.0.0/0`, from the VPC CIDR (for example, `10.0.0.0/8`), or from the load balancer's security group (`SG1`). | Because the instance is registered as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group must allow traffic coming from the load balancer. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`. | This opens the load balancer to incoming traffic from the internet on a specific port. |
+  | The load balancer has a listener accepting traffic on port `X`. | A [listener][37] is a process that checks for connection requests using the protocol and port that you configure. |
+  | The load balancer has a target group forwarding traffic to some port `Y`. | [Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
+  | The EC2 instance is listed as a target of the target group, and has a security group with at least one rule that allows ingress traffic on port `Y` from `0.0.0.0/0`, from the VPC CIDR (for example, `10.0.0.0/8`), or from the load balancer's security group (`SG1`). | Because the instance is registered as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group must allow traffic coming from the load balancer. |
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
@@ -158,7 +158,7 @@ See [Launching your Amazon OpenSearch Service domains within a VPC][24] for more
 
 ### Amazon Machine Images (AMI)
 
-A [Machine Image][25] (`aws_ami`) is considered publicly accessible if:
+A [Machine Image][25] (`aws_ami`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -179,7 +179,7 @@ See [Share an Amazon EBS snapshot][29] for information about public EBS snapshot
 
 ### Amazon EKS clusters
 
-An [EKS cluster][30] (`aws_eks_cluster`) is considered publicly accessible if:
+An [EKS cluster][30] (`aws_eks_cluster`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -212,7 +212,7 @@ See [Best practices for working with AWS Lambda functions][59] for more informat
 
 ### Azure Network Security Group (NSG)
 
-An Azure NSG (`azure_security_group`) grants public access if:
+An Azure NSG (`azure_security_group`) grants public access if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -225,29 +225,29 @@ For details on how Azure NSGs allow and deny Internet access for a resource, see
 
 ### Azure Virtual Machine Instance
 
-A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publicly accessible if:
+A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publicly accessible in either of the following cases:
 
-* _Attached to Network Security Group allowing public access:_
+* **Attached to Network Security Group allowing public access** if all of the following are true:
 
-| Criteria | Explanation |
-|----------|-------------|
-|The virtual machine instance has a public IP address attached to one of its network interfaces. | A public IP is required for Internet access to a virtual machine instance. |
-|The virtual machine instance has a network security group granting public access attached to one of its network interfaces. | To learn more about how a network can grant public access, see [Azure Network Security Group (NSG)](#azure-network-security-group-nsg). |
+  | Criteria | Explanation |
+  |----------|-------------|
+  |The virtual machine instance has a public IP address attached to one of its network interfaces. | A public IP is required for Internet access to a virtual machine instance. |
+  |The virtual machine instance has a network security group granting public access attached to one of its network interfaces. | To learn more about how a network can grant public access, see [Azure Network Security Group (NSG)](#azure-network-security-group-nsg). |
 
 ***OR***
 
-* _Has Public IP with SKU "Basic":_
+* **Has Public IP with SKU "Basic"** if all of the following are true:
 
-| Criteria | Explanation |
-|----------|-------------|
-|The virtual machine instance has a public IP address with SKU Basic attached to its network interface. | A public IP address with SKU basic is open by default (see [Public IP addresses][41]). |
-|The virtual machine instance has no attached network security groups. | If no network security groups are attached, then there are no rules blocking access through the open public IP address. |
+  | Criteria | Explanation |
+  |----------|-------------|
+  |The virtual machine instance has a public IP address with SKU Basic attached to its network interface. | A public IP address with SKU basic is open by default (see [Public IP addresses][41]). |
+  |The virtual machine instance has no attached network security groups. | If no network security groups are attached, then there are no rules blocking access through the open public IP address. |
 
 To learn more about Azure Virtual Machine Instances and public access, see [Associate a public IP address to a virtual machine][42].
 
 ### Azure Storage blob container
 
-A Storage blob container (`azure_storage_blob_container`) is considered publicly accessible if:
+A Storage blob container (`azure_storage_blob_container`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -259,7 +259,7 @@ To learn more about disallowing blob public access on Azure Storage accounts, se
 
 ### Azure Kubernetes Service (AKS) cluster
 
-An [AKS cluster][60] (`azure_aks_cluster`) is considered publicly accessible if:
+An [AKS cluster][60] (`azure_aks_cluster`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -272,7 +272,7 @@ See [AKS best practices][61] for more information on public AKS clusters.
 
 ### Google Cloud Compute firewall
 
-A Compute Firewall (`gcp_compute_firewall`) grants public access if:
+A Compute Firewall (`gcp_compute_firewall`) grants public access if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -283,18 +283,18 @@ For more information about using Compute firewalls, [Choose to allow or disallow
 
 ### Google Cloud Compute instance
 
-A Compute instance (`gcp_compute_instance`) is considered publicly accessible if:
+A Compute instance (`gcp_compute_instance`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
 |The compute instance has a public IP address, meaning at least one of its network interfaces has a public IP address defined in its access configurations, | To learn more about adding an external IP to a compute instance, see [Reserve a static external IP address][48]. |
-|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><p><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance's `service_accounts`.</li><li>Having some `target_tags` that match the compute instance's network tags.</li></ul></p>The rules should grant public access (see [Google Cloud Compute Firewall](#google-cloud-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
+|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance's `service_accounts`.</li><li>Having some `target_tags` that match the compute instance's network tags.</li></ul>The rules should grant public access (see [Google Cloud Compute Firewall](#google-cloud-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
 
 Learn more about how compute firewall rules are used to restrict port ranges for a compute instance [here][50].
 
 ### Google Cloud BigQuery dataset
 
-A BigQuery dataset (`gcp_bigquery_dataset`) is considered publicly accessible if:
+A BigQuery dataset (`gcp_bigquery_dataset`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -305,7 +305,7 @@ Learn more about [BigQuery datasets][53].
 
 ### Google Cloud Storage bucket
 
-A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if:
+A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -317,7 +317,7 @@ Explore more information about making storage buckets public [here][57].
 
 ### Google Cloud Kubernetes Engine clusters
 
-A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publicly accessible if it meets **all** of the following **base criteria** AND **at least one** of the additional conditions listed below:
+A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publicly accessible if it meets **all** of the following **base criteria**, **AND at least one** of the additional conditions listed below:
 
 **Base criteria (all required):**
 
@@ -328,37 +328,37 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 
 **AND at least one of the following conditions:**
 
-* _Authorized networks is disabled:_
+* **Authorized networks is disabled**
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-| [Authorized networks][63] is not enabled. | There are no IP allowlist restrictions on who can access the cluster's control plane, allowing access from any IP address. |
-
-***OR***
-
-* _Unrestricted CIDR block allowed:_
-
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-| The authorized networks configuration includes the `0.0.0.0/0` CIDR block. | This CIDR block allows access from any IP address on the internet. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | [Authorized networks][63] is not enabled. | There are no IP allowlist restrictions on who can access the cluster's control plane, allowing access from any IP address. |
 
 ***OR***
 
-* _Google Cloud external IP addresses added to authorized networks:_
+* **Unrestricted CIDR block allowed**
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-| Google Cloud external IP addresses are added to authorized networks (`gcpPublicCidrsAccessEnabled` is set to `true`). | This allows access from any external IP address assigned to Google Cloud VMs, meaning anyone can create a VM in Google Cloud and access the cluster's control plane. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | The authorized networks configuration includes the `0.0.0.0/0` CIDR block. | This CIDR block allows access from any IP address on the internet. |
 
 ***OR***
 
-* _Broad Google Cloud IP range allowed:_
+* **Google Cloud external IP addresses added to authorized networks**
 
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-| The authorized networks configuration includes the `34.0.0.0/7` CIDR block. | This CIDR range is sometimes used to allow access from Google Cloud IP ranges and is considered publicly accessible. |
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | Google Cloud external IP addresses are added to authorized networks (`gcpPublicCidrsAccessEnabled` is set to `true`). | This allows access from any external IP address assigned to Google Cloud VMs, meaning anyone can create a VM in Google Cloud and access the cluster's control plane. |
 
-**Note**: A cluster with authorized networks enabled (`{"enabled":true}`) but with an empty CIDR blocks list (`{"enabled":true, "cidr_blocks":[]}`) is **not** considered publicly accessible, as it blocks all external access to the control plane.
+***OR***
+
+* **Broad Google Cloud IP range allowed**
+
+  | **Criteria** | **Explanation** |
+  |--------------|-----------------|
+  | The authorized networks configuration includes the `34.0.0.0/7` CIDR block. | This CIDR range is sometimes used to allow access from Google Cloud IP ranges and is considered publicly accessible. |
+
+<div class="alert alert-info">A cluster with authorized networks enabled (<code>{"enabled":true}</code>) but with an empty CIDR blocks list (<code>{"enabled":true, "cidr_blocks":[]}</code>) is <strong>not</strong> considered publicly accessible, as it blocks all external access to the control plane.</div>
 
 ## Further Reading
 

@@ -1,4 +1,5 @@
 ---
+id: sd_wan
 title: software-defined wide area network (SD-WAN)
 core_product:
   - network device monitoring

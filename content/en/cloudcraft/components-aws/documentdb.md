@@ -11,13 +11,13 @@ Use the DocumentDB component to represent DocumentDB clusters from your Amazon W
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Role**: Select the role of the DocumentDB instance. Can be writer or reader.
-- **Instance type**: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: The size of the database cluster. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Storage (GiB)**: Amount of storage provisioned for the cluster, in gibibytes. Only available for the writer role.
-- **Snapshots (GiB)**: Amount of storage provisioned for snapshots, in gibibytes. Only available for the writer role.
-- **IOPS (Millions)**: The monthly I/O limit for the cluster, in the millions. Only available for the writer role.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Role{{< /ui >}}: Select the role of the DocumentDB instance. Can be writer or reader.
+- {{< ui >}}Instance type{{< /ui >}}: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: The size of the database cluster. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Amount of storage provisioned for the cluster, in gibibytes. Only available for the writer role.
+- {{< ui >}}Snapshots (GiB){{< /ui >}}: Amount of storage provisioned for snapshots, in gibibytes. Only available for the writer role.
+- {{< ui >}}IOPS (Millions){{< /ui >}}: The monthly I/O limit for the cluster, in the millions. Only available for the writer role.
 
 ## API
 

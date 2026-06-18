@@ -1,6 +1,6 @@
 ---
 title: Configure Monitors
-description: Describes the monitor creation page.
+description: Learn how to configure and customize monitors using the monitor creation page in Datadog.
 aliases:
   - /monitors/create/configuration
 further_reading:
@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
   tag: "Blog"
   text: "Manage your monitors more efficiently with Datadog Teams"
+- link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
+  tag: "Learning Center"
+  text: "Customize Alert Monitor Notifications"
+
 ---
 
 ## Overview
@@ -40,13 +44,13 @@ As you build or modify your query, the preview graph at the top of the configura
 
 {{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
 
-The Evaluation Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
+The Evaluated Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
 - See historical state transitions (for example, `OK` → `ALERT`).
 - Understand how your monitor would have behaved.
 - Preview who would be notified (including from notification rules)
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, and Deployment monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, Agent Observability, and Deployment monitors.
 
 {{% /tab %}}
 
@@ -87,7 +91,9 @@ The query returns a series of points, but a single value is needed to compare to
 | min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query.* |
 | sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
 
-\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed. For more examples, see the [Monitor aggregators][1] guide.
+\* These descriptions of max and min assume that the monitor alerts when the metric goes _above_ the threshold. For monitors that alert when _below_ the threshold, the max and min behavior is reversed.
+
+<div class="alert alert-info">For a breakdown of how each aggregation method works with examples, see the <a href="/monitors/guide/monitor_aggregators/">Monitor Aggregators guide</a>.</div>
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][2] for details.
 

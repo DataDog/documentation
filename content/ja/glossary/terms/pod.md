@@ -1,4 +1,5 @@
 ---
+id: pod
 core_product:
 - infrastructure monitoring
 title: ポッド

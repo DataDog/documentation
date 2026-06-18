@@ -20,7 +20,7 @@ Suivez les instructions de l'[API How's my SSL?][2] pour vérifier la compatibil
 Les navigateurs modernes prennent en charge la version 1.2 de TLS depuis longtemps. Référez-vous au [tableau de compatibilité][3] du site Can I Use pour vérifier si votre navigateur et la version que vous utilisez sont toujours compatibles.
 ## Prise en charge de l'Agent
 
-### Agent v6 et v7
+### Agent v6 et v7
 
 Toutes les versions de l'Agent v6 et v7 prennent en charge la version 1.2 de TLS.
 

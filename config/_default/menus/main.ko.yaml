@@ -5276,31 +5276,41 @@ menu:
       parent: quality_gates
       identifier: quality_gates_guide
       weight: 4
-    - name: OpenTelemetry
-      url: dora_metrics/
+    - name: Delivery Performance
+      url: delivery_performance/
       pre: ci
       parent: software_delivery_heading
-      identifier: dora_metrics
+      identifier: delivery_performance
       weight: 70000
+    - name: DORA Metrics
+      url: delivery_performance/dora_metrics/
+      parent: delivery_performance
+      identifier: dora_metrics
+      weight: 1
     - name: 설정
-      url: dora_metrics/setup
+      url: delivery_performance/dora_metrics/setup
       parent: dora_metrics
       identifier: dora_metrics_setup
       weight: 1
     - name: Deployment Data Sources
-      url: dora_metrics/setup/deployments
+      url: delivery_performance/dora_metrics/setup/deployments
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_deployments
       weight: 101
     - name: Failure Data Sources
-      url: dora_metrics/setup/failures/
+      url: delivery_performance/dora_metrics/setup/failures/
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_failures
       weight: 102
     - name: Data Collected
-      url: dora_metrics/data_collected/
+      url: delivery_performance/dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
+      weight: 2
+    - name: AI Impact
+      url: delivery_performance/ai_impact/
+      parent: delivery_performance
+      identifier: delivery_performance_ai_impact
       weight: 2
     - name: Feature Flags
       url: feature_flags/
@@ -6177,26 +6187,21 @@ menu:
       parent: security_platform
       identifier: security_access_control
       weight: 8
-    - name: 계정 인수 보호
-      url: security/account_takeover_protection
-      parent: security_platform
-      identifier: security_ato_protection
-      weight: 9
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 9
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 10
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 12
+      weight: 11
     - name: 클라우드 보안 정보와 이벤트 관리(SIEM)
       url: security/cloud_siem/
       pre: siem
@@ -6525,11 +6530,6 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
-    - name: Jira 이슈 생성
-      url: security/cloud_security_management/review_remediate/jira
-      parent: csm_review_remediate
-      identifier: csm_jira
-      weight: 103
     - name: '심각도 점수 '
       url: security/cloud_security_management/severity_scoring/
       parent: csm
@@ -6651,21 +6651,26 @@ menu:
       parent: application_security
       identifier: aws_waf_int
       weight: 8
+    - name: 계정 인수 보호
+      url: security/application_security/account_takeover_protection/
+      parent: application_security
+      identifier: security_ato_protection
+      weight: 9
     - name: API 보안 인벤토리
       url: security/application_security/api-inventory/
       parent: application_security
       identifier: asm_api_security
-      weight: 9
+      weight: 10
     - name: 가이드
       url: security/application_security/guide/
       parent: application_security
       identifier: appsec_guides
-      weight: 10
+      weight: 11
     - name: 트러블슈팅
       url: security/application_security/troubleshooting/
       parent: application_security
       identifier: appsec_troubleshooting
-      weight: 11
+      weight: 12
     - name: 민감한 데이터 스캐너
       url: /security/sensitive_data_scanner/
       pre: sensitive-data-scanner

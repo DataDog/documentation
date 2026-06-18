@@ -117,4 +117,30 @@
             }
         }
     }
+
+    // Enum collapsible styles using native <details>/<summary>
+    .enum-details {
+        display: inline;
+
+        summary {
+            display: inline;
+            cursor: pointer;
+            color: #632CA6;
+            font-size: 14px;
+            list-style: none; // removes default disclosure triangle
+
+            &::-webkit-details-marker {
+                display: none; // hide triangle in webkit browsers
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &:focus {
+                outline: 2px solid #632CA6;
+                outline-offset: 2px;
+            }
+        }
+    }
 }

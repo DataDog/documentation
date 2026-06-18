@@ -12,11 +12,11 @@ You can use the Virtual Machine component to represent and visualize virtual mac
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Platform**: Select the platform for your virtual machine. Supported options are Windows and Linux.
-- **Tier**: Select the service level tier for your virtual machine.
-- **Series**: Select your virtual machine series. This option affects the available instance types.
-- **Instance**: Select an instance type for your virtual machine. Changing the type of instance also changes the hardware details shown in the toolbar to reflect what the hypervisor uses.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Platform{{< /ui >}}: Select the platform for your virtual machine. Supported options are Windows and Linux.
+- {{< ui >}}Tier{{< /ui >}}: Select the service level tier for your virtual machine.
+- {{< ui >}}Series{{< /ui >}}: Select your virtual machine series. This option affects the available instance types.
+- {{< ui >}}Instance{{< /ui >}}: Select an instance type for your virtual machine. Changing the type of instance also changes the hardware details shown in the toolbar to reflect what the hypervisor uses.
 
 ## API
 

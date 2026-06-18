@@ -23,7 +23,7 @@ title: Suivi des erreurs pour les services backend
 
 ## Présentation
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -33,7 +33,7 @@ La solution Error Tracking est disponible pour tous les langages pris en charge
 
 Vous pouvez aussi choisir de voir les extraits de code dans vos stack traces en configurant [lʼintégration GitHub][4].
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="Un extrait de code généré directement dans une stack trace" style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="Un extrait de code généré directement dans une stack trace" style="width:70%;" >}}
 
 Pour commencer à configurer votre référentiel, consultez la [documentation relative à lʼintégration du code source][6].
 

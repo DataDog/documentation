@@ -123,6 +123,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3767278442",
+      "description": "Create a new dashboard with a query_value widget containing a description"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2261785072",
       "description": "Create a new dashboard with a timeseries widget and an overlay request"
     },
@@ -170,6 +175,11 @@
       "group": "dashboards",
       "suffix": "_798168180",
       "description": "Create a new dashboard with apm dependency stats widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2252738813",
+      "description": "Create a new dashboard with apm metrics widget"
     },
     {
       "group": "dashboards",
@@ -238,6 +248,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_732700533",
+      "description": "Create a new dashboard with formulas and functions events query using facet group by"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4018282928",
+      "description": "Create a new dashboard with formulas and functions events query using flat group by fields"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2104498738",
       "description": "Create a new dashboard with formulas and functions scatterplot widget"
     },
@@ -265,6 +285,11 @@
       "group": "dashboards",
       "suffix": "_2823363212",
       "description": "Create a new dashboard with heatmap widget with markers and num_buckets"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2882802132",
+      "description": "Create a new dashboard with hostmap infra widget"
     },
     {
       "group": "dashboards",
@@ -343,6 +368,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2049446128",
+      "description": "Create a new dashboard with point_plot widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1754992756",
       "description": "Create a new dashboard with powerpack widget"
     },
@@ -375,6 +405,21 @@
       "group": "dashboards",
       "suffix": "_2610827685",
       "description": "Create a new dashboard with run-workflow widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2844071429",
+      "description": "Create a new dashboard with sankey widget and RUM data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_258152475",
+      "description": "Create a new dashboard with sankey widget and network data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_373890042",
+      "description": "Create a new dashboard with sankey widget and product analytics data source"
     },
     {
       "group": "dashboards",
@@ -440,6 +485,11 @@
       "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
     },
     {
       "group": "dashboards",
@@ -546,8 +596,8 @@
   "SendPublicDashboardInvitation": [
     {
       "group": "dashboards",
-      "suffix": "",
-      "description": "Send shared dashboard invitation email returns \"OK\" response"
+      "suffix": "_3435926116",
+      "description": "Send shared dashboard invitation email returns OK"
     }
   ],
   "UpdateDashboard": [
@@ -725,6 +775,11 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2599033345",
+      "description": "Create a pipeline with nested pipeline processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_501419705",
       "description": "Create a pipeline with schema processor"
     }
@@ -758,6 +813,11 @@
       "group": "monitors",
       "suffix": "_1303514967",
       "description": "Create a Cost Monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2589528326",
+      "description": "Create a Data Jobs monitor returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -803,6 +863,16 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -893,6 +963,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "_1326388368",
       "description": "Create an SLO correction with rrule returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2888963657",
+      "description": "Create an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "UpdateSLOCorrection": [
@@ -900,9 +975,19 @@
       "group": "service_level_objective_corrections",
       "suffix": "",
       "description": "Update an SLO correction returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2949191256",
+      "description": "Update an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_512760759",
@@ -1002,6 +1087,11 @@
       "group": "synthetics",
       "suffix": "_1072503741",
       "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2547523542",
+      "description": "Create an API test with MCP steps returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

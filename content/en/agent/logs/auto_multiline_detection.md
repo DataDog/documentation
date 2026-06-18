@@ -260,6 +260,8 @@ is automatically converted to:
 
 This allows Datadog to identify the JSON as a structured log and allows its attributes to be automatically queryable.
 
+<div class="alert alert-warning">JSON aggregation runs before <code>log_processing_rules</code> are evaluated. If your <code>log_processing_rules</code> regex patterns rely on spaces after colons (for example, <code>"key": "value"</code>), they will not match on Agent 7.67+. Update your patterns to account for compacted JSON (for example, <code>"key":"value"</code>), or disable JSON aggregation.</div>
+
 You can disable JSON aggregation with:
 
 {{< tabs >}}

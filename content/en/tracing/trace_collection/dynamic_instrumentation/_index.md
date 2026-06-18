@@ -20,7 +20,7 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/software_catalog/"
+- link: "/internal_developer_portal/catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/metrics"
@@ -43,19 +43,12 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.49.0 or higher (7.73.0+ for Go) is installed alongside your service.
+- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service (7.73.0 or higher for Go).
 - [Remote Configuration][2] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
-- For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
-- For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
-- (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
-- (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
-- (Limited Preview) For Go applications, tracing library [`dd-trace-go`][21] >=1.74.6 (major version 1), or >=2.2.3 (major version 2).
-- (Limited Preview) For Go applications, the Agent and your application must run on the same host, with Linux kernel >=5.17.
+- A supported Datadog SDK is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended, [autocomplete and search (in Preview)][17] is enabled.
-- Recommended, [Source Code Integration][7] is set up for your service.
+- Recommended: [Autocomplete and search (in Preview)][17] are enabled.
+- Recommended: [Source Code Integration][7] is set up for your service.
 
 ### Permissions
 
@@ -73,11 +66,11 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 Dynamic Instrumentation creates "dynamic logs" that are sent to Datadog and appear alongside your regular application logs.
 
-If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not filtered:
+If you use [Exclusion filters][9], verify that Dynamic Instrumentation logs are not filtered:
 
 1. Create a logs index and [configure it][10] to the desired retention with **no sampling**.
 2. Set the filter to match on the `source:dd_debugger` tag. All Dynamic Instrumentation logs have this source.
-3. Ensure that the new index takes precedence over any other with filters that match that tag, because the first match wins.
+3. Verify that the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
 ### Enable Dynamic Instrumentation
 
@@ -85,15 +78,23 @@ To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16
 
 For more detailed instructions, select your runtime below:
 
-{{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/dynamic_instrumentation/enabling/go" src="integrations_logos/go-metro.png" alt="Go" >}}
+{{< /card-grid >}}
 
 
 ### Limitations
 
-- Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
-- Full support is available for applications built with Python, Java, .NET, and Node.js.
-- Limited previews are ongoing for applications built with Ruby and PHP.
-- The Java tracer library does not support Kotlin coroutines.
+- Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
+- Not all probe types are supported in every language. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for supported features and limitations.
+- The Java SDK does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
 
@@ -224,22 +225,14 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 
 [1]: /agent/
 [2]: /tracing/guide/remote_config
-[3]: https://github.com/DataDog/dd-trace-java
-[4]: https://github.com/DataDog/dd-trace-py
-[5]: https://github.com/DataDog/dd-trace-dotnet
 [6]: /getting_started/tagging/unified_service_tagging/
 [7]: /integrations/guide/source-code-integration/
 [8]: /account_management/rbac/permissions#apm
 [9]: /logs/log_configuration/indexes/#exclusion-filters
 [10]: /logs/log_configuration/indexes/#add-indexes
-[11]: /dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
 [13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /dynamic_instrumentation/symdb/
-[18]: https://github.com/DataDog/dd-trace-js
-[19]: https://github.com/DataDog/dd-trace-rb
-[20]: https://github.com/DataDog/dd-trace-php
-[21]: https://github.com/DataDog/dd-trace-go

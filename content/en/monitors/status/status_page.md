@@ -17,6 +17,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-status-page/"
   tag: "Blog"
   text: "Quickly get rich, actionable context for alerts with Datadog's new Monitor Status page"
+- link: "https://learn.datadoghq.com/courses/getting-started-monitors"
+  tag: "Learning Center"
+  text: "Getting Started with Monitors"
+
 ---
 
 ## Overview

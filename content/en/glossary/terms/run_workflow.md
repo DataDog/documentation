@@ -1,4 +1,5 @@
 ---
+id: run_workflow
 title: run workflow
 core_product:
   - dashboards

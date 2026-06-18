@@ -1,0 +1,20 @@
+{{- $integration_id := .Page.Params.app_id -}}
+{{- $integration_title := .Page.Title -}}
+{{- $type := .Get "type" | default "url" -}}
+
+{{- with .Get "id" }}{{ $integration_id = . }}{{ end -}}
+{{- with .Get "title" }}{{ $integration_title = . }}{{ end -}}
+
+{{- if not $integration_id -}}
+  {{ errorf "integration-api-key-picker shortcode error: No integration ID found. Set 'app_id' in page frontmatter or pass 'id' param. %s" .Position }}
+{{- end -}}
+
+{{- $tile_url := printf "https://app.datadoghq.com/integrations/%s" $integration_id -}}
+
+<div class="shortcode-wrapper shortcode-integration-api-key-picker">
+{{- if eq $type "api-key" -}}
+  Copy your Datadog API key from the <strong>Configure</strong> tab on the <a href="{{ $tile_url }}">{{ $integration_title }} integration tile</a>.
+{{- else -}}
+  Copy the generated webhook URL from the <strong>Configure</strong> tab on the <a href="{{ $tile_url }}">{{ $integration_title }} integration tile</a>.
+{{- end -}}
+</div>

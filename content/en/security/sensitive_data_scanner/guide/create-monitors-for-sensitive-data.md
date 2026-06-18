@@ -47,7 +47,7 @@ To create a log monitor for sensitive data matches:
 
 1. Navigate to **Monitors > New Monitor > [Logs][2]**.
 2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to all logs that contain sensitive data matches.
-    - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:credit_card` for financial data or `sensitive_data_category:pii` for personally identifiable information (PII).
+    - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:payment_card` for financial data or `sensitive_data_category:pii` for personally identifiable information (PII).
 3. Configure the alert conditions based on your needs:
     - **Threshold**: Set a threshold for the number of matches over a time period (for example, alert when more than 10 sensitive data matches occur within five minutes).
     - **Group by**: Group by `service`, `env`, or `team` to identify which services are logging sensitive data.
@@ -57,9 +57,9 @@ To create a log monitor for sensitive data matches:
     - Recommended remediation steps (for example, "Review application code to remove sensitive data from logs")
     - Links to relevant documentation or runbooks
 
-#### Monitor for credit card data in production logs
+#### Monitor for payment card data in production logs
 
-Use this query to monitor all production logs for credit card matches: `sensitive_data_category:credit_card env:prod`
+Use this query to monitor all production logs for payment card matches: `sensitive_data_category:payment_card env:prod`
 
 If you want to be more specific, you can use individual rule tags: `sensitive_data:visa_credit_card env:prod`
 
@@ -107,13 +107,13 @@ Use this query to monitor for email address detected in RUM events: `sensitive_d
 
 To avoid alert fatigue from false positives, scope your monitors to specific domains relevant to your organization. For example:
 
-- **Financial services**: Use `sensitive_data_category:credit_card` to monitor payment card data.
+- **Financial services**: Use `sensitive_data_category:payment_card` to monitor payment card data.
 - **PII**: Use `sensitive_data_category:pii` to monitor for personally identifiable data.
 - **SaaS applications**: Use `sensitive_data_category:credentials` to monitor API keys and tokens.
 
 ### Combine with service tags
 
-Combine sensitive data tags with service-specific tags to create targeted monitors, for example: `sensitive_data_category:credit_card service:payment-service env:prod`
+Combine sensitive data tags with service-specific tags to create targeted monitors, for example: `sensitive_data_category:payment_card service:payment-service env:prod`
 
 This approach helps you:
 - Reduce noise by focusing on high-risk services
@@ -126,7 +126,7 @@ Start with conservative thresholds and adjust based on your baseline:
 
 1. Monitor sensitive data matches for 1-2 weeks without alerts to establish a baseline.
 2. Set thresholds above your normal baseline to catch anomalies.
-3. For critical data types (for example, credit cards and SSNs), consider setting thresholds lower or alerting on any match.
+3. For critical data types (for example, payment cards and SSNs), consider setting thresholds lower or alerting on any match.
 
 ### Use Case Management to track alert investigations
 
@@ -145,7 +145,5 @@ When a sensitive data monitor triggers, use [Case Management][5] to:
 [3]: https://app.datadoghq.com/monitors/create/apm
 [4]: https://app.datadoghq.com/monitors/create/rum
 [5]: /service_management/case_management/
-[6]: /account_management/rbac/permissions/#monitors
-[7]: /monitors/notify/
 [6]: /account_management/rbac/permissions/#monitors
 [7]: /monitors/notify/

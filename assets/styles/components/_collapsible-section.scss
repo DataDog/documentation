@@ -11,7 +11,6 @@
     align-items: center;
     padding: 8px;
     cursor: pointer;
-    outline: none;
     background-color: #ffffff00;
     border-radius: 7px 7px 7px 7px;
     transition: background-color 0.3s,
@@ -22,18 +21,32 @@
   display: none;
 }
 
+.collapsible-header:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.collapsible-header:focus-visible {
+    outline: 2px solid $ddpurple;
+    outline-offset: -2px;
+}
+
 .collapsible-header:hover {
     background-color: #eae2f8;
 }
 
-.collapsible-section[open] .collapsible-header {
+.collapsible-section[open] > .collapsible-header {
     background-color: #632DA6;
     color: white;
     border-radius: 7px 7px 0 0;
 }
 
-.collapsible-section[open] .header-text-inner {
+.collapsible-section[open] > .collapsible-header .header-text-inner,
+.collapsible-section[open] > .collapsible-header .header-text-inner a {
     color: white;
+}
+
+.collapsible-section[open] > .collapsible-header .header-text-inner a:hover {
+    border-bottom-color: white;
 }
 
 .header-text-inner {
@@ -60,7 +73,7 @@
     fill: currentColor;
 }
 
-.collapsible-section[open] .icon-chevron-right {
+.collapsible-section[open] > .collapsible-header .icon-chevron-right {
     transform: rotate(90deg);
 }
 
@@ -71,4 +84,54 @@
 
 .collapsible-content {
     padding: 16px;
+}
+
+// Registry copy-links
+.registry-config-sections details {
+    position: relative;
+}
+
+.registry-config-sections summary {
+    padding-right: 48px;
+}
+
+details > a.registry-copy-link {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    color: white;
+
+    &:hover, &:focus {
+        opacity: 1;
+    }
+}
+
+a.registry-copy-link {
+    border-bottom: none;
+    margin-left: 10px;
+    position: relative;
+    top: 4px;
+    color: inherit;
+    cursor: pointer;
+    opacity: .5;
+
+    &:focus {
+        opacity: 1;
+    }
+
+    &--copied {
+        color: $ddpurple;
+        opacity: 1;
+    }
+}
+
+// Show link icon on hover of the parent dt
+dt:hover .registry-copy-link,
+summary:hover + .registry-copy-link{
+    opacity: 1;
+}
+
+// Config entry anchors need scroll-margin for sticky header
+dt[id] {
+    scroll-margin-top: 100px;
 }

@@ -2,15 +2,15 @@
 title: HIPAA Compliance
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/hipaa-compliant-log-management/"
-  tag: "Blog"
-  text: "HIPAA-compliant observability and security for health information systems"
 - link: "data_security/logs"
   tag: "Documentation"
   text: "Data Security for Log Management"
 - link: "coterm"
   tag: "Documentation"
   text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
+- link: "https://www.datadoghq.com/blog/hipaa-compliant-log-management/"
+  tag: "Blog"
+  text: "HIPAA-compliant observability and security for health information systems"
 ---
 
 ## Overview

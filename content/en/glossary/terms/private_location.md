@@ -1,4 +1,5 @@
 ---
+id: private_location
 title: private location
 core_product:
   - synthetic monitoring

@@ -41,7 +41,7 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Modify an incident (for example, update severity)
 - Delete an incident
 - Add a comment, graph, or link to an incident timeline
-- Assign a task to a user within an incident (the assignee must have a seat)
+- Assign a task to a user within an incident (the assignee does not need a seat)
 - Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
 In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
@@ -53,6 +53,10 @@ If your organization has committed to the Incident Response SKU, any user who me
 All paid Datadog customers can use Status Pages. Access depends on whether your organization has a committed Incident Management or Incident Response seat:
 - **With at least one committed seat**: Full access, including unlimited pages and custom domains.
 - **Without a committed seat**: Limited to one Status Page and no custom domain support.
+
+<div class="alert alert-info">
+If you are a trialing customer who would like full access during trial period, contact your Datadog sales representative or Customer Success Manager.
+</div>
 
 ## Manage seats
 
@@ -77,14 +81,18 @@ Removing a user's notification preferences does not unassign their seat. If a us
 
 ### Assign seats
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Seat assignment is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it.
 
 To assign a seat:
-1. Go to **Plan & Usage** → **Seat Management**.
-2. Select the relevant product tab: **Incident Management**, **On-Call**, or **Incident Response**.
-3. Click **Assign Seats**.
+1. Go to {{< ui >}}Plan & Usage{{< /ui >}} → {{< ui >}}Seat Management{{< /ui >}}.
+2. Select the relevant product tab: {{< ui >}}Incident Management{{< /ui >}}, {{< ui >}}On-Call{{< /ui >}}, or {{< ui >}}Incident Response{{< /ui >}}.
+3. Click {{< ui >}}Assign Seats{{< /ui >}}.
 4. Search for users by name or email, and select them.
-5. Click **Assign Seats**.
+5. Click {{< ui >}}Assign Seats{{< /ui >}}.
 
 Assigned users immediately appear in the Seats table and can access the product's features. 
 
@@ -92,7 +100,7 @@ Assigned users immediately appear in the Seats table and can access the product'
 
 To remove users and free up seats: 
 1. In the Seats table, check the box next to one or more users.
-2. Click **Unassign Seats**.
+2. Click {{< ui >}}Unassign Seats{{< /ui >}}.
 3. Confirm your selection.
 
 After they are unassigned, the user loses access to features that require a seat. They can still perform the following actions:

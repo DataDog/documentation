@@ -11,12 +11,12 @@ Use the Elasticsearch component to represent Elasticsearch clusters from your Am
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Role**: Select the role of the Elasticsearch instance.
-- **Instance count**: Enter the number of instances for the Elasticsearch cluster.
-- **Instance type**: Select the type of instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: Select the size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Billing option**: The pricing model used for the instance.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Role{{< /ui >}}: Select the role of the Elasticsearch instance.
+- {{< ui >}}Instance count{{< /ui >}}: Enter the number of instances for the Elasticsearch cluster.
+- {{< ui >}}Instance type{{< /ui >}}: Select the type of instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: Select the size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Billing option{{< /ui >}}: The pricing model used for the instance.
 
 ## API
 

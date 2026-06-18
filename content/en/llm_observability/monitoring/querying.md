@@ -1,20 +1,25 @@
 ---
 title: Querying spans and traces
+description: Learn how to query Agent Observability spans and traces in the Trace Explorer, including how to search by attribute, tags, and trace-level properties.
 further_reading:
   - link: "tracing/trace_explorer/query_syntax/"
     tag: "Documentation"
     text: "Trace Explorer Query Syntax"
+  - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+    tag: "Learning Center"
+    text: "Investigate with Agent Observability"
+
 ---
 
 ## Overview
-This page discusses using Datadog's [LLM Observability Trace Explorer][1] to query your LLM application's spans and traces.
+This page discusses using Datadog's [Agent Observability Trace Explorer][1] to query your LLM application's spans and traces.
 
 #### Querying across spans versus traces
-In LLM Observability, a _span_ represents a unit of work representing a single operation in your LLM application. A _trace_ represents the end-to-end operations involved in processing a request in your LLM application, often consisting of one or more nested spans. For more information about this terminology, see [LLM Observability Terms and Concepts][2].
+In Agent Observability, a _span_ represents a unit of work representing a single operation in your LLM application. A _trace_ represents the end-to-end operations involved in processing a request in your LLM application, often consisting of one or more nested spans. For more information about this terminology, see [Agent Observability Terms and Concepts][2].
 
-In the [LLM Observability Trace Explorer][1], choose whether to search across traces or spans:
-- Select **Traces** to find traces where the root span matches your query.
-- Select **Spans** to search across all your spans, including nested child spans.
+In the [Agent Observability Trace Explorer][1], choose whether to search across traces or spans:
+- Select {{< ui >}}Traces{{< /ui >}} to find traces where the root span matches your query.
+- Select {{< ui >}}Spans{{< /ui >}} to search across all your spans, including nested child spans.
 
 Some search terms are only applicable to traces. For examples, see [Trace-level queries](#trace-level-queries).
 
@@ -55,7 +60,7 @@ You can combine multiple search terms using the Boolean operators `AND` (interse
 
 ### Query syntax
 
-The LLM Observability Trace Explorer shares the same query syntax as Datadog's [APM Trace Explorer][6]. For query syntax details, including wildcard search, handling numerical values, escaping special characters, and more, see [Trace Explorer Query Syntax][6].
+The Agent Observability Trace Explorer shares the same query syntax as Datadog's [APM Trace Explorer][6]. For query syntax details, including wildcard search, handling numerical values, escaping special characters, and more, see [Trace Explorer Query Syntax][6].
 
 ## Example queries
 
@@ -70,28 +75,15 @@ The LLM Observability Trace Explorer shares the same query syntax as Datadog's [
 
 ### Evaluation queries
 
-Use the `@evaluations` attribute to find spans or traces by [evaluation][3] result.
+Use the `@evaluation` attribute to find spans or traces by [evaluation][3] result.
 
-#### Custom evaluations
-You can search spans by the results of [custom evaluations][4]. For example, if you have a custom evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluations.custom.user_mood:happy`.
+#### Evaluations
+You can search spans by the results of [evaluations][4]. For example, if you have an evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluation.user_mood.value:happy`.
 
 | Query | Match |
 | ----- | ----- |
-| `@evaluations.custom.user_satisfaction:>5` | Spans or traces that scored higher than 5 according to a custom evaluation called `user_satisfaction` |
-| `@evaluations.custom.user_mood:happy` | Spans or traces that were evaluated as `happy` according to a custom evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
-
-#### Out-of-the-box evaluations
-| Query | Match |
-| ----- | ----- |
-| `@evaluations.failure_to_answer:"failed to answer"` | Spans or traces where the LLM failed to deliver an appropriate response |
-| `@evaluations.hallucination:"hallucination found"` | Spans or traces where a hallucination is detected |
-| `@evaluations.input_sentiment:negative` | Spans or traces with negative input sentiment |
-| `@evaluations.input_toxicity:toxic` | Spans or traces where harmful or inappropriate content is detected in the input |
-| `@evaluations.language_mismatch:mismatched` | Spans or traces where the user's prompt and the LLM's response are in different languages |
-| `@evaluations.output_sentiment:negative` | Spans or traces with negative output sentiment |
-| `@evaluations.output_toxicity:toxic` | Spans or traces where harmful or inappropriate content is detected in the output |
-| `@evaluations.prompt_injection:found` | Spans or traces where prompt injection is detected |
-| `@evaluations.topic_relevancy:irrelevant` | Spans or traces where the prompt input diverges from the LLM application's intended topic |
+| `@evaluation.user_satisfaction.value:>5` | Spans or traces that scored higher than 5 according to an evaluation called `user_satisfaction` |
+| `@evaluation.user_mood.value:happy` | Spans or traces that were evaluated as `happy` according to an evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
 
 ### Metadata queries
 
@@ -118,8 +110,8 @@ To search traces based on attributes of its nested spans, use the `@child` attri
 
 | Query | Match |
 | ----- | ----- |
-| `@child.@evaluations.hallucination:"hallucination found"` | Traces with a hallucinating sub-span |
-| `@child.@meta.span.name:retrieval AND @meta.span. kind:workflow`| Workflow traces that contain a retrieval span |
+| `@child.@evaluation.hallucination.value:"hallucination found"` | Traces with a hallucinating sub-span |
+| `@child.@meta.span.kind:retrieval AND @meta.span.kind:workflow`| Workflow traces that contain a retrieval span |
 
 Use the `@trace` attribute to access trace-level information, such as estimated total cost, number of LLM calls, or number of tools.
 

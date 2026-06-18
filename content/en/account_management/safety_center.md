@@ -9,32 +9,32 @@ further_reading:
     - link: "/account_management/users/"
       tag: "Documentation"
       text: "User management"
-    - link: "/account_management/org_settings/oauth_apps"
+    - link: "/account_management/org_settings/mobile_third_party_access"
       tag: "Documentation"
-      text: "OAuth Apps"
+      text: "Mobile and Third-Party Access"
 ---
 
 ## Overview
-Datadog's Safety Center in **Organization Settings** is a centralized location for security alerts and best practices. [Administrators][1] of an organization can open this page to review recommendations and take action on high priority security warnings and alerts.
+Datadog's Safety Center in {{< ui >}}Organization Settings{{< /ui >}} is a centralized location for security alerts and best practices. [Administrators][1] of an organization can open this page to review recommendations and take action on high priority security warnings and alerts.
 
 {{< img src="account_management/safety_center/overview.png" alt="Safety Center Overview page" style="width:80%;" >}}
 
 ## Security Alerts
-If your organization has a high priority security alert, it appears in the **Security Alerts** section of **Safety Center**. Safety Center supports two types of alerts: leaked [application keys][2] and leaked [API keys][3].
+If your organization has a high priority security alert, it appears in the {{< ui >}}Security Alerts{{< /ui >}} section of {{< ui >}}Safety Center{{< /ui >}}. Safety Center supports two types of alerts: leaked [application keys][2] and leaked [API keys][3].
 
 A leaked key alert means that one or more private keys (application or API) have been compromised or publicly exposed on the internet. Exposed keys have to be [revoked][4] as soon as possible to minimize security risks to your organization. Removing the file containing the key from a public site such as GitHub **does not** guarantee it was not already accessed by another party.
 
 {{< img src="account_management/safety_center/revoke-leaked-api-key.png" alt="Revoking leaked API key" style="width:70%;" >}}
 
 ## Configuration
-The **Configuration** tab in **Safety Center** allows setting **Security Contacts** - primary and secondary email addresses to receive security notifications for your Datadog organization. Upon detecting security issues, like publicly exposed Datadog keys needing [rotation][4], your assigned **Security Contacts** gets notified.
+The {{< ui >}}Configuration{{< /ui >}} tab in {{< ui >}}Safety Center{{< /ui >}} allows setting {{< ui >}}Security Contacts{{< /ui >}} - primary and secondary email addresses to receive security notifications for your Datadog organization. Upon detecting security issues, like publicly exposed Datadog keys needing [rotation][4], your assigned {{< ui >}}Security Contacts{{< /ui >}} gets notified.
 
 {{< img src="account_management/safety_center/set-security-contacts.png" alt="Setting Security Contacts" style="width:70%;" >}}
 
-It is important to keep **Security Contacts** up to date to ensure that potential security risks are promptly addressed and mitigated. The **Safety Center** page reminds you to review assigned **Security Contacts** every 6 months.
+It is important to keep {{< ui >}}Security Contacts{{< /ui >}} up to date to ensure that potential security risks are promptly addressed and mitigated. The {{< ui >}}Safety Center{{< /ui >}} page reminds you to review assigned {{< ui >}}Security Contacts{{< /ui >}} every 6 months.
 
 ## Access & Sharing
-The **Access & Sharing** section in **Safety Center** lists entities that allow external access to your Datadog organization. It highlights:
+The {{< ui >}}Access & Sharing{{< /ui >}} section in {{< ui >}}Safety Center{{< /ui >}} lists entities that allow external access to your Datadog organization. It highlights:
 
 - [**OAuth applications**][5] that have been inactive for 60+ days or have write access and have been inactive for 30+ days.
 - [**API keys**][3] that have been unused for 30+ days.
@@ -50,7 +50,7 @@ Unused **API keys** can facilitate unauthorized access to your organization if t
 {{< img src="account_management/safety_center/revoke-unused-api-key.png" alt="Revoking unused API key" style="width:70%;" >}}
 
 ## Users
-In order to keep your organization safe it is important to follow best practices for user management. The **Users** page in **Safety Center** surfaces user-related security recommendations:
+In order to keep your organization safe it is important to follow best practices for user management. The {{< ui >}}Users{{< /ui >}} page in {{< ui >}}Safety Center{{< /ui >}} surfaces user-related security recommendations:
 
 - [User invites][7] that have not been accepted for 30+ days.
 - [Admin users][1] in the event their number exceeds 10% of all users within an organization.
@@ -75,5 +75,5 @@ Giving **admin access** to users without careful consideration increases potenti
 [2]: /account_management/api-app-keys/#application-keys
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#what-to-do-if-an-api-or-application-key-was-exposed
-[5]: /account_management/org_settings/oauth_apps
+[5]: /account_management/org_settings/mobile_third_party_access
 [7]: /account_management/users/#add-new-members-and-manage-invites

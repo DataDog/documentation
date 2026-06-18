@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "indicator": "192.0.2.1",
+      "triage_state": "reviewed"
+    },
+    "type": "ioc_triage_state"
+  }
+}

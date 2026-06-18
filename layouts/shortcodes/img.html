@@ -20,15 +20,15 @@
 {{- $image_type_arr := split (.Get "src") "." -}}
 {{- $image_ext := index $image_type_arr 1 -}}
 {{- if $wide -}}
-    {{- $.Scratch.Set "imgix_w" "1170" -}}
+    {{- $.Scratch.Set "img_w" "1170" -}}
 {{- else -}}
-    {{- $.Scratch.Set "imgix_w" "850" -}}
+    {{- $.Scratch.Set "img_w" "850" -}}
 {{- end -}}
-{{- $imgix_w := $.Scratch.Get "imgix_w" -}}
+{{- $img_w := $.Scratch.Get "img_w" -}}
 {{- if .Get "img_param" | len -}}
   {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
 {{- else -}}
-  {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
+  {{- $.Scratch.Add "img_param" (printf "?fit=max") -}}
 {{- end -}}
 {{- if .Get "pop_param" | len -}}
   {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
@@ -42,7 +42,8 @@
 {{- $img_param := $.Scratch.Get "img_param" -}}
 {{- $pop_param := $.Scratch.Get "pop_param" -}}
 {{- $figure_class :=  .Get "figure_class" -}}
-{{ $e := (print $img_resource "?auto=format" | safeURL) }}
+{{- $e := (print $img_resource "?auto=format&fit=max&w=" $img_w | safeURL) -}}
+{{- $e2x := (print $img_resource "?auto=format&fit=max&w=" $img_w "&dpr=2" | safeURL) -}}
 {{- if not (eq $img_inline "true")}}
   <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
     {{- if $video -}}
@@ -66,23 +67,21 @@
       {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
   {{- end -}}
   {{- if $wide -}}
-    {{ $e := (print $img_resource "?auto=format" safeURL) }}
     {{- if eq $image_ext "gif" -}}
       <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
     {{- else -}}
       <picture {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }}>
-        <img class="img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
+        <img class="img-fluid" srcset="{{ $e }} 1x, {{ $e2x }} 2x" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
       </picture>
     {{- end -}}
   {{- else -}}
-      {{ $e := (print $img_resource "?auto=format" | safeURL) }}
       {{- if eq $image_ext "gif" -}}
           <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
       {{- else -}}
         <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
           <img 
               class="img-fluid" 
-              srcset="{{ $e }}" 
+              srcset="{{ $e }} 1x, {{ $e2x }} 2x"
               {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
               {{- with $img_width -}} width="{{ . }}" {{- end -}}
               {{- with $img_height -}} height="{{ . }}" {{- end -}}
@@ -104,8 +103,8 @@
     </figure>
   </div>
   {{- else -}}
-  <img 
-    srcset="{{ $e }}" 
+  <img
+    srcset="{{ $e }} 1x, {{ $e2x }} 2x"
     {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
     {{- with $img_width -}} width="{{ . }}" {{- end -}}
     {{- with $img_height -}} height="{{ . }}" {{- end -}} />

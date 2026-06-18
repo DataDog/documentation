@@ -54,20 +54,20 @@ Dashboards can also help you track down persistent problems and fix them. _Troub
 Datadog provides many out-of-the-box dashboards for features and integrations. For the infrastructure you monitor, check out the out-of-the-box dashboards that are provided with Datadog:
 
 1. In Datadog, go to the [Dashboards List page][2] and search for the name of an integration you have added. For example, `Redis`, or a feature you use, such as `RUM`. 
-2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
+2. Browse the search results for dashboards marked {{< ui >}}Preset{{< /ui >}} and see if at least some of the graphs show the answers you're looking for.
 3. Explore the links in the out-of-the-box dashboard's title dropdown to find more information about how people are using them.
 
 ## Start by reusing other dashboards
 
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
-1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Configuration Actions menu (the Configure button on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
+1. Clone it by opening the dashboard and selecting {{< ui >}}Clone dashboard{{< /ui >}} from the Configuration Actions menu (the {{< ui >}}Configure{{< /ui >}} button on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
   {{< img src="getting_started/dashboards/configure_clone_dashboard.png" alt="Clone dashboard option in the Configuration Actions menu" style="width:100%;" >}}
-2. Edit the clone by opening it and clicking **Edit widgets**. 
-3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
+2. Edit the clone by opening it and clicking {{< ui >}}Edit widgets{{< /ui >}}. 
+3. Delete widgets you don't need by selecting {{< ui >}}Delete{{< /ui >}} from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
 5. Copy in widgets you like from other dashboards by hovering over the widget and typing `Command + C` (`Ctrl + C` on Windows). Paste it into your dashboard by opening the dashboard and typing `Command + V` (`Ctrl + V` on Windows).
-5. Use the **Export to Dashboard** option provided by many Datadog views for data they show. For example, the Log Explorer and Log Analytics views have share options to export logs lists and metrics to dashboards.
+5. Use the {{< ui >}}Export to Dashboard{{< /ui >}} option provided by many Datadog views for data they show. For example, the Log Explorer and Log Analytics views have share options to export logs lists and metrics to dashboards.
 
 ## Learn more about metrics
 
@@ -105,6 +105,8 @@ See [Widgets][6] for more information and examples of setting up these graphs.
 
 Move graphs around so they create a flow for the work you do or conversations you have around the dashboard. Drag and drop widgets to place them. On screenboards, use Free Text widgets to organize sections under headings. On timeboards, add a Group widget that can contain multiple widgets, and can collapse out of the way when you're viewing the dashboard.
 
+For dashboards that grow large, use tabs to organize widgets into named sections. Click {{< ui >}}+{{< /ui >}} in the tab bar (or {{< ui >}}Add New Tab{{< /ui >}} under the dropdown next to {{< ui >}}Add Widgets{{< /ui >}}) to add a tab, then move widgets between tabs from each widget's share menu (⋮). Using tabs keeps a single dashboard focused and easy to navigate without requiring viewers to scroll through unrelated content. For more information, see [Tabs][20].
+
 There are two ways to create links from a dashboard to any target URL:
 
  - Add a Notes and Links widget, which can contain Markdown formatted text, including links. The widget editor includes Markdown formatting tips.
@@ -115,13 +117,13 @@ There are two ways to create links from a dashboard to any target URL:
 
 ### Share your dashboards outside of the Datadog site
 
-Click **Configure Public URL** in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][14].
+Click {{< ui >}}Configure Public URL{{< /ui >}} in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][14].
 
 Integrate with your team communications by using the [Slack integration][15] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
 
 ### Create multiple dashboards quickly
 
-Every dashboard has a JSON representation that you can copy or export from the Settings menu. Each widget on the dashboard also has a JSON definition, which you can see and edit by opening the widget editor (pencil icon) and clicking the JSON tab under **Graph your data**.
+Every dashboard has a JSON representation that you can copy or export from the Settings menu. Each widget on the dashboard also has a JSON definition, which you can see and edit by opening the widget editor (pencil icon) and clicking the JSON tab under {{< ui >}}Graph your data{{< /ui >}}.
 
 Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][16], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
@@ -156,3 +158,4 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [17]: /mobile/
 [18]: https://apps.apple.com/app/datadog/id1391380318
 [19]: https://play.google.com/store/apps/details?id=com.datadog.app
+[20]: /dashboards/configure/#tabs

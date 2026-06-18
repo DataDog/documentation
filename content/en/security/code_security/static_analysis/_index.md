@@ -7,6 +7,9 @@ is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 further_reading:
+- link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+  tag: "Blog"
+  text: "Introducing Bits Code for Code Security"
 - link: https://www.datadoghq.com/blog/code-security-secret-scanning
   tag: Blog
   text: Detect and block exposed credentials with Datadog Secret Scanning
@@ -15,7 +18,7 @@ further_reading:
   text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
@@ -36,9 +39,24 @@ Static Code Analysis helps you identify security vulnerabilities and maintainabi
 
 Static Code Analysis supports scanning for security vulnerabilities and poor coding practices in the following languages and technologies:
 
-{{< partial name="code_security/languages-getting-started.html" >}}
+{{< card-grid card_width="130px" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=JavaScript" src="integrations_logos/javascript_large.png" alt="javascript" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript" src="integrations_logos/typescript_large.svg" alt="typescript" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Java" src="integrations_logos/java_avatar.svg" alt="java" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=CSharp" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Go" src="integrations_logos/golang-avatar.png" alt="go" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Ruby" src="integrations_logos/ruby_avatar.svg" alt="ruby" image_width="60" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=PHP" src="integrations_logos/php_opcache.png" alt="php" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Docker" src="integrations_logos/docker_avatar.svg" alt="docker" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=YAML" src="integrations_logos/yaml.png" alt="yaml" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Kotlin" src="integrations_logos/kotlin.png" alt="kotlin" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir" src="integrations_logos/elixir.png" alt="elixir" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex" src="integrations_logos/salesforce_large.svg" alt="apex" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift" src="integrations_logos/swift_large.svg" alt="swift" >}}
+  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" >}}
+{{< /card-grid >}}
 
-<!-- </br>  -->
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning.  
 To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
 
@@ -76,7 +94,7 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the violation.
 
 ### Filter out false positives
-For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
+For a subset of SAST vulnerabilities, Bits AI can review the context and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
 
 For more information, see [AI-Enhanced Static Code Analysis][17].
 
@@ -144,7 +162,7 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [10]: /security/code_security/dev_tool_int/github_pull_requests/
 [11]: /getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
-[13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
+[13]: /security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
 [14]: /account_management/teams/
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
 [16]: /integrations/azure-devops-source-code/

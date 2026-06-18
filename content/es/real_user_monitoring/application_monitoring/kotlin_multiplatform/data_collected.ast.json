@@ -1,0 +1,60 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "8ff3eb343127ea2f1555fd44c93ddd1c": {
+            "string": "Datos recopilados por Kotlin Multiplatform"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "572d7e7799d4a4c4d93c0731028b2190": {
+            "string": "Obtén más información acerca de los datos recopilados por Kotlin Multiplatform."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-kotlin-multiplatform",
+            "text": {
+              "itemTranslationData": {
+                "3acf306ec994947c07d47d4a8344b4d6": {
+                  "string": "Código fuente de dd-sdk-kotlin-multiplatform"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e71776c17591b32ce376a434685d04f5": {
+                  "string": "Código fuente"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "real_user_monitoring/explorer/",
+            "text": {
+              "itemTranslationData": {
+                "074ab9df9528722dd668d1ad1a471918": {
+                  "string": "Aprender a explorar tus datos de RUM"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "b44a7e6d9c5df7ecc4cd88baa827e409": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

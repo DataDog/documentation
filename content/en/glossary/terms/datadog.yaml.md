@@ -1,4 +1,5 @@
 ---
+id: datadogyaml
 title: datadog.yaml
 core_product:
   - datadog agent

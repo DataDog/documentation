@@ -1,4 +1,5 @@
 ---
+id: security_signal
 title: security signal
 synonyms:
   - signal

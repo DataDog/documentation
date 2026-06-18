@@ -105,7 +105,7 @@ AWS App Runner は、サービスとオペレーションのステータス変�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-app-runner" >}}
+{{< get-metrics-from-git "amazon_app_runner" >}}
 
 
 ### イベント

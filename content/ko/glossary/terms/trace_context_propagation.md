@@ -1,4 +1,5 @@
 ---
+id: trace_context_propagation
 core_product:
 - APM
 short_definition: 트레이스 컨텍스트 전파는 분산 시스템에서 서비스 간에 트레이스 식별자를 전달하는 방법입니다.

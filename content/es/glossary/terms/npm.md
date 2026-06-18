@@ -1,4 +1,5 @@
 ---
+id: npm
 core_product:
 - cloud network monitoring
 title: Cloud Network Monitoring (CNM)

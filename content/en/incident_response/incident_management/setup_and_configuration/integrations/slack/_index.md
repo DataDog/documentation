@@ -114,6 +114,7 @@ Access all configuration options for Slack in Incident Management through the [*
 | **Send a Slack notification when a meeting starts**       | Notify the Slack channel when a meeting is started, with participants and a join link.<br><br>Provides convenient access to incident calls.     |
 | **Activate Bits AI in incident Slack channels**           | Enable AI features that use incident context from Datadog.<br><br>Applies to all incident types in the selected Slack workspace.                |
 | **Automatically archive Slack channels after resolution** | Archive incident Slack channels once the incident is resolved.<br><br>Helps reduce channel clutter.                                             |
+| **Customize incident action tray**                        | Customize which actions appear in the incident action tray.<br><br>Increases visibility of common actions.                                      |
 
 ## Global channel for incident updates
 
@@ -156,7 +157,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
 | `/datadog incident summary` | Get an AI-generated summary of the incident that is visible only to you. |
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 | Command | Description |
 | ------- | ----------- |
 | `/datadog` | Open the incident action tray to perform common actions. |

@@ -30,5 +30,7 @@ cascade:
     {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without Limits™ - Learn how to control custom metrics volumes and costs with Metrics without Limits™ {{< /nextlink >}}
     {{< nextlink href="metrics/guide/custom_metrics_governance" >}}Best Practices for Custom Metrics Governance - Understand what your usage is and take action to reduce the largest cost drivers{{< /nextlink >}}
     {{< nextlink href="metrics/guide/dynamic_quotas" >}}Dynamic Quotas for Metrics{{< /nextlink >}}
-    {{< nextlink href="metrics/guide/agent-filtering-for-dogstatsd-custom-metrics/" >}}Agent-Side Filtering for DogStatsD Custom Metrics{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/agent-filtering-for-custom-metrics/" >}}Agent-Side Filtering for Custom Metrics{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/tag-indexing-rules/" >}}Tag Indexing Rules{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/metric_name_pricing_experience" >}}Metrics Experience Changes for Metric Name Pricing{{< /nextlink >}}
 {{< /whatsnext >}}

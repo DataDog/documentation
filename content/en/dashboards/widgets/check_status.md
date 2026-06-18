@@ -26,11 +26,11 @@ Check status shows the current status or number of results for any check perform
 1. Select a previously created [service check][1].
 2. Choose a reporting time frame. This time frame always includes up to the present, so you can choose an option such as `The past 10 minutes` or `The past 1 day` and it reports a status that includes that time frame up to the present moment. If you choose `Global Time`, the person using the dashboard can select a range using the time frame selector in the upper right, but _they must choose one that includes the present moment_, that is any `past X` time frame. Otherwise the widget is blank.
 3. Choose your scope:
-    * **A single check**: Select this option if your Check Status widget is for a specific element only, for example: one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`.
-    * **A cluster of checks**: Select this option if your Check Status widget is for a scope of elements as in all `host`s, or all `service`s.
+    * {{< ui >}}A single check{{< /ui >}}: Select this option if your Check Status widget is for a specific element only, for example: one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`.
+    * {{< ui >}}A cluster of checks{{< /ui >}}: Select this option if your Check Status widget is for a scope of elements as in all `host`s, or all `service`s.
 
-4. After selecting your scope, define your Check Status widget context with the **Reported by** field.
-5. For the scope **A Cluster of checks**, you have the option to select a subset with the **Group by** field. **Note**: The check status does not show you the count of checks per group, it shows the count of groups running the check. For example, if you are monitoring Agent Up, grouped by `env`, the check status shows you the number of `env` that matches your scope configurations and is running the Agent, not the count of Agents in an environment.
+4. After selecting your scope, define your Check Status widget context with the {{< ui >}}Reported by{{< /ui >}} field.
+5. For the scope {{< ui >}}A Cluster of checks{{< /ui >}}, you have the option to select a subset with the {{< ui >}}Group by{{< /ui >}} field. **Note**: The check status does not show you the count of checks per group, it shows the count of groups running the check. For example, if you are monitoring Agent Up, grouped by `env`, the check status shows you the number of `env` that matches your scope configurations and is running the Agent, not the count of Agents in an environment.
 
 ## API
 

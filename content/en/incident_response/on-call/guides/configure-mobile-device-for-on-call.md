@@ -7,6 +7,9 @@ further_reading:
   tag: "Documentation"
   text: "On-Call Documentation"
 ---
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
 
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with Datadog On-Call.
 
@@ -26,11 +29,11 @@ However, by default, the mobile app is not allowed to send you notifications. To
 
 1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
 
-   {{< img src="service_management/mobile/ios_settings_may_2025.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:35%;" >}}
+   {{< img src="mobile/push_notification/ios_settings_may_2025.png" alt="Find the notification settings in the iOS version of Datadog's mobile app." style="width:35%;" >}}
 
 2. Enable the **Allow Notifications** toggle. If this is your first time enabling notifications, this opens up a permissions prompt. Grant permission, then touch **Enable Notifications** again to go to the iOS system settings.
 
-   {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%;" >}}
+   {{< img src="mobile/push_notification/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%;" >}}
 
 3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog highly recommends you also enable the **Sound** and **Badges** toggles.
 
@@ -40,11 +43,11 @@ Make sure you grant the mobile app the necessary permissions.
 {{% tab "Android" %}}
 1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
 
-   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:35%;" >}}
+   {{< img src="mobile/push_notification/android_settings_may_2025.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:35%;" >}}
 
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 
-   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
+   {{< img src="mobile/push_notification/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -59,7 +62,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%;" >}}
+{{< img src="mobile/push_notification/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
@@ -74,21 +77,21 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
-{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 2. If notification permissions are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
 
-{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High Urgency On-Call.
 
 **For Samsung:** Go to device **Settings** > **Notifications** > **Do Not Disturb** > **App notification** options. Select Datadog as an app that bypasses Do Not Disturb.
 
-{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
+{{< img src="mobile/push_notification/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%;" >}}
 
 4. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
 
@@ -97,7 +100,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-warning">
-On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
+On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. Datadog recommends installing the Datadog mobile app on your personal profile, subject to your organization's policies.
 </div>
 
 {{% /tab %}}
@@ -112,7 +115,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_sync_card_may_2025.png" alt="Override your iOS device's Do Not Disturb mode for SMS and voice calls" style="width:100%;" >}}
+{{< img src="incident_response/on-call/guides/configure-mobile-device-for-on-call/ios_sync_card_may_2025.png" alt="Override your iOS device's Do Not Disturb mode for SMS and voice calls" style="width:100%;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **Preferences** > **On-Call**.
 
@@ -127,7 +130,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_sync_card_may_2025.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
+{{< img src="incident_response/on-call/guides/configure-mobile-device-for-on-call/android_sync_card_may_2025.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
@@ -145,31 +148,31 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 </div>
 
 ## On-Call mobile widgets
-Add On-Call home screen and lock screen widgets to easily access your pages and shifts.
+Add On-Call home screen and lock screen widgets to easily access your Pages and shifts.
 
 ### On-Call home screen widget
 
-View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
+View your On-Call shifts and On-Call Pages on your mobile home screen with Datadog widgets.
 
 You can customize your On-Call shift widgets by filtering on:
 
 - Organization
 - Period of time
 
-You can customize your On-Call page widgets by filtering on:
+You can customize your On-Call Page widgets by filtering on:
 
 - Organization
 - Team
 - Order
 
-**Note**: You can add additional filters for the On-Call pages widget.
+**Note**: You can add additional filters for the On-Call Pages widget.
 
 #### Edit an On-Call shift widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_shifts_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/widgets/ios_shifts_widget_may_2025.png" alt="Configured home screen on-call shift widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Long press on the widget to configure.
 2. Tap **Edit Widget** to bring up the configuration screen.
@@ -180,7 +183,7 @@ You can customize your On-Call page widgets by filtering on:
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_shifts_widget_may_2025.png" alt="Configured home screen On-Call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/widgets/android_shifts_widget_may_2025.png" alt="Configured home screen On-Call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap on the widget to configure.
 2. Select the **Organization** and **Time Period** you would like to see your On-Call shifts for.
@@ -207,7 +210,7 @@ The On-Call lock screen widget displays your On-Call status. Lock screen widgets
 ## Troubleshooting
 For help with troubleshooting, [contact Datadog support][2]. You can also send a message in the [Datadog public Slack][3] [#mobile-app][4] channel.
 
-[1]: /service_management/mobile/?tab=ios
+[1]: /mobile/?tab=ios
 [2]: /help/
 [3]: https://chat.datadoghq.com/
 [4]: https://datadoghq.slack.com/archives/C0114D5EHNG

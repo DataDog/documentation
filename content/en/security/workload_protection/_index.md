@@ -8,10 +8,21 @@ aliases:
   - /security/threats/security_profiles
   - /security/threats/runtime_anomaly_detection
   - /security/threats/
+  - /security/threats/agent
+  - /security/workload_protection/agent
 further_reading:
   - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
     tag: "Blog"
     text: "Turn fragmented runtime signals into coherent attack stories with Datadog Workload Protection"
+  - link: "https://www.datadoghq.com/blog/workload-protection-findings"
+    tag: "Blog"
+    text: "Surface and remediate runtime posture issues with Workload Protection Findings"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+    tag: "Learning Center"
+    text: "Detect Host and Container Compromises with Workload Protection"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"
+    tag: "Learning Center"
+    text: "Enable and Manage Workload Protection"
 cascade:
 - _target:
     path: /security/workload_protection/agent_expressions
@@ -49,7 +60,24 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-<!-- {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}} -->
+## Respond to threats
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This feature is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+When a threat is confirmed, you can contain it directly from the Workload Protection signal side panel. This shortens response time and helps preserve forensic state while an investigation continues.
+
+Four response actions are available from any Workload Protection signal:
+
+- **Kill process** to terminate the offending process.
+- **Kill container** to terminate the offending container.
+- **Isolate process from network** to block network access for the process, with the option to block all traffic, all traffic except localhost, or only public traffic.
+- **Isolate container from network** to block network access for the container, with the same level of control.
+
+Response actions are manual and per-signal. Action status is reported in the signal's response table, investigation graph, and events timeline, and every action is recorded in the audit trail.
+
+To use response actions, you need the Datadog Agent v7.78.1 or later, [Remote Configuration][11] enabled, and the **Cloud Workload Security Agent Actions** [RBAC permission][12].
 
 ## Proactively block threats with Active Protection
 
@@ -61,7 +89,7 @@ By default, all OOTB Agent crypto mining threat detection rules are enabled and 
 
 Workload Protection Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
-Set up [Cloud Security][1] with {{< tooltip glossary="Remote Configuration" case="title" >}} to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
+Set up [Cloud Security][1] with {{< tooltip glossary="remote_configuration" case="title" >}} to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
 <!-- {{< img src="security/cws/threats_detection_rules.png" alt="Workload Protection detection rules in the Datadog app" width="100%">}} -->
 
@@ -89,7 +117,6 @@ Datadog is introducing a new feature called Active Protection to address the cry
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Workload Protection{{< /nextlink >}}
   {{< nextlink href="/security/workload_protection/workload_security_rules">}}Learn about Workload Protection detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Workload Protection detection rules{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
@@ -105,3 +132,5 @@ Datadog is introducing a new feature called Active Protection to address the cry
 [8]: /security/workload_protection/security_signals
 [9]: /network_monitoring/performance/
 [10]: /security/workload_protection/guide/active-protection
+[11]: /agent/remote_config/
+[12]: /account_management/rbac/permissions/#cloud-security-platform

@@ -1,4 +1,5 @@
 ---
+id: flush_interval
 title: flush interval
 core_product:
   - datadog agent

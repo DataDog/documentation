@@ -16,18 +16,18 @@ further_reading:
 title: Rastreo de aplicaciones iOS
 type: lenguaje de código múltiple
 ---
-Envía [trazas][1] a Datadog desde tus aplicaciones iOS con [la librería de rastreo del cliente `dd-sdk-ios` de Datadog][2] y aprovecha las siguientes características:
+Envía [trazas][1] a Datadog desde tus aplicaciones iOS con [la biblioteca de rastreo del cliente `dd-sdk-ios` de Datadog][2] y aprovecha las siguientes características:
 
 * Crea [tramos (spans)][3] personalizados para las operaciones de tu aplicación.
 * Envía logs para cada tramo individualmente.
 * Utiliza los atributos predeterminados y añade atributos personalizados a cada tramo.
 * Aprovechar el uso optimizado de red con publicaciones masivas automáticas.
 
-<div class="alert alert-info"><strong>Nota</strong>: Datadog factura por la <strong>ingesta e indexación</strong> de tramos enviados desde tus aplicaciones iOS, pero no factura por los dispositivos subyacentes. Para obtener más información, consulta la <a href="/account_management/billing/apm_tracing_profiler/">documentación de facturación de APM</a>.</div>
+<div class="alert alert-info">Datadog cobra por los <strong>tramos ingeridos e indexados</strong> enviados desde tus aplicaciones iOS, pero no cobra por los dispositivos subyacentes. Más información en la <a href="/account_management/billing/apm_tracing_profiler/">documentación de facturación de APM </a>.</div>
 
 ## Configuración
 
-1. Declara la librería como una dependencia, en función de tu gestor de paquetes. Se recomienda Swift paquete Manager (SPM).
+1. Declara la biblioteca como una dependencia, en función de tu gestor de paquetes. Se recomienda Swift paquete Manager (SPM).
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -62,7 +62,7 @@ Puedes utilizar [Carthage][5] para instalar `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-En Xcode, vincula los siguientes marcos:
+En Xcode, vincula los siguientes frameworks:
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
@@ -74,7 +74,7 @@ DatadogTrace.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 
@@ -438,7 +438,7 @@ span.log(
 {{% /tab %}}
 {{< /tabs >}}
 
-8. (Opcional) Para distribuir trazas entre tus entornos, por ejemplo frontend a backend, puedes hacerlo manualmente o aprovechar nuestra instrumentación automática. En ambos casos, las trazas de red se muestrean con una frecuencia de muestreo ajustable. Por defecto se aplica un muestreo del 20%.
+8. (Opcional) Para distribuir trazas entre tus entornos, por ejemplo frontend-backend, puedes hacerlo manualmente o aprovechar nuestra autoinstrumentación. En ambos casos, puedes optar por inyectar el contexto de la traza en todas las solicitudes o solo en las muestreadas. Por defecto se aplica un muestreo del 100 %.
 
 * Para propagar manualmente la traza, inyecta el contexto del tramo en los encabezados `URLRequest`:
 
@@ -448,11 +448,12 @@ span.log(
 var request: URLRequest = ... // the request to your API
 
 let span = tracer.startSpan(operationName: "network request")
+let traceContextInjection = ... // either `.all` or `.sampled`
 
-let headersWriter = HTTPHeadersWriter(samplingRate: 20)
+let headersWriter = HTTPHeadersWriter(traceContextInjection: traceContextInjection)
 tracer.inject(spanContext: span.context, writer: headersWriter)
 
-for (headerField, value) in headersWriter.tracePropagationHTTPHeaders {
+for (headerField, value) in headersWriter.traceHeaderFields {
     request.addValue(value, forHTTPHeaderField: headerField)
 }
 ```
@@ -460,7 +461,8 @@ for (headerField, value) in headersWriter.tracePropagationHTTPHeaders {
 {{% tab "Objective-C" %}}
 ```objective-c
 id<OTSpan> span = [tracer startSpan:@"network request"];
-DDHTTPHeadersWriter *headersWriter = [[DDHTTPHeadersWriter alloc] initWithSamplingRate:20];
+DDTraceContextInjection traceContextInjection = ...; // either `DDTraceContextInjectionAll` or `DDTraceContextInjectionSampled`
+DDHTTPHeadersWriter *headersWriter = [[DDHTTPHeadersWriter alloc] initWithTraceContextInjection:traceContextInjection];
 
 NSError *error = nil;
 [tracer inject:span.context
@@ -468,8 +470,8 @@ NSError *error = nil;
     carrier:headersWriter
         error:&error];
 
-for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
-    NSString *value = headersWriter.tracePropagationHTTPHeaders[key];
+for (NSString *key in headersWriter.traceHeaderFields) {
+    NSString *value = headersWriter.traceHeaderFields[key];
     [request addValue:value forHTTPHeaderField:key];
 }
 ```
@@ -544,11 +546,14 @@ Los siguientes atributos de `Trace.Configuration` pueden utilizarse al crear el 
 
 | Método | Descripción |
 |---|---|
-| `service` | Configura el valor del `service`. |
-| `networkInfoEnabled` | Selecciona `true` para enriquecer las trazas con información sobre la conexión de red (estado de accesibilidad, tipo de conexión, nombre del operador móvil, etc.).|
-| `tags` | Configura un par de etiquetas `<KEY>:<VALUE>` que se añadirán a tramos creados por el rastreador. |
 | `bundleWithRumEnabled` | Configura como `true` para permitir que los tramos se enriquezcan con la información de la vista RUM actual. Esto te permite ver todos los tramos generados durante la vida útil de una vista específica en el Explorador RUM. |
+| `customEndpoint` | Establece la url de envío de trazas para un servidor personalizado. |
+| `eventMapper` | Configura el asignador para que modifique los eventos de tramo antes de enviarlos. |
+| `networkInfoEnabled` | Selecciona `true` para enriquecer las trazas con información sobre la conexión de red (estado de accesibilidad, tipo de conexión, nombre del operador móvil, etc.).|
 | `sampleRate` | Configura un valor `0-100` para definir el porcentaje de trazas a recopilar. |
+| `service` | Configura el valor del `service`. |
+| `tags` | Configura un par de etiquetas `<KEY>:<VALUE>` que se añadirán a tramos creados por el rastreador. |
+| `urlSessionTracking` | Establécelo para configurar el rastreo automático de solicitudes de red. Define los hosts de origen, la frecuencia de muestreo y la estrategia de inyección de contexto de traza. No configures esto si ya está configurado por otra función como `RUM`. |
 
 ## Referencias adicionales
 

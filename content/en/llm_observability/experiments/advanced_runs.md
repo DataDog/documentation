@@ -1,16 +1,35 @@
 ---
 title: Advanced Experiment Runs
-description: Run experiments multiple times to account for model variability and automate experiment execution in CI/CD pipelines. 
+description: Run experiments multiple times to account for model variability on a subset of your dataset, and automate experiment execution in CI/CD pipelines. 
 ---
 
 This page discusses advanced topics in running experiments, including [multiple experiment runs](#multiple-runs) and [setting up experiments in CI/CD](#setting-up-your-experiment-in-cicd).
 
+## Run an experiment on a subset of your dataset
+
+First, add tags to your dataset records. These tags can be unique identifiers (for example, `name:test_use_case_1`) or represent properties of the scenario (for example, `difficulty:hard`).
+
+Then, use the `tags` argument of `LLMObs.pull_dataset()` to filter the dataset to the relevant records and run the experiment.
+
+Example
+```
+prod_dataset = LLMObs.pull_dataset(dataset_name="my-dataset", tags=["env:prod", "version:1.0"])
+
+experiment = LLMObs.experiment(
+    name="example-experiment",
+    dataset=prod_dataset,
+    task=topic_relevance,
+    evaluators=[exact_match, false_confidence]
+)
+experiment.run()
+```
+
 ## Multiple runs
 
-You can run the same experiment multiple times to account for model non-determinism. You can use the [LLM Observability Python SDK][1] or [Experiments API][2] to specify how many iterations to run; subsequently, each dataset record is executed that many times using the same tasks and evaluators. 
+You can run the same experiment multiple times to account for model non-determinism. You can use the [Agent Observability Python SDK][1] or [Experiments API][2] to specify how many iterations to run; subsequently, each dataset record is executed that many times using the same tasks and evaluators. 
 
 ### Multiple runs with the Python SDK
-<div class="alert alert-info">Requires LLM Observability Python SDK v4.1+.</div>
+<div class="alert alert-info">Requires Agent Observability Python SDK v4.1+.</div>
 
 Define an optional `runs` parameter in your experiment method, as shown in the following example:
 
@@ -57,11 +76,11 @@ If you do not define `run_count`, your experiment defaults to running 1 iteratio
 
 Navigate to [LLM Experiments][3] in Datadog and select an experiment with multiple runs.
 
-At the **Summary** level, evaluations and metrics are computed as:
+At the {{< ui >}}Summary{{< /ui >}} level, evaluations and metrics are computed as:
 - For score-based evaluations, the average across record averages
 - For categorical evaluations, the mode across record modes
 
-At the **Record** level, evaluations and metrics are computed as:
+At the {{< ui >}}Record{{< /ui >}} level, evaluations and metrics are computed as:
 - For score-based evaluations, the average across runs on the input
 - For categorical evaluations, the mode across runs on the input
 
@@ -133,8 +152,9 @@ dataset = LLMObs.create_dataset(
     ],
 )
 
-def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
     question = input_data["question"]
+    difficulty = metadata.get("difficulty", "unknown") if metadata else "unknown"
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"
 
@@ -211,6 +231,42 @@ jobs:
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+```
+
+### Querying and comparing CI/CD runs via the API
+When creating experiments for a CI/CD pipeline, use the `name` field to include a shared logical pipeline name and a per-run suffix (for example, `my-pipeline-<run-id>`), and use the `metadata` field for commit, branch, or other pipeline context (for example, `"metadata": {"commit": "abc123", "branch": "feat/foo"}`).
+
+To retrieve and compare runs through the API, call `GET /api/v2/llm-obs/v1/experiments` with these filters:
+- `filter[experiment]=<pipeline-name>` returns all runs sharing the same logical pipeline name.
+- `filter[metadata]={"branch":"main"}` returns runs whose metadata contains those key-value pairs.
+- Combine both filters to narrow comparisons, for example: `?filter[experiment]=my-pipeline&filter[metadata]={"commit":"abc123"}`.
+
+Each matching experiment includes `aggregate_data` with pre-computed eval score distributions, token costs, and error rates, so you can compare runs without querying individual spans.
+
+`page[cursor]` is not supported when `filter[experiment]` or `filter[metadata]` is used.
+
+`filter[experiment]` matches the shared logical pipeline name stored in the `experiment` column (for example, `my-pipeline`). This is distinct from the unique per-run `name` field (for example, `my-pipeline-<run-id>`).
+
+```http
+# Create experiment tagged with pipeline context
+POST /api/v2/llm-obs/v1/experiments
+{
+  "data": {
+    "type": "experiments",
+    "attributes": {
+      "project_id": "<project_id>",
+      "dataset_id": "<dataset_id>",
+      "name": "my-pipeline-<run-id>",
+      "metadata": {"commit": "abc123", "branch": "feat/foo"}
+    }
+  }
+}
+
+# Compare all runs of the same pipeline on main branch
+GET /api/v2/llm-obs/v1/experiments?filter[experiment]=my-pipeline&filter[metadata]={"branch":"main"}
+
+# Retrieve a specific commit's run
+GET /api/v2/llm-obs/v1/experiments?filter[experiment]=my-pipeline&filter[metadata]={"commit":"abc123"}
 ```
 
 [1]: /llm_observability/instrumentation/sdk?tab=python

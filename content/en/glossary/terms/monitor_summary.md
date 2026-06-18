@@ -1,4 +1,5 @@
 ---
+id: monitor_summary
 title: monitor summary
 core_product:
   - dashboards

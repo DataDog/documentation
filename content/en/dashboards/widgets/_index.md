@@ -37,8 +37,8 @@ The fastest way to onboard widgets relevant to your data is to clone a dashboard
 To begin using widgets in your dashboards:
 
 1. Navigate to the [Dashboards List][1] in Datadog.
-2. Click **New Dashboard** or select an existing dashboard to edit.
-3. Click **Add Widget**. Choose from a variety of widget types such as timeseries, bar chart, table, or event stream.
+2. Click {{< ui >}}New Dashboard{{< /ui >}} or select an existing dashboard to edit.
+3. Click {{< ui >}}Add Widget{{< /ui >}}. Choose from a variety of widget types such as timeseries, bar chart, table, or event stream.
 4. Configure your widget:
     - Select data source: Choose metrics, logs, traces, or other data sources.
     - Customize visualization: Adjust display settings, units, and timeframes to fit your needs.
@@ -46,6 +46,10 @@ To begin using widgets in your dashboards:
 5. Save your dashboard and share it with your team or externally as needed.
 
 For more information, see [Widget Configuration][3] and explore the available [Widget Types][4].
+
+### Organize widgets with tabs
+
+As dashboards grow, use tabs to group widgets into named sections. In edit mode, open a widget's share menu and select **Move to tab** to assign it to an existing tab or create a new one. Tabs appear as a navigation bar at the top of the dashboard, letting viewers navigate directly to the section they need. For more information, see [Tabs][5].
 
 ## Data sources
 
@@ -93,3 +97,4 @@ Widgets can visualize data from multiple Datadog sources including:
 [2]: /dashboards/
 [3]: /dashboards/widgets/configuration/
 [4]: /dashboards/widgets/types/
+[5]: /dashboards/configure/#tabs

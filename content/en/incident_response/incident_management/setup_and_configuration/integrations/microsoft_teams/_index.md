@@ -92,6 +92,36 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
    2. (Optional) Specify the incident criteria that creates a Microsoft Teams meeting. If left blank, any changes to an incident without an existing Microsoft Teams meeting will create a Microsoft Teams meeting.
 4. Save your settings.
 
+### Meeting summaries
+
+Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
+
+<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by Hyperdoc Inc. (d/b/a Recall.ai), a Datadog subprocessor. Recall.ai retains the audio recording and transcript for 7 days. Datadog retains the transcript for 7 days. All data is automatically deleted after the retention period.</div>
+
+#### Enabling meeting summaries
+
+To enable meeting summaries for incident Microsoft Teams meetings:
+
+1. Navigate to [Incident Settings][2].
+2. In Microsoft Teams, select your connected Microsoft Teams tenant.
+3. Toggle on **Enable meeting creation**.
+4. Toggle on **Generate AI meeting summaries**.
+5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
+6. Save your settings.
+
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/ms_teams_enable_meeting_summaries.png" alt="The Microsoft Teams tenant settings page with the Generate AI meeting summaries toggle enabled." style="width:90%;" >}}
+
+#### How meeting summaries work
+
+Meeting summaries are generated for Microsoft Teams meetings attached to an incident.
+
+When a meeting starts, a Datadog Transcriber attempts to join the Microsoft Teams meeting. This may take 10 to 30 seconds. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin. After the Datadog Transcriber is admitted, live summaries are periodically posted to the following locations during the meeting:
+
+- The **incident timeline**, under a **Meeting Summary** entry.
+- The **incident chat channel**, both in the meeting card thread and as a message to the channel.
+
+When the meeting ends, a final post-meeting summary is posted to the same locations.
+
 ## Using the Datadog tab in Microsoft Teams
 
 In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
@@ -113,33 +143,7 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 
 ## Microsoft Teams commands
 
-You can view the full list of available commands at any time by typing `@Datadog help` in Microsoft Teams.
-
-<table>
-  <thead>
-    <tr>
-      <th scope="col">Category</th>
-      <th scope="col">Command</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">Global commands (run anywhere)</td>
-      <td><code>@Datadog incident</code></td>
-      <td>Declare a new incident.</td>
-    </tr>
-    <tr>
-      <td><code>@Datadog list incidents</code></td>
-      <td>Show a list of all open incidents.</td>
-    </tr>
-    <tr>
-      <td><code>@Datadog help</code></td>
-      <td>Show all supported commands.</td>
-    </tr>
-  </tbody>
-</table>
-
+For a full list of available `@Datadog` commands, see the [Microsoft Teams integration documentation][5].
 
 ## Further reading
 
@@ -149,3 +153,4 @@ You can view the full list of available commands at any time by typing `@Datadog
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
+[5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams

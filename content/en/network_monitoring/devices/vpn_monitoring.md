@@ -92,10 +92,13 @@ network_devices:
 
 ## Viewing VPN tunnels
 
-To view VPN tunnels in the UI:
+To view VPN tunnels for a device, click the device in the [NDM device list][8] or the [Device Topology Map][7] to open the NDM device view. The **Dependencies** section shows the number of connected devices and VPN tunnels at a glance.
 
-1. Select a monitored device in NDM that has VPN tunnels.
-2. Click on the **VPN Tunnels** tab in the device's side panel.
+{{< img src="/network_device_monitoring/vpn_monitoring/dependency_tab.png" alt="The NDM device view showing the Dependencies section with connected devices and a VPN tunnel count." style="width:100%;" >}}
+
+Click **View dependencies** to open the full device page. On the **Dependencies** tab, select the **VPN** filter to see all VPN tunnels for the device. The table displays the local outside IP, remote peer IP, protocol, tunnel interface, destination subnets, bytes in, bytes out, and active time for each tunnel.
+
+{{< img src="/network_device_monitoring/vpn_monitoring/vpn_dependency.png" alt="The Dependencies tab on the NDM device page with the VPN filter selected, showing a table of VPN tunnels with connection details." style="width:100%;" >}}
 
 ### Metrics collected
 
@@ -154,7 +157,7 @@ If you experience issues using VPN monitoring, use the following troubleshooting
 
 ### VPN tunnels not displayed
 
-The VPN tunnel data is collected with SNMP. If VPN tunnels are missing on a device, ensure the following:
+The VPN tunnel data is collected with SNMP. If VPN tunnels are missing on a device, verify the following:
 
 - Datadog Agent version 7.70 or later is installed.
 - Verify the device exposes the relevant VPN tunnel data with SNMP by running the following command:
@@ -173,3 +176,6 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.171.1.3.2
 [4]: /network_monitoring/devices/vpn_monitoring/?tab=individual#configuration
 [5]: /network_monitoring/devices/vpn_monitoring/?tab=autodiscovery#configuration
 [6]: /help
+[7]: /network_monitoring/devices/topology/
+[8]: https://app.datadoghq.com/devices
+

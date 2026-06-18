@@ -10,6 +10,9 @@ further_reading:
   - link: '/data_observability/jobs_monitoring'
     tag: 'Documentation'
     text: 'Jobs Monitoring'
+  - link: '/data_observability/lineage/'
+    tag: 'Documentation'
+    text: 'Lineage'
 ---
 
 ## Overview
@@ -23,6 +26,7 @@ With Quality Monitoring, you can:
 - Surface changes in column-level metrics such as null counts or uniqueness
 - Set up monitors using static thresholds or historical baselines
 - Trace quality issues using lineage views that show upstream jobs and downstream impact
+- Explore end-to-end dependencies in [Lineage][1] to identify root causes and downstream impact
 
 ## Supported data sources
 
@@ -30,6 +34,7 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these data lake catalogs:" >}}
@@ -48,6 +53,10 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/jobs_monitoring/openlineage" >}}Custom Jobs using OpenLineage{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Trace lineage from these ELT tools:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/elt/airbyte" >}}Airbyte{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/elt/fivetran" >}}Fivetran{{< /nextlink >}}
+{{< /whatsnext >}}
 
 {{< whatsnext desc="Track downstream impact in these BI tools:" >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/looker" >}}Looker{{< /nextlink >}}
@@ -61,3 +70,4 @@ With Quality Monitoring, you can:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /data_observability/lineage/

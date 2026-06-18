@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for simplified management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. Configure suite-level alerting to receive a consolidated notification when a critical portion of your tests fail, helping you respond more efficiently to issues impacting important workflows. 
+Synthetic Monitoring Test Suites let you organize multiple tests into a single collection for simplified management and troubleshooting. Group tests by user journey, environment, location, service, team, or any other dimension that fits your workflow. View aggregated results, identify failing components, and understand application performance across related tests, all from a unified view. Configure suite-level alerting to get a consolidated notification when a critical portion of your tests fail.
 
 ## Key features
 
@@ -32,7 +32,7 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 
 ## Create a test suite
 
-To create a new Test Suite:
+To create a Synthetic Monitoring Test Suite:
 1. In Datadog, navigate to **Digital Experience**.
 2. Click **New Test Suite**.
 3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click **+ New Suite**.
@@ -49,7 +49,7 @@ To create a new Test Suite:
 4. _Optionally, remove tests using the Remove Test from Suite icon next to each entry_.
 
 5. Configure alerting for the suite:
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">Alerting for Test Suites is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
@@ -68,9 +68,54 @@ To create a new Test Suite:
 
 {{< img src="synthetics/test_suites/test_suite_creation_2.png" alt="Synthetic Monitoring Test Suite creation page" style="width:80%;">}}
 
-## View and manage
+## Service level objectives
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**. 
+When you create a test suite, Datadog automatically generates a service level objective (SLO) for it, with no configuration required. By default, the SLO uses a 7-day rolling window with a 99.9% target.
+
+<div class="alert alert-info">Test suite permissions (view and edit) apply to the suite itself and are independent of the auto-generated SLO's permissions. Access to the SLO is determined by the user's <a href="/service_level_objectives/#permissions">SLO product permissions</a>. A user without test suite edit permissions can still edit the auto-generated SLO if they have SLO edit permissions.</div>
+
+The SLO panel on the Test Suite details page shows the current SLO status and error budget. From this view, you can:
+
+- **[Create alert](#create-an-alert)** to set up alerting when SLO performance degrades significantly. When an alert already exists, hover over the alert indicator to view additional details.
+- **[View details](#view-details)** by clicking the eye icon to open the full SLO details page.
+- **[View contributors](#contributors)** to see which tests are consuming error budget.
+- **[Edit the SLO](#edit-the-service-level-objective)** by clicking the {{< img src="icons/pencil-mdi.svg" inline="true" style="width:16px;">}} pencil icon.
+
+{{< img src="synthetics/test_suites/test_suite_slo_panel_v2.png" alt="Test Suite details page showing the SLO panel with a 7-day rolling window and error budget, the Primary Contributors section with top contributing tests, the Global Uptime timeline, and the Test Runs section." style="width:100%;">}}
+
+### Create an alert
+
+Click **Create alert** on the SLO details panel to open the SLO Monitor configuration form, where you can set alert conditions and notification settings.
+
+{{< img src="synthetics/test_suites/test_suite_slo_create_alert.png" alt="SLO Monitor creation form with alert condition and notification settings." style="width:80%;">}}
+
+### View details
+
+Click the eye icon to open the full SLO details page. From this page, you can view SLO status, error budget burndown, burn rate, and metric timeseries.
+
+{{< img src="synthetics/test_suites/test_suite_slo_details.png" alt="Full SLO details page for a test suite, showing SLO status, error budget burndown, burn rate, and metric timeseries." style="width:90%;">}}
+
+### Contributors
+
+The contributors section highlights the tests with the largest impact on error budget consumption:
+
+- **Total number of critical tests**: The total number of critical tests in the suite.
+- **Error budget consumed by**: The number of tests that consumed error budget.
+- **Top 3 contributors consumed**: The top three tests by percentage impact, based on how long each test was in an alert state while the suite was in alert.
+
+{{< img src="synthetics/test_suites/test_suite_slo_contributors.png" alt="Primary Contributors section showing total critical tests, error budget consumed, and top three contributors by percentage impact." style="width:90%;">}}
+
+### Edit the service level objective
+
+To update the SLO time window (for example, to 30 days) or target, click the {{< img src="icons/pencil-mdi.svg" inline="true" style="width:16px;">}} pencil icon on the SLO panel. Because this SLO is automatically created from a test suite, you can only edit the time window, target, and warning thresholds.
+
+   {{< img src="synthetics/test_suites/test_suite_slo_edit.png" alt="Edit SLO page for a test suite, showing the target and time window fields." style="width:90%;">}}
+
+## View and manage test suites
+
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page. You can also access test suites from **Digital Experience > Test Suites**.
+
+To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime**.
 
 When viewing a test suite, three tabs are available:
 
@@ -82,11 +127,36 @@ When viewing a test suite, three tabs are available:
 
 {{< img src="synthetics/test_suites/test_suite_summary_2.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
+## Run a test suite
+
+You can trigger test runs in two ways:
+
+- [Run all tests in the suite](#run-all-tests-in-the-suite)
+- [Run selected tests](#run-selected-tests)
+
+### Run all tests in the suite
+
+From the suite detail page, click **Run Suite Now** in the top right to trigger every test in the suite.
+
+{{< img src="synthetics/test_suites/run_suite_now.png" alt="The test suite detail page with the Run Suite Now button in the top right." style="width:100%;" >}}
+
+### Run selected tests
+
+To run a subset of tests:
+
+1. Navigate to the suite and click the **Tests in the Suite** tab.
+2. Select the tests you want to run using the checkboxes.
+3. Click **Run Tests Now**.
+
+{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible." style="width:100%;" >}}
+
+**Note**: You can run a maximum of 50 tests at a time with **Run Tests Now**.
+
 ## Troubleshooting
 
 If some tests fail to appear in a suite:
 
-- Ensure the tests are active and not deleted.
+- Verify the tests are active and not deleted.
 - Confirm you have the necessary permissions to view those tests.
 - Refresh filters or clear search terms when adding tests.
 
@@ -102,3 +172,4 @@ If execution results look incomplete:
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/notifications/
+[3]: /synthetics/platform/downtime/

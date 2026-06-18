@@ -1,5 +1,6 @@
 ---
-title: Scanning Rules
+title: Sensitive Data Scanning Rules
+description: Understand how Sensitive Data Scanner uses scanning rules to match sensitive data, including predefined library rules and custom regex rules for telemetry data and cloud storage.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules
@@ -17,7 +18,7 @@ further_reading:
 Phone number and physical address PII detection in logs using machine learning are in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
 {{< /site-region >}}
 

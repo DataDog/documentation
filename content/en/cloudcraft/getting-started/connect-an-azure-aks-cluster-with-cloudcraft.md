@@ -14,24 +14,24 @@ Before connecting your Azure AKS clusters with Cloudcraft, you must connect your
 
 ## Authorizing the Cloudcraft IAM user for view-only access
 
-Start by opening a blueprint with an existing Azure AKS cluster, or using the **Auto Layout** feature to generate a new blueprint.
+Start by opening a blueprint with an existing Azure AKS cluster, or using the {{< ui >}}Auto Layout{{< /ui >}} feature to generate a new blueprint.
 
-With your Azure environment mapped into a blueprint, select the Azure AKS cluster that you wish to scan, and click the **Enable cluster scanning** button that appears in the component toolbar.
+With your Azure environment mapped into a blueprint, select the Azure AKS cluster that you wish to scan, and click the {{< ui >}}Enable cluster scanning{{< /ui >}} button that appears in the component toolbar.
 
 {{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Interactive Cloudcraft diagram showing an Azure AKS cluster with enable cluster scanning button highlighted." responsive="true" style="width:100%;">}}
 
 The next screen provides step-by-step instructions to complete in Azure.
 
-1. Click the first link to open your Azure Subscriptions page, then click **Access control (IAM)** on the left sidebar.
-2. Click **Add** and select **Add role assignment**.
-3.  Search for and select **Azure Kubernetes Service Cluster User Role**, then click **Next**.
-4. Click **Select members**.
-5. Search for the IAM user that you want to grant access to your Azure AKS cluster—usually named cloudcraft—and click **Select**.
-6. Click **Review + assign** twice to complete the process.
+1. Click the first link to open your Azure Subscriptions page, then click {{< ui >}}Access control (IAM){{< /ui >}} on the left sidebar.
+2. Click {{< ui >}}Add{{< /ui >}} and select {{< ui >}}Add role assignment{{< /ui >}}.
+3.  Search for and select {{< ui >}}Azure Kubernetes Service Cluster User Role{{< /ui >}}, then click {{< ui >}}Next{{< /ui >}}.
+4. Click {{< ui >}}Select members{{< /ui >}}.
+5. Search for the IAM user that you want to grant access to your Azure AKS cluster—usually named cloudcraft—and click {{< ui >}}Select{{< /ui >}}.
+6. Click {{< ui >}}Review + assign{{< /ui >}} twice to complete the process.
 
 ## Testing access to the cluster
 
-To test that Cloudcraft can access to the cluster, click **Test cluster access** at the bottom of the **Enable Kubernetes Cluster Scanning** screen.
+To test that Cloudcraft can access to the cluster, click {{< ui >}}Test cluster access{{< /ui >}} at the bottom of the {{< ui >}}Enable Kubernetes Cluster Scanning{{< /ui >}} screen.
 
 {{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/test-cluster-access.png" alt="Screenshot of Cloudcraft Enable Kubernetes Cluster Scanning interface with instructions and Test Cluster Access button." responsive="true" style="width:100%;">}}
 
