@@ -56,12 +56,16 @@ You approve one CloudFormation stack, one time, during initial setup. After that
 
 ## Install the Agent
 
-Start Agent installation as part of AWS integration setup, or from the AWS integration page at any time.
+You can start Agent installation from any of these entry points:
 
-<!-- TODO(DOCS-14545): confirm exact entry point and UI labels at launch. -->
+- **AWS integration setup**: Enable the Agent installation toggle, shown alongside log and resource collection. This installs the Agent on all eligible EC2 and EKS resources.
+- **Quick Start page**: Select the Agent installation action shown after your AWS account is connected.
+- **Fleet Automation**: Open the AWS Install Agents page at any time.
 
-1. In Datadog, open the [AWS integration page][3].
-1. Enable Agent installation. During initial CloudFormation setup, this appears as a toggle alongside log and resource collection.
+<!-- TODO(DOCS-14545): confirm exact entry-point labels and navigation paths at launch (pending AWS team). -->
+
+The Quick Start and Fleet Automation entry points open the AWS Install Agents page, where you choose which resources to instrument:
+
 1. Opt in to all eligible resources, or select specific EC2 instances and EKS clusters from the resource list.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. The installation proceeds automatically, and Datadog reports progress as Agents come online.
@@ -72,7 +76,7 @@ Start Agent installation as part of AWS integration setup, or from the AWS integ
 
 After the installation completes:
 
-- The newly installed Agents appear in the [Infrastructure List][4] and on the host map.
+- The newly installed Agents appear in the [Infrastructure List][3] and on the host map.
 - Fleet Automation lists the same Agents in the Fleet View.
 
 <!-- TODO(DOCS-14545): add expected time-to-data once confirmed. -->
@@ -87,7 +91,7 @@ From this page, you can:
 - Install the Agent on new resources in your AWS environment.
 - Uninstall Agents from resources you no longer want to monitor.
 
-Manage Agent configuration and version upgrades through [Fleet Automation][5].
+Manage Agent configuration and version upgrades through [Fleet Automation][4].
 
 ## Troubleshooting
 
@@ -109,6 +113,5 @@ If installation can't complete because of missing permissions, Datadog shows a n
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://app.datadoghq.com/infrastructure
-[5]: https://docs.datadoghq.com/agent/fleet_automation/
+[3]: https://app.datadoghq.com/infrastructure
+[4]: https://docs.datadoghq.com/agent/fleet_automation/
