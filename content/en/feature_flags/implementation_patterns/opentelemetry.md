@@ -238,6 +238,38 @@ client = OpenFeature::SDK.build_client
 For more detail, see [OpenTelemetry API Support for Ruby][14].
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+**Note**: The OpenFeature adapter requires PHP 8 or later.
+
+{{< code-block lang="bash" filename=".env" >}}
+DD_TRACE_OTEL_ENABLED=true
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_METRICS_OTEL_ENABLED=true
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+{{< code-block lang="php" filename="app.php" >}}
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use DDTrace\OpenFeature\DataDogProvider;
+use OpenFeature\OpenFeatureAPI;
+
+// Register the Datadog OpenFeature provider
+$api = OpenFeatureAPI::getInstance();
+$api->setProvider(new DataDogProvider());
+
+$client = $api->getClient('my-service');
+
+// Your existing OpenTelemetry API calls continue to work unchanged
+{{< /code-block >}}
+
+For more detail, see [OpenTelemetry API Support for PHP][15].
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Option B: Run the Datadog SDK alongside OpenTelemetry
@@ -422,6 +454,36 @@ client = OpenFeature::SDK.build_client
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+**Note**: The OpenFeature adapter requires PHP 8 or later.
+
+{{< code-block lang="bash" filename=".env" >}}
+DD_APM_TRACING_ENABLED=false
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+DD_METRICS_OTEL_ENABLED=true
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+{{< code-block lang="php" filename="app.php" >}}
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use DDTrace\OpenFeature\DataDogProvider;
+use OpenFeature\OpenFeatureAPI;
+
+// Register the Datadog OpenFeature provider
+$api = OpenFeatureAPI::getInstance();
+$api->setProvider(new DataDogProvider());
+
+$client = $api->getClient('my-service');
+
+// Your existing OpenTelemetry SDK initialization stays unchanged
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Evaluate feature flags
@@ -520,6 +582,21 @@ is_enabled = client.fetch_boolean_value(
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+{{< code-block lang="php" >}}
+use OpenFeature\implementation\flags\Attributes;
+use OpenFeature\implementation\flags\EvaluationContext;
+
+$context = new EvaluationContext(
+    'user-123',
+    new Attributes(['companyID' => 'acme-corp'])
+);
+
+$isEnabled = $client->getBooleanValue('my-flag', false, $context);
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 In both integration options, feature flags evaluate the same way. Flag configurations are delivered through the same Remote Configuration channel.
@@ -538,3 +615,4 @@ For complete setup instructions, typed getters, evaluation context requirements,
 [12]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces
 [13]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python&platform=traces
 [14]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby&platform=traces
+[15]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=php&platform=traces
