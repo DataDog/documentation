@@ -155,7 +155,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
    **Note**: Use only one destination bucket for all inventory files generated in an AWS account.
-2. Decide on the destination prefix within the bucket where inventory files are written. If left empty, the prefix defaults to `datadog-inventories`. You can set a custom prefix, but you must use the same value in every later step: the S3 Inventory configuration, the destination bucket policy, the integration role permissions, and the API registration call. Mismatched prefixes prevent Datadog from reading your inventory files.
+2. Decide on the destination prefix within the bucket where inventory files are written. The standard prefix is `datadog-inventories`. You can use a custom prefix, but you must use the same value in every later step: the S3 Inventory configuration, the destination bucket policy, the integration role permissions, and the API registration call. Mismatched prefixes prevent Datadog from reading your inventory files.
 
 [201]: https://console.aws.amazon.com/s3/bucket/create
 {{% /collapse-content %}}
@@ -259,7 +259,7 @@ To use the example above:
 - Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
 - Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
 - Replace `<DESTINATION_BUCKET_REGION>` with the AWS region of the destination bucket.
-- Replace `<DESTINATION_PREFIX>` with the prefix where your inventory files are written. This must match the destination prefix in your S3 Inventory configuration. If left empty, the prefix defaults to `datadog-inventories`. Enter the prefix with a trailing slash and no leading slash, for example `datadog-inventories/`. Don't add a leading slash or repeat the slash, which creates an invalid path and prevents Datadog from finding your inventory files.
+- Replace `<DESTINATION_PREFIX>` with the prefix in the destination bucket where your S3 Inventory reports are written, for example `datadog-inventories/`. This must match the prefix in your S3 Inventory configuration. To read inventory reports from the entire bucket, set the value to `/`. Leaving the value empty does not read from the entire bucket; it defaults to `datadog-inventories/`.
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
 
