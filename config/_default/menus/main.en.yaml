@@ -5380,7 +5380,7 @@ menu:
       identifier: jobs_monitoring_airflow
       parent: data_jobs
       weight: 200000
-    - name: Logs Correlation 
+    - name: Logs Correlation
       url: data_observability/jobs_monitoring/airflow_log_context
       identifier: jobs_monitoring_airflow_log_context
       parent: jobs_monitoring_airflow
@@ -6310,6 +6310,16 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_history
       weight: 307
+    - name: Implementation Patterns
+      url: feature_flags/implementation_patterns
+      parent: feature_flags
+      identifier: feature_flags_implementation_patterns
+      weight: 4
+    - name: Serverless
+      url: feature_flags/implementation_patterns/serverless
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_serverless
+      weight: 402
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
