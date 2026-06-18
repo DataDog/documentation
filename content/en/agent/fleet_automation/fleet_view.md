@@ -123,6 +123,10 @@ Most of the Kubernetes view is available without any prerequisite version. Speci
 
 **Edit configuration from Fleet View**
 - [Remote Configuration][6] enabled for your organization, and Datadog Operator v1.27 or later (you cannot edit Helm Chart values from Fleet View)
+- The following flags set in your [Operator configuration][7]:
+  - `remoteConfigEnabled`
+  - `remoteUpdatesEnabled`
+  - `createControllerRevisions`
 
 **View integrations running on a Cluster Agent**
 - Integrations list: Agent v7.72.0 or later
@@ -163,3 +167,4 @@ Compared to the default view, the Kubernetes view has the following limitations:
 [4]: https://app.datadoghq.com/fleet?view_by=clusters
 [5]: /containers/datadog_operator
 [6]: /agent/guide/setup_remote_config
+[7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
