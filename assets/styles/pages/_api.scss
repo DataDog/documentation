@@ -42,6 +42,12 @@ $ddpurple: #632ca6;
     margin-bottom: 0.75rem;
 }
 
+// Hardcoded Overview pages (Using the API, Authorization Scopes, Rate Limits, API Reference):
+// the copy button sits on its own line, flush right, above the page content.
+.api-hardcoded-header {
+    margin-bottom: -1rem;
+}
+
 .announcement.api {
     .main-api {
         h2 {

@@ -4,6 +4,9 @@
 
     {{ with .Content}}
        <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} ps-0">
+        <div class="api-hardcoded-header d-flex justify-content-end">
+          {{ partial "api/api-copy-btn.html" $dot }}
+        </div>
         {{ . }}
        </div>
     {{ end }}
