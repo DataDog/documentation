@@ -72,7 +72,7 @@ To create a Synthetic Monitoring Test Suite:
 
 When you create a test suite, Datadog automatically generates a service level objective (SLO) for it, with no configuration required. By default, the SLO uses a 7-day rolling window with a 99.9% target.
 
-<div class="alert alert-info">Test suite permissions (view and edit) apply to the suite itself and are independent of the auto-generated SLO's permissions. Access to the SLO is governed by the user's <a href="/service_level_objectives/#permissions">SLO product permissions</a>. A user without test suite modification rights can still edit the auto-generated SLO if they have SLO edit permissions.</div>
+<div class="alert alert-info">Test suite permissions (view and edit) apply to the suite itself and are independent of the auto-generated SLO's permissions. Access to the SLO is determined by the user's <a href="/service_level_objectives/#permissions">SLO product permissions</a>. A user without test suite edit permissions can still edit the auto-generated SLO if they have SLO edit permissions.</div>
 
 The SLO panel on the Test Suite details page shows the current SLO status and error budget. From this view, you can:
 
