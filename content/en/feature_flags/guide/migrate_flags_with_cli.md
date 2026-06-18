@@ -1,5 +1,5 @@
 ---
-title: Migrating Flags with the Flag Migration CLI
+title: Migrate Flags with the Flag Migration CLI
 description: Learn how to use the Datadog Flag Migration CLI to migrate feature flags from other providers to Datadog Feature Flags.
 further_reading:
 - link: "/feature_flags/"
