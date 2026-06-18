@@ -78,13 +78,13 @@ kotlin {
 NdkCrashReports.enable()
 ```
 
-An "Application Not Responding" ([ANR][12]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
+An "Application Not Responding" ([ANR][101]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 
-For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK. For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][13].
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK. For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][102].
 
 
-[12]: https://developer.android.com/topic/performance/vitals/anr
-[13]: /error_tracking/frontend/mobile/android/?tab=kotlin#step-5---add-anr-reporting
+[101]: https://developer.android.com/topic/performance/vitals/anr
+[102]: /error_tracking/frontend/mobile/android/?tab=kotlin#step-5---add-anr-reporting
 
 {{% /tab %}}
 
@@ -99,7 +99,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 * `DatadogObjc`
 * `DatadogCrashReporting`
 
-**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][14].
+**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][101].
 
 
 #### Adding native iOS dependencies using the CocoaPods plugin
@@ -132,7 +132,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 1. Click on your project in Xcode and go to the **Package Dependencies** tab.
 2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
-3. Select the version that matches the Kotlin Multiplatform SDK version you're using (see the [version compatibility guide][14]).
+3. Select the version that matches the Kotlin Multiplatform SDK version you're using (see the [version compatibility guide][101]).
 4. Click on the necessary application target and open the **General** tab.
 5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies (`DatadogObjc` and `DatadogCrashReporting`).
 
@@ -140,10 +140,10 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add App Hang Reporting][15].
+By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add App Hang Reporting][102].
 
-[14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[15]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[101]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
+[102]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 {{% /tab %}}
 {{< /tabs >}}
 
