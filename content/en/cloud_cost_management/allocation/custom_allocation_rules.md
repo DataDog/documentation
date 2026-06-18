@@ -91,6 +91,8 @@ You can also specify how cost proportions should be partitioned to ensure segmen
 
 {{% tab "Dynamic by metric" %}}
 
+<div class="alert alert-info">The Dynamic by Metric allocation method requires a CCM Enterprise plan.</div>
+
 {{< img src="cloud_cost/custom_allocation_rules/dynamic_diagram.png" alt="Diagram illustrating the dynamic by metric strategy" style="width:70%;" >}}
 
 Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][1]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
