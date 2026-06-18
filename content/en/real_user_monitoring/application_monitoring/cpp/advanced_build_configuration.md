@@ -17,128 +17,194 @@ further_reading:
 
 ## Overview
 
-This page covers build configuration topics beyond the standard CMake setup described in [C / C++ Monitoring Setup][1]:
+This page covers build configuration topics beyond the standard CMake setup described in [C / C++ Monitoring Setup][1], including instructions for integrating the SDK into projects that don't use CMake.
 
-- How the `datadog_enable()` and `datadog_install()` CMake convenience functions work, and how to link against `Datadog::sdk` directly if you need finer control.
-- How to use `datadog_install()` with your application's CMake install targets.
-- How to build the SDK from source to produce artifacts for use in non-CMake builds.
-- Available CMake configuration options and how to set them.
-- Platform-specific linker dependencies required when integrating without CMake.
+## CMake targets and datadog_enable()
 
-## CMake convenience functions
-
-The SDK provides two convenience functions, `datadog_enable()` and `datadog_install()`, defined in [`DatadogConvenience.cmake`][2]. They are automatically available after calling `FetchContent_MakeAvailable(Datadog)` or `find_package(Datadog)`.
-
-### `datadog_enable(target)`
-
-`datadog_enable(target)` performs two tasks:
-
-1. **Links `Datadog::sdk`**: Adds the SDK as a private linker dependency for `target`, so its sources can include SDK headers and call SDK functions.
-2. **Copies `crashpad_handler`** (Crashpad mode only): Adds a post-build step to copy the `crashpad_handler` executable alongside the `target` binary. This is required for crash reporting to work without explicitly configuring a handler path.
+The recommended approach for adding the SDK as a dependency in your CMake project is to use the `datadog_enable()` function, passing your program's executable target as an argument:
 
 ```cmake
+add_executable(my-app main.cpp)
 datadog_enable(my-app)
 ```
 
-### `datadog_install(destination)`
+This function adds the SDK as a dependency while also configuring additional build steps as required by your build configuration<!--CRASHPAD--, such as deploying a crash handler executable when using Crashpad--CRASHPAD-->.
 
-`datadog_install(destination)` complements `datadog_enable()` for applications that use CMake's install system. It ensures that `crashpad_handler` is installed alongside your application binary when you run `cmake --install`.
-
-```cmake
-install(TARGETS my-app RUNTIME DESTINATION bin)
-datadog_install(bin)
-```
-
-This function has no effect when the SDK is built without Crashpad support (`DD_CRASH_MODE` is `noop` or `inprocess`). You can omit the call if your project does not use CMake install rules, does not require Crashpad, or copies `crashpad_handler` through other means.
-
-### Using `Datadog::sdk` directly
-
-Both functions are wrappers around `Datadog::sdk`, the primary CMake import target. If you need finer-grained control — for example, to use the SDK as a public dependency rather than a private one — link against it directly:
+If you prefer to configure CMake dependencies directly, you can use the `Datadog::sdk` target:
 
 ```cmake
 target_link_libraries(my-app PRIVATE Datadog::sdk)
 ```
 
-When linking directly, you are responsible for ensuring `crashpad_handler` is distributed alongside your application binary (if using Crashpad mode).
+See [`DatadogConvenience.cmake`][2] for a full definition of `datadog_enable()`.
 
-## Building from source for non-CMake builds
+## CMake installation rules and datadog_install()
 
-If you are not using CMake to build your application, you must first build the SDK with CMake to produce artifacts (headers and libraries), then configure your build to reference those artifacts.
+Depending on build configuration, you may need to package additional files with installable builds of your application.
 
-1. Clone the repository into its own directory:
+<!--CRASHPAD--
+- If you build the SDK as a shared library, your application will need to load `.so`/`.dylib`/`.dll` files at runtime.
+- When using Crashpad, an additional crash handler executable must be distributed with your application.
+--CRASHPAD-->
 
-   ```shell
-   git clone https://github.com/DataDog/dd-sdk-cpp.git
-   cd dd-sdk-cpp
-   ```
+If you're using `install()` to define installation rules for your CMake project, call `datadog_install()`:
 
-2. Configure the build, passing any desired [CMake options](#cmake-options):
-
-   ```shell
-   cmake -S . -B build
-   ```
-
-3. Build the SDK:
-
-   ```shell
-   cmake --build build
-   ```
-
-4. Copy the SDK headers into your project. Use `include-cpp/` for the C++ API or `include-c/` for the C API:
-
-   ```shell
-   cp -r include-cpp/ external/datadog-sdk/include/
-   ```
-
-5. Copy the compiled library from `build/src/` into your project. The filename varies by platform and build type: `libddsdkcpp.a` on Linux and macOS (static), `libddsdkcpp.so` or `libddsdkcpp.dylib` (shared), or `ddsdkcpp.lib` on Windows.
-
-   ```shell
-   cp build/src/libddsdkcpp.a external/datadog-sdk/lib/
-   ```
-
-6. If using Crashpad mode, also copy the `crashpad_handler` executable to the same directory as your application binary.
-
-After populating `external/datadog-sdk/`, configure your build to add the SDK headers to your include path and link against the SDK library. See [Linker dependencies](#linker-dependencies) for the full list of required libraries per platform.
-
-For a complete example, see [`myapp-make`][3] in the `dd-sdk-cpp-examples` repository.
-
-## CMake options
-
-Pass options to the CMake configure step with the `-D` flag:
-
-```shell
-cmake -S . -B build -DDD_CRASH_MODE=crashpad -DDD_HTTP_USE_SYSTEM_LIBCURL=OFF
+```cmake
+install(TARGETS my-app RUNTIME DESTINATION bin LIBRARY DESTINATION lib)
+datadog_install(my-app
+   RUNTIME_DESTINATION bin  # Optional, defaults to CMAKE_INSTALL_BINDIR if set
+   LIBRARY_DESTINATION lib  # Optional, defaults to CMAKE_INSTALL_LIBDIR if set
+                            # (Not used for Windows or static-library builds)
+)
 ```
 
-The following options are most relevant when building for integration into an existing project:
+This function ensures that all required runtime artifacts are present alongside your application binary when using `cmake --install` or building generated "install" targets.
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `DD_CRASH_MODE` | `inprocess` | Crash handler mode. `noop` disables crash reporting entirely; `inprocess` uses a signal/exception handler in the application process; `crashpad` uses an external `crashpad_handler` process. |
-| `DD_BUILD_SHARED` | `${BUILD_SHARED_LIBS}` (default: `OFF`) | Build the SDK as a shared library instead of a static library. |
-| `DD_HTTP_USE_SYSTEM_LIBCURL` | `ON` (Linux/macOS), `OFF` (Windows) | Link against the system-installed `libcurl`. Disable to have the SDK build and bundle `libcurl` from source. Windows defaults to `OFF` because `libcurl` does not ship with Windows. |
+See [`DatadogConvenience.cmake`][2] for a full definition of `datadog_install()`.
 
-## Linker dependencies
+## Customizing the SDK build
 
-When integrating the SDK without CMake, link against the following libraries in addition to `libddsdkcpp`:
+If you use `FetchContent` to build the SDK from source as part of your project's build, or if you build your own precompiled binaries to integrate into a non-CMake build, you can customize the build with CMake options:
 
-| Platform | Additional libraries |
-|----------|---------------------|
-| Linux | `-luuid` (for UUID generation), `-lcurl` (default HTTP client) |
-| macOS | `-framework CoreFoundation`, `-lcurl` (default HTTP client) |
-| Windows | `ole32.lib` (for UUID generation via `CoCreateGuid`), `wbemuuid.lib` (for WMI device info) |
+- In a `CMakeList.txt` or `.cmake` file: `set(DD_CRASH_MODE inprocess)`
+- When configuring the project with `cmake`: `cmake -DDD_CRASH_MODE=inprocess ...`
+- In the CMake GUI
 
-`-lcurl` is required on Linux and macOS when the SDK was built with `DD_HTTP_USE_SYSTEM_LIBCURL=ON` (the POSIX default). If you built the SDK with `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`, `libcurl` is compiled into the SDK and does not need to be linked separately.
+These are several important options to consider when building the SDK from source.
 
-On Windows, `ole32.lib` and `wbemuuid.lib` are linked automatically when building with MSVC (via `#pragma comment(lib, ...)`). If you are using a different toolchain such as MinGW, add them explicitly. If the SDK was built with `DD_HTTP_USE_SYSTEM_LIBCURL=ON` (non-default on Windows), also link `-lcurl`.
+<table>
+  <colgroup>
+    <col style="width:25%">
+    <col style="width:75%">
+  </colgroup>
+  <thead>
+    <tr><th>Option</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>CMAKE_BUILD_TYPE</code></td>
+      <td>
+        This is a standard CMake option, typically <code>RelWithDebInfo</code> or <code>Release</code> for production builds. If you incorporate the SDK as a dependency with <code>FetchContent</code>, you are responsible for setting this option in your project's build.
+      </td>
+    </tr>
+    <tr>
+      <td><code>DD_BUILD_SHARED</code></td>
+      <td>
+        <code>OFF</code>: The SDK is built as a static library.<br>
+        <code>ON</code>: The SDK is built as a shared/dynamic library.<br>
+        Defaults to the value of <code>BUILD_SHARED_LIBS</code>, which is <code>OFF</code> by default.
+      </td>
+    </tr>
+    <tr>
+      <td><code>DD_CRASH_MODE</code></td>
+      <td>
+        <code>inprocess</code> <i>(default)</i>: The SDK uses a simple in-process handler to detect crashes.<br>
+        <!--CRASHPAD--<code>crashpad</code>: The SDK launches a separate executable to detect crashes.<br>--CRASHPAD-->
+        <code>noop</code>: The SDK does not detect crashes.</li>
+      </td>
+    </tr>
+    <tr>
+      <td><code>DD_HTTP_USE_SYSTEM_LIBCURL</code></td>
+      <td>
+        <code>OFF</code>: libcurl is built from source as a static library and linked into the SDK.<br>
+        <code>ON</code>: The SDK will use system-installed shared libraries for libcurl.<br>
+        Defaults to <code>OFF</code> for Windows builds, <code>ON</code> for Linux and macOS.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-A complete `Makefile` linker configuration for Linux looks like:
+For a full list of configuration options, see the SDK's root [`CMakeLists.txt`][3].
 
-```makefile
-INCLUDES = -Iexternal/datadog-sdk/include
-LDFLAGS  = -Lexternal/datadog-sdk/lib
-LDLIBS   = -lddsdkcpp -lcurl -luuid
+## Integrating the SDK into a non-CMake build
+
+If your application is not built with CMake, you can link against `libddsdkcpp.a` (or `ddsdkcpp.lib` on Windows) using your project's build system. You have two options for obtaining a ready-to-link build of the SDK:
+
+1. **Use precompiled binaries:** download an officially-published Datadog release.
+2. **Build from source:** clone the SDK and build it yourself.
+
+### Using precompiled binaries
+
+From the SDK's [GitHub Releases][4] page, find your chosen release, then download the archive for your platform. Extract its contents to a directory within your project: the example below uses `external/datadog-sdk/`. 
+
+### Building from source
+
+Alternatively, you can build your own SDK binaries. Clone the SDK, configure it with your desired [CMake options](#customizing-the-sdk-build), run a build, and then use `cmake --install` to deploy it to a directory within your project. For example:
+
+{{< tabs >}}
+{{% tab "POSIX" %}}
 ```
+git clone https://github.com/DataDog/dd-sdk-cpp.git
+cd dd-sdk-cpp
+cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build
+cmake --build build
+cmake --install build --prefix "$YOUR_PROJECT/external/datadog-sdk/"
+```
+{{% /tab %}}
+{{% tab "Windows" %}}
+```
+git clone https://github.com/DataDog/dd-sdk-cpp.git
+cd dd-sdk-cpp
+cmake -G"Visual Studio 17 2022" -S . -B build
+cmake --build build --config RelWithDebInfo
+cmake --install build --config RelWithDebInfo --prefix "%YOUR_PROJECT%\external\datadog-sdk"
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+This will populate `external/datadog-sdk/`, placing all required files in `include/`, `lib/`, etc.
+
+### Configuring compiler and linker dependencies
+
+Once you have a redistributable build of the SDK in place, make the following changes to your project's build configuration:
+
+- **Include directories:** Add `external/datadog-sdk/include/`
+- **Library directories:** Add `external/datadog-sdk/lib/`
+- **Libraries to link:** Add `-lddsdkcpp` on POSIX; `ddsdkcpp.lib` on Windows
+
+You may also need to add a few other libraries, depending on your platform:
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+On Linux, linking against the SDK requires:
+
+- `-luuid`
+- `-lcurl` (unless the SDK is built with `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`)
+
+{{% /tab %}}
+{{% tab "macOS" %}}
+
+On macOS, linking against the SDK requires:
+
+- `-framework CoreFoundation`
+- `-lcurl` (unless the SDK is built with `DD_HTTP_USE_SYSTEM_LIBCURL=OFF`)
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+On Windows, linking against the SDK requires:
+
+- `ole32.lib`
+- `wbemuuid.lib`
+
+MSVC should include these libraries automatically thanks to `#pragma` directives.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Deploying additional files
+
+If you've built the SDK as a shared library, you'll need to ensure that the shared library is bundled with your application:
+
+- **Linux:** `libddsdkcpp.so`
+- **macOS:** `libddsdkcpp.dylib`
+- **Windows:** `ddsdkcpp.dll`
+
+On macOS and Linux, you'll also need to configure your executable's runtime search path so that it can find this file.
+
+<!--CRASHPAD--
+If using `DD_CRASH_MODE=crashpad`, you'll also need to copy the crashpad handler executable to the same directory as your application's executable.
+--CRASHPAD-->
 
 ## Further Reading
 
@@ -146,4 +212,5 @@ LDLIBS   = -lddsdkcpp -lcurl -luuid
 
 [1]: /real_user_monitoring/application_monitoring/cpp/setup
 [2]: https://github.com/DataDog/dd-sdk-cpp/blob/main/cmake/DatadogConvenience.cmake
-[3]: https://github.com/DataDog/dd-sdk-cpp-examples/tree/main/myapp-make
+[3]: https://github.com/DataDog/dd-sdk-cpp/blob/main/CMakeLists.txt
+[4]: https://github.com/DataDog/dd-sdk-cpp/releases
