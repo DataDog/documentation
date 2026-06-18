@@ -35,7 +35,7 @@ Choose your preferred setup method.
 {{< tabs >}}
 {{% tab "Single-Step Instrumentation" %}}
 
-Enables RUM Browser monitoring with [Single Step Instrumentation (SSI)][1].
+Enables RUM Browser monitoring with [Single Step Instrumentation (SSI)][101].
 When you run the Agent installation with RUM enabled, Datadog:
 - Loads the NGINX module into your NGINX server through SSI
 - Creates a RUM application for you
@@ -43,7 +43,7 @@ When you run the Agent installation with RUM enabled, Datadog:
 
 **This approach requires no code changes and no manual NGINX configuration.**
 
-1. Go to the [**Agent Installation**][2] page.
+1. Go to the [**Agent Installation**][102] page.
 2. Select your platform (for example, Linux).
 3. In the **Customize your observability coverage** section, enable **Real User Monitoring** under **Application Observability**.
 
@@ -52,28 +52,28 @@ When you run the Agent installation with RUM enabled, Datadog:
 4. Copy the generated installation command and run it on your host.
 5. Restart NGINX to begin collecting RUM sessions.
 
-[1]: /tracing/trace_collection/single-step-apm/
-[2]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[101]: /tracing/trace_collection/single-step-apm/
+[102]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 
 {{% /tab %}}
 {{% tab "Managed Instrumentation" %}}
 
 Use this method if you need to configure sampling rates or application settings before deploying.
 
-1. In Datadog, navigate to **Digital Experience > Manage Applications**, click [**New Application**][1], and select the JavaScript (JS) application type.
+1. In Datadog, navigate to **Digital Experience > Manage Applications**, click **Set up Manually**, and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **NGINX**.
-3. Configure your application parameters. See [guidance on configuring sampling][2].
-4. Copy and run the installer command to load the Datadog NGINX module with the RUM SDK Injector onto NGINX.
+3. Configure your application parameters. See [guidance on configuring sampling][102].
+4. Copy and run the installer command to load the Datadog NGINX module with the RUM SDK Injector into your NGINX server.
 5. Restart NGINX to begin collecting RUM sessions.
-6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the [NGINX error logs][3] for relevant messages. The module logs important steps during the injection process. Confirm that NGINX is configured with at least the `INFO` log level with the following:
+6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the [NGINX error logs][103] for relevant messages. The module logs important steps during the injection process. Confirm that NGINX is configured with at least the `INFO` log level with the following:
 
    ```javascript
    error_log <file> info;
    ```
 
-[1]: https://app.datadoghq.com/rum/list
-[2]: /real_user_monitoring/guide/sampling-browser-plans/
-[3]: https://nginx.org/en/docs/ngx_core_module.html#error_log
+[101]: https://app.datadoghq.com/rum/list
+[102]: /real_user_monitoring/guide/sampling-browser-plans/
+[103]: https://nginx.org/en/docs/ngx_core_module.html#error_log
 
 {{% /tab %}}
 {{% tab "Manual Instructions" %}}
@@ -116,7 +116,7 @@ Use this method if you cannot run the installation script or need full control o
 
 ### Restart NGINX
 
-1. Restart the NGINX server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
+1. Restart the NGINX server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected into all HTML documents. You may need to clear your browser cache.
 2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Confirm that NGINX is configured with at least the `INFO` log level with the following:
 
    ```javascript
@@ -140,7 +140,7 @@ Adjust the slider or enter a specific percentage in the input box for Session Sa
 
 ### NGINX stops responding
 
-If NGINX stops serving requests, specifically after installation, contact [Datadog support][4] with the following information:
+If NGINX stops serving requests after installation, contact [Datadog support][4] with the following information:
 
 - Your NGINX configuration file
 - Any relevant error logs
