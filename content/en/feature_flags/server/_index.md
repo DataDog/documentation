@@ -8,7 +8,7 @@ further_reading:
 - link: "/remote_configuration/"
   tag: "Documentation"
   text: "Remote Configuration"
-- link: "/feature_flags/server/serverless/"
+- link: "/feature_flags/implementation_patterns/serverless/"
   tag: "Documentation"
   text: "Serverless environments and Feature Flags"
 ---
@@ -26,6 +26,7 @@ This guide covers the common setup required for all server-side SDKs, including 
   {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/feature_flags/server/php/" src="integrations_logos/php.png" alt="PHP" >}}
   {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
@@ -140,4 +141,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /tracing/guide/#tutorials-enabling-tracing
-[5]: /feature_flags/server/serverless/
+[5]: /feature_flags/implementation_patterns/serverless/

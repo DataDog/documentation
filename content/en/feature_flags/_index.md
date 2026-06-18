@@ -20,15 +20,18 @@ further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Set up Feature Flags for server-side applications"
-- link: "/feature_flags/server/serverless/"
+- link: "/feature_flags/implementation_patterns/"
   tag: "Documentation"
-  text: "Serverless environments and Feature Flags"
+  text: "Explore Feature Flags implementation patterns"
 - link: "/feature_flags/guide/migrate_from_launchdarkly"
   tag: "Guide"
   text: "Migrate Your Feature Flags from LaunchDarkly"
 - link: "/feature_flags/guide/migrate_from_statsig"
   tag: "Guide"
   text: "Migrate Your Feature Flags from Statsig"
+- link: "/feature_flags/guide/headless_cms"
+  tag: "Guide"
+  text: "Integrate Feature Flags with a Headless CMS"
 ---
 
 ## Overview

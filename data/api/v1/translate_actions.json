@@ -786,10 +786,10 @@
     "summary": "Get all SLO corrections"
   },
   "CreateSLOCorrection": {
-    "description": "Create an SLO Correction.",
+    "description": "Create an SLO correction. Use `slo_id` to apply the correction to a single SLO, or `slo_query` to apply the\ncorrection to SLOs that match a query. Exactly one of `slo_id` or `slo_query` is required.",
     "summary": "Create an SLO correction",
     "request_description": "Create an SLO Correction",
-    "request_schema_description": "An object that defines a correction to be applied to an SLO."
+    "request_schema_description": "An object that defines a correction to be applied to one or more SLOs."
   },
   "DeleteSLOCorrection": {
     "description": "Permanently delete the specified SLO correction object.",
@@ -1144,7 +1144,7 @@
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get all usage across your account.\n\nNewly added billing dimensions and usage types appear as untyped keys on the\n`additionalProperties` map of `UsageSummaryResponse`, `UsageSummaryDate`, and\n`UsageSummaryDateOrg` instead of as typed fields. Call\n`GET /api/v2/usage/summary/available_fields` to enumerate every key returned\nat each response level—both typed fields and `additionalProperties` keys.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "description": "Get all usage across your account.\n\nFor SDK users only: all fields on `UsageSummaryResponse`, `UsageSummaryDate`, and\n`UsageSummaryDateOrg` are accessible through each object's `additionalProperties` map.\nExisting typed-field getters are unchanged. New billing dimensions will not have\ntyped-field getters. Use\n[Get available fields for usage summary](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-summary-available-fields)\nto enumerate every available key at each response level.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get usage across your account"
   },
   "GetUsageSynthetics": {

@@ -13,11 +13,15 @@ products:
 
 Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to send logs to Splunk HEC.
 
+**Note**: Observability Pipelines compresses logs with the gzip (level 6) algorithm.
+
 ## Setup
 
 Configure the Splunk HEC destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.<br>Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the Splunk HEC destination in the pipeline UI:
 
@@ -76,9 +80,9 @@ Select the **Encoding** in the dropdown menu (**JSON** or **Raw**).
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 

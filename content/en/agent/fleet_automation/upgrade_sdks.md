@@ -5,6 +5,7 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
+site-support-id: fleet-automation-standard-features
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/remote-upgrade-of-sdk-versions/" btn_hidden="false" header="Join the Preview!" >}}
