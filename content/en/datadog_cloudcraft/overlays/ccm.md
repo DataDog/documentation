@@ -22,7 +22,7 @@ further_reading:
 
 The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your cloud architecture diagrams. This overlay provides two views: [{{< ui >}}Cost{{< /ui >}}](#cost-view) and [{{< ui >}}Recommendations{{< /ui >}}](#recommendations-view).
 
-**Note**: For GCP accounts, only the Recommendations view is available.
+**Note**: For GCP and OCI accounts, only the Recommendations view is available.
 
 ## Cost view
 
