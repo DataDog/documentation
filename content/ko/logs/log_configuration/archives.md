@@ -424,4 +424,4 @@ Datadog이 스토리지 버킷에 전달하는 로그 아카이브는 압축된 
 [12]: /ko/account_management/rbac/permissions#logs_read_index_data
 [13]: /ko/account_management/rbac/permissions#logs_read_data
 [14]: /ko/logs/explorer/live_tail/
-[15]: /ko/service_management/events/explorer/
+[15]: /ko/events/explorer/

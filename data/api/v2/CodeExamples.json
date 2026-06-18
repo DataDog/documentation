@@ -140,6 +140,20 @@
       "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
+  "CreateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Create an annotation returns \"OK\" response"
+    }
+  ],
+  "UpdateAnnotation": [
+    {
+      "group": "annotations",
+      "suffix": "",
+      "description": "Update an annotation returns \"OK\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",
@@ -154,11 +168,53 @@
       "description": "Delete Multiple Apps returns \"OK\" response"
     }
   ],
+  "UpdateAppVersionName": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Name App Version returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppFavorite": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Favorite Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateProtectionLevel": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Protection Level returns \"OK\" response"
+    }
+  ],
+  "UpdateAppSelfService": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Self-Service Status returns \"No Content\" response"
+    }
+  ],
+  "UpdateAppTags": [
+    {
+      "group": "app_builder",
+      "suffix": "",
+      "description": "Update App Tags returns \"No Content\" response"
+    }
+  ],
   "UpdateApp": [
     {
       "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
+    }
+  ],
+  "CreateApplicationSecurityWafPolicy": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF Policy returns \"Created\" response"
     }
   ],
   "CreateApplicationSecurityWafExclusionFilter": [
@@ -744,6 +800,48 @@
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
+  "CreateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create a form returns \"OK\" response"
+    }
+  ],
+  "CreateAndPublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create and publish a form returns \"OK\" response"
+    }
+  ],
+  "UpsertFormVersion": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create or update a form version returns \"OK\" response"
+    }
+  ],
+  "PublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Publish a form version returns \"OK\" response"
+    }
+  ],
+  "UpdateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Update a form returns \"OK\" response"
+    }
+  ],
+  "UpsertAndPublishFormVersion": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Upsert and publish a form version returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
@@ -819,20 +917,6 @@
       "group": "ip_allowlist",
       "suffix": "",
       "description": "Update IP Allowlist returns \"OK\" response"
-    }
-  ],
-  "CreateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Create a new incident service returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Update an existing incident service returns \"OK\" response"
     }
   ],
   "UpdateIncident": [
@@ -1176,11 +1260,30 @@
       "description": "Create a tag configuration returns \"Created\" response"
     }
   ],
+  "CreateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Create a tag indexing rule returns \"Created\" response"
+    }
+  ],
+  "ReorderTagIndexingRules": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Reorder tag indexing rules returns \"No Content\" response"
+    }
+  ],
   "QueryScalarData": [
     {
       "group": "metrics",
       "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2086017331",
+      "description": "Scalar cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1259,11 +1362,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_2312509843",
-      "description": "Scalar cross product query with rum data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_394862343",
       "description": "Scalar cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1295,6 +1393,11 @@
       "group": "metrics",
       "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4190640887",
+      "description": "Timeseries cross product query with RUM data source returns \"OK\" response"
     },
     {
       "group": "metrics",
@@ -1373,11 +1476,6 @@
     },
     {
       "group": "metrics",
-      "suffix": "_123149143",
-      "description": "Timeseries cross product query with rum data source returns \"OK\" response"
-    },
-    {
-      "group": "metrics",
       "suffix": "_2884575435",
       "description": "Timeseries cross product query with security_signals data source returns \"OK\" response"
     },
@@ -1397,6 +1495,13 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag configuration returns \"OK\" response"
+    }
+  ],
+  "UpdateTagIndexingRule": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Update a tag indexing rule returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [
@@ -1554,6 +1659,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1785209526",
+      "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
     },
@@ -1576,6 +1686,11 @@
       "group": "observability_pipelines",
       "suffix": "_2960728933",
       "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1130701356",
+      "description": "Validate an observability pipeline with Splunk HEC source valid_tokens returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -1813,14 +1928,14 @@
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Create a rum-based metric returns \"Created\" response"
+      "description": "Create a RUM-based metric returns \"Created\" response"
     }
   ],
   "UpdateRumMetric": [
     {
       "group": "rum_metrics",
       "suffix": "",
-      "description": "Update a rum-based metric returns \"OK\" response"
+      "description": "Update a RUM-based metric returns \"OK\" response"
     }
   ],
   "CreateRetentionFilter": [
@@ -1986,6 +2101,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_3243059428",
+      "description": "Create a detection rule with type 'impossible_travel' and baselineUserLocationsDuration returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -2017,6 +2137,20 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a custom framework returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityFindingsAutomationDueDateRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a due date rule returns \"Successfully created the due date rule\" response"
+    }
+  ],
+  "CreateSecurityFindingsAutomationMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a mute rule returns \"Successfully created the mute rule\" response"
     }
   ],
   "CreateSignalNotificationRule": [
@@ -2057,6 +2191,13 @@
       "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationTicketCreationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a ticket creation rule returns \"Successfully created the ticket creation rule\" response"
+    }
+  ],
   "CreateCases": [
     {
       "group": "security_monitoring",
@@ -2072,6 +2213,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create cases for security findings returns \"Created\" response"
+    }
+  ],
+  "CreateIoCTriageState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
   "DetachCase": [
@@ -2109,13 +2257,6 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "MuteFindings": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Mute or unmute a batch of findings returns \"OK\" response"
-    }
-  ],
   "MuteSecurityFindings": [
     {
       "group": "security_monitoring",
@@ -2142,6 +2283,27 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
+  "ReorderSecurityFindingsAutomationDueDateRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder due date rules returns \"Successfully reordered the due date rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationMuteRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder mute rules returns \"Successfully reordered the mute rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationTicketCreationRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder ticket creation rules returns \"Successfully reordered the ticket creation rules\" response"
+    }
+  ],
   "RunHistoricalJob": [
     {
       "group": "security_monitoring",
@@ -2159,6 +2321,13 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
+  "SendSecurityMonitoringNotificationPreview": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a notification rule returns \"OK\" response"
     }
   ],
   "TestSecurityMonitoringRule": [
@@ -2194,6 +2363,20 @@
       "description": "Update a custom framework returns \"OK\" response"
     }
   ],
+  "UpdateSecurityFindingsAutomationDueDateRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a due date rule returns \"Successfully updated the due date rule\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a mute rule returns \"Successfully updated the mute rule\" response"
+    }
+  ],
   "UpdateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -2206,6 +2389,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationTicketCreationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a ticket creation rule returns \"Successfully updated the ticket creation rule\" response"
     }
   ],
   "UpdateResourceEvaluationFilters": [
@@ -2395,6 +2585,20 @@
       "group": "spans_metrics",
       "suffix": "",
       "description": "Update a span-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateBackfilledDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create backfilled degradation returns \"Created\" response"
+    }
+  ],
+  "CreateBackfilledMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create backfilled maintenance returns \"Created\" response"
     }
   ],
   "CreateComponent": [

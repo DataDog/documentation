@@ -334,7 +334,7 @@ export default {
     us5: 'The private link service for US5 is not supported.',
     eu: 'The private link service for EU is not supported.',
     ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad',
-    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5',
+    ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
   },
@@ -387,6 +387,26 @@ export default {
     ap2: 'com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10',
     gov2: 'The private link service for US2-FED is not supported.',
     gov: 'The private link service for GOV is not supported.'
+  },
+  aws_customer_access_id: {
+    us: '464622532012',
+    us3: '464622532012',
+    us5: '464622532012',
+    eu: '464622532012',
+    ap1: '417141415827',
+    ap2: '412381753143',
+    gov2: '382742775718',
+    gov: '392588925713'
+  },
+  aws_customer_access_govcloud_id: {
+    us: 'N/A',
+    us3: 'N/A',
+    us5: 'N/A',
+    eu: 'N/A',
+    ap1: 'N/A',
+    ap2: 'N/A',
+    gov2: '486737091498',
+    gov: '065115117704'
   },
   ip_ranges_url: {
     us: 'https://ip-ranges.datadoghq.com',
@@ -678,6 +698,16 @@ export default {
     gov2: '\n        .useSite(DatadogSite.US2_FED)\n        .trackCrashes(true)',
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
+  maui_site_config: {
+    us: '',
+    us3: '\n    Site = DatadogSite.Us3,',
+    us5: '\n    Site = DatadogSite.Us5,',
+    eu: '\n    Site = DatadogSite.Eu1,',
+    ap1: '\n    Site = DatadogSite.Ap1,',
+    ap2: '\n    Site = DatadogSite.Ap2,',
+    gov2: '\n    Site = DatadogSite.Us1Fed,',
+    gov: '\n    Site = DatadogSite.Us1Fed,'
+  },
   flutter_web_logs_cdn_path: {
     us: 'us1/v6/datadog-logs.js',
     us3: 'us3/v6/datadog-logs.js',
@@ -729,12 +759,12 @@ export default {
     gov: 'intake.synthetics.ddog-gov.com'
   },
   mcp_server_endpoint: {
-    us: 'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp',
-    us3: 'https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp',
-    us5: 'https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp',
-    eu: 'https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp',
-    ap1: 'https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp',
-    ap2: 'https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp',
+    us: 'https://mcp.datadoghq.com/v1/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/v1/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/v1/mcp',
+    eu: 'https://mcp.datadoghq.eu/v1/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
     gov2: 'The MCP Server endpoint for US2-FED is not supported.',
     gov: 'The MCP Server endpoint for GOV is not supported.'
   },
@@ -749,12 +779,12 @@ export default {
     gov: 'N/A'
   },
   goose_mcp_install_deeplink: {
-    us: 'goose://extension?url=https://mcp.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    eu: 'goose://extension?url=https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
-    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us: 'goose://extension?url=https://mcp.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    eu: 'goose://extension?url=https://mcp.datadoghq.eu/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
     gov: 'N/A'
   },
   microsoft_teams_app_name: {

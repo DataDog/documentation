@@ -15,9 +15,7 @@ Use this guide to set up and manage Azure automated log forwarding. You can conf
 
 The ARM template deploys resources from a series of Azure services (storage accounts and function apps) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of function apps deployed to a subscription and region of your choice. Storage accounts and function apps are deployed in each of the subscriptions forwarding logs to Datadog.
 
-**All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
-
-**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported. If you use Datadog government sites, you can only use this feature with workloads in Azure commercial cloud.
+**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
 
 ## How to choose between automated and manual setup
 
@@ -37,13 +35,13 @@ Use the automated setup method if you want to:
 
 Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly in Datadog. You can use this flow to deploy automated log forwarding from scratch or update an existing setup, such as adding or removing subscriptions or modifying log filters.
 
-1. In Datadog, navigate to [**Integrations > Azure**][16].
-1. Click **Configure Log Forwarding**.
+1. In Datadog, navigate to [{{< ui >}}Integrations > Azure{{< /ui >}}][16].
+1. Click {{< ui >}}Configure Log Forwarding{{< /ui >}}.
 1. Choose to deploy a new setup or update an existing one.
 1. Copy the provided command and paste it in your Azure Cloud Shell.
 1. Select the subscriptions to forward logs from.
 1. Optionally, add or remove log filters.
-1. Click **Confirm**.
+1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 ### ARM template
 
@@ -51,16 +49,16 @@ Alternatively, you can deploy automated log forwarding with an [Azure Public ARM
 
 #### Basics
 
-1. Under **Project details**, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
-2. Under **Instance details**, select values for:
-   - **Region**. This is where the control plane is deployed.
-   - **Subscriptions to Forward Logs**. These are the subscriptions to be configured for log forwarding.
-   - **Control Plane Subscription**. This is the subscription that the control plane is deployed to.
-   - **Resource Group Name**. This is the resource group to be used by the control plane. It is recommended to choose a new, unused resource group name to simplify management of control plane services.
+1. Under {{< ui >}}Project details{{< /ui >}}, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
+2. Under {{< ui >}}Instance details{{< /ui >}}, select values for:
+   - {{< ui >}}Region{{< /ui >}}. This is where the control plane is deployed.
+   - {{< ui >}}Subscriptions to Forward Logs{{< /ui >}}. These are the subscriptions to be configured for log forwarding.
+   - {{< ui >}}Control Plane Subscription{{< /ui >}}. This is the subscription that the control plane is deployed to.
+   - {{< ui >}}Resource Group Name{{< /ui >}}. This is the resource group to be used by the control plane. It is recommended to choose a new, unused resource group name to simplify management of control plane services.
 
 {{< img src="logs/guide/azure-automated-log-forwarding/deployment_basics.png" alt="The Basics page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
 
-3. Click **Next**.
+3. Click {{< ui >}}Next{{< /ui >}}.
 
 #### Datadog configuration
 
@@ -69,17 +67,17 @@ Alternatively, you can deploy automated log forwarding with an [Azure Public ARM
 
 {{< img src="logs/guide/azure-automated-log-forwarding/deployment_datadog_configuration_2025-02-18.png" alt="The Datadog Configuration page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
 
-3. Click **Next**.
+3. Click {{< ui >}}Next{{< /ui >}}.
 
 #### Deployment
 
 1. Click the checkbox to acknowledge the deployment warnings.
-2. Click **Review + create**.
+2. Click {{< ui >}}Review + create{{< /ui >}}.
 
 #### Review + create
 
 1. Review the finalized deployment details.
-2. Click **Create**.
+2. Click {{< ui >}}Create{{< /ui >}}.
 
 ## Resource tag filtering
 
@@ -99,12 +97,12 @@ You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog throu
 
 1. If you haven't already created an automated log forwarder, follow the [Setup](#setup) instructions. If you already have a log forwarder, make sure it is updated to the latest version.
 2. In the [Azure Portal][19], navigate to the desired Log Analytics Workspace.
-3. Under **Settings**, click **Data export**.
-4. Click **New export rule**.
-5. Name the rule, check **Enable upon creation**, and click **Next**.
-6. Select the tables to export. You can modify this selection later by editing the data export rule. Click **Next**.
-7. For **Destination type**, select **Storage Account**. Select the subscription containing your log forwarder, and choose a log forwarder storage account. These accounts typically have the prefix `ddlogstorage`. Click **Next**.
-8. Review the rule and click **Create**. Logs from the LAW start appearing in Datadog within a few minutes.
+3. Under {{< ui >}}Settings{{< /ui >}}, click {{< ui >}}Data export{{< /ui >}}.
+4. Click {{< ui >}}New export rule{{< /ui >}}.
+5. Name the rule, check {{< ui >}}Enable upon creation{{< /ui >}}, and click {{< ui >}}Next{{< /ui >}}.
+6. Select the tables to export. You can modify this selection later by editing the data export rule. Click {{< ui >}}Next{{< /ui >}}.
+7. For {{< ui >}}Destination type{{< /ui >}}, select {{< ui >}}Storage Account{{< /ui >}}. Select the subscription containing your log forwarder, and choose a log forwarder storage account. These accounts typically have the prefix `ddlogstorage`. Click {{< ui >}}Next{{< /ui >}}.
+8. Review the rule and click {{< ui >}}Create{{< /ui >}}. Logs from the LAW start appearing in Datadog within a few minutes.
 
 ### Troubleshooting
 

@@ -43,7 +43,7 @@ DORA Metrics は、選択されたサイト ({{< region-param key="dd_site_name"
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /ja/dora_metrics/
-[4]: /ja/service_management/events/explorer/
+[4]: /ja/events/explorer/
 [5]: /ja/api/latest/metrics/#query-timeseries-points
 [6]: /ja/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [7]: /ja/dora_metrics/data_collected/

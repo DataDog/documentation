@@ -43,13 +43,15 @@ Before implementing Early Flake Detection, you must configure [Test Optimization
 
 ### Configuration
 
-After you have set up your Datadog library for Test Optimization, you can configure Early Flake Detection from the [Test Optimization Settings page][7].
+After you set up your Datadog library for Test Optimization, configure Early Flake Detection in [**CI/CD Optimization settings**][7]. You can apply the setting at the organization, repository, or test service level.
 
-{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="Early flake Detection in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/early_flake_detection_test_settings-1.png" alt="Early Flake Detection toggle in CI/CD Settings." style="width:100%" >}}
 
-1. Navigate to [**Software Delivery** > **Test Optimization** > **Settings**][7].
-1. Click **Configure** on the Early Flake Detection column for a test service.
-1. Click the toggle to enable Early Flake Detection.
+1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][7].
+1. Choose where to apply the setting:
+   - Select the **Organization** tab to update the organization default.
+   - Select the **Repository-specific** tab to override the default for a single repository, or to apply an override to one of its test services.
+1. Under **Prevention**, toggle **Early Flake Detection** on.
 
 ## Compatibility
 {{< tabs >}}
@@ -103,9 +105,21 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{< /tabs >}}
 
-<div class="alert alert-danger">
-Older tracer versions limit the number of known tests fetched to 500k. If you need to fetch more than 500k known tests, update to the latest tracer version.
+<div class="alert alert-warning">
+Test services with more than 100,000 known tests require a Datadog library version that supports pagination on the known tests endpoint. The minimum versions above cover EFD's initial release; pagination support arrived later. Without it, the library cannot fetch the known tests baseline and Early Flake Detection does not run for that session.
 </div>
+
+The following Datadog library versions add pagination support on the known tests endpoint:
+
+| Library                | Minimum version |
+| ---------------------- | --------------- |
+| `dd-trace-js`          | 5.94.0          |
+| `dd-trace-java`        | 1.60.0          |
+| `dd-trace-dotnet`      | 3.42.0          |
+| `ddtrace` (Python)     | 4.6.0           |
+| `datadog-ci` (Ruby)    | 1.27.0          |
+| `dd-trace-go/v2`       | 2.8.0           |
+| `dd-sdk-swift-testing` | 2.6.7           |
 
 ## Explore results in the Test Optimization Explorer
 
@@ -116,7 +130,7 @@ You can use the following facets to query sessions that run Early Flake Detectio
 
 ## Troubleshooting
 
-If you suspect there are issues with Early Flake Detection, navigate to the [Test Optimization Settings page][7], look for your repository, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
+If you suspect there are issues with Early Flake Detection, open [**CI/CD Optimization settings**][7], find your repository or test service, and toggle Early Flake Detection off.
 
 ### A new test is not being retried
 
@@ -125,7 +139,7 @@ This could be caused by a couple of reasons:
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
-Finally, older tracer versions limit the number of known tests fetched to 500k. If your repository has more than 500k known tests, no tests will be identified as new. To prevent this, update to the latest tracer version.
+Finally, if your test service has more than 100,000 known tests and your Datadog library version does not support pagination on the known tests endpoint, the library cannot fetch the known tests baseline and no tests are identified as new. To prevent this, update to the latest tracer version.
 
 ### A test was retried that is not new
 
@@ -143,6 +157,6 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [4]: /pr_gates/
 [5]: /pr_gates/setup
 [6]: /tests
-[7]: https://app.datadoghq.com/ci/settings/test-optimization
+[7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /tests/explorer/
 [9]: /help/

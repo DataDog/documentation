@@ -377,8 +377,6 @@ If an application or a client library does not support UDS traffic, run `socat` 
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-For guidelines on creating additional implementation options, see the [datadog-agent GitHub wiki][9].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -391,4 +389,3 @@ For guidelines on creating additional implementation options, see the [datadog-a
 [6]: https://github.com/DataDog/dogstatsd-ruby#configuration
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
-[9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support

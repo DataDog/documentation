@@ -60,6 +60,11 @@
                             {{ partial "img.html" (dict "root" $dot "src" "os-ibm-zos.png" "class" "static" "alt" "IBM Z/OS" "width" "80") }}
                         </span>
                     {{ end }}
+                    {{ if eq . "aix" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "icons/platform_aix.png" "class" "static" "alt" "AIX" "width" "48") }}
+                        </span>
+                    {{ end }}
                 {{ end }}
             </p>
         </div>

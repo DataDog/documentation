@@ -47,6 +47,7 @@ The following table lists minimum SDK versions required for adaptive sampling:
 | .NET        | [v2.54.0][13]            |
 | C++/Proxies | [v0.2.2][14]             |
 | PHP         | [v1.4.0][17]             |
+| Rust        | [v0.4.0][20]             |
 
 ## Limitations
 
@@ -201,3 +202,4 @@ To restrict access:
 [17]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0
 [18]: https://app.datadoghq.com/apm/traces/ingestion-control
 [19]: /account_management/rbac/granular_access/
+[20]: https://github.com/DataDog/dd-trace-rs/releases/tag/datadog-opentelemetry-v0.4.0
