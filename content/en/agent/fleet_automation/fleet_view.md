@@ -115,13 +115,18 @@ Each row is a cluster managed by the [Datadog Operator][5] or Helm chart, and th
 
 ### Prerequisites for Kubernetes view
 
-- [Remote Configuration][6] must be enabled for your organization
+Most of the Kubernetes view is available without any prerequisite version. Specific capabilities have the following requirements:
 
-Some capabilities require specific versions:
+**View configuration**
+- `DatadogAgent` custom resource: Datadog Operator v1.24 or later
+- Helm Chart values (`values.yaml`): Datadog Helm Chart v3.157.0 or later
 
-- To view the `DatadogAgent` custom resource configuration: Datadog Operator v1.24 or later
-- To edit the `DatadogAgent` configuration from Fleet View: Datadog Operator v1.27 or later
-- To view the list of integrations running on a Cluster Agent: Agent v7.72.0 or later. On Agent v7.79.0 or later, the integration list also includes status.
+**Edit configuration from Fleet View**
+- [Remote Configuration][6] enabled for your organization, and Datadog Operator v1.27 or later (you cannot edit Helm Chart values from Fleet View)
+
+**View integrations running on a Cluster Agent**
+- Integrations list: Agent v7.72.0 or later
+- Integration status in the list: Agent v7.79.0 or later
 
 ### View Kubernetes clusters
 
@@ -135,13 +140,16 @@ Click a cluster to view:
 - Cluster-level Agents (Cluster Agent and Cluster Check Runners)
 - Node Agents
 
-For clusters managed with the Datadog Operator v1.24 or later, the {{< ui >}}Configuration{{< /ui >}} tab shows the cluster's configuration data. With Datadog Operator v1.27 or later, you can also edit the configuration from this tab.
+On the {{< ui >}}Configuration{{< /ui >}} tab, you can view configuration:
+
+- **Datadog Operator v1.24 or later**: View the `DatadogAgent` custom resource configuration. With Datadog Operator v1.27 or later, you can also edit the configuration from this tab.
+- **Datadog Helm Chart v3.157.0 or later**: View the Helm Chart values (`values.yaml`).
 
 ### Limitations
 
 Compared to the default view, the Kubernetes view has the following limitations:
 
-- You cannot send remote support flares. [under development v7.80]
+- You cannot send remote support flares.
 - You can see which OTel Collectors are running, but you cannot view their configuration in the Kubernetes view.
 - Fleet Automation API access is not available.
 
