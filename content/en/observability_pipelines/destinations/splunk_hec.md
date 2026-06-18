@@ -27,8 +27,8 @@ After you select the Splunk HEC destination in the pipeline UI:
 
 1. For the **Token strategy** dropdown menu:
 	- Only select **From Source** if you are using a [Splunk HEC source][8] and have enabled **Store HEC token** on the source. Otherwise, an error occurs and you cannot proceed to install the Worker. This option forwards the token received by Observability Pipelines onto the Splunk HEC destination.
-	- If you use the default **Custom** token strategy, enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+	- If you use the default **Custom** token strategy, enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
