@@ -94,7 +94,7 @@ On Databricks **classic** clusters (all-purpose or job clusters), the Agent is i
 
 ### What runs on the cluster
 
-- The **Datadog Agent** and the Java APM tracer run as processes on the cluster nodes (the driver, and optionally the workers).
+- The **Datadog Agent** and the Java APM tracer run as processes on the cluster nodes (the driver and the executors).
 - The Spark integration runs **in-process** as a Spark listener: it reacts to Spark scheduler events (job, stage, and task callbacks) to build traces and spans. It does not poll your data or run any queries against your warehouse.
 - The Agent collects Spark performance metrics and cluster system metrics, and optionally tails driver and worker logs.
 
@@ -108,7 +108,6 @@ The cluster Agent issues **no queries against your warehouse**, so it adds no wa
 
 ### Reducing Jobs Monitoring overhead
 
-- **Install on the driver only** when you do not need per-executor task detail, rather than on every worker node.
 - **Disable log collection** when you do not need driver and worker logs (`DRIVER_LOGS_ENABLED` / `WORKER_LOGS_ENABLED`), or filter logs with `DD_LOGS_CONFIG_PROCESSING_RULES`. Log collection is the main tunable contributor to footprint and ingestion volume.
 
 ### A note on Databricks cost data
@@ -123,9 +122,9 @@ These integrations capture run, job, and dataset metadata and emit events at run
 
 - **Airflow**: the [`apache-airflow-providers-openlineage`][4] provider runs in your Airflow schedulers and workers and emits an event at task and DAG lifecycle points. Its [configuration reference][5] documents options that affect overhead, such as selectively enabling OpenLineage and limiting collected metadata.
 - **dbt**: for dbt Core, the [`openlineage-dbt`][6] wrapper (`dbt-ol`) follows dbt's structured logs and emits events as the run progresses. Because it reads logs rather than instrumenting execution, it does not affect dbt's performance. dbt Cloud sends job-run events to Datadog through a webhook, with no component running in your environment.
-- **Custom pipelines**: you emit events yourself with the OpenLineage client or a raw HTTP call, so the overhead is whatever your emitting code does. You can also instrument Spark directly with OpenLineage instead of using the Agent-based Spark monitoring above. In that case, the Spark integration provides a [circuit breaker][7] that bounds the listener's time and memory overhead.
+- **Custom pipelines**: you emit events yourself with the OpenLineage client or a raw HTTP call, so the overhead is whatever your emitting code does.
 
-For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineage][8]. Refer to the OpenLineage documentation for the full set of tuning and overhead controls.
+For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineage][7]. Refer to the OpenLineage documentation for the full set of tuning and overhead controls.
 
 ## Notes
 
@@ -137,8 +136,7 @@ The behaviors above are environment-dependent. Actual cost depends on your wareh
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html
 [6]: https://openlineage.io/docs/integrations/dbt
-[7]: https://openlineage.io/docs/integrations/spark/configuration/circuit_breaker
-[8]: /data_observability/jobs_monitoring/openlineage/
+[7]: /data_observability/jobs_monitoring/openlineage/
 
 ## Further reading
 
