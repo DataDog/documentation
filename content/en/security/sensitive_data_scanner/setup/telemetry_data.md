@@ -63,6 +63,12 @@ If a scanning rule uses the **mask** action (only available for logs) for matche
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
+### Guided setup
+
+When you set up Sensitive Data Scanner for the first time, or when your organization has no scanning groups configured, Datadog provides an in-app guided setup. Open the [Sensitive Data Scanner][5] settings page and follow the on-screen steps to select the data you want to scan, create a scanning group, and add scanning rules. This is the recommended way to get started.
+
+To configure scanning groups and rules manually, or to adjust an existing configuration, follow the sections below.
+
 ### Add a scanning group
 
 A scanning group determines what data to scan. It consists of a query filter, a set of buttons to enable scanning for logs, APM, RUM, and events, and the option to set sampling rates between 10% to 99% for each product. See the [Log Search Syntax][3] documentation to learn more about query filters.
