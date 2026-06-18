@@ -6325,6 +6325,11 @@ menu:
       parent: feature_flags
       identifier: feature_flags_implementation_patterns
       weight: 4
+    - name: OpenTelemetry
+      url: feature_flags/implementation_patterns/opentelemetry
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_opentelemetry
+      weight: 401
     - name: Serverless
       url: feature_flags/implementation_patterns/serverless
       parent: feature_flags_implementation_patterns
