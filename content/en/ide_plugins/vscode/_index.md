@@ -76,7 +76,7 @@ Install the extension either directly in the IDE, or from the web:
 
 ### Datadog MCP Server setup
 
-Sign in to Datadog via the extension and run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [Datadog MCP Server][3].
+Sign in to Datadog using the extension and run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [Datadog MCP Server][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /mcp_server/
