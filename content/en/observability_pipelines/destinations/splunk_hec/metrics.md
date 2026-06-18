@@ -32,7 +32,7 @@ After you select the Splunk HEC destination in the pipeline UI:
 
 #### Default namespace
 
-Enter a default namespace to use as a prefix for metrics that don't already have one. The namespace is prepended to the metric name with a period (`.`),for example, `service.cpu.usage` where `service` is the namespace.
+Enter a default namespace to use as a prefix for metrics that don't already have one. The namespace is prepended to the metric name with a period (`.`), such as `service.cpu.usage` where `service` is the namespace.
 
 #### Compression
 
