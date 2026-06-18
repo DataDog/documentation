@@ -92,21 +92,23 @@ All instrumentation types require the same initial setup:
 
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Instrumentation** in the top right, or click the three-dot menu on a service and select **Add an instrumentation for this service**.
-1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the instrumentation by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
+1. If they are not prefilled, choose service, runtime, environment, and version (optional).
+1. Specify where to set the instrumentation in the source code by specifying either a class and method, or a specific line of code in a given file. In most cases, there should be an autocomplete search available for you to easily find the files, methods, or symbols you're looking for.
+
+For the best experience, we strongly recommend setting up your [Source Code Integration][7], so that you can see your code directly in Datadog and select the instrumentation code location - like you would with a breakpoint in an IDE.
 
 See the individual instrumentation types below for specific creation steps for each instrumentation type.
 
 <div class="alert alert-info">Dynamic log instrumentations are supported in <a href="/tracing/live_debugger/">Live Debugger</a>. Use Live Debugger to capture logs and variable snapshots in real time from running applications.</div>
 
-### Creating metric instrumentations
+### Creating dynamic metrics
 
-A *metric instrumentation* emits a metric when it executes.
+A dynamic metric emits a metric when it executes.
 
-To create a metric instrumentation:
+To create a dynamic metric:
 
 1. Select **Metric** as the instrumentation type.
-1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
+1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, and location).
 1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
 1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
@@ -115,31 +117,31 @@ To create a metric instrumentation:
 
 Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method or line is invoked.
 
-Dynamic Instrumentation metric instrumentations support the following metric types:
+Dynamic Instrumentation supports the following metric types:
 
 - **Count**: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
 - **Gauge**: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
 - **Histogram**: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
-### Creating span instrumentations
+### Creating dynamic spans
 
-A *span instrumentation* emits a span when a method is executed.
+A *dynamic span* emits a span when a method is executed.
 
-To create a span instrumentation:
+To create a dynamic span:
 
 1. Select **Span** as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
 
 {{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span instrumentation" >}}
 
-You can use a *span instrumentation* as an alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
+You can use a *dynamic span* as an alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
 
-### Creating span tag instrumentations
+### Creating dynamic span tags
 
-A *span tag instrumentation* adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
+A *dynamic span tag* adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
 Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.
 
-To create a span tag instrumentation:
+To create a dynamic span tag:
 
 1. Select **Span Tag** as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
@@ -151,7 +153,7 @@ To create a span tag instrumentation:
 
 {{< img src="dynamic_instrumentation/span_tag_probe.png" alt="Creating a Dynamic Instrumentation span tag instrumentation" >}}
 
-You can use a *span tag instrumentation* as an alternative to [using Custom Instrumentation to add tags in code][14].
+You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][14].
 
 
 ## Further Reading
