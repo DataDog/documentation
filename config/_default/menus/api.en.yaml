@@ -4291,6 +4291,240 @@ menu:
           - DetachCase
         unstable: []
         order: 16
+    - name: Update a ticket creation rule
+      url: /api/latest/security-monitoring/update-a-ticket-creation-rule/
+      identifier: security-monitoring-update-a-ticket-creation-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationTicketCreationRule
+        unstable:
+          - v2
+        order: 150
+    - name: Get a ticket creation rule
+      url: /api/latest/security-monitoring/get-a-ticket-creation-rule/
+      identifier: security-monitoring-get-a-ticket-creation-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationTicketCreationRule
+        unstable:
+          - v2
+        order: 149
+    - name: Delete a ticket creation rule
+      url: /api/latest/security-monitoring/delete-a-ticket-creation-rule/
+      identifier: security-monitoring-delete-a-ticket-creation-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationTicketCreationRule
+        unstable:
+          - v2
+        order: 151
+    - name: Reorder ticket creation rules
+      url: /api/latest/security-monitoring/reorder-ticket-creation-rules/
+      identifier: security-monitoring-reorder-ticket-creation-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationTicketCreationRules
+        unstable:
+          - v2
+        order: 148
+    - name: Create a ticket creation rule
+      url: /api/latest/security-monitoring/create-a-ticket-creation-rule/
+      identifier: security-monitoring-create-a-ticket-creation-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationTicketCreationRule
+        unstable:
+          - v2
+        order: 147
+    - name: Get all ticket creation rules
+      url: /api/latest/security-monitoring/get-all-ticket-creation-rules/
+      identifier: security-monitoring-get-all-ticket-creation-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationTicketCreationRules
+        unstable:
+          - v2
+        order: 146
+    - name: Update a mute rule
+      url: /api/latest/security-monitoring/update-a-mute-rule/
+      identifier: security-monitoring-update-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationMuteRule
+        unstable:
+          - v2
+        order: 138
+    - name: Get a mute rule
+      url: /api/latest/security-monitoring/get-a-mute-rule/
+      identifier: security-monitoring-get-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationMuteRule
+        unstable:
+          - v2
+        order: 137
+    - name: Delete a mute rule
+      url: /api/latest/security-monitoring/delete-a-mute-rule/
+      identifier: security-monitoring-delete-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationMuteRule
+        unstable:
+          - v2
+        order: 139
+    - name: Reorder mute rules
+      url: /api/latest/security-monitoring/reorder-mute-rules/
+      identifier: security-monitoring-reorder-mute-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationMuteRules
+        unstable:
+          - v2
+        order: 136
+    - name: Create a mute rule
+      url: /api/latest/security-monitoring/create-a-mute-rule/
+      identifier: security-monitoring-create-a-mute-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationMuteRule
+        unstable:
+          - v2
+        order: 135
+    - name: Get all mute rules
+      url: /api/latest/security-monitoring/get-all-mute-rules/
+      identifier: security-monitoring-get-all-mute-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationMuteRules
+        unstable:
+          - v2
+        order: 134
+    - name: Update a due date rule
+      url: /api/latest/security-monitoring/update-a-due-date-rule/
+      identifier: security-monitoring-update-a-due-date-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationDueDateRule
+        unstable:
+          - v2
+        order: 144
+    - name: Get a due date rule
+      url: /api/latest/security-monitoring/get-a-due-date-rule/
+      identifier: security-monitoring-get-a-due-date-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationDueDateRule
+        unstable:
+          - v2
+        order: 143
+    - name: Delete a due date rule
+      url: /api/latest/security-monitoring/delete-a-due-date-rule/
+      identifier: security-monitoring-delete-a-due-date-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationDueDateRule
+        unstable:
+          - v2
+        order: 145
+    - name: Reorder due date rules
+      url: /api/latest/security-monitoring/reorder-due-date-rules/
+      identifier: security-monitoring-reorder-due-date-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationDueDateRules
+        unstable:
+          - v2
+        order: 142
+    - name: Create a due date rule
+      url: /api/latest/security-monitoring/create-a-due-date-rule/
+      identifier: security-monitoring-create-a-due-date-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationDueDateRule
+        unstable:
+          - v2
+        order: 141
+    - name: Get all due date rules
+      url: /api/latest/security-monitoring/get-all-due-date-rules/
+      identifier: security-monitoring-get-all-due-date-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationDueDateRules
+        unstable:
+          - v2
+        order: 140
     - name: Assign or unassign security findings
       url: /api/latest/security-monitoring/assign-or-unassign-security-findings/
       identifier: security-monitoring-assign-or-unassign-security-findings
