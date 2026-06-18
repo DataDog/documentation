@@ -124,7 +124,6 @@ module "datadog_storage_management" {
   # Defaults to "datadog-inventories/". The module keeps the inventory
   # configuration, bucket policy, and IAM permissions consistent with this
   # value. Datadog recommends to use the default value.
-  # change it.
   # destination_prefix = "datadog-inventories/"
 
   # Bucket policy: "none", "create", or "merge" (default)
