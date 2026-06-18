@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Server-side events are custom events sent through the [Product Analytics API][1] from your server. Unlike client-side events captured by the RUM SDK—such as pageviews or button clicks—server-side events track actions that occur in your backend, such as a completed checkout or processed payment.
+Server-side events are custom events sent through the [Product Analytics API][1] from your server. Unlike client-side events captured by the RUM SDK, such as pageviews or button clicks, server-side events track actions that occur in your backend, such as a completed checkout or processed payment.
 
 Use server-side events to:
 
@@ -31,7 +31,7 @@ Before sending server-side events, [set up the Datadog SDK][2] for your applicat
 
 ## Send server-side events
 
-Use the [Product Analytics API][1] to send events from your server. To associate a server-side event with a client session—enabling a complete view of the user journey in Product Analytics—include the `session_id` from the client's active RUM session.
+Use the [Product Analytics API][1] to send events from your server. To associate a server-side event with a client session, include the `session_id` from the client's active RUM session. This links server-side events to client-side data for a complete view of the user journey.
 
 For the full API reference including authentication, required fields, and request parameters, see [Send server-side events][1].
 
