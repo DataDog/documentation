@@ -40,8 +40,6 @@ The extension includes these features:
 
 - [**Code Security**](#code-security): Detect and fix security issues before you commit, and write custom rules.
 
-- [**Datadog MCP Server Configuration Assistant**](?tab=cursor#installation): Configure the Datadog MCP Server for detected AI tools.
-
 - [**Code Insights**](#code-insights): Stay informed about code and library vulnerabilities without leaving the code.
 
 - [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
@@ -78,7 +76,7 @@ Install the extension either directly in the IDE, or from the web:
 
 ### Datadog MCP Server setup
 
-Run the `Datadog: Open MCP Configuration Assistant` command and follow the guidance to configure the [Datadog MCP Server][3].
+Sign in to Datadog via the extension then run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [Datadog MCP Server][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /mcp_server/
