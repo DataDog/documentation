@@ -1,0 +1,16 @@
+{{- /*
+  Page-title heading for hardcoded API Overview pages (Using the API,
+  Authorization Scopes, Rate Limits, API Reference). Renders the same anchored
+  <h2> as the h2 shortcode, paired with the page Copy button so the two sit
+  together — mirroring the layout of the generated API pages.
+
+  Use once per page, for the top heading only: it emits the #page-copy-btn
+  element, so a second use would duplicate that id.
+*/ -}}
+{{ $anchorized := anchorize .Inner }}
+<div class="api-intro-header d-flex flex-wrap align-items-start justify-content-between">
+  <h2 id="{{ $anchorized }}">
+    <a href="#{{ $anchorized }}">{{ .Inner }}</a>
+  </h2>
+  {{ partial "api/api-copy-btn.html" .Page }}
+</div>
