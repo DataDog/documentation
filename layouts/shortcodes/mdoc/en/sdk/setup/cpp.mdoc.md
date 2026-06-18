@@ -9,10 +9,11 @@ This page describes how to instrument your applications for [Real User Monitorin
 
 ## Prerequisites
 
-Before you begin, you need:
-- CMake 3.21 or later
-- A C++17-compatible compiler (GCC 8+, Clang 7+, or MSVC 2019 16.11+)
+Before you begin, you will need:
+
 - A Datadog account with RUM or Error Tracking enabled
+- A C++17-compatible compiler
+- If using CMake: a project defined using CMake 3.21 or later
 
 ## Setup
 
@@ -97,7 +98,7 @@ For more detailed information on build configuration, see [Advanced Build Config
 
 1. Navigate to [**Digital Experience** > **Add an Application**][2].
 2. Select `C++` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. Copy the application ID and client token — you need them to initialize the SDK.
+3. Copy the application ID and client token — you'll need them to initialize the SDK.
 
 {% /step %}
 

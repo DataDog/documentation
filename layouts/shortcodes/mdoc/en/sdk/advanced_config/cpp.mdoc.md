@@ -3,15 +3,15 @@ This partial contains advanced configuration instructions for the C++ SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-If you have not set up the RUM C++ SDK yet, follow the [in-app setup instructions][1] or see the [RUM C++ setup documentation][2].
+If you haven't set up the C++ SDK yet, follow the [in-app setup instructions][1] or see the [RUM C++ setup documentation][2].
 
 ## Instrument your application
 
-The C++ SDK does not automatically instrument your application. Unlike mobile SDKs that hook into platform UI frameworks, every view transition, user interaction, network request, and error must be recorded by calling the appropriate RUM API. The sections below describe each category of event.
+The C++ SDK is a low-level library that it not coupled to a UI framework. As such, it does not automatically instrument your application: user interactions and changes in application state must be manually recording by calling the appropriate RUM API.
 
 ### Track views
 
-A RUM session is organized into views — each representing a distinct screen, scene, or state in your application, such as a level, menu, or settings panel. All actions, resources, and errors are associated with the current view.
+A RUM session is organized into views, each representing a distinct screen, scene, or state in your application, such as a level, menu, or settings panel. All actions, resources, and errors are associated with the current view.
 
 Each view is identified by a `key` string that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous one.
 
@@ -86,7 +86,7 @@ dd_rum_stop_action(rum, DD_RUM_ACTION_TYPE_SCROLL, NULL, NULL);
 
 ### Track resources
 
-Resources track HTTP requests — or any analogous network operation — made in the context of the current view. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
+Resources track HTTP requests (or any analogous network operation) made in the context of the current view. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
 
 {% tabs %}
 {% tab label="Cpp" %}
@@ -154,7 +154,7 @@ dd_rum_add_error(rum, DD_RUM_ERROR_SOURCE_SOURCE,
 
 ### Track operations
 
-Operations let you measure multi-step workflows — such as login, checkout, or file upload — that may span multiple views. The SDK emits step events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
+Operations let you measure multi-step workflows — such as login, checkout, or file upload — that may span multiple views. The SDK emits events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
 
 {% alert level="info" %}
 The operations API is in preview and may change in future releases.
@@ -218,17 +218,16 @@ dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_GRANTED);
 
 ## Custom attributes
 
-Custom attributes are key-value pairs that you attach to RUM events to enrich them with application-specific context. They can be scoped either globally (applied to all subsequent events) or per-view (applied only to events generated within that view).
+Custom attributes are key-value pairs that you attach to RUM events to enrich them with application-specific context. They can be scoped globally or per-view, as well as being applied to individual actions, resources, errors, or operations.
 
 {% alert level="info" %}
 Custom attributes are intended for small, targeted pieces of information such as IDs, flags, or short labels. Avoid attaching large objects such as full HTTP response payloads, which can significantly increase event size and impact performance.
 {% /alert %}
 
-**Global attributes** are set on the `Rum` instance and apply to all events from that point forward:
+For example, to apply a set of custom attributes to all RUM events sent from that point forward:
 
 {% tabs %}
 {% tab label="Cpp" %}
-
 ```cpp
 rum->AddAttribute("account.tier", datadog::Attribute::String("premium"));
 rum->AddAttribute("feature.new_ui", datadog::Attribute::Bool(true));
@@ -236,10 +235,8 @@ rum->AddAttribute("feature.new_ui", datadog::Attribute::Bool(true));
 // Remove a global attribute
 rum->RemoveAttribute("feature.new_ui");
 ```
-
 {% /tab %}
 {% tab label="C" %}
-
 ```c
 dd_attribute_t tier_attr = dd_attribute_string("premium");
 dd_rum_add_attribute(rum, "account.tier", &tier_attr);
@@ -248,34 +245,8 @@ dd_attribute_free(&tier_attr);
 /* Remove a global attribute */
 dd_rum_remove_attribute(rum, "feature.new_ui");
 ```
-
 {% /tab %}
 {% /tabs %}
-
-**View-level attributes** are set after `StartView` and are scoped to that view's lifetime. They take precedence over global attributes with the same name and are discarded when the view ends:
-
-{% tabs %}
-{% tab label="Cpp" %}
-
-```cpp
-rum->StartView("gameplay", "Level 1");
-rum->AddViewAttribute("level.difficulty", datadog::Attribute::String("hard"));
-```
-
-{% /tab %}
-{% tab label="C" %}
-
-```c
-dd_rum_start_view(rum, "gameplay", "Level 1", NULL);
-dd_attribute_t diff_attr = dd_attribute_string("hard");
-dd_rum_add_view_attribute(rum, "level.difficulty", &diff_attr);
-dd_attribute_free(&diff_attr);
-```
-
-{% /tab %}
-{% /tabs %}
-
-Supported value types include strings, booleans, integers (`int64_t`), unsigned integers (`uint64_t`), doubles, timestamps, UUIDs, arrays, and nested objects.
 
 **Note**: Avoid spaces or special characters in attribute key names. For example, use `"account_tier"` instead of `"Account Tier"`. Keys with spaces or special characters cannot be used as facets in the Datadog UI.
 
@@ -452,12 +423,14 @@ The following parameters are required to initialize the SDK. The first three are
 
 | Parameter | Description |
 | --- | --- |
-| `client_token` | The client token for your Datadog organization. |
+| `client_token` | The client token associated with your RUM Application. |
 | `service` | Application or service name, used for unified service tagging. |
 | `env` | Deployment environment, such as `prod` or `staging`. |
-| `application_id` | (RUM only) The ID of your RUM Application. |
+| `application_id` | The ID of your RUM Application. |
 
 ### Additional parameters
+
+These optional parameters are accepted by `CoreConfig`:
 
 | Parameter | Description |
 | --- | --- |
