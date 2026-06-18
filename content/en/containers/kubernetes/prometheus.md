@@ -232,6 +232,39 @@ For a full list of available parameters for instances, including `namespace` and
    ```
 
    {{% /tab %}}
+   {{% tab "DatadogInstrumentation CRD" %}}
+
+   **Note:** Configuring checks with the `DatadogInstrumentation` custom resource requires Datadog Agent version 7.81 or higher.
+
+   The example `prometheus.yaml` defines the same check as a pod annotation. Remove that annotation before applying this resource, because annotations take precedence over `DatadogInstrumentation` resources.
+
+   ```yaml
+   apiVersion: datadoghq.com/v1alpha1
+   kind: DatadogInstrumentation
+   metadata:
+     name: prometheus-example
+     namespace: <WORKLOAD_NAMESPACE>
+   spec:
+     targetRef:
+       apiVersion: apps/v1
+       kind: Deployment
+       name: prometheus-example
+     config:
+       checks:
+         - integration: openmetrics
+           containerImage:
+             - prometheus # the image short name
+           initConfig: {}
+           instances:
+             - openmetrics_endpoint: "http://%%host%%:%%port%%/metrics"
+               namespace: "documentation_example_kubernetes"
+               metrics:
+                 - promhttp_metric_handler_requests: "handler.requests"
+                 - promhttp_metric_handler_requests_in_flight: "handler.requests.in_flight"
+                 - "go_memory.*"
+   ```
+
+   {{% /tab %}}
    {{< /tabs >}}
 
      Command to create the Prometheus Deployment:
