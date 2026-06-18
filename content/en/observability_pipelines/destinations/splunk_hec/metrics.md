@@ -32,7 +32,7 @@ After you select the Splunk HEC destination in the pipeline UI:
 
 #### Default namespace
 
-Enter a default namespace.
+Enter a default namespace to use as a prefix for metrics that don't already have one. The namespace is prepended to the metric name with a period (`.`),for example, `service.cpu.usage` where `service` is the namespace.
 
 #### Compression
 
@@ -46,7 +46,7 @@ Enter the name of the Splunk metrics index to which you are sending metrics. See
 
 #### Source
 
-Enter a source value if you want the source field added to your metrics.
+Enter a source value to add the source field to your metrics.
 
 #### Source type override
 
@@ -78,15 +78,15 @@ Set the `sourcetype` to override Splunk's default value, which is `httpevent` fo
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-|    None        |       1           |          1          |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds) |
+|----------------|-------------------|-------------------|
+|    None        |       1           |          1        |
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/destinations/#event-batching
