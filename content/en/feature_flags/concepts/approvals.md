@@ -16,15 +16,19 @@ Approvals help you control what changes are made to feature flags and by whom. I
 
 ## Require approvals on an environment
 
-1. Mark the environment as a [production environment](/feature_flags/concepts/environments/#production-environments).
-2. Navigate to **Feature Flags > Settings > Environments**.
-3. Select the environment and enable the option to require approvals.
+1. Navigate to <a href="https://app.datadoghq.com/feature-flags/settings/environments"><strong>Feature Flags &gt; Settings &gt; Environments</strong></a>.
+2. Select the environment you want to configure.
+3. If it is not already a production environment, mark it as a [production environment](/feature_flags/concepts/environments/#production-environments).
+4. Enable the option to require approvals.
+
+{{< img src="getting_started/feature_flags/environment-approvals.png" alt="Edit Environment dialog with Mark as production environment and Require feature flag approval options." style="width:100%;" >}}
+
 
 After you enable approvals, subsequent changes that impact application behavior in that environment require approval from a user with edit access to the flag. Examples include:
 
-- Enabling or disabling the flag
+- Enabling or disabling a flag
 - Modifying targeting rules
-- Archiving the flag
+- Archiving a flag
 
 ## Require approvals on a feature flag
 
@@ -32,11 +36,19 @@ After you enable approvals, subsequent changes that impact application behavior 
 
 When creating a flag, toggle **Require approval on changes to this flag for all production environments** to enable approvals for that flag in every production environment.
 
+{{< img src="getting_started/feature_flags/configure-flag-approvals-on-creation.png" alt="Create feature flag flow showing Approvals and notifications with Require approval on changes to this flag for all production environments enabled." style="width:100%;" >}}
+
 ### Existing flag
+
+<div class="alert alert-info">
+Enabling or disabling approvals on an existing flag requires the organization permission <strong>Feature Flag Approvals Override</strong>, in addition to edit access on the flag. The same permission allows users to bypass or override the approvals workflow; see <a href="#override-approvals">Override approvals</a>.
+</div>
 
 1. Navigate to your flag's details page.
 2. Open **Settings > Approvals**.
 3. Toggle **Require approval on changes to this flag for all production environments**.
+
+{{< img src="getting_started/feature_flags/flag-approvals-modal.png" alt="Approvals modal on a feature flag with Require approval on changes to this flag for all production environments toggle and Save." style="width:100%;" >}}
 
 ## Approval workflow
 
@@ -56,6 +68,16 @@ Approvers see a diff, a description of the change, and the affected environment.
 <div class="alert alert-warning">
 Approving a change <strong>applies the change automatically</strong>.
 </div>
+
+
+### Override approvals
+
+The **Feature Flag Approvals Override** organization permission does two things:
+
+- **Existing flags:** It is required to turn on required approvals for a flag that already exists (in addition to [granular edit access](/feature_flags/concepts/permissions/) on that flag).
+- **Workflow bypass:** It allows holders to bypass or override the approvals workflow when the product exposes that option, so changes can proceed without the usual review and approval steps.
+
+Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles](/account_management/rbac/); see [Permissions and Access Control](/feature_flags/concepts/permissions/) for related Feature Flags permissions.
 
 ## Find flags with pending approvals
 
