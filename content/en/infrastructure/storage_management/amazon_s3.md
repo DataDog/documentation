@@ -204,7 +204,7 @@ For each bucket you want to monitor:
      {{< img src="integrations/guide/storage_monitoring/all-versions.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
    - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
 
-      **Note**: Add the destination prefix you chose in step 1. Use the same value here that you register with Datadog in the post-setup step.
+      **Note**: Add the destination prefix you chose in step 1. Use the same value that you register with Datadog in the post-setup step.
    - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
    - **Output format**: CSV
    - **Status**: Enabled
