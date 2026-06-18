@@ -107,7 +107,7 @@ For more detailed information on build configuration, see [Advanced Build Config
 In your application code, include the appropriate SDK headers:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 #include "datadog.hpp"
 ```
@@ -122,7 +122,7 @@ In your application code, include the appropriate SDK headers:
 Next, as early as possible in your application's startup sequence, initialize a `Core` using the configuration details that identify your RUM Application:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 // Configure the SDK with your client token and unified service tagging values
 datadog::CoreConfig config("<client_token>", "<service>", "<env>");
@@ -166,7 +166,7 @@ dd_core_destroy(core);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::us3);
 ```
@@ -183,7 +183,7 @@ dd_core_config_set_site(&config, DD_SITE_US3);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::us5);
 ```
@@ -200,7 +200,7 @@ dd_core_config_set_site(&config, DD_SITE_US5);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::eu1);
 ```
@@ -217,7 +217,7 @@ dd_core_config_set_site(&config, DD_SITE_EU1);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::ap1);
 ```
@@ -234,7 +234,7 @@ dd_core_config_set_site(&config, DD_SITE_AP1);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::ap2);
 ```
@@ -251,7 +251,7 @@ dd_core_config_set_site(&config, DD_SITE_AP2);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::us1_fed);
 ```
@@ -268,7 +268,7 @@ dd_core_config_set_site(&config, DD_SITE_US1_FED);
 #### Configure Datadog site
 Use `SetSite` to configure the SDK with your Datadog site.
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetSite(datadog::Site::us2_fed);
 ```
@@ -298,7 +298,7 @@ For GDPR compliance, the SDK requires a tracking consent value at initialization
 The tracking consent value may be updated at any time, as long as the Core still exists:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 core->SetTrackingConsent(datadog::TrackingConsent::Pending);
 ```
@@ -321,7 +321,7 @@ For information on other SDK configuration options, see [Advanced Configuration]
 Once the Core is configured, register the RUM feature and call `Start()`.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 // Configure and register RUM
 datadog::RumConfig rum_config("<rum_application_id>");
@@ -357,7 +357,7 @@ dd_core_destroy(core);
 To control the percentage of RUM sessions sent to Datadog, you can set a session sample rate between 0.0 and 100.0. The default is 100.0, which keeps all sessions.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 // In this example, only 75% of sessions will be sent to Datadog
 rum_config.SetSessionSampleRate(75.0f);
@@ -380,7 +380,7 @@ Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessio
 Call `StartView` whenever your application transitions to a new screen, scene, or meaningful state:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 // Record that the user is now on the startup screen
 rum->StartView("startup_screen", "Startup Screen");
@@ -409,7 +409,7 @@ After instrumenting your application, verify that the SDK is correctly sending d
 By default, the SDK will log diagnostic warnings and errors to `stderr`. You can increase the verbosity of this output in your `CoreConfig`:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 config.SetDiagnosticThreshold(datadog::DiagnosticLevel::Debug);
 ```

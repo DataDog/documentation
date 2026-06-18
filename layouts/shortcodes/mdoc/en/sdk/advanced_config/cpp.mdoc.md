@@ -16,7 +16,7 @@ A RUM session is organized into views, each representing a distinct screen, scen
 Each view is identified by a `key` string that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous one.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 // Begin tracking the main menu
@@ -56,7 +56,7 @@ Actions record user interactions in the context of the current view. The SDK sup
 Available action types are `Tap`, `Click`, `Scroll`, `Swipe`, and `Custom`. Only one non-`Custom` action may be active at a time; `AddAction` with type `Custom` is always accepted regardless of other active actions.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 // Record a discrete button tap
@@ -89,7 +89,7 @@ dd_rum_stop_action(rum, DD_RUM_ACTION_TYPE_SCROLL, NULL, NULL);
 Resources track HTTP requests (or any analogous network operation) made in the context of the current view. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 // Record the start of an HTTP request
@@ -132,7 +132,7 @@ Use `StopResourceWithError` instead of `StopResource` when the request fails due
 Custom errors can be reported in the context of the current view with `AddError`. The `source` field classifies where the error originates: use `Source` for bugs in application code, `Network` for connectivity issues, and `Custom` as a general-purpose catch-all. The `type` and `stack_trace` parameters are optional.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 rum->AddError(datadog::RumErrorSource::Source,
@@ -161,7 +161,7 @@ The operations API is in preview and may change in future releases.
 {% /alert %}
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 rum->StartOperation("user_login");
@@ -200,7 +200,7 @@ To update the SDK's tracking consent after initialization, call `SetTrackingCons
 - `NotGranted`: The SDK deletes all pending data and stops collecting new data.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 core->SetTrackingConsent(datadog::TrackingConsent::Granted);
@@ -227,7 +227,7 @@ Custom attributes are intended for small, targeted pieces of information such as
 For example, to apply a set of custom attributes to all RUM events sent from that point forward:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 ```cpp
 rum->AddAttribute("account.tier", datadog::Attribute::String("premium"));
 rum->AddAttribute("feature.new_ui", datadog::Attribute::Bool(true));
@@ -269,7 +269,7 @@ Adding user information to your RUM sessions makes it possible to:
 To identify user sessions, call `SetUserInfo` on the core:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 core->SetUserInfo("1234", "John Doe", "john@doe.com");
@@ -297,7 +297,7 @@ A parallel API is available for associating an account — such as an organizati
 | `acc.name` | String | (Optional) Account name, displayed in the Datadog UI. |
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 core->SetAccountInfo("org-456", "Acme Corp");
@@ -322,7 +322,7 @@ By default, the SDK prints warnings and errors to `stderr`. Both the threshold a
 The **threshold** controls which severity levels are emitted. Levels below the threshold are silently dropped:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 // Emit all messages (debug, status, warning, error)
@@ -349,7 +349,7 @@ dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_ERROR);
 The **handler** controls what happens when a message is emitted. Supply a callback to route SDK messages into your own logging system. The `text` field in the message is only valid during the handler invocation — copy it if you need to store it persistently.
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 config.SetDiagnosticHandler([](const datadog::DiagnosticMessage& message) {
@@ -391,7 +391,7 @@ If `SetApplicationStoragePath` is not called, the SDK defaults to the current wo
 To accept the current working directory and suppress the warning, pass `"."` explicitly:
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 // Recommended: use a dedicated directory owned by your application
@@ -430,7 +430,7 @@ The following parameters are required to initialize the SDK. The first three are
 
 ### Additional parameters
 
-These optional parameters are accepted by `CoreConfig`:
+`CoreConfig` accepts these optional parameters:
 
 | Parameter | Description |
 | --- | --- |
@@ -449,7 +449,7 @@ These parameters control how the SDK batches and uploads event data. The default
 | `batch_processing_level` | `Low`, `Medium`, `High` | `Medium` | Maximum number of batches processed in a single upload cycle. Higher values increase throughput but may produce bursts of HTTP requests. |
 
 {% tabs %}
-{% tab label="Cpp" %}
+{% tab label="C++" %}
 
 ```cpp
 config.SetBatchSize(datadog::BatchSize::Small);
