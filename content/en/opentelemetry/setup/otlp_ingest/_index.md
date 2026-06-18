@@ -13,7 +13,7 @@ further_reading:
 
 For production workloads, Datadog recommends sending OpenTelemetry data through a [Datadog Agent][1] or [OpenTelemetry Collector with the Datadog Exporter][2]. These components provide metadata enrichment, signal normalization, and centralized sampling.
 
-<div class="alert alert-info">You can also send data from an OpenTelemetry Collector using only OSS components, without the Datadog Exporter. This experience is <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">in Preview</a>.</div>
+<div class="alert alert-info">You can also send data from an OpenTelemetry Collector without Datadog-specific components. This experience is <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">in Preview</a>.</div>
 
 Use the direct OTLP intake endpoints on this page when deploying a Collector or Agent is not feasible. Examples include serverless functions, managed platforms that export telemetry on your behalf, and environments with strict resource constraints.
 
