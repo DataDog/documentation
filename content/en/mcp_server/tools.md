@@ -1106,7 +1106,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ## Security
 
-Tools for code security scanning, analyzing, searching and triaging [security signals][53], investigating [IoC Explorer][64] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][64] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
