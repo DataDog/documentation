@@ -34,10 +34,16 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
     - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
 1. Click **Add Metric**.
 
-##### Set up a metrics destination
+##### Configure a metrics destination
 
-1. On the Generate Metrics processor, click **Add Metrics Destination** to select the destination to which to send the metrics.
-1. [Datadog Metrics](6) is the default destination. To select a different destination, click the pencil icon in the Datadog Metrics destination and select **Change metrics destination**.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
+Sending generated metrics to Elasticsearch, HTTP/S Client, or Splunk HEC is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
+<div class="alert alert-info">The option to send generated metrics to a destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is available for Worker version 2.18 and later. For Worker version 2.17 and earlier, you can only send metrics to Datadog Metrics.<br><br>If you upgraded to Worker version 2.18 or later for an existing pipeline that already has a Generate Metrics processor, you must delete the previous Generate Metrics processor and add and configure a new Generate Metrics processor to be able to select a destination other than Datadog Metrics.</div>
+
+1. On the Generate Metrics processor, click **Add Metrics Destination** to select the destination to which to send the metrics. **Note**: If you are using Pipeline Simulation, you must go back to the pipeline page to configure your metrics destination. Click **Back to pipeline** on the top right side of the Pipeline Simulation page.
+1. [Datadog Metrics][6] is the default destination. To select a different destination, click the pencil icon in the Datadog Metrics destination and select **Change metrics destination**.
 1. Select your destination and follow the instructions for the specific [destination](7) to set it up.
 
 ##### Metrics types
@@ -96,5 +102,5 @@ To create a distribution metric that measures the average time it takes for an A
 [3]: /metrics/types/
 [4]: /metrics/distributions/
 [5]: /observability_pipelines/search_syntax/logs/
-[6]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
+[6]: /observability_pipelines/destinations/datadog_metrics/
 [7]: /observability_pipelines/destinations/?tab=metrics#destinations
