@@ -80,7 +80,7 @@ Configure Bits Code's runtime environment, including network access policies and
 
 By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits Code** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
-The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
+The default allowlist includes the following domains. This list evolves over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
 | Language | Domains |
 |---|---|
