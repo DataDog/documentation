@@ -155,7 +155,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
    **Note**: Use only one destination bucket for all inventory files generated in an AWS account.
-2. Decide on the destination prefix within the bucket where inventory files are written. The standard prefix is `datadog-inventories`. You can use a custom prefix, but you must use the same value in every later step: the S3 Inventory configuration, the destination bucket policy, the integration role permissions, and the API registration call. Mismatched prefixes prevent Datadog from reading your inventory files.
+2. Decide on the destination prefix within the bucket where inventory files are written. The standard prefix is `datadog-inventories/`, which is also the default if you leave the value empty. You can use a custom prefix, but you must use the same value in every later step: the S3 Inventory configuration, the destination bucket policy, the integration role permissions, and the API registration call. Mismatched prefixes prevent Datadog from reading your inventory files.
 
 [201]: https://console.aws.amazon.com/s3/bucket/create
 {{% /collapse-content %}}
