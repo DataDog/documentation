@@ -58,7 +58,7 @@ var client = Api.Instance.GetClient("my-service");
 // Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for .NET][9].
+For more detail, see [OpenTelemetry API Support for .NET](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net&platform=traces).
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -107,7 +107,7 @@ func main() {
 }
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Go][10].
+For more detail, see [OpenTelemetry API Support for Go](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go&platform=traces).
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -134,7 +134,7 @@ Client client = api.getClient("my-app");
 /* Your existing OpenTelemetry API calls continue to work unchanged */
 {{< /code-block >}}
 
-**Note**: Depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java][11].
+**Note**: Depend only on the OpenTelemetry API, not the OpenTelemetry SDK. For more detail, see [OpenTelemetry API Support for Java](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces).
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -172,7 +172,7 @@ const otelTracer = otel.trace.getTracer('my-service');
 otelTracer.startActiveSpan('my-operation', (span) => { ... });
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Node.js][12].
+For more detail, see [OpenTelemetry API Support for Node.js](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces).
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -200,7 +200,7 @@ client = api.get_client()
 # Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Python][13].
+For more detail, see [OpenTelemetry API Support for Python](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python&platform=traces).
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -235,7 +235,7 @@ client = OpenFeature::SDK.build_client
 # Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for Ruby][14].
+For more detail, see [OpenTelemetry API Support for Ruby](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby&platform=traces).
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -267,7 +267,7 @@ $client = $api->getClient('my-service');
 // Your existing OpenTelemetry API calls continue to work unchanged
 {{< /code-block >}}
 
-For more detail, see [OpenTelemetry API Support for PHP][15].
+For more detail, see [OpenTelemetry API Support for PHP](/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=php&platform=traces).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -609,10 +609,3 @@ For complete setup instructions, typed getters, evaluation context requirements,
 
 [1]: /feature_flags/server/
 [2]: https://opentelemetry.io/
-[9]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net&platform=traces
-[10]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go&platform=traces
-[11]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java&platform=traces
-[12]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces
-[13]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python&platform=traces
-[14]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby&platform=traces
-[15]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=php&platform=traces
