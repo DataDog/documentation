@@ -79,8 +79,6 @@ The ADOT layer handles resource attribute detection automatically. If you are no
 export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=aws,faas.id=arn:aws:lambda:us-east-1:123456789012:function:my-function"
 ```
 
-<!-- TODO: Eng to confirm whether backend accepts cloud.resource_id (faas.id is deprecated in OTel semconv). -->
-
 | Attribute | Required | Description |
 |---|---|---|
 | `cloud.provider` | Yes | Set to `aws` |
@@ -165,8 +163,6 @@ export OTEL_RESOURCE_ATTRIBUTES="cloud.provider=azure,cloud.platform=azure.funct
 ```
 
 ### Resource attributes reference
-
-<!-- TODO: Confirm whether Azure Functions cloud.resource_id should identify the specific function, not just the function app. -->
 
 | Platform | `cloud.provider` | `cloud.platform` | `cloud.resource_id` |
 |---|---|---|---|
