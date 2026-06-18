@@ -919,20 +919,6 @@
       "description": "Update IP Allowlist returns \"OK\" response"
     }
   ],
-  "CreateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Create a new incident service returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Update an existing incident service returns \"OK\" response"
-    }
-  ],
   "UpdateIncident": [
     {
       "group": "incidents",
@@ -2208,6 +2194,13 @@
       "description": "Create cases for security findings returns \"Created\" response"
     }
   ],
+  "CreateIoCTriageState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create or update an indicator triage state returns \"Created\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
@@ -2241,13 +2234,6 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
-    }
-  ],
-  "MuteFindings": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
   "MuteSecurityFindings": [

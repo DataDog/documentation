@@ -65,6 +65,8 @@ If your monitor queries for crawler-based cloud metrics, use an [evaluation dela
 
 Unexpected monitor behavior can sometimes be the result of misconfigured [alert conditions][5], which vary by [monitor type][6]. If your monitor query uses the `as_count()` function, check the [`as_count()` in Monitor Evaluations][7] guide.
 
+If your monitor is alerting unexpectedly, check that you are using the correct aggregator for your use case. See the [Monitor Aggregators guide][22] for examples of how each aggregation method affects alert behavior.
+
 If using recovery thresholds, check the conditions listed in the [recovery thresholds guide][8] to see if the behavior is expected.
 
 ### New group delays
@@ -121,3 +123,4 @@ If you are using multiple `@opsgenie-[...]` notifications in your monitor, we se
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
 [20]: /notebooks
 [21]: /dashboards/functions/rollup/#rollups-in-monitors
+[22]: /monitors/guide/monitor_aggregators/

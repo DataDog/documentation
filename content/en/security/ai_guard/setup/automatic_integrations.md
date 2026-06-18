@@ -32,6 +32,12 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 | [OpenAI](#nodejs)                | >= 4.87.0          | >= 5.105.0  |
 
 {{% /tab %}}
+{{% tab "Ruby" %}}
+| Package                          | Supported Versions | SDK Version |
+|----------------------------------|--------------------|-------------|
+| [RubyLLM](#ruby)                 | >= 1.0.0           | >= 2.28.0   |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 {{< partial name="security-platform/aiguard-sdk-setup.html" target="automatic" >}}
@@ -139,6 +145,28 @@ AI Guard automatically evaluates the following OpenAI operations:
 [1]: https://github.com/openai/openai-node
 [2]: https://platform.openai.com/docs/api-reference/chat
 [3]: https://platform.openai.com/docs/api-reference/responses
+{{% /tab %}}
+{{< /tabs >}}
+
+### Ruby
+
+{{< tabs >}}
+{{% tab "RubyLLM" %}}
+The [RubyLLM][1] integration automatically applies AI Guard evaluations to chat messages and tool calls.
+
+#### Traced operations
+
+AI Guard automatically evaluates the following RubyLLM operations:
+
+- [Chat][2]:
+  - `RubyLLM::Chat#ask`
+  - `RubyLLM::Chat#complete`
+- [Tool calling][3]:
+  - `RubyLLM::Chat#handle_tool_calls`
+
+[1]: https://rubyllm.com/
+[2]: https://rubyllm.com/chat/
+[3]: https://rubyllm.com/tools/
 {{% /tab %}}
 {{< /tabs >}}
 
