@@ -14,7 +14,7 @@ further_reading:
       text: 'Learn about Source Code Integration'
     - link: '/mcp_server/'
       tag: 'Documentation'
-      text: 'Learn about the Datadog Model Context Protocol (MCP) Server'
+      text: 'Learn about the Datadog MCP Server'
     - link: 'https://www.datadoghq.com/blog/datadog-ide-plugins/'
       tag: 'Blog'
       text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
@@ -40,7 +40,7 @@ The extension includes these features:
 
 - [**Code Security**](#code-security): Detect and fix security issues before you commit, and write custom rules.
 
-- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and context from Datadog.
+- [**Datadog MCP Server Configuration Assistant**](?tab=cursor#installation): Configure the Datadog MCP Server for detected AI tools.
 
 - [**Code Insights**](#code-insights): Stay informed about code and library vulnerabilities without leaving the code.
 
@@ -76,14 +76,9 @@ Install the extension either directly in the IDE, or from the web:
 
 - **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
 
-### MCP Server setup
+### Datadog MCP Server setup
 
-The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
-
-1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
-   {{< img src="mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
-
-1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
+Run the `Datadog: Open MCP Configuration Assistant` command and follow the guidance to configure the [Datadog MCP Server][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /mcp_server/
