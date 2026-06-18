@@ -303,6 +303,9 @@ $product-collapse-duration: 300ms;
     &__collapsible-inner {
         overflow: hidden;
         min-height: 0;
+        // Vertical breathing room so the card's hover scale (1.02y) doesn't get
+        // clipped at the top/bottom. ~8px each side fits cards up to ~800px tall.
+        padding: 8px 0;
     }
 
     &__icon {
@@ -350,6 +353,48 @@ $product-collapse-duration: 300ms;
         border-radius: 8px;
         padding: 32px;
         box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.05);
+
+        // Hover: card "shell" grows around stationary inner content.
+        // Matches the prototype HoverCard exactly: scale(1.008, 1.02) on outer,
+        // inverse scale on inner content (see &__subheaders below).
+        // Springy enter / calm leave easing matches the prototype.
+        // Gated >768px (no hover on touch).
+        @media (min-width: 769px) and (hover: hover) {
+            transform: scale(1);
+            transition:
+                background 300ms cubic-bezier(0.4, 0.06, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0.06, 0.2, 1),
+                transform 450ms cubic-bezier(0.4, 0.06, 0.2, 1);
+
+            &:hover {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 1) 0%,
+                    rgba(255, 255, 255, 1) 50%,
+                    rgba(255, 255, 255, 0.7) 100%
+                );
+                box-shadow: 0 6px 11px -3px rgba(0, 0, 0, 0.0675);
+                transform: scale(1.008, 1.02);
+                transition:
+                    background 300ms cubic-bezier(0.25, 1.4, 0.55, 1),
+                    box-shadow 300ms cubic-bezier(0.25, 1.4, 0.55, 1),
+                    transform 800ms cubic-bezier(0.25, 1.4, 0.55, 1);
+            }
+        }
+    }
+
+    // Inverse-scale the inner content so the visible "card shell" appears to
+    // grow around stationary text. Mirrors the prototype's inner grid wrapper.
+    @media (min-width: 769px) and (hover: hover) {
+        &__subheaders {
+            transform: scale(1);
+            transition: transform 450ms cubic-bezier(0.4, 0.06, 0.2, 1);
+        }
+
+        &__card:hover &__subheaders {
+            transform: scale(calc(1 / 1.008), calc(1 / 1.02));
+            transition: transform 800ms cubic-bezier(0.25, 1.4, 0.55, 1);
+        }
     }
 
     &__subheaders {
@@ -406,6 +451,7 @@ $product-collapse-duration: 300ms;
 
     &__link-item {
         margin: 0;
+        position: relative;
     }
 
     &__link {
@@ -419,6 +465,104 @@ $product-collapse-duration: 300ms;
         &:focus {
             color: darken($brand-primary, 10%);
             text-decoration: none;
+        }
+    }
+
+    // Keep the last word + arrow on one line so the arrow never orphans.
+    &__link-tail {
+        white-space: nowrap;
+    }
+
+    // Right-arrow that slides in on link hover (desktop only).
+    // Matches the prototype LinkItem: opacity 0 -> 1, translateX(-8px) -> 0, 200ms ease-out.
+    &__link-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        width: 14px;
+        height: 14px;
+        margin-left: 6px;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 200ms ease-out, transform 200ms ease-out;
+        color: inherit;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            display: block;
+            color: currentColor;
+        }
+    }
+
+    @media (max-width: 768px), (hover: none) {
+        &__link-arrow {
+            display: none;
+        }
+    }
+
+    @media (min-width: 769px) and (hover: hover) {
+        &__link:hover &__link-arrow,
+        &__link:focus-visible &__link-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    // Tooltip: floats below the link with a description on hover.
+    // Matches the prototype LinkItem `disclosure === 'hover-link'` mode.
+    // Default: shows `short_description`. At desktop (>=1280px): shows `description`.
+    &__link-tooltip {
+        position: absolute;
+        top: 100%;
+        left: -12px;
+        margin-top: 4px;
+        padding: 8px 12px;
+        max-width: 280px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        box-shadow:
+            0 4px 16px rgba(0, 0, 0, 0.12),
+            0 1px 4px rgba(0, 0, 0, 0.08);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: rgba(28, 43, 52, 0.85);
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 200ms ease-out, transform 200ms ease-out;
+        pointer-events: none;
+        z-index: 100;
+    }
+
+    // Show short by default; hide long. Swap at desktop.
+    &__link-tooltip-long {
+        display: none;
+    }
+
+    @media (min-width: 1280px) {
+        &__link-tooltip-short {
+            display: none;
+        }
+        &__link-tooltip-long {
+            display: inline;
+        }
+    }
+
+    @media (max-width: 768px), (hover: none) {
+        &__link-tooltip {
+            display: none;
+        }
+    }
+
+    @media (min-width: 769px) and (hover: hover) {
+        &__link:hover ~ &__link-tooltip,
+        &__link:focus-visible ~ &__link-tooltip {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 }
