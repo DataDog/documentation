@@ -44,14 +44,7 @@ Select your runtime below:
 
 With autocomplete and search, the user experience of Dynamic Instrumentation is improved to behave more like an IDE.
 
-Dynamic Instrumentation provides search for class and method names:
-{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="Search for methods when creating a Dynamic Instrumentation instrumentation" style="width:60%;" >}}
-
-When you select a method in the Dynamic Instrumentation configuration, the code for that method is displayed:
-{{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Autocomplete and search highlights the selected method" >}}
-
-Dynamic Instrumentation also provides autocomplete for expression templates that use the [Dynamic Instrumentation expression language][5]:
-{{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for expression templates" style="width:80%;" >}}
+Dynamic Instrumentation provides search for class and method names. When you select a method in the Dynamic Instrumentation configuration, the code for that method is displayed. Dynamic Instrumentation also provides autocomplete for expression templates that use the [Dynamic Instrumentation expression language][5].
 
 ## Further Reading
 

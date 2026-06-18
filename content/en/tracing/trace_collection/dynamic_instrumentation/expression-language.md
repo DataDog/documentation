@@ -16,8 +16,6 @@ Examples:
 - `any(post.tags, {@it == "debugger"})`
 - `@duration > 10 && len(p.data) < 100`
 
-{{< img src="tracing/dynamic_instrumentation/expressions.png" alt="Example log probe with expressions" style="width:100%;" >}}
-
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
