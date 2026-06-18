@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-[Bits Code][8] integrates with [source code providers][11] to open, update, and iterate on pull/merge requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
+[Bits Code][8] integrates with [source code providers][11] to open, update, and iterate on pull or merge requests based on issues detected in Datadog. After completing setup, you can [start using Bits Code][7].
 
 ## Prerequisites
 
@@ -44,8 +44,8 @@ Set up Bits Code for one of the [supported source code providers][11].
 
 {{% tab "GitLab" %}}
 1. Install the [GitLab Source Code integration][1]. For full installation and configuration steps, see the [GitLab Source Code integration guide][2].
-1. Ensure the GitLab [service account][3] has the following configurations:
-   - The service account must have the [`Developer` role][4] on the project. This role can be inherited from a [group][5].
+1. Verify that the GitLab [service account][3] meets the following requirements:
+   - The service account must have the [Developer role][4] on the project. This role can be inherited from a [group][5].
    - The service account's personal access token must have the following [scopes][6]: `api`, `write_repository`, and `read_user`.
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code
@@ -72,7 +72,7 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 ### Enable auto-push
 
-Auto-push allows Bits Code to create branches, push code, and open PRs/MRs when it detects something it can help you with. Auto-push only opens PRs/MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
+Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
 To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
 
@@ -140,7 +140,7 @@ Bits Code runs the setup command at startup and can use any tools installed in y
 
 ### Creation of GitHub PRs fails unexpectedly
 
-In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [GitHub Source Code Integration][2].
+In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in the [GitHub integration][2].
 
 **Note**: This permission allows Bits AI to create workflows in your repository and has security implications.
 
