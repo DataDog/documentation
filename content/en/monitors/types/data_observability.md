@@ -196,7 +196,7 @@ Set how often the monitor evaluates your data:
 
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
-- **Manual**: The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10].
+- **Manual**: The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule so enough historical data can accumulate for modeling to be useful. Currently, the UI does not support default metrics like row counts and freshness, so this workflow only applies to custom or column-level metrics.
 
 ### Set alert conditions
 
