@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the generate metrics processor to generate count, gauge, or distribution metrics from logs that match a query.
+Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query.
 
 **Note**: The metrics generated are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
@@ -33,6 +33,12 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
     - For the distribution metric type, the log field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
     - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
 1. Click **Add Metric**.
+
+##### Set up a metrics destination
+
+1. On the Generate Metrics processor, click **Add Metrics Destination** to select the destination to which to send the metrics.
+1. [Datadog Metrics](6) is the default destination. To select a different destination, click the pencil icon in the Datadog Metrics destination and select **Change metrics destination**.
+1. Select your destination and follow the instructions for the specific [destination](7) to set it up.
 
 ##### Metrics types
 
@@ -90,3 +96,5 @@ To create a distribution metric that measures the average time it takes for an A
 [3]: /metrics/types/
 [4]: /metrics/distributions/
 [5]: /observability_pipelines/search_syntax/logs/
+[6]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
+[7]: /observability_pipelines/destinations/?tab=metrics#destinations
