@@ -40,6 +40,11 @@ After you complete the initial SDK setup, use the advanced configuration options
 {% partial file="sdk/advanced_config/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+{% partial file="sdk/advanced_config/maui.mdoc.md" /%}
+{% /if %}
+
 <!-- Roku -->
 {% if equals($platform, "roku") %}
 {% partial file="sdk/advanced_config/roku.mdoc.md" /%}
