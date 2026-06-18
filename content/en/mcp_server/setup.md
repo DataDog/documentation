@@ -478,7 +478,7 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] provides an configuration assistant for the Datadog MCP Server. GitHub Copilot can also access the Datadog MCP Server in VS Code (requires an active GitHub Copilot subscription).
+Datadog's [Cursor and VS Code extension][1] provides a configuration assistant for the Datadog MCP Server.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
