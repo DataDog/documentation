@@ -129,6 +129,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
+1. Select the **Add a Single AWS Account** and **CloudFormation** options.
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that has [Remote Configuration][3] enabled.
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
@@ -140,8 +141,11 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 1. Click the AWS account where you want to deploy the Agentless scanner, which opens the side panel.
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **CloudFormation**.
+1. Select the AWS region that corresponds to the CloudFormation stack.
 1. Select an API key that has [Remote Configuration][3] enabled.
-1. Toggle the features you want to enable, such as **Vulnerability Management** or **Sensitive Data Scanner**.
+1. Copy the new application key Datadog generates.
+1. Choose to either use an existing scanner, then select the scanner you want to use, or to deploy a new scanner.
+1. Toggle the features you want to enable, such as **Agentless Vulnerability Management** or **Sensitive Data Scanning for Cloud Storage**.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click **Done**.
 
@@ -157,9 +161,9 @@ This setup deploys the delegate role required for [cross-account scanning](/secu
 
 #### Prerequisites
 
-1. Access to the AWS management account.
-1. [Trusted Access with AWS Organizations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html) must be enabled for CloudFormation StackSets.
-1. Agentless Scanning is already configured in your central scanning account (see above).
+- Access to the AWS management account
+- [Trusted Access with AWS Organizations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html) must be enabled for CloudFormation StackSets
+- Agentless Scanning already configured in your central scanning account ([see above](#aws-cloudformation-setup))
 
 #### Deploy the StackSet
 
@@ -194,7 +198,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
-1. Under **Choose a method for adding your AWS account**, select **Manually**.
+1. Select the **Add a Single AWS Account** and **Manually** options.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
 1. Select the **I confirm that the Datadog IAM Role has been added to the AWS Account** checkbox.
 1. Enter the **AWS Account ID** and **AWS Role Name**.
@@ -207,7 +211,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. Select the **I confirm the Terraform module is installed** checkbox.
+1. Select the **I confirm the Datadog Agentless Scanner was installed using Terraform** checkbox.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
