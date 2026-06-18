@@ -783,7 +783,7 @@ You can recreate critical flags either manually or with the Datadog Flag Migrati
 
 #### Option 1: Use the Flag Migration CLI
 
-The [Datadog Flag Migration CLI][13] automates the migration of flag definitions, targeting rules, and variations from LaunchDarkly to Datadog. See the [Migrating Flags with the Flag Migration CLI][14] guide to get started, or read the [`dd-flag-migration` README on GitHub][13] for full details.
+The [Datadog Flag Migration CLI][13] automates the migration of flag definitions, targeting rules, and variations from LaunchDarkly to Datadog. See [Migrate Flags with the Flag Migration CLI][14] to get started.
 
 #### Option 2: Recreate flags manually
 
