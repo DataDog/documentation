@@ -123,7 +123,7 @@ module "datadog_storage_management" {
   # Prefix within the destination bucket where inventory files are written.
   # Defaults to "datadog-inventories/". The module keeps the inventory
   # configuration, bucket policy, and IAM permissions consistent with this
-  # value, so leave it at the default unless you have a specific reason to
+  # value. Datadog recommends to use the default value.
   # change it.
   # destination_prefix = "datadog-inventories/"
 
