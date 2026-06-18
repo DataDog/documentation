@@ -19,9 +19,9 @@ Server-side events are custom events sent through the [Product Analytics API][1]
 
 Use server-side events to:
 
-- Capture events at the point of truth on the server, independent of client-side behavior
+- Capture events at the source of truth on the server, independent of client-side behavior
 - Track backend actions with no client-side equivalent, such as a payment confirmation or subscription renewal
-- Supplement client-side data for a more complete view of the user journey
+- Supplement client-side data with server-side context
 
 <div class="alert alert-warning">Datadog bills server-side events separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
@@ -31,9 +31,9 @@ Before sending server-side events, [set up the Datadog SDK][2] for your applicat
 
 ## Send server-side events
 
-Use the [Product Analytics API][1] to send events from your server. To associate a server-side event with a client session, include the `session_id` from the client's active RUM session. This links server-side events to client-side data for a complete view of the user journey.
+Use the [Product Analytics API][1] to send events from your server. To associate a server-side event with a client session, include the `session_id` from the client's active RUM session. Including the session ID links server-side events to client-side data for a complete view of the user journey.
 
-For the full API reference including authentication, required fields, and request parameters, see [Send server-side events][1].
+For the full API reference, including authentication, required fields, and request parameters, see [Send server-side events][1].
 
 ## Analyze server-side events
 
