@@ -82,7 +82,7 @@ A schedule trigger controls when an automation runs. It can be used in combinati
 ## Outputs
 An output defines what Bits Code does after a [session][1] completes. An automation can have one or more outputs, including [opening a pull or merge request](#pull-or-merge-request-output) and [generating a Slack notification](#slack-message-output).
 
-### Pull/merge request output
+### Pull or merge request output
 You can configure your automation to:
 - **Create a PR or MR**: Open a pull or merge request with the proposed changes
 - **Draft a PR or MR**: Open a draft pull or merge request with the proposed changes
