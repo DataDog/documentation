@@ -3,6 +3,13 @@ title: Kotlin Multiplatform Crash Reporting and Error Tracking
 type: multi-code-lang
 code_lang: kotlin-multiplatform
 code_lang_weight: 50
+further_reading:
+- link: '/real_user_monitoring/error_tracking/'
+  tag: 'Documentation'
+  text: 'Get started with Error Tracking'
+- link: '/real_user_monitoring/error_tracking/explorer'
+  tag: 'Documentation'
+  text: 'Visualize Error Tracking data in the Explorer'
 ---
 
 ## Overview
