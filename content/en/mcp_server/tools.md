@@ -1164,7 +1164,7 @@ Updates the triage state or assignee of one or more security signals in bulk (up
 *Permissions Required: `Security Signals Read`*\
 Discover filterable fields and their values for [IoC Explorer][64]. Omit `filter` to list available fields; supply `filter` to get `[{value, count}]` for that field. Use `query` to scope counts to a subset of indicators.
 
-- What fields can I filter IoC indicators by?
+- What fields are available for IoC indicator filters?
 - Show me the available indicator types and how many of each exist.
 - Get the values for the `categories` filter scoped to high-score indicators.
 
