@@ -77,8 +77,6 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][5].
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-<div class="alert alert-info">Native OpenTelemetry support for the Kubernetes Explorer is in Preview. Contact your account representative to request access.</div>
-
 You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][100] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][101] orchestrator explorer functionality.
 
 #### Prerequisites

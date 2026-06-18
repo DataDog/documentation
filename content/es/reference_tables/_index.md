@@ -14,7 +14,7 @@ further_reading:
 - link: /sheets/#lookup
   tag: Documentación
   text: Consulta de hojas
-- link: /service_management/events/pipelines_and_processors/lookup_processor/
+- link: /events/pipelines_and_processors/lookup_processor/
   tag: Documentación
   text: Procesador de búsqueda de eventos
 - link: '/cloud_cost_management/tag_pipelines/#map-multiple-tags'

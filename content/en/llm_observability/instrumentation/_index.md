@@ -26,7 +26,7 @@ Datadog provides native SDKs that offer the most comprehensive Agent Observabili
 | -------- | ------------- | -------------------- | ---------------------- |
 | Python | Python 3.7+ | {{< X >}} | {{< X >}} |
 | Node.js | Node.js 16+ | {{< X >}} | {{< X >}} |
-| Java | Java 8+ | | {{< X >}} |
+| Java | Java 8+ | {{< X >}} | {{< X >}} |
 
 
 To instrument an LLM application with the SDK:
