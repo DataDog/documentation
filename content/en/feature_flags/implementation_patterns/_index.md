@@ -7,4 +7,5 @@ Explore implementation patterns for integrating Datadog Feature Flags with your 
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/feature_flags/implementation_patterns/opentelemetry" >}}Feature Flags with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/implementation_patterns/serverless" >}}Serverless Environments{{< /nextlink >}}
 {{< /whatsnext >}}
