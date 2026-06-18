@@ -6550,6 +6550,22 @@
     "description": "Check that the API key and application key used for the request are both valid.\nReturns `{\"status\": \"ok\"}` on success, `401` or `403` otherwise. Useful as a\nlightweight authentication probe before issuing other API calls that require\nfull credentials.",
     "summary": "Validate API and application keys"
   },
+  "GetVercelConfig": {
+    "description": "Retrieve the Datadog Vercel integration configuration for a given Vercel configuration. The response contains the API key reference, logs forwarding settings, and tracing settings stored in Datadog for this configuration.",
+    "summary": "Get Vercel configuration"
+  },
+  "UpdateVercelConfig": {
+    "description": "Update the Datadog Vercel integration configuration for a given Vercel configuration. The provided payload replaces the existing API key reference, logs forwarding settings, and tracing settings stored in Datadog for this configuration.",
+    "summary": "Update Vercel configuration",
+    "request_description": "",
+    "request_schema_description": "Attributes of the Datadog Vercel integration configuration."
+  },
+  "CreateVercelToken": {
+    "description": "Exchange a Vercel marketplace authorization code for an access token and store it in Datadog so that the integration can call Vercel APIs on behalf of the customer. This endpoint is invoked once when a customer installs the Datadog integration from the Vercel marketplace.",
+    "summary": "Create Vercel access token",
+    "request_description": "",
+    "request_schema_description": "Request to exchange a Vercel marketplace authorization code for a Datadog-managed access token."
+  },
   "SearchWidgets": {
     "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",
     "summary": "Search widgets"

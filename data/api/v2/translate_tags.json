@@ -515,6 +515,10 @@
     "name": "Users",
     "description": "Create, edit, and disable users."
   },
+  "vercel": {
+    "name": "Vercel",
+    "description": "Configure the Datadog Vercel integration. Endpoints in this section let you exchange a Vercel marketplace authorization code for a Datadog-managed access token and read or update the logs, traces, and API key configuration associated with a Vercel project."
+  },
   "webhooks-integration": {
     "name": "Webhooks Integration",
     "description": "Configure your [Datadog Webhooks integration](https://docs.datadoghq.com/integrations/webhooks/)\ndirectly through the Datadog API."

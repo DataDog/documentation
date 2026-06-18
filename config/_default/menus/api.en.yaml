@@ -20033,6 +20033,46 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Vercel
+      url: /api/latest/vercel/
+      identifier: vercel
+      generated: true
+    - name: Create Vercel access token
+      url: /api/latest/vercel/create-vercel-access-token/
+      identifier: vercel-create-vercel-access-token
+      parent: vercel
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateVercelToken
+        unstable: []
+        order: 1
+    - name: Update Vercel configuration
+      url: /api/latest/vercel/update-vercel-configuration/
+      identifier: vercel-update-vercel-configuration
+      parent: vercel
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateVercelConfig
+        unstable: []
+        order: 3
+    - name: Get Vercel configuration
+      url: /api/latest/vercel/get-vercel-configuration/
+      identifier: vercel-get-vercel-configuration
+      parent: vercel
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetVercelConfig
+        unstable: []
+        order: 2
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets
