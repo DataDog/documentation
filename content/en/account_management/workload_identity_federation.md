@@ -85,7 +85,7 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 <li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
 <li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
 </ul>
-To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.</div>
+</div>
 
 To create an identity mapping:
 
