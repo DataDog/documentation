@@ -34,7 +34,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
     - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
 1. Click **Add Metric**.
 
-##### Metrics types
+## Metrics types
 
 You can generate these types of metrics for your logs. See the [Metrics types][3] and [Distributions][4] documentation for more details.
 
@@ -44,7 +44,7 @@ You can generate these types of metrics for your logs. See the [Metrics types][3
 | GAUGE        | A snapshot of a value at the time it is reported.                                                                                                   | You want to track the latest CPU utilization per host.                                        |
 | DISTRIBUTION | Raw values sent to Datadog so percentile aggregations (such as p95, p99) are computed server-side, globally across every host reporting the metric. | You want the global p95 of `response_time_seconds` across every host serving an API endpoint. |
 
-##### Count metric example
+### Count metric example
 
 For this `status:error` log example:
 
@@ -61,7 +61,7 @@ To create a count metric that counts the number of logs that contain `"status":"
 | Metric type      | Count               |
 | Group by         | `env`, `prod`       |
 
-##### Distribution metric example
+### Distribution metric example
 
 For this example of an API response log:
 
