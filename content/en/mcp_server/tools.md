@@ -446,6 +446,21 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Cloud Cost Management
+
+Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+
+### `cost_recommendations`
+*Toolset: **cost***\
+*Permissions Required: `Cloud Cost Management Read`*\
+Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+
+#### Examples of queries:
+
+- What are my top cloud cost-saving recommendations?
+- How much could I save per day, and how many open recommendations do I have?
+- Which of our Kubernetes cluster optimizations does the team already have underway?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
@@ -1168,22 +1183,14 @@ Returns the authoring reference and schema for detection rules. Covers supported
 - Show me the schema for sequence detection rules.
 - What tag conventions and query syntax does the detection rules API use?
 
-### `list_datadog_security_detection_rules`
+### `get_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+Retrieves security detection rules. Supports two modes: provide `rule_id` to get the full definition of a single rule by ID, or omit `rule_id` to list rules (optionally filtered with `query` and token-limited with `max_tokens`). The two modes are mutually exclusive.
 
 - List all enabled Cloud SIEM detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
-- Which rules are configured for impossible travel detection?
-
-### `get_datadog_security_detection_rule`
-*Toolset: **security***\
-*Permissions Required: `Security Monitoring Rules Read`*\
-Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
-
 - Get the full definition of detection rule `abc-123-def`.
-- Show me the queries and cases for the rule generating this signal.
 - What thresholds and group-by fields does this detection rule use?
 
 ### `get_datadog_security_suppressions`
@@ -1579,3 +1586,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
+[64]: /cloud_cost_management/

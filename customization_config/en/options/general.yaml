@@ -16,6 +16,9 @@ options:
 - label: .NET
   id: dot_net
 
+- label: .NET MAUI
+  id: maui
+
 - label: Agent
   id: agent
 
