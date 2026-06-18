@@ -146,6 +146,8 @@ tracer.dataStreamsCheckpointer.setConsumeCheckpoint(
 );
 ```
 
+[4]: /data_streams/manual_instrumentation/
+
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -222,6 +224,8 @@ set_consume_checkpoint(
 )
 ```
 
+[4]: /data_streams/manual_instrumentation/
+
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -258,7 +262,7 @@ func handler(ctx context.Context, _ json.RawMessage) error {
 }
 ```
 
-### Consumer Code
+### Consumer code
 
 Regardless of the message transport used, the consumer needs to extract the DSM context from the inbound message and use that to call `SetDataStreamsCheckpointWithParams`.
 
@@ -425,6 +429,8 @@ public Task Consume(
 }
 ```
 
+[4]: /data_streams/manual_instrumentation/
+
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -544,6 +550,8 @@ public void handleRequest(InputStream input, OutputStream output, Context contex
           new MapCarrier(detail.dsm()));
 }
 ```
+
+[4]: /data_streams/manual_instrumentation/
 
 {{% /tab %}}
 

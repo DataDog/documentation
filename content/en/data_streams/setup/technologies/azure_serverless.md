@@ -12,7 +12,7 @@ further_reading:
 Data Streams Monitoring supports tracing event-driven pipelines where Azure Functions communicate through Azure Service Bus.
 
 | | Azure Service Bus |
-|---|---|---|---|
+|---|---|
 | .NET | Manual |
 
 ## Prerequisites
@@ -73,6 +73,7 @@ public void Run([ServiceBusTrigger(ServiceBusConfiguration.QueueName, Connection
 }
 ```
 
+[3]: /data_streams/setup/technologies/azure_service_bus/
 
 {{% /tab %}}
 
@@ -84,4 +85,3 @@ public void Run([ServiceBusTrigger(ServiceBusConfiguration.QueueName, Connection
 
 [1]: /data_streams/manual_instrumentation/
 [2]: /serverless/azure_functions/?tab=dotnet
-[3]: /data_streams/setup/technologies/azure_service_bus/

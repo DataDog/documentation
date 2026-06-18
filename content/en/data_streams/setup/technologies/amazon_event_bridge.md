@@ -66,12 +66,14 @@ tracer.dataStreamsCheckpointer.setConsumeCheckpoint(
 );
 ```
 
+[3]: /data_streams/manual_instrumentation/
+
 {{% /tab %}}
 {{% tab "Python" %}}
 
 ### Amazon EventBridge
 
-Amazon EventBridge does not support message attributes. Data Streams Monitoring context must be embedded directly in the event `detail` object. Use [manual instrumentation][4] to set produce and consume checkpoints on your Lambda functions.
+Amazon EventBridge does not support message attributes. Data Streams Monitoring context must be embedded directly in the event `detail` object. Use [manual instrumentation][3] to set produce and consume checkpoints on your Lambda functions.
 
 #### Producer Lambda
 
@@ -120,6 +122,8 @@ set_consume_checkpoint(
 )
 ```
 
+[3]: /data_streams/manual_instrumentation/
+
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -156,7 +160,7 @@ func handler(ctx context.Context, _ json.RawMessage) error {
 }
 ```
 
-### Consumer Code
+### Consumer code
 
 Regardless of the message transport used, the consumer needs to extract the DSM context from the inbound message and use that to call `SetDataStreamsCheckpointWithParams`.
 
@@ -180,4 +184,3 @@ func handler(ctx context.Context, event events.SQSEvent) (lambdainternal.BatchRe
 
 [1]: /agent
 [2]: /serverless/aws_lambda/instrumentation/
-[3]: /data_streams/manual_instrumentation/
