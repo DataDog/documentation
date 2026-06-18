@@ -4333,6 +4333,16 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "GetRumSdkConfig": {
+    "description": "Retrieve a RUM SDK configuration by its identifier.",
+    "summary": "Get a RUM SDK configuration"
+  },
+  "UpdateRumSdkConfig": {
+    "description": "Update an existing RUM SDK configuration by its identifier.\nReturns the updated configuration when successful.",
+    "summary": "Update a RUM SDK configuration",
+    "request_description": "The RUM SDK configuration update.",
+    "request_schema_description": "Request body for updating a RUM SDK configuration."
+  },
   "ListReplayHeatmapSnapshots": {
     "description": "List heatmap snapshots.",
     "summary": "List replay heatmap snapshots"

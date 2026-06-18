@@ -16479,6 +16479,36 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Remote Config
+      url: /api/latest/rum-remote-config/
+      identifier: rum-remote-config
+      generated: true
+    - name: Update a RUM SDK configuration
+      url: /api/latest/rum-remote-config/update-a-rum-sdk-configuration/
+      identifier: rum-remote-config-update-a-rum-sdk-configuration
+      parent: rum-remote-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumSdkConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Get a RUM SDK configuration
+      url: /api/latest/rum-remote-config/get-a-rum-sdk-configuration/
+      identifier: rum-remote-config-get-a-rum-sdk-configuration
+      parent: rum-remote-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumSdkConfig
+        unstable:
+          - v2
+        order: 1
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
