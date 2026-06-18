@@ -45,7 +45,7 @@ To change the tracking consent value after the RUM iOS SDK is initialized, use t
 
 For example, if the current tracking consent is `.pending`:
 
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
+- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog.
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
 ## Data management
