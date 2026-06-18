@@ -13,6 +13,8 @@ further_reading:
 
 For production workloads, Datadog recommends sending OpenTelemetry data through a [Datadog Agent][1] or [OpenTelemetry Collector with the Datadog Exporter][2]. These components provide metadata enrichment, signal normalization, and centralized sampling.
 
+<div class="alert alert-info">If you want to send data from an OpenTelemetry Collector without Datadog-specific components, <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">enroll in the Preview</a> for the full OSS Collector experience.</div>
+
 Use the direct OTLP intake endpoints on this page when deploying a Collector or Agent is not feasible. Examples include serverless functions, managed platforms that export telemetry on your behalf, and environments with strict resource constraints.
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
@@ -26,8 +28,6 @@ Your setup depends on where your telemetry is coming from. Check the [Managed pl
 | A managed platform (Cloudflare, Vercel, Heroku, Netlify, Modal, and [others][6]) | [Managed platforms][6] |
 | A serverless environment sending traces (Lambda, ECS Fargate, Azure Functions, Cloud Run, GKE Autopilot) | [Serverless][7] |
 | Your own app, host, or container | [Logs][3], [Metrics][4], or Traces (in Preview; contact your Customer Success Manager) |
-
-<div class="alert alert-info">If you want to send data from an OpenTelemetry Collector, <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">enroll in the Preview</a> for the full Collector experience. You can also send OTLP data through the <a href="/opentelemetry/otlp_ingest_in_the_agent/">Datadog Agent</a>.</div>
 
 See also: [Instrumenting for Agent Observability][5].
 

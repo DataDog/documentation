@@ -32,7 +32,7 @@ Supported platforms:
 
 The following configuration applies to all platforms.
 
-**Protocol**: `http/protobuf` only. `grpc` and `http/json` are not supported.
+**Protocol**: `http/protobuf` (recommended) or `http/json`. `grpc` is not supported.
 
 **Required headers**:
 
