@@ -2194,6 +2194,13 @@
       "description": "Create cases for security findings returns \"Created\" response"
     }
   ],
+  "CreateIoCTriageState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create or update an indicator triage state returns \"Created\" response"
+    }
+  ],
   "DetachCase": [
     {
       "group": "security_monitoring",
