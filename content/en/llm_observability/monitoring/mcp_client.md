@@ -23,9 +23,9 @@ If you are using the official MCP Python SDK to connect to an MCP server with an
 
 1. Install `ddtrace`:
 
-   {{< code-block lang="shell">}}
-pip install ddtrace
-{{< /code-block >}}
+   ```shell
+   pip install ddtrace
+   ```
 
 2. Set the required environment variables:
 
@@ -39,9 +39,9 @@ pip install ddtrace
 
 3. Run your application with the `ddtrace-run` command:
 
-   {{< code-block lang="shell">}}
-ddtrace-run <YOUR_APP_STARTUP_COMMAND>
-{{< /code-block >}}
+   ```shell
+   ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+   ```
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -49,9 +49,9 @@ If you are using the official MCP JavaScript SDK to connect to an MCP server wit
 
 1. Install `dd-trace`:
 
-   {{< code-block lang="shell">}}
-npm install dd-trace
-{{< /code-block >}}
+   ```shell
+   npm install dd-trace
+   ```
 
 2. Set the required environment variables:
 
@@ -65,9 +65,9 @@ npm install dd-trace
 
 3. Run your application:
 
-   {{< code-block lang="shell">}}
-NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
-{{< /code-block >}}
+   ```shell
+   NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
+   ```
 {{% /tab %}}
 
 {{< /tabs >}}
