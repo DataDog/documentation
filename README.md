@@ -1,5 +1,6 @@
 # Documentation site for Datadog
 
+
 Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
 
 ## Contribute to the docs
