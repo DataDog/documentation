@@ -122,7 +122,7 @@ In your Glue job script, configure the `SparkSession` with the following setting
 spark = SparkSession.builder \
     .config("spark.extraListeners", "io.openlineage.spark.agent.OpenLineageSparkListener") \
     .config("spark.openlineage.transport.type", "http") \
-    .config("spark.openlineage.transport.url", "https://data-obs-intake.datadoghq.com") \
+    .config("spark.openlineage.transport.url", "<DD_DATA_OBSERVABILITY_INTAKE>") \
     .config("spark.openlineage.transport.auth.type", "api_key") \
     .config("spark.openlineage.transport.auth.apiKey", "<DATADOG_API_KEY>") \
     .config("spark.redaction.regex", "(?i)secret|password|token|access[.]key|apikey") \
@@ -130,7 +130,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 ```
 
-Replace `<DATADOG_API_KEY>` with your Datadog API key.
+Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. Replace `<DATADOG_API_KEY>` with your Datadog API key.
 
 ### Validate
 
