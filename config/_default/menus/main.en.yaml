@@ -6442,11 +6442,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
       weight: 103
-    - name: Live Debugger
-      url: ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 104
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
