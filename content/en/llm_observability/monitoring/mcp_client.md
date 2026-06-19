@@ -11,11 +11,14 @@ further_reading:
 
 You can monitor your MCP clients with Agent Observability in two ways:
 
-- [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1]
-- [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using the official MCP Python SDK, or your MCP clients are written in Node.js or Java
+- [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1] or [MCP JavaScript SDK][3]
+- [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using an official MCP SDK, or your MCP clients are written in Java
 
 ## Automatically instrument your MCP client
 
+{{< tabs >}}
+
+{{% tab "Python" %}}
 If you are using the official MCP Python SDK to connect to an MCP server with an MCP client session, use the following steps to automatically instrument your MCP client application:
 
 1. Install `ddtrace`:
@@ -39,6 +42,35 @@ pip install ddtrace
    {{< code-block lang="shell">}}
 ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+If you are using the official MCP JavaScript SDK to connect to an MCP server with an MCP client session, use the following steps to automatically instrument your MCP client application:
+
+1. Install `dd-trace`:
+
+   {{< code-block lang="shell">}}
+npm install dd-trace
+{{< /code-block >}}
+
+2. Set the required environment variables:
+
+   ```shell
+   export DD_LLMOBS_ENABLED=true
+   export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
+   export DD_LLMOBS_AGENTLESS_ENABLED=true
+   export DD_API_KEY=<YOUR_API_KEY>
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
+
+3. Run your application:
+
+   {{< code-block lang="shell">}}
+NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Manually instrument your MCP client
 
@@ -419,3 +451,4 @@ java -javaagent:dd-java-agent.jar -Ddd.llmobs.enabled=true -Ddd.llmobs.ml-app=<Y
 
 [1]: https://github.com/modelcontextprotocol/python-sdk
 [2]: /llm_observability/instrumentation/sdk
+[3]: https://github.com/modelcontextprotocol/typescript-sdk

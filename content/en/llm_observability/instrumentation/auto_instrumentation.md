@@ -56,6 +56,7 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
 | [LangChain](#langchain)                    | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [MCP](#mcp)                                | >= 1.27.1          | >= 5.99.0 (CJS), >=5.99.0 (ESM)             |
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
@@ -531,7 +532,7 @@ The LiteLLM integration instruments the following methods:
 {{% tab "Python" %}}
 The Model Context Protocol (MCP) integration instruments client and server tool calls in the [MCP][1] SDK.
 
-**Package name:** `mcp`
+**Package name:** `mcp`\
 **Integration name:** `mcp`
 
 ### Traced methods
@@ -547,6 +548,24 @@ The MCP integration instruments the following methods:
 [1]: https://modelcontextprotocol.io/docs/getting-started/intro
 [2]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
 [3]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The Model Context Protocol (MCP) integration instruments client tool calls in the [MCP JavaScript SDK][1].
+
+**Package name:** `@modelcontextprotocol/sdk`\
+**Integration name:** `modelcontextprotocol-sdk`
+
+### Traced methods
+
+The MCP integration instruments the following methods:
+
+- [Client Tool Calls][2]:
+  - `Client.callTool()`
+  - `Client.listTools()`
+
+[1]: https://github.com/modelcontextprotocol/typescript-sdk
+[2]: https://github.com/modelcontextprotocol/typescript-sdk?tab=readme-ov-file#writing-mcp-clients
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
