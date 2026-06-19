@@ -28,6 +28,8 @@ After you set up the SDK with your code and configure the Agent to collect APM d
 
 {{% apm-config-visibility %}}
 
+When using **ddtrace-run**, the following [environment variable options][2] can be used:
+
 ## Configurations keys
 
 {{< partial name="apm/registry-config-list.html" >}}
@@ -37,3 +39,4 @@ After you set up the SDK with your code and configure the Agent to collect APM d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
+[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
