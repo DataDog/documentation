@@ -106,6 +106,8 @@ To get started, follow the instructions below.
 
 4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Observability: Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][5].
 
+   **Note:** For log correlation to work, inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog. See [Inject Airflow Task Context into Logs][11].
+
    The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
    ```yaml
    ad.datadoghq.com/base.logs: '[{"type": "file", "path": "PATH_TO_AIRFLOW_LOGS/*/*/*/*.log", "source": "airflow"}]'
@@ -129,6 +131,7 @@ To get started, follow the instructions below.
 [7]: /integrations/airflow/?tab=containerized
 [8]: /containers/kubernetes/installation/?tab=datadogoperator#installation
 [9]: /containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
+[11]: /data_observability/jobs_monitoring/airflow_log_context/
 
 
 ### Validation
@@ -256,7 +259,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
     See the [Astronomer official guide][10] for managing environment variables for a deployment. See Apache Airflow's [OpenLineage Configuration Reference][6] for other supported configurations of the OpenLineage provider.
 
-3. Trigger a update to your deployment and wait for it to finish.
+3. Trigger an update to your deployment and wait for it to finish.
 
 [1]: https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-1210
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html

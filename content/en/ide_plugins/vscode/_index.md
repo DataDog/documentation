@@ -14,7 +14,7 @@ further_reading:
       text: 'Learn about Source Code Integration'
     - link: '/mcp_server/'
       tag: 'Documentation'
-      text: 'Learn about the Datadog Model Context Protocol (MCP) Server'
+      text: 'Learn about the Datadog MCP Server'
     - link: 'https://www.datadoghq.com/blog/datadog-ide-plugins/'
       tag: 'Blog'
       text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
@@ -24,16 +24,11 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-cursor-extension/'
       tag: 'Blog'
       text: 'Debug live production issues with the Datadog Cursor extension'
+cascade:
+  site_support_id: ide_plugins_vscode
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
-
-{{% site-region region="gov,gov2" %}}
-
-<div class="alert alert-danger">
-    The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
 
 ## Overview
 
@@ -44,8 +39,6 @@ The Datadog extension for VS Code and Cursor brings Datadog to your code editor 
 The extension includes these features:
 
 - [**Code Security**](#code-security): Detect and fix security issues before you commit, and write custom rules.
-
-- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and context from Datadog.
 
 - [**Code Insights**](#code-insights): Stay informed about code and library vulnerabilities without leaving the code.
 
@@ -81,14 +74,9 @@ Install the extension either directly in the IDE, or from the web:
 
 - **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
 
-### MCP Server setup
+### Datadog MCP Server setup
 
-The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
-
-1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
-   {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
-
-1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
+Sign in to Datadog using the extension and run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [Datadog MCP Server][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /mcp_server/
