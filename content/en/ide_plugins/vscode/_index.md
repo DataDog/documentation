@@ -25,7 +25,7 @@ further_reading:
       tag: 'Blog'
       text: 'Debug live production issues with the Datadog Cursor extension'
 cascade:
-  site_support_id: ide_plugins_vscode
+    site_support_id: ide_plugins_vscode
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
@@ -49,8 +49,6 @@ The extension includes these features:
 - [**Logs**](#logs): Gauge log volumes and search logs from your code.
 
 - [**Exception Replay**](#exception-replay): Debug your production code.
-
-- [**Live Debugger**](#live-debugger): Add non-breaking logpoints to running services to capture runtime data without redeploying.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
@@ -161,16 +159,6 @@ Find out more in the [Logs][20] sub-section.
 
 Find out more in the [Exception Replay][22] sub-section.
 
-### Live Debugger
-
-<div class="alert alert-info">This feature is in limited support.</div>
-
-The **Live Debugger** lets you add logpoints—auto-expiring, non-breaking breakpoints—to your running services to capture runtime data for debugging without redeploying your code.
-
-{{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Overview of the Datadog Live Debugger activity" style="width:100%" video=true >}}
-
-Find out more in the [Live Debugger][23] sub-section.
-
 ## Data and telemetry
 
 Datadog collects certain information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. This data is used to help improve the extension's performance and features, including transitions to and from the extension and the applicable Datadog login page for accessing the Services.
@@ -210,4 +198,3 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 [20]: /ide_plugins/vscode/logs/
 [21]: /ide_plugins/vscode/code_insights/
 [22]: /ide_plugins/vscode/exception_replay/
-[23]: /ide_plugins/vscode/live_debugger/

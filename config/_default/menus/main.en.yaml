@@ -6472,11 +6472,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_exception_replay
       weight: 104
-    - name: Live Debugger
-      url: ide_plugins/vscode/live_debugger/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_live_debugger
-      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
