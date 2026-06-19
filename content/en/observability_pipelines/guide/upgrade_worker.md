@@ -127,7 +127,7 @@ Worker version 2.15.1 gives you access to the following:
 
 #### New features
 
-- The Custom Processor now supports the`to_entries` and `from_entries` functions for converting between objects and arrays of key-value pairs (jq-style).
+- The Custom Processor now supports the `to_entries` and `from_entries` functions for converting between objects and arrays of key-value pairs (jq-style).
 
 #### Enhancements
 
