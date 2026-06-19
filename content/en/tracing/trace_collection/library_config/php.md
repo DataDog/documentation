@@ -89,7 +89,7 @@ Set in the command line to start the server.
 DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 ```
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 
