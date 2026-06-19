@@ -108,6 +108,34 @@ This helps ensure the logs are searchable and available under the {{< ui >}}Glue
 Enable the [Glue Integration][4] tile for Glue metrics collection.
 Metrics should be available under the {{< ui >}}Glue{{< /ui >}} job tab in **Data Observability: Jobs Monitoring**.
 
+## (Optional) Enable OpenLineage for dataset lineage
+
+Glue jobs that run with the Spark engine can emit OpenLineage events directly to Datadog. This provides dataset-level lineage, showing which datasets your job reads and writes.
+
+**Note**: AWS Glue includes the Spark OpenLineage connector in its default class path. To use a more recent version, add the connector JAR manually through the `--extra-jars` Glue job parameter and set `--user-jars-first=true` to override the bundled version.
+
+### Configure Spark
+
+In your Glue job script, configure the `SparkSession` with the following settings:
+
+```python
+spark = SparkSession.builder \
+    .config("spark.extraListeners", "io.openlineage.spark.agent.OpenLineageSparkListener") \
+    .config("spark.openlineage.transport.type", "http") \
+    .config("spark.openlineage.transport.url", "https://data-obs-intake.datadoghq.com") \
+    .config("spark.openlineage.transport.auth.type", "api_key") \
+    .config("spark.openlineage.transport.auth.apiKey", "<DATADOG_API_KEY>") \
+    .config("spark.redaction.regex", "(?i)secret|password|token|access[.]key|apikey") \
+    .config("spark.openlineage.capturedProperties", "spark.glue.JOB_RUN_ID") \
+    .getOrCreate()
+```
+
+Replace `<DATADOG_API_KEY>` with your Datadog API key.
+
+### Validate
+
+After enabling OpenLineage, open a job run in [Data Observability: Jobs Monitoring][6]. In the flame graph, additional spans such as `spark.application` or `spark.sql_job` should appear. The payloads of these spans should be helpful when debugging dataset extraction.
+
 ## Next steps
 
 The crawler runs every few minutes.
