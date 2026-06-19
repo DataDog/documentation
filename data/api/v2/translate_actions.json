@@ -6012,6 +6012,16 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a degradation."
   },
+  "SoftDeleteDegradationUpdate": {
+    "description": "Soft-deletes a degradation update.",
+    "summary": "Soft delete degradation update"
+  },
+  "EditDegradationUpdate": {
+    "description": "Edits a specific degradation update.",
+    "summary": "Edit degradation update",
+    "request_description": "",
+    "request_schema_description": "Request object for editing a degradation update."
+  },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",
     "summary": "Schedule maintenance",
