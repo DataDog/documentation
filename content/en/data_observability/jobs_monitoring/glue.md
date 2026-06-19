@@ -108,13 +108,13 @@ This helps ensure the logs are searchable and available under the {{< ui >}}Glue
 Enable the [Glue Integration][4] tile for Glue metrics collection.
 Metrics should be available under the {{< ui >}}Glue{{< /ui >}} job tab in **Data Observability: Jobs Monitoring**.
 
-## (Optional) Enable OpenLineage for dataset lineage
+## (Optional) Enable dataset lineage
 
 Glue jobs that run with the Spark engine can emit OpenLineage events directly to Datadog. This provides dataset-level lineage, showing which datasets your job reads and writes.
 
 **Note**: AWS Glue includes the Spark OpenLineage connector in its default class path. To use a more recent version, add the connector JAR manually through the `--extra-jars` Glue job parameter and set `--user-jars-first=true` to override the bundled version.
 
-### Configure Spark
+### Configure the SparkSession
 
 In your Glue job script, configure the `SparkSession` with the following settings:
 
