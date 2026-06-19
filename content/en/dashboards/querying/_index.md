@@ -150,16 +150,16 @@ Datadog also supports the ability to graph your metrics, logs, traces, and other
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations; they do not work on monitors. Use [boolean operators][15] or arithmetic operations to combine multiple metrics in a monitor.
 
-{{% collapse-content title="Metric arithmetic using an integer" level="h5" %}}
+{{% collapse-content title="Metric arithmetic using an integer" level="h4" %}}
 
-Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the {{< ui >}}Advanced...{{< /ui >}} link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
+Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the {{< ui >}}Advanced...{{< /ui >}} link in the graph editor. Then enter your arithmetic in the `Formula` box; in this case: `a * 2`:
 
 {{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Arithmetic between two metrics" level="h5" %}}
+{{% collapse-content title="Arithmetic between two metrics" level="h4" %}}
 
 Visualize the percentage of a metric by dividing one metric over another, for example:
 
@@ -188,7 +188,7 @@ status:error / status:info
 
 When a widget has multiple queries and a formula, you can hide individual queries so only the formula result appears on the graph. Click the query's letter label to toggle its visibility on the graph. A blue label indicates the query is displayed; a grey label indicates it is hidden. The hidden query is still used in the formula calculation.
 
-{{% collapse-content title="Minimum or Maximum between two queries" level="h5" %}}
+{{% collapse-content title="Minimum or Maximum between two queries" level="h4" %}}
 
 Use `minimum()` and `maximum()` to compare two queries point by point and return the lower or higher value at each timestamp.
 
@@ -211,7 +211,7 @@ minimum(status:error, status:warn)
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="time() function" level="h5" %}}
+{{% collapse-content title="time() function" level="h4" %}}
 
 The `time()` function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
 
