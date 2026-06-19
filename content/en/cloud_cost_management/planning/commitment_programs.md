@@ -100,6 +100,41 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 {{< ui >}}Hourly unused committed spend percentage{{< /ui >}}: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
 
+## Savings Plan simulation
+
+<div class="alert alert-info">Savings Plan simulation is in Preview and currently supports AWS Savings Plans for organizations with AWS cost data.</div>
+
+Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment directly against your historical usage and see the projected coverage, utilization, and savings.
+
+{{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing input parameters, summary metrics, and a time series chart of projected commitment coverage." style="width:100%;" >}}
+
+### Run a simulation
+
+1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] and open the {{< ui >}}Simulator{{< /ui >}} tab.
+2. Set the simulation inputs:
+   - {{< ui >}}Commitment amount{{< /ui >}}: The hourly commitment ($/hour) you want to model.
+   - {{< ui >}}Savings Plan type{{< /ui >}}: The type of Savings Plan to simulate (for example, Compute Savings Plans).
+   - {{< ui >}}Term{{< /ui >}}: The length of the commitment (for example, 1 year or 3 years).
+   - {{< ui >}}Payment option{{< /ui >}}: How the commitment is paid (No Upfront, Partial Upfront, or All Upfront).
+   - {{< ui >}}Lookback window{{< /ui >}}: The historical period of usage the simulation is evaluated against.
+3. Review the projected results in the summary metrics, the time series chart, and the per-service breakdown.
+
+If Datadog has a Savings Plan recommendation for your organization, the simulation is prefilled with the recommended values so you can start from a suggested commitment and adjust from there.
+
+### Interpret the results
+
+All simulation outputs are estimates based on your historical usage over the selected lookback window. Actual savings depend on your future usage and how AWS applies Savings Plan discounts across your accounts.
+
+- {{< ui >}}Summary metrics{{< /ui >}}: High-level estimates for the simulated commitment, such as projected coverage, utilization, and savings compared to on-demand rates.
+- {{< ui >}}Projected coverage over time{{< /ui >}}: A time series chart showing how the simulated commitment would apply to your usage over the lookback window, including the portion of usage that would be covered by the commitment versus the portion remaining as on-demand spend.
+- {{< ui >}}Coverage by service{{< /ui >}}: A table breaking down the estimated coverage and spend by AWS service, so you can see which services the commitment would apply to.
+
+### Best practices
+
+- Start from a Datadog recommendation when one is available, then adjust the commitment amount to compare scenarios.
+- Use a lookback window that reflects your typical usage. Avoid periods with unusual spikes or gaps if you want a representative estimate.
+- Treat the results as directional guidance for sizing a commitment, not as a guarantee of future savings.
+
 ## Example use cases
 
 ### Identify underutilized commitments
