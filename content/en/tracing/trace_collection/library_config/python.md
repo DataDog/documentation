@@ -30,7 +30,7 @@ After you set up the SDK with your code and configure the Agent to collect APM d
 
 When using **ddtrace-run**, the following [environment variable options][2] can be used:
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 
