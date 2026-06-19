@@ -28,4 +28,5 @@ Select a platform to start instrumenting your application:
   {{< image-card href="/client_sdks/setup/?platform=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
   {{< image-card href="/client_sdks/setup/?platform=roku" src="integrations_logos/roku_large.svg" alt="Roku" >}}
   {{< image-card href="/client_sdks/setup/?platform=unity" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
+  {{< image-card href="/client_sdks/setup/?platform=maui" src="integrations_logos/maui_large.svg" alt=".NET MAUI" >}}
 {{< /card-grid >}}

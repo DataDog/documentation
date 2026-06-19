@@ -261,4 +261,3 @@ This means that even if users open your application while offline, no data is lo
 [15]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
 [16]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [17]: /real_user_monitoring/explorer/
-

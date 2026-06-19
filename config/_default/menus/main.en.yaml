@@ -797,6 +797,16 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
+    - name: Managed Platforms Endpoint
+      url: /opentelemetry/setup/otlp_ingest/managed_platforms
+      parent: otel-setup-intake-endpoint
+      weight: 40233
+      identifier: otel_setup_managed_platforms
+    - name: Serverless Endpoint
+      url: /opentelemetry/setup/otlp_ingest/serverless
+      parent: otel-setup-intake-endpoint
+      weight: 40234
+      identifier: otel_setup_serverless
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -5895,6 +5905,16 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
+    - name: Just-In-Time (JIT) Gates
+      url: deployment_gates/setup/jit/
+      parent: deployment_gates_setup
+      identifier: deployment_gates_setup_jit
+      weight: 1
+    - name: Preconfigured Gates
+      url: deployment_gates/setup/preconfigured/
+      parent: deployment_gates_setup
+      identifier: deployment_gates_setup_preconfigured
+      weight: 2
     - name: Explore
       url: deployment_gates/explore/
       parent: deployment_gates
@@ -6315,6 +6335,11 @@ menu:
       parent: feature_flags
       identifier: feature_flags_implementation_patterns
       weight: 4
+    - name: OpenTelemetry
+      url: feature_flags/implementation_patterns/opentelemetry
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_opentelemetry
+      weight: 401
     - name: Serverless
       url: feature_flags/implementation_patterns/serverless
       parent: feature_flags_implementation_patterns
@@ -7089,6 +7114,11 @@ menu:
       url: logs/log_collection/kotlin_multiplatform/
       parent: log_collection
       weight: 107
+    - name: .NET MAUI
+      identifier: log_maui
+      url: logs/log_collection/maui/
+      parent: log_collection
+      weight: 108
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
@@ -9367,6 +9397,46 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_troubleshooting
       weight: 106
+    - name: .NET MAUI
+      url: real_user_monitoring/application_monitoring/maui
+      parent: application_monitoring
+      identifier: rum_mobile_maui
+      weight: 208
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/maui/setup
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_setup
+      weight: 101
+    - name: Crash Reporting
+      url: real_user_monitoring/application_monitoring/maui/error_tracking
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_crash
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/maui/advanced_configuration
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_advanced_config
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/maui/data_collected
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_data_collected
+      weight: 104
+    - name: Mobile Vitals
+      url: real_user_monitoring/application_monitoring/maui/mobile_vitals
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_mobile_vitals
+      weight: 105
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/maui/frustration_signals
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_frustration_signals
+      weight: 106
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/maui/troubleshooting
+      parent: rum_mobile_maui
+      identifier: rum_mobile_maui_troubleshooting
+      weight: 109
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
