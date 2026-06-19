@@ -48,15 +48,15 @@ To configure a focus mode to include or exclude the Datadog Mobile App:
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS Settings screen showing Focus options">}}
+{{< img src="mobile/shortcut_configurations/iOS_Setting_1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS Settings screen showing Focus options">}}
 
 1. Open **Settings** > **Focus**.
 
-   {{< img src="service_management/mobile/iOS_Setting_2.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS Focus settings screen">}}
+   {{< img src="mobile/shortcut_configurations/iOS_Setting_2.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS Focus settings screen">}}
 
 2. Tap a **Focus** or create your own.
 
-   {{< img src="service_management/mobile/iOS_Setting_3.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS Focus settings screen showing options to configure notification preferences">}}
+   {{< img src="mobile/shortcut_configurations/iOS_Setting_3.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="iOS Focus settings screen showing options to configure notification preferences">}}
 
 3. Tap **Allow Notifications From** and add the Datadog Mobile App. Alertnatively, tap **Silence Notifications From** and add the Datadog Mobile App.
 
@@ -67,15 +67,15 @@ For more information, see [Set up a Focus on iPhone][5].
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Setting_1.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Android Settings screen showing Modes and Routines option">}}
+{{< img src="mobile/shortcut_configurations/Android_Setting_1.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Android Settings screen showing Modes and Routines option">}}
 
 1. Open **Settings** > **Modes and Routines**.
 
-   {{< img src="service_management/mobile/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Modes and Routines settings screen">}}
+   {{< img src="mobile/shortcut_configurations/Android_Setting_2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Modes and Routines settings screen">}}
 
 2. Tap a **Mode** or create your own.
 
-   {{< img src="service_management/mobile/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Mode configuration screen showing focus options">}}
+   {{< img src="mobile/shortcut_configurations/Android_Setting_3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android Mode configuration screen showing focus options">}}
 
 3. Tap **Stay focused** > **Restrict app usage** and add the Datadog Mobile App > **Done**. Alternatively, tap **Do not disturb** and add the Datadog Mobile App > **Done**.
 
@@ -88,13 +88,13 @@ For more information, see [Limit interruptions with Modes][6].
 
 ## Quick actions
 
-{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Mobile app icon with quick action menu showing top five frequently viewed dashboards">}}
+{{< img src="mobile/shortcut_configurations/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Mobile app icon with quick action menu showing top five frequently viewed dashboards">}}
 
 Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][1] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
 ## Search from home screen
 
-{{< img src="service_management/mobile/iphone_search_doc.png" alt="iPhone home screen search showing Datadog dashboard results" style="width:40%;">}}
+{{< img src="mobile/shortcut_configurations/iphone_search_doc.png" alt="iPhone home screen search showing Datadog dashboard results" style="width:40%;">}}
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the **Search in App** button to open the search query in the in-app Dashboard List page.
 
@@ -111,7 +111,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 - Siri Voice: say your shortcut name, such as "Open AWS Overview", and Siri opens your dashboard in-app.
 - Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
-{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS Shortcuts app showing Datadog dashboard shortcuts with Siri suggestions">}}
+{{< img src="mobile/shortcut_configurations/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS Shortcuts app showing Datadog dashboard shortcuts with Siri suggestions">}}
 
 For more information about Siri shortcuts and suggestions, see the [Apple Siri documentation][2].
 

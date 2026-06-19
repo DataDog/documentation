@@ -193,7 +193,7 @@ Datadog은 특정 클라우드 워크로드의 수동 종료와 관련된 모니
 [10]: /ko/integrations/#cat-notification
 [11]: https://app.datadoghq.com/monitors/downtimes
 [12]: /ko/monitors/manage/status/
-[13]: /ko/service_management/events/explorer
+[13]: /ko/events/explorer
 [14]: /ko/api/latest/downtimes/#cancel-a-downtime
 [15]: /ko/account_management/#preferences
 [16]: /ko/integrations/amazon_ec2/#ec2-automuting

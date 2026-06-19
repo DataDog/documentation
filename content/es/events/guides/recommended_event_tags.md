@@ -1,6 +1,6 @@
 ---
 aliases:
-- /es/service_management/events/guides/recommended_event_tags/
+- /es/events/guides/recommended_event_tags/
 description: Obtén información sobre las etiquetas de eventos recomendadas y cómo
   añadirlas.
 further_reading:
