@@ -2865,6 +2865,34 @@
     "request_description": "",
     "request_schema_description": "Payload schema when updating an Okta account."
   },
+  "ListAmsIntegrationAccounts": {
+    "description": "Retrieve all configured accounts for a specific integration within your organization.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "List integration accounts"
+  },
+  "CreateAmsIntegrationAccount": {
+    "description": "Create a new account for a specific integration. The account configuration must conform\nto the schema defined for the integration, which can be retrieved using the schema endpoint.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "Create integration account",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a web integration account."
+  },
+  "GetAmsIntegrationAccountSchema": {
+    "description": "Get the JSON schema that defines the structure and validation rules for account configuration\nof a specific integration. This schema describes the required and optional fields for both\n**settings** and **secrets** when creating or updating an account.\n\nThe schema structure varies between integrations, so always retrieve the schema for your\nspecific integration before creating or updating accounts.\n\nRate limit: 12000 requests per organization every 60 seconds.",
+    "summary": "Get account schema for an integration"
+  },
+  "DeleteAmsIntegrationAccount": {
+    "description": "Delete a specific account by its ID for a given integration. This removes the\naccount configuration and stops any data collection associated with it.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "Delete integration account"
+  },
+  "GetAmsIntegrationAccount": {
+    "description": "Retrieve a specific account by its ID for a given integration. The response includes\nthe account name and settings, but excludes sensitive secret values.\n\nRate limit: 12000 requests per organization every 60 seconds.",
+    "summary": "Get integration account"
+  },
+  "UpdateAmsIntegrationAccount": {
+    "description": "Update an existing account for a specific integration. You can update the name, settings,\nand secrets. Only the fields provided in the request are updated.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "Update integration account",
+    "request_description": "",
+    "request_schema_description": "Payload for updating a web integration account."
+  },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
     "summary": "Get IP Allowlist"
