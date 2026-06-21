@@ -62,13 +62,11 @@ To balance safety and automation, you can configure auto-push behavior in [Datad
 
 Bits Code ingests custom instruction files from your repository, including:
 
+- `AGENTS.md`
+- `CLAUDE.md`
 - `.cursorrules`
 - `.windsurfrules`
 - `copilot-instructions.md`
-- `CLAUDE.md`
-- `AGENTS.md`
-- `agent.md`
-
 
 You can also define global custom instructions, which apply to all Bits Code sessions, in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
 
@@ -94,6 +92,8 @@ The default allowlist includes the following domains. This list will evolve over
 | Rust | `index.crates.io`, `static.crates.io` |
 | Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 
+Any HTTP method can be used with allowed domains. This allows the agent to publish packages.
+
 ### Configure repository environment
 
 Configure a custom environment for Bits Code to install dependencies, formatters, linters, and build tools that are needed for your codebase. Each repository runs in its own isolated sandbox, and the environment defines the settings for that sandbox. 
@@ -111,7 +111,7 @@ To configure a repository environment:
 
 Bits Code runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [internet access](#configure-internet-access) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
 
-**Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
+**Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `AGENTS.md`) to your repository with instructions on how to build and test your code.
 
 ## Troubleshooting
 
