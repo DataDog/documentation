@@ -10,7 +10,7 @@ products:
 {{< product-availability >}}
 
 {{< callout url="#"
- btn_hidden="true" header="false">}}
+ btn_hidden="true" header="Join the Preview!">}}
 The Tag Cardinality Control processor is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
