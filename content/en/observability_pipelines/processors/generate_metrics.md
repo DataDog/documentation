@@ -37,14 +37,14 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 ### Configure a metrics destination
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-Sending generated metrics to Elasticsearch, HTTP/S Client, or Splunk HEC is in Preview. Contact your account manager to request access.
+Sending generated metrics to a metrics destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 <div class="alert alert-info">The option to send generated metrics to a destination other than <a href="/observability_pipelines/destinations/datadog_metrics/">Datadog Metrics</a> is available for Worker versions 2.18 and later.<br><br>If you upgrade to Worker version 2.18 or later for an existing pipeline that already has a Generate Metrics processor, you must delete the previous Generate Metrics processor and add and configure a new Generate Metrics processor to be able to select a destination other than Datadog Metrics.</div>
 
-1. On the Generate Metrics processor, click **Add Metrics Destination** to select the destination to which to send the metrics.<br>**Note**: If you are using Pipeline Simulation, you must go back to the pipeline page to configure your metrics destination. Click **Back to pipeline** on the top right side of the Pipeline Simulation page.
-1. [Datadog Metrics][6] is the default destination. To select a different destination, click the pencil icon in the Datadog Metrics destination and select **Change metrics destination**.
-1. Select your destination and follow the instructions for the specific [destination](7) to set it up.
+1. On the Generate Metrics processor, click **Add Metrics Destination** to select a metrics destination.<br>**Note**: If you are using Pipeline Simulation, you must go back to the pipeline page to configure your metrics destination. Click **Back to pipeline** on the top right side of the Pipeline Simulation page.
+1. [Datadog Metrics][6] is the default destination. To select a different destination, click the pencil icon on the Datadog Metrics destination and select **Change metrics destination**.
+1. Select your destination and follow the instructions for the specific [destination][7] to set it up.
 
 ## Metrics types
 
