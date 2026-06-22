@@ -96,10 +96,6 @@ The Collector automatically attaches `service.name`, `service.version`, and `ser
 
 ### 5. (Optional) Configure gateway topology (preview)
 
-<div class="alert alert-info">
-The Gateway topology view in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> is a preview feature. Please contact Datadog support to join the preview. The Datadog Extension config fields below are available in OpenTelemetry Collector v0.150.0 and later.
-</div>
-
 When you have an OpenTelemetry Collector gateway setup that forwards telemetry through one or more gateway Collectors before reaching Datadog, the Datadog Extension can publish the topology so it appears as a connected pipeline graph in [Fleet Automation][7]:
 
 {{< img src="opentelemetry/integrations/datadog_extension_gateway_topology.png" alt="Gateway topology view in Fleet Automation showing DaemonSet Collectors forwarding through two layers of gateway Collectors to Datadog" style="width:100%;" >}}
@@ -275,7 +271,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `hostname` | Custom hostname for the Collector. | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint. | `localhost:9875` |
 | `http.path` | HTTP server path for metadata. | `/metadata` |
-| `deployment_type` | Deployment type for the Collector. One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
+| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#5-optional-configure-gateway-topology-preview). One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
 | `installation_method` | How the Collector was installed. One of: `kubernetes`, `bare-metal`, `docker`, `ecs-fargate`, `eks-fargate`, or unset. Available in Collector v0.148.0 and later. | unset |
 | `gateway_service` | Set on **gateway** Collectors only. The Kubernetes Service fronting the gateway Collector pods. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
 | `gateway_destination` | Set on any Collector that forwards telemetry to a downstream gateway. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |

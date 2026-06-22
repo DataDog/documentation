@@ -27,7 +27,7 @@ No requiere instalación.
 
 #### Activación del streaming de eventos
 
-Antes de poder conectarte al [Event Stream](https://docs.datadoghq.com/service_management/events/explorer/), [ponte en contacto con el equipo de asistencia de CrowdStrike](https://supportportal.crowdstrike.com/) para habilitar el flujo de APIs en tu cuenta de cliente.
+Antes de poder conectarte al [Event Stream](https://docs.datadoghq.com/events/explorer/), [ponte en contacto con el equipo de asistencia de CrowdStrike](https://supportportal.crowdstrike.com/) para habilitar el flujo de APIs en tu cuenta de cliente.
 
 #### Conexión de tu cuenta de CrowdStrike
 
