@@ -14,7 +14,13 @@ further_reading:
 
 ## Overview
 
-Custom jobs use the [OpenLineage][1] standard to send job and lineage events to Datadog. Use custom jobs when you need to:
+Custom jobs use the [OpenLineage][1] standard to send job and lineage events to Datadog. With custom jobs, you can:
+
+- Detect failing and long-running jobs
+- Pinpoint and resolve the root cause of failed and long-running jobs
+- Understand upstream dependencies and downstream data consumers with data lineage
+
+Use custom jobs when you need to:
 
 - Capture lineage from systems Datadog doesn't integrate with natively, such as in-house tools or custom ETL scripts
 - Emit lineage events for jobs or orchestrators where a native Datadog integration isn't available
