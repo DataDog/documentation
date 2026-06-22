@@ -123,7 +123,7 @@ For the complete list of AP2 DNS records and VPC service endpoints, see [VPC End
    1. Optionally, fill in the {{< ui >}}Name tag{{< /ui >}}.
    1. Under {{< ui >}}Type{{< /ui >}}, select {{< ui >}}PrivateLink Ready partner services{{< /ui >}}.
 1. Discover and configure the interface endpoint with cross-region support:
-   1. Under {{< ui >}}Service name{{< /ui >}}, fill in the service name with a valid PrivateLink service name from the [table](#vpc-endpoint-service-ids) below.
+   1. Under {{< ui >}}Service name{{< /ui >}}, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
    1. Under {{< ui >}}Service region{{< /ui >}}, click {{< ui >}}Enable Cross Region endpoint{{< /ui >}} and select **{{< region-param key="aws_private_link_cross_region" >}}**.
    1. Click {{< ui >}}Verify service{{< /ui >}} and wait for a _Service name verified_ notification.
       **Note:** If you aren't able to verify the service after completing the steps above, reach out to [Datadog Support][1].
@@ -156,6 +156,10 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
 For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
+For the complete list of US1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 
 **Note**: Cross-region PrivateLink doesn't emit CloudWatch metrics. See [CloudWatch metrics for AWS PrivateLink][2] for more information.
@@ -339,6 +343,7 @@ US1 uses a two-level DNS architecture for PrivateLink. Every customer-facing DNS
 
 Use the following table to identify which VPC endpoints to set up for the Datadog features you use. Wildcard entries match any subdomain not otherwise listed.
 
+**Note**: In the table below, `---` indicates a direct VPC service endpoint with no intermediate anchor address.
 | Name | Anchor | VPC Endpoint Service ID |
 |---|---|---|
 | `webhook-intake.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
