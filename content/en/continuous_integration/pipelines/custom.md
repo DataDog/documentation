@@ -102,6 +102,15 @@ Pipeline events sent with the `status` set to `running` have the same `unique_id
 
 **Note**: The most recent value may not always be the one displayed in the UI when a field is updated. For example, if the tag `my_tag` is set to `value1` in the first running pipeline, and then is updated to `value2`, you may see `value1` instead of `value2` in the UI. It is recommended to only update running pipelines by adding more fields instead modifying existing ones.
 
+## Running jobs
+Job events can also be sent while a job is still running by setting the `status` to `running`. As with running pipelines, all events for the same job share the same `id`. A running job consists of the following events:
+
+1. The initial running job event with the `status` set to `running`.
+2. Optionally, `N` running job events that update the job with more information, with the same `id` and the `status` set to `running`.
+3. The final job event with a terminal status (such as `success` or `error`) and the same `id`.
+
+A running job event does not require an `end` time. The `end` time is set when the final job event is sent.
+
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines are accepted for processing.
