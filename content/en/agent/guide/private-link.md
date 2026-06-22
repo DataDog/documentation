@@ -123,7 +123,7 @@ For the complete list of AP2 DNS records and VPC service endpoints, see [VPC End
    1. Optionally, fill in the {{< ui >}}Name tag{{< /ui >}}.
    1. Under {{< ui >}}Type{{< /ui >}}, select {{< ui >}}PrivateLink Ready partner services{{< /ui >}}.
 1. Discover and configure the interface endpoint with cross-region support:
-   1. Under {{< ui >}}Service name{{< /ui >}}, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
+   1. Under {{< ui >}}Service name{{< /ui >}}, fill in the service name with a valid PrivateLink service name from the [table](#vpc-endpoint-service-ids) below.
    1. Under {{< ui >}}Service region{{< /ui >}}, click {{< ui >}}Enable Cross Region endpoint{{< /ui >}} and select **{{< region-param key="aws_private_link_cross_region" >}}**.
    1. Click {{< ui >}}Verify service{{< /ui >}} and wait for a _Service name verified_ notification.
       **Note:** If you aren't able to verify the service after completing the steps above, reach out to [Datadog Support][1].
@@ -153,9 +153,6 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
-{{% /site-region %}}
-{{% site-region region="us" %}}
-For the complete list of US1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
 For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
