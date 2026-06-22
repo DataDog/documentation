@@ -48,22 +48,9 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 1. Click {{< ui >}}Create Endpoint{{< /ui >}}:
    {{< img src="agent/guide/private-link-vpc.png" alt="The endpoints page on the VPC dashboard" style="width:90%;" >}}
 1. Select {{< ui >}}Find service by name{{< /ui >}}.
-1. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:
+1. Fill in the _Service Name_ text box with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
-
-| Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
-|---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
-| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
-| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
-| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
-| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 
 4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][14].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
@@ -130,21 +117,6 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 
 After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can use this endpoint to send telemetry to Datadog using the cross-region AWS PrivateLink endpoint.
 
-## PrivateLink service names
-
-| Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
-|---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
-| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
-| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
-| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
-| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
-
 **Note**: Cross-region PrivateLink doesn't emit CloudWatch metrics. See [CloudWatch metrics for AWS PrivateLink][2] for more information.
 
 [1]: /help/
@@ -161,18 +133,47 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
+{{% site-region region="ap2" %}}
+**AP2 customers:** each `Private DNS name` shown below is a routing record covering one or more agent FQDNs. See [AP2: VPC endpoints by color](#ap2-vpc-endpoints-by-color) for the complete FQDN mapping.
+{{% /site-region %}}
+
 | Datadog                   | PrivateLink service name                                                               |
 |---------------------------|----------------------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        |
 | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         |
 | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               |
 | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
+| Container Monitoring      | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        |
+| Process Monitoring        | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           |
+| General Intake (EVP All)  | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         |
+| APM (Traces)              | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
+| Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               |
+| CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     |
+| Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     |
+| Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               |
+| Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           |
+| Cloud Security Management | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     |
+| Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         |
+| Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    |
+| RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         |
+| Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            |
+| Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         |
+| Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           |
+| Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       |
+| All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       |
+| HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       |
+| Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        |
+| Real User Monitoring (All)| {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        |
+| Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           |
+| Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       |
+| Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          |
+| AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     |
+| Real User Monitoring (Browser)| {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        |
+| APM (Datadog internal)    | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       |
+| Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            |
+| OpenTelemetry (OTLP)      | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} |
 
 4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][1].
 
@@ -200,18 +201,47 @@ After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can 
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+  {{% site-region region="ap2" %}}
+**AP2 customers:** each `Private DNS name` shown below is a routing record covering one or more agent FQDNs. See [AP2: VPC endpoints by color](#ap2-vpc-endpoints-by-color) for the complete FQDN mapping.
+{{% /site-region %}}
+
+| Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
   |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
   | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
   | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
   | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
   | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
-  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
-  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
-  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
-  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
+  | Container Monitoring      | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
+  | Process Monitoring        | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
+  | General Intake (EVP All)  | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
+  | APM (Traces)              | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
   | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+  | Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
+  | CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
+  | Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
+  | Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
+  | Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
+  | Cloud Security Management | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     | {{< region-param key="evp_compliance_endpoint_private_link" code="true" >}}     |
+  | Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         | {{< region-param key="salesforce_endpoint_private_link" code="true" >}}         |
+  | Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
+  | RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
+  | Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
+  | Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
+  | Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
+  | Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
+  | All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       | {{< region-param key="evp_all_ddog_endpoint_private_link" code="true" >}}       |
+  | HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       | {{< region-param key="hamr_evp_all_endpoint_private_link" code="true" >}}       |
+  | Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        | {{< region-param key="evp_profile_endpoint_private_link" code="true" >}}        |
+  | Real User Monitoring (All)| {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        | {{< region-param key="evp_all_rum_endpoint_private_link" code="true" >}}        |
+  | Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           | {{< region-param key="web_ddog_endpoint_private_link" code="true" >}}           |
+  | Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       | {{< region-param key="evp_internal_endpoint_private_link" code="true" >}}       |
+  | Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          | {{< region-param key="evp_agent_endpoint_private_link" code="true" >}}          |
+  | AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     | {{< region-param key="evp_awsmetrics_endpoint_private_link" code="true" >}}     |
+  | Real User Monitoring (Browser)| {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        | {{< region-param key="evp_browser_endpoint_private_link" code="true" >}}        |
+  | APM (Datadog internal)    | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       | {{< region-param key="evp_apm_ddog_endpoint_private_link" code="true" >}}       |
+  | Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            | {{< region-param key="evp_rum_endpoint_private_link" code="true" >}}            |
+  | OpenTelemetry (OTLP)      | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} | {{< region-param key="hamr_metrics_agent_endpoint_private_link" code="true" >}} |
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command:
 
@@ -229,11 +259,16 @@ Use the list below to map service and DNS name to different parts of Datadog:
 
 This returns <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
 
+{{% site-region region="ap2" %}}
+**Note for AP2:** On AP2, PrivateLink endpoints use an intermediate color-named routing record instead of the agent hostname directly. The `PrivateDnsName` returned by the command above will be a record like `beige.intake.ap2.datadoghq.com`, not the agent-facing hostname. Create your Route53 hosted zone for _that_ color record. Because the customer-facing agent hostnames (for example, `metrics.agent.ap2.datadoghq.com`) CNAME to the color record, overriding the color record in your VPC is sufficient — you do not need a separate hosted zone per agent hostname.
+{{% /site-region %}}
+
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the {{< ui >}}Alias{{< /ui >}} option, then under {{< ui >}}Route traffic to{{< /ui >}}, choose {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
    **Notes**:
       - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]
       - The Agent sends telemetry to versioned endpoints, for example, <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> which resolves to <code>metrics.agent.{{< region-param key="dd_site" >}}</code> through a CNAME alias. Therefore, you only need to set up a private hosted zone for <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
+      - {{% site-region region="ap2" %}}**AP2 only:** The agent hostname shown in the table above (for example, `metrics.agent.ap2.datadoghq.com`) CNAME-resolves to an intermediate color record (for example, `beige.intake.ap2.datadoghq.com`). The Route53 hosted zone you need to create is for the color record, not the agent hostname. Retrieve the correct hosted zone name for each service using `DescribeVpcEndpointServices` as shown above.{{% /site-region %}}
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
@@ -295,6 +330,252 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 {{% /tab %}}
 {{< /tabs >}}
 
+## PrivateLink service names
+
+{{% site-region region="us,ap1" %}}
+| Datadog                   | PrivateLink service name                                                               | Agent hostname(s)                                                      |
+|---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint_private_link" code="true" >}}       |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | {{< region-param key="api_endpoint_private_link" code="true" >}}        |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | {{< region-param key="metrics_endpoint_private_link" code="true" >}}    |
+| Container Monitoring      | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | {{< region-param key="containers_endpoint_private_link" code="true" >}} |
+| Process Monitoring        | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | {{< region-param key="process_endpoint_private_link" code="true" >}}    |
+| General Intake (EVP All)  | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | {{< region-param key="profiling_endpoint_private_link" code="true" >}}  |
+| APM (Traces)              | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
+| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+| Network Device Monitoring | {{< region-param key="aws_private_link_ndm_service_name" code="true" >}}               | {{< region-param key="ndm_endpoint_private_link" code="true" >}}               |
+| CI Visibility             | {{< region-param key="aws_private_link_ci_visibility_service_name" code="true" >}}     | {{< region-param key="ci_visibility_endpoint_private_link" code="true" >}}     |
+| Logs (Live Tail)          | {{< region-param key="aws_private_link_logs_livetail_service_name" code="true" >}}     | {{< region-param key="logs_livetail_endpoint_private_link" code="true" >}}     |
+| Echo                      | {{< region-param key="aws_private_link_echo_service_name" code="true" >}}               | {{< region-param key="echo_endpoint_private_link" code="true" >}}               |
+| Slack                     | {{< region-param key="aws_private_link_slack_gw_service_name" code="true" >}}           | {{< region-param key="slack_gw_endpoint_private_link" code="true" >}}           |
+| Cloud Security Management | {{< region-param key="aws_private_link_evp_compliance_service_name" code="true" >}}     | {{< region-param key="evp_compliance_endpoint_private_link" code="true" >}}     |
+| Salesforce                | {{< region-param key="aws_private_link_salesforce_service_name" code="true" >}}         | {{< region-param key="salesforce_endpoint_private_link" code="true" >}}         |
+| Logs (Kinesis Firehose)   | {{< region-param key="aws_private_link_evp_aws_kinesis_service_name" code="true" >}}    | {{< region-param key="evp_aws_kinesis_endpoint_private_link" code="true" >}}    |
+| RUM & Session Replay      | {{< region-param key="aws_private_link_evp_replay_service_name" code="true" >}}         | {{< region-param key="evp_replay_endpoint_private_link" code="true" >}}         |
+| Logs (GCP)                | {{< region-param key="aws_private_link_evp_gcp_service_name" code="true" >}}            | {{< region-param key="evp_gcp_endpoint_private_link" code="true" >}}            |
+| Source Maps               | {{< region-param key="aws_private_link_evp_srcmap_service_name" code="true" >}}         | {{< region-param key="evp_srcmap_endpoint_private_link" code="true" >}}         |
+| Webhooks (Build)          | {{< region-param key="aws_private_link_webhooks_service_name" code="true" >}}           | {{< region-param key="webhooks_endpoint_private_link" code="true" >}}           |
+| Webhooks                  | {{< region-param key="aws_private_link_evp_webhooks_service_name" code="true" >}}       | {{< region-param key="evp_webhooks_endpoint_private_link" code="true" >}}       |
+| All Datadog (EVP)         | {{< region-param key="aws_private_link_evp_all_ddog_service_name" code="true" >}}       | {{< region-param key="evp_all_ddog_endpoint_private_link" code="true" >}}       |
+| HAMR All EVP              | {{< region-param key="aws_private_link_hamr_evp_all_service_name" code="true" >}}       | {{< region-param key="hamr_evp_all_endpoint_private_link" code="true" >}}       |
+| Continuous Profiler       | {{< region-param key="aws_private_link_evp_profile_service_name" code="true" >}}        | {{< region-param key="evp_profile_endpoint_private_link" code="true" >}}        |
+| Real User Monitoring (All)| {{< region-param key="aws_private_link_evp_all_rum_service_name" code="true" >}}        | {{< region-param key="evp_all_rum_endpoint_private_link" code="true" >}}        |
+| Datadog Web               | {{< region-param key="aws_private_link_web_ddog_service_name" code="true" >}}           | {{< region-param key="web_ddog_endpoint_private_link" code="true" >}}           |
+| Internal (EVP)            | {{< region-param key="aws_private_link_evp_internal_service_name" code="true" >}}       | {{< region-param key="evp_internal_endpoint_private_link" code="true" >}}       |
+| Agent (EVP)               | {{< region-param key="aws_private_link_evp_agent_service_name" code="true" >}}          | {{< region-param key="evp_agent_endpoint_private_link" code="true" >}}          |
+| AWS Metrics (EVP)         | {{< region-param key="aws_private_link_evp_awsmetrics_service_name" code="true" >}}     | {{< region-param key="evp_awsmetrics_endpoint_private_link" code="true" >}}     |
+| Real User Monitoring (Browser)| {{< region-param key="aws_private_link_evp_browser_service_name" code="true" >}}        | {{< region-param key="evp_browser_endpoint_private_link" code="true" >}}        |
+| APM (Datadog internal)    | {{< region-param key="aws_private_link_evp_apm_ddog_service_name" code="true" >}}       | {{< region-param key="evp_apm_ddog_endpoint_private_link" code="true" >}}       |
+| Real User Monitoring      | {{< region-param key="aws_private_link_evp_rum_service_name" code="true" >}}            | {{< region-param key="evp_rum_endpoint_private_link" code="true" >}}            |
+| OpenTelemetry (OTLP)      | {{< region-param key="aws_private_link_hamr_metrics_agent_service_name" code="true" >}} | {{< region-param key="hamr_metrics_agent_endpoint_private_link" code="true" >}} |
+{{% /site-region %}}
+
+{{% site-region region="ap2" %}}
+On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps to one VPC service endpoint and one Route53 private hosted zone, and covers one or more agent FQDNs. Create one VPC endpoint and one Route53 private hosted zone per color. No per-FQDN configuration is required.
+
+<!--
+  INTENTIONAL OMISSIONS — do not add the following endpoints to this section:
+
+  - On Call (primary):   green.intake.ap2.datadoghq.com  (aws_private_link_on_call_service_name / on_call_endpoint_private_link)
+  - On Call (secondary): ivory.intake.ap2.datadoghq.com  (aws_private_link_on_call_secondary_service_name / on_call_secondary_endpoint_private_link)
+  - Datadog Web (orange): orange.intake.ap2.datadoghq.com (aws_private_link_web_ddog_service_name / web_ddog_endpoint_private_link)
+
+  These three endpoints serve non-agent, non-telemetry purposes (On-Call notification delivery and
+  Datadog web UI access) and are not intended for customer PrivateLink configuration. They are
+  defined in regions.config.js for completeness but should not appear in this color reference or
+  in the service-name tables above.
+-->
+
+### Aqua (`vpce-svc-01b61a61d21fc7273`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273`
+- **Private DNS name (Route53 zone):** `aqua.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `gcp-intake.logs.ap2.datadoghq.com` |
+
+### Beige (`vpce-svc-06a30d6a016b746ff`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff`
+- **Private DNS name (Route53 zone):** `beige.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `*.agent.ap2.datadoghq.com` |
+| `agent.ap2.datadoghq.com` |
+
+### Bisque (`vpce-svc-0c26ca335d93a68b5`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5`
+- **Private DNS name (Route53 zone):** `bisque.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `process.ap2.datadoghq.com` |
+
+### Brown (`vpce-svc-04c61207a01a73496`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496`
+- **Private DNS name (Route53 zone):** `brown.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `*.integrations.otlp.ap2.datadoghq.com` |
+| `opamp.ap2.datadoghq.com` |
+| `otlp.ap2.datadoghq.com` |
+
+### Cyan (`vpce-svc-0d936da0e6a30d3cd`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd`
+- **Private DNS name (Route53 zone):** `cyan.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `agenthealth-intake.ap2.datadoghq.com` |
+| `awsmetrics-intake.ap2.datadoghq.com` |
+| `ci-intake.ap2.datadoghq.com` |
+| `cicodescan-intake.ap2.datadoghq.com` |
+| `cireport-intake.ap2.datadoghq.com` |
+| `citestcov-intake.ap2.datadoghq.com` |
+| `citestcycle-intake.ap2.datadoghq.com` |
+| `cloudplatform-intake.ap2.datadoghq.com` |
+| `contimage-intake.ap2.datadoghq.com` |
+| `contlcycle-intake.ap2.datadoghq.com` |
+| `cspm-intake.ap2.datadoghq.com` |
+| `cws-intake.ap2.datadoghq.com` |
+| `debugger-intake.ap2.datadoghq.com` |
+| `error-tracking-intake.ap2.datadoghq.com` |
+| `event-management-intake.ap2.datadoghq.com` |
+| `instrumentation-telemetry-intake.ap2.datadoghq.com` |
+| `intake.profile.ap2.datadoghq.com` |
+| `kubeops-intake.ap2.datadoghq.com` |
+| `llmobs-intake.ap2.datadoghq.com` |
+| `ndm-intake.ap2.datadoghq.com` |
+| `ndmflow-intake.ap2.datadoghq.com` |
+| `netpath-intake.ap2.datadoghq.com` |
+| `ocimetrics-intake.ap2.datadoghq.com` |
+| `resources-intake.ap2.datadoghq.com` |
+| `sbom-intake.ap2.datadoghq.com` |
+| `sds-intake.ap2.datadoghq.com` |
+| `sentry-intake.ap2.datadoghq.com` |
+| `snmp-traps-intake.ap2.datadoghq.com` |
+| `softinv-intake.ap2.datadoghq.com` |
+| `webhook-intake.ap2.datadoghq.com` |
+
+### Gold (`vpce-svc-06460db30a7cfdace`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace`
+- **Private DNS name (Route53 zone):** `gold.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `agent-http-intake.logs.ap2.datadoghq.com` |
+| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` |
+| `eventbridge-intake.logs.ap2.datadoghq.com` |
+| `http-intake.logs.ap2.datadoghq.com` |
+| `lambda-http-intake.logs.ap2.datadoghq.com` |
+| `obpipeline-intake.ap2.datadoghq.com` |
+| `runtime-security-http-intake.logs.ap2.datadoghq.com` |
+
+### Indigo (`vpce-svc-0545109555aa68e7e`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e`
+- **Private DNS name (Route53 zone):** `indigo.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `live.logs.ap2.datadoghq.com` |
+
+### Lime (`vpce-svc-0f3e01f4180b2ae09`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09`
+- **Private DNS name (Route53 zone):** `lime.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `data-obs-intake.ap2.datadoghq.com` |
+| `trace.agent.ap2.datadoghq.com` |
+
+### Linen (`vpce-svc-031da3ffac78ef902`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902`
+- **Private DNS name (Route53 zone):** `linen.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `orchestrator.ap2.datadoghq.com` |
+
+### Orchid (`vpce-svc-06ec78b291ce8020a`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a`
+- **Private DNS name (Route53 zone):** `orchid.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `*.synthetics.ap2.datadoghq.com` |
+| `api.ap2.datadoghq.com` |
+| `quota.browser-intake-ap2-datadoghq.com` |
+| `synthetics.ap2.datadoghq.com` |
+
+### Plum (`vpce-svc-028e4348e80fa73f5`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5`
+- **Private DNS name (Route53 zone):** `plum.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `sourcemap-intake.ap2.datadoghq.com` |
+
+### Violet (`vpce-svc-01f8f80f4cb97bd10`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10`
+- **Private DNS name (Route53 zone):** `violet.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `config.ap2.datadoghq.com` |
+
+### White (`vpce-svc-094469ee7a178f448`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448`
+- **Private DNS name (Route53 zone):** `white.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `dbm-metrics-intake.ap2.datadoghq.com` |
+| `dbquery-intake.ap2.datadoghq.com` |
+
+{{% /site-region %}}
+
 [11]: https://aws.amazon.com/privatelink/
 [12]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
 [13]: /agent/configuration/agent-commands/#restart-the-agent
@@ -302,6 +583,215 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [15]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [16]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [17]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+
+{{% /site-region %}}
+
+{{% site-region region="ap2" %}}
+
+## AP2: VPC endpoints by color
+
+On AP2, each PrivateLink VPC endpoint is identified by a color. Each color maps to one VPC service endpoint and one Route53 private hosted zone, and covers one or more agent FQDNs. Create one VPC endpoint and one Route53 private hosted zone per color. No per-FQDN configuration is required.
+
+Each FQDN table lists the DNS names covered by that endpoint.
+
+<!--
+  INTENTIONAL OMISSIONS — do not add the following endpoints to this section:
+
+  - On Call (primary):   green.intake.ap2.datadoghq.com  (aws_private_link_on_call_service_name / on_call_endpoint_private_link)
+  - On Call (secondary): ivory.intake.ap2.datadoghq.com  (aws_private_link_on_call_secondary_service_name / on_call_secondary_endpoint_private_link)
+  - Datadog Web (orange): orange.intake.ap2.datadoghq.com (aws_private_link_web_ddog_service_name / web_ddog_endpoint_private_link)
+
+  These three endpoints serve non-agent, non-telemetry purposes (On-Call notification delivery and
+  Datadog web UI access) and are not intended for customer PrivateLink configuration. They are
+  defined in regions.config.js for completeness but should not appear in this color reference or
+  in the service-name tables above.
+-->
+
+### Aqua (`vpce-svc-01b61a61d21fc7273`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273`
+- **Private DNS name (Route53 zone):** `aqua.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `gcp-intake.logs.ap2.datadoghq.com` |
+
+### Beige (`vpce-svc-06a30d6a016b746ff`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff`
+- **Private DNS name (Route53 zone):** `beige.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `*.agent.ap2.datadoghq.com` |
+| `agent.ap2.datadoghq.com` |
+
+### Bisque (`vpce-svc-0c26ca335d93a68b5`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5`
+- **Private DNS name (Route53 zone):** `bisque.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `process.ap2.datadoghq.com` |
+
+### Brown (`vpce-svc-04c61207a01a73496`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496`
+- **Private DNS name (Route53 zone):** `brown.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `*.integrations.otlp.ap2.datadoghq.com` |
+| `opamp.ap2.datadoghq.com` |
+| `otlp.ap2.datadoghq.com` |
+
+### Cyan (`vpce-svc-0d936da0e6a30d3cd`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd`
+- **Private DNS name (Route53 zone):** `cyan.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `agenthealth-intake.ap2.datadoghq.com` |
+| `awsmetrics-intake.ap2.datadoghq.com` |
+| `ci-intake.ap2.datadoghq.com` |
+| `cicodescan-intake.ap2.datadoghq.com` |
+| `cireport-intake.ap2.datadoghq.com` |
+| `citestcov-intake.ap2.datadoghq.com` |
+| `citestcycle-intake.ap2.datadoghq.com` |
+| `cloudplatform-intake.ap2.datadoghq.com` |
+| `contimage-intake.ap2.datadoghq.com` |
+| `contlcycle-intake.ap2.datadoghq.com` |
+| `cspm-intake.ap2.datadoghq.com` |
+| `cws-intake.ap2.datadoghq.com` |
+| `debugger-intake.ap2.datadoghq.com` |
+| `error-tracking-intake.ap2.datadoghq.com` |
+| `event-management-intake.ap2.datadoghq.com` |
+| `instrumentation-telemetry-intake.ap2.datadoghq.com` |
+| `intake.profile.ap2.datadoghq.com` |
+| `kubeops-intake.ap2.datadoghq.com` |
+| `llmobs-intake.ap2.datadoghq.com` |
+| `ndm-intake.ap2.datadoghq.com` |
+| `ndmflow-intake.ap2.datadoghq.com` |
+| `netpath-intake.ap2.datadoghq.com` |
+| `ocimetrics-intake.ap2.datadoghq.com` |
+| `resources-intake.ap2.datadoghq.com` |
+| `sbom-intake.ap2.datadoghq.com` |
+| `sds-intake.ap2.datadoghq.com` |
+| `sentry-intake.ap2.datadoghq.com` |
+| `snmp-traps-intake.ap2.datadoghq.com` |
+| `softinv-intake.ap2.datadoghq.com` |
+| `webhook-intake.ap2.datadoghq.com` |
+
+### Gold (`vpce-svc-06460db30a7cfdace`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace`
+- **Private DNS name (Route53 zone):** `gold.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `agent-http-intake.logs.ap2.datadoghq.com` |
+| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` |
+| `eventbridge-intake.logs.ap2.datadoghq.com` |
+| `http-intake.logs.ap2.datadoghq.com` |
+| `lambda-http-intake.logs.ap2.datadoghq.com` |
+| `obpipeline-intake.ap2.datadoghq.com` |
+| `runtime-security-http-intake.logs.ap2.datadoghq.com` |
+
+### Indigo (`vpce-svc-0545109555aa68e7e`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e`
+- **Private DNS name (Route53 zone):** `indigo.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `live.logs.ap2.datadoghq.com` |
+
+### Lime (`vpce-svc-0f3e01f4180b2ae09`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09`
+- **Private DNS name (Route53 zone):** `lime.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `data-obs-intake.ap2.datadoghq.com` |
+| `trace.agent.ap2.datadoghq.com` |
+
+### Linen (`vpce-svc-031da3ffac78ef902`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902`
+- **Private DNS name (Route53 zone):** `linen.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `orchestrator.ap2.datadoghq.com` |
+
+### Orchid (`vpce-svc-06ec78b291ce8020a`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a`
+- **Private DNS name (Route53 zone):** `orchid.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `*.synthetics.ap2.datadoghq.com` |
+| `api.ap2.datadoghq.com` |
+| `quota.browser-intake-ap2-datadoghq.com` |
+| `synthetics.ap2.datadoghq.com` |
+
+### Plum (`vpce-svc-028e4348e80fa73f5`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5`
+- **Private DNS name (Route53 zone):** `plum.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `sourcemap-intake.ap2.datadoghq.com` |
+
+### Violet (`vpce-svc-01f8f80f4cb97bd10`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10`
+- **Private DNS name (Route53 zone):** `violet.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `config.ap2.datadoghq.com` |
+
+### White (`vpce-svc-094469ee7a178f448`)
+
+- **VPC service endpoint:** `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448`
+- **Private DNS name (Route53 zone):** `white.intake.ap2.datadoghq.com`
+
+**FQDNs covered:**
+
+| FQDN |
+|------|
+| `dbm-metrics-intake.ap2.datadoghq.com` |
+| `dbquery-intake.ap2.datadoghq.com` |
 
 {{% /site-region %}}
 
