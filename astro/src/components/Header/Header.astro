@@ -4,9 +4,7 @@ import NavDropdown from "./NavDropdown.tsx";
 import ProductMegaMenu from "./ProductMegaMenu.tsx";
 import { LogoDownloadPanel } from "./LogoDownloadPanel.tsx";
 import HeaderScroll from "./HeaderScroll.astro";
-import MobileNav, {
-  type MobileNavLabels,
-} from "@components/MobileNav/MobileNav.tsx";
+import MobileNav from "@components/MobileNav/MobileNav.astro";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
@@ -17,16 +15,6 @@ const cl = classListFactory(styles);
 
 const headerData = getHeaderData();
 const logoTriggerId = generateElementId("header__logo-column");
-
-// TODO: replace hardcoded English with i18n() once authoritative translation
-// keys exist for these strings in the Hugo i18n bundle.
-const mobileNavSearch = { placeholder: "Search", ariaLabel: "Search" };
-const mobileNavLabels: MobileNavLabels = {
-  "Toggle navigation": "Toggle navigation",
-  home: i18n("home"),
-  docs: i18n("docs") || "Docs",
-  api: i18n("api"),
-};
 
 const bitsLogoUrl = `${IMAGES_URL}/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75`;
 const textLogoUrl = `${IMAGES_URL}/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807`;
@@ -219,13 +207,7 @@ const logoPanelLabels = {
             height="40"
           />
         </a>
-        <MobileNav
-          client:load
-          search={mobileNavSearch}
-          items={headerData.mobileItems}
-          categories={headerData.mobileCategories}
-          labels={mobileNavLabels}
-        />
+        <MobileNav />
       </div>
     </div>
   </nav>

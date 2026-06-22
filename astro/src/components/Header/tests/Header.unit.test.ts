@@ -47,11 +47,15 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    // Every <img> inside the header must carry a 1x/2x srcset so retina
-    // displays render a crisp logo instead of upscaling the 1x PNG.
-    const imgTags = html.match(/<img[^>]*>/g) ?? [];
-    expect(imgTags.length).toBeGreaterThan(0);
-    for (const img of imgTags) {
+    // Every logo <img> must carry a 1x/2x srcset so retina displays render a
+    // crisp logo instead of upscaling the 1x PNG. (The mobile-nav quicknav
+    // icons are excluded: they ship as native 42×42 PNGs rendered at 21×21, so
+    // they are already retina-crisp without a srcset, matching Hugo.)
+    const logoImgTags = (html.match(/<img[^>]*>/g) ?? []).filter((img) =>
+      /class="[^"]*logo/.test(img),
+    );
+    expect(logoImgTags.length).toBeGreaterThan(0);
+    for (const img of logoImgTags) {
       expect(img).toMatch(/srcset="[^"]*1x, [^"]*2x"/);
     }
   });

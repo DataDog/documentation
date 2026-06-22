@@ -1,0 +1,75 @@
+---
+/**
+ * Renders one node of the documentation nav tree as part of the mobile
+ * accordion. A node with children becomes a native `<details>` (zero-JS,
+ * accessible, multiple-open) whose `<summary>` is the toggle; a leaf becomes a
+ * plain link. Recurses into itself for arbitrary depth, mirroring Hugo's
+ * `mobile-documentation.html`.
+ */
+import type { DocsNavNode } from "@lib/componentUtils/docsNavMenu";
+import styles from "./MobileNav.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import Self from "./MobileNavSection.astro";
+
+interface Props {
+  node: DocsNavNode;
+  level: number;
+  open?: boolean;
+}
+
+const { node, level, open = false } = Astro.props;
+const cl = classListFactory(styles);
+const hasChildren = node.children.length > 0;
+---
+
+{
+  hasChildren ? (
+    <details
+      class={`${cl("section")} mobile-nav__section`}
+      data-level={level}
+      style={`--depth:${level}`}
+      open={open}
+    >
+      <summary class={`${cl("sectionToggle")} mobile-nav__section-toggle`}>
+        <span>{node.label}</span>
+        <span class={`${cl("caret")} mobile-nav__caret`} aria-hidden="true">
+          <svg viewBox="0 0 17.78 10.51" width="10">
+            <polyline
+              class={cl("caretArrow")}
+              points="16.92 1.14 8.92 9.14 0.92 1.14"
+            />
+          </svg>
+        </span>
+      </summary>
+      <ul class={`${cl("sublist")} mobile-nav__sublist`}>
+        {/* A section that is itself a page stays reachable via its own link,
+            matching Hugo's "add parent url as a child nav item". */}
+        {node.href && (
+          <li>
+            <a
+              class={`${cl("link")} mobile-nav__link`}
+              style={`--depth:${level + 1}`}
+              href={node.href}
+            >
+              {node.label}
+            </a>
+          </li>
+        )}
+        {node.children.map((child) => (
+          <li>
+            <Self node={child} level={level + 1} />
+          </li>
+        ))}
+      </ul>
+    </details>
+  ) : (
+    <a
+      class={`${cl("link")} mobile-nav__link`}
+      data-level={level}
+      style={`--depth:${level}`}
+      href={node.href ?? "/"}
+    >
+      {node.label}
+    </a>
+  )
+}

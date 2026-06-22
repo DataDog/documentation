@@ -1,5 +1,9 @@
 /* Ported from ~/dd/websites-modules/assets/styles/components/_mobile-nav.scss.
-   Hugo-identical dimensions and timings. */
+   Hugo-identical dimensions and timings.
+
+   The overlay is rendered at build time; the MobileNavToggle island flips the
+   global `.mobile-menu-open` / `.mobile-bg-open` classes, so the open-state
+   rules below reach those plain classes via :global(). */
 
 .mobileNav {
   transition: right 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -16,7 +20,7 @@
   box-sizing: border-box;
 }
 
-.mobileNav--open {
+.mobileNav:global(.mobile-menu-open) {
   right: 0 !important;
 }
 
@@ -46,7 +50,7 @@
   z-index: var(--hugo-mobile-nav-bg-z);
 }
 
-.bg--open {
+.bg:global(.mobile-bg-open) {
   display: block;
   opacity: var(--hugo-mobile-nav-bg-opacity);
   pointer-events: auto;
@@ -58,6 +62,8 @@
   }
 }
 
+/* --- Quick-links row (Home / Docs / API with icons) --- */
+
 .quicknav {
   display: flex;
   align-items: center;
@@ -65,8 +71,12 @@
   border-bottom: 1px solid var(--hugo-nav-gray-light);
 }
 
-.quicknav a {
+.quicknavLink {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   text-align: center;
   color: var(--hugo-nav-text);
   text-decoration: none;
@@ -74,35 +84,18 @@
   font-size: 14px;
   text-transform: uppercase;
   padding: 4px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.list > li {
-  border-bottom: 1px solid var(--hugo-nav-gray-light);
-  font-size: 18px;
-  list-style: none;
-}
-
-.itemLink {
-  display: block;
-  color: var(--hugo-nav-text);
-  text-decoration: none;
-  padding: 12px 0 12px 14px;
-  font-weight: 600;
-}
-
-.itemLink:hover {
+.quicknavLink:hover {
   color: var(--hugo-nav-brand-primary);
 }
+
+.quicknavIcon {
+  width: 21px;
+  height: auto;
+}
+
+/* --- Search --- */
 
 .searchWrap {
   padding: 12px 14px;
@@ -118,41 +111,112 @@
   color: var(--hugo-nav-text);
 }
 
-.productCategory {
-  font-size: 22px;
-  line-height: 24px;
-  font-weight: 700;
+/* --- Accordion menu --- */
+
+.list {
+  list-style: none;
+  padding: 0;
   margin: 0;
-  padding: 13px 0 5px 20px;
+}
+
+.list > li {
+  list-style: none;
+  border-bottom: 1px solid var(--hugo-nav-gray-light);
+}
+
+/* A section's left indent grows with its depth in the tree (--depth set inline). */
+.section,
+.link {
+  --indent: calc(14px + var(--depth, 0) * 16px);
+}
+
+.section {
+  position: relative;
+}
+
+.sectionToggle {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.productCategory .nav-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.productSublist {
   list-style: none;
-  margin-bottom: 5px;
+  cursor: pointer;
+  padding: 12px 36px 12px var(--indent);
+  color: var(--hugo-nav-text);
+  font-size: 18px;
+}
+
+/* Hide the native disclosure triangle. */
+.sectionToggle::-webkit-details-marker {
+  display: none;
+}
+.sectionToggle::marker {
+  content: "";
+}
+
+/* Top-level sections read as headings, matching Hugo's uppercase, semibold. */
+.section[data-level="0"] > .sectionToggle {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.sectionToggle:hover {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.caret {
+  position: absolute;
+  right: 22px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.caretArrow {
+  fill: none;
+  stroke: var(--hugo-nav-text);
+  stroke-miterlimit: 10;
+  stroke-width: 2px;
+}
+
+/* Rotate the caret and brand-color the header when its section is open. */
+.section[open] > .sectionToggle {
+  color: var(--hugo-nav-brand-primary);
+}
+.section[open] > .sectionToggle .caret {
+  transform: rotate(180deg);
+}
+.section[open] > .sectionToggle .caretArrow {
+  stroke: var(--hugo-nav-brand-primary);
+}
+.caret {
+  transition: transform 250ms ease;
+}
+
+.sublist {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.productSublist li {
-  border: none !important;
+.sublist li {
+  list-style: none;
+  border: none;
 }
 
-.productSublist a {
-  padding: 9px 0 8px 70px;
+.link {
   display: block;
+  padding: 8px 14px 8px var(--indent);
   color: var(--hugo-nav-text);
   text-decoration: none;
   font-size: 16px;
 }
 
-.productSublist a:hover {
+/* Top-level leaf links match the heading styling of top-level sections. */
+.link[data-level="0"] {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.link:hover {
   color: var(--hugo-nav-brand-primary);
 }
 

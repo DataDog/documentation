@@ -116,6 +116,39 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await expect(overlay).toBeVisible();
     await expect(bg).toBeVisible();
   });
+
+  test('mobile nav accordion: Essentials is open by default and another section toggles', async ({ page }) => {
+    await page.setViewportSize({ width: 500, height: 900 });
+    await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState('networkidle');
+
+    await page.locator('.navbar-toggler').click();
+
+    // Match a top-level section by its own summary label (not a nested one).
+    const topSectionByLabel = (label: string) =>
+      page
+        .locator('.mobile-nav__section[data-level="0"]', {
+          has: page.locator(':scope > summary > span', { hasText: label }),
+        })
+        .first();
+
+    // Essentials renders open (contains the API docs), so its child sections are
+    // revealed. "Getting Started" is itself a collapsible sub-section, so its
+    // summary toggle is visible even though its own nested links stay collapsed.
+    const essentials = topSectionByLabel('Essentials');
+    await expect(essentials).toHaveAttribute('open', '');
+    await expect(
+      essentials.locator('.mobile-nav__section-toggle', { hasText: 'Getting Started' }).first(),
+    ).toBeVisible();
+
+    // A different section starts collapsed and opens on click — independently
+    // of Essentials (multiple sections may be open at once, as in Hugo).
+    const infrastructure = topSectionByLabel('Infrastructure');
+    await expect(infrastructure).not.toHaveAttribute('open', '');
+    await infrastructure.locator('.mobile-nav__section-toggle').first().click();
+    await expect(infrastructure).toHaveAttribute('open', '');
+    await expect(essentials).toHaveAttribute('open', '');
+  });
 });
 
 test.describe('Header — visual', () => {

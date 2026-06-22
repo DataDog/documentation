@@ -1,0 +1,102 @@
+---
+/**
+ * Mobile navigation overlay, ported from Hugo's `mobile-documentation.html`:
+ * a quick-links row (Home / Docs / API with icons), a search box, and the full
+ * documentation menu rendered as a `<details>` accordion. "Essentials" is open
+ * by default because it contains the API docs.
+ *
+ * The menu tree is large, so it is rendered here at build time and never
+ * serialized into a Preact island. Only the small `MobileNavToggle` island
+ * (hamburger + open/close) is hydrated; it manipulates the already-rendered
+ * overlay via element references.
+ */
+import styles from "./MobileNav.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import MobileNavToggle, {
+  type MobileNavLabels,
+} from "./MobileNavToggle.tsx";
+import MobileNavSection from "./MobileNavSection.astro";
+import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
+import { CORP_ORIGIN } from "@config/typesense";
+import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import { i18n } from "@lib/i18n/i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const cl = classListFactory(styles);
+
+const tree = getDocsNavTree(lang);
+const ESSENTIALS_ID = "essentials_heading";
+
+// TODO: replace hardcoded English fallbacks with i18n() keys once authoritative
+// translations exist in the Hugo i18n bundle.
+const toggleLabels: MobileNavLabels = {
+  "Toggle navigation": "Toggle navigation",
+};
+const quicknav = [
+  { label: i18n("home"), href: CORP_ORIGIN, icon: "nav_home", alt: "home" },
+  { label: i18n("docs") || "Docs", href: localizedHref(lang, "/"), icon: "nav_docs", alt: "docs" },
+  { label: i18n("api"), href: localizedHref(lang, "/api/"), icon: "nav_mobile_api", alt: "api" },
+];
+const searchPlaceholder = "Search documentation...";
+const searchAriaLabel = "Search";
+---
+
+<div id="mobile-nav-root">
+  <MobileNavToggle
+    client:load
+    labels={toggleLabels}
+    externalContext={{
+      scope: "mobile-nav-root",
+      entries: { overlay: "mobile-nav", backdrop: "mobile-nav-bg" },
+    }}
+  />
+
+  <div id="mobile-nav-bg" class={cl("bg")}></div>
+
+  <div id="mobile-nav" class={cl("mobileNav")}>
+    <div class={`${cl("quicknav")} mobile-nav__quicknav`}>
+      {
+        quicknav.map((item) => (
+          <a class={cl("quicknavLink")} href={item.href}>
+            <img
+              class={cl("quicknavIcon")}
+              src={`/images/icons/${item.icon}.png`}
+              width="21"
+              height="21"
+              loading="lazy"
+              alt={item.alt}
+            />
+            <span>{item.label}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class={cl("searchWrap")}>
+      <input
+        class={`${cl("searchInput")} mobile-nav__search`}
+        type="search"
+        placeholder={searchPlaceholder}
+        aria-label={searchAriaLabel}
+      />
+    </div>
+
+    <ul class={`${cl("list")} mobile-nav__list`}>
+      {
+        tree.map((node) => (
+          <li>
+            <MobileNavSection
+              node={node}
+              level={0}
+              open={node.identifier === ESSENTIALS_ID}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

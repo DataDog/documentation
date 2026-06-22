@@ -120,14 +120,6 @@ export type SolutionsColumn = {
   items: { label: string; url: string }[];
 };
 
-export type MobileNavLink = { identifier?: string; label: string; url: string };
-
-export type MobileCategory = {
-  identifier: string;
-  label: string;
-  products: MobileNavLink[];
-};
-
 export type HeaderData = {
   product: {
     label: string;
@@ -145,8 +137,6 @@ export type HeaderData = {
   blog: (SimpleLink & { children: SimpleLink[] }) | null;
   login: SimpleLink | null;
   getStarted: SimpleLink | null;
-  mobileItems: MobileNavLink[];
-  mobileCategories: MobileCategory[];
 };
 
 // ---------------------------------------------------------------------------
@@ -267,16 +257,6 @@ function buildSolutionsColumns(item: MenuItem | undefined): SolutionsColumn[] {
   }));
 }
 
-function buildMobileCategories(): MobileCategory[] {
-  return productCategories
-    .filter((c) => c.mobile || c.mobile_products)
-    .map((cat) => ({
-      identifier: cat.identifier,
-      label: i18n(cat.lang_key),
-      products: resolveProductList(cat.mobile_products ?? []),
-    }));
-}
-
 // ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
@@ -330,14 +310,6 @@ export function getHeaderData(): HeaderData {
     login:
       loginItem && !isDisabledForDocs(loginItem) ? asLink(loginItem) : null,
     getStarted: asLink(getStartedItem),
-    mobileItems: left
-      .filter((m) => !isDisabledForDocs(m))
-      .map((m) => ({
-        identifier: m.identifier,
-        label: i18n(m.lang_key),
-        url: resolveUrl(m.url),
-      })),
-    mobileCategories: buildMobileCategories(),
   };
 }
 
