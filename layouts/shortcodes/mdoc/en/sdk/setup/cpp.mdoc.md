@@ -9,7 +9,7 @@ This page describes how to instrument your applications for [Real User Monitorin
 
 ## Prerequisites
 
-Before you begin, you will need:
+Before you begin, you need:
 
 - A Datadog account with RUM or Error Tracking enabled
 - A C++17-compatible compiler
@@ -26,7 +26,7 @@ Add the SDK's public headers to your project's include paths, and add the SDK as
 {% tabs %}
 {% tab label="CMake (FetchContent)" %}
 
-Using CMake's `FetchContent` module will allow you to download and build the SDK from source, guaranteeing binary compatibility and giving you full control over build configuration.
+Using CMake's `FetchContent` module downloads and builds the SDK from source, guaranteeing binary compatibility and giving you full control over build configuration.
 
 In your project's `CMakeLists.txt`, use CMake's `FetchContent` module to download and build the SDK as part of your project:
 
@@ -75,7 +75,7 @@ For more detailed information on CMake setup, see [Advanced Build Configuration]
 {% /tab %}
 {% tab label="Other build systems" %}
 
-If you're not using CMake, you'll need to either download precompiled binaries or build the SDK from source with CMake, then point your compiler and linker to the appropriate headers and libraries. For example, in a `Makefile`:
+If you're not using CMake, download precompiled binaries or build the SDK from source with CMake, then point your compiler and linker to the appropriate headers and libraries. For example, in a `Makefile`:
 
 ```makefile
 INCLUDES = -Iexternal/datadog-sdk/include
@@ -97,8 +97,8 @@ For more detailed information on build configuration, see [Advanced Build Config
 {% step title="Create a RUM Application in the Datadog UI" %}
 
 1. Navigate to [**Digital Experience** > **Add an Application**][2].
-2. Select `C++` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. Copy the application ID and client token — you'll need them to initialize the SDK.
+2. Select `C++` as the application type and enter an application name to generate a unique RUM application ID and client token.
+3. Copy the application ID and client token—you need them to initialize the SDK.
 
 {% /step %}
 
@@ -147,7 +147,7 @@ dd_core_config_set_application_storage_path(&config, "<app-storage-dir>");
 dd_core_t* core = dd_core_create(&config, DD_TRACKING_CONSENT_GRANTED);
 ```
 
-Note that the C API requires explicit cleanup:
+**Note**: The C API requires explicit cleanup:
 
 ```c
 /* Free all resources held by the core when finished */
@@ -285,7 +285,7 @@ dd_core_config_set_site(&config, DD_SITE_US2_FED);
 
 #### Configure an application storage path
 
-The SDK requires an application storage path, which must be an existing directory that's exclusively used by your application. The SDK will create a `.datadog/` subdirectory within that directory and store all transient files within it.
+The SDK requires an application storage path, which must be an existing directory that's exclusively used by your application. The SDK creates a `.datadog/` subdirectory within that directory and stores all transient files within it.
 
 #### Set tracking consent (GDPR compliance)
 
@@ -318,7 +318,7 @@ For information on other SDK configuration options, see [Advanced Configuration]
 
 {% step title="Register RUM and start the SDK" %}
 
-Once the Core is configured, register the RUM feature and call `Start()`.
+After the Core is configured, register the RUM feature and call `Start()`.
 
 {% tabs %}
 {% tab label="C++" %}
@@ -342,7 +342,7 @@ dd_rum_t* rum = dd_rum_init(core, &rum_config);
 dd_core_start(core);
 ```
 
-Note that the C API requires explicit cleanup:
+**Note**: The C API requires explicit cleanup:
 
 ```c
 /* Free all resources when finished */
@@ -352,7 +352,7 @@ dd_core_destroy(core);
 {% /tab %}
 {% /tabs %}
 
-#### Configure RUM Session Sample Rate
+#### Configure RUM session sample rate
 
 To control the percentage of RUM sessions sent to Datadog, you can set a session sample rate between 0.0 and 100.0. The default is 100.0, which keeps all sessions.
 
@@ -406,7 +406,7 @@ After instrumenting your application, verify that the SDK is correctly sending d
 
 ### Check diagnostic output
 
-By default, the SDK will log diagnostic warnings and errors to `stderr`. You can increase the verbosity of this output in your `CoreConfig`:
+By default, the SDK logs diagnostic warnings and errors to `stderr`. You can increase the verbosity of this output in your `CoreConfig`:
 
 {% tabs %}
 {% tab label="C++" %}
@@ -421,7 +421,7 @@ dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
 {% /tab %}
 {% /tabs %}
 
-Once the SDK is correctly configured, tracking consent is granted, and your calls to RUM API functions like `StartView()` are being executed, you should see periodic console output indicating that the SDK is uploading data:
+After the SDK is correctly configured, tracking consent is granted, and your calls to RUM API functions like `StartView()` are being executed, you should see periodic console output indicating that the SDK is uploading data:
 
 ```
 [DATADOG DEBUG] Initiating HTTP request

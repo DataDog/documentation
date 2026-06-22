@@ -154,7 +154,7 @@ dd_rum_add_error(rum, DD_RUM_ERROR_SOURCE_SOURCE,
 
 ### Track operations
 
-Operations let you measure multi-step workflows — such as login, checkout, or file upload — that may span multiple views. The SDK emits events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
+Operations let you measure multi-step workflows—such as login, checkout, or file upload—that may span multiple views. The SDK emits events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
 
 {% alert level="info" %}
 The operations API is in preview and may change in future releases.
@@ -289,7 +289,7 @@ To add extra properties to the current user without replacing the existing user 
 
 ### Account information
 
-A parallel API is available for associating an account — such as an organization, workspace, or tenant — with the current session.
+A parallel API is available for associating an account—such as an organization, workspace, or tenant—with the current session.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
@@ -346,7 +346,7 @@ dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_ERROR);
 {% /tab %}
 {% /tabs %}
 
-The **handler** controls what happens when a message is emitted. Supply a callback to route SDK messages into your own logging system. The `text` field in the message is only valid during the handler invocation — copy it if you need to store it persistently.
+The **handler** controls what happens when a message is emitted. Supply a callback to route SDK messages into your own logging system. The `text` field in the message is only valid during the handler invocation—copy it if you need to store it persistently.
 
 {% tabs %}
 {% tab label="C++" %}
@@ -436,7 +436,7 @@ The following parameters are required to initialize the SDK. The first three are
 | --- | --- |
 | `version` | Application version string, used to filter sessions by release and track error rates across versions. Set with `SetVersion()`. |
 | `variant` | Build flavor or configuration, such as `free` or `pro`. Attached to all events as metadata. |
-| `site` | Datadog datacenter for your organization. Defaults to `us1`. See [Getting Started with Datadog Sites][4] for available values. |
+| `site` | Datadog data center for your organization. Defaults to `us1`. See [Getting Started with Datadog Sites][4] for available values. |
 
 ### Upload tuning
 
@@ -444,7 +444,7 @@ These parameters control how the SDK batches and uploads event data. The default
 
 | Parameter | Options | Default | Description |
 | --- | --- | --- | --- |
-| `batch_size` | `Small`, `Medium`, `Large` | `Medium` | Controls how quickly a batch of events is considered ready for upload. Smaller batches produce more frequent, smaller HTTP requests; larger batches produce fewer, larger requests. |
+| `batch_size` | `Small`, `Medium`, `Large` | `Medium` | Controls how soon a batch of events is considered ready for upload. Smaller batches produce more frequent, smaller HTTP requests; larger batches produce fewer, larger requests. |
 | `upload_frequency` | `Frequent`, `Average`, `Rare` | `Average` | Controls how often upload cycles are initiated. More frequent cycling reduces the time between when an event is recorded and when it is sent to Datadog. |
 | `batch_processing_level` | `Low`, `Medium`, `High` | `Medium` | Maximum number of batches processed in a single upload cycle. Higher values increase throughput but may produce bursts of HTTP requests. |
 
@@ -475,7 +475,7 @@ dd_core_config_set_batch_processing_level(&config, DD_BATCH_PROCESSING_LEVEL_HIG
 
 In C++, `Core` and `Rum` are managed as `std::shared_ptr` references. The SDK stops automatically when the last reference to the core is released, so no explicit cleanup is required in typical usage.
 
-To stop the SDK before it goes out of scope — for example, to reinitialize with different configuration — call `Stop()` explicitly:
+To stop the SDK before it goes out of scope—for example, to reinitialize with different configuration—call `Stop()` explicitly:
 
 ```cpp
 core->Stop();

@@ -58,7 +58,7 @@ datadog_install(my-app
 )
 ```
 
-This function ensures that all required runtime artifacts are present alongside your application binary when using `cmake --install` or building generated "install" targets.
+This function deploys all required runtime artifacts alongside your application binary when using `cmake --install` or building generated "install" targets.
 
 See [`DatadogConvenience.cmake`][2] for a full definition of `datadog_install()`.
 
