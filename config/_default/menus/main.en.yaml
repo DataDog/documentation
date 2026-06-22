@@ -797,6 +797,16 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
+    - name: Managed Platforms Endpoint
+      url: /opentelemetry/setup/otlp_ingest/managed_platforms
+      parent: otel-setup-intake-endpoint
+      weight: 40233
+      identifier: otel_setup_managed_platforms
+    - name: Serverless Endpoint
+      url: /opentelemetry/setup/otlp_ingest/serverless
+      parent: otel-setup-intake-endpoint
+      weight: 40234
+      identifier: otel_setup_serverless
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -6325,6 +6335,11 @@ menu:
       parent: feature_flags
       identifier: feature_flags_implementation_patterns
       weight: 4
+    - name: OpenTelemetry
+      url: feature_flags/implementation_patterns/opentelemetry
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_opentelemetry
+      weight: 401
     - name: Serverless
       url: feature_flags/implementation_patterns/serverless
       parent: feature_flags_implementation_patterns
@@ -6427,11 +6442,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
       weight: 103
-    - name: Live Debugger
-      url: ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 104
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6457,11 +6467,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_exception_replay
       weight: 104
-    - name: Live Debugger
-      url: ide_plugins/vscode/live_debugger/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_live_debugger
-      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines

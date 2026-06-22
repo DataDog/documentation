@@ -19100,6 +19100,30 @@ menu:
           - CreateMaintenance
         unstable: []
         order: 18
+    - name: Edit degradation update
+      url: /api/latest/status-pages/edit-degradation-update/
+      identifier: status-pages-edit-degradation-update
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EditDegradationUpdate
+        unstable: []
+        order: 25
+    - name: Soft delete degradation update
+      url: /api/latest/status-pages/soft-delete-degradation-update/
+      identifier: status-pages-soft-delete-degradation-update
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SoftDeleteDegradationUpdate
+        unstable: []
+        order: 24
     - name: Update degradation
       url: /api/latest/status-pages/update-degradation/
       identifier: status-pages-update-degradation

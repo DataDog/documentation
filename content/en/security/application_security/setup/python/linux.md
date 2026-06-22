@@ -80,7 +80,7 @@ ddtrace-run python app.py
 
 Start your Python application with the settings described above.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 

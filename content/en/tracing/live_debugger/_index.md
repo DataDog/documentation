@@ -1,6 +1,10 @@
 ---
 title: Live Debugger
 description: Debug running applications in real time using non-breaking logpoints that collect information without stopping execution or redeploying code.
+aliases:
+- '/ide_plugins/idea/live_debugger/'
+- '/developers/ide_plugins/idea/live_debugger/'
+- '/ide_plugins/vscode/live_debugger/'
 further_reading:
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
@@ -11,9 +15,6 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
-- link: "/ide_plugins/idea/live_debugger/"
-  tag: "Documentation"
-  text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
@@ -114,10 +115,6 @@ Live Debugger.
 {{< img src="tracing/live_debugger/live_debugger_code_viewer.png" alt="Live Debugger with Source Code Integration enabled showing code viewer" style="width:90%" >}}
 
 ## Using Live Debugger
-
-<div class="alert alert-info">
-<b>Rather debug in your IDE?</b>
-Try using Live Debugger directly from JetBrains! <a href="/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
 
 ### Creating and using a Debug Session
 

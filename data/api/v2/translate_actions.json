@@ -1030,7 +1030,7 @@
     "request_schema_description": "Request object for deleting Test Optimization service settings."
   },
   "UpdateTestOptimizationServiceSettings": {
-    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; null or omitted fields are left unchanged.",
+    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; setting a field to `null` is a no-op.\nTo reset a setting to inherit from the repository level, use the corresponding `<setting>_inherit` field.\nThe `pr_comments_enabled` field is ignored as it cannot be overridden at the service level.",
     "summary": "Update Test Optimization service settings",
     "request_description": "",
     "request_schema_description": "Request object for updating Test Optimization service settings."
@@ -6011,6 +6011,16 @@
     "summary": "Update degradation",
     "request_description": "",
     "request_schema_description": "Request object for updating a degradation."
+  },
+  "SoftDeleteDegradationUpdate": {
+    "description": "Soft-deletes a degradation update.",
+    "summary": "Soft delete degradation update"
+  },
+  "EditDegradationUpdate": {
+    "description": "Edits a specific degradation update.",
+    "summary": "Edit degradation update",
+    "request_description": "",
+    "request_schema_description": "Request object for editing a degradation update."
   },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",
