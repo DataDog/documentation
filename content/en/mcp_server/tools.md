@@ -716,7 +716,7 @@ Updates the state or assignee of an Error Tracking Issue in Datadog.
 ### `manage_datadog_error_tracking_issue_comments`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
-Adds, updates, or deletes a comment on a Datadog Error Tracking issue.
+Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 
 - Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
 - Update the comment we just added to say "Fixed in version 2.3.1".
