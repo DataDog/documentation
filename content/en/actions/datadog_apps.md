@@ -71,11 +71,9 @@ The scaffolded project includes:
 ## Develop your app locally
 
 1. Start the development server:
-
    ```shell
    npm run dev
    ```
-
 2. Open the URL shown in the terminal (for example, `http://localhost:5173/`) to preview your app.
 
 When the dev server needs to call Datadog, such as when running a backend function locally, it uses OAuth by default. If authorization is required, the command opens a browser prompt. After authorization completes, the token is cached in your operating system credential store when supported.
