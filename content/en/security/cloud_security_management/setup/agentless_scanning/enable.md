@@ -144,7 +144,9 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 1. Select the AWS region that corresponds to the CloudFormation stack.
 1. Select an API key that has [Remote Configuration][3] enabled.
 1. Copy the new application key Datadog generates.
-1. Choose to either use an existing scanner, then select the scanner you want to use, or to deploy a new scanner.
+1. Choose to either:
+   - Use an existing scanner, then select the scanner you want to use.
+   - Deploy a nwe scanner.
 1. Toggle the features you want to enable, such as **Agentless Vulnerability Management** or **Sensitive Data Scanning for Cloud Storage**.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click **Done**.
