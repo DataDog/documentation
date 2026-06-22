@@ -58,7 +58,7 @@ To set up your application with a coding assistant, see [Agentic onboarding][17]
 
 ### Track server-side events (API)
 
-After you set up client-side collection, you can use the [Product Analytics API][21] to send custom events from your server, such as completed checkouts or processed payments. For a step-by-step guide, see [Track Server-Side Events][22].
+After you set up client-side collection, you can use the [Product Analytics API][21] to send custom events from your server, such as completed checkouts or processed payments. For more information, see [Track Server-Side Events][22].
 
 <div class="alert alert-warning">Datadog bills server-side events separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
