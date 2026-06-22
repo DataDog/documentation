@@ -134,8 +134,8 @@ If Datadog doesn't have complete cost data for the selected period, the simulato
 
 Results appear in two sections:
 
-- {{< ui >}}Estimated Impact{{< /ui >}}: A {{< ui >}}Before{{< /ui >}}/{{< ui >}}After{{< /ui >}}/{{< ui >}}Change{{< /ui >}} comparison of {{< ui >}}Monthly Cost{{< /ui >}}, {{< ui >}}Coverage{{< /ui >}}, {{< ui >}}Utilization{{< /ui >}}, {{< ui >}}Effective Savings Rate{{< /ui >}}, and {{< ui >}}Hourly commitment{{< /ui >}}, shown next to a {{< ui >}}Simulated Cost{{< /ui >}} chart that plots your cost over the lookback window with the commitment applied.
-- {{< ui >}}Estimated Service Breakdown{{< /ui >}}: A per-service table showing the estimated {{< ui >}}Monthly Cost{{< /ui >}} and {{< ui >}}Coverage{{< /ui >}} before and after the commitment, along with the share of the Savings Plan applied to each service (highest discount rate first).
+- {{< ui >}}Estimated Impact{{< /ui >}}: Compares your key metrics before and after the simulated commitment, alongside a {{< ui >}}Simulated Cost{{< /ui >}} chart over the selected period.
+- {{< ui >}}Estimated Service Breakdown{{< /ui >}}: Breaks down the estimated cost and coverage by AWS service.
 
 ### Best practices
 
