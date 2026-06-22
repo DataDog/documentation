@@ -76,7 +76,6 @@ metadata:
   name: datadog
   annotations:
     agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.mode: "sidecar"
 ```
 
 Apply with:
