@@ -77,7 +77,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 
 Start your PHP application with the settings described above.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 

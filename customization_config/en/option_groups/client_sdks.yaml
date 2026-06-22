@@ -8,6 +8,7 @@ client_sdk_platform_options:
   - id: kotlin_multiplatform
   - id: roku
   - id: unity
+  - id: maui
 
 client_sdk_product_options:
   - id: rum

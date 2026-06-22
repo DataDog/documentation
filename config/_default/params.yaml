@@ -280,6 +280,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
@@ -325,6 +326,7 @@ unsupported_sites:
   data_observability: [gov,gov2]
   data_streams: [gov,gov2]
   datadog_disaster_recovery: [gov,gov2]
+  deployment_gates: [gov,gov2]
   dora_metrics: [gov,gov2]
   dynamic_instrumentation: [gov,gov2]
   dynamic_quotas: [gov,gov2]

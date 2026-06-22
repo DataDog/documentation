@@ -1,5 +1,6 @@
 ---
-title: Telemetry Data
+title: Set Up Sensitive Data Scanner for Telemetry Data
+description: Set up Sensitive Data Scanner scanning groups and rules to detect and redact sensitive data in Datadog logs, APM spans, RUM events, and events from Event Management. Covers permissions, Terraform resources, sampling, and excluded namespaces.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data
@@ -61,6 +62,12 @@ By default, users with the Datadog Admin role have access to view and set up sca
 If a scanning rule uses the **mask** action (only available for logs) for matched sensitive data, users with the `data_scanner_unmask` permission can de-obfuscate and view the data in Datadog. **Note**: Datadog does not recommend using the **mask** action for credentials, unless you have a plan to respond to and rotate all leaked credentials. See [Mask action](#mask-action) for more information.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
+
+### Guided setup
+
+When you set up Sensitive Data Scanner for the first time, or when your organization has no scanning groups configured, Datadog provides an in-app guided setup. Open the [Sensitive Data Scanner][5] settings page and follow the on-screen steps to select the data you want to scan, create a scanning group, and add scanning rules. This is the recommended way to get started.
+
+To configure scanning groups and rules manually, or to adjust an existing configuration, follow the sections below.
 
 ### Add a scanning group
 
