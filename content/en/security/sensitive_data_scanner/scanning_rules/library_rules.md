@@ -1,5 +1,6 @@
 ---
-title: Library Rules
+title: Sensitive Data Scanner Library Rules
+description: Browse Sensitive Data Scanner's predefined rule library for detecting email addresses, credit card numbers, API keys, credentials, IP addresses, and other sensitive patterns across logs, APM, RUM, and cloud storage.
 aliases:
   - /sensitive_data_scanner/library_rules/
   - /sensitive_data_scanner/scanning_rules/library_rules

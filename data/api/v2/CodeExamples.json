@@ -814,6 +814,34 @@
       "description": "Create and publish a form returns \"OK\" response"
     }
   ],
+  "UpsertFormVersion": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Create or update a form version returns \"OK\" response"
+    }
+  ],
+  "PublishForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Publish a form version returns \"OK\" response"
+    }
+  ],
+  "UpdateForm": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Update a form returns \"OK\" response"
+    }
+  ],
+  "UpsertAndPublishFormVersion": [
+    {
+      "group": "forms",
+      "suffix": "",
+      "description": "Upsert and publish a form version returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
@@ -889,20 +917,6 @@
       "group": "ip_allowlist",
       "suffix": "",
       "description": "Update IP Allowlist returns \"OK\" response"
-    }
-  ],
-  "CreateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Create a new incident service returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentService": [
-    {
-      "group": "incident_services",
-      "suffix": "",
-      "description": "Update an existing incident service returns \"OK\" response"
     }
   ],
   "UpdateIncident": [
@@ -2125,6 +2139,20 @@
       "description": "Create a custom framework returns \"OK\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationDueDateRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a due date rule returns \"Successfully created the due date rule\" response"
+    }
+  ],
+  "CreateSecurityFindingsAutomationMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a mute rule returns \"Successfully created the mute rule\" response"
+    }
+  ],
   "CreateSignalNotificationRule": [
     {
       "group": "security_monitoring",
@@ -2163,6 +2191,13 @@
       "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationTicketCreationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a ticket creation rule returns \"Successfully created the ticket creation rule\" response"
+    }
+  ],
   "CreateCases": [
     {
       "group": "security_monitoring",
@@ -2178,6 +2213,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create cases for security findings returns \"Created\" response"
+    }
+  ],
+  "CreateIoCTriageState": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create or update an indicator triage state returns \"Created\" response"
     }
   ],
   "DetachCase": [
@@ -2215,13 +2257,6 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "MuteFindings": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Mute or unmute a batch of findings returns \"OK\" response"
-    }
-  ],
   "MuteSecurityFindings": [
     {
       "group": "security_monitoring",
@@ -2246,6 +2281,27 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationDueDateRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder due date rules returns \"Successfully reordered the due date rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationMuteRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder mute rules returns \"Successfully reordered the mute rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationTicketCreationRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder ticket creation rules returns \"Successfully reordered the ticket creation rules\" response"
     }
   ],
   "RunHistoricalJob": [
@@ -2307,6 +2363,20 @@
       "description": "Update a custom framework returns \"OK\" response"
     }
   ],
+  "UpdateSecurityFindingsAutomationDueDateRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a due date rule returns \"Successfully updated the due date rule\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationMuteRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a mute rule returns \"Successfully updated the mute rule\" response"
+    }
+  ],
   "UpdateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -2319,6 +2389,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a suppression rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationTicketCreationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a ticket creation rule returns \"Successfully updated the ticket creation rule\" response"
     }
   ],
   "UpdateResourceEvaluationFilters": [

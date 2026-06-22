@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanner
+description: Discover, classify, and optionally redact sensitive data such as PII, credentials, and credit card numbers across Datadog logs, APM spans, RUM events, Agent Observability traces, events, and Amazon S3 buckets with Sensitive Data Scanner.
 disable_toc: false
 aliases:
   - /account_management/org_settings/sensitive_data_detection

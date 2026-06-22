@@ -190,6 +190,14 @@ Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 : Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
 
+Allocated Memory (Preview)
+: The amount of heap memory allocated by each function, including allocations which were subsequently freed.<br />
+_Requires: Node.js 26+ and `DD_PROFILING_ALLOCATION_ENABLED=true`_
+
+Allocations (Preview)
+: The number of heap allocations made by each function, including allocations which were subsequently freed.<br />
+_Requires: Node.js 26+ and `DD_PROFILING_ALLOCATION_ENABLED=true`_
+
 [1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}

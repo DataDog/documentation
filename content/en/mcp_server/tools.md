@@ -446,6 +446,21 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Cloud Cost Management
+
+Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+
+### `cost_recommendations`
+*Toolset: **cost***\
+*Permissions Required: `Cloud Cost Management Read`*\
+Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+
+#### Examples of queries:
+
+- What are my top cloud cost-saving recommendations?
+- How much could I save per day, and how many open recommendations do I have?
+- Which of our Kubernetes cluster optimizations does the team already have underway?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
@@ -1168,22 +1183,14 @@ Returns the authoring reference and schema for detection rules. Covers supported
 - Show me the schema for sequence detection rules.
 - What tag conventions and query syntax does the detection rules API use?
 
-### `list_datadog_security_detection_rules`
+### `get_datadog_security_detection_rules`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Lists detection rules for the organization. Detection rules define the conditions under which security signals are generated. Accepts an optional free-text query to filter results server-side. Use `get_datadog_security_detection_rule` to fetch the full definition of a specific rule.
+Retrieves security detection rules. Supports two modes: provide `rule_id` to get the full definition of a single rule by ID, or omit `rule_id` to list rules (optionally filtered with `query` and token-limited with `max_tokens`). The two modes are mutually exclusive.
 
 - List all enabled Cloud SIEM detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
-- Which rules are configured for impossible travel detection?
-
-### `get_datadog_security_detection_rule`
-*Toolset: **security***\
-*Permissions Required: `Security Monitoring Rules Read`*\
-Retrieves the full definition of a single detection rule by ID, including queries, cases, options, filters, and metadata. Use `list_datadog_security_detection_rules` to find rule IDs.
-
 - Get the full definition of detection rule `abc-123-def`.
-- Show me the queries and cases for the rule generating this signal.
 - What thresholds and group-by fields does this detection rule use?
 
 ### `get_datadog_security_suppressions`
@@ -1221,32 +1228,76 @@ Deletes a suppression rule.
 - Delete suppression `sup-456-xyz`.
 - Remove the suppression that was silencing the brute force detection rule.
 
-### `security_findings_schema`
+### `get_datadog_security_findings_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
-Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
+Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_datadog_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
 - What fields are available for security findings?
 - Show me the schema for library vulnerability findings.
 - Get the full schema including descriptions for misconfiguration findings.
 
-### `analyze_security_findings`
+### `analyze_datadog_security_findings`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read` and `Timeseries`*\
-Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
+Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `get_datadog_security_findings_schema` first to discover available fields, then use this tool to query.
 
 - Show me the top 10 rules with the most critical findings.
 - Count open findings grouped by severity and finding type.
 - Find library vulnerabilities with exploits available, grouped by resource.
 
-### `search_security_findings`
+### `search_datadog_security_findings`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
-Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
+Fallback tool for retrieving full security finding details. Prefer `analyze_datadog_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
 
 - Get full details for critical findings in my AWS environment.
 - Retrieve complete finding objects for a specific rule.
 - List all open identity risk findings with full metadata.
+
+### `get_datadog_security_findings_ticket_suggestions`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
+Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+
+- What Jira projects can I use to create tickets for security findings?
+- Show me available ServiceNow projects for ticketing.
+- Which Case Management projects are most used for findings?
+
+### `create_datadog_security_findings_ticket`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
+Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+
+- Create a Jira ticket for these critical findings in project SECURITY.
+- Open a Case Management case for the findings from this rule.
+- Create a ServiceNow ticket for these library vulnerabilities.
+
+### `detach_datadog_security_findings_ticket`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`, `Cases Write`*\
+Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
+
+- Detach these findings from their linked Jira ticket.
+- Remove the case association for these findings.
+
+### `mute_datadog_security_findings`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Mutes or unmutes security findings to suppress them from alerts and dashboards. Requires a mute reason (`PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, or `OTHER`) and supports an optional description and expiration date.
+
+- Mute these findings as false positives.
+- Mute this misconfiguration as accepted risk with a 90-day expiration.
+- Unmute findings that were previously marked as pending fix.
+
+### `assign_datadog_security_findings`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Write`*\
+Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
+
+- Assign these critical findings to the security team lead.
+- Unassign findings that are no longer relevant.
+- Assign all findings from this rule to me.
 
 ## Software Delivery
 
@@ -1322,6 +1373,23 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
+
+### `get_datadog_code_coverage_pr_summary`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
+
+- Show me the code coverage for PR #123 in `github.com/my-org/my-repo`.
+- What's the patch coverage for pull request #456 in `github.com/my-org/my-repo`?
+
+### `get_datadog_code_coverage_files`
+*Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
+Fetches per-file code coverage line data for a repository commit, branch, or pull request. Returns executable lines, covered lines, and added lines for each file. Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided. At most one of `service`, `codeowner`, or `flag` may be provided to filter results.
+
+- Show me per-file coverage for PR #123 in `github.com/my-org/my-repo`.
+- Get changed-file coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- Show coverage for the `main` branch of `github.com/my-org/my-repo`, filtered by codeowner `@my-org/my-team`.`
 
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
@@ -1535,3 +1603,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
 [63]: /agent/guide/rshell/
+[64]: /cloud_cost_management/

@@ -1,6 +1,6 @@
 ---
 title: Infrastructure
-description: "Use the Infrastructure overlay in Cloudcraft to view resources grouped by Account, Region, and VPC for architecture diagrams and troubleshooting."
+description: "Use the Infrastructure overlay in Cloudcraft to view resources grouped by a provider-specific hierarchy for architecture diagrams and troubleshooting."
 further_reading:
 - link: "/datadog_cloudcraft/overlays/observability/"
   tag: "Documentation"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure overlay provides a broad overview of your cloud environment by grouping resources into Account, Region, and VPC. This is the default view when opening a Cloudcraft diagram.
+The Infrastructure overlay provides a broad overview of your cloud environment by grouping resources into a provider-specific hierarchy. This is the default view when opening a Cloudcraft diagram.
 
 {{< img src="datadog_cloudcraft/infra_overlay_5.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}
 
@@ -30,15 +30,7 @@ The Infrastructure overlay is ideal for:
 
 ## Resource grouping
 
-Resources are organized in a hierarchical structure. The grouping labels vary by provider:
-
-| Level | AWS | Azure | GCP |
-|-------|-----|-------|-----|
-| Top-level | Account | Subscription | Project |
-| Geographic | Region | Region | Region |
-| Network | VPC | Virtual Network | VPC |
-
-This hierarchy helps you understand how resources are distributed across your cloud infrastructure.
+Resources are grouped by a provider-specific hierarchy. Use the **Group by** controls at the top of the diagram to customize the grouping.
 
 ## Interact with resources
 

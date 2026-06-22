@@ -24,7 +24,7 @@ The Datadog Browser SDK enables Real User Monitoring (RUM) for your web applicat
 
 There are three ways to instrument your browser-based web applications with the Browser SDK:
 
-- [**Manual client-side setup**][1]: Instrument your browser-based web applications, deploy them, configure the initialization parameters you want to track, and use advanced configuration to further manage the data and context that RUM collects.
+- [**Manual client-side setup**][1]: Add the SDK to your frontend code using npm or a script tag, then initialize it with your application ID and client token.
 - [**Agentic Onboarding**][2]: Instrument your frontend applications with one prompt using LLM coding agents such as Cursor or Claude.
 - [**Auto-Instrumentation**][3]: Inject a RUM SDK JavaScript scriptlet into the HTML responses of your web applications being served through a web server or proxy.
 
