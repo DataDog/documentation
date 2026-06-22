@@ -117,6 +117,16 @@ To view additional information about the service entry spans for each node, hove
 {{% /tab %}}
 {{< /tabs >}}
 
+### Focus on a span
+In the waterfall and flame graph visualizations, you can focus on a span to narrow the view to that span and its children. This is useful for large traces, where focusing lets you isolate and investigate a specific group of operations without the rest of the trace adding noise.
+
+In the flame graph, select a span, then click the focus icon next to the minimap. In the waterfall, hover over a span and click the focus icon on its right side. The visualization rescales with the selected span as the new root, and its descendants fill the timeline. To return to the full trace, reset the focus.
+
+{{< img src="/tracing/trace_view/flamegraph-focus-on-span.mp4" alt="Flamegraph focus on span" video="true" style="width:90%;">}}
+{{< img src="tracing/trace_view/waterfall-focus-on-spans.mp4" alt="Waterfall focus on span" video="true" style="width:90%;">}}
+
+<div class="alert alert-info">Focusing only changes what is displayed. It does not filter spans out of search results or alter the underlying trace.</div>
+
 ### Trace preview
 When a trace size exceeds 100MB, it cannot be fully visualized using the default trace side panel. In such cases, Trace Preview mode is enabled. This mode returns only the most critical spans to help you continue your investigation. These include:
 

@@ -76,6 +76,11 @@
 /*/real_user_monitoring/application_monitoring/kotlin_multiplatform/integrated_libraries.md
 /*/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup.md
 /*/real_user_monitoring/application_monitoring/kotlin_multiplatform/troubleshooting.md
+/*/real_user_monitoring/application_monitoring/maui/advanced_configuration.md
+/*/real_user_monitoring/application_monitoring/maui/data_collected.md
+/*/real_user_monitoring/application_monitoring/maui/frustration_signals.md
+/*/real_user_monitoring/application_monitoring/maui/setup.md
+/*/real_user_monitoring/application_monitoring/maui/troubleshooting.md
 /*/real_user_monitoring/application_monitoring/react_native/advanced_configuration.md
 /*/real_user_monitoring/application_monitoring/react_native/data_collected.md
 /*/real_user_monitoring/application_monitoring/react_native/frustration_signals.md

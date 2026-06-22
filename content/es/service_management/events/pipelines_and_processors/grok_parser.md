@@ -6,7 +6,7 @@ title: Analizador de Grok
 Crea reglas de Grok personalizadas para analizar el mensaje completo o un atributo específico de tu evento sin formato. Como práctica recomendada, se sugiere utilizar un máximo de 10 reglas de parseo en un procesador de Grok.
 
 
-{{< img src="service_management/events/grok-parser.png" alt="Ejemplo de parseo 1" style="width:80%;">}}
+{{< img src="events/grok-parser.png" alt="Ejemplo de parseo 1" style="width:80%;">}}
 
 
 Haz clic en **Parse My Events** (Analizar mis eventos) a fin de iniciar un conjunto de tres reglas de parseo para los eventos que fluyen a través del pipeline subyacente. Refina la denominación de atributos allí y añade reglas nuevas para otro tipo de eventos si es necesario. Esta característica requiere que los eventos correspondientes se indexen y realmente fluyan. Puedes desactivar o reducir de manera temporal los filtros de exclusión para que funcione.
@@ -657,5 +657,5 @@ Si tus eventos contienen caracteres de control ASCII, se serializarán al ingeri
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /es/service_management/events/pipelines_and_processors/date_remapper
-[4]: /es/service_management/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter
+[3]: /es/events/pipelines_and_processors/date_remapper
+[4]: /es/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter

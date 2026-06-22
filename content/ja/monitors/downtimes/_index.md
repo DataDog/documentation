@@ -195,7 +195,7 @@ Datadog は、特定のクラウドワークロードの手動シャットダウ
 [7]: /ja/monitors/notify/#overview
 [8]: /ja/integrations/#cat-notification
 [9]: /ja/monitors/status/
-[10]: /ja/service_management/events/explorer
+[10]: /ja/events/explorer
 [11]: /ja/api/latest/downtimes/#cancel-a-downtime
 [12]: /ja/account_management/#preferences
 [13]: /ja/integrations/amazon_ec2/#ec2-automuting

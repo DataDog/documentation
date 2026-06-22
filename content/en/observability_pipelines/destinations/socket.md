@@ -59,9 +59,9 @@ After you select the Socket destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 The Socket destination does not batch events.
 

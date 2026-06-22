@@ -1030,7 +1030,7 @@
     "request_schema_description": "Request object for deleting Test Optimization service settings."
   },
   "UpdateTestOptimizationServiceSettings": {
-    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; null or omitted fields are left unchanged.",
+    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; setting a field to `null` is a no-op.\nTo reset a setting to inherit from the repository level, use the corresponding `<setting>_inherit` field.\nThe `pr_comments_enabled` field is ignored as it cannot be overridden at the service level.",
     "summary": "Update Test Optimization service settings",
     "request_description": "",
     "request_schema_description": "Request object for updating Test Optimization service settings."
@@ -1931,6 +1931,10 @@
   "ListGlobalOrgs": {
     "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
     "summary": "List global orgs"
+  },
+  "ListGovernanceInsights": {
+    "description": "Retrieve the list of governance insights available to the organization. By default, only\ninsight metadata is returned; pass `withValues=true` to also compute and include each\ninsight's current and previous values. Insights can be filtered by product.",
+    "summary": "List governance insights"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -4329,6 +4333,16 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "GetRumSdkConfig": {
+    "description": "Retrieve a RUM SDK configuration by its identifier.",
+    "summary": "Get a RUM SDK configuration"
+  },
+  "UpdateRumSdkConfig": {
+    "description": "Update an existing RUM SDK configuration by its identifier.\nReturns the updated configuration when successful.",
+    "summary": "Update a RUM SDK configuration",
+    "request_description": "The RUM SDK configuration update.",
+    "request_schema_description": "Request body for updating a RUM SDK configuration."
+  },
   "ListReplayHeatmapSnapshots": {
     "description": "List heatmap snapshots.",
     "summary": "List replay heatmap snapshots"
@@ -4833,6 +4847,10 @@
     "description": "Get the risk score for a specific entity by its ID. Returns security risk assessment including risk score, severity, detected signals, misconfigurations, and identity risks.",
     "summary": "Get Entity Risk Score"
   },
+  "GetAsmServiceByName": {
+    "description": "Retrieve Application Security details for services matching the given name.\nReturns Application Security activation, compatibility, and product enablement\ninformation for each matching `(service, environment)` pair, along with a count\nof services that have Application Security Management (Threats) enabled.",
+    "summary": "Get Application Security details for a service"
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
@@ -4846,6 +4864,96 @@
     "summary": "Assign or unassign security findings",
     "request_description": "",
     "request_schema_description": "Request to assign or unassign security findings."
+  },
+  "ListSecurityFindingsAutomationDueDateRules": {
+    "description": "Get all due date rules for the current organization.",
+    "summary": "Get all due date rules"
+  },
+  "CreateSecurityFindingsAutomationDueDateRule": {
+    "description": "Create a new due date rule for the current organization.",
+    "summary": "Create a due date rule",
+    "request_description": "",
+    "request_schema_description": "The body of a due date rule create request."
+  },
+  "ReorderSecurityFindingsAutomationDueDateRules": {
+    "description": "Reorder the list of due date rules for the current organization.",
+    "summary": "Reorder due date rules",
+    "request_description": "",
+    "request_schema_description": "The body of the due date rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationDueDateRule": {
+    "description": "Delete an existing due date rule by ID.",
+    "summary": "Delete a due date rule"
+  },
+  "GetSecurityFindingsAutomationDueDateRule": {
+    "description": "Get the details of a due date rule by ID.",
+    "summary": "Get a due date rule"
+  },
+  "UpdateSecurityFindingsAutomationDueDateRule": {
+    "description": "Update an existing due date rule by ID.",
+    "summary": "Update a due date rule",
+    "request_description": "",
+    "request_schema_description": "The body of a due date rule update request."
+  },
+  "ListSecurityFindingsAutomationMuteRules": {
+    "description": "Get all mute rules for the current organization.",
+    "summary": "Get all mute rules"
+  },
+  "CreateSecurityFindingsAutomationMuteRule": {
+    "description": "Create a new mute rule for the current organization.",
+    "summary": "Create a mute rule",
+    "request_description": "",
+    "request_schema_description": "The body of a mute rule create request."
+  },
+  "ReorderSecurityFindingsAutomationMuteRules": {
+    "description": "Reorder the list of mute rules for the current organization.",
+    "summary": "Reorder mute rules",
+    "request_description": "",
+    "request_schema_description": "The body of the mute rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationMuteRule": {
+    "description": "Delete an existing mute rule by ID.",
+    "summary": "Delete a mute rule"
+  },
+  "GetSecurityFindingsAutomationMuteRule": {
+    "description": "Get the details of a mute rule by ID.",
+    "summary": "Get a mute rule"
+  },
+  "UpdateSecurityFindingsAutomationMuteRule": {
+    "description": "Update an existing mute rule by ID.",
+    "summary": "Update a mute rule",
+    "request_description": "",
+    "request_schema_description": "The body of a mute rule update request."
+  },
+  "ListSecurityFindingsAutomationTicketCreationRules": {
+    "description": "Get all ticket creation rules for the current organization.",
+    "summary": "Get all ticket creation rules"
+  },
+  "CreateSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Create a new ticket creation rule for the current organization.",
+    "summary": "Create a ticket creation rule",
+    "request_description": "",
+    "request_schema_description": "The body of a ticket creation rule create request."
+  },
+  "ReorderSecurityFindingsAutomationTicketCreationRules": {
+    "description": "Reorder the list of ticket creation rules for the current organization.",
+    "summary": "Reorder ticket creation rules",
+    "request_description": "",
+    "request_schema_description": "The body of the ticket creation rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Delete an existing ticket creation rule by ID.",
+    "summary": "Delete a ticket creation rule"
+  },
+  "GetSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Get the details of a ticket creation rule by ID.",
+    "summary": "Get a ticket creation rule"
+  },
+  "UpdateSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Update an existing ticket creation rule by ID.",
+    "summary": "Update a ticket creation rule",
+    "request_description": "",
+    "request_schema_description": "The body of a ticket creation rule update request."
   },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
@@ -4920,6 +5028,12 @@
   "GetIndicatorOfCompromise": {
     "description": "Get detailed information about a specific indicator of compromise (IoC).",
     "summary": "Get an indicator of compromise"
+  },
+  "CreateIoCTriageState": {
+    "description": "Set the triage state of an indicator of compromise (IoC). This creates or\nupdates the triage state for the indicator in your organization.",
+    "summary": "Create or update an indicator triage state",
+    "request_description": "The triage state to set for the indicator.",
+    "request_schema_description": "Request body for creating or updating an indicator triage state."
   },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
@@ -5898,6 +6012,16 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a degradation."
   },
+  "SoftDeleteDegradationUpdate": {
+    "description": "Soft-deletes a degradation update.",
+    "summary": "Soft delete degradation update"
+  },
+  "EditDegradationUpdate": {
+    "description": "Edits a specific degradation update.",
+    "summary": "Edit degradation update",
+    "request_description": "",
+    "request_schema_description": "Request object for editing a degradation update."
+  },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",
     "summary": "Schedule maintenance",
@@ -6371,7 +6495,7 @@
     "summary": "Get projected cost across your account"
   },
   "GetUsageSummaryAvailableFields": {
-    "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
   },
   "GetUsageAttributionTypes": {
@@ -6459,6 +6583,10 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListWorkflows": {
+    "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
+    "summary": "List workflows"
   },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

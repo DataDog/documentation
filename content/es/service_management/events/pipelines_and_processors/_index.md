@@ -1,9 +1,9 @@
 ---
 further_reading:
-- link: /service_management/events/
+- link: /events/
   tag: Documentación
   text: Gestión de eventos
-- link: /service_management/events/correlation/
+- link: /events/correlation/
   tag: Documentación
   text: Correlación de eventos
 title: Pipelines y procesadores
@@ -58,13 +58,13 @@ Puedes añadir procesadores después de crear un pipeline. Los procesadores disp
 
 [1]: https://app.datadoghq.com/event/pipelines
 [2]: https://app.datadoghq.com/event/explorer
-[3]: /es/service_management/events/pipelines_and_processors/aggregation_key
-[4]: /es/service_management/events/pipelines_and_processors/arithmetic_processor
-[5]: /es/service_management/events/pipelines_and_processors/date_remapper
-[6]: /es/service_management/events/pipelines_and_processors/category_processor
-[7]: /es/service_management/events/pipelines_and_processors/grok_parser
-[8]: /es/service_management/events/pipelines_and_processors/lookup_processor
-[9]: /es/service_management/events/pipelines_and_processors/remapper
-[10]: /es/service_management/events/pipelines_and_processors/service_remapper
-[11]: /es/service_management/events/pipelines_and_processors/status_remapper
-[12]: /es/service_management/events/pipelines_and_processors/string_builder_processor
+[3]: /es/events/pipelines_and_processors/aggregation_key
+[4]: /es/events/pipelines_and_processors/arithmetic_processor
+[5]: /es/events/pipelines_and_processors/date_remapper
+[6]: /es/events/pipelines_and_processors/category_processor
+[7]: /es/events/pipelines_and_processors/grok_parser
+[8]: /es/events/pipelines_and_processors/lookup_processor
+[9]: /es/events/pipelines_and_processors/remapper
+[10]: /es/events/pipelines_and_processors/service_remapper
+[11]: /es/events/pipelines_and_processors/status_remapper
+[12]: /es/events/pipelines_and_processors/string_builder_processor
