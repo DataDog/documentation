@@ -129,7 +129,7 @@ This creates an IAM role called `byoclogs` and a Kubernetes service account call
 
 ### Create an RDS database
 
-Create an RDS instance with the following command, replacing `<PASSWORD>` with ...:
+Create an RDS instance with the following command, replacing `<PASSWORD>` with your desired password:
 
 ```shell
 aws rds create-db-instance \
@@ -162,7 +162,8 @@ DATABASE=$(echo $RDS_INFO | jq -r '.Database')
 
 echo ""
 echo "Full URI:"
-echo "postgres://byoclogs:FixMeBYOC_Logs@$ENDPOINT:$PORT/$DATABASE"
+# Replace <PASSWORD> with the master-user-password you set for the instance
+echo "postgres://byoclogs:<PASSWORD>@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
 
