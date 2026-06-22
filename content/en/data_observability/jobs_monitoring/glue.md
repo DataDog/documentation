@@ -112,7 +112,7 @@ Metrics should be available under the {{< ui >}}Glue{{< /ui >}} job tab in **Dat
 
 Glue jobs that run with the Spark engine can emit OpenLineage events directly to Datadog. This provides dataset-level lineage, showing which datasets your job reads and writes.
 
-**Note**: AWS Glue includes the Spark OpenLineage connector in its default class path. To use a more recent version, add the connector JAR manually through the `--extra-jars` Glue job parameter and set `--user-jars-first=true` to override the bundled version.
+**Note**: AWS Glue includes the Spark OpenLineage connector in its default class path. To use a more recent version, add the connector JAR manually through the `--extra-jars` Glue job parameter and set `--user-jars-first=true` to override the bundled version. For example: `--extra-jars s3://<YOUR_BUCKET>/openlineage-spark-<VERSION>.jar` and `--user-jars-first true`.
 
 ### Configure the SparkSession
 
@@ -130,7 +130,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 ```
 
-Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. Replace `<DATADOG_API_KEY>` with your Datadog API key.
+Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. Replace `<DATADOG_API_KEY>` with your Datadog API key. `spark.glue.JOB_RUN_ID` is the Spark configuration property automatically set by AWS Glue with the current job run ID — use it verbatim.
 
 ### Validate
 
