@@ -152,8 +152,8 @@ The following environment variables are available:
 
 | Variable | Description |
 |---|---|
-| `DD_API_KEY` | Optional for local development. Datadog API key used when `DD_APP_KEY` is also set. Also enables API-key-backed build telemetry, such as build metrics and Error Tracking sourcemap uploads. |
-| `DD_APP_KEY` | Optional for local development. Datadog application key used when `DD_API_KEY` is also set. |
+| `DD_API_KEY` | Optional. Datadog API key used with `DD_APP_KEY` for local development and uploads. Also enables API-key-backed build telemetry, such as build metrics and Error Tracking sourcemap uploads. |
+| `DD_APP_KEY` | Optional. Datadog application key used with `DD_API_KEY` for local development and uploads. |
 | `DD_APPS_AUTH_METHOD` | Optional. Set to `oauth` or `apiKey` to override the generated app's authentication method. |
 | `DD_APPS_VERSION_NAME` | Optional. The version name for the uploaded app version. Must be a unique string per app. If unset, Datadog assigns a version name. |
 | `DD_APPS_UPLOAD_ASSETS` | If set, uploads built assets to Datadog. Set automatically by `npm run upload`. |
@@ -238,9 +238,15 @@ jobs:
 
 ### Authentication errors
 
-For local development and uploads, authentication errors may mean the OAuth browser flow did not complete, the cached OAuth token is invalid, or `auth.site` does not match your Datadog site. Rerun the command and complete the browser authorization flow.
+For local development and uploads, OAuth authentication errors may have one of these causes:
 
-If you are using API and application key authentication, authentication errors (such as 401 or `Missing authentication token`) and backend function call failures usually point to missing or invalid credentials. Verify that `DD_API_KEY` and `DD_APP_KEY` are set, and that the application key has [Actions API Access][5] enabled.
+- The OAuth browser flow did not complete.
+- The cached OAuth token is invalid.
+- `auth.site` does not match your Datadog site.
+
+Rerun the command and complete the browser authorization flow.
+
+If you use API and application key authentication, authentication errors usually point to missing or invalid credentials. Backend function call failures can have the same cause. Verify that `DD_API_KEY` and `DD_APP_KEY` are set, and that the application key has [Actions API Access][5] enabled.
 
 ### Build succeeds but nothing uploads
 
