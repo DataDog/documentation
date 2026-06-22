@@ -53,7 +53,6 @@ export default function MobileNav({ search, items, categories, labels }: Props) 
         <span class={cl('mobile-nav__hamburger-bar')}></span>
         <span class={cl('mobile-nav__hamburger-bar')}></span>
         <span class={cl('mobile-nav__hamburger-bar')}></span>
-        <span class={cl('mobile-nav__hamburger-bar')}></span>
       </button>
 
       <div
