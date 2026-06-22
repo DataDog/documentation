@@ -72,6 +72,7 @@ For the complete list of US1 DNS records and VPC service endpoints, see [VPC End
 {{% site-region region="ap2" %}}
 For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
+
 {{% site-region region="uk1" %}}
 For the complete list of UK1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
@@ -204,6 +205,7 @@ For the complete list of US1 DNS records and VPC service endpoints, see [VPC End
 {{% site-region region="ap2" %}}
 For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
+
 {{% site-region region="uk1" %}}
 For the complete list of UK1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
@@ -254,6 +256,7 @@ For the complete list of US1 DNS records and VPC service endpoints, see [VPC End
 {{% site-region region="ap2" %}}
 For the complete list of AP2 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
+
 {{% site-region region="uk1" %}}
 For the complete list of UK1 DNS records and VPC service endpoints, see [VPC Endpoint Service IDs](#vpc-endpoint-service-ids).
 {{% /site-region %}}
