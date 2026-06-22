@@ -85,14 +85,7 @@ Files matching `*.backend.ts` or `*.backend.js` contain backend functions. Backe
 
 Backend functions can call any action in Datadog's [Action Catalog][4] through the [`@datadog/action-catalog`][10] library. The Action Catalog provides reusable, prebuilt actions for interacting with cloud providers, SaaS tools, and the Datadog API. You can build on top of existing integrations instead of writing API clients from scratch.
 
-The library is a fully typed TypeScript client for integrations such as:
-
-- AWS, Azure, and GCP
-- The Datadog API
-- GitHub, GitLab, Slack, Jira, PagerDuty, and ServiceNow
-- OpenAI, Anthropic, and generic HTTP
-
-Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
+The library is a fully typed TypeScript client that wraps integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
 {{% collapse-content title="Example backend function" level="h4" expanded=false %}}
 
