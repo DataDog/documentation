@@ -54,12 +54,12 @@ For the list of supported proxies and proxy-specific setup steps, see the [setup
 ## Limitations
 
 ### Sidecar mode
-- Requires Datadog Cluster Agent 7.76.0 or later
+- Requires Datadog Cluster Agent 7.80.2 or later
 - Each gateway pod runs its own processor instance, which increases per-pod resource usage
 - Datadog Operator does not support sidecar mode configuration
 
 ### External mode
-- Requires Datadog Cluster Agent 7.73.0 or later
+- Requires Datadog Cluster Agent 7.80.2 or later
 - Security processor must be manually deployed and scaled
 - Deployed service may require an appropriate network policy:
   - From the proxy pods on the service port
@@ -73,7 +73,7 @@ For the list of supported proxies and proxy-specific setup steps, see the [setup
 Before enabling App and API Protection for Kubernetes, verify that you have:
 
 - A running Kubernetes cluster (version 1.20 or later)
-- [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
+- [Datadog Cluster Agent 7.80.2+][1] installed and configured in your cluster
 - One or more [supported proxies][10] installed
 - [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
