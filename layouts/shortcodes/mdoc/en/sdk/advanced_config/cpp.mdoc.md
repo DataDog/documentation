@@ -250,6 +250,35 @@ dd_rum_remove_attribute(rum, "feature.new_ui");
 
 **Note**: Avoid spaces or special characters in attribute key names. For example, use `"account_tier"` instead of `"Account Tier"`. Keys with spaces or special characters cannot be used as facets in the Datadog UI.
 
+### View attributes
+
+View attributes attach to the current view only and do not persist to subsequent views. Where a view attribute and a global attribute share the same key, the view attribute takes precedence.
+
+{% tabs %}
+{% tab label="C++" %}
+
+```cpp
+rum->AddViewAttribute("ui.variant", datadog::Attribute::String("A"));
+
+// Remove a view attribute
+rum->RemoveViewAttribute("ui.variant");
+```
+
+{% /tab %}
+{% tab label="C" %}
+
+```c
+dd_attribute_t variant_attr = dd_attribute_string("A");
+dd_rum_add_view_attribute(rum, "ui.variant", &variant_attr);
+dd_attribute_free(&variant_attr);
+
+/* Remove a view attribute */
+dd_rum_remove_view_attribute(rum, "ui.variant");
+```
+
+{% /tab %}
+{% /tabs %}
+
 ## Track user and account information
 
 ### User information
@@ -464,6 +493,27 @@ config.SetBatchProcessingLevel(datadog::BatchProcessingLevel::High);
 dd_core_config_set_batch_size(&config, DD_BATCH_SIZE_SMALL);
 dd_core_config_set_upload_frequency(&config, DD_UPLOAD_FREQUENCY_FREQUENT);
 dd_core_config_set_batch_processing_level(&config, DD_BATCH_PROCESSING_LEVEL_HIGH);
+```
+
+{% /tab %}
+{% /tabs %}
+
+## Stop the current session
+
+Call `StopSession` to explicitly end the current RUM session. The next call to `StartView()`, `StartAction()`, or `AddAction()` automatically starts a new session. If the new session is triggered by an action, the last active view from the previous session is restarted in the new session.
+
+{% tabs %}
+{% tab label="C++" %}
+
+```cpp
+rum->StopSession();
+```
+
+{% /tab %}
+{% tab label="C" %}
+
+```c
+dd_rum_stop_session(rum);
 ```
 
 {% /tab %}
