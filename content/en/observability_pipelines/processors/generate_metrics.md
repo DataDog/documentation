@@ -24,7 +24,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
 - If you have not created any metrics yet, enter the metric parameters as described in the [Add a metric](#add-a-metric) section to create a metric.
 - If you have already created metrics, click on the metric's row in the overview table to edit or delete it. Use the search bar to find a specific metric by its name, and then select the metric to edit or delete it. Click **Add Metric** to add another metric.
 
-##### Add a metric
+### Add a metric
 
  1. Enter a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][5] for more information. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
@@ -34,7 +34,7 @@ Click **Manage Metrics** to create new metrics or edit existing metrics. This op
     - The **Group by** field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the **Group by** setting are set as tags on the configured metric.
 1. Click **Add Metric**.
 
-##### Configure a metrics destination
+### Configure a metrics destination
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
 Sending generated metrics to Elasticsearch, HTTP/S Client, or Splunk HEC is in Preview. Contact your account manager to request access.
@@ -46,7 +46,7 @@ Sending generated metrics to Elasticsearch, HTTP/S Client, or Splunk HEC is in P
 1. [Datadog Metrics][6] is the default destination. To select a different destination, click the pencil icon in the Datadog Metrics destination and select **Change metrics destination**.
 1. Select your destination and follow the instructions for the specific [destination](7) to set it up.
 
-##### Metrics types
+## Metrics types
 
 You can generate these types of metrics for your logs. See the [Metrics types][3] and [Distributions][4] documentation for more details.
 
@@ -56,7 +56,7 @@ You can generate these types of metrics for your logs. See the [Metrics types][3
 | GAUGE        | A snapshot of a value at the time it is reported.                                                                                                   | You want to track the latest CPU utilization per host.                                        |
 | DISTRIBUTION | Raw values sent to Datadog so percentile aggregations (such as p95, p99) are computed server-side, globally across every host reporting the metric. | You want the global p95 of `response_time_seconds` across every host serving an API endpoint. |
 
-##### Count metric example
+### Count metric example
 
 For this `status:error` log example:
 
@@ -73,7 +73,7 @@ To create a count metric that counts the number of logs that contain `"status":"
 | Metric type      | Count               |
 | Group by         | `env`, `prod`       |
 
-##### Distribution metric example
+### Distribution metric example
 
 For this example of an API response log:
 

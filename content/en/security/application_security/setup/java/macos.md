@@ -100,7 +100,7 @@ java -javaagent:/path/to/dd-java-agent.jar -jar path/to/app.jar
 ## 3. Run your application
 Start your Java application with the configured settings.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 

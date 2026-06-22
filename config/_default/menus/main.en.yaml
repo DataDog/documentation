@@ -797,6 +797,16 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 40232
       identifier: otel_setup_agentless_metrics
+    - name: Managed Platforms Endpoint
+      url: /opentelemetry/setup/otlp_ingest/managed_platforms
+      parent: otel-setup-intake-endpoint
+      weight: 40233
+      identifier: otel_setup_managed_platforms
+    - name: Serverless Endpoint
+      url: /opentelemetry/setup/otlp_ingest/serverless
+      parent: otel-setup-intake-endpoint
+      weight: 40234
+      identifier: otel_setup_serverless
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
@@ -1752,24 +1762,26 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
-    - name: Widget Public URLs
+    - name: Widget Share URLs
       identifier: dashboards_sharing_widget_public_urls
       url: dashboards/sharing/widget_public_urls
+      parent: dashboards_sharing
+      weight: 1003
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1004
+      weight: 1005
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1005
+      weight: 1006
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -4687,9 +4699,9 @@ menu:
       identifier: live_debugger
       parent: tracing
       weight: 12
-    - name: Debug with Bits
-      url: tracing/live_debugger/debug-with-bits/
-      identifier: live_debugger_debug_with_bits
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger/
+      identifier: live_debugger_bits_live_debugger
       parent: live_debugger
       weight: 1
     - name: Error Tracking
@@ -6320,6 +6332,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_history
       weight: 307
+    - name: Feature Flag Graphs
+      url: feature_flags/concepts/flag_graphs
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_graphs
+      weight: 308
     - name: Implementation Patterns
       url: feature_flags/implementation_patterns
       parent: feature_flags
@@ -6432,11 +6449,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
       weight: 103
-    - name: Live Debugger
-      url: ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 104
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6462,11 +6474,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_exception_replay
       weight: 104
-    - name: Live Debugger
-      url: ide_plugins/vscode/live_debugger/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_live_debugger
-      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
