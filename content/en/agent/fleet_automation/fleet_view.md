@@ -107,11 +107,11 @@ When you contact Datadog Support with Remote Configuration enabled, the Support 
 
 ## Kubernetes view
 
-The Kubernetes view lets you see Datadog Agents and OTel Collectors running in Kubernetes environments, giving you a unified view of your fleet across both host-based and containerized infrastructure.
+The Kubernetes view lets you see Datadog Agents and OTel Collectors running in Kubernetes environments. It provides a unified view of your fleet across both host-based and containerized infrastructure.
 
 By default, Fleet View lists infrastructure as individual hosts. Use the {{< ui >}}View by infra type{{< /ui >}} toggle to switch to the [Kubernetes view][4], which shows Agents by Kubernetes cluster instead.
 
-Each row is a cluster managed by the [Datadog Operator][5] or Helm chart, and the Agents in it (Node Agents, Cluster Agent, Cluster Check Runners) appear grouped per cluster instead of as individual hosts.
+Each row is a cluster managed by the [Datadog Operator][5] or Helm chart. The cluster's Node Agents, Cluster Agent, and Cluster Check Runners appear grouped together rather than as individual hosts.
 
 ### Prerequisites for Kubernetes view
 
