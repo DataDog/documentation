@@ -72,6 +72,9 @@
     {{- /* api pages are controlled by layout and not markdown, so we need to index them separately */ -}}
     {{ partial "algolia/api-pages-full-index.json" (dict "context" $hugo_context) }}
 
+    {{- /* non-endpoint api pages (overview, using-the-api, scopes, rate-limits) are skipped by the main loop because they have type: api */ -}}
+    {{ partial "algolia/api-non-endpoint-pages.json" (dict "context" $hugo_context) }}
+
     {{- /* standard attributes pages */ -}}
     {{ partial "algolia/standard-attributes.json" (dict "context" $hugo_context) }}
 
