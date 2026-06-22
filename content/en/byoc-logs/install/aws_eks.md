@@ -24,7 +24,7 @@ To deploy BYOC Logs on AWS, you must configure:
 - AWS region selection.
 - IAM permissions for S3 object storage.
 - RDS PostgreSQL database (recommended).
-- EKS cluster with AWS Load Balancer Controller.
+- EKS cluster.
   - See the [Cluster Sizing][1] documentation for guidelines on planning your node groups for your expected TB/day.
 - If you are not using EKS auto-mode, the [EKS Pod Identity Agent][2] and [EBS CSI driver][3] are required to use persistent volumes and claims from `searcher.persistentVolume` or `indexer.persistentVolume`.
 
@@ -129,7 +129,7 @@ This creates an IAM role called `byoclogs` and a Kubernetes service account call
 
 ### Create an RDS database
 
-Create an RDS instance with the following command:
+Create an RDS instance with the following command, replacing `<PASSWORD>` with ...:
 
 ```shell
 aws rds create-db-instance \
@@ -138,7 +138,7 @@ aws rds create-db-instance \
   --engine postgres \
   --engine-version 18.3 \
   --master-username byoclogs \
-  --master-user-password 'FixMeBYOC_Logs' \
+  --master-user-password '<PASSWORD>' \
   --allocated-storage 20 \
   --storage-type gp3 \
   --db-subnet-group-name <DB-SUBNET-GROUP-NAME> \
