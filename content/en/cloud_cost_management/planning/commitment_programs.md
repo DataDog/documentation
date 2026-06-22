@@ -106,20 +106,22 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment directly against your historical usage and see the projected coverage, utilization, and savings.
 
+The simulation is retrospective: it applies the Savings Plan you configure to your usage during the selected lookback window and shows what your coverage, utilization, and savings _would have been_. It does not forecast future usage.
+
 {{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing input parameters, summary metrics, and a time series chart of projected commitment coverage." style="width:100%;" >}}
 
 ### Run a simulation
 
-1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] and open the {{< ui >}}Simulator{{< /ui >}} tab.
+1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**.
 2. Set the simulation inputs:
    - {{< ui >}}Commitment amount{{< /ui >}}: The hourly commitment ($/hour) you want to model.
-   - {{< ui >}}Savings Plan type{{< /ui >}}: The type of Savings Plan to simulate (for example, Compute Savings Plans).
+   - {{< ui >}}Savings Plan type{{< /ui >}}: Choose {{< ui >}}Compute{{< /ui >}} or {{< ui >}}Database{{< /ui >}}.
    - {{< ui >}}Term{{< /ui >}}: The length of the commitment (for example, 1 year or 3 years).
    - {{< ui >}}Payment option{{< /ui >}}: How the commitment is paid (No Upfront, Partial Upfront, or All Upfront).
-   - {{< ui >}}Lookback window{{< /ui >}}: The historical period of usage the simulation is evaluated against.
-3. Review the projected results in the summary metrics, the time series chart, and the per-service breakdown.
+   - {{< ui >}}Lookback window{{< /ui >}}: The past period of usage to test the commitment against.
+3. Review the results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
 
-If Datadog has a Savings Plan recommendation for your organization, the simulation is prefilled with the recommended values so you can start from a suggested commitment and adjust from there.
+If Datadog has a Savings Plan recommendation for your organization, the simulation is prefilled with the recommended values so you can start from a suggested commitment and adjust from there. Recommendations are currently available for Compute Savings Plans only.
 
 ### Interpret the results
 
@@ -127,9 +129,10 @@ All simulation outputs are estimates based on your historical usage over the sel
 
 Savings Plans are shared across a [Consolidated Billing Family][2], so a commitment can apply to usage in multiple accounts. The simulation estimates how the modeled commitment would be distributed across your accounts; actual distribution depends on AWS's application logic.
 
-- {{< ui >}}Summary metrics{{< /ui >}}: High-level estimates for the simulated commitment, such as projected coverage, utilization, and savings compared to on-demand rates.
-- {{< ui >}}Projected coverage over time{{< /ui >}}: A time series chart showing how the simulated commitment would apply to your usage over the lookback window, including the portion of usage that would be covered by the commitment versus the portion remaining as on-demand spend.
-- {{< ui >}}Coverage by service{{< /ui >}}: A table breaking down the estimated coverage and spend by AWS service, so you can see which services the commitment would apply to.
+Results appear in two sections:
+
+- {{< ui >}}Estimated Impact{{< /ui >}}: A {{< ui >}}Before{{< /ui >}}/{{< ui >}}After{{< /ui >}}/{{< ui >}}Change{{< /ui >}} comparison of {{< ui >}}Monthly Cost{{< /ui >}}, {{< ui >}}Coverage{{< /ui >}}, {{< ui >}}Utilization{{< /ui >}}, {{< ui >}}Effective Savings Rate{{< /ui >}}, and {{< ui >}}Hourly commitment{{< /ui >}}, shown next to a {{< ui >}}Simulated Cost{{< /ui >}} chart that plots your cost over the lookback window with the commitment applied.
+- {{< ui >}}Estimated Service Breakdown{{< /ui >}}: A per-service table showing the estimated {{< ui >}}Monthly Cost{{< /ui >}} and {{< ui >}}Coverage{{< /ui >}} before and after the commitment, along with the share of the Savings Plan applied to each service (highest discount rate first).
 
 ### Best practices
 
@@ -180,3 +183,4 @@ Savings Plans are shared across a [Consolidated Billing Family][2], so a commitm
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
 [2]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
+[3]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
