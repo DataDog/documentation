@@ -24,7 +24,7 @@ Use the processor to set a cardinality limit for metrics that match the filter q
 
 To set up the Tag Cardinality Control processor:
 
-1. Define a filter query. Only matching metrics are processed by this processor. See [Search Syntax][1] for more information.
+1. Define a filter query. Only matching metrics are processed by this processor. See [Metrics Search Syntax][1] for more information.
 1. Enter a cardinality limit for the maximum number of distinct values per tag. This limit is applied to all metrics that match the filter query.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
 
@@ -38,13 +38,14 @@ If you want to set a cardinality limit for a specific metric:
 1. Enter the name of the metric.
 1. Select the override mode in the dropdown menu.
     - **Custom limit**: Sets a cardinality limit for this metric.
-    - **Exclude from limit**: Excludes this metric from being counted towards the cardinality limit. This is useful if you are tracking an important metric when you don't want to drop any samples or tags due to a cardinality limit.
+    - **Exclude from limit**: Excludes this metric from being counted toward the cardinality limit. This is useful if you are tracking an important metric when you don't want to drop any samples or tags due to a cardinality limit.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
 1. If you want to add specific tag overrides for this metric:
     1. Click **Add Tag Override**.
     1. Enter the tag key on which to set a limit.
-    1. Select the override mode in the dropdown menu: **Custom limit** or **Exclude from limit**.
-        - **Custom limit**: Sets a limit on the number of unique values per tag. For example, if the tag limit is set to `5`, the first five tag values received are used. The tag values are only reset with a Worker restart or a pipeline configuration update, even if the Tag Cardinality Control processor wasn't updated.
+    1. Select the override mode in the dropdown menu:
+        - **Custom limit**: Sets a limit on the number of unique values per tag. For example, if the tag limit is set to `5`, the first five tag values received are used.
+            - **Note**: The tag values are only reset with a Worker restart or a pipeline configuration update, even if the Tag Cardinality Control processor isn't updated.
         - **Exclude from limit**: Excludes metrics with the specified tag from being counted towards the cardinality limit.
     1. Enter the limit for the maximum number of tag keys.
     1. Click **Add Override**.
