@@ -80,12 +80,12 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 
 {{< img src="account_management/workload_identity_federation/identity-mappings-list.png" alt="Identity Mappings tab in the Workload Identity Federation page, showing the Org UUID field and a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
 
-<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:
+<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:</div>
 <ul>
 <li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
 <li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
 </ul>
-</div>
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
 
 To create an identity mapping:
 
@@ -284,12 +284,12 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 
 {{< img src="account_management/workload_identity_federation/intake-mappings-list.png" alt="Intake Mappings tab in the Workload Identity Federation page, showing the Org UUID field and a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
 
-<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:
+<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:</div>
 <ul>
 <li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
 <li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
 </ul>
-To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.</div>
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
 
 To create an intake mapping:
 
