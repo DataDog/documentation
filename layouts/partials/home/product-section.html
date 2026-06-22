@@ -1,21 +1,17 @@
 {{- $product := .product -}}
 {{- $ctx := .ctx -}}
-{{- $count := 0 -}}
-{{- range $product.subheaders -}}
-    {{- $count = add $count (len .links) -}}
-{{- end -}}
 {{- $span := $product.span | default 4 -}}
 
-{{- /*
-  Column count = len(product.columns) when defined, else one column per subheader.
-  Each entry in `product.columns` is a list of subheader titles to stack (in order)
-  in that column. This mirrors the HiFi design and the prototype's baseGroups,
-  e.g. Observability's middle column stacks APPLICATIONS + DATA.
-*/ -}}
-{{- $colCount := len $product.subheaders -}}
-{{- with $product.columns -}}
-    {{- $colCount = len . -}}
+{{- /* Total link count, shown next to the section title as e.g. "(18)" */ -}}
+{{- $count := 0 -}}
+{{- range $product.columns -}}
+    {{- range .subheaders -}}
+        {{- $count = add $count (len .links) -}}
+    {{- end -}}
 {{- end -}}
+
+{{- /* Column count drives the grid via the --cols custom property */ -}}
+{{- $colCount := len $product.columns -}}
 
 <div class="product-section product-section--span-{{ $span }} is-open">
     <div class="product-section__header">
@@ -39,26 +35,12 @@
         <div class="product-section__collapsible-inner">
             <div class="product-section__card">
                 <div class="product-section__subheaders" style="--cols: {{ $colCount }};">
-                    {{- if $product.columns }}
-                        {{- range $product.columns }}
-                        <div class="product-section__column">
-                            {{- $titles := . }}
-                            {{- range $titles }}
-                                {{- $needle := . }}
-                                {{- range $product.subheaders }}
-                                    {{- if eq .title $needle }}
-                                    {{ partial "home/product-subheader" . }}
-                                    {{- end }}
-                                {{- end }}
-                            {{- end }}
-                        </div>
+                    {{- range $product.columns }}
+                    <div class="product-section__column">
+                        {{- range .subheaders }}
+                        {{ partial "home/product-subheader" . }}
                         {{- end }}
-                    {{- else }}
-                        {{- range $product.subheaders }}
-                        <div class="product-section__column">
-                            {{ partial "home/product-subheader" . }}
-                        </div>
-                        {{- end }}
+                    </div>
                     {{- end }}
                 </div>
             </div>
