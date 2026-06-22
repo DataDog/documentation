@@ -97,7 +97,7 @@ After you are connected, try prompts like:
 To use the Software Delivery tools, connect to the Datadog MCP Server with the `software-delivery` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your [Datadog site][5]:
 
 ```text
-https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
+https://mcp.{{< region-param key="dd_site" >}}/v1/mcp?toolsets=core,software-delivery
 ```
 
 For full setup instructions including client configuration for Cursor, Claude Code, VS Code, and other AI clients, see [Set Up the Datadog MCP Server][1].

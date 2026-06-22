@@ -73,7 +73,7 @@ Datadog는 커밋 생성부터 배포까지 다양한 단계를 나타내는 메
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/service_management/events/explorer/
+[1]: /ko/events/explorer/
 [2]: /ko/api/latest/metrics/#query-timeseries-points
 [3]: /ko/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights

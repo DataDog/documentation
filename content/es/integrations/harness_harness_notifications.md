@@ -109,7 +109,7 @@ Los canales de notificación se pueden activar, desactivar o eliminar desde la p
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Harness][5].
 
 
-[1]: https://docs.datadoghq.com/es/service_management/events/explorer/
+[1]: https://docs.datadoghq.com/es/events/explorer/
 [2]: mailto:support@harness.io
 [3]: https://developer.harness.io/docs/continuous-delivery/x-platform-cd-features/cd-steps/notify-users-of-pipeline-events/#datadog-notifications
 [4]: https://docs.datadoghq.com/es/account_management/api-app-keys/

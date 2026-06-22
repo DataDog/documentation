@@ -42,6 +42,7 @@ Network Device Monitoring (NDM) gives you visibility into your on-premises and v
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>Getting Started</u>: Getting started with Network Device Monitoring{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/summary" >}}<u>Summary Page</u>: Assess the health of your network at a glance{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>Supported devices</u>: View supported NDM devices{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>SNMP Metrics</u>: Collect SNMP Metrics from your network devices {{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>SNMP Profile Manager</u>: Getting started with device profiles{{< /nextlink >}}

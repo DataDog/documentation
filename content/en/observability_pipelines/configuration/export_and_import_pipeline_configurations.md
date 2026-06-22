@@ -81,7 +81,7 @@ To help build your pipelines and transfer pipeline configurations across Datadog
    {{< img src="observability_pipelines/export_pipeline/import_access.png" alt="The settings menu showing Import Pipeline" style="width:100%;" >}}
 1. Choose a pipeline configuration as a JSON file from your computer.
    {{< img src="observability_pipelines/export_pipeline/import_select.png" alt="The import modal giving the option to select a JSON file" style="width:100%;" >}}
-1. Click Import. This replaces your current pipeline configuration with the imported JSON's pipeline configuration. 
+1. Click Import. This replaces your current pipeline configuration with the imported JSON's pipeline configuration.
 1. [Install the Observability Pipelines Worker and deploy your pipeline using the UI][8].
 
 ## Further reading
@@ -95,4 +95,4 @@ To help build your pipelines and transfer pipeline configurations across Datadog
 [5]: https://docs.datadoghq.com/api/latest/observability-pipelines/#update-a-pipeline
 [6]: /observability_pipelines/packs/
 [7]: /observability_pipelines/configuration/install_the_worker/#api-or-terraform-pipeline-setup
-[8]: https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
+[8]: https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/?interface=ui&platform=docker&secrets_source=secrets_management

@@ -43,6 +43,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Logstash
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
+### MySQL
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
+
 ### OpenTelemetry
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
