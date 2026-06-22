@@ -137238,6 +137238,12 @@ paths:
           name: filter[provider]
           schema:
             type: string
+        - description: When `true`, only return metrics for currently enabled accounts. When omitted or `false`, return all metrics present in tag metadata. Metrics not recognized by Cloud Cost Management are always excluded.
+          example: true
+          in: query
+          name: filter[enabled_metrics_only]
+          schema:
+            type: boolean
       responses:
         "200":
           content:
