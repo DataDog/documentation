@@ -14,7 +14,7 @@ The Monitors overlay is in Preview.
 
 ## Overview
 
-The Monitors overlay shows monitors associated with your AWS and Azure resources and services, along with their current state (`Alert`, `Warn`, or `OK`). Use this overlay to identify and investigate production issues directly in your infrastructure diagram.
+The Monitors overlay shows monitors associated with your cloud resources and services, along with their current state (`Alert`, `Warn`, or `OK`). Use this overlay to identify and investigate production issues directly in your infrastructure diagram.
 
 ## View monitor status
 

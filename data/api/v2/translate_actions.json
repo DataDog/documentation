@@ -1030,7 +1030,7 @@
     "request_schema_description": "Request object for deleting Test Optimization service settings."
   },
   "UpdateTestOptimizationServiceSettings": {
-    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; null or omitted fields are left unchanged.",
+    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; setting a field to `null` is a no-op.\nTo reset a setting to inherit from the repository level, use the corresponding `<setting>_inherit` field.\nThe `pr_comments_enabled` field is ignored as it cannot be overridden at the service level.",
     "summary": "Update Test Optimization service settings",
     "request_description": "",
     "request_schema_description": "Request object for updating Test Optimization service settings."
@@ -1931,6 +1931,10 @@
   "ListGlobalOrgs": {
     "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
     "summary": "List global orgs"
+  },
+  "ListGovernanceInsights": {
+    "description": "Retrieve the list of governance insights available to the organization. By default, only\ninsight metadata is returned; pass `withValues=true` to also compute and include each\ninsight's current and previous values. Insights can be filtered by product.",
+    "summary": "List governance insights"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -4329,6 +4333,16 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "GetRumSdkConfig": {
+    "description": "Retrieve a RUM SDK configuration by its identifier.",
+    "summary": "Get a RUM SDK configuration"
+  },
+  "UpdateRumSdkConfig": {
+    "description": "Update an existing RUM SDK configuration by its identifier.\nReturns the updated configuration when successful.",
+    "summary": "Update a RUM SDK configuration",
+    "request_description": "The RUM SDK configuration update.",
+    "request_schema_description": "Request body for updating a RUM SDK configuration."
+  },
   "ListReplayHeatmapSnapshots": {
     "description": "List heatmap snapshots.",
     "summary": "List replay heatmap snapshots"
@@ -4851,6 +4865,96 @@
     "request_description": "",
     "request_schema_description": "Request to assign or unassign security findings."
   },
+  "ListSecurityFindingsAutomationDueDateRules": {
+    "description": "Get all due date rules for the current organization.",
+    "summary": "Get all due date rules"
+  },
+  "CreateSecurityFindingsAutomationDueDateRule": {
+    "description": "Create a new due date rule for the current organization.",
+    "summary": "Create a due date rule",
+    "request_description": "",
+    "request_schema_description": "The body of a due date rule create request."
+  },
+  "ReorderSecurityFindingsAutomationDueDateRules": {
+    "description": "Reorder the list of due date rules for the current organization.",
+    "summary": "Reorder due date rules",
+    "request_description": "",
+    "request_schema_description": "The body of the due date rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationDueDateRule": {
+    "description": "Delete an existing due date rule by ID.",
+    "summary": "Delete a due date rule"
+  },
+  "GetSecurityFindingsAutomationDueDateRule": {
+    "description": "Get the details of a due date rule by ID.",
+    "summary": "Get a due date rule"
+  },
+  "UpdateSecurityFindingsAutomationDueDateRule": {
+    "description": "Update an existing due date rule by ID.",
+    "summary": "Update a due date rule",
+    "request_description": "",
+    "request_schema_description": "The body of a due date rule update request."
+  },
+  "ListSecurityFindingsAutomationMuteRules": {
+    "description": "Get all mute rules for the current organization.",
+    "summary": "Get all mute rules"
+  },
+  "CreateSecurityFindingsAutomationMuteRule": {
+    "description": "Create a new mute rule for the current organization.",
+    "summary": "Create a mute rule",
+    "request_description": "",
+    "request_schema_description": "The body of a mute rule create request."
+  },
+  "ReorderSecurityFindingsAutomationMuteRules": {
+    "description": "Reorder the list of mute rules for the current organization.",
+    "summary": "Reorder mute rules",
+    "request_description": "",
+    "request_schema_description": "The body of the mute rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationMuteRule": {
+    "description": "Delete an existing mute rule by ID.",
+    "summary": "Delete a mute rule"
+  },
+  "GetSecurityFindingsAutomationMuteRule": {
+    "description": "Get the details of a mute rule by ID.",
+    "summary": "Get a mute rule"
+  },
+  "UpdateSecurityFindingsAutomationMuteRule": {
+    "description": "Update an existing mute rule by ID.",
+    "summary": "Update a mute rule",
+    "request_description": "",
+    "request_schema_description": "The body of a mute rule update request."
+  },
+  "ListSecurityFindingsAutomationTicketCreationRules": {
+    "description": "Get all ticket creation rules for the current organization.",
+    "summary": "Get all ticket creation rules"
+  },
+  "CreateSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Create a new ticket creation rule for the current organization.",
+    "summary": "Create a ticket creation rule",
+    "request_description": "",
+    "request_schema_description": "The body of a ticket creation rule create request."
+  },
+  "ReorderSecurityFindingsAutomationTicketCreationRules": {
+    "description": "Reorder the list of ticket creation rules for the current organization.",
+    "summary": "Reorder ticket creation rules",
+    "request_description": "",
+    "request_schema_description": "The body of the ticket creation rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Delete an existing ticket creation rule by ID.",
+    "summary": "Delete a ticket creation rule"
+  },
+  "GetSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Get the details of a ticket creation rule by ID.",
+    "summary": "Get a ticket creation rule"
+  },
+  "UpdateSecurityFindingsAutomationTicketCreationRule": {
+    "description": "Update an existing ticket creation rule by ID.",
+    "summary": "Update a ticket creation rule",
+    "request_description": "",
+    "request_schema_description": "The body of a ticket creation rule update request."
+  },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
@@ -4924,6 +5028,12 @@
   "GetIndicatorOfCompromise": {
     "description": "Get detailed information about a specific indicator of compromise (IoC).",
     "summary": "Get an indicator of compromise"
+  },
+  "CreateIoCTriageState": {
+    "description": "Set the triage state of an indicator of compromise (IoC). This creates or\nupdates the triage state for the indicator in your organization.",
+    "summary": "Create or update an indicator triage state",
+    "request_description": "The triage state to set for the indicator.",
+    "request_schema_description": "Request body for creating or updating an indicator triage state."
   },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
@@ -5901,6 +6011,16 @@
     "summary": "Update degradation",
     "request_description": "",
     "request_schema_description": "Request object for updating a degradation."
+  },
+  "SoftDeleteDegradationUpdate": {
+    "description": "Soft-deletes a degradation update.",
+    "summary": "Soft delete degradation update"
+  },
+  "EditDegradationUpdate": {
+    "description": "Edits a specific degradation update.",
+    "summary": "Edit degradation update",
+    "request_description": "",
+    "request_schema_description": "Request object for editing a degradation update."
   },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",

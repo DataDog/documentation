@@ -29,7 +29,7 @@ Use Status Pages to:
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
 * Announce scheduled maintenance and planned downtime in advance
-* Reduce inbound support volume with proactive email notifications
+* Reduce inbound support volume with proactive email and Slack notifications
 
 ## Configure permissions
 
@@ -82,8 +82,8 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Enable users to receive email notifications about status page updates. When subscriptions are enabled, users can sign up to get notified about new notices and updates. You can turn subscriptions on or off for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in, email must be confirmed. |
-   | **Company logo, Favicon, or Email Header Image** *(optional)* | Upload a logo, favicon, or image to personalize the appearance of your status page and email notifications. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). When subscriptions are enabled, visitors can sign up from the published page to get notified about new notices and updates. Email and Slack subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
    <div class="alert alert-info">A status page <strong>is not Live</strong> after you save your settings. To make the page available, <a href="#publish-your-status-page">publish your status page</a>.</div>
@@ -111,6 +111,20 @@ You can add components to your status page either on initial setup or through th
 
 If multiple notices affect the same component, the notice with the greatest impact takes precedence:
 Major Outage > Partial Outage > Degraded Performance > Maintenance > Operational
+
+### Component status and uptime
+
+Each component status affects the uptime bars and uptime percentage differently:
+
+| Status | Uptime bars | Uptime percentage |
+|--------|-------------|-------------------|
+| Major Outage | Shown | Counts as downtime |
+| Partial Outage | Shown | Counts as downtime |
+| Degraded Performance | Shown | No impact |
+| Maintenance | Shown | No impact |
+| Operational | Shown as healthy | No impact |
+
+**Note**: Partial Outage and Major Outage are weighted equally. The full duration at either status counts as downtime in the uptime percentage calculation.
 
 ## Publish your status page
 
@@ -147,7 +161,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
-- Updates the uptime bars for impacted components.
+- Updates the uptime bars for impacted components. Components set to **Partial Outage** or **Major Outage** also have their uptime percentage reduced for the duration of the impact.
 - Is visible in the notice history timeline.
 
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
@@ -215,6 +229,7 @@ For **internal** status pages, the subscription process is the same, but users m
 
 {{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
+
 ## Configure a custom email sender domain
 
 By default, status page subscription emails are sent from a Datadog email address. To send notifications from your own domain, configure a custom SMTP server in Organization Settings.
@@ -222,9 +237,44 @@ By default, status page subscription emails are sent from a Datadog email addres
 <div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
 
 1. On your status page, go to **Settings** > **Subscriptions**.
-1. Under **Email Sender Domain**, click **Organization Settings**.
-1. In Organization Settings, [add and validate an SMTP server][3].
-1. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+2. Under **Email Sender Domain**, click **Organization Settings**.
+3. In Organization Settings, [add and validate an SMTP server][3].
+4. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+
+## Slack subscriptions
+
+Visitors can subscribe to status page updates in Slack through the **Datadog Status Pages** Slack app. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, the app posts updates to each subscribed channel for the components it follows, using your page name and Slack app icon as the sender. Slack subscriptions are configured independently of [email subscriptions](#email-subscriptions).
+
+### Enable Slack subscriptions
+
+1. From your status page, click **Settings**.
+2. Enable **Slack subscriptions**.
+3. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
+
+{{< img src="service_management/status_pages/status_pages_enable_slack.png" alt="Status page settings showing the Enable Slack subscriptions toggle and the Slack App Icon upload" style="width:80%;" >}}
+
+Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type.
+
+### Subscribe in Slack
+
+From a published page with Slack subscriptions enabled:
+
+1. Click **Subscribe** and open the **Slack** tab.
+1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
+1. Click **Subscribe via Slack**.
+   {{< img src="service_management/status_pages/status_pages_slack_subscription_modal.png" alt="Subscribe to Updates modal with the Slack tab selected and a Subscribe via Slack button" style="width:70%;" >}}
+1. Authorize the **Datadog Status Pages** app for your workspace and select the channel to receive updates.
+   {{< img src="service_management/status_pages/status_pages_slack_oauth.png" alt="Slack authorization screen granting the Datadog Status Pages app access to a workspace and channel" style="width:70%;" >}}
+
+After subscribing, the selected channel receives a welcome message confirming the subscription.
+
+**Private channels**: After subscribing, the user receives a message in the **Messages** tab of the Slack app prompting them to invite the **Datadog Status Pages** bot to the channel. The bot must be invited before it can post updates. Direct message (DM) channels are not supported. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
+
+### Manage subscriptions
+
+Subscribers can change the components they follow or unsubscribe at any time from the **Manage Preferences** link in any Slack notification.
+
+Status page owners can review subscribers in the status page settings, which lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page.
 
 <div class="alert alert-info">
 If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
