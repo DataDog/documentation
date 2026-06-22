@@ -43,7 +43,9 @@ If you are using the official MCP Python SDK to connect to an MCP server with an
    ddtrace-run <YOUR_APP_STARTUP_COMMAND>
    ```
 
-For additional configuration options, see the [Agent Observability SDK setup guide](/llm_observability/instrumentation/sdk?tab=python#setup).
+For additional configuration options, see the [Agent Observability SDK setup guide][1].
+
+[1]: /llm_observability/instrumentation/sdk?tab=python#setup
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -71,7 +73,9 @@ If you are using the official MCP JavaScript SDK to connect to an MCP server wit
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
    ```
 
-For additional configuration options, see the [Agent Observability SDK setup guide](/llm_observability/instrumentation/sdk?tab=nodejs#setup).
+For additional configuration options, see the [Agent Observability SDK setup guide][1].
+
+[1]: /llm_observability/instrumentation/sdk?tab=nodejs#setup
 {{% /tab %}}
 
 {{< /tabs >}}
