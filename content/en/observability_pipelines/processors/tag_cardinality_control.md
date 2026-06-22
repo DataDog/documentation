@@ -16,7 +16,7 @@ The Tag Cardinality Control processor is in Preview. Contact your account manage
 
 ## Overview
 
-The Tag Cardinality Control processor limits the number of tag values for each metric. For example, a metric with unbounded tag keys, such as `userID`, can cause the metric's cardinality to spike and impact ingestion and indexing costs. To prevent these unexpected spikes, use the processor to set a cardinality limit for metrics that match the filter query, and either drop metrics received after the limit has been reached or drop the tags for those metrics.
+The Tag Cardinality Control processor limits the number of tag values for each metric. For example, a metric with unbounded tag keys, such as `userID`, can cause the metric's cardinality to spike and impact ingestion and indexing costs. To prevent these unexpected spikes, use the processor to set a cardinality limit for metrics that match the filter query, and either drop metrics received after the limit is reached or drop the tags for those metrics.
 
 Optionally, you can also configure [per-metric overrides](#optional-per-metric-override-settings) to set a limit for a specific metric or to exclude the metric from any cardinality limits. For each per-metric override, you can also set a custom limit for individual tags within the metric, or exclude the tag from the per-metric cardinality limit.
 
@@ -38,7 +38,7 @@ If you want to set a cardinality limit for a specific metric:
 1. Enter the name of the metric.
 1. Select the override mode in the dropdown menu.
     - **Custom limit**: Sets a cardinality limit for this metric.
-    - **Exclude from limit**: Excludes this metric from being counted toward the cardinality limit. This is useful if you are tracking an important metric when you don't want to drop any samples or tags due to a cardinality limit.
+    - **Exclude from limit**: Excludes this metric from being counted toward the cardinality limit. This is useful when you are tracking an important metric and you don't want to drop any samples or tags due to a cardinality limit.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
 1. If you want to add specific tag overrides for this metric:
     1. Click **Add Tag Override**.
@@ -46,7 +46,7 @@ If you want to set a cardinality limit for a specific metric:
     1. Select the override mode in the dropdown menu:
         - **Custom limit**: Sets a limit on the number of unique values per tag. For example, if the tag limit is set to `5`, the first five tag values received are used.
             - **Note**: The tag values are only reset with a Worker restart or a pipeline configuration update, even if the Tag Cardinality Control processor isn't updated.
-        - **Exclude from limit**: Excludes metrics with the specified tag from being counted towards the cardinality limit.
+        - **Exclude from limit**: Excludes metrics with the specified tag from being counted toward the cardinality limit.
     1. Enter the limit for the maximum number of tag keys.
     1. Click **Add Override**.
 

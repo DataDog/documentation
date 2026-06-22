@@ -31,8 +31,8 @@ Use **Add tag** to append a new key-value tag to your metric.
 To set up the **Add tag** processor:
 
 1. Select **Add tag** in the **Action** dropdown menu.
-1. Define a filter query. Only metrics that match the filter query are processed. All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Metrics Search Syntax][1] for creating queries.
-1. Enter the tag key and value you want added to metrics. **Note**: If the tag you want to add already exists, the Worker logs an error and the existing tag remains unchanged.
+1. Define a filter query. Only metrics that match the filter query are processed. All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Metrics Search Syntax][1] for information on creating queries.
+1. Enter the tag key and value you want to add to metrics. **Note**: If the tag you want to add already exists, the Worker logs an error and the existing tag remains unchanged.
 
 ### Rename tag
 

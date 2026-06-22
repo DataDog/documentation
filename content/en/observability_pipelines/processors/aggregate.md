@@ -19,11 +19,11 @@ To set up the Aggregate processor:
 
 1. Define a filter query. Only matching metrics are processed by the processor. All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Metrics Search Syntax][1] for information on creating queries.
 1. In the **Mode** dropdown menu, select the aggregation function to use. See [Modes](#modes) for details.
-1. In the **Interval** field, enter the time window (seconds) for aggregating metrics. The maximum value is 60 seconds.
+1. In the **Interval** field, enter the time window in seconds for aggregating metrics. The maximum value is 60 seconds.
 
 ## Modes
 
-The Aggregate processor can combine metrics into a single metric based on the following modes. Some modes are only available for specific [metric kinds][2], incremental or absolute.
+The Aggregate processor can combine metrics into a single metric based on the following modes. Some modes are available only for specific [metric kinds][2], incremental or absolute.
 
 | Mode   | Description                                                                            | Incremental metrics | Absolute metrics |
 | ------ | -------------------------------------------------------------------------------------- | :-----------------: | :--------------: |
