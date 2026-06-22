@@ -75,12 +75,14 @@ These are the available processors:
 - [Aggregate][1]
 - [Edit Tags][2]
 - [Filter][3]
-- [Tag Control][4]
+- [Tag Cardinality Control][4]
+- [Tag Control][5]
 
 [1]: /observability_pipelines/processors/aggregate/
 [2]: /observability_pipelines/processors/edit_tags/
 [3]: /observability_pipelines/processors/filter/
-[4]: /observability_pipelines/processors/tag_control/
+[4]: /observability_pipelines/processors/tag_cardinality_control/
+[5]: /observability_pipelines/processors/tag_control/
 
 {{% /tab %}}
 {{< /tabs >}}
