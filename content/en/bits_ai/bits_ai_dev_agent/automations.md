@@ -9,7 +9,7 @@ further_reading:
 ---
 
 ## Overview
-Create an automation to have Bits Code start a [session][1] when a trigger fires, such as a new Code Security finding or a recurring schedule, then deliver the results as a pull or merge request or Slack notification.
+Create an automation to have Bits Code start a [session][1] when a trigger fires—such as a new Code Security finding or a recurring schedule. Bits Code delivers the results as a pull or merge request, or a Slack notification.
 
 {{< img src="bits_ai/dev_agent/automations/list.png" alt="Under an 'Automate with Bits' title, a table with columns like Name, Author, and Last Run has four rows." style="width:100%;" >}}
 
@@ -17,7 +17,7 @@ With Bits Code automations, you can:
 
 - Generate code fixes on a schedule, without starting each session manually
 - Have Bits Code respond to signals from other Datadog products, such as a new APM Recommendation, a flaky test, or a Code Security finding
-- Route the resulting code changes directly to a pull or merge request or notify a team in Slack
+- Route the resulting code changes directly to a pull or merge request, or notify a team in Slack
 
 ## Prerequisites
 To set up a Bits Code automation, each of the following must be true:
@@ -58,7 +58,7 @@ A trigger defines when an automation runs and what Bits Code acts on. A trigger 
 
 Click **Add Trigger** to add a component. You can combine a product finding with a schedule, a custom prompt with a schedule, or use a product finding on its own.
 
-To limit how many Bits Code sessions the automation can create in a given period (for example, `5 runs per Week`), click **Add Trigger** > **Set max runs**. One automation execution may produce more than one session. Use this setting to control the volume of pull or merge requests or notifications an automation produces.
+To limit how many Bits Code sessions the automation can create in a given period (for example, `5 runs per Week`), click **Add Trigger** > **Set max runs**. One automation execution may produce more than one session. Use this setting to control the volume of pull or merge requests, or Slack notifications, an automation produces.
 
 ### Product finding trigger
 A product finding trigger runs the automation in response to new issues in another Datadog product (for example, Error Tracking or Code Security). You can use a product finding trigger by itself, which runs the automation whenever there is a new finding, or with a [schedule](#schedule-trigger) and lookback window you define (in the **New findings within** field).
@@ -69,7 +69,7 @@ When setting up a product finding trigger, you can configure additional filters,
   - **Flaky Tests** supports filtering by **Repository**, **Branch** (defaults to the repository's default branch), and **Status**.
   - **Code Security (SAST)** supports filtering by **Repository**, **Severity**, **Rule to remediate**, and a toggle to **Filter out findings identified as false positives by Bits AI**.
 
-<div class="alert alert-warning">Each finding that triggers an automation is tied to a single session. Multiple findings cannot be fixed in a single session or pull or merge request.</div>
+<div class="alert alert-warning">Each finding that triggers an automation must have its own session, and related pull or merge request. Multiple findings cannot be fixed in a single session.</div>
 
 ### Custom prompt trigger
 A custom prompt tells Bits Code what to do each time the automation runs, in freeform text, against a chosen repository. Use a custom prompt for recurring maintenance tasks that aren't tied to a specific Datadog signal, such as updating dependencies or refreshing documentation.

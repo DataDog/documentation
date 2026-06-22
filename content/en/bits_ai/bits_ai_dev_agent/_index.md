@@ -87,7 +87,7 @@ Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on gen
 
 You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
-### Pull/merge request collaboration
+### Pull or merge request collaboration
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
