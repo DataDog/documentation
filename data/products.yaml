@@ -1,5 +1,9 @@
 heading: Browse by product
 
+# Each immediate child of `products` is one product grouping rendered as a card on the homepage.
+# `span` is the card's width out of a 12-column grid. `columns` lay out the card's contents,
+# and each entry under `subheaders` is an individual product grouping within the card.
+
 products:
   - title: Observability
     icon: eye-4
