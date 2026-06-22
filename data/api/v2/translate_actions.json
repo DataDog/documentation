@@ -1238,6 +1238,12 @@
   "ValidateCsvBudget": {
     "summary": "Validate CSV budget"
   },
+  "UpsertCustomForecast": {
+    "description": "Create or replace the custom forecast for an existing budget.\nPass an empty `entries` list to delete the custom forecast for the budget.",
+    "summary": "Create or replace a budget's custom forecast",
+    "request_description": "",
+    "request_schema_description": "Request body to upsert (create or replace) the custom forecast for a budget."
+  },
   "ValidateBudget": {
     "description": "Validate a budget configuration without creating or modifying it",
     "summary": "Validate budget",
@@ -1251,6 +1257,10 @@
   "GetBudget": {
     "description": "Get a budget",
     "summary": "Get budget"
+  },
+  "DeleteCustomForecast": {
+    "description": "Delete the custom forecast for a budget.",
+    "summary": "Delete a budget's custom forecast"
   },
   "ListBudgets": {
     "description": "List budgets.",
