@@ -112,22 +112,25 @@ The simulation is retrospective: it applies the Savings Plan you configure to yo
 
 ### Run a simulation
 
-1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**.
-2. Set the simulation inputs:
-   - {{< ui >}}Commitment amount{{< /ui >}}: The hourly commitment ($/hour) you want to model.
-   - {{< ui >}}Savings Plan type{{< /ui >}}: Choose {{< ui >}}Compute{{< /ui >}} or {{< ui >}}Database{{< /ui >}}.
-   - {{< ui >}}Term{{< /ui >}}: The length of the commitment (for example, 1 year or 3 years).
-   - {{< ui >}}Payment option{{< /ui >}}: How the commitment is paid (No Upfront, Partial Upfront, or All Upfront).
-   - {{< ui >}}Lookback window{{< /ui >}}: The past period of usage to test the commitment against.
-3. Review the results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
+1. Go to the [**Simulator**][3] tab in **Cloud Cost > Planning > Commitment Programs**. If none of your AWS accounts are eligible to own a Savings Plan, the simulator shows an empty state instead.
+2. Choose the {{< ui >}}Savings Plan Type{{< /ui >}}: {{< ui >}}Compute{{< /ui >}} or {{< ui >}}Database{{< /ui >}}.
+3. Set your commitment preferences (use {{< ui >}}Edit{{< /ui >}} to change them):
+   - {{< ui >}}Owner Account{{< /ui >}}: The AWS account that would own the Savings Plan.
+   - {{< ui >}}Term{{< /ui >}}: {{< ui >}}1 Year{{< /ui >}} or {{< ui >}}3 Years{{< /ui >}}.
+   - {{< ui >}}Payment Model{{< /ui >}}: {{< ui >}}No Upfront{{< /ui >}}, {{< ui >}}Partial Upfront{{< /ui >}}, or {{< ui >}}All Upfront{{< /ui >}}.
+4. Enter an {{< ui >}}Additional Hourly Commitment{{< /ui >}}: the amount per hour ($/hour) you want to model.
+5. Set {{< ui >}}Simulate against usage during{{< /ui >}} to the historical period to evaluate the commitment against. This defaults to the past 30 days.
+6. Review the results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
 
-If Datadog has a Savings Plan recommendation for your organization, the simulation is prefilled with the recommended values so you can start from a suggested commitment and adjust from there. Recommendations are currently available for Compute Savings Plans only.
+If [AWS Cost Optimization Hub][4] has a Savings Plan recommendation for your organization, it appears in a callout with the suggested hourly commitment, term, and payment option. Click the callout to apply those settings to the simulation. Recommendations are available for Compute Savings Plans only.
 
 ### Interpret the results
 
 All simulation outputs are estimates based on your historical usage over the selected lookback window. Actual savings depend on your future usage and how AWS applies Savings Plan discounts across your accounts.
 
 Savings Plans are shared across a [Consolidated Billing Family][2], so a commitment can apply to usage in multiple accounts. The simulation estimates how the modeled commitment would be distributed across your accounts; actual distribution depends on AWS's application logic.
+
+If Datadog doesn't have complete cost data for the selected period, the simulator warns you that the results are based on incomplete data.
 
 Results appear in two sections:
 
@@ -136,8 +139,8 @@ Results appear in two sections:
 
 ### Best practices
 
-- Start from a Datadog recommendation when one is available, then adjust the commitment amount to compare scenarios.
-- Use a lookback window that reflects your typical usage. Avoid periods with unusual spikes or gaps if you want a representative estimate.
+- When an AWS recommendation is shown, apply it as a starting point, then adjust the hourly commitment to compare scenarios.
+- Choose a usage period that reflects your typical usage. Avoid periods with unusual spikes or gaps if you want a representative estimate.
 - Treat the results as directional guidance for sizing a commitment, not as a guarantee of future savings.
 
 ## Example use cases
@@ -184,3 +187,4 @@ Results appear in two sections:
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
 [2]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
 [3]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
+[4]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
