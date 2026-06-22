@@ -4,6 +4,13 @@ products:
   - title: Observability
     icon: eye-4
     span: 9
+    # Column groupings mirror the HiFi design: APPLICATIONS and DATA stack
+    # in the middle column so INFRASTRUCTURE's long link list balances out
+    # against the other two columns.
+    columns:
+      - [Infrastructure]
+      - [Applications, Data]
+      - [Logs]
     subheaders:
       - title: Infrastructure
         links:
@@ -89,6 +96,8 @@ products:
   - title: Digital Experience
     icon: rum
     span: 3
+    columns:
+      - [Synthetic Testing, Real User Monitoring, Product Analytics]
     subheaders:
       - title: Synthetic Testing
         links:
@@ -120,6 +129,8 @@ products:
   - title: AI
     icon: bits-ai
     span: 4
+    columns:
+      - [AI]
     subheaders:
       - title: AI
         links:
@@ -139,6 +150,10 @@ products:
   - title: Security
     icon: security-platform
     span: 8
+    columns:
+      - [Code Security]
+      - [Cloud Security]
+      - [Cloud SIEM]
     subheaders:
       - title: Code Security
         links:
@@ -174,6 +189,9 @@ products:
   - title: Software Delivery
     icon: ci
     span: 6
+    columns:
+      - [CI/CD]
+      - [Developer Efficiency]
     subheaders:
       - title: CI/CD
         links:
@@ -215,6 +233,9 @@ products:
   - title: Service Management
     icon: service-catalog
     span: 6
+    columns:
+      - [Incident Response]
+      - [Actions]
     subheaders:
       - title: Incident Response
         links:
@@ -256,6 +277,10 @@ products:
   - title: Platform & Administration
     icon: gear
     span: 12
+    columns:
+      - [Core Platform]
+      - [Extend]
+      - [Govern]
     subheaders:
       - title: Core Platform
         links:

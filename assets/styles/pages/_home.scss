@@ -235,11 +235,25 @@
 $product-collapse-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
 $product-collapse-duration: 300ms;
 
+// Used by .product-section__collapsible-inner to flip overflow to visible
+// once the expand transition has completed, so tooltips can escape the card.
+@keyframes product-section-reveal-overflow {
+    to { overflow: visible; }
+}
+
 .product-section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     grid-column: 1 / -1;
+    // position+z-index so a hovered section paints above neighbors. Without
+    // this, a link tooltip near the bottom of one card can be obscured by the
+    // next row's card (whose backdrop-filter creates its own stacking context).
+    position: relative;
+
+    &:hover {
+        z-index: 2;
+    }
 
     @media (min-width: 1280px) {
         @for $i from 1 through 12 {
@@ -251,6 +265,12 @@ $product-collapse-duration: 300ms;
         display: flex;
         align-items: center;
         gap: 0.6rem;
+        // Reserve room for a 2-line title (22px font * 2 lines) so the card top
+        // aligns with sibling sections whose titles fit on one line.
+        min-height: 44px;
+        // Match the card's 12px horizontal margin so the icon and caret line
+        // up with the card's left and right edges.
+        padding: 0 12px;
     }
 
     &__caret-button {
@@ -301,11 +321,22 @@ $product-collapse-duration: 300ms;
     }
 
     &__collapsible-inner {
+        // overflow:hidden is required so the grid-template-rows: 0fr collapse
+        // visually clips the card. But it also clips link tooltips that extend
+        // below the card. When the section is fully open we want overflow:visible
+        // so tooltips escape -- but only AFTER the expand transition completes,
+        // otherwise the contents pop out partway through the animation.
+        //
+        // A 0s animation with delay = collapse duration switches overflow to
+        // visible exactly when the expand finishes. Collapsing removes .is-open,
+        // which removes the animation; the base `overflow: hidden` rule then
+        // takes effect immediately, clipping content during the collapse.
         overflow: hidden;
         min-height: 0;
-        // Vertical breathing room so the card's hover scale (1.02y) doesn't get
-        // clipped at the top/bottom. ~8px each side fits cards up to ~800px tall.
-        padding: 8px 0;
+    }
+
+    &.is-open &__collapsible-inner {
+        animation: product-section-reveal-overflow 0s $product-collapse-duration forwards;
     }
 
     &__icon {
@@ -345,13 +376,30 @@ $product-collapse-duration: 300ms;
     //   cardOpacity: 55, cardBorder: 85, cardBlur: 24, cardRadius: 8, cardPadding: 32,
     //   shadowY: 4, shadowBlur: 8, shadowSpread: -4, shadowOpacity: 5
     &__card {
-        height: 100%;
-        background: rgba(255, 255, 255, 0.55);
+        // height: calc + margin gives the hover scale (1.008x, 1.02y) room to
+        // grow without being clipped by the collapsible wrapper's overflow:hidden.
+        // Margin sits OUTSIDE the card's box, so when the section collapses
+        // (grid-template-rows: 0fr), the card cleanly disappears -- margin
+        // never adds to the collapsed inner's height the way padding would.
+        height: calc(100% - 16px);
+        margin: 8px 12px;
+        // Resting bg is a 3-stop linear-gradient with matching structure to
+        // the hover gradient below, so the transition interpolates smoothly
+        // between them. (CSS cannot transition between a flat color and a
+        // gradient -- it would snap, which is what caused the jarring leave.)
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.55) 0%,
+            rgba(255, 255, 255, 0.55) 50%,
+            rgba(255, 255, 255, 0.55) 100%
+        );
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
         border: 1px solid rgba(0, 0, 0, 0.068);
         border-radius: 8px;
-        padding: 32px;
+        // No padding here -- it lives on .__subheaders so that the prototype's
+        // inverse-scale on hover cancels out the padding's visual stretch.
+        // (See the HoverCard component in docs-site-prototype/App.tsx.)
         box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.05);
 
         // Hover: card "shell" grows around stationary inner content.
@@ -398,37 +446,34 @@ $product-collapse-duration: 300ms;
     }
 
     &__subheaders {
-        columns: 1;
+        // Padding lives on the inverse-scaled wrapper (not the card) to match
+        // the prototype's HoverCard structure. This keeps the visual gap between
+        // the card border and the content stable as the card scales on hover.
+        padding: 32px;
+        // Column count comes from `--cols` on the element (set by the template
+        // from `product.columns` in the YAML). Each `__column` is its own flex
+        // stack of subheaders -- mirrors the prototype's baseGroups, where e.g.
+        // Observability's middle column stacks APPLICATIONS + DATA.
+        display: grid;
+        grid-template-columns: 1fr;
         column-gap: 40px;
+        row-gap: 48px;
     }
 
-    @media (min-width: 1280px) {
-        &--span-6 &__subheaders {
-            columns: 2;
-        }
-
-        &--span-8 &__subheaders,
-        &--span-9 &__subheaders,
-        &--span-12 &__subheaders {
-            columns: 3;
-        }
-    }
-
-    @media (min-width: 745px) and (max-width: 1279px) {
+    @media (min-width: 745px) {
         &__subheaders {
-            columns: 3;
+            grid-template-columns: repeat(var(--cols, 1), 1fr);
         }
     }
 
-    @media (min-width: 541px) and (max-width: 744px) {
-        &__subheaders {
-            columns: 2;
-        }
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
     }
 
     &__subheader {
-        break-inside: avoid;
-        margin-bottom: 32px;
+        margin: 0;
     }
 
     &__subheader-title {
@@ -468,24 +513,33 @@ $product-collapse-duration: 300ms;
         }
     }
 
-    // Keep the last word + arrow on one line so the arrow never orphans.
+    // Anchor for the absolutely-positioned arrow. nowrap keeps the last word
+    // unbreakable so the arrow always sits flush to its right edge.
     &__link-tail {
+        position: relative;
         white-space: nowrap;
     }
 
     // Right-arrow that slides in on link hover (desktop only).
     // Matches the prototype LinkItem: opacity 0 -> 1, translateX(-8px) -> 0, 200ms ease-out.
+    // Positioned absolutely so it doesn't reserve layout width -- otherwise the
+    // hidden arrow space would push long link titles to wrap differently in
+    // different sections, causing card heights to drift.
     &__link-arrow {
+        position: absolute;
+        left: 100%;
+        // Slight nudge down to optically center with the link's baseline; the
+        // text's cap-height vs full-height makes a true 50% feel too high.
+        top: calc(50% + 2px);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        vertical-align: middle;
         width: 14px;
         height: 14px;
         margin-left: 6px;
         overflow: hidden;
         opacity: 0;
-        transform: translateX(-8px);
+        transform: translate(-8px, -50%);
         transition: opacity 200ms ease-out, transform 200ms ease-out;
         color: inherit;
 
@@ -507,7 +561,7 @@ $product-collapse-duration: 300ms;
         &__link:hover &__link-arrow,
         &__link:focus-visible &__link-arrow {
             opacity: 1;
-            transform: translateX(0);
+            transform: translate(0, -50%);
         }
     }
 

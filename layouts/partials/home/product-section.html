@@ -6,6 +6,17 @@
 {{- end -}}
 {{- $span := $product.span | default 4 -}}
 
+{{- /*
+  Column count = len(product.columns) when defined, else one column per subheader.
+  Each entry in `product.columns` is a list of subheader titles to stack (in order)
+  in that column. This mirrors the HiFi design and the prototype's baseGroups,
+  e.g. Observability's middle column stacks APPLICATIONS + DATA.
+*/ -}}
+{{- $colCount := len $product.subheaders -}}
+{{- with $product.columns -}}
+    {{- $colCount = len . -}}
+{{- end -}}
+
 <div class="product-section product-section--span-{{ $span }} is-open">
     <div class="product-section__header">
         {{- with $product.icon }}
@@ -27,28 +38,27 @@
     <div class="product-section__collapsible">
         <div class="product-section__collapsible-inner">
             <div class="product-section__card">
-                <div class="product-section__subheaders">
-                    {{- range $product.subheaders }}
-                    <div class="product-section__subheader">
-                        <h4 class="product-section__subheader-title">{{ .title }}</h4>
-                        <ul class="product-section__links">
-                            {{- range .links }}
-                            {{- $words := split .title " " -}}
-                            {{- $lastIdx := sub (len $words) 1 -}}
-                            {{- $lastWord := index $words $lastIdx -}}
-                            {{- $leading := delimit (first $lastIdx $words) " " -}}
-                            <li class="product-section__link-item">
-                                <a class="product-section__link" href="{{ .link | absLangURL }}">{{- with $leading }}{{ . }} {{ end -}}<span class="product-section__link-tail">{{ $lastWord }}<span class="product-section__link-arrow" aria-hidden="true"><svg viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 6.5h13M9 1l5 5.5L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
-                                {{- if or .description .short_description }}
-                                <span class="product-section__link-tooltip" role="tooltip">
-                                    {{- with .short_description }}<span class="product-section__link-tooltip-short">{{ . }}</span>{{ end -}}
-                                    {{- with .description }}<span class="product-section__link-tooltip-long">{{ . }}</span>{{ end -}}
-                                </span>
+                <div class="product-section__subheaders" style="--cols: {{ $colCount }};">
+                    {{- if $product.columns }}
+                        {{- range $product.columns }}
+                        <div class="product-section__column">
+                            {{- $titles := . }}
+                            {{- range $titles }}
+                                {{- $needle := . }}
+                                {{- range $product.subheaders }}
+                                    {{- if eq .title $needle }}
+                                    {{ partial "home/product-subheader" . }}
+                                    {{- end }}
                                 {{- end }}
-                            </li>
                             {{- end }}
-                        </ul>
-                    </div>
+                        </div>
+                        {{- end }}
+                    {{- else }}
+                        {{- range $product.subheaders }}
+                        <div class="product-section__column">
+                            {{ partial "home/product-subheader" . }}
+                        </div>
+                        {{- end }}
                     {{- end }}
                 </div>
             </div>
