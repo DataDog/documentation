@@ -52,11 +52,12 @@ These different metric submission types are mapped to five in-app metric types f
 
 ## Submission vs. in-app type
 
-Metrics are submitted to Datadog in three main ways:
+Metrics are submitted to Datadog in four main ways:
 
 - [Agent check][5]
 - [DogStatsD][6]
 - [Datadog's HTTP API][7]
+- [OTLP Metrics API][20]
 
 The majority of data that Datadog receives is submitted by the Agent, either through an Agent check or DogStatsD. For these submission methods, a metric's type determines how multiple values collected on an Agent in [a flush time interval][8] are aggregated. The Agent combines these values into a single representative metric value for that interval. This combined value is stored with a single timestamp in Datadog.
 
@@ -370,3 +371,4 @@ Below is a summary of all available metric submission sources and methods. This 
 [17]: /metrics/custom_metrics/dogstatsd_metrics_submission/#set
 [18]: /metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
 [19]: /metrics/types/?tab=distribution#definition
+[20]: /opentelemetry/setup/otlp_ingest/metrics/
