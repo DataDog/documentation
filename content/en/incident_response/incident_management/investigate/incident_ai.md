@@ -9,7 +9,7 @@ aliases:
 further_reading:
 - link: "/bits_ai/bits_ai_sre/"
   tag: "Documentation"
-  text: "Learn about Bits AI SRE"
+  text: "Learn about Bits Investigation"
 - link: "/incident_response/incident_management/post_incident/postmortems"
   tag: "Documentation"
   text: "Generate AI-assisted postmortems"
@@ -34,7 +34,7 @@ When you join an incident channel in Slack (connected to Datadog Incident Manage
 
 When an incident is changed to resolved, Incident AI posts a final summary. This is visible to everyone in the channel.
 
-{{< img src="service_management/incidents/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
 ## Related incident detection
 
@@ -55,11 +55,11 @@ Use natural language prompts to request information or take action from Slack:
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDoS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
 
-## Trigger a Bits AI SRE investigation {#bits-ai-investigation}
+## Trigger a Bits Investigation {#bits-ai-investigation}
 
-Start a Bits AI SRE investigation directly from your incident Slack channel or the Datadog Incident Management web UI, without leaving your incident response workflow. This reduces context switching during active incidents and allows the AI agent to investigate alongside your team using the same shared context.
+Start a Bits Investigation directly from your incident Slack channel or the Datadog Incident Management web UI, without leaving your incident response workflow. This reduces context switching during active incidents and allows the AI agent to investigate alongside your team using the same shared context.
 
-Bits AI SRE must be enabled for your organization and you can only trigger an investigation from a **properly configured Datadog Incident Management Slack channel**. The Incident Investigation flow only activates when the system detects a valid incident channel.
+Bits Investigation must be enabled for your organization and you can only trigger an investigation from a **properly configured Datadog Incident Management Slack channel**. The Incident Investigation flow only activates when the system detects a valid incident channel.
 
 **From Slack,** type `@Datadog investigate` in the incident channel to kick off an investigation during an active incident. You can include additional context inline to help the agent narrow its scope from the start:
 
@@ -70,15 +70,15 @@ Bits AI SRE must be enabled for your organization and you can only trigger an in
 
 When triggered, the agent automatically pulls in the incident's timeline, linked telemetry signals (traces, metrics, and logs), and any context you provide in the prompt. It then posts updates back to the channel as a thread reply, with a final root cause summary and recommended next steps surfaced to the broader channel when the investigation completes.
 
-{{< img src="incident_response/incident_management/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits AI SRE investigation with root cause findings and a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits Investigation with root cause findings and a View Full Investigation button" >}}
 
 **From the web UI**, you can trigger an investigation directly from the "Investigation" section on the incident overview page.
 
-{{< img src="incident_response/incident_management/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits AI SRE investigation in the Investigation section with a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Full Investigation button" >}}
 
-When triggered, the investigation is embedded in the incident web UI, and Bits AI SRE appears as a responder in the Responder Roles section of the page.
+When triggered, the investigation is embedded in the incident web UI, and Bits Investigation appears as a responder in the Responder Roles section of the page.
 
-For a full walkthrough of the investigation workflow, see [Bits AI SRE][4].
+For a full walkthrough of the investigation workflow, see [Bits Investigation][4].
 
 ## Further reading
 

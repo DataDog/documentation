@@ -19,10 +19,13 @@ The Observability Pipelines Worker uses standard Google authentication methods. 
 
 Configure the Google SecOps destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][1], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Google SecOps endpoint URL. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
 After you select the Google SecOps destination in the pipeline UI:
 
 1. Enter the identifier for your Google SecOps endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
-	- **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual URL.
 1. Enter the customer ID for your Google SecOps instance.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
@@ -55,9 +58,9 @@ After you select the Google SecOps destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 

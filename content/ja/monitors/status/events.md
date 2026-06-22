@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/
+- link: events/
   tag: ドキュメント
   text: イベント管理
 title: Status Events

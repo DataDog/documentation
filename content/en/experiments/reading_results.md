@@ -19,7 +19,7 @@ After [launching your experiment][1], Datadog begins calculating results for you
 {{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="The experiment results overview showing a decision metrics table with control and treatment values, relative lift, and confidence interval bars for three metrics." style="width:90%;" >}}
 
 ## Confidence intervals
-For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval.
+For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval. The interval depends on the experiment's configured [analysis method][2].
 
 The relative lift is defined as:
 
@@ -46,3 +46,4 @@ Subject-level properties are based on attributes at the initial time of exposure
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/
+[2]: /experiments/analysis_methods

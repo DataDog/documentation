@@ -1,8 +1,10 @@
 ---
 title: Apps
 description: Build and deploy custom Apps locally using a code-based development workflow with React, backend functions, and a CLI.
-site_support_id: app_builder #Site support banner for US1-FED and US2-FED
 further_reading:
+- link: "https://www.datadoghq.com/blog/internal-applications-datadog-apps/"
+  tag: "Blog"
+  text: "Ship internal applications from your AI Agent with Datadog Apps"
 - link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder"
@@ -13,6 +15,10 @@ further_reading:
   tag: "Documentation"
   text: "Access and Authentication"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
+Datadog Apps is in Preview. Use this form to request access.
+{{< /callout >}}
 
 ## Overview
 

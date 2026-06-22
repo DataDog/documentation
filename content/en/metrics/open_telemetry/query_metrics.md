@@ -1,5 +1,6 @@
 ---
 title: Query Across Datadog and OpenTelemetry Metrics
+description: "Query equivalent Datadog and OpenTelemetry metrics together in hybrid environments using Semantic Mode."
 aliases:
 - metrics/open_telemetry/otlp_metrics/
 further_reading:
