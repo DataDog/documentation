@@ -92,7 +92,7 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 }, ddkafka.WithDataStreams())
 ```
 
-If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure. The `ctx` returned by `ExtractFromBase64Carrier` carries the upstream DSM pathway. Pass it to `SetDataStreamsCheckpointWithParams` when you produce, then inject it into the outbound message with `InjectToBase64Carrier`. Passing `context.Background()` at the produce site instead — for example, in a worker goroutine that has lost the consume ctx — creates a new pathway root and breaks end-to-end visibility.
+If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure. The `ctx` returned by `ExtractFromBase64Carrier` carries the upstream DSM pathway. Pass it to `SetDataStreamsCheckpointWithParams` when you produce, then inject it into the outbound message with `InjectToBase64Carrier`. Passing `context.Background()` at the produce site creates a new pathway root and breaks end-to-end visibility. This happens, for example, in a worker goroutine that has lost the consume `ctx`.
 
 3. Extract the context from headers
 
@@ -107,7 +107,7 @@ If a service consumes data from one point and produces to another point, propaga
 
 ##### Goroutines and channels
 
-Go channels and goroutines do not carry `context.Context` automatically. If your service fans consumed messages out to worker goroutines before producing, thread the consume ctx to the produce site by including it in the work item you send over the channel:
+Go channels and goroutines do not carry `context.Context` automatically. If your service fans consumed messages out to worker goroutines before producing, pass the consume `ctx` to the produce site by including it in the work item you send over the channel:
 
 ```go
 type job struct {
@@ -137,7 +137,8 @@ for j := range jobs {
 }
 ```
 
-When one consumed message fans out to multiple produce calls, pass the same consume ctx to each produce checkpoint — each call creates its own child node in the pathway. For the reverse case (many consumed messages merging into one produce), combine the inbound contexts with `datastreams.MergeContexts(ctxs...)` before producing.
+- **Fan-out**: When one consumed message fans out to multiple produce calls, pass the same consume `ctx` to each produce checkpoint. Each call creates its own child node in the pathway.
+- **Fan-in**: When many consumed messages merge into one produce call, combine the inbound contexts with `datastreams.MergeContexts(ctxs...)` before producing.
 
 #### Other queuing technologies or protocols
 
