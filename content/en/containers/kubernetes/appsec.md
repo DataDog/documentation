@@ -54,17 +54,17 @@ More proxies are available through manual installation on the global [setup page
 
 ## Limitations
 
+### Sidecar mode
+- Requires Datadog Cluster Agent 7.76.0 or later
+- Each gateway pod runs its own processor instance, which increases per-pod resource usage
+- Datadog Operator does not support sidecar mode configuration
+
 ### External mode
 - Requires Datadog Cluster Agent 7.73.0 or later
 - Security processor must be manually deployed and scaled
 - Deployed service may require an appropriate network policy:
   - From the proxy pods on the service port
   - To the Datadog Agent for traces
-
-### Sidecar mode
-- Requires Datadog Cluster Agent 7.76.0 or later
-- Each gateway pod runs its own processor instance, which increases per-pod resource usage
-- Datadog Operator does not support sidecar mode configuration
 
 ### Proxy compatibility
 - For specific proxy version compatibility, see:
@@ -86,12 +86,64 @@ Before enabling App and API Protection for Kubernetes, verify that you have:
 
 App and API Protection for Kubernetes supports two deployment modes:
 
-- **External mode** (recommended): A single, centralized Application Security processor deployment serves all gateway traffic in your cluster. This is the preferred approach for most environments.
-- **Sidecar mode**: The Application Security processor runs as a sidecar container injected directly into each gateway pod. No separate processor deployment is needed. See [Set up sidecar mode](#set-up-sidecar-mode) for setup details.
+- **Sidecar mode** (default): The Application Security processor runs as a sidecar container injected directly into each gateway pod. No separate processor deployment is needed, and the processor scales automatically with your gateway pods.
+- **External mode**: A single, centralized Application Security processor deployment serves all gateway traffic in your cluster. Use this mode when you want to manage one shared processor for the whole cluster.
 
-The following sections describe the external mode architecture and setup. For sidecar mode, skip to [Set up sidecar mode](#set-up-sidecar-mode).
+To set up the default sidecar mode, see [Set up sidecar mode](#set-up-sidecar-mode). To deploy a centralized processor instead, see [Set up external mode](#set-up-external-mode).
 
-### Architecture (external mode)
+## Set up sidecar mode
+
+In sidecar mode, the security processor runs as a container injected directly into each gateway pod. The Cluster Agent handles injection automatically, so you don't need a separate processor deployment or service.
+
+### When to use sidecar mode
+
+- You prefer not to manage a separate processor deployment and service
+- You want the processor co-located with each gateway pod
+- You are using Istio with the automated configuration (see [Enabling App and API Protection for Istio][7])
+
+### Setup
+
+Add the following to your Helm `values.yaml`. No `processor.service.*` values are needed because the injector handles processor deployment automatically.
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      # mode defaults to "sidecar" when omitted
+```
+
+Install or upgrade the Datadog Helm chart (v3.153+):
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+```
+
+<div class="alert alert-warning">
+  Datadog Operator does not support sidecar mode configuration. Use Helm to configure sidecar mode.
+</div>
+
+### Sidecar configuration reference
+
+All sidecar parameters are nested under `datadog.appsec.injector.sidecar` in your Helm `values.yaml`:
+
+| Helm Parameter | Type | Default | Description |
+|----------------|------|---------|-------------|
+| `sidecar.image` | String | `ghcr.io/datadog/dd-trace-go/service-extensions-callout` | Sidecar container image |
+| `sidecar.imageTag` | String | `v2.6.0` | Sidecar container image tag |
+| `sidecar.port` | Integer | `8080` | gRPC listening port for the sidecar processor |
+| `sidecar.healthPort` | Integer | `8081` | Health check port for the sidecar processor |
+| `sidecar.bodyParsingSizeLimit` | Integer | `0` | Maximum request body size in bytes to process. `0` disables body processing. Use `-1` to disable body parsing entirely. |
+| `sidecar.resources.requests.cpu` | String | `10m` | CPU request for the sidecar container |
+| `sidecar.resources.requests.memory` | String | `128Mi` | Memory request for the sidecar container |
+| `sidecar.resources.limits.cpu` | String | `""` | CPU limit for the sidecar container (optional) |
+| `sidecar.resources.limits.memory` | String | `""` | Memory limit for the sidecar container (optional) |
+
+## Set up external mode
+
+In external mode, you deploy a single, centralized Application Security processor that serves all gateway traffic in your cluster. The Cluster Agent automatically configures your supported proxies to route traffic to this processor.
+
+### Architecture
 
 -  **Security Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
 -  **Automatic Proxy Detection**: The controller watches for supported proxy resources in your cluster using Kubernetes informers.
@@ -107,8 +159,6 @@ The following sections describe the external mode architecture and setup. For si
 - **Infrastructure-as-Code**: Manage configuration through Helm values
 - **Non-Invasive**: No application code changes required
 - **Scalable**: Add new gateways without additional configuration
-
-## Setup
 
 ### Step 1: Deploy the security processor
 
@@ -394,54 +444,6 @@ All errors are logged as Kubernetes events. Check for events on the Gateway or G
   - `gateway.networking.k8s.io/gatewayclasses`
 - Check that the ClusterRoleBinding references the correct service account
 - Make sure you are using the newest version of the Datadog Helm Chart or Operator.
-
-## Set up sidecar mode
-
-In sidecar mode, the security processor runs as a container injected directly into each gateway pod. The Cluster Agent handles injection automatically, so you don't need a separate processor deployment or service.
-
-### When to use sidecar mode
-
-- You prefer not to manage a separate processor deployment and service
-- You want the processor co-located with each gateway pod
-- You are using Istio with the automated configuration (see [Enabling App and API Protection for Istio][7])
-
-### Setup
-
-Add the following to your Helm `values.yaml`. No `processor.service.*` values are needed because the injector handles processor deployment automatically.
-
-```yaml
-datadog:
-  appsec:
-    injector:
-      enabled: true
-      # mode defaults to "sidecar" when omitted
-```
-
-Install or upgrade the Datadog Helm chart (v3.153+):
-
-```bash
-helm upgrade -i datadog-agent datadog/datadog -f values.yaml
-```
-
-<div class="alert alert-warning">
-  Datadog Operator does not support sidecar mode configuration. Use Helm to configure sidecar mode.
-</div>
-
-### Sidecar configuration reference
-
-All sidecar parameters are nested under `datadog.appsec.injector.sidecar` in your Helm `values.yaml`:
-
-| Helm Parameter | Type | Default | Description |
-|----------------|------|---------|-------------|
-| `sidecar.image` | String | `ghcr.io/datadog/dd-trace-go/service-extensions-callout` | Sidecar container image |
-| `sidecar.imageTag` | String | `v2.6.0` | Sidecar container image tag |
-| `sidecar.port` | Integer | `8080` | gRPC listening port for the sidecar processor |
-| `sidecar.healthPort` | Integer | `8081` | Health check port for the sidecar processor |
-| `sidecar.bodyParsingSizeLimit` | Integer | `0` | Maximum request body size in bytes to process. `0` disables body processing. Use `-1` to disable body parsing entirely. |
-| `sidecar.resources.requests.cpu` | String | `10m` | CPU request for the sidecar container |
-| `sidecar.resources.requests.memory` | String | `128Mi` | Memory request for the sidecar container |
-| `sidecar.resources.limits.cpu` | String | `""` | CPU limit for the sidecar container (optional) |
-| `sidecar.resources.limits.memory` | String | `""` | Memory limit for the sidecar container (optional) |
 
 ## Further Reading
 
