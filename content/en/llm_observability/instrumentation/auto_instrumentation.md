@@ -565,7 +565,7 @@ The MCP integration instruments the following methods:
   - `Client.listTools()`
 
 [1]: https://github.com/modelcontextprotocol/typescript-sdk
-[2]: https://github.com/modelcontextprotocol/typescript-sdk?tab=readme-ov-file#writing-mcp-clients
+[2]: https://github.com/modelcontextprotocol/typescript-sdk/blob/main/docs/client.md#tools
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
