@@ -102,7 +102,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 ## Savings Plan simulation
 
-<div class="alert alert-info">Savings Plan simulation is in Preview and currently supports AWS Savings Plans for organizations with AWS cost data.</div>
+<div class="alert alert-info">Savings Plan simulation is in Preview. It supports AWS Savings Plans and runs at the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">AWS management account</a> level, estimating coverage across the organization's member accounts.</div>
 
 Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment directly against your historical usage and see the projected coverage, utilization, and savings.
 
@@ -124,6 +124,8 @@ If Datadog has a Savings Plan recommendation for your organization, the simulati
 ### Interpret the results
 
 All simulation outputs are estimates based on your historical usage over the selected lookback window. Actual savings depend on your future usage and how AWS applies Savings Plan discounts across your accounts.
+
+Savings Plans are shared across a [Consolidated Billing Family][2], so a commitment can apply to usage in multiple accounts. The simulation estimates how the modeled commitment would be distributed across your accounts; actual distribution depends on AWS's application logic.
 
 - {{< ui >}}Summary metrics{{< /ui >}}: High-level estimates for the simulated commitment, such as projected coverage, utilization, and savings compared to on-demand rates.
 - {{< ui >}}Projected coverage over time{{< /ui >}}: A time series chart showing how the simulated commitment would apply to your usage over the lookback window, including the portion of usage that would be covered by the commitment versus the portion remaining as on-demand spend.
@@ -177,3 +179,4 @@ All simulation outputs are estimates based on your historical usage over the sel
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
+[2]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
