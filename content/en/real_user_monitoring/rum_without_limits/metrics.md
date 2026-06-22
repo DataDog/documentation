@@ -29,7 +29,8 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 
 | Metric Name | Description | Dimensions | Platform |
 |-------------|-------------|------------|----------|
-| `rum.measure.app.startup_time` | App startup time | Default, Percentiles breakdown | Mobile only |
+| `rum.measure.app.startup_to_full_display` | Time to full display during application launch | Default, Percentiles breakdown | Mobile only |
+| `rum.measure.app.startup_to_initial_display` | Time to initial display during application launch | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.error` | Count of errors | Default, Is Crash, View Name | Mobile & Browser |
 | `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Is Crash, View Name | Mobile only |
 | `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
