@@ -24,6 +24,7 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
   {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry.png" alt="Sentry" title="Sentry" >}}
   {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon_sns.png" alt="Amazon CloudWatch" title="Amazon CloudWatch" >}}
   {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure.png" alt="Azure Monitor" title="Azure Monitor" >}}
+  {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix.png" alt="Zabbix" title="Zabbix" >}}
 {{< /card-grid >}}
 
 ## Further Reading
