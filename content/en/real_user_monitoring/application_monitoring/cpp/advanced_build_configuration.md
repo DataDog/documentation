@@ -114,7 +114,7 @@ These are several important options to consider when building the SDK from sourc
   </tbody>
 </table>
 
-For a full list of configuration options, see the SDK's root [`CMakeLists.txt`][3].
+For a full list of configuration options, see the [SDK source][3].
 
 ## Integrating the SDK into a non-CMake build
 
@@ -212,5 +212,5 @@ If using `DD_CRASH_MODE=crashpad`, you'll also need to copy the crashpad handler
 
 [1]: /real_user_monitoring/application_monitoring/cpp/setup
 [2]: https://github.com/DataDog/dd-sdk-cpp/blob/main/cmake/DatadogConvenience.cmake
-[3]: https://github.com/DataDog/dd-sdk-cpp/blob/main/CMakeLists.txt
+[3]: https://github.com/DataDog/dd-sdk-cpp
 [4]: https://github.com/DataDog/dd-sdk-cpp/releases

@@ -50,7 +50,7 @@ If your application runs but data does not appear in the Datadog UI, check the f
 
 **Storage directory is not writable**
 
-If diagnostic output shows storage errors, verify that the storage directory exists and is writable by the application process. The SDK uses the directory set with `SetApplicationStoragePath()`, or the system temporary directory by default.
+If diagnostic output shows storage errors, verify that the storage directory exists and is writable by the application process. The SDK uses the directory set with `SetApplicationStoragePath()`, or the current working directory by default.
 
 **Crash reports are not appearing after a crash**
 

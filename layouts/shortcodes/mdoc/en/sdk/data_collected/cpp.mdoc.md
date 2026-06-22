@@ -13,7 +13,7 @@ Every RUM event has all of the [default attributes](#default-attributes), for ex
 
 | Event type | Retention | Description |
 |------------|-----------|-------------|
-| Session    | 30 days   | A session represents a continuous usage period in your application. It begins when `Core::Start()` is called and remains active as long as the application is in use. All RUM events generated during the session share the same `session.id`. **Note:** The session resets after 15 minutes of inactivity and expires after 4 hours of continuous activity. |
+| Session    | 30 days   | A session represents a continuous usage period in your application. It begins with the first call to `StartView()` and remains active as long as the application is in use. All RUM events generated during the session share the same `session.id`. **Note:** The session resets after 15 minutes of inactivity and expires after 4 hours of continuous activity. |
 | View       | 30 days   | A view corresponds to a logical screen or scene, tracked manually using `StartView()` and `StopView()`. All events (errors, resources, and actions) generated while a view is active are attached to it with a unique `view.id`. |
 | Resource   | 15 days   | A resource represents a network request, tracked manually using `StartResource()` and `StopResource()`. Resources are associated with the active view. |
 | Error      | 30 days   | An error represents an exception or problem in the application, reported with `AddError()` or automatically captured as a crash. Errors are attached to the active view. |
