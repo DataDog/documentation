@@ -11478,6 +11478,46 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: ECS Remediation
+      url: /api/latest/ecs-remediation/
+      identifier: ecs-remediation
+      generated: true
+    - name: List ECS remediation investigations
+      url: /api/latest/ecs-remediation/list-ecs-remediation-investigations/
+      identifier: ecs-remediation-list-ecs-remediation-investigations
+      parent: ecs-remediation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEcsRemediationInvestigations
+        unstable: []
+        order: 2
+    - name: Get an ECS remediation investigation
+      url: /api/latest/ecs-remediation/get-an-ecs-remediation-investigation/
+      identifier: ecs-remediation-get-an-ecs-remediation-investigation
+      parent: ecs-remediation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEcsRemediationInvestigation
+        unstable: []
+        order: 1
+    - name: Execute an ECS remediation
+      url: /api/latest/ecs-remediation/execute-an-ecs-remediation/
+      identifier: ecs-remediation-execute-an-ecs-remediation
+      parent: ecs-remediation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExecuteRemediation
+        unstable: []
+        order: 3
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs

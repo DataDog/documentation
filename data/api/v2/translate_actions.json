@@ -1,4 +1,18 @@
 {
+  "ExecuteRemediation": {
+    "description": "Trigger execution of the proposed remediation for an investigation through the configured AWS connection. The investigation must belong to the caller's organization.",
+    "summary": "Execute an ECS remediation",
+    "request_description": "The investigation to remediate and the AWS connection to use.",
+    "request_schema_description": "Request payload for executing a remediation."
+  },
+  "GetEcsRemediationInvestigation": {
+    "description": "Get a single ECS remediation investigation by ID, including its proposed plan, history, and ECS workload metadata.",
+    "summary": "Get an ECS remediation investigation"
+  },
+  "ListEcsRemediationInvestigations": {
+    "description": "List ECS remediation investigations for the caller's organization. All filters are optional and applied together. Results are returned in pages.",
+    "summary": "List ECS remediation investigations"
+  },
   "ListFleetAgentVersions": {
     "description": "Retrieve a list of all available Datadog Agent versions.\n\nThis endpoint returns the available Agent versions that can be deployed to your fleet.\nThese versions are used when creating deployments or configuring schedules for\nautomated Agent upgrades.",
     "summary": "List all available Agent versions"
