@@ -112,7 +112,7 @@ Widgets not linked to global time show the data for their local time frame as ap
 
 Copy and paste functionality is a key sharing and collaboration feature that allows you to reuse widgets across different Datadog contexts and external tools.
 
-<div class="alert alert-info">To copy widgets with <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, an admin must set <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Widget Share URLs</strong></a> to Public or Private in your Organization Settings. Admins can disable this setting to stop users from generating widget share links and previews.</div>
+<div class="alert alert-info">To share widgets outside of Datadog with link previews, an admin must set <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Widget Share URLs</strong></a> to Public or Private in your Organization Settings. Admins can disable this setting to stop users from generating widget share links and previews.</div>
 
 Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, or by selecting the share icon and choosing "Copy".
 
