@@ -210,6 +210,7 @@ allowedRegions:
     domain: uk1.datadoghq.com
     exact_domains:
       - "TODO.oncall.datadoghq.com"
+      - "browser-intake-uk1-datadoghq.com"
   - name: US1-FED
     value: gov
     weight: 35
