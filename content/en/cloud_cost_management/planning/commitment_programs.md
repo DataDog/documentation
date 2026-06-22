@@ -102,11 +102,11 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 ## Savings Plan simulation
 
-<div class="alert alert-info">Savings Plan simulation is in Preview. It supports AWS Savings Plans and runs at the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">AWS management account</a> level, estimating coverage across the organization's member accounts.</div>
+<div class="alert alert-info">Savings Plan simulation is in Preview. It supports AWS Savings Plans and runs at the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">AWS management account</a> level.</div>
 
 Savings Plan simulation lets you estimate the impact of a new {{< tooltip text="Savings Plan" tooltip="A flexible cloud discount program that provides lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}} on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment directly against your historical usage and see the projected coverage, utilization, and savings.
 
-The simulation is retrospective: it applies the Savings Plan you configure to your usage during the selected lookback window and shows what your coverage, utilization, and savings _would have been_. It does not forecast future usage.
+The simulation is retrospective: it re-prices your on-demand usage from the selected period as if the Savings Plan had been active, and shows what your cost and savings _would have been_. It does not forecast future usage.
 
 {{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing input parameters, summary metrics, and a time series chart of projected commitment coverage." style="width:100%;" >}}
 
