@@ -109,7 +109,7 @@ To enable meeting summaries for incident Microsoft Teams meetings:
 5. (Optional) Add conditions to prevent summarization for specific incidents. By default, meetings for private incidents are not summarized.
 6. Save your settings.
 
-{{< img src="incident_response/incident_management/integrations/ms_teams_enable_meeting_summaries.png" alt="The Microsoft Teams tenant settings page with the Generate AI meeting summaries toggle enabled." style="width:90%;" >}}
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/ms_teams_enable_meeting_summaries.png" alt="The Microsoft Teams tenant settings page with the Generate AI meeting summaries toggle enabled." style="width:90%;" >}}
 
 #### How meeting summaries work
 
