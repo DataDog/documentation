@@ -41,7 +41,7 @@ algolia:
   tags: ["asm", "App and API Protection"]
 ---
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
 <div class="alert alert-info">
 AI Guard is in Preview. Get real-time security guardrails for your AI apps and agents. AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Fill out this <a href="https://www.datadoghq.com/product-preview/ai-security/">form</a> to request access.

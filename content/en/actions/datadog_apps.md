@@ -187,7 +187,7 @@ To automatically upload your app on every push to the `main` branch, use the [`D
 
 If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][15]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
-{{< site-region region="us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 
 ```ts
 datadogVitePlugin({

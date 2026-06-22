@@ -33,7 +33,7 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 You can manage your time zone, time format, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the {{< ui >}}Personal Settings{{< /ui >}} page.
 
 #### Email subscriptions

@@ -111,7 +111,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
 
-{{< site-region region="us,ap1,ap2" >}}
+{{< site-region region="us,ap1,ap2,uk1" >}}
 
 ## AWS PrivateLink
 

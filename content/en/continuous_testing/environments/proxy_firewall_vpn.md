@@ -58,7 +58,7 @@ Allow **Outbound connections** for the following Datadog endpoints:
 | 443 | {{< region-param key="api_endpoint" code="true" >}} | Required to search for Synthetic tests, get them, and poll their results. |
 
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |

@@ -13,7 +13,7 @@ further_reading:
 
 <div class="alert alert-info">Select your Datadog site to see instructions for your support portal.</div>
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
 ## Create a support ticket
 
