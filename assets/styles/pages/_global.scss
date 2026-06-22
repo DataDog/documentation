@@ -510,6 +510,15 @@ h5 {
     pre {
         margin: 0 0 24px 0;
     }
+
+    // Prevent long inline code strings (e.g. VPC endpoint names in list items)
+    // from overflowing their flex column and pushing the right sidebar out of place.
+    li code,
+    p code {
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
     p + .highlight {
         position: relative;
     }
